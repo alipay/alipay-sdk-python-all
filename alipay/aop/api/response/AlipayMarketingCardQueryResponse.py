@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.MerchantCard import MerchantCard
+
+
+class AlipayMarketingCardQueryResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayMarketingCardQueryResponse, self).__init__()
+        self._card_info = None
+        self._schema_url = None
+
+    @property
+    def card_info(self):
+        return self._card_info
+
+    @card_info.setter
+    def card_info(self, value):
+        if isinstance(value, MerchantCard):
+            self._card_info = value
+        else:
+            self._card_info = MerchantCard.from_alipay_dict(value)
+    @property
+    def schema_url(self):
+        return self._schema_url
+
+    @schema_url.setter
+    def schema_url(self, value):
+        self._schema_url = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayMarketingCardQueryResponse, self).parse_response_content(response_content)
+        if 'card_info' in response:
+            self.card_info = response['card_info']
+        if 'schema_url' in response:
+            self.schema_url = response['schema_url']

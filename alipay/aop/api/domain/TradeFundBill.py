@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class TradeFundBill(object):
+
+    def __init__(self):
+        self._amount = None
+        self._fund_channel = None
+        self._fund_type = None
+        self._real_amount = None
+
+    @property
+    def amount(self):
+        return self._amount
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
+    @property
+    def fund_channel(self):
+        return self._fund_channel
+
+    @fund_channel.setter
+    def fund_channel(self, value):
+        self._fund_channel = value
+    @property
+    def fund_type(self):
+        return self._fund_type
+
+    @fund_type.setter
+    def fund_type(self, value):
+        self._fund_type = value
+    @property
+    def real_amount(self):
+        return self._real_amount
+
+    @real_amount.setter
+    def real_amount(self, value):
+        self._real_amount = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.amount:
+            if hasattr(self.amount, 'to_alipay_dict'):
+                params['amount'] = self.amount.to_alipay_dict()
+            else:
+                params['amount'] = self.amount
+        if self.fund_channel:
+            if hasattr(self.fund_channel, 'to_alipay_dict'):
+                params['fund_channel'] = self.fund_channel.to_alipay_dict()
+            else:
+                params['fund_channel'] = self.fund_channel
+        if self.fund_type:
+            if hasattr(self.fund_type, 'to_alipay_dict'):
+                params['fund_type'] = self.fund_type.to_alipay_dict()
+            else:
+                params['fund_type'] = self.fund_type
+        if self.real_amount:
+            if hasattr(self.real_amount, 'to_alipay_dict'):
+                params['real_amount'] = self.real_amount.to_alipay_dict()
+            else:
+                params['real_amount'] = self.real_amount
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = TradeFundBill()
+        if 'amount' in d:
+            o.amount = d['amount']
+        if 'fund_channel' in d:
+            o.fund_channel = d['fund_channel']
+        if 'fund_type' in d:
+            o.fund_type = d['fund_type']
+        if 'real_amount' in d:
+            o.real_amount = d['real_amount']
+        return o
+
+

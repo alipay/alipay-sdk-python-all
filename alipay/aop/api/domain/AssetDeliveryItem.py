@@ -1,0 +1,322 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
+from alipay.aop.api.domain.LogisticsInfo import LogisticsInfo
+from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
+
+
+class AssetDeliveryItem(object):
+
+    def __init__(self):
+        self._action_type = None
+        self._amount = None
+        self._apply_order_id = None
+        self._assign_item_id = None
+        self._assign_out_order_id = None
+        self._biz_tag = None
+        self._from_address = None
+        self._gmt_assign = None
+        self._item_id = None
+        self._item_name = None
+        self._logistics_info = None
+        self._memo = None
+        self._parent_item_id = None
+        self._print_data = None
+        self._produce_order_item_id = None
+        self._record_type = None
+        self._supplier_id = None
+        self._supplier_name = None
+        self._to_address = None
+
+    @property
+    def action_type(self):
+        return self._action_type
+
+    @action_type.setter
+    def action_type(self, value):
+        self._action_type = value
+    @property
+    def amount(self):
+        return self._amount
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
+    @property
+    def apply_order_id(self):
+        return self._apply_order_id
+
+    @apply_order_id.setter
+    def apply_order_id(self, value):
+        self._apply_order_id = value
+    @property
+    def assign_item_id(self):
+        return self._assign_item_id
+
+    @assign_item_id.setter
+    def assign_item_id(self, value):
+        self._assign_item_id = value
+    @property
+    def assign_out_order_id(self):
+        return self._assign_out_order_id
+
+    @assign_out_order_id.setter
+    def assign_out_order_id(self, value):
+        self._assign_out_order_id = value
+    @property
+    def biz_tag(self):
+        return self._biz_tag
+
+    @biz_tag.setter
+    def biz_tag(self, value):
+        self._biz_tag = value
+    @property
+    def from_address(self):
+        return self._from_address
+
+    @from_address.setter
+    def from_address(self, value):
+        if isinstance(value, AssetDeliveryAddress):
+            self._from_address = value
+        else:
+            self._from_address = AssetDeliveryAddress.from_alipay_dict(value)
+    @property
+    def gmt_assign(self):
+        return self._gmt_assign
+
+    @gmt_assign.setter
+    def gmt_assign(self, value):
+        self._gmt_assign = value
+    @property
+    def item_id(self):
+        return self._item_id
+
+    @item_id.setter
+    def item_id(self, value):
+        self._item_id = value
+    @property
+    def item_name(self):
+        return self._item_name
+
+    @item_name.setter
+    def item_name(self, value):
+        self._item_name = value
+    @property
+    def logistics_info(self):
+        return self._logistics_info
+
+    @logistics_info.setter
+    def logistics_info(self, value):
+        if isinstance(value, LogisticsInfo):
+            self._logistics_info = value
+        else:
+            self._logistics_info = LogisticsInfo.from_alipay_dict(value)
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
+    @property
+    def parent_item_id(self):
+        return self._parent_item_id
+
+    @parent_item_id.setter
+    def parent_item_id(self, value):
+        self._parent_item_id = value
+    @property
+    def print_data(self):
+        return self._print_data
+
+    @print_data.setter
+    def print_data(self, value):
+        self._print_data = value
+    @property
+    def produce_order_item_id(self):
+        return self._produce_order_item_id
+
+    @produce_order_item_id.setter
+    def produce_order_item_id(self, value):
+        self._produce_order_item_id = value
+    @property
+    def record_type(self):
+        return self._record_type
+
+    @record_type.setter
+    def record_type(self, value):
+        self._record_type = value
+    @property
+    def supplier_id(self):
+        return self._supplier_id
+
+    @supplier_id.setter
+    def supplier_id(self, value):
+        self._supplier_id = value
+    @property
+    def supplier_name(self):
+        return self._supplier_name
+
+    @supplier_name.setter
+    def supplier_name(self, value):
+        self._supplier_name = value
+    @property
+    def to_address(self):
+        return self._to_address
+
+    @to_address.setter
+    def to_address(self, value):
+        if isinstance(value, AssetDeliveryAddress):
+            self._to_address = value
+        else:
+            self._to_address = AssetDeliveryAddress.from_alipay_dict(value)
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.action_type:
+            if hasattr(self.action_type, 'to_alipay_dict'):
+                params['action_type'] = self.action_type.to_alipay_dict()
+            else:
+                params['action_type'] = self.action_type
+        if self.amount:
+            if hasattr(self.amount, 'to_alipay_dict'):
+                params['amount'] = self.amount.to_alipay_dict()
+            else:
+                params['amount'] = self.amount
+        if self.apply_order_id:
+            if hasattr(self.apply_order_id, 'to_alipay_dict'):
+                params['apply_order_id'] = self.apply_order_id.to_alipay_dict()
+            else:
+                params['apply_order_id'] = self.apply_order_id
+        if self.assign_item_id:
+            if hasattr(self.assign_item_id, 'to_alipay_dict'):
+                params['assign_item_id'] = self.assign_item_id.to_alipay_dict()
+            else:
+                params['assign_item_id'] = self.assign_item_id
+        if self.assign_out_order_id:
+            if hasattr(self.assign_out_order_id, 'to_alipay_dict'):
+                params['assign_out_order_id'] = self.assign_out_order_id.to_alipay_dict()
+            else:
+                params['assign_out_order_id'] = self.assign_out_order_id
+        if self.biz_tag:
+            if hasattr(self.biz_tag, 'to_alipay_dict'):
+                params['biz_tag'] = self.biz_tag.to_alipay_dict()
+            else:
+                params['biz_tag'] = self.biz_tag
+        if self.from_address:
+            if hasattr(self.from_address, 'to_alipay_dict'):
+                params['from_address'] = self.from_address.to_alipay_dict()
+            else:
+                params['from_address'] = self.from_address
+        if self.gmt_assign:
+            if hasattr(self.gmt_assign, 'to_alipay_dict'):
+                params['gmt_assign'] = self.gmt_assign.to_alipay_dict()
+            else:
+                params['gmt_assign'] = self.gmt_assign
+        if self.item_id:
+            if hasattr(self.item_id, 'to_alipay_dict'):
+                params['item_id'] = self.item_id.to_alipay_dict()
+            else:
+                params['item_id'] = self.item_id
+        if self.item_name:
+            if hasattr(self.item_name, 'to_alipay_dict'):
+                params['item_name'] = self.item_name.to_alipay_dict()
+            else:
+                params['item_name'] = self.item_name
+        if self.logistics_info:
+            if hasattr(self.logistics_info, 'to_alipay_dict'):
+                params['logistics_info'] = self.logistics_info.to_alipay_dict()
+            else:
+                params['logistics_info'] = self.logistics_info
+        if self.memo:
+            if hasattr(self.memo, 'to_alipay_dict'):
+                params['memo'] = self.memo.to_alipay_dict()
+            else:
+                params['memo'] = self.memo
+        if self.parent_item_id:
+            if hasattr(self.parent_item_id, 'to_alipay_dict'):
+                params['parent_item_id'] = self.parent_item_id.to_alipay_dict()
+            else:
+                params['parent_item_id'] = self.parent_item_id
+        if self.print_data:
+            if hasattr(self.print_data, 'to_alipay_dict'):
+                params['print_data'] = self.print_data.to_alipay_dict()
+            else:
+                params['print_data'] = self.print_data
+        if self.produce_order_item_id:
+            if hasattr(self.produce_order_item_id, 'to_alipay_dict'):
+                params['produce_order_item_id'] = self.produce_order_item_id.to_alipay_dict()
+            else:
+                params['produce_order_item_id'] = self.produce_order_item_id
+        if self.record_type:
+            if hasattr(self.record_type, 'to_alipay_dict'):
+                params['record_type'] = self.record_type.to_alipay_dict()
+            else:
+                params['record_type'] = self.record_type
+        if self.supplier_id:
+            if hasattr(self.supplier_id, 'to_alipay_dict'):
+                params['supplier_id'] = self.supplier_id.to_alipay_dict()
+            else:
+                params['supplier_id'] = self.supplier_id
+        if self.supplier_name:
+            if hasattr(self.supplier_name, 'to_alipay_dict'):
+                params['supplier_name'] = self.supplier_name.to_alipay_dict()
+            else:
+                params['supplier_name'] = self.supplier_name
+        if self.to_address:
+            if hasattr(self.to_address, 'to_alipay_dict'):
+                params['to_address'] = self.to_address.to_alipay_dict()
+            else:
+                params['to_address'] = self.to_address
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AssetDeliveryItem()
+        if 'action_type' in d:
+            o.action_type = d['action_type']
+        if 'amount' in d:
+            o.amount = d['amount']
+        if 'apply_order_id' in d:
+            o.apply_order_id = d['apply_order_id']
+        if 'assign_item_id' in d:
+            o.assign_item_id = d['assign_item_id']
+        if 'assign_out_order_id' in d:
+            o.assign_out_order_id = d['assign_out_order_id']
+        if 'biz_tag' in d:
+            o.biz_tag = d['biz_tag']
+        if 'from_address' in d:
+            o.from_address = d['from_address']
+        if 'gmt_assign' in d:
+            o.gmt_assign = d['gmt_assign']
+        if 'item_id' in d:
+            o.item_id = d['item_id']
+        if 'item_name' in d:
+            o.item_name = d['item_name']
+        if 'logistics_info' in d:
+            o.logistics_info = d['logistics_info']
+        if 'memo' in d:
+            o.memo = d['memo']
+        if 'parent_item_id' in d:
+            o.parent_item_id = d['parent_item_id']
+        if 'print_data' in d:
+            o.print_data = d['print_data']
+        if 'produce_order_item_id' in d:
+            o.produce_order_item_id = d['produce_order_item_id']
+        if 'record_type' in d:
+            o.record_type = d['record_type']
+        if 'supplier_id' in d:
+            o.supplier_id = d['supplier_id']
+        if 'supplier_name' in d:
+            o.supplier_name = d['supplier_name']
+        if 'to_address' in d:
+            o.to_address = d['to_address']
+        return o
+
+

@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+
+
+class AlipayTradeBatchSettleResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayTradeBatchSettleResponse, self).__init__()
+        self._gmt_create = None
+        self._result_code = None
+        self._settle_no = None
+
+    @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
+    @property
+    def result_code(self):
+        return self._result_code
+
+    @result_code.setter
+    def result_code(self, value):
+        self._result_code = value
+    @property
+    def settle_no(self):
+        return self._settle_no
+
+    @settle_no.setter
+    def settle_no(self, value):
+        self._settle_no = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayTradeBatchSettleResponse, self).parse_response_content(response_content)
+        if 'gmt_create' in response:
+            self.gmt_create = response['gmt_create']
+        if 'result_code' in response:
+            self.result_code = response['result_code']
+        if 'settle_no' in response:
+            self.settle_no = response['settle_no']

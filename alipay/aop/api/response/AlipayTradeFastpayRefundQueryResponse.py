@@ -1,0 +1,152 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
+
+
+class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayTradeFastpayRefundQueryResponse, self).__init__()
+        self._error_code = None
+        self._industry_sepc_detail = None
+        self._out_request_no = None
+        self._out_trade_no = None
+        self._present_refund_buyer_amount = None
+        self._present_refund_discount_amount = None
+        self._present_refund_mdiscount_amount = None
+        self._refund_amount = None
+        self._refund_reason = None
+        self._refund_royaltys = None
+        self._refund_status = None
+        self._total_amount = None
+        self._trade_no = None
+
+    @property
+    def error_code(self):
+        return self._error_code
+
+    @error_code.setter
+    def error_code(self, value):
+        self._error_code = value
+    @property
+    def industry_sepc_detail(self):
+        return self._industry_sepc_detail
+
+    @industry_sepc_detail.setter
+    def industry_sepc_detail(self, value):
+        self._industry_sepc_detail = value
+    @property
+    def out_request_no(self):
+        return self._out_request_no
+
+    @out_request_no.setter
+    def out_request_no(self, value):
+        self._out_request_no = value
+    @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
+    @property
+    def present_refund_buyer_amount(self):
+        return self._present_refund_buyer_amount
+
+    @present_refund_buyer_amount.setter
+    def present_refund_buyer_amount(self, value):
+        self._present_refund_buyer_amount = value
+    @property
+    def present_refund_discount_amount(self):
+        return self._present_refund_discount_amount
+
+    @present_refund_discount_amount.setter
+    def present_refund_discount_amount(self, value):
+        self._present_refund_discount_amount = value
+    @property
+    def present_refund_mdiscount_amount(self):
+        return self._present_refund_mdiscount_amount
+
+    @present_refund_mdiscount_amount.setter
+    def present_refund_mdiscount_amount(self, value):
+        self._present_refund_mdiscount_amount = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_reason(self):
+        return self._refund_reason
+
+    @refund_reason.setter
+    def refund_reason(self, value):
+        self._refund_reason = value
+    @property
+    def refund_royaltys(self):
+        return self._refund_royaltys
+
+    @refund_royaltys.setter
+    def refund_royaltys(self, value):
+        if isinstance(value, list):
+            self._refund_royaltys = list()
+            for i in value:
+                if isinstance(i, RefundRoyaltyResult):
+                    self._refund_royaltys.append(i)
+                else:
+                    self._refund_royaltys.append(RefundRoyaltyResult.from_alipay_dict(i))
+    @property
+    def refund_status(self):
+        return self._refund_status
+
+    @refund_status.setter
+    def refund_status(self, value):
+        self._refund_status = value
+    @property
+    def total_amount(self):
+        return self._total_amount
+
+    @total_amount.setter
+    def total_amount(self, value):
+        self._total_amount = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayTradeFastpayRefundQueryResponse, self).parse_response_content(response_content)
+        if 'error_code' in response:
+            self.error_code = response['error_code']
+        if 'industry_sepc_detail' in response:
+            self.industry_sepc_detail = response['industry_sepc_detail']
+        if 'out_request_no' in response:
+            self.out_request_no = response['out_request_no']
+        if 'out_trade_no' in response:
+            self.out_trade_no = response['out_trade_no']
+        if 'present_refund_buyer_amount' in response:
+            self.present_refund_buyer_amount = response['present_refund_buyer_amount']
+        if 'present_refund_discount_amount' in response:
+            self.present_refund_discount_amount = response['present_refund_discount_amount']
+        if 'present_refund_mdiscount_amount' in response:
+            self.present_refund_mdiscount_amount = response['present_refund_mdiscount_amount']
+        if 'refund_amount' in response:
+            self.refund_amount = response['refund_amount']
+        if 'refund_reason' in response:
+            self.refund_reason = response['refund_reason']
+        if 'refund_royaltys' in response:
+            self.refund_royaltys = response['refund_royaltys']
+        if 'refund_status' in response:
+            self.refund_status = response['refund_status']
+        if 'total_amount' in response:
+            self.total_amount = response['total_amount']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']
