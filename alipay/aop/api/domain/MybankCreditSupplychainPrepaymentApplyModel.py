@@ -10,6 +10,7 @@ class MybankCreditSupplychainPrepaymentApplyModel(object):
 
     def __init__(self):
         self._buyer = None
+        self._ext_data = None
         self._loan_pay_amount = None
         self._out_order_no = None
         self._request_id = None
@@ -25,6 +26,13 @@ class MybankCreditSupplychainPrepaymentApplyModel(object):
             self._buyer = value
         else:
             self._buyer = Member.from_alipay_dict(value)
+    @property
+    def ext_data(self):
+        return self._ext_data
+
+    @ext_data.setter
+    def ext_data(self, value):
+        self._ext_data = value
     @property
     def loan_pay_amount(self):
         return self._loan_pay_amount
@@ -62,6 +70,11 @@ class MybankCreditSupplychainPrepaymentApplyModel(object):
                 params['buyer'] = self.buyer.to_alipay_dict()
             else:
                 params['buyer'] = self.buyer
+        if self.ext_data:
+            if hasattr(self.ext_data, 'to_alipay_dict'):
+                params['ext_data'] = self.ext_data.to_alipay_dict()
+            else:
+                params['ext_data'] = self.ext_data
         if self.loan_pay_amount:
             if hasattr(self.loan_pay_amount, 'to_alipay_dict'):
                 params['loan_pay_amount'] = self.loan_pay_amount.to_alipay_dict()
@@ -91,6 +104,8 @@ class MybankCreditSupplychainPrepaymentApplyModel(object):
         o = MybankCreditSupplychainPrepaymentApplyModel()
         if 'buyer' in d:
             o.buyer = d['buyer']
+        if 'ext_data' in d:
+            o.ext_data = d['ext_data']
         if 'loan_pay_amount' in d:
             o.loan_pay_amount = d['loan_pay_amount']
         if 'out_order_no' in d:

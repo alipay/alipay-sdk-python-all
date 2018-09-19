@@ -12,6 +12,7 @@ class MybankCreditLoanapplyArrangementCreateModel(object):
         self._ext_data = None
         self._ip_id = None
         self._ip_role_id = None
+        self._scene = None
         self._site = None
         self._site_user_id = None
 
@@ -43,6 +44,13 @@ class MybankCreditLoanapplyArrangementCreateModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def scene(self):
+        return self._scene
+
+    @scene.setter
+    def scene(self, value):
+        self._scene = value
     @property
     def site(self):
         return self._site
@@ -81,6 +89,11 @@ class MybankCreditLoanapplyArrangementCreateModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.scene:
+            if hasattr(self.scene, 'to_alipay_dict'):
+                params['scene'] = self.scene.to_alipay_dict()
+            else:
+                params['scene'] = self.scene
         if self.site:
             if hasattr(self.site, 'to_alipay_dict'):
                 params['site'] = self.site.to_alipay_dict()
@@ -106,6 +119,8 @@ class MybankCreditLoanapplyArrangementCreateModel(object):
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'scene' in d:
+            o.scene = d['scene']
         if 'site' in d:
             o.site = d['site']
         if 'site_user_id' in d:

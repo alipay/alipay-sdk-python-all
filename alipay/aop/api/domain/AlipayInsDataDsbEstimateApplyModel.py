@@ -9,6 +9,7 @@ from alipay.aop.api.domain.AlipayInsDataDsbRequestImageInfo import AlipayInsData
 class AlipayInsDataDsbEstimateApplyModel(object):
 
     def __init__(self):
+        self._accident_area_id = None
         self._car_properties = None
         self._case_properties = None
         self._commercial_policy_no = None
@@ -17,14 +18,23 @@ class AlipayInsDataDsbEstimateApplyModel(object):
         self._estimate_no = None
         self._estimate_request_uuid = None
         self._frame_no = None
+        self._garage_type = None
         self._image_list = None
         self._license_no = None
         self._model_brand = None
+        self._new_car_price = None
         self._repair_corp_properties = None
         self._report_no = None
         self._request_timestamp = None
         self._survey_no = None
 
+    @property
+    def accident_area_id(self):
+        return self._accident_area_id
+
+    @accident_area_id.setter
+    def accident_area_id(self, value):
+        self._accident_area_id = value
     @property
     def car_properties(self):
         return self._car_properties
@@ -82,6 +92,13 @@ class AlipayInsDataDsbEstimateApplyModel(object):
     def frame_no(self, value):
         self._frame_no = value
     @property
+    def garage_type(self):
+        return self._garage_type
+
+    @garage_type.setter
+    def garage_type(self, value):
+        self._garage_type = value
+    @property
     def image_list(self):
         return self._image_list
 
@@ -108,6 +125,13 @@ class AlipayInsDataDsbEstimateApplyModel(object):
     @model_brand.setter
     def model_brand(self, value):
         self._model_brand = value
+    @property
+    def new_car_price(self):
+        return self._new_car_price
+
+    @new_car_price.setter
+    def new_car_price(self, value):
+        self._new_car_price = value
     @property
     def repair_corp_properties(self):
         return self._repair_corp_properties
@@ -140,6 +164,11 @@ class AlipayInsDataDsbEstimateApplyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accident_area_id:
+            if hasattr(self.accident_area_id, 'to_alipay_dict'):
+                params['accident_area_id'] = self.accident_area_id.to_alipay_dict()
+            else:
+                params['accident_area_id'] = self.accident_area_id
         if self.car_properties:
             if hasattr(self.car_properties, 'to_alipay_dict'):
                 params['car_properties'] = self.car_properties.to_alipay_dict()
@@ -180,6 +209,11 @@ class AlipayInsDataDsbEstimateApplyModel(object):
                 params['frame_no'] = self.frame_no.to_alipay_dict()
             else:
                 params['frame_no'] = self.frame_no
+        if self.garage_type:
+            if hasattr(self.garage_type, 'to_alipay_dict'):
+                params['garage_type'] = self.garage_type.to_alipay_dict()
+            else:
+                params['garage_type'] = self.garage_type
         if self.image_list:
             if isinstance(self.image_list, list):
                 for i in range(0, len(self.image_list)):
@@ -200,6 +234,11 @@ class AlipayInsDataDsbEstimateApplyModel(object):
                 params['model_brand'] = self.model_brand.to_alipay_dict()
             else:
                 params['model_brand'] = self.model_brand
+        if self.new_car_price:
+            if hasattr(self.new_car_price, 'to_alipay_dict'):
+                params['new_car_price'] = self.new_car_price.to_alipay_dict()
+            else:
+                params['new_car_price'] = self.new_car_price
         if self.repair_corp_properties:
             if hasattr(self.repair_corp_properties, 'to_alipay_dict'):
                 params['repair_corp_properties'] = self.repair_corp_properties.to_alipay_dict()
@@ -227,6 +266,8 @@ class AlipayInsDataDsbEstimateApplyModel(object):
         if not d:
             return None
         o = AlipayInsDataDsbEstimateApplyModel()
+        if 'accident_area_id' in d:
+            o.accident_area_id = d['accident_area_id']
         if 'car_properties' in d:
             o.car_properties = d['car_properties']
         if 'case_properties' in d:
@@ -243,12 +284,16 @@ class AlipayInsDataDsbEstimateApplyModel(object):
             o.estimate_request_uuid = d['estimate_request_uuid']
         if 'frame_no' in d:
             o.frame_no = d['frame_no']
+        if 'garage_type' in d:
+            o.garage_type = d['garage_type']
         if 'image_list' in d:
             o.image_list = d['image_list']
         if 'license_no' in d:
             o.license_no = d['license_no']
         if 'model_brand' in d:
             o.model_brand = d['model_brand']
+        if 'new_car_price' in d:
+            o.new_car_price = d['new_car_price']
         if 'repair_corp_properties' in d:
             o.repair_corp_properties = d['repair_corp_properties']
         if 'report_no' in d:

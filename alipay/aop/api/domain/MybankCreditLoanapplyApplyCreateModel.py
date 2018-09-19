@@ -26,6 +26,7 @@ class MybankCreditLoanapplyApplyCreateModel(object):
         self._name = None
         self._op_pd_code = None
         self._out_mem_id = None
+        self._out_uni_code = None
         self._request_id = None
         self._site = None
         self._site_user_id = None
@@ -156,6 +157,13 @@ class MybankCreditLoanapplyApplyCreateModel(object):
     def out_mem_id(self, value):
         self._out_mem_id = value
     @property
+    def out_uni_code(self):
+        return self._out_uni_code
+
+    @out_uni_code.setter
+    def out_uni_code(self, value):
+        self._out_uni_code = value
+    @property
     def request_id(self):
         return self._request_id
 
@@ -270,6 +278,11 @@ class MybankCreditLoanapplyApplyCreateModel(object):
                 params['out_mem_id'] = self.out_mem_id.to_alipay_dict()
             else:
                 params['out_mem_id'] = self.out_mem_id
+        if self.out_uni_code:
+            if hasattr(self.out_uni_code, 'to_alipay_dict'):
+                params['out_uni_code'] = self.out_uni_code.to_alipay_dict()
+            else:
+                params['out_uni_code'] = self.out_uni_code
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -326,6 +339,8 @@ class MybankCreditLoanapplyApplyCreateModel(object):
             o.op_pd_code = d['op_pd_code']
         if 'out_mem_id' in d:
             o.out_mem_id = d['out_mem_id']
+        if 'out_uni_code' in d:
+            o.out_uni_code = d['out_uni_code']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'site' in d:

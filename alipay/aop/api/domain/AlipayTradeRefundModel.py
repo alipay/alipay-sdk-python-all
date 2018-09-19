@@ -12,6 +12,7 @@ class AlipayTradeRefundModel(object):
     def __init__(self):
         self._goods_detail = None
         self._operator_id = None
+        self._org_pid = None
         self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
@@ -42,6 +43,13 @@ class AlipayTradeRefundModel(object):
     @operator_id.setter
     def operator_id(self, value):
         self._operator_id = value
+    @property
+    def org_pid(self):
+        return self._org_pid
+
+    @org_pid.setter
+    def org_pid(self, value):
+        self._org_pid = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -130,6 +138,11 @@ class AlipayTradeRefundModel(object):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
             else:
                 params['operator_id'] = self.operator_id
+        if self.org_pid:
+            if hasattr(self.org_pid, 'to_alipay_dict'):
+                params['org_pid'] = self.org_pid.to_alipay_dict()
+            else:
+                params['org_pid'] = self.org_pid
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -191,6 +204,8 @@ class AlipayTradeRefundModel(object):
             o.goods_detail = d['goods_detail']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
+        if 'org_pid' in d:
+            o.org_pid = d['org_pid']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'out_trade_no' in d:

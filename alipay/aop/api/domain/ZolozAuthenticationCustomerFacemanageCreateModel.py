@@ -9,6 +9,7 @@ class ZolozAuthenticationCustomerFacemanageCreateModel(object):
 
     def __init__(self):
         self._areacode = None
+        self._biz_type = None
         self._bizscale = None
         self._brandcode = None
         self._devicenum = None
@@ -26,6 +27,13 @@ class ZolozAuthenticationCustomerFacemanageCreateModel(object):
     @areacode.setter
     def areacode(self, value):
         self._areacode = value
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def bizscale(self):
         return self._bizscale
@@ -98,6 +106,11 @@ class ZolozAuthenticationCustomerFacemanageCreateModel(object):
                 params['areacode'] = self.areacode.to_alipay_dict()
             else:
                 params['areacode'] = self.areacode
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.bizscale:
             if hasattr(self.bizscale, 'to_alipay_dict'):
                 params['bizscale'] = self.bizscale.to_alipay_dict()
@@ -152,6 +165,8 @@ class ZolozAuthenticationCustomerFacemanageCreateModel(object):
         o = ZolozAuthenticationCustomerFacemanageCreateModel()
         if 'areacode' in d:
             o.areacode = d['areacode']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'bizscale' in d:
             o.bizscale = d['bizscale']
         if 'brandcode' in d:

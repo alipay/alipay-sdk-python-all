@@ -11,6 +11,8 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
         super(AlipayFundAuthOrderAppFreezeResponse, self).__init__()
         self._amount = None
         self._auth_no = None
+        self._credit_amount = None
+        self._fund_amount = None
         self._gmt_trans = None
         self._operation_id = None
         self._out_order_no = None
@@ -33,6 +35,20 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
     @auth_no.setter
     def auth_no(self, value):
         self._auth_no = value
+    @property
+    def credit_amount(self):
+        return self._credit_amount
+
+    @credit_amount.setter
+    def credit_amount(self, value):
+        self._credit_amount = value
+    @property
+    def fund_amount(self):
+        return self._fund_amount
+
+    @fund_amount.setter
+    def fund_amount(self, value):
+        self._fund_amount = value
     @property
     def gmt_trans(self):
         return self._gmt_trans
@@ -89,6 +105,10 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
             self.amount = response['amount']
         if 'auth_no' in response:
             self.auth_no = response['auth_no']
+        if 'credit_amount' in response:
+            self.credit_amount = response['credit_amount']
+        if 'fund_amount' in response:
+            self.fund_amount = response['fund_amount']
         if 'gmt_trans' in response:
             self.gmt_trans = response['gmt_trans']
         if 'operation_id' in response:

@@ -16,6 +16,8 @@ class ExtendMedicalCard(object):
         self._medical_card_id = None
         self._medical_card_no = None
         self._medical_card_type = None
+        self._out_user_card_no = None
+        self._out_user_name = None
         self._sign_status = None
 
     @property
@@ -75,6 +77,20 @@ class ExtendMedicalCard(object):
     def medical_card_type(self, value):
         self._medical_card_type = value
     @property
+    def out_user_card_no(self):
+        return self._out_user_card_no
+
+    @out_user_card_no.setter
+    def out_user_card_no(self, value):
+        self._out_user_card_no = value
+    @property
+    def out_user_name(self):
+        return self._out_user_name
+
+    @out_user_name.setter
+    def out_user_name(self, value):
+        self._out_user_name = value
+    @property
     def sign_status(self):
         return self._sign_status
 
@@ -125,6 +141,16 @@ class ExtendMedicalCard(object):
                 params['medical_card_type'] = self.medical_card_type.to_alipay_dict()
             else:
                 params['medical_card_type'] = self.medical_card_type
+        if self.out_user_card_no:
+            if hasattr(self.out_user_card_no, 'to_alipay_dict'):
+                params['out_user_card_no'] = self.out_user_card_no.to_alipay_dict()
+            else:
+                params['out_user_card_no'] = self.out_user_card_no
+        if self.out_user_name:
+            if hasattr(self.out_user_name, 'to_alipay_dict'):
+                params['out_user_name'] = self.out_user_name.to_alipay_dict()
+            else:
+                params['out_user_name'] = self.out_user_name
         if self.sign_status:
             if hasattr(self.sign_status, 'to_alipay_dict'):
                 params['sign_status'] = self.sign_status.to_alipay_dict()
@@ -153,6 +179,10 @@ class ExtendMedicalCard(object):
             o.medical_card_no = d['medical_card_no']
         if 'medical_card_type' in d:
             o.medical_card_type = d['medical_card_type']
+        if 'out_user_card_no' in d:
+            o.out_user_card_no = d['out_user_card_no']
+        if 'out_user_name' in d:
+            o.out_user_name = d['out_user_name']
         if 'sign_status' in d:
             o.sign_status = d['sign_status']
         return o

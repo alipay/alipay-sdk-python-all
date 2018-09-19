@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MyBkAccountVO import MyBkAccountVO
 
 
 class MybankCreditLoantradeRepayCustApplyModel(object):
@@ -18,6 +19,8 @@ class MybankCreditLoantradeRepayCustApplyModel(object):
         self._ip_role_id = None
         self._loan_ar_no = None
         self._prom_tools = None
+        self._repay_account = None
+        self._repay_type = None
         self._request_id = None
 
     @property
@@ -94,6 +97,23 @@ class MybankCreditLoantradeRepayCustApplyModel(object):
             for i in value:
                 self._prom_tools.append(i)
     @property
+    def repay_account(self):
+        return self._repay_account
+
+    @repay_account.setter
+    def repay_account(self, value):
+        if isinstance(value, MyBkAccountVO):
+            self._repay_account = value
+        else:
+            self._repay_account = MyBkAccountVO.from_alipay_dict(value)
+    @property
+    def repay_type(self):
+        return self._repay_type
+
+    @repay_type.setter
+    def repay_type(self, value):
+        self._repay_type = value
+    @property
     def request_id(self):
         return self._request_id
 
@@ -159,6 +179,16 @@ class MybankCreditLoantradeRepayCustApplyModel(object):
                 params['prom_tools'] = self.prom_tools.to_alipay_dict()
             else:
                 params['prom_tools'] = self.prom_tools
+        if self.repay_account:
+            if hasattr(self.repay_account, 'to_alipay_dict'):
+                params['repay_account'] = self.repay_account.to_alipay_dict()
+            else:
+                params['repay_account'] = self.repay_account
+        if self.repay_type:
+            if hasattr(self.repay_type, 'to_alipay_dict'):
+                params['repay_type'] = self.repay_type.to_alipay_dict()
+            else:
+                params['repay_type'] = self.repay_type
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -191,6 +221,10 @@ class MybankCreditLoantradeRepayCustApplyModel(object):
             o.loan_ar_no = d['loan_ar_no']
         if 'prom_tools' in d:
             o.prom_tools = d['prom_tools']
+        if 'repay_account' in d:
+            o.repay_account = d['repay_account']
+        if 'repay_type' in d:
+            o.repay_type = d['repay_type']
         if 'request_id' in d:
             o.request_id = d['request_id']
         return o

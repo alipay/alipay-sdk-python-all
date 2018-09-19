@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MyBkAccountVO import MyBkAccountVO
 
 
 class MybankCreditLoantradeLoanarCreateModel(object):
@@ -18,6 +19,7 @@ class MybankCreditLoantradeLoanarCreateModel(object):
         self._alipay_id = None
         self._apply_amt = None
         self._bsn_no = None
+        self._bsn_type = None
         self._credit_no = None
         self._cust_group = None
         self._grant_channel = None
@@ -27,10 +29,12 @@ class MybankCreditLoantradeLoanarCreateModel(object):
         self._loan_policy_code = None
         self._loan_term = None
         self._loan_term_unit = None
+        self._need_check_account_same_name = None
         self._need_sign_contract = None
         self._pd_code = None
         self._pd_version = None
         self._promo_tools = None
+        self._repay_account = None
         self._repay_mode = None
         self._request_id = None
         self._sign = None
@@ -107,6 +111,13 @@ class MybankCreditLoantradeLoanarCreateModel(object):
     def bsn_no(self, value):
         self._bsn_no = value
     @property
+    def bsn_type(self):
+        return self._bsn_type
+
+    @bsn_type.setter
+    def bsn_type(self, value):
+        self._bsn_type = value
+    @property
     def credit_no(self):
         return self._credit_no
 
@@ -170,6 +181,13 @@ class MybankCreditLoantradeLoanarCreateModel(object):
     def loan_term_unit(self, value):
         self._loan_term_unit = value
     @property
+    def need_check_account_same_name(self):
+        return self._need_check_account_same_name
+
+    @need_check_account_same_name.setter
+    def need_check_account_same_name(self, value):
+        self._need_check_account_same_name = value
+    @property
     def need_sign_contract(self):
         return self._need_sign_contract
 
@@ -200,6 +218,16 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             self._promo_tools = list()
             for i in value:
                 self._promo_tools.append(i)
+    @property
+    def repay_account(self):
+        return self._repay_account
+
+    @repay_account.setter
+    def repay_account(self, value):
+        if isinstance(value, MyBkAccountVO):
+            self._repay_account = value
+        else:
+            self._repay_account = MyBkAccountVO.from_alipay_dict(value)
     @property
     def repay_mode(self):
         return self._repay_mode
@@ -282,6 +310,11 @@ class MybankCreditLoantradeLoanarCreateModel(object):
                 params['bsn_no'] = self.bsn_no.to_alipay_dict()
             else:
                 params['bsn_no'] = self.bsn_no
+        if self.bsn_type:
+            if hasattr(self.bsn_type, 'to_alipay_dict'):
+                params['bsn_type'] = self.bsn_type.to_alipay_dict()
+            else:
+                params['bsn_type'] = self.bsn_type
         if self.credit_no:
             if hasattr(self.credit_no, 'to_alipay_dict'):
                 params['credit_no'] = self.credit_no.to_alipay_dict()
@@ -327,6 +360,11 @@ class MybankCreditLoantradeLoanarCreateModel(object):
                 params['loan_term_unit'] = self.loan_term_unit.to_alipay_dict()
             else:
                 params['loan_term_unit'] = self.loan_term_unit
+        if self.need_check_account_same_name:
+            if hasattr(self.need_check_account_same_name, 'to_alipay_dict'):
+                params['need_check_account_same_name'] = self.need_check_account_same_name.to_alipay_dict()
+            else:
+                params['need_check_account_same_name'] = self.need_check_account_same_name
         if self.need_sign_contract:
             if hasattr(self.need_sign_contract, 'to_alipay_dict'):
                 params['need_sign_contract'] = self.need_sign_contract.to_alipay_dict()
@@ -352,6 +390,11 @@ class MybankCreditLoantradeLoanarCreateModel(object):
                 params['promo_tools'] = self.promo_tools.to_alipay_dict()
             else:
                 params['promo_tools'] = self.promo_tools
+        if self.repay_account:
+            if hasattr(self.repay_account, 'to_alipay_dict'):
+                params['repay_account'] = self.repay_account.to_alipay_dict()
+            else:
+                params['repay_account'] = self.repay_account
         if self.repay_mode:
             if hasattr(self.repay_mode, 'to_alipay_dict'):
                 params['repay_mode'] = self.repay_mode.to_alipay_dict()
@@ -399,6 +442,8 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             o.apply_amt = d['apply_amt']
         if 'bsn_no' in d:
             o.bsn_no = d['bsn_no']
+        if 'bsn_type' in d:
+            o.bsn_type = d['bsn_type']
         if 'credit_no' in d:
             o.credit_no = d['credit_no']
         if 'cust_group' in d:
@@ -417,6 +462,8 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             o.loan_term = d['loan_term']
         if 'loan_term_unit' in d:
             o.loan_term_unit = d['loan_term_unit']
+        if 'need_check_account_same_name' in d:
+            o.need_check_account_same_name = d['need_check_account_same_name']
         if 'need_sign_contract' in d:
             o.need_sign_contract = d['need_sign_contract']
         if 'pd_code' in d:
@@ -425,6 +472,8 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             o.pd_version = d['pd_version']
         if 'promo_tools' in d:
             o.promo_tools = d['promo_tools']
+        if 'repay_account' in d:
+            o.repay_account = d['repay_account']
         if 'repay_mode' in d:
             o.repay_mode = d['repay_mode']
         if 'request_id' in d:

@@ -12,6 +12,7 @@ class AlipaySecurityDataInfoIpaddrinfoQueryRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._biz_content = None
         self._ip_addr = None
         self._version = "1.0"
         self._terminal_type = None
@@ -30,6 +31,13 @@ class AlipaySecurityDataInfoIpaddrinfoQueryRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def biz_content(self):
+        return self._biz_content
+
+    @biz_content.setter
+    def biz_content(self, value):
+        self._biz_content = value
     @property
     def ip_addr(self):
         return self._ip_addr
@@ -116,6 +124,11 @@ class AlipaySecurityDataInfoIpaddrinfoQueryRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.biz_content:
+            if hasattr(self.biz_content, 'to_alipay_dict'):
+                params['biz_content'] = json.dumps(obj=self.biz_content.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['biz_content'] = self.biz_content
         if self.ip_addr:
             if hasattr(self.ip_addr, 'to_alipay_dict'):
                 params['ip_addr'] = json.dumps(obj=self.ip_addr.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

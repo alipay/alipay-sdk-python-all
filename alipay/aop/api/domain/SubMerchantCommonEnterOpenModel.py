@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class SubMerchantCommonEnterOpenModel(object):
 
     def __init__(self):
+        self._extend_fields = None
         self._product_code = None
         self._s_short_name = None
 
+    @property
+    def extend_fields(self):
+        return self._extend_fields
+
+    @extend_fields.setter
+    def extend_fields(self, value):
+        self._extend_fields = value
     @property
     def product_code(self):
         return self._product_code
@@ -29,6 +37,11 @@ class SubMerchantCommonEnterOpenModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.extend_fields:
+            if hasattr(self.extend_fields, 'to_alipay_dict'):
+                params['extend_fields'] = self.extend_fields.to_alipay_dict()
+            else:
+                params['extend_fields'] = self.extend_fields
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -46,6 +59,8 @@ class SubMerchantCommonEnterOpenModel(object):
         if not d:
             return None
         o = SubMerchantCommonEnterOpenModel()
+        if 'extend_fields' in d:
+            o.extend_fields = d['extend_fields']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 's_short_name' in d:

@@ -18,6 +18,8 @@ class KbdishCookInfo(object):
         self._create_user = None
         self._end_date = None
         self._end_time = None
+        self._gmt_create = None
+        self._gmt_modified = None
         self._kb_cook_detail_list = None
         self._merchant_id = None
         self._period_type = None
@@ -93,6 +95,20 @@ class KbdishCookInfo(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
+    @property
+    def gmt_modified(self):
+        return self._gmt_modified
+
+    @gmt_modified.setter
+    def gmt_modified(self, value):
+        self._gmt_modified = value
     @property
     def kb_cook_detail_list(self):
         return self._kb_cook_detail_list
@@ -228,6 +244,16 @@ class KbdishCookInfo(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.gmt_create:
+            if hasattr(self.gmt_create, 'to_alipay_dict'):
+                params['gmt_create'] = self.gmt_create.to_alipay_dict()
+            else:
+                params['gmt_create'] = self.gmt_create
+        if self.gmt_modified:
+            if hasattr(self.gmt_modified, 'to_alipay_dict'):
+                params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
+            else:
+                params['gmt_modified'] = self.gmt_modified
         if self.kb_cook_detail_list:
             if isinstance(self.kb_cook_detail_list, list):
                 for i in range(0, len(self.kb_cook_detail_list)):
@@ -318,6 +344,10 @@ class KbdishCookInfo(object):
             o.end_date = d['end_date']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'gmt_create' in d:
+            o.gmt_create = d['gmt_create']
+        if 'gmt_modified' in d:
+            o.gmt_modified = d['gmt_modified']
         if 'kb_cook_detail_list' in d:
             o.kb_cook_detail_list = d['kb_cook_detail_list']
         if 'merchant_id' in d:

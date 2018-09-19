@@ -12,6 +12,7 @@ class KoubeiTradeItemorderQueryResponse(AlipayResponse):
         super(KoubeiTradeItemorderQueryResponse, self).__init__()
         self._biz_product = None
         self._buyer_id = None
+        self._deliver_seller_real_amount = None
         self._discount_amount = None
         self._gmt_create = None
         self._gmt_modified = None
@@ -40,6 +41,13 @@ class KoubeiTradeItemorderQueryResponse(AlipayResponse):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def deliver_seller_real_amount(self):
+        return self._deliver_seller_real_amount
+
+    @deliver_seller_real_amount.setter
+    def deliver_seller_real_amount(self, value):
+        self._deliver_seller_real_amount = value
     @property
     def discount_amount(self):
         return self._discount_amount
@@ -144,6 +152,8 @@ class KoubeiTradeItemorderQueryResponse(AlipayResponse):
             self.biz_product = response['biz_product']
         if 'buyer_id' in response:
             self.buyer_id = response['buyer_id']
+        if 'deliver_seller_real_amount' in response:
+            self.deliver_seller_real_amount = response['deliver_seller_real_amount']
         if 'discount_amount' in response:
             self.discount_amount = response['discount_amount']
         if 'gmt_create' in response:

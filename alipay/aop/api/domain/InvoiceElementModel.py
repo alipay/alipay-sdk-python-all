@@ -18,6 +18,8 @@ class InvoiceElementModel(object):
         self._invoice_kind = None
         self._invoice_no = None
         self._invoice_status = None
+        self._logo_url = None
+        self._m_name = None
         self._payee_name = None
         self._payee_tax_no = None
         self._payer_name = None
@@ -93,6 +95,20 @@ class InvoiceElementModel(object):
     @invoice_status.setter
     def invoice_status(self, value):
         self._invoice_status = value
+    @property
+    def logo_url(self):
+        return self._logo_url
+
+    @logo_url.setter
+    def logo_url(self, value):
+        self._logo_url = value
+    @property
+    def m_name(self):
+        return self._m_name
+
+    @m_name.setter
+    def m_name(self, value):
+        self._m_name = value
     @property
     def payee_name(self):
         return self._payee_name
@@ -175,6 +191,16 @@ class InvoiceElementModel(object):
                 params['invoice_status'] = self.invoice_status.to_alipay_dict()
             else:
                 params['invoice_status'] = self.invoice_status
+        if self.logo_url:
+            if hasattr(self.logo_url, 'to_alipay_dict'):
+                params['logo_url'] = self.logo_url.to_alipay_dict()
+            else:
+                params['logo_url'] = self.logo_url
+        if self.m_name:
+            if hasattr(self.m_name, 'to_alipay_dict'):
+                params['m_name'] = self.m_name.to_alipay_dict()
+            else:
+                params['m_name'] = self.m_name
         if self.payee_name:
             if hasattr(self.payee_name, 'to_alipay_dict'):
                 params['payee_name'] = self.payee_name.to_alipay_dict()
@@ -222,6 +248,10 @@ class InvoiceElementModel(object):
             o.invoice_no = d['invoice_no']
         if 'invoice_status' in d:
             o.invoice_status = d['invoice_status']
+        if 'logo_url' in d:
+            o.logo_url = d['logo_url']
+        if 'm_name' in d:
+            o.m_name = d['m_name']
         if 'payee_name' in d:
             o.payee_name = d['payee_name']
         if 'payee_tax_no' in d:

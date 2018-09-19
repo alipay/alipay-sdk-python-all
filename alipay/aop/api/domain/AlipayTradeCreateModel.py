@@ -6,6 +6,8 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.LogisticsDetail import LogisticsDetail
+from alipay.aop.api.domain.ReceiverAddressInfo import ReceiverAddressInfo
 from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
 from alipay.aop.api.domain.SubMerchant import SubMerchant
@@ -25,9 +27,11 @@ class AlipayTradeCreateModel(object):
         self._ext_user_info = None
         self._extend_params = None
         self._goods_detail = None
+        self._logistics_detail = None
         self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
+        self._receiver_address_info = None
         self._royalty_info = None
         self._seller_id = None
         self._settle_info = None
@@ -129,6 +133,16 @@ class AlipayTradeCreateModel(object):
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
     @property
+    def logistics_detail(self):
+        return self._logistics_detail
+
+    @logistics_detail.setter
+    def logistics_detail(self, value):
+        if isinstance(value, LogisticsDetail):
+            self._logistics_detail = value
+        else:
+            self._logistics_detail = LogisticsDetail.from_alipay_dict(value)
+    @property
     def merchant_order_no(self):
         return self._merchant_order_no
 
@@ -149,6 +163,16 @@ class AlipayTradeCreateModel(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def receiver_address_info(self):
+        return self._receiver_address_info
+
+    @receiver_address_info.setter
+    def receiver_address_info(self, value):
+        if isinstance(value, ReceiverAddressInfo):
+            self._receiver_address_info = value
+        else:
+            self._receiver_address_info = ReceiverAddressInfo.from_alipay_dict(value)
     @property
     def royalty_info(self):
         return self._royalty_info
@@ -292,6 +316,11 @@ class AlipayTradeCreateModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.logistics_detail:
+            if hasattr(self.logistics_detail, 'to_alipay_dict'):
+                params['logistics_detail'] = self.logistics_detail.to_alipay_dict()
+            else:
+                params['logistics_detail'] = self.logistics_detail
         if self.merchant_order_no:
             if hasattr(self.merchant_order_no, 'to_alipay_dict'):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
@@ -307,6 +336,11 @@ class AlipayTradeCreateModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.receiver_address_info:
+            if hasattr(self.receiver_address_info, 'to_alipay_dict'):
+                params['receiver_address_info'] = self.receiver_address_info.to_alipay_dict()
+            else:
+                params['receiver_address_info'] = self.receiver_address_info
         if self.royalty_info:
             if hasattr(self.royalty_info, 'to_alipay_dict'):
                 params['royalty_info'] = self.royalty_info.to_alipay_dict()
@@ -386,12 +420,16 @@ class AlipayTradeCreateModel(object):
             o.extend_params = d['extend_params']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'logistics_detail' in d:
+            o.logistics_detail = d['logistics_detail']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'receiver_address_info' in d:
+            o.receiver_address_info = d['receiver_address_info']
         if 'royalty_info' in d:
             o.royalty_info = d['royalty_info']
         if 'seller_id' in d:

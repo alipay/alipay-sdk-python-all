@@ -33,10 +33,12 @@ class KbPosOrderDishDetail(object):
         self._refund_reason = None
         self._refund_time = None
         self._remind_time = None
+        self._sales_properties = None
         self._sell_price = None
         self._sku_id = None
         self._sort = None
         self._spec_name = None
+        self._type = None
         self._user_identity = None
         self._wake_status = None
 
@@ -216,6 +218,13 @@ class KbPosOrderDishDetail(object):
     def remind_time(self, value):
         self._remind_time = value
     @property
+    def sales_properties(self):
+        return self._sales_properties
+
+    @sales_properties.setter
+    def sales_properties(self, value):
+        self._sales_properties = value
+    @property
     def sell_price(self):
         return self._sell_price
 
@@ -243,6 +252,13 @@ class KbPosOrderDishDetail(object):
     @spec_name.setter
     def spec_name(self, value):
         self._spec_name = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
     @property
     def user_identity(self):
         return self._user_identity
@@ -386,6 +402,11 @@ class KbPosOrderDishDetail(object):
                 params['remind_time'] = self.remind_time.to_alipay_dict()
             else:
                 params['remind_time'] = self.remind_time
+        if self.sales_properties:
+            if hasattr(self.sales_properties, 'to_alipay_dict'):
+                params['sales_properties'] = self.sales_properties.to_alipay_dict()
+            else:
+                params['sales_properties'] = self.sales_properties
         if self.sell_price:
             if hasattr(self.sell_price, 'to_alipay_dict'):
                 params['sell_price'] = self.sell_price.to_alipay_dict()
@@ -406,6 +427,11 @@ class KbPosOrderDishDetail(object):
                 params['spec_name'] = self.spec_name.to_alipay_dict()
             else:
                 params['spec_name'] = self.spec_name
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.user_identity:
             if hasattr(self.user_identity, 'to_alipay_dict'):
                 params['user_identity'] = self.user_identity.to_alipay_dict()
@@ -473,6 +499,8 @@ class KbPosOrderDishDetail(object):
             o.refund_time = d['refund_time']
         if 'remind_time' in d:
             o.remind_time = d['remind_time']
+        if 'sales_properties' in d:
+            o.sales_properties = d['sales_properties']
         if 'sell_price' in d:
             o.sell_price = d['sell_price']
         if 'sku_id' in d:
@@ -481,6 +509,8 @@ class KbPosOrderDishDetail(object):
             o.sort = d['sort']
         if 'spec_name' in d:
             o.spec_name = d['spec_name']
+        if 'type' in d:
+            o.type = d['type']
         if 'user_identity' in d:
             o.user_identity = d['user_identity']
         if 'wake_status' in d:

@@ -22,6 +22,8 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
         self._medical_card_id = None
         self._medical_card_no = None
         self._medical_card_type = None
+        self._out_user_card_no = None
+        self._out_user_name = None
         self._sign_status = None
 
     @property
@@ -115,6 +117,20 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
     def medical_card_type(self, value):
         self._medical_card_type = value
     @property
+    def out_user_card_no(self):
+        return self._out_user_card_no
+
+    @out_user_card_no.setter
+    def out_user_card_no(self, value):
+        self._out_user_card_no = value
+    @property
+    def out_user_name(self):
+        return self._out_user_name
+
+    @out_user_name.setter
+    def out_user_name(self, value):
+        self._out_user_name = value
+    @property
     def sign_status(self):
         return self._sign_status
 
@@ -148,5 +164,9 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
             self.medical_card_no = response['medical_card_no']
         if 'medical_card_type' in response:
             self.medical_card_type = response['medical_card_type']
+        if 'out_user_card_no' in response:
+            self.out_user_card_no = response['out_user_card_no']
+        if 'out_user_name' in response:
+            self.out_user_name = response['out_user_name']
         if 'sign_status' in response:
             self.sign_status = response['sign_status']

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SceneExtParam import SceneExtParam
 
 
 class MybankCreditSceneprodLoanApplyModel(object):
@@ -12,6 +13,7 @@ class MybankCreditSceneprodLoanApplyModel(object):
         self._back_url = None
         self._channel = None
         self._ext_param = None
+        self._ext_param_info = None
         self._finance_inst_iprole_id = None
         self._loan_amt = None
         self._loan_period = None
@@ -52,6 +54,16 @@ class MybankCreditSceneprodLoanApplyModel(object):
     @ext_param.setter
     def ext_param(self, value):
         self._ext_param = value
+    @property
+    def ext_param_info(self):
+        return self._ext_param_info
+
+    @ext_param_info.setter
+    def ext_param_info(self, value):
+        if isinstance(value, SceneExtParam):
+            self._ext_param_info = value
+        else:
+            self._ext_param_info = SceneExtParam.from_alipay_dict(value)
     @property
     def finance_inst_iprole_id(self):
         return self._finance_inst_iprole_id
@@ -153,6 +165,11 @@ class MybankCreditSceneprodLoanApplyModel(object):
                 params['ext_param'] = self.ext_param.to_alipay_dict()
             else:
                 params['ext_param'] = self.ext_param
+        if self.ext_param_info:
+            if hasattr(self.ext_param_info, 'to_alipay_dict'):
+                params['ext_param_info'] = self.ext_param_info.to_alipay_dict()
+            else:
+                params['ext_param_info'] = self.ext_param_info
         if self.finance_inst_iprole_id:
             if hasattr(self.finance_inst_iprole_id, 'to_alipay_dict'):
                 params['finance_inst_iprole_id'] = self.finance_inst_iprole_id.to_alipay_dict()
@@ -223,6 +240,8 @@ class MybankCreditSceneprodLoanApplyModel(object):
             o.channel = d['channel']
         if 'ext_param' in d:
             o.ext_param = d['ext_param']
+        if 'ext_param_info' in d:
+            o.ext_param_info = d['ext_param_info']
         if 'finance_inst_iprole_id' in d:
             o.finance_inst_iprole_id = d['finance_inst_iprole_id']
         if 'loan_amt' in d:

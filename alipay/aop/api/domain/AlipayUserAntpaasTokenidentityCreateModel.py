@@ -10,6 +10,7 @@ class AlipayUserAntpaasTokenidentityCreateModel(object):
     def __init__(self):
         self._biz_id = None
         self._biz_scene = None
+        self._ext_info = None
         self._ext_info_id = None
         self._mobile = None
         self._user_type = None
@@ -28,6 +29,13 @@ class AlipayUserAntpaasTokenidentityCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def ext_info_id(self):
         return self._ext_info_id
@@ -63,6 +71,11 @@ class AlipayUserAntpaasTokenidentityCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.ext_info_id:
             if hasattr(self.ext_info_id, 'to_alipay_dict'):
                 params['ext_info_id'] = self.ext_info_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayUserAntpaasTokenidentityCreateModel(object):
             o.biz_id = d['biz_id']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'ext_info_id' in d:
             o.ext_info_id = d['ext_info_id']
         if 'mobile' in d:

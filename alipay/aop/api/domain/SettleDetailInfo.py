@@ -9,6 +9,8 @@ class SettleDetailInfo(object):
 
     def __init__(self):
         self._amount = None
+        self._settle_entity_id = None
+        self._settle_entity_type = None
         self._summary_dimension = None
         self._trans_in = None
         self._trans_in_type = None
@@ -20,6 +22,20 @@ class SettleDetailInfo(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def settle_entity_id(self):
+        return self._settle_entity_id
+
+    @settle_entity_id.setter
+    def settle_entity_id(self, value):
+        self._settle_entity_id = value
+    @property
+    def settle_entity_type(self):
+        return self._settle_entity_type
+
+    @settle_entity_type.setter
+    def settle_entity_type(self, value):
+        self._settle_entity_type = value
     @property
     def summary_dimension(self):
         return self._summary_dimension
@@ -50,6 +66,16 @@ class SettleDetailInfo(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.settle_entity_id:
+            if hasattr(self.settle_entity_id, 'to_alipay_dict'):
+                params['settle_entity_id'] = self.settle_entity_id.to_alipay_dict()
+            else:
+                params['settle_entity_id'] = self.settle_entity_id
+        if self.settle_entity_type:
+            if hasattr(self.settle_entity_type, 'to_alipay_dict'):
+                params['settle_entity_type'] = self.settle_entity_type.to_alipay_dict()
+            else:
+                params['settle_entity_type'] = self.settle_entity_type
         if self.summary_dimension:
             if hasattr(self.summary_dimension, 'to_alipay_dict'):
                 params['summary_dimension'] = self.summary_dimension.to_alipay_dict()
@@ -74,6 +100,10 @@ class SettleDetailInfo(object):
         o = SettleDetailInfo()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'settle_entity_id' in d:
+            o.settle_entity_id = d['settle_entity_id']
+        if 'settle_entity_type' in d:
+            o.settle_entity_type = d['settle_entity_type']
         if 'summary_dimension' in d:
             o.summary_dimension = d['summary_dimension']
         if 'trans_in' in d:

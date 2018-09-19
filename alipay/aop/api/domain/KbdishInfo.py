@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.KbdishPracticeInfo import KbdishPracticeInfo
 from alipay.aop.api.domain.KbdishSkuInfo import KbdishSkuInfo
+from alipay.aop.api.domain.KbdishMaterialBindingInfo import KbdishMaterialBindingInfo
+from alipay.aop.api.domain.KbdishPropertyInfo import KbdishPropertyInfo
 
 
 class KbdishInfo(object):
@@ -26,12 +28,14 @@ class KbdishInfo(object):
         self._en_remember_code = None
         self._ext_content = None
         self._goods_id = None
+        self._material_binding_info_list = None
         self._merchant_id = None
         self._min_serving = None
         self._mini_add_num = None
         self._nb_remember_code = None
         self._not_count_threshold = None
         self._out_dish_id = None
+        self._property_info_list = None
         self._remarks = None
         self._shop_id = None
         self._status = None
@@ -166,6 +170,19 @@ class KbdishInfo(object):
     def goods_id(self, value):
         self._goods_id = value
     @property
+    def material_binding_info_list(self):
+        return self._material_binding_info_list
+
+    @material_binding_info_list.setter
+    def material_binding_info_list(self, value):
+        if isinstance(value, list):
+            self._material_binding_info_list = list()
+            for i in value:
+                if isinstance(i, KbdishMaterialBindingInfo):
+                    self._material_binding_info_list.append(i)
+                else:
+                    self._material_binding_info_list.append(KbdishMaterialBindingInfo.from_alipay_dict(i))
+    @property
     def merchant_id(self):
         return self._merchant_id
 
@@ -207,6 +224,19 @@ class KbdishInfo(object):
     @out_dish_id.setter
     def out_dish_id(self, value):
         self._out_dish_id = value
+    @property
+    def property_info_list(self):
+        return self._property_info_list
+
+    @property_info_list.setter
+    def property_info_list(self, value):
+        if isinstance(value, list):
+            self._property_info_list = list()
+            for i in value:
+                if isinstance(i, KbdishPropertyInfo):
+                    self._property_info_list.append(i)
+                else:
+                    self._property_info_list.append(KbdishPropertyInfo.from_alipay_dict(i))
     @property
     def remarks(self):
         return self._remarks
@@ -357,6 +387,16 @@ class KbdishInfo(object):
                 params['goods_id'] = self.goods_id.to_alipay_dict()
             else:
                 params['goods_id'] = self.goods_id
+        if self.material_binding_info_list:
+            if isinstance(self.material_binding_info_list, list):
+                for i in range(0, len(self.material_binding_info_list)):
+                    element = self.material_binding_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.material_binding_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.material_binding_info_list, 'to_alipay_dict'):
+                params['material_binding_info_list'] = self.material_binding_info_list.to_alipay_dict()
+            else:
+                params['material_binding_info_list'] = self.material_binding_info_list
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
@@ -387,6 +427,16 @@ class KbdishInfo(object):
                 params['out_dish_id'] = self.out_dish_id.to_alipay_dict()
             else:
                 params['out_dish_id'] = self.out_dish_id
+        if self.property_info_list:
+            if isinstance(self.property_info_list, list):
+                for i in range(0, len(self.property_info_list)):
+                    element = self.property_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.property_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.property_info_list, 'to_alipay_dict'):
+                params['property_info_list'] = self.property_info_list.to_alipay_dict()
+            else:
+                params['property_info_list'] = self.property_info_list
         if self.remarks:
             if hasattr(self.remarks, 'to_alipay_dict'):
                 params['remarks'] = self.remarks.to_alipay_dict()
@@ -466,6 +516,8 @@ class KbdishInfo(object):
             o.ext_content = d['ext_content']
         if 'goods_id' in d:
             o.goods_id = d['goods_id']
+        if 'material_binding_info_list' in d:
+            o.material_binding_info_list = d['material_binding_info_list']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
         if 'min_serving' in d:
@@ -478,6 +530,8 @@ class KbdishInfo(object):
             o.not_count_threshold = d['not_count_threshold']
         if 'out_dish_id' in d:
             o.out_dish_id = d['out_dish_id']
+        if 'property_info_list' in d:
+            o.property_info_list = d['property_info_list']
         if 'remarks' in d:
             o.remarks = d['remarks']
         if 'shop_id' in d:

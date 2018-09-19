@@ -13,6 +13,7 @@ class MybankCreditSupplychainInventoryOutConsultModel(object):
         self._ar_no = None
         self._asset_info_list = None
         self._customer = None
+        self._ext_info = None
         self._out_order_no = None
         self._sale_pd_code = None
         self._trade_type = None
@@ -47,6 +48,13 @@ class MybankCreditSupplychainInventoryOutConsultModel(object):
             self._customer = value
         else:
             self._customer = Member.from_alipay_dict(value)
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -92,6 +100,11 @@ class MybankCreditSupplychainInventoryOutConsultModel(object):
                 params['customer'] = self.customer.to_alipay_dict()
             else:
                 params['customer'] = self.customer
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -120,6 +133,8 @@ class MybankCreditSupplychainInventoryOutConsultModel(object):
             o.asset_info_list = d['asset_info_list']
         if 'customer' in d:
             o.customer = d['customer']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'sale_pd_code' in d:

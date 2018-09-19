@@ -14,6 +14,7 @@ class AlipayOpenEchoSendResponse(AlipayResponse):
         self._out_a = None
         self._out_b = None
         self._out_c = None
+        self._out_d = None
         self._word = None
 
     @property
@@ -48,6 +49,13 @@ class AlipayOpenEchoSendResponse(AlipayResponse):
     def out_c(self, value):
         self._out_c = value
     @property
+    def out_d(self):
+        return self._out_d
+
+    @out_d.setter
+    def out_d(self, value):
+        self._out_d = value
+    @property
     def word(self):
         return self._word
 
@@ -65,5 +73,7 @@ class AlipayOpenEchoSendResponse(AlipayResponse):
             self.out_b = response['out_b']
         if 'out_c' in response:
             self.out_c = response['out_c']
+        if 'out_d' in response:
+            self.out_d = response['out_d']
         if 'word' in response:
             self.word = response['word']

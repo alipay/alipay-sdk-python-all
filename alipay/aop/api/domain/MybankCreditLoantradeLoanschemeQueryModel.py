@@ -14,6 +14,7 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
         self._entity_name = None
         self._entity_type = None
         self._loan_policy_code = None
+        self._out_uni_code = None
         self._sale_pd_code = None
         self._scen = None
 
@@ -59,6 +60,13 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
     @loan_policy_code.setter
     def loan_policy_code(self, value):
         self._loan_policy_code = value
+    @property
+    def out_uni_code(self):
+        return self._out_uni_code
+
+    @out_uni_code.setter
+    def out_uni_code(self, value):
+        self._out_uni_code = value
     @property
     def sale_pd_code(self):
         return self._sale_pd_code
@@ -107,6 +115,11 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
                 params['loan_policy_code'] = self.loan_policy_code.to_alipay_dict()
             else:
                 params['loan_policy_code'] = self.loan_policy_code
+        if self.out_uni_code:
+            if hasattr(self.out_uni_code, 'to_alipay_dict'):
+                params['out_uni_code'] = self.out_uni_code.to_alipay_dict()
+            else:
+                params['out_uni_code'] = self.out_uni_code
         if self.sale_pd_code:
             if hasattr(self.sale_pd_code, 'to_alipay_dict'):
                 params['sale_pd_code'] = self.sale_pd_code.to_alipay_dict()
@@ -136,6 +149,8 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
             o.entity_type = d['entity_type']
         if 'loan_policy_code' in d:
             o.loan_policy_code = d['loan_policy_code']
+        if 'out_uni_code' in d:
+            o.out_uni_code = d['out_uni_code']
         if 'sale_pd_code' in d:
             o.sale_pd_code = d['sale_pd_code']
         if 'scen' in d:

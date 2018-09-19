@@ -10,6 +10,7 @@ class AlipayPcreditLoanCollateralValuationSyncModel(object):
     def __init__(self):
         self._apply_no = None
         self._eval_time = None
+        self._ext_info = None
         self._out_request_no = None
         self._rejected_code = None
         self._rejected_reason = None
@@ -30,6 +31,13 @@ class AlipayPcreditLoanCollateralValuationSyncModel(object):
     @eval_time.setter
     def eval_time(self, value):
         self._eval_time = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -79,6 +87,11 @@ class AlipayPcreditLoanCollateralValuationSyncModel(object):
                 params['eval_time'] = self.eval_time.to_alipay_dict()
             else:
                 params['eval_time'] = self.eval_time
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayPcreditLoanCollateralValuationSyncModel(object):
             o.apply_no = d['apply_no']
         if 'eval_time' in d:
             o.eval_time = d['eval_time']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'rejected_code' in d:

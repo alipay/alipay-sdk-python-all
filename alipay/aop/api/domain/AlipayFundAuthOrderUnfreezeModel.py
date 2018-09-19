@@ -10,6 +10,7 @@ class AlipayFundAuthOrderUnfreezeModel(object):
     def __init__(self):
         self._amount = None
         self._auth_no = None
+        self._extra_param = None
         self._out_request_no = None
         self._remark = None
 
@@ -27,6 +28,13 @@ class AlipayFundAuthOrderUnfreezeModel(object):
     @auth_no.setter
     def auth_no(self, value):
         self._auth_no = value
+    @property
+    def extra_param(self):
+        return self._extra_param
+
+    @extra_param.setter
+    def extra_param(self, value):
+        self._extra_param = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -55,6 +63,11 @@ class AlipayFundAuthOrderUnfreezeModel(object):
                 params['auth_no'] = self.auth_no.to_alipay_dict()
             else:
                 params['auth_no'] = self.auth_no
+        if self.extra_param:
+            if hasattr(self.extra_param, 'to_alipay_dict'):
+                params['extra_param'] = self.extra_param.to_alipay_dict()
+            else:
+                params['extra_param'] = self.extra_param
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayFundAuthOrderUnfreezeModel(object):
             o.amount = d['amount']
         if 'auth_no' in d:
             o.auth_no = d['auth_no']
+        if 'extra_param' in d:
+            o.extra_param = d['extra_param']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'remark' in d:

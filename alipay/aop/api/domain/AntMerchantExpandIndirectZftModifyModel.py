@@ -16,6 +16,7 @@ class AntMerchantExpandIndirectZftModifyModel(object):
     def __init__(self):
         self._alias_name = None
         self._alipay_logon_id = None
+        self._binding_alipay_logon_id = None
         self._biz_cards = None
         self._business_address = None
         self._contact_infos = None
@@ -51,6 +52,13 @@ class AntMerchantExpandIndirectZftModifyModel(object):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def binding_alipay_logon_id(self):
+        return self._binding_alipay_logon_id
+
+    @binding_alipay_logon_id.setter
+    def binding_alipay_logon_id(self, value):
+        self._binding_alipay_logon_id = value
     @property
     def biz_cards(self):
         return self._biz_cards
@@ -241,6 +249,11 @@ class AntMerchantExpandIndirectZftModifyModel(object):
                 params['alipay_logon_id'] = self.alipay_logon_id.to_alipay_dict()
             else:
                 params['alipay_logon_id'] = self.alipay_logon_id
+        if self.binding_alipay_logon_id:
+            if hasattr(self.binding_alipay_logon_id, 'to_alipay_dict'):
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id.to_alipay_dict()
+            else:
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id
         if self.biz_cards:
             if isinstance(self.biz_cards, list):
                 for i in range(0, len(self.biz_cards)):
@@ -382,6 +395,8 @@ class AntMerchantExpandIndirectZftModifyModel(object):
             o.alias_name = d['alias_name']
         if 'alipay_logon_id' in d:
             o.alipay_logon_id = d['alipay_logon_id']
+        if 'binding_alipay_logon_id' in d:
+            o.binding_alipay_logon_id = d['binding_alipay_logon_id']
         if 'biz_cards' in d:
             o.biz_cards = d['biz_cards']
         if 'business_address' in d:

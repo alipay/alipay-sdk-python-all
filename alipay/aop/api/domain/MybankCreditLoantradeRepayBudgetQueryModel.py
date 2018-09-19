@@ -9,6 +9,8 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
 
     def __init__(self):
         self._apply_repay_prin = None
+        self._budget_type = None
+        self._can_repay_flag = None
         self._ext_data = None
         self._ip_id = None
         self._ip_role_id = None
@@ -21,6 +23,20 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
     @apply_repay_prin.setter
     def apply_repay_prin(self, value):
         self._apply_repay_prin = value
+    @property
+    def budget_type(self):
+        return self._budget_type
+
+    @budget_type.setter
+    def budget_type(self, value):
+        self._budget_type = value
+    @property
+    def can_repay_flag(self):
+        return self._can_repay_flag
+
+    @can_repay_flag.setter
+    def can_repay_flag(self, value):
+        self._can_repay_flag = value
     @property
     def ext_data(self):
         return self._ext_data
@@ -58,6 +74,16 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
                 params['apply_repay_prin'] = self.apply_repay_prin.to_alipay_dict()
             else:
                 params['apply_repay_prin'] = self.apply_repay_prin
+        if self.budget_type:
+            if hasattr(self.budget_type, 'to_alipay_dict'):
+                params['budget_type'] = self.budget_type.to_alipay_dict()
+            else:
+                params['budget_type'] = self.budget_type
+        if self.can_repay_flag:
+            if hasattr(self.can_repay_flag, 'to_alipay_dict'):
+                params['can_repay_flag'] = self.can_repay_flag.to_alipay_dict()
+            else:
+                params['can_repay_flag'] = self.can_repay_flag
         if self.ext_data:
             if hasattr(self.ext_data, 'to_alipay_dict'):
                 params['ext_data'] = self.ext_data.to_alipay_dict()
@@ -87,6 +113,10 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
         o = MybankCreditLoantradeRepayBudgetQueryModel()
         if 'apply_repay_prin' in d:
             o.apply_repay_prin = d['apply_repay_prin']
+        if 'budget_type' in d:
+            o.budget_type = d['budget_type']
+        if 'can_repay_flag' in d:
+            o.can_repay_flag = d['can_repay_flag']
         if 'ext_data' in d:
             o.ext_data = d['ext_data']
         if 'ip_id' in d:

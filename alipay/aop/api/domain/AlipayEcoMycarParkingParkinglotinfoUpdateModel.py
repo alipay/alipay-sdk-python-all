@@ -19,6 +19,7 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
         self._equipment_name = None
         self._latitude = None
         self._longitude = None
+        self._mchnt_id = None
         self._out_parking_id = None
         self._parking_address = None
         self._parking_end_time = None
@@ -113,6 +114,13 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def mchnt_id(self):
+        return self._mchnt_id
+
+    @mchnt_id.setter
+    def mchnt_id(self, value):
+        self._mchnt_id = value
     @property
     def out_parking_id(self):
         return self._out_parking_id
@@ -284,6 +292,11 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.mchnt_id:
+            if hasattr(self.mchnt_id, 'to_alipay_dict'):
+                params['mchnt_id'] = self.mchnt_id.to_alipay_dict()
+            else:
+                params['mchnt_id'] = self.mchnt_id
         if self.out_parking_id:
             if hasattr(self.out_parking_id, 'to_alipay_dict'):
                 params['out_parking_id'] = self.out_parking_id.to_alipay_dict()
@@ -393,6 +406,8 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'mchnt_id' in d:
+            o.mchnt_id = d['mchnt_id']
         if 'out_parking_id' in d:
             o.out_parking_id = d['out_parking_id']
         if 'parking_address' in d:

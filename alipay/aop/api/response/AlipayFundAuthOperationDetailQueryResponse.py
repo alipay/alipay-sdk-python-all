@@ -11,7 +11,9 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         super(AlipayFundAuthOperationDetailQueryResponse, self).__init__()
         self._amount = None
         self._auth_no = None
+        self._credit_amount = None
         self._extra_param = None
+        self._fund_amount = None
         self._gmt_create = None
         self._gmt_trans = None
         self._operation_id = None
@@ -24,9 +26,15 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         self._pre_auth_type = None
         self._remark = None
         self._rest_amount = None
+        self._rest_credit_amount = None
+        self._rest_fund_amount = None
         self._status = None
         self._total_freeze_amount = None
+        self._total_freeze_credit_amount = None
+        self._total_freeze_fund_amount = None
         self._total_pay_amount = None
+        self._total_pay_credit_amount = None
+        self._total_pay_fund_amount = None
         self._trans_currency = None
 
     @property
@@ -44,12 +52,26 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     def auth_no(self, value):
         self._auth_no = value
     @property
+    def credit_amount(self):
+        return self._credit_amount
+
+    @credit_amount.setter
+    def credit_amount(self, value):
+        self._credit_amount = value
+    @property
     def extra_param(self):
         return self._extra_param
 
     @extra_param.setter
     def extra_param(self, value):
         self._extra_param = value
+    @property
+    def fund_amount(self):
+        return self._fund_amount
+
+    @fund_amount.setter
+    def fund_amount(self, value):
+        self._fund_amount = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -135,6 +157,20 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     def rest_amount(self, value):
         self._rest_amount = value
     @property
+    def rest_credit_amount(self):
+        return self._rest_credit_amount
+
+    @rest_credit_amount.setter
+    def rest_credit_amount(self, value):
+        self._rest_credit_amount = value
+    @property
+    def rest_fund_amount(self):
+        return self._rest_fund_amount
+
+    @rest_fund_amount.setter
+    def rest_fund_amount(self, value):
+        self._rest_fund_amount = value
+    @property
     def status(self):
         return self._status
 
@@ -149,12 +185,40 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     def total_freeze_amount(self, value):
         self._total_freeze_amount = value
     @property
+    def total_freeze_credit_amount(self):
+        return self._total_freeze_credit_amount
+
+    @total_freeze_credit_amount.setter
+    def total_freeze_credit_amount(self, value):
+        self._total_freeze_credit_amount = value
+    @property
+    def total_freeze_fund_amount(self):
+        return self._total_freeze_fund_amount
+
+    @total_freeze_fund_amount.setter
+    def total_freeze_fund_amount(self, value):
+        self._total_freeze_fund_amount = value
+    @property
     def total_pay_amount(self):
         return self._total_pay_amount
 
     @total_pay_amount.setter
     def total_pay_amount(self, value):
         self._total_pay_amount = value
+    @property
+    def total_pay_credit_amount(self):
+        return self._total_pay_credit_amount
+
+    @total_pay_credit_amount.setter
+    def total_pay_credit_amount(self, value):
+        self._total_pay_credit_amount = value
+    @property
+    def total_pay_fund_amount(self):
+        return self._total_pay_fund_amount
+
+    @total_pay_fund_amount.setter
+    def total_pay_fund_amount(self, value):
+        self._total_pay_fund_amount = value
     @property
     def trans_currency(self):
         return self._trans_currency
@@ -169,8 +233,12 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.amount = response['amount']
         if 'auth_no' in response:
             self.auth_no = response['auth_no']
+        if 'credit_amount' in response:
+            self.credit_amount = response['credit_amount']
         if 'extra_param' in response:
             self.extra_param = response['extra_param']
+        if 'fund_amount' in response:
+            self.fund_amount = response['fund_amount']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
         if 'gmt_trans' in response:
@@ -195,11 +263,23 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.remark = response['remark']
         if 'rest_amount' in response:
             self.rest_amount = response['rest_amount']
+        if 'rest_credit_amount' in response:
+            self.rest_credit_amount = response['rest_credit_amount']
+        if 'rest_fund_amount' in response:
+            self.rest_fund_amount = response['rest_fund_amount']
         if 'status' in response:
             self.status = response['status']
         if 'total_freeze_amount' in response:
             self.total_freeze_amount = response['total_freeze_amount']
+        if 'total_freeze_credit_amount' in response:
+            self.total_freeze_credit_amount = response['total_freeze_credit_amount']
+        if 'total_freeze_fund_amount' in response:
+            self.total_freeze_fund_amount = response['total_freeze_fund_amount']
         if 'total_pay_amount' in response:
             self.total_pay_amount = response['total_pay_amount']
+        if 'total_pay_credit_amount' in response:
+            self.total_pay_credit_amount = response['total_pay_credit_amount']
+        if 'total_pay_fund_amount' in response:
+            self.total_pay_fund_amount = response['total_pay_fund_amount']
         if 'trans_currency' in response:
             self.trans_currency = response['trans_currency']

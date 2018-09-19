@@ -10,6 +10,7 @@ class ZhimaCustomerCertificationInitializeModel(object):
     def __init__(self):
         self._biz_code = None
         self._ext_biz_param = None
+        self._face_contrast_picture = None
         self._identity_param = None
         self._linked_merchant_id = None
         self._merchant_config = None
@@ -30,6 +31,13 @@ class ZhimaCustomerCertificationInitializeModel(object):
     @ext_biz_param.setter
     def ext_biz_param(self, value):
         self._ext_biz_param = value
+    @property
+    def face_contrast_picture(self):
+        return self._face_contrast_picture
+
+    @face_contrast_picture.setter
+    def face_contrast_picture(self, value):
+        self._face_contrast_picture = value
     @property
     def identity_param(self):
         return self._identity_param
@@ -79,6 +87,11 @@ class ZhimaCustomerCertificationInitializeModel(object):
                 params['ext_biz_param'] = self.ext_biz_param.to_alipay_dict()
             else:
                 params['ext_biz_param'] = self.ext_biz_param
+        if self.face_contrast_picture:
+            if hasattr(self.face_contrast_picture, 'to_alipay_dict'):
+                params['face_contrast_picture'] = self.face_contrast_picture.to_alipay_dict()
+            else:
+                params['face_contrast_picture'] = self.face_contrast_picture
         if self.identity_param:
             if hasattr(self.identity_param, 'to_alipay_dict'):
                 params['identity_param'] = self.identity_param.to_alipay_dict()
@@ -115,6 +128,8 @@ class ZhimaCustomerCertificationInitializeModel(object):
             o.biz_code = d['biz_code']
         if 'ext_biz_param' in d:
             o.ext_biz_param = d['ext_biz_param']
+        if 'face_contrast_picture' in d:
+            o.face_contrast_picture = d['face_contrast_picture']
         if 'identity_param' in d:
             o.identity_param = d['identity_param']
         if 'linked_merchant_id' in d:

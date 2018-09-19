@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class MybankCreditSceneprodLoanCancelModel(object):
 
     def __init__(self):
+        self._cancel_reason = None
         self._org_code = None
         self._out_order_no = None
         self._product_code = None
         self._site = None
         self._site_user_id = None
 
+    @property
+    def cancel_reason(self):
+        return self._cancel_reason
+
+    @cancel_reason.setter
+    def cancel_reason(self, value):
+        self._cancel_reason = value
     @property
     def org_code(self):
         return self._org_code
@@ -53,6 +61,11 @@ class MybankCreditSceneprodLoanCancelModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cancel_reason:
+            if hasattr(self.cancel_reason, 'to_alipay_dict'):
+                params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
+            else:
+                params['cancel_reason'] = self.cancel_reason
         if self.org_code:
             if hasattr(self.org_code, 'to_alipay_dict'):
                 params['org_code'] = self.org_code.to_alipay_dict()
@@ -85,6 +98,8 @@ class MybankCreditSceneprodLoanCancelModel(object):
         if not d:
             return None
         o = MybankCreditSceneprodLoanCancelModel()
+        if 'cancel_reason' in d:
+            o.cancel_reason = d['cancel_reason']
         if 'org_code' in d:
             o.org_code = d['org_code']
         if 'out_order_no' in d:

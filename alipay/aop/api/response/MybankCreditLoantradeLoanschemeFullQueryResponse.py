@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.Contract import Contract
 from alipay.aop.api.domain.LoanScheme import LoanScheme
 from alipay.aop.api.domain.MyBkAccountVO import MyBkAccountVO
+from alipay.aop.api.domain.MyBkAccountVO import MyBkAccountVO
 
 
 class MybankCreditLoantradeLoanschemeFullQueryResponse(AlipayResponse):
@@ -15,6 +16,7 @@ class MybankCreditLoantradeLoanschemeFullQueryResponse(AlipayResponse):
         self._contract_list = None
         self._data_sign = None
         self._loan_scheme = None
+        self._repay_account = None
         self._trans_in_account = None
 
     @property
@@ -48,6 +50,16 @@ class MybankCreditLoantradeLoanschemeFullQueryResponse(AlipayResponse):
         else:
             self._loan_scheme = LoanScheme.from_alipay_dict(value)
     @property
+    def repay_account(self):
+        return self._repay_account
+
+    @repay_account.setter
+    def repay_account(self, value):
+        if isinstance(value, MyBkAccountVO):
+            self._repay_account = value
+        else:
+            self._repay_account = MyBkAccountVO.from_alipay_dict(value)
+    @property
     def trans_in_account(self):
         return self._trans_in_account
 
@@ -66,5 +78,7 @@ class MybankCreditLoantradeLoanschemeFullQueryResponse(AlipayResponse):
             self.data_sign = response['data_sign']
         if 'loan_scheme' in response:
             self.loan_scheme = response['loan_scheme']
+        if 'repay_account' in response:
+            self.repay_account = response['repay_account']
         if 'trans_in_account' in response:
             self.trans_in_account = response['trans_in_account']

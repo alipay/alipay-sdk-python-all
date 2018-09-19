@@ -10,6 +10,7 @@ class AlipayInsDataDsbEstimateQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayInsDataDsbEstimateQueryResponse, self).__init__()
+        self._confidence = None
         self._estimate_detail_list = None
         self._estimate_no = None
         self._frame_no = None
@@ -18,6 +19,13 @@ class AlipayInsDataDsbEstimateQueryResponse(AlipayResponse):
         self._total_damage_amount = None
         self._total_remain_value = None
 
+    @property
+    def confidence(self):
+        return self._confidence
+
+    @confidence.setter
+    def confidence(self, value):
+        self._confidence = value
     @property
     def estimate_detail_list(self):
         return self._estimate_detail_list
@@ -76,6 +84,8 @@ class AlipayInsDataDsbEstimateQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayInsDataDsbEstimateQueryResponse, self).parse_response_content(response_content)
+        if 'confidence' in response:
+            self.confidence = response['confidence']
         if 'estimate_detail_list' in response:
             self.estimate_detail_list = response['estimate_detail_list']
         if 'estimate_no' in response:

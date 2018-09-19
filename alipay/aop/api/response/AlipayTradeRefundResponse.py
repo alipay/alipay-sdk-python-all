@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
+from alipay.aop.api.domain.PresetPayToolInfo import PresetPayToolInfo
 
 
 class AlipayTradeRefundResponse(AlipayResponse):
@@ -22,6 +23,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._refund_currency = None
         self._refund_detail_item_list = None
         self._refund_fee = None
+        self._refund_preset_paytool_list = None
         self._send_back_fee = None
         self._store_name = None
         self._trade_no = None
@@ -117,6 +119,16 @@ class AlipayTradeRefundResponse(AlipayResponse):
     def refund_fee(self, value):
         self._refund_fee = value
     @property
+    def refund_preset_paytool_list(self):
+        return self._refund_preset_paytool_list
+
+    @refund_preset_paytool_list.setter
+    def refund_preset_paytool_list(self, value):
+        if isinstance(value, PresetPayToolInfo):
+            self._refund_preset_paytool_list = value
+        else:
+            self._refund_preset_paytool_list = PresetPayToolInfo.from_alipay_dict(value)
+    @property
     def send_back_fee(self):
         return self._send_back_fee
 
@@ -164,6 +176,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.refund_detail_item_list = response['refund_detail_item_list']
         if 'refund_fee' in response:
             self.refund_fee = response['refund_fee']
+        if 'refund_preset_paytool_list' in response:
+            self.refund_preset_paytool_list = response['refund_preset_paytool_list']
         if 'send_back_fee' in response:
             self.send_back_fee = response['send_back_fee']
         if 'store_name' in response:

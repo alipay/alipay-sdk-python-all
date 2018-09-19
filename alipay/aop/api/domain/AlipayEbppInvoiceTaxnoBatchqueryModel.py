@@ -11,6 +11,7 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
         self._end_invoice_date = None
         self._invoice_kind_list = None
         self._limit_size = None
+        self._page_num = None
         self._scene = None
         self._start_invoice_date = None
         self._tax_no = None
@@ -39,6 +40,13 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
     @limit_size.setter
     def limit_size(self, value):
         self._limit_size = value
+    @property
+    def page_num(self):
+        return self._page_num
+
+    @page_num.setter
+    def page_num(self, value):
+        self._page_num = value
     @property
     def scene(self):
         return self._scene
@@ -84,6 +92,11 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
                 params['limit_size'] = self.limit_size.to_alipay_dict()
             else:
                 params['limit_size'] = self.limit_size
+        if self.page_num:
+            if hasattr(self.page_num, 'to_alipay_dict'):
+                params['page_num'] = self.page_num.to_alipay_dict()
+            else:
+                params['page_num'] = self.page_num
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -112,6 +125,8 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
             o.invoice_kind_list = d['invoice_kind_list']
         if 'limit_size' in d:
             o.limit_size = d['limit_size']
+        if 'page_num' in d:
+            o.page_num = d['page_num']
         if 'scene' in d:
             o.scene = d['scene']
         if 'start_invoice_date' in d:
