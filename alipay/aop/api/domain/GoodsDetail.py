@@ -10,6 +10,7 @@ class GoodsDetail(object):
     def __init__(self):
         self._alipay_goods_id = None
         self._body = None
+        self._categories_tree = None
         self._goods_category = None
         self._goods_id = None
         self._goods_name = None
@@ -31,6 +32,13 @@ class GoodsDetail(object):
     @body.setter
     def body(self, value):
         self._body = value
+    @property
+    def categories_tree(self):
+        return self._categories_tree
+
+    @categories_tree.setter
+    def categories_tree(self, value):
+        self._categories_tree = value
     @property
     def goods_category(self):
         return self._goods_category
@@ -87,6 +95,11 @@ class GoodsDetail(object):
                 params['body'] = self.body.to_alipay_dict()
             else:
                 params['body'] = self.body
+        if self.categories_tree:
+            if hasattr(self.categories_tree, 'to_alipay_dict'):
+                params['categories_tree'] = self.categories_tree.to_alipay_dict()
+            else:
+                params['categories_tree'] = self.categories_tree
         if self.goods_category:
             if hasattr(self.goods_category, 'to_alipay_dict'):
                 params['goods_category'] = self.goods_category.to_alipay_dict()
@@ -128,6 +141,8 @@ class GoodsDetail(object):
             o.alipay_goods_id = d['alipay_goods_id']
         if 'body' in d:
             o.body = d['body']
+        if 'categories_tree' in d:
+            o.categories_tree = d['categories_tree']
         if 'goods_category' in d:
             o.goods_category = d['goods_category']
         if 'goods_id' in d:

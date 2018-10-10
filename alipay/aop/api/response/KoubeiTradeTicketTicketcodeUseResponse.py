@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.KbTicketUseDetail import KbTicketUseDetail
 
 
 class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
@@ -23,6 +24,7 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
         self._request_id = None
         self._ticket_code = None
         self._ticket_trans_id = None
+        self._ticket_use_details = None
         self._use_date = None
         self._use_shop_id = None
         self._use_shop_name = None
@@ -127,6 +129,19 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
     def ticket_trans_id(self, value):
         self._ticket_trans_id = value
     @property
+    def ticket_use_details(self):
+        return self._ticket_use_details
+
+    @ticket_use_details.setter
+    def ticket_use_details(self, value):
+        if isinstance(value, list):
+            self._ticket_use_details = list()
+            for i in value:
+                if isinstance(i, KbTicketUseDetail):
+                    self._ticket_use_details.append(i)
+                else:
+                    self._ticket_use_details.append(KbTicketUseDetail.from_alipay_dict(i))
+    @property
     def use_date(self):
         return self._use_date
 
@@ -185,6 +200,8 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
             self.ticket_code = response['ticket_code']
         if 'ticket_trans_id' in response:
             self.ticket_trans_id = response['ticket_trans_id']
+        if 'ticket_use_details' in response:
+            self.ticket_use_details = response['ticket_use_details']
         if 'use_date' in response:
             self.use_date = response['use_date']
         if 'use_shop_id' in response:

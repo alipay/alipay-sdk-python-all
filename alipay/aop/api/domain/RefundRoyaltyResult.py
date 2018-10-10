@@ -10,6 +10,7 @@ class RefundRoyaltyResult(object):
     def __init__(self):
         self._refund_amount = None
         self._result_code = None
+        self._royalty_type = None
         self._trans_in = None
         self._trans_in_email = None
         self._trans_out = None
@@ -29,6 +30,13 @@ class RefundRoyaltyResult(object):
     @result_code.setter
     def result_code(self, value):
         self._result_code = value
+    @property
+    def royalty_type(self):
+        return self._royalty_type
+
+    @royalty_type.setter
+    def royalty_type(self, value):
+        self._royalty_type = value
     @property
     def trans_in(self):
         return self._trans_in
@@ -71,6 +79,11 @@ class RefundRoyaltyResult(object):
                 params['result_code'] = self.result_code.to_alipay_dict()
             else:
                 params['result_code'] = self.result_code
+        if self.royalty_type:
+            if hasattr(self.royalty_type, 'to_alipay_dict'):
+                params['royalty_type'] = self.royalty_type.to_alipay_dict()
+            else:
+                params['royalty_type'] = self.royalty_type
         if self.trans_in:
             if hasattr(self.trans_in, 'to_alipay_dict'):
                 params['trans_in'] = self.trans_in.to_alipay_dict()
@@ -102,6 +115,8 @@ class RefundRoyaltyResult(object):
             o.refund_amount = d['refund_amount']
         if 'result_code' in d:
             o.result_code = d['result_code']
+        if 'royalty_type' in d:
+            o.royalty_type = d['royalty_type']
         if 'trans_in' in d:
             o.trans_in = d['trans_in']
         if 'trans_in_email' in d:

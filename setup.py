@@ -36,8 +36,7 @@ AUTHOR_EMAIL = "antopen@aliyun.com"
 URL = "https://github.com/alipay/alipay-sdk-python-all"
 
 TOPDIR = os.path.dirname(__file__) or "."
-# VERSION = __import__(PACKAGE).__version__
-VERSION = "3.1.81"
+VERSION = __import__(PACKAGE).__version__
 
 desc_file = codecs.open("README.rst", 'r', 'utf-8')
 try:

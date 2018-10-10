@@ -35,7 +35,7 @@ def sign_with_rsa(private_key, sign_content, charset):
     if PYTHON_VERSION_3:
         sign_content = sign_content.encode(charset)
     private_key = fill_private_key_marker(private_key)
-    signature = rsa.sign(sign_content, priv_key=rsa.PrivateKey.load_pkcs1(private_key, format='PEM'), hash='SHA-1')
+    signature = rsa.sign(sign_content, rsa.PrivateKey.load_pkcs1(private_key, format='PEM'), 'SHA-1')
     sign = base64.b64encode(signature)
     if PYTHON_VERSION_3:
         sign = str(sign, encoding=charset)
@@ -46,7 +46,7 @@ def sign_with_rsa2(private_key, sign_content, charset):
     if PYTHON_VERSION_3:
         sign_content = sign_content.encode(charset)
     private_key = fill_private_key_marker(private_key)
-    signature = rsa.sign(sign_content, priv_key=rsa.PrivateKey.load_pkcs1(private_key, format='PEM'), hash='SHA-256')
+    signature = rsa.sign(sign_content, rsa.PrivateKey.load_pkcs1(private_key, format='PEM'), 'SHA-256')
     sign = base64.b64encode(signature)
     if PYTHON_VERSION_3:
         sign = str(sign, encoding=charset)

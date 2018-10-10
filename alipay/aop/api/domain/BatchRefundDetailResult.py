@@ -16,6 +16,7 @@ class BatchRefundDetailResult(object):
         self._est_bank_receipt_time = None
         self._has_deposit_back = None
         self._refund_amount = None
+        self._refund_bank_name = None
         self._refund_royaltys = None
         self._refund_suppl_amount = None
         self._refund_suppl_result_code = None
@@ -66,6 +67,13 @@ class BatchRefundDetailResult(object):
     @refund_amount.setter
     def refund_amount(self, value):
         self._refund_amount = value
+    @property
+    def refund_bank_name(self):
+        return self._refund_bank_name
+
+    @refund_bank_name.setter
+    def refund_bank_name(self, value):
+        self._refund_bank_name = value
     @property
     def refund_royaltys(self):
         return self._refund_royaltys
@@ -158,6 +166,11 @@ class BatchRefundDetailResult(object):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
             else:
                 params['refund_amount'] = self.refund_amount
+        if self.refund_bank_name:
+            if hasattr(self.refund_bank_name, 'to_alipay_dict'):
+                params['refund_bank_name'] = self.refund_bank_name.to_alipay_dict()
+            else:
+                params['refund_bank_name'] = self.refund_bank_name
         if self.refund_royaltys:
             if isinstance(self.refund_royaltys, list):
                 for i in range(0, len(self.refund_royaltys)):
@@ -217,6 +230,8 @@ class BatchRefundDetailResult(object):
             o.has_deposit_back = d['has_deposit_back']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
+        if 'refund_bank_name' in d:
+            o.refund_bank_name = d['refund_bank_name']
         if 'refund_royaltys' in d:
             o.refund_royaltys = d['refund_royaltys']
         if 'refund_suppl_amount' in d:
