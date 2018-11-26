@@ -10,6 +10,7 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayPcreditHuabeiAuthOrderQueryResponse, self).__init__()
         self._agreement_no = None
+        self._alipay_user_id = None
         self._auth_opt_id = None
         self._gmt_trans = None
         self._order_title = None
@@ -27,6 +28,13 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def alipay_user_id(self):
+        return self._alipay_user_id
+
+    @alipay_user_id.setter
+    def alipay_user_id(self, value):
+        self._alipay_user_id = value
     @property
     def auth_opt_id(self):
         return self._auth_opt_id
@@ -95,6 +103,8 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
         response = super(AlipayPcreditHuabeiAuthOrderQueryResponse, self).parse_response_content(response_content)
         if 'agreement_no' in response:
             self.agreement_no = response['agreement_no']
+        if 'alipay_user_id' in response:
+            self.alipay_user_id = response['alipay_user_id']
         if 'auth_opt_id' in response:
             self.auth_opt_id = response['auth_opt_id']
         if 'gmt_trans' in response:

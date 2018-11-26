@@ -20,10 +20,12 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._present_refund_buyer_amount = None
         self._present_refund_discount_amount = None
         self._present_refund_mdiscount_amount = None
+        self._refund_charge_amount = None
         self._refund_currency = None
         self._refund_detail_item_list = None
         self._refund_fee = None
         self._refund_preset_paytool_list = None
+        self._refund_settlement_id = None
         self._send_back_fee = None
         self._store_name = None
         self._trade_no = None
@@ -92,6 +94,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
     def present_refund_mdiscount_amount(self, value):
         self._present_refund_mdiscount_amount = value
     @property
+    def refund_charge_amount(self):
+        return self._refund_charge_amount
+
+    @refund_charge_amount.setter
+    def refund_charge_amount(self, value):
+        self._refund_charge_amount = value
+    @property
     def refund_currency(self):
         return self._refund_currency
 
@@ -128,6 +137,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self._refund_preset_paytool_list = value
         else:
             self._refund_preset_paytool_list = PresetPayToolInfo.from_alipay_dict(value)
+    @property
+    def refund_settlement_id(self):
+        return self._refund_settlement_id
+
+    @refund_settlement_id.setter
+    def refund_settlement_id(self, value):
+        self._refund_settlement_id = value
     @property
     def send_back_fee(self):
         return self._send_back_fee
@@ -170,6 +186,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.present_refund_discount_amount = response['present_refund_discount_amount']
         if 'present_refund_mdiscount_amount' in response:
             self.present_refund_mdiscount_amount = response['present_refund_mdiscount_amount']
+        if 'refund_charge_amount' in response:
+            self.refund_charge_amount = response['refund_charge_amount']
         if 'refund_currency' in response:
             self.refund_currency = response['refund_currency']
         if 'refund_detail_item_list' in response:
@@ -178,6 +196,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.refund_fee = response['refund_fee']
         if 'refund_preset_paytool_list' in response:
             self.refund_preset_paytool_list = response['refund_preset_paytool_list']
+        if 'refund_settlement_id' in response:
+            self.refund_settlement_id = response['refund_settlement_id']
         if 'send_back_fee' in response:
             self.send_back_fee = response['send_back_fee']
         if 'store_name' in response:

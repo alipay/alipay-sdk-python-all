@@ -18,6 +18,7 @@ class PosBillPayChannel(object):
         self._pay_no = None
         self._pay_time = None
         self._receipt_amount = None
+        self._trade_no = None
         self._user_identity = None
 
     @property
@@ -90,6 +91,13 @@ class PosBillPayChannel(object):
     def receipt_amount(self, value):
         self._receipt_amount = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def user_identity(self):
         return self._user_identity
 
@@ -150,6 +158,11 @@ class PosBillPayChannel(object):
                 params['receipt_amount'] = self.receipt_amount.to_alipay_dict()
             else:
                 params['receipt_amount'] = self.receipt_amount
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         if self.user_identity:
             if hasattr(self.user_identity, 'to_alipay_dict'):
                 params['user_identity'] = self.user_identity.to_alipay_dict()
@@ -180,6 +193,8 @@ class PosBillPayChannel(object):
             o.pay_time = d['pay_time']
         if 'receipt_amount' in d:
             o.receipt_amount = d['receipt_amount']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         if 'user_identity' in d:
             o.user_identity = d['user_identity']
         return o

@@ -10,6 +10,7 @@ class ZhimaCreditEpOrderRatingQueryResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditEpOrderRatingQueryResponse, self).__init__()
         self._amount = None
+        self._credit_level = None
         self._decision = None
         self._ext_info = None
         self._order_no = None
@@ -25,6 +26,13 @@ class ZhimaCreditEpOrderRatingQueryResponse(AlipayResponse):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def credit_level(self):
+        return self._credit_level
+
+    @credit_level.setter
+    def credit_level(self, value):
+        self._credit_level = value
     @property
     def decision(self):
         return self._decision
@@ -79,6 +87,8 @@ class ZhimaCreditEpOrderRatingQueryResponse(AlipayResponse):
         response = super(ZhimaCreditEpOrderRatingQueryResponse, self).parse_response_content(response_content)
         if 'amount' in response:
             self.amount = response['amount']
+        if 'credit_level' in response:
+            self.credit_level = response['credit_level']
         if 'decision' in response:
             self.decision = response['decision']
         if 'ext_info' in response:

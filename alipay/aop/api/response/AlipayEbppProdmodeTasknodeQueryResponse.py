@@ -9,6 +9,7 @@ class AlipayEbppProdmodeTasknodeQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppProdmodeTasknodeQueryResponse, self).__init__()
+        self._gmt_modified = None
         self._is_edit_all = None
         self._is_edit_fund = None
         self._node_code = None
@@ -16,6 +17,13 @@ class AlipayEbppProdmodeTasknodeQueryResponse(AlipayResponse):
         self._reject = None
         self._reject_time = None
 
+    @property
+    def gmt_modified(self):
+        return self._gmt_modified
+
+    @gmt_modified.setter
+    def gmt_modified(self, value):
+        self._gmt_modified = value
     @property
     def is_edit_all(self):
         return self._is_edit_all
@@ -61,6 +69,8 @@ class AlipayEbppProdmodeTasknodeQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppProdmodeTasknodeQueryResponse, self).parse_response_content(response_content)
+        if 'gmt_modified' in response:
+            self.gmt_modified = response['gmt_modified']
         if 'is_edit_all' in response:
             self.is_edit_all = response['is_edit_all']
         if 'is_edit_fund' in response:

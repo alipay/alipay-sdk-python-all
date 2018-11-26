@@ -11,11 +11,14 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
         super(AlipayIserviceCognitiveOcrIdcardQueryResponse, self).__init__()
         self._address = None
         self._birth = None
+        self._end_date = None
         self._error_content = None
+        self._issue = None
         self._nationality = None
         self._num = None
         self._request_id = None
         self._sex = None
+        self._start_date = None
         self._success = None
         self._trace_id = None
 
@@ -34,12 +37,26 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
     def birth(self, value):
         self._birth = value
     @property
+    def end_date(self):
+        return self._end_date
+
+    @end_date.setter
+    def end_date(self, value):
+        self._end_date = value
+    @property
     def error_content(self):
         return self._error_content
 
     @error_content.setter
     def error_content(self, value):
         self._error_content = value
+    @property
+    def issue(self):
+        return self._issue
+
+    @issue.setter
+    def issue(self, value):
+        self._issue = value
     @property
     def nationality(self):
         return self._nationality
@@ -69,6 +86,13 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
     def sex(self, value):
         self._sex = value
     @property
+    def start_date(self):
+        return self._start_date
+
+    @start_date.setter
+    def start_date(self, value):
+        self._start_date = value
+    @property
     def success(self):
         return self._success
 
@@ -89,8 +113,12 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
             self.address = response['address']
         if 'birth' in response:
             self.birth = response['birth']
+        if 'end_date' in response:
+            self.end_date = response['end_date']
         if 'error_content' in response:
             self.error_content = response['error_content']
+        if 'issue' in response:
+            self.issue = response['issue']
         if 'nationality' in response:
             self.nationality = response['nationality']
         if 'num' in response:
@@ -99,6 +127,8 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
             self.request_id = response['request_id']
         if 'sex' in response:
             self.sex = response['sex']
+        if 'start_date' in response:
+            self.start_date = response['start_date']
         if 'success' in response:
             self.success = response['success']
         if 'trace_id' in response:

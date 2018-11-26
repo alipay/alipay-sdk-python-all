@@ -10,6 +10,7 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
     def __init__(self):
         self._credit_category = None
         self._m_category = None
+        self._member_type = None
         self._out_order_no = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
     @m_category.setter
     def m_category(self, value):
         self._m_category = value
+    @property
+    def member_type(self):
+        return self._member_type
+
+    @member_type.setter
+    def member_type(self, value):
+        self._member_type = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -55,6 +63,11 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
                 params['m_category'] = self.m_category.to_alipay_dict()
             else:
                 params['m_category'] = self.m_category
+        if self.member_type:
+            if hasattr(self.member_type, 'to_alipay_dict'):
+                params['member_type'] = self.member_type.to_alipay_dict()
+            else:
+                params['member_type'] = self.member_type
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
             o.credit_category = d['credit_category']
         if 'm_category' in d:
             o.m_category = d['m_category']
+        if 'member_type' in d:
+            o.member_type = d['member_type']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'user_id' in d:

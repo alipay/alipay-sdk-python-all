@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class BankCardInfo(object):
 
     def __init__(self):
+        self._bank_branch_name = None
         self._card_name = None
         self._card_no = None
 
+    @property
+    def bank_branch_name(self):
+        return self._bank_branch_name
+
+    @bank_branch_name.setter
+    def bank_branch_name(self, value):
+        self._bank_branch_name = value
     @property
     def card_name(self):
         return self._card_name
@@ -29,6 +37,11 @@ class BankCardInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bank_branch_name:
+            if hasattr(self.bank_branch_name, 'to_alipay_dict'):
+                params['bank_branch_name'] = self.bank_branch_name.to_alipay_dict()
+            else:
+                params['bank_branch_name'] = self.bank_branch_name
         if self.card_name:
             if hasattr(self.card_name, 'to_alipay_dict'):
                 params['card_name'] = self.card_name.to_alipay_dict()
@@ -46,6 +59,8 @@ class BankCardInfo(object):
         if not d:
             return None
         o = BankCardInfo()
+        if 'bank_branch_name' in d:
+            o.bank_branch_name = d['bank_branch_name']
         if 'card_name' in d:
             o.card_name = d['card_name']
         if 'card_no' in d:

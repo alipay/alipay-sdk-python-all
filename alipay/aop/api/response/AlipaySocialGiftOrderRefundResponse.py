@@ -9,7 +9,17 @@ class AlipaySocialGiftOrderRefundResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipaySocialGiftOrderRefundResponse, self).__init__()
+        self._order_id = None
 
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipaySocialGiftOrderRefundResponse, self).parse_response_content(response_content)
+        if 'order_id' in response:
+            self.order_id = response['order_id']

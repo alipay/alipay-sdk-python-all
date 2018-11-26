@@ -16,7 +16,10 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._buyer_logon_id = None
         self._buyer_pay_amount = None
         self._buyer_user_id = None
+        self._buyer_user_name = None
         self._buyer_user_type = None
+        self._charge_amount = None
+        self._charge_flags = None
         self._discount_amount = None
         self._discount_goods_detail = None
         self._fund_bill_list = None
@@ -33,6 +36,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._settle_amount = None
         self._settle_currency = None
         self._settle_trans_rate = None
+        self._settlement_id = None
         self._store_id = None
         self._store_name = None
         self._terminal_id = None
@@ -79,12 +83,33 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def buyer_user_id(self, value):
         self._buyer_user_id = value
     @property
+    def buyer_user_name(self):
+        return self._buyer_user_name
+
+    @buyer_user_name.setter
+    def buyer_user_name(self, value):
+        self._buyer_user_name = value
+    @property
     def buyer_user_type(self):
         return self._buyer_user_type
 
     @buyer_user_type.setter
     def buyer_user_type(self, value):
         self._buyer_user_type = value
+    @property
+    def charge_amount(self):
+        return self._charge_amount
+
+    @charge_amount.setter
+    def charge_amount(self, value):
+        self._charge_amount = value
+    @property
+    def charge_flags(self):
+        return self._charge_flags
+
+    @charge_flags.setter
+    def charge_flags(self, value):
+        self._charge_flags = value
     @property
     def discount_amount(self):
         return self._discount_amount
@@ -204,6 +229,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def settle_trans_rate(self, value):
         self._settle_trans_rate = value
     @property
+    def settlement_id(self):
+        return self._settlement_id
+
+    @settlement_id.setter
+    def settlement_id(self, value):
+        self._settlement_id = value
+    @property
     def store_id(self):
         return self._store_id
 
@@ -285,8 +317,14 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.buyer_pay_amount = response['buyer_pay_amount']
         if 'buyer_user_id' in response:
             self.buyer_user_id = response['buyer_user_id']
+        if 'buyer_user_name' in response:
+            self.buyer_user_name = response['buyer_user_name']
         if 'buyer_user_type' in response:
             self.buyer_user_type = response['buyer_user_type']
+        if 'charge_amount' in response:
+            self.charge_amount = response['charge_amount']
+        if 'charge_flags' in response:
+            self.charge_flags = response['charge_flags']
         if 'discount_amount' in response:
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
@@ -319,6 +357,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.settle_currency = response['settle_currency']
         if 'settle_trans_rate' in response:
             self.settle_trans_rate = response['settle_trans_rate']
+        if 'settlement_id' in response:
+            self.settlement_id = response['settlement_id']
         if 'store_id' in response:
             self.store_id = response['store_id']
         if 'store_name' in response:

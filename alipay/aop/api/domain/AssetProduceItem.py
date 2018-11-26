@@ -23,6 +23,8 @@ class AssetProduceItem(object):
         self._logistics_name = None
         self._logistics_no = None
         self._memo = None
+        self._ou_code = None
+        self._ou_name = None
         self._parent_template_id = None
         self._postcode = None
         self._print_data = None
@@ -140,6 +142,20 @@ class AssetProduceItem(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def ou_code(self):
+        return self._ou_code
+
+    @ou_code.setter
+    def ou_code(self, value):
+        self._ou_code = value
+    @property
+    def ou_name(self):
+        return self._ou_name
+
+    @ou_name.setter
+    def ou_name(self, value):
+        self._ou_name = value
     @property
     def parent_template_id(self):
         return self._parent_template_id
@@ -296,6 +312,16 @@ class AssetProduceItem(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.ou_code:
+            if hasattr(self.ou_code, 'to_alipay_dict'):
+                params['ou_code'] = self.ou_code.to_alipay_dict()
+            else:
+                params['ou_code'] = self.ou_code
+        if self.ou_name:
+            if hasattr(self.ou_name, 'to_alipay_dict'):
+                params['ou_name'] = self.ou_name.to_alipay_dict()
+            else:
+                params['ou_name'] = self.ou_name
         if self.parent_template_id:
             if hasattr(self.parent_template_id, 'to_alipay_dict'):
                 params['parent_template_id'] = self.parent_template_id.to_alipay_dict()
@@ -388,6 +414,10 @@ class AssetProduceItem(object):
             o.logistics_no = d['logistics_no']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'ou_code' in d:
+            o.ou_code = d['ou_code']
+        if 'ou_name' in d:
+            o.ou_name = d['ou_name']
         if 'parent_template_id' in d:
             o.parent_template_id = d['parent_template_id']
         if 'postcode' in d:

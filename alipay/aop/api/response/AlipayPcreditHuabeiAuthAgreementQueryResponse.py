@@ -9,8 +9,10 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditHuabeiAuthAgreementQueryResponse, self).__init__()
+        self._agreement_name = None
         self._agreement_no = None
         self._agreement_status = None
+        self._alipay_user_id = None
         self._auth_scene = None
         self._external_logon_id = None
         self._gmt_sign = None
@@ -18,6 +20,13 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
         self._out_sign_no = None
         self._rest_freeze_amount = None
 
+    @property
+    def agreement_name(self):
+        return self._agreement_name
+
+    @agreement_name.setter
+    def agreement_name(self, value):
+        self._agreement_name = value
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -32,6 +41,13 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
     @agreement_status.setter
     def agreement_status(self, value):
         self._agreement_status = value
+    @property
+    def alipay_user_id(self):
+        return self._alipay_user_id
+
+    @alipay_user_id.setter
+    def alipay_user_id(self, value):
+        self._alipay_user_id = value
     @property
     def auth_scene(self):
         return self._auth_scene
@@ -77,10 +93,14 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditHuabeiAuthAgreementQueryResponse, self).parse_response_content(response_content)
+        if 'agreement_name' in response:
+            self.agreement_name = response['agreement_name']
         if 'agreement_no' in response:
             self.agreement_no = response['agreement_no']
         if 'agreement_status' in response:
             self.agreement_status = response['agreement_status']
+        if 'alipay_user_id' in response:
+            self.alipay_user_id = response['alipay_user_id']
         if 'auth_scene' in response:
             self.auth_scene = response['auth_scene']
         if 'external_logon_id' in response:

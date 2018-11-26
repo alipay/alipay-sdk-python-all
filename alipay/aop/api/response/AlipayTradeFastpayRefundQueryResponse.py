@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
 
 
@@ -11,6 +12,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeFastpayRefundQueryResponse, self).__init__()
         self._error_code = None
+        self._gmt_refund_pay = None
         self._industry_sepc_detail = None
         self._out_request_no = None
         self._out_trade_no = None
@@ -18,9 +20,13 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._present_refund_discount_amount = None
         self._present_refund_mdiscount_amount = None
         self._refund_amount = None
+        self._refund_charge_amount = None
+        self._refund_detail_item_list = None
         self._refund_reason = None
         self._refund_royaltys = None
+        self._refund_settlement_id = None
         self._refund_status = None
+        self._send_back_fee = None
         self._total_amount = None
         self._trade_no = None
 
@@ -31,6 +37,13 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     @error_code.setter
     def error_code(self, value):
         self._error_code = value
+    @property
+    def gmt_refund_pay(self):
+        return self._gmt_refund_pay
+
+    @gmt_refund_pay.setter
+    def gmt_refund_pay(self, value):
+        self._gmt_refund_pay = value
     @property
     def industry_sepc_detail(self):
         return self._industry_sepc_detail
@@ -81,6 +94,26 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def refund_amount(self, value):
         self._refund_amount = value
     @property
+    def refund_charge_amount(self):
+        return self._refund_charge_amount
+
+    @refund_charge_amount.setter
+    def refund_charge_amount(self, value):
+        self._refund_charge_amount = value
+    @property
+    def refund_detail_item_list(self):
+        return self._refund_detail_item_list
+
+    @refund_detail_item_list.setter
+    def refund_detail_item_list(self, value):
+        if isinstance(value, list):
+            self._refund_detail_item_list = list()
+            for i in value:
+                if isinstance(i, TradeFundBill):
+                    self._refund_detail_item_list.append(i)
+                else:
+                    self._refund_detail_item_list.append(TradeFundBill.from_alipay_dict(i))
+    @property
     def refund_reason(self):
         return self._refund_reason
 
@@ -101,12 +134,26 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
                 else:
                     self._refund_royaltys.append(RefundRoyaltyResult.from_alipay_dict(i))
     @property
+    def refund_settlement_id(self):
+        return self._refund_settlement_id
+
+    @refund_settlement_id.setter
+    def refund_settlement_id(self, value):
+        self._refund_settlement_id = value
+    @property
     def refund_status(self):
         return self._refund_status
 
     @refund_status.setter
     def refund_status(self, value):
         self._refund_status = value
+    @property
+    def send_back_fee(self):
+        return self._send_back_fee
+
+    @send_back_fee.setter
+    def send_back_fee(self, value):
+        self._send_back_fee = value
     @property
     def total_amount(self):
         return self._total_amount
@@ -126,6 +173,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         response = super(AlipayTradeFastpayRefundQueryResponse, self).parse_response_content(response_content)
         if 'error_code' in response:
             self.error_code = response['error_code']
+        if 'gmt_refund_pay' in response:
+            self.gmt_refund_pay = response['gmt_refund_pay']
         if 'industry_sepc_detail' in response:
             self.industry_sepc_detail = response['industry_sepc_detail']
         if 'out_request_no' in response:
@@ -140,12 +189,20 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self.present_refund_mdiscount_amount = response['present_refund_mdiscount_amount']
         if 'refund_amount' in response:
             self.refund_amount = response['refund_amount']
+        if 'refund_charge_amount' in response:
+            self.refund_charge_amount = response['refund_charge_amount']
+        if 'refund_detail_item_list' in response:
+            self.refund_detail_item_list = response['refund_detail_item_list']
         if 'refund_reason' in response:
             self.refund_reason = response['refund_reason']
         if 'refund_royaltys' in response:
             self.refund_royaltys = response['refund_royaltys']
+        if 'refund_settlement_id' in response:
+            self.refund_settlement_id = response['refund_settlement_id']
         if 'refund_status' in response:
             self.refund_status = response['refund_status']
+        if 'send_back_fee' in response:
+            self.send_back_fee = response['send_back_fee']
         if 'total_amount' in response:
             self.total_amount = response['total_amount']
         if 'trade_no' in response:

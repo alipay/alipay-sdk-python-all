@@ -10,6 +10,8 @@ class FengdieSitesPageModel(object):
 
     def __init__(self):
         self._alias = None
+        self._is_home_page = None
+        self._origin_url = None
         self._schema = None
         self._snapshot = None
         self._url = None
@@ -21,6 +23,20 @@ class FengdieSitesPageModel(object):
     @alias.setter
     def alias(self, value):
         self._alias = value
+    @property
+    def is_home_page(self):
+        return self._is_home_page
+
+    @is_home_page.setter
+    def is_home_page(self, value):
+        self._is_home_page = value
+    @property
+    def origin_url(self):
+        return self._origin_url
+
+    @origin_url.setter
+    def origin_url(self, value):
+        self._origin_url = value
     @property
     def schema(self):
         return self._schema
@@ -57,6 +73,16 @@ class FengdieSitesPageModel(object):
                 params['alias'] = self.alias.to_alipay_dict()
             else:
                 params['alias'] = self.alias
+        if self.is_home_page:
+            if hasattr(self.is_home_page, 'to_alipay_dict'):
+                params['is_home_page'] = self.is_home_page.to_alipay_dict()
+            else:
+                params['is_home_page'] = self.is_home_page
+        if self.origin_url:
+            if hasattr(self.origin_url, 'to_alipay_dict'):
+                params['origin_url'] = self.origin_url.to_alipay_dict()
+            else:
+                params['origin_url'] = self.origin_url
         if self.schema:
             if isinstance(self.schema, list):
                 for i in range(0, len(self.schema)):
@@ -86,6 +112,10 @@ class FengdieSitesPageModel(object):
         o = FengdieSitesPageModel()
         if 'alias' in d:
             o.alias = d['alias']
+        if 'is_home_page' in d:
+            o.is_home_page = d['is_home_page']
+        if 'origin_url' in d:
+            o.origin_url = d['origin_url']
         if 'schema' in d:
             o.schema = d['schema']
         if 'snapshot' in d:

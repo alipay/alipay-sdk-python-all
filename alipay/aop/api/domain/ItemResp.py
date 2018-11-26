@@ -14,7 +14,9 @@ class ItemResp(object):
         self._image = None
         self._item_id = None
         self._meaning = None
+        self._org_price = None
         self._price = None
+        self._shop_id = None
         self._summary = None
         self._tags = None
         self._tips = None
@@ -65,12 +67,26 @@ class ItemResp(object):
     def meaning(self, value):
         self._meaning = value
     @property
+    def org_price(self):
+        return self._org_price
+
+    @org_price.setter
+    def org_price(self, value):
+        self._org_price = value
+    @property
     def price(self):
         return self._price
 
     @price.setter
     def price(self, value):
         self._price = value
+    @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
     @property
     def summary(self):
         return self._summary
@@ -147,11 +163,21 @@ class ItemResp(object):
                 params['meaning'] = self.meaning.to_alipay_dict()
             else:
                 params['meaning'] = self.meaning
+        if self.org_price:
+            if hasattr(self.org_price, 'to_alipay_dict'):
+                params['org_price'] = self.org_price.to_alipay_dict()
+            else:
+                params['org_price'] = self.org_price
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
             else:
                 params['price'] = self.price
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.summary:
             if hasattr(self.summary, 'to_alipay_dict'):
                 params['summary'] = self.summary.to_alipay_dict()
@@ -201,8 +227,12 @@ class ItemResp(object):
             o.item_id = d['item_id']
         if 'meaning' in d:
             o.meaning = d['meaning']
+        if 'org_price' in d:
+            o.org_price = d['org_price']
         if 'price' in d:
             o.price = d['price']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'summary' in d:
             o.summary = d['summary']
         if 'tags' in d:

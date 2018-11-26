@@ -24,6 +24,7 @@ class AlipayTradePrecreateModel(object):
         self._ext_user_info = None
         self._extend_params = None
         self._goods_detail = None
+        self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
         self._qr_code_timeout_express = None
@@ -120,6 +121,13 @@ class AlipayTradePrecreateModel(object):
                     self._goods_detail.append(i)
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
+    @property
+    def merchant_order_no(self):
+        return self._merchant_order_no
+
+    @merchant_order_no.setter
+    def merchant_order_no(self, value):
+        self._merchant_order_no = value
     @property
     def operator_id(self):
         return self._operator_id
@@ -279,6 +287,11 @@ class AlipayTradePrecreateModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.merchant_order_no:
+            if hasattr(self.merchant_order_no, 'to_alipay_dict'):
+                params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
+            else:
+                params['merchant_order_no'] = self.merchant_order_no
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -371,6 +384,8 @@ class AlipayTradePrecreateModel(object):
             o.extend_params = d['extend_params']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'merchant_order_no' in d:
+            o.merchant_order_no = d['merchant_order_no']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:

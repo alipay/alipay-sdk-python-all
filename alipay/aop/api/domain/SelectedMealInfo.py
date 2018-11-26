@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class SelectedMealInfo(object):
 
     def __init__(self):
+        self._add_price = None
         self._dish_id = None
         self._dish_name = None
         self._ext_infos = None
@@ -20,6 +21,13 @@ class SelectedMealInfo(object):
         self._type = None
         self._unit = None
 
+    @property
+    def add_price(self):
+        return self._add_price
+
+    @add_price.setter
+    def add_price(self, value):
+        self._add_price = value
     @property
     def dish_id(self):
         return self._dish_id
@@ -101,6 +109,11 @@ class SelectedMealInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.add_price:
+            if hasattr(self.add_price, 'to_alipay_dict'):
+                params['add_price'] = self.add_price.to_alipay_dict()
+            else:
+                params['add_price'] = self.add_price
         if self.dish_id:
             if hasattr(self.dish_id, 'to_alipay_dict'):
                 params['dish_id'] = self.dish_id.to_alipay_dict()
@@ -163,6 +176,8 @@ class SelectedMealInfo(object):
         if not d:
             return None
         o = SelectedMealInfo()
+        if 'add_price' in d:
+            o.add_price = d['add_price']
         if 'dish_id' in d:
             o.dish_id = d['dish_id']
         if 'dish_name' in d:

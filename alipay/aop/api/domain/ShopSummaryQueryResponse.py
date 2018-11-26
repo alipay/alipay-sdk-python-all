@@ -17,12 +17,14 @@ class ShopSummaryQueryResponse(object):
         self._category_infos = None
         self._city_code = None
         self._district_code = None
+        self._ext_info = None
         self._gmt_create = None
         self._is_show = None
         self._latitude = None
         self._longitude = None
         self._main_image = None
         self._main_shop_name = None
+        self._per_pay = None
         self._pic_coll = None
         self._province_code = None
         self._shop_comment_info = None
@@ -86,6 +88,13 @@ class ShopSummaryQueryResponse(object):
     def district_code(self, value):
         self._district_code = value
     @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
+    @property
     def gmt_create(self):
         return self._gmt_create
 
@@ -127,6 +136,13 @@ class ShopSummaryQueryResponse(object):
     @main_shop_name.setter
     def main_shop_name(self, value):
         self._main_shop_name = value
+    @property
+    def per_pay(self):
+        return self._per_pay
+
+    @per_pay.setter
+    def per_pay(self, value):
+        self._per_pay = value
     @property
     def pic_coll(self):
         return self._pic_coll
@@ -216,6 +232,11 @@ class ShopSummaryQueryResponse(object):
                 params['district_code'] = self.district_code.to_alipay_dict()
             else:
                 params['district_code'] = self.district_code
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -246,6 +267,11 @@ class ShopSummaryQueryResponse(object):
                 params['main_shop_name'] = self.main_shop_name.to_alipay_dict()
             else:
                 params['main_shop_name'] = self.main_shop_name
+        if self.per_pay:
+            if hasattr(self.per_pay, 'to_alipay_dict'):
+                params['per_pay'] = self.per_pay.to_alipay_dict()
+            else:
+                params['per_pay'] = self.per_pay
         if self.pic_coll:
             if hasattr(self.pic_coll, 'to_alipay_dict'):
                 params['pic_coll'] = self.pic_coll.to_alipay_dict()
@@ -297,6 +323,8 @@ class ShopSummaryQueryResponse(object):
             o.city_code = d['city_code']
         if 'district_code' in d:
             o.district_code = d['district_code']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'is_show' in d:
@@ -309,6 +337,8 @@ class ShopSummaryQueryResponse(object):
             o.main_image = d['main_image']
         if 'main_shop_name' in d:
             o.main_shop_name = d['main_shop_name']
+        if 'per_pay' in d:
+            o.per_pay = d['per_pay']
         if 'pic_coll' in d:
             o.pic_coll = d['pic_coll']
         if 'province_code' in d:
