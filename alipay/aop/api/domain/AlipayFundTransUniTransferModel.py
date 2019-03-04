@@ -13,7 +13,9 @@ class AlipayFundTransUniTransferModel(object):
         self._biz_scene = None
         self._business_params = None
         self._order_title = None
+        self._original_order_id = None
         self._out_biz_no = None
+        self._passback_params = None
         self._payee_info = None
         self._payer_info = None
         self._product_code = None
@@ -42,12 +44,26 @@ class AlipayFundTransUniTransferModel(object):
     def order_title(self, value):
         self._order_title = value
     @property
+    def original_order_id(self):
+        return self._original_order_id
+
+    @original_order_id.setter
+    def original_order_id(self, value):
+        self._original_order_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def passback_params(self):
+        return self._passback_params
+
+    @passback_params.setter
+    def passback_params(self, value):
+        self._passback_params = value
     @property
     def payee_info(self):
         return self._payee_info
@@ -108,11 +124,21 @@ class AlipayFundTransUniTransferModel(object):
                 params['order_title'] = self.order_title.to_alipay_dict()
             else:
                 params['order_title'] = self.order_title
+        if self.original_order_id:
+            if hasattr(self.original_order_id, 'to_alipay_dict'):
+                params['original_order_id'] = self.original_order_id.to_alipay_dict()
+            else:
+                params['original_order_id'] = self.original_order_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.passback_params:
+            if hasattr(self.passback_params, 'to_alipay_dict'):
+                params['passback_params'] = self.passback_params.to_alipay_dict()
+            else:
+                params['passback_params'] = self.passback_params
         if self.payee_info:
             if hasattr(self.payee_info, 'to_alipay_dict'):
                 params['payee_info'] = self.payee_info.to_alipay_dict()
@@ -151,8 +177,12 @@ class AlipayFundTransUniTransferModel(object):
             o.business_params = d['business_params']
         if 'order_title' in d:
             o.order_title = d['order_title']
+        if 'original_order_id' in d:
+            o.original_order_id = d['original_order_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'passback_params' in d:
+            o.passback_params = d['passback_params']
         if 'payee_info' in d:
             o.payee_info = d['payee_info']
         if 'payer_info' in d:

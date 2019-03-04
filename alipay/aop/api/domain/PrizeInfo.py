@@ -9,6 +9,7 @@ class PrizeInfo(object):
 
     def __init__(self):
         self._activity_url = None
+        self._alipay_logon_id = None
         self._amount = None
         self._desc = None
         self._gmt_create = None
@@ -24,6 +25,13 @@ class PrizeInfo(object):
     @activity_url.setter
     def activity_url(self, value):
         self._activity_url = value
+    @property
+    def alipay_logon_id(self):
+        return self._alipay_logon_id
+
+    @alipay_logon_id.setter
+    def alipay_logon_id(self, value):
+        self._alipay_logon_id = value
     @property
     def amount(self):
         return self._amount
@@ -82,6 +90,11 @@ class PrizeInfo(object):
                 params['activity_url'] = self.activity_url.to_alipay_dict()
             else:
                 params['activity_url'] = self.activity_url
+        if self.alipay_logon_id:
+            if hasattr(self.alipay_logon_id, 'to_alipay_dict'):
+                params['alipay_logon_id'] = self.alipay_logon_id.to_alipay_dict()
+            else:
+                params['alipay_logon_id'] = self.alipay_logon_id
         if self.amount:
             if hasattr(self.amount, 'to_alipay_dict'):
                 params['amount'] = self.amount.to_alipay_dict()
@@ -126,6 +139,8 @@ class PrizeInfo(object):
         o = PrizeInfo()
         if 'activity_url' in d:
             o.activity_url = d['activity_url']
+        if 'alipay_logon_id' in d:
+            o.alipay_logon_id = d['alipay_logon_id']
         if 'amount' in d:
             o.amount = d['amount']
         if 'desc' in d:

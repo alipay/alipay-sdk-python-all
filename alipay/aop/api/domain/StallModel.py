@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.StallKdsEntity import StallKdsEntity
 
 
 class StallModel(object):
@@ -10,6 +11,7 @@ class StallModel(object):
     def __init__(self):
         self._dish_ids = None
         self._id = None
+        self._kds_list = None
         self._printer_id = None
         self._printer_name = None
         self._receipt_type = None
@@ -34,6 +36,19 @@ class StallModel(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def kds_list(self):
+        return self._kds_list
+
+    @kds_list.setter
+    def kds_list(self, value):
+        if isinstance(value, list):
+            self._kds_list = list()
+            for i in value:
+                if isinstance(i, StallKdsEntity):
+                    self._kds_list.append(i)
+                else:
+                    self._kds_list.append(StallKdsEntity.from_alipay_dict(i))
     @property
     def printer_id(self):
         return self._printer_id
@@ -95,6 +110,16 @@ class StallModel(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.kds_list:
+            if isinstance(self.kds_list, list):
+                for i in range(0, len(self.kds_list)):
+                    element = self.kds_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.kds_list[i] = element.to_alipay_dict()
+            if hasattr(self.kds_list, 'to_alipay_dict'):
+                params['kds_list'] = self.kds_list.to_alipay_dict()
+            else:
+                params['kds_list'] = self.kds_list
         if self.printer_id:
             if hasattr(self.printer_id, 'to_alipay_dict'):
                 params['printer_id'] = self.printer_id.to_alipay_dict()
@@ -136,6 +161,8 @@ class StallModel(object):
             o.dish_ids = d['dish_ids']
         if 'id' in d:
             o.id = d['id']
+        if 'kds_list' in d:
+            o.kds_list = d['kds_list']
         if 'printer_id' in d:
             o.printer_id = d['printer_id']
         if 'printer_name' in d:

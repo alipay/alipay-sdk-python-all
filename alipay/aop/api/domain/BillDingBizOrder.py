@@ -11,9 +11,13 @@ class BillDingBizOrder(object):
         self._amount = None
         self._biz_trans_id = None
         self._biz_type = None
+        self._biz_type_desc = None
+        self._detail_state_desc = None
+        self._detail_title = None
         self._direction = None
         self._gmt_finish = None
         self._id = None
+        self._list_title = None
         self._opp_login_id = None
         self._opp_nick_name = None
         self._opp_user_name = None
@@ -44,6 +48,27 @@ class BillDingBizOrder(object):
     def biz_type(self, value):
         self._biz_type = value
     @property
+    def biz_type_desc(self):
+        return self._biz_type_desc
+
+    @biz_type_desc.setter
+    def biz_type_desc(self, value):
+        self._biz_type_desc = value
+    @property
+    def detail_state_desc(self):
+        return self._detail_state_desc
+
+    @detail_state_desc.setter
+    def detail_state_desc(self, value):
+        self._detail_state_desc = value
+    @property
+    def detail_title(self):
+        return self._detail_title
+
+    @detail_title.setter
+    def detail_title(self, value):
+        self._detail_title = value
+    @property
     def direction(self):
         return self._direction
 
@@ -64,6 +89,13 @@ class BillDingBizOrder(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def list_title(self):
+        return self._list_title
+
+    @list_title.setter
+    def list_title(self, value):
+        self._list_title = value
     @property
     def opp_login_id(self):
         return self._opp_login_id
@@ -132,6 +164,21 @@ class BillDingBizOrder(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.biz_type_desc:
+            if hasattr(self.biz_type_desc, 'to_alipay_dict'):
+                params['biz_type_desc'] = self.biz_type_desc.to_alipay_dict()
+            else:
+                params['biz_type_desc'] = self.biz_type_desc
+        if self.detail_state_desc:
+            if hasattr(self.detail_state_desc, 'to_alipay_dict'):
+                params['detail_state_desc'] = self.detail_state_desc.to_alipay_dict()
+            else:
+                params['detail_state_desc'] = self.detail_state_desc
+        if self.detail_title:
+            if hasattr(self.detail_title, 'to_alipay_dict'):
+                params['detail_title'] = self.detail_title.to_alipay_dict()
+            else:
+                params['detail_title'] = self.detail_title
         if self.direction:
             if hasattr(self.direction, 'to_alipay_dict'):
                 params['direction'] = self.direction.to_alipay_dict()
@@ -147,6 +194,11 @@ class BillDingBizOrder(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.list_title:
+            if hasattr(self.list_title, 'to_alipay_dict'):
+                params['list_title'] = self.list_title.to_alipay_dict()
+            else:
+                params['list_title'] = self.list_title
         if self.opp_login_id:
             if hasattr(self.opp_login_id, 'to_alipay_dict'):
                 params['opp_login_id'] = self.opp_login_id.to_alipay_dict()
@@ -195,12 +247,20 @@ class BillDingBizOrder(object):
             o.biz_trans_id = d['biz_trans_id']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'biz_type_desc' in d:
+            o.biz_type_desc = d['biz_type_desc']
+        if 'detail_state_desc' in d:
+            o.detail_state_desc = d['detail_state_desc']
+        if 'detail_title' in d:
+            o.detail_title = d['detail_title']
         if 'direction' in d:
             o.direction = d['direction']
         if 'gmt_finish' in d:
             o.gmt_finish = d['gmt_finish']
         if 'id' in d:
             o.id = d['id']
+        if 'list_title' in d:
+            o.list_title = d['list_title']
         if 'opp_login_id' in d:
             o.opp_login_id = d['opp_login_id']
         if 'opp_nick_name' in d:

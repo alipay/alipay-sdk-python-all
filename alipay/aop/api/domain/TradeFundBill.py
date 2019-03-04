@@ -9,6 +9,7 @@ class TradeFundBill(object):
 
     def __init__(self):
         self._amount = None
+        self._bank_code = None
         self._fund_channel = None
         self._fund_type = None
         self._real_amount = None
@@ -20,6 +21,13 @@ class TradeFundBill(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def bank_code(self):
+        return self._bank_code
+
+    @bank_code.setter
+    def bank_code(self, value):
+        self._bank_code = value
     @property
     def fund_channel(self):
         return self._fund_channel
@@ -50,6 +58,11 @@ class TradeFundBill(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.bank_code:
+            if hasattr(self.bank_code, 'to_alipay_dict'):
+                params['bank_code'] = self.bank_code.to_alipay_dict()
+            else:
+                params['bank_code'] = self.bank_code
         if self.fund_channel:
             if hasattr(self.fund_channel, 'to_alipay_dict'):
                 params['fund_channel'] = self.fund_channel.to_alipay_dict()
@@ -74,6 +87,8 @@ class TradeFundBill(object):
         o = TradeFundBill()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'bank_code' in d:
+            o.bank_code = d['bank_code']
         if 'fund_channel' in d:
             o.fund_channel = d['fund_channel']
         if 'fund_type' in d:

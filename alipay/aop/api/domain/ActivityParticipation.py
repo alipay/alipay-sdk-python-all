@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Activity import Activity
+from alipay.aop.api.domain.ContractStatusTag import ContractStatusTag
 
 
 class ActivityParticipation(object):
@@ -15,7 +16,10 @@ class ActivityParticipation(object):
         self._consumed_times = None
         self._contract_no = None
         self._contract_status = None
+        self._contract_status_desc = None
+        self._contract_status_tag = None
         self._discount_amount = None
+        self._effective_time = None
         self._expire_time = None
         self._participated = None
         self._user_id = None
@@ -66,12 +70,36 @@ class ActivityParticipation(object):
     def contract_status(self, value):
         self._contract_status = value
     @property
+    def contract_status_desc(self):
+        return self._contract_status_desc
+
+    @contract_status_desc.setter
+    def contract_status_desc(self, value):
+        self._contract_status_desc = value
+    @property
+    def contract_status_tag(self):
+        return self._contract_status_tag
+
+    @contract_status_tag.setter
+    def contract_status_tag(self, value):
+        if isinstance(value, ContractStatusTag):
+            self._contract_status_tag = value
+        else:
+            self._contract_status_tag = ContractStatusTag.from_alipay_dict(value)
+    @property
     def discount_amount(self):
         return self._discount_amount
 
     @discount_amount.setter
     def discount_amount(self, value):
         self._discount_amount = value
+    @property
+    def effective_time(self):
+        return self._effective_time
+
+    @effective_time.setter
+    def effective_time(self, value):
+        self._effective_time = value
     @property
     def expire_time(self):
         return self._expire_time
@@ -127,11 +155,26 @@ class ActivityParticipation(object):
                 params['contract_status'] = self.contract_status.to_alipay_dict()
             else:
                 params['contract_status'] = self.contract_status
+        if self.contract_status_desc:
+            if hasattr(self.contract_status_desc, 'to_alipay_dict'):
+                params['contract_status_desc'] = self.contract_status_desc.to_alipay_dict()
+            else:
+                params['contract_status_desc'] = self.contract_status_desc
+        if self.contract_status_tag:
+            if hasattr(self.contract_status_tag, 'to_alipay_dict'):
+                params['contract_status_tag'] = self.contract_status_tag.to_alipay_dict()
+            else:
+                params['contract_status_tag'] = self.contract_status_tag
         if self.discount_amount:
             if hasattr(self.discount_amount, 'to_alipay_dict'):
                 params['discount_amount'] = self.discount_amount.to_alipay_dict()
             else:
                 params['discount_amount'] = self.discount_amount
+        if self.effective_time:
+            if hasattr(self.effective_time, 'to_alipay_dict'):
+                params['effective_time'] = self.effective_time.to_alipay_dict()
+            else:
+                params['effective_time'] = self.effective_time
         if self.expire_time:
             if hasattr(self.expire_time, 'to_alipay_dict'):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
@@ -166,8 +209,14 @@ class ActivityParticipation(object):
             o.contract_no = d['contract_no']
         if 'contract_status' in d:
             o.contract_status = d['contract_status']
+        if 'contract_status_desc' in d:
+            o.contract_status_desc = d['contract_status_desc']
+        if 'contract_status_tag' in d:
+            o.contract_status_tag = d['contract_status_tag']
         if 'discount_amount' in d:
             o.discount_amount = d['discount_amount']
+        if 'effective_time' in d:
+            o.effective_time = d['effective_time']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
         if 'participated' in d:

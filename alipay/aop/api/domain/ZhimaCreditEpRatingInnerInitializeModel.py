@@ -9,6 +9,8 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
 
     def __init__(self):
         self._credit_category = None
+        self._ep_cert_no = None
+        self._ep_name = None
         self._m_category = None
         self._member_type = None
         self._out_order_no = None
@@ -21,6 +23,20 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
     @credit_category.setter
     def credit_category(self, value):
         self._credit_category = value
+    @property
+    def ep_cert_no(self):
+        return self._ep_cert_no
+
+    @ep_cert_no.setter
+    def ep_cert_no(self, value):
+        self._ep_cert_no = value
+    @property
+    def ep_name(self):
+        return self._ep_name
+
+    @ep_name.setter
+    def ep_name(self, value):
+        self._ep_name = value
     @property
     def m_category(self):
         return self._m_category
@@ -58,6 +74,16 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
                 params['credit_category'] = self.credit_category.to_alipay_dict()
             else:
                 params['credit_category'] = self.credit_category
+        if self.ep_cert_no:
+            if hasattr(self.ep_cert_no, 'to_alipay_dict'):
+                params['ep_cert_no'] = self.ep_cert_no.to_alipay_dict()
+            else:
+                params['ep_cert_no'] = self.ep_cert_no
+        if self.ep_name:
+            if hasattr(self.ep_name, 'to_alipay_dict'):
+                params['ep_name'] = self.ep_name.to_alipay_dict()
+            else:
+                params['ep_name'] = self.ep_name
         if self.m_category:
             if hasattr(self.m_category, 'to_alipay_dict'):
                 params['m_category'] = self.m_category.to_alipay_dict()
@@ -87,6 +113,10 @@ class ZhimaCreditEpRatingInnerInitializeModel(object):
         o = ZhimaCreditEpRatingInnerInitializeModel()
         if 'credit_category' in d:
             o.credit_category = d['credit_category']
+        if 'ep_cert_no' in d:
+            o.ep_cert_no = d['ep_cert_no']
+        if 'ep_name' in d:
+            o.ep_name = d['ep_name']
         if 'm_category' in d:
             o.m_category = d['m_category']
         if 'member_type' in d:

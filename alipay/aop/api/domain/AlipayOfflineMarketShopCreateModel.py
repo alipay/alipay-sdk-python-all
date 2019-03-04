@@ -11,7 +11,6 @@ class AlipayOfflineMarketShopCreateModel(object):
         self._address = None
         self._audit_images = None
         self._auth_letter = None
-        self._avg_price = None
         self._biz_version = None
         self._box = None
         self._branch_shop_name = None
@@ -78,13 +77,6 @@ class AlipayOfflineMarketShopCreateModel(object):
     @auth_letter.setter
     def auth_letter(self, value):
         self._auth_letter = value
-    @property
-    def avg_price(self):
-        return self._avg_price
-
-    @avg_price.setter
-    def avg_price(self, value):
-        self._avg_price = value
     @property
     def biz_version(self):
         return self._biz_version
@@ -412,11 +404,6 @@ class AlipayOfflineMarketShopCreateModel(object):
                 params['auth_letter'] = self.auth_letter.to_alipay_dict()
             else:
                 params['auth_letter'] = self.auth_letter
-        if self.avg_price:
-            if hasattr(self.avg_price, 'to_alipay_dict'):
-                params['avg_price'] = self.avg_price.to_alipay_dict()
-            else:
-                params['avg_price'] = self.avg_price
         if self.biz_version:
             if hasattr(self.biz_version, 'to_alipay_dict'):
                 params['biz_version'] = self.biz_version.to_alipay_dict()
@@ -650,8 +637,6 @@ class AlipayOfflineMarketShopCreateModel(object):
             o.audit_images = d['audit_images']
         if 'auth_letter' in d:
             o.auth_letter = d['auth_letter']
-        if 'avg_price' in d:
-            o.avg_price = d['avg_price']
         if 'biz_version' in d:
             o.biz_version = d['biz_version']
         if 'box' in d:

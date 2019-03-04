@@ -17,6 +17,7 @@ class KoubeiCateringDishQueryModel(object):
         self._en_remember_code = None
         self._merchant_id = None
         self._nb_remember_code = None
+        self._shop_id = None
         self._sku_id = None
 
     @property
@@ -83,6 +84,13 @@ class KoubeiCateringDishQueryModel(object):
     def nb_remember_code(self, value):
         self._nb_remember_code = value
     @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
     def sku_id(self):
         return self._sku_id
 
@@ -138,6 +146,11 @@ class KoubeiCateringDishQueryModel(object):
                 params['nb_remember_code'] = self.nb_remember_code.to_alipay_dict()
             else:
                 params['nb_remember_code'] = self.nb_remember_code
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.sku_id:
             if hasattr(self.sku_id, 'to_alipay_dict'):
                 params['sku_id'] = self.sku_id.to_alipay_dict()
@@ -168,6 +181,8 @@ class KoubeiCateringDishQueryModel(object):
             o.merchant_id = d['merchant_id']
         if 'nb_remember_code' in d:
             o.nb_remember_code = d['nb_remember_code']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'sku_id' in d:
             o.sku_id = d['sku_id']
         return o

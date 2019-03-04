@@ -27,6 +27,8 @@ class SceneProdBillDetail(object):
         self._remark = None
         self._status = None
         self._term = None
+        self._term_end_date = None
+        self._term_start_date = None
         self._total_amt = None
 
     @property
@@ -163,6 +165,20 @@ class SceneProdBillDetail(object):
     def term(self, value):
         self._term = value
     @property
+    def term_end_date(self):
+        return self._term_end_date
+
+    @term_end_date.setter
+    def term_end_date(self, value):
+        self._term_end_date = value
+    @property
+    def term_start_date(self):
+        return self._term_start_date
+
+    @term_start_date.setter
+    def term_start_date(self, value):
+        self._term_start_date = value
+    @property
     def total_amt(self):
         return self._total_amt
 
@@ -268,6 +284,16 @@ class SceneProdBillDetail(object):
                 params['term'] = self.term.to_alipay_dict()
             else:
                 params['term'] = self.term
+        if self.term_end_date:
+            if hasattr(self.term_end_date, 'to_alipay_dict'):
+                params['term_end_date'] = self.term_end_date.to_alipay_dict()
+            else:
+                params['term_end_date'] = self.term_end_date
+        if self.term_start_date:
+            if hasattr(self.term_start_date, 'to_alipay_dict'):
+                params['term_start_date'] = self.term_start_date.to_alipay_dict()
+            else:
+                params['term_start_date'] = self.term_start_date
         if self.total_amt:
             if hasattr(self.total_amt, 'to_alipay_dict'):
                 params['total_amt'] = self.total_amt.to_alipay_dict()
@@ -318,6 +344,10 @@ class SceneProdBillDetail(object):
             o.status = d['status']
         if 'term' in d:
             o.term = d['term']
+        if 'term_end_date' in d:
+            o.term_end_date = d['term_end_date']
+        if 'term_start_date' in d:
+            o.term_start_date = d['term_start_date']
         if 'total_amt' in d:
             o.total_amt = d['total_amt']
         return o

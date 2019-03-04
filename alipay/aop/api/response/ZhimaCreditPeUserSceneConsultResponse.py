@@ -17,6 +17,7 @@ class ZhimaCreditPeUserSceneConsultResponse(AlipayResponse):
         self._risk_order_no = None
         self._top_amount = None
         self._top_goods_count = None
+        self._zm_score_level = None
 
     @property
     def display_msg(self):
@@ -74,6 +75,13 @@ class ZhimaCreditPeUserSceneConsultResponse(AlipayResponse):
     @top_goods_count.setter
     def top_goods_count(self, value):
         self._top_goods_count = value
+    @property
+    def zm_score_level(self):
+        return self._zm_score_level
+
+    @zm_score_level.setter
+    def zm_score_level(self, value):
+        self._zm_score_level = value
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditPeUserSceneConsultResponse, self).parse_response_content(response_content)
@@ -93,3 +101,5 @@ class ZhimaCreditPeUserSceneConsultResponse(AlipayResponse):
             self.top_amount = response['top_amount']
         if 'top_goods_count' in response:
             self.top_goods_count = response['top_goods_count']
+        if 'zm_score_level' in response:
+            self.zm_score_level = response['zm_score_level']

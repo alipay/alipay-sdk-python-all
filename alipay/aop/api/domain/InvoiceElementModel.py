@@ -18,12 +18,15 @@ class InvoiceElementModel(object):
         self._invoice_kind = None
         self._invoice_no = None
         self._invoice_status = None
+        self._isv_contact = None
+        self._isv_name = None
         self._logo_url = None
         self._m_name = None
         self._payee_name = None
         self._payee_tax_no = None
         self._payer_name = None
         self._payer_tax_no = None
+        self._pdf_url = None
 
     @property
     def expense_status(self):
@@ -96,6 +99,20 @@ class InvoiceElementModel(object):
     def invoice_status(self, value):
         self._invoice_status = value
     @property
+    def isv_contact(self):
+        return self._isv_contact
+
+    @isv_contact.setter
+    def isv_contact(self, value):
+        self._isv_contact = value
+    @property
+    def isv_name(self):
+        return self._isv_name
+
+    @isv_name.setter
+    def isv_name(self, value):
+        self._isv_name = value
+    @property
     def logo_url(self):
         return self._logo_url
 
@@ -137,6 +154,13 @@ class InvoiceElementModel(object):
     @payer_tax_no.setter
     def payer_tax_no(self, value):
         self._payer_tax_no = value
+    @property
+    def pdf_url(self):
+        return self._pdf_url
+
+    @pdf_url.setter
+    def pdf_url(self, value):
+        self._pdf_url = value
 
 
     def to_alipay_dict(self):
@@ -191,6 +215,16 @@ class InvoiceElementModel(object):
                 params['invoice_status'] = self.invoice_status.to_alipay_dict()
             else:
                 params['invoice_status'] = self.invoice_status
+        if self.isv_contact:
+            if hasattr(self.isv_contact, 'to_alipay_dict'):
+                params['isv_contact'] = self.isv_contact.to_alipay_dict()
+            else:
+                params['isv_contact'] = self.isv_contact
+        if self.isv_name:
+            if hasattr(self.isv_name, 'to_alipay_dict'):
+                params['isv_name'] = self.isv_name.to_alipay_dict()
+            else:
+                params['isv_name'] = self.isv_name
         if self.logo_url:
             if hasattr(self.logo_url, 'to_alipay_dict'):
                 params['logo_url'] = self.logo_url.to_alipay_dict()
@@ -221,6 +255,11 @@ class InvoiceElementModel(object):
                 params['payer_tax_no'] = self.payer_tax_no.to_alipay_dict()
             else:
                 params['payer_tax_no'] = self.payer_tax_no
+        if self.pdf_url:
+            if hasattr(self.pdf_url, 'to_alipay_dict'):
+                params['pdf_url'] = self.pdf_url.to_alipay_dict()
+            else:
+                params['pdf_url'] = self.pdf_url
         return params
 
     @staticmethod
@@ -248,6 +287,10 @@ class InvoiceElementModel(object):
             o.invoice_no = d['invoice_no']
         if 'invoice_status' in d:
             o.invoice_status = d['invoice_status']
+        if 'isv_contact' in d:
+            o.isv_contact = d['isv_contact']
+        if 'isv_name' in d:
+            o.isv_name = d['isv_name']
         if 'logo_url' in d:
             o.logo_url = d['logo_url']
         if 'm_name' in d:
@@ -260,6 +303,8 @@ class InvoiceElementModel(object):
             o.payer_name = d['payer_name']
         if 'payer_tax_no' in d:
             o.payer_tax_no = d['payer_tax_no']
+        if 'pdf_url' in d:
+            o.pdf_url = d['pdf_url']
         return o
 
 

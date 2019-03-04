@@ -13,6 +13,7 @@ class AddressInfo(object):
         self._district_code = None
         self._latitude = None
         self._longitude = None
+        self._poiid = None
         self._province_code = None
         self._type = None
 
@@ -51,6 +52,13 @@ class AddressInfo(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def poiid(self):
+        return self._poiid
+
+    @poiid.setter
+    def poiid(self, value):
+        self._poiid = value
     @property
     def province_code(self):
         return self._province_code
@@ -94,6 +102,11 @@ class AddressInfo(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.poiid:
+            if hasattr(self.poiid, 'to_alipay_dict'):
+                params['poiid'] = self.poiid.to_alipay_dict()
+            else:
+                params['poiid'] = self.poiid
         if self.province_code:
             if hasattr(self.province_code, 'to_alipay_dict'):
                 params['province_code'] = self.province_code.to_alipay_dict()
@@ -121,6 +134,8 @@ class AddressInfo(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'poiid' in d:
+            o.poiid = d['poiid']
         if 'province_code' in d:
             o.province_code = d['province_code']
         if 'type' in d:

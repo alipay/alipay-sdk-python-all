@@ -15,6 +15,7 @@ class AlipayPcreditHuabeiAuthPageSignModel(object):
         self._out_request_no = None
         self._out_sign_no = None
         self._seller_id = None
+        self._timeout_express = None
 
     @property
     def auth_scene(self):
@@ -65,6 +66,13 @@ class AlipayPcreditHuabeiAuthPageSignModel(object):
     @seller_id.setter
     def seller_id(self, value):
         self._seller_id = value
+    @property
+    def timeout_express(self):
+        return self._timeout_express
+
+    @timeout_express.setter
+    def timeout_express(self, value):
+        self._timeout_express = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class AlipayPcreditHuabeiAuthPageSignModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.timeout_express:
+            if hasattr(self.timeout_express, 'to_alipay_dict'):
+                params['timeout_express'] = self.timeout_express.to_alipay_dict()
+            else:
+                params['timeout_express'] = self.timeout_express
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class AlipayPcreditHuabeiAuthPageSignModel(object):
             o.out_sign_no = d['out_sign_no']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'timeout_express' in d:
+            o.timeout_express = d['timeout_express']
         return o
 
 

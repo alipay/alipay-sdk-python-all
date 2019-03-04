@@ -14,6 +14,7 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
         self._biometainfo = None
         self._biz_id = None
         self._biz_scene_name = None
+        self._biz_type = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -67,6 +68,13 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
     @biz_scene_name.setter
     def biz_scene_name(self, value):
         self._biz_scene_name = value
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -171,6 +179,11 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
                 params['biz_scene_name'] = self.biz_scene_name.to_alipay_dict()
             else:
                 params['biz_scene_name'] = self.biz_scene_name
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -240,6 +253,8 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
             o.biz_id = d['biz_id']
         if 'biz_scene_name' in d:
             o.biz_scene_name = d['biz_scene_name']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

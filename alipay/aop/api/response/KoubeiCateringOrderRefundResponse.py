@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RefundDescriptionDTO import RefundDescriptionDTO
 
 
 class KoubeiCateringOrderRefundResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class KoubeiCateringOrderRefundResponse(AlipayResponse):
         self._ext_info = None
         self._order_id = None
         self._out_biz_no = None
+        self._refund_description_list = None
         self._refund_id = None
         self._retry = None
 
@@ -37,6 +39,19 @@ class KoubeiCateringOrderRefundResponse(AlipayResponse):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def refund_description_list(self):
+        return self._refund_description_list
+
+    @refund_description_list.setter
+    def refund_description_list(self, value):
+        if isinstance(value, list):
+            self._refund_description_list = list()
+            for i in value:
+                if isinstance(i, RefundDescriptionDTO):
+                    self._refund_description_list.append(i)
+                else:
+                    self._refund_description_list.append(RefundDescriptionDTO.from_alipay_dict(i))
+    @property
     def refund_id(self):
         return self._refund_id
 
@@ -59,6 +74,8 @@ class KoubeiCateringOrderRefundResponse(AlipayResponse):
             self.order_id = response['order_id']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
+        if 'refund_description_list' in response:
+            self.refund_description_list = response['refund_description_list']
         if 'refund_id' in response:
             self.refund_id = response['refund_id']
         if 'retry' in response:

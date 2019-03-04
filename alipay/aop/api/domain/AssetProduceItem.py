@@ -14,6 +14,7 @@ class AssetProduceItem(object):
         self._asset_resource = None
         self._assign_item_id = None
         self._biz_tag = None
+        self._biz_type = None
         self._city = None
         self._count = None
         self._create_date = None
@@ -29,6 +30,7 @@ class AssetProduceItem(object):
         self._postcode = None
         self._print_data = None
         self._produce_order = None
+        self._produce_type = None
         self._province = None
         self._receiver_address = None
         self._receiver_mobile = None
@@ -79,6 +81,13 @@ class AssetProduceItem(object):
     @biz_tag.setter
     def biz_tag(self, value):
         self._biz_tag = value
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def city(self):
         return self._city
@@ -185,6 +194,13 @@ class AssetProduceItem(object):
     def produce_order(self, value):
         self._produce_order = value
     @property
+    def produce_type(self):
+        return self._produce_type
+
+    @produce_type.setter
+    def produce_type(self, value):
+        self._produce_type = value
+    @property
     def province(self):
         return self._province
 
@@ -267,6 +283,11 @@ class AssetProduceItem(object):
                 params['biz_tag'] = self.biz_tag.to_alipay_dict()
             else:
                 params['biz_tag'] = self.biz_tag
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.city:
             if hasattr(self.city, 'to_alipay_dict'):
                 params['city'] = self.city.to_alipay_dict()
@@ -342,6 +363,11 @@ class AssetProduceItem(object):
                 params['produce_order'] = self.produce_order.to_alipay_dict()
             else:
                 params['produce_order'] = self.produce_order
+        if self.produce_type:
+            if hasattr(self.produce_type, 'to_alipay_dict'):
+                params['produce_type'] = self.produce_type.to_alipay_dict()
+            else:
+                params['produce_type'] = self.produce_type
         if self.province:
             if hasattr(self.province, 'to_alipay_dict'):
                 params['province'] = self.province.to_alipay_dict()
@@ -396,6 +422,8 @@ class AssetProduceItem(object):
             o.assign_item_id = d['assign_item_id']
         if 'biz_tag' in d:
             o.biz_tag = d['biz_tag']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'city' in d:
             o.city = d['city']
         if 'count' in d:
@@ -426,6 +454,8 @@ class AssetProduceItem(object):
             o.print_data = d['print_data']
         if 'produce_order' in d:
             o.produce_order = d['produce_order']
+        if 'produce_type' in d:
+            o.produce_type = d['produce_type']
         if 'province' in d:
             o.province = d['province']
         if 'receiver_address' in d:

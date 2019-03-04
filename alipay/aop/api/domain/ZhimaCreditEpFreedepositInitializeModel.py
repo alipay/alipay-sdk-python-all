@@ -17,6 +17,7 @@ class ZhimaCreditEpFreedepositInitializeModel(object):
         self._ep_cert_type = None
         self._ep_name = None
         self._goto_url = None
+        self._member_type = None
         self._merchant_order_no = None
         self._name = None
         self._out_request_no = None
@@ -86,6 +87,13 @@ class ZhimaCreditEpFreedepositInitializeModel(object):
     @goto_url.setter
     def goto_url(self, value):
         self._goto_url = value
+    @property
+    def member_type(self):
+        return self._member_type
+
+    @member_type.setter
+    def member_type(self, value):
+        self._member_type = value
     @property
     def merchant_order_no(self):
         return self._merchant_order_no
@@ -170,6 +178,11 @@ class ZhimaCreditEpFreedepositInitializeModel(object):
                 params['goto_url'] = self.goto_url.to_alipay_dict()
             else:
                 params['goto_url'] = self.goto_url
+        if self.member_type:
+            if hasattr(self.member_type, 'to_alipay_dict'):
+                params['member_type'] = self.member_type.to_alipay_dict()
+            else:
+                params['member_type'] = self.member_type
         if self.merchant_order_no:
             if hasattr(self.merchant_order_no, 'to_alipay_dict'):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
@@ -220,6 +233,8 @@ class ZhimaCreditEpFreedepositInitializeModel(object):
             o.ep_name = d['ep_name']
         if 'goto_url' in d:
             o.goto_url = d['goto_url']
+        if 'member_type' in d:
+            o.member_type = d['member_type']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
         if 'name' in d:

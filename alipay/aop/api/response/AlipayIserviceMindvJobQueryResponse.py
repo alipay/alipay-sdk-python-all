@@ -14,6 +14,8 @@ class AlipayIserviceMindvJobQueryResponse(AlipayResponse):
         self._job_domain = None
         self._name = None
         self._status = None
+        self._submit_complete_count = None
+        self._total_submit_count = None
 
     @property
     def gmt_create(self):
@@ -50,6 +52,20 @@ class AlipayIserviceMindvJobQueryResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def submit_complete_count(self):
+        return self._submit_complete_count
+
+    @submit_complete_count.setter
+    def submit_complete_count(self, value):
+        self._submit_complete_count = value
+    @property
+    def total_submit_count(self):
+        return self._total_submit_count
+
+    @total_submit_count.setter
+    def total_submit_count(self, value):
+        self._total_submit_count = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayIserviceMindvJobQueryResponse, self).parse_response_content(response_content)
@@ -63,3 +79,7 @@ class AlipayIserviceMindvJobQueryResponse(AlipayResponse):
             self.name = response['name']
         if 'status' in response:
             self.status = response['status']
+        if 'submit_complete_count' in response:
+            self.submit_complete_count = response['submit_complete_count']
+        if 'total_submit_count' in response:
+            self.total_submit_count = response['total_submit_count']

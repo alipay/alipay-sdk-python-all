@@ -12,8 +12,11 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
         self._bank_partner_id = None
         self._bank_uid = None
         self._bankcard_no = None
+        self._batch_no = None
+        self._card_alias_no = None
         self._city_code = None
         self._city_name = None
+        self._corporate_branch_pid = None
         self._district_code = None
         self._district_name = None
         self._isv_name = None
@@ -29,6 +32,8 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
         self._school_pid = None
         self._school_stdcode = None
         self._school_type = None
+        self._smid = None
+        self._trans_in = None
         self._white_channel_code = None
 
     @property
@@ -60,6 +65,20 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
     def bankcard_no(self, value):
         self._bankcard_no = value
     @property
+    def batch_no(self):
+        return self._batch_no
+
+    @batch_no.setter
+    def batch_no(self, value):
+        self._batch_no = value
+    @property
+    def card_alias_no(self):
+        return self._card_alias_no
+
+    @card_alias_no.setter
+    def card_alias_no(self, value):
+        self._card_alias_no = value
+    @property
     def city_code(self):
         return self._city_code
 
@@ -73,6 +92,13 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
     @city_name.setter
     def city_name(self, value):
         self._city_name = value
+    @property
+    def corporate_branch_pid(self):
+        return self._corporate_branch_pid
+
+    @corporate_branch_pid.setter
+    def corporate_branch_pid(self, value):
+        self._corporate_branch_pid = value
     @property
     def district_code(self):
         return self._district_code
@@ -179,6 +205,20 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
     def school_type(self, value):
         self._school_type = value
     @property
+    def smid(self):
+        return self._smid
+
+    @smid.setter
+    def smid(self, value):
+        self._smid = value
+    @property
+    def trans_in(self):
+        return self._trans_in
+
+    @trans_in.setter
+    def trans_in(self, value):
+        self._trans_in = value
+    @property
     def white_channel_code(self):
         return self._white_channel_code
 
@@ -209,6 +249,16 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
                 params['bankcard_no'] = self.bankcard_no.to_alipay_dict()
             else:
                 params['bankcard_no'] = self.bankcard_no
+        if self.batch_no:
+            if hasattr(self.batch_no, 'to_alipay_dict'):
+                params['batch_no'] = self.batch_no.to_alipay_dict()
+            else:
+                params['batch_no'] = self.batch_no
+        if self.card_alias_no:
+            if hasattr(self.card_alias_no, 'to_alipay_dict'):
+                params['card_alias_no'] = self.card_alias_no.to_alipay_dict()
+            else:
+                params['card_alias_no'] = self.card_alias_no
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -219,6 +269,11 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.corporate_branch_pid:
+            if hasattr(self.corporate_branch_pid, 'to_alipay_dict'):
+                params['corporate_branch_pid'] = self.corporate_branch_pid.to_alipay_dict()
+            else:
+                params['corporate_branch_pid'] = self.corporate_branch_pid
         if self.district_code:
             if hasattr(self.district_code, 'to_alipay_dict'):
                 params['district_code'] = self.district_code.to_alipay_dict()
@@ -294,6 +349,16 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
                 params['school_type'] = self.school_type.to_alipay_dict()
             else:
                 params['school_type'] = self.school_type
+        if self.smid:
+            if hasattr(self.smid, 'to_alipay_dict'):
+                params['smid'] = self.smid.to_alipay_dict()
+            else:
+                params['smid'] = self.smid
+        if self.trans_in:
+            if hasattr(self.trans_in, 'to_alipay_dict'):
+                params['trans_in'] = self.trans_in.to_alipay_dict()
+            else:
+                params['trans_in'] = self.trans_in
         if self.white_channel_code:
             if hasattr(self.white_channel_code, 'to_alipay_dict'):
                 params['white_channel_code'] = self.white_channel_code.to_alipay_dict()
@@ -314,10 +379,16 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
             o.bank_uid = d['bank_uid']
         if 'bankcard_no' in d:
             o.bankcard_no = d['bankcard_no']
+        if 'batch_no' in d:
+            o.batch_no = d['batch_no']
+        if 'card_alias_no' in d:
+            o.card_alias_no = d['card_alias_no']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'corporate_branch_pid' in d:
+            o.corporate_branch_pid = d['corporate_branch_pid']
         if 'district_code' in d:
             o.district_code = d['district_code']
         if 'district_name' in d:
@@ -348,6 +419,10 @@ class AlipayEcoEduKtSchoolinfoModifyModel(object):
             o.school_stdcode = d['school_stdcode']
         if 'school_type' in d:
             o.school_type = d['school_type']
+        if 'smid' in d:
+            o.smid = d['smid']
+        if 'trans_in' in d:
+            o.trans_in = d['trans_in']
         if 'white_channel_code' in d:
             o.white_channel_code = d['white_channel_code']
         return o

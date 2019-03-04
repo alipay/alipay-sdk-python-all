@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SelectedMealSideInfo import SelectedMealSideInfo
 
 
 class SelectedMealInfo(object):
@@ -12,6 +13,7 @@ class SelectedMealInfo(object):
         self._dish_id = None
         self._dish_name = None
         self._ext_infos = None
+        self._meal_side_list = None
         self._num = None
         self._out_dish_id = None
         self._out_dish_infos = None
@@ -49,6 +51,19 @@ class SelectedMealInfo(object):
     @ext_infos.setter
     def ext_infos(self, value):
         self._ext_infos = value
+    @property
+    def meal_side_list(self):
+        return self._meal_side_list
+
+    @meal_side_list.setter
+    def meal_side_list(self, value):
+        if isinstance(value, list):
+            self._meal_side_list = list()
+            for i in value:
+                if isinstance(i, SelectedMealSideInfo):
+                    self._meal_side_list.append(i)
+                else:
+                    self._meal_side_list.append(SelectedMealSideInfo.from_alipay_dict(i))
     @property
     def num(self):
         return self._num
@@ -129,6 +144,16 @@ class SelectedMealInfo(object):
                 params['ext_infos'] = self.ext_infos.to_alipay_dict()
             else:
                 params['ext_infos'] = self.ext_infos
+        if self.meal_side_list:
+            if isinstance(self.meal_side_list, list):
+                for i in range(0, len(self.meal_side_list)):
+                    element = self.meal_side_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.meal_side_list[i] = element.to_alipay_dict()
+            if hasattr(self.meal_side_list, 'to_alipay_dict'):
+                params['meal_side_list'] = self.meal_side_list.to_alipay_dict()
+            else:
+                params['meal_side_list'] = self.meal_side_list
         if self.num:
             if hasattr(self.num, 'to_alipay_dict'):
                 params['num'] = self.num.to_alipay_dict()
@@ -184,6 +209,8 @@ class SelectedMealInfo(object):
             o.dish_name = d['dish_name']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
+        if 'meal_side_list' in d:
+            o.meal_side_list = d['meal_side_list']
         if 'num' in d:
             o.num = d['num']
         if 'out_dish_id' in d:

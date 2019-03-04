@@ -15,6 +15,7 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
         self._client_ip = None
         self._json_ua = None
         self._login_id = None
+        self._out_biz_no = None
         self._user_id = None
 
     @property
@@ -67,6 +68,13 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
     def login_id(self, value):
         self._login_id = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -112,6 +120,11 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
                 params['login_id'] = self.login_id.to_alipay_dict()
             else:
                 params['login_id'] = self.login_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
             o.json_ua = d['json_ua']
         if 'login_id' in d:
             o.login_id = d['login_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -16,6 +16,7 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._build_package_name = None
         self._build_package_stream = None
         self._build_qcloud_info = None
+        self._build_source_pkg_size = None
         self._build_source_pkg_url = None
         self._build_sub_url = None
         self._build_version = None
@@ -78,6 +79,13 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     @build_qcloud_info.setter
     def build_qcloud_info(self, value):
         self._build_qcloud_info = value
+    @property
+    def build_source_pkg_size(self):
+        return self._build_source_pkg_size
+
+    @build_source_pkg_size.setter
+    def build_source_pkg_size(self, value):
+        self._build_source_pkg_size = value
     @property
     def build_source_pkg_url(self):
         return self._build_source_pkg_url
@@ -157,6 +165,11 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_qcloud_info'] = self.build_qcloud_info.to_alipay_dict()
             else:
                 params['build_qcloud_info'] = self.build_qcloud_info
+        if self.build_source_pkg_size:
+            if hasattr(self.build_source_pkg_size, 'to_alipay_dict'):
+                params['build_source_pkg_size'] = self.build_source_pkg_size.to_alipay_dict()
+            else:
+                params['build_source_pkg_size'] = self.build_source_pkg_size
         if self.build_source_pkg_url:
             if hasattr(self.build_source_pkg_url, 'to_alipay_dict'):
                 params['build_source_pkg_url'] = self.build_source_pkg_url.to_alipay_dict()
@@ -205,6 +218,8 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_package_stream = d['build_package_stream']
         if 'build_qcloud_info' in d:
             o.build_qcloud_info = d['build_qcloud_info']
+        if 'build_source_pkg_size' in d:
+            o.build_source_pkg_size = d['build_source_pkg_size']
         if 'build_source_pkg_url' in d:
             o.build_source_pkg_url = d['build_source_pkg_url']
         if 'build_sub_url' in d:

@@ -14,6 +14,7 @@ class AlipayOfflineMarketShopCreateResponse(AlipayResponse):
         self._audit_status = None
         self._is_online = None
         self._is_show = None
+        self._rate = None
         self._result_code = None
         self._shop_id = None
 
@@ -53,6 +54,13 @@ class AlipayOfflineMarketShopCreateResponse(AlipayResponse):
     def is_show(self, value):
         self._is_show = value
     @property
+    def rate(self):
+        return self._rate
+
+    @rate.setter
+    def rate(self, value):
+        self._rate = value
+    @property
     def result_code(self):
         return self._result_code
 
@@ -79,6 +87,8 @@ class AlipayOfflineMarketShopCreateResponse(AlipayResponse):
             self.is_online = response['is_online']
         if 'is_show' in response:
             self.is_show = response['is_show']
+        if 'rate' in response:
+            self.rate = response['rate']
         if 'result_code' in response:
             self.result_code = response['result_code']
         if 'shop_id' in response:

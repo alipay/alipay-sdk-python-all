@@ -12,6 +12,7 @@ class PosCookDishQryDetailModel(object):
         self._dish_id = None
         self._dish_img = None
         self._dish_name = None
+        self._dish_stall_ref = None
         self._min_price = None
         self._multi_spec = None
         self._special_tag = None
@@ -48,6 +49,13 @@ class PosCookDishQryDetailModel(object):
     @dish_name.setter
     def dish_name(self, value):
         self._dish_name = value
+    @property
+    def dish_stall_ref(self):
+        return self._dish_stall_ref
+
+    @dish_stall_ref.setter
+    def dish_stall_ref(self, value):
+        self._dish_stall_ref = value
     @property
     def min_price(self):
         return self._min_price
@@ -121,6 +129,11 @@ class PosCookDishQryDetailModel(object):
                 params['dish_name'] = self.dish_name.to_alipay_dict()
             else:
                 params['dish_name'] = self.dish_name
+        if self.dish_stall_ref:
+            if hasattr(self.dish_stall_ref, 'to_alipay_dict'):
+                params['dish_stall_ref'] = self.dish_stall_ref.to_alipay_dict()
+            else:
+                params['dish_stall_ref'] = self.dish_stall_ref
         if self.min_price:
             if hasattr(self.min_price, 'to_alipay_dict'):
                 params['min_price'] = self.min_price.to_alipay_dict()
@@ -171,6 +184,8 @@ class PosCookDishQryDetailModel(object):
             o.dish_img = d['dish_img']
         if 'dish_name' in d:
             o.dish_name = d['dish_name']
+        if 'dish_stall_ref' in d:
+            o.dish_stall_ref = d['dish_stall_ref']
         if 'min_price' in d:
             o.min_price = d['min_price']
         if 'multi_spec' in d:

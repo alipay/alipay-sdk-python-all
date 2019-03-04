@@ -22,7 +22,9 @@ class PosDishQryModel(object):
         self._dish_name = None
         self._en_remember_code = None
         self._fixed_dish_group_list = None
+        self._making_time = None
         self._material_list = None
+        self._max_copies_per_time = None
         self._min_serving = None
         self._nb_remember_code = None
         self._practice_list = None
@@ -104,6 +106,13 @@ class PosDishQryModel(object):
                 else:
                     self._fixed_dish_group_list.append(PosFixedDishGroupModel.from_alipay_dict(i))
     @property
+    def making_time(self):
+        return self._making_time
+
+    @making_time.setter
+    def making_time(self, value):
+        self._making_time = value
+    @property
     def material_list(self):
         return self._material_list
 
@@ -116,6 +125,13 @@ class PosDishQryModel(object):
                     self._material_list.append(i)
                 else:
                     self._material_list.append(PosDishMaterialModel.from_alipay_dict(i))
+    @property
+    def max_copies_per_time(self):
+        return self._max_copies_per_time
+
+    @max_copies_per_time.setter
+    def max_copies_per_time(self, value):
+        self._max_copies_per_time = value
     @property
     def min_serving(self):
         return self._min_serving
@@ -265,6 +281,11 @@ class PosDishQryModel(object):
                 params['fixed_dish_group_list'] = self.fixed_dish_group_list.to_alipay_dict()
             else:
                 params['fixed_dish_group_list'] = self.fixed_dish_group_list
+        if self.making_time:
+            if hasattr(self.making_time, 'to_alipay_dict'):
+                params['making_time'] = self.making_time.to_alipay_dict()
+            else:
+                params['making_time'] = self.making_time
         if self.material_list:
             if isinstance(self.material_list, list):
                 for i in range(0, len(self.material_list)):
@@ -275,6 +296,11 @@ class PosDishQryModel(object):
                 params['material_list'] = self.material_list.to_alipay_dict()
             else:
                 params['material_list'] = self.material_list
+        if self.max_copies_per_time:
+            if hasattr(self.max_copies_per_time, 'to_alipay_dict'):
+                params['max_copies_per_time'] = self.max_copies_per_time.to_alipay_dict()
+            else:
+                params['max_copies_per_time'] = self.max_copies_per_time
         if self.min_serving:
             if hasattr(self.min_serving, 'to_alipay_dict'):
                 params['min_serving'] = self.min_serving.to_alipay_dict()
@@ -368,8 +394,12 @@ class PosDishQryModel(object):
             o.en_remember_code = d['en_remember_code']
         if 'fixed_dish_group_list' in d:
             o.fixed_dish_group_list = d['fixed_dish_group_list']
+        if 'making_time' in d:
+            o.making_time = d['making_time']
         if 'material_list' in d:
             o.material_list = d['material_list']
+        if 'max_copies_per_time' in d:
+            o.max_copies_per_time = d['max_copies_per_time']
         if 'min_serving' in d:
             o.min_serving = d['min_serving']
         if 'nb_remember_code' in d:

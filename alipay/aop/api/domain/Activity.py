@@ -19,6 +19,7 @@ class Activity(object):
         self._activity_status = None
         self._brand_name = None
         self._end_time = None
+        self._fulfil_dimension = None
         self._out_activity_no = None
         self._partner_id = None
         self._rule_type = None
@@ -93,6 +94,13 @@ class Activity(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def fulfil_dimension(self):
+        return self._fulfil_dimension
+
+    @fulfil_dimension.setter
+    def fulfil_dimension(self, value):
+        self._fulfil_dimension = value
     @property
     def out_activity_no(self):
         return self._out_activity_no
@@ -177,6 +185,11 @@ class Activity(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.fulfil_dimension:
+            if hasattr(self.fulfil_dimension, 'to_alipay_dict'):
+                params['fulfil_dimension'] = self.fulfil_dimension.to_alipay_dict()
+            else:
+                params['fulfil_dimension'] = self.fulfil_dimension
         if self.out_activity_no:
             if hasattr(self.out_activity_no, 'to_alipay_dict'):
                 params['out_activity_no'] = self.out_activity_no.to_alipay_dict()
@@ -225,6 +238,8 @@ class Activity(object):
             o.brand_name = d['brand_name']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'fulfil_dimension' in d:
+            o.fulfil_dimension = d['fulfil_dimension']
         if 'out_activity_no' in d:
             o.out_activity_no = d['out_activity_no']
         if 'partner_id' in d:

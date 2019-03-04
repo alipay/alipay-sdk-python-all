@@ -11,6 +11,8 @@ class AlipayUserAntarchiveFaceQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayUserAntarchiveFaceQueryResponse, self).__init__()
         self._archive_face_list = None
+        self._local_usable = None
+        self._remote_usable = None
 
     @property
     def archive_face_list(self):
@@ -25,8 +27,26 @@ class AlipayUserAntarchiveFaceQueryResponse(AlipayResponse):
                     self._archive_face_list.append(i)
                 else:
                     self._archive_face_list.append(ArchiveFaceInfo.from_alipay_dict(i))
+    @property
+    def local_usable(self):
+        return self._local_usable
+
+    @local_usable.setter
+    def local_usable(self, value):
+        self._local_usable = value
+    @property
+    def remote_usable(self):
+        return self._remote_usable
+
+    @remote_usable.setter
+    def remote_usable(self, value):
+        self._remote_usable = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserAntarchiveFaceQueryResponse, self).parse_response_content(response_content)
         if 'archive_face_list' in response:
             self.archive_face_list = response['archive_face_list']
+        if 'local_usable' in response:
+            self.local_usable = response['local_usable']
+        if 'remote_usable' in response:
+            self.remote_usable = response['remote_usable']

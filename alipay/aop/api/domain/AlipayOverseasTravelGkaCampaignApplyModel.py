@@ -11,6 +11,7 @@ class AlipayOverseasTravelGkaCampaignApplyModel(object):
         self._camp_id = None
         self._client_ip = None
         self._device_info = None
+        self._extend_info = None
         self._json_ua = None
         self._login_mobile = None
         self._user_id = None
@@ -36,6 +37,13 @@ class AlipayOverseasTravelGkaCampaignApplyModel(object):
     @device_info.setter
     def device_info(self, value):
         self._device_info = value
+    @property
+    def extend_info(self):
+        return self._extend_info
+
+    @extend_info.setter
+    def extend_info(self, value):
+        self._extend_info = value
     @property
     def json_ua(self):
         return self._json_ua
@@ -76,6 +84,11 @@ class AlipayOverseasTravelGkaCampaignApplyModel(object):
                 params['device_info'] = self.device_info.to_alipay_dict()
             else:
                 params['device_info'] = self.device_info
+        if self.extend_info:
+            if hasattr(self.extend_info, 'to_alipay_dict'):
+                params['extend_info'] = self.extend_info.to_alipay_dict()
+            else:
+                params['extend_info'] = self.extend_info
         if self.json_ua:
             if hasattr(self.json_ua, 'to_alipay_dict'):
                 params['json_ua'] = self.json_ua.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayOverseasTravelGkaCampaignApplyModel(object):
             o.client_ip = d['client_ip']
         if 'device_info' in d:
             o.device_info = d['device_info']
+        if 'extend_info' in d:
+            o.extend_info = d['extend_info']
         if 'json_ua' in d:
             o.json_ua = d['json_ua']
         if 'login_mobile' in d:

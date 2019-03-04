@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaMerchantActivityBatchqueryModel(object):
 
     def __init__(self):
+        self._activity_no = None
         self._page_no = None
         self._page_size = None
         self._status_list = None
 
+    @property
+    def activity_no(self):
+        return self._activity_no
+
+    @activity_no.setter
+    def activity_no(self, value):
+        self._activity_no = value
     @property
     def page_no(self):
         return self._page_no
@@ -40,6 +48,11 @@ class ZhimaMerchantActivityBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_no:
+            if hasattr(self.activity_no, 'to_alipay_dict'):
+                params['activity_no'] = self.activity_no.to_alipay_dict()
+            else:
+                params['activity_no'] = self.activity_no
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -67,6 +80,8 @@ class ZhimaMerchantActivityBatchqueryModel(object):
         if not d:
             return None
         o = ZhimaMerchantActivityBatchqueryModel()
+        if 'activity_no' in d:
+            o.activity_no = d['activity_no']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

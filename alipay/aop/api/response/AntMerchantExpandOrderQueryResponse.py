@@ -10,6 +10,7 @@ class AntMerchantExpandOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AntMerchantExpandOrderQueryResponse, self).__init__()
         self._apply_time = None
+        self._ext_info = None
         self._ip_role_id = None
         self._merchant_name = None
         self._status = None
@@ -21,6 +22,13 @@ class AntMerchantExpandOrderQueryResponse(AlipayResponse):
     @apply_time.setter
     def apply_time(self, value):
         self._apply_time = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -50,6 +58,8 @@ class AntMerchantExpandOrderQueryResponse(AlipayResponse):
         response = super(AntMerchantExpandOrderQueryResponse, self).parse_response_content(response_content)
         if 'apply_time' in response:
             self.apply_time = response['apply_time']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'ip_role_id' in response:
             self.ip_role_id = response['ip_role_id']
         if 'merchant_name' in response:

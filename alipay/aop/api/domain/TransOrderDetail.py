@@ -12,6 +12,7 @@ class TransOrderDetail(object):
         self._business_params = None
         self._order_title = None
         self._out_biz_no = None
+        self._passback_params = None
         self._payee_info = None
         self._remark = None
         self._trans_amount = None
@@ -37,6 +38,13 @@ class TransOrderDetail(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def passback_params(self):
+        return self._passback_params
+
+    @passback_params.setter
+    def passback_params(self, value):
+        self._passback_params = value
     @property
     def payee_info(self):
         return self._payee_info
@@ -80,6 +88,11 @@ class TransOrderDetail(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.passback_params:
+            if hasattr(self.passback_params, 'to_alipay_dict'):
+                params['passback_params'] = self.passback_params.to_alipay_dict()
+            else:
+                params['passback_params'] = self.passback_params
         if self.payee_info:
             if hasattr(self.payee_info, 'to_alipay_dict'):
                 params['payee_info'] = self.payee_info.to_alipay_dict()
@@ -108,6 +121,8 @@ class TransOrderDetail(object):
             o.order_title = d['order_title']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'passback_params' in d:
+            o.passback_params = d['passback_params']
         if 'payee_info' in d:
             o.payee_info = d['payee_info']
         if 'remark' in d:

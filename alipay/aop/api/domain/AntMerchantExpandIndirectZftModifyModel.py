@@ -19,12 +19,15 @@ class AntMerchantExpandIndirectZftModifyModel(object):
         self._binding_alipay_logon_id = None
         self._biz_cards = None
         self._business_address = None
+        self._cert_image = None
+        self._cert_image_back = None
         self._contact_infos = None
         self._external_id = None
         self._invoice_info = None
         self._legal_cert_back_image = None
         self._legal_cert_front_image = None
         self._legal_cert_no = None
+        self._legal_cert_type = None
         self._legal_name = None
         self._license_auth_letter_image = None
         self._mcc = None
@@ -83,6 +86,20 @@ class AntMerchantExpandIndirectZftModifyModel(object):
         else:
             self._business_address = AddressInfo.from_alipay_dict(value)
     @property
+    def cert_image(self):
+        return self._cert_image
+
+    @cert_image.setter
+    def cert_image(self, value):
+        self._cert_image = value
+    @property
+    def cert_image_back(self):
+        return self._cert_image_back
+
+    @cert_image_back.setter
+    def cert_image_back(self, value):
+        self._cert_image_back = value
+    @property
     def contact_infos(self):
         return self._contact_infos
 
@@ -133,6 +150,13 @@ class AntMerchantExpandIndirectZftModifyModel(object):
     @legal_cert_no.setter
     def legal_cert_no(self, value):
         self._legal_cert_no = value
+    @property
+    def legal_cert_type(self):
+        return self._legal_cert_type
+
+    @legal_cert_type.setter
+    def legal_cert_type(self, value):
+        self._legal_cert_type = value
     @property
     def legal_name(self):
         return self._legal_name
@@ -269,6 +293,16 @@ class AntMerchantExpandIndirectZftModifyModel(object):
                 params['business_address'] = self.business_address.to_alipay_dict()
             else:
                 params['business_address'] = self.business_address
+        if self.cert_image:
+            if hasattr(self.cert_image, 'to_alipay_dict'):
+                params['cert_image'] = self.cert_image.to_alipay_dict()
+            else:
+                params['cert_image'] = self.cert_image
+        if self.cert_image_back:
+            if hasattr(self.cert_image_back, 'to_alipay_dict'):
+                params['cert_image_back'] = self.cert_image_back.to_alipay_dict()
+            else:
+                params['cert_image_back'] = self.cert_image_back
         if self.contact_infos:
             if isinstance(self.contact_infos, list):
                 for i in range(0, len(self.contact_infos)):
@@ -304,6 +338,11 @@ class AntMerchantExpandIndirectZftModifyModel(object):
                 params['legal_cert_no'] = self.legal_cert_no.to_alipay_dict()
             else:
                 params['legal_cert_no'] = self.legal_cert_no
+        if self.legal_cert_type:
+            if hasattr(self.legal_cert_type, 'to_alipay_dict'):
+                params['legal_cert_type'] = self.legal_cert_type.to_alipay_dict()
+            else:
+                params['legal_cert_type'] = self.legal_cert_type
         if self.legal_name:
             if hasattr(self.legal_name, 'to_alipay_dict'):
                 params['legal_name'] = self.legal_name.to_alipay_dict()
@@ -401,6 +440,10 @@ class AntMerchantExpandIndirectZftModifyModel(object):
             o.biz_cards = d['biz_cards']
         if 'business_address' in d:
             o.business_address = d['business_address']
+        if 'cert_image' in d:
+            o.cert_image = d['cert_image']
+        if 'cert_image_back' in d:
+            o.cert_image_back = d['cert_image_back']
         if 'contact_infos' in d:
             o.contact_infos = d['contact_infos']
         if 'external_id' in d:
@@ -413,6 +456,8 @@ class AntMerchantExpandIndirectZftModifyModel(object):
             o.legal_cert_front_image = d['legal_cert_front_image']
         if 'legal_cert_no' in d:
             o.legal_cert_no = d['legal_cert_no']
+        if 'legal_cert_type' in d:
+            o.legal_cert_type = d['legal_cert_type']
         if 'legal_name' in d:
             o.legal_name = d['legal_name']
         if 'license_auth_letter_image' in d:

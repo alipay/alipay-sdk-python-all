@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class FaceAbilityExtInfo(object):
 
     def __init__(self):
+        self._age = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -19,6 +20,13 @@ class FaceAbilityExtInfo(object):
         self._sex = None
         self._source = None
 
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        self._age = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -93,6 +101,11 @@ class FaceAbilityExtInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.age:
+            if hasattr(self.age, 'to_alipay_dict'):
+                params['age'] = self.age.to_alipay_dict()
+            else:
+                params['age'] = self.age
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -150,6 +163,8 @@ class FaceAbilityExtInfo(object):
         if not d:
             return None
         o = FaceAbilityExtInfo()
+        if 'age' in d:
+            o.age = d['age']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

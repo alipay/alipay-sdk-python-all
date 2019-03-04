@@ -18,6 +18,7 @@ class AlipayFundTransAppPayModel(object):
         self._payee_info = None
         self._payer_info = None
         self._product_code = None
+        self._refund_time_expire = None
         self._remark = None
         self._time_expire = None
         self._trans_amount = None
@@ -85,6 +86,13 @@ class AlipayFundTransAppPayModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def refund_time_expire(self):
+        return self._refund_time_expire
+
+    @refund_time_expire.setter
+    def refund_time_expire(self, value):
+        self._refund_time_expire = value
+    @property
     def remark(self):
         return self._remark
 
@@ -149,6 +157,11 @@ class AlipayFundTransAppPayModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.refund_time_expire:
+            if hasattr(self.refund_time_expire, 'to_alipay_dict'):
+                params['refund_time_expire'] = self.refund_time_expire.to_alipay_dict()
+            else:
+                params['refund_time_expire'] = self.refund_time_expire
         if self.remark:
             if hasattr(self.remark, 'to_alipay_dict'):
                 params['remark'] = self.remark.to_alipay_dict()
@@ -187,6 +200,8 @@ class AlipayFundTransAppPayModel(object):
             o.payer_info = d['payer_info']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'refund_time_expire' in d:
+            o.refund_time_expire = d['refund_time_expire']
         if 'remark' in d:
             o.remark = d['remark']
         if 'time_expire' in d:

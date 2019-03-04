@@ -30,6 +30,7 @@ class AntMerchantExpandIndirectZftCreateModel(object):
         self._legal_cert_back_image = None
         self._legal_cert_front_image = None
         self._legal_cert_no = None
+        self._legal_cert_type = None
         self._legal_name = None
         self._license_auth_letter_image = None
         self._mcc = None
@@ -173,6 +174,13 @@ class AntMerchantExpandIndirectZftCreateModel(object):
     @legal_cert_no.setter
     def legal_cert_no(self, value):
         self._legal_cert_no = value
+    @property
+    def legal_cert_type(self):
+        return self._legal_cert_type
+
+    @legal_cert_type.setter
+    def legal_cert_type(self, value):
+        self._legal_cert_type = value
     @property
     def legal_name(self):
         return self._legal_name
@@ -369,6 +377,11 @@ class AntMerchantExpandIndirectZftCreateModel(object):
                 params['legal_cert_no'] = self.legal_cert_no.to_alipay_dict()
             else:
                 params['legal_cert_no'] = self.legal_cert_no
+        if self.legal_cert_type:
+            if hasattr(self.legal_cert_type, 'to_alipay_dict'):
+                params['legal_cert_type'] = self.legal_cert_type.to_alipay_dict()
+            else:
+                params['legal_cert_type'] = self.legal_cert_type
         if self.legal_name:
             if hasattr(self.legal_name, 'to_alipay_dict'):
                 params['legal_name'] = self.legal_name.to_alipay_dict()
@@ -488,6 +501,8 @@ class AntMerchantExpandIndirectZftCreateModel(object):
             o.legal_cert_front_image = d['legal_cert_front_image']
         if 'legal_cert_no' in d:
             o.legal_cert_no = d['legal_cert_no']
+        if 'legal_cert_type' in d:
+            o.legal_cert_type = d['legal_cert_type']
         if 'legal_name' in d:
             o.legal_name = d['legal_name']
         if 'license_auth_letter_image' in d:

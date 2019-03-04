@@ -13,9 +13,11 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
         self._camp_log_id = None
         self._display_name = None
         self._extend_field = None
+        self._out_prize_id = None
         self._prize_flag = None
         self._prize_id = None
         self._prize_name = None
+        self._repeat_trigger_flag = None
         self._trigger_result = None
 
     @property
@@ -47,6 +49,13 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
     def extend_field(self, value):
         self._extend_field = value
     @property
+    def out_prize_id(self):
+        return self._out_prize_id
+
+    @out_prize_id.setter
+    def out_prize_id(self, value):
+        self._out_prize_id = value
+    @property
     def prize_flag(self):
         return self._prize_flag
 
@@ -68,6 +77,13 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
     def prize_name(self, value):
         self._prize_name = value
     @property
+    def repeat_trigger_flag(self):
+        return self._repeat_trigger_flag
+
+    @repeat_trigger_flag.setter
+    def repeat_trigger_flag(self, value):
+        self._repeat_trigger_flag = value
+    @property
     def trigger_result(self):
         return self._trigger_result
 
@@ -85,11 +101,15 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
             self.display_name = response['display_name']
         if 'extend_field' in response:
             self.extend_field = response['extend_field']
+        if 'out_prize_id' in response:
+            self.out_prize_id = response['out_prize_id']
         if 'prize_flag' in response:
             self.prize_flag = response['prize_flag']
         if 'prize_id' in response:
             self.prize_id = response['prize_id']
         if 'prize_name' in response:
             self.prize_name = response['prize_name']
+        if 'repeat_trigger_flag' in response:
+            self.repeat_trigger_flag = response['repeat_trigger_flag']
         if 'trigger_result' in response:
             self.trigger_result = response['trigger_result']

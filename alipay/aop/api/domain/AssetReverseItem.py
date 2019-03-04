@@ -21,6 +21,8 @@ class AssetReverseItem(object):
         self._original_apply_order_item_id = None
         self._original_delivery_assign_item_id = None
         self._original_record_type = None
+        self._ou_code = None
+        self._ou_name = None
         self._reverse_type = None
 
     @property
@@ -111,6 +113,20 @@ class AssetReverseItem(object):
     def original_record_type(self, value):
         self._original_record_type = value
     @property
+    def ou_code(self):
+        return self._ou_code
+
+    @ou_code.setter
+    def ou_code(self, value):
+        self._ou_code = value
+    @property
+    def ou_name(self):
+        return self._ou_name
+
+    @ou_name.setter
+    def ou_name(self, value):
+        self._ou_name = value
+    @property
     def reverse_type(self):
         return self._reverse_type
 
@@ -181,6 +197,16 @@ class AssetReverseItem(object):
                 params['original_record_type'] = self.original_record_type.to_alipay_dict()
             else:
                 params['original_record_type'] = self.original_record_type
+        if self.ou_code:
+            if hasattr(self.ou_code, 'to_alipay_dict'):
+                params['ou_code'] = self.ou_code.to_alipay_dict()
+            else:
+                params['ou_code'] = self.ou_code
+        if self.ou_name:
+            if hasattr(self.ou_name, 'to_alipay_dict'):
+                params['ou_name'] = self.ou_name.to_alipay_dict()
+            else:
+                params['ou_name'] = self.ou_name
         if self.reverse_type:
             if hasattr(self.reverse_type, 'to_alipay_dict'):
                 params['reverse_type'] = self.reverse_type.to_alipay_dict()
@@ -217,6 +243,10 @@ class AssetReverseItem(object):
             o.original_delivery_assign_item_id = d['original_delivery_assign_item_id']
         if 'original_record_type' in d:
             o.original_record_type = d['original_record_type']
+        if 'ou_code' in d:
+            o.ou_code = d['ou_code']
+        if 'ou_name' in d:
+            o.ou_name = d['ou_name']
         if 'reverse_type' in d:
             o.reverse_type = d['reverse_type']
         return o

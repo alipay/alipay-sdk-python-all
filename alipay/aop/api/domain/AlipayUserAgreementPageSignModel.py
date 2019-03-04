@@ -28,6 +28,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._sign_validity_period = None
         self._sub_merchant = None
         self._third_party_type = None
+        self._user_age_range = None
         self._zm_auth_params = None
 
     @property
@@ -148,6 +149,13 @@ class AlipayUserAgreementPageSignModel(object):
     def third_party_type(self, value):
         self._third_party_type = value
     @property
+    def user_age_range(self):
+        return self._user_age_range
+
+    @user_age_range.setter
+    def user_age_range(self, value):
+        self._user_age_range = value
+    @property
     def zm_auth_params(self):
         return self._zm_auth_params
 
@@ -236,6 +244,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['third_party_type'] = self.third_party_type.to_alipay_dict()
             else:
                 params['third_party_type'] = self.third_party_type
+        if self.user_age_range:
+            if hasattr(self.user_age_range, 'to_alipay_dict'):
+                params['user_age_range'] = self.user_age_range.to_alipay_dict()
+            else:
+                params['user_age_range'] = self.user_age_range
         if self.zm_auth_params:
             if hasattr(self.zm_auth_params, 'to_alipay_dict'):
                 params['zm_auth_params'] = self.zm_auth_params.to_alipay_dict()
@@ -278,6 +291,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.sub_merchant = d['sub_merchant']
         if 'third_party_type' in d:
             o.third_party_type = d['third_party_type']
+        if 'user_age_range' in d:
+            o.user_age_range = d['user_age_range']
         if 'zm_auth_params' in d:
             o.zm_auth_params = d['zm_auth_params']
         return o

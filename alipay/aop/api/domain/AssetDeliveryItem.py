@@ -13,10 +13,12 @@ class AssetDeliveryItem(object):
     def __init__(self):
         self._action_type = None
         self._amount = None
+        self._apply_order_date = None
         self._apply_order_id = None
         self._assign_item_id = None
         self._assign_out_order_id = None
         self._biz_tag = None
+        self._biz_type = None
         self._from_address = None
         self._gmt_assign = None
         self._item_id = None
@@ -25,6 +27,7 @@ class AssetDeliveryItem(object):
         self._memo = None
         self._ou_code = None
         self._ou_name = None
+        self._out_biz_no = None
         self._parent_item_id = None
         self._print_data = None
         self._produce_order_item_id = None
@@ -47,6 +50,13 @@ class AssetDeliveryItem(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def apply_order_date(self):
+        return self._apply_order_date
+
+    @apply_order_date.setter
+    def apply_order_date(self, value):
+        self._apply_order_date = value
     @property
     def apply_order_id(self):
         return self._apply_order_id
@@ -75,6 +85,13 @@ class AssetDeliveryItem(object):
     @biz_tag.setter
     def biz_tag(self, value):
         self._biz_tag = value
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def from_address(self):
         return self._from_address
@@ -137,6 +154,13 @@ class AssetDeliveryItem(object):
     @ou_name.setter
     def ou_name(self, value):
         self._ou_name = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def parent_item_id(self):
         return self._parent_item_id
@@ -203,6 +227,11 @@ class AssetDeliveryItem(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.apply_order_date:
+            if hasattr(self.apply_order_date, 'to_alipay_dict'):
+                params['apply_order_date'] = self.apply_order_date.to_alipay_dict()
+            else:
+                params['apply_order_date'] = self.apply_order_date
         if self.apply_order_id:
             if hasattr(self.apply_order_id, 'to_alipay_dict'):
                 params['apply_order_id'] = self.apply_order_id.to_alipay_dict()
@@ -223,6 +252,11 @@ class AssetDeliveryItem(object):
                 params['biz_tag'] = self.biz_tag.to_alipay_dict()
             else:
                 params['biz_tag'] = self.biz_tag
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.from_address:
             if hasattr(self.from_address, 'to_alipay_dict'):
                 params['from_address'] = self.from_address.to_alipay_dict()
@@ -263,6 +297,11 @@ class AssetDeliveryItem(object):
                 params['ou_name'] = self.ou_name.to_alipay_dict()
             else:
                 params['ou_name'] = self.ou_name
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.parent_item_id:
             if hasattr(self.parent_item_id, 'to_alipay_dict'):
                 params['parent_item_id'] = self.parent_item_id.to_alipay_dict()
@@ -309,6 +348,8 @@ class AssetDeliveryItem(object):
             o.action_type = d['action_type']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'apply_order_date' in d:
+            o.apply_order_date = d['apply_order_date']
         if 'apply_order_id' in d:
             o.apply_order_id = d['apply_order_id']
         if 'assign_item_id' in d:
@@ -317,6 +358,8 @@ class AssetDeliveryItem(object):
             o.assign_out_order_id = d['assign_out_order_id']
         if 'biz_tag' in d:
             o.biz_tag = d['biz_tag']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'from_address' in d:
             o.from_address = d['from_address']
         if 'gmt_assign' in d:
@@ -333,6 +376,8 @@ class AssetDeliveryItem(object):
             o.ou_code = d['ou_code']
         if 'ou_name' in d:
             o.ou_name = d['ou_name']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'parent_item_id' in d:
             o.parent_item_id = d['parent_item_id']
         if 'print_data' in d:

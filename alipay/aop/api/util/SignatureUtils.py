@@ -56,5 +56,5 @@ def sign_with_rsa2(private_key, sign_content, charset):
 def verify_with_rsa(public_key, message, sign):
     public_key = fill_public_key_marker(public_key)
     sign = base64.b64decode(sign)
-    return rsa.verify(message, sign, rsa.PublicKey.load_pkcs1_openssl_pem(public_key))
+    return bool(rsa.verify(message, sign, rsa.PublicKey.load_pkcs1_openssl_pem(public_key)))
 

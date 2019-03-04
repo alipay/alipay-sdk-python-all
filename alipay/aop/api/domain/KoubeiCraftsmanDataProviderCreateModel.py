@@ -108,10 +108,7 @@ class KoubeiCraftsmanDataProviderCreateModel(object):
 
     @specialities.setter
     def specialities(self, value):
-        if isinstance(value, list):
-            self._specialities = list()
-            for i in value:
-                self._specialities.append(i)
+        self._specialities = value
     @property
     def tel_num(self):
         return self._tel_num
@@ -191,11 +188,6 @@ class KoubeiCraftsmanDataProviderCreateModel(object):
             else:
                 params['shop_relations'] = self.shop_relations
         if self.specialities:
-            if isinstance(self.specialities, list):
-                for i in range(0, len(self.specialities)):
-                    element = self.specialities[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.specialities[i] = element.to_alipay_dict()
             if hasattr(self.specialities, 'to_alipay_dict'):
                 params['specialities'] = self.specialities.to_alipay_dict()
             else:

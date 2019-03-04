@@ -8,8 +8,13 @@ from alipay.aop.api.constant.ParamConstants import *
 class ParamModel(object):
 
     def __init__(self):
+        self._cabinet_enabled = None
         self._carry_rule = None
         self._dining_mode = None
+        self._kds_display_mode = None
+        self._kds_enabled = None
+        self._kds_voice_call_enabled = None
+        self._multi_cabinet_per_order_allowed = None
         self._open_ele = None
         self._reason_flag = None
         self._shop_id = None
@@ -18,6 +23,13 @@ class ParamModel(object):
         self._tail_number_rule = None
         self._takeout_auto_receipt = None
 
+    @property
+    def cabinet_enabled(self):
+        return self._cabinet_enabled
+
+    @cabinet_enabled.setter
+    def cabinet_enabled(self, value):
+        self._cabinet_enabled = value
     @property
     def carry_rule(self):
         return self._carry_rule
@@ -32,6 +44,34 @@ class ParamModel(object):
     @dining_mode.setter
     def dining_mode(self, value):
         self._dining_mode = value
+    @property
+    def kds_display_mode(self):
+        return self._kds_display_mode
+
+    @kds_display_mode.setter
+    def kds_display_mode(self, value):
+        self._kds_display_mode = value
+    @property
+    def kds_enabled(self):
+        return self._kds_enabled
+
+    @kds_enabled.setter
+    def kds_enabled(self, value):
+        self._kds_enabled = value
+    @property
+    def kds_voice_call_enabled(self):
+        return self._kds_voice_call_enabled
+
+    @kds_voice_call_enabled.setter
+    def kds_voice_call_enabled(self, value):
+        self._kds_voice_call_enabled = value
+    @property
+    def multi_cabinet_per_order_allowed(self):
+        return self._multi_cabinet_per_order_allowed
+
+    @multi_cabinet_per_order_allowed.setter
+    def multi_cabinet_per_order_allowed(self, value):
+        self._multi_cabinet_per_order_allowed = value
     @property
     def open_ele(self):
         return self._open_ele
@@ -85,6 +125,11 @@ class ParamModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cabinet_enabled:
+            if hasattr(self.cabinet_enabled, 'to_alipay_dict'):
+                params['cabinet_enabled'] = self.cabinet_enabled.to_alipay_dict()
+            else:
+                params['cabinet_enabled'] = self.cabinet_enabled
         if self.carry_rule:
             if hasattr(self.carry_rule, 'to_alipay_dict'):
                 params['carry_rule'] = self.carry_rule.to_alipay_dict()
@@ -95,6 +140,26 @@ class ParamModel(object):
                 params['dining_mode'] = self.dining_mode.to_alipay_dict()
             else:
                 params['dining_mode'] = self.dining_mode
+        if self.kds_display_mode:
+            if hasattr(self.kds_display_mode, 'to_alipay_dict'):
+                params['kds_display_mode'] = self.kds_display_mode.to_alipay_dict()
+            else:
+                params['kds_display_mode'] = self.kds_display_mode
+        if self.kds_enabled:
+            if hasattr(self.kds_enabled, 'to_alipay_dict'):
+                params['kds_enabled'] = self.kds_enabled.to_alipay_dict()
+            else:
+                params['kds_enabled'] = self.kds_enabled
+        if self.kds_voice_call_enabled:
+            if hasattr(self.kds_voice_call_enabled, 'to_alipay_dict'):
+                params['kds_voice_call_enabled'] = self.kds_voice_call_enabled.to_alipay_dict()
+            else:
+                params['kds_voice_call_enabled'] = self.kds_voice_call_enabled
+        if self.multi_cabinet_per_order_allowed:
+            if hasattr(self.multi_cabinet_per_order_allowed, 'to_alipay_dict'):
+                params['multi_cabinet_per_order_allowed'] = self.multi_cabinet_per_order_allowed.to_alipay_dict()
+            else:
+                params['multi_cabinet_per_order_allowed'] = self.multi_cabinet_per_order_allowed
         if self.open_ele:
             if hasattr(self.open_ele, 'to_alipay_dict'):
                 params['open_ele'] = self.open_ele.to_alipay_dict()
@@ -137,10 +202,20 @@ class ParamModel(object):
         if not d:
             return None
         o = ParamModel()
+        if 'cabinet_enabled' in d:
+            o.cabinet_enabled = d['cabinet_enabled']
         if 'carry_rule' in d:
             o.carry_rule = d['carry_rule']
         if 'dining_mode' in d:
             o.dining_mode = d['dining_mode']
+        if 'kds_display_mode' in d:
+            o.kds_display_mode = d['kds_display_mode']
+        if 'kds_enabled' in d:
+            o.kds_enabled = d['kds_enabled']
+        if 'kds_voice_call_enabled' in d:
+            o.kds_voice_call_enabled = d['kds_voice_call_enabled']
+        if 'multi_cabinet_per_order_allowed' in d:
+            o.multi_cabinet_per_order_allowed = d['multi_cabinet_per_order_allowed']
         if 'open_ele' in d:
             o.open_ele = d['open_ele']
         if 'reason_flag' in d:

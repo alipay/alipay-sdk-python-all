@@ -12,6 +12,7 @@ class MybankCreditSupplychainFactoringSupplierCreateModel(object):
         self._buyer_ip_role_id = None
         self._buyer_site = None
         self._buyer_site_user_id = None
+        self._rcv_account_type = None
         self._seller_bank_acc = None
         self._seller_bank_acc_name = None
         self._seller_bank_branch_union_code = None
@@ -49,6 +50,13 @@ class MybankCreditSupplychainFactoringSupplierCreateModel(object):
     @buyer_site_user_id.setter
     def buyer_site_user_id(self, value):
         self._buyer_site_user_id = value
+    @property
+    def rcv_account_type(self):
+        return self._rcv_account_type
+
+    @rcv_account_type.setter
+    def rcv_account_type(self, value):
+        self._rcv_account_type = value
     @property
     def seller_bank_acc(self):
         return self._seller_bank_acc
@@ -129,6 +137,11 @@ class MybankCreditSupplychainFactoringSupplierCreateModel(object):
                 params['buyer_site_user_id'] = self.buyer_site_user_id.to_alipay_dict()
             else:
                 params['buyer_site_user_id'] = self.buyer_site_user_id
+        if self.rcv_account_type:
+            if hasattr(self.rcv_account_type, 'to_alipay_dict'):
+                params['rcv_account_type'] = self.rcv_account_type.to_alipay_dict()
+            else:
+                params['rcv_account_type'] = self.rcv_account_type
         if self.seller_bank_acc:
             if hasattr(self.seller_bank_acc, 'to_alipay_dict'):
                 params['seller_bank_acc'] = self.seller_bank_acc.to_alipay_dict()
@@ -184,6 +197,8 @@ class MybankCreditSupplychainFactoringSupplierCreateModel(object):
             o.buyer_site = d['buyer_site']
         if 'buyer_site_user_id' in d:
             o.buyer_site_user_id = d['buyer_site_user_id']
+        if 'rcv_account_type' in d:
+            o.rcv_account_type = d['rcv_account_type']
         if 'seller_bank_acc' in d:
             o.seller_bank_acc = d['seller_bank_acc']
         if 'seller_bank_acc_name' in d:

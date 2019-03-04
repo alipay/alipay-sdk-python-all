@@ -12,6 +12,7 @@ class AlipayInsSceneProductInquiryApplyModel(object):
     def __init__(self):
         self._applicant = None
         self._biz_data = None
+        self._copies_count = None
         self._insureds = None
         self._out_biz_no = None
         self._period = None
@@ -36,6 +37,13 @@ class AlipayInsSceneProductInquiryApplyModel(object):
     @biz_data.setter
     def biz_data(self, value):
         self._biz_data = value
+    @property
+    def copies_count(self):
+        return self._copies_count
+
+    @copies_count.setter
+    def copies_count(self, value):
+        self._copies_count = value
     @property
     def insureds(self):
         return self._insureds
@@ -98,6 +106,11 @@ class AlipayInsSceneProductInquiryApplyModel(object):
                 params['biz_data'] = self.biz_data.to_alipay_dict()
             else:
                 params['biz_data'] = self.biz_data
+        if self.copies_count:
+            if hasattr(self.copies_count, 'to_alipay_dict'):
+                params['copies_count'] = self.copies_count.to_alipay_dict()
+            else:
+                params['copies_count'] = self.copies_count
         if self.insureds:
             if isinstance(self.insureds, list):
                 for i in range(0, len(self.insureds)):
@@ -144,6 +157,8 @@ class AlipayInsSceneProductInquiryApplyModel(object):
             o.applicant = d['applicant']
         if 'biz_data' in d:
             o.biz_data = d['biz_data']
+        if 'copies_count' in d:
+            o.copies_count = d['copies_count']
         if 'insureds' in d:
             o.insureds = d['insureds']
         if 'out_biz_no' in d:

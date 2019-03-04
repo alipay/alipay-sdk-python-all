@@ -12,7 +12,9 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeQueryResponse, self).__init__()
         self._alipay_store_id = None
+        self._alipay_sub_merchant_id = None
         self._auth_trade_pay_mode = None
+        self._body = None
         self._buyer_logon_id = None
         self._buyer_pay_amount = None
         self._buyer_user_id = None
@@ -39,6 +41,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._settlement_id = None
         self._store_id = None
         self._store_name = None
+        self._subject = None
         self._terminal_id = None
         self._total_amount = None
         self._trade_no = None
@@ -55,12 +58,26 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def alipay_store_id(self, value):
         self._alipay_store_id = value
     @property
+    def alipay_sub_merchant_id(self):
+        return self._alipay_sub_merchant_id
+
+    @alipay_sub_merchant_id.setter
+    def alipay_sub_merchant_id(self, value):
+        self._alipay_sub_merchant_id = value
+    @property
     def auth_trade_pay_mode(self):
         return self._auth_trade_pay_mode
 
     @auth_trade_pay_mode.setter
     def auth_trade_pay_mode(self, value):
         self._auth_trade_pay_mode = value
+    @property
+    def body(self):
+        return self._body
+
+    @body.setter
+    def body(self, value):
+        self._body = value
     @property
     def buyer_logon_id(self):
         return self._buyer_logon_id
@@ -250,6 +267,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def store_name(self, value):
         self._store_name = value
     @property
+    def subject(self):
+        return self._subject
+
+    @subject.setter
+    def subject(self, value):
+        self._subject = value
+    @property
     def terminal_id(self):
         return self._terminal_id
 
@@ -309,8 +333,12 @@ class AlipayTradeQueryResponse(AlipayResponse):
         response = super(AlipayTradeQueryResponse, self).parse_response_content(response_content)
         if 'alipay_store_id' in response:
             self.alipay_store_id = response['alipay_store_id']
+        if 'alipay_sub_merchant_id' in response:
+            self.alipay_sub_merchant_id = response['alipay_sub_merchant_id']
         if 'auth_trade_pay_mode' in response:
             self.auth_trade_pay_mode = response['auth_trade_pay_mode']
+        if 'body' in response:
+            self.body = response['body']
         if 'buyer_logon_id' in response:
             self.buyer_logon_id = response['buyer_logon_id']
         if 'buyer_pay_amount' in response:
@@ -363,6 +391,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.store_id = response['store_id']
         if 'store_name' in response:
             self.store_name = response['store_name']
+        if 'subject' in response:
+            self.subject = response['subject']
         if 'terminal_id' in response:
             self.terminal_id = response['terminal_id']
         if 'total_amount' in response:

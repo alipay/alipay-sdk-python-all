@@ -13,6 +13,7 @@ class AssetResult(object):
         self._batch_no = None
         self._error_code = None
         self._error_desc = None
+        self._request_id = None
         self._sub_feedback_infos = None
         self._success = None
 
@@ -44,6 +45,13 @@ class AssetResult(object):
     @error_desc.setter
     def error_desc(self, value):
         self._error_desc = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
     @property
     def sub_feedback_infos(self):
         return self._sub_feedback_infos
@@ -88,6 +96,11 @@ class AssetResult(object):
                 params['error_desc'] = self.error_desc.to_alipay_dict()
             else:
                 params['error_desc'] = self.error_desc
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
         if self.sub_feedback_infos:
             if isinstance(self.sub_feedback_infos, list):
                 for i in range(0, len(self.sub_feedback_infos)):
@@ -118,6 +131,8 @@ class AssetResult(object):
             o.error_code = d['error_code']
         if 'error_desc' in d:
             o.error_desc = d['error_desc']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
         if 'sub_feedback_infos' in d:
             o.sub_feedback_infos = d['sub_feedback_infos']
         if 'success' in d:
