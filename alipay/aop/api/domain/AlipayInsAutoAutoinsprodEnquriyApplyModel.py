@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsPerson import InsPerson
+from alipay.aop.api.domain.AgentOrganization import AgentOrganization
+from alipay.aop.api.domain.AgentOrganization import AgentOrganization
 from alipay.aop.api.domain.InsPerson import InsPerson
 from alipay.aop.api.domain.Car import Car
 from alipay.aop.api.domain.InsPerson import InsPerson
@@ -14,6 +16,8 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
 
     def __init__(self):
         self._agent = None
+        self._agent_organization = None
+        self._agent_tech_organization = None
         self._agent_user_id = None
         self._applicant = None
         self._car = None
@@ -32,6 +36,26 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
             self._agent = value
         else:
             self._agent = InsPerson.from_alipay_dict(value)
+    @property
+    def agent_organization(self):
+        return self._agent_organization
+
+    @agent_organization.setter
+    def agent_organization(self, value):
+        if isinstance(value, AgentOrganization):
+            self._agent_organization = value
+        else:
+            self._agent_organization = AgentOrganization.from_alipay_dict(value)
+    @property
+    def agent_tech_organization(self):
+        return self._agent_tech_organization
+
+    @agent_tech_organization.setter
+    def agent_tech_organization(self, value):
+        if isinstance(value, AgentOrganization):
+            self._agent_tech_organization = value
+        else:
+            self._agent_tech_organization = AgentOrganization.from_alipay_dict(value)
     @property
     def agent_user_id(self):
         return self._agent_user_id
@@ -102,6 +126,16 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
                 params['agent'] = self.agent.to_alipay_dict()
             else:
                 params['agent'] = self.agent
+        if self.agent_organization:
+            if hasattr(self.agent_organization, 'to_alipay_dict'):
+                params['agent_organization'] = self.agent_organization.to_alipay_dict()
+            else:
+                params['agent_organization'] = self.agent_organization
+        if self.agent_tech_organization:
+            if hasattr(self.agent_tech_organization, 'to_alipay_dict'):
+                params['agent_tech_organization'] = self.agent_tech_organization.to_alipay_dict()
+            else:
+                params['agent_tech_organization'] = self.agent_tech_organization
         if self.agent_user_id:
             if hasattr(self.agent_user_id, 'to_alipay_dict'):
                 params['agent_user_id'] = self.agent_user_id.to_alipay_dict()
@@ -146,6 +180,10 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
         o = AlipayInsAutoAutoinsprodEnquriyApplyModel()
         if 'agent' in d:
             o.agent = d['agent']
+        if 'agent_organization' in d:
+            o.agent_organization = d['agent_organization']
+        if 'agent_tech_organization' in d:
+            o.agent_tech_organization = d['agent_tech_organization']
         if 'agent_user_id' in d:
             o.agent_user_id = d['agent_user_id']
         if 'applicant' in d:

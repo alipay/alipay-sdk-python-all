@@ -15,6 +15,7 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
         self._check_code_id = None
         self._check_type = None
         self._company_id = None
+        self._company_ids = None
         self._enquiry_biz_id = None
         self._force_product = None
         self._quote_type = None
@@ -57,6 +58,16 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
     @company_id.setter
     def company_id(self, value):
         self._company_id = value
+    @property
+    def company_ids(self):
+        return self._company_ids
+
+    @company_ids.setter
+    def company_ids(self, value):
+        if isinstance(value, list):
+            self._company_ids = list()
+            for i in value:
+                self._company_ids.append(i)
     @property
     def enquiry_biz_id(self):
         return self._enquiry_biz_id
@@ -110,6 +121,16 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
                 params['company_id'] = self.company_id.to_alipay_dict()
             else:
                 params['company_id'] = self.company_id
+        if self.company_ids:
+            if isinstance(self.company_ids, list):
+                for i in range(0, len(self.company_ids)):
+                    element = self.company_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.company_ids[i] = element.to_alipay_dict()
+            if hasattr(self.company_ids, 'to_alipay_dict'):
+                params['company_ids'] = self.company_ids.to_alipay_dict()
+            else:
+                params['company_ids'] = self.company_ids
         if self.enquiry_biz_id:
             if hasattr(self.enquiry_biz_id, 'to_alipay_dict'):
                 params['enquiry_biz_id'] = self.enquiry_biz_id.to_alipay_dict()
@@ -142,6 +163,8 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
             o.check_type = d['check_type']
         if 'company_id' in d:
             o.company_id = d['company_id']
+        if 'company_ids' in d:
+            o.company_ids = d['company_ids']
         if 'enquiry_biz_id' in d:
             o.enquiry_biz_id = d['enquiry_biz_id']
         if 'force_product' in d:

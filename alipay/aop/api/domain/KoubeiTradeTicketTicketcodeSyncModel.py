@@ -13,6 +13,7 @@ class KoubeiTradeTicketTicketcodeSyncModel(object):
         self._order_no = None
         self._quantity = None
         self._request_id = None
+        self._sync_shop_id = None
         self._ticket_code = None
 
     @property
@@ -51,6 +52,13 @@ class KoubeiTradeTicketTicketcodeSyncModel(object):
     def request_id(self, value):
         self._request_id = value
     @property
+    def sync_shop_id(self):
+        return self._sync_shop_id
+
+    @sync_shop_id.setter
+    def sync_shop_id(self, value):
+        self._sync_shop_id = value
+    @property
     def ticket_code(self):
         return self._ticket_code
 
@@ -86,6 +94,11 @@ class KoubeiTradeTicketTicketcodeSyncModel(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.sync_shop_id:
+            if hasattr(self.sync_shop_id, 'to_alipay_dict'):
+                params['sync_shop_id'] = self.sync_shop_id.to_alipay_dict()
+            else:
+                params['sync_shop_id'] = self.sync_shop_id
         if self.ticket_code:
             if hasattr(self.ticket_code, 'to_alipay_dict'):
                 params['ticket_code'] = self.ticket_code.to_alipay_dict()
@@ -108,6 +121,8 @@ class KoubeiTradeTicketTicketcodeSyncModel(object):
             o.quantity = d['quantity']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'sync_shop_id' in d:
+            o.sync_shop_id = d['sync_shop_id']
         if 'ticket_code' in d:
             o.ticket_code = d['ticket_code']
         return o

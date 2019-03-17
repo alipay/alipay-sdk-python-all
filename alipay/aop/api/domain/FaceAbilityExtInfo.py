@@ -13,6 +13,8 @@ class FaceAbilityExtInfo(object):
         self._cert_no = None
         self._cert_type = None
         self._channel = None
+        self._choose_face_rule = None
+        self._face_data_type = None
         self._feature = None
         self._hasrisk = None
         self._quality = None
@@ -55,6 +57,20 @@ class FaceAbilityExtInfo(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def choose_face_rule(self):
+        return self._choose_face_rule
+
+    @choose_face_rule.setter
+    def choose_face_rule(self, value):
+        self._choose_face_rule = value
+    @property
+    def face_data_type(self):
+        return self._face_data_type
+
+    @face_data_type.setter
+    def face_data_type(self, value):
+        self._face_data_type = value
     @property
     def feature(self):
         return self._feature
@@ -126,6 +142,16 @@ class FaceAbilityExtInfo(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.choose_face_rule:
+            if hasattr(self.choose_face_rule, 'to_alipay_dict'):
+                params['choose_face_rule'] = self.choose_face_rule.to_alipay_dict()
+            else:
+                params['choose_face_rule'] = self.choose_face_rule
+        if self.face_data_type:
+            if hasattr(self.face_data_type, 'to_alipay_dict'):
+                params['face_data_type'] = self.face_data_type.to_alipay_dict()
+            else:
+                params['face_data_type'] = self.face_data_type
         if self.feature:
             if hasattr(self.feature, 'to_alipay_dict'):
                 params['feature'] = self.feature.to_alipay_dict()
@@ -173,6 +199,10 @@ class FaceAbilityExtInfo(object):
             o.cert_type = d['cert_type']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'choose_face_rule' in d:
+            o.choose_face_rule = d['choose_face_rule']
+        if 'face_data_type' in d:
+            o.face_data_type = d['face_data_type']
         if 'feature' in d:
             o.feature = d['feature']
         if 'hasrisk' in d:

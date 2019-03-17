@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.VehicleInfo import VehicleInfo
+from alipay.aop.api.domain.VehicleInfo import VehicleInfo
 
 
 class Car(object):
@@ -18,6 +19,7 @@ class Car(object):
         self._license_address = None
         self._transfer_car = None
         self._transfer_date = None
+        self._vehicle_info = None
         self._vehicle_info_list = None
         self._vehicle_type = None
 
@@ -84,6 +86,16 @@ class Car(object):
     @transfer_date.setter
     def transfer_date(self, value):
         self._transfer_date = value
+    @property
+    def vehicle_info(self):
+        return self._vehicle_info
+
+    @vehicle_info.setter
+    def vehicle_info(self, value):
+        if isinstance(value, VehicleInfo):
+            self._vehicle_info = value
+        else:
+            self._vehicle_info = VehicleInfo.from_alipay_dict(value)
     @property
     def vehicle_info_list(self):
         return self._vehicle_info_list
@@ -153,6 +165,11 @@ class Car(object):
                 params['transfer_date'] = self.transfer_date.to_alipay_dict()
             else:
                 params['transfer_date'] = self.transfer_date
+        if self.vehicle_info:
+            if hasattr(self.vehicle_info, 'to_alipay_dict'):
+                params['vehicle_info'] = self.vehicle_info.to_alipay_dict()
+            else:
+                params['vehicle_info'] = self.vehicle_info
         if self.vehicle_info_list:
             if isinstance(self.vehicle_info_list, list):
                 for i in range(0, len(self.vehicle_info_list)):
@@ -193,6 +210,8 @@ class Car(object):
             o.transfer_car = d['transfer_car']
         if 'transfer_date' in d:
             o.transfer_date = d['transfer_date']
+        if 'vehicle_info' in d:
+            o.vehicle_info = d['vehicle_info']
         if 'vehicle_info_list' in d:
             o.vehicle_info_list = d['vehicle_info_list']
         if 'vehicle_type' in d:

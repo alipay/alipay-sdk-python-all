@@ -10,6 +10,7 @@ class VehicleInfo(object):
     def __init__(self):
         self._company_id = None
         self._vehicle_code = None
+        self._vehicle_subject_code = None
 
     @property
     def company_id(self):
@@ -25,6 +26,13 @@ class VehicleInfo(object):
     @vehicle_code.setter
     def vehicle_code(self, value):
         self._vehicle_code = value
+    @property
+    def vehicle_subject_code(self):
+        return self._vehicle_subject_code
+
+    @vehicle_subject_code.setter
+    def vehicle_subject_code(self, value):
+        self._vehicle_subject_code = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class VehicleInfo(object):
                 params['vehicle_code'] = self.vehicle_code.to_alipay_dict()
             else:
                 params['vehicle_code'] = self.vehicle_code
+        if self.vehicle_subject_code:
+            if hasattr(self.vehicle_subject_code, 'to_alipay_dict'):
+                params['vehicle_subject_code'] = self.vehicle_subject_code.to_alipay_dict()
+            else:
+                params['vehicle_subject_code'] = self.vehicle_subject_code
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class VehicleInfo(object):
             o.company_id = d['company_id']
         if 'vehicle_code' in d:
             o.vehicle_code = d['vehicle_code']
+        if 'vehicle_subject_code' in d:
+            o.vehicle_subject_code = d['vehicle_subject_code']
         return o
 
 

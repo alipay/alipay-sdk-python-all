@@ -9,10 +9,26 @@ from alipay.aop.api.domain.KbdishPropertyValueInfo import KbdishPropertyValueInf
 class KbdishPropertyInfo(object):
 
     def __init__(self):
+        self._max_count_limit = None
+        self._min_count_limit = None
         self._property_name = None
         self._property_value_info_list = None
         self._sort = None
 
+    @property
+    def max_count_limit(self):
+        return self._max_count_limit
+
+    @max_count_limit.setter
+    def max_count_limit(self, value):
+        self._max_count_limit = value
+    @property
+    def min_count_limit(self):
+        return self._min_count_limit
+
+    @min_count_limit.setter
+    def min_count_limit(self, value):
+        self._min_count_limit = value
     @property
     def property_name(self):
         return self._property_name
@@ -44,6 +60,16 @@ class KbdishPropertyInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.max_count_limit:
+            if hasattr(self.max_count_limit, 'to_alipay_dict'):
+                params['max_count_limit'] = self.max_count_limit.to_alipay_dict()
+            else:
+                params['max_count_limit'] = self.max_count_limit
+        if self.min_count_limit:
+            if hasattr(self.min_count_limit, 'to_alipay_dict'):
+                params['min_count_limit'] = self.min_count_limit.to_alipay_dict()
+            else:
+                params['min_count_limit'] = self.min_count_limit
         if self.property_name:
             if hasattr(self.property_name, 'to_alipay_dict'):
                 params['property_name'] = self.property_name.to_alipay_dict()
@@ -71,6 +97,10 @@ class KbdishPropertyInfo(object):
         if not d:
             return None
         o = KbdishPropertyInfo()
+        if 'max_count_limit' in d:
+            o.max_count_limit = d['max_count_limit']
+        if 'min_count_limit' in d:
+            o.min_count_limit = d['min_count_limit']
         if 'property_name' in d:
             o.property_name = d['property_name']
         if 'property_value_info_list' in d:

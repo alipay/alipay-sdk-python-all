@@ -16,6 +16,7 @@ class KbdishGroupInfo(object):
         self._group_rule = None
         self._group_version = None
         self._merchant_id = None
+        self._min_count_limit = None
         self._status = None
         self._unit_count_limit = None
         self._update_user = None
@@ -75,6 +76,13 @@ class KbdishGroupInfo(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def min_count_limit(self):
+        return self._min_count_limit
+
+    @min_count_limit.setter
+    def min_count_limit(self, value):
+        self._min_count_limit = value
     @property
     def status(self):
         return self._status
@@ -140,6 +148,11 @@ class KbdishGroupInfo(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.min_count_limit:
+            if hasattr(self.min_count_limit, 'to_alipay_dict'):
+                params['min_count_limit'] = self.min_count_limit.to_alipay_dict()
+            else:
+                params['min_count_limit'] = self.min_count_limit
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -176,6 +189,8 @@ class KbdishGroupInfo(object):
             o.group_version = d['group_version']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'min_count_limit' in d:
+            o.min_count_limit = d['min_count_limit']
         if 'status' in d:
             o.status = d['status']
         if 'unit_count_limit' in d:
