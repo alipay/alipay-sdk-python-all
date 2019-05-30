@@ -9,6 +9,7 @@ class AlipayMarketingCampaignDiscountBudgetCreateModel(object):
 
     def __init__(self):
         self._biz_from = None
+        self._fund_type = None
         self._gmt_end = None
         self._name = None
         self._out_biz_no = None
@@ -23,6 +24,13 @@ class AlipayMarketingCampaignDiscountBudgetCreateModel(object):
     @biz_from.setter
     def biz_from(self, value):
         self._biz_from = value
+    @property
+    def fund_type(self):
+        return self._fund_type
+
+    @fund_type.setter
+    def fund_type(self, value):
+        self._fund_type = value
     @property
     def gmt_end(self):
         return self._gmt_end
@@ -74,6 +82,11 @@ class AlipayMarketingCampaignDiscountBudgetCreateModel(object):
                 params['biz_from'] = self.biz_from.to_alipay_dict()
             else:
                 params['biz_from'] = self.biz_from
+        if self.fund_type:
+            if hasattr(self.fund_type, 'to_alipay_dict'):
+                params['fund_type'] = self.fund_type.to_alipay_dict()
+            else:
+                params['fund_type'] = self.fund_type
         if self.gmt_end:
             if hasattr(self.gmt_end, 'to_alipay_dict'):
                 params['gmt_end'] = self.gmt_end.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayMarketingCampaignDiscountBudgetCreateModel(object):
         o = AlipayMarketingCampaignDiscountBudgetCreateModel()
         if 'biz_from' in d:
             o.biz_from = d['biz_from']
+        if 'fund_type' in d:
+            o.fund_type = d['fund_type']
         if 'gmt_end' in d:
             o.gmt_end = d['gmt_end']
         if 'name' in d:

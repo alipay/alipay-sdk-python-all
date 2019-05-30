@@ -12,6 +12,7 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
         self._agreement_no = None
         self._alipay_user_id = None
         self._extend_params = None
+        self._need_terminated = None
         self._out_request_no = None
         self._pay_amount = None
         self._seller_id = None
@@ -40,6 +41,13 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
             self._extend_params = value
         else:
             self._extend_params = ExtraParams.from_alipay_dict(value)
+    @property
+    def need_terminated(self):
+        return self._need_terminated
+
+    @need_terminated.setter
+    def need_terminated(self, value):
+        self._need_terminated = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -80,6 +88,11 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.need_terminated:
+            if hasattr(self.need_terminated, 'to_alipay_dict'):
+                params['need_terminated'] = self.need_terminated.to_alipay_dict()
+            else:
+                params['need_terminated'] = self.need_terminated
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'need_terminated' in d:
+            o.need_terminated = d['need_terminated']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'pay_amount' in d:

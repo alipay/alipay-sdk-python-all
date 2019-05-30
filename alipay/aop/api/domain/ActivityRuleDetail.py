@@ -11,6 +11,7 @@ class ActivityRuleDetail(object):
         self._rule_amount = None
         self._rule_discount = None
         self._rule_period = None
+        self._rule_period_unit = None
         self._rule_times = None
 
     @property
@@ -34,6 +35,13 @@ class ActivityRuleDetail(object):
     @rule_period.setter
     def rule_period(self, value):
         self._rule_period = value
+    @property
+    def rule_period_unit(self):
+        return self._rule_period_unit
+
+    @rule_period_unit.setter
+    def rule_period_unit(self, value):
+        self._rule_period_unit = value
     @property
     def rule_times(self):
         return self._rule_times
@@ -60,6 +68,11 @@ class ActivityRuleDetail(object):
                 params['rule_period'] = self.rule_period.to_alipay_dict()
             else:
                 params['rule_period'] = self.rule_period
+        if self.rule_period_unit:
+            if hasattr(self.rule_period_unit, 'to_alipay_dict'):
+                params['rule_period_unit'] = self.rule_period_unit.to_alipay_dict()
+            else:
+                params['rule_period_unit'] = self.rule_period_unit
         if self.rule_times:
             if hasattr(self.rule_times, 'to_alipay_dict'):
                 params['rule_times'] = self.rule_times.to_alipay_dict()
@@ -78,6 +91,8 @@ class ActivityRuleDetail(object):
             o.rule_discount = d['rule_discount']
         if 'rule_period' in d:
             o.rule_period = d['rule_period']
+        if 'rule_period_unit' in d:
+            o.rule_period_unit = d['rule_period_unit']
         if 'rule_times' in d:
             o.rule_times = d['rule_times']
         return o

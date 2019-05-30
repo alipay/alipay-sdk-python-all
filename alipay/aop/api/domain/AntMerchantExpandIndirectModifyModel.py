@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.BankCardInfo import BankCardInfo
 from alipay.aop.api.domain.ContactInfo import ContactInfo
+from alipay.aop.api.domain.SiteInfo import SiteInfo
 
 
 class AntMerchantExpandIndirectModifyModel(object):
@@ -25,7 +26,9 @@ class AntMerchantExpandIndirectModifyModel(object):
         self._name = None
         self._org_pid = None
         self._pay_code_info = None
+        self._service_codes = None
         self._service_phone = None
+        self._site_info = None
         self._source = None
         self._sub_merchant_id = None
 
@@ -152,12 +155,35 @@ class AntMerchantExpandIndirectModifyModel(object):
             for i in value:
                 self._pay_code_info.append(i)
     @property
+    def service_codes(self):
+        return self._service_codes
+
+    @service_codes.setter
+    def service_codes(self, value):
+        if isinstance(value, list):
+            self._service_codes = list()
+            for i in value:
+                self._service_codes.append(i)
+    @property
     def service_phone(self):
         return self._service_phone
 
     @service_phone.setter
     def service_phone(self, value):
         self._service_phone = value
+    @property
+    def site_info(self):
+        return self._site_info
+
+    @site_info.setter
+    def site_info(self, value):
+        if isinstance(value, list):
+            self._site_info = list()
+            for i in value:
+                if isinstance(i, SiteInfo):
+                    self._site_info.append(i)
+                else:
+                    self._site_info.append(SiteInfo.from_alipay_dict(i))
     @property
     def source(self):
         return self._source
@@ -271,11 +297,31 @@ class AntMerchantExpandIndirectModifyModel(object):
                 params['pay_code_info'] = self.pay_code_info.to_alipay_dict()
             else:
                 params['pay_code_info'] = self.pay_code_info
+        if self.service_codes:
+            if isinstance(self.service_codes, list):
+                for i in range(0, len(self.service_codes)):
+                    element = self.service_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_codes[i] = element.to_alipay_dict()
+            if hasattr(self.service_codes, 'to_alipay_dict'):
+                params['service_codes'] = self.service_codes.to_alipay_dict()
+            else:
+                params['service_codes'] = self.service_codes
         if self.service_phone:
             if hasattr(self.service_phone, 'to_alipay_dict'):
                 params['service_phone'] = self.service_phone.to_alipay_dict()
             else:
                 params['service_phone'] = self.service_phone
+        if self.site_info:
+            if isinstance(self.site_info, list):
+                for i in range(0, len(self.site_info)):
+                    element = self.site_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.site_info[i] = element.to_alipay_dict()
+            if hasattr(self.site_info, 'to_alipay_dict'):
+                params['site_info'] = self.site_info.to_alipay_dict()
+            else:
+                params['site_info'] = self.site_info
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -321,8 +367,12 @@ class AntMerchantExpandIndirectModifyModel(object):
             o.org_pid = d['org_pid']
         if 'pay_code_info' in d:
             o.pay_code_info = d['pay_code_info']
+        if 'service_codes' in d:
+            o.service_codes = d['service_codes']
         if 'service_phone' in d:
             o.service_phone = d['service_phone']
+        if 'site_info' in d:
+            o.site_info = d['site_info']
         if 'source' in d:
             o.source = d['source']
         if 'sub_merchant_id' in d:

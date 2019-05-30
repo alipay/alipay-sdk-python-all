@@ -24,6 +24,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._charge_flags = None
         self._discount_amount = None
         self._discount_goods_detail = None
+        self._ext_infos = None
         self._fund_bill_list = None
         self._industry_sepc_detail = None
         self._invoice_amount = None
@@ -141,6 +142,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @discount_goods_detail.setter
     def discount_goods_detail(self, value):
         self._discount_goods_detail = value
+    @property
+    def ext_infos(self):
+        return self._ext_infos
+
+    @ext_infos.setter
+    def ext_infos(self, value):
+        self._ext_infos = value
     @property
     def fund_bill_list(self):
         return self._fund_bill_list
@@ -357,6 +365,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
             self.discount_goods_detail = response['discount_goods_detail']
+        if 'ext_infos' in response:
+            self.ext_infos = response['ext_infos']
         if 'fund_bill_list' in response:
             self.fund_bill_list = response['fund_bill_list']
         if 'industry_sepc_detail' in response:

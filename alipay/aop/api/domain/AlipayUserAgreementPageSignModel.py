@@ -6,7 +6,9 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AccessParams import AccessParams
 from alipay.aop.api.domain.DeviceParams import DeviceParams
 from alipay.aop.api.domain.IdentityParams import IdentityParams
+from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.ProdParams import ProdParams
+from alipay.aop.api.domain.SubMerchantParams import SubMerchantParams
 from alipay.aop.api.domain.ZmAuthParams import ZmAuthParams
 
 
@@ -20,6 +22,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._external_logon_id = None
         self._identity_params = None
         self._merchant_process_url = None
+        self._period_rule_params = None
         self._personal_product_code = None
         self._prod_params = None
         self._product_code = None
@@ -90,6 +93,16 @@ class AlipayUserAgreementPageSignModel(object):
     def merchant_process_url(self, value):
         self._merchant_process_url = value
     @property
+    def period_rule_params(self):
+        return self._period_rule_params
+
+    @period_rule_params.setter
+    def period_rule_params(self, value):
+        if isinstance(value, PeriodRuleParams):
+            self._period_rule_params = value
+        else:
+            self._period_rule_params = PeriodRuleParams.from_alipay_dict(value)
+    @property
     def personal_product_code(self):
         return self._personal_product_code
 
@@ -140,7 +153,10 @@ class AlipayUserAgreementPageSignModel(object):
 
     @sub_merchant.setter
     def sub_merchant(self, value):
-        self._sub_merchant = value
+        if isinstance(value, SubMerchantParams):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchantParams.from_alipay_dict(value)
     @property
     def third_party_type(self):
         return self._third_party_type
@@ -204,6 +220,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['merchant_process_url'] = self.merchant_process_url.to_alipay_dict()
             else:
                 params['merchant_process_url'] = self.merchant_process_url
+        if self.period_rule_params:
+            if hasattr(self.period_rule_params, 'to_alipay_dict'):
+                params['period_rule_params'] = self.period_rule_params.to_alipay_dict()
+            else:
+                params['period_rule_params'] = self.period_rule_params
         if self.personal_product_code:
             if hasattr(self.personal_product_code, 'to_alipay_dict'):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
@@ -275,6 +296,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.identity_params = d['identity_params']
         if 'merchant_process_url' in d:
             o.merchant_process_url = d['merchant_process_url']
+        if 'period_rule_params' in d:
+            o.period_rule_params = d['period_rule_params']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
         if 'prod_params' in d:

@@ -22,6 +22,7 @@ class AlipayTradeAppPayModel(object):
         self._extend_params = None
         self._goods_type = None
         self._invoice_info = None
+        self._merchant_order_no = None
         self._out_trade_no = None
         self._passback_params = None
         self._product_code = None
@@ -102,6 +103,13 @@ class AlipayTradeAppPayModel(object):
             self._invoice_info = value
         else:
             self._invoice_info = InvoiceInfo.from_alipay_dict(value)
+    @property
+    def merchant_order_no(self):
+        return self._merchant_order_no
+
+    @merchant_order_no.setter
+    def merchant_order_no(self, value):
+        self._merchant_order_no = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -253,6 +261,11 @@ class AlipayTradeAppPayModel(object):
                 params['invoice_info'] = self.invoice_info.to_alipay_dict()
             else:
                 params['invoice_info'] = self.invoice_info
+        if self.merchant_order_no:
+            if hasattr(self.merchant_order_no, 'to_alipay_dict'):
+                params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
+            else:
+                params['merchant_order_no'] = self.merchant_order_no
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -346,6 +359,8 @@ class AlipayTradeAppPayModel(object):
             o.goods_type = d['goods_type']
         if 'invoice_info' in d:
             o.invoice_info = d['invoice_info']
+        if 'merchant_order_no' in d:
+            o.merchant_order_no = d['merchant_order_no']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'passback_params' in d:

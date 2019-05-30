@@ -20,6 +20,7 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
         self._payer_user_id = None
         self._pre_auth_type = None
         self._status = None
+        self._trans_currency = None
 
     @property
     def amount(self):
@@ -98,6 +99,13 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def trans_currency(self):
+        return self._trans_currency
+
+    @trans_currency.setter
+    def trans_currency(self, value):
+        self._trans_currency = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundAuthOrderAppFreezeResponse, self).parse_response_content(response_content)
@@ -123,3 +131,5 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
             self.pre_auth_type = response['pre_auth_type']
         if 'status' in response:
             self.status = response['status']
+        if 'trans_currency' in response:
+            self.trans_currency = response['trans_currency']

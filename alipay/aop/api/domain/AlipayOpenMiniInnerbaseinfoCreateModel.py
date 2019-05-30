@@ -12,12 +12,15 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
         self._app_category_ids = None
         self._app_desc = None
         self._app_english_name = None
+        self._app_key = None
         self._app_logo = None
         self._app_name = None
         self._app_origin = None
         self._app_slogan = None
         self._app_sub_type = None
+        self._app_type = None
         self._client_type = None
+        self._inst_code = None
         self._mini_app_id = None
         self._owner_entity = None
         self._partner_domain = None
@@ -54,6 +57,13 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
     def app_english_name(self, value):
         self._app_english_name = value
     @property
+    def app_key(self):
+        return self._app_key
+
+    @app_key.setter
+    def app_key(self, value):
+        self._app_key = value
+    @property
     def app_logo(self):
         return self._app_logo
 
@@ -89,12 +99,26 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
     def app_sub_type(self, value):
         self._app_sub_type = value
     @property
+    def app_type(self):
+        return self._app_type
+
+    @app_type.setter
+    def app_type(self, value):
+        self._app_type = value
+    @property
     def client_type(self):
         return self._client_type
 
     @client_type.setter
     def client_type(self, value):
         self._client_type = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -161,6 +185,11 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
                 params['app_english_name'] = self.app_english_name.to_alipay_dict()
             else:
                 params['app_english_name'] = self.app_english_name
+        if self.app_key:
+            if hasattr(self.app_key, 'to_alipay_dict'):
+                params['app_key'] = self.app_key.to_alipay_dict()
+            else:
+                params['app_key'] = self.app_key
         if self.app_logo:
             if hasattr(self.app_logo, 'to_alipay_dict'):
                 params['app_logo'] = self.app_logo.to_alipay_dict()
@@ -186,11 +215,21 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
                 params['app_sub_type'] = self.app_sub_type.to_alipay_dict()
             else:
                 params['app_sub_type'] = self.app_sub_type
+        if self.app_type:
+            if hasattr(self.app_type, 'to_alipay_dict'):
+                params['app_type'] = self.app_type.to_alipay_dict()
+            else:
+                params['app_type'] = self.app_type
         if self.client_type:
             if hasattr(self.client_type, 'to_alipay_dict'):
                 params['client_type'] = self.client_type.to_alipay_dict()
             else:
                 params['client_type'] = self.client_type
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -236,6 +275,8 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
             o.app_desc = d['app_desc']
         if 'app_english_name' in d:
             o.app_english_name = d['app_english_name']
+        if 'app_key' in d:
+            o.app_key = d['app_key']
         if 'app_logo' in d:
             o.app_logo = d['app_logo']
         if 'app_name' in d:
@@ -246,8 +287,12 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
             o.app_slogan = d['app_slogan']
         if 'app_sub_type' in d:
             o.app_sub_type = d['app_sub_type']
+        if 'app_type' in d:
+            o.app_type = d['app_type']
         if 'client_type' in d:
             o.client_type = d['client_type']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'owner_entity' in d:

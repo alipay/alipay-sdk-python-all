@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.InsProduct import InsProduct
 from alipay.aop.api.domain.Car import Car
+from alipay.aop.api.domain.CarModel import CarModel
 from alipay.aop.api.domain.InsProduct import InsProduct
 
 
@@ -20,9 +21,11 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
         self._check_code_type = None
         self._com_id = None
         self._com_name = None
+        self._correct_car_models = None
         self._enquiry_biz_id = None
         self._force_premium = None
         self._force_product = None
+        self._logistics_models = None
         self._quote_biz_id = None
         self._quote_error_code = None
         self._quote_error_msg = None
@@ -93,6 +96,19 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
     def com_name(self, value):
         self._com_name = value
     @property
+    def correct_car_models(self):
+        return self._correct_car_models
+
+    @correct_car_models.setter
+    def correct_car_models(self, value):
+        if isinstance(value, list):
+            self._correct_car_models = list()
+            for i in value:
+                if isinstance(i, CarModel):
+                    self._correct_car_models.append(i)
+                else:
+                    self._correct_car_models.append(CarModel.from_alipay_dict(i))
+    @property
     def enquiry_biz_id(self):
         return self._enquiry_biz_id
 
@@ -116,6 +132,16 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
             self._force_product = value
         else:
             self._force_product = InsProduct.from_alipay_dict(value)
+    @property
+    def logistics_models(self):
+        return self._logistics_models
+
+    @logistics_models.setter
+    def logistics_models(self, value):
+        if isinstance(value, list):
+            self._logistics_models = list()
+            for i in value:
+                self._logistics_models.append(i)
     @property
     def quote_biz_id(self):
         return self._quote_biz_id
@@ -177,12 +203,16 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
             self.com_id = response['com_id']
         if 'com_name' in response:
             self.com_name = response['com_name']
+        if 'correct_car_models' in response:
+            self.correct_car_models = response['correct_car_models']
         if 'enquiry_biz_id' in response:
             self.enquiry_biz_id = response['enquiry_biz_id']
         if 'force_premium' in response:
             self.force_premium = response['force_premium']
         if 'force_product' in response:
             self.force_product = response['force_product']
+        if 'logistics_models' in response:
+            self.logistics_models = response['logistics_models']
         if 'quote_biz_id' in response:
             self.quote_biz_id = response['quote_biz_id']
         if 'quote_error_code' in response:

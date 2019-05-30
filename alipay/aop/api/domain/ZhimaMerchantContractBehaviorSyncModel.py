@@ -13,6 +13,7 @@ class ZhimaMerchantContractBehaviorSyncModel(object):
         self._contract_no = None
         self._out_biz_no = None
         self._trade_no = None
+        self._trade_order_amount = None
         self._user_id = None
 
     @property
@@ -51,6 +52,13 @@ class ZhimaMerchantContractBehaviorSyncModel(object):
     def trade_no(self, value):
         self._trade_no = value
     @property
+    def trade_order_amount(self):
+        return self._trade_order_amount
+
+    @trade_order_amount.setter
+    def trade_order_amount(self, value):
+        self._trade_order_amount = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -86,6 +94,11 @@ class ZhimaMerchantContractBehaviorSyncModel(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.trade_order_amount:
+            if hasattr(self.trade_order_amount, 'to_alipay_dict'):
+                params['trade_order_amount'] = self.trade_order_amount.to_alipay_dict()
+            else:
+                params['trade_order_amount'] = self.trade_order_amount
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -108,6 +121,8 @@ class ZhimaMerchantContractBehaviorSyncModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'trade_order_amount' in d:
+            o.trade_order_amount = d['trade_order_amount']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
@@ -31,6 +32,7 @@ class AlipayTradeCreateModel(object):
         self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
+        self._product_code = None
         self._receiver_address_info = None
         self._royalty_info = None
         self._seller_id = None
@@ -63,7 +65,10 @@ class AlipayTradeCreateModel(object):
 
     @business_params.setter
     def business_params(self, value):
-        self._business_params = value
+        if isinstance(value, BusinessParams):
+            self._business_params = value
+        else:
+            self._business_params = BusinessParams.from_alipay_dict(value)
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -163,6 +168,13 @@ class AlipayTradeCreateModel(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def receiver_address_info(self):
         return self._receiver_address_info
@@ -336,6 +348,11 @@ class AlipayTradeCreateModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.receiver_address_info:
             if hasattr(self.receiver_address_info, 'to_alipay_dict'):
                 params['receiver_address_info'] = self.receiver_address_info.to_alipay_dict()
@@ -428,6 +445,8 @@ class AlipayTradeCreateModel(object):
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'receiver_address_info' in d:
             o.receiver_address_info = d['receiver_address_info']
         if 'royalty_info' in d:

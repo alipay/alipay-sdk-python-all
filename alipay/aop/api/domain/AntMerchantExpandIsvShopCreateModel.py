@@ -12,7 +12,9 @@ class AntMerchantExpandIsvShopCreateModel(object):
         self._address = None
         self._address_memo = None
         self._attachment_list = None
+        self._biz_type = None
         self._business_time = None
+        self._campus_id = None
         self._campus_name = None
         self._category_label = None
         self._city_code = None
@@ -29,6 +31,7 @@ class AntMerchantExpandIsvShopCreateModel(object):
         self._shop_category = None
         self._shop_name = None
         self._shop_type = None
+        self._store_id = None
 
     @property
     def address(self):
@@ -52,6 +55,13 @@ class AntMerchantExpandIsvShopCreateModel(object):
     def attachment_list(self, value):
         self._attachment_list = value
     @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
+    @property
     def business_time(self):
         return self._business_time
 
@@ -64,6 +74,13 @@ class AntMerchantExpandIsvShopCreateModel(object):
                     self._business_time.append(i)
                 else:
                     self._business_time.append(ShopBusinessTime.from_alipay_dict(i))
+    @property
+    def campus_id(self):
+        return self._campus_id
+
+    @campus_id.setter
+    def campus_id(self, value):
+        self._campus_id = value
     @property
     def campus_name(self):
         return self._campus_name
@@ -176,6 +193,13 @@ class AntMerchantExpandIsvShopCreateModel(object):
     @shop_type.setter
     def shop_type(self, value):
         self._shop_type = value
+    @property
+    def store_id(self):
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, value):
+        self._store_id = value
 
 
     def to_alipay_dict(self):
@@ -195,6 +219,11 @@ class AntMerchantExpandIsvShopCreateModel(object):
                 params['attachment_list'] = self.attachment_list.to_alipay_dict()
             else:
                 params['attachment_list'] = self.attachment_list
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.business_time:
             if isinstance(self.business_time, list):
                 for i in range(0, len(self.business_time)):
@@ -205,6 +234,11 @@ class AntMerchantExpandIsvShopCreateModel(object):
                 params['business_time'] = self.business_time.to_alipay_dict()
             else:
                 params['business_time'] = self.business_time
+        if self.campus_id:
+            if hasattr(self.campus_id, 'to_alipay_dict'):
+                params['campus_id'] = self.campus_id.to_alipay_dict()
+            else:
+                params['campus_id'] = self.campus_id
         if self.campus_name:
             if hasattr(self.campus_name, 'to_alipay_dict'):
                 params['campus_name'] = self.campus_name.to_alipay_dict()
@@ -285,6 +319,11 @@ class AntMerchantExpandIsvShopCreateModel(object):
                 params['shop_type'] = self.shop_type.to_alipay_dict()
             else:
                 params['shop_type'] = self.shop_type
+        if self.store_id:
+            if hasattr(self.store_id, 'to_alipay_dict'):
+                params['store_id'] = self.store_id.to_alipay_dict()
+            else:
+                params['store_id'] = self.store_id
         return params
 
     @staticmethod
@@ -298,8 +337,12 @@ class AntMerchantExpandIsvShopCreateModel(object):
             o.address_memo = d['address_memo']
         if 'attachment_list' in d:
             o.attachment_list = d['attachment_list']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'business_time' in d:
             o.business_time = d['business_time']
+        if 'campus_id' in d:
+            o.campus_id = d['campus_id']
         if 'campus_name' in d:
             o.campus_name = d['campus_name']
         if 'category_label' in d:
@@ -332,6 +375,8 @@ class AntMerchantExpandIsvShopCreateModel(object):
             o.shop_name = d['shop_name']
         if 'shop_type' in d:
             o.shop_type = d['shop_type']
+        if 'store_id' in d:
+            o.store_id = d['store_id']
         return o
 
 

@@ -13,6 +13,8 @@ class MybankCreditSceneprodPaymentApplyModel(object):
         self._amount = None
         self._biz_product_code = None
         self._biz_type = None
+        self._cust_name = None
+        self._drawdown_no = None
         self._id_card = None
         self._login_account = None
         self._mybk_order_no = None
@@ -45,6 +47,20 @@ class MybankCreditSceneprodPaymentApplyModel(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def cust_name(self):
+        return self._cust_name
+
+    @cust_name.setter
+    def cust_name(self, value):
+        self._cust_name = value
+    @property
+    def drawdown_no(self):
+        return self._drawdown_no
+
+    @drawdown_no.setter
+    def drawdown_no(self, value):
+        self._drawdown_no = value
     @property
     def id_card(self):
         return self._id_card
@@ -146,6 +162,16 @@ class MybankCreditSceneprodPaymentApplyModel(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.cust_name:
+            if hasattr(self.cust_name, 'to_alipay_dict'):
+                params['cust_name'] = self.cust_name.to_alipay_dict()
+            else:
+                params['cust_name'] = self.cust_name
+        if self.drawdown_no:
+            if hasattr(self.drawdown_no, 'to_alipay_dict'):
+                params['drawdown_no'] = self.drawdown_no.to_alipay_dict()
+            else:
+                params['drawdown_no'] = self.drawdown_no
         if self.id_card:
             if hasattr(self.id_card, 'to_alipay_dict'):
                 params['id_card'] = self.id_card.to_alipay_dict()
@@ -219,6 +245,10 @@ class MybankCreditSceneprodPaymentApplyModel(object):
             o.biz_product_code = d['biz_product_code']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'cust_name' in d:
+            o.cust_name = d['cust_name']
+        if 'drawdown_no' in d:
+            o.drawdown_no = d['drawdown_no']
         if 'id_card' in d:
             o.id_card = d['id_card']
         if 'login_account' in d:

@@ -13,6 +13,7 @@ class AlipayEbppCommonBillQueryResponse(AlipayResponse):
         self._bill_no = None
         self._charge_inst = None
         self._chargeoff_inst = None
+        self._extend_field = None
         self._gmt_create = None
         self._gmt_pay = None
         self._status = None
@@ -46,6 +47,13 @@ class AlipayEbppCommonBillQueryResponse(AlipayResponse):
     def chargeoff_inst(self, value):
         self._chargeoff_inst = value
     @property
+    def extend_field(self):
+        return self._extend_field
+
+    @extend_field.setter
+    def extend_field(self, value):
+        self._extend_field = value
+    @property
     def gmt_create(self):
         return self._gmt_create
 
@@ -77,6 +85,8 @@ class AlipayEbppCommonBillQueryResponse(AlipayResponse):
             self.charge_inst = response['charge_inst']
         if 'chargeoff_inst' in response:
             self.chargeoff_inst = response['chargeoff_inst']
+        if 'extend_field' in response:
+            self.extend_field = response['extend_field']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
         if 'gmt_pay' in response:

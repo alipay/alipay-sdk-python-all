@@ -23,6 +23,8 @@ class ActivityParticipation(object):
         self._expire_time = None
         self._participated = None
         self._user_id = None
+        self._violation_amount = None
+        self._voucher_available = None
 
     @property
     def activity(self):
@@ -121,6 +123,20 @@ class ActivityParticipation(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def violation_amount(self):
+        return self._violation_amount
+
+    @violation_amount.setter
+    def violation_amount(self, value):
+        self._violation_amount = value
+    @property
+    def voucher_available(self):
+        return self._voucher_available
+
+    @voucher_available.setter
+    def voucher_available(self, value):
+        self._voucher_available = value
 
 
     def to_alipay_dict(self):
@@ -190,6 +206,16 @@ class ActivityParticipation(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.violation_amount:
+            if hasattr(self.violation_amount, 'to_alipay_dict'):
+                params['violation_amount'] = self.violation_amount.to_alipay_dict()
+            else:
+                params['violation_amount'] = self.violation_amount
+        if self.voucher_available:
+            if hasattr(self.voucher_available, 'to_alipay_dict'):
+                params['voucher_available'] = self.voucher_available.to_alipay_dict()
+            else:
+                params['voucher_available'] = self.voucher_available
         return params
 
     @staticmethod
@@ -223,6 +249,10 @@ class ActivityParticipation(object):
             o.participated = d['participated']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'violation_amount' in d:
+            o.violation_amount = d['violation_amount']
+        if 'voucher_available' in d:
+            o.voucher_available = d['voucher_available']
         return o
 
 

@@ -11,6 +11,7 @@ class AlipayTradePayResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradePayResponse, self).__init__()
+        self._advance_amount = None
         self._async_payment_mode = None
         self._auth_trade_pay_mode = None
         self._business_params = None
@@ -45,6 +46,13 @@ class AlipayTradePayResponse(AlipayResponse):
         self._trans_pay_rate = None
         self._voucher_detail_list = None
 
+    @property
+    def advance_amount(self):
+        return self._advance_amount
+
+    @advance_amount.setter
+    def advance_amount(self, value):
+        self._advance_amount = value
     @property
     def async_payment_mode(self):
         return self._async_payment_mode
@@ -291,6 +299,8 @@ class AlipayTradePayResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradePayResponse, self).parse_response_content(response_content)
+        if 'advance_amount' in response:
+            self.advance_amount = response['advance_amount']
         if 'async_payment_mode' in response:
             self.async_payment_mode = response['async_payment_mode']
         if 'auth_trade_pay_mode' in response:

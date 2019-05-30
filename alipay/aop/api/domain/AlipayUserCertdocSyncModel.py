@@ -14,6 +14,7 @@ class AlipayUserCertdocSyncModel(object):
         self._ext_info = None
         self._name = None
         self._pic_list = None
+        self._status = None
         self._user_id = None
 
     @property
@@ -58,6 +59,13 @@ class AlipayUserCertdocSyncModel(object):
                 else:
                     self._pic_list.append(OpenCertPic.from_alipay_dict(i))
     @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -98,6 +106,11 @@ class AlipayUserCertdocSyncModel(object):
                 params['pic_list'] = self.pic_list.to_alipay_dict()
             else:
                 params['pic_list'] = self.pic_list
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -120,6 +133,8 @@ class AlipayUserCertdocSyncModel(object):
             o.name = d['name']
         if 'pic_list' in d:
             o.pic_list = d['pic_list']
+        if 'status' in d:
+            o.status = d['status']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

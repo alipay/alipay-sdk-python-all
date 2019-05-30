@@ -9,6 +9,7 @@ class AlipayIserviceCognitiveOcrVehiclelicenseQueryModel(object):
 
     def __init__(self):
         self._image_content = None
+        self._side = None
 
     @property
     def image_content(self):
@@ -17,6 +18,13 @@ class AlipayIserviceCognitiveOcrVehiclelicenseQueryModel(object):
     @image_content.setter
     def image_content(self, value):
         self._image_content = value
+    @property
+    def side(self):
+        return self._side
+
+    @side.setter
+    def side(self, value):
+        self._side = value
 
 
     def to_alipay_dict(self):
@@ -26,6 +34,11 @@ class AlipayIserviceCognitiveOcrVehiclelicenseQueryModel(object):
                 params['image_content'] = self.image_content.to_alipay_dict()
             else:
                 params['image_content'] = self.image_content
+        if self.side:
+            if hasattr(self.side, 'to_alipay_dict'):
+                params['side'] = self.side.to_alipay_dict()
+            else:
+                params['side'] = self.side
         return params
 
     @staticmethod
@@ -35,6 +48,8 @@ class AlipayIserviceCognitiveOcrVehiclelicenseQueryModel(object):
         o = AlipayIserviceCognitiveOcrVehiclelicenseQueryModel()
         if 'image_content' in d:
             o.image_content = d['image_content']
+        if 'side' in d:
+            o.side = d['side']
         return o
 
 

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
@@ -27,6 +28,7 @@ class AlipayTradePrecreateModel(object):
         self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
+        self._product_code = None
         self._qr_code_timeout_express = None
         self._royalty_info = None
         self._seller_id = None
@@ -59,7 +61,10 @@ class AlipayTradePrecreateModel(object):
 
     @business_params.setter
     def business_params(self, value):
-        self._business_params = value
+        if isinstance(value, BusinessParams):
+            self._business_params = value
+        else:
+            self._business_params = BusinessParams.from_alipay_dict(value)
     @property
     def buyer_logon_id(self):
         return self._buyer_logon_id
@@ -142,6 +147,13 @@ class AlipayTradePrecreateModel(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def qr_code_timeout_express(self):
         return self._qr_code_timeout_express
@@ -302,6 +314,11 @@ class AlipayTradePrecreateModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.qr_code_timeout_express:
             if hasattr(self.qr_code_timeout_express, 'to_alipay_dict'):
                 params['qr_code_timeout_express'] = self.qr_code_timeout_express.to_alipay_dict()
@@ -390,6 +407,8 @@ class AlipayTradePrecreateModel(object):
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'qr_code_timeout_express' in d:
             o.qr_code_timeout_express = d['qr_code_timeout_express']
         if 'royalty_info' in d:

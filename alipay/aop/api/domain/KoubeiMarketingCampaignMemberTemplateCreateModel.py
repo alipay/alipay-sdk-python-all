@@ -13,6 +13,7 @@ from alipay.aop.api.domain.MemberOpenInfoModel import MemberOpenInfoModel
 class KoubeiMarketingCampaignMemberTemplateCreateModel(object):
 
     def __init__(self):
+        self._client_channels = None
         self._desc = None
         self._member_actions = None
         self._member_assets = None
@@ -24,6 +25,16 @@ class KoubeiMarketingCampaignMemberTemplateCreateModel(object):
         self._request_id = None
         self._write_off_type = None
 
+    @property
+    def client_channels(self):
+        return self._client_channels
+
+    @client_channels.setter
+    def client_channels(self, value):
+        if isinstance(value, list):
+            self._client_channels = list()
+            for i in value:
+                self._client_channels.append(i)
     @property
     def desc(self):
         return self._desc
@@ -125,6 +136,16 @@ class KoubeiMarketingCampaignMemberTemplateCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.client_channels:
+            if isinstance(self.client_channels, list):
+                for i in range(0, len(self.client_channels)):
+                    element = self.client_channels[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.client_channels[i] = element.to_alipay_dict()
+            if hasattr(self.client_channels, 'to_alipay_dict'):
+                params['client_channels'] = self.client_channels.to_alipay_dict()
+            else:
+                params['client_channels'] = self.client_channels
         if self.desc:
             if hasattr(self.desc, 'to_alipay_dict'):
                 params['desc'] = self.desc.to_alipay_dict()
@@ -202,6 +223,8 @@ class KoubeiMarketingCampaignMemberTemplateCreateModel(object):
         if not d:
             return None
         o = KoubeiMarketingCampaignMemberTemplateCreateModel()
+        if 'client_channels' in d:
+            o.client_channels = d['client_channels']
         if 'desc' in d:
             o.desc = d['desc']
         if 'member_actions' in d:

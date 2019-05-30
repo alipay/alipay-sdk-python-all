@@ -9,6 +9,7 @@ class FaceAbilityExtInfo(object):
 
     def __init__(self):
         self._age = None
+        self._algfactors = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -29,6 +30,13 @@ class FaceAbilityExtInfo(object):
     @age.setter
     def age(self, value):
         self._age = value
+    @property
+    def algfactors(self):
+        return self._algfactors
+
+    @algfactors.setter
+    def algfactors(self, value):
+        self._algfactors = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -122,6 +130,11 @@ class FaceAbilityExtInfo(object):
                 params['age'] = self.age.to_alipay_dict()
             else:
                 params['age'] = self.age
+        if self.algfactors:
+            if hasattr(self.algfactors, 'to_alipay_dict'):
+                params['algfactors'] = self.algfactors.to_alipay_dict()
+            else:
+                params['algfactors'] = self.algfactors
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -191,6 +204,8 @@ class FaceAbilityExtInfo(object):
         o = FaceAbilityExtInfo()
         if 'age' in d:
             o.age = d['age']
+        if 'algfactors' in d:
+            o.algfactors = d['algfactors']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

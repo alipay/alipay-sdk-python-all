@@ -11,6 +11,7 @@ class MybankPaymentTradeNormalpayOrderCreateModel(object):
         self._amount = None
         self._biz_channel = None
         self._biz_no = None
+        self._card_no = None
         self._currency_value = None
         self._ext_info = None
         self._ipid = None
@@ -40,6 +41,13 @@ class MybankPaymentTradeNormalpayOrderCreateModel(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def card_no(self):
+        return self._card_no
+
+    @card_no.setter
+    def card_no(self, value):
+        self._card_no = value
     @property
     def currency_value(self):
         return self._currency_value
@@ -108,6 +116,11 @@ class MybankPaymentTradeNormalpayOrderCreateModel(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.card_no:
+            if hasattr(self.card_no, 'to_alipay_dict'):
+                params['card_no'] = self.card_no.to_alipay_dict()
+            else:
+                params['card_no'] = self.card_no
         if self.currency_value:
             if hasattr(self.currency_value, 'to_alipay_dict'):
                 params['currency_value'] = self.currency_value.to_alipay_dict()
@@ -156,6 +169,8 @@ class MybankPaymentTradeNormalpayOrderCreateModel(object):
             o.biz_channel = d['biz_channel']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'card_no' in d:
+            o.card_no = d['card_no']
         if 'currency_value' in d:
             o.currency_value = d['currency_value']
         if 'ext_info' in d:

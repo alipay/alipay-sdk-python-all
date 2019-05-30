@@ -20,6 +20,7 @@ class Activity(object):
         self._brand_name = None
         self._end_time = None
         self._fulfil_dimension = None
+        self._invoke_app_id = None
         self._out_activity_no = None
         self._partner_id = None
         self._rule_type = None
@@ -101,6 +102,13 @@ class Activity(object):
     @fulfil_dimension.setter
     def fulfil_dimension(self, value):
         self._fulfil_dimension = value
+    @property
+    def invoke_app_id(self):
+        return self._invoke_app_id
+
+    @invoke_app_id.setter
+    def invoke_app_id(self, value):
+        self._invoke_app_id = value
     @property
     def out_activity_no(self):
         return self._out_activity_no
@@ -190,6 +198,11 @@ class Activity(object):
                 params['fulfil_dimension'] = self.fulfil_dimension.to_alipay_dict()
             else:
                 params['fulfil_dimension'] = self.fulfil_dimension
+        if self.invoke_app_id:
+            if hasattr(self.invoke_app_id, 'to_alipay_dict'):
+                params['invoke_app_id'] = self.invoke_app_id.to_alipay_dict()
+            else:
+                params['invoke_app_id'] = self.invoke_app_id
         if self.out_activity_no:
             if hasattr(self.out_activity_no, 'to_alipay_dict'):
                 params['out_activity_no'] = self.out_activity_no.to_alipay_dict()
@@ -240,6 +253,8 @@ class Activity(object):
             o.end_time = d['end_time']
         if 'fulfil_dimension' in d:
             o.fulfil_dimension = d['fulfil_dimension']
+        if 'invoke_app_id' in d:
+            o.invoke_app_id = d['invoke_app_id']
         if 'out_activity_no' in d:
             o.out_activity_no = d['out_activity_no']
         if 'partner_id' in d:

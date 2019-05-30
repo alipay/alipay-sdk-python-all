@@ -14,6 +14,7 @@ class MiniappCloudDetailInfo(object):
         self._app_name = None
         self._app_slogan = None
         self._category_names = None
+        self._create_time = None
         self._mini_appid = None
 
     @property
@@ -59,6 +60,13 @@ class MiniappCloudDetailInfo(object):
     def category_names(self, value):
         self._category_names = value
     @property
+    def create_time(self):
+        return self._create_time
+
+    @create_time.setter
+    def create_time(self, value):
+        self._create_time = value
+    @property
     def mini_appid(self):
         return self._mini_appid
 
@@ -99,6 +107,11 @@ class MiniappCloudDetailInfo(object):
                 params['category_names'] = self.category_names.to_alipay_dict()
             else:
                 params['category_names'] = self.category_names
+        if self.create_time:
+            if hasattr(self.create_time, 'to_alipay_dict'):
+                params['create_time'] = self.create_time.to_alipay_dict()
+            else:
+                params['create_time'] = self.create_time
         if self.mini_appid:
             if hasattr(self.mini_appid, 'to_alipay_dict'):
                 params['mini_appid'] = self.mini_appid.to_alipay_dict()
@@ -123,6 +136,8 @@ class MiniappCloudDetailInfo(object):
             o.app_slogan = d['app_slogan']
         if 'category_names' in d:
             o.category_names = d['category_names']
+        if 'create_time' in d:
+            o.create_time = d['create_time']
         if 'mini_appid' in d:
             o.mini_appid = d['mini_appid']
         return o

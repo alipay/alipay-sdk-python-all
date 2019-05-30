@@ -43,10 +43,13 @@ class KoubeiCateringOrderCancelResponse(AlipayResponse):
 
     @refund_description_list.setter
     def refund_description_list(self, value):
-        if isinstance(value, RefundDescriptionDTO):
-            self._refund_description_list = value
-        else:
-            self._refund_description_list = RefundDescriptionDTO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._refund_description_list = list()
+            for i in value:
+                if isinstance(i, RefundDescriptionDTO):
+                    self._refund_description_list.append(i)
+                else:
+                    self._refund_description_list.append(RefundDescriptionDTO.from_alipay_dict(i))
     @property
     def retry(self):
         return self._retry

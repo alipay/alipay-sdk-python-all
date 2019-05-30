@@ -18,6 +18,7 @@ class InsPerson(object):
         self._channel_user_source = None
         self._email = None
         self._gender = None
+        self._identity_type = None
         self._nationality = None
         self._phone = None
         self._pronounce_name = None
@@ -93,6 +94,13 @@ class InsPerson(object):
     @gender.setter
     def gender(self, value):
         self._gender = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
     @property
     def nationality(self):
         return self._nationality
@@ -175,6 +183,11 @@ class InsPerson(object):
                 params['gender'] = self.gender.to_alipay_dict()
             else:
                 params['gender'] = self.gender
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.nationality:
             if hasattr(self.nationality, 'to_alipay_dict'):
                 params['nationality'] = self.nationality.to_alipay_dict()
@@ -222,6 +235,8 @@ class InsPerson(object):
             o.email = d['email']
         if 'gender' in d:
             o.gender = d['gender']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'nationality' in d:
             o.nationality = d['nationality']
         if 'phone' in d:

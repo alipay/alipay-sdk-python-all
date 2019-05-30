@@ -12,6 +12,10 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._build_extra_info = None
         self._build_js_permission = None
         self._build_main_url = None
+        self._build_max_android_client_version = None
+        self._build_max_ios_client_version = None
+        self._build_min_android_client_version = None
+        self._build_min_ios_client_version = None
         self._build_package_md_5 = None
         self._build_package_name = None
         self._build_package_stream = None
@@ -20,7 +24,9 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._build_source_pkg_url = None
         self._build_sub_url = None
         self._build_version = None
+        self._bundle_id = None
         self._client_type = None
+        self._inst_code = None
         self._mini_app_id = None
 
     @property
@@ -51,6 +57,34 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     @build_main_url.setter
     def build_main_url(self, value):
         self._build_main_url = value
+    @property
+    def build_max_android_client_version(self):
+        return self._build_max_android_client_version
+
+    @build_max_android_client_version.setter
+    def build_max_android_client_version(self, value):
+        self._build_max_android_client_version = value
+    @property
+    def build_max_ios_client_version(self):
+        return self._build_max_ios_client_version
+
+    @build_max_ios_client_version.setter
+    def build_max_ios_client_version(self, value):
+        self._build_max_ios_client_version = value
+    @property
+    def build_min_android_client_version(self):
+        return self._build_min_android_client_version
+
+    @build_min_android_client_version.setter
+    def build_min_android_client_version(self, value):
+        self._build_min_android_client_version = value
+    @property
+    def build_min_ios_client_version(self):
+        return self._build_min_ios_client_version
+
+    @build_min_ios_client_version.setter
+    def build_min_ios_client_version(self, value):
+        self._build_min_ios_client_version = value
     @property
     def build_package_md_5(self):
         return self._build_package_md_5
@@ -108,12 +142,26 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     def build_version(self, value):
         self._build_version = value
     @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
+    @property
     def client_type(self):
         return self._client_type
 
     @client_type.setter
     def client_type(self, value):
         self._client_type = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -145,6 +193,26 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_main_url'] = self.build_main_url.to_alipay_dict()
             else:
                 params['build_main_url'] = self.build_main_url
+        if self.build_max_android_client_version:
+            if hasattr(self.build_max_android_client_version, 'to_alipay_dict'):
+                params['build_max_android_client_version'] = self.build_max_android_client_version.to_alipay_dict()
+            else:
+                params['build_max_android_client_version'] = self.build_max_android_client_version
+        if self.build_max_ios_client_version:
+            if hasattr(self.build_max_ios_client_version, 'to_alipay_dict'):
+                params['build_max_ios_client_version'] = self.build_max_ios_client_version.to_alipay_dict()
+            else:
+                params['build_max_ios_client_version'] = self.build_max_ios_client_version
+        if self.build_min_android_client_version:
+            if hasattr(self.build_min_android_client_version, 'to_alipay_dict'):
+                params['build_min_android_client_version'] = self.build_min_android_client_version.to_alipay_dict()
+            else:
+                params['build_min_android_client_version'] = self.build_min_android_client_version
+        if self.build_min_ios_client_version:
+            if hasattr(self.build_min_ios_client_version, 'to_alipay_dict'):
+                params['build_min_ios_client_version'] = self.build_min_ios_client_version.to_alipay_dict()
+            else:
+                params['build_min_ios_client_version'] = self.build_min_ios_client_version
         if self.build_package_md_5:
             if hasattr(self.build_package_md_5, 'to_alipay_dict'):
                 params['build_package_md_5'] = self.build_package_md_5.to_alipay_dict()
@@ -185,11 +253,21 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_version'] = self.build_version.to_alipay_dict()
             else:
                 params['build_version'] = self.build_version
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = self.bundle_id.to_alipay_dict()
+            else:
+                params['bundle_id'] = self.bundle_id
         if self.client_type:
             if hasattr(self.client_type, 'to_alipay_dict'):
                 params['client_type'] = self.client_type.to_alipay_dict()
             else:
                 params['client_type'] = self.client_type
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -210,6 +288,14 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_js_permission = d['build_js_permission']
         if 'build_main_url' in d:
             o.build_main_url = d['build_main_url']
+        if 'build_max_android_client_version' in d:
+            o.build_max_android_client_version = d['build_max_android_client_version']
+        if 'build_max_ios_client_version' in d:
+            o.build_max_ios_client_version = d['build_max_ios_client_version']
+        if 'build_min_android_client_version' in d:
+            o.build_min_android_client_version = d['build_min_android_client_version']
+        if 'build_min_ios_client_version' in d:
+            o.build_min_ios_client_version = d['build_min_ios_client_version']
         if 'build_package_md_5' in d:
             o.build_package_md_5 = d['build_package_md_5']
         if 'build_package_name' in d:
@@ -226,8 +312,12 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_sub_url = d['build_sub_url']
         if 'build_version' in d:
             o.build_version = d['build_version']
+        if 'bundle_id' in d:
+            o.bundle_id = d['bundle_id']
         if 'client_type' in d:
             o.client_type = d['client_type']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         return o

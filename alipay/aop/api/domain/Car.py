@@ -16,7 +16,9 @@ class Car(object):
         self._car_no = None
         self._data_source = None
         self._first_register_date = None
+        self._is_new = None
         self._license_address = None
+        self._seat_number = None
         self._transfer_car = None
         self._transfer_date = None
         self._vehicle_info = None
@@ -66,12 +68,26 @@ class Car(object):
     def first_register_date(self, value):
         self._first_register_date = value
     @property
+    def is_new(self):
+        return self._is_new
+
+    @is_new.setter
+    def is_new(self, value):
+        self._is_new = value
+    @property
     def license_address(self):
         return self._license_address
 
     @license_address.setter
     def license_address(self, value):
         self._license_address = value
+    @property
+    def seat_number(self):
+        return self._seat_number
+
+    @seat_number.setter
+    def seat_number(self, value):
+        self._seat_number = value
     @property
     def transfer_car(self):
         return self._transfer_car
@@ -150,11 +166,21 @@ class Car(object):
                 params['first_register_date'] = self.first_register_date.to_alipay_dict()
             else:
                 params['first_register_date'] = self.first_register_date
+        if self.is_new:
+            if hasattr(self.is_new, 'to_alipay_dict'):
+                params['is_new'] = self.is_new.to_alipay_dict()
+            else:
+                params['is_new'] = self.is_new
         if self.license_address:
             if hasattr(self.license_address, 'to_alipay_dict'):
                 params['license_address'] = self.license_address.to_alipay_dict()
             else:
                 params['license_address'] = self.license_address
+        if self.seat_number:
+            if hasattr(self.seat_number, 'to_alipay_dict'):
+                params['seat_number'] = self.seat_number.to_alipay_dict()
+            else:
+                params['seat_number'] = self.seat_number
         if self.transfer_car:
             if hasattr(self.transfer_car, 'to_alipay_dict'):
                 params['transfer_car'] = self.transfer_car.to_alipay_dict()
@@ -204,8 +230,12 @@ class Car(object):
             o.data_source = d['data_source']
         if 'first_register_date' in d:
             o.first_register_date = d['first_register_date']
+        if 'is_new' in d:
+            o.is_new = d['is_new']
         if 'license_address' in d:
             o.license_address = d['license_address']
+        if 'seat_number' in d:
+            o.seat_number = d['seat_number']
         if 'transfer_car' in d:
             o.transfer_car = d['transfer_car']
         if 'transfer_date' in d:

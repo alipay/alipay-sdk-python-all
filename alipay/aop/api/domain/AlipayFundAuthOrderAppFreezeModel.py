@@ -18,6 +18,9 @@ class AlipayFundAuthOrderAppFreezeModel(object):
         self._payee_logon_id = None
         self._payee_user_id = None
         self._product_code = None
+        self._scene_code = None
+        self._settle_currency = None
+        self._trans_currency = None
 
     @property
     def amount(self):
@@ -89,6 +92,27 @@ class AlipayFundAuthOrderAppFreezeModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
+    @property
+    def settle_currency(self):
+        return self._settle_currency
+
+    @settle_currency.setter
+    def settle_currency(self, value):
+        self._settle_currency = value
+    @property
+    def trans_currency(self):
+        return self._trans_currency
+
+    @trans_currency.setter
+    def trans_currency(self, value):
+        self._trans_currency = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +167,21 @@ class AlipayFundAuthOrderAppFreezeModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
+        if self.settle_currency:
+            if hasattr(self.settle_currency, 'to_alipay_dict'):
+                params['settle_currency'] = self.settle_currency.to_alipay_dict()
+            else:
+                params['settle_currency'] = self.settle_currency
+        if self.trans_currency:
+            if hasattr(self.trans_currency, 'to_alipay_dict'):
+                params['trans_currency'] = self.trans_currency.to_alipay_dict()
+            else:
+                params['trans_currency'] = self.trans_currency
         return params
 
     @staticmethod
@@ -170,6 +209,12 @@ class AlipayFundAuthOrderAppFreezeModel(object):
             o.payee_user_id = d['payee_user_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
+        if 'settle_currency' in d:
+            o.settle_currency = d['settle_currency']
+        if 'trans_currency' in d:
+            o.trans_currency = d['trans_currency']
         return o
 
 

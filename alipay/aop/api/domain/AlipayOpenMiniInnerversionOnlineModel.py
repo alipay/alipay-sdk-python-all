@@ -10,6 +10,8 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
     def __init__(self):
         self._app_offline_version = None
         self._app_online_version = None
+        self._bundle_id = None
+        self._inst_code = None
         self._mini_app_id = None
 
     @property
@@ -26,6 +28,20 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
     @app_online_version.setter
     def app_online_version(self, value):
         self._app_online_version = value
+    @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -47,6 +63,16 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
                 params['app_online_version'] = self.app_online_version.to_alipay_dict()
             else:
                 params['app_online_version'] = self.app_online_version
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = self.bundle_id.to_alipay_dict()
+            else:
+                params['bundle_id'] = self.bundle_id
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -63,6 +89,10 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
             o.app_offline_version = d['app_offline_version']
         if 'app_online_version' in d:
             o.app_online_version = d['app_online_version']
+        if 'bundle_id' in d:
+            o.bundle_id = d['bundle_id']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         return o

@@ -15,6 +15,8 @@ class CarModel(object):
         self._gear_box_type = None
         self._purchase_price = None
         self._seat = None
+        self._seat_max = None
+        self._seat_min = None
         self._vehicle_class_code = None
         self._vehicle_code = None
         self._vehicle_name = None
@@ -69,6 +71,20 @@ class CarModel(object):
     @seat.setter
     def seat(self, value):
         self._seat = value
+    @property
+    def seat_max(self):
+        return self._seat_max
+
+    @seat_max.setter
+    def seat_max(self, value):
+        self._seat_max = value
+    @property
+    def seat_min(self):
+        return self._seat_min
+
+    @seat_min.setter
+    def seat_min(self, value):
+        self._seat_min = value
     @property
     def vehicle_class_code(self):
         return self._vehicle_class_code
@@ -136,6 +152,16 @@ class CarModel(object):
                 params['seat'] = self.seat.to_alipay_dict()
             else:
                 params['seat'] = self.seat
+        if self.seat_max:
+            if hasattr(self.seat_max, 'to_alipay_dict'):
+                params['seat_max'] = self.seat_max.to_alipay_dict()
+            else:
+                params['seat_max'] = self.seat_max
+        if self.seat_min:
+            if hasattr(self.seat_min, 'to_alipay_dict'):
+                params['seat_min'] = self.seat_min.to_alipay_dict()
+            else:
+                params['seat_min'] = self.seat_min
         if self.vehicle_class_code:
             if hasattr(self.vehicle_class_code, 'to_alipay_dict'):
                 params['vehicle_class_code'] = self.vehicle_class_code.to_alipay_dict()
@@ -177,6 +203,10 @@ class CarModel(object):
             o.purchase_price = d['purchase_price']
         if 'seat' in d:
             o.seat = d['seat']
+        if 'seat_max' in d:
+            o.seat_max = d['seat_max']
+        if 'seat_min' in d:
+            o.seat_min = d['seat_min']
         if 'vehicle_class_code' in d:
             o.vehicle_class_code = d['vehicle_class_code']
         if 'vehicle_code' in d:

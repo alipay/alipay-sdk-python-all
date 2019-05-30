@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.BankCardInfo import BankCardInfo
 from alipay.aop.api.domain.ContactInfo import ContactInfo
+from alipay.aop.api.domain.SiteInfo import SiteInfo
 
 
 class AntMerchantExpandIndirectQueryResponse(AlipayResponse):
@@ -27,7 +28,9 @@ class AntMerchantExpandIndirectQueryResponse(AlipayResponse):
         self._name = None
         self._org_pid = None
         self._pay_code_info = None
+        self._service_codes = None
         self._service_phone = None
+        self._site_info = None
         self._source = None
         self._sub_merchant_id = None
 
@@ -161,12 +164,35 @@ class AntMerchantExpandIndirectQueryResponse(AlipayResponse):
             for i in value:
                 self._pay_code_info.append(i)
     @property
+    def service_codes(self):
+        return self._service_codes
+
+    @service_codes.setter
+    def service_codes(self, value):
+        if isinstance(value, list):
+            self._service_codes = list()
+            for i in value:
+                self._service_codes.append(i)
+    @property
     def service_phone(self):
         return self._service_phone
 
     @service_phone.setter
     def service_phone(self, value):
         self._service_phone = value
+    @property
+    def site_info(self):
+        return self._site_info
+
+    @site_info.setter
+    def site_info(self, value):
+        if isinstance(value, list):
+            self._site_info = list()
+            for i in value:
+                if isinstance(i, SiteInfo):
+                    self._site_info.append(i)
+                else:
+                    self._site_info.append(SiteInfo.from_alipay_dict(i))
     @property
     def source(self):
         return self._source
@@ -214,8 +240,12 @@ class AntMerchantExpandIndirectQueryResponse(AlipayResponse):
             self.org_pid = response['org_pid']
         if 'pay_code_info' in response:
             self.pay_code_info = response['pay_code_info']
+        if 'service_codes' in response:
+            self.service_codes = response['service_codes']
         if 'service_phone' in response:
             self.service_phone = response['service_phone']
+        if 'site_info' in response:
+            self.site_info = response['site_info']
         if 'source' in response:
             self.source = response['source']
         if 'sub_merchant_id' in response:

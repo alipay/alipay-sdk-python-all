@@ -12,6 +12,7 @@ class AlipayEcoMycarParkingOrderPayModel(object):
         self._body = None
         self._car_number = None
         self._car_number_color = None
+        self._is_advance = None
         self._out_parking_id = None
         self._out_trade_no = None
         self._parking_id = None
@@ -48,6 +49,13 @@ class AlipayEcoMycarParkingOrderPayModel(object):
     @car_number_color.setter
     def car_number_color(self, value):
         self._car_number_color = value
+    @property
+    def is_advance(self):
+        return self._is_advance
+
+    @is_advance.setter
+    def is_advance(self, value):
+        self._is_advance = value
     @property
     def out_parking_id(self):
         return self._out_parking_id
@@ -121,6 +129,11 @@ class AlipayEcoMycarParkingOrderPayModel(object):
                 params['car_number_color'] = self.car_number_color.to_alipay_dict()
             else:
                 params['car_number_color'] = self.car_number_color
+        if self.is_advance:
+            if hasattr(self.is_advance, 'to_alipay_dict'):
+                params['is_advance'] = self.is_advance.to_alipay_dict()
+            else:
+                params['is_advance'] = self.is_advance
         if self.out_parking_id:
             if hasattr(self.out_parking_id, 'to_alipay_dict'):
                 params['out_parking_id'] = self.out_parking_id.to_alipay_dict()
@@ -171,6 +184,8 @@ class AlipayEcoMycarParkingOrderPayModel(object):
             o.car_number = d['car_number']
         if 'car_number_color' in d:
             o.car_number_color = d['car_number_color']
+        if 'is_advance' in d:
+            o.is_advance = d['is_advance']
         if 'out_parking_id' in d:
             o.out_parking_id = d['out_parking_id']
         if 'out_trade_no' in d:

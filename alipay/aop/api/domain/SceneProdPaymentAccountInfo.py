@@ -16,6 +16,7 @@ class SceneProdPaymentAccountInfo(object):
         self._amt = None
         self._bank_card_category = None
         self._card_holder_name = None
+        self._ext_card_type = None
         self._ext_info = None
         self._inst_out_code = None
         self._ip_id = None
@@ -78,6 +79,13 @@ class SceneProdPaymentAccountInfo(object):
     @card_holder_name.setter
     def card_holder_name(self, value):
         self._card_holder_name = value
+    @property
+    def ext_card_type(self):
+        return self._ext_card_type
+
+    @ext_card_type.setter
+    def ext_card_type(self, value):
+        self._ext_card_type = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -157,6 +165,11 @@ class SceneProdPaymentAccountInfo(object):
                 params['card_holder_name'] = self.card_holder_name.to_alipay_dict()
             else:
                 params['card_holder_name'] = self.card_holder_name
+        if self.ext_card_type:
+            if hasattr(self.ext_card_type, 'to_alipay_dict'):
+                params['ext_card_type'] = self.ext_card_type.to_alipay_dict()
+            else:
+                params['ext_card_type'] = self.ext_card_type
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -205,6 +218,8 @@ class SceneProdPaymentAccountInfo(object):
             o.bank_card_category = d['bank_card_category']
         if 'card_holder_name' in d:
             o.card_holder_name = d['card_holder_name']
+        if 'ext_card_type' in d:
+            o.ext_card_type = d['ext_card_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'inst_out_code' in d:

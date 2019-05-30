@@ -11,6 +11,7 @@ class PaytoolRequestDetail(object):
     def __init__(self):
         self._amount = None
         self._payer_identity = None
+        self._paytool_business_info = None
         self._paytool_request_no = None
         self._tool_code = None
 
@@ -31,6 +32,13 @@ class PaytoolRequestDetail(object):
             self._payer_identity = value
         else:
             self._payer_identity = UserIdentity.from_alipay_dict(value)
+    @property
+    def paytool_business_info(self):
+        return self._paytool_business_info
+
+    @paytool_business_info.setter
+    def paytool_business_info(self, value):
+        self._paytool_business_info = value
     @property
     def paytool_request_no(self):
         return self._paytool_request_no
@@ -59,6 +67,11 @@ class PaytoolRequestDetail(object):
                 params['payer_identity'] = self.payer_identity.to_alipay_dict()
             else:
                 params['payer_identity'] = self.payer_identity
+        if self.paytool_business_info:
+            if hasattr(self.paytool_business_info, 'to_alipay_dict'):
+                params['paytool_business_info'] = self.paytool_business_info.to_alipay_dict()
+            else:
+                params['paytool_business_info'] = self.paytool_business_info
         if self.paytool_request_no:
             if hasattr(self.paytool_request_no, 'to_alipay_dict'):
                 params['paytool_request_no'] = self.paytool_request_no.to_alipay_dict()
@@ -80,6 +93,8 @@ class PaytoolRequestDetail(object):
             o.amount = d['amount']
         if 'payer_identity' in d:
             o.payer_identity = d['payer_identity']
+        if 'paytool_business_info' in d:
+            o.paytool_business_info = d['paytool_business_info']
         if 'paytool_request_no' in d:
             o.paytool_request_no = d['paytool_request_no']
         if 'tool_code' in d:

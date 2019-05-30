@@ -9,7 +9,11 @@ from alipay.aop.api.domain.SceneProdBillDetail import SceneProdBillDetail
 class MybankCreditSceneprodBillSyncModel(object):
 
     def __init__(self):
+        self._app_seq_no = None
         self._bill_list = None
+        self._cert_name = None
+        self._cert_no = None
+        self._drawdown_no = None
         self._ext_param = None
         self._org_code = None
         self._out_order_no = None
@@ -17,6 +21,13 @@ class MybankCreditSceneprodBillSyncModel(object):
         self._site = None
         self._site_user_id = None
 
+    @property
+    def app_seq_no(self):
+        return self._app_seq_no
+
+    @app_seq_no.setter
+    def app_seq_no(self, value):
+        self._app_seq_no = value
     @property
     def bill_list(self):
         return self._bill_list
@@ -30,6 +41,27 @@ class MybankCreditSceneprodBillSyncModel(object):
                     self._bill_list.append(i)
                 else:
                     self._bill_list.append(SceneProdBillDetail.from_alipay_dict(i))
+    @property
+    def cert_name(self):
+        return self._cert_name
+
+    @cert_name.setter
+    def cert_name(self, value):
+        self._cert_name = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
+    @property
+    def drawdown_no(self):
+        return self._drawdown_no
+
+    @drawdown_no.setter
+    def drawdown_no(self, value):
+        self._drawdown_no = value
     @property
     def ext_param(self):
         return self._ext_param
@@ -76,6 +108,11 @@ class MybankCreditSceneprodBillSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_seq_no:
+            if hasattr(self.app_seq_no, 'to_alipay_dict'):
+                params['app_seq_no'] = self.app_seq_no.to_alipay_dict()
+            else:
+                params['app_seq_no'] = self.app_seq_no
         if self.bill_list:
             if isinstance(self.bill_list, list):
                 for i in range(0, len(self.bill_list)):
@@ -86,6 +123,21 @@ class MybankCreditSceneprodBillSyncModel(object):
                 params['bill_list'] = self.bill_list.to_alipay_dict()
             else:
                 params['bill_list'] = self.bill_list
+        if self.cert_name:
+            if hasattr(self.cert_name, 'to_alipay_dict'):
+                params['cert_name'] = self.cert_name.to_alipay_dict()
+            else:
+                params['cert_name'] = self.cert_name
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
+        if self.drawdown_no:
+            if hasattr(self.drawdown_no, 'to_alipay_dict'):
+                params['drawdown_no'] = self.drawdown_no.to_alipay_dict()
+            else:
+                params['drawdown_no'] = self.drawdown_no
         if self.ext_param:
             if hasattr(self.ext_param, 'to_alipay_dict'):
                 params['ext_param'] = self.ext_param.to_alipay_dict()
@@ -123,8 +175,16 @@ class MybankCreditSceneprodBillSyncModel(object):
         if not d:
             return None
         o = MybankCreditSceneprodBillSyncModel()
+        if 'app_seq_no' in d:
+            o.app_seq_no = d['app_seq_no']
         if 'bill_list' in d:
             o.bill_list = d['bill_list']
+        if 'cert_name' in d:
+            o.cert_name = d['cert_name']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
+        if 'drawdown_no' in d:
+            o.drawdown_no = d['drawdown_no']
         if 'ext_param' in d:
             o.ext_param = d['ext_param']
         if 'org_code' in d:

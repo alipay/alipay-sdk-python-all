@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditEpSceneAgreementUseModel(object):
 
     def __init__(self):
+        self._biz_ext_param = None
         self._biz_time = None
         self._out_order_no = None
         self._provision_code = None
         self._rating_order_no = None
 
+    @property
+    def biz_ext_param(self):
+        return self._biz_ext_param
+
+    @biz_ext_param.setter
+    def biz_ext_param(self, value):
+        self._biz_ext_param = value
     @property
     def biz_time(self):
         return self._biz_time
@@ -45,6 +53,11 @@ class ZhimaCreditEpSceneAgreementUseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_ext_param:
+            if hasattr(self.biz_ext_param, 'to_alipay_dict'):
+                params['biz_ext_param'] = self.biz_ext_param.to_alipay_dict()
+            else:
+                params['biz_ext_param'] = self.biz_ext_param
         if self.biz_time:
             if hasattr(self.biz_time, 'to_alipay_dict'):
                 params['biz_time'] = self.biz_time.to_alipay_dict()
@@ -72,6 +85,8 @@ class ZhimaCreditEpSceneAgreementUseModel(object):
         if not d:
             return None
         o = ZhimaCreditEpSceneAgreementUseModel()
+        if 'biz_ext_param' in d:
+            o.biz_ext_param = d['biz_ext_param']
         if 'biz_time' in d:
             o.biz_time = d['biz_time']
         if 'out_order_no' in d:

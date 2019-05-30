@@ -11,9 +11,11 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
         self._app_category_ids = None
         self._app_desc = None
         self._app_english_name = None
+        self._app_key = None
         self._app_logo = None
         self._app_name = None
         self._app_slogan = None
+        self._inst_code = None
         self._mini_app_id = None
         self._service_email = None
         self._service_phone = None
@@ -40,6 +42,13 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
     def app_english_name(self, value):
         self._app_english_name = value
     @property
+    def app_key(self):
+        return self._app_key
+
+    @app_key.setter
+    def app_key(self, value):
+        self._app_key = value
+    @property
     def app_logo(self):
         return self._app_logo
 
@@ -60,6 +69,13 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
     @app_slogan.setter
     def app_slogan(self, value):
         self._app_slogan = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -100,6 +116,11 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
                 params['app_english_name'] = self.app_english_name.to_alipay_dict()
             else:
                 params['app_english_name'] = self.app_english_name
+        if self.app_key:
+            if hasattr(self.app_key, 'to_alipay_dict'):
+                params['app_key'] = self.app_key.to_alipay_dict()
+            else:
+                params['app_key'] = self.app_key
         if self.app_logo:
             if hasattr(self.app_logo, 'to_alipay_dict'):
                 params['app_logo'] = self.app_logo.to_alipay_dict()
@@ -115,6 +136,11 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
                 params['app_slogan'] = self.app_slogan.to_alipay_dict()
             else:
                 params['app_slogan'] = self.app_slogan
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -143,12 +169,16 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
             o.app_desc = d['app_desc']
         if 'app_english_name' in d:
             o.app_english_name = d['app_english_name']
+        if 'app_key' in d:
+            o.app_key = d['app_key']
         if 'app_logo' in d:
             o.app_logo = d['app_logo']
         if 'app_name' in d:
             o.app_name = d['app_name']
         if 'app_slogan' in d:
             o.app_slogan = d['app_slogan']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'service_email' in d:

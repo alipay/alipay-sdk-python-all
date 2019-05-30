@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AgreementParams import AgreementParams
+from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
@@ -16,6 +17,7 @@ from alipay.aop.api.domain.SubMerchant import SubMerchant
 class AlipayTradePayModel(object):
 
     def __init__(self):
+        self._advance_payment_type = None
         self._agreement_params = None
         self._alipay_store_id = None
         self._auth_code = None
@@ -49,6 +51,13 @@ class AlipayTradePayModel(object):
         self._trans_currency = None
         self._undiscountable_amount = None
 
+    @property
+    def advance_payment_type(self):
+        return self._advance_payment_type
+
+    @advance_payment_type.setter
+    def advance_payment_type(self, value):
+        self._advance_payment_type = value
     @property
     def agreement_params(self):
         return self._agreement_params
@@ -100,7 +109,10 @@ class AlipayTradePayModel(object):
 
     @business_params.setter
     def business_params(self, value):
-        self._business_params = value
+        if isinstance(value, BusinessParams):
+            self._business_params = value
+        else:
+            self._business_params = BusinessParams.from_alipay_dict(value)
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -304,6 +316,11 @@ class AlipayTradePayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.advance_payment_type:
+            if hasattr(self.advance_payment_type, 'to_alipay_dict'):
+                params['advance_payment_type'] = self.advance_payment_type.to_alipay_dict()
+            else:
+                params['advance_payment_type'] = self.advance_payment_type
         if self.agreement_params:
             if hasattr(self.agreement_params, 'to_alipay_dict'):
                 params['agreement_params'] = self.agreement_params.to_alipay_dict()
@@ -476,6 +493,8 @@ class AlipayTradePayModel(object):
         if not d:
             return None
         o = AlipayTradePayModel()
+        if 'advance_payment_type' in d:
+            o.advance_payment_type = d['advance_payment_type']
         if 'agreement_params' in d:
             o.agreement_params = d['agreement_params']
         if 'alipay_store_id' in d:

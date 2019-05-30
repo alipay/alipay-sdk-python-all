@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsPerson import InsPerson
 from alipay.aop.api.domain.InsObject import InsObject
 from alipay.aop.api.domain.InsPerson import InsPerson
+from alipay.aop.api.domain.InsPerson import InsPerson
 
 
 class AlipayInsSceneApplicationApplyModel(object):
@@ -22,7 +23,9 @@ class AlipayInsSceneApplicationApplyModel(object):
         self._period = None
         self._premium = None
         self._prod_code = None
+        self._recom_flow_no = None
         self._source = None
+        self._stake_holders = None
         self._sum_insured = None
 
     @property
@@ -118,12 +121,32 @@ class AlipayInsSceneApplicationApplyModel(object):
     def prod_code(self, value):
         self._prod_code = value
     @property
+    def recom_flow_no(self):
+        return self._recom_flow_no
+
+    @recom_flow_no.setter
+    def recom_flow_no(self, value):
+        self._recom_flow_no = value
+    @property
     def source(self):
         return self._source
 
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def stake_holders(self):
+        return self._stake_holders
+
+    @stake_holders.setter
+    def stake_holders(self, value):
+        if isinstance(value, list):
+            self._stake_holders = list()
+            for i in value:
+                if isinstance(i, InsPerson):
+                    self._stake_holders.append(i)
+                else:
+                    self._stake_holders.append(InsPerson.from_alipay_dict(i))
     @property
     def sum_insured(self):
         return self._sum_insured
@@ -200,11 +223,26 @@ class AlipayInsSceneApplicationApplyModel(object):
                 params['prod_code'] = self.prod_code.to_alipay_dict()
             else:
                 params['prod_code'] = self.prod_code
+        if self.recom_flow_no:
+            if hasattr(self.recom_flow_no, 'to_alipay_dict'):
+                params['recom_flow_no'] = self.recom_flow_no.to_alipay_dict()
+            else:
+                params['recom_flow_no'] = self.recom_flow_no
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.stake_holders:
+            if isinstance(self.stake_holders, list):
+                for i in range(0, len(self.stake_holders)):
+                    element = self.stake_holders[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.stake_holders[i] = element.to_alipay_dict()
+            if hasattr(self.stake_holders, 'to_alipay_dict'):
+                params['stake_holders'] = self.stake_holders.to_alipay_dict()
+            else:
+                params['stake_holders'] = self.stake_holders
         if self.sum_insured:
             if hasattr(self.sum_insured, 'to_alipay_dict'):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
@@ -239,8 +277,12 @@ class AlipayInsSceneApplicationApplyModel(object):
             o.premium = d['premium']
         if 'prod_code' in d:
             o.prod_code = d['prod_code']
+        if 'recom_flow_no' in d:
+            o.recom_flow_no = d['recom_flow_no']
         if 'source' in d:
             o.source = d['source']
+        if 'stake_holders' in d:
+            o.stake_holders = d['stake_holders']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
         return o

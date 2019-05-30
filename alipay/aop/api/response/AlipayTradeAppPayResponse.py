@@ -9,11 +9,19 @@ class AlipayTradeAppPayResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeAppPayResponse, self).__init__()
+        self._merchant_order_no = None
         self._out_trade_no = None
         self._seller_id = None
         self._total_amount = None
         self._trade_no = None
 
+    @property
+    def merchant_order_no(self):
+        return self._merchant_order_no
+
+    @merchant_order_no.setter
+    def merchant_order_no(self, value):
+        self._merchant_order_no = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -45,6 +53,8 @@ class AlipayTradeAppPayResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeAppPayResponse, self).parse_response_content(response_content)
+        if 'merchant_order_no' in response:
+            self.merchant_order_no = response['merchant_order_no']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'seller_id' in response:

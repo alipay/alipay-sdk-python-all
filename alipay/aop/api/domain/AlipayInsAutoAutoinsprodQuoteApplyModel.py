@@ -18,6 +18,7 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
         self._company_ids = None
         self._enquiry_biz_id = None
         self._force_product = None
+        self._is_tong_rong = None
         self._quote_type = None
 
     @property
@@ -86,6 +87,13 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
         else:
             self._force_product = InsProduct.from_alipay_dict(value)
     @property
+    def is_tong_rong(self):
+        return self._is_tong_rong
+
+    @is_tong_rong.setter
+    def is_tong_rong(self, value):
+        self._is_tong_rong = value
+    @property
     def quote_type(self):
         return self._quote_type
 
@@ -141,6 +149,11 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
                 params['force_product'] = self.force_product.to_alipay_dict()
             else:
                 params['force_product'] = self.force_product
+        if self.is_tong_rong:
+            if hasattr(self.is_tong_rong, 'to_alipay_dict'):
+                params['is_tong_rong'] = self.is_tong_rong.to_alipay_dict()
+            else:
+                params['is_tong_rong'] = self.is_tong_rong
         if self.quote_type:
             if hasattr(self.quote_type, 'to_alipay_dict'):
                 params['quote_type'] = self.quote_type.to_alipay_dict()
@@ -169,6 +182,8 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
             o.enquiry_biz_id = d['enquiry_biz_id']
         if 'force_product' in d:
             o.force_product = d['force_product']
+        if 'is_tong_rong' in d:
+            o.is_tong_rong = d['is_tong_rong']
         if 'quote_type' in d:
             o.quote_type = d['quote_type']
         return o
