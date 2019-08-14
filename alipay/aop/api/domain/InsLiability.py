@@ -18,6 +18,7 @@ class InsLiability(object):
         self._liability_name = None
         self._liability_no = None
         self._liability_premium = None
+        self._liability_rates = None
         self._options = None
         self._premium = None
         self._sum_insured = None
@@ -78,6 +79,13 @@ class InsLiability(object):
     @liability_premium.setter
     def liability_premium(self, value):
         self._liability_premium = value
+    @property
+    def liability_rates(self):
+        return self._liability_rates
+
+    @liability_rates.setter
+    def liability_rates(self, value):
+        self._liability_rates = value
     @property
     def options(self):
         return self._options
@@ -152,6 +160,11 @@ class InsLiability(object):
                 params['liability_premium'] = self.liability_premium.to_alipay_dict()
             else:
                 params['liability_premium'] = self.liability_premium
+        if self.liability_rates:
+            if hasattr(self.liability_rates, 'to_alipay_dict'):
+                params['liability_rates'] = self.liability_rates.to_alipay_dict()
+            else:
+                params['liability_rates'] = self.liability_rates
         if self.options:
             if isinstance(self.options, list):
                 for i in range(0, len(self.options)):
@@ -195,6 +208,8 @@ class InsLiability(object):
             o.liability_no = d['liability_no']
         if 'liability_premium' in d:
             o.liability_premium = d['liability_premium']
+        if 'liability_rates' in d:
+            o.liability_rates = d['liability_rates']
         if 'options' in d:
             o.options = d['options']
         if 'premium' in d:

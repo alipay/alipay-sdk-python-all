@@ -7,6 +7,7 @@ from alipay.aop.api.domain.InsPerson import InsPerson
 from alipay.aop.api.domain.AgentOrganization import AgentOrganization
 from alipay.aop.api.domain.AgentOrganization import AgentOrganization
 from alipay.aop.api.domain.InsPerson import InsPerson
+from alipay.aop.api.domain.ApplyBusinessCity import ApplyBusinessCity
 from alipay.aop.api.domain.Car import Car
 from alipay.aop.api.domain.InsPerson import InsPerson
 from alipay.aop.api.domain.InsPerson import InsPerson
@@ -20,6 +21,7 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
         self._agent_tech_organization = None
         self._agent_user_id = None
         self._applicant = None
+        self._apply_business_city = None
         self._car = None
         self._car_owner = None
         self._city_code = None
@@ -73,6 +75,16 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
             self._applicant = value
         else:
             self._applicant = InsPerson.from_alipay_dict(value)
+    @property
+    def apply_business_city(self):
+        return self._apply_business_city
+
+    @apply_business_city.setter
+    def apply_business_city(self, value):
+        if isinstance(value, ApplyBusinessCity):
+            self._apply_business_city = value
+        else:
+            self._apply_business_city = ApplyBusinessCity.from_alipay_dict(value)
     @property
     def car(self):
         return self._car
@@ -146,6 +158,11 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
                 params['applicant'] = self.applicant.to_alipay_dict()
             else:
                 params['applicant'] = self.applicant
+        if self.apply_business_city:
+            if hasattr(self.apply_business_city, 'to_alipay_dict'):
+                params['apply_business_city'] = self.apply_business_city.to_alipay_dict()
+            else:
+                params['apply_business_city'] = self.apply_business_city
         if self.car:
             if hasattr(self.car, 'to_alipay_dict'):
                 params['car'] = self.car.to_alipay_dict()
@@ -188,6 +205,8 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
             o.agent_user_id = d['agent_user_id']
         if 'applicant' in d:
             o.applicant = d['applicant']
+        if 'apply_business_city' in d:
+            o.apply_business_city = d['apply_business_city']
         if 'car' in d:
             o.car = d['car']
         if 'car_owner' in d:

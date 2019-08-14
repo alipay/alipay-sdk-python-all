@@ -13,6 +13,7 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
         self._image_info_list = None
         self._params = None
         self._request_type = None
+        self._user_id = None
 
     @property
     def biz_id(self):
@@ -48,6 +49,13 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
     @request_type.setter
     def request_type(self, value):
         self._request_type = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -77,6 +85,11 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
                 params['request_type'] = self.request_type.to_alipay_dict()
             else:
                 params['request_type'] = self.request_type
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -92,6 +105,8 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
             o.params = d['params']
         if 'request_type' in d:
             o.request_type = d['request_type']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

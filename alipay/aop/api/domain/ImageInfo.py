@@ -10,6 +10,8 @@ class ImageInfo(object):
     def __init__(self):
         self._image = None
         self._image_type = None
+        self._md_5 = None
+        self._name = None
 
     @property
     def image(self):
@@ -25,6 +27,20 @@ class ImageInfo(object):
     @image_type.setter
     def image_type(self, value):
         self._image_type = value
+    @property
+    def md_5(self):
+        return self._md_5
+
+    @md_5.setter
+    def md_5(self, value):
+        self._md_5 = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +55,16 @@ class ImageInfo(object):
                 params['image_type'] = self.image_type.to_alipay_dict()
             else:
                 params['image_type'] = self.image_type
+        if self.md_5:
+            if hasattr(self.md_5, 'to_alipay_dict'):
+                params['md_5'] = self.md_5.to_alipay_dict()
+            else:
+                params['md_5'] = self.md_5
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         return params
 
     @staticmethod
@@ -50,6 +76,10 @@ class ImageInfo(object):
             o.image = d['image']
         if 'image_type' in d:
             o.image_type = d['image_type']
+        if 'md_5' in d:
+            o.md_5 = d['md_5']
+        if 'name' in d:
+            o.name = d['name']
         return o
 
 

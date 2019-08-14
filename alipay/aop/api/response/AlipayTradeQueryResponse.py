@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
+from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
 
@@ -46,6 +47,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._terminal_id = None
         self._total_amount = None
         self._trade_no = None
+        self._trade_settle_info = None
         self._trade_status = None
         self._trans_currency = None
         self._trans_pay_rate = None
@@ -303,6 +305,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def trade_no(self, value):
         self._trade_no = value
     @property
+    def trade_settle_info(self):
+        return self._trade_settle_info
+
+    @trade_settle_info.setter
+    def trade_settle_info(self, value):
+        if isinstance(value, TradeSettleInfo):
+            self._trade_settle_info = value
+        else:
+            self._trade_settle_info = TradeSettleInfo.from_alipay_dict(value)
+    @property
     def trade_status(self):
         return self._trade_status
 
@@ -409,6 +421,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.total_amount = response['total_amount']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
+        if 'trade_settle_info' in response:
+            self.trade_settle_info = response['trade_settle_info']
         if 'trade_status' in response:
             self.trade_status = response['trade_status']
         if 'trans_currency' in response:

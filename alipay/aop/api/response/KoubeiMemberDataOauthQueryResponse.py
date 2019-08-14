@@ -13,6 +13,7 @@ class KoubeiMemberDataOauthQueryResponse(AlipayResponse):
         self._operator_id = None
         self._operator_partner_id = None
         self._operator_type = None
+        self._shop_ids = None
 
     @property
     def ext_info(self):
@@ -42,6 +43,13 @@ class KoubeiMemberDataOauthQueryResponse(AlipayResponse):
     @operator_type.setter
     def operator_type(self, value):
         self._operator_type = value
+    @property
+    def shop_ids(self):
+        return self._shop_ids
+
+    @shop_ids.setter
+    def shop_ids(self, value):
+        self._shop_ids = value
 
     def parse_response_content(self, response_content):
         response = super(KoubeiMemberDataOauthQueryResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class KoubeiMemberDataOauthQueryResponse(AlipayResponse):
             self.operator_partner_id = response['operator_partner_id']
         if 'operator_type' in response:
             self.operator_type = response['operator_type']
+        if 'shop_ids' in response:
+            self.shop_ids = response['shop_ids']

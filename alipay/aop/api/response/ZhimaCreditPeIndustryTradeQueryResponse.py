@@ -10,6 +10,7 @@ class ZhimaCreditPeIndustryTradeQueryResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditPeIndustryTradeQueryResponse, self).__init__()
         self._alipay_fund_order_no = None
+        self._alipay_out_trade_no = None
         self._amount = None
         self._fund_status = None
         self._fund_type = None
@@ -24,6 +25,13 @@ class ZhimaCreditPeIndustryTradeQueryResponse(AlipayResponse):
     @alipay_fund_order_no.setter
     def alipay_fund_order_no(self, value):
         self._alipay_fund_order_no = value
+    @property
+    def alipay_out_trade_no(self):
+        return self._alipay_out_trade_no
+
+    @alipay_out_trade_no.setter
+    def alipay_out_trade_no(self, value):
+        self._alipay_out_trade_no = value
     @property
     def amount(self):
         return self._amount
@@ -71,6 +79,8 @@ class ZhimaCreditPeIndustryTradeQueryResponse(AlipayResponse):
         response = super(ZhimaCreditPeIndustryTradeQueryResponse, self).parse_response_content(response_content)
         if 'alipay_fund_order_no' in response:
             self.alipay_fund_order_no = response['alipay_fund_order_no']
+        if 'alipay_out_trade_no' in response:
+            self.alipay_out_trade_no = response['alipay_out_trade_no']
         if 'amount' in response:
             self.amount = response['amount']
         if 'fund_status' in response:

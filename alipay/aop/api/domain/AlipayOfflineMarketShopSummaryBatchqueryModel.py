@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOfflineMarketShopSummaryBatchqueryModel(object):
 
     def __init__(self):
+        self._biz_channel = None
         self._brand_name = None
         self._city_code = None
         self._district_code = None
@@ -20,6 +21,13 @@ class AlipayOfflineMarketShopSummaryBatchqueryModel(object):
         self._shop_id = None
         self._shop_status = None
 
+    @property
+    def biz_channel(self):
+        return self._biz_channel
+
+    @biz_channel.setter
+    def biz_channel(self, value):
+        self._biz_channel = value
     @property
     def brand_name(self):
         return self._brand_name
@@ -101,6 +109,11 @@ class AlipayOfflineMarketShopSummaryBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_channel:
+            if hasattr(self.biz_channel, 'to_alipay_dict'):
+                params['biz_channel'] = self.biz_channel.to_alipay_dict()
+            else:
+                params['biz_channel'] = self.biz_channel
         if self.brand_name:
             if hasattr(self.brand_name, 'to_alipay_dict'):
                 params['brand_name'] = self.brand_name.to_alipay_dict()
@@ -163,6 +176,8 @@ class AlipayOfflineMarketShopSummaryBatchqueryModel(object):
         if not d:
             return None
         o = AlipayOfflineMarketShopSummaryBatchqueryModel()
+        if 'biz_channel' in d:
+            o.biz_channel = d['biz_channel']
         if 'brand_name' in d:
             o.brand_name = d['brand_name']
         if 'city_code' in d:

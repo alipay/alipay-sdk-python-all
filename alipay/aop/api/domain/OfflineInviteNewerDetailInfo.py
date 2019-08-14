@@ -9,6 +9,7 @@ class OfflineInviteNewerDetailInfo(object):
 
     def __init__(self):
         self._city_name = None
+        self._ext_info = None
         self._invited_phone = None
         self._lbs_rate = None
         self._partner_id = None
@@ -27,6 +28,13 @@ class OfflineInviteNewerDetailInfo(object):
     @city_name.setter
     def city_name(self, value):
         self._city_name = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def invited_phone(self):
         return self._invited_phone
@@ -106,6 +114,11 @@ class OfflineInviteNewerDetailInfo(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.invited_phone:
             if hasattr(self.invited_phone, 'to_alipay_dict'):
                 params['invited_phone'] = self.invited_phone.to_alipay_dict()
@@ -165,6 +178,8 @@ class OfflineInviteNewerDetailInfo(object):
         o = OfflineInviteNewerDetailInfo()
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'invited_phone' in d:
             o.invited_phone = d['invited_phone']
         if 'lbs_rate' in d:

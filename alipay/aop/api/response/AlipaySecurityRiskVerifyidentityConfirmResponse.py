@@ -9,10 +9,18 @@ class AlipaySecurityRiskVerifyidentityConfirmResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipaySecurityRiskVerifyidentityConfirmResponse, self).__init__()
+        self._biz_data = None
         self._error_code = None
         self._error_msg = None
         self._verify_result = None
 
+    @property
+    def biz_data(self):
+        return self._biz_data
+
+    @biz_data.setter
+    def biz_data(self, value):
+        self._biz_data = value
     @property
     def error_code(self):
         return self._error_code
@@ -37,6 +45,8 @@ class AlipaySecurityRiskVerifyidentityConfirmResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipaySecurityRiskVerifyidentityConfirmResponse, self).parse_response_content(response_content)
+        if 'biz_data' in response:
+            self.biz_data = response['biz_data']
         if 'error_code' in response:
             self.error_code = response['error_code']
         if 'error_msg' in response:

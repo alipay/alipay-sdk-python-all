@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditPeUserRiskConsultModel(object):
 
     def __init__(self):
+        self._apply_amount = None
         self._biz_action = None
         self._category_code = None
         self._credit_scene = None
@@ -16,6 +17,13 @@ class ZhimaCreditPeUserRiskConsultModel(object):
         self._product_code = None
         self._risk_info = None
 
+    @property
+    def apply_amount(self):
+        return self._apply_amount
+
+    @apply_amount.setter
+    def apply_amount(self, value):
+        self._apply_amount = value
     @property
     def biz_action(self):
         return self._biz_action
@@ -69,6 +77,11 @@ class ZhimaCreditPeUserRiskConsultModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_amount:
+            if hasattr(self.apply_amount, 'to_alipay_dict'):
+                params['apply_amount'] = self.apply_amount.to_alipay_dict()
+            else:
+                params['apply_amount'] = self.apply_amount
         if self.biz_action:
             if hasattr(self.biz_action, 'to_alipay_dict'):
                 params['biz_action'] = self.biz_action.to_alipay_dict()
@@ -111,6 +124,8 @@ class ZhimaCreditPeUserRiskConsultModel(object):
         if not d:
             return None
         o = ZhimaCreditPeUserRiskConsultModel()
+        if 'apply_amount' in d:
+            o.apply_amount = d['apply_amount']
         if 'biz_action' in d:
             o.biz_action = d['biz_action']
         if 'category_code' in d:

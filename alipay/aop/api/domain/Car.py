@@ -18,6 +18,7 @@ class Car(object):
         self._first_register_date = None
         self._is_new = None
         self._license_address = None
+        self._loan_flag = None
         self._seat_number = None
         self._transfer_car = None
         self._transfer_date = None
@@ -81,6 +82,13 @@ class Car(object):
     @license_address.setter
     def license_address(self, value):
         self._license_address = value
+    @property
+    def loan_flag(self):
+        return self._loan_flag
+
+    @loan_flag.setter
+    def loan_flag(self, value):
+        self._loan_flag = value
     @property
     def seat_number(self):
         return self._seat_number
@@ -176,6 +184,11 @@ class Car(object):
                 params['license_address'] = self.license_address.to_alipay_dict()
             else:
                 params['license_address'] = self.license_address
+        if self.loan_flag:
+            if hasattr(self.loan_flag, 'to_alipay_dict'):
+                params['loan_flag'] = self.loan_flag.to_alipay_dict()
+            else:
+                params['loan_flag'] = self.loan_flag
         if self.seat_number:
             if hasattr(self.seat_number, 'to_alipay_dict'):
                 params['seat_number'] = self.seat_number.to_alipay_dict()
@@ -234,6 +247,8 @@ class Car(object):
             o.is_new = d['is_new']
         if 'license_address' in d:
             o.license_address = d['license_address']
+        if 'loan_flag' in d:
+            o.loan_flag = d['loan_flag']
         if 'seat_number' in d:
             o.seat_number = d['seat_number']
         if 'transfer_car' in d:

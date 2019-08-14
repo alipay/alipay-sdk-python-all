@@ -9,6 +9,7 @@ class MybankCreditSceneprodLoanCancelModel(object):
 
     def __init__(self):
         self._cancel_reason = None
+        self._mybk_order_no = None
         self._org_code = None
         self._out_order_no = None
         self._product_code = None
@@ -22,6 +23,13 @@ class MybankCreditSceneprodLoanCancelModel(object):
     @cancel_reason.setter
     def cancel_reason(self, value):
         self._cancel_reason = value
+    @property
+    def mybk_order_no(self):
+        return self._mybk_order_no
+
+    @mybk_order_no.setter
+    def mybk_order_no(self, value):
+        self._mybk_order_no = value
     @property
     def org_code(self):
         return self._org_code
@@ -66,6 +74,11 @@ class MybankCreditSceneprodLoanCancelModel(object):
                 params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
             else:
                 params['cancel_reason'] = self.cancel_reason
+        if self.mybk_order_no:
+            if hasattr(self.mybk_order_no, 'to_alipay_dict'):
+                params['mybk_order_no'] = self.mybk_order_no.to_alipay_dict()
+            else:
+                params['mybk_order_no'] = self.mybk_order_no
         if self.org_code:
             if hasattr(self.org_code, 'to_alipay_dict'):
                 params['org_code'] = self.org_code.to_alipay_dict()
@@ -100,6 +113,8 @@ class MybankCreditSceneprodLoanCancelModel(object):
         o = MybankCreditSceneprodLoanCancelModel()
         if 'cancel_reason' in d:
             o.cancel_reason = d['cancel_reason']
+        if 'mybk_order_no' in d:
+            o.mybk_order_no = d['mybk_order_no']
         if 'org_code' in d:
             o.org_code = d['org_code']
         if 'out_order_no' in d:

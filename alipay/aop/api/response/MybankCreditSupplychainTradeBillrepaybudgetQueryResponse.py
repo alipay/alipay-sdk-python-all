@@ -13,6 +13,7 @@ class MybankCreditSupplychainTradeBillrepaybudgetQueryResponse(AlipayResponse):
         super(MybankCreditSupplychainTradeBillrepaybudgetQueryResponse, self).__init__()
         self._bill_amt_detail = None
         self._can_repay = None
+        self._exempt_amt = None
         self._install_budget_detail_list = None
         self._out_order = None
         self._status = None
@@ -35,6 +36,13 @@ class MybankCreditSupplychainTradeBillrepaybudgetQueryResponse(AlipayResponse):
     @can_repay.setter
     def can_repay(self, value):
         self._can_repay = value
+    @property
+    def exempt_amt(self):
+        return self._exempt_amt
+
+    @exempt_amt.setter
+    def exempt_amt(self, value):
+        self._exempt_amt = value
     @property
     def install_budget_detail_list(self):
         return self._install_budget_detail_list
@@ -76,6 +84,8 @@ class MybankCreditSupplychainTradeBillrepaybudgetQueryResponse(AlipayResponse):
             self.bill_amt_detail = response['bill_amt_detail']
         if 'can_repay' in response:
             self.can_repay = response['can_repay']
+        if 'exempt_amt' in response:
+            self.exempt_amt = response['exempt_amt']
         if 'install_budget_detail_list' in response:
             self.install_budget_detail_list = response['install_budget_detail_list']
         if 'out_order' in response:

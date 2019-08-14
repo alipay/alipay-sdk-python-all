@@ -11,6 +11,8 @@ class CloudbusTimeOdItem(object):
         self._bus_od = None
         self._od = None
         self._time = None
+        self._week_od = None
+        self._work_od = None
 
     @property
     def bus_od(self):
@@ -33,6 +35,20 @@ class CloudbusTimeOdItem(object):
     @time.setter
     def time(self, value):
         self._time = value
+    @property
+    def week_od(self):
+        return self._week_od
+
+    @week_od.setter
+    def week_od(self, value):
+        self._week_od = value
+    @property
+    def work_od(self):
+        return self._work_od
+
+    @work_od.setter
+    def work_od(self, value):
+        self._work_od = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +68,16 @@ class CloudbusTimeOdItem(object):
                 params['time'] = self.time.to_alipay_dict()
             else:
                 params['time'] = self.time
+        if self.week_od:
+            if hasattr(self.week_od, 'to_alipay_dict'):
+                params['week_od'] = self.week_od.to_alipay_dict()
+            else:
+                params['week_od'] = self.week_od
+        if self.work_od:
+            if hasattr(self.work_od, 'to_alipay_dict'):
+                params['work_od'] = self.work_od.to_alipay_dict()
+            else:
+                params['work_od'] = self.work_od
         return params
 
     @staticmethod
@@ -65,6 +91,10 @@ class CloudbusTimeOdItem(object):
             o.od = d['od']
         if 'time' in d:
             o.time = d['time']
+        if 'week_od' in d:
+            o.week_od = d['week_od']
+        if 'work_od' in d:
+            o.work_od = d['work_od']
         return o
 
 

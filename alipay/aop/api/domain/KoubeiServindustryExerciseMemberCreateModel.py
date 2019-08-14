@@ -9,6 +9,7 @@ class KoubeiServindustryExerciseMemberCreateModel(object):
 
     def __init__(self):
         self._external_member_id = None
+        self._fitness_id = None
         self._gmt_end = None
         self._gmt_start = None
         self._level = None
@@ -26,6 +27,13 @@ class KoubeiServindustryExerciseMemberCreateModel(object):
     @external_member_id.setter
     def external_member_id(self, value):
         self._external_member_id = value
+    @property
+    def fitness_id(self):
+        return self._fitness_id
+
+    @fitness_id.setter
+    def fitness_id(self, value):
+        self._fitness_id = value
     @property
     def gmt_end(self):
         return self._gmt_end
@@ -101,6 +109,11 @@ class KoubeiServindustryExerciseMemberCreateModel(object):
                 params['external_member_id'] = self.external_member_id.to_alipay_dict()
             else:
                 params['external_member_id'] = self.external_member_id
+        if self.fitness_id:
+            if hasattr(self.fitness_id, 'to_alipay_dict'):
+                params['fitness_id'] = self.fitness_id.to_alipay_dict()
+            else:
+                params['fitness_id'] = self.fitness_id
         if self.gmt_end:
             if hasattr(self.gmt_end, 'to_alipay_dict'):
                 params['gmt_end'] = self.gmt_end.to_alipay_dict()
@@ -160,6 +173,8 @@ class KoubeiServindustryExerciseMemberCreateModel(object):
         o = KoubeiServindustryExerciseMemberCreateModel()
         if 'external_member_id' in d:
             o.external_member_id = d['external_member_id']
+        if 'fitness_id' in d:
+            o.fitness_id = d['fitness_id']
         if 'gmt_end' in d:
             o.gmt_end = d['gmt_end']
         if 'gmt_start' in d:

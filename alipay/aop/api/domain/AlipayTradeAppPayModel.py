@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SignParams import SignParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.InvoiceInfo import InvoiceInfo
@@ -14,6 +15,7 @@ from alipay.aop.api.domain.SubMerchant import SubMerchant
 class AlipayTradeAppPayModel(object):
 
     def __init__(self):
+        self._agreement_sign_params = None
         self._body = None
         self._business_params = None
         self._disable_pay_channels = None
@@ -38,6 +40,16 @@ class AlipayTradeAppPayModel(object):
         self._timeout_express = None
         self._total_amount = None
 
+    @property
+    def agreement_sign_params(self):
+        return self._agreement_sign_params
+
+    @agreement_sign_params.setter
+    def agreement_sign_params(self, value):
+        if isinstance(value, SignParams):
+            self._agreement_sign_params = value
+        else:
+            self._agreement_sign_params = SignParams.from_alipay_dict(value)
     @property
     def body(self):
         return self._body
@@ -221,6 +233,11 @@ class AlipayTradeAppPayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_sign_params:
+            if hasattr(self.agreement_sign_params, 'to_alipay_dict'):
+                params['agreement_sign_params'] = self.agreement_sign_params.to_alipay_dict()
+            else:
+                params['agreement_sign_params'] = self.agreement_sign_params
         if self.body:
             if hasattr(self.body, 'to_alipay_dict'):
                 params['body'] = self.body.to_alipay_dict()
@@ -343,6 +360,8 @@ class AlipayTradeAppPayModel(object):
         if not d:
             return None
         o = AlipayTradeAppPayModel()
+        if 'agreement_sign_params' in d:
+            o.agreement_sign_params = d['agreement_sign_params']
         if 'body' in d:
             o.body = d['body']
         if 'business_params' in d:

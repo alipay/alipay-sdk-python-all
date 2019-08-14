@@ -15,6 +15,7 @@ class GroupFundUserBill(object):
         self._bill_no = None
         self._bill_type = None
         self._status = None
+        self._timeout = None
         self._user_id = None
 
     @property
@@ -67,6 +68,13 @@ class GroupFundUserBill(object):
     def status(self, value):
         self._status = value
     @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, value):
+        self._timeout = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -112,6 +120,11 @@ class GroupFundUserBill(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.timeout:
+            if hasattr(self.timeout, 'to_alipay_dict'):
+                params['timeout'] = self.timeout.to_alipay_dict()
+            else:
+                params['timeout'] = self.timeout
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -138,6 +151,8 @@ class GroupFundUserBill(object):
             o.bill_type = d['bill_type']
         if 'status' in d:
             o.status = d['status']
+        if 'timeout' in d:
+            o.timeout = d['timeout']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

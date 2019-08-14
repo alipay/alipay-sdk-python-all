@@ -10,6 +10,7 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
     def __init__(self):
         self._cert_no = None
         self._cert_type = None
+        self._operator_user_id = None
         self._parent_phone = None
         self._school_std_code = None
         self._student_name = None
@@ -29,6 +30,13 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def operator_user_id(self):
+        return self._operator_user_id
+
+    @operator_user_id.setter
+    def operator_user_id(self, value):
+        self._operator_user_id = value
     @property
     def parent_phone(self):
         return self._parent_phone
@@ -71,6 +79,11 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.operator_user_id:
+            if hasattr(self.operator_user_id, 'to_alipay_dict'):
+                params['operator_user_id'] = self.operator_user_id.to_alipay_dict()
+            else:
+                params['operator_user_id'] = self.operator_user_id
         if self.parent_phone:
             if hasattr(self.parent_phone, 'to_alipay_dict'):
                 params['parent_phone'] = self.parent_phone.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'operator_user_id' in d:
+            o.operator_user_id = d['operator_user_id']
         if 'parent_phone' in d:
             o.parent_phone = d['parent_phone']
         if 'school_std_code' in d:

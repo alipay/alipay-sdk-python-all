@@ -20,6 +20,11 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
         self._force_product = None
         self._is_tong_rong = None
         self._quote_type = None
+        self._tax_inst_code = None
+        self._tax_inst_name = None
+        self._tax_payment_code = None
+        self._tax_payment_date = None
+        self._tax_type = None
 
     @property
     def business_product(self):
@@ -100,6 +105,41 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
     @quote_type.setter
     def quote_type(self, value):
         self._quote_type = value
+    @property
+    def tax_inst_code(self):
+        return self._tax_inst_code
+
+    @tax_inst_code.setter
+    def tax_inst_code(self, value):
+        self._tax_inst_code = value
+    @property
+    def tax_inst_name(self):
+        return self._tax_inst_name
+
+    @tax_inst_name.setter
+    def tax_inst_name(self, value):
+        self._tax_inst_name = value
+    @property
+    def tax_payment_code(self):
+        return self._tax_payment_code
+
+    @tax_payment_code.setter
+    def tax_payment_code(self, value):
+        self._tax_payment_code = value
+    @property
+    def tax_payment_date(self):
+        return self._tax_payment_date
+
+    @tax_payment_date.setter
+    def tax_payment_date(self, value):
+        self._tax_payment_date = value
+    @property
+    def tax_type(self):
+        return self._tax_type
+
+    @tax_type.setter
+    def tax_type(self, value):
+        self._tax_type = value
 
 
     def to_alipay_dict(self):
@@ -159,6 +199,31 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
                 params['quote_type'] = self.quote_type.to_alipay_dict()
             else:
                 params['quote_type'] = self.quote_type
+        if self.tax_inst_code:
+            if hasattr(self.tax_inst_code, 'to_alipay_dict'):
+                params['tax_inst_code'] = self.tax_inst_code.to_alipay_dict()
+            else:
+                params['tax_inst_code'] = self.tax_inst_code
+        if self.tax_inst_name:
+            if hasattr(self.tax_inst_name, 'to_alipay_dict'):
+                params['tax_inst_name'] = self.tax_inst_name.to_alipay_dict()
+            else:
+                params['tax_inst_name'] = self.tax_inst_name
+        if self.tax_payment_code:
+            if hasattr(self.tax_payment_code, 'to_alipay_dict'):
+                params['tax_payment_code'] = self.tax_payment_code.to_alipay_dict()
+            else:
+                params['tax_payment_code'] = self.tax_payment_code
+        if self.tax_payment_date:
+            if hasattr(self.tax_payment_date, 'to_alipay_dict'):
+                params['tax_payment_date'] = self.tax_payment_date.to_alipay_dict()
+            else:
+                params['tax_payment_date'] = self.tax_payment_date
+        if self.tax_type:
+            if hasattr(self.tax_type, 'to_alipay_dict'):
+                params['tax_type'] = self.tax_type.to_alipay_dict()
+            else:
+                params['tax_type'] = self.tax_type
         return params
 
     @staticmethod
@@ -186,6 +251,16 @@ class AlipayInsAutoAutoinsprodQuoteApplyModel(object):
             o.is_tong_rong = d['is_tong_rong']
         if 'quote_type' in d:
             o.quote_type = d['quote_type']
+        if 'tax_inst_code' in d:
+            o.tax_inst_code = d['tax_inst_code']
+        if 'tax_inst_name' in d:
+            o.tax_inst_name = d['tax_inst_name']
+        if 'tax_payment_code' in d:
+            o.tax_payment_code = d['tax_payment_code']
+        if 'tax_payment_date' in d:
+            o.tax_payment_date = d['tax_payment_date']
+        if 'tax_type' in d:
+            o.tax_type = d['tax_type']
         return o
 
 

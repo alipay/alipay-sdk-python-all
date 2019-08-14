@@ -18,6 +18,7 @@ class BillDingBizOrder(object):
         self._gmt_finish = None
         self._id = None
         self._list_title = None
+        self._login_id = None
         self._opp_login_id = None
         self._opp_nick_name = None
         self._opp_user_name = None
@@ -25,6 +26,7 @@ class BillDingBizOrder(object):
         self._out_order_no = None
         self._sub_biz_scene = None
         self._title = None
+        self._user_name = None
 
     @property
     def amount(self):
@@ -97,6 +99,13 @@ class BillDingBizOrder(object):
     def list_title(self, value):
         self._list_title = value
     @property
+    def login_id(self):
+        return self._login_id
+
+    @login_id.setter
+    def login_id(self, value):
+        self._login_id = value
+    @property
     def opp_login_id(self):
         return self._opp_login_id
 
@@ -145,6 +154,13 @@ class BillDingBizOrder(object):
     @title.setter
     def title(self, value):
         self._title = value
+    @property
+    def user_name(self):
+        return self._user_name
+
+    @user_name.setter
+    def user_name(self, value):
+        self._user_name = value
 
 
     def to_alipay_dict(self):
@@ -199,6 +215,11 @@ class BillDingBizOrder(object):
                 params['list_title'] = self.list_title.to_alipay_dict()
             else:
                 params['list_title'] = self.list_title
+        if self.login_id:
+            if hasattr(self.login_id, 'to_alipay_dict'):
+                params['login_id'] = self.login_id.to_alipay_dict()
+            else:
+                params['login_id'] = self.login_id
         if self.opp_login_id:
             if hasattr(self.opp_login_id, 'to_alipay_dict'):
                 params['opp_login_id'] = self.opp_login_id.to_alipay_dict()
@@ -234,6 +255,11 @@ class BillDingBizOrder(object):
                 params['title'] = self.title.to_alipay_dict()
             else:
                 params['title'] = self.title
+        if self.user_name:
+            if hasattr(self.user_name, 'to_alipay_dict'):
+                params['user_name'] = self.user_name.to_alipay_dict()
+            else:
+                params['user_name'] = self.user_name
         return params
 
     @staticmethod
@@ -261,6 +287,8 @@ class BillDingBizOrder(object):
             o.id = d['id']
         if 'list_title' in d:
             o.list_title = d['list_title']
+        if 'login_id' in d:
+            o.login_id = d['login_id']
         if 'opp_login_id' in d:
             o.opp_login_id = d['opp_login_id']
         if 'opp_nick_name' in d:
@@ -275,6 +303,8 @@ class BillDingBizOrder(object):
             o.sub_biz_scene = d['sub_biz_scene']
         if 'title' in d:
             o.title = d['title']
+        if 'user_name' in d:
+            o.user_name = d['user_name']
         return o
 
 

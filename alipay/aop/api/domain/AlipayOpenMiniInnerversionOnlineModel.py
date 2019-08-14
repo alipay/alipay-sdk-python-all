@@ -10,6 +10,7 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
     def __init__(self):
         self._app_offline_version = None
         self._app_online_version = None
+        self._app_origin = None
         self._bundle_id = None
         self._inst_code = None
         self._mini_app_id = None
@@ -28,6 +29,13 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
     @app_online_version.setter
     def app_online_version(self, value):
         self._app_online_version = value
+    @property
+    def app_origin(self):
+        return self._app_origin
+
+    @app_origin.setter
+    def app_origin(self, value):
+        self._app_origin = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -63,6 +71,11 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
                 params['app_online_version'] = self.app_online_version.to_alipay_dict()
             else:
                 params['app_online_version'] = self.app_online_version
+        if self.app_origin:
+            if hasattr(self.app_origin, 'to_alipay_dict'):
+                params['app_origin'] = self.app_origin.to_alipay_dict()
+            else:
+                params['app_origin'] = self.app_origin
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayOpenMiniInnerversionOnlineModel(object):
             o.app_offline_version = d['app_offline_version']
         if 'app_online_version' in d:
             o.app_online_version = d['app_online_version']
+        if 'app_origin' in d:
+            o.app_origin = d['app_origin']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'inst_code' in d:

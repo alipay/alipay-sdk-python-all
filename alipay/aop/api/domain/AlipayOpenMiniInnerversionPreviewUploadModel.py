@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MiniAppPluginReference import MiniAppPluginReference
 
 
 class AlipayOpenMiniInnerversionPreviewUploadModel(object):
@@ -10,11 +11,13 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     def __init__(self):
         self._build_js_permission = None
         self._build_pkg_url = None
+        self._build_plugin_url = None
         self._bundle_id = None
         self._extend_info = None
         self._inst_code = None
         self._main_url = None
         self._mini_app_id = None
+        self._plugin_refs = None
         self._scene = None
 
     @property
@@ -31,6 +34,13 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     @build_pkg_url.setter
     def build_pkg_url(self, value):
         self._build_pkg_url = value
+    @property
+    def build_plugin_url(self):
+        return self._build_plugin_url
+
+    @build_plugin_url.setter
+    def build_plugin_url(self, value):
+        self._build_plugin_url = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -67,6 +77,19 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def plugin_refs(self):
+        return self._plugin_refs
+
+    @plugin_refs.setter
+    def plugin_refs(self, value):
+        if isinstance(value, list):
+            self._plugin_refs = list()
+            for i in value:
+                if isinstance(i, MiniAppPluginReference):
+                    self._plugin_refs.append(i)
+                else:
+                    self._plugin_refs.append(MiniAppPluginReference.from_alipay_dict(i))
+    @property
     def scene(self):
         return self._scene
 
@@ -87,6 +110,11 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['build_pkg_url'] = self.build_pkg_url.to_alipay_dict()
             else:
                 params['build_pkg_url'] = self.build_pkg_url
+        if self.build_plugin_url:
+            if hasattr(self.build_plugin_url, 'to_alipay_dict'):
+                params['build_plugin_url'] = self.build_plugin_url.to_alipay_dict()
+            else:
+                params['build_plugin_url'] = self.build_plugin_url
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -112,6 +140,16 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.plugin_refs:
+            if isinstance(self.plugin_refs, list):
+                for i in range(0, len(self.plugin_refs)):
+                    element = self.plugin_refs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.plugin_refs[i] = element.to_alipay_dict()
+            if hasattr(self.plugin_refs, 'to_alipay_dict'):
+                params['plugin_refs'] = self.plugin_refs.to_alipay_dict()
+            else:
+                params['plugin_refs'] = self.plugin_refs
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -128,6 +166,8 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
             o.build_js_permission = d['build_js_permission']
         if 'build_pkg_url' in d:
             o.build_pkg_url = d['build_pkg_url']
+        if 'build_plugin_url' in d:
+            o.build_plugin_url = d['build_plugin_url']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'extend_info' in d:
@@ -138,6 +178,8 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
             o.main_url = d['main_url']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'plugin_refs' in d:
+            o.plugin_refs = d['plugin_refs']
         if 'scene' in d:
             o.scene = d['scene']
         return o

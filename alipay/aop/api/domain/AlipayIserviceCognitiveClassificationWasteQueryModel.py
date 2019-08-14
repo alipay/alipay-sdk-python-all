@@ -1,0 +1,130 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
+
+    def __init__(self):
+        self._biz_code = None
+        self._city_code = None
+        self._cognition_content = None
+        self._cognition_type = None
+        self._latitude = None
+        self._longitude = None
+        self._user_id = None
+
+    @property
+    def biz_code(self):
+        return self._biz_code
+
+    @biz_code.setter
+    def biz_code(self, value):
+        self._biz_code = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
+    @property
+    def cognition_content(self):
+        return self._cognition_content
+
+    @cognition_content.setter
+    def cognition_content(self, value):
+        self._cognition_content = value
+    @property
+    def cognition_type(self):
+        return self._cognition_type
+
+    @cognition_type.setter
+    def cognition_type(self, value):
+        self._cognition_type = value
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.biz_code:
+            if hasattr(self.biz_code, 'to_alipay_dict'):
+                params['biz_code'] = self.biz_code.to_alipay_dict()
+            else:
+                params['biz_code'] = self.biz_code
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
+        if self.cognition_content:
+            if hasattr(self.cognition_content, 'to_alipay_dict'):
+                params['cognition_content'] = self.cognition_content.to_alipay_dict()
+            else:
+                params['cognition_content'] = self.cognition_content
+        if self.cognition_type:
+            if hasattr(self.cognition_type, 'to_alipay_dict'):
+                params['cognition_type'] = self.cognition_type.to_alipay_dict()
+            else:
+                params['cognition_type'] = self.cognition_type
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AlipayIserviceCognitiveClassificationWasteQueryModel()
+        if 'biz_code' in d:
+            o.biz_code = d['biz_code']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
+        if 'cognition_content' in d:
+            o.cognition_content = d['cognition_content']
+        if 'cognition_type' in d:
+            o.cognition_type = d['cognition_type']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
+        return o
+
+

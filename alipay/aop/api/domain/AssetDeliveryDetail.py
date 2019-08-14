@@ -12,6 +12,7 @@ class AssetDeliveryDetail(object):
         self._amount = None
         self._assign_item_id = None
         self._batch_no = None
+        self._ext_info = None
         self._logistics_infos = None
 
     @property
@@ -35,6 +36,13 @@ class AssetDeliveryDetail(object):
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def logistics_infos(self):
         return self._logistics_infos
@@ -67,6 +75,11 @@ class AssetDeliveryDetail(object):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
             else:
                 params['batch_no'] = self.batch_no
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.logistics_infos:
             if isinstance(self.logistics_infos, list):
                 for i in range(0, len(self.logistics_infos)):
@@ -90,6 +103,8 @@ class AssetDeliveryDetail(object):
             o.assign_item_id = d['assign_item_id']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'logistics_infos' in d:
             o.logistics_infos = d['logistics_infos']
         return o

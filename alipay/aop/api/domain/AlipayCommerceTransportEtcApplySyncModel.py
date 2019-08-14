@@ -8,18 +8,29 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceTransportEtcApplySyncModel(object):
 
     def __init__(self):
+        self._card_expiry_date = None
         self._card_no = None
+        self._card_type = None
         self._censor_info = None
         self._delivery_code = None
         self._delivery_name = None
         self._delivery_no = None
+        self._device_expiry_date = None
         self._device_no = None
         self._device_status = None
+        self._device_type = None
         self._order_id = None
         self._order_status = None
         self._order_update_time = None
         self._out_biz_no = None
 
+    @property
+    def card_expiry_date(self):
+        return self._card_expiry_date
+
+    @card_expiry_date.setter
+    def card_expiry_date(self, value):
+        self._card_expiry_date = value
     @property
     def card_no(self):
         return self._card_no
@@ -27,6 +38,13 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
     @card_no.setter
     def card_no(self, value):
         self._card_no = value
+    @property
+    def card_type(self):
+        return self._card_type
+
+    @card_type.setter
+    def card_type(self, value):
+        self._card_type = value
     @property
     def censor_info(self):
         return self._censor_info
@@ -56,6 +74,13 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
     def delivery_no(self, value):
         self._delivery_no = value
     @property
+    def device_expiry_date(self):
+        return self._device_expiry_date
+
+    @device_expiry_date.setter
+    def device_expiry_date(self, value):
+        self._device_expiry_date = value
+    @property
     def device_no(self):
         return self._device_no
 
@@ -69,6 +94,13 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
     @device_status.setter
     def device_status(self, value):
         self._device_status = value
+    @property
+    def device_type(self):
+        return self._device_type
+
+    @device_type.setter
+    def device_type(self, value):
+        self._device_type = value
     @property
     def order_id(self):
         return self._order_id
@@ -101,11 +133,21 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_expiry_date:
+            if hasattr(self.card_expiry_date, 'to_alipay_dict'):
+                params['card_expiry_date'] = self.card_expiry_date.to_alipay_dict()
+            else:
+                params['card_expiry_date'] = self.card_expiry_date
         if self.card_no:
             if hasattr(self.card_no, 'to_alipay_dict'):
                 params['card_no'] = self.card_no.to_alipay_dict()
             else:
                 params['card_no'] = self.card_no
+        if self.card_type:
+            if hasattr(self.card_type, 'to_alipay_dict'):
+                params['card_type'] = self.card_type.to_alipay_dict()
+            else:
+                params['card_type'] = self.card_type
         if self.censor_info:
             if hasattr(self.censor_info, 'to_alipay_dict'):
                 params['censor_info'] = self.censor_info.to_alipay_dict()
@@ -126,6 +168,11 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
                 params['delivery_no'] = self.delivery_no.to_alipay_dict()
             else:
                 params['delivery_no'] = self.delivery_no
+        if self.device_expiry_date:
+            if hasattr(self.device_expiry_date, 'to_alipay_dict'):
+                params['device_expiry_date'] = self.device_expiry_date.to_alipay_dict()
+            else:
+                params['device_expiry_date'] = self.device_expiry_date
         if self.device_no:
             if hasattr(self.device_no, 'to_alipay_dict'):
                 params['device_no'] = self.device_no.to_alipay_dict()
@@ -136,6 +183,11 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
                 params['device_status'] = self.device_status.to_alipay_dict()
             else:
                 params['device_status'] = self.device_status
+        if self.device_type:
+            if hasattr(self.device_type, 'to_alipay_dict'):
+                params['device_type'] = self.device_type.to_alipay_dict()
+            else:
+                params['device_type'] = self.device_type
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -163,8 +215,12 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportEtcApplySyncModel()
+        if 'card_expiry_date' in d:
+            o.card_expiry_date = d['card_expiry_date']
         if 'card_no' in d:
             o.card_no = d['card_no']
+        if 'card_type' in d:
+            o.card_type = d['card_type']
         if 'censor_info' in d:
             o.censor_info = d['censor_info']
         if 'delivery_code' in d:
@@ -173,10 +229,14 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
             o.delivery_name = d['delivery_name']
         if 'delivery_no' in d:
             o.delivery_no = d['delivery_no']
+        if 'device_expiry_date' in d:
+            o.device_expiry_date = d['device_expiry_date']
         if 'device_no' in d:
             o.device_no = d['device_no']
         if 'device_status' in d:
             o.device_status = d['device_status']
+        if 'device_type' in d:
+            o.device_type = d['device_type']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'order_status' in d:

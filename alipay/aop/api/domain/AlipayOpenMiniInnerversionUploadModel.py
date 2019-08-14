@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MiniAppPluginReference import MiniAppPluginReference
 
 
 class AlipayOpenMiniInnerversionUploadModel(object):
 
     def __init__(self):
+        self._app_origin = None
         self._build_app_type = None
         self._build_extra_info = None
         self._build_js_permission = None
@@ -28,7 +30,15 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._client_type = None
         self._inst_code = None
         self._mini_app_id = None
+        self._plugin_refs = None
 
+    @property
+    def app_origin(self):
+        return self._app_origin
+
+    @app_origin.setter
+    def app_origin(self, value):
+        self._app_origin = value
     @property
     def build_app_type(self):
         return self._build_app_type
@@ -169,10 +179,28 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     @mini_app_id.setter
     def mini_app_id(self, value):
         self._mini_app_id = value
+    @property
+    def plugin_refs(self):
+        return self._plugin_refs
+
+    @plugin_refs.setter
+    def plugin_refs(self, value):
+        if isinstance(value, list):
+            self._plugin_refs = list()
+            for i in value:
+                if isinstance(i, MiniAppPluginReference):
+                    self._plugin_refs.append(i)
+                else:
+                    self._plugin_refs.append(MiniAppPluginReference.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_origin:
+            if hasattr(self.app_origin, 'to_alipay_dict'):
+                params['app_origin'] = self.app_origin.to_alipay_dict()
+            else:
+                params['app_origin'] = self.app_origin
         if self.build_app_type:
             if hasattr(self.build_app_type, 'to_alipay_dict'):
                 params['build_app_type'] = self.build_app_type.to_alipay_dict()
@@ -273,6 +301,16 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.plugin_refs:
+            if isinstance(self.plugin_refs, list):
+                for i in range(0, len(self.plugin_refs)):
+                    element = self.plugin_refs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.plugin_refs[i] = element.to_alipay_dict()
+            if hasattr(self.plugin_refs, 'to_alipay_dict'):
+                params['plugin_refs'] = self.plugin_refs.to_alipay_dict()
+            else:
+                params['plugin_refs'] = self.plugin_refs
         return params
 
     @staticmethod
@@ -280,6 +318,8 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         if not d:
             return None
         o = AlipayOpenMiniInnerversionUploadModel()
+        if 'app_origin' in d:
+            o.app_origin = d['app_origin']
         if 'build_app_type' in d:
             o.build_app_type = d['build_app_type']
         if 'build_extra_info' in d:
@@ -320,6 +360,8 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'plugin_refs' in d:
+            o.plugin_refs = d['plugin_refs']
         return o
 
 

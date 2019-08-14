@@ -9,6 +9,7 @@ class InsPerson(object):
 
     def __init__(self):
         self._address = None
+        self._area_code = None
         self._birthday = None
         self._biz_data = None
         self._cert_name = None
@@ -31,6 +32,13 @@ class InsPerson(object):
     @address.setter
     def address(self, value):
         self._address = value
+    @property
+    def area_code(self):
+        return self._area_code
+
+    @area_code.setter
+    def area_code(self, value):
+        self._area_code = value
     @property
     def birthday(self):
         return self._birthday
@@ -138,6 +146,11 @@ class InsPerson(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
+        if self.area_code:
+            if hasattr(self.area_code, 'to_alipay_dict'):
+                params['area_code'] = self.area_code.to_alipay_dict()
+            else:
+                params['area_code'] = self.area_code
         if self.birthday:
             if hasattr(self.birthday, 'to_alipay_dict'):
                 params['birthday'] = self.birthday.to_alipay_dict()
@@ -217,6 +230,8 @@ class InsPerson(object):
         o = InsPerson()
         if 'address' in d:
             o.address = d['address']
+        if 'area_code' in d:
+            o.area_code = d['area_code']
         if 'birthday' in d:
             o.birthday = d['birthday']
         if 'biz_data' in d:

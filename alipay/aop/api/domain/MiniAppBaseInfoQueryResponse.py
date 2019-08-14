@@ -20,6 +20,7 @@ class MiniAppBaseInfoQueryResponse(object):
         self._gmt_modified = None
         self._mini_app_id = None
         self._origin = None
+        self._status = None
 
     @property
     def app_desc(self):
@@ -105,6 +106,13 @@ class MiniAppBaseInfoQueryResponse(object):
     @origin.setter
     def origin(self, value):
         self._origin = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
 
     def to_alipay_dict(self):
@@ -169,6 +177,11 @@ class MiniAppBaseInfoQueryResponse(object):
                 params['origin'] = self.origin.to_alipay_dict()
             else:
                 params['origin'] = self.origin
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         return params
 
     @staticmethod
@@ -200,6 +213,8 @@ class MiniAppBaseInfoQueryResponse(object):
             o.mini_app_id = d['mini_app_id']
         if 'origin' in d:
             o.origin = d['origin']
+        if 'status' in d:
+            o.status = d['status']
         return o
 
 

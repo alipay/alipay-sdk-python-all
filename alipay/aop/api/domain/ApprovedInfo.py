@@ -9,6 +9,7 @@ class ApprovedInfo(object):
 
     def __init__(self):
         self._application_no = None
+        self._approval_letter_url = None
         self._imm_code = None
         self._imm_fullname = None
         self._imm_position = None
@@ -17,6 +18,7 @@ class ApprovedInfo(object):
         self._remark = None
         self._status = None
         self._status_date_time = None
+        self._tm_6_url = None
         self._tm_88_url = None
 
     @property
@@ -26,6 +28,13 @@ class ApprovedInfo(object):
     @application_no.setter
     def application_no(self, value):
         self._application_no = value
+    @property
+    def approval_letter_url(self):
+        return self._approval_letter_url
+
+    @approval_letter_url.setter
+    def approval_letter_url(self, value):
+        self._approval_letter_url = value
     @property
     def imm_code(self):
         return self._imm_code
@@ -83,6 +92,13 @@ class ApprovedInfo(object):
     def status_date_time(self, value):
         self._status_date_time = value
     @property
+    def tm_6_url(self):
+        return self._tm_6_url
+
+    @tm_6_url.setter
+    def tm_6_url(self, value):
+        self._tm_6_url = value
+    @property
     def tm_88_url(self):
         return self._tm_88_url
 
@@ -98,6 +114,11 @@ class ApprovedInfo(object):
                 params['application_no'] = self.application_no.to_alipay_dict()
             else:
                 params['application_no'] = self.application_no
+        if self.approval_letter_url:
+            if hasattr(self.approval_letter_url, 'to_alipay_dict'):
+                params['approval_letter_url'] = self.approval_letter_url.to_alipay_dict()
+            else:
+                params['approval_letter_url'] = self.approval_letter_url
         if self.imm_code:
             if hasattr(self.imm_code, 'to_alipay_dict'):
                 params['imm_code'] = self.imm_code.to_alipay_dict()
@@ -138,6 +159,11 @@ class ApprovedInfo(object):
                 params['status_date_time'] = self.status_date_time.to_alipay_dict()
             else:
                 params['status_date_time'] = self.status_date_time
+        if self.tm_6_url:
+            if hasattr(self.tm_6_url, 'to_alipay_dict'):
+                params['tm_6_url'] = self.tm_6_url.to_alipay_dict()
+            else:
+                params['tm_6_url'] = self.tm_6_url
         if self.tm_88_url:
             if hasattr(self.tm_88_url, 'to_alipay_dict'):
                 params['tm_88_url'] = self.tm_88_url.to_alipay_dict()
@@ -152,6 +178,8 @@ class ApprovedInfo(object):
         o = ApprovedInfo()
         if 'application_no' in d:
             o.application_no = d['application_no']
+        if 'approval_letter_url' in d:
+            o.approval_letter_url = d['approval_letter_url']
         if 'imm_code' in d:
             o.imm_code = d['imm_code']
         if 'imm_fullname' in d:
@@ -168,6 +196,8 @@ class ApprovedInfo(object):
             o.status = d['status']
         if 'status_date_time' in d:
             o.status_date_time = d['status_date_time']
+        if 'tm_6_url' in d:
+            o.tm_6_url = d['tm_6_url']
         if 'tm_88_url' in d:
             o.tm_88_url = d['tm_88_url']
         return o

@@ -14,6 +14,7 @@ class KoubeiMarketingCampaignBenefitSendModel(object):
         self._idem_camp_trigger = None
         self._item_id = None
         self._logon_id = None
+        self._mobile_no = None
         self._out_biz_no = None
         self._shop_id = None
         self._user_id = None
@@ -60,6 +61,13 @@ class KoubeiMarketingCampaignBenefitSendModel(object):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def mobile_no(self):
+        return self._mobile_no
+
+    @mobile_no.setter
+    def mobile_no(self, value):
+        self._mobile_no = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -115,6 +123,11 @@ class KoubeiMarketingCampaignBenefitSendModel(object):
                 params['logon_id'] = self.logon_id.to_alipay_dict()
             else:
                 params['logon_id'] = self.logon_id
+        if self.mobile_no:
+            if hasattr(self.mobile_no, 'to_alipay_dict'):
+                params['mobile_no'] = self.mobile_no.to_alipay_dict()
+            else:
+                params['mobile_no'] = self.mobile_no
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -149,6 +162,8 @@ class KoubeiMarketingCampaignBenefitSendModel(object):
             o.item_id = d['item_id']
         if 'logon_id' in d:
             o.logon_id = d['logon_id']
+        if 'mobile_no' in d:
+            o.mobile_no = d['mobile_no']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'shop_id' in d:

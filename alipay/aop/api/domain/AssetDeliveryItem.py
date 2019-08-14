@@ -19,6 +19,10 @@ class AssetDeliveryItem(object):
         self._assign_out_order_id = None
         self._biz_tag = None
         self._biz_type = None
+        self._delivery_assign_order_item_id = None
+        self._delivery_process_no = None
+        self._delivery_process_supplier_id = None
+        self._delivery_process_supplier_name = None
         self._from_address = None
         self._gmt_assign = None
         self._item_id = None
@@ -92,6 +96,34 @@ class AssetDeliveryItem(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def delivery_assign_order_item_id(self):
+        return self._delivery_assign_order_item_id
+
+    @delivery_assign_order_item_id.setter
+    def delivery_assign_order_item_id(self, value):
+        self._delivery_assign_order_item_id = value
+    @property
+    def delivery_process_no(self):
+        return self._delivery_process_no
+
+    @delivery_process_no.setter
+    def delivery_process_no(self, value):
+        self._delivery_process_no = value
+    @property
+    def delivery_process_supplier_id(self):
+        return self._delivery_process_supplier_id
+
+    @delivery_process_supplier_id.setter
+    def delivery_process_supplier_id(self, value):
+        self._delivery_process_supplier_id = value
+    @property
+    def delivery_process_supplier_name(self):
+        return self._delivery_process_supplier_name
+
+    @delivery_process_supplier_name.setter
+    def delivery_process_supplier_name(self, value):
+        self._delivery_process_supplier_name = value
     @property
     def from_address(self):
         return self._from_address
@@ -257,6 +289,26 @@ class AssetDeliveryItem(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.delivery_assign_order_item_id:
+            if hasattr(self.delivery_assign_order_item_id, 'to_alipay_dict'):
+                params['delivery_assign_order_item_id'] = self.delivery_assign_order_item_id.to_alipay_dict()
+            else:
+                params['delivery_assign_order_item_id'] = self.delivery_assign_order_item_id
+        if self.delivery_process_no:
+            if hasattr(self.delivery_process_no, 'to_alipay_dict'):
+                params['delivery_process_no'] = self.delivery_process_no.to_alipay_dict()
+            else:
+                params['delivery_process_no'] = self.delivery_process_no
+        if self.delivery_process_supplier_id:
+            if hasattr(self.delivery_process_supplier_id, 'to_alipay_dict'):
+                params['delivery_process_supplier_id'] = self.delivery_process_supplier_id.to_alipay_dict()
+            else:
+                params['delivery_process_supplier_id'] = self.delivery_process_supplier_id
+        if self.delivery_process_supplier_name:
+            if hasattr(self.delivery_process_supplier_name, 'to_alipay_dict'):
+                params['delivery_process_supplier_name'] = self.delivery_process_supplier_name.to_alipay_dict()
+            else:
+                params['delivery_process_supplier_name'] = self.delivery_process_supplier_name
         if self.from_address:
             if hasattr(self.from_address, 'to_alipay_dict'):
                 params['from_address'] = self.from_address.to_alipay_dict()
@@ -360,6 +412,14 @@ class AssetDeliveryItem(object):
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'delivery_assign_order_item_id' in d:
+            o.delivery_assign_order_item_id = d['delivery_assign_order_item_id']
+        if 'delivery_process_no' in d:
+            o.delivery_process_no = d['delivery_process_no']
+        if 'delivery_process_supplier_id' in d:
+            o.delivery_process_supplier_id = d['delivery_process_supplier_id']
+        if 'delivery_process_supplier_name' in d:
+            o.delivery_process_supplier_name = d['delivery_process_supplier_name']
         if 'from_address' in d:
             o.from_address = d['from_address']
         if 'gmt_assign' in d:

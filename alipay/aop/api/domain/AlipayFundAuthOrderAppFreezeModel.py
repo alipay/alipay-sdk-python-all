@@ -11,6 +11,7 @@ class AlipayFundAuthOrderAppFreezeModel(object):
         self._amount = None
         self._enable_pay_channels = None
         self._extra_param = None
+        self._identity_params = None
         self._order_title = None
         self._out_order_no = None
         self._out_request_no = None
@@ -43,6 +44,13 @@ class AlipayFundAuthOrderAppFreezeModel(object):
     @extra_param.setter
     def extra_param(self, value):
         self._extra_param = value
+    @property
+    def identity_params(self):
+        return self._identity_params
+
+    @identity_params.setter
+    def identity_params(self, value):
+        self._identity_params = value
     @property
     def order_title(self):
         return self._order_title
@@ -132,6 +140,11 @@ class AlipayFundAuthOrderAppFreezeModel(object):
                 params['extra_param'] = self.extra_param.to_alipay_dict()
             else:
                 params['extra_param'] = self.extra_param
+        if self.identity_params:
+            if hasattr(self.identity_params, 'to_alipay_dict'):
+                params['identity_params'] = self.identity_params.to_alipay_dict()
+            else:
+                params['identity_params'] = self.identity_params
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -195,6 +208,8 @@ class AlipayFundAuthOrderAppFreezeModel(object):
             o.enable_pay_channels = d['enable_pay_channels']
         if 'extra_param' in d:
             o.extra_param = d['extra_param']
+        if 'identity_params' in d:
+            o.identity_params = d['identity_params']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_order_no' in d:

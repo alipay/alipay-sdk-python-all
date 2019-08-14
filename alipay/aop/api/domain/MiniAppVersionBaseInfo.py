@@ -20,6 +20,7 @@ class MiniAppVersionBaseInfo(object):
         self._mini_app_id = None
         self._offline_time = None
         self._package_url = None
+        self._plugin_url = None
         self._rollback_time = None
         self._shelf_time = None
         self._status = None
@@ -112,6 +113,13 @@ class MiniAppVersionBaseInfo(object):
     @package_url.setter
     def package_url(self, value):
         self._package_url = value
+    @property
+    def plugin_url(self):
+        return self._plugin_url
+
+    @plugin_url.setter
+    def plugin_url(self, value):
+        self._plugin_url = value
     @property
     def rollback_time(self):
         return self._rollback_time
@@ -225,6 +233,11 @@ class MiniAppVersionBaseInfo(object):
                 params['package_url'] = self.package_url.to_alipay_dict()
             else:
                 params['package_url'] = self.package_url
+        if self.plugin_url:
+            if hasattr(self.plugin_url, 'to_alipay_dict'):
+                params['plugin_url'] = self.plugin_url.to_alipay_dict()
+            else:
+                params['plugin_url'] = self.plugin_url
         if self.rollback_time:
             if hasattr(self.rollback_time, 'to_alipay_dict'):
                 params['rollback_time'] = self.rollback_time.to_alipay_dict()
@@ -291,6 +304,8 @@ class MiniAppVersionBaseInfo(object):
             o.offline_time = d['offline_time']
         if 'package_url' in d:
             o.package_url = d['package_url']
+        if 'plugin_url' in d:
+            o.plugin_url = d['plugin_url']
         if 'rollback_time' in d:
             o.rollback_time = d['rollback_time']
         if 'shelf_time' in d:

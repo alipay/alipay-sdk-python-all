@@ -10,6 +10,7 @@ class AlipayTradeOrderinfoSyncModel(object):
     def __init__(self):
         self._biz_type = None
         self._order_biz_info = None
+        self._orig_request_no = None
         self._out_request_no = None
         self._trade_no = None
 
@@ -27,6 +28,13 @@ class AlipayTradeOrderinfoSyncModel(object):
     @order_biz_info.setter
     def order_biz_info(self, value):
         self._order_biz_info = value
+    @property
+    def orig_request_no(self):
+        return self._orig_request_no
+
+    @orig_request_no.setter
+    def orig_request_no(self, value):
+        self._orig_request_no = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -55,6 +63,11 @@ class AlipayTradeOrderinfoSyncModel(object):
                 params['order_biz_info'] = self.order_biz_info.to_alipay_dict()
             else:
                 params['order_biz_info'] = self.order_biz_info
+        if self.orig_request_no:
+            if hasattr(self.orig_request_no, 'to_alipay_dict'):
+                params['orig_request_no'] = self.orig_request_no.to_alipay_dict()
+            else:
+                params['orig_request_no'] = self.orig_request_no
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayTradeOrderinfoSyncModel(object):
             o.biz_type = d['biz_type']
         if 'order_biz_info' in d:
             o.order_biz_info = d['order_biz_info']
+        if 'orig_request_no' in d:
+            o.orig_request_no = d['orig_request_no']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'trade_no' in d:

@@ -21,6 +21,7 @@ class PromotionInfo(object):
         self._valid_date_from = None
         self._valid_date_to = None
         self._valid_time_text = None
+        self._voucher_usage_status = None
 
     @property
     def brand_name(self):
@@ -113,6 +114,13 @@ class PromotionInfo(object):
     @valid_time_text.setter
     def valid_time_text(self, value):
         self._valid_time_text = value
+    @property
+    def voucher_usage_status(self):
+        return self._voucher_usage_status
+
+    @voucher_usage_status.setter
+    def voucher_usage_status(self, value):
+        self._voucher_usage_status = value
 
 
     def to_alipay_dict(self):
@@ -182,6 +190,11 @@ class PromotionInfo(object):
                 params['valid_time_text'] = self.valid_time_text.to_alipay_dict()
             else:
                 params['valid_time_text'] = self.valid_time_text
+        if self.voucher_usage_status:
+            if hasattr(self.voucher_usage_status, 'to_alipay_dict'):
+                params['voucher_usage_status'] = self.voucher_usage_status.to_alipay_dict()
+            else:
+                params['voucher_usage_status'] = self.voucher_usage_status
         return params
 
     @staticmethod
@@ -215,6 +228,8 @@ class PromotionInfo(object):
             o.valid_date_to = d['valid_date_to']
         if 'valid_time_text' in d:
             o.valid_time_text = d['valid_time_text']
+        if 'voucher_usage_status' in d:
+            o.voucher_usage_status = d['voucher_usage_status']
         return o
 
 

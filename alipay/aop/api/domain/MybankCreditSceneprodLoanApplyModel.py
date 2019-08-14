@@ -21,6 +21,7 @@ class MybankCreditSceneprodLoanApplyModel(object):
         self._org_code = None
         self._out_order_no = None
         self._product_code = None
+        self._sales_product_code = None
         self._scene = None
         self._site = None
         self._site_user_id = None
@@ -114,6 +115,13 @@ class MybankCreditSceneprodLoanApplyModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def sales_product_code(self):
+        return self._sales_product_code
+
+    @sales_product_code.setter
+    def sales_product_code(self, value):
+        self._sales_product_code = value
+    @property
     def scene(self):
         return self._scene
 
@@ -205,6 +213,11 @@ class MybankCreditSceneprodLoanApplyModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.sales_product_code:
+            if hasattr(self.sales_product_code, 'to_alipay_dict'):
+                params['sales_product_code'] = self.sales_product_code.to_alipay_dict()
+            else:
+                params['sales_product_code'] = self.sales_product_code
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -256,6 +269,8 @@ class MybankCreditSceneprodLoanApplyModel(object):
             o.out_order_no = d['out_order_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'sales_product_code' in d:
+            o.sales_product_code = d['sales_product_code']
         if 'scene' in d:
             o.scene = d['scene']
         if 'site' in d:
