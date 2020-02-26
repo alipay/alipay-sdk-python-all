@@ -6,6 +6,7 @@ Created on 2017-12-20
 '''
 import json
 import os
+import ssl
 
 import itertools
 
@@ -121,7 +122,8 @@ def get_http_connection(url, query_string, timeout):
     connection = httplib.HTTPConnection(host=host, port=port, timeout=timeout)
     if url.find("https") == 0:
         port = 443
-        connection = httplib.HTTPSConnection(host=host, port=port, timeout=timeout)
+        connection = httplib.HTTPSConnection(host=host, port=port, timeout=timeout, 
+                context=ssl._create_unverified_context())
     url = url_parse_result.scheme + "://" + url_parse_result.hostname
     if url_parse_result.port:
         url += url_parse_result.port
