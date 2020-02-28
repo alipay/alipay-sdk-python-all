@@ -183,6 +183,8 @@ Example
         request = AlipayTradeAppPayRequest(biz_model=model)
         response = client.sdk_execute(request)
         print("alipay.trade.app.pay response:" + response)
+        
+
         """
         代扣签约接口
         """
