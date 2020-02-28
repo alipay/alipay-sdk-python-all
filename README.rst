@@ -21,7 +21,8 @@ Example
     # -*- coding: utf-8 -*-
     import logging
     import traceback
-    
+    from urllib import parse
+
     from alipay.aop.api.AlipayClientConfig import AlipayClientConfig
     from alipay.aop.api.DefaultAlipayClient import DefaultAlipayClient
     from alipay.aop.api.FileItem import FileItem
@@ -182,3 +183,18 @@ Example
         request = AlipayTradeAppPayRequest(biz_model=model)
         response = client.sdk_execute(request)
         print("alipay.trade.app.pay response:" + response)
+        """
+        代扣签约接口
+        """
+        model = AlipayUserAgreementPageSignModel()
+        model.sign_scene = "INDUSTRY|VENDING_MACHINE"
+        model.personal_product_code = "ONE_TIME_AUTH_P"
+        model.product_code = "ONE_TIME_AUTH"
+        model.access_params = {"channel": "ALIPAYAPP"}
+        model.device_params = {"out_device_id": "your device id"}
+        model.external_agreement_no = "your agreement no"
+        request = AlipayUserAgreementPageSignRequest(biz_model=model)
+        request.notify_url = "your notify url"
+        response = parse.quote(client.sdk_execute(request))
+        print(response)
+        
