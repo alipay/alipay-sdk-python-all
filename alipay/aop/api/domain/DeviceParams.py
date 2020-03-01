@@ -39,9 +39,9 @@ class DeviceParams(object):
         params = dict()
         if self.device_id:
             if hasattr(self.device_id, 'to_alipay_dict'):
-                params['device_id'] = self.device_id.to_alipay_dict()
+                params['out_device_id'] = self.device_id.to_alipay_dict()
             else:
-                params['device_id'] = self.device_id
+                params['out_device_id'] = self.device_id
         if self.device_name:
             if hasattr(self.device_name, 'to_alipay_dict'):
                 params['device_name'] = self.device_name.to_alipay_dict()
@@ -59,8 +59,8 @@ class DeviceParams(object):
         if not d:
             return None
         o = DeviceParams()
-        if 'device_id' in d:
-            o.device_id = d['device_id']
+        if 'out_device_id' in d:
+            o.device_id = d['out_device_id']
         if 'device_name' in d:
             o.device_name = d['device_name']
         if 'device_type' in d:
