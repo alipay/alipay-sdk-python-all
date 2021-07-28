@@ -10,6 +10,7 @@ class AlipayFundAuthOperationDetailQueryModel(object):
     def __init__(self):
         self._auth_no = None
         self._operation_id = None
+        self._operation_type = None
         self._out_order_no = None
         self._out_request_no = None
 
@@ -27,6 +28,13 @@ class AlipayFundAuthOperationDetailQueryModel(object):
     @operation_id.setter
     def operation_id(self, value):
         self._operation_id = value
+    @property
+    def operation_type(self):
+        return self._operation_type
+
+    @operation_type.setter
+    def operation_type(self, value):
+        self._operation_type = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -55,6 +63,11 @@ class AlipayFundAuthOperationDetailQueryModel(object):
                 params['operation_id'] = self.operation_id.to_alipay_dict()
             else:
                 params['operation_id'] = self.operation_id
+        if self.operation_type:
+            if hasattr(self.operation_type, 'to_alipay_dict'):
+                params['operation_type'] = self.operation_type.to_alipay_dict()
+            else:
+                params['operation_type'] = self.operation_type
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayFundAuthOperationDetailQueryModel(object):
             o.auth_no = d['auth_no']
         if 'operation_id' in d:
             o.operation_id = d['operation_id']
+        if 'operation_type' in d:
+            o.operation_type = d['operation_type']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'out_request_no' in d:

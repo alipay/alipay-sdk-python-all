@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEcoEduKtBillingModifyModel(object):
 
     def __init__(self):
+        self._bank_success = None
         self._buyer_logon_id = None
         self._buyer_user_id = None
         self._fund_change = None
@@ -20,6 +21,13 @@ class AlipayEcoEduKtBillingModifyModel(object):
         self._status = None
         self._trade_no = None
 
+    @property
+    def bank_success(self):
+        return self._bank_success
+
+    @bank_success.setter
+    def bank_success(self, value):
+        self._bank_success = value
     @property
     def buyer_logon_id(self):
         return self._buyer_logon_id
@@ -101,6 +109,11 @@ class AlipayEcoEduKtBillingModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bank_success:
+            if hasattr(self.bank_success, 'to_alipay_dict'):
+                params['bank_success'] = self.bank_success.to_alipay_dict()
+            else:
+                params['bank_success'] = self.bank_success
         if self.buyer_logon_id:
             if hasattr(self.buyer_logon_id, 'to_alipay_dict'):
                 params['buyer_logon_id'] = self.buyer_logon_id.to_alipay_dict()
@@ -163,6 +176,8 @@ class AlipayEcoEduKtBillingModifyModel(object):
         if not d:
             return None
         o = AlipayEcoEduKtBillingModifyModel()
+        if 'bank_success' in d:
+            o.bank_success = d['bank_success']
         if 'buyer_logon_id' in d:
             o.buyer_logon_id = d['buyer_logon_id']
         if 'buyer_user_id' in d:

@@ -12,6 +12,7 @@ class AlipayPassInstanceUpdateModel(object):
         self._serial_number = None
         self._status = None
         self._tpl_params = None
+        self._user_id = None
         self._verify_code = None
         self._verify_type = None
 
@@ -43,6 +44,13 @@ class AlipayPassInstanceUpdateModel(object):
     @tpl_params.setter
     def tpl_params(self, value):
         self._tpl_params = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
     @property
     def verify_code(self):
         return self._verify_code
@@ -81,6 +89,11 @@ class AlipayPassInstanceUpdateModel(object):
                 params['tpl_params'] = self.tpl_params.to_alipay_dict()
             else:
                 params['tpl_params'] = self.tpl_params
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         if self.verify_code:
             if hasattr(self.verify_code, 'to_alipay_dict'):
                 params['verify_code'] = self.verify_code.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayPassInstanceUpdateModel(object):
             o.status = d['status']
         if 'tpl_params' in d:
             o.tpl_params = d['tpl_params']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         if 'verify_code' in d:
             o.verify_code = d['verify_code']
         if 'verify_type' in d:

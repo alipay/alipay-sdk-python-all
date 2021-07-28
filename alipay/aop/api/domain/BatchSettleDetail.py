@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SubMerchant import SubMerchant
 
 
 class BatchSettleDetail(object):
@@ -18,6 +19,7 @@ class BatchSettleDetail(object):
         self._settle_entity_id = None
         self._settle_entity_type = None
         self._status = None
+        self._sub_merchant = None
 
     @property
     def amount(self):
@@ -89,6 +91,16 @@ class BatchSettleDetail(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SubMerchant):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchant.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -143,6 +155,11 @@ class BatchSettleDetail(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         return params
 
     @staticmethod
@@ -170,6 +187,8 @@ class BatchSettleDetail(object):
             o.settle_entity_type = d['settle_entity_type']
         if 'status' in d:
             o.status = d['status']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         return o
 
 

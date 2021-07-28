@@ -19,27 +19,35 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         self._app_name = None
         self._app_slogan = None
         self._app_version = None
+        self._bundle_id = None
         self._license_name = None
         self._license_no = None
         self._license_valid_date = None
         self._memo = None
+        self._mini_category_ids = None
         self._region_type = None
         self._service_email = None
         self._service_phone = None
         self._service_region_info = None
+        self._test_accout = None
+        self._test_password = None
         self._version_desc = None
         self._app_logo = None
         self._fifth_license_pic = None
         self._fifth_screen_shot = None
         self._first_license_pic = None
         self._first_screen_shot = None
+        self._first_special_license_pic = None
         self._fourth_license_pic = None
         self._fourth_screen_shot = None
         self._out_door_pic = None
         self._second_license_pic = None
         self._second_screen_shot = None
+        self._second_special_license_pic = None
+        self._test_file_name = None
         self._third_license_pic = None
         self._third_screen_shot = None
+        self._third_special_license_pic = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -100,6 +108,13 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
     def app_version(self, value):
         self._app_version = value
     @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
+    @property
     def license_name(self):
         return self._license_name
 
@@ -127,6 +142,13 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
     @property
     def region_type(self):
         return self._region_type
@@ -161,6 +183,20 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                     self._service_region_info.append(i)
                 else:
                     self._service_region_info.append(RegionInfo.from_alipay_dict(i))
+    @property
+    def test_accout(self):
+        return self._test_accout
+
+    @test_accout.setter
+    def test_accout(self, value):
+        self._test_accout = value
+    @property
+    def test_password(self):
+        return self._test_password
+
+    @test_password.setter
+    def test_password(self, value):
+        self._test_password = value
     @property
     def version_desc(self):
         return self._version_desc
@@ -215,6 +251,15 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             return
         self._first_screen_shot = value
     @property
+    def first_special_license_pic(self):
+        return self._first_special_license_pic
+
+    @first_special_license_pic.setter
+    def first_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._first_special_license_pic = value
+    @property
     def fourth_license_pic(self):
         return self._fourth_license_pic
 
@@ -260,6 +305,24 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             return
         self._second_screen_shot = value
     @property
+    def second_special_license_pic(self):
+        return self._second_special_license_pic
+
+    @second_special_license_pic.setter
+    def second_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._second_special_license_pic = value
+    @property
+    def test_file_name(self):
+        return self._test_file_name
+
+    @test_file_name.setter
+    def test_file_name(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._test_file_name = value
+    @property
     def third_license_pic(self):
         return self._third_license_pic
 
@@ -277,6 +340,15 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         if not isinstance(value, FileItem):
             return
         self._third_screen_shot = value
+    @property
+    def third_special_license_pic(self):
+        return self._third_special_license_pic
+
+    @third_special_license_pic.setter
+    def third_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._third_special_license_pic = value
 
     @property
     def version(self):
@@ -385,6 +457,11 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                 params['app_version'] = json.dumps(obj=self.app_version.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['app_version'] = self.app_version
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = json.dumps(obj=self.bundle_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['bundle_id'] = self.bundle_id
         if self.license_name:
             if hasattr(self.license_name, 'to_alipay_dict'):
                 params['license_name'] = json.dumps(obj=self.license_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -405,6 +482,11 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                 params['memo'] = json.dumps(obj=self.memo.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['memo'] = self.memo
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = json.dumps(obj=self.mini_category_ids.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.region_type:
             if hasattr(self.region_type, 'to_alipay_dict'):
                 params['region_type'] = json.dumps(obj=self.region_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -427,6 +509,16 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                     if hasattr(element, 'to_alipay_dict'):
                         self.service_region_info[i] = element.to_alipay_dict()
                 params['service_region_info'] = json.dumps(obj=self.service_region_info, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.test_accout:
+            if hasattr(self.test_accout, 'to_alipay_dict'):
+                params['test_accout'] = json.dumps(obj=self.test_accout.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['test_accout'] = self.test_accout
+        if self.test_password:
+            if hasattr(self.test_password, 'to_alipay_dict'):
+                params['test_password'] = json.dumps(obj=self.test_password.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['test_password'] = self.test_password
         if self.version_desc:
             if hasattr(self.version_desc, 'to_alipay_dict'):
                 params['version_desc'] = json.dumps(obj=self.version_desc.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -458,6 +550,8 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             multipart_params['first_license_pic'] = self.first_license_pic
         if self.first_screen_shot:
             multipart_params['first_screen_shot'] = self.first_screen_shot
+        if self.first_special_license_pic:
+            multipart_params['first_special_license_pic'] = self.first_special_license_pic
         if self.fourth_license_pic:
             multipart_params['fourth_license_pic'] = self.fourth_license_pic
         if self.fourth_screen_shot:
@@ -468,8 +562,14 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             multipart_params['second_license_pic'] = self.second_license_pic
         if self.second_screen_shot:
             multipart_params['second_screen_shot'] = self.second_screen_shot
+        if self.second_special_license_pic:
+            multipart_params['second_special_license_pic'] = self.second_special_license_pic
+        if self.test_file_name:
+            multipart_params['test_file_name'] = self.test_file_name
         if self.third_license_pic:
             multipart_params['third_license_pic'] = self.third_license_pic
         if self.third_screen_shot:
             multipart_params['third_screen_shot'] = self.third_screen_shot
+        if self.third_special_license_pic:
+            multipart_params['third_special_license_pic'] = self.third_special_license_pic
         return multipart_params

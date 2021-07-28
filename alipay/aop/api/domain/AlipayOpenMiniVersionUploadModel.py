@@ -9,6 +9,7 @@ class AlipayOpenMiniVersionUploadModel(object):
 
     def __init__(self):
         self._app_version = None
+        self._bundle_id = None
         self._ext = None
         self._template_id = None
         self._template_version = None
@@ -20,6 +21,13 @@ class AlipayOpenMiniVersionUploadModel(object):
     @app_version.setter
     def app_version(self, value):
         self._app_version = value
+    @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
     @property
     def ext(self):
         return self._ext
@@ -50,6 +58,11 @@ class AlipayOpenMiniVersionUploadModel(object):
                 params['app_version'] = self.app_version.to_alipay_dict()
             else:
                 params['app_version'] = self.app_version
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = self.bundle_id.to_alipay_dict()
+            else:
+                params['bundle_id'] = self.bundle_id
         if self.ext:
             if hasattr(self.ext, 'to_alipay_dict'):
                 params['ext'] = self.ext.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayOpenMiniVersionUploadModel(object):
         o = AlipayOpenMiniVersionUploadModel()
         if 'app_version' in d:
             o.app_version = d['app_version']
+        if 'bundle_id' in d:
+            o.bundle_id = d['bundle_id']
         if 'ext' in d:
             o.ext = d['ext']
         if 'template_id' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.domain.DeviceParams import DeviceParams
 from alipay.aop.api.domain.IdentityParams import IdentityParams
 from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.ProdParams import ProdParams
+from alipay.aop.api.domain.SpecifiedChannelParam import SpecifiedChannelParam
 from alipay.aop.api.domain.SubMerchantParams import SubMerchantParams
 from alipay.aop.api.domain.ZmAuthParams import ZmAuthParams
 
@@ -17,11 +18,13 @@ class AlipayUserAgreementPageSignModel(object):
     def __init__(self):
         self._access_params = None
         self._agreement_effect_type = None
+        self._allow_huazhi_degrade = None
         self._device_params = None
         self._external_agreement_no = None
         self._external_logon_id = None
         self._identity_params = None
         self._merchant_process_url = None
+        self._pass_params = None
         self._period_rule_params = None
         self._personal_product_code = None
         self._prod_params = None
@@ -29,6 +32,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._promo_params = None
         self._sign_scene = None
         self._sign_validity_period = None
+        self._specified_sort_channel_params = None
         self._sub_merchant = None
         self._third_party_type = None
         self._user_age_range = None
@@ -51,6 +55,13 @@ class AlipayUserAgreementPageSignModel(object):
     @agreement_effect_type.setter
     def agreement_effect_type(self, value):
         self._agreement_effect_type = value
+    @property
+    def allow_huazhi_degrade(self):
+        return self._allow_huazhi_degrade
+
+    @allow_huazhi_degrade.setter
+    def allow_huazhi_degrade(self, value):
+        self._allow_huazhi_degrade = value
     @property
     def device_params(self):
         return self._device_params
@@ -92,6 +103,13 @@ class AlipayUserAgreementPageSignModel(object):
     @merchant_process_url.setter
     def merchant_process_url(self, value):
         self._merchant_process_url = value
+    @property
+    def pass_params(self):
+        return self._pass_params
+
+    @pass_params.setter
+    def pass_params(self, value):
+        self._pass_params = value
     @property
     def period_rule_params(self):
         return self._period_rule_params
@@ -148,6 +166,16 @@ class AlipayUserAgreementPageSignModel(object):
     def sign_validity_period(self, value):
         self._sign_validity_period = value
     @property
+    def specified_sort_channel_params(self):
+        return self._specified_sort_channel_params
+
+    @specified_sort_channel_params.setter
+    def specified_sort_channel_params(self, value):
+        if isinstance(value, SpecifiedChannelParam):
+            self._specified_sort_channel_params = value
+        else:
+            self._specified_sort_channel_params = SpecifiedChannelParam.from_alipay_dict(value)
+    @property
     def sub_merchant(self):
         return self._sub_merchant
 
@@ -195,6 +223,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['agreement_effect_type'] = self.agreement_effect_type.to_alipay_dict()
             else:
                 params['agreement_effect_type'] = self.agreement_effect_type
+        if self.allow_huazhi_degrade:
+            if hasattr(self.allow_huazhi_degrade, 'to_alipay_dict'):
+                params['allow_huazhi_degrade'] = self.allow_huazhi_degrade.to_alipay_dict()
+            else:
+                params['allow_huazhi_degrade'] = self.allow_huazhi_degrade
         if self.device_params:
             if hasattr(self.device_params, 'to_alipay_dict'):
                 params['device_params'] = self.device_params.to_alipay_dict()
@@ -220,6 +253,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['merchant_process_url'] = self.merchant_process_url.to_alipay_dict()
             else:
                 params['merchant_process_url'] = self.merchant_process_url
+        if self.pass_params:
+            if hasattr(self.pass_params, 'to_alipay_dict'):
+                params['pass_params'] = self.pass_params.to_alipay_dict()
+            else:
+                params['pass_params'] = self.pass_params
         if self.period_rule_params:
             if hasattr(self.period_rule_params, 'to_alipay_dict'):
                 params['period_rule_params'] = self.period_rule_params.to_alipay_dict()
@@ -255,6 +293,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['sign_validity_period'] = self.sign_validity_period.to_alipay_dict()
             else:
                 params['sign_validity_period'] = self.sign_validity_period
+        if self.specified_sort_channel_params:
+            if hasattr(self.specified_sort_channel_params, 'to_alipay_dict'):
+                params['specified_sort_channel_params'] = self.specified_sort_channel_params.to_alipay_dict()
+            else:
+                params['specified_sort_channel_params'] = self.specified_sort_channel_params
         if self.sub_merchant:
             if hasattr(self.sub_merchant, 'to_alipay_dict'):
                 params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
@@ -286,6 +329,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.access_params = d['access_params']
         if 'agreement_effect_type' in d:
             o.agreement_effect_type = d['agreement_effect_type']
+        if 'allow_huazhi_degrade' in d:
+            o.allow_huazhi_degrade = d['allow_huazhi_degrade']
         if 'device_params' in d:
             o.device_params = d['device_params']
         if 'external_agreement_no' in d:
@@ -296,6 +341,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.identity_params = d['identity_params']
         if 'merchant_process_url' in d:
             o.merchant_process_url = d['merchant_process_url']
+        if 'pass_params' in d:
+            o.pass_params = d['pass_params']
         if 'period_rule_params' in d:
             o.period_rule_params = d['period_rule_params']
         if 'personal_product_code' in d:
@@ -310,6 +357,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.sign_scene = d['sign_scene']
         if 'sign_validity_period' in d:
             o.sign_validity_period = d['sign_validity_period']
+        if 'specified_sort_channel_params' in d:
+            o.specified_sort_channel_params = d['specified_sort_channel_params']
         if 'sub_merchant' in d:
             o.sub_merchant = d['sub_merchant']
         if 'third_party_type' in d:

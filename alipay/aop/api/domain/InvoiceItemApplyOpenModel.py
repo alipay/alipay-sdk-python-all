@@ -18,7 +18,10 @@ class InvoiceItemApplyOpenModel(object):
         self._item_tax_rate = None
         self._item_unit = None
         self._item_unit_price = None
+        self._prefer_policy_flag = None
         self._row_type = None
+        self._special_manage_flag = None
+        self._zero_tax_flag = None
 
     @property
     def item_ex_tax_amount(self):
@@ -91,12 +94,33 @@ class InvoiceItemApplyOpenModel(object):
     def item_unit_price(self, value):
         self._item_unit_price = value
     @property
+    def prefer_policy_flag(self):
+        return self._prefer_policy_flag
+
+    @prefer_policy_flag.setter
+    def prefer_policy_flag(self, value):
+        self._prefer_policy_flag = value
+    @property
     def row_type(self):
         return self._row_type
 
     @row_type.setter
     def row_type(self, value):
         self._row_type = value
+    @property
+    def special_manage_flag(self):
+        return self._special_manage_flag
+
+    @special_manage_flag.setter
+    def special_manage_flag(self, value):
+        self._special_manage_flag = value
+    @property
+    def zero_tax_flag(self):
+        return self._zero_tax_flag
+
+    @zero_tax_flag.setter
+    def zero_tax_flag(self, value):
+        self._zero_tax_flag = value
 
 
     def to_alipay_dict(self):
@@ -151,11 +175,26 @@ class InvoiceItemApplyOpenModel(object):
                 params['item_unit_price'] = self.item_unit_price.to_alipay_dict()
             else:
                 params['item_unit_price'] = self.item_unit_price
+        if self.prefer_policy_flag:
+            if hasattr(self.prefer_policy_flag, 'to_alipay_dict'):
+                params['prefer_policy_flag'] = self.prefer_policy_flag.to_alipay_dict()
+            else:
+                params['prefer_policy_flag'] = self.prefer_policy_flag
         if self.row_type:
             if hasattr(self.row_type, 'to_alipay_dict'):
                 params['row_type'] = self.row_type.to_alipay_dict()
             else:
                 params['row_type'] = self.row_type
+        if self.special_manage_flag:
+            if hasattr(self.special_manage_flag, 'to_alipay_dict'):
+                params['special_manage_flag'] = self.special_manage_flag.to_alipay_dict()
+            else:
+                params['special_manage_flag'] = self.special_manage_flag
+        if self.zero_tax_flag:
+            if hasattr(self.zero_tax_flag, 'to_alipay_dict'):
+                params['zero_tax_flag'] = self.zero_tax_flag.to_alipay_dict()
+            else:
+                params['zero_tax_flag'] = self.zero_tax_flag
         return params
 
     @staticmethod
@@ -183,8 +222,14 @@ class InvoiceItemApplyOpenModel(object):
             o.item_unit = d['item_unit']
         if 'item_unit_price' in d:
             o.item_unit_price = d['item_unit_price']
+        if 'prefer_policy_flag' in d:
+            o.prefer_policy_flag = d['prefer_policy_flag']
         if 'row_type' in d:
             o.row_type = d['row_type']
+        if 'special_manage_flag' in d:
+            o.special_manage_flag = d['special_manage_flag']
+        if 'zero_tax_flag' in d:
+            o.zero_tax_flag = d['zero_tax_flag']
         return o
 
 

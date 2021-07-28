@@ -10,6 +10,7 @@ class AlipayUserAccountDeviceInfoQueryModel(object):
     def __init__(self):
         self._device_ids = None
         self._device_type = None
+        self._devices = None
         self._encrypt_type = None
         self._extra_info = None
         self._request_from = None
@@ -31,6 +32,13 @@ class AlipayUserAccountDeviceInfoQueryModel(object):
     @device_type.setter
     def device_type(self, value):
         self._device_type = value
+    @property
+    def devices(self):
+        return self._devices
+
+    @devices.setter
+    def devices(self, value):
+        self._devices = value
     @property
     def encrypt_type(self):
         return self._encrypt_type
@@ -71,6 +79,11 @@ class AlipayUserAccountDeviceInfoQueryModel(object):
                 params['device_type'] = self.device_type.to_alipay_dict()
             else:
                 params['device_type'] = self.device_type
+        if self.devices:
+            if hasattr(self.devices, 'to_alipay_dict'):
+                params['devices'] = self.devices.to_alipay_dict()
+            else:
+                params['devices'] = self.devices
         if self.encrypt_type:
             if hasattr(self.encrypt_type, 'to_alipay_dict'):
                 params['encrypt_type'] = self.encrypt_type.to_alipay_dict()
@@ -97,6 +110,8 @@ class AlipayUserAccountDeviceInfoQueryModel(object):
             o.device_ids = d['device_ids']
         if 'device_type' in d:
             o.device_type = d['device_type']
+        if 'devices' in d:
+            o.devices = d['devices']
         if 'encrypt_type' in d:
             o.encrypt_type = d['encrypt_type']
         if 'extra_info' in d:

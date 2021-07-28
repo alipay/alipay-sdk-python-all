@@ -5,15 +5,22 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
-from alipay.aop.api.domain.AlipayOpenPublicLifeaccountCreateModel import AlipayOpenPublicLifeaccountCreateModel
 
 
 
-class AlipayOpenPublicLifeaccountCreateRequest(object):
+class AlipayOpenPublicLifeAccountCreateRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
-        self._biz_content = None
+        self._catagory_id = None
+        self._contact_email = None
+        self._contact_tel = None
+        self._content = None
+        self._customer_tel = None
+        self._life_name = None
+        self._user_id = None
+        self._background = None
+        self._logo = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -32,16 +39,73 @@ class AlipayOpenPublicLifeaccountCreateRequest(object):
         self._biz_model = value
 
     @property
-    def biz_content(self):
-        return self._biz_content
+    def catagory_id(self):
+        return self._catagory_id
 
-    @biz_content.setter
-    def biz_content(self, value):
-        if isinstance(value, AlipayOpenPublicLifeaccountCreateModel):
-            self._biz_content = value
-        else:
-            self._biz_content = AlipayOpenPublicLifeaccountCreateModel.from_alipay_dict(value)
+    @catagory_id.setter
+    def catagory_id(self, value):
+        self._catagory_id = value
+    @property
+    def contact_email(self):
+        return self._contact_email
 
+    @contact_email.setter
+    def contact_email(self, value):
+        self._contact_email = value
+    @property
+    def contact_tel(self):
+        return self._contact_tel
+
+    @contact_tel.setter
+    def contact_tel(self, value):
+        self._contact_tel = value
+    @property
+    def content(self):
+        return self._content
+
+    @content.setter
+    def content(self, value):
+        self._content = value
+    @property
+    def customer_tel(self):
+        return self._customer_tel
+
+    @customer_tel.setter
+    def customer_tel(self, value):
+        self._customer_tel = value
+    @property
+    def life_name(self):
+        return self._life_name
+
+    @life_name.setter
+    def life_name(self, value):
+        self._life_name = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+
+    @property
+    def background(self):
+        return self._background
+
+    @background.setter
+    def background(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._background = value
+    @property
+    def logo(self):
+        return self._logo
+
+    @logo.setter
+    def logo(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._logo = value
 
     @property
     def version(self):
@@ -116,15 +180,45 @@ class AlipayOpenPublicLifeaccountCreateRequest(object):
 
     def get_params(self):
         params = dict()
-        params[P_METHOD] = 'alipay.open.public.lifeaccount.create'
+        params[P_METHOD] = 'alipay.open.public.life.account.create'
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-        if self.biz_content:
-            if hasattr(self.biz_content, 'to_alipay_dict'):
-                params['biz_content'] = json.dumps(obj=self.biz_content.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.catagory_id:
+            if hasattr(self.catagory_id, 'to_alipay_dict'):
+                params['catagory_id'] = json.dumps(obj=self.catagory_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
-                params['biz_content'] = self.biz_content
+                params['catagory_id'] = self.catagory_id
+        if self.contact_email:
+            if hasattr(self.contact_email, 'to_alipay_dict'):
+                params['contact_email'] = json.dumps(obj=self.contact_email.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['contact_email'] = self.contact_email
+        if self.contact_tel:
+            if hasattr(self.contact_tel, 'to_alipay_dict'):
+                params['contact_tel'] = json.dumps(obj=self.contact_tel.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['contact_tel'] = self.contact_tel
+        if self.content:
+            if hasattr(self.content, 'to_alipay_dict'):
+                params['content'] = json.dumps(obj=self.content.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['content'] = self.content
+        if self.customer_tel:
+            if hasattr(self.customer_tel, 'to_alipay_dict'):
+                params['customer_tel'] = json.dumps(obj=self.customer_tel.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['customer_tel'] = self.customer_tel
+        if self.life_name:
+            if hasattr(self.life_name, 'to_alipay_dict'):
+                params['life_name'] = json.dumps(obj=self.life_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['life_name'] = self.life_name
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = json.dumps(obj=self.user_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['user_id'] = self.user_id
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:
@@ -141,4 +235,8 @@ class AlipayOpenPublicLifeaccountCreateRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.background:
+            multipart_params['background'] = self.background
+        if self.logo:
+            multipart_params['logo'] = self.logo
         return multipart_params

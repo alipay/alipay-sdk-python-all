@@ -12,8 +12,10 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
         self._city_code = None
         self._cognition_content = None
         self._cognition_type = None
+        self._group_id = None
         self._latitude = None
         self._longitude = None
+        self._source = None
         self._user_id = None
 
     @property
@@ -45,6 +47,13 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
     def cognition_type(self, value):
         self._cognition_type = value
     @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
+    @property
     def latitude(self):
         return self._latitude
 
@@ -58,6 +67,13 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
     @property
     def user_id(self):
         return self._user_id
@@ -89,6 +105,11 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
                 params['cognition_type'] = self.cognition_type.to_alipay_dict()
             else:
                 params['cognition_type'] = self.cognition_type
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -99,6 +120,11 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -119,10 +145,14 @@ class AlipayIserviceCognitiveClassificationWasteQueryModel(object):
             o.cognition_content = d['cognition_content']
         if 'cognition_type' in d:
             o.cognition_type = d['cognition_type']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'source' in d:
+            o.source = d['source']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

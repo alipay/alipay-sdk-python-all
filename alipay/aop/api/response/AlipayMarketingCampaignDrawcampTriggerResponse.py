@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.MpPrizeSendOrder import MpPrizeSendOrder
 
 
 class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
@@ -16,8 +17,10 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
         self._out_prize_id = None
         self._prize_flag = None
         self._prize_id = None
+        self._prize_log_id = None
         self._prize_name = None
         self._repeat_trigger_flag = None
+        self._send_order_list = None
         self._trigger_result = None
 
     @property
@@ -70,6 +73,13 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
     def prize_id(self, value):
         self._prize_id = value
     @property
+    def prize_log_id(self):
+        return self._prize_log_id
+
+    @prize_log_id.setter
+    def prize_log_id(self, value):
+        self._prize_log_id = value
+    @property
     def prize_name(self):
         return self._prize_name
 
@@ -83,6 +93,19 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
     @repeat_trigger_flag.setter
     def repeat_trigger_flag(self, value):
         self._repeat_trigger_flag = value
+    @property
+    def send_order_list(self):
+        return self._send_order_list
+
+    @send_order_list.setter
+    def send_order_list(self, value):
+        if isinstance(value, list):
+            self._send_order_list = list()
+            for i in value:
+                if isinstance(i, MpPrizeSendOrder):
+                    self._send_order_list.append(i)
+                else:
+                    self._send_order_list.append(MpPrizeSendOrder.from_alipay_dict(i))
     @property
     def trigger_result(self):
         return self._trigger_result
@@ -107,9 +130,13 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
             self.prize_flag = response['prize_flag']
         if 'prize_id' in response:
             self.prize_id = response['prize_id']
+        if 'prize_log_id' in response:
+            self.prize_log_id = response['prize_log_id']
         if 'prize_name' in response:
             self.prize_name = response['prize_name']
         if 'repeat_trigger_flag' in response:
             self.repeat_trigger_flag = response['repeat_trigger_flag']
+        if 'send_order_list' in response:
+            self.send_order_list = response['send_order_list']
         if 'trigger_result' in response:
             self.trigger_result = response['trigger_result']

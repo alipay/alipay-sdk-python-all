@@ -9,6 +9,7 @@ from alipay.aop.api.domain.UserVo import UserVo
 class MybankCreditLoantradeBillListQueryModel(object):
 
     def __init__(self):
+        self._bill_no_list = None
         self._bill_status_list = None
         self._end_date = None
         self._out_request_no = None
@@ -18,6 +19,13 @@ class MybankCreditLoantradeBillListQueryModel(object):
         self._start_date = None
         self._user = None
 
+    @property
+    def bill_no_list(self):
+        return self._bill_no_list
+
+    @bill_no_list.setter
+    def bill_no_list(self, value):
+        self._bill_no_list = value
     @property
     def bill_status_list(self):
         return self._bill_status_list
@@ -81,6 +89,11 @@ class MybankCreditLoantradeBillListQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bill_no_list:
+            if hasattr(self.bill_no_list, 'to_alipay_dict'):
+                params['bill_no_list'] = self.bill_no_list.to_alipay_dict()
+            else:
+                params['bill_no_list'] = self.bill_no_list
         if self.bill_status_list:
             if hasattr(self.bill_status_list, 'to_alipay_dict'):
                 params['bill_status_list'] = self.bill_status_list.to_alipay_dict()
@@ -128,6 +141,8 @@ class MybankCreditLoantradeBillListQueryModel(object):
         if not d:
             return None
         o = MybankCreditLoantradeBillListQueryModel()
+        if 'bill_no_list' in d:
+            o.bill_no_list = d['bill_no_list']
         if 'bill_status_list' in d:
             o.bill_status_list = d['bill_status_list']
         if 'end_date' in d:

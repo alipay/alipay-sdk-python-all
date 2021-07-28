@@ -8,11 +8,27 @@ from alipay.aop.api.constant.ParamConstants import *
 class SubMerchantEnterOpenModel(object):
 
     def __init__(self):
+        self._extend_fields = None
+        self._industry = None
         self._pid = None
         self._register_no = None
         self._sub_m_name = None
         self._sub_m_short_name = None
 
+    @property
+    def extend_fields(self):
+        return self._extend_fields
+
+    @extend_fields.setter
+    def extend_fields(self, value):
+        self._extend_fields = value
+    @property
+    def industry(self):
+        return self._industry
+
+    @industry.setter
+    def industry(self, value):
+        self._industry = value
     @property
     def pid(self):
         return self._pid
@@ -45,6 +61,16 @@ class SubMerchantEnterOpenModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.extend_fields:
+            if hasattr(self.extend_fields, 'to_alipay_dict'):
+                params['extend_fields'] = self.extend_fields.to_alipay_dict()
+            else:
+                params['extend_fields'] = self.extend_fields
+        if self.industry:
+            if hasattr(self.industry, 'to_alipay_dict'):
+                params['industry'] = self.industry.to_alipay_dict()
+            else:
+                params['industry'] = self.industry
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
@@ -72,6 +98,10 @@ class SubMerchantEnterOpenModel(object):
         if not d:
             return None
         o = SubMerchantEnterOpenModel()
+        if 'extend_fields' in d:
+            o.extend_fields = d['extend_fields']
+        if 'industry' in d:
+            o.industry = d['industry']
         if 'pid' in d:
             o.pid = d['pid']
         if 'register_no' in d:

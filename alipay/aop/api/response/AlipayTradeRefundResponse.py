@@ -15,6 +15,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._buyer_user_id = None
         self._fund_change = None
         self._gmt_refund_pay = None
+        self._has_deposit_back = None
         self._open_id = None
         self._out_trade_no = None
         self._present_refund_buyer_amount = None
@@ -58,6 +59,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
     @gmt_refund_pay.setter
     def gmt_refund_pay(self, value):
         self._gmt_refund_pay = value
+    @property
+    def has_deposit_back(self):
+        return self._has_deposit_back
+
+    @has_deposit_back.setter
+    def has_deposit_back(self, value):
+        self._has_deposit_back = value
     @property
     def open_id(self):
         return self._open_id
@@ -176,6 +184,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.fund_change = response['fund_change']
         if 'gmt_refund_pay' in response:
             self.gmt_refund_pay = response['gmt_refund_pay']
+        if 'has_deposit_back' in response:
+            self.has_deposit_back = response['has_deposit_back']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'out_trade_no' in response:

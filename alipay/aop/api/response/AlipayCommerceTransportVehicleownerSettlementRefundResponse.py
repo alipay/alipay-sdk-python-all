@@ -11,8 +11,10 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
         super(AlipayCommerceTransportVehicleownerSettlementRefundResponse, self).__init__()
         self._buyer_id = None
         self._gmt_refund_pay = None
+        self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
+        self._refund_status = None
         self._trade_no = None
 
     @property
@@ -30,6 +32,13 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
     def gmt_refund_pay(self, value):
         self._gmt_refund_pay = value
     @property
+    def out_request_no(self):
+        return self._out_request_no
+
+    @out_request_no.setter
+    def out_request_no(self, value):
+        self._out_request_no = value
+    @property
     def out_trade_no(self):
         return self._out_trade_no
 
@@ -44,6 +53,13 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
     def refund_amount(self, value):
         self._refund_amount = value
     @property
+    def refund_status(self):
+        return self._refund_status
+
+    @refund_status.setter
+    def refund_status(self, value):
+        self._refund_status = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -57,9 +73,13 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
             self.buyer_id = response['buyer_id']
         if 'gmt_refund_pay' in response:
             self.gmt_refund_pay = response['gmt_refund_pay']
+        if 'out_request_no' in response:
+            self.out_request_no = response['out_request_no']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'refund_amount' in response:
             self.refund_amount = response['refund_amount']
+        if 'refund_status' in response:
+            self.refund_status = response['refund_status']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']

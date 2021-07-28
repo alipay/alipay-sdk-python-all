@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AssetProduceItem(object):
 
     def __init__(self):
+        self._action_type = None
         self._apply_date = None
         self._apply_order_id = None
         self._asset_pic_url = None
@@ -39,6 +40,13 @@ class AssetProduceItem(object):
         self._template_id = None
         self._template_name = None
 
+    @property
+    def action_type(self):
+        return self._action_type
+
+    @action_type.setter
+    def action_type(self, value):
+        self._action_type = value
     @property
     def apply_date(self):
         return self._apply_date
@@ -253,6 +261,11 @@ class AssetProduceItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.action_type:
+            if hasattr(self.action_type, 'to_alipay_dict'):
+                params['action_type'] = self.action_type.to_alipay_dict()
+            else:
+                params['action_type'] = self.action_type
         if self.apply_date:
             if hasattr(self.apply_date, 'to_alipay_dict'):
                 params['apply_date'] = self.apply_date.to_alipay_dict()
@@ -410,6 +423,8 @@ class AssetProduceItem(object):
         if not d:
             return None
         o = AssetProduceItem()
+        if 'action_type' in d:
+            o.action_type = d['action_type']
         if 'apply_date' in d:
             o.apply_date = d['apply_date']
         if 'apply_order_id' in d:

@@ -11,6 +11,7 @@ class MybankPaymentTradeNormalpayOrderPayModel(object):
         self._amount = None
         self._currency_value = None
         self._ext_info = None
+        self._operate_scene_type = None
         self._order_no = None
         self._order_type = None
         self._payee_fund_detail = None
@@ -40,6 +41,13 @@ class MybankPaymentTradeNormalpayOrderPayModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def operate_scene_type(self):
+        return self._operate_scene_type
+
+    @operate_scene_type.setter
+    def operate_scene_type(self, value):
+        self._operate_scene_type = value
     @property
     def order_no(self):
         return self._order_no
@@ -108,6 +116,11 @@ class MybankPaymentTradeNormalpayOrderPayModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.operate_scene_type:
+            if hasattr(self.operate_scene_type, 'to_alipay_dict'):
+                params['operate_scene_type'] = self.operate_scene_type.to_alipay_dict()
+            else:
+                params['operate_scene_type'] = self.operate_scene_type
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -156,6 +169,8 @@ class MybankPaymentTradeNormalpayOrderPayModel(object):
             o.currency_value = d['currency_value']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'operate_scene_type' in d:
+            o.operate_scene_type = d['operate_scene_type']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'order_type' in d:

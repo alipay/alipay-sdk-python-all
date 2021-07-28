@@ -13,6 +13,7 @@ class AlipayTradeBatchSettleModel(object):
         self._extend_params = None
         self._out_request_no = None
         self._settle_clauses = None
+        self._settle_type = None
 
     @property
     def biz_product(self):
@@ -48,6 +49,13 @@ class AlipayTradeBatchSettleModel(object):
                     self._settle_clauses.append(i)
                 else:
                     self._settle_clauses.append(SettleClause.from_alipay_dict(i))
+    @property
+    def settle_type(self):
+        return self._settle_type
+
+    @settle_type.setter
+    def settle_type(self, value):
+        self._settle_type = value
 
 
     def to_alipay_dict(self):
@@ -77,6 +85,11 @@ class AlipayTradeBatchSettleModel(object):
                 params['settle_clauses'] = self.settle_clauses.to_alipay_dict()
             else:
                 params['settle_clauses'] = self.settle_clauses
+        if self.settle_type:
+            if hasattr(self.settle_type, 'to_alipay_dict'):
+                params['settle_type'] = self.settle_type.to_alipay_dict()
+            else:
+                params['settle_type'] = self.settle_type
         return params
 
     @staticmethod
@@ -92,6 +105,8 @@ class AlipayTradeBatchSettleModel(object):
             o.out_request_no = d['out_request_no']
         if 'settle_clauses' in d:
             o.settle_clauses = d['settle_clauses']
+        if 'settle_type' in d:
+            o.settle_type = d['settle_type']
         return o
 
 

@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
+from alipay.aop.api.domain.SignAddressInfo import SignAddressInfo
+from alipay.aop.api.domain.SignAddressInfo import SignAddressInfo
 
 
 
@@ -13,12 +15,17 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._batch_no = None
+        self._business_license_mobile = None
         self._business_license_no = None
         self._date_limitation = None
+        self._delivery_address = None
         self._long_term = None
         self._mcc_code = None
         self._rate = None
+        self._shop_address = None
+        self._shop_name = None
         self._business_license_pic = None
+        self._shop_scene_pic = None
         self._shop_sign_board_pic = None
         self._special_license_pic = None
         self._version = "1.0"
@@ -46,6 +53,13 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
     def batch_no(self, value):
         self._batch_no = value
     @property
+    def business_license_mobile(self):
+        return self._business_license_mobile
+
+    @business_license_mobile.setter
+    def business_license_mobile(self, value):
+        self._business_license_mobile = value
+    @property
     def business_license_no(self):
         return self._business_license_no
 
@@ -59,6 +73,16 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
     @date_limitation.setter
     def date_limitation(self, value):
         self._date_limitation = value
+    @property
+    def delivery_address(self):
+        return self._delivery_address
+
+    @delivery_address.setter
+    def delivery_address(self, value):
+        if isinstance(value, SignAddressInfo):
+            self._delivery_address = value
+        else:
+            self._delivery_address = SignAddressInfo.from_alipay_dict(value)
     @property
     def long_term(self):
         return self._long_term
@@ -80,6 +104,23 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
     @rate.setter
     def rate(self, value):
         self._rate = value
+    @property
+    def shop_address(self):
+        return self._shop_address
+
+    @shop_address.setter
+    def shop_address(self, value):
+        if isinstance(value, SignAddressInfo):
+            self._shop_address = value
+        else:
+            self._shop_address = SignAddressInfo.from_alipay_dict(value)
+    @property
+    def shop_name(self):
+        return self._shop_name
+
+    @shop_name.setter
+    def shop_name(self, value):
+        self._shop_name = value
 
     @property
     def business_license_pic(self):
@@ -90,6 +131,15 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
         if not isinstance(value, FileItem):
             return
         self._business_license_pic = value
+    @property
+    def shop_scene_pic(self):
+        return self._shop_scene_pic
+
+    @shop_scene_pic.setter
+    def shop_scene_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._shop_scene_pic = value
     @property
     def shop_sign_board_pic(self):
         return self._shop_sign_board_pic
@@ -191,6 +241,11 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
                 params['batch_no'] = json.dumps(obj=self.batch_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['batch_no'] = self.batch_no
+        if self.business_license_mobile:
+            if hasattr(self.business_license_mobile, 'to_alipay_dict'):
+                params['business_license_mobile'] = json.dumps(obj=self.business_license_mobile.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['business_license_mobile'] = self.business_license_mobile
         if self.business_license_no:
             if hasattr(self.business_license_no, 'to_alipay_dict'):
                 params['business_license_no'] = json.dumps(obj=self.business_license_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -201,6 +256,11 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
                 params['date_limitation'] = json.dumps(obj=self.date_limitation.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['date_limitation'] = self.date_limitation
+        if self.delivery_address:
+            if hasattr(self.delivery_address, 'to_alipay_dict'):
+                params['delivery_address'] = json.dumps(obj=self.delivery_address.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['delivery_address'] = self.delivery_address
         if self.long_term:
             if hasattr(self.long_term, 'to_alipay_dict'):
                 params['long_term'] = json.dumps(obj=self.long_term.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -216,6 +276,16 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
                 params['rate'] = json.dumps(obj=self.rate.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['rate'] = self.rate
+        if self.shop_address:
+            if hasattr(self.shop_address, 'to_alipay_dict'):
+                params['shop_address'] = json.dumps(obj=self.shop_address.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_address'] = self.shop_address
+        if self.shop_name:
+            if hasattr(self.shop_name, 'to_alipay_dict'):
+                params['shop_name'] = json.dumps(obj=self.shop_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_name'] = self.shop_name
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:
@@ -234,6 +304,8 @@ class AlipayOpenAgentOfflinepaymentSignRequest(object):
         multipart_params = dict()
         if self.business_license_pic:
             multipart_params['business_license_pic'] = self.business_license_pic
+        if self.shop_scene_pic:
+            multipart_params['shop_scene_pic'] = self.shop_scene_pic
         if self.shop_sign_board_pic:
             multipart_params['shop_sign_board_pic'] = self.shop_sign_board_pic
         if self.special_license_pic:

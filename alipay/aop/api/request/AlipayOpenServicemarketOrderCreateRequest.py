@@ -16,9 +16,13 @@ class AlipayOpenServicemarketOrderCreateRequest(object):
         self._app_desc = None
         self._app_english_name = None
         self._app_name = None
+        self._app_origin = None
         self._app_slogan = None
+        self._market_code = None
         self._merchandise_id = None
         self._merchant_pid = None
+        self._mini_app_id = None
+        self._mini_category_ids = None
         self._out_biz_no = None
         self._service_email = None
         self._service_phone = None
@@ -69,12 +73,26 @@ class AlipayOpenServicemarketOrderCreateRequest(object):
     def app_name(self, value):
         self._app_name = value
     @property
+    def app_origin(self):
+        return self._app_origin
+
+    @app_origin.setter
+    def app_origin(self, value):
+        self._app_origin = value
+    @property
     def app_slogan(self):
         return self._app_slogan
 
     @app_slogan.setter
     def app_slogan(self, value):
         self._app_slogan = value
+    @property
+    def market_code(self):
+        return self._market_code
+
+    @market_code.setter
+    def market_code(self, value):
+        self._market_code = value
     @property
     def merchandise_id(self):
         return self._merchandise_id
@@ -89,6 +107,20 @@ class AlipayOpenServicemarketOrderCreateRequest(object):
     @merchant_pid.setter
     def merchant_pid(self, value):
         self._merchant_pid = value
+    @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -218,11 +250,21 @@ class AlipayOpenServicemarketOrderCreateRequest(object):
                 params['app_name'] = json.dumps(obj=self.app_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['app_name'] = self.app_name
+        if self.app_origin:
+            if hasattr(self.app_origin, 'to_alipay_dict'):
+                params['app_origin'] = json.dumps(obj=self.app_origin.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['app_origin'] = self.app_origin
         if self.app_slogan:
             if hasattr(self.app_slogan, 'to_alipay_dict'):
                 params['app_slogan'] = json.dumps(obj=self.app_slogan.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['app_slogan'] = self.app_slogan
+        if self.market_code:
+            if hasattr(self.market_code, 'to_alipay_dict'):
+                params['market_code'] = json.dumps(obj=self.market_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['market_code'] = self.market_code
         if self.merchandise_id:
             if hasattr(self.merchandise_id, 'to_alipay_dict'):
                 params['merchandise_id'] = json.dumps(obj=self.merchandise_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -233,6 +275,16 @@ class AlipayOpenServicemarketOrderCreateRequest(object):
                 params['merchant_pid'] = json.dumps(obj=self.merchant_pid.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['merchant_pid'] = self.merchant_pid
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = json.dumps(obj=self.mini_app_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_app_id'] = self.mini_app_id
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = json.dumps(obj=self.mini_category_ids.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = json.dumps(obj=self.out_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

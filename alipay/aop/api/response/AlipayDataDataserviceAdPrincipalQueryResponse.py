@@ -13,6 +13,7 @@ class AlipayDataDataserviceAdPrincipalQueryResponse(AlipayResponse):
         self._alipay_pid = None
         self._attachment_list = None
         self._principal_id = None
+        self._refuse_reason = None
         self._status = None
         self._trade_id = None
 
@@ -44,6 +45,13 @@ class AlipayDataDataserviceAdPrincipalQueryResponse(AlipayResponse):
     def principal_id(self, value):
         self._principal_id = value
     @property
+    def refuse_reason(self):
+        return self._refuse_reason
+
+    @refuse_reason.setter
+    def refuse_reason(self, value):
+        self._refuse_reason = value
+    @property
     def status(self):
         return self._status
 
@@ -66,6 +74,8 @@ class AlipayDataDataserviceAdPrincipalQueryResponse(AlipayResponse):
             self.attachment_list = response['attachment_list']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'refuse_reason' in response:
+            self.refuse_reason = response['refuse_reason']
         if 'status' in response:
             self.status = response['status']
         if 'trade_id' in response:

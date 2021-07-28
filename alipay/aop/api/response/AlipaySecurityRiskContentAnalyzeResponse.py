@@ -15,6 +15,7 @@ class AlipaySecurityRiskContentAnalyzeResponse(AlipayResponse):
         self._hit_detect_items = None
         self._need_query = None
         self._result_action = None
+        self._risk_labels = None
 
     @property
     def app_scene_data_id(self):
@@ -57,6 +58,13 @@ class AlipaySecurityRiskContentAnalyzeResponse(AlipayResponse):
     @result_action.setter
     def result_action(self, value):
         self._result_action = value
+    @property
+    def risk_labels(self):
+        return self._risk_labels
+
+    @risk_labels.setter
+    def risk_labels(self, value):
+        self._risk_labels = value
 
     def parse_response_content(self, response_content):
         response = super(AlipaySecurityRiskContentAnalyzeResponse, self).parse_response_content(response_content)
@@ -70,3 +78,5 @@ class AlipaySecurityRiskContentAnalyzeResponse(AlipayResponse):
             self.need_query = response['need_query']
         if 'result_action' in response:
             self.result_action = response['result_action']
+        if 'risk_labels' in response:
+            self.risk_labels = response['risk_labels']

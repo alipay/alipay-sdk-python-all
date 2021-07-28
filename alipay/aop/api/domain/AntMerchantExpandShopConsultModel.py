@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SettleCardInfo import SettleCardInfo
 from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
@@ -13,6 +14,7 @@ from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificatio
 class AntMerchantExpandShopConsultModel(object):
 
     def __init__(self):
+        self._biz_cards = None
         self._brand_id = None
         self._business_address = None
         self._business_time = None
@@ -38,6 +40,19 @@ class AntMerchantExpandShopConsultModel(object):
         self._shop_type = None
         self._store_id = None
 
+    @property
+    def biz_cards(self):
+        return self._biz_cards
+
+    @biz_cards.setter
+    def biz_cards(self, value):
+        if isinstance(value, list):
+            self._biz_cards = list()
+            for i in value:
+                if isinstance(i, SettleCardInfo):
+                    self._biz_cards.append(i)
+                else:
+                    self._biz_cards.append(SettleCardInfo.from_alipay_dict(i))
     @property
     def brand_id(self):
         return self._brand_id
@@ -237,6 +252,16 @@ class AntMerchantExpandShopConsultModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_cards:
+            if isinstance(self.biz_cards, list):
+                for i in range(0, len(self.biz_cards)):
+                    element = self.biz_cards[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.biz_cards[i] = element.to_alipay_dict()
+            if hasattr(self.biz_cards, 'to_alipay_dict'):
+                params['biz_cards'] = self.biz_cards.to_alipay_dict()
+            else:
+                params['biz_cards'] = self.biz_cards
         if self.brand_id:
             if hasattr(self.brand_id, 'to_alipay_dict'):
                 params['brand_id'] = self.brand_id.to_alipay_dict()
@@ -384,6 +409,8 @@ class AntMerchantExpandShopConsultModel(object):
         if not d:
             return None
         o = AntMerchantExpandShopConsultModel()
+        if 'biz_cards' in d:
+            o.biz_cards = d['biz_cards']
         if 'brand_id' in d:
             o.brand_id = d['brand_id']
         if 'business_address' in d:

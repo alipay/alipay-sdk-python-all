@@ -8,6 +8,7 @@ from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.PayParams import PayParams
 from alipay.aop.api.domain.PromoParam import PromoParam
 from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
@@ -31,11 +32,16 @@ class AlipayTradePayModel(object):
         self._ext_user_info = None
         self._extend_params = None
         self._goods_detail = None
+        self._is_async_pay = None
         self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
+        self._passback_params = None
+        self._pay_params = None
         self._product_code = None
         self._promo_params = None
+        self._query_options = None
+        self._request_org_pid = None
         self._royalty_info = None
         self._scene = None
         self._seller_id = None
@@ -168,6 +174,13 @@ class AlipayTradePayModel(object):
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
     @property
+    def is_async_pay(self):
+        return self._is_async_pay
+
+    @is_async_pay.setter
+    def is_async_pay(self, value):
+        self._is_async_pay = value
+    @property
     def merchant_order_no(self):
         return self._merchant_order_no
 
@@ -189,6 +202,23 @@ class AlipayTradePayModel(object):
     def out_trade_no(self, value):
         self._out_trade_no = value
     @property
+    def passback_params(self):
+        return self._passback_params
+
+    @passback_params.setter
+    def passback_params(self, value):
+        self._passback_params = value
+    @property
+    def pay_params(self):
+        return self._pay_params
+
+    @pay_params.setter
+    def pay_params(self, value):
+        if isinstance(value, PayParams):
+            self._pay_params = value
+        else:
+            self._pay_params = PayParams.from_alipay_dict(value)
+    @property
     def product_code(self):
         return self._product_code
 
@@ -205,6 +235,23 @@ class AlipayTradePayModel(object):
             self._promo_params = value
         else:
             self._promo_params = PromoParam.from_alipay_dict(value)
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
+    @property
+    def request_org_pid(self):
+        return self._request_org_pid
+
+    @request_org_pid.setter
+    def request_org_pid(self, value):
+        self._request_org_pid = value
     @property
     def royalty_info(self):
         return self._royalty_info
@@ -391,6 +438,11 @@ class AlipayTradePayModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.is_async_pay:
+            if hasattr(self.is_async_pay, 'to_alipay_dict'):
+                params['is_async_pay'] = self.is_async_pay.to_alipay_dict()
+            else:
+                params['is_async_pay'] = self.is_async_pay
         if self.merchant_order_no:
             if hasattr(self.merchant_order_no, 'to_alipay_dict'):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
@@ -406,6 +458,16 @@ class AlipayTradePayModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.passback_params:
+            if hasattr(self.passback_params, 'to_alipay_dict'):
+                params['passback_params'] = self.passback_params.to_alipay_dict()
+            else:
+                params['passback_params'] = self.passback_params
+        if self.pay_params:
+            if hasattr(self.pay_params, 'to_alipay_dict'):
+                params['pay_params'] = self.pay_params.to_alipay_dict()
+            else:
+                params['pay_params'] = self.pay_params
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -416,6 +478,21 @@ class AlipayTradePayModel(object):
                 params['promo_params'] = self.promo_params.to_alipay_dict()
             else:
                 params['promo_params'] = self.promo_params
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
+        if self.request_org_pid:
+            if hasattr(self.request_org_pid, 'to_alipay_dict'):
+                params['request_org_pid'] = self.request_org_pid.to_alipay_dict()
+            else:
+                params['request_org_pid'] = self.request_org_pid
         if self.royalty_info:
             if hasattr(self.royalty_info, 'to_alipay_dict'):
                 params['royalty_info'] = self.royalty_info.to_alipay_dict()
@@ -521,16 +598,26 @@ class AlipayTradePayModel(object):
             o.extend_params = d['extend_params']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'is_async_pay' in d:
+            o.is_async_pay = d['is_async_pay']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'passback_params' in d:
+            o.passback_params = d['passback_params']
+        if 'pay_params' in d:
+            o.pay_params = d['pay_params']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'promo_params' in d:
             o.promo_params = d['promo_params']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
+        if 'request_org_pid' in d:
+            o.request_org_pid = d['request_org_pid']
         if 'royalty_info' in d:
             o.royalty_info = d['royalty_info']
         if 'scene' in d:

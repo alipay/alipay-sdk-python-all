@@ -15,6 +15,7 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
         self._current_price = None
         self._discount_amount = None
         self._invoice_amount = None
+        self._item_alias = None
         self._item_id = None
         self._item_name = None
         self._koubei_subsidy_amount = None
@@ -65,6 +66,13 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
     @invoice_amount.setter
     def invoice_amount(self, value):
         self._invoice_amount = value
+    @property
+    def item_alias(self):
+        return self._item_alias
+
+    @item_alias.setter
+    def item_alias(self, value):
+        self._item_alias = value
     @property
     def item_id(self):
         return self._item_id
@@ -182,6 +190,8 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
             self.discount_amount = response['discount_amount']
         if 'invoice_amount' in response:
             self.invoice_amount = response['invoice_amount']
+        if 'item_alias' in response:
+            self.item_alias = response['item_alias']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'item_name' in response:

@@ -16,6 +16,9 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
         self._json_ua = None
         self._login_id = None
         self._out_biz_no = None
+        self._prize_id = None
+        self._taobao_id = None
+        self._term_id = None
         self._user_id = None
 
     @property
@@ -75,6 +78,27 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def prize_id(self):
+        return self._prize_id
+
+    @prize_id.setter
+    def prize_id(self, value):
+        self._prize_id = value
+    @property
+    def taobao_id(self):
+        return self._taobao_id
+
+    @taobao_id.setter
+    def taobao_id(self, value):
+        self._taobao_id = value
+    @property
+    def term_id(self):
+        return self._term_id
+
+    @term_id.setter
+    def term_id(self, value):
+        self._term_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -125,6 +149,21 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.prize_id:
+            if hasattr(self.prize_id, 'to_alipay_dict'):
+                params['prize_id'] = self.prize_id.to_alipay_dict()
+            else:
+                params['prize_id'] = self.prize_id
+        if self.taobao_id:
+            if hasattr(self.taobao_id, 'to_alipay_dict'):
+                params['taobao_id'] = self.taobao_id.to_alipay_dict()
+            else:
+                params['taobao_id'] = self.taobao_id
+        if self.term_id:
+            if hasattr(self.term_id, 'to_alipay_dict'):
+                params['term_id'] = self.term_id.to_alipay_dict()
+            else:
+                params['term_id'] = self.term_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -153,6 +192,12 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
             o.login_id = d['login_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'prize_id' in d:
+            o.prize_id = d['prize_id']
+        if 'taobao_id' in d:
+            o.taobao_id = d['taobao_id']
+        if 'term_id' in d:
+            o.term_id = d['term_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

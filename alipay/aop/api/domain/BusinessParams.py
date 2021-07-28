@@ -11,6 +11,7 @@ class BusinessParams(object):
         self._actual_order_time = None
         self._campus_card = None
         self._card_type = None
+        self._good_taxes = None
 
     @property
     def actual_order_time(self):
@@ -33,6 +34,13 @@ class BusinessParams(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def good_taxes(self):
+        return self._good_taxes
+
+    @good_taxes.setter
+    def good_taxes(self, value):
+        self._good_taxes = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class BusinessParams(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.good_taxes:
+            if hasattr(self.good_taxes, 'to_alipay_dict'):
+                params['good_taxes'] = self.good_taxes.to_alipay_dict()
+            else:
+                params['good_taxes'] = self.good_taxes
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class BusinessParams(object):
             o.campus_card = d['campus_card']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'good_taxes' in d:
+            o.good_taxes = d['good_taxes']
         return o
 
 

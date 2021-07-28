@@ -32,6 +32,7 @@ class AlipayTradeCreateModel(object):
         self._merchant_order_no = None
         self._operator_id = None
         self._out_trade_no = None
+        self._passback_params = None
         self._product_code = None
         self._receiver_address_info = None
         self._royalty_info = None
@@ -168,6 +169,13 @@ class AlipayTradeCreateModel(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def passback_params(self):
+        return self._passback_params
+
+    @passback_params.setter
+    def passback_params(self, value):
+        self._passback_params = value
     @property
     def product_code(self):
         return self._product_code
@@ -348,6 +356,11 @@ class AlipayTradeCreateModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.passback_params:
+            if hasattr(self.passback_params, 'to_alipay_dict'):
+                params['passback_params'] = self.passback_params.to_alipay_dict()
+            else:
+                params['passback_params'] = self.passback_params
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -445,6 +458,8 @@ class AlipayTradeCreateModel(object):
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'passback_params' in d:
+            o.passback_params = d['passback_params']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'receiver_address_info' in d:

@@ -12,6 +12,7 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
         self._agreement_no = None
         self._alipay_logon_id = None
         self._alipay_user_id = None
+        self._credit_auth_mode = None
         self._external_agreement_no = None
         self._external_logon_id = None
         self._forex_eligible = None
@@ -19,6 +20,7 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
         self._personal_product_code = None
         self._sign_scene = None
         self._sign_time = None
+        self._specified_sort_assets = None
         self._status = None
         self._valid_time = None
         self._zm_open_id = None
@@ -44,6 +46,13 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def credit_auth_mode(self):
+        return self._credit_auth_mode
+
+    @credit_auth_mode.setter
+    def credit_auth_mode(self, value):
+        self._credit_auth_mode = value
     @property
     def external_agreement_no(self):
         return self._external_agreement_no
@@ -94,6 +103,13 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
     def sign_time(self, value):
         self._sign_time = value
     @property
+    def specified_sort_assets(self):
+        return self._specified_sort_assets
+
+    @specified_sort_assets.setter
+    def specified_sort_assets(self, value):
+        self._specified_sort_assets = value
+    @property
     def status(self):
         return self._status
 
@@ -123,6 +139,8 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
             self.alipay_logon_id = response['alipay_logon_id']
         if 'alipay_user_id' in response:
             self.alipay_user_id = response['alipay_user_id']
+        if 'credit_auth_mode' in response:
+            self.credit_auth_mode = response['credit_auth_mode']
         if 'external_agreement_no' in response:
             self.external_agreement_no = response['external_agreement_no']
         if 'external_logon_id' in response:
@@ -137,6 +155,8 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
             self.sign_scene = response['sign_scene']
         if 'sign_time' in response:
             self.sign_time = response['sign_time']
+        if 'specified_sort_assets' in response:
+            self.specified_sort_assets = response['specified_sort_assets']
         if 'status' in response:
             self.status = response['status']
         if 'valid_time' in response:

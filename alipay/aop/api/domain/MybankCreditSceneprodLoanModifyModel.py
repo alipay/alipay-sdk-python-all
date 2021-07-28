@@ -9,6 +9,7 @@ from alipay.aop.api.domain.SceneExtParam import SceneExtParam
 class MybankCreditSceneprodLoanModifyModel(object):
 
     def __init__(self):
+        self._app_seq_no = None
         self._ext_param = None
         self._ext_param_info = None
         self._finance_inst_iprole_id = None
@@ -21,6 +22,13 @@ class MybankCreditSceneprodLoanModifyModel(object):
         self._site_user_id = None
         self._status = None
 
+    @property
+    def app_seq_no(self):
+        return self._app_seq_no
+
+    @app_seq_no.setter
+    def app_seq_no(self, value):
+        self._app_seq_no = value
     @property
     def ext_param(self):
         return self._ext_param
@@ -105,6 +113,11 @@ class MybankCreditSceneprodLoanModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_seq_no:
+            if hasattr(self.app_seq_no, 'to_alipay_dict'):
+                params['app_seq_no'] = self.app_seq_no.to_alipay_dict()
+            else:
+                params['app_seq_no'] = self.app_seq_no
         if self.ext_param:
             if hasattr(self.ext_param, 'to_alipay_dict'):
                 params['ext_param'] = self.ext_param.to_alipay_dict()
@@ -167,6 +180,8 @@ class MybankCreditSceneprodLoanModifyModel(object):
         if not d:
             return None
         o = MybankCreditSceneprodLoanModifyModel()
+        if 'app_seq_no' in d:
+            o.app_seq_no = d['app_seq_no']
         if 'ext_param' in d:
             o.ext_param = d['ext_param']
         if 'ext_param_info' in d:

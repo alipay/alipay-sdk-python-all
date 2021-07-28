@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateLocalfaceCompareSyncModel(object):
 
     def __init__(self):
+        self._aes_cypher = None
         self._alg_ver = None
         self._auth_img = None
         self._biz_code = None
@@ -21,6 +22,13 @@ class AlipayCommerceEducateLocalfaceCompareSyncModel(object):
         self._rect = None
         self._score = None
 
+    @property
+    def aes_cypher(self):
+        return self._aes_cypher
+
+    @aes_cypher.setter
+    def aes_cypher(self, value):
+        self._aes_cypher = value
     @property
     def alg_ver(self):
         return self._alg_ver
@@ -109,6 +117,11 @@ class AlipayCommerceEducateLocalfaceCompareSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aes_cypher:
+            if hasattr(self.aes_cypher, 'to_alipay_dict'):
+                params['aes_cypher'] = self.aes_cypher.to_alipay_dict()
+            else:
+                params['aes_cypher'] = self.aes_cypher
         if self.alg_ver:
             if hasattr(self.alg_ver, 'to_alipay_dict'):
                 params['alg_ver'] = self.alg_ver.to_alipay_dict()
@@ -176,6 +189,8 @@ class AlipayCommerceEducateLocalfaceCompareSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateLocalfaceCompareSyncModel()
+        if 'aes_cypher' in d:
+            o.aes_cypher = d['aes_cypher']
         if 'alg_ver' in d:
             o.alg_ver = d['alg_ver']
         if 'auth_img' in d:

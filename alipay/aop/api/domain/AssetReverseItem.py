@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetReverseGoodsItem import AssetReverseGoodsItem
+from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
+from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
 
 
 class AssetReverseItem(object):
@@ -15,15 +17,21 @@ class AssetReverseItem(object):
         self._asset_reverse_goods_items = None
         self._assign_item_id = None
         self._count = None
+        self._from_address = None
         self._item_id = None
         self._item_name = None
         self._original_apply_order_id = None
         self._original_apply_order_item_id = None
+        self._original_deliver_order_id = None
+        self._original_deliver_order_item_id = None
         self._original_delivery_assign_item_id = None
         self._original_record_type = None
         self._ou_code = None
         self._ou_name = None
+        self._reverse_apply_order_id = None
+        self._reverse_apply_order_item_id = None
         self._reverse_type = None
+        self._to_address = None
 
     @property
     def action_type(self):
@@ -71,6 +79,16 @@ class AssetReverseItem(object):
     def count(self, value):
         self._count = value
     @property
+    def from_address(self):
+        return self._from_address
+
+    @from_address.setter
+    def from_address(self, value):
+        if isinstance(value, AssetDeliveryAddress):
+            self._from_address = value
+        else:
+            self._from_address = AssetDeliveryAddress.from_alipay_dict(value)
+    @property
     def item_id(self):
         return self._item_id
 
@@ -98,6 +116,20 @@ class AssetReverseItem(object):
     @original_apply_order_item_id.setter
     def original_apply_order_item_id(self, value):
         self._original_apply_order_item_id = value
+    @property
+    def original_deliver_order_id(self):
+        return self._original_deliver_order_id
+
+    @original_deliver_order_id.setter
+    def original_deliver_order_id(self, value):
+        self._original_deliver_order_id = value
+    @property
+    def original_deliver_order_item_id(self):
+        return self._original_deliver_order_item_id
+
+    @original_deliver_order_item_id.setter
+    def original_deliver_order_item_id(self, value):
+        self._original_deliver_order_item_id = value
     @property
     def original_delivery_assign_item_id(self):
         return self._original_delivery_assign_item_id
@@ -127,12 +159,36 @@ class AssetReverseItem(object):
     def ou_name(self, value):
         self._ou_name = value
     @property
+    def reverse_apply_order_id(self):
+        return self._reverse_apply_order_id
+
+    @reverse_apply_order_id.setter
+    def reverse_apply_order_id(self, value):
+        self._reverse_apply_order_id = value
+    @property
+    def reverse_apply_order_item_id(self):
+        return self._reverse_apply_order_item_id
+
+    @reverse_apply_order_item_id.setter
+    def reverse_apply_order_item_id(self, value):
+        self._reverse_apply_order_item_id = value
+    @property
     def reverse_type(self):
         return self._reverse_type
 
     @reverse_type.setter
     def reverse_type(self, value):
         self._reverse_type = value
+    @property
+    def to_address(self):
+        return self._to_address
+
+    @to_address.setter
+    def to_address(self, value):
+        if isinstance(value, AssetDeliveryAddress):
+            self._to_address = value
+        else:
+            self._to_address = AssetDeliveryAddress.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -167,6 +223,11 @@ class AssetReverseItem(object):
                 params['count'] = self.count.to_alipay_dict()
             else:
                 params['count'] = self.count
+        if self.from_address:
+            if hasattr(self.from_address, 'to_alipay_dict'):
+                params['from_address'] = self.from_address.to_alipay_dict()
+            else:
+                params['from_address'] = self.from_address
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -187,6 +248,16 @@ class AssetReverseItem(object):
                 params['original_apply_order_item_id'] = self.original_apply_order_item_id.to_alipay_dict()
             else:
                 params['original_apply_order_item_id'] = self.original_apply_order_item_id
+        if self.original_deliver_order_id:
+            if hasattr(self.original_deliver_order_id, 'to_alipay_dict'):
+                params['original_deliver_order_id'] = self.original_deliver_order_id.to_alipay_dict()
+            else:
+                params['original_deliver_order_id'] = self.original_deliver_order_id
+        if self.original_deliver_order_item_id:
+            if hasattr(self.original_deliver_order_item_id, 'to_alipay_dict'):
+                params['original_deliver_order_item_id'] = self.original_deliver_order_item_id.to_alipay_dict()
+            else:
+                params['original_deliver_order_item_id'] = self.original_deliver_order_item_id
         if self.original_delivery_assign_item_id:
             if hasattr(self.original_delivery_assign_item_id, 'to_alipay_dict'):
                 params['original_delivery_assign_item_id'] = self.original_delivery_assign_item_id.to_alipay_dict()
@@ -207,11 +278,26 @@ class AssetReverseItem(object):
                 params['ou_name'] = self.ou_name.to_alipay_dict()
             else:
                 params['ou_name'] = self.ou_name
+        if self.reverse_apply_order_id:
+            if hasattr(self.reverse_apply_order_id, 'to_alipay_dict'):
+                params['reverse_apply_order_id'] = self.reverse_apply_order_id.to_alipay_dict()
+            else:
+                params['reverse_apply_order_id'] = self.reverse_apply_order_id
+        if self.reverse_apply_order_item_id:
+            if hasattr(self.reverse_apply_order_item_id, 'to_alipay_dict'):
+                params['reverse_apply_order_item_id'] = self.reverse_apply_order_item_id.to_alipay_dict()
+            else:
+                params['reverse_apply_order_item_id'] = self.reverse_apply_order_item_id
         if self.reverse_type:
             if hasattr(self.reverse_type, 'to_alipay_dict'):
                 params['reverse_type'] = self.reverse_type.to_alipay_dict()
             else:
                 params['reverse_type'] = self.reverse_type
+        if self.to_address:
+            if hasattr(self.to_address, 'to_alipay_dict'):
+                params['to_address'] = self.to_address.to_alipay_dict()
+            else:
+                params['to_address'] = self.to_address
         return params
 
     @staticmethod
@@ -231,6 +317,8 @@ class AssetReverseItem(object):
             o.assign_item_id = d['assign_item_id']
         if 'count' in d:
             o.count = d['count']
+        if 'from_address' in d:
+            o.from_address = d['from_address']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_name' in d:
@@ -239,6 +327,10 @@ class AssetReverseItem(object):
             o.original_apply_order_id = d['original_apply_order_id']
         if 'original_apply_order_item_id' in d:
             o.original_apply_order_item_id = d['original_apply_order_item_id']
+        if 'original_deliver_order_id' in d:
+            o.original_deliver_order_id = d['original_deliver_order_id']
+        if 'original_deliver_order_item_id' in d:
+            o.original_deliver_order_item_id = d['original_deliver_order_item_id']
         if 'original_delivery_assign_item_id' in d:
             o.original_delivery_assign_item_id = d['original_delivery_assign_item_id']
         if 'original_record_type' in d:
@@ -247,8 +339,14 @@ class AssetReverseItem(object):
             o.ou_code = d['ou_code']
         if 'ou_name' in d:
             o.ou_name = d['ou_name']
+        if 'reverse_apply_order_id' in d:
+            o.reverse_apply_order_id = d['reverse_apply_order_id']
+        if 'reverse_apply_order_item_id' in d:
+            o.reverse_apply_order_item_id = d['reverse_apply_order_item_id']
         if 'reverse_type' in d:
             o.reverse_type = d['reverse_type']
+        if 'to_address' in d:
+            o.to_address = d['to_address']
         return o
 
 

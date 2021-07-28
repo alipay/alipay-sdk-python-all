@@ -9,6 +9,7 @@ class AlipayUserAliyunbenefitReceiveModel(object):
 
     def __init__(self):
         self._biz_date = None
+        self._ext_json = None
         self._item_id = None
         self._out_biz_no = None
         self._price_strategy = None
@@ -22,6 +23,13 @@ class AlipayUserAliyunbenefitReceiveModel(object):
     @biz_date.setter
     def biz_date(self, value):
         self._biz_date = value
+    @property
+    def ext_json(self):
+        return self._ext_json
+
+    @ext_json.setter
+    def ext_json(self, value):
+        self._ext_json = value
     @property
     def item_id(self):
         return self._item_id
@@ -66,6 +74,11 @@ class AlipayUserAliyunbenefitReceiveModel(object):
                 params['biz_date'] = self.biz_date.to_alipay_dict()
             else:
                 params['biz_date'] = self.biz_date
+        if self.ext_json:
+            if hasattr(self.ext_json, 'to_alipay_dict'):
+                params['ext_json'] = self.ext_json.to_alipay_dict()
+            else:
+                params['ext_json'] = self.ext_json
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayUserAliyunbenefitReceiveModel(object):
         o = AlipayUserAliyunbenefitReceiveModel()
         if 'biz_date' in d:
             o.biz_date = d['biz_date']
+        if 'ext_json' in d:
+            o.ext_json = d['ext_json']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'out_biz_no' in d:

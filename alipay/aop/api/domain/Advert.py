@@ -9,9 +9,19 @@ from alipay.aop.api.domain.AdvertItem import AdvertItem
 class Advert(object):
 
     def __init__(self):
+        self._advert_group = None
         self._advert_id = None
         self._advert_items = None
+        self._group_id = None
+        self._mobile_client_type = None
 
+    @property
+    def advert_group(self):
+        return self._advert_group
+
+    @advert_group.setter
+    def advert_group(self, value):
+        self._advert_group = value
     @property
     def advert_id(self):
         return self._advert_id
@@ -32,10 +42,29 @@ class Advert(object):
                     self._advert_items.append(i)
                 else:
                     self._advert_items.append(AdvertItem.from_alipay_dict(i))
+    @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
+    @property
+    def mobile_client_type(self):
+        return self._mobile_client_type
+
+    @mobile_client_type.setter
+    def mobile_client_type(self, value):
+        self._mobile_client_type = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.advert_group:
+            if hasattr(self.advert_group, 'to_alipay_dict'):
+                params['advert_group'] = self.advert_group.to_alipay_dict()
+            else:
+                params['advert_group'] = self.advert_group
         if self.advert_id:
             if hasattr(self.advert_id, 'to_alipay_dict'):
                 params['advert_id'] = self.advert_id.to_alipay_dict()
@@ -51,6 +80,16 @@ class Advert(object):
                 params['advert_items'] = self.advert_items.to_alipay_dict()
             else:
                 params['advert_items'] = self.advert_items
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
+        if self.mobile_client_type:
+            if hasattr(self.mobile_client_type, 'to_alipay_dict'):
+                params['mobile_client_type'] = self.mobile_client_type.to_alipay_dict()
+            else:
+                params['mobile_client_type'] = self.mobile_client_type
         return params
 
     @staticmethod
@@ -58,10 +97,16 @@ class Advert(object):
         if not d:
             return None
         o = Advert()
+        if 'advert_group' in d:
+            o.advert_group = d['advert_group']
         if 'advert_id' in d:
             o.advert_id = d['advert_id']
         if 'advert_items' in d:
             o.advert_items = d['advert_items']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
+        if 'mobile_client_type' in d:
+            o.mobile_client_type = d['mobile_client_type']
         return o
 
 

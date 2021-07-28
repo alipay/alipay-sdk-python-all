@@ -9,10 +9,26 @@ class AlipayOverseasTaxUserinfoQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOverseasTaxUserinfoQueryResponse, self).__init__()
+        self._eligible = None
+        self._eligible_msg = None
         self._logon_id = None
         self._user_id = None
         self._user_name = None
 
+    @property
+    def eligible(self):
+        return self._eligible
+
+    @eligible.setter
+    def eligible(self, value):
+        self._eligible = value
+    @property
+    def eligible_msg(self):
+        return self._eligible_msg
+
+    @eligible_msg.setter
+    def eligible_msg(self, value):
+        self._eligible_msg = value
     @property
     def logon_id(self):
         return self._logon_id
@@ -37,6 +53,10 @@ class AlipayOverseasTaxUserinfoQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOverseasTaxUserinfoQueryResponse, self).parse_response_content(response_content)
+        if 'eligible' in response:
+            self.eligible = response['eligible']
+        if 'eligible_msg' in response:
+            self.eligible_msg = response['eligible_msg']
         if 'logon_id' in response:
             self.logon_id = response['logon_id']
         if 'user_id' in response:

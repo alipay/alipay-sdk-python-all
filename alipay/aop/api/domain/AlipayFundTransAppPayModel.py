@@ -12,6 +12,7 @@ class AlipayFundTransAppPayModel(object):
     def __init__(self):
         self._biz_scene = None
         self._business_params = None
+        self._order_id = None
         self._order_title = None
         self._out_biz_no = None
         self._passback_params = None
@@ -38,6 +39,13 @@ class AlipayFundTransAppPayModel(object):
     @business_params.setter
     def business_params(self, value):
         self._business_params = value
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
     @property
     def order_title(self):
         return self._order_title
@@ -135,6 +143,11 @@ class AlipayFundTransAppPayModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -201,6 +214,8 @@ class AlipayFundTransAppPayModel(object):
             o.biz_scene = d['biz_scene']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_biz_no' in d:

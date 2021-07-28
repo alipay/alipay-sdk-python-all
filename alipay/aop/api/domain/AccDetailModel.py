@@ -13,11 +13,15 @@ class AccDetailModel(object):
     def __init__(self):
         self._alipay_order_no = None
         self._cert_info = None
+        self._detail_id = None
         self._detail_no = None
         self._error_code = None
         self._error_msg = None
         self._exchange_rate = None
+        self._gmt_create = None
+        self._gmt_finish = None
         self._need_retry = None
+        self._out_biz_no = None
         self._payee_info = None
         self._payment_amount = None
         self._payment_currency = None
@@ -25,6 +29,7 @@ class AccDetailModel(object):
         self._settlement_amount = None
         self._settlement_currency = None
         self._status = None
+        self._sub_status = None
         self._trans_amount = None
         self._trans_currency = None
 
@@ -45,6 +50,13 @@ class AccDetailModel(object):
             self._cert_info = value
         else:
             self._cert_info = CertInfo.from_alipay_dict(value)
+    @property
+    def detail_id(self):
+        return self._detail_id
+
+    @detail_id.setter
+    def detail_id(self, value):
+        self._detail_id = value
     @property
     def detail_no(self):
         return self._detail_no
@@ -77,12 +89,33 @@ class AccDetailModel(object):
         else:
             self._exchange_rate = ExchangeRate.from_alipay_dict(value)
     @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
+    @property
+    def gmt_finish(self):
+        return self._gmt_finish
+
+    @gmt_finish.setter
+    def gmt_finish(self, value):
+        self._gmt_finish = value
+    @property
     def need_retry(self):
         return self._need_retry
 
     @need_retry.setter
     def need_retry(self, value):
         self._need_retry = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def payee_info(self):
         return self._payee_info
@@ -136,6 +169,13 @@ class AccDetailModel(object):
     def status(self, value):
         self._status = value
     @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
+    @property
     def trans_amount(self):
         return self._trans_amount
 
@@ -163,6 +203,11 @@ class AccDetailModel(object):
                 params['cert_info'] = self.cert_info.to_alipay_dict()
             else:
                 params['cert_info'] = self.cert_info
+        if self.detail_id:
+            if hasattr(self.detail_id, 'to_alipay_dict'):
+                params['detail_id'] = self.detail_id.to_alipay_dict()
+            else:
+                params['detail_id'] = self.detail_id
         if self.detail_no:
             if hasattr(self.detail_no, 'to_alipay_dict'):
                 params['detail_no'] = self.detail_no.to_alipay_dict()
@@ -183,11 +228,26 @@ class AccDetailModel(object):
                 params['exchange_rate'] = self.exchange_rate.to_alipay_dict()
             else:
                 params['exchange_rate'] = self.exchange_rate
+        if self.gmt_create:
+            if hasattr(self.gmt_create, 'to_alipay_dict'):
+                params['gmt_create'] = self.gmt_create.to_alipay_dict()
+            else:
+                params['gmt_create'] = self.gmt_create
+        if self.gmt_finish:
+            if hasattr(self.gmt_finish, 'to_alipay_dict'):
+                params['gmt_finish'] = self.gmt_finish.to_alipay_dict()
+            else:
+                params['gmt_finish'] = self.gmt_finish
         if self.need_retry:
             if hasattr(self.need_retry, 'to_alipay_dict'):
                 params['need_retry'] = self.need_retry.to_alipay_dict()
             else:
                 params['need_retry'] = self.need_retry
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.payee_info:
             if hasattr(self.payee_info, 'to_alipay_dict'):
                 params['payee_info'] = self.payee_info.to_alipay_dict()
@@ -223,6 +283,11 @@ class AccDetailModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.sub_status:
+            if hasattr(self.sub_status, 'to_alipay_dict'):
+                params['sub_status'] = self.sub_status.to_alipay_dict()
+            else:
+                params['sub_status'] = self.sub_status
         if self.trans_amount:
             if hasattr(self.trans_amount, 'to_alipay_dict'):
                 params['trans_amount'] = self.trans_amount.to_alipay_dict()
@@ -244,6 +309,8 @@ class AccDetailModel(object):
             o.alipay_order_no = d['alipay_order_no']
         if 'cert_info' in d:
             o.cert_info = d['cert_info']
+        if 'detail_id' in d:
+            o.detail_id = d['detail_id']
         if 'detail_no' in d:
             o.detail_no = d['detail_no']
         if 'error_code' in d:
@@ -252,8 +319,14 @@ class AccDetailModel(object):
             o.error_msg = d['error_msg']
         if 'exchange_rate' in d:
             o.exchange_rate = d['exchange_rate']
+        if 'gmt_create' in d:
+            o.gmt_create = d['gmt_create']
+        if 'gmt_finish' in d:
+            o.gmt_finish = d['gmt_finish']
         if 'need_retry' in d:
             o.need_retry = d['need_retry']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'payee_info' in d:
             o.payee_info = d['payee_info']
         if 'payment_amount' in d:
@@ -268,6 +341,8 @@ class AccDetailModel(object):
             o.settlement_currency = d['settlement_currency']
         if 'status' in d:
             o.status = d['status']
+        if 'sub_status' in d:
+            o.sub_status = d['sub_status']
         if 'trans_amount' in d:
             o.trans_amount = d['trans_amount']
         if 'trans_currency' in d:

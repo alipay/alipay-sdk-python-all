@@ -12,6 +12,7 @@ class AlipaySecurityRiskContentResultGetResponse(AlipayResponse):
         super(AlipaySecurityRiskContentResultGetResponse, self).__init__()
         self._hit_detect_items = None
         self._result_action = None
+        self._risk_labels = None
 
     @property
     def hit_detect_items(self):
@@ -33,6 +34,13 @@ class AlipaySecurityRiskContentResultGetResponse(AlipayResponse):
     @result_action.setter
     def result_action(self, value):
         self._result_action = value
+    @property
+    def risk_labels(self):
+        return self._risk_labels
+
+    @risk_labels.setter
+    def risk_labels(self, value):
+        self._risk_labels = value
 
     def parse_response_content(self, response_content):
         response = super(AlipaySecurityRiskContentResultGetResponse, self).parse_response_content(response_content)
@@ -40,3 +48,5 @@ class AlipaySecurityRiskContentResultGetResponse(AlipayResponse):
             self.hit_detect_items = response['hit_detect_items']
         if 'result_action' in response:
             self.result_action = response['result_action']
+        if 'risk_labels' in response:
+            self.risk_labels = response['risk_labels']

@@ -13,6 +13,7 @@ class MybankCreditCreditriskConsultQueryResponse(AlipayResponse):
         self._consult_result_code = None
         self._consult_result_msg = None
         self._creditlmt_amt = None
+        self._loan_int_rate = None
 
     @property
     def available_amt(self):
@@ -42,6 +43,13 @@ class MybankCreditCreditriskConsultQueryResponse(AlipayResponse):
     @creditlmt_amt.setter
     def creditlmt_amt(self, value):
         self._creditlmt_amt = value
+    @property
+    def loan_int_rate(self):
+        return self._loan_int_rate
+
+    @loan_int_rate.setter
+    def loan_int_rate(self, value):
+        self._loan_int_rate = value
 
     def parse_response_content(self, response_content):
         response = super(MybankCreditCreditriskConsultQueryResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class MybankCreditCreditriskConsultQueryResponse(AlipayResponse):
             self.consult_result_msg = response['consult_result_msg']
         if 'creditlmt_amt' in response:
             self.creditlmt_amt = response['creditlmt_amt']
+        if 'loan_int_rate' in response:
+            self.loan_int_rate = response['loan_int_rate']

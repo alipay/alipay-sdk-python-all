@@ -11,6 +11,7 @@ class KbdishEstimatedInfo(object):
         self._ds_id = None
         self._ds_type = None
         self._inventory = None
+        self._out_shop_id = None
         self._shop_id = None
         self._status = None
         self._update_user = None
@@ -36,6 +37,13 @@ class KbdishEstimatedInfo(object):
     @inventory.setter
     def inventory(self, value):
         self._inventory = value
+    @property
+    def out_shop_id(self):
+        return self._out_shop_id
+
+    @out_shop_id.setter
+    def out_shop_id(self, value):
+        self._out_shop_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -76,6 +84,11 @@ class KbdishEstimatedInfo(object):
                 params['inventory'] = self.inventory.to_alipay_dict()
             else:
                 params['inventory'] = self.inventory
+        if self.out_shop_id:
+            if hasattr(self.out_shop_id, 'to_alipay_dict'):
+                params['out_shop_id'] = self.out_shop_id.to_alipay_dict()
+            else:
+                params['out_shop_id'] = self.out_shop_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -104,6 +117,8 @@ class KbdishEstimatedInfo(object):
             o.ds_type = d['ds_type']
         if 'inventory' in d:
             o.inventory = d['inventory']
+        if 'out_shop_id' in d:
+            o.out_shop_id = d['out_shop_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'status' in d:

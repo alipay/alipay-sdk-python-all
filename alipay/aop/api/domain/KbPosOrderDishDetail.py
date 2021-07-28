@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.NameOuterIdPair import NameOuterIdPair
+from alipay.aop.api.domain.NameOuterIdPair import NameOuterIdPair
 
 
 class KbPosOrderDishDetail(object):
@@ -28,16 +30,19 @@ class KbPosOrderDishDetail(object):
         self._operator = None
         self._order_time = None
         self._out_detail_no = None
+        self._outer_id = None
         self._practice_info = None
         self._practice_price = None
         self._refund_reason = None
         self._refund_time = None
         self._remind_time = None
         self._sales_properties = None
+        self._sales_properties_ext = None
         self._sell_price = None
         self._sku_id = None
         self._sort = None
         self._spec_name = None
+        self._spec_name_ext = None
         self._type = None
         self._user_identity = None
         self._wake_status = None
@@ -183,6 +188,13 @@ class KbPosOrderDishDetail(object):
     def out_detail_no(self, value):
         self._out_detail_no = value
     @property
+    def outer_id(self):
+        return self._outer_id
+
+    @outer_id.setter
+    def outer_id(self, value):
+        self._outer_id = value
+    @property
     def practice_info(self):
         return self._practice_info
 
@@ -225,6 +237,19 @@ class KbPosOrderDishDetail(object):
     def sales_properties(self, value):
         self._sales_properties = value
     @property
+    def sales_properties_ext(self):
+        return self._sales_properties_ext
+
+    @sales_properties_ext.setter
+    def sales_properties_ext(self, value):
+        if isinstance(value, list):
+            self._sales_properties_ext = list()
+            for i in value:
+                if isinstance(i, NameOuterIdPair):
+                    self._sales_properties_ext.append(i)
+                else:
+                    self._sales_properties_ext.append(NameOuterIdPair.from_alipay_dict(i))
+    @property
     def sell_price(self):
         return self._sell_price
 
@@ -252,6 +277,19 @@ class KbPosOrderDishDetail(object):
     @spec_name.setter
     def spec_name(self, value):
         self._spec_name = value
+    @property
+    def spec_name_ext(self):
+        return self._spec_name_ext
+
+    @spec_name_ext.setter
+    def spec_name_ext(self, value):
+        if isinstance(value, list):
+            self._spec_name_ext = list()
+            for i in value:
+                if isinstance(i, NameOuterIdPair):
+                    self._spec_name_ext.append(i)
+                else:
+                    self._spec_name_ext.append(NameOuterIdPair.from_alipay_dict(i))
     @property
     def type(self):
         return self._type
@@ -377,6 +415,11 @@ class KbPosOrderDishDetail(object):
                 params['out_detail_no'] = self.out_detail_no.to_alipay_dict()
             else:
                 params['out_detail_no'] = self.out_detail_no
+        if self.outer_id:
+            if hasattr(self.outer_id, 'to_alipay_dict'):
+                params['outer_id'] = self.outer_id.to_alipay_dict()
+            else:
+                params['outer_id'] = self.outer_id
         if self.practice_info:
             if hasattr(self.practice_info, 'to_alipay_dict'):
                 params['practice_info'] = self.practice_info.to_alipay_dict()
@@ -407,6 +450,16 @@ class KbPosOrderDishDetail(object):
                 params['sales_properties'] = self.sales_properties.to_alipay_dict()
             else:
                 params['sales_properties'] = self.sales_properties
+        if self.sales_properties_ext:
+            if isinstance(self.sales_properties_ext, list):
+                for i in range(0, len(self.sales_properties_ext)):
+                    element = self.sales_properties_ext[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sales_properties_ext[i] = element.to_alipay_dict()
+            if hasattr(self.sales_properties_ext, 'to_alipay_dict'):
+                params['sales_properties_ext'] = self.sales_properties_ext.to_alipay_dict()
+            else:
+                params['sales_properties_ext'] = self.sales_properties_ext
         if self.sell_price:
             if hasattr(self.sell_price, 'to_alipay_dict'):
                 params['sell_price'] = self.sell_price.to_alipay_dict()
@@ -427,6 +480,16 @@ class KbPosOrderDishDetail(object):
                 params['spec_name'] = self.spec_name.to_alipay_dict()
             else:
                 params['spec_name'] = self.spec_name
+        if self.spec_name_ext:
+            if isinstance(self.spec_name_ext, list):
+                for i in range(0, len(self.spec_name_ext)):
+                    element = self.spec_name_ext[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.spec_name_ext[i] = element.to_alipay_dict()
+            if hasattr(self.spec_name_ext, 'to_alipay_dict'):
+                params['spec_name_ext'] = self.spec_name_ext.to_alipay_dict()
+            else:
+                params['spec_name_ext'] = self.spec_name_ext
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -489,6 +552,8 @@ class KbPosOrderDishDetail(object):
             o.order_time = d['order_time']
         if 'out_detail_no' in d:
             o.out_detail_no = d['out_detail_no']
+        if 'outer_id' in d:
+            o.outer_id = d['outer_id']
         if 'practice_info' in d:
             o.practice_info = d['practice_info']
         if 'practice_price' in d:
@@ -501,6 +566,8 @@ class KbPosOrderDishDetail(object):
             o.remind_time = d['remind_time']
         if 'sales_properties' in d:
             o.sales_properties = d['sales_properties']
+        if 'sales_properties_ext' in d:
+            o.sales_properties_ext = d['sales_properties_ext']
         if 'sell_price' in d:
             o.sell_price = d['sell_price']
         if 'sku_id' in d:
@@ -509,6 +576,8 @@ class KbPosOrderDishDetail(object):
             o.sort = d['sort']
         if 'spec_name' in d:
             o.spec_name = d['spec_name']
+        if 'spec_name_ext' in d:
+            o.spec_name_ext = d['spec_name_ext']
         if 'type' in d:
             o.type = d['type']
         if 'user_identity' in d:

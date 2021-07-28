@@ -13,7 +13,11 @@ class PosDiscountDetail(object):
         self._discount_name = None
         self._discount_type = None
         self._dish_id = None
+        self._dish_main_out_detail_no = None
+        self._dish_out_detail_no = None
+        self._dish_sku_id = None
         self._ext_info = None
+        self._ext_info_str = None
         self._mrt_discount = None
         self._rt_discount = None
         self._target_user_type = None
@@ -55,12 +59,40 @@ class PosDiscountDetail(object):
     def dish_id(self, value):
         self._dish_id = value
     @property
+    def dish_main_out_detail_no(self):
+        return self._dish_main_out_detail_no
+
+    @dish_main_out_detail_no.setter
+    def dish_main_out_detail_no(self, value):
+        self._dish_main_out_detail_no = value
+    @property
+    def dish_out_detail_no(self):
+        return self._dish_out_detail_no
+
+    @dish_out_detail_no.setter
+    def dish_out_detail_no(self, value):
+        self._dish_out_detail_no = value
+    @property
+    def dish_sku_id(self):
+        return self._dish_sku_id
+
+    @dish_sku_id.setter
+    def dish_sku_id(self, value):
+        self._dish_sku_id = value
+    @property
     def ext_info(self):
         return self._ext_info
 
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def ext_info_str(self):
+        return self._ext_info_str
+
+    @ext_info_str.setter
+    def ext_info_str(self, value):
+        self._ext_info_str = value
     @property
     def mrt_discount(self):
         return self._mrt_discount
@@ -118,11 +150,31 @@ class PosDiscountDetail(object):
                 params['dish_id'] = self.dish_id.to_alipay_dict()
             else:
                 params['dish_id'] = self.dish_id
+        if self.dish_main_out_detail_no:
+            if hasattr(self.dish_main_out_detail_no, 'to_alipay_dict'):
+                params['dish_main_out_detail_no'] = self.dish_main_out_detail_no.to_alipay_dict()
+            else:
+                params['dish_main_out_detail_no'] = self.dish_main_out_detail_no
+        if self.dish_out_detail_no:
+            if hasattr(self.dish_out_detail_no, 'to_alipay_dict'):
+                params['dish_out_detail_no'] = self.dish_out_detail_no.to_alipay_dict()
+            else:
+                params['dish_out_detail_no'] = self.dish_out_detail_no
+        if self.dish_sku_id:
+            if hasattr(self.dish_sku_id, 'to_alipay_dict'):
+                params['dish_sku_id'] = self.dish_sku_id.to_alipay_dict()
+            else:
+                params['dish_sku_id'] = self.dish_sku_id
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.ext_info_str:
+            if hasattr(self.ext_info_str, 'to_alipay_dict'):
+                params['ext_info_str'] = self.ext_info_str.to_alipay_dict()
+            else:
+                params['ext_info_str'] = self.ext_info_str
         if self.mrt_discount:
             if hasattr(self.mrt_discount, 'to_alipay_dict'):
                 params['mrt_discount'] = self.mrt_discount.to_alipay_dict()
@@ -160,8 +212,16 @@ class PosDiscountDetail(object):
             o.discount_type = d['discount_type']
         if 'dish_id' in d:
             o.dish_id = d['dish_id']
+        if 'dish_main_out_detail_no' in d:
+            o.dish_main_out_detail_no = d['dish_main_out_detail_no']
+        if 'dish_out_detail_no' in d:
+            o.dish_out_detail_no = d['dish_out_detail_no']
+        if 'dish_sku_id' in d:
+            o.dish_sku_id = d['dish_sku_id']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'ext_info_str' in d:
+            o.ext_info_str = d['ext_info_str']
         if 'mrt_discount' in d:
             o.mrt_discount = d['mrt_discount']
         if 'rt_discount' in d:

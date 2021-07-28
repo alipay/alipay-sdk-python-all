@@ -16,6 +16,7 @@ class AlipayInsSceneApplicationApplyModel(object):
         self._applicant = None
         self._bill_title = None
         self._biz_data = None
+        self._csu_no = None
         self._effect_start_time = None
         self._ins_objects = None
         self._insureds = None
@@ -59,6 +60,13 @@ class AlipayInsSceneApplicationApplyModel(object):
     @biz_data.setter
     def biz_data(self, value):
         self._biz_data = value
+    @property
+    def csu_no(self):
+        return self._csu_no
+
+    @csu_no.setter
+    def csu_no(self, value):
+        self._csu_no = value
     @property
     def effect_start_time(self):
         return self._effect_start_time
@@ -178,6 +186,11 @@ class AlipayInsSceneApplicationApplyModel(object):
                 params['biz_data'] = self.biz_data.to_alipay_dict()
             else:
                 params['biz_data'] = self.biz_data
+        if self.csu_no:
+            if hasattr(self.csu_no, 'to_alipay_dict'):
+                params['csu_no'] = self.csu_no.to_alipay_dict()
+            else:
+                params['csu_no'] = self.csu_no
         if self.effect_start_time:
             if hasattr(self.effect_start_time, 'to_alipay_dict'):
                 params['effect_start_time'] = self.effect_start_time.to_alipay_dict()
@@ -263,6 +276,8 @@ class AlipayInsSceneApplicationApplyModel(object):
             o.bill_title = d['bill_title']
         if 'biz_data' in d:
             o.biz_data = d['biz_data']
+        if 'csu_no' in d:
+            o.csu_no = d['csu_no']
         if 'effect_start_time' in d:
             o.effect_start_time = d['effect_start_time']
         if 'ins_objects' in d:

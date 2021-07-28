@@ -33,6 +33,10 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
         self._force_renewal_flag = None
         self._force_renewal_org = None
         self._logistics_models = None
+        self._max_self_channel_ratio = None
+        self._max_self_underwrite_ratio = None
+        self._min_self_channel_ratio = None
+        self._min_self_underwrite_ratio = None
         self._no_claim_adjust_ratio = None
         self._quote_biz_id = None
         self._quote_error_code = None
@@ -43,6 +47,7 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
         self._self_underwrite_ratio = None
         self._total_premium = None
         self._traffic_violation_ratio = None
+        self._user_level = None
         self._warn_code = None
         self._warn_message = None
 
@@ -205,6 +210,34 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
             for i in value:
                 self._logistics_models.append(i)
     @property
+    def max_self_channel_ratio(self):
+        return self._max_self_channel_ratio
+
+    @max_self_channel_ratio.setter
+    def max_self_channel_ratio(self, value):
+        self._max_self_channel_ratio = value
+    @property
+    def max_self_underwrite_ratio(self):
+        return self._max_self_underwrite_ratio
+
+    @max_self_underwrite_ratio.setter
+    def max_self_underwrite_ratio(self, value):
+        self._max_self_underwrite_ratio = value
+    @property
+    def min_self_channel_ratio(self):
+        return self._min_self_channel_ratio
+
+    @min_self_channel_ratio.setter
+    def min_self_channel_ratio(self, value):
+        self._min_self_channel_ratio = value
+    @property
+    def min_self_underwrite_ratio(self):
+        return self._min_self_underwrite_ratio
+
+    @min_self_underwrite_ratio.setter
+    def min_self_underwrite_ratio(self, value):
+        self._min_self_underwrite_ratio = value
+    @property
     def no_claim_adjust_ratio(self):
         return self._no_claim_adjust_ratio
 
@@ -275,6 +308,13 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
     def traffic_violation_ratio(self, value):
         self._traffic_violation_ratio = value
     @property
+    def user_level(self):
+        return self._user_level
+
+    @user_level.setter
+    def user_level(self, value):
+        self._user_level = value
+    @property
     def warn_code(self):
         return self._warn_code
 
@@ -331,6 +371,14 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
             self.force_renewal_org = response['force_renewal_org']
         if 'logistics_models' in response:
             self.logistics_models = response['logistics_models']
+        if 'max_self_channel_ratio' in response:
+            self.max_self_channel_ratio = response['max_self_channel_ratio']
+        if 'max_self_underwrite_ratio' in response:
+            self.max_self_underwrite_ratio = response['max_self_underwrite_ratio']
+        if 'min_self_channel_ratio' in response:
+            self.min_self_channel_ratio = response['min_self_channel_ratio']
+        if 'min_self_underwrite_ratio' in response:
+            self.min_self_underwrite_ratio = response['min_self_underwrite_ratio']
         if 'no_claim_adjust_ratio' in response:
             self.no_claim_adjust_ratio = response['no_claim_adjust_ratio']
         if 'quote_biz_id' in response:
@@ -351,6 +399,8 @@ class AlipayInsAutoAutoinsprodQuoteQueryResponse(AlipayResponse):
             self.total_premium = response['total_premium']
         if 'traffic_violation_ratio' in response:
             self.traffic_violation_ratio = response['traffic_violation_ratio']
+        if 'user_level' in response:
+            self.user_level = response['user_level']
         if 'warn_code' in response:
             self.warn_code = response['warn_code']
         if 'warn_message' in response:

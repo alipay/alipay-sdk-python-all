@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BusinessItem import BusinessItem
 
 
 class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
         super(AlipayEcoMycarParkingParkinglotinfoQueryResponse, self).__init__()
         self._address_id = None
         self._agent_id = None
+        self._business_isv = None
         self._city_id = None
         self._map_poi_address = None
         self._map_poi_name = None
@@ -18,6 +20,7 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
         self._out_parking_id = None
         self._parking_address = None
         self._parking_fee_description = None
+        self._parking_fee_description_img = None
         self._parking_id = None
         self._parking_latitude = None
         self._parking_longitude = None
@@ -44,6 +47,19 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
     @agent_id.setter
     def agent_id(self, value):
         self._agent_id = value
+    @property
+    def business_isv(self):
+        return self._business_isv
+
+    @business_isv.setter
+    def business_isv(self, value):
+        if isinstance(value, list):
+            self._business_isv = list()
+            for i in value:
+                if isinstance(i, BusinessItem):
+                    self._business_isv.append(i)
+                else:
+                    self._business_isv.append(BusinessItem.from_alipay_dict(i))
     @property
     def city_id(self):
         return self._city_id
@@ -93,6 +109,13 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
     @parking_fee_description.setter
     def parking_fee_description(self, value):
         self._parking_fee_description = value
+    @property
+    def parking_fee_description_img(self):
+        return self._parking_fee_description_img
+
+    @parking_fee_description_img.setter
+    def parking_fee_description_img(self, value):
+        self._parking_fee_description_img = value
     @property
     def parking_id(self):
         return self._parking_id
@@ -177,6 +200,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.address_id = response['address_id']
         if 'agent_id' in response:
             self.agent_id = response['agent_id']
+        if 'business_isv' in response:
+            self.business_isv = response['business_isv']
         if 'city_id' in response:
             self.city_id = response['city_id']
         if 'map_poi_address' in response:
@@ -191,6 +216,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.parking_address = response['parking_address']
         if 'parking_fee_description' in response:
             self.parking_fee_description = response['parking_fee_description']
+        if 'parking_fee_description_img' in response:
+            self.parking_fee_description_img = response['parking_fee_description_img']
         if 'parking_id' in response:
             self.parking_id = response['parking_id']
         if 'parking_latitude' in response:

@@ -11,6 +11,7 @@ class AlipayOpenPublicAdvertBatchqueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenPublicAdvertBatchqueryResponse, self).__init__()
         self._advert_list = None
+        self._count = None
 
     @property
     def advert_list(self):
@@ -25,8 +26,17 @@ class AlipayOpenPublicAdvertBatchqueryResponse(AlipayResponse):
                     self._advert_list.append(i)
                 else:
                     self._advert_list.append(Advert.from_alipay_dict(i))
+    @property
+    def count(self):
+        return self._count
+
+    @count.setter
+    def count(self, value):
+        self._count = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenPublicAdvertBatchqueryResponse, self).parse_response_content(response_content)
         if 'advert_list' in response:
             self.advert_list = response['advert_list']
+        if 'count' in response:
+            self.count = response['count']

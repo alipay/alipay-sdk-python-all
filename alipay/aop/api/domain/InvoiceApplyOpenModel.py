@@ -21,6 +21,7 @@ class InvoiceApplyOpenModel(object):
         self._ori_blue_inv_code = None
         self._ori_blue_inv_no = None
         self._out_apply_id = None
+        self._out_extends = None
         self._out_trade_no = None
         self._payee = None
         self._payee_address = None
@@ -121,6 +122,13 @@ class InvoiceApplyOpenModel(object):
     @out_apply_id.setter
     def out_apply_id(self, value):
         self._out_apply_id = value
+    @property
+    def out_extends(self):
+        return self._out_extends
+
+    @out_extends.setter
+    def out_extends(self, value):
+        self._out_extends = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -276,6 +284,11 @@ class InvoiceApplyOpenModel(object):
                 params['out_apply_id'] = self.out_apply_id.to_alipay_dict()
             else:
                 params['out_apply_id'] = self.out_apply_id
+        if self.out_extends:
+            if hasattr(self.out_extends, 'to_alipay_dict'):
+                params['out_extends'] = self.out_extends.to_alipay_dict()
+            else:
+                params['out_extends'] = self.out_extends
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -370,6 +383,8 @@ class InvoiceApplyOpenModel(object):
             o.ori_blue_inv_no = d['ori_blue_inv_no']
         if 'out_apply_id' in d:
             o.out_apply_id = d['out_apply_id']
+        if 'out_extends' in d:
+            o.out_extends = d['out_extends']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'payee' in d:

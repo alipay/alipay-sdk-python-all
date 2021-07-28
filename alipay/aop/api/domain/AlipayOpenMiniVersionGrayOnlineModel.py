@@ -9,6 +9,7 @@ class AlipayOpenMiniVersionGrayOnlineModel(object):
 
     def __init__(self):
         self._app_version = None
+        self._bundle_id = None
         self._gray_strategy = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayOpenMiniVersionGrayOnlineModel(object):
     @app_version.setter
     def app_version(self, value):
         self._app_version = value
+    @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
     @property
     def gray_strategy(self):
         return self._gray_strategy
@@ -34,6 +42,11 @@ class AlipayOpenMiniVersionGrayOnlineModel(object):
                 params['app_version'] = self.app_version.to_alipay_dict()
             else:
                 params['app_version'] = self.app_version
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = self.bundle_id.to_alipay_dict()
+            else:
+                params['bundle_id'] = self.bundle_id
         if self.gray_strategy:
             if hasattr(self.gray_strategy, 'to_alipay_dict'):
                 params['gray_strategy'] = self.gray_strategy.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayOpenMiniVersionGrayOnlineModel(object):
         o = AlipayOpenMiniVersionGrayOnlineModel()
         if 'app_version' in d:
             o.app_version = d['app_version']
+        if 'bundle_id' in d:
+            o.bundle_id = d['bundle_id']
         if 'gray_strategy' in d:
             o.gray_strategy = d['gray_strategy']
         return o

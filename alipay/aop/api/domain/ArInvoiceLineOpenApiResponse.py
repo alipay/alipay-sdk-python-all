@@ -12,6 +12,8 @@ class ArInvoiceLineOpenApiResponse(object):
 
     def __init__(self):
         self._amt = None
+        self._duty_free_flag = None
+        self._incl_tax_unit_amt = None
         self._invoice_id = None
         self._invoice_line_id = None
         self._measurement_unit = None
@@ -33,6 +35,20 @@ class ArInvoiceLineOpenApiResponse(object):
             self._amt = value
         else:
             self._amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
+    @property
+    def duty_free_flag(self):
+        return self._duty_free_flag
+
+    @duty_free_flag.setter
+    def duty_free_flag(self, value):
+        self._duty_free_flag = value
+    @property
+    def incl_tax_unit_amt(self):
+        return self._incl_tax_unit_amt
+
+    @incl_tax_unit_amt.setter
+    def incl_tax_unit_amt(self, value):
+        self._incl_tax_unit_amt = value
     @property
     def invoice_id(self):
         return self._invoice_id
@@ -118,6 +134,16 @@ class ArInvoiceLineOpenApiResponse(object):
                 params['amt'] = self.amt.to_alipay_dict()
             else:
                 params['amt'] = self.amt
+        if self.duty_free_flag:
+            if hasattr(self.duty_free_flag, 'to_alipay_dict'):
+                params['duty_free_flag'] = self.duty_free_flag.to_alipay_dict()
+            else:
+                params['duty_free_flag'] = self.duty_free_flag
+        if self.incl_tax_unit_amt:
+            if hasattr(self.incl_tax_unit_amt, 'to_alipay_dict'):
+                params['incl_tax_unit_amt'] = self.incl_tax_unit_amt.to_alipay_dict()
+            else:
+                params['incl_tax_unit_amt'] = self.incl_tax_unit_amt
         if self.invoice_id:
             if hasattr(self.invoice_id, 'to_alipay_dict'):
                 params['invoice_id'] = self.invoice_id.to_alipay_dict()
@@ -177,6 +203,10 @@ class ArInvoiceLineOpenApiResponse(object):
         o = ArInvoiceLineOpenApiResponse()
         if 'amt' in d:
             o.amt = d['amt']
+        if 'duty_free_flag' in d:
+            o.duty_free_flag = d['duty_free_flag']
+        if 'incl_tax_unit_amt' in d:
+            o.incl_tax_unit_amt = d['incl_tax_unit_amt']
         if 'invoice_id' in d:
             o.invoice_id = d['invoice_id']
         if 'invoice_line_id' in d:

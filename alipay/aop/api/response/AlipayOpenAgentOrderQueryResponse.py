@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.SignRestrictInfo import SignRestrictInfo
 
 
 class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
         self._merchant_pid = None
         self._order_status = None
         self._reject_reason = None
+        self._restrict_infos = None
 
     @property
     def agent_app_id(self):
@@ -50,6 +52,19 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
     @reject_reason.setter
     def reject_reason(self, value):
         self._reject_reason = value
+    @property
+    def restrict_infos(self):
+        return self._restrict_infos
+
+    @restrict_infos.setter
+    def restrict_infos(self, value):
+        if isinstance(value, list):
+            self._restrict_infos = list()
+            for i in value:
+                if isinstance(i, SignRestrictInfo):
+                    self._restrict_infos.append(i)
+                else:
+                    self._restrict_infos.append(SignRestrictInfo.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAgentOrderQueryResponse, self).parse_response_content(response_content)
@@ -63,3 +78,5 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
             self.order_status = response['order_status']
         if 'reject_reason' in response:
             self.reject_reason = response['reject_reason']
+        if 'restrict_infos' in response:
+            self.restrict_infos = response['restrict_infos']

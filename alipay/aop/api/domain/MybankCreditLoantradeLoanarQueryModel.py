@@ -10,6 +10,7 @@ class MybankCreditLoantradeLoanarQueryModel(object):
     def __init__(self):
         self._iproleid = None
         self._loanarno = None
+        self._roletype = None
 
     @property
     def iproleid(self):
@@ -25,6 +26,13 @@ class MybankCreditLoantradeLoanarQueryModel(object):
     @loanarno.setter
     def loanarno(self, value):
         self._loanarno = value
+    @property
+    def roletype(self):
+        return self._roletype
+
+    @roletype.setter
+    def roletype(self, value):
+        self._roletype = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class MybankCreditLoantradeLoanarQueryModel(object):
                 params['loanarno'] = self.loanarno.to_alipay_dict()
             else:
                 params['loanarno'] = self.loanarno
+        if self.roletype:
+            if hasattr(self.roletype, 'to_alipay_dict'):
+                params['roletype'] = self.roletype.to_alipay_dict()
+            else:
+                params['roletype'] = self.roletype
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class MybankCreditLoantradeLoanarQueryModel(object):
             o.iproleid = d['iproleid']
         if 'loanarno' in d:
             o.loanarno = d['loanarno']
+        if 'roletype' in d:
+            o.roletype = d['roletype']
         return o
 
 

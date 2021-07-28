@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ChargeItems import ChargeItems
+from alipay.aop.api.domain.BillSendExtInfo import BillSendExtInfo
 from alipay.aop.api.domain.UserDetails import UserDetails
 
 
@@ -17,6 +18,7 @@ class AlipayEcoEduKtBillingSendModel(object):
         self._child_name = None
         self._class_in = None
         self._end_enable = None
+        self._ext_info = None
         self._gmt_end = None
         self._grade = None
         self._out_trade_no = None
@@ -82,6 +84,16 @@ class AlipayEcoEduKtBillingSendModel(object):
     @end_enable.setter
     def end_enable(self, value):
         self._end_enable = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, BillSendExtInfo):
+            self._ext_info = value
+        else:
+            self._ext_info = BillSendExtInfo.from_alipay_dict(value)
     @property
     def gmt_end(self):
         return self._gmt_end
@@ -195,6 +207,11 @@ class AlipayEcoEduKtBillingSendModel(object):
                 params['end_enable'] = self.end_enable.to_alipay_dict()
             else:
                 params['end_enable'] = self.end_enable
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.gmt_end:
             if hasattr(self.gmt_end, 'to_alipay_dict'):
                 params['gmt_end'] = self.gmt_end.to_alipay_dict()
@@ -266,6 +283,8 @@ class AlipayEcoEduKtBillingSendModel(object):
             o.class_in = d['class_in']
         if 'end_enable' in d:
             o.end_enable = d['end_enable']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'gmt_end' in d:
             o.gmt_end = d['gmt_end']
         if 'grade' in d:

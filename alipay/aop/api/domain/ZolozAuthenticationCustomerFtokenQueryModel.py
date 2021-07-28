@@ -12,6 +12,7 @@ class ZolozAuthenticationCustomerFtokenQueryModel(object):
         self._biz_type = None
         self._ext_info = None
         self._ftoken = None
+        self._zim_id = None
 
     @property
     def biz_type(self):
@@ -37,6 +38,13 @@ class ZolozAuthenticationCustomerFtokenQueryModel(object):
     @ftoken.setter
     def ftoken(self, value):
         self._ftoken = value
+    @property
+    def zim_id(self):
+        return self._zim_id
+
+    @zim_id.setter
+    def zim_id(self, value):
+        self._zim_id = value
 
 
     def to_alipay_dict(self):
@@ -56,6 +64,11 @@ class ZolozAuthenticationCustomerFtokenQueryModel(object):
                 params['ftoken'] = self.ftoken.to_alipay_dict()
             else:
                 params['ftoken'] = self.ftoken
+        if self.zim_id:
+            if hasattr(self.zim_id, 'to_alipay_dict'):
+                params['zim_id'] = self.zim_id.to_alipay_dict()
+            else:
+                params['zim_id'] = self.zim_id
         return params
 
     @staticmethod
@@ -69,6 +82,8 @@ class ZolozAuthenticationCustomerFtokenQueryModel(object):
             o.ext_info = d['ext_info']
         if 'ftoken' in d:
             o.ftoken = d['ftoken']
+        if 'zim_id' in d:
+            o.zim_id = d['zim_id']
         return o
 
 

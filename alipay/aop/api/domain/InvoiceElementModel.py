@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EinvTrade import EinvTrade
 
 
 class InvoiceElementModel(object):
 
     def __init__(self):
         self._expense_status = None
+        self._extend_fields = None
         self._has_pdf_file = None
         self._has_risk = None
         self._invoice_amount = None
@@ -22,11 +24,15 @@ class InvoiceElementModel(object):
         self._isv_name = None
         self._logo_url = None
         self._m_name = None
+        self._out_tax_amount = None
         self._payee_name = None
         self._payee_tax_no = None
         self._payer_name = None
         self._payer_tax_no = None
         self._pdf_url = None
+        self._source = None
+        self._trade_list = None
+        self._trade_match_result = None
 
     @property
     def expense_status(self):
@@ -35,6 +41,13 @@ class InvoiceElementModel(object):
     @expense_status.setter
     def expense_status(self, value):
         self._expense_status = value
+    @property
+    def extend_fields(self):
+        return self._extend_fields
+
+    @extend_fields.setter
+    def extend_fields(self, value):
+        self._extend_fields = value
     @property
     def has_pdf_file(self):
         return self._has_pdf_file
@@ -127,6 +140,13 @@ class InvoiceElementModel(object):
     def m_name(self, value):
         self._m_name = value
     @property
+    def out_tax_amount(self):
+        return self._out_tax_amount
+
+    @out_tax_amount.setter
+    def out_tax_amount(self, value):
+        self._out_tax_amount = value
+    @property
     def payee_name(self):
         return self._payee_name
 
@@ -161,6 +181,33 @@ class InvoiceElementModel(object):
     @pdf_url.setter
     def pdf_url(self, value):
         self._pdf_url = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
+    def trade_list(self):
+        return self._trade_list
+
+    @trade_list.setter
+    def trade_list(self, value):
+        if isinstance(value, list):
+            self._trade_list = list()
+            for i in value:
+                if isinstance(i, EinvTrade):
+                    self._trade_list.append(i)
+                else:
+                    self._trade_list.append(EinvTrade.from_alipay_dict(i))
+    @property
+    def trade_match_result(self):
+        return self._trade_match_result
+
+    @trade_match_result.setter
+    def trade_match_result(self, value):
+        self._trade_match_result = value
 
 
     def to_alipay_dict(self):
@@ -170,6 +217,11 @@ class InvoiceElementModel(object):
                 params['expense_status'] = self.expense_status.to_alipay_dict()
             else:
                 params['expense_status'] = self.expense_status
+        if self.extend_fields:
+            if hasattr(self.extend_fields, 'to_alipay_dict'):
+                params['extend_fields'] = self.extend_fields.to_alipay_dict()
+            else:
+                params['extend_fields'] = self.extend_fields
         if self.has_pdf_file:
             if hasattr(self.has_pdf_file, 'to_alipay_dict'):
                 params['has_pdf_file'] = self.has_pdf_file.to_alipay_dict()
@@ -235,6 +287,11 @@ class InvoiceElementModel(object):
                 params['m_name'] = self.m_name.to_alipay_dict()
             else:
                 params['m_name'] = self.m_name
+        if self.out_tax_amount:
+            if hasattr(self.out_tax_amount, 'to_alipay_dict'):
+                params['out_tax_amount'] = self.out_tax_amount.to_alipay_dict()
+            else:
+                params['out_tax_amount'] = self.out_tax_amount
         if self.payee_name:
             if hasattr(self.payee_name, 'to_alipay_dict'):
                 params['payee_name'] = self.payee_name.to_alipay_dict()
@@ -260,6 +317,26 @@ class InvoiceElementModel(object):
                 params['pdf_url'] = self.pdf_url.to_alipay_dict()
             else:
                 params['pdf_url'] = self.pdf_url
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
+        if self.trade_list:
+            if isinstance(self.trade_list, list):
+                for i in range(0, len(self.trade_list)):
+                    element = self.trade_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_list[i] = element.to_alipay_dict()
+            if hasattr(self.trade_list, 'to_alipay_dict'):
+                params['trade_list'] = self.trade_list.to_alipay_dict()
+            else:
+                params['trade_list'] = self.trade_list
+        if self.trade_match_result:
+            if hasattr(self.trade_match_result, 'to_alipay_dict'):
+                params['trade_match_result'] = self.trade_match_result.to_alipay_dict()
+            else:
+                params['trade_match_result'] = self.trade_match_result
         return params
 
     @staticmethod
@@ -269,6 +346,8 @@ class InvoiceElementModel(object):
         o = InvoiceElementModel()
         if 'expense_status' in d:
             o.expense_status = d['expense_status']
+        if 'extend_fields' in d:
+            o.extend_fields = d['extend_fields']
         if 'has_pdf_file' in d:
             o.has_pdf_file = d['has_pdf_file']
         if 'has_risk' in d:
@@ -295,6 +374,8 @@ class InvoiceElementModel(object):
             o.logo_url = d['logo_url']
         if 'm_name' in d:
             o.m_name = d['m_name']
+        if 'out_tax_amount' in d:
+            o.out_tax_amount = d['out_tax_amount']
         if 'payee_name' in d:
             o.payee_name = d['payee_name']
         if 'payee_tax_no' in d:
@@ -305,6 +386,12 @@ class InvoiceElementModel(object):
             o.payer_tax_no = d['payer_tax_no']
         if 'pdf_url' in d:
             o.pdf_url = d['pdf_url']
+        if 'source' in d:
+            o.source = d['source']
+        if 'trade_list' in d:
+            o.trade_list = d['trade_list']
+        if 'trade_match_result' in d:
+            o.trade_match_result = d['trade_match_result']
         return o
 
 

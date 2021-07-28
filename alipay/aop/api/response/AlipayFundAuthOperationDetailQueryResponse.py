@@ -18,6 +18,7 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         self._gmt_trans = None
         self._operation_id = None
         self._operation_type = None
+        self._order_status = None
         self._order_title = None
         self._out_order_no = None
         self._out_request_no = None
@@ -100,6 +101,13 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     @operation_type.setter
     def operation_type(self, value):
         self._operation_type = value
+    @property
+    def order_status(self):
+        return self._order_status
+
+    @order_status.setter
+    def order_status(self, value):
+        self._order_status = value
     @property
     def order_title(self):
         return self._order_title
@@ -247,6 +255,8 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.operation_id = response['operation_id']
         if 'operation_type' in response:
             self.operation_type = response['operation_type']
+        if 'order_status' in response:
+            self.order_status = response['order_status']
         if 'order_title' in response:
             self.order_title = response['order_title']
         if 'out_order_no' in response:

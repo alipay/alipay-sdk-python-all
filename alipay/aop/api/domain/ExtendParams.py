@@ -12,6 +12,7 @@ class ExtendParams(object):
         self._hb_fq_num = None
         self._hb_fq_seller_percent = None
         self._industry_reflux_info = None
+        self._specified_seller_name = None
         self._sys_service_provider_id = None
 
     @property
@@ -43,6 +44,13 @@ class ExtendParams(object):
     def industry_reflux_info(self, value):
         self._industry_reflux_info = value
     @property
+    def specified_seller_name(self):
+        return self._specified_seller_name
+
+    @specified_seller_name.setter
+    def specified_seller_name(self, value):
+        self._specified_seller_name = value
+    @property
     def sys_service_provider_id(self):
         return self._sys_service_provider_id
 
@@ -73,6 +81,11 @@ class ExtendParams(object):
                 params['industry_reflux_info'] = self.industry_reflux_info.to_alipay_dict()
             else:
                 params['industry_reflux_info'] = self.industry_reflux_info
+        if self.specified_seller_name:
+            if hasattr(self.specified_seller_name, 'to_alipay_dict'):
+                params['specified_seller_name'] = self.specified_seller_name.to_alipay_dict()
+            else:
+                params['specified_seller_name'] = self.specified_seller_name
         if self.sys_service_provider_id:
             if hasattr(self.sys_service_provider_id, 'to_alipay_dict'):
                 params['sys_service_provider_id'] = self.sys_service_provider_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class ExtendParams(object):
             o.hb_fq_seller_percent = d['hb_fq_seller_percent']
         if 'industry_reflux_info' in d:
             o.industry_reflux_info = d['industry_reflux_info']
+        if 'specified_seller_name' in d:
+            o.specified_seller_name = d['specified_seller_name']
         if 'sys_service_provider_id' in d:
             o.sys_service_provider_id = d['sys_service_provider_id']
         return o

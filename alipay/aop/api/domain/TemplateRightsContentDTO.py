@@ -9,6 +9,7 @@ class TemplateRightsContentDTO(object):
 
     def __init__(self):
         self._detail = None
+        self._logo_id = None
         self._title = None
 
     @property
@@ -18,6 +19,13 @@ class TemplateRightsContentDTO(object):
     @detail.setter
     def detail(self, value):
         self._detail = value
+    @property
+    def logo_id(self):
+        return self._logo_id
+
+    @logo_id.setter
+    def logo_id(self, value):
+        self._logo_id = value
     @property
     def title(self):
         return self._title
@@ -34,6 +42,11 @@ class TemplateRightsContentDTO(object):
                 params['detail'] = self.detail.to_alipay_dict()
             else:
                 params['detail'] = self.detail
+        if self.logo_id:
+            if hasattr(self.logo_id, 'to_alipay_dict'):
+                params['logo_id'] = self.logo_id.to_alipay_dict()
+            else:
+                params['logo_id'] = self.logo_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -48,6 +61,8 @@ class TemplateRightsContentDTO(object):
         o = TemplateRightsContentDTO()
         if 'detail' in d:
             o.detail = d['detail']
+        if 'logo_id' in d:
+            o.logo_id = d['logo_id']
         if 'title' in d:
             o.title = d['title']
         return o

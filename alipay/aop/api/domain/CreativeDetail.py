@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.TextInstance import TextInstance
 from alipay.aop.api.domain.MaterialDetail import MaterialDetail
+from alipay.aop.api.domain.CreativeRefuseExtendInfo import CreativeRefuseExtendInfo
 from alipay.aop.api.domain.TextInstance import TextInstance
 from alipay.aop.api.domain.MaterialDetail import MaterialDetail
 
@@ -13,17 +14,22 @@ class CreativeDetail(object):
 
     def __init__(self):
         self._action_type = None
+        self._audit_order_id = None
         self._batch_tag = None
+        self._click = None
+        self._cost = None
         self._creative_id = None
         self._creative_outer_id = None
         self._desc_list = None
         self._extend_info = None
         self._group_outer_id = None
         self._img_list = None
+        self._impression = None
         self._lbs_list = None
         self._name = None
         self._plan_outer_id = None
         self._principal_id = None
+        self._refuse_extend_info = None
         self._refuse_reason = None
         self._region_list = None
         self._status = None
@@ -43,12 +49,33 @@ class CreativeDetail(object):
     def action_type(self, value):
         self._action_type = value
     @property
+    def audit_order_id(self):
+        return self._audit_order_id
+
+    @audit_order_id.setter
+    def audit_order_id(self, value):
+        self._audit_order_id = value
+    @property
     def batch_tag(self):
         return self._batch_tag
 
     @batch_tag.setter
     def batch_tag(self, value):
         self._batch_tag = value
+    @property
+    def click(self):
+        return self._click
+
+    @click.setter
+    def click(self, value):
+        self._click = value
+    @property
+    def cost(self):
+        return self._cost
+
+    @cost.setter
+    def cost(self, value):
+        self._cost = value
     @property
     def creative_id(self):
         return self._creative_id
@@ -104,6 +131,13 @@ class CreativeDetail(object):
                 else:
                     self._img_list.append(MaterialDetail.from_alipay_dict(i))
     @property
+    def impression(self):
+        return self._impression
+
+    @impression.setter
+    def impression(self, value):
+        self._impression = value
+    @property
     def lbs_list(self):
         return self._lbs_list
 
@@ -134,6 +168,16 @@ class CreativeDetail(object):
     @principal_id.setter
     def principal_id(self, value):
         self._principal_id = value
+    @property
+    def refuse_extend_info(self):
+        return self._refuse_extend_info
+
+    @refuse_extend_info.setter
+    def refuse_extend_info(self, value):
+        if isinstance(value, CreativeRefuseExtendInfo):
+            self._refuse_extend_info = value
+        else:
+            self._refuse_extend_info = CreativeRefuseExtendInfo.from_alipay_dict(value)
     @property
     def refuse_reason(self):
         return self._refuse_reason
@@ -228,11 +272,26 @@ class CreativeDetail(object):
                 params['action_type'] = self.action_type.to_alipay_dict()
             else:
                 params['action_type'] = self.action_type
+        if self.audit_order_id:
+            if hasattr(self.audit_order_id, 'to_alipay_dict'):
+                params['audit_order_id'] = self.audit_order_id.to_alipay_dict()
+            else:
+                params['audit_order_id'] = self.audit_order_id
         if self.batch_tag:
             if hasattr(self.batch_tag, 'to_alipay_dict'):
                 params['batch_tag'] = self.batch_tag.to_alipay_dict()
             else:
                 params['batch_tag'] = self.batch_tag
+        if self.click:
+            if hasattr(self.click, 'to_alipay_dict'):
+                params['click'] = self.click.to_alipay_dict()
+            else:
+                params['click'] = self.click
+        if self.cost:
+            if hasattr(self.cost, 'to_alipay_dict'):
+                params['cost'] = self.cost.to_alipay_dict()
+            else:
+                params['cost'] = self.cost
         if self.creative_id:
             if hasattr(self.creative_id, 'to_alipay_dict'):
                 params['creative_id'] = self.creative_id.to_alipay_dict()
@@ -273,6 +332,11 @@ class CreativeDetail(object):
                 params['img_list'] = self.img_list.to_alipay_dict()
             else:
                 params['img_list'] = self.img_list
+        if self.impression:
+            if hasattr(self.impression, 'to_alipay_dict'):
+                params['impression'] = self.impression.to_alipay_dict()
+            else:
+                params['impression'] = self.impression
         if self.lbs_list:
             if isinstance(self.lbs_list, list):
                 for i in range(0, len(self.lbs_list)):
@@ -298,6 +362,11 @@ class CreativeDetail(object):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
             else:
                 params['principal_id'] = self.principal_id
+        if self.refuse_extend_info:
+            if hasattr(self.refuse_extend_info, 'to_alipay_dict'):
+                params['refuse_extend_info'] = self.refuse_extend_info.to_alipay_dict()
+            else:
+                params['refuse_extend_info'] = self.refuse_extend_info
         if self.refuse_reason:
             if hasattr(self.refuse_reason, 'to_alipay_dict'):
                 params['refuse_reason'] = self.refuse_reason.to_alipay_dict()
@@ -372,8 +441,14 @@ class CreativeDetail(object):
         o = CreativeDetail()
         if 'action_type' in d:
             o.action_type = d['action_type']
+        if 'audit_order_id' in d:
+            o.audit_order_id = d['audit_order_id']
         if 'batch_tag' in d:
             o.batch_tag = d['batch_tag']
+        if 'click' in d:
+            o.click = d['click']
+        if 'cost' in d:
+            o.cost = d['cost']
         if 'creative_id' in d:
             o.creative_id = d['creative_id']
         if 'creative_outer_id' in d:
@@ -386,6 +461,8 @@ class CreativeDetail(object):
             o.group_outer_id = d['group_outer_id']
         if 'img_list' in d:
             o.img_list = d['img_list']
+        if 'impression' in d:
+            o.impression = d['impression']
         if 'lbs_list' in d:
             o.lbs_list = d['lbs_list']
         if 'name' in d:
@@ -394,6 +471,8 @@ class CreativeDetail(object):
             o.plan_outer_id = d['plan_outer_id']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
+        if 'refuse_extend_info' in d:
+            o.refuse_extend_info = d['refuse_extend_info']
         if 'refuse_reason' in d:
             o.refuse_reason = d['refuse_reason']
         if 'region_list' in d:

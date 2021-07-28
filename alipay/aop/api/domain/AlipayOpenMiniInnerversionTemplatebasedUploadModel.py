@@ -10,6 +10,7 @@ class AlipayOpenMiniInnerversionTemplatebasedUploadModel(object):
     def __init__(self):
         self._app_version = None
         self._build_extra_info = None
+        self._build_type = None
         self._bundle_id = None
         self._inst_code = None
         self._mini_app_id = None
@@ -32,6 +33,13 @@ class AlipayOpenMiniInnerversionTemplatebasedUploadModel(object):
     @build_extra_info.setter
     def build_extra_info(self, value):
         self._build_extra_info = value
+    @property
+    def build_type(self):
+        return self._build_type
+
+    @build_type.setter
+    def build_type(self, value):
+        self._build_type = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -95,6 +103,11 @@ class AlipayOpenMiniInnerversionTemplatebasedUploadModel(object):
                 params['build_extra_info'] = self.build_extra_info.to_alipay_dict()
             else:
                 params['build_extra_info'] = self.build_extra_info
+        if self.build_type:
+            if hasattr(self.build_type, 'to_alipay_dict'):
+                params['build_type'] = self.build_type.to_alipay_dict()
+            else:
+                params['build_type'] = self.build_type
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -141,6 +154,8 @@ class AlipayOpenMiniInnerversionTemplatebasedUploadModel(object):
             o.app_version = d['app_version']
         if 'build_extra_info' in d:
             o.build_extra_info = d['build_extra_info']
+        if 'build_type' in d:
+            o.build_type = d['build_type']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'inst_code' in d:

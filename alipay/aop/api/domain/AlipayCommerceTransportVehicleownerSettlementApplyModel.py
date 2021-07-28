@@ -3,13 +3,16 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BankRepayData import BankRepayData
 from alipay.aop.api.domain.HighwaySceneData import HighwaySceneData
+from alipay.aop.api.domain.VehicleSettleInfo import VehicleSettleInfo
 
 
 class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
 
     def __init__(self):
         self._alipay_store_id = None
+        self._bank_repay_data = None
         self._biz_agreement_no = None
         self._biz_scene_code = None
         self._business_params = None
@@ -24,6 +27,7 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
         self._plate_color = None
         self._plate_no = None
         self._seller_id = None
+        self._settle_info = None
         self._store_id = None
         self._subject = None
         self._terminal_id = None
@@ -38,6 +42,16 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
     @alipay_store_id.setter
     def alipay_store_id(self, value):
         self._alipay_store_id = value
+    @property
+    def bank_repay_data(self):
+        return self._bank_repay_data
+
+    @bank_repay_data.setter
+    def bank_repay_data(self, value):
+        if isinstance(value, BankRepayData):
+            self._bank_repay_data = value
+        else:
+            self._bank_repay_data = BankRepayData.from_alipay_dict(value)
     @property
     def biz_agreement_no(self):
         return self._biz_agreement_no
@@ -140,6 +154,16 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
     def seller_id(self, value):
         self._seller_id = value
     @property
+    def settle_info(self):
+        return self._settle_info
+
+    @settle_info.setter
+    def settle_info(self, value):
+        if isinstance(value, VehicleSettleInfo):
+            self._settle_info = value
+        else:
+            self._settle_info = VehicleSettleInfo.from_alipay_dict(value)
+    @property
     def store_id(self):
         return self._store_id
 
@@ -190,6 +214,11 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
                 params['alipay_store_id'] = self.alipay_store_id.to_alipay_dict()
             else:
                 params['alipay_store_id'] = self.alipay_store_id
+        if self.bank_repay_data:
+            if hasattr(self.bank_repay_data, 'to_alipay_dict'):
+                params['bank_repay_data'] = self.bank_repay_data.to_alipay_dict()
+            else:
+                params['bank_repay_data'] = self.bank_repay_data
         if self.biz_agreement_no:
             if hasattr(self.biz_agreement_no, 'to_alipay_dict'):
                 params['biz_agreement_no'] = self.biz_agreement_no.to_alipay_dict()
@@ -260,6 +289,11 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.settle_info:
+            if hasattr(self.settle_info, 'to_alipay_dict'):
+                params['settle_info'] = self.settle_info.to_alipay_dict()
+            else:
+                params['settle_info'] = self.settle_info
         if self.store_id:
             if hasattr(self.store_id, 'to_alipay_dict'):
                 params['store_id'] = self.store_id.to_alipay_dict()
@@ -299,6 +333,8 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
         o = AlipayCommerceTransportVehicleownerSettlementApplyModel()
         if 'alipay_store_id' in d:
             o.alipay_store_id = d['alipay_store_id']
+        if 'bank_repay_data' in d:
+            o.bank_repay_data = d['bank_repay_data']
         if 'biz_agreement_no' in d:
             o.biz_agreement_no = d['biz_agreement_no']
         if 'biz_scene_code' in d:
@@ -327,6 +363,8 @@ class AlipayCommerceTransportVehicleownerSettlementApplyModel(object):
             o.plate_no = d['plate_no']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'settle_info' in d:
+            o.settle_info = d['settle_info']
         if 'store_id' in d:
             o.store_id = d['store_id']
         if 'subject' in d:

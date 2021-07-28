@@ -12,6 +12,7 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._app_origin = None
         self._build_app_type = None
         self._build_extra_info = None
+        self._build_extra_mini_project_config = None
         self._build_js_permission = None
         self._build_main_url = None
         self._build_max_android_client_version = None
@@ -22,10 +23,13 @@ class AlipayOpenMiniInnerversionUploadModel(object):
         self._build_package_name = None
         self._build_package_stream = None
         self._build_qcloud_info = None
+        self._build_signed_pkg_url = None
         self._build_source_pkg_size = None
         self._build_source_pkg_url = None
         self._build_sub_url = None
         self._build_version = None
+        self._builded_package_size = None
+        self._builded_package_url = None
         self._bundle_id = None
         self._client_type = None
         self._inst_code = None
@@ -53,6 +57,13 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     @build_extra_info.setter
     def build_extra_info(self, value):
         self._build_extra_info = value
+    @property
+    def build_extra_mini_project_config(self):
+        return self._build_extra_mini_project_config
+
+    @build_extra_mini_project_config.setter
+    def build_extra_mini_project_config(self, value):
+        self._build_extra_mini_project_config = value
     @property
     def build_js_permission(self):
         return self._build_js_permission
@@ -124,6 +135,13 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     def build_qcloud_info(self, value):
         self._build_qcloud_info = value
     @property
+    def build_signed_pkg_url(self):
+        return self._build_signed_pkg_url
+
+    @build_signed_pkg_url.setter
+    def build_signed_pkg_url(self, value):
+        self._build_signed_pkg_url = value
+    @property
     def build_source_pkg_size(self):
         return self._build_source_pkg_size
 
@@ -151,6 +169,20 @@ class AlipayOpenMiniInnerversionUploadModel(object):
     @build_version.setter
     def build_version(self, value):
         self._build_version = value
+    @property
+    def builded_package_size(self):
+        return self._builded_package_size
+
+    @builded_package_size.setter
+    def builded_package_size(self, value):
+        self._builded_package_size = value
+    @property
+    def builded_package_url(self):
+        return self._builded_package_url
+
+    @builded_package_url.setter
+    def builded_package_url(self, value):
+        self._builded_package_url = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -211,6 +243,11 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_extra_info'] = self.build_extra_info.to_alipay_dict()
             else:
                 params['build_extra_info'] = self.build_extra_info
+        if self.build_extra_mini_project_config:
+            if hasattr(self.build_extra_mini_project_config, 'to_alipay_dict'):
+                params['build_extra_mini_project_config'] = self.build_extra_mini_project_config.to_alipay_dict()
+            else:
+                params['build_extra_mini_project_config'] = self.build_extra_mini_project_config
         if self.build_js_permission:
             if hasattr(self.build_js_permission, 'to_alipay_dict'):
                 params['build_js_permission'] = self.build_js_permission.to_alipay_dict()
@@ -261,6 +298,11 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_qcloud_info'] = self.build_qcloud_info.to_alipay_dict()
             else:
                 params['build_qcloud_info'] = self.build_qcloud_info
+        if self.build_signed_pkg_url:
+            if hasattr(self.build_signed_pkg_url, 'to_alipay_dict'):
+                params['build_signed_pkg_url'] = self.build_signed_pkg_url.to_alipay_dict()
+            else:
+                params['build_signed_pkg_url'] = self.build_signed_pkg_url
         if self.build_source_pkg_size:
             if hasattr(self.build_source_pkg_size, 'to_alipay_dict'):
                 params['build_source_pkg_size'] = self.build_source_pkg_size.to_alipay_dict()
@@ -281,6 +323,16 @@ class AlipayOpenMiniInnerversionUploadModel(object):
                 params['build_version'] = self.build_version.to_alipay_dict()
             else:
                 params['build_version'] = self.build_version
+        if self.builded_package_size:
+            if hasattr(self.builded_package_size, 'to_alipay_dict'):
+                params['builded_package_size'] = self.builded_package_size.to_alipay_dict()
+            else:
+                params['builded_package_size'] = self.builded_package_size
+        if self.builded_package_url:
+            if hasattr(self.builded_package_url, 'to_alipay_dict'):
+                params['builded_package_url'] = self.builded_package_url.to_alipay_dict()
+            else:
+                params['builded_package_url'] = self.builded_package_url
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -324,6 +376,8 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_app_type = d['build_app_type']
         if 'build_extra_info' in d:
             o.build_extra_info = d['build_extra_info']
+        if 'build_extra_mini_project_config' in d:
+            o.build_extra_mini_project_config = d['build_extra_mini_project_config']
         if 'build_js_permission' in d:
             o.build_js_permission = d['build_js_permission']
         if 'build_main_url' in d:
@@ -344,6 +398,8 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_package_stream = d['build_package_stream']
         if 'build_qcloud_info' in d:
             o.build_qcloud_info = d['build_qcloud_info']
+        if 'build_signed_pkg_url' in d:
+            o.build_signed_pkg_url = d['build_signed_pkg_url']
         if 'build_source_pkg_size' in d:
             o.build_source_pkg_size = d['build_source_pkg_size']
         if 'build_source_pkg_url' in d:
@@ -352,6 +408,10 @@ class AlipayOpenMiniInnerversionUploadModel(object):
             o.build_sub_url = d['build_sub_url']
         if 'build_version' in d:
             o.build_version = d['build_version']
+        if 'builded_package_size' in d:
+            o.builded_package_size = d['builded_package_size']
+        if 'builded_package_url' in d:
+            o.builded_package_url = d['builded_package_url']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'client_type' in d:

@@ -10,9 +10,11 @@ from alipay.aop.api.domain.InvoiceTitleModel import InvoiceTitleModel
 class InvoiceModelContent(object):
 
     def __init__(self):
+        self._apply_id = None
         self._extend_fields = None
         self._file_download_type = None
         self._file_download_url = None
+        self._financial_electronic_type = None
         self._invoice_amount = None
         self._invoice_code = None
         self._invoice_content = None
@@ -40,6 +42,13 @@ class InvoiceModelContent(object):
         self._user_id = None
 
     @property
+    def apply_id(self):
+        return self._apply_id
+
+    @apply_id.setter
+    def apply_id(self, value):
+        self._apply_id = value
+    @property
     def extend_fields(self):
         return self._extend_fields
 
@@ -60,6 +69,13 @@ class InvoiceModelContent(object):
     @file_download_url.setter
     def file_download_url(self, value):
         self._file_download_url = value
+    @property
+    def financial_electronic_type(self):
+        return self._financial_electronic_type
+
+    @financial_electronic_type.setter
+    def financial_electronic_type(self, value):
+        self._financial_electronic_type = value
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -248,6 +264,11 @@ class InvoiceModelContent(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_id:
+            if hasattr(self.apply_id, 'to_alipay_dict'):
+                params['apply_id'] = self.apply_id.to_alipay_dict()
+            else:
+                params['apply_id'] = self.apply_id
         if self.extend_fields:
             if hasattr(self.extend_fields, 'to_alipay_dict'):
                 params['extend_fields'] = self.extend_fields.to_alipay_dict()
@@ -263,6 +284,11 @@ class InvoiceModelContent(object):
                 params['file_download_url'] = self.file_download_url.to_alipay_dict()
             else:
                 params['file_download_url'] = self.file_download_url
+        if self.financial_electronic_type:
+            if hasattr(self.financial_electronic_type, 'to_alipay_dict'):
+                params['financial_electronic_type'] = self.financial_electronic_type.to_alipay_dict()
+            else:
+                params['financial_electronic_type'] = self.financial_electronic_type
         if self.invoice_amount:
             if hasattr(self.invoice_amount, 'to_alipay_dict'):
                 params['invoice_amount'] = self.invoice_amount.to_alipay_dict()
@@ -400,12 +426,16 @@ class InvoiceModelContent(object):
         if not d:
             return None
         o = InvoiceModelContent()
+        if 'apply_id' in d:
+            o.apply_id = d['apply_id']
         if 'extend_fields' in d:
             o.extend_fields = d['extend_fields']
         if 'file_download_type' in d:
             o.file_download_type = d['file_download_type']
         if 'file_download_url' in d:
             o.file_download_url = d['file_download_url']
+        if 'financial_electronic_type' in d:
+            o.financial_electronic_type = d['financial_electronic_type']
         if 'invoice_amount' in d:
             o.invoice_amount = d['invoice_amount']
         if 'invoice_code' in d:

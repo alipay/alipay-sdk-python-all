@@ -15,6 +15,7 @@ class AlipayOpenOperationBizfeeAftechApplyModel(object):
         self._fee_amount = None
         self._fee_currency = None
         self._gmt_charge = None
+        self._gmt_receive = None
         self._gmt_service = None
         self._op_mode = None
         self._out_biz_no = None
@@ -75,6 +76,13 @@ class AlipayOpenOperationBizfeeAftechApplyModel(object):
     @gmt_charge.setter
     def gmt_charge(self, value):
         self._gmt_charge = value
+    @property
+    def gmt_receive(self):
+        return self._gmt_receive
+
+    @gmt_receive.setter
+    def gmt_receive(self, value):
+        self._gmt_receive = value
     @property
     def gmt_service(self):
         return self._gmt_service
@@ -184,6 +192,11 @@ class AlipayOpenOperationBizfeeAftechApplyModel(object):
                 params['gmt_charge'] = self.gmt_charge.to_alipay_dict()
             else:
                 params['gmt_charge'] = self.gmt_charge
+        if self.gmt_receive:
+            if hasattr(self.gmt_receive, 'to_alipay_dict'):
+                params['gmt_receive'] = self.gmt_receive.to_alipay_dict()
+            else:
+                params['gmt_receive'] = self.gmt_receive
         if self.gmt_service:
             if hasattr(self.gmt_service, 'to_alipay_dict'):
                 params['gmt_service'] = self.gmt_service.to_alipay_dict()
@@ -255,6 +268,8 @@ class AlipayOpenOperationBizfeeAftechApplyModel(object):
             o.fee_currency = d['fee_currency']
         if 'gmt_charge' in d:
             o.gmt_charge = d['gmt_charge']
+        if 'gmt_receive' in d:
+            o.gmt_receive = d['gmt_receive']
         if 'gmt_service' in d:
             o.gmt_service = d['gmt_service']
         if 'op_mode' in d:

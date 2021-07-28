@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SubMerchant import SubMerchant
 
 
 class SettleClause(object):
@@ -10,11 +11,13 @@ class SettleClause(object):
     def __init__(self):
         self._amount = None
         self._currency = None
+        self._settle_account_entity = None
         self._settle_account_id = None
         self._settle_account_id_type = None
         self._settle_account_type = None
         self._settle_entity_id = None
         self._settle_entity_type = None
+        self._sub_merchant = None
 
     @property
     def amount(self):
@@ -30,6 +33,13 @@ class SettleClause(object):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def settle_account_entity(self):
+        return self._settle_account_entity
+
+    @settle_account_entity.setter
+    def settle_account_entity(self, value):
+        self._settle_account_entity = value
     @property
     def settle_account_id(self):
         return self._settle_account_id
@@ -65,6 +75,16 @@ class SettleClause(object):
     @settle_entity_type.setter
     def settle_entity_type(self, value):
         self._settle_entity_type = value
+    @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SubMerchant):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchant.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -79,6 +99,11 @@ class SettleClause(object):
                 params['currency'] = self.currency.to_alipay_dict()
             else:
                 params['currency'] = self.currency
+        if self.settle_account_entity:
+            if hasattr(self.settle_account_entity, 'to_alipay_dict'):
+                params['settle_account_entity'] = self.settle_account_entity.to_alipay_dict()
+            else:
+                params['settle_account_entity'] = self.settle_account_entity
         if self.settle_account_id:
             if hasattr(self.settle_account_id, 'to_alipay_dict'):
                 params['settle_account_id'] = self.settle_account_id.to_alipay_dict()
@@ -104,6 +129,11 @@ class SettleClause(object):
                 params['settle_entity_type'] = self.settle_entity_type.to_alipay_dict()
             else:
                 params['settle_entity_type'] = self.settle_entity_type
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         return params
 
     @staticmethod
@@ -115,6 +145,8 @@ class SettleClause(object):
             o.amount = d['amount']
         if 'currency' in d:
             o.currency = d['currency']
+        if 'settle_account_entity' in d:
+            o.settle_account_entity = d['settle_account_entity']
         if 'settle_account_id' in d:
             o.settle_account_id = d['settle_account_id']
         if 'settle_account_id_type' in d:
@@ -125,6 +157,8 @@ class SettleClause(object):
             o.settle_entity_id = d['settle_entity_id']
         if 'settle_entity_type' in d:
             o.settle_entity_type = d['settle_entity_type']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         return o
 
 

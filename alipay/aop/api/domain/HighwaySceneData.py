@@ -26,6 +26,9 @@ class HighwaySceneData(object):
         self._start_station_name = None
         self._start_station_province = None
         self._start_time = None
+        self._sub_scene = None
+        self._sub_scene_desc = None
+        self._sub_type = None
 
     @property
     def car_type(self):
@@ -153,6 +156,27 @@ class HighwaySceneData(object):
     @start_time.setter
     def start_time(self, value):
         self._start_time = value
+    @property
+    def sub_scene(self):
+        return self._sub_scene
+
+    @sub_scene.setter
+    def sub_scene(self, value):
+        self._sub_scene = value
+    @property
+    def sub_scene_desc(self):
+        return self._sub_scene_desc
+
+    @sub_scene_desc.setter
+    def sub_scene_desc(self, value):
+        self._sub_scene_desc = value
+    @property
+    def sub_type(self):
+        return self._sub_type
+
+    @sub_type.setter
+    def sub_type(self, value):
+        self._sub_type = value
 
 
     def to_alipay_dict(self):
@@ -247,6 +271,21 @@ class HighwaySceneData(object):
                 params['start_time'] = self.start_time.to_alipay_dict()
             else:
                 params['start_time'] = self.start_time
+        if self.sub_scene:
+            if hasattr(self.sub_scene, 'to_alipay_dict'):
+                params['sub_scene'] = self.sub_scene.to_alipay_dict()
+            else:
+                params['sub_scene'] = self.sub_scene
+        if self.sub_scene_desc:
+            if hasattr(self.sub_scene_desc, 'to_alipay_dict'):
+                params['sub_scene_desc'] = self.sub_scene_desc.to_alipay_dict()
+            else:
+                params['sub_scene_desc'] = self.sub_scene_desc
+        if self.sub_type:
+            if hasattr(self.sub_type, 'to_alipay_dict'):
+                params['sub_type'] = self.sub_type.to_alipay_dict()
+            else:
+                params['sub_type'] = self.sub_type
         return params
 
     @staticmethod
@@ -290,6 +329,12 @@ class HighwaySceneData(object):
             o.start_station_province = d['start_station_province']
         if 'start_time' in d:
             o.start_time = d['start_time']
+        if 'sub_scene' in d:
+            o.sub_scene = d['sub_scene']
+        if 'sub_scene_desc' in d:
+            o.sub_scene_desc = d['sub_scene_desc']
+        if 'sub_type' in d:
+            o.sub_type = d['sub_type']
         return o
 
 

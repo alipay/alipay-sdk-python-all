@@ -9,6 +9,7 @@ from alipay.aop.api.domain.ExtraParams import ExtraParams
 class AlipayPcreditHuabeiAuthSettleApplyModel(object):
 
     def __init__(self):
+        self._action_type = None
         self._agreement_no = None
         self._alipay_user_id = None
         self._extend_params = None
@@ -17,6 +18,13 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
         self._pay_amount = None
         self._seller_id = None
 
+    @property
+    def action_type(self):
+        return self._action_type
+
+    @action_type.setter
+    def action_type(self, value):
+        self._action_type = value
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -73,6 +81,11 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.action_type:
+            if hasattr(self.action_type, 'to_alipay_dict'):
+                params['action_type'] = self.action_type.to_alipay_dict()
+            else:
+                params['action_type'] = self.action_type
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayPcreditHuabeiAuthSettleApplyModel(object):
         if not d:
             return None
         o = AlipayPcreditHuabeiAuthSettleApplyModel()
+        if 'action_type' in d:
+            o.action_type = d['action_type']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'alipay_user_id' in d:

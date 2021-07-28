@@ -10,12 +10,20 @@ class ZolozIdentificationCustomerCertifyzhubQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(ZolozIdentificationCustomerCertifyzhubQueryResponse, self).__init__()
+        self._attack = None
         self._biz_id = None
         self._face_attr_info = None
         self._img_str = None
         self._zim_code = None
         self._zim_msg = None
 
+    @property
+    def attack(self):
+        return self._attack
+
+    @attack.setter
+    def attack(self, value):
+        self._attack = value
     @property
     def biz_id(self):
         return self._biz_id
@@ -57,6 +65,8 @@ class ZolozIdentificationCustomerCertifyzhubQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZolozIdentificationCustomerCertifyzhubQueryResponse, self).parse_response_content(response_content)
+        if 'attack' in response:
+            self.attack = response['attack']
         if 'biz_id' in response:
             self.biz_id = response['biz_id']
         if 'face_attr_info' in response:

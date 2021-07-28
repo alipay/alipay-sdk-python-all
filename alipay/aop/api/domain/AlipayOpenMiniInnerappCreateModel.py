@@ -18,6 +18,8 @@ class AlipayOpenMiniInnerappCreateModel(object):
         self._app_sub_type = None
         self._app_type = None
         self._isv_app_id = None
+        self._mini_app_id = None
+        self._mini_category_ids = None
         self._pid = None
         self._service_email = None
         self._service_phone = None
@@ -93,6 +95,20 @@ class AlipayOpenMiniInnerappCreateModel(object):
     def isv_app_id(self, value):
         self._isv_app_id = value
     @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
+    @property
     def pid(self):
         return self._pid
 
@@ -167,6 +183,16 @@ class AlipayOpenMiniInnerappCreateModel(object):
                 params['isv_app_id'] = self.isv_app_id.to_alipay_dict()
             else:
                 params['isv_app_id'] = self.isv_app_id
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
+            else:
+                params['mini_app_id'] = self.mini_app_id
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = self.mini_category_ids.to_alipay_dict()
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
@@ -209,6 +235,10 @@ class AlipayOpenMiniInnerappCreateModel(object):
             o.app_type = d['app_type']
         if 'isv_app_id' in d:
             o.isv_app_id = d['isv_app_id']
+        if 'mini_app_id' in d:
+            o.mini_app_id = d['mini_app_id']
+        if 'mini_category_ids' in d:
+            o.mini_category_ids = d['mini_category_ids']
         if 'pid' in d:
             o.pid = d['pid']
         if 'service_email' in d:

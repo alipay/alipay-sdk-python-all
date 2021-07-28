@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class MiniAppBaseInfoQueryResponse(object):
 
     def __init__(self):
+        self._app_alias_name = None
         self._app_desc = None
         self._app_english_name = None
         self._app_key = None
@@ -22,6 +23,13 @@ class MiniAppBaseInfoQueryResponse(object):
         self._origin = None
         self._status = None
 
+    @property
+    def app_alias_name(self):
+        return self._app_alias_name
+
+    @app_alias_name.setter
+    def app_alias_name(self, value):
+        self._app_alias_name = value
     @property
     def app_desc(self):
         return self._app_desc
@@ -117,6 +125,11 @@ class MiniAppBaseInfoQueryResponse(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_alias_name:
+            if hasattr(self.app_alias_name, 'to_alipay_dict'):
+                params['app_alias_name'] = self.app_alias_name.to_alipay_dict()
+            else:
+                params['app_alias_name'] = self.app_alias_name
         if self.app_desc:
             if hasattr(self.app_desc, 'to_alipay_dict'):
                 params['app_desc'] = self.app_desc.to_alipay_dict()
@@ -189,6 +202,8 @@ class MiniAppBaseInfoQueryResponse(object):
         if not d:
             return None
         o = MiniAppBaseInfoQueryResponse()
+        if 'app_alias_name' in d:
+            o.app_alias_name = d['app_alias_name']
         if 'app_desc' in d:
             o.app_desc = d['app_desc']
         if 'app_english_name' in d:

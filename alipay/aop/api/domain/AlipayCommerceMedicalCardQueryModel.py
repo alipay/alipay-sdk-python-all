@@ -12,8 +12,10 @@ class AlipayCommerceMedicalCardQueryModel(object):
         self._buyer_id = None
         self._card_org_no = None
         self._extend_params = None
+        self._ins_type = None
         self._return_url = None
         self._scene = None
+        self._version_no = None
 
     @property
     def auth_code(self):
@@ -44,6 +46,13 @@ class AlipayCommerceMedicalCardQueryModel(object):
     def extend_params(self, value):
         self._extend_params = value
     @property
+    def ins_type(self):
+        return self._ins_type
+
+    @ins_type.setter
+    def ins_type(self, value):
+        self._ins_type = value
+    @property
     def return_url(self):
         return self._return_url
 
@@ -57,6 +66,13 @@ class AlipayCommerceMedicalCardQueryModel(object):
     @scene.setter
     def scene(self, value):
         self._scene = value
+    @property
+    def version_no(self):
+        return self._version_no
+
+    @version_no.setter
+    def version_no(self, value):
+        self._version_no = value
 
 
     def to_alipay_dict(self):
@@ -81,6 +97,11 @@ class AlipayCommerceMedicalCardQueryModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.ins_type:
+            if hasattr(self.ins_type, 'to_alipay_dict'):
+                params['ins_type'] = self.ins_type.to_alipay_dict()
+            else:
+                params['ins_type'] = self.ins_type
         if self.return_url:
             if hasattr(self.return_url, 'to_alipay_dict'):
                 params['return_url'] = self.return_url.to_alipay_dict()
@@ -91,6 +112,11 @@ class AlipayCommerceMedicalCardQueryModel(object):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.version_no:
+            if hasattr(self.version_no, 'to_alipay_dict'):
+                params['version_no'] = self.version_no.to_alipay_dict()
+            else:
+                params['version_no'] = self.version_no
         return params
 
     @staticmethod
@@ -106,10 +132,14 @@ class AlipayCommerceMedicalCardQueryModel(object):
             o.card_org_no = d['card_org_no']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'ins_type' in d:
+            o.ins_type = d['ins_type']
         if 'return_url' in d:
             o.return_url = d['return_url']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'version_no' in d:
+            o.version_no = d['version_no']
         return o
 
 

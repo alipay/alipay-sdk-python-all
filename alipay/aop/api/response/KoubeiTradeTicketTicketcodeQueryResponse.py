@@ -14,6 +14,7 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
         self._current_price = None
         self._effect_date = None
         self._expire_date = None
+        self._item_alias = None
         self._item_id = None
         self._item_name = None
         self._order_no = None
@@ -54,6 +55,13 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
     @expire_date.setter
     def expire_date(self, value):
         self._expire_date = value
+    @property
+    def item_alias(self):
+        return self._item_alias
+
+    @item_alias.setter
+    def item_alias(self, value):
+        self._item_alias = value
     @property
     def item_id(self):
         return self._item_id
@@ -148,6 +156,8 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
             self.effect_date = response['effect_date']
         if 'expire_date' in response:
             self.expire_date = response['expire_date']
+        if 'item_alias' in response:
+            self.item_alias = response['item_alias']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'item_name' in response:

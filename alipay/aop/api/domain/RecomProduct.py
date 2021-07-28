@@ -18,6 +18,7 @@ class RecomProduct(object):
         self._company_seller_id = None
         self._company_seller_nick = None
         self._company_service_phone = None
+        self._csu_no = None
         self._max_quan = None
         self._name = None
         self._plans = None
@@ -26,6 +27,7 @@ class RecomProduct(object):
         self._resource_list = None
         self._resources = None
         self._restriction_type = None
+        self._sum_insured = None
         self._type = None
 
     @property
@@ -77,6 +79,13 @@ class RecomProduct(object):
     @company_service_phone.setter
     def company_service_phone(self, value):
         self._company_service_phone = value
+    @property
+    def csu_no(self):
+        return self._csu_no
+
+    @csu_no.setter
+    def csu_no(self, value):
+        self._csu_no = value
     @property
     def max_quan(self):
         return self._max_quan
@@ -146,6 +155,13 @@ class RecomProduct(object):
     def restriction_type(self, value):
         self._restriction_type = value
     @property
+    def sum_insured(self):
+        return self._sum_insured
+
+    @sum_insured.setter
+    def sum_insured(self, value):
+        self._sum_insured = value
+    @property
     def type(self):
         return self._type
 
@@ -191,6 +207,11 @@ class RecomProduct(object):
                 params['company_service_phone'] = self.company_service_phone.to_alipay_dict()
             else:
                 params['company_service_phone'] = self.company_service_phone
+        if self.csu_no:
+            if hasattr(self.csu_no, 'to_alipay_dict'):
+                params['csu_no'] = self.csu_no.to_alipay_dict()
+            else:
+                params['csu_no'] = self.csu_no
         if self.max_quan:
             if hasattr(self.max_quan, 'to_alipay_dict'):
                 params['max_quan'] = self.max_quan.to_alipay_dict()
@@ -236,6 +257,11 @@ class RecomProduct(object):
                 params['restriction_type'] = self.restriction_type.to_alipay_dict()
             else:
                 params['restriction_type'] = self.restriction_type
+        if self.sum_insured:
+            if hasattr(self.sum_insured, 'to_alipay_dict'):
+                params['sum_insured'] = self.sum_insured.to_alipay_dict()
+            else:
+                params['sum_insured'] = self.sum_insured
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -262,6 +288,8 @@ class RecomProduct(object):
             o.company_seller_nick = d['company_seller_nick']
         if 'company_service_phone' in d:
             o.company_service_phone = d['company_service_phone']
+        if 'csu_no' in d:
+            o.csu_no = d['csu_no']
         if 'max_quan' in d:
             o.max_quan = d['max_quan']
         if 'name' in d:
@@ -278,6 +306,8 @@ class RecomProduct(object):
             o.resources = d['resources']
         if 'restriction_type' in d:
             o.restriction_type = d['restriction_type']
+        if 'sum_insured' in d:
+            o.sum_insured = d['sum_insured']
         if 'type' in d:
             o.type = d['type']
         return o

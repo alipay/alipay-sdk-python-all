@@ -11,6 +11,7 @@ class AlipayOpenAppMessageTopicSubscribeModel(object):
         self._auth_token = None
         self._auth_type = None
         self._comm_type = None
+        self._tag = None
         self._topic = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayOpenAppMessageTopicSubscribeModel(object):
     @comm_type.setter
     def comm_type(self, value):
         self._comm_type = value
+    @property
+    def tag(self):
+        return self._tag
+
+    @tag.setter
+    def tag(self, value):
+        self._tag = value
     @property
     def topic(self):
         return self._topic
@@ -60,6 +68,11 @@ class AlipayOpenAppMessageTopicSubscribeModel(object):
                 params['comm_type'] = self.comm_type.to_alipay_dict()
             else:
                 params['comm_type'] = self.comm_type
+        if self.tag:
+            if hasattr(self.tag, 'to_alipay_dict'):
+                params['tag'] = self.tag.to_alipay_dict()
+            else:
+                params['tag'] = self.tag
         if self.topic:
             if hasattr(self.topic, 'to_alipay_dict'):
                 params['topic'] = self.topic.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayOpenAppMessageTopicSubscribeModel(object):
             o.auth_type = d['auth_type']
         if 'comm_type' in d:
             o.comm_type = d['comm_type']
+        if 'tag' in d:
+            o.tag = d['tag']
         if 'topic' in d:
             o.topic = d['topic']
         return o

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MiniAppPluginReference import MiniAppPluginReference
+from alipay.aop.api.domain.SubPackage import SubPackage
 
 
 class AlipayOpenMiniInnerversionPreviewUploadModel(object):
@@ -17,8 +18,11 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
         self._inst_code = None
         self._main_url = None
         self._mini_app_id = None
+        self._new_build_pkg_url = None
+        self._new_build_plugin_url = None
         self._plugin_refs = None
         self._scene = None
+        self._sub_packages = None
 
     @property
     def build_js_permission(self):
@@ -77,6 +81,20 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def new_build_pkg_url(self):
+        return self._new_build_pkg_url
+
+    @new_build_pkg_url.setter
+    def new_build_pkg_url(self, value):
+        self._new_build_pkg_url = value
+    @property
+    def new_build_plugin_url(self):
+        return self._new_build_plugin_url
+
+    @new_build_plugin_url.setter
+    def new_build_plugin_url(self, value):
+        self._new_build_plugin_url = value
+    @property
     def plugin_refs(self):
         return self._plugin_refs
 
@@ -96,6 +114,19 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     @scene.setter
     def scene(self, value):
         self._scene = value
+    @property
+    def sub_packages(self):
+        return self._sub_packages
+
+    @sub_packages.setter
+    def sub_packages(self, value):
+        if isinstance(value, list):
+            self._sub_packages = list()
+            for i in value:
+                if isinstance(i, SubPackage):
+                    self._sub_packages.append(i)
+                else:
+                    self._sub_packages.append(SubPackage.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -140,6 +171,16 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.new_build_pkg_url:
+            if hasattr(self.new_build_pkg_url, 'to_alipay_dict'):
+                params['new_build_pkg_url'] = self.new_build_pkg_url.to_alipay_dict()
+            else:
+                params['new_build_pkg_url'] = self.new_build_pkg_url
+        if self.new_build_plugin_url:
+            if hasattr(self.new_build_plugin_url, 'to_alipay_dict'):
+                params['new_build_plugin_url'] = self.new_build_plugin_url.to_alipay_dict()
+            else:
+                params['new_build_plugin_url'] = self.new_build_plugin_url
         if self.plugin_refs:
             if isinstance(self.plugin_refs, list):
                 for i in range(0, len(self.plugin_refs)):
@@ -155,6 +196,16 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.sub_packages:
+            if isinstance(self.sub_packages, list):
+                for i in range(0, len(self.sub_packages)):
+                    element = self.sub_packages[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sub_packages[i] = element.to_alipay_dict()
+            if hasattr(self.sub_packages, 'to_alipay_dict'):
+                params['sub_packages'] = self.sub_packages.to_alipay_dict()
+            else:
+                params['sub_packages'] = self.sub_packages
         return params
 
     @staticmethod
@@ -178,10 +229,16 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
             o.main_url = d['main_url']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'new_build_pkg_url' in d:
+            o.new_build_pkg_url = d['new_build_pkg_url']
+        if 'new_build_plugin_url' in d:
+            o.new_build_plugin_url = d['new_build_plugin_url']
         if 'plugin_refs' in d:
             o.plugin_refs = d['plugin_refs']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'sub_packages' in d:
+            o.sub_packages = d['sub_packages']
         return o
 
 

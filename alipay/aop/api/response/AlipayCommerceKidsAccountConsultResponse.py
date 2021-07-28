@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ChildCertInfo import ChildCertInfo
+from alipay.aop.api.domain.NextUrl import NextUrl
 from alipay.aop.api.domain.RelationVO import RelationVO
 
 
@@ -13,6 +14,7 @@ class AlipayCommerceKidsAccountConsultResponse(AlipayResponse):
         super(AlipayCommerceKidsAccountConsultResponse, self).__init__()
         self._can_open = None
         self._child_info = None
+        self._next_url = None
         self._relation_limit = None
         self._relation_list = None
 
@@ -33,6 +35,16 @@ class AlipayCommerceKidsAccountConsultResponse(AlipayResponse):
             self._child_info = value
         else:
             self._child_info = ChildCertInfo.from_alipay_dict(value)
+    @property
+    def next_url(self):
+        return self._next_url
+
+    @next_url.setter
+    def next_url(self, value):
+        if isinstance(value, NextUrl):
+            self._next_url = value
+        else:
+            self._next_url = NextUrl.from_alipay_dict(value)
     @property
     def relation_limit(self):
         return self._relation_limit
@@ -60,6 +72,8 @@ class AlipayCommerceKidsAccountConsultResponse(AlipayResponse):
             self.can_open = response['can_open']
         if 'child_info' in response:
             self.child_info = response['child_info']
+        if 'next_url' in response:
+            self.next_url = response['next_url']
         if 'relation_limit' in response:
             self.relation_limit = response['relation_limit']
         if 'relation_list' in response:

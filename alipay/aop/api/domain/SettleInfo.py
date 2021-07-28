@@ -10,6 +10,7 @@ class SettleInfo(object):
 
     def __init__(self):
         self._settle_detail_infos = None
+        self._settle_period_time = None
 
     @property
     def settle_detail_infos(self):
@@ -24,6 +25,13 @@ class SettleInfo(object):
                     self._settle_detail_infos.append(i)
                 else:
                     self._settle_detail_infos.append(SettleDetailInfo.from_alipay_dict(i))
+    @property
+    def settle_period_time(self):
+        return self._settle_period_time
+
+    @settle_period_time.setter
+    def settle_period_time(self, value):
+        self._settle_period_time = value
 
 
     def to_alipay_dict(self):
@@ -38,6 +46,11 @@ class SettleInfo(object):
                 params['settle_detail_infos'] = self.settle_detail_infos.to_alipay_dict()
             else:
                 params['settle_detail_infos'] = self.settle_detail_infos
+        if self.settle_period_time:
+            if hasattr(self.settle_period_time, 'to_alipay_dict'):
+                params['settle_period_time'] = self.settle_period_time.to_alipay_dict()
+            else:
+                params['settle_period_time'] = self.settle_period_time
         return params
 
     @staticmethod
@@ -47,6 +60,8 @@ class SettleInfo(object):
         o = SettleInfo()
         if 'settle_detail_infos' in d:
             o.settle_detail_infos = d['settle_detail_infos']
+        if 'settle_period_time' in d:
+            o.settle_period_time = d['settle_period_time']
         return o
 
 

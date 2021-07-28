@@ -11,8 +11,10 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
         self._app_origin = None
         self._app_version = None
         self._bundle_id = None
+        self._downgrade = None
         self._mini_app_id = None
         self._pid = None
+        self._release_type = None
 
     @property
     def app_origin(self):
@@ -36,6 +38,13 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
     def bundle_id(self, value):
         self._bundle_id = value
     @property
+    def downgrade(self):
+        return self._downgrade
+
+    @downgrade.setter
+    def downgrade(self, value):
+        self._downgrade = value
+    @property
     def mini_app_id(self):
         return self._mini_app_id
 
@@ -49,6 +58,13 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def release_type(self):
+        return self._release_type
+
+    @release_type.setter
+    def release_type(self, value):
+        self._release_type = value
 
 
     def to_alipay_dict(self):
@@ -68,6 +84,11 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.downgrade:
+            if hasattr(self.downgrade, 'to_alipay_dict'):
+                params['downgrade'] = self.downgrade.to_alipay_dict()
+            else:
+                params['downgrade'] = self.downgrade
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -78,6 +99,11 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.release_type:
+            if hasattr(self.release_type, 'to_alipay_dict'):
+                params['release_type'] = self.release_type.to_alipay_dict()
+            else:
+                params['release_type'] = self.release_type
         return params
 
     @staticmethod
@@ -91,10 +117,14 @@ class AlipayOpenMiniInnerversionOnlinePublishModel(object):
             o.app_version = d['app_version']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'downgrade' in d:
+            o.downgrade = d['downgrade']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'pid' in d:
             o.pid = d['pid']
+        if 'release_type' in d:
+            o.release_type = d['release_type']
         return o
 
 

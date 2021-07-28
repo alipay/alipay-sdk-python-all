@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MerchantCard import MerchantCard
 from alipay.aop.api.domain.McardStylInfo import McardStylInfo
+from alipay.aop.api.domain.MerchantCardMsgInfo import MerchantCardMsgInfo
 from alipay.aop.api.domain.McardNotifyMessage import McardNotifyMessage
 
 
@@ -14,6 +15,7 @@ class AlipayMarketingCardUpdateModel(object):
         self._card_info = None
         self._ext_info = None
         self._mcard_style_info = None
+        self._merchant_card_msg_info = None
         self._notify_messages = None
         self._occur_time = None
         self._target_card_no = None
@@ -46,6 +48,16 @@ class AlipayMarketingCardUpdateModel(object):
             self._mcard_style_info = value
         else:
             self._mcard_style_info = McardStylInfo.from_alipay_dict(value)
+    @property
+    def merchant_card_msg_info(self):
+        return self._merchant_card_msg_info
+
+    @merchant_card_msg_info.setter
+    def merchant_card_msg_info(self, value):
+        if isinstance(value, MerchantCardMsgInfo):
+            self._merchant_card_msg_info = value
+        else:
+            self._merchant_card_msg_info = MerchantCardMsgInfo.from_alipay_dict(value)
     @property
     def notify_messages(self):
         return self._notify_messages
@@ -99,6 +111,11 @@ class AlipayMarketingCardUpdateModel(object):
                 params['mcard_style_info'] = self.mcard_style_info.to_alipay_dict()
             else:
                 params['mcard_style_info'] = self.mcard_style_info
+        if self.merchant_card_msg_info:
+            if hasattr(self.merchant_card_msg_info, 'to_alipay_dict'):
+                params['merchant_card_msg_info'] = self.merchant_card_msg_info.to_alipay_dict()
+            else:
+                params['merchant_card_msg_info'] = self.merchant_card_msg_info
         if self.notify_messages:
             if isinstance(self.notify_messages, list):
                 for i in range(0, len(self.notify_messages)):
@@ -137,6 +154,8 @@ class AlipayMarketingCardUpdateModel(object):
             o.ext_info = d['ext_info']
         if 'mcard_style_info' in d:
             o.mcard_style_info = d['mcard_style_info']
+        if 'merchant_card_msg_info' in d:
+            o.merchant_card_msg_info = d['merchant_card_msg_info']
         if 'notify_messages' in d:
             o.notify_messages = d['notify_messages']
         if 'occur_time' in d:

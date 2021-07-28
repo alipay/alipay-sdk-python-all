@@ -22,6 +22,7 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
         self._client_type = None
         self._inst_code = None
         self._mini_app_id = None
+        self._mini_category_ids = None
         self._owner_entity = None
         self._partner_domain = None
         self._pid = None
@@ -126,6 +127,13 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
     @mini_app_id.setter
     def mini_app_id(self, value):
         self._mini_app_id = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
     @property
     def owner_entity(self):
         return self._owner_entity
@@ -235,6 +243,11 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = self.mini_category_ids.to_alipay_dict()
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.owner_entity:
             if hasattr(self.owner_entity, 'to_alipay_dict'):
                 params['owner_entity'] = self.owner_entity.to_alipay_dict()
@@ -295,6 +308,8 @@ class AlipayOpenMiniInnerbaseinfoCreateModel(object):
             o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'mini_category_ids' in d:
+            o.mini_category_ids = d['mini_category_ids']
         if 'owner_entity' in d:
             o.owner_entity = d['owner_entity']
         if 'partner_domain' in d:

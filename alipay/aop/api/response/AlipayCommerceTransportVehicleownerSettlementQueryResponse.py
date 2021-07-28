@@ -18,6 +18,7 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
         self._m_discount_amount = None
         self._out_trade_no = None
         self._plate_no = None
+        self._refund_amount = None
         self._send_pay_date = None
         self._status = None
         self._subject = None
@@ -87,6 +88,13 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
     def plate_no(self, value):
         self._plate_no = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
     def send_pay_date(self):
         return self._send_pay_date
 
@@ -140,6 +148,8 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
             self.out_trade_no = response['out_trade_no']
         if 'plate_no' in response:
             self.plate_no = response['plate_no']
+        if 'refund_amount' in response:
+            self.refund_amount = response['refund_amount']
         if 'send_pay_date' in response:
             self.send_pay_date = response['send_pay_date']
         if 'status' in response:

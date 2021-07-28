@@ -14,6 +14,7 @@ class ApprovedInfo(object):
         self._imm_fullname = None
         self._imm_position = None
         self._note = None
+        self._payment_confirm_url = None
         self._receipt_url = None
         self._remark = None
         self._status = None
@@ -63,6 +64,13 @@ class ApprovedInfo(object):
     @note.setter
     def note(self, value):
         self._note = value
+    @property
+    def payment_confirm_url(self):
+        return self._payment_confirm_url
+
+    @payment_confirm_url.setter
+    def payment_confirm_url(self, value):
+        self._payment_confirm_url = value
     @property
     def receipt_url(self):
         return self._receipt_url
@@ -139,6 +147,11 @@ class ApprovedInfo(object):
                 params['note'] = self.note.to_alipay_dict()
             else:
                 params['note'] = self.note
+        if self.payment_confirm_url:
+            if hasattr(self.payment_confirm_url, 'to_alipay_dict'):
+                params['payment_confirm_url'] = self.payment_confirm_url.to_alipay_dict()
+            else:
+                params['payment_confirm_url'] = self.payment_confirm_url
         if self.receipt_url:
             if hasattr(self.receipt_url, 'to_alipay_dict'):
                 params['receipt_url'] = self.receipt_url.to_alipay_dict()
@@ -188,6 +201,8 @@ class ApprovedInfo(object):
             o.imm_position = d['imm_position']
         if 'note' in d:
             o.note = d['note']
+        if 'payment_confirm_url' in d:
+            o.payment_confirm_url = d['payment_confirm_url']
         if 'receipt_url' in d:
             o.receipt_url = d['receipt_url']
         if 'remark' in d:

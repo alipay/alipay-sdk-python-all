@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.CreditPayBillAssetVO import CreditPayBillAssetVO
+from alipay.aop.api.domain.CreditPayGuaranteeAssetVO import CreditPayGuaranteeAssetVO
+from alipay.aop.api.domain.CreditPayGuideVO import CreditPayGuideVO
 from alipay.aop.api.domain.CreditPayInstallmentAssetVO import CreditPayInstallmentAssetVO
 from alipay.aop.api.domain.CreditPayRefuseVO import CreditPayRefuseVO
 
@@ -13,6 +15,8 @@ class MybankCreditLoantradePayAssetConsultResponse(AlipayResponse):
     def __init__(self):
         super(MybankCreditLoantradePayAssetConsultResponse, self).__init__()
         self._bill_assets = None
+        self._guarantee_assets = None
+        self._guide_info = None
         self._installment_assets = None
         self._refuse_info = None
         self._success = None
@@ -30,6 +34,29 @@ class MybankCreditLoantradePayAssetConsultResponse(AlipayResponse):
                     self._bill_assets.append(i)
                 else:
                     self._bill_assets.append(CreditPayBillAssetVO.from_alipay_dict(i))
+    @property
+    def guarantee_assets(self):
+        return self._guarantee_assets
+
+    @guarantee_assets.setter
+    def guarantee_assets(self, value):
+        if isinstance(value, list):
+            self._guarantee_assets = list()
+            for i in value:
+                if isinstance(i, CreditPayGuaranteeAssetVO):
+                    self._guarantee_assets.append(i)
+                else:
+                    self._guarantee_assets.append(CreditPayGuaranteeAssetVO.from_alipay_dict(i))
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, CreditPayGuideVO):
+            self._guide_info = value
+        else:
+            self._guide_info = CreditPayGuideVO.from_alipay_dict(value)
     @property
     def installment_assets(self):
         return self._installment_assets
@@ -65,6 +92,10 @@ class MybankCreditLoantradePayAssetConsultResponse(AlipayResponse):
         response = super(MybankCreditLoantradePayAssetConsultResponse, self).parse_response_content(response_content)
         if 'bill_assets' in response:
             self.bill_assets = response['bill_assets']
+        if 'guarantee_assets' in response:
+            self.guarantee_assets = response['guarantee_assets']
+        if 'guide_info' in response:
+            self.guide_info = response['guide_info']
         if 'installment_assets' in response:
             self.installment_assets = response['installment_assets']
         if 'refuse_info' in response:

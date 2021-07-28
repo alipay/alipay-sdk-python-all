@@ -14,6 +14,7 @@ class PromotionInfo(object):
         self._detail_url = None
         self._icon_url = None
         self._main_image_url = None
+        self._out_prize_id = None
         self._promotion_id = None
         self._title = None
         self._using_condition = None
@@ -65,6 +66,13 @@ class PromotionInfo(object):
     @main_image_url.setter
     def main_image_url(self, value):
         self._main_image_url = value
+    @property
+    def out_prize_id(self):
+        return self._out_prize_id
+
+    @out_prize_id.setter
+    def out_prize_id(self, value):
+        self._out_prize_id = value
     @property
     def promotion_id(self):
         return self._promotion_id
@@ -155,6 +163,11 @@ class PromotionInfo(object):
                 params['main_image_url'] = self.main_image_url.to_alipay_dict()
             else:
                 params['main_image_url'] = self.main_image_url
+        if self.out_prize_id:
+            if hasattr(self.out_prize_id, 'to_alipay_dict'):
+                params['out_prize_id'] = self.out_prize_id.to_alipay_dict()
+            else:
+                params['out_prize_id'] = self.out_prize_id
         if self.promotion_id:
             if hasattr(self.promotion_id, 'to_alipay_dict'):
                 params['promotion_id'] = self.promotion_id.to_alipay_dict()
@@ -214,6 +227,8 @@ class PromotionInfo(object):
             o.icon_url = d['icon_url']
         if 'main_image_url' in d:
             o.main_image_url = d['main_image_url']
+        if 'out_prize_id' in d:
+            o.out_prize_id = d['out_prize_id']
         if 'promotion_id' in d:
             o.promotion_id = d['promotion_id']
         if 'title' in d:

@@ -9,6 +9,7 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenMiniInnerbaseinfoQueryResponse, self).__init__()
+        self._app_alias_name = None
         self._app_category_ids = None
         self._app_desc = None
         self._app_english_name = None
@@ -21,11 +22,20 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
         self._gmt_create = None
         self._gmt_modified = None
         self._mini_app_id = None
+        self._mini_category_ids = None
         self._origin = None
         self._owner_entity = None
+        self._owner_portrait = None
         self._service_email = None
         self._service_phone = None
 
+    @property
+    def app_alias_name(self):
+        return self._app_alias_name
+
+    @app_alias_name.setter
+    def app_alias_name(self, value):
+        self._app_alias_name = value
     @property
     def app_category_ids(self):
         return self._app_category_ids
@@ -111,6 +121,13 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
+    @property
     def origin(self):
         return self._origin
 
@@ -124,6 +141,13 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
     @owner_entity.setter
     def owner_entity(self, value):
         self._owner_entity = value
+    @property
+    def owner_portrait(self):
+        return self._owner_portrait
+
+    @owner_portrait.setter
+    def owner_portrait(self, value):
+        self._owner_portrait = value
     @property
     def service_email(self):
         return self._service_email
@@ -141,6 +165,8 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniInnerbaseinfoQueryResponse, self).parse_response_content(response_content)
+        if 'app_alias_name' in response:
+            self.app_alias_name = response['app_alias_name']
         if 'app_category_ids' in response:
             self.app_category_ids = response['app_category_ids']
         if 'app_desc' in response:
@@ -165,10 +191,14 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
             self.gmt_modified = response['gmt_modified']
         if 'mini_app_id' in response:
             self.mini_app_id = response['mini_app_id']
+        if 'mini_category_ids' in response:
+            self.mini_category_ids = response['mini_category_ids']
         if 'origin' in response:
             self.origin = response['origin']
         if 'owner_entity' in response:
             self.owner_entity = response['owner_entity']
+        if 'owner_portrait' in response:
+            self.owner_portrait = response['owner_portrait']
         if 'service_email' in response:
             self.service_email = response['service_email']
         if 'service_phone' in response:

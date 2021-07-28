@@ -11,6 +11,8 @@ class ItemSkuModifyInfo(object):
     def __init__(self):
         self._cost_price = None
         self._ext_info = None
+        self._external_sku_id = None
+        self._inventory = None
         self._original_price = None
         self._price = None
         self._sku_id = None
@@ -36,6 +38,20 @@ class ItemSkuModifyInfo(object):
                     self._ext_info.append(i)
                 else:
                     self._ext_info.append(ItemExtInfo.from_alipay_dict(i))
+    @property
+    def external_sku_id(self):
+        return self._external_sku_id
+
+    @external_sku_id.setter
+    def external_sku_id(self, value):
+        self._external_sku_id = value
+    @property
+    def inventory(self):
+        return self._inventory
+
+    @inventory.setter
+    def inventory(self, value):
+        self._inventory = value
     @property
     def original_price(self):
         return self._original_price
@@ -83,6 +99,16 @@ class ItemSkuModifyInfo(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.external_sku_id:
+            if hasattr(self.external_sku_id, 'to_alipay_dict'):
+                params['external_sku_id'] = self.external_sku_id.to_alipay_dict()
+            else:
+                params['external_sku_id'] = self.external_sku_id
+        if self.inventory:
+            if hasattr(self.inventory, 'to_alipay_dict'):
+                params['inventory'] = self.inventory.to_alipay_dict()
+            else:
+                params['inventory'] = self.inventory
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -114,6 +140,10 @@ class ItemSkuModifyInfo(object):
             o.cost_price = d['cost_price']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'external_sku_id' in d:
+            o.external_sku_id = d['external_sku_id']
+        if 'inventory' in d:
+            o.inventory = d['inventory']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'price' in d:

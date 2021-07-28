@@ -18,10 +18,12 @@ class InsClaimReport(object):
         self._attachments = None
         self._biz_data = None
         self._claim_report_no = None
+        self._claim_report_type = None
         self._claims = None
         self._progress = None
         self._report_reject_reason = None
         self._reporter = None
+        self._source = None
         self._status = None
 
     @property
@@ -73,6 +75,13 @@ class InsClaimReport(object):
     def claim_report_no(self, value):
         self._claim_report_no = value
     @property
+    def claim_report_type(self):
+        return self._claim_report_type
+
+    @claim_report_type.setter
+    def claim_report_type(self, value):
+        self._claim_report_type = value
+    @property
     def claims(self):
         return self._claims
 
@@ -115,6 +124,13 @@ class InsClaimReport(object):
             self._reporter = value
         else:
             self._reporter = InsPerson.from_alipay_dict(value)
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
     @property
     def status(self):
         return self._status
@@ -161,6 +177,11 @@ class InsClaimReport(object):
                 params['claim_report_no'] = self.claim_report_no.to_alipay_dict()
             else:
                 params['claim_report_no'] = self.claim_report_no
+        if self.claim_report_type:
+            if hasattr(self.claim_report_type, 'to_alipay_dict'):
+                params['claim_report_type'] = self.claim_report_type.to_alipay_dict()
+            else:
+                params['claim_report_type'] = self.claim_report_type
         if self.claims:
             if isinstance(self.claims, list):
                 for i in range(0, len(self.claims)):
@@ -191,6 +212,11 @@ class InsClaimReport(object):
                 params['reporter'] = self.reporter.to_alipay_dict()
             else:
                 params['reporter'] = self.reporter
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -215,6 +241,8 @@ class InsClaimReport(object):
             o.biz_data = d['biz_data']
         if 'claim_report_no' in d:
             o.claim_report_no = d['claim_report_no']
+        if 'claim_report_type' in d:
+            o.claim_report_type = d['claim_report_type']
         if 'claims' in d:
             o.claims = d['claims']
         if 'progress' in d:
@@ -223,6 +251,8 @@ class InsClaimReport(object):
             o.report_reject_reason = d['report_reject_reason']
         if 'reporter' in d:
             o.reporter = d['reporter']
+        if 'source' in d:
+            o.source = d['source']
         if 'status' in d:
             o.status = d['status']
         return o

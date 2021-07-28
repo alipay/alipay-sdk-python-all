@@ -15,6 +15,7 @@ class AlipayOpenMiniDeveloppackageQueryModel(object):
         self._mini_app_id = None
         self._protocol = None
         self._scene = None
+        self._user_id = None
 
     @property
     def bundle_id(self):
@@ -65,6 +66,13 @@ class AlipayOpenMiniDeveloppackageQueryModel(object):
     @scene.setter
     def scene(self, value):
         self._scene = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class AlipayOpenMiniDeveloppackageQueryModel(object):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class AlipayOpenMiniDeveloppackageQueryModel(object):
             o.protocol = d['protocol']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

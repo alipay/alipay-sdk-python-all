@@ -11,7 +11,9 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
 
     def __init__(self):
         self._button = None
+        self._group_id = None
         self._label_rule = None
+        self._mobile_client_type = None
         self._type = None
 
     @property
@@ -28,6 +30,13 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
                 else:
                     self._button.append(ButtonObject.from_alipay_dict(i))
     @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
+    @property
     def label_rule(self):
         return self._label_rule
 
@@ -40,6 +49,13 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
                     self._label_rule.append(i)
                 else:
                     self._label_rule.append(LabelRule.from_alipay_dict(i))
+    @property
+    def mobile_client_type(self):
+        return self._mobile_client_type
+
+    @mobile_client_type.setter
+    def mobile_client_type(self, value):
+        self._mobile_client_type = value
     @property
     def type(self):
         return self._type
@@ -61,6 +77,11 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
                 params['button'] = self.button.to_alipay_dict()
             else:
                 params['button'] = self.button
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
         if self.label_rule:
             if isinstance(self.label_rule, list):
                 for i in range(0, len(self.label_rule)):
@@ -71,6 +92,11 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
                 params['label_rule'] = self.label_rule.to_alipay_dict()
             else:
                 params['label_rule'] = self.label_rule
+        if self.mobile_client_type:
+            if hasattr(self.mobile_client_type, 'to_alipay_dict'):
+                params['mobile_client_type'] = self.mobile_client_type.to_alipay_dict()
+            else:
+                params['mobile_client_type'] = self.mobile_client_type
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -85,8 +111,12 @@ class AlipayOpenPublicPersonalizedMenuCreateModel(object):
         o = AlipayOpenPublicPersonalizedMenuCreateModel()
         if 'button' in d:
             o.button = d['button']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
         if 'label_rule' in d:
             o.label_rule = d['label_rule']
+        if 'mobile_client_type' in d:
+            o.mobile_client_type = d['mobile_client_type']
         if 'type' in d:
             o.type = d['type']
         return o

@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BakingItemOperationData import BakingItemOperationData
 
 
 class KoubeiCateringSmartstoreDataSyncModel(object):
 
     def __init__(self):
+        self._baking_item_operation_data = None
         self._browse_dishs = None
         self._browse_time = None
         self._buy_result = None
@@ -42,6 +44,16 @@ class KoubeiCateringSmartstoreDataSyncModel(object):
         self._total_price = None
         self._user_id = None
 
+    @property
+    def baking_item_operation_data(self):
+        return self._baking_item_operation_data
+
+    @baking_item_operation_data.setter
+    def baking_item_operation_data(self, value):
+        if isinstance(value, BakingItemOperationData):
+            self._baking_item_operation_data = value
+        else:
+            self._baking_item_operation_data = BakingItemOperationData.from_alipay_dict(value)
     @property
     def browse_dishs(self):
         return self._browse_dishs
@@ -277,6 +289,11 @@ class KoubeiCateringSmartstoreDataSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.baking_item_operation_data:
+            if hasattr(self.baking_item_operation_data, 'to_alipay_dict'):
+                params['baking_item_operation_data'] = self.baking_item_operation_data.to_alipay_dict()
+            else:
+                params['baking_item_operation_data'] = self.baking_item_operation_data
         if self.browse_dishs:
             if hasattr(self.browse_dishs, 'to_alipay_dict'):
                 params['browse_dishs'] = self.browse_dishs.to_alipay_dict()
@@ -449,6 +466,8 @@ class KoubeiCateringSmartstoreDataSyncModel(object):
         if not d:
             return None
         o = KoubeiCateringSmartstoreDataSyncModel()
+        if 'baking_item_operation_data' in d:
+            o.baking_item_operation_data = d['baking_item_operation_data']
         if 'browse_dishs' in d:
             o.browse_dishs = d['browse_dishs']
         if 'browse_time' in d:

@@ -23,6 +23,8 @@ class AlipayTradePayResponse(AlipayResponse):
         self._card_balance = None
         self._charge_amount = None
         self._charge_flags = None
+        self._credit_biz_order_id = None
+        self._credit_pay_mode = None
         self._discount_amount = None
         self._discount_goods_detail = None
         self._fund_bill_list = None
@@ -35,6 +37,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._pay_currency = None
         self._point_amount = None
         self._receipt_amount = None
+        self._receipt_currency_type = None
         self._settle_amount = None
         self._settle_currency = None
         self._settle_trans_rate = None
@@ -131,6 +134,20 @@ class AlipayTradePayResponse(AlipayResponse):
     def charge_flags(self, value):
         self._charge_flags = value
     @property
+    def credit_biz_order_id(self):
+        return self._credit_biz_order_id
+
+    @credit_biz_order_id.setter
+    def credit_biz_order_id(self, value):
+        self._credit_biz_order_id = value
+    @property
+    def credit_pay_mode(self):
+        return self._credit_pay_mode
+
+    @credit_pay_mode.setter
+    def credit_pay_mode(self, value):
+        self._credit_pay_mode = value
+    @property
     def discount_amount(self):
         return self._discount_amount
 
@@ -220,6 +237,13 @@ class AlipayTradePayResponse(AlipayResponse):
     @receipt_amount.setter
     def receipt_amount(self, value):
         self._receipt_amount = value
+    @property
+    def receipt_currency_type(self):
+        return self._receipt_currency_type
+
+    @receipt_currency_type.setter
+    def receipt_currency_type(self, value):
+        self._receipt_currency_type = value
     @property
     def settle_amount(self):
         return self._settle_amount
@@ -323,6 +347,10 @@ class AlipayTradePayResponse(AlipayResponse):
             self.charge_amount = response['charge_amount']
         if 'charge_flags' in response:
             self.charge_flags = response['charge_flags']
+        if 'credit_biz_order_id' in response:
+            self.credit_biz_order_id = response['credit_biz_order_id']
+        if 'credit_pay_mode' in response:
+            self.credit_pay_mode = response['credit_pay_mode']
         if 'discount_amount' in response:
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
@@ -347,6 +375,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.point_amount = response['point_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
+        if 'receipt_currency_type' in response:
+            self.receipt_currency_type = response['receipt_currency_type']
         if 'settle_amount' in response:
             self.settle_amount = response['settle_amount']
         if 'settle_currency' in response:

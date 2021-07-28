@@ -11,6 +11,7 @@ class OpenApiRoyaltyDetailInfoPojo(object):
         self._amount = None
         self._amount_percentage = None
         self._desc = None
+        self._royalty_scene = None
         self._royalty_type = None
         self._trans_in = None
         self._trans_in_type = None
@@ -38,6 +39,13 @@ class OpenApiRoyaltyDetailInfoPojo(object):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def royalty_scene(self):
+        return self._royalty_scene
+
+    @royalty_scene.setter
+    def royalty_scene(self, value):
+        self._royalty_scene = value
     @property
     def royalty_type(self):
         return self._royalty_type
@@ -92,6 +100,11 @@ class OpenApiRoyaltyDetailInfoPojo(object):
                 params['desc'] = self.desc.to_alipay_dict()
             else:
                 params['desc'] = self.desc
+        if self.royalty_scene:
+            if hasattr(self.royalty_scene, 'to_alipay_dict'):
+                params['royalty_scene'] = self.royalty_scene.to_alipay_dict()
+            else:
+                params['royalty_scene'] = self.royalty_scene
         if self.royalty_type:
             if hasattr(self.royalty_type, 'to_alipay_dict'):
                 params['royalty_type'] = self.royalty_type.to_alipay_dict()
@@ -130,6 +143,8 @@ class OpenApiRoyaltyDetailInfoPojo(object):
             o.amount_percentage = d['amount_percentage']
         if 'desc' in d:
             o.desc = d['desc']
+        if 'royalty_scene' in d:
+            o.royalty_scene = d['royalty_scene']
         if 'royalty_type' in d:
             o.royalty_type = d['royalty_type']
         if 'trans_in' in d:

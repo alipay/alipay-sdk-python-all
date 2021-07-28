@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OpenApiRefundFundDetailPojo import OpenApiRefundFundDetailPojo
 
 
 class AlipayTradeRefundApplyModel(object):
@@ -13,6 +14,7 @@ class AlipayTradeRefundApplyModel(object):
         self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
+        self._refund_fund_details = None
         self._refund_reason = None
         self._store_id = None
         self._terminal_id = None
@@ -53,6 +55,19 @@ class AlipayTradeRefundApplyModel(object):
     @refund_amount.setter
     def refund_amount(self, value):
         self._refund_amount = value
+    @property
+    def refund_fund_details(self):
+        return self._refund_fund_details
+
+    @refund_fund_details.setter
+    def refund_fund_details(self, value):
+        if isinstance(value, list):
+            self._refund_fund_details = list()
+            for i in value:
+                if isinstance(i, OpenApiRefundFundDetailPojo):
+                    self._refund_fund_details.append(i)
+                else:
+                    self._refund_fund_details.append(OpenApiRefundFundDetailPojo.from_alipay_dict(i))
     @property
     def refund_reason(self):
         return self._refund_reason
@@ -110,6 +125,16 @@ class AlipayTradeRefundApplyModel(object):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
             else:
                 params['refund_amount'] = self.refund_amount
+        if self.refund_fund_details:
+            if isinstance(self.refund_fund_details, list):
+                for i in range(0, len(self.refund_fund_details)):
+                    element = self.refund_fund_details[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refund_fund_details[i] = element.to_alipay_dict()
+            if hasattr(self.refund_fund_details, 'to_alipay_dict'):
+                params['refund_fund_details'] = self.refund_fund_details.to_alipay_dict()
+            else:
+                params['refund_fund_details'] = self.refund_fund_details
         if self.refund_reason:
             if hasattr(self.refund_reason, 'to_alipay_dict'):
                 params['refund_reason'] = self.refund_reason.to_alipay_dict()
@@ -147,6 +172,8 @@ class AlipayTradeRefundApplyModel(object):
             o.out_trade_no = d['out_trade_no']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
+        if 'refund_fund_details' in d:
+            o.refund_fund_details = d['refund_fund_details']
         if 'refund_reason' in d:
             o.refund_reason = d['refund_reason']
         if 'store_id' in d:

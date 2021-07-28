@@ -10,6 +10,7 @@ class AlipayCommerceTransportOfflinepayVirtualcardBatchqueryModel(object):
     def __init__(self):
         self._card_no = None
         self._card_type = None
+        self._include_deleted = None
         self._user_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayCommerceTransportOfflinepayVirtualcardBatchqueryModel(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def include_deleted(self):
+        return self._include_deleted
+
+    @include_deleted.setter
+    def include_deleted(self, value):
+        self._include_deleted = value
     @property
     def user_id(self):
         return self._user_id
@@ -47,6 +55,11 @@ class AlipayCommerceTransportOfflinepayVirtualcardBatchqueryModel(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.include_deleted:
+            if hasattr(self.include_deleted, 'to_alipay_dict'):
+                params['include_deleted'] = self.include_deleted.to_alipay_dict()
+            else:
+                params['include_deleted'] = self.include_deleted
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayCommerceTransportOfflinepayVirtualcardBatchqueryModel(object):
             o.card_no = d['card_no']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'include_deleted' in d:
+            o.include_deleted = d['include_deleted']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -11,13 +11,16 @@ class KbdishMaterialInfo(object):
         self._add_price = None
         self._create_user = None
         self._ext_info = None
+        self._material_desc = None
         self._material_id = None
         self._material_img = None
         self._material_name = None
         self._material_type = None
         self._max_num = None
         self._merchant_id = None
+        self._out_material_id = None
         self._public_id = None
+        self._unit_id = None
         self._update_user = None
 
     @property
@@ -41,6 +44,13 @@ class KbdishMaterialInfo(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def material_desc(self):
+        return self._material_desc
+
+    @material_desc.setter
+    def material_desc(self, value):
+        self._material_desc = value
     @property
     def material_id(self):
         return self._material_id
@@ -84,12 +94,26 @@ class KbdishMaterialInfo(object):
     def merchant_id(self, value):
         self._merchant_id = value
     @property
+    def out_material_id(self):
+        return self._out_material_id
+
+    @out_material_id.setter
+    def out_material_id(self, value):
+        self._out_material_id = value
+    @property
     def public_id(self):
         return self._public_id
 
     @public_id.setter
     def public_id(self, value):
         self._public_id = value
+    @property
+    def unit_id(self):
+        return self._unit_id
+
+    @unit_id.setter
+    def unit_id(self, value):
+        self._unit_id = value
     @property
     def update_user(self):
         return self._update_user
@@ -116,6 +140,11 @@ class KbdishMaterialInfo(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.material_desc:
+            if hasattr(self.material_desc, 'to_alipay_dict'):
+                params['material_desc'] = self.material_desc.to_alipay_dict()
+            else:
+                params['material_desc'] = self.material_desc
         if self.material_id:
             if hasattr(self.material_id, 'to_alipay_dict'):
                 params['material_id'] = self.material_id.to_alipay_dict()
@@ -146,11 +175,21 @@ class KbdishMaterialInfo(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.out_material_id:
+            if hasattr(self.out_material_id, 'to_alipay_dict'):
+                params['out_material_id'] = self.out_material_id.to_alipay_dict()
+            else:
+                params['out_material_id'] = self.out_material_id
         if self.public_id:
             if hasattr(self.public_id, 'to_alipay_dict'):
                 params['public_id'] = self.public_id.to_alipay_dict()
             else:
                 params['public_id'] = self.public_id
+        if self.unit_id:
+            if hasattr(self.unit_id, 'to_alipay_dict'):
+                params['unit_id'] = self.unit_id.to_alipay_dict()
+            else:
+                params['unit_id'] = self.unit_id
         if self.update_user:
             if hasattr(self.update_user, 'to_alipay_dict'):
                 params['update_user'] = self.update_user.to_alipay_dict()
@@ -169,6 +208,8 @@ class KbdishMaterialInfo(object):
             o.create_user = d['create_user']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'material_desc' in d:
+            o.material_desc = d['material_desc']
         if 'material_id' in d:
             o.material_id = d['material_id']
         if 'material_img' in d:
@@ -181,8 +222,12 @@ class KbdishMaterialInfo(object):
             o.max_num = d['max_num']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'out_material_id' in d:
+            o.out_material_id = d['out_material_id']
         if 'public_id' in d:
             o.public_id = d['public_id']
+        if 'unit_id' in d:
+            o.unit_id = d['unit_id']
         if 'update_user' in d:
             o.update_user = d['update_user']
         return o

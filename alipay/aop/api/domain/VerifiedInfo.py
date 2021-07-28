@@ -9,6 +9,7 @@ class VerifiedInfo(object):
 
     def __init__(self):
         self._application_no = None
+        self._ext_info = None
         self._note = None
         self._remark = None
         self._status = None
@@ -22,6 +23,13 @@ class VerifiedInfo(object):
     @application_no.setter
     def application_no(self, value):
         self._application_no = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def note(self):
         return self._note
@@ -66,6 +74,11 @@ class VerifiedInfo(object):
                 params['application_no'] = self.application_no.to_alipay_dict()
             else:
                 params['application_no'] = self.application_no
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.note:
             if hasattr(self.note, 'to_alipay_dict'):
                 params['note'] = self.note.to_alipay_dict()
@@ -100,6 +113,8 @@ class VerifiedInfo(object):
         o = VerifiedInfo()
         if 'application_no' in d:
             o.application_no = d['application_no']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'note' in d:
             o.note = d['note']
         if 'remark' in d:

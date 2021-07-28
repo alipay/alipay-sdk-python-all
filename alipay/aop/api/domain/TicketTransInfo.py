@@ -10,6 +10,7 @@ class TicketTransInfo(object):
     def __init__(self):
         self._create_time = None
         self._last_modify_time = None
+        self._quantity = None
         self._ticket_trans_id = None
         self._ticket_trans_type = None
 
@@ -27,6 +28,13 @@ class TicketTransInfo(object):
     @last_modify_time.setter
     def last_modify_time(self, value):
         self._last_modify_time = value
+    @property
+    def quantity(self):
+        return self._quantity
+
+    @quantity.setter
+    def quantity(self, value):
+        self._quantity = value
     @property
     def ticket_trans_id(self):
         return self._ticket_trans_id
@@ -55,6 +63,11 @@ class TicketTransInfo(object):
                 params['last_modify_time'] = self.last_modify_time.to_alipay_dict()
             else:
                 params['last_modify_time'] = self.last_modify_time
+        if self.quantity:
+            if hasattr(self.quantity, 'to_alipay_dict'):
+                params['quantity'] = self.quantity.to_alipay_dict()
+            else:
+                params['quantity'] = self.quantity
         if self.ticket_trans_id:
             if hasattr(self.ticket_trans_id, 'to_alipay_dict'):
                 params['ticket_trans_id'] = self.ticket_trans_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class TicketTransInfo(object):
             o.create_time = d['create_time']
         if 'last_modify_time' in d:
             o.last_modify_time = d['last_modify_time']
+        if 'quantity' in d:
+            o.quantity = d['quantity']
         if 'ticket_trans_id' in d:
             o.ticket_trans_id = d['ticket_trans_id']
         if 'ticket_trans_type' in d:

@@ -17,6 +17,7 @@ class InsClaim(object):
         self._claim_status = None
         self._out_request_no = None
         self._reject_reason = None
+        self._trade_no = None
 
     @property
     def biz_data(self):
@@ -80,6 +81,13 @@ class InsClaim(object):
     @reject_reason.setter
     def reject_reason(self, value):
         self._reject_reason = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
 
     def to_alipay_dict(self):
@@ -129,6 +137,11 @@ class InsClaim(object):
                 params['reject_reason'] = self.reject_reason.to_alipay_dict()
             else:
                 params['reject_reason'] = self.reject_reason
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         return params
 
     @staticmethod
@@ -152,6 +165,8 @@ class InsClaim(object):
             o.out_request_no = d['out_request_no']
         if 'reject_reason' in d:
             o.reject_reason = d['reject_reason']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         return o
 
 

@@ -10,6 +10,7 @@ class AlipayOpenMiniInnerversionGrayOnlineModel(object):
     def __init__(self):
         self._app_version = None
         self._bundle_id = None
+        self._gray_rule = None
         self._inst_code = None
         self._mini_app_id = None
 
@@ -27,6 +28,13 @@ class AlipayOpenMiniInnerversionGrayOnlineModel(object):
     @bundle_id.setter
     def bundle_id(self, value):
         self._bundle_id = value
+    @property
+    def gray_rule(self):
+        return self._gray_rule
+
+    @gray_rule.setter
+    def gray_rule(self, value):
+        self._gray_rule = value
     @property
     def inst_code(self):
         return self._inst_code
@@ -55,6 +63,11 @@ class AlipayOpenMiniInnerversionGrayOnlineModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.gray_rule:
+            if hasattr(self.gray_rule, 'to_alipay_dict'):
+                params['gray_rule'] = self.gray_rule.to_alipay_dict()
+            else:
+                params['gray_rule'] = self.gray_rule
         if self.inst_code:
             if hasattr(self.inst_code, 'to_alipay_dict'):
                 params['inst_code'] = self.inst_code.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayOpenMiniInnerversionGrayOnlineModel(object):
             o.app_version = d['app_version']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'gray_rule' in d:
+            o.gray_rule = d['gray_rule']
         if 'inst_code' in d:
             o.inst_code = d['inst_code']
         if 'mini_app_id' in d:

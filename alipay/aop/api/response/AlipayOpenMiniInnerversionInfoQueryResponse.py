@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.MiniAppPluginInfo import MiniAppPluginInfo
 
 
 class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
@@ -21,11 +22,13 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
         self._mini_app_id = None
         self._offline_time = None
         self._package_url = None
+        self._plugin_refs = None
         self._reject_reason = None
         self._rollback_time = None
         self._scan_result = None
         self._screen_shot_list = None
         self._shelf_time = None
+        self._source_url = None
         self._status = None
         self._template_extra = None
         self._template_version = None
@@ -115,6 +118,19 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
     def package_url(self, value):
         self._package_url = value
     @property
+    def plugin_refs(self):
+        return self._plugin_refs
+
+    @plugin_refs.setter
+    def plugin_refs(self, value):
+        if isinstance(value, list):
+            self._plugin_refs = list()
+            for i in value:
+                if isinstance(i, MiniAppPluginInfo):
+                    self._plugin_refs.append(i)
+                else:
+                    self._plugin_refs.append(MiniAppPluginInfo.from_alipay_dict(i))
+    @property
     def reject_reason(self):
         return self._reject_reason
 
@@ -149,6 +165,13 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
     @shelf_time.setter
     def shelf_time(self, value):
         self._shelf_time = value
+    @property
+    def source_url(self):
+        return self._source_url
+
+    @source_url.setter
+    def source_url(self, value):
+        self._source_url = value
     @property
     def status(self):
         return self._status
@@ -197,6 +220,8 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
             self.offline_time = response['offline_time']
         if 'package_url' in response:
             self.package_url = response['package_url']
+        if 'plugin_refs' in response:
+            self.plugin_refs = response['plugin_refs']
         if 'reject_reason' in response:
             self.reject_reason = response['reject_reason']
         if 'rollback_time' in response:
@@ -207,6 +232,8 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
             self.screen_shot_list = response['screen_shot_list']
         if 'shelf_time' in response:
             self.shelf_time = response['shelf_time']
+        if 'source_url' in response:
+            self.source_url = response['source_url']
         if 'status' in response:
             self.status = response['status']
         if 'template_extra' in response:

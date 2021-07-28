@@ -5,7 +5,9 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetParams import AssetParams
 from alipay.aop.api.domain.DeviceParams import DeviceParams
+from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.ProdParams import ProdParams
+from alipay.aop.api.domain.SpecifiedChannelParam import SpecifiedChannelParam
 from alipay.aop.api.domain.VerifyParams import VerifyParams
 from alipay.aop.api.domain.ZmAuthParams import ZmAuthParams
 
@@ -21,12 +23,16 @@ class AlipayUserAgreementSignModel(object):
         self._device_params = None
         self._external_agreement_no = None
         self._external_logon_id = None
+        self._pass_params = None
+        self._period_rule_params = None
         self._personal_product_code = None
         self._prod_params = None
         self._product_code = None
         self._promo_params = None
+        self._provisioning_bundle_id = None
         self._sign_scene = None
         self._sign_validity_period = None
+        self._specified_channel = None
         self._sub_merchant = None
         self._third_party_type = None
         self._user_age_range = None
@@ -96,6 +102,23 @@ class AlipayUserAgreementSignModel(object):
     def external_logon_id(self, value):
         self._external_logon_id = value
     @property
+    def pass_params(self):
+        return self._pass_params
+
+    @pass_params.setter
+    def pass_params(self, value):
+        self._pass_params = value
+    @property
+    def period_rule_params(self):
+        return self._period_rule_params
+
+    @period_rule_params.setter
+    def period_rule_params(self, value):
+        if isinstance(value, PeriodRuleParams):
+            self._period_rule_params = value
+        else:
+            self._period_rule_params = PeriodRuleParams.from_alipay_dict(value)
+    @property
     def personal_product_code(self):
         return self._personal_product_code
 
@@ -127,6 +150,13 @@ class AlipayUserAgreementSignModel(object):
     def promo_params(self, value):
         self._promo_params = value
     @property
+    def provisioning_bundle_id(self):
+        return self._provisioning_bundle_id
+
+    @provisioning_bundle_id.setter
+    def provisioning_bundle_id(self, value):
+        self._provisioning_bundle_id = value
+    @property
     def sign_scene(self):
         return self._sign_scene
 
@@ -140,6 +170,19 @@ class AlipayUserAgreementSignModel(object):
     @sign_validity_period.setter
     def sign_validity_period(self, value):
         self._sign_validity_period = value
+    @property
+    def specified_channel(self):
+        return self._specified_channel
+
+    @specified_channel.setter
+    def specified_channel(self, value):
+        if isinstance(value, list):
+            self._specified_channel = list()
+            for i in value:
+                if isinstance(i, SpecifiedChannelParam):
+                    self._specified_channel.append(i)
+                else:
+                    self._specified_channel.append(SpecifiedChannelParam.from_alipay_dict(i))
     @property
     def sub_merchant(self):
         return self._sub_merchant
@@ -225,6 +268,16 @@ class AlipayUserAgreementSignModel(object):
                 params['external_logon_id'] = self.external_logon_id.to_alipay_dict()
             else:
                 params['external_logon_id'] = self.external_logon_id
+        if self.pass_params:
+            if hasattr(self.pass_params, 'to_alipay_dict'):
+                params['pass_params'] = self.pass_params.to_alipay_dict()
+            else:
+                params['pass_params'] = self.pass_params
+        if self.period_rule_params:
+            if hasattr(self.period_rule_params, 'to_alipay_dict'):
+                params['period_rule_params'] = self.period_rule_params.to_alipay_dict()
+            else:
+                params['period_rule_params'] = self.period_rule_params
         if self.personal_product_code:
             if hasattr(self.personal_product_code, 'to_alipay_dict'):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
@@ -245,6 +298,11 @@ class AlipayUserAgreementSignModel(object):
                 params['promo_params'] = self.promo_params.to_alipay_dict()
             else:
                 params['promo_params'] = self.promo_params
+        if self.provisioning_bundle_id:
+            if hasattr(self.provisioning_bundle_id, 'to_alipay_dict'):
+                params['provisioning_bundle_id'] = self.provisioning_bundle_id.to_alipay_dict()
+            else:
+                params['provisioning_bundle_id'] = self.provisioning_bundle_id
         if self.sign_scene:
             if hasattr(self.sign_scene, 'to_alipay_dict'):
                 params['sign_scene'] = self.sign_scene.to_alipay_dict()
@@ -255,6 +313,16 @@ class AlipayUserAgreementSignModel(object):
                 params['sign_validity_period'] = self.sign_validity_period.to_alipay_dict()
             else:
                 params['sign_validity_period'] = self.sign_validity_period
+        if self.specified_channel:
+            if isinstance(self.specified_channel, list):
+                for i in range(0, len(self.specified_channel)):
+                    element = self.specified_channel[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.specified_channel[i] = element.to_alipay_dict()
+            if hasattr(self.specified_channel, 'to_alipay_dict'):
+                params['specified_channel'] = self.specified_channel.to_alipay_dict()
+            else:
+                params['specified_channel'] = self.specified_channel
         if self.sub_merchant:
             if hasattr(self.sub_merchant, 'to_alipay_dict'):
                 params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
@@ -303,6 +371,10 @@ class AlipayUserAgreementSignModel(object):
             o.external_agreement_no = d['external_agreement_no']
         if 'external_logon_id' in d:
             o.external_logon_id = d['external_logon_id']
+        if 'pass_params' in d:
+            o.pass_params = d['pass_params']
+        if 'period_rule_params' in d:
+            o.period_rule_params = d['period_rule_params']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
         if 'prod_params' in d:
@@ -311,10 +383,14 @@ class AlipayUserAgreementSignModel(object):
             o.product_code = d['product_code']
         if 'promo_params' in d:
             o.promo_params = d['promo_params']
+        if 'provisioning_bundle_id' in d:
+            o.provisioning_bundle_id = d['provisioning_bundle_id']
         if 'sign_scene' in d:
             o.sign_scene = d['sign_scene']
         if 'sign_validity_period' in d:
             o.sign_validity_period = d['sign_validity_period']
+        if 'specified_channel' in d:
+            o.specified_channel = d['specified_channel']
         if 'sub_merchant' in d:
             o.sub_merchant = d['sub_merchant']
         if 'third_party_type' in d:

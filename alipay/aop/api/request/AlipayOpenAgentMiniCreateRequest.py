@@ -18,6 +18,7 @@ class AlipayOpenAgentMiniCreateRequest(object):
         self._app_name = None
         self._app_slogan = None
         self._batch_no = None
+        self._mini_category_ids = None
         self._service_email = None
         self._service_phone = None
         self._app_logo = None
@@ -80,6 +81,13 @@ class AlipayOpenAgentMiniCreateRequest(object):
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
     @property
     def service_email(self):
         return self._service_email
@@ -212,6 +220,11 @@ class AlipayOpenAgentMiniCreateRequest(object):
                 params['batch_no'] = json.dumps(obj=self.batch_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['batch_no'] = self.batch_no
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = json.dumps(obj=self.mini_category_ids.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.service_email:
             if hasattr(self.service_email, 'to_alipay_dict'):
                 params['service_email'] = json.dumps(obj=self.service_email.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

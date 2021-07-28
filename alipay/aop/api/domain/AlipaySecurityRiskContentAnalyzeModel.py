@@ -20,6 +20,7 @@ class AlipaySecurityRiskContentAnalyzeModel(object):
         self._picture_urls = None
         self._publish_date = None
         self._text = None
+        self._text_type = None
         self._video_urls = None
 
     @property
@@ -116,6 +117,13 @@ class AlipaySecurityRiskContentAnalyzeModel(object):
     def text(self, value):
         self._text = value
     @property
+    def text_type(self):
+        return self._text_type
+
+    @text_type.setter
+    def text_type(self, value):
+        self._text_type = value
+    @property
     def video_urls(self):
         return self._video_urls
 
@@ -204,6 +212,11 @@ class AlipaySecurityRiskContentAnalyzeModel(object):
                 params['text'] = self.text.to_alipay_dict()
             else:
                 params['text'] = self.text
+        if self.text_type:
+            if hasattr(self.text_type, 'to_alipay_dict'):
+                params['text_type'] = self.text_type.to_alipay_dict()
+            else:
+                params['text_type'] = self.text_type
         if self.video_urls:
             if isinstance(self.video_urls, list):
                 for i in range(0, len(self.video_urls)):
@@ -245,6 +258,8 @@ class AlipaySecurityRiskContentAnalyzeModel(object):
             o.publish_date = d['publish_date']
         if 'text' in d:
             o.text = d['text']
+        if 'text_type' in d:
+            o.text_type = d['text_type']
         if 'video_urls' in d:
             o.video_urls = d['video_urls']
         return o

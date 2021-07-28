@@ -18,6 +18,7 @@ class AlipayCommerceIotDapplyOrderCreateModel(object):
         self._creator = None
         self._device_apply_order_item_models = None
         self._ext_info = None
+        self._item_mall_id = None
         self._memo = None
         self._merchant_name = None
         self._merchant_pid = None
@@ -96,6 +97,13 @@ class AlipayCommerceIotDapplyOrderCreateModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def item_mall_id(self):
+        return self._item_mall_id
+
+    @item_mall_id.setter
+    def item_mall_id(self, value):
+        self._item_mall_id = value
     @property
     def memo(self):
         return self._memo
@@ -206,6 +214,11 @@ class AlipayCommerceIotDapplyOrderCreateModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.item_mall_id:
+            if hasattr(self.item_mall_id, 'to_alipay_dict'):
+                params['item_mall_id'] = self.item_mall_id.to_alipay_dict()
+            else:
+                params['item_mall_id'] = self.item_mall_id
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -271,6 +284,8 @@ class AlipayCommerceIotDapplyOrderCreateModel(object):
             o.device_apply_order_item_models = d['device_apply_order_item_models']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'item_mall_id' in d:
+            o.item_mall_id = d['item_mall_id']
         if 'memo' in d:
             o.memo = d['memo']
         if 'merchant_name' in d:

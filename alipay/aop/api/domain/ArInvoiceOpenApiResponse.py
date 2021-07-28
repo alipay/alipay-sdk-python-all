@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ArInvoiceLineOpenApiResponse import ArInvoiceLineOpenApiResponse
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 
 
 class ArInvoiceOpenApiResponse(object):
@@ -18,6 +19,7 @@ class ArInvoiceOpenApiResponse(object):
         self._buyer_invoice_title = None
         self._buyer_tax_no = None
         self._buyer_telephone = None
+        self._can_link = None
         self._creator = None
         self._drawer = None
         self._elc_invoice_url = None
@@ -37,8 +39,10 @@ class ArInvoiceOpenApiResponse(object):
         self._ip_id = None
         self._ip_role_id = None
         self._last_moder = None
+        self._linked_amt = None
         self._mail_status = None
         self._memo = None
+        self._no_bill_invoice_flag = None
         self._online = None
         self._payee = None
         self._recent_mail_id = None
@@ -108,6 +112,13 @@ class ArInvoiceOpenApiResponse(object):
     @buyer_telephone.setter
     def buyer_telephone(self, value):
         self._buyer_telephone = value
+    @property
+    def can_link(self):
+        return self._can_link
+
+    @can_link.setter
+    def can_link(self, value):
+        self._can_link = value
     @property
     def creator(self):
         return self._creator
@@ -245,6 +256,16 @@ class ArInvoiceOpenApiResponse(object):
     def last_moder(self, value):
         self._last_moder = value
     @property
+    def linked_amt(self):
+        return self._linked_amt
+
+    @linked_amt.setter
+    def linked_amt(self, value):
+        if isinstance(value, MultiCurrencyMoneyOpenApi):
+            self._linked_amt = value
+        else:
+            self._linked_amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
+    @property
     def mail_status(self):
         return self._mail_status
 
@@ -258,6 +279,13 @@ class ArInvoiceOpenApiResponse(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def no_bill_invoice_flag(self):
+        return self._no_bill_invoice_flag
+
+    @no_bill_invoice_flag.setter
+    def no_bill_invoice_flag(self, value):
+        self._no_bill_invoice_flag = value
     @property
     def online(self):
         return self._online
@@ -396,6 +424,11 @@ class ArInvoiceOpenApiResponse(object):
                 params['buyer_telephone'] = self.buyer_telephone.to_alipay_dict()
             else:
                 params['buyer_telephone'] = self.buyer_telephone
+        if self.can_link:
+            if hasattr(self.can_link, 'to_alipay_dict'):
+                params['can_link'] = self.can_link.to_alipay_dict()
+            else:
+                params['can_link'] = self.can_link
         if self.creator:
             if hasattr(self.creator, 'to_alipay_dict'):
                 params['creator'] = self.creator.to_alipay_dict()
@@ -491,6 +524,11 @@ class ArInvoiceOpenApiResponse(object):
                 params['last_moder'] = self.last_moder.to_alipay_dict()
             else:
                 params['last_moder'] = self.last_moder
+        if self.linked_amt:
+            if hasattr(self.linked_amt, 'to_alipay_dict'):
+                params['linked_amt'] = self.linked_amt.to_alipay_dict()
+            else:
+                params['linked_amt'] = self.linked_amt
         if self.mail_status:
             if hasattr(self.mail_status, 'to_alipay_dict'):
                 params['mail_status'] = self.mail_status.to_alipay_dict()
@@ -501,6 +539,11 @@ class ArInvoiceOpenApiResponse(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.no_bill_invoice_flag:
+            if hasattr(self.no_bill_invoice_flag, 'to_alipay_dict'):
+                params['no_bill_invoice_flag'] = self.no_bill_invoice_flag.to_alipay_dict()
+            else:
+                params['no_bill_invoice_flag'] = self.no_bill_invoice_flag
         if self.online:
             if hasattr(self.online, 'to_alipay_dict'):
                 params['online'] = self.online.to_alipay_dict()
@@ -587,6 +630,8 @@ class ArInvoiceOpenApiResponse(object):
             o.buyer_tax_no = d['buyer_tax_no']
         if 'buyer_telephone' in d:
             o.buyer_telephone = d['buyer_telephone']
+        if 'can_link' in d:
+            o.can_link = d['can_link']
         if 'creator' in d:
             o.creator = d['creator']
         if 'drawer' in d:
@@ -625,10 +670,14 @@ class ArInvoiceOpenApiResponse(object):
             o.ip_role_id = d['ip_role_id']
         if 'last_moder' in d:
             o.last_moder = d['last_moder']
+        if 'linked_amt' in d:
+            o.linked_amt = d['linked_amt']
         if 'mail_status' in d:
             o.mail_status = d['mail_status']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'no_bill_invoice_flag' in d:
+            o.no_bill_invoice_flag = d['no_bill_invoice_flag']
         if 'online' in d:
             o.online = d['online']
         if 'payee' in d:

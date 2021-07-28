@@ -11,6 +11,7 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMerchantOrderDigestUnlimitedBatchqueryResponse, self).__init__()
         self._has_next_page = None
+        self._next_end_time = None
         self._order_list = None
 
     @property
@@ -20,6 +21,13 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryResponse(AlipayResponse):
     @has_next_page.setter
     def has_next_page(self, value):
         self._has_next_page = value
+    @property
+    def next_end_time(self):
+        return self._next_end_time
+
+    @next_end_time.setter
+    def next_end_time(self, value):
+        self._next_end_time = value
     @property
     def order_list(self):
         return self._order_list
@@ -38,5 +46,7 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryResponse(AlipayResponse):
         response = super(AlipayMerchantOrderDigestUnlimitedBatchqueryResponse, self).parse_response_content(response_content)
         if 'has_next_page' in response:
             self.has_next_page = response['has_next_page']
+        if 'next_end_time' in response:
+            self.next_end_time = response['next_end_time']
         if 'order_list' in response:
             self.order_list = response['order_list']

@@ -10,7 +10,9 @@ from alipay.aop.api.domain.HelloBikePriceConstraint import HelloBikePriceConstra
 class AlipayDataAiserviceSmartpriceGetModel(object):
 
     def __init__(self):
+        self._ad_source = None
         self._base_price_cent = None
+        self._card_type_version = None
         self._channel = None
         self._city_code = None
         self._conditions = None
@@ -19,10 +21,20 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
         self._from = None
         self._high_price_cent = None
         self._lower_price_cent = None
+        self._plat_form = None
+        self._rank = None
         self._scene_code = None
+        self._system_code = None
         self._trace_id = None
         self._user_id = None
 
+    @property
+    def ad_source(self):
+        return self._ad_source
+
+    @ad_source.setter
+    def ad_source(self, value):
+        self._ad_source = value
     @property
     def base_price_cent(self):
         return self._base_price_cent
@@ -30,6 +42,13 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
     @base_price_cent.setter
     def base_price_cent(self, value):
         self._base_price_cent = value
+    @property
+    def card_type_version(self):
+        return self._card_type_version
+
+    @card_type_version.setter
+    def card_type_version(self, value):
+        self._card_type_version = value
     @property
     def channel(self):
         return self._channel
@@ -99,12 +118,33 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
     def lower_price_cent(self, value):
         self._lower_price_cent = value
     @property
+    def plat_form(self):
+        return self._plat_form
+
+    @plat_form.setter
+    def plat_form(self, value):
+        self._plat_form = value
+    @property
+    def rank(self):
+        return self._rank
+
+    @rank.setter
+    def rank(self, value):
+        self._rank = value
+    @property
     def scene_code(self):
         return self._scene_code
 
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def system_code(self):
+        return self._system_code
+
+    @system_code.setter
+    def system_code(self, value):
+        self._system_code = value
     @property
     def trace_id(self):
         return self._trace_id
@@ -123,11 +163,21 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ad_source:
+            if hasattr(self.ad_source, 'to_alipay_dict'):
+                params['ad_source'] = self.ad_source.to_alipay_dict()
+            else:
+                params['ad_source'] = self.ad_source
         if self.base_price_cent:
             if hasattr(self.base_price_cent, 'to_alipay_dict'):
                 params['base_price_cent'] = self.base_price_cent.to_alipay_dict()
             else:
                 params['base_price_cent'] = self.base_price_cent
+        if self.card_type_version:
+            if hasattr(self.card_type_version, 'to_alipay_dict'):
+                params['card_type_version'] = self.card_type_version.to_alipay_dict()
+            else:
+                params['card_type_version'] = self.card_type_version
         if self.channel:
             if hasattr(self.channel, 'to_alipay_dict'):
                 params['channel'] = self.channel.to_alipay_dict()
@@ -178,11 +228,26 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
                 params['lower_price_cent'] = self.lower_price_cent.to_alipay_dict()
             else:
                 params['lower_price_cent'] = self.lower_price_cent
+        if self.plat_form:
+            if hasattr(self.plat_form, 'to_alipay_dict'):
+                params['plat_form'] = self.plat_form.to_alipay_dict()
+            else:
+                params['plat_form'] = self.plat_form
+        if self.rank:
+            if hasattr(self.rank, 'to_alipay_dict'):
+                params['rank'] = self.rank.to_alipay_dict()
+            else:
+                params['rank'] = self.rank
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.system_code:
+            if hasattr(self.system_code, 'to_alipay_dict'):
+                params['system_code'] = self.system_code.to_alipay_dict()
+            else:
+                params['system_code'] = self.system_code
         if self.trace_id:
             if hasattr(self.trace_id, 'to_alipay_dict'):
                 params['trace_id'] = self.trace_id.to_alipay_dict()
@@ -200,8 +265,12 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
         if not d:
             return None
         o = AlipayDataAiserviceSmartpriceGetModel()
+        if 'ad_source' in d:
+            o.ad_source = d['ad_source']
         if 'base_price_cent' in d:
             o.base_price_cent = d['base_price_cent']
+        if 'card_type_version' in d:
+            o.card_type_version = d['card_type_version']
         if 'channel' in d:
             o.channel = d['channel']
         if 'city_code' in d:
@@ -218,8 +287,14 @@ class AlipayDataAiserviceSmartpriceGetModel(object):
             o.high_price_cent = d['high_price_cent']
         if 'lower_price_cent' in d:
             o.lower_price_cent = d['lower_price_cent']
+        if 'plat_form' in d:
+            o.plat_form = d['plat_form']
+        if 'rank' in d:
+            o.rank = d['rank']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'system_code' in d:
+            o.system_code = d['system_code']
         if 'trace_id' in d:
             o.trace_id = d['trace_id']
         if 'user_id' in d:

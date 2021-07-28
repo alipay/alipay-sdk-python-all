@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenMiniTemplateUsageQueryModel(object):
 
     def __init__(self):
+        self._bundle_id = None
         self._page_num = None
         self._page_size = None
         self._template_id = None
         self._template_version = None
 
+    @property
+    def bundle_id(self):
+        return self._bundle_id
+
+    @bundle_id.setter
+    def bundle_id(self, value):
+        self._bundle_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -45,6 +53,11 @@ class AlipayOpenMiniTemplateUsageQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bundle_id:
+            if hasattr(self.bundle_id, 'to_alipay_dict'):
+                params['bundle_id'] = self.bundle_id.to_alipay_dict()
+            else:
+                params['bundle_id'] = self.bundle_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayOpenMiniTemplateUsageQueryModel(object):
         if not d:
             return None
         o = AlipayOpenMiniTemplateUsageQueryModel()
+        if 'bundle_id' in d:
+            o.bundle_id = d['bundle_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

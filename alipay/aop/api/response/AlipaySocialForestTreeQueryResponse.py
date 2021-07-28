@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TreeData import TreeData
+from alipay.aop.api.domain.TreeDetailData import TreeDetailData
 
 
 class AlipaySocialForestTreeQueryResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class AlipaySocialForestTreeQueryResponse(AlipayResponse):
         super(AlipaySocialForestTreeQueryResponse, self).__init__()
         self._forest_status = None
         self._tree_datas = None
+        self._tree_detail_data = None
 
     @property
     def forest_status(self):
@@ -33,6 +35,19 @@ class AlipaySocialForestTreeQueryResponse(AlipayResponse):
                     self._tree_datas.append(i)
                 else:
                     self._tree_datas.append(TreeData.from_alipay_dict(i))
+    @property
+    def tree_detail_data(self):
+        return self._tree_detail_data
+
+    @tree_detail_data.setter
+    def tree_detail_data(self, value):
+        if isinstance(value, list):
+            self._tree_detail_data = list()
+            for i in value:
+                if isinstance(i, TreeDetailData):
+                    self._tree_detail_data.append(i)
+                else:
+                    self._tree_detail_data.append(TreeDetailData.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipaySocialForestTreeQueryResponse, self).parse_response_content(response_content)
@@ -40,3 +55,5 @@ class AlipaySocialForestTreeQueryResponse(AlipayResponse):
             self.forest_status = response['forest_status']
         if 'tree_datas' in response:
             self.tree_datas = response['tree_datas']
+        if 'tree_detail_data' in response:
+            self.tree_detail_data = response['tree_detail_data']

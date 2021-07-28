@@ -18,6 +18,8 @@ class MiniAppVersionBaseInfo(object):
         self._gray_start_time = None
         self._inst_code = None
         self._mini_app_id = None
+        self._new_package_url = None
+        self._new_plugin_url = None
         self._offline_time = None
         self._package_url = None
         self._plugin_url = None
@@ -99,6 +101,20 @@ class MiniAppVersionBaseInfo(object):
     @mini_app_id.setter
     def mini_app_id(self, value):
         self._mini_app_id = value
+    @property
+    def new_package_url(self):
+        return self._new_package_url
+
+    @new_package_url.setter
+    def new_package_url(self, value):
+        self._new_package_url = value
+    @property
+    def new_plugin_url(self):
+        return self._new_plugin_url
+
+    @new_plugin_url.setter
+    def new_plugin_url(self, value):
+        self._new_plugin_url = value
     @property
     def offline_time(self):
         return self._offline_time
@@ -223,6 +239,16 @@ class MiniAppVersionBaseInfo(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.new_package_url:
+            if hasattr(self.new_package_url, 'to_alipay_dict'):
+                params['new_package_url'] = self.new_package_url.to_alipay_dict()
+            else:
+                params['new_package_url'] = self.new_package_url
+        if self.new_plugin_url:
+            if hasattr(self.new_plugin_url, 'to_alipay_dict'):
+                params['new_plugin_url'] = self.new_plugin_url.to_alipay_dict()
+            else:
+                params['new_plugin_url'] = self.new_plugin_url
         if self.offline_time:
             if hasattr(self.offline_time, 'to_alipay_dict'):
                 params['offline_time'] = self.offline_time.to_alipay_dict()
@@ -300,6 +326,10 @@ class MiniAppVersionBaseInfo(object):
             o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'new_package_url' in d:
+            o.new_package_url = d['new_package_url']
+        if 'new_plugin_url' in d:
+            o.new_plugin_url = d['new_plugin_url']
         if 'offline_time' in d:
             o.offline_time = d['offline_time']
         if 'package_url' in d:

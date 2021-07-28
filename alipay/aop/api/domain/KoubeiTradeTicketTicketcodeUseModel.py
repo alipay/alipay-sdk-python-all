@@ -9,6 +9,7 @@ class KoubeiTradeTicketTicketcodeUseModel(object):
 
     def __init__(self):
         self._code_type = None
+        self._ext = None
         self._gmt_biz = None
         self._order_no = None
         self._quantity = None
@@ -24,6 +25,13 @@ class KoubeiTradeTicketTicketcodeUseModel(object):
     @code_type.setter
     def code_type(self, value):
         self._code_type = value
+    @property
+    def ext(self):
+        return self._ext
+
+    @ext.setter
+    def ext(self, value):
+        self._ext = value
     @property
     def gmt_biz(self):
         return self._gmt_biz
@@ -82,6 +90,11 @@ class KoubeiTradeTicketTicketcodeUseModel(object):
                 params['code_type'] = self.code_type.to_alipay_dict()
             else:
                 params['code_type'] = self.code_type
+        if self.ext:
+            if hasattr(self.ext, 'to_alipay_dict'):
+                params['ext'] = self.ext.to_alipay_dict()
+            else:
+                params['ext'] = self.ext
         if self.gmt_biz:
             if hasattr(self.gmt_biz, 'to_alipay_dict'):
                 params['gmt_biz'] = self.gmt_biz.to_alipay_dict()
@@ -126,6 +139,8 @@ class KoubeiTradeTicketTicketcodeUseModel(object):
         o = KoubeiTradeTicketTicketcodeUseModel()
         if 'code_type' in d:
             o.code_type = d['code_type']
+        if 'ext' in d:
+            o.ext = d['ext']
         if 'gmt_biz' in d:
             o.gmt_biz = d['gmt_biz']
         if 'order_no' in d:

@@ -10,9 +10,12 @@ from alipay.aop.api.domain.ItemSkuCreateInfo import ItemSkuCreateInfo
 class AntMerchantExpandItemCreateModel(object):
 
     def __init__(self):
+        self._detail_url = None
         self._ext_info = None
+        self._external_item_id = None
         self._front_category_id = None
         self._label_list = None
+        self._main_pic = None
         self._name = None
         self._scene = None
         self._sku_list = None
@@ -20,12 +23,26 @@ class AntMerchantExpandItemCreateModel(object):
         self._target_type = None
 
     @property
+    def detail_url(self):
+        return self._detail_url
+
+    @detail_url.setter
+    def detail_url(self, value):
+        self._detail_url = value
+    @property
     def ext_info(self):
         return self._ext_info
 
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def external_item_id(self):
+        return self._external_item_id
+
+    @external_item_id.setter
+    def external_item_id(self, value):
+        self._external_item_id = value
     @property
     def front_category_id(self):
         return self._front_category_id
@@ -46,6 +63,13 @@ class AntMerchantExpandItemCreateModel(object):
                     self._label_list.append(i)
                 else:
                     self._label_list.append(ItemLabelCreateInfo.from_alipay_dict(i))
+    @property
+    def main_pic(self):
+        return self._main_pic
+
+    @main_pic.setter
+    def main_pic(self, value):
+        self._main_pic = value
     @property
     def name(self):
         return self._name
@@ -91,11 +115,21 @@ class AntMerchantExpandItemCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.detail_url:
+            if hasattr(self.detail_url, 'to_alipay_dict'):
+                params['detail_url'] = self.detail_url.to_alipay_dict()
+            else:
+                params['detail_url'] = self.detail_url
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.external_item_id:
+            if hasattr(self.external_item_id, 'to_alipay_dict'):
+                params['external_item_id'] = self.external_item_id.to_alipay_dict()
+            else:
+                params['external_item_id'] = self.external_item_id
         if self.front_category_id:
             if hasattr(self.front_category_id, 'to_alipay_dict'):
                 params['front_category_id'] = self.front_category_id.to_alipay_dict()
@@ -111,6 +145,11 @@ class AntMerchantExpandItemCreateModel(object):
                 params['label_list'] = self.label_list.to_alipay_dict()
             else:
                 params['label_list'] = self.label_list
+        if self.main_pic:
+            if hasattr(self.main_pic, 'to_alipay_dict'):
+                params['main_pic'] = self.main_pic.to_alipay_dict()
+            else:
+                params['main_pic'] = self.main_pic
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -148,12 +187,18 @@ class AntMerchantExpandItemCreateModel(object):
         if not d:
             return None
         o = AntMerchantExpandItemCreateModel()
+        if 'detail_url' in d:
+            o.detail_url = d['detail_url']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'external_item_id' in d:
+            o.external_item_id = d['external_item_id']
         if 'front_category_id' in d:
             o.front_category_id = d['front_category_id']
         if 'label_list' in d:
             o.label_list = d['label_list']
+        if 'main_pic' in d:
+            o.main_pic = d['main_pic']
         if 'name' in d:
             o.name = d['name']
         if 'scene' in d:

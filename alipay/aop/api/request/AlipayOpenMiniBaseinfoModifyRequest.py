@@ -17,6 +17,7 @@ class AlipayOpenMiniBaseinfoModifyRequest(object):
         self._app_english_name = None
         self._app_name = None
         self._app_slogan = None
+        self._mini_category_ids = None
         self._service_email = None
         self._service_phone = None
         self._app_logo = None
@@ -72,6 +73,13 @@ class AlipayOpenMiniBaseinfoModifyRequest(object):
     @app_slogan.setter
     def app_slogan(self, value):
         self._app_slogan = value
+    @property
+    def mini_category_ids(self):
+        return self._mini_category_ids
+
+    @mini_category_ids.setter
+    def mini_category_ids(self, value):
+        self._mini_category_ids = value
     @property
     def service_email(self):
         return self._service_email
@@ -199,6 +207,11 @@ class AlipayOpenMiniBaseinfoModifyRequest(object):
                 params['app_slogan'] = json.dumps(obj=self.app_slogan.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['app_slogan'] = self.app_slogan
+        if self.mini_category_ids:
+            if hasattr(self.mini_category_ids, 'to_alipay_dict'):
+                params['mini_category_ids'] = json.dumps(obj=self.mini_category_ids.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_category_ids'] = self.mini_category_ids
         if self.service_email:
             if hasattr(self.service_email, 'to_alipay_dict'):
                 params['service_email'] = json.dumps(obj=self.service_email.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

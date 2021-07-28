@@ -13,6 +13,7 @@ class MybankCreditLoantradeRepayBudgetQueryResponse(AlipayResponse):
         self._loan_ar_no = None
         self._should_repay_fee = None
         self._should_repay_int = None
+        self._should_repay_penalty = None
         self._should_repay_pre_fee = None
         self._should_repay_prin = None
 
@@ -45,6 +46,13 @@ class MybankCreditLoantradeRepayBudgetQueryResponse(AlipayResponse):
     def should_repay_int(self, value):
         self._should_repay_int = value
     @property
+    def should_repay_penalty(self):
+        return self._should_repay_penalty
+
+    @should_repay_penalty.setter
+    def should_repay_penalty(self, value):
+        self._should_repay_penalty = value
+    @property
     def should_repay_pre_fee(self):
         return self._should_repay_pre_fee
 
@@ -69,6 +77,8 @@ class MybankCreditLoantradeRepayBudgetQueryResponse(AlipayResponse):
             self.should_repay_fee = response['should_repay_fee']
         if 'should_repay_int' in response:
             self.should_repay_int = response['should_repay_int']
+        if 'should_repay_penalty' in response:
+            self.should_repay_penalty = response['should_repay_penalty']
         if 'should_repay_pre_fee' in response:
             self.should_repay_pre_fee = response['should_repay_pre_fee']
         if 'should_repay_prin' in response:

@@ -12,6 +12,7 @@ class AlipayCommerceKidsAccountConsultModel(object):
         self._child_cert_no = None
         self._child_cert_type = None
         self._info_source = None
+        self._operator_uid = None
         self._parent_uid = None
         self._scene_code = None
 
@@ -39,6 +40,13 @@ class AlipayCommerceKidsAccountConsultModel(object):
             self._info_source = value
         else:
             self._info_source = InfoSource.from_alipay_dict(value)
+    @property
+    def operator_uid(self):
+        return self._operator_uid
+
+    @operator_uid.setter
+    def operator_uid(self, value):
+        self._operator_uid = value
     @property
     def parent_uid(self):
         return self._parent_uid
@@ -72,6 +80,11 @@ class AlipayCommerceKidsAccountConsultModel(object):
                 params['info_source'] = self.info_source.to_alipay_dict()
             else:
                 params['info_source'] = self.info_source
+        if self.operator_uid:
+            if hasattr(self.operator_uid, 'to_alipay_dict'):
+                params['operator_uid'] = self.operator_uid.to_alipay_dict()
+            else:
+                params['operator_uid'] = self.operator_uid
         if self.parent_uid:
             if hasattr(self.parent_uid, 'to_alipay_dict'):
                 params['parent_uid'] = self.parent_uid.to_alipay_dict()
@@ -95,6 +108,8 @@ class AlipayCommerceKidsAccountConsultModel(object):
             o.child_cert_type = d['child_cert_type']
         if 'info_source' in d:
             o.info_source = d['info_source']
+        if 'operator_uid' in d:
+            o.operator_uid = d['operator_uid']
         if 'parent_uid' in d:
             o.parent_uid = d['parent_uid']
         if 'scene_code' in d:

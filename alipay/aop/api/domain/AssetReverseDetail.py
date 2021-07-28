@@ -12,6 +12,7 @@ class AssetReverseDetail(object):
         self._assign_item_id = None
         self._batch_no = None
         self._goods_status = None
+        self._success = None
 
     @property
     def amount(self):
@@ -41,6 +42,13 @@ class AssetReverseDetail(object):
     @goods_status.setter
     def goods_status(self, value):
         self._goods_status = value
+    @property
+    def success(self):
+        return self._success
+
+    @success.setter
+    def success(self, value):
+        self._success = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AssetReverseDetail(object):
                 params['goods_status'] = self.goods_status.to_alipay_dict()
             else:
                 params['goods_status'] = self.goods_status
+        if self.success:
+            if hasattr(self.success, 'to_alipay_dict'):
+                params['success'] = self.success.to_alipay_dict()
+            else:
+                params['success'] = self.success
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AssetReverseDetail(object):
             o.batch_no = d['batch_no']
         if 'goods_status' in d:
             o.goods_status = d['goods_status']
+        if 'success' in d:
+            o.success = d['success']
         return o
 
 

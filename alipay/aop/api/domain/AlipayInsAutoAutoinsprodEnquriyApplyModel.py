@@ -26,6 +26,7 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
         self._car_owner = None
         self._city_code = None
         self._insured = None
+        self._leads_id = None
         self._out_biz_no = None
 
     @property
@@ -123,6 +124,13 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
         else:
             self._insured = InsPerson.from_alipay_dict(value)
     @property
+    def leads_id(self):
+        return self._leads_id
+
+    @leads_id.setter
+    def leads_id(self, value):
+        self._leads_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -183,6 +191,11 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
                 params['insured'] = self.insured.to_alipay_dict()
             else:
                 params['insured'] = self.insured
+        if self.leads_id:
+            if hasattr(self.leads_id, 'to_alipay_dict'):
+                params['leads_id'] = self.leads_id.to_alipay_dict()
+            else:
+                params['leads_id'] = self.leads_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -215,6 +228,8 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
             o.city_code = d['city_code']
         if 'insured' in d:
             o.insured = d['insured']
+        if 'leads_id' in d:
+            o.leads_id = d['leads_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         return o

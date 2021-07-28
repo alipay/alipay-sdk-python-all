@@ -11,6 +11,7 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
         super(AlipayUserAgreementQueryResponse, self).__init__()
         self._agreement_no = None
         self._alipay_logon_id = None
+        self._credit_auth_mode = None
         self._device_id = None
         self._external_agreement_no = None
         self._external_logon_id = None
@@ -39,6 +40,13 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def credit_auth_mode(self):
+        return self._credit_auth_mode
+
+    @credit_auth_mode.setter
+    def credit_auth_mode(self, value):
+        self._credit_auth_mode = value
     @property
     def device_id(self):
         return self._device_id
@@ -137,6 +145,8 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'alipay_logon_id' in response:
             self.alipay_logon_id = response['alipay_logon_id']
+        if 'credit_auth_mode' in response:
+            self.credit_auth_mode = response['credit_auth_mode']
         if 'device_id' in response:
             self.device_id = response['device_id']
         if 'external_agreement_no' in response:

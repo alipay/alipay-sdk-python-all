@@ -10,6 +10,7 @@ class AlipayOpenMiniInnerversionGrayPublishModel(object):
     def __init__(self):
         self._app_origin = None
         self._app_version = None
+        self._beta_app_id_list = None
         self._bundle_id = None
         self._gray_strategy = None
         self._mini_app_id = None
@@ -29,6 +30,16 @@ class AlipayOpenMiniInnerversionGrayPublishModel(object):
     @app_version.setter
     def app_version(self, value):
         self._app_version = value
+    @property
+    def beta_app_id_list(self):
+        return self._beta_app_id_list
+
+    @beta_app_id_list.setter
+    def beta_app_id_list(self, value):
+        if isinstance(value, list):
+            self._beta_app_id_list = list()
+            for i in value:
+                self._beta_app_id_list.append(i)
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -71,6 +82,16 @@ class AlipayOpenMiniInnerversionGrayPublishModel(object):
                 params['app_version'] = self.app_version.to_alipay_dict()
             else:
                 params['app_version'] = self.app_version
+        if self.beta_app_id_list:
+            if isinstance(self.beta_app_id_list, list):
+                for i in range(0, len(self.beta_app_id_list)):
+                    element = self.beta_app_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.beta_app_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.beta_app_id_list, 'to_alipay_dict'):
+                params['beta_app_id_list'] = self.beta_app_id_list.to_alipay_dict()
+            else:
+                params['beta_app_id_list'] = self.beta_app_id_list
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -102,6 +123,8 @@ class AlipayOpenMiniInnerversionGrayPublishModel(object):
             o.app_origin = d['app_origin']
         if 'app_version' in d:
             o.app_version = d['app_version']
+        if 'beta_app_id_list' in d:
+            o.beta_app_id_list = d['beta_app_id_list']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'gray_strategy' in d:

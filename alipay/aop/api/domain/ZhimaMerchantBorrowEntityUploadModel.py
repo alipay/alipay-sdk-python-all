@@ -16,6 +16,7 @@ class ZhimaMerchantBorrowEntityUploadModel(object):
         self._contact_number = None
         self._entity_code = None
         self._entity_name = None
+        self._ext_properties = None
         self._latitude = None
         self._longitude = None
         self._office_hours_desc = None
@@ -80,6 +81,13 @@ class ZhimaMerchantBorrowEntityUploadModel(object):
     @entity_name.setter
     def entity_name(self, value):
         self._entity_name = value
+    @property
+    def ext_properties(self):
+        return self._ext_properties
+
+    @ext_properties.setter
+    def ext_properties(self, value):
+        self._ext_properties = value
     @property
     def latitude(self):
         return self._latitude
@@ -173,6 +181,11 @@ class ZhimaMerchantBorrowEntityUploadModel(object):
                 params['entity_name'] = self.entity_name.to_alipay_dict()
             else:
                 params['entity_name'] = self.entity_name
+        if self.ext_properties:
+            if hasattr(self.ext_properties, 'to_alipay_dict'):
+                params['ext_properties'] = self.ext_properties.to_alipay_dict()
+            else:
+                params['ext_properties'] = self.ext_properties
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -231,6 +244,8 @@ class ZhimaMerchantBorrowEntityUploadModel(object):
             o.entity_code = d['entity_code']
         if 'entity_name' in d:
             o.entity_name = d['entity_name']
+        if 'ext_properties' in d:
+            o.ext_properties = d['ext_properties']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

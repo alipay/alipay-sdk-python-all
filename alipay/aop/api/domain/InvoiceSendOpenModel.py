@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InvoiceItemOpenModel import InvoiceItemOpenModel
 from alipay.aop.api.domain.InvoiceTitleOpenModel import InvoiceTitleOpenModel
+from alipay.aop.api.domain.EinvTrade import EinvTrade
 
 
 class InvoiceSendOpenModel(object):
@@ -18,6 +19,7 @@ class InvoiceSendOpenModel(object):
         self._extend_fields = None
         self._file_download_type = None
         self._file_download_url = None
+        self._financial_electronic_type = None
         self._invoice_code = None
         self._invoice_content = None
         self._invoice_date = None
@@ -37,6 +39,7 @@ class InvoiceSendOpenModel(object):
         self._payee_register_no = None
         self._sum_amount = None
         self._tax_amount = None
+        self._trade_list = None
         self._user_id = None
 
     @property
@@ -95,6 +98,13 @@ class InvoiceSendOpenModel(object):
     @file_download_url.setter
     def file_download_url(self, value):
         self._file_download_url = value
+    @property
+    def financial_electronic_type(self):
+        return self._financial_electronic_type
+
+    @financial_electronic_type.setter
+    def financial_electronic_type(self, value):
+        self._financial_electronic_type = value
     @property
     def invoice_code(self):
         return self._invoice_code
@@ -238,6 +248,19 @@ class InvoiceSendOpenModel(object):
     def tax_amount(self, value):
         self._tax_amount = value
     @property
+    def trade_list(self):
+        return self._trade_list
+
+    @trade_list.setter
+    def trade_list(self, value):
+        if isinstance(value, list):
+            self._trade_list = list()
+            for i in value:
+                if isinstance(i, EinvTrade):
+                    self._trade_list.append(i)
+                else:
+                    self._trade_list.append(EinvTrade.from_alipay_dict(i))
+    @property
     def user_id(self):
         return self._user_id
 
@@ -288,6 +311,11 @@ class InvoiceSendOpenModel(object):
                 params['file_download_url'] = self.file_download_url.to_alipay_dict()
             else:
                 params['file_download_url'] = self.file_download_url
+        if self.financial_electronic_type:
+            if hasattr(self.financial_electronic_type, 'to_alipay_dict'):
+                params['financial_electronic_type'] = self.financial_electronic_type.to_alipay_dict()
+            else:
+                params['financial_electronic_type'] = self.financial_electronic_type
         if self.invoice_code:
             if hasattr(self.invoice_code, 'to_alipay_dict'):
                 params['invoice_code'] = self.invoice_code.to_alipay_dict()
@@ -388,6 +416,16 @@ class InvoiceSendOpenModel(object):
                 params['tax_amount'] = self.tax_amount.to_alipay_dict()
             else:
                 params['tax_amount'] = self.tax_amount
+        if self.trade_list:
+            if isinstance(self.trade_list, list):
+                for i in range(0, len(self.trade_list)):
+                    element = self.trade_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_list[i] = element.to_alipay_dict()
+            if hasattr(self.trade_list, 'to_alipay_dict'):
+                params['trade_list'] = self.trade_list.to_alipay_dict()
+            else:
+                params['trade_list'] = self.trade_list
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -416,6 +454,8 @@ class InvoiceSendOpenModel(object):
             o.file_download_type = d['file_download_type']
         if 'file_download_url' in d:
             o.file_download_url = d['file_download_url']
+        if 'financial_electronic_type' in d:
+            o.financial_electronic_type = d['financial_electronic_type']
         if 'invoice_code' in d:
             o.invoice_code = d['invoice_code']
         if 'invoice_content' in d:
@@ -454,6 +494,8 @@ class InvoiceSendOpenModel(object):
             o.sum_amount = d['sum_amount']
         if 'tax_amount' in d:
             o.tax_amount = d['tax_amount']
+        if 'trade_list' in d:
+            o.trade_list = d['trade_list']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

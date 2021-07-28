@@ -12,6 +12,7 @@ class ZhimaCreditPeUserOrderSyncModel(object):
         self._order_info = None
         self._out_order_no = None
         self._out_request_no = None
+        self._product_code = None
         self._seller_id = None
         self._sub_out_order_no = None
         self._trade_no = None
@@ -44,6 +45,13 @@ class ZhimaCreditPeUserOrderSyncModel(object):
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def seller_id(self):
         return self._seller_id
@@ -89,6 +97,11 @@ class ZhimaCreditPeUserOrderSyncModel(object):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -119,6 +132,8 @@ class ZhimaCreditPeUserOrderSyncModel(object):
             o.out_order_no = d['out_order_no']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'sub_out_order_no' in d:

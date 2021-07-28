@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.MiniAppCategoryInfo import MiniAppCategoryInfo
+from alipay.aop.api.domain.MiniAppCategoryInfo import MiniAppCategoryInfo
 from alipay.aop.api.domain.MiniPackageInfo import MiniPackageInfo
 from alipay.aop.api.domain.RegionInfo import RegionInfo
 
@@ -26,6 +27,7 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
         self._gray_strategy = None
         self._memo = None
         self._mini_app_category_info_list = None
+        self._mini_category_info_list = None
         self._package_info_list = None
         self._reject_reason = None
         self._scan_result = None
@@ -142,6 +144,19 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
                 else:
                     self._mini_app_category_info_list.append(MiniAppCategoryInfo.from_alipay_dict(i))
     @property
+    def mini_category_info_list(self):
+        return self._mini_category_info_list
+
+    @mini_category_info_list.setter
+    def mini_category_info_list(self, value):
+        if isinstance(value, list):
+            self._mini_category_info_list = list()
+            for i in value:
+                if isinstance(i, MiniAppCategoryInfo):
+                    self._mini_category_info_list.append(i)
+                else:
+                    self._mini_category_info_list.append(MiniAppCategoryInfo.from_alipay_dict(i))
+    @property
     def package_info_list(self):
         return self._package_info_list
 
@@ -257,6 +272,8 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
             self.memo = response['memo']
         if 'mini_app_category_info_list' in response:
             self.mini_app_category_info_list = response['mini_app_category_info_list']
+        if 'mini_category_info_list' in response:
+            self.mini_category_info_list = response['mini_category_info_list']
         if 'package_info_list' in response:
             self.package_info_list = response['package_info_list']
         if 'reject_reason' in response:

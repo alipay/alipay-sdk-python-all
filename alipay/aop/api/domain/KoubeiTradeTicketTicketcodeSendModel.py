@@ -14,6 +14,8 @@ class KoubeiTradeTicketTicketcodeSendModel(object):
         self._request_id = None
         self._send_order_no = None
         self._send_token = None
+        self._valid_end = None
+        self._valid_start = None
 
     @property
     def isv_ma_list(self):
@@ -56,6 +58,20 @@ class KoubeiTradeTicketTicketcodeSendModel(object):
     @send_token.setter
     def send_token(self, value):
         self._send_token = value
+    @property
+    def valid_end(self):
+        return self._valid_end
+
+    @valid_end.setter
+    def valid_end(self, value):
+        self._valid_end = value
+    @property
+    def valid_start(self):
+        return self._valid_start
+
+    @valid_start.setter
+    def valid_start(self, value):
+        self._valid_start = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +106,16 @@ class KoubeiTradeTicketTicketcodeSendModel(object):
                 params['send_token'] = self.send_token.to_alipay_dict()
             else:
                 params['send_token'] = self.send_token
+        if self.valid_end:
+            if hasattr(self.valid_end, 'to_alipay_dict'):
+                params['valid_end'] = self.valid_end.to_alipay_dict()
+            else:
+                params['valid_end'] = self.valid_end
+        if self.valid_start:
+            if hasattr(self.valid_start, 'to_alipay_dict'):
+                params['valid_start'] = self.valid_start.to_alipay_dict()
+            else:
+                params['valid_start'] = self.valid_start
         return params
 
     @staticmethod
@@ -107,6 +133,10 @@ class KoubeiTradeTicketTicketcodeSendModel(object):
             o.send_order_no = d['send_order_no']
         if 'send_token' in d:
             o.send_token = d['send_token']
+        if 'valid_end' in d:
+            o.valid_end = d['valid_end']
+        if 'valid_start' in d:
+            o.valid_start = d['valid_start']
         return o
 
 

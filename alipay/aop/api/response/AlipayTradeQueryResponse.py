@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
+from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -23,10 +24,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._buyer_user_type = None
         self._charge_amount = None
         self._charge_flags = None
+        self._credit_biz_order_id = None
+        self._credit_pay_mode = None
         self._discount_amount = None
         self._discount_goods_detail = None
         self._ext_infos = None
         self._fund_bill_list = None
+        self._hb_fq_pay_info = None
         self._industry_sepc_detail = None
         self._invoice_amount = None
         self._mdiscount_amount = None
@@ -36,6 +40,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._pay_currency = None
         self._point_amount = None
         self._receipt_amount = None
+        self._receipt_currency_type = None
         self._send_pay_date = None
         self._settle_amount = None
         self._settle_currency = None
@@ -131,6 +136,20 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def charge_flags(self, value):
         self._charge_flags = value
     @property
+    def credit_biz_order_id(self):
+        return self._credit_biz_order_id
+
+    @credit_biz_order_id.setter
+    def credit_biz_order_id(self, value):
+        self._credit_biz_order_id = value
+    @property
+    def credit_pay_mode(self):
+        return self._credit_pay_mode
+
+    @credit_pay_mode.setter
+    def credit_pay_mode(self, value):
+        self._credit_pay_mode = value
+    @property
     def discount_amount(self):
         return self._discount_amount
 
@@ -164,6 +183,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
                     self._fund_bill_list.append(i)
                 else:
                     self._fund_bill_list.append(TradeFundBill.from_alipay_dict(i))
+    @property
+    def hb_fq_pay_info(self):
+        return self._hb_fq_pay_info
+
+    @hb_fq_pay_info.setter
+    def hb_fq_pay_info(self, value):
+        if isinstance(value, HbFqPayInfo):
+            self._hb_fq_pay_info = value
+        else:
+            self._hb_fq_pay_info = HbFqPayInfo.from_alipay_dict(value)
     @property
     def industry_sepc_detail(self):
         return self._industry_sepc_detail
@@ -227,6 +256,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @receipt_amount.setter
     def receipt_amount(self, value):
         self._receipt_amount = value
+    @property
+    def receipt_currency_type(self):
+        return self._receipt_currency_type
+
+    @receipt_currency_type.setter
+    def receipt_currency_type(self, value):
+        self._receipt_currency_type = value
     @property
     def send_pay_date(self):
         return self._send_pay_date
@@ -373,6 +409,10 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.charge_amount = response['charge_amount']
         if 'charge_flags' in response:
             self.charge_flags = response['charge_flags']
+        if 'credit_biz_order_id' in response:
+            self.credit_biz_order_id = response['credit_biz_order_id']
+        if 'credit_pay_mode' in response:
+            self.credit_pay_mode = response['credit_pay_mode']
         if 'discount_amount' in response:
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
@@ -381,6 +421,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.ext_infos = response['ext_infos']
         if 'fund_bill_list' in response:
             self.fund_bill_list = response['fund_bill_list']
+        if 'hb_fq_pay_info' in response:
+            self.hb_fq_pay_info = response['hb_fq_pay_info']
         if 'industry_sepc_detail' in response:
             self.industry_sepc_detail = response['industry_sepc_detail']
         if 'invoice_amount' in response:
@@ -399,6 +441,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.point_amount = response['point_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
+        if 'receipt_currency_type' in response:
+            self.receipt_currency_type = response['receipt_currency_type']
         if 'send_pay_date' in response:
             self.send_pay_date = response['send_pay_date']
         if 'settle_amount' in response:

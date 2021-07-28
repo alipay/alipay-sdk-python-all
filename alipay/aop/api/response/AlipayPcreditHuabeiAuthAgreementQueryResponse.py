@@ -17,6 +17,7 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
         self._external_logon_id = None
         self._gmt_sign = None
         self._gmt_unsign = None
+        self._out_biz_type = None
         self._out_sign_no = None
         self._rest_freeze_amount = None
 
@@ -77,6 +78,13 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
     def gmt_unsign(self, value):
         self._gmt_unsign = value
     @property
+    def out_biz_type(self):
+        return self._out_biz_type
+
+    @out_biz_type.setter
+    def out_biz_type(self, value):
+        self._out_biz_type = value
+    @property
     def out_sign_no(self):
         return self._out_sign_no
 
@@ -109,6 +117,8 @@ class AlipayPcreditHuabeiAuthAgreementQueryResponse(AlipayResponse):
             self.gmt_sign = response['gmt_sign']
         if 'gmt_unsign' in response:
             self.gmt_unsign = response['gmt_unsign']
+        if 'out_biz_type' in response:
+            self.out_biz_type = response['out_biz_type']
         if 'out_sign_no' in response:
             self.out_sign_no = response['out_sign_no']
         if 'rest_freeze_amount' in response:

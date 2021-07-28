@@ -13,6 +13,7 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
         self._refer_result = None
         self._result_code = None
         self._result_message = None
+        self._risk_level = None
         self._wait_repayment_amount = None
         self._wait_repayment_order_count = None
         self._wait_repayment_order_infos = None
@@ -38,6 +39,13 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
     @result_message.setter
     def result_message(self, value):
         self._result_message = value
+    @property
+    def risk_level(self):
+        return self._risk_level
+
+    @risk_level.setter
+    def risk_level(self, value):
+        self._risk_level = value
     @property
     def wait_repayment_amount(self):
         return self._wait_repayment_amount
@@ -74,6 +82,8 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
             self.result_code = response['result_code']
         if 'result_message' in response:
             self.result_message = response['result_message']
+        if 'risk_level' in response:
+            self.risk_level = response['risk_level']
         if 'wait_repayment_amount' in response:
             self.wait_repayment_amount = response['wait_repayment_amount']
         if 'wait_repayment_order_count' in response:

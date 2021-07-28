@@ -23,6 +23,7 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
         self._order_status = None
         self._order_update_time = None
         self._out_biz_no = None
+        self._reactive_status = None
 
     @property
     def card_expiry_date(self):
@@ -129,6 +130,13 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def reactive_status(self):
+        return self._reactive_status
+
+    @reactive_status.setter
+    def reactive_status(self, value):
+        self._reactive_status = value
 
 
     def to_alipay_dict(self):
@@ -208,6 +216,11 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.reactive_status:
+            if hasattr(self.reactive_status, 'to_alipay_dict'):
+                params['reactive_status'] = self.reactive_status.to_alipay_dict()
+            else:
+                params['reactive_status'] = self.reactive_status
         return params
 
     @staticmethod
@@ -245,6 +258,8 @@ class AlipayCommerceTransportEtcApplySyncModel(object):
             o.order_update_time = d['order_update_time']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'reactive_status' in d:
+            o.reactive_status = d['reactive_status']
         return o
 
 

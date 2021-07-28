@@ -30,6 +30,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._legal_name = None
         self._license_auth_letter_image = None
         self._memo = None
+        self._new_shop_category = None
         self._out_door_images = None
         self._qualifications = None
         self._scene = None
@@ -174,6 +175,13 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     def memo(self, value):
         self._memo = value
     @property
+    def new_shop_category(self):
+        return self._new_shop_category
+
+    @new_shop_category.setter
+    def new_shop_category(self, value):
+        self._new_shop_category = value
+    @property
     def out_door_images(self):
         return self._out_door_images
 
@@ -280,6 +288,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.license_auth_letter_image = response['license_auth_letter_image']
         if 'memo' in response:
             self.memo = response['memo']
+        if 'new_shop_category' in response:
+            self.new_shop_category = response['new_shop_category']
         if 'out_door_images' in response:
             self.out_door_images = response['out_door_images']
         if 'qualifications' in response:

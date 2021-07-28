@@ -13,6 +13,8 @@ class AlipayEbppDetectCreateModel(object):
         self._data_from_type = None
         self._out_biz_no = None
         self._service_list = None
+        self._tinyapp_id = None
+        self._tinyapp_partner_id = None
 
     @property
     def biz_type(self):
@@ -48,6 +50,20 @@ class AlipayEbppDetectCreateModel(object):
                     self._service_list.append(i)
                 else:
                     self._service_list.append(DetectServiceEntity.from_alipay_dict(i))
+    @property
+    def tinyapp_id(self):
+        return self._tinyapp_id
+
+    @tinyapp_id.setter
+    def tinyapp_id(self, value):
+        self._tinyapp_id = value
+    @property
+    def tinyapp_partner_id(self):
+        return self._tinyapp_partner_id
+
+    @tinyapp_partner_id.setter
+    def tinyapp_partner_id(self, value):
+        self._tinyapp_partner_id = value
 
 
     def to_alipay_dict(self):
@@ -77,6 +93,16 @@ class AlipayEbppDetectCreateModel(object):
                 params['service_list'] = self.service_list.to_alipay_dict()
             else:
                 params['service_list'] = self.service_list
+        if self.tinyapp_id:
+            if hasattr(self.tinyapp_id, 'to_alipay_dict'):
+                params['tinyapp_id'] = self.tinyapp_id.to_alipay_dict()
+            else:
+                params['tinyapp_id'] = self.tinyapp_id
+        if self.tinyapp_partner_id:
+            if hasattr(self.tinyapp_partner_id, 'to_alipay_dict'):
+                params['tinyapp_partner_id'] = self.tinyapp_partner_id.to_alipay_dict()
+            else:
+                params['tinyapp_partner_id'] = self.tinyapp_partner_id
         return params
 
     @staticmethod
@@ -92,6 +118,10 @@ class AlipayEbppDetectCreateModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'service_list' in d:
             o.service_list = d['service_list']
+        if 'tinyapp_id' in d:
+            o.tinyapp_id = d['tinyapp_id']
+        if 'tinyapp_partner_id' in d:
+            o.tinyapp_partner_id = d['tinyapp_partner_id']
         return o
 
 

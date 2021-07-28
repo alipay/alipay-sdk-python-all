@@ -9,11 +9,13 @@ class AlipayOpenMiniInnerversionQueryModel(object):
 
     def __init__(self):
         self._bundle_id = None
+        self._bundle_ids = None
         self._first_sort_col = None
         self._first_sort_col_order = None
         self._group_status_list = None
         self._inst_code = None
         self._mini_app_id = None
+        self._mini_app_id_list = None
         self._page_num = None
         self._page_size = None
         self._version_list = None
@@ -25,6 +27,16 @@ class AlipayOpenMiniInnerversionQueryModel(object):
     @bundle_id.setter
     def bundle_id(self, value):
         self._bundle_id = value
+    @property
+    def bundle_ids(self):
+        return self._bundle_ids
+
+    @bundle_ids.setter
+    def bundle_ids(self, value):
+        if isinstance(value, list):
+            self._bundle_ids = list()
+            for i in value:
+                self._bundle_ids.append(i)
     @property
     def first_sort_col(self):
         return self._first_sort_col
@@ -64,6 +76,16 @@ class AlipayOpenMiniInnerversionQueryModel(object):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def mini_app_id_list(self):
+        return self._mini_app_id_list
+
+    @mini_app_id_list.setter
+    def mini_app_id_list(self, value):
+        if isinstance(value, list):
+            self._mini_app_id_list = list()
+            for i in value:
+                self._mini_app_id_list.append(i)
+    @property
     def page_num(self):
         return self._page_num
 
@@ -96,6 +118,16 @@ class AlipayOpenMiniInnerversionQueryModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.bundle_ids:
+            if isinstance(self.bundle_ids, list):
+                for i in range(0, len(self.bundle_ids)):
+                    element = self.bundle_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.bundle_ids[i] = element.to_alipay_dict()
+            if hasattr(self.bundle_ids, 'to_alipay_dict'):
+                params['bundle_ids'] = self.bundle_ids.to_alipay_dict()
+            else:
+                params['bundle_ids'] = self.bundle_ids
         if self.first_sort_col:
             if hasattr(self.first_sort_col, 'to_alipay_dict'):
                 params['first_sort_col'] = self.first_sort_col.to_alipay_dict()
@@ -126,6 +158,16 @@ class AlipayOpenMiniInnerversionQueryModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.mini_app_id_list:
+            if isinstance(self.mini_app_id_list, list):
+                for i in range(0, len(self.mini_app_id_list)):
+                    element = self.mini_app_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.mini_app_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.mini_app_id_list, 'to_alipay_dict'):
+                params['mini_app_id_list'] = self.mini_app_id_list.to_alipay_dict()
+            else:
+                params['mini_app_id_list'] = self.mini_app_id_list
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -155,6 +197,8 @@ class AlipayOpenMiniInnerversionQueryModel(object):
         o = AlipayOpenMiniInnerversionQueryModel()
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'bundle_ids' in d:
+            o.bundle_ids = d['bundle_ids']
         if 'first_sort_col' in d:
             o.first_sort_col = d['first_sort_col']
         if 'first_sort_col_order' in d:
@@ -165,6 +209,8 @@ class AlipayOpenMiniInnerversionQueryModel(object):
             o.inst_code = d['inst_code']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'mini_app_id_list' in d:
+            o.mini_app_id_list = d['mini_app_id_list']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

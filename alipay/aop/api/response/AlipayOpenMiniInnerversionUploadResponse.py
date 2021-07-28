@@ -14,6 +14,7 @@ class AlipayOpenMiniInnerversionUploadResponse(AlipayResponse):
         self._build_status = None
         self._build_version = None
         self._need_rotation = None
+        self._new_build_package_url = None
         self._package_id = None
         self._version_created = None
 
@@ -53,6 +54,13 @@ class AlipayOpenMiniInnerversionUploadResponse(AlipayResponse):
     def need_rotation(self, value):
         self._need_rotation = value
     @property
+    def new_build_package_url(self):
+        return self._new_build_package_url
+
+    @new_build_package_url.setter
+    def new_build_package_url(self, value):
+        self._new_build_package_url = value
+    @property
     def package_id(self):
         return self._package_id
 
@@ -79,6 +87,8 @@ class AlipayOpenMiniInnerversionUploadResponse(AlipayResponse):
             self.build_version = response['build_version']
         if 'need_rotation' in response:
             self.need_rotation = response['need_rotation']
+        if 'new_build_package_url' in response:
+            self.new_build_package_url = response['new_build_package_url']
         if 'package_id' in response:
             self.package_id = response['package_id']
         if 'version_created' in response:

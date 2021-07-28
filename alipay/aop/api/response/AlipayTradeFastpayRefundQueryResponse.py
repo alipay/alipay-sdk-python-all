@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.DepositBackInfo import DepositBackInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
 
@@ -11,6 +12,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeFastpayRefundQueryResponse, self).__init__()
+        self._deposit_back_info = None
         self._error_code = None
         self._gmt_refund_pay = None
         self._industry_sepc_detail = None
@@ -20,6 +22,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._present_refund_discount_amount = None
         self._present_refund_mdiscount_amount = None
         self._refund_amount = None
+        self._refund_channel_list = None
+        self._refund_channel_status = None
         self._refund_charge_amount = None
         self._refund_detail_item_list = None
         self._refund_reason = None
@@ -30,6 +34,16 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._total_amount = None
         self._trade_no = None
 
+    @property
+    def deposit_back_info(self):
+        return self._deposit_back_info
+
+    @deposit_back_info.setter
+    def deposit_back_info(self, value):
+        if isinstance(value, DepositBackInfo):
+            self._deposit_back_info = value
+        else:
+            self._deposit_back_info = DepositBackInfo.from_alipay_dict(value)
     @property
     def error_code(self):
         return self._error_code
@@ -93,6 +107,20 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     @refund_amount.setter
     def refund_amount(self, value):
         self._refund_amount = value
+    @property
+    def refund_channel_list(self):
+        return self._refund_channel_list
+
+    @refund_channel_list.setter
+    def refund_channel_list(self, value):
+        self._refund_channel_list = value
+    @property
+    def refund_channel_status(self):
+        return self._refund_channel_status
+
+    @refund_channel_status.setter
+    def refund_channel_status(self, value):
+        self._refund_channel_status = value
     @property
     def refund_charge_amount(self):
         return self._refund_charge_amount
@@ -171,6 +199,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeFastpayRefundQueryResponse, self).parse_response_content(response_content)
+        if 'deposit_back_info' in response:
+            self.deposit_back_info = response['deposit_back_info']
         if 'error_code' in response:
             self.error_code = response['error_code']
         if 'gmt_refund_pay' in response:
@@ -189,6 +219,10 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self.present_refund_mdiscount_amount = response['present_refund_mdiscount_amount']
         if 'refund_amount' in response:
             self.refund_amount = response['refund_amount']
+        if 'refund_channel_list' in response:
+            self.refund_channel_list = response['refund_channel_list']
+        if 'refund_channel_status' in response:
+            self.refund_channel_status = response['refund_channel_status']
         if 'refund_charge_amount' in response:
             self.refund_charge_amount = response['refund_charge_amount']
         if 'refund_detail_item_list' in response:

@@ -11,6 +11,7 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceMedicalCardQueryResponse, self).__init__()
         self._agreement_no = None
+        self._bind_status = None
         self._buyer_logon_id = None
         self._buyer_user_id = None
         self._card_org_name = None
@@ -22,6 +23,8 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
         self._medical_card_id = None
         self._medical_card_no = None
         self._medical_card_type = None
+        self._other_user_logon_id = None
+        self._other_user_status = None
         self._out_user_card_no = None
         self._out_user_name = None
         self._sign_status = None
@@ -33,6 +36,13 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def bind_status(self):
+        return self._bind_status
+
+    @bind_status.setter
+    def bind_status(self, value):
+        self._bind_status = value
     @property
     def buyer_logon_id(self):
         return self._buyer_logon_id
@@ -117,6 +127,20 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
     def medical_card_type(self, value):
         self._medical_card_type = value
     @property
+    def other_user_logon_id(self):
+        return self._other_user_logon_id
+
+    @other_user_logon_id.setter
+    def other_user_logon_id(self, value):
+        self._other_user_logon_id = value
+    @property
+    def other_user_status(self):
+        return self._other_user_status
+
+    @other_user_status.setter
+    def other_user_status(self, value):
+        self._other_user_status = value
+    @property
     def out_user_card_no(self):
         return self._out_user_card_no
 
@@ -142,6 +166,8 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
         response = super(AlipayCommerceMedicalCardQueryResponse, self).parse_response_content(response_content)
         if 'agreement_no' in response:
             self.agreement_no = response['agreement_no']
+        if 'bind_status' in response:
+            self.bind_status = response['bind_status']
         if 'buyer_logon_id' in response:
             self.buyer_logon_id = response['buyer_logon_id']
         if 'buyer_user_id' in response:
@@ -164,6 +190,10 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
             self.medical_card_no = response['medical_card_no']
         if 'medical_card_type' in response:
             self.medical_card_type = response['medical_card_type']
+        if 'other_user_logon_id' in response:
+            self.other_user_logon_id = response['other_user_logon_id']
+        if 'other_user_status' in response:
+            self.other_user_status = response['other_user_status']
         if 'out_user_card_no' in response:
             self.out_user_card_no = response['out_user_card_no']
         if 'out_user_name' in response:

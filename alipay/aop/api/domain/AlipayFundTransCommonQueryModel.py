@@ -11,6 +11,7 @@ class AlipayFundTransCommonQueryModel(object):
         self._biz_scene = None
         self._order_id = None
         self._out_biz_no = None
+        self._pay_fund_order_id = None
         self._product_code = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayFundTransCommonQueryModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def pay_fund_order_id(self):
+        return self._pay_fund_order_id
+
+    @pay_fund_order_id.setter
+    def pay_fund_order_id(self, value):
+        self._pay_fund_order_id = value
     @property
     def product_code(self):
         return self._product_code
@@ -60,6 +68,11 @@ class AlipayFundTransCommonQueryModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.pay_fund_order_id:
+            if hasattr(self.pay_fund_order_id, 'to_alipay_dict'):
+                params['pay_fund_order_id'] = self.pay_fund_order_id.to_alipay_dict()
+            else:
+                params['pay_fund_order_id'] = self.pay_fund_order_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayFundTransCommonQueryModel(object):
             o.order_id = d['order_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'pay_fund_order_id' in d:
+            o.pay_fund_order_id = d['pay_fund_order_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

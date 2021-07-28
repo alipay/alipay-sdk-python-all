@@ -9,7 +9,9 @@ class MybankCreditLoanapplyPromotionDynamicurlGetModel(object):
 
     def __init__(self):
         self._arrangement_no = None
+        self._biz_scene = None
         self._dept_code = None
+        self._inst_staff_no = None
         self._op_ch_code = None
         self._passiver_cert_name = None
         self._passiver_cert_no = None
@@ -27,12 +29,26 @@ class MybankCreditLoanapplyPromotionDynamicurlGetModel(object):
     def arrangement_no(self, value):
         self._arrangement_no = value
     @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
+    @property
     def dept_code(self):
         return self._dept_code
 
     @dept_code.setter
     def dept_code(self, value):
         self._dept_code = value
+    @property
+    def inst_staff_no(self):
+        return self._inst_staff_no
+
+    @inst_staff_no.setter
+    def inst_staff_no(self, value):
+        self._inst_staff_no = value
     @property
     def op_ch_code(self):
         return self._op_ch_code
@@ -98,11 +114,21 @@ class MybankCreditLoanapplyPromotionDynamicurlGetModel(object):
                 params['arrangement_no'] = self.arrangement_no.to_alipay_dict()
             else:
                 params['arrangement_no'] = self.arrangement_no
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.dept_code:
             if hasattr(self.dept_code, 'to_alipay_dict'):
                 params['dept_code'] = self.dept_code.to_alipay_dict()
             else:
                 params['dept_code'] = self.dept_code
+        if self.inst_staff_no:
+            if hasattr(self.inst_staff_no, 'to_alipay_dict'):
+                params['inst_staff_no'] = self.inst_staff_no.to_alipay_dict()
+            else:
+                params['inst_staff_no'] = self.inst_staff_no
         if self.op_ch_code:
             if hasattr(self.op_ch_code, 'to_alipay_dict'):
                 params['op_ch_code'] = self.op_ch_code.to_alipay_dict()
@@ -152,8 +178,12 @@ class MybankCreditLoanapplyPromotionDynamicurlGetModel(object):
         o = MybankCreditLoanapplyPromotionDynamicurlGetModel()
         if 'arrangement_no' in d:
             o.arrangement_no = d['arrangement_no']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'dept_code' in d:
             o.dept_code = d['dept_code']
+        if 'inst_staff_no' in d:
+            o.inst_staff_no = d['inst_staff_no']
         if 'op_ch_code' in d:
             o.op_ch_code = d['op_ch_code']
         if 'passiver_cert_name' in d:

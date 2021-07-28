@@ -14,11 +14,15 @@ class MybankPaymentTradeNormalpayOrderQueryResponse(AlipayResponse):
         self._biz_no = None
         self._currency_value = None
         self._ext_info = None
+        self._order_no = None
+        self._order_status = None
         self._order_type = None
         self._pay_amount = None
+        self._pay_time = None
         self._paying_amount = None
         self._receipt_amount = None
         self._receipting_amount = None
+        self._refund_amount = None
         self._request_accept_time = None
         self._request_no = None
 
@@ -58,6 +62,20 @@ class MybankPaymentTradeNormalpayOrderQueryResponse(AlipayResponse):
     def ext_info(self, value):
         self._ext_info = value
     @property
+    def order_no(self):
+        return self._order_no
+
+    @order_no.setter
+    def order_no(self, value):
+        self._order_no = value
+    @property
+    def order_status(self):
+        return self._order_status
+
+    @order_status.setter
+    def order_status(self, value):
+        self._order_status = value
+    @property
     def order_type(self):
         return self._order_type
 
@@ -71,6 +89,13 @@ class MybankPaymentTradeNormalpayOrderQueryResponse(AlipayResponse):
     @pay_amount.setter
     def pay_amount(self, value):
         self._pay_amount = value
+    @property
+    def pay_time(self):
+        return self._pay_time
+
+    @pay_time.setter
+    def pay_time(self, value):
+        self._pay_time = value
     @property
     def paying_amount(self):
         return self._paying_amount
@@ -92,6 +117,13 @@ class MybankPaymentTradeNormalpayOrderQueryResponse(AlipayResponse):
     @receipting_amount.setter
     def receipting_amount(self, value):
         self._receipting_amount = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
     @property
     def request_accept_time(self):
         return self._request_accept_time
@@ -119,16 +151,24 @@ class MybankPaymentTradeNormalpayOrderQueryResponse(AlipayResponse):
             self.currency_value = response['currency_value']
         if 'ext_info' in response:
             self.ext_info = response['ext_info']
+        if 'order_no' in response:
+            self.order_no = response['order_no']
+        if 'order_status' in response:
+            self.order_status = response['order_status']
         if 'order_type' in response:
             self.order_type = response['order_type']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
+        if 'pay_time' in response:
+            self.pay_time = response['pay_time']
         if 'paying_amount' in response:
             self.paying_amount = response['paying_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
         if 'receipting_amount' in response:
             self.receipting_amount = response['receipting_amount']
+        if 'refund_amount' in response:
+            self.refund_amount = response['refund_amount']
         if 'request_accept_time' in response:
             self.request_accept_time = response['request_accept_time']
         if 'request_no' in response:

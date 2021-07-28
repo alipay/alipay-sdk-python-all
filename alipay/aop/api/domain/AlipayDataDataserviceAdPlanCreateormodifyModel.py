@@ -15,6 +15,7 @@ class AlipayDataDataserviceAdPlanCreateormodifyModel(object):
         self._extend_info = None
         self._plan_name = None
         self._plan_outer_id = None
+        self._plan_status = None
         self._principal_id = None
         self._sell_mode = None
         self._start_date = None
@@ -70,6 +71,13 @@ class AlipayDataDataserviceAdPlanCreateormodifyModel(object):
     @plan_outer_id.setter
     def plan_outer_id(self, value):
         self._plan_outer_id = value
+    @property
+    def plan_status(self):
+        return self._plan_status
+
+    @plan_status.setter
+    def plan_status(self, value):
+        self._plan_status = value
     @property
     def principal_id(self):
         return self._principal_id
@@ -144,6 +152,11 @@ class AlipayDataDataserviceAdPlanCreateormodifyModel(object):
                 params['plan_outer_id'] = self.plan_outer_id.to_alipay_dict()
             else:
                 params['plan_outer_id'] = self.plan_outer_id
+        if self.plan_status:
+            if hasattr(self.plan_status, 'to_alipay_dict'):
+                params['plan_status'] = self.plan_status.to_alipay_dict()
+            else:
+                params['plan_status'] = self.plan_status
         if self.principal_id:
             if hasattr(self.principal_id, 'to_alipay_dict'):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayDataDataserviceAdPlanCreateormodifyModel(object):
             o.plan_name = d['plan_name']
         if 'plan_outer_id' in d:
             o.plan_outer_id = d['plan_outer_id']
+        if 'plan_status' in d:
+            o.plan_status = d['plan_status']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
         if 'sell_mode' in d:

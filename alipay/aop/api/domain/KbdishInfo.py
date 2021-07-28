@@ -19,6 +19,7 @@ class KbdishInfo(object):
         self._default_in_carts = None
         self._default_in_carts_detail = None
         self._dish_cuisine = None
+        self._dish_detail_img_list = None
         self._dish_id = None
         self._dish_img = None
         self._dish_name = None
@@ -94,6 +95,16 @@ class KbdishInfo(object):
     @dish_cuisine.setter
     def dish_cuisine(self, value):
         self._dish_cuisine = value
+    @property
+    def dish_detail_img_list(self):
+        return self._dish_detail_img_list
+
+    @dish_detail_img_list.setter
+    def dish_detail_img_list(self, value):
+        if isinstance(value, list):
+            self._dish_detail_img_list = list()
+            for i in value:
+                self._dish_detail_img_list.append(i)
     @property
     def dish_id(self):
         return self._dish_id
@@ -332,6 +343,16 @@ class KbdishInfo(object):
                 params['dish_cuisine'] = self.dish_cuisine.to_alipay_dict()
             else:
                 params['dish_cuisine'] = self.dish_cuisine
+        if self.dish_detail_img_list:
+            if isinstance(self.dish_detail_img_list, list):
+                for i in range(0, len(self.dish_detail_img_list)):
+                    element = self.dish_detail_img_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.dish_detail_img_list[i] = element.to_alipay_dict()
+            if hasattr(self.dish_detail_img_list, 'to_alipay_dict'):
+                params['dish_detail_img_list'] = self.dish_detail_img_list.to_alipay_dict()
+            else:
+                params['dish_detail_img_list'] = self.dish_detail_img_list
         if self.dish_id:
             if hasattr(self.dish_id, 'to_alipay_dict'):
                 params['dish_id'] = self.dish_id.to_alipay_dict()
@@ -498,6 +519,8 @@ class KbdishInfo(object):
             o.default_in_carts_detail = d['default_in_carts_detail']
         if 'dish_cuisine' in d:
             o.dish_cuisine = d['dish_cuisine']
+        if 'dish_detail_img_list' in d:
+            o.dish_detail_img_list = d['dish_detail_img_list']
         if 'dish_id' in d:
             o.dish_id = d['dish_id']
         if 'dish_img' in d:

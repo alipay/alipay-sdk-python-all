@@ -12,6 +12,7 @@ class AlipayMarketingMaterialImageUploadRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._file_key = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -30,6 +31,13 @@ class AlipayMarketingMaterialImageUploadRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def file_key(self):
+        return self._file_key
+
+    @file_key.setter
+    def file_key(self, value):
+        self._file_key = value
 
     @property
     def file_content(self):
@@ -118,6 +126,11 @@ class AlipayMarketingMaterialImageUploadRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.file_key:
+            if hasattr(self.file_key, 'to_alipay_dict'):
+                params['file_key'] = json.dumps(obj=self.file_key.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['file_key'] = self.file_key
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

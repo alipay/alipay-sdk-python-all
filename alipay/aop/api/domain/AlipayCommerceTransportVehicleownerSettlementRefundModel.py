@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceTransportVehicleownerSettlementRefundModel(object):
 
     def __init__(self):
+        self._biz_agreement_no = None
         self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
         self._trade_no = None
 
+    @property
+    def biz_agreement_no(self):
+        return self._biz_agreement_no
+
+    @biz_agreement_no.setter
+    def biz_agreement_no(self, value):
+        self._biz_agreement_no = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -45,6 +53,11 @@ class AlipayCommerceTransportVehicleownerSettlementRefundModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_agreement_no:
+            if hasattr(self.biz_agreement_no, 'to_alipay_dict'):
+                params['biz_agreement_no'] = self.biz_agreement_no.to_alipay_dict()
+            else:
+                params['biz_agreement_no'] = self.biz_agreement_no
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayCommerceTransportVehicleownerSettlementRefundModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportVehicleownerSettlementRefundModel()
+        if 'biz_agreement_no' in d:
+            o.biz_agreement_no = d['biz_agreement_no']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'out_trade_no' in d:

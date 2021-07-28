@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class AlipayOpenMiniAmpeDevicemodelAddModel(object):
+
+    def __init__(self):
+        self._hardware_params = None
+        self._model_name = None
+        self._model_no = None
+        self._product_id = None
+        self._scene_code = None
+
+    @property
+    def hardware_params(self):
+        return self._hardware_params
+
+    @hardware_params.setter
+    def hardware_params(self, value):
+        self._hardware_params = value
+    @property
+    def model_name(self):
+        return self._model_name
+
+    @model_name.setter
+    def model_name(self, value):
+        self._model_name = value
+    @property
+    def model_no(self):
+        return self._model_no
+
+    @model_no.setter
+    def model_no(self, value):
+        self._model_no = value
+    @property
+    def product_id(self):
+        return self._product_id
+
+    @product_id.setter
+    def product_id(self, value):
+        self._product_id = value
+    @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.hardware_params:
+            if hasattr(self.hardware_params, 'to_alipay_dict'):
+                params['hardware_params'] = self.hardware_params.to_alipay_dict()
+            else:
+                params['hardware_params'] = self.hardware_params
+        if self.model_name:
+            if hasattr(self.model_name, 'to_alipay_dict'):
+                params['model_name'] = self.model_name.to_alipay_dict()
+            else:
+                params['model_name'] = self.model_name
+        if self.model_no:
+            if hasattr(self.model_no, 'to_alipay_dict'):
+                params['model_no'] = self.model_no.to_alipay_dict()
+            else:
+                params['model_no'] = self.model_no
+        if self.product_id:
+            if hasattr(self.product_id, 'to_alipay_dict'):
+                params['product_id'] = self.product_id.to_alipay_dict()
+            else:
+                params['product_id'] = self.product_id
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AlipayOpenMiniAmpeDevicemodelAddModel()
+        if 'hardware_params' in d:
+            o.hardware_params = d['hardware_params']
+        if 'model_name' in d:
+            o.model_name = d['model_name']
+        if 'model_no' in d:
+            o.model_no = d['model_no']
+        if 'product_id' in d:
+            o.product_id = d['product_id']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
+        return o
+
+

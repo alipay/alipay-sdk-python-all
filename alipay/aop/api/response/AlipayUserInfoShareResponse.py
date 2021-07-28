@@ -49,6 +49,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._nick_name = None
         self._organization_code = None
         self._person_birthday = None
+        self._person_birthday_without_year = None
         self._person_cert_expiry_date = None
         self._person_pictures = None
         self._phone = None
@@ -332,6 +333,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def person_birthday(self, value):
         self._person_birthday = value
     @property
+    def person_birthday_without_year(self):
+        return self._person_birthday_without_year
+
+    @person_birthday_without_year.setter
+    def person_birthday_without_year(self, value):
+        self._person_birthday_without_year = value
+    @property
     def person_cert_expiry_date(self):
         return self._person_cert_expiry_date
 
@@ -489,6 +497,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.organization_code = response['organization_code']
         if 'person_birthday' in response:
             self.person_birthday = response['person_birthday']
+        if 'person_birthday_without_year' in response:
+            self.person_birthday_without_year = response['person_birthday_without_year']
         if 'person_cert_expiry_date' in response:
             self.person_cert_expiry_date = response['person_cert_expiry_date']
         if 'person_pictures' in response:

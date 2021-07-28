@@ -10,6 +10,7 @@ class KoubeiCateringDishMaterialQueryModel(object):
     def __init__(self):
         self._material_id = None
         self._merchant_id = None
+        self._out_material_id = None
         self._page_no = None
         self._page_size = None
 
@@ -27,6 +28,13 @@ class KoubeiCateringDishMaterialQueryModel(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def out_material_id(self):
+        return self._out_material_id
+
+    @out_material_id.setter
+    def out_material_id(self, value):
+        self._out_material_id = value
     @property
     def page_no(self):
         return self._page_no
@@ -55,6 +63,11 @@ class KoubeiCateringDishMaterialQueryModel(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.out_material_id:
+            if hasattr(self.out_material_id, 'to_alipay_dict'):
+                params['out_material_id'] = self.out_material_id.to_alipay_dict()
+            else:
+                params['out_material_id'] = self.out_material_id
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class KoubeiCateringDishMaterialQueryModel(object):
             o.material_id = d['material_id']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'out_material_id' in d:
+            o.out_material_id = d['out_material_id']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

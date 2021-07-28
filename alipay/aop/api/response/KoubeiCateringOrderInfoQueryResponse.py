@@ -18,6 +18,7 @@ class KoubeiCateringOrderInfoQueryResponse(AlipayResponse):
         self._dinner_type = None
         self._dish_details = None
         self._ext_info = None
+        self._external_shop_id = None
         self._member_flag = None
         self._memo = None
         self._merchant_id = None
@@ -93,6 +94,13 @@ class KoubeiCateringOrderInfoQueryResponse(AlipayResponse):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def external_shop_id(self):
+        return self._external_shop_id
+
+    @external_shop_id.setter
+    def external_shop_id(self, value):
+        self._external_shop_id = value
     @property
     def member_flag(self):
         return self._member_flag
@@ -249,6 +257,8 @@ class KoubeiCateringOrderInfoQueryResponse(AlipayResponse):
             self.dish_details = response['dish_details']
         if 'ext_info' in response:
             self.ext_info = response['ext_info']
+        if 'external_shop_id' in response:
+            self.external_shop_id = response['external_shop_id']
         if 'member_flag' in response:
             self.member_flag = response['member_flag']
         if 'memo' in response:

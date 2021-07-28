@@ -10,6 +10,7 @@ class AlipayTradeBatchSettleResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeBatchSettleResponse, self).__init__()
         self._gmt_create = None
+        self._out_request_no = None
         self._result_code = None
         self._settle_no = None
 
@@ -20,6 +21,13 @@ class AlipayTradeBatchSettleResponse(AlipayResponse):
     @gmt_create.setter
     def gmt_create(self, value):
         self._gmt_create = value
+    @property
+    def out_request_no(self):
+        return self._out_request_no
+
+    @out_request_no.setter
+    def out_request_no(self, value):
+        self._out_request_no = value
     @property
     def result_code(self):
         return self._result_code
@@ -39,6 +47,8 @@ class AlipayTradeBatchSettleResponse(AlipayResponse):
         response = super(AlipayTradeBatchSettleResponse, self).parse_response_content(response_content)
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
+        if 'out_request_no' in response:
+            self.out_request_no = response['out_request_no']
         if 'result_code' in response:
             self.result_code = response['result_code']
         if 'settle_no' in response:

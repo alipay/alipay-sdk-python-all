@@ -10,6 +10,7 @@ class AccPayeeInfo(object):
     def __init__(self):
         self._payee_account = None
         self._payee_name = None
+        self._payee_type = None
 
     @property
     def payee_account(self):
@@ -25,6 +26,13 @@ class AccPayeeInfo(object):
     @payee_name.setter
     def payee_name(self, value):
         self._payee_name = value
+    @property
+    def payee_type(self):
+        return self._payee_type
+
+    @payee_type.setter
+    def payee_type(self, value):
+        self._payee_type = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AccPayeeInfo(object):
                 params['payee_name'] = self.payee_name.to_alipay_dict()
             else:
                 params['payee_name'] = self.payee_name
+        if self.payee_type:
+            if hasattr(self.payee_type, 'to_alipay_dict'):
+                params['payee_type'] = self.payee_type.to_alipay_dict()
+            else:
+                params['payee_type'] = self.payee_type
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AccPayeeInfo(object):
             o.payee_account = d['payee_account']
         if 'payee_name' in d:
             o.payee_name = d['payee_name']
+        if 'payee_type' in d:
+            o.payee_type = d['payee_type']
         return o
 
 

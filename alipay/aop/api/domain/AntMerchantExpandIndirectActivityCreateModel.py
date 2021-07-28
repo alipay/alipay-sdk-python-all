@@ -12,13 +12,18 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
         self._activity_type = None
         self._alias_name = None
         self._bank_account = None
+        self._bank_account_prove = None
+        self._bank_cooperation_agreement = None
         self._business_license_pic = None
         self._certificate_file = None
         self._charge_sample = None
         self._checkstand_pic = None
         self._diplomatic_note = None
         self._indoor_pic = None
+        self._industry_code = None
+        self._industry_qualification_image = None
         self._institutional_organization_pic = None
+        self._legal_person_license_auth_pic = None
         self._legal_person_pic = None
         self._legal_person_registration_pic = None
         self._medical_instrument_practice_license_pic = None
@@ -54,6 +59,20 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             self._bank_account = value
         else:
             self._bank_account = BankCardInfo.from_alipay_dict(value)
+    @property
+    def bank_account_prove(self):
+        return self._bank_account_prove
+
+    @bank_account_prove.setter
+    def bank_account_prove(self, value):
+        self._bank_account_prove = value
+    @property
+    def bank_cooperation_agreement(self):
+        return self._bank_cooperation_agreement
+
+    @bank_cooperation_agreement.setter
+    def bank_cooperation_agreement(self, value):
+        self._bank_cooperation_agreement = value
     @property
     def business_license_pic(self):
         return self._business_license_pic
@@ -97,12 +116,33 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     def indoor_pic(self, value):
         self._indoor_pic = value
     @property
+    def industry_code(self):
+        return self._industry_code
+
+    @industry_code.setter
+    def industry_code(self, value):
+        self._industry_code = value
+    @property
+    def industry_qualification_image(self):
+        return self._industry_qualification_image
+
+    @industry_qualification_image.setter
+    def industry_qualification_image(self, value):
+        self._industry_qualification_image = value
+    @property
     def institutional_organization_pic(self):
         return self._institutional_organization_pic
 
     @institutional_organization_pic.setter
     def institutional_organization_pic(self, value):
         self._institutional_organization_pic = value
+    @property
+    def legal_person_license_auth_pic(self):
+        return self._legal_person_license_auth_pic
+
+    @legal_person_license_auth_pic.setter
+    def legal_person_license_auth_pic(self, value):
+        self._legal_person_license_auth_pic = value
     @property
     def legal_person_pic(self):
         return self._legal_person_pic
@@ -192,6 +232,16 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['bank_account'] = self.bank_account.to_alipay_dict()
             else:
                 params['bank_account'] = self.bank_account
+        if self.bank_account_prove:
+            if hasattr(self.bank_account_prove, 'to_alipay_dict'):
+                params['bank_account_prove'] = self.bank_account_prove.to_alipay_dict()
+            else:
+                params['bank_account_prove'] = self.bank_account_prove
+        if self.bank_cooperation_agreement:
+            if hasattr(self.bank_cooperation_agreement, 'to_alipay_dict'):
+                params['bank_cooperation_agreement'] = self.bank_cooperation_agreement.to_alipay_dict()
+            else:
+                params['bank_cooperation_agreement'] = self.bank_cooperation_agreement
         if self.business_license_pic:
             if hasattr(self.business_license_pic, 'to_alipay_dict'):
                 params['business_license_pic'] = self.business_license_pic.to_alipay_dict()
@@ -222,11 +272,26 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['indoor_pic'] = self.indoor_pic.to_alipay_dict()
             else:
                 params['indoor_pic'] = self.indoor_pic
+        if self.industry_code:
+            if hasattr(self.industry_code, 'to_alipay_dict'):
+                params['industry_code'] = self.industry_code.to_alipay_dict()
+            else:
+                params['industry_code'] = self.industry_code
+        if self.industry_qualification_image:
+            if hasattr(self.industry_qualification_image, 'to_alipay_dict'):
+                params['industry_qualification_image'] = self.industry_qualification_image.to_alipay_dict()
+            else:
+                params['industry_qualification_image'] = self.industry_qualification_image
         if self.institutional_organization_pic:
             if hasattr(self.institutional_organization_pic, 'to_alipay_dict'):
                 params['institutional_organization_pic'] = self.institutional_organization_pic.to_alipay_dict()
             else:
                 params['institutional_organization_pic'] = self.institutional_organization_pic
+        if self.legal_person_license_auth_pic:
+            if hasattr(self.legal_person_license_auth_pic, 'to_alipay_dict'):
+                params['legal_person_license_auth_pic'] = self.legal_person_license_auth_pic.to_alipay_dict()
+            else:
+                params['legal_person_license_auth_pic'] = self.legal_person_license_auth_pic
         if self.legal_person_pic:
             if hasattr(self.legal_person_pic, 'to_alipay_dict'):
                 params['legal_person_pic'] = self.legal_person_pic.to_alipay_dict()
@@ -290,6 +355,10 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.alias_name = d['alias_name']
         if 'bank_account' in d:
             o.bank_account = d['bank_account']
+        if 'bank_account_prove' in d:
+            o.bank_account_prove = d['bank_account_prove']
+        if 'bank_cooperation_agreement' in d:
+            o.bank_cooperation_agreement = d['bank_cooperation_agreement']
         if 'business_license_pic' in d:
             o.business_license_pic = d['business_license_pic']
         if 'certificate_file' in d:
@@ -302,8 +371,14 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.diplomatic_note = d['diplomatic_note']
         if 'indoor_pic' in d:
             o.indoor_pic = d['indoor_pic']
+        if 'industry_code' in d:
+            o.industry_code = d['industry_code']
+        if 'industry_qualification_image' in d:
+            o.industry_qualification_image = d['industry_qualification_image']
         if 'institutional_organization_pic' in d:
             o.institutional_organization_pic = d['institutional_organization_pic']
+        if 'legal_person_license_auth_pic' in d:
+            o.legal_person_license_auth_pic = d['legal_person_license_auth_pic']
         if 'legal_person_pic' in d:
             o.legal_person_pic = d['legal_person_pic']
         if 'legal_person_registration_pic' in d:

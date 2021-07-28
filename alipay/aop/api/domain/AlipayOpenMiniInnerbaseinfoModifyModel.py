@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenMiniInnerbaseinfoModifyModel(object):
 
     def __init__(self):
+        self._app_alias_name = None
         self._app_category_ids = None
         self._app_desc = None
         self._app_english_name = None
@@ -20,6 +21,13 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
         self._service_email = None
         self._service_phone = None
 
+    @property
+    def app_alias_name(self):
+        return self._app_alias_name
+
+    @app_alias_name.setter
+    def app_alias_name(self, value):
+        self._app_alias_name = value
     @property
     def app_category_ids(self):
         return self._app_category_ids
@@ -101,6 +109,11 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_alias_name:
+            if hasattr(self.app_alias_name, 'to_alipay_dict'):
+                params['app_alias_name'] = self.app_alias_name.to_alipay_dict()
+            else:
+                params['app_alias_name'] = self.app_alias_name
         if self.app_category_ids:
             if hasattr(self.app_category_ids, 'to_alipay_dict'):
                 params['app_category_ids'] = self.app_category_ids.to_alipay_dict()
@@ -163,6 +176,8 @@ class AlipayOpenMiniInnerbaseinfoModifyModel(object):
         if not d:
             return None
         o = AlipayOpenMiniInnerbaseinfoModifyModel()
+        if 'app_alias_name' in d:
+            o.app_alias_name = d['app_alias_name']
         if 'app_category_ids' in d:
             o.app_category_ids = d['app_category_ids']
         if 'app_desc' in d:

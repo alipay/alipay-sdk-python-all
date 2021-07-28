@@ -10,6 +10,7 @@ class MybankCreditSceneprodPrepaymentApplyResponse(AlipayResponse):
     def __init__(self):
         super(MybankCreditSceneprodPrepaymentApplyResponse, self).__init__()
         self._accept_repay = None
+        self._biz_type = None
         self._fail_reason = None
         self._prepayment_amt = None
         self._prepayment_apply_no = None
@@ -27,6 +28,13 @@ class MybankCreditSceneprodPrepaymentApplyResponse(AlipayResponse):
     @accept_repay.setter
     def accept_repay(self, value):
         self._accept_repay = value
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def fail_reason(self):
         return self._fail_reason
@@ -95,6 +103,8 @@ class MybankCreditSceneprodPrepaymentApplyResponse(AlipayResponse):
         response = super(MybankCreditSceneprodPrepaymentApplyResponse, self).parse_response_content(response_content)
         if 'accept_repay' in response:
             self.accept_repay = response['accept_repay']
+        if 'biz_type' in response:
+            self.biz_type = response['biz_type']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
         if 'prepayment_amt' in response:

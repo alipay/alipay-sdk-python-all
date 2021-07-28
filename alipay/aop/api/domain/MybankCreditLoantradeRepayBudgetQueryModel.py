@@ -15,6 +15,7 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
         self._ip_id = None
         self._ip_role_id = None
         self._loan_ar_no = None
+        self._repay_scene = None
 
     @property
     def apply_repay_prin(self):
@@ -65,6 +66,13 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
     @loan_ar_no.setter
     def loan_ar_no(self, value):
         self._loan_ar_no = value
+    @property
+    def repay_scene(self):
+        return self._repay_scene
+
+    @repay_scene.setter
+    def repay_scene(self, value):
+        self._repay_scene = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
                 params['loan_ar_no'] = self.loan_ar_no.to_alipay_dict()
             else:
                 params['loan_ar_no'] = self.loan_ar_no
+        if self.repay_scene:
+            if hasattr(self.repay_scene, 'to_alipay_dict'):
+                params['repay_scene'] = self.repay_scene.to_alipay_dict()
+            else:
+                params['repay_scene'] = self.repay_scene
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class MybankCreditLoantradeRepayBudgetQueryModel(object):
             o.ip_role_id = d['ip_role_id']
         if 'loan_ar_no' in d:
             o.loan_ar_no = d['loan_ar_no']
+        if 'repay_scene' in d:
+            o.repay_scene = d['repay_scene']
         return o
 
 

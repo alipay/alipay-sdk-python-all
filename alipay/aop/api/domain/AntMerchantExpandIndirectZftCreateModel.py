@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SettleCardInfo import SettleCardInfo
 from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ContactInfo import ContactInfo
+from alipay.aop.api.domain.DefaultSettleRule import DefaultSettleRule
 from alipay.aop.api.domain.MerchantInvoiceInfo import MerchantInvoiceInfo
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 from alipay.aop.api.domain.SiteInfo import SiteInfo
@@ -25,7 +26,9 @@ class AntMerchantExpandIndirectZftCreateModel(object):
         self._cert_no = None
         self._cert_type = None
         self._contact_infos = None
+        self._default_settle_rule = None
         self._external_id = None
+        self._in_door_images = None
         self._invoice_info = None
         self._legal_cert_back_image = None
         self._legal_cert_front_image = None
@@ -137,12 +140,32 @@ class AntMerchantExpandIndirectZftCreateModel(object):
                 else:
                     self._contact_infos.append(ContactInfo.from_alipay_dict(i))
     @property
+    def default_settle_rule(self):
+        return self._default_settle_rule
+
+    @default_settle_rule.setter
+    def default_settle_rule(self, value):
+        if isinstance(value, DefaultSettleRule):
+            self._default_settle_rule = value
+        else:
+            self._default_settle_rule = DefaultSettleRule.from_alipay_dict(value)
+    @property
     def external_id(self):
         return self._external_id
 
     @external_id.setter
     def external_id(self, value):
         self._external_id = value
+    @property
+    def in_door_images(self):
+        return self._in_door_images
+
+    @in_door_images.setter
+    def in_door_images(self, value):
+        if isinstance(value, list):
+            self._in_door_images = list()
+            for i in value:
+                self._in_door_images.append(i)
     @property
     def invoice_info(self):
         return self._invoice_info
@@ -352,11 +375,26 @@ class AntMerchantExpandIndirectZftCreateModel(object):
                 params['contact_infos'] = self.contact_infos.to_alipay_dict()
             else:
                 params['contact_infos'] = self.contact_infos
+        if self.default_settle_rule:
+            if hasattr(self.default_settle_rule, 'to_alipay_dict'):
+                params['default_settle_rule'] = self.default_settle_rule.to_alipay_dict()
+            else:
+                params['default_settle_rule'] = self.default_settle_rule
         if self.external_id:
             if hasattr(self.external_id, 'to_alipay_dict'):
                 params['external_id'] = self.external_id.to_alipay_dict()
             else:
                 params['external_id'] = self.external_id
+        if self.in_door_images:
+            if isinstance(self.in_door_images, list):
+                for i in range(0, len(self.in_door_images)):
+                    element = self.in_door_images[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.in_door_images[i] = element.to_alipay_dict()
+            if hasattr(self.in_door_images, 'to_alipay_dict'):
+                params['in_door_images'] = self.in_door_images.to_alipay_dict()
+            else:
+                params['in_door_images'] = self.in_door_images
         if self.invoice_info:
             if hasattr(self.invoice_info, 'to_alipay_dict'):
                 params['invoice_info'] = self.invoice_info.to_alipay_dict()
@@ -491,8 +529,12 @@ class AntMerchantExpandIndirectZftCreateModel(object):
             o.cert_type = d['cert_type']
         if 'contact_infos' in d:
             o.contact_infos = d['contact_infos']
+        if 'default_settle_rule' in d:
+            o.default_settle_rule = d['default_settle_rule']
         if 'external_id' in d:
             o.external_id = d['external_id']
+        if 'in_door_images' in d:
+            o.in_door_images = d['in_door_images']
         if 'invoice_info' in d:
             o.invoice_info = d['invoice_info']
         if 'legal_cert_back_image' in d:

@@ -12,15 +12,26 @@ class AlipayOpenAgentMobilepaySignRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._app_market = None
         self._app_name = None
+        self._app_status = None
+        self._app_test_account = None
+        self._app_test_account_password = None
+        self._app_type = None
         self._batch_no = None
+        self._business_license_mobile = None
         self._business_license_no = None
         self._date_limitation = None
+        self._download_link = None
         self._long_term = None
         self._mcc_code = None
+        self._app_auth_pic = None
         self._app_demo = None
         self._business_license_auth_pic = None
         self._business_license_pic = None
+        self._home_screenshot = None
+        self._in_app_screenshot = None
+        self._pay_screenshot = None
         self._special_license_pic = None
         self._version = "1.0"
         self._terminal_type = None
@@ -40,6 +51,16 @@ class AlipayOpenAgentMobilepaySignRequest(object):
         self._biz_model = value
 
     @property
+    def app_market(self):
+        return self._app_market
+
+    @app_market.setter
+    def app_market(self, value):
+        if isinstance(value, list):
+            self._app_market = list()
+            for i in value:
+                self._app_market.append(i)
+    @property
     def app_name(self):
         return self._app_name
 
@@ -47,12 +68,50 @@ class AlipayOpenAgentMobilepaySignRequest(object):
     def app_name(self, value):
         self._app_name = value
     @property
+    def app_status(self):
+        return self._app_status
+
+    @app_status.setter
+    def app_status(self, value):
+        self._app_status = value
+    @property
+    def app_test_account(self):
+        return self._app_test_account
+
+    @app_test_account.setter
+    def app_test_account(self, value):
+        self._app_test_account = value
+    @property
+    def app_test_account_password(self):
+        return self._app_test_account_password
+
+    @app_test_account_password.setter
+    def app_test_account_password(self, value):
+        self._app_test_account_password = value
+    @property
+    def app_type(self):
+        return self._app_type
+
+    @app_type.setter
+    def app_type(self, value):
+        if isinstance(value, list):
+            self._app_type = list()
+            for i in value:
+                self._app_type.append(i)
+    @property
     def batch_no(self):
         return self._batch_no
 
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def business_license_mobile(self):
+        return self._business_license_mobile
+
+    @business_license_mobile.setter
+    def business_license_mobile(self, value):
+        self._business_license_mobile = value
     @property
     def business_license_no(self):
         return self._business_license_no
@@ -68,6 +127,13 @@ class AlipayOpenAgentMobilepaySignRequest(object):
     def date_limitation(self, value):
         self._date_limitation = value
     @property
+    def download_link(self):
+        return self._download_link
+
+    @download_link.setter
+    def download_link(self, value):
+        self._download_link = value
+    @property
     def long_term(self):
         return self._long_term
 
@@ -82,6 +148,15 @@ class AlipayOpenAgentMobilepaySignRequest(object):
     def mcc_code(self, value):
         self._mcc_code = value
 
+    @property
+    def app_auth_pic(self):
+        return self._app_auth_pic
+
+    @app_auth_pic.setter
+    def app_auth_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._app_auth_pic = value
     @property
     def app_demo(self):
         return self._app_demo
@@ -109,6 +184,33 @@ class AlipayOpenAgentMobilepaySignRequest(object):
         if not isinstance(value, FileItem):
             return
         self._business_license_pic = value
+    @property
+    def home_screenshot(self):
+        return self._home_screenshot
+
+    @home_screenshot.setter
+    def home_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._home_screenshot = value
+    @property
+    def in_app_screenshot(self):
+        return self._in_app_screenshot
+
+    @in_app_screenshot.setter
+    def in_app_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._in_app_screenshot = value
+    @property
+    def pay_screenshot(self):
+        return self._pay_screenshot
+
+    @pay_screenshot.setter
+    def pay_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._pay_screenshot = value
     @property
     def special_license_pic(self):
         return self._special_license_pic
@@ -196,16 +298,50 @@ class AlipayOpenAgentMobilepaySignRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.app_market:
+            if isinstance(self.app_market, list):
+                for i in range(0, len(self.app_market)):
+                    element = self.app_market[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.app_market[i] = element.to_alipay_dict()
+                params['app_market'] = json.dumps(obj=self.app_market, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.app_name:
             if hasattr(self.app_name, 'to_alipay_dict'):
                 params['app_name'] = json.dumps(obj=self.app_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['app_name'] = self.app_name
+        if self.app_status:
+            if hasattr(self.app_status, 'to_alipay_dict'):
+                params['app_status'] = json.dumps(obj=self.app_status.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['app_status'] = self.app_status
+        if self.app_test_account:
+            if hasattr(self.app_test_account, 'to_alipay_dict'):
+                params['app_test_account'] = json.dumps(obj=self.app_test_account.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['app_test_account'] = self.app_test_account
+        if self.app_test_account_password:
+            if hasattr(self.app_test_account_password, 'to_alipay_dict'):
+                params['app_test_account_password'] = json.dumps(obj=self.app_test_account_password.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['app_test_account_password'] = self.app_test_account_password
+        if self.app_type:
+            if isinstance(self.app_type, list):
+                for i in range(0, len(self.app_type)):
+                    element = self.app_type[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.app_type[i] = element.to_alipay_dict()
+                params['app_type'] = json.dumps(obj=self.app_type, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.batch_no:
             if hasattr(self.batch_no, 'to_alipay_dict'):
                 params['batch_no'] = json.dumps(obj=self.batch_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['batch_no'] = self.batch_no
+        if self.business_license_mobile:
+            if hasattr(self.business_license_mobile, 'to_alipay_dict'):
+                params['business_license_mobile'] = json.dumps(obj=self.business_license_mobile.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['business_license_mobile'] = self.business_license_mobile
         if self.business_license_no:
             if hasattr(self.business_license_no, 'to_alipay_dict'):
                 params['business_license_no'] = json.dumps(obj=self.business_license_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -216,6 +352,11 @@ class AlipayOpenAgentMobilepaySignRequest(object):
                 params['date_limitation'] = json.dumps(obj=self.date_limitation.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['date_limitation'] = self.date_limitation
+        if self.download_link:
+            if hasattr(self.download_link, 'to_alipay_dict'):
+                params['download_link'] = json.dumps(obj=self.download_link.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['download_link'] = self.download_link
         if self.long_term:
             if hasattr(self.long_term, 'to_alipay_dict'):
                 params['long_term'] = json.dumps(obj=self.long_term.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -242,12 +383,20 @@ class AlipayOpenAgentMobilepaySignRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.app_auth_pic:
+            multipart_params['app_auth_pic'] = self.app_auth_pic
         if self.app_demo:
             multipart_params['app_demo'] = self.app_demo
         if self.business_license_auth_pic:
             multipart_params['business_license_auth_pic'] = self.business_license_auth_pic
         if self.business_license_pic:
             multipart_params['business_license_pic'] = self.business_license_pic
+        if self.home_screenshot:
+            multipart_params['home_screenshot'] = self.home_screenshot
+        if self.in_app_screenshot:
+            multipart_params['in_app_screenshot'] = self.in_app_screenshot
+        if self.pay_screenshot:
+            multipart_params['pay_screenshot'] = self.pay_screenshot
         if self.special_license_pic:
             multipart_params['special_license_pic'] = self.special_license_pic
         return multipart_params

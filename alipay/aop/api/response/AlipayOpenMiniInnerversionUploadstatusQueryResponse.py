@@ -12,7 +12,11 @@ class AlipayOpenMiniInnerversionUploadstatusQueryResponse(AlipayResponse):
         self._build_info = None
         self._build_package_url = None
         self._build_status = None
+        self._log_url = None
         self._need_rotation = None
+        self._new_build_package_url = None
+        self._new_result_url = None
+        self._result_url = None
         self._version_created = None
 
     @property
@@ -37,12 +41,40 @@ class AlipayOpenMiniInnerversionUploadstatusQueryResponse(AlipayResponse):
     def build_status(self, value):
         self._build_status = value
     @property
+    def log_url(self):
+        return self._log_url
+
+    @log_url.setter
+    def log_url(self, value):
+        self._log_url = value
+    @property
     def need_rotation(self):
         return self._need_rotation
 
     @need_rotation.setter
     def need_rotation(self, value):
         self._need_rotation = value
+    @property
+    def new_build_package_url(self):
+        return self._new_build_package_url
+
+    @new_build_package_url.setter
+    def new_build_package_url(self, value):
+        self._new_build_package_url = value
+    @property
+    def new_result_url(self):
+        return self._new_result_url
+
+    @new_result_url.setter
+    def new_result_url(self, value):
+        self._new_result_url = value
+    @property
+    def result_url(self):
+        return self._result_url
+
+    @result_url.setter
+    def result_url(self, value):
+        self._result_url = value
     @property
     def version_created(self):
         return self._version_created
@@ -59,7 +91,15 @@ class AlipayOpenMiniInnerversionUploadstatusQueryResponse(AlipayResponse):
             self.build_package_url = response['build_package_url']
         if 'build_status' in response:
             self.build_status = response['build_status']
+        if 'log_url' in response:
+            self.log_url = response['log_url']
         if 'need_rotation' in response:
             self.need_rotation = response['need_rotation']
+        if 'new_build_package_url' in response:
+            self.new_build_package_url = response['new_build_package_url']
+        if 'new_result_url' in response:
+            self.new_result_url = response['new_result_url']
+        if 'result_url' in response:
+            self.result_url = response['result_url']
         if 'version_created' in response:
             self.version_created = response['version_created']

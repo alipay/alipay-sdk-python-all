@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SignParams import SignParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
+from alipay.aop.api.domain.GoodsDetail import GoodsDetail
 from alipay.aop.api.domain.InvoiceInfo import InvoiceInfo
 from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
@@ -22,6 +23,7 @@ class AlipayTradeAppPayModel(object):
         self._enable_pay_channels = None
         self._ext_user_info = None
         self._extend_params = None
+        self._goods_detail = None
         self._goods_type = None
         self._invoice_info = None
         self._merchant_order_no = None
@@ -98,6 +100,19 @@ class AlipayTradeAppPayModel(object):
             self._extend_params = value
         else:
             self._extend_params = ExtendParams.from_alipay_dict(value)
+    @property
+    def goods_detail(self):
+        return self._goods_detail
+
+    @goods_detail.setter
+    def goods_detail(self, value):
+        if isinstance(value, list):
+            self._goods_detail = list()
+            for i in value:
+                if isinstance(i, GoodsDetail):
+                    self._goods_detail.append(i)
+                else:
+                    self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
     @property
     def goods_type(self):
         return self._goods_type
@@ -268,6 +283,16 @@ class AlipayTradeAppPayModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.goods_detail:
+            if isinstance(self.goods_detail, list):
+                for i in range(0, len(self.goods_detail)):
+                    element = self.goods_detail[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.goods_detail[i] = element.to_alipay_dict()
+            if hasattr(self.goods_detail, 'to_alipay_dict'):
+                params['goods_detail'] = self.goods_detail.to_alipay_dict()
+            else:
+                params['goods_detail'] = self.goods_detail
         if self.goods_type:
             if hasattr(self.goods_type, 'to_alipay_dict'):
                 params['goods_type'] = self.goods_type.to_alipay_dict()
@@ -374,6 +399,8 @@ class AlipayTradeAppPayModel(object):
             o.ext_user_info = d['ext_user_info']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'goods_detail' in d:
+            o.goods_detail = d['goods_detail']
         if 'goods_type' in d:
             o.goods_type = d['goods_type']
         if 'invoice_info' in d:

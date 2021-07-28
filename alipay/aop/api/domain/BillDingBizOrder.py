@@ -19,6 +19,7 @@ class BillDingBizOrder(object):
         self._id = None
         self._list_title = None
         self._login_id = None
+        self._marketing_amount = None
         self._opp_login_id = None
         self._opp_nick_name = None
         self._opp_user_name = None
@@ -105,6 +106,13 @@ class BillDingBizOrder(object):
     @login_id.setter
     def login_id(self, value):
         self._login_id = value
+    @property
+    def marketing_amount(self):
+        return self._marketing_amount
+
+    @marketing_amount.setter
+    def marketing_amount(self, value):
+        self._marketing_amount = value
     @property
     def opp_login_id(self):
         return self._opp_login_id
@@ -220,6 +228,11 @@ class BillDingBizOrder(object):
                 params['login_id'] = self.login_id.to_alipay_dict()
             else:
                 params['login_id'] = self.login_id
+        if self.marketing_amount:
+            if hasattr(self.marketing_amount, 'to_alipay_dict'):
+                params['marketing_amount'] = self.marketing_amount.to_alipay_dict()
+            else:
+                params['marketing_amount'] = self.marketing_amount
         if self.opp_login_id:
             if hasattr(self.opp_login_id, 'to_alipay_dict'):
                 params['opp_login_id'] = self.opp_login_id.to_alipay_dict()
@@ -289,6 +302,8 @@ class BillDingBizOrder(object):
             o.list_title = d['list_title']
         if 'login_id' in d:
             o.login_id = d['login_id']
+        if 'marketing_amount' in d:
+            o.marketing_amount = d['marketing_amount']
         if 'opp_login_id' in d:
             o.opp_login_id = d['opp_login_id']
         if 'opp_nick_name' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
 
     def __init__(self):
+        self._enable_trade_out = None
         self._end_invoice_date = None
         self._invoice_kind_list = None
         self._limit_size = None
@@ -16,6 +17,13 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
         self._start_invoice_date = None
         self._tax_no = None
 
+    @property
+    def enable_trade_out(self):
+        return self._enable_trade_out
+
+    @enable_trade_out.setter
+    def enable_trade_out(self, value):
+        self._enable_trade_out = value
     @property
     def end_invoice_date(self):
         return self._end_invoice_date
@@ -72,6 +80,11 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.enable_trade_out:
+            if hasattr(self.enable_trade_out, 'to_alipay_dict'):
+                params['enable_trade_out'] = self.enable_trade_out.to_alipay_dict()
+            else:
+                params['enable_trade_out'] = self.enable_trade_out
         if self.end_invoice_date:
             if hasattr(self.end_invoice_date, 'to_alipay_dict'):
                 params['end_invoice_date'] = self.end_invoice_date.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayEbppInvoiceTaxnoBatchqueryModel(object):
         if not d:
             return None
         o = AlipayEbppInvoiceTaxnoBatchqueryModel()
+        if 'enable_trade_out' in d:
+            o.enable_trade_out = d['enable_trade_out']
         if 'end_invoice_date' in d:
             o.end_invoice_date = d['end_invoice_date']
         if 'invoice_kind_list' in d:

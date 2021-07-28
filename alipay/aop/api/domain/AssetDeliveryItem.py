@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CCInfo import CCInfo
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
 from alipay.aop.api.domain.LogisticsInfo import LogisticsInfo
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
@@ -19,6 +20,7 @@ class AssetDeliveryItem(object):
         self._assign_out_order_id = None
         self._biz_tag = None
         self._biz_type = None
+        self._custom_clearance = None
         self._delivery_assign_order_item_id = None
         self._delivery_process_no = None
         self._delivery_process_supplier_id = None
@@ -29,6 +31,7 @@ class AssetDeliveryItem(object):
         self._item_name = None
         self._logistics_info = None
         self._memo = None
+        self._operate_info = None
         self._ou_code = None
         self._ou_name = None
         self._out_biz_no = None
@@ -96,6 +99,16 @@ class AssetDeliveryItem(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def custom_clearance(self):
+        return self._custom_clearance
+
+    @custom_clearance.setter
+    def custom_clearance(self, value):
+        if isinstance(value, CCInfo):
+            self._custom_clearance = value
+        else:
+            self._custom_clearance = CCInfo.from_alipay_dict(value)
     @property
     def delivery_assign_order_item_id(self):
         return self._delivery_assign_order_item_id
@@ -172,6 +185,13 @@ class AssetDeliveryItem(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def operate_info(self):
+        return self._operate_info
+
+    @operate_info.setter
+    def operate_info(self, value):
+        self._operate_info = value
     @property
     def ou_code(self):
         return self._ou_code
@@ -289,6 +309,11 @@ class AssetDeliveryItem(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.custom_clearance:
+            if hasattr(self.custom_clearance, 'to_alipay_dict'):
+                params['custom_clearance'] = self.custom_clearance.to_alipay_dict()
+            else:
+                params['custom_clearance'] = self.custom_clearance
         if self.delivery_assign_order_item_id:
             if hasattr(self.delivery_assign_order_item_id, 'to_alipay_dict'):
                 params['delivery_assign_order_item_id'] = self.delivery_assign_order_item_id.to_alipay_dict()
@@ -339,6 +364,11 @@ class AssetDeliveryItem(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.operate_info:
+            if hasattr(self.operate_info, 'to_alipay_dict'):
+                params['operate_info'] = self.operate_info.to_alipay_dict()
+            else:
+                params['operate_info'] = self.operate_info
         if self.ou_code:
             if hasattr(self.ou_code, 'to_alipay_dict'):
                 params['ou_code'] = self.ou_code.to_alipay_dict()
@@ -412,6 +442,8 @@ class AssetDeliveryItem(object):
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'custom_clearance' in d:
+            o.custom_clearance = d['custom_clearance']
         if 'delivery_assign_order_item_id' in d:
             o.delivery_assign_order_item_id = d['delivery_assign_order_item_id']
         if 'delivery_process_no' in d:
@@ -432,6 +464,8 @@ class AssetDeliveryItem(object):
             o.logistics_info = d['logistics_info']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'operate_info' in d:
+            o.operate_info = d['operate_info']
         if 'ou_code' in d:
             o.ou_code = d['ou_code']
         if 'ou_name' in d:

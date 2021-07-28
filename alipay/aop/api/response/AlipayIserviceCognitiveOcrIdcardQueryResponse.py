@@ -14,6 +14,7 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
         self._end_date = None
         self._error_content = None
         self._issue = None
+        self._name = None
         self._nationality = None
         self._num = None
         self._request_id = None
@@ -57,6 +58,13 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
     @issue.setter
     def issue(self, value):
         self._issue = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def nationality(self):
         return self._nationality
@@ -119,6 +127,8 @@ class AlipayIserviceCognitiveOcrIdcardQueryResponse(AlipayResponse):
             self.error_content = response['error_content']
         if 'issue' in response:
             self.issue = response['issue']
+        if 'name' in response:
+            self.name = response['name']
         if 'nationality' in response:
             self.nationality = response['nationality']
         if 'num' in response:

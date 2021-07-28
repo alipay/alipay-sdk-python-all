@@ -25,6 +25,7 @@ class AlipayAssetCardNewtemplateCreateModel(object):
         self._period_type = None
         self._product_code = None
         self._settle_user_id = None
+        self._sign_principal = None
 
     @property
     def account_model(self):
@@ -140,6 +141,13 @@ class AlipayAssetCardNewtemplateCreateModel(object):
     @settle_user_id.setter
     def settle_user_id(self, value):
         self._settle_user_id = value
+    @property
+    def sign_principal(self):
+        return self._sign_principal
+
+    @sign_principal.setter
+    def sign_principal(self, value):
+        self._sign_principal = value
 
 
     def to_alipay_dict(self):
@@ -224,6 +232,11 @@ class AlipayAssetCardNewtemplateCreateModel(object):
                 params['settle_user_id'] = self.settle_user_id.to_alipay_dict()
             else:
                 params['settle_user_id'] = self.settle_user_id
+        if self.sign_principal:
+            if hasattr(self.sign_principal, 'to_alipay_dict'):
+                params['sign_principal'] = self.sign_principal.to_alipay_dict()
+            else:
+                params['sign_principal'] = self.sign_principal
         return params
 
     @staticmethod
@@ -261,6 +274,8 @@ class AlipayAssetCardNewtemplateCreateModel(object):
             o.product_code = d['product_code']
         if 'settle_user_id' in d:
             o.settle_user_id = d['settle_user_id']
+        if 'sign_principal' in d:
+            o.sign_principal = d['sign_principal']
         return o
 
 

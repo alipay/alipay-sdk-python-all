@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateFacefeatureReportUploadModel(object):
 
     def __init__(self):
+        self._aes_cypher = None
         self._auth_img = None
         self._biz_code = None
         self._device_num = None
@@ -16,6 +17,13 @@ class AlipayCommerceEducateFacefeatureReportUploadModel(object):
         self._scene_code = None
         self._z_face_info = None
 
+    @property
+    def aes_cypher(self):
+        return self._aes_cypher
+
+    @aes_cypher.setter
+    def aes_cypher(self, value):
+        self._aes_cypher = value
     @property
     def auth_img(self):
         return self._auth_img
@@ -69,6 +77,11 @@ class AlipayCommerceEducateFacefeatureReportUploadModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aes_cypher:
+            if hasattr(self.aes_cypher, 'to_alipay_dict'):
+                params['aes_cypher'] = self.aes_cypher.to_alipay_dict()
+            else:
+                params['aes_cypher'] = self.aes_cypher
         if self.auth_img:
             if hasattr(self.auth_img, 'to_alipay_dict'):
                 params['auth_img'] = self.auth_img.to_alipay_dict()
@@ -111,6 +124,8 @@ class AlipayCommerceEducateFacefeatureReportUploadModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateFacefeatureReportUploadModel()
+        if 'aes_cypher' in d:
+            o.aes_cypher = d['aes_cypher']
         if 'auth_img' in d:
             o.auth_img = d['auth_img']
         if 'biz_code' in d:

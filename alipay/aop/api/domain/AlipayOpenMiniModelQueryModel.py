@@ -12,6 +12,7 @@ class AlipayOpenMiniModelQueryModel(object):
         self._app_version_modified = None
         self._deploy_package_modified = None
         self._deploy_window_modified = None
+        self._inst_code = None
         self._load_test = None
         self._mini_app_id = None
         self._mini_app_version_modified = None
@@ -44,6 +45,13 @@ class AlipayOpenMiniModelQueryModel(object):
     @deploy_window_modified.setter
     def deploy_window_modified(self, value):
         self._deploy_window_modified = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def load_test(self):
         return self._load_test
@@ -89,6 +97,11 @@ class AlipayOpenMiniModelQueryModel(object):
                 params['deploy_window_modified'] = self.deploy_window_modified.to_alipay_dict()
             else:
                 params['deploy_window_modified'] = self.deploy_window_modified
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.load_test:
             if hasattr(self.load_test, 'to_alipay_dict'):
                 params['load_test'] = self.load_test.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayOpenMiniModelQueryModel(object):
             o.deploy_package_modified = d['deploy_package_modified']
         if 'deploy_window_modified' in d:
             o.deploy_window_modified = d['deploy_window_modified']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'load_test' in d:
             o.load_test = d['load_test']
         if 'mini_app_id' in d:

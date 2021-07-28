@@ -12,6 +12,7 @@ class AlipayUserElectronicidUserQueryResponse(AlipayResponse):
         self._address = None
         self._birthday = None
         self._cert_no = None
+        self._cert_picture = None
         self._gender = None
         self._name = None
         self._nation = None
@@ -42,6 +43,13 @@ class AlipayUserElectronicidUserQueryResponse(AlipayResponse):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_picture(self):
+        return self._cert_picture
+
+    @cert_picture.setter
+    def cert_picture(self, value):
+        self._cert_picture = value
     @property
     def gender(self):
         return self._gender
@@ -107,6 +115,8 @@ class AlipayUserElectronicidUserQueryResponse(AlipayResponse):
             self.birthday = response['birthday']
         if 'cert_no' in response:
             self.cert_no = response['cert_no']
+        if 'cert_picture' in response:
+            self.cert_picture = response['cert_picture']
         if 'gender' in response:
             self.gender = response['gender']
         if 'name' in response:

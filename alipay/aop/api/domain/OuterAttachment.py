@@ -10,6 +10,7 @@ class OuterAttachment(object):
     def __init__(self):
         self._attachment_type = None
         self._file_key = None
+        self._file_url = None
         self._validate_end_time = None
         self._validate_start_time = None
 
@@ -27,6 +28,13 @@ class OuterAttachment(object):
     @file_key.setter
     def file_key(self, value):
         self._file_key = value
+    @property
+    def file_url(self):
+        return self._file_url
+
+    @file_url.setter
+    def file_url(self, value):
+        self._file_url = value
     @property
     def validate_end_time(self):
         return self._validate_end_time
@@ -55,6 +63,11 @@ class OuterAttachment(object):
                 params['file_key'] = self.file_key.to_alipay_dict()
             else:
                 params['file_key'] = self.file_key
+        if self.file_url:
+            if hasattr(self.file_url, 'to_alipay_dict'):
+                params['file_url'] = self.file_url.to_alipay_dict()
+            else:
+                params['file_url'] = self.file_url
         if self.validate_end_time:
             if hasattr(self.validate_end_time, 'to_alipay_dict'):
                 params['validate_end_time'] = self.validate_end_time.to_alipay_dict()
@@ -76,6 +89,8 @@ class OuterAttachment(object):
             o.attachment_type = d['attachment_type']
         if 'file_key' in d:
             o.file_key = d['file_key']
+        if 'file_url' in d:
+            o.file_url = d['file_url']
         if 'validate_end_time' in d:
             o.validate_end_time = d['validate_end_time']
         if 'validate_start_time' in d:

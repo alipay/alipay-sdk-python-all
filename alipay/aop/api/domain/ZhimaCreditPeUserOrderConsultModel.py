@@ -14,6 +14,7 @@ class ZhimaCreditPeUserOrderConsultModel(object):
         self._credit_scene = None
         self._ext_params = None
         self._out_order_no = None
+        self._product_code = None
         self._risk_info = None
         self._seller_id = None
 
@@ -59,6 +60,13 @@ class ZhimaCreditPeUserOrderConsultModel(object):
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def risk_info(self):
         return self._risk_info
@@ -107,6 +115,11 @@ class ZhimaCreditPeUserOrderConsultModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.risk_info:
             if hasattr(self.risk_info, 'to_alipay_dict'):
                 params['risk_info'] = self.risk_info.to_alipay_dict()
@@ -136,6 +149,8 @@ class ZhimaCreditPeUserOrderConsultModel(object):
             o.ext_params = d['ext_params']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'risk_info' in d:
             o.risk_info = d['risk_info']
         if 'seller_id' in d:

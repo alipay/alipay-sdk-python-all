@@ -15,6 +15,8 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
         self._terminal_id = None
         self._total_floors = None
         self._transaction_id = None
+        self._type = None
+        self._uid = None
 
     @property
     def goods_infos(self):
@@ -64,6 +66,20 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
     @transaction_id.setter
     def transaction_id(self, value):
         self._transaction_id = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
+    def uid(self):
+        return self._uid
+
+    @uid.setter
+    def uid(self, value):
+        self._uid = value
 
 
     def to_alipay_dict(self):
@@ -103,6 +119,16 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
                 params['transaction_id'] = self.transaction_id.to_alipay_dict()
             else:
                 params['transaction_id'] = self.transaction_id
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
+        if self.uid:
+            if hasattr(self.uid, 'to_alipay_dict'):
+                params['uid'] = self.uid.to_alipay_dict()
+            else:
+                params['uid'] = self.uid
         return params
 
     @staticmethod
@@ -122,6 +148,10 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
             o.total_floors = d['total_floors']
         if 'transaction_id' in d:
             o.transaction_id = d['transaction_id']
+        if 'type' in d:
+            o.type = d['type']
+        if 'uid' in d:
+            o.uid = d['uid']
         return o
 
 
