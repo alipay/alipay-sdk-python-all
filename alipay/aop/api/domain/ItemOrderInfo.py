@@ -14,6 +14,7 @@ class ItemOrderInfo(object):
         self._item_name = None
         self._quantity = None
         self._sku_id = None
+        self._unit = None
         self._unit_price = None
 
     @property
@@ -58,6 +59,13 @@ class ItemOrderInfo(object):
     def sku_id(self, value):
         self._sku_id = value
     @property
+    def unit(self):
+        return self._unit
+
+    @unit.setter
+    def unit(self, value):
+        self._unit = value
+    @property
     def unit_price(self):
         return self._unit_price
 
@@ -98,6 +106,11 @@ class ItemOrderInfo(object):
                 params['sku_id'] = self.sku_id.to_alipay_dict()
             else:
                 params['sku_id'] = self.sku_id
+        if self.unit:
+            if hasattr(self.unit, 'to_alipay_dict'):
+                params['unit'] = self.unit.to_alipay_dict()
+            else:
+                params['unit'] = self.unit
         if self.unit_price:
             if hasattr(self.unit_price, 'to_alipay_dict'):
                 params['unit_price'] = self.unit_price.to_alipay_dict()
@@ -120,6 +133,8 @@ class ItemOrderInfo(object):
             o.quantity = d['quantity']
         if 'sku_id' in d:
             o.sku_id = d['sku_id']
+        if 'unit' in d:
+            o.unit = d['unit']
         if 'unit_price' in d:
             o.unit_price = d['unit_price']
         return o

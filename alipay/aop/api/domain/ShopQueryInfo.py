@@ -9,7 +9,6 @@ class ShopQueryInfo(object):
 
     def __init__(self):
         self._address = None
-        self._is_include_cognate = None
         self._latitude = None
         self._longitude = None
         self._name = None
@@ -25,13 +24,6 @@ class ShopQueryInfo(object):
     @address.setter
     def address(self, value):
         self._address = value
-    @property
-    def is_include_cognate(self):
-        return self._is_include_cognate
-
-    @is_include_cognate.setter
-    def is_include_cognate(self, value):
-        self._is_include_cognate = value
     @property
     def latitude(self):
         return self._latitude
@@ -90,11 +82,6 @@ class ShopQueryInfo(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
-        if self.is_include_cognate:
-            if hasattr(self.is_include_cognate, 'to_alipay_dict'):
-                params['is_include_cognate'] = self.is_include_cognate.to_alipay_dict()
-            else:
-                params['is_include_cognate'] = self.is_include_cognate
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -139,8 +126,6 @@ class ShopQueryInfo(object):
         o = ShopQueryInfo()
         if 'address' in d:
             o.address = d['address']
-        if 'is_include_cognate' in d:
-            o.is_include_cognate = d['is_include_cognate']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

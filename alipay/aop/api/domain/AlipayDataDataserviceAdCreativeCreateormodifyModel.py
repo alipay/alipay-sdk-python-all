@@ -26,6 +26,7 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
         self._material_list = None
         self._name = None
         self._region_list = None
+        self._rta_id = None
         self._status = None
         self._store_id = None
         self._target_app_id = None
@@ -161,6 +162,13 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             self._region_list = list()
             for i in value:
                 self._region_list.append(i)
+    @property
+    def rta_id(self):
+        return self._rta_id
+
+    @rta_id.setter
+    def rta_id(self, value):
+        self._rta_id = value
     @property
     def status(self):
         return self._status
@@ -300,6 +308,11 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
                 params['region_list'] = self.region_list.to_alipay_dict()
             else:
                 params['region_list'] = self.region_list
+        if self.rta_id:
+            if hasattr(self.rta_id, 'to_alipay_dict'):
+                params['rta_id'] = self.rta_id.to_alipay_dict()
+            else:
+                params['rta_id'] = self.rta_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -362,6 +375,8 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             o.name = d['name']
         if 'region_list' in d:
             o.region_list = d['region_list']
+        if 'rta_id' in d:
+            o.rta_id = d['rta_id']
         if 'status' in d:
             o.status = d['status']
         if 'store_id' in d:

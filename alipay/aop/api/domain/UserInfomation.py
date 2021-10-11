@@ -14,6 +14,7 @@ class UserInfomation(object):
         self._ext_info = None
         self._mobile = None
         self._name = None
+        self._user_id = None
 
     @property
     def cert_no(self):
@@ -56,6 +57,13 @@ class UserInfomation(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +98,11 @@ class UserInfomation(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -107,6 +120,8 @@ class UserInfomation(object):
             o.mobile = d['mobile']
         if 'name' in d:
             o.name = d['name']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

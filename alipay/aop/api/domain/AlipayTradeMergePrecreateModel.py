@@ -11,6 +11,7 @@ class AlipayTradeMergePrecreateModel(object):
     def __init__(self):
         self._order_details = None
         self._out_merge_no = None
+        self._time_expire = None
         self._timeout_express = None
 
     @property
@@ -33,6 +34,13 @@ class AlipayTradeMergePrecreateModel(object):
     @out_merge_no.setter
     def out_merge_no(self, value):
         self._out_merge_no = value
+    @property
+    def time_expire(self):
+        return self._time_expire
+
+    @time_expire.setter
+    def time_expire(self, value):
+        self._time_expire = value
     @property
     def timeout_express(self):
         return self._timeout_express
@@ -59,6 +67,11 @@ class AlipayTradeMergePrecreateModel(object):
                 params['out_merge_no'] = self.out_merge_no.to_alipay_dict()
             else:
                 params['out_merge_no'] = self.out_merge_no
+        if self.time_expire:
+            if hasattr(self.time_expire, 'to_alipay_dict'):
+                params['time_expire'] = self.time_expire.to_alipay_dict()
+            else:
+                params['time_expire'] = self.time_expire
         if self.timeout_express:
             if hasattr(self.timeout_express, 'to_alipay_dict'):
                 params['timeout_express'] = self.timeout_express.to_alipay_dict()
@@ -75,6 +88,8 @@ class AlipayTradeMergePrecreateModel(object):
             o.order_details = d['order_details']
         if 'out_merge_no' in d:
             o.out_merge_no = d['out_merge_no']
+        if 'time_expire' in d:
+            o.time_expire = d['time_expire']
         if 'timeout_express' in d:
             o.timeout_express = d['timeout_express']
         return o

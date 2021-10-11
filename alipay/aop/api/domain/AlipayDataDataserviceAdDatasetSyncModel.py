@@ -14,6 +14,7 @@ class AlipayDataDataserviceAdDatasetSyncModel(object):
         self._data_src_type = None
         self._data_table_name = None
         self._data_type = None
+        self._principal_id = None
         self._principal_tag = None
         self._status = None
         self._user_unique_type = None
@@ -60,6 +61,13 @@ class AlipayDataDataserviceAdDatasetSyncModel(object):
     @data_type.setter
     def data_type(self, value):
         self._data_type = value
+    @property
+    def principal_id(self):
+        return self._principal_id
+
+    @principal_id.setter
+    def principal_id(self, value):
+        self._principal_id = value
     @property
     def principal_tag(self):
         return self._principal_tag
@@ -115,6 +123,11 @@ class AlipayDataDataserviceAdDatasetSyncModel(object):
                 params['data_type'] = self.data_type.to_alipay_dict()
             else:
                 params['data_type'] = self.data_type
+        if self.principal_id:
+            if hasattr(self.principal_id, 'to_alipay_dict'):
+                params['principal_id'] = self.principal_id.to_alipay_dict()
+            else:
+                params['principal_id'] = self.principal_id
         if self.principal_tag:
             if hasattr(self.principal_tag, 'to_alipay_dict'):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayDataDataserviceAdDatasetSyncModel(object):
             o.data_table_name = d['data_table_name']
         if 'data_type' in d:
             o.data_type = d['data_type']
+        if 'principal_id' in d:
+            o.principal_id = d['principal_id']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
         if 'status' in d:

@@ -26,6 +26,7 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
         self._ticket_code = None
         self._ticket_trans_id = None
         self._ticket_use_details = None
+        self._tm_item_id = None
         self._use_date = None
         self._use_shop_id = None
         self._use_shop_name = None
@@ -150,6 +151,13 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
                 else:
                     self._ticket_use_details.append(KbTicketUseDetail.from_alipay_dict(i))
     @property
+    def tm_item_id(self):
+        return self._tm_item_id
+
+    @tm_item_id.setter
+    def tm_item_id(self, value):
+        self._tm_item_id = value
+    @property
     def use_date(self):
         return self._use_date
 
@@ -212,6 +220,8 @@ class KoubeiTradeTicketTicketcodeUseResponse(AlipayResponse):
             self.ticket_trans_id = response['ticket_trans_id']
         if 'ticket_use_details' in response:
             self.ticket_use_details = response['ticket_use_details']
+        if 'tm_item_id' in response:
+            self.tm_item_id = response['tm_item_id']
         if 'use_date' in response:
             self.use_date = response['use_date']
         if 'use_shop_id' in response:

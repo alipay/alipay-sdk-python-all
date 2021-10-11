@@ -10,6 +10,7 @@ class AlipayOverseasTravelShopSyncResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOverseasTravelShopSyncResponse, self).__init__()
         self._shop_biz_status = None
+        self._sync_order_id = None
         self._sync_status = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayOverseasTravelShopSyncResponse(AlipayResponse):
     @shop_biz_status.setter
     def shop_biz_status(self, value):
         self._shop_biz_status = value
+    @property
+    def sync_order_id(self):
+        return self._sync_order_id
+
+    @sync_order_id.setter
+    def sync_order_id(self, value):
+        self._sync_order_id = value
     @property
     def sync_status(self):
         return self._sync_status
@@ -31,5 +39,7 @@ class AlipayOverseasTravelShopSyncResponse(AlipayResponse):
         response = super(AlipayOverseasTravelShopSyncResponse, self).parse_response_content(response_content)
         if 'shop_biz_status' in response:
             self.shop_biz_status = response['shop_biz_status']
+        if 'sync_order_id' in response:
+            self.sync_order_id = response['sync_order_id']
         if 'sync_status' in response:
             self.sync_status = response['sync_status']

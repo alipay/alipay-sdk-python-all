@@ -11,6 +11,11 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     def __init__(self):
         self._activity_type = None
         self._alias_name = None
+        self._app_market = None
+        self._app_name = None
+        self._app_screenshot = None
+        self._app_status = None
+        self._auth_license = None
         self._bank_account = None
         self._bank_account_prove = None
         self._bank_cooperation_agreement = None
@@ -19,6 +24,7 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
         self._charge_sample = None
         self._checkstand_pic = None
         self._diplomatic_note = None
+        self._icp_license = None
         self._indoor_pic = None
         self._industry_code = None
         self._industry_qualification_image = None
@@ -29,11 +35,17 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
         self._medical_instrument_practice_license_pic = None
         self._name = None
         self._org_cert_pic = None
+        self._pc_site = None
+        self._pc_site_status = None
         self._private_nonenterprise_units = None
+        self._quota_per_day = None
+        self._quota_per_each = None
         self._run_school_license_pic = None
         self._settled_pic = None
         self._shop_entrance_pic = None
         self._sub_merchant_id = None
+        self._withhold_service_desc = None
+        self._withhold_service_name = None
 
     @property
     def activity_type(self):
@@ -49,6 +61,41 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     @alias_name.setter
     def alias_name(self, value):
         self._alias_name = value
+    @property
+    def app_market(self):
+        return self._app_market
+
+    @app_market.setter
+    def app_market(self, value):
+        self._app_market = value
+    @property
+    def app_name(self):
+        return self._app_name
+
+    @app_name.setter
+    def app_name(self, value):
+        self._app_name = value
+    @property
+    def app_screenshot(self):
+        return self._app_screenshot
+
+    @app_screenshot.setter
+    def app_screenshot(self, value):
+        self._app_screenshot = value
+    @property
+    def app_status(self):
+        return self._app_status
+
+    @app_status.setter
+    def app_status(self, value):
+        self._app_status = value
+    @property
+    def auth_license(self):
+        return self._auth_license
+
+    @auth_license.setter
+    def auth_license(self, value):
+        self._auth_license = value
     @property
     def bank_account(self):
         return self._bank_account
@@ -108,6 +155,13 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     @diplomatic_note.setter
     def diplomatic_note(self, value):
         self._diplomatic_note = value
+    @property
+    def icp_license(self):
+        return self._icp_license
+
+    @icp_license.setter
+    def icp_license(self, value):
+        self._icp_license = value
     @property
     def indoor_pic(self):
         return self._indoor_pic
@@ -179,12 +233,40 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     def org_cert_pic(self, value):
         self._org_cert_pic = value
     @property
+    def pc_site(self):
+        return self._pc_site
+
+    @pc_site.setter
+    def pc_site(self, value):
+        self._pc_site = value
+    @property
+    def pc_site_status(self):
+        return self._pc_site_status
+
+    @pc_site_status.setter
+    def pc_site_status(self, value):
+        self._pc_site_status = value
+    @property
     def private_nonenterprise_units(self):
         return self._private_nonenterprise_units
 
     @private_nonenterprise_units.setter
     def private_nonenterprise_units(self, value):
         self._private_nonenterprise_units = value
+    @property
+    def quota_per_day(self):
+        return self._quota_per_day
+
+    @quota_per_day.setter
+    def quota_per_day(self, value):
+        self._quota_per_day = value
+    @property
+    def quota_per_each(self):
+        return self._quota_per_each
+
+    @quota_per_each.setter
+    def quota_per_each(self, value):
+        self._quota_per_each = value
     @property
     def run_school_license_pic(self):
         return self._run_school_license_pic
@@ -213,6 +295,20 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
     @sub_merchant_id.setter
     def sub_merchant_id(self, value):
         self._sub_merchant_id = value
+    @property
+    def withhold_service_desc(self):
+        return self._withhold_service_desc
+
+    @withhold_service_desc.setter
+    def withhold_service_desc(self, value):
+        self._withhold_service_desc = value
+    @property
+    def withhold_service_name(self):
+        return self._withhold_service_name
+
+    @withhold_service_name.setter
+    def withhold_service_name(self, value):
+        self._withhold_service_name = value
 
 
     def to_alipay_dict(self):
@@ -227,6 +323,31 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['alias_name'] = self.alias_name.to_alipay_dict()
             else:
                 params['alias_name'] = self.alias_name
+        if self.app_market:
+            if hasattr(self.app_market, 'to_alipay_dict'):
+                params['app_market'] = self.app_market.to_alipay_dict()
+            else:
+                params['app_market'] = self.app_market
+        if self.app_name:
+            if hasattr(self.app_name, 'to_alipay_dict'):
+                params['app_name'] = self.app_name.to_alipay_dict()
+            else:
+                params['app_name'] = self.app_name
+        if self.app_screenshot:
+            if hasattr(self.app_screenshot, 'to_alipay_dict'):
+                params['app_screenshot'] = self.app_screenshot.to_alipay_dict()
+            else:
+                params['app_screenshot'] = self.app_screenshot
+        if self.app_status:
+            if hasattr(self.app_status, 'to_alipay_dict'):
+                params['app_status'] = self.app_status.to_alipay_dict()
+            else:
+                params['app_status'] = self.app_status
+        if self.auth_license:
+            if hasattr(self.auth_license, 'to_alipay_dict'):
+                params['auth_license'] = self.auth_license.to_alipay_dict()
+            else:
+                params['auth_license'] = self.auth_license
         if self.bank_account:
             if hasattr(self.bank_account, 'to_alipay_dict'):
                 params['bank_account'] = self.bank_account.to_alipay_dict()
@@ -267,6 +388,11 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['diplomatic_note'] = self.diplomatic_note.to_alipay_dict()
             else:
                 params['diplomatic_note'] = self.diplomatic_note
+        if self.icp_license:
+            if hasattr(self.icp_license, 'to_alipay_dict'):
+                params['icp_license'] = self.icp_license.to_alipay_dict()
+            else:
+                params['icp_license'] = self.icp_license
         if self.indoor_pic:
             if hasattr(self.indoor_pic, 'to_alipay_dict'):
                 params['indoor_pic'] = self.indoor_pic.to_alipay_dict()
@@ -317,11 +443,31 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['org_cert_pic'] = self.org_cert_pic.to_alipay_dict()
             else:
                 params['org_cert_pic'] = self.org_cert_pic
+        if self.pc_site:
+            if hasattr(self.pc_site, 'to_alipay_dict'):
+                params['pc_site'] = self.pc_site.to_alipay_dict()
+            else:
+                params['pc_site'] = self.pc_site
+        if self.pc_site_status:
+            if hasattr(self.pc_site_status, 'to_alipay_dict'):
+                params['pc_site_status'] = self.pc_site_status.to_alipay_dict()
+            else:
+                params['pc_site_status'] = self.pc_site_status
         if self.private_nonenterprise_units:
             if hasattr(self.private_nonenterprise_units, 'to_alipay_dict'):
                 params['private_nonenterprise_units'] = self.private_nonenterprise_units.to_alipay_dict()
             else:
                 params['private_nonenterprise_units'] = self.private_nonenterprise_units
+        if self.quota_per_day:
+            if hasattr(self.quota_per_day, 'to_alipay_dict'):
+                params['quota_per_day'] = self.quota_per_day.to_alipay_dict()
+            else:
+                params['quota_per_day'] = self.quota_per_day
+        if self.quota_per_each:
+            if hasattr(self.quota_per_each, 'to_alipay_dict'):
+                params['quota_per_each'] = self.quota_per_each.to_alipay_dict()
+            else:
+                params['quota_per_each'] = self.quota_per_each
         if self.run_school_license_pic:
             if hasattr(self.run_school_license_pic, 'to_alipay_dict'):
                 params['run_school_license_pic'] = self.run_school_license_pic.to_alipay_dict()
@@ -342,6 +488,16 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
                 params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
             else:
                 params['sub_merchant_id'] = self.sub_merchant_id
+        if self.withhold_service_desc:
+            if hasattr(self.withhold_service_desc, 'to_alipay_dict'):
+                params['withhold_service_desc'] = self.withhold_service_desc.to_alipay_dict()
+            else:
+                params['withhold_service_desc'] = self.withhold_service_desc
+        if self.withhold_service_name:
+            if hasattr(self.withhold_service_name, 'to_alipay_dict'):
+                params['withhold_service_name'] = self.withhold_service_name.to_alipay_dict()
+            else:
+                params['withhold_service_name'] = self.withhold_service_name
         return params
 
     @staticmethod
@@ -353,6 +509,16 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.activity_type = d['activity_type']
         if 'alias_name' in d:
             o.alias_name = d['alias_name']
+        if 'app_market' in d:
+            o.app_market = d['app_market']
+        if 'app_name' in d:
+            o.app_name = d['app_name']
+        if 'app_screenshot' in d:
+            o.app_screenshot = d['app_screenshot']
+        if 'app_status' in d:
+            o.app_status = d['app_status']
+        if 'auth_license' in d:
+            o.auth_license = d['auth_license']
         if 'bank_account' in d:
             o.bank_account = d['bank_account']
         if 'bank_account_prove' in d:
@@ -369,6 +535,8 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.checkstand_pic = d['checkstand_pic']
         if 'diplomatic_note' in d:
             o.diplomatic_note = d['diplomatic_note']
+        if 'icp_license' in d:
+            o.icp_license = d['icp_license']
         if 'indoor_pic' in d:
             o.indoor_pic = d['indoor_pic']
         if 'industry_code' in d:
@@ -389,8 +557,16 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.name = d['name']
         if 'org_cert_pic' in d:
             o.org_cert_pic = d['org_cert_pic']
+        if 'pc_site' in d:
+            o.pc_site = d['pc_site']
+        if 'pc_site_status' in d:
+            o.pc_site_status = d['pc_site_status']
         if 'private_nonenterprise_units' in d:
             o.private_nonenterprise_units = d['private_nonenterprise_units']
+        if 'quota_per_day' in d:
+            o.quota_per_day = d['quota_per_day']
+        if 'quota_per_each' in d:
+            o.quota_per_each = d['quota_per_each']
         if 'run_school_license_pic' in d:
             o.run_school_license_pic = d['run_school_license_pic']
         if 'settled_pic' in d:
@@ -399,6 +575,10 @@ class AntMerchantExpandIndirectActivityCreateModel(object):
             o.shop_entrance_pic = d['shop_entrance_pic']
         if 'sub_merchant_id' in d:
             o.sub_merchant_id = d['sub_merchant_id']
+        if 'withhold_service_desc' in d:
+            o.withhold_service_desc = d['withhold_service_desc']
+        if 'withhold_service_name' in d:
+            o.withhold_service_name = d['withhold_service_name']
         return o
 
 

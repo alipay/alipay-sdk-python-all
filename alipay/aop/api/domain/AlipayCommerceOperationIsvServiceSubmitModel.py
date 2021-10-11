@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtraInfo import ExtraInfo
 from alipay.aop.api.domain.CateringMerchantInfo import CateringMerchantInfo
+from alipay.aop.api.domain.CateringServiceScopeInfo import CateringServiceScopeInfo
 from alipay.aop.api.domain.CateringStoreInfo import CateringStoreInfo
 
 
@@ -15,6 +16,7 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
         self._merchant_info = None
         self._service_description = None
         self._service_name = None
+        self._service_scope_info = None
         self._service_status = None
         self._service_sub_type = None
         self._service_type = None
@@ -58,6 +60,16 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
     @service_name.setter
     def service_name(self, value):
         self._service_name = value
+    @property
+    def service_scope_info(self):
+        return self._service_scope_info
+
+    @service_scope_info.setter
+    def service_scope_info(self, value):
+        if isinstance(value, CateringServiceScopeInfo):
+            self._service_scope_info = value
+        else:
+            self._service_scope_info = CateringServiceScopeInfo.from_alipay_dict(value)
     @property
     def service_status(self):
         return self._service_status
@@ -125,6 +137,11 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
                 params['service_name'] = self.service_name.to_alipay_dict()
             else:
                 params['service_name'] = self.service_name
+        if self.service_scope_info:
+            if hasattr(self.service_scope_info, 'to_alipay_dict'):
+                params['service_scope_info'] = self.service_scope_info.to_alipay_dict()
+            else:
+                params['service_scope_info'] = self.service_scope_info
         if self.service_status:
             if hasattr(self.service_status, 'to_alipay_dict'):
                 params['service_status'] = self.service_status.to_alipay_dict()
@@ -165,6 +182,8 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
             o.service_description = d['service_description']
         if 'service_name' in d:
             o.service_name = d['service_name']
+        if 'service_scope_info' in d:
+            o.service_scope_info = d['service_scope_info']
         if 'service_status' in d:
             o.service_status = d['service_status']
         if 'service_sub_type' in d:

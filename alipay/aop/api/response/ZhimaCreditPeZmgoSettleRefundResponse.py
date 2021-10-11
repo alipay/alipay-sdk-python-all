@@ -12,6 +12,7 @@ class ZhimaCreditPeZmgoSettleRefundResponse(AlipayResponse):
         self._fail_reason = None
         self._out_request_no = None
         self._refund_amount = None
+        self._refund_opt_no = None
         self._retry = None
         self._withhold_plan_no = None
 
@@ -37,6 +38,13 @@ class ZhimaCreditPeZmgoSettleRefundResponse(AlipayResponse):
     def refund_amount(self, value):
         self._refund_amount = value
     @property
+    def refund_opt_no(self):
+        return self._refund_opt_no
+
+    @refund_opt_no.setter
+    def refund_opt_no(self, value):
+        self._refund_opt_no = value
+    @property
     def retry(self):
         return self._retry
 
@@ -59,6 +67,8 @@ class ZhimaCreditPeZmgoSettleRefundResponse(AlipayResponse):
             self.out_request_no = response['out_request_no']
         if 'refund_amount' in response:
             self.refund_amount = response['refund_amount']
+        if 'refund_opt_no' in response:
+            self.refund_opt_no = response['refund_opt_no']
         if 'retry' in response:
             self.retry = response['retry']
         if 'withhold_plan_no' in response:

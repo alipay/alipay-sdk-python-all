@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GolGoodsExtParam import GolGoodsExtParam
 from alipay.aop.api.domain.Amount import Amount
 from alipay.aop.api.domain.Amount import Amount
 from alipay.aop.api.domain.GoodsSalesVolume import GoodsSalesVolume
@@ -13,6 +14,7 @@ class AlipayOverseasTravelGoodsSyncModel(object):
     def __init__(self):
         self._cover = None
         self._external_link_url = None
+        self._gol_goods_ext_param = None
         self._goods_category = None
         self._goods_name = None
         self._goods_tags = None
@@ -43,6 +45,16 @@ class AlipayOverseasTravelGoodsSyncModel(object):
     @external_link_url.setter
     def external_link_url(self, value):
         self._external_link_url = value
+    @property
+    def gol_goods_ext_param(self):
+        return self._gol_goods_ext_param
+
+    @gol_goods_ext_param.setter
+    def gol_goods_ext_param(self, value):
+        if isinstance(value, GolGoodsExtParam):
+            self._gol_goods_ext_param = value
+        else:
+            self._gol_goods_ext_param = GolGoodsExtParam.from_alipay_dict(value)
     @property
     def goods_category(self):
         return self._goods_category
@@ -180,6 +192,11 @@ class AlipayOverseasTravelGoodsSyncModel(object):
                 params['external_link_url'] = self.external_link_url.to_alipay_dict()
             else:
                 params['external_link_url'] = self.external_link_url
+        if self.gol_goods_ext_param:
+            if hasattr(self.gol_goods_ext_param, 'to_alipay_dict'):
+                params['gol_goods_ext_param'] = self.gol_goods_ext_param.to_alipay_dict()
+            else:
+                params['gol_goods_ext_param'] = self.gol_goods_ext_param
         if self.goods_category:
             if hasattr(self.goods_category, 'to_alipay_dict'):
                 params['goods_category'] = self.goods_category.to_alipay_dict()
@@ -281,6 +298,8 @@ class AlipayOverseasTravelGoodsSyncModel(object):
             o.cover = d['cover']
         if 'external_link_url' in d:
             o.external_link_url = d['external_link_url']
+        if 'gol_goods_ext_param' in d:
+            o.gol_goods_ext_param = d['gol_goods_ext_param']
         if 'goods_category' in d:
             o.goods_category = d['goods_category']
         if 'goods_name' in d:

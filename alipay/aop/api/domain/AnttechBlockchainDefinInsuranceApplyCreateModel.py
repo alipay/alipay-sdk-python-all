@@ -12,6 +12,7 @@ class AnttechBlockchainDefinInsuranceApplyCreateModel(object):
         self._apply_basic_info = None
         self._business_code = None
         self._parm = None
+        self._pdt_mkt_code = None
         self._platform_access_type = None
         self._platform_code = None
         self._product_code = None
@@ -42,6 +43,13 @@ class AnttechBlockchainDefinInsuranceApplyCreateModel(object):
     @parm.setter
     def parm(self, value):
         self._parm = value
+    @property
+    def pdt_mkt_code(self):
+        return self._pdt_mkt_code
+
+    @pdt_mkt_code.setter
+    def pdt_mkt_code(self, value):
+        self._pdt_mkt_code = value
     @property
     def platform_access_type(self):
         return self._platform_access_type
@@ -96,6 +104,11 @@ class AnttechBlockchainDefinInsuranceApplyCreateModel(object):
                 params['parm'] = self.parm.to_alipay_dict()
             else:
                 params['parm'] = self.parm
+        if self.pdt_mkt_code:
+            if hasattr(self.pdt_mkt_code, 'to_alipay_dict'):
+                params['pdt_mkt_code'] = self.pdt_mkt_code.to_alipay_dict()
+            else:
+                params['pdt_mkt_code'] = self.pdt_mkt_code
         if self.platform_access_type:
             if hasattr(self.platform_access_type, 'to_alipay_dict'):
                 params['platform_access_type'] = self.platform_access_type.to_alipay_dict()
@@ -134,6 +147,8 @@ class AnttechBlockchainDefinInsuranceApplyCreateModel(object):
             o.business_code = d['business_code']
         if 'parm' in d:
             o.parm = d['parm']
+        if 'pdt_mkt_code' in d:
+            o.pdt_mkt_code = d['pdt_mkt_code']
         if 'platform_access_type' in d:
             o.platform_access_type = d['platform_access_type']
         if 'platform_code' in d:

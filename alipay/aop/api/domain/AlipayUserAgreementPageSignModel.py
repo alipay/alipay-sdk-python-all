@@ -8,6 +8,7 @@ from alipay.aop.api.domain.DeviceParams import DeviceParams
 from alipay.aop.api.domain.IdentityParams import IdentityParams
 from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.ProdParams import ProdParams
+from alipay.aop.api.domain.SpecifiedAsset import SpecifiedAsset
 from alipay.aop.api.domain.SpecifiedChannelParam import SpecifiedChannelParam
 from alipay.aop.api.domain.SubMerchantParams import SubMerchantParams
 from alipay.aop.api.domain.ZmAuthParams import ZmAuthParams
@@ -32,6 +33,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._promo_params = None
         self._sign_scene = None
         self._sign_validity_period = None
+        self._specified_asset = None
         self._specified_sort_channel_params = None
         self._sub_merchant = None
         self._third_party_type = None
@@ -166,6 +168,16 @@ class AlipayUserAgreementPageSignModel(object):
     def sign_validity_period(self, value):
         self._sign_validity_period = value
     @property
+    def specified_asset(self):
+        return self._specified_asset
+
+    @specified_asset.setter
+    def specified_asset(self, value):
+        if isinstance(value, SpecifiedAsset):
+            self._specified_asset = value
+        else:
+            self._specified_asset = SpecifiedAsset.from_alipay_dict(value)
+    @property
     def specified_sort_channel_params(self):
         return self._specified_sort_channel_params
 
@@ -293,6 +305,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['sign_validity_period'] = self.sign_validity_period.to_alipay_dict()
             else:
                 params['sign_validity_period'] = self.sign_validity_period
+        if self.specified_asset:
+            if hasattr(self.specified_asset, 'to_alipay_dict'):
+                params['specified_asset'] = self.specified_asset.to_alipay_dict()
+            else:
+                params['specified_asset'] = self.specified_asset
         if self.specified_sort_channel_params:
             if hasattr(self.specified_sort_channel_params, 'to_alipay_dict'):
                 params['specified_sort_channel_params'] = self.specified_sort_channel_params.to_alipay_dict()
@@ -357,6 +374,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.sign_scene = d['sign_scene']
         if 'sign_validity_period' in d:
             o.sign_validity_period = d['sign_validity_period']
+        if 'specified_asset' in d:
+            o.specified_asset = d['specified_asset']
         if 'specified_sort_channel_params' in d:
             o.specified_sort_channel_params = d['specified_sort_channel_params']
         if 'sub_merchant' in d:

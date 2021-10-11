@@ -14,6 +14,7 @@ class AssetProduceItem(object):
         self._asset_pic_url = None
         self._asset_resource = None
         self._assign_item_id = None
+        self._biz_line = None
         self._biz_tag = None
         self._biz_type = None
         self._city = None
@@ -31,6 +32,9 @@ class AssetProduceItem(object):
         self._postcode = None
         self._print_data = None
         self._produce_order = None
+        self._produce_supplier_full_name = None
+        self._produce_supplier_id = None
+        self._produce_supplier_name = None
         self._produce_type = None
         self._province = None
         self._receiver_address = None
@@ -82,6 +86,13 @@ class AssetProduceItem(object):
     @assign_item_id.setter
     def assign_item_id(self, value):
         self._assign_item_id = value
+    @property
+    def biz_line(self):
+        return self._biz_line
+
+    @biz_line.setter
+    def biz_line(self, value):
+        self._biz_line = value
     @property
     def biz_tag(self):
         return self._biz_tag
@@ -202,6 +213,27 @@ class AssetProduceItem(object):
     def produce_order(self, value):
         self._produce_order = value
     @property
+    def produce_supplier_full_name(self):
+        return self._produce_supplier_full_name
+
+    @produce_supplier_full_name.setter
+    def produce_supplier_full_name(self, value):
+        self._produce_supplier_full_name = value
+    @property
+    def produce_supplier_id(self):
+        return self._produce_supplier_id
+
+    @produce_supplier_id.setter
+    def produce_supplier_id(self, value):
+        self._produce_supplier_id = value
+    @property
+    def produce_supplier_name(self):
+        return self._produce_supplier_name
+
+    @produce_supplier_name.setter
+    def produce_supplier_name(self, value):
+        self._produce_supplier_name = value
+    @property
     def produce_type(self):
         return self._produce_type
 
@@ -291,6 +323,11 @@ class AssetProduceItem(object):
                 params['assign_item_id'] = self.assign_item_id.to_alipay_dict()
             else:
                 params['assign_item_id'] = self.assign_item_id
+        if self.biz_line:
+            if hasattr(self.biz_line, 'to_alipay_dict'):
+                params['biz_line'] = self.biz_line.to_alipay_dict()
+            else:
+                params['biz_line'] = self.biz_line
         if self.biz_tag:
             if hasattr(self.biz_tag, 'to_alipay_dict'):
                 params['biz_tag'] = self.biz_tag.to_alipay_dict()
@@ -376,6 +413,21 @@ class AssetProduceItem(object):
                 params['produce_order'] = self.produce_order.to_alipay_dict()
             else:
                 params['produce_order'] = self.produce_order
+        if self.produce_supplier_full_name:
+            if hasattr(self.produce_supplier_full_name, 'to_alipay_dict'):
+                params['produce_supplier_full_name'] = self.produce_supplier_full_name.to_alipay_dict()
+            else:
+                params['produce_supplier_full_name'] = self.produce_supplier_full_name
+        if self.produce_supplier_id:
+            if hasattr(self.produce_supplier_id, 'to_alipay_dict'):
+                params['produce_supplier_id'] = self.produce_supplier_id.to_alipay_dict()
+            else:
+                params['produce_supplier_id'] = self.produce_supplier_id
+        if self.produce_supplier_name:
+            if hasattr(self.produce_supplier_name, 'to_alipay_dict'):
+                params['produce_supplier_name'] = self.produce_supplier_name.to_alipay_dict()
+            else:
+                params['produce_supplier_name'] = self.produce_supplier_name
         if self.produce_type:
             if hasattr(self.produce_type, 'to_alipay_dict'):
                 params['produce_type'] = self.produce_type.to_alipay_dict()
@@ -435,6 +487,8 @@ class AssetProduceItem(object):
             o.asset_resource = d['asset_resource']
         if 'assign_item_id' in d:
             o.assign_item_id = d['assign_item_id']
+        if 'biz_line' in d:
+            o.biz_line = d['biz_line']
         if 'biz_tag' in d:
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
@@ -469,6 +523,12 @@ class AssetProduceItem(object):
             o.print_data = d['print_data']
         if 'produce_order' in d:
             o.produce_order = d['produce_order']
+        if 'produce_supplier_full_name' in d:
+            o.produce_supplier_full_name = d['produce_supplier_full_name']
+        if 'produce_supplier_id' in d:
+            o.produce_supplier_id = d['produce_supplier_id']
+        if 'produce_supplier_name' in d:
+            o.produce_supplier_name = d['produce_supplier_name']
         if 'produce_type' in d:
             o.produce_type = d['produce_type']
         if 'province' in d:

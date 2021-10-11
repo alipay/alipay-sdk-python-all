@@ -9,6 +9,8 @@ class ExpenseConsumeInfo(object):
 
     def __init__(self):
         self._account_id = None
+        self._actual_account_number = None
+        self._batch_id = None
         self._bill_no = None
         self._bill_type = None
         self._category_name = None
@@ -16,10 +18,15 @@ class ExpenseConsumeInfo(object):
         self._consume_date = None
         self._consume_title = None
         self._employee_id = None
+        self._open_model = None
+        self._original_voucher_id = None
         self._out_biz_no = None
         self._p_pay_amount = None
         self._payee_name = None
+        self._project_id = None
         self._projiect_id = None
+        self._standard_id = None
+        self._tp_sign = None
         self._voucher_id = None
 
     @property
@@ -29,6 +36,20 @@ class ExpenseConsumeInfo(object):
     @account_id.setter
     def account_id(self, value):
         self._account_id = value
+    @property
+    def actual_account_number(self):
+        return self._actual_account_number
+
+    @actual_account_number.setter
+    def actual_account_number(self, value):
+        self._actual_account_number = value
+    @property
+    def batch_id(self):
+        return self._batch_id
+
+    @batch_id.setter
+    def batch_id(self, value):
+        self._batch_id = value
     @property
     def bill_no(self):
         return self._bill_no
@@ -79,6 +100,20 @@ class ExpenseConsumeInfo(object):
     def employee_id(self, value):
         self._employee_id = value
     @property
+    def open_model(self):
+        return self._open_model
+
+    @open_model.setter
+    def open_model(self, value):
+        self._open_model = value
+    @property
+    def original_voucher_id(self):
+        return self._original_voucher_id
+
+    @original_voucher_id.setter
+    def original_voucher_id(self, value):
+        self._original_voucher_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -100,12 +135,33 @@ class ExpenseConsumeInfo(object):
     def payee_name(self, value):
         self._payee_name = value
     @property
+    def project_id(self):
+        return self._project_id
+
+    @project_id.setter
+    def project_id(self, value):
+        self._project_id = value
+    @property
     def projiect_id(self):
         return self._projiect_id
 
     @projiect_id.setter
     def projiect_id(self, value):
         self._projiect_id = value
+    @property
+    def standard_id(self):
+        return self._standard_id
+
+    @standard_id.setter
+    def standard_id(self, value):
+        self._standard_id = value
+    @property
+    def tp_sign(self):
+        return self._tp_sign
+
+    @tp_sign.setter
+    def tp_sign(self, value):
+        self._tp_sign = value
     @property
     def voucher_id(self):
         return self._voucher_id
@@ -122,6 +178,16 @@ class ExpenseConsumeInfo(object):
                 params['account_id'] = self.account_id.to_alipay_dict()
             else:
                 params['account_id'] = self.account_id
+        if self.actual_account_number:
+            if hasattr(self.actual_account_number, 'to_alipay_dict'):
+                params['actual_account_number'] = self.actual_account_number.to_alipay_dict()
+            else:
+                params['actual_account_number'] = self.actual_account_number
+        if self.batch_id:
+            if hasattr(self.batch_id, 'to_alipay_dict'):
+                params['batch_id'] = self.batch_id.to_alipay_dict()
+            else:
+                params['batch_id'] = self.batch_id
         if self.bill_no:
             if hasattr(self.bill_no, 'to_alipay_dict'):
                 params['bill_no'] = self.bill_no.to_alipay_dict()
@@ -157,6 +223,16 @@ class ExpenseConsumeInfo(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.open_model:
+            if hasattr(self.open_model, 'to_alipay_dict'):
+                params['open_model'] = self.open_model.to_alipay_dict()
+            else:
+                params['open_model'] = self.open_model
+        if self.original_voucher_id:
+            if hasattr(self.original_voucher_id, 'to_alipay_dict'):
+                params['original_voucher_id'] = self.original_voucher_id.to_alipay_dict()
+            else:
+                params['original_voucher_id'] = self.original_voucher_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -172,11 +248,26 @@ class ExpenseConsumeInfo(object):
                 params['payee_name'] = self.payee_name.to_alipay_dict()
             else:
                 params['payee_name'] = self.payee_name
+        if self.project_id:
+            if hasattr(self.project_id, 'to_alipay_dict'):
+                params['project_id'] = self.project_id.to_alipay_dict()
+            else:
+                params['project_id'] = self.project_id
         if self.projiect_id:
             if hasattr(self.projiect_id, 'to_alipay_dict'):
                 params['projiect_id'] = self.projiect_id.to_alipay_dict()
             else:
                 params['projiect_id'] = self.projiect_id
+        if self.standard_id:
+            if hasattr(self.standard_id, 'to_alipay_dict'):
+                params['standard_id'] = self.standard_id.to_alipay_dict()
+            else:
+                params['standard_id'] = self.standard_id
+        if self.tp_sign:
+            if hasattr(self.tp_sign, 'to_alipay_dict'):
+                params['tp_sign'] = self.tp_sign.to_alipay_dict()
+            else:
+                params['tp_sign'] = self.tp_sign
         if self.voucher_id:
             if hasattr(self.voucher_id, 'to_alipay_dict'):
                 params['voucher_id'] = self.voucher_id.to_alipay_dict()
@@ -191,6 +282,10 @@ class ExpenseConsumeInfo(object):
         o = ExpenseConsumeInfo()
         if 'account_id' in d:
             o.account_id = d['account_id']
+        if 'actual_account_number' in d:
+            o.actual_account_number = d['actual_account_number']
+        if 'batch_id' in d:
+            o.batch_id = d['batch_id']
         if 'bill_no' in d:
             o.bill_no = d['bill_no']
         if 'bill_type' in d:
@@ -205,14 +300,24 @@ class ExpenseConsumeInfo(object):
             o.consume_title = d['consume_title']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'open_model' in d:
+            o.open_model = d['open_model']
+        if 'original_voucher_id' in d:
+            o.original_voucher_id = d['original_voucher_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'p_pay_amount' in d:
             o.p_pay_amount = d['p_pay_amount']
         if 'payee_name' in d:
             o.payee_name = d['payee_name']
+        if 'project_id' in d:
+            o.project_id = d['project_id']
         if 'projiect_id' in d:
             o.projiect_id = d['projiect_id']
+        if 'standard_id' in d:
+            o.standard_id = d['standard_id']
+        if 'tp_sign' in d:
+            o.tp_sign = d['tp_sign']
         if 'voucher_id' in d:
             o.voucher_id = d['voucher_id']
         return o

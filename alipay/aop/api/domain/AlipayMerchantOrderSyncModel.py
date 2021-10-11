@@ -11,6 +11,7 @@ from alipay.aop.api.domain.OrderJourneyInfo import OrderJourneyInfo
 from alipay.aop.api.domain.OrderLogisticsInformationRequest import OrderLogisticsInformationRequest
 from alipay.aop.api.domain.OrderShopInfo import OrderShopInfo
 from alipay.aop.api.domain.TicketInfo import TicketInfo
+from alipay.aop.api.domain.TicketOrderInfo import TicketOrderInfo
 
 
 class AlipayMerchantOrderSyncModel(object):
@@ -41,6 +42,7 @@ class AlipayMerchantOrderSyncModel(object):
         self._shop_info = None
         self._sync_content = None
         self._ticket_info = None
+        self._ticket_order_list = None
         self._trade_no = None
         self._trade_type = None
 
@@ -259,6 +261,19 @@ class AlipayMerchantOrderSyncModel(object):
         else:
             self._ticket_info = TicketInfo.from_alipay_dict(value)
     @property
+    def ticket_order_list(self):
+        return self._ticket_order_list
+
+    @ticket_order_list.setter
+    def ticket_order_list(self, value):
+        if isinstance(value, list):
+            self._ticket_order_list = list()
+            for i in value:
+                if isinstance(i, TicketOrderInfo):
+                    self._ticket_order_list.append(i)
+                else:
+                    self._ticket_order_list.append(TicketOrderInfo.from_alipay_dict(i))
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -426,6 +441,16 @@ class AlipayMerchantOrderSyncModel(object):
                 params['ticket_info'] = self.ticket_info.to_alipay_dict()
             else:
                 params['ticket_info'] = self.ticket_info
+        if self.ticket_order_list:
+            if isinstance(self.ticket_order_list, list):
+                for i in range(0, len(self.ticket_order_list)):
+                    element = self.ticket_order_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ticket_order_list[i] = element.to_alipay_dict()
+            if hasattr(self.ticket_order_list, 'to_alipay_dict'):
+                params['ticket_order_list'] = self.ticket_order_list.to_alipay_dict()
+            else:
+                params['ticket_order_list'] = self.ticket_order_list
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -493,6 +518,8 @@ class AlipayMerchantOrderSyncModel(object):
             o.sync_content = d['sync_content']
         if 'ticket_info' in d:
             o.ticket_info = d['ticket_info']
+        if 'ticket_order_list' in d:
+            o.ticket_order_list = d['ticket_order_list']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'trade_type' in d:

@@ -12,6 +12,8 @@ class AlipayFundJointaccountUnsignModel(object):
         self._agreement_no = None
         self._biz_scene = None
         self._business_params = None
+        self._identity = None
+        self._identity_type = None
         self._product_code = None
 
     @property
@@ -43,6 +45,20 @@ class AlipayFundJointaccountUnsignModel(object):
     def business_params(self, value):
         self._business_params = value
     @property
+    def identity(self):
+        return self._identity
+
+    @identity.setter
+    def identity(self, value):
+        self._identity = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -73,6 +89,16 @@ class AlipayFundJointaccountUnsignModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.identity:
+            if hasattr(self.identity, 'to_alipay_dict'):
+                params['identity'] = self.identity.to_alipay_dict()
+            else:
+                params['identity'] = self.identity
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -93,6 +119,10 @@ class AlipayFundJointaccountUnsignModel(object):
             o.biz_scene = d['biz_scene']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'identity' in d:
+            o.identity = d['identity']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

@@ -10,6 +10,7 @@ class AlipayDataDataserviceAdGroupCreateormodifyModel(object):
 
     def __init__(self):
         self._biz_token = None
+        self._conversion_data_id_list = None
         self._conversion_id = None
         self._conversion_id_list = None
         self._conversion_type = None
@@ -34,6 +35,16 @@ class AlipayDataDataserviceAdGroupCreateormodifyModel(object):
     @biz_token.setter
     def biz_token(self, value):
         self._biz_token = value
+    @property
+    def conversion_data_id_list(self):
+        return self._conversion_data_id_list
+
+    @conversion_data_id_list.setter
+    def conversion_data_id_list(self, value):
+        if isinstance(value, list):
+            self._conversion_data_id_list = list()
+            for i in value:
+                self._conversion_data_id_list.append(i)
     @property
     def conversion_id(self):
         return self._conversion_id
@@ -167,6 +178,16 @@ class AlipayDataDataserviceAdGroupCreateormodifyModel(object):
                 params['biz_token'] = self.biz_token.to_alipay_dict()
             else:
                 params['biz_token'] = self.biz_token
+        if self.conversion_data_id_list:
+            if isinstance(self.conversion_data_id_list, list):
+                for i in range(0, len(self.conversion_data_id_list)):
+                    element = self.conversion_data_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.conversion_data_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.conversion_data_id_list, 'to_alipay_dict'):
+                params['conversion_data_id_list'] = self.conversion_data_id_list.to_alipay_dict()
+            else:
+                params['conversion_data_id_list'] = self.conversion_data_id_list
         if self.conversion_id:
             if hasattr(self.conversion_id, 'to_alipay_dict'):
                 params['conversion_id'] = self.conversion_id.to_alipay_dict()
@@ -271,6 +292,8 @@ class AlipayDataDataserviceAdGroupCreateormodifyModel(object):
         o = AlipayDataDataserviceAdGroupCreateormodifyModel()
         if 'biz_token' in d:
             o.biz_token = d['biz_token']
+        if 'conversion_data_id_list' in d:
+            o.conversion_data_id_list = d['conversion_data_id_list']
         if 'conversion_id' in d:
             o.conversion_id = d['conversion_id']
         if 'conversion_id_list' in d:

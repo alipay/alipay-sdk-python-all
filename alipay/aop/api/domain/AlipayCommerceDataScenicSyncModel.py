@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceDataScenicSyncModel(object):
 
     def __init__(self):
+        self._code_value = None
         self._isv_name = None
         self._isv_scenic_address = None
         self._isv_scenic_name = None
@@ -15,6 +16,16 @@ class AlipayCommerceDataScenicSyncModel(object):
         self._scenic_app_id = None
         self._scenic_id = None
 
+    @property
+    def code_value(self):
+        return self._code_value
+
+    @code_value.setter
+    def code_value(self, value):
+        if isinstance(value, list):
+            self._code_value = list()
+            for i in value:
+                self._code_value.append(i)
     @property
     def isv_name(self):
         return self._isv_name
@@ -61,6 +72,16 @@ class AlipayCommerceDataScenicSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.code_value:
+            if isinstance(self.code_value, list):
+                for i in range(0, len(self.code_value)):
+                    element = self.code_value[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.code_value[i] = element.to_alipay_dict()
+            if hasattr(self.code_value, 'to_alipay_dict'):
+                params['code_value'] = self.code_value.to_alipay_dict()
+            else:
+                params['code_value'] = self.code_value
         if self.isv_name:
             if hasattr(self.isv_name, 'to_alipay_dict'):
                 params['isv_name'] = self.isv_name.to_alipay_dict()
@@ -98,6 +119,8 @@ class AlipayCommerceDataScenicSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceDataScenicSyncModel()
+        if 'code_value' in d:
+            o.code_value = d['code_value']
         if 'isv_name' in d:
             o.isv_name = d['isv_name']
         if 'isv_scenic_address' in d:

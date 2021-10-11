@@ -24,6 +24,7 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
         self._ticket_status_desc = None
         self._ticket_trans_info_list = None
         self._time_cards = None
+        self._tm_item_id = None
         self._total_quantity = None
         self._voucher_id = None
 
@@ -132,6 +133,13 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
     def time_cards(self, value):
         self._time_cards = value
     @property
+    def tm_item_id(self):
+        return self._tm_item_id
+
+    @tm_item_id.setter
+    def tm_item_id(self, value):
+        self._tm_item_id = value
+    @property
     def total_quantity(self):
         return self._total_quantity
 
@@ -176,6 +184,8 @@ class KoubeiTradeTicketTicketcodeQueryResponse(AlipayResponse):
             self.ticket_trans_info_list = response['ticket_trans_info_list']
         if 'time_cards' in response:
             self.time_cards = response['time_cards']
+        if 'tm_item_id' in response:
+            self.tm_item_id = response['tm_item_id']
         if 'total_quantity' in response:
             self.total_quantity = response['total_quantity']
         if 'voucher_id' in response:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.EpBranchInfo import EpBranchInfo
 
 
 class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
@@ -14,6 +15,8 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
         self._business_scope = None
         self._charge_person_name = None
         self._charge_person_type = None
+        self._employee_account = None
+        self._ep_branch_list = None
         self._ep_cert_no = None
         self._ep_name = None
         self._ep_status = None
@@ -24,6 +27,7 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
         self._registered_address = None
         self._registered_capital = None
         self._registered_org = None
+        self._social_security_account = None
 
     @property
     def business_period_from(self):
@@ -60,6 +64,26 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
     @charge_person_type.setter
     def charge_person_type(self, value):
         self._charge_person_type = value
+    @property
+    def employee_account(self):
+        return self._employee_account
+
+    @employee_account.setter
+    def employee_account(self, value):
+        self._employee_account = value
+    @property
+    def ep_branch_list(self):
+        return self._ep_branch_list
+
+    @ep_branch_list.setter
+    def ep_branch_list(self, value):
+        if isinstance(value, list):
+            self._ep_branch_list = list()
+            for i in value:
+                if isinstance(i, EpBranchInfo):
+                    self._ep_branch_list.append(i)
+                else:
+                    self._ep_branch_list.append(EpBranchInfo.from_alipay_dict(i))
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -130,6 +154,13 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
     @registered_org.setter
     def registered_org(self, value):
         self._registered_org = value
+    @property
+    def social_security_account(self):
+        return self._social_security_account
+
+    @social_security_account.setter
+    def social_security_account(self, value):
+        self._social_security_account = value
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpDossierInfoQueryResponse, self).parse_response_content(response_content)
@@ -143,6 +174,10 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
             self.charge_person_name = response['charge_person_name']
         if 'charge_person_type' in response:
             self.charge_person_type = response['charge_person_type']
+        if 'employee_account' in response:
+            self.employee_account = response['employee_account']
+        if 'ep_branch_list' in response:
+            self.ep_branch_list = response['ep_branch_list']
         if 'ep_cert_no' in response:
             self.ep_cert_no = response['ep_cert_no']
         if 'ep_name' in response:
@@ -163,3 +198,5 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
             self.registered_capital = response['registered_capital']
         if 'registered_org' in response:
             self.registered_org = response['registered_org']
+        if 'social_security_account' in response:
+            self.social_security_account = response['social_security_account']

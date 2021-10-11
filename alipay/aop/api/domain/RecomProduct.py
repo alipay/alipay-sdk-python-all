@@ -24,6 +24,7 @@ class RecomProduct(object):
         self._plans = None
         self._premium = None
         self._prod_no = None
+        self._recom_flow_no = None
         self._resource_list = None
         self._resources = None
         self._restriction_type = None
@@ -124,6 +125,13 @@ class RecomProduct(object):
     @prod_no.setter
     def prod_no(self, value):
         self._prod_no = value
+    @property
+    def recom_flow_no(self):
+        return self._recom_flow_no
+
+    @recom_flow_no.setter
+    def recom_flow_no(self, value):
+        self._recom_flow_no = value
     @property
     def resource_list(self):
         return self._resource_list
@@ -237,6 +245,11 @@ class RecomProduct(object):
                 params['prod_no'] = self.prod_no.to_alipay_dict()
             else:
                 params['prod_no'] = self.prod_no
+        if self.recom_flow_no:
+            if hasattr(self.recom_flow_no, 'to_alipay_dict'):
+                params['recom_flow_no'] = self.recom_flow_no.to_alipay_dict()
+            else:
+                params['recom_flow_no'] = self.recom_flow_no
         if self.resource_list:
             if isinstance(self.resource_list, list):
                 for i in range(0, len(self.resource_list)):
@@ -300,6 +313,8 @@ class RecomProduct(object):
             o.premium = d['premium']
         if 'prod_no' in d:
             o.prod_no = d['prod_no']
+        if 'recom_flow_no' in d:
+            o.recom_flow_no = d['recom_flow_no']
         if 'resource_list' in d:
             o.resource_list = d['resource_list']
         if 'resources' in d:

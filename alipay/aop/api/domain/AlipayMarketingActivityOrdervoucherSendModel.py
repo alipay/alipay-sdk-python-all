@@ -10,6 +10,7 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
     def __init__(self):
         self._activity_id = None
         self._biz_dt = None
+        self._ch_info = None
         self._merchant_order_url = None
         self._out_biz_no = None
         self._trade_channel = None
@@ -30,6 +31,13 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
     @biz_dt.setter
     def biz_dt(self, value):
         self._biz_dt = value
+    @property
+    def ch_info(self):
+        return self._ch_info
+
+    @ch_info.setter
+    def ch_info(self, value):
+        self._ch_info = value
     @property
     def merchant_order_url(self):
         return self._merchant_order_url
@@ -79,6 +87,11 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
                 params['biz_dt'] = self.biz_dt.to_alipay_dict()
             else:
                 params['biz_dt'] = self.biz_dt
+        if self.ch_info:
+            if hasattr(self.ch_info, 'to_alipay_dict'):
+                params['ch_info'] = self.ch_info.to_alipay_dict()
+            else:
+                params['ch_info'] = self.ch_info
         if self.merchant_order_url:
             if hasattr(self.merchant_order_url, 'to_alipay_dict'):
                 params['merchant_order_url'] = self.merchant_order_url.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
             o.activity_id = d['activity_id']
         if 'biz_dt' in d:
             o.biz_dt = d['biz_dt']
+        if 'ch_info' in d:
+            o.ch_info = d['ch_info']
         if 'merchant_order_url' in d:
             o.merchant_order_url = d['merchant_order_url']
         if 'out_biz_no' in d:

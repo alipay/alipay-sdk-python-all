@@ -15,6 +15,7 @@ class AnttechBlockchainDefinInsuranceApplyCreateResponse(AlipayResponse):
         self._insure_start_date = None
         self._parm = None
         self._policy_no = None
+        self._policy_url = None
         self._premium = None
         self._trade_no = None
 
@@ -61,6 +62,13 @@ class AnttechBlockchainDefinInsuranceApplyCreateResponse(AlipayResponse):
     def policy_no(self, value):
         self._policy_no = value
     @property
+    def policy_url(self):
+        return self._policy_url
+
+    @policy_url.setter
+    def policy_url(self, value):
+        self._policy_url = value
+    @property
     def premium(self):
         return self._premium
 
@@ -89,6 +97,8 @@ class AnttechBlockchainDefinInsuranceApplyCreateResponse(AlipayResponse):
             self.parm = response['parm']
         if 'policy_no' in response:
             self.policy_no = response['policy_no']
+        if 'policy_url' in response:
+            self.policy_url = response['policy_url']
         if 'premium' in response:
             self.premium = response['premium']
         if 'trade_no' in response:

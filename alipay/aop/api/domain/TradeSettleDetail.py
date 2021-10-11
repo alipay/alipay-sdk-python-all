@@ -12,6 +12,8 @@ class TradeSettleDetail(object):
         self._operation_dt = None
         self._operation_serial_no = None
         self._operation_type = None
+        self._ori_trans_in = None
+        self._ori_trans_out = None
         self._trans_in = None
         self._trans_out = None
 
@@ -43,6 +45,20 @@ class TradeSettleDetail(object):
     @operation_type.setter
     def operation_type(self, value):
         self._operation_type = value
+    @property
+    def ori_trans_in(self):
+        return self._ori_trans_in
+
+    @ori_trans_in.setter
+    def ori_trans_in(self, value):
+        self._ori_trans_in = value
+    @property
+    def ori_trans_out(self):
+        return self._ori_trans_out
+
+    @ori_trans_out.setter
+    def ori_trans_out(self, value):
+        self._ori_trans_out = value
     @property
     def trans_in(self):
         return self._trans_in
@@ -81,6 +97,16 @@ class TradeSettleDetail(object):
                 params['operation_type'] = self.operation_type.to_alipay_dict()
             else:
                 params['operation_type'] = self.operation_type
+        if self.ori_trans_in:
+            if hasattr(self.ori_trans_in, 'to_alipay_dict'):
+                params['ori_trans_in'] = self.ori_trans_in.to_alipay_dict()
+            else:
+                params['ori_trans_in'] = self.ori_trans_in
+        if self.ori_trans_out:
+            if hasattr(self.ori_trans_out, 'to_alipay_dict'):
+                params['ori_trans_out'] = self.ori_trans_out.to_alipay_dict()
+            else:
+                params['ori_trans_out'] = self.ori_trans_out
         if self.trans_in:
             if hasattr(self.trans_in, 'to_alipay_dict'):
                 params['trans_in'] = self.trans_in.to_alipay_dict()
@@ -106,6 +132,10 @@ class TradeSettleDetail(object):
             o.operation_serial_no = d['operation_serial_no']
         if 'operation_type' in d:
             o.operation_type = d['operation_type']
+        if 'ori_trans_in' in d:
+            o.ori_trans_in = d['ori_trans_in']
+        if 'ori_trans_out' in d:
+            o.ori_trans_out = d['ori_trans_out']
         if 'trans_in' in d:
             o.trans_in = d['trans_in']
         if 'trans_out' in d:

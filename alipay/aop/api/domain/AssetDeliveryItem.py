@@ -18,6 +18,7 @@ class AssetDeliveryItem(object):
         self._apply_order_id = None
         self._assign_item_id = None
         self._assign_out_order_id = None
+        self._biz_line = None
         self._biz_tag = None
         self._biz_type = None
         self._custom_clearance = None
@@ -25,6 +26,10 @@ class AssetDeliveryItem(object):
         self._delivery_process_no = None
         self._delivery_process_supplier_id = None
         self._delivery_process_supplier_name = None
+        self._delivery_supplier_full_name = None
+        self._delivery_supplier_id = None
+        self._delivery_supplier_name = None
+        self._ext_info = None
         self._from_address = None
         self._gmt_assign = None
         self._item_id = None
@@ -86,6 +91,13 @@ class AssetDeliveryItem(object):
     def assign_out_order_id(self, value):
         self._assign_out_order_id = value
     @property
+    def biz_line(self):
+        return self._biz_line
+
+    @biz_line.setter
+    def biz_line(self, value):
+        self._biz_line = value
+    @property
     def biz_tag(self):
         return self._biz_tag
 
@@ -137,6 +149,34 @@ class AssetDeliveryItem(object):
     @delivery_process_supplier_name.setter
     def delivery_process_supplier_name(self, value):
         self._delivery_process_supplier_name = value
+    @property
+    def delivery_supplier_full_name(self):
+        return self._delivery_supplier_full_name
+
+    @delivery_supplier_full_name.setter
+    def delivery_supplier_full_name(self, value):
+        self._delivery_supplier_full_name = value
+    @property
+    def delivery_supplier_id(self):
+        return self._delivery_supplier_id
+
+    @delivery_supplier_id.setter
+    def delivery_supplier_id(self, value):
+        self._delivery_supplier_id = value
+    @property
+    def delivery_supplier_name(self):
+        return self._delivery_supplier_name
+
+    @delivery_supplier_name.setter
+    def delivery_supplier_name(self, value):
+        self._delivery_supplier_name = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def from_address(self):
         return self._from_address
@@ -299,6 +339,11 @@ class AssetDeliveryItem(object):
                 params['assign_out_order_id'] = self.assign_out_order_id.to_alipay_dict()
             else:
                 params['assign_out_order_id'] = self.assign_out_order_id
+        if self.biz_line:
+            if hasattr(self.biz_line, 'to_alipay_dict'):
+                params['biz_line'] = self.biz_line.to_alipay_dict()
+            else:
+                params['biz_line'] = self.biz_line
         if self.biz_tag:
             if hasattr(self.biz_tag, 'to_alipay_dict'):
                 params['biz_tag'] = self.biz_tag.to_alipay_dict()
@@ -334,6 +379,26 @@ class AssetDeliveryItem(object):
                 params['delivery_process_supplier_name'] = self.delivery_process_supplier_name.to_alipay_dict()
             else:
                 params['delivery_process_supplier_name'] = self.delivery_process_supplier_name
+        if self.delivery_supplier_full_name:
+            if hasattr(self.delivery_supplier_full_name, 'to_alipay_dict'):
+                params['delivery_supplier_full_name'] = self.delivery_supplier_full_name.to_alipay_dict()
+            else:
+                params['delivery_supplier_full_name'] = self.delivery_supplier_full_name
+        if self.delivery_supplier_id:
+            if hasattr(self.delivery_supplier_id, 'to_alipay_dict'):
+                params['delivery_supplier_id'] = self.delivery_supplier_id.to_alipay_dict()
+            else:
+                params['delivery_supplier_id'] = self.delivery_supplier_id
+        if self.delivery_supplier_name:
+            if hasattr(self.delivery_supplier_name, 'to_alipay_dict'):
+                params['delivery_supplier_name'] = self.delivery_supplier_name.to_alipay_dict()
+            else:
+                params['delivery_supplier_name'] = self.delivery_supplier_name
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.from_address:
             if hasattr(self.from_address, 'to_alipay_dict'):
                 params['from_address'] = self.from_address.to_alipay_dict()
@@ -438,6 +503,8 @@ class AssetDeliveryItem(object):
             o.assign_item_id = d['assign_item_id']
         if 'assign_out_order_id' in d:
             o.assign_out_order_id = d['assign_out_order_id']
+        if 'biz_line' in d:
+            o.biz_line = d['biz_line']
         if 'biz_tag' in d:
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
@@ -452,6 +519,14 @@ class AssetDeliveryItem(object):
             o.delivery_process_supplier_id = d['delivery_process_supplier_id']
         if 'delivery_process_supplier_name' in d:
             o.delivery_process_supplier_name = d['delivery_process_supplier_name']
+        if 'delivery_supplier_full_name' in d:
+            o.delivery_supplier_full_name = d['delivery_supplier_full_name']
+        if 'delivery_supplier_id' in d:
+            o.delivery_supplier_id = d['delivery_supplier_id']
+        if 'delivery_supplier_name' in d:
+            o.delivery_supplier_name = d['delivery_supplier_name']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'from_address' in d:
             o.from_address = d['from_address']
         if 'gmt_assign' in d:

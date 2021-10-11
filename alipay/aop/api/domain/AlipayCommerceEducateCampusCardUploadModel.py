@@ -9,12 +9,20 @@ from alipay.aop.api.domain.CampusCardPicture import CampusCardPicture
 class AlipayCommerceEducateCampusCardUploadModel(object):
 
     def __init__(self):
+        self._biz_source_from = None
         self._campus_card_picture = None
         self._card_pictures = None
         self._degree = None
         self._enroll_date = None
         self._school_name = None
 
+    @property
+    def biz_source_from(self):
+        return self._biz_source_from
+
+    @biz_source_from.setter
+    def biz_source_from(self, value):
+        self._biz_source_from = value
     @property
     def campus_card_picture(self):
         return self._campus_card_picture
@@ -63,6 +71,11 @@ class AlipayCommerceEducateCampusCardUploadModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_source_from:
+            if hasattr(self.biz_source_from, 'to_alipay_dict'):
+                params['biz_source_from'] = self.biz_source_from.to_alipay_dict()
+            else:
+                params['biz_source_from'] = self.biz_source_from
         if self.campus_card_picture:
             if isinstance(self.campus_card_picture, list):
                 for i in range(0, len(self.campus_card_picture)):
@@ -105,6 +118,8 @@ class AlipayCommerceEducateCampusCardUploadModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateCampusCardUploadModel()
+        if 'biz_source_from' in d:
+            o.biz_source_from = d['biz_source_from']
         if 'campus_card_picture' in d:
             o.campus_card_picture = d['campus_card_picture']
         if 'card_pictures' in d:

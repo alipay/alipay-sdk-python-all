@@ -18,6 +18,7 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
         self._end_time = None
         self._fund_type = None
         self._install_num_list = None
+        self._isv_id = None
         self._max_money_limit = None
         self._merchant_info = None
         self._min_money_limit = None
@@ -91,6 +92,13 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
             self._install_num_list = list()
             for i in value:
                 self._install_num_list.append(i)
+    @property
+    def isv_id(self):
+        return self._isv_id
+
+    @isv_id.setter
+    def isv_id(self, value):
+        self._isv_id = value
     @property
     def max_money_limit(self):
         return self._max_money_limit
@@ -193,6 +201,11 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
                 params['install_num_list'] = self.install_num_list.to_alipay_dict()
             else:
                 params['install_num_list'] = self.install_num_list
+        if self.isv_id:
+            if hasattr(self.isv_id, 'to_alipay_dict'):
+                params['isv_id'] = self.isv_id.to_alipay_dict()
+            else:
+                params['isv_id'] = self.isv_id
         if self.max_money_limit:
             if hasattr(self.max_money_limit, 'to_alipay_dict'):
                 params['max_money_limit'] = self.max_money_limit.to_alipay_dict()
@@ -253,6 +266,8 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
             o.fund_type = d['fund_type']
         if 'install_num_list' in d:
             o.install_num_list = d['install_num_list']
+        if 'isv_id' in d:
+            o.isv_id = d['isv_id']
         if 'max_money_limit' in d:
             o.max_money_limit = d['max_money_limit']
         if 'merchant_info' in d:

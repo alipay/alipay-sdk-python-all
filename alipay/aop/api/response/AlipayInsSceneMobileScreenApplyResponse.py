@@ -12,6 +12,7 @@ class AlipayInsSceneMobileScreenApplyResponse(AlipayResponse):
         self._out_biz_no = None
         self._policy_no = None
         self._policy_url = None
+        self._premium = None
 
     @property
     def out_biz_no(self):
@@ -34,6 +35,13 @@ class AlipayInsSceneMobileScreenApplyResponse(AlipayResponse):
     @policy_url.setter
     def policy_url(self, value):
         self._policy_url = value
+    @property
+    def premium(self):
+        return self._premium
+
+    @premium.setter
+    def premium(self, value):
+        self._premium = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayInsSceneMobileScreenApplyResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayInsSceneMobileScreenApplyResponse(AlipayResponse):
             self.policy_no = response['policy_no']
         if 'policy_url' in response:
             self.policy_url = response['policy_url']
+        if 'premium' in response:
+            self.premium = response['premium']

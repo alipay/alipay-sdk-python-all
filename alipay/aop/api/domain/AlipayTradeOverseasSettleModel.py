@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OverseasExtendParams import OverseasExtendParams
 
 
 class AlipayTradeOverseasSettleModel(object):
 
     def __init__(self):
         self._amount = None
+        self._extend_params = None
         self._foreign_settle_currency = None
         self._out_request_no = None
         self._trade_no = None
@@ -20,6 +22,16 @@ class AlipayTradeOverseasSettleModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, OverseasExtendParams):
+            self._extend_params = value
+        else:
+            self._extend_params = OverseasExtendParams.from_alipay_dict(value)
     @property
     def foreign_settle_currency(self):
         return self._foreign_settle_currency
@@ -50,6 +62,11 @@ class AlipayTradeOverseasSettleModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.foreign_settle_currency:
             if hasattr(self.foreign_settle_currency, 'to_alipay_dict'):
                 params['foreign_settle_currency'] = self.foreign_settle_currency.to_alipay_dict()
@@ -74,6 +91,8 @@ class AlipayTradeOverseasSettleModel(object):
         o = AlipayTradeOverseasSettleModel()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'foreign_settle_currency' in d:
             o.foreign_settle_currency = d['foreign_settle_currency']
         if 'out_request_no' in d:

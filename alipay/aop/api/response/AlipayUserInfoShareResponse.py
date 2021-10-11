@@ -39,6 +39,10 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._firm_type = None
         self._gender = None
         self._graduation_time = None
+        self._identity_card_address = None
+        self._identity_card_area = None
+        self._identity_card_city = None
+        self._identity_card_province = None
         self._is_balance_frozen = None
         self._is_certified = None
         self._is_student_certified = None
@@ -58,6 +62,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._taobao_id = None
         self._user_id = None
         self._user_name = None
+        self._user_nation = None
         self._user_status = None
         self._user_type = None
         self._zip = None
@@ -263,6 +268,34 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def graduation_time(self, value):
         self._graduation_time = value
     @property
+    def identity_card_address(self):
+        return self._identity_card_address
+
+    @identity_card_address.setter
+    def identity_card_address(self, value):
+        self._identity_card_address = value
+    @property
+    def identity_card_area(self):
+        return self._identity_card_area
+
+    @identity_card_area.setter
+    def identity_card_area(self, value):
+        self._identity_card_area = value
+    @property
+    def identity_card_city(self):
+        return self._identity_card_city
+
+    @identity_card_city.setter
+    def identity_card_city(self, value):
+        self._identity_card_city = value
+    @property
+    def identity_card_province(self):
+        return self._identity_card_province
+
+    @identity_card_province.setter
+    def identity_card_province(self, value):
+        self._identity_card_province = value
+    @property
     def is_balance_frozen(self):
         return self._is_balance_frozen
 
@@ -402,6 +435,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def user_name(self, value):
         self._user_name = value
     @property
+    def user_nation(self):
+        return self._user_nation
+
+    @user_nation.setter
+    def user_nation(self, value):
+        self._user_nation = value
+    @property
     def user_status(self):
         return self._user_status
 
@@ -477,6 +517,14 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.gender = response['gender']
         if 'graduation_time' in response:
             self.graduation_time = response['graduation_time']
+        if 'identity_card_address' in response:
+            self.identity_card_address = response['identity_card_address']
+        if 'identity_card_area' in response:
+            self.identity_card_area = response['identity_card_area']
+        if 'identity_card_city' in response:
+            self.identity_card_city = response['identity_card_city']
+        if 'identity_card_province' in response:
+            self.identity_card_province = response['identity_card_province']
         if 'is_balance_frozen' in response:
             self.is_balance_frozen = response['is_balance_frozen']
         if 'is_certified' in response:
@@ -515,6 +563,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.user_id = response['user_id']
         if 'user_name' in response:
             self.user_name = response['user_name']
+        if 'user_nation' in response:
+            self.user_nation = response['user_nation']
         if 'user_status' in response:
             self.user_status = response['user_status']
         if 'user_type' in response:

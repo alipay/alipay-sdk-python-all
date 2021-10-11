@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.UserRiskPrediction import UserRiskPrediction
 from alipay.aop.api.domain.WaitRepaymentOrderInfo import WaitRepaymentOrderInfo
 
 
@@ -14,6 +15,7 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
         self._result_code = None
         self._result_message = None
         self._risk_level = None
+        self._user_risk_prediction = None
         self._wait_repayment_amount = None
         self._wait_repayment_order_count = None
         self._wait_repayment_order_infos = None
@@ -46,6 +48,16 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
     @risk_level.setter
     def risk_level(self, value):
         self._risk_level = value
+    @property
+    def user_risk_prediction(self):
+        return self._user_risk_prediction
+
+    @user_risk_prediction.setter
+    def user_risk_prediction(self, value):
+        if isinstance(value, UserRiskPrediction):
+            self._user_risk_prediction = value
+        else:
+            self._user_risk_prediction = UserRiskPrediction.from_alipay_dict(value)
     @property
     def wait_repayment_amount(self):
         return self._wait_repayment_amount
@@ -84,6 +96,8 @@ class AlipayTradeAdvanceConsultResponse(AlipayResponse):
             self.result_message = response['result_message']
         if 'risk_level' in response:
             self.risk_level = response['risk_level']
+        if 'user_risk_prediction' in response:
+            self.user_risk_prediction = response['user_risk_prediction']
         if 'wait_repayment_amount' in response:
             self.wait_repayment_amount = response['wait_repayment_amount']
         if 'wait_repayment_order_count' in response:

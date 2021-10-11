@@ -7,12 +7,12 @@ The official Alipay SDK for Python.
 
 
 Links
------
+--------
 
 * Website: https://open.alipay.com
 
 Issues
------
+--------
 
 不管您在使用SDK的过程中遇到任何问题，欢迎前往 `支付宝开放社区 <https://forum.alipay.com/mini-app/channel/1100001>`_ 发帖与支付宝工作人员和其他开发者一起交流。
 

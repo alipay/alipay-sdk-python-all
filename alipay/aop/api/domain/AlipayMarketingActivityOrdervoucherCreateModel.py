@@ -15,6 +15,7 @@ class AlipayMarketingActivityOrdervoucherCreateModel(object):
     def __init__(self):
         self._activity_name = None
         self._belong_merchant_info = None
+        self._biz_tag = None
         self._code_mode = None
         self._customer_guide = None
         self._out_biz_no = None
@@ -42,6 +43,13 @@ class AlipayMarketingActivityOrdervoucherCreateModel(object):
             self._belong_merchant_info = value
         else:
             self._belong_merchant_info = BelongMerchantInfo.from_alipay_dict(value)
+    @property
+    def biz_tag(self):
+        return self._biz_tag
+
+    @biz_tag.setter
+    def biz_tag(self, value):
+        self._biz_tag = value
     @property
     def code_mode(self):
         return self._code_mode
@@ -131,6 +139,11 @@ class AlipayMarketingActivityOrdervoucherCreateModel(object):
                 params['belong_merchant_info'] = self.belong_merchant_info.to_alipay_dict()
             else:
                 params['belong_merchant_info'] = self.belong_merchant_info
+        if self.biz_tag:
+            if hasattr(self.biz_tag, 'to_alipay_dict'):
+                params['biz_tag'] = self.biz_tag.to_alipay_dict()
+            else:
+                params['biz_tag'] = self.biz_tag
         if self.code_mode:
             if hasattr(self.code_mode, 'to_alipay_dict'):
                 params['code_mode'] = self.code_mode.to_alipay_dict()
@@ -187,6 +200,8 @@ class AlipayMarketingActivityOrdervoucherCreateModel(object):
             o.activity_name = d['activity_name']
         if 'belong_merchant_info' in d:
             o.belong_merchant_info = d['belong_merchant_info']
+        if 'biz_tag' in d:
+            o.biz_tag = d['biz_tag']
         if 'code_mode' in d:
             o.code_mode = d['code_mode']
         if 'customer_guide' in d:

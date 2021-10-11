@@ -10,6 +10,7 @@ class RecruitMaterial(object):
     def __init__(self):
         self._data = None
         self._description = None
+        self._material_audit_info = None
         self._name = None
         self._subject_id = None
 
@@ -27,6 +28,13 @@ class RecruitMaterial(object):
     @description.setter
     def description(self, value):
         self._description = value
+    @property
+    def material_audit_info(self):
+        return self._material_audit_info
+
+    @material_audit_info.setter
+    def material_audit_info(self, value):
+        self._material_audit_info = value
     @property
     def name(self):
         return self._name
@@ -55,6 +63,11 @@ class RecruitMaterial(object):
                 params['description'] = self.description.to_alipay_dict()
             else:
                 params['description'] = self.description
+        if self.material_audit_info:
+            if hasattr(self.material_audit_info, 'to_alipay_dict'):
+                params['material_audit_info'] = self.material_audit_info.to_alipay_dict()
+            else:
+                params['material_audit_info'] = self.material_audit_info
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -76,6 +89,8 @@ class RecruitMaterial(object):
             o.data = d['data']
         if 'description' in d:
             o.description = d['description']
+        if 'material_audit_info' in d:
+            o.material_audit_info = d['material_audit_info']
         if 'name' in d:
             o.name = d['name']
         if 'subject_id' in d:

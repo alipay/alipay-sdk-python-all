@@ -11,6 +11,7 @@ class AlipayFundJointaccountDetailQueryModel(object):
         self._account_id = None
         self._agreement_no = None
         self._biz_scene = None
+        self._out_biz_no = None
         self._product_code = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayFundJointaccountDetailQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def product_code(self):
         return self._product_code
@@ -60,6 +68,11 @@ class AlipayFundJointaccountDetailQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayFundJointaccountDetailQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

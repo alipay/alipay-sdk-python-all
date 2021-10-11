@@ -11,6 +11,7 @@ class AlipayOpenAppServiceApplyModel(object):
         self._category_id = None
         self._out_biz_no = None
         self._schema_version = None
+        self._service_code = None
         self._service_xml = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayOpenAppServiceApplyModel(object):
     @schema_version.setter
     def schema_version(self, value):
         self._schema_version = value
+    @property
+    def service_code(self):
+        return self._service_code
+
+    @service_code.setter
+    def service_code(self, value):
+        self._service_code = value
     @property
     def service_xml(self):
         return self._service_xml
@@ -60,6 +68,11 @@ class AlipayOpenAppServiceApplyModel(object):
                 params['schema_version'] = self.schema_version.to_alipay_dict()
             else:
                 params['schema_version'] = self.schema_version
+        if self.service_code:
+            if hasattr(self.service_code, 'to_alipay_dict'):
+                params['service_code'] = self.service_code.to_alipay_dict()
+            else:
+                params['service_code'] = self.service_code
         if self.service_xml:
             if hasattr(self.service_xml, 'to_alipay_dict'):
                 params['service_xml'] = self.service_xml.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayOpenAppServiceApplyModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'schema_version' in d:
             o.schema_version = d['schema_version']
+        if 'service_code' in d:
+            o.service_code = d['service_code']
         if 'service_xml' in d:
             o.service_xml = d['service_xml']
         return o

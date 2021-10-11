@@ -13,6 +13,7 @@ class AlipayUserDigitalidentityCertificateSyncModel(object):
         self._certificate_instance_code = None
         self._ext_info = None
         self._status = None
+        self._sync_token = None
         self._user_apply_cert_no = None
         self._user_apply_cert_type = None
         self._user_id = None
@@ -53,6 +54,13 @@ class AlipayUserDigitalidentityCertificateSyncModel(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def sync_token(self):
+        return self._sync_token
+
+    @sync_token.setter
+    def sync_token(self, value):
+        self._sync_token = value
     @property
     def user_apply_cert_no(self):
         return self._user_apply_cert_no
@@ -110,6 +118,11 @@ class AlipayUserDigitalidentityCertificateSyncModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.sync_token:
+            if hasattr(self.sync_token, 'to_alipay_dict'):
+                params['sync_token'] = self.sync_token.to_alipay_dict()
+            else:
+                params['sync_token'] = self.sync_token
         if self.user_apply_cert_no:
             if hasattr(self.user_apply_cert_no, 'to_alipay_dict'):
                 params['user_apply_cert_no'] = self.user_apply_cert_no.to_alipay_dict()
@@ -147,6 +160,8 @@ class AlipayUserDigitalidentityCertificateSyncModel(object):
             o.ext_info = d['ext_info']
         if 'status' in d:
             o.status = d['status']
+        if 'sync_token' in d:
+            o.sync_token = d['sync_token']
         if 'user_apply_cert_no' in d:
             o.user_apply_cert_no = d['user_apply_cert_no']
         if 'user_apply_cert_type' in d:

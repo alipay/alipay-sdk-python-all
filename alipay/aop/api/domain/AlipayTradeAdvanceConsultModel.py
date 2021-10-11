@@ -13,9 +13,12 @@ class AlipayTradeAdvanceConsultModel(object):
         self._consult_scene = None
         self._estimated_order_amount = None
         self._industry_product_code = None
+        self._need_user_risk_prediction = None
         self._out_trade_no = None
         self._sub_merchant_id = None
         self._sub_merchant_type = None
+        self._trade_digest = None
+        self._user_out_binding_phone = None
 
     @property
     def agreement_no(self):
@@ -53,6 +56,13 @@ class AlipayTradeAdvanceConsultModel(object):
     def industry_product_code(self, value):
         self._industry_product_code = value
     @property
+    def need_user_risk_prediction(self):
+        return self._need_user_risk_prediction
+
+    @need_user_risk_prediction.setter
+    def need_user_risk_prediction(self, value):
+        self._need_user_risk_prediction = value
+    @property
     def out_trade_no(self):
         return self._out_trade_no
 
@@ -73,6 +83,20 @@ class AlipayTradeAdvanceConsultModel(object):
     @sub_merchant_type.setter
     def sub_merchant_type(self, value):
         self._sub_merchant_type = value
+    @property
+    def trade_digest(self):
+        return self._trade_digest
+
+    @trade_digest.setter
+    def trade_digest(self, value):
+        self._trade_digest = value
+    @property
+    def user_out_binding_phone(self):
+        return self._user_out_binding_phone
+
+    @user_out_binding_phone.setter
+    def user_out_binding_phone(self, value):
+        self._user_out_binding_phone = value
 
 
     def to_alipay_dict(self):
@@ -102,6 +126,11 @@ class AlipayTradeAdvanceConsultModel(object):
                 params['industry_product_code'] = self.industry_product_code.to_alipay_dict()
             else:
                 params['industry_product_code'] = self.industry_product_code
+        if self.need_user_risk_prediction:
+            if hasattr(self.need_user_risk_prediction, 'to_alipay_dict'):
+                params['need_user_risk_prediction'] = self.need_user_risk_prediction.to_alipay_dict()
+            else:
+                params['need_user_risk_prediction'] = self.need_user_risk_prediction
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -117,6 +146,16 @@ class AlipayTradeAdvanceConsultModel(object):
                 params['sub_merchant_type'] = self.sub_merchant_type.to_alipay_dict()
             else:
                 params['sub_merchant_type'] = self.sub_merchant_type
+        if self.trade_digest:
+            if hasattr(self.trade_digest, 'to_alipay_dict'):
+                params['trade_digest'] = self.trade_digest.to_alipay_dict()
+            else:
+                params['trade_digest'] = self.trade_digest
+        if self.user_out_binding_phone:
+            if hasattr(self.user_out_binding_phone, 'to_alipay_dict'):
+                params['user_out_binding_phone'] = self.user_out_binding_phone.to_alipay_dict()
+            else:
+                params['user_out_binding_phone'] = self.user_out_binding_phone
         return params
 
     @staticmethod
@@ -134,12 +173,18 @@ class AlipayTradeAdvanceConsultModel(object):
             o.estimated_order_amount = d['estimated_order_amount']
         if 'industry_product_code' in d:
             o.industry_product_code = d['industry_product_code']
+        if 'need_user_risk_prediction' in d:
+            o.need_user_risk_prediction = d['need_user_risk_prediction']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'sub_merchant_id' in d:
             o.sub_merchant_id = d['sub_merchant_id']
         if 'sub_merchant_type' in d:
             o.sub_merchant_type = d['sub_merchant_type']
+        if 'trade_digest' in d:
+            o.trade_digest = d['trade_digest']
+        if 'user_out_binding_phone' in d:
+            o.user_out_binding_phone = d['user_out_binding_phone']
         return o
 
 

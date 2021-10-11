@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class DeviceExtParams(object):
 
     def __init__(self):
+        self._external_id = None
         self._external_shop_id = None
         self._payment_type = None
         self._shop_name = None
@@ -15,6 +16,13 @@ class DeviceExtParams(object):
         self._spi_app_id = None
         self._terminal_bind_info = None
 
+    @property
+    def external_id(self):
+        return self._external_id
+
+    @external_id.setter
+    def external_id(self, value):
+        self._external_id = value
     @property
     def external_shop_id(self):
         return self._external_shop_id
@@ -61,6 +69,11 @@ class DeviceExtParams(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.external_id:
+            if hasattr(self.external_id, 'to_alipay_dict'):
+                params['external_id'] = self.external_id.to_alipay_dict()
+            else:
+                params['external_id'] = self.external_id
         if self.external_shop_id:
             if hasattr(self.external_shop_id, 'to_alipay_dict'):
                 params['external_shop_id'] = self.external_shop_id.to_alipay_dict()
@@ -98,6 +111,8 @@ class DeviceExtParams(object):
         if not d:
             return None
         o = DeviceExtParams()
+        if 'external_id' in d:
+            o.external_id = d['external_id']
         if 'external_shop_id' in d:
             o.external_shop_id = d['external_shop_id']
         if 'payment_type' in d:

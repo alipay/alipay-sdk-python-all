@@ -15,6 +15,7 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
         self._plate_no = None
         self._seller_id = None
         self._total_amount = None
+        self._trade_no = None
         self._trade_status = None
         self._uid = None
 
@@ -64,6 +65,13 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
     def total_amount(self, value):
         self._total_amount = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def trade_status(self):
         return self._trade_status
 
@@ -111,6 +119,11 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
                 params['total_amount'] = self.total_amount.to_alipay_dict()
             else:
                 params['total_amount'] = self.total_amount
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         if self.trade_status:
             if hasattr(self.trade_status, 'to_alipay_dict'):
                 params['trade_status'] = self.trade_status.to_alipay_dict()
@@ -140,6 +153,8 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
             o.seller_id = d['seller_id']
         if 'total_amount' in d:
             o.total_amount = d['total_amount']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         if 'trade_status' in d:
             o.trade_status = d['trade_status']
         if 'uid' in d:

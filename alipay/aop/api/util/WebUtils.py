@@ -145,7 +145,7 @@ def do_post(url, query_string=None, headers=None, params=None, charset='utf-8', 
     except Exception as e:
         raise RequestException('[' + THREAD_LOCAL.uuid + ']post request failed. ' + str(e))
     response = connection.getresponse()
-    if response.status is not 200:
+    if response.status != 200:
         raise ResponseException('[' + THREAD_LOCAL.uuid + ']invalid http status ' + str(response.status) + \
                                ',detail body:' + response.read())
     result = response.read()
@@ -183,7 +183,7 @@ def do_multipart_post(url, query_string=None, headers=None, params=None, multipa
     except Exception as e:
         raise RequestException('[' + THREAD_LOCAL.uuid + ']post request failed. ' + str(e))
     response = connection.getresponse()
-    if response.status is not 200:
+    if response.status != 200:
         raise ResponseException('[' + THREAD_LOCAL.uuid + ']invalid http status ' + str(response.status) + \
                                 ',detail body:' + response.read())
     result = response.read()

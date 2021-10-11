@@ -13,6 +13,7 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
         self._biz_dt = None
         self._goods_detail = None
         self._out_biz_no = None
+        self._real_shop_id = None
         self._store_id = None
         self._total_fee = None
         self._trade_channel = None
@@ -53,6 +54,13 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def real_shop_id(self):
+        return self._real_shop_id
+
+    @real_shop_id.setter
+    def real_shop_id(self, value):
+        self._real_shop_id = value
     @property
     def store_id(self):
         return self._store_id
@@ -117,6 +125,11 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.real_shop_id:
+            if hasattr(self.real_shop_id, 'to_alipay_dict'):
+                params['real_shop_id'] = self.real_shop_id.to_alipay_dict()
+            else:
+                params['real_shop_id'] = self.real_shop_id
         if self.store_id:
             if hasattr(self.store_id, 'to_alipay_dict'):
                 params['store_id'] = self.store_id.to_alipay_dict()
@@ -157,6 +170,8 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
             o.goods_detail = d['goods_detail']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'real_shop_id' in d:
+            o.real_shop_id = d['real_shop_id']
         if 'store_id' in d:
             o.store_id = d['store_id']
         if 'total_fee' in d:

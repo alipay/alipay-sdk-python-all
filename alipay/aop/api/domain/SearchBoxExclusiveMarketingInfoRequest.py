@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SearchProductOrientedRuleOpenApi import SearchProductOrientedRuleOpenApi
 from alipay.aop.api.domain.SearchProductPeriod import SearchProductPeriod
 from alipay.aop.api.domain.SearchProductRegion import SearchProductRegion
 
@@ -18,6 +19,7 @@ class SearchBoxExclusiveMarketingInfoRequest(object):
         self._item_id = None
         self._material_link = None
         self._material_type = None
+        self._oriented_rules = None
         self._serv_code = None
         self._target_period = None
         self._target_region = None
@@ -79,6 +81,16 @@ class SearchBoxExclusiveMarketingInfoRequest(object):
     @material_type.setter
     def material_type(self, value):
         self._material_type = value
+    @property
+    def oriented_rules(self):
+        return self._oriented_rules
+
+    @oriented_rules.setter
+    def oriented_rules(self, value):
+        if isinstance(value, SearchProductOrientedRuleOpenApi):
+            self._oriented_rules = value
+        else:
+            self._oriented_rules = SearchProductOrientedRuleOpenApi.from_alipay_dict(value)
     @property
     def serv_code(self):
         return self._serv_code
@@ -160,6 +172,11 @@ class SearchBoxExclusiveMarketingInfoRequest(object):
                 params['material_type'] = self.material_type.to_alipay_dict()
             else:
                 params['material_type'] = self.material_type
+        if self.oriented_rules:
+            if hasattr(self.oriented_rules, 'to_alipay_dict'):
+                params['oriented_rules'] = self.oriented_rules.to_alipay_dict()
+            else:
+                params['oriented_rules'] = self.oriented_rules
         if self.serv_code:
             if hasattr(self.serv_code, 'to_alipay_dict'):
                 params['serv_code'] = self.serv_code.to_alipay_dict()
@@ -208,6 +225,8 @@ class SearchBoxExclusiveMarketingInfoRequest(object):
             o.material_link = d['material_link']
         if 'material_type' in d:
             o.material_type = d['material_type']
+        if 'oriented_rules' in d:
+            o.oriented_rules = d['oriented_rules']
         if 'serv_code' in d:
             o.serv_code = d['serv_code']
         if 'target_period' in d:

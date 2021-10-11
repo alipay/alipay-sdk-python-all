@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TuitionOrderExtendParam import TuitionOrderExtendParam
 
 
 class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
@@ -13,6 +14,7 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
         self._course_name = None
         self._course_start_month = None
         self._ext_info = None
+        self._ext_param = None
         self._logo = None
         self._out_order_no = None
         self._pay_amount = None
@@ -56,6 +58,16 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def ext_param(self):
+        return self._ext_param
+
+    @ext_param.setter
+    def ext_param(self, value):
+        if isinstance(value, TuitionOrderExtendParam):
+            self._ext_param = value
+        else:
+            self._ext_param = TuitionOrderExtendParam.from_alipay_dict(value)
     @property
     def logo(self):
         return self._logo
@@ -134,6 +146,11 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.ext_param:
+            if hasattr(self.ext_param, 'to_alipay_dict'):
+                params['ext_param'] = self.ext_param.to_alipay_dict()
+            else:
+                params['ext_param'] = self.ext_param
         if self.logo:
             if hasattr(self.logo, 'to_alipay_dict'):
                 params['logo'] = self.logo.to_alipay_dict()
@@ -186,6 +203,8 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
             o.course_start_month = d['course_start_month']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'ext_param' in d:
+            o.ext_param = d['ext_param']
         if 'logo' in d:
             o.logo = d['logo']
         if 'out_order_no' in d:

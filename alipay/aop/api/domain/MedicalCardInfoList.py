@@ -11,7 +11,7 @@ class MedicalCardInfoList(object):
     def __init__(self):
         self._insured_cities = None
         self._insured_status = None
-        self._relation_type = None
+        self._medical_card_id = None
         self._status = None
 
     @property
@@ -32,12 +32,12 @@ class MedicalCardInfoList(object):
     def insured_status(self, value):
         self._insured_status = value
     @property
-    def relation_type(self):
-        return self._relation_type
+    def medical_card_id(self):
+        return self._medical_card_id
 
-    @relation_type.setter
-    def relation_type(self, value):
-        self._relation_type = value
+    @medical_card_id.setter
+    def medical_card_id(self, value):
+        self._medical_card_id = value
     @property
     def status(self):
         return self._status
@@ -59,11 +59,11 @@ class MedicalCardInfoList(object):
                 params['insured_status'] = self.insured_status.to_alipay_dict()
             else:
                 params['insured_status'] = self.insured_status
-        if self.relation_type:
-            if hasattr(self.relation_type, 'to_alipay_dict'):
-                params['relation_type'] = self.relation_type.to_alipay_dict()
+        if self.medical_card_id:
+            if hasattr(self.medical_card_id, 'to_alipay_dict'):
+                params['medical_card_id'] = self.medical_card_id.to_alipay_dict()
             else:
-                params['relation_type'] = self.relation_type
+                params['medical_card_id'] = self.medical_card_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -80,8 +80,8 @@ class MedicalCardInfoList(object):
             o.insured_cities = d['insured_cities']
         if 'insured_status' in d:
             o.insured_status = d['insured_status']
-        if 'relation_type' in d:
-            o.relation_type = d['relation_type']
+        if 'medical_card_id' in d:
+            o.medical_card_id = d['medical_card_id']
         if 'status' in d:
             o.status = d['status']
         return o

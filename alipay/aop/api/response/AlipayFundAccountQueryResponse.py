@@ -12,6 +12,7 @@ class AlipayFundAccountQueryResponse(AlipayResponse):
         super(AlipayFundAccountQueryResponse, self).__init__()
         self._available_amount = None
         self._ext_card_info = None
+        self._freeze_amount = None
 
     @property
     def available_amount(self):
@@ -30,6 +31,13 @@ class AlipayFundAccountQueryResponse(AlipayResponse):
             self._ext_card_info = value
         else:
             self._ext_card_info = ExtCardInfo.from_alipay_dict(value)
+    @property
+    def freeze_amount(self):
+        return self._freeze_amount
+
+    @freeze_amount.setter
+    def freeze_amount(self, value):
+        self._freeze_amount = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundAccountQueryResponse, self).parse_response_content(response_content)
@@ -37,3 +45,5 @@ class AlipayFundAccountQueryResponse(AlipayResponse):
             self.available_amount = response['available_amount']
         if 'ext_card_info' in response:
             self.ext_card_info = response['ext_card_info']
+        if 'freeze_amount' in response:
+            self.freeze_amount = response['freeze_amount']

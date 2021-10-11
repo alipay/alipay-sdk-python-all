@@ -29,6 +29,7 @@ class AlipayEcoEduKtBillingSyncModel(object):
         self._pay_amount = None
         self._pay_user_id = None
         self._province = None
+        self._school_code = None
         self._school_external_id = None
         self._school_name = None
         self._school_pid = None
@@ -37,6 +38,10 @@ class AlipayEcoEduKtBillingSyncModel(object):
         self._source = None
         self._student_code = None
         self._student_name = None
+        self._sub_orgname = None
+        self._sub_orgtype = None
+        self._sys_service_param = None
+        self._sys_service_provider_id = None
         self._title = None
         self._trade_no = None
         self._trans_currency = None
@@ -178,6 +183,13 @@ class AlipayEcoEduKtBillingSyncModel(object):
     def province(self, value):
         self._province = value
     @property
+    def school_code(self):
+        return self._school_code
+
+    @school_code.setter
+    def school_code(self, value):
+        self._school_code = value
+    @property
     def school_external_id(self):
         return self._school_external_id
 
@@ -233,6 +245,34 @@ class AlipayEcoEduKtBillingSyncModel(object):
     @student_name.setter
     def student_name(self, value):
         self._student_name = value
+    @property
+    def sub_orgname(self):
+        return self._sub_orgname
+
+    @sub_orgname.setter
+    def sub_orgname(self, value):
+        self._sub_orgname = value
+    @property
+    def sub_orgtype(self):
+        return self._sub_orgtype
+
+    @sub_orgtype.setter
+    def sub_orgtype(self, value):
+        self._sub_orgtype = value
+    @property
+    def sys_service_param(self):
+        return self._sys_service_param
+
+    @sys_service_param.setter
+    def sys_service_param(self, value):
+        self._sys_service_param = value
+    @property
+    def sys_service_provider_id(self):
+        return self._sys_service_provider_id
+
+    @sys_service_provider_id.setter
+    def sys_service_provider_id(self, value):
+        self._sys_service_provider_id = value
     @property
     def title(self):
         return self._title
@@ -363,6 +403,11 @@ class AlipayEcoEduKtBillingSyncModel(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.school_code:
+            if hasattr(self.school_code, 'to_alipay_dict'):
+                params['school_code'] = self.school_code.to_alipay_dict()
+            else:
+                params['school_code'] = self.school_code
         if self.school_external_id:
             if hasattr(self.school_external_id, 'to_alipay_dict'):
                 params['school_external_id'] = self.school_external_id.to_alipay_dict()
@@ -403,6 +448,26 @@ class AlipayEcoEduKtBillingSyncModel(object):
                 params['student_name'] = self.student_name.to_alipay_dict()
             else:
                 params['student_name'] = self.student_name
+        if self.sub_orgname:
+            if hasattr(self.sub_orgname, 'to_alipay_dict'):
+                params['sub_orgname'] = self.sub_orgname.to_alipay_dict()
+            else:
+                params['sub_orgname'] = self.sub_orgname
+        if self.sub_orgtype:
+            if hasattr(self.sub_orgtype, 'to_alipay_dict'):
+                params['sub_orgtype'] = self.sub_orgtype.to_alipay_dict()
+            else:
+                params['sub_orgtype'] = self.sub_orgtype
+        if self.sys_service_param:
+            if hasattr(self.sys_service_param, 'to_alipay_dict'):
+                params['sys_service_param'] = self.sys_service_param.to_alipay_dict()
+            else:
+                params['sys_service_param'] = self.sys_service_param
+        if self.sys_service_provider_id:
+            if hasattr(self.sys_service_provider_id, 'to_alipay_dict'):
+                params['sys_service_provider_id'] = self.sys_service_provider_id.to_alipay_dict()
+            else:
+                params['sys_service_provider_id'] = self.sys_service_provider_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -466,6 +531,8 @@ class AlipayEcoEduKtBillingSyncModel(object):
             o.pay_user_id = d['pay_user_id']
         if 'province' in d:
             o.province = d['province']
+        if 'school_code' in d:
+            o.school_code = d['school_code']
         if 'school_external_id' in d:
             o.school_external_id = d['school_external_id']
         if 'school_name' in d:
@@ -482,6 +549,14 @@ class AlipayEcoEduKtBillingSyncModel(object):
             o.student_code = d['student_code']
         if 'student_name' in d:
             o.student_name = d['student_name']
+        if 'sub_orgname' in d:
+            o.sub_orgname = d['sub_orgname']
+        if 'sub_orgtype' in d:
+            o.sub_orgtype = d['sub_orgtype']
+        if 'sys_service_param' in d:
+            o.sys_service_param = d['sys_service_param']
+        if 'sys_service_provider_id' in d:
+            o.sys_service_provider_id = d['sys_service_provider_id']
         if 'title' in d:
             o.title = d['title']
         if 'trade_no' in d:

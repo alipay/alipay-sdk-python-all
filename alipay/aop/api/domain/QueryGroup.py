@@ -9,10 +9,18 @@ from alipay.aop.api.domain.QueryComplexLabelRule import QueryComplexLabelRule
 class QueryGroup(object):
 
     def __init__(self):
+        self._count = None
         self._id = None
         self._label_rule = None
         self._name = None
 
+    @property
+    def count(self):
+        return self._count
+
+    @count.setter
+    def count(self, value):
+        self._count = value
     @property
     def id(self):
         return self._id
@@ -44,6 +52,11 @@ class QueryGroup(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.count:
+            if hasattr(self.count, 'to_alipay_dict'):
+                params['count'] = self.count.to_alipay_dict()
+            else:
+                params['count'] = self.count
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -71,6 +84,8 @@ class QueryGroup(object):
         if not d:
             return None
         o = QueryGroup()
+        if 'count' in d:
+            o.count = d['count']
         if 'id' in d:
             o.id = d['id']
         if 'label_rule' in d:

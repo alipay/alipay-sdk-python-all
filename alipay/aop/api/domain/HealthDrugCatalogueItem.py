@@ -18,6 +18,7 @@ class HealthDrugCatalogueItem(object):
         self._manufacturer_name = None
         self._max_purchase_quantity = None
         self._min_purchase_quantity = None
+        self._national_medicine_permission_no = None
         self._price = None
         self._specifications = None
         self._support_emergency_delivery = None
@@ -93,6 +94,13 @@ class HealthDrugCatalogueItem(object):
     @min_purchase_quantity.setter
     def min_purchase_quantity(self, value):
         self._min_purchase_quantity = value
+    @property
+    def national_medicine_permission_no(self):
+        return self._national_medicine_permission_no
+
+    @national_medicine_permission_no.setter
+    def national_medicine_permission_no(self, value):
+        self._national_medicine_permission_no = value
     @property
     def price(self):
         return self._price
@@ -175,6 +183,11 @@ class HealthDrugCatalogueItem(object):
                 params['min_purchase_quantity'] = self.min_purchase_quantity.to_alipay_dict()
             else:
                 params['min_purchase_quantity'] = self.min_purchase_quantity
+        if self.national_medicine_permission_no:
+            if hasattr(self.national_medicine_permission_no, 'to_alipay_dict'):
+                params['national_medicine_permission_no'] = self.national_medicine_permission_no.to_alipay_dict()
+            else:
+                params['national_medicine_permission_no'] = self.national_medicine_permission_no
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
@@ -222,6 +235,8 @@ class HealthDrugCatalogueItem(object):
             o.max_purchase_quantity = d['max_purchase_quantity']
         if 'min_purchase_quantity' in d:
             o.min_purchase_quantity = d['min_purchase_quantity']
+        if 'national_medicine_permission_no' in d:
+            o.national_medicine_permission_no = d['national_medicine_permission_no']
         if 'price' in d:
             o.price = d['price']
         if 'specifications' in d:

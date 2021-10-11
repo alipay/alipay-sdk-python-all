@@ -11,6 +11,8 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
         self._back_url = None
         self._cert_no = None
         self._cert_type = None
+        self._industry_id = None
+        self._job_id = None
         self._user_id = None
         self._user_name = None
 
@@ -35,6 +37,20 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def industry_id(self):
+        return self._industry_id
+
+    @industry_id.setter
+    def industry_id(self, value):
+        self._industry_id = value
+    @property
+    def job_id(self):
+        return self._job_id
+
+    @job_id.setter
+    def job_id(self, value):
+        self._job_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -68,6 +84,16 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.industry_id:
+            if hasattr(self.industry_id, 'to_alipay_dict'):
+                params['industry_id'] = self.industry_id.to_alipay_dict()
+            else:
+                params['industry_id'] = self.industry_id
+        if self.job_id:
+            if hasattr(self.job_id, 'to_alipay_dict'):
+                params['job_id'] = self.job_id.to_alipay_dict()
+            else:
+                params['job_id'] = self.job_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -91,6 +117,10 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'industry_id' in d:
+            o.industry_id = d['industry_id']
+        if 'job_id' in d:
+            o.job_id = d['job_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

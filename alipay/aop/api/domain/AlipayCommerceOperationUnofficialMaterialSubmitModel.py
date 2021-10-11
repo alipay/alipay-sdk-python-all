@@ -9,9 +9,10 @@ class AlipayCommerceOperationUnofficialMaterialSubmitModel(object):
 
     def __init__(self):
         self._isv_pid = None
+        self._material_level = None
         self._mini_app_id = None
+        self._open_seller_pid = None
         self._qr_code_url = None
-        self._rebate_pid = None
         self._seller_checkout_pid = None
         self._seller_checkout_smid = None
         self._shop_id = None
@@ -24,6 +25,13 @@ class AlipayCommerceOperationUnofficialMaterialSubmitModel(object):
     def isv_pid(self, value):
         self._isv_pid = value
     @property
+    def material_level(self):
+        return self._material_level
+
+    @material_level.setter
+    def material_level(self, value):
+        self._material_level = value
+    @property
     def mini_app_id(self):
         return self._mini_app_id
 
@@ -31,19 +39,19 @@ class AlipayCommerceOperationUnofficialMaterialSubmitModel(object):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def open_seller_pid(self):
+        return self._open_seller_pid
+
+    @open_seller_pid.setter
+    def open_seller_pid(self, value):
+        self._open_seller_pid = value
+    @property
     def qr_code_url(self):
         return self._qr_code_url
 
     @qr_code_url.setter
     def qr_code_url(self, value):
         self._qr_code_url = value
-    @property
-    def rebate_pid(self):
-        return self._rebate_pid
-
-    @rebate_pid.setter
-    def rebate_pid(self, value):
-        self._rebate_pid = value
     @property
     def seller_checkout_pid(self):
         return self._seller_checkout_pid
@@ -74,21 +82,26 @@ class AlipayCommerceOperationUnofficialMaterialSubmitModel(object):
                 params['isv_pid'] = self.isv_pid.to_alipay_dict()
             else:
                 params['isv_pid'] = self.isv_pid
+        if self.material_level:
+            if hasattr(self.material_level, 'to_alipay_dict'):
+                params['material_level'] = self.material_level.to_alipay_dict()
+            else:
+                params['material_level'] = self.material_level
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.open_seller_pid:
+            if hasattr(self.open_seller_pid, 'to_alipay_dict'):
+                params['open_seller_pid'] = self.open_seller_pid.to_alipay_dict()
+            else:
+                params['open_seller_pid'] = self.open_seller_pid
         if self.qr_code_url:
             if hasattr(self.qr_code_url, 'to_alipay_dict'):
                 params['qr_code_url'] = self.qr_code_url.to_alipay_dict()
             else:
                 params['qr_code_url'] = self.qr_code_url
-        if self.rebate_pid:
-            if hasattr(self.rebate_pid, 'to_alipay_dict'):
-                params['rebate_pid'] = self.rebate_pid.to_alipay_dict()
-            else:
-                params['rebate_pid'] = self.rebate_pid
         if self.seller_checkout_pid:
             if hasattr(self.seller_checkout_pid, 'to_alipay_dict'):
                 params['seller_checkout_pid'] = self.seller_checkout_pid.to_alipay_dict()
@@ -113,12 +126,14 @@ class AlipayCommerceOperationUnofficialMaterialSubmitModel(object):
         o = AlipayCommerceOperationUnofficialMaterialSubmitModel()
         if 'isv_pid' in d:
             o.isv_pid = d['isv_pid']
+        if 'material_level' in d:
+            o.material_level = d['material_level']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'open_seller_pid' in d:
+            o.open_seller_pid = d['open_seller_pid']
         if 'qr_code_url' in d:
             o.qr_code_url = d['qr_code_url']
-        if 'rebate_pid' in d:
-            o.rebate_pid = d['rebate_pid']
         if 'seller_checkout_pid' in d:
             o.seller_checkout_pid = d['seller_checkout_pid']
         if 'seller_checkout_smid' in d:

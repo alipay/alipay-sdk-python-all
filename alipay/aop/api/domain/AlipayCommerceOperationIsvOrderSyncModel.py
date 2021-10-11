@@ -9,6 +9,7 @@ from alipay.aop.api.domain.CateringGoodsInfo import CateringGoodsInfo
 from alipay.aop.api.domain.ExtraInfo import ExtraInfo
 from alipay.aop.api.domain.PickUpInfo import PickUpInfo
 from alipay.aop.api.domain.QueueInfo import QueueInfo
+from alipay.aop.api.domain.CateringServiceInfo import CateringServiceInfo
 
 
 class AlipayCommerceOperationIsvOrderSyncModel(object):
@@ -40,6 +41,7 @@ class AlipayCommerceOperationIsvOrderSyncModel(object):
         self._record_id = None
         self._reorder_url = None
         self._service_code = None
+        self._service_info = None
         self._status = None
         self._trade_no = None
 
@@ -247,6 +249,16 @@ class AlipayCommerceOperationIsvOrderSyncModel(object):
     def service_code(self, value):
         self._service_code = value
     @property
+    def service_info(self):
+        return self._service_info
+
+    @service_info.setter
+    def service_info(self, value):
+        if isinstance(value, CateringServiceInfo):
+            self._service_info = value
+        else:
+            self._service_info = CateringServiceInfo.from_alipay_dict(value)
+    @property
     def status(self):
         return self._status
 
@@ -399,6 +411,11 @@ class AlipayCommerceOperationIsvOrderSyncModel(object):
                 params['service_code'] = self.service_code.to_alipay_dict()
             else:
                 params['service_code'] = self.service_code
+        if self.service_info:
+            if hasattr(self.service_info, 'to_alipay_dict'):
+                params['service_info'] = self.service_info.to_alipay_dict()
+            else:
+                params['service_info'] = self.service_info
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -468,6 +485,8 @@ class AlipayCommerceOperationIsvOrderSyncModel(object):
             o.reorder_url = d['reorder_url']
         if 'service_code' in d:
             o.service_code = d['service_code']
+        if 'service_info' in d:
+            o.service_info = d['service_info']
         if 'status' in d:
             o.status = d['status']
         if 'trade_no' in d:

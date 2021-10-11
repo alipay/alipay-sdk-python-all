@@ -11,6 +11,7 @@ class AlipayEbppCommunityRelationshipCreateModel(object):
     def __init__(self):
         self._account = None
         self._account_type = None
+        self._allow_skip_pay = None
         self._billkey_url = None
         self._community_short_name = None
         self._daily_end = None
@@ -37,6 +38,13 @@ class AlipayEbppCommunityRelationshipCreateModel(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def allow_skip_pay(self):
+        return self._allow_skip_pay
+
+    @allow_skip_pay.setter
+    def allow_skip_pay(self, value):
+        self._allow_skip_pay = value
     @property
     def billkey_url(self):
         return self._billkey_url
@@ -131,6 +139,11 @@ class AlipayEbppCommunityRelationshipCreateModel(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.allow_skip_pay:
+            if hasattr(self.allow_skip_pay, 'to_alipay_dict'):
+                params['allow_skip_pay'] = self.allow_skip_pay.to_alipay_dict()
+            else:
+                params['allow_skip_pay'] = self.allow_skip_pay
         if self.billkey_url:
             if hasattr(self.billkey_url, 'to_alipay_dict'):
                 params['billkey_url'] = self.billkey_url.to_alipay_dict()
@@ -197,6 +210,8 @@ class AlipayEbppCommunityRelationshipCreateModel(object):
             o.account = d['account']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'allow_skip_pay' in d:
+            o.allow_skip_pay = d['allow_skip_pay']
         if 'billkey_url' in d:
             o.billkey_url = d['billkey_url']
         if 'community_short_name' in d:

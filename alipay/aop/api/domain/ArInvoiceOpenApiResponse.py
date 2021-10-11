@@ -7,6 +7,8 @@ from alipay.aop.api.domain.ArInvoiceLineOpenApiResponse import ArInvoiceLineOpen
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.ArRelInvoiceOpenApiResponse import ArRelInvoiceOpenApiResponse
+from alipay.aop.api.domain.ArRelInvoiceOpenApiResponse import ArRelInvoiceOpenApiResponse
 
 
 class ArInvoiceOpenApiResponse(object):
@@ -48,6 +50,8 @@ class ArInvoiceOpenApiResponse(object):
         self._recent_mail_id = None
         self._red = None
         self._red_amt = None
+        self._rel_blue_invoices = None
+        self._rel_red_invoices = None
         self._reviewer = None
         self._seller_address = None
         self._seller_bank_account = None
@@ -325,6 +329,32 @@ class ArInvoiceOpenApiResponse(object):
         else:
             self._red_amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
     @property
+    def rel_blue_invoices(self):
+        return self._rel_blue_invoices
+
+    @rel_blue_invoices.setter
+    def rel_blue_invoices(self, value):
+        if isinstance(value, list):
+            self._rel_blue_invoices = list()
+            for i in value:
+                if isinstance(i, ArRelInvoiceOpenApiResponse):
+                    self._rel_blue_invoices.append(i)
+                else:
+                    self._rel_blue_invoices.append(ArRelInvoiceOpenApiResponse.from_alipay_dict(i))
+    @property
+    def rel_red_invoices(self):
+        return self._rel_red_invoices
+
+    @rel_red_invoices.setter
+    def rel_red_invoices(self, value):
+        if isinstance(value, list):
+            self._rel_red_invoices = list()
+            for i in value:
+                if isinstance(i, ArRelInvoiceOpenApiResponse):
+                    self._rel_red_invoices.append(i)
+                else:
+                    self._rel_red_invoices.append(ArRelInvoiceOpenApiResponse.from_alipay_dict(i))
+    @property
     def reviewer(self):
         return self._reviewer
 
@@ -569,6 +599,26 @@ class ArInvoiceOpenApiResponse(object):
                 params['red_amt'] = self.red_amt.to_alipay_dict()
             else:
                 params['red_amt'] = self.red_amt
+        if self.rel_blue_invoices:
+            if isinstance(self.rel_blue_invoices, list):
+                for i in range(0, len(self.rel_blue_invoices)):
+                    element = self.rel_blue_invoices[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.rel_blue_invoices[i] = element.to_alipay_dict()
+            if hasattr(self.rel_blue_invoices, 'to_alipay_dict'):
+                params['rel_blue_invoices'] = self.rel_blue_invoices.to_alipay_dict()
+            else:
+                params['rel_blue_invoices'] = self.rel_blue_invoices
+        if self.rel_red_invoices:
+            if isinstance(self.rel_red_invoices, list):
+                for i in range(0, len(self.rel_red_invoices)):
+                    element = self.rel_red_invoices[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.rel_red_invoices[i] = element.to_alipay_dict()
+            if hasattr(self.rel_red_invoices, 'to_alipay_dict'):
+                params['rel_red_invoices'] = self.rel_red_invoices.to_alipay_dict()
+            else:
+                params['rel_red_invoices'] = self.rel_red_invoices
         if self.reviewer:
             if hasattr(self.reviewer, 'to_alipay_dict'):
                 params['reviewer'] = self.reviewer.to_alipay_dict()
@@ -688,6 +738,10 @@ class ArInvoiceOpenApiResponse(object):
             o.red = d['red']
         if 'red_amt' in d:
             o.red_amt = d['red_amt']
+        if 'rel_blue_invoices' in d:
+            o.rel_blue_invoices = d['rel_blue_invoices']
+        if 'rel_red_invoices' in d:
+            o.rel_red_invoices = d['rel_red_invoices']
         if 'reviewer' in d:
             o.reviewer = d['reviewer']
         if 'seller_address' in d:

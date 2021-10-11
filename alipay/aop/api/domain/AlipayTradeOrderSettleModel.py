@@ -13,6 +13,7 @@ class AlipayTradeOrderSettleModel(object):
         self._extend_params = None
         self._operator_id = None
         self._out_request_no = None
+        self._royalty_mode = None
         self._royalty_parameters = None
         self._trade_no = None
 
@@ -40,6 +41,13 @@ class AlipayTradeOrderSettleModel(object):
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def royalty_mode(self):
+        return self._royalty_mode
+
+    @royalty_mode.setter
+    def royalty_mode(self, value):
+        self._royalty_mode = value
     @property
     def royalty_parameters(self):
         return self._royalty_parameters
@@ -79,6 +87,11 @@ class AlipayTradeOrderSettleModel(object):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.royalty_mode:
+            if hasattr(self.royalty_mode, 'to_alipay_dict'):
+                params['royalty_mode'] = self.royalty_mode.to_alipay_dict()
+            else:
+                params['royalty_mode'] = self.royalty_mode
         if self.royalty_parameters:
             if isinstance(self.royalty_parameters, list):
                 for i in range(0, len(self.royalty_parameters)):
@@ -107,6 +120,8 @@ class AlipayTradeOrderSettleModel(object):
             o.operator_id = d['operator_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'royalty_mode' in d:
+            o.royalty_mode = d['royalty_mode']
         if 'royalty_parameters' in d:
             o.royalty_parameters = d['royalty_parameters']
         if 'trade_no' in d:
