@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MerchantCard import MerchantCard
 from alipay.aop.api.domain.CardUserInfo import CardUserInfo
 from alipay.aop.api.domain.MerchantMenber import MerchantMenber
+from alipay.aop.api.domain.PaidOuterCardExtraInfoDTO import PaidOuterCardExtraInfoDTO
 
 
 class AlipayMarketingCardOpenModel(object):
@@ -18,6 +19,7 @@ class AlipayMarketingCardOpenModel(object):
         self._open_card_channel = None
         self._open_card_channel_id = None
         self._out_serial_no = None
+        self._paid_outer_card_info = None
 
     @property
     def card_ext_info(self):
@@ -77,6 +79,16 @@ class AlipayMarketingCardOpenModel(object):
     @out_serial_no.setter
     def out_serial_no(self, value):
         self._out_serial_no = value
+    @property
+    def paid_outer_card_info(self):
+        return self._paid_outer_card_info
+
+    @paid_outer_card_info.setter
+    def paid_outer_card_info(self, value):
+        if isinstance(value, PaidOuterCardExtraInfoDTO):
+            self._paid_outer_card_info = value
+        else:
+            self._paid_outer_card_info = PaidOuterCardExtraInfoDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -116,6 +128,11 @@ class AlipayMarketingCardOpenModel(object):
                 params['out_serial_no'] = self.out_serial_no.to_alipay_dict()
             else:
                 params['out_serial_no'] = self.out_serial_no
+        if self.paid_outer_card_info:
+            if hasattr(self.paid_outer_card_info, 'to_alipay_dict'):
+                params['paid_outer_card_info'] = self.paid_outer_card_info.to_alipay_dict()
+            else:
+                params['paid_outer_card_info'] = self.paid_outer_card_info
         return params
 
     @staticmethod
@@ -137,6 +154,8 @@ class AlipayMarketingCardOpenModel(object):
             o.open_card_channel_id = d['open_card_channel_id']
         if 'out_serial_no' in d:
             o.out_serial_no = d['out_serial_no']
+        if 'paid_outer_card_info' in d:
+            o.paid_outer_card_info = d['paid_outer_card_info']
         return o
 
 

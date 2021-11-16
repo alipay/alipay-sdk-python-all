@@ -9,6 +9,7 @@ from alipay.aop.api.domain.TemplateColumnInfoDTO import TemplateColumnInfoDTO
 from alipay.aop.api.domain.TemplateFieldRuleDTO import TemplateFieldRuleDTO
 from alipay.aop.api.domain.TemplateMdcodeNotifyConfDTO import TemplateMdcodeNotifyConfDTO
 from alipay.aop.api.domain.TemplateOpenCardConfDTO import TemplateOpenCardConfDTO
+from alipay.aop.api.domain.PaidOuterCardTemplateConfDTO import PaidOuterCardTemplateConfDTO
 from alipay.aop.api.domain.PubChannelDTO import PubChannelDTO
 from alipay.aop.api.domain.TemplateBenefitInfoDTO import TemplateBenefitInfoDTO
 from alipay.aop.api.domain.TemplateStyleInfoDTO import TemplateStyleInfoDTO
@@ -25,6 +26,7 @@ class AlipayMarketingCardTemplateModifyModel(object):
         self._field_rule_list = None
         self._mdcode_notify_conf = None
         self._open_card_conf = None
+        self._paid_outer_card_conf = None
         self._pub_channels = None
         self._request_id = None
         self._shop_ids = None
@@ -119,6 +121,16 @@ class AlipayMarketingCardTemplateModifyModel(object):
             self._open_card_conf = value
         else:
             self._open_card_conf = TemplateOpenCardConfDTO.from_alipay_dict(value)
+    @property
+    def paid_outer_card_conf(self):
+        return self._paid_outer_card_conf
+
+    @paid_outer_card_conf.setter
+    def paid_outer_card_conf(self, value):
+        if isinstance(value, PaidOuterCardTemplateConfDTO):
+            self._paid_outer_card_conf = value
+        else:
+            self._paid_outer_card_conf = PaidOuterCardTemplateConfDTO.from_alipay_dict(value)
     @property
     def pub_channels(self):
         return self._pub_channels
@@ -250,6 +262,11 @@ class AlipayMarketingCardTemplateModifyModel(object):
                 params['open_card_conf'] = self.open_card_conf.to_alipay_dict()
             else:
                 params['open_card_conf'] = self.open_card_conf
+        if self.paid_outer_card_conf:
+            if hasattr(self.paid_outer_card_conf, 'to_alipay_dict'):
+                params['paid_outer_card_conf'] = self.paid_outer_card_conf.to_alipay_dict()
+            else:
+                params['paid_outer_card_conf'] = self.paid_outer_card_conf
         if self.pub_channels:
             if isinstance(self.pub_channels, list):
                 for i in range(0, len(self.pub_channels)):
@@ -323,6 +340,8 @@ class AlipayMarketingCardTemplateModifyModel(object):
             o.mdcode_notify_conf = d['mdcode_notify_conf']
         if 'open_card_conf' in d:
             o.open_card_conf = d['open_card_conf']
+        if 'paid_outer_card_conf' in d:
+            o.paid_outer_card_conf = d['paid_outer_card_conf']
         if 'pub_channels' in d:
             o.pub_channels = d['pub_channels']
         if 'request_id' in d:

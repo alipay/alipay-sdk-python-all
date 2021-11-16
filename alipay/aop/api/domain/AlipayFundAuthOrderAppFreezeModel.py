@@ -22,6 +22,7 @@ class AlipayFundAuthOrderAppFreezeModel(object):
         self._product_code = None
         self._scene_code = None
         self._settle_currency = None
+        self._timeout_express = None
         self._trans_currency = None
 
     @property
@@ -123,6 +124,13 @@ class AlipayFundAuthOrderAppFreezeModel(object):
     def settle_currency(self, value):
         self._settle_currency = value
     @property
+    def timeout_express(self):
+        return self._timeout_express
+
+    @timeout_express.setter
+    def timeout_express(self, value):
+        self._timeout_express = value
+    @property
     def trans_currency(self):
         return self._trans_currency
 
@@ -203,6 +211,11 @@ class AlipayFundAuthOrderAppFreezeModel(object):
                 params['settle_currency'] = self.settle_currency.to_alipay_dict()
             else:
                 params['settle_currency'] = self.settle_currency
+        if self.timeout_express:
+            if hasattr(self.timeout_express, 'to_alipay_dict'):
+                params['timeout_express'] = self.timeout_express.to_alipay_dict()
+            else:
+                params['timeout_express'] = self.timeout_express
         if self.trans_currency:
             if hasattr(self.trans_currency, 'to_alipay_dict'):
                 params['trans_currency'] = self.trans_currency.to_alipay_dict()
@@ -243,6 +256,8 @@ class AlipayFundAuthOrderAppFreezeModel(object):
             o.scene_code = d['scene_code']
         if 'settle_currency' in d:
             o.settle_currency = d['settle_currency']
+        if 'timeout_express' in d:
+            o.timeout_express = d['timeout_express']
         if 'trans_currency' in d:
             o.trans_currency = d['trans_currency']
         return o

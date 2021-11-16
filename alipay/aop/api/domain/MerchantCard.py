@@ -12,6 +12,7 @@ class MerchantCard(object):
     def __init__(self):
         self._balance = None
         self._biz_card_no = None
+        self._custom_assets = None
         self._external_card_no = None
         self._front_image_id = None
         self._front_text_list = None
@@ -36,6 +37,13 @@ class MerchantCard(object):
     @biz_card_no.setter
     def biz_card_no(self, value):
         self._biz_card_no = value
+    @property
+    def custom_assets(self):
+        return self._custom_assets
+
+    @custom_assets.setter
+    def custom_assets(self, value):
+        self._custom_assets = value
     @property
     def external_card_no(self):
         return self._external_card_no
@@ -122,6 +130,11 @@ class MerchantCard(object):
                 params['biz_card_no'] = self.biz_card_no.to_alipay_dict()
             else:
                 params['biz_card_no'] = self.biz_card_no
+        if self.custom_assets:
+            if hasattr(self.custom_assets, 'to_alipay_dict'):
+                params['custom_assets'] = self.custom_assets.to_alipay_dict()
+            else:
+                params['custom_assets'] = self.custom_assets
         if self.external_card_no:
             if hasattr(self.external_card_no, 'to_alipay_dict'):
                 params['external_card_no'] = self.external_card_no.to_alipay_dict()
@@ -183,6 +196,8 @@ class MerchantCard(object):
             o.balance = d['balance']
         if 'biz_card_no' in d:
             o.biz_card_no = d['biz_card_no']
+        if 'custom_assets' in d:
+            o.custom_assets = d['custom_assets']
         if 'external_card_no' in d:
             o.external_card_no = d['external_card_no']
         if 'front_image_id' in d:

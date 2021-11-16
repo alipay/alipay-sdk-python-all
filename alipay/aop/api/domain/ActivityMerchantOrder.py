@@ -12,6 +12,7 @@ class ActivityMerchantOrder(object):
         self._audit_result = None
         self._fail_reason = None
         self._order_id = None
+        self._rate = None
 
     @property
     def activity_type(self):
@@ -41,6 +42,13 @@ class ActivityMerchantOrder(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def rate(self):
+        return self._rate
+
+    @rate.setter
+    def rate(self, value):
+        self._rate = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class ActivityMerchantOrder(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.rate:
+            if hasattr(self.rate, 'to_alipay_dict'):
+                params['rate'] = self.rate.to_alipay_dict()
+            else:
+                params['rate'] = self.rate
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class ActivityMerchantOrder(object):
             o.fail_reason = d['fail_reason']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'rate' in d:
+            o.rate = d['rate']
         return o
 
 

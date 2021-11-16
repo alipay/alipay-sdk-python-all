@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
@@ -28,14 +29,18 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._credit_pay_mode = None
         self._discount_amount = None
         self._discount_goods_detail = None
+        self._enterprise_pay_info = None
         self._ext_infos = None
         self._fund_bill_list = None
         self._hb_fq_pay_info = None
         self._industry_sepc_detail = None
+        self._industry_sepc_detail_acc = None
+        self._industry_sepc_detail_gov = None
         self._invoice_amount = None
         self._mdiscount_amount = None
         self._open_id = None
         self._out_trade_no = None
+        self._passback_params = None
         self._pay_amount = None
         self._pay_currency = None
         self._point_amount = None
@@ -164,6 +169,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def discount_goods_detail(self, value):
         self._discount_goods_detail = value
     @property
+    def enterprise_pay_info(self):
+        return self._enterprise_pay_info
+
+    @enterprise_pay_info.setter
+    def enterprise_pay_info(self, value):
+        if isinstance(value, EnterprisePayInfo):
+            self._enterprise_pay_info = value
+        else:
+            self._enterprise_pay_info = EnterprisePayInfo.from_alipay_dict(value)
+    @property
     def ext_infos(self):
         return self._ext_infos
 
@@ -201,6 +216,20 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def industry_sepc_detail(self, value):
         self._industry_sepc_detail = value
     @property
+    def industry_sepc_detail_acc(self):
+        return self._industry_sepc_detail_acc
+
+    @industry_sepc_detail_acc.setter
+    def industry_sepc_detail_acc(self, value):
+        self._industry_sepc_detail_acc = value
+    @property
+    def industry_sepc_detail_gov(self):
+        return self._industry_sepc_detail_gov
+
+    @industry_sepc_detail_gov.setter
+    def industry_sepc_detail_gov(self, value):
+        self._industry_sepc_detail_gov = value
+    @property
     def invoice_amount(self):
         return self._invoice_amount
 
@@ -228,6 +257,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def passback_params(self):
+        return self._passback_params
+
+    @passback_params.setter
+    def passback_params(self, value):
+        self._passback_params = value
     @property
     def pay_amount(self):
         return self._pay_amount
@@ -417,6 +453,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
             self.discount_goods_detail = response['discount_goods_detail']
+        if 'enterprise_pay_info' in response:
+            self.enterprise_pay_info = response['enterprise_pay_info']
         if 'ext_infos' in response:
             self.ext_infos = response['ext_infos']
         if 'fund_bill_list' in response:
@@ -425,6 +463,10 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.hb_fq_pay_info = response['hb_fq_pay_info']
         if 'industry_sepc_detail' in response:
             self.industry_sepc_detail = response['industry_sepc_detail']
+        if 'industry_sepc_detail_acc' in response:
+            self.industry_sepc_detail_acc = response['industry_sepc_detail_acc']
+        if 'industry_sepc_detail_gov' in response:
+            self.industry_sepc_detail_gov = response['industry_sepc_detail_gov']
         if 'invoice_amount' in response:
             self.invoice_amount = response['invoice_amount']
         if 'mdiscount_amount' in response:
@@ -433,6 +475,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.open_id = response['open_id']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'passback_params' in response:
+            self.passback_params = response['passback_params']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
         if 'pay_currency' in response:

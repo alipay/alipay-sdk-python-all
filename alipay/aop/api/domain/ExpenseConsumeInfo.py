@@ -18,6 +18,8 @@ class ExpenseConsumeInfo(object):
         self._consume_date = None
         self._consume_title = None
         self._employee_id = None
+        self._merchant_id = None
+        self._mshop_id = None
         self._open_model = None
         self._original_voucher_id = None
         self._out_biz_no = None
@@ -26,6 +28,8 @@ class ExpenseConsumeInfo(object):
         self._project_id = None
         self._projiect_id = None
         self._standard_id = None
+        self._store_id = None
+        self._summary_id = None
         self._tp_sign = None
         self._voucher_id = None
 
@@ -100,6 +104,20 @@ class ExpenseConsumeInfo(object):
     def employee_id(self, value):
         self._employee_id = value
     @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
+    @property
+    def mshop_id(self):
+        return self._mshop_id
+
+    @mshop_id.setter
+    def mshop_id(self, value):
+        self._mshop_id = value
+    @property
     def open_model(self):
         return self._open_model
 
@@ -155,6 +173,20 @@ class ExpenseConsumeInfo(object):
     @standard_id.setter
     def standard_id(self, value):
         self._standard_id = value
+    @property
+    def store_id(self):
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, value):
+        self._store_id = value
+    @property
+    def summary_id(self):
+        return self._summary_id
+
+    @summary_id.setter
+    def summary_id(self, value):
+        self._summary_id = value
     @property
     def tp_sign(self):
         return self._tp_sign
@@ -223,6 +255,16 @@ class ExpenseConsumeInfo(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
+        if self.mshop_id:
+            if hasattr(self.mshop_id, 'to_alipay_dict'):
+                params['mshop_id'] = self.mshop_id.to_alipay_dict()
+            else:
+                params['mshop_id'] = self.mshop_id
         if self.open_model:
             if hasattr(self.open_model, 'to_alipay_dict'):
                 params['open_model'] = self.open_model.to_alipay_dict()
@@ -263,6 +305,16 @@ class ExpenseConsumeInfo(object):
                 params['standard_id'] = self.standard_id.to_alipay_dict()
             else:
                 params['standard_id'] = self.standard_id
+        if self.store_id:
+            if hasattr(self.store_id, 'to_alipay_dict'):
+                params['store_id'] = self.store_id.to_alipay_dict()
+            else:
+                params['store_id'] = self.store_id
+        if self.summary_id:
+            if hasattr(self.summary_id, 'to_alipay_dict'):
+                params['summary_id'] = self.summary_id.to_alipay_dict()
+            else:
+                params['summary_id'] = self.summary_id
         if self.tp_sign:
             if hasattr(self.tp_sign, 'to_alipay_dict'):
                 params['tp_sign'] = self.tp_sign.to_alipay_dict()
@@ -300,6 +352,10 @@ class ExpenseConsumeInfo(object):
             o.consume_title = d['consume_title']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
+        if 'mshop_id' in d:
+            o.mshop_id = d['mshop_id']
         if 'open_model' in d:
             o.open_model = d['open_model']
         if 'original_voucher_id' in d:
@@ -316,6 +372,10 @@ class ExpenseConsumeInfo(object):
             o.projiect_id = d['projiect_id']
         if 'standard_id' in d:
             o.standard_id = d['standard_id']
+        if 'store_id' in d:
+            o.store_id = d['store_id']
+        if 'summary_id' in d:
+            o.summary_id = d['summary_id']
         if 'tp_sign' in d:
             o.tp_sign = d['tp_sign']
         if 'voucher_id' in d:

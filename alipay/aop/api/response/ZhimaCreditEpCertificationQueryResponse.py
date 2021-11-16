@@ -12,7 +12,10 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
         self._attorney_letter = None
         self._auth_status = None
         self._business_license = None
+        self._certify_channel = None
+        self._certify_mode = None
         self._certify_status = None
+        self._email_address = None
         self._ep_cert_no = None
         self._ep_name = None
         self._legal_person_id_card_back = None
@@ -41,12 +44,33 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     def business_license(self, value):
         self._business_license = value
     @property
+    def certify_channel(self):
+        return self._certify_channel
+
+    @certify_channel.setter
+    def certify_channel(self, value):
+        self._certify_channel = value
+    @property
+    def certify_mode(self):
+        return self._certify_mode
+
+    @certify_mode.setter
+    def certify_mode(self, value):
+        self._certify_mode = value
+    @property
     def certify_status(self):
         return self._certify_status
 
     @certify_status.setter
     def certify_status(self, value):
         self._certify_status = value
+    @property
+    def email_address(self):
+        return self._email_address
+
+    @email_address.setter
+    def email_address(self, value):
+        self._email_address = value
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -91,8 +115,14 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
             self.auth_status = response['auth_status']
         if 'business_license' in response:
             self.business_license = response['business_license']
+        if 'certify_channel' in response:
+            self.certify_channel = response['certify_channel']
+        if 'certify_mode' in response:
+            self.certify_mode = response['certify_mode']
         if 'certify_status' in response:
             self.certify_status = response['certify_status']
+        if 'email_address' in response:
+            self.email_address = response['email_address']
         if 'ep_cert_no' in response:
             self.ep_cert_no = response['ep_cert_no']
         if 'ep_name' in response:

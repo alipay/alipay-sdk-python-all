@@ -18,6 +18,7 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
         self._is_off_set = None
         self._out_source_id = None
         self._platform = None
+        self._relate_no = None
         self._standard_id = None
 
     @property
@@ -91,6 +92,13 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
     def platform(self, value):
         self._platform = value
     @property
+    def relate_no(self):
+        return self._relate_no
+
+    @relate_no.setter
+    def relate_no(self, value):
+        self._relate_no = value
+    @property
     def standard_id(self):
         return self._standard_id
 
@@ -151,6 +159,11 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
                 params['platform'] = self.platform.to_alipay_dict()
             else:
                 params['platform'] = self.platform
+        if self.relate_no:
+            if hasattr(self.relate_no, 'to_alipay_dict'):
+                params['relate_no'] = self.relate_no.to_alipay_dict()
+            else:
+                params['relate_no'] = self.relate_no
         if self.standard_id:
             if hasattr(self.standard_id, 'to_alipay_dict'):
                 params['standard_id'] = self.standard_id.to_alipay_dict()
@@ -183,6 +196,8 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
             o.out_source_id = d['out_source_id']
         if 'platform' in d:
             o.platform = d['platform']
+        if 'relate_no' in d:
+            o.relate_no = d['relate_no']
         if 'standard_id' in d:
             o.standard_id = d['standard_id']
         return o

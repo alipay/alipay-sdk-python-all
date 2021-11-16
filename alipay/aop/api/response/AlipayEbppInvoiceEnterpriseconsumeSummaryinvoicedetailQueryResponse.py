@@ -10,6 +10,7 @@ class AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse(Alipay
 
     def __init__(self):
         super(AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse, self).__init__()
+        self._account_id = None
         self._apply_date = None
         self._batch_id = None
         self._batch_status = None
@@ -17,8 +18,16 @@ class AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse(Alipay
         self._gmt_biz_end = None
         self._gmt_biz_start = None
         self._status_show_content = None
+        self._summary_id = None
         self._user_id = None
 
+    @property
+    def account_id(self):
+        return self._account_id
+
+    @account_id.setter
+    def account_id(self, value):
+        self._account_id = value
     @property
     def apply_date(self):
         return self._apply_date
@@ -75,6 +84,13 @@ class AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse(Alipay
     def status_show_content(self, value):
         self._status_show_content = value
     @property
+    def summary_id(self):
+        return self._summary_id
+
+    @summary_id.setter
+    def summary_id(self, value):
+        self._summary_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -84,6 +100,8 @@ class AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse(Alipay
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse, self).parse_response_content(response_content)
+        if 'account_id' in response:
+            self.account_id = response['account_id']
         if 'apply_date' in response:
             self.apply_date = response['apply_date']
         if 'batch_id' in response:
@@ -98,5 +116,7 @@ class AlipayEbppInvoiceEnterpriseconsumeSummaryinvoicedetailQueryResponse(Alipay
             self.gmt_biz_start = response['gmt_biz_start']
         if 'status_show_content' in response:
             self.status_show_content = response['status_show_content']
+        if 'summary_id' in response:
+            self.summary_id = response['summary_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

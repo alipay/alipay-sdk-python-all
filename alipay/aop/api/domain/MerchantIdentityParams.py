@@ -15,6 +15,7 @@ class MerchantIdentityParams(object):
         self._name = None
         self._phone = None
         self._smid = None
+        self._smid_source_pid = None
 
     @property
     def cert_no(self):
@@ -65,6 +66,13 @@ class MerchantIdentityParams(object):
     @smid.setter
     def smid(self, value):
         self._smid = value
+    @property
+    def smid_source_pid(self):
+        return self._smid_source_pid
+
+    @smid_source_pid.setter
+    def smid_source_pid(self, value):
+        self._smid_source_pid = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class MerchantIdentityParams(object):
                 params['smid'] = self.smid.to_alipay_dict()
             else:
                 params['smid'] = self.smid
+        if self.smid_source_pid:
+            if hasattr(self.smid_source_pid, 'to_alipay_dict'):
+                params['smid_source_pid'] = self.smid_source_pid.to_alipay_dict()
+            else:
+                params['smid_source_pid'] = self.smid_source_pid
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class MerchantIdentityParams(object):
             o.phone = d['phone']
         if 'smid' in d:
             o.smid = d['smid']
+        if 'smid_source_pid' in d:
+            o.smid_source_pid = d['smid_source_pid']
         return o
 
 

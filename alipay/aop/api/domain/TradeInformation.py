@@ -10,6 +10,8 @@ class TradeInformation(object):
     def __init__(self):
         self._commodity_name = None
         self._currency = None
+        self._is_l_c_order = None
+        self._is_l_c_received_by_one_touch = None
         self._order_amount = None
         self._order_id = None
 
@@ -27,6 +29,20 @@ class TradeInformation(object):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def is_l_c_order(self):
+        return self._is_l_c_order
+
+    @is_l_c_order.setter
+    def is_l_c_order(self, value):
+        self._is_l_c_order = value
+    @property
+    def is_l_c_received_by_one_touch(self):
+        return self._is_l_c_received_by_one_touch
+
+    @is_l_c_received_by_one_touch.setter
+    def is_l_c_received_by_one_touch(self, value):
+        self._is_l_c_received_by_one_touch = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -55,6 +71,16 @@ class TradeInformation(object):
                 params['currency'] = self.currency.to_alipay_dict()
             else:
                 params['currency'] = self.currency
+        if self.is_l_c_order:
+            if hasattr(self.is_l_c_order, 'to_alipay_dict'):
+                params['is_l_c_order'] = self.is_l_c_order.to_alipay_dict()
+            else:
+                params['is_l_c_order'] = self.is_l_c_order
+        if self.is_l_c_received_by_one_touch:
+            if hasattr(self.is_l_c_received_by_one_touch, 'to_alipay_dict'):
+                params['is_l_c_received_by_one_touch'] = self.is_l_c_received_by_one_touch.to_alipay_dict()
+            else:
+                params['is_l_c_received_by_one_touch'] = self.is_l_c_received_by_one_touch
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -76,6 +102,10 @@ class TradeInformation(object):
             o.commodity_name = d['commodity_name']
         if 'currency' in d:
             o.currency = d['currency']
+        if 'is_l_c_order' in d:
+            o.is_l_c_order = d['is_l_c_order']
+        if 'is_l_c_received_by_one_touch' in d:
+            o.is_l_c_received_by_one_touch = d['is_l_c_received_by_one_touch']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'order_id' in d:

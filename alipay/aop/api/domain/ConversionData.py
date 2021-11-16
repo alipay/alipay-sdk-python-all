@@ -16,12 +16,15 @@ class ConversionData(object):
         self._conversion_type = None
         self._creative_id = None
         self._data_id = None
+        self._data_src_type = None
         self._group_id = None
         self._plan_id = None
         self._principal_id = None
         self._principal_tag = None
         self._property_list = None
         self._source = None
+        self._target_id = None
+        self._target_type = None
         self._uuid = None
         self._uuid_type = None
 
@@ -75,6 +78,13 @@ class ConversionData(object):
     def data_id(self, value):
         self._data_id = value
     @property
+    def data_src_type(self):
+        return self._data_src_type
+
+    @data_src_type.setter
+    def data_src_type(self, value):
+        self._data_src_type = value
+    @property
     def group_id(self):
         return self._group_id
 
@@ -122,6 +132,20 @@ class ConversionData(object):
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def target_id(self):
+        return self._target_id
+
+    @target_id.setter
+    def target_id(self, value):
+        self._target_id = value
+    @property
+    def target_type(self):
+        return self._target_type
+
+    @target_type.setter
+    def target_type(self, value):
+        self._target_type = value
     @property
     def uuid(self):
         return self._uuid
@@ -175,6 +199,11 @@ class ConversionData(object):
                 params['data_id'] = self.data_id.to_alipay_dict()
             else:
                 params['data_id'] = self.data_id
+        if self.data_src_type:
+            if hasattr(self.data_src_type, 'to_alipay_dict'):
+                params['data_src_type'] = self.data_src_type.to_alipay_dict()
+            else:
+                params['data_src_type'] = self.data_src_type
         if self.group_id:
             if hasattr(self.group_id, 'to_alipay_dict'):
                 params['group_id'] = self.group_id.to_alipay_dict()
@@ -210,6 +239,16 @@ class ConversionData(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.target_id:
+            if hasattr(self.target_id, 'to_alipay_dict'):
+                params['target_id'] = self.target_id.to_alipay_dict()
+            else:
+                params['target_id'] = self.target_id
+        if self.target_type:
+            if hasattr(self.target_type, 'to_alipay_dict'):
+                params['target_type'] = self.target_type.to_alipay_dict()
+            else:
+                params['target_type'] = self.target_type
         if self.uuid:
             if hasattr(self.uuid, 'to_alipay_dict'):
                 params['uuid'] = self.uuid.to_alipay_dict()
@@ -241,6 +280,8 @@ class ConversionData(object):
             o.creative_id = d['creative_id']
         if 'data_id' in d:
             o.data_id = d['data_id']
+        if 'data_src_type' in d:
+            o.data_src_type = d['data_src_type']
         if 'group_id' in d:
             o.group_id = d['group_id']
         if 'plan_id' in d:
@@ -253,6 +294,10 @@ class ConversionData(object):
             o.property_list = d['property_list']
         if 'source' in d:
             o.source = d['source']
+        if 'target_id' in d:
+            o.target_id = d['target_id']
+        if 'target_type' in d:
+            o.target_type = d['target_type']
         if 'uuid' in d:
             o.uuid = d['uuid']
         if 'uuid_type' in d:

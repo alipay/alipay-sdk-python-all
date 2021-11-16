@@ -40,6 +40,7 @@ class AlipayMerchantOrderSyncModel(object):
         self._send_msg = None
         self._service_code = None
         self._shop_info = None
+        self._source_app = None
         self._sync_content = None
         self._ticket_info = None
         self._ticket_order_list = None
@@ -244,6 +245,13 @@ class AlipayMerchantOrderSyncModel(object):
         else:
             self._shop_info = OrderShopInfo.from_alipay_dict(value)
     @property
+    def source_app(self):
+        return self._source_app
+
+    @source_app.setter
+    def source_app(self, value):
+        self._source_app = value
+    @property
     def sync_content(self):
         return self._sync_content
 
@@ -431,6 +439,11 @@ class AlipayMerchantOrderSyncModel(object):
                 params['shop_info'] = self.shop_info.to_alipay_dict()
             else:
                 params['shop_info'] = self.shop_info
+        if self.source_app:
+            if hasattr(self.source_app, 'to_alipay_dict'):
+                params['source_app'] = self.source_app.to_alipay_dict()
+            else:
+                params['source_app'] = self.source_app
         if self.sync_content:
             if hasattr(self.sync_content, 'to_alipay_dict'):
                 params['sync_content'] = self.sync_content.to_alipay_dict()
@@ -514,6 +527,8 @@ class AlipayMerchantOrderSyncModel(object):
             o.service_code = d['service_code']
         if 'shop_info' in d:
             o.shop_info = d['shop_info']
+        if 'source_app' in d:
+            o.source_app = d['source_app']
         if 'sync_content' in d:
             o.sync_content = d['sync_content']
         if 'ticket_info' in d:

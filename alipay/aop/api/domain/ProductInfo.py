@@ -26,6 +26,7 @@ class ProductInfo(object):
         self._sale_price = None
         self._start_time = None
         self._stock_count = None
+        self._user_name_required = None
         self._voucher_type = None
         self._voucher_verify_type = None
 
@@ -151,6 +152,13 @@ class ProductInfo(object):
     def stock_count(self, value):
         self._stock_count = value
     @property
+    def user_name_required(self):
+        return self._user_name_required
+
+    @user_name_required.setter
+    def user_name_required(self, value):
+        self._user_name_required = value
+    @property
     def voucher_type(self):
         return self._voucher_type
 
@@ -253,6 +261,11 @@ class ProductInfo(object):
                 params['stock_count'] = self.stock_count.to_alipay_dict()
             else:
                 params['stock_count'] = self.stock_count
+        if self.user_name_required:
+            if hasattr(self.user_name_required, 'to_alipay_dict'):
+                params['user_name_required'] = self.user_name_required.to_alipay_dict()
+            else:
+                params['user_name_required'] = self.user_name_required
         if self.voucher_type:
             if hasattr(self.voucher_type, 'to_alipay_dict'):
                 params['voucher_type'] = self.voucher_type.to_alipay_dict()
@@ -302,6 +315,8 @@ class ProductInfo(object):
             o.start_time = d['start_time']
         if 'stock_count' in d:
             o.stock_count = d['stock_count']
+        if 'user_name_required' in d:
+            o.user_name_required = d['user_name_required']
         if 'voucher_type' in d:
             o.voucher_type = d['voucher_type']
         if 'voucher_verify_type' in d:

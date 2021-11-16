@@ -32,6 +32,8 @@ class GrmProjectInfoDTO(object):
         self._project_type = None
         self._project_workload = None
         self._service_location = None
+        self._settlement_formula_code = None
+        self._settlement_formula_name = None
         self._sla_view_info = None
         self._start_date = None
         self._total_amount = None
@@ -206,6 +208,20 @@ class GrmProjectInfoDTO(object):
     def service_location(self, value):
         self._service_location = value
     @property
+    def settlement_formula_code(self):
+        return self._settlement_formula_code
+
+    @settlement_formula_code.setter
+    def settlement_formula_code(self, value):
+        self._settlement_formula_code = value
+    @property
+    def settlement_formula_name(self):
+        return self._settlement_formula_name
+
+    @settlement_formula_name.setter
+    def settlement_formula_name(self, value):
+        self._settlement_formula_name = value
+    @property
     def sla_view_info(self):
         return self._sla_view_info
 
@@ -362,6 +378,16 @@ class GrmProjectInfoDTO(object):
                 params['service_location'] = self.service_location.to_alipay_dict()
             else:
                 params['service_location'] = self.service_location
+        if self.settlement_formula_code:
+            if hasattr(self.settlement_formula_code, 'to_alipay_dict'):
+                params['settlement_formula_code'] = self.settlement_formula_code.to_alipay_dict()
+            else:
+                params['settlement_formula_code'] = self.settlement_formula_code
+        if self.settlement_formula_name:
+            if hasattr(self.settlement_formula_name, 'to_alipay_dict'):
+                params['settlement_formula_name'] = self.settlement_formula_name.to_alipay_dict()
+            else:
+                params['settlement_formula_name'] = self.settlement_formula_name
         if self.sla_view_info:
             if hasattr(self.sla_view_info, 'to_alipay_dict'):
                 params['sla_view_info'] = self.sla_view_info.to_alipay_dict()
@@ -431,6 +457,10 @@ class GrmProjectInfoDTO(object):
             o.project_workload = d['project_workload']
         if 'service_location' in d:
             o.service_location = d['service_location']
+        if 'settlement_formula_code' in d:
+            o.settlement_formula_code = d['settlement_formula_code']
+        if 'settlement_formula_name' in d:
+            o.settlement_formula_name = d['settlement_formula_name']
         if 'sla_view_info' in d:
             o.sla_view_info = d['sla_view_info']
         if 'start_date' in d:

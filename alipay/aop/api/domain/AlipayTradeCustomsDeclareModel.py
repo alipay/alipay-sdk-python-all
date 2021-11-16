@@ -16,7 +16,9 @@ class AlipayTradeCustomsDeclareModel(object):
         self._is_split = None
         self._merchant_customs_code = None
         self._merchant_customs_name = None
+        self._merchant_id = None
         self._out_request_no = None
+        self._out_trade_no = None
         self._sub_out_biz_no = None
         self._trade_no = None
 
@@ -73,12 +75,26 @@ class AlipayTradeCustomsDeclareModel(object):
     def merchant_customs_name(self, value):
         self._merchant_customs_name = value
     @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
+    @property
     def out_request_no(self):
         return self._out_request_no
 
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
     @property
     def sub_out_biz_no(self):
         return self._sub_out_biz_no
@@ -132,11 +148,21 @@ class AlipayTradeCustomsDeclareModel(object):
                 params['merchant_customs_name'] = self.merchant_customs_name.to_alipay_dict()
             else:
                 params['merchant_customs_name'] = self.merchant_customs_name
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.out_trade_no:
+            if hasattr(self.out_trade_no, 'to_alipay_dict'):
+                params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
+            else:
+                params['out_trade_no'] = self.out_trade_no
         if self.sub_out_biz_no:
             if hasattr(self.sub_out_biz_no, 'to_alipay_dict'):
                 params['sub_out_biz_no'] = self.sub_out_biz_no.to_alipay_dict()
@@ -168,8 +194,12 @@ class AlipayTradeCustomsDeclareModel(object):
             o.merchant_customs_code = d['merchant_customs_code']
         if 'merchant_customs_name' in d:
             o.merchant_customs_name = d['merchant_customs_name']
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'out_trade_no' in d:
+            o.out_trade_no = d['out_trade_no']
         if 'sub_out_biz_no' in d:
             o.sub_out_biz_no = d['sub_out_biz_no']
         if 'trade_no' in d:

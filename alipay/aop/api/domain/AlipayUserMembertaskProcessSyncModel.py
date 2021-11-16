@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayUserMembertaskProcessSyncModel(object):
 
     def __init__(self):
+        self._biz_param = None
         self._biz_type = None
         self._money = None
         self._out_biz_no = None
         self._sub_biz_type = None
         self._user_id = None
 
+    @property
+    def biz_param(self):
+        return self._biz_param
+
+    @biz_param.setter
+    def biz_param(self, value):
+        self._biz_param = value
     @property
     def biz_type(self):
         return self._biz_type
@@ -53,6 +61,11 @@ class AlipayUserMembertaskProcessSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_param:
+            if hasattr(self.biz_param, 'to_alipay_dict'):
+                params['biz_param'] = self.biz_param.to_alipay_dict()
+            else:
+                params['biz_param'] = self.biz_param
         if self.biz_type:
             if hasattr(self.biz_type, 'to_alipay_dict'):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayUserMembertaskProcessSyncModel(object):
         if not d:
             return None
         o = AlipayUserMembertaskProcessSyncModel()
+        if 'biz_param' in d:
+            o.biz_param = d['biz_param']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
         if 'money' in d:

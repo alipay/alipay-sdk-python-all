@@ -26,6 +26,7 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
         self._origin = None
         self._owner_entity = None
         self._owner_portrait = None
+        self._plugin_refresh_type = None
         self._service_email = None
         self._service_phone = None
 
@@ -149,6 +150,13 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
     def owner_portrait(self, value):
         self._owner_portrait = value
     @property
+    def plugin_refresh_type(self):
+        return self._plugin_refresh_type
+
+    @plugin_refresh_type.setter
+    def plugin_refresh_type(self, value):
+        self._plugin_refresh_type = value
+    @property
     def service_email(self):
         return self._service_email
 
@@ -199,6 +207,8 @@ class AlipayOpenMiniInnerbaseinfoQueryResponse(AlipayResponse):
             self.owner_entity = response['owner_entity']
         if 'owner_portrait' in response:
             self.owner_portrait = response['owner_portrait']
+        if 'plugin_refresh_type' in response:
+            self.plugin_refresh_type = response['plugin_refresh_type']
         if 'service_email' in response:
             self.service_email = response['service_email']
         if 'service_phone' in response:

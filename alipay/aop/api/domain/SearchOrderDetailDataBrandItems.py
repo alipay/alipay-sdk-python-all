@@ -12,9 +12,9 @@ class SearchOrderDetailDataBrandItems(object):
         self._biz_id = None
         self._box_status = None
         self._brand_box_keywords = None
+        self._brand_detail_list = None
         self._brand_template_id = None
         self._channel = None
-        self._data = None
         self._merchant_type = None
         self._template_id = None
 
@@ -40,6 +40,19 @@ class SearchOrderDetailDataBrandItems(object):
     def brand_box_keywords(self, value):
         self._brand_box_keywords = value
     @property
+    def brand_detail_list(self):
+        return self._brand_detail_list
+
+    @brand_detail_list.setter
+    def brand_detail_list(self, value):
+        if isinstance(value, list):
+            self._brand_detail_list = list()
+            for i in value:
+                if isinstance(i, SearchOrderBrandDetail):
+                    self._brand_detail_list.append(i)
+                else:
+                    self._brand_detail_list.append(SearchOrderBrandDetail.from_alipay_dict(i))
+    @property
     def brand_template_id(self):
         return self._brand_template_id
 
@@ -53,19 +66,6 @@ class SearchOrderDetailDataBrandItems(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
-    @property
-    def data(self):
-        return self._data
-
-    @data.setter
-    def data(self, value):
-        if isinstance(value, list):
-            self._data = list()
-            for i in value:
-                if isinstance(i, SearchOrderBrandDetail):
-                    self._data.append(i)
-                else:
-                    self._data.append(SearchOrderBrandDetail.from_alipay_dict(i))
     @property
     def merchant_type(self):
         return self._merchant_type
@@ -99,6 +99,16 @@ class SearchOrderDetailDataBrandItems(object):
                 params['brand_box_keywords'] = self.brand_box_keywords.to_alipay_dict()
             else:
                 params['brand_box_keywords'] = self.brand_box_keywords
+        if self.brand_detail_list:
+            if isinstance(self.brand_detail_list, list):
+                for i in range(0, len(self.brand_detail_list)):
+                    element = self.brand_detail_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.brand_detail_list[i] = element.to_alipay_dict()
+            if hasattr(self.brand_detail_list, 'to_alipay_dict'):
+                params['brand_detail_list'] = self.brand_detail_list.to_alipay_dict()
+            else:
+                params['brand_detail_list'] = self.brand_detail_list
         if self.brand_template_id:
             if hasattr(self.brand_template_id, 'to_alipay_dict'):
                 params['brand_template_id'] = self.brand_template_id.to_alipay_dict()
@@ -109,16 +119,6 @@ class SearchOrderDetailDataBrandItems(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
-        if self.data:
-            if isinstance(self.data, list):
-                for i in range(0, len(self.data)):
-                    element = self.data[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.data[i] = element.to_alipay_dict()
-            if hasattr(self.data, 'to_alipay_dict'):
-                params['data'] = self.data.to_alipay_dict()
-            else:
-                params['data'] = self.data
         if self.merchant_type:
             if hasattr(self.merchant_type, 'to_alipay_dict'):
                 params['merchant_type'] = self.merchant_type.to_alipay_dict()
@@ -142,12 +142,12 @@ class SearchOrderDetailDataBrandItems(object):
             o.box_status = d['box_status']
         if 'brand_box_keywords' in d:
             o.brand_box_keywords = d['brand_box_keywords']
+        if 'brand_detail_list' in d:
+            o.brand_detail_list = d['brand_detail_list']
         if 'brand_template_id' in d:
             o.brand_template_id = d['brand_template_id']
         if 'channel' in d:
             o.channel = d['channel']
-        if 'data' in d:
-            o.data = d['data']
         if 'merchant_type' in d:
             o.merchant_type = d['merchant_type']
         if 'template_id' in d:

@@ -16,8 +16,10 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
         self._ext_info = None
         self._ext_param = None
         self._logo = None
+        self._out_biz_no = None
         self._out_order_no = None
         self._pay_amount = None
+        self._period = None
         self._period_type = None
         self._remark = None
         self._smid = None
@@ -76,6 +78,13 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
     def logo(self, value):
         self._logo = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def out_order_no(self):
         return self._out_order_no
 
@@ -89,6 +98,13 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
     @pay_amount.setter
     def pay_amount(self, value):
         self._pay_amount = value
+    @property
+    def period(self):
+        return self._period
+
+    @period.setter
+    def period(self, value):
+        self._period = value
     @property
     def period_type(self):
         return self._period_type
@@ -156,6 +172,11 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
                 params['logo'] = self.logo.to_alipay_dict()
             else:
                 params['logo'] = self.logo
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -166,6 +187,11 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
             else:
                 params['pay_amount'] = self.pay_amount
+        if self.period:
+            if hasattr(self.period, 'to_alipay_dict'):
+                params['period'] = self.period.to_alipay_dict()
+            else:
+                params['period'] = self.period
         if self.period_type:
             if hasattr(self.period_type, 'to_alipay_dict'):
                 params['period_type'] = self.period_type.to_alipay_dict()
@@ -207,10 +233,14 @@ class AlipayCommerceEducateTuitioncodePagedataSendModel(object):
             o.ext_param = d['ext_param']
         if 'logo' in d:
             o.logo = d['logo']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
+        if 'period' in d:
+            o.period = d['period']
         if 'period_type' in d:
             o.period_type = d['period_type']
         if 'remark' in d:

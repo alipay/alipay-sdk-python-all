@@ -52,6 +52,7 @@ class AlipayTradePayModel(object):
         self._subject = None
         self._terminal_id = None
         self._terminal_params = None
+        self._time_expire = None
         self._timeout_express = None
         self._total_amount = None
         self._trans_currency = None
@@ -332,6 +333,13 @@ class AlipayTradePayModel(object):
     def terminal_params(self, value):
         self._terminal_params = value
     @property
+    def time_expire(self):
+        return self._time_expire
+
+    @time_expire.setter
+    def time_expire(self, value):
+        self._time_expire = value
+    @property
     def timeout_express(self):
         return self._timeout_express
 
@@ -543,6 +551,11 @@ class AlipayTradePayModel(object):
                 params['terminal_params'] = self.terminal_params.to_alipay_dict()
             else:
                 params['terminal_params'] = self.terminal_params
+        if self.time_expire:
+            if hasattr(self.time_expire, 'to_alipay_dict'):
+                params['time_expire'] = self.time_expire.to_alipay_dict()
+            else:
+                params['time_expire'] = self.time_expire
         if self.timeout_express:
             if hasattr(self.timeout_express, 'to_alipay_dict'):
                 params['timeout_express'] = self.timeout_express.to_alipay_dict()
@@ -638,6 +651,8 @@ class AlipayTradePayModel(object):
             o.terminal_id = d['terminal_id']
         if 'terminal_params' in d:
             o.terminal_params = d['terminal_params']
+        if 'time_expire' in d:
+            o.time_expire = d['time_expire']
         if 'timeout_express' in d:
             o.timeout_express = d['timeout_express']
         if 'total_amount' in d:

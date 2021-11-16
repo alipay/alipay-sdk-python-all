@@ -14,6 +14,7 @@ class ProductZoneInfo(object):
         self._sale_price = None
         self._start_time = None
         self._stock_count = None
+        self._zone_name = None
 
     @property
     def end_time(self):
@@ -57,6 +58,13 @@ class ProductZoneInfo(object):
     @stock_count.setter
     def stock_count(self, value):
         self._stock_count = value
+    @property
+    def zone_name(self):
+        return self._zone_name
+
+    @zone_name.setter
+    def zone_name(self, value):
+        self._zone_name = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class ProductZoneInfo(object):
                 params['stock_count'] = self.stock_count.to_alipay_dict()
             else:
                 params['stock_count'] = self.stock_count
+        if self.zone_name:
+            if hasattr(self.zone_name, 'to_alipay_dict'):
+                params['zone_name'] = self.zone_name.to_alipay_dict()
+            else:
+                params['zone_name'] = self.zone_name
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class ProductZoneInfo(object):
             o.start_time = d['start_time']
         if 'stock_count' in d:
             o.stock_count = d['stock_count']
+        if 'zone_name' in d:
+            o.zone_name = d['zone_name']
         return o
 
 

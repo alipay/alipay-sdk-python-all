@@ -7,6 +7,7 @@ from alipay.aop.api.domain.MerchantCard import MerchantCard
 from alipay.aop.api.domain.McardStylInfo import McardStylInfo
 from alipay.aop.api.domain.MerchantCardMsgInfo import MerchantCardMsgInfo
 from alipay.aop.api.domain.McardNotifyMessage import McardNotifyMessage
+from alipay.aop.api.domain.PaidOuterCardExtraInfoDTO import PaidOuterCardExtraInfoDTO
 
 
 class AlipayMarketingCardUpdateModel(object):
@@ -18,6 +19,7 @@ class AlipayMarketingCardUpdateModel(object):
         self._merchant_card_msg_info = None
         self._notify_messages = None
         self._occur_time = None
+        self._paid_outer_card_info = None
         self._target_card_no = None
         self._target_card_no_type = None
 
@@ -79,6 +81,16 @@ class AlipayMarketingCardUpdateModel(object):
     def occur_time(self, value):
         self._occur_time = value
     @property
+    def paid_outer_card_info(self):
+        return self._paid_outer_card_info
+
+    @paid_outer_card_info.setter
+    def paid_outer_card_info(self, value):
+        if isinstance(value, PaidOuterCardExtraInfoDTO):
+            self._paid_outer_card_info = value
+        else:
+            self._paid_outer_card_info = PaidOuterCardExtraInfoDTO.from_alipay_dict(value)
+    @property
     def target_card_no(self):
         return self._target_card_no
 
@@ -131,6 +143,11 @@ class AlipayMarketingCardUpdateModel(object):
                 params['occur_time'] = self.occur_time.to_alipay_dict()
             else:
                 params['occur_time'] = self.occur_time
+        if self.paid_outer_card_info:
+            if hasattr(self.paid_outer_card_info, 'to_alipay_dict'):
+                params['paid_outer_card_info'] = self.paid_outer_card_info.to_alipay_dict()
+            else:
+                params['paid_outer_card_info'] = self.paid_outer_card_info
         if self.target_card_no:
             if hasattr(self.target_card_no, 'to_alipay_dict'):
                 params['target_card_no'] = self.target_card_no.to_alipay_dict()
@@ -160,6 +177,8 @@ class AlipayMarketingCardUpdateModel(object):
             o.notify_messages = d['notify_messages']
         if 'occur_time' in d:
             o.occur_time = d['occur_time']
+        if 'paid_outer_card_info' in d:
+            o.paid_outer_card_info = d['paid_outer_card_info']
         if 'target_card_no' in d:
             o.target_card_no = d['target_card_no']
         if 'target_card_no_type' in d:

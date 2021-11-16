@@ -14,6 +14,7 @@ class OpenApiRoyaltyDetailInfoPojo(object):
         self._royalty_scene = None
         self._royalty_type = None
         self._trans_in = None
+        self._trans_in_name = None
         self._trans_in_type = None
         self._trans_out = None
         self._trans_out_type = None
@@ -60,6 +61,13 @@ class OpenApiRoyaltyDetailInfoPojo(object):
     @trans_in.setter
     def trans_in(self, value):
         self._trans_in = value
+    @property
+    def trans_in_name(self):
+        return self._trans_in_name
+
+    @trans_in_name.setter
+    def trans_in_name(self, value):
+        self._trans_in_name = value
     @property
     def trans_in_type(self):
         return self._trans_in_type
@@ -115,6 +123,11 @@ class OpenApiRoyaltyDetailInfoPojo(object):
                 params['trans_in'] = self.trans_in.to_alipay_dict()
             else:
                 params['trans_in'] = self.trans_in
+        if self.trans_in_name:
+            if hasattr(self.trans_in_name, 'to_alipay_dict'):
+                params['trans_in_name'] = self.trans_in_name.to_alipay_dict()
+            else:
+                params['trans_in_name'] = self.trans_in_name
         if self.trans_in_type:
             if hasattr(self.trans_in_type, 'to_alipay_dict'):
                 params['trans_in_type'] = self.trans_in_type.to_alipay_dict()
@@ -149,6 +162,8 @@ class OpenApiRoyaltyDetailInfoPojo(object):
             o.royalty_type = d['royalty_type']
         if 'trans_in' in d:
             o.trans_in = d['trans_in']
+        if 'trans_in_name' in d:
+            o.trans_in_name = d['trans_in_name']
         if 'trans_in_type' in d:
             o.trans_in_type = d['trans_in_type']
         if 'trans_out' in d:

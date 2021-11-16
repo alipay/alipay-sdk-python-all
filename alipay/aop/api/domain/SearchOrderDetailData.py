@@ -9,7 +9,6 @@ from alipay.aop.api.domain.OrderStatusData import OrderStatusData
 from alipay.aop.api.domain.SearchOrderDetailDataBaseItems import SearchOrderDetailDataBaseItems
 from alipay.aop.api.domain.SearchOrderDetailDataBrandItems import SearchOrderDetailDataBrandItems
 from alipay.aop.api.domain.SearchOrderDetailDataServiceItems import SearchOrderDetailDataServiceItems
-from alipay.aop.api.domain.SearchOrderDetailDataInfo import SearchOrderDetailDataInfo
 
 
 class SearchOrderDetailData(object):
@@ -45,7 +44,6 @@ class SearchOrderDetailData(object):
         self._scene_name = None
         self._service_code = None
         self._service_name = None
-        self._service_status_infos = None
         self._status = None
         self._sub_service_code = None
         self._template_id = None
@@ -280,19 +278,6 @@ class SearchOrderDetailData(object):
     def service_name(self, value):
         self._service_name = value
     @property
-    def service_status_infos(self):
-        return self._service_status_infos
-
-    @service_status_infos.setter
-    def service_status_infos(self, value):
-        if isinstance(value, list):
-            self._service_status_infos = list()
-            for i in value:
-                if isinstance(i, SearchOrderDetailDataInfo):
-                    self._service_status_infos.append(i)
-                else:
-                    self._service_status_infos.append(SearchOrderDetailDataInfo.from_alipay_dict(i))
-    @property
     def status(self):
         return self._status
 
@@ -474,16 +459,6 @@ class SearchOrderDetailData(object):
                 params['service_name'] = self.service_name.to_alipay_dict()
             else:
                 params['service_name'] = self.service_name
-        if self.service_status_infos:
-            if isinstance(self.service_status_infos, list):
-                for i in range(0, len(self.service_status_infos)):
-                    element = self.service_status_infos[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.service_status_infos[i] = element.to_alipay_dict()
-            if hasattr(self.service_status_infos, 'to_alipay_dict'):
-                params['service_status_infos'] = self.service_status_infos.to_alipay_dict()
-            else:
-                params['service_status_infos'] = self.service_status_infos
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -571,8 +546,6 @@ class SearchOrderDetailData(object):
             o.service_code = d['service_code']
         if 'service_name' in d:
             o.service_name = d['service_name']
-        if 'service_status_infos' in d:
-            o.service_status_infos = d['service_status_infos']
         if 'status' in d:
             o.status = d['status']
         if 'sub_service_code' in d:

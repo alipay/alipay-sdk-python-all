@@ -12,6 +12,7 @@ class ReceiptSku(object):
         self._count = None
         self._name = None
         self._price = None
+        self._unit = None
 
     @property
     def barcode(self):
@@ -41,6 +42,13 @@ class ReceiptSku(object):
     @price.setter
     def price(self, value):
         self._price = value
+    @property
+    def unit(self):
+        return self._unit
+
+    @unit.setter
+    def unit(self, value):
+        self._unit = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class ReceiptSku(object):
                 params['price'] = self.price.to_alipay_dict()
             else:
                 params['price'] = self.price
+        if self.unit:
+            if hasattr(self.unit, 'to_alipay_dict'):
+                params['unit'] = self.unit.to_alipay_dict()
+            else:
+                params['unit'] = self.unit
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class ReceiptSku(object):
             o.name = d['name']
         if 'price' in d:
             o.price = d['price']
+        if 'unit' in d:
+            o.unit = d['unit']
         return o
 
 

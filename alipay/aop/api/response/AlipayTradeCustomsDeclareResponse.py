@@ -12,6 +12,7 @@ class AlipayTradeCustomsDeclareResponse(AlipayResponse):
         self._alipay_declare_no = None
         self._currency = None
         self._identity_check = None
+        self._out_trade_no = None
         self._pay_code = None
         self._pay_transaction_id = None
         self._total_amount = None
@@ -39,6 +40,13 @@ class AlipayTradeCustomsDeclareResponse(AlipayResponse):
     @identity_check.setter
     def identity_check(self, value):
         self._identity_check = value
+    @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
     @property
     def pay_code(self):
         return self._pay_code
@@ -83,6 +91,8 @@ class AlipayTradeCustomsDeclareResponse(AlipayResponse):
             self.currency = response['currency']
         if 'identity_check' in response:
             self.identity_check = response['identity_check']
+        if 'out_trade_no' in response:
+            self.out_trade_no = response['out_trade_no']
         if 'pay_code' in response:
             self.pay_code = response['pay_code']
         if 'pay_transaction_id' in response:

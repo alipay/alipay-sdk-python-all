@@ -11,6 +11,7 @@ class ExpenseQuotaInfo(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._enterprise_id = None
+        self._freeze = None
         self._owner_id = None
         self._owner_type = None
         self._quota_available = None
@@ -42,6 +43,13 @@ class ExpenseQuotaInfo(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def freeze(self):
+        return self._freeze
+
+    @freeze.setter
+    def freeze(self, value):
+        self._freeze = value
     @property
     def owner_id(self):
         return self._owner_id
@@ -124,6 +132,11 @@ class ExpenseQuotaInfo(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.freeze:
+            if hasattr(self.freeze, 'to_alipay_dict'):
+                params['freeze'] = self.freeze.to_alipay_dict()
+            else:
+                params['freeze'] = self.freeze
         if self.owner_id:
             if hasattr(self.owner_id, 'to_alipay_dict'):
                 params['owner_id'] = self.owner_id.to_alipay_dict()
@@ -182,6 +195,8 @@ class ExpenseQuotaInfo(object):
             o.effective_start_date = d['effective_start_date']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'freeze' in d:
+            o.freeze = d['freeze']
         if 'owner_id' in d:
             o.owner_id = d['owner_id']
         if 'owner_type' in d:

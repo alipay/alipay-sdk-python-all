@@ -11,6 +11,7 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
         self._activity_id = None
         self._logon_id = None
         self._out_biz_no = None
+        self._phone_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def phone_id(self):
+        return self._phone_id
+
+    @phone_id.setter
+    def phone_id(self, value):
+        self._phone_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.phone_id:
+            if hasattr(self.phone_id, 'to_alipay_dict'):
+                params['phone_id'] = self.phone_id.to_alipay_dict()
+            else:
+                params['phone_id'] = self.phone_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
             o.logon_id = d['logon_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'phone_id' in d:
+            o.phone_id = d['phone_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

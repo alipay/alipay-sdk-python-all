@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -27,6 +28,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._credit_pay_mode = None
         self._discount_amount = None
         self._discount_goods_detail = None
+        self._enterprise_pay_info = None
         self._fund_bill_list = None
         self._gmt_payment = None
         self._invoice_amount = None
@@ -161,6 +163,16 @@ class AlipayTradePayResponse(AlipayResponse):
     @discount_goods_detail.setter
     def discount_goods_detail(self, value):
         self._discount_goods_detail = value
+    @property
+    def enterprise_pay_info(self):
+        return self._enterprise_pay_info
+
+    @enterprise_pay_info.setter
+    def enterprise_pay_info(self, value):
+        if isinstance(value, EnterprisePayInfo):
+            self._enterprise_pay_info = value
+        else:
+            self._enterprise_pay_info = EnterprisePayInfo.from_alipay_dict(value)
     @property
     def fund_bill_list(self):
         return self._fund_bill_list
@@ -355,6 +367,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.discount_amount = response['discount_amount']
         if 'discount_goods_detail' in response:
             self.discount_goods_detail = response['discount_goods_detail']
+        if 'enterprise_pay_info' in response:
+            self.enterprise_pay_info = response['enterprise_pay_info']
         if 'fund_bill_list' in response:
             self.fund_bill_list = response['fund_bill_list']
         if 'gmt_payment' in response:
