@@ -8,6 +8,8 @@ from alipay.aop.api.constant.ParamConstants import *
 class RecruitVoucherRule(object):
 
     def __init__(self):
+        self._amount_max = None
+        self._amount_min = None
         self._denomination_percent_max = None
         self._denomination_percent_min = None
         self._floor_amount_max = None
@@ -31,6 +33,20 @@ class RecruitVoucherRule(object):
         self._voucher_valid_begin_time_min = None
         self._voucher_valid_end_time_max = None
 
+    @property
+    def amount_max(self):
+        return self._amount_max
+
+    @amount_max.setter
+    def amount_max(self, value):
+        self._amount_max = value
+    @property
+    def amount_min(self):
+        return self._amount_min
+
+    @amount_min.setter
+    def amount_min(self, value):
+        self._amount_min = value
     @property
     def denomination_percent_max(self):
         return self._denomination_percent_max
@@ -195,6 +211,16 @@ class RecruitVoucherRule(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_max:
+            if hasattr(self.amount_max, 'to_alipay_dict'):
+                params['amount_max'] = self.amount_max.to_alipay_dict()
+            else:
+                params['amount_max'] = self.amount_max
+        if self.amount_min:
+            if hasattr(self.amount_min, 'to_alipay_dict'):
+                params['amount_min'] = self.amount_min.to_alipay_dict()
+            else:
+                params['amount_min'] = self.amount_min
         if self.denomination_percent_max:
             if hasattr(self.denomination_percent_max, 'to_alipay_dict'):
                 params['denomination_percent_max'] = self.denomination_percent_max.to_alipay_dict()
@@ -322,6 +348,10 @@ class RecruitVoucherRule(object):
         if not d:
             return None
         o = RecruitVoucherRule()
+        if 'amount_max' in d:
+            o.amount_max = d['amount_max']
+        if 'amount_min' in d:
+            o.amount_min = d['amount_min']
         if 'denomination_percent_max' in d:
             o.denomination_percent_max = d['denomination_percent_max']
         if 'denomination_percent_min' in d:

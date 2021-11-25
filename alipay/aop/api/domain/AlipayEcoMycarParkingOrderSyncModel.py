@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEcoMycarParkingOrderSyncModel(object):
 
     def __init__(self):
+        self._agent_pid = None
         self._car_number = None
         self._card_number = None
         self._in_duration = None
@@ -26,6 +27,13 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
         self._smid = None
         self._user_id = None
 
+    @property
+    def agent_pid(self):
+        return self._agent_pid
+
+    @agent_pid.setter
+    def agent_pid(self, value):
+        self._agent_pid = value
     @property
     def car_number(self):
         return self._car_number
@@ -149,6 +157,11 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_pid:
+            if hasattr(self.agent_pid, 'to_alipay_dict'):
+                params['agent_pid'] = self.agent_pid.to_alipay_dict()
+            else:
+                params['agent_pid'] = self.agent_pid
         if self.car_number:
             if hasattr(self.car_number, 'to_alipay_dict'):
                 params['car_number'] = self.car_number.to_alipay_dict()
@@ -241,6 +254,8 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
         if not d:
             return None
         o = AlipayEcoMycarParkingOrderSyncModel()
+        if 'agent_pid' in d:
+            o.agent_pid = d['agent_pid']
         if 'car_number' in d:
             o.car_number = d['car_number']
         if 'card_number' in d:

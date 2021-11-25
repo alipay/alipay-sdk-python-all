@@ -10,6 +10,7 @@ class AlipayOpenSpOperationQrcodeQueryModel(object):
     def __init__(self):
         self._access_product_code = None
         self._alipay_account = None
+        self._isv_scene_permissions = None
         self._merchant_no = None
         self._operate_type = None
         self._out_biz_no = None
@@ -28,6 +29,13 @@ class AlipayOpenSpOperationQrcodeQueryModel(object):
     @alipay_account.setter
     def alipay_account(self, value):
         self._alipay_account = value
+    @property
+    def isv_scene_permissions(self):
+        return self._isv_scene_permissions
+
+    @isv_scene_permissions.setter
+    def isv_scene_permissions(self, value):
+        self._isv_scene_permissions = value
     @property
     def merchant_no(self):
         return self._merchant_no
@@ -63,6 +71,11 @@ class AlipayOpenSpOperationQrcodeQueryModel(object):
                 params['alipay_account'] = self.alipay_account.to_alipay_dict()
             else:
                 params['alipay_account'] = self.alipay_account
+        if self.isv_scene_permissions:
+            if hasattr(self.isv_scene_permissions, 'to_alipay_dict'):
+                params['isv_scene_permissions'] = self.isv_scene_permissions.to_alipay_dict()
+            else:
+                params['isv_scene_permissions'] = self.isv_scene_permissions
         if self.merchant_no:
             if hasattr(self.merchant_no, 'to_alipay_dict'):
                 params['merchant_no'] = self.merchant_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayOpenSpOperationQrcodeQueryModel(object):
             o.access_product_code = d['access_product_code']
         if 'alipay_account' in d:
             o.alipay_account = d['alipay_account']
+        if 'isv_scene_permissions' in d:
+            o.isv_scene_permissions = d['isv_scene_permissions']
         if 'merchant_no' in d:
             o.merchant_no = d['merchant_no']
         if 'operate_type' in d:

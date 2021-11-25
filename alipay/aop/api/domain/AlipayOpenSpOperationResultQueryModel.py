@@ -11,6 +11,7 @@ class AlipayOpenSpOperationResultQueryModel(object):
         self._access_product_code = None
         self._alipay_account = None
         self._batch_no = None
+        self._isv_scene_permissions = None
         self._merchant_no = None
         self._operate_type = None
 
@@ -35,6 +36,13 @@ class AlipayOpenSpOperationResultQueryModel(object):
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def isv_scene_permissions(self):
+        return self._isv_scene_permissions
+
+    @isv_scene_permissions.setter
+    def isv_scene_permissions(self, value):
+        self._isv_scene_permissions = value
     @property
     def merchant_no(self):
         return self._merchant_no
@@ -68,6 +76,11 @@ class AlipayOpenSpOperationResultQueryModel(object):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
             else:
                 params['batch_no'] = self.batch_no
+        if self.isv_scene_permissions:
+            if hasattr(self.isv_scene_permissions, 'to_alipay_dict'):
+                params['isv_scene_permissions'] = self.isv_scene_permissions.to_alipay_dict()
+            else:
+                params['isv_scene_permissions'] = self.isv_scene_permissions
         if self.merchant_no:
             if hasattr(self.merchant_no, 'to_alipay_dict'):
                 params['merchant_no'] = self.merchant_no.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayOpenSpOperationResultQueryModel(object):
             o.alipay_account = d['alipay_account']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
+        if 'isv_scene_permissions' in d:
+            o.isv_scene_permissions = d['isv_scene_permissions']
         if 'merchant_no' in d:
             o.merchant_no = d['merchant_no']
         if 'operate_type' in d:

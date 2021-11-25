@@ -27,6 +27,7 @@ class ReceiptOrderDTO(object):
         self._logistics_info_list = None
         self._merchant_name = None
         self._order_create_time = None
+        self._order_link = None
         self._order_modified_time = None
         self._order_pay_time = None
         self._order_type = None
@@ -166,6 +167,13 @@ class ReceiptOrderDTO(object):
     @order_create_time.setter
     def order_create_time(self, value):
         self._order_create_time = value
+    @property
+    def order_link(self):
+        return self._order_link
+
+    @order_link.setter
+    def order_link(self, value):
+        self._order_link = value
     @property
     def order_modified_time(self):
         return self._order_modified_time
@@ -351,6 +359,11 @@ class ReceiptOrderDTO(object):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
             else:
                 params['order_create_time'] = self.order_create_time
+        if self.order_link:
+            if hasattr(self.order_link, 'to_alipay_dict'):
+                params['order_link'] = self.order_link.to_alipay_dict()
+            else:
+                params['order_link'] = self.order_link
         if self.order_modified_time:
             if hasattr(self.order_modified_time, 'to_alipay_dict'):
                 params['order_modified_time'] = self.order_modified_time.to_alipay_dict()
@@ -451,6 +464,8 @@ class ReceiptOrderDTO(object):
             o.merchant_name = d['merchant_name']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
+        if 'order_link' in d:
+            o.order_link = d['order_link']
         if 'order_modified_time' in d:
             o.order_modified_time = d['order_modified_time']
         if 'order_pay_time' in d:

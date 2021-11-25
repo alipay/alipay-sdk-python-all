@@ -3,5 +3,6 @@
 """
     __inti__.py
 """
+
 name = "alipay-sdk-python"
-__version__ = "3.6.28"
+__version__ = "3.6.34"

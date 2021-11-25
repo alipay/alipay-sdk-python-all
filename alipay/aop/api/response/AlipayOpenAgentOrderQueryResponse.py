@@ -14,6 +14,7 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
         self._agent_app_id = None
         self._confirm_url = None
         self._merchant_pid = None
+        self._order_no = None
         self._order_status = None
         self._product_agent_status_infos = None
         self._reject_reason = None
@@ -40,6 +41,13 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
     @merchant_pid.setter
     def merchant_pid(self, value):
         self._merchant_pid = value
+    @property
+    def order_no(self):
+        return self._order_no
+
+    @order_no.setter
+    def order_no(self, value):
+        self._order_no = value
     @property
     def order_status(self):
         return self._order_status
@@ -89,6 +97,8 @@ class AlipayOpenAgentOrderQueryResponse(AlipayResponse):
             self.confirm_url = response['confirm_url']
         if 'merchant_pid' in response:
             self.merchant_pid = response['merchant_pid']
+        if 'order_no' in response:
+            self.order_no = response['order_no']
         if 'order_status' in response:
             self.order_status = response['order_status']
         if 'product_agent_status_infos' in response:

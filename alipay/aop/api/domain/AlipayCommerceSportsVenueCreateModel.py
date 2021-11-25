@@ -14,6 +14,8 @@ class AlipayCommerceSportsVenueCreateModel(object):
         self._bookable = None
         self._city_code = None
         self._desc = None
+        self._extra_service_url = None
+        self._join_type = None
         self._latitude = None
         self._longitude = None
         self._name = None
@@ -67,6 +69,20 @@ class AlipayCommerceSportsVenueCreateModel(object):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def extra_service_url(self):
+        return self._extra_service_url
+
+    @extra_service_url.setter
+    def extra_service_url(self, value):
+        self._extra_service_url = value
+    @property
+    def join_type(self):
+        return self._join_type
+
+    @join_type.setter
+    def join_type(self, value):
+        self._join_type = value
     @property
     def latitude(self):
         return self._latitude
@@ -236,6 +252,16 @@ class AlipayCommerceSportsVenueCreateModel(object):
                 params['desc'] = self.desc.to_alipay_dict()
             else:
                 params['desc'] = self.desc
+        if self.extra_service_url:
+            if hasattr(self.extra_service_url, 'to_alipay_dict'):
+                params['extra_service_url'] = self.extra_service_url.to_alipay_dict()
+            else:
+                params['extra_service_url'] = self.extra_service_url
+        if self.join_type:
+            if hasattr(self.join_type, 'to_alipay_dict'):
+                params['join_type'] = self.join_type.to_alipay_dict()
+            else:
+                params['join_type'] = self.join_type
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -368,6 +394,10 @@ class AlipayCommerceSportsVenueCreateModel(object):
             o.city_code = d['city_code']
         if 'desc' in d:
             o.desc = d['desc']
+        if 'extra_service_url' in d:
+            o.extra_service_url = d['extra_service_url']
+        if 'join_type' in d:
+            o.join_type = d['join_type']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

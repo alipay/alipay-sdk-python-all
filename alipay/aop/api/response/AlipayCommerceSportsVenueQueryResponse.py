@@ -15,6 +15,8 @@ class AlipayCommerceSportsVenueQueryResponse(AlipayResponse):
         self._bookable = None
         self._city_code = None
         self._desc = None
+        self._extra_service_url = None
+        self._join_type = None
         self._latitude = None
         self._longitude = None
         self._name = None
@@ -69,6 +71,20 @@ class AlipayCommerceSportsVenueQueryResponse(AlipayResponse):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def extra_service_url(self):
+        return self._extra_service_url
+
+    @extra_service_url.setter
+    def extra_service_url(self, value):
+        self._extra_service_url = value
+    @property
+    def join_type(self):
+        return self._join_type
+
+    @join_type.setter
+    def join_type(self, value):
+        self._join_type = value
     @property
     def latitude(self):
         return self._latitude
@@ -229,6 +245,10 @@ class AlipayCommerceSportsVenueQueryResponse(AlipayResponse):
             self.city_code = response['city_code']
         if 'desc' in response:
             self.desc = response['desc']
+        if 'extra_service_url' in response:
+            self.extra_service_url = response['extra_service_url']
+        if 'join_type' in response:
+            self.join_type = response['join_type']
         if 'latitude' in response:
             self.latitude = response['latitude']
         if 'longitude' in response:
