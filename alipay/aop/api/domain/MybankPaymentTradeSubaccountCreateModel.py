@@ -12,6 +12,7 @@ class MybankPaymentTradeSubaccountCreateModel(object):
         self._currency_value = None
         self._out_channel_id = None
         self._out_channel_type = None
+        self._parent_account_name = None
         self._parent_account_type = None
         self._parent_card_no = None
         self._request_no = None
@@ -45,6 +46,13 @@ class MybankPaymentTradeSubaccountCreateModel(object):
     @out_channel_type.setter
     def out_channel_type(self, value):
         self._out_channel_type = value
+    @property
+    def parent_account_name(self):
+        return self._parent_account_name
+
+    @parent_account_name.setter
+    def parent_account_name(self, value):
+        self._parent_account_name = value
     @property
     def parent_account_type(self):
         return self._parent_account_type
@@ -97,6 +105,11 @@ class MybankPaymentTradeSubaccountCreateModel(object):
                 params['out_channel_type'] = self.out_channel_type.to_alipay_dict()
             else:
                 params['out_channel_type'] = self.out_channel_type
+        if self.parent_account_name:
+            if hasattr(self.parent_account_name, 'to_alipay_dict'):
+                params['parent_account_name'] = self.parent_account_name.to_alipay_dict()
+            else:
+                params['parent_account_name'] = self.parent_account_name
         if self.parent_account_type:
             if hasattr(self.parent_account_type, 'to_alipay_dict'):
                 params['parent_account_type'] = self.parent_account_type.to_alipay_dict()
@@ -132,6 +145,8 @@ class MybankPaymentTradeSubaccountCreateModel(object):
             o.out_channel_id = d['out_channel_id']
         if 'out_channel_type' in d:
             o.out_channel_type = d['out_channel_type']
+        if 'parent_account_name' in d:
+            o.parent_account_name = d['parent_account_name']
         if 'parent_account_type' in d:
             o.parent_account_type = d['parent_account_type']
         if 'parent_card_no' in d:

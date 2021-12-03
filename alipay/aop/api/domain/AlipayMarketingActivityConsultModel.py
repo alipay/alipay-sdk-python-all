@@ -10,6 +10,7 @@ class AlipayMarketingActivityConsultModel(object):
 
     def __init__(self):
         self._consult_activity_info_list = None
+        self._merchant_id = None
         self._user_id = None
 
     @property
@@ -25,6 +26,13 @@ class AlipayMarketingActivityConsultModel(object):
                     self._consult_activity_info_list.append(i)
                 else:
                     self._consult_activity_info_list.append(ConsultActivityInfo.from_alipay_dict(i))
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -46,6 +54,11 @@ class AlipayMarketingActivityConsultModel(object):
                 params['consult_activity_info_list'] = self.consult_activity_info_list.to_alipay_dict()
             else:
                 params['consult_activity_info_list'] = self.consult_activity_info_list
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -60,6 +73,8 @@ class AlipayMarketingActivityConsultModel(object):
         o = AlipayMarketingActivityConsultModel()
         if 'consult_activity_info_list' in d:
             o.consult_activity_info_list = d['consult_activity_info_list']
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

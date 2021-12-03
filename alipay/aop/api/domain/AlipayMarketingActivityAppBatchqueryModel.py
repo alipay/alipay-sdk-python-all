@@ -9,6 +9,7 @@ class AlipayMarketingActivityAppBatchqueryModel(object):
 
     def __init__(self):
         self._activity_id = None
+        self._merchant_id = None
         self._page_num = None
         self._page_size = None
 
@@ -19,6 +20,13 @@ class AlipayMarketingActivityAppBatchqueryModel(object):
     @activity_id.setter
     def activity_id(self, value):
         self._activity_id = value
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -42,6 +50,11 @@ class AlipayMarketingActivityAppBatchqueryModel(object):
                 params['activity_id'] = self.activity_id.to_alipay_dict()
             else:
                 params['activity_id'] = self.activity_id
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayMarketingActivityAppBatchqueryModel(object):
         o = AlipayMarketingActivityAppBatchqueryModel()
         if 'activity_id' in d:
             o.activity_id = d['activity_id']
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

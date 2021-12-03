@@ -12,6 +12,7 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         self._amount = None
         self._auth_no = None
         self._credit_amount = None
+        self._credit_merchant_ext = None
         self._extra_param = None
         self._fund_amount = None
         self._gmt_create = None
@@ -59,6 +60,13 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     @credit_amount.setter
     def credit_amount(self, value):
         self._credit_amount = value
+    @property
+    def credit_merchant_ext(self):
+        return self._credit_merchant_ext
+
+    @credit_merchant_ext.setter
+    def credit_merchant_ext(self, value):
+        self._credit_merchant_ext = value
     @property
     def extra_param(self):
         return self._extra_param
@@ -243,6 +251,8 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.auth_no = response['auth_no']
         if 'credit_amount' in response:
             self.credit_amount = response['credit_amount']
+        if 'credit_merchant_ext' in response:
+            self.credit_merchant_ext = response['credit_merchant_ext']
         if 'extra_param' in response:
             self.extra_param = response['extra_param']
         if 'fund_amount' in response:

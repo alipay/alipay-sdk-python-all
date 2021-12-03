@@ -12,6 +12,7 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
         self._category_id = None
         self._credit_agreement_id = None
         self._extend_params = None
+        self._order_amount = None
         self._out_order_no = None
         self._product_code = None
         self._subject = None
@@ -44,6 +45,13 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
     @extend_params.setter
     def extend_params(self, value):
         self._extend_params = value
+    @property
+    def order_amount(self):
+        return self._order_amount
+
+    @order_amount.setter
+    def order_amount(self, value):
+        self._order_amount = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -89,6 +97,11 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.order_amount:
+            if hasattr(self.order_amount, 'to_alipay_dict'):
+                params['order_amount'] = self.order_amount.to_alipay_dict()
+            else:
+                params['order_amount'] = self.order_amount
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -119,6 +132,8 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
             o.credit_agreement_id = d['credit_agreement_id']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'order_amount' in d:
+            o.order_amount = d['order_amount']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'product_code' in d:

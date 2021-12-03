@@ -17,6 +17,7 @@ class AccountLogItemResult(object):
         self._biz_orig_no = None
         self._direction = None
         self._merchant_order_no = None
+        self._merchant_out_refund_no = None
         self._other_account = None
         self._trans_amount = None
         self._trans_dt = None
@@ -86,6 +87,13 @@ class AccountLogItemResult(object):
     @merchant_order_no.setter
     def merchant_order_no(self, value):
         self._merchant_order_no = value
+    @property
+    def merchant_out_refund_no(self):
+        return self._merchant_out_refund_no
+
+    @merchant_out_refund_no.setter
+    def merchant_out_refund_no(self, value):
+        self._merchant_out_refund_no = value
     @property
     def other_account(self):
         return self._other_account
@@ -170,6 +178,11 @@ class AccountLogItemResult(object):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
             else:
                 params['merchant_order_no'] = self.merchant_order_no
+        if self.merchant_out_refund_no:
+            if hasattr(self.merchant_out_refund_no, 'to_alipay_dict'):
+                params['merchant_out_refund_no'] = self.merchant_out_refund_no.to_alipay_dict()
+            else:
+                params['merchant_out_refund_no'] = self.merchant_out_refund_no
         if self.other_account:
             if hasattr(self.other_account, 'to_alipay_dict'):
                 params['other_account'] = self.other_account.to_alipay_dict()
@@ -220,6 +233,8 @@ class AccountLogItemResult(object):
             o.direction = d['direction']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
+        if 'merchant_out_refund_no' in d:
+            o.merchant_out_refund_no = d['merchant_out_refund_no']
         if 'other_account' in d:
             o.other_account = d['other_account']
         if 'trans_amount' in d:

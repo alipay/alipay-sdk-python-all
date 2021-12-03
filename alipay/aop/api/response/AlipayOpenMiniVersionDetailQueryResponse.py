@@ -3,9 +3,11 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.MiniAppAuditReason import MiniAppAuditReason
 from alipay.aop.api.domain.MiniAppCategoryInfo import MiniAppCategoryInfo
 from alipay.aop.api.domain.MiniAppCategoryInfo import MiniAppCategoryInfo
 from alipay.aop.api.domain.MiniPackageInfo import MiniPackageInfo
+from alipay.aop.api.domain.MiniAppAuditReason import MiniAppAuditReason
 from alipay.aop.api.domain.RegionInfo import RegionInfo
 
 
@@ -19,6 +21,9 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
         self._app_name = None
         self._app_slogan = None
         self._app_version = None
+        self._base_audit = None
+        self._base_audit_record = None
+        self._can_release = None
         self._gmt_apply_audit = None
         self._gmt_audit_end = None
         self._gmt_create = None
@@ -29,6 +34,8 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
         self._mini_app_category_info_list = None
         self._mini_category_info_list = None
         self._package_info_list = None
+        self._promote_audit = None
+        self._promote_audit_record = None
         self._reject_reason = None
         self._scan_result = None
         self._screen_shot_list = None
@@ -81,6 +88,30 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
     @app_version.setter
     def app_version(self, value):
         self._app_version = value
+    @property
+    def base_audit(self):
+        return self._base_audit
+
+    @base_audit.setter
+    def base_audit(self, value):
+        self._base_audit = value
+    @property
+    def base_audit_record(self):
+        return self._base_audit_record
+
+    @base_audit_record.setter
+    def base_audit_record(self, value):
+        if isinstance(value, MiniAppAuditReason):
+            self._base_audit_record = value
+        else:
+            self._base_audit_record = MiniAppAuditReason.from_alipay_dict(value)
+    @property
+    def can_release(self):
+        return self._can_release
+
+    @can_release.setter
+    def can_release(self, value):
+        self._can_release = value
     @property
     def gmt_apply_audit(self):
         return self._gmt_apply_audit
@@ -170,6 +201,23 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
                 else:
                     self._package_info_list.append(MiniPackageInfo.from_alipay_dict(i))
     @property
+    def promote_audit(self):
+        return self._promote_audit
+
+    @promote_audit.setter
+    def promote_audit(self, value):
+        self._promote_audit = value
+    @property
+    def promote_audit_record(self):
+        return self._promote_audit_record
+
+    @promote_audit_record.setter
+    def promote_audit_record(self, value):
+        if isinstance(value, MiniAppAuditReason):
+            self._promote_audit_record = value
+        else:
+            self._promote_audit_record = MiniAppAuditReason.from_alipay_dict(value)
+    @property
     def reject_reason(self):
         return self._reject_reason
 
@@ -256,6 +304,12 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
             self.app_slogan = response['app_slogan']
         if 'app_version' in response:
             self.app_version = response['app_version']
+        if 'base_audit' in response:
+            self.base_audit = response['base_audit']
+        if 'base_audit_record' in response:
+            self.base_audit_record = response['base_audit_record']
+        if 'can_release' in response:
+            self.can_release = response['can_release']
         if 'gmt_apply_audit' in response:
             self.gmt_apply_audit = response['gmt_apply_audit']
         if 'gmt_audit_end' in response:
@@ -276,6 +330,10 @@ class AlipayOpenMiniVersionDetailQueryResponse(AlipayResponse):
             self.mini_category_info_list = response['mini_category_info_list']
         if 'package_info_list' in response:
             self.package_info_list = response['package_info_list']
+        if 'promote_audit' in response:
+            self.promote_audit = response['promote_audit']
+        if 'promote_audit_record' in response:
+            self.promote_audit_record = response['promote_audit_record']
         if 'reject_reason' in response:
             self.reject_reason = response['reject_reason']
         if 'scan_result' in response:
