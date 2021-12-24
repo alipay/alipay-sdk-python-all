@@ -18,6 +18,7 @@ class VehSearchItem(object):
         self._name = None
         self._poi_id = None
         self._support_service_list = None
+        self._surplus_parking_space = None
 
     @property
     def address(self):
@@ -88,6 +89,13 @@ class VehSearchItem(object):
                     self._support_service_list.append(i)
                 else:
                     self._support_service_list.append(VehServiceItem.from_alipay_dict(i))
+    @property
+    def surplus_parking_space(self):
+        return self._surplus_parking_space
+
+    @surplus_parking_space.setter
+    def surplus_parking_space(self, value):
+        self._surplus_parking_space = value
 
 
     def to_alipay_dict(self):
@@ -142,6 +150,11 @@ class VehSearchItem(object):
                 params['support_service_list'] = self.support_service_list.to_alipay_dict()
             else:
                 params['support_service_list'] = self.support_service_list
+        if self.surplus_parking_space:
+            if hasattr(self.surplus_parking_space, 'to_alipay_dict'):
+                params['surplus_parking_space'] = self.surplus_parking_space.to_alipay_dict()
+            else:
+                params['surplus_parking_space'] = self.surplus_parking_space
         return params
 
     @staticmethod
@@ -167,6 +180,8 @@ class VehSearchItem(object):
             o.poi_id = d['poi_id']
         if 'support_service_list' in d:
             o.support_service_list = d['support_service_list']
+        if 'surplus_parking_space' in d:
+            o.surplus_parking_space = d['surplus_parking_space']
         return o
 
 

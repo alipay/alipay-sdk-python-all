@@ -21,6 +21,7 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
         self._ep_name = None
         self._ep_status = None
         self._ep_type = None
+        self._ep_type_scope = None
         self._established_time = None
         self._industry = None
         self._location = None
@@ -113,6 +114,13 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
     def ep_type(self, value):
         self._ep_type = value
     @property
+    def ep_type_scope(self):
+        return self._ep_type_scope
+
+    @ep_type_scope.setter
+    def ep_type_scope(self, value):
+        self._ep_type_scope = value
+    @property
     def established_time(self):
         return self._established_time
 
@@ -186,6 +194,8 @@ class ZhimaCreditEpDossierInfoQueryResponse(AlipayResponse):
             self.ep_status = response['ep_status']
         if 'ep_type' in response:
             self.ep_type = response['ep_type']
+        if 'ep_type_scope' in response:
+            self.ep_type_scope = response['ep_type_scope']
         if 'established_time' in response:
             self.established_time = response['established_time']
         if 'industry' in response:

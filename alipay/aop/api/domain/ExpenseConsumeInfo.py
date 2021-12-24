@@ -27,6 +27,8 @@ class ExpenseConsumeInfo(object):
         self._payee_name = None
         self._project_id = None
         self._projiect_id = None
+        self._refund_amount = None
+        self._refund_status = None
         self._standard_id = None
         self._store_id = None
         self._summary_id = None
@@ -167,6 +169,20 @@ class ExpenseConsumeInfo(object):
     def projiect_id(self, value):
         self._projiect_id = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_status(self):
+        return self._refund_status
+
+    @refund_status.setter
+    def refund_status(self, value):
+        self._refund_status = value
+    @property
     def standard_id(self):
         return self._standard_id
 
@@ -300,6 +316,16 @@ class ExpenseConsumeInfo(object):
                 params['projiect_id'] = self.projiect_id.to_alipay_dict()
             else:
                 params['projiect_id'] = self.projiect_id
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
+        if self.refund_status:
+            if hasattr(self.refund_status, 'to_alipay_dict'):
+                params['refund_status'] = self.refund_status.to_alipay_dict()
+            else:
+                params['refund_status'] = self.refund_status
         if self.standard_id:
             if hasattr(self.standard_id, 'to_alipay_dict'):
                 params['standard_id'] = self.standard_id.to_alipay_dict()
@@ -370,6 +396,10 @@ class ExpenseConsumeInfo(object):
             o.project_id = d['project_id']
         if 'projiect_id' in d:
             o.projiect_id = d['projiect_id']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
+        if 'refund_status' in d:
+            o.refund_status = d['refund_status']
         if 'standard_id' in d:
             o.standard_id = d['standard_id']
         if 'store_id' in d:

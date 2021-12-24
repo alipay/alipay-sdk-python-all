@@ -21,6 +21,7 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
         self._principal_id = None
         self._sign_scene = None
         self._sign_time = None
+        self._single_quota = None
         self._status = None
         self._third_party_type = None
         self._valid_time = None
@@ -111,6 +112,13 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
     def sign_time(self, value):
         self._sign_time = value
     @property
+    def single_quota(self):
+        return self._single_quota
+
+    @single_quota.setter
+    def single_quota(self, value):
+        self._single_quota = value
+    @property
     def status(self):
         return self._status
 
@@ -165,6 +173,8 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
             self.sign_scene = response['sign_scene']
         if 'sign_time' in response:
             self.sign_time = response['sign_time']
+        if 'single_quota' in response:
+            self.single_quota = response['single_quota']
         if 'status' in response:
             self.status = response['status']
         if 'third_party_type' in response:

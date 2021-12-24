@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RecommendAccountDTO import RecommendAccountDTO
 from alipay.aop.api.domain.RecommendAccountDTO import RecommendAccountDTO
+from alipay.aop.api.domain.RecommendAccountDTO import RecommendAccountDTO
 
 
 class AlipayOpenSpOperationQrcodeQueryResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayOpenSpOperationQrcodeQueryResponse(AlipayResponse):
         self._batch_no = None
         self._bind_account = None
         self._qr_code_url = None
+        self._recommend_account_list = None
         self._recommend_accounts = None
 
     @property
@@ -41,6 +43,19 @@ class AlipayOpenSpOperationQrcodeQueryResponse(AlipayResponse):
     def qr_code_url(self, value):
         self._qr_code_url = value
     @property
+    def recommend_account_list(self):
+        return self._recommend_account_list
+
+    @recommend_account_list.setter
+    def recommend_account_list(self, value):
+        if isinstance(value, list):
+            self._recommend_account_list = list()
+            for i in value:
+                if isinstance(i, RecommendAccountDTO):
+                    self._recommend_account_list.append(i)
+                else:
+                    self._recommend_account_list.append(RecommendAccountDTO.from_alipay_dict(i))
+    @property
     def recommend_accounts(self):
         return self._recommend_accounts
 
@@ -59,5 +74,7 @@ class AlipayOpenSpOperationQrcodeQueryResponse(AlipayResponse):
             self.bind_account = response['bind_account']
         if 'qr_code_url' in response:
             self.qr_code_url = response['qr_code_url']
+        if 'recommend_account_list' in response:
+            self.recommend_account_list = response['recommend_account_list']
         if 'recommend_accounts' in response:
             self.recommend_accounts = response['recommend_accounts']

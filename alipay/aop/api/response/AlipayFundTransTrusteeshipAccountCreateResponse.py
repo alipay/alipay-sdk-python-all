@@ -10,9 +10,17 @@ class AlipayFundTransTrusteeshipAccountCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayFundTransTrusteeshipAccountCreateResponse, self).__init__()
+        self._alipay_account_no = None
         self._alipay_user_id = None
         self._ext_card_info = None
 
+    @property
+    def alipay_account_no(self):
+        return self._alipay_account_no
+
+    @alipay_account_no.setter
+    def alipay_account_no(self, value):
+        self._alipay_account_no = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -33,6 +41,8 @@ class AlipayFundTransTrusteeshipAccountCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundTransTrusteeshipAccountCreateResponse, self).parse_response_content(response_content)
+        if 'alipay_account_no' in response:
+            self.alipay_account_no = response['alipay_account_no']
         if 'alipay_user_id' in response:
             self.alipay_user_id = response['alipay_user_id']
         if 'ext_card_info' in response:

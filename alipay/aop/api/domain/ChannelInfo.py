@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetsDetailParams import AssetsDetailParams
+from alipay.aop.api.domain.SubChannelList import SubChannelList
 
 
 class ChannelInfo(object):
@@ -20,11 +21,13 @@ class ChannelInfo(object):
         self._enable = None
         self._enough = None
         self._inst_id = None
+        self._limit_amount = None
         self._logo = None
         self._name = None
         self._recommend_text = None
         self._recommend_tip = None
         self._signed = None
+        self._sub_channel_list = None
 
     @property
     def asset_id(self):
@@ -107,6 +110,13 @@ class ChannelInfo(object):
     def inst_id(self, value):
         self._inst_id = value
     @property
+    def limit_amount(self):
+        return self._limit_amount
+
+    @limit_amount.setter
+    def limit_amount(self, value):
+        self._limit_amount = value
+    @property
     def logo(self):
         return self._logo
 
@@ -141,6 +151,19 @@ class ChannelInfo(object):
     @signed.setter
     def signed(self, value):
         self._signed = value
+    @property
+    def sub_channel_list(self):
+        return self._sub_channel_list
+
+    @sub_channel_list.setter
+    def sub_channel_list(self, value):
+        if isinstance(value, list):
+            self._sub_channel_list = list()
+            for i in value:
+                if isinstance(i, SubChannelList):
+                    self._sub_channel_list.append(i)
+                else:
+                    self._sub_channel_list.append(SubChannelList.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -200,6 +223,11 @@ class ChannelInfo(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.limit_amount:
+            if hasattr(self.limit_amount, 'to_alipay_dict'):
+                params['limit_amount'] = self.limit_amount.to_alipay_dict()
+            else:
+                params['limit_amount'] = self.limit_amount
         if self.logo:
             if hasattr(self.logo, 'to_alipay_dict'):
                 params['logo'] = self.logo.to_alipay_dict()
@@ -225,6 +253,16 @@ class ChannelInfo(object):
                 params['signed'] = self.signed.to_alipay_dict()
             else:
                 params['signed'] = self.signed
+        if self.sub_channel_list:
+            if isinstance(self.sub_channel_list, list):
+                for i in range(0, len(self.sub_channel_list)):
+                    element = self.sub_channel_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sub_channel_list[i] = element.to_alipay_dict()
+            if hasattr(self.sub_channel_list, 'to_alipay_dict'):
+                params['sub_channel_list'] = self.sub_channel_list.to_alipay_dict()
+            else:
+                params['sub_channel_list'] = self.sub_channel_list
         return params
 
     @staticmethod
@@ -254,6 +292,8 @@ class ChannelInfo(object):
             o.enough = d['enough']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'limit_amount' in d:
+            o.limit_amount = d['limit_amount']
         if 'logo' in d:
             o.logo = d['logo']
         if 'name' in d:
@@ -264,6 +304,8 @@ class ChannelInfo(object):
             o.recommend_tip = d['recommend_tip']
         if 'signed' in d:
             o.signed = d['signed']
+        if 'sub_channel_list' in d:
+            o.sub_channel_list = d['sub_channel_list']
         return o
 
 

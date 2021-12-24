@@ -12,8 +12,10 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
         self._agreement_no = None
         self._effective_end_date = None
         self._effective_start_date = None
+        self._outer_source_id = None
         self._owner_id = None
         self._owner_type = None
+        self._platform = None
         self._quota_value = None
         self._target_id = None
         self._target_type = None
@@ -47,6 +49,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
     def effective_start_date(self, value):
         self._effective_start_date = value
     @property
+    def outer_source_id(self):
+        return self._outer_source_id
+
+    @outer_source_id.setter
+    def outer_source_id(self, value):
+        self._outer_source_id = value
+    @property
     def owner_id(self):
         return self._owner_id
 
@@ -60,6 +69,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
     @owner_type.setter
     def owner_type(self, value):
         self._owner_type = value
+    @property
+    def platform(self):
+        return self._platform
+
+    @platform.setter
+    def platform(self, value):
+        self._platform = value
     @property
     def quota_value(self):
         return self._quota_value
@@ -105,6 +121,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
                 params['effective_start_date'] = self.effective_start_date.to_alipay_dict()
             else:
                 params['effective_start_date'] = self.effective_start_date
+        if self.outer_source_id:
+            if hasattr(self.outer_source_id, 'to_alipay_dict'):
+                params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
+            else:
+                params['outer_source_id'] = self.outer_source_id
         if self.owner_id:
             if hasattr(self.owner_id, 'to_alipay_dict'):
                 params['owner_id'] = self.owner_id.to_alipay_dict()
@@ -115,6 +136,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
                 params['owner_type'] = self.owner_type.to_alipay_dict()
             else:
                 params['owner_type'] = self.owner_type
+        if self.platform:
+            if hasattr(self.platform, 'to_alipay_dict'):
+                params['platform'] = self.platform.to_alipay_dict()
+            else:
+                params['platform'] = self.platform
         if self.quota_value:
             if hasattr(self.quota_value, 'to_alipay_dict'):
                 params['quota_value'] = self.quota_value.to_alipay_dict()
@@ -145,10 +171,14 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:
             o.effective_start_date = d['effective_start_date']
+        if 'outer_source_id' in d:
+            o.outer_source_id = d['outer_source_id']
         if 'owner_id' in d:
             o.owner_id = d['owner_id']
         if 'owner_type' in d:
             o.owner_type = d['owner_type']
+        if 'platform' in d:
+            o.platform = d['platform']
         if 'quota_value' in d:
             o.quota_value = d['quota_value']
         if 'target_id' in d:

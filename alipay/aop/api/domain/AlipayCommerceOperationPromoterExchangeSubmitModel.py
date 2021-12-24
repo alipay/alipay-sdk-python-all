@@ -12,6 +12,7 @@ class AlipayCommerceOperationPromoterExchangeSubmitModel(object):
         self._item_code = None
         self._pid = None
         self._point_amount = None
+        self._task_code = None
         self._user_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayCommerceOperationPromoterExchangeSubmitModel(object):
     def point_amount(self, value):
         self._point_amount = value
     @property
+    def task_code(self):
+        return self._task_code
+
+    @task_code.setter
+    def task_code(self, value):
+        self._task_code = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -73,6 +81,11 @@ class AlipayCommerceOperationPromoterExchangeSubmitModel(object):
                 params['point_amount'] = self.point_amount.to_alipay_dict()
             else:
                 params['point_amount'] = self.point_amount
+        if self.task_code:
+            if hasattr(self.task_code, 'to_alipay_dict'):
+                params['task_code'] = self.task_code.to_alipay_dict()
+            else:
+                params['task_code'] = self.task_code
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayCommerceOperationPromoterExchangeSubmitModel(object):
             o.pid = d['pid']
         if 'point_amount' in d:
             o.point_amount = d['point_amount']
+        if 'task_code' in d:
+            o.task_code = d['task_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

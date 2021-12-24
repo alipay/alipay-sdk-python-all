@@ -14,6 +14,7 @@ class AnttechBlockchainDefinSaasPaymentCreateModel(object):
         self._fund_mode = None
         self._fund_order = None
         self._order_type = None
+        self._out_request_id = None
         self._platform_member_id = None
 
     @property
@@ -51,6 +52,13 @@ class AnttechBlockchainDefinSaasPaymentCreateModel(object):
     def order_type(self, value):
         self._order_type = value
     @property
+    def out_request_id(self):
+        return self._out_request_id
+
+    @out_request_id.setter
+    def out_request_id(self, value):
+        self._out_request_id = value
+    @property
     def platform_member_id(self):
         return self._platform_member_id
 
@@ -81,6 +89,11 @@ class AnttechBlockchainDefinSaasPaymentCreateModel(object):
                 params['order_type'] = self.order_type.to_alipay_dict()
             else:
                 params['order_type'] = self.order_type
+        if self.out_request_id:
+            if hasattr(self.out_request_id, 'to_alipay_dict'):
+                params['out_request_id'] = self.out_request_id.to_alipay_dict()
+            else:
+                params['out_request_id'] = self.out_request_id
         if self.platform_member_id:
             if hasattr(self.platform_member_id, 'to_alipay_dict'):
                 params['platform_member_id'] = self.platform_member_id.to_alipay_dict()
@@ -101,6 +114,8 @@ class AnttechBlockchainDefinSaasPaymentCreateModel(object):
             o.fund_order = d['fund_order']
         if 'order_type' in d:
             o.order_type = d['order_type']
+        if 'out_request_id' in d:
+            o.out_request_id = d['out_request_id']
         if 'platform_member_id' in d:
             o.platform_member_id = d['platform_member_id']
         return o

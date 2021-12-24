@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InputInvoiceBillLinkOrderDTO import InputInvoiceBillLinkOrderDTO
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.ApInvoiceLineOrderRequest import ApInvoiceLineOrderRequest
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 
 
@@ -25,6 +26,7 @@ class RelateInputInvoiceOrderDTO(object):
         self._invoice_amt = None
         self._invoice_code = None
         self._invoice_date = None
+        self._invoice_line_orders = None
         self._invoice_material = None
         self._invoice_no = None
         self._invoice_note = None
@@ -152,6 +154,19 @@ class RelateInputInvoiceOrderDTO(object):
     @invoice_date.setter
     def invoice_date(self, value):
         self._invoice_date = value
+    @property
+    def invoice_line_orders(self):
+        return self._invoice_line_orders
+
+    @invoice_line_orders.setter
+    def invoice_line_orders(self, value):
+        if isinstance(value, list):
+            self._invoice_line_orders = list()
+            for i in value:
+                if isinstance(i, ApInvoiceLineOrderRequest):
+                    self._invoice_line_orders.append(i)
+                else:
+                    self._invoice_line_orders.append(ApInvoiceLineOrderRequest.from_alipay_dict(i))
     @property
     def invoice_material(self):
         return self._invoice_material
@@ -367,6 +382,16 @@ class RelateInputInvoiceOrderDTO(object):
                 params['invoice_date'] = self.invoice_date.to_alipay_dict()
             else:
                 params['invoice_date'] = self.invoice_date
+        if self.invoice_line_orders:
+            if isinstance(self.invoice_line_orders, list):
+                for i in range(0, len(self.invoice_line_orders)):
+                    element = self.invoice_line_orders[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.invoice_line_orders[i] = element.to_alipay_dict()
+            if hasattr(self.invoice_line_orders, 'to_alipay_dict'):
+                params['invoice_line_orders'] = self.invoice_line_orders.to_alipay_dict()
+            else:
+                params['invoice_line_orders'] = self.invoice_line_orders
         if self.invoice_material:
             if hasattr(self.invoice_material, 'to_alipay_dict'):
                 params['invoice_material'] = self.invoice_material.to_alipay_dict()
@@ -497,6 +522,8 @@ class RelateInputInvoiceOrderDTO(object):
             o.invoice_code = d['invoice_code']
         if 'invoice_date' in d:
             o.invoice_date = d['invoice_date']
+        if 'invoice_line_orders' in d:
+            o.invoice_line_orders = d['invoice_line_orders']
         if 'invoice_material' in d:
             o.invoice_material = d['invoice_material']
         if 'invoice_no' in d:

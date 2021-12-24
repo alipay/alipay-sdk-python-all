@@ -12,11 +12,22 @@ from alipay.aop.api.domain.RecruitVoucher import RecruitVoucher
 class RecruitEnrollInfo(object):
 
     def __init__(self):
+        self._cities = None
         self._enroll_merchant = None
         self._materials = None
         self._mini_apps = None
         self._vouchers = None
 
+    @property
+    def cities(self):
+        return self._cities
+
+    @cities.setter
+    def cities(self, value):
+        if isinstance(value, list):
+            self._cities = list()
+            for i in value:
+                self._cities.append(i)
     @property
     def enroll_merchant(self):
         return self._enroll_merchant
@@ -70,6 +81,16 @@ class RecruitEnrollInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cities:
+            if isinstance(self.cities, list):
+                for i in range(0, len(self.cities)):
+                    element = self.cities[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.cities[i] = element.to_alipay_dict()
+            if hasattr(self.cities, 'to_alipay_dict'):
+                params['cities'] = self.cities.to_alipay_dict()
+            else:
+                params['cities'] = self.cities
         if self.enroll_merchant:
             if hasattr(self.enroll_merchant, 'to_alipay_dict'):
                 params['enroll_merchant'] = self.enroll_merchant.to_alipay_dict()
@@ -112,6 +133,8 @@ class RecruitEnrollInfo(object):
         if not d:
             return None
         o = RecruitEnrollInfo()
+        if 'cities' in d:
+            o.cities = d['cities']
         if 'enroll_merchant' in d:
             o.enroll_merchant = d['enroll_merchant']
         if 'materials' in d:

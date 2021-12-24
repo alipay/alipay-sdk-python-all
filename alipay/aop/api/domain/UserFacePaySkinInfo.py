@@ -11,6 +11,7 @@ class UserFacePaySkinInfo(object):
         self._client_version_limit = None
         self._expire_date = None
         self._name = None
+        self._setting_link = None
         self._skin_id = None
         self._status = None
         self._thumbnail = None
@@ -36,6 +37,13 @@ class UserFacePaySkinInfo(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def setting_link(self):
+        return self._setting_link
+
+    @setting_link.setter
+    def setting_link(self, value):
+        self._setting_link = value
     @property
     def skin_id(self):
         return self._skin_id
@@ -76,6 +84,11 @@ class UserFacePaySkinInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.setting_link:
+            if hasattr(self.setting_link, 'to_alipay_dict'):
+                params['setting_link'] = self.setting_link.to_alipay_dict()
+            else:
+                params['setting_link'] = self.setting_link
         if self.skin_id:
             if hasattr(self.skin_id, 'to_alipay_dict'):
                 params['skin_id'] = self.skin_id.to_alipay_dict()
@@ -104,6 +117,8 @@ class UserFacePaySkinInfo(object):
             o.expire_date = d['expire_date']
         if 'name' in d:
             o.name = d['name']
+        if 'setting_link' in d:
+            o.setting_link = d['setting_link']
         if 'skin_id' in d:
             o.skin_id = d['skin_id']
         if 'status' in d:

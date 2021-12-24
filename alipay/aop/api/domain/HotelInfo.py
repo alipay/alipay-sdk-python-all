@@ -17,6 +17,7 @@ class HotelInfo(object):
         self._latitude = None
         self._longitude = None
         self._province = None
+        self._shop_id = None
         self._telephone = None
 
     @property
@@ -83,6 +84,13 @@ class HotelInfo(object):
     def province(self, value):
         self._province = value
     @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
     def telephone(self):
         return self._telephone
 
@@ -138,6 +146,11 @@ class HotelInfo(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.telephone:
             if hasattr(self.telephone, 'to_alipay_dict'):
                 params['telephone'] = self.telephone.to_alipay_dict()
@@ -168,6 +181,8 @@ class HotelInfo(object):
             o.longitude = d['longitude']
         if 'province' in d:
             o.province = d['province']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'telephone' in d:
             o.telephone = d['telephone']
         return o

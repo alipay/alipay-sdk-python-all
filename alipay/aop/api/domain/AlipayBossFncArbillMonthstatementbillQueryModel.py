@@ -24,6 +24,7 @@ class AlipayBossFncArbillMonthstatementbillQueryModel(object):
         self._invoice_status = None
         self._ip_id = None
         self._ip_role_id = None
+        self._no_include_unify_settle = None
         self._page_no = None
         self._page_size = None
         self._pay_status_list = None
@@ -162,6 +163,13 @@ class AlipayBossFncArbillMonthstatementbillQueryModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def no_include_unify_settle(self):
+        return self._no_include_unify_settle
+
+    @no_include_unify_settle.setter
+    def no_include_unify_settle(self, value):
+        self._no_include_unify_settle = value
     @property
     def page_no(self):
         return self._page_no
@@ -344,6 +352,11 @@ class AlipayBossFncArbillMonthstatementbillQueryModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.no_include_unify_settle:
+            if hasattr(self.no_include_unify_settle, 'to_alipay_dict'):
+                params['no_include_unify_settle'] = self.no_include_unify_settle.to_alipay_dict()
+            else:
+                params['no_include_unify_settle'] = self.no_include_unify_settle
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -441,6 +454,8 @@ class AlipayBossFncArbillMonthstatementbillQueryModel(object):
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'no_include_unify_settle' in d:
+            o.no_include_unify_settle = d['no_include_unify_settle']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

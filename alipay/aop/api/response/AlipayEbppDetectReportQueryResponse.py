@@ -14,6 +14,7 @@ class AlipayEbppDetectReportQueryResponse(AlipayResponse):
         self._detail_report = None
         self._detect_detail = None
         self._detect_result = None
+        self._detect_result_detail_list = None
         self._detect_status = None
         self._err_msg = None
         self._out_biz_no = None
@@ -55,6 +56,16 @@ class AlipayEbppDetectReportQueryResponse(AlipayResponse):
     @detect_result.setter
     def detect_result(self, value):
         self._detect_result = value
+    @property
+    def detect_result_detail_list(self):
+        return self._detect_result_detail_list
+
+    @detect_result_detail_list.setter
+    def detect_result_detail_list(self, value):
+        if isinstance(value, list):
+            self._detect_result_detail_list = list()
+            for i in value:
+                self._detect_result_detail_list.append(i)
     @property
     def detect_status(self):
         return self._detect_status
@@ -103,6 +114,8 @@ class AlipayEbppDetectReportQueryResponse(AlipayResponse):
             self.detect_detail = response['detect_detail']
         if 'detect_result' in response:
             self.detect_result = response['detect_result']
+        if 'detect_result_detail_list' in response:
+            self.detect_result_detail_list = response['detect_result_detail_list']
         if 'detect_status' in response:
             self.detect_status = response['detect_status']
         if 'err_msg' in response:

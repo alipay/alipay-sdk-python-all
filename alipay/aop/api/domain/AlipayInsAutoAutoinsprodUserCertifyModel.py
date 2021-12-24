@@ -11,6 +11,8 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
         self._agent_id_card_name = None
         self._agent_id_card_no = None
         self._agent_user_id = None
+        self._auth_cert_name = None
+        self._auth_cert_no = None
 
     @property
     def agent_id_card_name(self):
@@ -33,6 +35,20 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
     @agent_user_id.setter
     def agent_user_id(self, value):
         self._agent_user_id = value
+    @property
+    def auth_cert_name(self):
+        return self._auth_cert_name
+
+    @auth_cert_name.setter
+    def auth_cert_name(self, value):
+        self._auth_cert_name = value
+    @property
+    def auth_cert_no(self):
+        return self._auth_cert_no
+
+    @auth_cert_no.setter
+    def auth_cert_no(self, value):
+        self._auth_cert_no = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +68,16 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
                 params['agent_user_id'] = self.agent_user_id.to_alipay_dict()
             else:
                 params['agent_user_id'] = self.agent_user_id
+        if self.auth_cert_name:
+            if hasattr(self.auth_cert_name, 'to_alipay_dict'):
+                params['auth_cert_name'] = self.auth_cert_name.to_alipay_dict()
+            else:
+                params['auth_cert_name'] = self.auth_cert_name
+        if self.auth_cert_no:
+            if hasattr(self.auth_cert_no, 'to_alipay_dict'):
+                params['auth_cert_no'] = self.auth_cert_no.to_alipay_dict()
+            else:
+                params['auth_cert_no'] = self.auth_cert_no
         return params
 
     @staticmethod
@@ -65,6 +91,10 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
             o.agent_id_card_no = d['agent_id_card_no']
         if 'agent_user_id' in d:
             o.agent_user_id = d['agent_user_id']
+        if 'auth_cert_name' in d:
+            o.auth_cert_name = d['auth_cert_name']
+        if 'auth_cert_no' in d:
+            o.auth_cert_no = d['auth_cert_no']
         return o
 
 

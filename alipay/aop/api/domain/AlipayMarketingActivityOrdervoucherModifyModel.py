@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CustomerGuideModify import CustomerGuideModify
+from alipay.aop.api.domain.VoucherDisplayInfoModify import VoucherDisplayInfoModify
 from alipay.aop.api.domain.VoucherUseRuleModify import VoucherUseRuleModify
 
 
@@ -14,6 +15,7 @@ class AlipayMarketingActivityOrdervoucherModifyModel(object):
         self._customer_guide = None
         self._out_biz_no = None
         self._publish_end_time = None
+        self._voucher_display_info = None
         self._voucher_use_rule = None
 
     @property
@@ -48,6 +50,16 @@ class AlipayMarketingActivityOrdervoucherModifyModel(object):
     def publish_end_time(self, value):
         self._publish_end_time = value
     @property
+    def voucher_display_info(self):
+        return self._voucher_display_info
+
+    @voucher_display_info.setter
+    def voucher_display_info(self, value):
+        if isinstance(value, VoucherDisplayInfoModify):
+            self._voucher_display_info = value
+        else:
+            self._voucher_display_info = VoucherDisplayInfoModify.from_alipay_dict(value)
+    @property
     def voucher_use_rule(self):
         return self._voucher_use_rule
 
@@ -81,6 +93,11 @@ class AlipayMarketingActivityOrdervoucherModifyModel(object):
                 params['publish_end_time'] = self.publish_end_time.to_alipay_dict()
             else:
                 params['publish_end_time'] = self.publish_end_time
+        if self.voucher_display_info:
+            if hasattr(self.voucher_display_info, 'to_alipay_dict'):
+                params['voucher_display_info'] = self.voucher_display_info.to_alipay_dict()
+            else:
+                params['voucher_display_info'] = self.voucher_display_info
         if self.voucher_use_rule:
             if hasattr(self.voucher_use_rule, 'to_alipay_dict'):
                 params['voucher_use_rule'] = self.voucher_use_rule.to_alipay_dict()
@@ -101,6 +118,8 @@ class AlipayMarketingActivityOrdervoucherModifyModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'publish_end_time' in d:
             o.publish_end_time = d['publish_end_time']
+        if 'voucher_display_info' in d:
+            o.voucher_display_info = d['voucher_display_info']
         if 'voucher_use_rule' in d:
             o.voucher_use_rule = d['voucher_use_rule']
         return o
