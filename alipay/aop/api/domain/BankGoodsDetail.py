@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class BankGoodsDetail(object):
 
     def __init__(self):
+        self._goods_desc = None
         self._goods_id = None
         self._goods_name = None
         self._price = None
         self._quantity = None
 
+    @property
+    def goods_desc(self):
+        return self._goods_desc
+
+    @goods_desc.setter
+    def goods_desc(self, value):
+        self._goods_desc = value
     @property
     def goods_id(self):
         return self._goods_id
@@ -45,6 +53,11 @@ class BankGoodsDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.goods_desc:
+            if hasattr(self.goods_desc, 'to_alipay_dict'):
+                params['goods_desc'] = self.goods_desc.to_alipay_dict()
+            else:
+                params['goods_desc'] = self.goods_desc
         if self.goods_id:
             if hasattr(self.goods_id, 'to_alipay_dict'):
                 params['goods_id'] = self.goods_id.to_alipay_dict()
@@ -72,6 +85,8 @@ class BankGoodsDetail(object):
         if not d:
             return None
         o = BankGoodsDetail()
+        if 'goods_desc' in d:
+            o.goods_desc = d['goods_desc']
         if 'goods_id' in d:
             o.goods_id = d['goods_id']
         if 'goods_name' in d:

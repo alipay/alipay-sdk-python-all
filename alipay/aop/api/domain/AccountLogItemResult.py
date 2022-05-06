@@ -15,10 +15,12 @@ class AccountLogItemResult(object):
         self._biz_desc = None
         self._biz_nos = None
         self._biz_orig_no = None
+        self._complement_info = None
         self._direction = None
         self._merchant_order_no = None
         self._merchant_out_refund_no = None
         self._other_account = None
+        self._store_name = None
         self._trans_amount = None
         self._trans_dt = None
         self._trans_memo = None
@@ -74,6 +76,13 @@ class AccountLogItemResult(object):
     def biz_orig_no(self, value):
         self._biz_orig_no = value
     @property
+    def complement_info(self):
+        return self._complement_info
+
+    @complement_info.setter
+    def complement_info(self, value):
+        self._complement_info = value
+    @property
     def direction(self):
         return self._direction
 
@@ -101,6 +110,13 @@ class AccountLogItemResult(object):
     @other_account.setter
     def other_account(self, value):
         self._other_account = value
+    @property
+    def store_name(self):
+        return self._store_name
+
+    @store_name.setter
+    def store_name(self, value):
+        self._store_name = value
     @property
     def trans_amount(self):
         return self._trans_amount
@@ -168,6 +184,11 @@ class AccountLogItemResult(object):
                 params['biz_orig_no'] = self.biz_orig_no.to_alipay_dict()
             else:
                 params['biz_orig_no'] = self.biz_orig_no
+        if self.complement_info:
+            if hasattr(self.complement_info, 'to_alipay_dict'):
+                params['complement_info'] = self.complement_info.to_alipay_dict()
+            else:
+                params['complement_info'] = self.complement_info
         if self.direction:
             if hasattr(self.direction, 'to_alipay_dict'):
                 params['direction'] = self.direction.to_alipay_dict()
@@ -188,6 +209,11 @@ class AccountLogItemResult(object):
                 params['other_account'] = self.other_account.to_alipay_dict()
             else:
                 params['other_account'] = self.other_account
+        if self.store_name:
+            if hasattr(self.store_name, 'to_alipay_dict'):
+                params['store_name'] = self.store_name.to_alipay_dict()
+            else:
+                params['store_name'] = self.store_name
         if self.trans_amount:
             if hasattr(self.trans_amount, 'to_alipay_dict'):
                 params['trans_amount'] = self.trans_amount.to_alipay_dict()
@@ -229,6 +255,8 @@ class AccountLogItemResult(object):
             o.biz_nos = d['biz_nos']
         if 'biz_orig_no' in d:
             o.biz_orig_no = d['biz_orig_no']
+        if 'complement_info' in d:
+            o.complement_info = d['complement_info']
         if 'direction' in d:
             o.direction = d['direction']
         if 'merchant_order_no' in d:
@@ -237,6 +265,8 @@ class AccountLogItemResult(object):
             o.merchant_out_refund_no = d['merchant_out_refund_no']
         if 'other_account' in d:
             o.other_account = d['other_account']
+        if 'store_name' in d:
+            o.store_name = d['store_name']
         if 'trans_amount' in d:
             o.trans_amount = d['trans_amount']
         if 'trans_dt' in d:

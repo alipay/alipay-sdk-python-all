@@ -11,6 +11,7 @@ class AlipayOpenSpIsvSignauthCreateModel(object):
     def __init__(self):
         self._isv_auth_scene_infos = None
         self._merchant_logon_id = None
+        self._need_app_auth = None
         self._sign_order_no = None
 
     @property
@@ -33,6 +34,13 @@ class AlipayOpenSpIsvSignauthCreateModel(object):
     @merchant_logon_id.setter
     def merchant_logon_id(self, value):
         self._merchant_logon_id = value
+    @property
+    def need_app_auth(self):
+        return self._need_app_auth
+
+    @need_app_auth.setter
+    def need_app_auth(self, value):
+        self._need_app_auth = value
     @property
     def sign_order_no(self):
         return self._sign_order_no
@@ -59,6 +67,11 @@ class AlipayOpenSpIsvSignauthCreateModel(object):
                 params['merchant_logon_id'] = self.merchant_logon_id.to_alipay_dict()
             else:
                 params['merchant_logon_id'] = self.merchant_logon_id
+        if self.need_app_auth:
+            if hasattr(self.need_app_auth, 'to_alipay_dict'):
+                params['need_app_auth'] = self.need_app_auth.to_alipay_dict()
+            else:
+                params['need_app_auth'] = self.need_app_auth
         if self.sign_order_no:
             if hasattr(self.sign_order_no, 'to_alipay_dict'):
                 params['sign_order_no'] = self.sign_order_no.to_alipay_dict()
@@ -75,6 +88,8 @@ class AlipayOpenSpIsvSignauthCreateModel(object):
             o.isv_auth_scene_infos = d['isv_auth_scene_infos']
         if 'merchant_logon_id' in d:
             o.merchant_logon_id = d['merchant_logon_id']
+        if 'need_app_auth' in d:
+            o.need_app_auth = d['need_app_auth']
         if 'sign_order_no' in d:
             o.sign_order_no = d['sign_order_no']
         return o

@@ -24,6 +24,7 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
         self._has_welcome_page = None
         self._mobile = None
         self._osversion = None
+        self._use_back_camera = None
         self._user_id = None
 
     @property
@@ -139,6 +140,13 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
     def osversion(self, value):
         self._osversion = value
     @property
+    def use_back_camera(self):
+        return self._use_back_camera
+
+    @use_back_camera.setter
+    def use_back_camera(self, value):
+        self._use_back_camera = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -229,6 +237,11 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
                 params['osversion'] = self.osversion.to_alipay_dict()
             else:
                 params['osversion'] = self.osversion
+        if self.use_back_camera:
+            if hasattr(self.use_back_camera, 'to_alipay_dict'):
+                params['use_back_camera'] = self.use_back_camera.to_alipay_dict()
+            else:
+                params['use_back_camera'] = self.use_back_camera
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -273,6 +286,8 @@ class ZolozIdentificationCustomerCertifyzhubInitializeModel(object):
             o.mobile = d['mobile']
         if 'osversion' in d:
             o.osversion = d['osversion']
+        if 'use_back_camera' in d:
+            o.use_back_camera = d['use_back_camera']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

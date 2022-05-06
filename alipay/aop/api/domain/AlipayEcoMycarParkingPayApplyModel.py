@@ -11,6 +11,7 @@ class AlipayEcoMycarParkingPayApplyModel(object):
     def __init__(self):
         self._in_time = None
         self._out_order_no = None
+        self._out_serial_no = None
         self._out_time = None
         self._parking_id = None
         self._pay_scene = None
@@ -36,6 +37,13 @@ class AlipayEcoMycarParkingPayApplyModel(object):
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def out_serial_no(self):
+        return self._out_serial_no
+
+    @out_serial_no.setter
+    def out_serial_no(self, value):
+        self._out_serial_no = value
     @property
     def out_time(self):
         return self._out_time
@@ -123,6 +131,11 @@ class AlipayEcoMycarParkingPayApplyModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.out_serial_no:
+            if hasattr(self.out_serial_no, 'to_alipay_dict'):
+                params['out_serial_no'] = self.out_serial_no.to_alipay_dict()
+            else:
+                params['out_serial_no'] = self.out_serial_no
         if self.out_time:
             if hasattr(self.out_time, 'to_alipay_dict'):
                 params['out_time'] = self.out_time.to_alipay_dict()
@@ -184,6 +197,8 @@ class AlipayEcoMycarParkingPayApplyModel(object):
             o.in_time = d['in_time']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'out_serial_no' in d:
+            o.out_serial_no = d['out_serial_no']
         if 'out_time' in d:
             o.out_time = d['out_time']
         if 'parking_id' in d:

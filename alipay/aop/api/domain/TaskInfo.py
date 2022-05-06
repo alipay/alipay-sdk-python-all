@@ -9,11 +9,13 @@ class TaskInfo(object):
 
     def __init__(self):
         self._earned_point = None
+        self._owner_type = None
         self._task_code = None
         self._task_desc = None
         self._task_end_time = None
         self._task_icon_url = None
         self._task_name = None
+        self._task_remain_point = None
         self._task_start_time = None
         self._task_status = None
         self._total_point = None
@@ -25,6 +27,13 @@ class TaskInfo(object):
     @earned_point.setter
     def earned_point(self, value):
         self._earned_point = value
+    @property
+    def owner_type(self):
+        return self._owner_type
+
+    @owner_type.setter
+    def owner_type(self, value):
+        self._owner_type = value
     @property
     def task_code(self):
         return self._task_code
@@ -61,6 +70,13 @@ class TaskInfo(object):
     def task_name(self, value):
         self._task_name = value
     @property
+    def task_remain_point(self):
+        return self._task_remain_point
+
+    @task_remain_point.setter
+    def task_remain_point(self, value):
+        self._task_remain_point = value
+    @property
     def task_start_time(self):
         return self._task_start_time
 
@@ -90,6 +106,11 @@ class TaskInfo(object):
                 params['earned_point'] = self.earned_point.to_alipay_dict()
             else:
                 params['earned_point'] = self.earned_point
+        if self.owner_type:
+            if hasattr(self.owner_type, 'to_alipay_dict'):
+                params['owner_type'] = self.owner_type.to_alipay_dict()
+            else:
+                params['owner_type'] = self.owner_type
         if self.task_code:
             if hasattr(self.task_code, 'to_alipay_dict'):
                 params['task_code'] = self.task_code.to_alipay_dict()
@@ -115,6 +136,11 @@ class TaskInfo(object):
                 params['task_name'] = self.task_name.to_alipay_dict()
             else:
                 params['task_name'] = self.task_name
+        if self.task_remain_point:
+            if hasattr(self.task_remain_point, 'to_alipay_dict'):
+                params['task_remain_point'] = self.task_remain_point.to_alipay_dict()
+            else:
+                params['task_remain_point'] = self.task_remain_point
         if self.task_start_time:
             if hasattr(self.task_start_time, 'to_alipay_dict'):
                 params['task_start_time'] = self.task_start_time.to_alipay_dict()
@@ -139,6 +165,8 @@ class TaskInfo(object):
         o = TaskInfo()
         if 'earned_point' in d:
             o.earned_point = d['earned_point']
+        if 'owner_type' in d:
+            o.owner_type = d['owner_type']
         if 'task_code' in d:
             o.task_code = d['task_code']
         if 'task_desc' in d:
@@ -149,6 +177,8 @@ class TaskInfo(object):
             o.task_icon_url = d['task_icon_url']
         if 'task_name' in d:
             o.task_name = d['task_name']
+        if 'task_remain_point' in d:
+            o.task_remain_point = d['task_remain_point']
         if 'task_start_time' in d:
             o.task_start_time = d['task_start_time']
         if 'task_status' in d:

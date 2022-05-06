@@ -11,6 +11,7 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
     def __init__(self):
         super(AntfortuneStockQualifiedInvestorApplyResponse, self).__init__()
         self._agreement_no = None
+        self._alipay_asset_time = None
         self._alipay_total_asset = None
         self._first_yeb_trade_day = None
         self._has_material = None
@@ -25,6 +26,13 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def alipay_asset_time(self):
+        return self._alipay_asset_time
+
+    @alipay_asset_time.setter
+    def alipay_asset_time(self, value):
+        self._alipay_asset_time = value
     @property
     def alipay_total_asset(self):
         return self._alipay_total_asset
@@ -78,6 +86,8 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
         response = super(AntfortuneStockQualifiedInvestorApplyResponse, self).parse_response_content(response_content)
         if 'agreement_no' in response:
             self.agreement_no = response['agreement_no']
+        if 'alipay_asset_time' in response:
+            self.alipay_asset_time = response['alipay_asset_time']
         if 'alipay_total_asset' in response:
             self.alipay_total_asset = response['alipay_total_asset']
         if 'first_yeb_trade_day' in response:

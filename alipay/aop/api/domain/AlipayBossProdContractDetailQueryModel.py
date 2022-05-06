@@ -10,6 +10,7 @@ class AlipayBossProdContractDetailQueryModel(object):
     def __init__(self):
         self._business_id = None
         self._contract_code = None
+        self._is_pdf_required = None
         self._source_system_id = None
         self._tenant = None
 
@@ -27,6 +28,13 @@ class AlipayBossProdContractDetailQueryModel(object):
     @contract_code.setter
     def contract_code(self, value):
         self._contract_code = value
+    @property
+    def is_pdf_required(self):
+        return self._is_pdf_required
+
+    @is_pdf_required.setter
+    def is_pdf_required(self, value):
+        self._is_pdf_required = value
     @property
     def source_system_id(self):
         return self._source_system_id
@@ -55,6 +63,11 @@ class AlipayBossProdContractDetailQueryModel(object):
                 params['contract_code'] = self.contract_code.to_alipay_dict()
             else:
                 params['contract_code'] = self.contract_code
+        if self.is_pdf_required:
+            if hasattr(self.is_pdf_required, 'to_alipay_dict'):
+                params['is_pdf_required'] = self.is_pdf_required.to_alipay_dict()
+            else:
+                params['is_pdf_required'] = self.is_pdf_required
         if self.source_system_id:
             if hasattr(self.source_system_id, 'to_alipay_dict'):
                 params['source_system_id'] = self.source_system_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayBossProdContractDetailQueryModel(object):
             o.business_id = d['business_id']
         if 'contract_code' in d:
             o.contract_code = d['contract_code']
+        if 'is_pdf_required' in d:
+            o.is_pdf_required = d['is_pdf_required']
         if 'source_system_id' in d:
             o.source_system_id = d['source_system_id']
         if 'tenant' in d:

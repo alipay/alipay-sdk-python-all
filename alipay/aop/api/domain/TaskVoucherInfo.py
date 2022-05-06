@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class TaskVoucherInfo(object):
 
     def __init__(self):
+        self._shop_voucher_sales_amount = None
         self._voucher_denomination = None
         self._voucher_icon_url = None
         self._voucher_name = None
@@ -15,6 +16,13 @@ class TaskVoucherInfo(object):
         self._voucher_template_id = None
         self._voucher_usage_threshold = None
 
+    @property
+    def shop_voucher_sales_amount(self):
+        return self._shop_voucher_sales_amount
+
+    @shop_voucher_sales_amount.setter
+    def shop_voucher_sales_amount(self, value):
+        self._shop_voucher_sales_amount = value
     @property
     def voucher_denomination(self):
         return self._voucher_denomination
@@ -61,6 +69,11 @@ class TaskVoucherInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.shop_voucher_sales_amount:
+            if hasattr(self.shop_voucher_sales_amount, 'to_alipay_dict'):
+                params['shop_voucher_sales_amount'] = self.shop_voucher_sales_amount.to_alipay_dict()
+            else:
+                params['shop_voucher_sales_amount'] = self.shop_voucher_sales_amount
         if self.voucher_denomination:
             if hasattr(self.voucher_denomination, 'to_alipay_dict'):
                 params['voucher_denomination'] = self.voucher_denomination.to_alipay_dict()
@@ -98,6 +111,8 @@ class TaskVoucherInfo(object):
         if not d:
             return None
         o = TaskVoucherInfo()
+        if 'shop_voucher_sales_amount' in d:
+            o.shop_voucher_sales_amount = d['shop_voucher_sales_amount']
         if 'voucher_denomination' in d:
             o.voucher_denomination = d['voucher_denomination']
         if 'voucher_icon_url' in d:

@@ -12,6 +12,7 @@ class PickUpInfo(object):
         self._pick_up_code = None
         self._pick_up_shop_name = None
         self._pick_up_type = None
+        self._table_num = None
 
     @property
     def pick_up_address(self):
@@ -41,6 +42,13 @@ class PickUpInfo(object):
     @pick_up_type.setter
     def pick_up_type(self, value):
         self._pick_up_type = value
+    @property
+    def table_num(self):
+        return self._table_num
+
+    @table_num.setter
+    def table_num(self, value):
+        self._table_num = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class PickUpInfo(object):
                 params['pick_up_type'] = self.pick_up_type.to_alipay_dict()
             else:
                 params['pick_up_type'] = self.pick_up_type
+        if self.table_num:
+            if hasattr(self.table_num, 'to_alipay_dict'):
+                params['table_num'] = self.table_num.to_alipay_dict()
+            else:
+                params['table_num'] = self.table_num
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class PickUpInfo(object):
             o.pick_up_shop_name = d['pick_up_shop_name']
         if 'pick_up_type' in d:
             o.pick_up_type = d['pick_up_type']
+        if 'table_num' in d:
+            o.table_num = d['table_num']
         return o
 
 

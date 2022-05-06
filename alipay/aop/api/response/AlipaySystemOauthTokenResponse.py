@@ -11,6 +11,7 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
         super(AlipaySystemOauthTokenResponse, self).__init__()
         self._access_token = None
         self._alipay_user_id = None
+        self._auth_start = None
         self._auth_token_type = None
         self._expires_in = None
         self._re_expires_in = None
@@ -31,6 +32,13 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def auth_start(self):
+        return self._auth_start
+
+    @auth_start.setter
+    def auth_start(self, value):
+        self._auth_start = value
     @property
     def auth_token_type(self):
         return self._auth_token_type
@@ -73,6 +81,8 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
             self.access_token = response['access_token']
         if 'alipay_user_id' in response:
             self.alipay_user_id = response['alipay_user_id']
+        if 'auth_start' in response:
+            self.auth_start = response['auth_start']
         if 'auth_token_type' in response:
             self.auth_token_type = response['auth_token_type']
         if 'expires_in' in response:

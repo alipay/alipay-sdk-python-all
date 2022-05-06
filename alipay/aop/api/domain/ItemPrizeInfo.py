@@ -13,6 +13,7 @@ class ItemPrizeInfo(object):
         self._item_icon_url = None
         self._item_name = None
         self._item_price = None
+        self._point_amount = None
 
     @property
     def item_can_exchange(self):
@@ -49,6 +50,13 @@ class ItemPrizeInfo(object):
     @item_price.setter
     def item_price(self, value):
         self._item_price = value
+    @property
+    def point_amount(self):
+        return self._point_amount
+
+    @point_amount.setter
+    def point_amount(self, value):
+        self._point_amount = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class ItemPrizeInfo(object):
                 params['item_price'] = self.item_price.to_alipay_dict()
             else:
                 params['item_price'] = self.item_price
+        if self.point_amount:
+            if hasattr(self.point_amount, 'to_alipay_dict'):
+                params['point_amount'] = self.point_amount.to_alipay_dict()
+            else:
+                params['point_amount'] = self.point_amount
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class ItemPrizeInfo(object):
             o.item_name = d['item_name']
         if 'item_price' in d:
             o.item_price = d['item_price']
+        if 'point_amount' in d:
+            o.point_amount = d['point_amount']
         return o
 
 

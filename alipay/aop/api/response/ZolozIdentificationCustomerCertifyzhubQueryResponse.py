@@ -16,6 +16,7 @@ class ZolozIdentificationCustomerCertifyzhubQueryResponse(AlipayResponse):
         self._img_str = None
         self._zim_code = None
         self._zim_msg = None
+        self._zim_token = None
 
     @property
     def attack(self):
@@ -62,6 +63,13 @@ class ZolozIdentificationCustomerCertifyzhubQueryResponse(AlipayResponse):
     @zim_msg.setter
     def zim_msg(self, value):
         self._zim_msg = value
+    @property
+    def zim_token(self):
+        return self._zim_token
+
+    @zim_token.setter
+    def zim_token(self, value):
+        self._zim_token = value
 
     def parse_response_content(self, response_content):
         response = super(ZolozIdentificationCustomerCertifyzhubQueryResponse, self).parse_response_content(response_content)
@@ -77,3 +85,5 @@ class ZolozIdentificationCustomerCertifyzhubQueryResponse(AlipayResponse):
             self.zim_code = response['zim_code']
         if 'zim_msg' in response:
             self.zim_msg = response['zim_msg']
+        if 'zim_token' in response:
+            self.zim_token = response['zim_token']

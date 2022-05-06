@@ -25,6 +25,7 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
         self._lbs_list = None
         self._material_list = None
         self._name = None
+        self._order_outer_id = None
         self._region_list = None
         self._rta_id = None
         self._status = None
@@ -152,6 +153,13 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def order_outer_id(self):
+        return self._order_outer_id
+
+    @order_outer_id.setter
+    def order_outer_id(self, value):
+        self._order_outer_id = value
     @property
     def region_list(self):
         return self._region_list
@@ -298,6 +306,11 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.order_outer_id:
+            if hasattr(self.order_outer_id, 'to_alipay_dict'):
+                params['order_outer_id'] = self.order_outer_id.to_alipay_dict()
+            else:
+                params['order_outer_id'] = self.order_outer_id
         if self.region_list:
             if isinstance(self.region_list, list):
                 for i in range(0, len(self.region_list)):
@@ -373,6 +386,8 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             o.material_list = d['material_list']
         if 'name' in d:
             o.name = d['name']
+        if 'order_outer_id' in d:
+            o.order_outer_id = d['order_outer_id']
         if 'region_list' in d:
             o.region_list = d['region_list']
         if 'rta_id' in d:

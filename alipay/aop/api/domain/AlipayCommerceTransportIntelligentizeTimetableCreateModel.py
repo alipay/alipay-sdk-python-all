@@ -15,6 +15,7 @@ class AlipayCommerceTransportIntelligentizeTimetableCreateModel(object):
         self._line_info_list = None
         self._request_id = None
         self._service_task_name = None
+        self._timetable_task_type = None
 
     @property
     def city_code(self):
@@ -64,6 +65,13 @@ class AlipayCommerceTransportIntelligentizeTimetableCreateModel(object):
     @service_task_name.setter
     def service_task_name(self, value):
         self._service_task_name = value
+    @property
+    def timetable_task_type(self):
+        return self._timetable_task_type
+
+    @timetable_task_type.setter
+    def timetable_task_type(self, value):
+        self._timetable_task_type = value
 
 
     def to_alipay_dict(self):
@@ -103,6 +111,11 @@ class AlipayCommerceTransportIntelligentizeTimetableCreateModel(object):
                 params['service_task_name'] = self.service_task_name.to_alipay_dict()
             else:
                 params['service_task_name'] = self.service_task_name
+        if self.timetable_task_type:
+            if hasattr(self.timetable_task_type, 'to_alipay_dict'):
+                params['timetable_task_type'] = self.timetable_task_type.to_alipay_dict()
+            else:
+                params['timetable_task_type'] = self.timetable_task_type
         return params
 
     @staticmethod
@@ -122,6 +135,8 @@ class AlipayCommerceTransportIntelligentizeTimetableCreateModel(object):
             o.request_id = d['request_id']
         if 'service_task_name' in d:
             o.service_task_name = d['service_task_name']
+        if 'timetable_task_type' in d:
+            o.timetable_task_type = d['timetable_task_type']
         return o
 
 

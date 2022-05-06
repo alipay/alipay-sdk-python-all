@@ -10,6 +10,8 @@ class VoucherDisplayInfo(object):
     def __init__(self):
         self._brand_logo = None
         self._brand_name = None
+        self._customer_service_mobile = None
+        self._customer_service_url = None
         self._voucher_comment = None
         self._voucher_description = None
         self._voucher_detail_images = None
@@ -29,6 +31,20 @@ class VoucherDisplayInfo(object):
     @brand_name.setter
     def brand_name(self, value):
         self._brand_name = value
+    @property
+    def customer_service_mobile(self):
+        return self._customer_service_mobile
+
+    @customer_service_mobile.setter
+    def customer_service_mobile(self, value):
+        self._customer_service_mobile = value
+    @property
+    def customer_service_url(self):
+        return self._customer_service_url
+
+    @customer_service_url.setter
+    def customer_service_url(self, value):
+        self._customer_service_url = value
     @property
     def voucher_comment(self):
         return self._voucher_comment
@@ -74,6 +90,16 @@ class VoucherDisplayInfo(object):
                 params['brand_name'] = self.brand_name.to_alipay_dict()
             else:
                 params['brand_name'] = self.brand_name
+        if self.customer_service_mobile:
+            if hasattr(self.customer_service_mobile, 'to_alipay_dict'):
+                params['customer_service_mobile'] = self.customer_service_mobile.to_alipay_dict()
+            else:
+                params['customer_service_mobile'] = self.customer_service_mobile
+        if self.customer_service_url:
+            if hasattr(self.customer_service_url, 'to_alipay_dict'):
+                params['customer_service_url'] = self.customer_service_url.to_alipay_dict()
+            else:
+                params['customer_service_url'] = self.customer_service_url
         if self.voucher_comment:
             if hasattr(self.voucher_comment, 'to_alipay_dict'):
                 params['voucher_comment'] = self.voucher_comment.to_alipay_dict()
@@ -110,6 +136,10 @@ class VoucherDisplayInfo(object):
             o.brand_logo = d['brand_logo']
         if 'brand_name' in d:
             o.brand_name = d['brand_name']
+        if 'customer_service_mobile' in d:
+            o.customer_service_mobile = d['customer_service_mobile']
+        if 'customer_service_url' in d:
+            o.customer_service_url = d['customer_service_url']
         if 'voucher_comment' in d:
             o.voucher_comment = d['voucher_comment']
         if 'voucher_description' in d:

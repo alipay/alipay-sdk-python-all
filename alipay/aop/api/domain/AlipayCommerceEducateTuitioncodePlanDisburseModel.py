@@ -9,6 +9,7 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
 
     def __init__(self):
         self._out_order_no = None
+        self._out_request_id = None
         self._plan_id = None
         self._plan_ids = None
         self._smid = None
@@ -21,6 +22,13 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def out_request_id(self):
+        return self._out_request_id
+
+    @out_request_id.setter
+    def out_request_id(self, value):
+        self._out_request_id = value
     @property
     def plan_id(self):
         return self._plan_id
@@ -61,6 +69,11 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.out_request_id:
+            if hasattr(self.out_request_id, 'to_alipay_dict'):
+                params['out_request_id'] = self.out_request_id.to_alipay_dict()
+            else:
+                params['out_request_id'] = self.out_request_id
         if self.plan_id:
             if hasattr(self.plan_id, 'to_alipay_dict'):
                 params['plan_id'] = self.plan_id.to_alipay_dict()
@@ -95,6 +108,8 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
         o = AlipayCommerceEducateTuitioncodePlanDisburseModel()
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'out_request_id' in d:
+            o.out_request_id = d['out_request_id']
         if 'plan_id' in d:
             o.plan_id = d['plan_id']
         if 'plan_ids' in d:

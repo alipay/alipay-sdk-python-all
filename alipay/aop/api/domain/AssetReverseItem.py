@@ -16,6 +16,8 @@ class AssetReverseItem(object):
         self._apply_order_item_id = None
         self._asset_reverse_goods_items = None
         self._assign_item_id = None
+        self._biz_line = None
+        self._biz_tag = None
         self._count = None
         self._from_address = None
         self._item_id = None
@@ -71,6 +73,20 @@ class AssetReverseItem(object):
     @assign_item_id.setter
     def assign_item_id(self, value):
         self._assign_item_id = value
+    @property
+    def biz_line(self):
+        return self._biz_line
+
+    @biz_line.setter
+    def biz_line(self, value):
+        self._biz_line = value
+    @property
+    def biz_tag(self):
+        return self._biz_tag
+
+    @biz_tag.setter
+    def biz_tag(self, value):
+        self._biz_tag = value
     @property
     def count(self):
         return self._count
@@ -218,6 +234,16 @@ class AssetReverseItem(object):
                 params['assign_item_id'] = self.assign_item_id.to_alipay_dict()
             else:
                 params['assign_item_id'] = self.assign_item_id
+        if self.biz_line:
+            if hasattr(self.biz_line, 'to_alipay_dict'):
+                params['biz_line'] = self.biz_line.to_alipay_dict()
+            else:
+                params['biz_line'] = self.biz_line
+        if self.biz_tag:
+            if hasattr(self.biz_tag, 'to_alipay_dict'):
+                params['biz_tag'] = self.biz_tag.to_alipay_dict()
+            else:
+                params['biz_tag'] = self.biz_tag
         if self.count:
             if hasattr(self.count, 'to_alipay_dict'):
                 params['count'] = self.count.to_alipay_dict()
@@ -315,6 +341,10 @@ class AssetReverseItem(object):
             o.asset_reverse_goods_items = d['asset_reverse_goods_items']
         if 'assign_item_id' in d:
             o.assign_item_id = d['assign_item_id']
+        if 'biz_line' in d:
+            o.biz_line = d['biz_line']
+        if 'biz_tag' in d:
+            o.biz_tag = d['biz_tag']
         if 'count' in d:
             o.count = d['count']
         if 'from_address' in d:

@@ -30,6 +30,7 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         self._service_email = None
         self._service_phone = None
         self._service_region_info = None
+        self._speed_up = None
         self._test_accout = None
         self._test_password = None
         self._version_desc = None
@@ -191,6 +192,13 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                     self._service_region_info.append(i)
                 else:
                     self._service_region_info.append(RegionInfo.from_alipay_dict(i))
+    @property
+    def speed_up(self):
+        return self._speed_up
+
+    @speed_up.setter
+    def speed_up(self, value):
+        self._speed_up = value
     @property
     def test_accout(self):
         return self._test_accout
@@ -522,6 +530,11 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                     if hasattr(element, 'to_alipay_dict'):
                         self.service_region_info[i] = element.to_alipay_dict()
                 params['service_region_info'] = json.dumps(obj=self.service_region_info, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.speed_up:
+            if hasattr(self.speed_up, 'to_alipay_dict'):
+                params['speed_up'] = json.dumps(obj=self.speed_up.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['speed_up'] = self.speed_up
         if self.test_accout:
             if hasattr(self.test_accout, 'to_alipay_dict'):
                 params['test_accout'] = json.dumps(obj=self.test_accout.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

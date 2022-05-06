@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.NewsConcerned import NewsConcerned
+from alipay.aop.api.domain.KeywordsHighlight import KeywordsHighlight
 from alipay.aop.api.domain.NewsNerEntity import NewsNerEntity
 from alipay.aop.api.domain.NewsRelatedCompany import NewsRelatedCompany
 
@@ -16,6 +17,7 @@ class NewsSource(object):
         self._content_url = None
         self._doc_self_content_sign = None
         self._first_publish_media = None
+        self._highlight = None
         self._images = None
         self._media_source = None
         self._ner_entities = None
@@ -70,6 +72,16 @@ class NewsSource(object):
     @first_publish_media.setter
     def first_publish_media(self, value):
         self._first_publish_media = value
+    @property
+    def highlight(self):
+        return self._highlight
+
+    @highlight.setter
+    def highlight(self, value):
+        if isinstance(value, KeywordsHighlight):
+            self._highlight = value
+        else:
+            self._highlight = KeywordsHighlight.from_alipay_dict(value)
     @property
     def images(self):
         return self._images
@@ -203,6 +215,11 @@ class NewsSource(object):
                 params['first_publish_media'] = self.first_publish_media.to_alipay_dict()
             else:
                 params['first_publish_media'] = self.first_publish_media
+        if self.highlight:
+            if hasattr(self.highlight, 'to_alipay_dict'):
+                params['highlight'] = self.highlight.to_alipay_dict()
+            else:
+                params['highlight'] = self.highlight
         if self.images:
             if isinstance(self.images, list):
                 for i in range(0, len(self.images)):
@@ -295,6 +312,8 @@ class NewsSource(object):
             o.doc_self_content_sign = d['doc_self_content_sign']
         if 'first_publish_media' in d:
             o.first_publish_media = d['first_publish_media']
+        if 'highlight' in d:
+            o.highlight = d['highlight']
         if 'images' in d:
             o.images = d['images']
         if 'media_source' in d:

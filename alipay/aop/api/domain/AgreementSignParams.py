@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SignMerchantParams import SignMerchantParams
 
 
 class AgreementSignParams(object):
@@ -16,6 +17,7 @@ class AgreementSignParams(object):
         self._promo_params = None
         self._sign_scene = None
         self._sign_validity_period = None
+        self._sub_merchant = None
         self._third_party_type = None
 
     @property
@@ -75,6 +77,16 @@ class AgreementSignParams(object):
     def sign_validity_period(self, value):
         self._sign_validity_period = value
     @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SignMerchantParams):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SignMerchantParams.from_alipay_dict(value)
+    @property
     def third_party_type(self):
         return self._third_party_type
 
@@ -125,6 +137,11 @@ class AgreementSignParams(object):
                 params['sign_validity_period'] = self.sign_validity_period.to_alipay_dict()
             else:
                 params['sign_validity_period'] = self.sign_validity_period
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         if self.third_party_type:
             if hasattr(self.third_party_type, 'to_alipay_dict'):
                 params['third_party_type'] = self.third_party_type.to_alipay_dict()
@@ -153,6 +170,8 @@ class AgreementSignParams(object):
             o.sign_scene = d['sign_scene']
         if 'sign_validity_period' in d:
             o.sign_validity_period = d['sign_validity_period']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         if 'third_party_type' in d:
             o.third_party_type = d['third_party_type']
         return o

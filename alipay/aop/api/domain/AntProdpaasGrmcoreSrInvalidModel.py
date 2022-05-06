@@ -9,6 +9,7 @@ class AntProdpaasGrmcoreSrInvalidModel(object):
 
     def __init__(self):
         self._env = None
+        self._program_code = None
         self._sr_nos = None
         self._suppliers = None
         self._tenant_code = None
@@ -20,6 +21,13 @@ class AntProdpaasGrmcoreSrInvalidModel(object):
     @env.setter
     def env(self, value):
         self._env = value
+    @property
+    def program_code(self):
+        return self._program_code
+
+    @program_code.setter
+    def program_code(self, value):
+        self._program_code = value
     @property
     def sr_nos(self):
         return self._sr_nos
@@ -56,6 +64,11 @@ class AntProdpaasGrmcoreSrInvalidModel(object):
                 params['env'] = self.env.to_alipay_dict()
             else:
                 params['env'] = self.env
+        if self.program_code:
+            if hasattr(self.program_code, 'to_alipay_dict'):
+                params['program_code'] = self.program_code.to_alipay_dict()
+            else:
+                params['program_code'] = self.program_code
         if self.sr_nos:
             if isinstance(self.sr_nos, list):
                 for i in range(0, len(self.sr_nos)):
@@ -90,6 +103,8 @@ class AntProdpaasGrmcoreSrInvalidModel(object):
         o = AntProdpaasGrmcoreSrInvalidModel()
         if 'env' in d:
             o.env = d['env']
+        if 'program_code' in d:
+            o.program_code = d['program_code']
         if 'sr_nos' in d:
             o.sr_nos = d['sr_nos']
         if 'suppliers' in d:

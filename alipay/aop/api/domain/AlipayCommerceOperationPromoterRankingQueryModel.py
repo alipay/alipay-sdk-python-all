@@ -9,6 +9,7 @@ class AlipayCommerceOperationPromoterRankingQueryModel(object):
 
     def __init__(self):
         self._pid = None
+        self._task_code = None
         self._type = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceOperationPromoterRankingQueryModel(object):
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def task_code(self):
+        return self._task_code
+
+    @task_code.setter
+    def task_code(self, value):
+        self._task_code = value
     @property
     def type(self):
         return self._type
@@ -42,6 +50,11 @@ class AlipayCommerceOperationPromoterRankingQueryModel(object):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.task_code:
+            if hasattr(self.task_code, 'to_alipay_dict'):
+                params['task_code'] = self.task_code.to_alipay_dict()
+            else:
+                params['task_code'] = self.task_code
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayCommerceOperationPromoterRankingQueryModel(object):
         o = AlipayCommerceOperationPromoterRankingQueryModel()
         if 'pid' in d:
             o.pid = d['pid']
+        if 'task_code' in d:
+            o.task_code = d['task_code']
         if 'type' in d:
             o.type = d['type']
         if 'user_id' in d:

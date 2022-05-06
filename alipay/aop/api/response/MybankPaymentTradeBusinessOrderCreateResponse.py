@@ -9,10 +9,18 @@ class MybankPaymentTradeBusinessOrderCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(MybankPaymentTradeBusinessOrderCreateResponse, self).__init__()
+        self._cashier_url = None
         self._order_no = None
         self._request_no = None
         self._retry = None
 
+    @property
+    def cashier_url(self):
+        return self._cashier_url
+
+    @cashier_url.setter
+    def cashier_url(self, value):
+        self._cashier_url = value
     @property
     def order_no(self):
         return self._order_no
@@ -37,6 +45,8 @@ class MybankPaymentTradeBusinessOrderCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(MybankPaymentTradeBusinessOrderCreateResponse, self).parse_response_content(response_content)
+        if 'cashier_url' in response:
+            self.cashier_url = response['cashier_url']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'request_no' in response:

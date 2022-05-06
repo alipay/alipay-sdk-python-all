@@ -21,6 +21,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._agreement_effect_type = None
         self._allow_huazhi_degrade = None
         self._device_params = None
+        self._effect_time = None
         self._external_agreement_no = None
         self._external_logon_id = None
         self._identity_params = None
@@ -74,6 +75,13 @@ class AlipayUserAgreementPageSignModel(object):
             self._device_params = value
         else:
             self._device_params = DeviceParams.from_alipay_dict(value)
+    @property
+    def effect_time(self):
+        return self._effect_time
+
+    @effect_time.setter
+    def effect_time(self, value):
+        self._effect_time = value
     @property
     def external_agreement_no(self):
         return self._external_agreement_no
@@ -245,6 +253,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['device_params'] = self.device_params.to_alipay_dict()
             else:
                 params['device_params'] = self.device_params
+        if self.effect_time:
+            if hasattr(self.effect_time, 'to_alipay_dict'):
+                params['effect_time'] = self.effect_time.to_alipay_dict()
+            else:
+                params['effect_time'] = self.effect_time
         if self.external_agreement_no:
             if hasattr(self.external_agreement_no, 'to_alipay_dict'):
                 params['external_agreement_no'] = self.external_agreement_no.to_alipay_dict()
@@ -350,6 +363,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.allow_huazhi_degrade = d['allow_huazhi_degrade']
         if 'device_params' in d:
             o.device_params = d['device_params']
+        if 'effect_time' in d:
+            o.effect_time = d['effect_time']
         if 'external_agreement_no' in d:
             o.external_agreement_no = d['external_agreement_no']
         if 'external_logon_id' in d:

@@ -18,6 +18,8 @@ class SceneInfo(object):
         self._job_name = None
         self._scene_time = None
         self._self_visit = None
+        self._source = None
+        self._type = None
         self._user_id = None
         self._user_name = None
 
@@ -92,6 +94,20 @@ class SceneInfo(object):
     def self_visit(self, value):
         self._self_visit = value
     @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -159,6 +175,16 @@ class SceneInfo(object):
                 params['self_visit'] = self.self_visit.to_alipay_dict()
             else:
                 params['self_visit'] = self.self_visit
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -196,6 +222,10 @@ class SceneInfo(object):
             o.scene_time = d['scene_time']
         if 'self_visit' in d:
             o.self_visit = d['self_visit']
+        if 'source' in d:
+            o.source = d['source']
+        if 'type' in d:
+            o.type = d['type']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

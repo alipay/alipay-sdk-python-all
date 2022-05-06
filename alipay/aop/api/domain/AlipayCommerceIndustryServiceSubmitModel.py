@@ -11,6 +11,7 @@ class AlipayCommerceIndustryServiceSubmitModel(object):
     def __init__(self):
         self._extra_info = None
         self._industry_info = None
+        self._out_service_code = None
         self._service_action = None
         self._service_description = None
         self._service_name = None
@@ -37,6 +38,13 @@ class AlipayCommerceIndustryServiceSubmitModel(object):
     @industry_info.setter
     def industry_info(self, value):
         self._industry_info = value
+    @property
+    def out_service_code(self):
+        return self._out_service_code
+
+    @out_service_code.setter
+    def out_service_code(self, value):
+        self._out_service_code = value
     @property
     def service_action(self):
         return self._service_action
@@ -91,6 +99,11 @@ class AlipayCommerceIndustryServiceSubmitModel(object):
                 params['industry_info'] = self.industry_info.to_alipay_dict()
             else:
                 params['industry_info'] = self.industry_info
+        if self.out_service_code:
+            if hasattr(self.out_service_code, 'to_alipay_dict'):
+                params['out_service_code'] = self.out_service_code.to_alipay_dict()
+            else:
+                params['out_service_code'] = self.out_service_code
         if self.service_action:
             if hasattr(self.service_action, 'to_alipay_dict'):
                 params['service_action'] = self.service_action.to_alipay_dict()
@@ -127,6 +140,8 @@ class AlipayCommerceIndustryServiceSubmitModel(object):
             o.extra_info = d['extra_info']
         if 'industry_info' in d:
             o.industry_info = d['industry_info']
+        if 'out_service_code' in d:
+            o.out_service_code = d['out_service_code']
         if 'service_action' in d:
             o.service_action = d['service_action']
         if 'service_description' in d:

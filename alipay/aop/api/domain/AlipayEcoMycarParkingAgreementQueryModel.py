@@ -11,6 +11,7 @@ class AlipayEcoMycarParkingAgreementQueryModel(object):
         self._alipay_user_id = None
         self._car_number = None
         self._parking_id = None
+        self._plate_color = None
         self._ver = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayEcoMycarParkingAgreementQueryModel(object):
     @parking_id.setter
     def parking_id(self, value):
         self._parking_id = value
+    @property
+    def plate_color(self):
+        return self._plate_color
+
+    @plate_color.setter
+    def plate_color(self, value):
+        self._plate_color = value
     @property
     def ver(self):
         return self._ver
@@ -60,6 +68,11 @@ class AlipayEcoMycarParkingAgreementQueryModel(object):
                 params['parking_id'] = self.parking_id.to_alipay_dict()
             else:
                 params['parking_id'] = self.parking_id
+        if self.plate_color:
+            if hasattr(self.plate_color, 'to_alipay_dict'):
+                params['plate_color'] = self.plate_color.to_alipay_dict()
+            else:
+                params['plate_color'] = self.plate_color
         if self.ver:
             if hasattr(self.ver, 'to_alipay_dict'):
                 params['ver'] = self.ver.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayEcoMycarParkingAgreementQueryModel(object):
             o.car_number = d['car_number']
         if 'parking_id' in d:
             o.parking_id = d['parking_id']
+        if 'plate_color' in d:
+            o.plate_color = d['plate_color']
         if 'ver' in d:
             o.ver = d['ver']
         return o

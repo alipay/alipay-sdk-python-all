@@ -14,6 +14,7 @@ class ReportBasicInfo(object):
         self._policy_no = None
         self._related_order_no = None
         self._report_date = None
+        self._report_unique_key = None
         self._reporter_contact_info = None
         self._reporter_name = None
         self._ticket_no = None
@@ -60,6 +61,13 @@ class ReportBasicInfo(object):
     @report_date.setter
     def report_date(self, value):
         self._report_date = value
+    @property
+    def report_unique_key(self):
+        return self._report_unique_key
+
+    @report_unique_key.setter
+    def report_unique_key(self, value):
+        self._report_unique_key = value
     @property
     def reporter_contact_info(self):
         return self._reporter_contact_info
@@ -115,6 +123,11 @@ class ReportBasicInfo(object):
                 params['report_date'] = self.report_date.to_alipay_dict()
             else:
                 params['report_date'] = self.report_date
+        if self.report_unique_key:
+            if hasattr(self.report_unique_key, 'to_alipay_dict'):
+                params['report_unique_key'] = self.report_unique_key.to_alipay_dict()
+            else:
+                params['report_unique_key'] = self.report_unique_key
         if self.reporter_contact_info:
             if hasattr(self.reporter_contact_info, 'to_alipay_dict'):
                 params['reporter_contact_info'] = self.reporter_contact_info.to_alipay_dict()
@@ -149,6 +162,8 @@ class ReportBasicInfo(object):
             o.related_order_no = d['related_order_no']
         if 'report_date' in d:
             o.report_date = d['report_date']
+        if 'report_unique_key' in d:
+            o.report_unique_key = d['report_unique_key']
         if 'reporter_contact_info' in d:
             o.reporter_contact_info = d['reporter_contact_info']
         if 'reporter_name' in d:

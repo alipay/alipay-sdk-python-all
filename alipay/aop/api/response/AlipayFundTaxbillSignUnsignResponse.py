@@ -20,6 +20,7 @@ class AlipayFundTaxbillSignUnsignResponse(AlipayResponse):
         self._error_msg = None
         self._identification_in_belonging_employer = None
         self._product_code = None
+        self._sign_status = None
         self._tax_optimization_mode = None
         self._terminated_time = None
         self._user_status = None
@@ -102,6 +103,13 @@ class AlipayFundTaxbillSignUnsignResponse(AlipayResponse):
     def product_code(self, value):
         self._product_code = value
     @property
+    def sign_status(self):
+        return self._sign_status
+
+    @sign_status.setter
+    def sign_status(self, value):
+        self._sign_status = value
+    @property
     def tax_optimization_mode(self):
         return self._tax_optimization_mode
 
@@ -147,6 +155,8 @@ class AlipayFundTaxbillSignUnsignResponse(AlipayResponse):
             self.identification_in_belonging_employer = response['identification_in_belonging_employer']
         if 'product_code' in response:
             self.product_code = response['product_code']
+        if 'sign_status' in response:
+            self.sign_status = response['sign_status']
         if 'tax_optimization_mode' in response:
             self.tax_optimization_mode = response['tax_optimization_mode']
         if 'terminated_time' in response:

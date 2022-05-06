@@ -11,6 +11,7 @@ class AgreementParams(object):
         self._agreement_no = None
         self._apply_token = None
         self._auth_confirm_no = None
+        self._deduct_permission = None
 
     @property
     def agreement_no(self):
@@ -33,6 +34,13 @@ class AgreementParams(object):
     @auth_confirm_no.setter
     def auth_confirm_no(self, value):
         self._auth_confirm_no = value
+    @property
+    def deduct_permission(self):
+        return self._deduct_permission
+
+    @deduct_permission.setter
+    def deduct_permission(self, value):
+        self._deduct_permission = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AgreementParams(object):
                 params['auth_confirm_no'] = self.auth_confirm_no.to_alipay_dict()
             else:
                 params['auth_confirm_no'] = self.auth_confirm_no
+        if self.deduct_permission:
+            if hasattr(self.deduct_permission, 'to_alipay_dict'):
+                params['deduct_permission'] = self.deduct_permission.to_alipay_dict()
+            else:
+                params['deduct_permission'] = self.deduct_permission
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AgreementParams(object):
             o.apply_token = d['apply_token']
         if 'auth_confirm_no' in d:
             o.auth_confirm_no = d['auth_confirm_no']
+        if 'deduct_permission' in d:
+            o.deduct_permission = d['deduct_permission']
         return o
 
 

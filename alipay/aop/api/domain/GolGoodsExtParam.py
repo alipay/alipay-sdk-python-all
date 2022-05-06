@@ -10,6 +10,7 @@ class GolGoodsExtParam(object):
     def __init__(self):
         self._brand_name = None
         self._description = None
+        self._discount_content = None
         self._is_tax_free = None
         self._specifications = None
         self._stock_status = None
@@ -29,6 +30,13 @@ class GolGoodsExtParam(object):
     @description.setter
     def description(self, value):
         self._description = value
+    @property
+    def discount_content(self):
+        return self._discount_content
+
+    @discount_content.setter
+    def discount_content(self, value):
+        self._discount_content = value
     @property
     def is_tax_free(self):
         return self._is_tax_free
@@ -74,6 +82,11 @@ class GolGoodsExtParam(object):
                 params['description'] = self.description.to_alipay_dict()
             else:
                 params['description'] = self.description
+        if self.discount_content:
+            if hasattr(self.discount_content, 'to_alipay_dict'):
+                params['discount_content'] = self.discount_content.to_alipay_dict()
+            else:
+                params['discount_content'] = self.discount_content
         if self.is_tax_free:
             if hasattr(self.is_tax_free, 'to_alipay_dict'):
                 params['is_tax_free'] = self.is_tax_free.to_alipay_dict()
@@ -110,6 +123,8 @@ class GolGoodsExtParam(object):
             o.brand_name = d['brand_name']
         if 'description' in d:
             o.description = d['description']
+        if 'discount_content' in d:
+            o.discount_content = d['discount_content']
         if 'is_tax_free' in d:
             o.is_tax_free = d['is_tax_free']
         if 'specifications' in d:

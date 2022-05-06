@@ -13,6 +13,7 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
         self._cert_expired_date = None
         self._cert_no = None
         self._cert_type = None
+        self._certificate_id = None
         self._city = None
         self._country = None
         self._face_url = None
@@ -58,6 +59,13 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def certificate_id(self):
+        return self._certificate_id
+
+    @certificate_id.setter
+    def certificate_id(self, value):
+        self._certificate_id = value
     @property
     def city(self):
         return self._city
@@ -150,6 +158,11 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.certificate_id:
+            if hasattr(self.certificate_id, 'to_alipay_dict'):
+                params['certificate_id'] = self.certificate_id.to_alipay_dict()
+            else:
+                params['certificate_id'] = self.certificate_id
         if self.city:
             if hasattr(self.city, 'to_alipay_dict'):
                 params['city'] = self.city.to_alipay_dict()
@@ -212,6 +225,8 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'certificate_id' in d:
+            o.certificate_id = d['certificate_id']
         if 'city' in d:
             o.city = d['city']
         if 'country' in d:

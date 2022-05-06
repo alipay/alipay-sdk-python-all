@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TradeFundBillDetail import TradeFundBillDetail
+from alipay.aop.api.domain.TradeInfoDTO import TradeInfoDTO
 
 
 class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
         self._create_time = None
         self._total_amount = None
         self._trade_fund_bill_list = None
+        self._trade_info_list = None
         self._trade_no = None
         self._trade_status = None
 
@@ -52,6 +54,19 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
                 else:
                     self._trade_fund_bill_list.append(TradeFundBillDetail.from_alipay_dict(i))
     @property
+    def trade_info_list(self):
+        return self._trade_info_list
+
+    @trade_info_list.setter
+    def trade_info_list(self, value):
+        if isinstance(value, list):
+            self._trade_info_list = list()
+            for i in value:
+                if isinstance(i, TradeInfoDTO):
+                    self._trade_info_list.append(i)
+                else:
+                    self._trade_info_list.append(TradeInfoDTO.from_alipay_dict(i))
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -76,6 +91,8 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
             self.total_amount = response['total_amount']
         if 'trade_fund_bill_list' in response:
             self.trade_fund_bill_list = response['trade_fund_bill_list']
+        if 'trade_info_list' in response:
+            self.trade_info_list = response['trade_info_list']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
         if 'trade_status' in response:

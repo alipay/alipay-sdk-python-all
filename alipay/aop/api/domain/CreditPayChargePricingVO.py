@@ -10,6 +10,7 @@ class CreditPayChargePricingVO(object):
     def __init__(self):
         self._actual_charge = None
         self._actual_charge_rate = None
+        self._charge_code = None
         self._charge_name = None
         self._origin_charge = None
         self._origin_charge_rate = None
@@ -28,6 +29,13 @@ class CreditPayChargePricingVO(object):
     @actual_charge_rate.setter
     def actual_charge_rate(self, value):
         self._actual_charge_rate = value
+    @property
+    def charge_code(self):
+        return self._charge_code
+
+    @charge_code.setter
+    def charge_code(self, value):
+        self._charge_code = value
     @property
     def charge_name(self):
         return self._charge_name
@@ -63,6 +71,11 @@ class CreditPayChargePricingVO(object):
                 params['actual_charge_rate'] = self.actual_charge_rate.to_alipay_dict()
             else:
                 params['actual_charge_rate'] = self.actual_charge_rate
+        if self.charge_code:
+            if hasattr(self.charge_code, 'to_alipay_dict'):
+                params['charge_code'] = self.charge_code.to_alipay_dict()
+            else:
+                params['charge_code'] = self.charge_code
         if self.charge_name:
             if hasattr(self.charge_name, 'to_alipay_dict'):
                 params['charge_name'] = self.charge_name.to_alipay_dict()
@@ -89,6 +102,8 @@ class CreditPayChargePricingVO(object):
             o.actual_charge = d['actual_charge']
         if 'actual_charge_rate' in d:
             o.actual_charge_rate = d['actual_charge_rate']
+        if 'charge_code' in d:
+            o.charge_code = d['charge_code']
         if 'charge_name' in d:
             o.charge_name = d['charge_name']
         if 'origin_charge' in d:

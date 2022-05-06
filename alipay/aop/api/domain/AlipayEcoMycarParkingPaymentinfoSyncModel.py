@@ -10,6 +10,7 @@ class AlipayEcoMycarParkingPaymentinfoSyncModel(object):
     def __init__(self):
         self._car_number = None
         self._isv_url = None
+        self._out_serial_no = None
         self._parking_id = None
         self._payment_free_minutes = None
         self._payment_time = None
@@ -29,6 +30,13 @@ class AlipayEcoMycarParkingPaymentinfoSyncModel(object):
     @isv_url.setter
     def isv_url(self, value):
         self._isv_url = value
+    @property
+    def out_serial_no(self):
+        return self._out_serial_no
+
+    @out_serial_no.setter
+    def out_serial_no(self, value):
+        self._out_serial_no = value
     @property
     def parking_id(self):
         return self._parking_id
@@ -71,6 +79,11 @@ class AlipayEcoMycarParkingPaymentinfoSyncModel(object):
                 params['isv_url'] = self.isv_url.to_alipay_dict()
             else:
                 params['isv_url'] = self.isv_url
+        if self.out_serial_no:
+            if hasattr(self.out_serial_no, 'to_alipay_dict'):
+                params['out_serial_no'] = self.out_serial_no.to_alipay_dict()
+            else:
+                params['out_serial_no'] = self.out_serial_no
         if self.parking_id:
             if hasattr(self.parking_id, 'to_alipay_dict'):
                 params['parking_id'] = self.parking_id.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayEcoMycarParkingPaymentinfoSyncModel(object):
             o.car_number = d['car_number']
         if 'isv_url' in d:
             o.isv_url = d['isv_url']
+        if 'out_serial_no' in d:
+            o.out_serial_no = d['out_serial_no']
         if 'parking_id' in d:
             o.parking_id = d['parking_id']
         if 'payment_free_minutes' in d:

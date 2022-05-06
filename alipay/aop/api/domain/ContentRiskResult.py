@@ -4,12 +4,14 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ContentRiskDetail import ContentRiskDetail
+from alipay.aop.api.domain.ContentRisks import ContentRisks
 
 
 class ContentRiskResult(object):
 
     def __init__(self):
         self._content_risk_details = None
+        self._contents = None
         self._result = None
         self._rl_cnt = None
 
@@ -26,6 +28,19 @@ class ContentRiskResult(object):
                     self._content_risk_details.append(i)
                 else:
                     self._content_risk_details.append(ContentRiskDetail.from_alipay_dict(i))
+    @property
+    def contents(self):
+        return self._contents
+
+    @contents.setter
+    def contents(self, value):
+        if isinstance(value, list):
+            self._contents = list()
+            for i in value:
+                if isinstance(i, ContentRisks):
+                    self._contents.append(i)
+                else:
+                    self._contents.append(ContentRisks.from_alipay_dict(i))
     @property
     def result(self):
         return self._result
@@ -54,6 +69,16 @@ class ContentRiskResult(object):
                 params['content_risk_details'] = self.content_risk_details.to_alipay_dict()
             else:
                 params['content_risk_details'] = self.content_risk_details
+        if self.contents:
+            if isinstance(self.contents, list):
+                for i in range(0, len(self.contents)):
+                    element = self.contents[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.contents[i] = element.to_alipay_dict()
+            if hasattr(self.contents, 'to_alipay_dict'):
+                params['contents'] = self.contents.to_alipay_dict()
+            else:
+                params['contents'] = self.contents
         if self.result:
             if hasattr(self.result, 'to_alipay_dict'):
                 params['result'] = self.result.to_alipay_dict()
@@ -73,6 +98,8 @@ class ContentRiskResult(object):
         o = ContentRiskResult()
         if 'content_risk_details' in d:
             o.content_risk_details = d['content_risk_details']
+        if 'contents' in d:
+            o.contents = d['contents']
         if 'result' in d:
             o.result = d['result']
         if 'rl_cnt' in d:

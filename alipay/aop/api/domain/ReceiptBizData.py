@@ -12,7 +12,7 @@ class ReceiptBizData(object):
     def __init__(self):
         self._actual_pay_amount = None
         self._actual_pay_time = None
-        self._biztid = None
+        self._change_amount = None
         self._currency = None
         self._fetch_num = None
         self._invoice_entry = None
@@ -20,7 +20,9 @@ class ReceiptBizData(object):
         self._merchant_name = None
         self._origin_amount = None
         self._other_discount_info = None
+        self._out_biz_id = None
         self._out_trade_id = None
+        self._pay_status = None
         self._platform_discount_amount = None
         self._shop_address = None
         self._shop_contract = None
@@ -45,12 +47,12 @@ class ReceiptBizData(object):
     def actual_pay_time(self, value):
         self._actual_pay_time = value
     @property
-    def biztid(self):
-        return self._biztid
+    def change_amount(self):
+        return self._change_amount
 
-    @biztid.setter
-    def biztid(self, value):
-        self._biztid = value
+    @change_amount.setter
+    def change_amount(self, value):
+        self._change_amount = value
     @property
     def currency(self):
         return self._currency
@@ -107,12 +109,26 @@ class ReceiptBizData(object):
                 else:
                     self._other_discount_info.append(ReceiptDiscountInfo.from_alipay_dict(i))
     @property
+    def out_biz_id(self):
+        return self._out_biz_id
+
+    @out_biz_id.setter
+    def out_biz_id(self, value):
+        self._out_biz_id = value
+    @property
     def out_trade_id(self):
         return self._out_trade_id
 
     @out_trade_id.setter
     def out_trade_id(self, value):
         self._out_trade_id = value
+    @property
+    def pay_status(self):
+        return self._pay_status
+
+    @pay_status.setter
+    def pay_status(self, value):
+        self._pay_status = value
     @property
     def platform_discount_amount(self):
         return self._platform_discount_amount
@@ -189,11 +205,11 @@ class ReceiptBizData(object):
                 params['actual_pay_time'] = self.actual_pay_time.to_alipay_dict()
             else:
                 params['actual_pay_time'] = self.actual_pay_time
-        if self.biztid:
-            if hasattr(self.biztid, 'to_alipay_dict'):
-                params['biztid'] = self.biztid.to_alipay_dict()
+        if self.change_amount:
+            if hasattr(self.change_amount, 'to_alipay_dict'):
+                params['change_amount'] = self.change_amount.to_alipay_dict()
             else:
-                params['biztid'] = self.biztid
+                params['change_amount'] = self.change_amount
         if self.currency:
             if hasattr(self.currency, 'to_alipay_dict'):
                 params['currency'] = self.currency.to_alipay_dict()
@@ -234,11 +250,21 @@ class ReceiptBizData(object):
                 params['other_discount_info'] = self.other_discount_info.to_alipay_dict()
             else:
                 params['other_discount_info'] = self.other_discount_info
+        if self.out_biz_id:
+            if hasattr(self.out_biz_id, 'to_alipay_dict'):
+                params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
+            else:
+                params['out_biz_id'] = self.out_biz_id
         if self.out_trade_id:
             if hasattr(self.out_trade_id, 'to_alipay_dict'):
                 params['out_trade_id'] = self.out_trade_id.to_alipay_dict()
             else:
                 params['out_trade_id'] = self.out_trade_id
+        if self.pay_status:
+            if hasattr(self.pay_status, 'to_alipay_dict'):
+                params['pay_status'] = self.pay_status.to_alipay_dict()
+            else:
+                params['pay_status'] = self.pay_status
         if self.platform_discount_amount:
             if hasattr(self.platform_discount_amount, 'to_alipay_dict'):
                 params['platform_discount_amount'] = self.platform_discount_amount.to_alipay_dict()
@@ -295,8 +321,8 @@ class ReceiptBizData(object):
             o.actual_pay_amount = d['actual_pay_amount']
         if 'actual_pay_time' in d:
             o.actual_pay_time = d['actual_pay_time']
-        if 'biztid' in d:
-            o.biztid = d['biztid']
+        if 'change_amount' in d:
+            o.change_amount = d['change_amount']
         if 'currency' in d:
             o.currency = d['currency']
         if 'fetch_num' in d:
@@ -311,8 +337,12 @@ class ReceiptBizData(object):
             o.origin_amount = d['origin_amount']
         if 'other_discount_info' in d:
             o.other_discount_info = d['other_discount_info']
+        if 'out_biz_id' in d:
+            o.out_biz_id = d['out_biz_id']
         if 'out_trade_id' in d:
             o.out_trade_id = d['out_trade_id']
+        if 'pay_status' in d:
+            o.pay_status = d['pay_status']
         if 'platform_discount_amount' in d:
             o.platform_discount_amount = d['platform_discount_amount']
         if 'shop_address' in d:

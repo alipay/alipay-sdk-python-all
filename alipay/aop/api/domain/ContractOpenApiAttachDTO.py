@@ -11,6 +11,7 @@ class ContractOpenApiAttachDTO(object):
         self._file_location = None
         self._file_name = None
         self._file_version = None
+        self._pdf_file_location = None
 
     @property
     def file_location(self):
@@ -33,6 +34,13 @@ class ContractOpenApiAttachDTO(object):
     @file_version.setter
     def file_version(self, value):
         self._file_version = value
+    @property
+    def pdf_file_location(self):
+        return self._pdf_file_location
+
+    @pdf_file_location.setter
+    def pdf_file_location(self, value):
+        self._pdf_file_location = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class ContractOpenApiAttachDTO(object):
                 params['file_version'] = self.file_version.to_alipay_dict()
             else:
                 params['file_version'] = self.file_version
+        if self.pdf_file_location:
+            if hasattr(self.pdf_file_location, 'to_alipay_dict'):
+                params['pdf_file_location'] = self.pdf_file_location.to_alipay_dict()
+            else:
+                params['pdf_file_location'] = self.pdf_file_location
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class ContractOpenApiAttachDTO(object):
             o.file_name = d['file_name']
         if 'file_version' in d:
             o.file_version = d['file_version']
+        if 'pdf_file_location' in d:
+            o.pdf_file_location = d['pdf_file_location']
         return o
 
 

@@ -13,8 +13,10 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
         self._car_number = None
         self._discount_amount = None
         self._exit_id = None
+        self._is_encrypt_car_number = None
         self._isv_url = None
         self._order_amount = None
+        self._out_serial_no = None
         self._out_time = None
         self._parking_id = None
         self._serial_no = None
@@ -57,6 +59,13 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
     def exit_id(self, value):
         self._exit_id = value
     @property
+    def is_encrypt_car_number(self):
+        return self._is_encrypt_car_number
+
+    @is_encrypt_car_number.setter
+    def is_encrypt_car_number(self, value):
+        self._is_encrypt_car_number = value
+    @property
     def isv_url(self):
         return self._isv_url
 
@@ -70,6 +79,13 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
     @order_amount.setter
     def order_amount(self, value):
         self._order_amount = value
+    @property
+    def out_serial_no(self):
+        return self._out_serial_no
+
+    @out_serial_no.setter
+    def out_serial_no(self, value):
+        self._out_serial_no = value
     @property
     def out_time(self):
         return self._out_time
@@ -134,6 +150,11 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
                 params['exit_id'] = self.exit_id.to_alipay_dict()
             else:
                 params['exit_id'] = self.exit_id
+        if self.is_encrypt_car_number:
+            if hasattr(self.is_encrypt_car_number, 'to_alipay_dict'):
+                params['is_encrypt_car_number'] = self.is_encrypt_car_number.to_alipay_dict()
+            else:
+                params['is_encrypt_car_number'] = self.is_encrypt_car_number
         if self.isv_url:
             if hasattr(self.isv_url, 'to_alipay_dict'):
                 params['isv_url'] = self.isv_url.to_alipay_dict()
@@ -144,6 +165,11 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
             else:
                 params['order_amount'] = self.order_amount
+        if self.out_serial_no:
+            if hasattr(self.out_serial_no, 'to_alipay_dict'):
+                params['out_serial_no'] = self.out_serial_no.to_alipay_dict()
+            else:
+                params['out_serial_no'] = self.out_serial_no
         if self.out_time:
             if hasattr(self.out_time, 'to_alipay_dict'):
                 params['out_time'] = self.out_time.to_alipay_dict()
@@ -186,10 +212,14 @@ class AlipayEcoMycarParkingExitinfoSyncModel(object):
             o.discount_amount = d['discount_amount']
         if 'exit_id' in d:
             o.exit_id = d['exit_id']
+        if 'is_encrypt_car_number' in d:
+            o.is_encrypt_car_number = d['is_encrypt_car_number']
         if 'isv_url' in d:
             o.isv_url = d['isv_url']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
+        if 'out_serial_no' in d:
+            o.out_serial_no = d['out_serial_no']
         if 'out_time' in d:
             o.out_time = d['out_time']
         if 'parking_id' in d:

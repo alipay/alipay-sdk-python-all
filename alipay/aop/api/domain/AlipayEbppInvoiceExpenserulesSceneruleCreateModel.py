@@ -16,6 +16,7 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
         self._employee_list = None
         self._expense_ctrl_rule_info_list = None
         self._expense_type = None
+        self._payment_policy = None
         self._scene_type = None
         self._standard_desc = None
         self._standard_name = None
@@ -78,6 +79,13 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
     @expense_type.setter
     def expense_type(self, value):
         self._expense_type = value
+    @property
+    def payment_policy(self):
+        return self._payment_policy
+
+    @payment_policy.setter
+    def payment_policy(self, value):
+        self._payment_policy = value
     @property
     def scene_type(self):
         return self._scene_type
@@ -148,6 +156,11 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
                 params['expense_type'] = self.expense_type.to_alipay_dict()
             else:
                 params['expense_type'] = self.expense_type
+        if self.payment_policy:
+            if hasattr(self.payment_policy, 'to_alipay_dict'):
+                params['payment_policy'] = self.payment_policy.to_alipay_dict()
+            else:
+                params['payment_policy'] = self.payment_policy
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -184,6 +197,8 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
             o.expense_ctrl_rule_info_list = d['expense_ctrl_rule_info_list']
         if 'expense_type' in d:
             o.expense_type = d['expense_type']
+        if 'payment_policy' in d:
+            o.payment_policy = d['payment_policy']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'standard_desc' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
 
     def __init__(self):
+        self._back_type = None
         self._back_url = None
         self._ext_info = None
         self._jump_type = None
@@ -15,7 +16,15 @@ class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
         self._partner_id = None
         self._sign_product_id = None
         self._solution_code = None
+        self._third_part_schema = None
 
+    @property
+    def back_type(self):
+        return self._back_type
+
+    @back_type.setter
+    def back_type(self, value):
+        self._back_type = value
     @property
     def back_url(self):
         return self._back_url
@@ -65,10 +74,22 @@ class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
     @solution_code.setter
     def solution_code(self, value):
         self._solution_code = value
+    @property
+    def third_part_schema(self):
+        return self._third_part_schema
+
+    @third_part_schema.setter
+    def third_part_schema(self, value):
+        self._third_part_schema = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.back_type:
+            if hasattr(self.back_type, 'to_alipay_dict'):
+                params['back_type'] = self.back_type.to_alipay_dict()
+            else:
+                params['back_type'] = self.back_type
         if self.back_url:
             if hasattr(self.back_url, 'to_alipay_dict'):
                 params['back_url'] = self.back_url.to_alipay_dict()
@@ -104,6 +125,11 @@ class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
                 params['solution_code'] = self.solution_code.to_alipay_dict()
             else:
                 params['solution_code'] = self.solution_code
+        if self.third_part_schema:
+            if hasattr(self.third_part_schema, 'to_alipay_dict'):
+                params['third_part_schema'] = self.third_part_schema.to_alipay_dict()
+            else:
+                params['third_part_schema'] = self.third_part_schema
         return params
 
     @staticmethod
@@ -111,6 +137,8 @@ class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
         if not d:
             return None
         o = AlipayFinancialnetAuthEcsignDataprepareCreateModel()
+        if 'back_type' in d:
+            o.back_type = d['back_type']
         if 'back_url' in d:
             o.back_url = d['back_url']
         if 'ext_info' in d:
@@ -125,6 +153,8 @@ class AlipayFinancialnetAuthEcsignDataprepareCreateModel(object):
             o.sign_product_id = d['sign_product_id']
         if 'solution_code' in d:
             o.solution_code = d['solution_code']
+        if 'third_part_schema' in d:
+            o.third_part_schema = d['third_part_schema']
         return o
 
 

@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.UserInformation import UserInformation
 from alipay.aop.api.domain.DiscountInfoDataDTO import DiscountInfoDataDTO
 from alipay.aop.api.domain.EnviromentalInfoDTO import EnviromentalInfoDTO
+from alipay.aop.api.domain.GoodExpirationListDTO import GoodExpirationListDTO
 from alipay.aop.api.domain.ItemOrderInfoDTO import ItemOrderInfoDTO
 from alipay.aop.api.domain.OrderLogisticsInformationRequestDTO import OrderLogisticsInformationRequestDTO
 
@@ -21,6 +22,7 @@ class ReceiptOrderDTO(object):
         self._discount_amount = None
         self._discount_info_list = None
         self._environmental_info = None
+        self._good_expiration_list = None
         self._is_alipay_ticket = None
         self._item_order_list = None
         self._location = None
@@ -113,6 +115,19 @@ class ReceiptOrderDTO(object):
                     self._environmental_info.append(i)
                 else:
                     self._environmental_info.append(EnviromentalInfoDTO.from_alipay_dict(i))
+    @property
+    def good_expiration_list(self):
+        return self._good_expiration_list
+
+    @good_expiration_list.setter
+    def good_expiration_list(self, value):
+        if isinstance(value, list):
+            self._good_expiration_list = list()
+            for i in value:
+                if isinstance(i, GoodExpirationListDTO):
+                    self._good_expiration_list.append(i)
+                else:
+                    self._good_expiration_list.append(GoodExpirationListDTO.from_alipay_dict(i))
     @property
     def is_alipay_ticket(self):
         return self._is_alipay_ticket
@@ -319,6 +334,16 @@ class ReceiptOrderDTO(object):
                 params['environmental_info'] = self.environmental_info.to_alipay_dict()
             else:
                 params['environmental_info'] = self.environmental_info
+        if self.good_expiration_list:
+            if isinstance(self.good_expiration_list, list):
+                for i in range(0, len(self.good_expiration_list)):
+                    element = self.good_expiration_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.good_expiration_list[i] = element.to_alipay_dict()
+            if hasattr(self.good_expiration_list, 'to_alipay_dict'):
+                params['good_expiration_list'] = self.good_expiration_list.to_alipay_dict()
+            else:
+                params['good_expiration_list'] = self.good_expiration_list
         if self.is_alipay_ticket:
             if hasattr(self.is_alipay_ticket, 'to_alipay_dict'):
                 params['is_alipay_ticket'] = self.is_alipay_ticket.to_alipay_dict()
@@ -452,6 +477,8 @@ class ReceiptOrderDTO(object):
             o.discount_info_list = d['discount_info_list']
         if 'environmental_info' in d:
             o.environmental_info = d['environmental_info']
+        if 'good_expiration_list' in d:
+            o.good_expiration_list = d['good_expiration_list']
         if 'is_alipay_ticket' in d:
             o.is_alipay_ticket = d['is_alipay_ticket']
         if 'item_order_list' in d:

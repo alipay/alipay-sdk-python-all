@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GoodInfo import GoodInfo
+from alipay.aop.api.domain.WeightFloor import WeightFloor
 
 
 class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
@@ -15,6 +16,7 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
         self._terminal_id = None
         self._transaction_id = None
         self._uid = None
+        self._weight_template = None
 
     @property
     def goods_infos(self):
@@ -64,6 +66,19 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
     @uid.setter
     def uid(self, value):
         self._uid = value
+    @property
+    def weight_template(self):
+        return self._weight_template
+
+    @weight_template.setter
+    def weight_template(self, value):
+        if isinstance(value, list):
+            self._weight_template = list()
+            for i in value:
+                if isinstance(i, WeightFloor):
+                    self._weight_template.append(i)
+                else:
+                    self._weight_template.append(WeightFloor.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -103,6 +118,16 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
                 params['uid'] = self.uid.to_alipay_dict()
             else:
                 params['uid'] = self.uid
+        if self.weight_template:
+            if isinstance(self.weight_template, list):
+                for i in range(0, len(self.weight_template)):
+                    element = self.weight_template[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.weight_template[i] = element.to_alipay_dict()
+            if hasattr(self.weight_template, 'to_alipay_dict'):
+                params['weight_template'] = self.weight_template.to_alipay_dict()
+            else:
+                params['weight_template'] = self.weight_template
         return params
 
     @staticmethod
@@ -122,6 +147,8 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
             o.transaction_id = d['transaction_id']
         if 'uid' in d:
             o.uid = d['uid']
+        if 'weight_template' in d:
+            o.weight_template = d['weight_template']
         return o
 
 

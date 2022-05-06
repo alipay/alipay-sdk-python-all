@@ -9,6 +9,7 @@ class AlipayCommerceDataHotelServiceSyncResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceDataHotelServiceSyncResponse, self).__init__()
+        self._audit_msg = None
         self._audit_status = None
         self._hotel_app_id = None
         self._hotel_id = None
@@ -18,6 +19,13 @@ class AlipayCommerceDataHotelServiceSyncResponse(AlipayResponse):
         self._service_status = None
         self._service_url = None
 
+    @property
+    def audit_msg(self):
+        return self._audit_msg
+
+    @audit_msg.setter
+    def audit_msg(self, value):
+        self._audit_msg = value
     @property
     def audit_status(self):
         return self._audit_status
@@ -77,6 +85,8 @@ class AlipayCommerceDataHotelServiceSyncResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceDataHotelServiceSyncResponse, self).parse_response_content(response_content)
+        if 'audit_msg' in response:
+            self.audit_msg = response['audit_msg']
         if 'audit_status' in response:
             self.audit_status = response['audit_status']
         if 'hotel_app_id' in response:

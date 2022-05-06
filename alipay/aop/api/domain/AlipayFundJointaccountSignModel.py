@@ -20,8 +20,11 @@ class AlipayFundJointaccountSignModel(object):
         self._identity = None
         self._identity_type = None
         self._invitee_list = None
+        self._name = None
         self._open_timeout = None
         self._out_biz_no = None
+        self._out_entity_id = None
+        self._out_source = None
         self._product_code = None
 
     @property
@@ -102,6 +105,13 @@ class AlipayFundJointaccountSignModel(object):
                 else:
                     self._invitee_list.append(InviteMemberForm.from_alipay_dict(i))
     @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+    @property
     def open_timeout(self):
         return self._open_timeout
 
@@ -115,6 +125,20 @@ class AlipayFundJointaccountSignModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def out_entity_id(self):
+        return self._out_entity_id
+
+    @out_entity_id.setter
+    def out_entity_id(self, value):
+        self._out_entity_id = value
+    @property
+    def out_source(self):
+        return self._out_source
+
+    @out_source.setter
+    def out_source(self, value):
+        self._out_source = value
     @property
     def product_code(self):
         return self._product_code
@@ -181,6 +205,11 @@ class AlipayFundJointaccountSignModel(object):
                 params['invitee_list'] = self.invitee_list.to_alipay_dict()
             else:
                 params['invitee_list'] = self.invitee_list
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         if self.open_timeout:
             if hasattr(self.open_timeout, 'to_alipay_dict'):
                 params['open_timeout'] = self.open_timeout.to_alipay_dict()
@@ -191,6 +220,16 @@ class AlipayFundJointaccountSignModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.out_entity_id:
+            if hasattr(self.out_entity_id, 'to_alipay_dict'):
+                params['out_entity_id'] = self.out_entity_id.to_alipay_dict()
+            else:
+                params['out_entity_id'] = self.out_entity_id
+        if self.out_source:
+            if hasattr(self.out_source, 'to_alipay_dict'):
+                params['out_source'] = self.out_source.to_alipay_dict()
+            else:
+                params['out_source'] = self.out_source
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -219,10 +258,16 @@ class AlipayFundJointaccountSignModel(object):
             o.identity_type = d['identity_type']
         if 'invitee_list' in d:
             o.invitee_list = d['invitee_list']
+        if 'name' in d:
+            o.name = d['name']
         if 'open_timeout' in d:
             o.open_timeout = d['open_timeout']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'out_entity_id' in d:
+            o.out_entity_id = d['out_entity_id']
+        if 'out_source' in d:
+            o.out_source = d['out_source']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

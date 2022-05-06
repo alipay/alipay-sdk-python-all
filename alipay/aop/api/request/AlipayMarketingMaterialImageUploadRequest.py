@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
+from alipay.aop.api.domain.BelongMerchantInfo import BelongMerchantInfo
 
 
 
@@ -12,6 +13,7 @@ class AlipayMarketingMaterialImageUploadRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._belong_merchant_info = None
         self._file_key = None
         self._file_content = None
         self._version = "1.0"
@@ -31,6 +33,16 @@ class AlipayMarketingMaterialImageUploadRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def belong_merchant_info(self):
+        return self._belong_merchant_info
+
+    @belong_merchant_info.setter
+    def belong_merchant_info(self, value):
+        if isinstance(value, BelongMerchantInfo):
+            self._belong_merchant_info = value
+        else:
+            self._belong_merchant_info = BelongMerchantInfo.from_alipay_dict(value)
     @property
     def file_key(self):
         return self._file_key
@@ -126,6 +138,11 @@ class AlipayMarketingMaterialImageUploadRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.belong_merchant_info:
+            if hasattr(self.belong_merchant_info, 'to_alipay_dict'):
+                params['belong_merchant_info'] = json.dumps(obj=self.belong_merchant_info.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['belong_merchant_info'] = self.belong_merchant_info
         if self.file_key:
             if hasattr(self.file_key, 'to_alipay_dict'):
                 params['file_key'] = json.dumps(obj=self.file_key.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

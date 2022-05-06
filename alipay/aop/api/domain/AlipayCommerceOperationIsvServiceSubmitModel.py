@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtraInfo import ExtraInfo
 from alipay.aop.api.domain.CateringMerchantInfo import CateringMerchantInfo
+from alipay.aop.api.domain.ServiceBusinessHours import ServiceBusinessHours
 from alipay.aop.api.domain.CateringServiceScopeInfo import CateringServiceScopeInfo
 from alipay.aop.api.domain.CateringStoreInfo import CateringStoreInfo
 
@@ -14,6 +15,7 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
     def __init__(self):
         self._extra_info = None
         self._merchant_info = None
+        self._service_business_hours = None
         self._service_description = None
         self._service_name = None
         self._service_scope_info = None
@@ -46,6 +48,19 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
             self._merchant_info = value
         else:
             self._merchant_info = CateringMerchantInfo.from_alipay_dict(value)
+    @property
+    def service_business_hours(self):
+        return self._service_business_hours
+
+    @service_business_hours.setter
+    def service_business_hours(self, value):
+        if isinstance(value, list):
+            self._service_business_hours = list()
+            for i in value:
+                if isinstance(i, ServiceBusinessHours):
+                    self._service_business_hours.append(i)
+                else:
+                    self._service_business_hours.append(ServiceBusinessHours.from_alipay_dict(i))
     @property
     def service_description(self):
         return self._service_description
@@ -127,6 +142,16 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
                 params['merchant_info'] = self.merchant_info.to_alipay_dict()
             else:
                 params['merchant_info'] = self.merchant_info
+        if self.service_business_hours:
+            if isinstance(self.service_business_hours, list):
+                for i in range(0, len(self.service_business_hours)):
+                    element = self.service_business_hours[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_business_hours[i] = element.to_alipay_dict()
+            if hasattr(self.service_business_hours, 'to_alipay_dict'):
+                params['service_business_hours'] = self.service_business_hours.to_alipay_dict()
+            else:
+                params['service_business_hours'] = self.service_business_hours
         if self.service_description:
             if hasattr(self.service_description, 'to_alipay_dict'):
                 params['service_description'] = self.service_description.to_alipay_dict()
@@ -178,6 +203,8 @@ class AlipayCommerceOperationIsvServiceSubmitModel(object):
             o.extra_info = d['extra_info']
         if 'merchant_info' in d:
             o.merchant_info = d['merchant_info']
+        if 'service_business_hours' in d:
+            o.service_business_hours = d['service_business_hours']
         if 'service_description' in d:
             o.service_description = d['service_description']
         if 'service_name' in d:

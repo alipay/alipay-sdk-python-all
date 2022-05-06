@@ -10,6 +10,7 @@ class FaceAbilityExtInfo(object):
     def __init__(self):
         self._age = None
         self._algfactors = None
+        self._blur = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -18,7 +19,13 @@ class FaceAbilityExtInfo(object):
         self._face_data_type = None
         self._feature = None
         self._hasrisk = None
+        self._joint_quality = None
+        self._light = None
+        self._occlusion = None
+        self._pose = None
         self._quality = None
+        self._quality_code = None
+        self._qualityok = None
         self._rect = None
         self._sex = None
         self._source = None
@@ -37,6 +44,13 @@ class FaceAbilityExtInfo(object):
     @algfactors.setter
     def algfactors(self, value):
         self._algfactors = value
+    @property
+    def blur(self):
+        return self._blur
+
+    @blur.setter
+    def blur(self, value):
+        self._blur = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -94,12 +108,54 @@ class FaceAbilityExtInfo(object):
     def hasrisk(self, value):
         self._hasrisk = value
     @property
+    def joint_quality(self):
+        return self._joint_quality
+
+    @joint_quality.setter
+    def joint_quality(self, value):
+        self._joint_quality = value
+    @property
+    def light(self):
+        return self._light
+
+    @light.setter
+    def light(self, value):
+        self._light = value
+    @property
+    def occlusion(self):
+        return self._occlusion
+
+    @occlusion.setter
+    def occlusion(self, value):
+        self._occlusion = value
+    @property
+    def pose(self):
+        return self._pose
+
+    @pose.setter
+    def pose(self, value):
+        self._pose = value
+    @property
     def quality(self):
         return self._quality
 
     @quality.setter
     def quality(self, value):
         self._quality = value
+    @property
+    def quality_code(self):
+        return self._quality_code
+
+    @quality_code.setter
+    def quality_code(self, value):
+        self._quality_code = value
+    @property
+    def qualityok(self):
+        return self._qualityok
+
+    @qualityok.setter
+    def qualityok(self, value):
+        self._qualityok = value
     @property
     def rect(self):
         return self._rect
@@ -135,6 +191,11 @@ class FaceAbilityExtInfo(object):
                 params['algfactors'] = self.algfactors.to_alipay_dict()
             else:
                 params['algfactors'] = self.algfactors
+        if self.blur:
+            if hasattr(self.blur, 'to_alipay_dict'):
+                params['blur'] = self.blur.to_alipay_dict()
+            else:
+                params['blur'] = self.blur
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -175,11 +236,41 @@ class FaceAbilityExtInfo(object):
                 params['hasrisk'] = self.hasrisk.to_alipay_dict()
             else:
                 params['hasrisk'] = self.hasrisk
+        if self.joint_quality:
+            if hasattr(self.joint_quality, 'to_alipay_dict'):
+                params['joint_quality'] = self.joint_quality.to_alipay_dict()
+            else:
+                params['joint_quality'] = self.joint_quality
+        if self.light:
+            if hasattr(self.light, 'to_alipay_dict'):
+                params['light'] = self.light.to_alipay_dict()
+            else:
+                params['light'] = self.light
+        if self.occlusion:
+            if hasattr(self.occlusion, 'to_alipay_dict'):
+                params['occlusion'] = self.occlusion.to_alipay_dict()
+            else:
+                params['occlusion'] = self.occlusion
+        if self.pose:
+            if hasattr(self.pose, 'to_alipay_dict'):
+                params['pose'] = self.pose.to_alipay_dict()
+            else:
+                params['pose'] = self.pose
         if self.quality:
             if hasattr(self.quality, 'to_alipay_dict'):
                 params['quality'] = self.quality.to_alipay_dict()
             else:
                 params['quality'] = self.quality
+        if self.quality_code:
+            if hasattr(self.quality_code, 'to_alipay_dict'):
+                params['quality_code'] = self.quality_code.to_alipay_dict()
+            else:
+                params['quality_code'] = self.quality_code
+        if self.qualityok:
+            if hasattr(self.qualityok, 'to_alipay_dict'):
+                params['qualityok'] = self.qualityok.to_alipay_dict()
+            else:
+                params['qualityok'] = self.qualityok
         if self.rect:
             if hasattr(self.rect, 'to_alipay_dict'):
                 params['rect'] = self.rect.to_alipay_dict()
@@ -206,6 +297,8 @@ class FaceAbilityExtInfo(object):
             o.age = d['age']
         if 'algfactors' in d:
             o.algfactors = d['algfactors']
+        if 'blur' in d:
+            o.blur = d['blur']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
@@ -222,8 +315,20 @@ class FaceAbilityExtInfo(object):
             o.feature = d['feature']
         if 'hasrisk' in d:
             o.hasrisk = d['hasrisk']
+        if 'joint_quality' in d:
+            o.joint_quality = d['joint_quality']
+        if 'light' in d:
+            o.light = d['light']
+        if 'occlusion' in d:
+            o.occlusion = d['occlusion']
+        if 'pose' in d:
+            o.pose = d['pose']
         if 'quality' in d:
             o.quality = d['quality']
+        if 'quality_code' in d:
+            o.quality_code = d['quality_code']
+        if 'qualityok' in d:
+            o.qualityok = d['qualityok']
         if 'rect' in d:
             o.rect = d['rect']
         if 'sex' in d:

@@ -18,10 +18,12 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
         self._order_time = None
         self._out_order_no = None
         self._out_parking_id = None
+        self._out_time = None
         self._parking_id = None
         self._parking_name = None
         self._parking_record_id = None
         self._pay_money = None
+        self._pay_scene = None
         self._pay_time = None
         self._pay_type = None
         self._smid = None
@@ -98,6 +100,13 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
     def out_parking_id(self, value):
         self._out_parking_id = value
     @property
+    def out_time(self):
+        return self._out_time
+
+    @out_time.setter
+    def out_time(self, value):
+        self._out_time = value
+    @property
     def parking_id(self):
         return self._parking_id
 
@@ -125,6 +134,13 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
     @pay_money.setter
     def pay_money(self, value):
         self._pay_money = value
+    @property
+    def pay_scene(self):
+        return self._pay_scene
+
+    @pay_scene.setter
+    def pay_scene(self, value):
+        self._pay_scene = value
     @property
     def pay_time(self):
         return self._pay_time
@@ -207,6 +223,11 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
                 params['out_parking_id'] = self.out_parking_id.to_alipay_dict()
             else:
                 params['out_parking_id'] = self.out_parking_id
+        if self.out_time:
+            if hasattr(self.out_time, 'to_alipay_dict'):
+                params['out_time'] = self.out_time.to_alipay_dict()
+            else:
+                params['out_time'] = self.out_time
         if self.parking_id:
             if hasattr(self.parking_id, 'to_alipay_dict'):
                 params['parking_id'] = self.parking_id.to_alipay_dict()
@@ -227,6 +248,11 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
                 params['pay_money'] = self.pay_money.to_alipay_dict()
             else:
                 params['pay_money'] = self.pay_money
+        if self.pay_scene:
+            if hasattr(self.pay_scene, 'to_alipay_dict'):
+                params['pay_scene'] = self.pay_scene.to_alipay_dict()
+            else:
+                params['pay_scene'] = self.pay_scene
         if self.pay_time:
             if hasattr(self.pay_time, 'to_alipay_dict'):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
@@ -274,6 +300,8 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
             o.out_order_no = d['out_order_no']
         if 'out_parking_id' in d:
             o.out_parking_id = d['out_parking_id']
+        if 'out_time' in d:
+            o.out_time = d['out_time']
         if 'parking_id' in d:
             o.parking_id = d['parking_id']
         if 'parking_name' in d:
@@ -282,6 +310,8 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
             o.parking_record_id = d['parking_record_id']
         if 'pay_money' in d:
             o.pay_money = d['pay_money']
+        if 'pay_scene' in d:
+            o.pay_scene = d['pay_scene']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
         if 'pay_type' in d:

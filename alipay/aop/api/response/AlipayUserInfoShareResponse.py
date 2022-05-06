@@ -24,8 +24,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._country_code = None
         self._degree = None
         self._deliver_addresses = None
+        self._display_name = None
         self._email = None
         self._enrollment_time = None
+        self._ent_license_address = None
+        self._ent_license_area = None
+        self._ent_license_city = None
+        self._ent_license_province = None
         self._firm_agent_person_cert_expiry_date = None
         self._firm_agent_person_cert_no = None
         self._firm_agent_person_cert_type = None
@@ -43,6 +48,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._identity_card_area = None
         self._identity_card_city = None
         self._identity_card_province = None
+        self._inst_or_corp = None
         self._is_balance_frozen = None
         self._is_certified = None
         self._is_student_certified = None
@@ -151,6 +157,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
                 else:
                     self._deliver_addresses.append(AlipayUserDeliverAddress.from_alipay_dict(i))
     @property
+    def display_name(self):
+        return self._display_name
+
+    @display_name.setter
+    def display_name(self, value):
+        self._display_name = value
+    @property
     def email(self):
         return self._email
 
@@ -164,6 +177,34 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     @enrollment_time.setter
     def enrollment_time(self, value):
         self._enrollment_time = value
+    @property
+    def ent_license_address(self):
+        return self._ent_license_address
+
+    @ent_license_address.setter
+    def ent_license_address(self, value):
+        self._ent_license_address = value
+    @property
+    def ent_license_area(self):
+        return self._ent_license_area
+
+    @ent_license_area.setter
+    def ent_license_area(self, value):
+        self._ent_license_area = value
+    @property
+    def ent_license_city(self):
+        return self._ent_license_city
+
+    @ent_license_city.setter
+    def ent_license_city(self, value):
+        self._ent_license_city = value
+    @property
+    def ent_license_province(self):
+        return self._ent_license_province
+
+    @ent_license_province.setter
+    def ent_license_province(self, value):
+        self._ent_license_province = value
     @property
     def firm_agent_person_cert_expiry_date(self):
         return self._firm_agent_person_cert_expiry_date
@@ -295,6 +336,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     @identity_card_province.setter
     def identity_card_province(self, value):
         self._identity_card_province = value
+    @property
+    def inst_or_corp(self):
+        return self._inst_or_corp
+
+    @inst_or_corp.setter
+    def inst_or_corp(self, value):
+        self._inst_or_corp = value
     @property
     def is_balance_frozen(self):
         return self._is_balance_frozen
@@ -487,10 +535,20 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.degree = response['degree']
         if 'deliver_addresses' in response:
             self.deliver_addresses = response['deliver_addresses']
+        if 'display_name' in response:
+            self.display_name = response['display_name']
         if 'email' in response:
             self.email = response['email']
         if 'enrollment_time' in response:
             self.enrollment_time = response['enrollment_time']
+        if 'ent_license_address' in response:
+            self.ent_license_address = response['ent_license_address']
+        if 'ent_license_area' in response:
+            self.ent_license_area = response['ent_license_area']
+        if 'ent_license_city' in response:
+            self.ent_license_city = response['ent_license_city']
+        if 'ent_license_province' in response:
+            self.ent_license_province = response['ent_license_province']
         if 'firm_agent_person_cert_expiry_date' in response:
             self.firm_agent_person_cert_expiry_date = response['firm_agent_person_cert_expiry_date']
         if 'firm_agent_person_cert_no' in response:
@@ -525,6 +583,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.identity_card_city = response['identity_card_city']
         if 'identity_card_province' in response:
             self.identity_card_province = response['identity_card_province']
+        if 'inst_or_corp' in response:
+            self.inst_or_corp = response['inst_or_corp']
         if 'is_balance_frozen' in response:
             self.is_balance_frozen = response['is_balance_frozen']
         if 'is_certified' in response:

@@ -10,6 +10,7 @@ class AlipayFundTransEntrustQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayFundTransEntrustQueryResponse, self).__init__()
         self._entrust_order_id = None
+        self._fail_reason = None
         self._out_biz_no = None
         self._rest_tranfer_amount = None
         self._status = None
@@ -23,6 +24,13 @@ class AlipayFundTransEntrustQueryResponse(AlipayResponse):
     @entrust_order_id.setter
     def entrust_order_id(self, value):
         self._entrust_order_id = value
+    @property
+    def fail_reason(self):
+        return self._fail_reason
+
+    @fail_reason.setter
+    def fail_reason(self, value):
+        self._fail_reason = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -63,6 +71,8 @@ class AlipayFundTransEntrustQueryResponse(AlipayResponse):
         response = super(AlipayFundTransEntrustQueryResponse, self).parse_response_content(response_content)
         if 'entrust_order_id' in response:
             self.entrust_order_id = response['entrust_order_id']
+        if 'fail_reason' in response:
+            self.fail_reason = response['fail_reason']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'rest_tranfer_amount' in response:

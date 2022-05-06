@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtTemplateConf import ExtTemplateConf
+from alipay.aop.api.domain.PreOrderExtInfo import PreOrderExtInfo
 
 
 class ZhimaCreditPeZmgoPreorderCreateModel(object):
@@ -14,6 +15,7 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
         self._custom_temp_conf = None
         self._expire_aisle_data = None
         self._ext_template_conf = None
+        self._extend_params = None
         self._freeze_amount = None
         self._isv_pid = None
         self._out_request_no = None
@@ -62,6 +64,16 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
             self._ext_template_conf = value
         else:
             self._ext_template_conf = ExtTemplateConf.from_alipay_dict(value)
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, PreOrderExtInfo):
+            self._extend_params = value
+        else:
+            self._extend_params = PreOrderExtInfo.from_alipay_dict(value)
     @property
     def freeze_amount(self):
         return self._freeze_amount
@@ -154,6 +166,11 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
                 params['ext_template_conf'] = self.ext_template_conf.to_alipay_dict()
             else:
                 params['ext_template_conf'] = self.ext_template_conf
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.freeze_amount:
             if hasattr(self.freeze_amount, 'to_alipay_dict'):
                 params['freeze_amount'] = self.freeze_amount.to_alipay_dict()
@@ -216,6 +233,8 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
             o.expire_aisle_data = d['expire_aisle_data']
         if 'ext_template_conf' in d:
             o.ext_template_conf = d['ext_template_conf']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'freeze_amount' in d:
             o.freeze_amount = d['freeze_amount']
         if 'isv_pid' in d:

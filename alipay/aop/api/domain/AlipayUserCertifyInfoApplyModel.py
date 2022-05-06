@@ -34,6 +34,7 @@ class AlipayUserCertifyInfoApplyModel(object):
         self._org_province = None
         self._org_type = None
         self._register_capital = None
+        self._remit_check = None
         self._user_id = None
 
     @property
@@ -219,6 +220,13 @@ class AlipayUserCertifyInfoApplyModel(object):
     def register_capital(self, value):
         self._register_capital = value
     @property
+    def remit_check(self):
+        return self._remit_check
+
+    @remit_check.setter
+    def remit_check(self, value):
+        self._remit_check = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -359,6 +367,11 @@ class AlipayUserCertifyInfoApplyModel(object):
                 params['register_capital'] = self.register_capital.to_alipay_dict()
             else:
                 params['register_capital'] = self.register_capital
+        if self.remit_check:
+            if hasattr(self.remit_check, 'to_alipay_dict'):
+                params['remit_check'] = self.remit_check.to_alipay_dict()
+            else:
+                params['remit_check'] = self.remit_check
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -423,6 +436,8 @@ class AlipayUserCertifyInfoApplyModel(object):
             o.org_type = d['org_type']
         if 'register_capital' in d:
             o.register_capital = d['register_capital']
+        if 'remit_check' in d:
+            o.remit_check = d['remit_check']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

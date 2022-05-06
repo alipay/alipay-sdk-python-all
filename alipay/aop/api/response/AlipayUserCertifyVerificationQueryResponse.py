@@ -12,6 +12,7 @@ class AlipayUserCertifyVerificationQueryResponse(AlipayResponse):
         self._mismatch_reason = None
         self._result_code = None
         self._result_msg = None
+        self._score = None
         self._source_from = None
 
     @property
@@ -36,6 +37,13 @@ class AlipayUserCertifyVerificationQueryResponse(AlipayResponse):
     def result_msg(self, value):
         self._result_msg = value
     @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, value):
+        self._score = value
+    @property
     def source_from(self):
         return self._source_from
 
@@ -51,5 +59,7 @@ class AlipayUserCertifyVerificationQueryResponse(AlipayResponse):
             self.result_code = response['result_code']
         if 'result_msg' in response:
             self.result_msg = response['result_msg']
+        if 'score' in response:
+            self.score = response['score']
         if 'source_from' in response:
             self.source_from = response['source_from']

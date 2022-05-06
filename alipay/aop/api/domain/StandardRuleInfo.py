@@ -12,6 +12,7 @@ class StandardRuleInfo(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._expense_ctrl_rule_info_list = None
+        self._payment_policy = None
         self._standard_desc = None
         self._standard_id = None
         self._standard_name = None
@@ -43,6 +44,13 @@ class StandardRuleInfo(object):
                     self._expense_ctrl_rule_info_list.append(i)
                 else:
                     self._expense_ctrl_rule_info_list.append(ExpenseCtrRuleInfo.from_alipay_dict(i))
+    @property
+    def payment_policy(self):
+        return self._payment_policy
+
+    @payment_policy.setter
+    def payment_policy(self, value):
+        self._payment_policy = value
     @property
     def standard_desc(self):
         return self._standard_desc
@@ -88,6 +96,11 @@ class StandardRuleInfo(object):
                 params['expense_ctrl_rule_info_list'] = self.expense_ctrl_rule_info_list.to_alipay_dict()
             else:
                 params['expense_ctrl_rule_info_list'] = self.expense_ctrl_rule_info_list
+        if self.payment_policy:
+            if hasattr(self.payment_policy, 'to_alipay_dict'):
+                params['payment_policy'] = self.payment_policy.to_alipay_dict()
+            else:
+                params['payment_policy'] = self.payment_policy
         if self.standard_desc:
             if hasattr(self.standard_desc, 'to_alipay_dict'):
                 params['standard_desc'] = self.standard_desc.to_alipay_dict()
@@ -116,6 +129,8 @@ class StandardRuleInfo(object):
             o.effective_start_date = d['effective_start_date']
         if 'expense_ctrl_rule_info_list' in d:
             o.expense_ctrl_rule_info_list = d['expense_ctrl_rule_info_list']
+        if 'payment_policy' in d:
+            o.payment_policy = d['payment_policy']
         if 'standard_desc' in d:
             o.standard_desc = d['standard_desc']
         if 'standard_id' in d:

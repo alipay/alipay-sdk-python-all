@@ -11,6 +11,7 @@ class InputInvoiceBillLinkOrderDTO(object):
 
     def __init__(self):
         self._bill_no = None
+        self._out_bill_type = None
         self._relate_amount = None
         self._tax_amt = None
 
@@ -21,6 +22,13 @@ class InputInvoiceBillLinkOrderDTO(object):
     @bill_no.setter
     def bill_no(self, value):
         self._bill_no = value
+    @property
+    def out_bill_type(self):
+        return self._out_bill_type
+
+    @out_bill_type.setter
+    def out_bill_type(self, value):
+        self._out_bill_type = value
     @property
     def relate_amount(self):
         return self._relate_amount
@@ -50,6 +58,11 @@ class InputInvoiceBillLinkOrderDTO(object):
                 params['bill_no'] = self.bill_no.to_alipay_dict()
             else:
                 params['bill_no'] = self.bill_no
+        if self.out_bill_type:
+            if hasattr(self.out_bill_type, 'to_alipay_dict'):
+                params['out_bill_type'] = self.out_bill_type.to_alipay_dict()
+            else:
+                params['out_bill_type'] = self.out_bill_type
         if self.relate_amount:
             if hasattr(self.relate_amount, 'to_alipay_dict'):
                 params['relate_amount'] = self.relate_amount.to_alipay_dict()
@@ -69,6 +82,8 @@ class InputInvoiceBillLinkOrderDTO(object):
         o = InputInvoiceBillLinkOrderDTO()
         if 'bill_no' in d:
             o.bill_no = d['bill_no']
+        if 'out_bill_type' in d:
+            o.out_bill_type = d['out_bill_type']
         if 'relate_amount' in d:
             o.relate_amount = d['relate_amount']
         if 'tax_amt' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.DepositBackInfo import DepositBackInfo
+from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
 
@@ -13,6 +14,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeFastpayRefundQueryResponse, self).__init__()
         self._deposit_back_info = None
+        self._enterprise_pay_info = None
         self._error_code = None
         self._gmt_refund_pay = None
         self._industry_sepc_detail = None
@@ -44,6 +46,16 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self._deposit_back_info = value
         else:
             self._deposit_back_info = DepositBackInfo.from_alipay_dict(value)
+    @property
+    def enterprise_pay_info(self):
+        return self._enterprise_pay_info
+
+    @enterprise_pay_info.setter
+    def enterprise_pay_info(self, value):
+        if isinstance(value, EnterprisePayInfo):
+            self._enterprise_pay_info = value
+        else:
+            self._enterprise_pay_info = EnterprisePayInfo.from_alipay_dict(value)
     @property
     def error_code(self):
         return self._error_code
@@ -201,6 +213,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         response = super(AlipayTradeFastpayRefundQueryResponse, self).parse_response_content(response_content)
         if 'deposit_back_info' in response:
             self.deposit_back_info = response['deposit_back_info']
+        if 'enterprise_pay_info' in response:
+            self.enterprise_pay_info = response['enterprise_pay_info']
         if 'error_code' in response:
             self.error_code = response['error_code']
         if 'gmt_refund_pay' in response:

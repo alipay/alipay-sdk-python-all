@@ -10,6 +10,7 @@ class TemplateAnswerDTO(object):
 
     def __init__(self):
         self._exp = None
+        self._initial_value = None
         self._label_name = None
         self._placeholder = None
         self._selects = None
@@ -23,6 +24,13 @@ class TemplateAnswerDTO(object):
     @exp.setter
     def exp(self, value):
         self._exp = value
+    @property
+    def initial_value(self):
+        return self._initial_value
+
+    @initial_value.setter
+    def initial_value(self, value):
+        self._initial_value = value
     @property
     def label_name(self):
         return self._label_name
@@ -73,6 +81,11 @@ class TemplateAnswerDTO(object):
                 params['exp'] = self.exp.to_alipay_dict()
             else:
                 params['exp'] = self.exp
+        if self.initial_value:
+            if hasattr(self.initial_value, 'to_alipay_dict'):
+                params['initial_value'] = self.initial_value.to_alipay_dict()
+            else:
+                params['initial_value'] = self.initial_value
         if self.label_name:
             if hasattr(self.label_name, 'to_alipay_dict'):
                 params['label_name'] = self.label_name.to_alipay_dict()
@@ -112,6 +125,8 @@ class TemplateAnswerDTO(object):
         o = TemplateAnswerDTO()
         if 'exp' in d:
             o.exp = d['exp']
+        if 'initial_value' in d:
+            o.initial_value = d['initial_value']
         if 'label_name' in d:
             o.label_name = d['label_name']
         if 'placeholder' in d:

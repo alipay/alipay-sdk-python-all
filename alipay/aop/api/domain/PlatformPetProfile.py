@@ -12,6 +12,7 @@ class PlatformPetProfile(object):
         self._birthday = None
         self._gender = None
         self._nick = None
+        self._pet_id = None
         self._photos = None
         self._sterilization = None
         self._type = None
@@ -37,6 +38,13 @@ class PlatformPetProfile(object):
     @nick.setter
     def nick(self, value):
         self._nick = value
+    @property
+    def pet_id(self):
+        return self._pet_id
+
+    @pet_id.setter
+    def pet_id(self, value):
+        self._pet_id = value
     @property
     def photos(self):
         return self._photos
@@ -83,6 +91,11 @@ class PlatformPetProfile(object):
                 params['nick'] = self.nick.to_alipay_dict()
             else:
                 params['nick'] = self.nick
+        if self.pet_id:
+            if hasattr(self.pet_id, 'to_alipay_dict'):
+                params['pet_id'] = self.pet_id.to_alipay_dict()
+            else:
+                params['pet_id'] = self.pet_id
         if self.photos:
             if isinstance(self.photos, list):
                 for i in range(0, len(self.photos)):
@@ -116,6 +129,8 @@ class PlatformPetProfile(object):
             o.gender = d['gender']
         if 'nick' in d:
             o.nick = d['nick']
+        if 'pet_id' in d:
+            o.pet_id = d['pet_id']
         if 'photos' in d:
             o.photos = d['photos']
         if 'sterilization' in d:

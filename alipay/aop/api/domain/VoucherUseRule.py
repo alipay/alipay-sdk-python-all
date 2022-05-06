@@ -7,6 +7,7 @@ from alipay.aop.api.domain.DiscountVoucher import DiscountVoucher
 from alipay.aop.api.domain.ExchangeVoucher import ExchangeVoucher
 from alipay.aop.api.domain.FixVoucher import FixVoucher
 from alipay.aop.api.domain.SpecialVoucher import SpecialVoucher
+from alipay.aop.api.domain.VoucherAvailableScope import VoucherAvailableScope
 from alipay.aop.api.domain.VoucherValidPeriod import VoucherValidPeriod
 
 
@@ -17,6 +18,7 @@ class VoucherUseRule(object):
         self._exchange_voucher = None
         self._fix_voucher = None
         self._special_voucher = None
+        self._voucher_available_scope = None
         self._voucher_valid_period = None
 
     @property
@@ -60,6 +62,16 @@ class VoucherUseRule(object):
         else:
             self._special_voucher = SpecialVoucher.from_alipay_dict(value)
     @property
+    def voucher_available_scope(self):
+        return self._voucher_available_scope
+
+    @voucher_available_scope.setter
+    def voucher_available_scope(self, value):
+        if isinstance(value, VoucherAvailableScope):
+            self._voucher_available_scope = value
+        else:
+            self._voucher_available_scope = VoucherAvailableScope.from_alipay_dict(value)
+    @property
     def voucher_valid_period(self):
         return self._voucher_valid_period
 
@@ -93,6 +105,11 @@ class VoucherUseRule(object):
                 params['special_voucher'] = self.special_voucher.to_alipay_dict()
             else:
                 params['special_voucher'] = self.special_voucher
+        if self.voucher_available_scope:
+            if hasattr(self.voucher_available_scope, 'to_alipay_dict'):
+                params['voucher_available_scope'] = self.voucher_available_scope.to_alipay_dict()
+            else:
+                params['voucher_available_scope'] = self.voucher_available_scope
         if self.voucher_valid_period:
             if hasattr(self.voucher_valid_period, 'to_alipay_dict'):
                 params['voucher_valid_period'] = self.voucher_valid_period.to_alipay_dict()
@@ -113,6 +130,8 @@ class VoucherUseRule(object):
             o.fix_voucher = d['fix_voucher']
         if 'special_voucher' in d:
             o.special_voucher = d['special_voucher']
+        if 'voucher_available_scope' in d:
+            o.voucher_available_scope = d['voucher_available_scope']
         if 'voucher_valid_period' in d:
             o.voucher_valid_period = d['voucher_valid_period']
         return o

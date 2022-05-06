@@ -13,6 +13,7 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
         self._auth_status = None
         self._business_license = None
         self._certify_channel = None
+        self._certify_fail_reasons = None
         self._certify_mode = None
         self._certify_person_card_no_postfix = None
         self._certify_status = None
@@ -51,6 +52,16 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     @certify_channel.setter
     def certify_channel(self, value):
         self._certify_channel = value
+    @property
+    def certify_fail_reasons(self):
+        return self._certify_fail_reasons
+
+    @certify_fail_reasons.setter
+    def certify_fail_reasons(self, value):
+        if isinstance(value, list):
+            self._certify_fail_reasons = list()
+            for i in value:
+                self._certify_fail_reasons.append(i)
     @property
     def certify_mode(self):
         return self._certify_mode
@@ -125,6 +136,8 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
             self.business_license = response['business_license']
         if 'certify_channel' in response:
             self.certify_channel = response['certify_channel']
+        if 'certify_fail_reasons' in response:
+            self.certify_fail_reasons = response['certify_fail_reasons']
         if 'certify_mode' in response:
             self.certify_mode = response['certify_mode']
         if 'certify_person_card_no_postfix' in response:

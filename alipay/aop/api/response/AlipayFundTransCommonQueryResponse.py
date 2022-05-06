@@ -20,6 +20,9 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._pay_date = None
         self._pay_fund_order_id = None
         self._status = None
+        self._sub_order_error_code = None
+        self._sub_order_fail_reason = None
+        self._sub_order_status = None
         self._trans_amount = None
         self._transfer_bill_info = None
 
@@ -101,6 +104,27 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def status(self, value):
         self._status = value
     @property
+    def sub_order_error_code(self):
+        return self._sub_order_error_code
+
+    @sub_order_error_code.setter
+    def sub_order_error_code(self, value):
+        self._sub_order_error_code = value
+    @property
+    def sub_order_fail_reason(self):
+        return self._sub_order_fail_reason
+
+    @sub_order_fail_reason.setter
+    def sub_order_fail_reason(self, value):
+        self._sub_order_fail_reason = value
+    @property
+    def sub_order_status(self):
+        return self._sub_order_status
+
+    @sub_order_status.setter
+    def sub_order_status(self, value):
+        self._sub_order_status = value
+    @property
     def trans_amount(self):
         return self._trans_amount
 
@@ -139,6 +163,12 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.pay_fund_order_id = response['pay_fund_order_id']
         if 'status' in response:
             self.status = response['status']
+        if 'sub_order_error_code' in response:
+            self.sub_order_error_code = response['sub_order_error_code']
+        if 'sub_order_fail_reason' in response:
+            self.sub_order_fail_reason = response['sub_order_fail_reason']
+        if 'sub_order_status' in response:
+            self.sub_order_status = response['sub_order_status']
         if 'trans_amount' in response:
             self.trans_amount = response['trans_amount']
         if 'transfer_bill_info' in response:

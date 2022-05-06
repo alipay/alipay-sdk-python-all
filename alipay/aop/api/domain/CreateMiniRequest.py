@@ -14,6 +14,7 @@ class CreateMiniRequest(object):
         self._cert_no = None
         self._contact_name = None
         self._contact_phone = None
+        self._is_individual = None
         self._legal_personal_name = None
         self._out_order_no = None
 
@@ -59,6 +60,13 @@ class CreateMiniRequest(object):
     @contact_phone.setter
     def contact_phone(self, value):
         self._contact_phone = value
+    @property
+    def is_individual(self):
+        return self._is_individual
+
+    @is_individual.setter
+    def is_individual(self, value):
+        self._is_individual = value
     @property
     def legal_personal_name(self):
         return self._legal_personal_name
@@ -107,6 +115,11 @@ class CreateMiniRequest(object):
                 params['contact_phone'] = self.contact_phone.to_alipay_dict()
             else:
                 params['contact_phone'] = self.contact_phone
+        if self.is_individual:
+            if hasattr(self.is_individual, 'to_alipay_dict'):
+                params['is_individual'] = self.is_individual.to_alipay_dict()
+            else:
+                params['is_individual'] = self.is_individual
         if self.legal_personal_name:
             if hasattr(self.legal_personal_name, 'to_alipay_dict'):
                 params['legal_personal_name'] = self.legal_personal_name.to_alipay_dict()
@@ -136,6 +149,8 @@ class CreateMiniRequest(object):
             o.contact_name = d['contact_name']
         if 'contact_phone' in d:
             o.contact_phone = d['contact_phone']
+        if 'is_individual' in d:
+            o.is_individual = d['is_individual']
         if 'legal_personal_name' in d:
             o.legal_personal_name = d['legal_personal_name']
         if 'out_order_no' in d:
