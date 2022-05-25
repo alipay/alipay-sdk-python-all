@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CreditpaySubquota import CreditpaySubquota
 
 
 class MybankCreditSupplychainCreditpayAmountQueryResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class MybankCreditSupplychainCreditpayAmountQueryResponse(AlipayResponse):
         self._admit = None
         self._available_amt = None
         self._buyer_scene_id = None
+        self._creditpay_sub_quotas = None
         self._signed = None
         self._total_amt = None
         self._trace_id = None
@@ -37,6 +39,19 @@ class MybankCreditSupplychainCreditpayAmountQueryResponse(AlipayResponse):
     @buyer_scene_id.setter
     def buyer_scene_id(self, value):
         self._buyer_scene_id = value
+    @property
+    def creditpay_sub_quotas(self):
+        return self._creditpay_sub_quotas
+
+    @creditpay_sub_quotas.setter
+    def creditpay_sub_quotas(self, value):
+        if isinstance(value, list):
+            self._creditpay_sub_quotas = list()
+            for i in value:
+                if isinstance(i, CreditpaySubquota):
+                    self._creditpay_sub_quotas.append(i)
+                else:
+                    self._creditpay_sub_quotas.append(CreditpaySubquota.from_alipay_dict(i))
     @property
     def signed(self):
         return self._signed
@@ -67,6 +82,8 @@ class MybankCreditSupplychainCreditpayAmountQueryResponse(AlipayResponse):
             self.available_amt = response['available_amt']
         if 'buyer_scene_id' in response:
             self.buyer_scene_id = response['buyer_scene_id']
+        if 'creditpay_sub_quotas' in response:
+            self.creditpay_sub_quotas = response['creditpay_sub_quotas']
         if 'signed' in response:
             self.signed = response['signed']
         if 'total_amt' in response:

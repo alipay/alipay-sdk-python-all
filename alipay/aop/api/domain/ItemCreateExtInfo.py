@@ -9,6 +9,8 @@ class ItemCreateExtInfo(object):
 
     def __init__(self):
         self._action_link = None
+        self._biz_from = None
+        self._ext_desc = None
         self._shop_id = None
 
     @property
@@ -18,6 +20,20 @@ class ItemCreateExtInfo(object):
     @action_link.setter
     def action_link(self, value):
         self._action_link = value
+    @property
+    def biz_from(self):
+        return self._biz_from
+
+    @biz_from.setter
+    def biz_from(self, value):
+        self._biz_from = value
+    @property
+    def ext_desc(self):
+        return self._ext_desc
+
+    @ext_desc.setter
+    def ext_desc(self, value):
+        self._ext_desc = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -34,6 +50,16 @@ class ItemCreateExtInfo(object):
                 params['action_link'] = self.action_link.to_alipay_dict()
             else:
                 params['action_link'] = self.action_link
+        if self.biz_from:
+            if hasattr(self.biz_from, 'to_alipay_dict'):
+                params['biz_from'] = self.biz_from.to_alipay_dict()
+            else:
+                params['biz_from'] = self.biz_from
+        if self.ext_desc:
+            if hasattr(self.ext_desc, 'to_alipay_dict'):
+                params['ext_desc'] = self.ext_desc.to_alipay_dict()
+            else:
+                params['ext_desc'] = self.ext_desc
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -48,6 +74,10 @@ class ItemCreateExtInfo(object):
         o = ItemCreateExtInfo()
         if 'action_link' in d:
             o.action_link = d['action_link']
+        if 'biz_from' in d:
+            o.biz_from = d['biz_from']
+        if 'ext_desc' in d:
+            o.ext_desc = d['ext_desc']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         return o

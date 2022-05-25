@@ -15,6 +15,7 @@ class ReceiptSimpleOrderDTO(object):
         self._currency = None
         self._discount_amount = None
         self._discount_info_list = None
+        self._invoice_entry = None
         self._item_order_list = None
         self._merchant_name = None
         self._order_create_time = None
@@ -73,6 +74,13 @@ class ReceiptSimpleOrderDTO(object):
                     self._discount_info_list.append(i)
                 else:
                     self._discount_info_list.append(DiscountInfoDataDTO.from_alipay_dict(i))
+    @property
+    def invoice_entry(self):
+        return self._invoice_entry
+
+    @invoice_entry.setter
+    def invoice_entry(self, value):
+        self._invoice_entry = value
     @property
     def item_order_list(self):
         return self._item_order_list
@@ -225,6 +233,11 @@ class ReceiptSimpleOrderDTO(object):
                 params['discount_info_list'] = self.discount_info_list.to_alipay_dict()
             else:
                 params['discount_info_list'] = self.discount_info_list
+        if self.invoice_entry:
+            if hasattr(self.invoice_entry, 'to_alipay_dict'):
+                params['invoice_entry'] = self.invoice_entry.to_alipay_dict()
+            else:
+                params['invoice_entry'] = self.invoice_entry
         if self.item_order_list:
             if isinstance(self.item_order_list, list):
                 for i in range(0, len(self.item_order_list)):
@@ -327,6 +340,8 @@ class ReceiptSimpleOrderDTO(object):
             o.discount_amount = d['discount_amount']
         if 'discount_info_list' in d:
             o.discount_info_list = d['discount_info_list']
+        if 'invoice_entry' in d:
+            o.invoice_entry = d['invoice_entry']
         if 'item_order_list' in d:
             o.item_order_list = d['item_order_list']
         if 'merchant_name' in d:

@@ -12,6 +12,7 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
         self._authorize_time = None
         self._authorized_party_name = None
         self._biz_scene = None
+        self._out_biz_no = None
         self._principal_id = None
         self._product_code = None
         self._status = None
@@ -37,6 +38,13 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def principal_id(self):
         return self._principal_id
@@ -67,6 +75,8 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
             self.authorized_party_name = response['authorized_party_name']
         if 'biz_scene' in response:
             self.biz_scene = response['biz_scene']
+        if 'out_biz_no' in response:
+            self.out_biz_no = response['out_biz_no']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
         if 'product_code' in response:

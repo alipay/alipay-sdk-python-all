@@ -12,6 +12,7 @@ class JointAccountBillDetailDTO(object):
         self._amount = None
         self._biz_date = None
         self._biz_no = None
+        self._in_out = None
         self._title = None
         self._user_id = None
 
@@ -43,6 +44,13 @@ class JointAccountBillDetailDTO(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def in_out(self):
+        return self._in_out
+
+    @in_out.setter
+    def in_out(self, value):
+        self._in_out = value
     @property
     def title(self):
         return self._title
@@ -81,6 +89,11 @@ class JointAccountBillDetailDTO(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.in_out:
+            if hasattr(self.in_out, 'to_alipay_dict'):
+                params['in_out'] = self.in_out.to_alipay_dict()
+            else:
+                params['in_out'] = self.in_out
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -106,6 +119,8 @@ class JointAccountBillDetailDTO(object):
             o.biz_date = d['biz_date']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'in_out' in d:
+            o.in_out = d['in_out']
         if 'title' in d:
             o.title = d['title']
         if 'user_id' in d:

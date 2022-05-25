@@ -14,6 +14,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def __init__(self):
         super(AlipayUserInfoShareResponse, self).__init__()
         self._address = None
+        self._age = None
         self._area = None
         self._avatar = None
         self._business_scope = None
@@ -49,6 +50,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._identity_card_city = None
         self._identity_card_province = None
         self._inst_or_corp = None
+        self._is_adult = None
         self._is_balance_frozen = None
         self._is_certified = None
         self._is_student_certified = None
@@ -80,6 +82,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     @address.setter
     def address(self, value):
         self._address = value
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+        self._age = value
     @property
     def area(self):
         return self._area
@@ -344,6 +353,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def inst_or_corp(self, value):
         self._inst_or_corp = value
     @property
+    def is_adult(self):
+        return self._is_adult
+
+    @is_adult.setter
+    def is_adult(self, value):
+        self._is_adult = value
+    @property
     def is_balance_frozen(self):
         return self._is_balance_frozen
 
@@ -515,6 +531,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         response = super(AlipayUserInfoShareResponse, self).parse_response_content(response_content)
         if 'address' in response:
             self.address = response['address']
+        if 'age' in response:
+            self.age = response['age']
         if 'area' in response:
             self.area = response['area']
         if 'avatar' in response:
@@ -585,6 +603,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.identity_card_province = response['identity_card_province']
         if 'inst_or_corp' in response:
             self.inst_or_corp = response['inst_or_corp']
+        if 'is_adult' in response:
+            self.is_adult = response['is_adult']
         if 'is_balance_frozen' in response:
             self.is_balance_frozen = response['is_balance_frozen']
         if 'is_certified' in response:

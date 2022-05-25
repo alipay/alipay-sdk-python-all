@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BelongMerchantInfoDTO import BelongMerchantInfoDTO
 from alipay.aop.api.domain.UserInformation import UserInformation
 from alipay.aop.api.domain.DiscountInfoDataDTO import DiscountInfoDataDTO
 from alipay.aop.api.domain.EnviromentalInfoDTO import EnviromentalInfoDTO
 from alipay.aop.api.domain.GoodExpirationListDTO import GoodExpirationListDTO
+from alipay.aop.api.domain.GreenCupsDTO import GreenCupsDTO
 from alipay.aop.api.domain.ItemOrderInfoDTO import ItemOrderInfoDTO
 from alipay.aop.api.domain.OrderLogisticsInformationRequestDTO import OrderLogisticsInformationRequestDTO
+from alipay.aop.api.domain.OrderGoodsDTO import OrderGoodsDTO
 
 
 class ReceiptOrderDTO(object):
@@ -16,6 +19,7 @@ class ReceiptOrderDTO(object):
     def __init__(self):
         self._alipay_uid = None
         self._amount = None
+        self._belong_merchant_info = None
         self._borrow_time = None
         self._buyer_info = None
         self._currency = None
@@ -23,12 +27,15 @@ class ReceiptOrderDTO(object):
         self._discount_info_list = None
         self._environmental_info = None
         self._good_expiration_list = None
+        self._green_cups_list = None
+        self._invoice_entry = None
         self._is_alipay_ticket = None
         self._item_order_list = None
         self._location = None
         self._logistics_info_list = None
         self._merchant_name = None
         self._order_create_time = None
+        self._order_goods_list = None
         self._order_link = None
         self._order_modified_time = None
         self._order_pay_time = None
@@ -58,6 +65,16 @@ class ReceiptOrderDTO(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def belong_merchant_info(self):
+        return self._belong_merchant_info
+
+    @belong_merchant_info.setter
+    def belong_merchant_info(self, value):
+        if isinstance(value, BelongMerchantInfoDTO):
+            self._belong_merchant_info = value
+        else:
+            self._belong_merchant_info = BelongMerchantInfoDTO.from_alipay_dict(value)
     @property
     def borrow_time(self):
         return self._borrow_time
@@ -129,6 +146,26 @@ class ReceiptOrderDTO(object):
                 else:
                     self._good_expiration_list.append(GoodExpirationListDTO.from_alipay_dict(i))
     @property
+    def green_cups_list(self):
+        return self._green_cups_list
+
+    @green_cups_list.setter
+    def green_cups_list(self, value):
+        if isinstance(value, list):
+            self._green_cups_list = list()
+            for i in value:
+                if isinstance(i, GreenCupsDTO):
+                    self._green_cups_list.append(i)
+                else:
+                    self._green_cups_list.append(GreenCupsDTO.from_alipay_dict(i))
+    @property
+    def invoice_entry(self):
+        return self._invoice_entry
+
+    @invoice_entry.setter
+    def invoice_entry(self, value):
+        self._invoice_entry = value
+    @property
     def is_alipay_ticket(self):
         return self._is_alipay_ticket
 
@@ -182,6 +219,19 @@ class ReceiptOrderDTO(object):
     @order_create_time.setter
     def order_create_time(self, value):
         self._order_create_time = value
+    @property
+    def order_goods_list(self):
+        return self._order_goods_list
+
+    @order_goods_list.setter
+    def order_goods_list(self, value):
+        if isinstance(value, list):
+            self._order_goods_list = list()
+            for i in value:
+                if isinstance(i, OrderGoodsDTO):
+                    self._order_goods_list.append(i)
+                else:
+                    self._order_goods_list.append(OrderGoodsDTO.from_alipay_dict(i))
     @property
     def order_link(self):
         return self._order_link
@@ -294,6 +344,11 @@ class ReceiptOrderDTO(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.belong_merchant_info:
+            if hasattr(self.belong_merchant_info, 'to_alipay_dict'):
+                params['belong_merchant_info'] = self.belong_merchant_info.to_alipay_dict()
+            else:
+                params['belong_merchant_info'] = self.belong_merchant_info
         if self.borrow_time:
             if hasattr(self.borrow_time, 'to_alipay_dict'):
                 params['borrow_time'] = self.borrow_time.to_alipay_dict()
@@ -344,6 +399,21 @@ class ReceiptOrderDTO(object):
                 params['good_expiration_list'] = self.good_expiration_list.to_alipay_dict()
             else:
                 params['good_expiration_list'] = self.good_expiration_list
+        if self.green_cups_list:
+            if isinstance(self.green_cups_list, list):
+                for i in range(0, len(self.green_cups_list)):
+                    element = self.green_cups_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.green_cups_list[i] = element.to_alipay_dict()
+            if hasattr(self.green_cups_list, 'to_alipay_dict'):
+                params['green_cups_list'] = self.green_cups_list.to_alipay_dict()
+            else:
+                params['green_cups_list'] = self.green_cups_list
+        if self.invoice_entry:
+            if hasattr(self.invoice_entry, 'to_alipay_dict'):
+                params['invoice_entry'] = self.invoice_entry.to_alipay_dict()
+            else:
+                params['invoice_entry'] = self.invoice_entry
         if self.is_alipay_ticket:
             if hasattr(self.is_alipay_ticket, 'to_alipay_dict'):
                 params['is_alipay_ticket'] = self.is_alipay_ticket.to_alipay_dict()
@@ -384,6 +454,16 @@ class ReceiptOrderDTO(object):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
             else:
                 params['order_create_time'] = self.order_create_time
+        if self.order_goods_list:
+            if isinstance(self.order_goods_list, list):
+                for i in range(0, len(self.order_goods_list)):
+                    element = self.order_goods_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.order_goods_list[i] = element.to_alipay_dict()
+            if hasattr(self.order_goods_list, 'to_alipay_dict'):
+                params['order_goods_list'] = self.order_goods_list.to_alipay_dict()
+            else:
+                params['order_goods_list'] = self.order_goods_list
         if self.order_link:
             if hasattr(self.order_link, 'to_alipay_dict'):
                 params['order_link'] = self.order_link.to_alipay_dict()
@@ -465,6 +545,8 @@ class ReceiptOrderDTO(object):
             o.alipay_uid = d['alipay_uid']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'belong_merchant_info' in d:
+            o.belong_merchant_info = d['belong_merchant_info']
         if 'borrow_time' in d:
             o.borrow_time = d['borrow_time']
         if 'buyer_info' in d:
@@ -479,6 +561,10 @@ class ReceiptOrderDTO(object):
             o.environmental_info = d['environmental_info']
         if 'good_expiration_list' in d:
             o.good_expiration_list = d['good_expiration_list']
+        if 'green_cups_list' in d:
+            o.green_cups_list = d['green_cups_list']
+        if 'invoice_entry' in d:
+            o.invoice_entry = d['invoice_entry']
         if 'is_alipay_ticket' in d:
             o.is_alipay_ticket = d['is_alipay_ticket']
         if 'item_order_list' in d:
@@ -491,6 +577,8 @@ class ReceiptOrderDTO(object):
             o.merchant_name = d['merchant_name']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
+        if 'order_goods_list' in d:
+            o.order_goods_list = d['order_goods_list']
         if 'order_link' in d:
             o.order_link = d['order_link']
         if 'order_modified_time' in d:

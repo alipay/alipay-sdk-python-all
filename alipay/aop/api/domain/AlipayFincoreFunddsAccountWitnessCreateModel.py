@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InstAccountElementsDTO import InstAccountElementsDTO
 
 
 class AlipayFincoreFunddsAccountWitnessCreateModel(object):
@@ -11,6 +12,7 @@ class AlipayFincoreFunddsAccountWitnessCreateModel(object):
         self._account_principal_type = None
         self._account_type = None
         self._external_entity_id = None
+        self._inst_account_elements = None
         self._memo = None
         self._operator = None
         self._product_code = None
@@ -37,6 +39,16 @@ class AlipayFincoreFunddsAccountWitnessCreateModel(object):
     @external_entity_id.setter
     def external_entity_id(self, value):
         self._external_entity_id = value
+    @property
+    def inst_account_elements(self):
+        return self._inst_account_elements
+
+    @inst_account_elements.setter
+    def inst_account_elements(self, value):
+        if isinstance(value, InstAccountElementsDTO):
+            self._inst_account_elements = value
+        else:
+            self._inst_account_elements = InstAccountElementsDTO.from_alipay_dict(value)
     @property
     def memo(self):
         return self._memo
@@ -84,6 +96,11 @@ class AlipayFincoreFunddsAccountWitnessCreateModel(object):
                 params['external_entity_id'] = self.external_entity_id.to_alipay_dict()
             else:
                 params['external_entity_id'] = self.external_entity_id
+        if self.inst_account_elements:
+            if hasattr(self.inst_account_elements, 'to_alipay_dict'):
+                params['inst_account_elements'] = self.inst_account_elements.to_alipay_dict()
+            else:
+                params['inst_account_elements'] = self.inst_account_elements
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -117,6 +134,8 @@ class AlipayFincoreFunddsAccountWitnessCreateModel(object):
             o.account_type = d['account_type']
         if 'external_entity_id' in d:
             o.external_entity_id = d['external_entity_id']
+        if 'inst_account_elements' in d:
+            o.inst_account_elements = d['inst_account_elements']
         if 'memo' in d:
             o.memo = d['memo']
         if 'operator' in d:

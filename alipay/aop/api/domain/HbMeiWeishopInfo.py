@@ -10,6 +10,7 @@ class HbMeiWeishopInfo(object):
     def __init__(self):
         self._city_code = None
         self._city_name = None
+        self._logo = None
         self._pirce_per_avg_shop = None
         self._poi_name = None
         self._province_code = None
@@ -34,6 +35,13 @@ class HbMeiWeishopInfo(object):
     @city_name.setter
     def city_name(self, value):
         self._city_name = value
+    @property
+    def logo(self):
+        return self._logo
+
+    @logo.setter
+    def logo(self, value):
+        self._logo = value
     @property
     def pirce_per_avg_shop(self):
         return self._pirce_per_avg_shop
@@ -111,6 +119,11 @@ class HbMeiWeishopInfo(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.logo:
+            if hasattr(self.logo, 'to_alipay_dict'):
+                params['logo'] = self.logo.to_alipay_dict()
+            else:
+                params['logo'] = self.logo
         if self.pirce_per_avg_shop:
             if hasattr(self.pirce_per_avg_shop, 'to_alipay_dict'):
                 params['pirce_per_avg_shop'] = self.pirce_per_avg_shop.to_alipay_dict()
@@ -167,6 +180,8 @@ class HbMeiWeishopInfo(object):
             o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'logo' in d:
+            o.logo = d['logo']
         if 'pirce_per_avg_shop' in d:
             o.pirce_per_avg_shop = d['pirce_per_avg_shop']
         if 'poi_name' in d:

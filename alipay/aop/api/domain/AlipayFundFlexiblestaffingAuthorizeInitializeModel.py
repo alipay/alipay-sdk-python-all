@@ -13,6 +13,7 @@ class AlipayFundFlexiblestaffingAuthorizeInitializeModel(object):
         self._biz_scene = None
         self._expire_time = None
         self._initialize_code_type = None
+        self._out_biz_no = None
         self._principal_party_info = None
         self._product_code = None
 
@@ -44,6 +45,13 @@ class AlipayFundFlexiblestaffingAuthorizeInitializeModel(object):
     @initialize_code_type.setter
     def initialize_code_type(self, value):
         self._initialize_code_type = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def principal_party_info(self):
         return self._principal_party_info
@@ -85,6 +93,11 @@ class AlipayFundFlexiblestaffingAuthorizeInitializeModel(object):
                 params['initialize_code_type'] = self.initialize_code_type.to_alipay_dict()
             else:
                 params['initialize_code_type'] = self.initialize_code_type
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.principal_party_info:
             if hasattr(self.principal_party_info, 'to_alipay_dict'):
                 params['principal_party_info'] = self.principal_party_info.to_alipay_dict()
@@ -110,6 +123,8 @@ class AlipayFundFlexiblestaffingAuthorizeInitializeModel(object):
             o.expire_time = d['expire_time']
         if 'initialize_code_type' in d:
             o.initialize_code_type = d['initialize_code_type']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'principal_party_info' in d:
             o.principal_party_info = d['principal_party_info']
         if 'product_code' in d:

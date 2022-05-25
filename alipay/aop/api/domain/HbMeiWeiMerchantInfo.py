@@ -9,10 +9,18 @@ from alipay.aop.api.domain.HbMeiWeishopInfo import HbMeiWeishopInfo
 class HbMeiWeiMerchantInfo(object):
 
     def __init__(self):
+        self._logo = None
         self._merchant_id = None
         self._merchant_name = None
         self._shop_list = None
 
+    @property
+    def logo(self):
+        return self._logo
+
+    @logo.setter
+    def logo(self, value):
+        self._logo = value
     @property
     def merchant_id(self):
         return self._merchant_id
@@ -44,6 +52,11 @@ class HbMeiWeiMerchantInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.logo:
+            if hasattr(self.logo, 'to_alipay_dict'):
+                params['logo'] = self.logo.to_alipay_dict()
+            else:
+                params['logo'] = self.logo
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
@@ -71,6 +84,8 @@ class HbMeiWeiMerchantInfo(object):
         if not d:
             return None
         o = HbMeiWeiMerchantInfo()
+        if 'logo' in d:
+            o.logo = d['logo']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
         if 'merchant_name' in d:

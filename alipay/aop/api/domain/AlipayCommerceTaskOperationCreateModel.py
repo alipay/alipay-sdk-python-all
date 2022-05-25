@@ -18,10 +18,12 @@ class AlipayCommerceTaskOperationCreateModel(object):
         self._out_biz_no = None
         self._scene = None
         self._scene_type = None
+        self._shop_scope_type = None
         self._start_time = None
         self._startup_type = None
         self._target = None
         self._target_type = None
+        self._task_rule_type = None
         self._type = None
         self._voucher_template_id = None
 
@@ -96,6 +98,13 @@ class AlipayCommerceTaskOperationCreateModel(object):
     def scene_type(self, value):
         self._scene_type = value
     @property
+    def shop_scope_type(self):
+        return self._shop_scope_type
+
+    @shop_scope_type.setter
+    def shop_scope_type(self, value):
+        self._shop_scope_type = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -123,6 +132,13 @@ class AlipayCommerceTaskOperationCreateModel(object):
     @target_type.setter
     def target_type(self, value):
         self._target_type = value
+    @property
+    def task_rule_type(self):
+        return self._task_rule_type
+
+    @task_rule_type.setter
+    def task_rule_type(self, value):
+        self._task_rule_type = value
     @property
     def type(self):
         return self._type
@@ -191,6 +207,11 @@ class AlipayCommerceTaskOperationCreateModel(object):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
             else:
                 params['scene_type'] = self.scene_type
+        if self.shop_scope_type:
+            if hasattr(self.shop_scope_type, 'to_alipay_dict'):
+                params['shop_scope_type'] = self.shop_scope_type.to_alipay_dict()
+            else:
+                params['shop_scope_type'] = self.shop_scope_type
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -211,6 +232,11 @@ class AlipayCommerceTaskOperationCreateModel(object):
                 params['target_type'] = self.target_type.to_alipay_dict()
             else:
                 params['target_type'] = self.target_type
+        if self.task_rule_type:
+            if hasattr(self.task_rule_type, 'to_alipay_dict'):
+                params['task_rule_type'] = self.task_rule_type.to_alipay_dict()
+            else:
+                params['task_rule_type'] = self.task_rule_type
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -248,6 +274,8 @@ class AlipayCommerceTaskOperationCreateModel(object):
             o.scene = d['scene']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
+        if 'shop_scope_type' in d:
+            o.shop_scope_type = d['shop_scope_type']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'startup_type' in d:
@@ -256,6 +284,8 @@ class AlipayCommerceTaskOperationCreateModel(object):
             o.target = d['target']
         if 'target_type' in d:
             o.target_type = d['target_type']
+        if 'task_rule_type' in d:
+            o.task_rule_type = d['task_rule_type']
         if 'type' in d:
             o.type = d['type']
         if 'voucher_template_id' in d:

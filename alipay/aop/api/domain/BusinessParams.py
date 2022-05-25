@@ -11,6 +11,7 @@ class BusinessParams(object):
         self._actual_order_time = None
         self._campus_card = None
         self._card_type = None
+        self._enterprise_pay_amount = None
         self._enterprise_pay_info = None
         self._good_taxes = None
 
@@ -35,6 +36,13 @@ class BusinessParams(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def enterprise_pay_amount(self):
+        return self._enterprise_pay_amount
+
+    @enterprise_pay_amount.setter
+    def enterprise_pay_amount(self, value):
+        self._enterprise_pay_amount = value
     @property
     def enterprise_pay_info(self):
         return self._enterprise_pay_info
@@ -68,6 +76,11 @@ class BusinessParams(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.enterprise_pay_amount:
+            if hasattr(self.enterprise_pay_amount, 'to_alipay_dict'):
+                params['enterprise_pay_amount'] = self.enterprise_pay_amount.to_alipay_dict()
+            else:
+                params['enterprise_pay_amount'] = self.enterprise_pay_amount
         if self.enterprise_pay_info:
             if hasattr(self.enterprise_pay_info, 'to_alipay_dict'):
                 params['enterprise_pay_info'] = self.enterprise_pay_info.to_alipay_dict()
@@ -91,6 +104,8 @@ class BusinessParams(object):
             o.campus_card = d['campus_card']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'enterprise_pay_amount' in d:
+            o.enterprise_pay_amount = d['enterprise_pay_amount']
         if 'enterprise_pay_info' in d:
             o.enterprise_pay_info = d['enterprise_pay_info']
         if 'good_taxes' in d:

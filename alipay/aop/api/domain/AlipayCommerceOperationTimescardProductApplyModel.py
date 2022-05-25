@@ -3,17 +3,27 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FundSettleInfo import FundSettleInfo
 
 
 class AlipayCommerceOperationTimescardProductApplyModel(object):
 
     def __init__(self):
+        self._biz_from = None
         self._isv_partner_id = None
         self._out_biz_no = None
         self._partner_id = None
         self._product_code = None
         self._scene_code = None
+        self._settle_info = None
 
+    @property
+    def biz_from(self):
+        return self._biz_from
+
+    @biz_from.setter
+    def biz_from(self, value):
+        self._biz_from = value
     @property
     def isv_partner_id(self):
         return self._isv_partner_id
@@ -49,10 +59,25 @@ class AlipayCommerceOperationTimescardProductApplyModel(object):
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def settle_info(self):
+        return self._settle_info
+
+    @settle_info.setter
+    def settle_info(self, value):
+        if isinstance(value, FundSettleInfo):
+            self._settle_info = value
+        else:
+            self._settle_info = FundSettleInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_from:
+            if hasattr(self.biz_from, 'to_alipay_dict'):
+                params['biz_from'] = self.biz_from.to_alipay_dict()
+            else:
+                params['biz_from'] = self.biz_from
         if self.isv_partner_id:
             if hasattr(self.isv_partner_id, 'to_alipay_dict'):
                 params['isv_partner_id'] = self.isv_partner_id.to_alipay_dict()
@@ -78,6 +103,11 @@ class AlipayCommerceOperationTimescardProductApplyModel(object):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.settle_info:
+            if hasattr(self.settle_info, 'to_alipay_dict'):
+                params['settle_info'] = self.settle_info.to_alipay_dict()
+            else:
+                params['settle_info'] = self.settle_info
         return params
 
     @staticmethod
@@ -85,6 +115,8 @@ class AlipayCommerceOperationTimescardProductApplyModel(object):
         if not d:
             return None
         o = AlipayCommerceOperationTimescardProductApplyModel()
+        if 'biz_from' in d:
+            o.biz_from = d['biz_from']
         if 'isv_partner_id' in d:
             o.isv_partner_id = d['isv_partner_id']
         if 'out_biz_no' in d:
@@ -95,6 +127,8 @@ class AlipayCommerceOperationTimescardProductApplyModel(object):
             o.product_code = d['product_code']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'settle_info' in d:
+            o.settle_info = d['settle_info']
         return o
 
 

@@ -20,6 +20,7 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         self._app_slogan = None
         self._app_version = None
         self._audit_rule = None
+        self._auto_online = None
         self._bundle_id = None
         self._license_name = None
         self._license_no = None
@@ -116,6 +117,13 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
     @audit_rule.setter
     def audit_rule(self, value):
         self._audit_rule = value
+    @property
+    def auto_online(self):
+        return self._auto_online
+
+    @auto_online.setter
+    def auto_online(self, value):
+        self._auto_online = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -478,6 +486,11 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
                 params['audit_rule'] = json.dumps(obj=self.audit_rule.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['audit_rule'] = self.audit_rule
+        if self.auto_online:
+            if hasattr(self.auto_online, 'to_alipay_dict'):
+                params['auto_online'] = json.dumps(obj=self.auto_online.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['auto_online'] = self.auto_online
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = json.dumps(obj=self.bundle_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

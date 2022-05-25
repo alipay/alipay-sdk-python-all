@@ -21,6 +21,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._buyer_user_id = None
         self._buyer_user_name = None
         self._buyer_user_type = None
+        self._can_turn_to_app_pay = None
         self._card_balance = None
         self._charge_amount = None
         self._charge_flags = None
@@ -114,6 +115,13 @@ class AlipayTradePayResponse(AlipayResponse):
     @buyer_user_type.setter
     def buyer_user_type(self, value):
         self._buyer_user_type = value
+    @property
+    def can_turn_to_app_pay(self):
+        return self._can_turn_to_app_pay
+
+    @can_turn_to_app_pay.setter
+    def can_turn_to_app_pay(self, value):
+        self._can_turn_to_app_pay = value
     @property
     def card_balance(self):
         return self._card_balance
@@ -353,6 +361,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.buyer_user_name = response['buyer_user_name']
         if 'buyer_user_type' in response:
             self.buyer_user_type = response['buyer_user_type']
+        if 'can_turn_to_app_pay' in response:
+            self.can_turn_to_app_pay = response['can_turn_to_app_pay']
         if 'card_balance' in response:
             self.card_balance = response['card_balance']
         if 'charge_amount' in response:

@@ -9,6 +9,7 @@ class AlipayCommerceYuntaskPointinstructionQueryModel(object):
 
     def __init__(self):
         self._hunter_id = None
+        self._instruction_id = None
         self._merchant_pid = None
         self._page = None
         self._page_size = None
@@ -21,6 +22,13 @@ class AlipayCommerceYuntaskPointinstructionQueryModel(object):
     @hunter_id.setter
     def hunter_id(self, value):
         self._hunter_id = value
+    @property
+    def instruction_id(self):
+        return self._instruction_id
+
+    @instruction_id.setter
+    def instruction_id(self, value):
+        self._instruction_id = value
     @property
     def merchant_pid(self):
         return self._merchant_pid
@@ -58,6 +66,11 @@ class AlipayCommerceYuntaskPointinstructionQueryModel(object):
                 params['hunter_id'] = self.hunter_id.to_alipay_dict()
             else:
                 params['hunter_id'] = self.hunter_id
+        if self.instruction_id:
+            if hasattr(self.instruction_id, 'to_alipay_dict'):
+                params['instruction_id'] = self.instruction_id.to_alipay_dict()
+            else:
+                params['instruction_id'] = self.instruction_id
         if self.merchant_pid:
             if hasattr(self.merchant_pid, 'to_alipay_dict'):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayCommerceYuntaskPointinstructionQueryModel(object):
         o = AlipayCommerceYuntaskPointinstructionQueryModel()
         if 'hunter_id' in d:
             o.hunter_id = d['hunter_id']
+        if 'instruction_id' in d:
+            o.instruction_id = d['instruction_id']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
         if 'page' in d:

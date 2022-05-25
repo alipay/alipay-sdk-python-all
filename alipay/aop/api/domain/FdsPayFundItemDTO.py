@@ -11,6 +11,7 @@ class FdsPayFundItemDTO(object):
 
     def __init__(self):
         self._amount = None
+        self._fund_biz_info = None
         self._fund_item_id = None
         self._gmt_pay = None
         self._memo = None
@@ -25,6 +26,13 @@ class FdsPayFundItemDTO(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def fund_biz_info(self):
+        return self._fund_biz_info
+
+    @fund_biz_info.setter
+    def fund_biz_info(self, value):
+        self._fund_biz_info = value
     @property
     def fund_item_id(self):
         return self._fund_item_id
@@ -82,6 +90,11 @@ class FdsPayFundItemDTO(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.fund_biz_info:
+            if hasattr(self.fund_biz_info, 'to_alipay_dict'):
+                params['fund_biz_info'] = self.fund_biz_info.to_alipay_dict()
+            else:
+                params['fund_biz_info'] = self.fund_biz_info
         if self.fund_item_id:
             if hasattr(self.fund_item_id, 'to_alipay_dict'):
                 params['fund_item_id'] = self.fund_item_id.to_alipay_dict()
@@ -121,6 +134,8 @@ class FdsPayFundItemDTO(object):
         o = FdsPayFundItemDTO()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'fund_biz_info' in d:
+            o.fund_biz_info = d['fund_biz_info']
         if 'fund_item_id' in d:
             o.fund_item_id = d['fund_item_id']
         if 'gmt_pay' in d:

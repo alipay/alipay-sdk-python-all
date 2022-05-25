@@ -3,16 +3,28 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BrandQuotaQueryCondition import BrandQuotaQueryCondition
 from alipay.aop.api.domain.Member import Member
 
 
 class MybankCreditSupplychainCreditpayAmountQueryModel(object):
 
     def __init__(self):
+        self._brand_quota_query_condition = None
         self._buyer = None
         self._channel_tag = None
         self._trace_id = None
 
+    @property
+    def brand_quota_query_condition(self):
+        return self._brand_quota_query_condition
+
+    @brand_quota_query_condition.setter
+    def brand_quota_query_condition(self, value):
+        if isinstance(value, BrandQuotaQueryCondition):
+            self._brand_quota_query_condition = value
+        else:
+            self._brand_quota_query_condition = BrandQuotaQueryCondition.from_alipay_dict(value)
     @property
     def buyer(self):
         return self._buyer
@@ -41,6 +53,11 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.brand_quota_query_condition:
+            if hasattr(self.brand_quota_query_condition, 'to_alipay_dict'):
+                params['brand_quota_query_condition'] = self.brand_quota_query_condition.to_alipay_dict()
+            else:
+                params['brand_quota_query_condition'] = self.brand_quota_query_condition
         if self.buyer:
             if hasattr(self.buyer, 'to_alipay_dict'):
                 params['buyer'] = self.buyer.to_alipay_dict()
@@ -63,6 +80,8 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
         if not d:
             return None
         o = MybankCreditSupplychainCreditpayAmountQueryModel()
+        if 'brand_quota_query_condition' in d:
+            o.brand_quota_query_condition = d['brand_quota_query_condition']
         if 'buyer' in d:
             o.buyer = d['buyer']
         if 'channel_tag' in d:
