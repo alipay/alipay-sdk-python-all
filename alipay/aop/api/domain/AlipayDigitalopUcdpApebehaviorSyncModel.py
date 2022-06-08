@@ -11,7 +11,10 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
         self._action_type = None
         self._channel = None
         self._item_id_list = None
+        self._item_num = None
         self._log_time = None
+        self._order_id = None
+        self._pay_amount = None
         self._pos = None
         self._project_id = None
         self._spm = None
@@ -40,12 +43,33 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     def item_id_list(self, value):
         self._item_id_list = value
     @property
+    def item_num(self):
+        return self._item_num
+
+    @item_num.setter
+    def item_num(self, value):
+        self._item_num = value
+    @property
     def log_time(self):
         return self._log_time
 
     @log_time.setter
     def log_time(self, value):
         self._log_time = value
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
+    def pay_amount(self):
+        return self._pay_amount
+
+    @pay_amount.setter
+    def pay_amount(self, value):
+        self._pay_amount = value
     @property
     def pos(self):
         return self._pos
@@ -100,11 +124,26 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
                 params['item_id_list'] = self.item_id_list.to_alipay_dict()
             else:
                 params['item_id_list'] = self.item_id_list
+        if self.item_num:
+            if hasattr(self.item_num, 'to_alipay_dict'):
+                params['item_num'] = self.item_num.to_alipay_dict()
+            else:
+                params['item_num'] = self.item_num
         if self.log_time:
             if hasattr(self.log_time, 'to_alipay_dict'):
                 params['log_time'] = self.log_time.to_alipay_dict()
             else:
                 params['log_time'] = self.log_time
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
+        if self.pay_amount:
+            if hasattr(self.pay_amount, 'to_alipay_dict'):
+                params['pay_amount'] = self.pay_amount.to_alipay_dict()
+            else:
+                params['pay_amount'] = self.pay_amount
         if self.pos:
             if hasattr(self.pos, 'to_alipay_dict'):
                 params['pos'] = self.pos.to_alipay_dict()
@@ -143,8 +182,14 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
             o.channel = d['channel']
         if 'item_id_list' in d:
             o.item_id_list = d['item_id_list']
+        if 'item_num' in d:
+            o.item_num = d['item_num']
         if 'log_time' in d:
             o.log_time = d['log_time']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
+        if 'pay_amount' in d:
+            o.pay_amount = d['pay_amount']
         if 'pos' in d:
             o.pos = d['pos']
         if 'project_id' in d:

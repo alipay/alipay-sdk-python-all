@@ -10,6 +10,7 @@ class DatadigitalFincloudGeneralsaasFaceFeeChargeModel(object):
     def __init__(self):
         self._certify_no = None
         self._merchant_id = None
+        self._product = None
         self._product_code = None
         self._scene_code = None
         self._service_time = None
@@ -28,6 +29,13 @@ class DatadigitalFincloudGeneralsaasFaceFeeChargeModel(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def product(self):
+        return self._product
+
+    @product.setter
+    def product(self, value):
+        self._product = value
     @property
     def product_code(self):
         return self._product_code
@@ -63,6 +71,11 @@ class DatadigitalFincloudGeneralsaasFaceFeeChargeModel(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.product:
+            if hasattr(self.product, 'to_alipay_dict'):
+                params['product'] = self.product.to_alipay_dict()
+            else:
+                params['product'] = self.product
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -89,6 +102,8 @@ class DatadigitalFincloudGeneralsaasFaceFeeChargeModel(object):
             o.certify_no = d['certify_no']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'product' in d:
+            o.product = d['product']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'scene_code' in d:

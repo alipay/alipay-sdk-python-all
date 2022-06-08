@@ -9,11 +9,19 @@ from alipay.aop.api.domain.ItemConsultRequest import ItemConsultRequest
 class AlipayMarketingCampaignOrderVoucherConsultModel(object):
 
     def __init__(self):
+        self._business_param = None
         self._item_consult_list = None
         self._order_amount = None
         self._scene_code = None
         self._specified_app_id = None
 
+    @property
+    def business_param(self):
+        return self._business_param
+
+    @business_param.setter
+    def business_param(self, value):
+        self._business_param = value
     @property
     def item_consult_list(self):
         return self._item_consult_list
@@ -55,6 +63,11 @@ class AlipayMarketingCampaignOrderVoucherConsultModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_param:
+            if hasattr(self.business_param, 'to_alipay_dict'):
+                params['business_param'] = self.business_param.to_alipay_dict()
+            else:
+                params['business_param'] = self.business_param
         if self.item_consult_list:
             if isinstance(self.item_consult_list, list):
                 for i in range(0, len(self.item_consult_list)):
@@ -92,6 +105,8 @@ class AlipayMarketingCampaignOrderVoucherConsultModel(object):
         if not d:
             return None
         o = AlipayMarketingCampaignOrderVoucherConsultModel()
+        if 'business_param' in d:
+            o.business_param = d['business_param']
         if 'item_consult_list' in d:
             o.item_consult_list = d['item_consult_list']
         if 'order_amount' in d:

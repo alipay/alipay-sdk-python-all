@@ -12,6 +12,7 @@ class ZhimaCreditEpCreditlinkAuthApplyModel(object):
         self._auth_callback_path = None
         self._auth_merchant_id = None
         self._auth_notify_path = None
+        self._certification_type = None
         self._cognizant_cert_no = None
         self._cognizant_name = None
         self._data_type = None
@@ -43,6 +44,13 @@ class ZhimaCreditEpCreditlinkAuthApplyModel(object):
     @auth_notify_path.setter
     def auth_notify_path(self, value):
         self._auth_notify_path = value
+    @property
+    def certification_type(self):
+        return self._certification_type
+
+    @certification_type.setter
+    def certification_type(self, value):
+        self._certification_type = value
     @property
     def cognizant_cert_no(self):
         return self._cognizant_cert_no
@@ -128,6 +136,11 @@ class ZhimaCreditEpCreditlinkAuthApplyModel(object):
                 params['auth_notify_path'] = self.auth_notify_path.to_alipay_dict()
             else:
                 params['auth_notify_path'] = self.auth_notify_path
+        if self.certification_type:
+            if hasattr(self.certification_type, 'to_alipay_dict'):
+                params['certification_type'] = self.certification_type.to_alipay_dict()
+            else:
+                params['certification_type'] = self.certification_type
         if self.cognizant_cert_no:
             if hasattr(self.cognizant_cert_no, 'to_alipay_dict'):
                 params['cognizant_cert_no'] = self.cognizant_cert_no.to_alipay_dict()
@@ -186,6 +199,8 @@ class ZhimaCreditEpCreditlinkAuthApplyModel(object):
             o.auth_merchant_id = d['auth_merchant_id']
         if 'auth_notify_path' in d:
             o.auth_notify_path = d['auth_notify_path']
+        if 'certification_type' in d:
+            o.certification_type = d['certification_type']
         if 'cognizant_cert_no' in d:
             o.cognizant_cert_no = d['cognizant_cert_no']
         if 'cognizant_name' in d:

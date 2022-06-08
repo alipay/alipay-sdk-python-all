@@ -10,6 +10,7 @@ class EnterpriseCustomerInfoVO(object):
     def __init__(self):
         self._cert_name = None
         self._enterprise_addr = None
+        self._enterprise_bank_card_name = None
         self._enterprise_bank_name = None
         self._enterprise_bank_no = None
         self._legal_cert_no = None
@@ -31,6 +32,13 @@ class EnterpriseCustomerInfoVO(object):
     @enterprise_addr.setter
     def enterprise_addr(self, value):
         self._enterprise_addr = value
+    @property
+    def enterprise_bank_card_name(self):
+        return self._enterprise_bank_card_name
+
+    @enterprise_bank_card_name.setter
+    def enterprise_bank_card_name(self, value):
+        self._enterprise_bank_card_name = value
     @property
     def enterprise_bank_name(self):
         return self._enterprise_bank_name
@@ -87,6 +95,11 @@ class EnterpriseCustomerInfoVO(object):
                 params['enterprise_addr'] = self.enterprise_addr.to_alipay_dict()
             else:
                 params['enterprise_addr'] = self.enterprise_addr
+        if self.enterprise_bank_card_name:
+            if hasattr(self.enterprise_bank_card_name, 'to_alipay_dict'):
+                params['enterprise_bank_card_name'] = self.enterprise_bank_card_name.to_alipay_dict()
+            else:
+                params['enterprise_bank_card_name'] = self.enterprise_bank_card_name
         if self.enterprise_bank_name:
             if hasattr(self.enterprise_bank_name, 'to_alipay_dict'):
                 params['enterprise_bank_name'] = self.enterprise_bank_name.to_alipay_dict()
@@ -128,6 +141,8 @@ class EnterpriseCustomerInfoVO(object):
             o.cert_name = d['cert_name']
         if 'enterprise_addr' in d:
             o.enterprise_addr = d['enterprise_addr']
+        if 'enterprise_bank_card_name' in d:
+            o.enterprise_bank_card_name = d['enterprise_bank_card_name']
         if 'enterprise_bank_name' in d:
             o.enterprise_bank_name = d['enterprise_bank_name']
         if 'enterprise_bank_no' in d:

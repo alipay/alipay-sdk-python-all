@@ -17,6 +17,8 @@ class AlipayTradeRefundModel(object):
         self._out_request_no = None
         self._out_trade_no = None
         self._query_options = None
+        self._refund_advance_account = None
+        self._refund_advance_account_type = None
         self._refund_amount = None
         self._refund_currency = None
         self._refund_goods_detail = None
@@ -77,6 +79,20 @@ class AlipayTradeRefundModel(object):
             self._query_options = list()
             for i in value:
                 self._query_options.append(i)
+    @property
+    def refund_advance_account(self):
+        return self._refund_advance_account
+
+    @refund_advance_account.setter
+    def refund_advance_account(self, value):
+        self._refund_advance_account = value
+    @property
+    def refund_advance_account_type(self):
+        return self._refund_advance_account_type
+
+    @refund_advance_account_type.setter
+    def refund_advance_account_type(self, value):
+        self._refund_advance_account_type = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -189,6 +205,16 @@ class AlipayTradeRefundModel(object):
                 params['query_options'] = self.query_options.to_alipay_dict()
             else:
                 params['query_options'] = self.query_options
+        if self.refund_advance_account:
+            if hasattr(self.refund_advance_account, 'to_alipay_dict'):
+                params['refund_advance_account'] = self.refund_advance_account.to_alipay_dict()
+            else:
+                params['refund_advance_account'] = self.refund_advance_account
+        if self.refund_advance_account_type:
+            if hasattr(self.refund_advance_account_type, 'to_alipay_dict'):
+                params['refund_advance_account_type'] = self.refund_advance_account_type.to_alipay_dict()
+            else:
+                params['refund_advance_account_type'] = self.refund_advance_account_type
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -258,6 +284,10 @@ class AlipayTradeRefundModel(object):
             o.out_trade_no = d['out_trade_no']
         if 'query_options' in d:
             o.query_options = d['query_options']
+        if 'refund_advance_account' in d:
+            o.refund_advance_account = d['refund_advance_account']
+        if 'refund_advance_account_type' in d:
+            o.refund_advance_account_type = d['refund_advance_account_type']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_currency' in d:

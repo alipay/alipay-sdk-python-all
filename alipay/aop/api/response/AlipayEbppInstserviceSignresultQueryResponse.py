@@ -14,6 +14,9 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
         self._inst_id = None
         self._login_id = None
         self._out_agreement_id = None
+        self._payment_type = None
+        self._product_type = None
+        self._sign_date = None
         self._status = None
         self._user_id = None
 
@@ -53,6 +56,27 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
     def out_agreement_id(self, value):
         self._out_agreement_id = value
     @property
+    def payment_type(self):
+        return self._payment_type
+
+    @payment_type.setter
+    def payment_type(self, value):
+        self._payment_type = value
+    @property
+    def product_type(self):
+        return self._product_type
+
+    @product_type.setter
+    def product_type(self, value):
+        self._product_type = value
+    @property
+    def sign_date(self):
+        return self._sign_date
+
+    @sign_date.setter
+    def sign_date(self, value):
+        self._sign_date = value
+    @property
     def status(self):
         return self._status
 
@@ -79,6 +103,12 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
             self.login_id = response['login_id']
         if 'out_agreement_id' in response:
             self.out_agreement_id = response['out_agreement_id']
+        if 'payment_type' in response:
+            self.payment_type = response['payment_type']
+        if 'product_type' in response:
+            self.product_type = response['product_type']
+        if 'sign_date' in response:
+            self.sign_date = response['sign_date']
         if 'status' in response:
             self.status = response['status']
         if 'user_id' in response:

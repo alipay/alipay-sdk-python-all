@@ -11,6 +11,7 @@ class AlipayOpenIotmbsFacedbDeleteModel(object):
         self._face_id = None
         self._phone_no = None
         self._project_id = None
+        self._sn = None
 
     @property
     def face_id(self):
@@ -33,6 +34,13 @@ class AlipayOpenIotmbsFacedbDeleteModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def sn(self):
+        return self._sn
+
+    @sn.setter
+    def sn(self, value):
+        self._sn = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayOpenIotmbsFacedbDeleteModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.sn:
+            if hasattr(self.sn, 'to_alipay_dict'):
+                params['sn'] = self.sn.to_alipay_dict()
+            else:
+                params['sn'] = self.sn
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayOpenIotmbsFacedbDeleteModel(object):
             o.phone_no = d['phone_no']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'sn' in d:
+            o.sn = d['sn']
         return o
 
 

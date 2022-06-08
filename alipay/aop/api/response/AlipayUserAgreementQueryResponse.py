@@ -16,6 +16,8 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
         self._external_agreement_no = None
         self._external_logon_id = None
         self._invalid_time = None
+        self._last_deduct_time = None
+        self._next_deduct_time = None
         self._personal_product_code = None
         self._pricipal_type = None
         self._principal_id = None
@@ -76,6 +78,20 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
     @invalid_time.setter
     def invalid_time(self, value):
         self._invalid_time = value
+    @property
+    def last_deduct_time(self):
+        return self._last_deduct_time
+
+    @last_deduct_time.setter
+    def last_deduct_time(self, value):
+        self._last_deduct_time = value
+    @property
+    def next_deduct_time(self):
+        return self._next_deduct_time
+
+    @next_deduct_time.setter
+    def next_deduct_time(self, value):
+        self._next_deduct_time = value
     @property
     def personal_product_code(self):
         return self._personal_product_code
@@ -163,6 +179,10 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
             self.external_logon_id = response['external_logon_id']
         if 'invalid_time' in response:
             self.invalid_time = response['invalid_time']
+        if 'last_deduct_time' in response:
+            self.last_deduct_time = response['last_deduct_time']
+        if 'next_deduct_time' in response:
+            self.next_deduct_time = response['next_deduct_time']
         if 'personal_product_code' in response:
             self.personal_product_code = response['personal_product_code']
         if 'pricipal_type' in response:

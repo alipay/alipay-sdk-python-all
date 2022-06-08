@@ -16,6 +16,7 @@ class ShopQueryOpenApiVO(object):
         self._contact_phone = None
         self._shop_category = None
         self._shop_id = None
+        self._shop_info_status = None
         self._shop_name = None
         self._shop_status = None
         self._shop_type = None
@@ -72,6 +73,13 @@ class ShopQueryOpenApiVO(object):
     @shop_id.setter
     def shop_id(self, value):
         self._shop_id = value
+    @property
+    def shop_info_status(self):
+        return self._shop_info_status
+
+    @shop_info_status.setter
+    def shop_info_status(self, value):
+        self._shop_info_status = value
     @property
     def shop_name(self):
         return self._shop_name
@@ -139,6 +147,11 @@ class ShopQueryOpenApiVO(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_info_status:
+            if hasattr(self.shop_info_status, 'to_alipay_dict'):
+                params['shop_info_status'] = self.shop_info_status.to_alipay_dict()
+            else:
+                params['shop_info_status'] = self.shop_info_status
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -178,6 +191,8 @@ class ShopQueryOpenApiVO(object):
             o.shop_category = d['shop_category']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_info_status' in d:
+            o.shop_info_status = d['shop_info_status']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'shop_status' in d:
