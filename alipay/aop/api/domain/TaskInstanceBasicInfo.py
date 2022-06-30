@@ -9,6 +9,7 @@ class TaskInstanceBasicInfo(object):
 
     def __init__(self):
         self._logo = None
+        self._marker_amount = None
         self._published_point_amount = None
         self._status = None
         self._task_end_time = None
@@ -26,6 +27,13 @@ class TaskInstanceBasicInfo(object):
     @logo.setter
     def logo(self, value):
         self._logo = value
+    @property
+    def marker_amount(self):
+        return self._marker_amount
+
+    @marker_amount.setter
+    def marker_amount(self, value):
+        self._marker_amount = value
     @property
     def published_point_amount(self):
         return self._published_point_amount
@@ -98,6 +106,11 @@ class TaskInstanceBasicInfo(object):
                 params['logo'] = self.logo.to_alipay_dict()
             else:
                 params['logo'] = self.logo
+        if self.marker_amount:
+            if hasattr(self.marker_amount, 'to_alipay_dict'):
+                params['marker_amount'] = self.marker_amount.to_alipay_dict()
+            else:
+                params['marker_amount'] = self.marker_amount
         if self.published_point_amount:
             if hasattr(self.published_point_amount, 'to_alipay_dict'):
                 params['published_point_amount'] = self.published_point_amount.to_alipay_dict()
@@ -152,6 +165,8 @@ class TaskInstanceBasicInfo(object):
         o = TaskInstanceBasicInfo()
         if 'logo' in d:
             o.logo = d['logo']
+        if 'marker_amount' in d:
+            o.marker_amount = d['marker_amount']
         if 'published_point_amount' in d:
             o.published_point_amount = d['published_point_amount']
         if 'status' in d:

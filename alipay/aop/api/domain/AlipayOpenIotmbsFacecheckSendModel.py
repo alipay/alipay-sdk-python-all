@@ -13,6 +13,7 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
         self._out_request_id = None
         self._phone_no = None
         self._project_id = None
+        self._sn_list = None
 
     @property
     def dev_id(self):
@@ -49,6 +50,16 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def sn_list(self):
+        return self._sn_list
+
+    @sn_list.setter
+    def sn_list(self, value):
+        if isinstance(value, list):
+            self._sn_list = list()
+            for i in value:
+                self._sn_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -78,6 +89,16 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.sn_list:
+            if isinstance(self.sn_list, list):
+                for i in range(0, len(self.sn_list)):
+                    element = self.sn_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sn_list[i] = element.to_alipay_dict()
+            if hasattr(self.sn_list, 'to_alipay_dict'):
+                params['sn_list'] = self.sn_list.to_alipay_dict()
+            else:
+                params['sn_list'] = self.sn_list
         return params
 
     @staticmethod
@@ -95,6 +116,8 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
             o.phone_no = d['phone_no']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'sn_list' in d:
+            o.sn_list = d['sn_list']
         return o
 
 

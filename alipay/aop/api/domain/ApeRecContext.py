@@ -8,13 +8,26 @@ from alipay.aop.api.constant.ParamConstants import *
 class ApeRecContext(object):
 
     def __init__(self):
+        self._cate = None
         self._city_code = None
         self._client_env = None
         self._current_item_id = None
         self._device_id = None
         self._latitude = None
         self._longitude = None
+        self._other_index_list = None
+        self._tags = None
 
+    @property
+    def cate(self):
+        return self._cate
+
+    @cate.setter
+    def cate(self, value):
+        if isinstance(value, list):
+            self._cate = list()
+            for i in value:
+                self._cate.append(i)
     @property
     def city_code(self):
         return self._city_code
@@ -57,10 +70,40 @@ class ApeRecContext(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def other_index_list(self):
+        return self._other_index_list
+
+    @other_index_list.setter
+    def other_index_list(self, value):
+        if isinstance(value, list):
+            self._other_index_list = list()
+            for i in value:
+                self._other_index_list.append(i)
+    @property
+    def tags(self):
+        return self._tags
+
+    @tags.setter
+    def tags(self, value):
+        if isinstance(value, list):
+            self._tags = list()
+            for i in value:
+                self._tags.append(i)
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cate:
+            if isinstance(self.cate, list):
+                for i in range(0, len(self.cate)):
+                    element = self.cate[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.cate[i] = element.to_alipay_dict()
+            if hasattr(self.cate, 'to_alipay_dict'):
+                params['cate'] = self.cate.to_alipay_dict()
+            else:
+                params['cate'] = self.cate
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -91,6 +134,26 @@ class ApeRecContext(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.other_index_list:
+            if isinstance(self.other_index_list, list):
+                for i in range(0, len(self.other_index_list)):
+                    element = self.other_index_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.other_index_list[i] = element.to_alipay_dict()
+            if hasattr(self.other_index_list, 'to_alipay_dict'):
+                params['other_index_list'] = self.other_index_list.to_alipay_dict()
+            else:
+                params['other_index_list'] = self.other_index_list
+        if self.tags:
+            if isinstance(self.tags, list):
+                for i in range(0, len(self.tags)):
+                    element = self.tags[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.tags[i] = element.to_alipay_dict()
+            if hasattr(self.tags, 'to_alipay_dict'):
+                params['tags'] = self.tags.to_alipay_dict()
+            else:
+                params['tags'] = self.tags
         return params
 
     @staticmethod
@@ -98,6 +161,8 @@ class ApeRecContext(object):
         if not d:
             return None
         o = ApeRecContext()
+        if 'cate' in d:
+            o.cate = d['cate']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'client_env' in d:
@@ -110,6 +175,10 @@ class ApeRecContext(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'other_index_list' in d:
+            o.other_index_list = d['other_index_list']
+        if 'tags' in d:
+            o.tags = d['tags']
         return o
 
 

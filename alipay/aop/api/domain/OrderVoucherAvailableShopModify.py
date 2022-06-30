@@ -3,14 +3,26 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OrderVoucherMerchantAllShopModify import OrderVoucherMerchantAllShopModify
 
 
 class OrderVoucherAvailableShopModify(object):
 
     def __init__(self):
+        self._order_voucher_merchant_all_shop = None
         self._real_shop_ids = None
         self._shop_ids = None
 
+    @property
+    def order_voucher_merchant_all_shop(self):
+        return self._order_voucher_merchant_all_shop
+
+    @order_voucher_merchant_all_shop.setter
+    def order_voucher_merchant_all_shop(self, value):
+        if isinstance(value, OrderVoucherMerchantAllShopModify):
+            self._order_voucher_merchant_all_shop = value
+        else:
+            self._order_voucher_merchant_all_shop = OrderVoucherMerchantAllShopModify.from_alipay_dict(value)
     @property
     def real_shop_ids(self):
         return self._real_shop_ids
@@ -35,6 +47,11 @@ class OrderVoucherAvailableShopModify(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.order_voucher_merchant_all_shop:
+            if hasattr(self.order_voucher_merchant_all_shop, 'to_alipay_dict'):
+                params['order_voucher_merchant_all_shop'] = self.order_voucher_merchant_all_shop.to_alipay_dict()
+            else:
+                params['order_voucher_merchant_all_shop'] = self.order_voucher_merchant_all_shop
         if self.real_shop_ids:
             if isinstance(self.real_shop_ids, list):
                 for i in range(0, len(self.real_shop_ids)):
@@ -62,6 +79,8 @@ class OrderVoucherAvailableShopModify(object):
         if not d:
             return None
         o = OrderVoucherAvailableShopModify()
+        if 'order_voucher_merchant_all_shop' in d:
+            o.order_voucher_merchant_all_shop = d['order_voucher_merchant_all_shop']
         if 'real_shop_ids' in d:
             o.real_shop_ids = d['real_shop_ids']
         if 'shop_ids' in d:

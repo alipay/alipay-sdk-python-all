@@ -12,6 +12,7 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
         self._disease_name_list = None
         self._emergency = None
         self._general_name_list = None
+        self._item_name_list = None
 
     @property
     def ant_ser_contract_no(self):
@@ -47,6 +48,16 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
             self._general_name_list = list()
             for i in value:
                 self._general_name_list.append(i)
+    @property
+    def item_name_list(self):
+        return self._item_name_list
+
+    @item_name_list.setter
+    def item_name_list(self, value):
+        if isinstance(value, list):
+            self._item_name_list = list()
+            for i in value:
+                self._item_name_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -81,6 +92,16 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
                 params['general_name_list'] = self.general_name_list.to_alipay_dict()
             else:
                 params['general_name_list'] = self.general_name_list
+        if self.item_name_list:
+            if isinstance(self.item_name_list, list):
+                for i in range(0, len(self.item_name_list)):
+                    element = self.item_name_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_name_list[i] = element.to_alipay_dict()
+            if hasattr(self.item_name_list, 'to_alipay_dict'):
+                params['item_name_list'] = self.item_name_list.to_alipay_dict()
+            else:
+                params['item_name_list'] = self.item_name_list
         return params
 
     @staticmethod
@@ -96,6 +117,8 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
             o.emergency = d['emergency']
         if 'general_name_list' in d:
             o.general_name_list = d['general_name_list']
+        if 'item_name_list' in d:
+            o.item_name_list = d['item_name_list']
         return o
 
 

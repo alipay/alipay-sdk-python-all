@@ -9,6 +9,7 @@ class AlipayCommerceTransportEtcSettlementQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceTransportEtcSettlementQueryResponse, self).__init__()
+        self._ext_info = None
         self._out_order_id = None
         self._pay_time = None
         self._total_amount = None
@@ -16,6 +17,13 @@ class AlipayCommerceTransportEtcSettlementQueryResponse(AlipayResponse):
         self._trade_status = None
         self._trip_id = None
 
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -61,6 +69,8 @@ class AlipayCommerceTransportEtcSettlementQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceTransportEtcSettlementQueryResponse, self).parse_response_content(response_content)
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'out_order_id' in response:
             self.out_order_id = response['out_order_id']
         if 'pay_time' in response:

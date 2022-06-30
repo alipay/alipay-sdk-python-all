@@ -9,6 +9,7 @@ class CrowdInfoDTO(object):
 
     def __init__(self):
         self._create_time = None
+        self._creator_id = None
         self._creator_name = None
         self._crowd_name = None
         self._crowd_num = None
@@ -16,6 +17,7 @@ class CrowdInfoDTO(object):
         self._ext_crowd_key = None
         self._id = None
         self._status = None
+        self._type = None
         self._update_time = None
 
     @property
@@ -25,6 +27,13 @@ class CrowdInfoDTO(object):
     @create_time.setter
     def create_time(self, value):
         self._create_time = value
+    @property
+    def creator_id(self):
+        return self._creator_id
+
+    @creator_id.setter
+    def creator_id(self, value):
+        self._creator_id = value
     @property
     def creator_name(self):
         return self._creator_name
@@ -75,6 +84,13 @@ class CrowdInfoDTO(object):
     def status(self, value):
         self._status = value
     @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def update_time(self):
         return self._update_time
 
@@ -90,6 +106,11 @@ class CrowdInfoDTO(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.creator_id:
+            if hasattr(self.creator_id, 'to_alipay_dict'):
+                params['creator_id'] = self.creator_id.to_alipay_dict()
+            else:
+                params['creator_id'] = self.creator_id
         if self.creator_name:
             if hasattr(self.creator_name, 'to_alipay_dict'):
                 params['creator_name'] = self.creator_name.to_alipay_dict()
@@ -125,6 +146,11 @@ class CrowdInfoDTO(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.update_time:
             if hasattr(self.update_time, 'to_alipay_dict'):
                 params['update_time'] = self.update_time.to_alipay_dict()
@@ -139,6 +165,8 @@ class CrowdInfoDTO(object):
         o = CrowdInfoDTO()
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'creator_id' in d:
+            o.creator_id = d['creator_id']
         if 'creator_name' in d:
             o.creator_name = d['creator_name']
         if 'crowd_name' in d:
@@ -153,6 +181,8 @@ class CrowdInfoDTO(object):
             o.id = d['id']
         if 'status' in d:
             o.status = d['status']
+        if 'type' in d:
+            o.type = d['type']
         if 'update_time' in d:
             o.update_time = d['update_time']
         return o

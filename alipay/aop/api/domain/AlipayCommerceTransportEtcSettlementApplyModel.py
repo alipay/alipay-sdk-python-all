@@ -12,6 +12,7 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
         self._car_type = None
         self._end_station_name = None
         self._end_time = None
+        self._memo = None
         self._out_order_id = None
         self._plate_color = None
         self._plate_no = None
@@ -51,6 +52,13 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -145,6 +153,11 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.memo:
+            if hasattr(self.memo, 'to_alipay_dict'):
+                params['memo'] = self.memo.to_alipay_dict()
+            else:
+                params['memo'] = self.memo
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -210,6 +223,8 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
             o.end_station_name = d['end_station_name']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'memo' in d:
+            o.memo = d['memo']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plate_color' in d:

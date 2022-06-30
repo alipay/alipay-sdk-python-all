@@ -5,11 +5,11 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
-from alipay.aop.api.domain.KoubeiMarketingCampaignActivityCreateModel import KoubeiMarketingCampaignActivityCreateModel
+from alipay.aop.api.domain.AlipayMerchantIndirectAuthorderQuerystatusModel import AlipayMerchantIndirectAuthorderQuerystatusModel
 
 
 
-class KoubeiMarketingCampaignActivityCreateRequest(object):
+class AlipayMerchantIndirectAuthorderQuerystatusRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
@@ -37,10 +37,10 @@ class KoubeiMarketingCampaignActivityCreateRequest(object):
 
     @biz_content.setter
     def biz_content(self, value):
-        if isinstance(value, KoubeiMarketingCampaignActivityCreateModel):
+        if isinstance(value, AlipayMerchantIndirectAuthorderQuerystatusModel):
             self._biz_content = value
         else:
-            self._biz_content = KoubeiMarketingCampaignActivityCreateModel.from_alipay_dict(value)
+            self._biz_content = AlipayMerchantIndirectAuthorderQuerystatusModel.from_alipay_dict(value)
 
 
     @property
@@ -116,7 +116,7 @@ class KoubeiMarketingCampaignActivityCreateRequest(object):
 
     def get_params(self):
         params = dict()
-        params[P_METHOD] = 'koubei.marketing.campaign.activity.create'
+        params[P_METHOD] = 'alipay.merchant.indirect.authorder.querystatus'
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

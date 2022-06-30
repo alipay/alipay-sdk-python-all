@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TaskRuleConfig import TaskRuleConfig
 
 
 class AlipayCommerceTaskEventCreateModel(object):
@@ -10,6 +11,7 @@ class AlipayCommerceTaskEventCreateModel(object):
     def __init__(self):
         self._event_list = None
         self._out_biz_no = None
+        self._rule_config = None
         self._template_id = None
 
     @property
@@ -29,6 +31,16 @@ class AlipayCommerceTaskEventCreateModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def rule_config(self):
+        return self._rule_config
+
+    @rule_config.setter
+    def rule_config(self, value):
+        if isinstance(value, TaskRuleConfig):
+            self._rule_config = value
+        else:
+            self._rule_config = TaskRuleConfig.from_alipay_dict(value)
     @property
     def template_id(self):
         return self._template_id
@@ -55,6 +67,11 @@ class AlipayCommerceTaskEventCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.rule_config:
+            if hasattr(self.rule_config, 'to_alipay_dict'):
+                params['rule_config'] = self.rule_config.to_alipay_dict()
+            else:
+                params['rule_config'] = self.rule_config
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -71,6 +88,8 @@ class AlipayCommerceTaskEventCreateModel(object):
             o.event_list = d['event_list']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'rule_config' in d:
+            o.rule_config = d['rule_config']
         if 'template_id' in d:
             o.template_id = d['template_id']
         return o

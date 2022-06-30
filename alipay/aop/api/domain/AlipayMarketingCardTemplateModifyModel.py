@@ -19,6 +19,7 @@ class AlipayMarketingCardTemplateModifyModel(object):
 
     def __init__(self):
         self._biz_no_prefix = None
+        self._biz_no_suffix_len = None
         self._card_action_list = None
         self._card_level_conf = None
         self._card_spec_tag = None
@@ -30,6 +31,7 @@ class AlipayMarketingCardTemplateModifyModel(object):
         self._pub_channels = None
         self._request_id = None
         self._shop_ids = None
+        self._spi_app_id = None
         self._template_benefit_info = None
         self._template_id = None
         self._template_style_info = None
@@ -42,6 +44,13 @@ class AlipayMarketingCardTemplateModifyModel(object):
     @biz_no_prefix.setter
     def biz_no_prefix(self, value):
         self._biz_no_prefix = value
+    @property
+    def biz_no_suffix_len(self):
+        return self._biz_no_suffix_len
+
+    @biz_no_suffix_len.setter
+    def biz_no_suffix_len(self, value):
+        self._biz_no_suffix_len = value
     @property
     def card_action_list(self):
         return self._card_action_list
@@ -162,6 +171,13 @@ class AlipayMarketingCardTemplateModifyModel(object):
             for i in value:
                 self._shop_ids.append(i)
     @property
+    def spi_app_id(self):
+        return self._spi_app_id
+
+    @spi_app_id.setter
+    def spi_app_id(self, value):
+        self._spi_app_id = value
+    @property
     def template_benefit_info(self):
         return self._template_benefit_info
 
@@ -207,6 +223,11 @@ class AlipayMarketingCardTemplateModifyModel(object):
                 params['biz_no_prefix'] = self.biz_no_prefix.to_alipay_dict()
             else:
                 params['biz_no_prefix'] = self.biz_no_prefix
+        if self.biz_no_suffix_len:
+            if hasattr(self.biz_no_suffix_len, 'to_alipay_dict'):
+                params['biz_no_suffix_len'] = self.biz_no_suffix_len.to_alipay_dict()
+            else:
+                params['biz_no_suffix_len'] = self.biz_no_suffix_len
         if self.card_action_list:
             if isinstance(self.card_action_list, list):
                 for i in range(0, len(self.card_action_list)):
@@ -292,6 +313,11 @@ class AlipayMarketingCardTemplateModifyModel(object):
                 params['shop_ids'] = self.shop_ids.to_alipay_dict()
             else:
                 params['shop_ids'] = self.shop_ids
+        if self.spi_app_id:
+            if hasattr(self.spi_app_id, 'to_alipay_dict'):
+                params['spi_app_id'] = self.spi_app_id.to_alipay_dict()
+            else:
+                params['spi_app_id'] = self.spi_app_id
         if self.template_benefit_info:
             if isinstance(self.template_benefit_info, list):
                 for i in range(0, len(self.template_benefit_info)):
@@ -326,6 +352,8 @@ class AlipayMarketingCardTemplateModifyModel(object):
         o = AlipayMarketingCardTemplateModifyModel()
         if 'biz_no_prefix' in d:
             o.biz_no_prefix = d['biz_no_prefix']
+        if 'biz_no_suffix_len' in d:
+            o.biz_no_suffix_len = d['biz_no_suffix_len']
         if 'card_action_list' in d:
             o.card_action_list = d['card_action_list']
         if 'card_level_conf' in d:
@@ -348,6 +376,8 @@ class AlipayMarketingCardTemplateModifyModel(object):
             o.request_id = d['request_id']
         if 'shop_ids' in d:
             o.shop_ids = d['shop_ids']
+        if 'spi_app_id' in d:
+            o.spi_app_id = d['spi_app_id']
         if 'template_benefit_info' in d:
             o.template_benefit_info = d['template_benefit_info']
         if 'template_id' in d:

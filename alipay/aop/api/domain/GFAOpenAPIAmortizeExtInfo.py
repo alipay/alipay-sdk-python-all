@@ -10,6 +10,7 @@ class GFAOpenAPIAmortizeExtInfo(object):
     def __init__(self):
         self._amortize_amount = None
         self._amortize_period_type = None
+        self._amortize_total_day = None
         self._amortize_type = None
         self._amortize_volume = None
         self._gmt_end = None
@@ -30,6 +31,13 @@ class GFAOpenAPIAmortizeExtInfo(object):
     @amortize_period_type.setter
     def amortize_period_type(self, value):
         self._amortize_period_type = value
+    @property
+    def amortize_total_day(self):
+        return self._amortize_total_day
+
+    @amortize_total_day.setter
+    def amortize_total_day(self, value):
+        self._amortize_total_day = value
     @property
     def amortize_type(self):
         return self._amortize_type
@@ -79,6 +87,11 @@ class GFAOpenAPIAmortizeExtInfo(object):
                 params['amortize_period_type'] = self.amortize_period_type.to_alipay_dict()
             else:
                 params['amortize_period_type'] = self.amortize_period_type
+        if self.amortize_total_day:
+            if hasattr(self.amortize_total_day, 'to_alipay_dict'):
+                params['amortize_total_day'] = self.amortize_total_day.to_alipay_dict()
+            else:
+                params['amortize_total_day'] = self.amortize_total_day
         if self.amortize_type:
             if hasattr(self.amortize_type, 'to_alipay_dict'):
                 params['amortize_type'] = self.amortize_type.to_alipay_dict()
@@ -115,6 +128,8 @@ class GFAOpenAPIAmortizeExtInfo(object):
             o.amortize_amount = d['amortize_amount']
         if 'amortize_period_type' in d:
             o.amortize_period_type = d['amortize_period_type']
+        if 'amortize_total_day' in d:
+            o.amortize_total_day = d['amortize_total_day']
         if 'amortize_type' in d:
             o.amortize_type = d['amortize_type']
         if 'amortize_volume' in d:

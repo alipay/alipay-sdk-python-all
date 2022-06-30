@@ -10,6 +10,9 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
     def __init__(self):
         super(AnttechMorseMarketingSrtaNonanonymousQueryResponse, self).__init__()
         self._biz_no = None
+        self._campaign_id = None
+        self._campaign_text = None
+        self._campaign_text_type = None
         self._channel = None
         self._max_amount = None
         self._min_amount = None
@@ -24,6 +27,27 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def campaign_id(self):
+        return self._campaign_id
+
+    @campaign_id.setter
+    def campaign_id(self, value):
+        self._campaign_id = value
+    @property
+    def campaign_text(self):
+        return self._campaign_text
+
+    @campaign_text.setter
+    def campaign_text(self, value):
+        self._campaign_text = value
+    @property
+    def campaign_text_type(self):
+        return self._campaign_text_type
+
+    @campaign_text_type.setter
+    def campaign_text_type(self, value):
+        self._campaign_text_type = value
     @property
     def channel(self):
         return self._channel
@@ -71,6 +95,12 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
         response = super(AnttechMorseMarketingSrtaNonanonymousQueryResponse, self).parse_response_content(response_content)
         if 'biz_no' in response:
             self.biz_no = response['biz_no']
+        if 'campaign_id' in response:
+            self.campaign_id = response['campaign_id']
+        if 'campaign_text' in response:
+            self.campaign_text = response['campaign_text']
+        if 'campaign_text_type' in response:
+            self.campaign_text_type = response['campaign_text_type']
         if 'channel' in response:
             self.channel = response['channel']
         if 'max_amount' in response:

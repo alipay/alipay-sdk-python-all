@@ -20,6 +20,7 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
         self._spm = None
         self._trace_id = None
         self._user_id = None
+        self._user_id_type = None
 
     @property
     def action_type(self):
@@ -105,6 +106,13 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def user_id_type(self):
+        return self._user_id_type
+
+    @user_id_type.setter
+    def user_id_type(self, value):
+        self._user_id_type = value
 
 
     def to_alipay_dict(self):
@@ -169,6 +177,11 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.user_id_type:
+            if hasattr(self.user_id_type, 'to_alipay_dict'):
+                params['user_id_type'] = self.user_id_type.to_alipay_dict()
+            else:
+                params['user_id_type'] = self.user_id_type
         return params
 
     @staticmethod
@@ -200,6 +213,8 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
             o.trace_id = d['trace_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'user_id_type' in d:
+            o.user_id_type = d['user_id_type']
         return o
 
 

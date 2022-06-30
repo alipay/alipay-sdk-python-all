@@ -10,6 +10,7 @@ class DriverTradeInfo(object):
     def __init__(self):
         self._create_date = None
         self._driver_user_id = None
+        self._risk_control = None
         self._trade_no = None
         self._trade_total_amount = None
 
@@ -27,6 +28,13 @@ class DriverTradeInfo(object):
     @driver_user_id.setter
     def driver_user_id(self, value):
         self._driver_user_id = value
+    @property
+    def risk_control(self):
+        return self._risk_control
+
+    @risk_control.setter
+    def risk_control(self, value):
+        self._risk_control = value
     @property
     def trade_no(self):
         return self._trade_no
@@ -55,6 +63,11 @@ class DriverTradeInfo(object):
                 params['driver_user_id'] = self.driver_user_id.to_alipay_dict()
             else:
                 params['driver_user_id'] = self.driver_user_id
+        if self.risk_control:
+            if hasattr(self.risk_control, 'to_alipay_dict'):
+                params['risk_control'] = self.risk_control.to_alipay_dict()
+            else:
+                params['risk_control'] = self.risk_control
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class DriverTradeInfo(object):
             o.create_date = d['create_date']
         if 'driver_user_id' in d:
             o.driver_user_id = d['driver_user_id']
+        if 'risk_control' in d:
+            o.risk_control = d['risk_control']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'trade_total_amount' in d:

@@ -11,6 +11,7 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
         self._back_url = None
         self._cert_no = None
         self._cert_type = None
+        self._conn_key = None
         self._industry_id = None
         self._job_id = None
         self._user_id = None
@@ -37,6 +38,13 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def conn_key(self):
+        return self._conn_key
+
+    @conn_key.setter
+    def conn_key(self, value):
+        self._conn_key = value
     @property
     def industry_id(self):
         return self._industry_id
@@ -84,6 +92,11 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.conn_key:
+            if hasattr(self.conn_key, 'to_alipay_dict'):
+                params['conn_key'] = self.conn_key.to_alipay_dict()
+            else:
+                params['conn_key'] = self.conn_key
         if self.industry_id:
             if hasattr(self.industry_id, 'to_alipay_dict'):
                 params['industry_id'] = self.industry_id.to_alipay_dict()
@@ -117,6 +130,8 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'conn_key' in d:
+            o.conn_key = d['conn_key']
         if 'industry_id' in d:
             o.industry_id = d['industry_id']
         if 'job_id' in d:

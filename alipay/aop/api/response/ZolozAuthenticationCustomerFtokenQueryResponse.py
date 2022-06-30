@@ -12,6 +12,8 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
         super(ZolozAuthenticationCustomerFtokenQueryResponse, self).__init__()
         self._age_check_result = None
         self._authimg_base_64 = None
+        self._cert_name = None
+        self._cert_no = None
         self._face_id = None
         self._uid = None
         self._uid_tel_pair_list = None
@@ -30,6 +32,20 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
     @authimg_base_64.setter
     def authimg_base_64(self, value):
         self._authimg_base_64 = value
+    @property
+    def cert_name(self):
+        return self._cert_name
+
+    @cert_name.setter
+    def cert_name(self, value):
+        self._cert_name = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
     @property
     def face_id(self):
         return self._face_id
@@ -64,6 +80,10 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
             self.age_check_result = response['age_check_result']
         if 'authimg_base_64' in response:
             self.authimg_base_64 = response['authimg_base_64']
+        if 'cert_name' in response:
+            self.cert_name = response['cert_name']
+        if 'cert_no' in response:
+            self.cert_no = response['cert_no']
         if 'face_id' in response:
             self.face_id = response['face_id']
         if 'uid' in response:

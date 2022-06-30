@@ -13,6 +13,7 @@ class AlipayMarketingActivityUserQueryvoucherResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMarketingActivityUserQueryvoucherResponse, self).__init__()
         self._activity_id = None
+        self._associate_trade_no = None
         self._available_begin_time = None
         self._available_end_time = None
         self._belong_merchant_id = None
@@ -31,6 +32,13 @@ class AlipayMarketingActivityUserQueryvoucherResponse(AlipayResponse):
     @activity_id.setter
     def activity_id(self, value):
         self._activity_id = value
+    @property
+    def associate_trade_no(self):
+        return self._associate_trade_no
+
+    @associate_trade_no.setter
+    def associate_trade_no(self, value):
+        self._associate_trade_no = value
     @property
     def available_begin_time(self):
         return self._available_begin_time
@@ -115,6 +123,8 @@ class AlipayMarketingActivityUserQueryvoucherResponse(AlipayResponse):
         response = super(AlipayMarketingActivityUserQueryvoucherResponse, self).parse_response_content(response_content)
         if 'activity_id' in response:
             self.activity_id = response['activity_id']
+        if 'associate_trade_no' in response:
+            self.associate_trade_no = response['associate_trade_no']
         if 'available_begin_time' in response:
             self.available_begin_time = response['available_begin_time']
         if 'available_end_time' in response:

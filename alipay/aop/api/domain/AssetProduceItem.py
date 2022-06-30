@@ -43,6 +43,7 @@ class AssetProduceItem(object):
         self._supplier_pid = None
         self._template_id = None
         self._template_name = None
+        self._work_process = None
 
     @property
     def action_type(self):
@@ -289,6 +290,13 @@ class AssetProduceItem(object):
     @template_name.setter
     def template_name(self, value):
         self._template_name = value
+    @property
+    def work_process(self):
+        return self._work_process
+
+    @work_process.setter
+    def work_process(self, value):
+        self._work_process = value
 
 
     def to_alipay_dict(self):
@@ -468,6 +476,11 @@ class AssetProduceItem(object):
                 params['template_name'] = self.template_name.to_alipay_dict()
             else:
                 params['template_name'] = self.template_name
+        if self.work_process:
+            if hasattr(self.work_process, 'to_alipay_dict'):
+                params['work_process'] = self.work_process.to_alipay_dict()
+            else:
+                params['work_process'] = self.work_process
         return params
 
     @staticmethod
@@ -545,6 +558,8 @@ class AssetProduceItem(object):
             o.template_id = d['template_id']
         if 'template_name' in d:
             o.template_name = d['template_name']
+        if 'work_process' in d:
+            o.work_process = d['work_process']
         return o
 
 

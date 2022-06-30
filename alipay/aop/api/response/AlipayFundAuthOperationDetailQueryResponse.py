@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CreditRiskInfo import CreditRiskInfo
 
 
 class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
@@ -13,6 +14,7 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         self._auth_no = None
         self._credit_amount = None
         self._credit_merchant_ext = None
+        self._credit_risk_info = None
         self._enterprise_pay_info = None
         self._extra_param = None
         self._fund_amount = None
@@ -68,6 +70,16 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     @credit_merchant_ext.setter
     def credit_merchant_ext(self, value):
         self._credit_merchant_ext = value
+    @property
+    def credit_risk_info(self):
+        return self._credit_risk_info
+
+    @credit_risk_info.setter
+    def credit_risk_info(self, value):
+        if isinstance(value, CreditRiskInfo):
+            self._credit_risk_info = value
+        else:
+            self._credit_risk_info = CreditRiskInfo.from_alipay_dict(value)
     @property
     def enterprise_pay_info(self):
         return self._enterprise_pay_info
@@ -261,6 +273,8 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.credit_amount = response['credit_amount']
         if 'credit_merchant_ext' in response:
             self.credit_merchant_ext = response['credit_merchant_ext']
+        if 'credit_risk_info' in response:
+            self.credit_risk_info = response['credit_risk_info']
         if 'enterprise_pay_info' in response:
             self.enterprise_pay_info = response['enterprise_pay_info']
         if 'extra_param' in response:

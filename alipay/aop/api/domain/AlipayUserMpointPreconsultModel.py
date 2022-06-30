@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayUserMpointPreconsultModel(object):
 
     def __init__(self):
+        self._biz_sub_scene = None
         self._biz_sub_type = None
         self._biz_type = None
         self._point = None
         self._user_id = None
 
+    @property
+    def biz_sub_scene(self):
+        return self._biz_sub_scene
+
+    @biz_sub_scene.setter
+    def biz_sub_scene(self, value):
+        self._biz_sub_scene = value
     @property
     def biz_sub_type(self):
         return self._biz_sub_type
@@ -45,6 +53,11 @@ class AlipayUserMpointPreconsultModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_sub_scene:
+            if hasattr(self.biz_sub_scene, 'to_alipay_dict'):
+                params['biz_sub_scene'] = self.biz_sub_scene.to_alipay_dict()
+            else:
+                params['biz_sub_scene'] = self.biz_sub_scene
         if self.biz_sub_type:
             if hasattr(self.biz_sub_type, 'to_alipay_dict'):
                 params['biz_sub_type'] = self.biz_sub_type.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayUserMpointPreconsultModel(object):
         if not d:
             return None
         o = AlipayUserMpointPreconsultModel()
+        if 'biz_sub_scene' in d:
+            o.biz_sub_scene = d['biz_sub_scene']
         if 'biz_sub_type' in d:
             o.biz_sub_type = d['biz_sub_type']
         if 'biz_type' in d:

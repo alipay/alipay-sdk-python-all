@@ -11,6 +11,7 @@ class HealthDrugCatalogueItem(object):
         self._catalogue_listed = None
         self._dosage_forms = None
         self._drug_classification = None
+        self._drug_type = None
         self._general_name = None
         self._inventory = None
         self._item_id = None
@@ -45,6 +46,13 @@ class HealthDrugCatalogueItem(object):
     @drug_classification.setter
     def drug_classification(self, value):
         self._drug_classification = value
+    @property
+    def drug_type(self):
+        return self._drug_type
+
+    @drug_type.setter
+    def drug_type(self, value):
+        self._drug_type = value
     @property
     def general_name(self):
         return self._general_name
@@ -148,6 +156,11 @@ class HealthDrugCatalogueItem(object):
                 params['drug_classification'] = self.drug_classification.to_alipay_dict()
             else:
                 params['drug_classification'] = self.drug_classification
+        if self.drug_type:
+            if hasattr(self.drug_type, 'to_alipay_dict'):
+                params['drug_type'] = self.drug_type.to_alipay_dict()
+            else:
+                params['drug_type'] = self.drug_type
         if self.general_name:
             if hasattr(self.general_name, 'to_alipay_dict'):
                 params['general_name'] = self.general_name.to_alipay_dict()
@@ -221,6 +234,8 @@ class HealthDrugCatalogueItem(object):
             o.dosage_forms = d['dosage_forms']
         if 'drug_classification' in d:
             o.drug_classification = d['drug_classification']
+        if 'drug_type' in d:
+            o.drug_type = d['drug_type']
         if 'general_name' in d:
             o.general_name = d['general_name']
         if 'inventory' in d:

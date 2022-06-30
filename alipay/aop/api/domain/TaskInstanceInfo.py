@@ -11,6 +11,7 @@ class TaskInstanceInfo(object):
         self._current_indicator = None
         self._incentive_mode = None
         self._incentive_rule = None
+        self._marker_promoted_count = None
         self._max_incentive_count = None
         self._published_point_amount = None
         self._status = None
@@ -46,6 +47,13 @@ class TaskInstanceInfo(object):
     @incentive_rule.setter
     def incentive_rule(self, value):
         self._incentive_rule = value
+    @property
+    def marker_promoted_count(self):
+        return self._marker_promoted_count
+
+    @marker_promoted_count.setter
+    def marker_promoted_count(self, value):
+        self._marker_promoted_count = value
     @property
     def max_incentive_count(self):
         return self._max_incentive_count
@@ -156,6 +164,11 @@ class TaskInstanceInfo(object):
                 params['incentive_rule'] = self.incentive_rule.to_alipay_dict()
             else:
                 params['incentive_rule'] = self.incentive_rule
+        if self.marker_promoted_count:
+            if hasattr(self.marker_promoted_count, 'to_alipay_dict'):
+                params['marker_promoted_count'] = self.marker_promoted_count.to_alipay_dict()
+            else:
+                params['marker_promoted_count'] = self.marker_promoted_count
         if self.max_incentive_count:
             if hasattr(self.max_incentive_count, 'to_alipay_dict'):
                 params['max_incentive_count'] = self.max_incentive_count.to_alipay_dict()
@@ -234,6 +247,8 @@ class TaskInstanceInfo(object):
             o.incentive_mode = d['incentive_mode']
         if 'incentive_rule' in d:
             o.incentive_rule = d['incentive_rule']
+        if 'marker_promoted_count' in d:
+            o.marker_promoted_count = d['marker_promoted_count']
         if 'max_incentive_count' in d:
             o.max_incentive_count = d['max_incentive_count']
         if 'published_point_amount' in d:

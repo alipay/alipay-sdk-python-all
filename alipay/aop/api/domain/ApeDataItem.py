@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ApeDataItem(object):
 
     def __init__(self):
+        self._available_city_list = None
         self._brand = None
         self._cate = None
         self._cate_cnt = None
@@ -28,9 +29,20 @@ class ApeDataItem(object):
         self._source_id = None
         self._spu_id = None
         self._status = None
+        self._stock_num = None
         self._tags = None
         self._title = None
 
+    @property
+    def available_city_list(self):
+        return self._available_city_list
+
+    @available_city_list.setter
+    def available_city_list(self, value):
+        if isinstance(value, list):
+            self._available_city_list = list()
+            for i in value:
+                self._available_city_list.append(i)
     @property
     def brand(self):
         return self._brand
@@ -175,6 +187,13 @@ class ApeDataItem(object):
     def status(self, value):
         self._status = value
     @property
+    def stock_num(self):
+        return self._stock_num
+
+    @stock_num.setter
+    def stock_num(self, value):
+        self._stock_num = value
+    @property
     def tags(self):
         return self._tags
 
@@ -192,6 +211,16 @@ class ApeDataItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.available_city_list:
+            if isinstance(self.available_city_list, list):
+                for i in range(0, len(self.available_city_list)):
+                    element = self.available_city_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.available_city_list[i] = element.to_alipay_dict()
+            if hasattr(self.available_city_list, 'to_alipay_dict'):
+                params['available_city_list'] = self.available_city_list.to_alipay_dict()
+            else:
+                params['available_city_list'] = self.available_city_list
         if self.brand:
             if hasattr(self.brand, 'to_alipay_dict'):
                 params['brand'] = self.brand.to_alipay_dict()
@@ -297,6 +326,11 @@ class ApeDataItem(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.stock_num:
+            if hasattr(self.stock_num, 'to_alipay_dict'):
+                params['stock_num'] = self.stock_num.to_alipay_dict()
+            else:
+                params['stock_num'] = self.stock_num
         if self.tags:
             if hasattr(self.tags, 'to_alipay_dict'):
                 params['tags'] = self.tags.to_alipay_dict()
@@ -314,6 +348,8 @@ class ApeDataItem(object):
         if not d:
             return None
         o = ApeDataItem()
+        if 'available_city_list' in d:
+            o.available_city_list = d['available_city_list']
         if 'brand' in d:
             o.brand = d['brand']
         if 'cate' in d:
@@ -354,6 +390,8 @@ class ApeDataItem(object):
             o.spu_id = d['spu_id']
         if 'status' in d:
             o.status = d['status']
+        if 'stock_num' in d:
+            o.stock_num = d['stock_num']
         if 'tags' in d:
             o.tags = d['tags']
         if 'title' in d:

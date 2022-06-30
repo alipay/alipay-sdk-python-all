@@ -11,6 +11,7 @@ class AlipayTradePrecreateResponse(AlipayResponse):
         super(AlipayTradePrecreateResponse, self).__init__()
         self._out_trade_no = None
         self._qr_code = None
+        self._share_code = None
 
     @property
     def out_trade_no(self):
@@ -26,6 +27,13 @@ class AlipayTradePrecreateResponse(AlipayResponse):
     @qr_code.setter
     def qr_code(self, value):
         self._qr_code = value
+    @property
+    def share_code(self):
+        return self._share_code
+
+    @share_code.setter
+    def share_code(self, value):
+        self._share_code = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradePrecreateResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayTradePrecreateResponse(AlipayResponse):
             self.out_trade_no = response['out_trade_no']
         if 'qr_code' in response:
             self.qr_code = response['qr_code']
+        if 'share_code' in response:
+            self.share_code = response['share_code']

@@ -5,11 +5,13 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.DiscountInfoDataDTO import DiscountInfoDataDTO
 from alipay.aop.api.domain.ItemOrderInfoDTO import ItemOrderInfoDTO
+from alipay.aop.api.domain.ReceiptMerchantExtendInfo import ReceiptMerchantExtendInfo
 
 
 class ReceiptSimpleOrderDTO(object):
 
     def __init__(self):
+        self._alipay_amout = None
         self._alipay_uid = None
         self._amount = None
         self._currency = None
@@ -17,12 +19,14 @@ class ReceiptSimpleOrderDTO(object):
         self._discount_info_list = None
         self._invoice_entry = None
         self._item_order_list = None
+        self._merchant_extend_info = None
         self._merchant_name = None
         self._order_create_time = None
         self._order_link = None
         self._order_modified_time = None
         self._order_pay_time = None
         self._order_type = None
+        self._other_pay_amount = None
         self._out_biz_no = None
         self._pay_amount = None
         self._pay_type = None
@@ -33,6 +37,13 @@ class ReceiptSimpleOrderDTO(object):
         self._trade_no = None
         self._trade_type = None
 
+    @property
+    def alipay_amout(self):
+        return self._alipay_amout
+
+    @alipay_amout.setter
+    def alipay_amout(self, value):
+        self._alipay_amout = value
     @property
     def alipay_uid(self):
         return self._alipay_uid
@@ -95,6 +106,16 @@ class ReceiptSimpleOrderDTO(object):
                 else:
                     self._item_order_list.append(ItemOrderInfoDTO.from_alipay_dict(i))
     @property
+    def merchant_extend_info(self):
+        return self._merchant_extend_info
+
+    @merchant_extend_info.setter
+    def merchant_extend_info(self, value):
+        if isinstance(value, ReceiptMerchantExtendInfo):
+            self._merchant_extend_info = value
+        else:
+            self._merchant_extend_info = ReceiptMerchantExtendInfo.from_alipay_dict(value)
+    @property
     def merchant_name(self):
         return self._merchant_name
 
@@ -136,6 +157,13 @@ class ReceiptSimpleOrderDTO(object):
     @order_type.setter
     def order_type(self, value):
         self._order_type = value
+    @property
+    def other_pay_amount(self):
+        return self._other_pay_amount
+
+    @other_pay_amount.setter
+    def other_pay_amount(self, value):
+        self._other_pay_amount = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -203,6 +231,11 @@ class ReceiptSimpleOrderDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_amout:
+            if hasattr(self.alipay_amout, 'to_alipay_dict'):
+                params['alipay_amout'] = self.alipay_amout.to_alipay_dict()
+            else:
+                params['alipay_amout'] = self.alipay_amout
         if self.alipay_uid:
             if hasattr(self.alipay_uid, 'to_alipay_dict'):
                 params['alipay_uid'] = self.alipay_uid.to_alipay_dict()
@@ -248,6 +281,11 @@ class ReceiptSimpleOrderDTO(object):
                 params['item_order_list'] = self.item_order_list.to_alipay_dict()
             else:
                 params['item_order_list'] = self.item_order_list
+        if self.merchant_extend_info:
+            if hasattr(self.merchant_extend_info, 'to_alipay_dict'):
+                params['merchant_extend_info'] = self.merchant_extend_info.to_alipay_dict()
+            else:
+                params['merchant_extend_info'] = self.merchant_extend_info
         if self.merchant_name:
             if hasattr(self.merchant_name, 'to_alipay_dict'):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
@@ -278,6 +316,11 @@ class ReceiptSimpleOrderDTO(object):
                 params['order_type'] = self.order_type.to_alipay_dict()
             else:
                 params['order_type'] = self.order_type
+        if self.other_pay_amount:
+            if hasattr(self.other_pay_amount, 'to_alipay_dict'):
+                params['other_pay_amount'] = self.other_pay_amount.to_alipay_dict()
+            else:
+                params['other_pay_amount'] = self.other_pay_amount
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -330,6 +373,8 @@ class ReceiptSimpleOrderDTO(object):
         if not d:
             return None
         o = ReceiptSimpleOrderDTO()
+        if 'alipay_amout' in d:
+            o.alipay_amout = d['alipay_amout']
         if 'alipay_uid' in d:
             o.alipay_uid = d['alipay_uid']
         if 'amount' in d:
@@ -344,6 +389,8 @@ class ReceiptSimpleOrderDTO(object):
             o.invoice_entry = d['invoice_entry']
         if 'item_order_list' in d:
             o.item_order_list = d['item_order_list']
+        if 'merchant_extend_info' in d:
+            o.merchant_extend_info = d['merchant_extend_info']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
         if 'order_create_time' in d:
@@ -356,6 +403,8 @@ class ReceiptSimpleOrderDTO(object):
             o.order_pay_time = d['order_pay_time']
         if 'order_type' in d:
             o.order_type = d['order_type']
+        if 'other_pay_amount' in d:
+            o.other_pay_amount = d['other_pay_amount']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'pay_amount' in d:

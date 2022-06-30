@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditEpCertificationInitializeModel(object):
 
     def __init__(self):
+        self._alipay_account = None
         self._certify_category = None
         self._certify_return_url = None
         self._ep_cert_no = None
@@ -18,6 +19,13 @@ class ZhimaCreditEpCertificationInitializeModel(object):
         self._user_id = None
         self._user_name = None
 
+    @property
+    def alipay_account(self):
+        return self._alipay_account
+
+    @alipay_account.setter
+    def alipay_account(self, value):
+        self._alipay_account = value
     @property
     def certify_category(self):
         return self._certify_category
@@ -85,6 +93,11 @@ class ZhimaCreditEpCertificationInitializeModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_account:
+            if hasattr(self.alipay_account, 'to_alipay_dict'):
+                params['alipay_account'] = self.alipay_account.to_alipay_dict()
+            else:
+                params['alipay_account'] = self.alipay_account
         if self.certify_category:
             if hasattr(self.certify_category, 'to_alipay_dict'):
                 params['certify_category'] = self.certify_category.to_alipay_dict()
@@ -137,6 +150,8 @@ class ZhimaCreditEpCertificationInitializeModel(object):
         if not d:
             return None
         o = ZhimaCreditEpCertificationInitializeModel()
+        if 'alipay_account' in d:
+            o.alipay_account = d['alipay_account']
         if 'certify_category' in d:
             o.certify_category = d['certify_category']
         if 'certify_return_url' in d:

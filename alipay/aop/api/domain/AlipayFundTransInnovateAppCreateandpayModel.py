@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Participant import Participant
+from alipay.aop.api.domain.PayerPaymentDTO import PayerPaymentDTO
 from alipay.aop.api.domain.Participant import Participant
 
 
@@ -15,6 +16,7 @@ class AlipayFundTransInnovateAppCreateandpayModel(object):
         self._order_title = None
         self._out_biz_no = None
         self._payee_info = None
+        self._payer_enable_channels_info_list = None
         self._payer_info = None
         self._product_code = None
         self._remark = None
@@ -59,6 +61,19 @@ class AlipayFundTransInnovateAppCreateandpayModel(object):
             self._payee_info = value
         else:
             self._payee_info = Participant.from_alipay_dict(value)
+    @property
+    def payer_enable_channels_info_list(self):
+        return self._payer_enable_channels_info_list
+
+    @payer_enable_channels_info_list.setter
+    def payer_enable_channels_info_list(self, value):
+        if isinstance(value, list):
+            self._payer_enable_channels_info_list = list()
+            for i in value:
+                if isinstance(i, PayerPaymentDTO):
+                    self._payer_enable_channels_info_list.append(i)
+                else:
+                    self._payer_enable_channels_info_list.append(PayerPaymentDTO.from_alipay_dict(i))
     @property
     def payer_info(self):
         return self._payer_info
@@ -126,6 +141,16 @@ class AlipayFundTransInnovateAppCreateandpayModel(object):
                 params['payee_info'] = self.payee_info.to_alipay_dict()
             else:
                 params['payee_info'] = self.payee_info
+        if self.payer_enable_channels_info_list:
+            if isinstance(self.payer_enable_channels_info_list, list):
+                for i in range(0, len(self.payer_enable_channels_info_list)):
+                    element = self.payer_enable_channels_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.payer_enable_channels_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.payer_enable_channels_info_list, 'to_alipay_dict'):
+                params['payer_enable_channels_info_list'] = self.payer_enable_channels_info_list.to_alipay_dict()
+            else:
+                params['payer_enable_channels_info_list'] = self.payer_enable_channels_info_list
         if self.payer_info:
             if hasattr(self.payer_info, 'to_alipay_dict'):
                 params['payer_info'] = self.payer_info.to_alipay_dict()
@@ -168,6 +193,8 @@ class AlipayFundTransInnovateAppCreateandpayModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'payee_info' in d:
             o.payee_info = d['payee_info']
+        if 'payer_enable_channels_info_list' in d:
+            o.payer_enable_channels_info_list = d['payer_enable_channels_info_list']
         if 'payer_info' in d:
             o.payer_info = d['payer_info']
         if 'product_code' in d:

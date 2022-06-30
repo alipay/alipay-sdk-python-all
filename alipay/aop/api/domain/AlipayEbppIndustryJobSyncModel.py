@@ -25,6 +25,7 @@ class AlipayEbppIndustryJobSyncModel(object):
         self._job_type = None
         self._job_worth_req = None
         self._out_job_id = None
+        self._part_time_mode = None
         self._pay_period = None
         self._priority = None
         self._salary = None
@@ -155,6 +156,13 @@ class AlipayEbppIndustryJobSyncModel(object):
     @out_job_id.setter
     def out_job_id(self, value):
         self._out_job_id = value
+    @property
+    def part_time_mode(self):
+        return self._part_time_mode
+
+    @part_time_mode.setter
+    def part_time_mode(self, value):
+        self._part_time_mode = value
     @property
     def pay_period(self):
         return self._pay_period
@@ -289,6 +297,11 @@ class AlipayEbppIndustryJobSyncModel(object):
                 params['out_job_id'] = self.out_job_id.to_alipay_dict()
             else:
                 params['out_job_id'] = self.out_job_id
+        if self.part_time_mode:
+            if hasattr(self.part_time_mode, 'to_alipay_dict'):
+                params['part_time_mode'] = self.part_time_mode.to_alipay_dict()
+            else:
+                params['part_time_mode'] = self.part_time_mode
         if self.pay_period:
             if hasattr(self.pay_period, 'to_alipay_dict'):
                 params['pay_period'] = self.pay_period.to_alipay_dict()
@@ -353,6 +366,8 @@ class AlipayEbppIndustryJobSyncModel(object):
             o.job_worth_req = d['job_worth_req']
         if 'out_job_id' in d:
             o.out_job_id = d['out_job_id']
+        if 'part_time_mode' in d:
+            o.part_time_mode = d['part_time_mode']
         if 'pay_period' in d:
             o.pay_period = d['pay_period']
         if 'priority' in d:

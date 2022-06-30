@@ -12,6 +12,7 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
         self._out_order_id = None
         self._out_request_no = None
         self._refund_amount = None
+        self._refund_reason = None
 
     @property
     def biz_agreement_no(self):
@@ -41,6 +42,13 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
     @refund_amount.setter
     def refund_amount(self, value):
         self._refund_amount = value
+    @property
+    def refund_reason(self):
+        return self._refund_reason
+
+    @refund_reason.setter
+    def refund_reason(self, value):
+        self._refund_reason = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
             else:
                 params['refund_amount'] = self.refund_amount
+        if self.refund_reason:
+            if hasattr(self.refund_reason, 'to_alipay_dict'):
+                params['refund_reason'] = self.refund_reason.to_alipay_dict()
+            else:
+                params['refund_reason'] = self.refund_reason
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
             o.out_request_no = d['out_request_no']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
+        if 'refund_reason' in d:
+            o.refund_reason = d['refund_reason']
         return o
 
 

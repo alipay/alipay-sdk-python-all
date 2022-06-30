@@ -10,6 +10,7 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaCreditEpCreditlinkCollectQueryResponse, self).__init__()
+        self._data_content = None
         self._data_status = None
         self._data_type = None
         self._encrypt_model = None
@@ -19,6 +20,13 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
         self._merchant_request_id = None
         self._secret = None
 
+    @property
+    def data_content(self):
+        return self._data_content
+
+    @data_content.setter
+    def data_content(self, value):
+        self._data_content = value
     @property
     def data_status(self):
         return self._data_status
@@ -87,6 +95,8 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpCreditlinkCollectQueryResponse, self).parse_response_content(response_content)
+        if 'data_content' in response:
+            self.data_content = response['data_content']
         if 'data_status' in response:
             self.data_status = response['data_status']
         if 'data_type' in response:

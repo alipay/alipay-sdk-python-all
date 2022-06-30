@@ -10,6 +10,7 @@ class SendVoucherInfoResult(object):
     def __init__(self):
         self._merchant_order_url = None
         self._voucher_code = None
+        self._voucher_code_url = None
 
     @property
     def merchant_order_url(self):
@@ -25,6 +26,13 @@ class SendVoucherInfoResult(object):
     @voucher_code.setter
     def voucher_code(self, value):
         self._voucher_code = value
+    @property
+    def voucher_code_url(self):
+        return self._voucher_code_url
+
+    @voucher_code_url.setter
+    def voucher_code_url(self, value):
+        self._voucher_code_url = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class SendVoucherInfoResult(object):
                 params['voucher_code'] = self.voucher_code.to_alipay_dict()
             else:
                 params['voucher_code'] = self.voucher_code
+        if self.voucher_code_url:
+            if hasattr(self.voucher_code_url, 'to_alipay_dict'):
+                params['voucher_code_url'] = self.voucher_code_url.to_alipay_dict()
+            else:
+                params['voucher_code_url'] = self.voucher_code_url
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class SendVoucherInfoResult(object):
             o.merchant_order_url = d['merchant_order_url']
         if 'voucher_code' in d:
             o.voucher_code = d['voucher_code']
+        if 'voucher_code_url' in d:
+            o.voucher_code_url = d['voucher_code_url']
         return o
 
 

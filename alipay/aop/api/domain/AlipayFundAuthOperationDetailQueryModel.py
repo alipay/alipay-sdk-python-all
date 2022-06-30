@@ -13,6 +13,7 @@ class AlipayFundAuthOperationDetailQueryModel(object):
         self._operation_type = None
         self._out_order_no = None
         self._out_request_no = None
+        self._query_options = None
 
     @property
     def auth_no(self):
@@ -49,6 +50,16 @@ class AlipayFundAuthOperationDetailQueryModel(object):
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
 
 
     def to_alipay_dict(self):
@@ -78,6 +89,16 @@ class AlipayFundAuthOperationDetailQueryModel(object):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         return params
 
     @staticmethod
@@ -95,6 +116,8 @@ class AlipayFundAuthOperationDetailQueryModel(object):
             o.out_order_no = d['out_order_no']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         return o
 
 

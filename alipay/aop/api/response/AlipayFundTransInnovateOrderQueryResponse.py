@@ -16,6 +16,7 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
         self._order_id = None
         self._out_biz_no = None
         self._pay_date = None
+        self._refund_date = None
         self._status = None
         self._trans_amount = None
 
@@ -69,6 +70,13 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
     def pay_date(self, value):
         self._pay_date = value
     @property
+    def refund_date(self):
+        return self._refund_date
+
+    @refund_date.setter
+    def refund_date(self, value):
+        self._refund_date = value
+    @property
     def status(self):
         return self._status
 
@@ -99,6 +107,8 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
             self.out_biz_no = response['out_biz_no']
         if 'pay_date' in response:
             self.pay_date = response['pay_date']
+        if 'refund_date' in response:
+            self.refund_date = response['refund_date']
         if 'status' in response:
             self.status = response['status']
         if 'trans_amount' in response:

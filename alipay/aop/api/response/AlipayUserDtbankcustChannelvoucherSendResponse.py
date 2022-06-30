@@ -9,6 +9,7 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayUserDtbankcustChannelvoucherSendResponse, self).__init__()
+        self._account_no = None
         self._activity_id = None
         self._activity_order_id = None
         self._discount_threshold_amt = None
@@ -18,6 +19,13 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
         self._send_status = None
         self._voucher_id = None
 
+    @property
+    def account_no(self):
+        return self._account_no
+
+    @account_no.setter
+    def account_no(self, value):
+        self._account_no = value
     @property
     def activity_id(self):
         return self._activity_id
@@ -77,6 +85,8 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserDtbankcustChannelvoucherSendResponse, self).parse_response_content(response_content)
+        if 'account_no' in response:
+            self.account_no = response['account_no']
         if 'activity_id' in response:
             self.activity_id = response['activity_id']
         if 'activity_order_id' in response:

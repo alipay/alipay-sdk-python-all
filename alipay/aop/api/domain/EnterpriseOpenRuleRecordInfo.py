@@ -19,6 +19,7 @@ class EnterpriseOpenRuleRecordInfo(object):
         self._open_mode = None
         self._open_type = None
         self._owner_id = None
+        self._tag = None
 
     @property
     def bill_month_day(self):
@@ -97,6 +98,13 @@ class EnterpriseOpenRuleRecordInfo(object):
     @owner_id.setter
     def owner_id(self, value):
         self._owner_id = value
+    @property
+    def tag(self):
+        return self._tag
+
+    @tag.setter
+    def tag(self, value):
+        self._tag = value
 
 
     def to_alipay_dict(self):
@@ -156,6 +164,11 @@ class EnterpriseOpenRuleRecordInfo(object):
                 params['owner_id'] = self.owner_id.to_alipay_dict()
             else:
                 params['owner_id'] = self.owner_id
+        if self.tag:
+            if hasattr(self.tag, 'to_alipay_dict'):
+                params['tag'] = self.tag.to_alipay_dict()
+            else:
+                params['tag'] = self.tag
         return params
 
     @staticmethod
@@ -185,6 +198,8 @@ class EnterpriseOpenRuleRecordInfo(object):
             o.open_type = d['open_type']
         if 'owner_id' in d:
             o.owner_id = d['owner_id']
+        if 'tag' in d:
+            o.tag = d['tag']
         return o
 
 
