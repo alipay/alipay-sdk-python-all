@@ -14,6 +14,7 @@ class BizActionLogDTO(object):
         self._biz_name = None
         self._biz_type = None
         self._biz_uk_id = None
+        self._currency_code = None
         self._gmt_create = None
         self._gmt_modified = None
         self._id = None
@@ -61,6 +62,13 @@ class BizActionLogDTO(object):
     @biz_uk_id.setter
     def biz_uk_id(self, value):
         self._biz_uk_id = value
+    @property
+    def currency_code(self):
+        return self._currency_code
+
+    @currency_code.setter
+    def currency_code(self, value):
+        self._currency_code = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -123,6 +131,11 @@ class BizActionLogDTO(object):
                 params['biz_uk_id'] = self.biz_uk_id.to_alipay_dict()
             else:
                 params['biz_uk_id'] = self.biz_uk_id
+        if self.currency_code:
+            if hasattr(self.currency_code, 'to_alipay_dict'):
+                params['currency_code'] = self.currency_code.to_alipay_dict()
+            else:
+                params['currency_code'] = self.currency_code
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -162,6 +175,8 @@ class BizActionLogDTO(object):
             o.biz_type = d['biz_type']
         if 'biz_uk_id' in d:
             o.biz_uk_id = d['biz_uk_id']
+        if 'currency_code' in d:
+            o.currency_code = d['currency_code']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

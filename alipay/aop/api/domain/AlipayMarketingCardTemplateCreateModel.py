@@ -33,6 +33,7 @@ class AlipayMarketingCardTemplateCreateModel(object):
         self._request_id = None
         self._service_label_list = None
         self._shop_ids = None
+        self._spi_app_id = None
         self._template_benefit_info = None
         self._template_style_info = None
         self._write_off_type = None
@@ -188,6 +189,13 @@ class AlipayMarketingCardTemplateCreateModel(object):
             for i in value:
                 self._shop_ids.append(i)
     @property
+    def spi_app_id(self):
+        return self._spi_app_id
+
+    @spi_app_id.setter
+    def spi_app_id(self, value):
+        self._spi_app_id = value
+    @property
     def template_benefit_info(self):
         return self._template_benefit_info
 
@@ -331,6 +339,11 @@ class AlipayMarketingCardTemplateCreateModel(object):
                 params['shop_ids'] = self.shop_ids.to_alipay_dict()
             else:
                 params['shop_ids'] = self.shop_ids
+        if self.spi_app_id:
+            if hasattr(self.spi_app_id, 'to_alipay_dict'):
+                params['spi_app_id'] = self.spi_app_id.to_alipay_dict()
+            else:
+                params['spi_app_id'] = self.spi_app_id
         if self.template_benefit_info:
             if isinstance(self.template_benefit_info, list):
                 for i in range(0, len(self.template_benefit_info)):
@@ -388,6 +401,8 @@ class AlipayMarketingCardTemplateCreateModel(object):
             o.service_label_list = d['service_label_list']
         if 'shop_ids' in d:
             o.shop_ids = d['shop_ids']
+        if 'spi_app_id' in d:
+            o.spi_app_id = d['spi_app_id']
         if 'template_benefit_info' in d:
             o.template_benefit_info = d['template_benefit_info']
         if 'template_style_info' in d:

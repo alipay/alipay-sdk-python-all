@@ -15,6 +15,7 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
         self._invoice_title_id = None
         self._open_mode = None
         self._seller_type = None
+        self._tag = None
 
     @property
     def account_id(self):
@@ -65,6 +66,13 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
     @seller_type.setter
     def seller_type(self, value):
         self._seller_type = value
+    @property
+    def tag(self):
+        return self._tag
+
+    @tag.setter
+    def tag(self, value):
+        self._tag = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
                 params['seller_type'] = self.seller_type.to_alipay_dict()
             else:
                 params['seller_type'] = self.seller_type
+        if self.tag:
+            if hasattr(self.tag, 'to_alipay_dict'):
+                params['tag'] = self.tag.to_alipay_dict()
+            else:
+                params['tag'] = self.tag
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
             o.open_mode = d['open_mode']
         if 'seller_type' in d:
             o.seller_type = d['seller_type']
+        if 'tag' in d:
+            o.tag = d['tag']
         return o
 
 

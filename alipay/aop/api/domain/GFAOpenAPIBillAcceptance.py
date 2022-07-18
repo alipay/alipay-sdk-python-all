@@ -8,6 +8,7 @@ from alipay.aop.api.domain.GFAOpenAPIParticipantInfo import GFAOpenAPIParticipan
 from alipay.aop.api.domain.GFAOpenAPIParticipantInfo import GFAOpenAPIParticipantInfo
 from alipay.aop.api.domain.GFAOpenAPIParticipantInfo import GFAOpenAPIParticipantInfo
 from alipay.aop.api.domain.GFAOpenAPIParticipantInfo import GFAOpenAPIParticipantInfo
+from alipay.aop.api.domain.GFAOpenAPIOuterTaxInfo import GFAOpenAPIOuterTaxInfo
 
 
 class GFAOpenAPIBillAcceptance(object):
@@ -27,6 +28,7 @@ class GFAOpenAPIBillAcceptance(object):
         self._gmt_service = None
         self._nonpayment_amount = None
         self._out_business_no = None
+        self._outer_tax_source = None
         self._pay_status = None
         self._payee_participant = None
         self._payer_participant = None
@@ -39,6 +41,7 @@ class GFAOpenAPIBillAcceptance(object):
         self._sign_participant = None
         self._sub_out_business_no = None
         self._system_origin = None
+        self._tax_info = None
         self._tnt_inst_id = None
 
     @property
@@ -143,6 +146,13 @@ class GFAOpenAPIBillAcceptance(object):
     def out_business_no(self, value):
         self._out_business_no = value
     @property
+    def outer_tax_source(self):
+        return self._outer_tax_source
+
+    @outer_tax_source.setter
+    def outer_tax_source(self, value):
+        self._outer_tax_source = value
+    @property
     def pay_status(self):
         return self._pay_status
 
@@ -239,6 +249,16 @@ class GFAOpenAPIBillAcceptance(object):
     def system_origin(self, value):
         self._system_origin = value
     @property
+    def tax_info(self):
+        return self._tax_info
+
+    @tax_info.setter
+    def tax_info(self, value):
+        if isinstance(value, GFAOpenAPIOuterTaxInfo):
+            self._tax_info = value
+        else:
+            self._tax_info = GFAOpenAPIOuterTaxInfo.from_alipay_dict(value)
+    @property
     def tnt_inst_id(self):
         return self._tnt_inst_id
 
@@ -319,6 +339,11 @@ class GFAOpenAPIBillAcceptance(object):
                 params['out_business_no'] = self.out_business_no.to_alipay_dict()
             else:
                 params['out_business_no'] = self.out_business_no
+        if self.outer_tax_source:
+            if hasattr(self.outer_tax_source, 'to_alipay_dict'):
+                params['outer_tax_source'] = self.outer_tax_source.to_alipay_dict()
+            else:
+                params['outer_tax_source'] = self.outer_tax_source
         if self.pay_status:
             if hasattr(self.pay_status, 'to_alipay_dict'):
                 params['pay_status'] = self.pay_status.to_alipay_dict()
@@ -379,6 +404,11 @@ class GFAOpenAPIBillAcceptance(object):
                 params['system_origin'] = self.system_origin.to_alipay_dict()
             else:
                 params['system_origin'] = self.system_origin
+        if self.tax_info:
+            if hasattr(self.tax_info, 'to_alipay_dict'):
+                params['tax_info'] = self.tax_info.to_alipay_dict()
+            else:
+                params['tax_info'] = self.tax_info
         if self.tnt_inst_id:
             if hasattr(self.tnt_inst_id, 'to_alipay_dict'):
                 params['tnt_inst_id'] = self.tnt_inst_id.to_alipay_dict()
@@ -419,6 +449,8 @@ class GFAOpenAPIBillAcceptance(object):
             o.nonpayment_amount = d['nonpayment_amount']
         if 'out_business_no' in d:
             o.out_business_no = d['out_business_no']
+        if 'outer_tax_source' in d:
+            o.outer_tax_source = d['outer_tax_source']
         if 'pay_status' in d:
             o.pay_status = d['pay_status']
         if 'payee_participant' in d:
@@ -443,6 +475,8 @@ class GFAOpenAPIBillAcceptance(object):
             o.sub_out_business_no = d['sub_out_business_no']
         if 'system_origin' in d:
             o.system_origin = d['system_origin']
+        if 'tax_info' in d:
+            o.tax_info = d['tax_info']
         if 'tnt_inst_id' in d:
             o.tnt_inst_id = d['tnt_inst_id']
         return o

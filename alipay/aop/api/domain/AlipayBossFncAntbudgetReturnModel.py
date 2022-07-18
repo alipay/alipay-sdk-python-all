@@ -12,8 +12,10 @@ class AlipayBossFncAntbudgetReturnModel(object):
         self._biz_budget_apply_code = None
         self._biz_type = None
         self._biz_uk_id = None
+        self._currency_code = None
         self._idempotent_id = None
         self._modify_type = None
+        self._time_zone = None
 
     @property
     def amount(self):
@@ -44,6 +46,13 @@ class AlipayBossFncAntbudgetReturnModel(object):
     def biz_uk_id(self, value):
         self._biz_uk_id = value
     @property
+    def currency_code(self):
+        return self._currency_code
+
+    @currency_code.setter
+    def currency_code(self, value):
+        self._currency_code = value
+    @property
     def idempotent_id(self):
         return self._idempotent_id
 
@@ -57,6 +66,13 @@ class AlipayBossFncAntbudgetReturnModel(object):
     @modify_type.setter
     def modify_type(self, value):
         self._modify_type = value
+    @property
+    def time_zone(self):
+        return self._time_zone
+
+    @time_zone.setter
+    def time_zone(self, value):
+        self._time_zone = value
 
 
     def to_alipay_dict(self):
@@ -81,6 +97,11 @@ class AlipayBossFncAntbudgetReturnModel(object):
                 params['biz_uk_id'] = self.biz_uk_id.to_alipay_dict()
             else:
                 params['biz_uk_id'] = self.biz_uk_id
+        if self.currency_code:
+            if hasattr(self.currency_code, 'to_alipay_dict'):
+                params['currency_code'] = self.currency_code.to_alipay_dict()
+            else:
+                params['currency_code'] = self.currency_code
         if self.idempotent_id:
             if hasattr(self.idempotent_id, 'to_alipay_dict'):
                 params['idempotent_id'] = self.idempotent_id.to_alipay_dict()
@@ -91,6 +112,11 @@ class AlipayBossFncAntbudgetReturnModel(object):
                 params['modify_type'] = self.modify_type.to_alipay_dict()
             else:
                 params['modify_type'] = self.modify_type
+        if self.time_zone:
+            if hasattr(self.time_zone, 'to_alipay_dict'):
+                params['time_zone'] = self.time_zone.to_alipay_dict()
+            else:
+                params['time_zone'] = self.time_zone
         return params
 
     @staticmethod
@@ -106,10 +132,14 @@ class AlipayBossFncAntbudgetReturnModel(object):
             o.biz_type = d['biz_type']
         if 'biz_uk_id' in d:
             o.biz_uk_id = d['biz_uk_id']
+        if 'currency_code' in d:
+            o.currency_code = d['currency_code']
         if 'idempotent_id' in d:
             o.idempotent_id = d['idempotent_id']
         if 'modify_type' in d:
             o.modify_type = d['modify_type']
+        if 'time_zone' in d:
+            o.time_zone = d['time_zone']
         return o
 
 

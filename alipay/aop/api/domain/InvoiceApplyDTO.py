@@ -11,6 +11,8 @@ class InvoiceApplyDTO(object):
         self._apply_amount = None
         self._apply_id = None
         self._batch_id = None
+        self._gmt_biz_end = None
+        self._gmt_biz_start = None
         self._invoice_kind = None
         self._invoice_type = None
         self._payee_register_no = None
@@ -44,6 +46,20 @@ class InvoiceApplyDTO(object):
     @batch_id.setter
     def batch_id(self, value):
         self._batch_id = value
+    @property
+    def gmt_biz_end(self):
+        return self._gmt_biz_end
+
+    @gmt_biz_end.setter
+    def gmt_biz_end(self, value):
+        self._gmt_biz_end = value
+    @property
+    def gmt_biz_start(self):
+        return self._gmt_biz_start
+
+    @gmt_biz_start.setter
+    def gmt_biz_start(self, value):
+        self._gmt_biz_start = value
     @property
     def invoice_kind(self):
         return self._invoice_kind
@@ -140,6 +156,16 @@ class InvoiceApplyDTO(object):
                 params['batch_id'] = self.batch_id.to_alipay_dict()
             else:
                 params['batch_id'] = self.batch_id
+        if self.gmt_biz_end:
+            if hasattr(self.gmt_biz_end, 'to_alipay_dict'):
+                params['gmt_biz_end'] = self.gmt_biz_end.to_alipay_dict()
+            else:
+                params['gmt_biz_end'] = self.gmt_biz_end
+        if self.gmt_biz_start:
+            if hasattr(self.gmt_biz_start, 'to_alipay_dict'):
+                params['gmt_biz_start'] = self.gmt_biz_start.to_alipay_dict()
+            else:
+                params['gmt_biz_start'] = self.gmt_biz_start
         if self.invoice_kind:
             if hasattr(self.invoice_kind, 'to_alipay_dict'):
                 params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
@@ -208,6 +234,10 @@ class InvoiceApplyDTO(object):
             o.apply_id = d['apply_id']
         if 'batch_id' in d:
             o.batch_id = d['batch_id']
+        if 'gmt_biz_end' in d:
+            o.gmt_biz_end = d['gmt_biz_end']
+        if 'gmt_biz_start' in d:
+            o.gmt_biz_start = d['gmt_biz_start']
         if 'invoice_kind' in d:
             o.invoice_kind = d['invoice_kind']
         if 'invoice_type' in d:

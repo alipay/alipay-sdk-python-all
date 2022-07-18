@@ -33,6 +33,7 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
         self._pub_channels = None
         self._service_label_list = None
         self._shop_ids = None
+        self._spi_app_id = None
         self._template_benefit_info = None
         self._template_style_info = None
 
@@ -180,6 +181,13 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
             for i in value:
                 self._shop_ids.append(i)
     @property
+    def spi_app_id(self):
+        return self._spi_app_id
+
+    @spi_app_id.setter
+    def spi_app_id(self, value):
+        self._spi_app_id = value
+    @property
     def template_benefit_info(self):
         return self._template_benefit_info
 
@@ -233,6 +241,8 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
             self.service_label_list = response['service_label_list']
         if 'shop_ids' in response:
             self.shop_ids = response['shop_ids']
+        if 'spi_app_id' in response:
+            self.spi_app_id = response['spi_app_id']
         if 'template_benefit_info' in response:
             self.template_benefit_info = response['template_benefit_info']
         if 'template_style_info' in response:

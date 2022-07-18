@@ -10,6 +10,8 @@ class EcOrderItem(object):
     def __init__(self):
         self._account_id = None
         self._biz_out_no = None
+        self._employee_id = None
+        self._enterprise_id = None
         self._gmt_create = None
         self._gmt_modified = None
         self._order_content = None
@@ -33,6 +35,20 @@ class EcOrderItem(object):
     @biz_out_no.setter
     def biz_out_no(self, value):
         self._biz_out_no = value
+    @property
+    def employee_id(self):
+        return self._employee_id
+
+    @employee_id.setter
+    def employee_id(self, value):
+        self._employee_id = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -103,6 +119,16 @@ class EcOrderItem(object):
                 params['biz_out_no'] = self.biz_out_no.to_alipay_dict()
             else:
                 params['biz_out_no'] = self.biz_out_no
+        if self.employee_id:
+            if hasattr(self.employee_id, 'to_alipay_dict'):
+                params['employee_id'] = self.employee_id.to_alipay_dict()
+            else:
+                params['employee_id'] = self.employee_id
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -154,6 +180,10 @@ class EcOrderItem(object):
             o.account_id = d['account_id']
         if 'biz_out_no' in d:
             o.biz_out_no = d['biz_out_no']
+        if 'employee_id' in d:
+            o.employee_id = d['employee_id']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

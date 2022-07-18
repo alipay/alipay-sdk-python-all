@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.TaskInstanceInfo import TaskInstanceInfo
+from alipay.aop.api.domain.TaskMarkerInfo import TaskMarkerInfo
 from alipay.aop.api.domain.TaskVoucherBasicInfo import TaskVoucherBasicInfo
 from alipay.aop.api.domain.TaskPointRankInfo import TaskPointRankInfo
 
@@ -13,6 +14,7 @@ class AlipayCommerceYuntaskHunterGetResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceYuntaskHunterGetResponse, self).__init__()
         self._task_instance_info = None
+        self._task_marker_info_list = None
         self._task_voucher_list = None
         self._user_ranking_info_list = None
 
@@ -26,6 +28,19 @@ class AlipayCommerceYuntaskHunterGetResponse(AlipayResponse):
             self._task_instance_info = value
         else:
             self._task_instance_info = TaskInstanceInfo.from_alipay_dict(value)
+    @property
+    def task_marker_info_list(self):
+        return self._task_marker_info_list
+
+    @task_marker_info_list.setter
+    def task_marker_info_list(self, value):
+        if isinstance(value, list):
+            self._task_marker_info_list = list()
+            for i in value:
+                if isinstance(i, TaskMarkerInfo):
+                    self._task_marker_info_list.append(i)
+                else:
+                    self._task_marker_info_list.append(TaskMarkerInfo.from_alipay_dict(i))
     @property
     def task_voucher_list(self):
         return self._task_voucher_list
@@ -57,6 +72,8 @@ class AlipayCommerceYuntaskHunterGetResponse(AlipayResponse):
         response = super(AlipayCommerceYuntaskHunterGetResponse, self).parse_response_content(response_content)
         if 'task_instance_info' in response:
             self.task_instance_info = response['task_instance_info']
+        if 'task_marker_info_list' in response:
+            self.task_marker_info_list = response['task_marker_info_list']
         if 'task_voucher_list' in response:
             self.task_voucher_list = response['task_voucher_list']
         if 'user_ranking_info_list' in response:

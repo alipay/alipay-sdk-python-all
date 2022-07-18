@@ -11,6 +11,7 @@ class AlipayCommerceEducateSchoolserviceModifyModel(object):
         self._content_id = None
         self._name = None
         self._out_service_id = None
+        self._school_name = None
         self._service_app_id = None
         self._service_id = None
         self._source_type = None
@@ -37,6 +38,13 @@ class AlipayCommerceEducateSchoolserviceModifyModel(object):
     @out_service_id.setter
     def out_service_id(self, value):
         self._out_service_id = value
+    @property
+    def school_name(self):
+        return self._school_name
+
+    @school_name.setter
+    def school_name(self, value):
+        self._school_name = value
     @property
     def service_app_id(self):
         return self._service_app_id
@@ -84,6 +92,11 @@ class AlipayCommerceEducateSchoolserviceModifyModel(object):
                 params['out_service_id'] = self.out_service_id.to_alipay_dict()
             else:
                 params['out_service_id'] = self.out_service_id
+        if self.school_name:
+            if hasattr(self.school_name, 'to_alipay_dict'):
+                params['school_name'] = self.school_name.to_alipay_dict()
+            else:
+                params['school_name'] = self.school_name
         if self.service_app_id:
             if hasattr(self.service_app_id, 'to_alipay_dict'):
                 params['service_app_id'] = self.service_app_id.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayCommerceEducateSchoolserviceModifyModel(object):
             o.name = d['name']
         if 'out_service_id' in d:
             o.out_service_id = d['out_service_id']
+        if 'school_name' in d:
+            o.school_name = d['school_name']
         if 'service_app_id' in d:
             o.service_app_id = d['service_app_id']
         if 'service_id' in d:

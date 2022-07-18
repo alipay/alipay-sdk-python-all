@@ -12,6 +12,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
         self._agreement_no = None
         self._effective_end_date = None
         self._effective_start_date = None
+        self._enterprise_id = None
         self._outer_source_id = None
         self._owner_id = None
         self._owner_type = None
@@ -48,6 +49,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
     @effective_start_date.setter
     def effective_start_date(self, value):
         self._effective_start_date = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def outer_source_id(self):
         return self._outer_source_id
@@ -121,6 +129,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
                 params['effective_start_date'] = self.effective_start_date.to_alipay_dict()
             else:
                 params['effective_start_date'] = self.effective_start_date
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.outer_source_id:
             if hasattr(self.outer_source_id, 'to_alipay_dict'):
                 params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
@@ -171,6 +184,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:
             o.effective_start_date = d['effective_start_date']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'outer_source_id' in d:
             o.outer_source_id = d['outer_source_id']
         if 'owner_id' in d:

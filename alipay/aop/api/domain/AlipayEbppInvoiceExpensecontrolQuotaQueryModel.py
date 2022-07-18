@@ -10,6 +10,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
     def __init__(self):
         self._account_id = None
         self._agreement_no = None
+        self._enterprise_id = None
         self._owner_id = None
         self._owner_type = None
         self._page_num = None
@@ -32,6 +33,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def owner_id(self):
         return self._owner_id
@@ -98,6 +106,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.owner_id:
             if hasattr(self.owner_id, 'to_alipay_dict'):
                 params['owner_id'] = self.owner_id.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
             o.account_id = d['account_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'owner_id' in d:
             o.owner_id = d['owner_id']
         if 'owner_type' in d:

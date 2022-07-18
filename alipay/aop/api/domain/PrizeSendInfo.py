@@ -11,6 +11,7 @@ class PrizeSendInfo(object):
         self._gmt_create = None
         self._gmt_modified = None
         self._modulus = None
+        self._price = None
         self._prize_id = None
         self._prize_name = None
         self._prize_type = None
@@ -38,6 +39,13 @@ class PrizeSendInfo(object):
     @modulus.setter
     def modulus(self, value):
         self._modulus = value
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        self._price = value
     @property
     def prize_id(self):
         return self._prize_id
@@ -92,6 +100,11 @@ class PrizeSendInfo(object):
                 params['modulus'] = self.modulus.to_alipay_dict()
             else:
                 params['modulus'] = self.modulus
+        if self.price:
+            if hasattr(self.price, 'to_alipay_dict'):
+                params['price'] = self.price.to_alipay_dict()
+            else:
+                params['price'] = self.price
         if self.prize_id:
             if hasattr(self.prize_id, 'to_alipay_dict'):
                 params['prize_id'] = self.prize_id.to_alipay_dict()
@@ -130,6 +143,8 @@ class PrizeSendInfo(object):
             o.gmt_modified = d['gmt_modified']
         if 'modulus' in d:
             o.modulus = d['modulus']
+        if 'price' in d:
+            o.price = d['price']
         if 'prize_id' in d:
             o.prize_id = d['prize_id']
         if 'prize_name' in d:

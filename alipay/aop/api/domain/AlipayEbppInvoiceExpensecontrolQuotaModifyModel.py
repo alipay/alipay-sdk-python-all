@@ -12,6 +12,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
         self._action = None
         self._agreement_no = None
         self._amount = None
+        self._enterprise_id = None
         self._outer_source_id = None
         self._platform = None
         self._quota_id = None
@@ -44,6 +45,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def outer_source_id(self):
         return self._outer_source_id
@@ -89,6 +97,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.outer_source_id:
             if hasattr(self.outer_source_id, 'to_alipay_dict'):
                 params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
             o.agreement_no = d['agreement_no']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'outer_source_id' in d:
             o.outer_source_id = d['outer_source_id']
         if 'platform' in d:

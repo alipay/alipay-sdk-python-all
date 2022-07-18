@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateSchoolcontentModifyModel(object):
 
     def __init__(self):
+        self._auto_bind = None
         self._carrier_app_id = None
         self._carrier_source_url = None
         self._content_id = None
@@ -16,10 +17,18 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
         self._image_data = None
         self._out_content_id = None
         self._school_name = None
+        self._service_ids = None
         self._source_type = None
         self._text_data = None
         self._video_data = None
 
+    @property
+    def auto_bind(self):
+        return self._auto_bind
+
+    @auto_bind.setter
+    def auto_bind(self, value):
+        self._auto_bind = value
     @property
     def carrier_app_id(self):
         return self._carrier_app_id
@@ -80,6 +89,16 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
     def school_name(self, value):
         self._school_name = value
     @property
+    def service_ids(self):
+        return self._service_ids
+
+    @service_ids.setter
+    def service_ids(self, value):
+        if isinstance(value, list):
+            self._service_ids = list()
+            for i in value:
+                self._service_ids.append(i)
+    @property
     def source_type(self):
         return self._source_type
 
@@ -110,6 +129,11 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auto_bind:
+            if hasattr(self.auto_bind, 'to_alipay_dict'):
+                params['auto_bind'] = self.auto_bind.to_alipay_dict()
+            else:
+                params['auto_bind'] = self.auto_bind
         if self.carrier_app_id:
             if hasattr(self.carrier_app_id, 'to_alipay_dict'):
                 params['carrier_app_id'] = self.carrier_app_id.to_alipay_dict()
@@ -155,6 +179,16 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
                 params['school_name'] = self.school_name.to_alipay_dict()
             else:
                 params['school_name'] = self.school_name
+        if self.service_ids:
+            if isinstance(self.service_ids, list):
+                for i in range(0, len(self.service_ids)):
+                    element = self.service_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_ids[i] = element.to_alipay_dict()
+            if hasattr(self.service_ids, 'to_alipay_dict'):
+                params['service_ids'] = self.service_ids.to_alipay_dict()
+            else:
+                params['service_ids'] = self.service_ids
         if self.source_type:
             if hasattr(self.source_type, 'to_alipay_dict'):
                 params['source_type'] = self.source_type.to_alipay_dict()
@@ -187,6 +221,8 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateSchoolcontentModifyModel()
+        if 'auto_bind' in d:
+            o.auto_bind = d['auto_bind']
         if 'carrier_app_id' in d:
             o.carrier_app_id = d['carrier_app_id']
         if 'carrier_source_url' in d:
@@ -203,6 +239,8 @@ class AlipayCommerceEducateSchoolcontentModifyModel(object):
             o.out_content_id = d['out_content_id']
         if 'school_name' in d:
             o.school_name = d['school_name']
+        if 'service_ids' in d:
+            o.service_ids = d['service_ids']
         if 'source_type' in d:
             o.source_type = d['source_type']
         if 'text_data' in d:

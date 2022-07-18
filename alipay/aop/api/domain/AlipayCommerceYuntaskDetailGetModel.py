@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceYuntaskDetailGetModel(object):
 
     def __init__(self):
+        self._funder_id = None
         self._merchant_pid = None
         self._task_template_id = None
 
+    @property
+    def funder_id(self):
+        return self._funder_id
+
+    @funder_id.setter
+    def funder_id(self, value):
+        self._funder_id = value
     @property
     def merchant_pid(self):
         return self._merchant_pid
@@ -29,6 +37,11 @@ class AlipayCommerceYuntaskDetailGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.funder_id:
+            if hasattr(self.funder_id, 'to_alipay_dict'):
+                params['funder_id'] = self.funder_id.to_alipay_dict()
+            else:
+                params['funder_id'] = self.funder_id
         if self.merchant_pid:
             if hasattr(self.merchant_pid, 'to_alipay_dict'):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayCommerceYuntaskDetailGetModel(object):
         if not d:
             return None
         o = AlipayCommerceYuntaskDetailGetModel()
+        if 'funder_id' in d:
+            o.funder_id = d['funder_id']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
         if 'task_template_id' in d:
