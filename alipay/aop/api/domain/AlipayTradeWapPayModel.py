@@ -30,6 +30,7 @@ class AlipayTradeWapPayModel(object):
         self._passback_params = None
         self._product_code = None
         self._promo_params = None
+        self._query_options = None
         self._quit_url = None
         self._royalty_info = None
         self._seller_id = None
@@ -162,6 +163,16 @@ class AlipayTradeWapPayModel(object):
     @promo_params.setter
     def promo_params(self, value):
         self._promo_params = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
     @property
     def quit_url(self):
         return self._quit_url
@@ -332,6 +343,16 @@ class AlipayTradeWapPayModel(object):
                 params['promo_params'] = self.promo_params.to_alipay_dict()
             else:
                 params['promo_params'] = self.promo_params
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         if self.quit_url:
             if hasattr(self.quit_url, 'to_alipay_dict'):
                 params['quit_url'] = self.quit_url.to_alipay_dict()
@@ -424,6 +445,8 @@ class AlipayTradeWapPayModel(object):
             o.product_code = d['product_code']
         if 'promo_params' in d:
             o.promo_params = d['promo_params']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         if 'quit_url' in d:
             o.quit_url = d['quit_url']
         if 'royalty_info' in d:

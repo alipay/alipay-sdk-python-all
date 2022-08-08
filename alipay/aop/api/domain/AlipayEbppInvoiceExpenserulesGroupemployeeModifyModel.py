@@ -11,6 +11,7 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
         self._account_id = None
         self._add_employee_list = None
         self._agreement_no = None
+        self._enterprise_id = None
         self._group_id_list = None
         self._remove_employee_list = None
 
@@ -38,6 +39,13 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def group_id_list(self):
         return self._group_id_list
@@ -82,6 +90,11 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.group_id_list:
             if isinstance(self.group_id_list, list):
                 for i in range(0, len(self.group_id_list)):
@@ -115,6 +128,8 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
             o.add_employee_list = d['add_employee_list']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'group_id_list' in d:
             o.group_id_list = d['group_id_list']
         if 'remove_employee_list' in d:

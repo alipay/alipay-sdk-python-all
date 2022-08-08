@@ -15,6 +15,7 @@ class AlipayMarketingMaterialImageUploadRequest(object):
         self._biz_model = biz_model
         self._belong_merchant_info = None
         self._file_key = None
+        self._merchant_access_mode = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -50,6 +51,13 @@ class AlipayMarketingMaterialImageUploadRequest(object):
     @file_key.setter
     def file_key(self, value):
         self._file_key = value
+    @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
 
     @property
     def file_content(self):
@@ -148,6 +156,11 @@ class AlipayMarketingMaterialImageUploadRequest(object):
                 params['file_key'] = json.dumps(obj=self.file_key.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['file_key'] = self.file_key
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = json.dumps(obj=self.merchant_access_mode.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

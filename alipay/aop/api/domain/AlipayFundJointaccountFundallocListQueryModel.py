@@ -11,6 +11,7 @@ class AlipayFundJointaccountFundallocListQueryModel(object):
         self._account_id = None
         self._agreement_no = None
         self._biz_scene = None
+        self._channel = None
         self._fund_plan_id = None
         self._identity = None
         self._identity_type = None
@@ -40,6 +41,13 @@ class AlipayFundJointaccountFundallocListQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def fund_plan_id(self):
         return self._fund_plan_id
@@ -111,6 +119,11 @@ class AlipayFundJointaccountFundallocListQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.fund_plan_id:
             if hasattr(self.fund_plan_id, 'to_alipay_dict'):
                 params['fund_plan_id'] = self.fund_plan_id.to_alipay_dict()
@@ -164,6 +177,8 @@ class AlipayFundJointaccountFundallocListQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'fund_plan_id' in d:
             o.fund_plan_id = d['fund_plan_id']
         if 'identity' in d:

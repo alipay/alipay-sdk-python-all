@@ -19,6 +19,7 @@ class AlipayMarketingActivityDeliveryCreateModel(object):
         self._delivery_config_list = None
         self._delivery_play_config = None
         self._delivery_target_rule = None
+        self._merchant_access_mode = None
         self._out_biz_no = None
 
     @property
@@ -82,6 +83,13 @@ class AlipayMarketingActivityDeliveryCreateModel(object):
         else:
             self._delivery_target_rule = DeliveryTargetRule.from_alipay_dict(value)
     @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -127,6 +135,11 @@ class AlipayMarketingActivityDeliveryCreateModel(object):
                 params['delivery_target_rule'] = self.delivery_target_rule.to_alipay_dict()
             else:
                 params['delivery_target_rule'] = self.delivery_target_rule
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayMarketingActivityDeliveryCreateModel(object):
             o.delivery_play_config = d['delivery_play_config']
         if 'delivery_target_rule' in d:
             o.delivery_target_rule = d['delivery_target_rule']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         return o

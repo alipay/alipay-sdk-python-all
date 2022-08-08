@@ -9,6 +9,7 @@ class AlipayMarketingActivityBatchqueryModel(object):
 
     def __init__(self):
         self._activity_status = None
+        self._merchant_access_mode = None
         self._merchant_id = None
         self._page_num = None
         self._page_size = None
@@ -20,6 +21,13 @@ class AlipayMarketingActivityBatchqueryModel(object):
     @activity_status.setter
     def activity_status(self, value):
         self._activity_status = value
+    @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
     @property
     def merchant_id(self):
         return self._merchant_id
@@ -50,6 +58,11 @@ class AlipayMarketingActivityBatchqueryModel(object):
                 params['activity_status'] = self.activity_status.to_alipay_dict()
             else:
                 params['activity_status'] = self.activity_status
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayMarketingActivityBatchqueryModel(object):
         o = AlipayMarketingActivityBatchqueryModel()
         if 'activity_status' in d:
             o.activity_status = d['activity_status']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
         if 'page_num' in d:

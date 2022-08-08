@@ -14,6 +14,7 @@ class AlipayEbppInvoiceExpenserulesSceneruleModifyModel(object):
         self._agreement_no = None
         self._effective_end_date = None
         self._effective_start_date = None
+        self._enterprise_id = None
         self._expense_ctrl_rule_info_list = None
         self._payment_policy = None
         self._standard_desc = None
@@ -55,6 +56,13 @@ class AlipayEbppInvoiceExpenserulesSceneruleModifyModel(object):
     @effective_start_date.setter
     def effective_start_date(self, value):
         self._effective_start_date = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def expense_ctrl_rule_info_list(self):
         return self._expense_ctrl_rule_info_list
@@ -125,6 +133,11 @@ class AlipayEbppInvoiceExpenserulesSceneruleModifyModel(object):
                 params['effective_start_date'] = self.effective_start_date.to_alipay_dict()
             else:
                 params['effective_start_date'] = self.effective_start_date
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.expense_ctrl_rule_info_list:
             if isinstance(self.expense_ctrl_rule_info_list, list):
                 for i in range(0, len(self.expense_ctrl_rule_info_list)):
@@ -172,6 +185,8 @@ class AlipayEbppInvoiceExpenserulesSceneruleModifyModel(object):
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:
             o.effective_start_date = d['effective_start_date']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'expense_ctrl_rule_info_list' in d:
             o.expense_ctrl_rule_info_list = d['expense_ctrl_rule_info_list']
         if 'payment_policy' in d:

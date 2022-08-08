@@ -34,6 +34,7 @@ class AlipayTradeCreateModel(object):
         self._out_trade_no = None
         self._passback_params = None
         self._product_code = None
+        self._query_options = None
         self._receiver_address_info = None
         self._royalty_info = None
         self._seller_id = None
@@ -184,6 +185,16 @@ class AlipayTradeCreateModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
     @property
     def receiver_address_info(self):
         return self._receiver_address_info
@@ -374,6 +385,16 @@ class AlipayTradeCreateModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         if self.receiver_address_info:
             if hasattr(self.receiver_address_info, 'to_alipay_dict'):
                 params['receiver_address_info'] = self.receiver_address_info.to_alipay_dict()
@@ -475,6 +496,8 @@ class AlipayTradeCreateModel(object):
             o.passback_params = d['passback_params']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         if 'receiver_address_info' in d:
             o.receiver_address_info = d['receiver_address_info']
         if 'royalty_info' in d:

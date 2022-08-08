@@ -9,15 +9,19 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
 
     def __init__(self):
         self._activity_page = None
+        self._activity_title = None
+        self._benefit_desc = None
         self._bill_way = None
         self._channel_id = None
         self._creator_id = None
         self._creator_name = None
         self._crowd_ids = None
         self._customize_page = None
+        self._detail_page_title = None
         self._end_time = None
         self._name = None
         self._page_type = None
+        self._pic_url = None
         self._plan_content = None
         self._rule_text = None
         self._start_time = None
@@ -31,6 +35,20 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
     @activity_page.setter
     def activity_page(self, value):
         self._activity_page = value
+    @property
+    def activity_title(self):
+        return self._activity_title
+
+    @activity_title.setter
+    def activity_title(self, value):
+        self._activity_title = value
+    @property
+    def benefit_desc(self):
+        return self._benefit_desc
+
+    @benefit_desc.setter
+    def benefit_desc(self, value):
+        self._benefit_desc = value
     @property
     def bill_way(self):
         return self._bill_way
@@ -74,6 +92,13 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
     def customize_page(self, value):
         self._customize_page = value
     @property
+    def detail_page_title(self):
+        return self._detail_page_title
+
+    @detail_page_title.setter
+    def detail_page_title(self, value):
+        self._detail_page_title = value
+    @property
     def end_time(self):
         return self._end_time
 
@@ -94,6 +119,13 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
     @page_type.setter
     def page_type(self, value):
         self._page_type = value
+    @property
+    def pic_url(self):
+        return self._pic_url
+
+    @pic_url.setter
+    def pic_url(self, value):
+        self._pic_url = value
     @property
     def plan_content(self):
         return self._plan_content
@@ -138,6 +170,16 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
                 params['activity_page'] = self.activity_page.to_alipay_dict()
             else:
                 params['activity_page'] = self.activity_page
+        if self.activity_title:
+            if hasattr(self.activity_title, 'to_alipay_dict'):
+                params['activity_title'] = self.activity_title.to_alipay_dict()
+            else:
+                params['activity_title'] = self.activity_title
+        if self.benefit_desc:
+            if hasattr(self.benefit_desc, 'to_alipay_dict'):
+                params['benefit_desc'] = self.benefit_desc.to_alipay_dict()
+            else:
+                params['benefit_desc'] = self.benefit_desc
         if self.bill_way:
             if hasattr(self.bill_way, 'to_alipay_dict'):
                 params['bill_way'] = self.bill_way.to_alipay_dict()
@@ -168,6 +210,11 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
                 params['customize_page'] = self.customize_page.to_alipay_dict()
             else:
                 params['customize_page'] = self.customize_page
+        if self.detail_page_title:
+            if hasattr(self.detail_page_title, 'to_alipay_dict'):
+                params['detail_page_title'] = self.detail_page_title.to_alipay_dict()
+            else:
+                params['detail_page_title'] = self.detail_page_title
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -183,6 +230,11 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
                 params['page_type'] = self.page_type.to_alipay_dict()
             else:
                 params['page_type'] = self.page_type
+        if self.pic_url:
+            if hasattr(self.pic_url, 'to_alipay_dict'):
+                params['pic_url'] = self.pic_url.to_alipay_dict()
+            else:
+                params['pic_url'] = self.pic_url
         if self.plan_content:
             if hasattr(self.plan_content, 'to_alipay_dict'):
                 params['plan_content'] = self.plan_content.to_alipay_dict()
@@ -217,6 +269,10 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
         o = DatadigitalFincloudFinsaasPutplanCreateModel()
         if 'activity_page' in d:
             o.activity_page = d['activity_page']
+        if 'activity_title' in d:
+            o.activity_title = d['activity_title']
+        if 'benefit_desc' in d:
+            o.benefit_desc = d['benefit_desc']
         if 'bill_way' in d:
             o.bill_way = d['bill_way']
         if 'channel_id' in d:
@@ -229,12 +285,16 @@ class DatadigitalFincloudFinsaasPutplanCreateModel(object):
             o.crowd_ids = d['crowd_ids']
         if 'customize_page' in d:
             o.customize_page = d['customize_page']
+        if 'detail_page_title' in d:
+            o.detail_page_title = d['detail_page_title']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'name' in d:
             o.name = d['name']
         if 'page_type' in d:
             o.page_type = d['page_type']
+        if 'pic_url' in d:
+            o.pic_url = d['pic_url']
         if 'plan_content' in d:
             o.plan_content = d['plan_content']
         if 'rule_text' in d:

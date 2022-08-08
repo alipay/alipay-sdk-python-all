@@ -10,6 +10,7 @@ class AlipayOpenMiniInnerVersionproportionModifyModel(object):
     def __init__(self):
         self._app_origin = None
         self._bundle_id = None
+        self._dev_id = None
         self._mini_app_id = None
         self._operate_id = None
         self._value = None
@@ -28,6 +29,13 @@ class AlipayOpenMiniInnerVersionproportionModifyModel(object):
     @bundle_id.setter
     def bundle_id(self, value):
         self._bundle_id = value
+    @property
+    def dev_id(self):
+        return self._dev_id
+
+    @dev_id.setter
+    def dev_id(self, value):
+        self._dev_id = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -63,6 +71,11 @@ class AlipayOpenMiniInnerVersionproportionModifyModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.dev_id:
+            if hasattr(self.dev_id, 'to_alipay_dict'):
+                params['dev_id'] = self.dev_id.to_alipay_dict()
+            else:
+                params['dev_id'] = self.dev_id
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayOpenMiniInnerVersionproportionModifyModel(object):
             o.app_origin = d['app_origin']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'dev_id' in d:
+            o.dev_id = d['dev_id']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'operate_id' in d:

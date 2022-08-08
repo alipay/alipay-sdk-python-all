@@ -32,6 +32,7 @@ class AlipayTradePrecreateModel(object):
         self._passback_params = None
         self._product_code = None
         self._qr_code_timeout_express = None
+        self._query_options = None
         self._royalty_info = None
         self._seller_id = None
         self._settle_info = None
@@ -178,6 +179,16 @@ class AlipayTradePrecreateModel(object):
     @qr_code_timeout_express.setter
     def qr_code_timeout_express(self, value):
         self._qr_code_timeout_express = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
     @property
     def royalty_info(self):
         return self._royalty_info
@@ -358,6 +369,16 @@ class AlipayTradePrecreateModel(object):
                 params['qr_code_timeout_express'] = self.qr_code_timeout_express.to_alipay_dict()
             else:
                 params['qr_code_timeout_express'] = self.qr_code_timeout_express
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         if self.royalty_info:
             if hasattr(self.royalty_info, 'to_alipay_dict'):
                 params['royalty_info'] = self.royalty_info.to_alipay_dict()
@@ -454,6 +475,8 @@ class AlipayTradePrecreateModel(object):
             o.product_code = d['product_code']
         if 'qr_code_timeout_express' in d:
             o.qr_code_timeout_express = d['qr_code_timeout_express']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         if 'royalty_info' in d:
             o.royalty_info = d['royalty_info']
         if 'seller_id' in d:

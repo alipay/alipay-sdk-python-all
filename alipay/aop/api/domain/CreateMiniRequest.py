@@ -16,6 +16,7 @@ class CreateMiniRequest(object):
         self._contact_phone = None
         self._is_individual = None
         self._legal_personal_name = None
+        self._license_pic = None
         self._out_order_no = None
 
     @property
@@ -75,6 +76,13 @@ class CreateMiniRequest(object):
     def legal_personal_name(self, value):
         self._legal_personal_name = value
     @property
+    def license_pic(self):
+        return self._license_pic
+
+    @license_pic.setter
+    def license_pic(self, value):
+        self._license_pic = value
+    @property
     def out_order_no(self):
         return self._out_order_no
 
@@ -125,6 +133,11 @@ class CreateMiniRequest(object):
                 params['legal_personal_name'] = self.legal_personal_name.to_alipay_dict()
             else:
                 params['legal_personal_name'] = self.legal_personal_name
+        if self.license_pic:
+            if hasattr(self.license_pic, 'to_alipay_dict'):
+                params['license_pic'] = self.license_pic.to_alipay_dict()
+            else:
+                params['license_pic'] = self.license_pic
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -153,6 +166,8 @@ class CreateMiniRequest(object):
             o.is_individual = d['is_individual']
         if 'legal_personal_name' in d:
             o.legal_personal_name = d['legal_personal_name']
+        if 'license_pic' in d:
+            o.license_pic = d['license_pic']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         return o

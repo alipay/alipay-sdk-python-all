@@ -25,6 +25,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._refund_currency = None
         self._refund_detail_item_list = None
         self._refund_fee = None
+        self._refund_hyb_amount = None
         self._refund_preset_paytool_list = None
         self._refund_settlement_id = None
         self._send_back_fee = None
@@ -136,6 +137,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
     def refund_fee(self, value):
         self._refund_fee = value
     @property
+    def refund_hyb_amount(self):
+        return self._refund_hyb_amount
+
+    @refund_hyb_amount.setter
+    def refund_hyb_amount(self, value):
+        self._refund_hyb_amount = value
+    @property
     def refund_preset_paytool_list(self):
         return self._refund_preset_paytool_list
 
@@ -204,6 +212,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.refund_detail_item_list = response['refund_detail_item_list']
         if 'refund_fee' in response:
             self.refund_fee = response['refund_fee']
+        if 'refund_hyb_amount' in response:
+            self.refund_hyb_amount = response['refund_hyb_amount']
         if 'refund_preset_paytool_list' in response:
             self.refund_preset_paytool_list = response['refund_preset_paytool_list']
         if 'refund_settlement_id' in response:

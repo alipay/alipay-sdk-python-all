@@ -9,6 +9,8 @@ from alipay.aop.api.domain.IssueTargetInfoContent import IssueTargetInfoContent
 class AlipayEbppInvoiceExpensecontrolIssuebatchCreateModel(object):
 
     def __init__(self):
+        self._account_id = None
+        self._agreement_no = None
         self._batch_no = None
         self._effective_end_date = None
         self._effective_start_date = None
@@ -20,6 +22,20 @@ class AlipayEbppInvoiceExpensecontrolIssuebatchCreateModel(object):
         self._quota_type = None
         self._share_mode = None
 
+    @property
+    def account_id(self):
+        return self._account_id
+
+    @account_id.setter
+    def account_id(self, value):
+        self._account_id = value
+    @property
+    def agreement_no(self):
+        return self._agreement_no
+
+    @agreement_no.setter
+    def agreement_no(self, value):
+        self._agreement_no = value
     @property
     def batch_no(self):
         return self._batch_no
@@ -100,6 +116,16 @@ class AlipayEbppInvoiceExpensecontrolIssuebatchCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.account_id:
+            if hasattr(self.account_id, 'to_alipay_dict'):
+                params['account_id'] = self.account_id.to_alipay_dict()
+            else:
+                params['account_id'] = self.account_id
+        if self.agreement_no:
+            if hasattr(self.agreement_no, 'to_alipay_dict'):
+                params['agreement_no'] = self.agreement_no.to_alipay_dict()
+            else:
+                params['agreement_no'] = self.agreement_no
         if self.batch_no:
             if hasattr(self.batch_no, 'to_alipay_dict'):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
@@ -162,6 +188,10 @@ class AlipayEbppInvoiceExpensecontrolIssuebatchCreateModel(object):
         if not d:
             return None
         o = AlipayEbppInvoiceExpensecontrolIssuebatchCreateModel()
+        if 'account_id' in d:
+            o.account_id = d['account_id']
+        if 'agreement_no' in d:
+            o.agreement_no = d['agreement_no']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
         if 'effective_end_date' in d:

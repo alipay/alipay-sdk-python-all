@@ -11,6 +11,7 @@ class AnttechAiCvUaAsyncQueryResponse(AlipayResponse):
         super(AnttechAiCvUaAsyncQueryResponse, self).__init__()
         self._host = None
         self._result_code = None
+        self._result_detail = None
         self._result_msg = None
         self._result_success = None
         self._result_url = None
@@ -30,6 +31,13 @@ class AnttechAiCvUaAsyncQueryResponse(AlipayResponse):
     @result_code.setter
     def result_code(self, value):
         self._result_code = value
+    @property
+    def result_detail(self):
+        return self._result_detail
+
+    @result_detail.setter
+    def result_detail(self, value):
+        self._result_detail = value
     @property
     def result_msg(self):
         return self._result_msg
@@ -65,6 +73,8 @@ class AnttechAiCvUaAsyncQueryResponse(AlipayResponse):
             self.host = response['host']
         if 'result_code' in response:
             self.result_code = response['result_code']
+        if 'result_detail' in response:
+            self.result_detail = response['result_detail']
         if 'result_msg' in response:
             self.result_msg = response['result_msg']
         if 'result_success' in response:

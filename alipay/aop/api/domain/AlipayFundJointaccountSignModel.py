@@ -6,6 +6,8 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.JointAccountQuotaDTO import JointAccountQuotaDTO
 from alipay.aop.api.domain.AuthorizeDetailDTO import AuthorizeDetailDTO
 from alipay.aop.api.domain.AuthorizedRuleDTO import AuthorizedRuleDTO
+from alipay.aop.api.domain.DepositForm import DepositForm
+from alipay.aop.api.domain.FundPlanForm import FundPlanForm
 from alipay.aop.api.domain.InviteMemberForm import InviteMemberForm
 
 
@@ -17,6 +19,9 @@ class AlipayFundJointaccountSignModel(object):
         self._authorized_detail_list = None
         self._authorized_rule = None
         self._biz_scene = None
+        self._channel = None
+        self._deposit = None
+        self._fund_plan = None
         self._identity = None
         self._identity_type = None
         self._invitee_list = None
@@ -77,6 +82,33 @@ class AlipayFundJointaccountSignModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
+    @property
+    def deposit(self):
+        return self._deposit
+
+    @deposit.setter
+    def deposit(self, value):
+        if isinstance(value, DepositForm):
+            self._deposit = value
+        else:
+            self._deposit = DepositForm.from_alipay_dict(value)
+    @property
+    def fund_plan(self):
+        return self._fund_plan
+
+    @fund_plan.setter
+    def fund_plan(self, value):
+        if isinstance(value, FundPlanForm):
+            self._fund_plan = value
+        else:
+            self._fund_plan = FundPlanForm.from_alipay_dict(value)
     @property
     def identity(self):
         return self._identity
@@ -185,6 +217,21 @@ class AlipayFundJointaccountSignModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
+        if self.deposit:
+            if hasattr(self.deposit, 'to_alipay_dict'):
+                params['deposit'] = self.deposit.to_alipay_dict()
+            else:
+                params['deposit'] = self.deposit
+        if self.fund_plan:
+            if hasattr(self.fund_plan, 'to_alipay_dict'):
+                params['fund_plan'] = self.fund_plan.to_alipay_dict()
+            else:
+                params['fund_plan'] = self.fund_plan
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -252,6 +299,12 @@ class AlipayFundJointaccountSignModel(object):
             o.authorized_rule = d['authorized_rule']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'channel' in d:
+            o.channel = d['channel']
+        if 'deposit' in d:
+            o.deposit = d['deposit']
+        if 'fund_plan' in d:
+            o.fund_plan = d['fund_plan']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_type' in d:

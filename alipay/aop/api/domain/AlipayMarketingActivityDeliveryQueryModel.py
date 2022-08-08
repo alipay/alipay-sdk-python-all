@@ -13,6 +13,7 @@ class AlipayMarketingActivityDeliveryQueryModel(object):
         self._belong_merchant_info = None
         self._delivery_config_list = None
         self._delivery_id = None
+        self._merchant_access_mode = None
 
     @property
     def belong_merchant_info(self):
@@ -44,6 +45,13 @@ class AlipayMarketingActivityDeliveryQueryModel(object):
     @delivery_id.setter
     def delivery_id(self, value):
         self._delivery_id = value
+    @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
 
 
     def to_alipay_dict(self):
@@ -68,6 +76,11 @@ class AlipayMarketingActivityDeliveryQueryModel(object):
                 params['delivery_id'] = self.delivery_id.to_alipay_dict()
             else:
                 params['delivery_id'] = self.delivery_id
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         return params
 
     @staticmethod
@@ -81,6 +94,8 @@ class AlipayMarketingActivityDeliveryQueryModel(object):
             o.delivery_config_list = d['delivery_config_list']
         if 'delivery_id' in d:
             o.delivery_id = d['delivery_id']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         return o
 
 

@@ -33,6 +33,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._ext_infos = None
         self._fund_bill_list = None
         self._hb_fq_pay_info = None
+        self._hyb_amount = None
         self._industry_sepc_detail = None
         self._industry_sepc_detail_acc = None
         self._industry_sepc_detail_gov = None
@@ -208,6 +209,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self._hb_fq_pay_info = value
         else:
             self._hb_fq_pay_info = HbFqPayInfo.from_alipay_dict(value)
+    @property
+    def hyb_amount(self):
+        return self._hyb_amount
+
+    @hyb_amount.setter
+    def hyb_amount(self, value):
+        self._hyb_amount = value
     @property
     def industry_sepc_detail(self):
         return self._industry_sepc_detail
@@ -461,6 +469,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.fund_bill_list = response['fund_bill_list']
         if 'hb_fq_pay_info' in response:
             self.hb_fq_pay_info = response['hb_fq_pay_info']
+        if 'hyb_amount' in response:
+            self.hyb_amount = response['hyb_amount']
         if 'industry_sepc_detail' in response:
             self.industry_sepc_detail = response['industry_sepc_detail']
         if 'industry_sepc_detail_acc' in response:

@@ -12,6 +12,7 @@ class AlipayFundJointaccountFundOrderQueryModel(object):
         self._agreement_no = None
         self._biz_scene = None
         self._biz_trans_id = None
+        self._channel = None
         self._operate_type = None
         self._out_biz_no = None
         self._product_code = None
@@ -45,6 +46,13 @@ class AlipayFundJointaccountFundOrderQueryModel(object):
     @biz_trans_id.setter
     def biz_trans_id(self, value):
         self._biz_trans_id = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def operate_type(self):
         return self._operate_type
@@ -97,6 +105,11 @@ class AlipayFundJointaccountFundOrderQueryModel(object):
                 params['biz_trans_id'] = self.biz_trans_id.to_alipay_dict()
             else:
                 params['biz_trans_id'] = self.biz_trans_id
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.operate_type:
             if hasattr(self.operate_type, 'to_alipay_dict'):
                 params['operate_type'] = self.operate_type.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayFundJointaccountFundOrderQueryModel(object):
             o.biz_scene = d['biz_scene']
         if 'biz_trans_id' in d:
             o.biz_trans_id = d['biz_trans_id']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'operate_type' in d:
             o.operate_type = d['operate_type']
         if 'out_biz_no' in d:

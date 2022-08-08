@@ -32,6 +32,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._enterprise_pay_info = None
         self._fund_bill_list = None
         self._gmt_payment = None
+        self._hyb_amount = None
         self._invoice_amount = None
         self._mdiscount_amount = None
         self._open_id = None
@@ -201,6 +202,13 @@ class AlipayTradePayResponse(AlipayResponse):
     @gmt_payment.setter
     def gmt_payment(self, value):
         self._gmt_payment = value
+    @property
+    def hyb_amount(self):
+        return self._hyb_amount
+
+    @hyb_amount.setter
+    def hyb_amount(self, value):
+        self._hyb_amount = value
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -383,6 +391,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.fund_bill_list = response['fund_bill_list']
         if 'gmt_payment' in response:
             self.gmt_payment = response['gmt_payment']
+        if 'hyb_amount' in response:
+            self.hyb_amount = response['hyb_amount']
         if 'invoice_amount' in response:
             self.invoice_amount = response['invoice_amount']
         if 'mdiscount_amount' in response:

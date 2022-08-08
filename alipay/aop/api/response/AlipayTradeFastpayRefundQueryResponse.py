@@ -28,6 +28,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._refund_channel_status = None
         self._refund_charge_amount = None
         self._refund_detail_item_list = None
+        self._refund_hyb_amount = None
         self._refund_reason = None
         self._refund_royaltys = None
         self._refund_settlement_id = None
@@ -154,6 +155,13 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
                 else:
                     self._refund_detail_item_list.append(TradeFundBill.from_alipay_dict(i))
     @property
+    def refund_hyb_amount(self):
+        return self._refund_hyb_amount
+
+    @refund_hyb_amount.setter
+    def refund_hyb_amount(self, value):
+        self._refund_hyb_amount = value
+    @property
     def refund_reason(self):
         return self._refund_reason
 
@@ -241,6 +249,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self.refund_charge_amount = response['refund_charge_amount']
         if 'refund_detail_item_list' in response:
             self.refund_detail_item_list = response['refund_detail_item_list']
+        if 'refund_hyb_amount' in response:
+            self.refund_hyb_amount = response['refund_hyb_amount']
         if 'refund_reason' in response:
             self.refund_reason = response['refund_reason']
         if 'refund_royaltys' in response:

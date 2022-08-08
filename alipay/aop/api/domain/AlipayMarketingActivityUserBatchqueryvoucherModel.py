@@ -10,6 +10,7 @@ class AlipayMarketingActivityUserBatchqueryvoucherModel(object):
     def __init__(self):
         self._activity_id = None
         self._belong_merchant_id = None
+        self._merchant_access_mode = None
         self._page_num = None
         self._page_size = None
         self._sender_merchant_id = None
@@ -30,6 +31,13 @@ class AlipayMarketingActivityUserBatchqueryvoucherModel(object):
     @belong_merchant_id.setter
     def belong_merchant_id(self, value):
         self._belong_merchant_id = value
+    @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
     @property
     def page_num(self):
         return self._page_num
@@ -79,6 +87,11 @@ class AlipayMarketingActivityUserBatchqueryvoucherModel(object):
                 params['belong_merchant_id'] = self.belong_merchant_id.to_alipay_dict()
             else:
                 params['belong_merchant_id'] = self.belong_merchant_id
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayMarketingActivityUserBatchqueryvoucherModel(object):
             o.activity_id = d['activity_id']
         if 'belong_merchant_id' in d:
             o.belong_merchant_id = d['belong_merchant_id']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

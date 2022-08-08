@@ -13,6 +13,7 @@ class ApeRecContext(object):
         self._client_env = None
         self._current_item_id = None
         self._device_id = None
+        self._landing_item_list = None
         self._latitude = None
         self._longitude = None
         self._other_index_list = None
@@ -56,6 +57,16 @@ class ApeRecContext(object):
     @device_id.setter
     def device_id(self, value):
         self._device_id = value
+    @property
+    def landing_item_list(self):
+        return self._landing_item_list
+
+    @landing_item_list.setter
+    def landing_item_list(self, value):
+        if isinstance(value, list):
+            self._landing_item_list = list()
+            for i in value:
+                self._landing_item_list.append(i)
     @property
     def latitude(self):
         return self._latitude
@@ -124,6 +135,16 @@ class ApeRecContext(object):
                 params['device_id'] = self.device_id.to_alipay_dict()
             else:
                 params['device_id'] = self.device_id
+        if self.landing_item_list:
+            if isinstance(self.landing_item_list, list):
+                for i in range(0, len(self.landing_item_list)):
+                    element = self.landing_item_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.landing_item_list[i] = element.to_alipay_dict()
+            if hasattr(self.landing_item_list, 'to_alipay_dict'):
+                params['landing_item_list'] = self.landing_item_list.to_alipay_dict()
+            else:
+                params['landing_item_list'] = self.landing_item_list
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -171,6 +192,8 @@ class ApeRecContext(object):
             o.current_item_id = d['current_item_id']
         if 'device_id' in d:
             o.device_id = d['device_id']
+        if 'landing_item_list' in d:
+            o.landing_item_list = d['landing_item_list']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

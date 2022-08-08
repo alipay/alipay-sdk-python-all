@@ -34,6 +34,7 @@ class AlipayTradePagePayModel(object):
         self._promo_params = None
         self._qr_pay_mode = None
         self._qrcode_width = None
+        self._query_options = None
         self._request_from_url = None
         self._royalty_info = None
         self._settle_info = None
@@ -188,6 +189,16 @@ class AlipayTradePagePayModel(object):
     @qrcode_width.setter
     def qrcode_width(self, value):
         self._qrcode_width = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
     @property
     def request_from_url(self):
         return self._request_from_url
@@ -359,6 +370,16 @@ class AlipayTradePagePayModel(object):
                 params['qrcode_width'] = self.qrcode_width.to_alipay_dict()
             else:
                 params['qrcode_width'] = self.qrcode_width
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         if self.request_from_url:
             if hasattr(self.request_from_url, 'to_alipay_dict'):
                 params['request_from_url'] = self.request_from_url.to_alipay_dict()
@@ -447,6 +468,8 @@ class AlipayTradePagePayModel(object):
             o.qr_pay_mode = d['qr_pay_mode']
         if 'qrcode_width' in d:
             o.qrcode_width = d['qrcode_width']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         if 'request_from_url' in d:
             o.request_from_url = d['request_from_url']
         if 'royalty_info' in d:

@@ -10,6 +10,7 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
     def __init__(self):
         self._activity_id = None
         self._biz_dt = None
+        self._merchant_access_mode = None
         self._out_biz_no = None
         self._total_fee = None
         self._voucher_code = None
@@ -28,6 +29,13 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
     @biz_dt.setter
     def biz_dt(self, value):
         self._biz_dt = value
+    @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -63,6 +71,11 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
                 params['biz_dt'] = self.biz_dt.to_alipay_dict()
             else:
                 params['biz_dt'] = self.biz_dt
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
             o.activity_id = d['activity_id']
         if 'biz_dt' in d:
             o.biz_dt = d['biz_dt']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'total_fee' in d:

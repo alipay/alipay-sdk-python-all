@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
 
     def __init__(self):
+        self._amount_type = None
         self._body = None
         self._category_id = None
         self._credit_agreement_id = None
@@ -17,6 +18,13 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
         self._product_code = None
         self._subject = None
 
+    @property
+    def amount_type(self):
+        return self._amount_type
+
+    @amount_type.setter
+    def amount_type(self, value):
+        self._amount_type = value
     @property
     def body(self):
         return self._body
@@ -77,6 +85,11 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_type:
+            if hasattr(self.amount_type, 'to_alipay_dict'):
+                params['amount_type'] = self.amount_type.to_alipay_dict()
+            else:
+                params['amount_type'] = self.amount_type
         if self.body:
             if hasattr(self.body, 'to_alipay_dict'):
                 params['body'] = self.body.to_alipay_dict()
@@ -124,6 +137,8 @@ class ZhimaCreditPayafteruseCreditbizorderOrderModel(object):
         if not d:
             return None
         o = ZhimaCreditPayafteruseCreditbizorderOrderModel()
+        if 'amount_type' in d:
+            o.amount_type = d['amount_type']
         if 'body' in d:
             o.body = d['body']
         if 'category_id' in d:

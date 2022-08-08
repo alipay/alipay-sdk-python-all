@@ -14,6 +14,7 @@ class TenantChannelDetailDTO(object):
         self._channel_name = None
         self._channel_status = None
         self._channel_type = None
+        self._form_template_id = None
         self._pic_url = None
         self._remark = None
         self._status = None
@@ -61,6 +62,13 @@ class TenantChannelDetailDTO(object):
     @channel_type.setter
     def channel_type(self, value):
         self._channel_type = value
+    @property
+    def form_template_id(self):
+        return self._form_template_id
+
+    @form_template_id.setter
+    def form_template_id(self, value):
+        self._form_template_id = value
     @property
     def pic_url(self):
         return self._pic_url
@@ -123,6 +131,11 @@ class TenantChannelDetailDTO(object):
                 params['channel_type'] = self.channel_type.to_alipay_dict()
             else:
                 params['channel_type'] = self.channel_type
+        if self.form_template_id:
+            if hasattr(self.form_template_id, 'to_alipay_dict'):
+                params['form_template_id'] = self.form_template_id.to_alipay_dict()
+            else:
+                params['form_template_id'] = self.form_template_id
         if self.pic_url:
             if hasattr(self.pic_url, 'to_alipay_dict'):
                 params['pic_url'] = self.pic_url.to_alipay_dict()
@@ -162,6 +175,8 @@ class TenantChannelDetailDTO(object):
             o.channel_status = d['channel_status']
         if 'channel_type' in d:
             o.channel_type = d['channel_type']
+        if 'form_template_id' in d:
+            o.form_template_id = d['form_template_id']
         if 'pic_url' in d:
             o.pic_url = d['pic_url']
         if 'remark' in d:

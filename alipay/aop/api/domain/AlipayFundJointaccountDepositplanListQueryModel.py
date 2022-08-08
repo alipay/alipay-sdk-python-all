@@ -11,9 +11,12 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
         self._account_id = None
         self._agreement_no = None
         self._biz_scene = None
+        self._channel = None
         self._identity = None
         self._identity_type = None
+        self._out_biz_no_list = None
         self._product_code = None
+        self._query_mode = None
 
     @property
     def account_id(self):
@@ -37,6 +40,13 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
     def biz_scene(self, value):
         self._biz_scene = value
     @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
+    @property
     def identity(self):
         return self._identity
 
@@ -51,12 +61,29 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def out_biz_no_list(self):
+        return self._out_biz_no_list
+
+    @out_biz_no_list.setter
+    def out_biz_no_list(self, value):
+        if isinstance(value, list):
+            self._out_biz_no_list = list()
+            for i in value:
+                self._out_biz_no_list.append(i)
+    @property
     def product_code(self):
         return self._product_code
 
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def query_mode(self):
+        return self._query_mode
+
+    @query_mode.setter
+    def query_mode(self, value):
+        self._query_mode = value
 
 
     def to_alipay_dict(self):
@@ -76,6 +103,11 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -86,11 +118,26 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.out_biz_no_list:
+            if isinstance(self.out_biz_no_list, list):
+                for i in range(0, len(self.out_biz_no_list)):
+                    element = self.out_biz_no_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.out_biz_no_list[i] = element.to_alipay_dict()
+            if hasattr(self.out_biz_no_list, 'to_alipay_dict'):
+                params['out_biz_no_list'] = self.out_biz_no_list.to_alipay_dict()
+            else:
+                params['out_biz_no_list'] = self.out_biz_no_list
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.query_mode:
+            if hasattr(self.query_mode, 'to_alipay_dict'):
+                params['query_mode'] = self.query_mode.to_alipay_dict()
+            else:
+                params['query_mode'] = self.query_mode
         return params
 
     @staticmethod
@@ -104,12 +151,18 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'out_biz_no_list' in d:
+            o.out_biz_no_list = d['out_biz_no_list']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'query_mode' in d:
+            o.query_mode = d['query_mode']
         return o
 
 

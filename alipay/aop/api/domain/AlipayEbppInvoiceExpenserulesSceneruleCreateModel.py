@@ -14,6 +14,7 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._employee_list = None
+        self._enterprise_id = None
         self._expense_ctrl_rule_info_list = None
         self._expense_type = None
         self._payment_policy = None
@@ -59,6 +60,13 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
             self._employee_list = list()
             for i in value:
                 self._employee_list.append(i)
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def expense_ctrl_rule_info_list(self):
         return self._expense_ctrl_rule_info_list
@@ -141,6 +149,11 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
                 params['employee_list'] = self.employee_list.to_alipay_dict()
             else:
                 params['employee_list'] = self.employee_list
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.expense_ctrl_rule_info_list:
             if isinstance(self.expense_ctrl_rule_info_list, list):
                 for i in range(0, len(self.expense_ctrl_rule_info_list)):
@@ -193,6 +206,8 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
             o.effective_start_date = d['effective_start_date']
         if 'employee_list' in d:
             o.employee_list = d['employee_list']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'expense_ctrl_rule_info_list' in d:
             o.expense_ctrl_rule_info_list = d['expense_ctrl_rule_info_list']
         if 'expense_type' in d:

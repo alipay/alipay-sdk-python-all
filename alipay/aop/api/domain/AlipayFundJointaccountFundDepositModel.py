@@ -12,6 +12,7 @@ class AlipayFundJointaccountFundDepositModel(object):
         self._agreement_no = None
         self._amount = None
         self._biz_scene = None
+        self._channel = None
         self._identity = None
         self._identity_type = None
         self._order_title = None
@@ -46,6 +47,13 @@ class AlipayFundJointaccountFundDepositModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def identity(self):
         return self._identity
@@ -105,6 +113,11 @@ class AlipayFundJointaccountFundDepositModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -145,6 +158,8 @@ class AlipayFundJointaccountFundDepositModel(object):
             o.amount = d['amount']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_type' in d:

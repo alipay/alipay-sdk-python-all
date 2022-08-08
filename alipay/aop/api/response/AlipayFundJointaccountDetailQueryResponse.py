@@ -27,6 +27,8 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
         self._invite_result_list = None
         self._member_list = None
         self._product_code = None
+        self._profit_status = None
+        self._yesterday_profit = None
 
     @property
     def account_id(self):
@@ -147,6 +149,20 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def profit_status(self):
+        return self._profit_status
+
+    @profit_status.setter
+    def profit_status(self, value):
+        self._profit_status = value
+    @property
+    def yesterday_profit(self):
+        return self._yesterday_profit
+
+    @yesterday_profit.setter
+    def yesterday_profit(self, value):
+        self._yesterday_profit = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundJointaccountDetailQueryResponse, self).parse_response_content(response_content)
@@ -178,3 +194,7 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
             self.member_list = response['member_list']
         if 'product_code' in response:
             self.product_code = response['product_code']
+        if 'profit_status' in response:
+            self.profit_status = response['profit_status']
+        if 'yesterday_profit' in response:
+            self.yesterday_profit = response['yesterday_profit']

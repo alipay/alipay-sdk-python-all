@@ -13,6 +13,7 @@ class AlipayMarketingActivityDeliveryStopModel(object):
         self._belong_merchant_info = None
         self._delivery_config_list = None
         self._delivery_id = None
+        self._merchant_access_mode = None
         self._out_biz_no = None
 
     @property
@@ -46,6 +47,13 @@ class AlipayMarketingActivityDeliveryStopModel(object):
     def delivery_id(self, value):
         self._delivery_id = value
     @property
+    def merchant_access_mode(self):
+        return self._merchant_access_mode
+
+    @merchant_access_mode.setter
+    def merchant_access_mode(self, value):
+        self._merchant_access_mode = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -76,6 +84,11 @@ class AlipayMarketingActivityDeliveryStopModel(object):
                 params['delivery_id'] = self.delivery_id.to_alipay_dict()
             else:
                 params['delivery_id'] = self.delivery_id
+        if self.merchant_access_mode:
+            if hasattr(self.merchant_access_mode, 'to_alipay_dict'):
+                params['merchant_access_mode'] = self.merchant_access_mode.to_alipay_dict()
+            else:
+                params['merchant_access_mode'] = self.merchant_access_mode
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -94,6 +107,8 @@ class AlipayMarketingActivityDeliveryStopModel(object):
             o.delivery_config_list = d['delivery_config_list']
         if 'delivery_id' in d:
             o.delivery_id = d['delivery_id']
+        if 'merchant_access_mode' in d:
+            o.merchant_access_mode = d['merchant_access_mode']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         return o

@@ -14,6 +14,7 @@ class MiniAppVersionBaseInfo(object):
         self._create_time = None
         self._description = None
         self._ext_json = None
+        self._extend_info = None
         self._gmt_modified = None
         self._gray_start_time = None
         self._inst_code = None
@@ -73,6 +74,13 @@ class MiniAppVersionBaseInfo(object):
     @ext_json.setter
     def ext_json(self, value):
         self._ext_json = value
+    @property
+    def extend_info(self):
+        return self._extend_info
+
+    @extend_info.setter
+    def extend_info(self, value):
+        self._extend_info = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -219,6 +227,11 @@ class MiniAppVersionBaseInfo(object):
                 params['ext_json'] = self.ext_json.to_alipay_dict()
             else:
                 params['ext_json'] = self.ext_json
+        if self.extend_info:
+            if hasattr(self.extend_info, 'to_alipay_dict'):
+                params['extend_info'] = self.extend_info.to_alipay_dict()
+            else:
+                params['extend_info'] = self.extend_info
         if self.gmt_modified:
             if hasattr(self.gmt_modified, 'to_alipay_dict'):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
@@ -318,6 +331,8 @@ class MiniAppVersionBaseInfo(object):
             o.description = d['description']
         if 'ext_json' in d:
             o.ext_json = d['ext_json']
+        if 'extend_info' in d:
+            o.extend_info = d['extend_info']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
         if 'gray_start_time' in d:

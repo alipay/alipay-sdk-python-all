@@ -10,6 +10,7 @@ class AlipayDataDataserviceBillDownloadurlQueryModel(object):
     def __init__(self):
         self._bill_date = None
         self._bill_type = None
+        self._smid = None
 
     @property
     def bill_date(self):
@@ -25,6 +26,13 @@ class AlipayDataDataserviceBillDownloadurlQueryModel(object):
     @bill_type.setter
     def bill_type(self, value):
         self._bill_type = value
+    @property
+    def smid(self):
+        return self._smid
+
+    @smid.setter
+    def smid(self, value):
+        self._smid = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AlipayDataDataserviceBillDownloadurlQueryModel(object):
                 params['bill_type'] = self.bill_type.to_alipay_dict()
             else:
                 params['bill_type'] = self.bill_type
+        if self.smid:
+            if hasattr(self.smid, 'to_alipay_dict'):
+                params['smid'] = self.smid.to_alipay_dict()
+            else:
+                params['smid'] = self.smid
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AlipayDataDataserviceBillDownloadurlQueryModel(object):
             o.bill_date = d['bill_date']
         if 'bill_type' in d:
             o.bill_type = d['bill_type']
+        if 'smid' in d:
+            o.smid = d['smid']
         return o
 
 

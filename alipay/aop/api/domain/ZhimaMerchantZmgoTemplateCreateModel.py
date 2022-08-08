@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ZMGOBasicConfig import ZMGOBasicConfig
+from alipay.aop.api.domain.ZMGOExtConfig import ZMGOExtConfig
 from alipay.aop.api.domain.ZMGOObligationConfig import ZMGOObligationConfig
 from alipay.aop.api.domain.ZMGOOpenConfig import ZMGOOpenConfig
 from alipay.aop.api.domain.ZMGOQuitConfig import ZMGOQuitConfig
@@ -15,6 +16,7 @@ class ZhimaMerchantZmgoTemplateCreateModel(object):
 
     def __init__(self):
         self._basic_config = None
+        self._ext_config = None
         self._obligation_config = None
         self._open_config = None
         self._quit_config = None
@@ -31,6 +33,16 @@ class ZhimaMerchantZmgoTemplateCreateModel(object):
             self._basic_config = value
         else:
             self._basic_config = ZMGOBasicConfig.from_alipay_dict(value)
+    @property
+    def ext_config(self):
+        return self._ext_config
+
+    @ext_config.setter
+    def ext_config(self, value):
+        if isinstance(value, ZMGOExtConfig):
+            self._ext_config = value
+        else:
+            self._ext_config = ZMGOExtConfig.from_alipay_dict(value)
     @property
     def obligation_config(self):
         return self._obligation_config
@@ -90,6 +102,11 @@ class ZhimaMerchantZmgoTemplateCreateModel(object):
                 params['basic_config'] = self.basic_config.to_alipay_dict()
             else:
                 params['basic_config'] = self.basic_config
+        if self.ext_config:
+            if hasattr(self.ext_config, 'to_alipay_dict'):
+                params['ext_config'] = self.ext_config.to_alipay_dict()
+            else:
+                params['ext_config'] = self.ext_config
         if self.obligation_config:
             if hasattr(self.obligation_config, 'to_alipay_dict'):
                 params['obligation_config'] = self.obligation_config.to_alipay_dict()
@@ -124,6 +141,8 @@ class ZhimaMerchantZmgoTemplateCreateModel(object):
         o = ZhimaMerchantZmgoTemplateCreateModel()
         if 'basic_config' in d:
             o.basic_config = d['basic_config']
+        if 'ext_config' in d:
+            o.ext_config = d['ext_config']
         if 'obligation_config' in d:
             o.obligation_config = d['obligation_config']
         if 'open_config' in d:

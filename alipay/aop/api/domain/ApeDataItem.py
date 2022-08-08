@@ -10,6 +10,7 @@ class ApeDataItem(object):
     def __init__(self):
         self._available_city_list = None
         self._brand = None
+        self._buy_url = None
         self._cate = None
         self._cate_cnt = None
         self._comment_cnt = None
@@ -17,9 +18,11 @@ class ApeDataItem(object):
         self._detail_pic_num = None
         self._free_shipping = None
         self._id = None
+        self._need_public_promo = None
         self._origin_price = None
         self._pic_url_list = None
         self._praise_cnt = None
+        self._promo_pic_url_list = None
         self._pub_time = None
         self._rating = None
         self._sale_number = None
@@ -50,6 +53,13 @@ class ApeDataItem(object):
     @brand.setter
     def brand(self, value):
         self._brand = value
+    @property
+    def buy_url(self):
+        return self._buy_url
+
+    @buy_url.setter
+    def buy_url(self, value):
+        self._buy_url = value
     @property
     def cate(self):
         return self._cate
@@ -100,6 +110,13 @@ class ApeDataItem(object):
     def id(self, value):
         self._id = value
     @property
+    def need_public_promo(self):
+        return self._need_public_promo
+
+    @need_public_promo.setter
+    def need_public_promo(self, value):
+        self._need_public_promo = value
+    @property
     def origin_price(self):
         return self._origin_price
 
@@ -123,6 +140,16 @@ class ApeDataItem(object):
     @praise_cnt.setter
     def praise_cnt(self, value):
         self._praise_cnt = value
+    @property
+    def promo_pic_url_list(self):
+        return self._promo_pic_url_list
+
+    @promo_pic_url_list.setter
+    def promo_pic_url_list(self, value):
+        if isinstance(value, list):
+            self._promo_pic_url_list = list()
+            for i in value:
+                self._promo_pic_url_list.append(i)
     @property
     def pub_time(self):
         return self._pub_time
@@ -226,6 +253,11 @@ class ApeDataItem(object):
                 params['brand'] = self.brand.to_alipay_dict()
             else:
                 params['brand'] = self.brand
+        if self.buy_url:
+            if hasattr(self.buy_url, 'to_alipay_dict'):
+                params['buy_url'] = self.buy_url.to_alipay_dict()
+            else:
+                params['buy_url'] = self.buy_url
         if self.cate:
             if hasattr(self.cate, 'to_alipay_dict'):
                 params['cate'] = self.cate.to_alipay_dict()
@@ -261,6 +293,11 @@ class ApeDataItem(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.need_public_promo:
+            if hasattr(self.need_public_promo, 'to_alipay_dict'):
+                params['need_public_promo'] = self.need_public_promo.to_alipay_dict()
+            else:
+                params['need_public_promo'] = self.need_public_promo
         if self.origin_price:
             if hasattr(self.origin_price, 'to_alipay_dict'):
                 params['origin_price'] = self.origin_price.to_alipay_dict()
@@ -281,6 +318,16 @@ class ApeDataItem(object):
                 params['praise_cnt'] = self.praise_cnt.to_alipay_dict()
             else:
                 params['praise_cnt'] = self.praise_cnt
+        if self.promo_pic_url_list:
+            if isinstance(self.promo_pic_url_list, list):
+                for i in range(0, len(self.promo_pic_url_list)):
+                    element = self.promo_pic_url_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.promo_pic_url_list[i] = element.to_alipay_dict()
+            if hasattr(self.promo_pic_url_list, 'to_alipay_dict'):
+                params['promo_pic_url_list'] = self.promo_pic_url_list.to_alipay_dict()
+            else:
+                params['promo_pic_url_list'] = self.promo_pic_url_list
         if self.pub_time:
             if hasattr(self.pub_time, 'to_alipay_dict'):
                 params['pub_time'] = self.pub_time.to_alipay_dict()
@@ -352,6 +399,8 @@ class ApeDataItem(object):
             o.available_city_list = d['available_city_list']
         if 'brand' in d:
             o.brand = d['brand']
+        if 'buy_url' in d:
+            o.buy_url = d['buy_url']
         if 'cate' in d:
             o.cate = d['cate']
         if 'cate_cnt' in d:
@@ -366,12 +415,16 @@ class ApeDataItem(object):
             o.free_shipping = d['free_shipping']
         if 'id' in d:
             o.id = d['id']
+        if 'need_public_promo' in d:
+            o.need_public_promo = d['need_public_promo']
         if 'origin_price' in d:
             o.origin_price = d['origin_price']
         if 'pic_url_list' in d:
             o.pic_url_list = d['pic_url_list']
         if 'praise_cnt' in d:
             o.praise_cnt = d['praise_cnt']
+        if 'promo_pic_url_list' in d:
+            o.promo_pic_url_list = d['promo_pic_url_list']
         if 'pub_time' in d:
             o.pub_time = d['pub_time']
         if 'rating' in d:
