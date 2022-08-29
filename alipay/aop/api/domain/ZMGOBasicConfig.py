@@ -15,6 +15,7 @@ class ZMGOBasicConfig(object):
         self._out_biz_no = None
         self._partner_id = None
         self._template_name = None
+        self._template_no = None
 
     @property
     def biz_type(self):
@@ -65,6 +66,13 @@ class ZMGOBasicConfig(object):
     @template_name.setter
     def template_name(self, value):
         self._template_name = value
+    @property
+    def template_no(self):
+        return self._template_no
+
+    @template_no.setter
+    def template_no(self, value):
+        self._template_no = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class ZMGOBasicConfig(object):
                 params['template_name'] = self.template_name.to_alipay_dict()
             else:
                 params['template_name'] = self.template_name
+        if self.template_no:
+            if hasattr(self.template_no, 'to_alipay_dict'):
+                params['template_no'] = self.template_no.to_alipay_dict()
+            else:
+                params['template_no'] = self.template_no
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class ZMGOBasicConfig(object):
             o.partner_id = d['partner_id']
         if 'template_name' in d:
             o.template_name = d['template_name']
+        if 'template_no' in d:
+            o.template_no = d['template_no']
         return o
 
 

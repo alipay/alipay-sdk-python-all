@@ -9,6 +9,8 @@ class OpenAppOperatorVo(object):
 
     def __init__(self):
         self._logon_id = None
+        self._nick_name = None
+        self._portrait = None
         self._role = None
         self._status = None
         self._user_id = None
@@ -20,6 +22,20 @@ class OpenAppOperatorVo(object):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def nick_name(self):
+        return self._nick_name
+
+    @nick_name.setter
+    def nick_name(self, value):
+        self._nick_name = value
+    @property
+    def portrait(self):
+        return self._portrait
+
+    @portrait.setter
+    def portrait(self, value):
+        self._portrait = value
     @property
     def role(self):
         return self._role
@@ -50,6 +66,16 @@ class OpenAppOperatorVo(object):
                 params['logon_id'] = self.logon_id.to_alipay_dict()
             else:
                 params['logon_id'] = self.logon_id
+        if self.nick_name:
+            if hasattr(self.nick_name, 'to_alipay_dict'):
+                params['nick_name'] = self.nick_name.to_alipay_dict()
+            else:
+                params['nick_name'] = self.nick_name
+        if self.portrait:
+            if hasattr(self.portrait, 'to_alipay_dict'):
+                params['portrait'] = self.portrait.to_alipay_dict()
+            else:
+                params['portrait'] = self.portrait
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -74,6 +100,10 @@ class OpenAppOperatorVo(object):
         o = OpenAppOperatorVo()
         if 'logon_id' in d:
             o.logon_id = d['logon_id']
+        if 'nick_name' in d:
+            o.nick_name = d['nick_name']
+        if 'portrait' in d:
+            o.portrait = d['portrait']
         if 'role' in d:
             o.role = d['role']
         if 'status' in d:

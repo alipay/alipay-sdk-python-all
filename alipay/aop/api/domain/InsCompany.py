@@ -11,8 +11,11 @@ class InsCompany(object):
         self._alipay_account_no = None
         self._cert_name = None
         self._cert_no = None
+        self._cert_type = None
         self._channel_account_id = None
         self._channel_account_type = None
+        self._company_cert_no = None
+        self._company_name = None
         self._phone = None
 
     @property
@@ -37,6 +40,13 @@ class InsCompany(object):
     def cert_no(self, value):
         self._cert_no = value
     @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
+    @property
     def channel_account_id(self):
         return self._channel_account_id
 
@@ -50,6 +60,20 @@ class InsCompany(object):
     @channel_account_type.setter
     def channel_account_type(self, value):
         self._channel_account_type = value
+    @property
+    def company_cert_no(self):
+        return self._company_cert_no
+
+    @company_cert_no.setter
+    def company_cert_no(self, value):
+        self._company_cert_no = value
+    @property
+    def company_name(self):
+        return self._company_name
+
+    @company_name.setter
+    def company_name(self, value):
+        self._company_name = value
     @property
     def phone(self):
         return self._phone
@@ -76,6 +100,11 @@ class InsCompany(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.channel_account_id:
             if hasattr(self.channel_account_id, 'to_alipay_dict'):
                 params['channel_account_id'] = self.channel_account_id.to_alipay_dict()
@@ -86,6 +115,16 @@ class InsCompany(object):
                 params['channel_account_type'] = self.channel_account_type.to_alipay_dict()
             else:
                 params['channel_account_type'] = self.channel_account_type
+        if self.company_cert_no:
+            if hasattr(self.company_cert_no, 'to_alipay_dict'):
+                params['company_cert_no'] = self.company_cert_no.to_alipay_dict()
+            else:
+                params['company_cert_no'] = self.company_cert_no
+        if self.company_name:
+            if hasattr(self.company_name, 'to_alipay_dict'):
+                params['company_name'] = self.company_name.to_alipay_dict()
+            else:
+                params['company_name'] = self.company_name
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -104,10 +143,16 @@ class InsCompany(object):
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'channel_account_id' in d:
             o.channel_account_id = d['channel_account_id']
         if 'channel_account_type' in d:
             o.channel_account_type = d['channel_account_type']
+        if 'company_cert_no' in d:
+            o.company_cert_no = d['company_cert_no']
+        if 'company_name' in d:
+            o.company_name = d['company_name']
         if 'phone' in d:
             o.phone = d['phone']
         return o

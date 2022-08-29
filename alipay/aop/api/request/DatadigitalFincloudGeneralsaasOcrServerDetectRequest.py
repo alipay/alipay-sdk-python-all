@@ -14,6 +14,7 @@ class DatadigitalFincloudGeneralsaasOcrServerDetectRequest(object):
         self._biz_model = biz_model
         self._ocr_type = None
         self._outer_order_no = None
+        self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -46,6 +47,15 @@ class DatadigitalFincloudGeneralsaasOcrServerDetectRequest(object):
     def outer_order_no(self, value):
         self._outer_order_no = value
 
+    @property
+    def file_content(self):
+        return self._file_content
+
+    @file_content.setter
+    def file_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._file_content = value
 
     @property
     def version(self):
@@ -150,4 +160,6 @@ class DatadigitalFincloudGeneralsaasOcrServerDetectRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.file_content:
+            multipart_params['file_content'] = self.file_content
         return multipart_params

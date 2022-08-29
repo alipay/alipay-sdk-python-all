@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AccountDTO import AccountDTO
 
 
 class AnttechBlockchainDefinSaasPaymentCreateResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AnttechBlockchainDefinSaasPaymentCreateResponse(AlipayResponse):
         self._out_order_id = None
         self._out_payee_id = None
         self._out_payer_id = None
+        self._payee_account = None
         self._platform_member_id = None
 
     @property
@@ -52,6 +54,16 @@ class AnttechBlockchainDefinSaasPaymentCreateResponse(AlipayResponse):
     def out_payer_id(self, value):
         self._out_payer_id = value
     @property
+    def payee_account(self):
+        return self._payee_account
+
+    @payee_account.setter
+    def payee_account(self, value):
+        if isinstance(value, AccountDTO):
+            self._payee_account = value
+        else:
+            self._payee_account = AccountDTO.from_alipay_dict(value)
+    @property
     def platform_member_id(self):
         return self._platform_member_id
 
@@ -71,5 +83,7 @@ class AnttechBlockchainDefinSaasPaymentCreateResponse(AlipayResponse):
             self.out_payee_id = response['out_payee_id']
         if 'out_payer_id' in response:
             self.out_payer_id = response['out_payer_id']
+        if 'payee_account' in response:
+            self.payee_account = response['payee_account']
         if 'platform_member_id' in response:
             self.platform_member_id = response['platform_member_id']

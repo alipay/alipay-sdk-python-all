@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsCompany import InsCompany
+from alipay.aop.api.domain.InsPartnerOrganization import InsPartnerOrganization
 
 
 class AlipayInsSceneEmploymentPolicyCancelModel(object):
@@ -12,6 +13,7 @@ class AlipayInsSceneEmploymentPolicyCancelModel(object):
         self._channel = None
         self._merchant = None
         self._out_biz_no = None
+        self._partner_organization = None
         self._policy_no_list = None
         self._scene_code = None
 
@@ -39,6 +41,16 @@ class AlipayInsSceneEmploymentPolicyCancelModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def partner_organization(self):
+        return self._partner_organization
+
+    @partner_organization.setter
+    def partner_organization(self, value):
+        if isinstance(value, InsPartnerOrganization):
+            self._partner_organization = value
+        else:
+            self._partner_organization = InsPartnerOrganization.from_alipay_dict(value)
     @property
     def policy_no_list(self):
         return self._policy_no_list
@@ -75,6 +87,11 @@ class AlipayInsSceneEmploymentPolicyCancelModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.partner_organization:
+            if hasattr(self.partner_organization, 'to_alipay_dict'):
+                params['partner_organization'] = self.partner_organization.to_alipay_dict()
+            else:
+                params['partner_organization'] = self.partner_organization
         if self.policy_no_list:
             if isinstance(self.policy_no_list, list):
                 for i in range(0, len(self.policy_no_list)):
@@ -103,6 +120,8 @@ class AlipayInsSceneEmploymentPolicyCancelModel(object):
             o.merchant = d['merchant']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'partner_organization' in d:
+            o.partner_organization = d['partner_organization']
         if 'policy_no_list' in d:
             o.policy_no_list = d['policy_no_list']
         if 'scene_code' in d:

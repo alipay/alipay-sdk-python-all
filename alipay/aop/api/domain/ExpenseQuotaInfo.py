@@ -18,6 +18,7 @@ class ExpenseQuotaInfo(object):
         self._quota_id = None
         self._quota_locked = None
         self._quota_total = None
+        self._quota_type = None
         self._quota_used = None
         self._target_id = None
         self._target_type = None
@@ -93,6 +94,13 @@ class ExpenseQuotaInfo(object):
     def quota_total(self, value):
         self._quota_total = value
     @property
+    def quota_type(self):
+        return self._quota_type
+
+    @quota_type.setter
+    def quota_type(self, value):
+        self._quota_type = value
+    @property
     def quota_used(self):
         return self._quota_used
 
@@ -167,6 +175,11 @@ class ExpenseQuotaInfo(object):
                 params['quota_total'] = self.quota_total.to_alipay_dict()
             else:
                 params['quota_total'] = self.quota_total
+        if self.quota_type:
+            if hasattr(self.quota_type, 'to_alipay_dict'):
+                params['quota_type'] = self.quota_type.to_alipay_dict()
+            else:
+                params['quota_type'] = self.quota_type
         if self.quota_used:
             if hasattr(self.quota_used, 'to_alipay_dict'):
                 params['quota_used'] = self.quota_used.to_alipay_dict()
@@ -209,6 +222,8 @@ class ExpenseQuotaInfo(object):
             o.quota_locked = d['quota_locked']
         if 'quota_total' in d:
             o.quota_total = d['quota_total']
+        if 'quota_type' in d:
+            o.quota_type = d['quota_type']
         if 'quota_used' in d:
             o.quota_used = d['quota_used']
         if 'target_id' in d:

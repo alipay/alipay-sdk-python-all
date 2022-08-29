@@ -8,12 +8,28 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceTransportAuthBindingGetModel(object):
 
     def __init__(self):
+        self._alipay_cert_type = None
+        self._biz_cert_type = None
         self._cert_no = None
         self._cert_type = None
         self._out_biz_no = None
         self._scene = None
         self._user_id = None
 
+    @property
+    def alipay_cert_type(self):
+        return self._alipay_cert_type
+
+    @alipay_cert_type.setter
+    def alipay_cert_type(self, value):
+        self._alipay_cert_type = value
+    @property
+    def biz_cert_type(self):
+        return self._biz_cert_type
+
+    @biz_cert_type.setter
+    def biz_cert_type(self, value):
+        self._biz_cert_type = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -53,6 +69,16 @@ class AlipayCommerceTransportAuthBindingGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_cert_type:
+            if hasattr(self.alipay_cert_type, 'to_alipay_dict'):
+                params['alipay_cert_type'] = self.alipay_cert_type.to_alipay_dict()
+            else:
+                params['alipay_cert_type'] = self.alipay_cert_type
+        if self.biz_cert_type:
+            if hasattr(self.biz_cert_type, 'to_alipay_dict'):
+                params['biz_cert_type'] = self.biz_cert_type.to_alipay_dict()
+            else:
+                params['biz_cert_type'] = self.biz_cert_type
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -85,6 +111,10 @@ class AlipayCommerceTransportAuthBindingGetModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportAuthBindingGetModel()
+        if 'alipay_cert_type' in d:
+            o.alipay_cert_type = d['alipay_cert_type']
+        if 'biz_cert_type' in d:
+            o.biz_cert_type = d['biz_cert_type']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'cert_type' in d:

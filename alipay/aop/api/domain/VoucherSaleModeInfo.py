@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BizfundSettleInfo import BizfundSettleInfo
 
 
 class VoucherSaleModeInfo(object):
@@ -13,6 +14,7 @@ class VoucherSaleModeInfo(object):
         self._payee_pid = None
         self._refundable = None
         self._sale_amount = None
+        self._settle_info = None
 
     @property
     def fund_custody_mode(self):
@@ -49,6 +51,16 @@ class VoucherSaleModeInfo(object):
     @sale_amount.setter
     def sale_amount(self, value):
         self._sale_amount = value
+    @property
+    def settle_info(self):
+        return self._settle_info
+
+    @settle_info.setter
+    def settle_info(self, value):
+        if isinstance(value, BizfundSettleInfo):
+            self._settle_info = value
+        else:
+            self._settle_info = BizfundSettleInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -78,6 +90,11 @@ class VoucherSaleModeInfo(object):
                 params['sale_amount'] = self.sale_amount.to_alipay_dict()
             else:
                 params['sale_amount'] = self.sale_amount
+        if self.settle_info:
+            if hasattr(self.settle_info, 'to_alipay_dict'):
+                params['settle_info'] = self.settle_info.to_alipay_dict()
+            else:
+                params['settle_info'] = self.settle_info
         return params
 
     @staticmethod
@@ -95,6 +112,8 @@ class VoucherSaleModeInfo(object):
             o.refundable = d['refundable']
         if 'sale_amount' in d:
             o.sale_amount = d['sale_amount']
+        if 'settle_info' in d:
+            o.settle_info = d['settle_info']
         return o
 
 

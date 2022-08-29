@@ -18,6 +18,7 @@ class OperatorAddVO(object):
         self._main_ip_role_type = None
         self._name = None
         self._nick_name = None
+        self._role_codes = None
         self._tenant_id = None
 
     @property
@@ -90,6 +91,16 @@ class OperatorAddVO(object):
     def nick_name(self, value):
         self._nick_name = value
     @property
+    def role_codes(self):
+        return self._role_codes
+
+    @role_codes.setter
+    def role_codes(self, value):
+        if isinstance(value, list):
+            self._role_codes = list()
+            for i in value:
+                self._role_codes.append(i)
+    @property
     def tenant_id(self):
         return self._tenant_id
 
@@ -150,6 +161,16 @@ class OperatorAddVO(object):
                 params['nick_name'] = self.nick_name.to_alipay_dict()
             else:
                 params['nick_name'] = self.nick_name
+        if self.role_codes:
+            if isinstance(self.role_codes, list):
+                for i in range(0, len(self.role_codes)):
+                    element = self.role_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.role_codes[i] = element.to_alipay_dict()
+            if hasattr(self.role_codes, 'to_alipay_dict'):
+                params['role_codes'] = self.role_codes.to_alipay_dict()
+            else:
+                params['role_codes'] = self.role_codes
         if self.tenant_id:
             if hasattr(self.tenant_id, 'to_alipay_dict'):
                 params['tenant_id'] = self.tenant_id.to_alipay_dict()
@@ -180,6 +201,8 @@ class OperatorAddVO(object):
             o.name = d['name']
         if 'nick_name' in d:
             o.nick_name = d['nick_name']
+        if 'role_codes' in d:
+            o.role_codes = d['role_codes']
         if 'tenant_id' in d:
             o.tenant_id = d['tenant_id']
         return o

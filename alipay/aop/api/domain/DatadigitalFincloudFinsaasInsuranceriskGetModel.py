@@ -10,6 +10,7 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
     def __init__(self):
         self._cert_no_code = None
         self._data_type = None
+        self._request_id = None
         self._telephone_num = None
 
     @property
@@ -26,6 +27,13 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
     @data_type.setter
     def data_type(self, value):
         self._data_type = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
     @property
     def telephone_num(self):
         return self._telephone_num
@@ -47,6 +55,11 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
                 params['data_type'] = self.data_type.to_alipay_dict()
             else:
                 params['data_type'] = self.data_type
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
         if self.telephone_num:
             if hasattr(self.telephone_num, 'to_alipay_dict'):
                 params['telephone_num'] = self.telephone_num.to_alipay_dict()
@@ -63,6 +76,8 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
             o.cert_no_code = d['cert_no_code']
         if 'data_type' in d:
             o.data_type = d['data_type']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
         if 'telephone_num' in d:
             o.telephone_num = d['telephone_num']
         return o

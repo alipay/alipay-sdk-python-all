@@ -18,8 +18,10 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
         self._apply_attatchments = None
         self._apply_time = None
         self._apply_user_info = None
+        self._apply_user_public_key = None
         self._beneficiary_user_info = None
         self._bid_detail = None
+        self._encrypted = None
         self._guar_end_date = None
         self._guar_start_date = None
         self._guar_valid_days = None
@@ -65,6 +67,13 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
         else:
             self._apply_user_info = EnterpriseCustomerInfoVO.from_alipay_dict(value)
     @property
+    def apply_user_public_key(self):
+        return self._apply_user_public_key
+
+    @apply_user_public_key.setter
+    def apply_user_public_key(self, value):
+        self._apply_user_public_key = value
+    @property
     def beneficiary_user_info(self):
         return self._beneficiary_user_info
 
@@ -84,6 +93,13 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
             self._bid_detail = value
         else:
             self._bid_detail = BidDetailVO.from_alipay_dict(value)
+    @property
+    def encrypted(self):
+        return self._encrypted
+
+    @encrypted.setter
+    def encrypted(self, value):
+        self._encrypted = value
     @property
     def guar_end_date(self):
         return self._guar_end_date
@@ -153,6 +169,11 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
                 params['apply_user_info'] = self.apply_user_info.to_alipay_dict()
             else:
                 params['apply_user_info'] = self.apply_user_info
+        if self.apply_user_public_key:
+            if hasattr(self.apply_user_public_key, 'to_alipay_dict'):
+                params['apply_user_public_key'] = self.apply_user_public_key.to_alipay_dict()
+            else:
+                params['apply_user_public_key'] = self.apply_user_public_key
         if self.beneficiary_user_info:
             if hasattr(self.beneficiary_user_info, 'to_alipay_dict'):
                 params['beneficiary_user_info'] = self.beneficiary_user_info.to_alipay_dict()
@@ -163,6 +184,11 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
                 params['bid_detail'] = self.bid_detail.to_alipay_dict()
             else:
                 params['bid_detail'] = self.bid_detail
+        if self.encrypted:
+            if hasattr(self.encrypted, 'to_alipay_dict'):
+                params['encrypted'] = self.encrypted.to_alipay_dict()
+            else:
+                params['encrypted'] = self.encrypted
         if self.guar_end_date:
             if hasattr(self.guar_end_date, 'to_alipay_dict'):
                 params['guar_end_date'] = self.guar_end_date.to_alipay_dict()
@@ -208,10 +234,14 @@ class MybankCreditLoantradeGuarletterApplyCreateModel(object):
             o.apply_time = d['apply_time']
         if 'apply_user_info' in d:
             o.apply_user_info = d['apply_user_info']
+        if 'apply_user_public_key' in d:
+            o.apply_user_public_key = d['apply_user_public_key']
         if 'beneficiary_user_info' in d:
             o.beneficiary_user_info = d['beneficiary_user_info']
         if 'bid_detail' in d:
             o.bid_detail = d['bid_detail']
+        if 'encrypted' in d:
+            o.encrypted = d['encrypted']
         if 'guar_end_date' in d:
             o.guar_end_date = d['guar_end_date']
         if 'guar_start_date' in d:

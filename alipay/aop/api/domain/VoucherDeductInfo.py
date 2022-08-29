@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CustomerDefineVoucherInfo import CustomerDefineVoucherInfo
 from alipay.aop.api.domain.DiscountVoucherInfo import DiscountVoucherInfo
 from alipay.aop.api.domain.ExchangeVoucherInfo import ExchangeVoucherInfo
 from alipay.aop.api.domain.FixVoucherInfo import FixVoucherInfo
@@ -12,12 +13,23 @@ from alipay.aop.api.domain.SpecialVoucherInfo import SpecialVoucherInfo
 class VoucherDeductInfo(object):
 
     def __init__(self):
+        self._customer_define_voucher_info = None
         self._discount_voucher_info = None
         self._exchange_voucher_info = None
         self._fix_voucher_info = None
         self._special_voucher_info = None
         self._voucher_type = None
 
+    @property
+    def customer_define_voucher_info(self):
+        return self._customer_define_voucher_info
+
+    @customer_define_voucher_info.setter
+    def customer_define_voucher_info(self, value):
+        if isinstance(value, CustomerDefineVoucherInfo):
+            self._customer_define_voucher_info = value
+        else:
+            self._customer_define_voucher_info = CustomerDefineVoucherInfo.from_alipay_dict(value)
     @property
     def discount_voucher_info(self):
         return self._discount_voucher_info
@@ -69,6 +81,11 @@ class VoucherDeductInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.customer_define_voucher_info:
+            if hasattr(self.customer_define_voucher_info, 'to_alipay_dict'):
+                params['customer_define_voucher_info'] = self.customer_define_voucher_info.to_alipay_dict()
+            else:
+                params['customer_define_voucher_info'] = self.customer_define_voucher_info
         if self.discount_voucher_info:
             if hasattr(self.discount_voucher_info, 'to_alipay_dict'):
                 params['discount_voucher_info'] = self.discount_voucher_info.to_alipay_dict()
@@ -101,6 +118,8 @@ class VoucherDeductInfo(object):
         if not d:
             return None
         o = VoucherDeductInfo()
+        if 'customer_define_voucher_info' in d:
+            o.customer_define_voucher_info = d['customer_define_voucher_info']
         if 'discount_voucher_info' in d:
             o.discount_voucher_info = d['discount_voucher_info']
         if 'exchange_voucher_info' in d:

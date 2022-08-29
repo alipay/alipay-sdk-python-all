@@ -18,6 +18,7 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
         self._outer_biz_no = None
         self._phone = None
         self._reserved = None
+        self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -78,6 +79,15 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     def reserved(self, value):
         self._reserved = value
 
+    @property
+    def file_content(self):
+        return self._file_content
+
+    @file_content.setter
+    def file_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._file_content = value
 
     @property
     def version(self):
@@ -202,4 +212,6 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.file_content:
+            multipart_params['file_content'] = self.file_content
         return multipart_params

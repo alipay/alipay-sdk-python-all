@@ -17,6 +17,7 @@ class ExchangeVoucher(object):
         self._payee_pid = None
         self._refundable = None
         self._sale_amount = None
+        self._settle_type = None
         self._voucher_detail_url = None
         self._voucher_name = None
 
@@ -84,6 +85,13 @@ class ExchangeVoucher(object):
     def sale_amount(self, value):
         self._sale_amount = value
     @property
+    def settle_type(self):
+        return self._settle_type
+
+    @settle_type.setter
+    def settle_type(self, value):
+        self._settle_type = value
+    @property
     def voucher_detail_url(self):
         return self._voucher_detail_url
 
@@ -146,6 +154,11 @@ class ExchangeVoucher(object):
                 params['sale_amount'] = self.sale_amount.to_alipay_dict()
             else:
                 params['sale_amount'] = self.sale_amount
+        if self.settle_type:
+            if hasattr(self.settle_type, 'to_alipay_dict'):
+                params['settle_type'] = self.settle_type.to_alipay_dict()
+            else:
+                params['settle_type'] = self.settle_type
         if self.voucher_detail_url:
             if hasattr(self.voucher_detail_url, 'to_alipay_dict'):
                 params['voucher_detail_url'] = self.voucher_detail_url.to_alipay_dict()
@@ -181,6 +194,8 @@ class ExchangeVoucher(object):
             o.refundable = d['refundable']
         if 'sale_amount' in d:
             o.sale_amount = d['sale_amount']
+        if 'settle_type' in d:
+            o.settle_type = d['settle_type']
         if 'voucher_detail_url' in d:
             o.voucher_detail_url = d['voucher_detail_url']
         if 'voucher_name' in d:

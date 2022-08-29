@@ -11,6 +11,7 @@ class AlipayPcreditHuabeiMerchantActivityQueryResponse(AlipayResponse):
         super(AlipayPcreditHuabeiMerchantActivityQueryResponse, self).__init__()
         self._account_id = None
         self._aggr_id = None
+        self._benefit_activity_code = None
         self._fund_type = None
         self._status = None
         self._subsidy_scope = None
@@ -29,6 +30,13 @@ class AlipayPcreditHuabeiMerchantActivityQueryResponse(AlipayResponse):
     @aggr_id.setter
     def aggr_id(self, value):
         self._aggr_id = value
+    @property
+    def benefit_activity_code(self):
+        return self._benefit_activity_code
+
+    @benefit_activity_code.setter
+    def benefit_activity_code(self, value):
+        self._benefit_activity_code = value
     @property
     def fund_type(self):
         return self._fund_type
@@ -57,6 +65,8 @@ class AlipayPcreditHuabeiMerchantActivityQueryResponse(AlipayResponse):
             self.account_id = response['account_id']
         if 'aggr_id' in response:
             self.aggr_id = response['aggr_id']
+        if 'benefit_activity_code' in response:
+            self.benefit_activity_code = response['benefit_activity_code']
         if 'fund_type' in response:
             self.fund_type = response['fund_type']
         if 'status' in response:

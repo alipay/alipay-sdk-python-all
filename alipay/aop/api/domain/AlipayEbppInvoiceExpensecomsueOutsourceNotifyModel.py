@@ -14,6 +14,7 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
         self._deal_time = None
         self._employee_id = None
         self._employee_id_type = None
+        self._enterprise_id = None
         self._extend = None
         self._is_off_set = None
         self._out_source_id = None
@@ -63,6 +64,13 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
     @employee_id_type.setter
     def employee_id_type(self, value):
         self._employee_id_type = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def extend(self):
         return self._extend
@@ -139,6 +147,11 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
                 params['employee_id_type'] = self.employee_id_type.to_alipay_dict()
             else:
                 params['employee_id_type'] = self.employee_id_type
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.extend:
             if hasattr(self.extend, 'to_alipay_dict'):
                 params['extend'] = self.extend.to_alipay_dict()
@@ -188,6 +201,8 @@ class AlipayEbppInvoiceExpensecomsueOutsourceNotifyModel(object):
             o.employee_id = d['employee_id']
         if 'employee_id_type' in d:
             o.employee_id_type = d['employee_id_type']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'extend' in d:
             o.extend = d['extend']
         if 'is_off_set' in d:

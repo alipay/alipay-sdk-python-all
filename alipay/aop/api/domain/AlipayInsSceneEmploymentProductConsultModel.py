@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsCompany import InsCompany
+from alipay.aop.api.domain.InsPartnerOrganization import InsPartnerOrganization
 
 
 class AlipayInsSceneEmploymentProductConsultModel(object):
@@ -11,6 +12,7 @@ class AlipayInsSceneEmploymentProductConsultModel(object):
     def __init__(self):
         self._channel = None
         self._merchant = None
+        self._partner_organization = None
         self._scene_code = None
 
     @property
@@ -30,6 +32,16 @@ class AlipayInsSceneEmploymentProductConsultModel(object):
             self._merchant = value
         else:
             self._merchant = InsCompany.from_alipay_dict(value)
+    @property
+    def partner_organization(self):
+        return self._partner_organization
+
+    @partner_organization.setter
+    def partner_organization(self, value):
+        if isinstance(value, InsPartnerOrganization):
+            self._partner_organization = value
+        else:
+            self._partner_organization = InsPartnerOrganization.from_alipay_dict(value)
     @property
     def scene_code(self):
         return self._scene_code
@@ -51,6 +63,11 @@ class AlipayInsSceneEmploymentProductConsultModel(object):
                 params['merchant'] = self.merchant.to_alipay_dict()
             else:
                 params['merchant'] = self.merchant
+        if self.partner_organization:
+            if hasattr(self.partner_organization, 'to_alipay_dict'):
+                params['partner_organization'] = self.partner_organization.to_alipay_dict()
+            else:
+                params['partner_organization'] = self.partner_organization
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -67,6 +84,8 @@ class AlipayInsSceneEmploymentProductConsultModel(object):
             o.channel = d['channel']
         if 'merchant' in d:
             o.merchant = d['merchant']
+        if 'partner_organization' in d:
+            o.partner_organization = d['partner_organization']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         return o

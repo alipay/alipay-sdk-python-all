@@ -14,7 +14,9 @@ class ContentRisks(object):
         self._file_id = None
         self._file_type = None
         self._origin_file = None
+        self._origin_file_id = None
         self._origin_name = None
+        self._parent_file_id = None
         self._risks = None
         self._sub_contents = None
 
@@ -47,12 +49,26 @@ class ContentRisks(object):
     def origin_file(self, value):
         self._origin_file = value
     @property
+    def origin_file_id(self):
+        return self._origin_file_id
+
+    @origin_file_id.setter
+    def origin_file_id(self, value):
+        self._origin_file_id = value
+    @property
     def origin_name(self):
         return self._origin_name
 
     @origin_name.setter
     def origin_name(self, value):
         self._origin_name = value
+    @property
+    def parent_file_id(self):
+        return self._parent_file_id
+
+    @parent_file_id.setter
+    def parent_file_id(self, value):
+        self._parent_file_id = value
     @property
     def risks(self):
         return self._risks
@@ -103,11 +119,21 @@ class ContentRisks(object):
                 params['origin_file'] = self.origin_file.to_alipay_dict()
             else:
                 params['origin_file'] = self.origin_file
+        if self.origin_file_id:
+            if hasattr(self.origin_file_id, 'to_alipay_dict'):
+                params['origin_file_id'] = self.origin_file_id.to_alipay_dict()
+            else:
+                params['origin_file_id'] = self.origin_file_id
         if self.origin_name:
             if hasattr(self.origin_name, 'to_alipay_dict'):
                 params['origin_name'] = self.origin_name.to_alipay_dict()
             else:
                 params['origin_name'] = self.origin_name
+        if self.parent_file_id:
+            if hasattr(self.parent_file_id, 'to_alipay_dict'):
+                params['parent_file_id'] = self.parent_file_id.to_alipay_dict()
+            else:
+                params['parent_file_id'] = self.parent_file_id
         if self.risks:
             if isinstance(self.risks, list):
                 for i in range(0, len(self.risks)):
@@ -143,8 +169,12 @@ class ContentRisks(object):
             o.file_type = d['file_type']
         if 'origin_file' in d:
             o.origin_file = d['origin_file']
+        if 'origin_file_id' in d:
+            o.origin_file_id = d['origin_file_id']
         if 'origin_name' in d:
             o.origin_name = d['origin_name']
+        if 'parent_file_id' in d:
+            o.parent_file_id = d['parent_file_id']
         if 'risks' in d:
             o.risks = d['risks']
         if 'sub_contents' in d:

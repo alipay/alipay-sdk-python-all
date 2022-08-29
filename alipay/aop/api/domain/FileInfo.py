@@ -11,6 +11,7 @@ class FileInfo(object):
         self._data_type = None
         self._file_biz_type = None
         self._file_url = None
+        self._origin_file_id = None
 
     @property
     def data_type(self):
@@ -33,6 +34,13 @@ class FileInfo(object):
     @file_url.setter
     def file_url(self, value):
         self._file_url = value
+    @property
+    def origin_file_id(self):
+        return self._origin_file_id
+
+    @origin_file_id.setter
+    def origin_file_id(self, value):
+        self._origin_file_id = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class FileInfo(object):
                 params['file_url'] = self.file_url.to_alipay_dict()
             else:
                 params['file_url'] = self.file_url
+        if self.origin_file_id:
+            if hasattr(self.origin_file_id, 'to_alipay_dict'):
+                params['origin_file_id'] = self.origin_file_id.to_alipay_dict()
+            else:
+                params['origin_file_id'] = self.origin_file_id
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class FileInfo(object):
             o.file_biz_type = d['file_biz_type']
         if 'file_url' in d:
             o.file_url = d['file_url']
+        if 'origin_file_id' in d:
+            o.origin_file_id = d['origin_file_id']
         return o
 
 

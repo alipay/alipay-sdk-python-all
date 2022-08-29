@@ -20,6 +20,7 @@ class OperatorBasicInfo(object):
         self._operator_id = None
         self._rel_ip_role_id = None
         self._rel_ip_role_type = None
+        self._role_codes = None
         self._status = None
         self._tenant_id = None
         self._type = None
@@ -107,6 +108,16 @@ class OperatorBasicInfo(object):
     def rel_ip_role_type(self, value):
         self._rel_ip_role_type = value
     @property
+    def role_codes(self):
+        return self._role_codes
+
+    @role_codes.setter
+    def role_codes(self, value):
+        if isinstance(value, list):
+            self._role_codes = list()
+            for i in value:
+                self._role_codes.append(i)
+    @property
     def status(self):
         return self._status
 
@@ -191,6 +202,16 @@ class OperatorBasicInfo(object):
                 params['rel_ip_role_type'] = self.rel_ip_role_type.to_alipay_dict()
             else:
                 params['rel_ip_role_type'] = self.rel_ip_role_type
+        if self.role_codes:
+            if isinstance(self.role_codes, list):
+                for i in range(0, len(self.role_codes)):
+                    element = self.role_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.role_codes[i] = element.to_alipay_dict()
+            if hasattr(self.role_codes, 'to_alipay_dict'):
+                params['role_codes'] = self.role_codes.to_alipay_dict()
+            else:
+                params['role_codes'] = self.role_codes
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -233,6 +254,8 @@ class OperatorBasicInfo(object):
             o.rel_ip_role_id = d['rel_ip_role_id']
         if 'rel_ip_role_type' in d:
             o.rel_ip_role_type = d['rel_ip_role_type']
+        if 'role_codes' in d:
+            o.role_codes = d['role_codes']
         if 'status' in d:
             o.status = d['status']
         if 'tenant_id' in d:

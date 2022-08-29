@@ -12,6 +12,7 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
         self._activity_name = None
         self._aggr_id = None
         self._amount_budget = None
+        self._benefit_activity_code = None
         self._budget_warning_mail_list = None
         self._budget_warning_mobile_list = None
         self._budget_warning_money = None
@@ -47,6 +48,13 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
     @amount_budget.setter
     def amount_budget(self, value):
         self._amount_budget = value
+    @property
+    def benefit_activity_code(self):
+        return self._benefit_activity_code
+
+    @benefit_activity_code.setter
+    def benefit_activity_code(self, value):
+        self._benefit_activity_code = value
     @property
     def budget_warning_mail_list(self):
         return self._budget_warning_mail_list
@@ -166,6 +174,11 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
                 params['amount_budget'] = self.amount_budget.to_alipay_dict()
             else:
                 params['amount_budget'] = self.amount_budget
+        if self.benefit_activity_code:
+            if hasattr(self.benefit_activity_code, 'to_alipay_dict'):
+                params['benefit_activity_code'] = self.benefit_activity_code.to_alipay_dict()
+            else:
+                params['benefit_activity_code'] = self.benefit_activity_code
         if self.budget_warning_mail_list:
             if hasattr(self.budget_warning_mail_list, 'to_alipay_dict'):
                 params['budget_warning_mail_list'] = self.budget_warning_mail_list.to_alipay_dict()
@@ -254,6 +267,8 @@ class AlipayPcreditHuabeiMerchantActivityModifyModel(object):
             o.aggr_id = d['aggr_id']
         if 'amount_budget' in d:
             o.amount_budget = d['amount_budget']
+        if 'benefit_activity_code' in d:
+            o.benefit_activity_code = d['benefit_activity_code']
         if 'budget_warning_mail_list' in d:
             o.budget_warning_mail_list = d['budget_warning_mail_list']
         if 'budget_warning_mobile_list' in d:

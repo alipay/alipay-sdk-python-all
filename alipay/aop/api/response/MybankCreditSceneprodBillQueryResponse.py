@@ -13,6 +13,7 @@ class MybankCreditSceneprodBillQueryResponse(AlipayResponse):
         self._app_seqno = None
         self._bill_list = None
         self._drawdown_no = None
+        self._ovd_days = None
         self._trace_id = None
 
     @property
@@ -43,6 +44,13 @@ class MybankCreditSceneprodBillQueryResponse(AlipayResponse):
     def drawdown_no(self, value):
         self._drawdown_no = value
     @property
+    def ovd_days(self):
+        return self._ovd_days
+
+    @ovd_days.setter
+    def ovd_days(self, value):
+        self._ovd_days = value
+    @property
     def trace_id(self):
         return self._trace_id
 
@@ -58,5 +66,7 @@ class MybankCreditSceneprodBillQueryResponse(AlipayResponse):
             self.bill_list = response['bill_list']
         if 'drawdown_no' in response:
             self.drawdown_no = response['drawdown_no']
+        if 'ovd_days' in response:
+            self.ovd_days = response['ovd_days']
         if 'trace_id' in response:
             self.trace_id = response['trace_id']

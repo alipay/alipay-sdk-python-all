@@ -10,6 +10,7 @@ class AlipayEcoActivityRecycleSendModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._energy_appid = None
         self._item_list = None
         self._out_biz_no = None
         self._out_biz_type = None
@@ -22,6 +23,13 @@ class AlipayEcoActivityRecycleSendModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def energy_appid(self):
+        return self._energy_appid
+
+    @energy_appid.setter
+    def energy_appid(self, value):
+        self._energy_appid = value
     @property
     def item_list(self):
         return self._item_list
@@ -65,6 +73,11 @@ class AlipayEcoActivityRecycleSendModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.energy_appid:
+            if hasattr(self.energy_appid, 'to_alipay_dict'):
+                params['energy_appid'] = self.energy_appid.to_alipay_dict()
+            else:
+                params['energy_appid'] = self.energy_appid
         if self.item_list:
             if isinstance(self.item_list, list):
                 for i in range(0, len(self.item_list)):
@@ -99,6 +112,8 @@ class AlipayEcoActivityRecycleSendModel(object):
         o = AlipayEcoActivityRecycleSendModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'energy_appid' in d:
+            o.energy_appid = d['energy_appid']
         if 'item_list' in d:
             o.item_list = d['item_list']
         if 'out_biz_no' in d:

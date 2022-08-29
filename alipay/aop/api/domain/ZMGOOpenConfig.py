@@ -11,6 +11,7 @@ class ZMGOOpenConfig(object):
         self._appoint_date = None
         self._card_color_scheme = None
         self._custom_open_tip_list = None
+        self._custom_open_tips = None
         self._freeze_amount = None
         self._min_sign_interval = None
         self._period_mode = None
@@ -38,6 +39,13 @@ class ZMGOOpenConfig(object):
     @custom_open_tip_list.setter
     def custom_open_tip_list(self, value):
         self._custom_open_tip_list = value
+    @property
+    def custom_open_tips(self):
+        return self._custom_open_tips
+
+    @custom_open_tips.setter
+    def custom_open_tips(self, value):
+        self._custom_open_tips = value
     @property
     def freeze_amount(self):
         return self._freeze_amount
@@ -92,6 +100,11 @@ class ZMGOOpenConfig(object):
                 params['custom_open_tip_list'] = self.custom_open_tip_list.to_alipay_dict()
             else:
                 params['custom_open_tip_list'] = self.custom_open_tip_list
+        if self.custom_open_tips:
+            if hasattr(self.custom_open_tips, 'to_alipay_dict'):
+                params['custom_open_tips'] = self.custom_open_tips.to_alipay_dict()
+            else:
+                params['custom_open_tips'] = self.custom_open_tips
         if self.freeze_amount:
             if hasattr(self.freeze_amount, 'to_alipay_dict'):
                 params['freeze_amount'] = self.freeze_amount.to_alipay_dict()
@@ -130,6 +143,8 @@ class ZMGOOpenConfig(object):
             o.card_color_scheme = d['card_color_scheme']
         if 'custom_open_tip_list' in d:
             o.custom_open_tip_list = d['custom_open_tip_list']
+        if 'custom_open_tips' in d:
+            o.custom_open_tips = d['custom_open_tips']
         if 'freeze_amount' in d:
             o.freeze_amount = d['freeze_amount']
         if 'min_sign_interval' in d:

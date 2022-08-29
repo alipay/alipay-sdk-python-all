@@ -10,6 +10,7 @@ class AlipayEcoCityserviceOpeneventAppModifyModel(object):
     def __init__(self):
         self._app_code = None
         self._biz_code = None
+        self._change_field_list = None
         self._service_desc = None
         self._service_func = None
         self._service_guide = None
@@ -34,6 +35,13 @@ class AlipayEcoCityserviceOpeneventAppModifyModel(object):
     @biz_code.setter
     def biz_code(self, value):
         self._biz_code = value
+    @property
+    def change_field_list(self):
+        return self._change_field_list
+
+    @change_field_list.setter
+    def change_field_list(self, value):
+        self._change_field_list = value
     @property
     def service_desc(self):
         return self._service_desc
@@ -111,6 +119,11 @@ class AlipayEcoCityserviceOpeneventAppModifyModel(object):
                 params['biz_code'] = self.biz_code.to_alipay_dict()
             else:
                 params['biz_code'] = self.biz_code
+        if self.change_field_list:
+            if hasattr(self.change_field_list, 'to_alipay_dict'):
+                params['change_field_list'] = self.change_field_list.to_alipay_dict()
+            else:
+                params['change_field_list'] = self.change_field_list
         if self.service_desc:
             if hasattr(self.service_desc, 'to_alipay_dict'):
                 params['service_desc'] = self.service_desc.to_alipay_dict()
@@ -167,6 +180,8 @@ class AlipayEcoCityserviceOpeneventAppModifyModel(object):
             o.app_code = d['app_code']
         if 'biz_code' in d:
             o.biz_code = d['biz_code']
+        if 'change_field_list' in d:
+            o.change_field_list = d['change_field_list']
         if 'service_desc' in d:
             o.service_desc = d['service_desc']
         if 'service_func' in d:

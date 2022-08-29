@@ -10,6 +10,7 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleQueryModel(object):
     def __init__(self):
         self._account_id = None
         self._agreement_no = None
+        self._enterprise_id = None
         self._invoice_rule_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def invoice_rule_id(self):
         return self._invoice_rule_id
@@ -47,6 +55,11 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.invoice_rule_id:
             if hasattr(self.invoice_rule_id, 'to_alipay_dict'):
                 params['invoice_rule_id'] = self.invoice_rule_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleQueryModel(object):
             o.account_id = d['account_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'invoice_rule_id' in d:
             o.invoice_rule_id = d['invoice_rule_id']
         return o

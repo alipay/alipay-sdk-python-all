@@ -11,6 +11,7 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
         self._account_id = None
         self._agreement_no = None
         self._bill_month_day = None
+        self._enterprise_id = None
         self._invoice_rule_name = None
         self._invoice_title_id = None
         self._open_mode = None
@@ -38,6 +39,13 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
     @bill_month_day.setter
     def bill_month_day(self, value):
         self._bill_month_day = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def invoice_rule_name(self):
         return self._invoice_rule_name
@@ -92,6 +100,11 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
                 params['bill_month_day'] = self.bill_month_day.to_alipay_dict()
             else:
                 params['bill_month_day'] = self.bill_month_day
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.invoice_rule_name:
             if hasattr(self.invoice_rule_name, 'to_alipay_dict'):
                 params['invoice_rule_name'] = self.invoice_rule_name.to_alipay_dict()
@@ -130,6 +143,8 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
             o.agreement_no = d['agreement_no']
         if 'bill_month_day' in d:
             o.bill_month_day = d['bill_month_day']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'invoice_rule_name' in d:
             o.invoice_rule_name = d['invoice_rule_name']
         if 'invoice_title_id' in d:

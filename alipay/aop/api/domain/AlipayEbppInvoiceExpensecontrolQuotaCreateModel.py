@@ -17,6 +17,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
         self._owner_id = None
         self._owner_type = None
         self._platform = None
+        self._quota_type = None
         self._quota_value = None
         self._target_id = None
         self._target_type = None
@@ -84,6 +85,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
     @platform.setter
     def platform(self, value):
         self._platform = value
+    @property
+    def quota_type(self):
+        return self._quota_type
+
+    @quota_type.setter
+    def quota_type(self, value):
+        self._quota_type = value
     @property
     def quota_value(self):
         return self._quota_value
@@ -154,6 +162,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
                 params['platform'] = self.platform.to_alipay_dict()
             else:
                 params['platform'] = self.platform
+        if self.quota_type:
+            if hasattr(self.quota_type, 'to_alipay_dict'):
+                params['quota_type'] = self.quota_type.to_alipay_dict()
+            else:
+                params['quota_type'] = self.quota_type
         if self.quota_value:
             if hasattr(self.quota_value, 'to_alipay_dict'):
                 params['quota_value'] = self.quota_value.to_alipay_dict()
@@ -194,6 +207,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
             o.owner_type = d['owner_type']
         if 'platform' in d:
             o.platform = d['platform']
+        if 'quota_type' in d:
+            o.quota_type = d['quota_type']
         if 'quota_value' in d:
             o.quota_value = d['quota_value']
         if 'target_id' in d:

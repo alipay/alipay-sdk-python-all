@@ -10,6 +10,7 @@ class AlipayOpenIotmbsRoomBindModel(object):
     def __init__(self):
         self._dev_id = None
         self._device_type = None
+        self._floor_num = None
         self._hotel_id = None
         self._hotel_name = None
         self._project_id = None
@@ -30,6 +31,13 @@ class AlipayOpenIotmbsRoomBindModel(object):
     @device_type.setter
     def device_type(self, value):
         self._device_type = value
+    @property
+    def floor_num(self):
+        return self._floor_num
+
+    @floor_num.setter
+    def floor_num(self, value):
+        self._floor_num = value
     @property
     def hotel_id(self):
         return self._hotel_id
@@ -79,6 +87,11 @@ class AlipayOpenIotmbsRoomBindModel(object):
                 params['device_type'] = self.device_type.to_alipay_dict()
             else:
                 params['device_type'] = self.device_type
+        if self.floor_num:
+            if hasattr(self.floor_num, 'to_alipay_dict'):
+                params['floor_num'] = self.floor_num.to_alipay_dict()
+            else:
+                params['floor_num'] = self.floor_num
         if self.hotel_id:
             if hasattr(self.hotel_id, 'to_alipay_dict'):
                 params['hotel_id'] = self.hotel_id.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayOpenIotmbsRoomBindModel(object):
             o.dev_id = d['dev_id']
         if 'device_type' in d:
             o.device_type = d['device_type']
+        if 'floor_num' in d:
+            o.floor_num = d['floor_num']
         if 'hotel_id' in d:
             o.hotel_id = d['hotel_id']
         if 'hotel_name' in d:

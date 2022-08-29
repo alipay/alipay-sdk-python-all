@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsEmployee import InsEmployee
 from alipay.aop.api.domain.InsCompany import InsCompany
+from alipay.aop.api.domain.InsPartnerOrganization import InsPartnerOrganization
 
 
 class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
@@ -12,10 +13,12 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
     def __init__(self):
         self._batch_no = None
         self._channel = None
+        self._effect_start_time = None
         self._employee_list = None
         self._insure_time = None
         self._merchant = None
         self._out_biz_no = None
+        self._partner_organization = None
         self._period = None
         self._recom_flow_no = None
         self._scene_code = None
@@ -34,6 +37,13 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def effect_start_time(self):
+        return self._effect_start_time
+
+    @effect_start_time.setter
+    def effect_start_time(self, value):
+        self._effect_start_time = value
     @property
     def employee_list(self):
         return self._employee_list
@@ -72,6 +82,16 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def partner_organization(self):
+        return self._partner_organization
+
+    @partner_organization.setter
+    def partner_organization(self, value):
+        if isinstance(value, InsPartnerOrganization):
+            self._partner_organization = value
+        else:
+            self._partner_organization = InsPartnerOrganization.from_alipay_dict(value)
+    @property
     def period(self):
         return self._period
 
@@ -106,6 +126,11 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.effect_start_time:
+            if hasattr(self.effect_start_time, 'to_alipay_dict'):
+                params['effect_start_time'] = self.effect_start_time.to_alipay_dict()
+            else:
+                params['effect_start_time'] = self.effect_start_time
         if self.employee_list:
             if isinstance(self.employee_list, list):
                 for i in range(0, len(self.employee_list)):
@@ -131,6 +156,11 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.partner_organization:
+            if hasattr(self.partner_organization, 'to_alipay_dict'):
+                params['partner_organization'] = self.partner_organization.to_alipay_dict()
+            else:
+                params['partner_organization'] = self.partner_organization
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -157,6 +187,8 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
             o.batch_no = d['batch_no']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'effect_start_time' in d:
+            o.effect_start_time = d['effect_start_time']
         if 'employee_list' in d:
             o.employee_list = d['employee_list']
         if 'insure_time' in d:
@@ -165,6 +197,8 @@ class AlipayInsSceneEmploymentPolicyBatchcreateModel(object):
             o.merchant = d['merchant']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'partner_organization' in d:
+            o.partner_organization = d['partner_organization']
         if 'period' in d:
             o.period = d['period']
         if 'recom_flow_no' in d:

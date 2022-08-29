@@ -15,6 +15,7 @@ class AnttechBlockchainDefinSaasPaymentCancelResponse(AlipayResponse):
         self._order_state = None
         self._out_order_id = None
         self._out_request_id = None
+        self._state = None
 
     @property
     def available_amount(self):
@@ -58,6 +59,13 @@ class AnttechBlockchainDefinSaasPaymentCancelResponse(AlipayResponse):
     @out_request_id.setter
     def out_request_id(self, value):
         self._out_request_id = value
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, value):
+        self._state = value
 
     def parse_response_content(self, response_content):
         response = super(AnttechBlockchainDefinSaasPaymentCancelResponse, self).parse_response_content(response_content)
@@ -73,3 +81,5 @@ class AnttechBlockchainDefinSaasPaymentCancelResponse(AlipayResponse):
             self.out_order_id = response['out_order_id']
         if 'out_request_id' in response:
             self.out_request_id = response['out_request_id']
+        if 'state' in response:
+            self.state = response['state']

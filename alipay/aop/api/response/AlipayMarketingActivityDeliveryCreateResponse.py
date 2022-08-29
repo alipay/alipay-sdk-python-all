@@ -11,10 +11,18 @@ class AlipayMarketingActivityDeliveryCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayMarketingActivityDeliveryCreateResponse, self).__init__()
+        self._delivery_guide_preview_url = None
         self._delivery_id = None
         self._error_delivery_config_list = None
         self._success_delivery_config_list = None
 
+    @property
+    def delivery_guide_preview_url(self):
+        return self._delivery_guide_preview_url
+
+    @delivery_guide_preview_url.setter
+    def delivery_guide_preview_url(self, value):
+        self._delivery_guide_preview_url = value
     @property
     def delivery_id(self):
         return self._delivery_id
@@ -51,6 +59,8 @@ class AlipayMarketingActivityDeliveryCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayMarketingActivityDeliveryCreateResponse, self).parse_response_content(response_content)
+        if 'delivery_guide_preview_url' in response:
+            self.delivery_guide_preview_url = response['delivery_guide_preview_url']
         if 'delivery_id' in response:
             self.delivery_id = response['delivery_id']
         if 'error_delivery_config_list' in response:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.OrderDataDistributeInfo import OrderDataDistributeInfo
+from alipay.aop.api.domain.OrderDataSyncSuggestion import OrderDataSyncSuggestion
 
 
 class AlipayMerchantOrderSyncResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayMerchantOrderSyncResponse(AlipayResponse):
         self._order_id = None
         self._order_status = None
         self._record_id = None
+        self._sync_suggestions = None
 
     @property
     def distribute_result(self):
@@ -49,6 +51,19 @@ class AlipayMerchantOrderSyncResponse(AlipayResponse):
     @record_id.setter
     def record_id(self, value):
         self._record_id = value
+    @property
+    def sync_suggestions(self):
+        return self._sync_suggestions
+
+    @sync_suggestions.setter
+    def sync_suggestions(self, value):
+        if isinstance(value, list):
+            self._sync_suggestions = list()
+            for i in value:
+                if isinstance(i, OrderDataSyncSuggestion):
+                    self._sync_suggestions.append(i)
+                else:
+                    self._sync_suggestions.append(OrderDataSyncSuggestion.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayMerchantOrderSyncResponse, self).parse_response_content(response_content)
@@ -60,3 +75,5 @@ class AlipayMerchantOrderSyncResponse(AlipayResponse):
             self.order_status = response['order_status']
         if 'record_id' in response:
             self.record_id = response['record_id']
+        if 'sync_suggestions' in response:
+            self.sync_suggestions = response['sync_suggestions']
