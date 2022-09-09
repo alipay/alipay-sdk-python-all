@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Member import Member
+from alipay.aop.api.domain.Account import Account
 
 
 class MybankCreditSupplychainTradePayModel(object):
@@ -14,6 +15,7 @@ class MybankCreditSupplychainTradePayModel(object):
         self._ext_data = None
         self._out_order_no = None
         self._pay_amount = None
+        self._pre_payment_account = None
         self._request_id = None
         self._sale_pd_code = None
         self._trade_type = None
@@ -56,6 +58,16 @@ class MybankCreditSupplychainTradePayModel(object):
     @pay_amount.setter
     def pay_amount(self, value):
         self._pay_amount = value
+    @property
+    def pre_payment_account(self):
+        return self._pre_payment_account
+
+    @pre_payment_account.setter
+    def pre_payment_account(self, value):
+        if isinstance(value, Account):
+            self._pre_payment_account = value
+        else:
+            self._pre_payment_account = Account.from_alipay_dict(value)
     @property
     def request_id(self):
         return self._request_id
@@ -106,6 +118,11 @@ class MybankCreditSupplychainTradePayModel(object):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
             else:
                 params['pay_amount'] = self.pay_amount
+        if self.pre_payment_account:
+            if hasattr(self.pre_payment_account, 'to_alipay_dict'):
+                params['pre_payment_account'] = self.pre_payment_account.to_alipay_dict()
+            else:
+                params['pre_payment_account'] = self.pre_payment_account
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -138,6 +155,8 @@ class MybankCreditSupplychainTradePayModel(object):
             o.out_order_no = d['out_order_no']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
+        if 'pre_payment_account' in d:
+            o.pre_payment_account = d['pre_payment_account']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'sale_pd_code' in d:

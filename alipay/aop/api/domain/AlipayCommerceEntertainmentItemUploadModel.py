@@ -10,10 +10,12 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
     def __init__(self):
         self._biz_scene = None
         self._enable = None
+        self._item_desc = None
         self._item_extended_info = None
         self._item_id = None
         self._item_name = None
         self._item_url = None
+        self._pic_file_id = None
         self._pic_source_url = None
         self._pricing_type = None
         self._promote_point = None
@@ -43,6 +45,13 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
     def enable(self, value):
         self._enable = value
     @property
+    def item_desc(self):
+        return self._item_desc
+
+    @item_desc.setter
+    def item_desc(self, value):
+        self._item_desc = value
+    @property
     def item_extended_info(self):
         return self._item_extended_info
 
@@ -70,6 +79,13 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
     @item_url.setter
     def item_url(self, value):
         self._item_url = value
+    @property
+    def pic_file_id(self):
+        return self._pic_file_id
+
+    @pic_file_id.setter
+    def pic_file_id(self, value):
+        self._pic_file_id = value
     @property
     def pic_source_url(self):
         return self._pic_source_url
@@ -178,6 +194,11 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
                 params['enable'] = self.enable.to_alipay_dict()
             else:
                 params['enable'] = self.enable
+        if self.item_desc:
+            if hasattr(self.item_desc, 'to_alipay_dict'):
+                params['item_desc'] = self.item_desc.to_alipay_dict()
+            else:
+                params['item_desc'] = self.item_desc
         if self.item_extended_info:
             if hasattr(self.item_extended_info, 'to_alipay_dict'):
                 params['item_extended_info'] = self.item_extended_info.to_alipay_dict()
@@ -198,6 +219,11 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
                 params['item_url'] = self.item_url.to_alipay_dict()
             else:
                 params['item_url'] = self.item_url
+        if self.pic_file_id:
+            if hasattr(self.pic_file_id, 'to_alipay_dict'):
+                params['pic_file_id'] = self.pic_file_id.to_alipay_dict()
+            else:
+                params['pic_file_id'] = self.pic_file_id
         if self.pic_source_url:
             if hasattr(self.pic_source_url, 'to_alipay_dict'):
                 params['pic_source_url'] = self.pic_source_url.to_alipay_dict()
@@ -279,6 +305,8 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
             o.biz_scene = d['biz_scene']
         if 'enable' in d:
             o.enable = d['enable']
+        if 'item_desc' in d:
+            o.item_desc = d['item_desc']
         if 'item_extended_info' in d:
             o.item_extended_info = d['item_extended_info']
         if 'item_id' in d:
@@ -287,6 +315,8 @@ class AlipayCommerceEntertainmentItemUploadModel(object):
             o.item_name = d['item_name']
         if 'item_url' in d:
             o.item_url = d['item_url']
+        if 'pic_file_id' in d:
+            o.pic_file_id = d['pic_file_id']
         if 'pic_source_url' in d:
             o.pic_source_url = d['pic_source_url']
         if 'pricing_type' in d:

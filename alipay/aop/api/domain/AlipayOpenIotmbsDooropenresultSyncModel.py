@@ -11,6 +11,7 @@ class AlipayOpenIotmbsDooropenresultSyncModel(object):
         self._dev_id = None
         self._door_state = None
         self._project_id = None
+        self._request_id = None
 
     @property
     def dev_id(self):
@@ -33,6 +34,13 @@ class AlipayOpenIotmbsDooropenresultSyncModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayOpenIotmbsDooropenresultSyncModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayOpenIotmbsDooropenresultSyncModel(object):
             o.door_state = d['door_state']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
         return o
 
 

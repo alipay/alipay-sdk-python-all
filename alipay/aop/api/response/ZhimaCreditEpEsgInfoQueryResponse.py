@@ -11,8 +11,11 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
         super(ZhimaCreditEpEsgInfoQueryResponse, self).__init__()
         self._bankrupt_liquid_12_m_flag = None
         self._emi_licen_ban_num_12_m_flag = None
+        self._ep_abn_status_flag = None
         self._ep_adm_team_adj_num_12_m = None
         self._ep_big_tax_illegal_num_12_m = None
+        self._ep_biggest_share_holder_ratio = None
+        self._ep_bond_default_flag = None
         self._ep_bond_defaults_num_12_m = None
         self._ep_brand_add_num_12_m = None
         self._ep_busi_abnor_num_12_m = None
@@ -20,16 +23,24 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
         self._ep_busi_scope_adj_num_12_m = None
         self._ep_cert_no = None
         self._ep_cetificate_list = None
+        self._ep_child_risk_12_m_flag = None
+        self._ep_climate_risk_exp = None
+        self._ep_co_2_emi_per_rvn = None
         self._ep_copyright_add_num_12_m = None
+        self._ep_copyright_total_num = None
+        self._ep_corrupt_brib_legal_case_num_12_m = None
         self._ep_criminal_case_num_12_m = None
         self._ep_down_rating_bond_num_12_m = None
         self._ep_down_rating_issuer_num_12_m = None
+        self._ep_energy_consume_per_rvn = None
         self._ep_env_evaluate_12_m = None
         self._ep_env_evaluate_adj_12_m = None
         self._ep_env_legal_case_num_12_m = None
         self._ep_env_penalty_amt_12_m = None
         self._ep_env_penalty_num_12_m = None
         self._ep_env_penalty_top_type_12_m = None
+        self._ep_fake_prop_penalty_num_12_m = None
+        self._ep_fd = None
         self._ep_fire_penalty_amt_12_m = None
         self._ep_fire_penalty_num_12_m = None
         self._ep_fire_penalty_top_type_12_m = None
@@ -38,31 +49,58 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
         self._ep_group = None
         self._ep_holder_eqty_frez_amt_12_m = None
         self._ep_holder_eqty_frez_num_12_m = None
+        self._ep_holder_eqty_frez_ratio_12_m = None
         self._ep_holder_eqty_pledge_amt_12_m = None
         self._ep_holder_eqty_pledge_num_12_m = None
+        self._ep_holder_eqty_pledge_ratio_12_m = None
         self._ep_hr_legal_case_num_12_m = None
         self._ep_hr_penalty_amt_12_m = None
         self._ep_hr_penalty_num_12_m = None
         self._ep_hr_penalty_top_type_12_m = None
+        self._ep_hzd_penalty_num_12_m = None
+        self._ep_hzd_penalty_top_type_12_m = None
         self._ep_icp_add_num_12_m = None
+        self._ep_industry_lv_1_code = None
+        self._ep_industry_lv_2_code = None
+        self._ep_industry_lv_3_code = None
+        self._ep_industry_lv_4_code = None
         self._ep_investor_eqty_adj_num_12_m = None
         self._ep_ip_legal_case_num_12_m = None
+        self._ep_lastyear_ann_rpt_disclose_flag = None
+        self._ep_latest_ann_rpt_audit_flag = None
+        self._ep_latest_ann_rpt_audit_opinion = None
         self._ep_legal_person_adj_num_12_m = None
         self._ep_lost_credit_excute_num_12_m = None
         self._ep_lost_credit_hist_num_12_m = None
+        self._ep_mom_risk_12_m_flag = None
         self._ep_name = None
+        self._ep_nephew_risk_12_m_flag = None
+        self._ep_oprt_scope = None
+        self._ep_org_reg_cptl = None
+        self._ep_org_reg_cptl_curcy = None
+        self._ep_org_reg_time = None
+        self._ep_org_status = None
         self._ep_other_legal_case_num_12_m = None
         self._ep_other_penalty_amt_12_m = None
         self._ep_other_penalty_num_12_m = None
         self._ep_other_penalty_top_type_12_m = None
         self._ep_patent_add_num_12_m = None
+        self._ep_patent_total_num = None
+        self._ep_private_lend_legal_case_num_12_m = None
         self._ep_qlty_penalty_amt_12_m = None
         self._ep_qlty_penalty_num_12_m = None
         self._ep_qlty_penalty_top_type_12_m = None
+        self._ep_reg_addr = None
+        self._ep_reg_cptl_adj_ratio_12_m = None
+        self._ep_resource_other_dependence = None
+        self._ep_resource_water_dependence = None
+        self._ep_root_risk_12_m_flag = None
         self._ep_secu_penalty_amt_12_m = None
         self._ep_secu_penalty_num_12_m = None
         self._ep_secu_penalty_top_type_12_m = None
         self._ep_serious_illegal_list_flag = None
+        self._ep_sibling_risk_12_m_flag = None
+        self._ep_solid_emi_per_rvn = None
         self._ep_staff_num_adj_rate_12_m = None
         self._ep_status = None
         self._ep_tax_abnor_acct_num_12_m = None
@@ -70,6 +108,8 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
         self._ep_tax_penalty_amt_12_m = None
         self._ep_tax_penalty_num_12_m = None
         self._ep_tax_penalty_top_type_12_m = None
+        self._ep_uncle_risk_12_m_flag = None
+        self._ep_unfair_compt_legal_case_num_12_m = None
         self._evaluate_time = None
         self._excu_limi_high_consum_12_m_flag = None
         self._issue_green_bond_flag = None
@@ -97,6 +137,13 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     def emi_licen_ban_num_12_m_flag(self, value):
         self._emi_licen_ban_num_12_m_flag = value
     @property
+    def ep_abn_status_flag(self):
+        return self._ep_abn_status_flag
+
+    @ep_abn_status_flag.setter
+    def ep_abn_status_flag(self, value):
+        self._ep_abn_status_flag = value
+    @property
     def ep_adm_team_adj_num_12_m(self):
         return self._ep_adm_team_adj_num_12_m
 
@@ -110,6 +157,20 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_big_tax_illegal_num_12_m.setter
     def ep_big_tax_illegal_num_12_m(self, value):
         self._ep_big_tax_illegal_num_12_m = value
+    @property
+    def ep_biggest_share_holder_ratio(self):
+        return self._ep_biggest_share_holder_ratio
+
+    @ep_biggest_share_holder_ratio.setter
+    def ep_biggest_share_holder_ratio(self, value):
+        self._ep_biggest_share_holder_ratio = value
+    @property
+    def ep_bond_default_flag(self):
+        return self._ep_bond_default_flag
+
+    @ep_bond_default_flag.setter
+    def ep_bond_default_flag(self, value):
+        self._ep_bond_default_flag = value
     @property
     def ep_bond_defaults_num_12_m(self):
         return self._ep_bond_defaults_num_12_m
@@ -163,12 +224,47 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             for i in value:
                 self._ep_cetificate_list.append(i)
     @property
+    def ep_child_risk_12_m_flag(self):
+        return self._ep_child_risk_12_m_flag
+
+    @ep_child_risk_12_m_flag.setter
+    def ep_child_risk_12_m_flag(self, value):
+        self._ep_child_risk_12_m_flag = value
+    @property
+    def ep_climate_risk_exp(self):
+        return self._ep_climate_risk_exp
+
+    @ep_climate_risk_exp.setter
+    def ep_climate_risk_exp(self, value):
+        self._ep_climate_risk_exp = value
+    @property
+    def ep_co_2_emi_per_rvn(self):
+        return self._ep_co_2_emi_per_rvn
+
+    @ep_co_2_emi_per_rvn.setter
+    def ep_co_2_emi_per_rvn(self, value):
+        self._ep_co_2_emi_per_rvn = value
+    @property
     def ep_copyright_add_num_12_m(self):
         return self._ep_copyright_add_num_12_m
 
     @ep_copyright_add_num_12_m.setter
     def ep_copyright_add_num_12_m(self, value):
         self._ep_copyright_add_num_12_m = value
+    @property
+    def ep_copyright_total_num(self):
+        return self._ep_copyright_total_num
+
+    @ep_copyright_total_num.setter
+    def ep_copyright_total_num(self, value):
+        self._ep_copyright_total_num = value
+    @property
+    def ep_corrupt_brib_legal_case_num_12_m(self):
+        return self._ep_corrupt_brib_legal_case_num_12_m
+
+    @ep_corrupt_brib_legal_case_num_12_m.setter
+    def ep_corrupt_brib_legal_case_num_12_m(self, value):
+        self._ep_corrupt_brib_legal_case_num_12_m = value
     @property
     def ep_criminal_case_num_12_m(self):
         return self._ep_criminal_case_num_12_m
@@ -190,6 +286,13 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_down_rating_issuer_num_12_m.setter
     def ep_down_rating_issuer_num_12_m(self, value):
         self._ep_down_rating_issuer_num_12_m = value
+    @property
+    def ep_energy_consume_per_rvn(self):
+        return self._ep_energy_consume_per_rvn
+
+    @ep_energy_consume_per_rvn.setter
+    def ep_energy_consume_per_rvn(self, value):
+        self._ep_energy_consume_per_rvn = value
     @property
     def ep_env_evaluate_12_m(self):
         return self._ep_env_evaluate_12_m
@@ -232,6 +335,20 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_env_penalty_top_type_12_m.setter
     def ep_env_penalty_top_type_12_m(self, value):
         self._ep_env_penalty_top_type_12_m = value
+    @property
+    def ep_fake_prop_penalty_num_12_m(self):
+        return self._ep_fake_prop_penalty_num_12_m
+
+    @ep_fake_prop_penalty_num_12_m.setter
+    def ep_fake_prop_penalty_num_12_m(self, value):
+        self._ep_fake_prop_penalty_num_12_m = value
+    @property
+    def ep_fd(self):
+        return self._ep_fd
+
+    @ep_fd.setter
+    def ep_fd(self, value):
+        self._ep_fd = value
     @property
     def ep_fire_penalty_amt_12_m(self):
         return self._ep_fire_penalty_amt_12_m
@@ -289,6 +406,13 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     def ep_holder_eqty_frez_num_12_m(self, value):
         self._ep_holder_eqty_frez_num_12_m = value
     @property
+    def ep_holder_eqty_frez_ratio_12_m(self):
+        return self._ep_holder_eqty_frez_ratio_12_m
+
+    @ep_holder_eqty_frez_ratio_12_m.setter
+    def ep_holder_eqty_frez_ratio_12_m(self, value):
+        self._ep_holder_eqty_frez_ratio_12_m = value
+    @property
     def ep_holder_eqty_pledge_amt_12_m(self):
         return self._ep_holder_eqty_pledge_amt_12_m
 
@@ -302,6 +426,13 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_holder_eqty_pledge_num_12_m.setter
     def ep_holder_eqty_pledge_num_12_m(self, value):
         self._ep_holder_eqty_pledge_num_12_m = value
+    @property
+    def ep_holder_eqty_pledge_ratio_12_m(self):
+        return self._ep_holder_eqty_pledge_ratio_12_m
+
+    @ep_holder_eqty_pledge_ratio_12_m.setter
+    def ep_holder_eqty_pledge_ratio_12_m(self, value):
+        self._ep_holder_eqty_pledge_ratio_12_m = value
     @property
     def ep_hr_legal_case_num_12_m(self):
         return self._ep_hr_legal_case_num_12_m
@@ -331,12 +462,54 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     def ep_hr_penalty_top_type_12_m(self, value):
         self._ep_hr_penalty_top_type_12_m = value
     @property
+    def ep_hzd_penalty_num_12_m(self):
+        return self._ep_hzd_penalty_num_12_m
+
+    @ep_hzd_penalty_num_12_m.setter
+    def ep_hzd_penalty_num_12_m(self, value):
+        self._ep_hzd_penalty_num_12_m = value
+    @property
+    def ep_hzd_penalty_top_type_12_m(self):
+        return self._ep_hzd_penalty_top_type_12_m
+
+    @ep_hzd_penalty_top_type_12_m.setter
+    def ep_hzd_penalty_top_type_12_m(self, value):
+        self._ep_hzd_penalty_top_type_12_m = value
+    @property
     def ep_icp_add_num_12_m(self):
         return self._ep_icp_add_num_12_m
 
     @ep_icp_add_num_12_m.setter
     def ep_icp_add_num_12_m(self, value):
         self._ep_icp_add_num_12_m = value
+    @property
+    def ep_industry_lv_1_code(self):
+        return self._ep_industry_lv_1_code
+
+    @ep_industry_lv_1_code.setter
+    def ep_industry_lv_1_code(self, value):
+        self._ep_industry_lv_1_code = value
+    @property
+    def ep_industry_lv_2_code(self):
+        return self._ep_industry_lv_2_code
+
+    @ep_industry_lv_2_code.setter
+    def ep_industry_lv_2_code(self, value):
+        self._ep_industry_lv_2_code = value
+    @property
+    def ep_industry_lv_3_code(self):
+        return self._ep_industry_lv_3_code
+
+    @ep_industry_lv_3_code.setter
+    def ep_industry_lv_3_code(self, value):
+        self._ep_industry_lv_3_code = value
+    @property
+    def ep_industry_lv_4_code(self):
+        return self._ep_industry_lv_4_code
+
+    @ep_industry_lv_4_code.setter
+    def ep_industry_lv_4_code(self, value):
+        self._ep_industry_lv_4_code = value
     @property
     def ep_investor_eqty_adj_num_12_m(self):
         return self._ep_investor_eqty_adj_num_12_m
@@ -351,6 +524,27 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_ip_legal_case_num_12_m.setter
     def ep_ip_legal_case_num_12_m(self, value):
         self._ep_ip_legal_case_num_12_m = value
+    @property
+    def ep_lastyear_ann_rpt_disclose_flag(self):
+        return self._ep_lastyear_ann_rpt_disclose_flag
+
+    @ep_lastyear_ann_rpt_disclose_flag.setter
+    def ep_lastyear_ann_rpt_disclose_flag(self, value):
+        self._ep_lastyear_ann_rpt_disclose_flag = value
+    @property
+    def ep_latest_ann_rpt_audit_flag(self):
+        return self._ep_latest_ann_rpt_audit_flag
+
+    @ep_latest_ann_rpt_audit_flag.setter
+    def ep_latest_ann_rpt_audit_flag(self, value):
+        self._ep_latest_ann_rpt_audit_flag = value
+    @property
+    def ep_latest_ann_rpt_audit_opinion(self):
+        return self._ep_latest_ann_rpt_audit_opinion
+
+    @ep_latest_ann_rpt_audit_opinion.setter
+    def ep_latest_ann_rpt_audit_opinion(self, value):
+        self._ep_latest_ann_rpt_audit_opinion = value
     @property
     def ep_legal_person_adj_num_12_m(self):
         return self._ep_legal_person_adj_num_12_m
@@ -373,12 +567,61 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     def ep_lost_credit_hist_num_12_m(self, value):
         self._ep_lost_credit_hist_num_12_m = value
     @property
+    def ep_mom_risk_12_m_flag(self):
+        return self._ep_mom_risk_12_m_flag
+
+    @ep_mom_risk_12_m_flag.setter
+    def ep_mom_risk_12_m_flag(self, value):
+        self._ep_mom_risk_12_m_flag = value
+    @property
     def ep_name(self):
         return self._ep_name
 
     @ep_name.setter
     def ep_name(self, value):
         self._ep_name = value
+    @property
+    def ep_nephew_risk_12_m_flag(self):
+        return self._ep_nephew_risk_12_m_flag
+
+    @ep_nephew_risk_12_m_flag.setter
+    def ep_nephew_risk_12_m_flag(self, value):
+        self._ep_nephew_risk_12_m_flag = value
+    @property
+    def ep_oprt_scope(self):
+        return self._ep_oprt_scope
+
+    @ep_oprt_scope.setter
+    def ep_oprt_scope(self, value):
+        self._ep_oprt_scope = value
+    @property
+    def ep_org_reg_cptl(self):
+        return self._ep_org_reg_cptl
+
+    @ep_org_reg_cptl.setter
+    def ep_org_reg_cptl(self, value):
+        self._ep_org_reg_cptl = value
+    @property
+    def ep_org_reg_cptl_curcy(self):
+        return self._ep_org_reg_cptl_curcy
+
+    @ep_org_reg_cptl_curcy.setter
+    def ep_org_reg_cptl_curcy(self, value):
+        self._ep_org_reg_cptl_curcy = value
+    @property
+    def ep_org_reg_time(self):
+        return self._ep_org_reg_time
+
+    @ep_org_reg_time.setter
+    def ep_org_reg_time(self, value):
+        self._ep_org_reg_time = value
+    @property
+    def ep_org_status(self):
+        return self._ep_org_status
+
+    @ep_org_status.setter
+    def ep_org_status(self, value):
+        self._ep_org_status = value
     @property
     def ep_other_legal_case_num_12_m(self):
         return self._ep_other_legal_case_num_12_m
@@ -415,6 +658,20 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     def ep_patent_add_num_12_m(self, value):
         self._ep_patent_add_num_12_m = value
     @property
+    def ep_patent_total_num(self):
+        return self._ep_patent_total_num
+
+    @ep_patent_total_num.setter
+    def ep_patent_total_num(self, value):
+        self._ep_patent_total_num = value
+    @property
+    def ep_private_lend_legal_case_num_12_m(self):
+        return self._ep_private_lend_legal_case_num_12_m
+
+    @ep_private_lend_legal_case_num_12_m.setter
+    def ep_private_lend_legal_case_num_12_m(self, value):
+        self._ep_private_lend_legal_case_num_12_m = value
+    @property
     def ep_qlty_penalty_amt_12_m(self):
         return self._ep_qlty_penalty_amt_12_m
 
@@ -435,6 +692,41 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_qlty_penalty_top_type_12_m.setter
     def ep_qlty_penalty_top_type_12_m(self, value):
         self._ep_qlty_penalty_top_type_12_m = value
+    @property
+    def ep_reg_addr(self):
+        return self._ep_reg_addr
+
+    @ep_reg_addr.setter
+    def ep_reg_addr(self, value):
+        self._ep_reg_addr = value
+    @property
+    def ep_reg_cptl_adj_ratio_12_m(self):
+        return self._ep_reg_cptl_adj_ratio_12_m
+
+    @ep_reg_cptl_adj_ratio_12_m.setter
+    def ep_reg_cptl_adj_ratio_12_m(self, value):
+        self._ep_reg_cptl_adj_ratio_12_m = value
+    @property
+    def ep_resource_other_dependence(self):
+        return self._ep_resource_other_dependence
+
+    @ep_resource_other_dependence.setter
+    def ep_resource_other_dependence(self, value):
+        self._ep_resource_other_dependence = value
+    @property
+    def ep_resource_water_dependence(self):
+        return self._ep_resource_water_dependence
+
+    @ep_resource_water_dependence.setter
+    def ep_resource_water_dependence(self, value):
+        self._ep_resource_water_dependence = value
+    @property
+    def ep_root_risk_12_m_flag(self):
+        return self._ep_root_risk_12_m_flag
+
+    @ep_root_risk_12_m_flag.setter
+    def ep_root_risk_12_m_flag(self, value):
+        self._ep_root_risk_12_m_flag = value
     @property
     def ep_secu_penalty_amt_12_m(self):
         return self._ep_secu_penalty_amt_12_m
@@ -463,6 +755,20 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_serious_illegal_list_flag.setter
     def ep_serious_illegal_list_flag(self, value):
         self._ep_serious_illegal_list_flag = value
+    @property
+    def ep_sibling_risk_12_m_flag(self):
+        return self._ep_sibling_risk_12_m_flag
+
+    @ep_sibling_risk_12_m_flag.setter
+    def ep_sibling_risk_12_m_flag(self, value):
+        self._ep_sibling_risk_12_m_flag = value
+    @property
+    def ep_solid_emi_per_rvn(self):
+        return self._ep_solid_emi_per_rvn
+
+    @ep_solid_emi_per_rvn.setter
+    def ep_solid_emi_per_rvn(self, value):
+        self._ep_solid_emi_per_rvn = value
     @property
     def ep_staff_num_adj_rate_12_m(self):
         return self._ep_staff_num_adj_rate_12_m
@@ -512,6 +818,20 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_tax_penalty_top_type_12_m.setter
     def ep_tax_penalty_top_type_12_m(self, value):
         self._ep_tax_penalty_top_type_12_m = value
+    @property
+    def ep_uncle_risk_12_m_flag(self):
+        return self._ep_uncle_risk_12_m_flag
+
+    @ep_uncle_risk_12_m_flag.setter
+    def ep_uncle_risk_12_m_flag(self, value):
+        self._ep_uncle_risk_12_m_flag = value
+    @property
+    def ep_unfair_compt_legal_case_num_12_m(self):
+        return self._ep_unfair_compt_legal_case_num_12_m
+
+    @ep_unfair_compt_legal_case_num_12_m.setter
+    def ep_unfair_compt_legal_case_num_12_m(self, value):
+        self._ep_unfair_compt_legal_case_num_12_m = value
     @property
     def evaluate_time(self):
         return self._evaluate_time
@@ -596,10 +916,16 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.bankrupt_liquid_12_m_flag = response['bankrupt_liquid_12_m_flag']
         if 'emi_licen_ban_num_12_m_flag' in response:
             self.emi_licen_ban_num_12_m_flag = response['emi_licen_ban_num_12_m_flag']
+        if 'ep_abn_status_flag' in response:
+            self.ep_abn_status_flag = response['ep_abn_status_flag']
         if 'ep_adm_team_adj_num_12_m' in response:
             self.ep_adm_team_adj_num_12_m = response['ep_adm_team_adj_num_12_m']
         if 'ep_big_tax_illegal_num_12_m' in response:
             self.ep_big_tax_illegal_num_12_m = response['ep_big_tax_illegal_num_12_m']
+        if 'ep_biggest_share_holder_ratio' in response:
+            self.ep_biggest_share_holder_ratio = response['ep_biggest_share_holder_ratio']
+        if 'ep_bond_default_flag' in response:
+            self.ep_bond_default_flag = response['ep_bond_default_flag']
         if 'ep_bond_defaults_num_12_m' in response:
             self.ep_bond_defaults_num_12_m = response['ep_bond_defaults_num_12_m']
         if 'ep_brand_add_num_12_m' in response:
@@ -614,14 +940,26 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_cert_no = response['ep_cert_no']
         if 'ep_cetificate_list' in response:
             self.ep_cetificate_list = response['ep_cetificate_list']
+        if 'ep_child_risk_12_m_flag' in response:
+            self.ep_child_risk_12_m_flag = response['ep_child_risk_12_m_flag']
+        if 'ep_climate_risk_exp' in response:
+            self.ep_climate_risk_exp = response['ep_climate_risk_exp']
+        if 'ep_co_2_emi_per_rvn' in response:
+            self.ep_co_2_emi_per_rvn = response['ep_co_2_emi_per_rvn']
         if 'ep_copyright_add_num_12_m' in response:
             self.ep_copyright_add_num_12_m = response['ep_copyright_add_num_12_m']
+        if 'ep_copyright_total_num' in response:
+            self.ep_copyright_total_num = response['ep_copyright_total_num']
+        if 'ep_corrupt_brib_legal_case_num_12_m' in response:
+            self.ep_corrupt_brib_legal_case_num_12_m = response['ep_corrupt_brib_legal_case_num_12_m']
         if 'ep_criminal_case_num_12_m' in response:
             self.ep_criminal_case_num_12_m = response['ep_criminal_case_num_12_m']
         if 'ep_down_rating_bond_num_12_m' in response:
             self.ep_down_rating_bond_num_12_m = response['ep_down_rating_bond_num_12_m']
         if 'ep_down_rating_issuer_num_12_m' in response:
             self.ep_down_rating_issuer_num_12_m = response['ep_down_rating_issuer_num_12_m']
+        if 'ep_energy_consume_per_rvn' in response:
+            self.ep_energy_consume_per_rvn = response['ep_energy_consume_per_rvn']
         if 'ep_env_evaluate_12_m' in response:
             self.ep_env_evaluate_12_m = response['ep_env_evaluate_12_m']
         if 'ep_env_evaluate_adj_12_m' in response:
@@ -634,6 +972,10 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_env_penalty_num_12_m = response['ep_env_penalty_num_12_m']
         if 'ep_env_penalty_top_type_12_m' in response:
             self.ep_env_penalty_top_type_12_m = response['ep_env_penalty_top_type_12_m']
+        if 'ep_fake_prop_penalty_num_12_m' in response:
+            self.ep_fake_prop_penalty_num_12_m = response['ep_fake_prop_penalty_num_12_m']
+        if 'ep_fd' in response:
+            self.ep_fd = response['ep_fd']
         if 'ep_fire_penalty_amt_12_m' in response:
             self.ep_fire_penalty_amt_12_m = response['ep_fire_penalty_amt_12_m']
         if 'ep_fire_penalty_num_12_m' in response:
@@ -650,10 +992,14 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_holder_eqty_frez_amt_12_m = response['ep_holder_eqty_frez_amt_12_m']
         if 'ep_holder_eqty_frez_num_12_m' in response:
             self.ep_holder_eqty_frez_num_12_m = response['ep_holder_eqty_frez_num_12_m']
+        if 'ep_holder_eqty_frez_ratio_12_m' in response:
+            self.ep_holder_eqty_frez_ratio_12_m = response['ep_holder_eqty_frez_ratio_12_m']
         if 'ep_holder_eqty_pledge_amt_12_m' in response:
             self.ep_holder_eqty_pledge_amt_12_m = response['ep_holder_eqty_pledge_amt_12_m']
         if 'ep_holder_eqty_pledge_num_12_m' in response:
             self.ep_holder_eqty_pledge_num_12_m = response['ep_holder_eqty_pledge_num_12_m']
+        if 'ep_holder_eqty_pledge_ratio_12_m' in response:
+            self.ep_holder_eqty_pledge_ratio_12_m = response['ep_holder_eqty_pledge_ratio_12_m']
         if 'ep_hr_legal_case_num_12_m' in response:
             self.ep_hr_legal_case_num_12_m = response['ep_hr_legal_case_num_12_m']
         if 'ep_hr_penalty_amt_12_m' in response:
@@ -662,20 +1008,52 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_hr_penalty_num_12_m = response['ep_hr_penalty_num_12_m']
         if 'ep_hr_penalty_top_type_12_m' in response:
             self.ep_hr_penalty_top_type_12_m = response['ep_hr_penalty_top_type_12_m']
+        if 'ep_hzd_penalty_num_12_m' in response:
+            self.ep_hzd_penalty_num_12_m = response['ep_hzd_penalty_num_12_m']
+        if 'ep_hzd_penalty_top_type_12_m' in response:
+            self.ep_hzd_penalty_top_type_12_m = response['ep_hzd_penalty_top_type_12_m']
         if 'ep_icp_add_num_12_m' in response:
             self.ep_icp_add_num_12_m = response['ep_icp_add_num_12_m']
+        if 'ep_industry_lv_1_code' in response:
+            self.ep_industry_lv_1_code = response['ep_industry_lv_1_code']
+        if 'ep_industry_lv_2_code' in response:
+            self.ep_industry_lv_2_code = response['ep_industry_lv_2_code']
+        if 'ep_industry_lv_3_code' in response:
+            self.ep_industry_lv_3_code = response['ep_industry_lv_3_code']
+        if 'ep_industry_lv_4_code' in response:
+            self.ep_industry_lv_4_code = response['ep_industry_lv_4_code']
         if 'ep_investor_eqty_adj_num_12_m' in response:
             self.ep_investor_eqty_adj_num_12_m = response['ep_investor_eqty_adj_num_12_m']
         if 'ep_ip_legal_case_num_12_m' in response:
             self.ep_ip_legal_case_num_12_m = response['ep_ip_legal_case_num_12_m']
+        if 'ep_lastyear_ann_rpt_disclose_flag' in response:
+            self.ep_lastyear_ann_rpt_disclose_flag = response['ep_lastyear_ann_rpt_disclose_flag']
+        if 'ep_latest_ann_rpt_audit_flag' in response:
+            self.ep_latest_ann_rpt_audit_flag = response['ep_latest_ann_rpt_audit_flag']
+        if 'ep_latest_ann_rpt_audit_opinion' in response:
+            self.ep_latest_ann_rpt_audit_opinion = response['ep_latest_ann_rpt_audit_opinion']
         if 'ep_legal_person_adj_num_12_m' in response:
             self.ep_legal_person_adj_num_12_m = response['ep_legal_person_adj_num_12_m']
         if 'ep_lost_credit_excute_num_12_m' in response:
             self.ep_lost_credit_excute_num_12_m = response['ep_lost_credit_excute_num_12_m']
         if 'ep_lost_credit_hist_num_12_m' in response:
             self.ep_lost_credit_hist_num_12_m = response['ep_lost_credit_hist_num_12_m']
+        if 'ep_mom_risk_12_m_flag' in response:
+            self.ep_mom_risk_12_m_flag = response['ep_mom_risk_12_m_flag']
         if 'ep_name' in response:
             self.ep_name = response['ep_name']
+        if 'ep_nephew_risk_12_m_flag' in response:
+            self.ep_nephew_risk_12_m_flag = response['ep_nephew_risk_12_m_flag']
+        if 'ep_oprt_scope' in response:
+            self.ep_oprt_scope = response['ep_oprt_scope']
+        if 'ep_org_reg_cptl' in response:
+            self.ep_org_reg_cptl = response['ep_org_reg_cptl']
+        if 'ep_org_reg_cptl_curcy' in response:
+            self.ep_org_reg_cptl_curcy = response['ep_org_reg_cptl_curcy']
+        if 'ep_org_reg_time' in response:
+            self.ep_org_reg_time = response['ep_org_reg_time']
+        if 'ep_org_status' in response:
+            self.ep_org_status = response['ep_org_status']
         if 'ep_other_legal_case_num_12_m' in response:
             self.ep_other_legal_case_num_12_m = response['ep_other_legal_case_num_12_m']
         if 'ep_other_penalty_amt_12_m' in response:
@@ -686,12 +1064,26 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_other_penalty_top_type_12_m = response['ep_other_penalty_top_type_12_m']
         if 'ep_patent_add_num_12_m' in response:
             self.ep_patent_add_num_12_m = response['ep_patent_add_num_12_m']
+        if 'ep_patent_total_num' in response:
+            self.ep_patent_total_num = response['ep_patent_total_num']
+        if 'ep_private_lend_legal_case_num_12_m' in response:
+            self.ep_private_lend_legal_case_num_12_m = response['ep_private_lend_legal_case_num_12_m']
         if 'ep_qlty_penalty_amt_12_m' in response:
             self.ep_qlty_penalty_amt_12_m = response['ep_qlty_penalty_amt_12_m']
         if 'ep_qlty_penalty_num_12_m' in response:
             self.ep_qlty_penalty_num_12_m = response['ep_qlty_penalty_num_12_m']
         if 'ep_qlty_penalty_top_type_12_m' in response:
             self.ep_qlty_penalty_top_type_12_m = response['ep_qlty_penalty_top_type_12_m']
+        if 'ep_reg_addr' in response:
+            self.ep_reg_addr = response['ep_reg_addr']
+        if 'ep_reg_cptl_adj_ratio_12_m' in response:
+            self.ep_reg_cptl_adj_ratio_12_m = response['ep_reg_cptl_adj_ratio_12_m']
+        if 'ep_resource_other_dependence' in response:
+            self.ep_resource_other_dependence = response['ep_resource_other_dependence']
+        if 'ep_resource_water_dependence' in response:
+            self.ep_resource_water_dependence = response['ep_resource_water_dependence']
+        if 'ep_root_risk_12_m_flag' in response:
+            self.ep_root_risk_12_m_flag = response['ep_root_risk_12_m_flag']
         if 'ep_secu_penalty_amt_12_m' in response:
             self.ep_secu_penalty_amt_12_m = response['ep_secu_penalty_amt_12_m']
         if 'ep_secu_penalty_num_12_m' in response:
@@ -700,6 +1092,10 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_secu_penalty_top_type_12_m = response['ep_secu_penalty_top_type_12_m']
         if 'ep_serious_illegal_list_flag' in response:
             self.ep_serious_illegal_list_flag = response['ep_serious_illegal_list_flag']
+        if 'ep_sibling_risk_12_m_flag' in response:
+            self.ep_sibling_risk_12_m_flag = response['ep_sibling_risk_12_m_flag']
+        if 'ep_solid_emi_per_rvn' in response:
+            self.ep_solid_emi_per_rvn = response['ep_solid_emi_per_rvn']
         if 'ep_staff_num_adj_rate_12_m' in response:
             self.ep_staff_num_adj_rate_12_m = response['ep_staff_num_adj_rate_12_m']
         if 'ep_status' in response:
@@ -714,6 +1110,10 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_tax_penalty_num_12_m = response['ep_tax_penalty_num_12_m']
         if 'ep_tax_penalty_top_type_12_m' in response:
             self.ep_tax_penalty_top_type_12_m = response['ep_tax_penalty_top_type_12_m']
+        if 'ep_uncle_risk_12_m_flag' in response:
+            self.ep_uncle_risk_12_m_flag = response['ep_uncle_risk_12_m_flag']
+        if 'ep_unfair_compt_legal_case_num_12_m' in response:
+            self.ep_unfair_compt_legal_case_num_12_m = response['ep_unfair_compt_legal_case_num_12_m']
         if 'evaluate_time' in response:
             self.evaluate_time = response['evaluate_time']
         if 'excu_limi_high_consum_12_m_flag' in response:

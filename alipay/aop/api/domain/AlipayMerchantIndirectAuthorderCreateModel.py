@@ -19,6 +19,7 @@ class AlipayMerchantIndirectAuthorderCreateModel(object):
         self._extra_credentials = None
         self._legal_person_info = None
         self._out_biz_no = None
+        self._source = None
 
     @property
     def auth_identity_info(self):
@@ -77,6 +78,13 @@ class AlipayMerchantIndirectAuthorderCreateModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -111,6 +119,11 @@ class AlipayMerchantIndirectAuthorderCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -130,6 +143,8 @@ class AlipayMerchantIndirectAuthorderCreateModel(object):
             o.legal_person_info = d['legal_person_info']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

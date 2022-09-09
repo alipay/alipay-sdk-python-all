@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.GiftUserTemplateBoxInfo import GiftUserTemplateBoxInfo
 from alipay.aop.api.domain.GiftUserTemplateInfo import GiftUserTemplateInfo
 
 
@@ -10,9 +11,20 @@ class AlipayFundCouponTemplateUserCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayFundCouponTemplateUserCreateResponse, self).__init__()
+        self._gift_user_template_box_info = None
         self._template_info = None
         self._user_template_id = None
 
+    @property
+    def gift_user_template_box_info(self):
+        return self._gift_user_template_box_info
+
+    @gift_user_template_box_info.setter
+    def gift_user_template_box_info(self, value):
+        if isinstance(value, GiftUserTemplateBoxInfo):
+            self._gift_user_template_box_info = value
+        else:
+            self._gift_user_template_box_info = GiftUserTemplateBoxInfo.from_alipay_dict(value)
     @property
     def template_info(self):
         return self._template_info
@@ -33,6 +45,8 @@ class AlipayFundCouponTemplateUserCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundCouponTemplateUserCreateResponse, self).parse_response_content(response_content)
+        if 'gift_user_template_box_info' in response:
+            self.gift_user_template_box_info = response['gift_user_template_box_info']
         if 'template_info' in response:
             self.template_info = response['template_info']
         if 'user_template_id' in response:

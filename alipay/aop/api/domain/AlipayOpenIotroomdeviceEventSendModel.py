@@ -12,6 +12,7 @@ class AlipayOpenIotroomdeviceEventSendModel(object):
         self._door_state = None
         self._face_id = None
         self._reason = None
+        self._request_id = None
 
     @property
     def biztid(self):
@@ -41,6 +42,13 @@ class AlipayOpenIotroomdeviceEventSendModel(object):
     @reason.setter
     def reason(self, value):
         self._reason = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayOpenIotroomdeviceEventSendModel(object):
                 params['reason'] = self.reason.to_alipay_dict()
             else:
                 params['reason'] = self.reason
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayOpenIotroomdeviceEventSendModel(object):
             o.face_id = d['face_id']
         if 'reason' in d:
             o.reason = d['reason']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
         return o
 
 

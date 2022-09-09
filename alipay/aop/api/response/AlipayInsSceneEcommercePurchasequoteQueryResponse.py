@@ -18,10 +18,13 @@ class AlipayInsSceneEcommercePurchasequoteQueryResponse(AlipayResponse):
 
     @purchase_query_results.setter
     def purchase_query_results(self, value):
-        if isinstance(value, PurchaseQueryResultDTO):
-            self._purchase_query_results = value
-        else:
-            self._purchase_query_results = PurchaseQueryResultDTO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._purchase_query_results = list()
+            for i in value:
+                if isinstance(i, PurchaseQueryResultDTO):
+                    self._purchase_query_results.append(i)
+                else:
+                    self._purchase_query_results.append(PurchaseQueryResultDTO.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayInsSceneEcommercePurchasequoteQueryResponse, self).parse_response_content(response_content)

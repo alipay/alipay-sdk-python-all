@@ -13,6 +13,7 @@ class EnterpriseCustomerInfoVO(object):
         self._enterprise_bank_card_name = None
         self._enterprise_bank_name = None
         self._enterprise_bank_no = None
+        self._enterprise_phone = None
         self._legal_cert_no = None
         self._legal_mobile_phone = None
         self._legal_name = None
@@ -53,6 +54,13 @@ class EnterpriseCustomerInfoVO(object):
     @enterprise_bank_no.setter
     def enterprise_bank_no(self, value):
         self._enterprise_bank_no = value
+    @property
+    def enterprise_phone(self):
+        return self._enterprise_phone
+
+    @enterprise_phone.setter
+    def enterprise_phone(self, value):
+        self._enterprise_phone = value
     @property
     def legal_cert_no(self):
         return self._legal_cert_no
@@ -110,6 +118,11 @@ class EnterpriseCustomerInfoVO(object):
                 params['enterprise_bank_no'] = self.enterprise_bank_no.to_alipay_dict()
             else:
                 params['enterprise_bank_no'] = self.enterprise_bank_no
+        if self.enterprise_phone:
+            if hasattr(self.enterprise_phone, 'to_alipay_dict'):
+                params['enterprise_phone'] = self.enterprise_phone.to_alipay_dict()
+            else:
+                params['enterprise_phone'] = self.enterprise_phone
         if self.legal_cert_no:
             if hasattr(self.legal_cert_no, 'to_alipay_dict'):
                 params['legal_cert_no'] = self.legal_cert_no.to_alipay_dict()
@@ -147,6 +160,8 @@ class EnterpriseCustomerInfoVO(object):
             o.enterprise_bank_name = d['enterprise_bank_name']
         if 'enterprise_bank_no' in d:
             o.enterprise_bank_no = d['enterprise_bank_no']
+        if 'enterprise_phone' in d:
+            o.enterprise_phone = d['enterprise_phone']
         if 'legal_cert_no' in d:
             o.legal_cert_no = d['legal_cert_no']
         if 'legal_mobile_phone' in d:

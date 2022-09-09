@@ -13,12 +13,15 @@ class InsurePlanDTO(object):
         self._ins_period = None
         self._insure_plan_name = None
         self._original_premium = None
+        self._original_premium_yuan = None
         self._premium = None
         self._premium_rate = None
+        self._premium_yuan = None
         self._product_plan_id = None
         self._quote_id = None
         self._recommend = None
         self._sum_insured = None
+        self._sum_insured_yuan = None
 
     @property
     def discount_rate(self):
@@ -52,6 +55,13 @@ class InsurePlanDTO(object):
     def original_premium(self, value):
         self._original_premium = value
     @property
+    def original_premium_yuan(self):
+        return self._original_premium_yuan
+
+    @original_premium_yuan.setter
+    def original_premium_yuan(self, value):
+        self._original_premium_yuan = value
+    @property
     def premium(self):
         return self._premium
 
@@ -65,6 +75,13 @@ class InsurePlanDTO(object):
     @premium_rate.setter
     def premium_rate(self, value):
         self._premium_rate = value
+    @property
+    def premium_yuan(self):
+        return self._premium_yuan
+
+    @premium_yuan.setter
+    def premium_yuan(self, value):
+        self._premium_yuan = value
     @property
     def product_plan_id(self):
         return self._product_plan_id
@@ -93,6 +110,13 @@ class InsurePlanDTO(object):
     @sum_insured.setter
     def sum_insured(self, value):
         self._sum_insured = value
+    @property
+    def sum_insured_yuan(self):
+        return self._sum_insured_yuan
+
+    @sum_insured_yuan.setter
+    def sum_insured_yuan(self, value):
+        self._sum_insured_yuan = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +141,11 @@ class InsurePlanDTO(object):
                 params['original_premium'] = self.original_premium.to_alipay_dict()
             else:
                 params['original_premium'] = self.original_premium
+        if self.original_premium_yuan:
+            if hasattr(self.original_premium_yuan, 'to_alipay_dict'):
+                params['original_premium_yuan'] = self.original_premium_yuan.to_alipay_dict()
+            else:
+                params['original_premium_yuan'] = self.original_premium_yuan
         if self.premium:
             if hasattr(self.premium, 'to_alipay_dict'):
                 params['premium'] = self.premium.to_alipay_dict()
@@ -127,6 +156,11 @@ class InsurePlanDTO(object):
                 params['premium_rate'] = self.premium_rate.to_alipay_dict()
             else:
                 params['premium_rate'] = self.premium_rate
+        if self.premium_yuan:
+            if hasattr(self.premium_yuan, 'to_alipay_dict'):
+                params['premium_yuan'] = self.premium_yuan.to_alipay_dict()
+            else:
+                params['premium_yuan'] = self.premium_yuan
         if self.product_plan_id:
             if hasattr(self.product_plan_id, 'to_alipay_dict'):
                 params['product_plan_id'] = self.product_plan_id.to_alipay_dict()
@@ -147,6 +181,11 @@ class InsurePlanDTO(object):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
             else:
                 params['sum_insured'] = self.sum_insured
+        if self.sum_insured_yuan:
+            if hasattr(self.sum_insured_yuan, 'to_alipay_dict'):
+                params['sum_insured_yuan'] = self.sum_insured_yuan.to_alipay_dict()
+            else:
+                params['sum_insured_yuan'] = self.sum_insured_yuan
         return params
 
     @staticmethod
@@ -162,10 +201,14 @@ class InsurePlanDTO(object):
             o.insure_plan_name = d['insure_plan_name']
         if 'original_premium' in d:
             o.original_premium = d['original_premium']
+        if 'original_premium_yuan' in d:
+            o.original_premium_yuan = d['original_premium_yuan']
         if 'premium' in d:
             o.premium = d['premium']
         if 'premium_rate' in d:
             o.premium_rate = d['premium_rate']
+        if 'premium_yuan' in d:
+            o.premium_yuan = d['premium_yuan']
         if 'product_plan_id' in d:
             o.product_plan_id = d['product_plan_id']
         if 'quote_id' in d:
@@ -174,6 +217,8 @@ class InsurePlanDTO(object):
             o.recommend = d['recommend']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
+        if 'sum_insured_yuan' in d:
+            o.sum_insured_yuan = d['sum_insured_yuan']
         return o
 
 

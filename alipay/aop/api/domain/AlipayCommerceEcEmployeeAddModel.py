@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
+        self._department_ids = None
         self._employee_email = None
         self._employee_mobile = None
         self._employee_name = None
@@ -17,6 +18,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._identity_type = None
         self._role_list = None
 
+    @property
+    def department_ids(self):
+        return self._department_ids
+
+    @department_ids.setter
+    def department_ids(self, value):
+        if isinstance(value, list):
+            self._department_ids = list()
+            for i in value:
+                self._department_ids.append(i)
     @property
     def employee_email(self):
         return self._employee_email
@@ -80,6 +91,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.department_ids:
+            if isinstance(self.department_ids, list):
+                for i in range(0, len(self.department_ids)):
+                    element = self.department_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.department_ids[i] = element.to_alipay_dict()
+            if hasattr(self.department_ids, 'to_alipay_dict'):
+                params['department_ids'] = self.department_ids.to_alipay_dict()
+            else:
+                params['department_ids'] = self.department_ids
         if self.employee_email:
             if hasattr(self.employee_email, 'to_alipay_dict'):
                 params['employee_email'] = self.employee_email.to_alipay_dict()
@@ -132,6 +153,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEmployeeAddModel()
+        if 'department_ids' in d:
+            o.department_ids = d['department_ids']
         if 'employee_email' in d:
             o.employee_email = d['employee_email']
         if 'employee_mobile' in d:

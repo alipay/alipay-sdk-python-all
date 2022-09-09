@@ -13,6 +13,7 @@ class BidDetailVO(object):
         self._bid_name = None
         self._bid_no = None
         self._bid_open_date = None
+        self._bid_open_date_str = None
         self._bid_type = None
         self._location_code = None
         self._location_name = None
@@ -53,6 +54,13 @@ class BidDetailVO(object):
     @bid_open_date.setter
     def bid_open_date(self, value):
         self._bid_open_date = value
+    @property
+    def bid_open_date_str(self):
+        return self._bid_open_date_str
+
+    @bid_open_date_str.setter
+    def bid_open_date_str(self, value):
+        self._bid_open_date_str = value
     @property
     def bid_type(self):
         return self._bid_type
@@ -110,6 +118,11 @@ class BidDetailVO(object):
                 params['bid_open_date'] = self.bid_open_date.to_alipay_dict()
             else:
                 params['bid_open_date'] = self.bid_open_date
+        if self.bid_open_date_str:
+            if hasattr(self.bid_open_date_str, 'to_alipay_dict'):
+                params['bid_open_date_str'] = self.bid_open_date_str.to_alipay_dict()
+            else:
+                params['bid_open_date_str'] = self.bid_open_date_str
         if self.bid_type:
             if hasattr(self.bid_type, 'to_alipay_dict'):
                 params['bid_type'] = self.bid_type.to_alipay_dict()
@@ -147,6 +160,8 @@ class BidDetailVO(object):
             o.bid_no = d['bid_no']
         if 'bid_open_date' in d:
             o.bid_open_date = d['bid_open_date']
+        if 'bid_open_date_str' in d:
+            o.bid_open_date_str = d['bid_open_date_str']
         if 'bid_type' in d:
             o.bid_type = d['bid_type']
         if 'location_code' in d:

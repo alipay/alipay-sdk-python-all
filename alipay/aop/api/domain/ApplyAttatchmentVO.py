@@ -15,6 +15,7 @@ class ApplyAttatchmentVO(object):
         self._corporation_cert = None
         self._entrust_doc = None
         self._legal_person_cert = None
+        self._merge_doc = None
 
     @property
     def apply_doc(self):
@@ -65,6 +66,13 @@ class ApplyAttatchmentVO(object):
     @legal_person_cert.setter
     def legal_person_cert(self, value):
         self._legal_person_cert = value
+    @property
+    def merge_doc(self):
+        return self._merge_doc
+
+    @merge_doc.setter
+    def merge_doc(self, value):
+        self._merge_doc = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class ApplyAttatchmentVO(object):
                 params['legal_person_cert'] = self.legal_person_cert.to_alipay_dict()
             else:
                 params['legal_person_cert'] = self.legal_person_cert
+        if self.merge_doc:
+            if hasattr(self.merge_doc, 'to_alipay_dict'):
+                params['merge_doc'] = self.merge_doc.to_alipay_dict()
+            else:
+                params['merge_doc'] = self.merge_doc
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class ApplyAttatchmentVO(object):
             o.entrust_doc = d['entrust_doc']
         if 'legal_person_cert' in d:
             o.legal_person_cert = d['legal_person_cert']
+        if 'merge_doc' in d:
+            o.merge_doc = d['merge_doc']
         return o
 
 

@@ -9,6 +9,7 @@ class AlipayEbppIndustryNucleicremindSubscribeModifyModel(object):
 
     def __init__(self):
         self._city_code = None
+        self._reminder_hour_list = None
         self._status = None
         self._user_id = None
 
@@ -19,6 +20,16 @@ class AlipayEbppIndustryNucleicremindSubscribeModifyModel(object):
     @city_code.setter
     def city_code(self, value):
         self._city_code = value
+    @property
+    def reminder_hour_list(self):
+        return self._reminder_hour_list
+
+    @reminder_hour_list.setter
+    def reminder_hour_list(self, value):
+        if isinstance(value, list):
+            self._reminder_hour_list = list()
+            for i in value:
+                self._reminder_hour_list.append(i)
     @property
     def status(self):
         return self._status
@@ -42,6 +53,16 @@ class AlipayEbppIndustryNucleicremindSubscribeModifyModel(object):
                 params['city_code'] = self.city_code.to_alipay_dict()
             else:
                 params['city_code'] = self.city_code
+        if self.reminder_hour_list:
+            if isinstance(self.reminder_hour_list, list):
+                for i in range(0, len(self.reminder_hour_list)):
+                    element = self.reminder_hour_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.reminder_hour_list[i] = element.to_alipay_dict()
+            if hasattr(self.reminder_hour_list, 'to_alipay_dict'):
+                params['reminder_hour_list'] = self.reminder_hour_list.to_alipay_dict()
+            else:
+                params['reminder_hour_list'] = self.reminder_hour_list
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -61,6 +82,8 @@ class AlipayEbppIndustryNucleicremindSubscribeModifyModel(object):
         o = AlipayEbppIndustryNucleicremindSubscribeModifyModel()
         if 'city_code' in d:
             o.city_code = d['city_code']
+        if 'reminder_hour_list' in d:
+            o.reminder_hour_list = d['reminder_hour_list']
         if 'status' in d:
             o.status = d['status']
         if 'user_id' in d:

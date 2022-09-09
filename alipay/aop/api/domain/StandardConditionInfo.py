@@ -9,6 +9,7 @@ class StandardConditionInfo(object):
 
     def __init__(self):
         self._rule_factor = None
+        self._rule_id = None
         self._rule_name = None
         self._rule_operator = None
         self._rule_value = None
@@ -20,6 +21,13 @@ class StandardConditionInfo(object):
     @rule_factor.setter
     def rule_factor(self, value):
         self._rule_factor = value
+    @property
+    def rule_id(self):
+        return self._rule_id
+
+    @rule_id.setter
+    def rule_id(self, value):
+        self._rule_id = value
     @property
     def rule_name(self):
         return self._rule_name
@@ -50,6 +58,11 @@ class StandardConditionInfo(object):
                 params['rule_factor'] = self.rule_factor.to_alipay_dict()
             else:
                 params['rule_factor'] = self.rule_factor
+        if self.rule_id:
+            if hasattr(self.rule_id, 'to_alipay_dict'):
+                params['rule_id'] = self.rule_id.to_alipay_dict()
+            else:
+                params['rule_id'] = self.rule_id
         if self.rule_name:
             if hasattr(self.rule_name, 'to_alipay_dict'):
                 params['rule_name'] = self.rule_name.to_alipay_dict()
@@ -74,6 +87,8 @@ class StandardConditionInfo(object):
         o = StandardConditionInfo()
         if 'rule_factor' in d:
             o.rule_factor = d['rule_factor']
+        if 'rule_id' in d:
+            o.rule_id = d['rule_id']
         if 'rule_name' in d:
             o.rule_name = d['rule_name']
         if 'rule_operator' in d:

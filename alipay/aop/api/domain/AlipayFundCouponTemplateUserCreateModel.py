@@ -10,6 +10,7 @@ class AlipayFundCouponTemplateUserCreateModel(object):
     def __init__(self):
         self._biz_scene = None
         self._out_biz_id = None
+        self._product_code = None
         self._template_id = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AlipayFundCouponTemplateUserCreateModel(object):
     @out_biz_id.setter
     def out_biz_id(self, value):
         self._out_biz_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def template_id(self):
         return self._template_id
@@ -55,6 +63,11 @@ class AlipayFundCouponTemplateUserCreateModel(object):
                 params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
             else:
                 params['out_biz_id'] = self.out_biz_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayFundCouponTemplateUserCreateModel(object):
             o.biz_scene = d['biz_scene']
         if 'out_biz_id' in d:
             o.out_biz_id = d['out_biz_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'user_id' in d:

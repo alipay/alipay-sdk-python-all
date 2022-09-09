@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEnterpriseCreateModel(object):
 
     def __init__(self):
+        self._enterprise_alias = None
         self._enterprise_name = None
         self._identity = None
         self._identity_type = None
 
+    @property
+    def enterprise_alias(self):
+        return self._enterprise_alias
+
+    @enterprise_alias.setter
+    def enterprise_alias(self, value):
+        self._enterprise_alias = value
     @property
     def enterprise_name(self):
         return self._enterprise_name
@@ -37,6 +45,11 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.enterprise_alias:
+            if hasattr(self.enterprise_alias, 'to_alipay_dict'):
+                params['enterprise_alias'] = self.enterprise_alias.to_alipay_dict()
+            else:
+                params['enterprise_alias'] = self.enterprise_alias
         if self.enterprise_name:
             if hasattr(self.enterprise_name, 'to_alipay_dict'):
                 params['enterprise_name'] = self.enterprise_name.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEnterpriseCreateModel()
+        if 'enterprise_alias' in d:
+            o.enterprise_alias = d['enterprise_alias']
         if 'enterprise_name' in d:
             o.enterprise_name = d['enterprise_name']
         if 'identity' in d:

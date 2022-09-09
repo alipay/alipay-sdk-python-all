@@ -12,7 +12,9 @@ class ItemOrderInfoDTO(object):
         self._item_id = None
         self._item_name = None
         self._quantity = None
+        self._quantity_dec = None
         self._sku_id = None
+        self._sku_total_price = None
         self._unit_price = None
 
     @property
@@ -44,12 +46,26 @@ class ItemOrderInfoDTO(object):
     def quantity(self, value):
         self._quantity = value
     @property
+    def quantity_dec(self):
+        return self._quantity_dec
+
+    @quantity_dec.setter
+    def quantity_dec(self, value):
+        self._quantity_dec = value
+    @property
     def sku_id(self):
         return self._sku_id
 
     @sku_id.setter
     def sku_id(self, value):
         self._sku_id = value
+    @property
+    def sku_total_price(self):
+        return self._sku_total_price
+
+    @sku_total_price.setter
+    def sku_total_price(self, value):
+        self._sku_total_price = value
     @property
     def unit_price(self):
         return self._unit_price
@@ -81,11 +97,21 @@ class ItemOrderInfoDTO(object):
                 params['quantity'] = self.quantity.to_alipay_dict()
             else:
                 params['quantity'] = self.quantity
+        if self.quantity_dec:
+            if hasattr(self.quantity_dec, 'to_alipay_dict'):
+                params['quantity_dec'] = self.quantity_dec.to_alipay_dict()
+            else:
+                params['quantity_dec'] = self.quantity_dec
         if self.sku_id:
             if hasattr(self.sku_id, 'to_alipay_dict'):
                 params['sku_id'] = self.sku_id.to_alipay_dict()
             else:
                 params['sku_id'] = self.sku_id
+        if self.sku_total_price:
+            if hasattr(self.sku_total_price, 'to_alipay_dict'):
+                params['sku_total_price'] = self.sku_total_price.to_alipay_dict()
+            else:
+                params['sku_total_price'] = self.sku_total_price
         if self.unit_price:
             if hasattr(self.unit_price, 'to_alipay_dict'):
                 params['unit_price'] = self.unit_price.to_alipay_dict()
@@ -106,8 +132,12 @@ class ItemOrderInfoDTO(object):
             o.item_name = d['item_name']
         if 'quantity' in d:
             o.quantity = d['quantity']
+        if 'quantity_dec' in d:
+            o.quantity_dec = d['quantity_dec']
         if 'sku_id' in d:
             o.sku_id = d['sku_id']
+        if 'sku_total_price' in d:
+            o.sku_total_price = d['sku_total_price']
         if 'unit_price' in d:
             o.unit_price = d['unit_price']
         return o

@@ -14,6 +14,7 @@ class AlipayOpenIotmbsHoteldeviceQueryResponse(AlipayResponse):
         self._function_list = None
         self._group_id = None
         self._hotel_name = None
+        self._poll_time = None
         self._room_no = None
         self._room_status = None
 
@@ -55,6 +56,13 @@ class AlipayOpenIotmbsHoteldeviceQueryResponse(AlipayResponse):
     def hotel_name(self, value):
         self._hotel_name = value
     @property
+    def poll_time(self):
+        return self._poll_time
+
+    @poll_time.setter
+    def poll_time(self, value):
+        self._poll_time = value
+    @property
     def room_no(self):
         return self._room_no
 
@@ -79,6 +87,8 @@ class AlipayOpenIotmbsHoteldeviceQueryResponse(AlipayResponse):
             self.group_id = response['group_id']
         if 'hotel_name' in response:
             self.hotel_name = response['hotel_name']
+        if 'poll_time' in response:
+            self.poll_time = response['poll_time']
         if 'room_no' in response:
             self.room_no = response['room_no']
         if 'room_status' in response:

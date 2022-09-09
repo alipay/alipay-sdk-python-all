@@ -12,7 +12,9 @@ class InsureRecommResultDTO(object):
     def __init__(self):
         self._agreement_list = None
         self._inst_id = None
+        self._inst_logo = None
         self._inst_name = None
+        self._inst_short_name = None
         self._insure_plans = None
         self._premium_payer_type = None
         self._prod_no = None
@@ -46,12 +48,26 @@ class InsureRecommResultDTO(object):
     def inst_id(self, value):
         self._inst_id = value
     @property
+    def inst_logo(self):
+        return self._inst_logo
+
+    @inst_logo.setter
+    def inst_logo(self, value):
+        self._inst_logo = value
+    @property
     def inst_name(self):
         return self._inst_name
 
     @inst_name.setter
     def inst_name(self, value):
         self._inst_name = value
+    @property
+    def inst_short_name(self):
+        return self._inst_short_name
+
+    @inst_short_name.setter
+    def inst_short_name(self, value):
+        self._inst_short_name = value
     @property
     def insure_plans(self):
         return self._insure_plans
@@ -154,11 +170,21 @@ class InsureRecommResultDTO(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.inst_logo:
+            if hasattr(self.inst_logo, 'to_alipay_dict'):
+                params['inst_logo'] = self.inst_logo.to_alipay_dict()
+            else:
+                params['inst_logo'] = self.inst_logo
         if self.inst_name:
             if hasattr(self.inst_name, 'to_alipay_dict'):
                 params['inst_name'] = self.inst_name.to_alipay_dict()
             else:
                 params['inst_name'] = self.inst_name
+        if self.inst_short_name:
+            if hasattr(self.inst_short_name, 'to_alipay_dict'):
+                params['inst_short_name'] = self.inst_short_name.to_alipay_dict()
+            else:
+                params['inst_short_name'] = self.inst_short_name
         if self.insure_plans:
             if isinstance(self.insure_plans, list):
                 for i in range(0, len(self.insure_plans)):
@@ -230,8 +256,12 @@ class InsureRecommResultDTO(object):
             o.agreement_list = d['agreement_list']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'inst_logo' in d:
+            o.inst_logo = d['inst_logo']
         if 'inst_name' in d:
             o.inst_name = d['inst_name']
+        if 'inst_short_name' in d:
+            o.inst_short_name = d['inst_short_name']
         if 'insure_plans' in d:
             o.insure_plans = d['insure_plans']
         if 'premium_payer_type' in d:

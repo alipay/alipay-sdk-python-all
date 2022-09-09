@@ -40,10 +40,13 @@ class PurchaseQueryResultDTO(object):
 
     @agreement_list.setter
     def agreement_list(self, value):
-        if isinstance(value, InsAgreementDTO):
-            self._agreement_list = value
-        else:
-            self._agreement_list = InsAgreementDTO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._agreement_list = list()
+            for i in value:
+                if isinstance(i, InsAgreementDTO):
+                    self._agreement_list.append(i)
+                else:
+                    self._agreement_list.append(InsAgreementDTO.from_alipay_dict(i))
     @property
     def effect_time(self):
         return self._effect_time
@@ -78,10 +81,13 @@ class PurchaseQueryResultDTO(object):
 
     @insure_plans.setter
     def insure_plans(self, value):
-        if isinstance(value, PurchaseInsurePlanDTO):
-            self._insure_plans = value
-        else:
-            self._insure_plans = PurchaseInsurePlanDTO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._insure_plans = list()
+            for i in value:
+                if isinstance(i, PurchaseInsurePlanDTO):
+                    self._insure_plans.append(i)
+                else:
+                    self._insure_plans.append(PurchaseInsurePlanDTO.from_alipay_dict(i))
     @property
     def issued_amount(self):
         return self._issued_amount
@@ -202,6 +208,11 @@ class PurchaseQueryResultDTO(object):
     def to_alipay_dict(self):
         params = dict()
         if self.agreement_list:
+            if isinstance(self.agreement_list, list):
+                for i in range(0, len(self.agreement_list)):
+                    element = self.agreement_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.agreement_list[i] = element.to_alipay_dict()
             if hasattr(self.agreement_list, 'to_alipay_dict'):
                 params['agreement_list'] = self.agreement_list.to_alipay_dict()
             else:
@@ -227,6 +238,11 @@ class PurchaseQueryResultDTO(object):
             else:
                 params['inst_name'] = self.inst_name
         if self.insure_plans:
+            if isinstance(self.insure_plans, list):
+                for i in range(0, len(self.insure_plans)):
+                    element = self.insure_plans[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.insure_plans[i] = element.to_alipay_dict()
             if hasattr(self.insure_plans, 'to_alipay_dict'):
                 params['insure_plans'] = self.insure_plans.to_alipay_dict()
             else:
