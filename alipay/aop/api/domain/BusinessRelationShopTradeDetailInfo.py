@@ -10,6 +10,7 @@ class BusinessRelationShopTradeDetailInfo(object):
     def __init__(self):
         self._gmt_payment = None
         self._trade_amount = None
+        self._trade_no = None
 
     @property
     def gmt_payment(self):
@@ -25,6 +26,13 @@ class BusinessRelationShopTradeDetailInfo(object):
     @trade_amount.setter
     def trade_amount(self, value):
         self._trade_amount = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class BusinessRelationShopTradeDetailInfo(object):
                 params['trade_amount'] = self.trade_amount.to_alipay_dict()
             else:
                 params['trade_amount'] = self.trade_amount
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class BusinessRelationShopTradeDetailInfo(object):
             o.gmt_payment = d['gmt_payment']
         if 'trade_amount' in d:
             o.trade_amount = d['trade_amount']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         return o
 
 

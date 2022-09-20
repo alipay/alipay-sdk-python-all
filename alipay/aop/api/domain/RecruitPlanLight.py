@@ -10,6 +10,7 @@ class RecruitPlanLight(object):
     def __init__(self):
         self._description = None
         self._enroll_end_time = None
+        self._enroll_scene_type = None
         self._enroll_start_time = None
         self._logo = None
         self._plan_id = None
@@ -30,6 +31,13 @@ class RecruitPlanLight(object):
     @enroll_end_time.setter
     def enroll_end_time(self, value):
         self._enroll_end_time = value
+    @property
+    def enroll_scene_type(self):
+        return self._enroll_scene_type
+
+    @enroll_scene_type.setter
+    def enroll_scene_type(self, value):
+        self._enroll_scene_type = value
     @property
     def enroll_start_time(self):
         return self._enroll_start_time
@@ -79,6 +87,11 @@ class RecruitPlanLight(object):
                 params['enroll_end_time'] = self.enroll_end_time.to_alipay_dict()
             else:
                 params['enroll_end_time'] = self.enroll_end_time
+        if self.enroll_scene_type:
+            if hasattr(self.enroll_scene_type, 'to_alipay_dict'):
+                params['enroll_scene_type'] = self.enroll_scene_type.to_alipay_dict()
+            else:
+                params['enroll_scene_type'] = self.enroll_scene_type
         if self.enroll_start_time:
             if hasattr(self.enroll_start_time, 'to_alipay_dict'):
                 params['enroll_start_time'] = self.enroll_start_time.to_alipay_dict()
@@ -115,6 +128,8 @@ class RecruitPlanLight(object):
             o.description = d['description']
         if 'enroll_end_time' in d:
             o.enroll_end_time = d['enroll_end_time']
+        if 'enroll_scene_type' in d:
+            o.enroll_scene_type = d['enroll_scene_type']
         if 'enroll_start_time' in d:
             o.enroll_start_time = d['enroll_start_time']
         if 'logo' in d:

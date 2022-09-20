@@ -13,6 +13,7 @@ class AlipayMarketingRecruitPlanQueryResponse(AlipayResponse):
         self._description = None
         self._enroll_end_time = None
         self._enroll_rules = None
+        self._enroll_scene_type = None
         self._enroll_start_time = None
         self._logo = None
         self._plan_id = None
@@ -46,6 +47,13 @@ class AlipayMarketingRecruitPlanQueryResponse(AlipayResponse):
                     self._enroll_rules.append(i)
                 else:
                     self._enroll_rules.append(RecruitEnrollRule.from_alipay_dict(i))
+    @property
+    def enroll_scene_type(self):
+        return self._enroll_scene_type
+
+    @enroll_scene_type.setter
+    def enroll_scene_type(self, value):
+        self._enroll_scene_type = value
     @property
     def enroll_start_time(self):
         return self._enroll_start_time
@@ -90,6 +98,8 @@ class AlipayMarketingRecruitPlanQueryResponse(AlipayResponse):
             self.enroll_end_time = response['enroll_end_time']
         if 'enroll_rules' in response:
             self.enroll_rules = response['enroll_rules']
+        if 'enroll_scene_type' in response:
+            self.enroll_scene_type = response['enroll_scene_type']
         if 'enroll_start_time' in response:
             self.enroll_start_time = response['enroll_start_time']
         if 'logo' in response:

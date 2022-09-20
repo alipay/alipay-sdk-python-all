@@ -9,9 +9,17 @@ from alipay.aop.api.domain.ManjiangTestComplexOneData import ManjiangTestComplex
 class ManjiangTestLevelTwoData(object):
 
     def __init__(self):
+        self._open_json = None
         self._test_comple_2 = None
         self._tets_level_2 = None
 
+    @property
+    def open_json(self):
+        return self._open_json
+
+    @open_json.setter
+    def open_json(self, value):
+        self._open_json = value
     @property
     def test_comple_2(self):
         return self._test_comple_2
@@ -33,6 +41,11 @@ class ManjiangTestLevelTwoData(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_json:
+            if hasattr(self.open_json, 'to_alipay_dict'):
+                params['open_json'] = self.open_json.to_alipay_dict()
+            else:
+                params['open_json'] = self.open_json
         if self.test_comple_2:
             if hasattr(self.test_comple_2, 'to_alipay_dict'):
                 params['test_comple_2'] = self.test_comple_2.to_alipay_dict()
@@ -50,6 +63,8 @@ class ManjiangTestLevelTwoData(object):
         if not d:
             return None
         o = ManjiangTestLevelTwoData()
+        if 'open_json' in d:
+            o.open_json = d['open_json']
         if 'test_comple_2' in d:
             o.test_comple_2 = d['test_comple_2']
         if 'tets_level_2' in d:

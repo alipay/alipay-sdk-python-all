@@ -23,6 +23,7 @@ class DatadigitalFincloudFinsaasPutplanModifyModel(object):
         self._name = None
         self._page_type = None
         self._pic_url = None
+        self._rule_text = None
         self._start_time = None
         self._task_id = None
         self._tenant_code = None
@@ -133,6 +134,13 @@ class DatadigitalFincloudFinsaasPutplanModifyModel(object):
     def pic_url(self, value):
         self._pic_url = value
     @property
+    def rule_text(self):
+        return self._rule_text
+
+    @rule_text.setter
+    def rule_text(self, value):
+        self._rule_text = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -232,6 +240,11 @@ class DatadigitalFincloudFinsaasPutplanModifyModel(object):
                 params['pic_url'] = self.pic_url.to_alipay_dict()
             else:
                 params['pic_url'] = self.pic_url
+        if self.rule_text:
+            if hasattr(self.rule_text, 'to_alipay_dict'):
+                params['rule_text'] = self.rule_text.to_alipay_dict()
+            else:
+                params['rule_text'] = self.rule_text
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -284,6 +297,8 @@ class DatadigitalFincloudFinsaasPutplanModifyModel(object):
             o.page_type = d['page_type']
         if 'pic_url' in d:
             o.pic_url = d['pic_url']
+        if 'rule_text' in d:
+            o.rule_text = d['rule_text']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'task_id' in d:

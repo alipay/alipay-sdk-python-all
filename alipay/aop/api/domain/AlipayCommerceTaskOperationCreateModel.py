@@ -18,6 +18,7 @@ class AlipayCommerceTaskOperationCreateModel(object):
         self._out_biz_no = None
         self._scene = None
         self._scene_type = None
+        self._settle_type = None
         self._shop_scope_type = None
         self._start_time = None
         self._startup_type = None
@@ -97,6 +98,13 @@ class AlipayCommerceTaskOperationCreateModel(object):
     @scene_type.setter
     def scene_type(self, value):
         self._scene_type = value
+    @property
+    def settle_type(self):
+        return self._settle_type
+
+    @settle_type.setter
+    def settle_type(self, value):
+        self._settle_type = value
     @property
     def shop_scope_type(self):
         return self._shop_scope_type
@@ -207,6 +215,11 @@ class AlipayCommerceTaskOperationCreateModel(object):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
             else:
                 params['scene_type'] = self.scene_type
+        if self.settle_type:
+            if hasattr(self.settle_type, 'to_alipay_dict'):
+                params['settle_type'] = self.settle_type.to_alipay_dict()
+            else:
+                params['settle_type'] = self.settle_type
         if self.shop_scope_type:
             if hasattr(self.shop_scope_type, 'to_alipay_dict'):
                 params['shop_scope_type'] = self.shop_scope_type.to_alipay_dict()
@@ -274,6 +287,8 @@ class AlipayCommerceTaskOperationCreateModel(object):
             o.scene = d['scene']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
+        if 'settle_type' in d:
+            o.settle_type = d['settle_type']
         if 'shop_scope_type' in d:
             o.shop_scope_type = d['shop_scope_type']
         if 'start_time' in d:

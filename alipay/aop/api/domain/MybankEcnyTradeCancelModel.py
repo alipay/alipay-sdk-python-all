@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class MybankEcnyTradeCancelModel(object):
 
     def __init__(self):
+        self._merchant_id = None
         self._out_trade_no = None
         self._trade_no = None
 
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -29,6 +37,11 @@ class MybankEcnyTradeCancelModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -46,6 +59,8 @@ class MybankEcnyTradeCancelModel(object):
         if not d:
             return None
         o = MybankEcnyTradeCancelModel()
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'trade_no' in d:

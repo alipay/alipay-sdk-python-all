@@ -10,6 +10,7 @@ class AlipayMarketingRecruitPlanlistQueryModel(object):
 
     def __init__(self):
         self._enroll_merchant = None
+        self._enroll_scene_type = None
         self._page_num = None
         self._page_size = None
 
@@ -23,6 +24,13 @@ class AlipayMarketingRecruitPlanlistQueryModel(object):
             self._enroll_merchant = value
         else:
             self._enroll_merchant = RecruitEnrollMerchant.from_alipay_dict(value)
+    @property
+    def enroll_scene_type(self):
+        return self._enroll_scene_type
+
+    @enroll_scene_type.setter
+    def enroll_scene_type(self, value):
+        self._enroll_scene_type = value
     @property
     def page_num(self):
         return self._page_num
@@ -46,6 +54,11 @@ class AlipayMarketingRecruitPlanlistQueryModel(object):
                 params['enroll_merchant'] = self.enroll_merchant.to_alipay_dict()
             else:
                 params['enroll_merchant'] = self.enroll_merchant
+        if self.enroll_scene_type:
+            if hasattr(self.enroll_scene_type, 'to_alipay_dict'):
+                params['enroll_scene_type'] = self.enroll_scene_type.to_alipay_dict()
+            else:
+                params['enroll_scene_type'] = self.enroll_scene_type
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -65,6 +78,8 @@ class AlipayMarketingRecruitPlanlistQueryModel(object):
         o = AlipayMarketingRecruitPlanlistQueryModel()
         if 'enroll_merchant' in d:
             o.enroll_merchant = d['enroll_merchant']
+        if 'enroll_scene_type' in d:
+            o.enroll_scene_type = d['enroll_scene_type']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

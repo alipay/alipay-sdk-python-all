@@ -16,6 +16,8 @@ class ZMGOOpenConfig(object):
         self._min_sign_interval = None
         self._period_mode = None
         self._period_time = None
+        self._show_sign_success_page = None
+        self._sign_success_task_button_desc = None
         self._support_expire_deferral = None
 
     @property
@@ -75,6 +77,20 @@ class ZMGOOpenConfig(object):
     def period_time(self, value):
         self._period_time = value
     @property
+    def show_sign_success_page(self):
+        return self._show_sign_success_page
+
+    @show_sign_success_page.setter
+    def show_sign_success_page(self, value):
+        self._show_sign_success_page = value
+    @property
+    def sign_success_task_button_desc(self):
+        return self._sign_success_task_button_desc
+
+    @sign_success_task_button_desc.setter
+    def sign_success_task_button_desc(self, value):
+        self._sign_success_task_button_desc = value
+    @property
     def support_expire_deferral(self):
         return self._support_expire_deferral
 
@@ -125,6 +141,16 @@ class ZMGOOpenConfig(object):
                 params['period_time'] = self.period_time.to_alipay_dict()
             else:
                 params['period_time'] = self.period_time
+        if self.show_sign_success_page:
+            if hasattr(self.show_sign_success_page, 'to_alipay_dict'):
+                params['show_sign_success_page'] = self.show_sign_success_page.to_alipay_dict()
+            else:
+                params['show_sign_success_page'] = self.show_sign_success_page
+        if self.sign_success_task_button_desc:
+            if hasattr(self.sign_success_task_button_desc, 'to_alipay_dict'):
+                params['sign_success_task_button_desc'] = self.sign_success_task_button_desc.to_alipay_dict()
+            else:
+                params['sign_success_task_button_desc'] = self.sign_success_task_button_desc
         if self.support_expire_deferral:
             if hasattr(self.support_expire_deferral, 'to_alipay_dict'):
                 params['support_expire_deferral'] = self.support_expire_deferral.to_alipay_dict()
@@ -153,6 +179,10 @@ class ZMGOOpenConfig(object):
             o.period_mode = d['period_mode']
         if 'period_time' in d:
             o.period_time = d['period_time']
+        if 'show_sign_success_page' in d:
+            o.show_sign_success_page = d['show_sign_success_page']
+        if 'sign_success_task_button_desc' in d:
+            o.sign_success_task_button_desc = d['sign_success_task_button_desc']
         if 'support_expire_deferral' in d:
             o.support_expire_deferral = d['support_expire_deferral']
         return o

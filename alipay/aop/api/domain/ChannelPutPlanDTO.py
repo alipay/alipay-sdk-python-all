@@ -11,6 +11,8 @@ class ChannelPutPlanDTO(object):
         self._activity_page = None
         self._bill_way = None
         self._channel_biz_id = None
+        self._channel_biz_id_str = None
+        self._channel_categorychannel_category = None
         self._channel_id = None
         self._creator_id = None
         self._creator_name = None
@@ -56,6 +58,20 @@ class ChannelPutPlanDTO(object):
     @channel_biz_id.setter
     def channel_biz_id(self, value):
         self._channel_biz_id = value
+    @property
+    def channel_biz_id_str(self):
+        return self._channel_biz_id_str
+
+    @channel_biz_id_str.setter
+    def channel_biz_id_str(self, value):
+        self._channel_biz_id_str = value
+    @property
+    def channel_categorychannel_category(self):
+        return self._channel_categorychannel_category
+
+    @channel_categorychannel_category.setter
+    def channel_categorychannel_category(self, value):
+        self._channel_categorychannel_category = value
     @property
     def channel_id(self):
         return self._channel_id
@@ -236,6 +252,16 @@ class ChannelPutPlanDTO(object):
                 params['channel_biz_id'] = self.channel_biz_id.to_alipay_dict()
             else:
                 params['channel_biz_id'] = self.channel_biz_id
+        if self.channel_biz_id_str:
+            if hasattr(self.channel_biz_id_str, 'to_alipay_dict'):
+                params['channel_biz_id_str'] = self.channel_biz_id_str.to_alipay_dict()
+            else:
+                params['channel_biz_id_str'] = self.channel_biz_id_str
+        if self.channel_categorychannel_category:
+            if hasattr(self.channel_categorychannel_category, 'to_alipay_dict'):
+                params['channel_categorychannel_category'] = self.channel_categorychannel_category.to_alipay_dict()
+            else:
+                params['channel_categorychannel_category'] = self.channel_categorychannel_category
         if self.channel_id:
             if hasattr(self.channel_id, 'to_alipay_dict'):
                 params['channel_id'] = self.channel_id.to_alipay_dict()
@@ -364,6 +390,10 @@ class ChannelPutPlanDTO(object):
             o.bill_way = d['bill_way']
         if 'channel_biz_id' in d:
             o.channel_biz_id = d['channel_biz_id']
+        if 'channel_biz_id_str' in d:
+            o.channel_biz_id_str = d['channel_biz_id_str']
+        if 'channel_categorychannel_category' in d:
+            o.channel_categorychannel_category = d['channel_categorychannel_category']
         if 'channel_id' in d:
             o.channel_id = d['channel_id']
         if 'creator_id' in d:

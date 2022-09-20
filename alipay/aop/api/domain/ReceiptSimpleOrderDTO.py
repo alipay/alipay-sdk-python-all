@@ -11,6 +11,7 @@ from alipay.aop.api.domain.ReceiptMerchantExtendInfo import ReceiptMerchantExten
 class ReceiptSimpleOrderDTO(object):
 
     def __init__(self):
+        self._alipay_amount = None
         self._alipay_amout = None
         self._alipay_uid = None
         self._amount = None
@@ -37,6 +38,13 @@ class ReceiptSimpleOrderDTO(object):
         self._trade_no = None
         self._trade_type = None
 
+    @property
+    def alipay_amount(self):
+        return self._alipay_amount
+
+    @alipay_amount.setter
+    def alipay_amount(self, value):
+        self._alipay_amount = value
     @property
     def alipay_amout(self):
         return self._alipay_amout
@@ -231,6 +239,11 @@ class ReceiptSimpleOrderDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_amount:
+            if hasattr(self.alipay_amount, 'to_alipay_dict'):
+                params['alipay_amount'] = self.alipay_amount.to_alipay_dict()
+            else:
+                params['alipay_amount'] = self.alipay_amount
         if self.alipay_amout:
             if hasattr(self.alipay_amout, 'to_alipay_dict'):
                 params['alipay_amout'] = self.alipay_amout.to_alipay_dict()
@@ -373,6 +386,8 @@ class ReceiptSimpleOrderDTO(object):
         if not d:
             return None
         o = ReceiptSimpleOrderDTO()
+        if 'alipay_amount' in d:
+            o.alipay_amount = d['alipay_amount']
         if 'alipay_amout' in d:
             o.alipay_amout = d['alipay_amout']
         if 'alipay_uid' in d:

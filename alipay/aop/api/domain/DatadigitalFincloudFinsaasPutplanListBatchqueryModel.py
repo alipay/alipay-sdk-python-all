@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class DatadigitalFincloudFinsaasPutplanListBatchqueryModel(object):
 
     def __init__(self):
+        self._channel_category = None
         self._name = None
         self._page = None
         self._size = None
@@ -15,6 +16,13 @@ class DatadigitalFincloudFinsaasPutplanListBatchqueryModel(object):
         self._tenant_code = None
         self._user_id = None
 
+    @property
+    def channel_category(self):
+        return self._channel_category
+
+    @channel_category.setter
+    def channel_category(self, value):
+        self._channel_category = value
     @property
     def name(self):
         return self._name
@@ -61,6 +69,11 @@ class DatadigitalFincloudFinsaasPutplanListBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel_category:
+            if hasattr(self.channel_category, 'to_alipay_dict'):
+                params['channel_category'] = self.channel_category.to_alipay_dict()
+            else:
+                params['channel_category'] = self.channel_category
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -98,6 +111,8 @@ class DatadigitalFincloudFinsaasPutplanListBatchqueryModel(object):
         if not d:
             return None
         o = DatadigitalFincloudFinsaasPutplanListBatchqueryModel()
+        if 'channel_category' in d:
+            o.channel_category = d['channel_category']
         if 'name' in d:
             o.name = d['name']
         if 'page' in d:

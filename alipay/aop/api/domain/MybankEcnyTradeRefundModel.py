@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class MybankEcnyTradeRefundModel(object):
 
     def __init__(self):
+        self._merchant_id = None
         self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
         self._refund_reason = None
         self._trade_no = None
 
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -53,6 +61,11 @@ class MybankEcnyTradeRefundModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -85,6 +98,8 @@ class MybankEcnyTradeRefundModel(object):
         if not d:
             return None
         o = MybankEcnyTradeRefundModel()
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'out_trade_no' in d:

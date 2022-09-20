@@ -10,6 +10,7 @@ class AlipayMarketingRecruitEnrollCreateModel(object):
 
     def __init__(self):
         self._enroll_info = None
+        self._enroll_scene_type = None
         self._out_biz_no = None
         self._plan_id = None
 
@@ -23,6 +24,13 @@ class AlipayMarketingRecruitEnrollCreateModel(object):
             self._enroll_info = value
         else:
             self._enroll_info = RecruitEnrollInfo.from_alipay_dict(value)
+    @property
+    def enroll_scene_type(self):
+        return self._enroll_scene_type
+
+    @enroll_scene_type.setter
+    def enroll_scene_type(self, value):
+        self._enroll_scene_type = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -46,6 +54,11 @@ class AlipayMarketingRecruitEnrollCreateModel(object):
                 params['enroll_info'] = self.enroll_info.to_alipay_dict()
             else:
                 params['enroll_info'] = self.enroll_info
+        if self.enroll_scene_type:
+            if hasattr(self.enroll_scene_type, 'to_alipay_dict'):
+                params['enroll_scene_type'] = self.enroll_scene_type.to_alipay_dict()
+            else:
+                params['enroll_scene_type'] = self.enroll_scene_type
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -65,6 +78,8 @@ class AlipayMarketingRecruitEnrollCreateModel(object):
         o = AlipayMarketingRecruitEnrollCreateModel()
         if 'enroll_info' in d:
             o.enroll_info = d['enroll_info']
+        if 'enroll_scene_type' in d:
+            o.enroll_scene_type = d['enroll_scene_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'plan_id' in d:

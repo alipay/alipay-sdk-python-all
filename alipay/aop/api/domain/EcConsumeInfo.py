@@ -13,6 +13,8 @@ class EcConsumeInfo(object):
         self._biz_out_no = None
         self._category_name = None
         self._consume_amount = None
+        self._consume_category = None
+        self._consume_memo = None
         self._consume_type = None
         self._employee_id = None
         self._enterprise_id = None
@@ -77,6 +79,20 @@ class EcConsumeInfo(object):
     @consume_amount.setter
     def consume_amount(self, value):
         self._consume_amount = value
+    @property
+    def consume_category(self):
+        return self._consume_category
+
+    @consume_category.setter
+    def consume_category(self, value):
+        self._consume_category = value
+    @property
+    def consume_memo(self):
+        return self._consume_memo
+
+    @consume_memo.setter
+    def consume_memo(self, value):
+        self._consume_memo = value
     @property
     def consume_type(self):
         return self._consume_type
@@ -302,6 +318,16 @@ class EcConsumeInfo(object):
                 params['consume_amount'] = self.consume_amount.to_alipay_dict()
             else:
                 params['consume_amount'] = self.consume_amount
+        if self.consume_category:
+            if hasattr(self.consume_category, 'to_alipay_dict'):
+                params['consume_category'] = self.consume_category.to_alipay_dict()
+            else:
+                params['consume_category'] = self.consume_category
+        if self.consume_memo:
+            if hasattr(self.consume_memo, 'to_alipay_dict'):
+                params['consume_memo'] = self.consume_memo.to_alipay_dict()
+            else:
+                params['consume_memo'] = self.consume_memo
         if self.consume_type:
             if hasattr(self.consume_type, 'to_alipay_dict'):
                 params['consume_type'] = self.consume_type.to_alipay_dict()
@@ -459,6 +485,10 @@ class EcConsumeInfo(object):
             o.category_name = d['category_name']
         if 'consume_amount' in d:
             o.consume_amount = d['consume_amount']
+        if 'consume_category' in d:
+            o.consume_category = d['consume_category']
+        if 'consume_memo' in d:
+            o.consume_memo = d['consume_memo']
         if 'consume_type' in d:
             o.consume_type = d['consume_type']
         if 'employee_id' in d:

@@ -12,6 +12,7 @@ class AlipayMarketingRecruitEnrollQueryResponse(AlipayResponse):
         super(AlipayMarketingRecruitEnrollQueryResponse, self).__init__()
         self._enroll_id = None
         self._enroll_info = None
+        self._enroll_scene_type = None
         self._enroll_time = None
         self._memo = None
         self._out_biz_no = None
@@ -35,6 +36,13 @@ class AlipayMarketingRecruitEnrollQueryResponse(AlipayResponse):
             self._enroll_info = value
         else:
             self._enroll_info = RecruitEnrollInfo.from_alipay_dict(value)
+    @property
+    def enroll_scene_type(self):
+        return self._enroll_scene_type
+
+    @enroll_scene_type.setter
+    def enroll_scene_type(self, value):
+        self._enroll_scene_type = value
     @property
     def enroll_time(self):
         return self._enroll_time
@@ -77,6 +85,8 @@ class AlipayMarketingRecruitEnrollQueryResponse(AlipayResponse):
             self.enroll_id = response['enroll_id']
         if 'enroll_info' in response:
             self.enroll_info = response['enroll_info']
+        if 'enroll_scene_type' in response:
+            self.enroll_scene_type = response['enroll_scene_type']
         if 'enroll_time' in response:
             self.enroll_time = response['enroll_time']
         if 'memo' in response:

@@ -35,6 +35,7 @@ class ChannelPutPlanDetailDTO(object):
         self._page_type = None
         self._pic_url = None
         self._reject_reason = None
+        self._rule_text = None
         self._status = None
         self._task_id = None
         self._task_name = None
@@ -232,6 +233,13 @@ class ChannelPutPlanDetailDTO(object):
     def reject_reason(self, value):
         self._reject_reason = value
     @property
+    def rule_text(self):
+        return self._rule_text
+
+    @rule_text.setter
+    def rule_text(self, value):
+        self._rule_text = value
+    @property
     def status(self):
         return self._status
 
@@ -403,6 +411,11 @@ class ChannelPutPlanDetailDTO(object):
                 params['reject_reason'] = self.reject_reason.to_alipay_dict()
             else:
                 params['reject_reason'] = self.reject_reason
+        if self.rule_text:
+            if hasattr(self.rule_text, 'to_alipay_dict'):
+                params['rule_text'] = self.rule_text.to_alipay_dict()
+            else:
+                params['rule_text'] = self.rule_text
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -482,6 +495,8 @@ class ChannelPutPlanDetailDTO(object):
             o.pic_url = d['pic_url']
         if 'reject_reason' in d:
             o.reject_reason = d['reject_reason']
+        if 'rule_text' in d:
+            o.rule_text = d['rule_text']
         if 'status' in d:
             o.status = d['status']
         if 'task_id' in d:

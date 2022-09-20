@@ -52,6 +52,7 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._inst_or_corp = None
         self._is_adult = None
         self._is_balance_frozen = None
+        self._is_blocked = None
         self._is_certified = None
         self._is_student_certified = None
         self._license_expiry_date = None
@@ -367,6 +368,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def is_balance_frozen(self, value):
         self._is_balance_frozen = value
     @property
+    def is_blocked(self):
+        return self._is_blocked
+
+    @is_blocked.setter
+    def is_blocked(self, value):
+        self._is_blocked = value
+    @property
     def is_certified(self):
         return self._is_certified
 
@@ -607,6 +615,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.is_adult = response['is_adult']
         if 'is_balance_frozen' in response:
             self.is_balance_frozen = response['is_balance_frozen']
+        if 'is_blocked' in response:
+            self.is_blocked = response['is_blocked']
         if 'is_certified' in response:
             self.is_certified = response['is_certified']
         if 'is_student_certified' in response:
