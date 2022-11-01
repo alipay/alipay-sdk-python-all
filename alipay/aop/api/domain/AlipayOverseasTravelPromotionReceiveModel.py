@@ -9,6 +9,7 @@ class AlipayOverseasTravelPromotionReceiveModel(object):
 
     def __init__(self):
         self._ch_info = None
+        self._open_id = None
         self._promotion_id = None
         self._unique_id = None
         self._user_id = None
@@ -21,6 +22,13 @@ class AlipayOverseasTravelPromotionReceiveModel(object):
     @ch_info.setter
     def ch_info(self, value):
         self._ch_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def promotion_id(self):
         return self._promotion_id
@@ -58,6 +66,11 @@ class AlipayOverseasTravelPromotionReceiveModel(object):
                 params['ch_info'] = self.ch_info.to_alipay_dict()
             else:
                 params['ch_info'] = self.ch_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.promotion_id:
             if hasattr(self.promotion_id, 'to_alipay_dict'):
                 params['promotion_id'] = self.promotion_id.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayOverseasTravelPromotionReceiveModel(object):
         o = AlipayOverseasTravelPromotionReceiveModel()
         if 'ch_info' in d:
             o.ch_info = d['ch_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'promotion_id' in d:
             o.promotion_id = d['promotion_id']
         if 'unique_id' in d:

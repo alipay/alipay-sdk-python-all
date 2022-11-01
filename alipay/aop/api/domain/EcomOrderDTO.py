@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EcomLogisticsOrderDTO import EcomLogisticsOrderDTO
 from alipay.aop.api.domain.PayOrderDTO import PayOrderDTO
+from alipay.aop.api.domain.EcomSubOrderDTO import EcomSubOrderDTO
 
 
 class EcomOrderDTO(object):
@@ -31,6 +32,7 @@ class EcomOrderDTO(object):
         self._post_fee = None
         self._seller_id = None
         self._seller_nick = None
+        self._sub_order_list = None
         self._trade_end_time = None
 
     @property
@@ -187,6 +189,19 @@ class EcomOrderDTO(object):
     def seller_nick(self, value):
         self._seller_nick = value
     @property
+    def sub_order_list(self):
+        return self._sub_order_list
+
+    @sub_order_list.setter
+    def sub_order_list(self, value):
+        if isinstance(value, list):
+            self._sub_order_list = list()
+            for i in value:
+                if isinstance(i, EcomSubOrderDTO):
+                    self._sub_order_list.append(i)
+                else:
+                    self._sub_order_list.append(EcomSubOrderDTO.from_alipay_dict(i))
+    @property
     def trade_end_time(self):
         return self._trade_end_time
 
@@ -302,6 +317,16 @@ class EcomOrderDTO(object):
                 params['seller_nick'] = self.seller_nick.to_alipay_dict()
             else:
                 params['seller_nick'] = self.seller_nick
+        if self.sub_order_list:
+            if isinstance(self.sub_order_list, list):
+                for i in range(0, len(self.sub_order_list)):
+                    element = self.sub_order_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sub_order_list[i] = element.to_alipay_dict()
+            if hasattr(self.sub_order_list, 'to_alipay_dict'):
+                params['sub_order_list'] = self.sub_order_list.to_alipay_dict()
+            else:
+                params['sub_order_list'] = self.sub_order_list
         if self.trade_end_time:
             if hasattr(self.trade_end_time, 'to_alipay_dict'):
                 params['trade_end_time'] = self.trade_end_time.to_alipay_dict()
@@ -356,6 +381,8 @@ class EcomOrderDTO(object):
             o.seller_id = d['seller_id']
         if 'seller_nick' in d:
             o.seller_nick = d['seller_nick']
+        if 'sub_order_list' in d:
+            o.sub_order_list = d['sub_order_list']
         if 'trade_end_time' in d:
             o.trade_end_time = d['trade_end_time']
         return o

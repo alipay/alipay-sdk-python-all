@@ -11,6 +11,7 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
         super(AlipayEbppInstserviceSignresultQueryResponse, self).__init__()
         self._agreement_id = None
         self._bill_key = None
+        self._deduct_amount = None
         self._inst_id = None
         self._login_id = None
         self._out_agreement_id = None
@@ -34,6 +35,13 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
     @bill_key.setter
     def bill_key(self, value):
         self._bill_key = value
+    @property
+    def deduct_amount(self):
+        return self._deduct_amount
+
+    @deduct_amount.setter
+    def deduct_amount(self, value):
+        self._deduct_amount = value
     @property
     def inst_id(self):
         return self._inst_id
@@ -97,6 +105,8 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
             self.agreement_id = response['agreement_id']
         if 'bill_key' in response:
             self.bill_key = response['bill_key']
+        if 'deduct_amount' in response:
+            self.deduct_amount = response['deduct_amount']
         if 'inst_id' in response:
             self.inst_id = response['inst_id']
         if 'login_id' in response:

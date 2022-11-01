@@ -22,6 +22,7 @@ class AlipayCommerceTransportIntelligentizeWorkscheduleCreateModel(object):
         self._trip_break_time = None
         self._up_first_station_capacity = None
         self._work_pattern_list = None
+        self._work_schedule_mode = None
 
     @property
     def city_code(self):
@@ -119,6 +120,13 @@ class AlipayCommerceTransportIntelligentizeWorkscheduleCreateModel(object):
                     self._work_pattern_list.append(i)
                 else:
                     self._work_pattern_list.append(WorkPattern.from_alipay_dict(i))
+    @property
+    def work_schedule_mode(self):
+        return self._work_schedule_mode
+
+    @work_schedule_mode.setter
+    def work_schedule_mode(self, value):
+        self._work_schedule_mode = value
 
 
     def to_alipay_dict(self):
@@ -193,6 +201,11 @@ class AlipayCommerceTransportIntelligentizeWorkscheduleCreateModel(object):
                 params['work_pattern_list'] = self.work_pattern_list.to_alipay_dict()
             else:
                 params['work_pattern_list'] = self.work_pattern_list
+        if self.work_schedule_mode:
+            if hasattr(self.work_schedule_mode, 'to_alipay_dict'):
+                params['work_schedule_mode'] = self.work_schedule_mode.to_alipay_dict()
+            else:
+                params['work_schedule_mode'] = self.work_schedule_mode
         return params
 
     @staticmethod
@@ -224,6 +237,8 @@ class AlipayCommerceTransportIntelligentizeWorkscheduleCreateModel(object):
             o.up_first_station_capacity = d['up_first_station_capacity']
         if 'work_pattern_list' in d:
             o.work_pattern_list = d['work_pattern_list']
+        if 'work_schedule_mode' in d:
+            o.work_schedule_mode = d['work_schedule_mode']
         return o
 
 

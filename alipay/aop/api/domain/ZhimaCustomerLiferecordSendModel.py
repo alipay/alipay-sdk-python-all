@@ -14,7 +14,9 @@ class ZhimaCustomerLiferecordSendModel(object):
         self._cert_type = None
         self._data = None
         self._merchant_id = None
+        self._open_id = None
         self._out_biz_no = None
+        self._push_record_out_biz_no = None
         self._scene = None
         self._user_id = None
 
@@ -60,12 +62,26 @@ class ZhimaCustomerLiferecordSendModel(object):
     def merchant_id(self, value):
         self._merchant_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def push_record_out_biz_no(self):
+        return self._push_record_out_biz_no
+
+    @push_record_out_biz_no.setter
+    def push_record_out_biz_no(self, value):
+        self._push_record_out_biz_no = value
     @property
     def scene(self):
         return self._scene
@@ -114,11 +130,21 @@ class ZhimaCustomerLiferecordSendModel(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.push_record_out_biz_no:
+            if hasattr(self.push_record_out_biz_no, 'to_alipay_dict'):
+                params['push_record_out_biz_no'] = self.push_record_out_biz_no.to_alipay_dict()
+            else:
+                params['push_record_out_biz_no'] = self.push_record_out_biz_no
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -146,8 +172,12 @@ class ZhimaCustomerLiferecordSendModel(object):
             o.data = d['data']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'push_record_out_biz_no' in d:
+            o.push_record_out_biz_no = d['push_record_out_biz_no']
         if 'scene' in d:
             o.scene = d['scene']
         if 'user_id' in d:

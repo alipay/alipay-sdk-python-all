@@ -13,6 +13,7 @@ class GroupBrief(object):
         self._group_img = None
         self._group_name = None
         self._master_uid = None
+        self._open_id = None
 
     @property
     def gmt_create(self):
@@ -49,6 +50,13 @@ class GroupBrief(object):
     @master_uid.setter
     def master_uid(self, value):
         self._master_uid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class GroupBrief(object):
                 params['master_uid'] = self.master_uid.to_alipay_dict()
             else:
                 params['master_uid'] = self.master_uid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class GroupBrief(object):
             o.group_name = d['group_name']
         if 'master_uid' in d:
             o.master_uid = d['master_uid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         return o
 
 

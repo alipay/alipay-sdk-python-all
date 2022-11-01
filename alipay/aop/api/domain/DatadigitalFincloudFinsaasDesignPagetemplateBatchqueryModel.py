@@ -10,6 +10,7 @@ class DatadigitalFincloudFinsaasDesignPagetemplateBatchqueryModel(object):
     def __init__(self):
         self._creator_id = None
         self._creator_name = None
+        self._operation_task_type = None
         self._page_name = None
         self._page_num = None
         self._page_size = None
@@ -30,6 +31,13 @@ class DatadigitalFincloudFinsaasDesignPagetemplateBatchqueryModel(object):
     @creator_name.setter
     def creator_name(self, value):
         self._creator_name = value
+    @property
+    def operation_task_type(self):
+        return self._operation_task_type
+
+    @operation_task_type.setter
+    def operation_task_type(self, value):
+        self._operation_task_type = value
     @property
     def page_name(self):
         return self._page_name
@@ -79,6 +87,11 @@ class DatadigitalFincloudFinsaasDesignPagetemplateBatchqueryModel(object):
                 params['creator_name'] = self.creator_name.to_alipay_dict()
             else:
                 params['creator_name'] = self.creator_name
+        if self.operation_task_type:
+            if hasattr(self.operation_task_type, 'to_alipay_dict'):
+                params['operation_task_type'] = self.operation_task_type.to_alipay_dict()
+            else:
+                params['operation_task_type'] = self.operation_task_type
         if self.page_name:
             if hasattr(self.page_name, 'to_alipay_dict'):
                 params['page_name'] = self.page_name.to_alipay_dict()
@@ -115,6 +128,8 @@ class DatadigitalFincloudFinsaasDesignPagetemplateBatchqueryModel(object):
             o.creator_id = d['creator_id']
         if 'creator_name' in d:
             o.creator_name = d['creator_name']
+        if 'operation_task_type' in d:
+            o.operation_task_type = d['operation_task_type']
         if 'page_name' in d:
             o.page_name = d['page_name']
         if 'page_num' in d:

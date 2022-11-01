@@ -10,6 +10,7 @@ class AlipayFincoreFunddsAccountlogWitnessQueryModel(object):
     def __init__(self):
         self._account_no = None
         self._account_type = None
+        self._biz_no = None
         self._end_time = None
         self._page_num = None
         self._page_size = None
@@ -31,6 +32,13 @@ class AlipayFincoreFunddsAccountlogWitnessQueryModel(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def biz_no(self):
+        return self._biz_no
+
+    @biz_no.setter
+    def biz_no(self, value):
+        self._biz_no = value
     @property
     def end_time(self):
         return self._end_time
@@ -87,6 +95,11 @@ class AlipayFincoreFunddsAccountlogWitnessQueryModel(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.biz_no:
+            if hasattr(self.biz_no, 'to_alipay_dict'):
+                params['biz_no'] = self.biz_no.to_alipay_dict()
+            else:
+                params['biz_no'] = self.biz_no
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -128,6 +141,8 @@ class AlipayFincoreFunddsAccountlogWitnessQueryModel(object):
             o.account_no = d['account_no']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'biz_no' in d:
+            o.biz_no = d['biz_no']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'page_num' in d:

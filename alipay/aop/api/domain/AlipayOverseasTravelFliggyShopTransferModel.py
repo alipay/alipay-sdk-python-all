@@ -9,6 +9,7 @@ class AlipayOverseasTravelFliggyShopTransferModel(object):
 
     def __init__(self):
         self._data = None
+        self._open_id = None
         self._unique_id = None
         self._user_id = None
         self._user_id_type = None
@@ -20,6 +21,13 @@ class AlipayOverseasTravelFliggyShopTransferModel(object):
     @data.setter
     def data(self, value):
         self._data = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def unique_id(self):
         return self._unique_id
@@ -50,6 +58,11 @@ class AlipayOverseasTravelFliggyShopTransferModel(object):
                 params['data'] = self.data.to_alipay_dict()
             else:
                 params['data'] = self.data
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.unique_id:
             if hasattr(self.unique_id, 'to_alipay_dict'):
                 params['unique_id'] = self.unique_id.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayOverseasTravelFliggyShopTransferModel(object):
         o = AlipayOverseasTravelFliggyShopTransferModel()
         if 'data' in d:
             o.data = d['data']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'unique_id' in d:
             o.unique_id = d['unique_id']
         if 'user_id' in d:

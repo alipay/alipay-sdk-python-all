@@ -14,6 +14,7 @@ class JointAccountBillDetailDTO(object):
         self._biz_date = None
         self._biz_no = None
         self._in_out = None
+        self._out_trade_no = None
         self._title = None
         self._user_id = None
 
@@ -59,6 +60,13 @@ class JointAccountBillDetailDTO(object):
     @in_out.setter
     def in_out(self, value):
         self._in_out = value
+    @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
     @property
     def title(self):
         return self._title
@@ -107,6 +115,11 @@ class JointAccountBillDetailDTO(object):
                 params['in_out'] = self.in_out.to_alipay_dict()
             else:
                 params['in_out'] = self.in_out
+        if self.out_trade_no:
+            if hasattr(self.out_trade_no, 'to_alipay_dict'):
+                params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
+            else:
+                params['out_trade_no'] = self.out_trade_no
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -136,6 +149,8 @@ class JointAccountBillDetailDTO(object):
             o.biz_no = d['biz_no']
         if 'in_out' in d:
             o.in_out = d['in_out']
+        if 'out_trade_no' in d:
+            o.out_trade_no = d['out_trade_no']
         if 'title' in d:
             o.title = d['title']
         if 'user_id' in d:

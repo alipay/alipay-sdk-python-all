@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExpenseCtrRuleInfo import ExpenseCtrRuleInfo
+from alipay.aop.api.domain.StandardConditionInfo import StandardConditionInfo
 
 
 class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
@@ -18,6 +19,7 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
         self._institution_id = None
         self._open_rule_id = None
         self._payment_policy = None
+        self._standard_condition_info_list = None
         self._standard_desc = None
         self._standard_id = None
         self._standard_name = None
@@ -91,6 +93,19 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
     @payment_policy.setter
     def payment_policy(self, value):
         self._payment_policy = value
+    @property
+    def standard_condition_info_list(self):
+        return self._standard_condition_info_list
+
+    @standard_condition_info_list.setter
+    def standard_condition_info_list(self, value):
+        if isinstance(value, list):
+            self._standard_condition_info_list = list()
+            for i in value:
+                if isinstance(i, StandardConditionInfo):
+                    self._standard_condition_info_list.append(i)
+                else:
+                    self._standard_condition_info_list.append(StandardConditionInfo.from_alipay_dict(i))
     @property
     def standard_desc(self):
         return self._standard_desc
@@ -166,6 +181,16 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
                 params['payment_policy'] = self.payment_policy.to_alipay_dict()
             else:
                 params['payment_policy'] = self.payment_policy
+        if self.standard_condition_info_list:
+            if isinstance(self.standard_condition_info_list, list):
+                for i in range(0, len(self.standard_condition_info_list)):
+                    element = self.standard_condition_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.standard_condition_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.standard_condition_info_list, 'to_alipay_dict'):
+                params['standard_condition_info_list'] = self.standard_condition_info_list.to_alipay_dict()
+            else:
+                params['standard_condition_info_list'] = self.standard_condition_info_list
         if self.standard_desc:
             if hasattr(self.standard_desc, 'to_alipay_dict'):
                 params['standard_desc'] = self.standard_desc.to_alipay_dict()
@@ -206,6 +231,8 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
             o.open_rule_id = d['open_rule_id']
         if 'payment_policy' in d:
             o.payment_policy = d['payment_policy']
+        if 'standard_condition_info_list' in d:
+            o.standard_condition_info_list = d['standard_condition_info_list']
         if 'standard_desc' in d:
             o.standard_desc = d['standard_desc']
         if 'standard_id' in d:

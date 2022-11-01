@@ -10,6 +10,7 @@ class AlipayUserSafeboxRecordSaveModel(object):
     def __init__(self):
         self._content = None
         self._key_version = None
+        self._open_id = None
         self._scene_code = None
         self._title = None
         self._unique_id = None
@@ -29,6 +30,13 @@ class AlipayUserSafeboxRecordSaveModel(object):
     @key_version.setter
     def key_version(self, value):
         self._key_version = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -71,6 +79,11 @@ class AlipayUserSafeboxRecordSaveModel(object):
                 params['key_version'] = self.key_version.to_alipay_dict()
             else:
                 params['key_version'] = self.key_version
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayUserSafeboxRecordSaveModel(object):
             o.content = d['content']
         if 'key_version' in d:
             o.key_version = d['key_version']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'title' in d:

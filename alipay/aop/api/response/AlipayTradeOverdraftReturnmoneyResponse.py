@@ -12,6 +12,7 @@ class AlipayTradeOverdraftReturnmoneyResponse(AlipayResponse):
         self._exchange_rate = None
         self._out_request_no = None
         self._receive_account = None
+        self._refund_out_request_no = None
         self._return_amount = None
         self._return_foreign_amount = None
         self._return_foreign_currency = None
@@ -39,6 +40,13 @@ class AlipayTradeOverdraftReturnmoneyResponse(AlipayResponse):
     @receive_account.setter
     def receive_account(self, value):
         self._receive_account = value
+    @property
+    def refund_out_request_no(self):
+        return self._refund_out_request_no
+
+    @refund_out_request_no.setter
+    def refund_out_request_no(self, value):
+        self._refund_out_request_no = value
     @property
     def return_amount(self):
         return self._return_amount
@@ -83,6 +91,8 @@ class AlipayTradeOverdraftReturnmoneyResponse(AlipayResponse):
             self.out_request_no = response['out_request_no']
         if 'receive_account' in response:
             self.receive_account = response['receive_account']
+        if 'refund_out_request_no' in response:
+            self.refund_out_request_no = response['refund_out_request_no']
         if 'return_amount' in response:
             self.return_amount = response['return_amount']
         if 'return_foreign_amount' in response:

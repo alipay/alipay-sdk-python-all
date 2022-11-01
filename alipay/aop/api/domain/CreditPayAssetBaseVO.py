@@ -14,6 +14,7 @@ class CreditPayAssetBaseVO(object):
         self._available_amt = None
         self._credit_enough = None
         self._enable = None
+        self._has_current_account = None
         self._name = None
         self._pre_repay_desc = None
         self._refuse_info = None
@@ -47,6 +48,13 @@ class CreditPayAssetBaseVO(object):
     @enable.setter
     def enable(self, value):
         self._enable = value
+    @property
+    def has_current_account(self):
+        return self._has_current_account
+
+    @has_current_account.setter
+    def has_current_account(self, value):
+        self._has_current_account = value
     @property
     def name(self):
         return self._name
@@ -128,6 +136,11 @@ class CreditPayAssetBaseVO(object):
                 params['enable'] = self.enable.to_alipay_dict()
             else:
                 params['enable'] = self.enable
+        if self.has_current_account:
+            if hasattr(self.has_current_account, 'to_alipay_dict'):
+                params['has_current_account'] = self.has_current_account.to_alipay_dict()
+            else:
+                params['has_current_account'] = self.has_current_account
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -181,6 +194,8 @@ class CreditPayAssetBaseVO(object):
             o.credit_enough = d['credit_enough']
         if 'enable' in d:
             o.enable = d['enable']
+        if 'has_current_account' in d:
+            o.has_current_account = d['has_current_account']
         if 'name' in d:
             o.name = d['name']
         if 'pre_repay_desc' in d:

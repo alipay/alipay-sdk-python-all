@@ -12,6 +12,7 @@ class AlipayEcoCityserviceOpeneventAppCreateModel(object):
         self._service_desc = None
         self._service_func = None
         self._service_guide = None
+        self._service_labels = None
         self._service_name = None
         self._service_snapshot = None
         self._service_template_config = None
@@ -47,6 +48,13 @@ class AlipayEcoCityserviceOpeneventAppCreateModel(object):
     @service_guide.setter
     def service_guide(self, value):
         self._service_guide = value
+    @property
+    def service_labels(self):
+        return self._service_labels
+
+    @service_labels.setter
+    def service_labels(self, value):
+        self._service_labels = value
     @property
     def service_name(self):
         return self._service_name
@@ -113,6 +121,11 @@ class AlipayEcoCityserviceOpeneventAppCreateModel(object):
                 params['service_guide'] = self.service_guide.to_alipay_dict()
             else:
                 params['service_guide'] = self.service_guide
+        if self.service_labels:
+            if hasattr(self.service_labels, 'to_alipay_dict'):
+                params['service_labels'] = self.service_labels.to_alipay_dict()
+            else:
+                params['service_labels'] = self.service_labels
         if self.service_name:
             if hasattr(self.service_name, 'to_alipay_dict'):
                 params['service_name'] = self.service_name.to_alipay_dict()
@@ -158,6 +171,8 @@ class AlipayEcoCityserviceOpeneventAppCreateModel(object):
             o.service_func = d['service_func']
         if 'service_guide' in d:
             o.service_guide = d['service_guide']
+        if 'service_labels' in d:
+            o.service_labels = d['service_labels']
         if 'service_name' in d:
             o.service_name = d['service_name']
         if 'service_snapshot' in d:

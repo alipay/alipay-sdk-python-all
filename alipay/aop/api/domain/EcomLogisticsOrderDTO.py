@@ -25,6 +25,7 @@ class EcomLogisticsOrderDTO(object):
         self._recipient_phone = None
         self._recipient_prov = None
         self._recipient_town = None
+        self._refusal = None
         self._sender_address = None
         self._sender_area = None
         self._sender_area_code = None
@@ -154,6 +155,13 @@ class EcomLogisticsOrderDTO(object):
     @recipient_town.setter
     def recipient_town(self, value):
         self._recipient_town = value
+    @property
+    def refusal(self):
+        return self._refusal
+
+    @refusal.setter
+    def refusal(self, value):
+        self._refusal = value
     @property
     def sender_address(self):
         return self._sender_address
@@ -306,6 +314,11 @@ class EcomLogisticsOrderDTO(object):
                 params['recipient_town'] = self.recipient_town.to_alipay_dict()
             else:
                 params['recipient_town'] = self.recipient_town
+        if self.refusal:
+            if hasattr(self.refusal, 'to_alipay_dict'):
+                params['refusal'] = self.refusal.to_alipay_dict()
+            else:
+                params['refusal'] = self.refusal
         if self.sender_address:
             if hasattr(self.sender_address, 'to_alipay_dict'):
                 params['sender_address'] = self.sender_address.to_alipay_dict()
@@ -392,6 +405,8 @@ class EcomLogisticsOrderDTO(object):
             o.recipient_prov = d['recipient_prov']
         if 'recipient_town' in d:
             o.recipient_town = d['recipient_town']
+        if 'refusal' in d:
+            o.refusal = d['refusal']
         if 'sender_address' in d:
             o.sender_address = d['sender_address']
         if 'sender_area' in d:

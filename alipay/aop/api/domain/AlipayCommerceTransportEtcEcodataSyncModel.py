@@ -11,6 +11,8 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
         self._acquire_inst = None
         self._agent_flag = None
         self._agree_id = None
+        self._apply_scene = None
+        self._apply_sub_scene = None
         self._apply_type = None
         self._approved_load = None
         self._axle_count = None
@@ -23,6 +25,7 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
         self._etc_name = None
         self._grant_date = None
         self._gross_mass = None
+        self._open_id = None
         self._order_status = None
         self._out_biz_no = None
         self._outline_size = None
@@ -62,6 +65,20 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
     @agree_id.setter
     def agree_id(self, value):
         self._agree_id = value
+    @property
+    def apply_scene(self):
+        return self._apply_scene
+
+    @apply_scene.setter
+    def apply_scene(self, value):
+        self._apply_scene = value
+    @property
+    def apply_sub_scene(self):
+        return self._apply_sub_scene
+
+    @apply_sub_scene.setter
+    def apply_sub_scene(self, value):
+        self._apply_sub_scene = value
     @property
     def apply_type(self):
         return self._apply_type
@@ -146,6 +163,13 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
     @gross_mass.setter
     def gross_mass(self, value):
         self._gross_mass = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -284,6 +308,16 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
                 params['agree_id'] = self.agree_id.to_alipay_dict()
             else:
                 params['agree_id'] = self.agree_id
+        if self.apply_scene:
+            if hasattr(self.apply_scene, 'to_alipay_dict'):
+                params['apply_scene'] = self.apply_scene.to_alipay_dict()
+            else:
+                params['apply_scene'] = self.apply_scene
+        if self.apply_sub_scene:
+            if hasattr(self.apply_sub_scene, 'to_alipay_dict'):
+                params['apply_sub_scene'] = self.apply_sub_scene.to_alipay_dict()
+            else:
+                params['apply_sub_scene'] = self.apply_sub_scene
         if self.apply_type:
             if hasattr(self.apply_type, 'to_alipay_dict'):
                 params['apply_type'] = self.apply_type.to_alipay_dict()
@@ -344,6 +378,11 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
                 params['gross_mass'] = self.gross_mass.to_alipay_dict()
             else:
                 params['gross_mass'] = self.gross_mass
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -442,6 +481,10 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
             o.agent_flag = d['agent_flag']
         if 'agree_id' in d:
             o.agree_id = d['agree_id']
+        if 'apply_scene' in d:
+            o.apply_scene = d['apply_scene']
+        if 'apply_sub_scene' in d:
+            o.apply_sub_scene = d['apply_sub_scene']
         if 'apply_type' in d:
             o.apply_type = d['apply_type']
         if 'approved_load' in d:
@@ -466,6 +509,8 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
             o.grant_date = d['grant_date']
         if 'gross_mass' in d:
             o.gross_mass = d['gross_mass']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'out_biz_no' in d:

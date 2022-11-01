@@ -9,6 +9,7 @@ class EcomBuyerDTO(object):
 
     def __init__(self):
         self._alipay_id = None
+        self._alipay_open_id = None
         self._bank_card_holder_name = None
         self._bank_card_no = None
         self._bank_id = None
@@ -31,6 +32,13 @@ class EcomBuyerDTO(object):
     @alipay_id.setter
     def alipay_id(self, value):
         self._alipay_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def bank_card_holder_name(self):
         return self._bank_card_holder_name
@@ -138,6 +146,11 @@ class EcomBuyerDTO(object):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
             else:
                 params['alipay_id'] = self.alipay_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.bank_card_holder_name:
             if hasattr(self.bank_card_holder_name, 'to_alipay_dict'):
                 params['bank_card_holder_name'] = self.bank_card_holder_name.to_alipay_dict()
@@ -217,6 +230,8 @@ class EcomBuyerDTO(object):
         o = EcomBuyerDTO()
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'bank_card_holder_name' in d:
             o.bank_card_holder_name = d['bank_card_holder_name']
         if 'bank_card_no' in d:

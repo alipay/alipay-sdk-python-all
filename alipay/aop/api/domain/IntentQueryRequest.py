@@ -14,6 +14,7 @@ class IntentQueryRequest(object):
         self._current_city = None
         self._location = None
         self._nlu_json_param = None
+        self._open_id = None
         self._query = None
         self._query_id = None
         self._scene_code = None
@@ -63,6 +64,13 @@ class IntentQueryRequest(object):
     @nlu_json_param.setter
     def nlu_json_param(self, value):
         self._nlu_json_param = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def query(self):
         return self._query
@@ -139,6 +147,11 @@ class IntentQueryRequest(object):
                 params['nlu_json_param'] = self.nlu_json_param.to_alipay_dict()
             else:
                 params['nlu_json_param'] = self.nlu_json_param
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query:
             if hasattr(self.query, 'to_alipay_dict'):
                 params['query'] = self.query.to_alipay_dict()
@@ -188,6 +201,8 @@ class IntentQueryRequest(object):
             o.location = d['location']
         if 'nlu_json_param' in d:
             o.nlu_json_param = d['nlu_json_param']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query' in d:
             o.query = d['query']
         if 'query_id' in d:

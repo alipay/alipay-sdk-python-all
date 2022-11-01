@@ -12,6 +12,7 @@ class VoucherUseRuleInfo(object):
         self._quantity_limit_per_user = None
         self._quantity_limit_per_user_period_type = None
         self._voucher_max_use_times = None
+        self._voucher_use_ext_info = None
         self._voucher_use_time_info = None
 
     @property
@@ -35,6 +36,13 @@ class VoucherUseRuleInfo(object):
     @voucher_max_use_times.setter
     def voucher_max_use_times(self, value):
         self._voucher_max_use_times = value
+    @property
+    def voucher_use_ext_info(self):
+        return self._voucher_use_ext_info
+
+    @voucher_use_ext_info.setter
+    def voucher_use_ext_info(self, value):
+        self._voucher_use_ext_info = value
     @property
     def voucher_use_time_info(self):
         return self._voucher_use_time_info
@@ -64,6 +72,11 @@ class VoucherUseRuleInfo(object):
                 params['voucher_max_use_times'] = self.voucher_max_use_times.to_alipay_dict()
             else:
                 params['voucher_max_use_times'] = self.voucher_max_use_times
+        if self.voucher_use_ext_info:
+            if hasattr(self.voucher_use_ext_info, 'to_alipay_dict'):
+                params['voucher_use_ext_info'] = self.voucher_use_ext_info.to_alipay_dict()
+            else:
+                params['voucher_use_ext_info'] = self.voucher_use_ext_info
         if self.voucher_use_time_info:
             if hasattr(self.voucher_use_time_info, 'to_alipay_dict'):
                 params['voucher_use_time_info'] = self.voucher_use_time_info.to_alipay_dict()
@@ -82,6 +95,8 @@ class VoucherUseRuleInfo(object):
             o.quantity_limit_per_user_period_type = d['quantity_limit_per_user_period_type']
         if 'voucher_max_use_times' in d:
             o.voucher_max_use_times = d['voucher_max_use_times']
+        if 'voucher_use_ext_info' in d:
+            o.voucher_use_ext_info = d['voucher_use_ext_info']
         if 'voucher_use_time_info' in d:
             o.voucher_use_time_info = d['voucher_use_time_info']
         return o

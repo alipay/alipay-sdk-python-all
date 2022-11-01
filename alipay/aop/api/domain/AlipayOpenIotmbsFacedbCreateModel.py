@@ -10,6 +10,7 @@ class AlipayOpenIotmbsFacedbCreateModel(object):
     def __init__(self):
         self._face_id = None
         self._face_image = None
+        self._floor_num = None
         self._phone_no = None
         self._project_id = None
         self._sn = None
@@ -28,6 +29,13 @@ class AlipayOpenIotmbsFacedbCreateModel(object):
     @face_image.setter
     def face_image(self, value):
         self._face_image = value
+    @property
+    def floor_num(self):
+        return self._floor_num
+
+    @floor_num.setter
+    def floor_num(self, value):
+        self._floor_num = value
     @property
     def phone_no(self):
         return self._phone_no
@@ -63,6 +71,11 @@ class AlipayOpenIotmbsFacedbCreateModel(object):
                 params['face_image'] = self.face_image.to_alipay_dict()
             else:
                 params['face_image'] = self.face_image
+        if self.floor_num:
+            if hasattr(self.floor_num, 'to_alipay_dict'):
+                params['floor_num'] = self.floor_num.to_alipay_dict()
+            else:
+                params['floor_num'] = self.floor_num
         if self.phone_no:
             if hasattr(self.phone_no, 'to_alipay_dict'):
                 params['phone_no'] = self.phone_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayOpenIotmbsFacedbCreateModel(object):
             o.face_id = d['face_id']
         if 'face_image' in d:
             o.face_image = d['face_image']
+        if 'floor_num' in d:
+            o.floor_num = d['floor_num']
         if 'phone_no' in d:
             o.phone_no = d['phone_no']
         if 'project_id' in d:

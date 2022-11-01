@@ -10,8 +10,10 @@ class GroupMemberDetail(object):
     def __init__(self):
         self._group_nick_name = None
         self._invite_id = None
+        self._invite_open_id = None
         self._join_scene = None
         self._join_time = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -29,6 +31,13 @@ class GroupMemberDetail(object):
     def invite_id(self, value):
         self._invite_id = value
     @property
+    def invite_open_id(self):
+        return self._invite_open_id
+
+    @invite_open_id.setter
+    def invite_open_id(self, value):
+        self._invite_open_id = value
+    @property
     def join_scene(self):
         return self._join_scene
 
@@ -42,6 +51,13 @@ class GroupMemberDetail(object):
     @join_time.setter
     def join_time(self, value):
         self._join_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -63,6 +79,11 @@ class GroupMemberDetail(object):
                 params['invite_id'] = self.invite_id.to_alipay_dict()
             else:
                 params['invite_id'] = self.invite_id
+        if self.invite_open_id:
+            if hasattr(self.invite_open_id, 'to_alipay_dict'):
+                params['invite_open_id'] = self.invite_open_id.to_alipay_dict()
+            else:
+                params['invite_open_id'] = self.invite_open_id
         if self.join_scene:
             if hasattr(self.join_scene, 'to_alipay_dict'):
                 params['join_scene'] = self.join_scene.to_alipay_dict()
@@ -73,6 +94,11 @@ class GroupMemberDetail(object):
                 params['join_time'] = self.join_time.to_alipay_dict()
             else:
                 params['join_time'] = self.join_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -89,10 +115,14 @@ class GroupMemberDetail(object):
             o.group_nick_name = d['group_nick_name']
         if 'invite_id' in d:
             o.invite_id = d['invite_id']
+        if 'invite_open_id' in d:
+            o.invite_open_id = d['invite_open_id']
         if 'join_scene' in d:
             o.join_scene = d['join_scene']
         if 'join_time' in d:
             o.join_time = d['join_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

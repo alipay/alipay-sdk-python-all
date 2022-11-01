@@ -9,6 +9,7 @@ from alipay.aop.api.domain.SignInfo import SignInfo
 class AlipayFinancialnetPromotionApplyCreateModel(object):
 
     def __init__(self):
+        self._apply_open_id = None
         self._apply_template_info = None
         self._apply_user_id = None
         self._asset_inst_id = None
@@ -19,9 +20,17 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
         self._org_code = None
         self._out_biz_no = None
         self._product_code = None
+        self._promote_open_id = None
         self._promote_user_id = None
         self._sign_info = None
 
+    @property
+    def apply_open_id(self):
+        return self._apply_open_id
+
+    @apply_open_id.setter
+    def apply_open_id(self, value):
+        self._apply_open_id = value
     @property
     def apply_template_info(self):
         return self._apply_template_info
@@ -93,6 +102,13 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def promote_open_id(self):
+        return self._promote_open_id
+
+    @promote_open_id.setter
+    def promote_open_id(self, value):
+        self._promote_open_id = value
+    @property
     def promote_user_id(self):
         return self._promote_user_id
 
@@ -113,6 +129,11 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_open_id:
+            if hasattr(self.apply_open_id, 'to_alipay_dict'):
+                params['apply_open_id'] = self.apply_open_id.to_alipay_dict()
+            else:
+                params['apply_open_id'] = self.apply_open_id
         if self.apply_template_info:
             if hasattr(self.apply_template_info, 'to_alipay_dict'):
                 params['apply_template_info'] = self.apply_template_info.to_alipay_dict()
@@ -163,6 +184,11 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.promote_open_id:
+            if hasattr(self.promote_open_id, 'to_alipay_dict'):
+                params['promote_open_id'] = self.promote_open_id.to_alipay_dict()
+            else:
+                params['promote_open_id'] = self.promote_open_id
         if self.promote_user_id:
             if hasattr(self.promote_user_id, 'to_alipay_dict'):
                 params['promote_user_id'] = self.promote_user_id.to_alipay_dict()
@@ -180,6 +206,8 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
         if not d:
             return None
         o = AlipayFinancialnetPromotionApplyCreateModel()
+        if 'apply_open_id' in d:
+            o.apply_open_id = d['apply_open_id']
         if 'apply_template_info' in d:
             o.apply_template_info = d['apply_template_info']
         if 'apply_user_id' in d:
@@ -200,6 +228,8 @@ class AlipayFinancialnetPromotionApplyCreateModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'promote_open_id' in d:
+            o.promote_open_id = d['promote_open_id']
         if 'promote_user_id' in d:
             o.promote_user_id = d['promote_user_id']
         if 'sign_info' in d:

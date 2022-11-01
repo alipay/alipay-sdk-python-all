@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenAppMembersDeleteModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._role = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def role(self):
         return self._role
@@ -29,6 +37,11 @@ class AlipayOpenAppMembersDeleteModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayOpenAppMembersDeleteModel(object):
         if not d:
             return None
         o = AlipayOpenAppMembersDeleteModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'role' in d:
             o.role = d['role']
         if 'user_id' in d:

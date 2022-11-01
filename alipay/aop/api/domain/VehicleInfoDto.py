@@ -20,6 +20,7 @@ class VehicleInfoDto(object):
         self._miles = None
         self._model_id = None
         self._model_name = None
+        self._open_id = None
         self._owner = None
         self._plate_no = None
         self._register_date = None
@@ -113,6 +114,13 @@ class VehicleInfoDto(object):
     @model_name.setter
     def model_name(self, value):
         self._model_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def owner(self):
         return self._owner
@@ -233,6 +241,11 @@ class VehicleInfoDto(object):
                 params['model_name'] = self.model_name.to_alipay_dict()
             else:
                 params['model_name'] = self.model_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.owner:
             if hasattr(self.owner, 'to_alipay_dict'):
                 params['owner'] = self.owner.to_alipay_dict()
@@ -304,6 +317,8 @@ class VehicleInfoDto(object):
             o.model_id = d['model_id']
         if 'model_name' in d:
             o.model_name = d['model_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'owner' in d:
             o.owner = d['owner']
         if 'plate_no' in d:

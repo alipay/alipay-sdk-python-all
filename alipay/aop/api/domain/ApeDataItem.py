@@ -18,6 +18,7 @@ class ApeDataItem(object):
         self._detail_pic_num = None
         self._free_shipping = None
         self._id = None
+        self._mini_app_id = None
         self._need_public_promo = None
         self._origin_price = None
         self._pic_url_list = None
@@ -25,6 +26,7 @@ class ApeDataItem(object):
         self._promo_pic_url_list = None
         self._pub_time = None
         self._rating = None
+        self._row_type = None
         self._sale_number = None
         self._share_cnt = None
         self._shipping_money = None
@@ -110,6 +112,13 @@ class ApeDataItem(object):
     def id(self, value):
         self._id = value
     @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
+    @property
     def need_public_promo(self):
         return self._need_public_promo
 
@@ -164,6 +173,13 @@ class ApeDataItem(object):
     @rating.setter
     def rating(self, value):
         self._rating = value
+    @property
+    def row_type(self):
+        return self._row_type
+
+    @row_type.setter
+    def row_type(self, value):
+        self._row_type = value
     @property
     def sale_number(self):
         return self._sale_number
@@ -293,6 +309,11 @@ class ApeDataItem(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
+            else:
+                params['mini_app_id'] = self.mini_app_id
         if self.need_public_promo:
             if hasattr(self.need_public_promo, 'to_alipay_dict'):
                 params['need_public_promo'] = self.need_public_promo.to_alipay_dict()
@@ -338,6 +359,11 @@ class ApeDataItem(object):
                 params['rating'] = self.rating.to_alipay_dict()
             else:
                 params['rating'] = self.rating
+        if self.row_type:
+            if hasattr(self.row_type, 'to_alipay_dict'):
+                params['row_type'] = self.row_type.to_alipay_dict()
+            else:
+                params['row_type'] = self.row_type
         if self.sale_number:
             if hasattr(self.sale_number, 'to_alipay_dict'):
                 params['sale_number'] = self.sale_number.to_alipay_dict()
@@ -415,6 +441,8 @@ class ApeDataItem(object):
             o.free_shipping = d['free_shipping']
         if 'id' in d:
             o.id = d['id']
+        if 'mini_app_id' in d:
+            o.mini_app_id = d['mini_app_id']
         if 'need_public_promo' in d:
             o.need_public_promo = d['need_public_promo']
         if 'origin_price' in d:
@@ -429,6 +457,8 @@ class ApeDataItem(object):
             o.pub_time = d['pub_time']
         if 'rating' in d:
             o.rating = d['rating']
+        if 'row_type' in d:
+            o.row_type = d['row_type']
         if 'sale_number' in d:
             o.sale_number = d['sale_number']
         if 'share_cnt' in d:

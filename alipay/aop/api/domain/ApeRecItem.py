@@ -9,6 +9,7 @@ class ApeRecItem(object):
 
     def __init__(self):
         self._id = None
+        self._key_words = None
         self._score = None
 
     @property
@@ -18,6 +19,13 @@ class ApeRecItem(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def key_words(self):
+        return self._key_words
+
+    @key_words.setter
+    def key_words(self, value):
+        self._key_words = value
     @property
     def score(self):
         return self._score
@@ -34,6 +42,11 @@ class ApeRecItem(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.key_words:
+            if hasattr(self.key_words, 'to_alipay_dict'):
+                params['key_words'] = self.key_words.to_alipay_dict()
+            else:
+                params['key_words'] = self.key_words
         if self.score:
             if hasattr(self.score, 'to_alipay_dict'):
                 params['score'] = self.score.to_alipay_dict()
@@ -48,6 +61,8 @@ class ApeRecItem(object):
         o = ApeRecItem()
         if 'id' in d:
             o.id = d['id']
+        if 'key_words' in d:
+            o.key_words = d['key_words']
         if 'score' in d:
             o.score = d['score']
         return o

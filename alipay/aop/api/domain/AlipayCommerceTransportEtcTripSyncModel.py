@@ -9,7 +9,10 @@ from alipay.aop.api.domain.HighwaySceneData import HighwaySceneData
 class AlipayCommerceTransportEtcTripSyncModel(object):
 
     def __init__(self):
+        self._advance_status = None
         self._highway_data = None
+        self._open_id = None
+        self._out_biz_no = None
         self._out_trade_no = None
         self._plate_color = None
         self._plate_no = None
@@ -20,6 +23,13 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
         self._uid = None
 
     @property
+    def advance_status(self):
+        return self._advance_status
+
+    @advance_status.setter
+    def advance_status(self, value):
+        self._advance_status = value
+    @property
     def highway_data(self):
         return self._highway_data
 
@@ -29,6 +39,20 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
             self._highway_data = value
         else:
             self._highway_data = HighwaySceneData.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -89,11 +113,26 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.advance_status:
+            if hasattr(self.advance_status, 'to_alipay_dict'):
+                params['advance_status'] = self.advance_status.to_alipay_dict()
+            else:
+                params['advance_status'] = self.advance_status
         if self.highway_data:
             if hasattr(self.highway_data, 'to_alipay_dict'):
                 params['highway_data'] = self.highway_data.to_alipay_dict()
             else:
                 params['highway_data'] = self.highway_data
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -141,8 +180,14 @@ class AlipayCommerceTransportEtcTripSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportEtcTripSyncModel()
+        if 'advance_status' in d:
+            o.advance_status = d['advance_status']
         if 'highway_data' in d:
             o.highway_data = d['highway_data']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'plate_color' in d:

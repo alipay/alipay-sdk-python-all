@@ -12,6 +12,7 @@ class AlipayMarketingActivityConsultModel(object):
         self._consult_activity_info_list = None
         self._merchant_access_mode = None
         self._merchant_id = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -41,6 +42,13 @@ class AlipayMarketingActivityConsultModel(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -72,6 +80,11 @@ class AlipayMarketingActivityConsultModel(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -90,6 +103,8 @@ class AlipayMarketingActivityConsultModel(object):
             o.merchant_access_mode = d['merchant_access_mode']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

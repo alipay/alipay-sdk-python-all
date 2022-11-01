@@ -10,6 +10,7 @@ class AlipayMarketingActivityOrderRefundModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._buyer_open_id = None
         self._order_no = None
         self._out_biz_no = None
         self._refund_activity_info_list = None
@@ -22,6 +23,13 @@ class AlipayMarketingActivityOrderRefundModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -65,6 +73,11 @@ class AlipayMarketingActivityOrderRefundModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -99,6 +112,8 @@ class AlipayMarketingActivityOrderRefundModel(object):
         o = AlipayMarketingActivityOrderRefundModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'out_biz_no' in d:

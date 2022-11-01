@@ -12,6 +12,7 @@ class AppMemberInfo(object):
         self._gmt_join = None
         self._logon_id = None
         self._nick_name = None
+        self._open_id = None
         self._portrait = None
         self._role = None
         self._status = None
@@ -45,6 +46,13 @@ class AppMemberInfo(object):
     @nick_name.setter
     def nick_name(self, value):
         self._nick_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def portrait(self):
         return self._portrait
@@ -97,6 +105,11 @@ class AppMemberInfo(object):
                 params['nick_name'] = self.nick_name.to_alipay_dict()
             else:
                 params['nick_name'] = self.nick_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.portrait:
             if hasattr(self.portrait, 'to_alipay_dict'):
                 params['portrait'] = self.portrait.to_alipay_dict()
@@ -132,6 +145,8 @@ class AppMemberInfo(object):
             o.logon_id = d['logon_id']
         if 'nick_name' in d:
             o.nick_name = d['nick_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'portrait' in d:
             o.portrait = d['portrait']
         if 'role' in d:

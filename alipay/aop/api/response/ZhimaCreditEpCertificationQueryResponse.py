@@ -21,8 +21,10 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
         self._email_address = None
         self._ep_cert_no = None
         self._ep_name = None
+        self._has_li_xin_certificate = None
         self._legal_person_id_card_back = None
         self._legal_person_id_card_front = None
+        self._li_xin_ep = None
         self._user_name = None
 
     @property
@@ -113,6 +115,13 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     def ep_name(self, value):
         self._ep_name = value
     @property
+    def has_li_xin_certificate(self):
+        return self._has_li_xin_certificate
+
+    @has_li_xin_certificate.setter
+    def has_li_xin_certificate(self, value):
+        self._has_li_xin_certificate = value
+    @property
     def legal_person_id_card_back(self):
         return self._legal_person_id_card_back
 
@@ -126,6 +135,13 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     @legal_person_id_card_front.setter
     def legal_person_id_card_front(self, value):
         self._legal_person_id_card_front = value
+    @property
+    def li_xin_ep(self):
+        return self._li_xin_ep
+
+    @li_xin_ep.setter
+    def li_xin_ep(self, value):
+        self._li_xin_ep = value
     @property
     def user_name(self):
         return self._user_name
@@ -160,9 +176,13 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
             self.ep_cert_no = response['ep_cert_no']
         if 'ep_name' in response:
             self.ep_name = response['ep_name']
+        if 'has_li_xin_certificate' in response:
+            self.has_li_xin_certificate = response['has_li_xin_certificate']
         if 'legal_person_id_card_back' in response:
             self.legal_person_id_card_back = response['legal_person_id_card_back']
         if 'legal_person_id_card_front' in response:
             self.legal_person_id_card_front = response['legal_person_id_card_front']
+        if 'li_xin_ep' in response:
+            self.li_xin_ep = response['li_xin_ep']
         if 'user_name' in response:
             self.user_name = response['user_name']

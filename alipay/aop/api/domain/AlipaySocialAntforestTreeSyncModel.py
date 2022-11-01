@@ -11,6 +11,7 @@ class AlipaySocialAntforestTreeSyncModel(object):
         self._account_id = None
         self._certificate_id = None
         self._ext_info = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipaySocialAntforestTreeSyncModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipaySocialAntforestTreeSyncModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipaySocialAntforestTreeSyncModel(object):
             o.certificate_id = d['certificate_id']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

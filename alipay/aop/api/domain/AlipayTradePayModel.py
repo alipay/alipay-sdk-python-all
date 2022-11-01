@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AgreementParams import AgreementParams
+from alipay.aop.api.domain.BkAgentReqInfo import BkAgentReqInfo
 from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.ExtendParams import ExtendParams
@@ -24,6 +25,7 @@ class AlipayTradePayModel(object):
         self._auth_code = None
         self._auth_confirm_mode = None
         self._auth_no = None
+        self._bkagent_req_info = None
         self._body = None
         self._business_params = None
         self._buyer_id = None
@@ -103,6 +105,16 @@ class AlipayTradePayModel(object):
     @auth_no.setter
     def auth_no(self, value):
         self._auth_no = value
+    @property
+    def bkagent_req_info(self):
+        return self._bkagent_req_info
+
+    @bkagent_req_info.setter
+    def bkagent_req_info(self, value):
+        if isinstance(value, BkAgentReqInfo):
+            self._bkagent_req_info = value
+        else:
+            self._bkagent_req_info = BkAgentReqInfo.from_alipay_dict(value)
     @property
     def body(self):
         return self._body
@@ -401,6 +413,11 @@ class AlipayTradePayModel(object):
                 params['auth_no'] = self.auth_no.to_alipay_dict()
             else:
                 params['auth_no'] = self.auth_no
+        if self.bkagent_req_info:
+            if hasattr(self.bkagent_req_info, 'to_alipay_dict'):
+                params['bkagent_req_info'] = self.bkagent_req_info.to_alipay_dict()
+            else:
+                params['bkagent_req_info'] = self.bkagent_req_info
         if self.body:
             if hasattr(self.body, 'to_alipay_dict'):
                 params['body'] = self.body.to_alipay_dict()
@@ -595,6 +612,8 @@ class AlipayTradePayModel(object):
             o.auth_confirm_mode = d['auth_confirm_mode']
         if 'auth_no' in d:
             o.auth_no = d['auth_no']
+        if 'bkagent_req_info' in d:
+            o.bkagent_req_info = d['bkagent_req_info']
         if 'body' in d:
             o.body = d['body']
         if 'business_params' in d:

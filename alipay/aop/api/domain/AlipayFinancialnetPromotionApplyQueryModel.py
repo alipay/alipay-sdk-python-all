@@ -9,6 +9,7 @@ class AlipayFinancialnetPromotionApplyQueryModel(object):
 
     def __init__(self):
         self._apply_no = None
+        self._apply_open_id = None
         self._apply_user_id = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayFinancialnetPromotionApplyQueryModel(object):
     @apply_no.setter
     def apply_no(self, value):
         self._apply_no = value
+    @property
+    def apply_open_id(self):
+        return self._apply_open_id
+
+    @apply_open_id.setter
+    def apply_open_id(self, value):
+        self._apply_open_id = value
     @property
     def apply_user_id(self):
         return self._apply_user_id
@@ -34,6 +42,11 @@ class AlipayFinancialnetPromotionApplyQueryModel(object):
                 params['apply_no'] = self.apply_no.to_alipay_dict()
             else:
                 params['apply_no'] = self.apply_no
+        if self.apply_open_id:
+            if hasattr(self.apply_open_id, 'to_alipay_dict'):
+                params['apply_open_id'] = self.apply_open_id.to_alipay_dict()
+            else:
+                params['apply_open_id'] = self.apply_open_id
         if self.apply_user_id:
             if hasattr(self.apply_user_id, 'to_alipay_dict'):
                 params['apply_user_id'] = self.apply_user_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayFinancialnetPromotionApplyQueryModel(object):
         o = AlipayFinancialnetPromotionApplyQueryModel()
         if 'apply_no' in d:
             o.apply_no = d['apply_no']
+        if 'apply_open_id' in d:
+            o.apply_open_id = d['apply_open_id']
         if 'apply_user_id' in d:
             o.apply_user_id = d['apply_user_id']
         return o

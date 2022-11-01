@@ -9,6 +9,8 @@ class AlipayFundIdentitypayMemberQueryModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._identity = None
+        self._identity_type = None
         self._out_member_id = None
         self._out_org_id = None
         self._product_code = None
@@ -22,6 +24,20 @@ class AlipayFundIdentitypayMemberQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def identity(self):
+        return self._identity
+
+    @identity.setter
+    def identity(self, value):
+        self._identity = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
     @property
     def out_member_id(self):
         return self._out_member_id
@@ -66,6 +82,16 @@ class AlipayFundIdentitypayMemberQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.identity:
+            if hasattr(self.identity, 'to_alipay_dict'):
+                params['identity'] = self.identity.to_alipay_dict()
+            else:
+                params['identity'] = self.identity
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.out_member_id:
             if hasattr(self.out_member_id, 'to_alipay_dict'):
                 params['out_member_id'] = self.out_member_id.to_alipay_dict()
@@ -100,6 +126,10 @@ class AlipayFundIdentitypayMemberQueryModel(object):
         o = AlipayFundIdentitypayMemberQueryModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'identity' in d:
+            o.identity = d['identity']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'out_member_id' in d:
             o.out_member_id = d['out_member_id']
         if 'out_org_id' in d:

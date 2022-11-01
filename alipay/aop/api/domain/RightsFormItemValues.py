@@ -13,6 +13,7 @@ class RightsFormItemValues(object):
         self._email = None
         self._ep_name = None
         self._legal_person = None
+        self._open_id = None
         self._other_fields = None
         self._phone = None
         self._submit_time = None
@@ -46,6 +47,13 @@ class RightsFormItemValues(object):
     @legal_person.setter
     def legal_person(self, value):
         self._legal_person = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def other_fields(self):
         return self._other_fields
@@ -104,6 +112,11 @@ class RightsFormItemValues(object):
                 params['legal_person'] = self.legal_person.to_alipay_dict()
             else:
                 params['legal_person'] = self.legal_person
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.other_fields:
             if isinstance(self.other_fields, list):
                 for i in range(0, len(self.other_fields)):
@@ -144,6 +157,8 @@ class RightsFormItemValues(object):
             o.ep_name = d['ep_name']
         if 'legal_person' in d:
             o.legal_person = d['legal_person']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'other_fields' in d:
             o.other_fields = d['other_fields']
         if 'phone' in d:

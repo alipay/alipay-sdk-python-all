@@ -10,6 +10,7 @@ class AlipayUserCharityRecordexistQueryModel(object):
     def __init__(self):
         self._biz_type = None
         self._end_time = None
+        self._open_id = None
         self._partner_id = None
         self._start_time = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayUserCharityRecordexistQueryModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -63,6 +71,11 @@ class AlipayUserCharityRecordexistQueryModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayUserCharityRecordexistQueryModel(object):
             o.biz_type = d['biz_type']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'start_time' in d:

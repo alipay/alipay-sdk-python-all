@@ -10,10 +10,13 @@ class AlipayFundIdentitypayMemberSignModel(object):
     def __init__(self):
         self._authentication_type = None
         self._biz_scene = None
+        self._identity = None
+        self._identity_type = None
         self._member_name = None
         self._out_member_id = None
         self._out_org_id = None
         self._product_code = None
+        self._real_name = None
         self._sub_biz_scene = None
         self._user_id = None
 
@@ -31,6 +34,20 @@ class AlipayFundIdentitypayMemberSignModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def identity(self):
+        return self._identity
+
+    @identity.setter
+    def identity(self, value):
+        self._identity = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
     @property
     def member_name(self):
         return self._member_name
@@ -60,6 +77,13 @@ class AlipayFundIdentitypayMemberSignModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def real_name(self):
+        return self._real_name
+
+    @real_name.setter
+    def real_name(self, value):
+        self._real_name = value
+    @property
     def sub_biz_scene(self):
         return self._sub_biz_scene
 
@@ -87,6 +111,16 @@ class AlipayFundIdentitypayMemberSignModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.identity:
+            if hasattr(self.identity, 'to_alipay_dict'):
+                params['identity'] = self.identity.to_alipay_dict()
+            else:
+                params['identity'] = self.identity
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.member_name:
             if hasattr(self.member_name, 'to_alipay_dict'):
                 params['member_name'] = self.member_name.to_alipay_dict()
@@ -107,6 +141,11 @@ class AlipayFundIdentitypayMemberSignModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.real_name:
+            if hasattr(self.real_name, 'to_alipay_dict'):
+                params['real_name'] = self.real_name.to_alipay_dict()
+            else:
+                params['real_name'] = self.real_name
         if self.sub_biz_scene:
             if hasattr(self.sub_biz_scene, 'to_alipay_dict'):
                 params['sub_biz_scene'] = self.sub_biz_scene.to_alipay_dict()
@@ -128,6 +167,10 @@ class AlipayFundIdentitypayMemberSignModel(object):
             o.authentication_type = d['authentication_type']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'identity' in d:
+            o.identity = d['identity']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'member_name' in d:
             o.member_name = d['member_name']
         if 'out_member_id' in d:
@@ -136,6 +179,8 @@ class AlipayFundIdentitypayMemberSignModel(object):
             o.out_org_id = d['out_org_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'real_name' in d:
+            o.real_name = d['real_name']
         if 'sub_biz_scene' in d:
             o.sub_biz_scene = d['sub_biz_scene']
         if 'user_id' in d:

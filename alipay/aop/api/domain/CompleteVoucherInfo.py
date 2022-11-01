@@ -21,6 +21,7 @@ class CompleteVoucherInfo(object):
         self._invoice_kind = None
         self._invoice_memo = None
         self._invoice_no = None
+        self._invoice_source = None
         self._invoice_title = None
         self._invoice_type = None
         self._payee_address = None
@@ -131,6 +132,13 @@ class CompleteVoucherInfo(object):
     @invoice_no.setter
     def invoice_no(self, value):
         self._invoice_no = value
+    @property
+    def invoice_source(self):
+        return self._invoice_source
+
+    @invoice_source.setter
+    def invoice_source(self, value):
+        self._invoice_source = value
     @property
     def invoice_title(self):
         return self._invoice_title
@@ -333,6 +341,11 @@ class CompleteVoucherInfo(object):
                 params['invoice_no'] = self.invoice_no.to_alipay_dict()
             else:
                 params['invoice_no'] = self.invoice_no
+        if self.invoice_source:
+            if hasattr(self.invoice_source, 'to_alipay_dict'):
+                params['invoice_source'] = self.invoice_source.to_alipay_dict()
+            else:
+                params['invoice_source'] = self.invoice_source
         if self.invoice_title:
             if hasattr(self.invoice_title, 'to_alipay_dict'):
                 params['invoice_title'] = self.invoice_title.to_alipay_dict()
@@ -459,6 +472,8 @@ class CompleteVoucherInfo(object):
             o.invoice_memo = d['invoice_memo']
         if 'invoice_no' in d:
             o.invoice_no = d['invoice_no']
+        if 'invoice_source' in d:
+            o.invoice_source = d['invoice_source']
         if 'invoice_title' in d:
             o.invoice_title = d['invoice_title']
         if 'invoice_type' in d:

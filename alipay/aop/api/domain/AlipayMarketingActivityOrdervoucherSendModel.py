@@ -12,6 +12,7 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
         self._biz_dt = None
         self._ch_info = None
         self._merchant_order_url = None
+        self._open_id = None
         self._out_biz_no = None
         self._trade_channel = None
         self._trade_no = None
@@ -45,6 +46,13 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
     @merchant_order_url.setter
     def merchant_order_url(self, value):
         self._merchant_order_url = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -97,6 +105,11 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
                 params['merchant_order_url'] = self.merchant_order_url.to_alipay_dict()
             else:
                 params['merchant_order_url'] = self.merchant_order_url
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayMarketingActivityOrdervoucherSendModel(object):
             o.ch_info = d['ch_info']
         if 'merchant_order_url' in d:
             o.merchant_order_url = d['merchant_order_url']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'trade_channel' in d:

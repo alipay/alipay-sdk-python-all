@@ -12,6 +12,7 @@ class AlipaySocialAntcommonwealDonateConsumeSyncModel(object):
         self._currency = None
         self._ext_info = None
         self._gmt_trade_finished = None
+        self._open_id = None
         self._out_merchant_id = None
         self._platform_trade_no = None
         self._product_code = None
@@ -49,6 +50,13 @@ class AlipaySocialAntcommonwealDonateConsumeSyncModel(object):
     @gmt_trade_finished.setter
     def gmt_trade_finished(self, value):
         self._gmt_trade_finished = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_merchant_id(self):
         return self._out_merchant_id
@@ -129,6 +137,11 @@ class AlipaySocialAntcommonwealDonateConsumeSyncModel(object):
                 params['gmt_trade_finished'] = self.gmt_trade_finished.to_alipay_dict()
             else:
                 params['gmt_trade_finished'] = self.gmt_trade_finished
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_merchant_id:
             if hasattr(self.out_merchant_id, 'to_alipay_dict'):
                 params['out_merchant_id'] = self.out_merchant_id.to_alipay_dict()
@@ -184,6 +197,8 @@ class AlipaySocialAntcommonwealDonateConsumeSyncModel(object):
             o.ext_info = d['ext_info']
         if 'gmt_trade_finished' in d:
             o.gmt_trade_finished = d['gmt_trade_finished']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_merchant_id' in d:
             o.out_merchant_id = d['out_merchant_id']
         if 'platform_trade_no' in d:

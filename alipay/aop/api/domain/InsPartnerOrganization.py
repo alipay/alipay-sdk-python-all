@@ -9,6 +9,7 @@ class InsPartnerOrganization(object):
 
     def __init__(self):
         self._alipay_id = None
+        self._alipay_open_id = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -21,6 +22,13 @@ class InsPartnerOrganization(object):
     @alipay_id.setter
     def alipay_id(self, value):
         self._alipay_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -58,6 +66,11 @@ class InsPartnerOrganization(object):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
             else:
                 params['alipay_id'] = self.alipay_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -87,6 +100,8 @@ class InsPartnerOrganization(object):
         o = InsPartnerOrganization()
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

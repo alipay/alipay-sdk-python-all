@@ -11,6 +11,7 @@ class AlipayUserValidateResponse(AlipayResponse):
         super(AlipayUserValidateResponse, self).__init__()
         self._alipay_user_id = None
         self._certified = None
+        self._open_id = None
         self._real_name = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayUserValidateResponse(AlipayResponse):
     def certified(self, value):
         self._certified = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def real_name(self):
         return self._real_name
 
@@ -41,5 +49,7 @@ class AlipayUserValidateResponse(AlipayResponse):
             self.alipay_user_id = response['alipay_user_id']
         if 'certified' in response:
             self.certified = response['certified']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'real_name' in response:
             self.real_name = response['real_name']

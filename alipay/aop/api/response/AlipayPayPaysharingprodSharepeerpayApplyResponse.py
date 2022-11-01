@@ -9,19 +9,19 @@ class AlipayPayPaysharingprodSharepeerpayApplyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPayPaysharingprodSharepeerpayApplyResponse, self).__init__()
-        self._firend_share_page_url = None
+        self._friend_share_page_url = None
         self._peerpay_order_no = None
         self._qrcode = None
         self._qrcode_image = None
         self._ztoken = None
 
     @property
-    def firend_share_page_url(self):
-        return self._firend_share_page_url
+    def friend_share_page_url(self):
+        return self._friend_share_page_url
 
-    @firend_share_page_url.setter
-    def firend_share_page_url(self, value):
-        self._firend_share_page_url = value
+    @friend_share_page_url.setter
+    def friend_share_page_url(self, value):
+        self._friend_share_page_url = value
     @property
     def peerpay_order_no(self):
         return self._peerpay_order_no
@@ -53,8 +53,8 @@ class AlipayPayPaysharingprodSharepeerpayApplyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPayPaysharingprodSharepeerpayApplyResponse, self).parse_response_content(response_content)
-        if 'firend_share_page_url' in response:
-            self.firend_share_page_url = response['firend_share_page_url']
+        if 'friend_share_page_url' in response:
+            self.friend_share_page_url = response['friend_share_page_url']
         if 'peerpay_order_no' in response:
             self.peerpay_order_no = response['peerpay_order_no']
         if 'qrcode' in response:

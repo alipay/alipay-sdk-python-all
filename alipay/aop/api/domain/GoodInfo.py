@@ -10,6 +10,7 @@ class GoodInfo(object):
     def __init__(self):
         self._goods_id = None
         self._goods_name = None
+        self._goods_price = None
         self._quantity = None
         self._weight = None
 
@@ -27,6 +28,13 @@ class GoodInfo(object):
     @goods_name.setter
     def goods_name(self, value):
         self._goods_name = value
+    @property
+    def goods_price(self):
+        return self._goods_price
+
+    @goods_price.setter
+    def goods_price(self, value):
+        self._goods_price = value
     @property
     def quantity(self):
         return self._quantity
@@ -55,6 +63,11 @@ class GoodInfo(object):
                 params['goods_name'] = self.goods_name.to_alipay_dict()
             else:
                 params['goods_name'] = self.goods_name
+        if self.goods_price:
+            if hasattr(self.goods_price, 'to_alipay_dict'):
+                params['goods_price'] = self.goods_price.to_alipay_dict()
+            else:
+                params['goods_price'] = self.goods_price
         if self.quantity:
             if hasattr(self.quantity, 'to_alipay_dict'):
                 params['quantity'] = self.quantity.to_alipay_dict()
@@ -76,6 +89,8 @@ class GoodInfo(object):
             o.goods_id = d['goods_id']
         if 'goods_name' in d:
             o.goods_name = d['goods_name']
+        if 'goods_price' in d:
+            o.goods_price = d['goods_price']
         if 'quantity' in d:
             o.quantity = d['quantity']
         if 'weight' in d:

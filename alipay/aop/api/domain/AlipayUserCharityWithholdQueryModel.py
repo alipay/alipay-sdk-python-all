@@ -9,6 +9,7 @@ class AlipayUserCharityWithholdQueryModel(object):
 
     def __init__(self):
         self._biz_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._product_code = None
         self._user_id = None
@@ -21,6 +22,13 @@ class AlipayUserCharityWithholdQueryModel(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -58,6 +66,11 @@ class AlipayUserCharityWithholdQueryModel(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayUserCharityWithholdQueryModel(object):
         o = AlipayUserCharityWithholdQueryModel()
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:

@@ -10,6 +10,7 @@ class ZhimaCreditEpLixinUserfillformQueryModel(object):
     def __init__(self):
         self._end_time = None
         self._form_id = None
+        self._open_id_list = None
         self._page_index = None
         self._page_size = None
         self._start_time = None
@@ -29,6 +30,16 @@ class ZhimaCreditEpLixinUserfillformQueryModel(object):
     @form_id.setter
     def form_id(self, value):
         self._form_id = value
+    @property
+    def open_id_list(self):
+        return self._open_id_list
+
+    @open_id_list.setter
+    def open_id_list(self, value):
+        if isinstance(value, list):
+            self._open_id_list = list()
+            for i in value:
+                self._open_id_list.append(i)
     @property
     def page_index(self):
         return self._page_index
@@ -74,6 +85,16 @@ class ZhimaCreditEpLixinUserfillformQueryModel(object):
                 params['form_id'] = self.form_id.to_alipay_dict()
             else:
                 params['form_id'] = self.form_id
+        if self.open_id_list:
+            if isinstance(self.open_id_list, list):
+                for i in range(0, len(self.open_id_list)):
+                    element = self.open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.open_id_list, 'to_alipay_dict'):
+                params['open_id_list'] = self.open_id_list.to_alipay_dict()
+            else:
+                params['open_id_list'] = self.open_id_list
         if self.page_index:
             if hasattr(self.page_index, 'to_alipay_dict'):
                 params['page_index'] = self.page_index.to_alipay_dict()
@@ -110,6 +131,8 @@ class ZhimaCreditEpLixinUserfillformQueryModel(object):
             o.end_time = d['end_time']
         if 'form_id' in d:
             o.form_id = d['form_id']
+        if 'open_id_list' in d:
+            o.open_id_list = d['open_id_list']
         if 'page_index' in d:
             o.page_index = d['page_index']
         if 'page_size' in d:

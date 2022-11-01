@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BkAgentRespInfo import BkAgentRespInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
@@ -15,6 +16,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._advance_amount = None
         self._async_payment_mode = None
         self._auth_trade_pay_mode = None
+        self._bkagent_resp_info = None
         self._business_params = None
         self._buyer_logon_id = None
         self._buyer_pay_amount = None
@@ -74,6 +76,16 @@ class AlipayTradePayResponse(AlipayResponse):
     @auth_trade_pay_mode.setter
     def auth_trade_pay_mode(self, value):
         self._auth_trade_pay_mode = value
+    @property
+    def bkagent_resp_info(self):
+        return self._bkagent_resp_info
+
+    @bkagent_resp_info.setter
+    def bkagent_resp_info(self, value):
+        if isinstance(value, BkAgentRespInfo):
+            self._bkagent_resp_info = value
+        else:
+            self._bkagent_resp_info = BkAgentRespInfo.from_alipay_dict(value)
     @property
     def business_params(self):
         return self._business_params
@@ -357,6 +369,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.async_payment_mode = response['async_payment_mode']
         if 'auth_trade_pay_mode' in response:
             self.auth_trade_pay_mode = response['auth_trade_pay_mode']
+        if 'bkagent_resp_info' in response:
+            self.bkagent_resp_info = response['bkagent_resp_info']
         if 'business_params' in response:
             self.business_params = response['business_params']
         if 'buyer_logon_id' in response:

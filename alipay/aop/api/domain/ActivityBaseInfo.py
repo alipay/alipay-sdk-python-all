@@ -12,6 +12,7 @@ class ActivityBaseInfo(object):
         self._activity_id = None
         self._activity_name = None
         self._activity_operation_status = None
+        self._activity_product_type = None
         self._activity_status = None
         self._belong_merchant_info = None
         self._code_mode = None
@@ -37,6 +38,13 @@ class ActivityBaseInfo(object):
     @activity_operation_status.setter
     def activity_operation_status(self, value):
         self._activity_operation_status = value
+    @property
+    def activity_product_type(self):
+        return self._activity_product_type
+
+    @activity_product_type.setter
+    def activity_product_type(self, value):
+        self._activity_product_type = value
     @property
     def activity_status(self):
         return self._activity_status
@@ -80,6 +88,11 @@ class ActivityBaseInfo(object):
                 params['activity_operation_status'] = self.activity_operation_status.to_alipay_dict()
             else:
                 params['activity_operation_status'] = self.activity_operation_status
+        if self.activity_product_type:
+            if hasattr(self.activity_product_type, 'to_alipay_dict'):
+                params['activity_product_type'] = self.activity_product_type.to_alipay_dict()
+            else:
+                params['activity_product_type'] = self.activity_product_type
         if self.activity_status:
             if hasattr(self.activity_status, 'to_alipay_dict'):
                 params['activity_status'] = self.activity_status.to_alipay_dict()
@@ -108,6 +121,8 @@ class ActivityBaseInfo(object):
             o.activity_name = d['activity_name']
         if 'activity_operation_status' in d:
             o.activity_operation_status = d['activity_operation_status']
+        if 'activity_product_type' in d:
+            o.activity_product_type = d['activity_product_type']
         if 'activity_status' in d:
             o.activity_status = d['activity_status']
         if 'belong_merchant_info' in d:

@@ -15,6 +15,7 @@ class AlipayOverseasTravelPromotionGetModel(object):
         self._latitude = None
         self._lbs_reverse_level = None
         self._longitude = None
+        self._open_id = None
         self._page_no = None
         self._page_size = None
         self._radius = None
@@ -83,6 +84,13 @@ class AlipayOverseasTravelPromotionGetModel(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_no(self):
         return self._page_no
@@ -203,6 +211,11 @@ class AlipayOverseasTravelPromotionGetModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -274,6 +287,8 @@ class AlipayOverseasTravelPromotionGetModel(object):
             o.lbs_reverse_level = d['lbs_reverse_level']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

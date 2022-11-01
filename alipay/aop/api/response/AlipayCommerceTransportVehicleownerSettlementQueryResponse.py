@@ -16,6 +16,7 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
         self._discount_amount = None
         self._fund_bill_list = None
         self._m_discount_amount = None
+        self._open_id = None
         self._out_trade_no = None
         self._plate_no = None
         self._refund_amount = None
@@ -73,6 +74,13 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
     @m_discount_amount.setter
     def m_discount_amount(self, value):
         self._m_discount_amount = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -144,6 +152,8 @@ class AlipayCommerceTransportVehicleownerSettlementQueryResponse(AlipayResponse)
             self.fund_bill_list = response['fund_bill_list']
         if 'm_discount_amount' in response:
             self.m_discount_amount = response['m_discount_amount']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'plate_no' in response:

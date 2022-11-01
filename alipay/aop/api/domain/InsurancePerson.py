@@ -13,6 +13,7 @@ class InsurancePerson(object):
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
+        self._open_id = None
         self._phone = None
 
     @property
@@ -51,6 +52,13 @@ class InsurancePerson(object):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def phone(self):
         return self._phone
 
@@ -86,6 +94,11 @@ class InsurancePerson(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -108,6 +121,8 @@ class InsurancePerson(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'phone' in d:
             o.phone = d['phone']
         return o

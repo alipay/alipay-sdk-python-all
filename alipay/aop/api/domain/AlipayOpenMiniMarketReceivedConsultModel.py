@@ -11,6 +11,7 @@ class AlipayOpenMiniMarketReceivedConsultModel(object):
         self._deliver_id = None
         self._deliver_id_list = None
         self._multi_deliver = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -37,6 +38,13 @@ class AlipayOpenMiniMarketReceivedConsultModel(object):
     @multi_deliver.setter
     def multi_deliver(self, value):
         self._multi_deliver = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -68,6 +76,11 @@ class AlipayOpenMiniMarketReceivedConsultModel(object):
                 params['multi_deliver'] = self.multi_deliver.to_alipay_dict()
             else:
                 params['multi_deliver'] = self.multi_deliver
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -86,6 +99,8 @@ class AlipayOpenMiniMarketReceivedConsultModel(object):
             o.deliver_id_list = d['deliver_id_list']
         if 'multi_deliver' in d:
             o.multi_deliver = d['multi_deliver']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -9,6 +9,7 @@ class AlipaySocialForestTreeQueryModel(object):
 
     def __init__(self):
         self._end_date = None
+        self._open_id = None
         self._start_date = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipaySocialForestTreeQueryModel(object):
     @end_date.setter
     def end_date(self, value):
         self._end_date = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def start_date(self):
         return self._start_date
@@ -42,6 +50,11 @@ class AlipaySocialForestTreeQueryModel(object):
                 params['end_date'] = self.end_date.to_alipay_dict()
             else:
                 params['end_date'] = self.end_date
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipaySocialForestTreeQueryModel(object):
         o = AlipaySocialForestTreeQueryModel()
         if 'end_date' in d:
             o.end_date = d['end_date']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'user_id' in d:

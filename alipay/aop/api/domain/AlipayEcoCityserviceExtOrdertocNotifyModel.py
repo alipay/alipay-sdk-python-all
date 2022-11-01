@@ -9,15 +9,18 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
 
     def __init__(self):
         self._app_code = None
+        self._city_code = None
         self._ext_info = None
         self._goods_info_list = None
         self._industry_type = None
+        self._open_id = None
         self._order_amount = None
         self._order_create_time = None
         self._order_update_time = None
         self._out_order_no = None
         self._pay_amount = None
         self._status = None
+        self._target_url = None
         self._template_id = None
         self._user_id = None
 
@@ -28,6 +31,13 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
     @app_code.setter
     def app_code(self, value):
         self._app_code = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -49,6 +59,13 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
     @industry_type.setter
     def industry_type(self, value):
         self._industry_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -92,6 +109,13 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
     def status(self, value):
         self._status = value
     @property
+    def target_url(self):
+        return self._target_url
+
+    @target_url.setter
+    def target_url(self, value):
+        self._target_url = value
+    @property
     def template_id(self):
         return self._template_id
 
@@ -114,6 +138,11 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
                 params['app_code'] = self.app_code.to_alipay_dict()
             else:
                 params['app_code'] = self.app_code
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -129,6 +158,11 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
                 params['industry_type'] = self.industry_type.to_alipay_dict()
             else:
                 params['industry_type'] = self.industry_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -159,6 +193,11 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.target_url:
+            if hasattr(self.target_url, 'to_alipay_dict'):
+                params['target_url'] = self.target_url.to_alipay_dict()
+            else:
+                params['target_url'] = self.target_url
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -178,12 +217,16 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
         o = AlipayEcoCityserviceExtOrdertocNotifyModel()
         if 'app_code' in d:
             o.app_code = d['app_code']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'goods_info_list' in d:
             o.goods_info_list = d['goods_info_list']
         if 'industry_type' in d:
             o.industry_type = d['industry_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'order_create_time' in d:
@@ -196,6 +239,8 @@ class AlipayEcoCityserviceExtOrdertocNotifyModel(object):
             o.pay_amount = d['pay_amount']
         if 'status' in d:
             o.status = d['status']
+        if 'target_url' in d:
+            o.target_url = d['target_url']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'user_id' in d:

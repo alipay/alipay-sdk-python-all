@@ -10,6 +10,7 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
     def __init__(self):
         self._dev_id = None
         self._face_id = None
+        self._floor_num = None
         self._out_request_id = None
         self._phone_no = None
         self._project_id = None
@@ -29,6 +30,13 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
     @face_id.setter
     def face_id(self, value):
         self._face_id = value
+    @property
+    def floor_num(self):
+        return self._floor_num
+
+    @floor_num.setter
+    def floor_num(self, value):
+        self._floor_num = value
     @property
     def out_request_id(self):
         return self._out_request_id
@@ -74,6 +82,11 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
                 params['face_id'] = self.face_id.to_alipay_dict()
             else:
                 params['face_id'] = self.face_id
+        if self.floor_num:
+            if hasattr(self.floor_num, 'to_alipay_dict'):
+                params['floor_num'] = self.floor_num.to_alipay_dict()
+            else:
+                params['floor_num'] = self.floor_num
         if self.out_request_id:
             if hasattr(self.out_request_id, 'to_alipay_dict'):
                 params['out_request_id'] = self.out_request_id.to_alipay_dict()
@@ -110,6 +123,8 @@ class AlipayOpenIotmbsFacecheckSendModel(object):
             o.dev_id = d['dev_id']
         if 'face_id' in d:
             o.face_id = d['face_id']
+        if 'floor_num' in d:
+            o.floor_num = d['floor_num']
         if 'out_request_id' in d:
             o.out_request_id = d['out_request_id']
         if 'phone_no' in d:

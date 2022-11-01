@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GiftCardTemplate import GiftCardTemplate
 
 
 class AlipayFundWalletTemplateConfirmModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._gift_card_template = None
+        self._out_biz_no = None
         self._product_code = None
 
     @property
@@ -18,6 +21,23 @@ class AlipayFundWalletTemplateConfirmModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def gift_card_template(self):
+        return self._gift_card_template
+
+    @gift_card_template.setter
+    def gift_card_template(self, value):
+        if isinstance(value, GiftCardTemplate):
+            self._gift_card_template = value
+        else:
+            self._gift_card_template = GiftCardTemplate.from_alipay_dict(value)
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def product_code(self):
         return self._product_code
@@ -34,6 +54,16 @@ class AlipayFundWalletTemplateConfirmModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.gift_card_template:
+            if hasattr(self.gift_card_template, 'to_alipay_dict'):
+                params['gift_card_template'] = self.gift_card_template.to_alipay_dict()
+            else:
+                params['gift_card_template'] = self.gift_card_template
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -48,6 +78,10 @@ class AlipayFundWalletTemplateConfirmModel(object):
         o = AlipayFundWalletTemplateConfirmModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'gift_card_template' in d:
+            o.gift_card_template = d['gift_card_template']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

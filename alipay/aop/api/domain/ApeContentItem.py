@@ -27,11 +27,13 @@ class ApeContentItem(object):
         self._id = None
         self._key_word = None
         self._location_tag = None
+        self._mini_app_id = None
         self._pic_url = None
         self._praise_cnt = None
         self._pub_time = None
         self._rating = None
         self._related_goods_ids = None
+        self._row_type = None
         self._share_cnt = None
         self._source_id = None
         self._status = None
@@ -177,6 +179,13 @@ class ApeContentItem(object):
     def location_tag(self, value):
         self._location_tag = value
     @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
+    @property
     def pic_url(self):
         return self._pic_url
 
@@ -211,6 +220,13 @@ class ApeContentItem(object):
     @related_goods_ids.setter
     def related_goods_ids(self, value):
         self._related_goods_ids = value
+    @property
+    def row_type(self):
+        return self._row_type
+
+    @row_type.setter
+    def row_type(self, value):
+        self._row_type = value
     @property
     def share_cnt(self):
         return self._share_cnt
@@ -380,6 +396,11 @@ class ApeContentItem(object):
                 params['location_tag'] = self.location_tag.to_alipay_dict()
             else:
                 params['location_tag'] = self.location_tag
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
+            else:
+                params['mini_app_id'] = self.mini_app_id
         if self.pic_url:
             if hasattr(self.pic_url, 'to_alipay_dict'):
                 params['pic_url'] = self.pic_url.to_alipay_dict()
@@ -405,6 +426,11 @@ class ApeContentItem(object):
                 params['related_goods_ids'] = self.related_goods_ids.to_alipay_dict()
             else:
                 params['related_goods_ids'] = self.related_goods_ids
+        if self.row_type:
+            if hasattr(self.row_type, 'to_alipay_dict'):
+                params['row_type'] = self.row_type.to_alipay_dict()
+            else:
+                params['row_type'] = self.row_type
         if self.share_cnt:
             if hasattr(self.share_cnt, 'to_alipay_dict'):
                 params['share_cnt'] = self.share_cnt.to_alipay_dict()
@@ -500,6 +526,8 @@ class ApeContentItem(object):
             o.key_word = d['key_word']
         if 'location_tag' in d:
             o.location_tag = d['location_tag']
+        if 'mini_app_id' in d:
+            o.mini_app_id = d['mini_app_id']
         if 'pic_url' in d:
             o.pic_url = d['pic_url']
         if 'praise_cnt' in d:
@@ -510,6 +538,8 @@ class ApeContentItem(object):
             o.rating = d['rating']
         if 'related_goods_ids' in d:
             o.related_goods_ids = d['related_goods_ids']
+        if 'row_type' in d:
+            o.row_type = d['row_type']
         if 'share_cnt' in d:
             o.share_cnt = d['share_cnt']
         if 'source_id' in d:

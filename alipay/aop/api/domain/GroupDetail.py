@@ -9,16 +9,28 @@ from alipay.aop.api.domain.GroupMemberDetail import GroupMemberDetail
 class GroupDetail(object):
 
     def __init__(self):
+        self._admin_open_ids = None
         self._admin_user_ids = None
         self._create_time = None
         self._group_id = None
         self._group_img = None
         self._group_name = None
+        self._master_open_id = None
         self._master_user_id = None
         self._member_count = None
         self._members = None
         self._notice = None
 
+    @property
+    def admin_open_ids(self):
+        return self._admin_open_ids
+
+    @admin_open_ids.setter
+    def admin_open_ids(self, value):
+        if isinstance(value, list):
+            self._admin_open_ids = list()
+            for i in value:
+                self._admin_open_ids.append(i)
     @property
     def admin_user_ids(self):
         return self._admin_user_ids
@@ -58,6 +70,13 @@ class GroupDetail(object):
     def group_name(self, value):
         self._group_name = value
     @property
+    def master_open_id(self):
+        return self._master_open_id
+
+    @master_open_id.setter
+    def master_open_id(self, value):
+        self._master_open_id = value
+    @property
     def master_user_id(self):
         return self._master_user_id
 
@@ -95,6 +114,16 @@ class GroupDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.admin_open_ids:
+            if isinstance(self.admin_open_ids, list):
+                for i in range(0, len(self.admin_open_ids)):
+                    element = self.admin_open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.admin_open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.admin_open_ids, 'to_alipay_dict'):
+                params['admin_open_ids'] = self.admin_open_ids.to_alipay_dict()
+            else:
+                params['admin_open_ids'] = self.admin_open_ids
         if self.admin_user_ids:
             if isinstance(self.admin_user_ids, list):
                 for i in range(0, len(self.admin_user_ids)):
@@ -125,6 +154,11 @@ class GroupDetail(object):
                 params['group_name'] = self.group_name.to_alipay_dict()
             else:
                 params['group_name'] = self.group_name
+        if self.master_open_id:
+            if hasattr(self.master_open_id, 'to_alipay_dict'):
+                params['master_open_id'] = self.master_open_id.to_alipay_dict()
+            else:
+                params['master_open_id'] = self.master_open_id
         if self.master_user_id:
             if hasattr(self.master_user_id, 'to_alipay_dict'):
                 params['master_user_id'] = self.master_user_id.to_alipay_dict()
@@ -157,6 +191,8 @@ class GroupDetail(object):
         if not d:
             return None
         o = GroupDetail()
+        if 'admin_open_ids' in d:
+            o.admin_open_ids = d['admin_open_ids']
         if 'admin_user_ids' in d:
             o.admin_user_ids = d['admin_user_ids']
         if 'create_time' in d:
@@ -167,6 +203,8 @@ class GroupDetail(object):
             o.group_img = d['group_img']
         if 'group_name' in d:
             o.group_name = d['group_name']
+        if 'master_open_id' in d:
+            o.master_open_id = d['master_open_id']
         if 'master_user_id' in d:
             o.master_user_id = d['master_user_id']
         if 'member_count' in d:

@@ -10,6 +10,7 @@ class DatadigitalFincloudFinsaasOperationtaskBatchqueryModel(object):
     def __init__(self):
         self._execution_time = None
         self._operation_task_name = None
+        self._operation_task_type = None
         self._page_num = None
         self._page_size = None
         self._status = None
@@ -31,6 +32,13 @@ class DatadigitalFincloudFinsaasOperationtaskBatchqueryModel(object):
     @operation_task_name.setter
     def operation_task_name(self, value):
         self._operation_task_name = value
+    @property
+    def operation_task_type(self):
+        return self._operation_task_type
+
+    @operation_task_type.setter
+    def operation_task_type(self, value):
+        self._operation_task_type = value
     @property
     def page_num(self):
         return self._page_num
@@ -87,6 +95,11 @@ class DatadigitalFincloudFinsaasOperationtaskBatchqueryModel(object):
                 params['operation_task_name'] = self.operation_task_name.to_alipay_dict()
             else:
                 params['operation_task_name'] = self.operation_task_name
+        if self.operation_task_type:
+            if hasattr(self.operation_task_type, 'to_alipay_dict'):
+                params['operation_task_type'] = self.operation_task_type.to_alipay_dict()
+            else:
+                params['operation_task_type'] = self.operation_task_type
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -128,6 +141,8 @@ class DatadigitalFincloudFinsaasOperationtaskBatchqueryModel(object):
             o.execution_time = d['execution_time']
         if 'operation_task_name' in d:
             o.operation_task_name = d['operation_task_name']
+        if 'operation_task_type' in d:
+            o.operation_task_type = d['operation_task_type']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

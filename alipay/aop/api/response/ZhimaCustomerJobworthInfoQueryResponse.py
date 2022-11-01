@@ -11,6 +11,7 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
         super(ZhimaCustomerJobworthInfoQueryResponse, self).__init__()
         self._acceptance_id = None
         self._auth_token = None
+        self._html_url = None
         self._picture_url = None
         self._sub_code = None
         self._sub_msg = None
@@ -31,6 +32,13 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
     @auth_token.setter
     def auth_token(self, value):
         self._auth_token = value
+    @property
+    def html_url(self):
+        return self._html_url
+
+    @html_url.setter
+    def html_url(self, value):
+        self._html_url = value
     @property
     def picture_url(self):
         return self._picture_url
@@ -73,6 +81,8 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
             self.acceptance_id = response['acceptance_id']
         if 'auth_token' in response:
             self.auth_token = response['auth_token']
+        if 'html_url' in response:
+            self.html_url = response['html_url']
         if 'picture_url' in response:
             self.picture_url = response['picture_url']
         if 'sub_code' in response:

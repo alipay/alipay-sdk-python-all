@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayBossFncGfsettleprodInvoiceBatchqueryModel(object):
 
     def __init__(self):
+        self._business_identify_ids = None
         self._buyer_inst_id_list = None
         self._invoice_auth_date_begin = None
         self._invoice_auth_date_end = None
@@ -27,6 +28,16 @@ class AlipayBossFncGfsettleprodInvoiceBatchqueryModel(object):
         self._page_size = None
         self._seller_ip_role_ids = None
 
+    @property
+    def business_identify_ids(self):
+        return self._business_identify_ids
+
+    @business_identify_ids.setter
+    def business_identify_ids(self, value):
+        if isinstance(value, list):
+            self._business_identify_ids = list()
+            for i in value:
+                self._business_identify_ids.append(i)
     @property
     def buyer_inst_id_list(self):
         return self._buyer_inst_id_list
@@ -166,6 +177,16 @@ class AlipayBossFncGfsettleprodInvoiceBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_identify_ids:
+            if isinstance(self.business_identify_ids, list):
+                for i in range(0, len(self.business_identify_ids)):
+                    element = self.business_identify_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.business_identify_ids[i] = element.to_alipay_dict()
+            if hasattr(self.business_identify_ids, 'to_alipay_dict'):
+                params['business_identify_ids'] = self.business_identify_ids.to_alipay_dict()
+            else:
+                params['business_identify_ids'] = self.business_identify_ids
         if self.buyer_inst_id_list:
             if isinstance(self.buyer_inst_id_list, list):
                 for i in range(0, len(self.buyer_inst_id_list)):
@@ -278,6 +299,8 @@ class AlipayBossFncGfsettleprodInvoiceBatchqueryModel(object):
         if not d:
             return None
         o = AlipayBossFncGfsettleprodInvoiceBatchqueryModel()
+        if 'business_identify_ids' in d:
+            o.business_identify_ids = d['business_identify_ids']
         if 'buyer_inst_id_list' in d:
             o.buyer_inst_id_list = d['buyer_inst_id_list']
         if 'invoice_auth_date_begin' in d:

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.IssueRuleInfo import IssueRuleInfo
 from alipay.aop.api.domain.StandardInfo import StandardInfo
+from alipay.aop.api.domain.StandardInfo import StandardInfo
 
 
 class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
@@ -19,6 +20,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         self._institution_name = None
         self._issue_rule_info_list = None
         self._scene_type = None
+        self._standard_info_detail_list = None
         self._standard_info_list = None
 
     @property
@@ -84,6 +86,19 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
     def scene_type(self, value):
         self._scene_type = value
     @property
+    def standard_info_detail_list(self):
+        return self._standard_info_detail_list
+
+    @standard_info_detail_list.setter
+    def standard_info_detail_list(self, value):
+        if isinstance(value, list):
+            self._standard_info_detail_list = list()
+            for i in value:
+                if isinstance(i, StandardInfo):
+                    self._standard_info_detail_list.append(i)
+                else:
+                    self._standard_info_detail_list.append(StandardInfo.from_alipay_dict(i))
+    @property
     def standard_info_list(self):
         return self._standard_info_list
 
@@ -112,5 +127,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self.issue_rule_info_list = response['issue_rule_info_list']
         if 'scene_type' in response:
             self.scene_type = response['scene_type']
+        if 'standard_info_detail_list' in response:
+            self.standard_info_detail_list = response['standard_info_detail_list']
         if 'standard_info_list' in response:
             self.standard_info_list = response['standard_info_list']

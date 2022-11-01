@@ -13,6 +13,7 @@ class MiniAppBaseInfoResponse(object):
         self._app_type = None
         self._logo_url = None
         self._mini_app_id = None
+        self._oid = None
         self._status = None
 
     @property
@@ -51,6 +52,13 @@ class MiniAppBaseInfoResponse(object):
     def mini_app_id(self, value):
         self._mini_app_id = value
     @property
+    def oid(self):
+        return self._oid
+
+    @oid.setter
+    def oid(self, value):
+        self._oid = value
+    @property
     def status(self):
         return self._status
 
@@ -86,6 +94,11 @@ class MiniAppBaseInfoResponse(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.oid:
+            if hasattr(self.oid, 'to_alipay_dict'):
+                params['oid'] = self.oid.to_alipay_dict()
+            else:
+                params['oid'] = self.oid
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -108,6 +121,8 @@ class MiniAppBaseInfoResponse(object):
             o.logo_url = d['logo_url']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'oid' in d:
+            o.oid = d['oid']
         if 'status' in d:
             o.status = d['status']
         return o

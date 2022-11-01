@@ -9,6 +9,7 @@ class EcomSellerDTO(object):
 
     def __init__(self):
         self._alipay_id = None
+        self._alipay_open_id = None
         self._attributes = None
         self._bank_card_holder_name = None
         self._bank_card_no = None
@@ -17,6 +18,8 @@ class EcomSellerDTO(object):
         self._bill_account_type = None
         self._id_card_no = None
         self._id_card_type = None
+        self._main_cat_order_count_of_platform = None
+        self._main_cat_refund_exchange_rate_of_platform = None
         self._phone = None
         self._real_name = None
         self._seller_id = None
@@ -32,6 +35,13 @@ class EcomSellerDTO(object):
     @alipay_id.setter
     def alipay_id(self, value):
         self._alipay_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def attributes(self):
         return self._attributes
@@ -88,6 +98,20 @@ class EcomSellerDTO(object):
     @id_card_type.setter
     def id_card_type(self, value):
         self._id_card_type = value
+    @property
+    def main_cat_order_count_of_platform(self):
+        return self._main_cat_order_count_of_platform
+
+    @main_cat_order_count_of_platform.setter
+    def main_cat_order_count_of_platform(self, value):
+        self._main_cat_order_count_of_platform = value
+    @property
+    def main_cat_refund_exchange_rate_of_platform(self):
+        return self._main_cat_refund_exchange_rate_of_platform
+
+    @main_cat_refund_exchange_rate_of_platform.setter
+    def main_cat_refund_exchange_rate_of_platform(self, value):
+        self._main_cat_refund_exchange_rate_of_platform = value
     @property
     def phone(self):
         return self._phone
@@ -146,6 +170,11 @@ class EcomSellerDTO(object):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
             else:
                 params['alipay_id'] = self.alipay_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.attributes:
             if hasattr(self.attributes, 'to_alipay_dict'):
                 params['attributes'] = self.attributes.to_alipay_dict()
@@ -186,6 +215,16 @@ class EcomSellerDTO(object):
                 params['id_card_type'] = self.id_card_type.to_alipay_dict()
             else:
                 params['id_card_type'] = self.id_card_type
+        if self.main_cat_order_count_of_platform:
+            if hasattr(self.main_cat_order_count_of_platform, 'to_alipay_dict'):
+                params['main_cat_order_count_of_platform'] = self.main_cat_order_count_of_platform.to_alipay_dict()
+            else:
+                params['main_cat_order_count_of_platform'] = self.main_cat_order_count_of_platform
+        if self.main_cat_refund_exchange_rate_of_platform:
+            if hasattr(self.main_cat_refund_exchange_rate_of_platform, 'to_alipay_dict'):
+                params['main_cat_refund_exchange_rate_of_platform'] = self.main_cat_refund_exchange_rate_of_platform.to_alipay_dict()
+            else:
+                params['main_cat_refund_exchange_rate_of_platform'] = self.main_cat_refund_exchange_rate_of_platform
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -230,6 +269,8 @@ class EcomSellerDTO(object):
         o = EcomSellerDTO()
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'attributes' in d:
             o.attributes = d['attributes']
         if 'bank_card_holder_name' in d:
@@ -246,6 +287,10 @@ class EcomSellerDTO(object):
             o.id_card_no = d['id_card_no']
         if 'id_card_type' in d:
             o.id_card_type = d['id_card_type']
+        if 'main_cat_order_count_of_platform' in d:
+            o.main_cat_order_count_of_platform = d['main_cat_order_count_of_platform']
+        if 'main_cat_refund_exchange_rate_of_platform' in d:
+            o.main_cat_refund_exchange_rate_of_platform = d['main_cat_refund_exchange_rate_of_platform']
         if 'phone' in d:
             o.phone = d['phone']
         if 'real_name' in d:

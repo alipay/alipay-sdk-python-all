@@ -13,6 +13,7 @@ class ZhimaCreditEpCertificationInitializeModel(object):
         self._certify_return_url = None
         self._ep_cert_no = None
         self._ep_name = None
+        self._open_id = None
         self._org_biz_no = None
         self._product_code = None
         self._user_cert_no = None
@@ -54,6 +55,13 @@ class ZhimaCreditEpCertificationInitializeModel(object):
     @ep_name.setter
     def ep_name(self, value):
         self._ep_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_biz_no(self):
         return self._org_biz_no
@@ -118,6 +126,11 @@ class ZhimaCreditEpCertificationInitializeModel(object):
                 params['ep_name'] = self.ep_name.to_alipay_dict()
             else:
                 params['ep_name'] = self.ep_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_biz_no:
             if hasattr(self.org_biz_no, 'to_alipay_dict'):
                 params['org_biz_no'] = self.org_biz_no.to_alipay_dict()
@@ -160,6 +173,8 @@ class ZhimaCreditEpCertificationInitializeModel(object):
             o.ep_cert_no = d['ep_cert_no']
         if 'ep_name' in d:
             o.ep_name = d['ep_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_biz_no' in d:
             o.org_biz_no = d['org_biz_no']
         if 'product_code' in d:

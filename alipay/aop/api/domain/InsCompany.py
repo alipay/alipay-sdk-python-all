@@ -9,6 +9,7 @@ class InsCompany(object):
 
     def __init__(self):
         self._alipay_account_no = None
+        self._alipay_account_open_id = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -25,6 +26,13 @@ class InsCompany(object):
     @alipay_account_no.setter
     def alipay_account_no(self, value):
         self._alipay_account_no = value
+    @property
+    def alipay_account_open_id(self):
+        return self._alipay_account_open_id
+
+    @alipay_account_open_id.setter
+    def alipay_account_open_id(self, value):
+        self._alipay_account_open_id = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -90,6 +98,11 @@ class InsCompany(object):
                 params['alipay_account_no'] = self.alipay_account_no.to_alipay_dict()
             else:
                 params['alipay_account_no'] = self.alipay_account_no
+        if self.alipay_account_open_id:
+            if hasattr(self.alipay_account_open_id, 'to_alipay_dict'):
+                params['alipay_account_open_id'] = self.alipay_account_open_id.to_alipay_dict()
+            else:
+                params['alipay_account_open_id'] = self.alipay_account_open_id
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -139,6 +152,8 @@ class InsCompany(object):
         o = InsCompany()
         if 'alipay_account_no' in d:
             o.alipay_account_no = d['alipay_account_no']
+        if 'alipay_account_open_id' in d:
+            o.alipay_account_open_id = d['alipay_account_open_id']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

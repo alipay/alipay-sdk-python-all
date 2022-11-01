@@ -11,6 +11,7 @@ class AlipayUserCharityCommonwealCreateModel(object):
         self._biz_time = None
         self._ext_info = None
         self._numerical = None
+        self._open_id = None
         self._original_data = None
         self._partner_id = None
         self._unique_id = None
@@ -37,6 +38,13 @@ class AlipayUserCharityCommonwealCreateModel(object):
     @numerical.setter
     def numerical(self, value):
         self._numerical = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def original_data(self):
         return self._original_data
@@ -84,6 +92,11 @@ class AlipayUserCharityCommonwealCreateModel(object):
                 params['numerical'] = self.numerical.to_alipay_dict()
             else:
                 params['numerical'] = self.numerical
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.original_data:
             if hasattr(self.original_data, 'to_alipay_dict'):
                 params['original_data'] = self.original_data.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayUserCharityCommonwealCreateModel(object):
             o.ext_info = d['ext_info']
         if 'numerical' in d:
             o.numerical = d['numerical']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'original_data' in d:
             o.original_data = d['original_data']
         if 'partner_id' in d:

@@ -16,6 +16,7 @@ class AlipayOpenMiniDeploypackageQueryModel(object):
         self._existed = None
         self._gray_rules = None
         self._local_app_info = None
+        self._open_id = None
         self._platform = None
         self._prefer_local = None
         self._protocol = None
@@ -82,6 +83,13 @@ class AlipayOpenMiniDeploypackageQueryModel(object):
     @local_app_info.setter
     def local_app_info(self, value):
         self._local_app_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def platform(self):
         return self._platform
@@ -189,6 +197,11 @@ class AlipayOpenMiniDeploypackageQueryModel(object):
                 params['local_app_info'] = self.local_app_info.to_alipay_dict()
             else:
                 params['local_app_info'] = self.local_app_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.platform:
             if hasattr(self.platform, 'to_alipay_dict'):
                 params['platform'] = self.platform.to_alipay_dict()
@@ -257,6 +270,8 @@ class AlipayOpenMiniDeploypackageQueryModel(object):
             o.gray_rules = d['gray_rules']
         if 'local_app_info' in d:
             o.local_app_info = d['local_app_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'platform' in d:
             o.platform = d['platform']
         if 'prefer_local' in d:

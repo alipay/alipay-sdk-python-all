@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RiskInfo import RiskInfo
+from alipay.aop.api.domain.SubContentRiskInfo import SubContentRiskInfo
 
 
 class ContentRiskInfo(object):
@@ -14,6 +15,7 @@ class ContentRiskInfo(object):
         self._ocr_info = None
         self._out_content_id = None
         self._risk_info_list = None
+        self._sub_content_risk_info_list = None
 
     @property
     def content_file_type(self):
@@ -56,6 +58,19 @@ class ContentRiskInfo(object):
                     self._risk_info_list.append(i)
                 else:
                     self._risk_info_list.append(RiskInfo.from_alipay_dict(i))
+    @property
+    def sub_content_risk_info_list(self):
+        return self._sub_content_risk_info_list
+
+    @sub_content_risk_info_list.setter
+    def sub_content_risk_info_list(self, value):
+        if isinstance(value, list):
+            self._sub_content_risk_info_list = list()
+            for i in value:
+                if isinstance(i, SubContentRiskInfo):
+                    self._sub_content_risk_info_list.append(i)
+                else:
+                    self._sub_content_risk_info_list.append(SubContentRiskInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -90,6 +105,16 @@ class ContentRiskInfo(object):
                 params['risk_info_list'] = self.risk_info_list.to_alipay_dict()
             else:
                 params['risk_info_list'] = self.risk_info_list
+        if self.sub_content_risk_info_list:
+            if isinstance(self.sub_content_risk_info_list, list):
+                for i in range(0, len(self.sub_content_risk_info_list)):
+                    element = self.sub_content_risk_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sub_content_risk_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.sub_content_risk_info_list, 'to_alipay_dict'):
+                params['sub_content_risk_info_list'] = self.sub_content_risk_info_list.to_alipay_dict()
+            else:
+                params['sub_content_risk_info_list'] = self.sub_content_risk_info_list
         return params
 
     @staticmethod
@@ -107,6 +132,8 @@ class ContentRiskInfo(object):
             o.out_content_id = d['out_content_id']
         if 'risk_info_list' in d:
             o.risk_info_list = d['risk_info_list']
+        if 'sub_content_risk_info_list' in d:
+            o.sub_content_risk_info_list = d['sub_content_risk_info_list']
         return o
 
 

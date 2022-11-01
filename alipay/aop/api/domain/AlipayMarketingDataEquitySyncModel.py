@@ -14,6 +14,7 @@ class AlipayMarketingDataEquitySyncModel(object):
         self._equity_from = None
         self._equity_id = None
         self._equity_info = None
+        self._open_id = None
         self._original_biz_no = None
         self._original_biz_type = None
         self._out_biz_no = None
@@ -57,6 +58,13 @@ class AlipayMarketingDataEquitySyncModel(object):
             self._equity_info = value
         else:
             self._equity_info = EquityInfo.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def original_biz_no(self):
         return self._original_biz_no
@@ -114,6 +122,11 @@ class AlipayMarketingDataEquitySyncModel(object):
                 params['equity_info'] = self.equity_info.to_alipay_dict()
             else:
                 params['equity_info'] = self.equity_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.original_biz_no:
             if hasattr(self.original_biz_no, 'to_alipay_dict'):
                 params['original_biz_no'] = self.original_biz_no.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayMarketingDataEquitySyncModel(object):
             o.equity_id = d['equity_id']
         if 'equity_info' in d:
             o.equity_info = d['equity_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'original_biz_no' in d:
             o.original_biz_no = d['original_biz_no']
         if 'original_biz_type' in d:

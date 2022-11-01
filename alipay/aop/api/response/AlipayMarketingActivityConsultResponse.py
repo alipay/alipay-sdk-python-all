@@ -11,6 +11,7 @@ class AlipayMarketingActivityConsultResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMarketingActivityConsultResponse, self).__init__()
         self._consult_result_info_list = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -27,6 +28,13 @@ class AlipayMarketingActivityConsultResponse(AlipayResponse):
                 else:
                     self._consult_result_info_list.append(ConsultActivityResultInfo.from_alipay_dict(i))
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -38,5 +46,7 @@ class AlipayMarketingActivityConsultResponse(AlipayResponse):
         response = super(AlipayMarketingActivityConsultResponse, self).parse_response_content(response_content)
         if 'consult_result_info_list' in response:
             self.consult_result_info_list = response['consult_result_info_list']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

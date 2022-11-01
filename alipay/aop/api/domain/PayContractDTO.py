@@ -23,6 +23,7 @@ class PayContractDTO(object):
         self._idempotent_no = None
         self._ip_role_id = None
         self._ip_role_source = None
+        self._operator_domain_id = None
         self._pay_contract_items = None
         self._payment_type = None
         self._pd_code = None
@@ -123,6 +124,13 @@ class PayContractDTO(object):
     @ip_role_source.setter
     def ip_role_source(self, value):
         self._ip_role_source = value
+    @property
+    def operator_domain_id(self):
+        return self._operator_domain_id
+
+    @operator_domain_id.setter
+    def operator_domain_id(self, value):
+        self._operator_domain_id = value
     @property
     def pay_contract_items(self):
         return self._pay_contract_items
@@ -233,6 +241,11 @@ class PayContractDTO(object):
                 params['ip_role_source'] = self.ip_role_source.to_alipay_dict()
             else:
                 params['ip_role_source'] = self.ip_role_source
+        if self.operator_domain_id:
+            if hasattr(self.operator_domain_id, 'to_alipay_dict'):
+                params['operator_domain_id'] = self.operator_domain_id.to_alipay_dict()
+            else:
+                params['operator_domain_id'] = self.operator_domain_id
         if self.pay_contract_items:
             if isinstance(self.pay_contract_items, list):
                 for i in range(0, len(self.pay_contract_items)):
@@ -296,6 +309,8 @@ class PayContractDTO(object):
             o.ip_role_id = d['ip_role_id']
         if 'ip_role_source' in d:
             o.ip_role_source = d['ip_role_source']
+        if 'operator_domain_id' in d:
+            o.operator_domain_id = d['operator_domain_id']
         if 'pay_contract_items' in d:
             o.pay_contract_items = d['pay_contract_items']
         if 'payment_type' in d:

@@ -11,6 +11,7 @@ class PayContractItemDTO(object):
         self._description = None
         self._item_no = None
         self._item_type = None
+        self._need_audit = None
         self._need_invoice = None
         self._pay_apply_date = None
         self._pay_ref_type = None
@@ -41,6 +42,13 @@ class PayContractItemDTO(object):
     @item_type.setter
     def item_type(self, value):
         self._item_type = value
+    @property
+    def need_audit(self):
+        return self._need_audit
+
+    @need_audit.setter
+    def need_audit(self, value):
+        self._need_audit = value
     @property
     def need_invoice(self):
         return self._need_invoice
@@ -116,6 +124,11 @@ class PayContractItemDTO(object):
                 params['item_type'] = self.item_type.to_alipay_dict()
             else:
                 params['item_type'] = self.item_type
+        if self.need_audit:
+            if hasattr(self.need_audit, 'to_alipay_dict'):
+                params['need_audit'] = self.need_audit.to_alipay_dict()
+            else:
+                params['need_audit'] = self.need_audit
         if self.need_invoice:
             if hasattr(self.need_invoice, 'to_alipay_dict'):
                 params['need_invoice'] = self.need_invoice.to_alipay_dict()
@@ -169,6 +182,8 @@ class PayContractItemDTO(object):
             o.item_no = d['item_no']
         if 'item_type' in d:
             o.item_type = d['item_type']
+        if 'need_audit' in d:
+            o.need_audit = d['need_audit']
         if 'need_invoice' in d:
             o.need_invoice = d['need_invoice']
         if 'pay_apply_date' in d:

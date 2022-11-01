@@ -12,6 +12,7 @@ class AlipaySocialOpengreenEnergyQueryModel(object):
         self._end_time = None
         self._ext_info = None
         self._green_actions = None
+        self._open_id = None
         self._pid = None
         self._source = None
         self._start_time = None
@@ -48,6 +49,13 @@ class AlipaySocialOpengreenEnergyQueryModel(object):
             self._green_actions = list()
             for i in value:
                 self._green_actions.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def pid(self):
         return self._pid
@@ -105,6 +113,11 @@ class AlipaySocialOpengreenEnergyQueryModel(object):
                 params['green_actions'] = self.green_actions.to_alipay_dict()
             else:
                 params['green_actions'] = self.green_actions
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
@@ -140,6 +153,8 @@ class AlipaySocialOpengreenEnergyQueryModel(object):
             o.ext_info = d['ext_info']
         if 'green_actions' in d:
             o.green_actions = d['green_actions']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'pid' in d:
             o.pid = d['pid']
         if 'source' in d:

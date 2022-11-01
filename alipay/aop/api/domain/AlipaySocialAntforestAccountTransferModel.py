@@ -12,6 +12,7 @@ class AlipaySocialAntforestAccountTransferModel(object):
         self._energy_account_to = None
         self._energy_count = None
         self._ext_info = None
+        self._open_id = None
         self._out_biz_no = None
         self._transfer_type = None
         self._user_id = None
@@ -44,6 +45,13 @@ class AlipaySocialAntforestAccountTransferModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -89,6 +97,11 @@ class AlipaySocialAntforestAccountTransferModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipaySocialAntforestAccountTransferModel(object):
             o.energy_count = d['energy_count']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'transfer_type' in d:

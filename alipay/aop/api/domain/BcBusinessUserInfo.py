@@ -10,6 +10,7 @@ class BcBusinessUserInfo(object):
     def __init__(self):
         self._logo = None
         self._name = None
+        self._open_id = None
         self._uid = None
 
     @property
@@ -26,6 +27,13 @@ class BcBusinessUserInfo(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def uid(self):
         return self._uid
@@ -47,6 +55,11 @@ class BcBusinessUserInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -63,6 +76,8 @@ class BcBusinessUserInfo(object):
             o.logo = d['logo']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'uid' in d:
             o.uid = d['uid']
         return o

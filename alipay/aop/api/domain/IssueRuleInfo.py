@@ -13,6 +13,7 @@ class IssueRuleInfo(object):
         self._invalid_mode_value = None
         self._issue_amount_value = None
         self._issue_end_date = None
+        self._issue_rule_id = None
         self._issue_rule_name = None
         self._issue_start_date = None
         self._issue_type = None
@@ -55,6 +56,13 @@ class IssueRuleInfo(object):
     @issue_end_date.setter
     def issue_end_date(self, value):
         self._issue_end_date = value
+    @property
+    def issue_rule_id(self):
+        return self._issue_rule_id
+
+    @issue_rule_id.setter
+    def issue_rule_id(self, value):
+        self._issue_rule_id = value
     @property
     def issue_rule_name(self):
         return self._issue_rule_name
@@ -126,6 +134,11 @@ class IssueRuleInfo(object):
                 params['issue_end_date'] = self.issue_end_date.to_alipay_dict()
             else:
                 params['issue_end_date'] = self.issue_end_date
+        if self.issue_rule_id:
+            if hasattr(self.issue_rule_id, 'to_alipay_dict'):
+                params['issue_rule_id'] = self.issue_rule_id.to_alipay_dict()
+            else:
+                params['issue_rule_id'] = self.issue_rule_id
         if self.issue_rule_name:
             if hasattr(self.issue_rule_name, 'to_alipay_dict'):
                 params['issue_rule_name'] = self.issue_rule_name.to_alipay_dict()
@@ -173,6 +186,8 @@ class IssueRuleInfo(object):
             o.issue_amount_value = d['issue_amount_value']
         if 'issue_end_date' in d:
             o.issue_end_date = d['issue_end_date']
+        if 'issue_rule_id' in d:
+            o.issue_rule_id = d['issue_rule_id']
         if 'issue_rule_name' in d:
             o.issue_rule_name = d['issue_rule_name']
         if 'issue_start_date' in d:

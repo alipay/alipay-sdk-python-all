@@ -12,6 +12,7 @@ class AlipayFinancialnetAuthEcsignSignorderQueryResponse(AlipayResponse):
         self._ext_info = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._open_id = None
         self._order_status = None
         self._sign_order_no = None
         self._sign_product_id = None
@@ -40,6 +41,13 @@ class AlipayFinancialnetAuthEcsignSignorderQueryResponse(AlipayResponse):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -91,6 +99,8 @@ class AlipayFinancialnetAuthEcsignSignorderQueryResponse(AlipayResponse):
             self.gmt_create = response['gmt_create']
         if 'gmt_modified' in response:
             self.gmt_modified = response['gmt_modified']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_status' in response:
             self.order_status = response['order_status']
         if 'sign_order_no' in response:

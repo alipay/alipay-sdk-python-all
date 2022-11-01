@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceLogisticsWaybillInstantdeliverySettleModel(object):
 
     def __init__(self):
+        self._cancel_fee = None
         self._logistics_code = None
         self._order_no = None
         self._out_settle_request_no = None
         self._waybill_no = None
         self._waybill_status = None
 
+    @property
+    def cancel_fee(self):
+        return self._cancel_fee
+
+    @cancel_fee.setter
+    def cancel_fee(self, value):
+        self._cancel_fee = value
     @property
     def logistics_code(self):
         return self._logistics_code
@@ -53,6 +61,11 @@ class AlipayCommerceLogisticsWaybillInstantdeliverySettleModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cancel_fee:
+            if hasattr(self.cancel_fee, 'to_alipay_dict'):
+                params['cancel_fee'] = self.cancel_fee.to_alipay_dict()
+            else:
+                params['cancel_fee'] = self.cancel_fee
         if self.logistics_code:
             if hasattr(self.logistics_code, 'to_alipay_dict'):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayCommerceLogisticsWaybillInstantdeliverySettleModel(object):
         if not d:
             return None
         o = AlipayCommerceLogisticsWaybillInstantdeliverySettleModel()
+        if 'cancel_fee' in d:
+            o.cancel_fee = d['cancel_fee']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
         if 'order_no' in d:

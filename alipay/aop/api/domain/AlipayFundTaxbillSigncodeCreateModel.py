@@ -18,6 +18,7 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
         self._identification_in_belonging_employer = None
         self._identity = None
         self._identity_type = None
+        self._out_biz_no = None
         self._product_code = None
         self._sign_code_type = None
         self._tax_optimization_mode = None
@@ -93,6 +94,13 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -167,6 +175,11 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -209,6 +222,8 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'sign_code_type' in d:

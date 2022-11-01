@@ -10,6 +10,7 @@ from alipay.aop.api.domain.WeightFloor import WeightFloor
 class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
 
     def __init__(self):
+        self._device_identify_type = None
         self._goods_infos = None
         self._req_id = None
         self._scene = None
@@ -18,6 +19,13 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
         self._uid = None
         self._weight_template = None
 
+    @property
+    def device_identify_type(self):
+        return self._device_identify_type
+
+    @device_identify_type.setter
+    def device_identify_type(self, value):
+        self._device_identify_type = value
     @property
     def goods_infos(self):
         return self._goods_infos
@@ -83,6 +91,11 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.device_identify_type:
+            if hasattr(self.device_identify_type, 'to_alipay_dict'):
+                params['device_identify_type'] = self.device_identify_type.to_alipay_dict()
+            else:
+                params['device_identify_type'] = self.device_identify_type
         if self.goods_infos:
             if isinstance(self.goods_infos, list):
                 for i in range(0, len(self.goods_infos)):
@@ -135,6 +148,8 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
         if not d:
             return None
         o = AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel()
+        if 'device_identify_type' in d:
+            o.device_identify_type = d['device_identify_type']
         if 'goods_infos' in d:
             o.goods_infos = d['goods_infos']
         if 'req_id' in d:

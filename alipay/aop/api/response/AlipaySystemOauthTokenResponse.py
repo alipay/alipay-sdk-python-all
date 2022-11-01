@@ -14,8 +14,10 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
         self._auth_start = None
         self._auth_token_type = None
         self._expires_in = None
+        self._open_id = None
         self._re_expires_in = None
         self._refresh_token = None
+        self._union_id = None
         self._user_id = None
 
     @property
@@ -54,6 +56,13 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
     def expires_in(self, value):
         self._expires_in = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def re_expires_in(self):
         return self._re_expires_in
 
@@ -67,6 +76,13 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
     @refresh_token.setter
     def refresh_token(self, value):
         self._refresh_token = value
+    @property
+    def union_id(self):
+        return self._union_id
+
+    @union_id.setter
+    def union_id(self, value):
+        self._union_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -87,9 +103,13 @@ class AlipaySystemOauthTokenResponse(AlipayResponse):
             self.auth_token_type = response['auth_token_type']
         if 'expires_in' in response:
             self.expires_in = response['expires_in']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 're_expires_in' in response:
             self.re_expires_in = response['re_expires_in']
         if 'refresh_token' in response:
             self.refresh_token = response['refresh_token']
+        if 'union_id' in response:
+            self.union_id = response['union_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

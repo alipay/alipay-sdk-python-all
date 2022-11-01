@@ -12,6 +12,7 @@ class AnttechMorseMarketingRtaCallbackModel(object):
         self._discount_amt = None
         self._extend_params = None
         self._mobile_sha_256 = None
+        self._out_biz_no = None
         self._payment_amt = None
         self._resource_id = None
         self._trade_date = None
@@ -47,6 +48,13 @@ class AnttechMorseMarketingRtaCallbackModel(object):
     @mobile_sha_256.setter
     def mobile_sha_256(self, value):
         self._mobile_sha_256 = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def payment_amt(self):
         return self._payment_amt
@@ -113,6 +121,11 @@ class AnttechMorseMarketingRtaCallbackModel(object):
                 params['mobile_sha_256'] = self.mobile_sha_256.to_alipay_dict()
             else:
                 params['mobile_sha_256'] = self.mobile_sha_256
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.payment_amt:
             if hasattr(self.payment_amt, 'to_alipay_dict'):
                 params['payment_amt'] = self.payment_amt.to_alipay_dict()
@@ -158,6 +171,8 @@ class AnttechMorseMarketingRtaCallbackModel(object):
             o.extend_params = d['extend_params']
         if 'mobile_sha_256' in d:
             o.mobile_sha_256 = d['mobile_sha_256']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'payment_amt' in d:
             o.payment_amt = d['payment_amt']
         if 'resource_id' in d:

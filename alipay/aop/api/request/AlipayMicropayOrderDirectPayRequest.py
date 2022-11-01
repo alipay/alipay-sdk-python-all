@@ -15,6 +15,7 @@ class AlipayMicropayOrderDirectPayRequest(object):
         self._alipay_order_no = None
         self._amount = None
         self._memo = None
+        self._receive_open_id = None
         self._receive_user_id = None
         self._transfer_out_order_no = None
         self._version = "1.0"
@@ -55,6 +56,13 @@ class AlipayMicropayOrderDirectPayRequest(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def receive_open_id(self):
+        return self._receive_open_id
+
+    @receive_open_id.setter
+    def receive_open_id(self, value):
+        self._receive_open_id = value
     @property
     def receive_user_id(self):
         return self._receive_user_id
@@ -163,6 +171,11 @@ class AlipayMicropayOrderDirectPayRequest(object):
                 params['memo'] = json.dumps(obj=self.memo.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['memo'] = self.memo
+        if self.receive_open_id:
+            if hasattr(self.receive_open_id, 'to_alipay_dict'):
+                params['receive_open_id'] = json.dumps(obj=self.receive_open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['receive_open_id'] = self.receive_open_id
         if self.receive_user_id:
             if hasattr(self.receive_user_id, 'to_alipay_dict'):
                 params['receive_user_id'] = json.dumps(obj=self.receive_user_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

@@ -10,10 +10,13 @@ class StandardInfo(object):
 
     def __init__(self):
         self._consume_mode = None
+        self._expense_type_sub_category = None
         self._open_rule_id = None
         self._outer_source_id = None
         self._payment_policy = None
         self._standard_condition_info_list = None
+        self._standard_desc = None
+        self._standard_id = None
         self._standard_name = None
 
     @property
@@ -23,6 +26,13 @@ class StandardInfo(object):
     @consume_mode.setter
     def consume_mode(self, value):
         self._consume_mode = value
+    @property
+    def expense_type_sub_category(self):
+        return self._expense_type_sub_category
+
+    @expense_type_sub_category.setter
+    def expense_type_sub_category(self, value):
+        self._expense_type_sub_category = value
     @property
     def open_rule_id(self):
         return self._open_rule_id
@@ -58,6 +68,20 @@ class StandardInfo(object):
                 else:
                     self._standard_condition_info_list.append(StandardConditionInfo.from_alipay_dict(i))
     @property
+    def standard_desc(self):
+        return self._standard_desc
+
+    @standard_desc.setter
+    def standard_desc(self, value):
+        self._standard_desc = value
+    @property
+    def standard_id(self):
+        return self._standard_id
+
+    @standard_id.setter
+    def standard_id(self, value):
+        self._standard_id = value
+    @property
     def standard_name(self):
         return self._standard_name
 
@@ -73,6 +97,11 @@ class StandardInfo(object):
                 params['consume_mode'] = self.consume_mode.to_alipay_dict()
             else:
                 params['consume_mode'] = self.consume_mode
+        if self.expense_type_sub_category:
+            if hasattr(self.expense_type_sub_category, 'to_alipay_dict'):
+                params['expense_type_sub_category'] = self.expense_type_sub_category.to_alipay_dict()
+            else:
+                params['expense_type_sub_category'] = self.expense_type_sub_category
         if self.open_rule_id:
             if hasattr(self.open_rule_id, 'to_alipay_dict'):
                 params['open_rule_id'] = self.open_rule_id.to_alipay_dict()
@@ -98,6 +127,16 @@ class StandardInfo(object):
                 params['standard_condition_info_list'] = self.standard_condition_info_list.to_alipay_dict()
             else:
                 params['standard_condition_info_list'] = self.standard_condition_info_list
+        if self.standard_desc:
+            if hasattr(self.standard_desc, 'to_alipay_dict'):
+                params['standard_desc'] = self.standard_desc.to_alipay_dict()
+            else:
+                params['standard_desc'] = self.standard_desc
+        if self.standard_id:
+            if hasattr(self.standard_id, 'to_alipay_dict'):
+                params['standard_id'] = self.standard_id.to_alipay_dict()
+            else:
+                params['standard_id'] = self.standard_id
         if self.standard_name:
             if hasattr(self.standard_name, 'to_alipay_dict'):
                 params['standard_name'] = self.standard_name.to_alipay_dict()
@@ -112,6 +151,8 @@ class StandardInfo(object):
         o = StandardInfo()
         if 'consume_mode' in d:
             o.consume_mode = d['consume_mode']
+        if 'expense_type_sub_category' in d:
+            o.expense_type_sub_category = d['expense_type_sub_category']
         if 'open_rule_id' in d:
             o.open_rule_id = d['open_rule_id']
         if 'outer_source_id' in d:
@@ -120,6 +161,10 @@ class StandardInfo(object):
             o.payment_policy = d['payment_policy']
         if 'standard_condition_info_list' in d:
             o.standard_condition_info_list = d['standard_condition_info_list']
+        if 'standard_desc' in d:
+            o.standard_desc = d['standard_desc']
+        if 'standard_id' in d:
+            o.standard_id = d['standard_id']
         if 'standard_name' in d:
             o.standard_name = d['standard_name']
         return o

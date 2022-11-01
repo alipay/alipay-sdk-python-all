@@ -10,6 +10,7 @@ class AlipayOverseasTaxAdvancedStatusQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOverseasTaxAdvancedStatusQueryResponse, self).__init__()
         self._alipay_user_id = None
+        self._open_id = None
         self._out_tax_refund_no = None
         self._status = None
         self._status_change_time = None
@@ -23,6 +24,13 @@ class AlipayOverseasTaxAdvancedStatusQueryResponse(AlipayResponse):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_tax_refund_no(self):
         return self._out_tax_refund_no
@@ -63,6 +71,8 @@ class AlipayOverseasTaxAdvancedStatusQueryResponse(AlipayResponse):
         response = super(AlipayOverseasTaxAdvancedStatusQueryResponse, self).parse_response_content(response_content)
         if 'alipay_user_id' in response:
             self.alipay_user_id = response['alipay_user_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_tax_refund_no' in response:
             self.out_tax_refund_no = response['out_tax_refund_no']
         if 'status' in response:

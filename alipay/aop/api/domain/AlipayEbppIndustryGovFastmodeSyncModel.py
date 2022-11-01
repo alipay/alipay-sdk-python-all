@@ -12,6 +12,7 @@ class AlipayEbppIndustryGovFastmodeSyncModel(object):
         self._biz_type = None
         self._desensitization = None
         self._keyword_list = None
+        self._open_id = None
         self._org_code = None
         self._user_id = None
 
@@ -42,6 +43,13 @@ class AlipayEbppIndustryGovFastmodeSyncModel(object):
                     self._keyword_list.append(i)
                 else:
                     self._keyword_list.append(CommonKeyword.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_code(self):
         return self._org_code
@@ -80,6 +88,11 @@ class AlipayEbppIndustryGovFastmodeSyncModel(object):
                 params['keyword_list'] = self.keyword_list.to_alipay_dict()
             else:
                 params['keyword_list'] = self.keyword_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_code:
             if hasattr(self.org_code, 'to_alipay_dict'):
                 params['org_code'] = self.org_code.to_alipay_dict()
@@ -103,6 +116,8 @@ class AlipayEbppIndustryGovFastmodeSyncModel(object):
             o.desensitization = d['desensitization']
         if 'keyword_list' in d:
             o.keyword_list = d['keyword_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_code' in d:
             o.org_code = d['org_code']
         if 'user_id' in d:

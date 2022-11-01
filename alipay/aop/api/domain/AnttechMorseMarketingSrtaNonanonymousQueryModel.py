@@ -10,6 +10,7 @@ class AnttechMorseMarketingSrtaNonanonymousQueryModel(object):
     def __init__(self):
         self._extend_params = None
         self._mobile_sha_256 = None
+        self._open_id = None
         self._order_amount = None
         self._req_id = None
         self._uid = None
@@ -28,6 +29,13 @@ class AnttechMorseMarketingSrtaNonanonymousQueryModel(object):
     @mobile_sha_256.setter
     def mobile_sha_256(self, value):
         self._mobile_sha_256 = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -63,6 +71,11 @@ class AnttechMorseMarketingSrtaNonanonymousQueryModel(object):
                 params['mobile_sha_256'] = self.mobile_sha_256.to_alipay_dict()
             else:
                 params['mobile_sha_256'] = self.mobile_sha_256
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -89,6 +102,8 @@ class AnttechMorseMarketingSrtaNonanonymousQueryModel(object):
             o.extend_params = d['extend_params']
         if 'mobile_sha_256' in d:
             o.mobile_sha_256 = d['mobile_sha_256']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'req_id' in d:

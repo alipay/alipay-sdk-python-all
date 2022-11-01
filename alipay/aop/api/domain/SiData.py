@@ -14,6 +14,7 @@ class SiData(object):
         self._target_idcard = None
         self._target_idcard_type = None
         self._target_mobile = None
+        self._target_open_id = None
         self._target_sicard_no = None
         self._target_user_id = None
         self._target_user_name = None
@@ -63,6 +64,13 @@ class SiData(object):
     @target_mobile.setter
     def target_mobile(self, value):
         self._target_mobile = value
+    @property
+    def target_open_id(self):
+        return self._target_open_id
+
+    @target_open_id.setter
+    def target_open_id(self, value):
+        self._target_open_id = value
     @property
     def target_sicard_no(self):
         return self._target_sicard_no
@@ -139,6 +147,11 @@ class SiData(object):
                 params['target_mobile'] = self.target_mobile.to_alipay_dict()
             else:
                 params['target_mobile'] = self.target_mobile
+        if self.target_open_id:
+            if hasattr(self.target_open_id, 'to_alipay_dict'):
+                params['target_open_id'] = self.target_open_id.to_alipay_dict()
+            else:
+                params['target_open_id'] = self.target_open_id
         if self.target_sicard_no:
             if hasattr(self.target_sicard_no, 'to_alipay_dict'):
                 params['target_sicard_no'] = self.target_sicard_no.to_alipay_dict()
@@ -188,6 +201,8 @@ class SiData(object):
             o.target_idcard_type = d['target_idcard_type']
         if 'target_mobile' in d:
             o.target_mobile = d['target_mobile']
+        if 'target_open_id' in d:
+            o.target_open_id = d['target_open_id']
         if 'target_sicard_no' in d:
             o.target_sicard_no = d['target_sicard_no']
         if 'target_user_id' in d:

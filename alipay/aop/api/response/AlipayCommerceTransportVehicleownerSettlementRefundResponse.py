@@ -11,6 +11,7 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
         super(AlipayCommerceTransportVehicleownerSettlementRefundResponse, self).__init__()
         self._buyer_id = None
         self._gmt_refund_pay = None
+        self._open_id = None
         self._out_request_no = None
         self._out_trade_no = None
         self._refund_amount = None
@@ -31,6 +32,13 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
     @gmt_refund_pay.setter
     def gmt_refund_pay(self, value):
         self._gmt_refund_pay = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -73,6 +81,8 @@ class AlipayCommerceTransportVehicleownerSettlementRefundResponse(AlipayResponse
             self.buyer_id = response['buyer_id']
         if 'gmt_refund_pay' in response:
             self.gmt_refund_pay = response['gmt_refund_pay']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_request_no' in response:
             self.out_request_no = response['out_request_no']
         if 'out_trade_no' in response:

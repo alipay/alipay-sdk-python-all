@@ -20,6 +20,7 @@ class AlipayBusinessOrderCheckinOrderinfoSyncModel(object):
         self._has_breakfast = None
         self._hotel_name = None
         self._member_level = None
+        self._open_id = None
         self._order_create_time = None
         self._order_id = None
         self._order_source = None
@@ -108,6 +109,13 @@ class AlipayBusinessOrderCheckinOrderinfoSyncModel(object):
     @member_level.setter
     def member_level(self, value):
         self._member_level = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_create_time(self):
         return self._order_create_time
@@ -250,6 +258,11 @@ class AlipayBusinessOrderCheckinOrderinfoSyncModel(object):
                 params['member_level'] = self.member_level.to_alipay_dict()
             else:
                 params['member_level'] = self.member_level
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_create_time:
             if hasattr(self.order_create_time, 'to_alipay_dict'):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
@@ -337,6 +350,8 @@ class AlipayBusinessOrderCheckinOrderinfoSyncModel(object):
             o.hotel_name = d['hotel_name']
         if 'member_level' in d:
             o.member_level = d['member_level']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
         if 'order_id' in d:

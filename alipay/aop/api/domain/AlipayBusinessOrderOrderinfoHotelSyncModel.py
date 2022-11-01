@@ -24,6 +24,7 @@ class AlipayBusinessOrderOrderinfoHotelSyncModel(object):
         self._ext_info = None
         self._membership_card_template_id = None
         self._membership_grade = None
+        self._open_id = None
         self._order_create_time = None
         self._order_id = None
         self._order_link = None
@@ -138,6 +139,13 @@ class AlipayBusinessOrderOrderinfoHotelSyncModel(object):
     @membership_grade.setter
     def membership_grade(self, value):
         self._membership_grade = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_create_time(self):
         return self._order_create_time
@@ -309,6 +317,11 @@ class AlipayBusinessOrderOrderinfoHotelSyncModel(object):
                 params['membership_grade'] = self.membership_grade.to_alipay_dict()
             else:
                 params['membership_grade'] = self.membership_grade
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_create_time:
             if hasattr(self.order_create_time, 'to_alipay_dict'):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
@@ -412,6 +425,8 @@ class AlipayBusinessOrderOrderinfoHotelSyncModel(object):
             o.membership_card_template_id = d['membership_card_template_id']
         if 'membership_grade' in d:
             o.membership_grade = d['membership_grade']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
         if 'order_id' in d:

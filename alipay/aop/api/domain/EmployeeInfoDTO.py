@@ -19,6 +19,7 @@ class EmployeeInfoDTO(object):
         self._gmt_modified = None
         self._mobile = None
         self._role_list = None
+        self._user_id = None
 
     @property
     def activate(self):
@@ -99,6 +100,13 @@ class EmployeeInfoDTO(object):
             self._role_list = list()
             for i in value:
                 self._role_list.append(i)
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -163,6 +171,11 @@ class EmployeeInfoDTO(object):
                 params['role_list'] = self.role_list.to_alipay_dict()
             else:
                 params['role_list'] = self.role_list
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -190,6 +203,8 @@ class EmployeeInfoDTO(object):
             o.mobile = d['mobile']
         if 'role_list' in d:
             o.role_list = d['role_list']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

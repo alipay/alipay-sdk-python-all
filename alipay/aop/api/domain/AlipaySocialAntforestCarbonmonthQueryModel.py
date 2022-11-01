@@ -10,6 +10,7 @@ class AlipaySocialAntforestCarbonmonthQueryModel(object):
     def __init__(self):
         self._carbon_type = None
         self._month = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -29,6 +30,13 @@ class AlipaySocialAntforestCarbonmonthQueryModel(object):
     @month.setter
     def month(self, value):
         self._month = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -55,6 +63,11 @@ class AlipaySocialAntforestCarbonmonthQueryModel(object):
                 params['month'] = self.month.to_alipay_dict()
             else:
                 params['month'] = self.month
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -71,6 +84,8 @@ class AlipaySocialAntforestCarbonmonthQueryModel(object):
             o.carbon_type = d['carbon_type']
         if 'month' in d:
             o.month = d['month']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

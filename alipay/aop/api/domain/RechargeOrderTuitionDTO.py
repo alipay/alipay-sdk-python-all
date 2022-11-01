@@ -24,6 +24,7 @@ class RechargeOrderTuitionDTO(object):
         self._trade_no = None
         self._user_display_name = None
         self._user_id = None
+        self._user_open_id = None
 
     @property
     def create_time(self):
@@ -132,6 +133,13 @@ class RechargeOrderTuitionDTO(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def user_open_id(self):
+        return self._user_open_id
+
+    @user_open_id.setter
+    def user_open_id(self, value):
+        self._user_open_id = value
 
 
     def to_alipay_dict(self):
@@ -211,6 +219,11 @@ class RechargeOrderTuitionDTO(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.user_open_id:
+            if hasattr(self.user_open_id, 'to_alipay_dict'):
+                params['user_open_id'] = self.user_open_id.to_alipay_dict()
+            else:
+                params['user_open_id'] = self.user_open_id
         return params
 
     @staticmethod
@@ -246,6 +259,8 @@ class RechargeOrderTuitionDTO(object):
             o.user_display_name = d['user_display_name']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'user_open_id' in d:
+            o.user_open_id = d['user_open_id']
         return o
 
 

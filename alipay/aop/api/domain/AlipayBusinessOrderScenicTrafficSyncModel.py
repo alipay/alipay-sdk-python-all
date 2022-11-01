@@ -17,6 +17,7 @@ class AlipayBusinessOrderScenicTrafficSyncModel(object):
         self._contact = None
         self._discount_amount = None
         self._ext_info = None
+        self._open_id = None
         self._order_create_time = None
         self._order_id = None
         self._order_link = None
@@ -83,6 +84,13 @@ class AlipayBusinessOrderScenicTrafficSyncModel(object):
             self._ext_info = value
         else:
             self._ext_info = ScenicExtInfo.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_create_time(self):
         return self._order_create_time
@@ -242,6 +250,11 @@ class AlipayBusinessOrderScenicTrafficSyncModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_create_time:
             if hasattr(self.order_create_time, 'to_alipay_dict'):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
@@ -351,6 +364,8 @@ class AlipayBusinessOrderScenicTrafficSyncModel(object):
             o.discount_amount = d['discount_amount']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
         if 'order_id' in d:

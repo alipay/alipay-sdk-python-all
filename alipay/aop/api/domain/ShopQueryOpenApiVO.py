@@ -14,6 +14,7 @@ class ShopQueryOpenApiVO(object):
         self._business_time = None
         self._contact_mobile = None
         self._contact_phone = None
+        self._new_shop_category = None
         self._shop_category = None
         self._shop_id = None
         self._shop_info_status = None
@@ -59,6 +60,13 @@ class ShopQueryOpenApiVO(object):
     @contact_phone.setter
     def contact_phone(self, value):
         self._contact_phone = value
+    @property
+    def new_shop_category(self):
+        return self._new_shop_category
+
+    @new_shop_category.setter
+    def new_shop_category(self, value):
+        self._new_shop_category = value
     @property
     def shop_category(self):
         return self._shop_category
@@ -137,6 +145,11 @@ class ShopQueryOpenApiVO(object):
                 params['contact_phone'] = self.contact_phone.to_alipay_dict()
             else:
                 params['contact_phone'] = self.contact_phone
+        if self.new_shop_category:
+            if hasattr(self.new_shop_category, 'to_alipay_dict'):
+                params['new_shop_category'] = self.new_shop_category.to_alipay_dict()
+            else:
+                params['new_shop_category'] = self.new_shop_category
         if self.shop_category:
             if hasattr(self.shop_category, 'to_alipay_dict'):
                 params['shop_category'] = self.shop_category.to_alipay_dict()
@@ -187,6 +200,8 @@ class ShopQueryOpenApiVO(object):
             o.contact_mobile = d['contact_mobile']
         if 'contact_phone' in d:
             o.contact_phone = d['contact_phone']
+        if 'new_shop_category' in d:
+            o.new_shop_category = d['new_shop_category']
         if 'shop_category' in d:
             o.shop_category = d['shop_category']
         if 'shop_id' in d:

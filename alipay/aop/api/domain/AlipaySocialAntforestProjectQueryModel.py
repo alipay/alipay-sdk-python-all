@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipaySocialAntforestProjectQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._query_type = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def query_type(self):
         return self._query_type
@@ -29,6 +37,11 @@ class AlipaySocialAntforestProjectQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query_type:
             if hasattr(self.query_type, 'to_alipay_dict'):
                 params['query_type'] = self.query_type.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipaySocialAntforestProjectQueryModel(object):
         if not d:
             return None
         o = AlipaySocialAntforestProjectQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query_type' in d:
             o.query_type = d['query_type']
         if 'user_id' in d:

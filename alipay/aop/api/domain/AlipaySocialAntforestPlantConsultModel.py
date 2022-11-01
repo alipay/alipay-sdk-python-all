@@ -10,6 +10,7 @@ class AlipaySocialAntforestPlantConsultModel(object):
     def __init__(self):
         self._account_id = None
         self._apply_type = None
+        self._open_id = None
         self._project_id = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AlipaySocialAntforestPlantConsultModel(object):
     @apply_type.setter
     def apply_type(self, value):
         self._apply_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def project_id(self):
         return self._project_id
@@ -55,6 +63,11 @@ class AlipaySocialAntforestPlantConsultModel(object):
                 params['apply_type'] = self.apply_type.to_alipay_dict()
             else:
                 params['apply_type'] = self.apply_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipaySocialAntforestPlantConsultModel(object):
             o.account_id = d['account_id']
         if 'apply_type' in d:
             o.apply_type = d['apply_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'user_id' in d:

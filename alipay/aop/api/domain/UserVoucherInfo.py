@@ -10,6 +10,7 @@ from alipay.aop.api.domain.VoucherDeductInfo import VoucherDeductInfo
 from alipay.aop.api.domain.CommonVoucherDisplayLiteInfo import CommonVoucherDisplayLiteInfo
 from alipay.aop.api.domain.VoucherDisplayPatternInfo import VoucherDisplayPatternInfo
 from alipay.aop.api.domain.VoucherSendModeInfo import VoucherSendModeInfo
+from alipay.aop.api.domain.VoucherUseRuleInfo import VoucherUseRuleInfo
 from alipay.aop.api.domain.CommonVoucherUseRuleLiteInfo import CommonVoucherUseRuleLiteInfo
 
 
@@ -32,6 +33,7 @@ class UserVoucherInfo(object):
         self._voucher_send_mode_info = None
         self._voucher_status = None
         self._voucher_type = None
+        self._voucher_use_rule_info = None
         self._voucher_use_rule_lite_info = None
 
     @property
@@ -168,6 +170,16 @@ class UserVoucherInfo(object):
     def voucher_type(self, value):
         self._voucher_type = value
     @property
+    def voucher_use_rule_info(self):
+        return self._voucher_use_rule_info
+
+    @voucher_use_rule_info.setter
+    def voucher_use_rule_info(self, value):
+        if isinstance(value, VoucherUseRuleInfo):
+            self._voucher_use_rule_info = value
+        else:
+            self._voucher_use_rule_info = VoucherUseRuleInfo.from_alipay_dict(value)
+    @property
     def voucher_use_rule_lite_info(self):
         return self._voucher_use_rule_lite_info
 
@@ -261,6 +273,11 @@ class UserVoucherInfo(object):
                 params['voucher_type'] = self.voucher_type.to_alipay_dict()
             else:
                 params['voucher_type'] = self.voucher_type
+        if self.voucher_use_rule_info:
+            if hasattr(self.voucher_use_rule_info, 'to_alipay_dict'):
+                params['voucher_use_rule_info'] = self.voucher_use_rule_info.to_alipay_dict()
+            else:
+                params['voucher_use_rule_info'] = self.voucher_use_rule_info
         if self.voucher_use_rule_lite_info:
             if hasattr(self.voucher_use_rule_lite_info, 'to_alipay_dict'):
                 params['voucher_use_rule_lite_info'] = self.voucher_use_rule_lite_info.to_alipay_dict()
@@ -305,6 +322,8 @@ class UserVoucherInfo(object):
             o.voucher_status = d['voucher_status']
         if 'voucher_type' in d:
             o.voucher_type = d['voucher_type']
+        if 'voucher_use_rule_info' in d:
+            o.voucher_use_rule_info = d['voucher_use_rule_info']
         if 'voucher_use_rule_lite_info' in d:
             o.voucher_use_rule_lite_info = d['voucher_use_rule_lite_info']
         return o

@@ -10,6 +10,7 @@ class AlipayOverseasTravelShopFollowModel(object):
     def __init__(self):
         self._action_type = None
         self._ch_info = None
+        self._open_id = None
         self._shop_id = None
         self._unique_id = None
         self._user_id = None
@@ -29,6 +30,13 @@ class AlipayOverseasTravelShopFollowModel(object):
     @ch_info.setter
     def ch_info(self, value):
         self._ch_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -71,6 +79,11 @@ class AlipayOverseasTravelShopFollowModel(object):
                 params['ch_info'] = self.ch_info.to_alipay_dict()
             else:
                 params['ch_info'] = self.ch_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayOverseasTravelShopFollowModel(object):
             o.action_type = d['action_type']
         if 'ch_info' in d:
             o.ch_info = d['ch_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'unique_id' in d:

@@ -10,11 +10,13 @@ class AlipayEcoActivityRecycleSendModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._buyer_open_id = None
         self._energy_appid = None
         self._item_list = None
         self._out_biz_no = None
         self._out_biz_type = None
         self._seller_id = None
+        self._seller_open_id = None
 
     @property
     def buyer_id(self):
@@ -23,6 +25,13 @@ class AlipayEcoActivityRecycleSendModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def energy_appid(self):
         return self._energy_appid
@@ -64,6 +73,13 @@ class AlipayEcoActivityRecycleSendModel(object):
     @seller_id.setter
     def seller_id(self, value):
         self._seller_id = value
+    @property
+    def seller_open_id(self):
+        return self._seller_open_id
+
+    @seller_open_id.setter
+    def seller_open_id(self, value):
+        self._seller_open_id = value
 
 
     def to_alipay_dict(self):
@@ -73,6 +89,11 @@ class AlipayEcoActivityRecycleSendModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.energy_appid:
             if hasattr(self.energy_appid, 'to_alipay_dict'):
                 params['energy_appid'] = self.energy_appid.to_alipay_dict()
@@ -103,6 +124,11 @@ class AlipayEcoActivityRecycleSendModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.seller_open_id:
+            if hasattr(self.seller_open_id, 'to_alipay_dict'):
+                params['seller_open_id'] = self.seller_open_id.to_alipay_dict()
+            else:
+                params['seller_open_id'] = self.seller_open_id
         return params
 
     @staticmethod
@@ -112,6 +138,8 @@ class AlipayEcoActivityRecycleSendModel(object):
         o = AlipayEcoActivityRecycleSendModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'energy_appid' in d:
             o.energy_appid = d['energy_appid']
         if 'item_list' in d:
@@ -122,6 +150,8 @@ class AlipayEcoActivityRecycleSendModel(object):
             o.out_biz_type = d['out_biz_type']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'seller_open_id' in d:
+            o.seller_open_id = d['seller_open_id']
         return o
 
 

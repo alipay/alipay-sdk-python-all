@@ -8,11 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEnterpriseCreateModel(object):
 
     def __init__(self):
+        self._biz_scene = None
         self._enterprise_alias = None
         self._enterprise_name = None
         self._identity = None
         self._identity_type = None
+        self._out_biz_no = None
 
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def enterprise_alias(self):
         return self._enterprise_alias
@@ -41,10 +50,22 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.enterprise_alias:
             if hasattr(self.enterprise_alias, 'to_alipay_dict'):
                 params['enterprise_alias'] = self.enterprise_alias.to_alipay_dict()
@@ -65,6 +86,11 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         return params
 
     @staticmethod
@@ -72,6 +98,8 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEnterpriseCreateModel()
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'enterprise_alias' in d:
             o.enterprise_alias = d['enterprise_alias']
         if 'enterprise_name' in d:
@@ -80,6 +108,8 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         return o
 
 

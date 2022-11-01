@@ -10,6 +10,7 @@ class AlipayMarketingActivityOrderCreateModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._buyer_open_id = None
         self._ch_info = None
         self._out_order_no = None
         self._promo_trace_info = None
@@ -23,6 +24,13 @@ class AlipayMarketingActivityOrderCreateModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def ch_info(self):
         return self._ch_info
@@ -73,6 +81,11 @@ class AlipayMarketingActivityOrderCreateModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.ch_info:
             if hasattr(self.ch_info, 'to_alipay_dict'):
                 params['ch_info'] = self.ch_info.to_alipay_dict()
@@ -112,6 +125,8 @@ class AlipayMarketingActivityOrderCreateModel(object):
         o = AlipayMarketingActivityOrderCreateModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'ch_info' in d:
             o.ch_info = d['ch_info']
         if 'out_order_no' in d:

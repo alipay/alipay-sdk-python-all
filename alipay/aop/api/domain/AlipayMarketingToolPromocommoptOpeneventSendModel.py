@@ -13,6 +13,7 @@ class AlipayMarketingToolPromocommoptOpeneventSendModel(object):
         self._ext_info = None
         self._latitude = None
         self._longitude = None
+        self._open_id = None
         self._out_biz_no = None
         self._user_id = None
 
@@ -51,6 +52,13 @@ class AlipayMarketingToolPromocommoptOpeneventSendModel(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -94,6 +102,11 @@ class AlipayMarketingToolPromocommoptOpeneventSendModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayMarketingToolPromocommoptOpeneventSendModel(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'user_id' in d:

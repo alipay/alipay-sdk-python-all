@@ -15,6 +15,7 @@ class AlipayCommerceTransportVehicleownerSettlementApplyResponse(AlipayResponse)
         self._buyer_id = None
         self._fund_bill_list = None
         self._gmt_payment = None
+        self._open_id = None
         self._out_trade_no = None
         self._pay_amount = None
         self._plate_no = None
@@ -63,6 +64,13 @@ class AlipayCommerceTransportVehicleownerSettlementApplyResponse(AlipayResponse)
     @gmt_payment.setter
     def gmt_payment(self, value):
         self._gmt_payment = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -118,6 +126,8 @@ class AlipayCommerceTransportVehicleownerSettlementApplyResponse(AlipayResponse)
             self.fund_bill_list = response['fund_bill_list']
         if 'gmt_payment' in response:
             self.gmt_payment = response['gmt_payment']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'pay_amount' in response:

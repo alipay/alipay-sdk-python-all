@@ -12,6 +12,7 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
         super(AlipayPayAppChannelConsultResponse, self).__init__()
         self._channel_info_list = None
         self._pre_consult_id = None
+        self._virtual_alipay_user_id = None
 
     @property
     def channel_info_list(self):
@@ -33,6 +34,13 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
     @pre_consult_id.setter
     def pre_consult_id(self, value):
         self._pre_consult_id = value
+    @property
+    def virtual_alipay_user_id(self):
+        return self._virtual_alipay_user_id
+
+    @virtual_alipay_user_id.setter
+    def virtual_alipay_user_id(self, value):
+        self._virtual_alipay_user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayPayAppChannelConsultResponse, self).parse_response_content(response_content)
@@ -40,3 +48,5 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
             self.channel_info_list = response['channel_info_list']
         if 'pre_consult_id' in response:
             self.pre_consult_id = response['pre_consult_id']
+        if 'virtual_alipay_user_id' in response:
+            self.virtual_alipay_user_id = response['virtual_alipay_user_id']

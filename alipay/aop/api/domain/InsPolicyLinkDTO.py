@@ -11,6 +11,7 @@ class InsPolicyLinkDTO(object):
         self._authed_token = None
         self._authed_url = None
         self._expiration = None
+        self._policy_status = None
         self._product_code = None
         self._product_icon = None
         self._product_name = None
@@ -37,6 +38,13 @@ class InsPolicyLinkDTO(object):
     @expiration.setter
     def expiration(self, value):
         self._expiration = value
+    @property
+    def policy_status(self):
+        return self._policy_status
+
+    @policy_status.setter
+    def policy_status(self, value):
+        self._policy_status = value
     @property
     def product_code(self):
         return self._product_code
@@ -84,6 +92,11 @@ class InsPolicyLinkDTO(object):
                 params['expiration'] = self.expiration.to_alipay_dict()
             else:
                 params['expiration'] = self.expiration
+        if self.policy_status:
+            if hasattr(self.policy_status, 'to_alipay_dict'):
+                params['policy_status'] = self.policy_status.to_alipay_dict()
+            else:
+                params['policy_status'] = self.policy_status
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -117,6 +130,8 @@ class InsPolicyLinkDTO(object):
             o.authed_url = d['authed_url']
         if 'expiration' in d:
             o.expiration = d['expiration']
+        if 'policy_status' in d:
+            o.policy_status = d['policy_status']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'product_icon' in d:

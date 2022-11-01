@@ -13,6 +13,7 @@ class SinglePayDetail(object):
         self._create_time = None
         self._modified_time = None
         self._pay_url = None
+        self._receive_open_id = None
         self._receive_user_id = None
         self._transfer_order_no = None
         self._transfer_out_order_no = None
@@ -52,6 +53,13 @@ class SinglePayDetail(object):
     @pay_url.setter
     def pay_url(self, value):
         self._pay_url = value
+    @property
+    def receive_open_id(self):
+        return self._receive_open_id
+
+    @receive_open_id.setter
+    def receive_open_id(self, value):
+        self._receive_open_id = value
     @property
     def receive_user_id(self):
         return self._receive_user_id
@@ -102,6 +110,11 @@ class SinglePayDetail(object):
                 params['pay_url'] = self.pay_url.to_alipay_dict()
             else:
                 params['pay_url'] = self.pay_url
+        if self.receive_open_id:
+            if hasattr(self.receive_open_id, 'to_alipay_dict'):
+                params['receive_open_id'] = self.receive_open_id.to_alipay_dict()
+            else:
+                params['receive_open_id'] = self.receive_open_id
         if self.receive_user_id:
             if hasattr(self.receive_user_id, 'to_alipay_dict'):
                 params['receive_user_id'] = self.receive_user_id.to_alipay_dict()
@@ -134,6 +147,8 @@ class SinglePayDetail(object):
             o.modified_time = d['modified_time']
         if 'pay_url' in d:
             o.pay_url = d['pay_url']
+        if 'receive_open_id' in d:
+            o.receive_open_id = d['receive_open_id']
         if 'receive_user_id' in d:
             o.receive_user_id = d['receive_user_id']
         if 'transfer_order_no' in d:

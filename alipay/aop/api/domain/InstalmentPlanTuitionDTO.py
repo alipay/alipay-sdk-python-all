@@ -12,6 +12,7 @@ class InstalmentPlanTuitionDTO(object):
         self._biz_time = None
         self._order_id = None
         self._partner_id = None
+        self._plan_open_id = None
         self._schedule_time = None
         self._serial_no = None
         self._smid = None
@@ -47,6 +48,13 @@ class InstalmentPlanTuitionDTO(object):
     @partner_id.setter
     def partner_id(self, value):
         self._partner_id = value
+    @property
+    def plan_open_id(self):
+        return self._plan_open_id
+
+    @plan_open_id.setter
+    def plan_open_id(self, value):
+        self._plan_open_id = value
     @property
     def schedule_time(self):
         return self._schedule_time
@@ -113,6 +121,11 @@ class InstalmentPlanTuitionDTO(object):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.plan_open_id:
+            if hasattr(self.plan_open_id, 'to_alipay_dict'):
+                params['plan_open_id'] = self.plan_open_id.to_alipay_dict()
+            else:
+                params['plan_open_id'] = self.plan_open_id
         if self.schedule_time:
             if hasattr(self.schedule_time, 'to_alipay_dict'):
                 params['schedule_time'] = self.schedule_time.to_alipay_dict()
@@ -158,6 +171,8 @@ class InstalmentPlanTuitionDTO(object):
             o.order_id = d['order_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'plan_open_id' in d:
+            o.plan_open_id = d['plan_open_id']
         if 'schedule_time' in d:
             o.schedule_time = d['schedule_time']
         if 'serial_no' in d:
