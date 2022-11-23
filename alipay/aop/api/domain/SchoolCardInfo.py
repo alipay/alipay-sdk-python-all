@@ -15,6 +15,7 @@ class SchoolCardInfo(object):
         self._create_time = None
         self._display_code_type = None
         self._name = None
+        self._open_id = None
         self._physical_card_number = None
         self._school_id = None
         self._school_name = None
@@ -72,6 +73,13 @@ class SchoolCardInfo(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def physical_card_number(self):
         return self._physical_card_number
@@ -160,6 +168,11 @@ class SchoolCardInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.physical_card_number:
             if hasattr(self.physical_card_number, 'to_alipay_dict'):
                 params['physical_card_number'] = self.physical_card_number.to_alipay_dict()
@@ -216,6 +229,8 @@ class SchoolCardInfo(object):
             o.display_code_type = d['display_code_type']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'physical_card_number' in d:
             o.physical_card_number = d['physical_card_number']
         if 'school_id' in d:

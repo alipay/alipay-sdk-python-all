@@ -13,6 +13,7 @@ class ZhimaCustomerJobworthJobdataAddModel(object):
         self._cert_type = None
         self._conn_key = None
         self._job_data_list = None
+        self._open_id = None
         self._user_id = None
         self._user_name = None
 
@@ -50,6 +51,13 @@ class ZhimaCustomerJobworthJobdataAddModel(object):
                     self._job_data_list.append(i)
                 else:
                     self._job_data_list.append(JobWorthJobdata.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -93,6 +101,11 @@ class ZhimaCustomerJobworthJobdataAddModel(object):
                 params['job_data_list'] = self.job_data_list.to_alipay_dict()
             else:
                 params['job_data_list'] = self.job_data_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -118,6 +131,8 @@ class ZhimaCustomerJobworthJobdataAddModel(object):
             o.conn_key = d['conn_key']
         if 'job_data_list' in d:
             o.job_data_list = d['job_data_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

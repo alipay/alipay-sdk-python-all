@@ -10,6 +10,7 @@ class AlipayCommerceEducateFacepayApplyResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceEducateFacepayApplyResponse, self).__init__()
         self._apply_token = None
+        self._face_open_id = None
         self._face_uid = None
         self._school_stdcode = None
 
@@ -20,6 +21,13 @@ class AlipayCommerceEducateFacepayApplyResponse(AlipayResponse):
     @apply_token.setter
     def apply_token(self, value):
         self._apply_token = value
+    @property
+    def face_open_id(self):
+        return self._face_open_id
+
+    @face_open_id.setter
+    def face_open_id(self, value):
+        self._face_open_id = value
     @property
     def face_uid(self):
         return self._face_uid
@@ -39,6 +47,8 @@ class AlipayCommerceEducateFacepayApplyResponse(AlipayResponse):
         response = super(AlipayCommerceEducateFacepayApplyResponse, self).parse_response_content(response_content)
         if 'apply_token' in response:
             self.apply_token = response['apply_token']
+        if 'face_open_id' in response:
+            self.face_open_id = response['face_open_id']
         if 'face_uid' in response:
             self.face_uid = response['face_uid']
         if 'school_stdcode' in response:

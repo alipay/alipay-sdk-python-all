@@ -11,6 +11,7 @@ class IssueQuotaCheckInfo(object):
         self._issue_quota = None
         self._message = None
         self._owner_id = None
+        self._owner_open_id = None
         self._owner_type = None
         self._result = None
         self._user_name = None
@@ -36,6 +37,13 @@ class IssueQuotaCheckInfo(object):
     @owner_id.setter
     def owner_id(self, value):
         self._owner_id = value
+    @property
+    def owner_open_id(self):
+        return self._owner_open_id
+
+    @owner_open_id.setter
+    def owner_open_id(self, value):
+        self._owner_open_id = value
     @property
     def owner_type(self):
         return self._owner_type
@@ -76,6 +84,11 @@ class IssueQuotaCheckInfo(object):
                 params['owner_id'] = self.owner_id.to_alipay_dict()
             else:
                 params['owner_id'] = self.owner_id
+        if self.owner_open_id:
+            if hasattr(self.owner_open_id, 'to_alipay_dict'):
+                params['owner_open_id'] = self.owner_open_id.to_alipay_dict()
+            else:
+                params['owner_open_id'] = self.owner_open_id
         if self.owner_type:
             if hasattr(self.owner_type, 'to_alipay_dict'):
                 params['owner_type'] = self.owner_type.to_alipay_dict()
@@ -104,6 +117,8 @@ class IssueQuotaCheckInfo(object):
             o.message = d['message']
         if 'owner_id' in d:
             o.owner_id = d['owner_id']
+        if 'owner_open_id' in d:
+            o.owner_open_id = d['owner_open_id']
         if 'owner_type' in d:
             o.owner_type = d['owner_type']
         if 'result' in d:

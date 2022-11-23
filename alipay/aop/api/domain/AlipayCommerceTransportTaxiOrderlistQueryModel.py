@@ -9,6 +9,7 @@ class AlipayCommerceTransportTaxiOrderlistQueryModel(object):
 
     def __init__(self):
         self._end_time = None
+        self._passenger_open_id = None
         self._passenger_user_id = None
         self._start_time = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceTransportTaxiOrderlistQueryModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def passenger_open_id(self):
+        return self._passenger_open_id
+
+    @passenger_open_id.setter
+    def passenger_open_id(self, value):
+        self._passenger_open_id = value
     @property
     def passenger_user_id(self):
         return self._passenger_user_id
@@ -42,6 +50,11 @@ class AlipayCommerceTransportTaxiOrderlistQueryModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.passenger_open_id:
+            if hasattr(self.passenger_open_id, 'to_alipay_dict'):
+                params['passenger_open_id'] = self.passenger_open_id.to_alipay_dict()
+            else:
+                params['passenger_open_id'] = self.passenger_open_id
         if self.passenger_user_id:
             if hasattr(self.passenger_user_id, 'to_alipay_dict'):
                 params['passenger_user_id'] = self.passenger_user_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayCommerceTransportTaxiOrderlistQueryModel(object):
         o = AlipayCommerceTransportTaxiOrderlistQueryModel()
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'passenger_open_id' in d:
+            o.passenger_open_id = d['passenger_open_id']
         if 'passenger_user_id' in d:
             o.passenger_user_id = d['passenger_user_id']
         if 'start_time' in d:

@@ -11,6 +11,7 @@ class AlipayEbppInvoiceAuthUnsignModel(object):
         self._authorization_type = None
         self._extend_fields = None
         self._m_short_name = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayEbppInvoiceAuthUnsignModel(object):
     @m_short_name.setter
     def m_short_name(self, value):
         self._m_short_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayEbppInvoiceAuthUnsignModel(object):
                 params['m_short_name'] = self.m_short_name.to_alipay_dict()
             else:
                 params['m_short_name'] = self.m_short_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayEbppInvoiceAuthUnsignModel(object):
             o.extend_fields = d['extend_fields']
         if 'm_short_name' in d:
             o.m_short_name = d['m_short_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

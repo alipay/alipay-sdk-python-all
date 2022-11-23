@@ -13,6 +13,7 @@ class StdPublicBindAccount(object):
         self._bind_account_no = None
         self._display_name = None
         self._from_user_id = None
+        self._open_id = None
         self._real_name = None
 
     @property
@@ -51,6 +52,13 @@ class StdPublicBindAccount(object):
     def from_user_id(self, value):
         self._from_user_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def real_name(self):
         return self._real_name
 
@@ -86,6 +94,11 @@ class StdPublicBindAccount(object):
                 params['from_user_id'] = self.from_user_id.to_alipay_dict()
             else:
                 params['from_user_id'] = self.from_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.real_name:
             if hasattr(self.real_name, 'to_alipay_dict'):
                 params['real_name'] = self.real_name.to_alipay_dict()
@@ -108,6 +121,8 @@ class StdPublicBindAccount(object):
             o.display_name = d['display_name']
         if 'from_user_id' in d:
             o.from_user_id = d['from_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'real_name' in d:
             o.real_name = d['real_name']
         return o

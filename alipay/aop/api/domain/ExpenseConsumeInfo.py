@@ -18,6 +18,7 @@ class ExpenseConsumeInfo(object):
         self._consume_date = None
         self._consume_title = None
         self._employee_id = None
+        self._employee_open_id = None
         self._merchant_id = None
         self._mshop_id = None
         self._open_model = None
@@ -105,6 +106,13 @@ class ExpenseConsumeInfo(object):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def employee_open_id(self):
+        return self._employee_open_id
+
+    @employee_open_id.setter
+    def employee_open_id(self, value):
+        self._employee_open_id = value
     @property
     def merchant_id(self):
         return self._merchant_id
@@ -271,6 +279,11 @@ class ExpenseConsumeInfo(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.employee_open_id:
+            if hasattr(self.employee_open_id, 'to_alipay_dict'):
+                params['employee_open_id'] = self.employee_open_id.to_alipay_dict()
+            else:
+                params['employee_open_id'] = self.employee_open_id
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
@@ -378,6 +391,8 @@ class ExpenseConsumeInfo(object):
             o.consume_title = d['consume_title']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'employee_open_id' in d:
+            o.employee_open_id = d['employee_open_id']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
         if 'mshop_id' in d:

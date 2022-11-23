@@ -11,6 +11,7 @@ class AlipayEcoMycarVehicleServicenotifySendModel(object):
     def __init__(self):
         self._merchant_status_code = None
         self._merchant_status_desc = None
+        self._open_id = None
         self._service_operate_timestamp = None
         self._service_status = None
         self._service_type = None
@@ -34,6 +35,13 @@ class AlipayEcoMycarVehicleServicenotifySendModel(object):
     @merchant_status_desc.setter
     def merchant_status_desc(self, value):
         self._merchant_status_desc = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def service_operate_timestamp(self):
         return self._service_operate_timestamp
@@ -107,6 +115,11 @@ class AlipayEcoMycarVehicleServicenotifySendModel(object):
                 params['merchant_status_desc'] = self.merchant_status_desc.to_alipay_dict()
             else:
                 params['merchant_status_desc'] = self.merchant_status_desc
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.service_operate_timestamp:
             if hasattr(self.service_operate_timestamp, 'to_alipay_dict'):
                 params['service_operate_timestamp'] = self.service_operate_timestamp.to_alipay_dict()
@@ -158,6 +171,8 @@ class AlipayEcoMycarVehicleServicenotifySendModel(object):
             o.merchant_status_code = d['merchant_status_code']
         if 'merchant_status_desc' in d:
             o.merchant_status_desc = d['merchant_status_desc']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'service_operate_timestamp' in d:
             o.service_operate_timestamp = d['service_operate_timestamp']
         if 'service_status' in d:

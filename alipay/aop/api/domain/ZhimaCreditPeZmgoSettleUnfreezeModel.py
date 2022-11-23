@@ -10,6 +10,7 @@ class ZhimaCreditPeZmgoSettleUnfreezeModel(object):
 
     def __init__(self):
         self._agreement_id = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._biz_time = None
         self._order_title = None
@@ -25,6 +26,13 @@ class ZhimaCreditPeZmgoSettleUnfreezeModel(object):
     @agreement_id.setter
     def agreement_id(self, value):
         self._agreement_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -86,6 +94,11 @@ class ZhimaCreditPeZmgoSettleUnfreezeModel(object):
                 params['agreement_id'] = self.agreement_id.to_alipay_dict()
             else:
                 params['agreement_id'] = self.agreement_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -130,6 +143,8 @@ class ZhimaCreditPeZmgoSettleUnfreezeModel(object):
         o = ZhimaCreditPeZmgoSettleUnfreezeModel()
         if 'agreement_id' in d:
             o.agreement_id = d['agreement_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'biz_time' in d:

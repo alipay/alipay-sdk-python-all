@@ -11,6 +11,8 @@ class AlipayOpenPublicFollowBatchqueryResponse(AlipayResponse):
         super(AlipayOpenPublicFollowBatchqueryResponse, self).__init__()
         self._count = None
         self._next_user_id = None
+        self._open_id = None
+        self._open_id_list = None
         self._user_id_list = None
 
     @property
@@ -28,6 +30,23 @@ class AlipayOpenPublicFollowBatchqueryResponse(AlipayResponse):
     def next_user_id(self, value):
         self._next_user_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def open_id_list(self):
+        return self._open_id_list
+
+    @open_id_list.setter
+    def open_id_list(self, value):
+        if isinstance(value, list):
+            self._open_id_list = list()
+            for i in value:
+                self._open_id_list.append(i)
+    @property
     def user_id_list(self):
         return self._user_id_list
 
@@ -44,5 +63,9 @@ class AlipayOpenPublicFollowBatchqueryResponse(AlipayResponse):
             self.count = response['count']
         if 'next_user_id' in response:
             self.next_user_id = response['next_user_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
+        if 'open_id_list' in response:
+            self.open_id_list = response['open_id_list']
         if 'user_id_list' in response:
             self.user_id_list = response['user_id_list']

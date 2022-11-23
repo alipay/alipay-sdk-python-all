@@ -10,6 +10,7 @@ class AlipayEbppPdeductBillPayStatusResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppPdeductBillPayStatusResponse, self).__init__()
         self._agreement_id = None
+        self._open_id = None
         self._order_no = None
         self._order_result_code = None
         self._order_result_msg = None
@@ -23,6 +24,13 @@ class AlipayEbppPdeductBillPayStatusResponse(AlipayResponse):
     @agreement_id.setter
     def agreement_id(self, value):
         self._agreement_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -63,6 +71,8 @@ class AlipayEbppPdeductBillPayStatusResponse(AlipayResponse):
         response = super(AlipayEbppPdeductBillPayStatusResponse, self).parse_response_content(response_content)
         if 'agreement_id' in response:
             self.agreement_id = response['agreement_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'order_result_code' in response:

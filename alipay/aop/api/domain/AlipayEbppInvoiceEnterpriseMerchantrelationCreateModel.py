@@ -11,6 +11,7 @@ class AlipayEbppInvoiceEnterpriseMerchantrelationCreateModel(object):
     def __init__(self):
         self._account_id = None
         self._agreement_no = None
+        self._enterprise_id = None
         self._operator_id = None
         self._shop_info = None
         self._trade_no = None
@@ -29,6 +30,13 @@ class AlipayEbppInvoiceEnterpriseMerchantrelationCreateModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def operator_id(self):
         return self._operator_id
@@ -67,6 +75,11 @@ class AlipayEbppInvoiceEnterpriseMerchantrelationCreateModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayEbppInvoiceEnterpriseMerchantrelationCreateModel(object):
             o.account_id = d['account_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'shop_info' in d:

@@ -11,6 +11,7 @@ class AlipayCommerceTransportTaxiDriverinfoModifyModel(object):
     def __init__(self):
         self._biz_no = None
         self._driver_car_info = None
+        self._driver_open_id = None
         self._driver_user_id = None
         self._request_time = None
 
@@ -31,6 +32,13 @@ class AlipayCommerceTransportTaxiDriverinfoModifyModel(object):
             self._driver_car_info = value
         else:
             self._driver_car_info = DriverCarInfo.from_alipay_dict(value)
+    @property
+    def driver_open_id(self):
+        return self._driver_open_id
+
+    @driver_open_id.setter
+    def driver_open_id(self, value):
+        self._driver_open_id = value
     @property
     def driver_user_id(self):
         return self._driver_user_id
@@ -59,6 +67,11 @@ class AlipayCommerceTransportTaxiDriverinfoModifyModel(object):
                 params['driver_car_info'] = self.driver_car_info.to_alipay_dict()
             else:
                 params['driver_car_info'] = self.driver_car_info
+        if self.driver_open_id:
+            if hasattr(self.driver_open_id, 'to_alipay_dict'):
+                params['driver_open_id'] = self.driver_open_id.to_alipay_dict()
+            else:
+                params['driver_open_id'] = self.driver_open_id
         if self.driver_user_id:
             if hasattr(self.driver_user_id, 'to_alipay_dict'):
                 params['driver_user_id'] = self.driver_user_id.to_alipay_dict()
@@ -80,6 +93,8 @@ class AlipayCommerceTransportTaxiDriverinfoModifyModel(object):
             o.biz_no = d['biz_no']
         if 'driver_car_info' in d:
             o.driver_car_info = d['driver_car_info']
+        if 'driver_open_id' in d:
+            o.driver_open_id = d['driver_open_id']
         if 'driver_user_id' in d:
             o.driver_user_id = d['driver_user_id']
         if 'request_time' in d:

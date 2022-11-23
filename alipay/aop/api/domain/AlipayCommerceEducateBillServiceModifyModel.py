@@ -10,6 +10,7 @@ class AlipayCommerceEducateBillServiceModifyModel(object):
 
     def __init__(self):
         self._isv_order_no = None
+        self._open_id = None
         self._order_status = None
         self._refund_info = None
         self._source = None
@@ -23,6 +24,13 @@ class AlipayCommerceEducateBillServiceModifyModel(object):
     @isv_order_no.setter
     def isv_order_no(self, value):
         self._isv_order_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -70,6 +78,11 @@ class AlipayCommerceEducateBillServiceModifyModel(object):
                 params['isv_order_no'] = self.isv_order_no.to_alipay_dict()
             else:
                 params['isv_order_no'] = self.isv_order_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommerceEducateBillServiceModifyModel(object):
         o = AlipayCommerceEducateBillServiceModifyModel()
         if 'isv_order_no' in d:
             o.isv_order_no = d['isv_order_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'refund_info' in d:

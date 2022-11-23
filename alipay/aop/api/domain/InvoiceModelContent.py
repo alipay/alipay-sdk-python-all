@@ -26,6 +26,7 @@ class InvoiceModelContent(object):
         self._invoice_operator = None
         self._invoice_title = None
         self._invoice_type = None
+        self._open_id = None
         self._original_blue_invoice_code = None
         self._original_blue_invoice_no = None
         self._out_biz_no = None
@@ -162,6 +163,13 @@ class InvoiceModelContent(object):
     @invoice_type.setter
     def invoice_type(self, value):
         self._invoice_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def original_blue_invoice_code(self):
         return self._original_blue_invoice_code
@@ -349,6 +357,11 @@ class InvoiceModelContent(object):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
             else:
                 params['invoice_type'] = self.invoice_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.original_blue_invoice_code:
             if hasattr(self.original_blue_invoice_code, 'to_alipay_dict'):
                 params['original_blue_invoice_code'] = self.original_blue_invoice_code.to_alipay_dict()
@@ -458,6 +471,8 @@ class InvoiceModelContent(object):
             o.invoice_title = d['invoice_title']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'original_blue_invoice_code' in d:
             o.original_blue_invoice_code = d['original_blue_invoice_code']
         if 'original_blue_invoice_no' in d:

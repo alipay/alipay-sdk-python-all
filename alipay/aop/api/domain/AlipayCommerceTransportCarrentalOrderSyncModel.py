@@ -13,6 +13,7 @@ class AlipayCommerceTransportCarrentalOrderSyncModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._buyer_open_id = None
         self._car_rental_info = None
         self._discount_amount = None
         self._goods_info = None
@@ -40,6 +41,13 @@ class AlipayCommerceTransportCarrentalOrderSyncModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def car_rental_info(self):
         return self._car_rental_info
@@ -197,6 +205,11 @@ class AlipayCommerceTransportCarrentalOrderSyncModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.car_rental_info:
             if hasattr(self.car_rental_info, 'to_alipay_dict'):
                 params['car_rental_info'] = self.car_rental_info.to_alipay_dict()
@@ -306,6 +319,8 @@ class AlipayCommerceTransportCarrentalOrderSyncModel(object):
         o = AlipayCommerceTransportCarrentalOrderSyncModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'car_rental_info' in d:
             o.car_rental_info = d['car_rental_info']
         if 'discount_amount' in d:

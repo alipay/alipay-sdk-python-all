@@ -28,6 +28,7 @@ class AlipayEcoEduKtBillingSyncModel(object):
         self._order_status = None
         self._pay_amount = None
         self._pay_user_id = None
+        self._pay_user_open_id = None
         self._province = None
         self._school_code = None
         self._school_external_id = None
@@ -175,6 +176,13 @@ class AlipayEcoEduKtBillingSyncModel(object):
     @pay_user_id.setter
     def pay_user_id(self, value):
         self._pay_user_id = value
+    @property
+    def pay_user_open_id(self):
+        return self._pay_user_open_id
+
+    @pay_user_open_id.setter
+    def pay_user_open_id(self, value):
+        self._pay_user_open_id = value
     @property
     def province(self):
         return self._province
@@ -398,6 +406,11 @@ class AlipayEcoEduKtBillingSyncModel(object):
                 params['pay_user_id'] = self.pay_user_id.to_alipay_dict()
             else:
                 params['pay_user_id'] = self.pay_user_id
+        if self.pay_user_open_id:
+            if hasattr(self.pay_user_open_id, 'to_alipay_dict'):
+                params['pay_user_open_id'] = self.pay_user_open_id.to_alipay_dict()
+            else:
+                params['pay_user_open_id'] = self.pay_user_open_id
         if self.province:
             if hasattr(self.province, 'to_alipay_dict'):
                 params['province'] = self.province.to_alipay_dict()
@@ -529,6 +542,8 @@ class AlipayEcoEduKtBillingSyncModel(object):
             o.pay_amount = d['pay_amount']
         if 'pay_user_id' in d:
             o.pay_user_id = d['pay_user_id']
+        if 'pay_user_open_id' in d:
+            o.pay_user_open_id = d['pay_user_open_id']
         if 'province' in d:
             o.province = d['province']
         if 'school_code' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceOperationUserPointExchangeModel(object):
         self._biz_time = None
         self._item_id = None
         self._item_name = None
+        self._open_id = None
         self._point = None
         self._request_id = None
         self._scene_code = None
@@ -46,6 +47,13 @@ class AlipayCommerceOperationUserPointExchangeModel(object):
     @item_name.setter
     def item_name(self, value):
         self._item_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def point(self):
         return self._point
@@ -105,6 +113,11 @@ class AlipayCommerceOperationUserPointExchangeModel(object):
                 params['item_name'] = self.item_name.to_alipay_dict()
             else:
                 params['item_name'] = self.item_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.point:
             if hasattr(self.point, 'to_alipay_dict'):
                 params['point'] = self.point.to_alipay_dict()
@@ -145,6 +158,8 @@ class AlipayCommerceOperationUserPointExchangeModel(object):
             o.item_id = d['item_id']
         if 'item_name' in d:
             o.item_name = d['item_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'point' in d:
             o.point = d['point']
         if 'request_id' in d:

@@ -11,6 +11,7 @@ class AlipayEbppInstserviceTokenCreateModel(object):
         self._agent_channel = None
         self._agent_code = None
         self._bill_key = None
+        self._bill_type = None
         self._biz_scene = None
         self._biz_type = None
         self._deduct_amount = None
@@ -45,6 +46,13 @@ class AlipayEbppInstserviceTokenCreateModel(object):
     @bill_key.setter
     def bill_key(self, value):
         self._bill_key = value
+    @property
+    def bill_type(self):
+        return self._bill_type
+
+    @bill_type.setter
+    def bill_type(self, value):
+        self._bill_type = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -148,6 +156,11 @@ class AlipayEbppInstserviceTokenCreateModel(object):
                 params['bill_key'] = self.bill_key.to_alipay_dict()
             else:
                 params['bill_key'] = self.bill_key
+        if self.bill_type:
+            if hasattr(self.bill_type, 'to_alipay_dict'):
+                params['bill_type'] = self.bill_type.to_alipay_dict()
+            else:
+                params['bill_type'] = self.bill_type
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -221,6 +234,8 @@ class AlipayEbppInstserviceTokenCreateModel(object):
             o.agent_code = d['agent_code']
         if 'bill_key' in d:
             o.bill_key = d['bill_key']
+        if 'bill_type' in d:
+            o.bill_type = d['bill_type']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'biz_type' in d:

@@ -11,6 +11,7 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
         self._biz_scene = None
         self._end_date = None
         self._enterprise_id = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._start_date = None
@@ -37,6 +38,13 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -84,6 +92,11 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
             o.end_date = d['end_date']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

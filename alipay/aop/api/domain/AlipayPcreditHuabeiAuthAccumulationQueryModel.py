@@ -10,6 +10,7 @@ class AlipayPcreditHuabeiAuthAccumulationQueryModel(object):
     def __init__(self):
         self._agreement_no = None
         self._alipay_user_id = None
+        self._open_id = None
         self._period = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayPcreditHuabeiAuthAccumulationQueryModel(object):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def period(self):
         return self._period
@@ -47,6 +55,11 @@ class AlipayPcreditHuabeiAuthAccumulationQueryModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayPcreditHuabeiAuthAccumulationQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'period' in d:
             o.period = d['period']
         return o

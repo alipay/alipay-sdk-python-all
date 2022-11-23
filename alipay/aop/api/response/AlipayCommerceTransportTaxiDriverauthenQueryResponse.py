@@ -11,6 +11,7 @@ class AlipayCommerceTransportTaxiDriverauthenQueryResponse(AlipayResponse):
         super(AlipayCommerceTransportTaxiDriverauthenQueryResponse, self).__init__()
         self._bind_status = None
         self._driver_id = None
+        self._driver_open_id = None
         self._driver_user_id = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayCommerceTransportTaxiDriverauthenQueryResponse(AlipayResponse):
     def driver_id(self, value):
         self._driver_id = value
     @property
+    def driver_open_id(self):
+        return self._driver_open_id
+
+    @driver_open_id.setter
+    def driver_open_id(self, value):
+        self._driver_open_id = value
+    @property
     def driver_user_id(self):
         return self._driver_user_id
 
@@ -41,5 +49,7 @@ class AlipayCommerceTransportTaxiDriverauthenQueryResponse(AlipayResponse):
             self.bind_status = response['bind_status']
         if 'driver_id' in response:
             self.driver_id = response['driver_id']
+        if 'driver_open_id' in response:
+            self.driver_open_id = response['driver_open_id']
         if 'driver_user_id' in response:
             self.driver_user_id = response['driver_user_id']

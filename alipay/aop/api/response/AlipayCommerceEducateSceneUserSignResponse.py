@@ -9,8 +9,16 @@ class AlipayCommerceEducateSceneUserSignResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEducateSceneUserSignResponse, self).__init__()
+        self._face_open_id = None
         self._face_user_id = None
 
+    @property
+    def face_open_id(self):
+        return self._face_open_id
+
+    @face_open_id.setter
+    def face_open_id(self, value):
+        self._face_open_id = value
     @property
     def face_user_id(self):
         return self._face_user_id
@@ -21,5 +29,7 @@ class AlipayCommerceEducateSceneUserSignResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEducateSceneUserSignResponse, self).parse_response_content(response_content)
+        if 'face_open_id' in response:
+            self.face_open_id = response['face_open_id']
         if 'face_user_id' in response:
             self.face_user_id = response['face_user_id']

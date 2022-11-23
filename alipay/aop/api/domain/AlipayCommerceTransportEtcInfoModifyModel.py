@@ -11,6 +11,7 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
         self._biz_agreement_no = None
         self._card_no = None
         self._device_no = None
+        self._open_id = None
         self._order_id = None
         self._out_biz_no = None
         self._plate_color = None
@@ -44,6 +45,13 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
     @device_no.setter
     def device_no(self, value):
         self._device_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -140,6 +148,11 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
                 params['device_no'] = self.device_no.to_alipay_dict()
             else:
                 params['device_no'] = self.device_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -208,6 +221,8 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
             o.card_no = d['card_no']
         if 'device_no' in d:
             o.device_no = d['device_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'out_biz_no' in d:

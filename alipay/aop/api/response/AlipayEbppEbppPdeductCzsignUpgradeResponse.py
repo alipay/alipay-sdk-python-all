@@ -11,6 +11,7 @@ class AlipayEbppEbppPdeductCzsignUpgradeResponse(AlipayResponse):
         super(AlipayEbppEbppPdeductCzsignUpgradeResponse, self).__init__()
         self._error_message = None
         self._new_agreement_id = None
+        self._open_id = None
         self._success = None
         self._user_id = None
 
@@ -28,6 +29,13 @@ class AlipayEbppEbppPdeductCzsignUpgradeResponse(AlipayResponse):
     @new_agreement_id.setter
     def new_agreement_id(self, value):
         self._new_agreement_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def success(self):
         return self._success
@@ -49,6 +57,8 @@ class AlipayEbppEbppPdeductCzsignUpgradeResponse(AlipayResponse):
             self.error_message = response['error_message']
         if 'new_agreement_id' in response:
             self.new_agreement_id = response['new_agreement_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'success' in response:
             self.success = response['success']
         if 'user_id' in response:

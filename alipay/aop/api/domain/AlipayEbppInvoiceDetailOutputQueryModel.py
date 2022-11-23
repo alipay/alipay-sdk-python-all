@@ -10,6 +10,7 @@ class AlipayEbppInvoiceDetailOutputQueryModel(object):
     def __init__(self):
         self._invoice_code = None
         self._invoice_no = None
+        self._open_id = None
         self._scene = None
         self._skip_expense_progress_sync = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayEbppInvoiceDetailOutputQueryModel(object):
     @invoice_no.setter
     def invoice_no(self, value):
         self._invoice_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene(self):
         return self._scene
@@ -63,6 +71,11 @@ class AlipayEbppInvoiceDetailOutputQueryModel(object):
                 params['invoice_no'] = self.invoice_no.to_alipay_dict()
             else:
                 params['invoice_no'] = self.invoice_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayEbppInvoiceDetailOutputQueryModel(object):
             o.invoice_code = d['invoice_code']
         if 'invoice_no' in d:
             o.invoice_no = d['invoice_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene' in d:
             o.scene = d['scene']
         if 'skip_expense_progress_sync' in d:

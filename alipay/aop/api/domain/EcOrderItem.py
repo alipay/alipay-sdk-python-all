@@ -14,6 +14,7 @@ class EcOrderItem(object):
         self._enterprise_id = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._open_id = None
         self._order_content = None
         self._order_id = None
         self._order_type = None
@@ -63,6 +64,13 @@ class EcOrderItem(object):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_content(self):
         return self._order_content
@@ -139,6 +147,11 @@ class EcOrderItem(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_content:
             if hasattr(self.order_content, 'to_alipay_dict'):
                 params['order_content'] = self.order_content.to_alipay_dict()
@@ -188,6 +201,8 @@ class EcOrderItem(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_content' in d:
             o.order_content = d['order_content']
         if 'order_id' in d:

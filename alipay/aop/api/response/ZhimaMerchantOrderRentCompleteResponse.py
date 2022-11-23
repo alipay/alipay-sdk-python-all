@@ -10,6 +10,7 @@ class ZhimaMerchantOrderRentCompleteResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaMerchantOrderRentCompleteResponse, self).__init__()
         self._alipay_fund_order_no = None
+        self._open_id = None
         self._order_no = None
         self._user_id = None
 
@@ -20,6 +21,13 @@ class ZhimaMerchantOrderRentCompleteResponse(AlipayResponse):
     @alipay_fund_order_no.setter
     def alipay_fund_order_no(self, value):
         self._alipay_fund_order_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -39,6 +47,8 @@ class ZhimaMerchantOrderRentCompleteResponse(AlipayResponse):
         response = super(ZhimaMerchantOrderRentCompleteResponse, self).parse_response_content(response_content)
         if 'alipay_fund_order_no' in response:
             self.alipay_fund_order_no = response['alipay_fund_order_no']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'user_id' in response:

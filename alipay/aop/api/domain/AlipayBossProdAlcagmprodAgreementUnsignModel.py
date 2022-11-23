@@ -10,6 +10,7 @@ class AlipayBossProdAlcagmprodAgreementUnsignModel(object):
     def __init__(self):
         self._agreement_id_list = None
         self._cancel_date = None
+        self._open_id = None
         self._out_sign_no = None
         self._product_cd = None
         self._request_from = None
@@ -33,6 +34,13 @@ class AlipayBossProdAlcagmprodAgreementUnsignModel(object):
     @cancel_date.setter
     def cancel_date(self, value):
         self._cancel_date = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_sign_no(self):
         return self._out_sign_no
@@ -87,6 +95,11 @@ class AlipayBossProdAlcagmprodAgreementUnsignModel(object):
                 params['cancel_date'] = self.cancel_date.to_alipay_dict()
             else:
                 params['cancel_date'] = self.cancel_date
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_sign_no:
             if hasattr(self.out_sign_no, 'to_alipay_dict'):
                 params['out_sign_no'] = self.out_sign_no.to_alipay_dict()
@@ -123,6 +136,8 @@ class AlipayBossProdAlcagmprodAgreementUnsignModel(object):
             o.agreement_id_list = d['agreement_id_list']
         if 'cancel_date' in d:
             o.cancel_date = d['cancel_date']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_sign_no' in d:
             o.out_sign_no = d['out_sign_no']
         if 'product_cd' in d:

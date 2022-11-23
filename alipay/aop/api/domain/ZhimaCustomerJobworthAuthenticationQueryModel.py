@@ -13,6 +13,7 @@ class ZhimaCustomerJobworthAuthenticationQueryModel(object):
         self._conn_key = None
         self._identity_type = None
         self._once_token = None
+        self._open_id = None
         self._query_type = None
         self._service_id = None
         self._user_id = None
@@ -52,6 +53,13 @@ class ZhimaCustomerJobworthAuthenticationQueryModel(object):
     @once_token.setter
     def once_token(self, value):
         self._once_token = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def query_type(self):
         return self._query_type
@@ -102,6 +110,11 @@ class ZhimaCustomerJobworthAuthenticationQueryModel(object):
                 params['once_token'] = self.once_token.to_alipay_dict()
             else:
                 params['once_token'] = self.once_token
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query_type:
             if hasattr(self.query_type, 'to_alipay_dict'):
                 params['query_type'] = self.query_type.to_alipay_dict()
@@ -134,6 +147,8 @@ class ZhimaCustomerJobworthAuthenticationQueryModel(object):
             o.identity_type = d['identity_type']
         if 'once_token' in d:
             o.once_token = d['once_token']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query_type' in d:
             o.query_type = d['query_type']
         if 'service_id' in d:

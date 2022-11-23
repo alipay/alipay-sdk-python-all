@@ -11,6 +11,7 @@ class AlipayCommerceLogisticsWaybillMinimctSyncModel(object):
     def __init__(self):
         self._logistics_code = None
         self._merchant_ext_info = None
+        self._receiver_mobile = None
         self._waybill_no = None
 
     @property
@@ -33,6 +34,13 @@ class AlipayCommerceLogisticsWaybillMinimctSyncModel(object):
                     self._merchant_ext_info.append(i)
                 else:
                     self._merchant_ext_info.append(ParamExtInfo.from_alipay_dict(i))
+    @property
+    def receiver_mobile(self):
+        return self._receiver_mobile
+
+    @receiver_mobile.setter
+    def receiver_mobile(self, value):
+        self._receiver_mobile = value
     @property
     def waybill_no(self):
         return self._waybill_no
@@ -59,6 +67,11 @@ class AlipayCommerceLogisticsWaybillMinimctSyncModel(object):
                 params['merchant_ext_info'] = self.merchant_ext_info.to_alipay_dict()
             else:
                 params['merchant_ext_info'] = self.merchant_ext_info
+        if self.receiver_mobile:
+            if hasattr(self.receiver_mobile, 'to_alipay_dict'):
+                params['receiver_mobile'] = self.receiver_mobile.to_alipay_dict()
+            else:
+                params['receiver_mobile'] = self.receiver_mobile
         if self.waybill_no:
             if hasattr(self.waybill_no, 'to_alipay_dict'):
                 params['waybill_no'] = self.waybill_no.to_alipay_dict()
@@ -75,6 +88,8 @@ class AlipayCommerceLogisticsWaybillMinimctSyncModel(object):
             o.logistics_code = d['logistics_code']
         if 'merchant_ext_info' in d:
             o.merchant_ext_info = d['merchant_ext_info']
+        if 'receiver_mobile' in d:
+            o.receiver_mobile = d['receiver_mobile']
         if 'waybill_no' in d:
             o.waybill_no = d['waybill_no']
         return o

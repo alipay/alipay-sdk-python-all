@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BkAgentRespInfo import BkAgentRespInfo
+from alipay.aop.api.domain.ChargeInfo import ChargeInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
@@ -19,6 +20,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._bkagent_resp_info = None
         self._business_params = None
         self._buyer_logon_id = None
+        self._buyer_open_id = None
         self._buyer_pay_amount = None
         self._buyer_user_id = None
         self._buyer_user_name = None
@@ -27,6 +29,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._card_balance = None
         self._charge_amount = None
         self._charge_flags = None
+        self._charge_info_list = None
         self._credit_biz_order_id = None
         self._credit_pay_mode = None
         self._discount_amount = None
@@ -101,6 +104,13 @@ class AlipayTradePayResponse(AlipayResponse):
     def buyer_logon_id(self, value):
         self._buyer_logon_id = value
     @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
+    @property
     def buyer_pay_amount(self):
         return self._buyer_pay_amount
 
@@ -156,6 +166,16 @@ class AlipayTradePayResponse(AlipayResponse):
     @charge_flags.setter
     def charge_flags(self, value):
         self._charge_flags = value
+    @property
+    def charge_info_list(self):
+        return self._charge_info_list
+
+    @charge_info_list.setter
+    def charge_info_list(self, value):
+        if isinstance(value, ChargeInfo):
+            self._charge_info_list = value
+        else:
+            self._charge_info_list = ChargeInfo.from_alipay_dict(value)
     @property
     def credit_biz_order_id(self):
         return self._credit_biz_order_id
@@ -375,6 +395,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.business_params = response['business_params']
         if 'buyer_logon_id' in response:
             self.buyer_logon_id = response['buyer_logon_id']
+        if 'buyer_open_id' in response:
+            self.buyer_open_id = response['buyer_open_id']
         if 'buyer_pay_amount' in response:
             self.buyer_pay_amount = response['buyer_pay_amount']
         if 'buyer_user_id' in response:
@@ -391,6 +413,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.charge_amount = response['charge_amount']
         if 'charge_flags' in response:
             self.charge_flags = response['charge_flags']
+        if 'charge_info_list' in response:
+            self.charge_info_list = response['charge_info_list']
         if 'credit_biz_order_id' in response:
             self.credit_biz_order_id = response['credit_biz_order_id']
         if 'credit_pay_mode' in response:

@@ -9,6 +9,7 @@ class ZhimaCreditPeZmgoPreConsultModel(object):
 
     def __init__(self):
         self._alipay_user_id = None
+        self._open_id = None
         self._partner_id = None
         self._phone = None
         self._query_level = None
@@ -21,6 +22,13 @@ class ZhimaCreditPeZmgoPreConsultModel(object):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -58,6 +66,11 @@ class ZhimaCreditPeZmgoPreConsultModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -87,6 +100,8 @@ class ZhimaCreditPeZmgoPreConsultModel(object):
         o = ZhimaCreditPeZmgoPreConsultModel()
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'phone' in d:

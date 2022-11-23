@@ -9,6 +9,7 @@ class AlipayCommerceOperationTimescardRefundApplyModel(object):
 
     def __init__(self):
         self._card_id = None
+        self._open_id = None
         self._scene_code = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceOperationTimescardRefundApplyModel(object):
     @card_id.setter
     def card_id(self, value):
         self._card_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -42,6 +50,11 @@ class AlipayCommerceOperationTimescardRefundApplyModel(object):
                 params['card_id'] = self.card_id.to_alipay_dict()
             else:
                 params['card_id'] = self.card_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayCommerceOperationTimescardRefundApplyModel(object):
         o = AlipayCommerceOperationTimescardRefundApplyModel()
         if 'card_id' in d:
             o.card_id = d['card_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'user_id' in d:

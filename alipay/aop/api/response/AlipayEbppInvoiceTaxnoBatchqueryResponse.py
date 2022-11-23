@@ -11,6 +11,7 @@ class AlipayEbppInvoiceTaxnoBatchqueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppInvoiceTaxnoBatchqueryResponse, self).__init__()
         self._invoice_element_list = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -27,6 +28,13 @@ class AlipayEbppInvoiceTaxnoBatchqueryResponse(AlipayResponse):
                 else:
                     self._invoice_element_list.append(InvoiceElementModel.from_alipay_dict(i))
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -38,5 +46,7 @@ class AlipayEbppInvoiceTaxnoBatchqueryResponse(AlipayResponse):
         response = super(AlipayEbppInvoiceTaxnoBatchqueryResponse, self).parse_response_content(response_content)
         if 'invoice_element_list' in response:
             self.invoice_element_list = response['invoice_element_list']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

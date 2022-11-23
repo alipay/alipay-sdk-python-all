@@ -10,6 +10,7 @@ class AlipayMarketingCampaignCashTriggerModel(object):
     def __init__(self):
         self._crowd_no = None
         self._login_id = None
+        self._open_id = None
         self._order_price = None
         self._out_biz_no = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayMarketingCampaignCashTriggerModel(object):
     @login_id.setter
     def login_id(self, value):
         self._login_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_price(self):
         return self._order_price
@@ -63,6 +71,11 @@ class AlipayMarketingCampaignCashTriggerModel(object):
                 params['login_id'] = self.login_id.to_alipay_dict()
             else:
                 params['login_id'] = self.login_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_price:
             if hasattr(self.order_price, 'to_alipay_dict'):
                 params['order_price'] = self.order_price.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayMarketingCampaignCashTriggerModel(object):
             o.crowd_no = d['crowd_no']
         if 'login_id' in d:
             o.login_id = d['login_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_price' in d:
             o.order_price = d['order_price']
         if 'out_biz_no' in d:

@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class WeatherInfo(object):
 
     def __init__(self):
+        self._addition_info = None
         self._forecast_date = None
         self._precipitation = None
         self._radiation = None
         self._temperature = None
         self._wind_speed = None
 
+    @property
+    def addition_info(self):
+        return self._addition_info
+
+    @addition_info.setter
+    def addition_info(self, value):
+        self._addition_info = value
     @property
     def forecast_date(self):
         return self._forecast_date
@@ -53,6 +61,11 @@ class WeatherInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.addition_info:
+            if hasattr(self.addition_info, 'to_alipay_dict'):
+                params['addition_info'] = self.addition_info.to_alipay_dict()
+            else:
+                params['addition_info'] = self.addition_info
         if self.forecast_date:
             if hasattr(self.forecast_date, 'to_alipay_dict'):
                 params['forecast_date'] = self.forecast_date.to_alipay_dict()
@@ -85,6 +98,8 @@ class WeatherInfo(object):
         if not d:
             return None
         o = WeatherInfo()
+        if 'addition_info' in d:
+            o.addition_info = d['addition_info']
         if 'forecast_date' in d:
             o.forecast_date = d['forecast_date']
         if 'precipitation' in d:

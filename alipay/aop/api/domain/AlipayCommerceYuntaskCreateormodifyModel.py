@@ -17,11 +17,13 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
         self._incentive_mode = None
         self._incentive_rule = None
         self._merchant_pid = None
+        self._operate_open_id = None
         self._operate_user_id = None
         self._organizer_id = None
         self._organizer_name = None
         self._organizer_type = None
         self._plan_info = None
+        self._support_unified_material_code = None
         self._task_desc = None
         self._task_end_time = None
         self._task_name = None
@@ -86,6 +88,13 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
     def merchant_pid(self, value):
         self._merchant_pid = value
     @property
+    def operate_open_id(self):
+        return self._operate_open_id
+
+    @operate_open_id.setter
+    def operate_open_id(self, value):
+        self._operate_open_id = value
+    @property
     def operate_user_id(self):
         return self._operate_user_id
 
@@ -123,6 +132,13 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
             self._plan_info = value
         else:
             self._plan_info = PlanInfo.from_alipay_dict(value)
+    @property
+    def support_unified_material_code(self):
+        return self._support_unified_material_code
+
+    @support_unified_material_code.setter
+    def support_unified_material_code(self, value):
+        self._support_unified_material_code = value
     @property
     def task_desc(self):
         return self._task_desc
@@ -209,6 +225,11 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
             else:
                 params['merchant_pid'] = self.merchant_pid
+        if self.operate_open_id:
+            if hasattr(self.operate_open_id, 'to_alipay_dict'):
+                params['operate_open_id'] = self.operate_open_id.to_alipay_dict()
+            else:
+                params['operate_open_id'] = self.operate_open_id
         if self.operate_user_id:
             if hasattr(self.operate_user_id, 'to_alipay_dict'):
                 params['operate_user_id'] = self.operate_user_id.to_alipay_dict()
@@ -234,6 +255,11 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
                 params['plan_info'] = self.plan_info.to_alipay_dict()
             else:
                 params['plan_info'] = self.plan_info
+        if self.support_unified_material_code:
+            if hasattr(self.support_unified_material_code, 'to_alipay_dict'):
+                params['support_unified_material_code'] = self.support_unified_material_code.to_alipay_dict()
+            else:
+                params['support_unified_material_code'] = self.support_unified_material_code
         if self.task_desc:
             if hasattr(self.task_desc, 'to_alipay_dict'):
                 params['task_desc'] = self.task_desc.to_alipay_dict()
@@ -287,6 +313,8 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
             o.incentive_rule = d['incentive_rule']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
+        if 'operate_open_id' in d:
+            o.operate_open_id = d['operate_open_id']
         if 'operate_user_id' in d:
             o.operate_user_id = d['operate_user_id']
         if 'organizer_id' in d:
@@ -297,6 +325,8 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
             o.organizer_type = d['organizer_type']
         if 'plan_info' in d:
             o.plan_info = d['plan_info']
+        if 'support_unified_material_code' in d:
+            o.support_unified_material_code = d['support_unified_material_code']
         if 'task_desc' in d:
             o.task_desc = d['task_desc']
         if 'task_end_time' in d:

@@ -13,6 +13,7 @@ class AlipayEbppInvoiceApplyModel(object):
         self._apply_from = None
         self._invoice_apply_model = None
         self._m_short_name = None
+        self._open_id = None
         self._sub_m_short_name = None
         self._user_id = None
 
@@ -47,6 +48,13 @@ class AlipayEbppInvoiceApplyModel(object):
     @m_short_name.setter
     def m_short_name(self, value):
         self._m_short_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sub_m_short_name(self):
         return self._sub_m_short_name
@@ -85,6 +93,11 @@ class AlipayEbppInvoiceApplyModel(object):
                 params['m_short_name'] = self.m_short_name.to_alipay_dict()
             else:
                 params['m_short_name'] = self.m_short_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sub_m_short_name:
             if hasattr(self.sub_m_short_name, 'to_alipay_dict'):
                 params['sub_m_short_name'] = self.sub_m_short_name.to_alipay_dict()
@@ -110,6 +123,8 @@ class AlipayEbppInvoiceApplyModel(object):
             o.invoice_apply_model = d['invoice_apply_model']
         if 'm_short_name' in d:
             o.m_short_name = d['m_short_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sub_m_short_name' in d:
             o.sub_m_short_name = d['sub_m_short_name']
         if 'user_id' in d:

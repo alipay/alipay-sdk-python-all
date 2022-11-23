@@ -15,6 +15,7 @@ class AlipayQueryCardModelResult(object):
         self._card_type = None
         self._ext_info = None
         self._last_update_time = None
+        self._open_id = None
         self._status_code = None
         self._status_msg = None
         self._user_auth_info = None
@@ -69,6 +70,13 @@ class AlipayQueryCardModelResult(object):
     @last_update_time.setter
     def last_update_time(self, value):
         self._last_update_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def status_code(self):
         return self._status_code
@@ -136,6 +144,11 @@ class AlipayQueryCardModelResult(object):
                 params['last_update_time'] = self.last_update_time.to_alipay_dict()
             else:
                 params['last_update_time'] = self.last_update_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status_code:
             if hasattr(self.status_code, 'to_alipay_dict'):
                 params['status_code'] = self.status_code.to_alipay_dict()
@@ -177,6 +190,8 @@ class AlipayQueryCardModelResult(object):
             o.ext_info = d['ext_info']
         if 'last_update_time' in d:
             o.last_update_time = d['last_update_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status_code' in d:
             o.status_code = d['status_code']
         if 'status_msg' in d:

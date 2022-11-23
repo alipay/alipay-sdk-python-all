@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.CloudResumeCertificateInfo import CloudResumeCertificateInfo
 from alipay.aop.api.domain.CloudResumeEducationExperience import CloudResumeEducationExperience
+from alipay.aop.api.domain.CloudResumeHeadPic import CloudResumeHeadPic
 from alipay.aop.api.domain.CloudResumePositionIntention import CloudResumePositionIntention
 from alipay.aop.api.domain.CloudResumeSkillInfo import CloudResumeSkillInfo
 from alipay.aop.api.domain.CloudResumeWorkExperience import CloudResumeWorkExperience
@@ -19,6 +20,7 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
         self._education_experiences = None
         self._gender = None
         self._phone = None
+        self._pic_url = None
         self._position_intentions = None
         self._skills = None
         self._user_name = None
@@ -72,6 +74,16 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def pic_url(self):
+        return self._pic_url
+
+    @pic_url.setter
+    def pic_url(self, value):
+        if isinstance(value, CloudResumeHeadPic):
+            self._pic_url = value
+        else:
+            self._pic_url = CloudResumeHeadPic.from_alipay_dict(value)
     @property
     def position_intentions(self):
         return self._position_intentions
@@ -138,6 +150,8 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
             self.gender = response['gender']
         if 'phone' in response:
             self.phone = response['phone']
+        if 'pic_url' in response:
+            self.pic_url = response['pic_url']
         if 'position_intentions' in response:
             self.position_intentions = response['position_intentions']
         if 'skills' in response:

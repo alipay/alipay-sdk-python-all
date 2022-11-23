@@ -18,6 +18,7 @@ class AlipayEcoMessageEntity(object):
         self._industry_type = None
         self._mobile = None
         self._msg_type = None
+        self._open_id = None
         self._target_url = None
         self._uuid = None
 
@@ -92,6 +93,13 @@ class AlipayEcoMessageEntity(object):
     def msg_type(self, value):
         self._msg_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def target_url(self):
         return self._target_url
 
@@ -159,6 +167,11 @@ class AlipayEcoMessageEntity(object):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
             else:
                 params['msg_type'] = self.msg_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.target_url:
             if hasattr(self.target_url, 'to_alipay_dict'):
                 params['target_url'] = self.target_url.to_alipay_dict()
@@ -196,6 +209,8 @@ class AlipayEcoMessageEntity(object):
             o.mobile = d['mobile']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'target_url' in d:
             o.target_url = d['target_url']
         if 'uuid' in d:

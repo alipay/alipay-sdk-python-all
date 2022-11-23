@@ -11,6 +11,7 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
         self._cert_no_code = None
         self._data_type = None
         self._request_id = None
+        self._scene_code = None
         self._telephone_num = None
 
     @property
@@ -34,6 +35,13 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
     @property
     def telephone_num(self):
         return self._telephone_num
@@ -60,6 +68,11 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
         if self.telephone_num:
             if hasattr(self.telephone_num, 'to_alipay_dict'):
                 params['telephone_num'] = self.telephone_num.to_alipay_dict()
@@ -78,6 +91,8 @@ class DatadigitalFincloudFinsaasInsuranceriskGetModel(object):
             o.data_type = d['data_type']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
         if 'telephone_num' in d:
             o.telephone_num = d['telephone_num']
         return o

@@ -13,6 +13,7 @@ class ZhimaCustomerJobworthAdapterQueryModel(object):
         self._cert_no = None
         self._cert_type = None
         self._job_name = None
+        self._open_id = None
         self._user_id = None
         self._user_name = None
 
@@ -47,6 +48,13 @@ class ZhimaCustomerJobworthAdapterQueryModel(object):
     @job_name.setter
     def job_name(self, value):
         self._job_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -85,6 +93,11 @@ class ZhimaCustomerJobworthAdapterQueryModel(object):
                 params['job_name'] = self.job_name.to_alipay_dict()
             else:
                 params['job_name'] = self.job_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -110,6 +123,8 @@ class ZhimaCustomerJobworthAdapterQueryModel(object):
             o.cert_type = d['cert_type']
         if 'job_name' in d:
             o.job_name = d['job_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

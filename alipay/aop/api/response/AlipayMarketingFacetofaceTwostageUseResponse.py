@@ -11,6 +11,7 @@ class AlipayMarketingFacetofaceTwostageUseResponse(AlipayResponse):
         super(AlipayMarketingFacetofaceTwostageUseResponse, self).__init__()
         self._biz_data = None
         self._havana_id = None
+        self._open_id = None
         self._otp_verify = None
         self._user_id = None
 
@@ -28,6 +29,13 @@ class AlipayMarketingFacetofaceTwostageUseResponse(AlipayResponse):
     @havana_id.setter
     def havana_id(self, value):
         self._havana_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def otp_verify(self):
         return self._otp_verify
@@ -49,6 +57,8 @@ class AlipayMarketingFacetofaceTwostageUseResponse(AlipayResponse):
             self.biz_data = response['biz_data']
         if 'havana_id' in response:
             self.havana_id = response['havana_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'otp_verify' in response:
             self.otp_verify = response['otp_verify']
         if 'user_id' in response:

@@ -10,6 +10,7 @@ class ZhimaCreditOrderRepaymentApplyModel(object):
     def __init__(self):
         self._action_type = None
         self._category = None
+        self._open_id = None
         self._order_info = None
         self._out_order_no = None
         self._repay_amount = None
@@ -30,6 +31,13 @@ class ZhimaCreditOrderRepaymentApplyModel(object):
     @category.setter
     def category(self, value):
         self._category = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_info(self):
         return self._order_info
@@ -79,6 +87,11 @@ class ZhimaCreditOrderRepaymentApplyModel(object):
                 params['category'] = self.category.to_alipay_dict()
             else:
                 params['category'] = self.category
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_info:
             if hasattr(self.order_info, 'to_alipay_dict'):
                 params['order_info'] = self.order_info.to_alipay_dict()
@@ -115,6 +128,8 @@ class ZhimaCreditOrderRepaymentApplyModel(object):
             o.action_type = d['action_type']
         if 'category' in d:
             o.category = d['category']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_info' in d:
             o.order_info = d['order_info']
         if 'out_order_no' in d:

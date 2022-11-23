@@ -9,6 +9,7 @@ class AlipayCommerceYuntaskGuidedcodeQueryModel(object):
 
     def __init__(self):
         self._hunter_id = None
+        self._hunter_open_id = None
         self._merchant_pid = None
         self._task_id = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceYuntaskGuidedcodeQueryModel(object):
     @hunter_id.setter
     def hunter_id(self, value):
         self._hunter_id = value
+    @property
+    def hunter_open_id(self):
+        return self._hunter_open_id
+
+    @hunter_open_id.setter
+    def hunter_open_id(self, value):
+        self._hunter_open_id = value
     @property
     def merchant_pid(self):
         return self._merchant_pid
@@ -42,6 +50,11 @@ class AlipayCommerceYuntaskGuidedcodeQueryModel(object):
                 params['hunter_id'] = self.hunter_id.to_alipay_dict()
             else:
                 params['hunter_id'] = self.hunter_id
+        if self.hunter_open_id:
+            if hasattr(self.hunter_open_id, 'to_alipay_dict'):
+                params['hunter_open_id'] = self.hunter_open_id.to_alipay_dict()
+            else:
+                params['hunter_open_id'] = self.hunter_open_id
         if self.merchant_pid:
             if hasattr(self.merchant_pid, 'to_alipay_dict'):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayCommerceYuntaskGuidedcodeQueryModel(object):
         o = AlipayCommerceYuntaskGuidedcodeQueryModel()
         if 'hunter_id' in d:
             o.hunter_id = d['hunter_id']
+        if 'hunter_open_id' in d:
+            o.hunter_open_id = d['hunter_open_id']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
         if 'task_id' in d:

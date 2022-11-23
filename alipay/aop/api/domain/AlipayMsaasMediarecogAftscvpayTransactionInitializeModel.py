@@ -13,6 +13,7 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
         self._device_identify_type = None
         self._goods_infos = None
         self._machine_type = None
+        self._open_id = None
         self._scene = None
         self._terminal_id = None
         self._total_floors = None
@@ -48,6 +49,13 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
     @machine_type.setter
     def machine_type(self, value):
         self._machine_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene(self):
         return self._scene
@@ -127,6 +135,11 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
                 params['machine_type'] = self.machine_type.to_alipay_dict()
             else:
                 params['machine_type'] = self.machine_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -180,6 +193,8 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
             o.goods_infos = d['goods_infos']
         if 'machine_type' in d:
             o.machine_type = d['machine_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene' in d:
             o.scene = d['scene']
         if 'terminal_id' in d:

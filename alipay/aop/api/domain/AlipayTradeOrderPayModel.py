@@ -11,6 +11,7 @@ class AlipayTradeOrderPayModel(object):
     def __init__(self):
         self._advance_payment_type = None
         self._buyer_id = None
+        self._buyer_open_id = None
         self._buyer_pay_detail = None
         self._fulfillment_amount = None
         self._is_async_pay = None
@@ -34,6 +35,13 @@ class AlipayTradeOrderPayModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def buyer_pay_detail(self):
         return self._buyer_pay_detail
@@ -110,6 +118,11 @@ class AlipayTradeOrderPayModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.buyer_pay_detail:
             if isinstance(self.buyer_pay_detail, list):
                 for i in range(0, len(self.buyer_pay_detail)):
@@ -166,6 +179,8 @@ class AlipayTradeOrderPayModel(object):
             o.advance_payment_type = d['advance_payment_type']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'buyer_pay_detail' in d:
             o.buyer_pay_detail = d['buyer_pay_detail']
         if 'fulfillment_amount' in d:

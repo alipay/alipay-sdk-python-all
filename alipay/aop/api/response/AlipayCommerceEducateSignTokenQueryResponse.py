@@ -12,7 +12,9 @@ class AlipayCommerceEducateSignTokenQueryResponse(AlipayResponse):
         self._biz_code = None
         self._cert_no = None
         self._cert_type = None
+        self._open_id = None
         self._parent_logon_id = None
+        self._parent_open_id = None
         self._parent_user_id = None
         self._school_code = None
         self._school_face_pass_status = None
@@ -42,12 +44,26 @@ class AlipayCommerceEducateSignTokenQueryResponse(AlipayResponse):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def parent_logon_id(self):
         return self._parent_logon_id
 
     @parent_logon_id.setter
     def parent_logon_id(self, value):
         self._parent_logon_id = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_user_id(self):
         return self._parent_user_id
@@ -99,8 +115,12 @@ class AlipayCommerceEducateSignTokenQueryResponse(AlipayResponse):
             self.cert_no = response['cert_no']
         if 'cert_type' in response:
             self.cert_type = response['cert_type']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'parent_logon_id' in response:
             self.parent_logon_id = response['parent_logon_id']
+        if 'parent_open_id' in response:
+            self.parent_open_id = response['parent_open_id']
         if 'parent_user_id' in response:
             self.parent_user_id = response['parent_user_id']
         if 'school_code' in response:

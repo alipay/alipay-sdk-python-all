@@ -15,6 +15,7 @@ class AlipaySocialBaseChatMsgSendModel(object):
         self._link = None
         self._push_str = None
         self._receiver_id = None
+        self._receiver_open_id = None
         self._template_code = None
         self._template_data = None
 
@@ -68,6 +69,13 @@ class AlipaySocialBaseChatMsgSendModel(object):
     def receiver_id(self, value):
         self._receiver_id = value
     @property
+    def receiver_open_id(self):
+        return self._receiver_open_id
+
+    @receiver_open_id.setter
+    def receiver_open_id(self, value):
+        self._receiver_open_id = value
+    @property
     def template_code(self):
         return self._template_code
 
@@ -120,6 +128,11 @@ class AlipaySocialBaseChatMsgSendModel(object):
                 params['receiver_id'] = self.receiver_id.to_alipay_dict()
             else:
                 params['receiver_id'] = self.receiver_id
+        if self.receiver_open_id:
+            if hasattr(self.receiver_open_id, 'to_alipay_dict'):
+                params['receiver_open_id'] = self.receiver_open_id.to_alipay_dict()
+            else:
+                params['receiver_open_id'] = self.receiver_open_id
         if self.template_code:
             if hasattr(self.template_code, 'to_alipay_dict'):
                 params['template_code'] = self.template_code.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipaySocialBaseChatMsgSendModel(object):
             o.push_str = d['push_str']
         if 'receiver_id' in d:
             o.receiver_id = d['receiver_id']
+        if 'receiver_open_id' in d:
+            o.receiver_open_id = d['receiver_open_id']
         if 'template_code' in d:
             o.template_code = d['template_code']
         if 'template_data' in d:

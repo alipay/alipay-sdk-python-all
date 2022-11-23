@@ -12,6 +12,7 @@ class PublicBindAccount(object):
         self._app_id = None
         self._bind_account_no = None
         self._display_name = None
+        self._from_alipay_user_id = None
         self._from_user_id = None
         self._real_name = None
 
@@ -43,6 +44,13 @@ class PublicBindAccount(object):
     @display_name.setter
     def display_name(self, value):
         self._display_name = value
+    @property
+    def from_alipay_user_id(self):
+        return self._from_alipay_user_id
+
+    @from_alipay_user_id.setter
+    def from_alipay_user_id(self, value):
+        self._from_alipay_user_id = value
     @property
     def from_user_id(self):
         return self._from_user_id
@@ -81,6 +89,11 @@ class PublicBindAccount(object):
                 params['display_name'] = self.display_name.to_alipay_dict()
             else:
                 params['display_name'] = self.display_name
+        if self.from_alipay_user_id:
+            if hasattr(self.from_alipay_user_id, 'to_alipay_dict'):
+                params['from_alipay_user_id'] = self.from_alipay_user_id.to_alipay_dict()
+            else:
+                params['from_alipay_user_id'] = self.from_alipay_user_id
         if self.from_user_id:
             if hasattr(self.from_user_id, 'to_alipay_dict'):
                 params['from_user_id'] = self.from_user_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class PublicBindAccount(object):
             o.bind_account_no = d['bind_account_no']
         if 'display_name' in d:
             o.display_name = d['display_name']
+        if 'from_alipay_user_id' in d:
+            o.from_alipay_user_id = d['from_alipay_user_id']
         if 'from_user_id' in d:
             o.from_user_id = d['from_user_id']
         if 'real_name' in d:

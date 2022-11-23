@@ -20,6 +20,7 @@ class AlipayEbppPdeductPayRequest(object):
         self._extend_field = None
         self._fine_amount = None
         self._memo = None
+        self._open_id = None
         self._out_order_no = None
         self._pay_amount = None
         self._pid = None
@@ -97,6 +98,13 @@ class AlipayEbppPdeductPayRequest(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -244,6 +252,11 @@ class AlipayEbppPdeductPayRequest(object):
                 params['memo'] = json.dumps(obj=self.memo.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = json.dumps(obj=self.out_order_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

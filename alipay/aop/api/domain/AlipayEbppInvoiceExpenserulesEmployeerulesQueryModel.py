@@ -11,6 +11,7 @@ class AlipayEbppInvoiceExpenserulesEmployeerulesQueryModel(object):
         self._account_id = None
         self._agreement_no = None
         self._employee_id = None
+        self._employee_open_id = None
         self._page_num = None
         self._page_size = None
 
@@ -35,6 +36,13 @@ class AlipayEbppInvoiceExpenserulesEmployeerulesQueryModel(object):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def employee_open_id(self):
+        return self._employee_open_id
+
+    @employee_open_id.setter
+    def employee_open_id(self, value):
+        self._employee_open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -68,6 +76,11 @@ class AlipayEbppInvoiceExpenserulesEmployeerulesQueryModel(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.employee_open_id:
+            if hasattr(self.employee_open_id, 'to_alipay_dict'):
+                params['employee_open_id'] = self.employee_open_id.to_alipay_dict()
+            else:
+                params['employee_open_id'] = self.employee_open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayEbppInvoiceExpenserulesEmployeerulesQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'employee_open_id' in d:
+            o.employee_open_id = d['employee_open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

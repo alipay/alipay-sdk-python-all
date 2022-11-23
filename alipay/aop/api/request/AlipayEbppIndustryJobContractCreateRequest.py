@@ -5,7 +5,8 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
-from alipay.aop.api.domain.ContractSignArea import ContractSignArea
+from alipay.aop.api.domain.ContractCompanyInfo import ContractCompanyInfo
+from alipay.aop.api.domain.ContractUserInfo import ContractUserInfo
 
 
 
@@ -13,17 +14,10 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
-        self._cert_no = None
-        self._company_cert_no = None
-        self._company_name = None
-        self._legal_person_cert_no = None
-        self._legal_person_name = None
-        self._open_id = None
+        self._company_list = None
         self._outer_biz_no = None
-        self._sign_area = None
         self._sign_platform = None
-        self._user_id = None
-        self._user_name = None
+        self._user_list = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -43,47 +37,18 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
         self._biz_model = value
 
     @property
-    def cert_no(self):
-        return self._cert_no
+    def company_list(self):
+        return self._company_list
 
-    @cert_no.setter
-    def cert_no(self, value):
-        self._cert_no = value
-    @property
-    def company_cert_no(self):
-        return self._company_cert_no
-
-    @company_cert_no.setter
-    def company_cert_no(self, value):
-        self._company_cert_no = value
-    @property
-    def company_name(self):
-        return self._company_name
-
-    @company_name.setter
-    def company_name(self, value):
-        self._company_name = value
-    @property
-    def legal_person_cert_no(self):
-        return self._legal_person_cert_no
-
-    @legal_person_cert_no.setter
-    def legal_person_cert_no(self, value):
-        self._legal_person_cert_no = value
-    @property
-    def legal_person_name(self):
-        return self._legal_person_name
-
-    @legal_person_name.setter
-    def legal_person_name(self, value):
-        self._legal_person_name = value
-    @property
-    def open_id(self):
-        return self._open_id
-
-    @open_id.setter
-    def open_id(self, value):
-        self._open_id = value
+    @company_list.setter
+    def company_list(self, value):
+        if isinstance(value, list):
+            self._company_list = list()
+            for i in value:
+                if isinstance(i, ContractCompanyInfo):
+                    self._company_list.append(i)
+                else:
+                    self._company_list.append(ContractCompanyInfo.from_alipay_dict(i))
     @property
     def outer_biz_no(self):
         return self._outer_biz_no
@@ -92,19 +57,6 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
     def outer_biz_no(self, value):
         self._outer_biz_no = value
     @property
-    def sign_area(self):
-        return self._sign_area
-
-    @sign_area.setter
-    def sign_area(self, value):
-        if isinstance(value, list):
-            self._sign_area = list()
-            for i in value:
-                if isinstance(i, ContractSignArea):
-                    self._sign_area.append(i)
-                else:
-                    self._sign_area.append(ContractSignArea.from_alipay_dict(i))
-    @property
     def sign_platform(self):
         return self._sign_platform
 
@@ -112,19 +64,18 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
     def sign_platform(self, value):
         self._sign_platform = value
     @property
-    def user_id(self):
-        return self._user_id
+    def user_list(self):
+        return self._user_list
 
-    @user_id.setter
-    def user_id(self, value):
-        self._user_id = value
-    @property
-    def user_name(self):
-        return self._user_name
-
-    @user_name.setter
-    def user_name(self, value):
-        self._user_name = value
+    @user_list.setter
+    def user_list(self, value):
+        if isinstance(value, list):
+            self._user_list = list()
+            for i in value:
+                if isinstance(i, ContractUserInfo):
+                    self._user_list.append(i)
+                else:
+                    self._user_list.append(ContractUserInfo.from_alipay_dict(i))
 
     @property
     def file_content(self):
@@ -213,63 +164,30 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-        if self.cert_no:
-            if hasattr(self.cert_no, 'to_alipay_dict'):
-                params['cert_no'] = json.dumps(obj=self.cert_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['cert_no'] = self.cert_no
-        if self.company_cert_no:
-            if hasattr(self.company_cert_no, 'to_alipay_dict'):
-                params['company_cert_no'] = json.dumps(obj=self.company_cert_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['company_cert_no'] = self.company_cert_no
-        if self.company_name:
-            if hasattr(self.company_name, 'to_alipay_dict'):
-                params['company_name'] = json.dumps(obj=self.company_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['company_name'] = self.company_name
-        if self.legal_person_cert_no:
-            if hasattr(self.legal_person_cert_no, 'to_alipay_dict'):
-                params['legal_person_cert_no'] = json.dumps(obj=self.legal_person_cert_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['legal_person_cert_no'] = self.legal_person_cert_no
-        if self.legal_person_name:
-            if hasattr(self.legal_person_name, 'to_alipay_dict'):
-                params['legal_person_name'] = json.dumps(obj=self.legal_person_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['legal_person_name'] = self.legal_person_name
-        if self.open_id:
-            if hasattr(self.open_id, 'to_alipay_dict'):
-                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['open_id'] = self.open_id
+        if self.company_list:
+            if isinstance(self.company_list, list):
+                for i in range(0, len(self.company_list)):
+                    element = self.company_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.company_list[i] = element.to_alipay_dict()
+                params['company_list'] = json.dumps(obj=self.company_list, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.outer_biz_no:
             if hasattr(self.outer_biz_no, 'to_alipay_dict'):
                 params['outer_biz_no'] = json.dumps(obj=self.outer_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['outer_biz_no'] = self.outer_biz_no
-        if self.sign_area:
-            if isinstance(self.sign_area, list):
-                for i in range(0, len(self.sign_area)):
-                    element = self.sign_area[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.sign_area[i] = element.to_alipay_dict()
-                params['sign_area'] = json.dumps(obj=self.sign_area, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.sign_platform:
             if hasattr(self.sign_platform, 'to_alipay_dict'):
                 params['sign_platform'] = json.dumps(obj=self.sign_platform.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['sign_platform'] = self.sign_platform
-        if self.user_id:
-            if hasattr(self.user_id, 'to_alipay_dict'):
-                params['user_id'] = json.dumps(obj=self.user_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['user_id'] = self.user_id
-        if self.user_name:
-            if hasattr(self.user_name, 'to_alipay_dict'):
-                params['user_name'] = json.dumps(obj=self.user_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-            else:
-                params['user_name'] = self.user_name
+        if self.user_list:
+            if isinstance(self.user_list, list):
+                for i in range(0, len(self.user_list)):
+                    element = self.user_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.user_list[i] = element.to_alipay_dict()
+                params['user_list'] = json.dumps(obj=self.user_list, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

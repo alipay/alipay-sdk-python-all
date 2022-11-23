@@ -23,6 +23,7 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
         self._medical_card_id = None
         self._medical_card_no = None
         self._medical_card_type = None
+        self._open_id = None
         self._other_user_logon_id = None
         self._other_user_status = None
         self._out_user_card_no = None
@@ -127,6 +128,13 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
     def medical_card_type(self, value):
         self._medical_card_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def other_user_logon_id(self):
         return self._other_user_logon_id
 
@@ -190,6 +198,8 @@ class AlipayCommerceMedicalCardQueryResponse(AlipayResponse):
             self.medical_card_no = response['medical_card_no']
         if 'medical_card_type' in response:
             self.medical_card_type = response['medical_card_type']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'other_user_logon_id' in response:
             self.other_user_logon_id = response['other_user_logon_id']
         if 'other_user_status' in response:

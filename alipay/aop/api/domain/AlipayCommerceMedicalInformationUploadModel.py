@@ -18,6 +18,7 @@ class AlipayCommerceMedicalInformationUploadModel(object):
         self._is_insurance = None
         self._medical_card_id = None
         self._medical_card_inst_id = None
+        self._open_id = None
         self._org_name = None
         self._org_no = None
         self._out_trade_no = None
@@ -102,6 +103,13 @@ class AlipayCommerceMedicalInformationUploadModel(object):
     @medical_card_inst_id.setter
     def medical_card_inst_id(self, value):
         self._medical_card_inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_name(self):
         return self._org_name
@@ -247,6 +255,11 @@ class AlipayCommerceMedicalInformationUploadModel(object):
                 params['medical_card_inst_id'] = self.medical_card_inst_id.to_alipay_dict()
             else:
                 params['medical_card_inst_id'] = self.medical_card_inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_name:
             if hasattr(self.org_name, 'to_alipay_dict'):
                 params['org_name'] = self.org_name.to_alipay_dict()
@@ -339,6 +352,8 @@ class AlipayCommerceMedicalInformationUploadModel(object):
             o.medical_card_id = d['medical_card_id']
         if 'medical_card_inst_id' in d:
             o.medical_card_inst_id = d['medical_card_inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_name' in d:
             o.org_name = d['org_name']
         if 'org_no' in d:

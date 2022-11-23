@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class JointAccountMemberInfoRespDTO(object):
 
     def __init__(self):
+        self._open_id = None
         self._operate_role = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operate_role(self):
         return self._operate_role
@@ -29,6 +37,11 @@ class JointAccountMemberInfoRespDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operate_role:
             if hasattr(self.operate_role, 'to_alipay_dict'):
                 params['operate_role'] = self.operate_role.to_alipay_dict()
@@ -46,6 +59,8 @@ class JointAccountMemberInfoRespDTO(object):
         if not d:
             return None
         o = JointAccountMemberInfoRespDTO()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operate_role' in d:
             o.operate_role = d['operate_role']
         if 'user_id' in d:

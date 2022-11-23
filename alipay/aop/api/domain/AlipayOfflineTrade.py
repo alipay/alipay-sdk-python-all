@@ -11,6 +11,7 @@ class AlipayOfflineTrade(object):
         self._actual_order_time = None
         self._amount = None
         self._card_type = None
+        self._open_id = None
         self._order_biz_context = None
         self._out_trade_no = None
         self._records = None
@@ -39,6 +40,13 @@ class AlipayOfflineTrade(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_biz_context(self):
         return self._order_biz_context
@@ -103,6 +111,11 @@ class AlipayOfflineTrade(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_biz_context:
             if hasattr(self.order_biz_context, 'to_alipay_dict'):
                 params['order_biz_context'] = self.order_biz_context.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayOfflineTrade(object):
             o.amount = d['amount']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_biz_context' in d:
             o.order_biz_context = d['order_biz_context']
         if 'out_trade_no' in d:

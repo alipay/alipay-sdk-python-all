@@ -11,6 +11,7 @@ class AlipayUserDtbankcustActivityorderQueryModel(object):
         self._activity_id = None
         self._activity_order_id = None
         self._logon_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._phone_id = None
         self._user_id = None
@@ -36,6 +37,13 @@ class AlipayUserDtbankcustActivityorderQueryModel(object):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -76,6 +84,11 @@ class AlipayUserDtbankcustActivityorderQueryModel(object):
                 params['logon_id'] = self.logon_id.to_alipay_dict()
             else:
                 params['logon_id'] = self.logon_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayUserDtbankcustActivityorderQueryModel(object):
             o.activity_order_id = d['activity_order_id']
         if 'logon_id' in d:
             o.logon_id = d['logon_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'phone_id' in d:

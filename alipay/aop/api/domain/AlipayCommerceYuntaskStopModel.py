@@ -9,6 +9,7 @@ class AlipayCommerceYuntaskStopModel(object):
 
     def __init__(self):
         self._merchant_pid = None
+        self._operate_open_id = None
         self._operate_user_id = None
         self._task_template_id = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceYuntaskStopModel(object):
     @merchant_pid.setter
     def merchant_pid(self, value):
         self._merchant_pid = value
+    @property
+    def operate_open_id(self):
+        return self._operate_open_id
+
+    @operate_open_id.setter
+    def operate_open_id(self, value):
+        self._operate_open_id = value
     @property
     def operate_user_id(self):
         return self._operate_user_id
@@ -42,6 +50,11 @@ class AlipayCommerceYuntaskStopModel(object):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
             else:
                 params['merchant_pid'] = self.merchant_pid
+        if self.operate_open_id:
+            if hasattr(self.operate_open_id, 'to_alipay_dict'):
+                params['operate_open_id'] = self.operate_open_id.to_alipay_dict()
+            else:
+                params['operate_open_id'] = self.operate_open_id
         if self.operate_user_id:
             if hasattr(self.operate_user_id, 'to_alipay_dict'):
                 params['operate_user_id'] = self.operate_user_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayCommerceYuntaskStopModel(object):
         o = AlipayCommerceYuntaskStopModel()
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
+        if 'operate_open_id' in d:
+            o.operate_open_id = d['operate_open_id']
         if 'operate_user_id' in d:
             o.operate_user_id = d['operate_user_id']
         if 'task_template_id' in d:

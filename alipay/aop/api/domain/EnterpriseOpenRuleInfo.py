@@ -10,6 +10,7 @@ from alipay.aop.api.domain.EnterpriseOpenRuleRelationInfo import EnterpriseOpenR
 class EnterpriseOpenRuleInfo(object):
 
     def __init__(self):
+        self._enterprise_id = None
         self._enterprise_open_rule_record_info_list = None
         self._enterprise_open_rule_relation_info_list = None
         self._gmt_create = None
@@ -19,6 +20,13 @@ class EnterpriseOpenRuleInfo(object):
         self._owner_id = None
         self._seller_type = None
 
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def enterprise_open_rule_record_info_list(self):
         return self._enterprise_open_rule_record_info_list
@@ -91,6 +99,11 @@ class EnterpriseOpenRuleInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.enterprise_open_rule_record_info_list:
             if isinstance(self.enterprise_open_rule_record_info_list, list):
                 for i in range(0, len(self.enterprise_open_rule_record_info_list)):
@@ -148,6 +161,8 @@ class EnterpriseOpenRuleInfo(object):
         if not d:
             return None
         o = EnterpriseOpenRuleInfo()
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'enterprise_open_rule_record_info_list' in d:
             o.enterprise_open_rule_record_info_list = d['enterprise_open_rule_record_info_list']
         if 'enterprise_open_rule_relation_info_list' in d:

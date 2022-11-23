@@ -11,6 +11,7 @@ class AntMerchantExpandMembercardTransactionBatchqueryModel(object):
         self._biz_type = None
         self._end_time = None
         self._member_product_id = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._start_time = None
@@ -40,6 +41,13 @@ class AntMerchantExpandMembercardTransactionBatchqueryModel(object):
     @member_product_id.setter
     def member_product_id(self, value):
         self._member_product_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -92,6 +100,11 @@ class AntMerchantExpandMembercardTransactionBatchqueryModel(object):
                 params['member_product_id'] = self.member_product_id.to_alipay_dict()
             else:
                 params['member_product_id'] = self.member_product_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -125,6 +138,8 @@ class AntMerchantExpandMembercardTransactionBatchqueryModel(object):
             o.end_time = d['end_time']
         if 'member_product_id' in d:
             o.member_product_id = d['member_product_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

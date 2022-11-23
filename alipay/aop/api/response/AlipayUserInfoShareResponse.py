@@ -60,10 +60,12 @@ class AlipayUserInfoShareResponse(AlipayResponse):
         self._member_grade = None
         self._mobile = None
         self._nick_name = None
+        self._open_id = None
         self._organization_code = None
         self._person_birthday = None
         self._person_birthday_without_year = None
         self._person_cert_expiry_date = None
+        self._person_cert_issue_date = None
         self._person_pictures = None
         self._phone = None
         self._profession = None
@@ -424,6 +426,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     def nick_name(self, value):
         self._nick_name = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def organization_code(self):
         return self._organization_code
 
@@ -451,6 +460,13 @@ class AlipayUserInfoShareResponse(AlipayResponse):
     @person_cert_expiry_date.setter
     def person_cert_expiry_date(self, value):
         self._person_cert_expiry_date = value
+    @property
+    def person_cert_issue_date(self):
+        return self._person_cert_issue_date
+
+    @person_cert_issue_date.setter
+    def person_cert_issue_date(self, value):
+        self._person_cert_issue_date = value
     @property
     def person_pictures(self):
         return self._person_pictures
@@ -631,6 +647,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.mobile = response['mobile']
         if 'nick_name' in response:
             self.nick_name = response['nick_name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'organization_code' in response:
             self.organization_code = response['organization_code']
         if 'person_birthday' in response:
@@ -639,6 +657,8 @@ class AlipayUserInfoShareResponse(AlipayResponse):
             self.person_birthday_without_year = response['person_birthday_without_year']
         if 'person_cert_expiry_date' in response:
             self.person_cert_expiry_date = response['person_cert_expiry_date']
+        if 'person_cert_issue_date' in response:
+            self.person_cert_issue_date = response['person_cert_issue_date']
         if 'person_pictures' in response:
             self.person_pictures = response['person_pictures']
         if 'phone' in response:

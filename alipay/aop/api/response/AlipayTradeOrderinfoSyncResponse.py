@@ -9,10 +9,18 @@ class AlipayTradeOrderinfoSyncResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeOrderinfoSyncResponse, self).__init__()
+        self._buyer_open_id = None
         self._buyer_user_id = None
         self._out_trade_no = None
         self._trade_no = None
 
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def buyer_user_id(self):
         return self._buyer_user_id
@@ -37,6 +45,8 @@ class AlipayTradeOrderinfoSyncResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeOrderinfoSyncResponse, self).parse_response_content(response_content)
+        if 'buyer_open_id' in response:
+            self.buyer_open_id = response['buyer_open_id']
         if 'buyer_user_id' in response:
             self.buyer_user_id = response['buyer_user_id']
         if 'out_trade_no' in response:

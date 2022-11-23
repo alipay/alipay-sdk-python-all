@@ -9,6 +9,7 @@ class AntMerchantExpandSavingPassQueryModel(object):
 
     def __init__(self):
         self._ch_info = None
+        self._open_id = None
         self._pid = None
         self._sol_code = None
         self._user_id = None
@@ -20,6 +21,13 @@ class AntMerchantExpandSavingPassQueryModel(object):
     @ch_info.setter
     def ch_info(self, value):
         self._ch_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def pid(self):
         return self._pid
@@ -50,6 +58,11 @@ class AntMerchantExpandSavingPassQueryModel(object):
                 params['ch_info'] = self.ch_info.to_alipay_dict()
             else:
                 params['ch_info'] = self.ch_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
@@ -74,6 +87,8 @@ class AntMerchantExpandSavingPassQueryModel(object):
         o = AntMerchantExpandSavingPassQueryModel()
         if 'ch_info' in d:
             o.ch_info = d['ch_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'pid' in d:
             o.pid = d['pid']
         if 'sol_code' in d:

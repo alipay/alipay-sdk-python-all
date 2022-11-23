@@ -18,6 +18,7 @@ class AlipayUserCertifyIdentifyInfoQueryResponse(AlipayResponse):
         self._is_certified = None
         self._is_released = None
         self._logon_id = None
+        self._open_id = None
         self._org_customer_expire_date = None
         self._org_customer_is_cancelled = None
         self._org_customer_is_exception = None
@@ -104,6 +105,13 @@ class AlipayUserCertifyIdentifyInfoQueryResponse(AlipayResponse):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_customer_expire_date(self):
         return self._org_customer_expire_date
@@ -291,6 +299,8 @@ class AlipayUserCertifyIdentifyInfoQueryResponse(AlipayResponse):
             self.is_released = response['is_released']
         if 'logon_id' in response:
             self.logon_id = response['logon_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'org_customer_expire_date' in response:
             self.org_customer_expire_date = response['org_customer_expire_date']
         if 'org_customer_is_cancelled' in response:

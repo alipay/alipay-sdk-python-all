@@ -11,6 +11,7 @@ class AlipayPcreditHuabeiAuthOrderUnfreezeModel(object):
         self._agreement_no = None
         self._alipay_user_id = None
         self._need_terminated = None
+        self._open_id = None
         self._order_title = None
         self._out_request_no = None
         self._seller_id = None
@@ -37,6 +38,13 @@ class AlipayPcreditHuabeiAuthOrderUnfreezeModel(object):
     @need_terminated.setter
     def need_terminated(self, value):
         self._need_terminated = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_title(self):
         return self._order_title
@@ -84,6 +92,11 @@ class AlipayPcreditHuabeiAuthOrderUnfreezeModel(object):
                 params['need_terminated'] = self.need_terminated.to_alipay_dict()
             else:
                 params['need_terminated'] = self.need_terminated
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayPcreditHuabeiAuthOrderUnfreezeModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'need_terminated' in d:
             o.need_terminated = d['need_terminated']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_request_no' in d:

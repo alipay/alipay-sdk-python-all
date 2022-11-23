@@ -17,6 +17,8 @@ class SummaryBillOpenApiDTO(object):
         self._bill_month = None
         self._bill_no = None
         self._bill_status = None
+        self._biz_pd_code = None
+        self._fund_settle_time = None
         self._inst_id = None
         self._payee_ip_role_id = None
         self._real_bill_amount = None
@@ -24,6 +26,7 @@ class SummaryBillOpenApiDTO(object):
         self._settle_status = None
         self._settle_time_type = None
         self._settled_amount = None
+        self._source = None
 
     @property
     def adjust_amount(self):
@@ -66,6 +69,20 @@ class SummaryBillOpenApiDTO(object):
     @bill_status.setter
     def bill_status(self, value):
         self._bill_status = value
+    @property
+    def biz_pd_code(self):
+        return self._biz_pd_code
+
+    @biz_pd_code.setter
+    def biz_pd_code(self, value):
+        self._biz_pd_code = value
+    @property
+    def fund_settle_time(self):
+        return self._fund_settle_time
+
+    @fund_settle_time.setter
+    def fund_settle_time(self, value):
+        self._fund_settle_time = value
     @property
     def inst_id(self):
         return self._inst_id
@@ -121,6 +138,13 @@ class SummaryBillOpenApiDTO(object):
             self._settled_amount = value
         else:
             self._settled_amount = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -150,6 +174,16 @@ class SummaryBillOpenApiDTO(object):
                 params['bill_status'] = self.bill_status.to_alipay_dict()
             else:
                 params['bill_status'] = self.bill_status
+        if self.biz_pd_code:
+            if hasattr(self.biz_pd_code, 'to_alipay_dict'):
+                params['biz_pd_code'] = self.biz_pd_code.to_alipay_dict()
+            else:
+                params['biz_pd_code'] = self.biz_pd_code
+        if self.fund_settle_time:
+            if hasattr(self.fund_settle_time, 'to_alipay_dict'):
+                params['fund_settle_time'] = self.fund_settle_time.to_alipay_dict()
+            else:
+                params['fund_settle_time'] = self.fund_settle_time
         if self.inst_id:
             if hasattr(self.inst_id, 'to_alipay_dict'):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
@@ -185,6 +219,11 @@ class SummaryBillOpenApiDTO(object):
                 params['settled_amount'] = self.settled_amount.to_alipay_dict()
             else:
                 params['settled_amount'] = self.settled_amount
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -202,6 +241,10 @@ class SummaryBillOpenApiDTO(object):
             o.bill_no = d['bill_no']
         if 'bill_status' in d:
             o.bill_status = d['bill_status']
+        if 'biz_pd_code' in d:
+            o.biz_pd_code = d['biz_pd_code']
+        if 'fund_settle_time' in d:
+            o.fund_settle_time = d['fund_settle_time']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
         if 'payee_ip_role_id' in d:
@@ -216,6 +259,8 @@ class SummaryBillOpenApiDTO(object):
             o.settle_time_type = d['settle_time_type']
         if 'settled_amount' in d:
             o.settled_amount = d['settled_amount']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

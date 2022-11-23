@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class InvoiceTitleQueryOpenModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._payer_address = None
         self._payer_bank_account = None
         self._payer_bank_name = None
@@ -16,6 +17,13 @@ class InvoiceTitleQueryOpenModel(object):
         self._title_name = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def payer_address(self):
         return self._payer_address
@@ -69,6 +77,11 @@ class InvoiceTitleQueryOpenModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.payer_address:
             if hasattr(self.payer_address, 'to_alipay_dict'):
                 params['payer_address'] = self.payer_address.to_alipay_dict()
@@ -111,6 +124,8 @@ class InvoiceTitleQueryOpenModel(object):
         if not d:
             return None
         o = InvoiceTitleQueryOpenModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'payer_address' in d:
             o.payer_address = d['payer_address']
         if 'payer_bank_account' in d:

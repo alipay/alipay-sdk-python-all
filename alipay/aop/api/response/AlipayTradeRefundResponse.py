@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RefundChargeInfo import RefundChargeInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.PresetPayToolInfo import PresetPayToolInfo
 
@@ -12,6 +13,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeRefundResponse, self).__init__()
         self._buyer_logon_id = None
+        self._buyer_open_id = None
         self._buyer_user_id = None
         self._fund_change = None
         self._gmt_refund_pay = None
@@ -22,6 +24,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._present_refund_discount_amount = None
         self._present_refund_mdiscount_amount = None
         self._refund_charge_amount = None
+        self._refund_charge_info_list = None
         self._refund_currency = None
         self._refund_detail_item_list = None
         self._refund_fee = None
@@ -39,6 +42,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
     @buyer_logon_id.setter
     def buyer_logon_id(self, value):
         self._buyer_logon_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def buyer_user_id(self):
         return self._buyer_user_id
@@ -109,6 +119,19 @@ class AlipayTradeRefundResponse(AlipayResponse):
     @refund_charge_amount.setter
     def refund_charge_amount(self, value):
         self._refund_charge_amount = value
+    @property
+    def refund_charge_info_list(self):
+        return self._refund_charge_info_list
+
+    @refund_charge_info_list.setter
+    def refund_charge_info_list(self, value):
+        if isinstance(value, list):
+            self._refund_charge_info_list = list()
+            for i in value:
+                if isinstance(i, RefundChargeInfo):
+                    self._refund_charge_info_list.append(i)
+                else:
+                    self._refund_charge_info_list.append(RefundChargeInfo.from_alipay_dict(i))
     @property
     def refund_currency(self):
         return self._refund_currency
@@ -186,6 +209,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
         response = super(AlipayTradeRefundResponse, self).parse_response_content(response_content)
         if 'buyer_logon_id' in response:
             self.buyer_logon_id = response['buyer_logon_id']
+        if 'buyer_open_id' in response:
+            self.buyer_open_id = response['buyer_open_id']
         if 'buyer_user_id' in response:
             self.buyer_user_id = response['buyer_user_id']
         if 'fund_change' in response:
@@ -206,6 +231,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.present_refund_mdiscount_amount = response['present_refund_mdiscount_amount']
         if 'refund_charge_amount' in response:
             self.refund_charge_amount = response['refund_charge_amount']
+        if 'refund_charge_info_list' in response:
+            self.refund_charge_info_list = response['refund_charge_info_list']
         if 'refund_currency' in response:
             self.refund_currency = response['refund_currency']
         if 'refund_detail_item_list' in response:

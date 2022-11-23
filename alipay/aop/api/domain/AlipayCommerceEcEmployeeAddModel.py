@@ -15,6 +15,7 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._employee_no = None
         self._enterprise_id = None
         self._identity = None
+        self._identity_open_id = None
         self._identity_type = None
         self._role_list = None
 
@@ -70,6 +71,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @identity.setter
     def identity(self, value):
         self._identity = value
+    @property
+    def identity_open_id(self):
+        return self._identity_open_id
+
+    @identity_open_id.setter
+    def identity_open_id(self, value):
+        self._identity_open_id = value
     @property
     def identity_type(self):
         return self._identity_type
@@ -131,6 +139,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['identity'] = self.identity.to_alipay_dict()
             else:
                 params['identity'] = self.identity
+        if self.identity_open_id:
+            if hasattr(self.identity_open_id, 'to_alipay_dict'):
+                params['identity_open_id'] = self.identity_open_id.to_alipay_dict()
+            else:
+                params['identity_open_id'] = self.identity_open_id
         if self.identity_type:
             if hasattr(self.identity_type, 'to_alipay_dict'):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
@@ -167,6 +180,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.enterprise_id = d['enterprise_id']
         if 'identity' in d:
             o.identity = d['identity']
+        if 'identity_open_id' in d:
+            o.identity_open_id = d['identity_open_id']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
         if 'role_list' in d:

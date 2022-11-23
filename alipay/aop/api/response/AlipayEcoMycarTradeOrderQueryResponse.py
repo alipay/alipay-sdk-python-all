@@ -19,6 +19,7 @@ class AlipayEcoMycarTradeOrderQueryResponse(AlipayResponse):
         self._gmt_refund = None
         self._gmt_refund_success = None
         self._gmt_updated = None
+        self._open_id = None
         self._out_biz_trade_no = None
         self._send_back_fee = None
         self._shop_id = None
@@ -99,6 +100,13 @@ class AlipayEcoMycarTradeOrderQueryResponse(AlipayResponse):
     @gmt_updated.setter
     def gmt_updated(self, value):
         self._gmt_updated = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_trade_no(self):
         return self._out_biz_trade_no
@@ -185,6 +193,8 @@ class AlipayEcoMycarTradeOrderQueryResponse(AlipayResponse):
             self.gmt_refund_success = response['gmt_refund_success']
         if 'gmt_updated' in response:
             self.gmt_updated = response['gmt_updated']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_biz_trade_no' in response:
             self.out_biz_trade_no = response['out_biz_trade_no']
         if 'send_back_fee' in response:

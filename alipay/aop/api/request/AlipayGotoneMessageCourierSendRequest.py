@@ -14,6 +14,7 @@ class AlipayGotoneMessageCourierSendRequest(object):
         self._biz_model = biz_model
         self._arguments = None
         self._ext_info = None
+        self._open_id = None
         self._service_code = None
         self._user_id = None
         self._version = "1.0"
@@ -47,6 +48,13 @@ class AlipayGotoneMessageCourierSendRequest(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def service_code(self):
         return self._service_code
@@ -150,6 +158,11 @@ class AlipayGotoneMessageCourierSendRequest(object):
                 params['ext_info'] = json.dumps(obj=self.ext_info.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['ext_info'] = self.ext_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.service_code:
             if hasattr(self.service_code, 'to_alipay_dict'):
                 params['service_code'] = json.dumps(obj=self.service_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.DepositBackInfo import DepositBackInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
+from alipay.aop.api.domain.RefundChargeInfo import RefundChargeInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
 
@@ -27,6 +28,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._refund_channel_list = None
         self._refund_channel_status = None
         self._refund_charge_amount = None
+        self._refund_charge_info_list = None
         self._refund_detail_item_list = None
         self._refund_hyb_amount = None
         self._refund_reason = None
@@ -142,6 +144,19 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def refund_charge_amount(self, value):
         self._refund_charge_amount = value
     @property
+    def refund_charge_info_list(self):
+        return self._refund_charge_info_list
+
+    @refund_charge_info_list.setter
+    def refund_charge_info_list(self, value):
+        if isinstance(value, list):
+            self._refund_charge_info_list = list()
+            for i in value:
+                if isinstance(i, RefundChargeInfo):
+                    self._refund_charge_info_list.append(i)
+                else:
+                    self._refund_charge_info_list.append(RefundChargeInfo.from_alipay_dict(i))
+    @property
     def refund_detail_item_list(self):
         return self._refund_detail_item_list
 
@@ -247,6 +262,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self.refund_channel_status = response['refund_channel_status']
         if 'refund_charge_amount' in response:
             self.refund_charge_amount = response['refund_charge_amount']
+        if 'refund_charge_info_list' in response:
+            self.refund_charge_info_list = response['refund_charge_info_list']
         if 'refund_detail_item_list' in response:
             self.refund_detail_item_list = response['refund_detail_item_list']
         if 'refund_hyb_amount' in response:

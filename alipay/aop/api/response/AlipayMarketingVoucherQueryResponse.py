@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.VoucherBillDetail import VoucherBillDetail
+from alipay.aop.api.domain.VcpDiscountInfo import VcpDiscountInfo
 
 
 class AlipayMarketingVoucherQueryResponse(AlipayResponse):
@@ -12,15 +13,18 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
         super(AlipayMarketingVoucherQueryResponse, self).__init__()
         self._available_amount = None
         self._bill_details = None
+        self._discount_info = None
         self._extend_info = None
         self._gmt_active = None
         self._gmt_create = None
         self._gmt_expired = None
         self._name = None
+        self._open_id = None
         self._status = None
         self._template_id = None
         self._total_amount = None
         self._user_id = None
+        self._voucher_description = None
         self._voucher_id = None
 
     @property
@@ -43,6 +47,16 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
                     self._bill_details.append(i)
                 else:
                     self._bill_details.append(VoucherBillDetail.from_alipay_dict(i))
+    @property
+    def discount_info(self):
+        return self._discount_info
+
+    @discount_info.setter
+    def discount_info(self, value):
+        if isinstance(value, VcpDiscountInfo):
+            self._discount_info = value
+        else:
+            self._discount_info = VcpDiscountInfo.from_alipay_dict(value)
     @property
     def extend_info(self):
         return self._extend_info
@@ -79,6 +93,13 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
     def name(self, value):
         self._name = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def status(self):
         return self._status
 
@@ -107,6 +128,13 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
     def user_id(self, value):
         self._user_id = value
     @property
+    def voucher_description(self):
+        return self._voucher_description
+
+    @voucher_description.setter
+    def voucher_description(self, value):
+        self._voucher_description = value
+    @property
     def voucher_id(self):
         return self._voucher_id
 
@@ -120,6 +148,8 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
             self.available_amount = response['available_amount']
         if 'bill_details' in response:
             self.bill_details = response['bill_details']
+        if 'discount_info' in response:
+            self.discount_info = response['discount_info']
         if 'extend_info' in response:
             self.extend_info = response['extend_info']
         if 'gmt_active' in response:
@@ -130,6 +160,8 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
             self.gmt_expired = response['gmt_expired']
         if 'name' in response:
             self.name = response['name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'status' in response:
             self.status = response['status']
         if 'template_id' in response:
@@ -138,5 +170,7 @@ class AlipayMarketingVoucherQueryResponse(AlipayResponse):
             self.total_amount = response['total_amount']
         if 'user_id' in response:
             self.user_id = response['user_id']
+        if 'voucher_description' in response:
+            self.voucher_description = response['voucher_description']
         if 'voucher_id' in response:
             self.voucher_id = response['voucher_id']

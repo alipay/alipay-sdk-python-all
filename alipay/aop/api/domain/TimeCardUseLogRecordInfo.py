@@ -14,6 +14,7 @@ class TimeCardUseLogRecordInfo(object):
         self._log_id = None
         self._log_time = None
         self._log_type = None
+        self._open_id = None
         self._time_card_info = None
         self._user_id = None
 
@@ -52,6 +53,13 @@ class TimeCardUseLogRecordInfo(object):
     @log_type.setter
     def log_type(self, value):
         self._log_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def time_card_info(self):
         return self._time_card_info
@@ -98,6 +106,11 @@ class TimeCardUseLogRecordInfo(object):
                 params['log_type'] = self.log_type.to_alipay_dict()
             else:
                 params['log_type'] = self.log_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.time_card_info:
             if hasattr(self.time_card_info, 'to_alipay_dict'):
                 params['time_card_info'] = self.time_card_info.to_alipay_dict()
@@ -125,6 +138,8 @@ class TimeCardUseLogRecordInfo(object):
             o.log_time = d['log_time']
         if 'log_type' in d:
             o.log_type = d['log_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'time_card_info' in d:
             o.time_card_info = d['time_card_info']
         if 'user_id' in d:

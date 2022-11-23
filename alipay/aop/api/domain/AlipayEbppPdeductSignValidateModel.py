@@ -16,6 +16,7 @@ class AlipayEbppPdeductSignValidateModel(object):
         self._deduct_type = None
         self._extend_field = None
         self._notify_config = None
+        self._open_id = None
         self._out_agreement_id = None
         self._owner_name = None
         self._pay_config = None
@@ -80,6 +81,13 @@ class AlipayEbppPdeductSignValidateModel(object):
     @notify_config.setter
     def notify_config(self, value):
         self._notify_config = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_agreement_id(self):
         return self._out_agreement_id
@@ -173,6 +181,11 @@ class AlipayEbppPdeductSignValidateModel(object):
                 params['notify_config'] = self.notify_config.to_alipay_dict()
             else:
                 params['notify_config'] = self.notify_config
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_agreement_id:
             if hasattr(self.out_agreement_id, 'to_alipay_dict'):
                 params['out_agreement_id'] = self.out_agreement_id.to_alipay_dict()
@@ -231,6 +244,8 @@ class AlipayEbppPdeductSignValidateModel(object):
             o.extend_field = d['extend_field']
         if 'notify_config' in d:
             o.notify_config = d['notify_config']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_agreement_id' in d:
             o.out_agreement_id = d['out_agreement_id']
         if 'owner_name' in d:

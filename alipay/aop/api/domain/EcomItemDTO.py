@@ -9,13 +9,17 @@ from alipay.aop.api.domain.EcomItemExtendDetailDTO import EcomItemExtendDetailDT
 class EcomItemDTO(object):
 
     def __init__(self):
+        self._buyout_money = None
         self._cat_order_count = None
         self._cat_order_refund_exchange_rate = None
+        self._item_condition = None
         self._item_detail = None
         self._item_id = None
+        self._item_model = None
         self._item_pict_url = None
         self._item_price = None
         self._item_title = None
+        self._item_value = None
         self._leaf_cat_id = None
         self._leaf_cat_name = None
         self._root_cat_id = None
@@ -24,6 +28,13 @@ class EcomItemDTO(object):
         self._sku_max_price = None
         self._sku_min_price = None
 
+    @property
+    def buyout_money(self):
+        return self._buyout_money
+
+    @buyout_money.setter
+    def buyout_money(self, value):
+        self._buyout_money = value
     @property
     def cat_order_count(self):
         return self._cat_order_count
@@ -38,6 +49,13 @@ class EcomItemDTO(object):
     @cat_order_refund_exchange_rate.setter
     def cat_order_refund_exchange_rate(self, value):
         self._cat_order_refund_exchange_rate = value
+    @property
+    def item_condition(self):
+        return self._item_condition
+
+    @item_condition.setter
+    def item_condition(self, value):
+        self._item_condition = value
     @property
     def item_detail(self):
         return self._item_detail
@@ -55,6 +73,13 @@ class EcomItemDTO(object):
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def item_model(self):
+        return self._item_model
+
+    @item_model.setter
+    def item_model(self, value):
+        self._item_model = value
     @property
     def item_pict_url(self):
         return self._item_pict_url
@@ -76,6 +101,13 @@ class EcomItemDTO(object):
     @item_title.setter
     def item_title(self, value):
         self._item_title = value
+    @property
+    def item_value(self):
+        return self._item_value
+
+    @item_value.setter
+    def item_value(self, value):
+        self._item_value = value
     @property
     def leaf_cat_id(self):
         return self._leaf_cat_id
@@ -129,6 +161,11 @@ class EcomItemDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.buyout_money:
+            if hasattr(self.buyout_money, 'to_alipay_dict'):
+                params['buyout_money'] = self.buyout_money.to_alipay_dict()
+            else:
+                params['buyout_money'] = self.buyout_money
         if self.cat_order_count:
             if hasattr(self.cat_order_count, 'to_alipay_dict'):
                 params['cat_order_count'] = self.cat_order_count.to_alipay_dict()
@@ -139,6 +176,11 @@ class EcomItemDTO(object):
                 params['cat_order_refund_exchange_rate'] = self.cat_order_refund_exchange_rate.to_alipay_dict()
             else:
                 params['cat_order_refund_exchange_rate'] = self.cat_order_refund_exchange_rate
+        if self.item_condition:
+            if hasattr(self.item_condition, 'to_alipay_dict'):
+                params['item_condition'] = self.item_condition.to_alipay_dict()
+            else:
+                params['item_condition'] = self.item_condition
         if self.item_detail:
             if hasattr(self.item_detail, 'to_alipay_dict'):
                 params['item_detail'] = self.item_detail.to_alipay_dict()
@@ -149,6 +191,11 @@ class EcomItemDTO(object):
                 params['item_id'] = self.item_id.to_alipay_dict()
             else:
                 params['item_id'] = self.item_id
+        if self.item_model:
+            if hasattr(self.item_model, 'to_alipay_dict'):
+                params['item_model'] = self.item_model.to_alipay_dict()
+            else:
+                params['item_model'] = self.item_model
         if self.item_pict_url:
             if hasattr(self.item_pict_url, 'to_alipay_dict'):
                 params['item_pict_url'] = self.item_pict_url.to_alipay_dict()
@@ -164,6 +211,11 @@ class EcomItemDTO(object):
                 params['item_title'] = self.item_title.to_alipay_dict()
             else:
                 params['item_title'] = self.item_title
+        if self.item_value:
+            if hasattr(self.item_value, 'to_alipay_dict'):
+                params['item_value'] = self.item_value.to_alipay_dict()
+            else:
+                params['item_value'] = self.item_value
         if self.leaf_cat_id:
             if hasattr(self.leaf_cat_id, 'to_alipay_dict'):
                 params['leaf_cat_id'] = self.leaf_cat_id.to_alipay_dict()
@@ -206,20 +258,28 @@ class EcomItemDTO(object):
         if not d:
             return None
         o = EcomItemDTO()
+        if 'buyout_money' in d:
+            o.buyout_money = d['buyout_money']
         if 'cat_order_count' in d:
             o.cat_order_count = d['cat_order_count']
         if 'cat_order_refund_exchange_rate' in d:
             o.cat_order_refund_exchange_rate = d['cat_order_refund_exchange_rate']
+        if 'item_condition' in d:
+            o.item_condition = d['item_condition']
         if 'item_detail' in d:
             o.item_detail = d['item_detail']
         if 'item_id' in d:
             o.item_id = d['item_id']
+        if 'item_model' in d:
+            o.item_model = d['item_model']
         if 'item_pict_url' in d:
             o.item_pict_url = d['item_pict_url']
         if 'item_price' in d:
             o.item_price = d['item_price']
         if 'item_title' in d:
             o.item_title = d['item_title']
+        if 'item_value' in d:
+            o.item_value = d['item_value']
         if 'leaf_cat_id' in d:
             o.leaf_cat_id = d['leaf_cat_id']
         if 'leaf_cat_name' in d:

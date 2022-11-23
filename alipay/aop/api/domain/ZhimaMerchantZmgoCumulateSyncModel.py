@@ -17,6 +17,7 @@ class ZhimaMerchantZmgoCumulateSyncModel(object):
         self._biz_time = None
         self._data_type = None
         self._discount_type_sync_data = None
+        self._open_id = None
         self._out_biz_no = None
         self._provider_pid = None
         self._refer_out_biz_no = None
@@ -72,6 +73,13 @@ class ZhimaMerchantZmgoCumulateSyncModel(object):
             self._discount_type_sync_data = value
         else:
             self._discount_type_sync_data = DiscountTypeSyncData.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -151,6 +159,11 @@ class ZhimaMerchantZmgoCumulateSyncModel(object):
                 params['discount_type_sync_data'] = self.discount_type_sync_data.to_alipay_dict()
             else:
                 params['discount_type_sync_data'] = self.discount_type_sync_data
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -200,6 +213,8 @@ class ZhimaMerchantZmgoCumulateSyncModel(object):
             o.data_type = d['data_type']
         if 'discount_type_sync_data' in d:
             o.discount_type_sync_data = d['discount_type_sync_data']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'provider_pid' in d:

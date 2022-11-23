@@ -12,6 +12,7 @@ class AlipayEbppEbppBillkeyDeductQueryResponse(AlipayResponse):
         self._bill_key = None
         self._biz_type = None
         self._charge_inst = None
+        self._open_id = None
         self._sub_biz_type = None
         self._user_id = None
 
@@ -37,6 +38,13 @@ class AlipayEbppEbppBillkeyDeductQueryResponse(AlipayResponse):
     def charge_inst(self, value):
         self._charge_inst = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def sub_biz_type(self):
         return self._sub_biz_type
 
@@ -59,6 +67,8 @@ class AlipayEbppEbppBillkeyDeductQueryResponse(AlipayResponse):
             self.biz_type = response['biz_type']
         if 'charge_inst' in response:
             self.charge_inst = response['charge_inst']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'sub_biz_type' in response:
             self.sub_biz_type = response['sub_biz_type']
         if 'user_id' in response:

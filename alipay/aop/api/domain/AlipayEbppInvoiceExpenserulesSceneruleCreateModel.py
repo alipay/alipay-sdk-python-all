@@ -14,6 +14,7 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._employee_list = None
+        self._employee_open_id_list = None
         self._enterprise_id = None
         self._expense_ctrl_rule_info_list = None
         self._expense_type = None
@@ -60,6 +61,16 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
             self._employee_list = list()
             for i in value:
                 self._employee_list.append(i)
+    @property
+    def employee_open_id_list(self):
+        return self._employee_open_id_list
+
+    @employee_open_id_list.setter
+    def employee_open_id_list(self, value):
+        if isinstance(value, list):
+            self._employee_open_id_list = list()
+            for i in value:
+                self._employee_open_id_list.append(i)
     @property
     def enterprise_id(self):
         return self._enterprise_id
@@ -149,6 +160,16 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
                 params['employee_list'] = self.employee_list.to_alipay_dict()
             else:
                 params['employee_list'] = self.employee_list
+        if self.employee_open_id_list:
+            if isinstance(self.employee_open_id_list, list):
+                for i in range(0, len(self.employee_open_id_list)):
+                    element = self.employee_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.employee_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.employee_open_id_list, 'to_alipay_dict'):
+                params['employee_open_id_list'] = self.employee_open_id_list.to_alipay_dict()
+            else:
+                params['employee_open_id_list'] = self.employee_open_id_list
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -206,6 +227,8 @@ class AlipayEbppInvoiceExpenserulesSceneruleCreateModel(object):
             o.effective_start_date = d['effective_start_date']
         if 'employee_list' in d:
             o.employee_list = d['employee_list']
+        if 'employee_open_id_list' in d:
+            o.employee_open_id_list = d['employee_open_id_list']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'expense_ctrl_rule_info_list' in d:

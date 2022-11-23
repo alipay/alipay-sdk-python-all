@@ -15,6 +15,7 @@ class AlipayEcoMycarSystemTemplatemessageSendModel(object):
         self._msg_id = None
         self._msg_subject_id = None
         self._msg_type = None
+        self._open_id = None
         self._params = None
         self._user_id = None
 
@@ -63,6 +64,13 @@ class AlipayEcoMycarSystemTemplatemessageSendModel(object):
     def msg_type(self, value):
         self._msg_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def params(self):
         return self._params
 
@@ -110,6 +118,11 @@ class AlipayEcoMycarSystemTemplatemessageSendModel(object):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
             else:
                 params['msg_type'] = self.msg_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.params:
             if hasattr(self.params, 'to_alipay_dict'):
                 params['params'] = self.params.to_alipay_dict()
@@ -137,6 +150,8 @@ class AlipayEcoMycarSystemTemplatemessageSendModel(object):
             o.msg_subject_id = d['msg_subject_id']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'params' in d:
             o.params = d['params']
         if 'user_id' in d:

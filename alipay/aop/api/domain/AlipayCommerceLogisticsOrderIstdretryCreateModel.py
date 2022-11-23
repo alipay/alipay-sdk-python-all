@@ -21,6 +21,7 @@ class AlipayCommerceLogisticsOrderIstdretryCreateModel(object):
         self._goods_info = None
         self._logistics_code = None
         self._logistics_token = None
+        self._open_id = None
         self._order_ext_istd = None
         self._out_order_no = None
         self._receiver = None
@@ -88,6 +89,13 @@ class AlipayCommerceLogisticsOrderIstdretryCreateModel(object):
     @logistics_token.setter
     def logistics_token(self, value):
         self._logistics_token = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_ext_istd(self):
         return self._order_ext_istd
@@ -176,6 +184,11 @@ class AlipayCommerceLogisticsOrderIstdretryCreateModel(object):
                 params['logistics_token'] = self.logistics_token.to_alipay_dict()
             else:
                 params['logistics_token'] = self.logistics_token
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_ext_istd:
             if hasattr(self.order_ext_istd, 'to_alipay_dict'):
                 params['order_ext_istd'] = self.order_ext_istd.to_alipay_dict()
@@ -222,6 +235,8 @@ class AlipayCommerceLogisticsOrderIstdretryCreateModel(object):
             o.logistics_code = d['logistics_code']
         if 'logistics_token' in d:
             o.logistics_token = d['logistics_token']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_ext_istd' in d:
             o.order_ext_istd = d['order_ext_istd']
         if 'out_order_no' in d:

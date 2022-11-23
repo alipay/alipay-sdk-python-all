@@ -11,6 +11,7 @@ class ZhimaMerchantOrderRentCreateResponse(AlipayResponse):
         super(ZhimaMerchantOrderRentCreateResponse, self).__init__()
         self._admit_state = None
         self._invoke_state = None
+        self._open_id = None
         self._order_no = None
         self._out_order_no = None
         self._user_id = None
@@ -29,6 +30,13 @@ class ZhimaMerchantOrderRentCreateResponse(AlipayResponse):
     @invoke_state.setter
     def invoke_state(self, value):
         self._invoke_state = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -57,6 +65,8 @@ class ZhimaMerchantOrderRentCreateResponse(AlipayResponse):
             self.admit_state = response['admit_state']
         if 'invoke_state' in response:
             self.invoke_state = response['invoke_state']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'out_order_no' in response:

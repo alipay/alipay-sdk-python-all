@@ -9,8 +9,16 @@ class AlipayMarketingFacetofaceDecodeUseResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayMarketingFacetofaceDecodeUseResponse, self).__init__()
+        self._open_id = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -21,5 +29,7 @@ class AlipayMarketingFacetofaceDecodeUseResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayMarketingFacetofaceDecodeUseResponse, self).parse_response_content(response_content)
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

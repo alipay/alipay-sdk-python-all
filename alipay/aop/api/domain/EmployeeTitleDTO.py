@@ -13,6 +13,7 @@ class EmployeeTitleDTO(object):
         self._employee_id = None
         self._enterprise_id = None
         self._modify_by = None
+        self._open_id = None
         self._title_id = None
         self._title_tag = None
         self._user_id = None
@@ -52,6 +53,13 @@ class EmployeeTitleDTO(object):
     @modify_by.setter
     def modify_by(self, value):
         self._modify_by = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def title_id(self):
         return self._title_id
@@ -102,6 +110,11 @@ class EmployeeTitleDTO(object):
                 params['modify_by'] = self.modify_by.to_alipay_dict()
             else:
                 params['modify_by'] = self.modify_by
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.title_id:
             if hasattr(self.title_id, 'to_alipay_dict'):
                 params['title_id'] = self.title_id.to_alipay_dict()
@@ -134,6 +147,8 @@ class EmployeeTitleDTO(object):
             o.enterprise_id = d['enterprise_id']
         if 'modify_by' in d:
             o.modify_by = d['modify_by']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'title_id' in d:
             o.title_id = d['title_id']
         if 'title_tag' in d:

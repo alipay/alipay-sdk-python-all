@@ -10,6 +10,7 @@ class AlipayEbppInstserviceContractdeductUnsignModel(object):
     def __init__(self):
         self._agreement_id = None
         self._bill_key = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayEbppInstserviceContractdeductUnsignModel(object):
     @bill_key.setter
     def bill_key(self, value):
         self._bill_key = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -47,6 +55,11 @@ class AlipayEbppInstserviceContractdeductUnsignModel(object):
                 params['bill_key'] = self.bill_key.to_alipay_dict()
             else:
                 params['bill_key'] = self.bill_key
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayEbppInstserviceContractdeductUnsignModel(object):
             o.agreement_id = d['agreement_id']
         if 'bill_key' in d:
             o.bill_key = d['bill_key']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

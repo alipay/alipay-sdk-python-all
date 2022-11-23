@@ -11,6 +11,7 @@ class AlipayEbppInvoiceTitleBatchqueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppInvoiceTitleBatchqueryResponse, self).__init__()
         self._invoice_element_list = None
+        self._open_id = None
         self._total_count = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AlipayEbppInvoiceTitleBatchqueryResponse(AlipayResponse):
                     self._invoice_element_list.append(i)
                 else:
                     self._invoice_element_list.append(InvoiceElementModel.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def total_count(self):
         return self._total_count
@@ -46,6 +54,8 @@ class AlipayEbppInvoiceTitleBatchqueryResponse(AlipayResponse):
         response = super(AlipayEbppInvoiceTitleBatchqueryResponse, self).parse_response_content(response_content)
         if 'invoice_element_list' in response:
             self.invoice_element_list = response['invoice_element_list']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'total_count' in response:
             self.total_count = response['total_count']
         if 'user_id' in response:

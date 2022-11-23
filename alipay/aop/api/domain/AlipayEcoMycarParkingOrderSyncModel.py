@@ -13,6 +13,7 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
         self._card_number = None
         self._in_duration = None
         self._in_time = None
+        self._open_id = None
         self._order_no = None
         self._order_status = None
         self._order_time = None
@@ -64,6 +65,13 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
     @in_time.setter
     def in_time(self, value):
         self._in_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -198,6 +206,11 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
                 params['in_time'] = self.in_time.to_alipay_dict()
             else:
                 params['in_time'] = self.in_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -290,6 +303,8 @@ class AlipayEcoMycarParkingOrderSyncModel(object):
             o.in_duration = d['in_duration']
         if 'in_time' in d:
             o.in_time = d['in_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'order_status' in d:

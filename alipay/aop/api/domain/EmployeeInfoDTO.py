@@ -18,6 +18,7 @@ class EmployeeInfoDTO(object):
         self._gmt_create = None
         self._gmt_modified = None
         self._mobile = None
+        self._open_id = None
         self._role_list = None
         self._user_id = None
 
@@ -91,6 +92,13 @@ class EmployeeInfoDTO(object):
     def mobile(self, value):
         self._mobile = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -161,6 +169,11 @@ class EmployeeInfoDTO(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -201,6 +214,8 @@ class EmployeeInfoDTO(object):
             o.gmt_modified = d['gmt_modified']
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'role_list' in d:
             o.role_list = d['role_list']
         if 'user_id' in d:

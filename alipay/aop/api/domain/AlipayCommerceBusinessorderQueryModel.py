@@ -11,6 +11,7 @@ class AlipayCommerceBusinessorderQueryModel(object):
         self._begin_time = None
         self._end_time = None
         self._isv_appid = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._platform_type = None
@@ -38,6 +39,13 @@ class AlipayCommerceBusinessorderQueryModel(object):
     @isv_appid.setter
     def isv_appid(self, value):
         self._isv_appid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -95,6 +103,11 @@ class AlipayCommerceBusinessorderQueryModel(object):
                 params['isv_appid'] = self.isv_appid.to_alipay_dict()
             else:
                 params['isv_appid'] = self.isv_appid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipayCommerceBusinessorderQueryModel(object):
             o.end_time = d['end_time']
         if 'isv_appid' in d:
             o.isv_appid = d['isv_appid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

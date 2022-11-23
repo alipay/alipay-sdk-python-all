@@ -9,6 +9,7 @@ class ZhimaMerchantOrderConfirmResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaMerchantOrderConfirmResponse, self).__init__()
+        self._buyer_open_id = None
         self._cert_no = None
         self._channel_id = None
         self._credit_amout = None
@@ -23,6 +24,13 @@ class ZhimaMerchantOrderConfirmResponse(AlipayResponse):
         self._zm_risk = None
         self._zm_score = None
 
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -117,6 +125,8 @@ class ZhimaMerchantOrderConfirmResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZhimaMerchantOrderConfirmResponse, self).parse_response_content(response_content)
+        if 'buyer_open_id' in response:
+            self.buyer_open_id = response['buyer_open_id']
         if 'cert_no' in response:
             self.cert_no = response['cert_no']
         if 'channel_id' in response:

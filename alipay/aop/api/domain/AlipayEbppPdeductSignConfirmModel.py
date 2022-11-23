@@ -15,6 +15,7 @@ class AlipayEbppPdeductSignConfirmModel(object):
         self._error_code = None
         self._error_message = None
         self._extend_field = None
+        self._open_id = None
         self._out_agreement_id = None
         self._pid = None
         self._serial_no = None
@@ -70,6 +71,13 @@ class AlipayEbppPdeductSignConfirmModel(object):
     @extend_field.setter
     def extend_field(self, value):
         self._extend_field = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_agreement_id(self):
         return self._out_agreement_id
@@ -144,6 +152,11 @@ class AlipayEbppPdeductSignConfirmModel(object):
                 params['extend_field'] = self.extend_field.to_alipay_dict()
             else:
                 params['extend_field'] = self.extend_field
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_agreement_id:
             if hasattr(self.out_agreement_id, 'to_alipay_dict'):
                 params['out_agreement_id'] = self.out_agreement_id.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayEbppPdeductSignConfirmModel(object):
             o.error_message = d['error_message']
         if 'extend_field' in d:
             o.extend_field = d['extend_field']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_agreement_id' in d:
             o.out_agreement_id = d['out_agreement_id']
         if 'pid' in d:

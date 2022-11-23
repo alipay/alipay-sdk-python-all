@@ -22,6 +22,7 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
         self._available_balance = None
         self._biz_scene = None
         self._creator_id = None
+        self._creator_open_id = None
         self._creator_out_id = None
         self._freeze_balance = None
         self._invite_result_list = None
@@ -102,6 +103,13 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
     @creator_id.setter
     def creator_id(self, value):
         self._creator_id = value
+    @property
+    def creator_open_id(self):
+        return self._creator_open_id
+
+    @creator_open_id.setter
+    def creator_open_id(self, value):
+        self._creator_open_id = value
     @property
     def creator_out_id(self):
         return self._creator_out_id
@@ -184,6 +192,8 @@ class AlipayFundJointaccountDetailQueryResponse(AlipayResponse):
             self.biz_scene = response['biz_scene']
         if 'creator_id' in response:
             self.creator_id = response['creator_id']
+        if 'creator_open_id' in response:
+            self.creator_open_id = response['creator_open_id']
         if 'creator_out_id' in response:
             self.creator_out_id = response['creator_out_id']
         if 'freeze_balance' in response:

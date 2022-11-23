@@ -11,6 +11,7 @@ class TaxiOrder(object):
         self._business_order_no = None
         self._car_no = None
         self._driver_name = None
+        self._driver_open_id = None
         self._driver_user_id = None
         self._end_trip_time = None
         self._start_trip_time = None
@@ -37,6 +38,13 @@ class TaxiOrder(object):
     @driver_name.setter
     def driver_name(self, value):
         self._driver_name = value
+    @property
+    def driver_open_id(self):
+        return self._driver_open_id
+
+    @driver_open_id.setter
+    def driver_open_id(self, value):
+        self._driver_open_id = value
     @property
     def driver_user_id(self):
         return self._driver_user_id
@@ -84,6 +92,11 @@ class TaxiOrder(object):
                 params['driver_name'] = self.driver_name.to_alipay_dict()
             else:
                 params['driver_name'] = self.driver_name
+        if self.driver_open_id:
+            if hasattr(self.driver_open_id, 'to_alipay_dict'):
+                params['driver_open_id'] = self.driver_open_id.to_alipay_dict()
+            else:
+                params['driver_open_id'] = self.driver_open_id
         if self.driver_user_id:
             if hasattr(self.driver_user_id, 'to_alipay_dict'):
                 params['driver_user_id'] = self.driver_user_id.to_alipay_dict()
@@ -117,6 +130,8 @@ class TaxiOrder(object):
             o.car_no = d['car_no']
         if 'driver_name' in d:
             o.driver_name = d['driver_name']
+        if 'driver_open_id' in d:
+            o.driver_open_id = d['driver_open_id']
         if 'driver_user_id' in d:
             o.driver_user_id = d['driver_user_id']
         if 'end_trip_time' in d:

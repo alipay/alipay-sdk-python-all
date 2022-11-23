@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.PromiseDetail import PromiseDetail
+from alipay.aop.api.domain.JinyouTestFive import JinyouTestFive
 
 
 class AlipaySecurityProdSssQueryModel(object):
@@ -13,6 +14,7 @@ class AlipaySecurityProdSssQueryModel(object):
         self._aaa_open_id = None
         self._bbb = None
         self._tesst = None
+        self._xxx = None
 
     @property
     def aaa(self):
@@ -48,6 +50,16 @@ class AlipaySecurityProdSssQueryModel(object):
                     self._tesst.append(i)
                 else:
                     self._tesst.append(PromiseDetail.from_alipay_dict(i))
+    @property
+    def xxx(self):
+        return self._xxx
+
+    @xxx.setter
+    def xxx(self, value):
+        if isinstance(value, JinyouTestFive):
+            self._xxx = value
+        else:
+            self._xxx = JinyouTestFive.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -77,6 +89,11 @@ class AlipaySecurityProdSssQueryModel(object):
                 params['tesst'] = self.tesst.to_alipay_dict()
             else:
                 params['tesst'] = self.tesst
+        if self.xxx:
+            if hasattr(self.xxx, 'to_alipay_dict'):
+                params['xxx'] = self.xxx.to_alipay_dict()
+            else:
+                params['xxx'] = self.xxx
         return params
 
     @staticmethod
@@ -92,6 +109,8 @@ class AlipaySecurityProdSssQueryModel(object):
             o.bbb = d['bbb']
         if 'tesst' in d:
             o.tesst = d['tesst']
+        if 'xxx' in d:
+            o.xxx = d['xxx']
         return o
 
 

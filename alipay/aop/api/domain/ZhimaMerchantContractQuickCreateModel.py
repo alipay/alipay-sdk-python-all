@@ -22,6 +22,7 @@ class ZhimaMerchantContractQuickCreateModel(object):
         self._fufilment_start_time = None
         self._offer_creater_id = None
         self._offer_creater_name = None
+        self._offer_creater_open_id = None
         self._offer_creater_type = None
         self._out_biz_no = None
         self._out_content_name = None
@@ -127,6 +128,13 @@ class ZhimaMerchantContractQuickCreateModel(object):
     @offer_creater_name.setter
     def offer_creater_name(self, value):
         self._offer_creater_name = value
+    @property
+    def offer_creater_open_id(self):
+        return self._offer_creater_open_id
+
+    @offer_creater_open_id.setter
+    def offer_creater_open_id(self, value):
+        self._offer_creater_open_id = value
     @property
     def offer_creater_type(self):
         return self._offer_creater_type
@@ -243,6 +251,11 @@ class ZhimaMerchantContractQuickCreateModel(object):
                 params['offer_creater_name'] = self.offer_creater_name.to_alipay_dict()
             else:
                 params['offer_creater_name'] = self.offer_creater_name
+        if self.offer_creater_open_id:
+            if hasattr(self.offer_creater_open_id, 'to_alipay_dict'):
+                params['offer_creater_open_id'] = self.offer_creater_open_id.to_alipay_dict()
+            else:
+                params['offer_creater_open_id'] = self.offer_creater_open_id
         if self.offer_creater_type:
             if hasattr(self.offer_creater_type, 'to_alipay_dict'):
                 params['offer_creater_type'] = self.offer_creater_type.to_alipay_dict()
@@ -308,6 +321,8 @@ class ZhimaMerchantContractQuickCreateModel(object):
             o.offer_creater_id = d['offer_creater_id']
         if 'offer_creater_name' in d:
             o.offer_creater_name = d['offer_creater_name']
+        if 'offer_creater_open_id' in d:
+            o.offer_creater_open_id = d['offer_creater_open_id']
         if 'offer_creater_type' in d:
             o.offer_creater_type = d['offer_creater_type']
         if 'out_biz_no' in d:

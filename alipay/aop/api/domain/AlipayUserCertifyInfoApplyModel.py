@@ -23,6 +23,7 @@ class AlipayUserCertifyInfoApplyModel(object):
         self._legal_cert_no = None
         self._legal_cert_type = None
         self._legal_name = None
+        self._open_id = None
         self._org_address = None
         self._org_business_scope = None
         self._org_city = None
@@ -142,6 +143,13 @@ class AlipayUserCertifyInfoApplyModel(object):
     @legal_name.setter
     def legal_name(self, value):
         self._legal_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_address(self):
         return self._org_address
@@ -312,6 +320,11 @@ class AlipayUserCertifyInfoApplyModel(object):
                 params['legal_name'] = self.legal_name.to_alipay_dict()
             else:
                 params['legal_name'] = self.legal_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_address:
             if hasattr(self.org_address, 'to_alipay_dict'):
                 params['org_address'] = self.org_address.to_alipay_dict()
@@ -414,6 +427,8 @@ class AlipayUserCertifyInfoApplyModel(object):
             o.legal_cert_type = d['legal_cert_type']
         if 'legal_name' in d:
             o.legal_name = d['legal_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_address' in d:
             o.org_address = d['org_address']
         if 'org_business_scope' in d:

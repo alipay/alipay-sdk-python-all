@@ -29,6 +29,7 @@ class AlipayTradePayModel(object):
         self._body = None
         self._business_params = None
         self._buyer_id = None
+        self._buyer_open_id = None
         self._disable_pay_channels = None
         self._discountable_amount = None
         self._ext_user_info = None
@@ -139,6 +140,13 @@ class AlipayTradePayModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def disable_pay_channels(self):
         return self._disable_pay_channels
@@ -433,6 +441,11 @@ class AlipayTradePayModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.disable_pay_channels:
             if hasattr(self.disable_pay_channels, 'to_alipay_dict'):
                 params['disable_pay_channels'] = self.disable_pay_channels.to_alipay_dict()
@@ -620,6 +633,8 @@ class AlipayTradePayModel(object):
             o.business_params = d['business_params']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'disable_pay_channels' in d:
             o.disable_pay_channels = d['disable_pay_channels']
         if 'discountable_amount' in d:

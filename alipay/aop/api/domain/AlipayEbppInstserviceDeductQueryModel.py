@@ -12,6 +12,7 @@ class AlipayEbppInstserviceDeductQueryModel(object):
         self._biz_type = None
         self._extend_field = None
         self._inst_id = None
+        self._open_id = None
         self._operation_type = None
         self._process_id = None
         self._sub_biz_type = None
@@ -45,6 +46,13 @@ class AlipayEbppInstserviceDeductQueryModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation_type(self):
         return self._operation_type
@@ -97,6 +105,11 @@ class AlipayEbppInstserviceDeductQueryModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation_type:
             if hasattr(self.operation_type, 'to_alipay_dict'):
                 params['operation_type'] = self.operation_type.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayEbppInstserviceDeductQueryModel(object):
             o.extend_field = d['extend_field']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation_type' in d:
             o.operation_type = d['operation_type']
         if 'process_id' in d:

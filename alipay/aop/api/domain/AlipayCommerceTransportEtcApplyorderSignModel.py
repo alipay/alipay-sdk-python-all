@@ -11,6 +11,7 @@ class AlipayCommerceTransportEtcApplyorderSignModel(object):
         self._agent_appid = None
         self._agent_pid = None
         self._alipay_order_id = None
+        self._open_id = None
         self._out_order_id = None
         self._seller_id = None
         self._sign_return_url = None
@@ -38,6 +39,13 @@ class AlipayCommerceTransportEtcApplyorderSignModel(object):
     @alipay_order_id.setter
     def alipay_order_id(self, value):
         self._alipay_order_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -92,6 +100,11 @@ class AlipayCommerceTransportEtcApplyorderSignModel(object):
                 params['alipay_order_id'] = self.alipay_order_id.to_alipay_dict()
             else:
                 params['alipay_order_id'] = self.alipay_order_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -130,6 +143,8 @@ class AlipayCommerceTransportEtcApplyorderSignModel(object):
             o.agent_pid = d['agent_pid']
         if 'alipay_order_id' in d:
             o.alipay_order_id = d['alipay_order_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'seller_id' in d:

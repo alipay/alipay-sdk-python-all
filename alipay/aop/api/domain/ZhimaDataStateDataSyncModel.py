@@ -11,6 +11,7 @@ class ZhimaDataStateDataSyncModel(object):
         self._biz_data = None
         self._biz_state_code = None
         self._category_code = None
+        self._open_id = None
         self._out_biz_no = None
         self._out_principal_id = None
         self._service_id = None
@@ -37,6 +38,13 @@ class ZhimaDataStateDataSyncModel(object):
     @category_code.setter
     def category_code(self, value):
         self._category_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -84,6 +92,11 @@ class ZhimaDataStateDataSyncModel(object):
                 params['category_code'] = self.category_code.to_alipay_dict()
             else:
                 params['category_code'] = self.category_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -117,6 +130,8 @@ class ZhimaDataStateDataSyncModel(object):
             o.biz_state_code = d['biz_state_code']
         if 'category_code' in d:
             o.category_code = d['category_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'out_principal_id' in d:

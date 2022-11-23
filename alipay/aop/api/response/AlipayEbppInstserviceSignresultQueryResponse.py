@@ -14,6 +14,7 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
         self._deduct_amount = None
         self._inst_id = None
         self._login_id = None
+        self._open_id = None
         self._out_agreement_id = None
         self._payment_type = None
         self._product_type = None
@@ -56,6 +57,13 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
     @login_id.setter
     def login_id(self, value):
         self._login_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_agreement_id(self):
         return self._out_agreement_id
@@ -111,6 +119,8 @@ class AlipayEbppInstserviceSignresultQueryResponse(AlipayResponse):
             self.inst_id = response['inst_id']
         if 'login_id' in response:
             self.login_id = response['login_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_agreement_id' in response:
             self.out_agreement_id = response['out_agreement_id']
         if 'payment_type' in response:

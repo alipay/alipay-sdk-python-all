@@ -14,6 +14,7 @@ class JobWorthJobdata(object):
         self._company_name = None
         self._degree = None
         self._education_status = None
+        self._head_pic_id = None
         self._intention_city = None
         self._job_id = None
         self._job_name = None
@@ -80,6 +81,13 @@ class JobWorthJobdata(object):
     @education_status.setter
     def education_status(self, value):
         self._education_status = value
+    @property
+    def head_pic_id(self):
+        return self._head_pic_id
+
+    @head_pic_id.setter
+    def head_pic_id(self, value):
+        self._head_pic_id = value
     @property
     def intention_city(self):
         return self._intention_city
@@ -275,6 +283,11 @@ class JobWorthJobdata(object):
                 params['education_status'] = self.education_status.to_alipay_dict()
             else:
                 params['education_status'] = self.education_status
+        if self.head_pic_id:
+            if hasattr(self.head_pic_id, 'to_alipay_dict'):
+                params['head_pic_id'] = self.head_pic_id.to_alipay_dict()
+            else:
+                params['head_pic_id'] = self.head_pic_id
         if self.intention_city:
             if hasattr(self.intention_city, 'to_alipay_dict'):
                 params['intention_city'] = self.intention_city.to_alipay_dict()
@@ -409,6 +422,8 @@ class JobWorthJobdata(object):
             o.degree = d['degree']
         if 'education_status' in d:
             o.education_status = d['education_status']
+        if 'head_pic_id' in d:
+            o.head_pic_id = d['head_pic_id']
         if 'intention_city' in d:
             o.intention_city = d['intention_city']
         if 'job_id' in d:

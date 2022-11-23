@@ -9,6 +9,7 @@ class AlipayMerchantPayforprivilegePayCreateModel(object):
 
     def __init__(self):
         self._member_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._payer_user_id = None
         self._promotion_plan_id = None
@@ -22,6 +23,13 @@ class AlipayMerchantPayforprivilegePayCreateModel(object):
     @member_id.setter
     def member_id(self, value):
         self._member_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -66,6 +74,11 @@ class AlipayMerchantPayforprivilegePayCreateModel(object):
                 params['member_id'] = self.member_id.to_alipay_dict()
             else:
                 params['member_id'] = self.member_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayMerchantPayforprivilegePayCreateModel(object):
         o = AlipayMerchantPayforprivilegePayCreateModel()
         if 'member_id' in d:
             o.member_id = d['member_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'payer_user_id' in d:

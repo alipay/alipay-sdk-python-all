@@ -13,6 +13,7 @@ class AlipayEbppPdeductBillPayStatusRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._agreement_id = None
+        self._open_id = None
         self._out_order_no = None
         self._version = "1.0"
         self._terminal_type = None
@@ -38,6 +39,13 @@ class AlipayEbppPdeductBillPayStatusRequest(object):
     @agreement_id.setter
     def agreement_id(self, value):
         self._agreement_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -129,6 +137,11 @@ class AlipayEbppPdeductBillPayStatusRequest(object):
                 params['agreement_id'] = json.dumps(obj=self.agreement_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['agreement_id'] = self.agreement_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = json.dumps(obj=self.out_order_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

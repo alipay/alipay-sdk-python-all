@@ -10,6 +10,7 @@ class AlipayEbppInvoiceInstitutionScopepageinfoQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppInvoiceInstitutionScopepageinfoQueryResponse, self).__init__()
         self._adapter_type = None
+        self._onwer_open_id_list = None
         self._owner_id_list = None
         self._page_num = None
         self._page_size = None
@@ -22,6 +23,16 @@ class AlipayEbppInvoiceInstitutionScopepageinfoQueryResponse(AlipayResponse):
     @adapter_type.setter
     def adapter_type(self, value):
         self._adapter_type = value
+    @property
+    def onwer_open_id_list(self):
+        return self._onwer_open_id_list
+
+    @onwer_open_id_list.setter
+    def onwer_open_id_list(self, value):
+        if isinstance(value, list):
+            self._onwer_open_id_list = list()
+            for i in value:
+                self._onwer_open_id_list.append(i)
     @property
     def owner_id_list(self):
         return self._owner_id_list
@@ -58,6 +69,8 @@ class AlipayEbppInvoiceInstitutionScopepageinfoQueryResponse(AlipayResponse):
         response = super(AlipayEbppInvoiceInstitutionScopepageinfoQueryResponse, self).parse_response_content(response_content)
         if 'adapter_type' in response:
             self.adapter_type = response['adapter_type']
+        if 'onwer_open_id_list' in response:
+            self.onwer_open_id_list = response['onwer_open_id_list']
         if 'owner_id_list' in response:
             self.owner_id_list = response['owner_id_list']
         if 'page_num' in response:

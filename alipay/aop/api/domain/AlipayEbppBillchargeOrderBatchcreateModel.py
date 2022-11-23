@@ -10,6 +10,7 @@ class AlipayEbppBillchargeOrderBatchcreateModel(object):
 
     def __init__(self):
         self._bill_list = None
+        self._open_id = None
         self._out_biz_id = None
         self._source = None
         self._total_pay_amount = None
@@ -28,6 +29,13 @@ class AlipayEbppBillchargeOrderBatchcreateModel(object):
                     self._bill_list.append(i)
                 else:
                     self._bill_list.append(SelectedBillInfo.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_id(self):
         return self._out_biz_id
@@ -70,6 +78,11 @@ class AlipayEbppBillchargeOrderBatchcreateModel(object):
                 params['bill_list'] = self.bill_list.to_alipay_dict()
             else:
                 params['bill_list'] = self.bill_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_id:
             if hasattr(self.out_biz_id, 'to_alipay_dict'):
                 params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
@@ -99,6 +112,8 @@ class AlipayEbppBillchargeOrderBatchcreateModel(object):
         o = AlipayEbppBillchargeOrderBatchcreateModel()
         if 'bill_list' in d:
             o.bill_list = d['bill_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_id' in d:
             o.out_biz_id = d['out_biz_id']
         if 'source' in d:

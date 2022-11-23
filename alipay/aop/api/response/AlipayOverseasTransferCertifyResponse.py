@@ -11,6 +11,7 @@ class AlipayOverseasTransferCertifyResponse(AlipayResponse):
         super(AlipayOverseasTransferCertifyResponse, self).__init__()
         self._has_default_card = None
         self._pass_through_info = None
+        self._result_msg = None
 
     @property
     def has_default_card(self):
@@ -26,6 +27,13 @@ class AlipayOverseasTransferCertifyResponse(AlipayResponse):
     @pass_through_info.setter
     def pass_through_info(self, value):
         self._pass_through_info = value
+    @property
+    def result_msg(self):
+        return self._result_msg
+
+    @result_msg.setter
+    def result_msg(self, value):
+        self._result_msg = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOverseasTransferCertifyResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayOverseasTransferCertifyResponse(AlipayResponse):
             self.has_default_card = response['has_default_card']
         if 'pass_through_info' in response:
             self.pass_through_info = response['pass_through_info']
+        if 'result_msg' in response:
+            self.result_msg = response['result_msg']

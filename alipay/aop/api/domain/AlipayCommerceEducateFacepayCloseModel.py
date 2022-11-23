@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateFacepayCloseModel(object):
 
     def __init__(self):
+        self._face_open_id = None
         self._face_uid = None
         self._scene = None
         self._school_stdcode = None
 
+    @property
+    def face_open_id(self):
+        return self._face_open_id
+
+    @face_open_id.setter
+    def face_open_id(self, value):
+        self._face_open_id = value
     @property
     def face_uid(self):
         return self._face_uid
@@ -37,6 +45,11 @@ class AlipayCommerceEducateFacepayCloseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.face_open_id:
+            if hasattr(self.face_open_id, 'to_alipay_dict'):
+                params['face_open_id'] = self.face_open_id.to_alipay_dict()
+            else:
+                params['face_open_id'] = self.face_open_id
         if self.face_uid:
             if hasattr(self.face_uid, 'to_alipay_dict'):
                 params['face_uid'] = self.face_uid.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceEducateFacepayCloseModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateFacepayCloseModel()
+        if 'face_open_id' in d:
+            o.face_open_id = d['face_open_id']
         if 'face_uid' in d:
             o.face_uid = d['face_uid']
         if 'scene' in d:

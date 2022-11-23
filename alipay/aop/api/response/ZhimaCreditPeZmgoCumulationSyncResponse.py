@@ -11,6 +11,7 @@ class ZhimaCreditPeZmgoCumulationSyncResponse(AlipayResponse):
         super(ZhimaCreditPeZmgoCumulationSyncResponse, self).__init__()
         self._agreement_no = None
         self._fail_reason = None
+        self._open_id = None
         self._out_biz_no = None
         self._user_id = None
 
@@ -28,6 +29,13 @@ class ZhimaCreditPeZmgoCumulationSyncResponse(AlipayResponse):
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -49,6 +57,8 @@ class ZhimaCreditPeZmgoCumulationSyncResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'user_id' in response:

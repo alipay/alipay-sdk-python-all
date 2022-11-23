@@ -9,6 +9,7 @@ class PkgAuthRelation(object):
 
     def __init__(self):
         self._mobile = None
+        self._open_id = None
         self._role = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class PkgAuthRelation(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def role(self):
         return self._role
@@ -42,6 +50,11 @@ class PkgAuthRelation(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -61,6 +74,8 @@ class PkgAuthRelation(object):
         o = PkgAuthRelation()
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'role' in d:
             o.role = d['role']
         if 'user_id' in d:

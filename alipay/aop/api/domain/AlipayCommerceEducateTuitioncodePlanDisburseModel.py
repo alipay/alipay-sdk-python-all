@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._out_order_no = None
         self._out_request_id = None
         self._plan_id = None
@@ -15,6 +16,13 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
         self._smid = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -64,6 +72,11 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayCommerceEducateTuitioncodePlanDisburseModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateTuitioncodePlanDisburseModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'out_request_id' in d:

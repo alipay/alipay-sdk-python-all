@@ -10,6 +10,7 @@ class AlipayCommerceTransportVehOrderRefundModel(object):
 
     def __init__(self):
         self._alipay_order_no = None
+        self._open_id = None
         self._order_type = None
         self._out_request_no = None
         self._refund_reason = None
@@ -24,6 +25,13 @@ class AlipayCommerceTransportVehOrderRefundModel(object):
     @alipay_order_no.setter
     def alipay_order_no(self, value):
         self._alipay_order_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_type(self):
         return self._order_type
@@ -81,6 +89,11 @@ class AlipayCommerceTransportVehOrderRefundModel(object):
                 params['alipay_order_no'] = self.alipay_order_no.to_alipay_dict()
             else:
                 params['alipay_order_no'] = self.alipay_order_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_type:
             if hasattr(self.order_type, 'to_alipay_dict'):
                 params['order_type'] = self.order_type.to_alipay_dict()
@@ -125,6 +138,8 @@ class AlipayCommerceTransportVehOrderRefundModel(object):
         o = AlipayCommerceTransportVehOrderRefundModel()
         if 'alipay_order_no' in d:
             o.alipay_order_no = d['alipay_order_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_type' in d:
             o.order_type = d['order_type']
         if 'out_request_no' in d:

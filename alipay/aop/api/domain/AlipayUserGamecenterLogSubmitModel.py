@@ -11,6 +11,7 @@ class AlipayUserGamecenterLogSubmitModel(object):
         self._alipay_user_id = None
         self._error_code = None
         self._error_desc = None
+        self._open_id = None
         self._openapi_name = None
         self._request_body = None
 
@@ -35,6 +36,13 @@ class AlipayUserGamecenterLogSubmitModel(object):
     @error_desc.setter
     def error_desc(self, value):
         self._error_desc = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def openapi_name(self):
         return self._openapi_name
@@ -68,6 +76,11 @@ class AlipayUserGamecenterLogSubmitModel(object):
                 params['error_desc'] = self.error_desc.to_alipay_dict()
             else:
                 params['error_desc'] = self.error_desc
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.openapi_name:
             if hasattr(self.openapi_name, 'to_alipay_dict'):
                 params['openapi_name'] = self.openapi_name.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayUserGamecenterLogSubmitModel(object):
             o.error_code = d['error_code']
         if 'error_desc' in d:
             o.error_desc = d['error_desc']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'openapi_name' in d:
             o.openapi_name = d['openapi_name']
         if 'request_body' in d:

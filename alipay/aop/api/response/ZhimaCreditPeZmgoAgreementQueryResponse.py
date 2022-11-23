@@ -14,6 +14,7 @@ class ZhimaCreditPeZmgoAgreementQueryResponse(AlipayResponse):
         self._agreement_status = None
         self._alipay_user_id = None
         self._biz_type = None
+        self._open_id = None
         self._sign_time = None
         self._start_time = None
 
@@ -53,6 +54,13 @@ class ZhimaCreditPeZmgoAgreementQueryResponse(AlipayResponse):
     def biz_type(self, value):
         self._biz_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def sign_time(self):
         return self._sign_time
 
@@ -79,6 +87,8 @@ class ZhimaCreditPeZmgoAgreementQueryResponse(AlipayResponse):
             self.alipay_user_id = response['alipay_user_id']
         if 'biz_type' in response:
             self.biz_type = response['biz_type']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'sign_time' in response:
             self.sign_time = response['sign_time']
         if 'start_time' in response:

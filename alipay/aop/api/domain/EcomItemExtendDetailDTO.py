@@ -14,6 +14,7 @@ class EcomItemExtendDetailDTO(object):
         self._game_account_client_id = None
         self._game_id = None
         self._game_name = None
+        self._lockable_device = None
 
     @property
     def ext_info(self):
@@ -57,6 +58,13 @@ class EcomItemExtendDetailDTO(object):
     @game_name.setter
     def game_name(self, value):
         self._game_name = value
+    @property
+    def lockable_device(self):
+        return self._lockable_device
+
+    @lockable_device.setter
+    def lockable_device(self, value):
+        self._lockable_device = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class EcomItemExtendDetailDTO(object):
                 params['game_name'] = self.game_name.to_alipay_dict()
             else:
                 params['game_name'] = self.game_name
+        if self.lockable_device:
+            if hasattr(self.lockable_device, 'to_alipay_dict'):
+                params['lockable_device'] = self.lockable_device.to_alipay_dict()
+            else:
+                params['lockable_device'] = self.lockable_device
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class EcomItemExtendDetailDTO(object):
             o.game_id = d['game_id']
         if 'game_name' in d:
             o.game_name = d['game_name']
+        if 'lockable_device' in d:
+            o.lockable_device = d['lockable_device']
         return o
 
 

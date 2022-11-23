@@ -13,6 +13,7 @@ class AlipaySecurityDataAlibabaSecuritydataSendModel(object):
         self._ingest_name = None
         self._main_target_type = None
         self._main_target_value = None
+        self._open_id = None
         self._property = None
         self._property_second = None
         self._property_third = None
@@ -60,6 +61,13 @@ class AlipaySecurityDataAlibabaSecuritydataSendModel(object):
     @main_target_value.setter
     def main_target_value(self, value):
         self._main_target_value = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def property(self):
         return self._property
@@ -166,6 +174,11 @@ class AlipaySecurityDataAlibabaSecuritydataSendModel(object):
                 params['main_target_value'] = self.main_target_value.to_alipay_dict()
             else:
                 params['main_target_value'] = self.main_target_value
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.property:
             if hasattr(self.property, 'to_alipay_dict'):
                 params['property'] = self.property.to_alipay_dict()
@@ -238,6 +251,8 @@ class AlipaySecurityDataAlibabaSecuritydataSendModel(object):
             o.main_target_type = d['main_target_type']
         if 'main_target_value' in d:
             o.main_target_value = d['main_target_value']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'property' in d:
             o.property = d['property']
         if 'property_second' in d:

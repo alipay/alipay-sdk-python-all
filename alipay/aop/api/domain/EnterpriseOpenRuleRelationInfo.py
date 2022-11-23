@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class EnterpriseOpenRuleRelationInfo(object):
 
     def __init__(self):
+        self._enterprise_id = None
         self._gmt_create = None
         self._gmt_modified = None
         self._owner_id = None
         self._standard_id = None
 
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -45,6 +53,11 @@ class EnterpriseOpenRuleRelationInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -72,6 +85,8 @@ class EnterpriseOpenRuleRelationInfo(object):
         if not d:
             return None
         o = EnterpriseOpenRuleRelationInfo()
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

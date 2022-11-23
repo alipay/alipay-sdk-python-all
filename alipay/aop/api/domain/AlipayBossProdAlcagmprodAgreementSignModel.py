@@ -9,6 +9,7 @@ class AlipayBossProdAlcagmprodAgreementSignModel(object):
 
     def __init__(self):
         self._agreement_id_list = None
+        self._open_id = None
         self._out_sign_no = None
         self._product_cd = None
         self._request_from = None
@@ -27,6 +28,13 @@ class AlipayBossProdAlcagmprodAgreementSignModel(object):
             self._agreement_id_list = list()
             for i in value:
                 self._agreement_id_list.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_sign_no(self):
         return self._out_sign_no
@@ -90,6 +98,11 @@ class AlipayBossProdAlcagmprodAgreementSignModel(object):
                 params['agreement_id_list'] = self.agreement_id_list.to_alipay_dict()
             else:
                 params['agreement_id_list'] = self.agreement_id_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_sign_no:
             if hasattr(self.out_sign_no, 'to_alipay_dict'):
                 params['out_sign_no'] = self.out_sign_no.to_alipay_dict()
@@ -134,6 +147,8 @@ class AlipayBossProdAlcagmprodAgreementSignModel(object):
         o = AlipayBossProdAlcagmprodAgreementSignModel()
         if 'agreement_id_list' in d:
             o.agreement_id_list = d['agreement_id_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_sign_no' in d:
             o.out_sign_no = d['out_sign_no']
         if 'product_cd' in d:

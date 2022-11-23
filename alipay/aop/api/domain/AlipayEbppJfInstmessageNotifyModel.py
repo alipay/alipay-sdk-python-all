@@ -20,6 +20,7 @@ class AlipayEbppJfInstmessageNotifyModel(object):
         self._inst = None
         self._inst_name = None
         self._inst_time = None
+        self._open_id = None
         self._org_code = None
         self._owe_amount = None
         self._owner_name = None
@@ -113,6 +114,13 @@ class AlipayEbppJfInstmessageNotifyModel(object):
     @inst_time.setter
     def inst_time(self, value):
         self._inst_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_code(self):
         return self._org_code
@@ -233,6 +241,11 @@ class AlipayEbppJfInstmessageNotifyModel(object):
                 params['inst_time'] = self.inst_time.to_alipay_dict()
             else:
                 params['inst_time'] = self.inst_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_code:
             if hasattr(self.org_code, 'to_alipay_dict'):
                 params['org_code'] = self.org_code.to_alipay_dict()
@@ -304,6 +317,8 @@ class AlipayEbppJfInstmessageNotifyModel(object):
             o.inst_name = d['inst_name']
         if 'inst_time' in d:
             o.inst_time = d['inst_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_code' in d:
             o.org_code = d['org_code']
         if 'owe_amount' in d:

@@ -10,6 +10,7 @@ class AlipayOpenPublicMessageSingleSendModel(object):
 
     def __init__(self):
         self._template = None
+        self._to_open_id = None
         self._to_user_id = None
 
     @property
@@ -22,6 +23,13 @@ class AlipayOpenPublicMessageSingleSendModel(object):
             self._template = value
         else:
             self._template = Template.from_alipay_dict(value)
+    @property
+    def to_open_id(self):
+        return self._to_open_id
+
+    @to_open_id.setter
+    def to_open_id(self, value):
+        self._to_open_id = value
     @property
     def to_user_id(self):
         return self._to_user_id
@@ -38,6 +46,11 @@ class AlipayOpenPublicMessageSingleSendModel(object):
                 params['template'] = self.template.to_alipay_dict()
             else:
                 params['template'] = self.template
+        if self.to_open_id:
+            if hasattr(self.to_open_id, 'to_alipay_dict'):
+                params['to_open_id'] = self.to_open_id.to_alipay_dict()
+            else:
+                params['to_open_id'] = self.to_open_id
         if self.to_user_id:
             if hasattr(self.to_user_id, 'to_alipay_dict'):
                 params['to_user_id'] = self.to_user_id.to_alipay_dict()
@@ -52,6 +65,8 @@ class AlipayOpenPublicMessageSingleSendModel(object):
         o = AlipayOpenPublicMessageSingleSendModel()
         if 'template' in d:
             o.template = d['template']
+        if 'to_open_id' in d:
+            o.to_open_id = d['to_open_id']
         if 'to_user_id' in d:
             o.to_user_id = d['to_user_id']
         return o

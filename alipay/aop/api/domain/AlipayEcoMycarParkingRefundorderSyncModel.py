@@ -9,6 +9,7 @@ class AlipayEcoMycarParkingRefundorderSyncModel(object):
 
     def __init__(self):
         self._car_number = None
+        self._open_id = None
         self._order_no = None
         self._out_refund_no = None
         self._refund_money = None
@@ -22,6 +23,13 @@ class AlipayEcoMycarParkingRefundorderSyncModel(object):
     @car_number.setter
     def car_number(self, value):
         self._car_number = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -66,6 +74,11 @@ class AlipayEcoMycarParkingRefundorderSyncModel(object):
                 params['car_number'] = self.car_number.to_alipay_dict()
             else:
                 params['car_number'] = self.car_number
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayEcoMycarParkingRefundorderSyncModel(object):
         o = AlipayEcoMycarParkingRefundorderSyncModel()
         if 'car_number' in d:
             o.car_number = d['car_number']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'out_refund_no' in d:

@@ -12,10 +12,15 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
         self._growth_strength = None
         self._is_growth_warn = None
         self._is_harvested = None
+        self._is_high_temperature_risk = None
+        self._is_low_temperature_risk = None
+        self._is_rainstorm_risk = None
+        self._is_soil_moisture_risk = None
         self._need_crop_only = None
         self._page_no = None
         self._page_size = None
         self._region_codes = None
+        self._region_group_code = None
 
     @property
     def crop_code(self):
@@ -45,6 +50,34 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
     @is_harvested.setter
     def is_harvested(self, value):
         self._is_harvested = value
+    @property
+    def is_high_temperature_risk(self):
+        return self._is_high_temperature_risk
+
+    @is_high_temperature_risk.setter
+    def is_high_temperature_risk(self, value):
+        self._is_high_temperature_risk = value
+    @property
+    def is_low_temperature_risk(self):
+        return self._is_low_temperature_risk
+
+    @is_low_temperature_risk.setter
+    def is_low_temperature_risk(self, value):
+        self._is_low_temperature_risk = value
+    @property
+    def is_rainstorm_risk(self):
+        return self._is_rainstorm_risk
+
+    @is_rainstorm_risk.setter
+    def is_rainstorm_risk(self, value):
+        self._is_rainstorm_risk = value
+    @property
+    def is_soil_moisture_risk(self):
+        return self._is_soil_moisture_risk
+
+    @is_soil_moisture_risk.setter
+    def is_soil_moisture_risk(self, value):
+        self._is_soil_moisture_risk = value
     @property
     def need_crop_only(self):
         return self._need_crop_only
@@ -76,6 +109,13 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
             self._region_codes = list()
             for i in value:
                 self._region_codes.append(i)
+    @property
+    def region_group_code(self):
+        return self._region_group_code
+
+    @region_group_code.setter
+    def region_group_code(self, value):
+        self._region_group_code = value
 
 
     def to_alipay_dict(self):
@@ -100,6 +140,26 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
                 params['is_harvested'] = self.is_harvested.to_alipay_dict()
             else:
                 params['is_harvested'] = self.is_harvested
+        if self.is_high_temperature_risk:
+            if hasattr(self.is_high_temperature_risk, 'to_alipay_dict'):
+                params['is_high_temperature_risk'] = self.is_high_temperature_risk.to_alipay_dict()
+            else:
+                params['is_high_temperature_risk'] = self.is_high_temperature_risk
+        if self.is_low_temperature_risk:
+            if hasattr(self.is_low_temperature_risk, 'to_alipay_dict'):
+                params['is_low_temperature_risk'] = self.is_low_temperature_risk.to_alipay_dict()
+            else:
+                params['is_low_temperature_risk'] = self.is_low_temperature_risk
+        if self.is_rainstorm_risk:
+            if hasattr(self.is_rainstorm_risk, 'to_alipay_dict'):
+                params['is_rainstorm_risk'] = self.is_rainstorm_risk.to_alipay_dict()
+            else:
+                params['is_rainstorm_risk'] = self.is_rainstorm_risk
+        if self.is_soil_moisture_risk:
+            if hasattr(self.is_soil_moisture_risk, 'to_alipay_dict'):
+                params['is_soil_moisture_risk'] = self.is_soil_moisture_risk.to_alipay_dict()
+            else:
+                params['is_soil_moisture_risk'] = self.is_soil_moisture_risk
         if self.need_crop_only:
             if hasattr(self.need_crop_only, 'to_alipay_dict'):
                 params['need_crop_only'] = self.need_crop_only.to_alipay_dict()
@@ -125,6 +185,11 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
                 params['region_codes'] = self.region_codes.to_alipay_dict()
             else:
                 params['region_codes'] = self.region_codes
+        if self.region_group_code:
+            if hasattr(self.region_group_code, 'to_alipay_dict'):
+                params['region_group_code'] = self.region_group_code.to_alipay_dict()
+            else:
+                params['region_group_code'] = self.region_group_code
         return params
 
     @staticmethod
@@ -140,6 +205,14 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
             o.is_growth_warn = d['is_growth_warn']
         if 'is_harvested' in d:
             o.is_harvested = d['is_harvested']
+        if 'is_high_temperature_risk' in d:
+            o.is_high_temperature_risk = d['is_high_temperature_risk']
+        if 'is_low_temperature_risk' in d:
+            o.is_low_temperature_risk = d['is_low_temperature_risk']
+        if 'is_rainstorm_risk' in d:
+            o.is_rainstorm_risk = d['is_rainstorm_risk']
+        if 'is_soil_moisture_risk' in d:
+            o.is_soil_moisture_risk = d['is_soil_moisture_risk']
         if 'need_crop_only' in d:
             o.need_crop_only = d['need_crop_only']
         if 'page_no' in d:
@@ -148,6 +221,8 @@ class AnttechBlockchainDefinDataserviceCropbaseBatchqueryModel(object):
             o.page_size = d['page_size']
         if 'region_codes' in d:
             o.region_codes = d['region_codes']
+        if 'region_group_code' in d:
+            o.region_group_code = d['region_group_code']
         return o
 
 

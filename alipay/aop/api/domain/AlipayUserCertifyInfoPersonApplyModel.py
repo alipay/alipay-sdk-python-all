@@ -18,6 +18,7 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
         self._country = None
         self._face_url = None
         self._mobile = None
+        self._open_id = None
         self._province = None
         self._sex = None
         self._user_id = None
@@ -94,6 +95,13 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def province(self):
         return self._province
@@ -183,6 +191,11 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.province:
             if hasattr(self.province, 'to_alipay_dict'):
                 params['province'] = self.province.to_alipay_dict()
@@ -235,6 +248,8 @@ class AlipayUserCertifyInfoPersonApplyModel(object):
             o.face_url = d['face_url']
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'province' in d:
             o.province = d['province']
         if 'sex' in d:

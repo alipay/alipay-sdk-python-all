@@ -9,6 +9,7 @@ class AlipayCommerceEducateFacepayApplyModel(object):
 
     def __init__(self):
         self._ext_info = None
+        self._face_open_id = None
         self._face_uid = None
         self._scene = None
         self._school_stdcode = None
@@ -20,6 +21,13 @@ class AlipayCommerceEducateFacepayApplyModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def face_open_id(self):
+        return self._face_open_id
+
+    @face_open_id.setter
+    def face_open_id(self, value):
+        self._face_open_id = value
     @property
     def face_uid(self):
         return self._face_uid
@@ -50,6 +58,11 @@ class AlipayCommerceEducateFacepayApplyModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.face_open_id:
+            if hasattr(self.face_open_id, 'to_alipay_dict'):
+                params['face_open_id'] = self.face_open_id.to_alipay_dict()
+            else:
+                params['face_open_id'] = self.face_open_id
         if self.face_uid:
             if hasattr(self.face_uid, 'to_alipay_dict'):
                 params['face_uid'] = self.face_uid.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayCommerceEducateFacepayApplyModel(object):
         o = AlipayCommerceEducateFacepayApplyModel()
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'face_open_id' in d:
+            o.face_open_id = d['face_open_id']
         if 'face_uid' in d:
             o.face_uid = d['face_uid']
         if 'scene' in d:

@@ -10,6 +10,7 @@ class EnterpriseOpenRuleRecordInfo(object):
     def __init__(self):
         self._bill_month_day = None
         self._effective_start = None
+        self._enterprise_id = None
         self._gmt_create = None
         self._gmt_modified = None
         self._invoice_rule_id = None
@@ -35,6 +36,13 @@ class EnterpriseOpenRuleRecordInfo(object):
     @effective_start.setter
     def effective_start(self, value):
         self._effective_start = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -119,6 +127,11 @@ class EnterpriseOpenRuleRecordInfo(object):
                 params['effective_start'] = self.effective_start.to_alipay_dict()
             else:
                 params['effective_start'] = self.effective_start
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -180,6 +193,8 @@ class EnterpriseOpenRuleRecordInfo(object):
             o.bill_month_day = d['bill_month_day']
         if 'effective_start' in d:
             o.effective_start = d['effective_start']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

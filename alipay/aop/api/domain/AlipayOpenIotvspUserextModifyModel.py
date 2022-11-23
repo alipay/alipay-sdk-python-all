@@ -12,6 +12,7 @@ class AlipayOpenIotvspUserextModifyModel(object):
         self._cert_no = None
         self._cert_type = None
         self._component_out_id = None
+        self._ext = None
         self._isv_pid = None
         self._org_out_id = None
         self._vid = None
@@ -44,6 +45,13 @@ class AlipayOpenIotvspUserextModifyModel(object):
     @component_out_id.setter
     def component_out_id(self, value):
         self._component_out_id = value
+    @property
+    def ext(self):
+        return self._ext
+
+    @ext.setter
+    def ext(self, value):
+        self._ext = value
     @property
     def isv_pid(self):
         return self._isv_pid
@@ -89,6 +97,11 @@ class AlipayOpenIotvspUserextModifyModel(object):
                 params['component_out_id'] = self.component_out_id.to_alipay_dict()
             else:
                 params['component_out_id'] = self.component_out_id
+        if self.ext:
+            if hasattr(self.ext, 'to_alipay_dict'):
+                params['ext'] = self.ext.to_alipay_dict()
+            else:
+                params['ext'] = self.ext
         if self.isv_pid:
             if hasattr(self.isv_pid, 'to_alipay_dict'):
                 params['isv_pid'] = self.isv_pid.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayOpenIotvspUserextModifyModel(object):
             o.cert_type = d['cert_type']
         if 'component_out_id' in d:
             o.component_out_id = d['component_out_id']
+        if 'ext' in d:
+            o.ext = d['ext']
         if 'isv_pid' in d:
             o.isv_pid = d['isv_pid']
         if 'org_out_id' in d:

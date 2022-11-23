@@ -15,6 +15,7 @@ class AlipayEbppPdeductSignCancelRequest(object):
         self._agent_channel = None
         self._agent_code = None
         self._agreement_id = None
+        self._open_id = None
         self._pay_password_token = None
         self._user_id = None
         self._version = "1.0"
@@ -55,6 +56,13 @@ class AlipayEbppPdeductSignCancelRequest(object):
     @agreement_id.setter
     def agreement_id(self, value):
         self._agreement_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def pay_password_token(self):
         return self._pay_password_token
@@ -163,6 +171,11 @@ class AlipayEbppPdeductSignCancelRequest(object):
                 params['agreement_id'] = json.dumps(obj=self.agreement_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['agreement_id'] = self.agreement_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.pay_password_token:
             if hasattr(self.pay_password_token, 'to_alipay_dict'):
                 params['pay_password_token'] = json.dumps(obj=self.pay_password_token.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

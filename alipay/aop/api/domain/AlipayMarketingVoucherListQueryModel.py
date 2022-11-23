@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayMarketingVoucherListQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._template_id = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def template_id(self):
         return self._template_id
@@ -29,6 +37,11 @@ class AlipayMarketingVoucherListQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayMarketingVoucherListQueryModel(object):
         if not d:
             return None
         o = AlipayMarketingVoucherListQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'user_id' in d:

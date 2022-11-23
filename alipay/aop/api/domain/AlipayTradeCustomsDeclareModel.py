@@ -13,6 +13,7 @@ class AlipayTradeCustomsDeclareModel(object):
         self._buyer_info = None
         self._customs_place = None
         self._declare_mode = None
+        self._deposit_trade_no = None
         self._is_split = None
         self._merchant_customs_code = None
         self._merchant_customs_name = None
@@ -53,6 +54,13 @@ class AlipayTradeCustomsDeclareModel(object):
     @declare_mode.setter
     def declare_mode(self, value):
         self._declare_mode = value
+    @property
+    def deposit_trade_no(self):
+        return self._deposit_trade_no
+
+    @deposit_trade_no.setter
+    def deposit_trade_no(self, value):
+        self._deposit_trade_no = value
     @property
     def is_split(self):
         return self._is_split
@@ -133,6 +141,11 @@ class AlipayTradeCustomsDeclareModel(object):
                 params['declare_mode'] = self.declare_mode.to_alipay_dict()
             else:
                 params['declare_mode'] = self.declare_mode
+        if self.deposit_trade_no:
+            if hasattr(self.deposit_trade_no, 'to_alipay_dict'):
+                params['deposit_trade_no'] = self.deposit_trade_no.to_alipay_dict()
+            else:
+                params['deposit_trade_no'] = self.deposit_trade_no
         if self.is_split:
             if hasattr(self.is_split, 'to_alipay_dict'):
                 params['is_split'] = self.is_split.to_alipay_dict()
@@ -188,6 +201,8 @@ class AlipayTradeCustomsDeclareModel(object):
             o.customs_place = d['customs_place']
         if 'declare_mode' in d:
             o.declare_mode = d['declare_mode']
+        if 'deposit_trade_no' in d:
+            o.deposit_trade_no = d['deposit_trade_no']
         if 'is_split' in d:
             o.is_split = d['is_split']
         if 'merchant_customs_code' in d:

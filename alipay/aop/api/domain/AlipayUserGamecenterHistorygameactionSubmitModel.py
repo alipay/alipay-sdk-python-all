@@ -12,6 +12,7 @@ class AlipayUserGamecenterHistorygameactionSubmitModel(object):
         self._action_finish_channel = None
         self._action_finish_date = None
         self._alipay_user_id = None
+        self._open_id = None
         self._out_biz_no = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayUserGamecenterHistorygameactionSubmitModel(object):
     def alipay_user_id(self, value):
         self._alipay_user_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -73,6 +81,11 @@ class AlipayUserGamecenterHistorygameactionSubmitModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayUserGamecenterHistorygameactionSubmitModel(object):
             o.action_finish_date = d['action_finish_date']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         return o

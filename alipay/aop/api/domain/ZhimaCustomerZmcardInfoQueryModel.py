@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCustomerZmcardInfoQueryModel(object):
 
     def __init__(self):
+        self._features = None
         self._guest_cert_no = None
         self._host_cert_no = None
         self._host_cert_type = None
         self._source = None
 
+    @property
+    def features(self):
+        return self._features
+
+    @features.setter
+    def features(self, value):
+        self._features = value
     @property
     def guest_cert_no(self):
         return self._guest_cert_no
@@ -45,6 +53,11 @@ class ZhimaCustomerZmcardInfoQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.features:
+            if hasattr(self.features, 'to_alipay_dict'):
+                params['features'] = self.features.to_alipay_dict()
+            else:
+                params['features'] = self.features
         if self.guest_cert_no:
             if hasattr(self.guest_cert_no, 'to_alipay_dict'):
                 params['guest_cert_no'] = self.guest_cert_no.to_alipay_dict()
@@ -72,6 +85,8 @@ class ZhimaCustomerZmcardInfoQueryModel(object):
         if not d:
             return None
         o = ZhimaCustomerZmcardInfoQueryModel()
+        if 'features' in d:
+            o.features = d['features']
         if 'guest_cert_no' in d:
             o.guest_cert_no = d['guest_cert_no']
         if 'host_cert_no' in d:

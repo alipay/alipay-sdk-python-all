@@ -13,6 +13,7 @@ class ZhimaMerchantOrderRentQueryResponse(AlipayResponse):
         self._alipay_fund_order_no = None
         self._borrow_time = None
         self._goods_name = None
+        self._open_id = None
         self._order_no = None
         self._pay_amount = None
         self._pay_amount_type = None
@@ -50,6 +51,13 @@ class ZhimaMerchantOrderRentQueryResponse(AlipayResponse):
     @goods_name.setter
     def goods_name(self, value):
         self._goods_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -117,6 +125,8 @@ class ZhimaMerchantOrderRentQueryResponse(AlipayResponse):
             self.borrow_time = response['borrow_time']
         if 'goods_name' in response:
             self.goods_name = response['goods_name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'pay_amount' in response:

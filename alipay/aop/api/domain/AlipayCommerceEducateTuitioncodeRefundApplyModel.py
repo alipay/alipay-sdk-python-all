@@ -9,13 +9,22 @@ from alipay.aop.api.domain.RefundPaidDetail import RefundPaidDetail
 class AlipayCommerceEducateTuitioncodeRefundApplyModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._out_order_no = None
         self._refund_paid_detail_list = None
         self._refund_reason = None
         self._refund_type = None
         self._request_id = None
         self._smid = None
+        self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -64,10 +73,22 @@ class AlipayCommerceEducateTuitioncodeRefundApplyModel(object):
     @smid.setter
     def smid(self, value):
         self._smid = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -103,6 +124,11 @@ class AlipayCommerceEducateTuitioncodeRefundApplyModel(object):
                 params['smid'] = self.smid.to_alipay_dict()
             else:
                 params['smid'] = self.smid
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -110,6 +136,8 @@ class AlipayCommerceEducateTuitioncodeRefundApplyModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateTuitioncodeRefundApplyModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'refund_paid_detail_list' in d:
@@ -122,6 +150,8 @@ class AlipayCommerceEducateTuitioncodeRefundApplyModel(object):
             o.request_id = d['request_id']
         if 'smid' in d:
             o.smid = d['smid']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

@@ -10,6 +10,7 @@ class AlipayCommerceTransportEtcSellerconfigQueryModel(object):
     def __init__(self):
         self._agent_appid = None
         self._agent_pid = None
+        self._open_id = None
         self._query_scopes = None
         self._seller_id = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceTransportEtcSellerconfigQueryModel(object):
     @agent_pid.setter
     def agent_pid(self, value):
         self._agent_pid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def query_scopes(self):
         return self._query_scopes
@@ -66,6 +74,11 @@ class AlipayCommerceTransportEtcSellerconfigQueryModel(object):
                 params['agent_pid'] = self.agent_pid.to_alipay_dict()
             else:
                 params['agent_pid'] = self.agent_pid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query_scopes:
             if isinstance(self.query_scopes, list):
                 for i in range(0, len(self.query_scopes)):
@@ -97,6 +110,8 @@ class AlipayCommerceTransportEtcSellerconfigQueryModel(object):
             o.agent_appid = d['agent_appid']
         if 'agent_pid' in d:
             o.agent_pid = d['agent_pid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query_scopes' in d:
             o.query_scopes = d['query_scopes']
         if 'seller_id' in d:

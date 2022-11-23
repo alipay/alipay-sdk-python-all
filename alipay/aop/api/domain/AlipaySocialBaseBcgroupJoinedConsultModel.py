@@ -9,6 +9,7 @@ class AlipaySocialBaseBcgroupJoinedConsultModel(object):
 
     def __init__(self):
         self._business_id = None
+        self._open_id = None
         self._tenant_id = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipaySocialBaseBcgroupJoinedConsultModel(object):
     @business_id.setter
     def business_id(self, value):
         self._business_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def tenant_id(self):
         return self._tenant_id
@@ -42,6 +50,11 @@ class AlipaySocialBaseBcgroupJoinedConsultModel(object):
                 params['business_id'] = self.business_id.to_alipay_dict()
             else:
                 params['business_id'] = self.business_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.tenant_id:
             if hasattr(self.tenant_id, 'to_alipay_dict'):
                 params['tenant_id'] = self.tenant_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipaySocialBaseBcgroupJoinedConsultModel(object):
         o = AlipaySocialBaseBcgroupJoinedConsultModel()
         if 'business_id' in d:
             o.business_id = d['business_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'tenant_id' in d:
             o.tenant_id = d['tenant_id']
         if 'user_id' in d:

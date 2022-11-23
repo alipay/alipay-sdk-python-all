@@ -9,6 +9,7 @@ class AlipayEbppEbppPdeductCzsignUpgradeModel(object):
 
     def __init__(self):
         self._agreement_id = None
+        self._fix_amount = None
         self._pid = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayEbppEbppPdeductCzsignUpgradeModel(object):
     @agreement_id.setter
     def agreement_id(self, value):
         self._agreement_id = value
+    @property
+    def fix_amount(self):
+        return self._fix_amount
+
+    @fix_amount.setter
+    def fix_amount(self, value):
+        self._fix_amount = value
     @property
     def pid(self):
         return self._pid
@@ -34,6 +42,11 @@ class AlipayEbppEbppPdeductCzsignUpgradeModel(object):
                 params['agreement_id'] = self.agreement_id.to_alipay_dict()
             else:
                 params['agreement_id'] = self.agreement_id
+        if self.fix_amount:
+            if hasattr(self.fix_amount, 'to_alipay_dict'):
+                params['fix_amount'] = self.fix_amount.to_alipay_dict()
+            else:
+                params['fix_amount'] = self.fix_amount
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayEbppEbppPdeductCzsignUpgradeModel(object):
         o = AlipayEbppEbppPdeductCzsignUpgradeModel()
         if 'agreement_id' in d:
             o.agreement_id = d['agreement_id']
+        if 'fix_amount' in d:
+            o.fix_amount = d['fix_amount']
         if 'pid' in d:
             o.pid = d['pid']
         return o

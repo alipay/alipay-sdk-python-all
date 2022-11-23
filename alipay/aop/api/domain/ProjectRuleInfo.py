@@ -12,6 +12,7 @@ class ProjectRuleInfo(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._employee_list = None
+        self._employee_open_id_list = None
         self._expense_ctrl_rule_info_group_list = None
         self._project_id = None
         self._project_name = None
@@ -40,6 +41,16 @@ class ProjectRuleInfo(object):
             self._employee_list = list()
             for i in value:
                 self._employee_list.append(i)
+    @property
+    def employee_open_id_list(self):
+        return self._employee_open_id_list
+
+    @employee_open_id_list.setter
+    def employee_open_id_list(self, value):
+        if isinstance(value, list):
+            self._employee_open_id_list = list()
+            for i in value:
+                self._employee_open_id_list.append(i)
     @property
     def expense_ctrl_rule_info_group_list(self):
         return self._expense_ctrl_rule_info_group_list
@@ -91,6 +102,16 @@ class ProjectRuleInfo(object):
                 params['employee_list'] = self.employee_list.to_alipay_dict()
             else:
                 params['employee_list'] = self.employee_list
+        if self.employee_open_id_list:
+            if isinstance(self.employee_open_id_list, list):
+                for i in range(0, len(self.employee_open_id_list)):
+                    element = self.employee_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.employee_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.employee_open_id_list, 'to_alipay_dict'):
+                params['employee_open_id_list'] = self.employee_open_id_list.to_alipay_dict()
+            else:
+                params['employee_open_id_list'] = self.employee_open_id_list
         if self.expense_ctrl_rule_info_group_list:
             if isinstance(self.expense_ctrl_rule_info_group_list, list):
                 for i in range(0, len(self.expense_ctrl_rule_info_group_list)):
@@ -124,6 +145,8 @@ class ProjectRuleInfo(object):
             o.effective_start_date = d['effective_start_date']
         if 'employee_list' in d:
             o.employee_list = d['employee_list']
+        if 'employee_open_id_list' in d:
+            o.employee_open_id_list = d['employee_open_id_list']
         if 'expense_ctrl_rule_info_group_list' in d:
             o.expense_ctrl_rule_info_group_list = d['expense_ctrl_rule_info_group_list']
         if 'project_id' in d:

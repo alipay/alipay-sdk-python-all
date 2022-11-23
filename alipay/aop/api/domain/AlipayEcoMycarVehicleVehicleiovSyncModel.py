@@ -12,6 +12,7 @@ class AlipayEcoMycarVehicleVehicleiovSyncModel(object):
         self._ext_info = None
         self._iov_datas = None
         self._iov_seq_no = None
+        self._open_id = None
         self._system_timestamp = None
         self._user_id = None
         self._vehicle_open_id = None
@@ -44,6 +45,13 @@ class AlipayEcoMycarVehicleVehicleiovSyncModel(object):
     @iov_seq_no.setter
     def iov_seq_no(self, value):
         self._iov_seq_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def system_timestamp(self):
         return self._system_timestamp
@@ -96,6 +104,11 @@ class AlipayEcoMycarVehicleVehicleiovSyncModel(object):
                 params['iov_seq_no'] = self.iov_seq_no.to_alipay_dict()
             else:
                 params['iov_seq_no'] = self.iov_seq_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.system_timestamp:
             if hasattr(self.system_timestamp, 'to_alipay_dict'):
                 params['system_timestamp'] = self.system_timestamp.to_alipay_dict()
@@ -129,6 +142,8 @@ class AlipayEcoMycarVehicleVehicleiovSyncModel(object):
             o.iov_datas = d['iov_datas']
         if 'iov_seq_no' in d:
             o.iov_seq_no = d['iov_seq_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'system_timestamp' in d:
             o.system_timestamp = d['system_timestamp']
         if 'user_id' in d:

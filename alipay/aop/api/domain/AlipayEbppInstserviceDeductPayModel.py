@@ -15,6 +15,7 @@ class AlipayEbppInstserviceDeductPayModel(object):
         self._extend_field = None
         self._fine_amount = None
         self._inst_id = None
+        self._open_id = None
         self._out_order_no = None
         self._pay_amount = None
         self._pid = None
@@ -69,6 +70,13 @@ class AlipayEbppInstserviceDeductPayModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -136,6 +144,11 @@ class AlipayEbppInstserviceDeductPayModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -177,6 +190,8 @@ class AlipayEbppInstserviceDeductPayModel(object):
             o.fine_amount = d['fine_amount']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'pay_amount' in d:

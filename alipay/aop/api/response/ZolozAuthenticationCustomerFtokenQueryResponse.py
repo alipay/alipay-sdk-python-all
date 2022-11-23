@@ -15,6 +15,7 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
         self._cert_name = None
         self._cert_no = None
         self._face_id = None
+        self._open_id = None
         self._uid = None
         self._uid_tel_pair_list = None
 
@@ -54,6 +55,13 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
     def face_id(self, value):
         self._face_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def uid(self):
         return self._uid
 
@@ -86,6 +94,8 @@ class ZolozAuthenticationCustomerFtokenQueryResponse(AlipayResponse):
             self.cert_no = response['cert_no']
         if 'face_id' in response:
             self.face_id = response['face_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'uid' in response:
             self.uid = response['uid']
         if 'uid_tel_pair_list' in response:

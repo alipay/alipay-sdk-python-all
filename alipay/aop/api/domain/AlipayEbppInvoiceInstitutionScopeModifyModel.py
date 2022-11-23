@@ -11,11 +11,13 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
         self._account_id = None
         self._adapter_type = None
         self._add_owner_id_list = None
+        self._add_owner_open_id_list = None
         self._agreement_no = None
         self._enterprise_id = None
         self._institution_id = None
         self._owner_type = None
         self._remove_owner_id_list = None
+        self._remove_owner_open_id_list = None
 
     @property
     def account_id(self):
@@ -41,6 +43,16 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
             self._add_owner_id_list = list()
             for i in value:
                 self._add_owner_id_list.append(i)
+    @property
+    def add_owner_open_id_list(self):
+        return self._add_owner_open_id_list
+
+    @add_owner_open_id_list.setter
+    def add_owner_open_id_list(self, value):
+        if isinstance(value, list):
+            self._add_owner_open_id_list = list()
+            for i in value:
+                self._add_owner_open_id_list.append(i)
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -79,6 +91,16 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
             self._remove_owner_id_list = list()
             for i in value:
                 self._remove_owner_id_list.append(i)
+    @property
+    def remove_owner_open_id_list(self):
+        return self._remove_owner_open_id_list
+
+    @remove_owner_open_id_list.setter
+    def remove_owner_open_id_list(self, value):
+        if isinstance(value, list):
+            self._remove_owner_open_id_list = list()
+            for i in value:
+                self._remove_owner_open_id_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -103,6 +125,16 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
                 params['add_owner_id_list'] = self.add_owner_id_list.to_alipay_dict()
             else:
                 params['add_owner_id_list'] = self.add_owner_id_list
+        if self.add_owner_open_id_list:
+            if isinstance(self.add_owner_open_id_list, list):
+                for i in range(0, len(self.add_owner_open_id_list)):
+                    element = self.add_owner_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.add_owner_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.add_owner_open_id_list, 'to_alipay_dict'):
+                params['add_owner_open_id_list'] = self.add_owner_open_id_list.to_alipay_dict()
+            else:
+                params['add_owner_open_id_list'] = self.add_owner_open_id_list
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -133,6 +165,16 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
                 params['remove_owner_id_list'] = self.remove_owner_id_list.to_alipay_dict()
             else:
                 params['remove_owner_id_list'] = self.remove_owner_id_list
+        if self.remove_owner_open_id_list:
+            if isinstance(self.remove_owner_open_id_list, list):
+                for i in range(0, len(self.remove_owner_open_id_list)):
+                    element = self.remove_owner_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.remove_owner_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.remove_owner_open_id_list, 'to_alipay_dict'):
+                params['remove_owner_open_id_list'] = self.remove_owner_open_id_list.to_alipay_dict()
+            else:
+                params['remove_owner_open_id_list'] = self.remove_owner_open_id_list
         return params
 
     @staticmethod
@@ -146,6 +188,8 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
             o.adapter_type = d['adapter_type']
         if 'add_owner_id_list' in d:
             o.add_owner_id_list = d['add_owner_id_list']
+        if 'add_owner_open_id_list' in d:
+            o.add_owner_open_id_list = d['add_owner_open_id_list']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'enterprise_id' in d:
@@ -156,6 +200,8 @@ class AlipayEbppInvoiceInstitutionScopeModifyModel(object):
             o.owner_type = d['owner_type']
         if 'remove_owner_id_list' in d:
             o.remove_owner_id_list = d['remove_owner_id_list']
+        if 'remove_owner_open_id_list' in d:
+            o.remove_owner_open_id_list = d['remove_owner_open_id_list']
         return o
 
 

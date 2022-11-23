@@ -21,6 +21,7 @@ class AlipayCommerceLogisticsOrderInstantdeliveryPrecreateModel(object):
         self._goods_details = None
         self._goods_info = None
         self._logistics_companies = None
+        self._open_id = None
         self._order_ext_istd = None
         self._out_order_no = None
         self._receiver = None
@@ -87,6 +88,13 @@ class AlipayCommerceLogisticsOrderInstantdeliveryPrecreateModel(object):
                     self._logistics_companies.append(i)
                 else:
                     self._logistics_companies.append(LogisticsCompanyIstd.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_ext_istd(self):
         return self._order_ext_istd
@@ -175,6 +183,11 @@ class AlipayCommerceLogisticsOrderInstantdeliveryPrecreateModel(object):
                 params['logistics_companies'] = self.logistics_companies.to_alipay_dict()
             else:
                 params['logistics_companies'] = self.logistics_companies
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_ext_istd:
             if hasattr(self.order_ext_istd, 'to_alipay_dict'):
                 params['order_ext_istd'] = self.order_ext_istd.to_alipay_dict()
@@ -219,6 +232,8 @@ class AlipayCommerceLogisticsOrderInstantdeliveryPrecreateModel(object):
             o.goods_info = d['goods_info']
         if 'logistics_companies' in d:
             o.logistics_companies = d['logistics_companies']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_ext_istd' in d:
             o.order_ext_istd = d['order_ext_istd']
         if 'out_order_no' in d:

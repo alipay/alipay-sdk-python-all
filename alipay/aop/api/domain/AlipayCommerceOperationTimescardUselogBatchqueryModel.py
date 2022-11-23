@@ -11,6 +11,7 @@ class AlipayCommerceOperationTimescardUselogBatchqueryModel(object):
         self._card_id = None
         self._log_time_end = None
         self._log_time_start = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._scene_code = None
@@ -37,6 +38,13 @@ class AlipayCommerceOperationTimescardUselogBatchqueryModel(object):
     @log_time_start.setter
     def log_time_start(self, value):
         self._log_time_start = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -84,6 +92,11 @@ class AlipayCommerceOperationTimescardUselogBatchqueryModel(object):
                 params['log_time_start'] = self.log_time_start.to_alipay_dict()
             else:
                 params['log_time_start'] = self.log_time_start
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayCommerceOperationTimescardUselogBatchqueryModel(object):
             o.log_time_end = d['log_time_end']
         if 'log_time_start' in d:
             o.log_time_start = d['log_time_start']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

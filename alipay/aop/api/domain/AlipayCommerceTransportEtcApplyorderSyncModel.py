@@ -19,6 +19,7 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
         self._delivery_no = None
         self._device_no = None
         self._need_refund = None
+        self._open_id = None
         self._order_id = None
         self._order_status = None
         self._out_biz_no = None
@@ -115,6 +116,13 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     @need_refund.setter
     def need_refund(self, value):
         self._need_refund = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -300,6 +308,11 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['need_refund'] = self.need_refund.to_alipay_dict()
             else:
                 params['need_refund'] = self.need_refund
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -419,6 +432,8 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.device_no = d['device_no']
         if 'need_refund' in d:
             o.need_refund = d['need_refund']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'order_status' in d:

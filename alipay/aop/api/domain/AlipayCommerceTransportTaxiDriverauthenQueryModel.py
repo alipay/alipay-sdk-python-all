@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceTransportTaxiDriverauthenQueryModel(object):
 
     def __init__(self):
+        self._driver_open_id = None
         self._driver_user_id = None
         self._request_time = None
 
+    @property
+    def driver_open_id(self):
+        return self._driver_open_id
+
+    @driver_open_id.setter
+    def driver_open_id(self, value):
+        self._driver_open_id = value
     @property
     def driver_user_id(self):
         return self._driver_user_id
@@ -29,6 +37,11 @@ class AlipayCommerceTransportTaxiDriverauthenQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.driver_open_id:
+            if hasattr(self.driver_open_id, 'to_alipay_dict'):
+                params['driver_open_id'] = self.driver_open_id.to_alipay_dict()
+            else:
+                params['driver_open_id'] = self.driver_open_id
         if self.driver_user_id:
             if hasattr(self.driver_user_id, 'to_alipay_dict'):
                 params['driver_user_id'] = self.driver_user_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayCommerceTransportTaxiDriverauthenQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportTaxiDriverauthenQueryModel()
+        if 'driver_open_id' in d:
+            o.driver_open_id = d['driver_open_id']
         if 'driver_user_id' in d:
             o.driver_user_id = d['driver_user_id']
         if 'request_time' in d:

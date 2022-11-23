@@ -12,6 +12,7 @@ class ZhimaCustomerBehaviorSyncModel(object):
         self._behavior_content = None
         self._contract_no = None
         self._gmt_service = None
+        self._open_id = None
         self._principal_type = None
         self._service_id = None
         self._subject_id = None
@@ -49,6 +50,13 @@ class ZhimaCustomerBehaviorSyncModel(object):
     @gmt_service.setter
     def gmt_service(self, value):
         self._gmt_service = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def principal_type(self):
         return self._principal_type
@@ -113,6 +121,11 @@ class ZhimaCustomerBehaviorSyncModel(object):
                 params['gmt_service'] = self.gmt_service.to_alipay_dict()
             else:
                 params['gmt_service'] = self.gmt_service
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.principal_type:
             if hasattr(self.principal_type, 'to_alipay_dict'):
                 params['principal_type'] = self.principal_type.to_alipay_dict()
@@ -153,6 +166,8 @@ class ZhimaCustomerBehaviorSyncModel(object):
             o.contract_no = d['contract_no']
         if 'gmt_service' in d:
             o.gmt_service = d['gmt_service']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'principal_type' in d:
             o.principal_type = d['principal_type']
         if 'service_id' in d:

@@ -13,6 +13,7 @@ class AlipayCommerceIndustryOrderSyncModel(object):
         self._discount_amount = None
         self._industry_info = None
         self._merchant_order_no = None
+        self._open_id = None
         self._order_amount = None
         self._order_create_time = None
         self._order_detail_url = None
@@ -54,6 +55,13 @@ class AlipayCommerceIndustryOrderSyncModel(object):
     @merchant_order_no.setter
     def merchant_order_no(self, value):
         self._merchant_order_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -165,6 +173,11 @@ class AlipayCommerceIndustryOrderSyncModel(object):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
             else:
                 params['merchant_order_no'] = self.merchant_order_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -240,6 +253,8 @@ class AlipayCommerceIndustryOrderSyncModel(object):
             o.industry_info = d['industry_info']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'order_create_time' in d:

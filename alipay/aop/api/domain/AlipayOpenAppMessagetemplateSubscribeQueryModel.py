@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenAppMessagetemplateSubscribeQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._template_id_list = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def template_id_list(self):
         return self._template_id_list
@@ -32,6 +40,11 @@ class AlipayOpenAppMessagetemplateSubscribeQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.template_id_list:
             if isinstance(self.template_id_list, list):
                 for i in range(0, len(self.template_id_list)):
@@ -54,6 +67,8 @@ class AlipayOpenAppMessagetemplateSubscribeQueryModel(object):
         if not d:
             return None
         o = AlipayOpenAppMessagetemplateSubscribeQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'template_id_list' in d:
             o.template_id_list = d['template_id_list']
         if 'user_id' in d:

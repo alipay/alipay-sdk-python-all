@@ -9,6 +9,7 @@ class AlipayBusinessMallPointsNotifyModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._buyer_open_id = None
         self._earn_points = None
         self._no_points_remarks = None
         self._obtain_points = None
@@ -23,6 +24,13 @@ class AlipayBusinessMallPointsNotifyModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def earn_points(self):
         return self._earn_points
@@ -74,6 +82,11 @@ class AlipayBusinessMallPointsNotifyModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.earn_points:
             if hasattr(self.earn_points, 'to_alipay_dict'):
                 params['earn_points'] = self.earn_points.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayBusinessMallPointsNotifyModel(object):
         o = AlipayBusinessMallPointsNotifyModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'earn_points' in d:
             o.earn_points = d['earn_points']
         if 'no_points_remarks' in d:

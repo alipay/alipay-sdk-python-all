@@ -20,6 +20,7 @@ class AlipayMerchantOrderSyncModel(object):
         self._amount = None
         self._buyer_id = None
         self._buyer_info = None
+        self._buyer_open_id = None
         self._discount_amount = None
         self._discount_info_list = None
         self._ext_info = None
@@ -71,6 +72,13 @@ class AlipayMerchantOrderSyncModel(object):
             self._buyer_info = value
         else:
             self._buyer_info = UserInfomation.from_alipay_dict(value)
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def discount_amount(self):
         return self._discount_amount
@@ -314,6 +322,11 @@ class AlipayMerchantOrderSyncModel(object):
                 params['buyer_info'] = self.buyer_info.to_alipay_dict()
             else:
                 params['buyer_info'] = self.buyer_info
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.discount_amount:
             if hasattr(self.discount_amount, 'to_alipay_dict'):
                 params['discount_amount'] = self.discount_amount.to_alipay_dict()
@@ -487,6 +500,8 @@ class AlipayMerchantOrderSyncModel(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_info' in d:
             o.buyer_info = d['buyer_info']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'discount_amount' in d:
             o.discount_amount = d['discount_amount']
         if 'discount_info_list' in d:

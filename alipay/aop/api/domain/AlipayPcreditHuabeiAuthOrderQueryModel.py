@@ -10,6 +10,7 @@ class AlipayPcreditHuabeiAuthOrderQueryModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._auth_opt_id = None
+        self._open_id = None
         self._out_request_no = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayPcreditHuabeiAuthOrderQueryModel(object):
     @auth_opt_id.setter
     def auth_opt_id(self, value):
         self._auth_opt_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -47,6 +55,11 @@ class AlipayPcreditHuabeiAuthOrderQueryModel(object):
                 params['auth_opt_id'] = self.auth_opt_id.to_alipay_dict()
             else:
                 params['auth_opt_id'] = self.auth_opt_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayPcreditHuabeiAuthOrderQueryModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'auth_opt_id' in d:
             o.auth_opt_id = d['auth_opt_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         return o

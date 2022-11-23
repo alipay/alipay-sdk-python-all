@@ -16,6 +16,7 @@ class AlipayEbppInvoiceExpenseProgressSyncModel(object):
         self._invoice_code = None
         self._invoice_no = None
         self._memo = None
+        self._open_id = None
         self._status = None
         self._user_id = None
 
@@ -76,6 +77,13 @@ class AlipayEbppInvoiceExpenseProgressSyncModel(object):
     def memo(self, value):
         self._memo = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def status(self):
         return self._status
 
@@ -133,6 +141,11 @@ class AlipayEbppInvoiceExpenseProgressSyncModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -166,6 +179,8 @@ class AlipayEbppInvoiceExpenseProgressSyncModel(object):
             o.invoice_no = d['invoice_no']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status' in d:
             o.status = d['status']
         if 'user_id' in d:

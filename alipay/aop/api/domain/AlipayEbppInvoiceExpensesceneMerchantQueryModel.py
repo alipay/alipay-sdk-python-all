@@ -10,6 +10,7 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
     def __init__(self):
         self._account_id = None
         self._agreement_no = None
+        self._enterprise_id = None
         self._expense_type = None
         self._page_num = None
         self._page_size = None
@@ -30,6 +31,13 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def expense_type(self):
         return self._expense_type
@@ -79,6 +87,11 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.expense_type:
             if hasattr(self.expense_type, 'to_alipay_dict'):
                 params['expense_type'] = self.expense_type.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
             o.account_id = d['account_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'expense_type' in d:
             o.expense_type = d['expense_type']
         if 'page_num' in d:

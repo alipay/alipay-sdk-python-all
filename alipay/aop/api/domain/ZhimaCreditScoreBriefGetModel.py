@@ -13,6 +13,7 @@ class ZhimaCreditScoreBriefGetModel(object):
         self._cert_type = None
         self._linked_merchant_id = None
         self._name = None
+        self._open_id = None
         self._product_code = None
         self._transaction_id = None
 
@@ -51,6 +52,13 @@ class ZhimaCreditScoreBriefGetModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def product_code(self):
         return self._product_code
@@ -94,6 +102,11 @@ class ZhimaCreditScoreBriefGetModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -121,6 +134,8 @@ class ZhimaCreditScoreBriefGetModel(object):
             o.linked_merchant_id = d['linked_merchant_id']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'transaction_id' in d:

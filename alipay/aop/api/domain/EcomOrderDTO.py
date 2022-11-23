@@ -16,6 +16,7 @@ class EcomOrderDTO(object):
         self._buy_amount = None
         self._buyer_id = None
         self._buyer_nick = None
+        self._credit_deposit_money = None
         self._discount_fee = None
         self._ext_info = None
         self._gmt_create = None
@@ -23,6 +24,7 @@ class EcomOrderDTO(object):
         self._item_pict_url = None
         self._item_price = None
         self._item_title = None
+        self._item_total_value = None
         self._logistics_order = None
         self._main_order_id = None
         self._order_fee = None
@@ -33,7 +35,9 @@ class EcomOrderDTO(object):
         self._seller_id = None
         self._seller_nick = None
         self._sub_order_list = None
+        self._trade_days = None
         self._trade_end_time = None
+        self._trade_start_time = None
 
     @property
     def actual_pay_fee(self):
@@ -70,6 +74,13 @@ class EcomOrderDTO(object):
     @buyer_nick.setter
     def buyer_nick(self, value):
         self._buyer_nick = value
+    @property
+    def credit_deposit_money(self):
+        return self._credit_deposit_money
+
+    @credit_deposit_money.setter
+    def credit_deposit_money(self, value):
+        self._credit_deposit_money = value
     @property
     def discount_fee(self):
         return self._discount_fee
@@ -119,6 +130,13 @@ class EcomOrderDTO(object):
     @item_title.setter
     def item_title(self, value):
         self._item_title = value
+    @property
+    def item_total_value(self):
+        return self._item_total_value
+
+    @item_total_value.setter
+    def item_total_value(self, value):
+        self._item_total_value = value
     @property
     def logistics_order(self):
         return self._logistics_order
@@ -202,12 +220,26 @@ class EcomOrderDTO(object):
                 else:
                     self._sub_order_list.append(EcomSubOrderDTO.from_alipay_dict(i))
     @property
+    def trade_days(self):
+        return self._trade_days
+
+    @trade_days.setter
+    def trade_days(self, value):
+        self._trade_days = value
+    @property
     def trade_end_time(self):
         return self._trade_end_time
 
     @trade_end_time.setter
     def trade_end_time(self, value):
         self._trade_end_time = value
+    @property
+    def trade_start_time(self):
+        return self._trade_start_time
+
+    @trade_start_time.setter
+    def trade_start_time(self, value):
+        self._trade_start_time = value
 
 
     def to_alipay_dict(self):
@@ -237,6 +269,11 @@ class EcomOrderDTO(object):
                 params['buyer_nick'] = self.buyer_nick.to_alipay_dict()
             else:
                 params['buyer_nick'] = self.buyer_nick
+        if self.credit_deposit_money:
+            if hasattr(self.credit_deposit_money, 'to_alipay_dict'):
+                params['credit_deposit_money'] = self.credit_deposit_money.to_alipay_dict()
+            else:
+                params['credit_deposit_money'] = self.credit_deposit_money
         if self.discount_fee:
             if hasattr(self.discount_fee, 'to_alipay_dict'):
                 params['discount_fee'] = self.discount_fee.to_alipay_dict()
@@ -272,6 +309,11 @@ class EcomOrderDTO(object):
                 params['item_title'] = self.item_title.to_alipay_dict()
             else:
                 params['item_title'] = self.item_title
+        if self.item_total_value:
+            if hasattr(self.item_total_value, 'to_alipay_dict'):
+                params['item_total_value'] = self.item_total_value.to_alipay_dict()
+            else:
+                params['item_total_value'] = self.item_total_value
         if self.logistics_order:
             if hasattr(self.logistics_order, 'to_alipay_dict'):
                 params['logistics_order'] = self.logistics_order.to_alipay_dict()
@@ -327,11 +369,21 @@ class EcomOrderDTO(object):
                 params['sub_order_list'] = self.sub_order_list.to_alipay_dict()
             else:
                 params['sub_order_list'] = self.sub_order_list
+        if self.trade_days:
+            if hasattr(self.trade_days, 'to_alipay_dict'):
+                params['trade_days'] = self.trade_days.to_alipay_dict()
+            else:
+                params['trade_days'] = self.trade_days
         if self.trade_end_time:
             if hasattr(self.trade_end_time, 'to_alipay_dict'):
                 params['trade_end_time'] = self.trade_end_time.to_alipay_dict()
             else:
                 params['trade_end_time'] = self.trade_end_time
+        if self.trade_start_time:
+            if hasattr(self.trade_start_time, 'to_alipay_dict'):
+                params['trade_start_time'] = self.trade_start_time.to_alipay_dict()
+            else:
+                params['trade_start_time'] = self.trade_start_time
         return params
 
     @staticmethod
@@ -349,6 +401,8 @@ class EcomOrderDTO(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_nick' in d:
             o.buyer_nick = d['buyer_nick']
+        if 'credit_deposit_money' in d:
+            o.credit_deposit_money = d['credit_deposit_money']
         if 'discount_fee' in d:
             o.discount_fee = d['discount_fee']
         if 'ext_info' in d:
@@ -363,6 +417,8 @@ class EcomOrderDTO(object):
             o.item_price = d['item_price']
         if 'item_title' in d:
             o.item_title = d['item_title']
+        if 'item_total_value' in d:
+            o.item_total_value = d['item_total_value']
         if 'logistics_order' in d:
             o.logistics_order = d['logistics_order']
         if 'main_order_id' in d:
@@ -383,8 +439,12 @@ class EcomOrderDTO(object):
             o.seller_nick = d['seller_nick']
         if 'sub_order_list' in d:
             o.sub_order_list = d['sub_order_list']
+        if 'trade_days' in d:
+            o.trade_days = d['trade_days']
         if 'trade_end_time' in d:
             o.trade_end_time = d['trade_end_time']
+        if 'trade_start_time' in d:
+            o.trade_start_time = d['trade_start_time']
         return o
 
 

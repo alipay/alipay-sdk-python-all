@@ -12,6 +12,7 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
     def __init__(self):
         self._device_identify_type = None
         self._goods_infos = None
+        self._open_id = None
         self._req_id = None
         self._scene = None
         self._terminal_id = None
@@ -39,6 +40,13 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
                     self._goods_infos.append(i)
                 else:
                     self._goods_infos.append(GoodInfo.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def req_id(self):
         return self._req_id
@@ -106,6 +114,11 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
                 params['goods_infos'] = self.goods_infos.to_alipay_dict()
             else:
                 params['goods_infos'] = self.goods_infos
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.req_id:
             if hasattr(self.req_id, 'to_alipay_dict'):
                 params['req_id'] = self.req_id.to_alipay_dict()
@@ -152,6 +165,8 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
             o.device_identify_type = d['device_identify_type']
         if 'goods_infos' in d:
             o.goods_infos = d['goods_infos']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'req_id' in d:
             o.req_id = d['req_id']
         if 'scene' in d:

@@ -13,6 +13,7 @@ class AlipayCommerceOperationContentQueryModel(object):
         self._city_code = None
         self._content_id_str = None
         self._ext_params = None
+        self._open_id = None
         self._page_number = None
         self._page_size = None
         self._scene = None
@@ -57,6 +58,13 @@ class AlipayCommerceOperationContentQueryModel(object):
     @ext_params.setter
     def ext_params(self, value):
         self._ext_params = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_number(self):
         return self._page_number
@@ -126,6 +134,11 @@ class AlipayCommerceOperationContentQueryModel(object):
                 params['ext_params'] = self.ext_params.to_alipay_dict()
             else:
                 params['ext_params'] = self.ext_params
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_number:
             if hasattr(self.page_number, 'to_alipay_dict'):
                 params['page_number'] = self.page_number.to_alipay_dict()
@@ -168,6 +181,8 @@ class AlipayCommerceOperationContentQueryModel(object):
             o.content_id_str = d['content_id_str']
         if 'ext_params' in d:
             o.ext_params = d['ext_params']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_number' in d:
             o.page_number = d['page_number']
         if 'page_size' in d:

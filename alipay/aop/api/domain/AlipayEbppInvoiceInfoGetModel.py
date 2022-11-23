@@ -10,6 +10,7 @@ class AlipayEbppInvoiceInfoGetModel(object):
     def __init__(self):
         self._invoice_code = None
         self._invoice_no = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayEbppInvoiceInfoGetModel(object):
     @invoice_no.setter
     def invoice_no(self, value):
         self._invoice_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -47,6 +55,11 @@ class AlipayEbppInvoiceInfoGetModel(object):
                 params['invoice_no'] = self.invoice_no.to_alipay_dict()
             else:
                 params['invoice_no'] = self.invoice_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayEbppInvoiceInfoGetModel(object):
             o.invoice_code = d['invoice_code']
         if 'invoice_no' in d:
             o.invoice_no = d['invoice_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

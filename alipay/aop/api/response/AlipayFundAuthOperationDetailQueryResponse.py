@@ -27,6 +27,7 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
         self._out_order_no = None
         self._out_request_no = None
         self._payer_logon_id = None
+        self._payer_open_id = None
         self._payer_user_id = None
         self._pre_auth_type = None
         self._remark = None
@@ -165,6 +166,13 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
     def payer_logon_id(self, value):
         self._payer_logon_id = value
     @property
+    def payer_open_id(self):
+        return self._payer_open_id
+
+    @payer_open_id.setter
+    def payer_open_id(self, value):
+        self._payer_open_id = value
+    @property
     def payer_user_id(self):
         return self._payer_user_id
 
@@ -299,6 +307,8 @@ class AlipayFundAuthOperationDetailQueryResponse(AlipayResponse):
             self.out_request_no = response['out_request_no']
         if 'payer_logon_id' in response:
             self.payer_logon_id = response['payer_logon_id']
+        if 'payer_open_id' in response:
+            self.payer_open_id = response['payer_open_id']
         if 'payer_user_id' in response:
             self.payer_user_id = response['payer_user_id']
         if 'pre_auth_type' in response:

@@ -11,6 +11,7 @@ class ZhimaCustomerContractAcceptCreateModel(object):
         self._biz_principal_id = None
         self._biz_principal_type = None
         self._contract_no = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class ZhimaCustomerContractAcceptCreateModel(object):
     @contract_no.setter
     def contract_no(self, value):
         self._contract_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class ZhimaCustomerContractAcceptCreateModel(object):
                 params['contract_no'] = self.contract_no.to_alipay_dict()
             else:
                 params['contract_no'] = self.contract_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class ZhimaCustomerContractAcceptCreateModel(object):
             o.biz_principal_type = d['biz_principal_type']
         if 'contract_no' in d:
             o.contract_no = d['contract_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

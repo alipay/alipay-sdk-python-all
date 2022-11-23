@@ -14,6 +14,7 @@ class VehMessageEntity(object):
         self._ext_info = None
         self._mark = None
         self._msg_template_id = None
+        self._open_id = None
         self._out_msg_id = None
         self._target_url = None
         self._uid = None
@@ -60,6 +61,13 @@ class VehMessageEntity(object):
     @msg_template_id.setter
     def msg_template_id(self, value):
         self._msg_template_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_msg_id(self):
         return self._out_msg_id
@@ -115,6 +123,11 @@ class VehMessageEntity(object):
                 params['msg_template_id'] = self.msg_template_id.to_alipay_dict()
             else:
                 params['msg_template_id'] = self.msg_template_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_msg_id:
             if hasattr(self.out_msg_id, 'to_alipay_dict'):
                 params['out_msg_id'] = self.out_msg_id.to_alipay_dict()
@@ -149,6 +162,8 @@ class VehMessageEntity(object):
             o.mark = d['mark']
         if 'msg_template_id' in d:
             o.msg_template_id = d['msg_template_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_msg_id' in d:
             o.out_msg_id = d['out_msg_id']
         if 'target_url' in d:

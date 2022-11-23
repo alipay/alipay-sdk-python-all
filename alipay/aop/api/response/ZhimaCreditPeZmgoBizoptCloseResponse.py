@@ -10,6 +10,7 @@ class ZhimaCreditPeZmgoBizoptCloseResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditPeZmgoBizoptCloseResponse, self).__init__()
         self._biz_opt_no = None
+        self._open_id = None
         self._out_request_no = None
         self._partner_id = None
         self._user_id = None
@@ -21,6 +22,13 @@ class ZhimaCreditPeZmgoBizoptCloseResponse(AlipayResponse):
     @biz_opt_no.setter
     def biz_opt_no(self, value):
         self._biz_opt_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -47,6 +55,8 @@ class ZhimaCreditPeZmgoBizoptCloseResponse(AlipayResponse):
         response = super(ZhimaCreditPeZmgoBizoptCloseResponse, self).parse_response_content(response_content)
         if 'biz_opt_no' in response:
             self.biz_opt_no = response['biz_opt_no']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_request_no' in response:
             self.out_request_no = response['out_request_no']
         if 'partner_id' in response:

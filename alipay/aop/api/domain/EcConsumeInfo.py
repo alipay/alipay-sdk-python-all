@@ -29,6 +29,7 @@ class EcConsumeInfo(object):
         self._invoice_open_mode = None
         self._merchant_id = None
         self._merchant_name = None
+        self._open_id = None
         self._order_complete_label = None
         self._order_complete_time = None
         self._pay_no = None
@@ -191,6 +192,13 @@ class EcConsumeInfo(object):
     @merchant_name.setter
     def merchant_name(self, value):
         self._merchant_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_complete_label(self):
         return self._order_complete_label
@@ -398,6 +406,11 @@ class EcConsumeInfo(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_complete_label:
             if hasattr(self.order_complete_label, 'to_alipay_dict'):
                 params['order_complete_label'] = self.order_complete_label.to_alipay_dict()
@@ -517,6 +530,8 @@ class EcConsumeInfo(object):
             o.merchant_id = d['merchant_id']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_complete_label' in d:
             o.order_complete_label = d['order_complete_label']
         if 'order_complete_time' in d:

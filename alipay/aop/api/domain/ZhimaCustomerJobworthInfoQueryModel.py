@@ -20,6 +20,7 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
         self._industry_id = None
         self._job_id = None
         self._ka_visitor_id = None
+        self._open_id = None
         self._user_id = None
         self._user_name = None
         self._visitor_name = None
@@ -110,6 +111,13 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
     @ka_visitor_id.setter
     def ka_visitor_id(self, value):
         self._ka_visitor_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -209,6 +217,11 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
                 params['ka_visitor_id'] = self.ka_visitor_id.to_alipay_dict()
             else:
                 params['ka_visitor_id'] = self.ka_visitor_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -265,6 +278,8 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
             o.job_id = d['job_id']
         if 'ka_visitor_id' in d:
             o.ka_visitor_id = d['ka_visitor_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

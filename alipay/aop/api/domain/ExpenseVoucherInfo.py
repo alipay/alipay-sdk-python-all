@@ -11,6 +11,7 @@ class ExpenseVoucherInfo(object):
         self._account_id = None
         self._consumption_date = None
         self._employee_id = None
+        self._employee_open_id = None
         self._extension = None
         self._gmt_create = None
         self._gmt_modified = None
@@ -47,6 +48,13 @@ class ExpenseVoucherInfo(object):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def employee_open_id(self):
+        return self._employee_open_id
+
+    @employee_open_id.setter
+    def employee_open_id(self, value):
+        self._employee_open_id = value
     @property
     def extension(self):
         return self._extension
@@ -164,6 +172,11 @@ class ExpenseVoucherInfo(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.employee_open_id:
+            if hasattr(self.employee_open_id, 'to_alipay_dict'):
+                params['employee_open_id'] = self.employee_open_id.to_alipay_dict()
+            else:
+                params['employee_open_id'] = self.employee_open_id
         if self.extension:
             if hasattr(self.extension, 'to_alipay_dict'):
                 params['extension'] = self.extension.to_alipay_dict()
@@ -247,6 +260,8 @@ class ExpenseVoucherInfo(object):
             o.consumption_date = d['consumption_date']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'employee_open_id' in d:
+            o.employee_open_id = d['employee_open_id']
         if 'extension' in d:
             o.extension = d['extension']
         if 'gmt_create' in d:

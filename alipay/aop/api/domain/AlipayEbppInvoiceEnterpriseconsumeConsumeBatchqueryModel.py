@@ -13,6 +13,7 @@ class AlipayEbppInvoiceEnterpriseconsumeConsumeBatchqueryModel(object):
         self._consumption_end = None
         self._consumption_start = None
         self._employee_list = None
+        self._employee_open_ids = None
 
     @property
     def account_id(self):
@@ -52,6 +53,16 @@ class AlipayEbppInvoiceEnterpriseconsumeConsumeBatchqueryModel(object):
             self._employee_list = list()
             for i in value:
                 self._employee_list.append(i)
+    @property
+    def employee_open_ids(self):
+        return self._employee_open_ids
+
+    @employee_open_ids.setter
+    def employee_open_ids(self, value):
+        if isinstance(value, list):
+            self._employee_open_ids = list()
+            for i in value:
+                self._employee_open_ids.append(i)
 
 
     def to_alipay_dict(self):
@@ -86,6 +97,16 @@ class AlipayEbppInvoiceEnterpriseconsumeConsumeBatchqueryModel(object):
                 params['employee_list'] = self.employee_list.to_alipay_dict()
             else:
                 params['employee_list'] = self.employee_list
+        if self.employee_open_ids:
+            if isinstance(self.employee_open_ids, list):
+                for i in range(0, len(self.employee_open_ids)):
+                    element = self.employee_open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.employee_open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.employee_open_ids, 'to_alipay_dict'):
+                params['employee_open_ids'] = self.employee_open_ids.to_alipay_dict()
+            else:
+                params['employee_open_ids'] = self.employee_open_ids
         return params
 
     @staticmethod
@@ -103,6 +124,8 @@ class AlipayEbppInvoiceEnterpriseconsumeConsumeBatchqueryModel(object):
             o.consumption_start = d['consumption_start']
         if 'employee_list' in d:
             o.employee_list = d['employee_list']
+        if 'employee_open_ids' in d:
+            o.employee_open_ids = d['employee_open_ids']
         return o
 
 

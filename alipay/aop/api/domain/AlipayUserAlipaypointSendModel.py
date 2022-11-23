@@ -10,6 +10,7 @@ class AlipayUserAlipaypointSendModel(object):
     def __init__(self):
         self._budget_code = None
         self._memo = None
+        self._open_id = None
         self._partner_biz_no = None
         self._point_amount = None
         self._user_account = None
@@ -29,6 +30,13 @@ class AlipayUserAlipaypointSendModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def partner_biz_no(self):
         return self._partner_biz_no
@@ -71,6 +79,11 @@ class AlipayUserAlipaypointSendModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.partner_biz_no:
             if hasattr(self.partner_biz_no, 'to_alipay_dict'):
                 params['partner_biz_no'] = self.partner_biz_no.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayUserAlipaypointSendModel(object):
             o.budget_code = d['budget_code']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'partner_biz_no' in d:
             o.partner_biz_no = d['partner_biz_no']
         if 'point_amount' in d:

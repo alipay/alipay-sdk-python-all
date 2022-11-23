@@ -11,6 +11,7 @@ class AlipayOpenAppMiniTemplatemessageSendModel(object):
         self._data = None
         self._form_id = None
         self._page = None
+        self._to_open_id = None
         self._to_user_id = None
         self._user_template_id = None
 
@@ -35,6 +36,13 @@ class AlipayOpenAppMiniTemplatemessageSendModel(object):
     @page.setter
     def page(self, value):
         self._page = value
+    @property
+    def to_open_id(self):
+        return self._to_open_id
+
+    @to_open_id.setter
+    def to_open_id(self, value):
+        self._to_open_id = value
     @property
     def to_user_id(self):
         return self._to_user_id
@@ -68,6 +76,11 @@ class AlipayOpenAppMiniTemplatemessageSendModel(object):
                 params['page'] = self.page.to_alipay_dict()
             else:
                 params['page'] = self.page
+        if self.to_open_id:
+            if hasattr(self.to_open_id, 'to_alipay_dict'):
+                params['to_open_id'] = self.to_open_id.to_alipay_dict()
+            else:
+                params['to_open_id'] = self.to_open_id
         if self.to_user_id:
             if hasattr(self.to_user_id, 'to_alipay_dict'):
                 params['to_user_id'] = self.to_user_id.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayOpenAppMiniTemplatemessageSendModel(object):
             o.form_id = d['form_id']
         if 'page' in d:
             o.page = d['page']
+        if 'to_open_id' in d:
+            o.to_open_id = d['to_open_id']
         if 'to_user_id' in d:
             o.to_user_id = d['to_user_id']
         if 'user_template_id' in d:

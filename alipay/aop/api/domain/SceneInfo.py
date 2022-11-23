@@ -16,6 +16,7 @@ class SceneInfo(object):
         self._job_category_id = None
         self._job_id = None
         self._job_name = None
+        self._open_id = None
         self._scene_time = None
         self._self_visit = None
         self._source = None
@@ -79,6 +80,13 @@ class SceneInfo(object):
     @job_name.setter
     def job_name(self, value):
         self._job_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_time(self):
         return self._scene_time
@@ -165,6 +173,11 @@ class SceneInfo(object):
                 params['job_name'] = self.job_name.to_alipay_dict()
             else:
                 params['job_name'] = self.job_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_time:
             if hasattr(self.scene_time, 'to_alipay_dict'):
                 params['scene_time'] = self.scene_time.to_alipay_dict()
@@ -218,6 +231,8 @@ class SceneInfo(object):
             o.job_id = d['job_id']
         if 'job_name' in d:
             o.job_name = d['job_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_time' in d:
             o.scene_time = d['scene_time']
         if 'self_visit' in d:

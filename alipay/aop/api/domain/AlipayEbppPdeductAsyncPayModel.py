@@ -16,6 +16,7 @@ class AlipayEbppPdeductAsyncPayModel(object):
         self._extend_field = None
         self._fine_amount = None
         self._memo = None
+        self._open_id = None
         self._out_order_no = None
         self._pay_amount = None
         self._pid = None
@@ -77,6 +78,13 @@ class AlipayEbppPdeductAsyncPayModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -149,6 +157,11 @@ class AlipayEbppPdeductAsyncPayModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -192,6 +205,8 @@ class AlipayEbppPdeductAsyncPayModel(object):
             o.fine_amount = d['fine_amount']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'pay_amount' in d:

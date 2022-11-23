@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateTuitioncodeFundtransferQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._operation_type = None
         self._out_order_no = None
         self._out_req_no = None
         self._smid = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation_type(self):
         return self._operation_type
@@ -53,6 +61,11 @@ class AlipayCommerceEducateTuitioncodeFundtransferQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation_type:
             if hasattr(self.operation_type, 'to_alipay_dict'):
                 params['operation_type'] = self.operation_type.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayCommerceEducateTuitioncodeFundtransferQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateTuitioncodeFundtransferQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation_type' in d:
             o.operation_type = d['operation_type']
         if 'out_order_no' in d:

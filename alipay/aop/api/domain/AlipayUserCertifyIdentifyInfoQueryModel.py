@@ -10,6 +10,7 @@ class AlipayUserCertifyIdentifyInfoQueryModel(object):
     def __init__(self):
         self._havana_id = None
         self._logon_id = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayUserCertifyIdentifyInfoQueryModel(object):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -47,6 +55,11 @@ class AlipayUserCertifyIdentifyInfoQueryModel(object):
                 params['logon_id'] = self.logon_id.to_alipay_dict()
             else:
                 params['logon_id'] = self.logon_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayUserCertifyIdentifyInfoQueryModel(object):
             o.havana_id = d['havana_id']
         if 'logon_id' in d:
             o.logon_id = d['logon_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

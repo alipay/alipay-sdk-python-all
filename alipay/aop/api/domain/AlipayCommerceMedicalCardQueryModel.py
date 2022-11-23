@@ -13,6 +13,7 @@ class AlipayCommerceMedicalCardQueryModel(object):
         self._card_org_no = None
         self._extend_params = None
         self._ins_type = None
+        self._open_id = None
         self._return_url = None
         self._scene = None
         self._version_no = None
@@ -52,6 +53,13 @@ class AlipayCommerceMedicalCardQueryModel(object):
     @ins_type.setter
     def ins_type(self, value):
         self._ins_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def return_url(self):
         return self._return_url
@@ -102,6 +110,11 @@ class AlipayCommerceMedicalCardQueryModel(object):
                 params['ins_type'] = self.ins_type.to_alipay_dict()
             else:
                 params['ins_type'] = self.ins_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.return_url:
             if hasattr(self.return_url, 'to_alipay_dict'):
                 params['return_url'] = self.return_url.to_alipay_dict()
@@ -134,6 +147,8 @@ class AlipayCommerceMedicalCardQueryModel(object):
             o.extend_params = d['extend_params']
         if 'ins_type' in d:
             o.ins_type = d['ins_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'return_url' in d:
             o.return_url = d['return_url']
         if 'scene' in d:

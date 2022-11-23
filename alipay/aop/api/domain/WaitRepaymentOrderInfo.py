@@ -11,6 +11,7 @@ class WaitRepaymentOrderInfo(object):
         self._advance_order_id = None
         self._alipay_user_id = None
         self._biz_product = None
+        self._open_id = None
         self._orig_biz_order_id = None
         self._wait_repayment_amount = None
 
@@ -35,6 +36,13 @@ class WaitRepaymentOrderInfo(object):
     @biz_product.setter
     def biz_product(self, value):
         self._biz_product = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def orig_biz_order_id(self):
         return self._orig_biz_order_id
@@ -68,6 +76,11 @@ class WaitRepaymentOrderInfo(object):
                 params['biz_product'] = self.biz_product.to_alipay_dict()
             else:
                 params['biz_product'] = self.biz_product
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.orig_biz_order_id:
             if hasattr(self.orig_biz_order_id, 'to_alipay_dict'):
                 params['orig_biz_order_id'] = self.orig_biz_order_id.to_alipay_dict()
@@ -91,6 +104,8 @@ class WaitRepaymentOrderInfo(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'biz_product' in d:
             o.biz_product = d['biz_product']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'orig_biz_order_id' in d:
             o.orig_biz_order_id = d['orig_biz_order_id']
         if 'wait_repayment_amount' in d:

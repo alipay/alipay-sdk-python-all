@@ -15,6 +15,7 @@ class AlipayCommerceEcEmployeeTitleModifyModel(object):
         self._modify_by = None
         self._new_title_id = None
         self._old_title_id = None
+        self._open_id = None
         self._title_tag = None
         self._user_id = None
 
@@ -68,6 +69,13 @@ class AlipayCommerceEcEmployeeTitleModifyModel(object):
     def old_title_id(self, value):
         self._old_title_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def title_tag(self):
         return self._title_tag
 
@@ -120,6 +128,11 @@ class AlipayCommerceEcEmployeeTitleModifyModel(object):
                 params['old_title_id'] = self.old_title_id.to_alipay_dict()
             else:
                 params['old_title_id'] = self.old_title_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.title_tag:
             if hasattr(self.title_tag, 'to_alipay_dict'):
                 params['title_tag'] = self.title_tag.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayCommerceEcEmployeeTitleModifyModel(object):
             o.new_title_id = d['new_title_id']
         if 'old_title_id' in d:
             o.old_title_id = d['old_title_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'title_tag' in d:
             o.title_tag = d['title_tag']
         if 'user_id' in d:

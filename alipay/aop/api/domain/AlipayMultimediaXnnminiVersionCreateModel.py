@@ -12,6 +12,7 @@ class AlipayMultimediaXnnminiVersionCreateModel(object):
         self._des = None
         self._mini_app_id = None
         self._model_version = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayMultimediaXnnminiVersionCreateModel(object):
     def model_version(self, value):
         self._model_version = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -73,6 +81,11 @@ class AlipayMultimediaXnnminiVersionCreateModel(object):
                 params['model_version'] = self.model_version.to_alipay_dict()
             else:
                 params['model_version'] = self.model_version
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayMultimediaXnnminiVersionCreateModel(object):
             o.mini_app_id = d['mini_app_id']
         if 'model_version' in d:
             o.model_version = d['model_version']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -15,8 +15,10 @@ class ApeRecContext(object):
         self._device_id = None
         self._landing_item_list = None
         self._latitude = None
+        self._lbs_distance = None
         self._longitude = None
         self._other_index_list = None
+        self._select_id_list = None
         self._tags = None
 
     @property
@@ -75,6 +77,13 @@ class ApeRecContext(object):
     def latitude(self, value):
         self._latitude = value
     @property
+    def lbs_distance(self):
+        return self._lbs_distance
+
+    @lbs_distance.setter
+    def lbs_distance(self, value):
+        self._lbs_distance = value
+    @property
     def longitude(self):
         return self._longitude
 
@@ -91,6 +100,16 @@ class ApeRecContext(object):
             self._other_index_list = list()
             for i in value:
                 self._other_index_list.append(i)
+    @property
+    def select_id_list(self):
+        return self._select_id_list
+
+    @select_id_list.setter
+    def select_id_list(self, value):
+        if isinstance(value, list):
+            self._select_id_list = list()
+            for i in value:
+                self._select_id_list.append(i)
     @property
     def tags(self):
         return self._tags
@@ -150,6 +169,11 @@ class ApeRecContext(object):
                 params['latitude'] = self.latitude.to_alipay_dict()
             else:
                 params['latitude'] = self.latitude
+        if self.lbs_distance:
+            if hasattr(self.lbs_distance, 'to_alipay_dict'):
+                params['lbs_distance'] = self.lbs_distance.to_alipay_dict()
+            else:
+                params['lbs_distance'] = self.lbs_distance
         if self.longitude:
             if hasattr(self.longitude, 'to_alipay_dict'):
                 params['longitude'] = self.longitude.to_alipay_dict()
@@ -165,6 +189,16 @@ class ApeRecContext(object):
                 params['other_index_list'] = self.other_index_list.to_alipay_dict()
             else:
                 params['other_index_list'] = self.other_index_list
+        if self.select_id_list:
+            if isinstance(self.select_id_list, list):
+                for i in range(0, len(self.select_id_list)):
+                    element = self.select_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.select_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.select_id_list, 'to_alipay_dict'):
+                params['select_id_list'] = self.select_id_list.to_alipay_dict()
+            else:
+                params['select_id_list'] = self.select_id_list
         if self.tags:
             if isinstance(self.tags, list):
                 for i in range(0, len(self.tags)):
@@ -196,10 +230,14 @@ class ApeRecContext(object):
             o.landing_item_list = d['landing_item_list']
         if 'latitude' in d:
             o.latitude = d['latitude']
+        if 'lbs_distance' in d:
+            o.lbs_distance = d['lbs_distance']
         if 'longitude' in d:
             o.longitude = d['longitude']
         if 'other_index_list' in d:
             o.other_index_list = d['other_index_list']
+        if 'select_id_list' in d:
+            o.select_id_list = d['select_id_list']
         if 'tags' in d:
             o.tags = d['tags']
         return o

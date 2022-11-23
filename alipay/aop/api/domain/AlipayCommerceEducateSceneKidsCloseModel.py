@@ -12,6 +12,8 @@ class AlipayCommerceEducateSceneKidsCloseModel(object):
         self._ext_info = None
         self._invoke_id = None
         self._memo = None
+        self._open_id = None
+        self._parent_open_id = None
         self._parent_uid = None
         self._school_stdcode = None
         self._sub_biz_code = None
@@ -45,6 +47,20 @@ class AlipayCommerceEducateSceneKidsCloseModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_uid(self):
         return self._parent_uid
@@ -97,6 +113,16 @@ class AlipayCommerceEducateSceneKidsCloseModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.parent_open_id:
+            if hasattr(self.parent_open_id, 'to_alipay_dict'):
+                params['parent_open_id'] = self.parent_open_id.to_alipay_dict()
+            else:
+                params['parent_open_id'] = self.parent_open_id
         if self.parent_uid:
             if hasattr(self.parent_uid, 'to_alipay_dict'):
                 params['parent_uid'] = self.parent_uid.to_alipay_dict()
@@ -132,6 +158,10 @@ class AlipayCommerceEducateSceneKidsCloseModel(object):
             o.invoke_id = d['invoke_id']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'parent_open_id' in d:
+            o.parent_open_id = d['parent_open_id']
         if 'parent_uid' in d:
             o.parent_uid = d['parent_uid']
         if 'school_stdcode' in d:

@@ -11,6 +11,7 @@ class AlipayCommerceDataSendModel(object):
         self._channel = None
         self._op_code = None
         self._op_data = None
+        self._open_id = None
         self._scene_code = None
         self._scene_data = None
         self._target_id = None
@@ -38,6 +39,13 @@ class AlipayCommerceDataSendModel(object):
     @op_data.setter
     def op_data(self, value):
         self._op_data = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -92,6 +100,11 @@ class AlipayCommerceDataSendModel(object):
                 params['op_data'] = self.op_data.to_alipay_dict()
             else:
                 params['op_data'] = self.op_data
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -130,6 +143,8 @@ class AlipayCommerceDataSendModel(object):
             o.op_code = d['op_code']
         if 'op_data' in d:
             o.op_data = d['op_data']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'scene_data' in d:

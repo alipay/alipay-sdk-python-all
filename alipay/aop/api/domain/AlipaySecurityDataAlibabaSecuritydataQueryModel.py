@@ -9,6 +9,7 @@ class AlipaySecurityDataAlibabaSecuritydataQueryModel(object):
 
     def __init__(self):
         self._biz_id = None
+        self._open_id = None
         self._service_name = None
         self._system_name = None
         self._table_name = None
@@ -22,6 +23,13 @@ class AlipaySecurityDataAlibabaSecuritydataQueryModel(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def service_name(self):
         return self._service_name
@@ -66,6 +74,11 @@ class AlipaySecurityDataAlibabaSecuritydataQueryModel(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.service_name:
             if hasattr(self.service_name, 'to_alipay_dict'):
                 params['service_name'] = self.service_name.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipaySecurityDataAlibabaSecuritydataQueryModel(object):
         o = AlipaySecurityDataAlibabaSecuritydataQueryModel()
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'service_name' in d:
             o.service_name = d['service_name']
         if 'system_name' in d:

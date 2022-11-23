@@ -15,6 +15,7 @@ class ExpenseInvoiceInfo(object):
 
     def __init__(self):
         self._employee_id = None
+        self._employee_open_id = None
         self._invoice_output_info = None
         self._ocr_normal_scan_info = None
         self._ocr_plane_scan_info = None
@@ -30,6 +31,13 @@ class ExpenseInvoiceInfo(object):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def employee_open_id(self):
+        return self._employee_open_id
+
+    @employee_open_id.setter
+    def employee_open_id(self, value):
+        self._employee_open_id = value
     @property
     def invoice_output_info(self):
         return self._invoice_output_info
@@ -106,6 +114,11 @@ class ExpenseInvoiceInfo(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.employee_open_id:
+            if hasattr(self.employee_open_id, 'to_alipay_dict'):
+                params['employee_open_id'] = self.employee_open_id.to_alipay_dict()
+            else:
+                params['employee_open_id'] = self.employee_open_id
         if self.invoice_output_info:
             if hasattr(self.invoice_output_info, 'to_alipay_dict'):
                 params['invoice_output_info'] = self.invoice_output_info.to_alipay_dict()
@@ -150,6 +163,8 @@ class ExpenseInvoiceInfo(object):
         o = ExpenseInvoiceInfo()
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'employee_open_id' in d:
+            o.employee_open_id = d['employee_open_id']
         if 'invoice_output_info' in d:
             o.invoice_output_info = d['invoice_output_info']
         if 'ocr_normal_scan_info' in d:

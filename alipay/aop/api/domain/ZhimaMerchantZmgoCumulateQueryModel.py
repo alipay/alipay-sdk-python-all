@@ -10,6 +10,7 @@ class ZhimaMerchantZmgoCumulateQueryModel(object):
     def __init__(self):
         self._agreement_id = None
         self._need_detail = None
+        self._open_id = None
         self._page_no = None
         self._page_size = None
         self._provider_pid = None
@@ -29,6 +30,13 @@ class ZhimaMerchantZmgoCumulateQueryModel(object):
     @need_detail.setter
     def need_detail(self, value):
         self._need_detail = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_no(self):
         return self._page_no
@@ -71,6 +79,11 @@ class ZhimaMerchantZmgoCumulateQueryModel(object):
                 params['need_detail'] = self.need_detail.to_alipay_dict()
             else:
                 params['need_detail'] = self.need_detail
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -102,6 +115,8 @@ class ZhimaMerchantZmgoCumulateQueryModel(object):
             o.agreement_id = d['agreement_id']
         if 'need_detail' in d:
             o.need_detail = d['need_detail']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

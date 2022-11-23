@@ -19,6 +19,7 @@ class InvoiceTradeInfo(object):
         self._m_name = None
         self._m_short_name = None
         self._merchant_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._payment_trade_date = None
         self._real_amount = None
@@ -92,6 +93,13 @@ class InvoiceTradeInfo(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -223,6 +231,11 @@ class InvoiceTradeInfo(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -306,6 +319,8 @@ class InvoiceTradeInfo(object):
             o.m_short_name = d['m_short_name']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'payment_trade_date' in d:

@@ -11,6 +11,7 @@ class AlipayPcreditHuabeiAuthSignApplyModel(object):
         self._alipay_user_id = None
         self._channel = None
         self._freeze_amount = None
+        self._open_id = None
         self._out_request_no = None
         self._out_sign_no = None
         self._seller_id = None
@@ -38,6 +39,13 @@ class AlipayPcreditHuabeiAuthSignApplyModel(object):
     @freeze_amount.setter
     def freeze_amount(self, value):
         self._freeze_amount = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -92,6 +100,11 @@ class AlipayPcreditHuabeiAuthSignApplyModel(object):
                 params['freeze_amount'] = self.freeze_amount.to_alipay_dict()
             else:
                 params['freeze_amount'] = self.freeze_amount
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -130,6 +143,8 @@ class AlipayPcreditHuabeiAuthSignApplyModel(object):
             o.channel = d['channel']
         if 'freeze_amount' in d:
             o.freeze_amount = d['freeze_amount']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'out_sign_no' in d:

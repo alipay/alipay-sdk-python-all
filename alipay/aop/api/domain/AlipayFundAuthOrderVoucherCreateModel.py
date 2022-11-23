@@ -9,6 +9,7 @@ class AlipayFundAuthOrderVoucherCreateModel(object):
 
     def __init__(self):
         self._amount = None
+        self._business_params = None
         self._disable_pay_channels = None
         self._enable_pay_channels = None
         self._extra_param = None
@@ -31,6 +32,13 @@ class AlipayFundAuthOrderVoucherCreateModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        self._business_params = value
     @property
     def disable_pay_channels(self):
         return self._disable_pay_channels
@@ -138,6 +146,11 @@ class AlipayFundAuthOrderVoucherCreateModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.disable_pay_channels:
             if hasattr(self.disable_pay_channels, 'to_alipay_dict'):
                 params['disable_pay_channels'] = self.disable_pay_channels.to_alipay_dict()
@@ -217,6 +230,8 @@ class AlipayFundAuthOrderVoucherCreateModel(object):
         o = AlipayFundAuthOrderVoucherCreateModel()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'disable_pay_channels' in d:
             o.disable_pay_channels = d['disable_pay_channels']
         if 'enable_pay_channels' in d:

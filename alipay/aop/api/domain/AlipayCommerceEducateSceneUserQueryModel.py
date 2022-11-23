@@ -8,13 +8,22 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEducateSceneUserQueryModel(object):
 
     def __init__(self):
+        self._alipay_open_id = None
         self._alipay_school_id = None
         self._alipay_user_id = None
         self._cert_no = None
         self._cert_type = None
+        self._face_open_id = None
         self._face_user_id = None
         self._name = None
 
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_school_id(self):
         return self._alipay_school_id
@@ -44,6 +53,13 @@ class AlipayCommerceEducateSceneUserQueryModel(object):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def face_open_id(self):
+        return self._face_open_id
+
+    @face_open_id.setter
+    def face_open_id(self, value):
+        self._face_open_id = value
+    @property
     def face_user_id(self):
         return self._face_user_id
 
@@ -61,6 +77,11 @@ class AlipayCommerceEducateSceneUserQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_school_id:
             if hasattr(self.alipay_school_id, 'to_alipay_dict'):
                 params['alipay_school_id'] = self.alipay_school_id.to_alipay_dict()
@@ -81,6 +102,11 @@ class AlipayCommerceEducateSceneUserQueryModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.face_open_id:
+            if hasattr(self.face_open_id, 'to_alipay_dict'):
+                params['face_open_id'] = self.face_open_id.to_alipay_dict()
+            else:
+                params['face_open_id'] = self.face_open_id
         if self.face_user_id:
             if hasattr(self.face_user_id, 'to_alipay_dict'):
                 params['face_user_id'] = self.face_user_id.to_alipay_dict()
@@ -98,6 +124,8 @@ class AlipayCommerceEducateSceneUserQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceEducateSceneUserQueryModel()
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_school_id' in d:
             o.alipay_school_id = d['alipay_school_id']
         if 'alipay_user_id' in d:
@@ -106,6 +134,8 @@ class AlipayCommerceEducateSceneUserQueryModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'face_open_id' in d:
+            o.face_open_id = d['face_open_id']
         if 'face_user_id' in d:
             o.face_user_id = d['face_user_id']
         if 'name' in d:

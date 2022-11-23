@@ -13,6 +13,7 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
         self._alipay_user_id = None
         self._auth_opt_id = None
         self._gmt_trans = None
+        self._open_id = None
         self._order_title = None
         self._out_request_no = None
         self._rest_freeze_amount = None
@@ -49,6 +50,13 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
     @gmt_trans.setter
     def gmt_trans(self, value):
         self._gmt_trans = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_title(self):
         return self._order_title
@@ -109,6 +117,8 @@ class AlipayPcreditHuabeiAuthOrderQueryResponse(AlipayResponse):
             self.auth_opt_id = response['auth_opt_id']
         if 'gmt_trans' in response:
             self.gmt_trans = response['gmt_trans']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_title' in response:
             self.order_title = response['order_title']
         if 'out_request_no' in response:

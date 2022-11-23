@@ -10,6 +10,7 @@ class ZhimaCreditPeUserSceneConsultModel(object):
     def __init__(self):
         self._apply_amount = None
         self._buyer_id = None
+        self._buyer_open_id = None
         self._category_code = None
         self._credit_scene = None
         self._ext_params = None
@@ -29,6 +30,13 @@ class ZhimaCreditPeUserSceneConsultModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def category_code(self):
         return self._category_code
@@ -71,6 +79,11 @@ class ZhimaCreditPeUserSceneConsultModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.category_code:
             if hasattr(self.category_code, 'to_alipay_dict'):
                 params['category_code'] = self.category_code.to_alipay_dict()
@@ -102,6 +115,8 @@ class ZhimaCreditPeUserSceneConsultModel(object):
             o.apply_amount = d['apply_amount']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'category_code' in d:
             o.category_code = d['category_code']
         if 'credit_scene' in d:

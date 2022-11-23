@@ -10,6 +10,7 @@ class AlipayEbppInvoiceExpenserulesEmployeeQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppInvoiceExpenserulesEmployeeQueryResponse, self).__init__()
         self._employee_list = None
+        self._employee_open_id_list = None
         self._page_num = None
         self._page_size = None
         self._total_page_count = None
@@ -24,6 +25,16 @@ class AlipayEbppInvoiceExpenserulesEmployeeQueryResponse(AlipayResponse):
             self._employee_list = list()
             for i in value:
                 self._employee_list.append(i)
+    @property
+    def employee_open_id_list(self):
+        return self._employee_open_id_list
+
+    @employee_open_id_list.setter
+    def employee_open_id_list(self, value):
+        if isinstance(value, list):
+            self._employee_open_id_list = list()
+            for i in value:
+                self._employee_open_id_list.append(i)
     @property
     def page_num(self):
         return self._page_num
@@ -50,6 +61,8 @@ class AlipayEbppInvoiceExpenserulesEmployeeQueryResponse(AlipayResponse):
         response = super(AlipayEbppInvoiceExpenserulesEmployeeQueryResponse, self).parse_response_content(response_content)
         if 'employee_list' in response:
             self.employee_list = response['employee_list']
+        if 'employee_open_id_list' in response:
+            self.employee_open_id_list = response['employee_open_id_list']
         if 'page_num' in response:
             self.page_num = response['page_num']
         if 'page_size' in response:

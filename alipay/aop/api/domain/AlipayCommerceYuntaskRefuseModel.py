@@ -10,6 +10,7 @@ class AlipayCommerceYuntaskRefuseModel(object):
     def __init__(self):
         self._funder_id = None
         self._funder_type = None
+        self._operate_open_id = None
         self._operate_user_id = None
         self._owner_pid = None
         self._task_template_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceYuntaskRefuseModel(object):
     @funder_type.setter
     def funder_type(self, value):
         self._funder_type = value
+    @property
+    def operate_open_id(self):
+        return self._operate_open_id
+
+    @operate_open_id.setter
+    def operate_open_id(self, value):
+        self._operate_open_id = value
     @property
     def operate_user_id(self):
         return self._operate_user_id
@@ -63,6 +71,11 @@ class AlipayCommerceYuntaskRefuseModel(object):
                 params['funder_type'] = self.funder_type.to_alipay_dict()
             else:
                 params['funder_type'] = self.funder_type
+        if self.operate_open_id:
+            if hasattr(self.operate_open_id, 'to_alipay_dict'):
+                params['operate_open_id'] = self.operate_open_id.to_alipay_dict()
+            else:
+                params['operate_open_id'] = self.operate_open_id
         if self.operate_user_id:
             if hasattr(self.operate_user_id, 'to_alipay_dict'):
                 params['operate_user_id'] = self.operate_user_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceYuntaskRefuseModel(object):
             o.funder_id = d['funder_id']
         if 'funder_type' in d:
             o.funder_type = d['funder_type']
+        if 'operate_open_id' in d:
+            o.operate_open_id = d['operate_open_id']
         if 'operate_user_id' in d:
             o.operate_user_id = d['operate_user_id']
         if 'owner_pid' in d:

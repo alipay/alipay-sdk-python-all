@@ -11,6 +11,7 @@ class AlipayEcoEduKtBillingModifyModel(object):
         self._bank_success = None
         self._buyer_logon_id = None
         self._buyer_user_id = None
+        self._buyer_user_open_id = None
         self._fund_change = None
         self._gmt_refund = None
         self._out_request_no = None
@@ -42,6 +43,13 @@ class AlipayEcoEduKtBillingModifyModel(object):
     @buyer_user_id.setter
     def buyer_user_id(self, value):
         self._buyer_user_id = value
+    @property
+    def buyer_user_open_id(self):
+        return self._buyer_user_open_id
+
+    @buyer_user_open_id.setter
+    def buyer_user_open_id(self, value):
+        self._buyer_user_open_id = value
     @property
     def fund_change(self):
         return self._fund_change
@@ -124,6 +132,11 @@ class AlipayEcoEduKtBillingModifyModel(object):
                 params['buyer_user_id'] = self.buyer_user_id.to_alipay_dict()
             else:
                 params['buyer_user_id'] = self.buyer_user_id
+        if self.buyer_user_open_id:
+            if hasattr(self.buyer_user_open_id, 'to_alipay_dict'):
+                params['buyer_user_open_id'] = self.buyer_user_open_id.to_alipay_dict()
+            else:
+                params['buyer_user_open_id'] = self.buyer_user_open_id
         if self.fund_change:
             if hasattr(self.fund_change, 'to_alipay_dict'):
                 params['fund_change'] = self.fund_change.to_alipay_dict()
@@ -182,6 +195,8 @@ class AlipayEcoEduKtBillingModifyModel(object):
             o.buyer_logon_id = d['buyer_logon_id']
         if 'buyer_user_id' in d:
             o.buyer_user_id = d['buyer_user_id']
+        if 'buyer_user_open_id' in d:
+            o.buyer_user_open_id = d['buyer_user_open_id']
         if 'fund_change' in d:
             o.fund_change = d['fund_change']
         if 'gmt_refund' in d:

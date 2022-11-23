@@ -16,6 +16,7 @@ class AlipaySocialBaseBcMsgSendModel(object):
         self._biz_type = None
         self._channel = None
         self._client_msg_id = None
+        self._consumer_open_id = None
         self._consumer_user_id = None
         self._hidden_side = None
         self._link = None
@@ -27,9 +28,11 @@ class AlipaySocialBaseBcMsgSendModel(object):
         self._next_msg_content = None
         self._notify_param = None
         self._receiver_id = None
+        self._receiver_open_id = None
         self._receiver_user_type = None
         self._relation_type = None
         self._sender_id = None
+        self._sender_open_id = None
         self._session_id = None
         self._template_code = None
         self._template_data = None
@@ -83,6 +86,13 @@ class AlipaySocialBaseBcMsgSendModel(object):
     @client_msg_id.setter
     def client_msg_id(self, value):
         self._client_msg_id = value
+    @property
+    def consumer_open_id(self):
+        return self._consumer_open_id
+
+    @consumer_open_id.setter
+    def consumer_open_id(self, value):
+        self._consumer_open_id = value
     @property
     def consumer_user_id(self):
         return self._consumer_user_id
@@ -164,6 +174,13 @@ class AlipaySocialBaseBcMsgSendModel(object):
     def receiver_id(self, value):
         self._receiver_id = value
     @property
+    def receiver_open_id(self):
+        return self._receiver_open_id
+
+    @receiver_open_id.setter
+    def receiver_open_id(self, value):
+        self._receiver_open_id = value
+    @property
     def receiver_user_type(self):
         return self._receiver_user_type
 
@@ -184,6 +201,13 @@ class AlipaySocialBaseBcMsgSendModel(object):
     @sender_id.setter
     def sender_id(self, value):
         self._sender_id = value
+    @property
+    def sender_open_id(self):
+        return self._sender_open_id
+
+    @sender_open_id.setter
+    def sender_open_id(self, value):
+        self._sender_open_id = value
     @property
     def session_id(self):
         return self._session_id
@@ -244,6 +268,11 @@ class AlipaySocialBaseBcMsgSendModel(object):
                 params['client_msg_id'] = self.client_msg_id.to_alipay_dict()
             else:
                 params['client_msg_id'] = self.client_msg_id
+        if self.consumer_open_id:
+            if hasattr(self.consumer_open_id, 'to_alipay_dict'):
+                params['consumer_open_id'] = self.consumer_open_id.to_alipay_dict()
+            else:
+                params['consumer_open_id'] = self.consumer_open_id
         if self.consumer_user_id:
             if hasattr(self.consumer_user_id, 'to_alipay_dict'):
                 params['consumer_user_id'] = self.consumer_user_id.to_alipay_dict()
@@ -299,6 +328,11 @@ class AlipaySocialBaseBcMsgSendModel(object):
                 params['receiver_id'] = self.receiver_id.to_alipay_dict()
             else:
                 params['receiver_id'] = self.receiver_id
+        if self.receiver_open_id:
+            if hasattr(self.receiver_open_id, 'to_alipay_dict'):
+                params['receiver_open_id'] = self.receiver_open_id.to_alipay_dict()
+            else:
+                params['receiver_open_id'] = self.receiver_open_id
         if self.receiver_user_type:
             if hasattr(self.receiver_user_type, 'to_alipay_dict'):
                 params['receiver_user_type'] = self.receiver_user_type.to_alipay_dict()
@@ -314,6 +348,11 @@ class AlipaySocialBaseBcMsgSendModel(object):
                 params['sender_id'] = self.sender_id.to_alipay_dict()
             else:
                 params['sender_id'] = self.sender_id
+        if self.sender_open_id:
+            if hasattr(self.sender_open_id, 'to_alipay_dict'):
+                params['sender_open_id'] = self.sender_open_id.to_alipay_dict()
+            else:
+                params['sender_open_id'] = self.sender_open_id
         if self.session_id:
             if hasattr(self.session_id, 'to_alipay_dict'):
                 params['session_id'] = self.session_id.to_alipay_dict()
@@ -350,6 +389,8 @@ class AlipaySocialBaseBcMsgSendModel(object):
             o.channel = d['channel']
         if 'client_msg_id' in d:
             o.client_msg_id = d['client_msg_id']
+        if 'consumer_open_id' in d:
+            o.consumer_open_id = d['consumer_open_id']
         if 'consumer_user_id' in d:
             o.consumer_user_id = d['consumer_user_id']
         if 'hidden_side' in d:
@@ -372,12 +413,16 @@ class AlipaySocialBaseBcMsgSendModel(object):
             o.notify_param = d['notify_param']
         if 'receiver_id' in d:
             o.receiver_id = d['receiver_id']
+        if 'receiver_open_id' in d:
+            o.receiver_open_id = d['receiver_open_id']
         if 'receiver_user_type' in d:
             o.receiver_user_type = d['receiver_user_type']
         if 'relation_type' in d:
             o.relation_type = d['relation_type']
         if 'sender_id' in d:
             o.sender_id = d['sender_id']
+        if 'sender_open_id' in d:
+            o.sender_open_id = d['sender_open_id']
         if 'session_id' in d:
             o.session_id = d['session_id']
         if 'template_code' in d:

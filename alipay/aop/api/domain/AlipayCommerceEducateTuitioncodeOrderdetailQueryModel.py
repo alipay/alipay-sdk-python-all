@@ -9,9 +9,11 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
 
     def __init__(self):
         self._include_plans = None
+        self._open_id = None
         self._out_order_no = None
         self._scene = None
         self._smid = None
+        self._user_id = None
 
     @property
     def include_plans(self):
@@ -20,6 +22,13 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
     @include_plans.setter
     def include_plans(self, value):
         self._include_plans = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -41,6 +50,13 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
     @smid.setter
     def smid(self, value):
         self._smid = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -50,6 +66,11 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
                 params['include_plans'] = self.include_plans.to_alipay_dict()
             else:
                 params['include_plans'] = self.include_plans
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -65,6 +86,11 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
                 params['smid'] = self.smid.to_alipay_dict()
             else:
                 params['smid'] = self.smid
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -74,12 +100,16 @@ class AlipayCommerceEducateTuitioncodeOrderdetailQueryModel(object):
         o = AlipayCommerceEducateTuitioncodeOrderdetailQueryModel()
         if 'include_plans' in d:
             o.include_plans = d['include_plans']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'scene' in d:
             o.scene = d['scene']
         if 'smid' in d:
             o.smid = d['smid']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

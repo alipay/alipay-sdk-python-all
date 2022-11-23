@@ -10,6 +10,7 @@ from alipay.aop.api.domain.PreOrderExtInfo import PreOrderExtInfo
 class ZhimaCreditPeZmgoPreorderCreateModel(object):
 
     def __init__(self):
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._biz_time = None
         self._custom_temp_conf = None
@@ -26,6 +27,13 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
         self._template_id = None
         self._timeout_express = None
 
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -141,6 +149,11 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -223,6 +236,8 @@ class ZhimaCreditPeZmgoPreorderCreateModel(object):
         if not d:
             return None
         o = ZhimaCreditPeZmgoPreorderCreateModel()
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'biz_time' in d:

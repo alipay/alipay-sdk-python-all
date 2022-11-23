@@ -10,8 +10,10 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceEducateSceneTokenQueryResponse, self).__init__()
         self._biz_code = None
+        self._open_id = None
         self._out_user_id = None
         self._parent_logon_id = None
+        self._parent_open_id = None
         self._parent_user_id = None
         self._payment_pid_list = None
         self._school_code = None
@@ -28,6 +30,13 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
     def biz_code(self, value):
         self._biz_code = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_user_id(self):
         return self._out_user_id
 
@@ -41,6 +50,13 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
     @parent_logon_id.setter
     def parent_logon_id(self, value):
         self._parent_logon_id = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_user_id(self):
         return self._parent_user_id
@@ -98,10 +114,14 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
         response = super(AlipayCommerceEducateSceneTokenQueryResponse, self).parse_response_content(response_content)
         if 'biz_code' in response:
             self.biz_code = response['biz_code']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_user_id' in response:
             self.out_user_id = response['out_user_id']
         if 'parent_logon_id' in response:
             self.parent_logon_id = response['parent_logon_id']
+        if 'parent_open_id' in response:
+            self.parent_open_id = response['parent_open_id']
         if 'parent_user_id' in response:
             self.parent_user_id = response['parent_user_id']
         if 'payment_pid_list' in response:

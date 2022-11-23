@@ -10,13 +10,16 @@ class PayOrderDTO(object):
     def __init__(self):
         self._actual_total_fee = None
         self._in_account_no = None
+        self._in_account_open_id = None
         self._in_account_type = None
         self._out_account_no = None
+        self._out_account_open_id = None
         self._out_account_type = None
         self._pay_flow_id = None
         self._pay_order_id = None
         self._pay_status = None
         self._pay_time = None
+        self._pay_type = None
         self._total_fee = None
 
     @property
@@ -34,6 +37,13 @@ class PayOrderDTO(object):
     def in_account_no(self, value):
         self._in_account_no = value
     @property
+    def in_account_open_id(self):
+        return self._in_account_open_id
+
+    @in_account_open_id.setter
+    def in_account_open_id(self, value):
+        self._in_account_open_id = value
+    @property
     def in_account_type(self):
         return self._in_account_type
 
@@ -47,6 +57,13 @@ class PayOrderDTO(object):
     @out_account_no.setter
     def out_account_no(self, value):
         self._out_account_no = value
+    @property
+    def out_account_open_id(self):
+        return self._out_account_open_id
+
+    @out_account_open_id.setter
+    def out_account_open_id(self, value):
+        self._out_account_open_id = value
     @property
     def out_account_type(self):
         return self._out_account_type
@@ -83,6 +100,13 @@ class PayOrderDTO(object):
     def pay_time(self, value):
         self._pay_time = value
     @property
+    def pay_type(self):
+        return self._pay_type
+
+    @pay_type.setter
+    def pay_type(self, value):
+        self._pay_type = value
+    @property
     def total_fee(self):
         return self._total_fee
 
@@ -103,6 +127,11 @@ class PayOrderDTO(object):
                 params['in_account_no'] = self.in_account_no.to_alipay_dict()
             else:
                 params['in_account_no'] = self.in_account_no
+        if self.in_account_open_id:
+            if hasattr(self.in_account_open_id, 'to_alipay_dict'):
+                params['in_account_open_id'] = self.in_account_open_id.to_alipay_dict()
+            else:
+                params['in_account_open_id'] = self.in_account_open_id
         if self.in_account_type:
             if hasattr(self.in_account_type, 'to_alipay_dict'):
                 params['in_account_type'] = self.in_account_type.to_alipay_dict()
@@ -113,6 +142,11 @@ class PayOrderDTO(object):
                 params['out_account_no'] = self.out_account_no.to_alipay_dict()
             else:
                 params['out_account_no'] = self.out_account_no
+        if self.out_account_open_id:
+            if hasattr(self.out_account_open_id, 'to_alipay_dict'):
+                params['out_account_open_id'] = self.out_account_open_id.to_alipay_dict()
+            else:
+                params['out_account_open_id'] = self.out_account_open_id
         if self.out_account_type:
             if hasattr(self.out_account_type, 'to_alipay_dict'):
                 params['out_account_type'] = self.out_account_type.to_alipay_dict()
@@ -138,6 +172,11 @@ class PayOrderDTO(object):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
             else:
                 params['pay_time'] = self.pay_time
+        if self.pay_type:
+            if hasattr(self.pay_type, 'to_alipay_dict'):
+                params['pay_type'] = self.pay_type.to_alipay_dict()
+            else:
+                params['pay_type'] = self.pay_type
         if self.total_fee:
             if hasattr(self.total_fee, 'to_alipay_dict'):
                 params['total_fee'] = self.total_fee.to_alipay_dict()
@@ -154,10 +193,14 @@ class PayOrderDTO(object):
             o.actual_total_fee = d['actual_total_fee']
         if 'in_account_no' in d:
             o.in_account_no = d['in_account_no']
+        if 'in_account_open_id' in d:
+            o.in_account_open_id = d['in_account_open_id']
         if 'in_account_type' in d:
             o.in_account_type = d['in_account_type']
         if 'out_account_no' in d:
             o.out_account_no = d['out_account_no']
+        if 'out_account_open_id' in d:
+            o.out_account_open_id = d['out_account_open_id']
         if 'out_account_type' in d:
             o.out_account_type = d['out_account_type']
         if 'pay_flow_id' in d:
@@ -168,6 +211,8 @@ class PayOrderDTO(object):
             o.pay_status = d['pay_status']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
+        if 'pay_type' in d:
+            o.pay_type = d['pay_type']
         if 'total_fee' in d:
             o.total_fee = d['total_fee']
         return o

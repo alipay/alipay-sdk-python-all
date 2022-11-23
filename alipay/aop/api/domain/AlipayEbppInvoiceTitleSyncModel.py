@@ -10,6 +10,7 @@ class AlipayEbppInvoiceTitleSyncModel(object):
     def __init__(self):
         self._open_bank_account = None
         self._open_bank_name = None
+        self._open_id = None
         self._tax_register_no = None
         self._title_name = None
         self._user_address = None
@@ -30,6 +31,13 @@ class AlipayEbppInvoiceTitleSyncModel(object):
     @open_bank_name.setter
     def open_bank_name(self, value):
         self._open_bank_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def tax_register_no(self):
         return self._tax_register_no
@@ -79,6 +87,11 @@ class AlipayEbppInvoiceTitleSyncModel(object):
                 params['open_bank_name'] = self.open_bank_name.to_alipay_dict()
             else:
                 params['open_bank_name'] = self.open_bank_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.tax_register_no:
             if hasattr(self.tax_register_no, 'to_alipay_dict'):
                 params['tax_register_no'] = self.tax_register_no.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayEbppInvoiceTitleSyncModel(object):
             o.open_bank_account = d['open_bank_account']
         if 'open_bank_name' in d:
             o.open_bank_name = d['open_bank_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'tax_register_no' in d:
             o.tax_register_no = d['tax_register_no']
         if 'title_name' in d:

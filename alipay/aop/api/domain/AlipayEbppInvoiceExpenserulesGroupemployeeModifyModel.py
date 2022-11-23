@@ -10,10 +10,12 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
     def __init__(self):
         self._account_id = None
         self._add_employee_list = None
+        self._add_employee_open_id_list = None
         self._agreement_no = None
         self._enterprise_id = None
         self._group_id_list = None
         self._remove_employee_list = None
+        self._remove_employee_open_id_list = None
 
     @property
     def account_id(self):
@@ -32,6 +34,16 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
             self._add_employee_list = list()
             for i in value:
                 self._add_employee_list.append(i)
+    @property
+    def add_employee_open_id_list(self):
+        return self._add_employee_open_id_list
+
+    @add_employee_open_id_list.setter
+    def add_employee_open_id_list(self, value):
+        if isinstance(value, list):
+            self._add_employee_open_id_list = list()
+            for i in value:
+                self._add_employee_open_id_list.append(i)
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -66,6 +78,16 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
             self._remove_employee_list = list()
             for i in value:
                 self._remove_employee_list.append(i)
+    @property
+    def remove_employee_open_id_list(self):
+        return self._remove_employee_open_id_list
+
+    @remove_employee_open_id_list.setter
+    def remove_employee_open_id_list(self, value):
+        if isinstance(value, list):
+            self._remove_employee_open_id_list = list()
+            for i in value:
+                self._remove_employee_open_id_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -85,6 +107,16 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
                 params['add_employee_list'] = self.add_employee_list.to_alipay_dict()
             else:
                 params['add_employee_list'] = self.add_employee_list
+        if self.add_employee_open_id_list:
+            if isinstance(self.add_employee_open_id_list, list):
+                for i in range(0, len(self.add_employee_open_id_list)):
+                    element = self.add_employee_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.add_employee_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.add_employee_open_id_list, 'to_alipay_dict'):
+                params['add_employee_open_id_list'] = self.add_employee_open_id_list.to_alipay_dict()
+            else:
+                params['add_employee_open_id_list'] = self.add_employee_open_id_list
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -115,6 +147,16 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
                 params['remove_employee_list'] = self.remove_employee_list.to_alipay_dict()
             else:
                 params['remove_employee_list'] = self.remove_employee_list
+        if self.remove_employee_open_id_list:
+            if isinstance(self.remove_employee_open_id_list, list):
+                for i in range(0, len(self.remove_employee_open_id_list)):
+                    element = self.remove_employee_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.remove_employee_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.remove_employee_open_id_list, 'to_alipay_dict'):
+                params['remove_employee_open_id_list'] = self.remove_employee_open_id_list.to_alipay_dict()
+            else:
+                params['remove_employee_open_id_list'] = self.remove_employee_open_id_list
         return params
 
     @staticmethod
@@ -126,6 +168,8 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
             o.account_id = d['account_id']
         if 'add_employee_list' in d:
             o.add_employee_list = d['add_employee_list']
+        if 'add_employee_open_id_list' in d:
+            o.add_employee_open_id_list = d['add_employee_open_id_list']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'enterprise_id' in d:
@@ -134,6 +178,8 @@ class AlipayEbppInvoiceExpenserulesGroupemployeeModifyModel(object):
             o.group_id_list = d['group_id_list']
         if 'remove_employee_list' in d:
             o.remove_employee_list = d['remove_employee_list']
+        if 'remove_employee_open_id_list' in d:
+            o.remove_employee_open_id_list = d['remove_employee_open_id_list']
         return o
 
 

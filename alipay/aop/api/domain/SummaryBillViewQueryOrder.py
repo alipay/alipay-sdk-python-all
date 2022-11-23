@@ -10,8 +10,11 @@ class SummaryBillViewQueryOrder(object):
     def __init__(self):
         self._arrangement_no = None
         self._bill_end_month = None
+        self._bill_nos = None
         self._bill_start_month = None
         self._bill_status_list = None
+        self._biz_pd_code_list = None
+        self._fund_settle_time = None
         self._inst_id_list = None
         self._page_num = None
         self._page_size = None
@@ -19,6 +22,7 @@ class SummaryBillViewQueryOrder(object):
         self._settle_ip_role_id_list = None
         self._settle_status_list = None
         self._settle_time_type_list = None
+        self._source = None
         self._summary_dmsn_1 = None
 
     @property
@@ -36,6 +40,16 @@ class SummaryBillViewQueryOrder(object):
     def bill_end_month(self, value):
         self._bill_end_month = value
     @property
+    def bill_nos(self):
+        return self._bill_nos
+
+    @bill_nos.setter
+    def bill_nos(self, value):
+        if isinstance(value, list):
+            self._bill_nos = list()
+            for i in value:
+                self._bill_nos.append(i)
+    @property
     def bill_start_month(self):
         return self._bill_start_month
 
@@ -49,6 +63,23 @@ class SummaryBillViewQueryOrder(object):
     @bill_status_list.setter
     def bill_status_list(self, value):
         self._bill_status_list = value
+    @property
+    def biz_pd_code_list(self):
+        return self._biz_pd_code_list
+
+    @biz_pd_code_list.setter
+    def biz_pd_code_list(self, value):
+        if isinstance(value, list):
+            self._biz_pd_code_list = list()
+            for i in value:
+                self._biz_pd_code_list.append(i)
+    @property
+    def fund_settle_time(self):
+        return self._fund_settle_time
+
+    @fund_settle_time.setter
+    def fund_settle_time(self, value):
+        self._fund_settle_time = value
     @property
     def inst_id_list(self):
         return self._inst_id_list
@@ -111,6 +142,13 @@ class SummaryBillViewQueryOrder(object):
             for i in value:
                 self._settle_time_type_list.append(i)
     @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
     def summary_dmsn_1(self):
         return self._summary_dmsn_1
 
@@ -131,6 +169,16 @@ class SummaryBillViewQueryOrder(object):
                 params['bill_end_month'] = self.bill_end_month.to_alipay_dict()
             else:
                 params['bill_end_month'] = self.bill_end_month
+        if self.bill_nos:
+            if isinstance(self.bill_nos, list):
+                for i in range(0, len(self.bill_nos)):
+                    element = self.bill_nos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.bill_nos[i] = element.to_alipay_dict()
+            if hasattr(self.bill_nos, 'to_alipay_dict'):
+                params['bill_nos'] = self.bill_nos.to_alipay_dict()
+            else:
+                params['bill_nos'] = self.bill_nos
         if self.bill_start_month:
             if hasattr(self.bill_start_month, 'to_alipay_dict'):
                 params['bill_start_month'] = self.bill_start_month.to_alipay_dict()
@@ -141,6 +189,21 @@ class SummaryBillViewQueryOrder(object):
                 params['bill_status_list'] = self.bill_status_list.to_alipay_dict()
             else:
                 params['bill_status_list'] = self.bill_status_list
+        if self.biz_pd_code_list:
+            if isinstance(self.biz_pd_code_list, list):
+                for i in range(0, len(self.biz_pd_code_list)):
+                    element = self.biz_pd_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.biz_pd_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.biz_pd_code_list, 'to_alipay_dict'):
+                params['biz_pd_code_list'] = self.biz_pd_code_list.to_alipay_dict()
+            else:
+                params['biz_pd_code_list'] = self.biz_pd_code_list
+        if self.fund_settle_time:
+            if hasattr(self.fund_settle_time, 'to_alipay_dict'):
+                params['fund_settle_time'] = self.fund_settle_time.to_alipay_dict()
+            else:
+                params['fund_settle_time'] = self.fund_settle_time
         if self.inst_id_list:
             if isinstance(self.inst_id_list, list):
                 for i in range(0, len(self.inst_id_list)):
@@ -196,6 +259,11 @@ class SummaryBillViewQueryOrder(object):
                 params['settle_time_type_list'] = self.settle_time_type_list.to_alipay_dict()
             else:
                 params['settle_time_type_list'] = self.settle_time_type_list
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.summary_dmsn_1:
             if hasattr(self.summary_dmsn_1, 'to_alipay_dict'):
                 params['summary_dmsn_1'] = self.summary_dmsn_1.to_alipay_dict()
@@ -212,10 +280,16 @@ class SummaryBillViewQueryOrder(object):
             o.arrangement_no = d['arrangement_no']
         if 'bill_end_month' in d:
             o.bill_end_month = d['bill_end_month']
+        if 'bill_nos' in d:
+            o.bill_nos = d['bill_nos']
         if 'bill_start_month' in d:
             o.bill_start_month = d['bill_start_month']
         if 'bill_status_list' in d:
             o.bill_status_list = d['bill_status_list']
+        if 'biz_pd_code_list' in d:
+            o.biz_pd_code_list = d['biz_pd_code_list']
+        if 'fund_settle_time' in d:
+            o.fund_settle_time = d['fund_settle_time']
         if 'inst_id_list' in d:
             o.inst_id_list = d['inst_id_list']
         if 'page_num' in d:
@@ -230,6 +304,8 @@ class SummaryBillViewQueryOrder(object):
             o.settle_status_list = d['settle_status_list']
         if 'settle_time_type_list' in d:
             o.settle_time_type_list = d['settle_time_type_list']
+        if 'source' in d:
+            o.source = d['source']
         if 'summary_dmsn_1' in d:
             o.summary_dmsn_1 = d['summary_dmsn_1']
         return o

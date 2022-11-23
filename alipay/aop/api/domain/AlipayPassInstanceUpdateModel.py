@@ -9,6 +9,7 @@ class AlipayPassInstanceUpdateModel(object):
 
     def __init__(self):
         self._channel_id = None
+        self._open_id = None
         self._serial_number = None
         self._status = None
         self._tpl_params = None
@@ -23,6 +24,13 @@ class AlipayPassInstanceUpdateModel(object):
     @channel_id.setter
     def channel_id(self, value):
         self._channel_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def serial_number(self):
         return self._serial_number
@@ -74,6 +82,11 @@ class AlipayPassInstanceUpdateModel(object):
                 params['channel_id'] = self.channel_id.to_alipay_dict()
             else:
                 params['channel_id'] = self.channel_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.serial_number:
             if hasattr(self.serial_number, 'to_alipay_dict'):
                 params['serial_number'] = self.serial_number.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayPassInstanceUpdateModel(object):
         o = AlipayPassInstanceUpdateModel()
         if 'channel_id' in d:
             o.channel_id = d['channel_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'serial_number' in d:
             o.serial_number = d['serial_number']
         if 'status' in d:

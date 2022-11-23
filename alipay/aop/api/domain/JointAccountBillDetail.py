@@ -14,6 +14,7 @@ class JointAccountBillDetail(object):
         self._biz_no = None
         self._enterprise_id = None
         self._in_out = None
+        self._open_id = None
         self._title = None
         self._user_id = None
 
@@ -59,6 +60,13 @@ class JointAccountBillDetail(object):
     @in_out.setter
     def in_out(self, value):
         self._in_out = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def title(self):
         return self._title
@@ -107,6 +115,11 @@ class JointAccountBillDetail(object):
                 params['in_out'] = self.in_out.to_alipay_dict()
             else:
                 params['in_out'] = self.in_out
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -136,6 +149,8 @@ class JointAccountBillDetail(object):
             o.enterprise_id = d['enterprise_id']
         if 'in_out' in d:
             o.in_out = d['in_out']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'title' in d:
             o.title = d['title']
         if 'user_id' in d:

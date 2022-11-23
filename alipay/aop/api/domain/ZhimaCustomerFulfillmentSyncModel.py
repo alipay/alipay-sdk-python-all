@@ -10,6 +10,7 @@ class ZhimaCustomerFulfillmentSyncModel(object):
     def __init__(self):
         self._ext_info = None
         self._gmt_service = None
+        self._open_id = None
         self._service_id = None
         self._subject_delta_num = None
         self._subject_id = None
@@ -31,6 +32,13 @@ class ZhimaCustomerFulfillmentSyncModel(object):
     @gmt_service.setter
     def gmt_service(self, value):
         self._gmt_service = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def service_id(self):
         return self._service_id
@@ -87,6 +95,11 @@ class ZhimaCustomerFulfillmentSyncModel(object):
                 params['gmt_service'] = self.gmt_service.to_alipay_dict()
             else:
                 params['gmt_service'] = self.gmt_service
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.service_id:
             if hasattr(self.service_id, 'to_alipay_dict'):
                 params['service_id'] = self.service_id.to_alipay_dict()
@@ -128,6 +141,8 @@ class ZhimaCustomerFulfillmentSyncModel(object):
             o.ext_info = d['ext_info']
         if 'gmt_service' in d:
             o.gmt_service = d['gmt_service']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'service_id' in d:
             o.service_id = d['service_id']
         if 'subject_delta_num' in d:

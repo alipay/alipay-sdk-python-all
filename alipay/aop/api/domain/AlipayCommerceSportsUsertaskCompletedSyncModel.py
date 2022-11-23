@@ -10,6 +10,7 @@ class AlipayCommerceSportsUsertaskCompletedSyncModel(object):
     def __init__(self):
         self._city_code = None
         self._completed_time = None
+        self._open_id = None
         self._out_biz_no = None
         self._task_id = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceSportsUsertaskCompletedSyncModel(object):
     @completed_time.setter
     def completed_time(self, value):
         self._completed_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -63,6 +71,11 @@ class AlipayCommerceSportsUsertaskCompletedSyncModel(object):
                 params['completed_time'] = self.completed_time.to_alipay_dict()
             else:
                 params['completed_time'] = self.completed_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceSportsUsertaskCompletedSyncModel(object):
             o.city_code = d['city_code']
         if 'completed_time' in d:
             o.completed_time = d['completed_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'task_id' in d:

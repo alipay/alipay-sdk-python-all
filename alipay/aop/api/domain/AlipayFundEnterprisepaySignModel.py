@@ -10,6 +10,7 @@ class AlipayFundEnterprisepaySignModel(object):
     def __init__(self):
         self._account_name = None
         self._biz_scene = None
+        self._ext_params = None
         self._identity = None
         self._identity_name = None
         self._identity_type = None
@@ -32,6 +33,13 @@ class AlipayFundEnterprisepaySignModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def ext_params(self):
+        return self._ext_params
+
+    @ext_params.setter
+    def ext_params(self, value):
+        self._ext_params = value
     @property
     def identity(self):
         return self._identity
@@ -95,6 +103,11 @@ class AlipayFundEnterprisepaySignModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.ext_params:
+            if hasattr(self.ext_params, 'to_alipay_dict'):
+                params['ext_params'] = self.ext_params.to_alipay_dict()
+            else:
+                params['ext_params'] = self.ext_params
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -141,6 +154,8 @@ class AlipayFundEnterprisepaySignModel(object):
             o.account_name = d['account_name']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'ext_params' in d:
+            o.ext_params = d['ext_params']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_name' in d:
