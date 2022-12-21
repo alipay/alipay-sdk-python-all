@@ -8,14 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class JobWorthJobdata(object):
 
     def __init__(self):
+        self._certificate_grant_institution = None
         self._certificate_id = None
+        self._certificate_level = None
         self._certificate_name = None
         self._certificate_pic_id = None
         self._company_name = None
         self._degree = None
+        self._delivery_position_id = None
+        self._delivery_time = None
         self._education_status = None
+        self._exam_score = None
         self._head_pic_id = None
         self._intention_city = None
+        self._issue_date = None
         self._job_id = None
         self._job_name = None
         self._ka_job_id = None
@@ -33,6 +39,8 @@ class JobWorthJobdata(object):
         self._skill_name = None
         self._start_time = None
         self._type = None
+        self._valid_date_end = None
+        self._valid_date_start = None
         self._work_desc = None
         self._work_end_time = None
         self._work_property = None
@@ -40,12 +48,26 @@ class JobWorthJobdata(object):
         self._year = None
 
     @property
+    def certificate_grant_institution(self):
+        return self._certificate_grant_institution
+
+    @certificate_grant_institution.setter
+    def certificate_grant_institution(self, value):
+        self._certificate_grant_institution = value
+    @property
     def certificate_id(self):
         return self._certificate_id
 
     @certificate_id.setter
     def certificate_id(self, value):
         self._certificate_id = value
+    @property
+    def certificate_level(self):
+        return self._certificate_level
+
+    @certificate_level.setter
+    def certificate_level(self, value):
+        self._certificate_level = value
     @property
     def certificate_name(self):
         return self._certificate_name
@@ -75,12 +97,33 @@ class JobWorthJobdata(object):
     def degree(self, value):
         self._degree = value
     @property
+    def delivery_position_id(self):
+        return self._delivery_position_id
+
+    @delivery_position_id.setter
+    def delivery_position_id(self, value):
+        self._delivery_position_id = value
+    @property
+    def delivery_time(self):
+        return self._delivery_time
+
+    @delivery_time.setter
+    def delivery_time(self, value):
+        self._delivery_time = value
+    @property
     def education_status(self):
         return self._education_status
 
     @education_status.setter
     def education_status(self, value):
         self._education_status = value
+    @property
+    def exam_score(self):
+        return self._exam_score
+
+    @exam_score.setter
+    def exam_score(self, value):
+        self._exam_score = value
     @property
     def head_pic_id(self):
         return self._head_pic_id
@@ -95,6 +138,13 @@ class JobWorthJobdata(object):
     @intention_city.setter
     def intention_city(self, value):
         self._intention_city = value
+    @property
+    def issue_date(self):
+        return self._issue_date
+
+    @issue_date.setter
+    def issue_date(self, value):
+        self._issue_date = value
     @property
     def job_id(self):
         return self._job_id
@@ -215,6 +265,20 @@ class JobWorthJobdata(object):
     def type(self, value):
         self._type = value
     @property
+    def valid_date_end(self):
+        return self._valid_date_end
+
+    @valid_date_end.setter
+    def valid_date_end(self, value):
+        self._valid_date_end = value
+    @property
+    def valid_date_start(self):
+        return self._valid_date_start
+
+    @valid_date_start.setter
+    def valid_date_start(self, value):
+        self._valid_date_start = value
+    @property
     def work_desc(self):
         return self._work_desc
 
@@ -253,11 +317,21 @@ class JobWorthJobdata(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_grant_institution:
+            if hasattr(self.certificate_grant_institution, 'to_alipay_dict'):
+                params['certificate_grant_institution'] = self.certificate_grant_institution.to_alipay_dict()
+            else:
+                params['certificate_grant_institution'] = self.certificate_grant_institution
         if self.certificate_id:
             if hasattr(self.certificate_id, 'to_alipay_dict'):
                 params['certificate_id'] = self.certificate_id.to_alipay_dict()
             else:
                 params['certificate_id'] = self.certificate_id
+        if self.certificate_level:
+            if hasattr(self.certificate_level, 'to_alipay_dict'):
+                params['certificate_level'] = self.certificate_level.to_alipay_dict()
+            else:
+                params['certificate_level'] = self.certificate_level
         if self.certificate_name:
             if hasattr(self.certificate_name, 'to_alipay_dict'):
                 params['certificate_name'] = self.certificate_name.to_alipay_dict()
@@ -278,11 +352,26 @@ class JobWorthJobdata(object):
                 params['degree'] = self.degree.to_alipay_dict()
             else:
                 params['degree'] = self.degree
+        if self.delivery_position_id:
+            if hasattr(self.delivery_position_id, 'to_alipay_dict'):
+                params['delivery_position_id'] = self.delivery_position_id.to_alipay_dict()
+            else:
+                params['delivery_position_id'] = self.delivery_position_id
+        if self.delivery_time:
+            if hasattr(self.delivery_time, 'to_alipay_dict'):
+                params['delivery_time'] = self.delivery_time.to_alipay_dict()
+            else:
+                params['delivery_time'] = self.delivery_time
         if self.education_status:
             if hasattr(self.education_status, 'to_alipay_dict'):
                 params['education_status'] = self.education_status.to_alipay_dict()
             else:
                 params['education_status'] = self.education_status
+        if self.exam_score:
+            if hasattr(self.exam_score, 'to_alipay_dict'):
+                params['exam_score'] = self.exam_score.to_alipay_dict()
+            else:
+                params['exam_score'] = self.exam_score
         if self.head_pic_id:
             if hasattr(self.head_pic_id, 'to_alipay_dict'):
                 params['head_pic_id'] = self.head_pic_id.to_alipay_dict()
@@ -293,6 +382,11 @@ class JobWorthJobdata(object):
                 params['intention_city'] = self.intention_city.to_alipay_dict()
             else:
                 params['intention_city'] = self.intention_city
+        if self.issue_date:
+            if hasattr(self.issue_date, 'to_alipay_dict'):
+                params['issue_date'] = self.issue_date.to_alipay_dict()
+            else:
+                params['issue_date'] = self.issue_date
         if self.job_id:
             if hasattr(self.job_id, 'to_alipay_dict'):
                 params['job_id'] = self.job_id.to_alipay_dict()
@@ -378,6 +472,16 @@ class JobWorthJobdata(object):
                 params['type'] = self.type.to_alipay_dict()
             else:
                 params['type'] = self.type
+        if self.valid_date_end:
+            if hasattr(self.valid_date_end, 'to_alipay_dict'):
+                params['valid_date_end'] = self.valid_date_end.to_alipay_dict()
+            else:
+                params['valid_date_end'] = self.valid_date_end
+        if self.valid_date_start:
+            if hasattr(self.valid_date_start, 'to_alipay_dict'):
+                params['valid_date_start'] = self.valid_date_start.to_alipay_dict()
+            else:
+                params['valid_date_start'] = self.valid_date_start
         if self.work_desc:
             if hasattr(self.work_desc, 'to_alipay_dict'):
                 params['work_desc'] = self.work_desc.to_alipay_dict()
@@ -410,8 +514,12 @@ class JobWorthJobdata(object):
         if not d:
             return None
         o = JobWorthJobdata()
+        if 'certificate_grant_institution' in d:
+            o.certificate_grant_institution = d['certificate_grant_institution']
         if 'certificate_id' in d:
             o.certificate_id = d['certificate_id']
+        if 'certificate_level' in d:
+            o.certificate_level = d['certificate_level']
         if 'certificate_name' in d:
             o.certificate_name = d['certificate_name']
         if 'certificate_pic_id' in d:
@@ -420,12 +528,20 @@ class JobWorthJobdata(object):
             o.company_name = d['company_name']
         if 'degree' in d:
             o.degree = d['degree']
+        if 'delivery_position_id' in d:
+            o.delivery_position_id = d['delivery_position_id']
+        if 'delivery_time' in d:
+            o.delivery_time = d['delivery_time']
         if 'education_status' in d:
             o.education_status = d['education_status']
+        if 'exam_score' in d:
+            o.exam_score = d['exam_score']
         if 'head_pic_id' in d:
             o.head_pic_id = d['head_pic_id']
         if 'intention_city' in d:
             o.intention_city = d['intention_city']
+        if 'issue_date' in d:
+            o.issue_date = d['issue_date']
         if 'job_id' in d:
             o.job_id = d['job_id']
         if 'job_name' in d:
@@ -460,6 +576,10 @@ class JobWorthJobdata(object):
             o.start_time = d['start_time']
         if 'type' in d:
             o.type = d['type']
+        if 'valid_date_end' in d:
+            o.valid_date_end = d['valid_date_end']
+        if 'valid_date_start' in d:
+            o.valid_date_start = d['valid_date_start']
         if 'work_desc' in d:
             o.work_desc = d['work_desc']
         if 'work_end_time' in d:

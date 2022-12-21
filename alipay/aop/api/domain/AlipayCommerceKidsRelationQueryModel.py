@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceKidsRelationQueryModel(object):
 
     def __init__(self):
+        self._parent_open_id = None
         self._parent_uid = None
         self._product_code = None
         self._scene_code = None
 
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_uid(self):
         return self._parent_uid
@@ -37,6 +45,11 @@ class AlipayCommerceKidsRelationQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.parent_open_id:
+            if hasattr(self.parent_open_id, 'to_alipay_dict'):
+                params['parent_open_id'] = self.parent_open_id.to_alipay_dict()
+            else:
+                params['parent_open_id'] = self.parent_open_id
         if self.parent_uid:
             if hasattr(self.parent_uid, 'to_alipay_dict'):
                 params['parent_uid'] = self.parent_uid.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceKidsRelationQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceKidsRelationQueryModel()
+        if 'parent_open_id' in d:
+            o.parent_open_id = d['parent_open_id']
         if 'parent_uid' in d:
             o.parent_uid = d['parent_uid']
         if 'product_code' in d:

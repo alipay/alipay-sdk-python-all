@@ -9,6 +9,7 @@ class AlipayCommerceSportsFacepayskinBatchqueryModel(object):
 
     def __init__(self):
         self._client_version = None
+        self._open_id = None
         self._skin_id_list = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayCommerceSportsFacepayskinBatchqueryModel(object):
     @client_version.setter
     def client_version(self, value):
         self._client_version = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def skin_id_list(self):
         return self._skin_id_list
@@ -45,6 +53,11 @@ class AlipayCommerceSportsFacepayskinBatchqueryModel(object):
                 params['client_version'] = self.client_version.to_alipay_dict()
             else:
                 params['client_version'] = self.client_version
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.skin_id_list:
             if isinstance(self.skin_id_list, list):
                 for i in range(0, len(self.skin_id_list)):
@@ -69,6 +82,8 @@ class AlipayCommerceSportsFacepayskinBatchqueryModel(object):
         o = AlipayCommerceSportsFacepayskinBatchqueryModel()
         if 'client_version' in d:
             o.client_version = d['client_version']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'skin_id_list' in d:
             o.skin_id_list = d['skin_id_list']
         if 'user_id' in d:

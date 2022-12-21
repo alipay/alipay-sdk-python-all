@@ -9,6 +9,7 @@ class ZhimaCreditPeUserOrderSyncModel(object):
 
     def __init__(self):
         self._buyer_id = None
+        self._open_id = None
         self._order_info = None
         self._out_order_no = None
         self._out_request_no = None
@@ -24,6 +25,13 @@ class ZhimaCreditPeUserOrderSyncModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_info(self):
         return self._order_info
@@ -82,6 +90,11 @@ class ZhimaCreditPeUserOrderSyncModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_info:
             if hasattr(self.order_info, 'to_alipay_dict'):
                 params['order_info'] = self.order_info.to_alipay_dict()
@@ -126,6 +139,8 @@ class ZhimaCreditPeUserOrderSyncModel(object):
         o = ZhimaCreditPeUserOrderSyncModel()
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_info' in d:
             o.order_info = d['order_info']
         if 'out_order_no' in d:

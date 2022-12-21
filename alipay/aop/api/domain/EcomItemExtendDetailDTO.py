@@ -8,6 +8,10 @@ from alipay.aop.api.constant.ParamConstants import *
 class EcomItemExtendDetailDTO(object):
 
     def __init__(self):
+        self._card_type = None
+        self._card_use_amount = None
+        self._card_use_count = None
+        self._card_use_period = None
         self._ext_info = None
         self._game_account = None
         self._game_account_client = None
@@ -16,6 +20,34 @@ class EcomItemExtendDetailDTO(object):
         self._game_name = None
         self._lockable_device = None
 
+    @property
+    def card_type(self):
+        return self._card_type
+
+    @card_type.setter
+    def card_type(self, value):
+        self._card_type = value
+    @property
+    def card_use_amount(self):
+        return self._card_use_amount
+
+    @card_use_amount.setter
+    def card_use_amount(self, value):
+        self._card_use_amount = value
+    @property
+    def card_use_count(self):
+        return self._card_use_count
+
+    @card_use_count.setter
+    def card_use_count(self, value):
+        self._card_use_count = value
+    @property
+    def card_use_period(self):
+        return self._card_use_period
+
+    @card_use_period.setter
+    def card_use_period(self, value):
+        self._card_use_period = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -69,6 +101,26 @@ class EcomItemExtendDetailDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_type:
+            if hasattr(self.card_type, 'to_alipay_dict'):
+                params['card_type'] = self.card_type.to_alipay_dict()
+            else:
+                params['card_type'] = self.card_type
+        if self.card_use_amount:
+            if hasattr(self.card_use_amount, 'to_alipay_dict'):
+                params['card_use_amount'] = self.card_use_amount.to_alipay_dict()
+            else:
+                params['card_use_amount'] = self.card_use_amount
+        if self.card_use_count:
+            if hasattr(self.card_use_count, 'to_alipay_dict'):
+                params['card_use_count'] = self.card_use_count.to_alipay_dict()
+            else:
+                params['card_use_count'] = self.card_use_count
+        if self.card_use_period:
+            if hasattr(self.card_use_period, 'to_alipay_dict'):
+                params['card_use_period'] = self.card_use_period.to_alipay_dict()
+            else:
+                params['card_use_period'] = self.card_use_period
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -111,6 +163,14 @@ class EcomItemExtendDetailDTO(object):
         if not d:
             return None
         o = EcomItemExtendDetailDTO()
+        if 'card_type' in d:
+            o.card_type = d['card_type']
+        if 'card_use_amount' in d:
+            o.card_use_amount = d['card_use_amount']
+        if 'card_use_count' in d:
+            o.card_use_count = d['card_use_count']
+        if 'card_use_period' in d:
+            o.card_use_period = d['card_use_period']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'game_account' in d:

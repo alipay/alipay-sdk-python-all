@@ -11,6 +11,7 @@ class AlipayCommerceSportsVenueOrderSyncModel(object):
 
     def __init__(self):
         self._create_time = None
+        self._open_id = None
         self._order_status = None
         self._order_type = None
         self._out_order_id = None
@@ -30,6 +31,13 @@ class AlipayCommerceSportsVenueOrderSyncModel(object):
     @create_time.setter
     def create_time(self, value):
         self._create_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -128,6 +136,11 @@ class AlipayCommerceSportsVenueOrderSyncModel(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -202,6 +215,8 @@ class AlipayCommerceSportsVenueOrderSyncModel(object):
         o = AlipayCommerceSportsVenueOrderSyncModel()
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'order_type' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceZhimaPreorderCreateModel(object):
         self._alipay_user_id = None
         self._biz_time = None
         self._isv_pid = None
+        self._open_id = None
         self._openapi_app_id = None
         self._out_biz_no = None
         self._start_time = None
@@ -48,6 +49,13 @@ class AlipayCommerceZhimaPreorderCreateModel(object):
     @isv_pid.setter
     def isv_pid(self, value):
         self._isv_pid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def openapi_app_id(self):
         return self._openapi_app_id
@@ -121,6 +129,11 @@ class AlipayCommerceZhimaPreorderCreateModel(object):
                 params['isv_pid'] = self.isv_pid.to_alipay_dict()
             else:
                 params['isv_pid'] = self.isv_pid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.openapi_app_id:
             if hasattr(self.openapi_app_id, 'to_alipay_dict'):
                 params['openapi_app_id'] = self.openapi_app_id.to_alipay_dict()
@@ -171,6 +184,8 @@ class AlipayCommerceZhimaPreorderCreateModel(object):
             o.biz_time = d['biz_time']
         if 'isv_pid' in d:
             o.isv_pid = d['isv_pid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'openapi_app_id' in d:
             o.openapi_app_id = d['openapi_app_id']
         if 'out_biz_no' in d:

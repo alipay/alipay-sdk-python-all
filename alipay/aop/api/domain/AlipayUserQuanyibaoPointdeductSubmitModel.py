@@ -13,6 +13,7 @@ class AlipayUserQuanyibaoPointdeductSubmitModel(object):
         self._alipay_user_id = None
         self._deduct_status = None
         self._ext_info_list = None
+        self._open_id = None
         self._third_biz_no = None
         self._third_user_id = None
 
@@ -50,6 +51,13 @@ class AlipayUserQuanyibaoPointdeductSubmitModel(object):
                     self._ext_info_list.append(i)
                 else:
                     self._ext_info_list.append(QYBMapInfo.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def third_biz_no(self):
         return self._third_biz_no
@@ -93,6 +101,11 @@ class AlipayUserQuanyibaoPointdeductSubmitModel(object):
                 params['ext_info_list'] = self.ext_info_list.to_alipay_dict()
             else:
                 params['ext_info_list'] = self.ext_info_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.third_biz_no:
             if hasattr(self.third_biz_no, 'to_alipay_dict'):
                 params['third_biz_no'] = self.third_biz_no.to_alipay_dict()
@@ -118,6 +131,8 @@ class AlipayUserQuanyibaoPointdeductSubmitModel(object):
             o.deduct_status = d['deduct_status']
         if 'ext_info_list' in d:
             o.ext_info_list = d['ext_info_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'third_biz_no' in d:
             o.third_biz_no = d['third_biz_no']
         if 'third_user_id' in d:

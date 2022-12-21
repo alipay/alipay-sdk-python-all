@@ -11,6 +11,7 @@ class AlipayCommerceSportsGamesSendinviteSendModel(object):
         self._biz_type = None
         self._desc = None
         self._open_id = None
+        self._self_open_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceSportsGamesSendinviteSendModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def self_open_id(self):
+        return self._self_open_id
+
+    @self_open_id.setter
+    def self_open_id(self, value):
+        self._self_open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayCommerceSportsGamesSendinviteSendModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.self_open_id:
+            if hasattr(self.self_open_id, 'to_alipay_dict'):
+                params['self_open_id'] = self.self_open_id.to_alipay_dict()
+            else:
+                params['self_open_id'] = self.self_open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceSportsGamesSendinviteSendModel(object):
             o.desc = d['desc']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'self_open_id' in d:
+            o.self_open_id = d['self_open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

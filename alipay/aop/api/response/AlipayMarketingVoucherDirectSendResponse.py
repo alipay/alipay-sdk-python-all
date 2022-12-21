@@ -20,6 +20,7 @@ class AlipayMarketingVoucherDirectSendResponse(AlipayResponse):
         self._gmt_extend = None
         self._gmt_modified = None
         self._name = None
+        self._open_id = None
         self._product_code = None
         self._status = None
         self._template_id = None
@@ -107,6 +108,13 @@ class AlipayMarketingVoucherDirectSendResponse(AlipayResponse):
     def name(self, value):
         self._name = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -187,6 +195,8 @@ class AlipayMarketingVoucherDirectSendResponse(AlipayResponse):
             self.gmt_modified = response['gmt_modified']
         if 'name' in response:
             self.name = response['name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'product_code' in response:
             self.product_code = response['product_code']
         if 'status' in response:

@@ -9,6 +9,7 @@ class RoyaltyEntity(object):
 
     def __init__(self):
         self._account = None
+        self._account_open_id = None
         self._bind_login_name = None
         self._login_name = None
         self._memo = None
@@ -22,6 +23,13 @@ class RoyaltyEntity(object):
     @account.setter
     def account(self, value):
         self._account = value
+    @property
+    def account_open_id(self):
+        return self._account_open_id
+
+    @account_open_id.setter
+    def account_open_id(self, value):
+        self._account_open_id = value
     @property
     def bind_login_name(self):
         return self._bind_login_name
@@ -66,6 +74,11 @@ class RoyaltyEntity(object):
                 params['account'] = self.account.to_alipay_dict()
             else:
                 params['account'] = self.account
+        if self.account_open_id:
+            if hasattr(self.account_open_id, 'to_alipay_dict'):
+                params['account_open_id'] = self.account_open_id.to_alipay_dict()
+            else:
+                params['account_open_id'] = self.account_open_id
         if self.bind_login_name:
             if hasattr(self.bind_login_name, 'to_alipay_dict'):
                 params['bind_login_name'] = self.bind_login_name.to_alipay_dict()
@@ -100,6 +113,8 @@ class RoyaltyEntity(object):
         o = RoyaltyEntity()
         if 'account' in d:
             o.account = d['account']
+        if 'account_open_id' in d:
+            o.account_open_id = d['account_open_id']
         if 'bind_login_name' in d:
             o.bind_login_name = d['bind_login_name']
         if 'login_name' in d:

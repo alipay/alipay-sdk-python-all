@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceSportsGreenenergyCheckModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._order_status = None
         self._out_order_id = None
         self._total_amount = None
@@ -15,6 +16,13 @@ class AlipayCommerceSportsGreenenergyCheckModel(object):
         self._trade_partner_id = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -61,6 +69,11 @@ class AlipayCommerceSportsGreenenergyCheckModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayCommerceSportsGreenenergyCheckModel(object):
         if not d:
             return None
         o = AlipayCommerceSportsGreenenergyCheckModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'out_order_id' in d:

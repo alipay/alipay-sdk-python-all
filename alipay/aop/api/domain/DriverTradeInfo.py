@@ -9,6 +9,7 @@ class DriverTradeInfo(object):
 
     def __init__(self):
         self._create_date = None
+        self._driver_open_id = None
         self._driver_user_id = None
         self._risk_control = None
         self._trade_no = None
@@ -21,6 +22,13 @@ class DriverTradeInfo(object):
     @create_date.setter
     def create_date(self, value):
         self._create_date = value
+    @property
+    def driver_open_id(self):
+        return self._driver_open_id
+
+    @driver_open_id.setter
+    def driver_open_id(self, value):
+        self._driver_open_id = value
     @property
     def driver_user_id(self):
         return self._driver_user_id
@@ -58,6 +66,11 @@ class DriverTradeInfo(object):
                 params['create_date'] = self.create_date.to_alipay_dict()
             else:
                 params['create_date'] = self.create_date
+        if self.driver_open_id:
+            if hasattr(self.driver_open_id, 'to_alipay_dict'):
+                params['driver_open_id'] = self.driver_open_id.to_alipay_dict()
+            else:
+                params['driver_open_id'] = self.driver_open_id
         if self.driver_user_id:
             if hasattr(self.driver_user_id, 'to_alipay_dict'):
                 params['driver_user_id'] = self.driver_user_id.to_alipay_dict()
@@ -87,6 +100,8 @@ class DriverTradeInfo(object):
         o = DriverTradeInfo()
         if 'create_date' in d:
             o.create_date = d['create_date']
+        if 'driver_open_id' in d:
+            o.driver_open_id = d['driver_open_id']
         if 'driver_user_id' in d:
             o.driver_user_id = d['driver_user_id']
         if 'risk_control' in d:

@@ -11,6 +11,7 @@ class AlipayCommerceTaskProcessQueryModel(object):
         self._alipay_user_id = None
         self._biz_id = None
         self._channel = None
+        self._open_id = None
         self._type = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceTaskProcessQueryModel(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def type(self):
         return self._type
@@ -60,6 +68,11 @@ class AlipayCommerceTaskProcessQueryModel(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceTaskProcessQueryModel(object):
             o.biz_id = d['biz_id']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'type' in d:
             o.type = d['type']
         return o

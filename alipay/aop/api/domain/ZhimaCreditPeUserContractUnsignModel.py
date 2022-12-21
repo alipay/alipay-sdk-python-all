@@ -9,6 +9,7 @@ class ZhimaCreditPeUserContractUnsignModel(object):
 
     def __init__(self):
         self._credit_scene = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -18,6 +19,13 @@ class ZhimaCreditPeUserContractUnsignModel(object):
     @credit_scene.setter
     def credit_scene(self, value):
         self._credit_scene = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -34,6 +42,11 @@ class ZhimaCreditPeUserContractUnsignModel(object):
                 params['credit_scene'] = self.credit_scene.to_alipay_dict()
             else:
                 params['credit_scene'] = self.credit_scene
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class ZhimaCreditPeUserContractUnsignModel(object):
         o = ZhimaCreditPeUserContractUnsignModel()
         if 'credit_scene' in d:
             o.credit_scene = d['credit_scene']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -13,6 +13,7 @@ class AlipayCommerceMedicalOctokenAuthQueryModel(object):
         self._ch_info = None
         self._extend_params = None
         self._ol_biz_type_code = None
+        self._open_id = None
         self._org_cfc_id = None
         self._org_chnl_crtf_code = None
         self._partner_city_code = None
@@ -55,6 +56,13 @@ class AlipayCommerceMedicalOctokenAuthQueryModel(object):
     @ol_biz_type_code.setter
     def ol_biz_type_code(self, value):
         self._ol_biz_type_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_cfc_id(self):
         return self._org_cfc_id
@@ -126,6 +134,11 @@ class AlipayCommerceMedicalOctokenAuthQueryModel(object):
                 params['ol_biz_type_code'] = self.ol_biz_type_code.to_alipay_dict()
             else:
                 params['ol_biz_type_code'] = self.ol_biz_type_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_cfc_id:
             if hasattr(self.org_cfc_id, 'to_alipay_dict'):
                 params['org_cfc_id'] = self.org_cfc_id.to_alipay_dict()
@@ -173,6 +186,8 @@ class AlipayCommerceMedicalOctokenAuthQueryModel(object):
             o.extend_params = d['extend_params']
         if 'ol_biz_type_code' in d:
             o.ol_biz_type_code = d['ol_biz_type_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_cfc_id' in d:
             o.org_cfc_id = d['org_cfc_id']
         if 'org_chnl_crtf_code' in d:

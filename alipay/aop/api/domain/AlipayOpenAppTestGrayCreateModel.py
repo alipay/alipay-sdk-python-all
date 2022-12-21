@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OpenidComplex import OpenidComplex
 
 
 class AlipayOpenAppTestGrayCreateModel(object):
@@ -13,6 +14,7 @@ class AlipayOpenAppTestGrayCreateModel(object):
         self._body = None
         self._body_1 = None
         self._c = None
+        self._complex_param = None
         self._open_id = None
         self._user_id = None
 
@@ -51,6 +53,16 @@ class AlipayOpenAppTestGrayCreateModel(object):
     @c.setter
     def c(self, value):
         self._c = value
+    @property
+    def complex_param(self):
+        return self._complex_param
+
+    @complex_param.setter
+    def complex_param(self, value):
+        if isinstance(value, OpenidComplex):
+            self._complex_param = value
+        else:
+            self._complex_param = OpenidComplex.from_alipay_dict(value)
     @property
     def open_id(self):
         return self._open_id
@@ -94,6 +106,11 @@ class AlipayOpenAppTestGrayCreateModel(object):
                 params['c'] = self.c.to_alipay_dict()
             else:
                 params['c'] = self.c
+        if self.complex_param:
+            if hasattr(self.complex_param, 'to_alipay_dict'):
+                params['complex_param'] = self.complex_param.to_alipay_dict()
+            else:
+                params['complex_param'] = self.complex_param
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -121,6 +138,8 @@ class AlipayOpenAppTestGrayCreateModel(object):
             o.body_1 = d['body_1']
         if 'c' in d:
             o.c = d['c']
+        if 'complex_param' in d:
+            o.complex_param = d['complex_param']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

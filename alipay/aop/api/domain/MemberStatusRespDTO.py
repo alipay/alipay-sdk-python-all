@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class MemberStatusRespDTO(object):
 
     def __init__(self):
+        self._open_id = None
         self._status = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def status(self):
         return self._status
@@ -29,6 +37,11 @@ class MemberStatusRespDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -46,6 +59,8 @@ class MemberStatusRespDTO(object):
         if not d:
             return None
         o = MemberStatusRespDTO()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status' in d:
             o.status = d['status']
         if 'user_id' in d:

@@ -7,6 +7,7 @@ from alipay.aop.api.domain.DeliveryAvailableScope import DeliveryAvailableScope
 from alipay.aop.api.domain.DeliveryCityCodeRule import DeliveryCityCodeRule
 from alipay.aop.api.domain.DeliveryMerchantInfo import DeliveryMerchantInfo
 from alipay.aop.api.domain.DeliveryMerchantRule import DeliveryMerchantRule
+from alipay.aop.api.domain.DeliverySearchBoxRule import DeliverySearchBoxRule
 
 
 class DeliveryTargetRule(object):
@@ -20,6 +21,7 @@ class DeliveryTargetRule(object):
         self._delivery_merchant_rule = None
         self._delivery_promo_tags = None
         self._delivery_recall_mode = None
+        self._delivery_search_box_rule = None
         self._delivery_type = None
 
     @property
@@ -97,6 +99,16 @@ class DeliveryTargetRule(object):
     def delivery_recall_mode(self, value):
         self._delivery_recall_mode = value
     @property
+    def delivery_search_box_rule(self):
+        return self._delivery_search_box_rule
+
+    @delivery_search_box_rule.setter
+    def delivery_search_box_rule(self, value):
+        if isinstance(value, DeliverySearchBoxRule):
+            self._delivery_search_box_rule = value
+        else:
+            self._delivery_search_box_rule = DeliverySearchBoxRule.from_alipay_dict(value)
+    @property
     def delivery_type(self):
         return self._delivery_type
 
@@ -157,6 +169,11 @@ class DeliveryTargetRule(object):
                 params['delivery_recall_mode'] = self.delivery_recall_mode.to_alipay_dict()
             else:
                 params['delivery_recall_mode'] = self.delivery_recall_mode
+        if self.delivery_search_box_rule:
+            if hasattr(self.delivery_search_box_rule, 'to_alipay_dict'):
+                params['delivery_search_box_rule'] = self.delivery_search_box_rule.to_alipay_dict()
+            else:
+                params['delivery_search_box_rule'] = self.delivery_search_box_rule
         if self.delivery_type:
             if hasattr(self.delivery_type, 'to_alipay_dict'):
                 params['delivery_type'] = self.delivery_type.to_alipay_dict()
@@ -185,6 +202,8 @@ class DeliveryTargetRule(object):
             o.delivery_promo_tags = d['delivery_promo_tags']
         if 'delivery_recall_mode' in d:
             o.delivery_recall_mode = d['delivery_recall_mode']
+        if 'delivery_search_box_rule' in d:
+            o.delivery_search_box_rule = d['delivery_search_box_rule']
         if 'delivery_type' in d:
             o.delivery_type = d['delivery_type']
         return o

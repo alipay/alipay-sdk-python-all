@@ -14,6 +14,7 @@ class AlipayCommerceKidsAccountBindModel(object):
         self._child_name = None
         self._class_name = None
         self._contact_mobile = None
+        self._parent_open_id = None
         self._parent_uid = None
         self._scene_code = None
         self._school_id = None
@@ -61,6 +62,13 @@ class AlipayCommerceKidsAccountBindModel(object):
     @contact_mobile.setter
     def contact_mobile(self, value):
         self._contact_mobile = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_uid(self):
         return self._parent_uid
@@ -123,6 +131,11 @@ class AlipayCommerceKidsAccountBindModel(object):
                 params['contact_mobile'] = self.contact_mobile.to_alipay_dict()
             else:
                 params['contact_mobile'] = self.contact_mobile
+        if self.parent_open_id:
+            if hasattr(self.parent_open_id, 'to_alipay_dict'):
+                params['parent_open_id'] = self.parent_open_id.to_alipay_dict()
+            else:
+                params['parent_open_id'] = self.parent_open_id
         if self.parent_uid:
             if hasattr(self.parent_uid, 'to_alipay_dict'):
                 params['parent_uid'] = self.parent_uid.to_alipay_dict()
@@ -162,6 +175,8 @@ class AlipayCommerceKidsAccountBindModel(object):
             o.class_name = d['class_name']
         if 'contact_mobile' in d:
             o.contact_mobile = d['contact_mobile']
+        if 'parent_open_id' in d:
+            o.parent_open_id = d['parent_open_id']
         if 'parent_uid' in d:
             o.parent_uid = d['parent_uid']
         if 'scene_code' in d:

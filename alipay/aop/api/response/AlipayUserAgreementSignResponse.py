@@ -11,6 +11,7 @@ class AlipayUserAgreementSignResponse(AlipayResponse):
         super(AlipayUserAgreementSignResponse, self).__init__()
         self._agreement_no = None
         self._alipay_logon_id = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._apply_token = None
         self._external_logon_id = None
@@ -30,6 +31,13 @@ class AlipayUserAgreementSignResponse(AlipayResponse):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -65,6 +73,8 @@ class AlipayUserAgreementSignResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'alipay_logon_id' in response:
             self.alipay_logon_id = response['alipay_logon_id']
+        if 'alipay_open_id' in response:
+            self.alipay_open_id = response['alipay_open_id']
         if 'alipay_user_id' in response:
             self.alipay_user_id = response['alipay_user_id']
         if 'apply_token' in response:

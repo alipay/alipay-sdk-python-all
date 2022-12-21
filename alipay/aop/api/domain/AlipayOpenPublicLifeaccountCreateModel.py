@@ -22,6 +22,7 @@ class AlipayOpenPublicLifeaccountCreateModel(object):
         self._logo = None
         self._menu_info = None
         self._name = None
+        self._open_id = None
         self._platform_account_id = None
         self._platform_unique_id = None
         self._user_id = None
@@ -128,6 +129,13 @@ class AlipayOpenPublicLifeaccountCreateModel(object):
     def name(self, value):
         self._name = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def platform_account_id(self):
         return self._platform_account_id
 
@@ -227,6 +235,11 @@ class AlipayOpenPublicLifeaccountCreateModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.platform_account_id:
             if hasattr(self.platform_account_id, 'to_alipay_dict'):
                 params['platform_account_id'] = self.platform_account_id.to_alipay_dict()
@@ -277,6 +290,8 @@ class AlipayOpenPublicLifeaccountCreateModel(object):
             o.menu_info = d['menu_info']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'platform_account_id' in d:
             o.platform_account_id = d['platform_account_id']
         if 'platform_unique_id' in d:

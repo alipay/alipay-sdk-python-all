@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditEpCertificationRiskIdentifyModel(object):
 
     def __init__(self):
+        self._biz_no = None
         self._ep_cert_no = None
         self._ep_name = None
         self._risk_identify_type = None
         self._user_cert_no = None
         self._user_name = None
 
+    @property
+    def biz_no(self):
+        return self._biz_no
+
+    @biz_no.setter
+    def biz_no(self, value):
+        self._biz_no = value
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -53,6 +61,11 @@ class ZhimaCreditEpCertificationRiskIdentifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_no:
+            if hasattr(self.biz_no, 'to_alipay_dict'):
+                params['biz_no'] = self.biz_no.to_alipay_dict()
+            else:
+                params['biz_no'] = self.biz_no
         if self.ep_cert_no:
             if hasattr(self.ep_cert_no, 'to_alipay_dict'):
                 params['ep_cert_no'] = self.ep_cert_no.to_alipay_dict()
@@ -85,6 +98,8 @@ class ZhimaCreditEpCertificationRiskIdentifyModel(object):
         if not d:
             return None
         o = ZhimaCreditEpCertificationRiskIdentifyModel()
+        if 'biz_no' in d:
+            o.biz_no = d['biz_no']
         if 'ep_cert_no' in d:
             o.ep_cert_no = d['ep_cert_no']
         if 'ep_name' in d:

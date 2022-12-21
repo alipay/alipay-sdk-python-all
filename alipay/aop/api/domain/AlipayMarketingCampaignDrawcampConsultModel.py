@@ -11,6 +11,7 @@ class AlipayMarketingCampaignDrawcampConsultModel(object):
     def __init__(self):
         self._camp_id = None
         self._ext_params = None
+        self._open_id = None
         self._prize_id_list = None
         self._source = None
         self._user_id = None
@@ -32,6 +33,13 @@ class AlipayMarketingCampaignDrawcampConsultModel(object):
             self._ext_params = value
         else:
             self._ext_params = ConsultExtParams.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def prize_id_list(self):
         return self._prize_id_list
@@ -67,6 +75,11 @@ class AlipayMarketingCampaignDrawcampConsultModel(object):
                 params['ext_params'] = self.ext_params.to_alipay_dict()
             else:
                 params['ext_params'] = self.ext_params
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.prize_id_list:
             if hasattr(self.prize_id_list, 'to_alipay_dict'):
                 params['prize_id_list'] = self.prize_id_list.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayMarketingCampaignDrawcampConsultModel(object):
             o.camp_id = d['camp_id']
         if 'ext_params' in d:
             o.ext_params = d['ext_params']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'prize_id_list' in d:
             o.prize_id_list = d['prize_id_list']
         if 'source' in d:

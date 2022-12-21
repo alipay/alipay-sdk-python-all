@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GoodsDetailDTO import GoodsDetailDTO
+from alipay.aop.api.domain.VoucherUseDetailInfo import VoucherUseDetailInfo
 
 
 class AlipayMarketingActivityOrdervoucherUseModel(object):
@@ -20,6 +21,7 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
         self._trade_channel = None
         self._trade_no = None
         self._voucher_code = None
+        self._voucher_use_detail_info = None
 
     @property
     def activity_id(self):
@@ -104,6 +106,16 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
     @voucher_code.setter
     def voucher_code(self, value):
         self._voucher_code = value
+    @property
+    def voucher_use_detail_info(self):
+        return self._voucher_use_detail_info
+
+    @voucher_use_detail_info.setter
+    def voucher_use_detail_info(self, value):
+        if isinstance(value, VoucherUseDetailInfo):
+            self._voucher_use_detail_info = value
+        else:
+            self._voucher_use_detail_info = VoucherUseDetailInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -168,6 +180,11 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
                 params['voucher_code'] = self.voucher_code.to_alipay_dict()
             else:
                 params['voucher_code'] = self.voucher_code
+        if self.voucher_use_detail_info:
+            if hasattr(self.voucher_use_detail_info, 'to_alipay_dict'):
+                params['voucher_use_detail_info'] = self.voucher_use_detail_info.to_alipay_dict()
+            else:
+                params['voucher_use_detail_info'] = self.voucher_use_detail_info
         return params
 
     @staticmethod
@@ -197,6 +214,8 @@ class AlipayMarketingActivityOrdervoucherUseModel(object):
             o.trade_no = d['trade_no']
         if 'voucher_code' in d:
             o.voucher_code = d['voucher_code']
+        if 'voucher_use_detail_info' in d:
+            o.voucher_use_detail_info = d['voucher_use_detail_info']
         return o
 
 

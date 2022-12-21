@@ -15,6 +15,7 @@ class AlipayCommerceAcommunicationEventSyncModel(object):
         self._event_time = None
         self._event_type = None
         self._flow_id = None
+        self._open_id = None
         self._partner_name = None
         self._product_id = None
         self._sku_info = None
@@ -70,6 +71,13 @@ class AlipayCommerceAcommunicationEventSyncModel(object):
     @flow_id.setter
     def flow_id(self, value):
         self._flow_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def partner_name(self):
         return self._partner_name
@@ -144,6 +152,11 @@ class AlipayCommerceAcommunicationEventSyncModel(object):
                 params['flow_id'] = self.flow_id.to_alipay_dict()
             else:
                 params['flow_id'] = self.flow_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.partner_name:
             if hasattr(self.partner_name, 'to_alipay_dict'):
                 params['partner_name'] = self.partner_name.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayCommerceAcommunicationEventSyncModel(object):
             o.event_type = d['event_type']
         if 'flow_id' in d:
             o.flow_id = d['flow_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'partner_name' in d:
             o.partner_name = d['partner_name']
         if 'product_id' in d:

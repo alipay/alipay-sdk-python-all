@@ -14,6 +14,7 @@ class ZhimaCreditPeUserScenePreconsultResponse(AlipayResponse):
         self._available_goods_count = None
         self._buyer_id = None
         self._eval_invoke_id = None
+        self._open_id = None
         self._scene_level = None
         self._top_amount = None
         self._top_goods_count = None
@@ -54,6 +55,13 @@ class ZhimaCreditPeUserScenePreconsultResponse(AlipayResponse):
     def eval_invoke_id(self, value):
         self._eval_invoke_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def scene_level(self):
         return self._scene_level
 
@@ -87,6 +95,8 @@ class ZhimaCreditPeUserScenePreconsultResponse(AlipayResponse):
             self.buyer_id = response['buyer_id']
         if 'eval_invoke_id' in response:
             self.eval_invoke_id = response['eval_invoke_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'scene_level' in response:
             self.scene_level = response['scene_level']
         if 'top_amount' in response:

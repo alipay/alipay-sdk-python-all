@@ -10,6 +10,7 @@ class AlipayMsaasMediarecogAftsCertIdentifyModel(object):
     def __init__(self):
         self._ext = None
         self._h = None
+        self._open_id = None
         self._plate_number = None
         self._url = None
         self._user_id = None
@@ -31,6 +32,13 @@ class AlipayMsaasMediarecogAftsCertIdentifyModel(object):
     @h.setter
     def h(self, value):
         self._h = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def plate_number(self):
         return self._plate_number
@@ -87,6 +95,11 @@ class AlipayMsaasMediarecogAftsCertIdentifyModel(object):
                 params['h'] = self.h.to_alipay_dict()
             else:
                 params['h'] = self.h
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.plate_number:
             if hasattr(self.plate_number, 'to_alipay_dict'):
                 params['plate_number'] = self.plate_number.to_alipay_dict()
@@ -128,6 +141,8 @@ class AlipayMsaasMediarecogAftsCertIdentifyModel(object):
             o.ext = d['ext']
         if 'h' in d:
             o.h = d['h']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'plate_number' in d:
             o.plate_number = d['plate_number']
         if 'url' in d:

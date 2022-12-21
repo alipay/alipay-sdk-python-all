@@ -11,6 +11,7 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
     def __init__(self):
         self._biz_id = None
         self._image_info_list = None
+        self._open_id = None
         self._params = None
         self._request_type = None
         self._user_id = None
@@ -35,6 +36,13 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
                     self._image_info_list.append(i)
                 else:
                     self._image_info_list.append(ImageInfo.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def params(self):
         return self._params
@@ -75,6 +83,11 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
                 params['image_info_list'] = self.image_info_list.to_alipay_dict()
             else:
                 params['image_info_list'] = self.image_info_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.params:
             if hasattr(self.params, 'to_alipay_dict'):
                 params['params'] = self.params.to_alipay_dict()
@@ -101,6 +114,8 @@ class AlipayMsaasMediarecogAftsXnnIdentifyModel(object):
             o.biz_id = d['biz_id']
         if 'image_info_list' in d:
             o.image_info_list = d['image_info_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'params' in d:
             o.params = d['params']
         if 'request_type' in d:

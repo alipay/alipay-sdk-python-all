@@ -9,6 +9,7 @@ class TransportAuthStatusData(object):
 
     def __init__(self):
         self._auth_status = None
+        self._auth_time = None
         self._open_id = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class TransportAuthStatusData(object):
     @auth_status.setter
     def auth_status(self, value):
         self._auth_status = value
+    @property
+    def auth_time(self):
+        return self._auth_time
+
+    @auth_time.setter
+    def auth_time(self, value):
+        self._auth_time = value
     @property
     def open_id(self):
         return self._open_id
@@ -42,6 +50,11 @@ class TransportAuthStatusData(object):
                 params['auth_status'] = self.auth_status.to_alipay_dict()
             else:
                 params['auth_status'] = self.auth_status
+        if self.auth_time:
+            if hasattr(self.auth_time, 'to_alipay_dict'):
+                params['auth_time'] = self.auth_time.to_alipay_dict()
+            else:
+                params['auth_time'] = self.auth_time
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class TransportAuthStatusData(object):
         o = TransportAuthStatusData()
         if 'auth_status' in d:
             o.auth_status = d['auth_status']
+        if 'auth_time' in d:
+            o.auth_time = d['auth_time']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

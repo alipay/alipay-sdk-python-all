@@ -11,6 +11,7 @@ class UserInfoVO(object):
         self._birthday = None
         self._head_url = None
         self._nick_name = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class UserInfoVO(object):
     @nick_name.setter
     def nick_name(self, value):
         self._nick_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class UserInfoVO(object):
                 params['nick_name'] = self.nick_name.to_alipay_dict()
             else:
                 params['nick_name'] = self.nick_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class UserInfoVO(object):
             o.head_url = d['head_url']
         if 'nick_name' in d:
             o.nick_name = d['nick_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

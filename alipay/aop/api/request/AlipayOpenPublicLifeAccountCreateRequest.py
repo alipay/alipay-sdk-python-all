@@ -18,6 +18,7 @@ class AlipayOpenPublicLifeAccountCreateRequest(object):
         self._content = None
         self._customer_tel = None
         self._life_name = None
+        self._open_id = None
         self._user_id = None
         self._background = None
         self._logo = None
@@ -80,6 +81,13 @@ class AlipayOpenPublicLifeAccountCreateRequest(object):
     @life_name.setter
     def life_name(self, value):
         self._life_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -214,6 +222,11 @@ class AlipayOpenPublicLifeAccountCreateRequest(object):
                 params['life_name'] = json.dumps(obj=self.life_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['life_name'] = self.life_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = json.dumps(obj=self.user_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

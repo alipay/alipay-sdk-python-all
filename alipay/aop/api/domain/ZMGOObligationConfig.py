@@ -8,11 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZMGOObligationConfig(object):
 
     def __init__(self):
+        self._benefit_url = None
         self._obligation_amount = None
         self._obligation_template = None
         self._obligation_times = None
         self._promise_type_desc = None
+        self._task_progress_redirect_schema = None
 
+    @property
+    def benefit_url(self):
+        return self._benefit_url
+
+    @benefit_url.setter
+    def benefit_url(self, value):
+        self._benefit_url = value
     @property
     def obligation_amount(self):
         return self._obligation_amount
@@ -41,10 +50,22 @@ class ZMGOObligationConfig(object):
     @promise_type_desc.setter
     def promise_type_desc(self, value):
         self._promise_type_desc = value
+    @property
+    def task_progress_redirect_schema(self):
+        return self._task_progress_redirect_schema
+
+    @task_progress_redirect_schema.setter
+    def task_progress_redirect_schema(self, value):
+        self._task_progress_redirect_schema = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.benefit_url:
+            if hasattr(self.benefit_url, 'to_alipay_dict'):
+                params['benefit_url'] = self.benefit_url.to_alipay_dict()
+            else:
+                params['benefit_url'] = self.benefit_url
         if self.obligation_amount:
             if hasattr(self.obligation_amount, 'to_alipay_dict'):
                 params['obligation_amount'] = self.obligation_amount.to_alipay_dict()
@@ -65,6 +86,11 @@ class ZMGOObligationConfig(object):
                 params['promise_type_desc'] = self.promise_type_desc.to_alipay_dict()
             else:
                 params['promise_type_desc'] = self.promise_type_desc
+        if self.task_progress_redirect_schema:
+            if hasattr(self.task_progress_redirect_schema, 'to_alipay_dict'):
+                params['task_progress_redirect_schema'] = self.task_progress_redirect_schema.to_alipay_dict()
+            else:
+                params['task_progress_redirect_schema'] = self.task_progress_redirect_schema
         return params
 
     @staticmethod
@@ -72,6 +98,8 @@ class ZMGOObligationConfig(object):
         if not d:
             return None
         o = ZMGOObligationConfig()
+        if 'benefit_url' in d:
+            o.benefit_url = d['benefit_url']
         if 'obligation_amount' in d:
             o.obligation_amount = d['obligation_amount']
         if 'obligation_template' in d:
@@ -80,6 +108,8 @@ class ZMGOObligationConfig(object):
             o.obligation_times = d['obligation_times']
         if 'promise_type_desc' in d:
             o.promise_type_desc = d['promise_type_desc']
+        if 'task_progress_redirect_schema' in d:
+            o.task_progress_redirect_schema = d['task_progress_redirect_schema']
         return o
 
 

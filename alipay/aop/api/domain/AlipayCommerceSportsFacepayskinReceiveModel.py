@@ -10,6 +10,7 @@ class AlipayCommerceSportsFacepayskinReceiveModel(object):
     def __init__(self):
         self._client_version = None
         self._expire_date = None
+        self._open_id = None
         self._skin_id = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AlipayCommerceSportsFacepayskinReceiveModel(object):
     @expire_date.setter
     def expire_date(self, value):
         self._expire_date = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def skin_id(self):
         return self._skin_id
@@ -55,6 +63,11 @@ class AlipayCommerceSportsFacepayskinReceiveModel(object):
                 params['expire_date'] = self.expire_date.to_alipay_dict()
             else:
                 params['expire_date'] = self.expire_date
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.skin_id:
             if hasattr(self.skin_id, 'to_alipay_dict'):
                 params['skin_id'] = self.skin_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayCommerceSportsFacepayskinReceiveModel(object):
             o.client_version = d['client_version']
         if 'expire_date' in d:
             o.expire_date = d['expire_date']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'skin_id' in d:
             o.skin_id = d['skin_id']
         if 'user_id' in d:

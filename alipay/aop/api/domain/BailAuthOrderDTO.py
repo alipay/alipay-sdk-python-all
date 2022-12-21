@@ -15,7 +15,9 @@ class BailAuthOrderDTO(object):
         self._fund_entrust_type = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._open_id = None
         self._order_title = None
+        self._partner_open_id = None
         self._partner_user_id = None
         self._product_code = None
         self._scene_code = None
@@ -72,12 +74,26 @@ class BailAuthOrderDTO(object):
     def gmt_modified(self, value):
         self._gmt_modified = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def order_title(self):
         return self._order_title
 
     @order_title.setter
     def order_title(self, value):
         self._order_title = value
+    @property
+    def partner_open_id(self):
+        return self._partner_open_id
+
+    @partner_open_id.setter
+    def partner_open_id(self, value):
+        self._partner_open_id = value
     @property
     def partner_user_id(self):
         return self._partner_user_id
@@ -152,11 +168,21 @@ class BailAuthOrderDTO(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
             else:
                 params['order_title'] = self.order_title
+        if self.partner_open_id:
+            if hasattr(self.partner_open_id, 'to_alipay_dict'):
+                params['partner_open_id'] = self.partner_open_id.to_alipay_dict()
+            else:
+                params['partner_open_id'] = self.partner_open_id
         if self.partner_user_id:
             if hasattr(self.partner_user_id, 'to_alipay_dict'):
                 params['partner_user_id'] = self.partner_user_id.to_alipay_dict()
@@ -203,8 +229,12 @@ class BailAuthOrderDTO(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_title' in d:
             o.order_title = d['order_title']
+        if 'partner_open_id' in d:
+            o.partner_open_id = d['partner_open_id']
         if 'partner_user_id' in d:
             o.partner_user_id = d['partner_user_id']
         if 'product_code' in d:

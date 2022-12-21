@@ -14,6 +14,7 @@ class AlipayUserQuanyibaoOpenbenefitSendModel(object):
         self._benefit_id = None
         self._ext_info = None
         self._memo = None
+        self._open_id = None
         self._third_biz_no = None
 
     @property
@@ -58,6 +59,13 @@ class AlipayUserQuanyibaoOpenbenefitSendModel(object):
     def memo(self, value):
         self._memo = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def third_biz_no(self):
         return self._third_biz_no
 
@@ -98,6 +106,11 @@ class AlipayUserQuanyibaoOpenbenefitSendModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.third_biz_no:
             if hasattr(self.third_biz_no, 'to_alipay_dict'):
                 params['third_biz_no'] = self.third_biz_no.to_alipay_dict()
@@ -120,6 +133,8 @@ class AlipayUserQuanyibaoOpenbenefitSendModel(object):
             o.ext_info = d['ext_info']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'third_biz_no' in d:
             o.third_biz_no = d['third_biz_no']
         return o

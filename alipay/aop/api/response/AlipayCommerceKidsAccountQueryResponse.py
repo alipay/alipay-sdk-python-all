@@ -10,6 +10,7 @@ class AlipayCommerceKidsAccountQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceKidsAccountQueryResponse, self).__init__()
         self._login_name = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayCommerceKidsAccountQueryResponse(AlipayResponse):
     @login_name.setter
     def login_name(self, value):
         self._login_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -31,5 +39,7 @@ class AlipayCommerceKidsAccountQueryResponse(AlipayResponse):
         response = super(AlipayCommerceKidsAccountQueryResponse, self).parse_response_content(response_content)
         if 'login_name' in response:
             self.login_name = response['login_name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

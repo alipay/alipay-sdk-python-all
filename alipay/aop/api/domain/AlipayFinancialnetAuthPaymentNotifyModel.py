@@ -12,6 +12,7 @@ class AlipayFinancialnetAuthPaymentNotifyModel(object):
         self._benefit_amount = None
         self._biz_status = None
         self._commodity_type = None
+        self._open_id = None
         self._out_commodity_id = None
         self._out_order_no = None
         self._platform_id = None
@@ -47,6 +48,13 @@ class AlipayFinancialnetAuthPaymentNotifyModel(object):
     @commodity_type.setter
     def commodity_type(self, value):
         self._commodity_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_commodity_id(self):
         return self._out_commodity_id
@@ -113,6 +121,11 @@ class AlipayFinancialnetAuthPaymentNotifyModel(object):
                 params['commodity_type'] = self.commodity_type.to_alipay_dict()
             else:
                 params['commodity_type'] = self.commodity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_commodity_id:
             if hasattr(self.out_commodity_id, 'to_alipay_dict'):
                 params['out_commodity_id'] = self.out_commodity_id.to_alipay_dict()
@@ -158,6 +171,8 @@ class AlipayFinancialnetAuthPaymentNotifyModel(object):
             o.biz_status = d['biz_status']
         if 'commodity_type' in d:
             o.commodity_type = d['commodity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_commodity_id' in d:
             o.out_commodity_id = d['out_commodity_id']
         if 'out_order_no' in d:

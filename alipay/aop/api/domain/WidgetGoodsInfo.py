@@ -9,6 +9,7 @@ class WidgetGoodsInfo(object):
 
     def __init__(self):
         self._buying_url = None
+        self._goods_brand = None
         self._goods_comment = None
         self._goods_description_label = None
         self._goods_id = None
@@ -16,12 +17,15 @@ class WidgetGoodsInfo(object):
         self._goods_name = None
         self._goods_type = None
         self._main_pic_url = None
+        self._need_public_promo = None
         self._order_number = None
         self._original_price = None
         self._publish_cities = None
         self._remaining_quantity = None
         self._sell_price = None
+        self._sell_tag_list = None
         self._sold_quantity = None
+        self._status = None
         self._total_quantity = None
 
     @property
@@ -31,6 +35,13 @@ class WidgetGoodsInfo(object):
     @buying_url.setter
     def buying_url(self, value):
         self._buying_url = value
+    @property
+    def goods_brand(self):
+        return self._goods_brand
+
+    @goods_brand.setter
+    def goods_brand(self, value):
+        self._goods_brand = value
     @property
     def goods_comment(self):
         return self._goods_comment
@@ -81,6 +92,13 @@ class WidgetGoodsInfo(object):
     def main_pic_url(self, value):
         self._main_pic_url = value
     @property
+    def need_public_promo(self):
+        return self._need_public_promo
+
+    @need_public_promo.setter
+    def need_public_promo(self, value):
+        self._need_public_promo = value
+    @property
     def order_number(self):
         return self._order_number
 
@@ -116,12 +134,29 @@ class WidgetGoodsInfo(object):
     def sell_price(self, value):
         self._sell_price = value
     @property
+    def sell_tag_list(self):
+        return self._sell_tag_list
+
+    @sell_tag_list.setter
+    def sell_tag_list(self, value):
+        if isinstance(value, list):
+            self._sell_tag_list = list()
+            for i in value:
+                self._sell_tag_list.append(i)
+    @property
     def sold_quantity(self):
         return self._sold_quantity
 
     @sold_quantity.setter
     def sold_quantity(self, value):
         self._sold_quantity = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def total_quantity(self):
         return self._total_quantity
@@ -138,6 +173,11 @@ class WidgetGoodsInfo(object):
                 params['buying_url'] = self.buying_url.to_alipay_dict()
             else:
                 params['buying_url'] = self.buying_url
+        if self.goods_brand:
+            if hasattr(self.goods_brand, 'to_alipay_dict'):
+                params['goods_brand'] = self.goods_brand.to_alipay_dict()
+            else:
+                params['goods_brand'] = self.goods_brand
         if self.goods_comment:
             if hasattr(self.goods_comment, 'to_alipay_dict'):
                 params['goods_comment'] = self.goods_comment.to_alipay_dict()
@@ -173,6 +213,11 @@ class WidgetGoodsInfo(object):
                 params['main_pic_url'] = self.main_pic_url.to_alipay_dict()
             else:
                 params['main_pic_url'] = self.main_pic_url
+        if self.need_public_promo:
+            if hasattr(self.need_public_promo, 'to_alipay_dict'):
+                params['need_public_promo'] = self.need_public_promo.to_alipay_dict()
+            else:
+                params['need_public_promo'] = self.need_public_promo
         if self.order_number:
             if hasattr(self.order_number, 'to_alipay_dict'):
                 params['order_number'] = self.order_number.to_alipay_dict()
@@ -198,11 +243,26 @@ class WidgetGoodsInfo(object):
                 params['sell_price'] = self.sell_price.to_alipay_dict()
             else:
                 params['sell_price'] = self.sell_price
+        if self.sell_tag_list:
+            if isinstance(self.sell_tag_list, list):
+                for i in range(0, len(self.sell_tag_list)):
+                    element = self.sell_tag_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sell_tag_list[i] = element.to_alipay_dict()
+            if hasattr(self.sell_tag_list, 'to_alipay_dict'):
+                params['sell_tag_list'] = self.sell_tag_list.to_alipay_dict()
+            else:
+                params['sell_tag_list'] = self.sell_tag_list
         if self.sold_quantity:
             if hasattr(self.sold_quantity, 'to_alipay_dict'):
                 params['sold_quantity'] = self.sold_quantity.to_alipay_dict()
             else:
                 params['sold_quantity'] = self.sold_quantity
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.total_quantity:
             if hasattr(self.total_quantity, 'to_alipay_dict'):
                 params['total_quantity'] = self.total_quantity.to_alipay_dict()
@@ -217,6 +277,8 @@ class WidgetGoodsInfo(object):
         o = WidgetGoodsInfo()
         if 'buying_url' in d:
             o.buying_url = d['buying_url']
+        if 'goods_brand' in d:
+            o.goods_brand = d['goods_brand']
         if 'goods_comment' in d:
             o.goods_comment = d['goods_comment']
         if 'goods_description_label' in d:
@@ -231,6 +293,8 @@ class WidgetGoodsInfo(object):
             o.goods_type = d['goods_type']
         if 'main_pic_url' in d:
             o.main_pic_url = d['main_pic_url']
+        if 'need_public_promo' in d:
+            o.need_public_promo = d['need_public_promo']
         if 'order_number' in d:
             o.order_number = d['order_number']
         if 'original_price' in d:
@@ -241,8 +305,12 @@ class WidgetGoodsInfo(object):
             o.remaining_quantity = d['remaining_quantity']
         if 'sell_price' in d:
             o.sell_price = d['sell_price']
+        if 'sell_tag_list' in d:
+            o.sell_tag_list = d['sell_tag_list']
         if 'sold_quantity' in d:
             o.sold_quantity = d['sold_quantity']
+        if 'status' in d:
+            o.status = d['status']
         if 'total_quantity' in d:
             o.total_quantity = d['total_quantity']
         return o

@@ -13,6 +13,7 @@ class AlipayCommerceBillMsgApplyModel(object):
         self._institution_id = None
         self._msg_params = None
         self._msg_type = None
+        self._open_id = None
         self._out_biz_no = None
 
     @property
@@ -47,6 +48,13 @@ class AlipayCommerceBillMsgApplyModel(object):
     def msg_type(self, value):
         self._msg_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
@@ -77,6 +85,11 @@ class AlipayCommerceBillMsgApplyModel(object):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
             else:
                 params['msg_type'] = self.msg_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -97,6 +110,8 @@ class AlipayCommerceBillMsgApplyModel(object):
             o.msg_params = d['msg_params']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         return o

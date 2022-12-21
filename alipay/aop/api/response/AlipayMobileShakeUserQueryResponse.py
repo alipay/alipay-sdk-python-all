@@ -11,6 +11,7 @@ class AlipayMobileShakeUserQueryResponse(AlipayResponse):
         super(AlipayMobileShakeUserQueryResponse, self).__init__()
         self._bizdata = None
         self._logon_id = None
+        self._open_id = None
         self._pass_id = None
         self._user_id = None
 
@@ -28,6 +29,13 @@ class AlipayMobileShakeUserQueryResponse(AlipayResponse):
     @logon_id.setter
     def logon_id(self, value):
         self._logon_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def pass_id(self):
         return self._pass_id
@@ -49,6 +57,8 @@ class AlipayMobileShakeUserQueryResponse(AlipayResponse):
             self.bizdata = response['bizdata']
         if 'logon_id' in response:
             self.logon_id = response['logon_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'pass_id' in response:
             self.pass_id = response['pass_id']
         if 'user_id' in response:

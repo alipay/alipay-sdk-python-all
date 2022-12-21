@@ -10,6 +10,7 @@ class BelongMerchantInfoDTO(object):
     def __init__(self):
         self._business_type = None
         self._merchant_id = None
+        self._merchant_open_id = None
 
     @property
     def business_type(self):
@@ -25,6 +26,13 @@ class BelongMerchantInfoDTO(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def merchant_open_id(self):
+        return self._merchant_open_id
+
+    @merchant_open_id.setter
+    def merchant_open_id(self, value):
+        self._merchant_open_id = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class BelongMerchantInfoDTO(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.merchant_open_id:
+            if hasattr(self.merchant_open_id, 'to_alipay_dict'):
+                params['merchant_open_id'] = self.merchant_open_id.to_alipay_dict()
+            else:
+                params['merchant_open_id'] = self.merchant_open_id
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class BelongMerchantInfoDTO(object):
             o.business_type = d['business_type']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'merchant_open_id' in d:
+            o.merchant_open_id = d['merchant_open_id']
         return o
 
 

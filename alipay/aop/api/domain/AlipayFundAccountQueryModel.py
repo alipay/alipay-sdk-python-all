@@ -11,6 +11,7 @@ class AlipayFundAccountQueryModel(object):
         self._account_product_code = None
         self._account_scene_code = None
         self._account_type = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._ext_info = None
         self._merchant_user_id = None
@@ -36,6 +37,13 @@ class AlipayFundAccountQueryModel(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -76,6 +84,11 @@ class AlipayFundAccountQueryModel(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayFundAccountQueryModel(object):
             o.account_scene_code = d['account_scene_code']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'ext_info' in d:

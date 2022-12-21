@@ -15,6 +15,8 @@ class AlipayAssetCardDisburseModel(object):
         self._biz_no = None
         self._extend_info = None
         self._fund_scence = None
+        self._open_id = None
+        self._payee_open_id = None
         self._payee_user_id = None
         self._payer_user_id = None
         self._template_id = None
@@ -69,6 +71,20 @@ class AlipayAssetCardDisburseModel(object):
     @fund_scence.setter
     def fund_scence(self, value):
         self._fund_scence = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def payee_open_id(self):
+        return self._payee_open_id
+
+    @payee_open_id.setter
+    def payee_open_id(self, value):
+        self._payee_open_id = value
     @property
     def payee_user_id(self):
         return self._payee_user_id
@@ -136,6 +152,16 @@ class AlipayAssetCardDisburseModel(object):
                 params['fund_scence'] = self.fund_scence.to_alipay_dict()
             else:
                 params['fund_scence'] = self.fund_scence
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.payee_open_id:
+            if hasattr(self.payee_open_id, 'to_alipay_dict'):
+                params['payee_open_id'] = self.payee_open_id.to_alipay_dict()
+            else:
+                params['payee_open_id'] = self.payee_open_id
         if self.payee_user_id:
             if hasattr(self.payee_user_id, 'to_alipay_dict'):
                 params['payee_user_id'] = self.payee_user_id.to_alipay_dict()
@@ -177,6 +203,10 @@ class AlipayAssetCardDisburseModel(object):
             o.extend_info = d['extend_info']
         if 'fund_scence' in d:
             o.fund_scence = d['fund_scence']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'payee_open_id' in d:
+            o.payee_open_id = d['payee_open_id']
         if 'payee_user_id' in d:
             o.payee_user_id = d['payee_user_id']
         if 'payer_user_id' in d:

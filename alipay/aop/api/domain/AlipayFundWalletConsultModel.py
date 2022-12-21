@@ -10,9 +10,11 @@ class AlipayFundWalletConsultModel(object):
     def __init__(self):
         self._biz_scene = None
         self._principal_id = None
+        self._principal_open_id = None
         self._principal_type = None
         self._product_code = None
         self._search_type = None
+        self._user_wallet_id = None
 
     @property
     def biz_scene(self):
@@ -28,6 +30,13 @@ class AlipayFundWalletConsultModel(object):
     @principal_id.setter
     def principal_id(self, value):
         self._principal_id = value
+    @property
+    def principal_open_id(self):
+        return self._principal_open_id
+
+    @principal_open_id.setter
+    def principal_open_id(self, value):
+        self._principal_open_id = value
     @property
     def principal_type(self):
         return self._principal_type
@@ -49,6 +58,13 @@ class AlipayFundWalletConsultModel(object):
     @search_type.setter
     def search_type(self, value):
         self._search_type = value
+    @property
+    def user_wallet_id(self):
+        return self._user_wallet_id
+
+    @user_wallet_id.setter
+    def user_wallet_id(self, value):
+        self._user_wallet_id = value
 
 
     def to_alipay_dict(self):
@@ -63,6 +79,11 @@ class AlipayFundWalletConsultModel(object):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
             else:
                 params['principal_id'] = self.principal_id
+        if self.principal_open_id:
+            if hasattr(self.principal_open_id, 'to_alipay_dict'):
+                params['principal_open_id'] = self.principal_open_id.to_alipay_dict()
+            else:
+                params['principal_open_id'] = self.principal_open_id
         if self.principal_type:
             if hasattr(self.principal_type, 'to_alipay_dict'):
                 params['principal_type'] = self.principal_type.to_alipay_dict()
@@ -78,6 +99,11 @@ class AlipayFundWalletConsultModel(object):
                 params['search_type'] = self.search_type.to_alipay_dict()
             else:
                 params['search_type'] = self.search_type
+        if self.user_wallet_id:
+            if hasattr(self.user_wallet_id, 'to_alipay_dict'):
+                params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
+            else:
+                params['user_wallet_id'] = self.user_wallet_id
         return params
 
     @staticmethod
@@ -89,12 +115,16 @@ class AlipayFundWalletConsultModel(object):
             o.biz_scene = d['biz_scene']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
+        if 'principal_open_id' in d:
+            o.principal_open_id = d['principal_open_id']
         if 'principal_type' in d:
             o.principal_type = d['principal_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'search_type' in d:
             o.search_type = d['search_type']
+        if 'user_wallet_id' in d:
+            o.user_wallet_id = d['user_wallet_id']
         return o
 
 

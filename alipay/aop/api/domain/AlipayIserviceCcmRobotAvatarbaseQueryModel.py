@@ -10,6 +10,7 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
     def __init__(self):
         self._method_params = None
         self._target_method = None
+        self._tenant_code = None
 
     @property
     def method_params(self):
@@ -25,6 +26,13 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
     @target_method.setter
     def target_method(self, value):
         self._target_method = value
+    @property
+    def tenant_code(self):
+        return self._tenant_code
+
+    @tenant_code.setter
+    def tenant_code(self, value):
+        self._tenant_code = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
                 params['target_method'] = self.target_method.to_alipay_dict()
             else:
                 params['target_method'] = self.target_method
+        if self.tenant_code:
+            if hasattr(self.tenant_code, 'to_alipay_dict'):
+                params['tenant_code'] = self.tenant_code.to_alipay_dict()
+            else:
+                params['tenant_code'] = self.tenant_code
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
             o.method_params = d['method_params']
         if 'target_method' in d:
             o.target_method = d['target_method']
+        if 'tenant_code' in d:
+            o.tenant_code = d['tenant_code']
         return o
 
 

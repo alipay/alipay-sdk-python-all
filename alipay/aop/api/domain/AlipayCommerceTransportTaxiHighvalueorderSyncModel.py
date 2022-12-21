@@ -15,6 +15,7 @@ class AlipayCommerceTransportTaxiHighvalueorderSyncModel(object):
         self._estimate_duration = None
         self._estimate_mileage = None
         self._estimate_pick_up_time = None
+        self._is_high_value = None
         self._order_id = None
         self._order_type = None
         self._request_time = None
@@ -70,6 +71,13 @@ class AlipayCommerceTransportTaxiHighvalueorderSyncModel(object):
     @estimate_pick_up_time.setter
     def estimate_pick_up_time(self, value):
         self._estimate_pick_up_time = value
+    @property
+    def is_high_value(self):
+        return self._is_high_value
+
+    @is_high_value.setter
+    def is_high_value(self, value):
+        self._is_high_value = value
     @property
     def order_id(self):
         return self._order_id
@@ -144,6 +152,11 @@ class AlipayCommerceTransportTaxiHighvalueorderSyncModel(object):
                 params['estimate_pick_up_time'] = self.estimate_pick_up_time.to_alipay_dict()
             else:
                 params['estimate_pick_up_time'] = self.estimate_pick_up_time
+        if self.is_high_value:
+            if hasattr(self.is_high_value, 'to_alipay_dict'):
+                params['is_high_value'] = self.is_high_value.to_alipay_dict()
+            else:
+                params['is_high_value'] = self.is_high_value
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayCommerceTransportTaxiHighvalueorderSyncModel(object):
             o.estimate_mileage = d['estimate_mileage']
         if 'estimate_pick_up_time' in d:
             o.estimate_pick_up_time = d['estimate_pick_up_time']
+        if 'is_high_value' in d:
+            o.is_high_value = d['is_high_value']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'order_type' in d:

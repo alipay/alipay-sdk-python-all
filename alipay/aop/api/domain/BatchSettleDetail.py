@@ -15,6 +15,7 @@ class BatchSettleDetail(object):
         self._error_desc = None
         self._settle_account_id = None
         self._settle_account_id_type = None
+        self._settle_account_open_id = None
         self._settle_account_type = None
         self._settle_entity_id = None
         self._settle_entity_type = None
@@ -63,6 +64,13 @@ class BatchSettleDetail(object):
     @settle_account_id_type.setter
     def settle_account_id_type(self, value):
         self._settle_account_id_type = value
+    @property
+    def settle_account_open_id(self):
+        return self._settle_account_open_id
+
+    @settle_account_open_id.setter
+    def settle_account_open_id(self, value):
+        self._settle_account_open_id = value
     @property
     def settle_account_type(self):
         return self._settle_account_type
@@ -135,6 +143,11 @@ class BatchSettleDetail(object):
                 params['settle_account_id_type'] = self.settle_account_id_type.to_alipay_dict()
             else:
                 params['settle_account_id_type'] = self.settle_account_id_type
+        if self.settle_account_open_id:
+            if hasattr(self.settle_account_open_id, 'to_alipay_dict'):
+                params['settle_account_open_id'] = self.settle_account_open_id.to_alipay_dict()
+            else:
+                params['settle_account_open_id'] = self.settle_account_open_id
         if self.settle_account_type:
             if hasattr(self.settle_account_type, 'to_alipay_dict'):
                 params['settle_account_type'] = self.settle_account_type.to_alipay_dict()
@@ -179,6 +192,8 @@ class BatchSettleDetail(object):
             o.settle_account_id = d['settle_account_id']
         if 'settle_account_id_type' in d:
             o.settle_account_id_type = d['settle_account_id_type']
+        if 'settle_account_open_id' in d:
+            o.settle_account_open_id = d['settle_account_open_id']
         if 'settle_account_type' in d:
             o.settle_account_type = d['settle_account_type']
         if 'settle_entity_id' in d:

@@ -11,6 +11,7 @@ class AlipayCommercePromoterRelationCreateModel(object):
         self._merchant_pid = None
         self._mini_app_id = None
         self._promoter_id = None
+        self._promoter_open_id = None
         self._role = None
         self._shop_id = None
         self._store_id = None
@@ -36,6 +37,13 @@ class AlipayCommercePromoterRelationCreateModel(object):
     @promoter_id.setter
     def promoter_id(self, value):
         self._promoter_id = value
+    @property
+    def promoter_open_id(self):
+        return self._promoter_open_id
+
+    @promoter_open_id.setter
+    def promoter_open_id(self, value):
+        self._promoter_open_id = value
     @property
     def role(self):
         return self._role
@@ -76,6 +84,11 @@ class AlipayCommercePromoterRelationCreateModel(object):
                 params['promoter_id'] = self.promoter_id.to_alipay_dict()
             else:
                 params['promoter_id'] = self.promoter_id
+        if self.promoter_open_id:
+            if hasattr(self.promoter_open_id, 'to_alipay_dict'):
+                params['promoter_open_id'] = self.promoter_open_id.to_alipay_dict()
+            else:
+                params['promoter_open_id'] = self.promoter_open_id
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommercePromoterRelationCreateModel(object):
             o.mini_app_id = d['mini_app_id']
         if 'promoter_id' in d:
             o.promoter_id = d['promoter_id']
+        if 'promoter_open_id' in d:
+            o.promoter_open_id = d['promoter_open_id']
         if 'role' in d:
             o.role = d['role']
         if 'shop_id' in d:

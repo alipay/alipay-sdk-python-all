@@ -13,6 +13,7 @@ class AlipayMerchantIndirectPromotaskSyncModel(object):
         self._source_pid = None
         self._task_code = None
         self._task_end_time = None
+        self._task_id = None
         self._task_state = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayMerchantIndirectPromotaskSyncModel(object):
     def task_end_time(self, value):
         self._task_end_time = value
     @property
+    def task_id(self):
+        return self._task_id
+
+    @task_id.setter
+    def task_id(self, value):
+        self._task_id = value
+    @property
     def task_state(self):
         return self._task_state
 
@@ -86,6 +94,11 @@ class AlipayMerchantIndirectPromotaskSyncModel(object):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
             else:
                 params['task_end_time'] = self.task_end_time
+        if self.task_id:
+            if hasattr(self.task_id, 'to_alipay_dict'):
+                params['task_id'] = self.task_id.to_alipay_dict()
+            else:
+                params['task_id'] = self.task_id
         if self.task_state:
             if hasattr(self.task_state, 'to_alipay_dict'):
                 params['task_state'] = self.task_state.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayMerchantIndirectPromotaskSyncModel(object):
             o.task_code = d['task_code']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
+        if 'task_id' in d:
+            o.task_id = d['task_id']
         if 'task_state' in d:
             o.task_state = d['task_state']
         return o

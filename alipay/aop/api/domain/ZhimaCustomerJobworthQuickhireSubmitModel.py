@@ -10,6 +10,7 @@ class ZhimaCustomerJobworthQuickhireSubmitModel(object):
     def __init__(self):
         self._age = None
         self._contact_no = None
+        self._deliver_id = None
         self._deliver_time = None
         self._deliver_type = None
         self._gender = None
@@ -34,6 +35,13 @@ class ZhimaCustomerJobworthQuickhireSubmitModel(object):
     @contact_no.setter
     def contact_no(self, value):
         self._contact_no = value
+    @property
+    def deliver_id(self):
+        return self._deliver_id
+
+    @deliver_id.setter
+    def deliver_id(self, value):
+        self._deliver_id = value
     @property
     def deliver_time(self):
         return self._deliver_time
@@ -111,6 +119,11 @@ class ZhimaCustomerJobworthQuickhireSubmitModel(object):
                 params['contact_no'] = self.contact_no.to_alipay_dict()
             else:
                 params['contact_no'] = self.contact_no
+        if self.deliver_id:
+            if hasattr(self.deliver_id, 'to_alipay_dict'):
+                params['deliver_id'] = self.deliver_id.to_alipay_dict()
+            else:
+                params['deliver_id'] = self.deliver_id
         if self.deliver_time:
             if hasattr(self.deliver_time, 'to_alipay_dict'):
                 params['deliver_time'] = self.deliver_time.to_alipay_dict()
@@ -167,6 +180,8 @@ class ZhimaCustomerJobworthQuickhireSubmitModel(object):
             o.age = d['age']
         if 'contact_no' in d:
             o.contact_no = d['contact_no']
+        if 'deliver_id' in d:
+            o.deliver_id = d['deliver_id']
         if 'deliver_time' in d:
             o.deliver_time = d['deliver_time']
         if 'deliver_type' in d:

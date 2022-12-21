@@ -10,6 +10,7 @@ class AlipayOpenPublicUserExpressQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenPublicUserExpressQueryResponse, self).__init__()
         self._express_user = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayOpenPublicUserExpressQueryResponse(AlipayResponse):
     @express_user.setter
     def express_user(self, value):
         self._express_user = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -31,5 +39,7 @@ class AlipayOpenPublicUserExpressQueryResponse(AlipayResponse):
         response = super(AlipayOpenPublicUserExpressQueryResponse, self).parse_response_content(response_content)
         if 'express_user' in response:
             self.express_user = response['express_user']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

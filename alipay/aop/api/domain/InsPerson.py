@@ -12,15 +12,19 @@ class InsPerson(object):
         self._area_code = None
         self._birthday = None
         self._biz_data = None
+        self._cert_effective_date = None
+        self._cert_expiration_date = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
         self._channel_user_id = None
+        self._channel_user_open_id = None
         self._channel_user_source = None
         self._email = None
         self._gender = None
         self._identity_type = None
         self._nationality = None
+        self._open_id = None
         self._phone = None
         self._pronounce_name = None
         self._user_id = None
@@ -54,6 +58,20 @@ class InsPerson(object):
     def biz_data(self, value):
         self._biz_data = value
     @property
+    def cert_effective_date(self):
+        return self._cert_effective_date
+
+    @cert_effective_date.setter
+    def cert_effective_date(self, value):
+        self._cert_effective_date = value
+    @property
+    def cert_expiration_date(self):
+        return self._cert_expiration_date
+
+    @cert_expiration_date.setter
+    def cert_expiration_date(self, value):
+        self._cert_expiration_date = value
+    @property
     def cert_name(self):
         return self._cert_name
 
@@ -81,6 +99,13 @@ class InsPerson(object):
     @channel_user_id.setter
     def channel_user_id(self, value):
         self._channel_user_id = value
+    @property
+    def channel_user_open_id(self):
+        return self._channel_user_open_id
+
+    @channel_user_open_id.setter
+    def channel_user_open_id(self, value):
+        self._channel_user_open_id = value
     @property
     def channel_user_source(self):
         return self._channel_user_source
@@ -116,6 +141,13 @@ class InsPerson(object):
     @nationality.setter
     def nationality(self, value):
         self._nationality = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def phone(self):
         return self._phone
@@ -161,6 +193,16 @@ class InsPerson(object):
                 params['biz_data'] = self.biz_data.to_alipay_dict()
             else:
                 params['biz_data'] = self.biz_data
+        if self.cert_effective_date:
+            if hasattr(self.cert_effective_date, 'to_alipay_dict'):
+                params['cert_effective_date'] = self.cert_effective_date.to_alipay_dict()
+            else:
+                params['cert_effective_date'] = self.cert_effective_date
+        if self.cert_expiration_date:
+            if hasattr(self.cert_expiration_date, 'to_alipay_dict'):
+                params['cert_expiration_date'] = self.cert_expiration_date.to_alipay_dict()
+            else:
+                params['cert_expiration_date'] = self.cert_expiration_date
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -181,6 +223,11 @@ class InsPerson(object):
                 params['channel_user_id'] = self.channel_user_id.to_alipay_dict()
             else:
                 params['channel_user_id'] = self.channel_user_id
+        if self.channel_user_open_id:
+            if hasattr(self.channel_user_open_id, 'to_alipay_dict'):
+                params['channel_user_open_id'] = self.channel_user_open_id.to_alipay_dict()
+            else:
+                params['channel_user_open_id'] = self.channel_user_open_id
         if self.channel_user_source:
             if hasattr(self.channel_user_source, 'to_alipay_dict'):
                 params['channel_user_source'] = self.channel_user_source.to_alipay_dict()
@@ -206,6 +253,11 @@ class InsPerson(object):
                 params['nationality'] = self.nationality.to_alipay_dict()
             else:
                 params['nationality'] = self.nationality
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -236,6 +288,10 @@ class InsPerson(object):
             o.birthday = d['birthday']
         if 'biz_data' in d:
             o.biz_data = d['biz_data']
+        if 'cert_effective_date' in d:
+            o.cert_effective_date = d['cert_effective_date']
+        if 'cert_expiration_date' in d:
+            o.cert_expiration_date = d['cert_expiration_date']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
@@ -244,6 +300,8 @@ class InsPerson(object):
             o.cert_type = d['cert_type']
         if 'channel_user_id' in d:
             o.channel_user_id = d['channel_user_id']
+        if 'channel_user_open_id' in d:
+            o.channel_user_open_id = d['channel_user_open_id']
         if 'channel_user_source' in d:
             o.channel_user_source = d['channel_user_source']
         if 'email' in d:
@@ -254,6 +312,8 @@ class InsPerson(object):
             o.identity_type = d['identity_type']
         if 'nationality' in d:
             o.nationality = d['nationality']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'phone' in d:
             o.phone = d['phone']
         if 'pronounce_name' in d:

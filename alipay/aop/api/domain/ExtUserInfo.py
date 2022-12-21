@@ -11,6 +11,7 @@ class ExtUserInfo(object):
         self._cert_no = None
         self._cert_type = None
         self._fix_buyer = None
+        self._identity_hash = None
         self._min_age = None
         self._mobile = None
         self._name = None
@@ -37,6 +38,13 @@ class ExtUserInfo(object):
     @fix_buyer.setter
     def fix_buyer(self, value):
         self._fix_buyer = value
+    @property
+    def identity_hash(self):
+        return self._identity_hash
+
+    @identity_hash.setter
+    def identity_hash(self, value):
+        self._identity_hash = value
     @property
     def min_age(self):
         return self._min_age
@@ -84,6 +92,11 @@ class ExtUserInfo(object):
                 params['fix_buyer'] = self.fix_buyer.to_alipay_dict()
             else:
                 params['fix_buyer'] = self.fix_buyer
+        if self.identity_hash:
+            if hasattr(self.identity_hash, 'to_alipay_dict'):
+                params['identity_hash'] = self.identity_hash.to_alipay_dict()
+            else:
+                params['identity_hash'] = self.identity_hash
         if self.min_age:
             if hasattr(self.min_age, 'to_alipay_dict'):
                 params['min_age'] = self.min_age.to_alipay_dict()
@@ -117,6 +130,8 @@ class ExtUserInfo(object):
             o.cert_type = d['cert_type']
         if 'fix_buyer' in d:
             o.fix_buyer = d['fix_buyer']
+        if 'identity_hash' in d:
+            o.identity_hash = d['identity_hash']
         if 'min_age' in d:
             o.min_age = d['min_age']
         if 'mobile' in d:

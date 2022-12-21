@@ -9,9 +9,17 @@ from alipay.aop.api.domain.UserIdentity import UserIdentity
 class AlipayMerchantOrderPointQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._point_type = None
         self._user = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def point_type(self):
         return self._point_type
@@ -33,6 +41,11 @@ class AlipayMerchantOrderPointQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.point_type:
             if hasattr(self.point_type, 'to_alipay_dict'):
                 params['point_type'] = self.point_type.to_alipay_dict()
@@ -50,6 +63,8 @@ class AlipayMerchantOrderPointQueryModel(object):
         if not d:
             return None
         o = AlipayMerchantOrderPointQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'point_type' in d:
             o.point_type = d['point_type']
         if 'user' in d:

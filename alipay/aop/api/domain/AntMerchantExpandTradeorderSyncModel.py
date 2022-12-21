@@ -13,6 +13,7 @@ class AntMerchantExpandTradeorderSyncModel(object):
     def __init__(self):
         self._amount = None
         self._buyer_id = None
+        self._buyer_open_id = None
         self._ext_info = None
         self._item_order_list = None
         self._memo = None
@@ -41,6 +42,13 @@ class AntMerchantExpandTradeorderSyncModel(object):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -164,6 +172,11 @@ class AntMerchantExpandTradeorderSyncModel(object):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
             else:
                 params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.ext_info:
             if isinstance(self.ext_info, list):
                 for i in range(0, len(self.ext_info)):
@@ -255,6 +268,8 @@ class AntMerchantExpandTradeorderSyncModel(object):
             o.amount = d['amount']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'item_order_list' in d:

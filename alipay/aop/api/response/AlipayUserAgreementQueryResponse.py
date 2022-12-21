@@ -21,6 +21,7 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
         self._personal_product_code = None
         self._pricipal_type = None
         self._principal_id = None
+        self._principal_open_id = None
         self._sign_scene = None
         self._sign_time = None
         self._single_quota = None
@@ -114,6 +115,13 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
     def principal_id(self, value):
         self._principal_id = value
     @property
+    def principal_open_id(self):
+        return self._principal_open_id
+
+    @principal_open_id.setter
+    def principal_open_id(self, value):
+        self._principal_open_id = value
+    @property
     def sign_scene(self):
         return self._sign_scene
 
@@ -189,6 +197,8 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
             self.pricipal_type = response['pricipal_type']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'principal_open_id' in response:
+            self.principal_open_id = response['principal_open_id']
         if 'sign_scene' in response:
             self.sign_scene = response['sign_scene']
         if 'sign_time' in response:

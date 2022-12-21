@@ -13,6 +13,7 @@ class FundPlanDTO(object):
         self._amount = None
         self._calendar_type = None
         self._creator_id = None
+        self._creator_open_id = None
         self._date = None
         self._end_date = None
         self._fund_plan_id = None
@@ -55,6 +56,13 @@ class FundPlanDTO(object):
     @creator_id.setter
     def creator_id(self, value):
         self._creator_id = value
+    @property
+    def creator_open_id(self):
+        return self._creator_open_id
+
+    @creator_open_id.setter
+    def creator_open_id(self, value):
+        self._creator_open_id = value
     @property
     def date(self):
         return self._date
@@ -173,6 +181,11 @@ class FundPlanDTO(object):
                 params['creator_id'] = self.creator_id.to_alipay_dict()
             else:
                 params['creator_id'] = self.creator_id
+        if self.creator_open_id:
+            if hasattr(self.creator_open_id, 'to_alipay_dict'):
+                params['creator_open_id'] = self.creator_open_id.to_alipay_dict()
+            else:
+                params['creator_open_id'] = self.creator_open_id
         if self.date:
             if hasattr(self.date, 'to_alipay_dict'):
                 params['date'] = self.date.to_alipay_dict()
@@ -253,6 +266,8 @@ class FundPlanDTO(object):
             o.calendar_type = d['calendar_type']
         if 'creator_id' in d:
             o.creator_id = d['creator_id']
+        if 'creator_open_id' in d:
+            o.creator_open_id = d['creator_open_id']
         if 'date' in d:
             o.date = d['date']
         if 'end_date' in d:

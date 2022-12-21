@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinancialnetAccountlistQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._scene_id = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_id(self):
         return self._scene_id
@@ -29,6 +37,11 @@ class AlipayFinancialnetAccountlistQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = self.scene_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayFinancialnetAccountlistQueryModel(object):
         if not d:
             return None
         o = AlipayFinancialnetAccountlistQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_id' in d:
             o.scene_id = d['scene_id']
         if 'user_id' in d:

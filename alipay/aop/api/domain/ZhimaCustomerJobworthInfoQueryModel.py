@@ -11,6 +11,7 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
         self._back_url = None
         self._cert_no = None
         self._cert_type = None
+        self._cloud_resume_scene = None
         self._company_certificate = None
         self._conn_key = None
         self._has_button = None
@@ -48,6 +49,13 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def cloud_resume_scene(self):
+        return self._cloud_resume_scene
+
+    @cloud_resume_scene.setter
+    def cloud_resume_scene(self, value):
+        self._cloud_resume_scene = value
     @property
     def company_certificate(self):
         return self._company_certificate
@@ -172,6 +180,11 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.cloud_resume_scene:
+            if hasattr(self.cloud_resume_scene, 'to_alipay_dict'):
+                params['cloud_resume_scene'] = self.cloud_resume_scene.to_alipay_dict()
+            else:
+                params['cloud_resume_scene'] = self.cloud_resume_scene
         if self.company_certificate:
             if hasattr(self.company_certificate, 'to_alipay_dict'):
                 params['company_certificate'] = self.company_certificate.to_alipay_dict()
@@ -260,6 +273,8 @@ class ZhimaCustomerJobworthInfoQueryModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'cloud_resume_scene' in d:
+            o.cloud_resume_scene = d['cloud_resume_scene']
         if 'company_certificate' in d:
             o.company_certificate = d['company_certificate']
         if 'conn_key' in d:

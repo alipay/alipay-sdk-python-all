@@ -14,6 +14,7 @@ class AlipayAssetCardDepositModel(object):
         self._biz_no = None
         self._extend_info = None
         self._fund_scence = None
+        self._open_id = None
         self._product_code = None
         self._template_id = None
         self._user_id = None
@@ -60,6 +61,13 @@ class AlipayAssetCardDepositModel(object):
     @fund_scence.setter
     def fund_scence(self, value):
         self._fund_scence = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def product_code(self):
         return self._product_code
@@ -115,6 +123,11 @@ class AlipayAssetCardDepositModel(object):
                 params['fund_scence'] = self.fund_scence.to_alipay_dict()
             else:
                 params['fund_scence'] = self.fund_scence
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayAssetCardDepositModel(object):
             o.extend_info = d['extend_info']
         if 'fund_scence' in d:
             o.fund_scence = d['fund_scence']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'template_id' in d:

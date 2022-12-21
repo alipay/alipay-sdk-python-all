@@ -22,6 +22,7 @@ class AlipayEbppInstserviceMessageNotifyModel(object):
         self._notify_date = None
         self._notify_desc = None
         self._notify_type = None
+        self._open_id = None
         self._sub_biz_type = None
         self._threshold_amount = None
         self._user_address = None
@@ -126,6 +127,13 @@ class AlipayEbppInstserviceMessageNotifyModel(object):
     @notify_type.setter
     def notify_type(self, value):
         self._notify_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sub_biz_type(self):
         return self._sub_biz_type
@@ -235,6 +243,11 @@ class AlipayEbppInstserviceMessageNotifyModel(object):
                 params['notify_type'] = self.notify_type.to_alipay_dict()
             else:
                 params['notify_type'] = self.notify_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sub_biz_type:
             if hasattr(self.sub_biz_type, 'to_alipay_dict'):
                 params['sub_biz_type'] = self.sub_biz_type.to_alipay_dict()
@@ -295,6 +308,8 @@ class AlipayEbppInstserviceMessageNotifyModel(object):
             o.notify_desc = d['notify_desc']
         if 'notify_type' in d:
             o.notify_type = d['notify_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sub_biz_type' in d:
             o.sub_biz_type = d['sub_biz_type']
         if 'threshold_amount' in d:

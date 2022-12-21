@@ -14,6 +14,7 @@ class AlipayEbppInstserviceOrderCreateModel(object):
         self._flow_id = None
         self._flow_time = None
         self._inst = None
+        self._open_id = None
         self._operation = None
         self._partner_name = None
         self._product_id = None
@@ -62,6 +63,13 @@ class AlipayEbppInstserviceOrderCreateModel(object):
     @inst.setter
     def inst(self, value):
         self._inst = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation(self):
         return self._operation
@@ -131,6 +139,11 @@ class AlipayEbppInstserviceOrderCreateModel(object):
                 params['inst'] = self.inst.to_alipay_dict()
             else:
                 params['inst'] = self.inst
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation:
             if hasattr(self.operation, 'to_alipay_dict'):
                 params['operation'] = self.operation.to_alipay_dict()
@@ -175,6 +188,8 @@ class AlipayEbppInstserviceOrderCreateModel(object):
             o.flow_time = d['flow_time']
         if 'inst' in d:
             o.inst = d['inst']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation' in d:
             o.operation = d['operation']
         if 'partner_name' in d:

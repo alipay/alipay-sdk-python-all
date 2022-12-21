@@ -13,6 +13,7 @@ class UserMailInfoVO(object):
         self._country = None
         self._county_district = None
         self._detail_address = None
+        self._email = None
         self._gmt_create = None
         self._gmt_modified = None
         self._id = None
@@ -57,6 +58,13 @@ class UserMailInfoVO(object):
     @detail_address.setter
     def detail_address(self, value):
         self._detail_address = value
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -142,6 +150,11 @@ class UserMailInfoVO(object):
                 params['detail_address'] = self.detail_address.to_alipay_dict()
             else:
                 params['detail_address'] = self.detail_address
+        if self.email:
+            if hasattr(self.email, 'to_alipay_dict'):
+                params['email'] = self.email.to_alipay_dict()
+            else:
+                params['email'] = self.email
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -199,6 +212,8 @@ class UserMailInfoVO(object):
             o.county_district = d['county_district']
         if 'detail_address' in d:
             o.detail_address = d['detail_address']
+        if 'email' in d:
+            o.email = d['email']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceTaskProcessQueryResponse(AlipayResponse):
         self._alipay_user_id = None
         self._biz_id = None
         self._current = None
+        self._open_id = None
         self._target = None
         self._target_type = None
         self._task_id = None
@@ -38,6 +39,13 @@ class AlipayCommerceTaskProcessQueryResponse(AlipayResponse):
     @current.setter
     def current(self, value):
         self._current = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def target(self):
         return self._target
@@ -75,6 +83,8 @@ class AlipayCommerceTaskProcessQueryResponse(AlipayResponse):
             self.biz_id = response['biz_id']
         if 'current' in response:
             self.current = response['current']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'target' in response:
             self.target = response['target']
         if 'target_type' in response:

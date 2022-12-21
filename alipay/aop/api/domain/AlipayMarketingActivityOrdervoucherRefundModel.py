@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.VoucherRefundDetailInfo import VoucherRefundDetailInfo
 
 
 class AlipayMarketingActivityOrdervoucherRefundModel(object):
@@ -14,6 +15,7 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
         self._out_biz_no = None
         self._total_fee = None
         self._voucher_code = None
+        self._voucher_refund_detail_info = None
 
     @property
     def activity_id(self):
@@ -57,6 +59,16 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
     @voucher_code.setter
     def voucher_code(self, value):
         self._voucher_code = value
+    @property
+    def voucher_refund_detail_info(self):
+        return self._voucher_refund_detail_info
+
+    @voucher_refund_detail_info.setter
+    def voucher_refund_detail_info(self, value):
+        if isinstance(value, VoucherRefundDetailInfo):
+            self._voucher_refund_detail_info = value
+        else:
+            self._voucher_refund_detail_info = VoucherRefundDetailInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -91,6 +103,11 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
                 params['voucher_code'] = self.voucher_code.to_alipay_dict()
             else:
                 params['voucher_code'] = self.voucher_code
+        if self.voucher_refund_detail_info:
+            if hasattr(self.voucher_refund_detail_info, 'to_alipay_dict'):
+                params['voucher_refund_detail_info'] = self.voucher_refund_detail_info.to_alipay_dict()
+            else:
+                params['voucher_refund_detail_info'] = self.voucher_refund_detail_info
         return params
 
     @staticmethod
@@ -110,6 +127,8 @@ class AlipayMarketingActivityOrdervoucherRefundModel(object):
             o.total_fee = d['total_fee']
         if 'voucher_code' in d:
             o.voucher_code = d['voucher_code']
+        if 'voucher_refund_detail_info' in d:
+            o.voucher_refund_detail_info = d['voucher_refund_detail_info']
         return o
 
 

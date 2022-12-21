@@ -13,6 +13,7 @@ class JointAccountMemberDTO(object):
         self._account_quota = None
         self._member_ext_info = None
         self._name = None
+        self._open_id = None
         self._status = None
         self._user_id = None
 
@@ -43,6 +44,13 @@ class JointAccountMemberDTO(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def status(self):
         return self._status
@@ -76,6 +84,11 @@ class JointAccountMemberDTO(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -99,6 +112,8 @@ class JointAccountMemberDTO(object):
             o.member_ext_info = d['member_ext_info']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status' in d:
             o.status = d['status']
         if 'user_id' in d:

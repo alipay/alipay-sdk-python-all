@@ -13,6 +13,8 @@ class StandardBailDTO(object):
         self._gmt_create = None
         self._gmt_modified = None
         self._migrate_to = None
+        self._open_id = None
+        self._partner_open_id = None
         self._partner_user_id = None
         self._scene_desc = None
         self._type_code = None
@@ -53,6 +55,20 @@ class StandardBailDTO(object):
     @migrate_to.setter
     def migrate_to(self, value):
         self._migrate_to = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def partner_open_id(self):
+        return self._partner_open_id
+
+    @partner_open_id.setter
+    def partner_open_id(self, value):
+        self._partner_open_id = value
     @property
     def partner_user_id(self):
         return self._partner_user_id
@@ -110,6 +126,16 @@ class StandardBailDTO(object):
                 params['migrate_to'] = self.migrate_to.to_alipay_dict()
             else:
                 params['migrate_to'] = self.migrate_to
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.partner_open_id:
+            if hasattr(self.partner_open_id, 'to_alipay_dict'):
+                params['partner_open_id'] = self.partner_open_id.to_alipay_dict()
+            else:
+                params['partner_open_id'] = self.partner_open_id
         if self.partner_user_id:
             if hasattr(self.partner_user_id, 'to_alipay_dict'):
                 params['partner_user_id'] = self.partner_user_id.to_alipay_dict()
@@ -147,6 +173,10 @@ class StandardBailDTO(object):
             o.gmt_modified = d['gmt_modified']
         if 'migrate_to' in d:
             o.migrate_to = d['migrate_to']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'partner_open_id' in d:
+            o.partner_open_id = d['partner_open_id']
         if 'partner_user_id' in d:
             o.partner_user_id = d['partner_user_id']
         if 'scene_desc' in d:

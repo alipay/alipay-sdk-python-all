@@ -13,6 +13,7 @@ class ZhimaCreditPeUserScenePreconsultModel(object):
         self._category_code = None
         self._credit_scene = None
         self._ext_params = None
+        self._open_id = None
         self._out_order_no = None
         self._product_code = None
         self._risk_info = None
@@ -53,6 +54,13 @@ class ZhimaCreditPeUserScenePreconsultModel(object):
     @ext_params.setter
     def ext_params(self, value):
         self._ext_params = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -110,6 +118,11 @@ class ZhimaCreditPeUserScenePreconsultModel(object):
                 params['ext_params'] = self.ext_params.to_alipay_dict()
             else:
                 params['ext_params'] = self.ext_params
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -147,6 +160,8 @@ class ZhimaCreditPeUserScenePreconsultModel(object):
             o.credit_scene = d['credit_scene']
         if 'ext_params' in d:
             o.ext_params = d['ext_params']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'product_code' in d:

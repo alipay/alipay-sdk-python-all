@@ -10,6 +10,7 @@ class AlipayOpenMiniMiniappFavoritegiftQueryModel(object):
 
     def __init__(self):
         self._activity_list = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -25,6 +26,13 @@ class AlipayOpenMiniMiniappFavoritegiftQueryModel(object):
                     self._activity_list.append(i)
                 else:
                     self._activity_list.append(ActivityQueryInfo.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -46,6 +54,11 @@ class AlipayOpenMiniMiniappFavoritegiftQueryModel(object):
                 params['activity_list'] = self.activity_list.to_alipay_dict()
             else:
                 params['activity_list'] = self.activity_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -60,6 +73,8 @@ class AlipayOpenMiniMiniappFavoritegiftQueryModel(object):
         o = AlipayOpenMiniMiniappFavoritegiftQueryModel()
         if 'activity_list' in d:
             o.activity_list = d['activity_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

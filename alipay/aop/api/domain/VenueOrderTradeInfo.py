@@ -11,6 +11,7 @@ class VenueOrderTradeInfo(object):
         self._amount = None
         self._desc = None
         self._id = None
+        self._open_id = None
         self._operation_time = None
         self._partner_id = None
         self._refund_request_no = None
@@ -39,6 +40,13 @@ class VenueOrderTradeInfo(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation_time(self):
         return self._operation_time
@@ -100,6 +108,11 @@ class VenueOrderTradeInfo(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation_time:
             if hasattr(self.operation_time, 'to_alipay_dict'):
                 params['operation_time'] = self.operation_time.to_alipay_dict()
@@ -143,6 +156,8 @@ class VenueOrderTradeInfo(object):
             o.desc = d['desc']
         if 'id' in d:
             o.id = d['id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation_time' in d:
             o.operation_time = d['operation_time']
         if 'partner_id' in d:

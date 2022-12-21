@@ -11,6 +11,7 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
         self._apdidtoken = None
         self._cert_no = None
         self._mobile = None
+        self._open_id = None
         self._order_amount = None
         self._start_time = None
         self._user_id = None
@@ -36,6 +37,13 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -76,6 +84,11 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
             o.cert_no = d['cert_no']
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'start_time' in d:

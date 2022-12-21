@@ -10,6 +10,7 @@ class AlipayUserAgreementUnsignModel(object):
     def __init__(self):
         self._agreement_no = None
         self._alipay_logon_id = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._extend_params = None
         self._external_agreement_no = None
@@ -32,6 +33,13 @@ class AlipayUserAgreementUnsignModel(object):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -95,6 +103,11 @@ class AlipayUserAgreementUnsignModel(object):
                 params['alipay_logon_id'] = self.alipay_logon_id.to_alipay_dict()
             else:
                 params['alipay_logon_id'] = self.alipay_logon_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -141,6 +154,8 @@ class AlipayUserAgreementUnsignModel(object):
             o.agreement_no = d['agreement_no']
         if 'alipay_logon_id' in d:
             o.alipay_logon_id = d['alipay_logon_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'extend_params' in d:

@@ -15,6 +15,7 @@ class AlipayFundJointaccountDepositplanDetailQueryModel(object):
         self._fund_plan_id_list = None
         self._identity = None
         self._identity_type = None
+        self._open_id = None
         self._product_code = None
 
     @property
@@ -70,6 +71,13 @@ class AlipayFundJointaccountDepositplanDetailQueryModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -120,6 +128,11 @@ class AlipayFundJointaccountDepositplanDetailQueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -146,6 +159,8 @@ class AlipayFundJointaccountDepositplanDetailQueryModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

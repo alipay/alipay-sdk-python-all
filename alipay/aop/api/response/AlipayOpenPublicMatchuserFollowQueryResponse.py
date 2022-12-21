@@ -10,6 +10,7 @@ class AlipayOpenPublicMatchuserFollowQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenPublicMatchuserFollowQueryResponse, self).__init__()
         self._is_follow = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayOpenPublicMatchuserFollowQueryResponse(AlipayResponse):
     @is_follow.setter
     def is_follow(self, value):
         self._is_follow = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -31,5 +39,7 @@ class AlipayOpenPublicMatchuserFollowQueryResponse(AlipayResponse):
         response = super(AlipayOpenPublicMatchuserFollowQueryResponse, self).parse_response_content(response_content)
         if 'is_follow' in response:
             self.is_follow = response['is_follow']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

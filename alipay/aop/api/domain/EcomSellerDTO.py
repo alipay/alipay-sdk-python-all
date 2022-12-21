@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class EcomSellerDTO(object):
 
     def __init__(self):
+        self._address = None
         self._alipay_id = None
         self._alipay_open_id = None
         self._attributes = None
@@ -28,6 +29,13 @@ class EcomSellerDTO(object):
         self._seller_order_refund_exchange_rate = None
         self._seller_user_type = None
 
+    @property
+    def address(self):
+        return self._address
+
+    @address.setter
+    def address(self, value):
+        self._address = value
     @property
     def alipay_id(self):
         return self._alipay_id
@@ -165,6 +173,11 @@ class EcomSellerDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.address:
+            if hasattr(self.address, 'to_alipay_dict'):
+                params['address'] = self.address.to_alipay_dict()
+            else:
+                params['address'] = self.address
         if self.alipay_id:
             if hasattr(self.alipay_id, 'to_alipay_dict'):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
@@ -267,6 +280,8 @@ class EcomSellerDTO(object):
         if not d:
             return None
         o = EcomSellerDTO()
+        if 'address' in d:
+            o.address = d['address']
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
         if 'alipay_open_id' in d:

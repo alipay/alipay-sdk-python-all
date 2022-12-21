@@ -9,6 +9,7 @@ class AlipayOpenMiniMiniappFavoriteAddModel(object):
 
     def __init__(self):
         self._designated_app_id = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayOpenMiniMiniappFavoriteAddModel(object):
     @designated_app_id.setter
     def designated_app_id(self, value):
         self._designated_app_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -34,6 +42,11 @@ class AlipayOpenMiniMiniappFavoriteAddModel(object):
                 params['designated_app_id'] = self.designated_app_id.to_alipay_dict()
             else:
                 params['designated_app_id'] = self.designated_app_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayOpenMiniMiniappFavoriteAddModel(object):
         o = AlipayOpenMiniMiniappFavoriteAddModel()
         if 'designated_app_id' in d:
             o.designated_app_id = d['designated_app_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

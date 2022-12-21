@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.OpenApiPeopleDTO import OpenApiPeopleDTO
+from alipay.aop.api.domain.ApproveNodePageGroupDTO import ApproveNodePageGroupDTO
 from alipay.aop.api.domain.ContractOpenApiAttachDTO import ContractOpenApiAttachDTO
 from alipay.aop.api.domain.ContractOpenApiAttachDTO import ContractOpenApiAttachDTO
 from alipay.aop.api.domain.OpenApiPartnerDTO import OpenApiPartnerDTO
@@ -11,6 +12,7 @@ from alipay.aop.api.domain.OpenApiPartnerDTO import OpenApiPartnerDTO
 from alipay.aop.api.domain.OpenApiPeopleDTO import OpenApiPeopleDTO
 from alipay.aop.api.domain.OpenApiPeopleDTO import OpenApiPeopleDTO
 from alipay.aop.api.domain.OpenApiMatterMemberDTO import OpenApiMatterMemberDTO
+from alipay.aop.api.domain.OpenApiPaymentTermsDTO import OpenApiPaymentTermsDTO
 
 
 class ContractDetailQueryDTO(object):
@@ -21,6 +23,7 @@ class ContractDetailQueryDTO(object):
         self._apply_end_time = None
         self._apply_people = None
         self._apply_start_time = None
+        self._approve_node_info_list = None
         self._auto_renew_period = None
         self._auto_renew_period_unit = None
         self._biz_status = None
@@ -59,6 +62,7 @@ class ContractDetailQueryDTO(object):
         self._matter_member_list = None
         self._number = None
         self._payer = None
+        self._payment_terms_list = None
         self._remarks_on_printing = None
         self._seal_order = None
         self._second_contract_type = None
@@ -106,6 +110,19 @@ class ContractDetailQueryDTO(object):
     @apply_start_time.setter
     def apply_start_time(self, value):
         self._apply_start_time = value
+    @property
+    def approve_node_info_list(self):
+        return self._approve_node_info_list
+
+    @approve_node_info_list.setter
+    def approve_node_info_list(self, value):
+        if isinstance(value, list):
+            self._approve_node_info_list = list()
+            for i in value:
+                if isinstance(i, ApproveNodePageGroupDTO):
+                    self._approve_node_info_list.append(i)
+                else:
+                    self._approve_node_info_list.append(ApproveNodePageGroupDTO.from_alipay_dict(i))
     @property
     def auto_renew_period(self):
         return self._auto_renew_period
@@ -412,6 +429,19 @@ class ContractDetailQueryDTO(object):
     def payer(self, value):
         self._payer = value
     @property
+    def payment_terms_list(self):
+        return self._payment_terms_list
+
+    @payment_terms_list.setter
+    def payment_terms_list(self, value):
+        if isinstance(value, list):
+            self._payment_terms_list = list()
+            for i in value:
+                if isinstance(i, OpenApiPaymentTermsDTO):
+                    self._payment_terms_list.append(i)
+                else:
+                    self._payment_terms_list.append(OpenApiPaymentTermsDTO.from_alipay_dict(i))
+    @property
     def remarks_on_printing(self):
         return self._remarks_on_printing
 
@@ -496,6 +526,16 @@ class ContractDetailQueryDTO(object):
                 params['apply_start_time'] = self.apply_start_time.to_alipay_dict()
             else:
                 params['apply_start_time'] = self.apply_start_time
+        if self.approve_node_info_list:
+            if isinstance(self.approve_node_info_list, list):
+                for i in range(0, len(self.approve_node_info_list)):
+                    element = self.approve_node_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.approve_node_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.approve_node_info_list, 'to_alipay_dict'):
+                params['approve_node_info_list'] = self.approve_node_info_list.to_alipay_dict()
+            else:
+                params['approve_node_info_list'] = self.approve_node_info_list
         if self.auto_renew_period:
             if hasattr(self.auto_renew_period, 'to_alipay_dict'):
                 params['auto_renew_period'] = self.auto_renew_period.to_alipay_dict()
@@ -716,6 +756,16 @@ class ContractDetailQueryDTO(object):
                 params['payer'] = self.payer.to_alipay_dict()
             else:
                 params['payer'] = self.payer
+        if self.payment_terms_list:
+            if isinstance(self.payment_terms_list, list):
+                for i in range(0, len(self.payment_terms_list)):
+                    element = self.payment_terms_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.payment_terms_list[i] = element.to_alipay_dict()
+            if hasattr(self.payment_terms_list, 'to_alipay_dict'):
+                params['payment_terms_list'] = self.payment_terms_list.to_alipay_dict()
+            else:
+                params['payment_terms_list'] = self.payment_terms_list
         if self.remarks_on_printing:
             if hasattr(self.remarks_on_printing, 'to_alipay_dict'):
                 params['remarks_on_printing'] = self.remarks_on_printing.to_alipay_dict()
@@ -773,6 +823,8 @@ class ContractDetailQueryDTO(object):
             o.apply_people = d['apply_people']
         if 'apply_start_time' in d:
             o.apply_start_time = d['apply_start_time']
+        if 'approve_node_info_list' in d:
+            o.approve_node_info_list = d['approve_node_info_list']
         if 'auto_renew_period' in d:
             o.auto_renew_period = d['auto_renew_period']
         if 'auto_renew_period_unit' in d:
@@ -849,6 +901,8 @@ class ContractDetailQueryDTO(object):
             o.number = d['number']
         if 'payer' in d:
             o.payer = d['payer']
+        if 'payment_terms_list' in d:
+            o.payment_terms_list = d['payment_terms_list']
         if 'remarks_on_printing' in d:
             o.remarks_on_printing = d['remarks_on_printing']
         if 'seal_order' in d:

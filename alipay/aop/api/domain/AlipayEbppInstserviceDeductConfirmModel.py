@@ -15,6 +15,7 @@ class AlipayEbppInstserviceDeductConfirmModel(object):
         self._error_message = None
         self._extend_field = None
         self._inst_id = None
+        self._open_id = None
         self._out_agreement_id = None
         self._process_id = None
         self._result = None
@@ -70,6 +71,13 @@ class AlipayEbppInstserviceDeductConfirmModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_agreement_id(self):
         return self._out_agreement_id
@@ -144,6 +152,11 @@ class AlipayEbppInstserviceDeductConfirmModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_agreement_id:
             if hasattr(self.out_agreement_id, 'to_alipay_dict'):
                 params['out_agreement_id'] = self.out_agreement_id.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayEbppInstserviceDeductConfirmModel(object):
             o.extend_field = d['extend_field']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_agreement_id' in d:
             o.out_agreement_id = d['out_agreement_id']
         if 'process_id' in d:

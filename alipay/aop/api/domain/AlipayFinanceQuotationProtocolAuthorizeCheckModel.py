@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinanceQuotationProtocolAuthorizeCheckModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._protocol_type_list = None
         self._sign_content_list = None
         self._symbols = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def protocol_type_list(self):
         return self._protocol_type_list
@@ -54,6 +62,11 @@ class AlipayFinanceQuotationProtocolAuthorizeCheckModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.protocol_type_list:
             if isinstance(self.protocol_type_list, list):
                 for i in range(0, len(self.protocol_type_list)):
@@ -96,6 +109,8 @@ class AlipayFinanceQuotationProtocolAuthorizeCheckModel(object):
         if not d:
             return None
         o = AlipayFinanceQuotationProtocolAuthorizeCheckModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'protocol_type_list' in d:
             o.protocol_type_list = d['protocol_type_list']
         if 'sign_content_list' in d:

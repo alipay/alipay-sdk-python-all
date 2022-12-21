@@ -11,6 +11,7 @@ class AlipayCommerceTransportEbikeBindSyncModel(object):
     def __init__(self):
         self._ebike_bind_list = None
         self._ebike_source = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -33,6 +34,13 @@ class AlipayCommerceTransportEbikeBindSyncModel(object):
     @ebike_source.setter
     def ebike_source(self, value):
         self._ebike_source = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -59,6 +67,11 @@ class AlipayCommerceTransportEbikeBindSyncModel(object):
                 params['ebike_source'] = self.ebike_source.to_alipay_dict()
             else:
                 params['ebike_source'] = self.ebike_source
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -75,6 +88,8 @@ class AlipayCommerceTransportEbikeBindSyncModel(object):
             o.ebike_bind_list = d['ebike_bind_list']
         if 'ebike_source' in d:
             o.ebike_source = d['ebike_source']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

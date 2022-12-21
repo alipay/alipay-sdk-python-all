@@ -14,6 +14,7 @@ class AlipayLifeassistantProdBillGetRequest(object):
         self._biz_model = biz_model
         self._biz_type = None
         self._m_type = None
+        self._open_id = None
         self._order_id = None
         self._uid = None
         self._version = "1.0"
@@ -47,6 +48,13 @@ class AlipayLifeassistantProdBillGetRequest(object):
     @m_type.setter
     def m_type(self, value):
         self._m_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -150,6 +158,11 @@ class AlipayLifeassistantProdBillGetRequest(object):
                 params['m_type'] = json.dumps(obj=self.m_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['m_type'] = self.m_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = json.dumps(obj=self.order_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

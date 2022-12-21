@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AntMerchantExpandShopQueryModel(object):
 
     def __init__(self):
+        self._address_version = None
         self._ip_role_id = None
         self._shop_id = None
         self._store_id = None
 
+    @property
+    def address_version(self):
+        return self._address_version
+
+    @address_version.setter
+    def address_version(self, value):
+        self._address_version = value
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -37,6 +45,11 @@ class AntMerchantExpandShopQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.address_version:
+            if hasattr(self.address_version, 'to_alipay_dict'):
+                params['address_version'] = self.address_version.to_alipay_dict()
+            else:
+                params['address_version'] = self.address_version
         if self.ip_role_id:
             if hasattr(self.ip_role_id, 'to_alipay_dict'):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AntMerchantExpandShopQueryModel(object):
         if not d:
             return None
         o = AntMerchantExpandShopQueryModel()
+        if 'address_version' in d:
+            o.address_version = d['address_version']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
         if 'shop_id' in d:

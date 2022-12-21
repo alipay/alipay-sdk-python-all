@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CardSubAccountResult import CardSubAccountResult
 
 
 class GiftCardVo(object):
@@ -16,7 +17,9 @@ class GiftCardVo(object):
         self._gift_card_name = None
         self._gift_card_no = None
         self._gift_card_status = None
+        self._gmt_create = None
         self._merchant_id = None
+        self._sub_account_info = None
         self._user_id = None
         self._valid_period = None
 
@@ -77,12 +80,29 @@ class GiftCardVo(object):
     def gift_card_status(self, value):
         self._gift_card_status = value
     @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
+    @property
     def merchant_id(self):
         return self._merchant_id
 
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def sub_account_info(self):
+        return self._sub_account_info
+
+    @sub_account_info.setter
+    def sub_account_info(self, value):
+        if isinstance(value, CardSubAccountResult):
+            self._sub_account_info = value
+        else:
+            self._sub_account_info = CardSubAccountResult.from_alipay_dict(value)
     @property
     def user_id(self):
         return self._user_id
@@ -141,11 +161,21 @@ class GiftCardVo(object):
                 params['gift_card_status'] = self.gift_card_status.to_alipay_dict()
             else:
                 params['gift_card_status'] = self.gift_card_status
+        if self.gmt_create:
+            if hasattr(self.gmt_create, 'to_alipay_dict'):
+                params['gmt_create'] = self.gmt_create.to_alipay_dict()
+            else:
+                params['gmt_create'] = self.gmt_create
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.sub_account_info:
+            if hasattr(self.sub_account_info, 'to_alipay_dict'):
+                params['sub_account_info'] = self.sub_account_info.to_alipay_dict()
+            else:
+                params['sub_account_info'] = self.sub_account_info
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -179,8 +209,12 @@ class GiftCardVo(object):
             o.gift_card_no = d['gift_card_no']
         if 'gift_card_status' in d:
             o.gift_card_status = d['gift_card_status']
+        if 'gmt_create' in d:
+            o.gmt_create = d['gmt_create']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'sub_account_info' in d:
+            o.sub_account_info = d['sub_account_info']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'valid_period' in d:

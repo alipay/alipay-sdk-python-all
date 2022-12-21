@@ -16,10 +16,12 @@ class AlipayPayAppMarketingConsultModel(object):
         self._device_type = None
         self._encrypted_mobile = None
         self._goods_detail = None
+        self._merchant_user_id = None
         self._mobile = None
         self._need_query_anti_rank = None
         self._need_query_marketing_rank = None
         self._need_return_tag = None
+        self._open_id = None
         self._out_trade_no = None
         self._product_code = None
         self._promo_params = None
@@ -87,6 +89,13 @@ class AlipayPayAppMarketingConsultModel(object):
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
     @property
+    def merchant_user_id(self):
+        return self._merchant_user_id
+
+    @merchant_user_id.setter
+    def merchant_user_id(self, value):
+        self._merchant_user_id = value
+    @property
     def mobile(self):
         return self._mobile
 
@@ -114,6 +123,13 @@ class AlipayPayAppMarketingConsultModel(object):
     @need_return_tag.setter
     def need_return_tag(self, value):
         self._need_return_tag = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -212,6 +228,11 @@ class AlipayPayAppMarketingConsultModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.merchant_user_id:
+            if hasattr(self.merchant_user_id, 'to_alipay_dict'):
+                params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
+            else:
+                params['merchant_user_id'] = self.merchant_user_id
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -232,6 +253,11 @@ class AlipayPayAppMarketingConsultModel(object):
                 params['need_return_tag'] = self.need_return_tag.to_alipay_dict()
             else:
                 params['need_return_tag'] = self.need_return_tag
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
@@ -288,6 +314,8 @@ class AlipayPayAppMarketingConsultModel(object):
             o.encrypted_mobile = d['encrypted_mobile']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'merchant_user_id' in d:
+            o.merchant_user_id = d['merchant_user_id']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'need_query_anti_rank' in d:
@@ -296,6 +324,8 @@ class AlipayPayAppMarketingConsultModel(object):
             o.need_query_marketing_rank = d['need_query_marketing_rank']
         if 'need_return_tag' in d:
             o.need_return_tag = d['need_return_tag']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
         if 'product_code' in d:

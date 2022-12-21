@@ -12,6 +12,7 @@ class AlipayMerchantIndirectPromotaskTakeModel(object):
         self._group_mid = None
         self._source_pid = None
         self._take_time = None
+        self._target_value = None
         self._task_code = None
         self._task_id = None
 
@@ -43,6 +44,13 @@ class AlipayMerchantIndirectPromotaskTakeModel(object):
     @take_time.setter
     def take_time(self, value):
         self._take_time = value
+    @property
+    def target_value(self):
+        return self._target_value
+
+    @target_value.setter
+    def target_value(self, value):
+        self._target_value = value
     @property
     def task_code(self):
         return self._task_code
@@ -81,6 +89,11 @@ class AlipayMerchantIndirectPromotaskTakeModel(object):
                 params['take_time'] = self.take_time.to_alipay_dict()
             else:
                 params['take_time'] = self.take_time
+        if self.target_value:
+            if hasattr(self.target_value, 'to_alipay_dict'):
+                params['target_value'] = self.target_value.to_alipay_dict()
+            else:
+                params['target_value'] = self.target_value
         if self.task_code:
             if hasattr(self.task_code, 'to_alipay_dict'):
                 params['task_code'] = self.task_code.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayMerchantIndirectPromotaskTakeModel(object):
             o.source_pid = d['source_pid']
         if 'take_time' in d:
             o.take_time = d['take_time']
+        if 'target_value' in d:
+            o.target_value = d['target_value']
         if 'task_code' in d:
             o.task_code = d['task_code']
         if 'task_id' in d:

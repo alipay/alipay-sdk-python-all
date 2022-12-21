@@ -14,6 +14,7 @@ class AlipayEbppInstserviceDeductUnsignModel(object):
         self._ededuct_product_code = None
         self._extend_field = None
         self._inst_id = None
+        self._open_id = None
         self._sub_biz_type = None
         self._user_id = None
         self._verify_id = None
@@ -60,6 +61,13 @@ class AlipayEbppInstserviceDeductUnsignModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sub_biz_type(self):
         return self._sub_biz_type
@@ -115,6 +123,11 @@ class AlipayEbppInstserviceDeductUnsignModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sub_biz_type:
             if hasattr(self.sub_biz_type, 'to_alipay_dict'):
                 params['sub_biz_type'] = self.sub_biz_type.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayEbppInstserviceDeductUnsignModel(object):
             o.extend_field = d['extend_field']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sub_biz_type' in d:
             o.sub_biz_type = d['sub_biz_type']
         if 'user_id' in d:

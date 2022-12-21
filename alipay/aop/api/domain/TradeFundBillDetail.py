@@ -11,6 +11,7 @@ class TradeFundBillDetail(object):
         self._amount = None
         self._asset_type_code = None
         self._asset_user_id = None
+        self._asset_user_open_id = None
         self._biz_pay_type = None
         self._create_time = None
         self._payment_no = None
@@ -36,6 +37,13 @@ class TradeFundBillDetail(object):
     @asset_user_id.setter
     def asset_user_id(self, value):
         self._asset_user_id = value
+    @property
+    def asset_user_open_id(self):
+        return self._asset_user_open_id
+
+    @asset_user_open_id.setter
+    def asset_user_open_id(self, value):
+        self._asset_user_open_id = value
     @property
     def biz_pay_type(self):
         return self._biz_pay_type
@@ -76,6 +84,11 @@ class TradeFundBillDetail(object):
                 params['asset_user_id'] = self.asset_user_id.to_alipay_dict()
             else:
                 params['asset_user_id'] = self.asset_user_id
+        if self.asset_user_open_id:
+            if hasattr(self.asset_user_open_id, 'to_alipay_dict'):
+                params['asset_user_open_id'] = self.asset_user_open_id.to_alipay_dict()
+            else:
+                params['asset_user_open_id'] = self.asset_user_open_id
         if self.biz_pay_type:
             if hasattr(self.biz_pay_type, 'to_alipay_dict'):
                 params['biz_pay_type'] = self.biz_pay_type.to_alipay_dict()
@@ -104,6 +117,8 @@ class TradeFundBillDetail(object):
             o.asset_type_code = d['asset_type_code']
         if 'asset_user_id' in d:
             o.asset_user_id = d['asset_user_id']
+        if 'asset_user_open_id' in d:
+            o.asset_user_open_id = d['asset_user_open_id']
         if 'biz_pay_type' in d:
             o.biz_pay_type = d['biz_pay_type']
         if 'create_time' in d:

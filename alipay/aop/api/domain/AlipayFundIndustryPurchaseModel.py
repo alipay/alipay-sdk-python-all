@@ -11,6 +11,7 @@ class AlipayFundIndustryPurchaseModel(object):
         self._agreement_no = None
         self._amount = None
         self._gmt_pay = None
+        self._open_id = None
         self._openid = None
         self._order_timeout = None
         self._out_request_no = None
@@ -37,6 +38,13 @@ class AlipayFundIndustryPurchaseModel(object):
     @gmt_pay.setter
     def gmt_pay(self, value):
         self._gmt_pay = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def openid(self):
         return self._openid
@@ -84,6 +92,11 @@ class AlipayFundIndustryPurchaseModel(object):
                 params['gmt_pay'] = self.gmt_pay.to_alipay_dict()
             else:
                 params['gmt_pay'] = self.gmt_pay
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.openid:
             if hasattr(self.openid, 'to_alipay_dict'):
                 params['openid'] = self.openid.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayFundIndustryPurchaseModel(object):
             o.amount = d['amount']
         if 'gmt_pay' in d:
             o.gmt_pay = d['gmt_pay']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'openid' in d:
             o.openid = d['openid']
         if 'order_timeout' in d:

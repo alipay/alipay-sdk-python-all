@@ -12,6 +12,7 @@ class AlipayCommerceEducateScenePhotoremoteApplyModel(object):
         self._cert_type = None
         self._image_content = None
         self._out_photo_id = None
+        self._out_user_id = None
         self._parent_phone_number = None
         self._school_std_code = None
         self._student_name = None
@@ -44,6 +45,13 @@ class AlipayCommerceEducateScenePhotoremoteApplyModel(object):
     @out_photo_id.setter
     def out_photo_id(self, value):
         self._out_photo_id = value
+    @property
+    def out_user_id(self):
+        return self._out_user_id
+
+    @out_user_id.setter
+    def out_user_id(self, value):
+        self._out_user_id = value
     @property
     def parent_phone_number(self):
         return self._parent_phone_number
@@ -89,6 +97,11 @@ class AlipayCommerceEducateScenePhotoremoteApplyModel(object):
                 params['out_photo_id'] = self.out_photo_id.to_alipay_dict()
             else:
                 params['out_photo_id'] = self.out_photo_id
+        if self.out_user_id:
+            if hasattr(self.out_user_id, 'to_alipay_dict'):
+                params['out_user_id'] = self.out_user_id.to_alipay_dict()
+            else:
+                params['out_user_id'] = self.out_user_id
         if self.parent_phone_number:
             if hasattr(self.parent_phone_number, 'to_alipay_dict'):
                 params['parent_phone_number'] = self.parent_phone_number.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayCommerceEducateScenePhotoremoteApplyModel(object):
             o.image_content = d['image_content']
         if 'out_photo_id' in d:
             o.out_photo_id = d['out_photo_id']
+        if 'out_user_id' in d:
+            o.out_user_id = d['out_user_id']
         if 'parent_phone_number' in d:
             o.parent_phone_number = d['parent_phone_number']
         if 'school_std_code' in d:

@@ -13,6 +13,7 @@ class AlipayCommerceTransportMessageSendModel(object):
         self._notify_data = None
         self._notify_time = None
         self._notify_type = None
+        self._open_ids = None
         self._user_ids = None
 
     @property
@@ -50,6 +51,16 @@ class AlipayCommerceTransportMessageSendModel(object):
     @notify_type.setter
     def notify_type(self, value):
         self._notify_type = value
+    @property
+    def open_ids(self):
+        return self._open_ids
+
+    @open_ids.setter
+    def open_ids(self, value):
+        if isinstance(value, list):
+            self._open_ids = list()
+            for i in value:
+                self._open_ids.append(i)
     @property
     def user_ids(self):
         return self._user_ids
@@ -89,6 +100,16 @@ class AlipayCommerceTransportMessageSendModel(object):
                 params['notify_type'] = self.notify_type.to_alipay_dict()
             else:
                 params['notify_type'] = self.notify_type
+        if self.open_ids:
+            if isinstance(self.open_ids, list):
+                for i in range(0, len(self.open_ids)):
+                    element = self.open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.open_ids, 'to_alipay_dict'):
+                params['open_ids'] = self.open_ids.to_alipay_dict()
+            else:
+                params['open_ids'] = self.open_ids
         if self.user_ids:
             if isinstance(self.user_ids, list):
                 for i in range(0, len(self.user_ids)):
@@ -116,6 +137,8 @@ class AlipayCommerceTransportMessageSendModel(object):
             o.notify_time = d['notify_time']
         if 'notify_type' in d:
             o.notify_type = d['notify_type']
+        if 'open_ids' in d:
+            o.open_ids = d['open_ids']
         if 'user_ids' in d:
             o.user_ids = d['user_ids']
         return o

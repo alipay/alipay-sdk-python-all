@@ -11,6 +11,7 @@ class AlipayFundWalletDepositorderCreateModel(object):
     def __init__(self):
         self._amount = None
         self._biz_scene = None
+        self._effective_end_date = None
         self._expand_amount = None
         self._order_title = None
         self._out_biz_no = None
@@ -18,6 +19,8 @@ class AlipayFundWalletDepositorderCreateModel(object):
         self._product_code = None
         self._remark = None
         self._time_expire = None
+        self._user_wallet_id = None
+        self._valid_date = None
 
     @property
     def amount(self):
@@ -33,6 +36,13 @@ class AlipayFundWalletDepositorderCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def effective_end_date(self):
+        return self._effective_end_date
+
+    @effective_end_date.setter
+    def effective_end_date(self, value):
+        self._effective_end_date = value
     @property
     def expand_amount(self):
         return self._expand_amount
@@ -85,6 +95,20 @@ class AlipayFundWalletDepositorderCreateModel(object):
     @time_expire.setter
     def time_expire(self, value):
         self._time_expire = value
+    @property
+    def user_wallet_id(self):
+        return self._user_wallet_id
+
+    @user_wallet_id.setter
+    def user_wallet_id(self, value):
+        self._user_wallet_id = value
+    @property
+    def valid_date(self):
+        return self._valid_date
+
+    @valid_date.setter
+    def valid_date(self, value):
+        self._valid_date = value
 
 
     def to_alipay_dict(self):
@@ -99,6 +123,11 @@ class AlipayFundWalletDepositorderCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.effective_end_date:
+            if hasattr(self.effective_end_date, 'to_alipay_dict'):
+                params['effective_end_date'] = self.effective_end_date.to_alipay_dict()
+            else:
+                params['effective_end_date'] = self.effective_end_date
         if self.expand_amount:
             if hasattr(self.expand_amount, 'to_alipay_dict'):
                 params['expand_amount'] = self.expand_amount.to_alipay_dict()
@@ -134,6 +163,16 @@ class AlipayFundWalletDepositorderCreateModel(object):
                 params['time_expire'] = self.time_expire.to_alipay_dict()
             else:
                 params['time_expire'] = self.time_expire
+        if self.user_wallet_id:
+            if hasattr(self.user_wallet_id, 'to_alipay_dict'):
+                params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
+            else:
+                params['user_wallet_id'] = self.user_wallet_id
+        if self.valid_date:
+            if hasattr(self.valid_date, 'to_alipay_dict'):
+                params['valid_date'] = self.valid_date.to_alipay_dict()
+            else:
+                params['valid_date'] = self.valid_date
         return params
 
     @staticmethod
@@ -145,6 +184,8 @@ class AlipayFundWalletDepositorderCreateModel(object):
             o.amount = d['amount']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'effective_end_date' in d:
+            o.effective_end_date = d['effective_end_date']
         if 'expand_amount' in d:
             o.expand_amount = d['expand_amount']
         if 'order_title' in d:
@@ -159,6 +200,10 @@ class AlipayFundWalletDepositorderCreateModel(object):
             o.remark = d['remark']
         if 'time_expire' in d:
             o.time_expire = d['time_expire']
+        if 'user_wallet_id' in d:
+            o.user_wallet_id = d['user_wallet_id']
+        if 'valid_date' in d:
+            o.valid_date = d['valid_date']
         return o
 
 

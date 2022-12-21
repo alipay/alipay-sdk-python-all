@@ -12,6 +12,7 @@ class AlipayMarketingVoucherSendModel(object):
         self._extend_info = None
         self._login_id = None
         self._memo = None
+        self._open_id = None
         self._out_biz_no = None
         self._taobao_nick = None
         self._template_id = None
@@ -45,6 +46,13 @@ class AlipayMarketingVoucherSendModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -97,6 +105,11 @@ class AlipayMarketingVoucherSendModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayMarketingVoucherSendModel(object):
             o.login_id = d['login_id']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'taobao_nick' in d:

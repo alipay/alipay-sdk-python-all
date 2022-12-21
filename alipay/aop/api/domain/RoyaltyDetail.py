@@ -15,8 +15,10 @@ class RoyaltyDetail(object):
         self._operation_type = None
         self._state = None
         self._trans_in = None
+        self._trans_in_open_id = None
         self._trans_in_type = None
         self._trans_out = None
+        self._trans_out_open_id = None
         self._trans_out_type = None
 
     @property
@@ -69,6 +71,13 @@ class RoyaltyDetail(object):
     def trans_in(self, value):
         self._trans_in = value
     @property
+    def trans_in_open_id(self):
+        return self._trans_in_open_id
+
+    @trans_in_open_id.setter
+    def trans_in_open_id(self, value):
+        self._trans_in_open_id = value
+    @property
     def trans_in_type(self):
         return self._trans_in_type
 
@@ -82,6 +91,13 @@ class RoyaltyDetail(object):
     @trans_out.setter
     def trans_out(self, value):
         self._trans_out = value
+    @property
+    def trans_out_open_id(self):
+        return self._trans_out_open_id
+
+    @trans_out_open_id.setter
+    def trans_out_open_id(self, value):
+        self._trans_out_open_id = value
     @property
     def trans_out_type(self):
         return self._trans_out_type
@@ -128,6 +144,11 @@ class RoyaltyDetail(object):
                 params['trans_in'] = self.trans_in.to_alipay_dict()
             else:
                 params['trans_in'] = self.trans_in
+        if self.trans_in_open_id:
+            if hasattr(self.trans_in_open_id, 'to_alipay_dict'):
+                params['trans_in_open_id'] = self.trans_in_open_id.to_alipay_dict()
+            else:
+                params['trans_in_open_id'] = self.trans_in_open_id
         if self.trans_in_type:
             if hasattr(self.trans_in_type, 'to_alipay_dict'):
                 params['trans_in_type'] = self.trans_in_type.to_alipay_dict()
@@ -138,6 +159,11 @@ class RoyaltyDetail(object):
                 params['trans_out'] = self.trans_out.to_alipay_dict()
             else:
                 params['trans_out'] = self.trans_out
+        if self.trans_out_open_id:
+            if hasattr(self.trans_out_open_id, 'to_alipay_dict'):
+                params['trans_out_open_id'] = self.trans_out_open_id.to_alipay_dict()
+            else:
+                params['trans_out_open_id'] = self.trans_out_open_id
         if self.trans_out_type:
             if hasattr(self.trans_out_type, 'to_alipay_dict'):
                 params['trans_out_type'] = self.trans_out_type.to_alipay_dict()
@@ -164,10 +190,14 @@ class RoyaltyDetail(object):
             o.state = d['state']
         if 'trans_in' in d:
             o.trans_in = d['trans_in']
+        if 'trans_in_open_id' in d:
+            o.trans_in_open_id = d['trans_in_open_id']
         if 'trans_in_type' in d:
             o.trans_in_type = d['trans_in_type']
         if 'trans_out' in d:
             o.trans_out = d['trans_out']
+        if 'trans_out_open_id' in d:
+            o.trans_out_open_id = d['trans_out_open_id']
         if 'trans_out_type' in d:
             o.trans_out_type = d['trans_out_type']
         return o

@@ -9,8 +9,10 @@ class FundTransferLogResult(object):
 
     def __init__(self):
         self._amount = None
+        self._fail_reason = None
         self._remark = None
         self._source_account = None
+        self._status = None
         self._target_account = None
         self._trans_create_time = None
         self._trans_date = None
@@ -23,6 +25,13 @@ class FundTransferLogResult(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def fail_reason(self):
+        return self._fail_reason
+
+    @fail_reason.setter
+    def fail_reason(self, value):
+        self._fail_reason = value
     @property
     def remark(self):
         return self._remark
@@ -37,6 +46,13 @@ class FundTransferLogResult(object):
     @source_account.setter
     def source_account(self, value):
         self._source_account = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def target_account(self):
         return self._target_account
@@ -74,6 +90,11 @@ class FundTransferLogResult(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.fail_reason:
+            if hasattr(self.fail_reason, 'to_alipay_dict'):
+                params['fail_reason'] = self.fail_reason.to_alipay_dict()
+            else:
+                params['fail_reason'] = self.fail_reason
         if self.remark:
             if hasattr(self.remark, 'to_alipay_dict'):
                 params['remark'] = self.remark.to_alipay_dict()
@@ -84,6 +105,11 @@ class FundTransferLogResult(object):
                 params['source_account'] = self.source_account.to_alipay_dict()
             else:
                 params['source_account'] = self.source_account
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.target_account:
             if hasattr(self.target_account, 'to_alipay_dict'):
                 params['target_account'] = self.target_account.to_alipay_dict()
@@ -113,10 +139,14 @@ class FundTransferLogResult(object):
         o = FundTransferLogResult()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'fail_reason' in d:
+            o.fail_reason = d['fail_reason']
         if 'remark' in d:
             o.remark = d['remark']
         if 'source_account' in d:
             o.source_account = d['source_account']
+        if 'status' in d:
+            o.status = d['status']
         if 'target_account' in d:
             o.target_account = d['target_account']
         if 'trans_create_time' in d:

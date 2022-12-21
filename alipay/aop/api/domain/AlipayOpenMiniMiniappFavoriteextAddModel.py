@@ -11,6 +11,7 @@ class AlipayOpenMiniMiniappFavoriteextAddModel(object):
         self._biz_type = None
         self._extend_info = None
         self._mini_app_id = None
+        self._open_id = None
         self._principal_biz_type = None
         self._principal_ids = None
         self._principal_type = None
@@ -37,6 +38,13 @@ class AlipayOpenMiniMiniappFavoriteextAddModel(object):
     @mini_app_id.setter
     def mini_app_id(self, value):
         self._mini_app_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def principal_biz_type(self):
         return self._principal_biz_type
@@ -87,6 +95,11 @@ class AlipayOpenMiniMiniappFavoriteextAddModel(object):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.principal_biz_type:
             if hasattr(self.principal_biz_type, 'to_alipay_dict'):
                 params['principal_biz_type'] = self.principal_biz_type.to_alipay_dict()
@@ -125,6 +138,8 @@ class AlipayOpenMiniMiniappFavoriteextAddModel(object):
             o.extend_info = d['extend_info']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'principal_biz_type' in d:
             o.principal_biz_type = d['principal_biz_type']
         if 'principal_ids' in d:

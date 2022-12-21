@@ -12,6 +12,7 @@ class TimeCardConsumeCardInfo(object):
         self._desc = None
         self._item_id = None
         self._logo = None
+        self._open_id = None
         self._status = None
         self._title = None
         self._user_id = None
@@ -44,6 +45,13 @@ class TimeCardConsumeCardInfo(object):
     @logo.setter
     def logo(self, value):
         self._logo = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def status(self):
         return self._status
@@ -89,6 +97,11 @@ class TimeCardConsumeCardInfo(object):
                 params['logo'] = self.logo.to_alipay_dict()
             else:
                 params['logo'] = self.logo
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -119,6 +132,8 @@ class TimeCardConsumeCardInfo(object):
             o.item_id = d['item_id']
         if 'logo' in d:
             o.logo = d['logo']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status' in d:
             o.status = d['status']
         if 'title' in d:

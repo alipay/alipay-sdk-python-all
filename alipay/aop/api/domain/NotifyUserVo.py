@@ -11,6 +11,8 @@ class NotifyUserVo(object):
         self._del_flag = None
         self._notify_id = None
         self._notify_object = None
+        self._notify_object_open_id = None
+        self._open_id = None
         self._status = None
         self._user_id = None
 
@@ -35,6 +37,20 @@ class NotifyUserVo(object):
     @notify_object.setter
     def notify_object(self, value):
         self._notify_object = value
+    @property
+    def notify_object_open_id(self):
+        return self._notify_object_open_id
+
+    @notify_object_open_id.setter
+    def notify_object_open_id(self, value):
+        self._notify_object_open_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def status(self):
         return self._status
@@ -68,6 +84,16 @@ class NotifyUserVo(object):
                 params['notify_object'] = self.notify_object.to_alipay_dict()
             else:
                 params['notify_object'] = self.notify_object
+        if self.notify_object_open_id:
+            if hasattr(self.notify_object_open_id, 'to_alipay_dict'):
+                params['notify_object_open_id'] = self.notify_object_open_id.to_alipay_dict()
+            else:
+                params['notify_object_open_id'] = self.notify_object_open_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -91,6 +117,10 @@ class NotifyUserVo(object):
             o.notify_id = d['notify_id']
         if 'notify_object' in d:
             o.notify_object = d['notify_object']
+        if 'notify_object_open_id' in d:
+            o.notify_object_open_id = d['notify_object_open_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'status' in d:
             o.status = d['status']
         if 'user_id' in d:

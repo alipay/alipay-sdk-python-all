@@ -10,6 +10,7 @@ class AlipayCommercePromoterRelationDeleteModel(object):
     def __init__(self):
         self._merchant_pid = None
         self._promoter_id = None
+        self._promoter_open_id = None
         self._shop_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayCommercePromoterRelationDeleteModel(object):
     @promoter_id.setter
     def promoter_id(self, value):
         self._promoter_id = value
+    @property
+    def promoter_open_id(self):
+        return self._promoter_open_id
+
+    @promoter_open_id.setter
+    def promoter_open_id(self, value):
+        self._promoter_open_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -47,6 +55,11 @@ class AlipayCommercePromoterRelationDeleteModel(object):
                 params['promoter_id'] = self.promoter_id.to_alipay_dict()
             else:
                 params['promoter_id'] = self.promoter_id
+        if self.promoter_open_id:
+            if hasattr(self.promoter_open_id, 'to_alipay_dict'):
+                params['promoter_open_id'] = self.promoter_open_id.to_alipay_dict()
+            else:
+                params['promoter_open_id'] = self.promoter_open_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayCommercePromoterRelationDeleteModel(object):
             o.merchant_pid = d['merchant_pid']
         if 'promoter_id' in d:
             o.promoter_id = d['promoter_id']
+        if 'promoter_open_id' in d:
+            o.promoter_open_id = d['promoter_open_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         return o

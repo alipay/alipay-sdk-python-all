@@ -9,6 +9,7 @@ from alipay.aop.api.domain.JobAddress import JobAddress
 class AlipayEbppIndustryJobSyncModel(object):
 
     def __init__(self):
+        self._academic_require = None
         self._address = None
         self._age = None
         self._certifications = None
@@ -18,6 +19,7 @@ class AlipayEbppIndustryJobSyncModel(object):
         self._expired_date = None
         self._gender = None
         self._hire_status = None
+        self._job_detail = None
         self._job_detail_url = None
         self._job_features = None
         self._job_name = None
@@ -31,7 +33,15 @@ class AlipayEbppIndustryJobSyncModel(object):
         self._salary = None
         self._start_date = None
         self._work_online = None
+        self._working_years = None
 
+    @property
+    def academic_require(self):
+        return self._academic_require
+
+    @academic_require.setter
+    def academic_require(self, value):
+        self._academic_require = value
     @property
     def address(self):
         return self._address
@@ -101,6 +111,13 @@ class AlipayEbppIndustryJobSyncModel(object):
     @hire_status.setter
     def hire_status(self, value):
         self._hire_status = value
+    @property
+    def job_detail(self):
+        return self._job_detail
+
+    @job_detail.setter
+    def job_detail(self, value):
+        self._job_detail = value
     @property
     def job_detail_url(self):
         return self._job_detail_url
@@ -198,10 +215,22 @@ class AlipayEbppIndustryJobSyncModel(object):
     @work_online.setter
     def work_online(self, value):
         self._work_online = value
+    @property
+    def working_years(self):
+        return self._working_years
+
+    @working_years.setter
+    def working_years(self, value):
+        self._working_years = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.academic_require:
+            if hasattr(self.academic_require, 'to_alipay_dict'):
+                params['academic_require'] = self.academic_require.to_alipay_dict()
+            else:
+                params['academic_require'] = self.academic_require
         if self.address:
             if hasattr(self.address, 'to_alipay_dict'):
                 params['address'] = self.address.to_alipay_dict()
@@ -252,6 +281,11 @@ class AlipayEbppIndustryJobSyncModel(object):
                 params['hire_status'] = self.hire_status.to_alipay_dict()
             else:
                 params['hire_status'] = self.hire_status
+        if self.job_detail:
+            if hasattr(self.job_detail, 'to_alipay_dict'):
+                params['job_detail'] = self.job_detail.to_alipay_dict()
+            else:
+                params['job_detail'] = self.job_detail
         if self.job_detail_url:
             if hasattr(self.job_detail_url, 'to_alipay_dict'):
                 params['job_detail_url'] = self.job_detail_url.to_alipay_dict()
@@ -327,6 +361,11 @@ class AlipayEbppIndustryJobSyncModel(object):
                 params['work_online'] = self.work_online.to_alipay_dict()
             else:
                 params['work_online'] = self.work_online
+        if self.working_years:
+            if hasattr(self.working_years, 'to_alipay_dict'):
+                params['working_years'] = self.working_years.to_alipay_dict()
+            else:
+                params['working_years'] = self.working_years
         return params
 
     @staticmethod
@@ -334,6 +373,8 @@ class AlipayEbppIndustryJobSyncModel(object):
         if not d:
             return None
         o = AlipayEbppIndustryJobSyncModel()
+        if 'academic_require' in d:
+            o.academic_require = d['academic_require']
         if 'address' in d:
             o.address = d['address']
         if 'age' in d:
@@ -352,6 +393,8 @@ class AlipayEbppIndustryJobSyncModel(object):
             o.gender = d['gender']
         if 'hire_status' in d:
             o.hire_status = d['hire_status']
+        if 'job_detail' in d:
+            o.job_detail = d['job_detail']
         if 'job_detail_url' in d:
             o.job_detail_url = d['job_detail_url']
         if 'job_features' in d:
@@ -378,6 +421,8 @@ class AlipayEbppIndustryJobSyncModel(object):
             o.start_date = d['start_date']
         if 'work_online' in d:
             o.work_online = d['work_online']
+        if 'working_years' in d:
+            o.working_years = d['working_years']
         return o
 
 

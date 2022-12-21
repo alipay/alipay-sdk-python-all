@@ -14,6 +14,7 @@ class AlipayTradeSettleReceivablesQueryModel(object):
         self._merchant_info = None
         self._out_request_no = None
         self._query_his_date = None
+        self._trade_no = None
 
     @property
     def biz_product(self):
@@ -53,6 +54,13 @@ class AlipayTradeSettleReceivablesQueryModel(object):
     @query_his_date.setter
     def query_his_date(self, value):
         self._query_his_date = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
 
     def to_alipay_dict(self):
@@ -82,6 +90,11 @@ class AlipayTradeSettleReceivablesQueryModel(object):
                 params['query_his_date'] = self.query_his_date.to_alipay_dict()
             else:
                 params['query_his_date'] = self.query_his_date
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         return params
 
     @staticmethod
@@ -99,6 +112,8 @@ class AlipayTradeSettleReceivablesQueryModel(object):
             o.out_request_no = d['out_request_no']
         if 'query_his_date' in d:
             o.query_his_date = d['query_his_date']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         return o
 
 

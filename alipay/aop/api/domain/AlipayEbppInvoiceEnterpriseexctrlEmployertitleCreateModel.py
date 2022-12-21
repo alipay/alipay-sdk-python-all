@@ -13,6 +13,7 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
         self._agreement_no = None
         self._bank_account = None
         self._bank_name = None
+        self._enterprise_id = None
         self._tax_register_no = None
         self._telephone = None
         self._title_name = None
@@ -52,6 +53,13 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
     @bank_name.setter
     def bank_name(self, value):
         self._bank_name = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def tax_register_no(self):
         return self._tax_register_no
@@ -102,6 +110,11 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
                 params['bank_name'] = self.bank_name.to_alipay_dict()
             else:
                 params['bank_name'] = self.bank_name
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.tax_register_no:
             if hasattr(self.tax_register_no, 'to_alipay_dict'):
                 params['tax_register_no'] = self.tax_register_no.to_alipay_dict()
@@ -134,6 +147,8 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
             o.bank_account = d['bank_account']
         if 'bank_name' in d:
             o.bank_name = d['bank_name']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'tax_register_no' in d:
             o.tax_register_no = d['tax_register_no']
         if 'telephone' in d:

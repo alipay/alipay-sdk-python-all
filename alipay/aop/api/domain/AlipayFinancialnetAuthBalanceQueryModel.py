@@ -13,6 +13,7 @@ class AlipayFinancialnetAuthBalanceQueryModel(object):
         self._biz_ext_type = None
         self._biz_type = None
         self._inst_id = None
+        self._open_id = None
         self._product_id = None
         self._scene_id = None
         self._submit_no = None
@@ -53,6 +54,13 @@ class AlipayFinancialnetAuthBalanceQueryModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def product_id(self):
         return self._product_id
@@ -110,6 +118,11 @@ class AlipayFinancialnetAuthBalanceQueryModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_id:
             if hasattr(self.product_id, 'to_alipay_dict'):
                 params['product_id'] = self.product_id.to_alipay_dict()
@@ -147,6 +160,8 @@ class AlipayFinancialnetAuthBalanceQueryModel(object):
             o.biz_type = d['biz_type']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_id' in d:
             o.product_id = d['product_id']
         if 'scene_id' in d:

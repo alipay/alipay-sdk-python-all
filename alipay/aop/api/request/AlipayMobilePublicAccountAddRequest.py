@@ -17,6 +17,7 @@ class AlipayMobilePublicAccountAddRequest(object):
         self._biz_content = None
         self._display_name = None
         self._from_user_id = None
+        self._open_id = None
         self._real_name = None
         self._version = "1.0"
         self._terminal_type = None
@@ -70,6 +71,13 @@ class AlipayMobilePublicAccountAddRequest(object):
     @from_user_id.setter
     def from_user_id(self, value):
         self._from_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def real_name(self):
         return self._real_name
@@ -181,6 +189,11 @@ class AlipayMobilePublicAccountAddRequest(object):
                 params['from_user_id'] = json.dumps(obj=self.from_user_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['from_user_id'] = self.from_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.real_name:
             if hasattr(self.real_name, 'to_alipay_dict'):
                 params['real_name'] = json.dumps(obj=self.real_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

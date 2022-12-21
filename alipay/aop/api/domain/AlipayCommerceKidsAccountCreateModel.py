@@ -15,6 +15,7 @@ class AlipayCommerceKidsAccountCreateModel(object):
         self._contact_mobile = None
         self._out_biz_id = None
         self._out_biz_type = None
+        self._parent_open_id = None
         self._parent_uid = None
         self._scene_code = None
         self._school_id = None
@@ -69,6 +70,13 @@ class AlipayCommerceKidsAccountCreateModel(object):
     @out_biz_type.setter
     def out_biz_type(self, value):
         self._out_biz_type = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
     @property
     def parent_uid(self):
         return self._parent_uid
@@ -136,6 +144,11 @@ class AlipayCommerceKidsAccountCreateModel(object):
                 params['out_biz_type'] = self.out_biz_type.to_alipay_dict()
             else:
                 params['out_biz_type'] = self.out_biz_type
+        if self.parent_open_id:
+            if hasattr(self.parent_open_id, 'to_alipay_dict'):
+                params['parent_open_id'] = self.parent_open_id.to_alipay_dict()
+            else:
+                params['parent_open_id'] = self.parent_open_id
         if self.parent_uid:
             if hasattr(self.parent_uid, 'to_alipay_dict'):
                 params['parent_uid'] = self.parent_uid.to_alipay_dict()
@@ -177,6 +190,8 @@ class AlipayCommerceKidsAccountCreateModel(object):
             o.out_biz_id = d['out_biz_id']
         if 'out_biz_type' in d:
             o.out_biz_type = d['out_biz_type']
+        if 'parent_open_id' in d:
+            o.parent_open_id = d['parent_open_id']
         if 'parent_uid' in d:
             o.parent_uid = d['parent_uid']
         if 'scene_code' in d:

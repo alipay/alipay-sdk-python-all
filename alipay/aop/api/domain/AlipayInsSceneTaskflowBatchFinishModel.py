@@ -9,6 +9,7 @@ class AlipayInsSceneTaskflowBatchFinishModel(object):
 
     def __init__(self):
         self._extra_map = None
+        self._open_id = None
         self._out_biz_no = None
         self._task_flow_id_list = None
         self._user_id = None
@@ -20,6 +21,13 @@ class AlipayInsSceneTaskflowBatchFinishModel(object):
     @extra_map.setter
     def extra_map(self, value):
         self._extra_map = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -53,6 +61,11 @@ class AlipayInsSceneTaskflowBatchFinishModel(object):
                 params['extra_map'] = self.extra_map.to_alipay_dict()
             else:
                 params['extra_map'] = self.extra_map
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -82,6 +95,8 @@ class AlipayInsSceneTaskflowBatchFinishModel(object):
         o = AlipayInsSceneTaskflowBatchFinishModel()
         if 'extra_map' in d:
             o.extra_map = d['extra_map']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'task_flow_id_list' in d:

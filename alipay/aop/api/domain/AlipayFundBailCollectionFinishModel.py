@@ -11,6 +11,7 @@ class AlipayFundBailCollectionFinishModel(object):
         self._agreement_no = None
         self._extra_param = None
         self._out_collection_no = None
+        self._principal_open_id = None
         self._principal_user_id = None
         self._product_code = None
 
@@ -35,6 +36,13 @@ class AlipayFundBailCollectionFinishModel(object):
     @out_collection_no.setter
     def out_collection_no(self, value):
         self._out_collection_no = value
+    @property
+    def principal_open_id(self):
+        return self._principal_open_id
+
+    @principal_open_id.setter
+    def principal_open_id(self, value):
+        self._principal_open_id = value
     @property
     def principal_user_id(self):
         return self._principal_user_id
@@ -68,6 +76,11 @@ class AlipayFundBailCollectionFinishModel(object):
                 params['out_collection_no'] = self.out_collection_no.to_alipay_dict()
             else:
                 params['out_collection_no'] = self.out_collection_no
+        if self.principal_open_id:
+            if hasattr(self.principal_open_id, 'to_alipay_dict'):
+                params['principal_open_id'] = self.principal_open_id.to_alipay_dict()
+            else:
+                params['principal_open_id'] = self.principal_open_id
         if self.principal_user_id:
             if hasattr(self.principal_user_id, 'to_alipay_dict'):
                 params['principal_user_id'] = self.principal_user_id.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayFundBailCollectionFinishModel(object):
             o.extra_param = d['extra_param']
         if 'out_collection_no' in d:
             o.out_collection_no = d['out_collection_no']
+        if 'principal_open_id' in d:
+            o.principal_open_id = d['principal_open_id']
         if 'principal_user_id' in d:
             o.principal_user_id = d['principal_user_id']
         if 'product_code' in d:

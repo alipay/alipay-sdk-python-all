@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayMarketingCampaignTaskQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._task_cen_id = None
         self._task_ids = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def task_cen_id(self):
         return self._task_cen_id
@@ -40,6 +48,11 @@ class AlipayMarketingCampaignTaskQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.task_cen_id:
             if hasattr(self.task_cen_id, 'to_alipay_dict'):
                 params['task_cen_id'] = self.task_cen_id.to_alipay_dict()
@@ -67,6 +80,8 @@ class AlipayMarketingCampaignTaskQueryModel(object):
         if not d:
             return None
         o = AlipayMarketingCampaignTaskQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'task_cen_id' in d:
             o.task_cen_id = d['task_cen_id']
         if 'task_ids' in d:

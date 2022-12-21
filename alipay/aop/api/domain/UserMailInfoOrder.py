@@ -12,6 +12,7 @@ class UserMailInfoOrder(object):
         self._country = None
         self._county_district = None
         self._detail_address = None
+        self._email = None
         self._ip_role_id = None
         self._name = None
         self._province = None
@@ -46,6 +47,13 @@ class UserMailInfoOrder(object):
     @detail_address.setter
     def detail_address(self, value):
         self._detail_address = value
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -105,6 +113,11 @@ class UserMailInfoOrder(object):
                 params['detail_address'] = self.detail_address.to_alipay_dict()
             else:
                 params['detail_address'] = self.detail_address
+        if self.email:
+            if hasattr(self.email, 'to_alipay_dict'):
+                params['email'] = self.email.to_alipay_dict()
+            else:
+                params['email'] = self.email
         if self.ip_role_id:
             if hasattr(self.ip_role_id, 'to_alipay_dict'):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
@@ -145,6 +158,8 @@ class UserMailInfoOrder(object):
             o.county_district = d['county_district']
         if 'detail_address' in d:
             o.detail_address = d['detail_address']
+        if 'email' in d:
+            o.email = d['email']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
         if 'name' in d:

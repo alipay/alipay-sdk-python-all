@@ -15,6 +15,7 @@ class AlipayFundJointaccountAccountModifyModel(object):
         self._identity = None
         self._identity_type = None
         self._modify_items = None
+        self._open_id = None
         self._product_code = None
 
     @property
@@ -67,6 +68,13 @@ class AlipayFundJointaccountAccountModifyModel(object):
     def modify_items(self, value):
         self._modify_items = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -112,6 +120,11 @@ class AlipayFundJointaccountAccountModifyModel(object):
                 params['modify_items'] = self.modify_items.to_alipay_dict()
             else:
                 params['modify_items'] = self.modify_items
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipayFundJointaccountAccountModifyModel(object):
             o.identity_type = d['identity_type']
         if 'modify_items' in d:
             o.modify_items = d['modify_items']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

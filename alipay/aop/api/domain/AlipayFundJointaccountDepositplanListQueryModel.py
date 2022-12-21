@@ -14,6 +14,7 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
         self._channel = None
         self._identity = None
         self._identity_type = None
+        self._open_id = None
         self._out_biz_no_list = None
         self._product_code = None
         self._query_mode = None
@@ -60,6 +61,13 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no_list(self):
         return self._out_biz_no_list
@@ -118,6 +126,11 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no_list:
             if isinstance(self.out_biz_no_list, list):
                 for i in range(0, len(self.out_biz_no_list)):
@@ -157,6 +170,8 @@ class AlipayFundJointaccountDepositplanListQueryModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no_list' in d:
             o.out_biz_no_list = d['out_biz_no_list']
         if 'product_code' in d:

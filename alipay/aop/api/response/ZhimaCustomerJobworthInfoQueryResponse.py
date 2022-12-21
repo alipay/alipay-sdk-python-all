@@ -13,6 +13,7 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
         self._auth_token = None
         self._html_url = None
         self._picture_url = None
+        self._scene_result = None
         self._sub_code = None
         self._sub_msg = None
         self._update_url = None
@@ -46,6 +47,13 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
     @picture_url.setter
     def picture_url(self, value):
         self._picture_url = value
+    @property
+    def scene_result(self):
+        return self._scene_result
+
+    @scene_result.setter
+    def scene_result(self, value):
+        self._scene_result = value
     @property
     def sub_code(self):
         return self._sub_code
@@ -85,6 +93,8 @@ class ZhimaCustomerJobworthInfoQueryResponse(AlipayResponse):
             self.html_url = response['html_url']
         if 'picture_url' in response:
             self.picture_url = response['picture_url']
+        if 'scene_result' in response:
+            self.scene_result = response['scene_result']
         if 'sub_code' in response:
             self.sub_code = response['sub_code']
         if 'sub_msg' in response:

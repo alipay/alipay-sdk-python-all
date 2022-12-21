@@ -9,6 +9,8 @@ class AlipayFundCouponTemplateUserCreateModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._code = None
+        self._open_id = None
         self._out_biz_id = None
         self._product_code = None
         self._template_id = None
@@ -21,6 +23,20 @@ class AlipayFundCouponTemplateUserCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def code(self):
+        return self._code
+
+    @code.setter
+    def code(self, value):
+        self._code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_id(self):
         return self._out_biz_id
@@ -58,6 +74,16 @@ class AlipayFundCouponTemplateUserCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.code:
+            if hasattr(self.code, 'to_alipay_dict'):
+                params['code'] = self.code.to_alipay_dict()
+            else:
+                params['code'] = self.code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_id:
             if hasattr(self.out_biz_id, 'to_alipay_dict'):
                 params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
@@ -87,6 +113,10 @@ class AlipayFundCouponTemplateUserCreateModel(object):
         o = AlipayFundCouponTemplateUserCreateModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'code' in d:
+            o.code = d['code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_id' in d:
             o.out_biz_id = d['out_biz_id']
         if 'product_code' in d:

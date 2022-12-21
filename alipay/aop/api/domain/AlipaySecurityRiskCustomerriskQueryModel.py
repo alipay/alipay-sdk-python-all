@@ -15,7 +15,9 @@ class AlipaySecurityRiskCustomerriskQueryModel(object):
         self._company_name = None
         self._external_id = None
         self._mobile_no = None
+        self._open_id = None
         self._risk_type = None
+        self._user_id = None
 
     @property
     def bank_card_no(self):
@@ -67,12 +69,26 @@ class AlipaySecurityRiskCustomerriskQueryModel(object):
     def mobile_no(self, value):
         self._mobile_no = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def risk_type(self):
         return self._risk_type
 
     @risk_type.setter
     def risk_type(self, value):
         self._risk_type = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -112,11 +128,21 @@ class AlipaySecurityRiskCustomerriskQueryModel(object):
                 params['mobile_no'] = self.mobile_no.to_alipay_dict()
             else:
                 params['mobile_no'] = self.mobile_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.risk_type:
             if hasattr(self.risk_type, 'to_alipay_dict'):
                 params['risk_type'] = self.risk_type.to_alipay_dict()
             else:
                 params['risk_type'] = self.risk_type
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -138,8 +164,12 @@ class AlipaySecurityRiskCustomerriskQueryModel(object):
             o.external_id = d['external_id']
         if 'mobile_no' in d:
             o.mobile_no = d['mobile_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'risk_type' in d:
             o.risk_type = d['risk_type']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

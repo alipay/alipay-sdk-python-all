@@ -23,6 +23,7 @@ class YunTaskTemplateInfoDTO(object):
         self._owner_pid = None
         self._plan_info = None
         self._status = None
+        self._support_unified_material_code = None
         self._task_desc = None
         self._task_end_time = None
         self._task_name = None
@@ -131,6 +132,13 @@ class YunTaskTemplateInfoDTO(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def support_unified_material_code(self):
+        return self._support_unified_material_code
+
+    @support_unified_material_code.setter
+    def support_unified_material_code(self, value):
+        self._support_unified_material_code = value
     @property
     def task_desc(self):
         return self._task_desc
@@ -247,6 +255,11 @@ class YunTaskTemplateInfoDTO(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.support_unified_material_code:
+            if hasattr(self.support_unified_material_code, 'to_alipay_dict'):
+                params['support_unified_material_code'] = self.support_unified_material_code.to_alipay_dict()
+            else:
+                params['support_unified_material_code'] = self.support_unified_material_code
         if self.task_desc:
             if hasattr(self.task_desc, 'to_alipay_dict'):
                 params['task_desc'] = self.task_desc.to_alipay_dict()
@@ -312,6 +325,8 @@ class YunTaskTemplateInfoDTO(object):
             o.plan_info = d['plan_info']
         if 'status' in d:
             o.status = d['status']
+        if 'support_unified_material_code' in d:
+            o.support_unified_material_code = d['support_unified_material_code']
         if 'task_desc' in d:
             o.task_desc = d['task_desc']
         if 'task_end_time' in d:

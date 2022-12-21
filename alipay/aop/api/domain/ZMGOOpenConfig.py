@@ -17,6 +17,7 @@ class ZMGOOpenConfig(object):
         self._period_mode = None
         self._period_time = None
         self._show_sign_success_page = None
+        self._sign_again_schema = None
         self._sign_success_task_button_desc = None
         self._support_expire_deferral = None
 
@@ -84,6 +85,13 @@ class ZMGOOpenConfig(object):
     def show_sign_success_page(self, value):
         self._show_sign_success_page = value
     @property
+    def sign_again_schema(self):
+        return self._sign_again_schema
+
+    @sign_again_schema.setter
+    def sign_again_schema(self, value):
+        self._sign_again_schema = value
+    @property
     def sign_success_task_button_desc(self):
         return self._sign_success_task_button_desc
 
@@ -146,6 +154,11 @@ class ZMGOOpenConfig(object):
                 params['show_sign_success_page'] = self.show_sign_success_page.to_alipay_dict()
             else:
                 params['show_sign_success_page'] = self.show_sign_success_page
+        if self.sign_again_schema:
+            if hasattr(self.sign_again_schema, 'to_alipay_dict'):
+                params['sign_again_schema'] = self.sign_again_schema.to_alipay_dict()
+            else:
+                params['sign_again_schema'] = self.sign_again_schema
         if self.sign_success_task_button_desc:
             if hasattr(self.sign_success_task_button_desc, 'to_alipay_dict'):
                 params['sign_success_task_button_desc'] = self.sign_success_task_button_desc.to_alipay_dict()
@@ -181,6 +194,8 @@ class ZMGOOpenConfig(object):
             o.period_time = d['period_time']
         if 'show_sign_success_page' in d:
             o.show_sign_success_page = d['show_sign_success_page']
+        if 'sign_again_schema' in d:
+            o.sign_again_schema = d['sign_again_schema']
         if 'sign_success_task_button_desc' in d:
             o.sign_success_task_button_desc = d['sign_success_task_button_desc']
         if 'support_expire_deferral' in d:

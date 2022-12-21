@@ -11,6 +11,7 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
     def __init__(self):
         self._agreement_info_list = None
         self._auth_merchant_id = None
+        self._authorization_expire_time = None
         self._cognizant_cert_no = None
         self._cognizant_mobile = None
         self._cognizant_name = None
@@ -40,6 +41,13 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
     @auth_merchant_id.setter
     def auth_merchant_id(self, value):
         self._auth_merchant_id = value
+    @property
+    def authorization_expire_time(self):
+        return self._authorization_expire_time
+
+    @authorization_expire_time.setter
+    def authorization_expire_time(self, value):
+        self._authorization_expire_time = value
     @property
     def cognizant_cert_no(self):
         return self._cognizant_cert_no
@@ -115,6 +123,11 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
                 params['auth_merchant_id'] = self.auth_merchant_id.to_alipay_dict()
             else:
                 params['auth_merchant_id'] = self.auth_merchant_id
+        if self.authorization_expire_time:
+            if hasattr(self.authorization_expire_time, 'to_alipay_dict'):
+                params['authorization_expire_time'] = self.authorization_expire_time.to_alipay_dict()
+            else:
+                params['authorization_expire_time'] = self.authorization_expire_time
         if self.cognizant_cert_no:
             if hasattr(self.cognizant_cert_no, 'to_alipay_dict'):
                 params['cognizant_cert_no'] = self.cognizant_cert_no.to_alipay_dict()
@@ -166,6 +179,8 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
             o.agreement_info_list = d['agreement_info_list']
         if 'auth_merchant_id' in d:
             o.auth_merchant_id = d['auth_merchant_id']
+        if 'authorization_expire_time' in d:
+            o.authorization_expire_time = d['authorization_expire_time']
         if 'cognizant_cert_no' in d:
             o.cognizant_cert_no = d['cognizant_cert_no']
         if 'cognizant_mobile' in d:

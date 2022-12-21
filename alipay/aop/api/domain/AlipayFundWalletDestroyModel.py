@@ -12,6 +12,7 @@ class AlipayFundWalletDestroyModel(object):
         self._biz_scene = None
         self._out_biz_no = None
         self._principal_id = None
+        self._principal_open_id = None
         self._principal_type = None
         self._product_code = None
 
@@ -43,6 +44,13 @@ class AlipayFundWalletDestroyModel(object):
     @principal_id.setter
     def principal_id(self, value):
         self._principal_id = value
+    @property
+    def principal_open_id(self):
+        return self._principal_open_id
+
+    @principal_open_id.setter
+    def principal_open_id(self, value):
+        self._principal_open_id = value
     @property
     def principal_type(self):
         return self._principal_type
@@ -81,6 +89,11 @@ class AlipayFundWalletDestroyModel(object):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
             else:
                 params['principal_id'] = self.principal_id
+        if self.principal_open_id:
+            if hasattr(self.principal_open_id, 'to_alipay_dict'):
+                params['principal_open_id'] = self.principal_open_id.to_alipay_dict()
+            else:
+                params['principal_open_id'] = self.principal_open_id
         if self.principal_type:
             if hasattr(self.principal_type, 'to_alipay_dict'):
                 params['principal_type'] = self.principal_type.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayFundWalletDestroyModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
+        if 'principal_open_id' in d:
+            o.principal_open_id = d['principal_open_id']
         if 'principal_type' in d:
             o.principal_type = d['principal_type']
         if 'product_code' in d:

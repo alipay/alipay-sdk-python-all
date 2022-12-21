@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.KeyValueMap import KeyValueMap
 
 
 class AlipayMarketingCampaignDrawcampTriggerModel(object):
@@ -13,8 +14,10 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
         self._camp_source = None
         self._channel_info = None
         self._client_ip = None
+        self._ext_info = None
         self._json_ua = None
         self._login_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._prize_id = None
         self._taobao_id = None
@@ -57,6 +60,16 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
     def client_ip(self, value):
         self._client_ip = value
     @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, KeyValueMap):
+            self._ext_info = value
+        else:
+            self._ext_info = KeyValueMap.from_alipay_dict(value)
+    @property
     def json_ua(self):
         return self._json_ua
 
@@ -70,6 +83,13 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
     @login_id.setter
     def login_id(self, value):
         self._login_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -134,6 +154,11 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
                 params['client_ip'] = self.client_ip.to_alipay_dict()
             else:
                 params['client_ip'] = self.client_ip
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.json_ua:
             if hasattr(self.json_ua, 'to_alipay_dict'):
                 params['json_ua'] = self.json_ua.to_alipay_dict()
@@ -144,6 +169,11 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
                 params['login_id'] = self.login_id.to_alipay_dict()
             else:
                 params['login_id'] = self.login_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -186,10 +216,14 @@ class AlipayMarketingCampaignDrawcampTriggerModel(object):
             o.channel_info = d['channel_info']
         if 'client_ip' in d:
             o.client_ip = d['client_ip']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'json_ua' in d:
             o.json_ua = d['json_ua']
         if 'login_id' in d:
             o.login_id = d['login_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'prize_id' in d:

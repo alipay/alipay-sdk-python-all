@@ -10,6 +10,7 @@ class JointAccountMemberList(object):
 
     def __init__(self):
         self._account_quota = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -25,6 +26,13 @@ class JointAccountMemberList(object):
                     self._account_quota.append(i)
                 else:
                     self._account_quota.append(JointAccountQuotaDTO.from_alipay_dict(i))
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -46,6 +54,11 @@ class JointAccountMemberList(object):
                 params['account_quota'] = self.account_quota.to_alipay_dict()
             else:
                 params['account_quota'] = self.account_quota
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -60,6 +73,8 @@ class JointAccountMemberList(object):
         o = JointAccountMemberList()
         if 'account_quota' in d:
             o.account_quota = d['account_quota']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

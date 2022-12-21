@@ -14,6 +14,7 @@ class AlipayOpenAuthTokenAppQueryResponse(AlipayResponse):
         self._auth_methods = None
         self._auth_start = None
         self._expires_in = None
+        self._is_by_app_auth = None
         self._status = None
         self._user_id = None
 
@@ -56,6 +57,13 @@ class AlipayOpenAuthTokenAppQueryResponse(AlipayResponse):
     def expires_in(self, value):
         self._expires_in = value
     @property
+    def is_by_app_auth(self):
+        return self._is_by_app_auth
+
+    @is_by_app_auth.setter
+    def is_by_app_auth(self, value):
+        self._is_by_app_auth = value
+    @property
     def status(self):
         return self._status
 
@@ -82,6 +90,8 @@ class AlipayOpenAuthTokenAppQueryResponse(AlipayResponse):
             self.auth_start = response['auth_start']
         if 'expires_in' in response:
             self.expires_in = response['expires_in']
+        if 'is_by_app_auth' in response:
+            self.is_by_app_auth = response['is_by_app_auth']
         if 'status' in response:
             self.status = response['status']
         if 'user_id' in response:

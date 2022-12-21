@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayInsSceneProductSignConfirmModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._prod_code = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def prod_code(self):
         return self._prod_code
@@ -29,6 +37,11 @@ class AlipayInsSceneProductSignConfirmModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.prod_code:
             if hasattr(self.prod_code, 'to_alipay_dict'):
                 params['prod_code'] = self.prod_code.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayInsSceneProductSignConfirmModel(object):
         if not d:
             return None
         o = AlipayInsSceneProductSignConfirmModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'prod_code' in d:
             o.prod_code = d['prod_code']
         if 'user_id' in d:
