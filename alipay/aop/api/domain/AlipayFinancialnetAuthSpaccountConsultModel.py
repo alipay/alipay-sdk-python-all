@@ -9,6 +9,7 @@ class AlipayFinancialnetAuthSpaccountConsultModel(object):
 
     def __init__(self):
         self._biz_identity = None
+        self._open_id = None
         self._sign_product_id = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayFinancialnetAuthSpaccountConsultModel(object):
     @biz_identity.setter
     def biz_identity(self, value):
         self._biz_identity = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sign_product_id(self):
         return self._sign_product_id
@@ -42,6 +50,11 @@ class AlipayFinancialnetAuthSpaccountConsultModel(object):
                 params['biz_identity'] = self.biz_identity.to_alipay_dict()
             else:
                 params['biz_identity'] = self.biz_identity
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sign_product_id:
             if hasattr(self.sign_product_id, 'to_alipay_dict'):
                 params['sign_product_id'] = self.sign_product_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayFinancialnetAuthSpaccountConsultModel(object):
         o = AlipayFinancialnetAuthSpaccountConsultModel()
         if 'biz_identity' in d:
             o.biz_identity = d['biz_identity']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sign_product_id' in d:
             o.sign_product_id = d['sign_product_id']
         if 'user_id' in d:

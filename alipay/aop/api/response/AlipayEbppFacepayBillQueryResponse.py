@@ -14,6 +14,7 @@ class AlipayEbppFacepayBillQueryResponse(AlipayResponse):
         self._charge_inst = None
         self._extend_field = None
         self._inst_no = None
+        self._open_id = None
         self._out_order_no = None
         self._status = None
         self._trade_date = None
@@ -55,6 +56,13 @@ class AlipayEbppFacepayBillQueryResponse(AlipayResponse):
     def inst_no(self, value):
         self._inst_no = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_order_no(self):
         return self._out_order_no
 
@@ -95,6 +103,8 @@ class AlipayEbppFacepayBillQueryResponse(AlipayResponse):
             self.extend_field = response['extend_field']
         if 'inst_no' in response:
             self.inst_no = response['inst_no']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_order_no' in response:
             self.out_order_no = response['out_order_no']
         if 'status' in response:

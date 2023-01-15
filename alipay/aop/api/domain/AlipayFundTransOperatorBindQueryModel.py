@@ -9,7 +9,9 @@ class AlipayFundTransOperatorBindQueryModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._master_open_id = None
         self._master_user_id = None
+        self._operator_open_id = None
         self._operator_user_id = None
         self._product_code = None
 
@@ -21,12 +23,26 @@ class AlipayFundTransOperatorBindQueryModel(object):
     def biz_scene(self, value):
         self._biz_scene = value
     @property
+    def master_open_id(self):
+        return self._master_open_id
+
+    @master_open_id.setter
+    def master_open_id(self, value):
+        self._master_open_id = value
+    @property
     def master_user_id(self):
         return self._master_user_id
 
     @master_user_id.setter
     def master_user_id(self, value):
         self._master_user_id = value
+    @property
+    def operator_open_id(self):
+        return self._operator_open_id
+
+    @operator_open_id.setter
+    def operator_open_id(self, value):
+        self._operator_open_id = value
     @property
     def operator_user_id(self):
         return self._operator_user_id
@@ -50,11 +66,21 @@ class AlipayFundTransOperatorBindQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.master_open_id:
+            if hasattr(self.master_open_id, 'to_alipay_dict'):
+                params['master_open_id'] = self.master_open_id.to_alipay_dict()
+            else:
+                params['master_open_id'] = self.master_open_id
         if self.master_user_id:
             if hasattr(self.master_user_id, 'to_alipay_dict'):
                 params['master_user_id'] = self.master_user_id.to_alipay_dict()
             else:
                 params['master_user_id'] = self.master_user_id
+        if self.operator_open_id:
+            if hasattr(self.operator_open_id, 'to_alipay_dict'):
+                params['operator_open_id'] = self.operator_open_id.to_alipay_dict()
+            else:
+                params['operator_open_id'] = self.operator_open_id
         if self.operator_user_id:
             if hasattr(self.operator_user_id, 'to_alipay_dict'):
                 params['operator_user_id'] = self.operator_user_id.to_alipay_dict()
@@ -74,8 +100,12 @@ class AlipayFundTransOperatorBindQueryModel(object):
         o = AlipayFundTransOperatorBindQueryModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'master_open_id' in d:
+            o.master_open_id = d['master_open_id']
         if 'master_user_id' in d:
             o.master_user_id = d['master_user_id']
+        if 'operator_open_id' in d:
+            o.operator_open_id = d['operator_open_id']
         if 'operator_user_id' in d:
             o.operator_user_id = d['operator_user_id']
         if 'product_code' in d:

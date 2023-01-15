@@ -12,6 +12,7 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
         self._context = None
         self._exposed_item_list = None
         self._item_id_list = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._project_id = None
@@ -50,6 +51,13 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
             self._item_id_list = list()
             for i in value:
                 self._item_id_list.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -128,6 +136,11 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
                 params['item_id_list'] = self.item_id_list.to_alipay_dict()
             else:
                 params['item_id_list'] = self.item_id_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -176,6 +189,8 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
             o.exposed_item_list = d['exposed_item_list']
         if 'item_id_list' in d:
             o.item_id_list = d['item_id_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

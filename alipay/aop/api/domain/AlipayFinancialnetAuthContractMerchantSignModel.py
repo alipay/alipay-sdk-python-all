@@ -14,6 +14,7 @@ class AlipayFinancialnetAuthContractMerchantSignModel(object):
         self._ext_info = None
         self._fee_value = None
         self._inst_id = None
+        self._open_id = None
         self._scene_code = None
         self._user_id = None
         self._valid_strategy = None
@@ -49,6 +50,13 @@ class AlipayFinancialnetAuthContractMerchantSignModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -97,6 +105,11 @@ class AlipayFinancialnetAuthContractMerchantSignModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -127,6 +140,8 @@ class AlipayFinancialnetAuthContractMerchantSignModel(object):
             o.fee_value = d['fee_value']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'user_id' in d:

@@ -22,6 +22,7 @@ class InvoiceApplyOpenApi(object):
         self._out_biz_type = None
         self._product_code = None
         self._service_mth = None
+        self._source = None
         self._tax_rate = None
         self._tax_type = None
 
@@ -120,6 +121,13 @@ class InvoiceApplyOpenApi(object):
     def service_mth(self, value):
         self._service_mth = value
     @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
     def tax_rate(self):
         return self._tax_rate
 
@@ -202,6 +210,11 @@ class InvoiceApplyOpenApi(object):
                 params['service_mth'] = self.service_mth.to_alipay_dict()
             else:
                 params['service_mth'] = self.service_mth
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.tax_rate:
             if hasattr(self.tax_rate, 'to_alipay_dict'):
                 params['tax_rate'] = self.tax_rate.to_alipay_dict()
@@ -245,6 +258,8 @@ class InvoiceApplyOpenApi(object):
             o.product_code = d['product_code']
         if 'service_mth' in d:
             o.service_mth = d['service_mth']
+        if 'source' in d:
+            o.source = d['source']
         if 'tax_rate' in d:
             o.tax_rate = d['tax_rate']
         if 'tax_type' in d:

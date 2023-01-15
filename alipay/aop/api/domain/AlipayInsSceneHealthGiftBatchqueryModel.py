@@ -10,6 +10,7 @@ class AlipayInsSceneHealthGiftBatchqueryModel(object):
     def __init__(self):
         self._biz_type_list = None
         self._end_time = None
+        self._open_id = None
         self._operation_list = None
         self._product_group_biz_type_list = None
         self._source = None
@@ -33,6 +34,13 @@ class AlipayInsSceneHealthGiftBatchqueryModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation_list(self):
         return self._operation_list
@@ -93,6 +101,11 @@ class AlipayInsSceneHealthGiftBatchqueryModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation_list:
             if isinstance(self.operation_list, list):
                 for i in range(0, len(self.operation_list)):
@@ -139,6 +152,8 @@ class AlipayInsSceneHealthGiftBatchqueryModel(object):
             o.biz_type_list = d['biz_type_list']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation_list' in d:
             o.operation_list = d['operation_list']
         if 'product_group_biz_type_list' in d:

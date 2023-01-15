@@ -14,7 +14,10 @@ class JointAccountBillDetailDTO(object):
         self._biz_date = None
         self._biz_no = None
         self._in_out = None
+        self._open_id = None
         self._out_trade_no = None
+        self._seller_full_name = None
+        self._seller_logon_id = None
         self._title = None
         self._user_id = None
 
@@ -61,12 +64,33 @@ class JointAccountBillDetailDTO(object):
     def in_out(self, value):
         self._in_out = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def out_trade_no(self):
         return self._out_trade_no
 
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def seller_full_name(self):
+        return self._seller_full_name
+
+    @seller_full_name.setter
+    def seller_full_name(self, value):
+        self._seller_full_name = value
+    @property
+    def seller_logon_id(self):
+        return self._seller_logon_id
+
+    @seller_logon_id.setter
+    def seller_logon_id(self, value):
+        self._seller_logon_id = value
     @property
     def title(self):
         return self._title
@@ -115,11 +139,26 @@ class JointAccountBillDetailDTO(object):
                 params['in_out'] = self.in_out.to_alipay_dict()
             else:
                 params['in_out'] = self.in_out
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_trade_no:
             if hasattr(self.out_trade_no, 'to_alipay_dict'):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.seller_full_name:
+            if hasattr(self.seller_full_name, 'to_alipay_dict'):
+                params['seller_full_name'] = self.seller_full_name.to_alipay_dict()
+            else:
+                params['seller_full_name'] = self.seller_full_name
+        if self.seller_logon_id:
+            if hasattr(self.seller_logon_id, 'to_alipay_dict'):
+                params['seller_logon_id'] = self.seller_logon_id.to_alipay_dict()
+            else:
+                params['seller_logon_id'] = self.seller_logon_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -149,8 +188,14 @@ class JointAccountBillDetailDTO(object):
             o.biz_no = d['biz_no']
         if 'in_out' in d:
             o.in_out = d['in_out']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'seller_full_name' in d:
+            o.seller_full_name = d['seller_full_name']
+        if 'seller_logon_id' in d:
+            o.seller_logon_id = d['seller_logon_id']
         if 'title' in d:
             o.title = d['title']
         if 'user_id' in d:

@@ -11,6 +11,7 @@ class RcsmartCommonApprovalReq(object):
     def __init__(self):
         self._biz_id = None
         self._ext_param = None
+        self._parent_request_id = None
         self._request_id = None
         self._scene_content_data_list = None
 
@@ -28,6 +29,13 @@ class RcsmartCommonApprovalReq(object):
     @ext_param.setter
     def ext_param(self, value):
         self._ext_param = value
+    @property
+    def parent_request_id(self):
+        return self._parent_request_id
+
+    @parent_request_id.setter
+    def parent_request_id(self, value):
+        self._parent_request_id = value
     @property
     def request_id(self):
         return self._request_id
@@ -62,6 +70,11 @@ class RcsmartCommonApprovalReq(object):
                 params['ext_param'] = self.ext_param.to_alipay_dict()
             else:
                 params['ext_param'] = self.ext_param
+        if self.parent_request_id:
+            if hasattr(self.parent_request_id, 'to_alipay_dict'):
+                params['parent_request_id'] = self.parent_request_id.to_alipay_dict()
+            else:
+                params['parent_request_id'] = self.parent_request_id
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -88,6 +101,8 @@ class RcsmartCommonApprovalReq(object):
             o.biz_id = d['biz_id']
         if 'ext_param' in d:
             o.ext_param = d['ext_param']
+        if 'parent_request_id' in d:
+            o.parent_request_id = d['parent_request_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'scene_content_data_list' in d:

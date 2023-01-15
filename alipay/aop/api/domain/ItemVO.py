@@ -14,6 +14,7 @@ class ItemVO(object):
         self._can_be_search = None
         self._desc = None
         self._feature = None
+        self._has_price = None
         self._image_list = None
         self._item_id = None
         self._main_image = None
@@ -21,6 +22,7 @@ class ItemVO(object):
         self._platform_category = None
         self._platform_item_id = None
         self._price = None
+        self._price_unit = None
         self._src_path = None
         self._stock_status = None
         self._title = None
@@ -56,6 +58,13 @@ class ItemVO(object):
     @feature.setter
     def feature(self, value):
         self._feature = value
+    @property
+    def has_price(self):
+        return self._has_price
+
+    @has_price.setter
+    def has_price(self, value):
+        self._has_price = value
     @property
     def image_list(self):
         return self._image_list
@@ -112,6 +121,13 @@ class ItemVO(object):
     def price(self, value):
         self._price = value
     @property
+    def price_unit(self):
+        return self._price_unit
+
+    @price_unit.setter
+    def price_unit(self, value):
+        self._price_unit = value
+    @property
     def src_path(self):
         return self._src_path
 
@@ -156,6 +172,11 @@ class ItemVO(object):
                 params['feature'] = self.feature.to_alipay_dict()
             else:
                 params['feature'] = self.feature
+        if self.has_price:
+            if hasattr(self.has_price, 'to_alipay_dict'):
+                params['has_price'] = self.has_price.to_alipay_dict()
+            else:
+                params['has_price'] = self.has_price
         if self.image_list:
             if isinstance(self.image_list, list):
                 for i in range(0, len(self.image_list)):
@@ -196,6 +217,11 @@ class ItemVO(object):
                 params['price'] = self.price.to_alipay_dict()
             else:
                 params['price'] = self.price
+        if self.price_unit:
+            if hasattr(self.price_unit, 'to_alipay_dict'):
+                params['price_unit'] = self.price_unit.to_alipay_dict()
+            else:
+                params['price_unit'] = self.price_unit
         if self.src_path:
             if hasattr(self.src_path, 'to_alipay_dict'):
                 params['src_path'] = self.src_path.to_alipay_dict()
@@ -226,6 +252,8 @@ class ItemVO(object):
             o.desc = d['desc']
         if 'feature' in d:
             o.feature = d['feature']
+        if 'has_price' in d:
+            o.has_price = d['has_price']
         if 'image_list' in d:
             o.image_list = d['image_list']
         if 'item_id' in d:
@@ -240,6 +268,8 @@ class ItemVO(object):
             o.platform_item_id = d['platform_item_id']
         if 'price' in d:
             o.price = d['price']
+        if 'price_unit' in d:
+            o.price_unit = d['price_unit']
         if 'src_path' in d:
             o.src_path = d['src_path']
         if 'stock_status' in d:

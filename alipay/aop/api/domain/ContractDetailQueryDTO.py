@@ -12,6 +12,8 @@ from alipay.aop.api.domain.OpenApiPartnerDTO import OpenApiPartnerDTO
 from alipay.aop.api.domain.OpenApiPeopleDTO import OpenApiPeopleDTO
 from alipay.aop.api.domain.OpenApiPeopleDTO import OpenApiPeopleDTO
 from alipay.aop.api.domain.OpenApiMatterMemberDTO import OpenApiMatterMemberDTO
+from alipay.aop.api.domain.OpenApiPartnerDTO import OpenApiPartnerDTO
+from alipay.aop.api.domain.OpenApiPartnerDTO import OpenApiPartnerDTO
 from alipay.aop.api.domain.OpenApiPaymentTermsDTO import OpenApiPaymentTermsDTO
 
 
@@ -61,6 +63,8 @@ class ContractDetailQueryDTO(object):
         self._matter_code = None
         self._matter_member_list = None
         self._number = None
+        self._other_relate_company_list = None
+        self._our_relate_company_list = None
         self._payer = None
         self._payment_terms_list = None
         self._remarks_on_printing = None
@@ -422,6 +426,32 @@ class ContractDetailQueryDTO(object):
     def number(self, value):
         self._number = value
     @property
+    def other_relate_company_list(self):
+        return self._other_relate_company_list
+
+    @other_relate_company_list.setter
+    def other_relate_company_list(self, value):
+        if isinstance(value, list):
+            self._other_relate_company_list = list()
+            for i in value:
+                if isinstance(i, OpenApiPartnerDTO):
+                    self._other_relate_company_list.append(i)
+                else:
+                    self._other_relate_company_list.append(OpenApiPartnerDTO.from_alipay_dict(i))
+    @property
+    def our_relate_company_list(self):
+        return self._our_relate_company_list
+
+    @our_relate_company_list.setter
+    def our_relate_company_list(self, value):
+        if isinstance(value, list):
+            self._our_relate_company_list = list()
+            for i in value:
+                if isinstance(i, OpenApiPartnerDTO):
+                    self._our_relate_company_list.append(i)
+                else:
+                    self._our_relate_company_list.append(OpenApiPartnerDTO.from_alipay_dict(i))
+    @property
     def payer(self):
         return self._payer
 
@@ -751,6 +781,26 @@ class ContractDetailQueryDTO(object):
                 params['number'] = self.number.to_alipay_dict()
             else:
                 params['number'] = self.number
+        if self.other_relate_company_list:
+            if isinstance(self.other_relate_company_list, list):
+                for i in range(0, len(self.other_relate_company_list)):
+                    element = self.other_relate_company_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.other_relate_company_list[i] = element.to_alipay_dict()
+            if hasattr(self.other_relate_company_list, 'to_alipay_dict'):
+                params['other_relate_company_list'] = self.other_relate_company_list.to_alipay_dict()
+            else:
+                params['other_relate_company_list'] = self.other_relate_company_list
+        if self.our_relate_company_list:
+            if isinstance(self.our_relate_company_list, list):
+                for i in range(0, len(self.our_relate_company_list)):
+                    element = self.our_relate_company_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.our_relate_company_list[i] = element.to_alipay_dict()
+            if hasattr(self.our_relate_company_list, 'to_alipay_dict'):
+                params['our_relate_company_list'] = self.our_relate_company_list.to_alipay_dict()
+            else:
+                params['our_relate_company_list'] = self.our_relate_company_list
         if self.payer:
             if hasattr(self.payer, 'to_alipay_dict'):
                 params['payer'] = self.payer.to_alipay_dict()
@@ -899,6 +949,10 @@ class ContractDetailQueryDTO(object):
             o.matter_member_list = d['matter_member_list']
         if 'number' in d:
             o.number = d['number']
+        if 'other_relate_company_list' in d:
+            o.other_relate_company_list = d['other_relate_company_list']
+        if 'our_relate_company_list' in d:
+            o.our_relate_company_list = d['our_relate_company_list']
         if 'payer' in d:
             o.payer = d['payer']
         if 'payment_terms_list' in d:

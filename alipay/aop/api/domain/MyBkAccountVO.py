@@ -14,6 +14,7 @@ class MyBkAccountVO(object):
         self._account_fip_name = None
         self._account_no = None
         self._account_type = None
+        self._alipay_open_id = None
         self._available = None
         self._bank_card_category = None
         self._card_holder_name = None
@@ -62,6 +63,13 @@ class MyBkAccountVO(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def available(self):
         return self._available
@@ -131,6 +139,11 @@ class MyBkAccountVO(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.available:
             if hasattr(self.available, 'to_alipay_dict'):
                 params['available'] = self.available.to_alipay_dict()
@@ -175,6 +188,8 @@ class MyBkAccountVO(object):
             o.account_no = d['account_no']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'available' in d:
             o.available = d['available']
         if 'bank_card_category' in d:

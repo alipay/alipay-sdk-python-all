@@ -12,6 +12,7 @@ class AlipayCommerceEducateCampusSchoolcardQueryModel(object):
         self._agreement_no = None
         self._identity = None
         self._identity_type = None
+        self._open_id = None
         self._school_id = None
         self._student_id = None
 
@@ -43,6 +44,13 @@ class AlipayCommerceEducateCampusSchoolcardQueryModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def school_id(self):
         return self._school_id
@@ -81,6 +89,11 @@ class AlipayCommerceEducateCampusSchoolcardQueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.school_id:
             if hasattr(self.school_id, 'to_alipay_dict'):
                 params['school_id'] = self.school_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayCommerceEducateCampusSchoolcardQueryModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'school_id' in d:
             o.school_id = d['school_id']
         if 'student_id' in d:

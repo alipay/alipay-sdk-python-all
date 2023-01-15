@@ -16,6 +16,7 @@ class AlipayAssetCardReturnRefundModel(object):
         self._extend_info = None
         self._fund_scence = None
         self._is_cancel = None
+        self._open_id = None
         self._operator = None
         self._out_biz_no = None
         self._recharge_details = None
@@ -74,6 +75,13 @@ class AlipayAssetCardReturnRefundModel(object):
     @is_cancel.setter
     def is_cancel(self, value):
         self._is_cancel = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operator(self):
         return self._operator
@@ -175,6 +183,11 @@ class AlipayAssetCardReturnRefundModel(object):
                 params['is_cancel'] = self.is_cancel.to_alipay_dict()
             else:
                 params['is_cancel'] = self.is_cancel
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operator:
             if hasattr(self.operator, 'to_alipay_dict'):
                 params['operator'] = self.operator.to_alipay_dict()
@@ -241,6 +254,8 @@ class AlipayAssetCardReturnRefundModel(object):
             o.fund_scence = d['fund_scence']
         if 'is_cancel' in d:
             o.is_cancel = d['is_cancel']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operator' in d:
             o.operator = d['operator']
         if 'out_biz_no' in d:

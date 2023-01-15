@@ -8,18 +8,29 @@ from alipay.aop.api.constant.ParamConstants import *
 class EsignResult(object):
 
     def __init__(self):
+        self._agreement_id = None
         self._agreement_url = None
         self._apply_dutiable_mode_enum = None
         self._contractor_code = None
         self._contractor_name = None
+        self._employee_alipay_logon_id = None
         self._employer_code = None
         self._identification_in_belonging_employer = None
+        self._out_biz_no = None
         self._pay_salary_mode_enum = None
         self._sign_time = None
         self._status = None
         self._tax_optimization_mode = None
         self._termination_time = None
+        self._two_party_status = None
 
+    @property
+    def agreement_id(self):
+        return self._agreement_id
+
+    @agreement_id.setter
+    def agreement_id(self, value):
+        self._agreement_id = value
     @property
     def agreement_url(self):
         return self._agreement_url
@@ -49,6 +60,13 @@ class EsignResult(object):
     def contractor_name(self, value):
         self._contractor_name = value
     @property
+    def employee_alipay_logon_id(self):
+        return self._employee_alipay_logon_id
+
+    @employee_alipay_logon_id.setter
+    def employee_alipay_logon_id(self, value):
+        self._employee_alipay_logon_id = value
+    @property
     def employer_code(self):
         return self._employer_code
 
@@ -62,6 +80,13 @@ class EsignResult(object):
     @identification_in_belonging_employer.setter
     def identification_in_belonging_employer(self, value):
         self._identification_in_belonging_employer = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def pay_salary_mode_enum(self):
         return self._pay_salary_mode_enum
@@ -97,10 +122,22 @@ class EsignResult(object):
     @termination_time.setter
     def termination_time(self, value):
         self._termination_time = value
+    @property
+    def two_party_status(self):
+        return self._two_party_status
+
+    @two_party_status.setter
+    def two_party_status(self, value):
+        self._two_party_status = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_id:
+            if hasattr(self.agreement_id, 'to_alipay_dict'):
+                params['agreement_id'] = self.agreement_id.to_alipay_dict()
+            else:
+                params['agreement_id'] = self.agreement_id
         if self.agreement_url:
             if hasattr(self.agreement_url, 'to_alipay_dict'):
                 params['agreement_url'] = self.agreement_url.to_alipay_dict()
@@ -121,6 +158,11 @@ class EsignResult(object):
                 params['contractor_name'] = self.contractor_name.to_alipay_dict()
             else:
                 params['contractor_name'] = self.contractor_name
+        if self.employee_alipay_logon_id:
+            if hasattr(self.employee_alipay_logon_id, 'to_alipay_dict'):
+                params['employee_alipay_logon_id'] = self.employee_alipay_logon_id.to_alipay_dict()
+            else:
+                params['employee_alipay_logon_id'] = self.employee_alipay_logon_id
         if self.employer_code:
             if hasattr(self.employer_code, 'to_alipay_dict'):
                 params['employer_code'] = self.employer_code.to_alipay_dict()
@@ -131,6 +173,11 @@ class EsignResult(object):
                 params['identification_in_belonging_employer'] = self.identification_in_belonging_employer.to_alipay_dict()
             else:
                 params['identification_in_belonging_employer'] = self.identification_in_belonging_employer
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.pay_salary_mode_enum:
             if hasattr(self.pay_salary_mode_enum, 'to_alipay_dict'):
                 params['pay_salary_mode_enum'] = self.pay_salary_mode_enum.to_alipay_dict()
@@ -156,6 +203,11 @@ class EsignResult(object):
                 params['termination_time'] = self.termination_time.to_alipay_dict()
             else:
                 params['termination_time'] = self.termination_time
+        if self.two_party_status:
+            if hasattr(self.two_party_status, 'to_alipay_dict'):
+                params['two_party_status'] = self.two_party_status.to_alipay_dict()
+            else:
+                params['two_party_status'] = self.two_party_status
         return params
 
     @staticmethod
@@ -163,6 +215,8 @@ class EsignResult(object):
         if not d:
             return None
         o = EsignResult()
+        if 'agreement_id' in d:
+            o.agreement_id = d['agreement_id']
         if 'agreement_url' in d:
             o.agreement_url = d['agreement_url']
         if 'apply_dutiable_mode_enum' in d:
@@ -171,10 +225,14 @@ class EsignResult(object):
             o.contractor_code = d['contractor_code']
         if 'contractor_name' in d:
             o.contractor_name = d['contractor_name']
+        if 'employee_alipay_logon_id' in d:
+            o.employee_alipay_logon_id = d['employee_alipay_logon_id']
         if 'employer_code' in d:
             o.employer_code = d['employer_code']
         if 'identification_in_belonging_employer' in d:
             o.identification_in_belonging_employer = d['identification_in_belonging_employer']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'pay_salary_mode_enum' in d:
             o.pay_salary_mode_enum = d['pay_salary_mode_enum']
         if 'sign_time' in d:
@@ -185,6 +243,8 @@ class EsignResult(object):
             o.tax_optimization_mode = d['tax_optimization_mode']
         if 'termination_time' in d:
             o.termination_time = d['termination_time']
+        if 'two_party_status' in d:
+            o.two_party_status = d['two_party_status']
         return o
 
 

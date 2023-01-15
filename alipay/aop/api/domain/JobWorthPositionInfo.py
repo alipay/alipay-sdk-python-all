@@ -12,6 +12,7 @@ class JobWorthPositionInfo(object):
         self._benefit = None
         self._certifications = None
         self._company_certificate = None
+        self._company_logo_afts_id = None
         self._company_name = None
         self._count = None
         self._education = None
@@ -64,6 +65,13 @@ class JobWorthPositionInfo(object):
     @company_certificate.setter
     def company_certificate(self, value):
         self._company_certificate = value
+    @property
+    def company_logo_afts_id(self):
+        return self._company_logo_afts_id
+
+    @company_logo_afts_id.setter
+    def company_logo_afts_id(self, value):
+        self._company_logo_afts_id = value
     @property
     def company_name(self):
         return self._company_name
@@ -249,6 +257,11 @@ class JobWorthPositionInfo(object):
                 params['company_certificate'] = self.company_certificate.to_alipay_dict()
             else:
                 params['company_certificate'] = self.company_certificate
+        if self.company_logo_afts_id:
+            if hasattr(self.company_logo_afts_id, 'to_alipay_dict'):
+                params['company_logo_afts_id'] = self.company_logo_afts_id.to_alipay_dict()
+            else:
+                params['company_logo_afts_id'] = self.company_logo_afts_id
         if self.company_name:
             if hasattr(self.company_name, 'to_alipay_dict'):
                 params['company_name'] = self.company_name.to_alipay_dict()
@@ -379,6 +392,8 @@ class JobWorthPositionInfo(object):
             o.certifications = d['certifications']
         if 'company_certificate' in d:
             o.company_certificate = d['company_certificate']
+        if 'company_logo_afts_id' in d:
+            o.company_logo_afts_id = d['company_logo_afts_id']
         if 'company_name' in d:
             o.company_name = d['company_name']
         if 'count' in d:

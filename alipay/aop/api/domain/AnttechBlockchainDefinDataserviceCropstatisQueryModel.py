@@ -10,6 +10,7 @@ class AnttechBlockchainDefinDataserviceCropstatisQueryModel(object):
     def __init__(self):
         self._crop_code = None
         self._growth_strength = None
+        self._is_certain_risk = None
         self._is_growth_warn = None
         self._is_harvested = None
         self._is_high_temperature_risk = None
@@ -34,6 +35,13 @@ class AnttechBlockchainDefinDataserviceCropstatisQueryModel(object):
     @growth_strength.setter
     def growth_strength(self, value):
         self._growth_strength = value
+    @property
+    def is_certain_risk(self):
+        return self._is_certain_risk
+
+    @is_certain_risk.setter
+    def is_certain_risk(self, value):
+        self._is_certain_risk = value
     @property
     def is_growth_warn(self):
         return self._is_growth_warn
@@ -114,6 +122,11 @@ class AnttechBlockchainDefinDataserviceCropstatisQueryModel(object):
                 params['growth_strength'] = self.growth_strength.to_alipay_dict()
             else:
                 params['growth_strength'] = self.growth_strength
+        if self.is_certain_risk:
+            if hasattr(self.is_certain_risk, 'to_alipay_dict'):
+                params['is_certain_risk'] = self.is_certain_risk.to_alipay_dict()
+            else:
+                params['is_certain_risk'] = self.is_certain_risk
         if self.is_growth_warn:
             if hasattr(self.is_growth_warn, 'to_alipay_dict'):
                 params['is_growth_warn'] = self.is_growth_warn.to_alipay_dict()
@@ -175,6 +188,8 @@ class AnttechBlockchainDefinDataserviceCropstatisQueryModel(object):
             o.crop_code = d['crop_code']
         if 'growth_strength' in d:
             o.growth_strength = d['growth_strength']
+        if 'is_certain_risk' in d:
+            o.is_certain_risk = d['is_certain_risk']
         if 'is_growth_warn' in d:
             o.is_growth_warn = d['is_growth_warn']
         if 'is_harvested' in d:

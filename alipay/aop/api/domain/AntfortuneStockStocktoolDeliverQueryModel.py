@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AntfortuneStockStocktoolDeliverQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._position_list = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def position_list(self):
         return self._position_list
@@ -32,6 +40,11 @@ class AntfortuneStockStocktoolDeliverQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.position_list:
             if isinstance(self.position_list, list):
                 for i in range(0, len(self.position_list)):
@@ -54,6 +67,8 @@ class AntfortuneStockStocktoolDeliverQueryModel(object):
         if not d:
             return None
         o = AntfortuneStockStocktoolDeliverQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'position_list' in d:
             o.position_list = d['position_list']
         if 'user_id' in d:

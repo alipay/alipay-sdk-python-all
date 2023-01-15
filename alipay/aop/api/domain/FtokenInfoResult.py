@@ -9,6 +9,7 @@ class FtokenInfoResult(object):
 
     def __init__(self):
         self._ftoken = None
+        self._open_id = None
         self._uid = None
 
     @property
@@ -18,6 +19,13 @@ class FtokenInfoResult(object):
     @ftoken.setter
     def ftoken(self, value):
         self._ftoken = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def uid(self):
         return self._uid
@@ -34,6 +42,11 @@ class FtokenInfoResult(object):
                 params['ftoken'] = self.ftoken.to_alipay_dict()
             else:
                 params['ftoken'] = self.ftoken
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -48,6 +61,8 @@ class FtokenInfoResult(object):
         o = FtokenInfoResult()
         if 'ftoken' in d:
             o.ftoken = d['ftoken']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'uid' in d:
             o.uid = d['uid']
         return o

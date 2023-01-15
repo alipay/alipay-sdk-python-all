@@ -12,6 +12,7 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryModel(object):
         self._end_time = None
         self._merchant_app_id = None
         self._merchant_user_id = None
+        self._open_id = None
         self._order_source = None
         self._size = None
         self._start_time = None
@@ -44,6 +45,13 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryModel(object):
     @merchant_user_id.setter
     def merchant_user_id(self, value):
         self._merchant_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_source(self):
         return self._order_source
@@ -89,6 +97,11 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryModel(object):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
             else:
                 params['merchant_user_id'] = self.merchant_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_source:
             if hasattr(self.order_source, 'to_alipay_dict'):
                 params['order_source'] = self.order_source.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayMerchantOrderDigestUnlimitedBatchqueryModel(object):
             o.merchant_app_id = d['merchant_app_id']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_source' in d:
             o.order_source = d['order_source']
         if 'size' in d:

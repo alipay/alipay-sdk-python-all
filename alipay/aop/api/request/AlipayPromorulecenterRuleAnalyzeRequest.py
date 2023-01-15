@@ -13,6 +13,7 @@ class AlipayPromorulecenterRuleAnalyzeRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._biz_id = None
+        self._open_id = None
         self._rule_uuid = None
         self._user_id = None
         self._version = "1.0"
@@ -39,6 +40,13 @@ class AlipayPromorulecenterRuleAnalyzeRequest(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def rule_uuid(self):
         return self._rule_uuid
@@ -137,6 +145,11 @@ class AlipayPromorulecenterRuleAnalyzeRequest(object):
                 params['biz_id'] = json.dumps(obj=self.biz_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['biz_id'] = self.biz_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.rule_uuid:
             if hasattr(self.rule_uuid, 'to_alipay_dict'):
                 params['rule_uuid'] = json.dumps(obj=self.rule_uuid.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

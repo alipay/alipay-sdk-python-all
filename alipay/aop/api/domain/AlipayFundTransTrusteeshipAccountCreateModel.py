@@ -10,6 +10,7 @@ class AlipayFundTransTrusteeshipAccountCreateModel(object):
     def __init__(self):
         self._account_product_code = None
         self._account_scene_code = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._merchant_user_id = None
         self._merchant_user_type = None
@@ -28,6 +29,13 @@ class AlipayFundTransTrusteeshipAccountCreateModel(object):
     @account_scene_code.setter
     def account_scene_code(self, value):
         self._account_scene_code = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -63,6 +71,11 @@ class AlipayFundTransTrusteeshipAccountCreateModel(object):
                 params['account_scene_code'] = self.account_scene_code.to_alipay_dict()
             else:
                 params['account_scene_code'] = self.account_scene_code
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayFundTransTrusteeshipAccountCreateModel(object):
             o.account_product_code = d['account_product_code']
         if 'account_scene_code' in d:
             o.account_scene_code = d['account_scene_code']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'merchant_user_id' in d:

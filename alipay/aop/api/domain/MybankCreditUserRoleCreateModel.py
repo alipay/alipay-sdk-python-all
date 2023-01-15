@@ -9,6 +9,7 @@ class MybankCreditUserRoleCreateModel(object):
 
     def __init__(self):
         self._entity_code = None
+        self._entity_code_open_id = None
         self._entity_name = None
         self._entity_type = None
         self._ext_data = None
@@ -21,6 +22,13 @@ class MybankCreditUserRoleCreateModel(object):
     @entity_code.setter
     def entity_code(self, value):
         self._entity_code = value
+    @property
+    def entity_code_open_id(self):
+        return self._entity_code_open_id
+
+    @entity_code_open_id.setter
+    def entity_code_open_id(self, value):
+        self._entity_code_open_id = value
     @property
     def entity_name(self):
         return self._entity_name
@@ -58,6 +66,11 @@ class MybankCreditUserRoleCreateModel(object):
                 params['entity_code'] = self.entity_code.to_alipay_dict()
             else:
                 params['entity_code'] = self.entity_code
+        if self.entity_code_open_id:
+            if hasattr(self.entity_code_open_id, 'to_alipay_dict'):
+                params['entity_code_open_id'] = self.entity_code_open_id.to_alipay_dict()
+            else:
+                params['entity_code_open_id'] = self.entity_code_open_id
         if self.entity_name:
             if hasattr(self.entity_name, 'to_alipay_dict'):
                 params['entity_name'] = self.entity_name.to_alipay_dict()
@@ -87,6 +100,8 @@ class MybankCreditUserRoleCreateModel(object):
         o = MybankCreditUserRoleCreateModel()
         if 'entity_code' in d:
             o.entity_code = d['entity_code']
+        if 'entity_code_open_id' in d:
+            o.entity_code_open_id = d['entity_code_open_id']
         if 'entity_name' in d:
             o.entity_name = d['entity_name']
         if 'entity_type' in d:

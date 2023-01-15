@@ -9,6 +9,7 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
 
     def __init__(self):
         self._convert_tag = None
+        self._open_id = None
         self._out_biz_no = None
         self._scene_type = None
         self._user_id = None
@@ -21,6 +22,13 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
     @convert_tag.setter
     def convert_tag(self, value):
         self._convert_tag = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -58,6 +66,11 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
                 params['convert_tag'] = self.convert_tag.to_alipay_dict()
             else:
                 params['convert_tag'] = self.convert_tag
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
         o = AlipayUserAccountInvitedConvertSyncModel()
         if 'convert_tag' in d:
             o.convert_tag = d['convert_tag']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'scene_type' in d:

@@ -12,6 +12,7 @@ class AlipayInsMarketingGiftQueryResponse(AlipayResponse):
         super(AlipayInsMarketingGiftQueryResponse, self).__init__()
         self._channel = None
         self._gift_prod_code = None
+        self._open_id = None
         self._opened = None
         self._right_no_opened_list = None
         self._user_id = None
@@ -30,6 +31,13 @@ class AlipayInsMarketingGiftQueryResponse(AlipayResponse):
     @gift_prod_code.setter
     def gift_prod_code(self, value):
         self._gift_prod_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def opened(self):
         return self._opened
@@ -64,6 +72,8 @@ class AlipayInsMarketingGiftQueryResponse(AlipayResponse):
             self.channel = response['channel']
         if 'gift_prod_code' in response:
             self.gift_prod_code = response['gift_prod_code']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'opened' in response:
             self.opened = response['opened']
         if 'right_no_opened_list' in response:

@@ -9,6 +9,7 @@ class AlipayCommerceOperationTerminalPowerbankorderInitializeModel(object):
 
     def __init__(self):
         self._auth_id = None
+        self._open_id = None
         self._out_trade_id = None
         self._sn = None
         self._user_id = None
@@ -20,6 +21,13 @@ class AlipayCommerceOperationTerminalPowerbankorderInitializeModel(object):
     @auth_id.setter
     def auth_id(self, value):
         self._auth_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_trade_id(self):
         return self._out_trade_id
@@ -50,6 +58,11 @@ class AlipayCommerceOperationTerminalPowerbankorderInitializeModel(object):
                 params['auth_id'] = self.auth_id.to_alipay_dict()
             else:
                 params['auth_id'] = self.auth_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_trade_id:
             if hasattr(self.out_trade_id, 'to_alipay_dict'):
                 params['out_trade_id'] = self.out_trade_id.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayCommerceOperationTerminalPowerbankorderInitializeModel(object):
         o = AlipayCommerceOperationTerminalPowerbankorderInitializeModel()
         if 'auth_id' in d:
             o.auth_id = d['auth_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_trade_id' in d:
             o.out_trade_id = d['out_trade_id']
         if 'sn' in d:

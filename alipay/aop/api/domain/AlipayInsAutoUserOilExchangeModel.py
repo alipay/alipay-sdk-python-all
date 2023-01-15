@@ -11,6 +11,7 @@ class AlipayInsAutoUserOilExchangeModel(object):
         self._benefit_id = None
         self._biz_time = None
         self._oil = None
+        self._open_id = None
         self._request_id = None
         self._scene_type = None
         self._source = None
@@ -37,6 +38,13 @@ class AlipayInsAutoUserOilExchangeModel(object):
     @oil.setter
     def oil(self, value):
         self._oil = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def request_id(self):
         return self._request_id
@@ -84,6 +92,11 @@ class AlipayInsAutoUserOilExchangeModel(object):
                 params['oil'] = self.oil.to_alipay_dict()
             else:
                 params['oil'] = self.oil
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayInsAutoUserOilExchangeModel(object):
             o.biz_time = d['biz_time']
         if 'oil' in d:
             o.oil = d['oil']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'scene_type' in d:

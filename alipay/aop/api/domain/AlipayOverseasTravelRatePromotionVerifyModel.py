@@ -9,6 +9,7 @@ class AlipayOverseasTravelRatePromotionVerifyModel(object):
 
     def __init__(self):
         self._extend_param = None
+        self._open_id = None
         self._travel_promotion_id = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayOverseasTravelRatePromotionVerifyModel(object):
     @extend_param.setter
     def extend_param(self, value):
         self._extend_param = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def travel_promotion_id(self):
         return self._travel_promotion_id
@@ -42,6 +50,11 @@ class AlipayOverseasTravelRatePromotionVerifyModel(object):
                 params['extend_param'] = self.extend_param.to_alipay_dict()
             else:
                 params['extend_param'] = self.extend_param
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.travel_promotion_id:
             if hasattr(self.travel_promotion_id, 'to_alipay_dict'):
                 params['travel_promotion_id'] = self.travel_promotion_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayOverseasTravelRatePromotionVerifyModel(object):
         o = AlipayOverseasTravelRatePromotionVerifyModel()
         if 'extend_param' in d:
             o.extend_param = d['extend_param']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'travel_promotion_id' in d:
             o.travel_promotion_id = d['travel_promotion_id']
         if 'user_id' in d:

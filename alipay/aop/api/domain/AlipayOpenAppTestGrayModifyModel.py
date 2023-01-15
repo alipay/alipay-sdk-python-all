@@ -13,6 +13,7 @@ class AlipayOpenAppTestGrayModifyModel(object):
         self._b_param = None
         self._c = None
         self._d = None
+        self._e = None
         self._open_id = None
         self._user_id = None
 
@@ -51,6 +52,13 @@ class AlipayOpenAppTestGrayModifyModel(object):
     @d.setter
     def d(self, value):
         self._d = value
+    @property
+    def e(self):
+        return self._e
+
+    @e.setter
+    def e(self, value):
+        self._e = value
     @property
     def open_id(self):
         return self._open_id
@@ -94,6 +102,11 @@ class AlipayOpenAppTestGrayModifyModel(object):
                 params['d'] = self.d.to_alipay_dict()
             else:
                 params['d'] = self.d
+        if self.e:
+            if hasattr(self.e, 'to_alipay_dict'):
+                params['e'] = self.e.to_alipay_dict()
+            else:
+                params['e'] = self.e
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayOpenAppTestGrayModifyModel(object):
             o.c = d['c']
         if 'd' in d:
             o.d = d['d']
+        if 'e' in d:
+            o.e = d['e']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

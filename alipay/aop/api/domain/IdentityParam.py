@@ -12,6 +12,7 @@ class IdentityParam(object):
         self._cert_no = None
         self._cert_type = None
         self._identity_type = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -43,6 +44,13 @@ class IdentityParam(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -73,6 +81,11 @@ class IdentityParam(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class IdentityParam(object):
             o.cert_type = d['cert_type']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -16,6 +16,7 @@ class AlipayMarketingVoucherBatchqueryModel(object):
         self._page_num = None
         self._page_size = None
         self._product_codes = None
+        self._sort_type = None
         self._status_list = None
         self._template_extend_info = None
         self._template_ids = None
@@ -80,6 +81,13 @@ class AlipayMarketingVoucherBatchqueryModel(object):
             self._product_codes = list()
             for i in value:
                 self._product_codes.append(i)
+    @property
+    def sort_type(self):
+        return self._sort_type
+
+    @sort_type.setter
+    def sort_type(self, value):
+        self._sort_type = value
     @property
     def status_list(self):
         return self._status_list
@@ -178,6 +186,11 @@ class AlipayMarketingVoucherBatchqueryModel(object):
                 params['product_codes'] = self.product_codes.to_alipay_dict()
             else:
                 params['product_codes'] = self.product_codes
+        if self.sort_type:
+            if hasattr(self.sort_type, 'to_alipay_dict'):
+                params['sort_type'] = self.sort_type.to_alipay_dict()
+            else:
+                params['sort_type'] = self.sort_type
         if self.status_list:
             if isinstance(self.status_list, list):
                 for i in range(0, len(self.status_list)):
@@ -234,6 +247,8 @@ class AlipayMarketingVoucherBatchqueryModel(object):
             o.page_size = d['page_size']
         if 'product_codes' in d:
             o.product_codes = d['product_codes']
+        if 'sort_type' in d:
+            o.sort_type = d['sort_type']
         if 'status_list' in d:
             o.status_list = d['status_list']
         if 'template_extend_info' in d:

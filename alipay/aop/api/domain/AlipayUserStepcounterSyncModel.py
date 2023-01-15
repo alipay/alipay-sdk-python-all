@@ -16,6 +16,7 @@ class AlipayUserStepcounterSyncModel(object):
         self._height = None
         self._latitude = None
         self._longitude = None
+        self._open_id = None
         self._out_user_id = None
         self._time = None
         self._time_zone = None
@@ -78,6 +79,13 @@ class AlipayUserStepcounterSyncModel(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_user_id(self):
         return self._out_user_id
@@ -157,6 +165,11 @@ class AlipayUserStepcounterSyncModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_user_id:
             if hasattr(self.out_user_id, 'to_alipay_dict'):
                 params['out_user_id'] = self.out_user_id.to_alipay_dict()
@@ -205,6 +218,8 @@ class AlipayUserStepcounterSyncModel(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_user_id' in d:
             o.out_user_id = d['out_user_id']
         if 'time' in d:

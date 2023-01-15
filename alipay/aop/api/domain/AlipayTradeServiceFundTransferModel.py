@@ -11,7 +11,9 @@ class AlipayTradeServiceFundTransferModel(object):
         self._amount = None
         self._biz_type = None
         self._out_biz_no = None
+        self._payee_open_id = None
         self._payee_user_id = None
+        self._payer_open_id = None
         self._payer_user_id = None
         self._sub_biz_type = None
 
@@ -37,12 +39,26 @@ class AlipayTradeServiceFundTransferModel(object):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def payee_open_id(self):
+        return self._payee_open_id
+
+    @payee_open_id.setter
+    def payee_open_id(self, value):
+        self._payee_open_id = value
+    @property
     def payee_user_id(self):
         return self._payee_user_id
 
     @payee_user_id.setter
     def payee_user_id(self, value):
         self._payee_user_id = value
+    @property
+    def payer_open_id(self):
+        return self._payer_open_id
+
+    @payer_open_id.setter
+    def payer_open_id(self, value):
+        self._payer_open_id = value
     @property
     def payer_user_id(self):
         return self._payer_user_id
@@ -76,11 +92,21 @@ class AlipayTradeServiceFundTransferModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.payee_open_id:
+            if hasattr(self.payee_open_id, 'to_alipay_dict'):
+                params['payee_open_id'] = self.payee_open_id.to_alipay_dict()
+            else:
+                params['payee_open_id'] = self.payee_open_id
         if self.payee_user_id:
             if hasattr(self.payee_user_id, 'to_alipay_dict'):
                 params['payee_user_id'] = self.payee_user_id.to_alipay_dict()
             else:
                 params['payee_user_id'] = self.payee_user_id
+        if self.payer_open_id:
+            if hasattr(self.payer_open_id, 'to_alipay_dict'):
+                params['payer_open_id'] = self.payer_open_id.to_alipay_dict()
+            else:
+                params['payer_open_id'] = self.payer_open_id
         if self.payer_user_id:
             if hasattr(self.payer_user_id, 'to_alipay_dict'):
                 params['payer_user_id'] = self.payer_user_id.to_alipay_dict()
@@ -104,8 +130,12 @@ class AlipayTradeServiceFundTransferModel(object):
             o.biz_type = d['biz_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'payee_open_id' in d:
+            o.payee_open_id = d['payee_open_id']
         if 'payee_user_id' in d:
             o.payee_user_id = d['payee_user_id']
+        if 'payer_open_id' in d:
+            o.payer_open_id = d['payer_open_id']
         if 'payer_user_id' in d:
             o.payer_user_id = d['payer_user_id']
         if 'sub_biz_type' in d:

@@ -9,6 +9,7 @@ class AlipayInsAutoUserOilRefundModel(object):
 
     def __init__(self):
         self._exchange_request_id = None
+        self._open_id = None
         self._reason = None
         self._request_id = None
         self._source = None
@@ -21,6 +22,13 @@ class AlipayInsAutoUserOilRefundModel(object):
     @exchange_request_id.setter
     def exchange_request_id(self, value):
         self._exchange_request_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def reason(self):
         return self._reason
@@ -58,6 +66,11 @@ class AlipayInsAutoUserOilRefundModel(object):
                 params['exchange_request_id'] = self.exchange_request_id.to_alipay_dict()
             else:
                 params['exchange_request_id'] = self.exchange_request_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.reason:
             if hasattr(self.reason, 'to_alipay_dict'):
                 params['reason'] = self.reason.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayInsAutoUserOilRefundModel(object):
         o = AlipayInsAutoUserOilRefundModel()
         if 'exchange_request_id' in d:
             o.exchange_request_id = d['exchange_request_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'reason' in d:
             o.reason = d['reason']
         if 'request_id' in d:

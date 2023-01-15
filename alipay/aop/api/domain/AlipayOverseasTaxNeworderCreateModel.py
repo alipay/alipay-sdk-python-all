@@ -14,6 +14,7 @@ class AlipayOverseasTaxNeworderCreateModel(object):
         self._doc_print_date = None
         self._extend_param = None
         self._nationality = None
+        self._open_id = None
         self._out_merchant_id = None
         self._passport_name = None
         self._passport_no = None
@@ -66,6 +67,13 @@ class AlipayOverseasTaxNeworderCreateModel(object):
     @nationality.setter
     def nationality(self, value):
         self._nationality = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_merchant_id(self):
         return self._out_merchant_id
@@ -163,6 +171,11 @@ class AlipayOverseasTaxNeworderCreateModel(object):
                 params['nationality'] = self.nationality.to_alipay_dict()
             else:
                 params['nationality'] = self.nationality
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_merchant_id:
             if hasattr(self.out_merchant_id, 'to_alipay_dict'):
                 params['out_merchant_id'] = self.out_merchant_id.to_alipay_dict()
@@ -227,6 +240,8 @@ class AlipayOverseasTaxNeworderCreateModel(object):
             o.extend_param = d['extend_param']
         if 'nationality' in d:
             o.nationality = d['nationality']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_merchant_id' in d:
             o.out_merchant_id = d['out_merchant_id']
         if 'passport_name' in d:

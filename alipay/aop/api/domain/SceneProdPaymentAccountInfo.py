@@ -21,7 +21,9 @@ class SceneProdPaymentAccountInfo(object):
         self._inst_out_code = None
         self._ip_id = None
         self._ip_role_id = None
+        self._loan_type = None
         self._payment_mark = None
+        self._seq_no = None
 
     @property
     def account_ext_no(self):
@@ -115,12 +117,26 @@ class SceneProdPaymentAccountInfo(object):
     def ip_role_id(self, value):
         self._ip_role_id = value
     @property
+    def loan_type(self):
+        return self._loan_type
+
+    @loan_type.setter
+    def loan_type(self, value):
+        self._loan_type = value
+    @property
     def payment_mark(self):
         return self._payment_mark
 
     @payment_mark.setter
     def payment_mark(self, value):
         self._payment_mark = value
+    @property
+    def seq_no(self):
+        return self._seq_no
+
+    @seq_no.setter
+    def seq_no(self, value):
+        self._seq_no = value
 
 
     def to_alipay_dict(self):
@@ -190,11 +206,21 @@ class SceneProdPaymentAccountInfo(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.loan_type:
+            if hasattr(self.loan_type, 'to_alipay_dict'):
+                params['loan_type'] = self.loan_type.to_alipay_dict()
+            else:
+                params['loan_type'] = self.loan_type
         if self.payment_mark:
             if hasattr(self.payment_mark, 'to_alipay_dict'):
                 params['payment_mark'] = self.payment_mark.to_alipay_dict()
             else:
                 params['payment_mark'] = self.payment_mark
+        if self.seq_no:
+            if hasattr(self.seq_no, 'to_alipay_dict'):
+                params['seq_no'] = self.seq_no.to_alipay_dict()
+            else:
+                params['seq_no'] = self.seq_no
         return params
 
     @staticmethod
@@ -228,8 +254,12 @@ class SceneProdPaymentAccountInfo(object):
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'loan_type' in d:
+            o.loan_type = d['loan_type']
         if 'payment_mark' in d:
             o.payment_mark = d['payment_mark']
+        if 'seq_no' in d:
+            o.seq_no = d['seq_no']
         return o
 
 

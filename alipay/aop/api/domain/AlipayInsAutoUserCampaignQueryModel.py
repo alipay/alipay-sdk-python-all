@@ -9,6 +9,7 @@ class AlipayInsAutoUserCampaignQueryModel(object):
 
     def __init__(self):
         self._auto_campaign_type = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayInsAutoUserCampaignQueryModel(object):
     @auto_campaign_type.setter
     def auto_campaign_type(self, value):
         self._auto_campaign_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -34,6 +42,11 @@ class AlipayInsAutoUserCampaignQueryModel(object):
                 params['auto_campaign_type'] = self.auto_campaign_type.to_alipay_dict()
             else:
                 params['auto_campaign_type'] = self.auto_campaign_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayInsAutoUserCampaignQueryModel(object):
         o = AlipayInsAutoUserCampaignQueryModel()
         if 'auto_campaign_type' in d:
             o.auto_campaign_type = d['auto_campaign_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

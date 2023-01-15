@@ -12,6 +12,7 @@ class AlipayFundJointaccountBillQueryModel(object):
         self._agreement_no = None
         self._biz_scene = None
         self._end_date = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._product_code = None
@@ -46,6 +47,13 @@ class AlipayFundJointaccountBillQueryModel(object):
     @end_date.setter
     def end_date(self, value):
         self._end_date = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -105,6 +113,11 @@ class AlipayFundJointaccountBillQueryModel(object):
                 params['end_date'] = self.end_date.to_alipay_dict()
             else:
                 params['end_date'] = self.end_date
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -145,6 +158,8 @@ class AlipayFundJointaccountBillQueryModel(object):
             o.biz_scene = d['biz_scene']
         if 'end_date' in d:
             o.end_date = d['end_date']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

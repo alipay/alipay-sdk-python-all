@@ -15,8 +15,12 @@ class GoodItem(object):
         self._comment_cnt = None
         self._content = None
         self._current_price = None
+        self._deposit_amount = None
         self._detail_pic_num = None
         self._detail_url = None
+        self._ext_json = None
+        self._fresh_degree = None
+        self._front_end_category = None
         self._id = None
         self._mini_app_id = None
         self._origin_price = None
@@ -24,11 +28,18 @@ class GoodItem(object):
         self._promo_pic_url_list = None
         self._pub_time = None
         self._rating = None
+        self._rental_date = None
+        self._rental_free = None
         self._row_type = None
+        self._self_pickup = None
+        self._shipment_rate = None
+        self._shipments = None
         self._shop_id = None
+        self._shop_name = None
         self._spu_id = None
         self._status = None
         self._stock_num = None
+        self._store_rating = None
         self._tags = None
         self._title = None
 
@@ -85,6 +96,13 @@ class GoodItem(object):
     def current_price(self, value):
         self._current_price = value
     @property
+    def deposit_amount(self):
+        return self._deposit_amount
+
+    @deposit_amount.setter
+    def deposit_amount(self, value):
+        self._deposit_amount = value
+    @property
     def detail_pic_num(self):
         return self._detail_pic_num
 
@@ -98,6 +116,27 @@ class GoodItem(object):
     @detail_url.setter
     def detail_url(self, value):
         self._detail_url = value
+    @property
+    def ext_json(self):
+        return self._ext_json
+
+    @ext_json.setter
+    def ext_json(self, value):
+        self._ext_json = value
+    @property
+    def fresh_degree(self):
+        return self._fresh_degree
+
+    @fresh_degree.setter
+    def fresh_degree(self, value):
+        self._fresh_degree = value
+    @property
+    def front_end_category(self):
+        return self._front_end_category
+
+    @front_end_category.setter
+    def front_end_category(self, value):
+        self._front_end_category = value
     @property
     def id(self):
         return self._id
@@ -154,6 +193,20 @@ class GoodItem(object):
     def rating(self, value):
         self._rating = value
     @property
+    def rental_date(self):
+        return self._rental_date
+
+    @rental_date.setter
+    def rental_date(self, value):
+        self._rental_date = value
+    @property
+    def rental_free(self):
+        return self._rental_free
+
+    @rental_free.setter
+    def rental_free(self, value):
+        self._rental_free = value
+    @property
     def row_type(self):
         return self._row_type
 
@@ -161,12 +214,40 @@ class GoodItem(object):
     def row_type(self, value):
         self._row_type = value
     @property
+    def self_pickup(self):
+        return self._self_pickup
+
+    @self_pickup.setter
+    def self_pickup(self, value):
+        self._self_pickup = value
+    @property
+    def shipment_rate(self):
+        return self._shipment_rate
+
+    @shipment_rate.setter
+    def shipment_rate(self, value):
+        self._shipment_rate = value
+    @property
+    def shipments(self):
+        return self._shipments
+
+    @shipments.setter
+    def shipments(self, value):
+        self._shipments = value
+    @property
     def shop_id(self):
         return self._shop_id
 
     @shop_id.setter
     def shop_id(self, value):
         self._shop_id = value
+    @property
+    def shop_name(self):
+        return self._shop_name
+
+    @shop_name.setter
+    def shop_name(self, value):
+        self._shop_name = value
     @property
     def spu_id(self):
         return self._spu_id
@@ -188,6 +269,13 @@ class GoodItem(object):
     @stock_num.setter
     def stock_num(self, value):
         self._stock_num = value
+    @property
+    def store_rating(self):
+        return self._store_rating
+
+    @store_rating.setter
+    def store_rating(self, value):
+        self._store_rating = value
     @property
     def tags(self):
         return self._tags
@@ -246,6 +334,11 @@ class GoodItem(object):
                 params['current_price'] = self.current_price.to_alipay_dict()
             else:
                 params['current_price'] = self.current_price
+        if self.deposit_amount:
+            if hasattr(self.deposit_amount, 'to_alipay_dict'):
+                params['deposit_amount'] = self.deposit_amount.to_alipay_dict()
+            else:
+                params['deposit_amount'] = self.deposit_amount
         if self.detail_pic_num:
             if hasattr(self.detail_pic_num, 'to_alipay_dict'):
                 params['detail_pic_num'] = self.detail_pic_num.to_alipay_dict()
@@ -256,6 +349,21 @@ class GoodItem(object):
                 params['detail_url'] = self.detail_url.to_alipay_dict()
             else:
                 params['detail_url'] = self.detail_url
+        if self.ext_json:
+            if hasattr(self.ext_json, 'to_alipay_dict'):
+                params['ext_json'] = self.ext_json.to_alipay_dict()
+            else:
+                params['ext_json'] = self.ext_json
+        if self.fresh_degree:
+            if hasattr(self.fresh_degree, 'to_alipay_dict'):
+                params['fresh_degree'] = self.fresh_degree.to_alipay_dict()
+            else:
+                params['fresh_degree'] = self.fresh_degree
+        if self.front_end_category:
+            if hasattr(self.front_end_category, 'to_alipay_dict'):
+                params['front_end_category'] = self.front_end_category.to_alipay_dict()
+            else:
+                params['front_end_category'] = self.front_end_category
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -301,16 +409,46 @@ class GoodItem(object):
                 params['rating'] = self.rating.to_alipay_dict()
             else:
                 params['rating'] = self.rating
+        if self.rental_date:
+            if hasattr(self.rental_date, 'to_alipay_dict'):
+                params['rental_date'] = self.rental_date.to_alipay_dict()
+            else:
+                params['rental_date'] = self.rental_date
+        if self.rental_free:
+            if hasattr(self.rental_free, 'to_alipay_dict'):
+                params['rental_free'] = self.rental_free.to_alipay_dict()
+            else:
+                params['rental_free'] = self.rental_free
         if self.row_type:
             if hasattr(self.row_type, 'to_alipay_dict'):
                 params['row_type'] = self.row_type.to_alipay_dict()
             else:
                 params['row_type'] = self.row_type
+        if self.self_pickup:
+            if hasattr(self.self_pickup, 'to_alipay_dict'):
+                params['self_pickup'] = self.self_pickup.to_alipay_dict()
+            else:
+                params['self_pickup'] = self.self_pickup
+        if self.shipment_rate:
+            if hasattr(self.shipment_rate, 'to_alipay_dict'):
+                params['shipment_rate'] = self.shipment_rate.to_alipay_dict()
+            else:
+                params['shipment_rate'] = self.shipment_rate
+        if self.shipments:
+            if hasattr(self.shipments, 'to_alipay_dict'):
+                params['shipments'] = self.shipments.to_alipay_dict()
+            else:
+                params['shipments'] = self.shipments
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_name:
+            if hasattr(self.shop_name, 'to_alipay_dict'):
+                params['shop_name'] = self.shop_name.to_alipay_dict()
+            else:
+                params['shop_name'] = self.shop_name
         if self.spu_id:
             if hasattr(self.spu_id, 'to_alipay_dict'):
                 params['spu_id'] = self.spu_id.to_alipay_dict()
@@ -326,6 +464,11 @@ class GoodItem(object):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
             else:
                 params['stock_num'] = self.stock_num
+        if self.store_rating:
+            if hasattr(self.store_rating, 'to_alipay_dict'):
+                params['store_rating'] = self.store_rating.to_alipay_dict()
+            else:
+                params['store_rating'] = self.store_rating
         if self.tags:
             if hasattr(self.tags, 'to_alipay_dict'):
                 params['tags'] = self.tags.to_alipay_dict()
@@ -357,10 +500,18 @@ class GoodItem(object):
             o.content = d['content']
         if 'current_price' in d:
             o.current_price = d['current_price']
+        if 'deposit_amount' in d:
+            o.deposit_amount = d['deposit_amount']
         if 'detail_pic_num' in d:
             o.detail_pic_num = d['detail_pic_num']
         if 'detail_url' in d:
             o.detail_url = d['detail_url']
+        if 'ext_json' in d:
+            o.ext_json = d['ext_json']
+        if 'fresh_degree' in d:
+            o.fresh_degree = d['fresh_degree']
+        if 'front_end_category' in d:
+            o.front_end_category = d['front_end_category']
         if 'id' in d:
             o.id = d['id']
         if 'mini_app_id' in d:
@@ -375,16 +526,30 @@ class GoodItem(object):
             o.pub_time = d['pub_time']
         if 'rating' in d:
             o.rating = d['rating']
+        if 'rental_date' in d:
+            o.rental_date = d['rental_date']
+        if 'rental_free' in d:
+            o.rental_free = d['rental_free']
         if 'row_type' in d:
             o.row_type = d['row_type']
+        if 'self_pickup' in d:
+            o.self_pickup = d['self_pickup']
+        if 'shipment_rate' in d:
+            o.shipment_rate = d['shipment_rate']
+        if 'shipments' in d:
+            o.shipments = d['shipments']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_name' in d:
+            o.shop_name = d['shop_name']
         if 'spu_id' in d:
             o.spu_id = d['spu_id']
         if 'status' in d:
             o.status = d['status']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
+        if 'store_rating' in d:
+            o.store_rating = d['store_rating']
         if 'tags' in d:
             o.tags = d['tags']
         if 'title' in d:

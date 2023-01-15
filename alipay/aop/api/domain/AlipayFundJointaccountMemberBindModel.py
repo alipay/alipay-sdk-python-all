@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.JointAccountQuotaDTO import JointAccountQuotaDTO
 from alipay.aop.api.domain.InviteMemberBusinessParamsDTO import InviteMemberBusinessParamsDTO
+from alipay.aop.api.domain.IdentityVerifiedInfoDTO import IdentityVerifiedInfoDTO
 
 
 class AlipayFundJointaccountMemberBindModel(object):
@@ -17,6 +18,7 @@ class AlipayFundJointaccountMemberBindModel(object):
         self._business_params = None
         self._identity = None
         self._identity_type = None
+        self._identity_verified_info = None
         self._name = None
         self._product_code = None
 
@@ -76,6 +78,16 @@ class AlipayFundJointaccountMemberBindModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def identity_verified_info(self):
+        return self._identity_verified_info
+
+    @identity_verified_info.setter
+    def identity_verified_info(self, value):
+        if isinstance(value, IdentityVerifiedInfoDTO):
+            self._identity_verified_info = value
+        else:
+            self._identity_verified_info = IdentityVerifiedInfoDTO.from_alipay_dict(value)
+    @property
     def name(self):
         return self._name
 
@@ -128,6 +140,11 @@ class AlipayFundJointaccountMemberBindModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.identity_verified_info:
+            if hasattr(self.identity_verified_info, 'to_alipay_dict'):
+                params['identity_verified_info'] = self.identity_verified_info.to_alipay_dict()
+            else:
+                params['identity_verified_info'] = self.identity_verified_info
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -159,6 +176,8 @@ class AlipayFundJointaccountMemberBindModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'identity_verified_info' in d:
+            o.identity_verified_info = d['identity_verified_info']
         if 'name' in d:
             o.name = d['name']
         if 'product_code' in d:

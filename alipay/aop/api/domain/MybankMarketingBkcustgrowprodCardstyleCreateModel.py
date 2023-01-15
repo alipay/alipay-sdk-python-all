@@ -11,6 +11,7 @@ class MybankMarketingBkcustgrowprodCardstyleCreateModel(object):
         self._alipay_user_id = None
         self._link_resource = None
         self._need_link = None
+        self._open_id = None
         self._selected = None
         self._source = None
         self._style_origin_id = None
@@ -38,6 +39,13 @@ class MybankMarketingBkcustgrowprodCardstyleCreateModel(object):
     @need_link.setter
     def need_link(self, value):
         self._need_link = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def selected(self):
         return self._selected
@@ -92,6 +100,11 @@ class MybankMarketingBkcustgrowprodCardstyleCreateModel(object):
                 params['need_link'] = self.need_link.to_alipay_dict()
             else:
                 params['need_link'] = self.need_link
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.selected:
             if hasattr(self.selected, 'to_alipay_dict'):
                 params['selected'] = self.selected.to_alipay_dict()
@@ -130,6 +143,8 @@ class MybankMarketingBkcustgrowprodCardstyleCreateModel(object):
             o.link_resource = d['link_resource']
         if 'need_link' in d:
             o.need_link = d['need_link']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'selected' in d:
             o.selected = d['selected']
         if 'source' in d:

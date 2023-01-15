@@ -9,6 +9,7 @@ class AlipayEbppFacepayBillCancelModel(object):
 
     def __init__(self):
         self._bill_no = None
+        self._open_id = None
         self._out_order_no = None
         self._user_id = None
         self._user_identity_code = None
@@ -20,6 +21,13 @@ class AlipayEbppFacepayBillCancelModel(object):
     @bill_no.setter
     def bill_no(self, value):
         self._bill_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -50,6 +58,11 @@ class AlipayEbppFacepayBillCancelModel(object):
                 params['bill_no'] = self.bill_no.to_alipay_dict()
             else:
                 params['bill_no'] = self.bill_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayEbppFacepayBillCancelModel(object):
         o = AlipayEbppFacepayBillCancelModel()
         if 'bill_no' in d:
             o.bill_no = d['bill_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'user_id' in d:

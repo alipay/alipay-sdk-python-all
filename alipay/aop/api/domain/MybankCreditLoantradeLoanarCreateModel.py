@@ -15,6 +15,7 @@ class MybankCreditLoantradeLoanarCreateModel(object):
         self._account_fin_type = None
         self._account_name = None
         self._account_no = None
+        self._account_no_open_id = None
         self._account_type = None
         self._alipay_id = None
         self._apply_amt = None
@@ -31,6 +32,7 @@ class MybankCreditLoantradeLoanarCreateModel(object):
         self._loan_term_unit = None
         self._need_check_account_same_name = None
         self._need_sign_contract = None
+        self._open_id = None
         self._pd_code = None
         self._pd_version = None
         self._promo_tools = None
@@ -82,6 +84,13 @@ class MybankCreditLoantradeLoanarCreateModel(object):
     @account_no.setter
     def account_no(self, value):
         self._account_no = value
+    @property
+    def account_no_open_id(self):
+        return self._account_no_open_id
+
+    @account_no_open_id.setter
+    def account_no_open_id(self, value):
+        self._account_no_open_id = value
     @property
     def account_type(self):
         return self._account_type
@@ -195,6 +204,13 @@ class MybankCreditLoantradeLoanarCreateModel(object):
     def need_sign_contract(self, value):
         self._need_sign_contract = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def pd_code(self):
         return self._pd_code
 
@@ -290,6 +306,11 @@ class MybankCreditLoantradeLoanarCreateModel(object):
                 params['account_no'] = self.account_no.to_alipay_dict()
             else:
                 params['account_no'] = self.account_no
+        if self.account_no_open_id:
+            if hasattr(self.account_no_open_id, 'to_alipay_dict'):
+                params['account_no_open_id'] = self.account_no_open_id.to_alipay_dict()
+            else:
+                params['account_no_open_id'] = self.account_no_open_id
         if self.account_type:
             if hasattr(self.account_type, 'to_alipay_dict'):
                 params['account_type'] = self.account_type.to_alipay_dict()
@@ -370,6 +391,11 @@ class MybankCreditLoantradeLoanarCreateModel(object):
                 params['need_sign_contract'] = self.need_sign_contract.to_alipay_dict()
             else:
                 params['need_sign_contract'] = self.need_sign_contract
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.pd_code:
             if hasattr(self.pd_code, 'to_alipay_dict'):
                 params['pd_code'] = self.pd_code.to_alipay_dict()
@@ -434,6 +460,8 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             o.account_name = d['account_name']
         if 'account_no' in d:
             o.account_no = d['account_no']
+        if 'account_no_open_id' in d:
+            o.account_no_open_id = d['account_no_open_id']
         if 'account_type' in d:
             o.account_type = d['account_type']
         if 'alipay_id' in d:
@@ -466,6 +494,8 @@ class MybankCreditLoantradeLoanarCreateModel(object):
             o.need_check_account_same_name = d['need_check_account_same_name']
         if 'need_sign_contract' in d:
             o.need_sign_contract = d['need_sign_contract']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'pd_code' in d:
             o.pd_code = d['pd_code']
         if 'pd_version' in d:

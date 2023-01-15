@@ -9,6 +9,7 @@ class MybankCreditLoanapplyBkruralindustryMassifQueryModel(object):
 
     def __init__(self):
         self._business_no = None
+        self._open_id = None
         self._request_id = None
         self._uid = None
 
@@ -19,6 +20,13 @@ class MybankCreditLoanapplyBkruralindustryMassifQueryModel(object):
     @business_no.setter
     def business_no(self, value):
         self._business_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def request_id(self):
         return self._request_id
@@ -42,6 +50,11 @@ class MybankCreditLoanapplyBkruralindustryMassifQueryModel(object):
                 params['business_no'] = self.business_no.to_alipay_dict()
             else:
                 params['business_no'] = self.business_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class MybankCreditLoanapplyBkruralindustryMassifQueryModel(object):
         o = MybankCreditLoanapplyBkruralindustryMassifQueryModel()
         if 'business_no' in d:
             o.business_no = d['business_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'uid' in d:

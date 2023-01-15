@@ -12,6 +12,9 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
         super(AlipayPayAppChannelConsultResponse, self).__init__()
         self._channel_info_list = None
         self._pre_consult_id = None
+        self._real_alipay_account_id = None
+        self._real_alipay_open_id = None
+        self._virtual_alipay_open_id = None
         self._virtual_alipay_user_id = None
 
     @property
@@ -35,6 +38,27 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
     def pre_consult_id(self, value):
         self._pre_consult_id = value
     @property
+    def real_alipay_account_id(self):
+        return self._real_alipay_account_id
+
+    @real_alipay_account_id.setter
+    def real_alipay_account_id(self, value):
+        self._real_alipay_account_id = value
+    @property
+    def real_alipay_open_id(self):
+        return self._real_alipay_open_id
+
+    @real_alipay_open_id.setter
+    def real_alipay_open_id(self, value):
+        self._real_alipay_open_id = value
+    @property
+    def virtual_alipay_open_id(self):
+        return self._virtual_alipay_open_id
+
+    @virtual_alipay_open_id.setter
+    def virtual_alipay_open_id(self, value):
+        self._virtual_alipay_open_id = value
+    @property
     def virtual_alipay_user_id(self):
         return self._virtual_alipay_user_id
 
@@ -48,5 +72,11 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
             self.channel_info_list = response['channel_info_list']
         if 'pre_consult_id' in response:
             self.pre_consult_id = response['pre_consult_id']
+        if 'real_alipay_account_id' in response:
+            self.real_alipay_account_id = response['real_alipay_account_id']
+        if 'real_alipay_open_id' in response:
+            self.real_alipay_open_id = response['real_alipay_open_id']
+        if 'virtual_alipay_open_id' in response:
+            self.virtual_alipay_open_id = response['virtual_alipay_open_id']
         if 'virtual_alipay_user_id' in response:
             self.virtual_alipay_user_id = response['virtual_alipay_user_id']

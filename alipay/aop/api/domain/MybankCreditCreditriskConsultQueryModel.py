@@ -13,6 +13,7 @@ class MybankCreditCreditriskConsultQueryModel(object):
         self._ext_par = None
         self._ip_id = None
         self._ip_role_id = None
+        self._open_id = None
         self._out_distinguish_id = None
         self._out_uni_code = None
         self._pd_code = None
@@ -55,6 +56,13 @@ class MybankCreditCreditriskConsultQueryModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_distinguish_id(self):
         return self._out_distinguish_id
@@ -133,6 +141,11 @@ class MybankCreditCreditriskConsultQueryModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_distinguish_id:
             if hasattr(self.out_distinguish_id, 'to_alipay_dict'):
                 params['out_distinguish_id'] = self.out_distinguish_id.to_alipay_dict()
@@ -183,6 +196,8 @@ class MybankCreditCreditriskConsultQueryModel(object):
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_distinguish_id' in d:
             o.out_distinguish_id = d['out_distinguish_id']
         if 'out_uni_code' in d:

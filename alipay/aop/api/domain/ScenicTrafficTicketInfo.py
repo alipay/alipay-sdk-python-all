@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ScenicExtInfo import ScenicExtInfo
+from alipay.aop.api.domain.ScenicExtInfo import ScenicExtInfo
 from alipay.aop.api.domain.ScenicTrafficUserInfo import ScenicTrafficUserInfo
 from alipay.aop.api.domain.TrafficProductInfo import TrafficProductInfo
 
@@ -15,6 +16,7 @@ class ScenicTrafficTicketInfo(object):
         self._departure_outer_scenic_id = None
         self._destination_outer_scenic_id = None
         self._ext_info = None
+        self._ext_infos = None
         self._passengers = None
         self._pic = None
         self._product_info = None
@@ -58,6 +60,19 @@ class ScenicTrafficTicketInfo(object):
             self._ext_info = value
         else:
             self._ext_info = ScenicExtInfo.from_alipay_dict(value)
+    @property
+    def ext_infos(self):
+        return self._ext_infos
+
+    @ext_infos.setter
+    def ext_infos(self, value):
+        if isinstance(value, list):
+            self._ext_infos = list()
+            for i in value:
+                if isinstance(i, ScenicExtInfo):
+                    self._ext_infos.append(i)
+                else:
+                    self._ext_infos.append(ScenicExtInfo.from_alipay_dict(i))
     @property
     def passengers(self):
         return self._passengers
@@ -165,6 +180,16 @@ class ScenicTrafficTicketInfo(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.ext_infos:
+            if isinstance(self.ext_infos, list):
+                for i in range(0, len(self.ext_infos)):
+                    element = self.ext_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ext_infos[i] = element.to_alipay_dict()
+            if hasattr(self.ext_infos, 'to_alipay_dict'):
+                params['ext_infos'] = self.ext_infos.to_alipay_dict()
+            else:
+                params['ext_infos'] = self.ext_infos
         if self.passengers:
             if hasattr(self.passengers, 'to_alipay_dict'):
                 params['passengers'] = self.passengers.to_alipay_dict()
@@ -235,6 +260,8 @@ class ScenicTrafficTicketInfo(object):
             o.destination_outer_scenic_id = d['destination_outer_scenic_id']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'ext_infos' in d:
+            o.ext_infos = d['ext_infos']
         if 'passengers' in d:
             o.passengers = d['passengers']
         if 'pic' in d:

@@ -9,6 +9,7 @@ class AlipaySocialAntsportsCurrentpathQueryModel(object):
 
     def __init__(self):
         self._day = None
+        self._open_id = None
         self._path_scene = None
         self._path_station_code = None
         self._path_station_name = None
@@ -22,6 +23,13 @@ class AlipaySocialAntsportsCurrentpathQueryModel(object):
     @day.setter
     def day(self, value):
         self._day = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def path_scene(self):
         return self._path_scene
@@ -66,6 +74,11 @@ class AlipaySocialAntsportsCurrentpathQueryModel(object):
                 params['day'] = self.day.to_alipay_dict()
             else:
                 params['day'] = self.day
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.path_scene:
             if hasattr(self.path_scene, 'to_alipay_dict'):
                 params['path_scene'] = self.path_scene.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipaySocialAntsportsCurrentpathQueryModel(object):
         o = AlipaySocialAntsportsCurrentpathQueryModel()
         if 'day' in d:
             o.day = d['day']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'path_scene' in d:
             o.path_scene = d['path_scene']
         if 'path_station_code' in d:

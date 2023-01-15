@@ -9,6 +9,7 @@ class AlipayInsSceneHealthGiftQueryModel(object):
 
     def __init__(self):
         self._end_time = None
+        self._open_id = None
         self._product_group_biz_type = None
         self._source = None
         self._start_time = None
@@ -21,6 +22,13 @@ class AlipayInsSceneHealthGiftQueryModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def product_group_biz_type(self):
         return self._product_group_biz_type
@@ -58,6 +66,11 @@ class AlipayInsSceneHealthGiftQueryModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_group_biz_type:
             if hasattr(self.product_group_biz_type, 'to_alipay_dict'):
                 params['product_group_biz_type'] = self.product_group_biz_type.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayInsSceneHealthGiftQueryModel(object):
         o = AlipayInsSceneHealthGiftQueryModel()
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_group_biz_type' in d:
             o.product_group_biz_type = d['product_group_biz_type']
         if 'source' in d:

@@ -11,6 +11,8 @@ class AlipayFundFlexiblestaffingAuthorizeQueryModel(object):
         self._biz_scene = None
         self._principal_account_no = None
         self._principal_id = None
+        self._principal_name = None
+        self._principal_type = None
         self._product_code = None
 
     @property
@@ -34,6 +36,20 @@ class AlipayFundFlexiblestaffingAuthorizeQueryModel(object):
     @principal_id.setter
     def principal_id(self, value):
         self._principal_id = value
+    @property
+    def principal_name(self):
+        return self._principal_name
+
+    @principal_name.setter
+    def principal_name(self, value):
+        self._principal_name = value
+    @property
+    def principal_type(self):
+        return self._principal_type
+
+    @principal_type.setter
+    def principal_type(self, value):
+        self._principal_type = value
     @property
     def product_code(self):
         return self._product_code
@@ -60,6 +76,16 @@ class AlipayFundFlexiblestaffingAuthorizeQueryModel(object):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
             else:
                 params['principal_id'] = self.principal_id
+        if self.principal_name:
+            if hasattr(self.principal_name, 'to_alipay_dict'):
+                params['principal_name'] = self.principal_name.to_alipay_dict()
+            else:
+                params['principal_name'] = self.principal_name
+        if self.principal_type:
+            if hasattr(self.principal_type, 'to_alipay_dict'):
+                params['principal_type'] = self.principal_type.to_alipay_dict()
+            else:
+                params['principal_type'] = self.principal_type
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -78,6 +104,10 @@ class AlipayFundFlexiblestaffingAuthorizeQueryModel(object):
             o.principal_account_no = d['principal_account_no']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
+        if 'principal_name' in d:
+            o.principal_name = d['principal_name']
+        if 'principal_type' in d:
+            o.principal_type = d['principal_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o

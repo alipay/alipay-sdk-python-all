@@ -10,6 +10,7 @@ class EnterpriseInfoDTO(object):
     def __init__(self):
         self._account_id = None
         self._activate = None
+        self._auth_level = None
         self._auth_status = None
         self._auth_time = None
         self._enterprise_alias = None
@@ -38,6 +39,13 @@ class EnterpriseInfoDTO(object):
     @activate.setter
     def activate(self, value):
         self._activate = value
+    @property
+    def auth_level(self):
+        return self._auth_level
+
+    @auth_level.setter
+    def auth_level(self, value):
+        self._auth_level = value
     @property
     def auth_status(self):
         return self._auth_status
@@ -143,6 +151,11 @@ class EnterpriseInfoDTO(object):
                 params['activate'] = self.activate.to_alipay_dict()
             else:
                 params['activate'] = self.activate
+        if self.auth_level:
+            if hasattr(self.auth_level, 'to_alipay_dict'):
+                params['auth_level'] = self.auth_level.to_alipay_dict()
+            else:
+                params['auth_level'] = self.auth_level
         if self.auth_status:
             if hasattr(self.auth_status, 'to_alipay_dict'):
                 params['auth_status'] = self.auth_status.to_alipay_dict()
@@ -219,6 +232,8 @@ class EnterpriseInfoDTO(object):
             o.account_id = d['account_id']
         if 'activate' in d:
             o.activate = d['activate']
+        if 'auth_level' in d:
+            o.auth_level = d['auth_level']
         if 'auth_status' in d:
             o.auth_status = d['auth_status']
         if 'auth_time' in d:

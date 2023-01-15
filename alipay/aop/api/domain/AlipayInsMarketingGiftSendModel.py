@@ -12,7 +12,9 @@ class AlipayInsMarketingGiftSendModel(object):
         self._entrance = None
         self._gain_now = None
         self._gift_prod_code = None
+        self._insured_open_id = None
         self._insured_user_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._relation_to_apply = None
         self._right_no_list = None
@@ -48,12 +50,26 @@ class AlipayInsMarketingGiftSendModel(object):
     def gift_prod_code(self, value):
         self._gift_prod_code = value
     @property
+    def insured_open_id(self):
+        return self._insured_open_id
+
+    @insured_open_id.setter
+    def insured_open_id(self, value):
+        self._insured_open_id = value
+    @property
     def insured_user_id(self):
         return self._insured_user_id
 
     @insured_user_id.setter
     def insured_user_id(self, value):
         self._insured_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -116,11 +132,21 @@ class AlipayInsMarketingGiftSendModel(object):
                 params['gift_prod_code'] = self.gift_prod_code.to_alipay_dict()
             else:
                 params['gift_prod_code'] = self.gift_prod_code
+        if self.insured_open_id:
+            if hasattr(self.insured_open_id, 'to_alipay_dict'):
+                params['insured_open_id'] = self.insured_open_id.to_alipay_dict()
+            else:
+                params['insured_open_id'] = self.insured_open_id
         if self.insured_user_id:
             if hasattr(self.insured_user_id, 'to_alipay_dict'):
                 params['insured_user_id'] = self.insured_user_id.to_alipay_dict()
             else:
                 params['insured_user_id'] = self.insured_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -166,8 +192,12 @@ class AlipayInsMarketingGiftSendModel(object):
             o.gain_now = d['gain_now']
         if 'gift_prod_code' in d:
             o.gift_prod_code = d['gift_prod_code']
+        if 'insured_open_id' in d:
+            o.insured_open_id = d['insured_open_id']
         if 'insured_user_id' in d:
             o.insured_user_id = d['insured_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'relation_to_apply' in d:

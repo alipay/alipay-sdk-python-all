@@ -13,11 +13,13 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
         self._item_id_list = None
         self._item_num = None
         self._log_time = None
+        self._open_id = None
         self._order_id = None
         self._page_stay = None
         self._pay_amount = None
         self._pos = None
         self._project_id = None
+        self._query = None
         self._spm = None
         self._trace_id = None
         self._user_id = None
@@ -61,6 +63,13 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
     def log_time(self, value):
         self._log_time = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def order_id(self):
         return self._order_id
 
@@ -95,6 +104,13 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def query(self):
+        return self._query
+
+    @query.setter
+    def query(self, value):
+        self._query = value
     @property
     def spm(self):
         return self._spm
@@ -166,6 +182,11 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
                 params['log_time'] = self.log_time.to_alipay_dict()
             else:
                 params['log_time'] = self.log_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -191,6 +212,11 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.query:
+            if hasattr(self.query, 'to_alipay_dict'):
+                params['query'] = self.query.to_alipay_dict()
+            else:
+                params['query'] = self.query
         if self.spm:
             if hasattr(self.spm, 'to_alipay_dict'):
                 params['spm'] = self.spm.to_alipay_dict()
@@ -238,6 +264,8 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
             o.item_num = d['item_num']
         if 'log_time' in d:
             o.log_time = d['log_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'page_stay' in d:
@@ -248,6 +276,8 @@ class AlipayOpenMiniCloudAosbehaviorSyncModel(object):
             o.pos = d['pos']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'query' in d:
+            o.query = d['query']
         if 'spm' in d:
             o.spm = d['spm']
         if 'trace_id' in d:

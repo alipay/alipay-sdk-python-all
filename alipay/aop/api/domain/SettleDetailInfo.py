@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class SettleDetailInfo(object):
 
     def __init__(self):
+        self._actual_amount = None
         self._amount = None
         self._settle_entity_id = None
         self._settle_entity_type = None
@@ -15,6 +16,13 @@ class SettleDetailInfo(object):
         self._trans_in = None
         self._trans_in_type = None
 
+    @property
+    def actual_amount(self):
+        return self._actual_amount
+
+    @actual_amount.setter
+    def actual_amount(self, value):
+        self._actual_amount = value
     @property
     def amount(self):
         return self._amount
@@ -61,6 +69,11 @@ class SettleDetailInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.actual_amount:
+            if hasattr(self.actual_amount, 'to_alipay_dict'):
+                params['actual_amount'] = self.actual_amount.to_alipay_dict()
+            else:
+                params['actual_amount'] = self.actual_amount
         if self.amount:
             if hasattr(self.amount, 'to_alipay_dict'):
                 params['amount'] = self.amount.to_alipay_dict()
@@ -98,6 +111,8 @@ class SettleDetailInfo(object):
         if not d:
             return None
         o = SettleDetailInfo()
+        if 'actual_amount' in d:
+            o.actual_amount = d['actual_amount']
         if 'amount' in d:
             o.amount = d['amount']
         if 'settle_entity_id' in d:

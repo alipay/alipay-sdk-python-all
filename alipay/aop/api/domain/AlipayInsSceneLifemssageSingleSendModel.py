@@ -13,6 +13,7 @@ class AlipayInsSceneLifemssageSingleSendModel(object):
         self._push_context = None
         self._template_context = None
         self._template_id = None
+        self._to_open_id = None
         self._to_user_id = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayInsSceneLifemssageSingleSendModel(object):
     def template_id(self, value):
         self._template_id = value
     @property
+    def to_open_id(self):
+        return self._to_open_id
+
+    @to_open_id.setter
+    def to_open_id(self, value):
+        self._to_open_id = value
+    @property
     def to_user_id(self):
         return self._to_user_id
 
@@ -86,6 +94,11 @@ class AlipayInsSceneLifemssageSingleSendModel(object):
                 params['template_id'] = self.template_id.to_alipay_dict()
             else:
                 params['template_id'] = self.template_id
+        if self.to_open_id:
+            if hasattr(self.to_open_id, 'to_alipay_dict'):
+                params['to_open_id'] = self.to_open_id.to_alipay_dict()
+            else:
+                params['to_open_id'] = self.to_open_id
         if self.to_user_id:
             if hasattr(self.to_user_id, 'to_alipay_dict'):
                 params['to_user_id'] = self.to_user_id.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayInsSceneLifemssageSingleSendModel(object):
             o.template_context = d['template_context']
         if 'template_id' in d:
             o.template_id = d['template_id']
+        if 'to_open_id' in d:
+            o.to_open_id = d['to_open_id']
         if 'to_user_id' in d:
             o.to_user_id = d['to_user_id']
         return o

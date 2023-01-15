@@ -14,10 +14,15 @@ class CropsStatisticsInfo(object):
         self._estimate_harvest_time_max = None
         self._estimate_harvest_time_min = None
         self._growth_general_area_sum = None
+        self._growth_general_plot_count = None
         self._growth_stronger_area_sum = None
+        self._growth_stronger_plot_count = None
         self._growth_strongest_area_sum = None
+        self._growth_strongest_plot_count = None
         self._growth_weaker_area_sum = None
+        self._growth_weaker_plot_count = None
         self._growth_weakest_area_sum = None
+        self._growth_weakest_plot_count = None
         self._harvest_progress_value = None
         self._harvested_area_sum = None
         self._high_temp_risk_plot_count = None
@@ -76,12 +81,26 @@ class CropsStatisticsInfo(object):
     def growth_general_area_sum(self, value):
         self._growth_general_area_sum = value
     @property
+    def growth_general_plot_count(self):
+        return self._growth_general_plot_count
+
+    @growth_general_plot_count.setter
+    def growth_general_plot_count(self, value):
+        self._growth_general_plot_count = value
+    @property
     def growth_stronger_area_sum(self):
         return self._growth_stronger_area_sum
 
     @growth_stronger_area_sum.setter
     def growth_stronger_area_sum(self, value):
         self._growth_stronger_area_sum = value
+    @property
+    def growth_stronger_plot_count(self):
+        return self._growth_stronger_plot_count
+
+    @growth_stronger_plot_count.setter
+    def growth_stronger_plot_count(self, value):
+        self._growth_stronger_plot_count = value
     @property
     def growth_strongest_area_sum(self):
         return self._growth_strongest_area_sum
@@ -90,6 +109,13 @@ class CropsStatisticsInfo(object):
     def growth_strongest_area_sum(self, value):
         self._growth_strongest_area_sum = value
     @property
+    def growth_strongest_plot_count(self):
+        return self._growth_strongest_plot_count
+
+    @growth_strongest_plot_count.setter
+    def growth_strongest_plot_count(self, value):
+        self._growth_strongest_plot_count = value
+    @property
     def growth_weaker_area_sum(self):
         return self._growth_weaker_area_sum
 
@@ -97,12 +123,26 @@ class CropsStatisticsInfo(object):
     def growth_weaker_area_sum(self, value):
         self._growth_weaker_area_sum = value
     @property
+    def growth_weaker_plot_count(self):
+        return self._growth_weaker_plot_count
+
+    @growth_weaker_plot_count.setter
+    def growth_weaker_plot_count(self, value):
+        self._growth_weaker_plot_count = value
+    @property
     def growth_weakest_area_sum(self):
         return self._growth_weakest_area_sum
 
     @growth_weakest_area_sum.setter
     def growth_weakest_area_sum(self, value):
         self._growth_weakest_area_sum = value
+    @property
+    def growth_weakest_plot_count(self):
+        return self._growth_weakest_plot_count
+
+    @growth_weakest_plot_count.setter
+    def growth_weakest_plot_count(self, value):
+        self._growth_weakest_plot_count = value
     @property
     def harvest_progress_value(self):
         return self._harvest_progress_value
@@ -238,26 +278,51 @@ class CropsStatisticsInfo(object):
                 params['growth_general_area_sum'] = self.growth_general_area_sum.to_alipay_dict()
             else:
                 params['growth_general_area_sum'] = self.growth_general_area_sum
+        if self.growth_general_plot_count:
+            if hasattr(self.growth_general_plot_count, 'to_alipay_dict'):
+                params['growth_general_plot_count'] = self.growth_general_plot_count.to_alipay_dict()
+            else:
+                params['growth_general_plot_count'] = self.growth_general_plot_count
         if self.growth_stronger_area_sum:
             if hasattr(self.growth_stronger_area_sum, 'to_alipay_dict'):
                 params['growth_stronger_area_sum'] = self.growth_stronger_area_sum.to_alipay_dict()
             else:
                 params['growth_stronger_area_sum'] = self.growth_stronger_area_sum
+        if self.growth_stronger_plot_count:
+            if hasattr(self.growth_stronger_plot_count, 'to_alipay_dict'):
+                params['growth_stronger_plot_count'] = self.growth_stronger_plot_count.to_alipay_dict()
+            else:
+                params['growth_stronger_plot_count'] = self.growth_stronger_plot_count
         if self.growth_strongest_area_sum:
             if hasattr(self.growth_strongest_area_sum, 'to_alipay_dict'):
                 params['growth_strongest_area_sum'] = self.growth_strongest_area_sum.to_alipay_dict()
             else:
                 params['growth_strongest_area_sum'] = self.growth_strongest_area_sum
+        if self.growth_strongest_plot_count:
+            if hasattr(self.growth_strongest_plot_count, 'to_alipay_dict'):
+                params['growth_strongest_plot_count'] = self.growth_strongest_plot_count.to_alipay_dict()
+            else:
+                params['growth_strongest_plot_count'] = self.growth_strongest_plot_count
         if self.growth_weaker_area_sum:
             if hasattr(self.growth_weaker_area_sum, 'to_alipay_dict'):
                 params['growth_weaker_area_sum'] = self.growth_weaker_area_sum.to_alipay_dict()
             else:
                 params['growth_weaker_area_sum'] = self.growth_weaker_area_sum
+        if self.growth_weaker_plot_count:
+            if hasattr(self.growth_weaker_plot_count, 'to_alipay_dict'):
+                params['growth_weaker_plot_count'] = self.growth_weaker_plot_count.to_alipay_dict()
+            else:
+                params['growth_weaker_plot_count'] = self.growth_weaker_plot_count
         if self.growth_weakest_area_sum:
             if hasattr(self.growth_weakest_area_sum, 'to_alipay_dict'):
                 params['growth_weakest_area_sum'] = self.growth_weakest_area_sum.to_alipay_dict()
             else:
                 params['growth_weakest_area_sum'] = self.growth_weakest_area_sum
+        if self.growth_weakest_plot_count:
+            if hasattr(self.growth_weakest_plot_count, 'to_alipay_dict'):
+                params['growth_weakest_plot_count'] = self.growth_weakest_plot_count.to_alipay_dict()
+            else:
+                params['growth_weakest_plot_count'] = self.growth_weakest_plot_count
         if self.harvest_progress_value:
             if hasattr(self.harvest_progress_value, 'to_alipay_dict'):
                 params['harvest_progress_value'] = self.harvest_progress_value.to_alipay_dict()
@@ -352,14 +417,24 @@ class CropsStatisticsInfo(object):
             o.estimate_harvest_time_min = d['estimate_harvest_time_min']
         if 'growth_general_area_sum' in d:
             o.growth_general_area_sum = d['growth_general_area_sum']
+        if 'growth_general_plot_count' in d:
+            o.growth_general_plot_count = d['growth_general_plot_count']
         if 'growth_stronger_area_sum' in d:
             o.growth_stronger_area_sum = d['growth_stronger_area_sum']
+        if 'growth_stronger_plot_count' in d:
+            o.growth_stronger_plot_count = d['growth_stronger_plot_count']
         if 'growth_strongest_area_sum' in d:
             o.growth_strongest_area_sum = d['growth_strongest_area_sum']
+        if 'growth_strongest_plot_count' in d:
+            o.growth_strongest_plot_count = d['growth_strongest_plot_count']
         if 'growth_weaker_area_sum' in d:
             o.growth_weaker_area_sum = d['growth_weaker_area_sum']
+        if 'growth_weaker_plot_count' in d:
+            o.growth_weaker_plot_count = d['growth_weaker_plot_count']
         if 'growth_weakest_area_sum' in d:
             o.growth_weakest_area_sum = d['growth_weakest_area_sum']
+        if 'growth_weakest_plot_count' in d:
+            o.growth_weakest_plot_count = d['growth_weakest_plot_count']
         if 'harvest_progress_value' in d:
             o.harvest_progress_value = d['harvest_progress_value']
         if 'harvested_area_sum' in d:

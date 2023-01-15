@@ -17,6 +17,7 @@ class ApeRetailItem(object):
         self._goods_id = None
         self._id = None
         self._ip_role_id = None
+        self._ip_role_open_id = None
         self._mini_app_id = None
         self._need_public_promo = None
         self._pic_url_list = None
@@ -88,6 +89,13 @@ class ApeRetailItem(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def ip_role_open_id(self):
+        return self._ip_role_open_id
+
+    @ip_role_open_id.setter
+    def ip_role_open_id(self, value):
+        self._ip_role_open_id = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -226,6 +234,11 @@ class ApeRetailItem(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.ip_role_open_id:
+            if hasattr(self.ip_role_open_id, 'to_alipay_dict'):
+                params['ip_role_open_id'] = self.ip_role_open_id.to_alipay_dict()
+            else:
+                params['ip_role_open_id'] = self.ip_role_open_id
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -319,6 +332,8 @@ class ApeRetailItem(object):
             o.id = d['id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'ip_role_open_id' in d:
+            o.ip_role_open_id = d['ip_role_open_id']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'need_public_promo' in d:

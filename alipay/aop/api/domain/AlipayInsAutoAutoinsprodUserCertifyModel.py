@@ -10,6 +10,7 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
     def __init__(self):
         self._agent_id_card_name = None
         self._agent_id_card_no = None
+        self._agent_open_id = None
         self._agent_user_id = None
         self._auth_cert_name = None
         self._auth_cert_no = None
@@ -28,6 +29,13 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
     @agent_id_card_no.setter
     def agent_id_card_no(self, value):
         self._agent_id_card_no = value
+    @property
+    def agent_open_id(self):
+        return self._agent_open_id
+
+    @agent_open_id.setter
+    def agent_open_id(self, value):
+        self._agent_open_id = value
     @property
     def agent_user_id(self):
         return self._agent_user_id
@@ -63,6 +71,11 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
                 params['agent_id_card_no'] = self.agent_id_card_no.to_alipay_dict()
             else:
                 params['agent_id_card_no'] = self.agent_id_card_no
+        if self.agent_open_id:
+            if hasattr(self.agent_open_id, 'to_alipay_dict'):
+                params['agent_open_id'] = self.agent_open_id.to_alipay_dict()
+            else:
+                params['agent_open_id'] = self.agent_open_id
         if self.agent_user_id:
             if hasattr(self.agent_user_id, 'to_alipay_dict'):
                 params['agent_user_id'] = self.agent_user_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayInsAutoAutoinsprodUserCertifyModel(object):
             o.agent_id_card_name = d['agent_id_card_name']
         if 'agent_id_card_no' in d:
             o.agent_id_card_no = d['agent_id_card_no']
+        if 'agent_open_id' in d:
+            o.agent_open_id = d['agent_open_id']
         if 'agent_user_id' in d:
             o.agent_user_id = d['agent_user_id']
         if 'auth_cert_name' in d:

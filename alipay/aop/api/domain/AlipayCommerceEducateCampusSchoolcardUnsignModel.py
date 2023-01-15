@@ -13,6 +13,7 @@ class AlipayCommerceEducateCampusSchoolcardUnsignModel(object):
         self._identity = None
         self._identity_type = None
         self._name = None
+        self._open_id = None
         self._school_id = None
         self._student_id = None
 
@@ -51,6 +52,13 @@ class AlipayCommerceEducateCampusSchoolcardUnsignModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def school_id(self):
         return self._school_id
@@ -94,6 +102,11 @@ class AlipayCommerceEducateCampusSchoolcardUnsignModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.school_id:
             if hasattr(self.school_id, 'to_alipay_dict'):
                 params['school_id'] = self.school_id.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayCommerceEducateCampusSchoolcardUnsignModel(object):
             o.identity_type = d['identity_type']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'school_id' in d:
             o.school_id = d['school_id']
         if 'student_id' in d:

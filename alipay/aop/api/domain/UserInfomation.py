@@ -14,6 +14,7 @@ class UserInfomation(object):
         self._ext_info = None
         self._mobile = None
         self._name = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -58,6 +59,13 @@ class UserInfomation(object):
     def name(self, value):
         self._name = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -98,6 +106,11 @@ class UserInfomation(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -120,6 +133,8 @@ class UserInfomation(object):
             o.mobile = d['mobile']
         if 'name' in d:
             o.name = d['name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

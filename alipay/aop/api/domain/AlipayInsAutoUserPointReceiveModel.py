@@ -10,6 +10,7 @@ class AlipayInsAutoUserPointReceiveModel(object):
     def __init__(self):
         self._auto_campaign_type = None
         self._extend_info = None
+        self._open_id = None
         self._out_biz_no = None
         self._scene_type = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipayInsAutoUserPointReceiveModel(object):
     @extend_info.setter
     def extend_info(self, value):
         self._extend_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -63,6 +71,11 @@ class AlipayInsAutoUserPointReceiveModel(object):
                 params['extend_info'] = self.extend_info.to_alipay_dict()
             else:
                 params['extend_info'] = self.extend_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayInsAutoUserPointReceiveModel(object):
             o.auto_campaign_type = d['auto_campaign_type']
         if 'extend_info' in d:
             o.extend_info = d['extend_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'scene_type' in d:

@@ -12,6 +12,7 @@ class AlipayAssetCardAccountCloseModel(object):
         self._biz_dt = None
         self._biz_no = None
         self._extend_info = None
+        self._open_id = None
         self._product_code = None
         self._template_id = None
         self._user_id = None
@@ -44,6 +45,13 @@ class AlipayAssetCardAccountCloseModel(object):
     @extend_info.setter
     def extend_info(self, value):
         self._extend_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def product_code(self):
         return self._product_code
@@ -89,6 +97,11 @@ class AlipayAssetCardAccountCloseModel(object):
                 params['extend_info'] = self.extend_info.to_alipay_dict()
             else:
                 params['extend_info'] = self.extend_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayAssetCardAccountCloseModel(object):
             o.biz_no = d['biz_no']
         if 'extend_info' in d:
             o.extend_info = d['extend_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'template_id' in d:

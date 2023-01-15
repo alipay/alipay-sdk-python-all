@@ -9,6 +9,7 @@ class AlipayMarketingVoucherConfirmModel(object):
 
     def __init__(self):
         self._need_redirect = None
+        self._open_id = None
         self._out_biz_no = None
         self._redirect_uri = None
         self._template_id = None
@@ -22,6 +23,13 @@ class AlipayMarketingVoucherConfirmModel(object):
     @need_redirect.setter
     def need_redirect(self, value):
         self._need_redirect = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -66,6 +74,11 @@ class AlipayMarketingVoucherConfirmModel(object):
                 params['need_redirect'] = self.need_redirect.to_alipay_dict()
             else:
                 params['need_redirect'] = self.need_redirect
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayMarketingVoucherConfirmModel(object):
         o = AlipayMarketingVoucherConfirmModel()
         if 'need_redirect' in d:
             o.need_redirect = d['need_redirect']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'redirect_uri' in d:

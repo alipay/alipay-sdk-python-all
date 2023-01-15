@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class InstitutionBasicInfo(object):
 
     def __init__(self):
+        self._consult_mode = None
         self._effective = None
         self._effective_end_date = None
         self._effective_start_date = None
@@ -15,6 +16,13 @@ class InstitutionBasicInfo(object):
         self._institution_id = None
         self._institution_name = None
 
+    @property
+    def consult_mode(self):
+        return self._consult_mode
+
+    @consult_mode.setter
+    def consult_mode(self, value):
+        self._consult_mode = value
     @property
     def effective(self):
         return self._effective
@@ -61,6 +69,11 @@ class InstitutionBasicInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.consult_mode:
+            if hasattr(self.consult_mode, 'to_alipay_dict'):
+                params['consult_mode'] = self.consult_mode.to_alipay_dict()
+            else:
+                params['consult_mode'] = self.consult_mode
         if self.effective:
             if hasattr(self.effective, 'to_alipay_dict'):
                 params['effective'] = self.effective.to_alipay_dict()
@@ -98,6 +111,8 @@ class InstitutionBasicInfo(object):
         if not d:
             return None
         o = InstitutionBasicInfo()
+        if 'consult_mode' in d:
+            o.consult_mode = d['consult_mode']
         if 'effective' in d:
             o.effective = d['effective']
         if 'effective_end_date' in d:

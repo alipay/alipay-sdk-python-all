@@ -11,6 +11,7 @@ class AlipaySecurityDataAmlassetBatchqueryModel(object):
         self._asset_type = None
         self._client = None
         self._lid = None
+        self._open_ids = None
         self._uids = None
 
     @property
@@ -34,6 +35,16 @@ class AlipaySecurityDataAmlassetBatchqueryModel(object):
     @lid.setter
     def lid(self, value):
         self._lid = value
+    @property
+    def open_ids(self):
+        return self._open_ids
+
+    @open_ids.setter
+    def open_ids(self, value):
+        if isinstance(value, list):
+            self._open_ids = list()
+            for i in value:
+                self._open_ids.append(i)
     @property
     def uids(self):
         return self._uids
@@ -63,6 +74,16 @@ class AlipaySecurityDataAmlassetBatchqueryModel(object):
                 params['lid'] = self.lid.to_alipay_dict()
             else:
                 params['lid'] = self.lid
+        if self.open_ids:
+            if isinstance(self.open_ids, list):
+                for i in range(0, len(self.open_ids)):
+                    element = self.open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.open_ids, 'to_alipay_dict'):
+                params['open_ids'] = self.open_ids.to_alipay_dict()
+            else:
+                params['open_ids'] = self.open_ids
         if self.uids:
             if isinstance(self.uids, list):
                 for i in range(0, len(self.uids)):
@@ -86,6 +107,8 @@ class AlipaySecurityDataAmlassetBatchqueryModel(object):
             o.client = d['client']
         if 'lid' in d:
             o.lid = d['lid']
+        if 'open_ids' in d:
+            o.open_ids = d['open_ids']
         if 'uids' in d:
             o.uids = d['uids']
         return o

@@ -11,6 +11,7 @@ class MybankCreditLoanapplyBkruralindustryTrackAddModel(object):
         self._business_no = None
         self._channel = None
         self._identity_type = None
+        self._open_id = None
         self._request_id = None
         self._scene = None
         self._track_data = None
@@ -37,6 +38,13 @@ class MybankCreditLoanapplyBkruralindustryTrackAddModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def request_id(self):
         return self._request_id
@@ -84,6 +92,11 @@ class MybankCreditLoanapplyBkruralindustryTrackAddModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -117,6 +130,8 @@ class MybankCreditLoanapplyBkruralindustryTrackAddModel(object):
             o.channel = d['channel']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'scene' in d:

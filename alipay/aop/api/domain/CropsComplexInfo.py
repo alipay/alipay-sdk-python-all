@@ -21,6 +21,7 @@ class CropsComplexInfo(object):
         self._harvest_forecast_info = None
         self._harvest_progress_info = None
         self._planting_info = None
+        self._plot_area = None
         self._region_code = None
         self._soil_moisture_info = None
         self._update_date = None
@@ -90,6 +91,13 @@ class CropsComplexInfo(object):
                     self._planting_info.append(i)
                 else:
                     self._planting_info.append(CropsPlantingInfo.from_alipay_dict(i))
+    @property
+    def plot_area(self):
+        return self._plot_area
+
+    @plot_area.setter
+    def plot_area(self, value):
+        self._plot_area = value
     @property
     def region_code(self):
         return self._region_code
@@ -204,6 +212,11 @@ class CropsComplexInfo(object):
                 params['planting_info'] = self.planting_info.to_alipay_dict()
             else:
                 params['planting_info'] = self.planting_info
+        if self.plot_area:
+            if hasattr(self.plot_area, 'to_alipay_dict'):
+                params['plot_area'] = self.plot_area.to_alipay_dict()
+            else:
+                params['plot_area'] = self.plot_area
         if self.region_code:
             if hasattr(self.region_code, 'to_alipay_dict'):
                 params['region_code'] = self.region_code.to_alipay_dict()
@@ -261,6 +274,8 @@ class CropsComplexInfo(object):
             o.harvest_progress_info = d['harvest_progress_info']
         if 'planting_info' in d:
             o.planting_info = d['planting_info']
+        if 'plot_area' in d:
+            o.plot_area = d['plot_area']
         if 'region_code' in d:
             o.region_code = d['region_code']
         if 'soil_moisture_info' in d:

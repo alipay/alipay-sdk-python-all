@@ -15,6 +15,8 @@ class AlipayAssetCardTransferModel(object):
         self._biz_no = None
         self._extend_info = None
         self._fund_scence = None
+        self._open_id = None
+        self._receive_open_id = None
         self._receive_user_id = None
         self._template_id = None
         self._user_id = None
@@ -68,6 +70,20 @@ class AlipayAssetCardTransferModel(object):
     @fund_scence.setter
     def fund_scence(self, value):
         self._fund_scence = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def receive_open_id(self):
+        return self._receive_open_id
+
+    @receive_open_id.setter
+    def receive_open_id(self, value):
+        self._receive_open_id = value
     @property
     def receive_user_id(self):
         return self._receive_user_id
@@ -128,6 +144,16 @@ class AlipayAssetCardTransferModel(object):
                 params['fund_scence'] = self.fund_scence.to_alipay_dict()
             else:
                 params['fund_scence'] = self.fund_scence
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.receive_open_id:
+            if hasattr(self.receive_open_id, 'to_alipay_dict'):
+                params['receive_open_id'] = self.receive_open_id.to_alipay_dict()
+            else:
+                params['receive_open_id'] = self.receive_open_id
         if self.receive_user_id:
             if hasattr(self.receive_user_id, 'to_alipay_dict'):
                 params['receive_user_id'] = self.receive_user_id.to_alipay_dict()
@@ -164,6 +190,10 @@ class AlipayAssetCardTransferModel(object):
             o.extend_info = d['extend_info']
         if 'fund_scence' in d:
             o.fund_scence = d['fund_scence']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'receive_open_id' in d:
+            o.receive_open_id = d['receive_open_id']
         if 'receive_user_id' in d:
             o.receive_user_id = d['receive_user_id']
         if 'template_id' in d:

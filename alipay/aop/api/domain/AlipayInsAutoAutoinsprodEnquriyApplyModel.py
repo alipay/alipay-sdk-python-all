@@ -17,6 +17,7 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
 
     def __init__(self):
         self._agent = None
+        self._agent_open_id = None
         self._agent_organization = None
         self._agent_tech_organization = None
         self._agent_user_id = None
@@ -39,6 +40,13 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
             self._agent = value
         else:
             self._agent = InsPerson.from_alipay_dict(value)
+    @property
+    def agent_open_id(self):
+        return self._agent_open_id
+
+    @agent_open_id.setter
+    def agent_open_id(self, value):
+        self._agent_open_id = value
     @property
     def agent_organization(self):
         return self._agent_organization
@@ -146,6 +154,11 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
                 params['agent'] = self.agent.to_alipay_dict()
             else:
                 params['agent'] = self.agent
+        if self.agent_open_id:
+            if hasattr(self.agent_open_id, 'to_alipay_dict'):
+                params['agent_open_id'] = self.agent_open_id.to_alipay_dict()
+            else:
+                params['agent_open_id'] = self.agent_open_id
         if self.agent_organization:
             if hasattr(self.agent_organization, 'to_alipay_dict'):
                 params['agent_organization'] = self.agent_organization.to_alipay_dict()
@@ -210,6 +223,8 @@ class AlipayInsAutoAutoinsprodEnquriyApplyModel(object):
         o = AlipayInsAutoAutoinsprodEnquriyApplyModel()
         if 'agent' in d:
             o.agent = d['agent']
+        if 'agent_open_id' in d:
+            o.agent_open_id = d['agent_open_id']
         if 'agent_organization' in d:
             o.agent_organization = d['agent_organization']
         if 'agent_tech_organization' in d:

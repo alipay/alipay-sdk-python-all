@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayInsAutoUserOilQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._scene_type = None
         self._source = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_type(self):
         return self._scene_type
@@ -37,6 +45,11 @@ class AlipayInsAutoUserOilQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayInsAutoUserOilQueryModel(object):
         if not d:
             return None
         o = AlipayInsAutoUserOilQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'source' in d:

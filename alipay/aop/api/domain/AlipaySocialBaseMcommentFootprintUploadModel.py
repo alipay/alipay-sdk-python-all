@@ -14,6 +14,7 @@ class AlipaySocialBaseMcommentFootprintUploadModel(object):
         self._footprint_model_data = None
         self._footprint_time = None
         self._item_id = None
+        self._open_id = None
         self._source = None
         self._user_id = None
 
@@ -59,6 +60,13 @@ class AlipaySocialBaseMcommentFootprintUploadModel(object):
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def source(self):
         return self._source
@@ -107,6 +115,11 @@ class AlipaySocialBaseMcommentFootprintUploadModel(object):
                 params['item_id'] = self.item_id.to_alipay_dict()
             else:
                 params['item_id'] = self.item_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -136,6 +149,8 @@ class AlipaySocialBaseMcommentFootprintUploadModel(object):
             o.footprint_time = d['footprint_time']
         if 'item_id' in d:
             o.item_id = d['item_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'source' in d:
             o.source = d['source']
         if 'user_id' in d:

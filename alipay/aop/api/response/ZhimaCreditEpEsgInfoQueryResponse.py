@@ -50,6 +50,7 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
         self._ep_holder_eqty_frez_amt_12_m = None
         self._ep_holder_eqty_frez_num_12_m = None
         self._ep_holder_eqty_frez_ratio_12_m = None
+        self._ep_holder_eqty_frez_ratio_12_m_new = None
         self._ep_holder_eqty_pledge_amt_12_m = None
         self._ep_holder_eqty_pledge_num_12_m = None
         self._ep_holder_eqty_pledge_ratio_12_m = None
@@ -412,6 +413,13 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
     @ep_holder_eqty_frez_ratio_12_m.setter
     def ep_holder_eqty_frez_ratio_12_m(self, value):
         self._ep_holder_eqty_frez_ratio_12_m = value
+    @property
+    def ep_holder_eqty_frez_ratio_12_m_new(self):
+        return self._ep_holder_eqty_frez_ratio_12_m_new
+
+    @ep_holder_eqty_frez_ratio_12_m_new.setter
+    def ep_holder_eqty_frez_ratio_12_m_new(self, value):
+        self._ep_holder_eqty_frez_ratio_12_m_new = value
     @property
     def ep_holder_eqty_pledge_amt_12_m(self):
         return self._ep_holder_eqty_pledge_amt_12_m
@@ -994,6 +1002,8 @@ class ZhimaCreditEpEsgInfoQueryResponse(AlipayResponse):
             self.ep_holder_eqty_frez_num_12_m = response['ep_holder_eqty_frez_num_12_m']
         if 'ep_holder_eqty_frez_ratio_12_m' in response:
             self.ep_holder_eqty_frez_ratio_12_m = response['ep_holder_eqty_frez_ratio_12_m']
+        if 'ep_holder_eqty_frez_ratio_12_m_new' in response:
+            self.ep_holder_eqty_frez_ratio_12_m_new = response['ep_holder_eqty_frez_ratio_12_m_new']
         if 'ep_holder_eqty_pledge_amt_12_m' in response:
             self.ep_holder_eqty_pledge_amt_12_m = response['ep_holder_eqty_pledge_amt_12_m']
         if 'ep_holder_eqty_pledge_num_12_m' in response:

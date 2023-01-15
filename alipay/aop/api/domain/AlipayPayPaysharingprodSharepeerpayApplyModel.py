@@ -11,6 +11,7 @@ class AlipayPayPaysharingprodSharepeerpayApplyModel(object):
     def __init__(self):
         self._alipay_applyer_id = None
         self._alipay_trade_no = None
+        self._applyer_open_id = None
         self._external_user_token = None
         self._security_info = None
 
@@ -28,6 +29,13 @@ class AlipayPayPaysharingprodSharepeerpayApplyModel(object):
     @alipay_trade_no.setter
     def alipay_trade_no(self, value):
         self._alipay_trade_no = value
+    @property
+    def applyer_open_id(self):
+        return self._applyer_open_id
+
+    @applyer_open_id.setter
+    def applyer_open_id(self, value):
+        self._applyer_open_id = value
     @property
     def external_user_token(self):
         return self._external_user_token
@@ -59,6 +67,11 @@ class AlipayPayPaysharingprodSharepeerpayApplyModel(object):
                 params['alipay_trade_no'] = self.alipay_trade_no.to_alipay_dict()
             else:
                 params['alipay_trade_no'] = self.alipay_trade_no
+        if self.applyer_open_id:
+            if hasattr(self.applyer_open_id, 'to_alipay_dict'):
+                params['applyer_open_id'] = self.applyer_open_id.to_alipay_dict()
+            else:
+                params['applyer_open_id'] = self.applyer_open_id
         if self.external_user_token:
             if hasattr(self.external_user_token, 'to_alipay_dict'):
                 params['external_user_token'] = self.external_user_token.to_alipay_dict()
@@ -80,6 +93,8 @@ class AlipayPayPaysharingprodSharepeerpayApplyModel(object):
             o.alipay_applyer_id = d['alipay_applyer_id']
         if 'alipay_trade_no' in d:
             o.alipay_trade_no = d['alipay_trade_no']
+        if 'applyer_open_id' in d:
+            o.applyer_open_id = d['applyer_open_id']
         if 'external_user_token' in d:
             o.external_user_token = d['external_user_token']
         if 'security_info' in d:

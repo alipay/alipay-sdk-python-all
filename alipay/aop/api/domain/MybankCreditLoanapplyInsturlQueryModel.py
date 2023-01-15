@@ -16,6 +16,7 @@ class MybankCreditLoanapplyInsturlQueryModel(object):
         self._ext_user_id = None
         self._mobile = None
         self._op_pd_code = None
+        self._open_id = None
         self._org_channel_code = None
         self._url_type = None
         self._user_id = None
@@ -77,6 +78,13 @@ class MybankCreditLoanapplyInsturlQueryModel(object):
     @op_pd_code.setter
     def op_pd_code(self, value):
         self._op_pd_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def org_channel_code(self):
         return self._org_channel_code
@@ -149,6 +157,11 @@ class MybankCreditLoanapplyInsturlQueryModel(object):
                 params['op_pd_code'] = self.op_pd_code.to_alipay_dict()
             else:
                 params['op_pd_code'] = self.op_pd_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.org_channel_code:
             if hasattr(self.org_channel_code, 'to_alipay_dict'):
                 params['org_channel_code'] = self.org_channel_code.to_alipay_dict()
@@ -192,6 +205,8 @@ class MybankCreditLoanapplyInsturlQueryModel(object):
             o.mobile = d['mobile']
         if 'op_pd_code' in d:
             o.op_pd_code = d['op_pd_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'org_channel_code' in d:
             o.org_channel_code = d['org_channel_code']
         if 'url_type' in d:

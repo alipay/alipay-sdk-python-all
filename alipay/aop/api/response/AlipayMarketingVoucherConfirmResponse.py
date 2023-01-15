@@ -10,6 +10,7 @@ class AlipayMarketingVoucherConfirmResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMarketingVoucherConfirmResponse, self).__init__()
         self._need_redirect = None
+        self._open_id = None
         self._out_biz_no = None
         self._redirect_uri = None
         self._send_code = None
@@ -24,6 +25,13 @@ class AlipayMarketingVoucherConfirmResponse(AlipayResponse):
     @need_redirect.setter
     def need_redirect(self, value):
         self._need_redirect = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -71,6 +79,8 @@ class AlipayMarketingVoucherConfirmResponse(AlipayResponse):
         response = super(AlipayMarketingVoucherConfirmResponse, self).parse_response_content(response_content)
         if 'need_redirect' in response:
             self.need_redirect = response['need_redirect']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'redirect_uri' in response:

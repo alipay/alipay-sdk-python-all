@@ -9,6 +9,7 @@ class AlipayUserStepcounterQueryModel(object):
 
     def __init__(self):
         self._count_date = None
+        self._open_id = None
         self._partner_id = None
         self._time_zone = None
         self._user_id = None
@@ -20,6 +21,13 @@ class AlipayUserStepcounterQueryModel(object):
     @count_date.setter
     def count_date(self, value):
         self._count_date = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -50,6 +58,11 @@ class AlipayUserStepcounterQueryModel(object):
                 params['count_date'] = self.count_date.to_alipay_dict()
             else:
                 params['count_date'] = self.count_date
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayUserStepcounterQueryModel(object):
         o = AlipayUserStepcounterQueryModel()
         if 'count_date' in d:
             o.count_date = d['count_date']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'time_zone' in d:

@@ -12,6 +12,7 @@ class AlipayOverseasTaxUserinfoQueryResponse(AlipayResponse):
         self._eligible = None
         self._eligible_msg = None
         self._logon_id = None
+        self._open_id = None
         self._user_id = None
         self._user_name = None
 
@@ -37,6 +38,13 @@ class AlipayOverseasTaxUserinfoQueryResponse(AlipayResponse):
     def logon_id(self, value):
         self._logon_id = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -59,6 +67,8 @@ class AlipayOverseasTaxUserinfoQueryResponse(AlipayResponse):
             self.eligible_msg = response['eligible_msg']
         if 'logon_id' in response:
             self.logon_id = response['logon_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'user_id' in response:
             self.user_id = response['user_id']
         if 'user_name' in response:

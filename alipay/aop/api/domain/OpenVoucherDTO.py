@@ -16,6 +16,7 @@ class OpenVoucherDTO(object):
         self._gmt_create = None
         self._gmt_expired = None
         self._name = None
+        self._product_code = None
         self._status = None
         self._template_id = None
         self._total_amount = None
@@ -74,6 +75,13 @@ class OpenVoucherDTO(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def status(self):
         return self._status
@@ -148,6 +156,11 @@ class OpenVoucherDTO(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -194,6 +207,8 @@ class OpenVoucherDTO(object):
             o.gmt_expired = d['gmt_expired']
         if 'name' in d:
             o.name = d['name']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'status' in d:
             o.status = d['status']
         if 'template_id' in d:

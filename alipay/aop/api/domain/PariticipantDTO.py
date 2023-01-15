@@ -10,6 +10,7 @@ class PariticipantDTO(object):
     def __init__(self):
         self._identity = None
         self._identity_type = None
+        self._name = None
 
     @property
     def identity(self):
@@ -25,6 +26,13 @@ class PariticipantDTO(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class PariticipantDTO(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class PariticipantDTO(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'name' in d:
+            o.name = d['name']
         return o
 
 

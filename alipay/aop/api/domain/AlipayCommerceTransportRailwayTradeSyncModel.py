@@ -11,6 +11,7 @@ class AlipayCommerceTransportRailwayTradeSyncModel(object):
         self._biz_date = None
         self._data_version = None
         self._ext_param = None
+        self._open_id = None
         self._order_amount = None
         self._order_total_amount = None
         self._order_total_num = None
@@ -41,6 +42,13 @@ class AlipayCommerceTransportRailwayTradeSyncModel(object):
     @ext_param.setter
     def ext_param(self, value):
         self._ext_param = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -116,6 +124,11 @@ class AlipayCommerceTransportRailwayTradeSyncModel(object):
                 params['ext_param'] = self.ext_param.to_alipay_dict()
             else:
                 params['ext_param'] = self.ext_param
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -169,6 +182,8 @@ class AlipayCommerceTransportRailwayTradeSyncModel(object):
             o.data_version = d['data_version']
         if 'ext_param' in d:
             o.ext_param = d['ext_param']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'order_total_amount' in d:

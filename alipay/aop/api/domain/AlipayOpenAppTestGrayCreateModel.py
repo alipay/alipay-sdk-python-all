@@ -15,6 +15,7 @@ class AlipayOpenAppTestGrayCreateModel(object):
         self._body_1 = None
         self._c = None
         self._complex_param = None
+        self._oid = None
         self._open_id = None
         self._user_id = None
 
@@ -64,6 +65,13 @@ class AlipayOpenAppTestGrayCreateModel(object):
         else:
             self._complex_param = OpenidComplex.from_alipay_dict(value)
     @property
+    def oid(self):
+        return self._oid
+
+    @oid.setter
+    def oid(self, value):
+        self._oid = value
+    @property
     def open_id(self):
         return self._open_id
 
@@ -111,6 +119,11 @@ class AlipayOpenAppTestGrayCreateModel(object):
                 params['complex_param'] = self.complex_param.to_alipay_dict()
             else:
                 params['complex_param'] = self.complex_param
+        if self.oid:
+            if hasattr(self.oid, 'to_alipay_dict'):
+                params['oid'] = self.oid.to_alipay_dict()
+            else:
+                params['oid'] = self.oid
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -140,6 +153,8 @@ class AlipayOpenAppTestGrayCreateModel(object):
             o.c = d['c']
         if 'complex_param' in d:
             o.complex_param = d['complex_param']
+        if 'oid' in d:
+            o.oid = d['oid']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

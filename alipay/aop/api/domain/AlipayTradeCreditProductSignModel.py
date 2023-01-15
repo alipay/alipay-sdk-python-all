@@ -10,6 +10,7 @@ class AlipayTradeCreditProductSignModel(object):
 
     def __init__(self):
         self._ext_info = None
+        self._open_id = None
         self._scene_code = None
         self._user_id = None
         self._valid_strategy = None
@@ -21,6 +22,13 @@ class AlipayTradeCreditProductSignModel(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -54,6 +62,11 @@ class AlipayTradeCreditProductSignModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayTradeCreditProductSignModel(object):
         o = AlipayTradeCreditProductSignModel()
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'user_id' in d:

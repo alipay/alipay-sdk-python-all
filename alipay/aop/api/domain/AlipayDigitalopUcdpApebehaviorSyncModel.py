@@ -13,6 +13,7 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
         self._item_id_list = None
         self._item_num = None
         self._log_time = None
+        self._open_id = None
         self._order_id = None
         self._page_stay = None
         self._pay_amount = None
@@ -60,6 +61,13 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     @log_time.setter
     def log_time(self, value):
         self._log_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -166,6 +174,11 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
                 params['log_time'] = self.log_time.to_alipay_dict()
             else:
                 params['log_time'] = self.log_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -238,6 +251,8 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
             o.item_num = d['item_num']
         if 'log_time' in d:
             o.log_time = d['log_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'page_stay' in d:

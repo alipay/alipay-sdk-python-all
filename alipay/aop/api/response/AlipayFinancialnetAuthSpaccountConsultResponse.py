@@ -15,6 +15,7 @@ class AlipayFinancialnetAuthSpaccountConsultResponse(AlipayResponse):
         self._is_success = None
         self._opened_account = None
         self._opened_account_user_id = None
+        self._opened_account_user_open_id = None
 
     @property
     def display_opened_account_logon_id(self):
@@ -58,6 +59,13 @@ class AlipayFinancialnetAuthSpaccountConsultResponse(AlipayResponse):
     @opened_account_user_id.setter
     def opened_account_user_id(self, value):
         self._opened_account_user_id = value
+    @property
+    def opened_account_user_open_id(self):
+        return self._opened_account_user_open_id
+
+    @opened_account_user_open_id.setter
+    def opened_account_user_open_id(self, value):
+        self._opened_account_user_open_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFinancialnetAuthSpaccountConsultResponse, self).parse_response_content(response_content)
@@ -73,3 +81,5 @@ class AlipayFinancialnetAuthSpaccountConsultResponse(AlipayResponse):
             self.opened_account = response['opened_account']
         if 'opened_account_user_id' in response:
             self.opened_account_user_id = response['opened_account_user_id']
+        if 'opened_account_user_open_id' in response:
+            self.opened_account_user_open_id = response['opened_account_user_open_id']

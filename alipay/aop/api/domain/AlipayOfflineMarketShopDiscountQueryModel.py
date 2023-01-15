@@ -9,6 +9,7 @@ class AlipayOfflineMarketShopDiscountQueryModel(object):
 
     def __init__(self):
         self._camp_biz_type_list = None
+        self._open_id = None
         self._query_type = None
         self._shop_id = None
         self._user_id = None
@@ -23,6 +24,13 @@ class AlipayOfflineMarketShopDiscountQueryModel(object):
             self._camp_biz_type_list = list()
             for i in value:
                 self._camp_biz_type_list.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def query_type(self):
         return self._query_type
@@ -58,6 +66,11 @@ class AlipayOfflineMarketShopDiscountQueryModel(object):
                 params['camp_biz_type_list'] = self.camp_biz_type_list.to_alipay_dict()
             else:
                 params['camp_biz_type_list'] = self.camp_biz_type_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query_type:
             if hasattr(self.query_type, 'to_alipay_dict'):
                 params['query_type'] = self.query_type.to_alipay_dict()
@@ -82,6 +95,8 @@ class AlipayOfflineMarketShopDiscountQueryModel(object):
         o = AlipayOfflineMarketShopDiscountQueryModel()
         if 'camp_biz_type_list' in d:
             o.camp_biz_type_list = d['camp_biz_type_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query_type' in d:
             o.query_type = d['query_type']
         if 'shop_id' in d:

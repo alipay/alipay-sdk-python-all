@@ -27,6 +27,7 @@ class AlipayOrderDataOpenapiResultInfo(object):
         self._merchant_order_link_page = None
         self._merchant_order_no = None
         self._merchant_user_id = None
+        self._open_id = None
         self._order_detail_link_page = None
         self._order_id = None
         self._order_status = None
@@ -146,6 +147,13 @@ class AlipayOrderDataOpenapiResultInfo(object):
     @merchant_user_id.setter
     def merchant_user_id(self, value):
         self._merchant_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_detail_link_page(self):
         return self._order_detail_link_page
@@ -326,6 +334,11 @@ class AlipayOrderDataOpenapiResultInfo(object):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
             else:
                 params['merchant_user_id'] = self.merchant_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_detail_link_page:
             if hasattr(self.order_detail_link_page, 'to_alipay_dict'):
                 params['order_detail_link_page'] = self.order_detail_link_page.to_alipay_dict()
@@ -419,6 +432,8 @@ class AlipayOrderDataOpenapiResultInfo(object):
             o.merchant_order_no = d['merchant_order_no']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_detail_link_page' in d:
             o.order_detail_link_page = d['order_detail_link_page']
         if 'order_id' in d:

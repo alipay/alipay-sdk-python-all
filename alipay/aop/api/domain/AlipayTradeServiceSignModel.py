@@ -9,6 +9,7 @@ class AlipayTradeServiceSignModel(object):
 
     def __init__(self):
         self._access_channel = None
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._biz_type = None
         self._external_logon_id = None
@@ -22,6 +23,13 @@ class AlipayTradeServiceSignModel(object):
     @access_channel.setter
     def access_channel(self, value):
         self._access_channel = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -66,6 +74,11 @@ class AlipayTradeServiceSignModel(object):
                 params['access_channel'] = self.access_channel.to_alipay_dict()
             else:
                 params['access_channel'] = self.access_channel
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayTradeServiceSignModel(object):
         o = AlipayTradeServiceSignModel()
         if 'access_channel' in d:
             o.access_channel = d['access_channel']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'biz_type' in d:

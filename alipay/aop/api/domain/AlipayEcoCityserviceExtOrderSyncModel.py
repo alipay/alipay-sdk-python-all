@@ -8,12 +8,14 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEcoCityserviceExtOrderSyncModel(object):
 
     def __init__(self):
+        self._app_code = None
         self._appid = None
         self._body = None
         self._buyer_id = None
         self._category_code = None
         self._ext = None
         self._gmt_service = None
+        self._open_id = None
         self._order_type = None
         self._out_request_no = None
         self._out_trade_no = None
@@ -24,6 +26,13 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
         self._total_amount = None
         self._trade_no = None
 
+    @property
+    def app_code(self):
+        return self._app_code
+
+    @app_code.setter
+    def app_code(self, value):
+        self._app_code = value
     @property
     def appid(self):
         return self._appid
@@ -66,6 +75,13 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
     @gmt_service.setter
     def gmt_service(self, value):
         self._gmt_service = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_type(self):
         return self._order_type
@@ -133,6 +149,11 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_code:
+            if hasattr(self.app_code, 'to_alipay_dict'):
+                params['app_code'] = self.app_code.to_alipay_dict()
+            else:
+                params['app_code'] = self.app_code
         if self.appid:
             if hasattr(self.appid, 'to_alipay_dict'):
                 params['appid'] = self.appid.to_alipay_dict()
@@ -163,6 +184,11 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
                 params['gmt_service'] = self.gmt_service.to_alipay_dict()
             else:
                 params['gmt_service'] = self.gmt_service
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_type:
             if hasattr(self.order_type, 'to_alipay_dict'):
                 params['order_type'] = self.order_type.to_alipay_dict()
@@ -215,6 +241,8 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
         if not d:
             return None
         o = AlipayEcoCityserviceExtOrderSyncModel()
+        if 'app_code' in d:
+            o.app_code = d['app_code']
         if 'appid' in d:
             o.appid = d['appid']
         if 'body' in d:
@@ -227,6 +255,8 @@ class AlipayEcoCityserviceExtOrderSyncModel(object):
             o.ext = d['ext']
         if 'gmt_service' in d:
             o.gmt_service = d['gmt_service']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_type' in d:
             o.order_type = d['order_type']
         if 'out_request_no' in d:

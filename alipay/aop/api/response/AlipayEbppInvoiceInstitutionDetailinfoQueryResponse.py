@@ -12,6 +12,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppInvoiceInstitutionDetailinfoQueryResponse, self).__init__()
+        self._consult_mode = None
         self._effective = None
         self._effective_end_date = None
         self._effective_start_date = None
@@ -24,6 +25,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         self._standard_info_detail_list = None
         self._standard_info_list = None
 
+    @property
+    def consult_mode(self):
+        return self._consult_mode
+
+    @consult_mode.setter
+    def consult_mode(self, value):
+        self._consult_mode = value
     @property
     def effective(self):
         return self._effective
@@ -119,6 +127,8 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppInvoiceInstitutionDetailinfoQueryResponse, self).parse_response_content(response_content)
+        if 'consult_mode' in response:
+            self.consult_mode = response['consult_mode']
         if 'effective' in response:
             self.effective = response['effective']
         if 'effective_end_date' in response:

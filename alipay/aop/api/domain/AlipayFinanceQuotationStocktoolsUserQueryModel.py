@@ -9,6 +9,7 @@ class AlipayFinanceQuotationStocktoolsUserQueryModel(object):
 
     def __init__(self):
         self._inst_org_id = None
+        self._open_id = None
         self._tool_type = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayFinanceQuotationStocktoolsUserQueryModel(object):
     @inst_org_id.setter
     def inst_org_id(self, value):
         self._inst_org_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def tool_type(self):
         return self._tool_type
@@ -42,6 +50,11 @@ class AlipayFinanceQuotationStocktoolsUserQueryModel(object):
                 params['inst_org_id'] = self.inst_org_id.to_alipay_dict()
             else:
                 params['inst_org_id'] = self.inst_org_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.tool_type:
             if hasattr(self.tool_type, 'to_alipay_dict'):
                 params['tool_type'] = self.tool_type.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayFinanceQuotationStocktoolsUserQueryModel(object):
         o = AlipayFinanceQuotationStocktoolsUserQueryModel()
         if 'inst_org_id' in d:
             o.inst_org_id = d['inst_org_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'tool_type' in d:
             o.tool_type = d['tool_type']
         if 'user_id' in d:

@@ -13,6 +13,7 @@ class AlipayTradeRepaybillOrderCreateandpayModel(object):
         self._extend_params = None
         self._out_order_no = None
         self._passback_params = None
+        self._payer_open_id = None
         self._payer_user_id = None
         self._repay_amount = None
         self._repay_payee_name = None
@@ -56,6 +57,13 @@ class AlipayTradeRepaybillOrderCreateandpayModel(object):
     @passback_params.setter
     def passback_params(self, value):
         self._passback_params = value
+    @property
+    def payer_open_id(self):
+        return self._payer_open_id
+
+    @payer_open_id.setter
+    def payer_open_id(self, value):
+        self._payer_open_id = value
     @property
     def payer_user_id(self):
         return self._payer_user_id
@@ -134,6 +142,11 @@ class AlipayTradeRepaybillOrderCreateandpayModel(object):
                 params['passback_params'] = self.passback_params.to_alipay_dict()
             else:
                 params['passback_params'] = self.passback_params
+        if self.payer_open_id:
+            if hasattr(self.payer_open_id, 'to_alipay_dict'):
+                params['payer_open_id'] = self.payer_open_id.to_alipay_dict()
+            else:
+                params['payer_open_id'] = self.payer_open_id
         if self.payer_user_id:
             if hasattr(self.payer_user_id, 'to_alipay_dict'):
                 params['payer_user_id'] = self.payer_user_id.to_alipay_dict()
@@ -186,6 +199,8 @@ class AlipayTradeRepaybillOrderCreateandpayModel(object):
             o.out_order_no = d['out_order_no']
         if 'passback_params' in d:
             o.passback_params = d['passback_params']
+        if 'payer_open_id' in d:
+            o.payer_open_id = d['payer_open_id']
         if 'payer_user_id' in d:
             o.payer_user_id = d['payer_user_id']
         if 'repay_amount' in d:

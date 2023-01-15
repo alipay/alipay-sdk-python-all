@@ -22,6 +22,7 @@ class AlipayOpenMiniInnerversionAuditSubmitModel(object):
         self._memo = None
         self._mini_app_id = None
         self._mini_category_ids = None
+        self._open_id = None
         self._out_door_pic = None
         self._pid = None
         self._screen_shot_list = None
@@ -124,6 +125,13 @@ class AlipayOpenMiniInnerversionAuditSubmitModel(object):
     @mini_category_ids.setter
     def mini_category_ids(self, value):
         self._mini_category_ids = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_door_pic(self):
         return self._out_door_pic
@@ -245,6 +253,11 @@ class AlipayOpenMiniInnerversionAuditSubmitModel(object):
                 params['mini_category_ids'] = self.mini_category_ids.to_alipay_dict()
             else:
                 params['mini_category_ids'] = self.mini_category_ids
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_door_pic:
             if hasattr(self.out_door_pic, 'to_alipay_dict'):
                 params['out_door_pic'] = self.out_door_pic.to_alipay_dict()
@@ -318,6 +331,8 @@ class AlipayOpenMiniInnerversionAuditSubmitModel(object):
             o.mini_app_id = d['mini_app_id']
         if 'mini_category_ids' in d:
             o.mini_category_ids = d['mini_category_ids']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_door_pic' in d:
             o.out_door_pic = d['out_door_pic']
         if 'pid' in d:

@@ -19,6 +19,7 @@ class AlipayAssetVoucherprodChargeSendModel(object):
         self._extend_info = None
         self._fund_scence = None
         self._out_biz_no = None
+        self._publisher_open_id = None
         self._publisher_user_id = None
 
     @property
@@ -98,6 +99,13 @@ class AlipayAssetVoucherprodChargeSendModel(object):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def publisher_open_id(self):
+        return self._publisher_open_id
+
+    @publisher_open_id.setter
+    def publisher_open_id(self, value):
+        self._publisher_open_id = value
+    @property
     def publisher_user_id(self):
         return self._publisher_user_id
 
@@ -163,6 +171,11 @@ class AlipayAssetVoucherprodChargeSendModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.publisher_open_id:
+            if hasattr(self.publisher_open_id, 'to_alipay_dict'):
+                params['publisher_open_id'] = self.publisher_open_id.to_alipay_dict()
+            else:
+                params['publisher_open_id'] = self.publisher_open_id
         if self.publisher_user_id:
             if hasattr(self.publisher_user_id, 'to_alipay_dict'):
                 params['publisher_user_id'] = self.publisher_user_id.to_alipay_dict()
@@ -195,6 +208,8 @@ class AlipayAssetVoucherprodChargeSendModel(object):
             o.fund_scence = d['fund_scence']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'publisher_open_id' in d:
+            o.publisher_open_id = d['publisher_open_id']
         if 'publisher_user_id' in d:
             o.publisher_user_id = d['publisher_user_id']
         return o

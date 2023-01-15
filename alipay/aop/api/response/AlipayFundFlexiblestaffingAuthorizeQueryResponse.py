@@ -14,6 +14,7 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
         self._biz_scene = None
         self._out_biz_no = None
         self._principal_id = None
+        self._principal_open_id = None
         self._product_code = None
         self._status = None
 
@@ -53,6 +54,13 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
     def principal_id(self, value):
         self._principal_id = value
     @property
+    def principal_open_id(self):
+        return self._principal_open_id
+
+    @principal_open_id.setter
+    def principal_open_id(self, value):
+        self._principal_open_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -79,6 +87,8 @@ class AlipayFundFlexiblestaffingAuthorizeQueryResponse(AlipayResponse):
             self.out_biz_no = response['out_biz_no']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'principal_open_id' in response:
+            self.principal_open_id = response['principal_open_id']
         if 'product_code' in response:
             self.product_code = response['product_code']
         if 'status' in response:

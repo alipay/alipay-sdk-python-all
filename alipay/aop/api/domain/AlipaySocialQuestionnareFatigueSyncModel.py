@@ -10,6 +10,7 @@ class AlipaySocialQuestionnareFatigueSyncModel(object):
     def __init__(self):
         self._biz_time = None
         self._channel_type = None
+        self._open_id = None
         self._qstn_id = None
         self._sync_type = None
         self._user_id = None
@@ -28,6 +29,13 @@ class AlipaySocialQuestionnareFatigueSyncModel(object):
     @channel_type.setter
     def channel_type(self, value):
         self._channel_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def qstn_id(self):
         return self._qstn_id
@@ -63,6 +71,11 @@ class AlipaySocialQuestionnareFatigueSyncModel(object):
                 params['channel_type'] = self.channel_type.to_alipay_dict()
             else:
                 params['channel_type'] = self.channel_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.qstn_id:
             if hasattr(self.qstn_id, 'to_alipay_dict'):
                 params['qstn_id'] = self.qstn_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipaySocialQuestionnareFatigueSyncModel(object):
             o.biz_time = d['biz_time']
         if 'channel_type' in d:
             o.channel_type = d['channel_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'qstn_id' in d:
             o.qstn_id = d['qstn_id']
         if 'sync_type' in d:

@@ -12,6 +12,8 @@ class GFAOpenAPIParticipantInfo(object):
         self._account_type = None
         self._inst_code = None
         self._ip_role_id = None
+        self._ip_role_id_type = None
+        self._open_id = None
         self._properties = None
 
     @property
@@ -43,6 +45,20 @@ class GFAOpenAPIParticipantInfo(object):
     def ip_role_id(self, value):
         self._ip_role_id = value
     @property
+    def ip_role_id_type(self):
+        return self._ip_role_id_type
+
+    @ip_role_id_type.setter
+    def ip_role_id_type(self, value):
+        self._ip_role_id_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def properties(self):
         return self._properties
 
@@ -73,6 +89,16 @@ class GFAOpenAPIParticipantInfo(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.ip_role_id_type:
+            if hasattr(self.ip_role_id_type, 'to_alipay_dict'):
+                params['ip_role_id_type'] = self.ip_role_id_type.to_alipay_dict()
+            else:
+                params['ip_role_id_type'] = self.ip_role_id_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.properties:
             if hasattr(self.properties, 'to_alipay_dict'):
                 params['properties'] = self.properties.to_alipay_dict()
@@ -93,6 +119,10 @@ class GFAOpenAPIParticipantInfo(object):
             o.inst_code = d['inst_code']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'ip_role_id_type' in d:
+            o.ip_role_id_type = d['ip_role_id_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'properties' in d:
             o.properties = d['properties']
         return o

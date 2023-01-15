@@ -11,6 +11,7 @@ class AlipayCommerceTransportIndustryProxyUseModel(object):
         self._industry_event = None
         self._industry_request = None
         self._industry_scene = None
+        self._open_id = None
         self._sys_service_provider_id = None
         self._user_id = None
 
@@ -35,6 +36,13 @@ class AlipayCommerceTransportIndustryProxyUseModel(object):
     @industry_scene.setter
     def industry_scene(self, value):
         self._industry_scene = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sys_service_provider_id(self):
         return self._sys_service_provider_id
@@ -68,6 +76,11 @@ class AlipayCommerceTransportIndustryProxyUseModel(object):
                 params['industry_scene'] = self.industry_scene.to_alipay_dict()
             else:
                 params['industry_scene'] = self.industry_scene
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sys_service_provider_id:
             if hasattr(self.sys_service_provider_id, 'to_alipay_dict'):
                 params['sys_service_provider_id'] = self.sys_service_provider_id.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayCommerceTransportIndustryProxyUseModel(object):
             o.industry_request = d['industry_request']
         if 'industry_scene' in d:
             o.industry_scene = d['industry_scene']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sys_service_provider_id' in d:
             o.sys_service_provider_id = d['sys_service_provider_id']
         if 'user_id' in d:

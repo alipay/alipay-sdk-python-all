@@ -18,6 +18,7 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
         self._label_out_no = None
         self._org_out_id = None
         self._phone = None
+        self._vid = None
 
     @property
     def cert_name(self):
@@ -89,6 +90,13 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def vid(self):
+        return self._vid
+
+    @vid.setter
+    def vid(self, value):
+        self._vid = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +151,11 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.vid:
+            if hasattr(self.vid, 'to_alipay_dict'):
+                params['vid'] = self.vid.to_alipay_dict()
+            else:
+                params['vid'] = self.vid
         return params
 
     @staticmethod
@@ -170,6 +183,8 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
             o.org_out_id = d['org_out_id']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'vid' in d:
+            o.vid = d['vid']
         return o
 
 

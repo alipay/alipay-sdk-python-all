@@ -10,6 +10,7 @@ class AmlAssetRecord(object):
     def __init__(self):
         self._active_date = None
         self._lid = None
+        self._open_id = None
         self._uid = None
         self._value = None
 
@@ -27,6 +28,13 @@ class AmlAssetRecord(object):
     @lid.setter
     def lid(self, value):
         self._lid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def uid(self):
         return self._uid
@@ -55,6 +63,11 @@ class AmlAssetRecord(object):
                 params['lid'] = self.lid.to_alipay_dict()
             else:
                 params['lid'] = self.lid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -76,6 +89,8 @@ class AmlAssetRecord(object):
             o.active_date = d['active_date']
         if 'lid' in d:
             o.lid = d['lid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'uid' in d:
             o.uid = d['uid']
         if 'value' in d:

@@ -15,6 +15,7 @@ class AlipayCreditCreditriskDataPutModel(object):
         self._entityname = None
         self._entitytype = None
         self._objectcontent = None
+        self._openid = None
         self._taskid = None
 
     @property
@@ -67,6 +68,13 @@ class AlipayCreditCreditriskDataPutModel(object):
     def objectcontent(self, value):
         self._objectcontent = value
     @property
+    def openid(self):
+        return self._openid
+
+    @openid.setter
+    def openid(self, value):
+        self._openid = value
+    @property
     def taskid(self):
         return self._taskid
 
@@ -112,6 +120,11 @@ class AlipayCreditCreditriskDataPutModel(object):
                 params['objectcontent'] = self.objectcontent.to_alipay_dict()
             else:
                 params['objectcontent'] = self.objectcontent
+        if self.openid:
+            if hasattr(self.openid, 'to_alipay_dict'):
+                params['openid'] = self.openid.to_alipay_dict()
+            else:
+                params['openid'] = self.openid
         if self.taskid:
             if hasattr(self.taskid, 'to_alipay_dict'):
                 params['taskid'] = self.taskid.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipayCreditCreditriskDataPutModel(object):
             o.entitytype = d['entitytype']
         if 'objectcontent' in d:
             o.objectcontent = d['objectcontent']
+        if 'openid' in d:
+            o.openid = d['openid']
         if 'taskid' in d:
             o.taskid = d['taskid']
         return o

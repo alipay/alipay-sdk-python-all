@@ -13,6 +13,7 @@ class AlipayCommerceTradeApplyModel(object):
         self._channel = None
         self._interface_version = None
         self._op_code = None
+        self._open_id = None
         self._order_detail = None
         self._scene_code = None
         self._target_id = None
@@ -47,6 +48,13 @@ class AlipayCommerceTradeApplyModel(object):
     @op_code.setter
     def op_code(self, value):
         self._op_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_detail(self):
         return self._order_detail
@@ -109,6 +117,11 @@ class AlipayCommerceTradeApplyModel(object):
                 params['op_code'] = self.op_code.to_alipay_dict()
             else:
                 params['op_code'] = self.op_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_detail:
             if hasattr(self.order_detail, 'to_alipay_dict'):
                 params['order_detail'] = self.order_detail.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayCommerceTradeApplyModel(object):
             o.interface_version = d['interface_version']
         if 'op_code' in d:
             o.op_code = d['op_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_detail' in d:
             o.order_detail = d['order_detail']
         if 'scene_code' in d:

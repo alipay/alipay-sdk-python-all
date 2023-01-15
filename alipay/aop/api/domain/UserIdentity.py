@@ -10,6 +10,7 @@ class UserIdentity(object):
     def __init__(self):
         self._identity = None
         self._issuer = None
+        self._open_id = None
         self._type = None
 
     @property
@@ -26,6 +27,13 @@ class UserIdentity(object):
     @issuer.setter
     def issuer(self, value):
         self._issuer = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def type(self):
         return self._type
@@ -47,6 +55,11 @@ class UserIdentity(object):
                 params['issuer'] = self.issuer.to_alipay_dict()
             else:
                 params['issuer'] = self.issuer
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -63,6 +76,8 @@ class UserIdentity(object):
             o.identity = d['identity']
         if 'issuer' in d:
             o.issuer = d['issuer']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'type' in d:
             o.type = d['type']
         return o

@@ -15,6 +15,7 @@ class AlipayPayAppChannelConsultModel(object):
         self._biz_order_list = None
         self._biz_scene = None
         self._ext_params = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -62,6 +63,13 @@ class AlipayPayAppChannelConsultModel(object):
         else:
             self._ext_params = BizExtInfo.from_alipay_dict(value)
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -102,6 +110,11 @@ class AlipayPayAppChannelConsultModel(object):
                 params['ext_params'] = self.ext_params.to_alipay_dict()
             else:
                 params['ext_params'] = self.ext_params
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -124,6 +137,8 @@ class AlipayPayAppChannelConsultModel(object):
             o.biz_scene = d['biz_scene']
         if 'ext_params' in d:
             o.ext_params = d['ext_params']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipaySocialBaseQuestInstancesQueryModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._quest_ids = None
         self._source_id = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def quest_ids(self):
         return self._quest_ids
@@ -40,6 +48,11 @@ class AlipaySocialBaseQuestInstancesQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.quest_ids:
             if isinstance(self.quest_ids, list):
                 for i in range(0, len(self.quest_ids)):
@@ -67,6 +80,8 @@ class AlipaySocialBaseQuestInstancesQueryModel(object):
         if not d:
             return None
         o = AlipaySocialBaseQuestInstancesQueryModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'quest_ids' in d:
             o.quest_ids = d['quest_ids']
         if 'source_id' in d:

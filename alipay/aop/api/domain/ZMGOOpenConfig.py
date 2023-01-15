@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZMGOOpenConfig(object):
 
     def __init__(self):
+        self._apply_button_desc = None
         self._appoint_date = None
         self._card_color_scheme = None
         self._custom_open_tip_list = None
@@ -21,6 +22,13 @@ class ZMGOOpenConfig(object):
         self._sign_success_task_button_desc = None
         self._support_expire_deferral = None
 
+    @property
+    def apply_button_desc(self):
+        return self._apply_button_desc
+
+    @apply_button_desc.setter
+    def apply_button_desc(self, value):
+        self._apply_button_desc = value
     @property
     def appoint_date(self):
         return self._appoint_date
@@ -109,6 +117,11 @@ class ZMGOOpenConfig(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_button_desc:
+            if hasattr(self.apply_button_desc, 'to_alipay_dict'):
+                params['apply_button_desc'] = self.apply_button_desc.to_alipay_dict()
+            else:
+                params['apply_button_desc'] = self.apply_button_desc
         if self.appoint_date:
             if hasattr(self.appoint_date, 'to_alipay_dict'):
                 params['appoint_date'] = self.appoint_date.to_alipay_dict()
@@ -176,6 +189,8 @@ class ZMGOOpenConfig(object):
         if not d:
             return None
         o = ZMGOOpenConfig()
+        if 'apply_button_desc' in d:
+            o.apply_button_desc = d['apply_button_desc']
         if 'appoint_date' in d:
             o.appoint_date = d['appoint_date']
         if 'card_color_scheme' in d:

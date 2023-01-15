@@ -12,6 +12,7 @@ class AlipayFundIdentitypayMemberUnsignModel(object):
         self._identity = None
         self._identity_type = None
         self._member_name = None
+        self._open_id = None
         self._out_member_id = None
         self._out_org_id = None
         self._product_code = None
@@ -46,6 +47,13 @@ class AlipayFundIdentitypayMemberUnsignModel(object):
     @member_name.setter
     def member_name(self, value):
         self._member_name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_member_id(self):
         return self._out_member_id
@@ -105,6 +113,11 @@ class AlipayFundIdentitypayMemberUnsignModel(object):
                 params['member_name'] = self.member_name.to_alipay_dict()
             else:
                 params['member_name'] = self.member_name
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_member_id:
             if hasattr(self.out_member_id, 'to_alipay_dict'):
                 params['out_member_id'] = self.out_member_id.to_alipay_dict()
@@ -145,6 +158,8 @@ class AlipayFundIdentitypayMemberUnsignModel(object):
             o.identity_type = d['identity_type']
         if 'member_name' in d:
             o.member_name = d['member_name']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_member_id' in d:
             o.out_member_id = d['out_member_id']
         if 'out_org_id' in d:

@@ -16,6 +16,7 @@ class InteractiveServiceRecordDetail(object):
         self._dialogue = None
         self._download_url = None
         self._end_time = None
+        self._interact_duration = None
         self._interact_result = None
         self._open_id = None
         self._phone_number = None
@@ -82,6 +83,13 @@ class InteractiveServiceRecordDetail(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def interact_duration(self):
+        return self._interact_duration
+
+    @interact_duration.setter
+    def interact_duration(self, value):
+        self._interact_duration = value
     @property
     def interact_result(self):
         return self._interact_result
@@ -195,6 +203,11 @@ class InteractiveServiceRecordDetail(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.interact_duration:
+            if hasattr(self.interact_duration, 'to_alipay_dict'):
+                params['interact_duration'] = self.interact_duration.to_alipay_dict()
+            else:
+                params['interact_duration'] = self.interact_duration
         if self.interact_result:
             if hasattr(self.interact_result, 'to_alipay_dict'):
                 params['interact_result'] = self.interact_result.to_alipay_dict()
@@ -273,6 +286,8 @@ class InteractiveServiceRecordDetail(object):
             o.download_url = d['download_url']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'interact_duration' in d:
+            o.interact_duration = d['interact_duration']
         if 'interact_result' in d:
             o.interact_result = d['interact_result']
         if 'open_id' in d:

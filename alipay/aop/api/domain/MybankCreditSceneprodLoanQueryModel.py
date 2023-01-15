@@ -9,6 +9,7 @@ class MybankCreditSceneprodLoanQueryModel(object):
 
     def __init__(self):
         self._app_seq_no = None
+        self._ext_param = None
         self._org_code = None
         self._out_order_no = None
         self._product_code = None
@@ -22,6 +23,13 @@ class MybankCreditSceneprodLoanQueryModel(object):
     @app_seq_no.setter
     def app_seq_no(self, value):
         self._app_seq_no = value
+    @property
+    def ext_param(self):
+        return self._ext_param
+
+    @ext_param.setter
+    def ext_param(self, value):
+        self._ext_param = value
     @property
     def org_code(self):
         return self._org_code
@@ -66,6 +74,11 @@ class MybankCreditSceneprodLoanQueryModel(object):
                 params['app_seq_no'] = self.app_seq_no.to_alipay_dict()
             else:
                 params['app_seq_no'] = self.app_seq_no
+        if self.ext_param:
+            if hasattr(self.ext_param, 'to_alipay_dict'):
+                params['ext_param'] = self.ext_param.to_alipay_dict()
+            else:
+                params['ext_param'] = self.ext_param
         if self.org_code:
             if hasattr(self.org_code, 'to_alipay_dict'):
                 params['org_code'] = self.org_code.to_alipay_dict()
@@ -100,6 +113,8 @@ class MybankCreditSceneprodLoanQueryModel(object):
         o = MybankCreditSceneprodLoanQueryModel()
         if 'app_seq_no' in d:
             o.app_seq_no = d['app_seq_no']
+        if 'ext_param' in d:
+            o.ext_param = d['ext_param']
         if 'org_code' in d:
             o.org_code = d['org_code']
         if 'out_order_no' in d:

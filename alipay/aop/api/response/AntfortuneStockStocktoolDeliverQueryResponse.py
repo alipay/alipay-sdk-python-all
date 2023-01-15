@@ -10,9 +10,17 @@ class AntfortuneStockStocktoolDeliverQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AntfortuneStockStocktoolDeliverQueryResponse, self).__init__()
+        self._open_id = None
         self._position_list = None
         self._user_id = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def position_list(self):
         return self._position_list
@@ -36,6 +44,8 @@ class AntfortuneStockStocktoolDeliverQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AntfortuneStockStocktoolDeliverQueryResponse, self).parse_response_content(response_content)
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'position_list' in response:
             self.position_list = response['position_list']
         if 'user_id' in response:
