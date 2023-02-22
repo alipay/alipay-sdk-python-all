@@ -11,6 +11,7 @@ class AlipaySecurityProdInteractiveprodInitializeModel(object):
         self._biz_id = None
         self._biz_request_params = None
         self._need_consult = None
+        self._open_id = None
         self._scene_id = None
         self._tenant_id = None
         self._user_id = None
@@ -36,6 +37,13 @@ class AlipaySecurityProdInteractiveprodInitializeModel(object):
     @need_consult.setter
     def need_consult(self, value):
         self._need_consult = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def scene_id(self):
         return self._scene_id
@@ -76,6 +84,11 @@ class AlipaySecurityProdInteractiveprodInitializeModel(object):
                 params['need_consult'] = self.need_consult.to_alipay_dict()
             else:
                 params['need_consult'] = self.need_consult
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = self.scene_id.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipaySecurityProdInteractiveprodInitializeModel(object):
             o.biz_request_params = d['biz_request_params']
         if 'need_consult' in d:
             o.need_consult = d['need_consult']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'scene_id' in d:
             o.scene_id = d['scene_id']
         if 'tenant_id' in d:

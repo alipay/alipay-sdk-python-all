@@ -13,6 +13,7 @@ class MybankCreditLoanapplyFinleaseTokenQueryModel(object):
         self._biz_sence = None
         self._ip_id = None
         self._ip_role_id = None
+        self._open_id = None
         self._option_type = None
         self._request_date = None
         self._request_id = None
@@ -52,6 +53,13 @@ class MybankCreditLoanapplyFinleaseTokenQueryModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def option_type(self):
         return self._option_type
@@ -102,6 +110,11 @@ class MybankCreditLoanapplyFinleaseTokenQueryModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.option_type:
             if hasattr(self.option_type, 'to_alipay_dict'):
                 params['option_type'] = self.option_type.to_alipay_dict()
@@ -134,6 +147,8 @@ class MybankCreditLoanapplyFinleaseTokenQueryModel(object):
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'option_type' in d:
             o.option_type = d['option_type']
         if 'request_date' in d:

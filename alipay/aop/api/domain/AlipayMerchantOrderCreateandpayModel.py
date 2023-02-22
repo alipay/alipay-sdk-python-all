@@ -18,7 +18,6 @@ class AlipayMerchantOrderCreateandpayModel(object):
         self._buyer = None
         self._ext_info = None
         self._goods_infos = None
-        self._open_id = None
         self._order_amount = None
         self._out_biz_no = None
         self._payment_request = None
@@ -68,13 +67,6 @@ class AlipayMerchantOrderCreateandpayModel(object):
                     self._goods_infos.append(i)
                 else:
                     self._goods_infos.append(GoodsInformation.from_alipay_dict(i))
-    @property
-    def open_id(self):
-        return self._open_id
-
-    @open_id.setter
-    def open_id(self, value):
-        self._open_id = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -159,11 +151,6 @@ class AlipayMerchantOrderCreateandpayModel(object):
                 params['goods_infos'] = self.goods_infos.to_alipay_dict()
             else:
                 params['goods_infos'] = self.goods_infos
-        if self.open_id:
-            if hasattr(self.open_id, 'to_alipay_dict'):
-                params['open_id'] = self.open_id.to_alipay_dict()
-            else:
-                params['open_id'] = self.open_id
         if self.order_amount:
             if isinstance(self.order_amount, list):
                 for i in range(0, len(self.order_amount)):
@@ -214,8 +201,6 @@ class AlipayMerchantOrderCreateandpayModel(object):
             o.ext_info = d['ext_info']
         if 'goods_infos' in d:
             o.goods_infos = d['goods_infos']
-        if 'open_id' in d:
-            o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'out_biz_no' in d:

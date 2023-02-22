@@ -11,6 +11,7 @@ class AlipayUserMpointPreconsultModel(object):
         self._biz_sub_scene = None
         self._biz_sub_type = None
         self._biz_type = None
+        self._open_id = None
         self._point = None
         self._user_id = None
 
@@ -35,6 +36,13 @@ class AlipayUserMpointPreconsultModel(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def point(self):
         return self._point
@@ -68,6 +76,11 @@ class AlipayUserMpointPreconsultModel(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.point:
             if hasattr(self.point, 'to_alipay_dict'):
                 params['point'] = self.point.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayUserMpointPreconsultModel(object):
             o.biz_sub_type = d['biz_sub_type']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'point' in d:
             o.point = d['point']
         if 'user_id' in d:

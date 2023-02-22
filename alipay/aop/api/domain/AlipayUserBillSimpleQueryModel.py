@@ -9,6 +9,7 @@ class AlipayUserBillSimpleQueryModel(object):
 
     def __init__(self):
         self._biz_no = None
+        self._open_id = None
         self._owner_card_no = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayUserBillSimpleQueryModel(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def owner_card_no(self):
         return self._owner_card_no
@@ -34,6 +42,11 @@ class AlipayUserBillSimpleQueryModel(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.owner_card_no:
             if hasattr(self.owner_card_no, 'to_alipay_dict'):
                 params['owner_card_no'] = self.owner_card_no.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayUserBillSimpleQueryModel(object):
         o = AlipayUserBillSimpleQueryModel()
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'owner_card_no' in d:
             o.owner_card_no = d['owner_card_no']
         return o

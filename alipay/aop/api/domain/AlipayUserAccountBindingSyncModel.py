@@ -13,6 +13,7 @@ class AlipayUserAccountBindingSyncModel(object):
         self._data_version = None
         self._havana_user_id = None
         self._modify_time = None
+        self._open_id = None
         self._realm = None
         self._status = None
 
@@ -51,6 +52,13 @@ class AlipayUserAccountBindingSyncModel(object):
     @modify_time.setter
     def modify_time(self, value):
         self._modify_time = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def realm(self):
         return self._realm
@@ -94,6 +102,11 @@ class AlipayUserAccountBindingSyncModel(object):
                 params['modify_time'] = self.modify_time.to_alipay_dict()
             else:
                 params['modify_time'] = self.modify_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.realm:
             if hasattr(self.realm, 'to_alipay_dict'):
                 params['realm'] = self.realm.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayUserAccountBindingSyncModel(object):
             o.havana_user_id = d['havana_user_id']
         if 'modify_time' in d:
             o.modify_time = d['modify_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'realm' in d:
             o.realm = d['realm']
         if 'status' in d:

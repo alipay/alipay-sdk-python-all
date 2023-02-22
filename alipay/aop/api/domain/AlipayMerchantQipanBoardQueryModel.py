@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BoardQueryRequest import BoardQueryRequest
 
 
 class AlipayMerchantQipanBoardQueryModel(object):
@@ -17,7 +18,10 @@ class AlipayMerchantQipanBoardQueryModel(object):
 
     @request_params.setter
     def request_params(self, value):
-        self._request_params = value
+        if isinstance(value, BoardQueryRequest):
+            self._request_params = value
+        else:
+            self._request_params = BoardQueryRequest.from_alipay_dict(value)
     @property
     def scene_code(self):
         return self._scene_code

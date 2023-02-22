@@ -10,6 +10,7 @@ class ContentAuditResult(object):
 
     def __init__(self):
         self._content_risk_info_list = None
+        self._robot_check_finished = None
         self._robot_status = None
         self._rule_counts = None
 
@@ -26,6 +27,13 @@ class ContentAuditResult(object):
                     self._content_risk_info_list.append(i)
                 else:
                     self._content_risk_info_list.append(ContentRiskInfo.from_alipay_dict(i))
+    @property
+    def robot_check_finished(self):
+        return self._robot_check_finished
+
+    @robot_check_finished.setter
+    def robot_check_finished(self, value):
+        self._robot_check_finished = value
     @property
     def robot_status(self):
         return self._robot_status
@@ -54,6 +62,11 @@ class ContentAuditResult(object):
                 params['content_risk_info_list'] = self.content_risk_info_list.to_alipay_dict()
             else:
                 params['content_risk_info_list'] = self.content_risk_info_list
+        if self.robot_check_finished:
+            if hasattr(self.robot_check_finished, 'to_alipay_dict'):
+                params['robot_check_finished'] = self.robot_check_finished.to_alipay_dict()
+            else:
+                params['robot_check_finished'] = self.robot_check_finished
         if self.robot_status:
             if hasattr(self.robot_status, 'to_alipay_dict'):
                 params['robot_status'] = self.robot_status.to_alipay_dict()
@@ -73,6 +86,8 @@ class ContentAuditResult(object):
         o = ContentAuditResult()
         if 'content_risk_info_list' in d:
             o.content_risk_info_list = d['content_risk_info_list']
+        if 'robot_check_finished' in d:
+            o.robot_check_finished = d['robot_check_finished']
         if 'robot_status' in d:
             o.robot_status = d['robot_status']
         if 'rule_counts' in d:

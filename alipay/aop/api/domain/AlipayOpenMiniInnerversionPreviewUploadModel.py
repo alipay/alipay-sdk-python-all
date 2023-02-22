@@ -13,6 +13,8 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
         self._build_js_permission = None
         self._build_pkg_url = None
         self._build_plugin_url = None
+        self._builded_package_size = None
+        self._builded_plugin_size = None
         self._bundle_id = None
         self._extend_info = None
         self._inst_code = None
@@ -20,6 +22,9 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
         self._mini_app_id = None
         self._new_build_pkg_url = None
         self._new_build_plugin_url = None
+        self._new_builded_package_size = None
+        self._new_builded_plugin_size = None
+        self._no_sign = None
         self._plugin_refs = None
         self._scene = None
         self._sub_packages = None
@@ -45,6 +50,20 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     @build_plugin_url.setter
     def build_plugin_url(self, value):
         self._build_plugin_url = value
+    @property
+    def builded_package_size(self):
+        return self._builded_package_size
+
+    @builded_package_size.setter
+    def builded_package_size(self, value):
+        self._builded_package_size = value
+    @property
+    def builded_plugin_size(self):
+        return self._builded_plugin_size
+
+    @builded_plugin_size.setter
+    def builded_plugin_size(self, value):
+        self._builded_plugin_size = value
     @property
     def bundle_id(self):
         return self._bundle_id
@@ -94,6 +113,27 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
     @new_build_plugin_url.setter
     def new_build_plugin_url(self, value):
         self._new_build_plugin_url = value
+    @property
+    def new_builded_package_size(self):
+        return self._new_builded_package_size
+
+    @new_builded_package_size.setter
+    def new_builded_package_size(self, value):
+        self._new_builded_package_size = value
+    @property
+    def new_builded_plugin_size(self):
+        return self._new_builded_plugin_size
+
+    @new_builded_plugin_size.setter
+    def new_builded_plugin_size(self, value):
+        self._new_builded_plugin_size = value
+    @property
+    def no_sign(self):
+        return self._no_sign
+
+    @no_sign.setter
+    def no_sign(self, value):
+        self._no_sign = value
     @property
     def plugin_refs(self):
         return self._plugin_refs
@@ -146,6 +186,16 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['build_plugin_url'] = self.build_plugin_url.to_alipay_dict()
             else:
                 params['build_plugin_url'] = self.build_plugin_url
+        if self.builded_package_size:
+            if hasattr(self.builded_package_size, 'to_alipay_dict'):
+                params['builded_package_size'] = self.builded_package_size.to_alipay_dict()
+            else:
+                params['builded_package_size'] = self.builded_package_size
+        if self.builded_plugin_size:
+            if hasattr(self.builded_plugin_size, 'to_alipay_dict'):
+                params['builded_plugin_size'] = self.builded_plugin_size.to_alipay_dict()
+            else:
+                params['builded_plugin_size'] = self.builded_plugin_size
         if self.bundle_id:
             if hasattr(self.bundle_id, 'to_alipay_dict'):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
@@ -181,6 +231,21 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
                 params['new_build_plugin_url'] = self.new_build_plugin_url.to_alipay_dict()
             else:
                 params['new_build_plugin_url'] = self.new_build_plugin_url
+        if self.new_builded_package_size:
+            if hasattr(self.new_builded_package_size, 'to_alipay_dict'):
+                params['new_builded_package_size'] = self.new_builded_package_size.to_alipay_dict()
+            else:
+                params['new_builded_package_size'] = self.new_builded_package_size
+        if self.new_builded_plugin_size:
+            if hasattr(self.new_builded_plugin_size, 'to_alipay_dict'):
+                params['new_builded_plugin_size'] = self.new_builded_plugin_size.to_alipay_dict()
+            else:
+                params['new_builded_plugin_size'] = self.new_builded_plugin_size
+        if self.no_sign:
+            if hasattr(self.no_sign, 'to_alipay_dict'):
+                params['no_sign'] = self.no_sign.to_alipay_dict()
+            else:
+                params['no_sign'] = self.no_sign
         if self.plugin_refs:
             if isinstance(self.plugin_refs, list):
                 for i in range(0, len(self.plugin_refs)):
@@ -219,6 +284,10 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
             o.build_pkg_url = d['build_pkg_url']
         if 'build_plugin_url' in d:
             o.build_plugin_url = d['build_plugin_url']
+        if 'builded_package_size' in d:
+            o.builded_package_size = d['builded_package_size']
+        if 'builded_plugin_size' in d:
+            o.builded_plugin_size = d['builded_plugin_size']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
         if 'extend_info' in d:
@@ -233,6 +302,12 @@ class AlipayOpenMiniInnerversionPreviewUploadModel(object):
             o.new_build_pkg_url = d['new_build_pkg_url']
         if 'new_build_plugin_url' in d:
             o.new_build_plugin_url = d['new_build_plugin_url']
+        if 'new_builded_package_size' in d:
+            o.new_builded_package_size = d['new_builded_package_size']
+        if 'new_builded_plugin_size' in d:
+            o.new_builded_plugin_size = d['new_builded_plugin_size']
+        if 'no_sign' in d:
+            o.no_sign = d['no_sign']
         if 'plugin_refs' in d:
             o.plugin_refs = d['plugin_refs']
         if 'scene' in d:

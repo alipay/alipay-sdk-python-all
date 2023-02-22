@@ -10,6 +10,7 @@ class AlipayMarketingCampaignSubcertQueryModel(object):
     def __init__(self):
         self._login_id = None
         self._lot_num = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayMarketingCampaignSubcertQueryModel(object):
     @lot_num.setter
     def lot_num(self, value):
         self._lot_num = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -47,6 +55,11 @@ class AlipayMarketingCampaignSubcertQueryModel(object):
                 params['lot_num'] = self.lot_num.to_alipay_dict()
             else:
                 params['lot_num'] = self.lot_num
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayMarketingCampaignSubcertQueryModel(object):
             o.login_id = d['login_id']
         if 'lot_num' in d:
             o.lot_num = d['lot_num']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

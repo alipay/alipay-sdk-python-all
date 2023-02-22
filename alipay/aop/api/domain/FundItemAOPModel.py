@@ -38,6 +38,7 @@ class FundItemAOPModel(object):
         self._fund_status = None
         self._fund_tool_belong_to_crowner = None
         self._fund_tool_owner_card_no = None
+        self._fund_tool_owner_open_id = None
         self._fund_tool_type_for_crowner = None
         self._fund_tool_type_for_system = None
         self._fund_tool_type_name = None
@@ -45,9 +46,12 @@ class FundItemAOPModel(object):
         self._open_self_slip_type = None
         self._opposite_biz_card_alias = None
         self._opposite_biz_card_no = None
+        self._opposite_biz_open_id = None
         self._opposite_fund_card_no = None
+        self._opposite_fund_open_id = None
         self._out_request_no = None
         self._owner_card_no = None
+        self._owner_open_id = None
         self._refund_bank_status = None
         self._slip_amount = None
         self._slip_id = None
@@ -266,6 +270,13 @@ class FundItemAOPModel(object):
     def fund_tool_owner_card_no(self, value):
         self._fund_tool_owner_card_no = value
     @property
+    def fund_tool_owner_open_id(self):
+        return self._fund_tool_owner_open_id
+
+    @fund_tool_owner_open_id.setter
+    def fund_tool_owner_open_id(self, value):
+        self._fund_tool_owner_open_id = value
+    @property
     def fund_tool_type_for_crowner(self):
         return self._fund_tool_type_for_crowner
 
@@ -315,12 +326,26 @@ class FundItemAOPModel(object):
     def opposite_biz_card_no(self, value):
         self._opposite_biz_card_no = value
     @property
+    def opposite_biz_open_id(self):
+        return self._opposite_biz_open_id
+
+    @opposite_biz_open_id.setter
+    def opposite_biz_open_id(self, value):
+        self._opposite_biz_open_id = value
+    @property
     def opposite_fund_card_no(self):
         return self._opposite_fund_card_no
 
     @opposite_fund_card_no.setter
     def opposite_fund_card_no(self, value):
         self._opposite_fund_card_no = value
+    @property
+    def opposite_fund_open_id(self):
+        return self._opposite_fund_open_id
+
+    @opposite_fund_open_id.setter
+    def opposite_fund_open_id(self, value):
+        self._opposite_fund_open_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -335,6 +360,13 @@ class FundItemAOPModel(object):
     @owner_card_no.setter
     def owner_card_no(self, value):
         self._owner_card_no = value
+    @property
+    def owner_open_id(self):
+        return self._owner_open_id
+
+    @owner_open_id.setter
+    def owner_open_id(self, value):
+        self._owner_open_id = value
     @property
     def refund_bank_status(self):
         return self._refund_bank_status
@@ -531,6 +563,11 @@ class FundItemAOPModel(object):
                 params['fund_tool_owner_card_no'] = self.fund_tool_owner_card_no.to_alipay_dict()
             else:
                 params['fund_tool_owner_card_no'] = self.fund_tool_owner_card_no
+        if self.fund_tool_owner_open_id:
+            if hasattr(self.fund_tool_owner_open_id, 'to_alipay_dict'):
+                params['fund_tool_owner_open_id'] = self.fund_tool_owner_open_id.to_alipay_dict()
+            else:
+                params['fund_tool_owner_open_id'] = self.fund_tool_owner_open_id
         if self.fund_tool_type_for_crowner:
             if hasattr(self.fund_tool_type_for_crowner, 'to_alipay_dict'):
                 params['fund_tool_type_for_crowner'] = self.fund_tool_type_for_crowner.to_alipay_dict()
@@ -566,11 +603,21 @@ class FundItemAOPModel(object):
                 params['opposite_biz_card_no'] = self.opposite_biz_card_no.to_alipay_dict()
             else:
                 params['opposite_biz_card_no'] = self.opposite_biz_card_no
+        if self.opposite_biz_open_id:
+            if hasattr(self.opposite_biz_open_id, 'to_alipay_dict'):
+                params['opposite_biz_open_id'] = self.opposite_biz_open_id.to_alipay_dict()
+            else:
+                params['opposite_biz_open_id'] = self.opposite_biz_open_id
         if self.opposite_fund_card_no:
             if hasattr(self.opposite_fund_card_no, 'to_alipay_dict'):
                 params['opposite_fund_card_no'] = self.opposite_fund_card_no.to_alipay_dict()
             else:
                 params['opposite_fund_card_no'] = self.opposite_fund_card_no
+        if self.opposite_fund_open_id:
+            if hasattr(self.opposite_fund_open_id, 'to_alipay_dict'):
+                params['opposite_fund_open_id'] = self.opposite_fund_open_id.to_alipay_dict()
+            else:
+                params['opposite_fund_open_id'] = self.opposite_fund_open_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -581,6 +628,11 @@ class FundItemAOPModel(object):
                 params['owner_card_no'] = self.owner_card_no.to_alipay_dict()
             else:
                 params['owner_card_no'] = self.owner_card_no
+        if self.owner_open_id:
+            if hasattr(self.owner_open_id, 'to_alipay_dict'):
+                params['owner_open_id'] = self.owner_open_id.to_alipay_dict()
+            else:
+                params['owner_open_id'] = self.owner_open_id
         if self.refund_bank_status:
             if hasattr(self.refund_bank_status, 'to_alipay_dict'):
                 params['refund_bank_status'] = self.refund_bank_status.to_alipay_dict()
@@ -678,6 +730,8 @@ class FundItemAOPModel(object):
             o.fund_tool_belong_to_crowner = d['fund_tool_belong_to_crowner']
         if 'fund_tool_owner_card_no' in d:
             o.fund_tool_owner_card_no = d['fund_tool_owner_card_no']
+        if 'fund_tool_owner_open_id' in d:
+            o.fund_tool_owner_open_id = d['fund_tool_owner_open_id']
         if 'fund_tool_type_for_crowner' in d:
             o.fund_tool_type_for_crowner = d['fund_tool_type_for_crowner']
         if 'fund_tool_type_for_system' in d:
@@ -692,12 +746,18 @@ class FundItemAOPModel(object):
             o.opposite_biz_card_alias = d['opposite_biz_card_alias']
         if 'opposite_biz_card_no' in d:
             o.opposite_biz_card_no = d['opposite_biz_card_no']
+        if 'opposite_biz_open_id' in d:
+            o.opposite_biz_open_id = d['opposite_biz_open_id']
         if 'opposite_fund_card_no' in d:
             o.opposite_fund_card_no = d['opposite_fund_card_no']
+        if 'opposite_fund_open_id' in d:
+            o.opposite_fund_open_id = d['opposite_fund_open_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'owner_card_no' in d:
             o.owner_card_no = d['owner_card_no']
+        if 'owner_open_id' in d:
+            o.owner_open_id = d['owner_open_id']
         if 'refund_bank_status' in d:
             o.refund_bank_status = d['refund_bank_status']
         if 'slip_amount' in d:

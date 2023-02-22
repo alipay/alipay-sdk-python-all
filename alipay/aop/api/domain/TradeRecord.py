@@ -15,6 +15,7 @@ class TradeRecord(object):
         self._modified_time = None
         self._opposite_logon_id = None
         self._opposite_name = None
+        self._opposite_open_id = None
         self._opposite_user_id = None
         self._order_from = None
         self._order_status = None
@@ -22,6 +23,7 @@ class TradeRecord(object):
         self._order_type = None
         self._owner_logon_id = None
         self._owner_name = None
+        self._owner_open_id = None
         self._owner_user_id = None
         self._partner_id = None
         self._service_charge = None
@@ -77,6 +79,13 @@ class TradeRecord(object):
     def opposite_name(self, value):
         self._opposite_name = value
     @property
+    def opposite_open_id(self):
+        return self._opposite_open_id
+
+    @opposite_open_id.setter
+    def opposite_open_id(self, value):
+        self._opposite_open_id = value
+    @property
     def opposite_user_id(self):
         return self._opposite_user_id
 
@@ -125,6 +134,13 @@ class TradeRecord(object):
     @owner_name.setter
     def owner_name(self, value):
         self._owner_name = value
+    @property
+    def owner_open_id(self):
+        return self._owner_open_id
+
+    @owner_open_id.setter
+    def owner_open_id(self, value):
+        self._owner_open_id = value
     @property
     def owner_user_id(self):
         return self._owner_user_id
@@ -192,6 +208,11 @@ class TradeRecord(object):
                 params['opposite_name'] = self.opposite_name.to_alipay_dict()
             else:
                 params['opposite_name'] = self.opposite_name
+        if self.opposite_open_id:
+            if hasattr(self.opposite_open_id, 'to_alipay_dict'):
+                params['opposite_open_id'] = self.opposite_open_id.to_alipay_dict()
+            else:
+                params['opposite_open_id'] = self.opposite_open_id
         if self.opposite_user_id:
             if hasattr(self.opposite_user_id, 'to_alipay_dict'):
                 params['opposite_user_id'] = self.opposite_user_id.to_alipay_dict()
@@ -227,6 +248,11 @@ class TradeRecord(object):
                 params['owner_name'] = self.owner_name.to_alipay_dict()
             else:
                 params['owner_name'] = self.owner_name
+        if self.owner_open_id:
+            if hasattr(self.owner_open_id, 'to_alipay_dict'):
+                params['owner_open_id'] = self.owner_open_id.to_alipay_dict()
+            else:
+                params['owner_open_id'] = self.owner_open_id
         if self.owner_user_id:
             if hasattr(self.owner_user_id, 'to_alipay_dict'):
                 params['owner_user_id'] = self.owner_user_id.to_alipay_dict()
@@ -268,6 +294,8 @@ class TradeRecord(object):
             o.opposite_logon_id = d['opposite_logon_id']
         if 'opposite_name' in d:
             o.opposite_name = d['opposite_name']
+        if 'opposite_open_id' in d:
+            o.opposite_open_id = d['opposite_open_id']
         if 'opposite_user_id' in d:
             o.opposite_user_id = d['opposite_user_id']
         if 'order_from' in d:
@@ -282,6 +310,8 @@ class TradeRecord(object):
             o.owner_logon_id = d['owner_logon_id']
         if 'owner_name' in d:
             o.owner_name = d['owner_name']
+        if 'owner_open_id' in d:
+            o.owner_open_id = d['owner_open_id']
         if 'owner_user_id' in d:
             o.owner_user_id = d['owner_user_id']
         if 'partner_id' in d:

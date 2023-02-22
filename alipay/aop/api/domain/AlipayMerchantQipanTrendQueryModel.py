@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TrendQueryRequest import TrendQueryRequest
 
 
 class AlipayMerchantQipanTrendQueryModel(object):
@@ -24,7 +25,10 @@ class AlipayMerchantQipanTrendQueryModel(object):
 
     @request_params.setter
     def request_params(self, value):
-        self._request_params = value
+        if isinstance(value, TrendQueryRequest):
+            self._request_params = value
+        else:
+            self._request_params = TrendQueryRequest.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):

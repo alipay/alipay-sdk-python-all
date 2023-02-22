@@ -14,7 +14,6 @@ class AlipayMerchantOrderRefundModel(object):
         self._biz_scene = None
         self._buyer = None
         self._ext_info = None
-        self._open_id = None
         self._order_id = None
         self._out_biz_no = None
         self._refund_reason = None
@@ -50,13 +49,6 @@ class AlipayMerchantOrderRefundModel(object):
                     self._ext_info.append(i)
                 else:
                     self._ext_info.append(OrderExtInfo.from_alipay_dict(i))
-    @property
-    def open_id(self):
-        return self._open_id
-
-    @open_id.setter
-    def open_id(self, value):
-        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -115,11 +107,6 @@ class AlipayMerchantOrderRefundModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
-        if self.open_id:
-            if hasattr(self.open_id, 'to_alipay_dict'):
-                params['open_id'] = self.open_id.to_alipay_dict()
-            else:
-                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -158,8 +145,6 @@ class AlipayMerchantOrderRefundModel(object):
             o.buyer = d['buyer']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
-        if 'open_id' in d:
-            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'out_biz_no' in d:

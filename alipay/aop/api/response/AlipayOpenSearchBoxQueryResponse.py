@@ -4,7 +4,9 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.SearchBoxAccountModule import SearchBoxAccountModule
+from alipay.aop.api.domain.SearchBoxAreaKeyWordModule import SearchBoxAreaKeyWordModule
 from alipay.aop.api.domain.SearchBoxBasicInfoModule import SearchBoxBasicInfoModule
+from alipay.aop.api.domain.BoxBusinessDistrictModule import BoxBusinessDistrictModule
 from alipay.aop.api.domain.SearchBoxKeyWordModule import SearchBoxKeyWordModule
 from alipay.aop.api.domain.SearchBoxImageModule import SearchBoxImageModule
 from alipay.aop.api.domain.SearchBoxServiceModule import SearchBoxServiceModule
@@ -16,9 +18,11 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenSearchBoxQueryResponse, self).__init__()
         self._account_module = None
+        self._area_keyword_module = None
         self._basic_info_module = None
         self._box_id = None
         self._box_status = None
+        self._business_district_module = None
         self._default_keywords = None
         self._keyword_module = None
         self._latest_audit_image = None
@@ -35,6 +39,16 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
             self._account_module = value
         else:
             self._account_module = SearchBoxAccountModule.from_alipay_dict(value)
+    @property
+    def area_keyword_module(self):
+        return self._area_keyword_module
+
+    @area_keyword_module.setter
+    def area_keyword_module(self, value):
+        if isinstance(value, SearchBoxAreaKeyWordModule):
+            self._area_keyword_module = value
+        else:
+            self._area_keyword_module = SearchBoxAreaKeyWordModule.from_alipay_dict(value)
     @property
     def basic_info_module(self):
         return self._basic_info_module
@@ -59,6 +73,16 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
     @box_status.setter
     def box_status(self, value):
         self._box_status = value
+    @property
+    def business_district_module(self):
+        return self._business_district_module
+
+    @business_district_module.setter
+    def business_district_module(self, value):
+        if isinstance(value, BoxBusinessDistrictModule):
+            self._business_district_module = value
+        else:
+            self._business_district_module = BoxBusinessDistrictModule.from_alipay_dict(value)
     @property
     def default_keywords(self):
         return self._default_keywords
@@ -114,12 +138,16 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
         response = super(AlipayOpenSearchBoxQueryResponse, self).parse_response_content(response_content)
         if 'account_module' in response:
             self.account_module = response['account_module']
+        if 'area_keyword_module' in response:
+            self.area_keyword_module = response['area_keyword_module']
         if 'basic_info_module' in response:
             self.basic_info_module = response['basic_info_module']
         if 'box_id' in response:
             self.box_id = response['box_id']
         if 'box_status' in response:
             self.box_status = response['box_status']
+        if 'business_district_module' in response:
+            self.business_district_module = response['business_district_module']
         if 'default_keywords' in response:
             self.default_keywords = response['default_keywords']
         if 'keyword_module' in response:

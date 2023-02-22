@@ -14,6 +14,7 @@ class AlipayGotoneMessageSmsSendRequest(object):
         self._biz_model = biz_model
         self._arguments = None
         self._mobile = None
+        self._open_id = None
         self._service_code = None
         self._user_id = None
         self._version = "1.0"
@@ -47,6 +48,13 @@ class AlipayGotoneMessageSmsSendRequest(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def service_code(self):
         return self._service_code
@@ -150,6 +158,11 @@ class AlipayGotoneMessageSmsSendRequest(object):
                 params['mobile'] = json.dumps(obj=self.mobile.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.service_code:
             if hasattr(self.service_code, 'to_alipay_dict'):
                 params['service_code'] = json.dumps(obj=self.service_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

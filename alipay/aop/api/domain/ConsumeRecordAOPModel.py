@@ -46,12 +46,14 @@ class ConsumeRecordAOPModel(object):
         self._opposite_login_id = None
         self._opposite_name = None
         self._opposite_nick_name = None
+        self._opposite_open_id = None
         self._orig_consume_title = None
         self._owner_card_no = None
         self._owner_customer_id = None
         self._owner_login_id = None
         self._owner_name = None
         self._owner_nick = None
+        self._owner_open_id = None
         self._partner_id = None
         self._pay_channel = None
         self._peerpayer_real_name = None
@@ -331,6 +333,13 @@ class ConsumeRecordAOPModel(object):
     def opposite_nick_name(self, value):
         self._opposite_nick_name = value
     @property
+    def opposite_open_id(self):
+        return self._opposite_open_id
+
+    @opposite_open_id.setter
+    def opposite_open_id(self, value):
+        self._opposite_open_id = value
+    @property
     def orig_consume_title(self):
         return self._orig_consume_title
 
@@ -372,6 +381,13 @@ class ConsumeRecordAOPModel(object):
     @owner_nick.setter
     def owner_nick(self, value):
         self._owner_nick = value
+    @property
+    def owner_open_id(self):
+        return self._owner_open_id
+
+    @owner_open_id.setter
+    def owner_open_id(self, value):
+        self._owner_open_id = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -627,6 +643,11 @@ class ConsumeRecordAOPModel(object):
                 params['opposite_nick_name'] = self.opposite_nick_name.to_alipay_dict()
             else:
                 params['opposite_nick_name'] = self.opposite_nick_name
+        if self.opposite_open_id:
+            if hasattr(self.opposite_open_id, 'to_alipay_dict'):
+                params['opposite_open_id'] = self.opposite_open_id.to_alipay_dict()
+            else:
+                params['opposite_open_id'] = self.opposite_open_id
         if self.orig_consume_title:
             if hasattr(self.orig_consume_title, 'to_alipay_dict'):
                 params['orig_consume_title'] = self.orig_consume_title.to_alipay_dict()
@@ -657,6 +678,11 @@ class ConsumeRecordAOPModel(object):
                 params['owner_nick'] = self.owner_nick.to_alipay_dict()
             else:
                 params['owner_nick'] = self.owner_nick
+        if self.owner_open_id:
+            if hasattr(self.owner_open_id, 'to_alipay_dict'):
+                params['owner_open_id'] = self.owner_open_id.to_alipay_dict()
+            else:
+                params['owner_open_id'] = self.owner_open_id
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -780,6 +806,8 @@ class ConsumeRecordAOPModel(object):
             o.opposite_name = d['opposite_name']
         if 'opposite_nick_name' in d:
             o.opposite_nick_name = d['opposite_nick_name']
+        if 'opposite_open_id' in d:
+            o.opposite_open_id = d['opposite_open_id']
         if 'orig_consume_title' in d:
             o.orig_consume_title = d['orig_consume_title']
         if 'owner_card_no' in d:
@@ -792,6 +820,8 @@ class ConsumeRecordAOPModel(object):
             o.owner_name = d['owner_name']
         if 'owner_nick' in d:
             o.owner_nick = d['owner_nick']
+        if 'owner_open_id' in d:
+            o.owner_open_id = d['owner_open_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'pay_channel' in d:

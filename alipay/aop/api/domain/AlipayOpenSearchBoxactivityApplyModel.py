@@ -11,6 +11,7 @@ class AlipayOpenSearchBoxactivityApplyModel(object):
 
     def __init__(self):
         self._action_url = None
+        self._background_word = None
         self._box_id = None
         self._end_time = None
         self._material_id = None
@@ -30,6 +31,13 @@ class AlipayOpenSearchBoxactivityApplyModel(object):
     @action_url.setter
     def action_url(self, value):
         self._action_url = value
+    @property
+    def background_word(self):
+        return self._background_word
+
+    @background_word.setter
+    def background_word(self, value):
+        self._background_word = value
     @property
     def box_id(self):
         return self._box_id
@@ -125,6 +133,11 @@ class AlipayOpenSearchBoxactivityApplyModel(object):
                 params['action_url'] = self.action_url.to_alipay_dict()
             else:
                 params['action_url'] = self.action_url
+        if self.background_word:
+            if hasattr(self.background_word, 'to_alipay_dict'):
+                params['background_word'] = self.background_word.to_alipay_dict()
+            else:
+                params['background_word'] = self.background_word
         if self.box_id:
             if hasattr(self.box_id, 'to_alipay_dict'):
                 params['box_id'] = self.box_id.to_alipay_dict()
@@ -194,6 +207,8 @@ class AlipayOpenSearchBoxactivityApplyModel(object):
         o = AlipayOpenSearchBoxactivityApplyModel()
         if 'action_url' in d:
             o.action_url = d['action_url']
+        if 'background_word' in d:
+            o.background_word = d['background_word']
         if 'box_id' in d:
             o.box_id = d['box_id']
         if 'end_time' in d:

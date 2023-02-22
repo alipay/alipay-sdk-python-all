@@ -14,6 +14,7 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
         self._expense_type = None
         self._page_num = None
         self._page_size = None
+        self._pid = None
         self._role_id = None
         self._shop_id = None
 
@@ -59,6 +60,13 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def pid(self):
+        return self._pid
+
+    @pid.setter
+    def pid(self, value):
+        self._pid = value
     @property
     def role_id(self):
         return self._role_id
@@ -107,6 +115,11 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.pid:
+            if hasattr(self.pid, 'to_alipay_dict'):
+                params['pid'] = self.pid.to_alipay_dict()
+            else:
+                params['pid'] = self.pid
         if self.role_id:
             if hasattr(self.role_id, 'to_alipay_dict'):
                 params['role_id'] = self.role_id.to_alipay_dict()
@@ -136,6 +149,8 @@ class AlipayEbppInvoiceExpensesceneMerchantQueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'pid' in d:
+            o.pid = d['pid']
         if 'role_id' in d:
             o.role_id = d['role_id']
         if 'shop_id' in d:

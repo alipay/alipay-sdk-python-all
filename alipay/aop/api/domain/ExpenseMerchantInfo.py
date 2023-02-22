@@ -9,6 +9,7 @@ class ExpenseMerchantInfo(object):
 
     def __init__(self):
         self._merchant_name = None
+        self._pid = None
         self._role_id = None
         self._role_type = None
         self._shop_id = None
@@ -21,6 +22,13 @@ class ExpenseMerchantInfo(object):
     @merchant_name.setter
     def merchant_name(self, value):
         self._merchant_name = value
+    @property
+    def pid(self):
+        return self._pid
+
+    @pid.setter
+    def pid(self, value):
+        self._pid = value
     @property
     def role_id(self):
         return self._role_id
@@ -58,6 +66,11 @@ class ExpenseMerchantInfo(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.pid:
+            if hasattr(self.pid, 'to_alipay_dict'):
+                params['pid'] = self.pid.to_alipay_dict()
+            else:
+                params['pid'] = self.pid
         if self.role_id:
             if hasattr(self.role_id, 'to_alipay_dict'):
                 params['role_id'] = self.role_id.to_alipay_dict()
@@ -87,6 +100,8 @@ class ExpenseMerchantInfo(object):
         o = ExpenseMerchantInfo()
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'pid' in d:
+            o.pid = d['pid']
         if 'role_id' in d:
             o.role_id = d['role_id']
         if 'role_type' in d:

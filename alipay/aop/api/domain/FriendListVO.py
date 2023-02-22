@@ -9,6 +9,7 @@ class FriendListVO(object):
 
     def __init__(self):
         self._head_img = None
+        self._open_id = None
         self._real_friend = None
         self._user_id = None
         self._view_name = None
@@ -20,6 +21,13 @@ class FriendListVO(object):
     @head_img.setter
     def head_img(self, value):
         self._head_img = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def real_friend(self):
         return self._real_friend
@@ -50,6 +58,11 @@ class FriendListVO(object):
                 params['head_img'] = self.head_img.to_alipay_dict()
             else:
                 params['head_img'] = self.head_img
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.real_friend:
             if hasattr(self.real_friend, 'to_alipay_dict'):
                 params['real_friend'] = self.real_friend.to_alipay_dict()
@@ -74,6 +87,8 @@ class FriendListVO(object):
         o = FriendListVO()
         if 'head_img' in d:
             o.head_img = d['head_img']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'real_friend' in d:
             o.real_friend = d['real_friend']
         if 'user_id' in d:

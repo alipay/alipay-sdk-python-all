@@ -27,6 +27,7 @@ class AlipayOpenMiniInnerversionNobuildUploadModel(object):
         self._new_builded_package_url = None
         self._new_builded_plugin_size = None
         self._new_builded_plugin_url = None
+        self._no_sign = None
         self._plugin_refs = None
         self._sub_packages = None
 
@@ -150,6 +151,13 @@ class AlipayOpenMiniInnerversionNobuildUploadModel(object):
     def new_builded_plugin_url(self, value):
         self._new_builded_plugin_url = value
     @property
+    def no_sign(self):
+        return self._no_sign
+
+    @no_sign.setter
+    def no_sign(self, value):
+        self._no_sign = value
+    @property
     def plugin_refs(self):
         return self._plugin_refs
 
@@ -264,6 +272,11 @@ class AlipayOpenMiniInnerversionNobuildUploadModel(object):
                 params['new_builded_plugin_url'] = self.new_builded_plugin_url.to_alipay_dict()
             else:
                 params['new_builded_plugin_url'] = self.new_builded_plugin_url
+        if self.no_sign:
+            if hasattr(self.no_sign, 'to_alipay_dict'):
+                params['no_sign'] = self.no_sign.to_alipay_dict()
+            else:
+                params['no_sign'] = self.no_sign
         if self.plugin_refs:
             if isinstance(self.plugin_refs, list):
                 for i in range(0, len(self.plugin_refs)):
@@ -325,6 +338,8 @@ class AlipayOpenMiniInnerversionNobuildUploadModel(object):
             o.new_builded_plugin_size = d['new_builded_plugin_size']
         if 'new_builded_plugin_url' in d:
             o.new_builded_plugin_url = d['new_builded_plugin_url']
+        if 'no_sign' in d:
+            o.no_sign = d['no_sign']
         if 'plugin_refs' in d:
             o.plugin_refs = d['plugin_refs']
         if 'sub_packages' in d:

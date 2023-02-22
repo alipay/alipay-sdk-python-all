@@ -23,6 +23,7 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
         self._offline_time = None
         self._package_url = None
         self._plugin_refs = None
+        self._process_task_id = None
         self._reject_reason = None
         self._rollback_time = None
         self._scan_result = None
@@ -131,6 +132,13 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
                 else:
                     self._plugin_refs.append(MiniAppPluginInfo.from_alipay_dict(i))
     @property
+    def process_task_id(self):
+        return self._process_task_id
+
+    @process_task_id.setter
+    def process_task_id(self, value):
+        self._process_task_id = value
+    @property
     def reject_reason(self):
         return self._reject_reason
 
@@ -222,6 +230,8 @@ class AlipayOpenMiniInnerversionInfoQueryResponse(AlipayResponse):
             self.package_url = response['package_url']
         if 'plugin_refs' in response:
             self.plugin_refs = response['plugin_refs']
+        if 'process_task_id' in response:
+            self.process_task_id = response['process_task_id']
         if 'reject_reason' in response:
             self.reject_reason = response['reject_reason']
         if 'rollback_time' in response:

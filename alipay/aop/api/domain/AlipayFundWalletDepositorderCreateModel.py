@@ -16,6 +16,7 @@ class AlipayFundWalletDepositorderCreateModel(object):
         self._order_title = None
         self._out_biz_no = None
         self._payee_info = None
+        self._platform = None
         self._product_code = None
         self._remark = None
         self._time_expire = None
@@ -74,6 +75,13 @@ class AlipayFundWalletDepositorderCreateModel(object):
             self._payee_info = value
         else:
             self._payee_info = ParticipantForm.from_alipay_dict(value)
+    @property
+    def platform(self):
+        return self._platform
+
+    @platform.setter
+    def platform(self, value):
+        self._platform = value
     @property
     def product_code(self):
         return self._product_code
@@ -148,6 +156,11 @@ class AlipayFundWalletDepositorderCreateModel(object):
                 params['payee_info'] = self.payee_info.to_alipay_dict()
             else:
                 params['payee_info'] = self.payee_info
+        if self.platform:
+            if hasattr(self.platform, 'to_alipay_dict'):
+                params['platform'] = self.platform.to_alipay_dict()
+            else:
+                params['platform'] = self.platform
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -194,6 +207,8 @@ class AlipayFundWalletDepositorderCreateModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'payee_info' in d:
             o.payee_info = d['payee_info']
+        if 'platform' in d:
+            o.platform = d['platform']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'remark' in d:

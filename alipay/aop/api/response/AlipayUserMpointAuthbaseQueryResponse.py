@@ -11,6 +11,7 @@ class AlipayUserMpointAuthbaseQueryResponse(AlipayResponse):
         super(AlipayUserMpointAuthbaseQueryResponse, self).__init__()
         self._balance = None
         self._grade = None
+        self._joint_info = None
 
     @property
     def balance(self):
@@ -26,6 +27,16 @@ class AlipayUserMpointAuthbaseQueryResponse(AlipayResponse):
     @grade.setter
     def grade(self, value):
         self._grade = value
+    @property
+    def joint_info(self):
+        return self._joint_info
+
+    @joint_info.setter
+    def joint_info(self, value):
+        if isinstance(value, list):
+            self._joint_info = list()
+            for i in value:
+                self._joint_info.append(i)
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserMpointAuthbaseQueryResponse, self).parse_response_content(response_content)
@@ -33,3 +44,5 @@ class AlipayUserMpointAuthbaseQueryResponse(AlipayResponse):
             self.balance = response['balance']
         if 'grade' in response:
             self.grade = response['grade']
+        if 'joint_info' in response:
+            self.joint_info = response['joint_info']

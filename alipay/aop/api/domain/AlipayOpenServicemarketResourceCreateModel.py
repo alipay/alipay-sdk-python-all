@@ -12,6 +12,7 @@ class AlipayOpenServicemarketResourceCreateModel(object):
         self._ability_resource_consume = None
         self._execution_time_end = None
         self._execution_time_start = None
+        self._open_id = None
         self._outer_code = None
         self._record_id = None
         self._record_unit = None
@@ -44,6 +45,13 @@ class AlipayOpenServicemarketResourceCreateModel(object):
     @execution_time_start.setter
     def execution_time_start(self, value):
         self._execution_time_start = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def outer_code(self):
         return self._outer_code
@@ -96,6 +104,11 @@ class AlipayOpenServicemarketResourceCreateModel(object):
                 params['execution_time_start'] = self.execution_time_start.to_alipay_dict()
             else:
                 params['execution_time_start'] = self.execution_time_start
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.outer_code:
             if hasattr(self.outer_code, 'to_alipay_dict'):
                 params['outer_code'] = self.outer_code.to_alipay_dict()
@@ -129,6 +142,8 @@ class AlipayOpenServicemarketResourceCreateModel(object):
             o.execution_time_end = d['execution_time_end']
         if 'execution_time_start' in d:
             o.execution_time_start = d['execution_time_start']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'outer_code' in d:
             o.outer_code = d['outer_code']
         if 'record_id' in d:

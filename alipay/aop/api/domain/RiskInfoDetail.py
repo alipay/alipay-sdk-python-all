@@ -8,11 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class RiskInfoDetail(object):
 
     def __init__(self):
+        self._dialog_index = None
         self._hit_word = None
         self._hit_word_index = None
+        self._hit_word_type = None
         self._new_picture_frame = None
         self._picture_frame = None
 
+    @property
+    def dialog_index(self):
+        return self._dialog_index
+
+    @dialog_index.setter
+    def dialog_index(self, value):
+        self._dialog_index = value
     @property
     def hit_word(self):
         return self._hit_word
@@ -27,6 +36,13 @@ class RiskInfoDetail(object):
     @hit_word_index.setter
     def hit_word_index(self, value):
         self._hit_word_index = value
+    @property
+    def hit_word_type(self):
+        return self._hit_word_type
+
+    @hit_word_type.setter
+    def hit_word_type(self, value):
+        self._hit_word_type = value
     @property
     def new_picture_frame(self):
         return self._new_picture_frame
@@ -45,6 +61,11 @@ class RiskInfoDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.dialog_index:
+            if hasattr(self.dialog_index, 'to_alipay_dict'):
+                params['dialog_index'] = self.dialog_index.to_alipay_dict()
+            else:
+                params['dialog_index'] = self.dialog_index
         if self.hit_word:
             if hasattr(self.hit_word, 'to_alipay_dict'):
                 params['hit_word'] = self.hit_word.to_alipay_dict()
@@ -55,6 +76,11 @@ class RiskInfoDetail(object):
                 params['hit_word_index'] = self.hit_word_index.to_alipay_dict()
             else:
                 params['hit_word_index'] = self.hit_word_index
+        if self.hit_word_type:
+            if hasattr(self.hit_word_type, 'to_alipay_dict'):
+                params['hit_word_type'] = self.hit_word_type.to_alipay_dict()
+            else:
+                params['hit_word_type'] = self.hit_word_type
         if self.new_picture_frame:
             if hasattr(self.new_picture_frame, 'to_alipay_dict'):
                 params['new_picture_frame'] = self.new_picture_frame.to_alipay_dict()
@@ -72,10 +98,14 @@ class RiskInfoDetail(object):
         if not d:
             return None
         o = RiskInfoDetail()
+        if 'dialog_index' in d:
+            o.dialog_index = d['dialog_index']
         if 'hit_word' in d:
             o.hit_word = d['hit_word']
         if 'hit_word_index' in d:
             o.hit_word_index = d['hit_word_index']
+        if 'hit_word_type' in d:
+            o.hit_word_type = d['hit_word_type']
         if 'new_picture_frame' in d:
             o.new_picture_frame = d['new_picture_frame']
         if 'picture_frame' in d:

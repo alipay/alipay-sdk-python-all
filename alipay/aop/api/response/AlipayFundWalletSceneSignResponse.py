@@ -9,12 +9,20 @@ class AlipayFundWalletSceneSignResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayFundWalletSceneSignResponse, self).__init__()
+        self._asset_no = None
         self._available_amount = None
         self._biz_scene = None
         self._out_biz_no = None
         self._total_amount = None
         self._user_wallet_id = None
 
+    @property
+    def asset_no(self):
+        return self._asset_no
+
+    @asset_no.setter
+    def asset_no(self, value):
+        self._asset_no = value
     @property
     def available_amount(self):
         return self._available_amount
@@ -53,6 +61,8 @@ class AlipayFundWalletSceneSignResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundWalletSceneSignResponse, self).parse_response_content(response_content)
+        if 'asset_no' in response:
+            self.asset_no = response['asset_no']
         if 'available_amount' in response:
             self.available_amount = response['available_amount']
         if 'biz_scene' in response:

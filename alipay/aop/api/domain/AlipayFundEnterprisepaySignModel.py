@@ -9,6 +9,7 @@ class AlipayFundEnterprisepaySignModel(object):
 
     def __init__(self):
         self._account_name = None
+        self._appoint_sign_terminal = None
         self._biz_scene = None
         self._ext_params = None
         self._identity = None
@@ -26,6 +27,13 @@ class AlipayFundEnterprisepaySignModel(object):
     @account_name.setter
     def account_name(self, value):
         self._account_name = value
+    @property
+    def appoint_sign_terminal(self):
+        return self._appoint_sign_terminal
+
+    @appoint_sign_terminal.setter
+    def appoint_sign_terminal(self, value):
+        self._appoint_sign_terminal = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -98,6 +106,11 @@ class AlipayFundEnterprisepaySignModel(object):
                 params['account_name'] = self.account_name.to_alipay_dict()
             else:
                 params['account_name'] = self.account_name
+        if self.appoint_sign_terminal:
+            if hasattr(self.appoint_sign_terminal, 'to_alipay_dict'):
+                params['appoint_sign_terminal'] = self.appoint_sign_terminal.to_alipay_dict()
+            else:
+                params['appoint_sign_terminal'] = self.appoint_sign_terminal
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -152,6 +165,8 @@ class AlipayFundEnterprisepaySignModel(object):
         o = AlipayFundEnterprisepaySignModel()
         if 'account_name' in d:
             o.account_name = d['account_name']
+        if 'appoint_sign_terminal' in d:
+            o.appoint_sign_terminal = d['appoint_sign_terminal']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'ext_params' in d:

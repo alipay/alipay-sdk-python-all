@@ -22,6 +22,7 @@ class AnttechBlockchainDefinDataserviceCropbaseQueryResponse(AlipayResponse):
         self._harvest_forecast_info = None
         self._harvest_progress_info = None
         self._planting_info = None
+        self._plot_area = None
         self._region_code = None
         self._soil_moisture_info = None
         self._update_date = None
@@ -91,6 +92,13 @@ class AnttechBlockchainDefinDataserviceCropbaseQueryResponse(AlipayResponse):
                     self._planting_info.append(i)
                 else:
                     self._planting_info.append(CropsPlantingInfo.from_alipay_dict(i))
+    @property
+    def plot_area(self):
+        return self._plot_area
+
+    @plot_area.setter
+    def plot_area(self, value):
+        self._plot_area = value
     @property
     def region_code(self):
         return self._region_code
@@ -164,6 +172,8 @@ class AnttechBlockchainDefinDataserviceCropbaseQueryResponse(AlipayResponse):
             self.harvest_progress_info = response['harvest_progress_info']
         if 'planting_info' in response:
             self.planting_info = response['planting_info']
+        if 'plot_area' in response:
+            self.plot_area = response['plot_area']
         if 'region_code' in response:
             self.region_code = response['region_code']
         if 'soil_moisture_info' in response:

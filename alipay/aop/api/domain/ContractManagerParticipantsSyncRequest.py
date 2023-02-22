@@ -9,6 +9,7 @@ class ContractManagerParticipantsSyncRequest(object):
 
     def __init__(self):
         self._name = None
+        self._open_ids = None
         self._principal_name = None
         self._principal_type = None
         self._role = None
@@ -23,6 +24,16 @@ class ContractManagerParticipantsSyncRequest(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_ids(self):
+        return self._open_ids
+
+    @open_ids.setter
+    def open_ids(self, value):
+        if isinstance(value, list):
+            self._open_ids = list()
+            for i in value:
+                self._open_ids.append(i)
     @property
     def principal_name(self):
         return self._principal_name
@@ -77,6 +88,16 @@ class ContractManagerParticipantsSyncRequest(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open_ids:
+            if isinstance(self.open_ids, list):
+                for i in range(0, len(self.open_ids)):
+                    element = self.open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.open_ids, 'to_alipay_dict'):
+                params['open_ids'] = self.open_ids.to_alipay_dict()
+            else:
+                params['open_ids'] = self.open_ids
         if self.principal_name:
             if hasattr(self.principal_name, 'to_alipay_dict'):
                 params['principal_name'] = self.principal_name.to_alipay_dict()
@@ -121,6 +142,8 @@ class ContractManagerParticipantsSyncRequest(object):
         o = ContractManagerParticipantsSyncRequest()
         if 'name' in d:
             o.name = d['name']
+        if 'open_ids' in d:
+            o.open_ids = d['open_ids']
         if 'principal_name' in d:
             o.principal_name = d['principal_name']
         if 'principal_type' in d:

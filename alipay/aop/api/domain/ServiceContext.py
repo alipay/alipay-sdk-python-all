@@ -10,6 +10,7 @@ class ServiceContext(object):
     def __init__(self):
         self._client_ip = None
         self._client_pcidguid = None
+        self._open_id = None
         self._server_name = None
         self._session_id = None
         self._user_id = None
@@ -28,6 +29,13 @@ class ServiceContext(object):
     @client_pcidguid.setter
     def client_pcidguid(self, value):
         self._client_pcidguid = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def server_name(self):
         return self._server_name
@@ -63,6 +71,11 @@ class ServiceContext(object):
                 params['client_pcidguid'] = self.client_pcidguid.to_alipay_dict()
             else:
                 params['client_pcidguid'] = self.client_pcidguid
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.server_name:
             if hasattr(self.server_name, 'to_alipay_dict'):
                 params['server_name'] = self.server_name.to_alipay_dict()
@@ -89,6 +102,8 @@ class ServiceContext(object):
             o.client_ip = d['client_ip']
         if 'client_pcidguid' in d:
             o.client_pcidguid = d['client_pcidguid']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'server_name' in d:
             o.server_name = d['server_name']
         if 'session_id' in d:

@@ -10,6 +10,7 @@ class AlipayOpenMiniExperienceQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenMiniExperienceQueryResponse, self).__init__()
         self._exp_qr_code_url = None
+        self._exp_schema_url = None
         self._status = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayOpenMiniExperienceQueryResponse(AlipayResponse):
     @exp_qr_code_url.setter
     def exp_qr_code_url(self, value):
         self._exp_qr_code_url = value
+    @property
+    def exp_schema_url(self):
+        return self._exp_schema_url
+
+    @exp_schema_url.setter
+    def exp_schema_url(self, value):
+        self._exp_schema_url = value
     @property
     def status(self):
         return self._status
@@ -31,5 +39,7 @@ class AlipayOpenMiniExperienceQueryResponse(AlipayResponse):
         response = super(AlipayOpenMiniExperienceQueryResponse, self).parse_response_content(response_content)
         if 'exp_qr_code_url' in response:
             self.exp_qr_code_url = response['exp_qr_code_url']
+        if 'exp_schema_url' in response:
+            self.exp_schema_url = response['exp_schema_url']
         if 'status' in response:
             self.status = response['status']

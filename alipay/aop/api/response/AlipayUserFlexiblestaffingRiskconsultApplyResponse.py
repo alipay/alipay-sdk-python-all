@@ -51,10 +51,13 @@ class AlipayUserFlexiblestaffingRiskconsultApplyResponse(AlipayResponse):
 
     @risk_results.setter
     def risk_results(self, value):
-        if isinstance(value, RiskApplyConsult):
-            self._risk_results = value
-        else:
-            self._risk_results = RiskApplyConsult.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._risk_results = list()
+            for i in value:
+                if isinstance(i, RiskApplyConsult):
+                    self._risk_results.append(i)
+                else:
+                    self._risk_results.append(RiskApplyConsult.from_alipay_dict(i))
     @property
     def suggest_risk(self):
         return self._suggest_risk

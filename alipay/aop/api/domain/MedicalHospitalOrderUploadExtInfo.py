@@ -26,13 +26,16 @@ class MedicalHospitalOrderUploadExtInfo(object):
         self._hospital = None
         self._hospital_id_type = None
         self._hospital_register_id = None
+        self._is_done_by_self = None
         self._medical_num = None
         self._medical_order_id = None
         self._merchant_order_link_page = None
+        self._merchant_order_link_type = None
         self._navigation = None
         self._patient = None
         self._report_url = None
         self._scheduled_time = None
+        self._summary_tip = None
         self._take_medicine_loc = None
         self._take_medicine_url = None
         self._take_num_password = None
@@ -168,6 +171,13 @@ class MedicalHospitalOrderUploadExtInfo(object):
     def hospital_register_id(self, value):
         self._hospital_register_id = value
     @property
+    def is_done_by_self(self):
+        return self._is_done_by_self
+
+    @is_done_by_self.setter
+    def is_done_by_self(self, value):
+        self._is_done_by_self = value
+    @property
     def medical_num(self):
         return self._medical_num
 
@@ -188,6 +198,13 @@ class MedicalHospitalOrderUploadExtInfo(object):
     @merchant_order_link_page.setter
     def merchant_order_link_page(self, value):
         self._merchant_order_link_page = value
+    @property
+    def merchant_order_link_type(self):
+        return self._merchant_order_link_type
+
+    @merchant_order_link_type.setter
+    def merchant_order_link_type(self, value):
+        self._merchant_order_link_type = value
     @property
     def navigation(self):
         return self._navigation
@@ -216,6 +233,13 @@ class MedicalHospitalOrderUploadExtInfo(object):
     @scheduled_time.setter
     def scheduled_time(self, value):
         self._scheduled_time = value
+    @property
+    def summary_tip(self):
+        return self._summary_tip
+
+    @summary_tip.setter
+    def summary_tip(self, value):
+        self._summary_tip = value
     @property
     def take_medicine_loc(self):
         return self._take_medicine_loc
@@ -359,6 +383,11 @@ class MedicalHospitalOrderUploadExtInfo(object):
                 params['hospital_register_id'] = self.hospital_register_id.to_alipay_dict()
             else:
                 params['hospital_register_id'] = self.hospital_register_id
+        if self.is_done_by_self:
+            if hasattr(self.is_done_by_self, 'to_alipay_dict'):
+                params['is_done_by_self'] = self.is_done_by_self.to_alipay_dict()
+            else:
+                params['is_done_by_self'] = self.is_done_by_self
         if self.medical_num:
             if hasattr(self.medical_num, 'to_alipay_dict'):
                 params['medical_num'] = self.medical_num.to_alipay_dict()
@@ -374,6 +403,11 @@ class MedicalHospitalOrderUploadExtInfo(object):
                 params['merchant_order_link_page'] = self.merchant_order_link_page.to_alipay_dict()
             else:
                 params['merchant_order_link_page'] = self.merchant_order_link_page
+        if self.merchant_order_link_type:
+            if hasattr(self.merchant_order_link_type, 'to_alipay_dict'):
+                params['merchant_order_link_type'] = self.merchant_order_link_type.to_alipay_dict()
+            else:
+                params['merchant_order_link_type'] = self.merchant_order_link_type
         if self.navigation:
             if hasattr(self.navigation, 'to_alipay_dict'):
                 params['navigation'] = self.navigation.to_alipay_dict()
@@ -394,6 +428,11 @@ class MedicalHospitalOrderUploadExtInfo(object):
                 params['scheduled_time'] = self.scheduled_time.to_alipay_dict()
             else:
                 params['scheduled_time'] = self.scheduled_time
+        if self.summary_tip:
+            if hasattr(self.summary_tip, 'to_alipay_dict'):
+                params['summary_tip'] = self.summary_tip.to_alipay_dict()
+            else:
+                params['summary_tip'] = self.summary_tip
         if self.take_medicine_loc:
             if hasattr(self.take_medicine_loc, 'to_alipay_dict'):
                 params['take_medicine_loc'] = self.take_medicine_loc.to_alipay_dict()
@@ -472,12 +511,16 @@ class MedicalHospitalOrderUploadExtInfo(object):
             o.hospital_id_type = d['hospital_id_type']
         if 'hospital_register_id' in d:
             o.hospital_register_id = d['hospital_register_id']
+        if 'is_done_by_self' in d:
+            o.is_done_by_self = d['is_done_by_self']
         if 'medical_num' in d:
             o.medical_num = d['medical_num']
         if 'medical_order_id' in d:
             o.medical_order_id = d['medical_order_id']
         if 'merchant_order_link_page' in d:
             o.merchant_order_link_page = d['merchant_order_link_page']
+        if 'merchant_order_link_type' in d:
+            o.merchant_order_link_type = d['merchant_order_link_type']
         if 'navigation' in d:
             o.navigation = d['navigation']
         if 'patient' in d:
@@ -486,6 +529,8 @@ class MedicalHospitalOrderUploadExtInfo(object):
             o.report_url = d['report_url']
         if 'scheduled_time' in d:
             o.scheduled_time = d['scheduled_time']
+        if 'summary_tip' in d:
+            o.summary_tip = d['summary_tip']
         if 'take_medicine_loc' in d:
             o.take_medicine_loc = d['take_medicine_loc']
         if 'take_medicine_url' in d:

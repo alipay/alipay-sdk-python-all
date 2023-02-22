@@ -13,6 +13,7 @@ class AlipayGotoneMessageMailSendRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._arguments = None
+        self._open_id = None
         self._receiver = None
         self._service_code = None
         self._subject = None
@@ -41,6 +42,13 @@ class AlipayGotoneMessageMailSendRequest(object):
     @arguments.setter
     def arguments(self, value):
         self._arguments = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def receiver(self):
         return self._receiver
@@ -153,6 +161,11 @@ class AlipayGotoneMessageMailSendRequest(object):
                 params['arguments'] = json.dumps(obj=self.arguments.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['arguments'] = self.arguments
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = json.dumps(obj=self.open_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['open_id'] = self.open_id
         if self.receiver:
             if hasattr(self.receiver, 'to_alipay_dict'):
                 params['receiver'] = json.dumps(obj=self.receiver.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

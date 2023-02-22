@@ -35,6 +35,7 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
         self._seller_id = None
         self._seller_name = None
         self._traction_mass = None
+        self._trade_no = None
         self._unladen_mass = None
         self._user_id = None
         self._user_mobile = None
@@ -234,6 +235,13 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
     def traction_mass(self, value):
         self._traction_mass = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def unladen_mass(self):
         return self._unladen_mass
 
@@ -428,6 +436,11 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
                 params['traction_mass'] = self.traction_mass.to_alipay_dict()
             else:
                 params['traction_mass'] = self.traction_mass
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         if self.unladen_mass:
             if hasattr(self.unladen_mass, 'to_alipay_dict'):
                 params['unladen_mass'] = self.unladen_mass.to_alipay_dict()
@@ -529,6 +542,8 @@ class AlipayCommerceTransportEtcEcodataSyncModel(object):
             o.seller_name = d['seller_name']
         if 'traction_mass' in d:
             o.traction_mass = d['traction_mass']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         if 'unladen_mass' in d:
             o.unladen_mass = d['unladen_mass']
         if 'user_id' in d:

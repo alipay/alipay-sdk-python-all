@@ -10,8 +10,11 @@ from alipay.aop.api.domain.SearchBoxServiceInfo import SearchBoxServiceInfo
 class AlipayOpenSearchBoxApplyModel(object):
 
     def __init__(self):
+        self._area_keywords = None
         self._box_desc = None
         self._brand_id = None
+        self._business_benefit_switch = None
+        self._business_district_ids = None
         self._custom_keywords = None
         self._image_id = None
         self._image_name = None
@@ -20,6 +23,16 @@ class AlipayOpenSearchBoxApplyModel(object):
         self._service_infos = None
         self._target_appid = None
 
+    @property
+    def area_keywords(self):
+        return self._area_keywords
+
+    @area_keywords.setter
+    def area_keywords(self, value):
+        if isinstance(value, list):
+            self._area_keywords = list()
+            for i in value:
+                self._area_keywords.append(i)
     @property
     def box_desc(self):
         return self._box_desc
@@ -34,6 +47,23 @@ class AlipayOpenSearchBoxApplyModel(object):
     @brand_id.setter
     def brand_id(self, value):
         self._brand_id = value
+    @property
+    def business_benefit_switch(self):
+        return self._business_benefit_switch
+
+    @business_benefit_switch.setter
+    def business_benefit_switch(self, value):
+        self._business_benefit_switch = value
+    @property
+    def business_district_ids(self):
+        return self._business_district_ids
+
+    @business_district_ids.setter
+    def business_district_ids(self, value):
+        if isinstance(value, list):
+            self._business_district_ids = list()
+            for i in value:
+                self._business_district_ids.append(i)
     @property
     def custom_keywords(self):
         return self._custom_keywords
@@ -102,6 +132,16 @@ class AlipayOpenSearchBoxApplyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.area_keywords:
+            if isinstance(self.area_keywords, list):
+                for i in range(0, len(self.area_keywords)):
+                    element = self.area_keywords[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.area_keywords[i] = element.to_alipay_dict()
+            if hasattr(self.area_keywords, 'to_alipay_dict'):
+                params['area_keywords'] = self.area_keywords.to_alipay_dict()
+            else:
+                params['area_keywords'] = self.area_keywords
         if self.box_desc:
             if hasattr(self.box_desc, 'to_alipay_dict'):
                 params['box_desc'] = self.box_desc.to_alipay_dict()
@@ -112,6 +152,21 @@ class AlipayOpenSearchBoxApplyModel(object):
                 params['brand_id'] = self.brand_id.to_alipay_dict()
             else:
                 params['brand_id'] = self.brand_id
+        if self.business_benefit_switch:
+            if hasattr(self.business_benefit_switch, 'to_alipay_dict'):
+                params['business_benefit_switch'] = self.business_benefit_switch.to_alipay_dict()
+            else:
+                params['business_benefit_switch'] = self.business_benefit_switch
+        if self.business_district_ids:
+            if isinstance(self.business_district_ids, list):
+                for i in range(0, len(self.business_district_ids)):
+                    element = self.business_district_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.business_district_ids[i] = element.to_alipay_dict()
+            if hasattr(self.business_district_ids, 'to_alipay_dict'):
+                params['business_district_ids'] = self.business_district_ids.to_alipay_dict()
+            else:
+                params['business_district_ids'] = self.business_district_ids
         if self.custom_keywords:
             if isinstance(self.custom_keywords, list):
                 for i in range(0, len(self.custom_keywords)):
@@ -169,10 +224,16 @@ class AlipayOpenSearchBoxApplyModel(object):
         if not d:
             return None
         o = AlipayOpenSearchBoxApplyModel()
+        if 'area_keywords' in d:
+            o.area_keywords = d['area_keywords']
         if 'box_desc' in d:
             o.box_desc = d['box_desc']
         if 'brand_id' in d:
             o.brand_id = d['brand_id']
+        if 'business_benefit_switch' in d:
+            o.business_benefit_switch = d['business_benefit_switch']
+        if 'business_district_ids' in d:
+            o.business_district_ids = d['business_district_ids']
         if 'custom_keywords' in d:
             o.custom_keywords = d['custom_keywords']
         if 'image_id' in d:

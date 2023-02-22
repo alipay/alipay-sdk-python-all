@@ -11,6 +11,7 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenSearchBoxactivityQueryResponse, self).__init__()
+        self._background_word = None
         self._box_activity_id = None
         self._box_id = None
         self._end_time = None
@@ -27,6 +28,13 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
         self._title = None
         self._video_info = None
 
+    @property
+    def background_word(self):
+        return self._background_word
+
+    @background_word.setter
+    def background_word(self, value):
+        self._background_word = value
     @property
     def box_activity_id(self):
         return self._box_activity_id
@@ -144,6 +152,8 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenSearchBoxactivityQueryResponse, self).parse_response_content(response_content)
+        if 'background_word' in response:
+            self.background_word = response['background_word']
         if 'box_activity_id' in response:
             self.box_activity_id = response['box_activity_id']
         if 'box_id' in response:

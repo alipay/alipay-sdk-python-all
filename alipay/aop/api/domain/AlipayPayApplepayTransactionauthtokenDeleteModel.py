@@ -13,6 +13,7 @@ class AlipayPayApplepayTransactionauthtokenDeleteModel(object):
         self._provisioning_bundle_identifiers = None
         self._push_token = None
         self._reference_identifier = None
+        self._reference_open_id = None
 
     @property
     def device_identifier(self):
@@ -52,6 +53,13 @@ class AlipayPayApplepayTransactionauthtokenDeleteModel(object):
     @reference_identifier.setter
     def reference_identifier(self, value):
         self._reference_identifier = value
+    @property
+    def reference_open_id(self):
+        return self._reference_open_id
+
+    @reference_open_id.setter
+    def reference_open_id(self, value):
+        self._reference_open_id = value
 
 
     def to_alipay_dict(self):
@@ -86,6 +94,11 @@ class AlipayPayApplepayTransactionauthtokenDeleteModel(object):
                 params['reference_identifier'] = self.reference_identifier.to_alipay_dict()
             else:
                 params['reference_identifier'] = self.reference_identifier
+        if self.reference_open_id:
+            if hasattr(self.reference_open_id, 'to_alipay_dict'):
+                params['reference_open_id'] = self.reference_open_id.to_alipay_dict()
+            else:
+                params['reference_open_id'] = self.reference_open_id
         return params
 
     @staticmethod
@@ -103,6 +116,8 @@ class AlipayPayApplepayTransactionauthtokenDeleteModel(object):
             o.push_token = d['push_token']
         if 'reference_identifier' in d:
             o.reference_identifier = d['reference_identifier']
+        if 'reference_open_id' in d:
+            o.reference_open_id = d['reference_open_id']
         return o
 
 

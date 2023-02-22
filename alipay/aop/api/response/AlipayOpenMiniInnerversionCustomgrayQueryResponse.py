@@ -13,6 +13,7 @@ class AlipayOpenMiniInnerversionCustomgrayQueryResponse(AlipayResponse):
         super(AlipayOpenMiniInnerversionCustomgrayQueryResponse, self).__init__()
         self._gray_groups = None
         self._member_infos = None
+        self._total_count = None
 
     @property
     def gray_groups(self):
@@ -37,6 +38,13 @@ class AlipayOpenMiniInnerversionCustomgrayQueryResponse(AlipayResponse):
                     self._member_infos.append(i)
                 else:
                     self._member_infos.append(MiniAppCustomGrayMemberInfoDto.from_alipay_dict(i))
+    @property
+    def total_count(self):
+        return self._total_count
+
+    @total_count.setter
+    def total_count(self, value):
+        self._total_count = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniInnerversionCustomgrayQueryResponse, self).parse_response_content(response_content)
@@ -44,3 +52,5 @@ class AlipayOpenMiniInnerversionCustomgrayQueryResponse(AlipayResponse):
             self.gray_groups = response['gray_groups']
         if 'member_infos' in response:
             self.member_infos = response['member_infos']
+        if 'total_count' in response:
+            self.total_count = response['total_count']

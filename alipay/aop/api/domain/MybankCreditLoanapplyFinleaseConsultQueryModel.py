@@ -9,6 +9,7 @@ class MybankCreditLoanapplyFinleaseConsultQueryModel(object):
 
     def __init__(self):
         self._corporationname = None
+        self._open_id = None
         self._registrationno = None
         self._userid = None
 
@@ -19,6 +20,13 @@ class MybankCreditLoanapplyFinleaseConsultQueryModel(object):
     @corporationname.setter
     def corporationname(self, value):
         self._corporationname = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def registrationno(self):
         return self._registrationno
@@ -42,6 +50,11 @@ class MybankCreditLoanapplyFinleaseConsultQueryModel(object):
                 params['corporationname'] = self.corporationname.to_alipay_dict()
             else:
                 params['corporationname'] = self.corporationname
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.registrationno:
             if hasattr(self.registrationno, 'to_alipay_dict'):
                 params['registrationno'] = self.registrationno.to_alipay_dict()
@@ -61,6 +74,8 @@ class MybankCreditLoanapplyFinleaseConsultQueryModel(object):
         o = MybankCreditLoanapplyFinleaseConsultQueryModel()
         if 'corporationname' in d:
             o.corporationname = d['corporationname']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'registrationno' in d:
             o.registrationno = d['registrationno']
         if 'userid' in d:

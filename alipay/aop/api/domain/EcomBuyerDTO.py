@@ -20,6 +20,7 @@ class EcomBuyerDTO(object):
         self._buyer_nick = None
         self._buyer_order_count = None
         self._buyer_order_refund_exchange_rate = None
+        self._buyer_tag_data = None
         self._id_card_no = None
         self._id_card_type = None
         self._phone = None
@@ -110,6 +111,13 @@ class EcomBuyerDTO(object):
     @buyer_order_refund_exchange_rate.setter
     def buyer_order_refund_exchange_rate(self, value):
         self._buyer_order_refund_exchange_rate = value
+    @property
+    def buyer_tag_data(self):
+        return self._buyer_tag_data
+
+    @buyer_tag_data.setter
+    def buyer_tag_data(self, value):
+        self._buyer_tag_data = value
     @property
     def id_card_no(self):
         return self._id_card_no
@@ -209,6 +217,11 @@ class EcomBuyerDTO(object):
                 params['buyer_order_refund_exchange_rate'] = self.buyer_order_refund_exchange_rate.to_alipay_dict()
             else:
                 params['buyer_order_refund_exchange_rate'] = self.buyer_order_refund_exchange_rate
+        if self.buyer_tag_data:
+            if hasattr(self.buyer_tag_data, 'to_alipay_dict'):
+                params['buyer_tag_data'] = self.buyer_tag_data.to_alipay_dict()
+            else:
+                params['buyer_tag_data'] = self.buyer_tag_data
         if self.id_card_no:
             if hasattr(self.id_card_no, 'to_alipay_dict'):
                 params['id_card_no'] = self.id_card_no.to_alipay_dict()
@@ -265,6 +278,8 @@ class EcomBuyerDTO(object):
             o.buyer_order_count = d['buyer_order_count']
         if 'buyer_order_refund_exchange_rate' in d:
             o.buyer_order_refund_exchange_rate = d['buyer_order_refund_exchange_rate']
+        if 'buyer_tag_data' in d:
+            o.buyer_tag_data = d['buyer_tag_data']
         if 'id_card_no' in d:
             o.id_card_no = d['id_card_no']
         if 'id_card_type' in d:

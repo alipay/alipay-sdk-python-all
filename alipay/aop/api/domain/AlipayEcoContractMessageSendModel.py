@@ -14,6 +14,7 @@ class AlipayEcoContractMessageSendModel(object):
         self._flow_id = None
         self._isv_app_id = None
         self._msg_template_id = None
+        self._open_ids = None
         self._sign_platform_code = None
         self._user_ids = None
 
@@ -62,6 +63,16 @@ class AlipayEcoContractMessageSendModel(object):
     @msg_template_id.setter
     def msg_template_id(self, value):
         self._msg_template_id = value
+    @property
+    def open_ids(self):
+        return self._open_ids
+
+    @open_ids.setter
+    def open_ids(self, value):
+        if isinstance(value, list):
+            self._open_ids = list()
+            for i in value:
+                self._open_ids.append(i)
     @property
     def sign_platform_code(self):
         return self._sign_platform_code
@@ -118,6 +129,16 @@ class AlipayEcoContractMessageSendModel(object):
                 params['msg_template_id'] = self.msg_template_id.to_alipay_dict()
             else:
                 params['msg_template_id'] = self.msg_template_id
+        if self.open_ids:
+            if isinstance(self.open_ids, list):
+                for i in range(0, len(self.open_ids)):
+                    element = self.open_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.open_ids[i] = element.to_alipay_dict()
+            if hasattr(self.open_ids, 'to_alipay_dict'):
+                params['open_ids'] = self.open_ids.to_alipay_dict()
+            else:
+                params['open_ids'] = self.open_ids
         if self.sign_platform_code:
             if hasattr(self.sign_platform_code, 'to_alipay_dict'):
                 params['sign_platform_code'] = self.sign_platform_code.to_alipay_dict()
@@ -152,6 +173,8 @@ class AlipayEcoContractMessageSendModel(object):
             o.isv_app_id = d['isv_app_id']
         if 'msg_template_id' in d:
             o.msg_template_id = d['msg_template_id']
+        if 'open_ids' in d:
+            o.open_ids = d['open_ids']
         if 'sign_platform_code' in d:
             o.sign_platform_code = d['sign_platform_code']
         if 'user_ids' in d:

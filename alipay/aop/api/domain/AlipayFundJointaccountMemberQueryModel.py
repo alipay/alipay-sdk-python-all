@@ -11,6 +11,7 @@ class AlipayFundJointaccountMemberQueryModel(object):
         self._account_id = None
         self._agreement_no = None
         self._biz_scene = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._product_code = None
@@ -37,6 +38,13 @@ class AlipayFundJointaccountMemberQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -84,6 +92,11 @@ class AlipayFundJointaccountMemberQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayFundJointaccountMemberQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

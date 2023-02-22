@@ -10,6 +10,7 @@ class AlipayOpenOperationOpenbizmockQuitModel(object):
     def __init__(self):
         self._open_id = None
         self._userid = None
+        self._xixihha = None
 
     @property
     def open_id(self):
@@ -25,6 +26,13 @@ class AlipayOpenOperationOpenbizmockQuitModel(object):
     @userid.setter
     def userid(self, value):
         self._userid = value
+    @property
+    def xixihha(self):
+        return self._xixihha
+
+    @xixihha.setter
+    def xixihha(self, value):
+        self._xixihha = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AlipayOpenOperationOpenbizmockQuitModel(object):
                 params['userid'] = self.userid.to_alipay_dict()
             else:
                 params['userid'] = self.userid
+        if self.xixihha:
+            if hasattr(self.xixihha, 'to_alipay_dict'):
+                params['xixihha'] = self.xixihha.to_alipay_dict()
+            else:
+                params['xixihha'] = self.xixihha
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AlipayOpenOperationOpenbizmockQuitModel(object):
             o.open_id = d['open_id']
         if 'userid' in d:
             o.userid = d['userid']
+        if 'xixihha' in d:
+            o.xixihha = d['xixihha']
         return o
 
 

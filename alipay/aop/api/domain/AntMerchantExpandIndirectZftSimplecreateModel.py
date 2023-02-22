@@ -27,10 +27,14 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
         self._default_settle_rule = None
         self._external_id = None
         self._in_door_images = None
+        self._info_source_open_id = None
+        self._info_source_uid = None
         self._invoice_info = None
         self._license_auth_letter_image = None
         self._mcc = None
         self._out_door_images = None
+        self._oversea_settle_account = None
+        self._oversea_settle_open_id = None
         self._qualifications = None
         self._service = None
         self._service_phone = None
@@ -134,6 +138,20 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
     def in_door_images(self, value):
         self._in_door_images = value
     @property
+    def info_source_open_id(self):
+        return self._info_source_open_id
+
+    @info_source_open_id.setter
+    def info_source_open_id(self, value):
+        self._info_source_open_id = value
+    @property
+    def info_source_uid(self):
+        return self._info_source_uid
+
+    @info_source_uid.setter
+    def info_source_uid(self, value):
+        self._info_source_uid = value
+    @property
     def invoice_info(self):
         return self._invoice_info
 
@@ -164,6 +182,20 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
     @out_door_images.setter
     def out_door_images(self, value):
         self._out_door_images = value
+    @property
+    def oversea_settle_account(self):
+        return self._oversea_settle_account
+
+    @oversea_settle_account.setter
+    def oversea_settle_account(self, value):
+        self._oversea_settle_account = value
+    @property
+    def oversea_settle_open_id(self):
+        return self._oversea_settle_open_id
+
+    @oversea_settle_open_id.setter
+    def oversea_settle_open_id(self, value):
+        self._oversea_settle_open_id = value
     @property
     def qualifications(self):
         return self._qualifications
@@ -275,6 +307,16 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
                 params['in_door_images'] = self.in_door_images.to_alipay_dict()
             else:
                 params['in_door_images'] = self.in_door_images
+        if self.info_source_open_id:
+            if hasattr(self.info_source_open_id, 'to_alipay_dict'):
+                params['info_source_open_id'] = self.info_source_open_id.to_alipay_dict()
+            else:
+                params['info_source_open_id'] = self.info_source_open_id
+        if self.info_source_uid:
+            if hasattr(self.info_source_uid, 'to_alipay_dict'):
+                params['info_source_uid'] = self.info_source_uid.to_alipay_dict()
+            else:
+                params['info_source_uid'] = self.info_source_uid
         if self.invoice_info:
             if hasattr(self.invoice_info, 'to_alipay_dict'):
                 params['invoice_info'] = self.invoice_info.to_alipay_dict()
@@ -295,6 +337,16 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
                 params['out_door_images'] = self.out_door_images.to_alipay_dict()
             else:
                 params['out_door_images'] = self.out_door_images
+        if self.oversea_settle_account:
+            if hasattr(self.oversea_settle_account, 'to_alipay_dict'):
+                params['oversea_settle_account'] = self.oversea_settle_account.to_alipay_dict()
+            else:
+                params['oversea_settle_account'] = self.oversea_settle_account
+        if self.oversea_settle_open_id:
+            if hasattr(self.oversea_settle_open_id, 'to_alipay_dict'):
+                params['oversea_settle_open_id'] = self.oversea_settle_open_id.to_alipay_dict()
+            else:
+                params['oversea_settle_open_id'] = self.oversea_settle_open_id
         if self.qualifications:
             if isinstance(self.qualifications, list):
                 for i in range(0, len(self.qualifications)):
@@ -361,6 +413,10 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
             o.external_id = d['external_id']
         if 'in_door_images' in d:
             o.in_door_images = d['in_door_images']
+        if 'info_source_open_id' in d:
+            o.info_source_open_id = d['info_source_open_id']
+        if 'info_source_uid' in d:
+            o.info_source_uid = d['info_source_uid']
         if 'invoice_info' in d:
             o.invoice_info = d['invoice_info']
         if 'license_auth_letter_image' in d:
@@ -369,6 +425,10 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
             o.mcc = d['mcc']
         if 'out_door_images' in d:
             o.out_door_images = d['out_door_images']
+        if 'oversea_settle_account' in d:
+            o.oversea_settle_account = d['oversea_settle_account']
+        if 'oversea_settle_open_id' in d:
+            o.oversea_settle_open_id = d['oversea_settle_open_id']
         if 'qualifications' in d:
             o.qualifications = d['qualifications']
         if 'service' in d:
