@@ -13,6 +13,7 @@ class AlipaySocialBaseContentlibStandardcontentQueryResponse(AlipayResponse):
         super(AlipaySocialBaseContentlibStandardcontentQueryResponse, self).__init__()
         self._content_id = None
         self._link = None
+        self._permission_status = None
         self._source_author = None
         self._source_content = None
         self._source_link = None
@@ -39,6 +40,13 @@ class AlipaySocialBaseContentlibStandardcontentQueryResponse(AlipayResponse):
     @link.setter
     def link(self, value):
         self._link = value
+    @property
+    def permission_status(self):
+        return self._permission_status
+
+    @permission_status.setter
+    def permission_status(self, value):
+        self._permission_status = value
     @property
     def source_author(self):
         return self._source_author
@@ -138,6 +146,8 @@ class AlipaySocialBaseContentlibStandardcontentQueryResponse(AlipayResponse):
             self.content_id = response['content_id']
         if 'link' in response:
             self.link = response['link']
+        if 'permission_status' in response:
+            self.permission_status = response['permission_status']
         if 'source_author' in response:
             self.source_author = response['source_author']
         if 'source_content' in response:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ApeRecContext(object):
 
     def __init__(self):
+        self._black_index_list = None
         self._cate = None
         self._city_code = None
         self._client_env = None
@@ -21,6 +22,16 @@ class ApeRecContext(object):
         self._select_id_list = None
         self._tags = None
 
+    @property
+    def black_index_list(self):
+        return self._black_index_list
+
+    @black_index_list.setter
+    def black_index_list(self, value):
+        if isinstance(value, list):
+            self._black_index_list = list()
+            for i in value:
+                self._black_index_list.append(i)
     @property
     def cate(self):
         return self._cate
@@ -124,6 +135,16 @@ class ApeRecContext(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.black_index_list:
+            if isinstance(self.black_index_list, list):
+                for i in range(0, len(self.black_index_list)):
+                    element = self.black_index_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.black_index_list[i] = element.to_alipay_dict()
+            if hasattr(self.black_index_list, 'to_alipay_dict'):
+                params['black_index_list'] = self.black_index_list.to_alipay_dict()
+            else:
+                params['black_index_list'] = self.black_index_list
         if self.cate:
             if isinstance(self.cate, list):
                 for i in range(0, len(self.cate)):
@@ -216,6 +237,8 @@ class ApeRecContext(object):
         if not d:
             return None
         o = ApeRecContext()
+        if 'black_index_list' in d:
+            o.black_index_list = d['black_index_list']
         if 'cate' in d:
             o.cate = d['cate']
         if 'city_code' in d:

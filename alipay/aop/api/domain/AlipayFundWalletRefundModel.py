@@ -10,11 +10,13 @@ class AlipayFundWalletRefundModel(object):
     def __init__(self):
         self._amount = None
         self._biz_scene = None
+        self._original_deposit_order_id = None
         self._out_biz_no = None
         self._principal_id = None
         self._principal_open_id = None
         self._principal_type = None
         self._product_code = None
+        self._refund_strategy = None
         self._user_wallet_id = None
 
     @property
@@ -31,6 +33,13 @@ class AlipayFundWalletRefundModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def original_deposit_order_id(self):
+        return self._original_deposit_order_id
+
+    @original_deposit_order_id.setter
+    def original_deposit_order_id(self, value):
+        self._original_deposit_order_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -67,6 +76,13 @@ class AlipayFundWalletRefundModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def refund_strategy(self):
+        return self._refund_strategy
+
+    @refund_strategy.setter
+    def refund_strategy(self, value):
+        self._refund_strategy = value
+    @property
     def user_wallet_id(self):
         return self._user_wallet_id
 
@@ -87,6 +103,11 @@ class AlipayFundWalletRefundModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.original_deposit_order_id:
+            if hasattr(self.original_deposit_order_id, 'to_alipay_dict'):
+                params['original_deposit_order_id'] = self.original_deposit_order_id.to_alipay_dict()
+            else:
+                params['original_deposit_order_id'] = self.original_deposit_order_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -112,6 +133,11 @@ class AlipayFundWalletRefundModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.refund_strategy:
+            if hasattr(self.refund_strategy, 'to_alipay_dict'):
+                params['refund_strategy'] = self.refund_strategy.to_alipay_dict()
+            else:
+                params['refund_strategy'] = self.refund_strategy
         if self.user_wallet_id:
             if hasattr(self.user_wallet_id, 'to_alipay_dict'):
                 params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
@@ -128,6 +154,8 @@ class AlipayFundWalletRefundModel(object):
             o.amount = d['amount']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'original_deposit_order_id' in d:
+            o.original_deposit_order_id = d['original_deposit_order_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'principal_id' in d:
@@ -138,6 +166,8 @@ class AlipayFundWalletRefundModel(object):
             o.principal_type = d['principal_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'refund_strategy' in d:
+            o.refund_strategy = d['refund_strategy']
         if 'user_wallet_id' in d:
             o.user_wallet_id = d['user_wallet_id']
         return o

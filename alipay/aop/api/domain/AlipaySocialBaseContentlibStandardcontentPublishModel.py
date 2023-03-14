@@ -10,6 +10,7 @@ from alipay.aop.api.domain.SourceOffer import SourceOffer
 class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
 
     def __init__(self):
+        self._permission_status = None
         self._public_id = None
         self._source_author = None
         self._source_content = None
@@ -21,6 +22,13 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
         self._source_title = None
         self._source_type = None
 
+    @property
+    def permission_status(self):
+        return self._permission_status
+
+    @permission_status.setter
+    def permission_status(self, value):
+        self._permission_status = value
     @property
     def public_id(self):
         return self._public_id
@@ -107,6 +115,11 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.permission_status:
+            if hasattr(self.permission_status, 'to_alipay_dict'):
+                params['permission_status'] = self.permission_status.to_alipay_dict()
+            else:
+                params['permission_status'] = self.permission_status
         if self.public_id:
             if hasattr(self.public_id, 'to_alipay_dict'):
                 params['public_id'] = self.public_id.to_alipay_dict()
@@ -174,6 +187,8 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
         if not d:
             return None
         o = AlipaySocialBaseContentlibStandardcontentPublishModel()
+        if 'permission_status' in d:
+            o.permission_status = d['permission_status']
         if 'public_id' in d:
             o.public_id = d['public_id']
         if 'source_author' in d:

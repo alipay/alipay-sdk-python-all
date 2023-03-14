@@ -10,6 +10,7 @@ class MybankCreditLoantradeLoanschemeFullQueryModel(object):
 
     def __init__(self):
         self._alipay_id = None
+        self._alipay_open_id = None
         self._apply_amt = None
         self._apply_date = None
         self._credit_no = None
@@ -31,6 +32,13 @@ class MybankCreditLoantradeLoanschemeFullQueryModel(object):
     @alipay_id.setter
     def alipay_id(self, value):
         self._alipay_id = value
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def apply_amt(self):
         return self._apply_amt
@@ -137,6 +145,11 @@ class MybankCreditLoantradeLoanschemeFullQueryModel(object):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
             else:
                 params['alipay_id'] = self.alipay_id
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.apply_amt:
             if hasattr(self.apply_amt, 'to_alipay_dict'):
                 params['apply_amt'] = self.apply_amt.to_alipay_dict()
@@ -216,6 +229,8 @@ class MybankCreditLoantradeLoanschemeFullQueryModel(object):
         o = MybankCreditLoantradeLoanschemeFullQueryModel()
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'apply_amt' in d:
             o.apply_amt = d['apply_amt']
         if 'apply_date' in d:

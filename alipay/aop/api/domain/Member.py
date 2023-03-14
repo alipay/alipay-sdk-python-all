@@ -12,6 +12,7 @@ class Member(object):
         self._ip_role_id = None
         self._site = None
         self._site_login_id = None
+        self._site_open_id = None
         self._site_user_id = None
         self._use_type = None
 
@@ -43,6 +44,13 @@ class Member(object):
     @site_login_id.setter
     def site_login_id(self, value):
         self._site_login_id = value
+    @property
+    def site_open_id(self):
+        return self._site_open_id
+
+    @site_open_id.setter
+    def site_open_id(self, value):
+        self._site_open_id = value
     @property
     def site_user_id(self):
         return self._site_user_id
@@ -81,6 +89,11 @@ class Member(object):
                 params['site_login_id'] = self.site_login_id.to_alipay_dict()
             else:
                 params['site_login_id'] = self.site_login_id
+        if self.site_open_id:
+            if hasattr(self.site_open_id, 'to_alipay_dict'):
+                params['site_open_id'] = self.site_open_id.to_alipay_dict()
+            else:
+                params['site_open_id'] = self.site_open_id
         if self.site_user_id:
             if hasattr(self.site_user_id, 'to_alipay_dict'):
                 params['site_user_id'] = self.site_user_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class Member(object):
             o.site = d['site']
         if 'site_login_id' in d:
             o.site_login_id = d['site_login_id']
+        if 'site_open_id' in d:
+            o.site_open_id = d['site_open_id']
         if 'site_user_id' in d:
             o.site_user_id = d['site_user_id']
         if 'use_type' in d:

@@ -9,13 +9,39 @@ from alipay.aop.api.domain.UseCaseStepInfo import UseCaseStepInfo
 class AlipayOpenMiniAutocheckCaseCreateModel(object):
 
     def __init__(self):
+        self._biz_line_name = None
+        self._case_app_type = None
+        self._case_ids = None
         self._case_intro = None
         self._case_name = None
         self._case_step_models = None
         self._creator = None
         self._ext_info = None
         self._time_out = None
+        self._use_case_exe_map = None
+        self._use_case_type = None
 
+    @property
+    def biz_line_name(self):
+        return self._biz_line_name
+
+    @biz_line_name.setter
+    def biz_line_name(self, value):
+        self._biz_line_name = value
+    @property
+    def case_app_type(self):
+        return self._case_app_type
+
+    @case_app_type.setter
+    def case_app_type(self, value):
+        self._case_app_type = value
+    @property
+    def case_ids(self):
+        return self._case_ids
+
+    @case_ids.setter
+    def case_ids(self, value):
+        self._case_ids = value
     @property
     def case_intro(self):
         return self._case_intro
@@ -64,10 +90,39 @@ class AlipayOpenMiniAutocheckCaseCreateModel(object):
     @time_out.setter
     def time_out(self, value):
         self._time_out = value
+    @property
+    def use_case_exe_map(self):
+        return self._use_case_exe_map
+
+    @use_case_exe_map.setter
+    def use_case_exe_map(self, value):
+        self._use_case_exe_map = value
+    @property
+    def use_case_type(self):
+        return self._use_case_type
+
+    @use_case_type.setter
+    def use_case_type(self, value):
+        self._use_case_type = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_line_name:
+            if hasattr(self.biz_line_name, 'to_alipay_dict'):
+                params['biz_line_name'] = self.biz_line_name.to_alipay_dict()
+            else:
+                params['biz_line_name'] = self.biz_line_name
+        if self.case_app_type:
+            if hasattr(self.case_app_type, 'to_alipay_dict'):
+                params['case_app_type'] = self.case_app_type.to_alipay_dict()
+            else:
+                params['case_app_type'] = self.case_app_type
+        if self.case_ids:
+            if hasattr(self.case_ids, 'to_alipay_dict'):
+                params['case_ids'] = self.case_ids.to_alipay_dict()
+            else:
+                params['case_ids'] = self.case_ids
         if self.case_intro:
             if hasattr(self.case_intro, 'to_alipay_dict'):
                 params['case_intro'] = self.case_intro.to_alipay_dict()
@@ -103,6 +158,16 @@ class AlipayOpenMiniAutocheckCaseCreateModel(object):
                 params['time_out'] = self.time_out.to_alipay_dict()
             else:
                 params['time_out'] = self.time_out
+        if self.use_case_exe_map:
+            if hasattr(self.use_case_exe_map, 'to_alipay_dict'):
+                params['use_case_exe_map'] = self.use_case_exe_map.to_alipay_dict()
+            else:
+                params['use_case_exe_map'] = self.use_case_exe_map
+        if self.use_case_type:
+            if hasattr(self.use_case_type, 'to_alipay_dict'):
+                params['use_case_type'] = self.use_case_type.to_alipay_dict()
+            else:
+                params['use_case_type'] = self.use_case_type
         return params
 
     @staticmethod
@@ -110,6 +175,12 @@ class AlipayOpenMiniAutocheckCaseCreateModel(object):
         if not d:
             return None
         o = AlipayOpenMiniAutocheckCaseCreateModel()
+        if 'biz_line_name' in d:
+            o.biz_line_name = d['biz_line_name']
+        if 'case_app_type' in d:
+            o.case_app_type = d['case_app_type']
+        if 'case_ids' in d:
+            o.case_ids = d['case_ids']
         if 'case_intro' in d:
             o.case_intro = d['case_intro']
         if 'case_name' in d:
@@ -122,6 +193,10 @@ class AlipayOpenMiniAutocheckCaseCreateModel(object):
             o.ext_info = d['ext_info']
         if 'time_out' in d:
             o.time_out = d['time_out']
+        if 'use_case_exe_map' in d:
+            o.use_case_exe_map = d['use_case_exe_map']
+        if 'use_case_type' in d:
+            o.use_case_type = d['use_case_type']
         return o
 
 

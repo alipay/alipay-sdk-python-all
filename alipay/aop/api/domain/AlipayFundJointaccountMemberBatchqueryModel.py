@@ -13,6 +13,7 @@ class AlipayFundJointaccountMemberBatchqueryModel(object):
         self._biz_scene = None
         self._identity = None
         self._identity_type = None
+        self._last_open_id = None
         self._last_user_id = None
         self._page_num = None
         self._page_size = None
@@ -53,6 +54,13 @@ class AlipayFundJointaccountMemberBatchqueryModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def last_open_id(self):
+        return self._last_open_id
+
+    @last_open_id.setter
+    def last_open_id(self, value):
+        self._last_open_id = value
     @property
     def last_user_id(self):
         return self._last_user_id
@@ -110,6 +118,11 @@ class AlipayFundJointaccountMemberBatchqueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.last_open_id:
+            if hasattr(self.last_open_id, 'to_alipay_dict'):
+                params['last_open_id'] = self.last_open_id.to_alipay_dict()
+            else:
+                params['last_open_id'] = self.last_open_id
         if self.last_user_id:
             if hasattr(self.last_user_id, 'to_alipay_dict'):
                 params['last_user_id'] = self.last_user_id.to_alipay_dict()
@@ -147,6 +160,8 @@ class AlipayFundJointaccountMemberBatchqueryModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'last_open_id' in d:
+            o.last_open_id = d['last_open_id']
         if 'last_user_id' in d:
             o.last_user_id = d['last_user_id']
         if 'page_num' in d:

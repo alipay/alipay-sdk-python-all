@@ -12,6 +12,7 @@ class SourceContentInfo(object):
     def __init__(self):
         self._content_id = None
         self._link = None
+        self._permission_status = None
         self._source_author = None
         self._source_link = None
         self._source_media_infos = None
@@ -37,6 +38,13 @@ class SourceContentInfo(object):
     @link.setter
     def link(self, value):
         self._link = value
+    @property
+    def permission_status(self):
+        return self._permission_status
+
+    @permission_status.setter
+    def permission_status(self, value):
+        self._permission_status = value
     @property
     def source_author(self):
         return self._source_author
@@ -136,6 +144,11 @@ class SourceContentInfo(object):
                 params['link'] = self.link.to_alipay_dict()
             else:
                 params['link'] = self.link
+        if self.permission_status:
+            if hasattr(self.permission_status, 'to_alipay_dict'):
+                params['permission_status'] = self.permission_status.to_alipay_dict()
+            else:
+                params['permission_status'] = self.permission_status
         if self.source_author:
             if hasattr(self.source_author, 'to_alipay_dict'):
                 params['source_author'] = self.source_author.to_alipay_dict()
@@ -212,6 +225,8 @@ class SourceContentInfo(object):
             o.content_id = d['content_id']
         if 'link' in d:
             o.link = d['link']
+        if 'permission_status' in d:
+            o.permission_status = d['permission_status']
         if 'source_author' in d:
             o.source_author = d['source_author']
         if 'source_link' in d:

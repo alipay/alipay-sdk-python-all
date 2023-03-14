@@ -14,6 +14,7 @@ class AlipayFundEnterprisepayMemberModifyModel(object):
         self._biz_scene = None
         self._fund_ext_info = None
         self._group_id_list = None
+        self._open_id = None
         self._operation_type_list = None
         self._product_code = None
         self._user_id = None
@@ -59,6 +60,13 @@ class AlipayFundEnterprisepayMemberModifyModel(object):
             self._group_id_list = list()
             for i in value:
                 self._group_id_list.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operation_type_list(self):
         return self._operation_type_list
@@ -117,6 +125,11 @@ class AlipayFundEnterprisepayMemberModifyModel(object):
                 params['group_id_list'] = self.group_id_list.to_alipay_dict()
             else:
                 params['group_id_list'] = self.group_id_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.operation_type_list:
             if isinstance(self.operation_type_list, list):
                 for i in range(0, len(self.operation_type_list)):
@@ -154,6 +167,8 @@ class AlipayFundEnterprisepayMemberModifyModel(object):
             o.fund_ext_info = d['fund_ext_info']
         if 'group_id_list' in d:
             o.group_id_list = d['group_id_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'operation_type_list' in d:
             o.operation_type_list = d['operation_type_list']
         if 'product_code' in d:

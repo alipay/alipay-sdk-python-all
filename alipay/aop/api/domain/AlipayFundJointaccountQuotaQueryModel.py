@@ -12,6 +12,7 @@ class AlipayFundJointaccountQuotaQueryModel(object):
         self._agreement_no = None
         self._biz_scene = None
         self._member_id = None
+        self._member_open_id = None
         self._operate_role = None
         self._product_code = None
 
@@ -43,6 +44,13 @@ class AlipayFundJointaccountQuotaQueryModel(object):
     @member_id.setter
     def member_id(self, value):
         self._member_id = value
+    @property
+    def member_open_id(self):
+        return self._member_open_id
+
+    @member_open_id.setter
+    def member_open_id(self, value):
+        self._member_open_id = value
     @property
     def operate_role(self):
         return self._operate_role
@@ -81,6 +89,11 @@ class AlipayFundJointaccountQuotaQueryModel(object):
                 params['member_id'] = self.member_id.to_alipay_dict()
             else:
                 params['member_id'] = self.member_id
+        if self.member_open_id:
+            if hasattr(self.member_open_id, 'to_alipay_dict'):
+                params['member_open_id'] = self.member_open_id.to_alipay_dict()
+            else:
+                params['member_open_id'] = self.member_open_id
         if self.operate_role:
             if hasattr(self.operate_role, 'to_alipay_dict'):
                 params['operate_role'] = self.operate_role.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayFundJointaccountQuotaQueryModel(object):
             o.biz_scene = d['biz_scene']
         if 'member_id' in d:
             o.member_id = d['member_id']
+        if 'member_open_id' in d:
+            o.member_open_id = d['member_open_id']
         if 'operate_role' in d:
             o.operate_role = d['operate_role']
         if 'product_code' in d:

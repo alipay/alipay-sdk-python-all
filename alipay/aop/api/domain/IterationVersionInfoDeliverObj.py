@@ -22,10 +22,12 @@ class IterationVersionInfoDeliverObj(object):
         self._l_2 = None
         self._l_3 = None
         self._l_3_code = None
+        self._multiplatform = None
         self._performance_test_report = None
         self._product_white_paper = None
         self._release_note = None
         self._security_white_paper = None
+        self._stamp_time = None
         self._sys_design_specification = None
         self._sys_installation_and_deployment_manual = None
         self._sys_installation_package = None
@@ -136,6 +138,13 @@ class IterationVersionInfoDeliverObj(object):
     def l_3_code(self, value):
         self._l_3_code = value
     @property
+    def multiplatform(self):
+        return self._multiplatform
+
+    @multiplatform.setter
+    def multiplatform(self, value):
+        self._multiplatform = value
+    @property
     def performance_test_report(self):
         return self._performance_test_report
 
@@ -163,6 +172,13 @@ class IterationVersionInfoDeliverObj(object):
     @security_white_paper.setter
     def security_white_paper(self, value):
         self._security_white_paper = value
+    @property
+    def stamp_time(self):
+        return self._stamp_time
+
+    @stamp_time.setter
+    def stamp_time(self, value):
+        self._stamp_time = value
     @property
     def sys_design_specification(self):
         return self._sys_design_specification
@@ -307,6 +323,11 @@ class IterationVersionInfoDeliverObj(object):
                 params['l_3_code'] = self.l_3_code.to_alipay_dict()
             else:
                 params['l_3_code'] = self.l_3_code
+        if self.multiplatform:
+            if hasattr(self.multiplatform, 'to_alipay_dict'):
+                params['multiplatform'] = self.multiplatform.to_alipay_dict()
+            else:
+                params['multiplatform'] = self.multiplatform
         if self.performance_test_report:
             if hasattr(self.performance_test_report, 'to_alipay_dict'):
                 params['performance_test_report'] = self.performance_test_report.to_alipay_dict()
@@ -327,6 +348,11 @@ class IterationVersionInfoDeliverObj(object):
                 params['security_white_paper'] = self.security_white_paper.to_alipay_dict()
             else:
                 params['security_white_paper'] = self.security_white_paper
+        if self.stamp_time:
+            if hasattr(self.stamp_time, 'to_alipay_dict'):
+                params['stamp_time'] = self.stamp_time.to_alipay_dict()
+            else:
+                params['stamp_time'] = self.stamp_time
         if self.sys_design_specification:
             if hasattr(self.sys_design_specification, 'to_alipay_dict'):
                 params['sys_design_specification'] = self.sys_design_specification.to_alipay_dict()
@@ -412,6 +438,8 @@ class IterationVersionInfoDeliverObj(object):
             o.l_3 = d['l_3']
         if 'l_3_code' in d:
             o.l_3_code = d['l_3_code']
+        if 'multiplatform' in d:
+            o.multiplatform = d['multiplatform']
         if 'performance_test_report' in d:
             o.performance_test_report = d['performance_test_report']
         if 'product_white_paper' in d:
@@ -420,6 +448,8 @@ class IterationVersionInfoDeliverObj(object):
             o.release_note = d['release_note']
         if 'security_white_paper' in d:
             o.security_white_paper = d['security_white_paper']
+        if 'stamp_time' in d:
+            o.stamp_time = d['stamp_time']
         if 'sys_design_specification' in d:
             o.sys_design_specification = d['sys_design_specification']
         if 'sys_installation_and_deployment_manual' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AlbumExtInfo import AlbumExtInfo
 from alipay.aop.api.domain.AlbumPopularityInfo import AlbumPopularityInfo
 from alipay.aop.api.domain.AlbumPriceInfo import AlbumPriceInfo
 from alipay.aop.api.domain.AlbumPromoInfo import AlbumPromoInfo
@@ -26,6 +27,7 @@ class AlipayUserAntbooksAlbumSyncModel(object):
         self._cover_url_middle = None
         self._cover_url_small = None
         self._create_time = None
+        self._ext_info_list = None
         self._name = None
         self._operate_type = None
         self._popularity_info = None
@@ -138,6 +140,19 @@ class AlipayUserAntbooksAlbumSyncModel(object):
     @create_time.setter
     def create_time(self, value):
         self._create_time = value
+    @property
+    def ext_info_list(self):
+        return self._ext_info_list
+
+    @ext_info_list.setter
+    def ext_info_list(self, value):
+        if isinstance(value, list):
+            self._ext_info_list = list()
+            for i in value:
+                if isinstance(i, AlbumExtInfo):
+                    self._ext_info_list.append(i)
+                else:
+                    self._ext_info_list.append(AlbumExtInfo.from_alipay_dict(i))
     @property
     def name(self):
         return self._name
@@ -308,6 +323,16 @@ class AlipayUserAntbooksAlbumSyncModel(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.ext_info_list:
+            if isinstance(self.ext_info_list, list):
+                for i in range(0, len(self.ext_info_list)):
+                    element = self.ext_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ext_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.ext_info_list, 'to_alipay_dict'):
+                params['ext_info_list'] = self.ext_info_list.to_alipay_dict()
+            else:
+                params['ext_info_list'] = self.ext_info_list
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -408,6 +433,8 @@ class AlipayUserAntbooksAlbumSyncModel(object):
             o.cover_url_small = d['cover_url_small']
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'ext_info_list' in d:
+            o.ext_info_list = d['ext_info_list']
         if 'name' in d:
             o.name = d['name']
         if 'operate_type' in d:

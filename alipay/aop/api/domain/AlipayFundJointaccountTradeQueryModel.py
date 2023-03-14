@@ -12,6 +12,7 @@ class AlipayFundJointaccountTradeQueryModel(object):
         self._agreement_no = None
         self._biz_scene = None
         self._member_id = None
+        self._member_open_id = None
         self._platform_order_id = None
         self._product_code = None
         self._trade_no = None
@@ -44,6 +45,13 @@ class AlipayFundJointaccountTradeQueryModel(object):
     @member_id.setter
     def member_id(self, value):
         self._member_id = value
+    @property
+    def member_open_id(self):
+        return self._member_open_id
+
+    @member_open_id.setter
+    def member_open_id(self, value):
+        self._member_open_id = value
     @property
     def platform_order_id(self):
         return self._platform_order_id
@@ -89,6 +97,11 @@ class AlipayFundJointaccountTradeQueryModel(object):
                 params['member_id'] = self.member_id.to_alipay_dict()
             else:
                 params['member_id'] = self.member_id
+        if self.member_open_id:
+            if hasattr(self.member_open_id, 'to_alipay_dict'):
+                params['member_open_id'] = self.member_open_id.to_alipay_dict()
+            else:
+                params['member_open_id'] = self.member_open_id
         if self.platform_order_id:
             if hasattr(self.platform_order_id, 'to_alipay_dict'):
                 params['platform_order_id'] = self.platform_order_id.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayFundJointaccountTradeQueryModel(object):
             o.biz_scene = d['biz_scene']
         if 'member_id' in d:
             o.member_id = d['member_id']
+        if 'member_open_id' in d:
+            o.member_open_id = d['member_open_id']
         if 'platform_order_id' in d:
             o.platform_order_id = d['platform_order_id']
         if 'product_code' in d:

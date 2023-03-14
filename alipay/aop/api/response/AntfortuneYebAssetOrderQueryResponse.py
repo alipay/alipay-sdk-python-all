@@ -13,6 +13,7 @@ class AntfortuneYebAssetOrderQueryResponse(AlipayResponse):
         self._close_reason = None
         self._gmt_close = None
         self._gmt_create = None
+        self._open_id = None
         self._order_no = None
         self._order_status = None
         self._order_timeout = None
@@ -47,6 +48,13 @@ class AntfortuneYebAssetOrderQueryResponse(AlipayResponse):
     @gmt_create.setter
     def gmt_create(self, value):
         self._gmt_create = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -93,6 +101,8 @@ class AntfortuneYebAssetOrderQueryResponse(AlipayResponse):
             self.gmt_close = response['gmt_close']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'order_status' in response:

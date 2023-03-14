@@ -18,6 +18,7 @@ class HighwaySceneData(object):
         self._end_station_province = None
         self._end_time = None
         self._lane_no = None
+        self._out_trip_id = None
         self._start_province_code = None
         self._start_station_code = None
         self._start_station_id = None
@@ -100,6 +101,13 @@ class HighwaySceneData(object):
     @lane_no.setter
     def lane_no(self, value):
         self._lane_no = value
+    @property
+    def out_trip_id(self):
+        return self._out_trip_id
+
+    @out_trip_id.setter
+    def out_trip_id(self, value):
+        self._out_trip_id = value
     @property
     def start_province_code(self):
         return self._start_province_code
@@ -231,6 +239,11 @@ class HighwaySceneData(object):
                 params['lane_no'] = self.lane_no.to_alipay_dict()
             else:
                 params['lane_no'] = self.lane_no
+        if self.out_trip_id:
+            if hasattr(self.out_trip_id, 'to_alipay_dict'):
+                params['out_trip_id'] = self.out_trip_id.to_alipay_dict()
+            else:
+                params['out_trip_id'] = self.out_trip_id
         if self.start_province_code:
             if hasattr(self.start_province_code, 'to_alipay_dict'):
                 params['start_province_code'] = self.start_province_code.to_alipay_dict()
@@ -313,6 +326,8 @@ class HighwaySceneData(object):
             o.end_time = d['end_time']
         if 'lane_no' in d:
             o.lane_no = d['lane_no']
+        if 'out_trip_id' in d:
+            o.out_trip_id = d['out_trip_id']
         if 'start_province_code' in d:
             o.start_province_code = d['start_province_code']
         if 'start_station_code' in d:

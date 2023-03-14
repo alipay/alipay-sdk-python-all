@@ -8,14 +8,23 @@ from alipay.aop.api.constant.ParamConstants import *
 class CreditPayUserVO(object):
 
     def __init__(self):
+        self._alipay_open_id = None
         self._alipay_user_id = None
         self._cert_no = None
         self._cert_type = None
         self._ip_id = None
         self._ip_role_id = None
         self._site = None
+        self._site_open_id = None
         self._site_user_id = None
 
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def alipay_user_id(self):
         return self._alipay_user_id
@@ -59,6 +68,13 @@ class CreditPayUserVO(object):
     def site(self, value):
         self._site = value
     @property
+    def site_open_id(self):
+        return self._site_open_id
+
+    @site_open_id.setter
+    def site_open_id(self, value):
+        self._site_open_id = value
+    @property
     def site_user_id(self):
         return self._site_user_id
 
@@ -69,6 +85,11 @@ class CreditPayUserVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.alipay_user_id:
             if hasattr(self.alipay_user_id, 'to_alipay_dict'):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
@@ -99,6 +120,11 @@ class CreditPayUserVO(object):
                 params['site'] = self.site.to_alipay_dict()
             else:
                 params['site'] = self.site
+        if self.site_open_id:
+            if hasattr(self.site_open_id, 'to_alipay_dict'):
+                params['site_open_id'] = self.site_open_id.to_alipay_dict()
+            else:
+                params['site_open_id'] = self.site_open_id
         if self.site_user_id:
             if hasattr(self.site_user_id, 'to_alipay_dict'):
                 params['site_user_id'] = self.site_user_id.to_alipay_dict()
@@ -111,6 +137,8 @@ class CreditPayUserVO(object):
         if not d:
             return None
         o = CreditPayUserVO()
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
         if 'cert_no' in d:
@@ -123,6 +151,8 @@ class CreditPayUserVO(object):
             o.ip_role_id = d['ip_role_id']
         if 'site' in d:
             o.site = d['site']
+        if 'site_open_id' in d:
+            o.site_open_id = d['site_open_id']
         if 'site_user_id' in d:
             o.site_user_id = d['site_user_id']
         return o

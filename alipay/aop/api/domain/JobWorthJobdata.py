@@ -18,6 +18,7 @@ class JobWorthJobdata(object):
         self._delivery_position_id = None
         self._delivery_time = None
         self._education_status = None
+        self._entry_no = None
         self._exam_score = None
         self._head_pic_id = None
         self._intention_city = None
@@ -41,6 +42,7 @@ class JobWorthJobdata(object):
         self._type = None
         self._valid_date_end = None
         self._valid_date_start = None
+        self._verify_status = None
         self._work_desc = None
         self._work_end_time = None
         self._work_property = None
@@ -117,6 +119,13 @@ class JobWorthJobdata(object):
     @education_status.setter
     def education_status(self, value):
         self._education_status = value
+    @property
+    def entry_no(self):
+        return self._entry_no
+
+    @entry_no.setter
+    def entry_no(self, value):
+        self._entry_no = value
     @property
     def exam_score(self):
         return self._exam_score
@@ -279,6 +288,13 @@ class JobWorthJobdata(object):
     def valid_date_start(self, value):
         self._valid_date_start = value
     @property
+    def verify_status(self):
+        return self._verify_status
+
+    @verify_status.setter
+    def verify_status(self, value):
+        self._verify_status = value
+    @property
     def work_desc(self):
         return self._work_desc
 
@@ -367,6 +383,11 @@ class JobWorthJobdata(object):
                 params['education_status'] = self.education_status.to_alipay_dict()
             else:
                 params['education_status'] = self.education_status
+        if self.entry_no:
+            if hasattr(self.entry_no, 'to_alipay_dict'):
+                params['entry_no'] = self.entry_no.to_alipay_dict()
+            else:
+                params['entry_no'] = self.entry_no
         if self.exam_score:
             if hasattr(self.exam_score, 'to_alipay_dict'):
                 params['exam_score'] = self.exam_score.to_alipay_dict()
@@ -482,6 +503,11 @@ class JobWorthJobdata(object):
                 params['valid_date_start'] = self.valid_date_start.to_alipay_dict()
             else:
                 params['valid_date_start'] = self.valid_date_start
+        if self.verify_status:
+            if hasattr(self.verify_status, 'to_alipay_dict'):
+                params['verify_status'] = self.verify_status.to_alipay_dict()
+            else:
+                params['verify_status'] = self.verify_status
         if self.work_desc:
             if hasattr(self.work_desc, 'to_alipay_dict'):
                 params['work_desc'] = self.work_desc.to_alipay_dict()
@@ -534,6 +560,8 @@ class JobWorthJobdata(object):
             o.delivery_time = d['delivery_time']
         if 'education_status' in d:
             o.education_status = d['education_status']
+        if 'entry_no' in d:
+            o.entry_no = d['entry_no']
         if 'exam_score' in d:
             o.exam_score = d['exam_score']
         if 'head_pic_id' in d:
@@ -580,6 +608,8 @@ class JobWorthJobdata(object):
             o.valid_date_end = d['valid_date_end']
         if 'valid_date_start' in d:
             o.valid_date_start = d['valid_date_start']
+        if 'verify_status' in d:
+            o.verify_status = d['verify_status']
         if 'work_desc' in d:
             o.work_desc = d['work_desc']
         if 'work_end_time' in d:

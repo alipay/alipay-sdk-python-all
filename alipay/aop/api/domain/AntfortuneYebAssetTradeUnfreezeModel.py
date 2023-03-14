@@ -10,6 +10,7 @@ class AntfortuneYebAssetTradeUnfreezeModel(object):
     def __init__(self):
         self._amount = None
         self._freeze_code = None
+        self._open_id = None
         self._out_biz_no = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AntfortuneYebAssetTradeUnfreezeModel(object):
     @freeze_code.setter
     def freeze_code(self, value):
         self._freeze_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -55,6 +63,11 @@ class AntfortuneYebAssetTradeUnfreezeModel(object):
                 params['freeze_code'] = self.freeze_code.to_alipay_dict()
             else:
                 params['freeze_code'] = self.freeze_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -76,6 +89,8 @@ class AntfortuneYebAssetTradeUnfreezeModel(object):
             o.amount = d['amount']
         if 'freeze_code' in d:
             o.freeze_code = d['freeze_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'user_id' in d:

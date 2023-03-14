@@ -12,6 +12,7 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayFundJointaccountTradeQueryResponse, self).__init__()
         self._buyer_id = None
+        self._buyer_open_id = None
         self._create_time = None
         self._total_amount = None
         self._trade_fund_bill_list = None
@@ -26,6 +27,13 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
     @buyer_id.setter
     def buyer_id(self, value):
         self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def create_time(self):
         return self._create_time
@@ -85,6 +93,8 @@ class AlipayFundJointaccountTradeQueryResponse(AlipayResponse):
         response = super(AlipayFundJointaccountTradeQueryResponse, self).parse_response_content(response_content)
         if 'buyer_id' in response:
             self.buyer_id = response['buyer_id']
+        if 'buyer_open_id' in response:
+            self.buyer_open_id = response['buyer_open_id']
         if 'create_time' in response:
             self.create_time = response['create_time']
         if 'total_amount' in response:

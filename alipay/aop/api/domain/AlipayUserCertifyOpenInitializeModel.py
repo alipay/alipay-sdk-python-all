@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OpenCertifyIdentityParam import OpenCertifyIdentityParam
+from alipay.aop.api.domain.OpenCertifyMerchantConfig import OpenCertifyMerchantConfig
 
 
 class AlipayUserCertifyOpenInitializeModel(object):
@@ -34,14 +36,20 @@ class AlipayUserCertifyOpenInitializeModel(object):
 
     @identity_param.setter
     def identity_param(self, value):
-        self._identity_param = value
+        if isinstance(value, OpenCertifyIdentityParam):
+            self._identity_param = value
+        else:
+            self._identity_param = OpenCertifyIdentityParam.from_alipay_dict(value)
     @property
     def merchant_config(self):
         return self._merchant_config
 
     @merchant_config.setter
     def merchant_config(self, value):
-        self._merchant_config = value
+        if isinstance(value, OpenCertifyMerchantConfig):
+            self._merchant_config = value
+        else:
+            self._merchant_config = OpenCertifyMerchantConfig.from_alipay_dict(value)
     @property
     def outer_order_no(self):
         return self._outer_order_no

@@ -14,6 +14,7 @@ class AlipayFundJointaccountQuotaQueryResponse(AlipayResponse):
         self._account_quota = None
         self._biz_scene = None
         self._member_id = None
+        self._member_open_id = None
         self._product_code = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayFundJointaccountQuotaQueryResponse(AlipayResponse):
     def member_id(self, value):
         self._member_id = value
     @property
+    def member_open_id(self):
+        return self._member_open_id
+
+    @member_open_id.setter
+    def member_open_id(self, value):
+        self._member_open_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -68,5 +76,7 @@ class AlipayFundJointaccountQuotaQueryResponse(AlipayResponse):
             self.biz_scene = response['biz_scene']
         if 'member_id' in response:
             self.member_id = response['member_id']
+        if 'member_open_id' in response:
+            self.member_open_id = response['member_open_id']
         if 'product_code' in response:
             self.product_code = response['product_code']

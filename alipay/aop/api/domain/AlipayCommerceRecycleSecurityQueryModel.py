@@ -9,6 +9,7 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
 
     def __init__(self):
         self._apdidtoken = None
+        self._biz_scene = None
         self._cert_no = None
         self._mobile = None
         self._open_id = None
@@ -23,6 +24,13 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
     @apdidtoken.setter
     def apdidtoken(self, value):
         self._apdidtoken = value
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -74,6 +82,11 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
                 params['apdidtoken'] = self.apdidtoken.to_alipay_dict()
             else:
                 params['apdidtoken'] = self.apdidtoken
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayCommerceRecycleSecurityQueryModel(object):
         o = AlipayCommerceRecycleSecurityQueryModel()
         if 'apdidtoken' in d:
             o.apdidtoken = d['apdidtoken']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'mobile' in d:

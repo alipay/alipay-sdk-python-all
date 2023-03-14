@@ -14,6 +14,7 @@ class AlipayIserviceItaskMerchantRecordSyncModel(object):
         self._biz_id = None
         self._buyer_id = None
         self._buyer_info = None
+        self._buyer_open_id = None
         self._content = None
         self._is_alipay_user = None
         self._is_authorize = None
@@ -51,6 +52,13 @@ class AlipayIserviceItaskMerchantRecordSyncModel(object):
             self._buyer_info = value
         else:
             self._buyer_info = BuyerInfo.from_alipay_dict(value)
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def content(self):
         return self._content
@@ -113,6 +121,11 @@ class AlipayIserviceItaskMerchantRecordSyncModel(object):
                 params['buyer_info'] = self.buyer_info.to_alipay_dict()
             else:
                 params['buyer_info'] = self.buyer_info
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.content:
             if hasattr(self.content, 'to_alipay_dict'):
                 params['content'] = self.content.to_alipay_dict()
@@ -153,6 +166,8 @@ class AlipayIserviceItaskMerchantRecordSyncModel(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_info' in d:
             o.buyer_info = d['buyer_info']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'content' in d:
             o.content = d['content']
         if 'is_alipay_user' in d:

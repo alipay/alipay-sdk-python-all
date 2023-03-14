@@ -19,6 +19,7 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
         self._pay_amount = None
         self._pos = None
         self._project_id = None
+        self._scene = None
         self._spm = None
         self._trace_id = None
         self._user_id = None
@@ -103,6 +104,13 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def scene(self):
+        return self._scene
+
+    @scene.setter
+    def scene(self, value):
+        self._scene = value
     @property
     def spm(self):
         return self._spm
@@ -204,6 +212,11 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.scene:
+            if hasattr(self.scene, 'to_alipay_dict'):
+                params['scene'] = self.scene.to_alipay_dict()
+            else:
+                params['scene'] = self.scene
         if self.spm:
             if hasattr(self.spm, 'to_alipay_dict'):
                 params['spm'] = self.spm.to_alipay_dict()
@@ -263,6 +276,8 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
             o.pos = d['pos']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'scene' in d:
+            o.scene = d['scene']
         if 'spm' in d:
             o.spm = d['spm']
         if 'trace_id' in d:

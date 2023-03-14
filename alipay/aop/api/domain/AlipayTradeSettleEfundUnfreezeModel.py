@@ -12,6 +12,7 @@ class AlipayTradeSettleEfundUnfreezeModel(object):
         self._extend_params = None
         self._memo = None
         self._out_request_no = None
+        self._seller_open_id = None
         self._seller_user_id = None
         self._settle_biz_type = None
 
@@ -43,6 +44,13 @@ class AlipayTradeSettleEfundUnfreezeModel(object):
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def seller_open_id(self):
+        return self._seller_open_id
+
+    @seller_open_id.setter
+    def seller_open_id(self, value):
+        self._seller_open_id = value
     @property
     def seller_user_id(self):
         return self._seller_user_id
@@ -81,6 +89,11 @@ class AlipayTradeSettleEfundUnfreezeModel(object):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.seller_open_id:
+            if hasattr(self.seller_open_id, 'to_alipay_dict'):
+                params['seller_open_id'] = self.seller_open_id.to_alipay_dict()
+            else:
+                params['seller_open_id'] = self.seller_open_id
         if self.seller_user_id:
             if hasattr(self.seller_user_id, 'to_alipay_dict'):
                 params['seller_user_id'] = self.seller_user_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayTradeSettleEfundUnfreezeModel(object):
             o.memo = d['memo']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'seller_open_id' in d:
+            o.seller_open_id = d['seller_open_id']
         if 'seller_user_id' in d:
             o.seller_user_id = d['seller_user_id']
         if 'settle_biz_type' in d:

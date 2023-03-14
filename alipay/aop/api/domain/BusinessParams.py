@@ -14,6 +14,7 @@ class BusinessParams(object):
         self._enterprise_pay_amount = None
         self._enterprise_pay_info = None
         self._good_taxes = None
+        self._mc_create_trade_ip = None
 
     @property
     def actual_order_time(self):
@@ -57,6 +58,13 @@ class BusinessParams(object):
     @good_taxes.setter
     def good_taxes(self, value):
         self._good_taxes = value
+    @property
+    def mc_create_trade_ip(self):
+        return self._mc_create_trade_ip
+
+    @mc_create_trade_ip.setter
+    def mc_create_trade_ip(self, value):
+        self._mc_create_trade_ip = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class BusinessParams(object):
                 params['good_taxes'] = self.good_taxes.to_alipay_dict()
             else:
                 params['good_taxes'] = self.good_taxes
+        if self.mc_create_trade_ip:
+            if hasattr(self.mc_create_trade_ip, 'to_alipay_dict'):
+                params['mc_create_trade_ip'] = self.mc_create_trade_ip.to_alipay_dict()
+            else:
+                params['mc_create_trade_ip'] = self.mc_create_trade_ip
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class BusinessParams(object):
             o.enterprise_pay_info = d['enterprise_pay_info']
         if 'good_taxes' in d:
             o.good_taxes = d['good_taxes']
+        if 'mc_create_trade_ip' in d:
+            o.mc_create_trade_ip = d['mc_create_trade_ip']
         return o
 
 
