@@ -10,6 +10,7 @@ class ConversionData(object):
 
     def __init__(self):
         self._biz_no = None
+        self._callback_ext_info = None
         self._conversion_amount = None
         self._conversion_id = None
         self._conversion_time = None
@@ -35,6 +36,13 @@ class ConversionData(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def callback_ext_info(self):
+        return self._callback_ext_info
+
+    @callback_ext_info.setter
+    def callback_ext_info(self, value):
+        self._callback_ext_info = value
     @property
     def conversion_amount(self):
         return self._conversion_amount
@@ -169,6 +177,11 @@ class ConversionData(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.callback_ext_info:
+            if hasattr(self.callback_ext_info, 'to_alipay_dict'):
+                params['callback_ext_info'] = self.callback_ext_info.to_alipay_dict()
+            else:
+                params['callback_ext_info'] = self.callback_ext_info
         if self.conversion_amount:
             if hasattr(self.conversion_amount, 'to_alipay_dict'):
                 params['conversion_amount'] = self.conversion_amount.to_alipay_dict()
@@ -268,6 +281,8 @@ class ConversionData(object):
         o = ConversionData()
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'callback_ext_info' in d:
+            o.callback_ext_info = d['callback_ext_info']
         if 'conversion_amount' in d:
             o.conversion_amount = d['conversion_amount']
         if 'conversion_id' in d:

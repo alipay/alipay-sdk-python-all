@@ -10,7 +10,7 @@ class TechriskInnovateMpcpromoDataSyncModel(object):
 
     def __init__(self):
         self._data_list = None
-        self._date_type = None
+        self._data_type = None
         self._industry = None
 
     @property
@@ -27,12 +27,12 @@ class TechriskInnovateMpcpromoDataSyncModel(object):
                 else:
                     self._data_list.append(MpcpromoGoodsList.from_alipay_dict(i))
     @property
-    def date_type(self):
-        return self._date_type
+    def data_type(self):
+        return self._data_type
 
-    @date_type.setter
-    def date_type(self, value):
-        self._date_type = value
+    @data_type.setter
+    def data_type(self, value):
+        self._data_type = value
     @property
     def industry(self):
         return self._industry
@@ -54,11 +54,11 @@ class TechriskInnovateMpcpromoDataSyncModel(object):
                 params['data_list'] = self.data_list.to_alipay_dict()
             else:
                 params['data_list'] = self.data_list
-        if self.date_type:
-            if hasattr(self.date_type, 'to_alipay_dict'):
-                params['date_type'] = self.date_type.to_alipay_dict()
+        if self.data_type:
+            if hasattr(self.data_type, 'to_alipay_dict'):
+                params['data_type'] = self.data_type.to_alipay_dict()
             else:
-                params['date_type'] = self.date_type
+                params['data_type'] = self.data_type
         if self.industry:
             if hasattr(self.industry, 'to_alipay_dict'):
                 params['industry'] = self.industry.to_alipay_dict()
@@ -73,8 +73,8 @@ class TechriskInnovateMpcpromoDataSyncModel(object):
         o = TechriskInnovateMpcpromoDataSyncModel()
         if 'data_list' in d:
             o.data_list = d['data_list']
-        if 'date_type' in d:
-            o.date_type = d['date_type']
+        if 'data_type' in d:
+            o.data_type = d['data_type']
         if 'industry' in d:
             o.industry = d['industry']
         return o

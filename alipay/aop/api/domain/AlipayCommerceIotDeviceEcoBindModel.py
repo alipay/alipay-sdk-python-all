@@ -12,6 +12,7 @@ class AlipayCommerceIotDeviceEcoBindModel(object):
         self._bind_user_id = None
         self._biz_tid = None
         self._identify_type = None
+        self._paycode_sn = None
         self._sn = None
         self._supplier_id = None
 
@@ -43,6 +44,13 @@ class AlipayCommerceIotDeviceEcoBindModel(object):
     @identify_type.setter
     def identify_type(self, value):
         self._identify_type = value
+    @property
+    def paycode_sn(self):
+        return self._paycode_sn
+
+    @paycode_sn.setter
+    def paycode_sn(self, value):
+        self._paycode_sn = value
     @property
     def sn(self):
         return self._sn
@@ -81,6 +89,11 @@ class AlipayCommerceIotDeviceEcoBindModel(object):
                 params['identify_type'] = self.identify_type.to_alipay_dict()
             else:
                 params['identify_type'] = self.identify_type
+        if self.paycode_sn:
+            if hasattr(self.paycode_sn, 'to_alipay_dict'):
+                params['paycode_sn'] = self.paycode_sn.to_alipay_dict()
+            else:
+                params['paycode_sn'] = self.paycode_sn
         if self.sn:
             if hasattr(self.sn, 'to_alipay_dict'):
                 params['sn'] = self.sn.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayCommerceIotDeviceEcoBindModel(object):
             o.biz_tid = d['biz_tid']
         if 'identify_type' in d:
             o.identify_type = d['identify_type']
+        if 'paycode_sn' in d:
+            o.paycode_sn = d['paycode_sn']
         if 'sn' in d:
             o.sn = d['sn']
         if 'supplier_id' in d:

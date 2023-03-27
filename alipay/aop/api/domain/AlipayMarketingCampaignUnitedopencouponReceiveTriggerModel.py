@@ -14,6 +14,7 @@ class AlipayMarketingCampaignUnitedopencouponReceiveTriggerModel(object):
         self._client_ip = None
         self._login_id = None
         self._open_id = None
+        self._out_biz_no = None
         self._term_id = None
         self._user_id = None
 
@@ -59,6 +60,13 @@ class AlipayMarketingCampaignUnitedopencouponReceiveTriggerModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def term_id(self):
         return self._term_id
@@ -107,6 +115,11 @@ class AlipayMarketingCampaignUnitedopencouponReceiveTriggerModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.term_id:
             if hasattr(self.term_id, 'to_alipay_dict'):
                 params['term_id'] = self.term_id.to_alipay_dict()
@@ -136,6 +149,8 @@ class AlipayMarketingCampaignUnitedopencouponReceiveTriggerModel(object):
             o.login_id = d['login_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'term_id' in d:
             o.term_id = d['term_id']
         if 'user_id' in d:

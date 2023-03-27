@@ -14,6 +14,7 @@ class AlipayOpenIotmbsIsvhotelCreateModel(object):
         self._project_flag = None
         self._project_id = None
         self._project_name = None
+        self._shop_id = None
 
     @property
     def appid(self):
@@ -57,6 +58,13 @@ class AlipayOpenIotmbsIsvhotelCreateModel(object):
     @project_name.setter
     def project_name(self, value):
         self._project_name = value
+    @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AlipayOpenIotmbsIsvhotelCreateModel(object):
                 params['project_name'] = self.project_name.to_alipay_dict()
             else:
                 params['project_name'] = self.project_name
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AlipayOpenIotmbsIsvhotelCreateModel(object):
             o.project_id = d['project_id']
         if 'project_name' in d:
             o.project_name = d['project_name']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         return o
 
 

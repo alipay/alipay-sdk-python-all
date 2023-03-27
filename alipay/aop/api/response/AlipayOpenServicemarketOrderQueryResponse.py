@@ -10,6 +10,7 @@ class AlipayOpenServicemarketOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenServicemarketOrderQueryResponse, self).__init__()
+        self._auto_upgrade = None
         self._commodity_id = None
         self._current_page = None
         self._order_items = None
@@ -17,6 +18,13 @@ class AlipayOpenServicemarketOrderQueryResponse(AlipayResponse):
         self._status = None
         self._total_size = None
 
+    @property
+    def auto_upgrade(self):
+        return self._auto_upgrade
+
+    @auto_upgrade.setter
+    def auto_upgrade(self, value):
+        self._auto_upgrade = value
     @property
     def commodity_id(self):
         return self._commodity_id
@@ -68,6 +76,8 @@ class AlipayOpenServicemarketOrderQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenServicemarketOrderQueryResponse, self).parse_response_content(response_content)
+        if 'auto_upgrade' in response:
+            self.auto_upgrade = response['auto_upgrade']
         if 'commodity_id' in response:
             self.commodity_id = response['commodity_id']
         if 'current_page' in response:

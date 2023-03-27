@@ -13,6 +13,7 @@ class AlipayFundWalletTemplateConfirmModel(object):
         self._gift_card_template = None
         self._out_biz_no = None
         self._product_code = None
+        self._wallet_template_name = None
 
     @property
     def biz_scene(self):
@@ -45,6 +46,13 @@ class AlipayFundWalletTemplateConfirmModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def wallet_template_name(self):
+        return self._wallet_template_name
+
+    @wallet_template_name.setter
+    def wallet_template_name(self, value):
+        self._wallet_template_name = value
 
 
     def to_alipay_dict(self):
@@ -69,6 +77,11 @@ class AlipayFundWalletTemplateConfirmModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.wallet_template_name:
+            if hasattr(self.wallet_template_name, 'to_alipay_dict'):
+                params['wallet_template_name'] = self.wallet_template_name.to_alipay_dict()
+            else:
+                params['wallet_template_name'] = self.wallet_template_name
         return params
 
     @staticmethod
@@ -84,6 +97,8 @@ class AlipayFundWalletTemplateConfirmModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'wallet_template_name' in d:
+            o.wallet_template_name = d['wallet_template_name']
         return o
 
 

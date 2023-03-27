@@ -8,10 +8,12 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
 
     def __init__(self):
+        self._game_event_id = None
         self._game_id = None
         self._gmt_complete = None
         self._gmt_join = None
         self._open_id = None
+        self._out_game_event_no = None
         self._out_game_no = None
         self._out_user_game_no = None
         self._status = None
@@ -20,7 +22,15 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
         self._user_id = None
         self._user_join_type = None
         self._user_name = None
+        self._user_online_detail_url = None
 
+    @property
+    def game_event_id(self):
+        return self._game_event_id
+
+    @game_event_id.setter
+    def game_event_id(self, value):
+        self._game_event_id = value
     @property
     def game_id(self):
         return self._game_id
@@ -49,6 +59,13 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def out_game_event_no(self):
+        return self._out_game_event_no
+
+    @out_game_event_no.setter
+    def out_game_event_no(self, value):
+        self._out_game_event_no = value
     @property
     def out_game_no(self):
         return self._out_game_no
@@ -105,10 +122,22 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def user_online_detail_url(self):
+        return self._user_online_detail_url
+
+    @user_online_detail_url.setter
+    def user_online_detail_url(self, value):
+        self._user_online_detail_url = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.game_event_id:
+            if hasattr(self.game_event_id, 'to_alipay_dict'):
+                params['game_event_id'] = self.game_event_id.to_alipay_dict()
+            else:
+                params['game_event_id'] = self.game_event_id
         if self.game_id:
             if hasattr(self.game_id, 'to_alipay_dict'):
                 params['game_id'] = self.game_id.to_alipay_dict()
@@ -129,6 +158,11 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.out_game_event_no:
+            if hasattr(self.out_game_event_no, 'to_alipay_dict'):
+                params['out_game_event_no'] = self.out_game_event_no.to_alipay_dict()
+            else:
+                params['out_game_event_no'] = self.out_game_event_no
         if self.out_game_no:
             if hasattr(self.out_game_no, 'to_alipay_dict'):
                 params['out_game_no'] = self.out_game_no.to_alipay_dict()
@@ -169,6 +203,11 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.user_online_detail_url:
+            if hasattr(self.user_online_detail_url, 'to_alipay_dict'):
+                params['user_online_detail_url'] = self.user_online_detail_url.to_alipay_dict()
+            else:
+                params['user_online_detail_url'] = self.user_online_detail_url
         return params
 
     @staticmethod
@@ -176,6 +215,8 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceSportsOnlinegameUsergameSyncModel()
+        if 'game_event_id' in d:
+            o.game_event_id = d['game_event_id']
         if 'game_id' in d:
             o.game_id = d['game_id']
         if 'gmt_complete' in d:
@@ -184,6 +225,8 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
             o.gmt_join = d['gmt_join']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'out_game_event_no' in d:
+            o.out_game_event_no = d['out_game_event_no']
         if 'out_game_no' in d:
             o.out_game_no = d['out_game_no']
         if 'out_user_game_no' in d:
@@ -200,6 +243,8 @@ class AlipayCommerceSportsOnlinegameUsergameSyncModel(object):
             o.user_join_type = d['user_join_type']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'user_online_detail_url' in d:
+            o.user_online_detail_url = d['user_online_detail_url']
         return o
 
 

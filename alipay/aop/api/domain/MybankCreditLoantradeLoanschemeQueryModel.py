@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class MybankCreditLoantradeLoanschemeQueryModel(object):
 
     def __init__(self):
+        self._alipay_open_id = None
         self._biz = None
         self._biz_no = None
         self._entity_code = None
@@ -18,6 +19,13 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
         self._sale_pd_code = None
         self._scen = None
 
+    @property
+    def alipay_open_id(self):
+        return self._alipay_open_id
+
+    @alipay_open_id.setter
+    def alipay_open_id(self, value):
+        self._alipay_open_id = value
     @property
     def biz(self):
         return self._biz
@@ -85,6 +93,11 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_open_id:
+            if hasattr(self.alipay_open_id, 'to_alipay_dict'):
+                params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
+            else:
+                params['alipay_open_id'] = self.alipay_open_id
         if self.biz:
             if hasattr(self.biz, 'to_alipay_dict'):
                 params['biz'] = self.biz.to_alipay_dict()
@@ -137,6 +150,8 @@ class MybankCreditLoantradeLoanschemeQueryModel(object):
         if not d:
             return None
         o = MybankCreditLoantradeLoanschemeQueryModel()
+        if 'alipay_open_id' in d:
+            o.alipay_open_id = d['alipay_open_id']
         if 'biz' in d:
             o.biz = d['biz']
         if 'biz_no' in d:

@@ -13,6 +13,7 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
         self._open_id = None
         self._out_serial_no = None
         self._payment_time = None
+        self._payment_type = None
         self._plate_color = None
         self._plate_no = None
         self._service_url = None
@@ -52,6 +53,13 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
     @payment_time.setter
     def payment_time(self, value):
         self._payment_time = value
+    @property
+    def payment_type(self):
+        return self._payment_type
+
+    @payment_type.setter
+    def payment_type(self, value):
+        self._payment_type = value
     @property
     def plate_color(self):
         return self._plate_color
@@ -102,6 +110,11 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
                 params['payment_time'] = self.payment_time.to_alipay_dict()
             else:
                 params['payment_time'] = self.payment_time
+        if self.payment_type:
+            if hasattr(self.payment_type, 'to_alipay_dict'):
+                params['payment_type'] = self.payment_type.to_alipay_dict()
+            else:
+                params['payment_type'] = self.payment_type
         if self.plate_color:
             if hasattr(self.plate_color, 'to_alipay_dict'):
                 params['plate_color'] = self.plate_color.to_alipay_dict()
@@ -134,6 +147,8 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
             o.out_serial_no = d['out_serial_no']
         if 'payment_time' in d:
             o.payment_time = d['payment_time']
+        if 'payment_type' in d:
+            o.payment_type = d['payment_type']
         if 'plate_color' in d:
             o.plate_color = d['plate_color']
         if 'plate_no' in d:

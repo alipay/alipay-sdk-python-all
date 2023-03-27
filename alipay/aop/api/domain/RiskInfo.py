@@ -13,6 +13,7 @@ class RiskInfo(object):
         self._notice = None
         self._risk_info_detail_list = None
         self._risk_level = None
+        self._rule_code = None
         self._rule_name = None
         self._rule_robot_status = None
 
@@ -50,6 +51,13 @@ class RiskInfo(object):
     @risk_level.setter
     def risk_level(self, value):
         self._risk_level = value
+    @property
+    def rule_code(self):
+        return self._rule_code
+
+    @rule_code.setter
+    def rule_code(self, value):
+        self._rule_code = value
     @property
     def rule_name(self):
         return self._rule_name
@@ -93,6 +101,11 @@ class RiskInfo(object):
                 params['risk_level'] = self.risk_level.to_alipay_dict()
             else:
                 params['risk_level'] = self.risk_level
+        if self.rule_code:
+            if hasattr(self.rule_code, 'to_alipay_dict'):
+                params['rule_code'] = self.rule_code.to_alipay_dict()
+            else:
+                params['rule_code'] = self.rule_code
         if self.rule_name:
             if hasattr(self.rule_name, 'to_alipay_dict'):
                 params['rule_name'] = self.rule_name.to_alipay_dict()
@@ -118,6 +131,8 @@ class RiskInfo(object):
             o.risk_info_detail_list = d['risk_info_detail_list']
         if 'risk_level' in d:
             o.risk_level = d['risk_level']
+        if 'rule_code' in d:
+            o.rule_code = d['rule_code']
         if 'rule_name' in d:
             o.rule_name = d['rule_name']
         if 'rule_robot_status' in d:

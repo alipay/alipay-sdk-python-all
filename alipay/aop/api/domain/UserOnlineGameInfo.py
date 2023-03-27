@@ -18,6 +18,7 @@ class UserOnlineGameInfo(object):
         self._user_game_plate = None
         self._user_join_type = None
         self._user_name = None
+        self._user_online_detail_url = None
         self._user_progress_game_unit = None
         self._user_progress_game_value = None
 
@@ -92,6 +93,13 @@ class UserOnlineGameInfo(object):
     def user_name(self, value):
         self._user_name = value
     @property
+    def user_online_detail_url(self):
+        return self._user_online_detail_url
+
+    @user_online_detail_url.setter
+    def user_online_detail_url(self, value):
+        self._user_online_detail_url = value
+    @property
     def user_progress_game_unit(self):
         return self._user_progress_game_unit
 
@@ -159,6 +167,11 @@ class UserOnlineGameInfo(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.user_online_detail_url:
+            if hasattr(self.user_online_detail_url, 'to_alipay_dict'):
+                params['user_online_detail_url'] = self.user_online_detail_url.to_alipay_dict()
+            else:
+                params['user_online_detail_url'] = self.user_online_detail_url
         if self.user_progress_game_unit:
             if hasattr(self.user_progress_game_unit, 'to_alipay_dict'):
                 params['user_progress_game_unit'] = self.user_progress_game_unit.to_alipay_dict()
@@ -196,6 +209,8 @@ class UserOnlineGameInfo(object):
             o.user_join_type = d['user_join_type']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'user_online_detail_url' in d:
+            o.user_online_detail_url = d['user_online_detail_url']
         if 'user_progress_game_unit' in d:
             o.user_progress_game_unit = d['user_progress_game_unit']
         if 'user_progress_game_value' in d:

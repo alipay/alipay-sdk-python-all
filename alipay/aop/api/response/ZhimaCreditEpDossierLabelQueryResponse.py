@@ -11,6 +11,7 @@ class ZhimaCreditEpDossierLabelQueryResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditEpDossierLabelQueryResponse, self).__init__()
         self._ep_cert_no = None
+        self._has_authed = None
         self._label_content = None
 
     @property
@@ -20,6 +21,13 @@ class ZhimaCreditEpDossierLabelQueryResponse(AlipayResponse):
     @ep_cert_no.setter
     def ep_cert_no(self, value):
         self._ep_cert_no = value
+    @property
+    def has_authed(self):
+        return self._has_authed
+
+    @has_authed.setter
+    def has_authed(self, value):
+        self._has_authed = value
     @property
     def label_content(self):
         return self._label_content
@@ -38,5 +46,7 @@ class ZhimaCreditEpDossierLabelQueryResponse(AlipayResponse):
         response = super(ZhimaCreditEpDossierLabelQueryResponse, self).parse_response_content(response_content)
         if 'ep_cert_no' in response:
             self.ep_cert_no = response['ep_cert_no']
+        if 'has_authed' in response:
+            self.has_authed = response['has_authed']
         if 'label_content' in response:
             self.label_content = response['label_content']

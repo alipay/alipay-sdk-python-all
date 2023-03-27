@@ -9,6 +9,7 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._create_iot_group = None
         self._enterprise_alias = None
         self._enterprise_name = None
         self._identity = None
@@ -23,6 +24,13 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def create_iot_group(self):
+        return self._create_iot_group
+
+    @create_iot_group.setter
+    def create_iot_group(self, value):
+        self._create_iot_group = value
     @property
     def enterprise_alias(self):
         return self._enterprise_alias
@@ -74,6 +82,11 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.create_iot_group:
+            if hasattr(self.create_iot_group, 'to_alipay_dict'):
+                params['create_iot_group'] = self.create_iot_group.to_alipay_dict()
+            else:
+                params['create_iot_group'] = self.create_iot_group
         if self.enterprise_alias:
             if hasattr(self.enterprise_alias, 'to_alipay_dict'):
                 params['enterprise_alias'] = self.enterprise_alias.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
         o = AlipayCommerceEcEnterpriseCreateModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'create_iot_group' in d:
+            o.create_iot_group = d['create_iot_group']
         if 'enterprise_alias' in d:
             o.enterprise_alias = d['enterprise_alias']
         if 'enterprise_name' in d:

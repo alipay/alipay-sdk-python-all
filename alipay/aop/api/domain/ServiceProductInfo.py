@@ -10,14 +10,11 @@ from alipay.aop.api.domain.ServiceProductAbilityInfo import ServiceProductAbilit
 class ServiceProductInfo(object):
 
     def __init__(self):
-        self._service_alone = None
         self._service_desc = None
         self._service_expense_sub_type = None
         self._service_expense_sub_type_name = None
         self._service_id = None
         self._service_name = None
-        self._service_open = None
-        self._service_order_key = None
         self._service_order_model = None
         self._service_point = None
         self._service_preview_urls = None
@@ -29,13 +26,6 @@ class ServiceProductInfo(object):
         self._service_status = None
         self._service_type = None
 
-    @property
-    def service_alone(self):
-        return self._service_alone
-
-    @service_alone.setter
-    def service_alone(self, value):
-        self._service_alone = value
     @property
     def service_desc(self):
         return self._service_desc
@@ -71,20 +61,6 @@ class ServiceProductInfo(object):
     @service_name.setter
     def service_name(self, value):
         self._service_name = value
-    @property
-    def service_open(self):
-        return self._service_open
-
-    @service_open.setter
-    def service_open(self, value):
-        self._service_open = value
-    @property
-    def service_order_key(self):
-        return self._service_order_key
-
-    @service_order_key.setter
-    def service_order_key(self, value):
-        self._service_order_key = value
     @property
     def service_order_model(self):
         return self._service_order_model
@@ -171,11 +147,6 @@ class ServiceProductInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
-        if self.service_alone:
-            if hasattr(self.service_alone, 'to_alipay_dict'):
-                params['service_alone'] = self.service_alone.to_alipay_dict()
-            else:
-                params['service_alone'] = self.service_alone
         if self.service_desc:
             if hasattr(self.service_desc, 'to_alipay_dict'):
                 params['service_desc'] = self.service_desc.to_alipay_dict()
@@ -201,16 +172,6 @@ class ServiceProductInfo(object):
                 params['service_name'] = self.service_name.to_alipay_dict()
             else:
                 params['service_name'] = self.service_name
-        if self.service_open:
-            if hasattr(self.service_open, 'to_alipay_dict'):
-                params['service_open'] = self.service_open.to_alipay_dict()
-            else:
-                params['service_open'] = self.service_open
-        if self.service_order_key:
-            if hasattr(self.service_order_key, 'to_alipay_dict'):
-                params['service_order_key'] = self.service_order_key.to_alipay_dict()
-            else:
-                params['service_order_key'] = self.service_order_key
         if self.service_order_model:
             if hasattr(self.service_order_model, 'to_alipay_dict'):
                 params['service_order_model'] = self.service_order_model.to_alipay_dict()
@@ -278,8 +239,6 @@ class ServiceProductInfo(object):
         if not d:
             return None
         o = ServiceProductInfo()
-        if 'service_alone' in d:
-            o.service_alone = d['service_alone']
         if 'service_desc' in d:
             o.service_desc = d['service_desc']
         if 'service_expense_sub_type' in d:
@@ -290,10 +249,6 @@ class ServiceProductInfo(object):
             o.service_id = d['service_id']
         if 'service_name' in d:
             o.service_name = d['service_name']
-        if 'service_open' in d:
-            o.service_open = d['service_open']
-        if 'service_order_key' in d:
-            o.service_order_key = d['service_order_key']
         if 'service_order_model' in d:
             o.service_order_model = d['service_order_model']
         if 'service_point' in d:

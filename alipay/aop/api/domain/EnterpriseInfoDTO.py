@@ -20,6 +20,8 @@ class EnterpriseInfoDTO(object):
         self._enterprise_name = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._iot_group_id = None
+        self._iot_logic_group_id = None
         self._platform_code = None
         self._platform_out_id = None
         self._sign_status = None
@@ -109,6 +111,20 @@ class EnterpriseInfoDTO(object):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def iot_group_id(self):
+        return self._iot_group_id
+
+    @iot_group_id.setter
+    def iot_group_id(self, value):
+        self._iot_group_id = value
+    @property
+    def iot_logic_group_id(self):
+        return self._iot_logic_group_id
+
+    @iot_logic_group_id.setter
+    def iot_logic_group_id(self, value):
+        self._iot_logic_group_id = value
     @property
     def platform_code(self):
         return self._platform_code
@@ -201,6 +217,16 @@ class EnterpriseInfoDTO(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.iot_group_id:
+            if hasattr(self.iot_group_id, 'to_alipay_dict'):
+                params['iot_group_id'] = self.iot_group_id.to_alipay_dict()
+            else:
+                params['iot_group_id'] = self.iot_group_id
+        if self.iot_logic_group_id:
+            if hasattr(self.iot_logic_group_id, 'to_alipay_dict'):
+                params['iot_logic_group_id'] = self.iot_logic_group_id.to_alipay_dict()
+            else:
+                params['iot_logic_group_id'] = self.iot_logic_group_id
         if self.platform_code:
             if hasattr(self.platform_code, 'to_alipay_dict'):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
@@ -252,6 +278,10 @@ class EnterpriseInfoDTO(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'iot_group_id' in d:
+            o.iot_group_id = d['iot_group_id']
+        if 'iot_logic_group_id' in d:
+            o.iot_logic_group_id = d['iot_logic_group_id']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
         if 'platform_out_id' in d:

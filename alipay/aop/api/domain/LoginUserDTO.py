@@ -13,6 +13,7 @@ class LoginUserDTO(object):
         self._tenant_ext_info = None
         self._tenant_id = None
         self._tenant_name = None
+        self._tenant_status = None
 
     @property
     def ip_role_id(self):
@@ -45,6 +46,13 @@ class LoginUserDTO(object):
     @tenant_name.setter
     def tenant_name(self, value):
         self._tenant_name = value
+    @property
+    def tenant_status(self):
+        return self._tenant_status
+
+    @tenant_status.setter
+    def tenant_status(self, value):
+        self._tenant_status = value
 
 
     def to_alipay_dict(self):
@@ -69,6 +77,11 @@ class LoginUserDTO(object):
                 params['tenant_name'] = self.tenant_name.to_alipay_dict()
             else:
                 params['tenant_name'] = self.tenant_name
+        if self.tenant_status:
+            if hasattr(self.tenant_status, 'to_alipay_dict'):
+                params['tenant_status'] = self.tenant_status.to_alipay_dict()
+            else:
+                params['tenant_status'] = self.tenant_status
         return params
 
     @staticmethod
@@ -84,6 +97,8 @@ class LoginUserDTO(object):
             o.tenant_id = d['tenant_id']
         if 'tenant_name' in d:
             o.tenant_name = d['tenant_name']
+        if 'tenant_status' in d:
+            o.tenant_status = d['tenant_status']
         return o
 
 

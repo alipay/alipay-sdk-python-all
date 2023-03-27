@@ -17,6 +17,8 @@ class EmployeeInfoDTO(object):
         self._employee_no = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._iot_face_status = None
+        self._iot_vid = None
         self._mobile = None
         self._open_id = None
         self._role_list = None
@@ -84,6 +86,20 @@ class EmployeeInfoDTO(object):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def iot_face_status(self):
+        return self._iot_face_status
+
+    @iot_face_status.setter
+    def iot_face_status(self, value):
+        self._iot_face_status = value
+    @property
+    def iot_vid(self):
+        return self._iot_vid
+
+    @iot_vid.setter
+    def iot_vid(self, value):
+        self._iot_vid = value
     @property
     def mobile(self):
         return self._mobile
@@ -164,6 +180,16 @@ class EmployeeInfoDTO(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.iot_face_status:
+            if hasattr(self.iot_face_status, 'to_alipay_dict'):
+                params['iot_face_status'] = self.iot_face_status.to_alipay_dict()
+            else:
+                params['iot_face_status'] = self.iot_face_status
+        if self.iot_vid:
+            if hasattr(self.iot_vid, 'to_alipay_dict'):
+                params['iot_vid'] = self.iot_vid.to_alipay_dict()
+            else:
+                params['iot_vid'] = self.iot_vid
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -212,6 +238,10 @@ class EmployeeInfoDTO(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'iot_face_status' in d:
+            o.iot_face_status = d['iot_face_status']
+        if 'iot_vid' in d:
+            o.iot_vid = d['iot_vid']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'open_id' in d:

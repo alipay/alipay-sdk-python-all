@@ -9,6 +9,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
         self._department_ids = None
+        self._employee_cert_no = None
+        self._employee_cert_type = None
         self._employee_email = None
         self._employee_mobile = None
         self._employee_name = None
@@ -17,6 +19,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
+        self._iot_check_type = None
+        self._iot_vid = None
         self._role_list = None
 
     @property
@@ -29,6 +33,20 @@ class AlipayCommerceEcEmployeeAddModel(object):
             self._department_ids = list()
             for i in value:
                 self._department_ids.append(i)
+    @property
+    def employee_cert_no(self):
+        return self._employee_cert_no
+
+    @employee_cert_no.setter
+    def employee_cert_no(self, value):
+        self._employee_cert_no = value
+    @property
+    def employee_cert_type(self):
+        return self._employee_cert_type
+
+    @employee_cert_type.setter
+    def employee_cert_type(self, value):
+        self._employee_cert_type = value
     @property
     def employee_email(self):
         return self._employee_email
@@ -86,6 +104,20 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def iot_check_type(self):
+        return self._iot_check_type
+
+    @iot_check_type.setter
+    def iot_check_type(self, value):
+        self._iot_check_type = value
+    @property
+    def iot_vid(self):
+        return self._iot_vid
+
+    @iot_vid.setter
+    def iot_vid(self, value):
+        self._iot_vid = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -109,6 +141,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['department_ids'] = self.department_ids.to_alipay_dict()
             else:
                 params['department_ids'] = self.department_ids
+        if self.employee_cert_no:
+            if hasattr(self.employee_cert_no, 'to_alipay_dict'):
+                params['employee_cert_no'] = self.employee_cert_no.to_alipay_dict()
+            else:
+                params['employee_cert_no'] = self.employee_cert_no
+        if self.employee_cert_type:
+            if hasattr(self.employee_cert_type, 'to_alipay_dict'):
+                params['employee_cert_type'] = self.employee_cert_type.to_alipay_dict()
+            else:
+                params['employee_cert_type'] = self.employee_cert_type
         if self.employee_email:
             if hasattr(self.employee_email, 'to_alipay_dict'):
                 params['employee_email'] = self.employee_email.to_alipay_dict()
@@ -149,6 +191,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.iot_check_type:
+            if hasattr(self.iot_check_type, 'to_alipay_dict'):
+                params['iot_check_type'] = self.iot_check_type.to_alipay_dict()
+            else:
+                params['iot_check_type'] = self.iot_check_type
+        if self.iot_vid:
+            if hasattr(self.iot_vid, 'to_alipay_dict'):
+                params['iot_vid'] = self.iot_vid.to_alipay_dict()
+            else:
+                params['iot_vid'] = self.iot_vid
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -168,6 +220,10 @@ class AlipayCommerceEcEmployeeAddModel(object):
         o = AlipayCommerceEcEmployeeAddModel()
         if 'department_ids' in d:
             o.department_ids = d['department_ids']
+        if 'employee_cert_no' in d:
+            o.employee_cert_no = d['employee_cert_no']
+        if 'employee_cert_type' in d:
+            o.employee_cert_type = d['employee_cert_type']
         if 'employee_email' in d:
             o.employee_email = d['employee_email']
         if 'employee_mobile' in d:
@@ -184,6 +240,10 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.identity_open_id = d['identity_open_id']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'iot_check_type' in d:
+            o.iot_check_type = d['iot_check_type']
+        if 'iot_vid' in d:
+            o.iot_vid = d['iot_vid']
         if 'role_list' in d:
             o.role_list = d['role_list']
         return o

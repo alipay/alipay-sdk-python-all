@@ -9,6 +9,7 @@ class BsEnrollParticipant(object):
 
     def __init__(self):
         self._out_merchant_no = None
+        self._reason = None
         self._type = None
         self._value = None
 
@@ -19,6 +20,13 @@ class BsEnrollParticipant(object):
     @out_merchant_no.setter
     def out_merchant_no(self, value):
         self._out_merchant_no = value
+    @property
+    def reason(self):
+        return self._reason
+
+    @reason.setter
+    def reason(self, value):
+        self._reason = value
     @property
     def type(self):
         return self._type
@@ -42,6 +50,11 @@ class BsEnrollParticipant(object):
                 params['out_merchant_no'] = self.out_merchant_no.to_alipay_dict()
             else:
                 params['out_merchant_no'] = self.out_merchant_no
+        if self.reason:
+            if hasattr(self.reason, 'to_alipay_dict'):
+                params['reason'] = self.reason.to_alipay_dict()
+            else:
+                params['reason'] = self.reason
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -61,6 +74,8 @@ class BsEnrollParticipant(object):
         o = BsEnrollParticipant()
         if 'out_merchant_no' in d:
             o.out_merchant_no = d['out_merchant_no']
+        if 'reason' in d:
+            o.reason = d['reason']
         if 'type' in d:
             o.type = d['type']
         if 'value' in d:
