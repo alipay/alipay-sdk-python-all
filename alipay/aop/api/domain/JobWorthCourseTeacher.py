@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class JobWorthCourseTeacher(object):
 
     def __init__(self):
+        self._desc = None
         self._id_type = None
         self._teacher_id = None
         self._teacher_name = None
 
+    @property
+    def desc(self):
+        return self._desc
+
+    @desc.setter
+    def desc(self, value):
+        self._desc = value
     @property
     def id_type(self):
         return self._id_type
@@ -37,6 +45,11 @@ class JobWorthCourseTeacher(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.desc:
+            if hasattr(self.desc, 'to_alipay_dict'):
+                params['desc'] = self.desc.to_alipay_dict()
+            else:
+                params['desc'] = self.desc
         if self.id_type:
             if hasattr(self.id_type, 'to_alipay_dict'):
                 params['id_type'] = self.id_type.to_alipay_dict()
@@ -59,6 +72,8 @@ class JobWorthCourseTeacher(object):
         if not d:
             return None
         o = JobWorthCourseTeacher()
+        if 'desc' in d:
+            o.desc = d['desc']
         if 'id_type' in d:
             o.id_type = d['id_type']
         if 'teacher_id' in d:

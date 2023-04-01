@@ -12,6 +12,7 @@ class ExtendParams(object):
         self._hb_fq_num = None
         self._hb_fq_seller_percent = None
         self._industry_reflux_info = None
+        self._royalty_freeze = None
         self._specified_seller_name = None
         self._sys_service_provider_id = None
 
@@ -43,6 +44,13 @@ class ExtendParams(object):
     @industry_reflux_info.setter
     def industry_reflux_info(self, value):
         self._industry_reflux_info = value
+    @property
+    def royalty_freeze(self):
+        return self._royalty_freeze
+
+    @royalty_freeze.setter
+    def royalty_freeze(self, value):
+        self._royalty_freeze = value
     @property
     def specified_seller_name(self):
         return self._specified_seller_name
@@ -81,6 +89,11 @@ class ExtendParams(object):
                 params['industry_reflux_info'] = self.industry_reflux_info.to_alipay_dict()
             else:
                 params['industry_reflux_info'] = self.industry_reflux_info
+        if self.royalty_freeze:
+            if hasattr(self.royalty_freeze, 'to_alipay_dict'):
+                params['royalty_freeze'] = self.royalty_freeze.to_alipay_dict()
+            else:
+                params['royalty_freeze'] = self.royalty_freeze
         if self.specified_seller_name:
             if hasattr(self.specified_seller_name, 'to_alipay_dict'):
                 params['specified_seller_name'] = self.specified_seller_name.to_alipay_dict()
@@ -106,6 +119,8 @@ class ExtendParams(object):
             o.hb_fq_seller_percent = d['hb_fq_seller_percent']
         if 'industry_reflux_info' in d:
             o.industry_reflux_info = d['industry_reflux_info']
+        if 'royalty_freeze' in d:
+            o.royalty_freeze = d['royalty_freeze']
         if 'specified_seller_name' in d:
             o.specified_seller_name = d['specified_seller_name']
         if 'sys_service_provider_id' in d:

@@ -13,6 +13,7 @@ class OperatorQuery(object):
         self._logon_id_type = None
         self._main_ip_role_id = None
         self._main_ip_role_type = None
+        self._open_id = None
 
     @property
     def id(self):
@@ -49,6 +50,13 @@ class OperatorQuery(object):
     @main_ip_role_type.setter
     def main_ip_role_type(self, value):
         self._main_ip_role_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class OperatorQuery(object):
                 params['main_ip_role_type'] = self.main_ip_role_type.to_alipay_dict()
             else:
                 params['main_ip_role_type'] = self.main_ip_role_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class OperatorQuery(object):
             o.main_ip_role_id = d['main_ip_role_id']
         if 'main_ip_role_type' in d:
             o.main_ip_role_type = d['main_ip_role_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         return o
 
 

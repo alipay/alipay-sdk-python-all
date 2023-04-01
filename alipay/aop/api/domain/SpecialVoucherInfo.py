@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.VoucherDeductThresholdInfo import VoucherDeductThresholdInfo
 
 
 class SpecialVoucherInfo(object):
@@ -10,6 +11,7 @@ class SpecialVoucherInfo(object):
     def __init__(self):
         self._floor_amount = None
         self._special_amount = None
+        self._voucher_deduct_threshold_info = None
 
     @property
     def floor_amount(self):
@@ -25,6 +27,16 @@ class SpecialVoucherInfo(object):
     @special_amount.setter
     def special_amount(self, value):
         self._special_amount = value
+    @property
+    def voucher_deduct_threshold_info(self):
+        return self._voucher_deduct_threshold_info
+
+    @voucher_deduct_threshold_info.setter
+    def voucher_deduct_threshold_info(self, value):
+        if isinstance(value, VoucherDeductThresholdInfo):
+            self._voucher_deduct_threshold_info = value
+        else:
+            self._voucher_deduct_threshold_info = VoucherDeductThresholdInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -39,6 +51,11 @@ class SpecialVoucherInfo(object):
                 params['special_amount'] = self.special_amount.to_alipay_dict()
             else:
                 params['special_amount'] = self.special_amount
+        if self.voucher_deduct_threshold_info:
+            if hasattr(self.voucher_deduct_threshold_info, 'to_alipay_dict'):
+                params['voucher_deduct_threshold_info'] = self.voucher_deduct_threshold_info.to_alipay_dict()
+            else:
+                params['voucher_deduct_threshold_info'] = self.voucher_deduct_threshold_info
         return params
 
     @staticmethod
@@ -50,6 +67,8 @@ class SpecialVoucherInfo(object):
             o.floor_amount = d['floor_amount']
         if 'special_amount' in d:
             o.special_amount = d['special_amount']
+        if 'voucher_deduct_threshold_info' in d:
+            o.voucher_deduct_threshold_info = d['voucher_deduct_threshold_info']
         return o
 
 

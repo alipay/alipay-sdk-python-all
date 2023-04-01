@@ -10,6 +10,7 @@ class AlipayOpenIotmbsHotelguestCreateModel(object):
     def __init__(self):
         self._face_id = None
         self._floor_num = None
+        self._project_id = None
         self._sn = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayOpenIotmbsHotelguestCreateModel(object):
     @floor_num.setter
     def floor_num(self, value):
         self._floor_num = value
+    @property
+    def project_id(self):
+        return self._project_id
+
+    @project_id.setter
+    def project_id(self, value):
+        self._project_id = value
     @property
     def sn(self):
         return self._sn
@@ -47,6 +55,11 @@ class AlipayOpenIotmbsHotelguestCreateModel(object):
                 params['floor_num'] = self.floor_num.to_alipay_dict()
             else:
                 params['floor_num'] = self.floor_num
+        if self.project_id:
+            if hasattr(self.project_id, 'to_alipay_dict'):
+                params['project_id'] = self.project_id.to_alipay_dict()
+            else:
+                params['project_id'] = self.project_id
         if self.sn:
             if hasattr(self.sn, 'to_alipay_dict'):
                 params['sn'] = self.sn.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayOpenIotmbsHotelguestCreateModel(object):
             o.face_id = d['face_id']
         if 'floor_num' in d:
             o.floor_num = d['floor_num']
+        if 'project_id' in d:
+            o.project_id = d['project_id']
         if 'sn' in d:
             o.sn = d['sn']
         return o

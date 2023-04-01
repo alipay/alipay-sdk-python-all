@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlbumPromoInfo(object):
 
     def __init__(self):
+        self._discount_price = None
         self._end_time = None
         self._promo_type = None
         self._start_time = None
 
+    @property
+    def discount_price(self):
+        return self._discount_price
+
+    @discount_price.setter
+    def discount_price(self, value):
+        self._discount_price = value
     @property
     def end_time(self):
         return self._end_time
@@ -37,6 +45,11 @@ class AlbumPromoInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.discount_price:
+            if hasattr(self.discount_price, 'to_alipay_dict'):
+                params['discount_price'] = self.discount_price.to_alipay_dict()
+            else:
+                params['discount_price'] = self.discount_price
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlbumPromoInfo(object):
         if not d:
             return None
         o = AlbumPromoInfo()
+        if 'discount_price' in d:
+            o.discount_price = d['discount_price']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'promo_type' in d:

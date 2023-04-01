@@ -9,6 +9,7 @@ class RoyaltyDetail(object):
 
     def __init__(self):
         self._amount = None
+        self._detail_id = None
         self._error_code = None
         self._error_desc = None
         self._execute_dt = None
@@ -28,6 +29,13 @@ class RoyaltyDetail(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def detail_id(self):
+        return self._detail_id
+
+    @detail_id.setter
+    def detail_id(self, value):
+        self._detail_id = value
     @property
     def error_code(self):
         return self._error_code
@@ -114,6 +122,11 @@ class RoyaltyDetail(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.detail_id:
+            if hasattr(self.detail_id, 'to_alipay_dict'):
+                params['detail_id'] = self.detail_id.to_alipay_dict()
+            else:
+                params['detail_id'] = self.detail_id
         if self.error_code:
             if hasattr(self.error_code, 'to_alipay_dict'):
                 params['error_code'] = self.error_code.to_alipay_dict()
@@ -178,6 +191,8 @@ class RoyaltyDetail(object):
         o = RoyaltyDetail()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'detail_id' in d:
+            o.detail_id = d['detail_id']
         if 'error_code' in d:
             o.error_code = d['error_code']
         if 'error_desc' in d:

@@ -10,6 +10,7 @@ class OperatorAccountVO(object):
     def __init__(self):
         self._account_id = None
         self._account_type = None
+        self._open_id = None
 
     @property
     def account_id(self):
@@ -25,6 +26,13 @@ class OperatorAccountVO(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class OperatorAccountVO(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class OperatorAccountVO(object):
             o.account_id = d['account_id']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         return o
 
 

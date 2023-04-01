@@ -3,7 +3,6 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
-from alipay.aop.api.domain.ItemPriceVO import ItemPriceVO
 
 
 class ItemSpuVO(object):
@@ -14,7 +13,7 @@ class ItemSpuVO(object):
         self._item_id = None
         self._out_item_id = None
         self._path = None
-        self._price = None
+        self._spu_status = None
         self._stock_num = None
         self._title = None
 
@@ -54,15 +53,12 @@ class ItemSpuVO(object):
     def path(self, value):
         self._path = value
     @property
-    def price(self):
-        return self._price
+    def spu_status(self):
+        return self._spu_status
 
-    @price.setter
-    def price(self, value):
-        if isinstance(value, ItemPriceVO):
-            self._price = value
-        else:
-            self._price = ItemPriceVO.from_alipay_dict(value)
+    @spu_status.setter
+    def spu_status(self, value):
+        self._spu_status = value
     @property
     def stock_num(self):
         return self._stock_num
@@ -106,11 +102,11 @@ class ItemSpuVO(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
-        if self.price:
-            if hasattr(self.price, 'to_alipay_dict'):
-                params['price'] = self.price.to_alipay_dict()
+        if self.spu_status:
+            if hasattr(self.spu_status, 'to_alipay_dict'):
+                params['spu_status'] = self.spu_status.to_alipay_dict()
             else:
-                params['price'] = self.price
+                params['spu_status'] = self.spu_status
         if self.stock_num:
             if hasattr(self.stock_num, 'to_alipay_dict'):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
@@ -138,8 +134,8 @@ class ItemSpuVO(object):
             o.out_item_id = d['out_item_id']
         if 'path' in d:
             o.path = d['path']
-        if 'price' in d:
-            o.price = d['price']
+        if 'spu_status' in d:
+            o.spu_status = d['spu_status']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
         if 'title' in d:

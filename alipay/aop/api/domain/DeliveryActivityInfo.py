@@ -16,6 +16,7 @@ class DeliveryActivityInfo(object):
         self._bank_inst_id = None
         self._bank_logo = None
         self._bank_name = None
+        self._delivery_prefer_type = None
         self._discount_max_amount = None
         self._discount_max_ratio = None
         self._discount_model = None
@@ -85,6 +86,13 @@ class DeliveryActivityInfo(object):
     @bank_name.setter
     def bank_name(self, value):
         self._bank_name = value
+    @property
+    def delivery_prefer_type(self):
+        return self._delivery_prefer_type
+
+    @delivery_prefer_type.setter
+    def delivery_prefer_type(self, value):
+        self._delivery_prefer_type = value
     @property
     def discount_max_amount(self):
         return self._discount_max_amount
@@ -200,6 +208,11 @@ class DeliveryActivityInfo(object):
                 params['bank_name'] = self.bank_name.to_alipay_dict()
             else:
                 params['bank_name'] = self.bank_name
+        if self.delivery_prefer_type:
+            if hasattr(self.delivery_prefer_type, 'to_alipay_dict'):
+                params['delivery_prefer_type'] = self.delivery_prefer_type.to_alipay_dict()
+            else:
+                params['delivery_prefer_type'] = self.delivery_prefer_type
         if self.discount_max_amount:
             if hasattr(self.discount_max_amount, 'to_alipay_dict'):
                 params['discount_max_amount'] = self.discount_max_amount.to_alipay_dict()
@@ -273,6 +286,8 @@ class DeliveryActivityInfo(object):
             o.bank_logo = d['bank_logo']
         if 'bank_name' in d:
             o.bank_name = d['bank_name']
+        if 'delivery_prefer_type' in d:
+            o.delivery_prefer_type = d['delivery_prefer_type']
         if 'discount_max_amount' in d:
             o.discount_max_amount = d['discount_max_amount']
         if 'discount_max_ratio' in d:

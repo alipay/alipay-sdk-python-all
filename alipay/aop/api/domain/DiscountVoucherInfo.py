@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.VoucherDeductThresholdInfo import VoucherDeductThresholdInfo
 
 
 class DiscountVoucherInfo(object):
@@ -11,6 +12,7 @@ class DiscountVoucherInfo(object):
         self._ceiling_amount = None
         self._discount = None
         self._floor_amount = None
+        self._voucher_deduct_threshold_info = None
 
     @property
     def ceiling_amount(self):
@@ -33,6 +35,16 @@ class DiscountVoucherInfo(object):
     @floor_amount.setter
     def floor_amount(self, value):
         self._floor_amount = value
+    @property
+    def voucher_deduct_threshold_info(self):
+        return self._voucher_deduct_threshold_info
+
+    @voucher_deduct_threshold_info.setter
+    def voucher_deduct_threshold_info(self, value):
+        if isinstance(value, VoucherDeductThresholdInfo):
+            self._voucher_deduct_threshold_info = value
+        else:
+            self._voucher_deduct_threshold_info = VoucherDeductThresholdInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -52,6 +64,11 @@ class DiscountVoucherInfo(object):
                 params['floor_amount'] = self.floor_amount.to_alipay_dict()
             else:
                 params['floor_amount'] = self.floor_amount
+        if self.voucher_deduct_threshold_info:
+            if hasattr(self.voucher_deduct_threshold_info, 'to_alipay_dict'):
+                params['voucher_deduct_threshold_info'] = self.voucher_deduct_threshold_info.to_alipay_dict()
+            else:
+                params['voucher_deduct_threshold_info'] = self.voucher_deduct_threshold_info
         return params
 
     @staticmethod
@@ -65,6 +82,8 @@ class DiscountVoucherInfo(object):
             o.discount = d['discount']
         if 'floor_amount' in d:
             o.floor_amount = d['floor_amount']
+        if 'voucher_deduct_threshold_info' in d:
+            o.voucher_deduct_threshold_info = d['voucher_deduct_threshold_info']
         return o
 
 

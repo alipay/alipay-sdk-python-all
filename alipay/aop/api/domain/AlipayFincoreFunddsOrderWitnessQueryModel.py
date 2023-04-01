@@ -9,6 +9,7 @@ class AlipayFincoreFunddsOrderWitnessQueryModel(object):
 
     def __init__(self):
         self._fds_no = None
+        self._out_request_no = None
         self._product_code = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayFincoreFunddsOrderWitnessQueryModel(object):
     @fds_no.setter
     def fds_no(self, value):
         self._fds_no = value
+    @property
+    def out_request_no(self):
+        return self._out_request_no
+
+    @out_request_no.setter
+    def out_request_no(self, value):
+        self._out_request_no = value
     @property
     def product_code(self):
         return self._product_code
@@ -34,6 +42,11 @@ class AlipayFincoreFunddsOrderWitnessQueryModel(object):
                 params['fds_no'] = self.fds_no.to_alipay_dict()
             else:
                 params['fds_no'] = self.fds_no
+        if self.out_request_no:
+            if hasattr(self.out_request_no, 'to_alipay_dict'):
+                params['out_request_no'] = self.out_request_no.to_alipay_dict()
+            else:
+                params['out_request_no'] = self.out_request_no
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayFincoreFunddsOrderWitnessQueryModel(object):
         o = AlipayFincoreFunddsOrderWitnessQueryModel()
         if 'fds_no' in d:
             o.fds_no = d['fds_no']
+        if 'out_request_no' in d:
+            o.out_request_no = d['out_request_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
         return o
