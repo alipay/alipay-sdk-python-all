@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class RiskInfoDetail(object):
 
     def __init__(self):
+        self._consistency_id = None
         self._dialog_index = None
         self._hit_word = None
         self._hit_word_index = None
@@ -15,6 +16,13 @@ class RiskInfoDetail(object):
         self._new_picture_frame = None
         self._picture_frame = None
 
+    @property
+    def consistency_id(self):
+        return self._consistency_id
+
+    @consistency_id.setter
+    def consistency_id(self, value):
+        self._consistency_id = value
     @property
     def dialog_index(self):
         return self._dialog_index
@@ -61,6 +69,11 @@ class RiskInfoDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.consistency_id:
+            if hasattr(self.consistency_id, 'to_alipay_dict'):
+                params['consistency_id'] = self.consistency_id.to_alipay_dict()
+            else:
+                params['consistency_id'] = self.consistency_id
         if self.dialog_index:
             if hasattr(self.dialog_index, 'to_alipay_dict'):
                 params['dialog_index'] = self.dialog_index.to_alipay_dict()
@@ -98,6 +111,8 @@ class RiskInfoDetail(object):
         if not d:
             return None
         o = RiskInfoDetail()
+        if 'consistency_id' in d:
+            o.consistency_id = d['consistency_id']
         if 'dialog_index' in d:
             o.dialog_index = d['dialog_index']
         if 'hit_word' in d:

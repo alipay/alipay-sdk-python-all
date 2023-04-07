@@ -9,6 +9,7 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._employee_id = None
         self._end_date = None
         self._enterprise_id = None
         self._open_id = None
@@ -24,6 +25,13 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def employee_id(self):
+        return self._employee_id
+
+    @employee_id.setter
+    def employee_id(self, value):
+        self._employee_id = value
     @property
     def end_date(self):
         return self._end_date
@@ -82,6 +90,11 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.employee_id:
+            if hasattr(self.employee_id, 'to_alipay_dict'):
+                params['employee_id'] = self.employee_id.to_alipay_dict()
+            else:
+                params['employee_id'] = self.employee_id
         if self.end_date:
             if hasattr(self.end_date, 'to_alipay_dict'):
                 params['end_date'] = self.end_date.to_alipay_dict()
@@ -126,6 +139,8 @@ class AlipayCommerceEcJointaccountbillDetailBatchqueryModel(object):
         o = AlipayCommerceEcJointaccountbillDetailBatchqueryModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'employee_id' in d:
+            o.employee_id = d['employee_id']
         if 'end_date' in d:
             o.end_date = d['end_date']
         if 'enterprise_id' in d:

@@ -16,6 +16,7 @@ class ActivityBaseInfo(object):
         self._activity_status = None
         self._belong_merchant_info = None
         self._code_mode = None
+        self._out_activity_id = None
 
     @property
     def activity_id(self):
@@ -69,6 +70,13 @@ class ActivityBaseInfo(object):
     @code_mode.setter
     def code_mode(self, value):
         self._code_mode = value
+    @property
+    def out_activity_id(self):
+        return self._out_activity_id
+
+    @out_activity_id.setter
+    def out_activity_id(self, value):
+        self._out_activity_id = value
 
 
     def to_alipay_dict(self):
@@ -108,6 +116,11 @@ class ActivityBaseInfo(object):
                 params['code_mode'] = self.code_mode.to_alipay_dict()
             else:
                 params['code_mode'] = self.code_mode
+        if self.out_activity_id:
+            if hasattr(self.out_activity_id, 'to_alipay_dict'):
+                params['out_activity_id'] = self.out_activity_id.to_alipay_dict()
+            else:
+                params['out_activity_id'] = self.out_activity_id
         return params
 
     @staticmethod
@@ -129,6 +142,8 @@ class ActivityBaseInfo(object):
             o.belong_merchant_info = d['belong_merchant_info']
         if 'code_mode' in d:
             o.code_mode = d['code_mode']
+        if 'out_activity_id' in d:
+            o.out_activity_id = d['out_activity_id']
         return o
 
 

@@ -11,6 +11,7 @@ class VoucherSendRuleInfo(object):
         self._max_quantity_by_day = None
         self._natural_person_limit = None
         self._phone_number_limit = None
+        self._phone_number_need_input_limit = None
         self._publish_end_time = None
         self._publish_start_time = None
         self._quantity = None
@@ -39,6 +40,13 @@ class VoucherSendRuleInfo(object):
     @phone_number_limit.setter
     def phone_number_limit(self, value):
         self._phone_number_limit = value
+    @property
+    def phone_number_need_input_limit(self):
+        return self._phone_number_need_input_limit
+
+    @phone_number_need_input_limit.setter
+    def phone_number_need_input_limit(self, value):
+        self._phone_number_need_input_limit = value
     @property
     def publish_end_time(self):
         return self._publish_end_time
@@ -100,6 +108,11 @@ class VoucherSendRuleInfo(object):
                 params['phone_number_limit'] = self.phone_number_limit.to_alipay_dict()
             else:
                 params['phone_number_limit'] = self.phone_number_limit
+        if self.phone_number_need_input_limit:
+            if hasattr(self.phone_number_need_input_limit, 'to_alipay_dict'):
+                params['phone_number_need_input_limit'] = self.phone_number_need_input_limit.to_alipay_dict()
+            else:
+                params['phone_number_need_input_limit'] = self.phone_number_need_input_limit
         if self.publish_end_time:
             if hasattr(self.publish_end_time, 'to_alipay_dict'):
                 params['publish_end_time'] = self.publish_end_time.to_alipay_dict()
@@ -143,6 +156,8 @@ class VoucherSendRuleInfo(object):
             o.natural_person_limit = d['natural_person_limit']
         if 'phone_number_limit' in d:
             o.phone_number_limit = d['phone_number_limit']
+        if 'phone_number_need_input_limit' in d:
+            o.phone_number_need_input_limit = d['phone_number_need_input_limit']
         if 'publish_end_time' in d:
             o.publish_end_time = d['publish_end_time']
         if 'publish_start_time' in d:

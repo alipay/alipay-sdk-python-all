@@ -12,7 +12,6 @@ class MedicalCommercialOrderUploadExtInfo(object):
     def __init__(self):
         self._expense_details = None
         self._medical_examination_user = None
-        self._mini_app_id = None
         self._refund_amount = None
         self._refund_note = None
         self._report_url = None
@@ -40,13 +39,6 @@ class MedicalCommercialOrderUploadExtInfo(object):
     @medical_examination_user.setter
     def medical_examination_user(self, value):
         self._medical_examination_user = value
-    @property
-    def mini_app_id(self):
-        return self._mini_app_id
-
-    @mini_app_id.setter
-    def mini_app_id(self, value):
-        self._mini_app_id = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -114,11 +106,6 @@ class MedicalCommercialOrderUploadExtInfo(object):
                 params['medical_examination_user'] = self.medical_examination_user.to_alipay_dict()
             else:
                 params['medical_examination_user'] = self.medical_examination_user
-        if self.mini_app_id:
-            if hasattr(self.mini_app_id, 'to_alipay_dict'):
-                params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
-            else:
-                params['mini_app_id'] = self.mini_app_id
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -165,8 +152,6 @@ class MedicalCommercialOrderUploadExtInfo(object):
             o.expense_details = d['expense_details']
         if 'medical_examination_user' in d:
             o.medical_examination_user = d['medical_examination_user']
-        if 'mini_app_id' in d:
-            o.mini_app_id = d['mini_app_id']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_note' in d:

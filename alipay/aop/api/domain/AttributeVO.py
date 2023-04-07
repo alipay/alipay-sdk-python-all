@@ -8,13 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AttributeVO(object):
 
     def __init__(self):
+        self._is_required = None
         self._length = None
         self._name = None
         self._range = None
-        self._required = None
         self._type = None
         self._value = None
 
+    @property
+    def is_required(self):
+        return self._is_required
+
+    @is_required.setter
+    def is_required(self, value):
+        self._is_required = value
     @property
     def length(self):
         return self._length
@@ -37,13 +44,6 @@ class AttributeVO(object):
     def range(self, value):
         self._range = value
     @property
-    def required(self):
-        return self._required
-
-    @required.setter
-    def required(self, value):
-        self._required = value
-    @property
     def type(self):
         return self._type
 
@@ -61,6 +61,11 @@ class AttributeVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.is_required:
+            if hasattr(self.is_required, 'to_alipay_dict'):
+                params['is_required'] = self.is_required.to_alipay_dict()
+            else:
+                params['is_required'] = self.is_required
         if self.length:
             if hasattr(self.length, 'to_alipay_dict'):
                 params['length'] = self.length.to_alipay_dict()
@@ -76,11 +81,6 @@ class AttributeVO(object):
                 params['range'] = self.range.to_alipay_dict()
             else:
                 params['range'] = self.range
-        if self.required:
-            if hasattr(self.required, 'to_alipay_dict'):
-                params['required'] = self.required.to_alipay_dict()
-            else:
-                params['required'] = self.required
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -98,14 +98,14 @@ class AttributeVO(object):
         if not d:
             return None
         o = AttributeVO()
+        if 'is_required' in d:
+            o.is_required = d['is_required']
         if 'length' in d:
             o.length = d['length']
         if 'name' in d:
             o.name = d['name']
         if 'range' in d:
             o.range = d['range']
-        if 'required' in d:
-            o.required = d['required']
         if 'type' in d:
             o.type = d['type']
         if 'value' in d:

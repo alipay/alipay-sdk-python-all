@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEcoMycarVehicleModelQueryModel(object):
 
     def __init__(self):
+        self._biz_scene = None
         self._end_date = None
         self._page_no = None
         self._page_size = None
         self._start_date = None
 
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def end_date(self):
         return self._end_date
@@ -45,6 +53,11 @@ class AlipayEcoMycarVehicleModelQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.end_date:
             if hasattr(self.end_date, 'to_alipay_dict'):
                 params['end_date'] = self.end_date.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayEcoMycarVehicleModelQueryModel(object):
         if not d:
             return None
         o = AlipayEcoMycarVehicleModelQueryModel()
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'end_date' in d:
             o.end_date = d['end_date']
         if 'page_no' in d:

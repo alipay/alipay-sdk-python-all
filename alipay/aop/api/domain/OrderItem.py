@@ -22,6 +22,7 @@ class OrderItem(object):
         self._mini_app_id = None
         self._mini_app_name = None
         self._online_time = None
+        self._open_id_model = None
         self._order_status = None
         self._phone_no = None
         self._province = None
@@ -128,6 +129,13 @@ class OrderItem(object):
     @online_time.setter
     def online_time(self, value):
         self._online_time = value
+    @property
+    def open_id_model(self):
+        return self._open_id_model
+
+    @open_id_model.setter
+    def open_id_model(self, value):
+        self._open_id_model = value
     @property
     def order_status(self):
         return self._order_status
@@ -251,6 +259,11 @@ class OrderItem(object):
                 params['online_time'] = self.online_time.to_alipay_dict()
             else:
                 params['online_time'] = self.online_time
+        if self.open_id_model:
+            if hasattr(self.open_id_model, 'to_alipay_dict'):
+                params['open_id_model'] = self.open_id_model.to_alipay_dict()
+            else:
+                params['open_id_model'] = self.open_id_model
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -321,6 +334,8 @@ class OrderItem(object):
             o.mini_app_name = d['mini_app_name']
         if 'online_time' in d:
             o.online_time = d['online_time']
+        if 'open_id_model' in d:
+            o.open_id_model = d['open_id_model']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'phone_no' in d:

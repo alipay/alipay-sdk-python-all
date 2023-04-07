@@ -9,6 +9,7 @@ class EpLabelContent(object):
 
     def __init__(self):
         self._label_category = None
+        self._label_code = None
         self._label_definition = None
         self._label_emotion = None
         self._label_name = None
@@ -21,6 +22,13 @@ class EpLabelContent(object):
     @label_category.setter
     def label_category(self, value):
         self._label_category = value
+    @property
+    def label_code(self):
+        return self._label_code
+
+    @label_code.setter
+    def label_code(self, value):
+        self._label_code = value
     @property
     def label_definition(self):
         return self._label_definition
@@ -61,6 +69,11 @@ class EpLabelContent(object):
                 params['label_category'] = self.label_category.to_alipay_dict()
             else:
                 params['label_category'] = self.label_category
+        if self.label_code:
+            if hasattr(self.label_code, 'to_alipay_dict'):
+                params['label_code'] = self.label_code.to_alipay_dict()
+            else:
+                params['label_code'] = self.label_code
         if self.label_definition:
             if hasattr(self.label_definition, 'to_alipay_dict'):
                 params['label_definition'] = self.label_definition.to_alipay_dict()
@@ -95,6 +108,8 @@ class EpLabelContent(object):
         o = EpLabelContent()
         if 'label_category' in d:
             o.label_category = d['label_category']
+        if 'label_code' in d:
+            o.label_code = d['label_code']
         if 'label_definition' in d:
             o.label_definition = d['label_definition']
         if 'label_emotion' in d:
