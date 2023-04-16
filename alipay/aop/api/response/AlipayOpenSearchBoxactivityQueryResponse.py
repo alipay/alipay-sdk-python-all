@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BackgroundWordInfo import BackgroundWordInfo
 from alipay.aop.api.domain.DeliveryTargetRegion import DeliveryTargetRegion
 from alipay.aop.api.domain.SearchBoxActivityVideoInfo import SearchBoxActivityVideoInfo
 
@@ -12,6 +13,7 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenSearchBoxactivityQueryResponse, self).__init__()
         self._background_word = None
+        self._background_word_info = None
         self._box_activity_id = None
         self._box_id = None
         self._end_time = None
@@ -35,6 +37,16 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
     @background_word.setter
     def background_word(self, value):
         self._background_word = value
+    @property
+    def background_word_info(self):
+        return self._background_word_info
+
+    @background_word_info.setter
+    def background_word_info(self, value):
+        if isinstance(value, BackgroundWordInfo):
+            self._background_word_info = value
+        else:
+            self._background_word_info = BackgroundWordInfo.from_alipay_dict(value)
     @property
     def box_activity_id(self):
         return self._box_activity_id
@@ -154,6 +166,8 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
         response = super(AlipayOpenSearchBoxactivityQueryResponse, self).parse_response_content(response_content)
         if 'background_word' in response:
             self.background_word = response['background_word']
+        if 'background_word_info' in response:
+            self.background_word_info = response['background_word_info']
         if 'box_activity_id' in response:
             self.box_activity_id = response['box_activity_id']
         if 'box_id' in response:

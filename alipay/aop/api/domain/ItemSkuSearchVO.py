@@ -60,10 +60,13 @@ class ItemSkuSearchVO(object):
 
     @sku_attrs.setter
     def sku_attrs(self, value):
-        if isinstance(value, ItemSkuAttrVO):
-            self._sku_attrs = value
-        else:
-            self._sku_attrs = ItemSkuAttrVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._sku_attrs = list()
+            for i in value:
+                if isinstance(i, ItemSkuAttrVO):
+                    self._sku_attrs.append(i)
+                else:
+                    self._sku_attrs.append(ItemSkuAttrVO.from_alipay_dict(i))
     @property
     def sku_id(self):
         return self._sku_id
@@ -115,6 +118,11 @@ class ItemSkuSearchVO(object):
             else:
                 params['sale_status'] = self.sale_status
         if self.sku_attrs:
+            if isinstance(self.sku_attrs, list):
+                for i in range(0, len(self.sku_attrs)):
+                    element = self.sku_attrs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_attrs[i] = element.to_alipay_dict()
             if hasattr(self.sku_attrs, 'to_alipay_dict'):
                 params['sku_attrs'] = self.sku_attrs.to_alipay_dict()
             else:

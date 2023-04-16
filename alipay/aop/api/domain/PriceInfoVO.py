@@ -12,6 +12,7 @@ class PriceInfoVO(object):
         self._discounted_price = None
         self._freight = None
         self._order_price = None
+        self._receipt_amount = None
 
     @property
     def additional_price(self):
@@ -41,6 +42,13 @@ class PriceInfoVO(object):
     @order_price.setter
     def order_price(self, value):
         self._order_price = value
+    @property
+    def receipt_amount(self):
+        return self._receipt_amount
+
+    @receipt_amount.setter
+    def receipt_amount(self, value):
+        self._receipt_amount = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class PriceInfoVO(object):
                 params['order_price'] = self.order_price.to_alipay_dict()
             else:
                 params['order_price'] = self.order_price
+        if self.receipt_amount:
+            if hasattr(self.receipt_amount, 'to_alipay_dict'):
+                params['receipt_amount'] = self.receipt_amount.to_alipay_dict()
+            else:
+                params['receipt_amount'] = self.receipt_amount
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class PriceInfoVO(object):
             o.freight = d['freight']
         if 'order_price' in d:
             o.order_price = d['order_price']
+        if 'receipt_amount' in d:
+            o.receipt_amount = d['receipt_amount']
         return o
 
 

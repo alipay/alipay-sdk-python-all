@@ -13,6 +13,8 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
         self._brand_quota_query_condition = None
         self._buyer = None
         self._channel_tag = None
+        self._mybk_auth_scene_code = None
+        self._mybk_auth_token = None
         self._trace_id = None
 
     @property
@@ -43,6 +45,20 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
     def channel_tag(self, value):
         self._channel_tag = value
     @property
+    def mybk_auth_scene_code(self):
+        return self._mybk_auth_scene_code
+
+    @mybk_auth_scene_code.setter
+    def mybk_auth_scene_code(self, value):
+        self._mybk_auth_scene_code = value
+    @property
+    def mybk_auth_token(self):
+        return self._mybk_auth_token
+
+    @mybk_auth_token.setter
+    def mybk_auth_token(self, value):
+        self._mybk_auth_token = value
+    @property
     def trace_id(self):
         return self._trace_id
 
@@ -68,6 +84,16 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
                 params['channel_tag'] = self.channel_tag.to_alipay_dict()
             else:
                 params['channel_tag'] = self.channel_tag
+        if self.mybk_auth_scene_code:
+            if hasattr(self.mybk_auth_scene_code, 'to_alipay_dict'):
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code.to_alipay_dict()
+            else:
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code
+        if self.mybk_auth_token:
+            if hasattr(self.mybk_auth_token, 'to_alipay_dict'):
+                params['mybk_auth_token'] = self.mybk_auth_token.to_alipay_dict()
+            else:
+                params['mybk_auth_token'] = self.mybk_auth_token
         if self.trace_id:
             if hasattr(self.trace_id, 'to_alipay_dict'):
                 params['trace_id'] = self.trace_id.to_alipay_dict()
@@ -86,6 +112,10 @@ class MybankCreditSupplychainCreditpayAmountQueryModel(object):
             o.buyer = d['buyer']
         if 'channel_tag' in d:
             o.channel_tag = d['channel_tag']
+        if 'mybk_auth_scene_code' in d:
+            o.mybk_auth_scene_code = d['mybk_auth_scene_code']
+        if 'mybk_auth_token' in d:
+            o.mybk_auth_token = d['mybk_auth_token']
         if 'trace_id' in d:
             o.trace_id = d['trace_id']
         return o

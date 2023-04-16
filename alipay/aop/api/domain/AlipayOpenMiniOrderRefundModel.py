@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MiniRefundGoodsInfoDTO import MiniRefundGoodsInfoDTO
 
 
 class AlipayOpenMiniOrderRefundModel(object):
 
     def __init__(self):
+        self._item_infos = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
@@ -16,6 +18,19 @@ class AlipayOpenMiniOrderRefundModel(object):
         self._refund_reason = None
         self._user_id = None
 
+    @property
+    def item_infos(self):
+        return self._item_infos
+
+    @item_infos.setter
+    def item_infos(self, value):
+        if isinstance(value, list):
+            self._item_infos = list()
+            for i in value:
+                if isinstance(i, MiniRefundGoodsInfoDTO):
+                    self._item_infos.append(i)
+                else:
+                    self._item_infos.append(MiniRefundGoodsInfoDTO.from_alipay_dict(i))
     @property
     def open_id(self):
         return self._open_id
@@ -69,6 +84,16 @@ class AlipayOpenMiniOrderRefundModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.item_infos:
+            if isinstance(self.item_infos, list):
+                for i in range(0, len(self.item_infos)):
+                    element = self.item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.item_infos, 'to_alipay_dict'):
+                params['item_infos'] = self.item_infos.to_alipay_dict()
+            else:
+                params['item_infos'] = self.item_infos
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -111,6 +136,8 @@ class AlipayOpenMiniOrderRefundModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderRefundModel()
+        if 'item_infos' in d:
+            o.item_infos = d['item_infos']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

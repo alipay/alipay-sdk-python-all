@@ -14,6 +14,8 @@ class MybankCreditLoantradePayAssetConsultModel(object):
         self._apply_amt = None
         self._biz_scene = None
         self._credit_asset_types = None
+        self._mybk_auth_scene_code = None
+        self._mybk_auth_token = None
         self._order_infos = None
         self._payment_sale_pd_code = None
         self._platform_type = None
@@ -55,6 +57,20 @@ class MybankCreditLoantradePayAssetConsultModel(object):
             self._credit_asset_types = list()
             for i in value:
                 self._credit_asset_types.append(i)
+    @property
+    def mybk_auth_scene_code(self):
+        return self._mybk_auth_scene_code
+
+    @mybk_auth_scene_code.setter
+    def mybk_auth_scene_code(self, value):
+        self._mybk_auth_scene_code = value
+    @property
+    def mybk_auth_token(self):
+        return self._mybk_auth_token
+
+    @mybk_auth_token.setter
+    def mybk_auth_token(self, value):
+        self._mybk_auth_token = value
     @property
     def order_infos(self):
         return self._order_infos
@@ -129,6 +145,16 @@ class MybankCreditLoantradePayAssetConsultModel(object):
                 params['credit_asset_types'] = self.credit_asset_types.to_alipay_dict()
             else:
                 params['credit_asset_types'] = self.credit_asset_types
+        if self.mybk_auth_scene_code:
+            if hasattr(self.mybk_auth_scene_code, 'to_alipay_dict'):
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code.to_alipay_dict()
+            else:
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code
+        if self.mybk_auth_token:
+            if hasattr(self.mybk_auth_token, 'to_alipay_dict'):
+                params['mybk_auth_token'] = self.mybk_auth_token.to_alipay_dict()
+            else:
+                params['mybk_auth_token'] = self.mybk_auth_token
         if self.order_infos:
             if hasattr(self.order_infos, 'to_alipay_dict'):
                 params['order_infos'] = self.order_infos.to_alipay_dict()
@@ -174,6 +200,10 @@ class MybankCreditLoantradePayAssetConsultModel(object):
             o.biz_scene = d['biz_scene']
         if 'credit_asset_types' in d:
             o.credit_asset_types = d['credit_asset_types']
+        if 'mybk_auth_scene_code' in d:
+            o.mybk_auth_scene_code = d['mybk_auth_scene_code']
+        if 'mybk_auth_token' in d:
+            o.mybk_auth_token = d['mybk_auth_token']
         if 'order_infos' in d:
             o.order_infos = d['order_infos']
         if 'payment_sale_pd_code' in d:

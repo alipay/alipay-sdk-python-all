@@ -12,6 +12,7 @@ class AlipayUserAgreementPermissionCreateResponse(AlipayResponse):
         self._deduct_permission = None
         self._effective_time_end = None
         self._effective_time_start = None
+        self._is_success_send = None
 
     @property
     def deduct_permission(self):
@@ -34,6 +35,13 @@ class AlipayUserAgreementPermissionCreateResponse(AlipayResponse):
     @effective_time_start.setter
     def effective_time_start(self, value):
         self._effective_time_start = value
+    @property
+    def is_success_send(self):
+        return self._is_success_send
+
+    @is_success_send.setter
+    def is_success_send(self, value):
+        self._is_success_send = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserAgreementPermissionCreateResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayUserAgreementPermissionCreateResponse(AlipayResponse):
             self.effective_time_end = response['effective_time_end']
         if 'effective_time_start' in response:
             self.effective_time_start = response['effective_time_start']
+        if 'is_success_send' in response:
+            self.is_success_send = response['is_success_send']

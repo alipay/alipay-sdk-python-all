@@ -9,18 +9,10 @@ from alipay.aop.api.domain.VoucherDetailInfoDTO import VoucherDetailInfoDTO
 class PayInfoVO(object):
 
     def __init__(self):
-        self._pay_method_type = None
         self._pay_time = None
         self._transaction_id = None
         self._voucher_detail_list = None
 
-    @property
-    def pay_method_type(self):
-        return self._pay_method_type
-
-    @pay_method_type.setter
-    def pay_method_type(self, value):
-        self._pay_method_type = value
     @property
     def pay_time(self):
         return self._pay_time
@@ -52,11 +44,6 @@ class PayInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
-        if self.pay_method_type:
-            if hasattr(self.pay_method_type, 'to_alipay_dict'):
-                params['pay_method_type'] = self.pay_method_type.to_alipay_dict()
-            else:
-                params['pay_method_type'] = self.pay_method_type
         if self.pay_time:
             if hasattr(self.pay_time, 'to_alipay_dict'):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
@@ -84,8 +71,6 @@ class PayInfoVO(object):
         if not d:
             return None
         o = PayInfoVO()
-        if 'pay_method_type' in d:
-            o.pay_method_type = d['pay_method_type']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
         if 'transaction_id' in d:

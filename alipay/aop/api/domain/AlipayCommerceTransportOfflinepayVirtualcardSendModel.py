@@ -18,6 +18,7 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendModel(object):
         self._disabled_tips = None
         self._ext_info = None
         self._last_update_time = None
+        self._open_id = None
         self._sub_action = None
         self._trade_scene = None
         self._user_id = None
@@ -93,6 +94,13 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendModel(object):
     def last_update_time(self, value):
         self._last_update_time = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def sub_action(self):
         return self._sub_action
 
@@ -167,6 +175,11 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendModel(object):
                 params['last_update_time'] = self.last_update_time.to_alipay_dict()
             else:
                 params['last_update_time'] = self.last_update_time
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sub_action:
             if hasattr(self.sub_action, 'to_alipay_dict'):
                 params['sub_action'] = self.sub_action.to_alipay_dict()
@@ -209,6 +222,8 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendModel(object):
             o.ext_info = d['ext_info']
         if 'last_update_time' in d:
             o.last_update_time = d['last_update_time']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sub_action' in d:
             o.sub_action = d['sub_action']
         if 'trade_scene' in d:

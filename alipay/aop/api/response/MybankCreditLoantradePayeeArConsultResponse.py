@@ -12,6 +12,7 @@ class MybankCreditLoantradePayeeArConsultResponse(AlipayResponse):
         super(MybankCreditLoantradePayeeArConsultResponse, self).__init__()
         self._admit = None
         self._admit_alipay_login_id = None
+        self._admit_alipay_open_id = None
         self._admit_alipay_user_id = None
         self._is_signed = None
         self._refuse_info = None
@@ -32,6 +33,13 @@ class MybankCreditLoantradePayeeArConsultResponse(AlipayResponse):
     @admit_alipay_login_id.setter
     def admit_alipay_login_id(self, value):
         self._admit_alipay_login_id = value
+    @property
+    def admit_alipay_open_id(self):
+        return self._admit_alipay_open_id
+
+    @admit_alipay_open_id.setter
+    def admit_alipay_open_id(self, value):
+        self._admit_alipay_open_id = value
     @property
     def admit_alipay_user_id(self):
         return self._admit_alipay_user_id
@@ -77,6 +85,8 @@ class MybankCreditLoantradePayeeArConsultResponse(AlipayResponse):
             self.admit = response['admit']
         if 'admit_alipay_login_id' in response:
             self.admit_alipay_login_id = response['admit_alipay_login_id']
+        if 'admit_alipay_open_id' in response:
+            self.admit_alipay_open_id = response['admit_alipay_open_id']
         if 'admit_alipay_user_id' in response:
             self.admit_alipay_user_id = response['admit_alipay_user_id']
         if 'is_signed' in response:

@@ -18,15 +18,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._create_time = None
         self._default_receiving_address = None
         self._delivery_detail = None
-        self._fund_type = None
-        self._openid = None
+        self._merchant_biz_type = None
+        self._open_id = None
         self._order_detail = None
         self._out_order_id = None
         self._path = None
         self._receive_time = None
         self._refund_info = None
-        self._scene = None
+        self._settle_type = None
         self._status = None
+        self._user_id = None
 
     @property
     def address_info(self):
@@ -66,19 +67,19 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._delivery_detail = DeliveryDetailInfoVO.from_alipay_dict(value)
     @property
-    def fund_type(self):
-        return self._fund_type
+    def merchant_biz_type(self):
+        return self._merchant_biz_type
 
-    @fund_type.setter
-    def fund_type(self, value):
-        self._fund_type = value
+    @merchant_biz_type.setter
+    def merchant_biz_type(self, value):
+        self._merchant_biz_type = value
     @property
-    def openid(self):
-        return self._openid
+    def open_id(self):
+        return self._open_id
 
-    @openid.setter
-    def openid(self, value):
-        self._openid = value
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_detail(self):
         return self._order_detail
@@ -121,12 +122,12 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._refund_info = RefundInfoVO.from_alipay_dict(value)
     @property
-    def scene(self):
-        return self._scene
+    def settle_type(self):
+        return self._settle_type
 
-    @scene.setter
-    def scene(self, value):
-        self._scene = value
+    @settle_type.setter
+    def settle_type(self, value):
+        self._settle_type = value
     @property
     def status(self):
         return self._status
@@ -134,6 +135,13 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderQueryResponse, self).parse_response_content(response_content)
@@ -145,10 +153,10 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.default_receiving_address = response['default_receiving_address']
         if 'delivery_detail' in response:
             self.delivery_detail = response['delivery_detail']
-        if 'fund_type' in response:
-            self.fund_type = response['fund_type']
-        if 'openid' in response:
-            self.openid = response['openid']
+        if 'merchant_biz_type' in response:
+            self.merchant_biz_type = response['merchant_biz_type']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_detail' in response:
             self.order_detail = response['order_detail']
         if 'out_order_id' in response:
@@ -159,7 +167,9 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.receive_time = response['receive_time']
         if 'refund_info' in response:
             self.refund_info = response['refund_info']
-        if 'scene' in response:
-            self.scene = response['scene']
+        if 'settle_type' in response:
+            self.settle_type = response['settle_type']
         if 'status' in response:
             self.status = response['status']
+        if 'user_id' in response:
+            self.user_id = response['user_id']

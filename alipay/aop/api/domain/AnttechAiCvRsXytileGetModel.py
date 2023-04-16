@@ -8,13 +8,23 @@ from alipay.aop.api.constant.ParamConstants import *
 class AnttechAiCvRsXytileGetModel(object):
 
     def __init__(self):
+        self._biz_name = None
         self._crow_type = None
         self._date = None
         self._index = None
+        self._object_type = None
+        self._query_params = None
         self._x = None
         self._y = None
         self._z = None
 
+    @property
+    def biz_name(self):
+        return self._biz_name
+
+    @biz_name.setter
+    def biz_name(self, value):
+        self._biz_name = value
     @property
     def crow_type(self):
         return self._crow_type
@@ -36,6 +46,20 @@ class AnttechAiCvRsXytileGetModel(object):
     @index.setter
     def index(self, value):
         self._index = value
+    @property
+    def object_type(self):
+        return self._object_type
+
+    @object_type.setter
+    def object_type(self, value):
+        self._object_type = value
+    @property
+    def query_params(self):
+        return self._query_params
+
+    @query_params.setter
+    def query_params(self, value):
+        self._query_params = value
     @property
     def x(self):
         return self._x
@@ -61,6 +85,11 @@ class AnttechAiCvRsXytileGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_name:
+            if hasattr(self.biz_name, 'to_alipay_dict'):
+                params['biz_name'] = self.biz_name.to_alipay_dict()
+            else:
+                params['biz_name'] = self.biz_name
         if self.crow_type:
             if hasattr(self.crow_type, 'to_alipay_dict'):
                 params['crow_type'] = self.crow_type.to_alipay_dict()
@@ -76,6 +105,16 @@ class AnttechAiCvRsXytileGetModel(object):
                 params['index'] = self.index.to_alipay_dict()
             else:
                 params['index'] = self.index
+        if self.object_type:
+            if hasattr(self.object_type, 'to_alipay_dict'):
+                params['object_type'] = self.object_type.to_alipay_dict()
+            else:
+                params['object_type'] = self.object_type
+        if self.query_params:
+            if hasattr(self.query_params, 'to_alipay_dict'):
+                params['query_params'] = self.query_params.to_alipay_dict()
+            else:
+                params['query_params'] = self.query_params
         if self.x:
             if hasattr(self.x, 'to_alipay_dict'):
                 params['x'] = self.x.to_alipay_dict()
@@ -98,12 +137,18 @@ class AnttechAiCvRsXytileGetModel(object):
         if not d:
             return None
         o = AnttechAiCvRsXytileGetModel()
+        if 'biz_name' in d:
+            o.biz_name = d['biz_name']
         if 'crow_type' in d:
             o.crow_type = d['crow_type']
         if 'date' in d:
             o.date = d['date']
         if 'index' in d:
             o.index = d['index']
+        if 'object_type' in d:
+            o.object_type = d['object_type']
+        if 'query_params' in d:
+            o.query_params = d['query_params']
         if 'x' in d:
             o.x = d['x']
         if 'y' in d:

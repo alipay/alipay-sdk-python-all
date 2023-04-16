@@ -13,6 +13,8 @@ class MybankCreditSupplychainCreditpayBuyerunsignCreateModel(object):
         self._buyer = None
         self._buyer_scene_id = None
         self._channel_tag = None
+        self._mybk_auth_scene_code = None
+        self._mybk_auth_token = None
         self._request_id = None
 
     @property
@@ -47,6 +49,20 @@ class MybankCreditSupplychainCreditpayBuyerunsignCreateModel(object):
     def channel_tag(self, value):
         self._channel_tag = value
     @property
+    def mybk_auth_scene_code(self):
+        return self._mybk_auth_scene_code
+
+    @mybk_auth_scene_code.setter
+    def mybk_auth_scene_code(self, value):
+        self._mybk_auth_scene_code = value
+    @property
+    def mybk_auth_token(self):
+        return self._mybk_auth_token
+
+    @mybk_auth_token.setter
+    def mybk_auth_token(self, value):
+        self._mybk_auth_token = value
+    @property
     def request_id(self):
         return self._request_id
 
@@ -77,6 +93,16 @@ class MybankCreditSupplychainCreditpayBuyerunsignCreateModel(object):
                 params['channel_tag'] = self.channel_tag.to_alipay_dict()
             else:
                 params['channel_tag'] = self.channel_tag
+        if self.mybk_auth_scene_code:
+            if hasattr(self.mybk_auth_scene_code, 'to_alipay_dict'):
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code.to_alipay_dict()
+            else:
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code
+        if self.mybk_auth_token:
+            if hasattr(self.mybk_auth_token, 'to_alipay_dict'):
+                params['mybk_auth_token'] = self.mybk_auth_token.to_alipay_dict()
+            else:
+                params['mybk_auth_token'] = self.mybk_auth_token
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -97,6 +123,10 @@ class MybankCreditSupplychainCreditpayBuyerunsignCreateModel(object):
             o.buyer_scene_id = d['buyer_scene_id']
         if 'channel_tag' in d:
             o.channel_tag = d['channel_tag']
+        if 'mybk_auth_scene_code' in d:
+            o.mybk_auth_scene_code = d['mybk_auth_scene_code']
+        if 'mybk_auth_token' in d:
+            o.mybk_auth_token = d['mybk_auth_token']
         if 'request_id' in d:
             o.request_id = d['request_id']
         return o

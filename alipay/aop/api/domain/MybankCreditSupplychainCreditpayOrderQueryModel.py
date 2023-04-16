@@ -12,6 +12,8 @@ class MybankCreditSupplychainCreditpayOrderQueryModel(object):
         self._custom_info = None
         self._end_date = None
         self._items_per_page = None
+        self._mybk_auth_scene_code = None
+        self._mybk_auth_token = None
         self._page = None
         self._plan_id = None
         self._start_date = None
@@ -42,6 +44,20 @@ class MybankCreditSupplychainCreditpayOrderQueryModel(object):
     @items_per_page.setter
     def items_per_page(self, value):
         self._items_per_page = value
+    @property
+    def mybk_auth_scene_code(self):
+        return self._mybk_auth_scene_code
+
+    @mybk_auth_scene_code.setter
+    def mybk_auth_scene_code(self, value):
+        self._mybk_auth_scene_code = value
+    @property
+    def mybk_auth_token(self):
+        return self._mybk_auth_token
+
+    @mybk_auth_token.setter
+    def mybk_auth_token(self, value):
+        self._mybk_auth_token = value
     @property
     def page(self):
         return self._page
@@ -96,6 +112,16 @@ class MybankCreditSupplychainCreditpayOrderQueryModel(object):
                 params['items_per_page'] = self.items_per_page.to_alipay_dict()
             else:
                 params['items_per_page'] = self.items_per_page
+        if self.mybk_auth_scene_code:
+            if hasattr(self.mybk_auth_scene_code, 'to_alipay_dict'):
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code.to_alipay_dict()
+            else:
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code
+        if self.mybk_auth_token:
+            if hasattr(self.mybk_auth_token, 'to_alipay_dict'):
+                params['mybk_auth_token'] = self.mybk_auth_token.to_alipay_dict()
+            else:
+                params['mybk_auth_token'] = self.mybk_auth_token
         if self.page:
             if hasattr(self.page, 'to_alipay_dict'):
                 params['page'] = self.page.to_alipay_dict()
@@ -134,6 +160,10 @@ class MybankCreditSupplychainCreditpayOrderQueryModel(object):
             o.end_date = d['end_date']
         if 'items_per_page' in d:
             o.items_per_page = d['items_per_page']
+        if 'mybk_auth_scene_code' in d:
+            o.mybk_auth_scene_code = d['mybk_auth_scene_code']
+        if 'mybk_auth_token' in d:
+            o.mybk_auth_token = d['mybk_auth_token']
         if 'page' in d:
             o.page = d['page']
         if 'plan_id' in d:

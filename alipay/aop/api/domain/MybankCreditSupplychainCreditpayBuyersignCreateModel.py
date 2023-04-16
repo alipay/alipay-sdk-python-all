@@ -12,6 +12,7 @@ class MybankCreditSupplychainCreditpayBuyersignCreateModel(object):
         self._buyer = None
         self._buyer_scene_id = None
         self._channel_tag = None
+        self._is_sign_data_auth = None
         self._request_id = None
         self._trace_id = None
 
@@ -39,6 +40,13 @@ class MybankCreditSupplychainCreditpayBuyersignCreateModel(object):
     @channel_tag.setter
     def channel_tag(self, value):
         self._channel_tag = value
+    @property
+    def is_sign_data_auth(self):
+        return self._is_sign_data_auth
+
+    @is_sign_data_auth.setter
+    def is_sign_data_auth(self, value):
+        self._is_sign_data_auth = value
     @property
     def request_id(self):
         return self._request_id
@@ -72,6 +80,11 @@ class MybankCreditSupplychainCreditpayBuyersignCreateModel(object):
                 params['channel_tag'] = self.channel_tag.to_alipay_dict()
             else:
                 params['channel_tag'] = self.channel_tag
+        if self.is_sign_data_auth:
+            if hasattr(self.is_sign_data_auth, 'to_alipay_dict'):
+                params['is_sign_data_auth'] = self.is_sign_data_auth.to_alipay_dict()
+            else:
+                params['is_sign_data_auth'] = self.is_sign_data_auth
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -95,6 +108,8 @@ class MybankCreditSupplychainCreditpayBuyersignCreateModel(object):
             o.buyer_scene_id = d['buyer_scene_id']
         if 'channel_tag' in d:
             o.channel_tag = d['channel_tag']
+        if 'is_sign_data_auth' in d:
+            o.is_sign_data_auth = d['is_sign_data_auth']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'trace_id' in d:

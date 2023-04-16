@@ -21,7 +21,6 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._buyer_open_id = None
         self._default_receiving_address = None
         self._delivery_detail = None
-        self._expire_time = None
         self._ext_info = None
         self._merchant_biz_type = None
         self._order_detail = None
@@ -92,13 +91,6 @@ class AlipayOpenMiniOrderCreateModel(object):
             self._delivery_detail = value
         else:
             self._delivery_detail = LogisticsInfoDTO.from_alipay_dict(value)
-    @property
-    def expire_time(self):
-        return self._expire_time
-
-    @expire_time.setter
-    def expire_time(self, value):
-        self._expire_time = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -200,11 +192,6 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['delivery_detail'] = self.delivery_detail.to_alipay_dict()
             else:
                 params['delivery_detail'] = self.delivery_detail
-        if self.expire_time:
-            if hasattr(self.expire_time, 'to_alipay_dict'):
-                params['expire_time'] = self.expire_time.to_alipay_dict()
-            else:
-                params['expire_time'] = self.expire_time
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -266,8 +253,6 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.default_receiving_address = d['default_receiving_address']
         if 'delivery_detail' in d:
             o.delivery_detail = d['delivery_detail']
-        if 'expire_time' in d:
-            o.expire_time = d['expire_time']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'merchant_biz_type' in d:

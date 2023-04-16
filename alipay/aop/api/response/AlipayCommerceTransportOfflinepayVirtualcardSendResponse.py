@@ -13,6 +13,7 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendResponse(AlipayResponse):
         self._card_schema = None
         self._card_type = None
         self._error_message = None
+        self._open_id = None
         self._sub_error_code = None
         self._user_id = None
 
@@ -45,6 +46,13 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendResponse(AlipayResponse):
     def error_message(self, value):
         self._error_message = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def sub_error_code(self):
         return self._sub_error_code
 
@@ -69,6 +77,8 @@ class AlipayCommerceTransportOfflinepayVirtualcardSendResponse(AlipayResponse):
             self.card_type = response['card_type']
         if 'error_message' in response:
             self.error_message = response['error_message']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'sub_error_code' in response:
             self.sub_error_code = response['sub_error_code']
         if 'user_id' in response:
