@@ -9,7 +9,17 @@ class AlipayEbppInvoiceInstitutionModifyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppInvoiceInstitutionModifyResponse, self).__init__()
+        self._result = None
 
+    @property
+    def result(self):
+        return self._result
+
+    @result.setter
+    def result(self, value):
+        self._result = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppInvoiceInstitutionModifyResponse, self).parse_response_content(response_content)
+        if 'result' in response:
+            self.result = response['result']

@@ -14,6 +14,7 @@ class MybankCreditSceneprodPreadmitQueryModel(object):
         self._product_code = None
         self._seq_no = None
         self._site = None
+        self._site_open_id = None
         self._site_user_id = None
 
     @property
@@ -59,6 +60,13 @@ class MybankCreditSceneprodPreadmitQueryModel(object):
     def site(self, value):
         self._site = value
     @property
+    def site_open_id(self):
+        return self._site_open_id
+
+    @site_open_id.setter
+    def site_open_id(self, value):
+        self._site_open_id = value
+    @property
     def site_user_id(self):
         return self._site_user_id
 
@@ -99,6 +107,11 @@ class MybankCreditSceneprodPreadmitQueryModel(object):
                 params['site'] = self.site.to_alipay_dict()
             else:
                 params['site'] = self.site
+        if self.site_open_id:
+            if hasattr(self.site_open_id, 'to_alipay_dict'):
+                params['site_open_id'] = self.site_open_id.to_alipay_dict()
+            else:
+                params['site_open_id'] = self.site_open_id
         if self.site_user_id:
             if hasattr(self.site_user_id, 'to_alipay_dict'):
                 params['site_user_id'] = self.site_user_id.to_alipay_dict()
@@ -123,6 +136,8 @@ class MybankCreditSceneprodPreadmitQueryModel(object):
             o.seq_no = d['seq_no']
         if 'site' in d:
             o.site = d['site']
+        if 'site_open_id' in d:
+            o.site_open_id = d['site_open_id']
         if 'site_user_id' in d:
             o.site_user_id = d['site_user_id']
         return o

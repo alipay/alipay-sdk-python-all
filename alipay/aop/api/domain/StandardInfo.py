@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AssetShareSourceInfo import AssetShareSourceInfo
 from alipay.aop.api.domain.StandardConditionInfo import StandardConditionInfo
 
 
 class StandardInfo(object):
 
     def __init__(self):
+        self._asset_share_source_info = None
         self._consume_mode = None
         self._expense_type_sub_category = None
         self._open_rule_id = None
@@ -19,6 +21,16 @@ class StandardInfo(object):
         self._standard_id = None
         self._standard_name = None
 
+    @property
+    def asset_share_source_info(self):
+        return self._asset_share_source_info
+
+    @asset_share_source_info.setter
+    def asset_share_source_info(self, value):
+        if isinstance(value, AssetShareSourceInfo):
+            self._asset_share_source_info = value
+        else:
+            self._asset_share_source_info = AssetShareSourceInfo.from_alipay_dict(value)
     @property
     def consume_mode(self):
         return self._consume_mode
@@ -92,6 +104,11 @@ class StandardInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.asset_share_source_info:
+            if hasattr(self.asset_share_source_info, 'to_alipay_dict'):
+                params['asset_share_source_info'] = self.asset_share_source_info.to_alipay_dict()
+            else:
+                params['asset_share_source_info'] = self.asset_share_source_info
         if self.consume_mode:
             if hasattr(self.consume_mode, 'to_alipay_dict'):
                 params['consume_mode'] = self.consume_mode.to_alipay_dict()
@@ -149,6 +166,8 @@ class StandardInfo(object):
         if not d:
             return None
         o = StandardInfo()
+        if 'asset_share_source_info' in d:
+            o.asset_share_source_info = d['asset_share_source_info']
         if 'consume_mode' in d:
             o.consume_mode = d['consume_mode']
         if 'expense_type_sub_category' in d:

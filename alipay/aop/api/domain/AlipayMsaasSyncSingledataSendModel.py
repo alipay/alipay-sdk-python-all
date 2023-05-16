@@ -17,6 +17,7 @@ class AlipayMsaasSyncSingledataSendModel(object):
         self._device_id = None
         self._immediate_sync = None
         self._link_token = None
+        self._open_id = None
         self._os_type = None
         self._payload = None
         self._third_msg_id = None
@@ -86,6 +87,13 @@ class AlipayMsaasSyncSingledataSendModel(object):
     @link_token.setter
     def link_token(self, value):
         self._link_token = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def os_type(self):
         return self._os_type
@@ -170,6 +178,11 @@ class AlipayMsaasSyncSingledataSendModel(object):
                 params['link_token'] = self.link_token.to_alipay_dict()
             else:
                 params['link_token'] = self.link_token
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.os_type:
             if hasattr(self.os_type, 'to_alipay_dict'):
                 params['os_type'] = self.os_type.to_alipay_dict()
@@ -220,6 +233,8 @@ class AlipayMsaasSyncSingledataSendModel(object):
             o.immediate_sync = d['immediate_sync']
         if 'link_token' in d:
             o.link_token = d['link_token']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'os_type' in d:
             o.os_type = d['os_type']
         if 'payload' in d:

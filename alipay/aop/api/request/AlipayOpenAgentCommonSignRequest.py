@@ -17,9 +17,13 @@ class AlipayOpenAgentCommonSignRequest(object):
         self._batch_no = None
         self._business_license_no = None
         self._date_limitation = None
+        self._life_app_id = None
         self._long_term = None
         self._mcc_code = None
+        self._mini_app_id = None
         self._product_code = None
+        self._rate = None
+        self._special_license_type = None
         self._web_sites = None
         self._web_status = None
         self._web_test_account = None
@@ -28,6 +32,7 @@ class AlipayOpenAgentCommonSignRequest(object):
         self._app_demo = None
         self._business_license_auth_pic = None
         self._business_license_pic = None
+        self._mini_app_screenshot = None
         self._shop_scene_pic = None
         self._shop_sign_board_pic = None
         self._special_license_pic = None
@@ -88,6 +93,13 @@ class AlipayOpenAgentCommonSignRequest(object):
     def date_limitation(self, value):
         self._date_limitation = value
     @property
+    def life_app_id(self):
+        return self._life_app_id
+
+    @life_app_id.setter
+    def life_app_id(self, value):
+        self._life_app_id = value
+    @property
     def long_term(self):
         return self._long_term
 
@@ -102,12 +114,33 @@ class AlipayOpenAgentCommonSignRequest(object):
     def mcc_code(self, value):
         self._mcc_code = value
     @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
+    @property
     def product_code(self):
         return self._product_code
 
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def rate(self):
+        return self._rate
+
+    @rate.setter
+    def rate(self, value):
+        self._rate = value
+    @property
+    def special_license_type(self):
+        return self._special_license_type
+
+    @special_license_type.setter
+    def special_license_type(self, value):
+        self._special_license_type = value
     @property
     def web_sites(self):
         return self._web_sites
@@ -174,6 +207,15 @@ class AlipayOpenAgentCommonSignRequest(object):
         if not isinstance(value, FileItem):
             return
         self._business_license_pic = value
+    @property
+    def mini_app_screenshot(self):
+        return self._mini_app_screenshot
+
+    @mini_app_screenshot.setter
+    def mini_app_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._mini_app_screenshot = value
     @property
     def shop_scene_pic(self):
         return self._shop_scene_pic
@@ -340,6 +382,11 @@ class AlipayOpenAgentCommonSignRequest(object):
                 params['date_limitation'] = json.dumps(obj=self.date_limitation.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['date_limitation'] = self.date_limitation
+        if self.life_app_id:
+            if hasattr(self.life_app_id, 'to_alipay_dict'):
+                params['life_app_id'] = json.dumps(obj=self.life_app_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['life_app_id'] = self.life_app_id
         if self.long_term:
             if hasattr(self.long_term, 'to_alipay_dict'):
                 params['long_term'] = json.dumps(obj=self.long_term.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -350,11 +397,26 @@ class AlipayOpenAgentCommonSignRequest(object):
                 params['mcc_code'] = json.dumps(obj=self.mcc_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['mcc_code'] = self.mcc_code
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = json.dumps(obj=self.mini_app_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mini_app_id'] = self.mini_app_id
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = json.dumps(obj=self.product_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['product_code'] = self.product_code
+        if self.rate:
+            if hasattr(self.rate, 'to_alipay_dict'):
+                params['rate'] = json.dumps(obj=self.rate.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['rate'] = self.rate
+        if self.special_license_type:
+            if hasattr(self.special_license_type, 'to_alipay_dict'):
+                params['special_license_type'] = json.dumps(obj=self.special_license_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['special_license_type'] = self.special_license_type
         if self.web_sites:
             if isinstance(self.web_sites, list):
                 for i in range(0, len(self.web_sites)):
@@ -404,6 +466,8 @@ class AlipayOpenAgentCommonSignRequest(object):
             multipart_params['business_license_auth_pic'] = self.business_license_auth_pic
         if self.business_license_pic:
             multipart_params['business_license_pic'] = self.business_license_pic
+        if self.mini_app_screenshot:
+            multipart_params['mini_app_screenshot'] = self.mini_app_screenshot
         if self.shop_scene_pic:
             multipart_params['shop_scene_pic'] = self.shop_scene_pic
         if self.shop_sign_board_pic:

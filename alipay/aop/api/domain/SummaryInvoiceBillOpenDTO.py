@@ -10,6 +10,7 @@ class SummaryInvoiceBillOpenDTO(object):
     def __init__(self):
         self._bill_no = None
         self._biz_out_no = None
+        self._buyer_open_id = None
         self._buyer_user_id = None
         self._pay_type = None
         self._related_pay_no = None
@@ -28,6 +29,13 @@ class SummaryInvoiceBillOpenDTO(object):
     @biz_out_no.setter
     def biz_out_no(self, value):
         self._biz_out_no = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def buyer_user_id(self):
         return self._buyer_user_id
@@ -63,6 +71,11 @@ class SummaryInvoiceBillOpenDTO(object):
                 params['biz_out_no'] = self.biz_out_no.to_alipay_dict()
             else:
                 params['biz_out_no'] = self.biz_out_no
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.buyer_user_id:
             if hasattr(self.buyer_user_id, 'to_alipay_dict'):
                 params['buyer_user_id'] = self.buyer_user_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class SummaryInvoiceBillOpenDTO(object):
             o.bill_no = d['bill_no']
         if 'biz_out_no' in d:
             o.biz_out_no = d['biz_out_no']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'buyer_user_id' in d:
             o.buyer_user_id = d['buyer_user_id']
         if 'pay_type' in d:

@@ -9,10 +9,21 @@ from alipay.aop.api.domain.VoucherDetailInfoDTO import VoucherDetailInfoDTO
 class PayInfoVO(object):
 
     def __init__(self):
+        self._pay_channels = None
         self._pay_time = None
         self._transaction_id = None
         self._voucher_detail_list = None
 
+    @property
+    def pay_channels(self):
+        return self._pay_channels
+
+    @pay_channels.setter
+    def pay_channels(self, value):
+        if isinstance(value, list):
+            self._pay_channels = list()
+            for i in value:
+                self._pay_channels.append(i)
     @property
     def pay_time(self):
         return self._pay_time
@@ -44,6 +55,16 @@ class PayInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.pay_channels:
+            if isinstance(self.pay_channels, list):
+                for i in range(0, len(self.pay_channels)):
+                    element = self.pay_channels[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pay_channels[i] = element.to_alipay_dict()
+            if hasattr(self.pay_channels, 'to_alipay_dict'):
+                params['pay_channels'] = self.pay_channels.to_alipay_dict()
+            else:
+                params['pay_channels'] = self.pay_channels
         if self.pay_time:
             if hasattr(self.pay_time, 'to_alipay_dict'):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
@@ -71,6 +92,8 @@ class PayInfoVO(object):
         if not d:
             return None
         o = PayInfoVO()
+        if 'pay_channels' in d:
+            o.pay_channels = d['pay_channels']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
         if 'transaction_id' in d:

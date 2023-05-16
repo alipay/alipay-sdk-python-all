@@ -13,6 +13,7 @@ class AlipayOpenAppServiceApplyModel(object):
         self._schema_version = None
         self._service_code = None
         self._service_xml = None
+        self._template_type = None
 
     @property
     def category_id(self):
@@ -49,6 +50,13 @@ class AlipayOpenAppServiceApplyModel(object):
     @service_xml.setter
     def service_xml(self, value):
         self._service_xml = value
+    @property
+    def template_type(self):
+        return self._template_type
+
+    @template_type.setter
+    def template_type(self, value):
+        self._template_type = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayOpenAppServiceApplyModel(object):
                 params['service_xml'] = self.service_xml.to_alipay_dict()
             else:
                 params['service_xml'] = self.service_xml
+        if self.template_type:
+            if hasattr(self.template_type, 'to_alipay_dict'):
+                params['template_type'] = self.template_type.to_alipay_dict()
+            else:
+                params['template_type'] = self.template_type
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayOpenAppServiceApplyModel(object):
             o.service_code = d['service_code']
         if 'service_xml' in d:
             o.service_xml = d['service_xml']
+        if 'template_type' in d:
+            o.template_type = d['template_type']
         return o
 
 

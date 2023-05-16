@@ -13,6 +13,7 @@ class AlipayOpenAppServiceQueryResponse(AlipayResponse):
         self._service_code = None
         self._service_xml = None
         self._status = None
+        self._template_type = None
 
     @property
     def reject_reason(self):
@@ -42,6 +43,13 @@ class AlipayOpenAppServiceQueryResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def template_type(self):
+        return self._template_type
+
+    @template_type.setter
+    def template_type(self, value):
+        self._template_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAppServiceQueryResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class AlipayOpenAppServiceQueryResponse(AlipayResponse):
             self.service_xml = response['service_xml']
         if 'status' in response:
             self.status = response['status']
+        if 'template_type' in response:
+            self.template_type = response['template_type']

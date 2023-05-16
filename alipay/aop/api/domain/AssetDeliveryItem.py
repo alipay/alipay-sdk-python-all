@@ -19,6 +19,7 @@ class AssetDeliveryItem(object):
         self._assign_item_id = None
         self._assign_out_order_id = None
         self._biz_line = None
+        self._biz_scene = None
         self._biz_tag = None
         self._biz_type = None
         self._custom_clearance = None
@@ -42,6 +43,7 @@ class AssetDeliveryItem(object):
         self._out_biz_no = None
         self._parent_item_id = None
         self._print_data = None
+        self._priority = None
         self._produce_order_item_id = None
         self._record_type = None
         self._supplier_id = None
@@ -98,6 +100,13 @@ class AssetDeliveryItem(object):
     @biz_line.setter
     def biz_line(self, value):
         self._biz_line = value
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def biz_tag(self):
         return self._biz_tag
@@ -269,6 +278,13 @@ class AssetDeliveryItem(object):
     def print_data(self, value):
         self._print_data = value
     @property
+    def priority(self):
+        return self._priority
+
+    @priority.setter
+    def priority(self, value):
+        self._priority = value
+    @property
     def produce_order_item_id(self):
         return self._produce_order_item_id
 
@@ -352,6 +368,11 @@ class AssetDeliveryItem(object):
                 params['biz_line'] = self.biz_line.to_alipay_dict()
             else:
                 params['biz_line'] = self.biz_line
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.biz_tag:
             if hasattr(self.biz_tag, 'to_alipay_dict'):
                 params['biz_tag'] = self.biz_tag.to_alipay_dict()
@@ -467,6 +488,11 @@ class AssetDeliveryItem(object):
                 params['print_data'] = self.print_data.to_alipay_dict()
             else:
                 params['print_data'] = self.print_data
+        if self.priority:
+            if hasattr(self.priority, 'to_alipay_dict'):
+                params['priority'] = self.priority.to_alipay_dict()
+            else:
+                params['priority'] = self.priority
         if self.produce_order_item_id:
             if hasattr(self.produce_order_item_id, 'to_alipay_dict'):
                 params['produce_order_item_id'] = self.produce_order_item_id.to_alipay_dict()
@@ -518,6 +544,8 @@ class AssetDeliveryItem(object):
             o.assign_out_order_id = d['assign_out_order_id']
         if 'biz_line' in d:
             o.biz_line = d['biz_line']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'biz_tag' in d:
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
@@ -564,6 +592,8 @@ class AssetDeliveryItem(object):
             o.parent_item_id = d['parent_item_id']
         if 'print_data' in d:
             o.print_data = d['print_data']
+        if 'priority' in d:
+            o.priority = d['priority']
         if 'produce_order_item_id' in d:
             o.produce_order_item_id = d['produce_order_item_id']
         if 'record_type' in d:

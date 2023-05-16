@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
 from alipay.aop.api.domain.MiniBusinessParamsDTO import MiniBusinessParamsDTO
+from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
 from alipay.aop.api.domain.LogisticsInfoDTO import LogisticsInfoDTO
 from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
@@ -19,6 +20,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._buyer_id = None
         self._buyer_logon_id = None
         self._buyer_open_id = None
+        self._contact_info = None
         self._default_receiving_address = None
         self._delivery_detail = None
         self._ext_info = None
@@ -71,6 +73,16 @@ class AlipayOpenMiniOrderCreateModel(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def contact_info(self):
+        return self._contact_info
+
+    @contact_info.setter
+    def contact_info(self, value):
+        if isinstance(value, ContactInfoDTO):
+            self._contact_info = value
+        else:
+            self._contact_info = ContactInfoDTO.from_alipay_dict(value)
     @property
     def default_receiving_address(self):
         return self._default_receiving_address
@@ -182,6 +194,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.contact_info:
+            if hasattr(self.contact_info, 'to_alipay_dict'):
+                params['contact_info'] = self.contact_info.to_alipay_dict()
+            else:
+                params['contact_info'] = self.contact_info
         if self.default_receiving_address:
             if hasattr(self.default_receiving_address, 'to_alipay_dict'):
                 params['default_receiving_address'] = self.default_receiving_address.to_alipay_dict()
@@ -249,6 +266,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.buyer_logon_id = d['buyer_logon_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'contact_info' in d:
+            o.contact_info = d['contact_info']
         if 'default_receiving_address' in d:
             o.default_receiving_address = d['default_receiving_address']
         if 'delivery_detail' in d:

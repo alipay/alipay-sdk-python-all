@@ -11,6 +11,7 @@ class AlipayFundBatchDetailQueryModel(object):
         self._batch_no = None
         self._biz_code = None
         self._biz_scene = None
+        self._business_params = None
         self._detail_no = None
         self._detail_status = None
         self._out_batch_no = None
@@ -42,6 +43,13 @@ class AlipayFundBatchDetailQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        self._business_params = value
     @property
     def detail_no(self):
         return self._detail_no
@@ -124,6 +132,11 @@ class AlipayFundBatchDetailQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.detail_no:
             if hasattr(self.detail_no, 'to_alipay_dict'):
                 params['detail_no'] = self.detail_no.to_alipay_dict()
@@ -182,6 +195,8 @@ class AlipayFundBatchDetailQueryModel(object):
             o.biz_code = d['biz_code']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'detail_no' in d:
             o.detail_no = d['detail_no']
         if 'detail_status' in d:

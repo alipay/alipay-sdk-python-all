@@ -20,6 +20,8 @@ class IssueRuleInfo(object):
         self._outer_source_id = None
         self._quota_type = None
         self._share_mode = None
+        self._target_id = None
+        self._target_type = None
 
     @property
     def effective_period(self):
@@ -105,6 +107,20 @@ class IssueRuleInfo(object):
     @share_mode.setter
     def share_mode(self, value):
         self._share_mode = value
+    @property
+    def target_id(self):
+        return self._target_id
+
+    @target_id.setter
+    def target_id(self, value):
+        self._target_id = value
+    @property
+    def target_type(self):
+        return self._target_type
+
+    @target_type.setter
+    def target_type(self, value):
+        self._target_type = value
 
 
     def to_alipay_dict(self):
@@ -169,6 +185,16 @@ class IssueRuleInfo(object):
                 params['share_mode'] = self.share_mode.to_alipay_dict()
             else:
                 params['share_mode'] = self.share_mode
+        if self.target_id:
+            if hasattr(self.target_id, 'to_alipay_dict'):
+                params['target_id'] = self.target_id.to_alipay_dict()
+            else:
+                params['target_id'] = self.target_id
+        if self.target_type:
+            if hasattr(self.target_type, 'to_alipay_dict'):
+                params['target_type'] = self.target_type.to_alipay_dict()
+            else:
+                params['target_type'] = self.target_type
         return params
 
     @staticmethod
@@ -200,6 +226,10 @@ class IssueRuleInfo(object):
             o.quota_type = d['quota_type']
         if 'share_mode' in d:
             o.share_mode = d['share_mode']
+        if 'target_id' in d:
+            o.target_id = d['target_id']
+        if 'target_type' in d:
+            o.target_type = d['target_type']
         return o
 
 

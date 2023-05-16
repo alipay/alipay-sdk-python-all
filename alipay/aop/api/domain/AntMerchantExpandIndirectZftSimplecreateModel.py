@@ -32,6 +32,7 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
         self._invoice_info = None
         self._license_auth_letter_image = None
         self._mcc = None
+        self._name = None
         self._out_door_images = None
         self._oversea_settle_account = None
         self._oversea_settle_open_id = None
@@ -175,6 +176,13 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
     @mcc.setter
     def mcc(self, value):
         self._mcc = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def out_door_images(self):
         return self._out_door_images
@@ -332,6 +340,11 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
                 params['mcc'] = self.mcc.to_alipay_dict()
             else:
                 params['mcc'] = self.mcc
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         if self.out_door_images:
             if hasattr(self.out_door_images, 'to_alipay_dict'):
                 params['out_door_images'] = self.out_door_images.to_alipay_dict()
@@ -423,6 +436,8 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
             o.license_auth_letter_image = d['license_auth_letter_image']
         if 'mcc' in d:
             o.mcc = d['mcc']
+        if 'name' in d:
+            o.name = d['name']
         if 'out_door_images' in d:
             o.out_door_images = d['out_door_images']
         if 'oversea_settle_account' in d:

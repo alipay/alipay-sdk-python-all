@@ -11,6 +11,7 @@ class RefundRecordVO(object):
         self._amount = None
         self._out_refund_id = None
         self._refund_id = None
+        self._status = None
 
     @property
     def amount(self):
@@ -33,6 +34,13 @@ class RefundRecordVO(object):
     @refund_id.setter
     def refund_id(self, value):
         self._refund_id = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class RefundRecordVO(object):
                 params['refund_id'] = self.refund_id.to_alipay_dict()
             else:
                 params['refund_id'] = self.refund_id
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class RefundRecordVO(object):
             o.out_refund_id = d['out_refund_id']
         if 'refund_id' in d:
             o.refund_id = d['refund_id']
+        if 'status' in d:
+            o.status = d['status']
         return o
 
 

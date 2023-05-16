@@ -12,6 +12,7 @@ class AlipayMarketingActivityOrderCreateModel(object):
         self._buyer_id = None
         self._buyer_open_id = None
         self._ch_info = None
+        self._mini_trace_info = None
         self._out_order_no = None
         self._promo_trace_info = None
         self._sale_activity_info_list = None
@@ -38,6 +39,13 @@ class AlipayMarketingActivityOrderCreateModel(object):
     @ch_info.setter
     def ch_info(self, value):
         self._ch_info = value
+    @property
+    def mini_trace_info(self):
+        return self._mini_trace_info
+
+    @mini_trace_info.setter
+    def mini_trace_info(self, value):
+        self._mini_trace_info = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -91,6 +99,11 @@ class AlipayMarketingActivityOrderCreateModel(object):
                 params['ch_info'] = self.ch_info.to_alipay_dict()
             else:
                 params['ch_info'] = self.ch_info
+        if self.mini_trace_info:
+            if hasattr(self.mini_trace_info, 'to_alipay_dict'):
+                params['mini_trace_info'] = self.mini_trace_info.to_alipay_dict()
+            else:
+                params['mini_trace_info'] = self.mini_trace_info
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -129,6 +142,8 @@ class AlipayMarketingActivityOrderCreateModel(object):
             o.buyer_open_id = d['buyer_open_id']
         if 'ch_info' in d:
             o.ch_info = d['ch_info']
+        if 'mini_trace_info' in d:
+            o.mini_trace_info = d['mini_trace_info']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'promo_trace_info' in d:

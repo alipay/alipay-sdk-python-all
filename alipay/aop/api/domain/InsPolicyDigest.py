@@ -13,6 +13,7 @@ class InsPolicyDigest(object):
         self._out_policy_no = None
         self._policy_no = None
         self._policy_status = None
+        self._policy_type = None
         self._premium = None
         self._sum_insured = None
 
@@ -51,6 +52,13 @@ class InsPolicyDigest(object):
     @policy_status.setter
     def policy_status(self, value):
         self._policy_status = value
+    @property
+    def policy_type(self):
+        return self._policy_type
+
+    @policy_type.setter
+    def policy_type(self, value):
+        self._policy_type = value
     @property
     def premium(self):
         return self._premium
@@ -94,6 +102,11 @@ class InsPolicyDigest(object):
                 params['policy_status'] = self.policy_status.to_alipay_dict()
             else:
                 params['policy_status'] = self.policy_status
+        if self.policy_type:
+            if hasattr(self.policy_type, 'to_alipay_dict'):
+                params['policy_type'] = self.policy_type.to_alipay_dict()
+            else:
+                params['policy_type'] = self.policy_type
         if self.premium:
             if hasattr(self.premium, 'to_alipay_dict'):
                 params['premium'] = self.premium.to_alipay_dict()
@@ -121,6 +134,8 @@ class InsPolicyDigest(object):
             o.policy_no = d['policy_no']
         if 'policy_status' in d:
             o.policy_status = d['policy_status']
+        if 'policy_type' in d:
+            o.policy_type = d['policy_type']
         if 'premium' in d:
             o.premium = d['premium']
         if 'sum_insured' in d:

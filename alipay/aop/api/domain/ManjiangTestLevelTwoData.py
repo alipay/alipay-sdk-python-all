@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ManjiangTestabc import ManjiangTestabc
 from alipay.aop.api.domain.ManjiangTestComplexOneData import ManjiangTestComplexOneData
 
 
@@ -10,6 +11,7 @@ class ManjiangTestLevelTwoData(object):
 
     def __init__(self):
         self._open_json = None
+        self._sss = None
         self._test_comple_2 = None
         self._tets_level_2 = None
 
@@ -20,6 +22,16 @@ class ManjiangTestLevelTwoData(object):
     @open_json.setter
     def open_json(self, value):
         self._open_json = value
+    @property
+    def sss(self):
+        return self._sss
+
+    @sss.setter
+    def sss(self, value):
+        if isinstance(value, ManjiangTestabc):
+            self._sss = value
+        else:
+            self._sss = ManjiangTestabc.from_alipay_dict(value)
     @property
     def test_comple_2(self):
         return self._test_comple_2
@@ -46,6 +58,11 @@ class ManjiangTestLevelTwoData(object):
                 params['open_json'] = self.open_json.to_alipay_dict()
             else:
                 params['open_json'] = self.open_json
+        if self.sss:
+            if hasattr(self.sss, 'to_alipay_dict'):
+                params['sss'] = self.sss.to_alipay_dict()
+            else:
+                params['sss'] = self.sss
         if self.test_comple_2:
             if hasattr(self.test_comple_2, 'to_alipay_dict'):
                 params['test_comple_2'] = self.test_comple_2.to_alipay_dict()
@@ -65,6 +82,8 @@ class ManjiangTestLevelTwoData(object):
         o = ManjiangTestLevelTwoData()
         if 'open_json' in d:
             o.open_json = d['open_json']
+        if 'sss' in d:
+            o.sss = d['sss']
         if 'test_comple_2' in d:
             o.test_comple_2 = d['test_comple_2']
         if 'tets_level_2' in d:

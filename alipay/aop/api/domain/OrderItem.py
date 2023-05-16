@@ -26,6 +26,8 @@ class OrderItem(object):
         self._order_status = None
         self._phone_no = None
         self._province = None
+        self._service_effect_date = None
+        self._service_expire_date = None
         self._shop_id = None
         self._shop_name = None
         self._shop_status = None
@@ -158,6 +160,20 @@ class OrderItem(object):
     def province(self, value):
         self._province = value
     @property
+    def service_effect_date(self):
+        return self._service_effect_date
+
+    @service_effect_date.setter
+    def service_effect_date(self, value):
+        self._service_effect_date = value
+    @property
+    def service_expire_date(self):
+        return self._service_expire_date
+
+    @service_expire_date.setter
+    def service_expire_date(self, value):
+        self._service_expire_date = value
+    @property
     def shop_id(self):
         return self._shop_id
 
@@ -279,6 +295,16 @@ class OrderItem(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.service_effect_date:
+            if hasattr(self.service_effect_date, 'to_alipay_dict'):
+                params['service_effect_date'] = self.service_effect_date.to_alipay_dict()
+            else:
+                params['service_effect_date'] = self.service_effect_date
+        if self.service_expire_date:
+            if hasattr(self.service_expire_date, 'to_alipay_dict'):
+                params['service_expire_date'] = self.service_expire_date.to_alipay_dict()
+            else:
+                params['service_expire_date'] = self.service_expire_date
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -342,6 +368,10 @@ class OrderItem(object):
             o.phone_no = d['phone_no']
         if 'province' in d:
             o.province = d['province']
+        if 'service_effect_date' in d:
+            o.service_effect_date = d['service_effect_date']
+        if 'service_expire_date' in d:
+            o.service_expire_date = d['service_expire_date']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'shop_name' in d:

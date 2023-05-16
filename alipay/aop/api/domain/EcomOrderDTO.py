@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsPeriodDTO import InsPeriodDTO
 from alipay.aop.api.domain.EcomLogisticsOrderDTO import EcomLogisticsOrderDTO
 from alipay.aop.api.domain.PayOrderDTO import PayOrderDTO
 from alipay.aop.api.domain.EcomSubOrderDTO import EcomSubOrderDTO
@@ -16,6 +17,7 @@ class EcomOrderDTO(object):
         self._buy_amount = None
         self._buyer_id = None
         self._buyer_nick = None
+        self._charge_duration = None
         self._credit_deposit_money = None
         self._discount_fee = None
         self._ext_info = None
@@ -74,6 +76,16 @@ class EcomOrderDTO(object):
     @buyer_nick.setter
     def buyer_nick(self, value):
         self._buyer_nick = value
+    @property
+    def charge_duration(self):
+        return self._charge_duration
+
+    @charge_duration.setter
+    def charge_duration(self, value):
+        if isinstance(value, InsPeriodDTO):
+            self._charge_duration = value
+        else:
+            self._charge_duration = InsPeriodDTO.from_alipay_dict(value)
     @property
     def credit_deposit_money(self):
         return self._credit_deposit_money
@@ -269,6 +281,11 @@ class EcomOrderDTO(object):
                 params['buyer_nick'] = self.buyer_nick.to_alipay_dict()
             else:
                 params['buyer_nick'] = self.buyer_nick
+        if self.charge_duration:
+            if hasattr(self.charge_duration, 'to_alipay_dict'):
+                params['charge_duration'] = self.charge_duration.to_alipay_dict()
+            else:
+                params['charge_duration'] = self.charge_duration
         if self.credit_deposit_money:
             if hasattr(self.credit_deposit_money, 'to_alipay_dict'):
                 params['credit_deposit_money'] = self.credit_deposit_money.to_alipay_dict()
@@ -401,6 +418,8 @@ class EcomOrderDTO(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_nick' in d:
             o.buyer_nick = d['buyer_nick']
+        if 'charge_duration' in d:
+            o.charge_duration = d['charge_duration']
         if 'credit_deposit_money' in d:
             o.credit_deposit_money = d['credit_deposit_money']
         if 'discount_fee' in d:

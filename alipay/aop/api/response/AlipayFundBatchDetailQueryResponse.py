@@ -27,6 +27,7 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
         self._page_num = None
         self._page_size = None
         self._payer_id = None
+        self._payer_open_id = None
         self._payment_amount = None
         self._payment_currency = None
         self._product_code = None
@@ -163,6 +164,13 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
     def payer_id(self, value):
         self._payer_id = value
     @property
+    def payer_open_id(self):
+        return self._payer_open_id
+
+    @payer_open_id.setter
+    def payer_open_id(self, value):
+        self._payer_open_id = value
+    @property
     def payment_amount(self):
         return self._payment_amount
 
@@ -262,6 +270,8 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
             self.page_size = response['page_size']
         if 'payer_id' in response:
             self.payer_id = response['payer_id']
+        if 'payer_open_id' in response:
+            self.payer_open_id = response['payer_open_id']
         if 'payment_amount' in response:
             self.payment_amount = response['payment_amount']
         if 'payment_currency' in response:

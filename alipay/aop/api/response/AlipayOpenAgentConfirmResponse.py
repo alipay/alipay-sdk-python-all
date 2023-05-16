@@ -13,6 +13,7 @@ class AlipayOpenAgentConfirmResponse(AlipayResponse):
         self._app_refresh_token = None
         self._auth_app_id = None
         self._expires_in = None
+        self._open_id = None
         self._order_no = None
         self._re_expires_in = None
         self._user_id = None
@@ -46,6 +47,13 @@ class AlipayOpenAgentConfirmResponse(AlipayResponse):
     def expires_in(self, value):
         self._expires_in = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def order_no(self):
         return self._order_no
 
@@ -77,6 +85,8 @@ class AlipayOpenAgentConfirmResponse(AlipayResponse):
             self.auth_app_id = response['auth_app_id']
         if 'expires_in' in response:
             self.expires_in = response['expires_in']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 're_expires_in' in response:

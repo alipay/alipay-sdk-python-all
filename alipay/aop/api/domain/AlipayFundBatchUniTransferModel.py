@@ -12,6 +12,7 @@ class AlipayFundBatchUniTransferModel(object):
     def __init__(self):
         self._biz_scene = None
         self._business_params = None
+        self._original_order_id = None
         self._out_batch_no = None
         self._payer_info = None
         self._product_code = None
@@ -34,6 +35,13 @@ class AlipayFundBatchUniTransferModel(object):
     @business_params.setter
     def business_params(self, value):
         self._business_params = value
+    @property
+    def original_order_id(self):
+        return self._original_order_id
+
+    @original_order_id.setter
+    def original_order_id(self, value):
+        self._original_order_id = value
     @property
     def out_batch_no(self):
         return self._out_batch_no
@@ -85,10 +93,13 @@ class AlipayFundBatchUniTransferModel(object):
 
     @trans_order_list.setter
     def trans_order_list(self, value):
-        if isinstance(value, TransOrderDetail):
-            self._trans_order_list = value
-        else:
-            self._trans_order_list = TransOrderDetail.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._trans_order_list = list()
+            for i in value:
+                if isinstance(i, TransOrderDetail):
+                    self._trans_order_list.append(i)
+                else:
+                    self._trans_order_list.append(TransOrderDetail.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -103,6 +114,11 @@ class AlipayFundBatchUniTransferModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.original_order_id:
+            if hasattr(self.original_order_id, 'to_alipay_dict'):
+                params['original_order_id'] = self.original_order_id.to_alipay_dict()
+            else:
+                params['original_order_id'] = self.original_order_id
         if self.out_batch_no:
             if hasattr(self.out_batch_no, 'to_alipay_dict'):
                 params['out_batch_no'] = self.out_batch_no.to_alipay_dict()
@@ -134,6 +150,11 @@ class AlipayFundBatchUniTransferModel(object):
             else:
                 params['total_trans_amount'] = self.total_trans_amount
         if self.trans_order_list:
+            if isinstance(self.trans_order_list, list):
+                for i in range(0, len(self.trans_order_list)):
+                    element = self.trans_order_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trans_order_list[i] = element.to_alipay_dict()
             if hasattr(self.trans_order_list, 'to_alipay_dict'):
                 params['trans_order_list'] = self.trans_order_list.to_alipay_dict()
             else:
@@ -149,6 +170,8 @@ class AlipayFundBatchUniTransferModel(object):
             o.biz_scene = d['biz_scene']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'original_order_id' in d:
+            o.original_order_id = d['original_order_id']
         if 'out_batch_no' in d:
             o.out_batch_no = d['out_batch_no']
         if 'payer_info' in d:

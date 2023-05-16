@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayUserAccountInvitedConvertSyncModel(object):
 
     def __init__(self):
+        self._biz_ext_info = None
         self._convert_tag = None
         self._open_id = None
         self._out_biz_no = None
@@ -15,6 +16,13 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
         self._user_id = None
         self._user_token = None
 
+    @property
+    def biz_ext_info(self):
+        return self._biz_ext_info
+
+    @biz_ext_info.setter
+    def biz_ext_info(self, value):
+        self._biz_ext_info = value
     @property
     def convert_tag(self):
         return self._convert_tag
@@ -61,6 +69,11 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_ext_info:
+            if hasattr(self.biz_ext_info, 'to_alipay_dict'):
+                params['biz_ext_info'] = self.biz_ext_info.to_alipay_dict()
+            else:
+                params['biz_ext_info'] = self.biz_ext_info
         if self.convert_tag:
             if hasattr(self.convert_tag, 'to_alipay_dict'):
                 params['convert_tag'] = self.convert_tag.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayUserAccountInvitedConvertSyncModel(object):
         if not d:
             return None
         o = AlipayUserAccountInvitedConvertSyncModel()
+        if 'biz_ext_info' in d:
+            o.biz_ext_info = d['biz_ext_info']
         if 'convert_tag' in d:
             o.convert_tag = d['convert_tag']
         if 'open_id' in d:

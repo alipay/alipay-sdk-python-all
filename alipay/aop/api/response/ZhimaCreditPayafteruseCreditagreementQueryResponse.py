@@ -12,6 +12,7 @@ class ZhimaCreditPayafteruseCreditagreementQueryResponse(AlipayResponse):
         self._agreement_status = None
         self._biz_time = None
         self._credit_agreement_id = None
+        self._ext_info = None
         self._out_agreement_no = None
 
     @property
@@ -36,6 +37,13 @@ class ZhimaCreditPayafteruseCreditagreementQueryResponse(AlipayResponse):
     def credit_agreement_id(self, value):
         self._credit_agreement_id = value
     @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
+    @property
     def out_agreement_no(self):
         return self._out_agreement_no
 
@@ -51,5 +59,7 @@ class ZhimaCreditPayafteruseCreditagreementQueryResponse(AlipayResponse):
             self.biz_time = response['biz_time']
         if 'credit_agreement_id' in response:
             self.credit_agreement_id = response['credit_agreement_id']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'out_agreement_no' in response:
             self.out_agreement_no = response['out_agreement_no']

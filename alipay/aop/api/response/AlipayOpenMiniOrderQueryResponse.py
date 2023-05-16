@@ -27,6 +27,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._refund_info = None
         self._settle_type = None
         self._status = None
+        self._trade_no = None
         self._user_id = None
 
     @property
@@ -136,6 +137,13 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     def status(self, value):
         self._status = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -171,5 +179,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.settle_type = response['settle_type']
         if 'status' in response:
             self.status = response['status']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']
         if 'user_id' in response:
             self.user_id = response['user_id']

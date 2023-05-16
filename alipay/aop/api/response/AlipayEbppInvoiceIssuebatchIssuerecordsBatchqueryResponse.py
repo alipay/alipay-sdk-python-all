@@ -21,10 +21,13 @@ class AlipayEbppInvoiceIssuebatchIssuerecordsBatchqueryResponse(AlipayResponse):
 
     @issue_record_info_list.setter
     def issue_record_info_list(self, value):
-        if isinstance(value, IssueRecordInfo):
-            self._issue_record_info_list = value
-        else:
-            self._issue_record_info_list = IssueRecordInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._issue_record_info_list = list()
+            for i in value:
+                if isinstance(i, IssueRecordInfo):
+                    self._issue_record_info_list.append(i)
+                else:
+                    self._issue_record_info_list.append(IssueRecordInfo.from_alipay_dict(i))
     @property
     def page_num(self):
         return self._page_num

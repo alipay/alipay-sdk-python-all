@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class CouponTemplateConsumeInfo(object):
 
     def __init__(self):
+        self._available_amount = None
         self._receive_amount = None
         self._receive_count = None
         self._refund_amount = None
         self._used_amount = None
         self._used_count = None
 
+    @property
+    def available_amount(self):
+        return self._available_amount
+
+    @available_amount.setter
+    def available_amount(self, value):
+        self._available_amount = value
     @property
     def receive_amount(self):
         return self._receive_amount
@@ -53,6 +61,11 @@ class CouponTemplateConsumeInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.available_amount:
+            if hasattr(self.available_amount, 'to_alipay_dict'):
+                params['available_amount'] = self.available_amount.to_alipay_dict()
+            else:
+                params['available_amount'] = self.available_amount
         if self.receive_amount:
             if hasattr(self.receive_amount, 'to_alipay_dict'):
                 params['receive_amount'] = self.receive_amount.to_alipay_dict()
@@ -85,6 +98,8 @@ class CouponTemplateConsumeInfo(object):
         if not d:
             return None
         o = CouponTemplateConsumeInfo()
+        if 'available_amount' in d:
+            o.available_amount = d['available_amount']
         if 'receive_amount' in d:
             o.receive_amount = d['receive_amount']
         if 'receive_count' in d:

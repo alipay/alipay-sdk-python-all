@@ -12,6 +12,7 @@ class AlipayOpenAppServiceSchemaQueryResponse(AlipayResponse):
         self._category_id = None
         self._schema_version = None
         self._schema_xml = None
+        self._template_type = None
 
     @property
     def category_id(self):
@@ -34,6 +35,13 @@ class AlipayOpenAppServiceSchemaQueryResponse(AlipayResponse):
     @schema_xml.setter
     def schema_xml(self, value):
         self._schema_xml = value
+    @property
+    def template_type(self):
+        return self._template_type
+
+    @template_type.setter
+    def template_type(self, value):
+        self._template_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAppServiceSchemaQueryResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayOpenAppServiceSchemaQueryResponse(AlipayResponse):
             self.schema_version = response['schema_version']
         if 'schema_xml' in response:
             self.schema_xml = response['schema_xml']
+        if 'template_type' in response:
+            self.template_type = response['template_type']

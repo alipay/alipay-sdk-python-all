@@ -13,6 +13,7 @@ class IssueRecordInfo(object):
         self._owner_id = None
         self._owner_open_id = None
         self._owner_type = None
+        self._quota_id = None
         self._user_name = None
 
     @property
@@ -51,6 +52,13 @@ class IssueRecordInfo(object):
     def owner_type(self, value):
         self._owner_type = value
     @property
+    def quota_id(self):
+        return self._quota_id
+
+    @quota_id.setter
+    def quota_id(self, value):
+        self._quota_id = value
+    @property
     def user_name(self):
         return self._user_name
 
@@ -86,6 +94,11 @@ class IssueRecordInfo(object):
                 params['owner_type'] = self.owner_type.to_alipay_dict()
             else:
                 params['owner_type'] = self.owner_type
+        if self.quota_id:
+            if hasattr(self.quota_id, 'to_alipay_dict'):
+                params['quota_id'] = self.quota_id.to_alipay_dict()
+            else:
+                params['quota_id'] = self.quota_id
         if self.user_name:
             if hasattr(self.user_name, 'to_alipay_dict'):
                 params['user_name'] = self.user_name.to_alipay_dict()
@@ -108,6 +121,8 @@ class IssueRecordInfo(object):
             o.owner_open_id = d['owner_open_id']
         if 'owner_type' in d:
             o.owner_type = d['owner_type']
+        if 'quota_id' in d:
+            o.quota_id = d['quota_id']
         if 'user_name' in d:
             o.user_name = d['user_name']
         return o

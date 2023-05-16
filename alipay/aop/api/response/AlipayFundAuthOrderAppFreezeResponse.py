@@ -17,6 +17,7 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
         self._operation_id = None
         self._out_order_no = None
         self._out_request_no = None
+        self._payer_open_id = None
         self._payer_user_id = None
         self._pre_auth_type = None
         self._status = None
@@ -79,6 +80,13 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
     def out_request_no(self, value):
         self._out_request_no = value
     @property
+    def payer_open_id(self):
+        return self._payer_open_id
+
+    @payer_open_id.setter
+    def payer_open_id(self, value):
+        self._payer_open_id = value
+    @property
     def payer_user_id(self):
         return self._payer_user_id
 
@@ -125,6 +133,8 @@ class AlipayFundAuthOrderAppFreezeResponse(AlipayResponse):
             self.out_order_no = response['out_order_no']
         if 'out_request_no' in response:
             self.out_request_no = response['out_request_no']
+        if 'payer_open_id' in response:
+            self.payer_open_id = response['payer_open_id']
         if 'payer_user_id' in response:
             self.payer_user_id = response['payer_user_id']
         if 'pre_auth_type' in response:

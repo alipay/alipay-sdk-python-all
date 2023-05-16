@@ -8,12 +8,25 @@ from alipay.aop.api.constant.ParamConstants import *
 class QipanMerchantCrowd(object):
 
     def __init__(self):
+        self._apply_channel_list = None
         self._crowd_code = None
         self._crowd_desc = None
         self._crowd_name = None
         self._external_crowd_code = None
+        self._hidden = None
+        self._processable = None
         self._status = None
 
+    @property
+    def apply_channel_list(self):
+        return self._apply_channel_list
+
+    @apply_channel_list.setter
+    def apply_channel_list(self, value):
+        if isinstance(value, list):
+            self._apply_channel_list = list()
+            for i in value:
+                self._apply_channel_list.append(i)
     @property
     def crowd_code(self):
         return self._crowd_code
@@ -43,6 +56,20 @@ class QipanMerchantCrowd(object):
     def external_crowd_code(self, value):
         self._external_crowd_code = value
     @property
+    def hidden(self):
+        return self._hidden
+
+    @hidden.setter
+    def hidden(self, value):
+        self._hidden = value
+    @property
+    def processable(self):
+        return self._processable
+
+    @processable.setter
+    def processable(self, value):
+        self._processable = value
+    @property
     def status(self):
         return self._status
 
@@ -53,6 +80,16 @@ class QipanMerchantCrowd(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_channel_list:
+            if isinstance(self.apply_channel_list, list):
+                for i in range(0, len(self.apply_channel_list)):
+                    element = self.apply_channel_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.apply_channel_list[i] = element.to_alipay_dict()
+            if hasattr(self.apply_channel_list, 'to_alipay_dict'):
+                params['apply_channel_list'] = self.apply_channel_list.to_alipay_dict()
+            else:
+                params['apply_channel_list'] = self.apply_channel_list
         if self.crowd_code:
             if hasattr(self.crowd_code, 'to_alipay_dict'):
                 params['crowd_code'] = self.crowd_code.to_alipay_dict()
@@ -73,6 +110,16 @@ class QipanMerchantCrowd(object):
                 params['external_crowd_code'] = self.external_crowd_code.to_alipay_dict()
             else:
                 params['external_crowd_code'] = self.external_crowd_code
+        if self.hidden:
+            if hasattr(self.hidden, 'to_alipay_dict'):
+                params['hidden'] = self.hidden.to_alipay_dict()
+            else:
+                params['hidden'] = self.hidden
+        if self.processable:
+            if hasattr(self.processable, 'to_alipay_dict'):
+                params['processable'] = self.processable.to_alipay_dict()
+            else:
+                params['processable'] = self.processable
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -85,6 +132,8 @@ class QipanMerchantCrowd(object):
         if not d:
             return None
         o = QipanMerchantCrowd()
+        if 'apply_channel_list' in d:
+            o.apply_channel_list = d['apply_channel_list']
         if 'crowd_code' in d:
             o.crowd_code = d['crowd_code']
         if 'crowd_desc' in d:
@@ -93,6 +142,10 @@ class QipanMerchantCrowd(object):
             o.crowd_name = d['crowd_name']
         if 'external_crowd_code' in d:
             o.external_crowd_code = d['external_crowd_code']
+        if 'hidden' in d:
+            o.hidden = d['hidden']
+        if 'processable' in d:
+            o.processable = d['processable']
         if 'status' in d:
             o.status = d['status']
         return o

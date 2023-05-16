@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AssetShareSourceInfo import AssetShareSourceInfo
 from alipay.aop.api.domain.ExpenseCtrRuleInfo import ExpenseCtrRuleInfo
 from alipay.aop.api.domain.StandardConditionInfo import StandardConditionInfo
 
@@ -13,6 +14,7 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
         self._account_id = None
         self._action = None
         self._agreement_no = None
+        self._asset_share_source_info = None
         self._consume_mode = None
         self._enterprise_id = None
         self._expense_ctrl_rule_info_list = None
@@ -45,6 +47,16 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def asset_share_source_info(self):
+        return self._asset_share_source_info
+
+    @asset_share_source_info.setter
+    def asset_share_source_info(self, value):
+        if isinstance(value, AssetShareSourceInfo):
+            self._asset_share_source_info = value
+        else:
+            self._asset_share_source_info = AssetShareSourceInfo.from_alipay_dict(value)
     @property
     def consume_mode(self):
         return self._consume_mode
@@ -146,6 +158,11 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.asset_share_source_info:
+            if hasattr(self.asset_share_source_info, 'to_alipay_dict'):
+                params['asset_share_source_info'] = self.asset_share_source_info.to_alipay_dict()
+            else:
+                params['asset_share_source_info'] = self.asset_share_source_info
         if self.consume_mode:
             if hasattr(self.consume_mode, 'to_alipay_dict'):
                 params['consume_mode'] = self.consume_mode.to_alipay_dict()
@@ -219,6 +236,8 @@ class AlipayEbppInvoiceInstitutionExpenseruleModifyModel(object):
             o.action = d['action']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'asset_share_source_info' in d:
+            o.asset_share_source_info = d['asset_share_source_info']
         if 'consume_mode' in d:
             o.consume_mode = d['consume_mode']
         if 'enterprise_id' in d:

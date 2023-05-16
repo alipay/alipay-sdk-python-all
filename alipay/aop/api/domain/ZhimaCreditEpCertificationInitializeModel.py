@@ -19,6 +19,7 @@ class ZhimaCreditEpCertificationInitializeModel(object):
         self._user_cert_no = None
         self._user_id = None
         self._user_name = None
+        self._user_type = None
 
     @property
     def alipay_account(self):
@@ -97,6 +98,13 @@ class ZhimaCreditEpCertificationInitializeModel(object):
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def user_type(self):
+        return self._user_type
+
+    @user_type.setter
+    def user_type(self, value):
+        self._user_type = value
 
 
     def to_alipay_dict(self):
@@ -156,6 +164,11 @@ class ZhimaCreditEpCertificationInitializeModel(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.user_type:
+            if hasattr(self.user_type, 'to_alipay_dict'):
+                params['user_type'] = self.user_type.to_alipay_dict()
+            else:
+                params['user_type'] = self.user_type
         return params
 
     @staticmethod
@@ -185,6 +198,8 @@ class ZhimaCreditEpCertificationInitializeModel(object):
             o.user_id = d['user_id']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'user_type' in d:
+            o.user_type = d['user_type']
         return o
 
 

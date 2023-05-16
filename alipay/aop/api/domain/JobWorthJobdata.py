@@ -31,6 +31,7 @@ class JobWorthJobdata(object):
         self._ka_profession_name = None
         self._location = None
         self._month = None
+        self._once_token = None
         self._profession_id = None
         self._profession_name = None
         self._salary_max = None
@@ -210,6 +211,13 @@ class JobWorthJobdata(object):
     @month.setter
     def month(self, value):
         self._month = value
+    @property
+    def once_token(self):
+        return self._once_token
+
+    @once_token.setter
+    def once_token(self, value):
+        self._once_token = value
     @property
     def profession_id(self):
         return self._profession_id
@@ -448,6 +456,11 @@ class JobWorthJobdata(object):
                 params['month'] = self.month.to_alipay_dict()
             else:
                 params['month'] = self.month
+        if self.once_token:
+            if hasattr(self.once_token, 'to_alipay_dict'):
+                params['once_token'] = self.once_token.to_alipay_dict()
+            else:
+                params['once_token'] = self.once_token
         if self.profession_id:
             if hasattr(self.profession_id, 'to_alipay_dict'):
                 params['profession_id'] = self.profession_id.to_alipay_dict()
@@ -586,6 +599,8 @@ class JobWorthJobdata(object):
             o.location = d['location']
         if 'month' in d:
             o.month = d['month']
+        if 'once_token' in d:
+            o.once_token = d['once_token']
         if 'profession_id' in d:
             o.profession_id = d['profession_id']
         if 'profession_name' in d:

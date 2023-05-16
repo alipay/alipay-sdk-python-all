@@ -21,6 +21,7 @@ class AlipayMerchantOrderSyncModel(object):
         self._buyer_id = None
         self._buyer_info = None
         self._buyer_open_id = None
+        self._category_id = None
         self._discount_amount = None
         self._discount_info_list = None
         self._ext_info = None
@@ -79,6 +80,13 @@ class AlipayMerchantOrderSyncModel(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def category_id(self):
+        return self._category_id
+
+    @category_id.setter
+    def category_id(self, value):
+        self._category_id = value
     @property
     def discount_amount(self):
         return self._discount_amount
@@ -327,6 +335,11 @@ class AlipayMerchantOrderSyncModel(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.category_id:
+            if hasattr(self.category_id, 'to_alipay_dict'):
+                params['category_id'] = self.category_id.to_alipay_dict()
+            else:
+                params['category_id'] = self.category_id
         if self.discount_amount:
             if hasattr(self.discount_amount, 'to_alipay_dict'):
                 params['discount_amount'] = self.discount_amount.to_alipay_dict()
@@ -502,6 +515,8 @@ class AlipayMerchantOrderSyncModel(object):
             o.buyer_info = d['buyer_info']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'category_id' in d:
+            o.category_id = d['category_id']
         if 'discount_amount' in d:
             o.discount_amount = d['discount_amount']
         if 'discount_info_list' in d:

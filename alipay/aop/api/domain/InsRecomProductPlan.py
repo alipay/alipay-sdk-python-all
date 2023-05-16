@@ -18,6 +18,7 @@ class InsRecomProductPlan(object):
         self._prod_name = None
         self._prod_no = None
         self._prod_version = None
+        self._product_code = None
         self._product_id = None
         self._product_plan_id = None
         self._recom_flow_no = None
@@ -88,6 +89,13 @@ class InsRecomProductPlan(object):
     @prod_version.setter
     def prod_version(self, value):
         self._prod_version = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def product_id(self):
         return self._product_id
@@ -185,6 +193,11 @@ class InsRecomProductPlan(object):
                 params['prod_version'] = self.prod_version.to_alipay_dict()
             else:
                 params['prod_version'] = self.prod_version
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.product_id:
             if hasattr(self.product_id, 'to_alipay_dict'):
                 params['product_id'] = self.product_id.to_alipay_dict()
@@ -245,6 +258,8 @@ class InsRecomProductPlan(object):
             o.prod_no = d['prod_no']
         if 'prod_version' in d:
             o.prod_version = d['prod_version']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'product_id' in d:
             o.product_id = d['product_id']
         if 'product_plan_id' in d:
