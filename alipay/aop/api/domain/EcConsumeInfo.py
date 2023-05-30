@@ -10,10 +10,12 @@ class EcConsumeInfo(object):
     def __init__(self):
         self._account_id = None
         self._agreement_peer_payer_id = None
+        self._benefit_amount = None
         self._biz_out_no = None
         self._category_name = None
         self._consume_amount = None
         self._consume_category = None
+        self._consume_fee_with_discount = None
         self._consume_memo = None
         self._consume_type = None
         self._employee_id = None
@@ -60,6 +62,13 @@ class EcConsumeInfo(object):
     def agreement_peer_payer_id(self, value):
         self._agreement_peer_payer_id = value
     @property
+    def benefit_amount(self):
+        return self._benefit_amount
+
+    @benefit_amount.setter
+    def benefit_amount(self, value):
+        self._benefit_amount = value
+    @property
     def biz_out_no(self):
         return self._biz_out_no
 
@@ -87,6 +96,13 @@ class EcConsumeInfo(object):
     @consume_category.setter
     def consume_category(self, value):
         self._consume_category = value
+    @property
+    def consume_fee_with_discount(self):
+        return self._consume_fee_with_discount
+
+    @consume_fee_with_discount.setter
+    def consume_fee_with_discount(self, value):
+        self._consume_fee_with_discount = value
     @property
     def consume_memo(self):
         return self._consume_memo
@@ -311,6 +327,11 @@ class EcConsumeInfo(object):
                 params['agreement_peer_payer_id'] = self.agreement_peer_payer_id.to_alipay_dict()
             else:
                 params['agreement_peer_payer_id'] = self.agreement_peer_payer_id
+        if self.benefit_amount:
+            if hasattr(self.benefit_amount, 'to_alipay_dict'):
+                params['benefit_amount'] = self.benefit_amount.to_alipay_dict()
+            else:
+                params['benefit_amount'] = self.benefit_amount
         if self.biz_out_no:
             if hasattr(self.biz_out_no, 'to_alipay_dict'):
                 params['biz_out_no'] = self.biz_out_no.to_alipay_dict()
@@ -331,6 +352,11 @@ class EcConsumeInfo(object):
                 params['consume_category'] = self.consume_category.to_alipay_dict()
             else:
                 params['consume_category'] = self.consume_category
+        if self.consume_fee_with_discount:
+            if hasattr(self.consume_fee_with_discount, 'to_alipay_dict'):
+                params['consume_fee_with_discount'] = self.consume_fee_with_discount.to_alipay_dict()
+            else:
+                params['consume_fee_with_discount'] = self.consume_fee_with_discount
         if self.consume_memo:
             if hasattr(self.consume_memo, 'to_alipay_dict'):
                 params['consume_memo'] = self.consume_memo.to_alipay_dict()
@@ -492,6 +518,8 @@ class EcConsumeInfo(object):
             o.account_id = d['account_id']
         if 'agreement_peer_payer_id' in d:
             o.agreement_peer_payer_id = d['agreement_peer_payer_id']
+        if 'benefit_amount' in d:
+            o.benefit_amount = d['benefit_amount']
         if 'biz_out_no' in d:
             o.biz_out_no = d['biz_out_no']
         if 'category_name' in d:
@@ -500,6 +528,8 @@ class EcConsumeInfo(object):
             o.consume_amount = d['consume_amount']
         if 'consume_category' in d:
             o.consume_category = d['consume_category']
+        if 'consume_fee_with_discount' in d:
+            o.consume_fee_with_discount = d['consume_fee_with_discount']
         if 'consume_memo' in d:
             o.consume_memo = d['consume_memo']
         if 'consume_type' in d:

@@ -25,6 +25,8 @@ class ZftSubMerchantOrder(object):
         self._smid = None
         self._status = None
         self._sub_confirm = None
+        self._sub_sign_qr_code_url = None
+        self._sub_sign_short_chain_url = None
 
     @property
     def app_pre_auth(self):
@@ -145,6 +147,20 @@ class ZftSubMerchantOrder(object):
     @sub_confirm.setter
     def sub_confirm(self, value):
         self._sub_confirm = value
+    @property
+    def sub_sign_qr_code_url(self):
+        return self._sub_sign_qr_code_url
+
+    @sub_sign_qr_code_url.setter
+    def sub_sign_qr_code_url(self, value):
+        self._sub_sign_qr_code_url = value
+    @property
+    def sub_sign_short_chain_url(self):
+        return self._sub_sign_short_chain_url
+
+    @sub_sign_short_chain_url.setter
+    def sub_sign_short_chain_url(self, value):
+        self._sub_sign_short_chain_url = value
 
 
     def to_alipay_dict(self):
@@ -234,6 +250,16 @@ class ZftSubMerchantOrder(object):
                 params['sub_confirm'] = self.sub_confirm.to_alipay_dict()
             else:
                 params['sub_confirm'] = self.sub_confirm
+        if self.sub_sign_qr_code_url:
+            if hasattr(self.sub_sign_qr_code_url, 'to_alipay_dict'):
+                params['sub_sign_qr_code_url'] = self.sub_sign_qr_code_url.to_alipay_dict()
+            else:
+                params['sub_sign_qr_code_url'] = self.sub_sign_qr_code_url
+        if self.sub_sign_short_chain_url:
+            if hasattr(self.sub_sign_short_chain_url, 'to_alipay_dict'):
+                params['sub_sign_short_chain_url'] = self.sub_sign_short_chain_url.to_alipay_dict()
+            else:
+                params['sub_sign_short_chain_url'] = self.sub_sign_short_chain_url
         return params
 
     @staticmethod
@@ -275,6 +301,10 @@ class ZftSubMerchantOrder(object):
             o.status = d['status']
         if 'sub_confirm' in d:
             o.sub_confirm = d['sub_confirm']
+        if 'sub_sign_qr_code_url' in d:
+            o.sub_sign_qr_code_url = d['sub_sign_qr_code_url']
+        if 'sub_sign_short_chain_url' in d:
+            o.sub_sign_short_chain_url = d['sub_sign_short_chain_url']
         return o
 
 

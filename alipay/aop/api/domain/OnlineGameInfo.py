@@ -13,9 +13,11 @@ class OnlineGameInfo(object):
         self._desc = None
         self._detail_url = None
         self._end_time = None
+        self._env = None
         self._game_id = None
         self._game_progress_unit = None
         self._game_progress_value = None
+        self._medal_image = None
         self._name = None
         self._online_game_event_list = None
         self._out_game_no = None
@@ -23,9 +25,11 @@ class OnlineGameInfo(object):
         self._sports_data_limit_count = None
         self._sports_data_source = None
         self._sports_data_type = None
+        self._sports_type = None
         self._start_time = None
         self._status = None
         self._sub_biz_type = None
+        self._tag_list = None
         self._user_join_end_time = None
         self._user_join_start_time = None
 
@@ -58,6 +62,13 @@ class OnlineGameInfo(object):
     def end_time(self, value):
         self._end_time = value
     @property
+    def env(self):
+        return self._env
+
+    @env.setter
+    def env(self, value):
+        self._env = value
+    @property
     def game_id(self):
         return self._game_id
 
@@ -78,6 +89,13 @@ class OnlineGameInfo(object):
     @game_progress_value.setter
     def game_progress_value(self, value):
         self._game_progress_value = value
+    @property
+    def medal_image(self):
+        return self._medal_image
+
+    @medal_image.setter
+    def medal_image(self, value):
+        self._medal_image = value
     @property
     def name(self):
         return self._name
@@ -134,6 +152,13 @@ class OnlineGameInfo(object):
     def sports_data_type(self, value):
         self._sports_data_type = value
     @property
+    def sports_type(self):
+        return self._sports_type
+
+    @sports_type.setter
+    def sports_type(self, value):
+        self._sports_type = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -154,6 +179,16 @@ class OnlineGameInfo(object):
     @sub_biz_type.setter
     def sub_biz_type(self, value):
         self._sub_biz_type = value
+    @property
+    def tag_list(self):
+        return self._tag_list
+
+    @tag_list.setter
+    def tag_list(self, value):
+        if isinstance(value, list):
+            self._tag_list = list()
+            for i in value:
+                self._tag_list.append(i)
     @property
     def user_join_end_time(self):
         return self._user_join_end_time
@@ -192,6 +227,11 @@ class OnlineGameInfo(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.env:
+            if hasattr(self.env, 'to_alipay_dict'):
+                params['env'] = self.env.to_alipay_dict()
+            else:
+                params['env'] = self.env
         if self.game_id:
             if hasattr(self.game_id, 'to_alipay_dict'):
                 params['game_id'] = self.game_id.to_alipay_dict()
@@ -207,6 +247,11 @@ class OnlineGameInfo(object):
                 params['game_progress_value'] = self.game_progress_value.to_alipay_dict()
             else:
                 params['game_progress_value'] = self.game_progress_value
+        if self.medal_image:
+            if hasattr(self.medal_image, 'to_alipay_dict'):
+                params['medal_image'] = self.medal_image.to_alipay_dict()
+            else:
+                params['medal_image'] = self.medal_image
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -247,6 +292,11 @@ class OnlineGameInfo(object):
                 params['sports_data_type'] = self.sports_data_type.to_alipay_dict()
             else:
                 params['sports_data_type'] = self.sports_data_type
+        if self.sports_type:
+            if hasattr(self.sports_type, 'to_alipay_dict'):
+                params['sports_type'] = self.sports_type.to_alipay_dict()
+            else:
+                params['sports_type'] = self.sports_type
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -262,6 +312,16 @@ class OnlineGameInfo(object):
                 params['sub_biz_type'] = self.sub_biz_type.to_alipay_dict()
             else:
                 params['sub_biz_type'] = self.sub_biz_type
+        if self.tag_list:
+            if isinstance(self.tag_list, list):
+                for i in range(0, len(self.tag_list)):
+                    element = self.tag_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.tag_list[i] = element.to_alipay_dict()
+            if hasattr(self.tag_list, 'to_alipay_dict'):
+                params['tag_list'] = self.tag_list.to_alipay_dict()
+            else:
+                params['tag_list'] = self.tag_list
         if self.user_join_end_time:
             if hasattr(self.user_join_end_time, 'to_alipay_dict'):
                 params['user_join_end_time'] = self.user_join_end_time.to_alipay_dict()
@@ -287,12 +347,16 @@ class OnlineGameInfo(object):
             o.detail_url = d['detail_url']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'env' in d:
+            o.env = d['env']
         if 'game_id' in d:
             o.game_id = d['game_id']
         if 'game_progress_unit' in d:
             o.game_progress_unit = d['game_progress_unit']
         if 'game_progress_value' in d:
             o.game_progress_value = d['game_progress_value']
+        if 'medal_image' in d:
+            o.medal_image = d['medal_image']
         if 'name' in d:
             o.name = d['name']
         if 'online_game_event_list' in d:
@@ -307,12 +371,16 @@ class OnlineGameInfo(object):
             o.sports_data_source = d['sports_data_source']
         if 'sports_data_type' in d:
             o.sports_data_type = d['sports_data_type']
+        if 'sports_type' in d:
+            o.sports_type = d['sports_type']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'status' in d:
             o.status = d['status']
         if 'sub_biz_type' in d:
             o.sub_biz_type = d['sub_biz_type']
+        if 'tag_list' in d:
+            o.tag_list = d['tag_list']
         if 'user_join_end_time' in d:
             o.user_join_end_time = d['user_join_end_time']
         if 'user_join_start_time' in d:

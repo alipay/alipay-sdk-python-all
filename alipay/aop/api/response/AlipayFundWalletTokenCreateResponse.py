@@ -11,6 +11,7 @@ class AlipayFundWalletTokenCreateResponse(AlipayResponse):
         super(AlipayFundWalletTokenCreateResponse, self).__init__()
         self._bind_token = None
         self._bind_url = None
+        self._user_wallet_id = None
 
     @property
     def bind_token(self):
@@ -26,6 +27,13 @@ class AlipayFundWalletTokenCreateResponse(AlipayResponse):
     @bind_url.setter
     def bind_url(self, value):
         self._bind_url = value
+    @property
+    def user_wallet_id(self):
+        return self._user_wallet_id
+
+    @user_wallet_id.setter
+    def user_wallet_id(self, value):
+        self._user_wallet_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundWalletTokenCreateResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayFundWalletTokenCreateResponse(AlipayResponse):
             self.bind_token = response['bind_token']
         if 'bind_url' in response:
             self.bind_url = response['bind_url']
+        if 'user_wallet_id' in response:
+            self.user_wallet_id = response['user_wallet_id']

@@ -9,6 +9,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
 
     def __init__(self):
         self._alipay_order_id = None
+        self._apply_scene = None
+        self._apply_sub_scene = None
         self._city_code = None
         self._mobile_no = None
         self._open_id = None
@@ -39,6 +41,20 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @alipay_order_id.setter
     def alipay_order_id(self, value):
         self._alipay_order_id = value
+    @property
+    def apply_scene(self):
+        return self._apply_scene
+
+    @apply_scene.setter
+    def apply_scene(self, value):
+        self._apply_scene = value
+    @property
+    def apply_sub_scene(self):
+        return self._apply_sub_scene
+
+    @apply_sub_scene.setter
+    def apply_sub_scene(self, value):
+        self._apply_sub_scene = value
     @property
     def city_code(self):
         return self._city_code
@@ -202,6 +218,16 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['alipay_order_id'] = self.alipay_order_id.to_alipay_dict()
             else:
                 params['alipay_order_id'] = self.alipay_order_id
+        if self.apply_scene:
+            if hasattr(self.apply_scene, 'to_alipay_dict'):
+                params['apply_scene'] = self.apply_scene.to_alipay_dict()
+            else:
+                params['apply_scene'] = self.apply_scene
+        if self.apply_sub_scene:
+            if hasattr(self.apply_sub_scene, 'to_alipay_dict'):
+                params['apply_sub_scene'] = self.apply_sub_scene.to_alipay_dict()
+            else:
+                params['apply_sub_scene'] = self.apply_sub_scene
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -321,6 +347,10 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         o = AlipayCommerceTransportEtcApplyorderCreateormodifyModel()
         if 'alipay_order_id' in d:
             o.alipay_order_id = d['alipay_order_id']
+        if 'apply_scene' in d:
+            o.apply_scene = d['apply_scene']
+        if 'apply_sub_scene' in d:
+            o.apply_sub_scene = d['apply_sub_scene']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'mobile_no' in d:

@@ -13,6 +13,7 @@ class AlipayMerchantQipanCrowdCreateModel(object):
         self._crowd_desc = None
         self._crowd_name = None
         self._external_crowd_code = None
+        self._hidden = None
         self._user_list = None
 
     @property
@@ -46,6 +47,13 @@ class AlipayMerchantQipanCrowdCreateModel(object):
     @external_crowd_code.setter
     def external_crowd_code(self, value):
         self._external_crowd_code = value
+    @property
+    def hidden(self):
+        return self._hidden
+
+    @hidden.setter
+    def hidden(self, value):
+        self._hidden = value
     @property
     def user_list(self):
         return self._user_list
@@ -88,6 +96,11 @@ class AlipayMerchantQipanCrowdCreateModel(object):
                 params['external_crowd_code'] = self.external_crowd_code.to_alipay_dict()
             else:
                 params['external_crowd_code'] = self.external_crowd_code
+        if self.hidden:
+            if hasattr(self.hidden, 'to_alipay_dict'):
+                params['hidden'] = self.hidden.to_alipay_dict()
+            else:
+                params['hidden'] = self.hidden
         if self.user_list:
             if isinstance(self.user_list, list):
                 for i in range(0, len(self.user_list)):
@@ -113,6 +126,8 @@ class AlipayMerchantQipanCrowdCreateModel(object):
             o.crowd_name = d['crowd_name']
         if 'external_crowd_code' in d:
             o.external_crowd_code = d['external_crowd_code']
+        if 'hidden' in d:
+            o.hidden = d['hidden']
         if 'user_list' in d:
             o.user_list = d['user_list']
         return o

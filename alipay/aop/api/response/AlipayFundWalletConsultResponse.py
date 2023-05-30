@@ -16,6 +16,8 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
         self._error_msg = None
         self._total_amount = None
         self._user_wallet_id = None
+        self._user_wallet_status = None
+        self._wallet_owner_status = None
 
     @property
     def actual_available_amount(self):
@@ -66,6 +68,20 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
     @user_wallet_id.setter
     def user_wallet_id(self, value):
         self._user_wallet_id = value
+    @property
+    def user_wallet_status(self):
+        return self._user_wallet_status
+
+    @user_wallet_status.setter
+    def user_wallet_status(self, value):
+        self._user_wallet_status = value
+    @property
+    def wallet_owner_status(self):
+        return self._wallet_owner_status
+
+    @wallet_owner_status.setter
+    def wallet_owner_status(self, value):
+        self._wallet_owner_status = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundWalletConsultResponse, self).parse_response_content(response_content)
@@ -83,3 +99,7 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
             self.total_amount = response['total_amount']
         if 'user_wallet_id' in response:
             self.user_wallet_id = response['user_wallet_id']
+        if 'user_wallet_status' in response:
+            self.user_wallet_status = response['user_wallet_status']
+        if 'wallet_owner_status' in response:
+            self.wallet_owner_status = response['wallet_owner_status']

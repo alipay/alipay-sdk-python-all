@@ -9,6 +9,7 @@ class AlipayDataTwentyTwoQueryModel(object):
 
     def __init__(self):
         self._body = None
+        self._body_a = None
         self._id = None
         self._id_open_id = None
         self._path = None
@@ -21,6 +22,13 @@ class AlipayDataTwentyTwoQueryModel(object):
     @body.setter
     def body(self, value):
         self._body = value
+    @property
+    def body_a(self):
+        return self._body_a
+
+    @body_a.setter
+    def body_a(self, value):
+        self._body_a = value
     @property
     def id(self):
         return self._id
@@ -58,6 +66,11 @@ class AlipayDataTwentyTwoQueryModel(object):
                 params['body'] = self.body.to_alipay_dict()
             else:
                 params['body'] = self.body
+        if self.body_a:
+            if hasattr(self.body_a, 'to_alipay_dict'):
+                params['body_a'] = self.body_a.to_alipay_dict()
+            else:
+                params['body_a'] = self.body_a
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayDataTwentyTwoQueryModel(object):
         o = AlipayDataTwentyTwoQueryModel()
         if 'body' in d:
             o.body = d['body']
+        if 'body_a' in d:
+            o.body_a = d['body_a']
         if 'id' in d:
             o.id = d['id']
         if 'id_open_id' in d:

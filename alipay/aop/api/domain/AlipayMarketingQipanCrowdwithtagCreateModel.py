@@ -13,6 +13,7 @@ class AlipayMarketingQipanCrowdwithtagCreateModel(object):
         self._crowd_desc = None
         self._crowd_id = None
         self._crowd_name = None
+        self._hidden = None
         self._select_tag_list = None
 
     @property
@@ -46,6 +47,13 @@ class AlipayMarketingQipanCrowdwithtagCreateModel(object):
     @crowd_name.setter
     def crowd_name(self, value):
         self._crowd_name = value
+    @property
+    def hidden(self):
+        return self._hidden
+
+    @hidden.setter
+    def hidden(self, value):
+        self._hidden = value
     @property
     def select_tag_list(self):
         return self._select_tag_list
@@ -88,6 +96,11 @@ class AlipayMarketingQipanCrowdwithtagCreateModel(object):
                 params['crowd_name'] = self.crowd_name.to_alipay_dict()
             else:
                 params['crowd_name'] = self.crowd_name
+        if self.hidden:
+            if hasattr(self.hidden, 'to_alipay_dict'):
+                params['hidden'] = self.hidden.to_alipay_dict()
+            else:
+                params['hidden'] = self.hidden
         if self.select_tag_list:
             if isinstance(self.select_tag_list, list):
                 for i in range(0, len(self.select_tag_list)):
@@ -113,6 +126,8 @@ class AlipayMarketingQipanCrowdwithtagCreateModel(object):
             o.crowd_id = d['crowd_id']
         if 'crowd_name' in d:
             o.crowd_name = d['crowd_name']
+        if 'hidden' in d:
+            o.hidden = d['hidden']
         if 'select_tag_list' in d:
             o.select_tag_list = d['select_tag_list']
         return o

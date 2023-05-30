@@ -9,6 +9,7 @@ class AlipayFundWalletConsultModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._out_biz_no = None
         self._principal_id = None
         self._principal_open_id = None
         self._principal_type = None
@@ -23,6 +24,13 @@ class AlipayFundWalletConsultModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def principal_id(self):
         return self._principal_id
@@ -74,6 +82,11 @@ class AlipayFundWalletConsultModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.principal_id:
             if hasattr(self.principal_id, 'to_alipay_dict'):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayFundWalletConsultModel(object):
         o = AlipayFundWalletConsultModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
         if 'principal_open_id' in d:

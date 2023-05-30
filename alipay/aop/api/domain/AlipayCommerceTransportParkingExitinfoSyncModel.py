@@ -9,6 +9,7 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
 
     def __init__(self):
         self._is_encrypt_plate_no = None
+        self._open_appid = None
         self._open_id = None
         self._out_serial_no = None
         self._out_time = None
@@ -23,6 +24,13 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
     @is_encrypt_plate_no.setter
     def is_encrypt_plate_no(self, value):
         self._is_encrypt_plate_no = value
+    @property
+    def open_appid(self):
+        return self._open_appid
+
+    @open_appid.setter
+    def open_appid(self, value):
+        self._open_appid = value
     @property
     def open_id(self):
         return self._open_id
@@ -74,6 +82,11 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no.to_alipay_dict()
             else:
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no
+        if self.open_appid:
+            if hasattr(self.open_appid, 'to_alipay_dict'):
+                params['open_appid'] = self.open_appid.to_alipay_dict()
+            else:
+                params['open_appid'] = self.open_appid
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -113,6 +126,8 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
         o = AlipayCommerceTransportParkingExitinfoSyncModel()
         if 'is_encrypt_plate_no' in d:
             o.is_encrypt_plate_no = d['is_encrypt_plate_no']
+        if 'open_appid' in d:
+            o.open_appid = d['open_appid']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_serial_no' in d:

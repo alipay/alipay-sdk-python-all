@@ -13,11 +13,13 @@ class AntSignUserInfoRequest(object):
         self._auth_signer_cert_type = None
         self._auth_signer_name = None
         self._authorized = None
+        self._auto_sign = None
         self._ca_system_sign_file_request_list = None
         self._email = None
         self._mobile = None
         self._order = None
         self._our_corp = None
+        self._send_link_flag = None
         self._sign_sub_type = None
         self._sign_user_id = None
         self._sign_user_type = None
@@ -53,6 +55,13 @@ class AntSignUserInfoRequest(object):
     @authorized.setter
     def authorized(self, value):
         self._authorized = value
+    @property
+    def auto_sign(self):
+        return self._auto_sign
+
+    @auto_sign.setter
+    def auto_sign(self, value):
+        self._auto_sign = value
     @property
     def ca_system_sign_file_request_list(self):
         return self._ca_system_sign_file_request_list
@@ -94,6 +103,13 @@ class AntSignUserInfoRequest(object):
     @our_corp.setter
     def our_corp(self, value):
         self._our_corp = value
+    @property
+    def send_link_flag(self):
+        return self._send_link_flag
+
+    @send_link_flag.setter
+    def send_link_flag(self, value):
+        self._send_link_flag = value
     @property
     def sign_sub_type(self):
         return self._sign_sub_type
@@ -160,6 +176,11 @@ class AntSignUserInfoRequest(object):
                 params['authorized'] = self.authorized.to_alipay_dict()
             else:
                 params['authorized'] = self.authorized
+        if self.auto_sign:
+            if hasattr(self.auto_sign, 'to_alipay_dict'):
+                params['auto_sign'] = self.auto_sign.to_alipay_dict()
+            else:
+                params['auto_sign'] = self.auto_sign
         if self.ca_system_sign_file_request_list:
             if isinstance(self.ca_system_sign_file_request_list, list):
                 for i in range(0, len(self.ca_system_sign_file_request_list)):
@@ -190,6 +211,11 @@ class AntSignUserInfoRequest(object):
                 params['our_corp'] = self.our_corp.to_alipay_dict()
             else:
                 params['our_corp'] = self.our_corp
+        if self.send_link_flag:
+            if hasattr(self.send_link_flag, 'to_alipay_dict'):
+                params['send_link_flag'] = self.send_link_flag.to_alipay_dict()
+            else:
+                params['send_link_flag'] = self.send_link_flag
         if self.sign_sub_type:
             if hasattr(self.sign_sub_type, 'to_alipay_dict'):
                 params['sign_sub_type'] = self.sign_sub_type.to_alipay_dict()
@@ -235,6 +261,8 @@ class AntSignUserInfoRequest(object):
             o.auth_signer_name = d['auth_signer_name']
         if 'authorized' in d:
             o.authorized = d['authorized']
+        if 'auto_sign' in d:
+            o.auto_sign = d['auto_sign']
         if 'ca_system_sign_file_request_list' in d:
             o.ca_system_sign_file_request_list = d['ca_system_sign_file_request_list']
         if 'email' in d:
@@ -245,6 +273,8 @@ class AntSignUserInfoRequest(object):
             o.order = d['order']
         if 'our_corp' in d:
             o.our_corp = d['our_corp']
+        if 'send_link_flag' in d:
+            o.send_link_flag = d['send_link_flag']
         if 'sign_sub_type' in d:
             o.sign_sub_type = d['sign_sub_type']
         if 'sign_user_id' in d:

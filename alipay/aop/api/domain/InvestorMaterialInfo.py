@@ -10,6 +10,7 @@ class InvestorMaterialInfo(object):
     def __init__(self):
         self._file_id = None
         self._file_url = None
+        self._material_type = None
         self._type = None
 
     @property
@@ -26,6 +27,13 @@ class InvestorMaterialInfo(object):
     @file_url.setter
     def file_url(self, value):
         self._file_url = value
+    @property
+    def material_type(self):
+        return self._material_type
+
+    @material_type.setter
+    def material_type(self, value):
+        self._material_type = value
     @property
     def type(self):
         return self._type
@@ -47,6 +55,11 @@ class InvestorMaterialInfo(object):
                 params['file_url'] = self.file_url.to_alipay_dict()
             else:
                 params['file_url'] = self.file_url
+        if self.material_type:
+            if hasattr(self.material_type, 'to_alipay_dict'):
+                params['material_type'] = self.material_type.to_alipay_dict()
+            else:
+                params['material_type'] = self.material_type
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -63,6 +76,8 @@ class InvestorMaterialInfo(object):
             o.file_id = d['file_id']
         if 'file_url' in d:
             o.file_url = d['file_url']
+        if 'material_type' in d:
+            o.material_type = d['material_type']
         if 'type' in d:
             o.type = d['type']
         return o

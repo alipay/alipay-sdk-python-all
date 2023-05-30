@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
+from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
@@ -15,6 +16,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenMiniOrderQueryResponse, self).__init__()
         self._address_info = None
+        self._contact_info = None
         self._create_time = None
         self._default_receiving_address = None
         self._delivery_detail = None
@@ -40,6 +42,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self._address_info = value
         else:
             self._address_info = AddressInfoVO.from_alipay_dict(value)
+    @property
+    def contact_info(self):
+        return self._contact_info
+
+    @contact_info.setter
+    def contact_info(self, value):
+        if isinstance(value, ContactInfoVO):
+            self._contact_info = value
+        else:
+            self._contact_info = ContactInfoVO.from_alipay_dict(value)
     @property
     def create_time(self):
         return self._create_time
@@ -155,6 +167,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         response = super(AlipayOpenMiniOrderQueryResponse, self).parse_response_content(response_content)
         if 'address_info' in response:
             self.address_info = response['address_info']
+        if 'contact_info' in response:
+            self.contact_info = response['contact_info']
         if 'create_time' in response:
             self.create_time = response['create_time']
         if 'default_receiving_address' in response:

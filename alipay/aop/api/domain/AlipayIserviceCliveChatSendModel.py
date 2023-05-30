@@ -11,6 +11,9 @@ class AlipayIserviceCliveChatSendModel(object):
         self._content = None
         self._content_type = None
         self._conversation_id = None
+        self._message_type_code = None
+        self._msg_id = None
+        self._reference_message_id = None
         self._src = None
         self._visitor_id = None
         self._visitor_name = None
@@ -38,6 +41,27 @@ class AlipayIserviceCliveChatSendModel(object):
     @conversation_id.setter
     def conversation_id(self, value):
         self._conversation_id = value
+    @property
+    def message_type_code(self):
+        return self._message_type_code
+
+    @message_type_code.setter
+    def message_type_code(self, value):
+        self._message_type_code = value
+    @property
+    def msg_id(self):
+        return self._msg_id
+
+    @msg_id.setter
+    def msg_id(self, value):
+        self._msg_id = value
+    @property
+    def reference_message_id(self):
+        return self._reference_message_id
+
+    @reference_message_id.setter
+    def reference_message_id(self, value):
+        self._reference_message_id = value
     @property
     def src(self):
         return self._src
@@ -92,6 +116,21 @@ class AlipayIserviceCliveChatSendModel(object):
                 params['conversation_id'] = self.conversation_id.to_alipay_dict()
             else:
                 params['conversation_id'] = self.conversation_id
+        if self.message_type_code:
+            if hasattr(self.message_type_code, 'to_alipay_dict'):
+                params['message_type_code'] = self.message_type_code.to_alipay_dict()
+            else:
+                params['message_type_code'] = self.message_type_code
+        if self.msg_id:
+            if hasattr(self.msg_id, 'to_alipay_dict'):
+                params['msg_id'] = self.msg_id.to_alipay_dict()
+            else:
+                params['msg_id'] = self.msg_id
+        if self.reference_message_id:
+            if hasattr(self.reference_message_id, 'to_alipay_dict'):
+                params['reference_message_id'] = self.reference_message_id.to_alipay_dict()
+            else:
+                params['reference_message_id'] = self.reference_message_id
         if self.src:
             if hasattr(self.src, 'to_alipay_dict'):
                 params['src'] = self.src.to_alipay_dict()
@@ -130,6 +169,12 @@ class AlipayIserviceCliveChatSendModel(object):
             o.content_type = d['content_type']
         if 'conversation_id' in d:
             o.conversation_id = d['conversation_id']
+        if 'message_type_code' in d:
+            o.message_type_code = d['message_type_code']
+        if 'msg_id' in d:
+            o.msg_id = d['msg_id']
+        if 'reference_message_id' in d:
+            o.reference_message_id = d['reference_message_id']
         if 'src' in d:
             o.src = d['src']
         if 'visitor_id' in d:

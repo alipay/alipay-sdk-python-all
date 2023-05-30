@@ -10,6 +10,7 @@ class AlipayDataMdaDigitaltorchofflineQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayDataMdaDigitaltorchofflineQueryResponse, self).__init__()
         self._age_distribution = None
+        self._cloth_digital_human_cnt = None
         self._country_distribution = None
         self._digital_images = None
         self._monthly_activity = None
@@ -23,6 +24,13 @@ class AlipayDataMdaDigitaltorchofflineQueryResponse(AlipayResponse):
     @age_distribution.setter
     def age_distribution(self, value):
         self._age_distribution = value
+    @property
+    def cloth_digital_human_cnt(self):
+        return self._cloth_digital_human_cnt
+
+    @cloth_digital_human_cnt.setter
+    def cloth_digital_human_cnt(self, value):
+        self._cloth_digital_human_cnt = value
     @property
     def country_distribution(self):
         return self._country_distribution
@@ -63,6 +71,8 @@ class AlipayDataMdaDigitaltorchofflineQueryResponse(AlipayResponse):
         response = super(AlipayDataMdaDigitaltorchofflineQueryResponse, self).parse_response_content(response_content)
         if 'age_distribution' in response:
             self.age_distribution = response['age_distribution']
+        if 'cloth_digital_human_cnt' in response:
+            self.cloth_digital_human_cnt = response['cloth_digital_human_cnt']
         if 'country_distribution' in response:
             self.country_distribution = response['country_distribution']
         if 'digital_images' in response:

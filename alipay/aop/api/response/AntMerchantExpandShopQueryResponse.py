@@ -8,6 +8,7 @@ from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
+from alipay.aop.api.domain.ShopRecommendInfo import ShopRecommendInfo
 
 
 class AntMerchantExpandShopQueryResponse(AlipayResponse):
@@ -39,6 +40,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._shop_id = None
         self._shop_info_status = None
         self._shop_name = None
+        self._shop_recommend_info = None
         self._shop_type = None
         self._store_id = None
 
@@ -248,6 +250,16 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     def shop_name(self, value):
         self._shop_name = value
     @property
+    def shop_recommend_info(self):
+        return self._shop_recommend_info
+
+    @shop_recommend_info.setter
+    def shop_recommend_info(self, value):
+        if isinstance(value, ShopRecommendInfo):
+            self._shop_recommend_info = value
+        else:
+            self._shop_recommend_info = ShopRecommendInfo.from_alipay_dict(value)
+    @property
     def shop_type(self):
         return self._shop_type
 
@@ -314,6 +326,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.shop_info_status = response['shop_info_status']
         if 'shop_name' in response:
             self.shop_name = response['shop_name']
+        if 'shop_recommend_info' in response:
+            self.shop_recommend_info = response['shop_recommend_info']
         if 'shop_type' in response:
             self.shop_type = response['shop_type']
         if 'store_id' in response:

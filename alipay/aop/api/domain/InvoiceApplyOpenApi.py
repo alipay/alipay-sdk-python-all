@@ -12,18 +12,23 @@ class InvoiceApplyOpenApi(object):
         self._amount = None
         self._arrangement_no = None
         self._duty_free_type = None
+        self._fee_interval_format_str = None
         self._inst_id = None
         self._invoice_date = None
         self._invoice_product_name = None
+        self._invoice_product_name_suffix = None
         self._invoice_specification = None
         self._ip_id = None
         self._ip_role_id = None
         self._out_biz_no = None
         self._out_biz_type = None
         self._product_code = None
+        self._received = None
+        self._register_country = None
         self._service_mth = None
         self._source = None
         self._tax_rate = None
+        self._tax_rate_tags = None
         self._tax_type = None
 
     @property
@@ -51,6 +56,13 @@ class InvoiceApplyOpenApi(object):
     def duty_free_type(self, value):
         self._duty_free_type = value
     @property
+    def fee_interval_format_str(self):
+        return self._fee_interval_format_str
+
+    @fee_interval_format_str.setter
+    def fee_interval_format_str(self, value):
+        self._fee_interval_format_str = value
+    @property
     def inst_id(self):
         return self._inst_id
 
@@ -71,6 +83,13 @@ class InvoiceApplyOpenApi(object):
     @invoice_product_name.setter
     def invoice_product_name(self, value):
         self._invoice_product_name = value
+    @property
+    def invoice_product_name_suffix(self):
+        return self._invoice_product_name_suffix
+
+    @invoice_product_name_suffix.setter
+    def invoice_product_name_suffix(self, value):
+        self._invoice_product_name_suffix = value
     @property
     def invoice_specification(self):
         return self._invoice_specification
@@ -114,6 +133,20 @@ class InvoiceApplyOpenApi(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def received(self):
+        return self._received
+
+    @received.setter
+    def received(self, value):
+        self._received = value
+    @property
+    def register_country(self):
+        return self._register_country
+
+    @register_country.setter
+    def register_country(self, value):
+        self._register_country = value
+    @property
     def service_mth(self):
         return self._service_mth
 
@@ -134,6 +167,13 @@ class InvoiceApplyOpenApi(object):
     @tax_rate.setter
     def tax_rate(self, value):
         self._tax_rate = value
+    @property
+    def tax_rate_tags(self):
+        return self._tax_rate_tags
+
+    @tax_rate_tags.setter
+    def tax_rate_tags(self, value):
+        self._tax_rate_tags = value
     @property
     def tax_type(self):
         return self._tax_type
@@ -160,6 +200,11 @@ class InvoiceApplyOpenApi(object):
                 params['duty_free_type'] = self.duty_free_type.to_alipay_dict()
             else:
                 params['duty_free_type'] = self.duty_free_type
+        if self.fee_interval_format_str:
+            if hasattr(self.fee_interval_format_str, 'to_alipay_dict'):
+                params['fee_interval_format_str'] = self.fee_interval_format_str.to_alipay_dict()
+            else:
+                params['fee_interval_format_str'] = self.fee_interval_format_str
         if self.inst_id:
             if hasattr(self.inst_id, 'to_alipay_dict'):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
@@ -175,6 +220,11 @@ class InvoiceApplyOpenApi(object):
                 params['invoice_product_name'] = self.invoice_product_name.to_alipay_dict()
             else:
                 params['invoice_product_name'] = self.invoice_product_name
+        if self.invoice_product_name_suffix:
+            if hasattr(self.invoice_product_name_suffix, 'to_alipay_dict'):
+                params['invoice_product_name_suffix'] = self.invoice_product_name_suffix.to_alipay_dict()
+            else:
+                params['invoice_product_name_suffix'] = self.invoice_product_name_suffix
         if self.invoice_specification:
             if hasattr(self.invoice_specification, 'to_alipay_dict'):
                 params['invoice_specification'] = self.invoice_specification.to_alipay_dict()
@@ -205,6 +255,16 @@ class InvoiceApplyOpenApi(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.received:
+            if hasattr(self.received, 'to_alipay_dict'):
+                params['received'] = self.received.to_alipay_dict()
+            else:
+                params['received'] = self.received
+        if self.register_country:
+            if hasattr(self.register_country, 'to_alipay_dict'):
+                params['register_country'] = self.register_country.to_alipay_dict()
+            else:
+                params['register_country'] = self.register_country
         if self.service_mth:
             if hasattr(self.service_mth, 'to_alipay_dict'):
                 params['service_mth'] = self.service_mth.to_alipay_dict()
@@ -220,6 +280,11 @@ class InvoiceApplyOpenApi(object):
                 params['tax_rate'] = self.tax_rate.to_alipay_dict()
             else:
                 params['tax_rate'] = self.tax_rate
+        if self.tax_rate_tags:
+            if hasattr(self.tax_rate_tags, 'to_alipay_dict'):
+                params['tax_rate_tags'] = self.tax_rate_tags.to_alipay_dict()
+            else:
+                params['tax_rate_tags'] = self.tax_rate_tags
         if self.tax_type:
             if hasattr(self.tax_type, 'to_alipay_dict'):
                 params['tax_type'] = self.tax_type.to_alipay_dict()
@@ -238,12 +303,16 @@ class InvoiceApplyOpenApi(object):
             o.arrangement_no = d['arrangement_no']
         if 'duty_free_type' in d:
             o.duty_free_type = d['duty_free_type']
+        if 'fee_interval_format_str' in d:
+            o.fee_interval_format_str = d['fee_interval_format_str']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
         if 'invoice_date' in d:
             o.invoice_date = d['invoice_date']
         if 'invoice_product_name' in d:
             o.invoice_product_name = d['invoice_product_name']
+        if 'invoice_product_name_suffix' in d:
+            o.invoice_product_name_suffix = d['invoice_product_name_suffix']
         if 'invoice_specification' in d:
             o.invoice_specification = d['invoice_specification']
         if 'ip_id' in d:
@@ -256,12 +325,18 @@ class InvoiceApplyOpenApi(object):
             o.out_biz_type = d['out_biz_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'received' in d:
+            o.received = d['received']
+        if 'register_country' in d:
+            o.register_country = d['register_country']
         if 'service_mth' in d:
             o.service_mth = d['service_mth']
         if 'source' in d:
             o.source = d['source']
         if 'tax_rate' in d:
             o.tax_rate = d['tax_rate']
+        if 'tax_rate_tags' in d:
+            o.tax_rate_tags = d['tax_rate_tags']
         if 'tax_type' in d:
             o.tax_type = d['tax_type']
         return o

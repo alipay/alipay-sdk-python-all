@@ -21,6 +21,8 @@ class MpcpromoGoodsList(object):
         self._free_shipping = None
         self._fresh_degree = None
         self._id = None
+        self._material_list = None
+        self._order_url = None
         self._origin_price = None
         self._pic_url_list = None
         self._price_unit = None
@@ -138,6 +140,23 @@ class MpcpromoGoodsList(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def material_list(self):
+        return self._material_list
+
+    @material_list.setter
+    def material_list(self, value):
+        if isinstance(value, list):
+            self._material_list = list()
+            for i in value:
+                self._material_list.append(i)
+    @property
+    def order_url(self):
+        return self._order_url
+
+    @order_url.setter
+    def order_url(self, value):
+        self._order_url = value
     @property
     def origin_price(self):
         return self._origin_price
@@ -375,6 +394,21 @@ class MpcpromoGoodsList(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.material_list:
+            if isinstance(self.material_list, list):
+                for i in range(0, len(self.material_list)):
+                    element = self.material_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.material_list[i] = element.to_alipay_dict()
+            if hasattr(self.material_list, 'to_alipay_dict'):
+                params['material_list'] = self.material_list.to_alipay_dict()
+            else:
+                params['material_list'] = self.material_list
+        if self.order_url:
+            if hasattr(self.order_url, 'to_alipay_dict'):
+                params['order_url'] = self.order_url.to_alipay_dict()
+            else:
+                params['order_url'] = self.order_url
         if self.origin_price:
             if hasattr(self.origin_price, 'to_alipay_dict'):
                 params['origin_price'] = self.origin_price.to_alipay_dict()
@@ -533,6 +567,10 @@ class MpcpromoGoodsList(object):
             o.fresh_degree = d['fresh_degree']
         if 'id' in d:
             o.id = d['id']
+        if 'material_list' in d:
+            o.material_list = d['material_list']
+        if 'order_url' in d:
+            o.order_url = d['order_url']
         if 'origin_price' in d:
             o.origin_price = d['origin_price']
         if 'pic_url_list' in d:

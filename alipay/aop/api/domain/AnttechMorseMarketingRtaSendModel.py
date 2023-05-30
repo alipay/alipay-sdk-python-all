@@ -17,6 +17,7 @@ class AnttechMorseMarketingRtaSendModel(object):
         self._out_biz_no = None
         self._resource_id = None
         self._send_type = None
+        self._user_pass_time = None
 
     @property
     def campaign_id(self):
@@ -81,6 +82,13 @@ class AnttechMorseMarketingRtaSendModel(object):
     @send_type.setter
     def send_type(self, value):
         self._send_type = value
+    @property
+    def user_pass_time(self):
+        return self._user_pass_time
+
+    @user_pass_time.setter
+    def user_pass_time(self, value):
+        self._user_pass_time = value
 
 
     def to_alipay_dict(self):
@@ -130,6 +138,11 @@ class AnttechMorseMarketingRtaSendModel(object):
                 params['send_type'] = self.send_type.to_alipay_dict()
             else:
                 params['send_type'] = self.send_type
+        if self.user_pass_time:
+            if hasattr(self.user_pass_time, 'to_alipay_dict'):
+                params['user_pass_time'] = self.user_pass_time.to_alipay_dict()
+            else:
+                params['user_pass_time'] = self.user_pass_time
         return params
 
     @staticmethod
@@ -155,6 +168,8 @@ class AnttechMorseMarketingRtaSendModel(object):
             o.resource_id = d['resource_id']
         if 'send_type' in d:
             o.send_type = d['send_type']
+        if 'user_pass_time' in d:
+            o.user_pass_time = d['user_pass_time']
         return o
 
 

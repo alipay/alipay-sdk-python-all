@@ -10,6 +10,7 @@ class AntMerchantExpandShopQueryModel(object):
     def __init__(self):
         self._address_version = None
         self._ip_role_id = None
+        self._need_recommend = None
         self._shop_id = None
         self._store_id = None
 
@@ -27,6 +28,13 @@ class AntMerchantExpandShopQueryModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def need_recommend(self):
+        return self._need_recommend
+
+    @need_recommend.setter
+    def need_recommend(self, value):
+        self._need_recommend = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -55,6 +63,11 @@ class AntMerchantExpandShopQueryModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.need_recommend:
+            if hasattr(self.need_recommend, 'to_alipay_dict'):
+                params['need_recommend'] = self.need_recommend.to_alipay_dict()
+            else:
+                params['need_recommend'] = self.need_recommend
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AntMerchantExpandShopQueryModel(object):
             o.address_version = d['address_version']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'need_recommend' in d:
+            o.need_recommend = d['need_recommend']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'store_id' in d:

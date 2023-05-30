@@ -16,6 +16,7 @@ class PromiseDetail(object):
         self._merchant_id = None
         self._merchant_logo = None
         self._merchant_name = None
+        self._out_biz_no = None
         self._period_type = None
         self._promise_name = None
         self._record_id = None
@@ -82,6 +83,13 @@ class PromiseDetail(object):
     @merchant_name.setter
     def merchant_name(self, value):
         self._merchant_name = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def period_type(self):
         return self._period_type
@@ -189,6 +197,11 @@ class PromiseDetail(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.period_type:
             if hasattr(self.period_type, 'to_alipay_dict'):
                 params['period_type'] = self.period_type.to_alipay_dict()
@@ -257,6 +270,8 @@ class PromiseDetail(object):
             o.merchant_logo = d['merchant_logo']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'period_type' in d:
             o.period_type = d['period_type']
         if 'promise_name' in d:

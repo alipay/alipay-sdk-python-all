@@ -14,6 +14,8 @@ class AlipayCreditCreditriskDataPutModel(object):
         self._entitycode = None
         self._entityname = None
         self._entitytype = None
+        self._mybk_auth_scene_code = None
+        self._mybk_auth_token = None
         self._objectcontent = None
         self._openid = None
         self._taskid = None
@@ -60,6 +62,20 @@ class AlipayCreditCreditriskDataPutModel(object):
     @entitytype.setter
     def entitytype(self, value):
         self._entitytype = value
+    @property
+    def mybk_auth_scene_code(self):
+        return self._mybk_auth_scene_code
+
+    @mybk_auth_scene_code.setter
+    def mybk_auth_scene_code(self, value):
+        self._mybk_auth_scene_code = value
+    @property
+    def mybk_auth_token(self):
+        return self._mybk_auth_token
+
+    @mybk_auth_token.setter
+    def mybk_auth_token(self, value):
+        self._mybk_auth_token = value
     @property
     def objectcontent(self):
         return self._objectcontent
@@ -115,6 +131,16 @@ class AlipayCreditCreditriskDataPutModel(object):
                 params['entitytype'] = self.entitytype.to_alipay_dict()
             else:
                 params['entitytype'] = self.entitytype
+        if self.mybk_auth_scene_code:
+            if hasattr(self.mybk_auth_scene_code, 'to_alipay_dict'):
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code.to_alipay_dict()
+            else:
+                params['mybk_auth_scene_code'] = self.mybk_auth_scene_code
+        if self.mybk_auth_token:
+            if hasattr(self.mybk_auth_token, 'to_alipay_dict'):
+                params['mybk_auth_token'] = self.mybk_auth_token.to_alipay_dict()
+            else:
+                params['mybk_auth_token'] = self.mybk_auth_token
         if self.objectcontent:
             if hasattr(self.objectcontent, 'to_alipay_dict'):
                 params['objectcontent'] = self.objectcontent.to_alipay_dict()
@@ -149,6 +175,10 @@ class AlipayCreditCreditriskDataPutModel(object):
             o.entityname = d['entityname']
         if 'entitytype' in d:
             o.entitytype = d['entitytype']
+        if 'mybk_auth_scene_code' in d:
+            o.mybk_auth_scene_code = d['mybk_auth_scene_code']
+        if 'mybk_auth_token' in d:
+            o.mybk_auth_token = d['mybk_auth_token']
         if 'objectcontent' in d:
             o.objectcontent = d['objectcontent']
         if 'openid' in d:

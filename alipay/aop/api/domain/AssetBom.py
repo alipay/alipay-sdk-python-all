@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetBomAttribute import AssetBomAttribute
 from alipay.aop.api.domain.AssetBomItem import AssetBomItem
+from alipay.aop.api.domain.AssetStandard import AssetStandard
 
 
 class AssetBom(object):
@@ -20,6 +21,7 @@ class AssetBom(object):
         self._item_name = None
         self._item_type = None
         self._request_id = None
+        self._std = None
 
     @property
     def asset_sub_type(self):
@@ -103,6 +105,16 @@ class AssetBom(object):
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def std(self):
+        return self._std
+
+    @std.setter
+    def std(self, value):
+        if isinstance(value, AssetStandard):
+            self._std = value
+        else:
+            self._std = AssetStandard.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -167,6 +179,11 @@ class AssetBom(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.std:
+            if hasattr(self.std, 'to_alipay_dict'):
+                params['std'] = self.std.to_alipay_dict()
+            else:
+                params['std'] = self.std
         return params
 
     @staticmethod
@@ -194,6 +211,8 @@ class AssetBom(object):
             o.item_type = d['item_type']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'std' in d:
+            o.std = d['std']
         return o
 
 

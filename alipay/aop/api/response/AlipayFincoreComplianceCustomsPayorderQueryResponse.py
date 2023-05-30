@@ -13,7 +13,9 @@ class AlipayFincoreComplianceCustomsPayorderQueryResponse(AlipayResponse):
         self._cert_type = None
         self._email = None
         self._mobile = None
+        self._pay_transaction_id = None
         self._user_name = None
+        self._ver_dept = None
 
     @property
     def cert_no(self):
@@ -44,12 +46,26 @@ class AlipayFincoreComplianceCustomsPayorderQueryResponse(AlipayResponse):
     def mobile(self, value):
         self._mobile = value
     @property
+    def pay_transaction_id(self):
+        return self._pay_transaction_id
+
+    @pay_transaction_id.setter
+    def pay_transaction_id(self, value):
+        self._pay_transaction_id = value
+    @property
     def user_name(self):
         return self._user_name
 
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def ver_dept(self):
+        return self._ver_dept
+
+    @ver_dept.setter
+    def ver_dept(self, value):
+        self._ver_dept = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFincoreComplianceCustomsPayorderQueryResponse, self).parse_response_content(response_content)
@@ -61,5 +77,9 @@ class AlipayFincoreComplianceCustomsPayorderQueryResponse(AlipayResponse):
             self.email = response['email']
         if 'mobile' in response:
             self.mobile = response['mobile']
+        if 'pay_transaction_id' in response:
+            self.pay_transaction_id = response['pay_transaction_id']
         if 'user_name' in response:
             self.user_name = response['user_name']
+        if 'ver_dept' in response:
+            self.ver_dept = response['ver_dept']
