@@ -4,7 +4,9 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
+from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
 from alipay.aop.api.domain.LocalItemSkuQueryVO import LocalItemSkuQueryVO
+from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
 
 class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
@@ -14,14 +16,18 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._attrs = None
         self._category_id = None
         self._create_time = None
+        self._customer_service_mobile = None
         self._head_img = None
         self._image_list = None
         self._is_online = None
+        self._item_details_page_model = None
         self._item_id = None
         self._item_type = None
+        self._merchant_name = None
         self._out_item_id = None
         self._path = None
         self._skus = None
+        self._sold_time = None
         self._spu_status = None
         self._stock_num = None
         self._title = None
@@ -52,6 +58,16 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     def create_time(self, value):
         self._create_time = value
     @property
+    def customer_service_mobile(self):
+        return self._customer_service_mobile
+
+    @customer_service_mobile.setter
+    def customer_service_mobile(self, value):
+        if isinstance(value, PhoneStructVO):
+            self._customer_service_mobile = value
+        else:
+            self._customer_service_mobile = PhoneStructVO.from_alipay_dict(value)
+    @property
     def head_img(self):
         return self._head_img
 
@@ -76,6 +92,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     def is_online(self, value):
         self._is_online = value
     @property
+    def item_details_page_model(self):
+        return self._item_details_page_model
+
+    @item_details_page_model.setter
+    def item_details_page_model(self, value):
+        self._item_details_page_model = value
+    @property
     def item_id(self):
         return self._item_id
 
@@ -89,6 +112,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     @item_type.setter
     def item_type(self, value):
         self._item_type = value
+    @property
+    def merchant_name(self):
+        return self._merchant_name
+
+    @merchant_name.setter
+    def merchant_name(self, value):
+        self._merchant_name = value
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -116,6 +146,16 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
                     self._skus.append(i)
                 else:
                     self._skus.append(LocalItemSkuQueryVO.from_alipay_dict(i))
+    @property
+    def sold_time(self):
+        return self._sold_time
+
+    @sold_time.setter
+    def sold_time(self, value):
+        if isinstance(value, TimeRangeStructVO):
+            self._sold_time = value
+        else:
+            self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
     @property
     def spu_status(self):
         return self._spu_status
@@ -153,22 +193,30 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.category_id = response['category_id']
         if 'create_time' in response:
             self.create_time = response['create_time']
+        if 'customer_service_mobile' in response:
+            self.customer_service_mobile = response['customer_service_mobile']
         if 'head_img' in response:
             self.head_img = response['head_img']
         if 'image_list' in response:
             self.image_list = response['image_list']
         if 'is_online' in response:
             self.is_online = response['is_online']
+        if 'item_details_page_model' in response:
+            self.item_details_page_model = response['item_details_page_model']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'item_type' in response:
             self.item_type = response['item_type']
+        if 'merchant_name' in response:
+            self.merchant_name = response['merchant_name']
         if 'out_item_id' in response:
             self.out_item_id = response['out_item_id']
         if 'path' in response:
             self.path = response['path']
         if 'skus' in response:
             self.skus = response['skus']
+        if 'sold_time' in response:
+            self.sold_time = response['sold_time']
         if 'spu_status' in response:
             self.spu_status = response['spu_status']
         if 'stock_num' in response:

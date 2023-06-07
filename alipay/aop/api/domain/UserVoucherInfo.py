@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityBaseInfo import ActivityBaseInfo
 from alipay.aop.api.domain.UserVoucherBaseInfo import UserVoucherBaseInfo
 from alipay.aop.api.domain.VoucherAvailableScopeInfo import VoucherAvailableScopeInfo
+from alipay.aop.api.domain.VoucherCustomerGuideInfo import VoucherCustomerGuideInfo
 from alipay.aop.api.domain.VoucherDeductInfo import VoucherDeductInfo
 from alipay.aop.api.domain.CommonVoucherDisplayLiteInfo import CommonVoucherDisplayLiteInfo
 from alipay.aop.api.domain.VoucherDisplayPatternInfo import VoucherDisplayPatternInfo
@@ -25,6 +26,7 @@ class UserVoucherInfo(object):
         self._create_time = None
         self._user_voucher_base_info = None
         self._voucher_available_scope_info = None
+        self._voucher_customer_guide_info = None
         self._voucher_deduct_info = None
         self._voucher_display_lite_info = None
         self._voucher_display_pattern_info = None
@@ -101,6 +103,16 @@ class UserVoucherInfo(object):
             self._voucher_available_scope_info = value
         else:
             self._voucher_available_scope_info = VoucherAvailableScopeInfo.from_alipay_dict(value)
+    @property
+    def voucher_customer_guide_info(self):
+        return self._voucher_customer_guide_info
+
+    @voucher_customer_guide_info.setter
+    def voucher_customer_guide_info(self, value):
+        if isinstance(value, VoucherCustomerGuideInfo):
+            self._voucher_customer_guide_info = value
+        else:
+            self._voucher_customer_guide_info = VoucherCustomerGuideInfo.from_alipay_dict(value)
     @property
     def voucher_deduct_info(self):
         return self._voucher_deduct_info
@@ -233,6 +245,11 @@ class UserVoucherInfo(object):
                 params['voucher_available_scope_info'] = self.voucher_available_scope_info.to_alipay_dict()
             else:
                 params['voucher_available_scope_info'] = self.voucher_available_scope_info
+        if self.voucher_customer_guide_info:
+            if hasattr(self.voucher_customer_guide_info, 'to_alipay_dict'):
+                params['voucher_customer_guide_info'] = self.voucher_customer_guide_info.to_alipay_dict()
+            else:
+                params['voucher_customer_guide_info'] = self.voucher_customer_guide_info
         if self.voucher_deduct_info:
             if hasattr(self.voucher_deduct_info, 'to_alipay_dict'):
                 params['voucher_deduct_info'] = self.voucher_deduct_info.to_alipay_dict()
@@ -306,6 +323,8 @@ class UserVoucherInfo(object):
             o.user_voucher_base_info = d['user_voucher_base_info']
         if 'voucher_available_scope_info' in d:
             o.voucher_available_scope_info = d['voucher_available_scope_info']
+        if 'voucher_customer_guide_info' in d:
+            o.voucher_customer_guide_info = d['voucher_customer_guide_info']
         if 'voucher_deduct_info' in d:
             o.voucher_deduct_info = d['voucher_deduct_info']
         if 'voucher_display_lite_info' in d:

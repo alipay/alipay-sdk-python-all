@@ -29,6 +29,8 @@ class MedicalPaymentQueryResponse(object):
         self._pid = None
         self._real_amount = None
         self._real_refund_amount = None
+        self._rels_pay_flag = None
+        self._rels_pay_user_name = None
         self._remark = None
         self._request_content = None
         self._total_amount = None
@@ -182,6 +184,20 @@ class MedicalPaymentQueryResponse(object):
     def real_refund_amount(self, value):
         self._real_refund_amount = value
     @property
+    def rels_pay_flag(self):
+        return self._rels_pay_flag
+
+    @rels_pay_flag.setter
+    def rels_pay_flag(self, value):
+        self._rels_pay_flag = value
+    @property
+    def rels_pay_user_name(self):
+        return self._rels_pay_user_name
+
+    @rels_pay_user_name.setter
+    def rels_pay_user_name(self, value):
+        self._rels_pay_user_name = value
+    @property
     def remark(self):
         return self._remark
 
@@ -318,6 +334,16 @@ class MedicalPaymentQueryResponse(object):
                 params['real_refund_amount'] = self.real_refund_amount.to_alipay_dict()
             else:
                 params['real_refund_amount'] = self.real_refund_amount
+        if self.rels_pay_flag:
+            if hasattr(self.rels_pay_flag, 'to_alipay_dict'):
+                params['rels_pay_flag'] = self.rels_pay_flag.to_alipay_dict()
+            else:
+                params['rels_pay_flag'] = self.rels_pay_flag
+        if self.rels_pay_user_name:
+            if hasattr(self.rels_pay_user_name, 'to_alipay_dict'):
+                params['rels_pay_user_name'] = self.rels_pay_user_name.to_alipay_dict()
+            else:
+                params['rels_pay_user_name'] = self.rels_pay_user_name
         if self.remark:
             if hasattr(self.remark, 'to_alipay_dict'):
                 params['remark'] = self.remark.to_alipay_dict()
@@ -387,6 +413,10 @@ class MedicalPaymentQueryResponse(object):
             o.real_amount = d['real_amount']
         if 'real_refund_amount' in d:
             o.real_refund_amount = d['real_refund_amount']
+        if 'rels_pay_flag' in d:
+            o.rels_pay_flag = d['rels_pay_flag']
+        if 'rels_pay_user_name' in d:
+            o.rels_pay_user_name = d['rels_pay_user_name']
         if 'remark' in d:
             o.remark = d['remark']
         if 'request_content' in d:

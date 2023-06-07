@@ -35,6 +35,7 @@ class GFAOpenAPIBillAcceptance(object):
         self._product_code = None
         self._properties = None
         self._real_amount = None
+        self._rel_out_business_no = None
         self._service_amount = None
         self._service_type = None
         self._settle_participant = None
@@ -200,6 +201,13 @@ class GFAOpenAPIBillAcceptance(object):
     @real_amount.setter
     def real_amount(self, value):
         self._real_amount = value
+    @property
+    def rel_out_business_no(self):
+        return self._rel_out_business_no
+
+    @rel_out_business_no.setter
+    def rel_out_business_no(self, value):
+        self._rel_out_business_no = value
     @property
     def service_amount(self):
         return self._service_amount
@@ -374,6 +382,11 @@ class GFAOpenAPIBillAcceptance(object):
                 params['real_amount'] = self.real_amount.to_alipay_dict()
             else:
                 params['real_amount'] = self.real_amount
+        if self.rel_out_business_no:
+            if hasattr(self.rel_out_business_no, 'to_alipay_dict'):
+                params['rel_out_business_no'] = self.rel_out_business_no.to_alipay_dict()
+            else:
+                params['rel_out_business_no'] = self.rel_out_business_no
         if self.service_amount:
             if hasattr(self.service_amount, 'to_alipay_dict'):
                 params['service_amount'] = self.service_amount.to_alipay_dict()
@@ -463,6 +476,8 @@ class GFAOpenAPIBillAcceptance(object):
             o.properties = d['properties']
         if 'real_amount' in d:
             o.real_amount = d['real_amount']
+        if 'rel_out_business_no' in d:
+            o.rel_out_business_no = d['rel_out_business_no']
         if 'service_amount' in d:
             o.service_amount = d['service_amount']
         if 'service_type' in d:

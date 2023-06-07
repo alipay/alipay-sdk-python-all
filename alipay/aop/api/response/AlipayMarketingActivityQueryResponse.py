@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ActivityBaseInfo import ActivityBaseInfo
 from alipay.aop.api.domain.VoucherAvailableScopeInfo import VoucherAvailableScopeInfo
+from alipay.aop.api.domain.VoucherCustomerGuideInfo import VoucherCustomerGuideInfo
 from alipay.aop.api.domain.VoucherDeductInfo import VoucherDeductInfo
 from alipay.aop.api.domain.CommonVoucherDisplayInfo import CommonVoucherDisplayInfo
 from alipay.aop.api.domain.VoucherDisplayPatternInfo import VoucherDisplayPatternInfo
@@ -26,6 +27,7 @@ class AlipayMarketingActivityQueryResponse(AlipayResponse):
         self._publish_end_time = None
         self._publish_start_time = None
         self._voucher_available_scope_info = None
+        self._voucher_customer_guide_info = None
         self._voucher_deduct_info = None
         self._voucher_display_info = None
         self._voucher_display_pattern_info = None
@@ -97,6 +99,16 @@ class AlipayMarketingActivityQueryResponse(AlipayResponse):
             self._voucher_available_scope_info = value
         else:
             self._voucher_available_scope_info = VoucherAvailableScopeInfo.from_alipay_dict(value)
+    @property
+    def voucher_customer_guide_info(self):
+        return self._voucher_customer_guide_info
+
+    @voucher_customer_guide_info.setter
+    def voucher_customer_guide_info(self, value):
+        if isinstance(value, VoucherCustomerGuideInfo):
+            self._voucher_customer_guide_info = value
+        else:
+            self._voucher_customer_guide_info = VoucherCustomerGuideInfo.from_alipay_dict(value)
     @property
     def voucher_deduct_info(self):
         return self._voucher_deduct_info
@@ -193,6 +205,8 @@ class AlipayMarketingActivityQueryResponse(AlipayResponse):
             self.publish_start_time = response['publish_start_time']
         if 'voucher_available_scope_info' in response:
             self.voucher_available_scope_info = response['voucher_available_scope_info']
+        if 'voucher_customer_guide_info' in response:
+            self.voucher_customer_guide_info = response['voucher_customer_guide_info']
         if 'voucher_deduct_info' in response:
             self.voucher_deduct_info = response['voucher_deduct_info']
         if 'voucher_display_info' in response:

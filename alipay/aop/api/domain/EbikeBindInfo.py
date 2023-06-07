@@ -13,6 +13,7 @@ class EbikeBindInfo(object):
         self._can_report_riding_distance = None
         self._ebike_name = None
         self._ebike_no = None
+        self._ebike_type = None
         self._is_bind = None
 
     @property
@@ -51,6 +52,13 @@ class EbikeBindInfo(object):
     def ebike_no(self, value):
         self._ebike_no = value
     @property
+    def ebike_type(self):
+        return self._ebike_type
+
+    @ebike_type.setter
+    def ebike_type(self, value):
+        self._ebike_type = value
+    @property
     def is_bind(self):
         return self._is_bind
 
@@ -86,6 +94,11 @@ class EbikeBindInfo(object):
                 params['ebike_no'] = self.ebike_no.to_alipay_dict()
             else:
                 params['ebike_no'] = self.ebike_no
+        if self.ebike_type:
+            if hasattr(self.ebike_type, 'to_alipay_dict'):
+                params['ebike_type'] = self.ebike_type.to_alipay_dict()
+            else:
+                params['ebike_type'] = self.ebike_type
         if self.is_bind:
             if hasattr(self.is_bind, 'to_alipay_dict'):
                 params['is_bind'] = self.is_bind.to_alipay_dict()
@@ -108,6 +121,8 @@ class EbikeBindInfo(object):
             o.ebike_name = d['ebike_name']
         if 'ebike_no' in d:
             o.ebike_no = d['ebike_no']
+        if 'ebike_type' in d:
+            o.ebike_type = d['ebike_type']
         if 'is_bind' in d:
             o.is_bind = d['is_bind']
         return o

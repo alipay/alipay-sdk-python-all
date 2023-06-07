@@ -10,6 +10,7 @@ class AlipayOpenIotvspUserDeleteModel(object):
     def __init__(self):
         self._isv_pid = None
         self._org_out_id = None
+        self._place_name_list = None
         self._vid_list = None
 
     @property
@@ -26,6 +27,16 @@ class AlipayOpenIotvspUserDeleteModel(object):
     @org_out_id.setter
     def org_out_id(self, value):
         self._org_out_id = value
+    @property
+    def place_name_list(self):
+        return self._place_name_list
+
+    @place_name_list.setter
+    def place_name_list(self, value):
+        if isinstance(value, list):
+            self._place_name_list = list()
+            for i in value:
+                self._place_name_list.append(i)
     @property
     def vid_list(self):
         return self._vid_list
@@ -50,6 +61,16 @@ class AlipayOpenIotvspUserDeleteModel(object):
                 params['org_out_id'] = self.org_out_id.to_alipay_dict()
             else:
                 params['org_out_id'] = self.org_out_id
+        if self.place_name_list:
+            if isinstance(self.place_name_list, list):
+                for i in range(0, len(self.place_name_list)):
+                    element = self.place_name_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.place_name_list[i] = element.to_alipay_dict()
+            if hasattr(self.place_name_list, 'to_alipay_dict'):
+                params['place_name_list'] = self.place_name_list.to_alipay_dict()
+            else:
+                params['place_name_list'] = self.place_name_list
         if self.vid_list:
             if isinstance(self.vid_list, list):
                 for i in range(0, len(self.vid_list)):
@@ -71,6 +92,8 @@ class AlipayOpenIotvspUserDeleteModel(object):
             o.isv_pid = d['isv_pid']
         if 'org_out_id' in d:
             o.org_out_id = d['org_out_id']
+        if 'place_name_list' in d:
+            o.place_name_list = d['place_name_list']
         if 'vid_list' in d:
             o.vid_list = d['vid_list']
         return o

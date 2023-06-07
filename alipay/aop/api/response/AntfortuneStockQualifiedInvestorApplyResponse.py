@@ -16,6 +16,7 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
         self._first_yeb_trade_day = None
         self._has_material = None
         self._material_list = None
+        self._material_type = None
         self._total_income = None
         self._trace_id = None
 
@@ -68,6 +69,13 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
                 else:
                     self._material_list.append(InvestorMaterialInfo.from_alipay_dict(i))
     @property
+    def material_type(self):
+        return self._material_type
+
+    @material_type.setter
+    def material_type(self, value):
+        self._material_type = value
+    @property
     def total_income(self):
         return self._total_income
 
@@ -96,6 +104,8 @@ class AntfortuneStockQualifiedInvestorApplyResponse(AlipayResponse):
             self.has_material = response['has_material']
         if 'material_list' in response:
             self.material_list = response['material_list']
+        if 'material_type' in response:
+            self.material_type = response['material_type']
         if 'total_income' in response:
             self.total_income = response['total_income']
         if 'trace_id' in response:

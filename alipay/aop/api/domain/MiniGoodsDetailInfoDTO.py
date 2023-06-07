@@ -17,6 +17,7 @@ class MiniGoodsDetailInfoDTO(object):
         self._item_cnt = None
         self._out_item_id = None
         self._out_sku_id = None
+        self._platform_item_version_id = None
         self._sale_price = None
         self._sale_real_price = None
         self._show_url = None
@@ -84,6 +85,13 @@ class MiniGoodsDetailInfoDTO(object):
     @out_sku_id.setter
     def out_sku_id(self, value):
         self._out_sku_id = value
+    @property
+    def platform_item_version_id(self):
+        return self._platform_item_version_id
+
+    @platform_item_version_id.setter
+    def platform_item_version_id(self, value):
+        self._platform_item_version_id = value
     @property
     def sale_price(self):
         return self._sale_price
@@ -154,6 +162,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
             else:
                 params['out_sku_id'] = self.out_sku_id
+        if self.platform_item_version_id:
+            if hasattr(self.platform_item_version_id, 'to_alipay_dict'):
+                params['platform_item_version_id'] = self.platform_item_version_id.to_alipay_dict()
+            else:
+                params['platform_item_version_id'] = self.platform_item_version_id
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -194,6 +207,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
+        if 'platform_item_version_id' in d:
+            o.platform_item_version_id = d['platform_item_version_id']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'sale_real_price' in d:

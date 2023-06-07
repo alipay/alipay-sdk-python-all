@@ -9,12 +9,20 @@ from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 class CertificateQueryInfo(object):
 
     def __init__(self):
+        self._certificate_id = None
         self._code = None
         self._sku_info = None
         self._status = None
         self._valid_begin_time = None
         self._valid_end_time = None
 
+    @property
+    def certificate_id(self):
+        return self._certificate_id
+
+    @certificate_id.setter
+    def certificate_id(self, value):
+        self._certificate_id = value
     @property
     def code(self):
         return self._code
@@ -57,6 +65,11 @@ class CertificateQueryInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_id:
+            if hasattr(self.certificate_id, 'to_alipay_dict'):
+                params['certificate_id'] = self.certificate_id.to_alipay_dict()
+            else:
+                params['certificate_id'] = self.certificate_id
         if self.code:
             if hasattr(self.code, 'to_alipay_dict'):
                 params['code'] = self.code.to_alipay_dict()
@@ -89,6 +102,8 @@ class CertificateQueryInfo(object):
         if not d:
             return None
         o = CertificateQueryInfo()
+        if 'certificate_id' in d:
+            o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
         if 'sku_info' in d:

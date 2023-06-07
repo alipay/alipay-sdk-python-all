@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ApprovedInfo import ApprovedInfo
+from alipay.aop.api.domain.RefundedInfo import RefundedInfo
 from alipay.aop.api.domain.VerifiedInfo import VerifiedInfo
 
 
@@ -14,6 +15,7 @@ class ZhimaMerchantEvisaStatusSyncModel(object):
         self._approved_infos = None
         self._biz_time = None
         self._out_biz_no = None
+        self._refunded_infos = None
         self._scene_type = None
         self._verified_infos = None
 
@@ -51,6 +53,19 @@ class ZhimaMerchantEvisaStatusSyncModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def refunded_infos(self):
+        return self._refunded_infos
+
+    @refunded_infos.setter
+    def refunded_infos(self, value):
+        if isinstance(value, list):
+            self._refunded_infos = list()
+            for i in value:
+                if isinstance(i, RefundedInfo):
+                    self._refunded_infos.append(i)
+                else:
+                    self._refunded_infos.append(RefundedInfo.from_alipay_dict(i))
     @property
     def scene_type(self):
         return self._scene_type
@@ -100,6 +115,16 @@ class ZhimaMerchantEvisaStatusSyncModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.refunded_infos:
+            if isinstance(self.refunded_infos, list):
+                for i in range(0, len(self.refunded_infos)):
+                    element = self.refunded_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refunded_infos[i] = element.to_alipay_dict()
+            if hasattr(self.refunded_infos, 'to_alipay_dict'):
+                params['refunded_infos'] = self.refunded_infos.to_alipay_dict()
+            else:
+                params['refunded_infos'] = self.refunded_infos
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -130,6 +155,8 @@ class ZhimaMerchantEvisaStatusSyncModel(object):
             o.biz_time = d['biz_time']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'refunded_infos' in d:
+            o.refunded_infos = d['refunded_infos']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'verified_infos' in d:

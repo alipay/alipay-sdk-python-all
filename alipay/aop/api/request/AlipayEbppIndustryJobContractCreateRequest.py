@@ -15,7 +15,10 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._company_list = None
+        self._failure_redirect_url = None
+        self._notice_url = None
         self._outer_biz_no = None
+        self._redirect_url = None
         self._sign_platform = None
         self._user_list = None
         self._file_content = None
@@ -50,12 +53,33 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
                 else:
                     self._company_list.append(ContractCompanyInfo.from_alipay_dict(i))
     @property
+    def failure_redirect_url(self):
+        return self._failure_redirect_url
+
+    @failure_redirect_url.setter
+    def failure_redirect_url(self, value):
+        self._failure_redirect_url = value
+    @property
+    def notice_url(self):
+        return self._notice_url
+
+    @notice_url.setter
+    def notice_url(self, value):
+        self._notice_url = value
+    @property
     def outer_biz_no(self):
         return self._outer_biz_no
 
     @outer_biz_no.setter
     def outer_biz_no(self, value):
         self._outer_biz_no = value
+    @property
+    def redirect_url(self):
+        return self._redirect_url
+
+    @redirect_url.setter
+    def redirect_url(self, value):
+        self._redirect_url = value
     @property
     def sign_platform(self):
         return self._sign_platform
@@ -171,11 +195,26 @@ class AlipayEbppIndustryJobContractCreateRequest(object):
                     if hasattr(element, 'to_alipay_dict'):
                         self.company_list[i] = element.to_alipay_dict()
                 params['company_list'] = json.dumps(obj=self.company_list, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.failure_redirect_url:
+            if hasattr(self.failure_redirect_url, 'to_alipay_dict'):
+                params['failure_redirect_url'] = json.dumps(obj=self.failure_redirect_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['failure_redirect_url'] = self.failure_redirect_url
+        if self.notice_url:
+            if hasattr(self.notice_url, 'to_alipay_dict'):
+                params['notice_url'] = json.dumps(obj=self.notice_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['notice_url'] = self.notice_url
         if self.outer_biz_no:
             if hasattr(self.outer_biz_no, 'to_alipay_dict'):
                 params['outer_biz_no'] = json.dumps(obj=self.outer_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['outer_biz_no'] = self.outer_biz_no
+        if self.redirect_url:
+            if hasattr(self.redirect_url, 'to_alipay_dict'):
+                params['redirect_url'] = json.dumps(obj=self.redirect_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['redirect_url'] = self.redirect_url
         if self.sign_platform:
             if hasattr(self.sign_platform, 'to_alipay_dict'):
                 params['sign_platform'] = json.dumps(obj=self.sign_platform.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

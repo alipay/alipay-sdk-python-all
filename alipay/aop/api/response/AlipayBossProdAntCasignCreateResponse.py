@@ -34,10 +34,13 @@ class AlipayBossProdAntCasignCreateResponse(AlipayResponse):
 
     @sub_ant_sign_result_list.setter
     def sub_ant_sign_result_list(self, value):
-        if isinstance(value, SubAntSignResult):
-            self._sub_ant_sign_result_list = value
-        else:
-            self._sub_ant_sign_result_list = SubAntSignResult.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._sub_ant_sign_result_list = list()
+            for i in value:
+                if isinstance(i, SubAntSignResult):
+                    self._sub_ant_sign_result_list.append(i)
+                else:
+                    self._sub_ant_sign_result_list.append(SubAntSignResult.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayBossProdAntCasignCreateResponse, self).parse_response_content(response_content)

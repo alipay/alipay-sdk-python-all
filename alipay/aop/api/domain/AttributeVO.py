@@ -9,6 +9,7 @@ class AttributeVO(object):
 
     def __init__(self):
         self._is_required = None
+        self._key = None
         self._length = None
         self._name = None
         self._range = None
@@ -22,6 +23,13 @@ class AttributeVO(object):
     @is_required.setter
     def is_required(self, value):
         self._is_required = value
+    @property
+    def key(self):
+        return self._key
+
+    @key.setter
+    def key(self, value):
+        self._key = value
     @property
     def length(self):
         return self._length
@@ -66,6 +74,11 @@ class AttributeVO(object):
                 params['is_required'] = self.is_required.to_alipay_dict()
             else:
                 params['is_required'] = self.is_required
+        if self.key:
+            if hasattr(self.key, 'to_alipay_dict'):
+                params['key'] = self.key.to_alipay_dict()
+            else:
+                params['key'] = self.key
         if self.length:
             if hasattr(self.length, 'to_alipay_dict'):
                 params['length'] = self.length.to_alipay_dict()
@@ -100,6 +113,8 @@ class AttributeVO(object):
         o = AttributeVO()
         if 'is_required' in d:
             o.is_required = d['is_required']
+        if 'key' in d:
+            o.key = d['key']
         if 'length' in d:
             o.length = d['length']
         if 'name' in d:

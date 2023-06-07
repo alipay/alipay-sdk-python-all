@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.LocalItemDirectModifySku import LocalItemDirectModifySku
+from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
 
 class AlipayOpenAppLocalitemDirectModifyModel(object):
@@ -14,6 +15,7 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
         self._item_id = None
         self._out_item_id = None
         self._skus = None
+        self._sold_time = None
 
     @property
     def attrs(self):
@@ -55,6 +57,16 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
                     self._skus.append(i)
                 else:
                     self._skus.append(LocalItemDirectModifySku.from_alipay_dict(i))
+    @property
+    def sold_time(self):
+        return self._sold_time
+
+    @sold_time.setter
+    def sold_time(self, value):
+        if isinstance(value, TimeRangeStructVO):
+            self._sold_time = value
+        else:
+            self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -89,6 +101,11 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
                 params['skus'] = self.skus.to_alipay_dict()
             else:
                 params['skus'] = self.skus
+        if self.sold_time:
+            if hasattr(self.sold_time, 'to_alipay_dict'):
+                params['sold_time'] = self.sold_time.to_alipay_dict()
+            else:
+                params['sold_time'] = self.sold_time
         return params
 
     @staticmethod
@@ -104,6 +121,8 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
             o.out_item_id = d['out_item_id']
         if 'skus' in d:
             o.skus = d['skus']
+        if 'sold_time' in d:
+            o.sold_time = d['sold_time']
         return o
 
 
