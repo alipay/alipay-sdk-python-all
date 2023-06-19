@@ -9,6 +9,7 @@ class TechriskInnovateMpcpromoSceneReleaseModel(object):
 
     def __init__(self):
         self._data_list = None
+        self._position_code = None
         self._scene_id = None
 
     @property
@@ -21,6 +22,13 @@ class TechriskInnovateMpcpromoSceneReleaseModel(object):
             self._data_list = list()
             for i in value:
                 self._data_list.append(i)
+    @property
+    def position_code(self):
+        return self._position_code
+
+    @position_code.setter
+    def position_code(self, value):
+        self._position_code = value
     @property
     def scene_id(self):
         return self._scene_id
@@ -42,6 +50,11 @@ class TechriskInnovateMpcpromoSceneReleaseModel(object):
                 params['data_list'] = self.data_list.to_alipay_dict()
             else:
                 params['data_list'] = self.data_list
+        if self.position_code:
+            if hasattr(self.position_code, 'to_alipay_dict'):
+                params['position_code'] = self.position_code.to_alipay_dict()
+            else:
+                params['position_code'] = self.position_code
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = self.scene_id.to_alipay_dict()
@@ -56,6 +69,8 @@ class TechriskInnovateMpcpromoSceneReleaseModel(object):
         o = TechriskInnovateMpcpromoSceneReleaseModel()
         if 'data_list' in d:
             o.data_list = d['data_list']
+        if 'position_code' in d:
+            o.position_code = d['position_code']
         if 'scene_id' in d:
             o.scene_id = d['scene_id']
         return o

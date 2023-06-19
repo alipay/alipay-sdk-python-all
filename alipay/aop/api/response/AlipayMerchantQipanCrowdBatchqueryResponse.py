@@ -19,10 +19,13 @@ class AlipayMerchantQipanCrowdBatchqueryResponse(AlipayResponse):
 
     @crowd_list.setter
     def crowd_list(self, value):
-        if isinstance(value, QipanMerchantCrowd):
-            self._crowd_list = value
-        else:
-            self._crowd_list = QipanMerchantCrowd.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._crowd_list = list()
+            for i in value:
+                if isinstance(i, QipanMerchantCrowd):
+                    self._crowd_list.append(i)
+                else:
+                    self._crowd_list.append(QipanMerchantCrowd.from_alipay_dict(i))
     @property
     def total_number(self):
         return self._total_number

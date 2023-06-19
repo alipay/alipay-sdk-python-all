@@ -14,6 +14,7 @@ class AlipayCommerceLogisticsWaybillIstddetailQueryResponse(AlipayResponse):
         self._rider_lng = None
         self._rider_mobile_no = None
         self._rider_name = None
+        self._rider_poi_link = None
         self._status = None
 
     @property
@@ -52,6 +53,13 @@ class AlipayCommerceLogisticsWaybillIstddetailQueryResponse(AlipayResponse):
     def rider_name(self, value):
         self._rider_name = value
     @property
+    def rider_poi_link(self):
+        return self._rider_poi_link
+
+    @rider_poi_link.setter
+    def rider_poi_link(self, value):
+        self._rider_poi_link = value
+    @property
     def status(self):
         return self._status
 
@@ -71,5 +79,7 @@ class AlipayCommerceLogisticsWaybillIstddetailQueryResponse(AlipayResponse):
             self.rider_mobile_no = response['rider_mobile_no']
         if 'rider_name' in response:
             self.rider_name = response['rider_name']
+        if 'rider_poi_link' in response:
+            self.rider_poi_link = response['rider_poi_link']
         if 'status' in response:
             self.status = response['status']

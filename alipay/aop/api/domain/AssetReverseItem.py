@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetReverseGoodsItem import AssetReverseGoodsItem
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
+from alipay.aop.api.domain.LogisticsInfo import LogisticsInfo
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
 
 
@@ -22,6 +23,7 @@ class AssetReverseItem(object):
         self._from_address = None
         self._item_id = None
         self._item_name = None
+        self._logistics_info = None
         self._original_apply_order_id = None
         self._original_apply_order_item_id = None
         self._original_deliver_order_id = None
@@ -32,6 +34,7 @@ class AssetReverseItem(object):
         self._ou_name = None
         self._reverse_apply_order_id = None
         self._reverse_apply_order_item_id = None
+        self._reverse_biz_scene = None
         self._reverse_type = None
         self._to_address = None
 
@@ -119,6 +122,16 @@ class AssetReverseItem(object):
     def item_name(self, value):
         self._item_name = value
     @property
+    def logistics_info(self):
+        return self._logistics_info
+
+    @logistics_info.setter
+    def logistics_info(self, value):
+        if isinstance(value, LogisticsInfo):
+            self._logistics_info = value
+        else:
+            self._logistics_info = LogisticsInfo.from_alipay_dict(value)
+    @property
     def original_apply_order_id(self):
         return self._original_apply_order_id
 
@@ -188,6 +201,13 @@ class AssetReverseItem(object):
     @reverse_apply_order_item_id.setter
     def reverse_apply_order_item_id(self, value):
         self._reverse_apply_order_item_id = value
+    @property
+    def reverse_biz_scene(self):
+        return self._reverse_biz_scene
+
+    @reverse_biz_scene.setter
+    def reverse_biz_scene(self, value):
+        self._reverse_biz_scene = value
     @property
     def reverse_type(self):
         return self._reverse_type
@@ -264,6 +284,11 @@ class AssetReverseItem(object):
                 params['item_name'] = self.item_name.to_alipay_dict()
             else:
                 params['item_name'] = self.item_name
+        if self.logistics_info:
+            if hasattr(self.logistics_info, 'to_alipay_dict'):
+                params['logistics_info'] = self.logistics_info.to_alipay_dict()
+            else:
+                params['logistics_info'] = self.logistics_info
         if self.original_apply_order_id:
             if hasattr(self.original_apply_order_id, 'to_alipay_dict'):
                 params['original_apply_order_id'] = self.original_apply_order_id.to_alipay_dict()
@@ -314,6 +339,11 @@ class AssetReverseItem(object):
                 params['reverse_apply_order_item_id'] = self.reverse_apply_order_item_id.to_alipay_dict()
             else:
                 params['reverse_apply_order_item_id'] = self.reverse_apply_order_item_id
+        if self.reverse_biz_scene:
+            if hasattr(self.reverse_biz_scene, 'to_alipay_dict'):
+                params['reverse_biz_scene'] = self.reverse_biz_scene.to_alipay_dict()
+            else:
+                params['reverse_biz_scene'] = self.reverse_biz_scene
         if self.reverse_type:
             if hasattr(self.reverse_type, 'to_alipay_dict'):
                 params['reverse_type'] = self.reverse_type.to_alipay_dict()
@@ -353,6 +383,8 @@ class AssetReverseItem(object):
             o.item_id = d['item_id']
         if 'item_name' in d:
             o.item_name = d['item_name']
+        if 'logistics_info' in d:
+            o.logistics_info = d['logistics_info']
         if 'original_apply_order_id' in d:
             o.original_apply_order_id = d['original_apply_order_id']
         if 'original_apply_order_item_id' in d:
@@ -373,6 +405,8 @@ class AssetReverseItem(object):
             o.reverse_apply_order_id = d['reverse_apply_order_id']
         if 'reverse_apply_order_item_id' in d:
             o.reverse_apply_order_item_id = d['reverse_apply_order_item_id']
+        if 'reverse_biz_scene' in d:
+            o.reverse_biz_scene = d['reverse_biz_scene']
         if 'reverse_type' in d:
             o.reverse_type = d['reverse_type']
         if 'to_address' in d:

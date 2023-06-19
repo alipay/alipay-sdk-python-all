@@ -14,6 +14,8 @@ class GoodsDetail(object):
         self._goods_category = None
         self._goods_id = None
         self._goods_name = None
+        self._out_item_id = None
+        self._out_sku_id = None
         self._price = None
         self._quantity = None
         self._show_url = None
@@ -60,6 +62,20 @@ class GoodsDetail(object):
     @goods_name.setter
     def goods_name(self, value):
         self._goods_name = value
+    @property
+    def out_item_id(self):
+        return self._out_item_id
+
+    @out_item_id.setter
+    def out_item_id(self, value):
+        self._out_item_id = value
+    @property
+    def out_sku_id(self):
+        return self._out_sku_id
+
+    @out_sku_id.setter
+    def out_sku_id(self, value):
+        self._out_sku_id = value
     @property
     def price(self):
         return self._price
@@ -115,6 +131,16 @@ class GoodsDetail(object):
                 params['goods_name'] = self.goods_name.to_alipay_dict()
             else:
                 params['goods_name'] = self.goods_name
+        if self.out_item_id:
+            if hasattr(self.out_item_id, 'to_alipay_dict'):
+                params['out_item_id'] = self.out_item_id.to_alipay_dict()
+            else:
+                params['out_item_id'] = self.out_item_id
+        if self.out_sku_id:
+            if hasattr(self.out_sku_id, 'to_alipay_dict'):
+                params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
+            else:
+                params['out_sku_id'] = self.out_sku_id
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
@@ -149,6 +175,10 @@ class GoodsDetail(object):
             o.goods_id = d['goods_id']
         if 'goods_name' in d:
             o.goods_name = d['goods_name']
+        if 'out_item_id' in d:
+            o.out_item_id = d['out_item_id']
+        if 'out_sku_id' in d:
+            o.out_sku_id = d['out_sku_id']
         if 'price' in d:
             o.price = d['price']
         if 'quantity' in d:

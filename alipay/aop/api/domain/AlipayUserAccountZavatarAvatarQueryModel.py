@@ -9,6 +9,7 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
 
     def __init__(self):
         self._avatar_app_version = None
+        self._device_level = None
         self._node_code = None
         self._scene_code = None
 
@@ -19,6 +20,13 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
     @avatar_app_version.setter
     def avatar_app_version(self, value):
         self._avatar_app_version = value
+    @property
+    def device_level(self):
+        return self._device_level
+
+    @device_level.setter
+    def device_level(self, value):
+        self._device_level = value
     @property
     def node_code(self):
         return self._node_code
@@ -42,6 +50,11 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
                 params['avatar_app_version'] = self.avatar_app_version.to_alipay_dict()
             else:
                 params['avatar_app_version'] = self.avatar_app_version
+        if self.device_level:
+            if hasattr(self.device_level, 'to_alipay_dict'):
+                params['device_level'] = self.device_level.to_alipay_dict()
+            else:
+                params['device_level'] = self.device_level
         if self.node_code:
             if hasattr(self.node_code, 'to_alipay_dict'):
                 params['node_code'] = self.node_code.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
         o = AlipayUserAccountZavatarAvatarQueryModel()
         if 'avatar_app_version' in d:
             o.avatar_app_version = d['avatar_app_version']
+        if 'device_level' in d:
+            o.device_level = d['device_level']
         if 'node_code' in d:
             o.node_code = d['node_code']
         if 'scene_code' in d:

@@ -12,6 +12,7 @@ class AlipayBusinessRelationShopDeleteModel(object):
         self._group_sub_type = None
         self._group_type = None
         self._real_shop_id = None
+        self._real_shop_no = None
 
     @property
     def group_id(self):
@@ -41,6 +42,13 @@ class AlipayBusinessRelationShopDeleteModel(object):
     @real_shop_id.setter
     def real_shop_id(self, value):
         self._real_shop_id = value
+    @property
+    def real_shop_no(self):
+        return self._real_shop_no
+
+    @real_shop_no.setter
+    def real_shop_no(self, value):
+        self._real_shop_no = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayBusinessRelationShopDeleteModel(object):
                 params['real_shop_id'] = self.real_shop_id.to_alipay_dict()
             else:
                 params['real_shop_id'] = self.real_shop_id
+        if self.real_shop_no:
+            if hasattr(self.real_shop_no, 'to_alipay_dict'):
+                params['real_shop_no'] = self.real_shop_no.to_alipay_dict()
+            else:
+                params['real_shop_no'] = self.real_shop_no
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayBusinessRelationShopDeleteModel(object):
             o.group_type = d['group_type']
         if 'real_shop_id' in d:
             o.real_shop_id = d['real_shop_id']
+        if 'real_shop_no' in d:
+            o.real_shop_no = d['real_shop_no']
         return o
 
 

@@ -12,6 +12,7 @@ class QipanMerchantCrowd(object):
         self._crowd_code = None
         self._crowd_desc = None
         self._crowd_name = None
+        self._crowd_size = None
         self._external_crowd_code = None
         self._hidden = None
         self._processable = None
@@ -48,6 +49,13 @@ class QipanMerchantCrowd(object):
     @crowd_name.setter
     def crowd_name(self, value):
         self._crowd_name = value
+    @property
+    def crowd_size(self):
+        return self._crowd_size
+
+    @crowd_size.setter
+    def crowd_size(self, value):
+        self._crowd_size = value
     @property
     def external_crowd_code(self):
         return self._external_crowd_code
@@ -105,6 +113,11 @@ class QipanMerchantCrowd(object):
                 params['crowd_name'] = self.crowd_name.to_alipay_dict()
             else:
                 params['crowd_name'] = self.crowd_name
+        if self.crowd_size:
+            if hasattr(self.crowd_size, 'to_alipay_dict'):
+                params['crowd_size'] = self.crowd_size.to_alipay_dict()
+            else:
+                params['crowd_size'] = self.crowd_size
         if self.external_crowd_code:
             if hasattr(self.external_crowd_code, 'to_alipay_dict'):
                 params['external_crowd_code'] = self.external_crowd_code.to_alipay_dict()
@@ -140,6 +153,8 @@ class QipanMerchantCrowd(object):
             o.crowd_desc = d['crowd_desc']
         if 'crowd_name' in d:
             o.crowd_name = d['crowd_name']
+        if 'crowd_size' in d:
+            o.crowd_size = d['crowd_size']
         if 'external_crowd_code' in d:
             o.external_crowd_code = d['external_crowd_code']
         if 'hidden' in d:

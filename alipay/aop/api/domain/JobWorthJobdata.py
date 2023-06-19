@@ -22,6 +22,7 @@ class JobWorthJobdata(object):
         self._exam_score = None
         self._head_pic_id = None
         self._intention_city = None
+        self._intention_city_name = None
         self._issue_date = None
         self._job_id = None
         self._job_name = None
@@ -46,6 +47,7 @@ class JobWorthJobdata(object):
         self._verify_status = None
         self._work_desc = None
         self._work_end_time = None
+        self._work_place = None
         self._work_property = None
         self._work_start_time = None
         self._year = None
@@ -148,6 +150,13 @@ class JobWorthJobdata(object):
     @intention_city.setter
     def intention_city(self, value):
         self._intention_city = value
+    @property
+    def intention_city_name(self):
+        return self._intention_city_name
+
+    @intention_city_name.setter
+    def intention_city_name(self, value):
+        self._intention_city_name = value
     @property
     def issue_date(self):
         return self._issue_date
@@ -317,6 +326,13 @@ class JobWorthJobdata(object):
     def work_end_time(self, value):
         self._work_end_time = value
     @property
+    def work_place(self):
+        return self._work_place
+
+    @work_place.setter
+    def work_place(self, value):
+        self._work_place = value
+    @property
     def work_property(self):
         return self._work_property
 
@@ -411,6 +427,11 @@ class JobWorthJobdata(object):
                 params['intention_city'] = self.intention_city.to_alipay_dict()
             else:
                 params['intention_city'] = self.intention_city
+        if self.intention_city_name:
+            if hasattr(self.intention_city_name, 'to_alipay_dict'):
+                params['intention_city_name'] = self.intention_city_name.to_alipay_dict()
+            else:
+                params['intention_city_name'] = self.intention_city_name
         if self.issue_date:
             if hasattr(self.issue_date, 'to_alipay_dict'):
                 params['issue_date'] = self.issue_date.to_alipay_dict()
@@ -531,6 +552,11 @@ class JobWorthJobdata(object):
                 params['work_end_time'] = self.work_end_time.to_alipay_dict()
             else:
                 params['work_end_time'] = self.work_end_time
+        if self.work_place:
+            if hasattr(self.work_place, 'to_alipay_dict'):
+                params['work_place'] = self.work_place.to_alipay_dict()
+            else:
+                params['work_place'] = self.work_place
         if self.work_property:
             if hasattr(self.work_property, 'to_alipay_dict'):
                 params['work_property'] = self.work_property.to_alipay_dict()
@@ -581,6 +607,8 @@ class JobWorthJobdata(object):
             o.head_pic_id = d['head_pic_id']
         if 'intention_city' in d:
             o.intention_city = d['intention_city']
+        if 'intention_city_name' in d:
+            o.intention_city_name = d['intention_city_name']
         if 'issue_date' in d:
             o.issue_date = d['issue_date']
         if 'job_id' in d:
@@ -629,6 +657,8 @@ class JobWorthJobdata(object):
             o.work_desc = d['work_desc']
         if 'work_end_time' in d:
             o.work_end_time = d['work_end_time']
+        if 'work_place' in d:
+            o.work_place = d['work_place']
         if 'work_property' in d:
             o.work_property = d['work_property']
         if 'work_start_time' in d:

@@ -16,6 +16,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
         self._outer_source_id = None
         self._platform = None
         self._quota_id = None
+        self._share_mode = None
 
     @property
     def account_id(self):
@@ -73,6 +74,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
     @quota_id.setter
     def quota_id(self, value):
         self._quota_id = value
+    @property
+    def share_mode(self):
+        return self._share_mode
+
+    @share_mode.setter
+    def share_mode(self, value):
+        self._share_mode = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +125,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
                 params['quota_id'] = self.quota_id.to_alipay_dict()
             else:
                 params['quota_id'] = self.quota_id
+        if self.share_mode:
+            if hasattr(self.share_mode, 'to_alipay_dict'):
+                params['share_mode'] = self.share_mode.to_alipay_dict()
+            else:
+                params['share_mode'] = self.share_mode
         return params
 
     @staticmethod
@@ -140,6 +153,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
             o.platform = d['platform']
         if 'quota_id' in d:
             o.quota_id = d['quota_id']
+        if 'share_mode' in d:
+            o.share_mode = d['share_mode']
         return o
 
 

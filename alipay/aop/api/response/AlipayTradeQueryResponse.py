@@ -44,6 +44,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._industry_sepc_detail_gov = None
         self._invoice_amount = None
         self._mdiscount_amount = None
+        self._medical_insurance_info = None
         self._open_id = None
         self._out_trade_no = None
         self._passback_params = None
@@ -287,6 +288,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def mdiscount_amount(self, value):
         self._mdiscount_amount = value
     @property
+    def medical_insurance_info(self):
+        return self._medical_insurance_info
+
+    @medical_insurance_info.setter
+    def medical_insurance_info(self, value):
+        self._medical_insurance_info = value
+    @property
     def open_id(self):
         return self._open_id
 
@@ -522,6 +530,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.invoice_amount = response['invoice_amount']
         if 'mdiscount_amount' in response:
             self.mdiscount_amount = response['mdiscount_amount']
+        if 'medical_insurance_info' in response:
+            self.medical_insurance_info = response['medical_insurance_info']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'out_trade_no' in response:

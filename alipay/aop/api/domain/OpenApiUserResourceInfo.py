@@ -9,6 +9,7 @@ class OpenApiUserResourceInfo(object):
 
     def __init__(self):
         self._alipay_uid = None
+        self._busvc_cloud_id = None
         self._busvc_domain = None
         self._busvc_id = None
         self._busvc_no = None
@@ -22,6 +23,13 @@ class OpenApiUserResourceInfo(object):
     @alipay_uid.setter
     def alipay_uid(self, value):
         self._alipay_uid = value
+    @property
+    def busvc_cloud_id(self):
+        return self._busvc_cloud_id
+
+    @busvc_cloud_id.setter
+    def busvc_cloud_id(self, value):
+        self._busvc_cloud_id = value
     @property
     def busvc_domain(self):
         return self._busvc_domain
@@ -66,6 +74,11 @@ class OpenApiUserResourceInfo(object):
                 params['alipay_uid'] = self.alipay_uid.to_alipay_dict()
             else:
                 params['alipay_uid'] = self.alipay_uid
+        if self.busvc_cloud_id:
+            if hasattr(self.busvc_cloud_id, 'to_alipay_dict'):
+                params['busvc_cloud_id'] = self.busvc_cloud_id.to_alipay_dict()
+            else:
+                params['busvc_cloud_id'] = self.busvc_cloud_id
         if self.busvc_domain:
             if hasattr(self.busvc_domain, 'to_alipay_dict'):
                 params['busvc_domain'] = self.busvc_domain.to_alipay_dict()
@@ -100,6 +113,8 @@ class OpenApiUserResourceInfo(object):
         o = OpenApiUserResourceInfo()
         if 'alipay_uid' in d:
             o.alipay_uid = d['alipay_uid']
+        if 'busvc_cloud_id' in d:
+            o.busvc_cloud_id = d['busvc_cloud_id']
         if 'busvc_domain' in d:
             o.busvc_domain = d['busvc_domain']
         if 'busvc_id' in d:

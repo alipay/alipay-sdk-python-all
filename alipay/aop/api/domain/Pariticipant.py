@@ -11,6 +11,7 @@ class Pariticipant(object):
         self._identity = None
         self._identity_type = None
         self._name = None
+        self._settle_in_time = None
 
     @property
     def identity(self):
@@ -33,6 +34,13 @@ class Pariticipant(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def settle_in_time(self):
+        return self._settle_in_time
+
+    @settle_in_time.setter
+    def settle_in_time(self, value):
+        self._settle_in_time = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class Pariticipant(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.settle_in_time:
+            if hasattr(self.settle_in_time, 'to_alipay_dict'):
+                params['settle_in_time'] = self.settle_in_time.to_alipay_dict()
+            else:
+                params['settle_in_time'] = self.settle_in_time
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class Pariticipant(object):
             o.identity_type = d['identity_type']
         if 'name' in d:
             o.name = d['name']
+        if 'settle_in_time' in d:
+            o.settle_in_time = d['settle_in_time']
         return o
 
 

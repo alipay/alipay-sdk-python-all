@@ -15,6 +15,7 @@ class ExtendParams(object):
         self._royalty_freeze = None
         self._specified_seller_name = None
         self._sys_service_provider_id = None
+        self._trade_component_order_id = None
 
     @property
     def card_type(self):
@@ -65,6 +66,13 @@ class ExtendParams(object):
     @sys_service_provider_id.setter
     def sys_service_provider_id(self, value):
         self._sys_service_provider_id = value
+    @property
+    def trade_component_order_id(self):
+        return self._trade_component_order_id
+
+    @trade_component_order_id.setter
+    def trade_component_order_id(self, value):
+        self._trade_component_order_id = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class ExtendParams(object):
                 params['sys_service_provider_id'] = self.sys_service_provider_id.to_alipay_dict()
             else:
                 params['sys_service_provider_id'] = self.sys_service_provider_id
+        if self.trade_component_order_id:
+            if hasattr(self.trade_component_order_id, 'to_alipay_dict'):
+                params['trade_component_order_id'] = self.trade_component_order_id.to_alipay_dict()
+            else:
+                params['trade_component_order_id'] = self.trade_component_order_id
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class ExtendParams(object):
             o.specified_seller_name = d['specified_seller_name']
         if 'sys_service_provider_id' in d:
             o.sys_service_provider_id = d['sys_service_provider_id']
+        if 'trade_component_order_id' in d:
+            o.trade_component_order_id = d['trade_component_order_id']
         return o
 
 

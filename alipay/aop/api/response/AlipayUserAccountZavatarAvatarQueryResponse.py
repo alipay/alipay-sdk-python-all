@@ -20,6 +20,7 @@ class AlipayUserAccountZavatarAvatarQueryResponse(AlipayResponse):
         self._default_stage_scenery_v_os = None
         self._digital_human_id = None
         self._init_avatar_v_os = None
+        self._model_level = None
         self._optional_animation_v_os = None
         self._optional_stage_scenery_v_os = None
 
@@ -80,6 +81,13 @@ class AlipayUserAccountZavatarAvatarQueryResponse(AlipayResponse):
                 else:
                     self._init_avatar_v_os.append(AvatarVO.from_alipay_dict(i))
     @property
+    def model_level(self):
+        return self._model_level
+
+    @model_level.setter
+    def model_level(self, value):
+        self._model_level = value
+    @property
     def optional_animation_v_os(self):
         return self._optional_animation_v_os
 
@@ -118,6 +126,8 @@ class AlipayUserAccountZavatarAvatarQueryResponse(AlipayResponse):
             self.digital_human_id = response['digital_human_id']
         if 'init_avatar_v_os' in response:
             self.init_avatar_v_os = response['init_avatar_v_os']
+        if 'model_level' in response:
+            self.model_level = response['model_level']
         if 'optional_animation_v_os' in response:
             self.optional_animation_v_os = response['optional_animation_v_os']
         if 'optional_stage_scenery_v_os' in response:

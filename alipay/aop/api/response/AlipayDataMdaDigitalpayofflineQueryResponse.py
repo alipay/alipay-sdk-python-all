@@ -11,6 +11,7 @@ class AlipayDataMdaDigitalpayofflineQueryResponse(AlipayResponse):
         super(AlipayDataMdaDigitalpayofflineQueryResponse, self).__init__()
         self._cb_top_5_uv = None
         self._cb_total_uv = None
+        self._cb_wallet_cnt = None
         self._top_5_merchant = None
         self._total_amount = None
         self._total_merchants = None
@@ -30,6 +31,13 @@ class AlipayDataMdaDigitalpayofflineQueryResponse(AlipayResponse):
     @cb_total_uv.setter
     def cb_total_uv(self, value):
         self._cb_total_uv = value
+    @property
+    def cb_wallet_cnt(self):
+        return self._cb_wallet_cnt
+
+    @cb_wallet_cnt.setter
+    def cb_wallet_cnt(self, value):
+        self._cb_wallet_cnt = value
     @property
     def top_5_merchant(self):
         return self._top_5_merchant
@@ -65,6 +73,8 @@ class AlipayDataMdaDigitalpayofflineQueryResponse(AlipayResponse):
             self.cb_top_5_uv = response['cb_top_5_uv']
         if 'cb_total_uv' in response:
             self.cb_total_uv = response['cb_total_uv']
+        if 'cb_wallet_cnt' in response:
+            self.cb_wallet_cnt = response['cb_wallet_cnt']
         if 'top_5_merchant' in response:
             self.top_5_merchant = response['top_5_merchant']
         if 'total_amount' in response:

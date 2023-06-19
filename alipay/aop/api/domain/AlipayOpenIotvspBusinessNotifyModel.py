@@ -4,18 +4,28 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BusinessInfoRequest import BusinessInfoRequest
+from alipay.aop.api.domain.NotifyEventParam import NotifyEventParam
 
 
 class AlipayOpenIotvspBusinessNotifyModel(object):
 
     def __init__(self):
+        self._biz_id = None
         self._business_list = None
         self._isv_pid = None
         self._label_out_no = None
+        self._notify_event_param = None
         self._org_out_id = None
         self._scene_code = None
         self._vid = None
 
+    @property
+    def biz_id(self):
+        return self._biz_id
+
+    @biz_id.setter
+    def biz_id(self, value):
+        self._biz_id = value
     @property
     def business_list(self):
         return self._business_list
@@ -44,6 +54,16 @@ class AlipayOpenIotvspBusinessNotifyModel(object):
     def label_out_no(self, value):
         self._label_out_no = value
     @property
+    def notify_event_param(self):
+        return self._notify_event_param
+
+    @notify_event_param.setter
+    def notify_event_param(self, value):
+        if isinstance(value, NotifyEventParam):
+            self._notify_event_param = value
+        else:
+            self._notify_event_param = NotifyEventParam.from_alipay_dict(value)
+    @property
     def org_out_id(self):
         return self._org_out_id
 
@@ -68,6 +88,11 @@ class AlipayOpenIotvspBusinessNotifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_id:
+            if hasattr(self.biz_id, 'to_alipay_dict'):
+                params['biz_id'] = self.biz_id.to_alipay_dict()
+            else:
+                params['biz_id'] = self.biz_id
         if self.business_list:
             if isinstance(self.business_list, list):
                 for i in range(0, len(self.business_list)):
@@ -88,6 +113,11 @@ class AlipayOpenIotvspBusinessNotifyModel(object):
                 params['label_out_no'] = self.label_out_no.to_alipay_dict()
             else:
                 params['label_out_no'] = self.label_out_no
+        if self.notify_event_param:
+            if hasattr(self.notify_event_param, 'to_alipay_dict'):
+                params['notify_event_param'] = self.notify_event_param.to_alipay_dict()
+            else:
+                params['notify_event_param'] = self.notify_event_param
         if self.org_out_id:
             if hasattr(self.org_out_id, 'to_alipay_dict'):
                 params['org_out_id'] = self.org_out_id.to_alipay_dict()
@@ -110,12 +140,16 @@ class AlipayOpenIotvspBusinessNotifyModel(object):
         if not d:
             return None
         o = AlipayOpenIotvspBusinessNotifyModel()
+        if 'biz_id' in d:
+            o.biz_id = d['biz_id']
         if 'business_list' in d:
             o.business_list = d['business_list']
         if 'isv_pid' in d:
             o.isv_pid = d['isv_pid']
         if 'label_out_no' in d:
             o.label_out_no = d['label_out_no']
+        if 'notify_event_param' in d:
+            o.notify_event_param = d['notify_event_param']
         if 'org_out_id' in d:
             o.org_out_id = d['org_out_id']
         if 'scene_code' in d:

@@ -25,8 +25,10 @@ class SpeechRecordDetail(object):
         self._out_plan_end_time = None
         self._out_plan_id = None
         self._out_plan_start_time = None
+        self._scan_type = None
         self._smid = None
         self._speech_content = None
+        self._speech_event = None
         self._speech_id = None
         self._speech_result = None
         self._speech_result_msg = None
@@ -155,6 +157,13 @@ class SpeechRecordDetail(object):
     def out_plan_start_time(self, value):
         self._out_plan_start_time = value
     @property
+    def scan_type(self):
+        return self._scan_type
+
+    @scan_type.setter
+    def scan_type(self, value):
+        self._scan_type = value
+    @property
     def smid(self):
         return self._smid
 
@@ -168,6 +177,13 @@ class SpeechRecordDetail(object):
     @speech_content.setter
     def speech_content(self, value):
         self._speech_content = value
+    @property
+    def speech_event(self):
+        return self._speech_event
+
+    @speech_event.setter
+    def speech_event(self, value):
+        self._speech_event = value
     @property
     def speech_id(self):
         return self._speech_id
@@ -306,6 +322,11 @@ class SpeechRecordDetail(object):
                 params['out_plan_start_time'] = self.out_plan_start_time.to_alipay_dict()
             else:
                 params['out_plan_start_time'] = self.out_plan_start_time
+        if self.scan_type:
+            if hasattr(self.scan_type, 'to_alipay_dict'):
+                params['scan_type'] = self.scan_type.to_alipay_dict()
+            else:
+                params['scan_type'] = self.scan_type
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -316,6 +337,11 @@ class SpeechRecordDetail(object):
                 params['speech_content'] = self.speech_content.to_alipay_dict()
             else:
                 params['speech_content'] = self.speech_content
+        if self.speech_event:
+            if hasattr(self.speech_event, 'to_alipay_dict'):
+                params['speech_event'] = self.speech_event.to_alipay_dict()
+            else:
+                params['speech_event'] = self.speech_event
         if self.speech_id:
             if hasattr(self.speech_id, 'to_alipay_dict'):
                 params['speech_id'] = self.speech_id.to_alipay_dict()
@@ -392,10 +418,14 @@ class SpeechRecordDetail(object):
             o.out_plan_id = d['out_plan_id']
         if 'out_plan_start_time' in d:
             o.out_plan_start_time = d['out_plan_start_time']
+        if 'scan_type' in d:
+            o.scan_type = d['scan_type']
         if 'smid' in d:
             o.smid = d['smid']
         if 'speech_content' in d:
             o.speech_content = d['speech_content']
+        if 'speech_event' in d:
+            o.speech_event = d['speech_event']
         if 'speech_id' in d:
             o.speech_id = d['speech_id']
         if 'speech_result' in d:

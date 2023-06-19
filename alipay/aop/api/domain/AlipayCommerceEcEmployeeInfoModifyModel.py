@@ -11,6 +11,7 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
         self._department_ids = None
         self._employee_email = None
         self._employee_id = None
+        self._employee_mobile = None
         self._employee_name = None
         self._employee_no = None
         self._enterprise_id = None
@@ -40,6 +41,13 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def employee_mobile(self):
+        return self._employee_mobile
+
+    @employee_mobile.setter
+    def employee_mobile(self, value):
+        self._employee_mobile = value
     @property
     def employee_name(self):
         return self._employee_name
@@ -95,6 +103,11 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
             else:
                 params['employee_id'] = self.employee_id
+        if self.employee_mobile:
+            if hasattr(self.employee_mobile, 'to_alipay_dict'):
+                params['employee_mobile'] = self.employee_mobile.to_alipay_dict()
+            else:
+                params['employee_mobile'] = self.employee_mobile
         if self.employee_name:
             if hasattr(self.employee_name, 'to_alipay_dict'):
                 params['employee_name'] = self.employee_name.to_alipay_dict()
@@ -133,6 +146,8 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
             o.employee_email = d['employee_email']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
+        if 'employee_mobile' in d:
+            o.employee_mobile = d['employee_mobile']
         if 'employee_name' in d:
             o.employee_name = d['employee_name']
         if 'employee_no' in d:

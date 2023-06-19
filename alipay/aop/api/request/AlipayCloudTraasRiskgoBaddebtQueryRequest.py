@@ -5,11 +5,11 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
-from alipay.aop.api.domain.AlipaySecurityRiskRainscoreQueryModel import AlipaySecurityRiskRainscoreQueryModel
+from alipay.aop.api.domain.AlipayCloudTraasRiskgoBaddebtQueryModel import AlipayCloudTraasRiskgoBaddebtQueryModel
 
 
 
-class AlipaySecurityRiskRainscoreQueryRequest(object):
+class AlipayCloudTraasRiskgoBaddebtQueryRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
@@ -37,10 +37,10 @@ class AlipaySecurityRiskRainscoreQueryRequest(object):
 
     @biz_content.setter
     def biz_content(self, value):
-        if isinstance(value, AlipaySecurityRiskRainscoreQueryModel):
+        if isinstance(value, AlipayCloudTraasRiskgoBaddebtQueryModel):
             self._biz_content = value
         else:
-            self._biz_content = AlipaySecurityRiskRainscoreQueryModel.from_alipay_dict(value)
+            self._biz_content = AlipayCloudTraasRiskgoBaddebtQueryModel.from_alipay_dict(value)
 
 
     @property
@@ -116,7 +116,7 @@ class AlipaySecurityRiskRainscoreQueryRequest(object):
 
     def get_params(self):
         params = dict()
-        params[P_METHOD] = 'alipay.security.risk.rainscore.query'
+        params[P_METHOD] = 'alipay.cloud.traas.riskgo.baddebt.query'
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

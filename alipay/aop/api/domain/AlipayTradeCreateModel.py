@@ -33,6 +33,7 @@ class AlipayTradeCreateModel(object):
         self._goods_detail = None
         self._logistics_detail = None
         self._merchant_order_no = None
+        self._op_app_id = None
         self._operator_id = None
         self._out_trade_no = None
         self._passback_params = None
@@ -177,6 +178,13 @@ class AlipayTradeCreateModel(object):
     @merchant_order_no.setter
     def merchant_order_no(self, value):
         self._merchant_order_no = value
+    @property
+    def op_app_id(self):
+        return self._op_app_id
+
+    @op_app_id.setter
+    def op_app_id(self, value):
+        self._op_app_id = value
     @property
     def operator_id(self):
         return self._operator_id
@@ -395,6 +403,11 @@ class AlipayTradeCreateModel(object):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
             else:
                 params['merchant_order_no'] = self.merchant_order_no
+        if self.op_app_id:
+            if hasattr(self.op_app_id, 'to_alipay_dict'):
+                params['op_app_id'] = self.op_app_id.to_alipay_dict()
+            else:
+                params['op_app_id'] = self.op_app_id
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -522,6 +535,8 @@ class AlipayTradeCreateModel(object):
             o.logistics_detail = d['logistics_detail']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
+        if 'op_app_id' in d:
+            o.op_app_id = d['op_app_id']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:

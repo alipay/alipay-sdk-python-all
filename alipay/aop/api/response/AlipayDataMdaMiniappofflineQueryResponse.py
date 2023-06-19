@@ -13,6 +13,7 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
         self._journey_planning_trend = None
         self._match_focus = None
         self._ticket_service = None
+        self._use_pass = None
         self._user_distribution = None
 
     @property
@@ -44,6 +45,13 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
     def ticket_service(self, value):
         self._ticket_service = value
     @property
+    def use_pass(self):
+        return self._use_pass
+
+    @use_pass.setter
+    def use_pass(self, value):
+        self._use_pass = value
+    @property
     def user_distribution(self):
         return self._user_distribution
 
@@ -61,5 +69,7 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
             self.match_focus = response['match_focus']
         if 'ticket_service' in response:
             self.ticket_service = response['ticket_service']
+        if 'use_pass' in response:
+            self.use_pass = response['use_pass']
         if 'user_distribution' in response:
             self.user_distribution = response['user_distribution']

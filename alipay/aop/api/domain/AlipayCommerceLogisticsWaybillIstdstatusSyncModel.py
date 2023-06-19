@@ -3,14 +3,18 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ContactRecord import ContactRecord
+from alipay.aop.api.domain.OrderChangeInfoExtIstd import OrderChangeInfoExtIstd
 
 
 class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
 
     def __init__(self):
         self._action_time = None
+        self._contact_records = None
         self._desc = None
         self._logistics_code = None
+        self._order_ext_istd = None
         self._order_no = None
         self._out_order_no = None
         self._reach_duration = None
@@ -28,6 +32,19 @@ class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
     def action_time(self, value):
         self._action_time = value
     @property
+    def contact_records(self):
+        return self._contact_records
+
+    @contact_records.setter
+    def contact_records(self, value):
+        if isinstance(value, list):
+            self._contact_records = list()
+            for i in value:
+                if isinstance(i, ContactRecord):
+                    self._contact_records.append(i)
+                else:
+                    self._contact_records.append(ContactRecord.from_alipay_dict(i))
+    @property
     def desc(self):
         return self._desc
 
@@ -41,6 +58,16 @@ class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
     @logistics_code.setter
     def logistics_code(self, value):
         self._logistics_code = value
+    @property
+    def order_ext_istd(self):
+        return self._order_ext_istd
+
+    @order_ext_istd.setter
+    def order_ext_istd(self, value):
+        if isinstance(value, OrderChangeInfoExtIstd):
+            self._order_ext_istd = value
+        else:
+            self._order_ext_istd = OrderChangeInfoExtIstd.from_alipay_dict(value)
     @property
     def order_no(self):
         return self._order_no
@@ -106,6 +133,16 @@ class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
                 params['action_time'] = self.action_time.to_alipay_dict()
             else:
                 params['action_time'] = self.action_time
+        if self.contact_records:
+            if isinstance(self.contact_records, list):
+                for i in range(0, len(self.contact_records)):
+                    element = self.contact_records[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.contact_records[i] = element.to_alipay_dict()
+            if hasattr(self.contact_records, 'to_alipay_dict'):
+                params['contact_records'] = self.contact_records.to_alipay_dict()
+            else:
+                params['contact_records'] = self.contact_records
         if self.desc:
             if hasattr(self.desc, 'to_alipay_dict'):
                 params['desc'] = self.desc.to_alipay_dict()
@@ -116,6 +153,11 @@ class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
             else:
                 params['logistics_code'] = self.logistics_code
+        if self.order_ext_istd:
+            if hasattr(self.order_ext_istd, 'to_alipay_dict'):
+                params['order_ext_istd'] = self.order_ext_istd.to_alipay_dict()
+            else:
+                params['order_ext_istd'] = self.order_ext_istd
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -165,10 +207,14 @@ class AlipayCommerceLogisticsWaybillIstdstatusSyncModel(object):
         o = AlipayCommerceLogisticsWaybillIstdstatusSyncModel()
         if 'action_time' in d:
             o.action_time = d['action_time']
+        if 'contact_records' in d:
+            o.contact_records = d['contact_records']
         if 'desc' in d:
             o.desc = d['desc']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
+        if 'order_ext_istd' in d:
+            o.order_ext_istd = d['order_ext_istd']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'out_order_no' in d:

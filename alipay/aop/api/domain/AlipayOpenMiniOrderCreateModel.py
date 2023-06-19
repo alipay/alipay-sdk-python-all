@@ -29,6 +29,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._out_order_id = None
         self._path = None
         self._seller_id = None
+        self._source_id = None
         self._timeout_express = None
         self._title = None
 
@@ -152,6 +153,13 @@ class AlipayOpenMiniOrderCreateModel(object):
     def seller_id(self, value):
         self._seller_id = value
     @property
+    def source_id(self):
+        return self._source_id
+
+    @source_id.setter
+    def source_id(self, value):
+        self._source_id = value
+    @property
     def timeout_express(self):
         return self._timeout_express
 
@@ -239,6 +247,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.source_id:
+            if hasattr(self.source_id, 'to_alipay_dict'):
+                params['source_id'] = self.source_id.to_alipay_dict()
+            else:
+                params['source_id'] = self.source_id
         if self.timeout_express:
             if hasattr(self.timeout_express, 'to_alipay_dict'):
                 params['timeout_express'] = self.timeout_express.to_alipay_dict()
@@ -284,6 +297,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.path = d['path']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'source_id' in d:
+            o.source_id = d['source_id']
         if 'timeout_express' in d:
             o.timeout_express = d['timeout_express']
         if 'title' in d:

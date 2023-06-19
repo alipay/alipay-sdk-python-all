@@ -16,6 +16,8 @@ class InsPolicyDigest(object):
         self._policy_type = None
         self._premium = None
         self._sum_insured = None
+        self._surrender_amount = None
+        self._surrender_time = None
 
     @property
     def effect_end_time(self):
@@ -73,6 +75,20 @@ class InsPolicyDigest(object):
     @sum_insured.setter
     def sum_insured(self, value):
         self._sum_insured = value
+    @property
+    def surrender_amount(self):
+        return self._surrender_amount
+
+    @surrender_amount.setter
+    def surrender_amount(self, value):
+        self._surrender_amount = value
+    @property
+    def surrender_time(self):
+        return self._surrender_time
+
+    @surrender_time.setter
+    def surrender_time(self, value):
+        self._surrender_time = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +133,16 @@ class InsPolicyDigest(object):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
             else:
                 params['sum_insured'] = self.sum_insured
+        if self.surrender_amount:
+            if hasattr(self.surrender_amount, 'to_alipay_dict'):
+                params['surrender_amount'] = self.surrender_amount.to_alipay_dict()
+            else:
+                params['surrender_amount'] = self.surrender_amount
+        if self.surrender_time:
+            if hasattr(self.surrender_time, 'to_alipay_dict'):
+                params['surrender_time'] = self.surrender_time.to_alipay_dict()
+            else:
+                params['surrender_time'] = self.surrender_time
         return params
 
     @staticmethod
@@ -140,6 +166,10 @@ class InsPolicyDigest(object):
             o.premium = d['premium']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
+        if 'surrender_amount' in d:
+            o.surrender_amount = d['surrender_amount']
+        if 'surrender_time' in d:
+            o.surrender_time = d['surrender_time']
         return o
 
 

@@ -15,6 +15,7 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
         self._enterprise_info = None
         self._out_biz_no = None
         self._product_code = None
+        self._risk_scene = None
 
     @property
     def biz_scene(self):
@@ -57,6 +58,13 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def risk_scene(self):
+        return self._risk_scene
+
+    @risk_scene.setter
+    def risk_scene(self, value):
+        self._risk_scene = value
 
 
     def to_alipay_dict(self):
@@ -86,6 +94,11 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.risk_scene:
+            if hasattr(self.risk_scene, 'to_alipay_dict'):
+                params['risk_scene'] = self.risk_scene.to_alipay_dict()
+            else:
+                params['risk_scene'] = self.risk_scene
         return params
 
     @staticmethod
@@ -103,6 +116,8 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'risk_scene' in d:
+            o.risk_scene = d['risk_scene']
         return o
 
 
