@@ -16,6 +16,7 @@ class ApeDataItem(object):
         self._comment_cnt = None
         self._current_price = None
         self._detail_pic_num = None
+        self._discount = None
         self._free_shipping = None
         self._id = None
         self._mini_app_id = None
@@ -97,6 +98,13 @@ class ApeDataItem(object):
     @detail_pic_num.setter
     def detail_pic_num(self, value):
         self._detail_pic_num = value
+    @property
+    def discount(self):
+        return self._discount
+
+    @discount.setter
+    def discount(self, value):
+        self._discount = value
     @property
     def free_shipping(self):
         return self._free_shipping
@@ -299,6 +307,11 @@ class ApeDataItem(object):
                 params['detail_pic_num'] = self.detail_pic_num.to_alipay_dict()
             else:
                 params['detail_pic_num'] = self.detail_pic_num
+        if self.discount:
+            if hasattr(self.discount, 'to_alipay_dict'):
+                params['discount'] = self.discount.to_alipay_dict()
+            else:
+                params['discount'] = self.discount
         if self.free_shipping:
             if hasattr(self.free_shipping, 'to_alipay_dict'):
                 params['free_shipping'] = self.free_shipping.to_alipay_dict()
@@ -437,6 +450,8 @@ class ApeDataItem(object):
             o.current_price = d['current_price']
         if 'detail_pic_num' in d:
             o.detail_pic_num = d['detail_pic_num']
+        if 'discount' in d:
+            o.discount = d['discount']
         if 'free_shipping' in d:
             o.free_shipping = d['free_shipping']
         if 'id' in d:

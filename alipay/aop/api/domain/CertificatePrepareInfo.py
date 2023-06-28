@@ -3,18 +3,30 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 
 
 class CertificatePrepareInfo(object):
 
     def __init__(self):
+        self._amount_info = None
         self._certificate_id = None
         self._encrypted_code = None
         self._sku_info = None
         self._valid_begin_time = None
         self._valid_end_time = None
 
+    @property
+    def amount_info(self):
+        return self._amount_info
+
+    @amount_info.setter
+    def amount_info(self, value):
+        if isinstance(value, CertificateInstanceAmountInfo):
+            self._amount_info = value
+        else:
+            self._amount_info = CertificateInstanceAmountInfo.from_alipay_dict(value)
     @property
     def certificate_id(self):
         return self._certificate_id
@@ -57,6 +69,11 @@ class CertificatePrepareInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_info:
+            if hasattr(self.amount_info, 'to_alipay_dict'):
+                params['amount_info'] = self.amount_info.to_alipay_dict()
+            else:
+                params['amount_info'] = self.amount_info
         if self.certificate_id:
             if hasattr(self.certificate_id, 'to_alipay_dict'):
                 params['certificate_id'] = self.certificate_id.to_alipay_dict()
@@ -89,6 +106,8 @@ class CertificatePrepareInfo(object):
         if not d:
             return None
         o = CertificatePrepareInfo()
+        if 'amount_info' in d:
+            o.amount_info = d['amount_info']
         if 'certificate_id' in d:
             o.certificate_id = d['certificate_id']
         if 'encrypted_code' in d:

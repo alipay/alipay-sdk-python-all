@@ -16,6 +16,8 @@ class MedicalNationalPayAuthInfo(object):
         self._medical_card_inst_id = None
         self._openapi_app_id = None
         self._pay_auth_no = None
+        self._rels_pay_flag = None
+        self._rels_pay_user_name = None
         self._req_biz_no = None
 
     @property
@@ -75,6 +77,20 @@ class MedicalNationalPayAuthInfo(object):
     def pay_auth_no(self, value):
         self._pay_auth_no = value
     @property
+    def rels_pay_flag(self):
+        return self._rels_pay_flag
+
+    @rels_pay_flag.setter
+    def rels_pay_flag(self, value):
+        self._rels_pay_flag = value
+    @property
+    def rels_pay_user_name(self):
+        return self._rels_pay_user_name
+
+    @rels_pay_user_name.setter
+    def rels_pay_user_name(self, value):
+        self._rels_pay_user_name = value
+    @property
     def req_biz_no(self):
         return self._req_biz_no
 
@@ -125,6 +141,16 @@ class MedicalNationalPayAuthInfo(object):
                 params['pay_auth_no'] = self.pay_auth_no.to_alipay_dict()
             else:
                 params['pay_auth_no'] = self.pay_auth_no
+        if self.rels_pay_flag:
+            if hasattr(self.rels_pay_flag, 'to_alipay_dict'):
+                params['rels_pay_flag'] = self.rels_pay_flag.to_alipay_dict()
+            else:
+                params['rels_pay_flag'] = self.rels_pay_flag
+        if self.rels_pay_user_name:
+            if hasattr(self.rels_pay_user_name, 'to_alipay_dict'):
+                params['rels_pay_user_name'] = self.rels_pay_user_name.to_alipay_dict()
+            else:
+                params['rels_pay_user_name'] = self.rels_pay_user_name
         if self.req_biz_no:
             if hasattr(self.req_biz_no, 'to_alipay_dict'):
                 params['req_biz_no'] = self.req_biz_no.to_alipay_dict()
@@ -153,6 +179,10 @@ class MedicalNationalPayAuthInfo(object):
             o.openapi_app_id = d['openapi_app_id']
         if 'pay_auth_no' in d:
             o.pay_auth_no = d['pay_auth_no']
+        if 'rels_pay_flag' in d:
+            o.rels_pay_flag = d['rels_pay_flag']
+        if 'rels_pay_user_name' in d:
+            o.rels_pay_user_name = d['rels_pay_user_name']
         if 'req_biz_no' in d:
             o.req_biz_no = d['req_biz_no']
         return o

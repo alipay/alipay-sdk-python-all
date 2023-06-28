@@ -22,6 +22,7 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._iot_check_type = None
         self._iot_vid = None
         self._role_list = None
+        self._sign_return_url = None
 
     @property
     def department_ids(self):
@@ -127,6 +128,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
             self._role_list = list()
             for i in value:
                 self._role_list.append(i)
+    @property
+    def sign_return_url(self):
+        return self._sign_return_url
+
+    @sign_return_url.setter
+    def sign_return_url(self, value):
+        self._sign_return_url = value
 
 
     def to_alipay_dict(self):
@@ -211,6 +219,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['role_list'] = self.role_list.to_alipay_dict()
             else:
                 params['role_list'] = self.role_list
+        if self.sign_return_url:
+            if hasattr(self.sign_return_url, 'to_alipay_dict'):
+                params['sign_return_url'] = self.sign_return_url.to_alipay_dict()
+            else:
+                params['sign_return_url'] = self.sign_return_url
         return params
 
     @staticmethod
@@ -246,6 +259,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.iot_vid = d['iot_vid']
         if 'role_list' in d:
             o.role_list = d['role_list']
+        if 'sign_return_url' in d:
+            o.sign_return_url = d['sign_return_url']
         return o
 
 

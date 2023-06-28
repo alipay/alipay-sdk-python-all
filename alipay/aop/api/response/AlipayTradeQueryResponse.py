@@ -19,6 +19,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._alipay_store_id = None
         self._alipay_sub_merchant_id = None
         self._auth_trade_pay_mode = None
+        self._biz_settle_mode = None
         self._bkagent_resp_info = None
         self._body = None
         self._buyer_logon_id = None
@@ -91,6 +92,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @auth_trade_pay_mode.setter
     def auth_trade_pay_mode(self, value):
         self._auth_trade_pay_mode = value
+    @property
+    def biz_settle_mode(self):
+        return self._biz_settle_mode
+
+    @biz_settle_mode.setter
+    def biz_settle_mode(self, value):
+        self._biz_settle_mode = value
     @property
     def bkagent_resp_info(self):
         return self._bkagent_resp_info
@@ -480,6 +488,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.alipay_sub_merchant_id = response['alipay_sub_merchant_id']
         if 'auth_trade_pay_mode' in response:
             self.auth_trade_pay_mode = response['auth_trade_pay_mode']
+        if 'biz_settle_mode' in response:
+            self.biz_settle_mode = response['biz_settle_mode']
         if 'bkagent_resp_info' in response:
             self.bkagent_resp_info = response['bkagent_resp_info']
         if 'body' in response:

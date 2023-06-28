@@ -17,6 +17,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
         self._page_num = None
         self._page_size = None
         self._quota_id_list = None
+        self._quota_type = None
         self._target_id = None
         self._target_type = None
 
@@ -87,6 +88,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
             for i in value:
                 self._quota_id_list.append(i)
     @property
+    def quota_type(self):
+        return self._quota_type
+
+    @quota_type.setter
+    def quota_type(self, value):
+        self._quota_type = value
+    @property
     def target_id(self):
         return self._target_id
 
@@ -154,6 +162,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
                 params['quota_id_list'] = self.quota_id_list.to_alipay_dict()
             else:
                 params['quota_id_list'] = self.quota_id_list
+        if self.quota_type:
+            if hasattr(self.quota_type, 'to_alipay_dict'):
+                params['quota_type'] = self.quota_type.to_alipay_dict()
+            else:
+                params['quota_type'] = self.quota_type
         if self.target_id:
             if hasattr(self.target_id, 'to_alipay_dict'):
                 params['target_id'] = self.target_id.to_alipay_dict()
@@ -189,6 +202,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaQueryModel(object):
             o.page_size = d['page_size']
         if 'quota_id_list' in d:
             o.quota_id_list = d['quota_id_list']
+        if 'quota_type' in d:
+            o.quota_type = d['quota_type']
         if 'target_id' in d:
             o.target_id = d['target_id']
         if 'target_type' in d:

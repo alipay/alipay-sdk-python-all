@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 
 
 class CertificateUseResult(object):
 
     def __init__(self):
+        self._amount_info = None
         self._code = None
         self._encrypted_code = None
         self._msg = None
         self._result = None
         self._use_order_no = None
 
+    @property
+    def amount_info(self):
+        return self._amount_info
+
+    @amount_info.setter
+    def amount_info(self, value):
+        if isinstance(value, CertificateInstanceAmountInfo):
+            self._amount_info = value
+        else:
+            self._amount_info = CertificateInstanceAmountInfo.from_alipay_dict(value)
     @property
     def code(self):
         return self._code
@@ -53,6 +65,11 @@ class CertificateUseResult(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_info:
+            if hasattr(self.amount_info, 'to_alipay_dict'):
+                params['amount_info'] = self.amount_info.to_alipay_dict()
+            else:
+                params['amount_info'] = self.amount_info
         if self.code:
             if hasattr(self.code, 'to_alipay_dict'):
                 params['code'] = self.code.to_alipay_dict()
@@ -85,6 +102,8 @@ class CertificateUseResult(object):
         if not d:
             return None
         o = CertificateUseResult()
+        if 'amount_info' in d:
+            o.amount_info = d['amount_info']
         if 'code' in d:
             o.code = d['code']
         if 'encrypted_code' in d:

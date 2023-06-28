@@ -12,6 +12,7 @@ class ItemSkuSearchVO(object):
         self._barcode = None
         self._original_price = None
         self._out_sku_id = None
+        self._price_unit = None
         self._sale_price = None
         self._sale_status = None
         self._sku_attrs = None
@@ -40,6 +41,13 @@ class ItemSkuSearchVO(object):
     @out_sku_id.setter
     def out_sku_id(self, value):
         self._out_sku_id = value
+    @property
+    def price_unit(self):
+        return self._price_unit
+
+    @price_unit.setter
+    def price_unit(self, value):
+        self._price_unit = value
     @property
     def sale_price(self):
         return self._sale_price
@@ -107,6 +115,11 @@ class ItemSkuSearchVO(object):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
             else:
                 params['out_sku_id'] = self.out_sku_id
+        if self.price_unit:
+            if hasattr(self.price_unit, 'to_alipay_dict'):
+                params['price_unit'] = self.price_unit.to_alipay_dict()
+            else:
+                params['price_unit'] = self.price_unit
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -155,6 +168,8 @@ class ItemSkuSearchVO(object):
             o.original_price = d['original_price']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
+        if 'price_unit' in d:
+            o.price_unit = d['price_unit']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'sale_status' in d:

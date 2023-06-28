@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AAAAAtest import AAAAAtest
 
 
 class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
@@ -12,6 +13,9 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
         self._b = None
         self._c = None
         self._d = None
+        self._e = None
+        self._g = None
+        self._i = None
 
     @property
     def a(self):
@@ -41,6 +45,33 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
     @d.setter
     def d(self, value):
         self._d = value
+    @property
+    def e(self):
+        return self._e
+
+    @e.setter
+    def e(self, value):
+        self._e = value
+    @property
+    def g(self):
+        return self._g
+
+    @g.setter
+    def g(self, value):
+        if isinstance(value, AAAAAtest):
+            self._g = value
+        else:
+            self._g = AAAAAtest.from_alipay_dict(value)
+    @property
+    def i(self):
+        return self._i
+
+    @i.setter
+    def i(self, value):
+        if isinstance(value, list):
+            self._i = list()
+            for i in value:
+                self._i.append(i)
 
 
     def to_alipay_dict(self):
@@ -65,6 +96,26 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
                 params['d'] = self.d.to_alipay_dict()
             else:
                 params['d'] = self.d
+        if self.e:
+            if hasattr(self.e, 'to_alipay_dict'):
+                params['e'] = self.e.to_alipay_dict()
+            else:
+                params['e'] = self.e
+        if self.g:
+            if hasattr(self.g, 'to_alipay_dict'):
+                params['g'] = self.g.to_alipay_dict()
+            else:
+                params['g'] = self.g
+        if self.i:
+            if isinstance(self.i, list):
+                for i in range(0, len(self.i)):
+                    element = self.i[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.i[i] = element.to_alipay_dict()
+            if hasattr(self.i, 'to_alipay_dict'):
+                params['i'] = self.i.to_alipay_dict()
+            else:
+                params['i'] = self.i
         return params
 
     @staticmethod
@@ -80,6 +131,12 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
             o.c = d['c']
         if 'd' in d:
             o.d = d['d']
+        if 'e' in d:
+            o.e = d['e']
+        if 'g' in d:
+            o.g = d['g']
+        if 'i' in d:
+            o.i = d['i']
         return o
 
 

@@ -11,6 +11,7 @@ class AlipayEbppChargerGreenenergyPublishModel(object):
     def __init__(self):
         self._charge_order_info = None
         self._charge_power = None
+        self._openid = None
         self._operator_id = None
         self._order_type = None
         self._out_biz_no = None
@@ -35,6 +36,13 @@ class AlipayEbppChargerGreenenergyPublishModel(object):
     @charge_power.setter
     def charge_power(self, value):
         self._charge_power = value
+    @property
+    def openid(self):
+        return self._openid
+
+    @openid.setter
+    def openid(self, value):
+        self._openid = value
     @property
     def operator_id(self):
         return self._operator_id
@@ -91,6 +99,11 @@ class AlipayEbppChargerGreenenergyPublishModel(object):
                 params['charge_power'] = self.charge_power.to_alipay_dict()
             else:
                 params['charge_power'] = self.charge_power
+        if self.openid:
+            if hasattr(self.openid, 'to_alipay_dict'):
+                params['openid'] = self.openid.to_alipay_dict()
+            else:
+                params['openid'] = self.openid
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayEbppChargerGreenenergyPublishModel(object):
             o.charge_order_info = d['charge_order_info']
         if 'charge_power' in d:
             o.charge_power = d['charge_power']
+        if 'openid' in d:
+            o.openid = d['openid']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'order_type' in d:

@@ -19,6 +19,7 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._passback_params = None
         self._pay_date = None
         self._pay_fund_order_id = None
+        self._settle_serial_no = None
         self._status = None
         self._sub_order_error_code = None
         self._sub_order_fail_reason = None
@@ -97,6 +98,13 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def pay_fund_order_id(self, value):
         self._pay_fund_order_id = value
     @property
+    def settle_serial_no(self):
+        return self._settle_serial_no
+
+    @settle_serial_no.setter
+    def settle_serial_no(self, value):
+        self._settle_serial_no = value
+    @property
     def status(self):
         return self._status
 
@@ -161,6 +169,8 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.pay_date = response['pay_date']
         if 'pay_fund_order_id' in response:
             self.pay_fund_order_id = response['pay_fund_order_id']
+        if 'settle_serial_no' in response:
+            self.settle_serial_no = response['settle_serial_no']
         if 'status' in response:
             self.status = response['status']
         if 'sub_order_error_code' in response:

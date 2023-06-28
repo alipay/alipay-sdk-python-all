@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 
 
 class CertificateQueryInfo(object):
 
     def __init__(self):
+        self._amount_info = None
+        self._can_use = None
         self._certificate_id = None
         self._code = None
         self._sku_info = None
@@ -16,6 +19,23 @@ class CertificateQueryInfo(object):
         self._valid_begin_time = None
         self._valid_end_time = None
 
+    @property
+    def amount_info(self):
+        return self._amount_info
+
+    @amount_info.setter
+    def amount_info(self, value):
+        if isinstance(value, CertificateInstanceAmountInfo):
+            self._amount_info = value
+        else:
+            self._amount_info = CertificateInstanceAmountInfo.from_alipay_dict(value)
+    @property
+    def can_use(self):
+        return self._can_use
+
+    @can_use.setter
+    def can_use(self, value):
+        self._can_use = value
     @property
     def certificate_id(self):
         return self._certificate_id
@@ -65,6 +85,16 @@ class CertificateQueryInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_info:
+            if hasattr(self.amount_info, 'to_alipay_dict'):
+                params['amount_info'] = self.amount_info.to_alipay_dict()
+            else:
+                params['amount_info'] = self.amount_info
+        if self.can_use:
+            if hasattr(self.can_use, 'to_alipay_dict'):
+                params['can_use'] = self.can_use.to_alipay_dict()
+            else:
+                params['can_use'] = self.can_use
         if self.certificate_id:
             if hasattr(self.certificate_id, 'to_alipay_dict'):
                 params['certificate_id'] = self.certificate_id.to_alipay_dict()
@@ -102,6 +132,10 @@ class CertificateQueryInfo(object):
         if not d:
             return None
         o = CertificateQueryInfo()
+        if 'amount_info' in d:
+            o.amount_info = d['amount_info']
+        if 'can_use' in d:
+            o.can_use = d['can_use']
         if 'certificate_id' in d:
             o.certificate_id = d['certificate_id']
         if 'code' in d:

@@ -15,6 +15,7 @@ class BusinessParams(object):
         self._enterprise_pay_info = None
         self._good_taxes = None
         self._mc_create_trade_ip = None
+        self._tiny_app_merchant_biz_type = None
 
     @property
     def actual_order_time(self):
@@ -65,6 +66,13 @@ class BusinessParams(object):
     @mc_create_trade_ip.setter
     def mc_create_trade_ip(self, value):
         self._mc_create_trade_ip = value
+    @property
+    def tiny_app_merchant_biz_type(self):
+        return self._tiny_app_merchant_biz_type
+
+    @tiny_app_merchant_biz_type.setter
+    def tiny_app_merchant_biz_type(self, value):
+        self._tiny_app_merchant_biz_type = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class BusinessParams(object):
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip.to_alipay_dict()
             else:
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip
+        if self.tiny_app_merchant_biz_type:
+            if hasattr(self.tiny_app_merchant_biz_type, 'to_alipay_dict'):
+                params['tiny_app_merchant_biz_type'] = self.tiny_app_merchant_biz_type.to_alipay_dict()
+            else:
+                params['tiny_app_merchant_biz_type'] = self.tiny_app_merchant_biz_type
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class BusinessParams(object):
             o.good_taxes = d['good_taxes']
         if 'mc_create_trade_ip' in d:
             o.mc_create_trade_ip = d['mc_create_trade_ip']
+        if 'tiny_app_merchant_biz_type' in d:
+            o.tiny_app_merchant_biz_type = d['tiny_app_merchant_biz_type']
         return o
 
 

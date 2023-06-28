@@ -16,6 +16,7 @@ class ApeSearchContext(object):
         self._latitude = None
         self._longitude = None
         self._size = None
+        self._sort_type = None
         self._start_index = None
 
     @property
@@ -78,6 +79,13 @@ class ApeSearchContext(object):
     def size(self, value):
         self._size = value
     @property
+    def sort_type(self):
+        return self._sort_type
+
+    @sort_type.setter
+    def sort_type(self, value):
+        self._sort_type = value
+    @property
     def start_index(self):
         return self._start_index
 
@@ -133,6 +141,11 @@ class ApeSearchContext(object):
                 params['size'] = self.size.to_alipay_dict()
             else:
                 params['size'] = self.size
+        if self.sort_type:
+            if hasattr(self.sort_type, 'to_alipay_dict'):
+                params['sort_type'] = self.sort_type.to_alipay_dict()
+            else:
+                params['sort_type'] = self.sort_type
         if self.start_index:
             if hasattr(self.start_index, 'to_alipay_dict'):
                 params['start_index'] = self.start_index.to_alipay_dict()
@@ -161,6 +174,8 @@ class ApeSearchContext(object):
             o.longitude = d['longitude']
         if 'size' in d:
             o.size = d['size']
+        if 'sort_type' in d:
+            o.sort_type = d['sort_type']
         if 'start_index' in d:
             o.start_index = d['start_index']
         return o

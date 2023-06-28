@@ -10,6 +10,7 @@ class AlipayOpenMiniVersionOnlineModel(object):
     def __init__(self):
         self._app_version = None
         self._bundle_id = None
+        self._downgrade = None
 
     @property
     def app_version(self):
@@ -25,6 +26,13 @@ class AlipayOpenMiniVersionOnlineModel(object):
     @bundle_id.setter
     def bundle_id(self, value):
         self._bundle_id = value
+    @property
+    def downgrade(self):
+        return self._downgrade
+
+    @downgrade.setter
+    def downgrade(self, value):
+        self._downgrade = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AlipayOpenMiniVersionOnlineModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.downgrade:
+            if hasattr(self.downgrade, 'to_alipay_dict'):
+                params['downgrade'] = self.downgrade.to_alipay_dict()
+            else:
+                params['downgrade'] = self.downgrade
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AlipayOpenMiniVersionOnlineModel(object):
             o.app_version = d['app_version']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'downgrade' in d:
+            o.downgrade = d['downgrade']
         return o
 
 

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GeneralWithholdInfoDTO import GeneralWithholdInfoDTO
 
 
 class AlipayFundZcardprodUserBindModel(object):
@@ -11,6 +12,7 @@ class AlipayFundZcardprodUserBindModel(object):
         self._account_id = None
         self._biz_scene_code = None
         self._business_params = None
+        self._general_withhold_info = None
         self._identity = None
         self._identity_type = None
         self._out_card_no = None
@@ -38,6 +40,16 @@ class AlipayFundZcardprodUserBindModel(object):
     @business_params.setter
     def business_params(self, value):
         self._business_params = value
+    @property
+    def general_withhold_info(self):
+        return self._general_withhold_info
+
+    @general_withhold_info.setter
+    def general_withhold_info(self, value):
+        if isinstance(value, GeneralWithholdInfoDTO):
+            self._general_withhold_info = value
+        else:
+            self._general_withhold_info = GeneralWithholdInfoDTO.from_alipay_dict(value)
     @property
     def identity(self):
         return self._identity
@@ -92,6 +104,11 @@ class AlipayFundZcardprodUserBindModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.general_withhold_info:
+            if hasattr(self.general_withhold_info, 'to_alipay_dict'):
+                params['general_withhold_info'] = self.general_withhold_info.to_alipay_dict()
+            else:
+                params['general_withhold_info'] = self.general_withhold_info
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -130,6 +147,8 @@ class AlipayFundZcardprodUserBindModel(object):
             o.biz_scene_code = d['biz_scene_code']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'general_withhold_info' in d:
+            o.general_withhold_info = d['general_withhold_info']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_type' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.PayChannelPromoInfo import PayChannelPromoInfo
 
 
 class AlipayPayAppMarketingConsultResponse(AlipayResponse):
@@ -13,6 +14,7 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
         self._assign_discounts = None
         self._biz_tag = None
         self._blind_signature = None
+        self._channel_info_list = None
         self._confused_cipher_list = None
         self._image = None
         self._marketing_rank = None
@@ -48,6 +50,19 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
     @blind_signature.setter
     def blind_signature(self, value):
         self._blind_signature = value
+    @property
+    def channel_info_list(self):
+        return self._channel_info_list
+
+    @channel_info_list.setter
+    def channel_info_list(self, value):
+        if isinstance(value, list):
+            self._channel_info_list = list()
+            for i in value:
+                if isinstance(i, PayChannelPromoInfo):
+                    self._channel_info_list.append(i)
+                else:
+                    self._channel_info_list.append(PayChannelPromoInfo.from_alipay_dict(i))
     @property
     def confused_cipher_list(self):
         return self._confused_cipher_list
@@ -104,6 +119,8 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             self.biz_tag = response['biz_tag']
         if 'blind_signature' in response:
             self.blind_signature = response['blind_signature']
+        if 'channel_info_list' in response:
+            self.channel_info_list = response['channel_info_list']
         if 'confused_cipher_list' in response:
             self.confused_cipher_list = response['confused_cipher_list']
         if 'image' in response:

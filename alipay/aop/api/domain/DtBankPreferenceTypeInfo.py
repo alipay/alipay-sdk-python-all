@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.DtBankPreferenceDiscountRule import DtBankPreferenceDiscountRule
 from alipay.aop.api.domain.DtBankPreferenceIntelligentRule import DtBankPreferenceIntelligentRule
+from alipay.aop.api.domain.DtBankPreferenceMultiStagedRule import DtBankPreferenceMultiStagedRule
 from alipay.aop.api.domain.DtBankPreferenceRandomRule import DtBankPreferenceRandomRule
 from alipay.aop.api.domain.DtBankPreferenceSingleRule import DtBankPreferenceSingleRule
 
@@ -14,6 +15,7 @@ class DtBankPreferenceTypeInfo(object):
     def __init__(self):
         self._discount_rule = None
         self._intelligent_rule = None
+        self._multi_staged_rule = None
         self._preference_type = None
         self._random_rule = None
         self._single_rule = None
@@ -39,6 +41,16 @@ class DtBankPreferenceTypeInfo(object):
             self._intelligent_rule = value
         else:
             self._intelligent_rule = DtBankPreferenceIntelligentRule.from_alipay_dict(value)
+    @property
+    def multi_staged_rule(self):
+        return self._multi_staged_rule
+
+    @multi_staged_rule.setter
+    def multi_staged_rule(self, value):
+        if isinstance(value, DtBankPreferenceMultiStagedRule):
+            self._multi_staged_rule = value
+        else:
+            self._multi_staged_rule = DtBankPreferenceMultiStagedRule.from_alipay_dict(value)
     @property
     def preference_type(self):
         return self._preference_type
@@ -87,6 +99,11 @@ class DtBankPreferenceTypeInfo(object):
                 params['intelligent_rule'] = self.intelligent_rule.to_alipay_dict()
             else:
                 params['intelligent_rule'] = self.intelligent_rule
+        if self.multi_staged_rule:
+            if hasattr(self.multi_staged_rule, 'to_alipay_dict'):
+                params['multi_staged_rule'] = self.multi_staged_rule.to_alipay_dict()
+            else:
+                params['multi_staged_rule'] = self.multi_staged_rule
         if self.preference_type:
             if hasattr(self.preference_type, 'to_alipay_dict'):
                 params['preference_type'] = self.preference_type.to_alipay_dict()
@@ -118,6 +135,8 @@ class DtBankPreferenceTypeInfo(object):
             o.discount_rule = d['discount_rule']
         if 'intelligent_rule' in d:
             o.intelligent_rule = d['intelligent_rule']
+        if 'multi_staged_rule' in d:
+            o.multi_staged_rule = d['multi_staged_rule']
         if 'preference_type' in d:
             o.preference_type = d['preference_type']
         if 'random_rule' in d:

@@ -16,6 +16,7 @@ class AlipayPayAppMarketingConsultModel(object):
         self._device_type = None
         self._encrypted_mobile = None
         self._goods_detail = None
+        self._history_alipay_trade_no = None
         self._merchant_user_id = None
         self._mobile = None
         self._need_query_anti_rank = None
@@ -88,6 +89,13 @@ class AlipayPayAppMarketingConsultModel(object):
                     self._goods_detail.append(i)
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
+    @property
+    def history_alipay_trade_no(self):
+        return self._history_alipay_trade_no
+
+    @history_alipay_trade_no.setter
+    def history_alipay_trade_no(self, value):
+        self._history_alipay_trade_no = value
     @property
     def merchant_user_id(self):
         return self._merchant_user_id
@@ -228,6 +236,11 @@ class AlipayPayAppMarketingConsultModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.history_alipay_trade_no:
+            if hasattr(self.history_alipay_trade_no, 'to_alipay_dict'):
+                params['history_alipay_trade_no'] = self.history_alipay_trade_no.to_alipay_dict()
+            else:
+                params['history_alipay_trade_no'] = self.history_alipay_trade_no
         if self.merchant_user_id:
             if hasattr(self.merchant_user_id, 'to_alipay_dict'):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
@@ -314,6 +327,8 @@ class AlipayPayAppMarketingConsultModel(object):
             o.encrypted_mobile = d['encrypted_mobile']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'history_alipay_trade_no' in d:
+            o.history_alipay_trade_no = d['history_alipay_trade_no']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
         if 'mobile' in d:

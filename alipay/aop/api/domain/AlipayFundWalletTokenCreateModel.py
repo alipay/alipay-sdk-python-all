@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFundWalletTokenCreateModel(object):
 
     def __init__(self):
+        self._agreement_pay_sign = None
         self._biz_scene = None
         self._identity = None
         self._identity_type = None
@@ -16,6 +17,13 @@ class AlipayFundWalletTokenCreateModel(object):
         self._real_name = None
         self._wallet_template_id = None
 
+    @property
+    def agreement_pay_sign(self):
+        return self._agreement_pay_sign
+
+    @agreement_pay_sign.setter
+    def agreement_pay_sign(self, value):
+        self._agreement_pay_sign = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -69,6 +77,11 @@ class AlipayFundWalletTokenCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_pay_sign:
+            if hasattr(self.agreement_pay_sign, 'to_alipay_dict'):
+                params['agreement_pay_sign'] = self.agreement_pay_sign.to_alipay_dict()
+            else:
+                params['agreement_pay_sign'] = self.agreement_pay_sign
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -111,6 +124,8 @@ class AlipayFundWalletTokenCreateModel(object):
         if not d:
             return None
         o = AlipayFundWalletTokenCreateModel()
+        if 'agreement_pay_sign' in d:
+            o.agreement_pay_sign = d['agreement_pay_sign']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'identity' in d:

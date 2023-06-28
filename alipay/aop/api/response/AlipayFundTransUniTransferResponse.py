@@ -12,6 +12,7 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
         self._order_id = None
         self._out_biz_no = None
         self._pay_fund_order_id = None
+        self._settle_serial_no = None
         self._status = None
         self._trans_date = None
 
@@ -37,6 +38,13 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
     def pay_fund_order_id(self, value):
         self._pay_fund_order_id = value
     @property
+    def settle_serial_no(self):
+        return self._settle_serial_no
+
+    @settle_serial_no.setter
+    def settle_serial_no(self, value):
+        self._settle_serial_no = value
+    @property
     def status(self):
         return self._status
 
@@ -59,6 +67,8 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
             self.out_biz_no = response['out_biz_no']
         if 'pay_fund_order_id' in response:
             self.pay_fund_order_id = response['pay_fund_order_id']
+        if 'settle_serial_no' in response:
+            self.settle_serial_no = response['settle_serial_no']
         if 'status' in response:
             self.status = response['status']
         if 'trans_date' in response:

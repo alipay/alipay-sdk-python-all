@@ -12,6 +12,7 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
         self._biz_scene = None
         self._expire_time = None
         self._out_biz_no = None
+        self._out_open_id = None
         self._pay_amount = None
         self._sub_merchant_id = None
 
@@ -43,6 +44,13 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def out_open_id(self):
+        return self._out_open_id
+
+    @out_open_id.setter
+    def out_open_id(self, value):
+        self._out_open_id = value
     @property
     def pay_amount(self):
         return self._pay_amount
@@ -81,6 +89,11 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.out_open_id:
+            if hasattr(self.out_open_id, 'to_alipay_dict'):
+                params['out_open_id'] = self.out_open_id.to_alipay_dict()
+            else:
+                params['out_open_id'] = self.out_open_id
         if self.pay_amount:
             if hasattr(self.pay_amount, 'to_alipay_dict'):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
             o.expire_time = d['expire_time']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'out_open_id' in d:
+            o.out_open_id = d['out_open_id']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
         if 'sub_merchant_id' in d:

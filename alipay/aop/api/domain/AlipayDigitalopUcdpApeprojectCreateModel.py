@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ApeRecommendStrategy import ApeRecommendStrategy
 
 
 class AlipayDigitalopUcdpApeprojectCreateModel(object):
@@ -13,7 +14,9 @@ class AlipayDigitalopUcdpApeprojectCreateModel(object):
         self._merchant_id = None
         self._mini_app_id = None
         self._org_id = None
+        self._project_id = None
         self._project_name = None
+        self._recommend_strategy = None
         self._template_code = None
 
     @property
@@ -52,12 +55,29 @@ class AlipayDigitalopUcdpApeprojectCreateModel(object):
     def org_id(self, value):
         self._org_id = value
     @property
+    def project_id(self):
+        return self._project_id
+
+    @project_id.setter
+    def project_id(self, value):
+        self._project_id = value
+    @property
     def project_name(self):
         return self._project_name
 
     @project_name.setter
     def project_name(self, value):
         self._project_name = value
+    @property
+    def recommend_strategy(self):
+        return self._recommend_strategy
+
+    @recommend_strategy.setter
+    def recommend_strategy(self, value):
+        if isinstance(value, ApeRecommendStrategy):
+            self._recommend_strategy = value
+        else:
+            self._recommend_strategy = ApeRecommendStrategy.from_alipay_dict(value)
     @property
     def template_code(self):
         return self._template_code
@@ -94,11 +114,21 @@ class AlipayDigitalopUcdpApeprojectCreateModel(object):
                 params['org_id'] = self.org_id.to_alipay_dict()
             else:
                 params['org_id'] = self.org_id
+        if self.project_id:
+            if hasattr(self.project_id, 'to_alipay_dict'):
+                params['project_id'] = self.project_id.to_alipay_dict()
+            else:
+                params['project_id'] = self.project_id
         if self.project_name:
             if hasattr(self.project_name, 'to_alipay_dict'):
                 params['project_name'] = self.project_name.to_alipay_dict()
             else:
                 params['project_name'] = self.project_name
+        if self.recommend_strategy:
+            if hasattr(self.recommend_strategy, 'to_alipay_dict'):
+                params['recommend_strategy'] = self.recommend_strategy.to_alipay_dict()
+            else:
+                params['recommend_strategy'] = self.recommend_strategy
         if self.template_code:
             if hasattr(self.template_code, 'to_alipay_dict'):
                 params['template_code'] = self.template_code.to_alipay_dict()
@@ -121,8 +151,12 @@ class AlipayDigitalopUcdpApeprojectCreateModel(object):
             o.mini_app_id = d['mini_app_id']
         if 'org_id' in d:
             o.org_id = d['org_id']
+        if 'project_id' in d:
+            o.project_id = d['project_id']
         if 'project_name' in d:
             o.project_name = d['project_name']
+        if 'recommend_strategy' in d:
+            o.recommend_strategy = d['recommend_strategy']
         if 'template_code' in d:
             o.template_code = d['template_code']
         return o

@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class TestDemo(object):
 
     def __init__(self):
+        self._a_uid = None
         self._open_id = None
         self._string_yingshe = None
         self._string_yingshe_1_open_id = None
         self._string_yingshe_2_openid = None
         self._uid = None
 
+    @property
+    def a_uid(self):
+        return self._a_uid
+
+    @a_uid.setter
+    def a_uid(self, value):
+        self._a_uid = value
     @property
     def open_id(self):
         return self._open_id
@@ -53,6 +61,11 @@ class TestDemo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.a_uid:
+            if hasattr(self.a_uid, 'to_alipay_dict'):
+                params['a_uid'] = self.a_uid.to_alipay_dict()
+            else:
+                params['a_uid'] = self.a_uid
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -85,6 +98,8 @@ class TestDemo(object):
         if not d:
             return None
         o = TestDemo()
+        if 'a_uid' in d:
+            o.a_uid = d['a_uid']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'string_yingshe' in d:
