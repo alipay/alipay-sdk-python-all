@@ -13,6 +13,7 @@ class AlipayOpenAppServiceBizabilitydataSetModel(object):
         self._batch_no = None
         self._category = None
         self._data_list = None
+        self._service_code = None
         self._type = None
 
     @property
@@ -50,6 +51,13 @@ class AlipayOpenAppServiceBizabilitydataSetModel(object):
                 else:
                     self._data_list.append(BizAbilityData.from_alipay_dict(i))
     @property
+    def service_code(self):
+        return self._service_code
+
+    @service_code.setter
+    def service_code(self, value):
+        self._service_code = value
+    @property
     def type(self):
         return self._type
 
@@ -85,6 +93,11 @@ class AlipayOpenAppServiceBizabilitydataSetModel(object):
                 params['data_list'] = self.data_list.to_alipay_dict()
             else:
                 params['data_list'] = self.data_list
+        if self.service_code:
+            if hasattr(self.service_code, 'to_alipay_dict'):
+                params['service_code'] = self.service_code.to_alipay_dict()
+            else:
+                params['service_code'] = self.service_code
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -105,6 +118,8 @@ class AlipayOpenAppServiceBizabilitydataSetModel(object):
             o.category = d['category']
         if 'data_list' in d:
             o.data_list = d['data_list']
+        if 'service_code' in d:
+            o.service_code = d['service_code']
         if 'type' in d:
             o.type = d['type']
         return o

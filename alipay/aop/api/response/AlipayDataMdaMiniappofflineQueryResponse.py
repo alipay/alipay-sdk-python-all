@@ -12,6 +12,10 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
         self._journey_planning = None
         self._journey_planning_trend = None
         self._match_focus = None
+        self._obtain_pass = None
+        self._pass_travel_user_cnt = None
+        self._pass_travel_user_trend = None
+        self._pass_use_scene = None
         self._ticket_service = None
         self._use_pass = None
         self._user_distribution = None
@@ -37,6 +41,34 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
     @match_focus.setter
     def match_focus(self, value):
         self._match_focus = value
+    @property
+    def obtain_pass(self):
+        return self._obtain_pass
+
+    @obtain_pass.setter
+    def obtain_pass(self, value):
+        self._obtain_pass = value
+    @property
+    def pass_travel_user_cnt(self):
+        return self._pass_travel_user_cnt
+
+    @pass_travel_user_cnt.setter
+    def pass_travel_user_cnt(self, value):
+        self._pass_travel_user_cnt = value
+    @property
+    def pass_travel_user_trend(self):
+        return self._pass_travel_user_trend
+
+    @pass_travel_user_trend.setter
+    def pass_travel_user_trend(self, value):
+        self._pass_travel_user_trend = value
+    @property
+    def pass_use_scene(self):
+        return self._pass_use_scene
+
+    @pass_use_scene.setter
+    def pass_use_scene(self, value):
+        self._pass_use_scene = value
     @property
     def ticket_service(self):
         return self._ticket_service
@@ -67,6 +99,14 @@ class AlipayDataMdaMiniappofflineQueryResponse(AlipayResponse):
             self.journey_planning_trend = response['journey_planning_trend']
         if 'match_focus' in response:
             self.match_focus = response['match_focus']
+        if 'obtain_pass' in response:
+            self.obtain_pass = response['obtain_pass']
+        if 'pass_travel_user_cnt' in response:
+            self.pass_travel_user_cnt = response['pass_travel_user_cnt']
+        if 'pass_travel_user_trend' in response:
+            self.pass_travel_user_trend = response['pass_travel_user_trend']
+        if 'pass_use_scene' in response:
+            self.pass_use_scene = response['pass_use_scene']
         if 'ticket_service' in response:
             self.ticket_service = response['ticket_service']
         if 'use_pass' in response:

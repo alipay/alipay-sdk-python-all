@@ -10,6 +10,7 @@ class TradeSettleInfo(object):
 
     def __init__(self):
         self._trade_settle_detail_list = None
+        self._trade_unsettled_amount = None
 
     @property
     def trade_settle_detail_list(self):
@@ -24,6 +25,13 @@ class TradeSettleInfo(object):
                     self._trade_settle_detail_list.append(i)
                 else:
                     self._trade_settle_detail_list.append(TradeSettleDetail.from_alipay_dict(i))
+    @property
+    def trade_unsettled_amount(self):
+        return self._trade_unsettled_amount
+
+    @trade_unsettled_amount.setter
+    def trade_unsettled_amount(self, value):
+        self._trade_unsettled_amount = value
 
 
     def to_alipay_dict(self):
@@ -38,6 +46,11 @@ class TradeSettleInfo(object):
                 params['trade_settle_detail_list'] = self.trade_settle_detail_list.to_alipay_dict()
             else:
                 params['trade_settle_detail_list'] = self.trade_settle_detail_list
+        if self.trade_unsettled_amount:
+            if hasattr(self.trade_unsettled_amount, 'to_alipay_dict'):
+                params['trade_unsettled_amount'] = self.trade_unsettled_amount.to_alipay_dict()
+            else:
+                params['trade_unsettled_amount'] = self.trade_unsettled_amount
         return params
 
     @staticmethod
@@ -47,6 +60,8 @@ class TradeSettleInfo(object):
         o = TradeSettleInfo()
         if 'trade_settle_detail_list' in d:
             o.trade_settle_detail_list = d['trade_settle_detail_list']
+        if 'trade_unsettled_amount' in d:
+            o.trade_unsettled_amount = d['trade_unsettled_amount']
         return o
 
 

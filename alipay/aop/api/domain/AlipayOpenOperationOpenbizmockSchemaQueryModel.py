@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TestDemo import TestDemo
 from alipay.aop.api.domain.TestDemoWzw import TestDemoWzw
 
 
@@ -12,10 +13,12 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
         self._a = None
         self._b = None
         self._c = None
+        self._complex_a = None
         self._fuza = None
         self._id_type = None
         self._open_id = None
         self._uid = None
+        self._uid_a = None
 
     @property
     def a(self):
@@ -38,6 +41,16 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
     @c.setter
     def c(self, value):
         self._c = value
+    @property
+    def complex_a(self):
+        return self._complex_a
+
+    @complex_a.setter
+    def complex_a(self, value):
+        if isinstance(value, TestDemo):
+            self._complex_a = value
+        else:
+            self._complex_a = TestDemo.from_alipay_dict(value)
     @property
     def fuza(self):
         return self._fuza
@@ -69,6 +82,13 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
     @uid.setter
     def uid(self, value):
         self._uid = value
+    @property
+    def uid_a(self):
+        return self._uid_a
+
+    @uid_a.setter
+    def uid_a(self, value):
+        self._uid_a = value
 
 
     def to_alipay_dict(self):
@@ -88,6 +108,11 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
                 params['c'] = self.c.to_alipay_dict()
             else:
                 params['c'] = self.c
+        if self.complex_a:
+            if hasattr(self.complex_a, 'to_alipay_dict'):
+                params['complex_a'] = self.complex_a.to_alipay_dict()
+            else:
+                params['complex_a'] = self.complex_a
         if self.fuza:
             if hasattr(self.fuza, 'to_alipay_dict'):
                 params['fuza'] = self.fuza.to_alipay_dict()
@@ -108,6 +133,11 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
                 params['uid'] = self.uid.to_alipay_dict()
             else:
                 params['uid'] = self.uid
+        if self.uid_a:
+            if hasattr(self.uid_a, 'to_alipay_dict'):
+                params['uid_a'] = self.uid_a.to_alipay_dict()
+            else:
+                params['uid_a'] = self.uid_a
         return params
 
     @staticmethod
@@ -121,6 +151,8 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
             o.b = d['b']
         if 'c' in d:
             o.c = d['c']
+        if 'complex_a' in d:
+            o.complex_a = d['complex_a']
         if 'fuza' in d:
             o.fuza = d['fuza']
         if 'id_type' in d:
@@ -129,6 +161,8 @@ class AlipayOpenOperationOpenbizmockSchemaQueryModel(object):
             o.open_id = d['open_id']
         if 'uid' in d:
             o.uid = d['uid']
+        if 'uid_a' in d:
+            o.uid_a = d['uid_a']
         return o
 
 

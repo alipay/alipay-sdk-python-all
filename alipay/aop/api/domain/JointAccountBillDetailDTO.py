@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.UserAssetInfoVO import UserAssetInfoVO
 
 
 class JointAccountBillDetailDTO(object):
@@ -16,6 +17,7 @@ class JointAccountBillDetailDTO(object):
         self._in_out = None
         self._open_id = None
         self._out_trade_no = None
+        self._payer_asset_info = None
         self._seller_full_name = None
         self._seller_logon_id = None
         self._title = None
@@ -77,6 +79,16 @@ class JointAccountBillDetailDTO(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def payer_asset_info(self):
+        return self._payer_asset_info
+
+    @payer_asset_info.setter
+    def payer_asset_info(self, value):
+        if isinstance(value, UserAssetInfoVO):
+            self._payer_asset_info = value
+        else:
+            self._payer_asset_info = UserAssetInfoVO.from_alipay_dict(value)
     @property
     def seller_full_name(self):
         return self._seller_full_name
@@ -149,6 +161,11 @@ class JointAccountBillDetailDTO(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.payer_asset_info:
+            if hasattr(self.payer_asset_info, 'to_alipay_dict'):
+                params['payer_asset_info'] = self.payer_asset_info.to_alipay_dict()
+            else:
+                params['payer_asset_info'] = self.payer_asset_info
         if self.seller_full_name:
             if hasattr(self.seller_full_name, 'to_alipay_dict'):
                 params['seller_full_name'] = self.seller_full_name.to_alipay_dict()
@@ -192,6 +209,8 @@ class JointAccountBillDetailDTO(object):
             o.open_id = d['open_id']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'payer_asset_info' in d:
+            o.payer_asset_info = d['payer_asset_info']
         if 'seller_full_name' in d:
             o.seller_full_name = d['seller_full_name']
         if 'seller_logon_id' in d:

@@ -14,10 +14,12 @@ class InvoiceApplyOpenApi(object):
         self._duty_free_type = None
         self._fee_interval_format_str = None
         self._inst_id = None
+        self._inv_dt = None
         self._invoice_date = None
         self._invoice_product_name = None
         self._invoice_product_name_suffix = None
         self._invoice_specification = None
+        self._invoice_type = None
         self._ip_id = None
         self._ip_role_id = None
         self._out_biz_no = None
@@ -70,6 +72,13 @@ class InvoiceApplyOpenApi(object):
     def inst_id(self, value):
         self._inst_id = value
     @property
+    def inv_dt(self):
+        return self._inv_dt
+
+    @inv_dt.setter
+    def inv_dt(self, value):
+        self._inv_dt = value
+    @property
     def invoice_date(self):
         return self._invoice_date
 
@@ -97,6 +106,13 @@ class InvoiceApplyOpenApi(object):
     @invoice_specification.setter
     def invoice_specification(self, value):
         self._invoice_specification = value
+    @property
+    def invoice_type(self):
+        return self._invoice_type
+
+    @invoice_type.setter
+    def invoice_type(self, value):
+        self._invoice_type = value
     @property
     def ip_id(self):
         return self._ip_id
@@ -210,6 +226,11 @@ class InvoiceApplyOpenApi(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.inv_dt:
+            if hasattr(self.inv_dt, 'to_alipay_dict'):
+                params['inv_dt'] = self.inv_dt.to_alipay_dict()
+            else:
+                params['inv_dt'] = self.inv_dt
         if self.invoice_date:
             if hasattr(self.invoice_date, 'to_alipay_dict'):
                 params['invoice_date'] = self.invoice_date.to_alipay_dict()
@@ -230,6 +251,11 @@ class InvoiceApplyOpenApi(object):
                 params['invoice_specification'] = self.invoice_specification.to_alipay_dict()
             else:
                 params['invoice_specification'] = self.invoice_specification
+        if self.invoice_type:
+            if hasattr(self.invoice_type, 'to_alipay_dict'):
+                params['invoice_type'] = self.invoice_type.to_alipay_dict()
+            else:
+                params['invoice_type'] = self.invoice_type
         if self.ip_id:
             if hasattr(self.ip_id, 'to_alipay_dict'):
                 params['ip_id'] = self.ip_id.to_alipay_dict()
@@ -307,6 +333,8 @@ class InvoiceApplyOpenApi(object):
             o.fee_interval_format_str = d['fee_interval_format_str']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'inv_dt' in d:
+            o.inv_dt = d['inv_dt']
         if 'invoice_date' in d:
             o.invoice_date = d['invoice_date']
         if 'invoice_product_name' in d:
@@ -315,6 +343,8 @@ class InvoiceApplyOpenApi(object):
             o.invoice_product_name_suffix = d['invoice_product_name_suffix']
         if 'invoice_specification' in d:
             o.invoice_specification = d['invoice_specification']
+        if 'invoice_type' in d:
+            o.invoice_type = d['invoice_type']
         if 'ip_id' in d:
             o.ip_id = d['ip_id']
         if 'ip_role_id' in d:

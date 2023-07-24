@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.OrderItemInfoVO import OrderItemInfoVO
 from alipay.aop.api.domain.PayInfoVO import PayInfoVO
 from alipay.aop.api.domain.PriceInfoVO import PriceInfoVO
+from alipay.aop.api.domain.PromoApplyInfoVO import PromoApplyInfoVO
 
 
 class OrderDetailInfoVO(object):
@@ -14,6 +15,7 @@ class OrderDetailInfoVO(object):
         self._item_infos = None
         self._pay_info = None
         self._price_info = None
+        self._promo_apply_info = None
 
     @property
     def item_infos(self):
@@ -48,6 +50,16 @@ class OrderDetailInfoVO(object):
             self._price_info = value
         else:
             self._price_info = PriceInfoVO.from_alipay_dict(value)
+    @property
+    def promo_apply_info(self):
+        return self._promo_apply_info
+
+    @promo_apply_info.setter
+    def promo_apply_info(self, value):
+        if isinstance(value, PromoApplyInfoVO):
+            self._promo_apply_info = value
+        else:
+            self._promo_apply_info = PromoApplyInfoVO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -72,6 +84,11 @@ class OrderDetailInfoVO(object):
                 params['price_info'] = self.price_info.to_alipay_dict()
             else:
                 params['price_info'] = self.price_info
+        if self.promo_apply_info:
+            if hasattr(self.promo_apply_info, 'to_alipay_dict'):
+                params['promo_apply_info'] = self.promo_apply_info.to_alipay_dict()
+            else:
+                params['promo_apply_info'] = self.promo_apply_info
         return params
 
     @staticmethod
@@ -85,6 +102,8 @@ class OrderDetailInfoVO(object):
             o.pay_info = d['pay_info']
         if 'price_info' in d:
             o.price_info = d['price_info']
+        if 'promo_apply_info' in d:
+            o.promo_apply_info = d['promo_apply_info']
         return o
 
 

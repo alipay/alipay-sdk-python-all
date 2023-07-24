@@ -10,10 +10,18 @@ from alipay.aop.api.domain.ManjiangTestLevelTwoData import ManjiangTestLevelTwoD
 class ManjiangTestThreeData(object):
 
     def __init__(self):
+        self._new_field = None
         self._test_complex = None
         self._test_complex_1 = None
         self._test_level_three = None
 
+    @property
+    def new_field(self):
+        return self._new_field
+
+    @new_field.setter
+    def new_field(self, value):
+        self._new_field = value
     @property
     def test_complex(self):
         return self._test_complex
@@ -45,6 +53,11 @@ class ManjiangTestThreeData(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.new_field:
+            if hasattr(self.new_field, 'to_alipay_dict'):
+                params['new_field'] = self.new_field.to_alipay_dict()
+            else:
+                params['new_field'] = self.new_field
         if self.test_complex:
             if hasattr(self.test_complex, 'to_alipay_dict'):
                 params['test_complex'] = self.test_complex.to_alipay_dict()
@@ -67,6 +80,8 @@ class ManjiangTestThreeData(object):
         if not d:
             return None
         o = ManjiangTestThreeData()
+        if 'new_field' in d:
+            o.new_field = d['new_field']
         if 'test_complex' in d:
             o.test_complex = d['test_complex']
         if 'test_complex_1' in d:

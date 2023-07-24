@@ -20,6 +20,7 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
         self._ep_name = None
         self._link_type = None
         self._merchant_request_id = None
+        self._product_code = None
 
     @property
     def agreement_info_list(self):
@@ -104,6 +105,13 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
     @merchant_request_id.setter
     def merchant_request_id(self, value):
         self._merchant_request_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
 
 
     def to_alipay_dict(self):
@@ -168,6 +176,11 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
                 params['merchant_request_id'] = self.merchant_request_id.to_alipay_dict()
             else:
                 params['merchant_request_id'] = self.merchant_request_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         return params
 
     @staticmethod
@@ -197,6 +210,8 @@ class ZhimaCreditEpCreditlinkAuthCreateModel(object):
             o.link_type = d['link_type']
         if 'merchant_request_id' in d:
             o.merchant_request_id = d['merchant_request_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         return o
 
 

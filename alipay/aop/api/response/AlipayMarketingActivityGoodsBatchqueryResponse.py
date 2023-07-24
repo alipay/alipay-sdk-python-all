@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AppItemInfo import AppItemInfo
 from alipay.aop.api.domain.ActivityGoodsInfo import ActivityGoodsInfo
 
 
@@ -11,6 +12,7 @@ class AlipayMarketingActivityGoodsBatchqueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMarketingActivityGoodsBatchqueryResponse, self).__init__()
         self._activity_id = None
+        self._app_item_infos = None
         self._goods_infos = None
         self._page_num = None
         self._page_size = None
@@ -23,6 +25,19 @@ class AlipayMarketingActivityGoodsBatchqueryResponse(AlipayResponse):
     @activity_id.setter
     def activity_id(self, value):
         self._activity_id = value
+    @property
+    def app_item_infos(self):
+        return self._app_item_infos
+
+    @app_item_infos.setter
+    def app_item_infos(self, value):
+        if isinstance(value, list):
+            self._app_item_infos = list()
+            for i in value:
+                if isinstance(i, AppItemInfo):
+                    self._app_item_infos.append(i)
+                else:
+                    self._app_item_infos.append(AppItemInfo.from_alipay_dict(i))
     @property
     def goods_infos(self):
         return self._goods_infos
@@ -62,6 +77,8 @@ class AlipayMarketingActivityGoodsBatchqueryResponse(AlipayResponse):
         response = super(AlipayMarketingActivityGoodsBatchqueryResponse, self).parse_response_content(response_content)
         if 'activity_id' in response:
             self.activity_id = response['activity_id']
+        if 'app_item_infos' in response:
+            self.app_item_infos = response['app_item_infos']
         if 'goods_infos' in response:
             self.goods_infos = response['goods_infos']
         if 'page_num' in response:

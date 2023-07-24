@@ -14,6 +14,7 @@ from alipay.aop.api.domain.GFAOpenAPIOuterTaxInfo import GFAOpenAPIOuterTaxInfo
 class GFAOpenAPIBillAcceptance(object):
 
     def __init__(self):
+        self._accept_uniq_no = None
         self._amortize_ext_info = None
         self._ar_no = None
         self._bill_amount = None
@@ -26,6 +27,7 @@ class GFAOpenAPIBillAcceptance(object):
         self._gmt_pay = None
         self._gmt_receive = None
         self._gmt_service = None
+        self._high_precision_bill_amount = None
         self._nonpayment_amount = None
         self._out_business_no = None
         self._outer_tax_source = None
@@ -45,6 +47,13 @@ class GFAOpenAPIBillAcceptance(object):
         self._tax_info = None
         self._tnt_inst_id = None
 
+    @property
+    def accept_uniq_no(self):
+        return self._accept_uniq_no
+
+    @accept_uniq_no.setter
+    def accept_uniq_no(self, value):
+        self._accept_uniq_no = value
     @property
     def amortize_ext_info(self):
         return self._amortize_ext_info
@@ -132,6 +141,13 @@ class GFAOpenAPIBillAcceptance(object):
     @gmt_service.setter
     def gmt_service(self, value):
         self._gmt_service = value
+    @property
+    def high_precision_bill_amount(self):
+        return self._high_precision_bill_amount
+
+    @high_precision_bill_amount.setter
+    def high_precision_bill_amount(self, value):
+        self._high_precision_bill_amount = value
     @property
     def nonpayment_amount(self):
         return self._nonpayment_amount
@@ -277,6 +293,11 @@ class GFAOpenAPIBillAcceptance(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accept_uniq_no:
+            if hasattr(self.accept_uniq_no, 'to_alipay_dict'):
+                params['accept_uniq_no'] = self.accept_uniq_no.to_alipay_dict()
+            else:
+                params['accept_uniq_no'] = self.accept_uniq_no
         if self.amortize_ext_info:
             if hasattr(self.amortize_ext_info, 'to_alipay_dict'):
                 params['amortize_ext_info'] = self.amortize_ext_info.to_alipay_dict()
@@ -337,6 +358,11 @@ class GFAOpenAPIBillAcceptance(object):
                 params['gmt_service'] = self.gmt_service.to_alipay_dict()
             else:
                 params['gmt_service'] = self.gmt_service
+        if self.high_precision_bill_amount:
+            if hasattr(self.high_precision_bill_amount, 'to_alipay_dict'):
+                params['high_precision_bill_amount'] = self.high_precision_bill_amount.to_alipay_dict()
+            else:
+                params['high_precision_bill_amount'] = self.high_precision_bill_amount
         if self.nonpayment_amount:
             if hasattr(self.nonpayment_amount, 'to_alipay_dict'):
                 params['nonpayment_amount'] = self.nonpayment_amount.to_alipay_dict()
@@ -434,6 +460,8 @@ class GFAOpenAPIBillAcceptance(object):
         if not d:
             return None
         o = GFAOpenAPIBillAcceptance()
+        if 'accept_uniq_no' in d:
+            o.accept_uniq_no = d['accept_uniq_no']
         if 'amortize_ext_info' in d:
             o.amortize_ext_info = d['amortize_ext_info']
         if 'ar_no' in d:
@@ -458,6 +486,8 @@ class GFAOpenAPIBillAcceptance(object):
             o.gmt_receive = d['gmt_receive']
         if 'gmt_service' in d:
             o.gmt_service = d['gmt_service']
+        if 'high_precision_bill_amount' in d:
+            o.high_precision_bill_amount = d['high_precision_bill_amount']
         if 'nonpayment_amount' in d:
             o.nonpayment_amount = d['nonpayment_amount']
         if 'out_business_no' in d:

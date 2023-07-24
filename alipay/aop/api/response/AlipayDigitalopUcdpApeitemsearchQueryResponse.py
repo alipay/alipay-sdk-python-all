@@ -10,9 +10,17 @@ class AlipayDigitalopUcdpApeitemsearchQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayDigitalopUcdpApeitemsearchQueryResponse, self).__init__()
+        self._item_total_count = None
         self._items = None
         self._trace_id = None
 
+    @property
+    def item_total_count(self):
+        return self._item_total_count
+
+    @item_total_count.setter
+    def item_total_count(self, value):
+        self._item_total_count = value
     @property
     def items(self):
         return self._items
@@ -36,6 +44,8 @@ class AlipayDigitalopUcdpApeitemsearchQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayDigitalopUcdpApeitemsearchQueryResponse, self).parse_response_content(response_content)
+        if 'item_total_count' in response:
+            self.item_total_count = response['item_total_count']
         if 'items' in response:
             self.items = response['items']
         if 'trace_id' in response:

@@ -13,6 +13,7 @@ class AssetBom(object):
     def __init__(self):
         self._asset_sub_type = None
         self._attributes = None
+        self._biz_type = None
         self._bom_items = None
         self._effect_img = None
         self._include_qrcode = None
@@ -20,7 +21,9 @@ class AssetBom(object):
         self._item_id = None
         self._item_name = None
         self._item_type = None
+        self._release_status = None
         self._request_id = None
+        self._status = None
         self._std = None
 
     @property
@@ -43,6 +46,13 @@ class AssetBom(object):
                     self._attributes.append(i)
                 else:
                     self._attributes.append(AssetBomAttribute.from_alipay_dict(i))
+    @property
+    def biz_type(self):
+        return self._biz_type
+
+    @biz_type.setter
+    def biz_type(self, value):
+        self._biz_type = value
     @property
     def bom_items(self):
         return self._bom_items
@@ -99,12 +109,26 @@ class AssetBom(object):
     def item_type(self, value):
         self._item_type = value
     @property
+    def release_status(self):
+        return self._release_status
+
+    @release_status.setter
+    def release_status(self, value):
+        self._release_status = value
+    @property
     def request_id(self):
         return self._request_id
 
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def std(self):
         return self._std
@@ -134,6 +158,11 @@ class AssetBom(object):
                 params['attributes'] = self.attributes.to_alipay_dict()
             else:
                 params['attributes'] = self.attributes
+        if self.biz_type:
+            if hasattr(self.biz_type, 'to_alipay_dict'):
+                params['biz_type'] = self.biz_type.to_alipay_dict()
+            else:
+                params['biz_type'] = self.biz_type
         if self.bom_items:
             if isinstance(self.bom_items, list):
                 for i in range(0, len(self.bom_items)):
@@ -174,11 +203,21 @@ class AssetBom(object):
                 params['item_type'] = self.item_type.to_alipay_dict()
             else:
                 params['item_type'] = self.item_type
+        if self.release_status:
+            if hasattr(self.release_status, 'to_alipay_dict'):
+                params['release_status'] = self.release_status.to_alipay_dict()
+            else:
+                params['release_status'] = self.release_status
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.std:
             if hasattr(self.std, 'to_alipay_dict'):
                 params['std'] = self.std.to_alipay_dict()
@@ -195,6 +234,8 @@ class AssetBom(object):
             o.asset_sub_type = d['asset_sub_type']
         if 'attributes' in d:
             o.attributes = d['attributes']
+        if 'biz_type' in d:
+            o.biz_type = d['biz_type']
         if 'bom_items' in d:
             o.bom_items = d['bom_items']
         if 'effect_img' in d:
@@ -209,8 +250,12 @@ class AssetBom(object):
             o.item_name = d['item_name']
         if 'item_type' in d:
             o.item_type = d['item_type']
+        if 'release_status' in d:
+            o.release_status = d['release_status']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'status' in d:
+            o.status = d['status']
         if 'std' in d:
             o.std = d['std']
         return o

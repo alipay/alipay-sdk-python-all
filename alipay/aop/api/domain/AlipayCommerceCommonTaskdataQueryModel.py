@@ -10,7 +10,7 @@ class AlipayCommerceCommonTaskdataQueryModel(object):
     def __init__(self):
         self._merchant_pid = None
         self._task_instance_id = None
-        self._task_templete_id = None
+        self._task_template_id = None
 
     @property
     def merchant_pid(self):
@@ -27,12 +27,12 @@ class AlipayCommerceCommonTaskdataQueryModel(object):
     def task_instance_id(self, value):
         self._task_instance_id = value
     @property
-    def task_templete_id(self):
-        return self._task_templete_id
+    def task_template_id(self):
+        return self._task_template_id
 
-    @task_templete_id.setter
-    def task_templete_id(self, value):
-        self._task_templete_id = value
+    @task_template_id.setter
+    def task_template_id(self, value):
+        self._task_template_id = value
 
 
     def to_alipay_dict(self):
@@ -47,11 +47,11 @@ class AlipayCommerceCommonTaskdataQueryModel(object):
                 params['task_instance_id'] = self.task_instance_id.to_alipay_dict()
             else:
                 params['task_instance_id'] = self.task_instance_id
-        if self.task_templete_id:
-            if hasattr(self.task_templete_id, 'to_alipay_dict'):
-                params['task_templete_id'] = self.task_templete_id.to_alipay_dict()
+        if self.task_template_id:
+            if hasattr(self.task_template_id, 'to_alipay_dict'):
+                params['task_template_id'] = self.task_template_id.to_alipay_dict()
             else:
-                params['task_templete_id'] = self.task_templete_id
+                params['task_template_id'] = self.task_template_id
         return params
 
     @staticmethod
@@ -63,8 +63,8 @@ class AlipayCommerceCommonTaskdataQueryModel(object):
             o.merchant_pid = d['merchant_pid']
         if 'task_instance_id' in d:
             o.task_instance_id = d['task_instance_id']
-        if 'task_templete_id' in d:
-            o.task_templete_id = d['task_templete_id']
+        if 'task_template_id' in d:
+            o.task_template_id = d['task_template_id']
         return o
 
 

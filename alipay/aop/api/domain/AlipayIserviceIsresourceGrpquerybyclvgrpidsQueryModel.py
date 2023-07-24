@@ -10,6 +10,7 @@ class AlipayIserviceIsresourceGrpquerybyclvgrpidsQueryModel(object):
     def __init__(self):
         self._clv_skill_group_ids = None
         self._query_scene_instance = None
+        self._query_transfer_skill_groups = None
         self._tnt_inst_id = None
 
     @property
@@ -29,6 +30,13 @@ class AlipayIserviceIsresourceGrpquerybyclvgrpidsQueryModel(object):
     @query_scene_instance.setter
     def query_scene_instance(self, value):
         self._query_scene_instance = value
+    @property
+    def query_transfer_skill_groups(self):
+        return self._query_transfer_skill_groups
+
+    @query_transfer_skill_groups.setter
+    def query_transfer_skill_groups(self, value):
+        self._query_transfer_skill_groups = value
     @property
     def tnt_inst_id(self):
         return self._tnt_inst_id
@@ -55,6 +63,11 @@ class AlipayIserviceIsresourceGrpquerybyclvgrpidsQueryModel(object):
                 params['query_scene_instance'] = self.query_scene_instance.to_alipay_dict()
             else:
                 params['query_scene_instance'] = self.query_scene_instance
+        if self.query_transfer_skill_groups:
+            if hasattr(self.query_transfer_skill_groups, 'to_alipay_dict'):
+                params['query_transfer_skill_groups'] = self.query_transfer_skill_groups.to_alipay_dict()
+            else:
+                params['query_transfer_skill_groups'] = self.query_transfer_skill_groups
         if self.tnt_inst_id:
             if hasattr(self.tnt_inst_id, 'to_alipay_dict'):
                 params['tnt_inst_id'] = self.tnt_inst_id.to_alipay_dict()
@@ -71,6 +84,8 @@ class AlipayIserviceIsresourceGrpquerybyclvgrpidsQueryModel(object):
             o.clv_skill_group_ids = d['clv_skill_group_ids']
         if 'query_scene_instance' in d:
             o.query_scene_instance = d['query_scene_instance']
+        if 'query_transfer_skill_groups' in d:
+            o.query_transfer_skill_groups = d['query_transfer_skill_groups']
         if 'tnt_inst_id' in d:
             o.tnt_inst_id = d['tnt_inst_id']
         return o

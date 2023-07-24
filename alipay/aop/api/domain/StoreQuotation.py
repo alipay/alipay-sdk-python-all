@@ -11,6 +11,7 @@ class StoreQuotation(object):
         self._comment_num = None
         self._comment_tag = None
         self._distance = None
+        self._isv_discount_amount = None
         self._latitude = None
         self._longitude = None
         self._quote_id = None
@@ -43,6 +44,13 @@ class StoreQuotation(object):
     @distance.setter
     def distance(self, value):
         self._distance = value
+    @property
+    def isv_discount_amount(self):
+        return self._isv_discount_amount
+
+    @isv_discount_amount.setter
+    def isv_discount_amount(self, value):
+        self._isv_discount_amount = value
     @property
     def latitude(self):
         return self._latitude
@@ -135,6 +143,11 @@ class StoreQuotation(object):
                 params['distance'] = self.distance.to_alipay_dict()
             else:
                 params['distance'] = self.distance
+        if self.isv_discount_amount:
+            if hasattr(self.isv_discount_amount, 'to_alipay_dict'):
+                params['isv_discount_amount'] = self.isv_discount_amount.to_alipay_dict()
+            else:
+                params['isv_discount_amount'] = self.isv_discount_amount
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -203,6 +216,8 @@ class StoreQuotation(object):
             o.comment_tag = d['comment_tag']
         if 'distance' in d:
             o.distance = d['distance']
+        if 'isv_discount_amount' in d:
+            o.isv_discount_amount = d['isv_discount_amount']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

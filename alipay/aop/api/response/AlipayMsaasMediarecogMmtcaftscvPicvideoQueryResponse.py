@@ -12,6 +12,7 @@ class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryResponse(AlipayResponse):
         self._data = None
         self._request_id = None
         self._result = None
+        self._retry = None
         self._transaction_id = None
         self._type = None
 
@@ -37,6 +38,13 @@ class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryResponse(AlipayResponse):
     def result(self, value):
         self._result = value
     @property
+    def retry(self):
+        return self._retry
+
+    @retry.setter
+    def retry(self, value):
+        self._retry = value
+    @property
     def transaction_id(self):
         return self._transaction_id
 
@@ -59,6 +67,8 @@ class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryResponse(AlipayResponse):
             self.request_id = response['request_id']
         if 'result' in response:
             self.result = response['result']
+        if 'retry' in response:
+            self.retry = response['retry']
         if 'transaction_id' in response:
             self.transaction_id = response['transaction_id']
         if 'type' in response:

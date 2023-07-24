@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.DeliveryActivityContentInfo import DeliveryActivityContentInfo
 from alipay.aop.api.domain.DeliveryMiniAppContentInfo import DeliveryMiniAppContentInfo
 from alipay.aop.api.domain.DeliveryDisplayInfo import DeliveryDisplayInfo
+from alipay.aop.api.domain.DeliveryItemContentInfo import DeliveryItemContentInfo
 
 
 class DeliveryContentInfo(object):
@@ -15,6 +16,7 @@ class DeliveryContentInfo(object):
         self._delivery_app_content = None
         self._delivery_content_type = None
         self._delivery_display_info = None
+        self._delivery_item_content = None
 
     @property
     def delivery_activity_content(self):
@@ -53,6 +55,16 @@ class DeliveryContentInfo(object):
             self._delivery_display_info = value
         else:
             self._delivery_display_info = DeliveryDisplayInfo.from_alipay_dict(value)
+    @property
+    def delivery_item_content(self):
+        return self._delivery_item_content
+
+    @delivery_item_content.setter
+    def delivery_item_content(self, value):
+        if isinstance(value, DeliveryItemContentInfo):
+            self._delivery_item_content = value
+        else:
+            self._delivery_item_content = DeliveryItemContentInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -77,6 +89,11 @@ class DeliveryContentInfo(object):
                 params['delivery_display_info'] = self.delivery_display_info.to_alipay_dict()
             else:
                 params['delivery_display_info'] = self.delivery_display_info
+        if self.delivery_item_content:
+            if hasattr(self.delivery_item_content, 'to_alipay_dict'):
+                params['delivery_item_content'] = self.delivery_item_content.to_alipay_dict()
+            else:
+                params['delivery_item_content'] = self.delivery_item_content
         return params
 
     @staticmethod
@@ -92,6 +109,8 @@ class DeliveryContentInfo(object):
             o.delivery_content_type = d['delivery_content_type']
         if 'delivery_display_info' in d:
             o.delivery_display_info = d['delivery_display_info']
+        if 'delivery_item_content' in d:
+            o.delivery_item_content = d['delivery_item_content']
         return o
 
 

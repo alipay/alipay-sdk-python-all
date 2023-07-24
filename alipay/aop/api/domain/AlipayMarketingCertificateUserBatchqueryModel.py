@@ -12,6 +12,7 @@ class AlipayMarketingCertificateUserBatchqueryModel(object):
         self._open_id = None
         self._page_num = None
         self._page_size = None
+        self._shop_id = None
         self._user_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayMarketingCertificateUserBatchqueryModel(object):
     def page_size(self, value):
         self._page_size = value
     @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -73,6 +81,11 @@ class AlipayMarketingCertificateUserBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayMarketingCertificateUserBatchqueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

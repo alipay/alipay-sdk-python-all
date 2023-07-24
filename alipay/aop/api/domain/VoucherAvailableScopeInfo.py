@@ -7,6 +7,7 @@ from alipay.aop.api.domain.VoucherAvailableAccountInfo import VoucherAvailableAc
 from alipay.aop.api.domain.VoucherAvailableAppInfo import VoucherAvailableAppInfo
 from alipay.aop.api.domain.VoucherAvailableGeographyScopeInfo import VoucherAvailableGeographyScopeInfo
 from alipay.aop.api.domain.VoucherAvailableGoodsInfo import VoucherAvailableGoodsInfo
+from alipay.aop.api.domain.VoucherAvailableItemInfo import VoucherAvailableItemInfo
 
 
 class VoucherAvailableScopeInfo(object):
@@ -16,6 +17,7 @@ class VoucherAvailableScopeInfo(object):
         self._voucher_available_app_info = None
         self._voucher_available_geography_scope_info = None
         self._voucher_available_goods_info = None
+        self._voucher_available_item_info = None
 
     @property
     def voucher_available_account_info(self):
@@ -57,6 +59,16 @@ class VoucherAvailableScopeInfo(object):
             self._voucher_available_goods_info = value
         else:
             self._voucher_available_goods_info = VoucherAvailableGoodsInfo.from_alipay_dict(value)
+    @property
+    def voucher_available_item_info(self):
+        return self._voucher_available_item_info
+
+    @voucher_available_item_info.setter
+    def voucher_available_item_info(self, value):
+        if isinstance(value, VoucherAvailableItemInfo):
+            self._voucher_available_item_info = value
+        else:
+            self._voucher_available_item_info = VoucherAvailableItemInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -81,6 +93,11 @@ class VoucherAvailableScopeInfo(object):
                 params['voucher_available_goods_info'] = self.voucher_available_goods_info.to_alipay_dict()
             else:
                 params['voucher_available_goods_info'] = self.voucher_available_goods_info
+        if self.voucher_available_item_info:
+            if hasattr(self.voucher_available_item_info, 'to_alipay_dict'):
+                params['voucher_available_item_info'] = self.voucher_available_item_info.to_alipay_dict()
+            else:
+                params['voucher_available_item_info'] = self.voucher_available_item_info
         return params
 
     @staticmethod
@@ -96,6 +113,8 @@ class VoucherAvailableScopeInfo(object):
             o.voucher_available_geography_scope_info = d['voucher_available_geography_scope_info']
         if 'voucher_available_goods_info' in d:
             o.voucher_available_goods_info = d['voucher_available_goods_info']
+        if 'voucher_available_item_info' in d:
+            o.voucher_available_item_info = d['voucher_available_item_info']
         return o
 
 

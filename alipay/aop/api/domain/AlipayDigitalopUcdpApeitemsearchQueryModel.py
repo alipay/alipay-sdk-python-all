@@ -11,6 +11,8 @@ class AlipayDigitalopUcdpApeitemsearchQueryModel(object):
     def __init__(self):
         self._context = None
         self._open_id = None
+        self._page_num = None
+        self._page_size = None
         self._project_id = None
         self._query = None
         self._user_id = None
@@ -32,6 +34,20 @@ class AlipayDigitalopUcdpApeitemsearchQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def page_num(self):
+        return self._page_num
+
+    @page_num.setter
+    def page_num(self, value):
+        self._page_num = value
+    @property
+    def page_size(self):
+        return self._page_size
+
+    @page_size.setter
+    def page_size(self, value):
+        self._page_size = value
     @property
     def project_id(self):
         return self._project_id
@@ -67,6 +83,16 @@ class AlipayDigitalopUcdpApeitemsearchQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.page_num:
+            if hasattr(self.page_num, 'to_alipay_dict'):
+                params['page_num'] = self.page_num.to_alipay_dict()
+            else:
+                params['page_num'] = self.page_num
+        if self.page_size:
+            if hasattr(self.page_size, 'to_alipay_dict'):
+                params['page_size'] = self.page_size.to_alipay_dict()
+            else:
+                params['page_size'] = self.page_size
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -93,6 +119,10 @@ class AlipayDigitalopUcdpApeitemsearchQueryModel(object):
             o.context = d['context']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'page_num' in d:
+            o.page_num = d['page_num']
+        if 'page_size' in d:
+            o.page_size = d['page_size']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'query' in d:

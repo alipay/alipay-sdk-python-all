@@ -13,6 +13,7 @@ class GFAOpenAPIParticipantInfo(object):
         self._inst_code = None
         self._ip_role_id = None
         self._ip_role_id_type = None
+        self._name = None
         self._open_id = None
         self._properties = None
 
@@ -51,6 +52,13 @@ class GFAOpenAPIParticipantInfo(object):
     @ip_role_id_type.setter
     def ip_role_id_type(self, value):
         self._ip_role_id_type = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def open_id(self):
         return self._open_id
@@ -94,6 +102,11 @@ class GFAOpenAPIParticipantInfo(object):
                 params['ip_role_id_type'] = self.ip_role_id_type.to_alipay_dict()
             else:
                 params['ip_role_id_type'] = self.ip_role_id_type
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -121,6 +134,8 @@ class GFAOpenAPIParticipantInfo(object):
             o.ip_role_id = d['ip_role_id']
         if 'ip_role_id_type' in d:
             o.ip_role_id_type = d['ip_role_id_type']
+        if 'name' in d:
+            o.name = d['name']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'properties' in d:

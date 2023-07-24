@@ -10,6 +10,8 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
     def __init__(self):
         self._biz_link = None
         self._biz_scene = None
+        self._biz_tracker = None
+        self._channel_info = None
         self._expire_time = None
         self._out_biz_no = None
         self._out_open_id = None
@@ -30,6 +32,20 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def biz_tracker(self):
+        return self._biz_tracker
+
+    @biz_tracker.setter
+    def biz_tracker(self, value):
+        self._biz_tracker = value
+    @property
+    def channel_info(self):
+        return self._channel_info
+
+    @channel_info.setter
+    def channel_info(self, value):
+        self._channel_info = value
     @property
     def expire_time(self):
         return self._expire_time
@@ -79,6 +95,16 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.biz_tracker:
+            if hasattr(self.biz_tracker, 'to_alipay_dict'):
+                params['biz_tracker'] = self.biz_tracker.to_alipay_dict()
+            else:
+                params['biz_tracker'] = self.biz_tracker
+        if self.channel_info:
+            if hasattr(self.channel_info, 'to_alipay_dict'):
+                params['channel_info'] = self.channel_info.to_alipay_dict()
+            else:
+                params['channel_info'] = self.channel_info
         if self.expire_time:
             if hasattr(self.expire_time, 'to_alipay_dict'):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
@@ -115,6 +141,10 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
             o.biz_link = d['biz_link']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'biz_tracker' in d:
+            o.biz_tracker = d['biz_tracker']
+        if 'channel_info' in d:
+            o.channel_info = d['channel_info']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
         if 'out_biz_no' in d:

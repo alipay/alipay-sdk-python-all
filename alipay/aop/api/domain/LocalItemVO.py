@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
+from alipay.aop.api.domain.LocalItemSkuQueryVO import LocalItemSkuQueryVO
 from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
 
@@ -21,6 +22,7 @@ class LocalItemVO(object):
         self._merchant_name = None
         self._out_item_id = None
         self._path = None
+        self._skus = None
         self._sold_time = None
         self._spu_status = None
         self._stock_num = None
@@ -102,6 +104,19 @@ class LocalItemVO(object):
     @path.setter
     def path(self, value):
         self._path = value
+    @property
+    def skus(self):
+        return self._skus
+
+    @skus.setter
+    def skus(self, value):
+        if isinstance(value, list):
+            self._skus = list()
+            for i in value:
+                if isinstance(i, LocalItemSkuQueryVO):
+                    self._skus.append(i)
+                else:
+                    self._skus.append(LocalItemSkuQueryVO.from_alipay_dict(i))
     @property
     def sold_time(self):
         return self._sold_time
@@ -187,6 +202,16 @@ class LocalItemVO(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.skus:
+            if isinstance(self.skus, list):
+                for i in range(0, len(self.skus)):
+                    element = self.skus[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.skus[i] = element.to_alipay_dict()
+            if hasattr(self.skus, 'to_alipay_dict'):
+                params['skus'] = self.skus.to_alipay_dict()
+            else:
+                params['skus'] = self.skus
         if self.sold_time:
             if hasattr(self.sold_time, 'to_alipay_dict'):
                 params['sold_time'] = self.sold_time.to_alipay_dict()
@@ -234,6 +259,8 @@ class LocalItemVO(object):
             o.out_item_id = d['out_item_id']
         if 'path' in d:
             o.path = d['path']
+        if 'skus' in d:
+            o.skus = d['skus']
         if 'sold_time' in d:
             o.sold_time = d['sold_time']
         if 'spu_status' in d:

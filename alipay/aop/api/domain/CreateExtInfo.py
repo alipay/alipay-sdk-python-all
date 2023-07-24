@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CreditRateNoAuth import CreditRateNoAuth
 from alipay.aop.api.domain.CreditRatePartialAuth import CreditRatePartialAuth
+from alipay.aop.api.domain.Dowsure import Dowsure
 
 
 class CreateExtInfo(object):
@@ -12,6 +13,7 @@ class CreateExtInfo(object):
     def __init__(self):
         self._cr_no_auth = None
         self._cr_partial_auth = None
+        self._dowsure = None
 
     @property
     def cr_no_auth(self):
@@ -33,6 +35,16 @@ class CreateExtInfo(object):
             self._cr_partial_auth = value
         else:
             self._cr_partial_auth = CreditRatePartialAuth.from_alipay_dict(value)
+    @property
+    def dowsure(self):
+        return self._dowsure
+
+    @dowsure.setter
+    def dowsure(self, value):
+        if isinstance(value, Dowsure):
+            self._dowsure = value
+        else:
+            self._dowsure = Dowsure.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -47,6 +59,11 @@ class CreateExtInfo(object):
                 params['cr_partial_auth'] = self.cr_partial_auth.to_alipay_dict()
             else:
                 params['cr_partial_auth'] = self.cr_partial_auth
+        if self.dowsure:
+            if hasattr(self.dowsure, 'to_alipay_dict'):
+                params['dowsure'] = self.dowsure.to_alipay_dict()
+            else:
+                params['dowsure'] = self.dowsure
         return params
 
     @staticmethod
@@ -58,6 +75,8 @@ class CreateExtInfo(object):
             o.cr_no_auth = d['cr_no_auth']
         if 'cr_partial_auth' in d:
             o.cr_partial_auth = d['cr_partial_auth']
+        if 'dowsure' in d:
+            o.dowsure = d['dowsure']
         return o
 
 

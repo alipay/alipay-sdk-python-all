@@ -9,13 +9,30 @@ from alipay.aop.api.domain.FqQrCodeExtendParams import FqQrCodeExtendParams
 class AlipayPcreditHuabeiFqqrcodeHbfqBindModel(object):
 
     def __init__(self):
+        self._bind_type = None
+        self._code_type = None
         self._fqqr_code_ext_info = None
+        self._merchant_id = None
         self._out_request_no = None
         self._qr_code_token = None
         self._smid = None
         self._source = None
         self._store_id = None
 
+    @property
+    def bind_type(self):
+        return self._bind_type
+
+    @bind_type.setter
+    def bind_type(self, value):
+        self._bind_type = value
+    @property
+    def code_type(self):
+        return self._code_type
+
+    @code_type.setter
+    def code_type(self, value):
+        self._code_type = value
     @property
     def fqqr_code_ext_info(self):
         return self._fqqr_code_ext_info
@@ -26,6 +43,13 @@ class AlipayPcreditHuabeiFqqrcodeHbfqBindModel(object):
             self._fqqr_code_ext_info = value
         else:
             self._fqqr_code_ext_info = FqQrCodeExtendParams.from_alipay_dict(value)
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -65,11 +89,26 @@ class AlipayPcreditHuabeiFqqrcodeHbfqBindModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bind_type:
+            if hasattr(self.bind_type, 'to_alipay_dict'):
+                params['bind_type'] = self.bind_type.to_alipay_dict()
+            else:
+                params['bind_type'] = self.bind_type
+        if self.code_type:
+            if hasattr(self.code_type, 'to_alipay_dict'):
+                params['code_type'] = self.code_type.to_alipay_dict()
+            else:
+                params['code_type'] = self.code_type
         if self.fqqr_code_ext_info:
             if hasattr(self.fqqr_code_ext_info, 'to_alipay_dict'):
                 params['fqqr_code_ext_info'] = self.fqqr_code_ext_info.to_alipay_dict()
             else:
                 params['fqqr_code_ext_info'] = self.fqqr_code_ext_info
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = self.merchant_id.to_alipay_dict()
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -102,8 +141,14 @@ class AlipayPcreditHuabeiFqqrcodeHbfqBindModel(object):
         if not d:
             return None
         o = AlipayPcreditHuabeiFqqrcodeHbfqBindModel()
+        if 'bind_type' in d:
+            o.bind_type = d['bind_type']
+        if 'code_type' in d:
+            o.code_type = d['code_type']
         if 'fqqr_code_ext_info' in d:
             o.fqqr_code_ext_info = d['fqqr_code_ext_info']
+        if 'merchant_id' in d:
+            o.merchant_id = d['merchant_id']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'qr_code_token' in d:

@@ -12,6 +12,7 @@ class AlipayOpenMiniInstantiateQueryModel(object):
         self._mini_app_name = None
         self._page_no = None
         self._page_size = None
+        self._query_full = None
         self._template_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayOpenMiniInstantiateQueryModel(object):
     def page_size(self, value):
         self._page_size = value
     @property
+    def query_full(self):
+        return self._query_full
+
+    @query_full.setter
+    def query_full(self, value):
+        self._query_full = value
+    @property
     def template_id(self):
         return self._template_id
 
@@ -73,6 +81,11 @@ class AlipayOpenMiniInstantiateQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.query_full:
+            if hasattr(self.query_full, 'to_alipay_dict'):
+                params['query_full'] = self.query_full.to_alipay_dict()
+            else:
+                params['query_full'] = self.query_full
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayOpenMiniInstantiateQueryModel(object):
             o.page_no = d['page_no']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'query_full' in d:
+            o.query_full = d['query_full']
         if 'template_id' in d:
             o.template_id = d['template_id']
         return o

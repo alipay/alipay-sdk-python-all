@@ -8,6 +8,8 @@ from alipay.aop.api.domain.ChargeInfo import ChargeInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
+from alipay.aop.api.domain.IntactChargeInfo import IntactChargeInfo
+from alipay.aop.api.domain.PaymentInfoWithId import PaymentInfoWithId
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -43,6 +45,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._industry_sepc_detail = None
         self._industry_sepc_detail_acc = None
         self._industry_sepc_detail_gov = None
+        self._intact_charge_info_list = None
         self._invoice_amount = None
         self._mdiscount_amount = None
         self._medical_insurance_info = None
@@ -51,6 +54,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._passback_params = None
         self._pay_amount = None
         self._pay_currency = None
+        self._payment_info_with_id_list = None
         self._point_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
@@ -282,6 +286,19 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def industry_sepc_detail_gov(self, value):
         self._industry_sepc_detail_gov = value
     @property
+    def intact_charge_info_list(self):
+        return self._intact_charge_info_list
+
+    @intact_charge_info_list.setter
+    def intact_charge_info_list(self, value):
+        if isinstance(value, list):
+            self._intact_charge_info_list = list()
+            for i in value:
+                if isinstance(i, IntactChargeInfo):
+                    self._intact_charge_info_list.append(i)
+                else:
+                    self._intact_charge_info_list.append(IntactChargeInfo.from_alipay_dict(i))
+    @property
     def invoice_amount(self):
         return self._invoice_amount
 
@@ -337,6 +354,19 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @pay_currency.setter
     def pay_currency(self, value):
         self._pay_currency = value
+    @property
+    def payment_info_with_id_list(self):
+        return self._payment_info_with_id_list
+
+    @payment_info_with_id_list.setter
+    def payment_info_with_id_list(self, value):
+        if isinstance(value, list):
+            self._payment_info_with_id_list = list()
+            for i in value:
+                if isinstance(i, PaymentInfoWithId):
+                    self._payment_info_with_id_list.append(i)
+                else:
+                    self._payment_info_with_id_list.append(PaymentInfoWithId.from_alipay_dict(i))
     @property
     def point_amount(self):
         return self._point_amount
@@ -536,6 +566,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.industry_sepc_detail_acc = response['industry_sepc_detail_acc']
         if 'industry_sepc_detail_gov' in response:
             self.industry_sepc_detail_gov = response['industry_sepc_detail_gov']
+        if 'intact_charge_info_list' in response:
+            self.intact_charge_info_list = response['intact_charge_info_list']
         if 'invoice_amount' in response:
             self.invoice_amount = response['invoice_amount']
         if 'mdiscount_amount' in response:
@@ -552,6 +584,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.pay_amount = response['pay_amount']
         if 'pay_currency' in response:
             self.pay_currency = response['pay_currency']
+        if 'payment_info_with_id_list' in response:
+            self.payment_info_with_id_list = response['payment_info_with_id_list']
         if 'point_amount' in response:
             self.point_amount = response['point_amount']
         if 'receipt_amount' in response:

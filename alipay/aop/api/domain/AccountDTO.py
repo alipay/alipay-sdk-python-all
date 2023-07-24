@@ -10,6 +10,7 @@ class AccountDTO(object):
     def __init__(self):
         self._account_name = None
         self._account_no = None
+        self._inst_id = None
         self._offical_name = None
         self._offical_number = None
 
@@ -27,6 +28,13 @@ class AccountDTO(object):
     @account_no.setter
     def account_no(self, value):
         self._account_no = value
+    @property
+    def inst_id(self):
+        return self._inst_id
+
+    @inst_id.setter
+    def inst_id(self, value):
+        self._inst_id = value
     @property
     def offical_name(self):
         return self._offical_name
@@ -55,6 +63,11 @@ class AccountDTO(object):
                 params['account_no'] = self.account_no.to_alipay_dict()
             else:
                 params['account_no'] = self.account_no
+        if self.inst_id:
+            if hasattr(self.inst_id, 'to_alipay_dict'):
+                params['inst_id'] = self.inst_id.to_alipay_dict()
+            else:
+                params['inst_id'] = self.inst_id
         if self.offical_name:
             if hasattr(self.offical_name, 'to_alipay_dict'):
                 params['offical_name'] = self.offical_name.to_alipay_dict()
@@ -76,6 +89,8 @@ class AccountDTO(object):
             o.account_name = d['account_name']
         if 'account_no' in d:
             o.account_no = d['account_no']
+        if 'inst_id' in d:
+            o.inst_id = d['inst_id']
         if 'offical_name' in d:
             o.offical_name = d['offical_name']
         if 'offical_number' in d:

@@ -47,10 +47,13 @@ class AlipaySocialOpengreenEnergySendModel(object):
 
     @ext_info.setter
     def ext_info(self, value):
-        if isinstance(value, EnergyExtRequest):
-            self._ext_info = value
-        else:
-            self._ext_info = EnergyExtRequest.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._ext_info = list()
+            for i in value:
+                if isinstance(i, EnergyExtRequest):
+                    self._ext_info.append(i)
+                else:
+                    self._ext_info.append(EnergyExtRequest.from_alipay_dict(i))
     @property
     def green_actions(self):
         return self._green_actions
@@ -112,6 +115,11 @@ class AlipaySocialOpengreenEnergySendModel(object):
             else:
                 params['energy_app_id'] = self.energy_app_id
         if self.ext_info:
+            if isinstance(self.ext_info, list):
+                for i in range(0, len(self.ext_info)):
+                    element = self.ext_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ext_info[i] = element.to_alipay_dict()
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:

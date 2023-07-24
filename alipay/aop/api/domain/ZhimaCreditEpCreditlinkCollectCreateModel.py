@@ -9,12 +9,21 @@ from alipay.aop.api.domain.CreateExtInfo import CreateExtInfo
 class ZhimaCreditEpCreditlinkCollectCreateModel(object):
 
     def __init__(self):
+        self._create_info = None
         self._data_type = None
         self._ep_cert_no = None
         self._ep_name = None
         self._ext_info = None
         self._merchant_request_id = None
+        self._product_code = None
 
+    @property
+    def create_info(self):
+        return self._create_info
+
+    @create_info.setter
+    def create_info(self, value):
+        self._create_info = value
     @property
     def data_type(self):
         return self._data_type
@@ -53,10 +62,22 @@ class ZhimaCreditEpCreditlinkCollectCreateModel(object):
     @merchant_request_id.setter
     def merchant_request_id(self, value):
         self._merchant_request_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.create_info:
+            if hasattr(self.create_info, 'to_alipay_dict'):
+                params['create_info'] = self.create_info.to_alipay_dict()
+            else:
+                params['create_info'] = self.create_info
         if self.data_type:
             if hasattr(self.data_type, 'to_alipay_dict'):
                 params['data_type'] = self.data_type.to_alipay_dict()
@@ -82,6 +103,11 @@ class ZhimaCreditEpCreditlinkCollectCreateModel(object):
                 params['merchant_request_id'] = self.merchant_request_id.to_alipay_dict()
             else:
                 params['merchant_request_id'] = self.merchant_request_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         return params
 
     @staticmethod
@@ -89,6 +115,8 @@ class ZhimaCreditEpCreditlinkCollectCreateModel(object):
         if not d:
             return None
         o = ZhimaCreditEpCreditlinkCollectCreateModel()
+        if 'create_info' in d:
+            o.create_info = d['create_info']
         if 'data_type' in d:
             o.data_type = d['data_type']
         if 'ep_cert_no' in d:
@@ -99,6 +127,8 @@ class ZhimaCreditEpCreditlinkCollectCreateModel(object):
             o.ext_info = d['ext_info']
         if 'merchant_request_id' in d:
             o.merchant_request_id = d['merchant_request_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         return o
 
 

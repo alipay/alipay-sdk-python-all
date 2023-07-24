@@ -10,6 +10,7 @@ from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddress
 from alipay.aop.api.domain.LogisticsInfoDTO import LogisticsInfoDTO
 from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
+from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
 
 
 class AlipayOpenMiniOrderCreateModel(object):
@@ -28,6 +29,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._order_detail = None
         self._out_order_id = None
         self._path = None
+        self._promo_detail_info = None
         self._seller_id = None
         self._source_id = None
         self._timeout_express = None
@@ -146,6 +148,16 @@ class AlipayOpenMiniOrderCreateModel(object):
     def path(self, value):
         self._path = value
     @property
+    def promo_detail_info(self):
+        return self._promo_detail_info
+
+    @promo_detail_info.setter
+    def promo_detail_info(self, value):
+        if isinstance(value, PromoDetailInfoDTO):
+            self._promo_detail_info = value
+        else:
+            self._promo_detail_info = PromoDetailInfoDTO.from_alipay_dict(value)
+    @property
     def seller_id(self):
         return self._seller_id
 
@@ -242,6 +254,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.promo_detail_info:
+            if hasattr(self.promo_detail_info, 'to_alipay_dict'):
+                params['promo_detail_info'] = self.promo_detail_info.to_alipay_dict()
+            else:
+                params['promo_detail_info'] = self.promo_detail_info
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -295,6 +312,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.out_order_id = d['out_order_id']
         if 'path' in d:
             o.path = d['path']
+        if 'promo_detail_info' in d:
+            o.promo_detail_info = d['promo_detail_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'source_id' in d:

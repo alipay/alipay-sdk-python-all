@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PaymentBusinessInfo import PaymentBusinessInfo
 from alipay.aop.api.domain.CustomInfo import CustomInfo
 
 
@@ -12,6 +13,7 @@ class AlipayMerchantOrderIotUploadModel(object):
         self._abcp_app_id = None
         self._actual_pay_amount = None
         self._actual_pay_time = None
+        self._business_infos = None
         self._change_amount = None
         self._custom_infos = None
         self._fail_info = None
@@ -45,6 +47,16 @@ class AlipayMerchantOrderIotUploadModel(object):
     @actual_pay_time.setter
     def actual_pay_time(self, value):
         self._actual_pay_time = value
+    @property
+    def business_infos(self):
+        return self._business_infos
+
+    @business_infos.setter
+    def business_infos(self, value):
+        if isinstance(value, PaymentBusinessInfo):
+            self._business_infos = value
+        else:
+            self._business_infos = PaymentBusinessInfo.from_alipay_dict(value)
     @property
     def change_amount(self):
         return self._change_amount
@@ -147,6 +159,11 @@ class AlipayMerchantOrderIotUploadModel(object):
                 params['actual_pay_time'] = self.actual_pay_time.to_alipay_dict()
             else:
                 params['actual_pay_time'] = self.actual_pay_time
+        if self.business_infos:
+            if hasattr(self.business_infos, 'to_alipay_dict'):
+                params['business_infos'] = self.business_infos.to_alipay_dict()
+            else:
+                params['business_infos'] = self.business_infos
         if self.change_amount:
             if hasattr(self.change_amount, 'to_alipay_dict'):
                 params['change_amount'] = self.change_amount.to_alipay_dict()
@@ -220,6 +237,8 @@ class AlipayMerchantOrderIotUploadModel(object):
             o.actual_pay_amount = d['actual_pay_amount']
         if 'actual_pay_time' in d:
             o.actual_pay_time = d['actual_pay_time']
+        if 'business_infos' in d:
+            o.business_infos = d['business_infos']
         if 'change_amount' in d:
             o.change_amount = d['change_amount']
         if 'custom_infos' in d:

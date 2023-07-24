@@ -14,6 +14,7 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
         self._campaign_text = None
         self._campaign_text_type = None
         self._channel = None
+        self._link = None
         self._max_amount = None
         self._min_amount = None
         self._need_deduct = None
@@ -55,6 +56,13 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def link(self):
+        return self._link
+
+    @link.setter
+    def link(self, value):
+        self._link = value
     @property
     def max_amount(self):
         return self._max_amount
@@ -103,6 +111,8 @@ class AnttechMorseMarketingSrtaNonanonymousQueryResponse(AlipayResponse):
             self.campaign_text_type = response['campaign_text_type']
         if 'channel' in response:
             self.channel = response['channel']
+        if 'link' in response:
+            self.link = response['link']
         if 'max_amount' in response:
             self.max_amount = response['max_amount']
         if 'min_amount' in response:

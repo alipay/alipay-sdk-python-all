@@ -11,6 +11,7 @@ class TagDTO(object):
         self._cate_id = None
         self._category_name = None
         self._data_type = None
+        self._date_format = None
         self._scene_code = None
         self._show_type = None
         self._store_type = None
@@ -19,6 +20,7 @@ class TagDTO(object):
         self._tag_kind = None
         self._tag_name = None
         self._tag_type = None
+        self._tag_version = None
 
     @property
     def cate_id(self):
@@ -41,6 +43,13 @@ class TagDTO(object):
     @data_type.setter
     def data_type(self, value):
         self._data_type = value
+    @property
+    def date_format(self):
+        return self._date_format
+
+    @date_format.setter
+    def date_format(self, value):
+        self._date_format = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -97,6 +106,13 @@ class TagDTO(object):
     @tag_type.setter
     def tag_type(self, value):
         self._tag_type = value
+    @property
+    def tag_version(self):
+        return self._tag_version
+
+    @tag_version.setter
+    def tag_version(self, value):
+        self._tag_version = value
 
 
     def to_alipay_dict(self):
@@ -116,6 +132,11 @@ class TagDTO(object):
                 params['data_type'] = self.data_type.to_alipay_dict()
             else:
                 params['data_type'] = self.data_type
+        if self.date_format:
+            if hasattr(self.date_format, 'to_alipay_dict'):
+                params['date_format'] = self.date_format.to_alipay_dict()
+            else:
+                params['date_format'] = self.date_format
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -156,6 +177,11 @@ class TagDTO(object):
                 params['tag_type'] = self.tag_type.to_alipay_dict()
             else:
                 params['tag_type'] = self.tag_type
+        if self.tag_version:
+            if hasattr(self.tag_version, 'to_alipay_dict'):
+                params['tag_version'] = self.tag_version.to_alipay_dict()
+            else:
+                params['tag_version'] = self.tag_version
         return params
 
     @staticmethod
@@ -169,6 +195,8 @@ class TagDTO(object):
             o.category_name = d['category_name']
         if 'data_type' in d:
             o.data_type = d['data_type']
+        if 'date_format' in d:
+            o.date_format = d['date_format']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'show_type' in d:
@@ -185,6 +213,8 @@ class TagDTO(object):
             o.tag_name = d['tag_name']
         if 'tag_type' in d:
             o.tag_type = d['tag_type']
+        if 'tag_version' in d:
+            o.tag_version = d['tag_version']
         return o
 
 

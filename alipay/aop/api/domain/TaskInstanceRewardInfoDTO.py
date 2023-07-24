@@ -11,6 +11,7 @@ class TaskInstanceRewardInfoDTO(object):
         self._current_num = None
         self._guided_finish_time = None
         self._hunter_id = None
+        self._hunter_open_id = None
         self._published_amount = None
         self._receive_time = None
         self._target_num = None
@@ -38,6 +39,13 @@ class TaskInstanceRewardInfoDTO(object):
     @hunter_id.setter
     def hunter_id(self, value):
         self._hunter_id = value
+    @property
+    def hunter_open_id(self):
+        return self._hunter_open_id
+
+    @hunter_open_id.setter
+    def hunter_open_id(self, value):
+        self._hunter_open_id = value
     @property
     def published_amount(self):
         return self._published_amount
@@ -92,6 +100,11 @@ class TaskInstanceRewardInfoDTO(object):
                 params['hunter_id'] = self.hunter_id.to_alipay_dict()
             else:
                 params['hunter_id'] = self.hunter_id
+        if self.hunter_open_id:
+            if hasattr(self.hunter_open_id, 'to_alipay_dict'):
+                params['hunter_open_id'] = self.hunter_open_id.to_alipay_dict()
+            else:
+                params['hunter_open_id'] = self.hunter_open_id
         if self.published_amount:
             if hasattr(self.published_amount, 'to_alipay_dict'):
                 params['published_amount'] = self.published_amount.to_alipay_dict()
@@ -130,6 +143,8 @@ class TaskInstanceRewardInfoDTO(object):
             o.guided_finish_time = d['guided_finish_time']
         if 'hunter_id' in d:
             o.hunter_id = d['hunter_id']
+        if 'hunter_open_id' in d:
+            o.hunter_open_id = d['hunter_open_id']
         if 'published_amount' in d:
             o.published_amount = d['published_amount']
         if 'receive_time' in d:

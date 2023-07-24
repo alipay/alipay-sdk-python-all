@@ -15,6 +15,7 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
+        self._liveness_strategy = None
         self._outer_biz_no = None
         self._phone = None
         self._reserved = None
@@ -57,6 +58,13 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def liveness_strategy(self):
+        return self._liveness_strategy
+
+    @liveness_strategy.setter
+    def liveness_strategy(self, value):
+        self._liveness_strategy = value
     @property
     def outer_biz_no(self):
         return self._outer_biz_no
@@ -181,6 +189,11 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
                 params['cert_type'] = json.dumps(obj=self.cert_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['cert_type'] = self.cert_type
+        if self.liveness_strategy:
+            if hasattr(self.liveness_strategy, 'to_alipay_dict'):
+                params['liveness_strategy'] = json.dumps(obj=self.liveness_strategy.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['liveness_strategy'] = self.liveness_strategy
         if self.outer_biz_no:
             if hasattr(self.outer_biz_no, 'to_alipay_dict'):
                 params['outer_biz_no'] = json.dumps(obj=self.outer_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
