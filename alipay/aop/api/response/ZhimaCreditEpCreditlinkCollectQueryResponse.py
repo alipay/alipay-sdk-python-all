@@ -18,6 +18,7 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
         self._file_num = None
         self._files = None
         self._merchant_request_id = None
+        self._product_code = None
         self._secret = None
 
     @property
@@ -86,6 +87,13 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
     def merchant_request_id(self, value):
         self._merchant_request_id = value
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
     def secret(self):
         return self._secret
 
@@ -111,5 +119,7 @@ class ZhimaCreditEpCreditlinkCollectQueryResponse(AlipayResponse):
             self.files = response['files']
         if 'merchant_request_id' in response:
             self.merchant_request_id = response['merchant_request_id']
+        if 'product_code' in response:
+            self.product_code = response['product_code']
         if 'secret' in response:
             self.secret = response['secret']

@@ -14,6 +14,7 @@ class CertificateQueryInfo(object):
         self._can_use = None
         self._certificate_id = None
         self._code = None
+        self._out_order_id = None
         self._sku_info = None
         self._status = None
         self._valid_begin_time = None
@@ -50,6 +51,13 @@ class CertificateQueryInfo(object):
     @code.setter
     def code(self, value):
         self._code = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
     @property
     def sku_info(self):
         return self._sku_info
@@ -105,6 +113,11 @@ class CertificateQueryInfo(object):
                 params['code'] = self.code.to_alipay_dict()
             else:
                 params['code'] = self.code
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.sku_info:
             if hasattr(self.sku_info, 'to_alipay_dict'):
                 params['sku_info'] = self.sku_info.to_alipay_dict()
@@ -140,6 +153,8 @@ class CertificateQueryInfo(object):
             o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'sku_info' in d:
             o.sku_info = d['sku_info']
         if 'status' in d:

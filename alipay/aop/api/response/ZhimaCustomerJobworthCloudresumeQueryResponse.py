@@ -18,10 +18,15 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
         self._birthday = None
         self._certificates = None
         self._education_experiences = None
+        self._email = None
         self._gender = None
+        self._intention_status = None
+        self._person_desc = None
         self._phone = None
         self._pic_url = None
         self._position_intentions = None
+        self._position_type = None
+        self._residential_area = None
         self._skills = None
         self._user_name = None
         self._work_experiences = None
@@ -61,12 +66,33 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
                 else:
                     self._education_experiences.append(CloudResumeEducationExperience.from_alipay_dict(i))
     @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
+    @property
     def gender(self):
         return self._gender
 
     @gender.setter
     def gender(self, value):
         self._gender = value
+    @property
+    def intention_status(self):
+        return self._intention_status
+
+    @intention_status.setter
+    def intention_status(self, value):
+        self._intention_status = value
+    @property
+    def person_desc(self):
+        return self._person_desc
+
+    @person_desc.setter
+    def person_desc(self, value):
+        self._person_desc = value
     @property
     def phone(self):
         return self._phone
@@ -97,6 +123,20 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
                     self._position_intentions.append(i)
                 else:
                     self._position_intentions.append(CloudResumePositionIntention.from_alipay_dict(i))
+    @property
+    def position_type(self):
+        return self._position_type
+
+    @position_type.setter
+    def position_type(self, value):
+        self._position_type = value
+    @property
+    def residential_area(self):
+        return self._residential_area
+
+    @residential_area.setter
+    def residential_area(self, value):
+        self._residential_area = value
     @property
     def skills(self):
         return self._skills
@@ -146,14 +186,24 @@ class ZhimaCustomerJobworthCloudresumeQueryResponse(AlipayResponse):
             self.certificates = response['certificates']
         if 'education_experiences' in response:
             self.education_experiences = response['education_experiences']
+        if 'email' in response:
+            self.email = response['email']
         if 'gender' in response:
             self.gender = response['gender']
+        if 'intention_status' in response:
+            self.intention_status = response['intention_status']
+        if 'person_desc' in response:
+            self.person_desc = response['person_desc']
         if 'phone' in response:
             self.phone = response['phone']
         if 'pic_url' in response:
             self.pic_url = response['pic_url']
         if 'position_intentions' in response:
             self.position_intentions = response['position_intentions']
+        if 'position_type' in response:
+            self.position_type = response['position_type']
+        if 'residential_area' in response:
+            self.residential_area = response['residential_area']
         if 'skills' in response:
             self.skills = response['skills']
         if 'user_name' in response:

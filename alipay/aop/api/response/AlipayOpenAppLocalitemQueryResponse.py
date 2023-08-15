@@ -41,10 +41,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
 
     @attrs.setter
     def attrs(self, value):
-        if isinstance(value, AppItemAttrVO):
-            self._attrs = value
-        else:
-            self._attrs = AppItemAttrVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._attrs = list()
+            for i in value:
+                if isinstance(i, AppItemAttrVO):
+                    self._attrs.append(i)
+                else:
+                    self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
     @property
     def category_id(self):
         return self._category_id

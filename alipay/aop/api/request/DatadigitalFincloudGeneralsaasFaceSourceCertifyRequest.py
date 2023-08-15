@@ -19,6 +19,7 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
         self._outer_biz_no = None
         self._phone = None
         self._reserved = None
+        self._security_strategy = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -86,6 +87,13 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     @reserved.setter
     def reserved(self, value):
         self._reserved = value
+    @property
+    def security_strategy(self):
+        return self._security_strategy
+
+    @security_strategy.setter
+    def security_strategy(self, value):
+        self._security_strategy = value
 
     @property
     def file_content(self):
@@ -209,6 +217,11 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
                 params['reserved'] = json.dumps(obj=self.reserved.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['reserved'] = self.reserved
+        if self.security_strategy:
+            if hasattr(self.security_strategy, 'to_alipay_dict'):
+                params['security_strategy'] = json.dumps(obj=self.security_strategy.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['security_strategy'] = self.security_strategy
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

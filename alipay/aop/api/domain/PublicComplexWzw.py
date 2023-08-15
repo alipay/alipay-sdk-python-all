@@ -3,16 +3,28 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CorporateSealRectOpenVO import CorporateSealRectOpenVO
 
 
 class PublicComplexWzw(object):
 
     def __init__(self):
+        self._complex_a = None
         self._test_boolean = None
         self._test_number = None
         self._test_string = None
         self._test_string_open_id = None
 
+    @property
+    def complex_a(self):
+        return self._complex_a
+
+    @complex_a.setter
+    def complex_a(self, value):
+        if isinstance(value, CorporateSealRectOpenVO):
+            self._complex_a = value
+        else:
+            self._complex_a = CorporateSealRectOpenVO.from_alipay_dict(value)
     @property
     def test_boolean(self):
         return self._test_boolean
@@ -51,6 +63,11 @@ class PublicComplexWzw(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.complex_a:
+            if hasattr(self.complex_a, 'to_alipay_dict'):
+                params['complex_a'] = self.complex_a.to_alipay_dict()
+            else:
+                params['complex_a'] = self.complex_a
         if self.test_boolean:
             if isinstance(self.test_boolean, list):
                 for i in range(0, len(self.test_boolean)):
@@ -88,6 +105,8 @@ class PublicComplexWzw(object):
         if not d:
             return None
         o = PublicComplexWzw()
+        if 'complex_a' in d:
+            o.complex_a = d['complex_a']
         if 'test_boolean' in d:
             o.test_boolean = d['test_boolean']
         if 'test_number' in d:

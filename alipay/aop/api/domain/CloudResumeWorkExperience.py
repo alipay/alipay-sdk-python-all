@@ -11,6 +11,7 @@ class CloudResumeWorkExperience(object):
         self._company_name = None
         self._job_id = None
         self._job_name = None
+        self._position_name = None
         self._profession_id = None
         self._profession_name = None
         self._work_desc = None
@@ -38,6 +39,13 @@ class CloudResumeWorkExperience(object):
     @job_name.setter
     def job_name(self, value):
         self._job_name = value
+    @property
+    def position_name(self):
+        return self._position_name
+
+    @position_name.setter
+    def position_name(self, value):
+        self._position_name = value
     @property
     def profession_id(self):
         return self._profession_id
@@ -92,6 +100,11 @@ class CloudResumeWorkExperience(object):
                 params['job_name'] = self.job_name.to_alipay_dict()
             else:
                 params['job_name'] = self.job_name
+        if self.position_name:
+            if hasattr(self.position_name, 'to_alipay_dict'):
+                params['position_name'] = self.position_name.to_alipay_dict()
+            else:
+                params['position_name'] = self.position_name
         if self.profession_id:
             if hasattr(self.profession_id, 'to_alipay_dict'):
                 params['profession_id'] = self.profession_id.to_alipay_dict()
@@ -130,6 +143,8 @@ class CloudResumeWorkExperience(object):
             o.job_id = d['job_id']
         if 'job_name' in d:
             o.job_name = d['job_name']
+        if 'position_name' in d:
+            o.position_name = d['position_name']
         if 'profession_id' in d:
             o.profession_id = d['profession_id']
         if 'profession_name' in d:

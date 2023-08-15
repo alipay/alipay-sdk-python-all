@@ -29,6 +29,7 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
         self._i = None
         self._mn = None
         self._open_id = None
+        self._sss = None
         self._uid = None
         self._uid_2_open_id = None
         self._uid_open_id = None
@@ -179,6 +180,13 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def sss(self):
+        return self._sss
+
+    @sss.setter
+    def sss(self, value):
+        self._sss = value
+    @property
     def uid(self):
         return self._uid
 
@@ -308,6 +316,11 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.sss:
+            if hasattr(self.sss, 'to_alipay_dict'):
+                params['sss'] = self.sss.to_alipay_dict()
+            else:
+                params['sss'] = self.sss
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -368,6 +381,8 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
             o.mn = d['mn']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'sss' in d:
+            o.sss = d['sss']
         if 'uid' in d:
             o.uid = d['uid']
         if 'uid_2_open_id' in d:

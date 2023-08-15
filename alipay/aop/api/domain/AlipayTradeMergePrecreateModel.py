@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
 from alipay.aop.api.domain.OrderDetail import OrderDetail
 
 
 class AlipayTradeMergePrecreateModel(object):
 
     def __init__(self):
+        self._ext_user_info = None
         self._order_details = None
         self._out_merge_no = None
         self._time_expire = None
         self._timeout_express = None
 
+    @property
+    def ext_user_info(self):
+        return self._ext_user_info
+
+    @ext_user_info.setter
+    def ext_user_info(self, value):
+        if isinstance(value, ExtUserInfo):
+            self._ext_user_info = value
+        else:
+            self._ext_user_info = ExtUserInfo.from_alipay_dict(value)
     @property
     def order_details(self):
         return self._order_details
@@ -52,6 +64,11 @@ class AlipayTradeMergePrecreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ext_user_info:
+            if hasattr(self.ext_user_info, 'to_alipay_dict'):
+                params['ext_user_info'] = self.ext_user_info.to_alipay_dict()
+            else:
+                params['ext_user_info'] = self.ext_user_info
         if self.order_details:
             if isinstance(self.order_details, list):
                 for i in range(0, len(self.order_details)):
@@ -84,6 +101,8 @@ class AlipayTradeMergePrecreateModel(object):
         if not d:
             return None
         o = AlipayTradeMergePrecreateModel()
+        if 'ext_user_info' in d:
+            o.ext_user_info = d['ext_user_info']
         if 'order_details' in d:
             o.order_details = d['order_details']
         if 'out_merge_no' in d:

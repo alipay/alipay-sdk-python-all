@@ -17,6 +17,7 @@ class DesignatedDrivingDriverInfo(object):
         self._isv = None
         self._latitude = None
         self._longitude = None
+        self._real_name = None
         self._service_times = None
         self._star_level = None
 
@@ -84,6 +85,13 @@ class DesignatedDrivingDriverInfo(object):
     def longitude(self, value):
         self._longitude = value
     @property
+    def real_name(self):
+        return self._real_name
+
+    @real_name.setter
+    def real_name(self, value):
+        self._real_name = value
+    @property
     def service_times(self):
         return self._service_times
 
@@ -146,6 +154,11 @@ class DesignatedDrivingDriverInfo(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.real_name:
+            if hasattr(self.real_name, 'to_alipay_dict'):
+                params['real_name'] = self.real_name.to_alipay_dict()
+            else:
+                params['real_name'] = self.real_name
         if self.service_times:
             if hasattr(self.service_times, 'to_alipay_dict'):
                 params['service_times'] = self.service_times.to_alipay_dict()
@@ -181,6 +194,8 @@ class DesignatedDrivingDriverInfo(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'real_name' in d:
+            o.real_name = d['real_name']
         if 'service_times' in d:
             o.service_times = d['service_times']
         if 'star_level' in d:

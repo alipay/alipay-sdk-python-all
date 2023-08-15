@@ -23,7 +23,9 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         self._head_img = None
         self._image_list = None
         self._is_online = None
+        self._item_details_page_model = None
         self._item_id = None
+        self._item_type = None
         self._original_price = None
         self._out_item_id = None
         self._path = None
@@ -119,12 +121,26 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def is_online(self, value):
         self._is_online = value
     @property
+    def item_details_page_model(self):
+        return self._item_details_page_model
+
+    @item_details_page_model.setter
+    def item_details_page_model(self, value):
+        self._item_details_page_model = value
+    @property
     def item_id(self):
         return self._item_id
 
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def item_type(self):
+        return self._item_type
+
+    @item_type.setter
+    def item_type(self, value):
+        self._item_type = value
     @property
     def original_price(self):
         return self._original_price
@@ -237,8 +253,12 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.image_list = response['image_list']
         if 'is_online' in response:
             self.is_online = response['is_online']
+        if 'item_details_page_model' in response:
+            self.item_details_page_model = response['item_details_page_model']
         if 'item_id' in response:
             self.item_id = response['item_id']
+        if 'item_type' in response:
+            self.item_type = response['item_type']
         if 'original_price' in response:
             self.original_price = response['original_price']
         if 'out_item_id' in response:

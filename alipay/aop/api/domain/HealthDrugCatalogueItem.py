@@ -13,6 +13,7 @@ class HealthDrugCatalogueItem(object):
         self._drug_classification = None
         self._drug_type = None
         self._general_name = None
+        self._image = None
         self._inventory = None
         self._item_id = None
         self._item_name = None
@@ -22,6 +23,7 @@ class HealthDrugCatalogueItem(object):
         self._national_medicine_permission_no = None
         self._not_purchase_reason_desc = None
         self._price = None
+        self._price_level = None
         self._specifications = None
         self._support_emergency_delivery = None
         self._usage_dosage = None
@@ -61,6 +63,13 @@ class HealthDrugCatalogueItem(object):
     @general_name.setter
     def general_name(self, value):
         self._general_name = value
+    @property
+    def image(self):
+        return self._image
+
+    @image.setter
+    def image(self, value):
+        self._image = value
     @property
     def inventory(self):
         return self._inventory
@@ -125,6 +134,13 @@ class HealthDrugCatalogueItem(object):
     def price(self, value):
         self._price = value
     @property
+    def price_level(self):
+        return self._price_level
+
+    @price_level.setter
+    def price_level(self, value):
+        self._price_level = value
+    @property
     def specifications(self):
         return self._specifications
 
@@ -174,6 +190,11 @@ class HealthDrugCatalogueItem(object):
                 params['general_name'] = self.general_name.to_alipay_dict()
             else:
                 params['general_name'] = self.general_name
+        if self.image:
+            if hasattr(self.image, 'to_alipay_dict'):
+                params['image'] = self.image.to_alipay_dict()
+            else:
+                params['image'] = self.image
         if self.inventory:
             if hasattr(self.inventory, 'to_alipay_dict'):
                 params['inventory'] = self.inventory.to_alipay_dict()
@@ -219,6 +240,11 @@ class HealthDrugCatalogueItem(object):
                 params['price'] = self.price.to_alipay_dict()
             else:
                 params['price'] = self.price
+        if self.price_level:
+            if hasattr(self.price_level, 'to_alipay_dict'):
+                params['price_level'] = self.price_level.to_alipay_dict()
+            else:
+                params['price_level'] = self.price_level
         if self.specifications:
             if hasattr(self.specifications, 'to_alipay_dict'):
                 params['specifications'] = self.specifications.to_alipay_dict()
@@ -251,6 +277,8 @@ class HealthDrugCatalogueItem(object):
             o.drug_type = d['drug_type']
         if 'general_name' in d:
             o.general_name = d['general_name']
+        if 'image' in d:
+            o.image = d['image']
         if 'inventory' in d:
             o.inventory = d['inventory']
         if 'item_id' in d:
@@ -269,6 +297,8 @@ class HealthDrugCatalogueItem(object):
             o.not_purchase_reason_desc = d['not_purchase_reason_desc']
         if 'price' in d:
             o.price = d['price']
+        if 'price_level' in d:
+            o.price_level = d['price_level']
         if 'specifications' in d:
             o.specifications = d['specifications']
         if 'support_emergency_delivery' in d:

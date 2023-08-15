@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CorporateSealRectOpenVO import CorporateSealRectOpenVO
 from alipay.aop.api.domain.MultilineTextRectOpenVO import MultilineTextRectOpenVO
 from alipay.aop.api.domain.PersonalSealRectOpenVO import PersonalSealRectOpenVO
+from alipay.aop.api.domain.MultilineTextRectOpenVO import MultilineTextRectOpenVO
 from alipay.aop.api.domain.TimeStampRectOpenVO import TimeStampRectOpenVO
 
 
@@ -17,6 +18,7 @@ class ContractTemplateOpenVO(object):
         self._must_read = None
         self._personal_seal_rects = None
         self._preview_url = None
+        self._singleline_text_rects = None
         self._template_id = None
         self._template_memo = None
         self._template_name = None
@@ -77,6 +79,19 @@ class ContractTemplateOpenVO(object):
     @preview_url.setter
     def preview_url(self, value):
         self._preview_url = value
+    @property
+    def singleline_text_rects(self):
+        return self._singleline_text_rects
+
+    @singleline_text_rects.setter
+    def singleline_text_rects(self, value):
+        if isinstance(value, list):
+            self._singleline_text_rects = list()
+            for i in value:
+                if isinstance(i, MultilineTextRectOpenVO):
+                    self._singleline_text_rects.append(i)
+                else:
+                    self._singleline_text_rects.append(MultilineTextRectOpenVO.from_alipay_dict(i))
     @property
     def template_id(self):
         return self._template_id
@@ -169,6 +184,16 @@ class ContractTemplateOpenVO(object):
                 params['preview_url'] = self.preview_url.to_alipay_dict()
             else:
                 params['preview_url'] = self.preview_url
+        if self.singleline_text_rects:
+            if isinstance(self.singleline_text_rects, list):
+                for i in range(0, len(self.singleline_text_rects)):
+                    element = self.singleline_text_rects[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.singleline_text_rects[i] = element.to_alipay_dict()
+            if hasattr(self.singleline_text_rects, 'to_alipay_dict'):
+                params['singleline_text_rects'] = self.singleline_text_rects.to_alipay_dict()
+            else:
+                params['singleline_text_rects'] = self.singleline_text_rects
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -221,6 +246,8 @@ class ContractTemplateOpenVO(object):
             o.personal_seal_rects = d['personal_seal_rects']
         if 'preview_url' in d:
             o.preview_url = d['preview_url']
+        if 'singleline_text_rects' in d:
+            o.singleline_text_rects = d['singleline_text_rects']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'template_memo' in d:

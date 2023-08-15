@@ -10,6 +10,8 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     def __init__(self):
         self._action_type = None
         self._channel = None
+        self._custom_id = None
+        self._goods_id = None
         self._item_id_list = None
         self._item_num = None
         self._log_time = None
@@ -42,6 +44,20 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def custom_id(self):
+        return self._custom_id
+
+    @custom_id.setter
+    def custom_id(self, value):
+        self._custom_id = value
+    @property
+    def goods_id(self):
+        return self._goods_id
+
+    @goods_id.setter
+    def goods_id(self, value):
+        self._goods_id = value
     @property
     def item_id_list(self):
         return self._item_id_list
@@ -175,6 +191,16 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.custom_id:
+            if hasattr(self.custom_id, 'to_alipay_dict'):
+                params['custom_id'] = self.custom_id.to_alipay_dict()
+            else:
+                params['custom_id'] = self.custom_id
+        if self.goods_id:
+            if hasattr(self.goods_id, 'to_alipay_dict'):
+                params['goods_id'] = self.goods_id.to_alipay_dict()
+            else:
+                params['goods_id'] = self.goods_id
         if self.item_id_list:
             if hasattr(self.item_id_list, 'to_alipay_dict'):
                 params['item_id_list'] = self.item_id_list.to_alipay_dict()
@@ -271,6 +297,10 @@ class AlipayDigitalopUcdpApebehaviorSyncModel(object):
             o.action_type = d['action_type']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'custom_id' in d:
+            o.custom_id = d['custom_id']
+        if 'goods_id' in d:
+            o.goods_id = d['goods_id']
         if 'item_id_list' in d:
             o.item_id_list = d['item_id_list']
         if 'item_num' in d:

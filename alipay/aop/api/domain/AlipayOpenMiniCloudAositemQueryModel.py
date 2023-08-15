@@ -24,7 +24,6 @@ class AlipayOpenMiniCloudAositemQueryModel(object):
         self._page_size = None
         self._project_id = None
         self._query = None
-        self._relevant_id = None
         self._tags = None
         self._user_id = None
         self._user_id_type = None
@@ -154,13 +153,6 @@ class AlipayOpenMiniCloudAositemQueryModel(object):
     def query(self, value):
         self._query = value
     @property
-    def relevant_id(self):
-        return self._relevant_id
-
-    @relevant_id.setter
-    def relevant_id(self, value):
-        self._relevant_id = value
-    @property
     def tags(self):
         return self._tags
 
@@ -288,11 +280,6 @@ class AlipayOpenMiniCloudAositemQueryModel(object):
                 params['query'] = self.query.to_alipay_dict()
             else:
                 params['query'] = self.query
-        if self.relevant_id:
-            if hasattr(self.relevant_id, 'to_alipay_dict'):
-                params['relevant_id'] = self.relevant_id.to_alipay_dict()
-            else:
-                params['relevant_id'] = self.relevant_id
         if self.tags:
             if isinstance(self.tags, list):
                 for i in range(0, len(self.tags)):
@@ -352,8 +339,6 @@ class AlipayOpenMiniCloudAositemQueryModel(object):
             o.project_id = d['project_id']
         if 'query' in d:
             o.query = d['query']
-        if 'relevant_id' in d:
-            o.relevant_id = d['relevant_id']
         if 'tags' in d:
             o.tags = d['tags']
         if 'user_id' in d:

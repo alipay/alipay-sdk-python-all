@@ -9,10 +9,11 @@ class ApmobileAppPermissionReportIndexDTO(object):
 
     def __init__(self):
         self._app_version = None
-        self._cert_md5 = None
+        self._cert_md_5 = None
+        self._detect_report_pdf_url = None
         self._detect_time = None
         self._developer = None
-        self._md5 = None
+        self._md_5 = None
         self._name = None
         self._package_name = None
         self._platform = None
@@ -32,12 +33,19 @@ class ApmobileAppPermissionReportIndexDTO(object):
     def app_version(self, value):
         self._app_version = value
     @property
-    def cert_md5(self):
-        return self._cert_md5
+    def cert_md_5(self):
+        return self._cert_md_5
 
-    @cert_md5.setter
-    def cert_md5(self, value):
-        self._cert_md5 = value
+    @cert_md_5.setter
+    def cert_md_5(self, value):
+        self._cert_md_5 = value
+    @property
+    def detect_report_pdf_url(self):
+        return self._detect_report_pdf_url
+
+    @detect_report_pdf_url.setter
+    def detect_report_pdf_url(self, value):
+        self._detect_report_pdf_url = value
     @property
     def detect_time(self):
         return self._detect_time
@@ -53,12 +61,12 @@ class ApmobileAppPermissionReportIndexDTO(object):
     def developer(self, value):
         self._developer = value
     @property
-    def md5(self):
-        return self._md5
+    def md_5(self):
+        return self._md_5
 
-    @md5.setter
-    def md5(self, value):
-        self._md5 = value
+    @md_5.setter
+    def md_5(self, value):
+        self._md_5 = value
     @property
     def name(self):
         return self._name
@@ -138,11 +146,16 @@ class ApmobileAppPermissionReportIndexDTO(object):
                 params['app_version'] = self.app_version.to_alipay_dict()
             else:
                 params['app_version'] = self.app_version
-        if self.cert_md5:
-            if hasattr(self.cert_md5, 'to_alipay_dict'):
-                params['cert_md5'] = self.cert_md5.to_alipay_dict()
+        if self.cert_md_5:
+            if hasattr(self.cert_md_5, 'to_alipay_dict'):
+                params['cert_md_5'] = self.cert_md_5.to_alipay_dict()
             else:
-                params['cert_md5'] = self.cert_md5
+                params['cert_md_5'] = self.cert_md_5
+        if self.detect_report_pdf_url:
+            if hasattr(self.detect_report_pdf_url, 'to_alipay_dict'):
+                params['detect_report_pdf_url'] = self.detect_report_pdf_url.to_alipay_dict()
+            else:
+                params['detect_report_pdf_url'] = self.detect_report_pdf_url
         if self.detect_time:
             if hasattr(self.detect_time, 'to_alipay_dict'):
                 params['detect_time'] = self.detect_time.to_alipay_dict()
@@ -153,11 +166,11 @@ class ApmobileAppPermissionReportIndexDTO(object):
                 params['developer'] = self.developer.to_alipay_dict()
             else:
                 params['developer'] = self.developer
-        if self.md5:
-            if hasattr(self.md5, 'to_alipay_dict'):
-                params['md5'] = self.md5.to_alipay_dict()
+        if self.md_5:
+            if hasattr(self.md_5, 'to_alipay_dict'):
+                params['md_5'] = self.md_5.to_alipay_dict()
             else:
-                params['md5'] = self.md5
+                params['md_5'] = self.md_5
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -217,14 +230,16 @@ class ApmobileAppPermissionReportIndexDTO(object):
         o = ApmobileAppPermissionReportIndexDTO()
         if 'app_version' in d:
             o.app_version = d['app_version']
-        if 'cert_md5' in d:
-            o.cert_md5 = d['cert_md5']
+        if 'cert_md_5' in d:
+            o.cert_md_5 = d['cert_md_5']
+        if 'detect_report_pdf_url' in d:
+            o.detect_report_pdf_url = d['detect_report_pdf_url']
         if 'detect_time' in d:
             o.detect_time = d['detect_time']
         if 'developer' in d:
             o.developer = d['developer']
-        if 'md5' in d:
-            o.md5 = d['md5']
+        if 'md_5' in d:
+            o.md_5 = d['md_5']
         if 'name' in d:
             o.name = d['name']
         if 'package_name' in d:

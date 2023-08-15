@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentInfoDTO import RentInfoDTO
 
 
 class MiniGoodsDetailInfoDTO(object):
@@ -18,6 +19,7 @@ class MiniGoodsDetailInfoDTO(object):
         self._out_item_id = None
         self._out_sku_id = None
         self._platform_item_version_id = None
+        self._rent_info = None
         self._sale_price = None
         self._sale_real_price = None
         self._show_url = None
@@ -93,6 +95,16 @@ class MiniGoodsDetailInfoDTO(object):
     def platform_item_version_id(self, value):
         self._platform_item_version_id = value
     @property
+    def rent_info(self):
+        return self._rent_info
+
+    @rent_info.setter
+    def rent_info(self, value):
+        if isinstance(value, RentInfoDTO):
+            self._rent_info = value
+        else:
+            self._rent_info = RentInfoDTO.from_alipay_dict(value)
+    @property
     def sale_price(self):
         return self._sale_price
 
@@ -167,6 +179,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['platform_item_version_id'] = self.platform_item_version_id.to_alipay_dict()
             else:
                 params['platform_item_version_id'] = self.platform_item_version_id
+        if self.rent_info:
+            if hasattr(self.rent_info, 'to_alipay_dict'):
+                params['rent_info'] = self.rent_info.to_alipay_dict()
+            else:
+                params['rent_info'] = self.rent_info
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -209,6 +226,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.out_sku_id = d['out_sku_id']
         if 'platform_item_version_id' in d:
             o.platform_item_version_id = d['platform_item_version_id']
+        if 'rent_info' in d:
+            o.rent_info = d['rent_info']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'sale_real_price' in d:

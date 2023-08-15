@@ -17,6 +17,7 @@ class SignParams(object):
         self._external_logon_id = None
         self._period_rule_params = None
         self._personal_product_code = None
+        self._product_code = None
         self._sign_notify_url = None
         self._sign_scene = None
         self._sub_merchant = None
@@ -69,6 +70,13 @@ class SignParams(object):
     @personal_product_code.setter
     def personal_product_code(self, value):
         self._personal_product_code = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def sign_notify_url(self):
         return self._sign_notify_url
@@ -127,6 +135,11 @@ class SignParams(object):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
             else:
                 params['personal_product_code'] = self.personal_product_code
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.sign_notify_url:
             if hasattr(self.sign_notify_url, 'to_alipay_dict'):
                 params['sign_notify_url'] = self.sign_notify_url.to_alipay_dict()
@@ -161,6 +174,8 @@ class SignParams(object):
             o.period_rule_params = d['period_rule_params']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'sign_notify_url' in d:
             o.sign_notify_url = d['sign_notify_url']
         if 'sign_scene' in d:

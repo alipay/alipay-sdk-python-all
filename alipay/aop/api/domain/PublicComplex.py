@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PublicComplexWzw import PublicComplexWzw
 
 
 class PublicComplex(object):
 
     def __init__(self):
+        self._complex_testa = None
         self._test_boolean = None
         self._test_date = None
         self._test_number = None
@@ -16,6 +18,16 @@ class PublicComplex(object):
         self._test_string_open_id = None
         self._update_test = None
 
+    @property
+    def complex_testa(self):
+        return self._complex_testa
+
+    @complex_testa.setter
+    def complex_testa(self, value):
+        if isinstance(value, PublicComplexWzw):
+            self._complex_testa = value
+        else:
+            self._complex_testa = PublicComplexWzw.from_alipay_dict(value)
     @property
     def test_boolean(self):
         return self._test_boolean
@@ -78,6 +90,11 @@ class PublicComplex(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.complex_testa:
+            if hasattr(self.complex_testa, 'to_alipay_dict'):
+                params['complex_testa'] = self.complex_testa.to_alipay_dict()
+            else:
+                params['complex_testa'] = self.complex_testa
         if self.test_boolean:
             if isinstance(self.test_boolean, list):
                 for i in range(0, len(self.test_boolean)):
@@ -135,6 +152,8 @@ class PublicComplex(object):
         if not d:
             return None
         o = PublicComplex()
+        if 'complex_testa' in d:
+            o.complex_testa = d['complex_testa']
         if 'test_boolean' in d:
             o.test_boolean = d['test_boolean']
         if 'test_date' in d:

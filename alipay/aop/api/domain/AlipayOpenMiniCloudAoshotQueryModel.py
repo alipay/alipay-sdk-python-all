@@ -15,7 +15,6 @@ class AlipayOpenMiniCloudAoshotQueryModel(object):
         self._longitude = None
         self._open_id = None
         self._project_id = None
-        self._relevant_id = None
         self._size = None
         self._sort_type = None
         self._user_id = None
@@ -70,13 +69,6 @@ class AlipayOpenMiniCloudAoshotQueryModel(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
-    @property
-    def relevant_id(self):
-        return self._relevant_id
-
-    @relevant_id.setter
-    def relevant_id(self, value):
-        self._relevant_id = value
     @property
     def size(self):
         return self._size
@@ -144,11 +136,6 @@ class AlipayOpenMiniCloudAoshotQueryModel(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
-        if self.relevant_id:
-            if hasattr(self.relevant_id, 'to_alipay_dict'):
-                params['relevant_id'] = self.relevant_id.to_alipay_dict()
-            else:
-                params['relevant_id'] = self.relevant_id
         if self.size:
             if hasattr(self.size, 'to_alipay_dict'):
                 params['size'] = self.size.to_alipay_dict()
@@ -190,8 +177,6 @@ class AlipayOpenMiniCloudAoshotQueryModel(object):
             o.open_id = d['open_id']
         if 'project_id' in d:
             o.project_id = d['project_id']
-        if 'relevant_id' in d:
-            o.relevant_id = d['relevant_id']
         if 'size' in d:
             o.size = d['size']
         if 'sort_type' in d:

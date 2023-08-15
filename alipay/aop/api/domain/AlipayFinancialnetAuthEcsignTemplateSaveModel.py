@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CorporateSealRectOpenVO import CorporateSealRectOpenVO
 from alipay.aop.api.domain.MultilineTextRectOpenVO import MultilineTextRectOpenVO
 from alipay.aop.api.domain.PersonalSealRectOpenVO import PersonalSealRectOpenVO
+from alipay.aop.api.domain.MultilineTextRectOpenVO import MultilineTextRectOpenVO
 from alipay.aop.api.domain.TimeStampRectOpenVO import TimeStampRectOpenVO
 
 
@@ -15,6 +16,7 @@ class AlipayFinancialnetAuthEcsignTemplateSaveModel(object):
         self._corporate_seal_rects = None
         self._multiline_text_rects = None
         self._personal_seal_rects = None
+        self._singleline_text_rects = None
         self._template_file_id = None
         self._template_file_type = None
         self._template_id = None
@@ -61,6 +63,19 @@ class AlipayFinancialnetAuthEcsignTemplateSaveModel(object):
                     self._personal_seal_rects.append(i)
                 else:
                     self._personal_seal_rects.append(PersonalSealRectOpenVO.from_alipay_dict(i))
+    @property
+    def singleline_text_rects(self):
+        return self._singleline_text_rects
+
+    @singleline_text_rects.setter
+    def singleline_text_rects(self, value):
+        if isinstance(value, list):
+            self._singleline_text_rects = list()
+            for i in value:
+                if isinstance(i, MultilineTextRectOpenVO):
+                    self._singleline_text_rects.append(i)
+                else:
+                    self._singleline_text_rects.append(MultilineTextRectOpenVO.from_alipay_dict(i))
     @property
     def template_file_id(self):
         return self._template_file_id
@@ -143,6 +158,16 @@ class AlipayFinancialnetAuthEcsignTemplateSaveModel(object):
                 params['personal_seal_rects'] = self.personal_seal_rects.to_alipay_dict()
             else:
                 params['personal_seal_rects'] = self.personal_seal_rects
+        if self.singleline_text_rects:
+            if isinstance(self.singleline_text_rects, list):
+                for i in range(0, len(self.singleline_text_rects)):
+                    element = self.singleline_text_rects[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.singleline_text_rects[i] = element.to_alipay_dict()
+            if hasattr(self.singleline_text_rects, 'to_alipay_dict'):
+                params['singleline_text_rects'] = self.singleline_text_rects.to_alipay_dict()
+            else:
+                params['singleline_text_rects'] = self.singleline_text_rects
         if self.template_file_id:
             if hasattr(self.template_file_id, 'to_alipay_dict'):
                 params['template_file_id'] = self.template_file_id.to_alipay_dict()
@@ -191,6 +216,8 @@ class AlipayFinancialnetAuthEcsignTemplateSaveModel(object):
             o.multiline_text_rects = d['multiline_text_rects']
         if 'personal_seal_rects' in d:
             o.personal_seal_rects = d['personal_seal_rects']
+        if 'singleline_text_rects' in d:
+            o.singleline_text_rects = d['singleline_text_rects']
         if 'template_file_id' in d:
             o.template_file_id = d['template_file_id']
         if 'template_file_type' in d:

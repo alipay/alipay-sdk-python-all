@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AosHintItem(object):
 
     def __init__(self):
+        self._biz_trace_id = None
         self._score = None
         self._sequence = None
         self._title = None
         self._trace_id = None
 
+    @property
+    def biz_trace_id(self):
+        return self._biz_trace_id
+
+    @biz_trace_id.setter
+    def biz_trace_id(self, value):
+        self._biz_trace_id = value
     @property
     def score(self):
         return self._score
@@ -45,6 +53,11 @@ class AosHintItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_trace_id:
+            if hasattr(self.biz_trace_id, 'to_alipay_dict'):
+                params['biz_trace_id'] = self.biz_trace_id.to_alipay_dict()
+            else:
+                params['biz_trace_id'] = self.biz_trace_id
         if self.score:
             if hasattr(self.score, 'to_alipay_dict'):
                 params['score'] = self.score.to_alipay_dict()
@@ -72,6 +85,8 @@ class AosHintItem(object):
         if not d:
             return None
         o = AosHintItem()
+        if 'biz_trace_id' in d:
+            o.biz_trace_id = d['biz_trace_id']
         if 'score' in d:
             o.score = d['score']
         if 'sequence' in d:

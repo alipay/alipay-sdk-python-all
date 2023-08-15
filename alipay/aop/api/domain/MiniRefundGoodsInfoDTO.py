@@ -3,16 +3,28 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MiniRefundCertificateDTO import MiniRefundCertificateDTO
 
 
 class MiniRefundGoodsInfoDTO(object):
 
     def __init__(self):
+        self._certificate_info = None
         self._goods_id = None
         self._out_item_id = None
         self._out_sku_id = None
         self._refund_amount = None
 
+    @property
+    def certificate_info(self):
+        return self._certificate_info
+
+    @certificate_info.setter
+    def certificate_info(self, value):
+        if isinstance(value, MiniRefundCertificateDTO):
+            self._certificate_info = value
+        else:
+            self._certificate_info = MiniRefundCertificateDTO.from_alipay_dict(value)
     @property
     def goods_id(self):
         return self._goods_id
@@ -45,6 +57,11 @@ class MiniRefundGoodsInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_info:
+            if hasattr(self.certificate_info, 'to_alipay_dict'):
+                params['certificate_info'] = self.certificate_info.to_alipay_dict()
+            else:
+                params['certificate_info'] = self.certificate_info
         if self.goods_id:
             if hasattr(self.goods_id, 'to_alipay_dict'):
                 params['goods_id'] = self.goods_id.to_alipay_dict()
@@ -72,6 +89,8 @@ class MiniRefundGoodsInfoDTO(object):
         if not d:
             return None
         o = MiniRefundGoodsInfoDTO()
+        if 'certificate_info' in d:
+            o.certificate_info = d['certificate_info']
         if 'goods_id' in d:
             o.goods_id = d['goods_id']
         if 'out_item_id' in d:

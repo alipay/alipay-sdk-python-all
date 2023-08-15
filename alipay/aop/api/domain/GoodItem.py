@@ -18,7 +18,6 @@ class GoodItem(object):
         self._deposit_amount = None
         self._detail_pic_num = None
         self._detail_url = None
-        self._ext_json = None
         self._fresh_degree = None
         self._front_end_category = None
         self._id = None
@@ -116,13 +115,6 @@ class GoodItem(object):
     @detail_url.setter
     def detail_url(self, value):
         self._detail_url = value
-    @property
-    def ext_json(self):
-        return self._ext_json
-
-    @ext_json.setter
-    def ext_json(self, value):
-        self._ext_json = value
     @property
     def fresh_degree(self):
         return self._fresh_degree
@@ -349,11 +341,6 @@ class GoodItem(object):
                 params['detail_url'] = self.detail_url.to_alipay_dict()
             else:
                 params['detail_url'] = self.detail_url
-        if self.ext_json:
-            if hasattr(self.ext_json, 'to_alipay_dict'):
-                params['ext_json'] = self.ext_json.to_alipay_dict()
-            else:
-                params['ext_json'] = self.ext_json
         if self.fresh_degree:
             if hasattr(self.fresh_degree, 'to_alipay_dict'):
                 params['fresh_degree'] = self.fresh_degree.to_alipay_dict()
@@ -506,8 +493,6 @@ class GoodItem(object):
             o.detail_pic_num = d['detail_pic_num']
         if 'detail_url' in d:
             o.detail_url = d['detail_url']
-        if 'ext_json' in d:
-            o.ext_json = d['ext_json']
         if 'fresh_degree' in d:
             o.fresh_degree = d['fresh_degree']
         if 'front_end_category' in d:

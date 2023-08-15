@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
 
     def __init__(self):
+        self._assume_token = None
         self._env = None
         self._file_id_list = None
         self._next_token = None
         self._page_size = None
         self._prefix = None
 
+    @property
+    def assume_token(self):
+        return self._assume_token
+
+    @assume_token.setter
+    def assume_token(self, value):
+        self._assume_token = value
     @property
     def env(self):
         return self._env
@@ -56,6 +64,11 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.assume_token:
+            if hasattr(self.assume_token, 'to_alipay_dict'):
+                params['assume_token'] = self.assume_token.to_alipay_dict()
+            else:
+                params['assume_token'] = self.assume_token
         if self.env:
             if hasattr(self.env, 'to_alipay_dict'):
                 params['env'] = self.env.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
         if not d:
             return None
         o = AlipayCloudCloudrunObjectstorageFilelistQueryModel()
+        if 'assume_token' in d:
+            o.assume_token = d['assume_token']
         if 'env' in d:
             o.env = d['env']
         if 'file_id_list' in d:

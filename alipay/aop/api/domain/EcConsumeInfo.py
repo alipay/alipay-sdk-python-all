@@ -14,6 +14,7 @@ class EcConsumeInfo(object):
         self._biz_out_no = None
         self._category_name = None
         self._consume_amount = None
+        self._consume_biz_type = None
         self._consume_category = None
         self._consume_fee_with_discount = None
         self._consume_memo = None
@@ -35,6 +36,9 @@ class EcConsumeInfo(object):
         self._order_complete_label = None
         self._order_complete_time = None
         self._pay_no = None
+        self._payer_card_no = None
+        self._payer_logon_id = None
+        self._payer_name = None
         self._peer_pay_amount = None
         self._peer_payer_card_no = None
         self._peer_refund_amount = None
@@ -89,6 +93,13 @@ class EcConsumeInfo(object):
     @consume_amount.setter
     def consume_amount(self, value):
         self._consume_amount = value
+    @property
+    def consume_biz_type(self):
+        return self._consume_biz_type
+
+    @consume_biz_type.setter
+    def consume_biz_type(self, value):
+        self._consume_biz_type = value
     @property
     def consume_category(self):
         return self._consume_category
@@ -237,6 +248,27 @@ class EcConsumeInfo(object):
     def pay_no(self, value):
         self._pay_no = value
     @property
+    def payer_card_no(self):
+        return self._payer_card_no
+
+    @payer_card_no.setter
+    def payer_card_no(self, value):
+        self._payer_card_no = value
+    @property
+    def payer_logon_id(self):
+        return self._payer_logon_id
+
+    @payer_logon_id.setter
+    def payer_logon_id(self, value):
+        self._payer_logon_id = value
+    @property
+    def payer_name(self):
+        return self._payer_name
+
+    @payer_name.setter
+    def payer_name(self, value):
+        self._payer_name = value
+    @property
     def peer_pay_amount(self):
         return self._peer_pay_amount
 
@@ -347,6 +379,11 @@ class EcConsumeInfo(object):
                 params['consume_amount'] = self.consume_amount.to_alipay_dict()
             else:
                 params['consume_amount'] = self.consume_amount
+        if self.consume_biz_type:
+            if hasattr(self.consume_biz_type, 'to_alipay_dict'):
+                params['consume_biz_type'] = self.consume_biz_type.to_alipay_dict()
+            else:
+                params['consume_biz_type'] = self.consume_biz_type
         if self.consume_category:
             if hasattr(self.consume_category, 'to_alipay_dict'):
                 params['consume_category'] = self.consume_category.to_alipay_dict()
@@ -452,6 +489,21 @@ class EcConsumeInfo(object):
                 params['pay_no'] = self.pay_no.to_alipay_dict()
             else:
                 params['pay_no'] = self.pay_no
+        if self.payer_card_no:
+            if hasattr(self.payer_card_no, 'to_alipay_dict'):
+                params['payer_card_no'] = self.payer_card_no.to_alipay_dict()
+            else:
+                params['payer_card_no'] = self.payer_card_no
+        if self.payer_logon_id:
+            if hasattr(self.payer_logon_id, 'to_alipay_dict'):
+                params['payer_logon_id'] = self.payer_logon_id.to_alipay_dict()
+            else:
+                params['payer_logon_id'] = self.payer_logon_id
+        if self.payer_name:
+            if hasattr(self.payer_name, 'to_alipay_dict'):
+                params['payer_name'] = self.payer_name.to_alipay_dict()
+            else:
+                params['payer_name'] = self.payer_name
         if self.peer_pay_amount:
             if hasattr(self.peer_pay_amount, 'to_alipay_dict'):
                 params['peer_pay_amount'] = self.peer_pay_amount.to_alipay_dict()
@@ -526,6 +578,8 @@ class EcConsumeInfo(object):
             o.category_name = d['category_name']
         if 'consume_amount' in d:
             o.consume_amount = d['consume_amount']
+        if 'consume_biz_type' in d:
+            o.consume_biz_type = d['consume_biz_type']
         if 'consume_category' in d:
             o.consume_category = d['consume_category']
         if 'consume_fee_with_discount' in d:
@@ -568,6 +622,12 @@ class EcConsumeInfo(object):
             o.order_complete_time = d['order_complete_time']
         if 'pay_no' in d:
             o.pay_no = d['pay_no']
+        if 'payer_card_no' in d:
+            o.payer_card_no = d['payer_card_no']
+        if 'payer_logon_id' in d:
+            o.payer_logon_id = d['payer_logon_id']
+        if 'payer_name' in d:
+            o.payer_name = d['payer_name']
         if 'peer_pay_amount' in d:
             o.peer_pay_amount = d['peer_pay_amount']
         if 'peer_payer_card_no' in d:

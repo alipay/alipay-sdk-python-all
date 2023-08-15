@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ScenePayParticipantBizParamDTO import ScenePayParticipantBizParamDTO
+
+
+class ScenePayParticipantInfoDTO(object):
+
+    def __init__(self):
+        self._participant_biz_param = None
+        self._participant_id = None
+        self._participant_id_type = None
+
+    @property
+    def participant_biz_param(self):
+        return self._participant_biz_param
+
+    @participant_biz_param.setter
+    def participant_biz_param(self, value):
+        if isinstance(value, ScenePayParticipantBizParamDTO):
+            self._participant_biz_param = value
+        else:
+            self._participant_biz_param = ScenePayParticipantBizParamDTO.from_alipay_dict(value)
+    @property
+    def participant_id(self):
+        return self._participant_id
+
+    @participant_id.setter
+    def participant_id(self, value):
+        self._participant_id = value
+    @property
+    def participant_id_type(self):
+        return self._participant_id_type
+
+    @participant_id_type.setter
+    def participant_id_type(self, value):
+        self._participant_id_type = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.participant_biz_param:
+            if hasattr(self.participant_biz_param, 'to_alipay_dict'):
+                params['participant_biz_param'] = self.participant_biz_param.to_alipay_dict()
+            else:
+                params['participant_biz_param'] = self.participant_biz_param
+        if self.participant_id:
+            if hasattr(self.participant_id, 'to_alipay_dict'):
+                params['participant_id'] = self.participant_id.to_alipay_dict()
+            else:
+                params['participant_id'] = self.participant_id
+        if self.participant_id_type:
+            if hasattr(self.participant_id_type, 'to_alipay_dict'):
+                params['participant_id_type'] = self.participant_id_type.to_alipay_dict()
+            else:
+                params['participant_id_type'] = self.participant_id_type
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = ScenePayParticipantInfoDTO()
+        if 'participant_biz_param' in d:
+            o.participant_biz_param = d['participant_biz_param']
+        if 'participant_id' in d:
+            o.participant_id = d['participant_id']
+        if 'participant_id_type' in d:
+            o.participant_id_type = d['participant_id_type']
+        return o
+
+

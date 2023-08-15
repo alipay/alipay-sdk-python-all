@@ -9,6 +9,7 @@ class AlipayFundWalletOperationQueryModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._biz_types = None
         self._current_page = None
         self._end_biz_dt = None
         self._page_size = None
@@ -23,6 +24,16 @@ class AlipayFundWalletOperationQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def biz_types(self):
+        return self._biz_types
+
+    @biz_types.setter
+    def biz_types(self, value):
+        if isinstance(value, list):
+            self._biz_types = list()
+            for i in value:
+                self._biz_types.append(i)
     @property
     def current_page(self):
         return self._current_page
@@ -74,6 +85,16 @@ class AlipayFundWalletOperationQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.biz_types:
+            if isinstance(self.biz_types, list):
+                for i in range(0, len(self.biz_types)):
+                    element = self.biz_types[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.biz_types[i] = element.to_alipay_dict()
+            if hasattr(self.biz_types, 'to_alipay_dict'):
+                params['biz_types'] = self.biz_types.to_alipay_dict()
+            else:
+                params['biz_types'] = self.biz_types
         if self.current_page:
             if hasattr(self.current_page, 'to_alipay_dict'):
                 params['current_page'] = self.current_page.to_alipay_dict()
@@ -113,6 +134,8 @@ class AlipayFundWalletOperationQueryModel(object):
         o = AlipayFundWalletOperationQueryModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'biz_types' in d:
+            o.biz_types = d['biz_types']
         if 'current_page' in d:
             o.current_page = d['current_page']
         if 'end_biz_dt' in d:

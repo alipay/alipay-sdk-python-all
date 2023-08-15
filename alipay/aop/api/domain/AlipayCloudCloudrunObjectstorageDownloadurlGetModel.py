@@ -9,9 +9,17 @@ from alipay.aop.api.domain.DownloadUrlRequest import DownloadUrlRequest
 class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
 
     def __init__(self):
+        self._assume_token = None
         self._env = None
         self._file_list = None
 
+    @property
+    def assume_token(self):
+        return self._assume_token
+
+    @assume_token.setter
+    def assume_token(self, value):
+        self._assume_token = value
     @property
     def env(self):
         return self._env
@@ -36,6 +44,11 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.assume_token:
+            if hasattr(self.assume_token, 'to_alipay_dict'):
+                params['assume_token'] = self.assume_token.to_alipay_dict()
+            else:
+                params['assume_token'] = self.assume_token
         if self.env:
             if hasattr(self.env, 'to_alipay_dict'):
                 params['env'] = self.env.to_alipay_dict()
@@ -58,6 +71,8 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
         if not d:
             return None
         o = AlipayCloudCloudrunObjectstorageDownloadurlGetModel()
+        if 'assume_token' in d:
+            o.assume_token = d['assume_token']
         if 'env' in d:
             o.env = d['env']
         if 'file_list' in d:

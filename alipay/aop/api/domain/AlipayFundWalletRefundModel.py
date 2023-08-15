@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RefundBusinessExtend import RefundBusinessExtend
 
 
 class AlipayFundWalletRefundModel(object):
@@ -16,6 +17,7 @@ class AlipayFundWalletRefundModel(object):
         self._principal_open_id = None
         self._principal_type = None
         self._product_code = None
+        self._refund_business_extend = None
         self._refund_strategy = None
         self._user_wallet_id = None
 
@@ -76,6 +78,16 @@ class AlipayFundWalletRefundModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def refund_business_extend(self):
+        return self._refund_business_extend
+
+    @refund_business_extend.setter
+    def refund_business_extend(self, value):
+        if isinstance(value, RefundBusinessExtend):
+            self._refund_business_extend = value
+        else:
+            self._refund_business_extend = RefundBusinessExtend.from_alipay_dict(value)
+    @property
     def refund_strategy(self):
         return self._refund_strategy
 
@@ -133,6 +145,11 @@ class AlipayFundWalletRefundModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.refund_business_extend:
+            if hasattr(self.refund_business_extend, 'to_alipay_dict'):
+                params['refund_business_extend'] = self.refund_business_extend.to_alipay_dict()
+            else:
+                params['refund_business_extend'] = self.refund_business_extend
         if self.refund_strategy:
             if hasattr(self.refund_strategy, 'to_alipay_dict'):
                 params['refund_strategy'] = self.refund_strategy.to_alipay_dict()
@@ -166,6 +183,8 @@ class AlipayFundWalletRefundModel(object):
             o.principal_type = d['principal_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'refund_business_extend' in d:
+            o.refund_business_extend = d['refund_business_extend']
         if 'refund_strategy' in d:
             o.refund_strategy = d['refund_strategy']
         if 'user_wallet_id' in d:

@@ -11,6 +11,7 @@ class ZhimaCreditEpCreditlinkCollectQueryModel(object):
         self._data_type = None
         self._ep_cert_no = None
         self._merchant_request_id = None
+        self._product_code = None
 
     @property
     def data_type(self):
@@ -33,6 +34,13 @@ class ZhimaCreditEpCreditlinkCollectQueryModel(object):
     @merchant_request_id.setter
     def merchant_request_id(self, value):
         self._merchant_request_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class ZhimaCreditEpCreditlinkCollectQueryModel(object):
                 params['merchant_request_id'] = self.merchant_request_id.to_alipay_dict()
             else:
                 params['merchant_request_id'] = self.merchant_request_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class ZhimaCreditEpCreditlinkCollectQueryModel(object):
             o.ep_cert_no = d['ep_cert_no']
         if 'merchant_request_id' in d:
             o.merchant_request_id = d['merchant_request_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         return o
 
 

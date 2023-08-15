@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class DataItem(object):
 
     def __init__(self):
+        self._biz_trace_id = None
         self._ext_res_field = None
         self._highlight_summary = None
         self._highlight_title = None
@@ -20,6 +21,13 @@ class DataItem(object):
         self._title = None
         self._trace_id = None
 
+    @property
+    def biz_trace_id(self):
+        return self._biz_trace_id
+
+    @biz_trace_id.setter
+    def biz_trace_id(self, value):
+        self._biz_trace_id = value
     @property
     def ext_res_field(self):
         return self._ext_res_field
@@ -107,6 +115,11 @@ class DataItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_trace_id:
+            if hasattr(self.biz_trace_id, 'to_alipay_dict'):
+                params['biz_trace_id'] = self.biz_trace_id.to_alipay_dict()
+            else:
+                params['biz_trace_id'] = self.biz_trace_id
         if self.ext_res_field:
             if isinstance(self.ext_res_field, list):
                 for i in range(0, len(self.ext_res_field)):
@@ -179,6 +192,8 @@ class DataItem(object):
         if not d:
             return None
         o = DataItem()
+        if 'biz_trace_id' in d:
+            o.biz_trace_id = d['biz_trace_id']
         if 'ext_res_field' in d:
             o.ext_res_field = d['ext_res_field']
         if 'highlight_summary' in d:

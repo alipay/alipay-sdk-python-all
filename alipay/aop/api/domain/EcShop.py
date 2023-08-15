@@ -10,6 +10,7 @@ class EcShop(object):
 
     def __init__(self):
         self._address = None
+        self._brand_id = None
         self._city_id = None
         self._city_name = None
         self._distance = None
@@ -39,6 +40,13 @@ class EcShop(object):
     @address.setter
     def address(self, value):
         self._address = value
+    @property
+    def brand_id(self):
+        return self._brand_id
+
+    @brand_id.setter
+    def brand_id(self, value):
+        self._brand_id = value
     @property
     def city_id(self):
         return self._city_id
@@ -198,6 +206,11 @@ class EcShop(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
+        if self.brand_id:
+            if hasattr(self.brand_id, 'to_alipay_dict'):
+                params['brand_id'] = self.brand_id.to_alipay_dict()
+            else:
+                params['brand_id'] = self.brand_id
         if self.city_id:
             if hasattr(self.city_id, 'to_alipay_dict'):
                 params['city_id'] = self.city_id.to_alipay_dict()
@@ -312,6 +325,8 @@ class EcShop(object):
         o = EcShop()
         if 'address' in d:
             o.address = d['address']
+        if 'brand_id' in d:
+            o.brand_id = d['brand_id']
         if 'city_id' in d:
             o.city_id = d['city_id']
         if 'city_name' in d:

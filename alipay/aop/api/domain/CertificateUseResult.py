@@ -13,6 +13,7 @@ class CertificateUseResult(object):
         self._code = None
         self._encrypted_code = None
         self._msg = None
+        self._out_order_id = None
         self._result = None
         self._use_order_no = None
 
@@ -47,6 +48,13 @@ class CertificateUseResult(object):
     @msg.setter
     def msg(self, value):
         self._msg = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
     @property
     def result(self):
         return self._result
@@ -85,6 +93,11 @@ class CertificateUseResult(object):
                 params['msg'] = self.msg.to_alipay_dict()
             else:
                 params['msg'] = self.msg
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.result:
             if hasattr(self.result, 'to_alipay_dict'):
                 params['result'] = self.result.to_alipay_dict()
@@ -110,6 +123,8 @@ class CertificateUseResult(object):
             o.encrypted_code = d['encrypted_code']
         if 'msg' in d:
             o.msg = d['msg']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'result' in d:
             o.result = d['result']
         if 'use_order_no' in d:

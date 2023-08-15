@@ -14,8 +14,10 @@ class MedicalNationalPayAuthInfo(object):
         self._auth_url = None
         self._medical_card_id = None
         self._medical_card_inst_id = None
+        self._medical_card_status = None
         self._openapi_app_id = None
         self._pay_auth_no = None
+        self._rels_medical_card_status = None
         self._rels_pay_flag = None
         self._rels_pay_user_name = None
         self._req_biz_no = None
@@ -63,6 +65,13 @@ class MedicalNationalPayAuthInfo(object):
     def medical_card_inst_id(self, value):
         self._medical_card_inst_id = value
     @property
+    def medical_card_status(self):
+        return self._medical_card_status
+
+    @medical_card_status.setter
+    def medical_card_status(self, value):
+        self._medical_card_status = value
+    @property
     def openapi_app_id(self):
         return self._openapi_app_id
 
@@ -76,6 +85,13 @@ class MedicalNationalPayAuthInfo(object):
     @pay_auth_no.setter
     def pay_auth_no(self, value):
         self._pay_auth_no = value
+    @property
+    def rels_medical_card_status(self):
+        return self._rels_medical_card_status
+
+    @rels_medical_card_status.setter
+    def rels_medical_card_status(self, value):
+        self._rels_medical_card_status = value
     @property
     def rels_pay_flag(self):
         return self._rels_pay_flag
@@ -131,6 +147,11 @@ class MedicalNationalPayAuthInfo(object):
                 params['medical_card_inst_id'] = self.medical_card_inst_id.to_alipay_dict()
             else:
                 params['medical_card_inst_id'] = self.medical_card_inst_id
+        if self.medical_card_status:
+            if hasattr(self.medical_card_status, 'to_alipay_dict'):
+                params['medical_card_status'] = self.medical_card_status.to_alipay_dict()
+            else:
+                params['medical_card_status'] = self.medical_card_status
         if self.openapi_app_id:
             if hasattr(self.openapi_app_id, 'to_alipay_dict'):
                 params['openapi_app_id'] = self.openapi_app_id.to_alipay_dict()
@@ -141,6 +162,11 @@ class MedicalNationalPayAuthInfo(object):
                 params['pay_auth_no'] = self.pay_auth_no.to_alipay_dict()
             else:
                 params['pay_auth_no'] = self.pay_auth_no
+        if self.rels_medical_card_status:
+            if hasattr(self.rels_medical_card_status, 'to_alipay_dict'):
+                params['rels_medical_card_status'] = self.rels_medical_card_status.to_alipay_dict()
+            else:
+                params['rels_medical_card_status'] = self.rels_medical_card_status
         if self.rels_pay_flag:
             if hasattr(self.rels_pay_flag, 'to_alipay_dict'):
                 params['rels_pay_flag'] = self.rels_pay_flag.to_alipay_dict()
@@ -175,10 +201,14 @@ class MedicalNationalPayAuthInfo(object):
             o.medical_card_id = d['medical_card_id']
         if 'medical_card_inst_id' in d:
             o.medical_card_inst_id = d['medical_card_inst_id']
+        if 'medical_card_status' in d:
+            o.medical_card_status = d['medical_card_status']
         if 'openapi_app_id' in d:
             o.openapi_app_id = d['openapi_app_id']
         if 'pay_auth_no' in d:
             o.pay_auth_no = d['pay_auth_no']
+        if 'rels_medical_card_status' in d:
+            o.rels_medical_card_status = d['rels_medical_card_status']
         if 'rels_pay_flag' in d:
             o.rels_pay_flag = d['rels_pay_flag']
         if 'rels_pay_user_name' in d:

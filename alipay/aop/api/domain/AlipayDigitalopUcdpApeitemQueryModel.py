@@ -10,6 +10,7 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
 
     def __init__(self):
         self._context = None
+        self._custom_id = None
         self._exposed_item_list = None
         self._item_id_list = None
         self._open_id = None
@@ -31,6 +32,13 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
             self._context = value
         else:
             self._context = ApeRecContext.from_alipay_dict(value)
+    @property
+    def custom_id(self):
+        return self._custom_id
+
+    @custom_id.setter
+    def custom_id(self, value):
+        self._custom_id = value
     @property
     def exposed_item_list(self):
         return self._exposed_item_list
@@ -116,6 +124,11 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
                 params['context'] = self.context.to_alipay_dict()
             else:
                 params['context'] = self.context
+        if self.custom_id:
+            if hasattr(self.custom_id, 'to_alipay_dict'):
+                params['custom_id'] = self.custom_id.to_alipay_dict()
+            else:
+                params['custom_id'] = self.custom_id
         if self.exposed_item_list:
             if isinstance(self.exposed_item_list, list):
                 for i in range(0, len(self.exposed_item_list)):
@@ -185,6 +198,8 @@ class AlipayDigitalopUcdpApeitemQueryModel(object):
         o = AlipayDigitalopUcdpApeitemQueryModel()
         if 'context' in d:
             o.context = d['context']
+        if 'custom_id' in d:
+            o.custom_id = d['custom_id']
         if 'exposed_item_list' in d:
             o.exposed_item_list = d['exposed_item_list']
         if 'item_id_list' in d:

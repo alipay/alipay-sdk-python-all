@@ -10,9 +10,17 @@ from alipay.aop.api.domain.ParticipantInfoDTO import ParticipantInfoDTO
 class EmployeeCardInfo(object):
 
     def __init__(self):
+        self._employee_card_no = None
         self._hire_principal = None
         self._invite_principal = None
 
+    @property
+    def employee_card_no(self):
+        return self._employee_card_no
+
+    @employee_card_no.setter
+    def employee_card_no(self, value):
+        self._employee_card_no = value
     @property
     def hire_principal(self):
         return self._hire_principal
@@ -37,6 +45,11 @@ class EmployeeCardInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.employee_card_no:
+            if hasattr(self.employee_card_no, 'to_alipay_dict'):
+                params['employee_card_no'] = self.employee_card_no.to_alipay_dict()
+            else:
+                params['employee_card_no'] = self.employee_card_no
         if self.hire_principal:
             if hasattr(self.hire_principal, 'to_alipay_dict'):
                 params['hire_principal'] = self.hire_principal.to_alipay_dict()
@@ -54,6 +67,8 @@ class EmployeeCardInfo(object):
         if not d:
             return None
         o = EmployeeCardInfo()
+        if 'employee_card_no' in d:
+            o.employee_card_no = d['employee_card_no']
         if 'hire_principal' in d:
             o.hire_principal = d['hire_principal']
         if 'invite_principal' in d:

@@ -19,6 +19,8 @@ class AlipayOpenAppItemCreateModel(object):
         self._direct_path = None
         self._head_img = None
         self._image_list = None
+        self._item_details_page_model = None
+        self._item_type = None
         self._original_price = None
         self._out_item_id = None
         self._path = None
@@ -97,6 +99,20 @@ class AlipayOpenAppItemCreateModel(object):
             self._image_list = list()
             for i in value:
                 self._image_list.append(i)
+    @property
+    def item_details_page_model(self):
+        return self._item_details_page_model
+
+    @item_details_page_model.setter
+    def item_details_page_model(self, value):
+        self._item_details_page_model = value
+    @property
+    def item_type(self):
+        return self._item_type
+
+    @item_type.setter
+    def item_type(self, value):
+        self._item_type = value
     @property
     def original_price(self):
         return self._original_price
@@ -220,6 +236,16 @@ class AlipayOpenAppItemCreateModel(object):
                 params['image_list'] = self.image_list.to_alipay_dict()
             else:
                 params['image_list'] = self.image_list
+        if self.item_details_page_model:
+            if hasattr(self.item_details_page_model, 'to_alipay_dict'):
+                params['item_details_page_model'] = self.item_details_page_model.to_alipay_dict()
+            else:
+                params['item_details_page_model'] = self.item_details_page_model
+        if self.item_type:
+            if hasattr(self.item_type, 'to_alipay_dict'):
+                params['item_type'] = self.item_type.to_alipay_dict()
+            else:
+                params['item_type'] = self.item_type
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -293,6 +319,10 @@ class AlipayOpenAppItemCreateModel(object):
             o.head_img = d['head_img']
         if 'image_list' in d:
             o.image_list = d['image_list']
+        if 'item_details_page_model' in d:
+            o.item_details_page_model = d['item_details_page_model']
+        if 'item_type' in d:
+            o.item_type = d['item_type']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'out_item_id' in d:

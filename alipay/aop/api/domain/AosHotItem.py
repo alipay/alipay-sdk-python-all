@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AosHotItem(object):
 
     def __init__(self):
+        self._biz_trace_id = None
         self._image = None
         self._score = None
         self._sequence = None
         self._title = None
         self._trace_id = None
 
+    @property
+    def biz_trace_id(self):
+        return self._biz_trace_id
+
+    @biz_trace_id.setter
+    def biz_trace_id(self, value):
+        self._biz_trace_id = value
     @property
     def image(self):
         return self._image
@@ -53,6 +61,11 @@ class AosHotItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_trace_id:
+            if hasattr(self.biz_trace_id, 'to_alipay_dict'):
+                params['biz_trace_id'] = self.biz_trace_id.to_alipay_dict()
+            else:
+                params['biz_trace_id'] = self.biz_trace_id
         if self.image:
             if hasattr(self.image, 'to_alipay_dict'):
                 params['image'] = self.image.to_alipay_dict()
@@ -85,6 +98,8 @@ class AosHotItem(object):
         if not d:
             return None
         o = AosHotItem()
+        if 'biz_trace_id' in d:
+            o.biz_trace_id = d['biz_trace_id']
         if 'image' in d:
             o.image = d['image']
         if 'score' in d:

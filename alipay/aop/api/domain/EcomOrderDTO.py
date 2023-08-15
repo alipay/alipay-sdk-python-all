@@ -18,6 +18,7 @@ class EcomOrderDTO(object):
         self._buyer_id = None
         self._buyer_nick = None
         self._charge_duration = None
+        self._charge_guarantee_plan_type = None
         self._credit_deposit_money = None
         self._discount_fee = None
         self._ext_info = None
@@ -86,6 +87,13 @@ class EcomOrderDTO(object):
             self._charge_duration = value
         else:
             self._charge_duration = InsPeriodDTO.from_alipay_dict(value)
+    @property
+    def charge_guarantee_plan_type(self):
+        return self._charge_guarantee_plan_type
+
+    @charge_guarantee_plan_type.setter
+    def charge_guarantee_plan_type(self, value):
+        self._charge_guarantee_plan_type = value
     @property
     def credit_deposit_money(self):
         return self._credit_deposit_money
@@ -286,6 +294,11 @@ class EcomOrderDTO(object):
                 params['charge_duration'] = self.charge_duration.to_alipay_dict()
             else:
                 params['charge_duration'] = self.charge_duration
+        if self.charge_guarantee_plan_type:
+            if hasattr(self.charge_guarantee_plan_type, 'to_alipay_dict'):
+                params['charge_guarantee_plan_type'] = self.charge_guarantee_plan_type.to_alipay_dict()
+            else:
+                params['charge_guarantee_plan_type'] = self.charge_guarantee_plan_type
         if self.credit_deposit_money:
             if hasattr(self.credit_deposit_money, 'to_alipay_dict'):
                 params['credit_deposit_money'] = self.credit_deposit_money.to_alipay_dict()
@@ -420,6 +433,8 @@ class EcomOrderDTO(object):
             o.buyer_nick = d['buyer_nick']
         if 'charge_duration' in d:
             o.charge_duration = d['charge_duration']
+        if 'charge_guarantee_plan_type' in d:
+            o.charge_guarantee_plan_type = d['charge_guarantee_plan_type']
         if 'credit_deposit_money' in d:
             o.credit_deposit_money = d['credit_deposit_money']
         if 'discount_fee' in d:

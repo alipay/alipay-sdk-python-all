@@ -12,6 +12,7 @@ class AlipayBossProdTestModifyResponse(AlipayResponse):
         self._out_boolean = None
         self._out_date = None
         self._out_number = None
+        self._out_number_open_id = None
         self._out_price = None
         self._out_string = None
 
@@ -37,6 +38,13 @@ class AlipayBossProdTestModifyResponse(AlipayResponse):
     def out_number(self, value):
         self._out_number = value
     @property
+    def out_number_open_id(self):
+        return self._out_number_open_id
+
+    @out_number_open_id.setter
+    def out_number_open_id(self, value):
+        self._out_number_open_id = value
+    @property
     def out_price(self):
         return self._out_price
 
@@ -59,6 +67,8 @@ class AlipayBossProdTestModifyResponse(AlipayResponse):
             self.out_date = response['out_date']
         if 'out_number' in response:
             self.out_number = response['out_number']
+        if 'out_number_open_id' in response:
+            self.out_number_open_id = response['out_number_open_id']
         if 'out_price' in response:
             self.out_price = response['out_price']
         if 'out_string' in response:
