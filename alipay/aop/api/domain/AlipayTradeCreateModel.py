@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SignParams import SignParams
 from alipay.aop.api.domain.BkAgentReqInfo import BkAgentReqInfo
 from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
@@ -18,6 +19,7 @@ from alipay.aop.api.domain.SubMerchant import SubMerchant
 class AlipayTradeCreateModel(object):
 
     def __init__(self):
+        self._agreement_sign_params = None
         self._alipay_store_id = None
         self._bkagent_req_info = None
         self._body = None
@@ -52,6 +54,16 @@ class AlipayTradeCreateModel(object):
         self._total_amount = None
         self._undiscountable_amount = None
 
+    @property
+    def agreement_sign_params(self):
+        return self._agreement_sign_params
+
+    @agreement_sign_params.setter
+    def agreement_sign_params(self, value):
+        if isinstance(value, SignParams):
+            self._agreement_sign_params = value
+        else:
+            self._agreement_sign_params = SignParams.from_alipay_dict(value)
     @property
     def alipay_store_id(self):
         return self._alipay_store_id
@@ -323,6 +335,11 @@ class AlipayTradeCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_sign_params:
+            if hasattr(self.agreement_sign_params, 'to_alipay_dict'):
+                params['agreement_sign_params'] = self.agreement_sign_params.to_alipay_dict()
+            else:
+                params['agreement_sign_params'] = self.agreement_sign_params
         if self.alipay_store_id:
             if hasattr(self.alipay_store_id, 'to_alipay_dict'):
                 params['alipay_store_id'] = self.alipay_store_id.to_alipay_dict()
@@ -505,6 +522,8 @@ class AlipayTradeCreateModel(object):
         if not d:
             return None
         o = AlipayTradeCreateModel()
+        if 'agreement_sign_params' in d:
+            o.agreement_sign_params = d['agreement_sign_params']
         if 'alipay_store_id' in d:
             o.alipay_store_id = d['alipay_store_id']
         if 'bkagent_req_info' in d:

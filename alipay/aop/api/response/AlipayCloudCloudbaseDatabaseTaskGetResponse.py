@@ -3,60 +3,53 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
-from alipay.aop.api.domain.FaasDatabaseHistorie import FaasDatabaseHistorie
 
 
 class AlipayCloudCloudbaseDatabaseTaskGetResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCloudCloudbaseDatabaseTaskGetResponse, self).__init__()
-        self._histories = None
-        self._page_index = None
-        self._page_size = None
-        self._total = None
+        self._process = None
+        self._start_time = None
+        self._status = None
+        self._task_type = None
 
     @property
-    def histories(self):
-        return self._histories
+    def process(self):
+        return self._process
 
-    @histories.setter
-    def histories(self, value):
-        if isinstance(value, list):
-            self._histories = list()
-            for i in value:
-                if isinstance(i, FaasDatabaseHistorie):
-                    self._histories.append(i)
-                else:
-                    self._histories.append(FaasDatabaseHistorie.from_alipay_dict(i))
+    @process.setter
+    def process(self, value):
+        self._process = value
     @property
-    def page_index(self):
-        return self._page_index
+    def start_time(self):
+        return self._start_time
 
-    @page_index.setter
-    def page_index(self, value):
-        self._page_index = value
+    @start_time.setter
+    def start_time(self, value):
+        self._start_time = value
     @property
-    def page_size(self):
-        return self._page_size
+    def status(self):
+        return self._status
 
-    @page_size.setter
-    def page_size(self, value):
-        self._page_size = value
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
-    def total(self):
-        return self._total
+    def task_type(self):
+        return self._task_type
 
-    @total.setter
-    def total(self, value):
-        self._total = value
+    @task_type.setter
+    def task_type(self, value):
+        self._task_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseDatabaseTaskGetResponse, self).parse_response_content(response_content)
-        if 'histories' in response:
-            self.histories = response['histories']
-        if 'page_index' in response:
-            self.page_index = response['page_index']
-        if 'page_size' in response:
-            self.page_size = response['page_size']
-        if 'total' in response:
-            self.total = response['total']
+        if 'process' in response:
+            self.process = response['process']
+        if 'start_time' in response:
+            self.start_time = response['start_time']
+        if 'status' in response:
+            self.status = response['status']
+        if 'task_type' in response:
+            self.task_type = response['task_type']

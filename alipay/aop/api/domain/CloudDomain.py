@@ -5,7 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 
 
-class FaasCloudDomains(object):
+class CloudDomain(object):
 
     def __init__(self):
         self._cname = None
@@ -110,7 +110,7 @@ class FaasCloudDomains(object):
     def from_alipay_dict(d):
         if not d:
             return None
-        o = FaasCloudDomains()
+        o = CloudDomain()
         if 'cname' in d:
             o.cname = d['cname']
         if 'force_https' in d:

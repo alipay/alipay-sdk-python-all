@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class PrePayOperationInfoViewData(object):
 
     def __init__(self):
+        self._logo = None
         self._operation_desc = None
         self._operation_tip = None
         self._pay_operation_info = None
@@ -15,6 +16,13 @@ class PrePayOperationInfoViewData(object):
         self._promo_type = None
         self._threshold_amount = None
 
+    @property
+    def logo(self):
+        return self._logo
+
+    @logo.setter
+    def logo(self, value):
+        self._logo = value
     @property
     def operation_desc(self):
         return self._operation_desc
@@ -61,6 +69,11 @@ class PrePayOperationInfoViewData(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.logo:
+            if hasattr(self.logo, 'to_alipay_dict'):
+                params['logo'] = self.logo.to_alipay_dict()
+            else:
+                params['logo'] = self.logo
         if self.operation_desc:
             if hasattr(self.operation_desc, 'to_alipay_dict'):
                 params['operation_desc'] = self.operation_desc.to_alipay_dict()
@@ -98,6 +111,8 @@ class PrePayOperationInfoViewData(object):
         if not d:
             return None
         o = PrePayOperationInfoViewData()
+        if 'logo' in d:
+            o.logo = d['logo']
         if 'operation_desc' in d:
             o.operation_desc = d['operation_desc']
         if 'operation_tip' in d:

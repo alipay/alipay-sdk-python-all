@@ -11,7 +11,6 @@ class AlipayCloudCloudbaseDatabaseTaskCancelModel(object):
         self._biz_app_id = None
         self._biz_env_id = None
         self._task_id = None
-        self._task_type = None
 
     @property
     def biz_app_id(self):
@@ -34,13 +33,6 @@ class AlipayCloudCloudbaseDatabaseTaskCancelModel(object):
     @task_id.setter
     def task_id(self, value):
         self._task_id = value
-    @property
-    def task_type(self):
-        return self._task_type
-
-    @task_type.setter
-    def task_type(self, value):
-        self._task_type = value
 
 
     def to_alipay_dict(self):
@@ -60,11 +52,6 @@ class AlipayCloudCloudbaseDatabaseTaskCancelModel(object):
                 params['task_id'] = self.task_id.to_alipay_dict()
             else:
                 params['task_id'] = self.task_id
-        if self.task_type:
-            if hasattr(self.task_type, 'to_alipay_dict'):
-                params['task_type'] = self.task_type.to_alipay_dict()
-            else:
-                params['task_type'] = self.task_type
         return params
 
     @staticmethod
@@ -78,8 +65,6 @@ class AlipayCloudCloudbaseDatabaseTaskCancelModel(object):
             o.biz_env_id = d['biz_env_id']
         if 'task_id' in d:
             o.task_id = d['task_id']
-        if 'task_type' in d:
-            o.task_type = d['task_type']
         return o
 
 

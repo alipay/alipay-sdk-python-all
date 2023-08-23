@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PostPayment import PostPayment
 
 
 class AlipayFundAuthOrderFreezeModel(object):
@@ -12,6 +13,7 @@ class AlipayFundAuthOrderFreezeModel(object):
         self._auth_code = None
         self._auth_code_type = None
         self._business_params = None
+        self._deposit_product_mode = None
         self._disable_pay_channels = None
         self._enable_pay_channels = None
         self._extra_param = None
@@ -22,6 +24,7 @@ class AlipayFundAuthOrderFreezeModel(object):
         self._pay_timeout = None
         self._payee_logon_id = None
         self._payee_user_id = None
+        self._post_payments = None
         self._product_code = None
         self._scene_code = None
         self._settle_currency = None
@@ -57,6 +60,13 @@ class AlipayFundAuthOrderFreezeModel(object):
     @business_params.setter
     def business_params(self, value):
         self._business_params = value
+    @property
+    def deposit_product_mode(self):
+        return self._deposit_product_mode
+
+    @deposit_product_mode.setter
+    def deposit_product_mode(self, value):
+        self._deposit_product_mode = value
     @property
     def disable_pay_channels(self):
         return self._disable_pay_channels
@@ -128,6 +138,19 @@ class AlipayFundAuthOrderFreezeModel(object):
     def payee_user_id(self, value):
         self._payee_user_id = value
     @property
+    def post_payments(self):
+        return self._post_payments
+
+    @post_payments.setter
+    def post_payments(self, value):
+        if isinstance(value, list):
+            self._post_payments = list()
+            for i in value:
+                if isinstance(i, PostPayment):
+                    self._post_payments.append(i)
+                else:
+                    self._post_payments.append(PostPayment.from_alipay_dict(i))
+    @property
     def product_code(self):
         return self._product_code
 
@@ -193,6 +216,11 @@ class AlipayFundAuthOrderFreezeModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.deposit_product_mode:
+            if hasattr(self.deposit_product_mode, 'to_alipay_dict'):
+                params['deposit_product_mode'] = self.deposit_product_mode.to_alipay_dict()
+            else:
+                params['deposit_product_mode'] = self.deposit_product_mode
         if self.disable_pay_channels:
             if hasattr(self.disable_pay_channels, 'to_alipay_dict'):
                 params['disable_pay_channels'] = self.disable_pay_channels.to_alipay_dict()
@@ -243,6 +271,16 @@ class AlipayFundAuthOrderFreezeModel(object):
                 params['payee_user_id'] = self.payee_user_id.to_alipay_dict()
             else:
                 params['payee_user_id'] = self.payee_user_id
+        if self.post_payments:
+            if isinstance(self.post_payments, list):
+                for i in range(0, len(self.post_payments)):
+                    element = self.post_payments[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.post_payments[i] = element.to_alipay_dict()
+            if hasattr(self.post_payments, 'to_alipay_dict'):
+                params['post_payments'] = self.post_payments.to_alipay_dict()
+            else:
+                params['post_payments'] = self.post_payments
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -288,6 +326,8 @@ class AlipayFundAuthOrderFreezeModel(object):
             o.auth_code_type = d['auth_code_type']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'deposit_product_mode' in d:
+            o.deposit_product_mode = d['deposit_product_mode']
         if 'disable_pay_channels' in d:
             o.disable_pay_channels = d['disable_pay_channels']
         if 'enable_pay_channels' in d:
@@ -308,6 +348,8 @@ class AlipayFundAuthOrderFreezeModel(object):
             o.payee_logon_id = d['payee_logon_id']
         if 'payee_user_id' in d:
             o.payee_user_id = d['payee_user_id']
+        if 'post_payments' in d:
+            o.post_payments = d['post_payments']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'scene_code' in d:

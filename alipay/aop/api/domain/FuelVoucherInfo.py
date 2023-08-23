@@ -9,6 +9,7 @@ class FuelVoucherInfo(object):
 
     def __init__(self):
         self._activity_code = None
+        self._activity_type = None
         self._alipay_amount = None
         self._amount = None
         self._merchant_amount = None
@@ -21,6 +22,13 @@ class FuelVoucherInfo(object):
     @activity_code.setter
     def activity_code(self, value):
         self._activity_code = value
+    @property
+    def activity_type(self):
+        return self._activity_type
+
+    @activity_type.setter
+    def activity_type(self, value):
+        self._activity_type = value
     @property
     def alipay_amount(self):
         return self._alipay_amount
@@ -58,6 +66,11 @@ class FuelVoucherInfo(object):
                 params['activity_code'] = self.activity_code.to_alipay_dict()
             else:
                 params['activity_code'] = self.activity_code
+        if self.activity_type:
+            if hasattr(self.activity_type, 'to_alipay_dict'):
+                params['activity_type'] = self.activity_type.to_alipay_dict()
+            else:
+                params['activity_type'] = self.activity_type
         if self.alipay_amount:
             if hasattr(self.alipay_amount, 'to_alipay_dict'):
                 params['alipay_amount'] = self.alipay_amount.to_alipay_dict()
@@ -87,6 +100,8 @@ class FuelVoucherInfo(object):
         o = FuelVoucherInfo()
         if 'activity_code' in d:
             o.activity_code = d['activity_code']
+        if 'activity_type' in d:
+            o.activity_type = d['activity_type']
         if 'alipay_amount' in d:
             o.alipay_amount = d['alipay_amount']
         if 'amount' in d:

@@ -14,6 +14,7 @@ class AlipayOpenFeeAdjustApplyRequest(object):
         self._biz_model = biz_model
         self._account = None
         self._application_fee = None
+        self._cert_date_limitation = None
         self._cert_no = None
         self._cert_type = None
         self._city_code = None
@@ -56,6 +57,13 @@ class AlipayOpenFeeAdjustApplyRequest(object):
     @application_fee.setter
     def application_fee(self, value):
         self._application_fee = value
+    @property
+    def cert_date_limitation(self):
+        return self._cert_date_limitation
+
+    @cert_date_limitation.setter
+    def cert_date_limitation(self, value):
+        self._cert_date_limitation = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -230,6 +238,11 @@ class AlipayOpenFeeAdjustApplyRequest(object):
                 params['application_fee'] = json.dumps(obj=self.application_fee.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['application_fee'] = self.application_fee
+        if self.cert_date_limitation:
+            if hasattr(self.cert_date_limitation, 'to_alipay_dict'):
+                params['cert_date_limitation'] = json.dumps(obj=self.cert_date_limitation.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['cert_date_limitation'] = self.cert_date_limitation
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = json.dumps(obj=self.cert_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

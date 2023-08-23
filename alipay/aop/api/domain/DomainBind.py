@@ -5,7 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 
 
-class FaasDomainBinds(object):
+class DomainBind(object):
 
     def __init__(self):
         self._bind_id = None
@@ -123,7 +123,7 @@ class FaasDomainBinds(object):
     def from_alipay_dict(d):
         if not d:
             return None
-        o = FaasDomainBinds()
+        o = DomainBind()
         if 'bind_id' in d:
             o.bind_id = d['bind_id']
         if 'domain_name' in d:

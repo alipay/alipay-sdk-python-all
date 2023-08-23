@@ -5,7 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 
 
-class FaasCors(object):
+class CorsDomain(object):
 
     def __init__(self):
         self._domain_name = None
@@ -32,7 +32,7 @@ class FaasCors(object):
     def from_alipay_dict(d):
         if not d:
             return None
-        o = FaasCors()
+        o = CorsDomain()
         if 'domain_name' in d:
             o.domain_name = d['domain_name']
         return o

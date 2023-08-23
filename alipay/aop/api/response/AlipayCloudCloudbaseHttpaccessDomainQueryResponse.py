@@ -3,7 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
-from alipay.aop.api.domain.FaasCloudDomains import FaasCloudDomains
+from alipay.aop.api.domain.CloudDomain import CloudDomain
 
 
 class AlipayCloudCloudbaseHttpaccessDomainQueryResponse(AlipayResponse):
@@ -24,10 +24,10 @@ class AlipayCloudCloudbaseHttpaccessDomainQueryResponse(AlipayResponse):
         if isinstance(value, list):
             self._cloud_domains = list()
             for i in value:
-                if isinstance(i, FaasCloudDomains):
+                if isinstance(i, CloudDomain):
                     self._cloud_domains.append(i)
                 else:
-                    self._cloud_domains.append(FaasCloudDomains.from_alipay_dict(i))
+                    self._cloud_domains.append(CloudDomain.from_alipay_dict(i))
     @property
     def page_index(self):
         return self._page_index

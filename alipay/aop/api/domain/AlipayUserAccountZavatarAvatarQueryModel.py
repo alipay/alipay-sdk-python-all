@@ -10,6 +10,7 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
     def __init__(self):
         self._avatar_app_version = None
         self._device_level = None
+        self._ext_param = None
         self._node_code = None
         self._scene_code = None
 
@@ -27,6 +28,13 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
     @device_level.setter
     def device_level(self, value):
         self._device_level = value
+    @property
+    def ext_param(self):
+        return self._ext_param
+
+    @ext_param.setter
+    def ext_param(self, value):
+        self._ext_param = value
     @property
     def node_code(self):
         return self._node_code
@@ -55,6 +63,11 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
                 params['device_level'] = self.device_level.to_alipay_dict()
             else:
                 params['device_level'] = self.device_level
+        if self.ext_param:
+            if hasattr(self.ext_param, 'to_alipay_dict'):
+                params['ext_param'] = self.ext_param.to_alipay_dict()
+            else:
+                params['ext_param'] = self.ext_param
         if self.node_code:
             if hasattr(self.node_code, 'to_alipay_dict'):
                 params['node_code'] = self.node_code.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayUserAccountZavatarAvatarQueryModel(object):
             o.avatar_app_version = d['avatar_app_version']
         if 'device_level' in d:
             o.device_level = d['device_level']
+        if 'ext_param' in d:
+            o.ext_param = d['ext_param']
         if 'node_code' in d:
             o.node_code = d['node_code']
         if 'scene_code' in d:

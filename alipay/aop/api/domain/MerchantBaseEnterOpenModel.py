@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class MerchantBaseEnterOpenModel(object):
 
     def __init__(self):
+        self._login_id = None
         self._logo_info = None
         self._m_name = None
         self._m_short_name = None
 
+    @property
+    def login_id(self):
+        return self._login_id
+
+    @login_id.setter
+    def login_id(self, value):
+        self._login_id = value
     @property
     def logo_info(self):
         return self._logo_info
@@ -37,6 +45,11 @@ class MerchantBaseEnterOpenModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.login_id:
+            if hasattr(self.login_id, 'to_alipay_dict'):
+                params['login_id'] = self.login_id.to_alipay_dict()
+            else:
+                params['login_id'] = self.login_id
         if self.logo_info:
             if hasattr(self.logo_info, 'to_alipay_dict'):
                 params['logo_info'] = self.logo_info.to_alipay_dict()
@@ -59,6 +72,8 @@ class MerchantBaseEnterOpenModel(object):
         if not d:
             return None
         o = MerchantBaseEnterOpenModel()
+        if 'login_id' in d:
+            o.login_id = d['login_id']
         if 'logo_info' in d:
             o.logo_info = d['logo_info']
         if 'm_name' in d:

@@ -3,7 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
-from alipay.aop.api.domain.FaasCors import FaasCors
+from alipay.aop.api.domain.CorsDomain import CorsDomain
 
 
 class AlipayCloudCloudbaseHttpaccessCorsQueryResponse(AlipayResponse):
@@ -24,10 +24,10 @@ class AlipayCloudCloudbaseHttpaccessCorsQueryResponse(AlipayResponse):
         if isinstance(value, list):
             self._cors = list()
             for i in value:
-                if isinstance(i, FaasCors):
+                if isinstance(i, CorsDomain):
                     self._cors.append(i)
                 else:
-                    self._cors.append(FaasCors.from_alipay_dict(i))
+                    self._cors.append(CorsDomain.from_alipay_dict(i))
     @property
     def page_index(self):
         return self._page_index

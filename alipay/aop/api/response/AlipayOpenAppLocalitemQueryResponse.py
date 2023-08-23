@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
 from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
+from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.LocalItemSkuQueryVO import LocalItemSkuQueryVO
 from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
@@ -28,6 +29,7 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._out_item_id = None
         self._path = None
         self._risk_info = None
+        self._scene_risk_info = None
         self._skus = None
         self._sold_time = None
         self._spu_status = None
@@ -152,6 +154,19 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
                 else:
                     self._risk_info.append(ItemRiskInfo.from_alipay_dict(i))
     @property
+    def scene_risk_info(self):
+        return self._scene_risk_info
+
+    @scene_risk_info.setter
+    def scene_risk_info(self, value):
+        if isinstance(value, list):
+            self._scene_risk_info = list()
+            for i in value:
+                if isinstance(i, ItemSceneRiskInfo):
+                    self._scene_risk_info.append(i)
+                else:
+                    self._scene_risk_info.append(ItemSceneRiskInfo.from_alipay_dict(i))
+    @property
     def skus(self):
         return self._skus
 
@@ -233,6 +248,8 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.path = response['path']
         if 'risk_info' in response:
             self.risk_info = response['risk_info']
+        if 'scene_risk_info' in response:
+            self.scene_risk_info = response['scene_risk_info']
         if 'skus' in response:
             self.skus = response['skus']
         if 'sold_time' in response:
