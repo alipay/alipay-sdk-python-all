@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
+from alipay.aop.api.domain.CertificateUseRuleInfo import CertificateUseRuleInfo
 
 
 class CertificateQueryInfo(object):
@@ -17,6 +18,7 @@ class CertificateQueryInfo(object):
         self._out_order_id = None
         self._sku_info = None
         self._status = None
+        self._use_rule_info = None
         self._valid_begin_time = None
         self._valid_end_time = None
 
@@ -76,6 +78,16 @@ class CertificateQueryInfo(object):
     def status(self, value):
         self._status = value
     @property
+    def use_rule_info(self):
+        return self._use_rule_info
+
+    @use_rule_info.setter
+    def use_rule_info(self, value):
+        if isinstance(value, CertificateUseRuleInfo):
+            self._use_rule_info = value
+        else:
+            self._use_rule_info = CertificateUseRuleInfo.from_alipay_dict(value)
+    @property
     def valid_begin_time(self):
         return self._valid_begin_time
 
@@ -128,6 +140,11 @@ class CertificateQueryInfo(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.use_rule_info:
+            if hasattr(self.use_rule_info, 'to_alipay_dict'):
+                params['use_rule_info'] = self.use_rule_info.to_alipay_dict()
+            else:
+                params['use_rule_info'] = self.use_rule_info
         if self.valid_begin_time:
             if hasattr(self.valid_begin_time, 'to_alipay_dict'):
                 params['valid_begin_time'] = self.valid_begin_time.to_alipay_dict()
@@ -159,6 +176,8 @@ class CertificateQueryInfo(object):
             o.sku_info = d['sku_info']
         if 'status' in d:
             o.status = d['status']
+        if 'use_rule_info' in d:
+            o.use_rule_info = d['use_rule_info']
         if 'valid_begin_time' in d:
             o.valid_begin_time = d['valid_begin_time']
         if 'valid_end_time' in d:

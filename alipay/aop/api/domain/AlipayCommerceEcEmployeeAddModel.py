@@ -23,6 +23,7 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._iot_vid = None
         self._role_list = None
         self._sign_return_url = None
+        self._sign_url_carry_info = None
 
     @property
     def department_ids(self):
@@ -135,6 +136,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @sign_return_url.setter
     def sign_return_url(self, value):
         self._sign_return_url = value
+    @property
+    def sign_url_carry_info(self):
+        return self._sign_url_carry_info
+
+    @sign_url_carry_info.setter
+    def sign_url_carry_info(self, value):
+        self._sign_url_carry_info = value
 
 
     def to_alipay_dict(self):
@@ -224,6 +232,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['sign_return_url'] = self.sign_return_url.to_alipay_dict()
             else:
                 params['sign_return_url'] = self.sign_return_url
+        if self.sign_url_carry_info:
+            if hasattr(self.sign_url_carry_info, 'to_alipay_dict'):
+                params['sign_url_carry_info'] = self.sign_url_carry_info.to_alipay_dict()
+            else:
+                params['sign_url_carry_info'] = self.sign_url_carry_info
         return params
 
     @staticmethod
@@ -261,6 +274,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.role_list = d['role_list']
         if 'sign_return_url' in d:
             o.sign_return_url = d['sign_return_url']
+        if 'sign_url_carry_info' in d:
+            o.sign_url_carry_info = d['sign_url_carry_info']
         return o
 
 

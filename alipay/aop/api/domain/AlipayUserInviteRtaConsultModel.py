@@ -9,6 +9,7 @@ class AlipayUserInviteRtaConsultModel(object):
 
     def __init__(self):
         self._encrypt_type = None
+        self._open_id = None
         self._principal = None
         self._principal_type = None
         self._target_crowd_package_key = None
@@ -20,6 +21,13 @@ class AlipayUserInviteRtaConsultModel(object):
     @encrypt_type.setter
     def encrypt_type(self, value):
         self._encrypt_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def principal(self):
         return self._principal
@@ -50,6 +58,11 @@ class AlipayUserInviteRtaConsultModel(object):
                 params['encrypt_type'] = self.encrypt_type.to_alipay_dict()
             else:
                 params['encrypt_type'] = self.encrypt_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.principal:
             if hasattr(self.principal, 'to_alipay_dict'):
                 params['principal'] = self.principal.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayUserInviteRtaConsultModel(object):
         o = AlipayUserInviteRtaConsultModel()
         if 'encrypt_type' in d:
             o.encrypt_type = d['encrypt_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'principal' in d:
             o.principal = d['principal']
         if 'principal_type' in d:

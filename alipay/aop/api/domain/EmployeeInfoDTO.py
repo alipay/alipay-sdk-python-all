@@ -12,9 +12,13 @@ class EmployeeInfoDTO(object):
         self._activate = None
         self._department_list = None
         self._email = None
+        self._employee_cert_no = None
+        self._employee_cert_type = None
         self._employee_id = None
         self._employee_name = None
         self._employee_no = None
+        self._encrypt_cert_no = None
+        self._encrypt_mobile = None
         self._gmt_create = None
         self._gmt_modified = None
         self._iot_face_status = None
@@ -52,6 +56,20 @@ class EmployeeInfoDTO(object):
     def email(self, value):
         self._email = value
     @property
+    def employee_cert_no(self):
+        return self._employee_cert_no
+
+    @employee_cert_no.setter
+    def employee_cert_no(self, value):
+        self._employee_cert_no = value
+    @property
+    def employee_cert_type(self):
+        return self._employee_cert_type
+
+    @employee_cert_type.setter
+    def employee_cert_type(self, value):
+        self._employee_cert_type = value
+    @property
     def employee_id(self):
         return self._employee_id
 
@@ -72,6 +90,20 @@ class EmployeeInfoDTO(object):
     @employee_no.setter
     def employee_no(self, value):
         self._employee_no = value
+    @property
+    def encrypt_cert_no(self):
+        return self._encrypt_cert_no
+
+    @encrypt_cert_no.setter
+    def encrypt_cert_no(self, value):
+        self._encrypt_cert_no = value
+    @property
+    def encrypt_mobile(self):
+        return self._encrypt_mobile
+
+    @encrypt_mobile.setter
+    def encrypt_mobile(self, value):
+        self._encrypt_mobile = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -155,6 +187,16 @@ class EmployeeInfoDTO(object):
                 params['email'] = self.email.to_alipay_dict()
             else:
                 params['email'] = self.email
+        if self.employee_cert_no:
+            if hasattr(self.employee_cert_no, 'to_alipay_dict'):
+                params['employee_cert_no'] = self.employee_cert_no.to_alipay_dict()
+            else:
+                params['employee_cert_no'] = self.employee_cert_no
+        if self.employee_cert_type:
+            if hasattr(self.employee_cert_type, 'to_alipay_dict'):
+                params['employee_cert_type'] = self.employee_cert_type.to_alipay_dict()
+            else:
+                params['employee_cert_type'] = self.employee_cert_type
         if self.employee_id:
             if hasattr(self.employee_id, 'to_alipay_dict'):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
@@ -170,6 +212,16 @@ class EmployeeInfoDTO(object):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
             else:
                 params['employee_no'] = self.employee_no
+        if self.encrypt_cert_no:
+            if hasattr(self.encrypt_cert_no, 'to_alipay_dict'):
+                params['encrypt_cert_no'] = self.encrypt_cert_no.to_alipay_dict()
+            else:
+                params['encrypt_cert_no'] = self.encrypt_cert_no
+        if self.encrypt_mobile:
+            if hasattr(self.encrypt_mobile, 'to_alipay_dict'):
+                params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
+            else:
+                params['encrypt_mobile'] = self.encrypt_mobile
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -228,12 +280,20 @@ class EmployeeInfoDTO(object):
             o.department_list = d['department_list']
         if 'email' in d:
             o.email = d['email']
+        if 'employee_cert_no' in d:
+            o.employee_cert_no = d['employee_cert_no']
+        if 'employee_cert_type' in d:
+            o.employee_cert_type = d['employee_cert_type']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
         if 'employee_name' in d:
             o.employee_name = d['employee_name']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
+        if 'encrypt_cert_no' in d:
+            o.encrypt_cert_no = d['encrypt_cert_no']
+        if 'encrypt_mobile' in d:
+            o.encrypt_mobile = d['encrypt_mobile']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

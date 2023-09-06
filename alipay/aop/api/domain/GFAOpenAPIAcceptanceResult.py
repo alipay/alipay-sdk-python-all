@@ -9,6 +9,7 @@ class GFAOpenAPIAcceptanceResult(object):
 
     def __init__(self):
         self._acceptance_id = None
+        self._data = None
         self._need_retry = None
         self._out_business_no = None
         self._result_code = None
@@ -24,6 +25,13 @@ class GFAOpenAPIAcceptanceResult(object):
     @acceptance_id.setter
     def acceptance_id(self, value):
         self._acceptance_id = value
+    @property
+    def data(self):
+        return self._data
+
+    @data.setter
+    def data(self, value):
+        self._data = value
     @property
     def need_retry(self):
         return self._need_retry
@@ -82,6 +90,11 @@ class GFAOpenAPIAcceptanceResult(object):
                 params['acceptance_id'] = self.acceptance_id.to_alipay_dict()
             else:
                 params['acceptance_id'] = self.acceptance_id
+        if self.data:
+            if hasattr(self.data, 'to_alipay_dict'):
+                params['data'] = self.data.to_alipay_dict()
+            else:
+                params['data'] = self.data
         if self.need_retry:
             if hasattr(self.need_retry, 'to_alipay_dict'):
                 params['need_retry'] = self.need_retry.to_alipay_dict()
@@ -126,6 +139,8 @@ class GFAOpenAPIAcceptanceResult(object):
         o = GFAOpenAPIAcceptanceResult()
         if 'acceptance_id' in d:
             o.acceptance_id = d['acceptance_id']
+        if 'data' in d:
+            o.data = d['data']
         if 'need_retry' in d:
             o.need_retry = d['need_retry']
         if 'out_business_no' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RiskImagePlusQueryOrderInfo import RiskImagePlusQueryOrderInfo
+from alipay.aop.api.domain.RiskImagePlusQueryOrderInfo import RiskImagePlusQueryOrderInfo
 
 
 class AlipayCloudTraasRiskgoScalperQueryModel(object):
@@ -13,6 +14,9 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         self._bank_card_no = None
         self._business_code = None
         self._cert_no = None
+        self._cert_type = None
+        self._certificate_date = None
+        self._channel = None
         self._customer_id = None
         self._email_address = None
         self._env_id = None
@@ -23,6 +27,8 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         self._is_employee = None
         self._isv_pid = None
         self._lbs = None
+        self._login_cert = None
+        self._login_phone = None
         self._mac_address = None
         self._mailing_address = None
         self._mailing_phone = None
@@ -30,8 +36,12 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         self._mobile_no = None
         self._open_id = None
         self._order_items_info = None
+        self._order_items_info_list = None
         self._order_no = None
         self._out_order_no = None
+        self._registration_cert = None
+        self._registration_date = None
+        self._registration_phone = None
         self._risk_type = None
         self._role = None
         self._sales_amount = None
@@ -69,6 +79,27 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
+    @property
+    def certificate_date(self):
+        return self._certificate_date
+
+    @certificate_date.setter
+    def certificate_date(self, value):
+        self._certificate_date = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def customer_id(self):
         return self._customer_id
@@ -140,6 +171,20 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
     def lbs(self, value):
         self._lbs = value
     @property
+    def login_cert(self):
+        return self._login_cert
+
+    @login_cert.setter
+    def login_cert(self, value):
+        self._login_cert = value
+    @property
+    def login_phone(self):
+        return self._login_phone
+
+    @login_phone.setter
+    def login_phone(self, value):
+        self._login_phone = value
+    @property
     def mac_address(self):
         return self._mac_address
 
@@ -192,6 +237,19 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         else:
             self._order_items_info = RiskImagePlusQueryOrderInfo.from_alipay_dict(value)
     @property
+    def order_items_info_list(self):
+        return self._order_items_info_list
+
+    @order_items_info_list.setter
+    def order_items_info_list(self, value):
+        if isinstance(value, list):
+            self._order_items_info_list = list()
+            for i in value:
+                if isinstance(i, RiskImagePlusQueryOrderInfo):
+                    self._order_items_info_list.append(i)
+                else:
+                    self._order_items_info_list.append(RiskImagePlusQueryOrderInfo.from_alipay_dict(i))
+    @property
     def order_no(self):
         return self._order_no
 
@@ -205,6 +263,27 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def registration_cert(self):
+        return self._registration_cert
+
+    @registration_cert.setter
+    def registration_cert(self, value):
+        self._registration_cert = value
+    @property
+    def registration_date(self):
+        return self._registration_date
+
+    @registration_date.setter
+    def registration_date(self, value):
+        self._registration_date = value
+    @property
+    def registration_phone(self):
+        return self._registration_phone
+
+    @registration_phone.setter
+    def registration_phone(self, value):
+        self._registration_phone = value
     @property
     def risk_type(self):
         return self._risk_type
@@ -285,6 +364,21 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
+        if self.certificate_date:
+            if hasattr(self.certificate_date, 'to_alipay_dict'):
+                params['certificate_date'] = self.certificate_date.to_alipay_dict()
+            else:
+                params['certificate_date'] = self.certificate_date
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.customer_id:
             if hasattr(self.customer_id, 'to_alipay_dict'):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
@@ -335,6 +429,16 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
                 params['lbs'] = self.lbs.to_alipay_dict()
             else:
                 params['lbs'] = self.lbs
+        if self.login_cert:
+            if hasattr(self.login_cert, 'to_alipay_dict'):
+                params['login_cert'] = self.login_cert.to_alipay_dict()
+            else:
+                params['login_cert'] = self.login_cert
+        if self.login_phone:
+            if hasattr(self.login_phone, 'to_alipay_dict'):
+                params['login_phone'] = self.login_phone.to_alipay_dict()
+            else:
+                params['login_phone'] = self.login_phone
         if self.mac_address:
             if hasattr(self.mac_address, 'to_alipay_dict'):
                 params['mac_address'] = self.mac_address.to_alipay_dict()
@@ -370,6 +474,16 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
                 params['order_items_info'] = self.order_items_info.to_alipay_dict()
             else:
                 params['order_items_info'] = self.order_items_info
+        if self.order_items_info_list:
+            if isinstance(self.order_items_info_list, list):
+                for i in range(0, len(self.order_items_info_list)):
+                    element = self.order_items_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.order_items_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.order_items_info_list, 'to_alipay_dict'):
+                params['order_items_info_list'] = self.order_items_info_list.to_alipay_dict()
+            else:
+                params['order_items_info_list'] = self.order_items_info_list
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -380,6 +494,21 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.registration_cert:
+            if hasattr(self.registration_cert, 'to_alipay_dict'):
+                params['registration_cert'] = self.registration_cert.to_alipay_dict()
+            else:
+                params['registration_cert'] = self.registration_cert
+        if self.registration_date:
+            if hasattr(self.registration_date, 'to_alipay_dict'):
+                params['registration_date'] = self.registration_date.to_alipay_dict()
+            else:
+                params['registration_date'] = self.registration_date
+        if self.registration_phone:
+            if hasattr(self.registration_phone, 'to_alipay_dict'):
+                params['registration_phone'] = self.registration_phone.to_alipay_dict()
+            else:
+                params['registration_phone'] = self.registration_phone
         if self.risk_type:
             if hasattr(self.risk_type, 'to_alipay_dict'):
                 params['risk_type'] = self.risk_type.to_alipay_dict()
@@ -435,6 +564,12 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
             o.business_code = d['business_code']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
+        if 'certificate_date' in d:
+            o.certificate_date = d['certificate_date']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
         if 'email_address' in d:
@@ -455,6 +590,10 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
             o.isv_pid = d['isv_pid']
         if 'lbs' in d:
             o.lbs = d['lbs']
+        if 'login_cert' in d:
+            o.login_cert = d['login_cert']
+        if 'login_phone' in d:
+            o.login_phone = d['login_phone']
         if 'mac_address' in d:
             o.mac_address = d['mac_address']
         if 'mailing_address' in d:
@@ -469,10 +608,18 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
             o.open_id = d['open_id']
         if 'order_items_info' in d:
             o.order_items_info = d['order_items_info']
+        if 'order_items_info_list' in d:
+            o.order_items_info_list = d['order_items_info_list']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'registration_cert' in d:
+            o.registration_cert = d['registration_cert']
+        if 'registration_date' in d:
+            o.registration_date = d['registration_date']
+        if 'registration_phone' in d:
+            o.registration_phone = d['registration_phone']
         if 'risk_type' in d:
             o.risk_type = d['risk_type']
         if 'role' in d:

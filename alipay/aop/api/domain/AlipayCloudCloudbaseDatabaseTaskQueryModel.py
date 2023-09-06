@@ -10,6 +10,7 @@ class AlipayCloudCloudbaseDatabaseTaskQueryModel(object):
     def __init__(self):
         self._biz_app_id = None
         self._biz_env_id = None
+        self._collection_name = None
         self._desc = None
         self._page_index = None
         self._page_size = None
@@ -29,6 +30,13 @@ class AlipayCloudCloudbaseDatabaseTaskQueryModel(object):
     @biz_env_id.setter
     def biz_env_id(self, value):
         self._biz_env_id = value
+    @property
+    def collection_name(self):
+        return self._collection_name
+
+    @collection_name.setter
+    def collection_name(self, value):
+        self._collection_name = value
     @property
     def desc(self):
         return self._desc
@@ -74,6 +82,11 @@ class AlipayCloudCloudbaseDatabaseTaskQueryModel(object):
                 params['biz_env_id'] = self.biz_env_id.to_alipay_dict()
             else:
                 params['biz_env_id'] = self.biz_env_id
+        if self.collection_name:
+            if hasattr(self.collection_name, 'to_alipay_dict'):
+                params['collection_name'] = self.collection_name.to_alipay_dict()
+            else:
+                params['collection_name'] = self.collection_name
         if self.desc:
             if hasattr(self.desc, 'to_alipay_dict'):
                 params['desc'] = self.desc.to_alipay_dict()
@@ -110,6 +123,8 @@ class AlipayCloudCloudbaseDatabaseTaskQueryModel(object):
             o.biz_app_id = d['biz_app_id']
         if 'biz_env_id' in d:
             o.biz_env_id = d['biz_env_id']
+        if 'collection_name' in d:
+            o.collection_name = d['collection_name']
         if 'desc' in d:
             o.desc = d['desc']
         if 'page_index' in d:

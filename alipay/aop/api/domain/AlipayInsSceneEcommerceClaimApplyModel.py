@@ -17,6 +17,7 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
         self._apply_amout = None
         self._attachments = None
         self._buyer = None
+        self._claim_pay_mode = None
         self._item = None
         self._order_dto = None
         self._partner_org_id = None
@@ -55,6 +56,13 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
             self._buyer = value
         else:
             self._buyer = EcomBuyerDTO.from_alipay_dict(value)
+    @property
+    def claim_pay_mode(self):
+        return self._claim_pay_mode
+
+    @claim_pay_mode.setter
+    def claim_pay_mode(self, value):
+        self._claim_pay_mode = value
     @property
     def item(self):
         return self._item
@@ -140,6 +148,11 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
                 params['buyer'] = self.buyer.to_alipay_dict()
             else:
                 params['buyer'] = self.buyer
+        if self.claim_pay_mode:
+            if hasattr(self.claim_pay_mode, 'to_alipay_dict'):
+                params['claim_pay_mode'] = self.claim_pay_mode.to_alipay_dict()
+            else:
+                params['claim_pay_mode'] = self.claim_pay_mode
         if self.item:
             if hasattr(self.item, 'to_alipay_dict'):
                 params['item'] = self.item.to_alipay_dict()
@@ -188,6 +201,8 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
             o.attachments = d['attachments']
         if 'buyer' in d:
             o.buyer = d['buyer']
+        if 'claim_pay_mode' in d:
+            o.claim_pay_mode = d['claim_pay_mode']
         if 'item' in d:
             o.item = d['item']
         if 'order_dto' in d:

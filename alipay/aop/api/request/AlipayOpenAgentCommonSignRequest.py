@@ -23,6 +23,10 @@ class AlipayOpenAgentCommonSignRequest(object):
         self._mini_app_id = None
         self._product_code = None
         self._rate = None
+        self._shop_city_code = None
+        self._shop_detail_address = None
+        self._shop_district_code = None
+        self._shop_province_code = None
         self._special_license_type = None
         self._web_sites = None
         self._web_status = None
@@ -134,6 +138,34 @@ class AlipayOpenAgentCommonSignRequest(object):
     @rate.setter
     def rate(self, value):
         self._rate = value
+    @property
+    def shop_city_code(self):
+        return self._shop_city_code
+
+    @shop_city_code.setter
+    def shop_city_code(self, value):
+        self._shop_city_code = value
+    @property
+    def shop_detail_address(self):
+        return self._shop_detail_address
+
+    @shop_detail_address.setter
+    def shop_detail_address(self, value):
+        self._shop_detail_address = value
+    @property
+    def shop_district_code(self):
+        return self._shop_district_code
+
+    @shop_district_code.setter
+    def shop_district_code(self, value):
+        self._shop_district_code = value
+    @property
+    def shop_province_code(self):
+        return self._shop_province_code
+
+    @shop_province_code.setter
+    def shop_province_code(self, value):
+        self._shop_province_code = value
     @property
     def special_license_type(self):
         return self._special_license_type
@@ -412,6 +444,26 @@ class AlipayOpenAgentCommonSignRequest(object):
                 params['rate'] = json.dumps(obj=self.rate.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['rate'] = self.rate
+        if self.shop_city_code:
+            if hasattr(self.shop_city_code, 'to_alipay_dict'):
+                params['shop_city_code'] = json.dumps(obj=self.shop_city_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_city_code'] = self.shop_city_code
+        if self.shop_detail_address:
+            if hasattr(self.shop_detail_address, 'to_alipay_dict'):
+                params['shop_detail_address'] = json.dumps(obj=self.shop_detail_address.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_detail_address'] = self.shop_detail_address
+        if self.shop_district_code:
+            if hasattr(self.shop_district_code, 'to_alipay_dict'):
+                params['shop_district_code'] = json.dumps(obj=self.shop_district_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_district_code'] = self.shop_district_code
+        if self.shop_province_code:
+            if hasattr(self.shop_province_code, 'to_alipay_dict'):
+                params['shop_province_code'] = json.dumps(obj=self.shop_province_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['shop_province_code'] = self.shop_province_code
         if self.special_license_type:
             if hasattr(self.special_license_type, 'to_alipay_dict'):
                 params['special_license_type'] = json.dumps(obj=self.special_license_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

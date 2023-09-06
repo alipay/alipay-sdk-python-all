@@ -11,6 +11,7 @@ class LocalAppxCategoryVO(object):
         self._cat_id = None
         self._cat_level = None
         self._cat_name = None
+        self._cat_status = None
         self._f_cat_id = None
         self._item_types = None
 
@@ -35,6 +36,13 @@ class LocalAppxCategoryVO(object):
     @cat_name.setter
     def cat_name(self, value):
         self._cat_name = value
+    @property
+    def cat_status(self):
+        return self._cat_status
+
+    @cat_status.setter
+    def cat_status(self, value):
+        self._cat_status = value
     @property
     def f_cat_id(self):
         return self._f_cat_id
@@ -71,6 +79,11 @@ class LocalAppxCategoryVO(object):
                 params['cat_name'] = self.cat_name.to_alipay_dict()
             else:
                 params['cat_name'] = self.cat_name
+        if self.cat_status:
+            if hasattr(self.cat_status, 'to_alipay_dict'):
+                params['cat_status'] = self.cat_status.to_alipay_dict()
+            else:
+                params['cat_status'] = self.cat_status
         if self.f_cat_id:
             if hasattr(self.f_cat_id, 'to_alipay_dict'):
                 params['f_cat_id'] = self.f_cat_id.to_alipay_dict()
@@ -99,6 +112,8 @@ class LocalAppxCategoryVO(object):
             o.cat_level = d['cat_level']
         if 'cat_name' in d:
             o.cat_name = d['cat_name']
+        if 'cat_status' in d:
+            o.cat_status = d['cat_status']
         if 'f_cat_id' in d:
             o.f_cat_id = d['f_cat_id']
         if 'item_types' in d:

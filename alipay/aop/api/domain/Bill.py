@@ -15,6 +15,7 @@ class Bill(object):
         self._biz_env_id = None
         self._currency = None
         self._discount_amount = None
+        self._env_id = None
         self._env_name = None
         self._fee_item_name = None
         self._fee_item_unit = None
@@ -75,6 +76,13 @@ class Bill(object):
     @discount_amount.setter
     def discount_amount(self, value):
         self._discount_amount = value
+    @property
+    def env_id(self):
+        return self._env_id
+
+    @env_id.setter
+    def env_id(self, value):
+        self._env_id = value
     @property
     def env_name(self):
         return self._env_name
@@ -184,6 +192,11 @@ class Bill(object):
                 params['discount_amount'] = self.discount_amount.to_alipay_dict()
             else:
                 params['discount_amount'] = self.discount_amount
+        if self.env_id:
+            if hasattr(self.env_id, 'to_alipay_dict'):
+                params['env_id'] = self.env_id.to_alipay_dict()
+            else:
+                params['env_id'] = self.env_id
         if self.env_name:
             if hasattr(self.env_name, 'to_alipay_dict'):
                 params['env_name'] = self.env_name.to_alipay_dict()
@@ -255,6 +268,8 @@ class Bill(object):
             o.currency = d['currency']
         if 'discount_amount' in d:
             o.discount_amount = d['discount_amount']
+        if 'env_id' in d:
+            o.env_id = d['env_id']
         if 'env_name' in d:
             o.env_name = d['env_name']
         if 'fee_item_name' in d:

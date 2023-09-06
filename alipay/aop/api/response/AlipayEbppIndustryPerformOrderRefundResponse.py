@@ -14,7 +14,9 @@ class AlipayEbppIndustryPerformOrderRefundResponse(AlipayResponse):
         self._inst_code = None
         self._out_no = None
         self._pay_amount = None
+        self._refund_amount = None
         self._service_code = None
+        self._trade_no = None
 
     @property
     def bill_amount(self):
@@ -52,12 +54,26 @@ class AlipayEbppIndustryPerformOrderRefundResponse(AlipayResponse):
     def pay_amount(self, value):
         self._pay_amount = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
     def service_code(self):
         return self._service_code
 
     @service_code.setter
     def service_code(self, value):
         self._service_code = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppIndustryPerformOrderRefundResponse, self).parse_response_content(response_content)
@@ -71,5 +87,9 @@ class AlipayEbppIndustryPerformOrderRefundResponse(AlipayResponse):
             self.out_no = response['out_no']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
+        if 'refund_amount' in response:
+            self.refund_amount = response['refund_amount']
         if 'service_code' in response:
             self.service_code = response['service_code']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']

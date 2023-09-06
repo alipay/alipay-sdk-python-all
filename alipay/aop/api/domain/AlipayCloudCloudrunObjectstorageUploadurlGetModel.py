@@ -11,6 +11,7 @@ class AlipayCloudCloudrunObjectstorageUploadurlGetModel(object):
         self._assume_token = None
         self._env = None
         self._path = None
+        self._upload_method = None
 
     @property
     def assume_token(self):
@@ -33,6 +34,13 @@ class AlipayCloudCloudrunObjectstorageUploadurlGetModel(object):
     @path.setter
     def path(self, value):
         self._path = value
+    @property
+    def upload_method(self):
+        return self._upload_method
+
+    @upload_method.setter
+    def upload_method(self, value):
+        self._upload_method = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayCloudCloudrunObjectstorageUploadurlGetModel(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.upload_method:
+            if hasattr(self.upload_method, 'to_alipay_dict'):
+                params['upload_method'] = self.upload_method.to_alipay_dict()
+            else:
+                params['upload_method'] = self.upload_method
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayCloudCloudrunObjectstorageUploadurlGetModel(object):
             o.env = d['env']
         if 'path' in d:
             o.path = d['path']
+        if 'upload_method' in d:
+            o.upload_method = d['upload_method']
         return o
 
 

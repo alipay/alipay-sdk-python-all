@@ -3,31 +3,18 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
-from alipay.aop.api.domain.FaasDatabaseHistorie import FaasDatabaseHistorie
+from alipay.aop.api.domain.MongoTaskHistory import MongoTaskHistory
 
 
 class AlipayCloudCloudbaseDatabaseTaskQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCloudCloudbaseDatabaseTaskQueryResponse, self).__init__()
-        self._histories = None
         self._page_index = None
         self._page_size = None
+        self._tasks = None
         self._total = None
 
-    @property
-    def histories(self):
-        return self._histories
-
-    @histories.setter
-    def histories(self, value):
-        if isinstance(value, list):
-            self._histories = list()
-            for i in value:
-                if isinstance(i, FaasDatabaseHistorie):
-                    self._histories.append(i)
-                else:
-                    self._histories.append(FaasDatabaseHistorie.from_alipay_dict(i))
     @property
     def page_index(self):
         return self._page_index
@@ -43,6 +30,19 @@ class AlipayCloudCloudbaseDatabaseTaskQueryResponse(AlipayResponse):
     def page_size(self, value):
         self._page_size = value
     @property
+    def tasks(self):
+        return self._tasks
+
+    @tasks.setter
+    def tasks(self, value):
+        if isinstance(value, list):
+            self._tasks = list()
+            for i in value:
+                if isinstance(i, MongoTaskHistory):
+                    self._tasks.append(i)
+                else:
+                    self._tasks.append(MongoTaskHistory.from_alipay_dict(i))
+    @property
     def total(self):
         return self._total
 
@@ -52,11 +52,11 @@ class AlipayCloudCloudbaseDatabaseTaskQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseDatabaseTaskQueryResponse, self).parse_response_content(response_content)
-        if 'histories' in response:
-            self.histories = response['histories']
         if 'page_index' in response:
             self.page_index = response['page_index']
         if 'page_size' in response:
             self.page_size = response['page_size']
+        if 'tasks' in response:
+            self.tasks = response['tasks']
         if 'total' in response:
             self.total = response['total']

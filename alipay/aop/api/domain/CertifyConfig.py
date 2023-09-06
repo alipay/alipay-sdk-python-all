@@ -9,11 +9,13 @@ class CertifyConfig(object):
 
     def __init__(self):
         self._certify_biz_code = None
+        self._component_out_id = None
         self._need_address = None
         self._need_certify_id = None
         self._need_gender = None
         self._need_phone = None
         self._need_user_nation = None
+        self._verify_channel = None
 
     @property
     def certify_biz_code(self):
@@ -22,6 +24,13 @@ class CertifyConfig(object):
     @certify_biz_code.setter
     def certify_biz_code(self, value):
         self._certify_biz_code = value
+    @property
+    def component_out_id(self):
+        return self._component_out_id
+
+    @component_out_id.setter
+    def component_out_id(self, value):
+        self._component_out_id = value
     @property
     def need_address(self):
         return self._need_address
@@ -57,6 +66,13 @@ class CertifyConfig(object):
     @need_user_nation.setter
     def need_user_nation(self, value):
         self._need_user_nation = value
+    @property
+    def verify_channel(self):
+        return self._verify_channel
+
+    @verify_channel.setter
+    def verify_channel(self, value):
+        self._verify_channel = value
 
 
     def to_alipay_dict(self):
@@ -66,6 +82,11 @@ class CertifyConfig(object):
                 params['certify_biz_code'] = self.certify_biz_code.to_alipay_dict()
             else:
                 params['certify_biz_code'] = self.certify_biz_code
+        if self.component_out_id:
+            if hasattr(self.component_out_id, 'to_alipay_dict'):
+                params['component_out_id'] = self.component_out_id.to_alipay_dict()
+            else:
+                params['component_out_id'] = self.component_out_id
         if self.need_address:
             if hasattr(self.need_address, 'to_alipay_dict'):
                 params['need_address'] = self.need_address.to_alipay_dict()
@@ -91,6 +112,11 @@ class CertifyConfig(object):
                 params['need_user_nation'] = self.need_user_nation.to_alipay_dict()
             else:
                 params['need_user_nation'] = self.need_user_nation
+        if self.verify_channel:
+            if hasattr(self.verify_channel, 'to_alipay_dict'):
+                params['verify_channel'] = self.verify_channel.to_alipay_dict()
+            else:
+                params['verify_channel'] = self.verify_channel
         return params
 
     @staticmethod
@@ -100,6 +126,8 @@ class CertifyConfig(object):
         o = CertifyConfig()
         if 'certify_biz_code' in d:
             o.certify_biz_code = d['certify_biz_code']
+        if 'component_out_id' in d:
+            o.component_out_id = d['component_out_id']
         if 'need_address' in d:
             o.need_address = d['need_address']
         if 'need_certify_id' in d:
@@ -110,6 +138,8 @@ class CertifyConfig(object):
             o.need_phone = d['need_phone']
         if 'need_user_nation' in d:
             o.need_user_nation = d['need_user_nation']
+        if 'verify_channel' in d:
+            o.verify_channel = d['verify_channel']
         return o
 
 

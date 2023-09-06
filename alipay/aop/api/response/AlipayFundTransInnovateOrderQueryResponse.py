@@ -12,6 +12,7 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
         self._arrival_time_end = None
         self._error_code = None
         self._fail_reason = None
+        self._fund_order_id = None
         self._order_fee = None
         self._order_id = None
         self._out_biz_no = None
@@ -41,6 +42,13 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def fund_order_id(self):
+        return self._fund_order_id
+
+    @fund_order_id.setter
+    def fund_order_id(self, value):
+        self._fund_order_id = value
     @property
     def order_fee(self):
         return self._order_fee
@@ -99,6 +107,8 @@ class AlipayFundTransInnovateOrderQueryResponse(AlipayResponse):
             self.error_code = response['error_code']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
+        if 'fund_order_id' in response:
+            self.fund_order_id = response['fund_order_id']
         if 'order_fee' in response:
             self.order_fee = response['order_fee']
         if 'order_id' in response:

@@ -15,6 +15,7 @@ class AlipayMarketingCertificateCertificationUseModel(object):
         self._open_id = None
         self._order_id = None
         self._out_biz_no = None
+        self._out_order_id = None
         self._shop_id = None
         self._user_id = None
 
@@ -66,6 +67,13 @@ class AlipayMarketingCertificateCertificationUseModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -119,6 +127,11 @@ class AlipayMarketingCertificateCertificationUseModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -148,6 +161,8 @@ class AlipayMarketingCertificateCertificationUseModel(object):
             o.order_id = d['order_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'user_id' in d:

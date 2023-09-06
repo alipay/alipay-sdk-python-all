@@ -12,6 +12,7 @@ class PublicComplex(object):
         self._complex_testa = None
         self._test_boolean = None
         self._test_date = None
+        self._test_new = None
         self._test_number = None
         self._test_price = None
         self._test_string = None
@@ -45,6 +46,13 @@ class PublicComplex(object):
     @test_date.setter
     def test_date(self, value):
         self._test_date = value
+    @property
+    def test_new(self):
+        return self._test_new
+
+    @test_new.setter
+    def test_new(self, value):
+        self._test_new = value
     @property
     def test_number(self):
         return self._test_number
@@ -110,6 +118,11 @@ class PublicComplex(object):
                 params['test_date'] = self.test_date.to_alipay_dict()
             else:
                 params['test_date'] = self.test_date
+        if self.test_new:
+            if hasattr(self.test_new, 'to_alipay_dict'):
+                params['test_new'] = self.test_new.to_alipay_dict()
+            else:
+                params['test_new'] = self.test_new
         if self.test_number:
             if isinstance(self.test_number, list):
                 for i in range(0, len(self.test_number)):
@@ -158,6 +171,8 @@ class PublicComplex(object):
             o.test_boolean = d['test_boolean']
         if 'test_date' in d:
             o.test_date = d['test_date']
+        if 'test_new' in d:
+            o.test_new = d['test_new']
         if 'test_number' in d:
             o.test_number = d['test_number']
         if 'test_price' in d:

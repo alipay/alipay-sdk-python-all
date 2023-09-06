@@ -65,10 +65,13 @@ class AssetReverseItem(object):
 
     @asset_reverse_goods_items.setter
     def asset_reverse_goods_items(self, value):
-        if isinstance(value, AssetReverseGoodsItem):
-            self._asset_reverse_goods_items = value
-        else:
-            self._asset_reverse_goods_items = AssetReverseGoodsItem.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._asset_reverse_goods_items = list()
+            for i in value:
+                if isinstance(i, AssetReverseGoodsItem):
+                    self._asset_reverse_goods_items.append(i)
+                else:
+                    self._asset_reverse_goods_items.append(AssetReverseGoodsItem.from_alipay_dict(i))
     @property
     def assign_item_id(self):
         return self._assign_item_id
@@ -245,6 +248,11 @@ class AssetReverseItem(object):
             else:
                 params['apply_order_item_id'] = self.apply_order_item_id
         if self.asset_reverse_goods_items:
+            if isinstance(self.asset_reverse_goods_items, list):
+                for i in range(0, len(self.asset_reverse_goods_items)):
+                    element = self.asset_reverse_goods_items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.asset_reverse_goods_items[i] = element.to_alipay_dict()
             if hasattr(self.asset_reverse_goods_items, 'to_alipay_dict'):
                 params['asset_reverse_goods_items'] = self.asset_reverse_goods_items.to_alipay_dict()
             else:

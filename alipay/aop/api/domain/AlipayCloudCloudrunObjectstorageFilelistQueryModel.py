@@ -13,6 +13,7 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
         self._file_id_list = None
         self._next_token = None
         self._page_size = None
+        self._parent_directory = None
         self._prefix = None
 
     @property
@@ -54,6 +55,13 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
     def page_size(self, value):
         self._page_size = value
     @property
+    def parent_directory(self):
+        return self._parent_directory
+
+    @parent_directory.setter
+    def parent_directory(self, value):
+        self._parent_directory = value
+    @property
     def prefix(self):
         return self._prefix
 
@@ -94,6 +102,11 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.parent_directory:
+            if hasattr(self.parent_directory, 'to_alipay_dict'):
+                params['parent_directory'] = self.parent_directory.to_alipay_dict()
+            else:
+                params['parent_directory'] = self.parent_directory
         if self.prefix:
             if hasattr(self.prefix, 'to_alipay_dict'):
                 params['prefix'] = self.prefix.to_alipay_dict()
@@ -116,6 +129,8 @@ class AlipayCloudCloudrunObjectstorageFilelistQueryModel(object):
             o.next_token = d['next_token']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'parent_directory' in d:
+            o.parent_directory = d['parent_directory']
         if 'prefix' in d:
             o.prefix = d['prefix']
         return o

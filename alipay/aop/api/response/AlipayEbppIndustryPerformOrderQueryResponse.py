@@ -9,11 +9,15 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppIndustryPerformOrderQueryResponse, self).__init__()
+        self._alloc_status = None
         self._bill_amount = None
         self._bill_no = None
         self._chargeoff_status = None
+        self._create_type = None
+        self._gmt_alloc = None
         self._gmt_chargeoff_finish = None
         self._gmt_chargeoff_start = None
+        self._gmt_create = None
         self._gmt_pay = None
         self._gmt_refund = None
         self._gmt_settle = None
@@ -26,7 +30,15 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
         self._settle_status = None
         self._status = None
         self._trade_no = None
+        self._unique_code = None
 
+    @property
+    def alloc_status(self):
+        return self._alloc_status
+
+    @alloc_status.setter
+    def alloc_status(self, value):
+        self._alloc_status = value
     @property
     def bill_amount(self):
         return self._bill_amount
@@ -49,6 +61,20 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
     def chargeoff_status(self, value):
         self._chargeoff_status = value
     @property
+    def create_type(self):
+        return self._create_type
+
+    @create_type.setter
+    def create_type(self, value):
+        self._create_type = value
+    @property
+    def gmt_alloc(self):
+        return self._gmt_alloc
+
+    @gmt_alloc.setter
+    def gmt_alloc(self, value):
+        self._gmt_alloc = value
+    @property
     def gmt_chargeoff_finish(self):
         return self._gmt_chargeoff_finish
 
@@ -62,6 +88,13 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
     @gmt_chargeoff_start.setter
     def gmt_chargeoff_start(self, value):
         self._gmt_chargeoff_start = value
+    @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
     @property
     def gmt_pay(self):
         return self._gmt_pay
@@ -146,19 +179,34 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def unique_code(self):
+        return self._unique_code
+
+    @unique_code.setter
+    def unique_code(self, value):
+        self._unique_code = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppIndustryPerformOrderQueryResponse, self).parse_response_content(response_content)
+        if 'alloc_status' in response:
+            self.alloc_status = response['alloc_status']
         if 'bill_amount' in response:
             self.bill_amount = response['bill_amount']
         if 'bill_no' in response:
             self.bill_no = response['bill_no']
         if 'chargeoff_status' in response:
             self.chargeoff_status = response['chargeoff_status']
+        if 'create_type' in response:
+            self.create_type = response['create_type']
+        if 'gmt_alloc' in response:
+            self.gmt_alloc = response['gmt_alloc']
         if 'gmt_chargeoff_finish' in response:
             self.gmt_chargeoff_finish = response['gmt_chargeoff_finish']
         if 'gmt_chargeoff_start' in response:
             self.gmt_chargeoff_start = response['gmt_chargeoff_start']
+        if 'gmt_create' in response:
+            self.gmt_create = response['gmt_create']
         if 'gmt_pay' in response:
             self.gmt_pay = response['gmt_pay']
         if 'gmt_refund' in response:
@@ -183,3 +231,5 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
             self.status = response['status']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
+        if 'unique_code' in response:
+            self.unique_code = response['unique_code']

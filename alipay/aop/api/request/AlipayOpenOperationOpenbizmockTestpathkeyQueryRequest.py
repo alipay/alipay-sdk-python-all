@@ -18,6 +18,7 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
         self._d = None
         self._e = None
         self._keykey = None
+        self._test_price = None
         self._f = None
         self._version = "1.0"
         self._terminal_type = None
@@ -78,6 +79,13 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
     @keykey.setter
     def keykey(self, value):
         self._keykey = value
+    @property
+    def test_price(self):
+        return self._test_price
+
+    @test_price.setter
+    def test_price(self, value):
+        self._test_price = value
 
     @property
     def f(self):
@@ -196,6 +204,11 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
                 params['keykey'] = json.dumps(obj=self.keykey.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['keykey'] = self.keykey
+        if self.test_price:
+            if hasattr(self.test_price, 'to_alipay_dict'):
+                params['test_price'] = json.dumps(obj=self.test_price.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['test_price'] = self.test_price
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:
