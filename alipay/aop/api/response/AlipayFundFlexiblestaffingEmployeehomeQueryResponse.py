@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.EmployeeCardInfoResDTO import EmployeeCardInfoResDTO
 from alipay.aop.api.domain.RentAgreementInfoDTO import RentAgreementInfoDTO
 from alipay.aop.api.domain.RentServiceInfoDTO import RentServiceInfoDTO
 
@@ -13,6 +14,7 @@ class AlipayFundFlexiblestaffingEmployeehomeQueryResponse(AlipayResponse):
         super(AlipayFundFlexiblestaffingEmployeehomeQueryResponse, self).__init__()
         self._apply_status = None
         self._biz_scene = None
+        self._employee_card_info = None
         self._out_biz_no = None
         self._product_code = None
         self._rent_agreement_info = None
@@ -32,6 +34,16 @@ class AlipayFundFlexiblestaffingEmployeehomeQueryResponse(AlipayResponse):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def employee_card_info(self):
+        return self._employee_card_info
+
+    @employee_card_info.setter
+    def employee_card_info(self, value):
+        if isinstance(value, EmployeeCardInfoResDTO):
+            self._employee_card_info = value
+        else:
+            self._employee_card_info = EmployeeCardInfoResDTO.from_alipay_dict(value)
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -73,6 +85,8 @@ class AlipayFundFlexiblestaffingEmployeehomeQueryResponse(AlipayResponse):
             self.apply_status = response['apply_status']
         if 'biz_scene' in response:
             self.biz_scene = response['biz_scene']
+        if 'employee_card_info' in response:
+            self.employee_card_info = response['employee_card_info']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'product_code' in response:

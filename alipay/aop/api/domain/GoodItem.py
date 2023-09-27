@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.LeaseIndustryBean import LeaseIndustryBean
 
 
 class GoodItem(object):
@@ -18,12 +19,18 @@ class GoodItem(object):
         self._deposit_amount = None
         self._detail_pic_num = None
         self._detail_url = None
+        self._discount_rate = None
+        self._free_shipping_val = None
         self._fresh_degree = None
         self._front_end_category = None
         self._id = None
+        self._industry_type = None
+        self._lease_industry_info = None
         self._mini_app_id = None
+        self._operate_time = None
         self._origin_price = None
         self._pic_url_list = None
+        self._praise_cnt = None
         self._promo_pic_url_list = None
         self._pub_time = None
         self._rating = None
@@ -31,8 +38,10 @@ class GoodItem(object):
         self._rental_free = None
         self._row_type = None
         self._self_pickup = None
+        self._share_cnt = None
         self._shipment_rate = None
         self._shipments = None
+        self._shipping_price = None
         self._shop_id = None
         self._shop_name = None
         self._spu_id = None
@@ -116,6 +125,20 @@ class GoodItem(object):
     def detail_url(self, value):
         self._detail_url = value
     @property
+    def discount_rate(self):
+        return self._discount_rate
+
+    @discount_rate.setter
+    def discount_rate(self, value):
+        self._discount_rate = value
+    @property
+    def free_shipping_val(self):
+        return self._free_shipping_val
+
+    @free_shipping_val.setter
+    def free_shipping_val(self, value):
+        self._free_shipping_val = value
+    @property
     def fresh_degree(self):
         return self._fresh_degree
 
@@ -137,12 +160,36 @@ class GoodItem(object):
     def id(self, value):
         self._id = value
     @property
+    def industry_type(self):
+        return self._industry_type
+
+    @industry_type.setter
+    def industry_type(self, value):
+        self._industry_type = value
+    @property
+    def lease_industry_info(self):
+        return self._lease_industry_info
+
+    @lease_industry_info.setter
+    def lease_industry_info(self, value):
+        if isinstance(value, LeaseIndustryBean):
+            self._lease_industry_info = value
+        else:
+            self._lease_industry_info = LeaseIndustryBean.from_alipay_dict(value)
+    @property
     def mini_app_id(self):
         return self._mini_app_id
 
     @mini_app_id.setter
     def mini_app_id(self, value):
         self._mini_app_id = value
+    @property
+    def operate_time(self):
+        return self._operate_time
+
+    @operate_time.setter
+    def operate_time(self, value):
+        self._operate_time = value
     @property
     def origin_price(self):
         return self._origin_price
@@ -160,6 +207,13 @@ class GoodItem(object):
             self._pic_url_list = list()
             for i in value:
                 self._pic_url_list.append(i)
+    @property
+    def praise_cnt(self):
+        return self._praise_cnt
+
+    @praise_cnt.setter
+    def praise_cnt(self, value):
+        self._praise_cnt = value
     @property
     def promo_pic_url_list(self):
         return self._promo_pic_url_list
@@ -213,6 +267,13 @@ class GoodItem(object):
     def self_pickup(self, value):
         self._self_pickup = value
     @property
+    def share_cnt(self):
+        return self._share_cnt
+
+    @share_cnt.setter
+    def share_cnt(self, value):
+        self._share_cnt = value
+    @property
     def shipment_rate(self):
         return self._shipment_rate
 
@@ -226,6 +287,13 @@ class GoodItem(object):
     @shipments.setter
     def shipments(self, value):
         self._shipments = value
+    @property
+    def shipping_price(self):
+        return self._shipping_price
+
+    @shipping_price.setter
+    def shipping_price(self, value):
+        self._shipping_price = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -341,6 +409,16 @@ class GoodItem(object):
                 params['detail_url'] = self.detail_url.to_alipay_dict()
             else:
                 params['detail_url'] = self.detail_url
+        if self.discount_rate:
+            if hasattr(self.discount_rate, 'to_alipay_dict'):
+                params['discount_rate'] = self.discount_rate.to_alipay_dict()
+            else:
+                params['discount_rate'] = self.discount_rate
+        if self.free_shipping_val:
+            if hasattr(self.free_shipping_val, 'to_alipay_dict'):
+                params['free_shipping_val'] = self.free_shipping_val.to_alipay_dict()
+            else:
+                params['free_shipping_val'] = self.free_shipping_val
         if self.fresh_degree:
             if hasattr(self.fresh_degree, 'to_alipay_dict'):
                 params['fresh_degree'] = self.fresh_degree.to_alipay_dict()
@@ -356,11 +434,26 @@ class GoodItem(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.industry_type:
+            if hasattr(self.industry_type, 'to_alipay_dict'):
+                params['industry_type'] = self.industry_type.to_alipay_dict()
+            else:
+                params['industry_type'] = self.industry_type
+        if self.lease_industry_info:
+            if hasattr(self.lease_industry_info, 'to_alipay_dict'):
+                params['lease_industry_info'] = self.lease_industry_info.to_alipay_dict()
+            else:
+                params['lease_industry_info'] = self.lease_industry_info
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
             else:
                 params['mini_app_id'] = self.mini_app_id
+        if self.operate_time:
+            if hasattr(self.operate_time, 'to_alipay_dict'):
+                params['operate_time'] = self.operate_time.to_alipay_dict()
+            else:
+                params['operate_time'] = self.operate_time
         if self.origin_price:
             if hasattr(self.origin_price, 'to_alipay_dict'):
                 params['origin_price'] = self.origin_price.to_alipay_dict()
@@ -376,6 +469,11 @@ class GoodItem(object):
                 params['pic_url_list'] = self.pic_url_list.to_alipay_dict()
             else:
                 params['pic_url_list'] = self.pic_url_list
+        if self.praise_cnt:
+            if hasattr(self.praise_cnt, 'to_alipay_dict'):
+                params['praise_cnt'] = self.praise_cnt.to_alipay_dict()
+            else:
+                params['praise_cnt'] = self.praise_cnt
         if self.promo_pic_url_list:
             if isinstance(self.promo_pic_url_list, list):
                 for i in range(0, len(self.promo_pic_url_list)):
@@ -416,6 +514,11 @@ class GoodItem(object):
                 params['self_pickup'] = self.self_pickup.to_alipay_dict()
             else:
                 params['self_pickup'] = self.self_pickup
+        if self.share_cnt:
+            if hasattr(self.share_cnt, 'to_alipay_dict'):
+                params['share_cnt'] = self.share_cnt.to_alipay_dict()
+            else:
+                params['share_cnt'] = self.share_cnt
         if self.shipment_rate:
             if hasattr(self.shipment_rate, 'to_alipay_dict'):
                 params['shipment_rate'] = self.shipment_rate.to_alipay_dict()
@@ -426,6 +529,11 @@ class GoodItem(object):
                 params['shipments'] = self.shipments.to_alipay_dict()
             else:
                 params['shipments'] = self.shipments
+        if self.shipping_price:
+            if hasattr(self.shipping_price, 'to_alipay_dict'):
+                params['shipping_price'] = self.shipping_price.to_alipay_dict()
+            else:
+                params['shipping_price'] = self.shipping_price
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -493,18 +601,30 @@ class GoodItem(object):
             o.detail_pic_num = d['detail_pic_num']
         if 'detail_url' in d:
             o.detail_url = d['detail_url']
+        if 'discount_rate' in d:
+            o.discount_rate = d['discount_rate']
+        if 'free_shipping_val' in d:
+            o.free_shipping_val = d['free_shipping_val']
         if 'fresh_degree' in d:
             o.fresh_degree = d['fresh_degree']
         if 'front_end_category' in d:
             o.front_end_category = d['front_end_category']
         if 'id' in d:
             o.id = d['id']
+        if 'industry_type' in d:
+            o.industry_type = d['industry_type']
+        if 'lease_industry_info' in d:
+            o.lease_industry_info = d['lease_industry_info']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
+        if 'operate_time' in d:
+            o.operate_time = d['operate_time']
         if 'origin_price' in d:
             o.origin_price = d['origin_price']
         if 'pic_url_list' in d:
             o.pic_url_list = d['pic_url_list']
+        if 'praise_cnt' in d:
+            o.praise_cnt = d['praise_cnt']
         if 'promo_pic_url_list' in d:
             o.promo_pic_url_list = d['promo_pic_url_list']
         if 'pub_time' in d:
@@ -519,10 +639,14 @@ class GoodItem(object):
             o.row_type = d['row_type']
         if 'self_pickup' in d:
             o.self_pickup = d['self_pickup']
+        if 'share_cnt' in d:
+            o.share_cnt = d['share_cnt']
         if 'shipment_rate' in d:
             o.shipment_rate = d['shipment_rate']
         if 'shipments' in d:
             o.shipments = d['shipments']
+        if 'shipping_price' in d:
+            o.shipping_price = d['shipping_price']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'shop_name' in d:

@@ -10,6 +10,7 @@ from alipay.aop.api.domain.RiskImagePlusQueryOrderInfo import RiskImagePlusQuery
 class AlipayCloudTraasRiskgoScalperQueryModel(object):
 
     def __init__(self):
+        self._activity_info = None
         self._apdid = None
         self._bank_card_no = None
         self._business_code = None
@@ -51,6 +52,13 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         self._user_id = None
         self._user_name = None
 
+    @property
+    def activity_info(self):
+        return self._activity_info
+
+    @activity_info.setter
+    def activity_info(self, value):
+        self._activity_info = value
     @property
     def apdid(self):
         return self._apdid
@@ -344,6 +352,11 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_info:
+            if hasattr(self.activity_info, 'to_alipay_dict'):
+                params['activity_info'] = self.activity_info.to_alipay_dict()
+            else:
+                params['activity_info'] = self.activity_info
         if self.apdid:
             if hasattr(self.apdid, 'to_alipay_dict'):
                 params['apdid'] = self.apdid.to_alipay_dict()
@@ -556,6 +569,8 @@ class AlipayCloudTraasRiskgoScalperQueryModel(object):
         if not d:
             return None
         o = AlipayCloudTraasRiskgoScalperQueryModel()
+        if 'activity_info' in d:
+            o.activity_info = d['activity_info']
         if 'apdid' in d:
             o.apdid = d['apdid']
         if 'bank_card_no' in d:

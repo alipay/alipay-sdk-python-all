@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InputInvoiceCheckResponse import InputInvoiceCheckResponse
 
 
 class InputInvoiceMqDTO(object):
@@ -11,12 +12,14 @@ class InputInvoiceMqDTO(object):
         self._error_code = None
         self._error_msg = None
         self._id = None
+        self._input_invoice_dto = None
         self._invoice_code = None
         self._invoice_no = None
         self._mq_key = None
         self._process_result = None
         self._process_type = None
         self._related_order = None
+        self._task_id = None
 
     @property
     def error_code(self):
@@ -39,6 +42,16 @@ class InputInvoiceMqDTO(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def input_invoice_dto(self):
+        return self._input_invoice_dto
+
+    @input_invoice_dto.setter
+    def input_invoice_dto(self, value):
+        if isinstance(value, InputInvoiceCheckResponse):
+            self._input_invoice_dto = value
+        else:
+            self._input_invoice_dto = InputInvoiceCheckResponse.from_alipay_dict(value)
     @property
     def invoice_code(self):
         return self._invoice_code
@@ -81,6 +94,13 @@ class InputInvoiceMqDTO(object):
     @related_order.setter
     def related_order(self, value):
         self._related_order = value
+    @property
+    def task_id(self):
+        return self._task_id
+
+    @task_id.setter
+    def task_id(self, value):
+        self._task_id = value
 
 
     def to_alipay_dict(self):
@@ -100,6 +120,11 @@ class InputInvoiceMqDTO(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.input_invoice_dto:
+            if hasattr(self.input_invoice_dto, 'to_alipay_dict'):
+                params['input_invoice_dto'] = self.input_invoice_dto.to_alipay_dict()
+            else:
+                params['input_invoice_dto'] = self.input_invoice_dto
         if self.invoice_code:
             if hasattr(self.invoice_code, 'to_alipay_dict'):
                 params['invoice_code'] = self.invoice_code.to_alipay_dict()
@@ -130,6 +155,11 @@ class InputInvoiceMqDTO(object):
                 params['related_order'] = self.related_order.to_alipay_dict()
             else:
                 params['related_order'] = self.related_order
+        if self.task_id:
+            if hasattr(self.task_id, 'to_alipay_dict'):
+                params['task_id'] = self.task_id.to_alipay_dict()
+            else:
+                params['task_id'] = self.task_id
         return params
 
     @staticmethod
@@ -143,6 +173,8 @@ class InputInvoiceMqDTO(object):
             o.error_msg = d['error_msg']
         if 'id' in d:
             o.id = d['id']
+        if 'input_invoice_dto' in d:
+            o.input_invoice_dto = d['input_invoice_dto']
         if 'invoice_code' in d:
             o.invoice_code = d['invoice_code']
         if 'invoice_no' in d:
@@ -155,6 +187,8 @@ class InputInvoiceMqDTO(object):
             o.process_type = d['process_type']
         if 'related_order' in d:
             o.related_order = d['related_order']
+        if 'task_id' in d:
+            o.task_id = d['task_id']
         return o
 
 

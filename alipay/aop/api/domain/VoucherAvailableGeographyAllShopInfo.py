@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class VoucherAvailableGeographyAllShopInfo(object):
 
     def __init__(self):
+        self._available_brand_id = None
         self._exclude_shop_ids = None
         self._merchant_ids = None
 
+    @property
+    def available_brand_id(self):
+        return self._available_brand_id
+
+    @available_brand_id.setter
+    def available_brand_id(self, value):
+        self._available_brand_id = value
     @property
     def exclude_shop_ids(self):
         return self._exclude_shop_ids
@@ -35,6 +43,11 @@ class VoucherAvailableGeographyAllShopInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.available_brand_id:
+            if hasattr(self.available_brand_id, 'to_alipay_dict'):
+                params['available_brand_id'] = self.available_brand_id.to_alipay_dict()
+            else:
+                params['available_brand_id'] = self.available_brand_id
         if self.exclude_shop_ids:
             if isinstance(self.exclude_shop_ids, list):
                 for i in range(0, len(self.exclude_shop_ids)):
@@ -62,6 +75,8 @@ class VoucherAvailableGeographyAllShopInfo(object):
         if not d:
             return None
         o = VoucherAvailableGeographyAllShopInfo()
+        if 'available_brand_id' in d:
+            o.available_brand_id = d['available_brand_id']
         if 'exclude_shop_ids' in d:
             o.exclude_shop_ids = d['exclude_shop_ids']
         if 'merchant_ids' in d:

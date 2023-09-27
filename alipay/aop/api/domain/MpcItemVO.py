@@ -10,12 +10,14 @@ class MpcItemVO(object):
 
     def __init__(self):
         self._category_id = None
+        self._detail_page_model = None
         self._img_url = None
         self._main_pic = None
         self._mpc_item_id = None
         self._mpc_sku_vo = None
         self._out_item_id = None
         self._path = None
+        self._price = None
         self._title = None
 
     @property
@@ -25,6 +27,13 @@ class MpcItemVO(object):
     @category_id.setter
     def category_id(self, value):
         self._category_id = value
+    @property
+    def detail_page_model(self):
+        return self._detail_page_model
+
+    @detail_page_model.setter
+    def detail_page_model(self, value):
+        self._detail_page_model = value
     @property
     def img_url(self):
         return self._img_url
@@ -74,6 +83,13 @@ class MpcItemVO(object):
     def path(self, value):
         self._path = value
     @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        self._price = value
+    @property
     def title(self):
         return self._title
 
@@ -89,6 +105,11 @@ class MpcItemVO(object):
                 params['category_id'] = self.category_id.to_alipay_dict()
             else:
                 params['category_id'] = self.category_id
+        if self.detail_page_model:
+            if hasattr(self.detail_page_model, 'to_alipay_dict'):
+                params['detail_page_model'] = self.detail_page_model.to_alipay_dict()
+            else:
+                params['detail_page_model'] = self.detail_page_model
         if self.img_url:
             if hasattr(self.img_url, 'to_alipay_dict'):
                 params['img_url'] = self.img_url.to_alipay_dict()
@@ -124,6 +145,11 @@ class MpcItemVO(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.price:
+            if hasattr(self.price, 'to_alipay_dict'):
+                params['price'] = self.price.to_alipay_dict()
+            else:
+                params['price'] = self.price
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -138,6 +164,8 @@ class MpcItemVO(object):
         o = MpcItemVO()
         if 'category_id' in d:
             o.category_id = d['category_id']
+        if 'detail_page_model' in d:
+            o.detail_page_model = d['detail_page_model']
         if 'img_url' in d:
             o.img_url = d['img_url']
         if 'main_pic' in d:
@@ -150,6 +178,8 @@ class MpcItemVO(object):
             o.out_item_id = d['out_item_id']
         if 'path' in d:
             o.path = d['path']
+        if 'price' in d:
+            o.price = d['price']
         if 'title' in d:
             o.title = d['title']
         return o

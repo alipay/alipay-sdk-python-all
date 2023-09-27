@@ -19,6 +19,7 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
         self._operate_user_id = None
         self._organizer_id = None
         self._organizer_name = None
+        self._pre_content = None
         self._task_desc = None
         self._task_end_time = None
         self._task_name = None
@@ -98,6 +99,13 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
     @organizer_name.setter
     def organizer_name(self, value):
         self._organizer_name = value
+    @property
+    def pre_content(self):
+        return self._pre_content
+
+    @pre_content.setter
+    def pre_content(self, value):
+        self._pre_content = value
     @property
     def task_desc(self):
         return self._task_desc
@@ -187,6 +195,11 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
                 params['organizer_name'] = self.organizer_name.to_alipay_dict()
             else:
                 params['organizer_name'] = self.organizer_name
+        if self.pre_content:
+            if hasattr(self.pre_content, 'to_alipay_dict'):
+                params['pre_content'] = self.pre_content.to_alipay_dict()
+            else:
+                params['pre_content'] = self.pre_content
         if self.task_desc:
             if hasattr(self.task_desc, 'to_alipay_dict'):
                 params['task_desc'] = self.task_desc.to_alipay_dict()
@@ -239,6 +252,8 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
             o.organizer_id = d['organizer_id']
         if 'organizer_name' in d:
             o.organizer_name = d['organizer_name']
+        if 'pre_content' in d:
+            o.pre_content = d['pre_content']
         if 'task_desc' in d:
             o.task_desc = d['task_desc']
         if 'task_end_time' in d:

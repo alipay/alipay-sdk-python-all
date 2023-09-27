@@ -15,6 +15,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._employee_mobile = None
         self._employee_name = None
         self._employee_no = None
+        self._encrypt_cert_no = None
+        self._encrypt_mobile = None
         self._enterprise_id = None
         self._identity = None
         self._identity_open_id = None
@@ -77,6 +79,20 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @employee_no.setter
     def employee_no(self, value):
         self._employee_no = value
+    @property
+    def encrypt_cert_no(self):
+        return self._encrypt_cert_no
+
+    @encrypt_cert_no.setter
+    def encrypt_cert_no(self, value):
+        self._encrypt_cert_no = value
+    @property
+    def encrypt_mobile(self):
+        return self._encrypt_mobile
+
+    @encrypt_mobile.setter
+    def encrypt_mobile(self, value):
+        self._encrypt_mobile = value
     @property
     def enterprise_id(self):
         return self._enterprise_id
@@ -187,6 +203,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
             else:
                 params['employee_no'] = self.employee_no
+        if self.encrypt_cert_no:
+            if hasattr(self.encrypt_cert_no, 'to_alipay_dict'):
+                params['encrypt_cert_no'] = self.encrypt_cert_no.to_alipay_dict()
+            else:
+                params['encrypt_cert_no'] = self.encrypt_cert_no
+        if self.encrypt_mobile:
+            if hasattr(self.encrypt_mobile, 'to_alipay_dict'):
+                params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
+            else:
+                params['encrypt_mobile'] = self.encrypt_mobile
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -258,6 +284,10 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.employee_name = d['employee_name']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
+        if 'encrypt_cert_no' in d:
+            o.encrypt_cert_no = d['encrypt_cert_no']
+        if 'encrypt_mobile' in d:
+            o.encrypt_mobile = d['encrypt_mobile']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'identity' in d:

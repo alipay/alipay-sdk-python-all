@@ -11,6 +11,7 @@ class AlipayBossFncGfsmartpayInvoicebillserviceBatchqueryModel(object):
         self._biz_code = None
         self._biz_document_nos = None
         self._related_document_nos = None
+        self._test_mode = None
 
     @property
     def biz_code(self):
@@ -39,6 +40,13 @@ class AlipayBossFncGfsmartpayInvoicebillserviceBatchqueryModel(object):
             self._related_document_nos = list()
             for i in value:
                 self._related_document_nos.append(i)
+    @property
+    def test_mode(self):
+        return self._test_mode
+
+    @test_mode.setter
+    def test_mode(self, value):
+        self._test_mode = value
 
 
     def to_alipay_dict(self):
@@ -68,6 +76,11 @@ class AlipayBossFncGfsmartpayInvoicebillserviceBatchqueryModel(object):
                 params['related_document_nos'] = self.related_document_nos.to_alipay_dict()
             else:
                 params['related_document_nos'] = self.related_document_nos
+        if self.test_mode:
+            if hasattr(self.test_mode, 'to_alipay_dict'):
+                params['test_mode'] = self.test_mode.to_alipay_dict()
+            else:
+                params['test_mode'] = self.test_mode
         return params
 
     @staticmethod
@@ -81,6 +94,8 @@ class AlipayBossFncGfsmartpayInvoicebillserviceBatchqueryModel(object):
             o.biz_document_nos = d['biz_document_nos']
         if 'related_document_nos' in d:
             o.related_document_nos = d['related_document_nos']
+        if 'test_mode' in d:
+            o.test_mode = d['test_mode']
         return o
 
 

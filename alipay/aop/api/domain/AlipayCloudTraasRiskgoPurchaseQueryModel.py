@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudTraasRiskgoPurchaseQueryModel(object):
 
     def __init__(self):
+        self._activity_info = None
         self._bank_card_no = None
         self._business_code = None
         self._cert_no = None
@@ -28,6 +29,13 @@ class AlipayCloudTraasRiskgoPurchaseQueryModel(object):
         self._service = None
         self._user_id = None
 
+    @property
+    def activity_info(self):
+        return self._activity_info
+
+    @activity_info.setter
+    def activity_info(self, value):
+        self._activity_info = value
     @property
     def bank_card_no(self):
         return self._bank_card_no
@@ -165,6 +173,11 @@ class AlipayCloudTraasRiskgoPurchaseQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_info:
+            if hasattr(self.activity_info, 'to_alipay_dict'):
+                params['activity_info'] = self.activity_info.to_alipay_dict()
+            else:
+                params['activity_info'] = self.activity_info
         if self.bank_card_no:
             if hasattr(self.bank_card_no, 'to_alipay_dict'):
                 params['bank_card_no'] = self.bank_card_no.to_alipay_dict()
@@ -267,6 +280,8 @@ class AlipayCloudTraasRiskgoPurchaseQueryModel(object):
         if not d:
             return None
         o = AlipayCloudTraasRiskgoPurchaseQueryModel()
+        if 'activity_info' in d:
+            o.activity_info = d['activity_info']
         if 'bank_card_no' in d:
             o.bank_card_no = d['bank_card_no']
         if 'business_code' in d:

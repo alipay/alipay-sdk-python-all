@@ -14,6 +14,7 @@ class AgmTemplateInstanceDTO(object):
         self._inst_id = None
         self._oss_url = None
         self._preview_url = None
+        self._template_code = None
 
     @property
     def file_name(self):
@@ -57,6 +58,13 @@ class AgmTemplateInstanceDTO(object):
     @preview_url.setter
     def preview_url(self, value):
         self._preview_url = value
+    @property
+    def template_code(self):
+        return self._template_code
+
+    @template_code.setter
+    def template_code(self, value):
+        self._template_code = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AgmTemplateInstanceDTO(object):
                 params['preview_url'] = self.preview_url.to_alipay_dict()
             else:
                 params['preview_url'] = self.preview_url
+        if self.template_code:
+            if hasattr(self.template_code, 'to_alipay_dict'):
+                params['template_code'] = self.template_code.to_alipay_dict()
+            else:
+                params['template_code'] = self.template_code
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AgmTemplateInstanceDTO(object):
             o.oss_url = d['oss_url']
         if 'preview_url' in d:
             o.preview_url = d['preview_url']
+        if 'template_code' in d:
+            o.template_code = d['template_code']
         return o
 
 

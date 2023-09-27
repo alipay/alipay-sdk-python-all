@@ -11,6 +11,7 @@ class AlipayCommerceEcEmployeeInviteQueryResponse(AlipayResponse):
         super(AlipayCommerceEcEmployeeInviteQueryResponse, self).__init__()
         self._enterprise_id = None
         self._mini_app_sign_url = None
+        self._share_code = None
         self._sign_url = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayCommerceEcEmployeeInviteQueryResponse(AlipayResponse):
     def mini_app_sign_url(self, value):
         self._mini_app_sign_url = value
     @property
+    def share_code(self):
+        return self._share_code
+
+    @share_code.setter
+    def share_code(self, value):
+        self._share_code = value
+    @property
     def sign_url(self):
         return self._sign_url
 
@@ -41,5 +49,7 @@ class AlipayCommerceEcEmployeeInviteQueryResponse(AlipayResponse):
             self.enterprise_id = response['enterprise_id']
         if 'mini_app_sign_url' in response:
             self.mini_app_sign_url = response['mini_app_sign_url']
+        if 'share_code' in response:
+            self.share_code = response['share_code']
         if 'sign_url' in response:
             self.sign_url = response['sign_url']

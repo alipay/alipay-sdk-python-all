@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
 
     def __init__(self):
+        self._activity_info = None
         self._apdid = None
         self._business_code = None
         self._cert_no = None
@@ -23,11 +24,19 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
         self._role = None
         self._scene = None
         self._service = None
+        self._service_category = None
         self._total_amount = None
         self._total_quantity = None
         self._user_id = None
         self._user_name = None
 
+    @property
+    def activity_info(self):
+        return self._activity_info
+
+    @activity_info.setter
+    def activity_info(self, value):
+        self._activity_info = value
     @property
     def apdid(self):
         return self._apdid
@@ -134,6 +143,13 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
     def service(self, value):
         self._service = value
     @property
+    def service_category(self):
+        return self._service_category
+
+    @service_category.setter
+    def service_category(self, value):
+        self._service_category = value
+    @property
     def total_amount(self):
         return self._total_amount
 
@@ -165,6 +181,11 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_info:
+            if hasattr(self.activity_info, 'to_alipay_dict'):
+                params['activity_info'] = self.activity_info.to_alipay_dict()
+            else:
+                params['activity_info'] = self.activity_info
         if self.apdid:
             if hasattr(self.apdid, 'to_alipay_dict'):
                 params['apdid'] = self.apdid.to_alipay_dict()
@@ -240,6 +261,11 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
                 params['service'] = self.service.to_alipay_dict()
             else:
                 params['service'] = self.service
+        if self.service_category:
+            if hasattr(self.service_category, 'to_alipay_dict'):
+                params['service_category'] = self.service_category.to_alipay_dict()
+            else:
+                params['service_category'] = self.service_category
         if self.total_amount:
             if hasattr(self.total_amount, 'to_alipay_dict'):
                 params['total_amount'] = self.total_amount.to_alipay_dict()
@@ -267,6 +293,8 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
         if not d:
             return None
         o = AlipayCloudTraasRiskgoBaddebtQueryModel()
+        if 'activity_info' in d:
+            o.activity_info = d['activity_info']
         if 'apdid' in d:
             o.apdid = d['apdid']
         if 'business_code' in d:
@@ -297,6 +325,8 @@ class AlipayCloudTraasRiskgoBaddebtQueryModel(object):
             o.scene = d['scene']
         if 'service' in d:
             o.service = d['service']
+        if 'service_category' in d:
+            o.service_category = d['service_category']
         if 'total_amount' in d:
             o.total_amount = d['total_amount']
         if 'total_quantity' in d:

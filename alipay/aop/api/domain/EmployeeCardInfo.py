@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CardExtendParamsDTO import CardExtendParamsDTO
 from alipay.aop.api.domain.ParticipantInfoDTO import ParticipantInfoDTO
 from alipay.aop.api.domain.ParticipantInfoDTO import ParticipantInfoDTO
 
@@ -10,10 +11,21 @@ from alipay.aop.api.domain.ParticipantInfoDTO import ParticipantInfoDTO
 class EmployeeCardInfo(object):
 
     def __init__(self):
+        self._card_extend_params = None
         self._employee_card_no = None
         self._hire_principal = None
         self._invite_principal = None
 
+    @property
+    def card_extend_params(self):
+        return self._card_extend_params
+
+    @card_extend_params.setter
+    def card_extend_params(self, value):
+        if isinstance(value, CardExtendParamsDTO):
+            self._card_extend_params = value
+        else:
+            self._card_extend_params = CardExtendParamsDTO.from_alipay_dict(value)
     @property
     def employee_card_no(self):
         return self._employee_card_no
@@ -45,6 +57,11 @@ class EmployeeCardInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_extend_params:
+            if hasattr(self.card_extend_params, 'to_alipay_dict'):
+                params['card_extend_params'] = self.card_extend_params.to_alipay_dict()
+            else:
+                params['card_extend_params'] = self.card_extend_params
         if self.employee_card_no:
             if hasattr(self.employee_card_no, 'to_alipay_dict'):
                 params['employee_card_no'] = self.employee_card_no.to_alipay_dict()
@@ -67,6 +84,8 @@ class EmployeeCardInfo(object):
         if not d:
             return None
         o = EmployeeCardInfo()
+        if 'card_extend_params' in d:
+            o.card_extend_params = d['card_extend_params']
         if 'employee_card_no' in d:
             o.employee_card_no = d['employee_card_no']
         if 'hire_principal' in d:

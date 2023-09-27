@@ -11,6 +11,7 @@ class AlipayBossFncGfsmartpayPaymentinstructionQueryModel(object):
         self._biz_code = None
         self._biz_document_nos = None
         self._related_document_nos = None
+        self._test_mode = None
 
     @property
     def biz_code(self):
@@ -33,6 +34,13 @@ class AlipayBossFncGfsmartpayPaymentinstructionQueryModel(object):
     @related_document_nos.setter
     def related_document_nos(self, value):
         self._related_document_nos = value
+    @property
+    def test_mode(self):
+        return self._test_mode
+
+    @test_mode.setter
+    def test_mode(self, value):
+        self._test_mode = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayBossFncGfsmartpayPaymentinstructionQueryModel(object):
                 params['related_document_nos'] = self.related_document_nos.to_alipay_dict()
             else:
                 params['related_document_nos'] = self.related_document_nos
+        if self.test_mode:
+            if hasattr(self.test_mode, 'to_alipay_dict'):
+                params['test_mode'] = self.test_mode.to_alipay_dict()
+            else:
+                params['test_mode'] = self.test_mode
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayBossFncGfsmartpayPaymentinstructionQueryModel(object):
             o.biz_document_nos = d['biz_document_nos']
         if 'related_document_nos' in d:
             o.related_document_nos = d['related_document_nos']
+        if 'test_mode' in d:
+            o.test_mode = d['test_mode']
         return o
 
 

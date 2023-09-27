@@ -33,6 +33,7 @@ class EcConsumeInfo(object):
         self._merchant_id = None
         self._merchant_name = None
         self._open_id = None
+        self._opposite_full_name = None
         self._order_complete_label = None
         self._order_complete_time = None
         self._pay_no = None
@@ -226,6 +227,13 @@ class EcConsumeInfo(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def opposite_full_name(self):
+        return self._opposite_full_name
+
+    @opposite_full_name.setter
+    def opposite_full_name(self, value):
+        self._opposite_full_name = value
     @property
     def order_complete_label(self):
         return self._order_complete_label
@@ -474,6 +482,11 @@ class EcConsumeInfo(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.opposite_full_name:
+            if hasattr(self.opposite_full_name, 'to_alipay_dict'):
+                params['opposite_full_name'] = self.opposite_full_name.to_alipay_dict()
+            else:
+                params['opposite_full_name'] = self.opposite_full_name
         if self.order_complete_label:
             if hasattr(self.order_complete_label, 'to_alipay_dict'):
                 params['order_complete_label'] = self.order_complete_label.to_alipay_dict()
@@ -616,6 +629,8 @@ class EcConsumeInfo(object):
             o.merchant_name = d['merchant_name']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'opposite_full_name' in d:
+            o.opposite_full_name = d['opposite_full_name']
         if 'order_complete_label' in d:
             o.order_complete_label = d['order_complete_label']
         if 'order_complete_time' in d:

@@ -9,6 +9,7 @@ from alipay.aop.api.domain.PublicComplex import PublicComplex
 class AlipayDataDataserviceDataJhjtestQueryModel(object):
 
     def __init__(self):
+        self._inner = None
         self._input_a = None
         self._input_b = None
         self._input_c = None
@@ -16,7 +17,16 @@ class AlipayDataDataserviceDataJhjtestQueryModel(object):
         self._input_complex_a = None
         self._input_d = None
         self._input_e = None
+        self._open_id = None
+        self._uid = None
 
+    @property
+    def inner(self):
+        return self._inner
+
+    @inner.setter
+    def inner(self, value):
+        self._inner = value
     @property
     def input_a(self):
         return self._input_a
@@ -69,10 +79,29 @@ class AlipayDataDataserviceDataJhjtestQueryModel(object):
     @input_e.setter
     def input_e(self, value):
         self._input_e = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def uid(self):
+        return self._uid
+
+    @uid.setter
+    def uid(self, value):
+        self._uid = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.inner:
+            if hasattr(self.inner, 'to_alipay_dict'):
+                params['inner'] = self.inner.to_alipay_dict()
+            else:
+                params['inner'] = self.inner
         if self.input_a:
             if hasattr(self.input_a, 'to_alipay_dict'):
                 params['input_a'] = self.input_a.to_alipay_dict()
@@ -108,6 +137,16 @@ class AlipayDataDataserviceDataJhjtestQueryModel(object):
                 params['input_e'] = self.input_e.to_alipay_dict()
             else:
                 params['input_e'] = self.input_e
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.uid:
+            if hasattr(self.uid, 'to_alipay_dict'):
+                params['uid'] = self.uid.to_alipay_dict()
+            else:
+                params['uid'] = self.uid
         return params
 
     @staticmethod
@@ -115,6 +154,8 @@ class AlipayDataDataserviceDataJhjtestQueryModel(object):
         if not d:
             return None
         o = AlipayDataDataserviceDataJhjtestQueryModel()
+        if 'inner' in d:
+            o.inner = d['inner']
         if 'input_a' in d:
             o.input_a = d['input_a']
         if 'input_b' in d:
@@ -129,6 +170,10 @@ class AlipayDataDataserviceDataJhjtestQueryModel(object):
             o.input_d = d['input_d']
         if 'input_e' in d:
             o.input_e = d['input_e']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'uid' in d:
+            o.uid = d['uid']
         return o
 
 

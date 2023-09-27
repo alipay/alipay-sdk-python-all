@@ -13,6 +13,7 @@ class DspCreative(object):
         self._app_download = None
         self._creative_elements = None
         self._creative_id = None
+        self._creative_tags = None
         self._deeplink_url = None
         self._end_date = None
         self._start_date = None
@@ -53,6 +54,16 @@ class DspCreative(object):
     @creative_id.setter
     def creative_id(self, value):
         self._creative_id = value
+    @property
+    def creative_tags(self):
+        return self._creative_tags
+
+    @creative_tags.setter
+    def creative_tags(self, value):
+        if isinstance(value, list):
+            self._creative_tags = list()
+            for i in value:
+                self._creative_tags.append(i)
     @property
     def deeplink_url(self):
         return self._deeplink_url
@@ -124,6 +135,16 @@ class DspCreative(object):
                 params['creative_id'] = self.creative_id.to_alipay_dict()
             else:
                 params['creative_id'] = self.creative_id
+        if self.creative_tags:
+            if isinstance(self.creative_tags, list):
+                for i in range(0, len(self.creative_tags)):
+                    element = self.creative_tags[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.creative_tags[i] = element.to_alipay_dict()
+            if hasattr(self.creative_tags, 'to_alipay_dict'):
+                params['creative_tags'] = self.creative_tags.to_alipay_dict()
+            else:
+                params['creative_tags'] = self.creative_tags
         if self.deeplink_url:
             if hasattr(self.deeplink_url, 'to_alipay_dict'):
                 params['deeplink_url'] = self.deeplink_url.to_alipay_dict()
@@ -167,6 +188,8 @@ class DspCreative(object):
             o.creative_elements = d['creative_elements']
         if 'creative_id' in d:
             o.creative_id = d['creative_id']
+        if 'creative_tags' in d:
+            o.creative_tags = d['creative_tags']
         if 'deeplink_url' in d:
             o.deeplink_url = d['deeplink_url']
         if 'end_date' in d:

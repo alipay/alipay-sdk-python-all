@@ -34,6 +34,7 @@ class InputInvoiceCheckResponse(object):
         self._seller_bank_info = None
         self._seller_company_name = None
         self._seller_tax_no = None
+        self._task_id = None
         self._tax_amount = None
 
     @property
@@ -218,6 +219,13 @@ class InputInvoiceCheckResponse(object):
     def seller_tax_no(self, value):
         self._seller_tax_no = value
     @property
+    def task_id(self):
+        return self._task_id
+
+    @task_id.setter
+    def task_id(self, value):
+        self._task_id = value
+    @property
     def tax_amount(self):
         return self._tax_amount
 
@@ -358,6 +366,11 @@ class InputInvoiceCheckResponse(object):
                 params['seller_tax_no'] = self.seller_tax_no.to_alipay_dict()
             else:
                 params['seller_tax_no'] = self.seller_tax_no
+        if self.task_id:
+            if hasattr(self.task_id, 'to_alipay_dict'):
+                params['task_id'] = self.task_id.to_alipay_dict()
+            else:
+                params['task_id'] = self.task_id
         if self.tax_amount:
             if hasattr(self.tax_amount, 'to_alipay_dict'):
                 params['tax_amount'] = self.tax_amount.to_alipay_dict()
@@ -420,6 +433,8 @@ class InputInvoiceCheckResponse(object):
             o.seller_company_name = d['seller_company_name']
         if 'seller_tax_no' in d:
             o.seller_tax_no = d['seller_tax_no']
+        if 'task_id' in d:
+            o.task_id = d['task_id']
         if 'tax_amount' in d:
             o.tax_amount = d['tax_amount']
         return o

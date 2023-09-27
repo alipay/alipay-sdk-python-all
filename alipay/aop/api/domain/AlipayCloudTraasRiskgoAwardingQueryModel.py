@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudTraasRiskgoAwardingQueryModel(object):
 
     def __init__(self):
+        self._activity_info = None
         self._bank_card_no = None
         self._business_code = None
         self._cert_no = None
@@ -24,15 +25,24 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
         self._open_id = None
         self._opposing_open_id = None
         self._opposing_userid = None
+        self._qr_code = None
         self._risk_type = None
         self._role = None
         self._sales_amount = None
         self._scene = None
         self._service = None
+        self._service_category = None
         self._store_mcc_desc = None
         self._user_id = None
         self._user_name = None
 
+    @property
+    def activity_info(self):
+        return self._activity_info
+
+    @activity_info.setter
+    def activity_info(self, value):
+        self._activity_info = value
     @property
     def bank_card_no(self):
         return self._bank_card_no
@@ -146,6 +156,13 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
     def opposing_userid(self, value):
         self._opposing_userid = value
     @property
+    def qr_code(self):
+        return self._qr_code
+
+    @qr_code.setter
+    def qr_code(self, value):
+        self._qr_code = value
+    @property
     def risk_type(self):
         return self._risk_type
 
@@ -181,6 +198,13 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
     def service(self, value):
         self._service = value
     @property
+    def service_category(self):
+        return self._service_category
+
+    @service_category.setter
+    def service_category(self, value):
+        self._service_category = value
+    @property
     def store_mcc_desc(self):
         return self._store_mcc_desc
 
@@ -205,6 +229,11 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_info:
+            if hasattr(self.activity_info, 'to_alipay_dict'):
+                params['activity_info'] = self.activity_info.to_alipay_dict()
+            else:
+                params['activity_info'] = self.activity_info
         if self.bank_card_no:
             if hasattr(self.bank_card_no, 'to_alipay_dict'):
                 params['bank_card_no'] = self.bank_card_no.to_alipay_dict()
@@ -285,6 +314,11 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
                 params['opposing_userid'] = self.opposing_userid.to_alipay_dict()
             else:
                 params['opposing_userid'] = self.opposing_userid
+        if self.qr_code:
+            if hasattr(self.qr_code, 'to_alipay_dict'):
+                params['qr_code'] = self.qr_code.to_alipay_dict()
+            else:
+                params['qr_code'] = self.qr_code
         if self.risk_type:
             if hasattr(self.risk_type, 'to_alipay_dict'):
                 params['risk_type'] = self.risk_type.to_alipay_dict()
@@ -310,6 +344,11 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
                 params['service'] = self.service.to_alipay_dict()
             else:
                 params['service'] = self.service
+        if self.service_category:
+            if hasattr(self.service_category, 'to_alipay_dict'):
+                params['service_category'] = self.service_category.to_alipay_dict()
+            else:
+                params['service_category'] = self.service_category
         if self.store_mcc_desc:
             if hasattr(self.store_mcc_desc, 'to_alipay_dict'):
                 params['store_mcc_desc'] = self.store_mcc_desc.to_alipay_dict()
@@ -332,6 +371,8 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
         if not d:
             return None
         o = AlipayCloudTraasRiskgoAwardingQueryModel()
+        if 'activity_info' in d:
+            o.activity_info = d['activity_info']
         if 'bank_card_no' in d:
             o.bank_card_no = d['bank_card_no']
         if 'business_code' in d:
@@ -364,6 +405,8 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
             o.opposing_open_id = d['opposing_open_id']
         if 'opposing_userid' in d:
             o.opposing_userid = d['opposing_userid']
+        if 'qr_code' in d:
+            o.qr_code = d['qr_code']
         if 'risk_type' in d:
             o.risk_type = d['risk_type']
         if 'role' in d:
@@ -374,6 +417,8 @@ class AlipayCloudTraasRiskgoAwardingQueryModel(object):
             o.scene = d['scene']
         if 'service' in d:
             o.service = d['service']
+        if 'service_category' in d:
+            o.service_category = d['service_category']
         if 'store_mcc_desc' in d:
             o.store_mcc_desc = d['store_mcc_desc']
         if 'user_id' in d:

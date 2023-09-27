@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenMiniOrderInstallmentCreateModel(object):
 
     def __init__(self):
+        self._addon_period_num = None
         self._is_finish_performance = None
         self._open_id = None
         self._order_id = None
@@ -17,6 +18,13 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
         self._type = None
         self._user_id = None
 
+    @property
+    def addon_period_num(self):
+        return self._addon_period_num
+
+    @addon_period_num.setter
+    def addon_period_num(self, value):
+        self._addon_period_num = value
     @property
     def is_finish_performance(self):
         return self._is_finish_performance
@@ -77,6 +85,11 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.addon_period_num:
+            if hasattr(self.addon_period_num, 'to_alipay_dict'):
+                params['addon_period_num'] = self.addon_period_num.to_alipay_dict()
+            else:
+                params['addon_period_num'] = self.addon_period_num
         if self.is_finish_performance:
             if hasattr(self.is_finish_performance, 'to_alipay_dict'):
                 params['is_finish_performance'] = self.is_finish_performance.to_alipay_dict()
@@ -124,6 +137,8 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderInstallmentCreateModel()
+        if 'addon_period_num' in d:
+            o.addon_period_num = d['addon_period_num']
         if 'is_finish_performance' in d:
             o.is_finish_performance = d['is_finish_performance']
         if 'open_id' in d:

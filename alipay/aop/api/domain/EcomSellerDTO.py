@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsOpenApplicationInfoDTO import InsOpenApplicationInfoDTO
 
 
 class EcomSellerDTO(object):
@@ -11,6 +12,7 @@ class EcomSellerDTO(object):
         self._address = None
         self._alipay_id = None
         self._alipay_open_id = None
+        self._application_info = None
         self._attributes = None
         self._bank_card_holder_name = None
         self._bank_card_no = None
@@ -50,6 +52,16 @@ class EcomSellerDTO(object):
     @alipay_open_id.setter
     def alipay_open_id(self, value):
         self._alipay_open_id = value
+    @property
+    def application_info(self):
+        return self._application_info
+
+    @application_info.setter
+    def application_info(self, value):
+        if isinstance(value, InsOpenApplicationInfoDTO):
+            self._application_info = value
+        else:
+            self._application_info = InsOpenApplicationInfoDTO.from_alipay_dict(value)
     @property
     def attributes(self):
         return self._attributes
@@ -188,6 +200,11 @@ class EcomSellerDTO(object):
                 params['alipay_open_id'] = self.alipay_open_id.to_alipay_dict()
             else:
                 params['alipay_open_id'] = self.alipay_open_id
+        if self.application_info:
+            if hasattr(self.application_info, 'to_alipay_dict'):
+                params['application_info'] = self.application_info.to_alipay_dict()
+            else:
+                params['application_info'] = self.application_info
         if self.attributes:
             if hasattr(self.attributes, 'to_alipay_dict'):
                 params['attributes'] = self.attributes.to_alipay_dict()
@@ -286,6 +303,8 @@ class EcomSellerDTO(object):
             o.alipay_id = d['alipay_id']
         if 'alipay_open_id' in d:
             o.alipay_open_id = d['alipay_open_id']
+        if 'application_info' in d:
+            o.application_info = d['application_info']
         if 'attributes' in d:
             o.attributes = d['attributes']
         if 'bank_card_holder_name' in d:

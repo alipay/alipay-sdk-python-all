@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OpenCertifyIdentifyInfo import OpenCertifyIdentifyInfo
+from alipay.aop.api.domain.OpenCertifyMerchantConfigs import OpenCertifyMerchantConfigs
 
 
 class DatadigitalFincloudGeneralsaasFaceCertifyInitializeModel(object):
@@ -34,14 +36,20 @@ class DatadigitalFincloudGeneralsaasFaceCertifyInitializeModel(object):
 
     @identity_param.setter
     def identity_param(self, value):
-        self._identity_param = value
+        if isinstance(value, OpenCertifyIdentifyInfo):
+            self._identity_param = value
+        else:
+            self._identity_param = OpenCertifyIdentifyInfo.from_alipay_dict(value)
     @property
     def merchant_config(self):
         return self._merchant_config
 
     @merchant_config.setter
     def merchant_config(self, value):
-        self._merchant_config = value
+        if isinstance(value, OpenCertifyMerchantConfigs):
+            self._merchant_config = value
+        else:
+            self._merchant_config = OpenCertifyMerchantConfigs.from_alipay_dict(value)
     @property
     def outer_order_no(self):
         return self._outer_order_no

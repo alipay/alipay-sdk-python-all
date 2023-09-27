@@ -13,6 +13,7 @@ class InvoicePDFSynModel(object):
         self._file_base = None
         self._file_download_type = None
         self._file_download_url = None
+        self._login_id = None
         self._open_id = None
         self._out_invoice_id = None
         self._user_id = None
@@ -53,6 +54,13 @@ class InvoicePDFSynModel(object):
     @file_download_url.setter
     def file_download_url(self, value):
         self._file_download_url = value
+    @property
+    def login_id(self):
+        return self._login_id
+
+    @login_id.setter
+    def login_id(self, value):
+        self._login_id = value
     @property
     def open_id(self):
         return self._open_id
@@ -110,6 +118,11 @@ class InvoicePDFSynModel(object):
                 params['file_download_url'] = self.file_download_url.to_alipay_dict()
             else:
                 params['file_download_url'] = self.file_download_url
+        if self.login_id:
+            if hasattr(self.login_id, 'to_alipay_dict'):
+                params['login_id'] = self.login_id.to_alipay_dict()
+            else:
+                params['login_id'] = self.login_id
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -147,6 +160,8 @@ class InvoicePDFSynModel(object):
             o.file_download_type = d['file_download_type']
         if 'file_download_url' in d:
             o.file_download_url = d['file_download_url']
+        if 'login_id' in d:
+            o.login_id = d['login_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_invoice_id' in d:

@@ -13,6 +13,8 @@ class AlipayCloudCloudbaseExternalaccountBindGetResponse(AlipayResponse):
         self._biz_app_id = None
         self._shadow_wallet_id = None
         self._status = None
+        self._user_hash_id = None
+        self._wallet_sign_status = None
 
     @property
     def access_token(self):
@@ -42,6 +44,20 @@ class AlipayCloudCloudbaseExternalaccountBindGetResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def user_hash_id(self):
+        return self._user_hash_id
+
+    @user_hash_id.setter
+    def user_hash_id(self, value):
+        self._user_hash_id = value
+    @property
+    def wallet_sign_status(self):
+        return self._wallet_sign_status
+
+    @wallet_sign_status.setter
+    def wallet_sign_status(self, value):
+        self._wallet_sign_status = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseExternalaccountBindGetResponse, self).parse_response_content(response_content)
@@ -53,3 +69,7 @@ class AlipayCloudCloudbaseExternalaccountBindGetResponse(AlipayResponse):
             self.shadow_wallet_id = response['shadow_wallet_id']
         if 'status' in response:
             self.status = response['status']
+        if 'user_hash_id' in response:
+            self.user_hash_id = response['user_hash_id']
+        if 'wallet_sign_status' in response:
+            self.wallet_sign_status = response['wallet_sign_status']

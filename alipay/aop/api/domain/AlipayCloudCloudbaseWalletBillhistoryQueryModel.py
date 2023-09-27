@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudCloudbaseWalletBillhistoryQueryModel(object):
 
     def __init__(self):
+        self._bill_type = None
         self._biz_app_id = None
         self._biz_env_id = None
         self._end_date = None
@@ -15,6 +16,13 @@ class AlipayCloudCloudbaseWalletBillhistoryQueryModel(object):
         self._page_size = None
         self._start_date = None
 
+    @property
+    def bill_type(self):
+        return self._bill_type
+
+    @bill_type.setter
+    def bill_type(self, value):
+        self._bill_type = value
     @property
     def biz_app_id(self):
         return self._biz_app_id
@@ -61,6 +69,11 @@ class AlipayCloudCloudbaseWalletBillhistoryQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bill_type:
+            if hasattr(self.bill_type, 'to_alipay_dict'):
+                params['bill_type'] = self.bill_type.to_alipay_dict()
+            else:
+                params['bill_type'] = self.bill_type
         if self.biz_app_id:
             if hasattr(self.biz_app_id, 'to_alipay_dict'):
                 params['biz_app_id'] = self.biz_app_id.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayCloudCloudbaseWalletBillhistoryQueryModel(object):
         if not d:
             return None
         o = AlipayCloudCloudbaseWalletBillhistoryQueryModel()
+        if 'bill_type' in d:
+            o.bill_type = d['bill_type']
         if 'biz_app_id' in d:
             o.biz_app_id = d['biz_app_id']
         if 'biz_env_id' in d:

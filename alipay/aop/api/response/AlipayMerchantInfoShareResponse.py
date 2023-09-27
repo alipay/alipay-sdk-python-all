@@ -13,6 +13,7 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
         self._area = None
         self._business_scope = None
         self._cert_no = None
+        self._cert_pic_exist = None
         self._cert_type = None
         self._city = None
         self._expire_date = None
@@ -51,6 +52,13 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_pic_exist(self):
+        return self._cert_pic_exist
+
+    @cert_pic_exist.setter
+    def cert_pic_exist(self, value):
+        self._cert_pic_exist = value
     @property
     def cert_type(self):
         return self._cert_type
@@ -125,6 +133,8 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
             self.business_scope = response['business_scope']
         if 'cert_no' in response:
             self.cert_no = response['cert_no']
+        if 'cert_pic_exist' in response:
+            self.cert_pic_exist = response['cert_pic_exist']
         if 'cert_type' in response:
             self.cert_type = response['cert_type']
         if 'city' in response:

@@ -19,6 +19,7 @@ class ConversionData(object):
         self._data_id = None
         self._data_src_type = None
         self._group_id = None
+        self._join_channel = None
         self._plan_id = None
         self._principal_id = None
         self._principal_tag = None
@@ -99,6 +100,13 @@ class ConversionData(object):
     @group_id.setter
     def group_id(self, value):
         self._group_id = value
+    @property
+    def join_channel(self):
+        return self._join_channel
+
+    @join_channel.setter
+    def join_channel(self, value):
+        self._join_channel = value
     @property
     def plan_id(self):
         return self._plan_id
@@ -222,6 +230,11 @@ class ConversionData(object):
                 params['group_id'] = self.group_id.to_alipay_dict()
             else:
                 params['group_id'] = self.group_id
+        if self.join_channel:
+            if hasattr(self.join_channel, 'to_alipay_dict'):
+                params['join_channel'] = self.join_channel.to_alipay_dict()
+            else:
+                params['join_channel'] = self.join_channel
         if self.plan_id:
             if hasattr(self.plan_id, 'to_alipay_dict'):
                 params['plan_id'] = self.plan_id.to_alipay_dict()
@@ -299,6 +312,8 @@ class ConversionData(object):
             o.data_src_type = d['data_src_type']
         if 'group_id' in d:
             o.group_id = d['group_id']
+        if 'join_channel' in d:
+            o.join_channel = d['join_channel']
         if 'plan_id' in d:
             o.plan_id = d['plan_id']
         if 'principal_id' in d:

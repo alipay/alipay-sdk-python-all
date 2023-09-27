@@ -12,6 +12,7 @@ class AlipayBossFncGfsmartpayInvoiceserviceCreateModel(object):
         self._entry_by = None
         self._invoice_specifics_dtos = None
         self._is_batch = None
+        self._test_mode = None
 
     @property
     def entry_by(self):
@@ -40,6 +41,13 @@ class AlipayBossFncGfsmartpayInvoiceserviceCreateModel(object):
     @is_batch.setter
     def is_batch(self, value):
         self._is_batch = value
+    @property
+    def test_mode(self):
+        return self._test_mode
+
+    @test_mode.setter
+    def test_mode(self, value):
+        self._test_mode = value
 
 
     def to_alipay_dict(self):
@@ -64,6 +72,11 @@ class AlipayBossFncGfsmartpayInvoiceserviceCreateModel(object):
                 params['is_batch'] = self.is_batch.to_alipay_dict()
             else:
                 params['is_batch'] = self.is_batch
+        if self.test_mode:
+            if hasattr(self.test_mode, 'to_alipay_dict'):
+                params['test_mode'] = self.test_mode.to_alipay_dict()
+            else:
+                params['test_mode'] = self.test_mode
         return params
 
     @staticmethod
@@ -77,6 +90,8 @@ class AlipayBossFncGfsmartpayInvoiceserviceCreateModel(object):
             o.invoice_specifics_dtos = d['invoice_specifics_dtos']
         if 'is_batch' in d:
             o.is_batch = d['is_batch']
+        if 'test_mode' in d:
+            o.test_mode = d['test_mode']
         return o
 
 

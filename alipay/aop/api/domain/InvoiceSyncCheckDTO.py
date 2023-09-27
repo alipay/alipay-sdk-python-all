@@ -16,6 +16,8 @@ class InvoiceSyncCheckDTO(object):
         self._invoice_code = None
         self._invoice_date = None
         self._invoice_no = None
+        self._invoice_type = None
+        self._platform_code = None
         self._tax_amt = None
 
     @property
@@ -75,6 +77,20 @@ class InvoiceSyncCheckDTO(object):
     def invoice_no(self, value):
         self._invoice_no = value
     @property
+    def invoice_type(self):
+        return self._invoice_type
+
+    @invoice_type.setter
+    def invoice_type(self, value):
+        self._invoice_type = value
+    @property
+    def platform_code(self):
+        return self._platform_code
+
+    @platform_code.setter
+    def platform_code(self, value):
+        self._platform_code = value
+    @property
     def tax_amt(self):
         return self._tax_amt
 
@@ -125,6 +141,16 @@ class InvoiceSyncCheckDTO(object):
                 params['invoice_no'] = self.invoice_no.to_alipay_dict()
             else:
                 params['invoice_no'] = self.invoice_no
+        if self.invoice_type:
+            if hasattr(self.invoice_type, 'to_alipay_dict'):
+                params['invoice_type'] = self.invoice_type.to_alipay_dict()
+            else:
+                params['invoice_type'] = self.invoice_type
+        if self.platform_code:
+            if hasattr(self.platform_code, 'to_alipay_dict'):
+                params['platform_code'] = self.platform_code.to_alipay_dict()
+            else:
+                params['platform_code'] = self.platform_code
         if self.tax_amt:
             if hasattr(self.tax_amt, 'to_alipay_dict'):
                 params['tax_amt'] = self.tax_amt.to_alipay_dict()
@@ -153,6 +179,10 @@ class InvoiceSyncCheckDTO(object):
             o.invoice_date = d['invoice_date']
         if 'invoice_no' in d:
             o.invoice_no = d['invoice_no']
+        if 'invoice_type' in d:
+            o.invoice_type = d['invoice_type']
+        if 'platform_code' in d:
+            o.platform_code = d['platform_code']
         if 'tax_amt' in d:
             o.tax_amt = d['tax_amt']
         return o

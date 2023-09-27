@@ -9,6 +9,7 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaCreditEpCertificationQueryResponse, self).__init__()
+        self._attorney_face_time = None
         self._attorney_letter = None
         self._auth_status = None
         self._business_license = None
@@ -22,11 +23,21 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
         self._ep_cert_no = None
         self._ep_name = None
         self._has_li_xin_certificate = None
+        self._legal_person_cert_no = None
+        self._legal_person_face_time = None
         self._legal_person_id_card_back = None
         self._legal_person_id_card_front = None
+        self._legal_person_name = None
         self._li_xin_ep = None
         self._user_name = None
 
+    @property
+    def attorney_face_time(self):
+        return self._attorney_face_time
+
+    @attorney_face_time.setter
+    def attorney_face_time(self, value):
+        self._attorney_face_time = value
     @property
     def attorney_letter(self):
         return self._attorney_letter
@@ -122,6 +133,20 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     def has_li_xin_certificate(self, value):
         self._has_li_xin_certificate = value
     @property
+    def legal_person_cert_no(self):
+        return self._legal_person_cert_no
+
+    @legal_person_cert_no.setter
+    def legal_person_cert_no(self, value):
+        self._legal_person_cert_no = value
+    @property
+    def legal_person_face_time(self):
+        return self._legal_person_face_time
+
+    @legal_person_face_time.setter
+    def legal_person_face_time(self, value):
+        self._legal_person_face_time = value
+    @property
     def legal_person_id_card_back(self):
         return self._legal_person_id_card_back
 
@@ -135,6 +160,13 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     @legal_person_id_card_front.setter
     def legal_person_id_card_front(self, value):
         self._legal_person_id_card_front = value
+    @property
+    def legal_person_name(self):
+        return self._legal_person_name
+
+    @legal_person_name.setter
+    def legal_person_name(self, value):
+        self._legal_person_name = value
     @property
     def li_xin_ep(self):
         return self._li_xin_ep
@@ -152,6 +184,8 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpCertificationQueryResponse, self).parse_response_content(response_content)
+        if 'attorney_face_time' in response:
+            self.attorney_face_time = response['attorney_face_time']
         if 'attorney_letter' in response:
             self.attorney_letter = response['attorney_letter']
         if 'auth_status' in response:
@@ -178,10 +212,16 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
             self.ep_name = response['ep_name']
         if 'has_li_xin_certificate' in response:
             self.has_li_xin_certificate = response['has_li_xin_certificate']
+        if 'legal_person_cert_no' in response:
+            self.legal_person_cert_no = response['legal_person_cert_no']
+        if 'legal_person_face_time' in response:
+            self.legal_person_face_time = response['legal_person_face_time']
         if 'legal_person_id_card_back' in response:
             self.legal_person_id_card_back = response['legal_person_id_card_back']
         if 'legal_person_id_card_front' in response:
             self.legal_person_id_card_front = response['legal_person_id_card_front']
+        if 'legal_person_name' in response:
+            self.legal_person_name = response['legal_person_name']
         if 'li_xin_ep' in response:
             self.li_xin_ep = response['li_xin_ep']
         if 'user_name' in response:

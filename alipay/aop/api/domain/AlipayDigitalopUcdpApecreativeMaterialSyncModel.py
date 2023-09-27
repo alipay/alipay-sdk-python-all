@@ -9,11 +9,19 @@ from alipay.aop.api.domain.ApeItemMaterial import ApeItemMaterial
 class AlipayDigitalopUcdpApecreativeMaterialSyncModel(object):
 
     def __init__(self):
+        self._create_type = None
         self._group_id = None
         self._group_name = None
         self._item_material_list = None
         self._project_id = None
 
+    @property
+    def create_type(self):
+        return self._create_type
+
+    @create_type.setter
+    def create_type(self, value):
+        self._create_type = value
     @property
     def group_id(self):
         return self._group_id
@@ -52,6 +60,11 @@ class AlipayDigitalopUcdpApecreativeMaterialSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.create_type:
+            if hasattr(self.create_type, 'to_alipay_dict'):
+                params['create_type'] = self.create_type.to_alipay_dict()
+            else:
+                params['create_type'] = self.create_type
         if self.group_id:
             if hasattr(self.group_id, 'to_alipay_dict'):
                 params['group_id'] = self.group_id.to_alipay_dict()
@@ -84,6 +97,8 @@ class AlipayDigitalopUcdpApecreativeMaterialSyncModel(object):
         if not d:
             return None
         o = AlipayDigitalopUcdpApecreativeMaterialSyncModel()
+        if 'create_type' in d:
+            o.create_type = d['create_type']
         if 'group_id' in d:
             o.group_id = d['group_id']
         if 'group_name' in d:
