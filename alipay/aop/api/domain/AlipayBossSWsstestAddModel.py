@@ -13,6 +13,7 @@ class AlipayBossSWsstestAddModel(object):
         self._address = None
         self._open_id = None
         self._sss = None
+        self._sssdsds = None
         self._test_2 = None
         self._type = None
         self._user_id = None
@@ -41,6 +42,13 @@ class AlipayBossSWsstestAddModel(object):
     @sss.setter
     def sss(self, value):
         self._sss = value
+    @property
+    def sssdsds(self):
+        return self._sssdsds
+
+    @sssdsds.setter
+    def sssdsds(self, value):
+        self._sssdsds = value
     @property
     def test_2(self):
         return self._test_2
@@ -84,6 +92,11 @@ class AlipayBossSWsstestAddModel(object):
                 params['sss'] = self.sss.to_alipay_dict()
             else:
                 params['sss'] = self.sss
+        if self.sssdsds:
+            if hasattr(self.sssdsds, 'to_alipay_dict'):
+                params['sssdsds'] = self.sssdsds.to_alipay_dict()
+            else:
+                params['sssdsds'] = self.sssdsds
         if self.test_2:
             if hasattr(self.test_2, 'to_alipay_dict'):
                 params['test_2'] = self.test_2.to_alipay_dict()
@@ -112,6 +125,8 @@ class AlipayBossSWsstestAddModel(object):
             o.open_id = d['open_id']
         if 'sss' in d:
             o.sss = d['sss']
+        if 'sssdsds' in d:
+            o.sssdsds = d['sssdsds']
         if 'test_2' in d:
             o.test_2 = d['test_2']
         if 'type' in d:

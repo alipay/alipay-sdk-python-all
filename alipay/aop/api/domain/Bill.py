@@ -12,7 +12,6 @@ class Bill(object):
         self._bill_status = None
         self._bill_type = None
         self._biz_app_id = None
-        self._biz_env_id = None
         self._currency = None
         self._discount_amount = None
         self._env_id = None
@@ -55,13 +54,6 @@ class Bill(object):
     @biz_app_id.setter
     def biz_app_id(self, value):
         self._biz_app_id = value
-    @property
-    def biz_env_id(self):
-        return self._biz_env_id
-
-    @biz_env_id.setter
-    def biz_env_id(self, value):
-        self._biz_env_id = value
     @property
     def currency(self):
         return self._currency
@@ -177,11 +169,6 @@ class Bill(object):
                 params['biz_app_id'] = self.biz_app_id.to_alipay_dict()
             else:
                 params['biz_app_id'] = self.biz_app_id
-        if self.biz_env_id:
-            if hasattr(self.biz_env_id, 'to_alipay_dict'):
-                params['biz_env_id'] = self.biz_env_id.to_alipay_dict()
-            else:
-                params['biz_env_id'] = self.biz_env_id
         if self.currency:
             if hasattr(self.currency, 'to_alipay_dict'):
                 params['currency'] = self.currency.to_alipay_dict()
@@ -262,8 +249,6 @@ class Bill(object):
             o.bill_type = d['bill_type']
         if 'biz_app_id' in d:
             o.biz_app_id = d['biz_app_id']
-        if 'biz_env_id' in d:
-            o.biz_env_id = d['biz_env_id']
         if 'currency' in d:
             o.currency = d['currency']
         if 'discount_amount' in d:

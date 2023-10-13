@@ -7,6 +7,7 @@ from alipay.aop.api.domain.ContentItem import ContentItem
 from alipay.aop.api.domain.GenericItem import GenericItem
 from alipay.aop.api.domain.GoodItem import GoodItem
 from alipay.aop.api.domain.RetailItem import RetailItem
+from alipay.aop.api.domain.ShopItemInfo import ShopItemInfo
 
 
 class AlipayOpenMiniCloudAosdataSyncModel(object):
@@ -18,6 +19,7 @@ class AlipayOpenMiniCloudAosdataSyncModel(object):
         self._goods_list = None
         self._project_id = None
         self._retail_item_list = None
+        self._shop_list = None
 
     @property
     def content_list(self):
@@ -85,6 +87,19 @@ class AlipayOpenMiniCloudAosdataSyncModel(object):
                     self._retail_item_list.append(i)
                 else:
                     self._retail_item_list.append(RetailItem.from_alipay_dict(i))
+    @property
+    def shop_list(self):
+        return self._shop_list
+
+    @shop_list.setter
+    def shop_list(self, value):
+        if isinstance(value, list):
+            self._shop_list = list()
+            for i in value:
+                if isinstance(i, ShopItemInfo):
+                    self._shop_list.append(i)
+                else:
+                    self._shop_list.append(ShopItemInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -139,6 +154,16 @@ class AlipayOpenMiniCloudAosdataSyncModel(object):
                 params['retail_item_list'] = self.retail_item_list.to_alipay_dict()
             else:
                 params['retail_item_list'] = self.retail_item_list
+        if self.shop_list:
+            if isinstance(self.shop_list, list):
+                for i in range(0, len(self.shop_list)):
+                    element = self.shop_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.shop_list[i] = element.to_alipay_dict()
+            if hasattr(self.shop_list, 'to_alipay_dict'):
+                params['shop_list'] = self.shop_list.to_alipay_dict()
+            else:
+                params['shop_list'] = self.shop_list
         return params
 
     @staticmethod
@@ -158,6 +183,8 @@ class AlipayOpenMiniCloudAosdataSyncModel(object):
             o.project_id = d['project_id']
         if 'retail_item_list' in d:
             o.retail_item_list = d['retail_item_list']
+        if 'shop_list' in d:
+            o.shop_list = d['shop_list']
         return o
 
 

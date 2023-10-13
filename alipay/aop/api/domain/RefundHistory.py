@@ -11,6 +11,7 @@ class RefundHistory(object):
         self._amount = None
         self._create_time = None
         self._finish_time = None
+        self._message = None
         self._refund_order_no = None
         self._status = None
 
@@ -35,6 +36,13 @@ class RefundHistory(object):
     @finish_time.setter
     def finish_time(self, value):
         self._finish_time = value
+    @property
+    def message(self):
+        return self._message
+
+    @message.setter
+    def message(self, value):
+        self._message = value
     @property
     def refund_order_no(self):
         return self._refund_order_no
@@ -68,6 +76,11 @@ class RefundHistory(object):
                 params['finish_time'] = self.finish_time.to_alipay_dict()
             else:
                 params['finish_time'] = self.finish_time
+        if self.message:
+            if hasattr(self.message, 'to_alipay_dict'):
+                params['message'] = self.message.to_alipay_dict()
+            else:
+                params['message'] = self.message
         if self.refund_order_no:
             if hasattr(self.refund_order_no, 'to_alipay_dict'):
                 params['refund_order_no'] = self.refund_order_no.to_alipay_dict()
@@ -91,6 +104,8 @@ class RefundHistory(object):
             o.create_time = d['create_time']
         if 'finish_time' in d:
             o.finish_time = d['finish_time']
+        if 'message' in d:
+            o.message = d['message']
         if 'refund_order_no' in d:
             o.refund_order_no = d['refund_order_no']
         if 'status' in d:

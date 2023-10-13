@@ -12,6 +12,7 @@ class AlipayOpenAligroupProductopenApplyModel(object):
     def __init__(self):
         self._business_properties = None
         self._channel_code = None
+        self._ctu_event_property = None
         self._order_lines = None
         self._out_biz_no = None
         self._out_request_no = None
@@ -34,6 +35,13 @@ class AlipayOpenAligroupProductopenApplyModel(object):
     @channel_code.setter
     def channel_code(self, value):
         self._channel_code = value
+    @property
+    def ctu_event_property(self):
+        return self._ctu_event_property
+
+    @ctu_event_property.setter
+    def ctu_event_property(self, value):
+        self._ctu_event_property = value
     @property
     def order_lines(self):
         return self._order_lines
@@ -82,6 +90,11 @@ class AlipayOpenAligroupProductopenApplyModel(object):
                 params['channel_code'] = self.channel_code.to_alipay_dict()
             else:
                 params['channel_code'] = self.channel_code
+        if self.ctu_event_property:
+            if hasattr(self.ctu_event_property, 'to_alipay_dict'):
+                params['ctu_event_property'] = self.ctu_event_property.to_alipay_dict()
+            else:
+                params['ctu_event_property'] = self.ctu_event_property
         if self.order_lines:
             if isinstance(self.order_lines, list):
                 for i in range(0, len(self.order_lines)):
@@ -118,6 +131,8 @@ class AlipayOpenAligroupProductopenApplyModel(object):
             o.business_properties = d['business_properties']
         if 'channel_code' in d:
             o.channel_code = d['channel_code']
+        if 'ctu_event_property' in d:
+            o.ctu_event_property = d['ctu_event_property']
         if 'order_lines' in d:
             o.order_lines = d['order_lines']
         if 'out_biz_no' in d:

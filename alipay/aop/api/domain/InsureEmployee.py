@@ -11,6 +11,7 @@ class InsureEmployee(object):
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
+        self._employee_card_no = None
         self._job = None
         self._job_level = None
         self._out_employee_id = None
@@ -37,6 +38,13 @@ class InsureEmployee(object):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def employee_card_no(self):
+        return self._employee_card_no
+
+    @employee_card_no.setter
+    def employee_card_no(self, value):
+        self._employee_card_no = value
     @property
     def job(self):
         return self._job
@@ -84,6 +92,11 @@ class InsureEmployee(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.employee_card_no:
+            if hasattr(self.employee_card_no, 'to_alipay_dict'):
+                params['employee_card_no'] = self.employee_card_no.to_alipay_dict()
+            else:
+                params['employee_card_no'] = self.employee_card_no
         if self.job:
             if hasattr(self.job, 'to_alipay_dict'):
                 params['job'] = self.job.to_alipay_dict()
@@ -117,6 +130,8 @@ class InsureEmployee(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'employee_card_no' in d:
+            o.employee_card_no = d['employee_card_no']
         if 'job' in d:
             o.job = d['job']
         if 'job_level' in d:

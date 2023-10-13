@@ -20,6 +20,7 @@ class CVGoodsInfo(object):
         self._package_type = None
         self._small_category = None
         self._standard_goods = None
+        self._standard_saleable_goods = None
         self._weight_list = None
         self._width = None
 
@@ -108,6 +109,13 @@ class CVGoodsInfo(object):
     def standard_goods(self, value):
         self._standard_goods = value
     @property
+    def standard_saleable_goods(self):
+        return self._standard_saleable_goods
+
+    @standard_saleable_goods.setter
+    def standard_saleable_goods(self, value):
+        self._standard_saleable_goods = value
+    @property
     def weight_list(self):
         return self._weight_list
 
@@ -185,6 +193,11 @@ class CVGoodsInfo(object):
                 params['standard_goods'] = self.standard_goods.to_alipay_dict()
             else:
                 params['standard_goods'] = self.standard_goods
+        if self.standard_saleable_goods:
+            if hasattr(self.standard_saleable_goods, 'to_alipay_dict'):
+                params['standard_saleable_goods'] = self.standard_saleable_goods.to_alipay_dict()
+            else:
+                params['standard_saleable_goods'] = self.standard_saleable_goods
         if self.weight_list:
             if hasattr(self.weight_list, 'to_alipay_dict'):
                 params['weight_list'] = self.weight_list.to_alipay_dict()
@@ -226,6 +239,8 @@ class CVGoodsInfo(object):
             o.small_category = d['small_category']
         if 'standard_goods' in d:
             o.standard_goods = d['standard_goods']
+        if 'standard_saleable_goods' in d:
+            o.standard_saleable_goods = d['standard_saleable_goods']
         if 'weight_list' in d:
             o.weight_list = d['weight_list']
         if 'width' in d:

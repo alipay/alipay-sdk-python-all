@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.StoreInfoDTO import StoreInfoDTO
 
 
 class ScenePayBusinessParamDTO(object):
 
     def __init__(self):
         self._custom_params = None
+        self._hit_store_info = None
         self._mall_cell_id = None
         self._mall_cell_type = None
         self._mall_id = None
@@ -24,6 +26,16 @@ class ScenePayBusinessParamDTO(object):
     @custom_params.setter
     def custom_params(self, value):
         self._custom_params = value
+    @property
+    def hit_store_info(self):
+        return self._hit_store_info
+
+    @hit_store_info.setter
+    def hit_store_info(self, value):
+        if isinstance(value, StoreInfoDTO):
+            self._hit_store_info = value
+        else:
+            self._hit_store_info = StoreInfoDTO.from_alipay_dict(value)
     @property
     def mall_cell_id(self):
         return self._mall_cell_id
@@ -82,6 +94,11 @@ class ScenePayBusinessParamDTO(object):
                 params['custom_params'] = self.custom_params.to_alipay_dict()
             else:
                 params['custom_params'] = self.custom_params
+        if self.hit_store_info:
+            if hasattr(self.hit_store_info, 'to_alipay_dict'):
+                params['hit_store_info'] = self.hit_store_info.to_alipay_dict()
+            else:
+                params['hit_store_info'] = self.hit_store_info
         if self.mall_cell_id:
             if hasattr(self.mall_cell_id, 'to_alipay_dict'):
                 params['mall_cell_id'] = self.mall_cell_id.to_alipay_dict()
@@ -126,6 +143,8 @@ class ScenePayBusinessParamDTO(object):
         o = ScenePayBusinessParamDTO()
         if 'custom_params' in d:
             o.custom_params = d['custom_params']
+        if 'hit_store_info' in d:
+            o.hit_store_info = d['hit_store_info']
         if 'mall_cell_id' in d:
             o.mall_cell_id = d['mall_cell_id']
         if 'mall_cell_type' in d:

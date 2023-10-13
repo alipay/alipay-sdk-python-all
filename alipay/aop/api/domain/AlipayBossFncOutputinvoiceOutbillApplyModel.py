@@ -17,6 +17,7 @@ class AlipayBossFncOutputinvoiceOutbillApplyModel(object):
         self._invoice_note = None
         self._memo = None
         self._operator = None
+        self._render_without_rule = None
         self._source = None
 
     @property
@@ -78,6 +79,13 @@ class AlipayBossFncOutputinvoiceOutbillApplyModel(object):
     def operator(self, value):
         self._operator = value
     @property
+    def render_without_rule(self):
+        return self._render_without_rule
+
+    @render_without_rule.setter
+    def render_without_rule(self, value):
+        self._render_without_rule = value
+    @property
     def source(self):
         return self._source
 
@@ -128,6 +136,11 @@ class AlipayBossFncOutputinvoiceOutbillApplyModel(object):
                 params['operator'] = self.operator.to_alipay_dict()
             else:
                 params['operator'] = self.operator
+        if self.render_without_rule:
+            if hasattr(self.render_without_rule, 'to_alipay_dict'):
+                params['render_without_rule'] = self.render_without_rule.to_alipay_dict()
+            else:
+                params['render_without_rule'] = self.render_without_rule
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -154,6 +167,8 @@ class AlipayBossFncOutputinvoiceOutbillApplyModel(object):
             o.memo = d['memo']
         if 'operator' in d:
             o.operator = d['operator']
+        if 'render_without_rule' in d:
+            o.render_without_rule = d['render_without_rule']
         if 'source' in d:
             o.source = d['source']
         return o

@@ -9,6 +9,8 @@ from alipay.aop.api.domain.ProductFeeItem import ProductFeeItem
 class ResourcePackageInfo(object):
 
     def __init__(self):
+        self._can_alter = None
+        self._error_msg = None
         self._original_unit_amount = None
         self._product_fee_items = None
         self._spec_code = None
@@ -16,6 +18,20 @@ class ResourcePackageInfo(object):
         self._spec_name = None
         self._trade_unit_amount = None
 
+    @property
+    def can_alter(self):
+        return self._can_alter
+
+    @can_alter.setter
+    def can_alter(self, value):
+        self._can_alter = value
+    @property
+    def error_msg(self):
+        return self._error_msg
+
+    @error_msg.setter
+    def error_msg(self, value):
+        self._error_msg = value
     @property
     def original_unit_amount(self):
         return self._original_unit_amount
@@ -68,6 +84,16 @@ class ResourcePackageInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.can_alter:
+            if hasattr(self.can_alter, 'to_alipay_dict'):
+                params['can_alter'] = self.can_alter.to_alipay_dict()
+            else:
+                params['can_alter'] = self.can_alter
+        if self.error_msg:
+            if hasattr(self.error_msg, 'to_alipay_dict'):
+                params['error_msg'] = self.error_msg.to_alipay_dict()
+            else:
+                params['error_msg'] = self.error_msg
         if self.original_unit_amount:
             if hasattr(self.original_unit_amount, 'to_alipay_dict'):
                 params['original_unit_amount'] = self.original_unit_amount.to_alipay_dict()
@@ -110,6 +136,10 @@ class ResourcePackageInfo(object):
         if not d:
             return None
         o = ResourcePackageInfo()
+        if 'can_alter' in d:
+            o.can_alter = d['can_alter']
+        if 'error_msg' in d:
+            o.error_msg = d['error_msg']
         if 'original_unit_amount' in d:
             o.original_unit_amount = d['original_unit_amount']
         if 'product_fee_items' in d:

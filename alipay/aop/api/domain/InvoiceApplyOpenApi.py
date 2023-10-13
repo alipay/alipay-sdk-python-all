@@ -16,9 +16,14 @@ class InvoiceApplyOpenApi(object):
         self._inst_id = None
         self._inv_dt = None
         self._invoice_date = None
+        self._invoice_line_measurement_unit = None
+        self._invoice_line_quantity = None
+        self._invoice_line_unit_amount = None
+        self._invoice_note = None
         self._invoice_product_name = None
         self._invoice_product_name_suffix = None
         self._invoice_specification = None
+        self._invoice_split_key = None
         self._invoice_type = None
         self._ip_id = None
         self._ip_role_id = None
@@ -29,6 +34,7 @@ class InvoiceApplyOpenApi(object):
         self._register_country = None
         self._service_mth = None
         self._source = None
+        self._tax_classification_code = None
         self._tax_rate = None
         self._tax_rate_tags = None
         self._tax_type = None
@@ -86,6 +92,34 @@ class InvoiceApplyOpenApi(object):
     def invoice_date(self, value):
         self._invoice_date = value
     @property
+    def invoice_line_measurement_unit(self):
+        return self._invoice_line_measurement_unit
+
+    @invoice_line_measurement_unit.setter
+    def invoice_line_measurement_unit(self, value):
+        self._invoice_line_measurement_unit = value
+    @property
+    def invoice_line_quantity(self):
+        return self._invoice_line_quantity
+
+    @invoice_line_quantity.setter
+    def invoice_line_quantity(self, value):
+        self._invoice_line_quantity = value
+    @property
+    def invoice_line_unit_amount(self):
+        return self._invoice_line_unit_amount
+
+    @invoice_line_unit_amount.setter
+    def invoice_line_unit_amount(self, value):
+        self._invoice_line_unit_amount = value
+    @property
+    def invoice_note(self):
+        return self._invoice_note
+
+    @invoice_note.setter
+    def invoice_note(self, value):
+        self._invoice_note = value
+    @property
     def invoice_product_name(self):
         return self._invoice_product_name
 
@@ -106,6 +140,13 @@ class InvoiceApplyOpenApi(object):
     @invoice_specification.setter
     def invoice_specification(self, value):
         self._invoice_specification = value
+    @property
+    def invoice_split_key(self):
+        return self._invoice_split_key
+
+    @invoice_split_key.setter
+    def invoice_split_key(self, value):
+        self._invoice_split_key = value
     @property
     def invoice_type(self):
         return self._invoice_type
@@ -177,6 +218,13 @@ class InvoiceApplyOpenApi(object):
     def source(self, value):
         self._source = value
     @property
+    def tax_classification_code(self):
+        return self._tax_classification_code
+
+    @tax_classification_code.setter
+    def tax_classification_code(self, value):
+        self._tax_classification_code = value
+    @property
     def tax_rate(self):
         return self._tax_rate
 
@@ -236,6 +284,26 @@ class InvoiceApplyOpenApi(object):
                 params['invoice_date'] = self.invoice_date.to_alipay_dict()
             else:
                 params['invoice_date'] = self.invoice_date
+        if self.invoice_line_measurement_unit:
+            if hasattr(self.invoice_line_measurement_unit, 'to_alipay_dict'):
+                params['invoice_line_measurement_unit'] = self.invoice_line_measurement_unit.to_alipay_dict()
+            else:
+                params['invoice_line_measurement_unit'] = self.invoice_line_measurement_unit
+        if self.invoice_line_quantity:
+            if hasattr(self.invoice_line_quantity, 'to_alipay_dict'):
+                params['invoice_line_quantity'] = self.invoice_line_quantity.to_alipay_dict()
+            else:
+                params['invoice_line_quantity'] = self.invoice_line_quantity
+        if self.invoice_line_unit_amount:
+            if hasattr(self.invoice_line_unit_amount, 'to_alipay_dict'):
+                params['invoice_line_unit_amount'] = self.invoice_line_unit_amount.to_alipay_dict()
+            else:
+                params['invoice_line_unit_amount'] = self.invoice_line_unit_amount
+        if self.invoice_note:
+            if hasattr(self.invoice_note, 'to_alipay_dict'):
+                params['invoice_note'] = self.invoice_note.to_alipay_dict()
+            else:
+                params['invoice_note'] = self.invoice_note
         if self.invoice_product_name:
             if hasattr(self.invoice_product_name, 'to_alipay_dict'):
                 params['invoice_product_name'] = self.invoice_product_name.to_alipay_dict()
@@ -251,6 +319,11 @@ class InvoiceApplyOpenApi(object):
                 params['invoice_specification'] = self.invoice_specification.to_alipay_dict()
             else:
                 params['invoice_specification'] = self.invoice_specification
+        if self.invoice_split_key:
+            if hasattr(self.invoice_split_key, 'to_alipay_dict'):
+                params['invoice_split_key'] = self.invoice_split_key.to_alipay_dict()
+            else:
+                params['invoice_split_key'] = self.invoice_split_key
         if self.invoice_type:
             if hasattr(self.invoice_type, 'to_alipay_dict'):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
@@ -301,6 +374,11 @@ class InvoiceApplyOpenApi(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.tax_classification_code:
+            if hasattr(self.tax_classification_code, 'to_alipay_dict'):
+                params['tax_classification_code'] = self.tax_classification_code.to_alipay_dict()
+            else:
+                params['tax_classification_code'] = self.tax_classification_code
         if self.tax_rate:
             if hasattr(self.tax_rate, 'to_alipay_dict'):
                 params['tax_rate'] = self.tax_rate.to_alipay_dict()
@@ -337,12 +415,22 @@ class InvoiceApplyOpenApi(object):
             o.inv_dt = d['inv_dt']
         if 'invoice_date' in d:
             o.invoice_date = d['invoice_date']
+        if 'invoice_line_measurement_unit' in d:
+            o.invoice_line_measurement_unit = d['invoice_line_measurement_unit']
+        if 'invoice_line_quantity' in d:
+            o.invoice_line_quantity = d['invoice_line_quantity']
+        if 'invoice_line_unit_amount' in d:
+            o.invoice_line_unit_amount = d['invoice_line_unit_amount']
+        if 'invoice_note' in d:
+            o.invoice_note = d['invoice_note']
         if 'invoice_product_name' in d:
             o.invoice_product_name = d['invoice_product_name']
         if 'invoice_product_name_suffix' in d:
             o.invoice_product_name_suffix = d['invoice_product_name_suffix']
         if 'invoice_specification' in d:
             o.invoice_specification = d['invoice_specification']
+        if 'invoice_split_key' in d:
+            o.invoice_split_key = d['invoice_split_key']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
         if 'ip_id' in d:
@@ -363,6 +451,8 @@ class InvoiceApplyOpenApi(object):
             o.service_mth = d['service_mth']
         if 'source' in d:
             o.source = d['source']
+        if 'tax_classification_code' in d:
+            o.tax_classification_code = d['tax_classification_code']
         if 'tax_rate' in d:
             o.tax_rate = d['tax_rate']
         if 'tax_rate_tags' in d:

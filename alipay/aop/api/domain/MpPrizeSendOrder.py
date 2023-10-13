@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PrizeCustomDisplayInfo import PrizeCustomDisplayInfo
 
 
 class MpPrizeSendOrder(object):
@@ -13,6 +14,7 @@ class MpPrizeSendOrder(object):
         self._display_name = None
         self._extend_field = None
         self._out_prize_id = None
+        self._prize_custom_display_info = None
         self._prize_flag = None
         self._prize_id = None
         self._prize_log_id = None
@@ -55,6 +57,16 @@ class MpPrizeSendOrder(object):
     @out_prize_id.setter
     def out_prize_id(self, value):
         self._out_prize_id = value
+    @property
+    def prize_custom_display_info(self):
+        return self._prize_custom_display_info
+
+    @prize_custom_display_info.setter
+    def prize_custom_display_info(self, value):
+        if isinstance(value, PrizeCustomDisplayInfo):
+            self._prize_custom_display_info = value
+        else:
+            self._prize_custom_display_info = PrizeCustomDisplayInfo.from_alipay_dict(value)
     @property
     def prize_flag(self):
         return self._prize_flag
@@ -126,6 +138,11 @@ class MpPrizeSendOrder(object):
                 params['out_prize_id'] = self.out_prize_id.to_alipay_dict()
             else:
                 params['out_prize_id'] = self.out_prize_id
+        if self.prize_custom_display_info:
+            if hasattr(self.prize_custom_display_info, 'to_alipay_dict'):
+                params['prize_custom_display_info'] = self.prize_custom_display_info.to_alipay_dict()
+            else:
+                params['prize_custom_display_info'] = self.prize_custom_display_info
         if self.prize_flag:
             if hasattr(self.prize_flag, 'to_alipay_dict'):
                 params['prize_flag'] = self.prize_flag.to_alipay_dict()
@@ -173,6 +190,8 @@ class MpPrizeSendOrder(object):
             o.extend_field = d['extend_field']
         if 'out_prize_id' in d:
             o.out_prize_id = d['out_prize_id']
+        if 'prize_custom_display_info' in d:
+            o.prize_custom_display_info = d['prize_custom_display_info']
         if 'prize_flag' in d:
             o.prize_flag = d['prize_flag']
         if 'prize_id' in d:

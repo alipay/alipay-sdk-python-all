@@ -13,6 +13,7 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
         self._biz_tracker = None
         self._channel_info = None
         self._expire_time = None
+        self._merchant_name = None
         self._out_biz_no = None
         self._out_open_id = None
         self._pay_amount = None
@@ -53,6 +54,13 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
     @expire_time.setter
     def expire_time(self, value):
         self._expire_time = value
+    @property
+    def merchant_name(self):
+        return self._merchant_name
+
+    @merchant_name.setter
+    def merchant_name(self, value):
+        self._merchant_name = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -110,6 +118,11 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
             else:
                 params['expire_time'] = self.expire_time
+        if self.merchant_name:
+            if hasattr(self.merchant_name, 'to_alipay_dict'):
+                params['merchant_name'] = self.merchant_name.to_alipay_dict()
+            else:
+                params['merchant_name'] = self.merchant_name
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -147,6 +160,8 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
             o.channel_info = d['channel_info']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
+        if 'merchant_name' in d:
+            o.merchant_name = d['merchant_name']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'out_open_id' in d:

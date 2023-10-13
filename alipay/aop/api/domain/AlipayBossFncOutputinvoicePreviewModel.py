@@ -22,6 +22,7 @@ class AlipayBossFncOutputinvoicePreviewModel(object):
         self._operator = None
         self._output_apply_invoice_detail_orders = None
         self._output_invoice_apply_orders = None
+        self._render_without_rule = None
         self._source = None
 
     @property
@@ -116,6 +117,13 @@ class AlipayBossFncOutputinvoicePreviewModel(object):
                 else:
                     self._output_invoice_apply_orders.append(InvoiceApplyOpenApi.from_alipay_dict(i))
     @property
+    def render_without_rule(self):
+        return self._render_without_rule
+
+    @render_without_rule.setter
+    def render_without_rule(self, value):
+        self._render_without_rule = value
+    @property
     def source(self):
         return self._source
 
@@ -191,6 +199,11 @@ class AlipayBossFncOutputinvoicePreviewModel(object):
                 params['output_invoice_apply_orders'] = self.output_invoice_apply_orders.to_alipay_dict()
             else:
                 params['output_invoice_apply_orders'] = self.output_invoice_apply_orders
+        if self.render_without_rule:
+            if hasattr(self.render_without_rule, 'to_alipay_dict'):
+                params['render_without_rule'] = self.render_without_rule.to_alipay_dict()
+            else:
+                params['render_without_rule'] = self.render_without_rule
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -223,6 +236,8 @@ class AlipayBossFncOutputinvoicePreviewModel(object):
             o.output_apply_invoice_detail_orders = d['output_apply_invoice_detail_orders']
         if 'output_invoice_apply_orders' in d:
             o.output_invoice_apply_orders = d['output_invoice_apply_orders']
+        if 'render_without_rule' in d:
+            o.render_without_rule = d['render_without_rule']
         if 'source' in d:
             o.source = d['source']
         return o

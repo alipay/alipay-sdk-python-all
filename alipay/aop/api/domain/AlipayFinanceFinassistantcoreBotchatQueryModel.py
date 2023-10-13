@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinanceFinassistantcoreBotchatQueryModel(object):
 
     def __init__(self):
+        self._chat = None
         self._question = None
         self._session_id = None
         self._user_type = None
 
+    @property
+    def chat(self):
+        return self._chat
+
+    @chat.setter
+    def chat(self, value):
+        self._chat = value
     @property
     def question(self):
         return self._question
@@ -37,6 +45,11 @@ class AlipayFinanceFinassistantcoreBotchatQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.chat:
+            if hasattr(self.chat, 'to_alipay_dict'):
+                params['chat'] = self.chat.to_alipay_dict()
+            else:
+                params['chat'] = self.chat
         if self.question:
             if hasattr(self.question, 'to_alipay_dict'):
                 params['question'] = self.question.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayFinanceFinassistantcoreBotchatQueryModel(object):
         if not d:
             return None
         o = AlipayFinanceFinassistantcoreBotchatQueryModel()
+        if 'chat' in d:
+            o.chat = d['chat']
         if 'question' in d:
             o.question = d['question']
         if 'session_id' in d:

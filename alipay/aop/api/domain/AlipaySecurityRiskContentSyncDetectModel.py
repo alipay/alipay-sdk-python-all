@@ -11,6 +11,7 @@ class AlipaySecurityRiskContentSyncDetectModel(object):
         self._channel = None
         self._content_type = None
         self._data_list = None
+        self._open_id = None
         self._products = None
         self._request_id = None
         self._tenants = None
@@ -40,6 +41,13 @@ class AlipaySecurityRiskContentSyncDetectModel(object):
             self._data_list = list()
             for i in value:
                 self._data_list.append(i)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def products(self):
         return self._products
@@ -92,6 +100,11 @@ class AlipaySecurityRiskContentSyncDetectModel(object):
                 params['data_list'] = self.data_list.to_alipay_dict()
             else:
                 params['data_list'] = self.data_list
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.products:
             if hasattr(self.products, 'to_alipay_dict'):
                 params['products'] = self.products.to_alipay_dict()
@@ -125,6 +138,8 @@ class AlipaySecurityRiskContentSyncDetectModel(object):
             o.content_type = d['content_type']
         if 'data_list' in d:
             o.data_list = d['data_list']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'products' in d:
             o.products = d['products']
         if 'request_id' in d:

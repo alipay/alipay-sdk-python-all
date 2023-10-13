@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class InsurePartnerOrganization(object):
 
     def __init__(self):
+        self._alipay_account_type = None
         self._alipay_id = None
         self._alipay_open_id = None
         self._cert_name = None
@@ -15,6 +16,13 @@ class InsurePartnerOrganization(object):
         self._cert_type = None
         self._partner_org_id = None
 
+    @property
+    def alipay_account_type(self):
+        return self._alipay_account_type
+
+    @alipay_account_type.setter
+    def alipay_account_type(self, value):
+        self._alipay_account_type = value
     @property
     def alipay_id(self):
         return self._alipay_id
@@ -61,6 +69,11 @@ class InsurePartnerOrganization(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_account_type:
+            if hasattr(self.alipay_account_type, 'to_alipay_dict'):
+                params['alipay_account_type'] = self.alipay_account_type.to_alipay_dict()
+            else:
+                params['alipay_account_type'] = self.alipay_account_type
         if self.alipay_id:
             if hasattr(self.alipay_id, 'to_alipay_dict'):
                 params['alipay_id'] = self.alipay_id.to_alipay_dict()
@@ -98,6 +111,8 @@ class InsurePartnerOrganization(object):
         if not d:
             return None
         o = InsurePartnerOrganization()
+        if 'alipay_account_type' in d:
+            o.alipay_account_type = d['alipay_account_type']
         if 'alipay_id' in d:
             o.alipay_id = d['alipay_id']
         if 'alipay_open_id' in d:

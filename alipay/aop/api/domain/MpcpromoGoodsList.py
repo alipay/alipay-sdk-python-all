@@ -20,6 +20,7 @@ class MpcpromoGoodsList(object):
         self._detail_pic_num = None
         self._free_shipping = None
         self._fresh_degree = None
+        self._host_app_id = None
         self._id = None
         self._material_list = None
         self._order_url = None
@@ -133,6 +134,13 @@ class MpcpromoGoodsList(object):
     @fresh_degree.setter
     def fresh_degree(self, value):
         self._fresh_degree = value
+    @property
+    def host_app_id(self):
+        return self._host_app_id
+
+    @host_app_id.setter
+    def host_app_id(self, value):
+        self._host_app_id = value
     @property
     def id(self):
         return self._id
@@ -389,6 +397,11 @@ class MpcpromoGoodsList(object):
                 params['fresh_degree'] = self.fresh_degree.to_alipay_dict()
             else:
                 params['fresh_degree'] = self.fresh_degree
+        if self.host_app_id:
+            if hasattr(self.host_app_id, 'to_alipay_dict'):
+                params['host_app_id'] = self.host_app_id.to_alipay_dict()
+            else:
+                params['host_app_id'] = self.host_app_id
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -565,6 +578,8 @@ class MpcpromoGoodsList(object):
             o.free_shipping = d['free_shipping']
         if 'fresh_degree' in d:
             o.fresh_degree = d['fresh_degree']
+        if 'host_app_id' in d:
+            o.host_app_id = d['host_app_id']
         if 'id' in d:
             o.id = d['id']
         if 'material_list' in d:
