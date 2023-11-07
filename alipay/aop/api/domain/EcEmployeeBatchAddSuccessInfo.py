@@ -17,6 +17,7 @@ class EcEmployeeBatchAddSuccessInfo(object):
         self._employee_no = None
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
+        self._iot_unique_id = None
 
     @property
     def employee_cert_no(self):
@@ -81,6 +82,13 @@ class EcEmployeeBatchAddSuccessInfo(object):
     @encrypt_mobile.setter
     def encrypt_mobile(self, value):
         self._encrypt_mobile = value
+    @property
+    def iot_unique_id(self):
+        return self._iot_unique_id
+
+    @iot_unique_id.setter
+    def iot_unique_id(self, value):
+        self._iot_unique_id = value
 
 
     def to_alipay_dict(self):
@@ -130,6 +138,11 @@ class EcEmployeeBatchAddSuccessInfo(object):
                 params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
             else:
                 params['encrypt_mobile'] = self.encrypt_mobile
+        if self.iot_unique_id:
+            if hasattr(self.iot_unique_id, 'to_alipay_dict'):
+                params['iot_unique_id'] = self.iot_unique_id.to_alipay_dict()
+            else:
+                params['iot_unique_id'] = self.iot_unique_id
         return params
 
     @staticmethod
@@ -155,6 +168,8 @@ class EcEmployeeBatchAddSuccessInfo(object):
             o.encrypt_cert_no = d['encrypt_cert_no']
         if 'encrypt_mobile' in d:
             o.encrypt_mobile = d['encrypt_mobile']
+        if 'iot_unique_id' in d:
+            o.iot_unique_id = d['iot_unique_id']
         return o
 
 

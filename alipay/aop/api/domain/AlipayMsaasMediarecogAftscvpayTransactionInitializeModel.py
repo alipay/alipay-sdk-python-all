@@ -14,6 +14,7 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
         self._goods_infos = None
         self._machine_type = None
         self._open_id = None
+        self._record_video = None
         self._scene = None
         self._terminal_id = None
         self._total_floors = None
@@ -56,6 +57,13 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def record_video(self):
+        return self._record_video
+
+    @record_video.setter
+    def record_video(self, value):
+        self._record_video = value
     @property
     def scene(self):
         return self._scene
@@ -140,6 +148,11 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.record_video:
+            if hasattr(self.record_video, 'to_alipay_dict'):
+                params['record_video'] = self.record_video.to_alipay_dict()
+            else:
+                params['record_video'] = self.record_video
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -195,6 +208,8 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
             o.machine_type = d['machine_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'record_video' in d:
+            o.record_video = d['record_video']
         if 'scene' in d:
             o.scene = d['scene']
         if 'terminal_id' in d:

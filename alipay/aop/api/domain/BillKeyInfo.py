@@ -13,6 +13,7 @@ class BillKeyInfo(object):
         self._charge_inst = None
         self._city = None
         self._country = None
+        self._inst_code = None
         self._province = None
         self._sub_biz_type = None
 
@@ -51,6 +52,13 @@ class BillKeyInfo(object):
     @country.setter
     def country(self, value):
         self._country = value
+    @property
+    def inst_code(self):
+        return self._inst_code
+
+    @inst_code.setter
+    def inst_code(self, value):
+        self._inst_code = value
     @property
     def province(self):
         return self._province
@@ -94,6 +102,11 @@ class BillKeyInfo(object):
                 params['country'] = self.country.to_alipay_dict()
             else:
                 params['country'] = self.country
+        if self.inst_code:
+            if hasattr(self.inst_code, 'to_alipay_dict'):
+                params['inst_code'] = self.inst_code.to_alipay_dict()
+            else:
+                params['inst_code'] = self.inst_code
         if self.province:
             if hasattr(self.province, 'to_alipay_dict'):
                 params['province'] = self.province.to_alipay_dict()
@@ -121,6 +134,8 @@ class BillKeyInfo(object):
             o.city = d['city']
         if 'country' in d:
             o.country = d['country']
+        if 'inst_code' in d:
+            o.inst_code = d['inst_code']
         if 'province' in d:
             o.province = d['province']
         if 'sub_biz_type' in d:

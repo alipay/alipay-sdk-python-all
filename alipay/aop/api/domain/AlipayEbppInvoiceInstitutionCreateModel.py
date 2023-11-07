@@ -11,6 +11,7 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
 
     def __init__(self):
         self._account_id = None
+        self._adapter_type = None
         self._agreement_no = None
         self._consult_mode = None
         self._effective_end_date = None
@@ -20,6 +21,10 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._institution_desc = None
         self._institution_name = None
         self._issue_rule_info_list = None
+        self._outer_source_id = None
+        self._owner_id_list = None
+        self._owner_open_id_list = None
+        self._owner_type = None
         self._scene_type = None
         self._standard_info_list = None
 
@@ -30,6 +35,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     @account_id.setter
     def account_id(self, value):
         self._account_id = value
+    @property
+    def adapter_type(self):
+        return self._adapter_type
+
+    @adapter_type.setter
+    def adapter_type(self, value):
+        self._adapter_type = value
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -100,6 +112,40 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 else:
                     self._issue_rule_info_list.append(IssueRuleInfo.from_alipay_dict(i))
     @property
+    def outer_source_id(self):
+        return self._outer_source_id
+
+    @outer_source_id.setter
+    def outer_source_id(self, value):
+        self._outer_source_id = value
+    @property
+    def owner_id_list(self):
+        return self._owner_id_list
+
+    @owner_id_list.setter
+    def owner_id_list(self, value):
+        if isinstance(value, list):
+            self._owner_id_list = list()
+            for i in value:
+                self._owner_id_list.append(i)
+    @property
+    def owner_open_id_list(self):
+        return self._owner_open_id_list
+
+    @owner_open_id_list.setter
+    def owner_open_id_list(self, value):
+        if isinstance(value, list):
+            self._owner_open_id_list = list()
+            for i in value:
+                self._owner_open_id_list.append(i)
+    @property
+    def owner_type(self):
+        return self._owner_type
+
+    @owner_type.setter
+    def owner_type(self, value):
+        self._owner_type = value
+    @property
     def scene_type(self):
         return self._scene_type
 
@@ -128,6 +174,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['account_id'] = self.account_id.to_alipay_dict()
             else:
                 params['account_id'] = self.account_id
+        if self.adapter_type:
+            if hasattr(self.adapter_type, 'to_alipay_dict'):
+                params['adapter_type'] = self.adapter_type.to_alipay_dict()
+            else:
+                params['adapter_type'] = self.adapter_type
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -178,6 +229,36 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['issue_rule_info_list'] = self.issue_rule_info_list.to_alipay_dict()
             else:
                 params['issue_rule_info_list'] = self.issue_rule_info_list
+        if self.outer_source_id:
+            if hasattr(self.outer_source_id, 'to_alipay_dict'):
+                params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
+            else:
+                params['outer_source_id'] = self.outer_source_id
+        if self.owner_id_list:
+            if isinstance(self.owner_id_list, list):
+                for i in range(0, len(self.owner_id_list)):
+                    element = self.owner_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.owner_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.owner_id_list, 'to_alipay_dict'):
+                params['owner_id_list'] = self.owner_id_list.to_alipay_dict()
+            else:
+                params['owner_id_list'] = self.owner_id_list
+        if self.owner_open_id_list:
+            if isinstance(self.owner_open_id_list, list):
+                for i in range(0, len(self.owner_open_id_list)):
+                    element = self.owner_open_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.owner_open_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.owner_open_id_list, 'to_alipay_dict'):
+                params['owner_open_id_list'] = self.owner_open_id_list.to_alipay_dict()
+            else:
+                params['owner_open_id_list'] = self.owner_open_id_list
+        if self.owner_type:
+            if hasattr(self.owner_type, 'to_alipay_dict'):
+                params['owner_type'] = self.owner_type.to_alipay_dict()
+            else:
+                params['owner_type'] = self.owner_type
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -202,6 +283,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         o = AlipayEbppInvoiceInstitutionCreateModel()
         if 'account_id' in d:
             o.account_id = d['account_id']
+        if 'adapter_type' in d:
+            o.adapter_type = d['adapter_type']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'consult_mode' in d:
@@ -220,6 +303,14 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.institution_name = d['institution_name']
         if 'issue_rule_info_list' in d:
             o.issue_rule_info_list = d['issue_rule_info_list']
+        if 'outer_source_id' in d:
+            o.outer_source_id = d['outer_source_id']
+        if 'owner_id_list' in d:
+            o.owner_id_list = d['owner_id_list']
+        if 'owner_open_id_list' in d:
+            o.owner_open_id_list = d['owner_open_id_list']
+        if 'owner_type' in d:
+            o.owner_type = d['owner_type']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'standard_info_list' in d:

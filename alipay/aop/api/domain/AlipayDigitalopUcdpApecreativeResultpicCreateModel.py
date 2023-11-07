@@ -12,8 +12,10 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
         self._creative_item_design_text_list = None
         self._description = None
         self._group_id = None
+        self._height = None
         self._project_id = None
         self._style_id_list = None
+        self._width = None
 
     @property
     def creative_item_design_text_list(self):
@@ -43,6 +45,13 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
     def group_id(self, value):
         self._group_id = value
     @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, value):
+        self._height = value
+    @property
     def project_id(self):
         return self._project_id
 
@@ -59,6 +68,13 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
             self._style_id_list = list()
             for i in value:
                 self._style_id_list.append(i)
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        self._width = value
 
 
     def to_alipay_dict(self):
@@ -83,6 +99,11 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
                 params['group_id'] = self.group_id.to_alipay_dict()
             else:
                 params['group_id'] = self.group_id
+        if self.height:
+            if hasattr(self.height, 'to_alipay_dict'):
+                params['height'] = self.height.to_alipay_dict()
+            else:
+                params['height'] = self.height
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -98,6 +119,11 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
                 params['style_id_list'] = self.style_id_list.to_alipay_dict()
             else:
                 params['style_id_list'] = self.style_id_list
+        if self.width:
+            if hasattr(self.width, 'to_alipay_dict'):
+                params['width'] = self.width.to_alipay_dict()
+            else:
+                params['width'] = self.width
         return params
 
     @staticmethod
@@ -111,10 +137,14 @@ class AlipayDigitalopUcdpApecreativeResultpicCreateModel(object):
             o.description = d['description']
         if 'group_id' in d:
             o.group_id = d['group_id']
+        if 'height' in d:
+            o.height = d['height']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'style_id_list' in d:
             o.style_id_list = d['style_id_list']
+        if 'width' in d:
+            o.width = d['width']
         return o
 
 

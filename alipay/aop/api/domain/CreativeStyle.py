@@ -10,6 +10,7 @@ class CreativeStyle(object):
     def __init__(self):
         self._id = None
         self._mock_img = None
+        self._pic_template_id = None
 
     @property
     def id(self):
@@ -25,6 +26,13 @@ class CreativeStyle(object):
     @mock_img.setter
     def mock_img(self, value):
         self._mock_img = value
+    @property
+    def pic_template_id(self):
+        return self._pic_template_id
+
+    @pic_template_id.setter
+    def pic_template_id(self, value):
+        self._pic_template_id = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class CreativeStyle(object):
                 params['mock_img'] = self.mock_img.to_alipay_dict()
             else:
                 params['mock_img'] = self.mock_img
+        if self.pic_template_id:
+            if hasattr(self.pic_template_id, 'to_alipay_dict'):
+                params['pic_template_id'] = self.pic_template_id.to_alipay_dict()
+            else:
+                params['pic_template_id'] = self.pic_template_id
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class CreativeStyle(object):
             o.id = d['id']
         if 'mock_img' in d:
             o.mock_img = d['mock_img']
+        if 'pic_template_id' in d:
+            o.pic_template_id = d['pic_template_id']
         return o
 
 

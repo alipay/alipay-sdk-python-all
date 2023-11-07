@@ -20,6 +20,7 @@ class AlipayEbppInvoiceIssueruleCreateModel(object):
         self._issue_rule_name = None
         self._issue_start_date = None
         self._issue_type = None
+        self._outer_source_id = None
         self._quota_type = None
         self._share_mode = None
         self._target_id = None
@@ -109,6 +110,13 @@ class AlipayEbppInvoiceIssueruleCreateModel(object):
     @issue_type.setter
     def issue_type(self, value):
         self._issue_type = value
+    @property
+    def outer_source_id(self):
+        return self._outer_source_id
+
+    @outer_source_id.setter
+    def outer_source_id(self, value):
+        self._outer_source_id = value
     @property
     def quota_type(self):
         return self._quota_type
@@ -201,6 +209,11 @@ class AlipayEbppInvoiceIssueruleCreateModel(object):
                 params['issue_type'] = self.issue_type.to_alipay_dict()
             else:
                 params['issue_type'] = self.issue_type
+        if self.outer_source_id:
+            if hasattr(self.outer_source_id, 'to_alipay_dict'):
+                params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
+            else:
+                params['outer_source_id'] = self.outer_source_id
         if self.quota_type:
             if hasattr(self.quota_type, 'to_alipay_dict'):
                 params['quota_type'] = self.quota_type.to_alipay_dict()
@@ -252,6 +265,8 @@ class AlipayEbppInvoiceIssueruleCreateModel(object):
             o.issue_start_date = d['issue_start_date']
         if 'issue_type' in d:
             o.issue_type = d['issue_type']
+        if 'outer_source_id' in d:
+            o.outer_source_id = d['outer_source_id']
         if 'quota_type' in d:
             o.quota_type = d['quota_type']
         if 'share_mode' in d:

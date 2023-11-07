@@ -9,6 +9,7 @@ class AlipayMarketingCertificateCertificationPrepareuseModel(object):
 
     def __init__(self):
         self._code = None
+        self._cross_order = None
         self._encrypted_data = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayMarketingCertificateCertificationPrepareuseModel(object):
     @code.setter
     def code(self, value):
         self._code = value
+    @property
+    def cross_order(self):
+        return self._cross_order
+
+    @cross_order.setter
+    def cross_order(self, value):
+        self._cross_order = value
     @property
     def encrypted_data(self):
         return self._encrypted_data
@@ -34,6 +42,11 @@ class AlipayMarketingCertificateCertificationPrepareuseModel(object):
                 params['code'] = self.code.to_alipay_dict()
             else:
                 params['code'] = self.code
+        if self.cross_order:
+            if hasattr(self.cross_order, 'to_alipay_dict'):
+                params['cross_order'] = self.cross_order.to_alipay_dict()
+            else:
+                params['cross_order'] = self.cross_order
         if self.encrypted_data:
             if hasattr(self.encrypted_data, 'to_alipay_dict'):
                 params['encrypted_data'] = self.encrypted_data.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayMarketingCertificateCertificationPrepareuseModel(object):
         o = AlipayMarketingCertificateCertificationPrepareuseModel()
         if 'code' in d:
             o.code = d['code']
+        if 'cross_order' in d:
+            o.cross_order = d['cross_order']
         if 'encrypted_data' in d:
             o.encrypted_data = d['encrypted_data']
         return o

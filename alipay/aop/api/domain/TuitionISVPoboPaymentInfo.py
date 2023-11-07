@@ -10,6 +10,7 @@ from alipay.aop.api.domain.TuitionAddress import TuitionAddress
 class TuitionISVPoboPaymentInfo(object):
 
     def __init__(self):
+        self._additional_payment_info = None
         self._amount = None
         self._card_brand = None
         self._card_expiry_date = None
@@ -18,7 +19,15 @@ class TuitionISVPoboPaymentInfo(object):
         self._card_no = None
         self._card_start_date = None
         self._cvv = None
+        self._pre_order_id = None
 
+    @property
+    def additional_payment_info(self):
+        return self._additional_payment_info
+
+    @additional_payment_info.setter
+    def additional_payment_info(self, value):
+        self._additional_payment_info = value
     @property
     def amount(self):
         return self._amount
@@ -81,10 +90,22 @@ class TuitionISVPoboPaymentInfo(object):
     @cvv.setter
     def cvv(self, value):
         self._cvv = value
+    @property
+    def pre_order_id(self):
+        return self._pre_order_id
+
+    @pre_order_id.setter
+    def pre_order_id(self, value):
+        self._pre_order_id = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.additional_payment_info:
+            if hasattr(self.additional_payment_info, 'to_alipay_dict'):
+                params['additional_payment_info'] = self.additional_payment_info.to_alipay_dict()
+            else:
+                params['additional_payment_info'] = self.additional_payment_info
         if self.amount:
             if hasattr(self.amount, 'to_alipay_dict'):
                 params['amount'] = self.amount.to_alipay_dict()
@@ -125,6 +146,11 @@ class TuitionISVPoboPaymentInfo(object):
                 params['cvv'] = self.cvv.to_alipay_dict()
             else:
                 params['cvv'] = self.cvv
+        if self.pre_order_id:
+            if hasattr(self.pre_order_id, 'to_alipay_dict'):
+                params['pre_order_id'] = self.pre_order_id.to_alipay_dict()
+            else:
+                params['pre_order_id'] = self.pre_order_id
         return params
 
     @staticmethod
@@ -132,6 +158,8 @@ class TuitionISVPoboPaymentInfo(object):
         if not d:
             return None
         o = TuitionISVPoboPaymentInfo()
+        if 'additional_payment_info' in d:
+            o.additional_payment_info = d['additional_payment_info']
         if 'amount' in d:
             o.amount = d['amount']
         if 'card_brand' in d:
@@ -148,6 +176,8 @@ class TuitionISVPoboPaymentInfo(object):
             o.card_start_date = d['card_start_date']
         if 'cvv' in d:
             o.cvv = d['cvv']
+        if 'pre_order_id' in d:
+            o.pre_order_id = d['pre_order_id']
         return o
 
 

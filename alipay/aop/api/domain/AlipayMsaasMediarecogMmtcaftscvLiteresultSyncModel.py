@@ -10,6 +10,7 @@ class AlipayMsaasMediarecogMmtcaftscvLiteresultSyncModel(object):
 
     def __init__(self):
         self._contrast_result = None
+        self._result_type = None
         self._transaction_id = None
 
     @property
@@ -25,6 +26,13 @@ class AlipayMsaasMediarecogMmtcaftscvLiteresultSyncModel(object):
                     self._contrast_result.append(i)
                 else:
                     self._contrast_result.append(ContrastResult.from_alipay_dict(i))
+    @property
+    def result_type(self):
+        return self._result_type
+
+    @result_type.setter
+    def result_type(self, value):
+        self._result_type = value
     @property
     def transaction_id(self):
         return self._transaction_id
@@ -46,6 +54,11 @@ class AlipayMsaasMediarecogMmtcaftscvLiteresultSyncModel(object):
                 params['contrast_result'] = self.contrast_result.to_alipay_dict()
             else:
                 params['contrast_result'] = self.contrast_result
+        if self.result_type:
+            if hasattr(self.result_type, 'to_alipay_dict'):
+                params['result_type'] = self.result_type.to_alipay_dict()
+            else:
+                params['result_type'] = self.result_type
         if self.transaction_id:
             if hasattr(self.transaction_id, 'to_alipay_dict'):
                 params['transaction_id'] = self.transaction_id.to_alipay_dict()
@@ -60,6 +73,8 @@ class AlipayMsaasMediarecogMmtcaftscvLiteresultSyncModel(object):
         o = AlipayMsaasMediarecogMmtcaftscvLiteresultSyncModel()
         if 'contrast_result' in d:
             o.contrast_result = d['contrast_result']
+        if 'result_type' in d:
+            o.result_type = d['result_type']
         if 'transaction_id' in d:
             o.transaction_id = d['transaction_id']
         return o

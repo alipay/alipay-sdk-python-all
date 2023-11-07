@@ -11,6 +11,8 @@ class AlipayCloudCloudpromoAigcOrderQueryResponse(AlipayResponse):
         super(AlipayCloudCloudpromoAigcOrderQueryResponse, self).__init__()
         self._desc = None
         self._images = None
+        self._order_id = None
+        self._out_biz_id = None
         self._status = None
         self._texts = None
 
@@ -31,6 +33,20 @@ class AlipayCloudCloudpromoAigcOrderQueryResponse(AlipayResponse):
             self._images = list()
             for i in value:
                 self._images.append(i)
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
+    def out_biz_id(self):
+        return self._out_biz_id
+
+    @out_biz_id.setter
+    def out_biz_id(self, value):
+        self._out_biz_id = value
     @property
     def status(self):
         return self._status
@@ -55,6 +71,10 @@ class AlipayCloudCloudpromoAigcOrderQueryResponse(AlipayResponse):
             self.desc = response['desc']
         if 'images' in response:
             self.images = response['images']
+        if 'order_id' in response:
+            self.order_id = response['order_id']
+        if 'out_biz_id' in response:
+            self.out_biz_id = response['out_biz_id']
         if 'status' in response:
             self.status = response['status']
         if 'texts' in response:

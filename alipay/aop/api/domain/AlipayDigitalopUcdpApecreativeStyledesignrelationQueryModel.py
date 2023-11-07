@@ -11,6 +11,7 @@ class AlipayDigitalopUcdpApecreativeStyledesignrelationQueryModel(object):
         self._design_id = None
         self._page_number = None
         self._page_size = None
+        self._profession = None
         self._project_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayDigitalopUcdpApecreativeStyledesignrelationQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def profession(self):
+        return self._profession
+
+    @profession.setter
+    def profession(self, value):
+        self._profession = value
     @property
     def project_id(self):
         return self._project_id
@@ -60,6 +68,11 @@ class AlipayDigitalopUcdpApecreativeStyledesignrelationQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.profession:
+            if hasattr(self.profession, 'to_alipay_dict'):
+                params['profession'] = self.profession.to_alipay_dict()
+            else:
+                params['profession'] = self.profession
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayDigitalopUcdpApecreativeStyledesignrelationQueryModel(object):
             o.page_number = d['page_number']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'profession' in d:
+            o.profession = d['profession']
         if 'project_id' in d:
             o.project_id = d['project_id']
         return o

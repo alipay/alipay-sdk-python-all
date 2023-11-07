@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class CertificateReverseResult(object):
 
     def __init__(self):
+        self._certificate_id = None
         self._msg = None
         self._result = None
         self._use_order_no = None
 
+    @property
+    def certificate_id(self):
+        return self._certificate_id
+
+    @certificate_id.setter
+    def certificate_id(self, value):
+        self._certificate_id = value
     @property
     def msg(self):
         return self._msg
@@ -37,6 +45,11 @@ class CertificateReverseResult(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_id:
+            if hasattr(self.certificate_id, 'to_alipay_dict'):
+                params['certificate_id'] = self.certificate_id.to_alipay_dict()
+            else:
+                params['certificate_id'] = self.certificate_id
         if self.msg:
             if hasattr(self.msg, 'to_alipay_dict'):
                 params['msg'] = self.msg.to_alipay_dict()
@@ -59,6 +72,8 @@ class CertificateReverseResult(object):
         if not d:
             return None
         o = CertificateReverseResult()
+        if 'certificate_id' in d:
+            o.certificate_id = d['certificate_id']
         if 'msg' in d:
             o.msg = d['msg']
         if 'result' in d:

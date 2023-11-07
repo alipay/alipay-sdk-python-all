@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayMarketingCampaignTaskSignupModel(object):
 
     def __init__(self):
+        self._channel_info = None
         self._open_id = None
         self._out_biz_no = None
         self._task_cen_id = None
         self._task_id = None
         self._user_id = None
 
+    @property
+    def channel_info(self):
+        return self._channel_info
+
+    @channel_info.setter
+    def channel_info(self, value):
+        self._channel_info = value
     @property
     def open_id(self):
         return self._open_id
@@ -53,6 +61,11 @@ class AlipayMarketingCampaignTaskSignupModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel_info:
+            if hasattr(self.channel_info, 'to_alipay_dict'):
+                params['channel_info'] = self.channel_info.to_alipay_dict()
+            else:
+                params['channel_info'] = self.channel_info
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayMarketingCampaignTaskSignupModel(object):
         if not d:
             return None
         o = AlipayMarketingCampaignTaskSignupModel()
+        if 'channel_info' in d:
+            o.channel_info = d['channel_info']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_biz_no' in d:

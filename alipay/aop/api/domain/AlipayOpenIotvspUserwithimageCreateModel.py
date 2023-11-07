@@ -13,6 +13,7 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
         self._cert_type = None
         self._component_out_id = None
         self._ext = None
+        self._ftoken = None
         self._image = None
         self._isv_pid = None
         self._label_out_no = None
@@ -55,6 +56,13 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
     @ext.setter
     def ext(self, value):
         self._ext = value
+    @property
+    def ftoken(self):
+        return self._ftoken
+
+    @ftoken.setter
+    def ftoken(self, value):
+        self._ftoken = value
     @property
     def image(self):
         return self._image
@@ -126,6 +134,11 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
                 params['ext'] = self.ext.to_alipay_dict()
             else:
                 params['ext'] = self.ext
+        if self.ftoken:
+            if hasattr(self.ftoken, 'to_alipay_dict'):
+                params['ftoken'] = self.ftoken.to_alipay_dict()
+            else:
+                params['ftoken'] = self.ftoken
         if self.image:
             if hasattr(self.image, 'to_alipay_dict'):
                 params['image'] = self.image.to_alipay_dict()
@@ -173,6 +186,8 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
             o.component_out_id = d['component_out_id']
         if 'ext' in d:
             o.ext = d['ext']
+        if 'ftoken' in d:
+            o.ftoken = d['ftoken']
         if 'image' in d:
             o.image = d['image']
         if 'isv_pid' in d:

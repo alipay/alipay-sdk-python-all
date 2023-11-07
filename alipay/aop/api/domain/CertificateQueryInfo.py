@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
+from alipay.aop.api.domain.CertificateTimesCardInfo import CertificateTimesCardInfo
 from alipay.aop.api.domain.CertificateUseRuleInfo import CertificateUseRuleInfo
 
 
@@ -18,6 +19,7 @@ class CertificateQueryInfo(object):
         self._out_order_id = None
         self._sku_info = None
         self._status = None
+        self._times_card_info = None
         self._use_rule_info = None
         self._valid_begin_time = None
         self._valid_end_time = None
@@ -77,6 +79,16 @@ class CertificateQueryInfo(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def times_card_info(self):
+        return self._times_card_info
+
+    @times_card_info.setter
+    def times_card_info(self, value):
+        if isinstance(value, CertificateTimesCardInfo):
+            self._times_card_info = value
+        else:
+            self._times_card_info = CertificateTimesCardInfo.from_alipay_dict(value)
     @property
     def use_rule_info(self):
         return self._use_rule_info
@@ -140,6 +152,11 @@ class CertificateQueryInfo(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.times_card_info:
+            if hasattr(self.times_card_info, 'to_alipay_dict'):
+                params['times_card_info'] = self.times_card_info.to_alipay_dict()
+            else:
+                params['times_card_info'] = self.times_card_info
         if self.use_rule_info:
             if hasattr(self.use_rule_info, 'to_alipay_dict'):
                 params['use_rule_info'] = self.use_rule_info.to_alipay_dict()
@@ -176,6 +193,8 @@ class CertificateQueryInfo(object):
             o.sku_info = d['sku_info']
         if 'status' in d:
             o.status = d['status']
+        if 'times_card_info' in d:
+            o.times_card_info = d['times_card_info']
         if 'use_rule_info' in d:
             o.use_rule_info = d['use_rule_info']
         if 'valid_begin_time' in d:

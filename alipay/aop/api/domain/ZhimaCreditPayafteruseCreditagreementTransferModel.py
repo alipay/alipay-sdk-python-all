@@ -10,7 +10,9 @@ class ZhimaCreditPayafteruseCreditagreementTransferModel(object):
     def __init__(self):
         self._category_id = None
         self._deduct_agreement_no = None
+        self._extend_params = None
         self._out_agreement_no = None
+        self._product_code = None
         self._zm_service_id = None
 
     @property
@@ -28,12 +30,26 @@ class ZhimaCreditPayafteruseCreditagreementTransferModel(object):
     def deduct_agreement_no(self, value):
         self._deduct_agreement_no = value
     @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        self._extend_params = value
+    @property
     def out_agreement_no(self):
         return self._out_agreement_no
 
     @out_agreement_no.setter
     def out_agreement_no(self, value):
         self._out_agreement_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def zm_service_id(self):
         return self._zm_service_id
@@ -55,11 +71,21 @@ class ZhimaCreditPayafteruseCreditagreementTransferModel(object):
                 params['deduct_agreement_no'] = self.deduct_agreement_no.to_alipay_dict()
             else:
                 params['deduct_agreement_no'] = self.deduct_agreement_no
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.out_agreement_no:
             if hasattr(self.out_agreement_no, 'to_alipay_dict'):
                 params['out_agreement_no'] = self.out_agreement_no.to_alipay_dict()
             else:
                 params['out_agreement_no'] = self.out_agreement_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.zm_service_id:
             if hasattr(self.zm_service_id, 'to_alipay_dict'):
                 params['zm_service_id'] = self.zm_service_id.to_alipay_dict()
@@ -76,8 +102,12 @@ class ZhimaCreditPayafteruseCreditagreementTransferModel(object):
             o.category_id = d['category_id']
         if 'deduct_agreement_no' in d:
             o.deduct_agreement_no = d['deduct_agreement_no']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'out_agreement_no' in d:
             o.out_agreement_no = d['out_agreement_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'zm_service_id' in d:
             o.zm_service_id = d['zm_service_id']
         return o

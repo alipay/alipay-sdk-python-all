@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.UserAddressInfoObj import UserAddressInfoObj
+from alipay.aop.api.domain.SelectedStationInfoDTO import SelectedStationInfoDTO
 from alipay.aop.api.domain.UserAddressInfoObj import UserAddressInfoObj
 from alipay.aop.api.domain.ServiceInfoObj import ServiceInfoObj
 
@@ -13,6 +14,7 @@ class AlipayCommerceLogisticsTokenInfoQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceLogisticsTokenInfoQueryResponse, self).__init__()
         self._receive_info = None
+        self._selected_station_info = None
         self._send_info = None
         self._service_info = None
 
@@ -26,6 +28,16 @@ class AlipayCommerceLogisticsTokenInfoQueryResponse(AlipayResponse):
             self._receive_info = value
         else:
             self._receive_info = UserAddressInfoObj.from_alipay_dict(value)
+    @property
+    def selected_station_info(self):
+        return self._selected_station_info
+
+    @selected_station_info.setter
+    def selected_station_info(self, value):
+        if isinstance(value, SelectedStationInfoDTO):
+            self._selected_station_info = value
+        else:
+            self._selected_station_info = SelectedStationInfoDTO.from_alipay_dict(value)
     @property
     def send_info(self):
         return self._send_info
@@ -51,6 +63,8 @@ class AlipayCommerceLogisticsTokenInfoQueryResponse(AlipayResponse):
         response = super(AlipayCommerceLogisticsTokenInfoQueryResponse, self).parse_response_content(response_content)
         if 'receive_info' in response:
             self.receive_info = response['receive_info']
+        if 'selected_station_info' in response:
+            self.selected_station_info = response['selected_station_info']
         if 'send_info' in response:
             self.send_info = response['send_info']
         if 'service_info' in response:

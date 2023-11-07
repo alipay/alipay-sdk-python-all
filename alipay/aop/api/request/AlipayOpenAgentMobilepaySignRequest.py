@@ -25,8 +25,13 @@ class AlipayOpenAgentMobilepaySignRequest(object):
         self._download_link = None
         self._long_term = None
         self._mcc_code = None
+        self._mobile_type = None
+        self._trade_scene = None
         self._app_auth_pic = None
         self._app_demo = None
+        self._app_home_screenshot = None
+        self._app_item_screenshot = None
+        self._app_pay_screenshot = None
         self._business_license_auth_pic = None
         self._business_license_pic = None
         self._home_screenshot = None
@@ -147,6 +152,20 @@ class AlipayOpenAgentMobilepaySignRequest(object):
     @mcc_code.setter
     def mcc_code(self, value):
         self._mcc_code = value
+    @property
+    def mobile_type(self):
+        return self._mobile_type
+
+    @mobile_type.setter
+    def mobile_type(self, value):
+        self._mobile_type = value
+    @property
+    def trade_scene(self):
+        return self._trade_scene
+
+    @trade_scene.setter
+    def trade_scene(self, value):
+        self._trade_scene = value
 
     @property
     def app_auth_pic(self):
@@ -166,6 +185,33 @@ class AlipayOpenAgentMobilepaySignRequest(object):
         if not isinstance(value, FileItem):
             return
         self._app_demo = value
+    @property
+    def app_home_screenshot(self):
+        return self._app_home_screenshot
+
+    @app_home_screenshot.setter
+    def app_home_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._app_home_screenshot = value
+    @property
+    def app_item_screenshot(self):
+        return self._app_item_screenshot
+
+    @app_item_screenshot.setter
+    def app_item_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._app_item_screenshot = value
+    @property
+    def app_pay_screenshot(self):
+        return self._app_pay_screenshot
+
+    @app_pay_screenshot.setter
+    def app_pay_screenshot(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._app_pay_screenshot = value
     @property
     def business_license_auth_pic(self):
         return self._business_license_auth_pic
@@ -367,6 +413,16 @@ class AlipayOpenAgentMobilepaySignRequest(object):
                 params['mcc_code'] = json.dumps(obj=self.mcc_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['mcc_code'] = self.mcc_code
+        if self.mobile_type:
+            if hasattr(self.mobile_type, 'to_alipay_dict'):
+                params['mobile_type'] = json.dumps(obj=self.mobile_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['mobile_type'] = self.mobile_type
+        if self.trade_scene:
+            if hasattr(self.trade_scene, 'to_alipay_dict'):
+                params['trade_scene'] = json.dumps(obj=self.trade_scene.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['trade_scene'] = self.trade_scene
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:
@@ -387,6 +443,12 @@ class AlipayOpenAgentMobilepaySignRequest(object):
             multipart_params['app_auth_pic'] = self.app_auth_pic
         if self.app_demo:
             multipart_params['app_demo'] = self.app_demo
+        if self.app_home_screenshot:
+            multipart_params['app_home_screenshot'] = self.app_home_screenshot
+        if self.app_item_screenshot:
+            multipart_params['app_item_screenshot'] = self.app_item_screenshot
+        if self.app_pay_screenshot:
+            multipart_params['app_pay_screenshot'] = self.app_pay_screenshot
         if self.business_license_auth_pic:
             multipart_params['business_license_auth_pic'] = self.business_license_auth_pic
         if self.business_license_pic:

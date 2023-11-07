@@ -11,6 +11,7 @@ class ZhimaCreditEpCertificationInitializeModel(object):
         self._alipay_account = None
         self._certify_category = None
         self._certify_return_url = None
+        self._customize_content = None
         self._ep_cert_no = None
         self._ep_name = None
         self._open_id = None
@@ -42,6 +43,13 @@ class ZhimaCreditEpCertificationInitializeModel(object):
     @certify_return_url.setter
     def certify_return_url(self, value):
         self._certify_return_url = value
+    @property
+    def customize_content(self):
+        return self._customize_content
+
+    @customize_content.setter
+    def customize_content(self, value):
+        self._customize_content = value
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -124,6 +132,11 @@ class ZhimaCreditEpCertificationInitializeModel(object):
                 params['certify_return_url'] = self.certify_return_url.to_alipay_dict()
             else:
                 params['certify_return_url'] = self.certify_return_url
+        if self.customize_content:
+            if hasattr(self.customize_content, 'to_alipay_dict'):
+                params['customize_content'] = self.customize_content.to_alipay_dict()
+            else:
+                params['customize_content'] = self.customize_content
         if self.ep_cert_no:
             if hasattr(self.ep_cert_no, 'to_alipay_dict'):
                 params['ep_cert_no'] = self.ep_cert_no.to_alipay_dict()
@@ -182,6 +195,8 @@ class ZhimaCreditEpCertificationInitializeModel(object):
             o.certify_category = d['certify_category']
         if 'certify_return_url' in d:
             o.certify_return_url = d['certify_return_url']
+        if 'customize_content' in d:
+            o.customize_content = d['customize_content']
         if 'ep_cert_no' in d:
             o.ep_cert_no = d['ep_cert_no']
         if 'ep_name' in d:

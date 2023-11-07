@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BusinessRelationShopAddresss import BusinessRelationShopAddresss
+from alipay.aop.api.domain.BusinessRelationBusinessTime import BusinessRelationBusinessTime
 from alipay.aop.api.domain.BusinessRelationExtInfo import BusinessRelationExtInfo
 
 
@@ -11,6 +12,7 @@ class BusinessRelationShopDetailInfo(object):
 
     def __init__(self):
         self._business_address = None
+        self._business_times = None
         self._cert_image = None
         self._cert_name = None
         self._cert_no = None
@@ -38,6 +40,19 @@ class BusinessRelationShopDetailInfo(object):
                     self._business_address.append(i)
                 else:
                     self._business_address.append(BusinessRelationShopAddresss.from_alipay_dict(i))
+    @property
+    def business_times(self):
+        return self._business_times
+
+    @business_times.setter
+    def business_times(self, value):
+        if isinstance(value, list):
+            self._business_times = list()
+            for i in value:
+                if isinstance(i, BusinessRelationBusinessTime):
+                    self._business_times.append(i)
+                else:
+                    self._business_times.append(BusinessRelationBusinessTime.from_alipay_dict(i))
     @property
     def cert_image(self):
         return self._cert_image
@@ -149,6 +164,16 @@ class BusinessRelationShopDetailInfo(object):
                 params['business_address'] = self.business_address.to_alipay_dict()
             else:
                 params['business_address'] = self.business_address
+        if self.business_times:
+            if isinstance(self.business_times, list):
+                for i in range(0, len(self.business_times)):
+                    element = self.business_times[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.business_times[i] = element.to_alipay_dict()
+            if hasattr(self.business_times, 'to_alipay_dict'):
+                params['business_times'] = self.business_times.to_alipay_dict()
+            else:
+                params['business_times'] = self.business_times
         if self.cert_image:
             if hasattr(self.cert_image, 'to_alipay_dict'):
                 params['cert_image'] = self.cert_image.to_alipay_dict()
@@ -228,6 +253,8 @@ class BusinessRelationShopDetailInfo(object):
         o = BusinessRelationShopDetailInfo()
         if 'business_address' in d:
             o.business_address = d['business_address']
+        if 'business_times' in d:
+            o.business_times = d['business_times']
         if 'cert_image' in d:
             o.cert_image = d['cert_image']
         if 'cert_name' in d:

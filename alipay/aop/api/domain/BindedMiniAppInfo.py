@@ -9,11 +9,13 @@ class BindedMiniAppInfo(object):
 
     def __init__(self):
         self._dev_name = None
+        self._locked_version = None
         self._mini_app_id = None
         self._mini_app_logo = None
         self._mini_app_name = None
         self._mini_app_slogan = None
         self._online = None
+        self._online_version = None
         self._support_ampe = None
 
     @property
@@ -23,6 +25,13 @@ class BindedMiniAppInfo(object):
     @dev_name.setter
     def dev_name(self, value):
         self._dev_name = value
+    @property
+    def locked_version(self):
+        return self._locked_version
+
+    @locked_version.setter
+    def locked_version(self, value):
+        self._locked_version = value
     @property
     def mini_app_id(self):
         return self._mini_app_id
@@ -59,6 +68,13 @@ class BindedMiniAppInfo(object):
     def online(self, value):
         self._online = value
     @property
+    def online_version(self):
+        return self._online_version
+
+    @online_version.setter
+    def online_version(self, value):
+        self._online_version = value
+    @property
     def support_ampe(self):
         return self._support_ampe
 
@@ -74,6 +90,11 @@ class BindedMiniAppInfo(object):
                 params['dev_name'] = self.dev_name.to_alipay_dict()
             else:
                 params['dev_name'] = self.dev_name
+        if self.locked_version:
+            if hasattr(self.locked_version, 'to_alipay_dict'):
+                params['locked_version'] = self.locked_version.to_alipay_dict()
+            else:
+                params['locked_version'] = self.locked_version
         if self.mini_app_id:
             if hasattr(self.mini_app_id, 'to_alipay_dict'):
                 params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
@@ -99,6 +120,11 @@ class BindedMiniAppInfo(object):
                 params['online'] = self.online.to_alipay_dict()
             else:
                 params['online'] = self.online
+        if self.online_version:
+            if hasattr(self.online_version, 'to_alipay_dict'):
+                params['online_version'] = self.online_version.to_alipay_dict()
+            else:
+                params['online_version'] = self.online_version
         if self.support_ampe:
             if hasattr(self.support_ampe, 'to_alipay_dict'):
                 params['support_ampe'] = self.support_ampe.to_alipay_dict()
@@ -113,6 +139,8 @@ class BindedMiniAppInfo(object):
         o = BindedMiniAppInfo()
         if 'dev_name' in d:
             o.dev_name = d['dev_name']
+        if 'locked_version' in d:
+            o.locked_version = d['locked_version']
         if 'mini_app_id' in d:
             o.mini_app_id = d['mini_app_id']
         if 'mini_app_logo' in d:
@@ -123,6 +151,8 @@ class BindedMiniAppInfo(object):
             o.mini_app_slogan = d['mini_app_slogan']
         if 'online' in d:
             o.online = d['online']
+        if 'online_version' in d:
+            o.online_version = d['online_version']
         if 'support_ampe' in d:
             o.support_ampe = d['support_ampe']
         return o

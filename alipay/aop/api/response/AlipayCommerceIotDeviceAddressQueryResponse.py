@@ -12,6 +12,8 @@ class AlipayCommerceIotDeviceAddressQueryResponse(AlipayResponse):
         self._city_name = None
         self._country_name = None
         self._county_name = None
+        self._latitude = None
+        self._longitude = None
         self._province_name = None
         self._town_name = None
 
@@ -37,6 +39,20 @@ class AlipayCommerceIotDeviceAddressQueryResponse(AlipayResponse):
     def county_name(self, value):
         self._county_name = value
     @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
+    @property
     def province_name(self):
         return self._province_name
 
@@ -59,6 +75,10 @@ class AlipayCommerceIotDeviceAddressQueryResponse(AlipayResponse):
             self.country_name = response['country_name']
         if 'county_name' in response:
             self.county_name = response['county_name']
+        if 'latitude' in response:
+            self.latitude = response['latitude']
+        if 'longitude' in response:
+            self.longitude = response['longitude']
         if 'province_name' in response:
             self.province_name = response['province_name']
         if 'town_name' in response:

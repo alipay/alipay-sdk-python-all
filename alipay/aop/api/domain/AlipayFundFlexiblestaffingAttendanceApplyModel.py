@@ -18,6 +18,7 @@ class AlipayFundFlexiblestaffingAttendanceApplyModel(object):
         self._expire_time = None
         self._insure_info = None
         self._insure_type = None
+        self._out_biz_no = None
         self._partner_organization = None
         self._product_code = None
 
@@ -77,6 +78,13 @@ class AlipayFundFlexiblestaffingAttendanceApplyModel(object):
     def insure_type(self, value):
         self._insure_type = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def partner_organization(self):
         return self._partner_organization
 
@@ -132,6 +140,11 @@ class AlipayFundFlexiblestaffingAttendanceApplyModel(object):
                 params['insure_type'] = self.insure_type.to_alipay_dict()
             else:
                 params['insure_type'] = self.insure_type
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.partner_organization:
             if hasattr(self.partner_organization, 'to_alipay_dict'):
                 params['partner_organization'] = self.partner_organization.to_alipay_dict()
@@ -163,6 +176,8 @@ class AlipayFundFlexiblestaffingAttendanceApplyModel(object):
             o.insure_info = d['insure_info']
         if 'insure_type' in d:
             o.insure_type = d['insure_type']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'partner_organization' in d:
             o.partner_organization = d['partner_organization']
         if 'product_code' in d:

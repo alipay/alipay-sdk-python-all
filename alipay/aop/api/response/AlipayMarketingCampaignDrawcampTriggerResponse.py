@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.PrizeCustomDisplayInfo import PrizeCustomDisplayInfo
 from alipay.aop.api.domain.MpPrizeSendOrder import MpPrizeSendOrder
 
 
@@ -15,6 +16,7 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
         self._display_name = None
         self._extend_field = None
         self._out_prize_id = None
+        self._prize_custom_display_info = None
         self._prize_flag = None
         self._prize_id = None
         self._prize_log_id = None
@@ -58,6 +60,16 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
     @out_prize_id.setter
     def out_prize_id(self, value):
         self._out_prize_id = value
+    @property
+    def prize_custom_display_info(self):
+        return self._prize_custom_display_info
+
+    @prize_custom_display_info.setter
+    def prize_custom_display_info(self, value):
+        if isinstance(value, PrizeCustomDisplayInfo):
+            self._prize_custom_display_info = value
+        else:
+            self._prize_custom_display_info = PrizeCustomDisplayInfo.from_alipay_dict(value)
     @property
     def prize_flag(self):
         return self._prize_flag
@@ -126,6 +138,8 @@ class AlipayMarketingCampaignDrawcampTriggerResponse(AlipayResponse):
             self.extend_field = response['extend_field']
         if 'out_prize_id' in response:
             self.out_prize_id = response['out_prize_id']
+        if 'prize_custom_display_info' in response:
+            self.prize_custom_display_info = response['prize_custom_display_info']
         if 'prize_flag' in response:
             self.prize_flag = response['prize_flag']
         if 'prize_id' in response:

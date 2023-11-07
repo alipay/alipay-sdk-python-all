@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
 
     def __init__(self):
+        self._commodity_code = None
         self._method_params = None
         self._target_method = None
         self._tenant_code = None
 
+    @property
+    def commodity_code(self):
+        return self._commodity_code
+
+    @commodity_code.setter
+    def commodity_code(self, value):
+        self._commodity_code = value
     @property
     def method_params(self):
         return self._method_params
@@ -37,6 +45,11 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.commodity_code:
+            if hasattr(self.commodity_code, 'to_alipay_dict'):
+                params['commodity_code'] = self.commodity_code.to_alipay_dict()
+            else:
+                params['commodity_code'] = self.commodity_code
         if self.method_params:
             if hasattr(self.method_params, 'to_alipay_dict'):
                 params['method_params'] = self.method_params.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayIserviceCcmRobotAvatarbaseQueryModel(object):
         if not d:
             return None
         o = AlipayIserviceCcmRobotAvatarbaseQueryModel()
+        if 'commodity_code' in d:
+            o.commodity_code = d['commodity_code']
         if 'method_params' in d:
             o.method_params = d['method_params']
         if 'target_method' in d:

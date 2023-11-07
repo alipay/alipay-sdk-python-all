@@ -11,6 +11,7 @@ class AlipayCommerceOperationDcsMerchantqrcodeQueryModel(object):
         self._apply_merchant_pid = None
         self._isv_pid = None
         self._merchant_pid = None
+        self._plan_id = None
         self._role_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceOperationDcsMerchantqrcodeQueryModel(object):
     @merchant_pid.setter
     def merchant_pid(self, value):
         self._merchant_pid = value
+    @property
+    def plan_id(self):
+        return self._plan_id
+
+    @plan_id.setter
+    def plan_id(self, value):
+        self._plan_id = value
     @property
     def role_id(self):
         return self._role_id
@@ -60,6 +68,11 @@ class AlipayCommerceOperationDcsMerchantqrcodeQueryModel(object):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
             else:
                 params['merchant_pid'] = self.merchant_pid
+        if self.plan_id:
+            if hasattr(self.plan_id, 'to_alipay_dict'):
+                params['plan_id'] = self.plan_id.to_alipay_dict()
+            else:
+                params['plan_id'] = self.plan_id
         if self.role_id:
             if hasattr(self.role_id, 'to_alipay_dict'):
                 params['role_id'] = self.role_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceOperationDcsMerchantqrcodeQueryModel(object):
             o.isv_pid = d['isv_pid']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
+        if 'plan_id' in d:
+            o.plan_id = d['plan_id']
         if 'role_id' in d:
             o.role_id = d['role_id']
         return o

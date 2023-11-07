@@ -12,6 +12,7 @@ class AlipayOpenAgentCreateModel(object):
         self._account = None
         self._contact_info = None
         self._order_ticket = None
+        self._sign_mode = None
 
     @property
     def account(self):
@@ -37,6 +38,13 @@ class AlipayOpenAgentCreateModel(object):
     @order_ticket.setter
     def order_ticket(self, value):
         self._order_ticket = value
+    @property
+    def sign_mode(self):
+        return self._sign_mode
+
+    @sign_mode.setter
+    def sign_mode(self, value):
+        self._sign_mode = value
 
 
     def to_alipay_dict(self):
@@ -56,6 +64,11 @@ class AlipayOpenAgentCreateModel(object):
                 params['order_ticket'] = self.order_ticket.to_alipay_dict()
             else:
                 params['order_ticket'] = self.order_ticket
+        if self.sign_mode:
+            if hasattr(self.sign_mode, 'to_alipay_dict'):
+                params['sign_mode'] = self.sign_mode.to_alipay_dict()
+            else:
+                params['sign_mode'] = self.sign_mode
         return params
 
     @staticmethod
@@ -69,6 +82,8 @@ class AlipayOpenAgentCreateModel(object):
             o.contact_info = d['contact_info']
         if 'order_ticket' in d:
             o.order_ticket = d['order_ticket']
+        if 'sign_mode' in d:
+            o.sign_mode = d['sign_mode']
         return o
 
 

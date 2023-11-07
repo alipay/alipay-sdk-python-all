@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ConsumeExtend import ConsumeExtend
 from alipay.aop.api.domain.GiftCardTemplate import GiftCardTemplate
 
 
@@ -10,6 +11,7 @@ class AlipayFundWalletTemplateConfirmModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._consume_extend = None
         self._gift_card_template = None
         self._out_biz_no = None
         self._product_code = None
@@ -22,6 +24,16 @@ class AlipayFundWalletTemplateConfirmModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def consume_extend(self):
+        return self._consume_extend
+
+    @consume_extend.setter
+    def consume_extend(self, value):
+        if isinstance(value, ConsumeExtend):
+            self._consume_extend = value
+        else:
+            self._consume_extend = ConsumeExtend.from_alipay_dict(value)
     @property
     def gift_card_template(self):
         return self._gift_card_template
@@ -62,6 +74,11 @@ class AlipayFundWalletTemplateConfirmModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.consume_extend:
+            if hasattr(self.consume_extend, 'to_alipay_dict'):
+                params['consume_extend'] = self.consume_extend.to_alipay_dict()
+            else:
+                params['consume_extend'] = self.consume_extend
         if self.gift_card_template:
             if hasattr(self.gift_card_template, 'to_alipay_dict'):
                 params['gift_card_template'] = self.gift_card_template.to_alipay_dict()
@@ -91,6 +108,8 @@ class AlipayFundWalletTemplateConfirmModel(object):
         o = AlipayFundWalletTemplateConfirmModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'consume_extend' in d:
+            o.consume_extend = d['consume_extend']
         if 'gift_card_template' in d:
             o.gift_card_template = d['gift_card_template']
         if 'out_biz_no' in d:

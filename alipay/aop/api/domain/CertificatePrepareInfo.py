@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
+from alipay.aop.api.domain.CertificateTimesCardInfo import CertificateTimesCardInfo
 
 
 class CertificatePrepareInfo(object):
@@ -13,7 +14,9 @@ class CertificatePrepareInfo(object):
         self._amount_info = None
         self._certificate_id = None
         self._encrypted_code = None
+        self._order_id = None
         self._sku_info = None
+        self._times_card_info = None
         self._valid_begin_time = None
         self._valid_end_time = None
 
@@ -42,6 +45,13 @@ class CertificatePrepareInfo(object):
     def encrypted_code(self, value):
         self._encrypted_code = value
     @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
     def sku_info(self):
         return self._sku_info
 
@@ -51,6 +61,16 @@ class CertificatePrepareInfo(object):
             self._sku_info = value
         else:
             self._sku_info = CertificateSkuInfo.from_alipay_dict(value)
+    @property
+    def times_card_info(self):
+        return self._times_card_info
+
+    @times_card_info.setter
+    def times_card_info(self, value):
+        if isinstance(value, CertificateTimesCardInfo):
+            self._times_card_info = value
+        else:
+            self._times_card_info = CertificateTimesCardInfo.from_alipay_dict(value)
     @property
     def valid_begin_time(self):
         return self._valid_begin_time
@@ -84,11 +104,21 @@ class CertificatePrepareInfo(object):
                 params['encrypted_code'] = self.encrypted_code.to_alipay_dict()
             else:
                 params['encrypted_code'] = self.encrypted_code
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
         if self.sku_info:
             if hasattr(self.sku_info, 'to_alipay_dict'):
                 params['sku_info'] = self.sku_info.to_alipay_dict()
             else:
                 params['sku_info'] = self.sku_info
+        if self.times_card_info:
+            if hasattr(self.times_card_info, 'to_alipay_dict'):
+                params['times_card_info'] = self.times_card_info.to_alipay_dict()
+            else:
+                params['times_card_info'] = self.times_card_info
         if self.valid_begin_time:
             if hasattr(self.valid_begin_time, 'to_alipay_dict'):
                 params['valid_begin_time'] = self.valid_begin_time.to_alipay_dict()
@@ -112,8 +142,12 @@ class CertificatePrepareInfo(object):
             o.certificate_id = d['certificate_id']
         if 'encrypted_code' in d:
             o.encrypted_code = d['encrypted_code']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
         if 'sku_info' in d:
             o.sku_info = d['sku_info']
+        if 'times_card_info' in d:
+            o.times_card_info = d['times_card_info']
         if 'valid_begin_time' in d:
             o.valid_begin_time = d['valid_begin_time']
         if 'valid_end_time' in d:

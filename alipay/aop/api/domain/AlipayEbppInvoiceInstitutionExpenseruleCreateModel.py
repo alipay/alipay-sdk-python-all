@@ -20,6 +20,7 @@ class AlipayEbppInvoiceInstitutionExpenseruleCreateModel(object):
         self._expense_type_sub_category = None
         self._institution_id = None
         self._open_rule_id = None
+        self._outer_source_id = None
         self._payment_policy = None
         self._standard_condition_info_list = None
         self._standard_desc = None
@@ -94,6 +95,13 @@ class AlipayEbppInvoiceInstitutionExpenseruleCreateModel(object):
     @open_rule_id.setter
     def open_rule_id(self, value):
         self._open_rule_id = value
+    @property
+    def outer_source_id(self):
+        return self._outer_source_id
+
+    @outer_source_id.setter
+    def outer_source_id(self, value):
+        self._outer_source_id = value
     @property
     def payment_policy(self):
         return self._payment_policy
@@ -177,6 +185,11 @@ class AlipayEbppInvoiceInstitutionExpenseruleCreateModel(object):
                 params['open_rule_id'] = self.open_rule_id.to_alipay_dict()
             else:
                 params['open_rule_id'] = self.open_rule_id
+        if self.outer_source_id:
+            if hasattr(self.outer_source_id, 'to_alipay_dict'):
+                params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
+            else:
+                params['outer_source_id'] = self.outer_source_id
         if self.payment_policy:
             if hasattr(self.payment_policy, 'to_alipay_dict'):
                 params['payment_policy'] = self.payment_policy.to_alipay_dict()
@@ -227,6 +240,8 @@ class AlipayEbppInvoiceInstitutionExpenseruleCreateModel(object):
             o.institution_id = d['institution_id']
         if 'open_rule_id' in d:
             o.open_rule_id = d['open_rule_id']
+        if 'outer_source_id' in d:
+            o.outer_source_id = d['outer_source_id']
         if 'payment_policy' in d:
             o.payment_policy = d['payment_policy']
         if 'standard_condition_info_list' in d:

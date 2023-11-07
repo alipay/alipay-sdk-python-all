@@ -10,6 +10,7 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
     def __init__(self):
         self._employee_id = None
         self._enterprise_id = None
+        self._mobile = None
         self._open_id = None
         self._user_id = None
 
@@ -27,6 +28,13 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
     @property
     def open_id(self):
         return self._open_id
@@ -55,6 +63,11 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.mobile:
+            if hasattr(self.mobile, 'to_alipay_dict'):
+                params['mobile'] = self.mobile.to_alipay_dict()
+            else:
+                params['mobile'] = self.mobile
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
             o.employee_id = d['employee_id']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'mobile' in d:
+            o.mobile = d['mobile']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

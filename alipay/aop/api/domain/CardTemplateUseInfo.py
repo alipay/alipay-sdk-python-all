@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CardCycleInfo import CardCycleInfo
+from alipay.aop.api.domain.CardDiscountRecoverRuleInfo import CardDiscountRecoverRuleInfo
 from alipay.aop.api.domain.CardPeriodPriceInfo import CardPeriodPriceInfo
 from alipay.aop.api.domain.CardUsableShopInfo import CardUsableShopInfo
 
@@ -12,6 +13,7 @@ class CardTemplateUseInfo(object):
 
     def __init__(self):
         self._cycle_info = None
+        self._discount_recover_rule_info = None
         self._expire_period = None
         self._period_price_list = None
         self._usable_count = None
@@ -28,6 +30,16 @@ class CardTemplateUseInfo(object):
             self._cycle_info = value
         else:
             self._cycle_info = CardCycleInfo.from_alipay_dict(value)
+    @property
+    def discount_recover_rule_info(self):
+        return self._discount_recover_rule_info
+
+    @discount_recover_rule_info.setter
+    def discount_recover_rule_info(self, value):
+        if isinstance(value, CardDiscountRecoverRuleInfo):
+            self._discount_recover_rule_info = value
+        else:
+            self._discount_recover_rule_info = CardDiscountRecoverRuleInfo.from_alipay_dict(value)
     @property
     def expire_period(self):
         return self._expire_period
@@ -84,6 +96,11 @@ class CardTemplateUseInfo(object):
                 params['cycle_info'] = self.cycle_info.to_alipay_dict()
             else:
                 params['cycle_info'] = self.cycle_info
+        if self.discount_recover_rule_info:
+            if hasattr(self.discount_recover_rule_info, 'to_alipay_dict'):
+                params['discount_recover_rule_info'] = self.discount_recover_rule_info.to_alipay_dict()
+            else:
+                params['discount_recover_rule_info'] = self.discount_recover_rule_info
         if self.expire_period:
             if hasattr(self.expire_period, 'to_alipay_dict'):
                 params['expire_period'] = self.expire_period.to_alipay_dict()
@@ -128,6 +145,8 @@ class CardTemplateUseInfo(object):
         o = CardTemplateUseInfo()
         if 'cycle_info' in d:
             o.cycle_info = d['cycle_info']
+        if 'discount_recover_rule_info' in d:
+            o.discount_recover_rule_info = d['discount_recover_rule_info']
         if 'expire_period' in d:
             o.expire_period = d['expire_period']
         if 'period_price_list' in d:

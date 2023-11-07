@@ -18,6 +18,7 @@ class InsCompany(object):
         self._company_cert_no = None
         self._company_name = None
         self._phone = None
+        self._platform_identity = None
 
     @property
     def alipay_account_no(self):
@@ -89,6 +90,13 @@ class InsCompany(object):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def platform_identity(self):
+        return self._platform_identity
+
+    @platform_identity.setter
+    def platform_identity(self, value):
+        self._platform_identity = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +151,11 @@ class InsCompany(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.platform_identity:
+            if hasattr(self.platform_identity, 'to_alipay_dict'):
+                params['platform_identity'] = self.platform_identity.to_alipay_dict()
+            else:
+                params['platform_identity'] = self.platform_identity
         return params
 
     @staticmethod
@@ -170,6 +183,8 @@ class InsCompany(object):
             o.company_name = d['company_name']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'platform_identity' in d:
+            o.platform_identity = d['platform_identity']
         return o
 
 

@@ -11,6 +11,7 @@ class AlipayIserviceIsresourceUserquerybyuidQueryModel(object):
         self._alipay_uid = None
         self._query_ref_account = None
         self._query_role = None
+        self._query_serve = None
         self._tnt_inst_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayIserviceIsresourceUserquerybyuidQueryModel(object):
     @query_role.setter
     def query_role(self, value):
         self._query_role = value
+    @property
+    def query_serve(self):
+        return self._query_serve
+
+    @query_serve.setter
+    def query_serve(self, value):
+        self._query_serve = value
     @property
     def tnt_inst_id(self):
         return self._tnt_inst_id
@@ -60,6 +68,11 @@ class AlipayIserviceIsresourceUserquerybyuidQueryModel(object):
                 params['query_role'] = self.query_role.to_alipay_dict()
             else:
                 params['query_role'] = self.query_role
+        if self.query_serve:
+            if hasattr(self.query_serve, 'to_alipay_dict'):
+                params['query_serve'] = self.query_serve.to_alipay_dict()
+            else:
+                params['query_serve'] = self.query_serve
         if self.tnt_inst_id:
             if hasattr(self.tnt_inst_id, 'to_alipay_dict'):
                 params['tnt_inst_id'] = self.tnt_inst_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayIserviceIsresourceUserquerybyuidQueryModel(object):
             o.query_ref_account = d['query_ref_account']
         if 'query_role' in d:
             o.query_role = d['query_role']
+        if 'query_serve' in d:
+            o.query_serve = d['query_serve']
         if 'tnt_inst_id' in d:
             o.tnt_inst_id = d['tnt_inst_id']
         return o

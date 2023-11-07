@@ -11,6 +11,7 @@ class RentCarStoreQuotation(object):
         self._comment_num = None
         self._comment_tag = None
         self._distance = None
+        self._easy_card_usable_day_count = None
         self._isv_discount_amount = None
         self._latitude = None
         self._longitude = None
@@ -23,6 +24,7 @@ class RentCarStoreQuotation(object):
         self._support_easy_card_order_ids = None
         self._total_amount = None
         self._unit_amount = None
+        self._use_easy_card_total_amount = None
 
     @property
     def comment_num(self):
@@ -45,6 +47,13 @@ class RentCarStoreQuotation(object):
     @distance.setter
     def distance(self, value):
         self._distance = value
+    @property
+    def easy_card_usable_day_count(self):
+        return self._easy_card_usable_day_count
+
+    @easy_card_usable_day_count.setter
+    def easy_card_usable_day_count(self, value):
+        self._easy_card_usable_day_count = value
     @property
     def isv_discount_amount(self):
         return self._isv_discount_amount
@@ -135,6 +144,13 @@ class RentCarStoreQuotation(object):
     @unit_amount.setter
     def unit_amount(self, value):
         self._unit_amount = value
+    @property
+    def use_easy_card_total_amount(self):
+        return self._use_easy_card_total_amount
+
+    @use_easy_card_total_amount.setter
+    def use_easy_card_total_amount(self, value):
+        self._use_easy_card_total_amount = value
 
 
     def to_alipay_dict(self):
@@ -154,6 +170,11 @@ class RentCarStoreQuotation(object):
                 params['distance'] = self.distance.to_alipay_dict()
             else:
                 params['distance'] = self.distance
+        if self.easy_card_usable_day_count:
+            if hasattr(self.easy_card_usable_day_count, 'to_alipay_dict'):
+                params['easy_card_usable_day_count'] = self.easy_card_usable_day_count.to_alipay_dict()
+            else:
+                params['easy_card_usable_day_count'] = self.easy_card_usable_day_count
         if self.isv_discount_amount:
             if hasattr(self.isv_discount_amount, 'to_alipay_dict'):
                 params['isv_discount_amount'] = self.isv_discount_amount.to_alipay_dict()
@@ -224,6 +245,11 @@ class RentCarStoreQuotation(object):
                 params['unit_amount'] = self.unit_amount.to_alipay_dict()
             else:
                 params['unit_amount'] = self.unit_amount
+        if self.use_easy_card_total_amount:
+            if hasattr(self.use_easy_card_total_amount, 'to_alipay_dict'):
+                params['use_easy_card_total_amount'] = self.use_easy_card_total_amount.to_alipay_dict()
+            else:
+                params['use_easy_card_total_amount'] = self.use_easy_card_total_amount
         return params
 
     @staticmethod
@@ -237,6 +263,8 @@ class RentCarStoreQuotation(object):
             o.comment_tag = d['comment_tag']
         if 'distance' in d:
             o.distance = d['distance']
+        if 'easy_card_usable_day_count' in d:
+            o.easy_card_usable_day_count = d['easy_card_usable_day_count']
         if 'isv_discount_amount' in d:
             o.isv_discount_amount = d['isv_discount_amount']
         if 'latitude' in d:
@@ -261,6 +289,8 @@ class RentCarStoreQuotation(object):
             o.total_amount = d['total_amount']
         if 'unit_amount' in d:
             o.unit_amount = d['unit_amount']
+        if 'use_easy_card_total_amount' in d:
+            o.use_easy_card_total_amount = d['use_easy_card_total_amount']
         return o
 
 

@@ -12,6 +12,8 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryModel(object):
         self._agreement_no = None
         self._enterprise_id = None
         self._institution_id = None
+        self._outer_source_id = None
+        self._owner_type = None
 
     @property
     def account_id(self):
@@ -41,6 +43,20 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryModel(object):
     @institution_id.setter
     def institution_id(self, value):
         self._institution_id = value
+    @property
+    def outer_source_id(self):
+        return self._outer_source_id
+
+    @outer_source_id.setter
+    def outer_source_id(self, value):
+        self._outer_source_id = value
+    @property
+    def owner_type(self):
+        return self._owner_type
+
+    @owner_type.setter
+    def owner_type(self, value):
+        self._owner_type = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +81,16 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryModel(object):
                 params['institution_id'] = self.institution_id.to_alipay_dict()
             else:
                 params['institution_id'] = self.institution_id
+        if self.outer_source_id:
+            if hasattr(self.outer_source_id, 'to_alipay_dict'):
+                params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
+            else:
+                params['outer_source_id'] = self.outer_source_id
+        if self.owner_type:
+            if hasattr(self.owner_type, 'to_alipay_dict'):
+                params['owner_type'] = self.owner_type.to_alipay_dict()
+            else:
+                params['owner_type'] = self.owner_type
         return params
 
     @staticmethod
@@ -80,6 +106,10 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryModel(object):
             o.enterprise_id = d['enterprise_id']
         if 'institution_id' in d:
             o.institution_id = d['institution_id']
+        if 'outer_source_id' in d:
+            o.outer_source_id = d['outer_source_id']
+        if 'owner_type' in d:
+            o.owner_type = d['owner_type']
         return o
 
 

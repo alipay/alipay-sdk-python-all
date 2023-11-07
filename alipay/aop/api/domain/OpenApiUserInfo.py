@@ -7,6 +7,7 @@ from alipay.aop.api.domain.OpenApiOrganizationNodeInfo import OpenApiOrganizatio
 from alipay.aop.api.domain.OpenApiRoleInfo import OpenApiRoleInfo
 from alipay.aop.api.domain.OpenApiSkillGroupInfo import OpenApiSkillGroupInfo
 from alipay.aop.api.domain.OpenApiUserResourceInfo import OpenApiUserResourceInfo
+from alipay.aop.api.domain.OpenApiUserServeInfo import OpenApiUserServeInfo
 
 
 class OpenApiUserInfo(object):
@@ -22,6 +23,7 @@ class OpenApiUserInfo(object):
         self._tnt_tnst_id = None
         self._user_id = None
         self._user_resource_info = None
+        self._user_serve_info = None
         self._work_status = None
 
     @property
@@ -116,6 +118,16 @@ class OpenApiUserInfo(object):
         else:
             self._user_resource_info = OpenApiUserResourceInfo.from_alipay_dict(value)
     @property
+    def user_serve_info(self):
+        return self._user_serve_info
+
+    @user_serve_info.setter
+    def user_serve_info(self, value):
+        if isinstance(value, OpenApiUserServeInfo):
+            self._user_serve_info = value
+        else:
+            self._user_serve_info = OpenApiUserServeInfo.from_alipay_dict(value)
+    @property
     def work_status(self):
         return self._work_status
 
@@ -191,6 +203,11 @@ class OpenApiUserInfo(object):
                 params['user_resource_info'] = self.user_resource_info.to_alipay_dict()
             else:
                 params['user_resource_info'] = self.user_resource_info
+        if self.user_serve_info:
+            if hasattr(self.user_serve_info, 'to_alipay_dict'):
+                params['user_serve_info'] = self.user_serve_info.to_alipay_dict()
+            else:
+                params['user_serve_info'] = self.user_serve_info
         if self.work_status:
             if hasattr(self.work_status, 'to_alipay_dict'):
                 params['work_status'] = self.work_status.to_alipay_dict()
@@ -223,6 +240,8 @@ class OpenApiUserInfo(object):
             o.user_id = d['user_id']
         if 'user_resource_info' in d:
             o.user_resource_info = d['user_resource_info']
+        if 'user_serve_info' in d:
+            o.user_serve_info = d['user_serve_info']
         if 'work_status' in d:
             o.work_status = d['work_status']
         return o
