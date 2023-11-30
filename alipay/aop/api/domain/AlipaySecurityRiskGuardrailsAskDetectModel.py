@@ -14,6 +14,7 @@ class AlipaySecurityRiskGuardrailsAskDetectModel(object):
         self._question = None
         self._question_format = None
         self._request_id = None
+        self._scene_code = None
         self._service_name = None
         self._session_id = None
         self._user_id = None
@@ -56,6 +57,13 @@ class AlipaySecurityRiskGuardrailsAskDetectModel(object):
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
     @property
     def service_name(self):
         return self._service_name
@@ -106,6 +114,11 @@ class AlipaySecurityRiskGuardrailsAskDetectModel(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
         if self.service_name:
             if hasattr(self.service_name, 'to_alipay_dict'):
                 params['service_name'] = self.service_name.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipaySecurityRiskGuardrailsAskDetectModel(object):
             o.question_format = d['question_format']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
         if 'service_name' in d:
             o.service_name = d['service_name']
         if 'session_id' in d:

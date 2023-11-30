@@ -9,6 +9,7 @@ from alipay.aop.api.domain.ConversionProperty import ConversionProperty
 class ConversionData(object):
 
     def __init__(self):
+        self._ad_id = None
         self._biz_no = None
         self._callback_ext_info = None
         self._conversion_amount = None
@@ -28,8 +29,16 @@ class ConversionData(object):
         self._target_id = None
         self._target_type = None
         self._uuid = None
+        self._uuid_open_id = None
         self._uuid_type = None
 
+    @property
+    def ad_id(self):
+        return self._ad_id
+
+    @ad_id.setter
+    def ad_id(self, value):
+        self._ad_id = value
     @property
     def biz_no(self):
         return self._biz_no
@@ -170,6 +179,13 @@ class ConversionData(object):
     def uuid(self, value):
         self._uuid = value
     @property
+    def uuid_open_id(self):
+        return self._uuid_open_id
+
+    @uuid_open_id.setter
+    def uuid_open_id(self, value):
+        self._uuid_open_id = value
+    @property
     def uuid_type(self):
         return self._uuid_type
 
@@ -180,6 +196,11 @@ class ConversionData(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ad_id:
+            if hasattr(self.ad_id, 'to_alipay_dict'):
+                params['ad_id'] = self.ad_id.to_alipay_dict()
+            else:
+                params['ad_id'] = self.ad_id
         if self.biz_no:
             if hasattr(self.biz_no, 'to_alipay_dict'):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
@@ -280,6 +301,11 @@ class ConversionData(object):
                 params['uuid'] = self.uuid.to_alipay_dict()
             else:
                 params['uuid'] = self.uuid
+        if self.uuid_open_id:
+            if hasattr(self.uuid_open_id, 'to_alipay_dict'):
+                params['uuid_open_id'] = self.uuid_open_id.to_alipay_dict()
+            else:
+                params['uuid_open_id'] = self.uuid_open_id
         if self.uuid_type:
             if hasattr(self.uuid_type, 'to_alipay_dict'):
                 params['uuid_type'] = self.uuid_type.to_alipay_dict()
@@ -292,6 +318,8 @@ class ConversionData(object):
         if not d:
             return None
         o = ConversionData()
+        if 'ad_id' in d:
+            o.ad_id = d['ad_id']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'callback_ext_info' in d:
@@ -330,6 +358,8 @@ class ConversionData(object):
             o.target_type = d['target_type']
         if 'uuid' in d:
             o.uuid = d['uuid']
+        if 'uuid_open_id' in d:
+            o.uuid_open_id = d['uuid_open_id']
         if 'uuid_type' in d:
             o.uuid_type = d['uuid_type']
         return o

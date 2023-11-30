@@ -18,10 +18,14 @@ class AssetProduceItem(object):
         self._biz_tag = None
         self._biz_type = None
         self._city = None
+        self._combination_batch_no = None
+        self._combination_count = None
+        self._combination_orders = None
         self._count = None
         self._create_date = None
         self._data_version = None
         self._district = None
+        self._is_combination_order = None
         self._logistics_code = None
         self._logistics_name = None
         self._logistics_no = None
@@ -31,6 +35,7 @@ class AssetProduceItem(object):
         self._parent_template_id = None
         self._postcode = None
         self._print_data = None
+        self._priority = None
         self._produce_order = None
         self._produce_supplier_full_name = None
         self._produce_supplier_id = None
@@ -116,6 +121,30 @@ class AssetProduceItem(object):
     def city(self, value):
         self._city = value
     @property
+    def combination_batch_no(self):
+        return self._combination_batch_no
+
+    @combination_batch_no.setter
+    def combination_batch_no(self, value):
+        self._combination_batch_no = value
+    @property
+    def combination_count(self):
+        return self._combination_count
+
+    @combination_count.setter
+    def combination_count(self, value):
+        self._combination_count = value
+    @property
+    def combination_orders(self):
+        return self._combination_orders
+
+    @combination_orders.setter
+    def combination_orders(self, value):
+        if isinstance(value, list):
+            self._combination_orders = list()
+            for i in value:
+                self._combination_orders.append(i)
+    @property
     def count(self):
         return self._count
 
@@ -143,6 +172,13 @@ class AssetProduceItem(object):
     @district.setter
     def district(self, value):
         self._district = value
+    @property
+    def is_combination_order(self):
+        return self._is_combination_order
+
+    @is_combination_order.setter
+    def is_combination_order(self, value):
+        self._is_combination_order = value
     @property
     def logistics_code(self):
         return self._logistics_code
@@ -206,6 +242,13 @@ class AssetProduceItem(object):
     @print_data.setter
     def print_data(self, value):
         self._print_data = value
+    @property
+    def priority(self):
+        return self._priority
+
+    @priority.setter
+    def priority(self, value):
+        self._priority = value
     @property
     def produce_order(self):
         return self._produce_order
@@ -351,6 +394,26 @@ class AssetProduceItem(object):
                 params['city'] = self.city.to_alipay_dict()
             else:
                 params['city'] = self.city
+        if self.combination_batch_no:
+            if hasattr(self.combination_batch_no, 'to_alipay_dict'):
+                params['combination_batch_no'] = self.combination_batch_no.to_alipay_dict()
+            else:
+                params['combination_batch_no'] = self.combination_batch_no
+        if self.combination_count:
+            if hasattr(self.combination_count, 'to_alipay_dict'):
+                params['combination_count'] = self.combination_count.to_alipay_dict()
+            else:
+                params['combination_count'] = self.combination_count
+        if self.combination_orders:
+            if isinstance(self.combination_orders, list):
+                for i in range(0, len(self.combination_orders)):
+                    element = self.combination_orders[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.combination_orders[i] = element.to_alipay_dict()
+            if hasattr(self.combination_orders, 'to_alipay_dict'):
+                params['combination_orders'] = self.combination_orders.to_alipay_dict()
+            else:
+                params['combination_orders'] = self.combination_orders
         if self.count:
             if hasattr(self.count, 'to_alipay_dict'):
                 params['count'] = self.count.to_alipay_dict()
@@ -371,6 +434,11 @@ class AssetProduceItem(object):
                 params['district'] = self.district.to_alipay_dict()
             else:
                 params['district'] = self.district
+        if self.is_combination_order:
+            if hasattr(self.is_combination_order, 'to_alipay_dict'):
+                params['is_combination_order'] = self.is_combination_order.to_alipay_dict()
+            else:
+                params['is_combination_order'] = self.is_combination_order
         if self.logistics_code:
             if hasattr(self.logistics_code, 'to_alipay_dict'):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
@@ -416,6 +484,11 @@ class AssetProduceItem(object):
                 params['print_data'] = self.print_data.to_alipay_dict()
             else:
                 params['print_data'] = self.print_data
+        if self.priority:
+            if hasattr(self.priority, 'to_alipay_dict'):
+                params['priority'] = self.priority.to_alipay_dict()
+            else:
+                params['priority'] = self.priority
         if self.produce_order:
             if hasattr(self.produce_order, 'to_alipay_dict'):
                 params['produce_order'] = self.produce_order.to_alipay_dict()
@@ -508,6 +581,12 @@ class AssetProduceItem(object):
             o.biz_type = d['biz_type']
         if 'city' in d:
             o.city = d['city']
+        if 'combination_batch_no' in d:
+            o.combination_batch_no = d['combination_batch_no']
+        if 'combination_count' in d:
+            o.combination_count = d['combination_count']
+        if 'combination_orders' in d:
+            o.combination_orders = d['combination_orders']
         if 'count' in d:
             o.count = d['count']
         if 'create_date' in d:
@@ -516,6 +595,8 @@ class AssetProduceItem(object):
             o.data_version = d['data_version']
         if 'district' in d:
             o.district = d['district']
+        if 'is_combination_order' in d:
+            o.is_combination_order = d['is_combination_order']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
         if 'logistics_name' in d:
@@ -534,6 +615,8 @@ class AssetProduceItem(object):
             o.postcode = d['postcode']
         if 'print_data' in d:
             o.print_data = d['print_data']
+        if 'priority' in d:
+            o.priority = d['priority']
         if 'produce_order' in d:
             o.produce_order = d['produce_order']
         if 'produce_supplier_full_name' in d:

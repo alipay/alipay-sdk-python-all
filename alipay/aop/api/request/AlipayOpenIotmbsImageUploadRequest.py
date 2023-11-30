@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
+from alipay.aop.api.domain.PrivateInfo import PrivateInfo
 
 
 
@@ -13,6 +14,8 @@ class AlipayOpenIotmbsImageUploadRequest(object):
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
         self._biz_code = None
+        self._biz_config = None
+        self._private_info = None
         self._image_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -38,6 +41,23 @@ class AlipayOpenIotmbsImageUploadRequest(object):
     @biz_code.setter
     def biz_code(self, value):
         self._biz_code = value
+    @property
+    def biz_config(self):
+        return self._biz_config
+
+    @biz_config.setter
+    def biz_config(self, value):
+        self._biz_config = value
+    @property
+    def private_info(self):
+        return self._private_info
+
+    @private_info.setter
+    def private_info(self, value):
+        if isinstance(value, PrivateInfo):
+            self._private_info = value
+        else:
+            self._private_info = PrivateInfo.from_alipay_dict(value)
 
     @property
     def image_content(self):
@@ -131,6 +151,16 @@ class AlipayOpenIotmbsImageUploadRequest(object):
                 params['biz_code'] = json.dumps(obj=self.biz_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['biz_code'] = self.biz_code
+        if self.biz_config:
+            if hasattr(self.biz_config, 'to_alipay_dict'):
+                params['biz_config'] = json.dumps(obj=self.biz_config.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['biz_config'] = self.biz_config
+        if self.private_info:
+            if hasattr(self.private_info, 'to_alipay_dict'):
+                params['private_info'] = json.dumps(obj=self.private_info.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['private_info'] = self.private_info
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

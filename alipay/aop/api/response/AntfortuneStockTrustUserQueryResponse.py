@@ -10,6 +10,7 @@ class AntfortuneStockTrustUserQueryResponse(AlipayResponse):
     def __init__(self):
         super(AntfortuneStockTrustUserQueryResponse, self).__init__()
         self._cert_no = None
+        self._phone = None
         self._user_name = None
 
     @property
@@ -19,6 +20,13 @@ class AntfortuneStockTrustUserQueryResponse(AlipayResponse):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def phone(self):
+        return self._phone
+
+    @phone.setter
+    def phone(self, value):
+        self._phone = value
     @property
     def user_name(self):
         return self._user_name
@@ -31,5 +39,7 @@ class AntfortuneStockTrustUserQueryResponse(AlipayResponse):
         response = super(AntfortuneStockTrustUserQueryResponse, self).parse_response_content(response_content)
         if 'cert_no' in response:
             self.cert_no = response['cert_no']
+        if 'phone' in response:
+            self.phone = response['phone']
         if 'user_name' in response:
             self.user_name = response['user_name']

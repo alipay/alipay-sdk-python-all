@@ -10,6 +10,7 @@ class BPOpenApiAddSignContent(object):
     def __init__(self):
         self._additional_lines = None
         self._assignee = None
+        self._assignee_work_no = None
         self._deal_actions = None
         self._deal_url = None
         self._detail_url = None
@@ -32,6 +33,13 @@ class BPOpenApiAddSignContent(object):
     @assignee.setter
     def assignee(self, value):
         self._assignee = value
+    @property
+    def assignee_work_no(self):
+        return self._assignee_work_no
+
+    @assignee_work_no.setter
+    def assignee_work_no(self, value):
+        self._assignee_work_no = value
     @property
     def deal_actions(self):
         return self._deal_actions
@@ -79,6 +87,11 @@ class BPOpenApiAddSignContent(object):
                 params['assignee'] = self.assignee.to_alipay_dict()
             else:
                 params['assignee'] = self.assignee
+        if self.assignee_work_no:
+            if hasattr(self.assignee_work_no, 'to_alipay_dict'):
+                params['assignee_work_no'] = self.assignee_work_no.to_alipay_dict()
+            else:
+                params['assignee_work_no'] = self.assignee_work_no
         if self.deal_actions:
             if hasattr(self.deal_actions, 'to_alipay_dict'):
                 params['deal_actions'] = self.deal_actions.to_alipay_dict()
@@ -110,6 +123,8 @@ class BPOpenApiAddSignContent(object):
             o.additional_lines = d['additional_lines']
         if 'assignee' in d:
             o.assignee = d['assignee']
+        if 'assignee_work_no' in d:
+            o.assignee_work_no = d['assignee_work_no']
         if 'deal_actions' in d:
             o.deal_actions = d['deal_actions']
         if 'deal_url' in d:

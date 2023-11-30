@@ -11,6 +11,7 @@ class AlipayDataDataserviceXlightTaskQueryResponse(AlipayResponse):
         super(AlipayDataDataserviceXlightTaskQueryResponse, self).__init__()
         self._finish_time = None
         self._status = None
+        self._task_reward_amount = None
 
     @property
     def finish_time(self):
@@ -26,6 +27,13 @@ class AlipayDataDataserviceXlightTaskQueryResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def task_reward_amount(self):
+        return self._task_reward_amount
+
+    @task_reward_amount.setter
+    def task_reward_amount(self, value):
+        self._task_reward_amount = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayDataDataserviceXlightTaskQueryResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayDataDataserviceXlightTaskQueryResponse(AlipayResponse):
             self.finish_time = response['finish_time']
         if 'status' in response:
             self.status = response['status']
+        if 'task_reward_amount' in response:
+            self.task_reward_amount = response['task_reward_amount']

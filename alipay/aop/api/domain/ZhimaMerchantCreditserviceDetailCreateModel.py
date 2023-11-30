@@ -19,6 +19,7 @@ class ZhimaMerchantCreditserviceDetailCreateModel(object):
         self._risk_config = None
         self._smid = None
         self._solution_id = None
+        self._sub_pid = None
 
     @property
     def base_info_config(self):
@@ -85,6 +86,13 @@ class ZhimaMerchantCreditserviceDetailCreateModel(object):
     @solution_id.setter
     def solution_id(self, value):
         self._solution_id = value
+    @property
+    def sub_pid(self):
+        return self._sub_pid
+
+    @sub_pid.setter
+    def sub_pid(self, value):
+        self._sub_pid = value
 
 
     def to_alipay_dict(self):
@@ -129,6 +137,11 @@ class ZhimaMerchantCreditserviceDetailCreateModel(object):
                 params['solution_id'] = self.solution_id.to_alipay_dict()
             else:
                 params['solution_id'] = self.solution_id
+        if self.sub_pid:
+            if hasattr(self.sub_pid, 'to_alipay_dict'):
+                params['sub_pid'] = self.sub_pid.to_alipay_dict()
+            else:
+                params['sub_pid'] = self.sub_pid
         return params
 
     @staticmethod
@@ -152,6 +165,8 @@ class ZhimaMerchantCreditserviceDetailCreateModel(object):
             o.smid = d['smid']
         if 'solution_id' in d:
             o.solution_id = d['solution_id']
+        if 'sub_pid' in d:
+            o.sub_pid = d['sub_pid']
         return o
 
 

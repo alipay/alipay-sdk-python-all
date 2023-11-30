@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayIserviceCliveConnectCloseModel(object):
 
     def __init__(self):
+        self._close_type = None
         self._conversation_id = None
         self._src = None
         self._visitor_token = None
 
+    @property
+    def close_type(self):
+        return self._close_type
+
+    @close_type.setter
+    def close_type(self, value):
+        self._close_type = value
     @property
     def conversation_id(self):
         return self._conversation_id
@@ -37,6 +45,11 @@ class AlipayIserviceCliveConnectCloseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.close_type:
+            if hasattr(self.close_type, 'to_alipay_dict'):
+                params['close_type'] = self.close_type.to_alipay_dict()
+            else:
+                params['close_type'] = self.close_type
         if self.conversation_id:
             if hasattr(self.conversation_id, 'to_alipay_dict'):
                 params['conversation_id'] = self.conversation_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayIserviceCliveConnectCloseModel(object):
         if not d:
             return None
         o = AlipayIserviceCliveConnectCloseModel()
+        if 'close_type' in d:
+            o.close_type = d['close_type']
         if 'conversation_id' in d:
             o.conversation_id = d['conversation_id']
         if 'src' in d:

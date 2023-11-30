@@ -32,10 +32,7 @@ class AlipayFundBatchCloseModel(object):
 
     @product_code.setter
     def product_code(self, value):
-        if isinstance(value, list):
-            self._product_code = list()
-            for i in value:
-                self._product_code.append(i)
+        self._product_code = value
 
 
     def to_alipay_dict(self):
@@ -51,11 +48,6 @@ class AlipayFundBatchCloseModel(object):
             else:
                 params['biz_scene'] = self.biz_scene
         if self.product_code:
-            if isinstance(self.product_code, list):
-                for i in range(0, len(self.product_code)):
-                    element = self.product_code[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.product_code[i] = element.to_alipay_dict()
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:

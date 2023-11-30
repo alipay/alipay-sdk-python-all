@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EffectiveDatesDTO import EffectiveDatesDTO
 from alipay.aop.api.domain.RentInfoDTO import RentInfoDTO
 
 
@@ -11,11 +12,13 @@ class MiniGoodsDetailInfoDTO(object):
     def __init__(self):
         self._body = None
         self._categories_tree = None
+        self._effective_dates = None
         self._goods_category = None
         self._goods_id = None
         self._goods_name = None
         self._image_material_id = None
         self._item_cnt = None
+        self._item_discount = None
         self._out_item_id = None
         self._out_sku_id = None
         self._platform_item_version_id = None
@@ -38,6 +41,19 @@ class MiniGoodsDetailInfoDTO(object):
     @categories_tree.setter
     def categories_tree(self, value):
         self._categories_tree = value
+    @property
+    def effective_dates(self):
+        return self._effective_dates
+
+    @effective_dates.setter
+    def effective_dates(self, value):
+        if isinstance(value, list):
+            self._effective_dates = list()
+            for i in value:
+                if isinstance(i, EffectiveDatesDTO):
+                    self._effective_dates.append(i)
+                else:
+                    self._effective_dates.append(EffectiveDatesDTO.from_alipay_dict(i))
     @property
     def goods_category(self):
         return self._goods_category
@@ -73,6 +89,13 @@ class MiniGoodsDetailInfoDTO(object):
     @item_cnt.setter
     def item_cnt(self, value):
         self._item_cnt = value
+    @property
+    def item_discount(self):
+        return self._item_discount
+
+    @item_discount.setter
+    def item_discount(self, value):
+        self._item_discount = value
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -139,6 +162,16 @@ class MiniGoodsDetailInfoDTO(object):
                 params['categories_tree'] = self.categories_tree.to_alipay_dict()
             else:
                 params['categories_tree'] = self.categories_tree
+        if self.effective_dates:
+            if isinstance(self.effective_dates, list):
+                for i in range(0, len(self.effective_dates)):
+                    element = self.effective_dates[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.effective_dates[i] = element.to_alipay_dict()
+            if hasattr(self.effective_dates, 'to_alipay_dict'):
+                params['effective_dates'] = self.effective_dates.to_alipay_dict()
+            else:
+                params['effective_dates'] = self.effective_dates
         if self.goods_category:
             if hasattr(self.goods_category, 'to_alipay_dict'):
                 params['goods_category'] = self.goods_category.to_alipay_dict()
@@ -164,6 +197,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['item_cnt'] = self.item_cnt.to_alipay_dict()
             else:
                 params['item_cnt'] = self.item_cnt
+        if self.item_discount:
+            if hasattr(self.item_discount, 'to_alipay_dict'):
+                params['item_discount'] = self.item_discount.to_alipay_dict()
+            else:
+                params['item_discount'] = self.item_discount
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -210,6 +248,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.body = d['body']
         if 'categories_tree' in d:
             o.categories_tree = d['categories_tree']
+        if 'effective_dates' in d:
+            o.effective_dates = d['effective_dates']
         if 'goods_category' in d:
             o.goods_category = d['goods_category']
         if 'goods_id' in d:
@@ -220,6 +260,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.image_material_id = d['image_material_id']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
+        if 'item_discount' in d:
+            o.item_discount = d['item_discount']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:

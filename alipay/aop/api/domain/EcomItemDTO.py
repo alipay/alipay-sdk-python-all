@@ -9,6 +9,7 @@ from alipay.aop.api.domain.EcomItemExtendDetailDTO import EcomItemExtendDetailDT
 class EcomItemDTO(object):
 
     def __init__(self):
+        self._alipay_item_id = None
         self._buyout_money = None
         self._cat_order_count = None
         self._cat_order_refund_exchange_rate = None
@@ -28,6 +29,13 @@ class EcomItemDTO(object):
         self._sku_max_price = None
         self._sku_min_price = None
 
+    @property
+    def alipay_item_id(self):
+        return self._alipay_item_id
+
+    @alipay_item_id.setter
+    def alipay_item_id(self, value):
+        self._alipay_item_id = value
     @property
     def buyout_money(self):
         return self._buyout_money
@@ -161,6 +169,11 @@ class EcomItemDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_item_id:
+            if hasattr(self.alipay_item_id, 'to_alipay_dict'):
+                params['alipay_item_id'] = self.alipay_item_id.to_alipay_dict()
+            else:
+                params['alipay_item_id'] = self.alipay_item_id
         if self.buyout_money:
             if hasattr(self.buyout_money, 'to_alipay_dict'):
                 params['buyout_money'] = self.buyout_money.to_alipay_dict()
@@ -258,6 +271,8 @@ class EcomItemDTO(object):
         if not d:
             return None
         o = EcomItemDTO()
+        if 'alipay_item_id' in d:
+            o.alipay_item_id = d['alipay_item_id']
         if 'buyout_money' in d:
             o.buyout_money = d['buyout_money']
         if 'cat_order_count' in d:

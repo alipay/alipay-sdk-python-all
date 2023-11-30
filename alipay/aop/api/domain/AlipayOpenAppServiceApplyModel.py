@@ -14,6 +14,7 @@ class AlipayOpenAppServiceApplyModel(object):
         self._service_code = None
         self._service_xml = None
         self._template_type = None
+        self._user_service_delivery_type = None
 
     @property
     def category_id(self):
@@ -57,6 +58,13 @@ class AlipayOpenAppServiceApplyModel(object):
     @template_type.setter
     def template_type(self, value):
         self._template_type = value
+    @property
+    def user_service_delivery_type(self):
+        return self._user_service_delivery_type
+
+    @user_service_delivery_type.setter
+    def user_service_delivery_type(self, value):
+        self._user_service_delivery_type = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AlipayOpenAppServiceApplyModel(object):
                 params['template_type'] = self.template_type.to_alipay_dict()
             else:
                 params['template_type'] = self.template_type
+        if self.user_service_delivery_type:
+            if hasattr(self.user_service_delivery_type, 'to_alipay_dict'):
+                params['user_service_delivery_type'] = self.user_service_delivery_type.to_alipay_dict()
+            else:
+                params['user_service_delivery_type'] = self.user_service_delivery_type
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AlipayOpenAppServiceApplyModel(object):
             o.service_xml = d['service_xml']
         if 'template_type' in d:
             o.template_type = d['template_type']
+        if 'user_service_delivery_type' in d:
+            o.user_service_delivery_type = d['user_service_delivery_type']
         return o
 
 

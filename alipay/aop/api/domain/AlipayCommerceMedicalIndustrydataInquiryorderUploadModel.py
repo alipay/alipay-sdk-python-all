@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MedicalInquiryOrderExtInfo import MedicalInquiryOrderExtInfo
 
 
 class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
@@ -14,6 +15,7 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
         self._amount = None
         self._department_name = None
         self._doctor_name = None
+        self._ext_info = None
         self._hospital_name = None
         self._inquiry_mode = None
         self._inquiry_type = None
@@ -74,6 +76,16 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
     @doctor_name.setter
     def doctor_name(self, value):
         self._doctor_name = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, MedicalInquiryOrderExtInfo):
+            self._ext_info = value
+        else:
+            self._ext_info = MedicalInquiryOrderExtInfo.from_alipay_dict(value)
     @property
     def hospital_name(self):
         return self._hospital_name
@@ -227,6 +239,11 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
                 params['doctor_name'] = self.doctor_name.to_alipay_dict()
             else:
                 params['doctor_name'] = self.doctor_name
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.hospital_name:
             if hasattr(self.hospital_name, 'to_alipay_dict'):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
@@ -331,6 +348,8 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
             o.department_name = d['department_name']
         if 'doctor_name' in d:
             o.doctor_name = d['doctor_name']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
         if 'inquiry_mode' in d:

@@ -17,6 +17,7 @@ class MiniInstantiateInfo(object):
         self._status = None
         self._template_id = None
         self._template_name = None
+        self._template_version = None
 
     @property
     def app_name(self):
@@ -81,6 +82,13 @@ class MiniInstantiateInfo(object):
     @template_name.setter
     def template_name(self, value):
         self._template_name = value
+    @property
+    def template_version(self):
+        return self._template_version
+
+    @template_version.setter
+    def template_version(self, value):
+        self._template_version = value
 
 
     def to_alipay_dict(self):
@@ -130,6 +138,11 @@ class MiniInstantiateInfo(object):
                 params['template_name'] = self.template_name.to_alipay_dict()
             else:
                 params['template_name'] = self.template_name
+        if self.template_version:
+            if hasattr(self.template_version, 'to_alipay_dict'):
+                params['template_version'] = self.template_version.to_alipay_dict()
+            else:
+                params['template_version'] = self.template_version
         return params
 
     @staticmethod
@@ -155,6 +168,8 @@ class MiniInstantiateInfo(object):
             o.template_id = d['template_id']
         if 'template_name' in d:
             o.template_name = d['template_name']
+        if 'template_version' in d:
+            o.template_version = d['template_version']
         return o
 
 

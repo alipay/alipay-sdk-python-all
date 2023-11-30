@@ -19,6 +19,7 @@ class AlipayInsSceneInsserviceprodSerattachmentUploadRequest(object):
         self._file_path = None
         self._file_size = None
         self._file_type = None
+        self._file_url = None
         self._out_biz_no = None
         self._ser_biz_no = None
         self._ser_biz_type = None
@@ -90,6 +91,13 @@ class AlipayInsSceneInsserviceprodSerattachmentUploadRequest(object):
     @file_type.setter
     def file_type(self, value):
         self._file_type = value
+    @property
+    def file_url(self):
+        return self._file_url
+
+    @file_url.setter
+    def file_url(self, value):
+        self._file_url = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -241,6 +249,11 @@ class AlipayInsSceneInsserviceprodSerattachmentUploadRequest(object):
                 params['file_type'] = json.dumps(obj=self.file_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['file_type'] = self.file_type
+        if self.file_url:
+            if hasattr(self.file_url, 'to_alipay_dict'):
+                params['file_url'] = json.dumps(obj=self.file_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['file_url'] = self.file_url
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = json.dumps(obj=self.out_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

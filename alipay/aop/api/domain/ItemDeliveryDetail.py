@@ -14,6 +14,7 @@ class ItemDeliveryDetail(object):
         self._logistic_code = None
         self._logistics_name = None
         self._logistics_no = None
+        self._voucher_time = None
 
     @property
     def amount(self):
@@ -57,6 +58,13 @@ class ItemDeliveryDetail(object):
     @logistics_no.setter
     def logistics_no(self, value):
         self._logistics_no = value
+    @property
+    def voucher_time(self):
+        return self._voucher_time
+
+    @voucher_time.setter
+    def voucher_time(self, value):
+        self._voucher_time = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class ItemDeliveryDetail(object):
                 params['logistics_no'] = self.logistics_no.to_alipay_dict()
             else:
                 params['logistics_no'] = self.logistics_no
+        if self.voucher_time:
+            if hasattr(self.voucher_time, 'to_alipay_dict'):
+                params['voucher_time'] = self.voucher_time.to_alipay_dict()
+            else:
+                params['voucher_time'] = self.voucher_time
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class ItemDeliveryDetail(object):
             o.logistics_name = d['logistics_name']
         if 'logistics_no' in d:
             o.logistics_no = d['logistics_no']
+        if 'voucher_time' in d:
+            o.voucher_time = d['voucher_time']
         return o
 
 

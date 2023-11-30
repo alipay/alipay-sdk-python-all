@@ -20,7 +20,11 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
         self._organizer_id = None
         self._organizer_name = None
         self._pre_content = None
+        self._show_name = None
+        self._show_picture = None
+        self._show_public = None
         self._task_desc = None
+        self._task_detail_url = None
         self._task_end_time = None
         self._task_name = None
         self._task_start_time = None
@@ -107,12 +111,40 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
     def pre_content(self, value):
         self._pre_content = value
     @property
+    def show_name(self):
+        return self._show_name
+
+    @show_name.setter
+    def show_name(self, value):
+        self._show_name = value
+    @property
+    def show_picture(self):
+        return self._show_picture
+
+    @show_picture.setter
+    def show_picture(self, value):
+        self._show_picture = value
+    @property
+    def show_public(self):
+        return self._show_public
+
+    @show_public.setter
+    def show_public(self, value):
+        self._show_public = value
+    @property
     def task_desc(self):
         return self._task_desc
 
     @task_desc.setter
     def task_desc(self, value):
         self._task_desc = value
+    @property
+    def task_detail_url(self):
+        return self._task_detail_url
+
+    @task_detail_url.setter
+    def task_detail_url(self, value):
+        self._task_detail_url = value
     @property
     def task_end_time(self):
         return self._task_end_time
@@ -200,11 +232,31 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
                 params['pre_content'] = self.pre_content.to_alipay_dict()
             else:
                 params['pre_content'] = self.pre_content
+        if self.show_name:
+            if hasattr(self.show_name, 'to_alipay_dict'):
+                params['show_name'] = self.show_name.to_alipay_dict()
+            else:
+                params['show_name'] = self.show_name
+        if self.show_picture:
+            if hasattr(self.show_picture, 'to_alipay_dict'):
+                params['show_picture'] = self.show_picture.to_alipay_dict()
+            else:
+                params['show_picture'] = self.show_picture
+        if self.show_public:
+            if hasattr(self.show_public, 'to_alipay_dict'):
+                params['show_public'] = self.show_public.to_alipay_dict()
+            else:
+                params['show_public'] = self.show_public
         if self.task_desc:
             if hasattr(self.task_desc, 'to_alipay_dict'):
                 params['task_desc'] = self.task_desc.to_alipay_dict()
             else:
                 params['task_desc'] = self.task_desc
+        if self.task_detail_url:
+            if hasattr(self.task_detail_url, 'to_alipay_dict'):
+                params['task_detail_url'] = self.task_detail_url.to_alipay_dict()
+            else:
+                params['task_detail_url'] = self.task_detail_url
         if self.task_end_time:
             if hasattr(self.task_end_time, 'to_alipay_dict'):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
@@ -254,8 +306,16 @@ class AlipayCommerceCommonTasktemplateCreateormodifyModel(object):
             o.organizer_name = d['organizer_name']
         if 'pre_content' in d:
             o.pre_content = d['pre_content']
+        if 'show_name' in d:
+            o.show_name = d['show_name']
+        if 'show_picture' in d:
+            o.show_picture = d['show_picture']
+        if 'show_public' in d:
+            o.show_public = d['show_public']
         if 'task_desc' in d:
             o.task_desc = d['task_desc']
+        if 'task_detail_url' in d:
+            o.task_detail_url = d['task_detail_url']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
         if 'task_name' in d:

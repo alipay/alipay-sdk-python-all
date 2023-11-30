@@ -51,6 +51,7 @@ class AntMerchantExpandIndirectZftModifyModel(object):
         self._sign_time_with_isv = None
         self._sites = None
         self._smid = None
+        self._trade_scene = None
 
     @property
     def additional_cert_image(self):
@@ -346,6 +347,16 @@ class AntMerchantExpandIndirectZftModifyModel(object):
     @smid.setter
     def smid(self, value):
         self._smid = value
+    @property
+    def trade_scene(self):
+        return self._trade_scene
+
+    @trade_scene.setter
+    def trade_scene(self, value):
+        if isinstance(value, list):
+            self._trade_scene = list()
+            for i in value:
+                self._trade_scene.append(i)
 
 
     def to_alipay_dict(self):
@@ -565,6 +576,16 @@ class AntMerchantExpandIndirectZftModifyModel(object):
                 params['smid'] = self.smid.to_alipay_dict()
             else:
                 params['smid'] = self.smid
+        if self.trade_scene:
+            if isinstance(self.trade_scene, list):
+                for i in range(0, len(self.trade_scene)):
+                    element = self.trade_scene[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_scene[i] = element.to_alipay_dict()
+            if hasattr(self.trade_scene, 'to_alipay_dict'):
+                params['trade_scene'] = self.trade_scene.to_alipay_dict()
+            else:
+                params['trade_scene'] = self.trade_scene
         return params
 
     @staticmethod
@@ -644,6 +665,8 @@ class AntMerchantExpandIndirectZftModifyModel(object):
             o.sites = d['sites']
         if 'smid' in d:
             o.smid = d['smid']
+        if 'trade_scene' in d:
+            o.trade_scene = d['trade_scene']
         return o
 
 

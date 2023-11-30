@@ -14,6 +14,7 @@ class AlipayCommerceCommonTaskrewardSettleModel(object):
         self._out_biz_no = None
         self._reward_way = None
         self._task_instance_id = None
+        self._unfreeze_time = None
         self._valid_trade_amount = None
 
     @property
@@ -59,6 +60,13 @@ class AlipayCommerceCommonTaskrewardSettleModel(object):
     def task_instance_id(self, value):
         self._task_instance_id = value
     @property
+    def unfreeze_time(self):
+        return self._unfreeze_time
+
+    @unfreeze_time.setter
+    def unfreeze_time(self, value):
+        self._unfreeze_time = value
+    @property
     def valid_trade_amount(self):
         return self._valid_trade_amount
 
@@ -99,6 +107,11 @@ class AlipayCommerceCommonTaskrewardSettleModel(object):
                 params['task_instance_id'] = self.task_instance_id.to_alipay_dict()
             else:
                 params['task_instance_id'] = self.task_instance_id
+        if self.unfreeze_time:
+            if hasattr(self.unfreeze_time, 'to_alipay_dict'):
+                params['unfreeze_time'] = self.unfreeze_time.to_alipay_dict()
+            else:
+                params['unfreeze_time'] = self.unfreeze_time
         if self.valid_trade_amount:
             if hasattr(self.valid_trade_amount, 'to_alipay_dict'):
                 params['valid_trade_amount'] = self.valid_trade_amount.to_alipay_dict()
@@ -123,6 +136,8 @@ class AlipayCommerceCommonTaskrewardSettleModel(object):
             o.reward_way = d['reward_way']
         if 'task_instance_id' in d:
             o.task_instance_id = d['task_instance_id']
+        if 'unfreeze_time' in d:
+            o.unfreeze_time = d['unfreeze_time']
         if 'valid_trade_amount' in d:
             o.valid_trade_amount = d['valid_trade_amount']
         return o

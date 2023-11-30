@@ -13,6 +13,7 @@ class AlipayOverseasOpenIndraccountConsultModel(object):
         self._bank_code = None
         self._beneficiary_id = None
         self._country = None
+        self._receipt_method = None
         self._scene_type = None
         self._swift_code = None
 
@@ -51,6 +52,13 @@ class AlipayOverseasOpenIndraccountConsultModel(object):
     @country.setter
     def country(self, value):
         self._country = value
+    @property
+    def receipt_method(self):
+        return self._receipt_method
+
+    @receipt_method.setter
+    def receipt_method(self, value):
+        self._receipt_method = value
     @property
     def scene_type(self):
         return self._scene_type
@@ -94,6 +102,11 @@ class AlipayOverseasOpenIndraccountConsultModel(object):
                 params['country'] = self.country.to_alipay_dict()
             else:
                 params['country'] = self.country
+        if self.receipt_method:
+            if hasattr(self.receipt_method, 'to_alipay_dict'):
+                params['receipt_method'] = self.receipt_method.to_alipay_dict()
+            else:
+                params['receipt_method'] = self.receipt_method
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayOverseasOpenIndraccountConsultModel(object):
             o.beneficiary_id = d['beneficiary_id']
         if 'country' in d:
             o.country = d['country']
+        if 'receipt_method' in d:
+            o.receipt_method = d['receipt_method']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'swift_code' in d:

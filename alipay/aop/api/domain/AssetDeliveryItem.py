@@ -22,6 +22,9 @@ class AssetDeliveryItem(object):
         self._biz_scene = None
         self._biz_tag = None
         self._biz_type = None
+        self._combination_batch_no = None
+        self._combination_count = None
+        self._combination_orders = None
         self._custom_clearance = None
         self._delivery_assign_order_item_id = None
         self._delivery_process_no = None
@@ -33,6 +36,7 @@ class AssetDeliveryItem(object):
         self._ext_info = None
         self._from_address = None
         self._gmt_assign = None
+        self._is_combination_order = None
         self._item_id = None
         self._item_name = None
         self._logistics_info = None
@@ -122,6 +126,30 @@ class AssetDeliveryItem(object):
     def biz_type(self, value):
         self._biz_type = value
     @property
+    def combination_batch_no(self):
+        return self._combination_batch_no
+
+    @combination_batch_no.setter
+    def combination_batch_no(self, value):
+        self._combination_batch_no = value
+    @property
+    def combination_count(self):
+        return self._combination_count
+
+    @combination_count.setter
+    def combination_count(self, value):
+        self._combination_count = value
+    @property
+    def combination_orders(self):
+        return self._combination_orders
+
+    @combination_orders.setter
+    def combination_orders(self, value):
+        if isinstance(value, list):
+            self._combination_orders = list()
+            for i in value:
+                self._combination_orders.append(i)
+    @property
     def custom_clearance(self):
         return self._custom_clearance
 
@@ -204,6 +232,13 @@ class AssetDeliveryItem(object):
     @gmt_assign.setter
     def gmt_assign(self, value):
         self._gmt_assign = value
+    @property
+    def is_combination_order(self):
+        return self._is_combination_order
+
+    @is_combination_order.setter
+    def is_combination_order(self, value):
+        self._is_combination_order = value
     @property
     def item_id(self):
         return self._item_id
@@ -383,6 +418,26 @@ class AssetDeliveryItem(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.combination_batch_no:
+            if hasattr(self.combination_batch_no, 'to_alipay_dict'):
+                params['combination_batch_no'] = self.combination_batch_no.to_alipay_dict()
+            else:
+                params['combination_batch_no'] = self.combination_batch_no
+        if self.combination_count:
+            if hasattr(self.combination_count, 'to_alipay_dict'):
+                params['combination_count'] = self.combination_count.to_alipay_dict()
+            else:
+                params['combination_count'] = self.combination_count
+        if self.combination_orders:
+            if isinstance(self.combination_orders, list):
+                for i in range(0, len(self.combination_orders)):
+                    element = self.combination_orders[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.combination_orders[i] = element.to_alipay_dict()
+            if hasattr(self.combination_orders, 'to_alipay_dict'):
+                params['combination_orders'] = self.combination_orders.to_alipay_dict()
+            else:
+                params['combination_orders'] = self.combination_orders
         if self.custom_clearance:
             if hasattr(self.custom_clearance, 'to_alipay_dict'):
                 params['custom_clearance'] = self.custom_clearance.to_alipay_dict()
@@ -438,6 +493,11 @@ class AssetDeliveryItem(object):
                 params['gmt_assign'] = self.gmt_assign.to_alipay_dict()
             else:
                 params['gmt_assign'] = self.gmt_assign
+        if self.is_combination_order:
+            if hasattr(self.is_combination_order, 'to_alipay_dict'):
+                params['is_combination_order'] = self.is_combination_order.to_alipay_dict()
+            else:
+                params['is_combination_order'] = self.is_combination_order
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -550,6 +610,12 @@ class AssetDeliveryItem(object):
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'combination_batch_no' in d:
+            o.combination_batch_no = d['combination_batch_no']
+        if 'combination_count' in d:
+            o.combination_count = d['combination_count']
+        if 'combination_orders' in d:
+            o.combination_orders = d['combination_orders']
         if 'custom_clearance' in d:
             o.custom_clearance = d['custom_clearance']
         if 'delivery_assign_order_item_id' in d:
@@ -572,6 +638,8 @@ class AssetDeliveryItem(object):
             o.from_address = d['from_address']
         if 'gmt_assign' in d:
             o.gmt_assign = d['gmt_assign']
+        if 'is_combination_order' in d:
+            o.is_combination_order = d['is_combination_order']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_name' in d:

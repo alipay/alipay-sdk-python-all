@@ -11,6 +11,7 @@ class PriceInfoDTO(object):
         self._additional_price = None
         self._discounted_price = None
         self._freight = None
+        self._merchant_value_price = None
         self._order_price = None
 
     @property
@@ -34,6 +35,13 @@ class PriceInfoDTO(object):
     @freight.setter
     def freight(self, value):
         self._freight = value
+    @property
+    def merchant_value_price(self):
+        return self._merchant_value_price
+
+    @merchant_value_price.setter
+    def merchant_value_price(self, value):
+        self._merchant_value_price = value
     @property
     def order_price(self):
         return self._order_price
@@ -60,6 +68,11 @@ class PriceInfoDTO(object):
                 params['freight'] = self.freight.to_alipay_dict()
             else:
                 params['freight'] = self.freight
+        if self.merchant_value_price:
+            if hasattr(self.merchant_value_price, 'to_alipay_dict'):
+                params['merchant_value_price'] = self.merchant_value_price.to_alipay_dict()
+            else:
+                params['merchant_value_price'] = self.merchant_value_price
         if self.order_price:
             if hasattr(self.order_price, 'to_alipay_dict'):
                 params['order_price'] = self.order_price.to_alipay_dict()
@@ -78,6 +91,8 @@ class PriceInfoDTO(object):
             o.discounted_price = d['discounted_price']
         if 'freight' in d:
             o.freight = d['freight']
+        if 'merchant_value_price' in d:
+            o.merchant_value_price = d['merchant_value_price']
         if 'order_price' in d:
             o.order_price = d['order_price']
         return o

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ParticipantPartyBizParams import ParticipantPartyBizParams
 
 
 class ParticipantPartyForm(object):
@@ -11,6 +12,7 @@ class ParticipantPartyForm(object):
         self._identity = None
         self._identity_type = None
         self._name = None
+        self._participant_party_biz_params = None
 
     @property
     def identity(self):
@@ -33,6 +35,16 @@ class ParticipantPartyForm(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def participant_party_biz_params(self):
+        return self._participant_party_biz_params
+
+    @participant_party_biz_params.setter
+    def participant_party_biz_params(self, value):
+        if isinstance(value, ParticipantPartyBizParams):
+            self._participant_party_biz_params = value
+        else:
+            self._participant_party_biz_params = ParticipantPartyBizParams.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -52,6 +64,11 @@ class ParticipantPartyForm(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.participant_party_biz_params:
+            if hasattr(self.participant_party_biz_params, 'to_alipay_dict'):
+                params['participant_party_biz_params'] = self.participant_party_biz_params.to_alipay_dict()
+            else:
+                params['participant_party_biz_params'] = self.participant_party_biz_params
         return params
 
     @staticmethod
@@ -65,6 +82,8 @@ class ParticipantPartyForm(object):
             o.identity_type = d['identity_type']
         if 'name' in d:
             o.name = d['name']
+        if 'participant_party_biz_params' in d:
+            o.participant_party_biz_params = d['participant_party_biz_params']
         return o
 
 

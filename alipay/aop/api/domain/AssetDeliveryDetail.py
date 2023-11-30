@@ -14,6 +14,7 @@ class AssetDeliveryDetail(object):
         self._batch_no = None
         self._ext_info = None
         self._logistics_infos = None
+        self._voucher_time = None
 
     @property
     def amount(self):
@@ -56,6 +57,13 @@ class AssetDeliveryDetail(object):
                     self._logistics_infos.append(i)
                 else:
                     self._logistics_infos.append(LogisticsInfo.from_alipay_dict(i))
+    @property
+    def voucher_time(self):
+        return self._voucher_time
+
+    @voucher_time.setter
+    def voucher_time(self, value):
+        self._voucher_time = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +98,11 @@ class AssetDeliveryDetail(object):
                 params['logistics_infos'] = self.logistics_infos.to_alipay_dict()
             else:
                 params['logistics_infos'] = self.logistics_infos
+        if self.voucher_time:
+            if hasattr(self.voucher_time, 'to_alipay_dict'):
+                params['voucher_time'] = self.voucher_time.to_alipay_dict()
+            else:
+                params['voucher_time'] = self.voucher_time
         return params
 
     @staticmethod
@@ -107,6 +120,8 @@ class AssetDeliveryDetail(object):
             o.ext_info = d['ext_info']
         if 'logistics_infos' in d:
             o.logistics_infos = d['logistics_infos']
+        if 'voucher_time' in d:
+            o.voucher_time = d['voucher_time']
         return o
 
 

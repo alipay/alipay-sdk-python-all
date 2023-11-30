@@ -9,7 +9,7 @@ class ConsumeExtend(object):
 
     def __init__(self):
         self._mall_assign_store = None
-        self._show_wallet_info_balance = None
+        self._recycle_industry = None
 
     @property
     def mall_assign_store(self):
@@ -19,12 +19,12 @@ class ConsumeExtend(object):
     def mall_assign_store(self, value):
         self._mall_assign_store = value
     @property
-    def show_wallet_info_balance(self):
-        return self._show_wallet_info_balance
+    def recycle_industry(self):
+        return self._recycle_industry
 
-    @show_wallet_info_balance.setter
-    def show_wallet_info_balance(self, value):
-        self._show_wallet_info_balance = value
+    @recycle_industry.setter
+    def recycle_industry(self, value):
+        self._recycle_industry = value
 
 
     def to_alipay_dict(self):
@@ -34,11 +34,11 @@ class ConsumeExtend(object):
                 params['mall_assign_store'] = self.mall_assign_store.to_alipay_dict()
             else:
                 params['mall_assign_store'] = self.mall_assign_store
-        if self.show_wallet_info_balance:
-            if hasattr(self.show_wallet_info_balance, 'to_alipay_dict'):
-                params['show_wallet_info_balance'] = self.show_wallet_info_balance.to_alipay_dict()
+        if self.recycle_industry:
+            if hasattr(self.recycle_industry, 'to_alipay_dict'):
+                params['recycle_industry'] = self.recycle_industry.to_alipay_dict()
             else:
-                params['show_wallet_info_balance'] = self.show_wallet_info_balance
+                params['recycle_industry'] = self.recycle_industry
         return params
 
     @staticmethod
@@ -48,8 +48,8 @@ class ConsumeExtend(object):
         o = ConsumeExtend()
         if 'mall_assign_store' in d:
             o.mall_assign_store = d['mall_assign_store']
-        if 'show_wallet_info_balance' in d:
-            o.show_wallet_info_balance = d['show_wallet_info_balance']
+        if 'recycle_industry' in d:
+            o.recycle_industry = d['recycle_industry']
         return o
 
 

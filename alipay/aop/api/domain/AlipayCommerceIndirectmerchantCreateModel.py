@@ -9,7 +9,9 @@ from alipay.aop.api.domain.MerchantSettleRelationProcessorRequest import Merchan
 class AlipayCommerceIndirectmerchantCreateModel(object):
 
     def __init__(self):
+        self._industry_template_code = None
         self._login_id = None
+        self._logo_image_id = None
         self._logo_url = None
         self._merchant_app_id = None
         self._merchant_name = None
@@ -18,12 +20,26 @@ class AlipayCommerceIndirectmerchantCreateModel(object):
         self._smid = None
 
     @property
+    def industry_template_code(self):
+        return self._industry_template_code
+
+    @industry_template_code.setter
+    def industry_template_code(self, value):
+        self._industry_template_code = value
+    @property
     def login_id(self):
         return self._login_id
 
     @login_id.setter
     def login_id(self, value):
         self._login_id = value
+    @property
+    def logo_image_id(self):
+        return self._logo_image_id
+
+    @logo_image_id.setter
+    def logo_image_id(self, value):
+        self._logo_image_id = value
     @property
     def logo_url(self):
         return self._logo_url
@@ -76,11 +92,21 @@ class AlipayCommerceIndirectmerchantCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.industry_template_code:
+            if hasattr(self.industry_template_code, 'to_alipay_dict'):
+                params['industry_template_code'] = self.industry_template_code.to_alipay_dict()
+            else:
+                params['industry_template_code'] = self.industry_template_code
         if self.login_id:
             if hasattr(self.login_id, 'to_alipay_dict'):
                 params['login_id'] = self.login_id.to_alipay_dict()
             else:
                 params['login_id'] = self.login_id
+        if self.logo_image_id:
+            if hasattr(self.logo_image_id, 'to_alipay_dict'):
+                params['logo_image_id'] = self.logo_image_id.to_alipay_dict()
+            else:
+                params['logo_image_id'] = self.logo_image_id
         if self.logo_url:
             if hasattr(self.logo_url, 'to_alipay_dict'):
                 params['logo_url'] = self.logo_url.to_alipay_dict()
@@ -123,8 +149,12 @@ class AlipayCommerceIndirectmerchantCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceIndirectmerchantCreateModel()
+        if 'industry_template_code' in d:
+            o.industry_template_code = d['industry_template_code']
         if 'login_id' in d:
             o.login_id = d['login_id']
+        if 'logo_image_id' in d:
+            o.logo_image_id = d['logo_image_id']
         if 'logo_url' in d:
             o.logo_url = d['logo_url']
         if 'merchant_app_id' in d:
