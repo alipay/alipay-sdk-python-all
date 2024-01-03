@@ -11,6 +11,7 @@ from alipay.aop.api.domain.LogisticsInfoDTO import LogisticsInfoDTO
 from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
+from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 
 
 class AlipayOpenMiniOrderCreateModel(object):
@@ -31,6 +32,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._path = None
         self._promo_detail_info = None
         self._seller_id = None
+        self._shop_info = None
         self._source_id = None
         self._timeout_express = None
         self._title = None
@@ -165,6 +167,16 @@ class AlipayOpenMiniOrderCreateModel(object):
     def seller_id(self, value):
         self._seller_id = value
     @property
+    def shop_info(self):
+        return self._shop_info
+
+    @shop_info.setter
+    def shop_info(self, value):
+        if isinstance(value, ShopInfoDTO):
+            self._shop_info = value
+        else:
+            self._shop_info = ShopInfoDTO.from_alipay_dict(value)
+    @property
     def source_id(self):
         return self._source_id
 
@@ -264,6 +276,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.shop_info:
+            if hasattr(self.shop_info, 'to_alipay_dict'):
+                params['shop_info'] = self.shop_info.to_alipay_dict()
+            else:
+                params['shop_info'] = self.shop_info
         if self.source_id:
             if hasattr(self.source_id, 'to_alipay_dict'):
                 params['source_id'] = self.source_id.to_alipay_dict()
@@ -316,6 +333,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.promo_detail_info = d['promo_detail_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'shop_info' in d:
+            o.shop_info = d['shop_info']
         if 'source_id' in d:
             o.source_id = d['source_id']
         if 'timeout_express' in d:

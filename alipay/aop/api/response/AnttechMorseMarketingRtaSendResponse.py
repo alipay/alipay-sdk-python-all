@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.SendEquityOrderResult import SendEquityOrderResult
+from alipay.aop.api.domain.SendEquityOrderResult import SendEquityOrderResult
 
 
 class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
         super(AnttechMorseMarketingRtaSendResponse, self).__init__()
         self._biz_no = None
         self._campaign_id = None
+        self._send_equity_order_list = None
         self._send_equity_order_result_list = None
         self._send_order_id = None
         self._send_order_time = None
@@ -31,6 +33,19 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
     @campaign_id.setter
     def campaign_id(self, value):
         self._campaign_id = value
+    @property
+    def send_equity_order_list(self):
+        return self._send_equity_order_list
+
+    @send_equity_order_list.setter
+    def send_equity_order_list(self, value):
+        if isinstance(value, list):
+            self._send_equity_order_list = list()
+            for i in value:
+                if isinstance(i, SendEquityOrderResult):
+                    self._send_equity_order_list.append(i)
+                else:
+                    self._send_equity_order_list.append(SendEquityOrderResult.from_alipay_dict(i))
     @property
     def send_equity_order_result_list(self):
         return self._send_equity_order_result_list
@@ -69,6 +84,8 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
             self.biz_no = response['biz_no']
         if 'campaign_id' in response:
             self.campaign_id = response['campaign_id']
+        if 'send_equity_order_list' in response:
+            self.send_equity_order_list = response['send_equity_order_list']
         if 'send_equity_order_result_list' in response:
             self.send_equity_order_result_list = response['send_equity_order_result_list']
         if 'send_order_id' in response:

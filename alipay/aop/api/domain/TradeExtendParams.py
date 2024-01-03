@@ -14,6 +14,7 @@ class TradeExtendParams(object):
         self._insurance_subsidy_type = None
         self._medical_card_id = None
         self._medical_ins_card_id = None
+        self._platform_source = None
         self._request_content = None
         self._scene = None
         self._sys_service_provider_id = None
@@ -60,6 +61,13 @@ class TradeExtendParams(object):
     @medical_ins_card_id.setter
     def medical_ins_card_id(self, value):
         self._medical_ins_card_id = value
+    @property
+    def platform_source(self):
+        return self._platform_source
+
+    @platform_source.setter
+    def platform_source(self, value):
+        self._platform_source = value
     @property
     def request_content(self):
         return self._request_content
@@ -115,6 +123,11 @@ class TradeExtendParams(object):
                 params['medical_ins_card_id'] = self.medical_ins_card_id.to_alipay_dict()
             else:
                 params['medical_ins_card_id'] = self.medical_ins_card_id
+        if self.platform_source:
+            if hasattr(self.platform_source, 'to_alipay_dict'):
+                params['platform_source'] = self.platform_source.to_alipay_dict()
+            else:
+                params['platform_source'] = self.platform_source
         if self.request_content:
             if hasattr(self.request_content, 'to_alipay_dict'):
                 params['request_content'] = self.request_content.to_alipay_dict()
@@ -149,6 +162,8 @@ class TradeExtendParams(object):
             o.medical_card_id = d['medical_card_id']
         if 'medical_ins_card_id' in d:
             o.medical_ins_card_id = d['medical_ins_card_id']
+        if 'platform_source' in d:
+            o.platform_source = d['platform_source']
         if 'request_content' in d:
             o.request_content = d['request_content']
         if 'scene' in d:

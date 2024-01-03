@@ -33,6 +33,7 @@ class AssetDeliveryItem(object):
         self._delivery_supplier_full_name = None
         self._delivery_supplier_id = None
         self._delivery_supplier_name = None
+        self._delivery_type = None
         self._ext_info = None
         self._from_address = None
         self._gmt_assign = None
@@ -208,6 +209,13 @@ class AssetDeliveryItem(object):
     @delivery_supplier_name.setter
     def delivery_supplier_name(self, value):
         self._delivery_supplier_name = value
+    @property
+    def delivery_type(self):
+        return self._delivery_type
+
+    @delivery_type.setter
+    def delivery_type(self, value):
+        self._delivery_type = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -478,6 +486,11 @@ class AssetDeliveryItem(object):
                 params['delivery_supplier_name'] = self.delivery_supplier_name.to_alipay_dict()
             else:
                 params['delivery_supplier_name'] = self.delivery_supplier_name
+        if self.delivery_type:
+            if hasattr(self.delivery_type, 'to_alipay_dict'):
+                params['delivery_type'] = self.delivery_type.to_alipay_dict()
+            else:
+                params['delivery_type'] = self.delivery_type
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -632,6 +645,8 @@ class AssetDeliveryItem(object):
             o.delivery_supplier_id = d['delivery_supplier_id']
         if 'delivery_supplier_name' in d:
             o.delivery_supplier_name = d['delivery_supplier_name']
+        if 'delivery_type' in d:
+            o.delivery_type = d['delivery_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'from_address' in d:

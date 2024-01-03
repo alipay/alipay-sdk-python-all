@@ -9,9 +9,17 @@ class AlipayUserKabaoVoucherModifyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayUserKabaoVoucherModifyResponse, self).__init__()
+        self._error_msg = None
         self._instance_id = None
         self._out_instance_id = None
 
+    @property
+    def error_msg(self):
+        return self._error_msg
+
+    @error_msg.setter
+    def error_msg(self, value):
+        self._error_msg = value
     @property
     def instance_id(self):
         return self._instance_id
@@ -29,6 +37,8 @@ class AlipayUserKabaoVoucherModifyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserKabaoVoucherModifyResponse, self).parse_response_content(response_content)
+        if 'error_msg' in response:
+            self.error_msg = response['error_msg']
         if 'instance_id' in response:
             self.instance_id = response['instance_id']
         if 'out_instance_id' in response:

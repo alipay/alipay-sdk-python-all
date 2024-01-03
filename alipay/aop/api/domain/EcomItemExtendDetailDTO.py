@@ -12,6 +12,9 @@ class EcomItemExtendDetailDTO(object):
         self._card_use_amount = None
         self._card_use_count = None
         self._card_use_period = None
+        self._charge_box_no = None
+        self._charge_box_plug_total = None
+        self._charge_box_type = None
         self._charge_station_address = None
         self._charge_station_area = None
         self._charge_station_city = None
@@ -58,6 +61,27 @@ class EcomItemExtendDetailDTO(object):
     @card_use_period.setter
     def card_use_period(self, value):
         self._card_use_period = value
+    @property
+    def charge_box_no(self):
+        return self._charge_box_no
+
+    @charge_box_no.setter
+    def charge_box_no(self, value):
+        self._charge_box_no = value
+    @property
+    def charge_box_plug_total(self):
+        return self._charge_box_plug_total
+
+    @charge_box_plug_total.setter
+    def charge_box_plug_total(self, value):
+        self._charge_box_plug_total = value
+    @property
+    def charge_box_type(self):
+        return self._charge_box_type
+
+    @charge_box_type.setter
+    def charge_box_type(self, value):
+        self._charge_box_type = value
     @property
     def charge_station_address(self):
         return self._charge_station_address
@@ -201,6 +225,21 @@ class EcomItemExtendDetailDTO(object):
                 params['card_use_period'] = self.card_use_period.to_alipay_dict()
             else:
                 params['card_use_period'] = self.card_use_period
+        if self.charge_box_no:
+            if hasattr(self.charge_box_no, 'to_alipay_dict'):
+                params['charge_box_no'] = self.charge_box_no.to_alipay_dict()
+            else:
+                params['charge_box_no'] = self.charge_box_no
+        if self.charge_box_plug_total:
+            if hasattr(self.charge_box_plug_total, 'to_alipay_dict'):
+                params['charge_box_plug_total'] = self.charge_box_plug_total.to_alipay_dict()
+            else:
+                params['charge_box_plug_total'] = self.charge_box_plug_total
+        if self.charge_box_type:
+            if hasattr(self.charge_box_type, 'to_alipay_dict'):
+                params['charge_box_type'] = self.charge_box_type.to_alipay_dict()
+            else:
+                params['charge_box_type'] = self.charge_box_type
         if self.charge_station_address:
             if hasattr(self.charge_station_address, 'to_alipay_dict'):
                 params['charge_station_address'] = self.charge_station_address.to_alipay_dict()
@@ -301,6 +340,12 @@ class EcomItemExtendDetailDTO(object):
             o.card_use_count = d['card_use_count']
         if 'card_use_period' in d:
             o.card_use_period = d['card_use_period']
+        if 'charge_box_no' in d:
+            o.charge_box_no = d['charge_box_no']
+        if 'charge_box_plug_total' in d:
+            o.charge_box_plug_total = d['charge_box_plug_total']
+        if 'charge_box_type' in d:
+            o.charge_box_type = d['charge_box_type']
         if 'charge_station_address' in d:
             o.charge_station_address = d['charge_station_address']
         if 'charge_station_area' in d:

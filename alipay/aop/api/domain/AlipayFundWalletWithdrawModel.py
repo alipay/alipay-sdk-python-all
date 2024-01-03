@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ExtendStrategy import ExtendStrategy
 from alipay.aop.api.domain.WithdrawExtend import WithdrawExtend
 
 
@@ -11,6 +12,7 @@ class AlipayFundWalletWithdrawModel(object):
     def __init__(self):
         self._amount = None
         self._biz_scene = None
+        self._extend_strategy = None
         self._order_title = None
         self._out_biz_no = None
         self._product_code = None
@@ -31,6 +33,16 @@ class AlipayFundWalletWithdrawModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def extend_strategy(self):
+        return self._extend_strategy
+
+    @extend_strategy.setter
+    def extend_strategy(self, value):
+        if isinstance(value, ExtendStrategy):
+            self._extend_strategy = value
+        else:
+            self._extend_strategy = ExtendStrategy.from_alipay_dict(value)
     @property
     def order_title(self):
         return self._order_title
@@ -83,6 +95,11 @@ class AlipayFundWalletWithdrawModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.extend_strategy:
+            if hasattr(self.extend_strategy, 'to_alipay_dict'):
+                params['extend_strategy'] = self.extend_strategy.to_alipay_dict()
+            else:
+                params['extend_strategy'] = self.extend_strategy
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -119,6 +136,8 @@ class AlipayFundWalletWithdrawModel(object):
             o.amount = d['amount']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'extend_strategy' in d:
+            o.extend_strategy = d['extend_strategy']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_biz_no' in d:

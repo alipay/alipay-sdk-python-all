@@ -14,6 +14,7 @@ class AlipayUserDtbankcustActivityQueryModel(object):
         self._discount_use_scene_map_string = None
         self._last_activity_id = None
         self._limit = None
+        self._pid_set = None
         self._source = None
         self._sub_source = None
         self._user_id = None
@@ -69,6 +70,16 @@ class AlipayUserDtbankcustActivityQueryModel(object):
     @limit.setter
     def limit(self, value):
         self._limit = value
+    @property
+    def pid_set(self):
+        return self._pid_set
+
+    @pid_set.setter
+    def pid_set(self, value):
+        if isinstance(value, list):
+            self._pid_set = list()
+            for i in value:
+                self._pid_set.append(i)
     @property
     def source(self):
         return self._source
@@ -139,6 +150,16 @@ class AlipayUserDtbankcustActivityQueryModel(object):
                 params['limit'] = self.limit.to_alipay_dict()
             else:
                 params['limit'] = self.limit
+        if self.pid_set:
+            if isinstance(self.pid_set, list):
+                for i in range(0, len(self.pid_set)):
+                    element = self.pid_set[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pid_set[i] = element.to_alipay_dict()
+            if hasattr(self.pid_set, 'to_alipay_dict'):
+                params['pid_set'] = self.pid_set.to_alipay_dict()
+            else:
+                params['pid_set'] = self.pid_set
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -173,6 +194,8 @@ class AlipayUserDtbankcustActivityQueryModel(object):
             o.last_activity_id = d['last_activity_id']
         if 'limit' in d:
             o.limit = d['limit']
+        if 'pid_set' in d:
+            o.pid_set = d['pid_set']
         if 'source' in d:
             o.source = d['source']
         if 'sub_source' in d:

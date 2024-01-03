@@ -12,6 +12,7 @@ class ParticipantForm(object):
         self._identity_id = None
         self._identity_type = None
         self._principal_open_id = None
+        self._real_name = None
 
     @property
     def ext_info(self):
@@ -41,6 +42,13 @@ class ParticipantForm(object):
     @principal_open_id.setter
     def principal_open_id(self, value):
         self._principal_open_id = value
+    @property
+    def real_name(self):
+        return self._real_name
+
+    @real_name.setter
+    def real_name(self, value):
+        self._real_name = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class ParticipantForm(object):
                 params['principal_open_id'] = self.principal_open_id.to_alipay_dict()
             else:
                 params['principal_open_id'] = self.principal_open_id
+        if self.real_name:
+            if hasattr(self.real_name, 'to_alipay_dict'):
+                params['real_name'] = self.real_name.to_alipay_dict()
+            else:
+                params['real_name'] = self.real_name
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class ParticipantForm(object):
             o.identity_type = d['identity_type']
         if 'principal_open_id' in d:
             o.principal_open_id = d['principal_open_id']
+        if 'real_name' in d:
+            o.real_name = d['real_name']
         return o
 
 

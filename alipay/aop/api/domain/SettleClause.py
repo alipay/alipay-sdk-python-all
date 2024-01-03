@@ -15,6 +15,7 @@ class SettleClause(object):
         self._settle_account_id = None
         self._settle_account_id_type = None
         self._settle_account_type = None
+        self._settle_entity_biz_type = None
         self._settle_entity_id = None
         self._settle_entity_type = None
         self._sub_merchant = None
@@ -61,6 +62,13 @@ class SettleClause(object):
     @settle_account_type.setter
     def settle_account_type(self, value):
         self._settle_account_type = value
+    @property
+    def settle_entity_biz_type(self):
+        return self._settle_entity_biz_type
+
+    @settle_entity_biz_type.setter
+    def settle_entity_biz_type(self, value):
+        self._settle_entity_biz_type = value
     @property
     def settle_entity_id(self):
         return self._settle_entity_id
@@ -119,6 +127,11 @@ class SettleClause(object):
                 params['settle_account_type'] = self.settle_account_type.to_alipay_dict()
             else:
                 params['settle_account_type'] = self.settle_account_type
+        if self.settle_entity_biz_type:
+            if hasattr(self.settle_entity_biz_type, 'to_alipay_dict'):
+                params['settle_entity_biz_type'] = self.settle_entity_biz_type.to_alipay_dict()
+            else:
+                params['settle_entity_biz_type'] = self.settle_entity_biz_type
         if self.settle_entity_id:
             if hasattr(self.settle_entity_id, 'to_alipay_dict'):
                 params['settle_entity_id'] = self.settle_entity_id.to_alipay_dict()
@@ -153,6 +166,8 @@ class SettleClause(object):
             o.settle_account_id_type = d['settle_account_id_type']
         if 'settle_account_type' in d:
             o.settle_account_type = d['settle_account_type']
+        if 'settle_entity_biz_type' in d:
+            o.settle_entity_biz_type = d['settle_entity_biz_type']
         if 'settle_entity_id' in d:
             o.settle_entity_id = d['settle_entity_id']
         if 'settle_entity_type' in d:

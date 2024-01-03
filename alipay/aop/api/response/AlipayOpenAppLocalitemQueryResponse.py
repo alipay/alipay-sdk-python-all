@@ -32,6 +32,7 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._scene_risk_info = None
         self._skus = None
         self._sold_time = None
+        self._spu_id = None
         self._spu_status = None
         self._stock_num = None
         self._title = None
@@ -190,6 +191,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         else:
             self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
     @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
+    @property
     def spu_status(self):
         return self._spu_status
 
@@ -254,6 +262,8 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.skus = response['skus']
         if 'sold_time' in response:
             self.sold_time = response['sold_time']
+        if 'spu_id' in response:
+            self.spu_id = response['spu_id']
         if 'spu_status' in response:
             self.spu_status = response['spu_status']
         if 'stock_num' in response:

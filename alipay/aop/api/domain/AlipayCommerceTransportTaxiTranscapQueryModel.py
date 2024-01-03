@@ -10,6 +10,7 @@ class AlipayCommerceTransportTaxiTranscapQueryModel(object):
     def __init__(self):
         self._car_no = None
         self._city_code = None
+        self._corp_id = None
         self._request_id = None
         self._request_time = None
         self._vehicle_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceTransportTaxiTranscapQueryModel(object):
     @city_code.setter
     def city_code(self, value):
         self._city_code = value
+    @property
+    def corp_id(self):
+        return self._corp_id
+
+    @corp_id.setter
+    def corp_id(self, value):
+        self._corp_id = value
     @property
     def request_id(self):
         return self._request_id
@@ -63,6 +71,11 @@ class AlipayCommerceTransportTaxiTranscapQueryModel(object):
                 params['city_code'] = self.city_code.to_alipay_dict()
             else:
                 params['city_code'] = self.city_code
+        if self.corp_id:
+            if hasattr(self.corp_id, 'to_alipay_dict'):
+                params['corp_id'] = self.corp_id.to_alipay_dict()
+            else:
+                params['corp_id'] = self.corp_id
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceTransportTaxiTranscapQueryModel(object):
             o.car_no = d['car_no']
         if 'city_code' in d:
             o.city_code = d['city_code']
+        if 'corp_id' in d:
+            o.corp_id = d['corp_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'request_time' in d:

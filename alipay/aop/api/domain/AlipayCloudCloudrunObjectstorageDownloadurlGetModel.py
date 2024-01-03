@@ -10,6 +10,7 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
 
     def __init__(self):
         self._assume_token = None
+        self._auth_key = None
         self._env = None
         self._file_list = None
 
@@ -20,6 +21,13 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
     @assume_token.setter
     def assume_token(self, value):
         self._assume_token = value
+    @property
+    def auth_key(self):
+        return self._auth_key
+
+    @auth_key.setter
+    def auth_key(self, value):
+        self._auth_key = value
     @property
     def env(self):
         return self._env
@@ -49,6 +57,11 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
                 params['assume_token'] = self.assume_token.to_alipay_dict()
             else:
                 params['assume_token'] = self.assume_token
+        if self.auth_key:
+            if hasattr(self.auth_key, 'to_alipay_dict'):
+                params['auth_key'] = self.auth_key.to_alipay_dict()
+            else:
+                params['auth_key'] = self.auth_key
         if self.env:
             if hasattr(self.env, 'to_alipay_dict'):
                 params['env'] = self.env.to_alipay_dict()
@@ -73,6 +86,8 @@ class AlipayCloudCloudrunObjectstorageDownloadurlGetModel(object):
         o = AlipayCloudCloudrunObjectstorageDownloadurlGetModel()
         if 'assume_token' in d:
             o.assume_token = d['assume_token']
+        if 'auth_key' in d:
+            o.auth_key = d['auth_key']
         if 'env' in d:
             o.env = d['env']
         if 'file_list' in d:

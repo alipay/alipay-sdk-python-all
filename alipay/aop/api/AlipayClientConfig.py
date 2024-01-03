@@ -37,6 +37,9 @@ class AlipayClientConfig(object):
         # 请求读取超时，单位秒，默认15s
         self._timeout = 15
 
+        # 是否跳过签名
+        self._skip_sign = False
+
     @property
     def app_id(self):
         return self._app_id
@@ -117,5 +120,10 @@ class AlipayClientConfig(object):
     def timeout(self, value):
         self._timeout = value
 
+    @property
+    def skip_sign(self):
+        return self._skip_sign
 
-
+    @skip_sign.setter
+    def skip_sign(self, value):
+        self._skip_sign = value

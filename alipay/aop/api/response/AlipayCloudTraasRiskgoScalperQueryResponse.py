@@ -18,10 +18,13 @@ class AlipayCloudTraasRiskgoScalperQueryResponse(AlipayResponse):
 
     @risk_result.setter
     def risk_result(self, value):
-        if isinstance(value, RiskImagePlusQueryResult):
-            self._risk_result = value
-        else:
-            self._risk_result = RiskImagePlusQueryResult.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._risk_result = list()
+            for i in value:
+                if isinstance(i, RiskImagePlusQueryResult):
+                    self._risk_result.append(i)
+                else:
+                    self._risk_result.append(RiskImagePlusQueryResult.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudTraasRiskgoScalperQueryResponse, self).parse_response_content(response_content)

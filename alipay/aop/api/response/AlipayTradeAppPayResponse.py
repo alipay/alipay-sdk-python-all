@@ -13,6 +13,7 @@ class AlipayTradeAppPayResponse(AlipayResponse):
         self._credit_biz_order_id = None
         self._credit_pay_mode = None
         self._merchant_order_no = None
+        self._orderStr = None
         self._out_trade_no = None
         self._seller_id = None
         self._total_amount = None
@@ -46,6 +47,13 @@ class AlipayTradeAppPayResponse(AlipayResponse):
     @merchant_order_no.setter
     def merchant_order_no(self, value):
         self._merchant_order_no = value
+    @property
+    def orderStr(self):
+        return self._orderStr
+
+    @orderStr.setter
+    def orderStr(self, value):
+        self._orderStr = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -85,6 +93,8 @@ class AlipayTradeAppPayResponse(AlipayResponse):
             self.credit_pay_mode = response['credit_pay_mode']
         if 'merchant_order_no' in response:
             self.merchant_order_no = response['merchant_order_no']
+        if 'orderStr' in response:
+            self.orderStr = response['orderStr']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'seller_id' in response:

@@ -9,6 +9,7 @@ class AlipayFundCouponWufuCardApplyModel(object):
 
     def __init__(self):
         self._biz_id = None
+        self._open_id = None
         self._sence_code = None
         self._user_id = None
 
@@ -19,6 +20,13 @@ class AlipayFundCouponWufuCardApplyModel(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sence_code(self):
         return self._sence_code
@@ -42,6 +50,11 @@ class AlipayFundCouponWufuCardApplyModel(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sence_code:
             if hasattr(self.sence_code, 'to_alipay_dict'):
                 params['sence_code'] = self.sence_code.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayFundCouponWufuCardApplyModel(object):
         o = AlipayFundCouponWufuCardApplyModel()
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sence_code' in d:
             o.sence_code = d['sence_code']
         if 'user_id' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceCommonGuidedcodeReceiveResponse(AlipayResponse):
         self._guided_code = None
         self._guided_code_img = None
         self._guided_share_code = None
+        self._guided_short_url = None
 
     @property
     def guided_code(self):
@@ -34,6 +35,13 @@ class AlipayCommerceCommonGuidedcodeReceiveResponse(AlipayResponse):
     @guided_share_code.setter
     def guided_share_code(self, value):
         self._guided_share_code = value
+    @property
+    def guided_short_url(self):
+        return self._guided_short_url
+
+    @guided_short_url.setter
+    def guided_short_url(self, value):
+        self._guided_short_url = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceCommonGuidedcodeReceiveResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayCommerceCommonGuidedcodeReceiveResponse(AlipayResponse):
             self.guided_code_img = response['guided_code_img']
         if 'guided_share_code' in response:
             self.guided_share_code = response['guided_share_code']
+        if 'guided_short_url' in response:
+            self.guided_short_url = response['guided_short_url']

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class Schedule(object):
 
     def __init__(self):
+        self._async = None
         self._open = None
         self._param_id = None
         self._param_name = None
@@ -15,6 +16,13 @@ class Schedule(object):
         self._period_crond_expr = None
         self._type = None
 
+    @property
+    def async(self):
+        return self._async
+
+    @async.setter
+    def async(self, value):
+        self._async = value
     @property
     def open(self):
         return self._open
@@ -61,6 +69,11 @@ class Schedule(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.async:
+            if hasattr(self.async, 'to_alipay_dict'):
+                params['async'] = self.async.to_alipay_dict()
+            else:
+                params['async'] = self.async
         if self.open:
             if hasattr(self.open, 'to_alipay_dict'):
                 params['open'] = self.open.to_alipay_dict()
@@ -98,6 +111,8 @@ class Schedule(object):
         if not d:
             return None
         o = Schedule()
+        if 'async' in d:
+            o.async = d['async']
         if 'open' in d:
             o.open = d['open']
         if 'param_id' in d:

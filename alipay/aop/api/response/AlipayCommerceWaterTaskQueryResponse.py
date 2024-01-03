@@ -18,12 +18,14 @@ class AlipayCommerceWaterTaskQueryResponse(AlipayResponse):
         self._task_condition = None
         self._task_contract_period = None
         self._task_end = None
+        self._task_free = None
         self._task_id = None
         self._task_join_count = None
         self._task_name = None
         self._task_start = None
         self._task_status = None
         self._task_title = None
+        self._task_type = None
 
     @property
     def creator(self):
@@ -85,6 +87,13 @@ class AlipayCommerceWaterTaskQueryResponse(AlipayResponse):
     def task_end(self, value):
         self._task_end = value
     @property
+    def task_free(self):
+        return self._task_free
+
+    @task_free.setter
+    def task_free(self, value):
+        self._task_free = value
+    @property
     def task_id(self):
         return self._task_id
 
@@ -126,6 +135,13 @@ class AlipayCommerceWaterTaskQueryResponse(AlipayResponse):
     @task_title.setter
     def task_title(self, value):
         self._task_title = value
+    @property
+    def task_type(self):
+        return self._task_type
+
+    @task_type.setter
+    def task_type(self, value):
+        self._task_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceWaterTaskQueryResponse, self).parse_response_content(response_content)
@@ -145,6 +161,8 @@ class AlipayCommerceWaterTaskQueryResponse(AlipayResponse):
             self.task_contract_period = response['task_contract_period']
         if 'task_end' in response:
             self.task_end = response['task_end']
+        if 'task_free' in response:
+            self.task_free = response['task_free']
         if 'task_id' in response:
             self.task_id = response['task_id']
         if 'task_join_count' in response:
@@ -157,3 +175,5 @@ class AlipayCommerceWaterTaskQueryResponse(AlipayResponse):
             self.task_status = response['task_status']
         if 'task_title' in response:
             self.task_title = response['task_title']
+        if 'task_type' in response:
+            self.task_type = response['task_type']

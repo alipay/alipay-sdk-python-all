@@ -19,6 +19,7 @@ class SupplierSkuInfo(object):
         self._fragile_flag = None
         self._hazardous_flag = None
         self._item_code = None
+        self._item_listing_channels = None
         self._item_name = None
         self._item_type = None
         self._liquid_flag = None
@@ -104,6 +105,13 @@ class SupplierSkuInfo(object):
     @item_code.setter
     def item_code(self, value):
         self._item_code = value
+    @property
+    def item_listing_channels(self):
+        return self._item_listing_channels
+
+    @item_listing_channels.setter
+    def item_listing_channels(self, value):
+        self._item_listing_channels = value
     @property
     def item_name(self):
         return self._item_name
@@ -219,6 +227,11 @@ class SupplierSkuInfo(object):
                 params['item_code'] = self.item_code.to_alipay_dict()
             else:
                 params['item_code'] = self.item_code
+        if self.item_listing_channels:
+            if hasattr(self.item_listing_channels, 'to_alipay_dict'):
+                params['item_listing_channels'] = self.item_listing_channels.to_alipay_dict()
+            else:
+                params['item_listing_channels'] = self.item_listing_channels
         if self.item_name:
             if hasattr(self.item_name, 'to_alipay_dict'):
                 params['item_name'] = self.item_name.to_alipay_dict()
@@ -286,6 +299,8 @@ class SupplierSkuInfo(object):
             o.hazardous_flag = d['hazardous_flag']
         if 'item_code' in d:
             o.item_code = d['item_code']
+        if 'item_listing_channels' in d:
+            o.item_listing_channels = d['item_listing_channels']
         if 'item_name' in d:
             o.item_name = d['item_name']
         if 'item_type' in d:

@@ -120,14 +120,16 @@ class DefaultAlipayClient(object):
         all_params.update(params)
         all_params.update(common_params)
         sign_content = get_sign_content(all_params)
-        try:
-            if self.__config.sign_type and self.__config.sign_type == 'RSA2':
-                sign = sign_with_rsa2(self.__config.app_private_key, sign_content, self.__config.charset)
-            else:
-                sign = sign_with_rsa(self.__config.app_private_key, sign_content, self.__config.charset)
-        except Exception as e:
-            raise RequestException('[' + THREAD_LOCAL.uuid + ']request sign failed. ' + str(e))
-        common_params[P_SIGN] = sign
+        sign = ''
+        if not self.__config.skip_sign:
+            try:
+                if self.__config.sign_type and self.__config.sign_type == 'RSA2':
+                    sign = sign_with_rsa2(self.__config.app_private_key, sign_content, self.__config.charset)
+                else:
+                    sign = sign_with_rsa(self.__config.app_private_key, sign_content, self.__config.charset)
+            except Exception as e:
+                raise RequestException('[' + THREAD_LOCAL.uuid + ']request sign failed. ' + str(e))
+            common_params[P_SIGN] = sign
         self.__remove_common_params(params)
 
         log_url = self.__config.server_url + '?' + sign_content + "&sign=" + sign
@@ -144,6 +146,36 @@ class DefaultAlipayClient(object):
             response_str = response_str.decode(self.__config.charset)
         if THREAD_LOCAL.logger:
             THREAD_LOCAL.logger.info('[' + THREAD_LOCAL.uuid + ']response:' + response_str)
+
+        if self.__config.skip_sign:
+            m1 = PATTERN_RESPONSE_BEGIN.search(response_str)
+            em1 = PATTERN_RESPONSE_ENCRYPT_BEGIN.search(response_str)
+            if not m1 and not em1:
+                raise ResponseException('[' + THREAD_LOCAL.uuid + ']response shape maybe illegal. ' + response_str)
+            begin_index = 0
+            end_index = 0
+            has_encrypted = False
+            if m1:
+                begin_index = m1.end() - 1
+                end_index = self.__extract_json_object_end_position(response_str, begin_index)
+            elif em1:
+                begin_index = em1.end() - 1
+                end_index = self.__extract_json_base64_value_end_position(response_str, begin_index)
+                has_encrypted = True
+
+            if begin_index >= end_index:
+                return response_str
+
+            response_content = response_str[begin_index:end_index]
+            if PYTHON_VERSION_3:
+                response_content = response_content.encode(self.__config.charset)
+
+            response_content = response_content.decode(self.__config.charset)
+            if has_encrypted and self.__config.encrypt_type and self.__config.encrypt_key:
+                response_content = decrypt_content(response_content[1:-1], self.__config.encrypt_type,
+                                                   self.__config.encrypt_key, self.__config.charset)
+
+            return response_content
 
         response_content = None
         sign = None
@@ -195,6 +227,62 @@ class DefaultAlipayClient(object):
                                                self.__config.encrypt_key, self.__config.charset)
         return response_content
 
+    '''
+    提取密文验签内容终点
+    '''
+    def __extract_json_base64_value_end_position(self, response_string, begin_position):
+        for index in range(begin_position, len(response_string)):
+            # 找到第2个双引号作为终点，由于中间全部是Base64编码的密文，所以不会有干扰的特殊字符
+            if response_string[index] == '"' and index != begin_position:
+                return index + 1
+
+        # 如果没有找到第2个双引号，说明验签内容片段提取失败，直接尝试选取剩余整个响应字符串进行验签
+        return len(response_string)
+
+    '''
+    提取明文验签内容终点
+    '''
+    def __extract_json_object_end_position(self, response_string, begin_position):
+        # 记录当前尚未发现配对闭合的大括号
+        braces = []
+        # 记录当前字符是否在双引号中
+        in_quotes = False
+        # 记录当前字符前面连续的转义字符个数
+        consecutive_escape_count = 0
+
+        # 从待验签字符的起点开始遍历后续字符串，找出待验签字符串的终止点，终点即是与起点{配对的}
+        for index in range(begin_position, len(response_string)):
+            # 提取当前字符
+            current_char = response_string[index]
+
+            # 如果当前字符是"且前面有偶数个转义标记（0也是偶数）
+            if current_char == '"' and consecutive_escape_count % 2 == 0:
+                # 是否在引号中的状态取反
+                in_quotes = not in_quotes
+
+            # 如果当前字符是{且不在引号中
+            elif current_char == '{' and not in_quotes:
+                # 将该{加入未闭合括号中
+                braces.append("{")
+
+            # 如果当前字符是}且不在引号中
+            elif current_char == '}' and not in_quotes:
+                # 弹出一个未闭合括号
+                braces.pop()
+                # 如果弹出后，未闭合括号为空，说明已经找到终点
+                if len(braces) == 0:
+                    return index + 1
+
+            # 如果当前字符是转义字符
+            if current_char == '\\':
+                # 连续转义字符个数+1
+                consecutive_escape_count += 1
+            else:
+                # 连续转义字符个数置0
+                consecutive_escape_count = 0
+
+        # 如果没有找到配对的闭合括号，说明验签内容片段提取失败，直接尝试选取剩余整个响应字符串进行验签
+        return len(response_string)
 
     """
     执行接口请求

@@ -13,6 +13,7 @@ class AssetReverseDetail(object):
         self._batch_no = None
         self._goods_status = None
         self._success = None
+        self._voucher_time = None
 
     @property
     def amount(self):
@@ -49,6 +50,13 @@ class AssetReverseDetail(object):
     @success.setter
     def success(self, value):
         self._success = value
+    @property
+    def voucher_time(self):
+        return self._voucher_time
+
+    @voucher_time.setter
+    def voucher_time(self, value):
+        self._voucher_time = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AssetReverseDetail(object):
                 params['success'] = self.success.to_alipay_dict()
             else:
                 params['success'] = self.success
+        if self.voucher_time:
+            if hasattr(self.voucher_time, 'to_alipay_dict'):
+                params['voucher_time'] = self.voucher_time.to_alipay_dict()
+            else:
+                params['voucher_time'] = self.voucher_time
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AssetReverseDetail(object):
             o.goods_status = d['goods_status']
         if 'success' in d:
             o.success = d['success']
+        if 'voucher_time' in d:
+            o.voucher_time = d['voucher_time']
         return o
 
 

@@ -9,9 +9,13 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
 
     def __init__(self):
         self._addon_period_num = None
+        self._installment_no = None
+        self._installment_no_type = None
+        self._installment_price = None
         self._is_finish_performance = None
         self._open_id = None
         self._order_id = None
+        self._out_installment_order_id = None
         self._out_order_id = None
         self._period_num = None
         self._trade_no = None
@@ -25,6 +29,27 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     @addon_period_num.setter
     def addon_period_num(self, value):
         self._addon_period_num = value
+    @property
+    def installment_no(self):
+        return self._installment_no
+
+    @installment_no.setter
+    def installment_no(self, value):
+        self._installment_no = value
+    @property
+    def installment_no_type(self):
+        return self._installment_no_type
+
+    @installment_no_type.setter
+    def installment_no_type(self, value):
+        self._installment_no_type = value
+    @property
+    def installment_price(self):
+        return self._installment_price
+
+    @installment_price.setter
+    def installment_price(self, value):
+        self._installment_price = value
     @property
     def is_finish_performance(self):
         return self._is_finish_performance
@@ -46,6 +71,13 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def out_installment_order_id(self):
+        return self._out_installment_order_id
+
+    @out_installment_order_id.setter
+    def out_installment_order_id(self, value):
+        self._out_installment_order_id = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -90,6 +122,21 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['addon_period_num'] = self.addon_period_num.to_alipay_dict()
             else:
                 params['addon_period_num'] = self.addon_period_num
+        if self.installment_no:
+            if hasattr(self.installment_no, 'to_alipay_dict'):
+                params['installment_no'] = self.installment_no.to_alipay_dict()
+            else:
+                params['installment_no'] = self.installment_no
+        if self.installment_no_type:
+            if hasattr(self.installment_no_type, 'to_alipay_dict'):
+                params['installment_no_type'] = self.installment_no_type.to_alipay_dict()
+            else:
+                params['installment_no_type'] = self.installment_no_type
+        if self.installment_price:
+            if hasattr(self.installment_price, 'to_alipay_dict'):
+                params['installment_price'] = self.installment_price.to_alipay_dict()
+            else:
+                params['installment_price'] = self.installment_price
         if self.is_finish_performance:
             if hasattr(self.is_finish_performance, 'to_alipay_dict'):
                 params['is_finish_performance'] = self.is_finish_performance.to_alipay_dict()
@@ -105,6 +152,11 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.out_installment_order_id:
+            if hasattr(self.out_installment_order_id, 'to_alipay_dict'):
+                params['out_installment_order_id'] = self.out_installment_order_id.to_alipay_dict()
+            else:
+                params['out_installment_order_id'] = self.out_installment_order_id
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -139,12 +191,20 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
         o = AlipayOpenMiniOrderInstallmentCreateModel()
         if 'addon_period_num' in d:
             o.addon_period_num = d['addon_period_num']
+        if 'installment_no' in d:
+            o.installment_no = d['installment_no']
+        if 'installment_no_type' in d:
+            o.installment_no_type = d['installment_no_type']
+        if 'installment_price' in d:
+            o.installment_price = d['installment_price']
         if 'is_finish_performance' in d:
             o.is_finish_performance = d['is_finish_performance']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'out_installment_order_id' in d:
+            o.out_installment_order_id = d['out_installment_order_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'period_num' in d:

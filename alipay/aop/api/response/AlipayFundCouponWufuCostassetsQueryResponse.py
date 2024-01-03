@@ -13,6 +13,7 @@ class AlipayFundCouponWufuCostassetsQueryResponse(AlipayResponse):
         self._can_cost = None
         self._card_numbers = None
         self._have_enough_cards = None
+        self._not_enough_jump_url = None
         self._result_code = None
         self._result_desc = None
         self._result_view = None
@@ -45,6 +46,13 @@ class AlipayFundCouponWufuCostassetsQueryResponse(AlipayResponse):
     @have_enough_cards.setter
     def have_enough_cards(self, value):
         self._have_enough_cards = value
+    @property
+    def not_enough_jump_url(self):
+        return self._not_enough_jump_url
+
+    @not_enough_jump_url.setter
+    def not_enough_jump_url(self, value):
+        self._not_enough_jump_url = value
     @property
     def result_code(self):
         return self._result_code
@@ -82,6 +90,8 @@ class AlipayFundCouponWufuCostassetsQueryResponse(AlipayResponse):
             self.card_numbers = response['card_numbers']
         if 'have_enough_cards' in response:
             self.have_enough_cards = response['have_enough_cards']
+        if 'not_enough_jump_url' in response:
+            self.not_enough_jump_url = response['not_enough_jump_url']
         if 'result_code' in response:
             self.result_code = response['result_code']
         if 'result_desc' in response:

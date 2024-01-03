@@ -25,6 +25,7 @@ class AlipayOpenAppLocalitemModifyModel(object):
         self._path = None
         self._skus = None
         self._sold_time = None
+        self._spu_id = None
         self._title = None
 
     @property
@@ -137,6 +138,13 @@ class AlipayOpenAppLocalitemModifyModel(object):
         else:
             self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
     @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
+    @property
     def title(self):
         return self._title
 
@@ -222,6 +230,11 @@ class AlipayOpenAppLocalitemModifyModel(object):
                 params['sold_time'] = self.sold_time.to_alipay_dict()
             else:
                 params['sold_time'] = self.sold_time
+        if self.spu_id:
+            if hasattr(self.spu_id, 'to_alipay_dict'):
+                params['spu_id'] = self.spu_id.to_alipay_dict()
+            else:
+                params['spu_id'] = self.spu_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -260,6 +273,8 @@ class AlipayOpenAppLocalitemModifyModel(object):
             o.skus = d['skus']
         if 'sold_time' in d:
             o.sold_time = d['sold_time']
+        if 'spu_id' in d:
+            o.spu_id = d['spu_id']
         if 'title' in d:
             o.title = d['title']
         return o

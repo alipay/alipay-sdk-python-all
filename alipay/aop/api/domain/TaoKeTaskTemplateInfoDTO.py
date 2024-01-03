@@ -16,10 +16,12 @@ class TaoKeTaskTemplateInfoDTO(object):
         self._incentive = None
         self._incentive_mode = None
         self._incentive_rule = None
+        self._max_receive_num = None
         self._organizer_id = None
         self._organizer_type = None
         self._owner_pid = None
         self._status = None
+        self._task_desc = None
         self._task_end_time = None
         self._task_name = None
         self._task_start_time = None
@@ -79,6 +81,13 @@ class TaoKeTaskTemplateInfoDTO(object):
         else:
             self._incentive_rule = RealAmountRatioIncentiveRule.from_alipay_dict(value)
     @property
+    def max_receive_num(self):
+        return self._max_receive_num
+
+    @max_receive_num.setter
+    def max_receive_num(self, value):
+        self._max_receive_num = value
+    @property
     def organizer_id(self):
         return self._organizer_id
 
@@ -106,6 +115,13 @@ class TaoKeTaskTemplateInfoDTO(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def task_desc(self):
+        return self._task_desc
+
+    @task_desc.setter
+    def task_desc(self, value):
+        self._task_desc = value
     @property
     def task_end_time(self):
         return self._task_end_time
@@ -180,6 +196,11 @@ class TaoKeTaskTemplateInfoDTO(object):
                 params['incentive_rule'] = self.incentive_rule.to_alipay_dict()
             else:
                 params['incentive_rule'] = self.incentive_rule
+        if self.max_receive_num:
+            if hasattr(self.max_receive_num, 'to_alipay_dict'):
+                params['max_receive_num'] = self.max_receive_num.to_alipay_dict()
+            else:
+                params['max_receive_num'] = self.max_receive_num
         if self.organizer_id:
             if hasattr(self.organizer_id, 'to_alipay_dict'):
                 params['organizer_id'] = self.organizer_id.to_alipay_dict()
@@ -200,6 +221,11 @@ class TaoKeTaskTemplateInfoDTO(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.task_desc:
+            if hasattr(self.task_desc, 'to_alipay_dict'):
+                params['task_desc'] = self.task_desc.to_alipay_dict()
+            else:
+                params['task_desc'] = self.task_desc
         if self.task_end_time:
             if hasattr(self.task_end_time, 'to_alipay_dict'):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
@@ -246,6 +272,8 @@ class TaoKeTaskTemplateInfoDTO(object):
             o.incentive_mode = d['incentive_mode']
         if 'incentive_rule' in d:
             o.incentive_rule = d['incentive_rule']
+        if 'max_receive_num' in d:
+            o.max_receive_num = d['max_receive_num']
         if 'organizer_id' in d:
             o.organizer_id = d['organizer_id']
         if 'organizer_type' in d:
@@ -254,6 +282,8 @@ class TaoKeTaskTemplateInfoDTO(object):
             o.owner_pid = d['owner_pid']
         if 'status' in d:
             o.status = d['status']
+        if 'task_desc' in d:
+            o.task_desc = d['task_desc']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
         if 'task_name' in d:

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSerialInfo import CertificateSerialInfo
+from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 
 
 class CertificateUseResult(object):
@@ -19,6 +20,7 @@ class CertificateUseResult(object):
         self._out_order_id = None
         self._result = None
         self._serial_info_list = None
+        self._sku_info = None
         self._use_order_no = None
 
     @property
@@ -91,6 +93,16 @@ class CertificateUseResult(object):
         else:
             self._serial_info_list = CertificateSerialInfo.from_alipay_dict(value)
     @property
+    def sku_info(self):
+        return self._sku_info
+
+    @sku_info.setter
+    def sku_info(self, value):
+        if isinstance(value, CertificateSkuInfo):
+            self._sku_info = value
+        else:
+            self._sku_info = CertificateSkuInfo.from_alipay_dict(value)
+    @property
     def use_order_no(self):
         return self._use_order_no
 
@@ -146,6 +158,11 @@ class CertificateUseResult(object):
                 params['serial_info_list'] = self.serial_info_list.to_alipay_dict()
             else:
                 params['serial_info_list'] = self.serial_info_list
+        if self.sku_info:
+            if hasattr(self.sku_info, 'to_alipay_dict'):
+                params['sku_info'] = self.sku_info.to_alipay_dict()
+            else:
+                params['sku_info'] = self.sku_info
         if self.use_order_no:
             if hasattr(self.use_order_no, 'to_alipay_dict'):
                 params['use_order_no'] = self.use_order_no.to_alipay_dict()
@@ -176,6 +193,8 @@ class CertificateUseResult(object):
             o.result = d['result']
         if 'serial_info_list' in d:
             o.serial_info_list = d['serial_info_list']
+        if 'sku_info' in d:
+            o.sku_info = d['sku_info']
         if 'use_order_no' in d:
             o.use_order_no = d['use_order_no']
         return o

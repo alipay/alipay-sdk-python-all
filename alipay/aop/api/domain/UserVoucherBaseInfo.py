@@ -9,6 +9,7 @@ class UserVoucherBaseInfo(object):
 
     def __init__(self):
         self._associate_trade_no = None
+        self._belong_merchant_id = None
         self._create_time = None
         self._valid_begin_time = None
         self._valid_end_time = None
@@ -25,6 +26,13 @@ class UserVoucherBaseInfo(object):
     @associate_trade_no.setter
     def associate_trade_no(self, value):
         self._associate_trade_no = value
+    @property
+    def belong_merchant_id(self):
+        return self._belong_merchant_id
+
+    @belong_merchant_id.setter
+    def belong_merchant_id(self, value):
+        self._belong_merchant_id = value
     @property
     def create_time(self):
         return self._create_time
@@ -90,6 +98,11 @@ class UserVoucherBaseInfo(object):
                 params['associate_trade_no'] = self.associate_trade_no.to_alipay_dict()
             else:
                 params['associate_trade_no'] = self.associate_trade_no
+        if self.belong_merchant_id:
+            if hasattr(self.belong_merchant_id, 'to_alipay_dict'):
+                params['belong_merchant_id'] = self.belong_merchant_id.to_alipay_dict()
+            else:
+                params['belong_merchant_id'] = self.belong_merchant_id
         if self.create_time:
             if hasattr(self.create_time, 'to_alipay_dict'):
                 params['create_time'] = self.create_time.to_alipay_dict()
@@ -139,6 +152,8 @@ class UserVoucherBaseInfo(object):
         o = UserVoucherBaseInfo()
         if 'associate_trade_no' in d:
             o.associate_trade_no = d['associate_trade_no']
+        if 'belong_merchant_id' in d:
+            o.belong_merchant_id = d['belong_merchant_id']
         if 'create_time' in d:
             o.create_time = d['create_time']
         if 'valid_begin_time' in d:

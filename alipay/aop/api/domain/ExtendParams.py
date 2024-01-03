@@ -15,6 +15,7 @@ class ExtendParams(object):
         self._royalty_freeze = None
         self._specified_seller_name = None
         self._sys_service_provider_id = None
+        self._tc_installment_order_id = None
         self._trade_component_order_id = None
 
     @property
@@ -67,6 +68,13 @@ class ExtendParams(object):
     def sys_service_provider_id(self, value):
         self._sys_service_provider_id = value
     @property
+    def tc_installment_order_id(self):
+        return self._tc_installment_order_id
+
+    @tc_installment_order_id.setter
+    def tc_installment_order_id(self, value):
+        self._tc_installment_order_id = value
+    @property
     def trade_component_order_id(self):
         return self._trade_component_order_id
 
@@ -112,6 +120,11 @@ class ExtendParams(object):
                 params['sys_service_provider_id'] = self.sys_service_provider_id.to_alipay_dict()
             else:
                 params['sys_service_provider_id'] = self.sys_service_provider_id
+        if self.tc_installment_order_id:
+            if hasattr(self.tc_installment_order_id, 'to_alipay_dict'):
+                params['tc_installment_order_id'] = self.tc_installment_order_id.to_alipay_dict()
+            else:
+                params['tc_installment_order_id'] = self.tc_installment_order_id
         if self.trade_component_order_id:
             if hasattr(self.trade_component_order_id, 'to_alipay_dict'):
                 params['trade_component_order_id'] = self.trade_component_order_id.to_alipay_dict()
@@ -138,6 +151,8 @@ class ExtendParams(object):
             o.specified_seller_name = d['specified_seller_name']
         if 'sys_service_provider_id' in d:
             o.sys_service_provider_id = d['sys_service_provider_id']
+        if 'tc_installment_order_id' in d:
+            o.tc_installment_order_id = d['tc_installment_order_id']
         if 'trade_component_order_id' in d:
             o.trade_component_order_id = d['trade_component_order_id']
         return o

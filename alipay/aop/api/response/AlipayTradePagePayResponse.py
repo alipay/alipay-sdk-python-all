@@ -11,6 +11,7 @@ class AlipayTradePagePayResponse(AlipayResponse):
         super(AlipayTradePagePayResponse, self).__init__()
         self._merchant_order_no = None
         self._out_trade_no = None
+        self._pageRedirectionData = None
         self._seller_id = None
         self._total_amount = None
         self._trade_no = None
@@ -29,6 +30,13 @@ class AlipayTradePagePayResponse(AlipayResponse):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def pageRedirectionData(self):
+        return self._pageRedirectionData
+
+    @pageRedirectionData.setter
+    def pageRedirectionData(self, value):
+        self._pageRedirectionData = value
     @property
     def seller_id(self):
         return self._seller_id
@@ -57,6 +65,8 @@ class AlipayTradePagePayResponse(AlipayResponse):
             self.merchant_order_no = response['merchant_order_no']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'pageRedirectionData' in response:
+            self.pageRedirectionData = response['pageRedirectionData']
         if 'seller_id' in response:
             self.seller_id = response['seller_id']
         if 'total_amount' in response:

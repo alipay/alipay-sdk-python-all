@@ -16,6 +16,7 @@ class ZhimaOpenAppDemoTestQueryModel(object):
         self._test_1 = None
         self._test_date = None
         self._test_number = None
+        self._test_other = None
         self._test_price = None
         self._test_string = None
         self._test_string_open_id = None
@@ -71,6 +72,13 @@ class ZhimaOpenAppDemoTestQueryModel(object):
     @test_number.setter
     def test_number(self, value):
         self._test_number = value
+    @property
+    def test_other(self):
+        return self._test_other
+
+    @test_other.setter
+    def test_other(self, value):
+        self._test_other = value
     @property
     def test_price(self):
         return self._test_price
@@ -131,6 +139,11 @@ class ZhimaOpenAppDemoTestQueryModel(object):
                 params['test_number'] = self.test_number.to_alipay_dict()
             else:
                 params['test_number'] = self.test_number
+        if self.test_other:
+            if hasattr(self.test_other, 'to_alipay_dict'):
+                params['test_other'] = self.test_other.to_alipay_dict()
+            else:
+                params['test_other'] = self.test_other
         if self.test_price:
             if hasattr(self.test_price, 'to_alipay_dict'):
                 params['test_price'] = self.test_price.to_alipay_dict()
@@ -165,6 +178,8 @@ class ZhimaOpenAppDemoTestQueryModel(object):
             o.test_date = d['test_date']
         if 'test_number' in d:
             o.test_number = d['test_number']
+        if 'test_other' in d:
+            o.test_other = d['test_other']
         if 'test_price' in d:
             o.test_price = d['test_price']
         if 'test_string' in d:

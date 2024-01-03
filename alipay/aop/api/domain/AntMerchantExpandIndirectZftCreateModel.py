@@ -39,6 +39,7 @@ class AntMerchantExpandIndirectZftCreateModel(object):
         self._legal_name = None
         self._license_auth_letter_image = None
         self._mcc = None
+        self._merchant_nature = None
         self._merchant_type = None
         self._name = None
         self._out_biz_no = None
@@ -243,6 +244,13 @@ class AntMerchantExpandIndirectZftCreateModel(object):
     @mcc.setter
     def mcc(self, value):
         self._mcc = value
+    @property
+    def merchant_nature(self):
+        return self._merchant_nature
+
+    @merchant_nature.setter
+    def merchant_nature(self, value):
+        self._merchant_nature = value
     @property
     def merchant_type(self):
         return self._merchant_type
@@ -477,6 +485,11 @@ class AntMerchantExpandIndirectZftCreateModel(object):
                 params['mcc'] = self.mcc.to_alipay_dict()
             else:
                 params['mcc'] = self.mcc
+        if self.merchant_nature:
+            if hasattr(self.merchant_nature, 'to_alipay_dict'):
+                params['merchant_nature'] = self.merchant_nature.to_alipay_dict()
+            else:
+                params['merchant_nature'] = self.merchant_nature
         if self.merchant_type:
             if hasattr(self.merchant_type, 'to_alipay_dict'):
                 params['merchant_type'] = self.merchant_type.to_alipay_dict()
@@ -607,6 +620,8 @@ class AntMerchantExpandIndirectZftCreateModel(object):
             o.license_auth_letter_image = d['license_auth_letter_image']
         if 'mcc' in d:
             o.mcc = d['mcc']
+        if 'merchant_nature' in d:
+            o.merchant_nature = d['merchant_nature']
         if 'merchant_type' in d:
             o.merchant_type = d['merchant_type']
         if 'name' in d:

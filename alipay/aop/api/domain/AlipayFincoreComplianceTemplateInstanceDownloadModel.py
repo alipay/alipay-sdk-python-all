@@ -9,6 +9,7 @@ class AlipayFincoreComplianceTemplateInstanceDownloadModel(object):
 
     def __init__(self):
         self._duration = None
+        self._required_validate = None
         self._type = None
         self._voucher_id = None
 
@@ -19,6 +20,13 @@ class AlipayFincoreComplianceTemplateInstanceDownloadModel(object):
     @duration.setter
     def duration(self, value):
         self._duration = value
+    @property
+    def required_validate(self):
+        return self._required_validate
+
+    @required_validate.setter
+    def required_validate(self, value):
+        self._required_validate = value
     @property
     def type(self):
         return self._type
@@ -42,6 +50,11 @@ class AlipayFincoreComplianceTemplateInstanceDownloadModel(object):
                 params['duration'] = self.duration.to_alipay_dict()
             else:
                 params['duration'] = self.duration
+        if self.required_validate:
+            if hasattr(self.required_validate, 'to_alipay_dict'):
+                params['required_validate'] = self.required_validate.to_alipay_dict()
+            else:
+                params['required_validate'] = self.required_validate
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayFincoreComplianceTemplateInstanceDownloadModel(object):
         o = AlipayFincoreComplianceTemplateInstanceDownloadModel()
         if 'duration' in d:
             o.duration = d['duration']
+        if 'required_validate' in d:
+            o.required_validate = d['required_validate']
         if 'type' in d:
             o.type = d['type']
         if 'voucher_id' in d:

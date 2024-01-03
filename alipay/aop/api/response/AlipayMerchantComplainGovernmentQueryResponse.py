@@ -14,8 +14,10 @@ class AlipayMerchantComplainGovernmentQueryResponse(AlipayResponse):
         self._complain_event_id = None
         self._complain_reason = None
         self._content = None
+        self._gmt_confirm_deadline = None
         self._gmt_create = None
         self._gmt_finished = None
+        self._gmt_handle_deadline = None
         self._gmt_intervene_platform = None
         self._gmt_modified = None
         self._images = None
@@ -58,6 +60,13 @@ class AlipayMerchantComplainGovernmentQueryResponse(AlipayResponse):
     def content(self, value):
         self._content = value
     @property
+    def gmt_confirm_deadline(self):
+        return self._gmt_confirm_deadline
+
+    @gmt_confirm_deadline.setter
+    def gmt_confirm_deadline(self, value):
+        self._gmt_confirm_deadline = value
+    @property
     def gmt_create(self):
         return self._gmt_create
 
@@ -71,6 +80,13 @@ class AlipayMerchantComplainGovernmentQueryResponse(AlipayResponse):
     @gmt_finished.setter
     def gmt_finished(self, value):
         self._gmt_finished = value
+    @property
+    def gmt_handle_deadline(self):
+        return self._gmt_handle_deadline
+
+    @gmt_handle_deadline.setter
+    def gmt_handle_deadline(self, value):
+        self._gmt_handle_deadline = value
     @property
     def gmt_intervene_platform(self):
         return self._gmt_intervene_platform
@@ -175,10 +191,14 @@ class AlipayMerchantComplainGovernmentQueryResponse(AlipayResponse):
             self.complain_reason = response['complain_reason']
         if 'content' in response:
             self.content = response['content']
+        if 'gmt_confirm_deadline' in response:
+            self.gmt_confirm_deadline = response['gmt_confirm_deadline']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
         if 'gmt_finished' in response:
             self.gmt_finished = response['gmt_finished']
+        if 'gmt_handle_deadline' in response:
+            self.gmt_handle_deadline = response['gmt_handle_deadline']
         if 'gmt_intervene_platform' in response:
             self.gmt_intervene_platform = response['gmt_intervene_platform']
         if 'gmt_modified' in response:

@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class EpDossierLiteDetail(object):
 
     def __init__(self):
+        self._charge_person_name = None
         self._ep_cert_no = None
         self._ep_name = None
         self._ep_status = None
         self._ep_type = None
 
+    @property
+    def charge_person_name(self):
+        return self._charge_person_name
+
+    @charge_person_name.setter
+    def charge_person_name(self, value):
+        self._charge_person_name = value
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -45,6 +53,11 @@ class EpDossierLiteDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.charge_person_name:
+            if hasattr(self.charge_person_name, 'to_alipay_dict'):
+                params['charge_person_name'] = self.charge_person_name.to_alipay_dict()
+            else:
+                params['charge_person_name'] = self.charge_person_name
         if self.ep_cert_no:
             if hasattr(self.ep_cert_no, 'to_alipay_dict'):
                 params['ep_cert_no'] = self.ep_cert_no.to_alipay_dict()
@@ -72,6 +85,8 @@ class EpDossierLiteDetail(object):
         if not d:
             return None
         o = EpDossierLiteDetail()
+        if 'charge_person_name' in d:
+            o.charge_person_name = d['charge_person_name']
         if 'ep_cert_no' in d:
             o.ep_cert_no = d['ep_cert_no']
         if 'ep_name' in d:

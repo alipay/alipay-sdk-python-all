@@ -10,6 +10,7 @@ class ZhimaCreditPayafteruseCreditagreementSignResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditPayafteruseCreditagreementSignResponse, self).__init__()
         self._credit_agreement_id = None
+        self._orderStr = None
         self._out_agreement_no = None
 
     @property
@@ -19,6 +20,13 @@ class ZhimaCreditPayafteruseCreditagreementSignResponse(AlipayResponse):
     @credit_agreement_id.setter
     def credit_agreement_id(self, value):
         self._credit_agreement_id = value
+    @property
+    def orderStr(self):
+        return self._orderStr
+
+    @orderStr.setter
+    def orderStr(self, value):
+        self._orderStr = value
     @property
     def out_agreement_no(self):
         return self._out_agreement_no
@@ -31,5 +39,7 @@ class ZhimaCreditPayafteruseCreditagreementSignResponse(AlipayResponse):
         response = super(ZhimaCreditPayafteruseCreditagreementSignResponse, self).parse_response_content(response_content)
         if 'credit_agreement_id' in response:
             self.credit_agreement_id = response['credit_agreement_id']
+        if 'orderStr' in response:
+            self.orderStr = response['orderStr']
         if 'out_agreement_no' in response:
             self.out_agreement_no = response['out_agreement_no']

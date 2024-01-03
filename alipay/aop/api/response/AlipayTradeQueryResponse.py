@@ -10,6 +10,7 @@ from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.IntactChargeInfo import IntactChargeInfo
 from alipay.aop.api.domain.PaymentInfoWithId import PaymentInfoWithId
+from alipay.aop.api.domain.GoodsDetail import GoodsDetail
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -58,6 +59,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._point_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
+        self._req_goods_detail = None
         self._send_pay_date = None
         self._settle_amount = None
         self._settle_currency = None
@@ -389,6 +391,19 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def receipt_currency_type(self, value):
         self._receipt_currency_type = value
     @property
+    def req_goods_detail(self):
+        return self._req_goods_detail
+
+    @req_goods_detail.setter
+    def req_goods_detail(self, value):
+        if isinstance(value, list):
+            self._req_goods_detail = list()
+            for i in value:
+                if isinstance(i, GoodsDetail):
+                    self._req_goods_detail.append(i)
+                else:
+                    self._req_goods_detail.append(GoodsDetail.from_alipay_dict(i))
+    @property
     def send_pay_date(self):
         return self._send_pay_date
 
@@ -592,6 +607,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.receipt_amount = response['receipt_amount']
         if 'receipt_currency_type' in response:
             self.receipt_currency_type = response['receipt_currency_type']
+        if 'req_goods_detail' in response:
+            self.req_goods_detail = response['req_goods_detail']
         if 'send_pay_date' in response:
             self.send_pay_date = response['send_pay_date']
         if 'settle_amount' in response:

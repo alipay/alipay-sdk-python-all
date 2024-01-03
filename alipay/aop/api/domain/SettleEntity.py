@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class SettleEntity(object):
 
     def __init__(self):
+        self._settle_entity_biz_type = None
         self._settle_entity_id = None
         self._settle_entity_type = None
 
+    @property
+    def settle_entity_biz_type(self):
+        return self._settle_entity_biz_type
+
+    @settle_entity_biz_type.setter
+    def settle_entity_biz_type(self, value):
+        self._settle_entity_biz_type = value
     @property
     def settle_entity_id(self):
         return self._settle_entity_id
@@ -29,6 +37,11 @@ class SettleEntity(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.settle_entity_biz_type:
+            if hasattr(self.settle_entity_biz_type, 'to_alipay_dict'):
+                params['settle_entity_biz_type'] = self.settle_entity_biz_type.to_alipay_dict()
+            else:
+                params['settle_entity_biz_type'] = self.settle_entity_biz_type
         if self.settle_entity_id:
             if hasattr(self.settle_entity_id, 'to_alipay_dict'):
                 params['settle_entity_id'] = self.settle_entity_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class SettleEntity(object):
         if not d:
             return None
         o = SettleEntity()
+        if 'settle_entity_biz_type' in d:
+            o.settle_entity_biz_type = d['settle_entity_biz_type']
         if 'settle_entity_id' in d:
             o.settle_entity_id = d['settle_entity_id']
         if 'settle_entity_type' in d:

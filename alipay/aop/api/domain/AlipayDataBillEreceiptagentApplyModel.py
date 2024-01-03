@@ -9,7 +9,9 @@ class AlipayDataBillEreceiptagentApplyModel(object):
 
     def __init__(self):
         self._agreement_no = None
+        self._end_time = None
         self._key = None
+        self._start_time = None
         self._type = None
 
     @property
@@ -20,12 +22,26 @@ class AlipayDataBillEreceiptagentApplyModel(object):
     def agreement_no(self, value):
         self._agreement_no = value
     @property
+    def end_time(self):
+        return self._end_time
+
+    @end_time.setter
+    def end_time(self, value):
+        self._end_time = value
+    @property
     def key(self):
         return self._key
 
     @key.setter
     def key(self, value):
         self._key = value
+    @property
+    def start_time(self):
+        return self._start_time
+
+    @start_time.setter
+    def start_time(self, value):
+        self._start_time = value
     @property
     def type(self):
         return self._type
@@ -42,11 +58,21 @@ class AlipayDataBillEreceiptagentApplyModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.end_time:
+            if hasattr(self.end_time, 'to_alipay_dict'):
+                params['end_time'] = self.end_time.to_alipay_dict()
+            else:
+                params['end_time'] = self.end_time
         if self.key:
             if hasattr(self.key, 'to_alipay_dict'):
                 params['key'] = self.key.to_alipay_dict()
             else:
                 params['key'] = self.key
+        if self.start_time:
+            if hasattr(self.start_time, 'to_alipay_dict'):
+                params['start_time'] = self.start_time.to_alipay_dict()
+            else:
+                params['start_time'] = self.start_time
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -61,8 +87,12 @@ class AlipayDataBillEreceiptagentApplyModel(object):
         o = AlipayDataBillEreceiptagentApplyModel()
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'end_time' in d:
+            o.end_time = d['end_time']
         if 'key' in d:
             o.key = d['key']
+        if 'start_time' in d:
+            o.start_time = d['start_time']
         if 'type' in d:
             o.type = d['type']
         return o

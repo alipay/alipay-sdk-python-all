@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class LocalItemDirectModifySku(object):
 
     def __init__(self):
+        self._limit_type = None
         self._original_price = None
         self._sale_price = None
         self._sale_status = None
         self._stock_num = None
 
+    @property
+    def limit_type(self):
+        return self._limit_type
+
+    @limit_type.setter
+    def limit_type(self, value):
+        self._limit_type = value
     @property
     def original_price(self):
         return self._original_price
@@ -45,6 +53,11 @@ class LocalItemDirectModifySku(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.limit_type:
+            if hasattr(self.limit_type, 'to_alipay_dict'):
+                params['limit_type'] = self.limit_type.to_alipay_dict()
+            else:
+                params['limit_type'] = self.limit_type
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -72,6 +85,8 @@ class LocalItemDirectModifySku(object):
         if not d:
             return None
         o = LocalItemDirectModifySku()
+        if 'limit_type' in d:
+            o.limit_type = d['limit_type']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'sale_price' in d:

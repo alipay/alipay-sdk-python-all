@@ -17,9 +17,11 @@ class AlipayCommerceWaterTaskCreateModel(object):
         self._task_condition = None
         self._task_contract_period = None
         self._task_end = None
+        self._task_free = None
         self._task_name = None
         self._task_start = None
         self._task_title = None
+        self._task_type = None
 
     @property
     def creator(self):
@@ -81,6 +83,13 @@ class AlipayCommerceWaterTaskCreateModel(object):
     def task_end(self, value):
         self._task_end = value
     @property
+    def task_free(self):
+        return self._task_free
+
+    @task_free.setter
+    def task_free(self, value):
+        self._task_free = value
+    @property
     def task_name(self):
         return self._task_name
 
@@ -101,6 +110,13 @@ class AlipayCommerceWaterTaskCreateModel(object):
     @task_title.setter
     def task_title(self, value):
         self._task_title = value
+    @property
+    def task_type(self):
+        return self._task_type
+
+    @task_type.setter
+    def task_type(self, value):
+        self._task_type = value
 
 
     def to_alipay_dict(self):
@@ -145,6 +161,11 @@ class AlipayCommerceWaterTaskCreateModel(object):
                 params['task_end'] = self.task_end.to_alipay_dict()
             else:
                 params['task_end'] = self.task_end
+        if self.task_free:
+            if hasattr(self.task_free, 'to_alipay_dict'):
+                params['task_free'] = self.task_free.to_alipay_dict()
+            else:
+                params['task_free'] = self.task_free
         if self.task_name:
             if hasattr(self.task_name, 'to_alipay_dict'):
                 params['task_name'] = self.task_name.to_alipay_dict()
@@ -160,6 +181,11 @@ class AlipayCommerceWaterTaskCreateModel(object):
                 params['task_title'] = self.task_title.to_alipay_dict()
             else:
                 params['task_title'] = self.task_title
+        if self.task_type:
+            if hasattr(self.task_type, 'to_alipay_dict'):
+                params['task_type'] = self.task_type.to_alipay_dict()
+            else:
+                params['task_type'] = self.task_type
         return params
 
     @staticmethod
@@ -183,12 +209,16 @@ class AlipayCommerceWaterTaskCreateModel(object):
             o.task_contract_period = d['task_contract_period']
         if 'task_end' in d:
             o.task_end = d['task_end']
+        if 'task_free' in d:
+            o.task_free = d['task_free']
         if 'task_name' in d:
             o.task_name = d['task_name']
         if 'task_start' in d:
             o.task_start = d['task_start']
         if 'task_title' in d:
             o.task_title = d['task_title']
+        if 'task_type' in d:
+            o.task_type = d['task_type']
         return o
 
 

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ShareCodeCreateExtendParam import ShareCodeCreateExtendParam
 
 
 class AlipayMerchantIndirectSharetokenCreateModel(object):
@@ -13,6 +14,7 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
         self._biz_tracker = None
         self._channel_info = None
         self._expire_time = None
+        self._extend_params = None
         self._merchant_name = None
         self._out_biz_no = None
         self._out_open_id = None
@@ -55,6 +57,16 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
     @expire_time.setter
     def expire_time(self, value):
         self._expire_time = value
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, ShareCodeCreateExtendParam):
+            self._extend_params = value
+        else:
+            self._extend_params = ShareCodeCreateExtendParam.from_alipay_dict(value)
     @property
     def merchant_name(self):
         return self._merchant_name
@@ -126,6 +138,11 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
             else:
                 params['expire_time'] = self.expire_time
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.merchant_name:
             if hasattr(self.merchant_name, 'to_alipay_dict'):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
@@ -173,6 +190,8 @@ class AlipayMerchantIndirectSharetokenCreateModel(object):
             o.channel_info = d['channel_info']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
         if 'out_biz_no' in d:

@@ -14,6 +14,7 @@ class DatadigitalFincloudGeneralsaasFaceVerificationInitializeModel(object):
         self._cert_type = None
         self._face_reserve_strategy = None
         self._identity_type = None
+        self._nation = None
         self._outer_order_no = None
         self._phone_no = None
 
@@ -59,6 +60,13 @@ class DatadigitalFincloudGeneralsaasFaceVerificationInitializeModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def nation(self):
+        return self._nation
+
+    @nation.setter
+    def nation(self, value):
+        self._nation = value
     @property
     def outer_order_no(self):
         return self._outer_order_no
@@ -107,6 +115,11 @@ class DatadigitalFincloudGeneralsaasFaceVerificationInitializeModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.nation:
+            if hasattr(self.nation, 'to_alipay_dict'):
+                params['nation'] = self.nation.to_alipay_dict()
+            else:
+                params['nation'] = self.nation
         if self.outer_order_no:
             if hasattr(self.outer_order_no, 'to_alipay_dict'):
                 params['outer_order_no'] = self.outer_order_no.to_alipay_dict()
@@ -136,6 +149,8 @@ class DatadigitalFincloudGeneralsaasFaceVerificationInitializeModel(object):
             o.face_reserve_strategy = d['face_reserve_strategy']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'nation' in d:
+            o.nation = d['nation']
         if 'outer_order_no' in d:
             o.outer_order_no = d['outer_order_no']
         if 'phone_no' in d:

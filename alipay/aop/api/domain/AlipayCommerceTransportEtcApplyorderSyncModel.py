@@ -14,6 +14,7 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
         self._card_no = None
         self._censor_code = None
         self._censor_info = None
+        self._corp_id = None
         self._delivery_code = None
         self._delivery_name = None
         self._delivery_no = None
@@ -22,6 +23,7 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
         self._open_id = None
         self._order_id = None
         self._order_status = None
+        self._order_type = None
         self._out_biz_no = None
         self._plate_color = None
         self._plate_no = None
@@ -82,6 +84,13 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     def censor_info(self, value):
         self._censor_info = value
     @property
+    def corp_id(self):
+        return self._corp_id
+
+    @corp_id.setter
+    def corp_id(self, value):
+        self._corp_id = value
+    @property
     def delivery_code(self):
         return self._delivery_code
 
@@ -137,6 +146,13 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     @order_status.setter
     def order_status(self, value):
         self._order_status = value
+    @property
+    def order_type(self):
+        return self._order_type
+
+    @order_type.setter
+    def order_type(self, value):
+        self._order_type = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -283,6 +299,11 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['censor_info'] = self.censor_info.to_alipay_dict()
             else:
                 params['censor_info'] = self.censor_info
+        if self.corp_id:
+            if hasattr(self.corp_id, 'to_alipay_dict'):
+                params['corp_id'] = self.corp_id.to_alipay_dict()
+            else:
+                params['corp_id'] = self.corp_id
         if self.delivery_code:
             if hasattr(self.delivery_code, 'to_alipay_dict'):
                 params['delivery_code'] = self.delivery_code.to_alipay_dict()
@@ -323,6 +344,11 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['order_status'] = self.order_status.to_alipay_dict()
             else:
                 params['order_status'] = self.order_status
+        if self.order_type:
+            if hasattr(self.order_type, 'to_alipay_dict'):
+                params['order_type'] = self.order_type.to_alipay_dict()
+            else:
+                params['order_type'] = self.order_type
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -422,6 +448,8 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.censor_code = d['censor_code']
         if 'censor_info' in d:
             o.censor_info = d['censor_info']
+        if 'corp_id' in d:
+            o.corp_id = d['corp_id']
         if 'delivery_code' in d:
             o.delivery_code = d['delivery_code']
         if 'delivery_name' in d:
@@ -438,6 +466,8 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.order_id = d['order_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
+        if 'order_type' in d:
+            o.order_type = d['order_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'plate_color' in d:

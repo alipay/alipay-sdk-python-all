@@ -9,6 +9,7 @@ class TechriskInnovateMpcpromoSceneCreateModel(object):
 
     def __init__(self):
         self._data_list = None
+        self._position_code = None
         self._recommend_type = None
         self._scene_description = None
         self._scene_project_name = None
@@ -23,6 +24,13 @@ class TechriskInnovateMpcpromoSceneCreateModel(object):
             self._data_list = list()
             for i in value:
                 self._data_list.append(i)
+    @property
+    def position_code(self):
+        return self._position_code
+
+    @position_code.setter
+    def position_code(self, value):
+        self._position_code = value
     @property
     def recommend_type(self):
         return self._recommend_type
@@ -58,6 +66,11 @@ class TechriskInnovateMpcpromoSceneCreateModel(object):
                 params['data_list'] = self.data_list.to_alipay_dict()
             else:
                 params['data_list'] = self.data_list
+        if self.position_code:
+            if hasattr(self.position_code, 'to_alipay_dict'):
+                params['position_code'] = self.position_code.to_alipay_dict()
+            else:
+                params['position_code'] = self.position_code
         if self.recommend_type:
             if hasattr(self.recommend_type, 'to_alipay_dict'):
                 params['recommend_type'] = self.recommend_type.to_alipay_dict()
@@ -82,6 +95,8 @@ class TechriskInnovateMpcpromoSceneCreateModel(object):
         o = TechriskInnovateMpcpromoSceneCreateModel()
         if 'data_list' in d:
             o.data_list = d['data_list']
+        if 'position_code' in d:
+            o.position_code = d['position_code']
         if 'recommend_type' in d:
             o.recommend_type = d['recommend_type']
         if 'scene_description' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SendSubOrderResult import SendSubOrderResult
 
 
 class SendEquityOrderResult(object):
@@ -15,6 +16,7 @@ class SendEquityOrderResult(object):
         self._order_result_msg = None
         self._order_status = None
         self._order_time = None
+        self._send_sub_order_result = None
 
     @property
     def equity_id(self):
@@ -65,6 +67,19 @@ class SendEquityOrderResult(object):
     @order_time.setter
     def order_time(self, value):
         self._order_time = value
+    @property
+    def send_sub_order_result(self):
+        return self._send_sub_order_result
+
+    @send_sub_order_result.setter
+    def send_sub_order_result(self, value):
+        if isinstance(value, list):
+            self._send_sub_order_result = list()
+            for i in value:
+                if isinstance(i, SendSubOrderResult):
+                    self._send_sub_order_result.append(i)
+                else:
+                    self._send_sub_order_result.append(SendSubOrderResult.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -104,6 +119,16 @@ class SendEquityOrderResult(object):
                 params['order_time'] = self.order_time.to_alipay_dict()
             else:
                 params['order_time'] = self.order_time
+        if self.send_sub_order_result:
+            if isinstance(self.send_sub_order_result, list):
+                for i in range(0, len(self.send_sub_order_result)):
+                    element = self.send_sub_order_result[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.send_sub_order_result[i] = element.to_alipay_dict()
+            if hasattr(self.send_sub_order_result, 'to_alipay_dict'):
+                params['send_sub_order_result'] = self.send_sub_order_result.to_alipay_dict()
+            else:
+                params['send_sub_order_result'] = self.send_sub_order_result
         return params
 
     @staticmethod
@@ -125,6 +150,8 @@ class SendEquityOrderResult(object):
             o.order_status = d['order_status']
         if 'order_time' in d:
             o.order_time = d['order_time']
+        if 'send_sub_order_result' in d:
+            o.send_sub_order_result = d['send_sub_order_result']
         return o
 
 

@@ -11,6 +11,7 @@ class MedicalInquiryOrderExtInfo(object):
         self._alipay_channel_order_flag = None
         self._approve_comment = None
         self._doctor_inquiry_link_page = None
+        self._order_pid = None
         self._source = None
 
     @property
@@ -34,6 +35,13 @@ class MedicalInquiryOrderExtInfo(object):
     @doctor_inquiry_link_page.setter
     def doctor_inquiry_link_page(self, value):
         self._doctor_inquiry_link_page = value
+    @property
+    def order_pid(self):
+        return self._order_pid
+
+    @order_pid.setter
+    def order_pid(self, value):
+        self._order_pid = value
     @property
     def source(self):
         return self._source
@@ -60,6 +68,11 @@ class MedicalInquiryOrderExtInfo(object):
                 params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page.to_alipay_dict()
             else:
                 params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page
+        if self.order_pid:
+            if hasattr(self.order_pid, 'to_alipay_dict'):
+                params['order_pid'] = self.order_pid.to_alipay_dict()
+            else:
+                params['order_pid'] = self.order_pid
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -78,6 +91,8 @@ class MedicalInquiryOrderExtInfo(object):
             o.approve_comment = d['approve_comment']
         if 'doctor_inquiry_link_page' in d:
             o.doctor_inquiry_link_page = d['doctor_inquiry_link_page']
+        if 'order_pid' in d:
+            o.order_pid = d['order_pid']
         if 'source' in d:
             o.source = d['source']
         return o

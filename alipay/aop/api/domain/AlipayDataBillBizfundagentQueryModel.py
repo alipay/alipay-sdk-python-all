@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayDataBillBizfundagentQueryModel(object):
 
     def __init__(self):
+        self._account_book_id = None
         self._agreement_no = None
         self._end_time = None
         self._page_no = None
         self._page_size = None
         self._start_time = None
 
+    @property
+    def account_book_id(self):
+        return self._account_book_id
+
+    @account_book_id.setter
+    def account_book_id(self, value):
+        self._account_book_id = value
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -53,6 +61,11 @@ class AlipayDataBillBizfundagentQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.account_book_id:
+            if hasattr(self.account_book_id, 'to_alipay_dict'):
+                params['account_book_id'] = self.account_book_id.to_alipay_dict()
+            else:
+                params['account_book_id'] = self.account_book_id
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayDataBillBizfundagentQueryModel(object):
         if not d:
             return None
         o = AlipayDataBillBizfundagentQueryModel()
+        if 'account_book_id' in d:
+            o.account_book_id = d['account_book_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'end_time' in d:
