@@ -12,6 +12,7 @@ class AlipayIserviceCcmRobotSessionCreateModel(object):
         self._biz_info = None
         self._robot_code = None
         self._scene_code = None
+        self._stream_output = None
         self._visitor_id = None
         self._visitor_ip = None
 
@@ -39,6 +40,13 @@ class AlipayIserviceCcmRobotSessionCreateModel(object):
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def stream_output(self):
+        return self._stream_output
+
+    @stream_output.setter
+    def stream_output(self, value):
+        self._stream_output = value
     @property
     def visitor_id(self):
         return self._visitor_id
@@ -72,6 +80,11 @@ class AlipayIserviceCcmRobotSessionCreateModel(object):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.stream_output:
+            if hasattr(self.stream_output, 'to_alipay_dict'):
+                params['stream_output'] = self.stream_output.to_alipay_dict()
+            else:
+                params['stream_output'] = self.stream_output
         if self.visitor_id:
             if hasattr(self.visitor_id, 'to_alipay_dict'):
                 params['visitor_id'] = self.visitor_id.to_alipay_dict()
@@ -95,6 +108,8 @@ class AlipayIserviceCcmRobotSessionCreateModel(object):
             o.robot_code = d['robot_code']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'stream_output' in d:
+            o.stream_output = d['stream_output']
         if 'visitor_id' in d:
             o.visitor_id = d['visitor_id']
         if 'visitor_ip' in d:

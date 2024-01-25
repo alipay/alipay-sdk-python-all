@@ -13,6 +13,7 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
         self._biz_token = None
         self._creative_id_list = None
         self._current = None
+        self._delivery_mode = None
         self._end_date = None
         self._group_id_list = None
         self._order_id_list = None
@@ -61,6 +62,13 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
     @current.setter
     def current(self, value):
         self._current = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def end_date(self):
         return self._end_date
@@ -167,6 +175,11 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
                 params['current'] = self.current.to_alipay_dict()
             else:
                 params['current'] = self.current
+        if self.delivery_mode:
+            if hasattr(self.delivery_mode, 'to_alipay_dict'):
+                params['delivery_mode'] = self.delivery_mode.to_alipay_dict()
+            else:
+                params['delivery_mode'] = self.delivery_mode
         if self.end_date:
             if hasattr(self.end_date, 'to_alipay_dict'):
                 params['end_date'] = self.end_date.to_alipay_dict()
@@ -244,6 +257,8 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
             o.creative_id_list = d['creative_id_list']
         if 'current' in d:
             o.current = d['current']
+        if 'delivery_mode' in d:
+            o.delivery_mode = d['delivery_mode']
         if 'end_date' in d:
             o.end_date = d['end_date']
         if 'group_id_list' in d:

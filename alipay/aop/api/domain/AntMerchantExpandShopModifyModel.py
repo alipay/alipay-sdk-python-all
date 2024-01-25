@@ -25,6 +25,7 @@ class AntMerchantExpandShopModifyModel(object):
         self._contact_infos = None
         self._contact_mobile = None
         self._contact_phone = None
+        self._cover = None
         self._ext_infos = None
         self._ip_role_id = None
         self._legal_cert_no = None
@@ -135,6 +136,13 @@ class AntMerchantExpandShopModifyModel(object):
     @contact_phone.setter
     def contact_phone(self, value):
         self._contact_phone = value
+    @property
+    def cover(self):
+        return self._cover
+
+    @cover.setter
+    def cover(self, value):
+        self._cover = value
     @property
     def ext_infos(self):
         return self._ext_infos
@@ -317,6 +325,11 @@ class AntMerchantExpandShopModifyModel(object):
                 params['contact_phone'] = self.contact_phone.to_alipay_dict()
             else:
                 params['contact_phone'] = self.contact_phone
+        if self.cover:
+            if hasattr(self.cover, 'to_alipay_dict'):
+                params['cover'] = self.cover.to_alipay_dict()
+            else:
+                params['cover'] = self.cover
         if self.ext_infos:
             if isinstance(self.ext_infos, list):
                 for i in range(0, len(self.ext_infos)):
@@ -431,6 +444,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.contact_mobile = d['contact_mobile']
         if 'contact_phone' in d:
             o.contact_phone = d['contact_phone']
+        if 'cover' in d:
+            o.cover = d['cover']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
         if 'ip_role_id' in d:

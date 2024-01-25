@@ -12,6 +12,7 @@ class AlipaySecurityRiskGuardrailsAnswerDetectModel(object):
         self._answer = None
         self._answer_flow_id = None
         self._answer_format = None
+        self._answer_index = None
         self._answer_type = None
         self._business_properties = None
         self._model_code = None
@@ -44,6 +45,13 @@ class AlipaySecurityRiskGuardrailsAnswerDetectModel(object):
     @answer_format.setter
     def answer_format(self, value):
         self._answer_format = value
+    @property
+    def answer_index(self):
+        return self._answer_index
+
+    @answer_index.setter
+    def answer_index(self, value):
+        self._answer_index = value
     @property
     def answer_type(self):
         return self._answer_type
@@ -136,6 +144,11 @@ class AlipaySecurityRiskGuardrailsAnswerDetectModel(object):
                 params['answer_format'] = self.answer_format.to_alipay_dict()
             else:
                 params['answer_format'] = self.answer_format
+        if self.answer_index:
+            if hasattr(self.answer_index, 'to_alipay_dict'):
+                params['answer_index'] = self.answer_index.to_alipay_dict()
+            else:
+                params['answer_index'] = self.answer_index
         if self.answer_type:
             if hasattr(self.answer_type, 'to_alipay_dict'):
                 params['answer_type'] = self.answer_type.to_alipay_dict()
@@ -199,6 +212,8 @@ class AlipaySecurityRiskGuardrailsAnswerDetectModel(object):
             o.answer_flow_id = d['answer_flow_id']
         if 'answer_format' in d:
             o.answer_format = d['answer_format']
+        if 'answer_index' in d:
+            o.answer_index = d['answer_index']
         if 'answer_type' in d:
             o.answer_type = d['answer_type']
         if 'business_properties' in d:

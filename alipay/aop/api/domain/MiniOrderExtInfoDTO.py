@@ -12,6 +12,7 @@ class MiniOrderExtInfoDTO(object):
         self._door_time = None
         self._order_str = None
         self._order_trade_type = None
+        self._trade_no = None
 
     @property
     def addition_rebate_base_price(self):
@@ -41,6 +42,13 @@ class MiniOrderExtInfoDTO(object):
     @order_trade_type.setter
     def order_trade_type(self, value):
         self._order_trade_type = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class MiniOrderExtInfoDTO(object):
                 params['order_trade_type'] = self.order_trade_type.to_alipay_dict()
             else:
                 params['order_trade_type'] = self.order_trade_type
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class MiniOrderExtInfoDTO(object):
             o.order_str = d['order_str']
         if 'order_trade_type' in d:
             o.order_trade_type = d['order_trade_type']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         return o
 
 

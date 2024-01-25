@@ -13,6 +13,7 @@ class MiniRefundGoodsInfoDTO(object):
         self._goods_id = None
         self._out_item_id = None
         self._out_sku_id = None
+        self._period_list = None
         self._refund_amount = None
 
     @property
@@ -47,6 +48,16 @@ class MiniRefundGoodsInfoDTO(object):
     def out_sku_id(self, value):
         self._out_sku_id = value
     @property
+    def period_list(self):
+        return self._period_list
+
+    @period_list.setter
+    def period_list(self, value):
+        if isinstance(value, list):
+            self._period_list = list()
+            for i in value:
+                self._period_list.append(i)
+    @property
     def refund_amount(self):
         return self._refund_amount
 
@@ -77,6 +88,16 @@ class MiniRefundGoodsInfoDTO(object):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
             else:
                 params['out_sku_id'] = self.out_sku_id
+        if self.period_list:
+            if isinstance(self.period_list, list):
+                for i in range(0, len(self.period_list)):
+                    element = self.period_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.period_list[i] = element.to_alipay_dict()
+            if hasattr(self.period_list, 'to_alipay_dict'):
+                params['period_list'] = self.period_list.to_alipay_dict()
+            else:
+                params['period_list'] = self.period_list
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -97,6 +118,8 @@ class MiniRefundGoodsInfoDTO(object):
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
+        if 'period_list' in d:
+            o.period_list = d['period_list']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         return o

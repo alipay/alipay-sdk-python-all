@@ -12,6 +12,7 @@ class LocalItemDirectModifySku(object):
         self._original_price = None
         self._sale_price = None
         self._sale_status = None
+        self._stock_limit_type = None
         self._stock_num = None
 
     @property
@@ -43,6 +44,13 @@ class LocalItemDirectModifySku(object):
     def sale_status(self, value):
         self._sale_status = value
     @property
+    def stock_limit_type(self):
+        return self._stock_limit_type
+
+    @stock_limit_type.setter
+    def stock_limit_type(self, value):
+        self._stock_limit_type = value
+    @property
     def stock_num(self):
         return self._stock_num
 
@@ -73,6 +81,11 @@ class LocalItemDirectModifySku(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.stock_limit_type:
+            if hasattr(self.stock_limit_type, 'to_alipay_dict'):
+                params['stock_limit_type'] = self.stock_limit_type.to_alipay_dict()
+            else:
+                params['stock_limit_type'] = self.stock_limit_type
         if self.stock_num:
             if hasattr(self.stock_num, 'to_alipay_dict'):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
@@ -93,6 +106,8 @@ class LocalItemDirectModifySku(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'stock_limit_type' in d:
+            o.stock_limit_type = d['stock_limit_type']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
         return o

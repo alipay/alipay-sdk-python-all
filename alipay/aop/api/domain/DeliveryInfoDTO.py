@@ -11,6 +11,7 @@ class DeliveryInfoDTO(object):
     def __init__(self):
         self._delivery_id = None
         self._item_info_list = None
+        self._period = None
         self._waybill_id = None
 
     @property
@@ -33,6 +34,13 @@ class DeliveryInfoDTO(object):
                     self._item_info_list.append(i)
                 else:
                     self._item_info_list.append(GoodsItemDTO.from_alipay_dict(i))
+    @property
+    def period(self):
+        return self._period
+
+    @period.setter
+    def period(self, value):
+        self._period = value
     @property
     def waybill_id(self):
         return self._waybill_id
@@ -59,6 +67,11 @@ class DeliveryInfoDTO(object):
                 params['item_info_list'] = self.item_info_list.to_alipay_dict()
             else:
                 params['item_info_list'] = self.item_info_list
+        if self.period:
+            if hasattr(self.period, 'to_alipay_dict'):
+                params['period'] = self.period.to_alipay_dict()
+            else:
+                params['period'] = self.period
         if self.waybill_id:
             if hasattr(self.waybill_id, 'to_alipay_dict'):
                 params['waybill_id'] = self.waybill_id.to_alipay_dict()
@@ -75,6 +88,8 @@ class DeliveryInfoDTO(object):
             o.delivery_id = d['delivery_id']
         if 'item_info_list' in d:
             o.item_info_list = d['item_info_list']
+        if 'period' in d:
+            o.period = d['period']
         if 'waybill_id' in d:
             o.waybill_id = d['waybill_id']
         return o

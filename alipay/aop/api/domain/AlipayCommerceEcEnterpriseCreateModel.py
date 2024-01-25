@@ -13,6 +13,7 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
         self._create_iot_group = None
         self._enterprise_alias = None
         self._enterprise_name = None
+        self._group_app_id = None
         self._identity = None
         self._identity_name = None
         self._identity_open_id = None
@@ -56,6 +57,13 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
     @enterprise_name.setter
     def enterprise_name(self, value):
         self._enterprise_name = value
+    @property
+    def group_app_id(self):
+        return self._group_app_id
+
+    @group_app_id.setter
+    def group_app_id(self, value):
+        self._group_app_id = value
     @property
     def identity(self):
         return self._identity
@@ -134,6 +142,11 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
                 params['enterprise_name'] = self.enterprise_name.to_alipay_dict()
             else:
                 params['enterprise_name'] = self.enterprise_name
+        if self.group_app_id:
+            if hasattr(self.group_app_id, 'to_alipay_dict'):
+                params['group_app_id'] = self.group_app_id.to_alipay_dict()
+            else:
+                params['group_app_id'] = self.group_app_id
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -186,6 +199,8 @@ class AlipayCommerceEcEnterpriseCreateModel(object):
             o.enterprise_alias = d['enterprise_alias']
         if 'enterprise_name' in d:
             o.enterprise_name = d['enterprise_name']
+        if 'group_app_id' in d:
+            o.group_app_id = d['group_app_id']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_name' in d:

@@ -9,7 +9,9 @@ class PrePayOperationInfoViewData(object):
 
     def __init__(self):
         self._logo = None
+        self._operation_bankcard_type = None
         self._operation_desc = None
+        self._operation_inst_id = None
         self._operation_tip = None
         self._pay_operation_info = None
         self._promo_price = None
@@ -24,12 +26,26 @@ class PrePayOperationInfoViewData(object):
     def logo(self, value):
         self._logo = value
     @property
+    def operation_bankcard_type(self):
+        return self._operation_bankcard_type
+
+    @operation_bankcard_type.setter
+    def operation_bankcard_type(self, value):
+        self._operation_bankcard_type = value
+    @property
     def operation_desc(self):
         return self._operation_desc
 
     @operation_desc.setter
     def operation_desc(self, value):
         self._operation_desc = value
+    @property
+    def operation_inst_id(self):
+        return self._operation_inst_id
+
+    @operation_inst_id.setter
+    def operation_inst_id(self, value):
+        self._operation_inst_id = value
     @property
     def operation_tip(self):
         return self._operation_tip
@@ -74,11 +90,21 @@ class PrePayOperationInfoViewData(object):
                 params['logo'] = self.logo.to_alipay_dict()
             else:
                 params['logo'] = self.logo
+        if self.operation_bankcard_type:
+            if hasattr(self.operation_bankcard_type, 'to_alipay_dict'):
+                params['operation_bankcard_type'] = self.operation_bankcard_type.to_alipay_dict()
+            else:
+                params['operation_bankcard_type'] = self.operation_bankcard_type
         if self.operation_desc:
             if hasattr(self.operation_desc, 'to_alipay_dict'):
                 params['operation_desc'] = self.operation_desc.to_alipay_dict()
             else:
                 params['operation_desc'] = self.operation_desc
+        if self.operation_inst_id:
+            if hasattr(self.operation_inst_id, 'to_alipay_dict'):
+                params['operation_inst_id'] = self.operation_inst_id.to_alipay_dict()
+            else:
+                params['operation_inst_id'] = self.operation_inst_id
         if self.operation_tip:
             if hasattr(self.operation_tip, 'to_alipay_dict'):
                 params['operation_tip'] = self.operation_tip.to_alipay_dict()
@@ -113,8 +139,12 @@ class PrePayOperationInfoViewData(object):
         o = PrePayOperationInfoViewData()
         if 'logo' in d:
             o.logo = d['logo']
+        if 'operation_bankcard_type' in d:
+            o.operation_bankcard_type = d['operation_bankcard_type']
         if 'operation_desc' in d:
             o.operation_desc = d['operation_desc']
+        if 'operation_inst_id' in d:
+            o.operation_inst_id = d['operation_inst_id']
         if 'operation_tip' in d:
             o.operation_tip = d['operation_tip']
         if 'pay_operation_info' in d:

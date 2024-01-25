@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActionProperty import ActionProperty
 from alipay.aop.api.domain.OuterAttachment import OuterAttachment
 from alipay.aop.api.domain.MaterialUnit import MaterialUnit
+from alipay.aop.api.domain.ThirdTrackUrlUnit import ThirdTrackUrlUnit
 
 
 class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
@@ -19,6 +20,8 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
         self._biz_token = None
         self._click_track_url = None
         self._creative_outer_id = None
+        self._deal_id = None
+        self._deal_type = None
         self._extend_info = None
         self._group_outer_id = None
         self._impression_track_url = None
@@ -26,6 +29,7 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
         self._material_list = None
         self._name = None
         self._order_outer_id = None
+        self._profile_id = None
         self._region_list = None
         self._rta_id = None
         self._status = None
@@ -33,6 +37,7 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
         self._target_app_id = None
         self._target_url = None
         self._template_id = None
+        self._third_track_url_list = None
 
     @property
     def action_property_list(self):
@@ -103,6 +108,20 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
     def creative_outer_id(self, value):
         self._creative_outer_id = value
     @property
+    def deal_id(self):
+        return self._deal_id
+
+    @deal_id.setter
+    def deal_id(self, value):
+        self._deal_id = value
+    @property
+    def deal_type(self):
+        return self._deal_type
+
+    @deal_type.setter
+    def deal_type(self, value):
+        self._deal_type = value
+    @property
     def extend_info(self):
         return self._extend_info
 
@@ -161,6 +180,13 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
     def order_outer_id(self, value):
         self._order_outer_id = value
     @property
+    def profile_id(self):
+        return self._profile_id
+
+    @profile_id.setter
+    def profile_id(self, value):
+        self._profile_id = value
+    @property
     def region_list(self):
         return self._region_list
 
@@ -212,6 +238,19 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
     @template_id.setter
     def template_id(self, value):
         self._template_id = value
+    @property
+    def third_track_url_list(self):
+        return self._third_track_url_list
+
+    @third_track_url_list.setter
+    def third_track_url_list(self, value):
+        if isinstance(value, list):
+            self._third_track_url_list = list()
+            for i in value:
+                if isinstance(i, ThirdTrackUrlUnit):
+                    self._third_track_url_list.append(i)
+                else:
+                    self._third_track_url_list.append(ThirdTrackUrlUnit.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -266,6 +305,16 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
                 params['creative_outer_id'] = self.creative_outer_id.to_alipay_dict()
             else:
                 params['creative_outer_id'] = self.creative_outer_id
+        if self.deal_id:
+            if hasattr(self.deal_id, 'to_alipay_dict'):
+                params['deal_id'] = self.deal_id.to_alipay_dict()
+            else:
+                params['deal_id'] = self.deal_id
+        if self.deal_type:
+            if hasattr(self.deal_type, 'to_alipay_dict'):
+                params['deal_type'] = self.deal_type.to_alipay_dict()
+            else:
+                params['deal_type'] = self.deal_type
         if self.extend_info:
             if hasattr(self.extend_info, 'to_alipay_dict'):
                 params['extend_info'] = self.extend_info.to_alipay_dict()
@@ -311,6 +360,11 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
                 params['order_outer_id'] = self.order_outer_id.to_alipay_dict()
             else:
                 params['order_outer_id'] = self.order_outer_id
+        if self.profile_id:
+            if hasattr(self.profile_id, 'to_alipay_dict'):
+                params['profile_id'] = self.profile_id.to_alipay_dict()
+            else:
+                params['profile_id'] = self.profile_id
         if self.region_list:
             if isinstance(self.region_list, list):
                 for i in range(0, len(self.region_list)):
@@ -351,6 +405,16 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
                 params['template_id'] = self.template_id.to_alipay_dict()
             else:
                 params['template_id'] = self.template_id
+        if self.third_track_url_list:
+            if isinstance(self.third_track_url_list, list):
+                for i in range(0, len(self.third_track_url_list)):
+                    element = self.third_track_url_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.third_track_url_list[i] = element.to_alipay_dict()
+            if hasattr(self.third_track_url_list, 'to_alipay_dict'):
+                params['third_track_url_list'] = self.third_track_url_list.to_alipay_dict()
+            else:
+                params['third_track_url_list'] = self.third_track_url_list
         return params
 
     @staticmethod
@@ -374,6 +438,10 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             o.click_track_url = d['click_track_url']
         if 'creative_outer_id' in d:
             o.creative_outer_id = d['creative_outer_id']
+        if 'deal_id' in d:
+            o.deal_id = d['deal_id']
+        if 'deal_type' in d:
+            o.deal_type = d['deal_type']
         if 'extend_info' in d:
             o.extend_info = d['extend_info']
         if 'group_outer_id' in d:
@@ -388,6 +456,8 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             o.name = d['name']
         if 'order_outer_id' in d:
             o.order_outer_id = d['order_outer_id']
+        if 'profile_id' in d:
+            o.profile_id = d['profile_id']
         if 'region_list' in d:
             o.region_list = d['region_list']
         if 'rta_id' in d:
@@ -402,6 +472,8 @@ class AlipayDataDataserviceAdCreativeCreateormodifyModel(object):
             o.target_url = d['target_url']
         if 'template_id' in d:
             o.template_id = d['template_id']
+        if 'third_track_url_list' in d:
+            o.third_track_url_list = d['third_track_url_list']
         return o
 
 

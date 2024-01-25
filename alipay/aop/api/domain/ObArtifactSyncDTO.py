@@ -27,6 +27,7 @@ class ObArtifactSyncDTO(object):
         self._repo_url = None
         self._scan_details = None
         self._size = None
+        self._tag = None
         self._trigger = None
         self._type = None
 
@@ -162,6 +163,13 @@ class ObArtifactSyncDTO(object):
     def size(self, value):
         self._size = value
     @property
+    def tag(self):
+        return self._tag
+
+    @tag.setter
+    def tag(self, value):
+        self._tag = value
+    @property
     def trigger(self):
         return self._trigger
 
@@ -274,6 +282,11 @@ class ObArtifactSyncDTO(object):
                 params['size'] = self.size.to_alipay_dict()
             else:
                 params['size'] = self.size
+        if self.tag:
+            if hasattr(self.tag, 'to_alipay_dict'):
+                params['tag'] = self.tag.to_alipay_dict()
+            else:
+                params['tag'] = self.tag
         if self.trigger:
             if hasattr(self.trigger, 'to_alipay_dict'):
                 params['trigger'] = self.trigger.to_alipay_dict()
@@ -325,6 +338,8 @@ class ObArtifactSyncDTO(object):
             o.scan_details = d['scan_details']
         if 'size' in d:
             o.size = d['size']
+        if 'tag' in d:
+            o.tag = d['tag']
         if 'trigger' in d:
             o.trigger = d['trigger']
         if 'type' in d:

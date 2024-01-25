@@ -6,12 +6,14 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
 from alipay.aop.api.domain.MiniBusinessParamsDTO import MiniBusinessParamsDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
+from alipay.aop.api.domain.CreditInfoDTO import CreditInfoDTO
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
 from alipay.aop.api.domain.LogisticsInfoDTO import LogisticsInfoDTO
 from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
+from alipay.aop.api.domain.SubMerchantDTO import SubMerchantDTO
 
 
 class AlipayOpenMiniOrderCreateModel(object):
@@ -23,6 +25,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._buyer_logon_id = None
         self._buyer_open_id = None
         self._contact_info = None
+        self._credit_info = None
         self._default_receiving_address = None
         self._delivery_detail = None
         self._ext_info = None
@@ -34,6 +37,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._seller_id = None
         self._shop_info = None
         self._source_id = None
+        self._sub_merchant = None
         self._timeout_express = None
         self._title = None
 
@@ -88,6 +92,16 @@ class AlipayOpenMiniOrderCreateModel(object):
             self._contact_info = value
         else:
             self._contact_info = ContactInfoDTO.from_alipay_dict(value)
+    @property
+    def credit_info(self):
+        return self._credit_info
+
+    @credit_info.setter
+    def credit_info(self, value):
+        if isinstance(value, CreditInfoDTO):
+            self._credit_info = value
+        else:
+            self._credit_info = CreditInfoDTO.from_alipay_dict(value)
     @property
     def default_receiving_address(self):
         return self._default_receiving_address
@@ -184,6 +198,16 @@ class AlipayOpenMiniOrderCreateModel(object):
     def source_id(self, value):
         self._source_id = value
     @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SubMerchantDTO):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchantDTO.from_alipay_dict(value)
+    @property
     def timeout_express(self):
         return self._timeout_express
 
@@ -231,6 +255,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['contact_info'] = self.contact_info.to_alipay_dict()
             else:
                 params['contact_info'] = self.contact_info
+        if self.credit_info:
+            if hasattr(self.credit_info, 'to_alipay_dict'):
+                params['credit_info'] = self.credit_info.to_alipay_dict()
+            else:
+                params['credit_info'] = self.credit_info
         if self.default_receiving_address:
             if hasattr(self.default_receiving_address, 'to_alipay_dict'):
                 params['default_receiving_address'] = self.default_receiving_address.to_alipay_dict()
@@ -286,6 +315,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['source_id'] = self.source_id.to_alipay_dict()
             else:
                 params['source_id'] = self.source_id
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         if self.timeout_express:
             if hasattr(self.timeout_express, 'to_alipay_dict'):
                 params['timeout_express'] = self.timeout_express.to_alipay_dict()
@@ -315,6 +349,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.buyer_open_id = d['buyer_open_id']
         if 'contact_info' in d:
             o.contact_info = d['contact_info']
+        if 'credit_info' in d:
+            o.credit_info = d['credit_info']
         if 'default_receiving_address' in d:
             o.default_receiving_address = d['default_receiving_address']
         if 'delivery_detail' in d:
@@ -337,6 +373,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.shop_info = d['shop_info']
         if 'source_id' in d:
             o.source_id = d['source_id']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         if 'timeout_express' in d:
             o.timeout_express = d['timeout_express']
         if 'title' in d:

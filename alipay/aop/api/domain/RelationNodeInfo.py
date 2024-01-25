@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class RelationNodeInfo(object):
 
     def __init__(self):
+        self._layer = None
         self._node_name = None
         self._node_no = None
         self._node_type = None
         self._relation_code = None
         self._ultimate_ratio = None
 
+    @property
+    def layer(self):
+        return self._layer
+
+    @layer.setter
+    def layer(self, value):
+        self._layer = value
     @property
     def node_name(self):
         return self._node_name
@@ -53,6 +61,11 @@ class RelationNodeInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.layer:
+            if hasattr(self.layer, 'to_alipay_dict'):
+                params['layer'] = self.layer.to_alipay_dict()
+            else:
+                params['layer'] = self.layer
         if self.node_name:
             if hasattr(self.node_name, 'to_alipay_dict'):
                 params['node_name'] = self.node_name.to_alipay_dict()
@@ -85,6 +98,8 @@ class RelationNodeInfo(object):
         if not d:
             return None
         o = RelationNodeInfo()
+        if 'layer' in d:
+            o.layer = d['layer']
         if 'node_name' in d:
             o.node_name = d['node_name']
         if 'node_no' in d:

@@ -9,6 +9,7 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayFundTransUniTransferResponse, self).__init__()
+        self._amount = None
         self._order_id = None
         self._out_biz_no = None
         self._pay_fund_order_id = None
@@ -16,6 +17,13 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
         self._status = None
         self._trans_date = None
 
+    @property
+    def amount(self):
+        return self._amount
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
     @property
     def order_id(self):
         return self._order_id
@@ -61,6 +69,8 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundTransUniTransferResponse, self).parse_response_content(response_content)
+        if 'amount' in response:
+            self.amount = response['amount']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'out_biz_no' in response:

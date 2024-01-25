@@ -12,7 +12,10 @@ class AlipayFundMbpcardFileUploadRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._biz_scene = None
+        self._image_ocr_tag = None
         self._image_type = None
+        self._product_code = None
         self._image_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -32,12 +35,33 @@ class AlipayFundMbpcardFileUploadRequest(object):
         self._biz_model = value
 
     @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
+    @property
+    def image_ocr_tag(self):
+        return self._image_ocr_tag
+
+    @image_ocr_tag.setter
+    def image_ocr_tag(self, value):
+        self._image_ocr_tag = value
+    @property
     def image_type(self):
         return self._image_type
 
     @image_type.setter
     def image_type(self, value):
         self._image_type = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
 
     @property
     def image_content(self):
@@ -126,11 +150,26 @@ class AlipayFundMbpcardFileUploadRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = json.dumps(obj=self.biz_scene.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['biz_scene'] = self.biz_scene
+        if self.image_ocr_tag:
+            if hasattr(self.image_ocr_tag, 'to_alipay_dict'):
+                params['image_ocr_tag'] = json.dumps(obj=self.image_ocr_tag.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['image_ocr_tag'] = self.image_ocr_tag
         if self.image_type:
             if hasattr(self.image_type, 'to_alipay_dict'):
                 params['image_type'] = json.dumps(obj=self.image_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['image_type'] = self.image_type
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = json.dumps(obj=self.product_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['product_code'] = self.product_code
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

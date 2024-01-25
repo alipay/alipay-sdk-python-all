@@ -13,6 +13,7 @@ class UserVoucherBaseInfo(object):
         self._create_time = None
         self._valid_begin_time = None
         self._valid_end_time = None
+        self._voucher_code = None
         self._voucher_id = None
         self._voucher_max_use_times = None
         self._voucher_name = None
@@ -54,6 +55,13 @@ class UserVoucherBaseInfo(object):
     @valid_end_time.setter
     def valid_end_time(self, value):
         self._valid_end_time = value
+    @property
+    def voucher_code(self):
+        return self._voucher_code
+
+    @voucher_code.setter
+    def voucher_code(self, value):
+        self._voucher_code = value
     @property
     def voucher_id(self):
         return self._voucher_id
@@ -118,6 +126,11 @@ class UserVoucherBaseInfo(object):
                 params['valid_end_time'] = self.valid_end_time.to_alipay_dict()
             else:
                 params['valid_end_time'] = self.valid_end_time
+        if self.voucher_code:
+            if hasattr(self.voucher_code, 'to_alipay_dict'):
+                params['voucher_code'] = self.voucher_code.to_alipay_dict()
+            else:
+                params['voucher_code'] = self.voucher_code
         if self.voucher_id:
             if hasattr(self.voucher_id, 'to_alipay_dict'):
                 params['voucher_id'] = self.voucher_id.to_alipay_dict()
@@ -160,6 +173,8 @@ class UserVoucherBaseInfo(object):
             o.valid_begin_time = d['valid_begin_time']
         if 'valid_end_time' in d:
             o.valid_end_time = d['valid_end_time']
+        if 'voucher_code' in d:
+            o.voucher_code = d['voucher_code']
         if 'voucher_id' in d:
             o.voucher_id = d['voucher_id']
         if 'voucher_max_use_times' in d:

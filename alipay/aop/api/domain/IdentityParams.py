@@ -10,6 +10,7 @@ class IdentityParams(object):
     def __init__(self):
         self._cert_no = None
         self._identity_hash = None
+        self._sign_open_id = None
         self._sign_user_id = None
         self._user_name = None
 
@@ -27,6 +28,13 @@ class IdentityParams(object):
     @identity_hash.setter
     def identity_hash(self, value):
         self._identity_hash = value
+    @property
+    def sign_open_id(self):
+        return self._sign_open_id
+
+    @sign_open_id.setter
+    def sign_open_id(self, value):
+        self._sign_open_id = value
     @property
     def sign_user_id(self):
         return self._sign_user_id
@@ -55,6 +63,11 @@ class IdentityParams(object):
                 params['identity_hash'] = self.identity_hash.to_alipay_dict()
             else:
                 params['identity_hash'] = self.identity_hash
+        if self.sign_open_id:
+            if hasattr(self.sign_open_id, 'to_alipay_dict'):
+                params['sign_open_id'] = self.sign_open_id.to_alipay_dict()
+            else:
+                params['sign_open_id'] = self.sign_open_id
         if self.sign_user_id:
             if hasattr(self.sign_user_id, 'to_alipay_dict'):
                 params['sign_user_id'] = self.sign_user_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class IdentityParams(object):
             o.cert_no = d['cert_no']
         if 'identity_hash' in d:
             o.identity_hash = d['identity_hash']
+        if 'sign_open_id' in d:
+            o.sign_open_id = d['sign_open_id']
         if 'sign_user_id' in d:
             o.sign_user_id = d['sign_user_id']
         if 'user_name' in d:

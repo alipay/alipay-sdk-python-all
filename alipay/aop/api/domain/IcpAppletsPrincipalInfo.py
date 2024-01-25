@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class IcpAppletsPrincipalInfo(object):
 
     def __init__(self):
+        self._authorization_materials = None
         self._certificate_number = None
         self._certificate_photo_back = None
         self._certificate_photo_front = None
@@ -20,6 +21,16 @@ class IcpAppletsPrincipalInfo(object):
         self._contact_phone_number = None
         self._name = None
 
+    @property
+    def authorization_materials(self):
+        return self._authorization_materials
+
+    @authorization_materials.setter
+    def authorization_materials(self, value):
+        if isinstance(value, list):
+            self._authorization_materials = list()
+            for i in value:
+                self._authorization_materials.append(i)
     @property
     def certificate_number(self):
         return self._certificate_number
@@ -104,6 +115,16 @@ class IcpAppletsPrincipalInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.authorization_materials:
+            if isinstance(self.authorization_materials, list):
+                for i in range(0, len(self.authorization_materials)):
+                    element = self.authorization_materials[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.authorization_materials[i] = element.to_alipay_dict()
+            if hasattr(self.authorization_materials, 'to_alipay_dict'):
+                params['authorization_materials'] = self.authorization_materials.to_alipay_dict()
+            else:
+                params['authorization_materials'] = self.authorization_materials
         if self.certificate_number:
             if hasattr(self.certificate_number, 'to_alipay_dict'):
                 params['certificate_number'] = self.certificate_number.to_alipay_dict()
@@ -171,6 +192,8 @@ class IcpAppletsPrincipalInfo(object):
         if not d:
             return None
         o = IcpAppletsPrincipalInfo()
+        if 'authorization_materials' in d:
+            o.authorization_materials = d['authorization_materials']
         if 'certificate_number' in d:
             o.certificate_number = d['certificate_number']
         if 'certificate_photo_back' in d:

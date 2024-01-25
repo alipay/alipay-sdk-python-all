@@ -3,16 +3,31 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DeliveryReceiveDTO import DeliveryReceiveDTO
 
 
 class AlipayOpenMiniOrderDeliveryReceiveModel(object):
 
     def __init__(self):
+        self._delivery_receive_list = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
         self._user_id = None
 
+    @property
+    def delivery_receive_list(self):
+        return self._delivery_receive_list
+
+    @delivery_receive_list.setter
+    def delivery_receive_list(self, value):
+        if isinstance(value, list):
+            self._delivery_receive_list = list()
+            for i in value:
+                if isinstance(i, DeliveryReceiveDTO):
+                    self._delivery_receive_list.append(i)
+                else:
+                    self._delivery_receive_list.append(DeliveryReceiveDTO.from_alipay_dict(i))
     @property
     def open_id(self):
         return self._open_id
@@ -45,6 +60,16 @@ class AlipayOpenMiniOrderDeliveryReceiveModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.delivery_receive_list:
+            if isinstance(self.delivery_receive_list, list):
+                for i in range(0, len(self.delivery_receive_list)):
+                    element = self.delivery_receive_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.delivery_receive_list[i] = element.to_alipay_dict()
+            if hasattr(self.delivery_receive_list, 'to_alipay_dict'):
+                params['delivery_receive_list'] = self.delivery_receive_list.to_alipay_dict()
+            else:
+                params['delivery_receive_list'] = self.delivery_receive_list
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -72,6 +97,8 @@ class AlipayOpenMiniOrderDeliveryReceiveModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderDeliveryReceiveModel()
+        if 'delivery_receive_list' in d:
+            o.delivery_receive_list = d['delivery_receive_list']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

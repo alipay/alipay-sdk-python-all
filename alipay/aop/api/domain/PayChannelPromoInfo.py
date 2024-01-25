@@ -12,6 +12,7 @@ class PayChannelPromoInfo(object):
 
     def __init__(self):
         self._channel_balance = None
+        self._channel_code = None
         self._channel_detail_params = None
         self._channel_enable = None
         self._channel_index = None
@@ -27,6 +28,13 @@ class PayChannelPromoInfo(object):
     @channel_balance.setter
     def channel_balance(self, value):
         self._channel_balance = value
+    @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
     @property
     def channel_detail_params(self):
         return self._channel_detail_params
@@ -94,6 +102,11 @@ class PayChannelPromoInfo(object):
                 params['channel_balance'] = self.channel_balance.to_alipay_dict()
             else:
                 params['channel_balance'] = self.channel_balance
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.channel_detail_params:
             if hasattr(self.channel_detail_params, 'to_alipay_dict'):
                 params['channel_detail_params'] = self.channel_detail_params.to_alipay_dict()
@@ -138,6 +151,8 @@ class PayChannelPromoInfo(object):
         o = PayChannelPromoInfo()
         if 'channel_balance' in d:
             o.channel_balance = d['channel_balance']
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'channel_detail_params' in d:
             o.channel_detail_params = d['channel_detail_params']
         if 'channel_enable' in d:

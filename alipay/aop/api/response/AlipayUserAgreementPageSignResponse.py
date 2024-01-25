@@ -18,6 +18,7 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
         self._external_logon_id = None
         self._forex_eligible = None
         self._invalid_time = None
+        self._pageRedirectionData = None
         self._personal_product_code = None
         self._sign_scene = None
         self._sign_time = None
@@ -90,6 +91,13 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
     def invalid_time(self, value):
         self._invalid_time = value
     @property
+    def pageRedirectionData(self):
+        return self._pageRedirectionData
+
+    @pageRedirectionData.setter
+    def pageRedirectionData(self, value):
+        self._pageRedirectionData = value
+    @property
     def personal_product_code(self):
         return self._personal_product_code
 
@@ -159,6 +167,8 @@ class AlipayUserAgreementPageSignResponse(AlipayResponse):
             self.forex_eligible = response['forex_eligible']
         if 'invalid_time' in response:
             self.invalid_time = response['invalid_time']
+        if 'pageRedirectionData' in response:
+            self.pageRedirectionData = response['pageRedirectionData']
         if 'personal_product_code' in response:
             self.personal_product_code = response['personal_product_code']
         if 'sign_scene' in response:

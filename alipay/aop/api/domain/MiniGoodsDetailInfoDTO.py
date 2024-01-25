@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EffectiveDatesDTO import EffectiveDatesDTO
+from alipay.aop.api.domain.ItemInstallmentInfoDTO import ItemInstallmentInfoDTO
 from alipay.aop.api.domain.RentInfoDTO import RentInfoDTO
 
 
@@ -19,6 +20,7 @@ class MiniGoodsDetailInfoDTO(object):
         self._image_material_id = None
         self._item_cnt = None
         self._item_discount = None
+        self._item_installment_info = None
         self._out_item_id = None
         self._out_sku_id = None
         self._platform_item_version_id = None
@@ -96,6 +98,16 @@ class MiniGoodsDetailInfoDTO(object):
     @item_discount.setter
     def item_discount(self, value):
         self._item_discount = value
+    @property
+    def item_installment_info(self):
+        return self._item_installment_info
+
+    @item_installment_info.setter
+    def item_installment_info(self, value):
+        if isinstance(value, ItemInstallmentInfoDTO):
+            self._item_installment_info = value
+        else:
+            self._item_installment_info = ItemInstallmentInfoDTO.from_alipay_dict(value)
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -202,6 +214,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['item_discount'] = self.item_discount.to_alipay_dict()
             else:
                 params['item_discount'] = self.item_discount
+        if self.item_installment_info:
+            if hasattr(self.item_installment_info, 'to_alipay_dict'):
+                params['item_installment_info'] = self.item_installment_info.to_alipay_dict()
+            else:
+                params['item_installment_info'] = self.item_installment_info
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -262,6 +279,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.item_cnt = d['item_cnt']
         if 'item_discount' in d:
             o.item_discount = d['item_discount']
+        if 'item_installment_info' in d:
+            o.item_installment_info = d['item_installment_info']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:

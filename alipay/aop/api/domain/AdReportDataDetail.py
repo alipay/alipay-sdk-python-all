@@ -14,7 +14,14 @@ class AdReportDataDetail(object):
         self._conversion_data_list = None
         self._cost = None
         self._data_id = None
+        self._group_name = None
         self._impression = None
+        self._market_target_name = None
+        self._order_id = None
+        self._order_name = None
+        self._plan_id = None
+        self._plan_name = None
+        self._scene_name = None
 
     @property
     def biz_date(self):
@@ -58,12 +65,61 @@ class AdReportDataDetail(object):
     def data_id(self, value):
         self._data_id = value
     @property
+    def group_name(self):
+        return self._group_name
+
+    @group_name.setter
+    def group_name(self, value):
+        self._group_name = value
+    @property
     def impression(self):
         return self._impression
 
     @impression.setter
     def impression(self, value):
         self._impression = value
+    @property
+    def market_target_name(self):
+        return self._market_target_name
+
+    @market_target_name.setter
+    def market_target_name(self, value):
+        self._market_target_name = value
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
+    def order_name(self):
+        return self._order_name
+
+    @order_name.setter
+    def order_name(self, value):
+        self._order_name = value
+    @property
+    def plan_id(self):
+        return self._plan_id
+
+    @plan_id.setter
+    def plan_id(self, value):
+        self._plan_id = value
+    @property
+    def plan_name(self):
+        return self._plan_name
+
+    @plan_name.setter
+    def plan_name(self, value):
+        self._plan_name = value
+    @property
+    def scene_name(self):
+        return self._scene_name
+
+    @scene_name.setter
+    def scene_name(self, value):
+        self._scene_name = value
 
 
     def to_alipay_dict(self):
@@ -98,11 +154,46 @@ class AdReportDataDetail(object):
                 params['data_id'] = self.data_id.to_alipay_dict()
             else:
                 params['data_id'] = self.data_id
+        if self.group_name:
+            if hasattr(self.group_name, 'to_alipay_dict'):
+                params['group_name'] = self.group_name.to_alipay_dict()
+            else:
+                params['group_name'] = self.group_name
         if self.impression:
             if hasattr(self.impression, 'to_alipay_dict'):
                 params['impression'] = self.impression.to_alipay_dict()
             else:
                 params['impression'] = self.impression
+        if self.market_target_name:
+            if hasattr(self.market_target_name, 'to_alipay_dict'):
+                params['market_target_name'] = self.market_target_name.to_alipay_dict()
+            else:
+                params['market_target_name'] = self.market_target_name
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
+        if self.order_name:
+            if hasattr(self.order_name, 'to_alipay_dict'):
+                params['order_name'] = self.order_name.to_alipay_dict()
+            else:
+                params['order_name'] = self.order_name
+        if self.plan_id:
+            if hasattr(self.plan_id, 'to_alipay_dict'):
+                params['plan_id'] = self.plan_id.to_alipay_dict()
+            else:
+                params['plan_id'] = self.plan_id
+        if self.plan_name:
+            if hasattr(self.plan_name, 'to_alipay_dict'):
+                params['plan_name'] = self.plan_name.to_alipay_dict()
+            else:
+                params['plan_name'] = self.plan_name
+        if self.scene_name:
+            if hasattr(self.scene_name, 'to_alipay_dict'):
+                params['scene_name'] = self.scene_name.to_alipay_dict()
+            else:
+                params['scene_name'] = self.scene_name
         return params
 
     @staticmethod
@@ -120,8 +211,22 @@ class AdReportDataDetail(object):
             o.cost = d['cost']
         if 'data_id' in d:
             o.data_id = d['data_id']
+        if 'group_name' in d:
+            o.group_name = d['group_name']
         if 'impression' in d:
             o.impression = d['impression']
+        if 'market_target_name' in d:
+            o.market_target_name = d['market_target_name']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
+        if 'order_name' in d:
+            o.order_name = d['order_name']
+        if 'plan_id' in d:
+            o.plan_id = d['plan_id']
+        if 'plan_name' in d:
+            o.plan_name = d['plan_name']
+        if 'scene_name' in d:
+            o.scene_name = d['scene_name']
         return o
 
 

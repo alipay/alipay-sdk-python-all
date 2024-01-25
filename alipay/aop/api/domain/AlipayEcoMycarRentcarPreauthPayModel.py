@@ -9,6 +9,7 @@ class AlipayEcoMycarRentcarPreauthPayModel(object):
 
     def __init__(self):
         self._deduct_amount = None
+        self._deduct_reason = None
         self._fund_type = None
         self._open_id = None
         self._out_order_no = None
@@ -22,6 +23,13 @@ class AlipayEcoMycarRentcarPreauthPayModel(object):
     @deduct_amount.setter
     def deduct_amount(self, value):
         self._deduct_amount = value
+    @property
+    def deduct_reason(self):
+        return self._deduct_reason
+
+    @deduct_reason.setter
+    def deduct_reason(self, value):
+        self._deduct_reason = value
     @property
     def fund_type(self):
         return self._fund_type
@@ -66,6 +74,11 @@ class AlipayEcoMycarRentcarPreauthPayModel(object):
                 params['deduct_amount'] = self.deduct_amount.to_alipay_dict()
             else:
                 params['deduct_amount'] = self.deduct_amount
+        if self.deduct_reason:
+            if hasattr(self.deduct_reason, 'to_alipay_dict'):
+                params['deduct_reason'] = self.deduct_reason.to_alipay_dict()
+            else:
+                params['deduct_reason'] = self.deduct_reason
         if self.fund_type:
             if hasattr(self.fund_type, 'to_alipay_dict'):
                 params['fund_type'] = self.fund_type.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayEcoMycarRentcarPreauthPayModel(object):
         o = AlipayEcoMycarRentcarPreauthPayModel()
         if 'deduct_amount' in d:
             o.deduct_amount = d['deduct_amount']
+        if 'deduct_reason' in d:
+            o.deduct_reason = d['deduct_reason']
         if 'fund_type' in d:
             o.fund_type = d['fund_type']
         if 'open_id' in d:
