@@ -15,6 +15,9 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
         self._invoice_rule_name = None
         self._invoice_title_id = None
         self._open_mode = None
+        self._receive_address = None
+        self._receive_name = None
+        self._receive_phone = None
         self._seller_type = None
         self._tag = None
 
@@ -68,6 +71,27 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
     def open_mode(self, value):
         self._open_mode = value
     @property
+    def receive_address(self):
+        return self._receive_address
+
+    @receive_address.setter
+    def receive_address(self, value):
+        self._receive_address = value
+    @property
+    def receive_name(self):
+        return self._receive_name
+
+    @receive_name.setter
+    def receive_name(self, value):
+        self._receive_name = value
+    @property
+    def receive_phone(self):
+        return self._receive_phone
+
+    @receive_phone.setter
+    def receive_phone(self, value):
+        self._receive_phone = value
+    @property
     def seller_type(self):
         return self._seller_type
 
@@ -120,6 +144,21 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
                 params['open_mode'] = self.open_mode.to_alipay_dict()
             else:
                 params['open_mode'] = self.open_mode
+        if self.receive_address:
+            if hasattr(self.receive_address, 'to_alipay_dict'):
+                params['receive_address'] = self.receive_address.to_alipay_dict()
+            else:
+                params['receive_address'] = self.receive_address
+        if self.receive_name:
+            if hasattr(self.receive_name, 'to_alipay_dict'):
+                params['receive_name'] = self.receive_name.to_alipay_dict()
+            else:
+                params['receive_name'] = self.receive_name
+        if self.receive_phone:
+            if hasattr(self.receive_phone, 'to_alipay_dict'):
+                params['receive_phone'] = self.receive_phone.to_alipay_dict()
+            else:
+                params['receive_phone'] = self.receive_phone
         if self.seller_type:
             if hasattr(self.seller_type, 'to_alipay_dict'):
                 params['seller_type'] = self.seller_type.to_alipay_dict()
@@ -151,6 +190,12 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
             o.invoice_title_id = d['invoice_title_id']
         if 'open_mode' in d:
             o.open_mode = d['open_mode']
+        if 'receive_address' in d:
+            o.receive_address = d['receive_address']
+        if 'receive_name' in d:
+            o.receive_name = d['receive_name']
+        if 'receive_phone' in d:
+            o.receive_phone = d['receive_phone']
         if 'seller_type' in d:
             o.seller_type = d['seller_type']
         if 'tag' in d:

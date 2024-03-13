@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RepaymentBusinessParams import RepaymentBusinessParams
 from alipay.aop.api.domain.RepaymentParticipant import RepaymentParticipant
 
 
@@ -10,6 +11,7 @@ class AlipayFundFlexiblestaffingRepaymentTransferModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._business_params = None
         self._loan_agreement_no = None
         self._order_title = None
         self._out_biz_no = None
@@ -25,6 +27,16 @@ class AlipayFundFlexiblestaffingRepaymentTransferModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        if isinstance(value, RepaymentBusinessParams):
+            self._business_params = value
+        else:
+            self._business_params = RepaymentBusinessParams.from_alipay_dict(value)
     @property
     def loan_agreement_no(self):
         return self._loan_agreement_no
@@ -86,6 +98,11 @@ class AlipayFundFlexiblestaffingRepaymentTransferModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.loan_agreement_no:
             if hasattr(self.loan_agreement_no, 'to_alipay_dict'):
                 params['loan_agreement_no'] = self.loan_agreement_no.to_alipay_dict()
@@ -130,6 +147,8 @@ class AlipayFundFlexiblestaffingRepaymentTransferModel(object):
         o = AlipayFundFlexiblestaffingRepaymentTransferModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'loan_agreement_no' in d:
             o.loan_agreement_no = d['loan_agreement_no']
         if 'order_title' in d:

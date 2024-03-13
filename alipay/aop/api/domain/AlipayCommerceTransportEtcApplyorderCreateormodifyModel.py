@@ -20,6 +20,7 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._plate_color = None
         self._plate_no = None
         self._seller_id = None
+        self._spu_code = None
         self._user_id = None
         self._vi_license_apc = None
         self._vi_license_brand_model = None
@@ -118,6 +119,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @seller_id.setter
     def seller_id(self, value):
         self._seller_id = value
+    @property
+    def spu_code(self):
+        return self._spu_code
+
+    @spu_code.setter
+    def spu_code(self, value):
+        self._spu_code = value
     @property
     def user_id(self):
         return self._user_id
@@ -273,6 +281,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.spu_code:
+            if hasattr(self.spu_code, 'to_alipay_dict'):
+                params['spu_code'] = self.spu_code.to_alipay_dict()
+            else:
+                params['spu_code'] = self.spu_code
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -369,6 +382,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.plate_no = d['plate_no']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'spu_code' in d:
+            o.spu_code = d['spu_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'vi_license_apc' in d:

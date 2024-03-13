@@ -19,6 +19,7 @@ class AlipayEbppIndustryJobSyncModel(object):
         self._expired_date = None
         self._gender = None
         self._hire_status = None
+        self._iot_status = None
         self._job_detail = None
         self._job_detail_url = None
         self._job_features = None
@@ -111,6 +112,13 @@ class AlipayEbppIndustryJobSyncModel(object):
     @hire_status.setter
     def hire_status(self, value):
         self._hire_status = value
+    @property
+    def iot_status(self):
+        return self._iot_status
+
+    @iot_status.setter
+    def iot_status(self, value):
+        self._iot_status = value
     @property
     def job_detail(self):
         return self._job_detail
@@ -281,6 +289,11 @@ class AlipayEbppIndustryJobSyncModel(object):
                 params['hire_status'] = self.hire_status.to_alipay_dict()
             else:
                 params['hire_status'] = self.hire_status
+        if self.iot_status:
+            if hasattr(self.iot_status, 'to_alipay_dict'):
+                params['iot_status'] = self.iot_status.to_alipay_dict()
+            else:
+                params['iot_status'] = self.iot_status
         if self.job_detail:
             if hasattr(self.job_detail, 'to_alipay_dict'):
                 params['job_detail'] = self.job_detail.to_alipay_dict()
@@ -393,6 +406,8 @@ class AlipayEbppIndustryJobSyncModel(object):
             o.gender = d['gender']
         if 'hire_status' in d:
             o.hire_status = d['hire_status']
+        if 'iot_status' in d:
+            o.iot_status = d['iot_status']
         if 'job_detail' in d:
             o.job_detail = d['job_detail']
         if 'job_detail_url' in d:

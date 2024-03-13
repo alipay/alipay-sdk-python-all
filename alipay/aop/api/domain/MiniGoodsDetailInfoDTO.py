@@ -3,14 +3,17 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ActivityInfoDTO import ActivityInfoDTO
 from alipay.aop.api.domain.EffectiveDatesDTO import EffectiveDatesDTO
 from alipay.aop.api.domain.ItemInstallmentInfoDTO import ItemInstallmentInfoDTO
 from alipay.aop.api.domain.RentInfoDTO import RentInfoDTO
+from alipay.aop.api.domain.TicketInfoDTO import TicketInfoDTO
 
 
 class MiniGoodsDetailInfoDTO(object):
 
     def __init__(self):
+        self._activity_info = None
         self._body = None
         self._categories_tree = None
         self._effective_dates = None
@@ -28,7 +31,18 @@ class MiniGoodsDetailInfoDTO(object):
         self._sale_price = None
         self._sale_real_price = None
         self._show_url = None
+        self._ticket_info = None
 
+    @property
+    def activity_info(self):
+        return self._activity_info
+
+    @activity_info.setter
+    def activity_info(self, value):
+        if isinstance(value, ActivityInfoDTO):
+            self._activity_info = value
+        else:
+            self._activity_info = ActivityInfoDTO.from_alipay_dict(value)
     @property
     def body(self):
         return self._body
@@ -160,10 +174,25 @@ class MiniGoodsDetailInfoDTO(object):
     @show_url.setter
     def show_url(self, value):
         self._show_url = value
+    @property
+    def ticket_info(self):
+        return self._ticket_info
+
+    @ticket_info.setter
+    def ticket_info(self, value):
+        if isinstance(value, TicketInfoDTO):
+            self._ticket_info = value
+        else:
+            self._ticket_info = TicketInfoDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_info:
+            if hasattr(self.activity_info, 'to_alipay_dict'):
+                params['activity_info'] = self.activity_info.to_alipay_dict()
+            else:
+                params['activity_info'] = self.activity_info
         if self.body:
             if hasattr(self.body, 'to_alipay_dict'):
                 params['body'] = self.body.to_alipay_dict()
@@ -254,6 +283,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['show_url'] = self.show_url.to_alipay_dict()
             else:
                 params['show_url'] = self.show_url
+        if self.ticket_info:
+            if hasattr(self.ticket_info, 'to_alipay_dict'):
+                params['ticket_info'] = self.ticket_info.to_alipay_dict()
+            else:
+                params['ticket_info'] = self.ticket_info
         return params
 
     @staticmethod
@@ -261,6 +295,8 @@ class MiniGoodsDetailInfoDTO(object):
         if not d:
             return None
         o = MiniGoodsDetailInfoDTO()
+        if 'activity_info' in d:
+            o.activity_info = d['activity_info']
         if 'body' in d:
             o.body = d['body']
         if 'categories_tree' in d:
@@ -295,6 +331,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.sale_real_price = d['sale_real_price']
         if 'show_url' in d:
             o.show_url = d['show_url']
+        if 'ticket_info' in d:
+            o.ticket_info = d['ticket_info']
         return o
 
 

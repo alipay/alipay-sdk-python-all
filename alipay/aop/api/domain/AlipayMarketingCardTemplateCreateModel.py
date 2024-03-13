@@ -12,12 +12,14 @@ from alipay.aop.api.domain.TemplateOpenCardConfDTO import TemplateOpenCardConfDT
 from alipay.aop.api.domain.PaidOuterCardTemplateConfDTO import PaidOuterCardTemplateConfDTO
 from alipay.aop.api.domain.PubChannelDTO import PubChannelDTO
 from alipay.aop.api.domain.TemplateBenefitInfoDTO import TemplateBenefitInfoDTO
+from alipay.aop.api.domain.TemplateFormConfig import TemplateFormConfig
 from alipay.aop.api.domain.TemplateStyleInfoDTO import TemplateStyleInfoDTO
 
 
 class AlipayMarketingCardTemplateCreateModel(object):
 
     def __init__(self):
+        self._access_version = None
         self._biz_no_prefix = None
         self._biz_no_suffix_len = None
         self._card_action_list = None
@@ -35,9 +37,17 @@ class AlipayMarketingCardTemplateCreateModel(object):
         self._shop_ids = None
         self._spi_app_id = None
         self._template_benefit_info = None
+        self._template_form_config = None
         self._template_style_info = None
         self._write_off_type = None
 
+    @property
+    def access_version(self):
+        return self._access_version
+
+    @access_version.setter
+    def access_version(self, value):
+        self._access_version = value
     @property
     def biz_no_prefix(self):
         return self._biz_no_prefix
@@ -209,6 +219,16 @@ class AlipayMarketingCardTemplateCreateModel(object):
                 else:
                     self._template_benefit_info.append(TemplateBenefitInfoDTO.from_alipay_dict(i))
     @property
+    def template_form_config(self):
+        return self._template_form_config
+
+    @template_form_config.setter
+    def template_form_config(self, value):
+        if isinstance(value, TemplateFormConfig):
+            self._template_form_config = value
+        else:
+            self._template_form_config = TemplateFormConfig.from_alipay_dict(value)
+    @property
     def template_style_info(self):
         return self._template_style_info
 
@@ -229,6 +249,11 @@ class AlipayMarketingCardTemplateCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.access_version:
+            if hasattr(self.access_version, 'to_alipay_dict'):
+                params['access_version'] = self.access_version.to_alipay_dict()
+            else:
+                params['access_version'] = self.access_version
         if self.biz_no_prefix:
             if hasattr(self.biz_no_prefix, 'to_alipay_dict'):
                 params['biz_no_prefix'] = self.biz_no_prefix.to_alipay_dict()
@@ -354,6 +379,11 @@ class AlipayMarketingCardTemplateCreateModel(object):
                 params['template_benefit_info'] = self.template_benefit_info.to_alipay_dict()
             else:
                 params['template_benefit_info'] = self.template_benefit_info
+        if self.template_form_config:
+            if hasattr(self.template_form_config, 'to_alipay_dict'):
+                params['template_form_config'] = self.template_form_config.to_alipay_dict()
+            else:
+                params['template_form_config'] = self.template_form_config
         if self.template_style_info:
             if hasattr(self.template_style_info, 'to_alipay_dict'):
                 params['template_style_info'] = self.template_style_info.to_alipay_dict()
@@ -371,6 +401,8 @@ class AlipayMarketingCardTemplateCreateModel(object):
         if not d:
             return None
         o = AlipayMarketingCardTemplateCreateModel()
+        if 'access_version' in d:
+            o.access_version = d['access_version']
         if 'biz_no_prefix' in d:
             o.biz_no_prefix = d['biz_no_prefix']
         if 'biz_no_suffix_len' in d:
@@ -405,6 +437,8 @@ class AlipayMarketingCardTemplateCreateModel(object):
             o.spi_app_id = d['spi_app_id']
         if 'template_benefit_info' in d:
             o.template_benefit_info = d['template_benefit_info']
+        if 'template_form_config' in d:
+            o.template_form_config = d['template_form_config']
         if 'template_style_info' in d:
             o.template_style_info = d['template_style_info']
         if 'write_off_type' in d:

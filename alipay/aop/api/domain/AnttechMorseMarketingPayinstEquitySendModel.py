@@ -9,6 +9,7 @@ class AnttechMorseMarketingPayinstEquitySendModel(object):
 
     def __init__(self):
         self._campaign_id = None
+        self._campaign_ids = None
         self._equity_type = None
         self._mobile_sha_256 = None
         self._out_request_id = None
@@ -22,6 +23,13 @@ class AnttechMorseMarketingPayinstEquitySendModel(object):
     @campaign_id.setter
     def campaign_id(self, value):
         self._campaign_id = value
+    @property
+    def campaign_ids(self):
+        return self._campaign_ids
+
+    @campaign_ids.setter
+    def campaign_ids(self, value):
+        self._campaign_ids = value
     @property
     def equity_type(self):
         return self._equity_type
@@ -66,6 +74,11 @@ class AnttechMorseMarketingPayinstEquitySendModel(object):
                 params['campaign_id'] = self.campaign_id.to_alipay_dict()
             else:
                 params['campaign_id'] = self.campaign_id
+        if self.campaign_ids:
+            if hasattr(self.campaign_ids, 'to_alipay_dict'):
+                params['campaign_ids'] = self.campaign_ids.to_alipay_dict()
+            else:
+                params['campaign_ids'] = self.campaign_ids
         if self.equity_type:
             if hasattr(self.equity_type, 'to_alipay_dict'):
                 params['equity_type'] = self.equity_type.to_alipay_dict()
@@ -100,6 +113,8 @@ class AnttechMorseMarketingPayinstEquitySendModel(object):
         o = AnttechMorseMarketingPayinstEquitySendModel()
         if 'campaign_id' in d:
             o.campaign_id = d['campaign_id']
+        if 'campaign_ids' in d:
+            o.campaign_ids = d['campaign_ids']
         if 'equity_type' in d:
             o.equity_type = d['equity_type']
         if 'mobile_sha_256' in d:

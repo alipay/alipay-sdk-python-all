@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class CardCycleInfo(object):
 
     def __init__(self):
+        self._cycle_charge_start_time = None
         self._cycle_charge_type = None
         self._cycle_range = None
         self._cycle_type = None
         self._cycle_value = None
 
+    @property
+    def cycle_charge_start_time(self):
+        return self._cycle_charge_start_time
+
+    @cycle_charge_start_time.setter
+    def cycle_charge_start_time(self, value):
+        self._cycle_charge_start_time = value
     @property
     def cycle_charge_type(self):
         return self._cycle_charge_type
@@ -45,6 +53,11 @@ class CardCycleInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cycle_charge_start_time:
+            if hasattr(self.cycle_charge_start_time, 'to_alipay_dict'):
+                params['cycle_charge_start_time'] = self.cycle_charge_start_time.to_alipay_dict()
+            else:
+                params['cycle_charge_start_time'] = self.cycle_charge_start_time
         if self.cycle_charge_type:
             if hasattr(self.cycle_charge_type, 'to_alipay_dict'):
                 params['cycle_charge_type'] = self.cycle_charge_type.to_alipay_dict()
@@ -72,6 +85,8 @@ class CardCycleInfo(object):
         if not d:
             return None
         o = CardCycleInfo()
+        if 'cycle_charge_start_time' in d:
+            o.cycle_charge_start_time = d['cycle_charge_start_time']
         if 'cycle_charge_type' in d:
             o.cycle_charge_type = d['cycle_charge_type']
         if 'cycle_range' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class CampaignPrize(object):
 
     def __init__(self):
+        self._actual_amount = None
         self._campaign_channel = None
         self._campaign_channel_code = None
         self._campaign_id = None
@@ -18,6 +19,13 @@ class CampaignPrize(object):
         self._min_amount = None
         self._threshold = None
 
+    @property
+    def actual_amount(self):
+        return self._actual_amount
+
+    @actual_amount.setter
+    def actual_amount(self, value):
+        self._actual_amount = value
     @property
     def campaign_channel(self):
         return self._campaign_channel
@@ -85,6 +93,11 @@ class CampaignPrize(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.actual_amount:
+            if hasattr(self.actual_amount, 'to_alipay_dict'):
+                params['actual_amount'] = self.actual_amount.to_alipay_dict()
+            else:
+                params['actual_amount'] = self.actual_amount
         if self.campaign_channel:
             if hasattr(self.campaign_channel, 'to_alipay_dict'):
                 params['campaign_channel'] = self.campaign_channel.to_alipay_dict()
@@ -137,6 +150,8 @@ class CampaignPrize(object):
         if not d:
             return None
         o = CampaignPrize()
+        if 'actual_amount' in d:
+            o.actual_amount = d['actual_amount']
         if 'campaign_channel' in d:
             o.campaign_channel = d['campaign_channel']
         if 'campaign_channel_code' in d:

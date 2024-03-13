@@ -12,12 +12,15 @@ class RoyaltyDetailInfo(object):
     def __init__(self):
         self._amount = None
         self._desc = None
+        self._scene = None
         self._trans_in_account_id = None
         self._trans_in_account_id_type = None
         self._trans_in_account_type = None
+        self._trans_in_entity_biz_type = None
         self._trans_in_entity_id = None
         self._trans_in_entity_type = None
         self._trans_in_sub_merchant = None
+        self._trans_out_entity_biz_type = None
         self._trans_out_entity_id = None
         self._trans_out_entity_type = None
         self._trans_out_sub_merchant = None
@@ -36,6 +39,13 @@ class RoyaltyDetailInfo(object):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def scene(self):
+        return self._scene
+
+    @scene.setter
+    def scene(self, value):
+        self._scene = value
     @property
     def trans_in_account_id(self):
         return self._trans_in_account_id
@@ -57,6 +67,13 @@ class RoyaltyDetailInfo(object):
     @trans_in_account_type.setter
     def trans_in_account_type(self, value):
         self._trans_in_account_type = value
+    @property
+    def trans_in_entity_biz_type(self):
+        return self._trans_in_entity_biz_type
+
+    @trans_in_entity_biz_type.setter
+    def trans_in_entity_biz_type(self, value):
+        self._trans_in_entity_biz_type = value
     @property
     def trans_in_entity_id(self):
         return self._trans_in_entity_id
@@ -81,6 +98,13 @@ class RoyaltyDetailInfo(object):
             self._trans_in_sub_merchant = value
         else:
             self._trans_in_sub_merchant = SubMerchant.from_alipay_dict(value)
+    @property
+    def trans_out_entity_biz_type(self):
+        return self._trans_out_entity_biz_type
+
+    @trans_out_entity_biz_type.setter
+    def trans_out_entity_biz_type(self, value):
+        self._trans_out_entity_biz_type = value
     @property
     def trans_out_entity_id(self):
         return self._trans_out_entity_id
@@ -119,6 +143,11 @@ class RoyaltyDetailInfo(object):
                 params['desc'] = self.desc.to_alipay_dict()
             else:
                 params['desc'] = self.desc
+        if self.scene:
+            if hasattr(self.scene, 'to_alipay_dict'):
+                params['scene'] = self.scene.to_alipay_dict()
+            else:
+                params['scene'] = self.scene
         if self.trans_in_account_id:
             if hasattr(self.trans_in_account_id, 'to_alipay_dict'):
                 params['trans_in_account_id'] = self.trans_in_account_id.to_alipay_dict()
@@ -134,6 +163,11 @@ class RoyaltyDetailInfo(object):
                 params['trans_in_account_type'] = self.trans_in_account_type.to_alipay_dict()
             else:
                 params['trans_in_account_type'] = self.trans_in_account_type
+        if self.trans_in_entity_biz_type:
+            if hasattr(self.trans_in_entity_biz_type, 'to_alipay_dict'):
+                params['trans_in_entity_biz_type'] = self.trans_in_entity_biz_type.to_alipay_dict()
+            else:
+                params['trans_in_entity_biz_type'] = self.trans_in_entity_biz_type
         if self.trans_in_entity_id:
             if hasattr(self.trans_in_entity_id, 'to_alipay_dict'):
                 params['trans_in_entity_id'] = self.trans_in_entity_id.to_alipay_dict()
@@ -149,6 +183,11 @@ class RoyaltyDetailInfo(object):
                 params['trans_in_sub_merchant'] = self.trans_in_sub_merchant.to_alipay_dict()
             else:
                 params['trans_in_sub_merchant'] = self.trans_in_sub_merchant
+        if self.trans_out_entity_biz_type:
+            if hasattr(self.trans_out_entity_biz_type, 'to_alipay_dict'):
+                params['trans_out_entity_biz_type'] = self.trans_out_entity_biz_type.to_alipay_dict()
+            else:
+                params['trans_out_entity_biz_type'] = self.trans_out_entity_biz_type
         if self.trans_out_entity_id:
             if hasattr(self.trans_out_entity_id, 'to_alipay_dict'):
                 params['trans_out_entity_id'] = self.trans_out_entity_id.to_alipay_dict()
@@ -175,18 +214,24 @@ class RoyaltyDetailInfo(object):
             o.amount = d['amount']
         if 'desc' in d:
             o.desc = d['desc']
+        if 'scene' in d:
+            o.scene = d['scene']
         if 'trans_in_account_id' in d:
             o.trans_in_account_id = d['trans_in_account_id']
         if 'trans_in_account_id_type' in d:
             o.trans_in_account_id_type = d['trans_in_account_id_type']
         if 'trans_in_account_type' in d:
             o.trans_in_account_type = d['trans_in_account_type']
+        if 'trans_in_entity_biz_type' in d:
+            o.trans_in_entity_biz_type = d['trans_in_entity_biz_type']
         if 'trans_in_entity_id' in d:
             o.trans_in_entity_id = d['trans_in_entity_id']
         if 'trans_in_entity_type' in d:
             o.trans_in_entity_type = d['trans_in_entity_type']
         if 'trans_in_sub_merchant' in d:
             o.trans_in_sub_merchant = d['trans_in_sub_merchant']
+        if 'trans_out_entity_biz_type' in d:
+            o.trans_out_entity_biz_type = d['trans_out_entity_biz_type']
         if 'trans_out_entity_id' in d:
             o.trans_out_entity_id = d['trans_out_entity_id']
         if 'trans_out_entity_type' in d:

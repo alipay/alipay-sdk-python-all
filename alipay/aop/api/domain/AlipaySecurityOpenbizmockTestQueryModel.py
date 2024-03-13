@@ -10,6 +10,8 @@ class AlipaySecurityOpenbizmockTestQueryModel(object):
 
     def __init__(self):
         self._complex = None
+        self._longitude = None
+        self._mobile_number = None
         self._test_boolean = None
         self._test_date = None
         self._test_number = None
@@ -30,6 +32,20 @@ class AlipaySecurityOpenbizmockTestQueryModel(object):
                     self._complex.append(i)
                 else:
                     self._complex.append(PublicComplex.from_alipay_dict(i))
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
+    @property
+    def mobile_number(self):
+        return self._mobile_number
+
+    @mobile_number.setter
+    def mobile_number(self, value):
+        self._mobile_number = value
     @property
     def test_boolean(self):
         return self._test_boolean
@@ -101,6 +117,16 @@ class AlipaySecurityOpenbizmockTestQueryModel(object):
                 params['complex'] = self.complex.to_alipay_dict()
             else:
                 params['complex'] = self.complex
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
+        if self.mobile_number:
+            if hasattr(self.mobile_number, 'to_alipay_dict'):
+                params['mobile_number'] = self.mobile_number.to_alipay_dict()
+            else:
+                params['mobile_number'] = self.mobile_number
         if self.test_boolean:
             if isinstance(self.test_boolean, list):
                 for i in range(0, len(self.test_boolean)):
@@ -165,6 +191,10 @@ class AlipaySecurityOpenbizmockTestQueryModel(object):
         o = AlipaySecurityOpenbizmockTestQueryModel()
         if 'complex' in d:
             o.complex = d['complex']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
+        if 'mobile_number' in d:
+            o.mobile_number = d['mobile_number']
         if 'test_boolean' in d:
             o.test_boolean = d['test_boolean']
         if 'test_date' in d:

@@ -16,6 +16,7 @@ class PayChannelPromoInfo(object):
         self._channel_detail_params = None
         self._channel_enable = None
         self._channel_index = None
+        self._channel_logo = None
         self._channel_name = None
         self._channel_operation_info = None
         self._installment_info_list = None
@@ -59,6 +60,13 @@ class PayChannelPromoInfo(object):
     @channel_index.setter
     def channel_index(self, value):
         self._channel_index = value
+    @property
+    def channel_logo(self):
+        return self._channel_logo
+
+    @channel_logo.setter
+    def channel_logo(self, value):
+        self._channel_logo = value
     @property
     def channel_name(self):
         return self._channel_name
@@ -122,6 +130,11 @@ class PayChannelPromoInfo(object):
                 params['channel_index'] = self.channel_index.to_alipay_dict()
             else:
                 params['channel_index'] = self.channel_index
+        if self.channel_logo:
+            if hasattr(self.channel_logo, 'to_alipay_dict'):
+                params['channel_logo'] = self.channel_logo.to_alipay_dict()
+            else:
+                params['channel_logo'] = self.channel_logo
         if self.channel_name:
             if hasattr(self.channel_name, 'to_alipay_dict'):
                 params['channel_name'] = self.channel_name.to_alipay_dict()
@@ -159,6 +172,8 @@ class PayChannelPromoInfo(object):
             o.channel_enable = d['channel_enable']
         if 'channel_index' in d:
             o.channel_index = d['channel_index']
+        if 'channel_logo' in d:
+            o.channel_logo = d['channel_logo']
         if 'channel_name' in d:
             o.channel_name = d['channel_name']
         if 'channel_operation_info' in d:

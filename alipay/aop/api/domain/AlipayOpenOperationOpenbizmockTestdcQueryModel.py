@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AAAAAtest import AAAAAtest
 from alipay.aop.api.domain.AAAAAtest import AAAAAtest
+from alipay.aop.api.domain.ManjiangTestComplexOneData import ManjiangTestComplexOneData
 
 
 class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
@@ -29,6 +30,7 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
         self._i = None
         self._mn = None
         self._open_id = None
+        self._s = None
         self._sss = None
         self._uid = None
         self._uid_2_open_id = None
@@ -180,6 +182,16 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def s(self):
+        return self._s
+
+    @s.setter
+    def s(self, value):
+        if isinstance(value, ManjiangTestComplexOneData):
+            self._s = value
+        else:
+            self._s = ManjiangTestComplexOneData.from_alipay_dict(value)
+    @property
     def sss(self):
         return self._sss
 
@@ -316,6 +328,11 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.s:
+            if hasattr(self.s, 'to_alipay_dict'):
+                params['s'] = self.s.to_alipay_dict()
+            else:
+                params['s'] = self.s
         if self.sss:
             if hasattr(self.sss, 'to_alipay_dict'):
                 params['sss'] = self.sss.to_alipay_dict()
@@ -381,6 +398,8 @@ class AlipayOpenOperationOpenbizmockTestdcQueryModel(object):
             o.mn = d['mn']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 's' in d:
+            o.s = d['s']
         if 'sss' in d:
             o.sss = d['sss']
         if 'uid' in d:

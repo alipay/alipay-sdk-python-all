@@ -10,6 +10,7 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayEbppIndustrySupervisionOrderQueryResponse, self).__init__()
         self._alipay_order_detail_url = None
+        self._alipay_order_no = None
         self._amount = None
         self._currency = None
         self._order_status = None
@@ -25,6 +26,13 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
     @alipay_order_detail_url.setter
     def alipay_order_detail_url(self, value):
         self._alipay_order_detail_url = value
+    @property
+    def alipay_order_no(self):
+        return self._alipay_order_no
+
+    @alipay_order_no.setter
+    def alipay_order_no(self, value):
+        self._alipay_order_no = value
     @property
     def amount(self):
         return self._amount
@@ -79,6 +87,8 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
         response = super(AlipayEbppIndustrySupervisionOrderQueryResponse, self).parse_response_content(response_content)
         if 'alipay_order_detail_url' in response:
             self.alipay_order_detail_url = response['alipay_order_detail_url']
+        if 'alipay_order_no' in response:
+            self.alipay_order_no = response['alipay_order_no']
         if 'amount' in response:
             self.amount = response['amount']
         if 'currency' in response:

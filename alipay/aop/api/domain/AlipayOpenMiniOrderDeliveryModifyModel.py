@@ -3,21 +3,38 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ActivityInfoModifyDTO import ActivityInfoModifyDTO
 from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
+from alipay.aop.api.domain.TicketInfoModifyDTO import TicketInfoModifyDTO
 
 
 class AlipayOpenMiniOrderDeliveryModifyModel(object):
 
     def __init__(self):
+        self._activity_infos = None
         self._booking_info = None
         self._contact_info = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
         self._status = None
+        self._ticket_infos = None
         self._user_id = None
 
+    @property
+    def activity_infos(self):
+        return self._activity_infos
+
+    @activity_infos.setter
+    def activity_infos(self, value):
+        if isinstance(value, list):
+            self._activity_infos = list()
+            for i in value:
+                if isinstance(i, ActivityInfoModifyDTO):
+                    self._activity_infos.append(i)
+                else:
+                    self._activity_infos.append(ActivityInfoModifyDTO.from_alipay_dict(i))
     @property
     def booking_info(self):
         return self._booking_info
@@ -67,6 +84,19 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
     def status(self, value):
         self._status = value
     @property
+    def ticket_infos(self):
+        return self._ticket_infos
+
+    @ticket_infos.setter
+    def ticket_infos(self, value):
+        if isinstance(value, list):
+            self._ticket_infos = list()
+            for i in value:
+                if isinstance(i, TicketInfoModifyDTO):
+                    self._ticket_infos.append(i)
+                else:
+                    self._ticket_infos.append(TicketInfoModifyDTO.from_alipay_dict(i))
+    @property
     def user_id(self):
         return self._user_id
 
@@ -77,6 +107,16 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_infos:
+            if isinstance(self.activity_infos, list):
+                for i in range(0, len(self.activity_infos)):
+                    element = self.activity_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.activity_infos[i] = element.to_alipay_dict()
+            if hasattr(self.activity_infos, 'to_alipay_dict'):
+                params['activity_infos'] = self.activity_infos.to_alipay_dict()
+            else:
+                params['activity_infos'] = self.activity_infos
         if self.booking_info:
             if hasattr(self.booking_info, 'to_alipay_dict'):
                 params['booking_info'] = self.booking_info.to_alipay_dict()
@@ -107,6 +147,16 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.ticket_infos:
+            if isinstance(self.ticket_infos, list):
+                for i in range(0, len(self.ticket_infos)):
+                    element = self.ticket_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ticket_infos[i] = element.to_alipay_dict()
+            if hasattr(self.ticket_infos, 'to_alipay_dict'):
+                params['ticket_infos'] = self.ticket_infos.to_alipay_dict()
+            else:
+                params['ticket_infos'] = self.ticket_infos
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -119,6 +169,8 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderDeliveryModifyModel()
+        if 'activity_infos' in d:
+            o.activity_infos = d['activity_infos']
         if 'booking_info' in d:
             o.booking_info = d['booking_info']
         if 'contact_info' in d:
@@ -131,6 +183,8 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
             o.out_order_id = d['out_order_id']
         if 'status' in d:
             o.status = d['status']
+        if 'ticket_infos' in d:
+            o.ticket_infos = d['ticket_infos']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

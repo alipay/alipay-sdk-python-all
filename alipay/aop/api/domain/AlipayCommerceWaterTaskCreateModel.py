@@ -14,6 +14,7 @@ class AlipayCommerceWaterTaskCreateModel(object):
         self._merchant_pid = None
         self._prize_content = None
         self._second_merchant_appid = None
+        self._smid = None
         self._task_condition = None
         self._task_contract_period = None
         self._task_end = None
@@ -61,6 +62,13 @@ class AlipayCommerceWaterTaskCreateModel(object):
     @second_merchant_appid.setter
     def second_merchant_appid(self, value):
         self._second_merchant_appid = value
+    @property
+    def smid(self):
+        return self._smid
+
+    @smid.setter
+    def smid(self, value):
+        self._smid = value
     @property
     def task_condition(self):
         return self._task_condition
@@ -146,6 +154,11 @@ class AlipayCommerceWaterTaskCreateModel(object):
                 params['second_merchant_appid'] = self.second_merchant_appid.to_alipay_dict()
             else:
                 params['second_merchant_appid'] = self.second_merchant_appid
+        if self.smid:
+            if hasattr(self.smid, 'to_alipay_dict'):
+                params['smid'] = self.smid.to_alipay_dict()
+            else:
+                params['smid'] = self.smid
         if self.task_condition:
             if hasattr(self.task_condition, 'to_alipay_dict'):
                 params['task_condition'] = self.task_condition.to_alipay_dict()
@@ -203,6 +216,8 @@ class AlipayCommerceWaterTaskCreateModel(object):
             o.prize_content = d['prize_content']
         if 'second_merchant_appid' in d:
             o.second_merchant_appid = d['second_merchant_appid']
+        if 'smid' in d:
+            o.smid = d['smid']
         if 'task_condition' in d:
             o.task_condition = d['task_condition']
         if 'task_contract_period' in d:

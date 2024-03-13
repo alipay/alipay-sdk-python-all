@@ -12,6 +12,7 @@ from alipay.aop.api.domain.TemplateOpenCardConfDTO import TemplateOpenCardConfDT
 from alipay.aop.api.domain.PaidOuterCardTemplateConfDTO import PaidOuterCardTemplateConfDTO
 from alipay.aop.api.domain.PubChannelDTO import PubChannelDTO
 from alipay.aop.api.domain.TemplateBenefitInfoDTO import TemplateBenefitInfoDTO
+from alipay.aop.api.domain.TemplateFormConfig import TemplateFormConfig
 from alipay.aop.api.domain.TemplateStyleInfoDTO import TemplateStyleInfoDTO
 
 
@@ -19,6 +20,7 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayMarketingCardTemplateQueryResponse, self).__init__()
+        self._access_version = None
         self._biz_no_prefix = None
         self._biz_no_suffix_len = None
         self._card_action_list = None
@@ -35,8 +37,16 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
         self._shop_ids = None
         self._spi_app_id = None
         self._template_benefit_info = None
+        self._template_form_config = None
         self._template_style_info = None
 
+    @property
+    def access_version(self):
+        return self._access_version
+
+    @access_version.setter
+    def access_version(self, value):
+        self._access_version = value
     @property
     def biz_no_prefix(self):
         return self._biz_no_prefix
@@ -201,6 +211,16 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
                 else:
                     self._template_benefit_info.append(TemplateBenefitInfoDTO.from_alipay_dict(i))
     @property
+    def template_form_config(self):
+        return self._template_form_config
+
+    @template_form_config.setter
+    def template_form_config(self, value):
+        if isinstance(value, TemplateFormConfig):
+            self._template_form_config = value
+        else:
+            self._template_form_config = TemplateFormConfig.from_alipay_dict(value)
+    @property
     def template_style_info(self):
         return self._template_style_info
 
@@ -213,6 +233,8 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayMarketingCardTemplateQueryResponse, self).parse_response_content(response_content)
+        if 'access_version' in response:
+            self.access_version = response['access_version']
         if 'biz_no_prefix' in response:
             self.biz_no_prefix = response['biz_no_prefix']
         if 'biz_no_suffix_len' in response:
@@ -245,5 +267,7 @@ class AlipayMarketingCardTemplateQueryResponse(AlipayResponse):
             self.spi_app_id = response['spi_app_id']
         if 'template_benefit_info' in response:
             self.template_benefit_info = response['template_benefit_info']
+        if 'template_form_config' in response:
+            self.template_form_config = response['template_form_config']
         if 'template_style_info' in response:
             self.template_style_info = response['template_style_info']

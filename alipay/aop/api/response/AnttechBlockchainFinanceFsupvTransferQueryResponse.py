@@ -10,12 +10,20 @@ class AnttechBlockchainFinanceFsupvTransferQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AnttechBlockchainFinanceFsupvTransferQueryResponse, self).__init__()
+        self._accepted_no = None
         self._fund_supv_task_id = None
         self._supv_special_account_no = None
         self._transfer_desc = None
         self._transfer_detail = None
         self._transfer_status = None
 
+    @property
+    def accepted_no(self):
+        return self._accepted_no
+
+    @accepted_no.setter
+    def accepted_no(self, value):
+        self._accepted_no = value
     @property
     def fund_supv_task_id(self):
         return self._fund_supv_task_id
@@ -60,6 +68,8 @@ class AnttechBlockchainFinanceFsupvTransferQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AnttechBlockchainFinanceFsupvTransferQueryResponse, self).parse_response_content(response_content)
+        if 'accepted_no' in response:
+            self.accepted_no = response['accepted_no']
         if 'fund_supv_task_id' in response:
             self.fund_supv_task_id = response['fund_supv_task_id']
         if 'supv_special_account_no' in response:

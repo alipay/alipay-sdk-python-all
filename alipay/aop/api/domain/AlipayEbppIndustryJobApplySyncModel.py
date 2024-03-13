@@ -12,6 +12,7 @@ class AlipayEbppIndustryJobApplySyncModel(object):
         self._apply_info_url = None
         self._apply_status = None
         self._apply_time = None
+        self._iot_sn = None
         self._out_apply_id = None
         self._out_job_id = None
 
@@ -43,6 +44,13 @@ class AlipayEbppIndustryJobApplySyncModel(object):
     @apply_time.setter
     def apply_time(self, value):
         self._apply_time = value
+    @property
+    def iot_sn(self):
+        return self._iot_sn
+
+    @iot_sn.setter
+    def iot_sn(self, value):
+        self._iot_sn = value
     @property
     def out_apply_id(self):
         return self._out_apply_id
@@ -81,6 +89,11 @@ class AlipayEbppIndustryJobApplySyncModel(object):
                 params['apply_time'] = self.apply_time.to_alipay_dict()
             else:
                 params['apply_time'] = self.apply_time
+        if self.iot_sn:
+            if hasattr(self.iot_sn, 'to_alipay_dict'):
+                params['iot_sn'] = self.iot_sn.to_alipay_dict()
+            else:
+                params['iot_sn'] = self.iot_sn
         if self.out_apply_id:
             if hasattr(self.out_apply_id, 'to_alipay_dict'):
                 params['out_apply_id'] = self.out_apply_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayEbppIndustryJobApplySyncModel(object):
             o.apply_status = d['apply_status']
         if 'apply_time' in d:
             o.apply_time = d['apply_time']
+        if 'iot_sn' in d:
+            o.iot_sn = d['iot_sn']
         if 'out_apply_id' in d:
             o.out_apply_id = d['out_apply_id']
         if 'out_job_id' in d:

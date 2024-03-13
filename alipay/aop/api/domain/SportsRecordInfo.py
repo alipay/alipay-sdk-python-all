@@ -11,14 +11,18 @@ class SportsRecordInfo(object):
         self._calorie = None
         self._distance = None
         self._duration = None
+        self._finish_face_verify_pass = None
         self._finish_time = None
+        self._from_app_id = None
         self._max_altitude = None
         self._min_altitude = None
+        self._out_biz_code = None
         self._record_date = None
         self._record_id = None
         self._speed = None
         self._sport_status = None
         self._sport_type = None
+        self._start_face_verify_pass = None
         self._start_time = None
         self._step_count = None
         self._step_frequency = None
@@ -46,12 +50,26 @@ class SportsRecordInfo(object):
     def duration(self, value):
         self._duration = value
     @property
+    def finish_face_verify_pass(self):
+        return self._finish_face_verify_pass
+
+    @finish_face_verify_pass.setter
+    def finish_face_verify_pass(self, value):
+        self._finish_face_verify_pass = value
+    @property
     def finish_time(self):
         return self._finish_time
 
     @finish_time.setter
     def finish_time(self, value):
         self._finish_time = value
+    @property
+    def from_app_id(self):
+        return self._from_app_id
+
+    @from_app_id.setter
+    def from_app_id(self, value):
+        self._from_app_id = value
     @property
     def max_altitude(self):
         return self._max_altitude
@@ -66,6 +84,13 @@ class SportsRecordInfo(object):
     @min_altitude.setter
     def min_altitude(self, value):
         self._min_altitude = value
+    @property
+    def out_biz_code(self):
+        return self._out_biz_code
+
+    @out_biz_code.setter
+    def out_biz_code(self, value):
+        self._out_biz_code = value
     @property
     def record_date(self):
         return self._record_date
@@ -101,6 +126,13 @@ class SportsRecordInfo(object):
     @sport_type.setter
     def sport_type(self, value):
         self._sport_type = value
+    @property
+    def start_face_verify_pass(self):
+        return self._start_face_verify_pass
+
+    @start_face_verify_pass.setter
+    def start_face_verify_pass(self, value):
+        self._start_face_verify_pass = value
     @property
     def start_time(self):
         return self._start_time
@@ -148,11 +180,21 @@ class SportsRecordInfo(object):
                 params['duration'] = self.duration.to_alipay_dict()
             else:
                 params['duration'] = self.duration
+        if self.finish_face_verify_pass:
+            if hasattr(self.finish_face_verify_pass, 'to_alipay_dict'):
+                params['finish_face_verify_pass'] = self.finish_face_verify_pass.to_alipay_dict()
+            else:
+                params['finish_face_verify_pass'] = self.finish_face_verify_pass
         if self.finish_time:
             if hasattr(self.finish_time, 'to_alipay_dict'):
                 params['finish_time'] = self.finish_time.to_alipay_dict()
             else:
                 params['finish_time'] = self.finish_time
+        if self.from_app_id:
+            if hasattr(self.from_app_id, 'to_alipay_dict'):
+                params['from_app_id'] = self.from_app_id.to_alipay_dict()
+            else:
+                params['from_app_id'] = self.from_app_id
         if self.max_altitude:
             if hasattr(self.max_altitude, 'to_alipay_dict'):
                 params['max_altitude'] = self.max_altitude.to_alipay_dict()
@@ -163,6 +205,11 @@ class SportsRecordInfo(object):
                 params['min_altitude'] = self.min_altitude.to_alipay_dict()
             else:
                 params['min_altitude'] = self.min_altitude
+        if self.out_biz_code:
+            if hasattr(self.out_biz_code, 'to_alipay_dict'):
+                params['out_biz_code'] = self.out_biz_code.to_alipay_dict()
+            else:
+                params['out_biz_code'] = self.out_biz_code
         if self.record_date:
             if hasattr(self.record_date, 'to_alipay_dict'):
                 params['record_date'] = self.record_date.to_alipay_dict()
@@ -188,6 +235,11 @@ class SportsRecordInfo(object):
                 params['sport_type'] = self.sport_type.to_alipay_dict()
             else:
                 params['sport_type'] = self.sport_type
+        if self.start_face_verify_pass:
+            if hasattr(self.start_face_verify_pass, 'to_alipay_dict'):
+                params['start_face_verify_pass'] = self.start_face_verify_pass.to_alipay_dict()
+            else:
+                params['start_face_verify_pass'] = self.start_face_verify_pass
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -221,12 +273,18 @@ class SportsRecordInfo(object):
             o.distance = d['distance']
         if 'duration' in d:
             o.duration = d['duration']
+        if 'finish_face_verify_pass' in d:
+            o.finish_face_verify_pass = d['finish_face_verify_pass']
         if 'finish_time' in d:
             o.finish_time = d['finish_time']
+        if 'from_app_id' in d:
+            o.from_app_id = d['from_app_id']
         if 'max_altitude' in d:
             o.max_altitude = d['max_altitude']
         if 'min_altitude' in d:
             o.min_altitude = d['min_altitude']
+        if 'out_biz_code' in d:
+            o.out_biz_code = d['out_biz_code']
         if 'record_date' in d:
             o.record_date = d['record_date']
         if 'record_id' in d:
@@ -237,6 +295,8 @@ class SportsRecordInfo(object):
             o.sport_status = d['sport_status']
         if 'sport_type' in d:
             o.sport_type = d['sport_type']
+        if 'start_face_verify_pass' in d:
+            o.start_face_verify_pass = d['start_face_verify_pass']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'step_count' in d:

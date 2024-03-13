@@ -13,6 +13,7 @@ class AlipayOpenMiniCloudAositemQueryResponse(AlipayResponse):
         self._aggregation_result = None
         self._item_total_count = None
         self._result = None
+        self._sequence = None
         self._trace_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayOpenMiniCloudAositemQueryResponse(AlipayResponse):
                 else:
                     self._result.append(DataItem.from_alipay_dict(i))
     @property
+    def sequence(self):
+        return self._sequence
+
+    @sequence.setter
+    def sequence(self, value):
+        self._sequence = value
+    @property
     def trace_id(self):
         return self._trace_id
 
@@ -58,5 +66,7 @@ class AlipayOpenMiniCloudAositemQueryResponse(AlipayResponse):
             self.item_total_count = response['item_total_count']
         if 'result' in response:
             self.result = response['result']
+        if 'sequence' in response:
+            self.sequence = response['sequence']
         if 'trace_id' in response:
             self.trace_id = response['trace_id']

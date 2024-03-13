@@ -13,6 +13,7 @@ class AlipayCloudCloudpromoMessageSendModel(object):
         self._sms_up_extend_code = None
         self._template_code = None
         self._template_param = None
+        self._template_param_json = None
 
     @property
     def out_biz_no(self):
@@ -58,6 +59,13 @@ class AlipayCloudCloudpromoMessageSendModel(object):
             self._template_param = list()
             for i in value:
                 self._template_param.append(i)
+    @property
+    def template_param_json(self):
+        return self._template_param_json
+
+    @template_param_json.setter
+    def template_param_json(self, value):
+        self._template_param_json = value
 
 
     def to_alipay_dict(self):
@@ -102,6 +110,11 @@ class AlipayCloudCloudpromoMessageSendModel(object):
                 params['template_param'] = self.template_param.to_alipay_dict()
             else:
                 params['template_param'] = self.template_param
+        if self.template_param_json:
+            if hasattr(self.template_param_json, 'to_alipay_dict'):
+                params['template_param_json'] = self.template_param_json.to_alipay_dict()
+            else:
+                params['template_param_json'] = self.template_param_json
         return params
 
     @staticmethod
@@ -119,6 +132,8 @@ class AlipayCloudCloudpromoMessageSendModel(object):
             o.template_code = d['template_code']
         if 'template_param' in d:
             o.template_param = d['template_param']
+        if 'template_param_json' in d:
+            o.template_param_json = d['template_param_json']
         return o
 
 

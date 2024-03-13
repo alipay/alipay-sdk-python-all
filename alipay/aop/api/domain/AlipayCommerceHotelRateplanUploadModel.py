@@ -13,6 +13,7 @@ class AlipayCommerceHotelRateplanUploadModel(object):
     def __init__(self):
         self._booking_rules = None
         self._hotel_id = None
+        self._increment = None
         self._rate_plans = None
         self._refund_rules = None
 
@@ -36,6 +37,13 @@ class AlipayCommerceHotelRateplanUploadModel(object):
     @hotel_id.setter
     def hotel_id(self, value):
         self._hotel_id = value
+    @property
+    def increment(self):
+        return self._increment
+
+    @increment.setter
+    def increment(self, value):
+        self._increment = value
     @property
     def rate_plans(self):
         return self._rate_plans
@@ -81,6 +89,11 @@ class AlipayCommerceHotelRateplanUploadModel(object):
                 params['hotel_id'] = self.hotel_id.to_alipay_dict()
             else:
                 params['hotel_id'] = self.hotel_id
+        if self.increment:
+            if hasattr(self.increment, 'to_alipay_dict'):
+                params['increment'] = self.increment.to_alipay_dict()
+            else:
+                params['increment'] = self.increment
         if self.rate_plans:
             if isinstance(self.rate_plans, list):
                 for i in range(0, len(self.rate_plans)):
@@ -112,6 +125,8 @@ class AlipayCommerceHotelRateplanUploadModel(object):
             o.booking_rules = d['booking_rules']
         if 'hotel_id' in d:
             o.hotel_id = d['hotel_id']
+        if 'increment' in d:
+            o.increment = d['increment']
         if 'rate_plans' in d:
             o.rate_plans = d['rate_plans']
         if 'refund_rules' in d:

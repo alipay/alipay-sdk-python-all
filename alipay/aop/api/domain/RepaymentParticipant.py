@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RepaymentBankcardExtInfo import RepaymentBankcardExtInfo
 from alipay.aop.api.domain.RepaymentParticipantExtInfo import RepaymentParticipantExtInfo
 
 
 class RepaymentParticipant(object):
 
     def __init__(self):
+        self._bankcard_ext_info = None
         self._ext_info = None
         self._identity = None
         self._identity_type = None
         self._name = None
 
+    @property
+    def bankcard_ext_info(self):
+        return self._bankcard_ext_info
+
+    @bankcard_ext_info.setter
+    def bankcard_ext_info(self, value):
+        if isinstance(value, RepaymentBankcardExtInfo):
+            self._bankcard_ext_info = value
+        else:
+            self._bankcard_ext_info = RepaymentBankcardExtInfo.from_alipay_dict(value)
     @property
     def ext_info(self):
         return self._ext_info
@@ -49,6 +61,11 @@ class RepaymentParticipant(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bankcard_ext_info:
+            if hasattr(self.bankcard_ext_info, 'to_alipay_dict'):
+                params['bankcard_ext_info'] = self.bankcard_ext_info.to_alipay_dict()
+            else:
+                params['bankcard_ext_info'] = self.bankcard_ext_info
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -76,6 +93,8 @@ class RepaymentParticipant(object):
         if not d:
             return None
         o = RepaymentParticipant()
+        if 'bankcard_ext_info' in d:
+            o.bankcard_ext_info = d['bankcard_ext_info']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'identity' in d:

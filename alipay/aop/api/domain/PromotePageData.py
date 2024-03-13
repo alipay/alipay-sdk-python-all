@@ -10,6 +10,7 @@ class PromotePageData(object):
 
     def __init__(self):
         self._biz_no = None
+        self._encrypt_uid = None
         self._property_list = None
 
     @property
@@ -19,6 +20,13 @@ class PromotePageData(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def encrypt_uid(self):
+        return self._encrypt_uid
+
+    @encrypt_uid.setter
+    def encrypt_uid(self, value):
+        self._encrypt_uid = value
     @property
     def property_list(self):
         return self._property_list
@@ -41,6 +49,11 @@ class PromotePageData(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.encrypt_uid:
+            if hasattr(self.encrypt_uid, 'to_alipay_dict'):
+                params['encrypt_uid'] = self.encrypt_uid.to_alipay_dict()
+            else:
+                params['encrypt_uid'] = self.encrypt_uid
         if self.property_list:
             if isinstance(self.property_list, list):
                 for i in range(0, len(self.property_list)):
@@ -60,6 +73,8 @@ class PromotePageData(object):
         o = PromotePageData()
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'encrypt_uid' in d:
+            o.encrypt_uid = d['encrypt_uid']
         if 'property_list' in d:
             o.property_list = d['property_list']
         return o

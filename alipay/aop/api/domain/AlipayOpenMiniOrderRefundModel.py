@@ -9,6 +9,7 @@ from alipay.aop.api.domain.MiniRefundGoodsInfoDTO import MiniRefundGoodsInfoDTO
 class AlipayOpenMiniOrderRefundModel(object):
 
     def __init__(self):
+        self._installment_order_id = None
         self._item_infos = None
         self._open_id = None
         self._order_id = None
@@ -18,6 +19,13 @@ class AlipayOpenMiniOrderRefundModel(object):
         self._refund_reason = None
         self._user_id = None
 
+    @property
+    def installment_order_id(self):
+        return self._installment_order_id
+
+    @installment_order_id.setter
+    def installment_order_id(self, value):
+        self._installment_order_id = value
     @property
     def item_infos(self):
         return self._item_infos
@@ -84,6 +92,11 @@ class AlipayOpenMiniOrderRefundModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.installment_order_id:
+            if hasattr(self.installment_order_id, 'to_alipay_dict'):
+                params['installment_order_id'] = self.installment_order_id.to_alipay_dict()
+            else:
+                params['installment_order_id'] = self.installment_order_id
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -136,6 +149,8 @@ class AlipayOpenMiniOrderRefundModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderRefundModel()
+        if 'installment_order_id' in d:
+            o.installment_order_id = d['installment_order_id']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
         if 'open_id' in d:

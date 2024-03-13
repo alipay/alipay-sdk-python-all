@@ -19,6 +19,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeQueryResponse, self).__init__()
+        self._additional_status = None
         self._alipay_store_id = None
         self._alipay_sub_merchant_id = None
         self._auth_trade_pay_mode = None
@@ -77,6 +78,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._trans_pay_rate = None
         self._voucher_detail_list = None
 
+    @property
+    def additional_status(self):
+        return self._additional_status
+
+    @additional_status.setter
+    def additional_status(self, value):
+        self._additional_status = value
     @property
     def alipay_store_id(self):
         return self._alipay_store_id
@@ -527,6 +535,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeQueryResponse, self).parse_response_content(response_content)
+        if 'additional_status' in response:
+            self.additional_status = response['additional_status']
         if 'alipay_store_id' in response:
             self.alipay_store_id = response['alipay_store_id']
         if 'alipay_sub_merchant_id' in response:

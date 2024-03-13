@@ -13,6 +13,7 @@ class RatePlan(object):
         self._booking_rule_ids = None
         self._confirm_minutes = None
         self._customer_type = None
+        self._identification = None
         self._identification_type = None
         self._instant_confirmation = None
         self._invoice = None
@@ -49,6 +50,13 @@ class RatePlan(object):
     @customer_type.setter
     def customer_type(self, value):
         self._customer_type = value
+    @property
+    def identification(self):
+        return self._identification
+
+    @identification.setter
+    def identification(self, value):
+        self._identification = value
     @property
     def identification_type(self):
         return self._identification_type
@@ -162,6 +170,11 @@ class RatePlan(object):
                 params['customer_type'] = self.customer_type.to_alipay_dict()
             else:
                 params['customer_type'] = self.customer_type
+        if self.identification:
+            if hasattr(self.identification, 'to_alipay_dict'):
+                params['identification'] = self.identification.to_alipay_dict()
+            else:
+                params['identification'] = self.identification
         if self.identification_type:
             if isinstance(self.identification_type, list):
                 for i in range(0, len(self.identification_type)):
@@ -240,6 +253,8 @@ class RatePlan(object):
             o.confirm_minutes = d['confirm_minutes']
         if 'customer_type' in d:
             o.customer_type = d['customer_type']
+        if 'identification' in d:
+            o.identification = d['identification']
         if 'identification_type' in d:
             o.identification_type = d['identification_type']
         if 'instant_confirmation' in d:

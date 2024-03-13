@@ -13,6 +13,7 @@ class AlipayMarketingCardQueryModel(object):
         self._ext_info = None
         self._target_card_no = None
         self._target_card_no_type = None
+        self._template_id = None
 
     @property
     def card_user_info(self):
@@ -45,6 +46,13 @@ class AlipayMarketingCardQueryModel(object):
     @target_card_no_type.setter
     def target_card_no_type(self, value):
         self._target_card_no_type = value
+    @property
+    def template_id(self):
+        return self._template_id
+
+    @template_id.setter
+    def template_id(self, value):
+        self._template_id = value
 
 
     def to_alipay_dict(self):
@@ -69,6 +77,11 @@ class AlipayMarketingCardQueryModel(object):
                 params['target_card_no_type'] = self.target_card_no_type.to_alipay_dict()
             else:
                 params['target_card_no_type'] = self.target_card_no_type
+        if self.template_id:
+            if hasattr(self.template_id, 'to_alipay_dict'):
+                params['template_id'] = self.template_id.to_alipay_dict()
+            else:
+                params['template_id'] = self.template_id
         return params
 
     @staticmethod
@@ -84,6 +97,8 @@ class AlipayMarketingCardQueryModel(object):
             o.target_card_no = d['target_card_no']
         if 'target_card_no_type' in d:
             o.target_card_no_type = d['target_card_no_type']
+        if 'template_id' in d:
+            o.template_id = d['template_id']
         return o
 
 

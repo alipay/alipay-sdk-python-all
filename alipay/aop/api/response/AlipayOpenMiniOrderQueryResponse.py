@@ -26,6 +26,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._merchant_biz_type = None
         self._open_id = None
         self._order_detail = None
+        self._order_id = None
         self._out_order_id = None
         self._path = None
         self._receive_time = None
@@ -118,6 +119,13 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._order_detail = OrderDetailInfoVO.from_alipay_dict(value)
     @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
     def out_order_id(self):
         return self._out_order_id
 
@@ -207,6 +215,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.open_id = response['open_id']
         if 'order_detail' in response:
             self.order_detail = response['order_detail']
+        if 'order_id' in response:
+            self.order_id = response['order_id']
         if 'out_order_id' in response:
             self.out_order_id = response['out_order_id']
         if 'path' in response:

@@ -10,6 +10,7 @@ class AlipayTradeOrderPayResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeOrderPayResponse, self).__init__()
         self._async_payment_mode = None
+        self._fulfillment_amount = None
         self._gmt_payment = None
         self._out_request_no = None
         self._out_trade_no = None
@@ -23,6 +24,13 @@ class AlipayTradeOrderPayResponse(AlipayResponse):
     @async_payment_mode.setter
     def async_payment_mode(self, value):
         self._async_payment_mode = value
+    @property
+    def fulfillment_amount(self):
+        return self._fulfillment_amount
+
+    @fulfillment_amount.setter
+    def fulfillment_amount(self, value):
+        self._fulfillment_amount = value
     @property
     def gmt_payment(self):
         return self._gmt_payment
@@ -63,6 +71,8 @@ class AlipayTradeOrderPayResponse(AlipayResponse):
         response = super(AlipayTradeOrderPayResponse, self).parse_response_content(response_content)
         if 'async_payment_mode' in response:
             self.async_payment_mode = response['async_payment_mode']
+        if 'fulfillment_amount' in response:
+            self.fulfillment_amount = response['fulfillment_amount']
         if 'gmt_payment' in response:
             self.gmt_payment = response['gmt_payment']
         if 'out_request_no' in response:

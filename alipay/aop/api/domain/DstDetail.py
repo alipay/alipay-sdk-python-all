@@ -10,6 +10,7 @@ class DstDetail(object):
     def __init__(self):
         self._content = None
         self._intent = None
+        self._stream_output = None
 
     @property
     def content(self):
@@ -25,6 +26,13 @@ class DstDetail(object):
     @intent.setter
     def intent(self, value):
         self._intent = value
+    @property
+    def stream_output(self):
+        return self._stream_output
+
+    @stream_output.setter
+    def stream_output(self, value):
+        self._stream_output = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class DstDetail(object):
                 params['intent'] = self.intent.to_alipay_dict()
             else:
                 params['intent'] = self.intent
+        if self.stream_output:
+            if hasattr(self.stream_output, 'to_alipay_dict'):
+                params['stream_output'] = self.stream_output.to_alipay_dict()
+            else:
+                params['stream_output'] = self.stream_output
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class DstDetail(object):
             o.content = d['content']
         if 'intent' in d:
             o.intent = d['intent']
+        if 'stream_output' in d:
+            o.stream_output = d['stream_output']
         return o
 
 

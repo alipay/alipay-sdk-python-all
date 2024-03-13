@@ -31,6 +31,9 @@ class EcomItemExtendDetailDTO(object):
         self._game_name = None
         self._game_trade_mode = None
         self._lockable_device = None
+        self._pet_id = None
+        self._pet_type = None
+        self._pet_version = None
         self._plug_no = None
 
     @property
@@ -195,6 +198,27 @@ class EcomItemExtendDetailDTO(object):
     def lockable_device(self, value):
         self._lockable_device = value
     @property
+    def pet_id(self):
+        return self._pet_id
+
+    @pet_id.setter
+    def pet_id(self, value):
+        self._pet_id = value
+    @property
+    def pet_type(self):
+        return self._pet_type
+
+    @pet_type.setter
+    def pet_type(self, value):
+        self._pet_type = value
+    @property
+    def pet_version(self):
+        return self._pet_version
+
+    @pet_version.setter
+    def pet_version(self, value):
+        self._pet_version = value
+    @property
     def plug_no(self):
         return self._plug_no
 
@@ -320,6 +344,21 @@ class EcomItemExtendDetailDTO(object):
                 params['lockable_device'] = self.lockable_device.to_alipay_dict()
             else:
                 params['lockable_device'] = self.lockable_device
+        if self.pet_id:
+            if hasattr(self.pet_id, 'to_alipay_dict'):
+                params['pet_id'] = self.pet_id.to_alipay_dict()
+            else:
+                params['pet_id'] = self.pet_id
+        if self.pet_type:
+            if hasattr(self.pet_type, 'to_alipay_dict'):
+                params['pet_type'] = self.pet_type.to_alipay_dict()
+            else:
+                params['pet_type'] = self.pet_type
+        if self.pet_version:
+            if hasattr(self.pet_version, 'to_alipay_dict'):
+                params['pet_version'] = self.pet_version.to_alipay_dict()
+            else:
+                params['pet_version'] = self.pet_version
         if self.plug_no:
             if hasattr(self.plug_no, 'to_alipay_dict'):
                 params['plug_no'] = self.plug_no.to_alipay_dict()
@@ -378,6 +417,12 @@ class EcomItemExtendDetailDTO(object):
             o.game_trade_mode = d['game_trade_mode']
         if 'lockable_device' in d:
             o.lockable_device = d['lockable_device']
+        if 'pet_id' in d:
+            o.pet_id = d['pet_id']
+        if 'pet_type' in d:
+            o.pet_type = d['pet_type']
+        if 'pet_version' in d:
+            o.pet_version = d['pet_version']
         if 'plug_no' in d:
             o.plug_no = d['plug_no']
         return o

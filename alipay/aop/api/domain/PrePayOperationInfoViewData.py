@@ -11,6 +11,7 @@ class PrePayOperationInfoViewData(object):
         self._logo = None
         self._operation_bankcard_type = None
         self._operation_desc = None
+        self._operation_display = None
         self._operation_inst_id = None
         self._operation_tip = None
         self._pay_operation_info = None
@@ -39,6 +40,13 @@ class PrePayOperationInfoViewData(object):
     @operation_desc.setter
     def operation_desc(self, value):
         self._operation_desc = value
+    @property
+    def operation_display(self):
+        return self._operation_display
+
+    @operation_display.setter
+    def operation_display(self, value):
+        self._operation_display = value
     @property
     def operation_inst_id(self):
         return self._operation_inst_id
@@ -100,6 +108,11 @@ class PrePayOperationInfoViewData(object):
                 params['operation_desc'] = self.operation_desc.to_alipay_dict()
             else:
                 params['operation_desc'] = self.operation_desc
+        if self.operation_display:
+            if hasattr(self.operation_display, 'to_alipay_dict'):
+                params['operation_display'] = self.operation_display.to_alipay_dict()
+            else:
+                params['operation_display'] = self.operation_display
         if self.operation_inst_id:
             if hasattr(self.operation_inst_id, 'to_alipay_dict'):
                 params['operation_inst_id'] = self.operation_inst_id.to_alipay_dict()
@@ -143,6 +156,8 @@ class PrePayOperationInfoViewData(object):
             o.operation_bankcard_type = d['operation_bankcard_type']
         if 'operation_desc' in d:
             o.operation_desc = d['operation_desc']
+        if 'operation_display' in d:
+            o.operation_display = d['operation_display']
         if 'operation_inst_id' in d:
             o.operation_inst_id = d['operation_inst_id']
         if 'operation_tip' in d:

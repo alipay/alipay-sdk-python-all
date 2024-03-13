@@ -31,6 +31,7 @@ class UserFeedbackResult(object):
         self._os_version = None
         self._picture = None
         self._platform_id = None
+        self._replays_id = None
         self._url = None
         self._userid = None
 
@@ -196,6 +197,13 @@ class UserFeedbackResult(object):
     def platform_id(self, value):
         self._platform_id = value
     @property
+    def replays_id(self):
+        return self._replays_id
+
+    @replays_id.setter
+    def replays_id(self, value):
+        self._replays_id = value
+    @property
     def url(self):
         return self._url
 
@@ -328,6 +336,11 @@ class UserFeedbackResult(object):
                 params['platform_id'] = self.platform_id.to_alipay_dict()
             else:
                 params['platform_id'] = self.platform_id
+        if self.replays_id:
+            if hasattr(self.replays_id, 'to_alipay_dict'):
+                params['replays_id'] = self.replays_id.to_alipay_dict()
+            else:
+                params['replays_id'] = self.replays_id
         if self.url:
             if hasattr(self.url, 'to_alipay_dict'):
                 params['url'] = self.url.to_alipay_dict()
@@ -391,6 +404,8 @@ class UserFeedbackResult(object):
             o.picture = d['picture']
         if 'platform_id' in d:
             o.platform_id = d['platform_id']
+        if 'replays_id' in d:
+            o.replays_id = d['replays_id']
         if 'url' in d:
             o.url = d['url']
         if 'userid' in d:

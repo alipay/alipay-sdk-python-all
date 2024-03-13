@@ -11,6 +11,7 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
         super(AlipayFundWalletConsultResponse, self).__init__()
         self._actual_available_amount = None
         self._amount_details = None
+        self._asset_no = None
         self._available_amount = None
         self._error_code = None
         self._error_msg = None
@@ -33,6 +34,13 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
     @amount_details.setter
     def amount_details(self, value):
         self._amount_details = value
+    @property
+    def asset_no(self):
+        return self._asset_no
+
+    @asset_no.setter
+    def asset_no(self, value):
+        self._asset_no = value
     @property
     def available_amount(self):
         return self._available_amount
@@ -89,6 +97,8 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
             self.actual_available_amount = response['actual_available_amount']
         if 'amount_details' in response:
             self.amount_details = response['amount_details']
+        if 'asset_no' in response:
+            self.asset_no = response['asset_no']
         if 'available_amount' in response:
             self.available_amount = response['available_amount']
         if 'error_code' in response:
