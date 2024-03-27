@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDescInfoVO import ItemDescInfoVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
 from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
 from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.ItemSkuSearchVO import ItemSkuSearchVO
@@ -21,6 +22,7 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         self._desc = None
         self._desc_info = None
         self._direct_path = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
         self._is_online = None
@@ -98,6 +100,19 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     @direct_path.setter
     def direct_path(self, value):
         self._direct_path = value
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
     @property
     def head_img(self):
         return self._head_img
@@ -262,6 +277,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.desc_info = response['desc_info']
         if 'direct_path' in response:
             self.direct_path = response['direct_path']
+        if 'guide_info' in response:
+            self.guide_info = response['guide_info']
         if 'head_img' in response:
             self.head_img = response['head_img']
         if 'image_list' in response:

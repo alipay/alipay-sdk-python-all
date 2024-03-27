@@ -11,6 +11,7 @@ class AlipayMarketingImageEnhanceUploadResponse(AlipayResponse):
         super(AlipayMarketingImageEnhanceUploadResponse, self).__init__()
         self._image_enhanced = None
         self._image_id = None
+        self._image_index_id = None
         self._image_url = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayMarketingImageEnhanceUploadResponse(AlipayResponse):
     def image_id(self, value):
         self._image_id = value
     @property
+    def image_index_id(self):
+        return self._image_index_id
+
+    @image_index_id.setter
+    def image_index_id(self, value):
+        self._image_index_id = value
+    @property
     def image_url(self):
         return self._image_url
 
@@ -41,5 +49,7 @@ class AlipayMarketingImageEnhanceUploadResponse(AlipayResponse):
             self.image_enhanced = response['image_enhanced']
         if 'image_id' in response:
             self.image_id = response['image_id']
+        if 'image_index_id' in response:
+            self.image_index_id = response['image_index_id']
         if 'image_url' in response:
             self.image_url = response['image_url']

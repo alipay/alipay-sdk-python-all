@@ -18,10 +18,12 @@ class RatePlan(object):
         self._instant_confirmation = None
         self._invoice = None
         self._nightly_rates = None
+        self._ota_url = None
         self._pay_type = None
         self._rate_plan_id = None
         self._rate_plan_name = None
         self._refund_rule_id = None
+        self._refund_rule_ids = None
         self._room_id = None
         self._status = None
         self._supplier_source = None
@@ -98,6 +100,13 @@ class RatePlan(object):
                 else:
                     self._nightly_rates.append(NightlyRate.from_alipay_dict(i))
     @property
+    def ota_url(self):
+        return self._ota_url
+
+    @ota_url.setter
+    def ota_url(self, value):
+        self._ota_url = value
+    @property
     def pay_type(self):
         return self._pay_type
 
@@ -125,6 +134,16 @@ class RatePlan(object):
     @refund_rule_id.setter
     def refund_rule_id(self, value):
         self._refund_rule_id = value
+    @property
+    def refund_rule_ids(self):
+        return self._refund_rule_ids
+
+    @refund_rule_ids.setter
+    def refund_rule_ids(self, value):
+        if isinstance(value, list):
+            self._refund_rule_ids = list()
+            for i in value:
+                self._refund_rule_ids.append(i)
     @property
     def room_id(self):
         return self._room_id
@@ -205,6 +224,11 @@ class RatePlan(object):
                 params['nightly_rates'] = self.nightly_rates.to_alipay_dict()
             else:
                 params['nightly_rates'] = self.nightly_rates
+        if self.ota_url:
+            if hasattr(self.ota_url, 'to_alipay_dict'):
+                params['ota_url'] = self.ota_url.to_alipay_dict()
+            else:
+                params['ota_url'] = self.ota_url
         if self.pay_type:
             if hasattr(self.pay_type, 'to_alipay_dict'):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
@@ -225,6 +249,16 @@ class RatePlan(object):
                 params['refund_rule_id'] = self.refund_rule_id.to_alipay_dict()
             else:
                 params['refund_rule_id'] = self.refund_rule_id
+        if self.refund_rule_ids:
+            if isinstance(self.refund_rule_ids, list):
+                for i in range(0, len(self.refund_rule_ids)):
+                    element = self.refund_rule_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refund_rule_ids[i] = element.to_alipay_dict()
+            if hasattr(self.refund_rule_ids, 'to_alipay_dict'):
+                params['refund_rule_ids'] = self.refund_rule_ids.to_alipay_dict()
+            else:
+                params['refund_rule_ids'] = self.refund_rule_ids
         if self.room_id:
             if hasattr(self.room_id, 'to_alipay_dict'):
                 params['room_id'] = self.room_id.to_alipay_dict()
@@ -263,6 +297,8 @@ class RatePlan(object):
             o.invoice = d['invoice']
         if 'nightly_rates' in d:
             o.nightly_rates = d['nightly_rates']
+        if 'ota_url' in d:
+            o.ota_url = d['ota_url']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
         if 'rate_plan_id' in d:
@@ -271,6 +307,8 @@ class RatePlan(object):
             o.rate_plan_name = d['rate_plan_name']
         if 'refund_rule_id' in d:
             o.refund_rule_id = d['refund_rule_id']
+        if 'refund_rule_ids' in d:
+            o.refund_rule_ids = d['refund_rule_ids']
         if 'room_id' in d:
             o.room_id = d['room_id']
         if 'status' in d:

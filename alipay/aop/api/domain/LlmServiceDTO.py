@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MedicalLlmAnswerDTO import MedicalLlmAnswerDTO
+from alipay.aop.api.domain.ExternalServiceDTO import ExternalServiceDTO
 
 
 class LlmServiceDTO(object):
@@ -16,7 +17,9 @@ class LlmServiceDTO(object):
         self._intention = None
         self._is_finished = None
         self._is_with_draw = None
+        self._query_type = None
         self._scene_code = None
+        self._service_result = None
         self._template_id = None
 
     @property
@@ -75,12 +78,32 @@ class LlmServiceDTO(object):
     def is_with_draw(self, value):
         self._is_with_draw = value
     @property
+    def query_type(self):
+        return self._query_type
+
+    @query_type.setter
+    def query_type(self, value):
+        self._query_type = value
+    @property
     def scene_code(self):
         return self._scene_code
 
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def service_result(self):
+        return self._service_result
+
+    @service_result.setter
+    def service_result(self, value):
+        if isinstance(value, list):
+            self._service_result = list()
+            for i in value:
+                if isinstance(i, ExternalServiceDTO):
+                    self._service_result.append(i)
+                else:
+                    self._service_result.append(ExternalServiceDTO.from_alipay_dict(i))
     @property
     def template_id(self):
         return self._template_id
@@ -132,11 +155,26 @@ class LlmServiceDTO(object):
                 params['is_with_draw'] = self.is_with_draw.to_alipay_dict()
             else:
                 params['is_with_draw'] = self.is_with_draw
+        if self.query_type:
+            if hasattr(self.query_type, 'to_alipay_dict'):
+                params['query_type'] = self.query_type.to_alipay_dict()
+            else:
+                params['query_type'] = self.query_type
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.service_result:
+            if isinstance(self.service_result, list):
+                for i in range(0, len(self.service_result)):
+                    element = self.service_result[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_result[i] = element.to_alipay_dict()
+            if hasattr(self.service_result, 'to_alipay_dict'):
+                params['service_result'] = self.service_result.to_alipay_dict()
+            else:
+                params['service_result'] = self.service_result
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -163,8 +201,12 @@ class LlmServiceDTO(object):
             o.is_finished = d['is_finished']
         if 'is_with_draw' in d:
             o.is_with_draw = d['is_with_draw']
+        if 'query_type' in d:
+            o.query_type = d['query_type']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'service_result' in d:
+            o.service_result = d['service_result']
         if 'template_id' in d:
             o.template_id = d['template_id']
         return o

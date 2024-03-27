@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PubNestPub import PubNestPub
 
 
 class AlipayDataDdtJhjtestCreateModel(object):
 
     def __init__(self):
+        self._com_a = None
         self._id = None
         self._id_openid = None
         self._input_a = None
@@ -17,6 +19,16 @@ class AlipayDataDdtJhjtestCreateModel(object):
         self._input_ee = None
         self._map_a_openid = None
 
+    @property
+    def com_a(self):
+        return self._com_a
+
+    @com_a.setter
+    def com_a(self, value):
+        if isinstance(value, PubNestPub):
+            self._com_a = value
+        else:
+            self._com_a = PubNestPub.from_alipay_dict(value)
     @property
     def id(self):
         return self._id
@@ -77,6 +89,11 @@ class AlipayDataDdtJhjtestCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.com_a:
+            if hasattr(self.com_a, 'to_alipay_dict'):
+                params['com_a'] = self.com_a.to_alipay_dict()
+            else:
+                params['com_a'] = self.com_a
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -124,6 +141,8 @@ class AlipayDataDdtJhjtestCreateModel(object):
         if not d:
             return None
         o = AlipayDataDdtJhjtestCreateModel()
+        if 'com_a' in d:
+            o.com_a = d['com_a']
         if 'id' in d:
             o.id = d['id']
         if 'id_openid' in d:

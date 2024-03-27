@@ -9,6 +9,7 @@ class InsOpenPolicyDigestDTO(object):
 
     def __init__(self):
         self._inst_id = None
+        self._inst_policy_no = None
         self._policy_effect_time = None
         self._policy_end_time = None
         self._policy_no = None
@@ -25,6 +26,13 @@ class InsOpenPolicyDigestDTO(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def inst_policy_no(self):
+        return self._inst_policy_no
+
+    @inst_policy_no.setter
+    def inst_policy_no(self, value):
+        self._inst_policy_no = value
     @property
     def policy_effect_time(self):
         return self._policy_effect_time
@@ -90,6 +98,11 @@ class InsOpenPolicyDigestDTO(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.inst_policy_no:
+            if hasattr(self.inst_policy_no, 'to_alipay_dict'):
+                params['inst_policy_no'] = self.inst_policy_no.to_alipay_dict()
+            else:
+                params['inst_policy_no'] = self.inst_policy_no
         if self.policy_effect_time:
             if hasattr(self.policy_effect_time, 'to_alipay_dict'):
                 params['policy_effect_time'] = self.policy_effect_time.to_alipay_dict()
@@ -139,6 +152,8 @@ class InsOpenPolicyDigestDTO(object):
         o = InsOpenPolicyDigestDTO()
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'inst_policy_no' in d:
+            o.inst_policy_no = d['inst_policy_no']
         if 'policy_effect_time' in d:
             o.policy_effect_time = d['policy_effect_time']
         if 'policy_end_time' in d:

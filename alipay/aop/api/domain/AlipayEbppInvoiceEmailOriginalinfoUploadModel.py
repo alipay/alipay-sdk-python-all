@@ -13,6 +13,7 @@ class AlipayEbppInvoiceEmailOriginalinfoUploadModel(object):
         self._email_subject = None
         self._eml_file_download_url = None
         self._out_email_id = None
+        self._parse_fail_reason = None
         self._parse_tag = None
         self._receive_date = None
 
@@ -51,6 +52,13 @@ class AlipayEbppInvoiceEmailOriginalinfoUploadModel(object):
     @out_email_id.setter
     def out_email_id(self, value):
         self._out_email_id = value
+    @property
+    def parse_fail_reason(self):
+        return self._parse_fail_reason
+
+    @parse_fail_reason.setter
+    def parse_fail_reason(self, value):
+        self._parse_fail_reason = value
     @property
     def parse_tag(self):
         return self._parse_tag
@@ -94,6 +102,11 @@ class AlipayEbppInvoiceEmailOriginalinfoUploadModel(object):
                 params['out_email_id'] = self.out_email_id.to_alipay_dict()
             else:
                 params['out_email_id'] = self.out_email_id
+        if self.parse_fail_reason:
+            if hasattr(self.parse_fail_reason, 'to_alipay_dict'):
+                params['parse_fail_reason'] = self.parse_fail_reason.to_alipay_dict()
+            else:
+                params['parse_fail_reason'] = self.parse_fail_reason
         if self.parse_tag:
             if hasattr(self.parse_tag, 'to_alipay_dict'):
                 params['parse_tag'] = self.parse_tag.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayEbppInvoiceEmailOriginalinfoUploadModel(object):
             o.eml_file_download_url = d['eml_file_download_url']
         if 'out_email_id' in d:
             o.out_email_id = d['out_email_id']
+        if 'parse_fail_reason' in d:
+            o.parse_fail_reason = d['parse_fail_reason']
         if 'parse_tag' in d:
             o.parse_tag = d['parse_tag']
         if 'receive_date' in d:

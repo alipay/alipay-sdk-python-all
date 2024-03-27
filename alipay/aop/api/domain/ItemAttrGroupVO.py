@@ -7,6 +7,7 @@ from alipay.aop.api.domain.AttributeVO import AttributeVO
 from alipay.aop.api.domain.AttributeVO import AttributeVO
 from alipay.aop.api.domain.AttributeVO import AttributeVO
 from alipay.aop.api.domain.AttributeVO import AttributeVO
+from alipay.aop.api.domain.AttributeVO import AttributeVO
 
 
 class ItemAttrGroupVO(object):
@@ -16,6 +17,7 @@ class ItemAttrGroupVO(object):
         self._product_attr_list = None
         self._sale_attr_list = None
         self._sku_attr_list = None
+        self._spu_attr_list = None
 
     @property
     def item_attr_list(self):
@@ -69,6 +71,19 @@ class ItemAttrGroupVO(object):
                     self._sku_attr_list.append(i)
                 else:
                     self._sku_attr_list.append(AttributeVO.from_alipay_dict(i))
+    @property
+    def spu_attr_list(self):
+        return self._spu_attr_list
+
+    @spu_attr_list.setter
+    def spu_attr_list(self, value):
+        if isinstance(value, list):
+            self._spu_attr_list = list()
+            for i in value:
+                if isinstance(i, AttributeVO):
+                    self._spu_attr_list.append(i)
+                else:
+                    self._spu_attr_list.append(AttributeVO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -113,6 +128,16 @@ class ItemAttrGroupVO(object):
                 params['sku_attr_list'] = self.sku_attr_list.to_alipay_dict()
             else:
                 params['sku_attr_list'] = self.sku_attr_list
+        if self.spu_attr_list:
+            if isinstance(self.spu_attr_list, list):
+                for i in range(0, len(self.spu_attr_list)):
+                    element = self.spu_attr_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.spu_attr_list[i] = element.to_alipay_dict()
+            if hasattr(self.spu_attr_list, 'to_alipay_dict'):
+                params['spu_attr_list'] = self.spu_attr_list.to_alipay_dict()
+            else:
+                params['spu_attr_list'] = self.spu_attr_list
         return params
 
     @staticmethod
@@ -128,6 +153,8 @@ class ItemAttrGroupVO(object):
             o.sale_attr_list = d['sale_attr_list']
         if 'sku_attr_list' in d:
             o.sku_attr_list = d['sku_attr_list']
+        if 'spu_attr_list' in d:
+            o.spu_attr_list = d['spu_attr_list']
         return o
 
 

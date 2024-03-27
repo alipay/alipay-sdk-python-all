@@ -17,6 +17,7 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         self._outer_user_type = None
         self._pre_intention = None
         self._query = None
+        self._query_type = None
         self._scene_code = None
         self._session_id = None
 
@@ -84,6 +85,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     def query(self, value):
         self._query = value
     @property
+    def query_type(self):
+        return self._query_type
+
+    @query_type.setter
+    def query_type(self, value):
+        self._query_type = value
+    @property
     def scene_code(self):
         return self._scene_code
 
@@ -146,6 +154,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
                 params['query'] = self.query.to_alipay_dict()
             else:
                 params['query'] = self.query
+        if self.query_type:
+            if hasattr(self.query_type, 'to_alipay_dict'):
+                params['query_type'] = self.query_type.to_alipay_dict()
+            else:
+                params['query_type'] = self.query_type
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -181,6 +194,8 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
             o.pre_intention = d['pre_intention']
         if 'query' in d:
             o.query = d['query']
+        if 'query_type' in d:
+            o.query_type = d['query_type']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'session_id' in d:

@@ -12,6 +12,7 @@ class AlipayMarketingImageEnhanceUploadRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._image_directory_id = None
         self._material_field = None
         self._material_spec_id = None
         self._need_enhance = None
@@ -34,6 +35,13 @@ class AlipayMarketingImageEnhanceUploadRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def image_directory_id(self):
+        return self._image_directory_id
+
+    @image_directory_id.setter
+    def image_directory_id(self, value):
+        self._image_directory_id = value
     @property
     def material_field(self):
         return self._material_field
@@ -150,6 +158,11 @@ class AlipayMarketingImageEnhanceUploadRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.image_directory_id:
+            if hasattr(self.image_directory_id, 'to_alipay_dict'):
+                params['image_directory_id'] = json.dumps(obj=self.image_directory_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['image_directory_id'] = self.image_directory_id
         if self.material_field:
             if hasattr(self.material_field, 'to_alipay_dict'):
                 params['material_field'] = json.dumps(obj=self.material_field.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

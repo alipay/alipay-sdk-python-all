@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BkAgentRespInfo import BkAgentRespInfo
 from alipay.aop.api.domain.ChargeInfo import ChargeInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
+from alipay.aop.api.domain.FulfillmentDetail import FulfillmentDetail
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.IntactChargeInfo import IntactChargeInfo
@@ -41,6 +42,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._discount_goods_detail = None
         self._enterprise_pay_info = None
         self._ext_infos = None
+        self._fulfillment_detail_list = None
         self._fund_bill_list = None
         self._hb_fq_pay_info = None
         self._hyb_amount = None
@@ -244,6 +246,19 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @ext_infos.setter
     def ext_infos(self, value):
         self._ext_infos = value
+    @property
+    def fulfillment_detail_list(self):
+        return self._fulfillment_detail_list
+
+    @fulfillment_detail_list.setter
+    def fulfillment_detail_list(self, value):
+        if isinstance(value, list):
+            self._fulfillment_detail_list = list()
+            for i in value:
+                if isinstance(i, FulfillmentDetail):
+                    self._fulfillment_detail_list.append(i)
+                else:
+                    self._fulfillment_detail_list.append(FulfillmentDetail.from_alipay_dict(i))
     @property
     def fund_bill_list(self):
         return self._fund_bill_list
@@ -579,6 +594,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.enterprise_pay_info = response['enterprise_pay_info']
         if 'ext_infos' in response:
             self.ext_infos = response['ext_infos']
+        if 'fulfillment_detail_list' in response:
+            self.fulfillment_detail_list = response['fulfillment_detail_list']
         if 'fund_bill_list' in response:
             self.fund_bill_list = response['fund_bill_list']
         if 'hb_fq_pay_info' in response:

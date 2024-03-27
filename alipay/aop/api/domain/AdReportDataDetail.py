@@ -21,6 +21,8 @@ class AdReportDataDetail(object):
         self._order_name = None
         self._plan_id = None
         self._plan_name = None
+        self._principal_alipay_account = None
+        self._principal_name = None
         self._scene_name = None
 
     @property
@@ -114,6 +116,20 @@ class AdReportDataDetail(object):
     def plan_name(self, value):
         self._plan_name = value
     @property
+    def principal_alipay_account(self):
+        return self._principal_alipay_account
+
+    @principal_alipay_account.setter
+    def principal_alipay_account(self, value):
+        self._principal_alipay_account = value
+    @property
+    def principal_name(self):
+        return self._principal_name
+
+    @principal_name.setter
+    def principal_name(self, value):
+        self._principal_name = value
+    @property
     def scene_name(self):
         return self._scene_name
 
@@ -189,6 +205,16 @@ class AdReportDataDetail(object):
                 params['plan_name'] = self.plan_name.to_alipay_dict()
             else:
                 params['plan_name'] = self.plan_name
+        if self.principal_alipay_account:
+            if hasattr(self.principal_alipay_account, 'to_alipay_dict'):
+                params['principal_alipay_account'] = self.principal_alipay_account.to_alipay_dict()
+            else:
+                params['principal_alipay_account'] = self.principal_alipay_account
+        if self.principal_name:
+            if hasattr(self.principal_name, 'to_alipay_dict'):
+                params['principal_name'] = self.principal_name.to_alipay_dict()
+            else:
+                params['principal_name'] = self.principal_name
         if self.scene_name:
             if hasattr(self.scene_name, 'to_alipay_dict'):
                 params['scene_name'] = self.scene_name.to_alipay_dict()
@@ -225,6 +251,10 @@ class AdReportDataDetail(object):
             o.plan_id = d['plan_id']
         if 'plan_name' in d:
             o.plan_name = d['plan_name']
+        if 'principal_alipay_account' in d:
+            o.principal_alipay_account = d['principal_alipay_account']
+        if 'principal_name' in d:
+            o.principal_name = d['principal_name']
         if 'scene_name' in d:
             o.scene_name = d['scene_name']
         return o

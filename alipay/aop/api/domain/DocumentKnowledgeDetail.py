@@ -11,6 +11,7 @@ class DocumentKnowledgeDetail(object):
     def __init__(self):
         self._document_answer = None
         self._related_document_fragments = None
+        self._stream_output = None
 
     @property
     def document_answer(self):
@@ -32,6 +33,13 @@ class DocumentKnowledgeDetail(object):
                     self._related_document_fragments.append(i)
                 else:
                     self._related_document_fragments.append(RelatedDocumentFragments.from_alipay_dict(i))
+    @property
+    def stream_output(self):
+        return self._stream_output
+
+    @stream_output.setter
+    def stream_output(self, value):
+        self._stream_output = value
 
 
     def to_alipay_dict(self):
@@ -51,6 +59,11 @@ class DocumentKnowledgeDetail(object):
                 params['related_document_fragments'] = self.related_document_fragments.to_alipay_dict()
             else:
                 params['related_document_fragments'] = self.related_document_fragments
+        if self.stream_output:
+            if hasattr(self.stream_output, 'to_alipay_dict'):
+                params['stream_output'] = self.stream_output.to_alipay_dict()
+            else:
+                params['stream_output'] = self.stream_output
         return params
 
     @staticmethod
@@ -62,6 +75,8 @@ class DocumentKnowledgeDetail(object):
             o.document_answer = d['document_answer']
         if 'related_document_fragments' in d:
             o.related_document_fragments = d['related_document_fragments']
+        if 'stream_output' in d:
+            o.stream_output = d['stream_output']
         return o
 
 

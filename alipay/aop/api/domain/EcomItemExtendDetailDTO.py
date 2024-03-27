@@ -24,6 +24,7 @@ class EcomItemExtendDetailDTO(object):
         self._charge_station_town = None
         self._charge_type = None
         self._ext_info = None
+        self._factory_ins_end_time = None
         self._game_account = None
         self._game_account_client = None
         self._game_account_client_id = None
@@ -148,6 +149,13 @@ class EcomItemExtendDetailDTO(object):
     @ext_info.setter
     def ext_info(self, value):
         self._ext_info = value
+    @property
+    def factory_ins_end_time(self):
+        return self._factory_ins_end_time
+
+    @factory_ins_end_time.setter
+    def factory_ins_end_time(self, value):
+        self._factory_ins_end_time = value
     @property
     def game_account(self):
         return self._game_account
@@ -309,6 +317,11 @@ class EcomItemExtendDetailDTO(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.factory_ins_end_time:
+            if hasattr(self.factory_ins_end_time, 'to_alipay_dict'):
+                params['factory_ins_end_time'] = self.factory_ins_end_time.to_alipay_dict()
+            else:
+                params['factory_ins_end_time'] = self.factory_ins_end_time
         if self.game_account:
             if hasattr(self.game_account, 'to_alipay_dict'):
                 params['game_account'] = self.game_account.to_alipay_dict()
@@ -403,6 +416,8 @@ class EcomItemExtendDetailDTO(object):
             o.charge_type = d['charge_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'factory_ins_end_time' in d:
+            o.factory_ins_end_time = d['factory_ins_end_time']
         if 'game_account' in d:
             o.game_account = d['game_account']
         if 'game_account_client' in d:

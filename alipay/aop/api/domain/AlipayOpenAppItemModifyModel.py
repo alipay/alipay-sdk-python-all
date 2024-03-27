@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDescInfoVO import ItemDescInfoVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
 from alipay.aop.api.domain.ItemSkuVO import ItemSkuVO
 
 
@@ -17,6 +18,7 @@ class AlipayOpenAppItemModifyModel(object):
         self._desc = None
         self._desc_info = None
         self._direct_path = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
         self._item_details_page_model = None
@@ -83,6 +85,19 @@ class AlipayOpenAppItemModifyModel(object):
     @direct_path.setter
     def direct_path(self, value):
         self._direct_path = value
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
     @property
     def head_img(self):
         return self._head_img
@@ -229,6 +244,16 @@ class AlipayOpenAppItemModifyModel(object):
                 params['direct_path'] = self.direct_path.to_alipay_dict()
             else:
                 params['direct_path'] = self.direct_path
+        if self.guide_info:
+            if isinstance(self.guide_info, list):
+                for i in range(0, len(self.guide_info)):
+                    element = self.guide_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.guide_info[i] = element.to_alipay_dict()
+            if hasattr(self.guide_info, 'to_alipay_dict'):
+                params['guide_info'] = self.guide_info.to_alipay_dict()
+            else:
+                params['guide_info'] = self.guide_info
         if self.head_img:
             if hasattr(self.head_img, 'to_alipay_dict'):
                 params['head_img'] = self.head_img.to_alipay_dict()
@@ -328,6 +353,8 @@ class AlipayOpenAppItemModifyModel(object):
             o.desc_info = d['desc_info']
         if 'direct_path' in d:
             o.direct_path = d['direct_path']
+        if 'guide_info' in d:
+            o.guide_info = d['guide_info']
         if 'head_img' in d:
             o.head_img = d['head_img']
         if 'image_list' in d:
