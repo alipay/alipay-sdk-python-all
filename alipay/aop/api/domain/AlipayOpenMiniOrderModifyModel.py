@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GoodsInfoModifyDTO import GoodsInfoModifyDTO
 from alipay.aop.api.domain.PriceInfoModifyDTO import PriceInfoModifyDTO
+from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
 
 
 class AlipayOpenMiniOrderModifyModel(object):
@@ -15,6 +16,7 @@ class AlipayOpenMiniOrderModifyModel(object):
         self._order_id = None
         self._out_order_id = None
         self._price_info = None
+        self._stage_pay_plans = None
         self._user_id = None
 
     @property
@@ -62,6 +64,19 @@ class AlipayOpenMiniOrderModifyModel(object):
         else:
             self._price_info = PriceInfoModifyDTO.from_alipay_dict(value)
     @property
+    def stage_pay_plans(self):
+        return self._stage_pay_plans
+
+    @stage_pay_plans.setter
+    def stage_pay_plans(self, value):
+        if isinstance(value, list):
+            self._stage_pay_plans = list()
+            for i in value:
+                if isinstance(i, StagePayPlanDTO):
+                    self._stage_pay_plans.append(i)
+                else:
+                    self._stage_pay_plans.append(StagePayPlanDTO.from_alipay_dict(i))
+    @property
     def user_id(self):
         return self._user_id
 
@@ -102,6 +117,16 @@ class AlipayOpenMiniOrderModifyModel(object):
                 params['price_info'] = self.price_info.to_alipay_dict()
             else:
                 params['price_info'] = self.price_info
+        if self.stage_pay_plans:
+            if isinstance(self.stage_pay_plans, list):
+                for i in range(0, len(self.stage_pay_plans)):
+                    element = self.stage_pay_plans[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.stage_pay_plans[i] = element.to_alipay_dict()
+            if hasattr(self.stage_pay_plans, 'to_alipay_dict'):
+                params['stage_pay_plans'] = self.stage_pay_plans.to_alipay_dict()
+            else:
+                params['stage_pay_plans'] = self.stage_pay_plans
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -124,6 +149,8 @@ class AlipayOpenMiniOrderModifyModel(object):
             o.out_order_id = d['out_order_id']
         if 'price_info' in d:
             o.price_info = d['price_info']
+        if 'stage_pay_plans' in d:
+            o.stage_pay_plans = d['stage_pay_plans']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

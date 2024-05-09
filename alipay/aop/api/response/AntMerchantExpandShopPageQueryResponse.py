@@ -10,9 +10,17 @@ class AntMerchantExpandShopPageQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AntMerchantExpandShopPageQueryResponse, self).__init__()
+        self._alipay_poiid = None
         self._shop_infos = None
         self._total_pages = None
 
+    @property
+    def alipay_poiid(self):
+        return self._alipay_poiid
+
+    @alipay_poiid.setter
+    def alipay_poiid(self, value):
+        self._alipay_poiid = value
     @property
     def shop_infos(self):
         return self._shop_infos
@@ -36,6 +44,8 @@ class AntMerchantExpandShopPageQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AntMerchantExpandShopPageQueryResponse, self).parse_response_content(response_content)
+        if 'alipay_poiid' in response:
+            self.alipay_poiid = response['alipay_poiid']
         if 'shop_infos' in response:
             self.shop_infos = response['shop_infos']
         if 'total_pages' in response:

@@ -4,10 +4,12 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.DepositBackInfo import DepositBackInfo
+from alipay.aop.api.domain.DepositBackInfo import DepositBackInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.RefundChargeInfo import RefundChargeInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.RefundRoyaltyResult import RefundRoyaltyResult
+from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
 
 class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
@@ -15,6 +17,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeFastpayRefundQueryResponse, self).__init__()
         self._deposit_back_info = None
+        self._deposit_back_info_list = None
         self._enterprise_pay_info = None
         self._error_code = None
         self._gmt_refund_pay = None
@@ -35,6 +38,7 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         self._refund_royaltys = None
         self._refund_settlement_id = None
         self._refund_status = None
+        self._refund_voucher_detail_list = None
         self._send_back_fee = None
         self._total_amount = None
         self._trade_no = None
@@ -49,6 +53,19 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self._deposit_back_info = value
         else:
             self._deposit_back_info = DepositBackInfo.from_alipay_dict(value)
+    @property
+    def deposit_back_info_list(self):
+        return self._deposit_back_info_list
+
+    @deposit_back_info_list.setter
+    def deposit_back_info_list(self, value):
+        if isinstance(value, list):
+            self._deposit_back_info_list = list()
+            for i in value:
+                if isinstance(i, DepositBackInfo):
+                    self._deposit_back_info_list.append(i)
+                else:
+                    self._deposit_back_info_list.append(DepositBackInfo.from_alipay_dict(i))
     @property
     def enterprise_pay_info(self):
         return self._enterprise_pay_info
@@ -211,6 +228,19 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
     def refund_status(self, value):
         self._refund_status = value
     @property
+    def refund_voucher_detail_list(self):
+        return self._refund_voucher_detail_list
+
+    @refund_voucher_detail_list.setter
+    def refund_voucher_detail_list(self, value):
+        if isinstance(value, list):
+            self._refund_voucher_detail_list = list()
+            for i in value:
+                if isinstance(i, VoucherDetail):
+                    self._refund_voucher_detail_list.append(i)
+                else:
+                    self._refund_voucher_detail_list.append(VoucherDetail.from_alipay_dict(i))
+    @property
     def send_back_fee(self):
         return self._send_back_fee
 
@@ -236,6 +266,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
         response = super(AlipayTradeFastpayRefundQueryResponse, self).parse_response_content(response_content)
         if 'deposit_back_info' in response:
             self.deposit_back_info = response['deposit_back_info']
+        if 'deposit_back_info_list' in response:
+            self.deposit_back_info_list = response['deposit_back_info_list']
         if 'enterprise_pay_info' in response:
             self.enterprise_pay_info = response['enterprise_pay_info']
         if 'error_code' in response:
@@ -276,6 +308,8 @@ class AlipayTradeFastpayRefundQueryResponse(AlipayResponse):
             self.refund_settlement_id = response['refund_settlement_id']
         if 'refund_status' in response:
             self.refund_status = response['refund_status']
+        if 'refund_voucher_detail_list' in response:
+            self.refund_voucher_detail_list = response['refund_voucher_detail_list']
         if 'send_back_fee' in response:
             self.send_back_fee = response['send_back_fee']
         if 'total_amount' in response:

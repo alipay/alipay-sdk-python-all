@@ -16,6 +16,7 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
         self._department_name = None
         self._doctor_name = None
         self._ext_info = None
+        self._ext_shift_case_id = None
         self._hospital_name = None
         self._inquiry_mode = None
         self._inquiry_type = None
@@ -86,6 +87,13 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
             self._ext_info = value
         else:
             self._ext_info = MedicalInquiryOrderExtInfo.from_alipay_dict(value)
+    @property
+    def ext_shift_case_id(self):
+        return self._ext_shift_case_id
+
+    @ext_shift_case_id.setter
+    def ext_shift_case_id(self, value):
+        self._ext_shift_case_id = value
     @property
     def hospital_name(self):
         return self._hospital_name
@@ -244,6 +252,11 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.ext_shift_case_id:
+            if hasattr(self.ext_shift_case_id, 'to_alipay_dict'):
+                params['ext_shift_case_id'] = self.ext_shift_case_id.to_alipay_dict()
+            else:
+                params['ext_shift_case_id'] = self.ext_shift_case_id
         if self.hospital_name:
             if hasattr(self.hospital_name, 'to_alipay_dict'):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
@@ -350,6 +363,8 @@ class AlipayCommerceMedicalIndustrydataInquiryorderUploadModel(object):
             o.doctor_name = d['doctor_name']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'ext_shift_case_id' in d:
+            o.ext_shift_case_id = d['ext_shift_case_id']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
         if 'inquiry_mode' in d:

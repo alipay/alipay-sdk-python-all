@@ -13,6 +13,7 @@ class AlipayEbppIndustryPerformOrderCreateModel(object):
         self._alipay_trade_asset = None
         self._bill_amount = None
         self._create_type = None
+        self._inst_smid = None
         self._open_id = None
         self._out_no = None
         self._profit_sharing_list = None
@@ -45,6 +46,13 @@ class AlipayEbppIndustryPerformOrderCreateModel(object):
     @create_type.setter
     def create_type(self, value):
         self._create_type = value
+    @property
+    def inst_smid(self):
+        return self._inst_smid
+
+    @inst_smid.setter
+    def inst_smid(self, value):
+        self._inst_smid = value
     @property
     def open_id(self):
         return self._open_id
@@ -119,6 +127,11 @@ class AlipayEbppIndustryPerformOrderCreateModel(object):
                 params['create_type'] = self.create_type.to_alipay_dict()
             else:
                 params['create_type'] = self.create_type
+        if self.inst_smid:
+            if hasattr(self.inst_smid, 'to_alipay_dict'):
+                params['inst_smid'] = self.inst_smid.to_alipay_dict()
+            else:
+                params['inst_smid'] = self.inst_smid
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -172,6 +185,8 @@ class AlipayEbppIndustryPerformOrderCreateModel(object):
             o.bill_amount = d['bill_amount']
         if 'create_type' in d:
             o.create_type = d['create_type']
+        if 'inst_smid' in d:
+            o.inst_smid = d['inst_smid']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_no' in d:

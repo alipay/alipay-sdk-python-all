@@ -10,12 +10,14 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceMedicalCommercialMemberQueryResponse, self).__init__()
         self._biz_order_id = None
+        self._count = None
         self._end_time = None
         self._exist = None
         self._open_id = None
         self._order_id = None
         self._out_product_id = None
         self._start_time = None
+        self._usage_count = None
         self._user_id = None
 
     @property
@@ -25,6 +27,13 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
     @biz_order_id.setter
     def biz_order_id(self, value):
         self._biz_order_id = value
+    @property
+    def count(self):
+        return self._count
+
+    @count.setter
+    def count(self, value):
+        self._count = value
     @property
     def end_time(self):
         return self._end_time
@@ -68,6 +77,13 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
     def start_time(self, value):
         self._start_time = value
     @property
+    def usage_count(self):
+        return self._usage_count
+
+    @usage_count.setter
+    def usage_count(self, value):
+        self._usage_count = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -79,6 +95,8 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
         response = super(AlipayCommerceMedicalCommercialMemberQueryResponse, self).parse_response_content(response_content)
         if 'biz_order_id' in response:
             self.biz_order_id = response['biz_order_id']
+        if 'count' in response:
+            self.count = response['count']
         if 'end_time' in response:
             self.end_time = response['end_time']
         if 'exist' in response:
@@ -91,5 +109,7 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
             self.out_product_id = response['out_product_id']
         if 'start_time' in response:
             self.start_time = response['start_time']
+        if 'usage_count' in response:
+            self.usage_count = response['usage_count']
         if 'user_id' in response:
             self.user_id = response['user_id']

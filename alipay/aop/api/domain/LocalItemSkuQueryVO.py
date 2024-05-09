@@ -3,17 +3,33 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ItemSkuAttrVO import ItemSkuAttrVO
 
 
 class LocalItemSkuQueryVO(object):
 
     def __init__(self):
+        self._attrs = None
         self._original_price = None
+        self._out_sku_id = None
         self._sale_price = None
         self._sale_status = None
         self._sku_id = None
         self._stock_num = None
 
+    @property
+    def attrs(self):
+        return self._attrs
+
+    @attrs.setter
+    def attrs(self, value):
+        if isinstance(value, list):
+            self._attrs = list()
+            for i in value:
+                if isinstance(i, ItemSkuAttrVO):
+                    self._attrs.append(i)
+                else:
+                    self._attrs.append(ItemSkuAttrVO.from_alipay_dict(i))
     @property
     def original_price(self):
         return self._original_price
@@ -21,6 +37,13 @@ class LocalItemSkuQueryVO(object):
     @original_price.setter
     def original_price(self, value):
         self._original_price = value
+    @property
+    def out_sku_id(self):
+        return self._out_sku_id
+
+    @out_sku_id.setter
+    def out_sku_id(self, value):
+        self._out_sku_id = value
     @property
     def sale_price(self):
         return self._sale_price
@@ -53,11 +76,26 @@ class LocalItemSkuQueryVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.attrs:
+            if isinstance(self.attrs, list):
+                for i in range(0, len(self.attrs)):
+                    element = self.attrs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.attrs[i] = element.to_alipay_dict()
+            if hasattr(self.attrs, 'to_alipay_dict'):
+                params['attrs'] = self.attrs.to_alipay_dict()
+            else:
+                params['attrs'] = self.attrs
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
             else:
                 params['original_price'] = self.original_price
+        if self.out_sku_id:
+            if hasattr(self.out_sku_id, 'to_alipay_dict'):
+                params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
+            else:
+                params['out_sku_id'] = self.out_sku_id
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -85,8 +123,12 @@ class LocalItemSkuQueryVO(object):
         if not d:
             return None
         o = LocalItemSkuQueryVO()
+        if 'attrs' in d:
+            o.attrs = d['attrs']
         if 'original_price' in d:
             o.original_price = d['original_price']
+        if 'out_sku_id' in d:
+            o.out_sku_id = d['out_sku_id']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'sale_status' in d:

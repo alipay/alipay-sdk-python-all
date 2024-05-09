@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinancialnetAuthEcsignSignorderQueryModel(object):
 
     def __init__(self):
+        self._ext_info = None
         self._out_order_no = None
         self._partner_id = None
         self._sign_product_id = None
         self._solution_code = None
 
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -45,6 +53,11 @@ class AlipayFinancialnetAuthEcsignSignorderQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayFinancialnetAuthEcsignSignorderQueryModel(object):
         if not d:
             return None
         o = AlipayFinancialnetAuthEcsignSignorderQueryModel()
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'partner_id' in d:

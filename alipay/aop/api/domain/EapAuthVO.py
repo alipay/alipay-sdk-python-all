@@ -10,6 +10,7 @@ class EapAuthVO(object):
     def __init__(self):
         self._corp = None
         self._has_auth = None
+        self._source = None
 
     @property
     def corp(self):
@@ -25,6 +26,13 @@ class EapAuthVO(object):
     @has_auth.setter
     def has_auth(self, value):
         self._has_auth = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class EapAuthVO(object):
                 params['has_auth'] = self.has_auth.to_alipay_dict()
             else:
                 params['has_auth'] = self.has_auth
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class EapAuthVO(object):
             o.corp = d['corp']
         if 'has_auth' in d:
             o.has_auth = d['has_auth']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

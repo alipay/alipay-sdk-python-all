@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ItemCalendarPriceVO import ItemCalendarPriceVO
+from alipay.aop.api.domain.SkuCalendarPriceListVO import SkuCalendarPriceListVO
 
 
 class AlipayOpenAppLocalitemCalendarpriceSaveModel(object):
@@ -12,6 +13,7 @@ class AlipayOpenAppLocalitemCalendarpriceSaveModel(object):
         self._calendar_prices = None
         self._item_id = None
         self._out_item_id = None
+        self._sku_calendar_prices = None
 
     @property
     def calendar_prices(self):
@@ -40,6 +42,19 @@ class AlipayOpenAppLocalitemCalendarpriceSaveModel(object):
     @out_item_id.setter
     def out_item_id(self, value):
         self._out_item_id = value
+    @property
+    def sku_calendar_prices(self):
+        return self._sku_calendar_prices
+
+    @sku_calendar_prices.setter
+    def sku_calendar_prices(self, value):
+        if isinstance(value, list):
+            self._sku_calendar_prices = list()
+            for i in value:
+                if isinstance(i, SkuCalendarPriceListVO):
+                    self._sku_calendar_prices.append(i)
+                else:
+                    self._sku_calendar_prices.append(SkuCalendarPriceListVO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -64,6 +79,16 @@ class AlipayOpenAppLocalitemCalendarpriceSaveModel(object):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
             else:
                 params['out_item_id'] = self.out_item_id
+        if self.sku_calendar_prices:
+            if isinstance(self.sku_calendar_prices, list):
+                for i in range(0, len(self.sku_calendar_prices)):
+                    element = self.sku_calendar_prices[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_calendar_prices[i] = element.to_alipay_dict()
+            if hasattr(self.sku_calendar_prices, 'to_alipay_dict'):
+                params['sku_calendar_prices'] = self.sku_calendar_prices.to_alipay_dict()
+            else:
+                params['sku_calendar_prices'] = self.sku_calendar_prices
         return params
 
     @staticmethod
@@ -77,6 +102,8 @@ class AlipayOpenAppLocalitemCalendarpriceSaveModel(object):
             o.item_id = d['item_id']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
+        if 'sku_calendar_prices' in d:
+            o.sku_calendar_prices = d['sku_calendar_prices']
         return o
 
 

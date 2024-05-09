@@ -3,14 +3,26 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DumTestFFAA import DumTestFFAA
 
 
 class SsdataDataserviceTestaaaSendModel(object):
 
     def __init__(self):
+        self._body_a = None
         self._tes_1 = None
         self._test_2 = None
 
+    @property
+    def body_a(self):
+        return self._body_a
+
+    @body_a.setter
+    def body_a(self, value):
+        if isinstance(value, DumTestFFAA):
+            self._body_a = value
+        else:
+            self._body_a = DumTestFFAA.from_alipay_dict(value)
     @property
     def tes_1(self):
         return self._tes_1
@@ -29,6 +41,11 @@ class SsdataDataserviceTestaaaSendModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.body_a:
+            if hasattr(self.body_a, 'to_alipay_dict'):
+                params['body_a'] = self.body_a.to_alipay_dict()
+            else:
+                params['body_a'] = self.body_a
         if self.tes_1:
             if hasattr(self.tes_1, 'to_alipay_dict'):
                 params['tes_1'] = self.tes_1.to_alipay_dict()
@@ -46,6 +63,8 @@ class SsdataDataserviceTestaaaSendModel(object):
         if not d:
             return None
         o = SsdataDataserviceTestaaaSendModel()
+        if 'body_a' in d:
+            o.body_a = d['body_a']
         if 'tes_1' in d:
             o.tes_1 = d['tes_1']
         if 'test_2' in d:

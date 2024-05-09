@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RefundChargeInfo import RefundChargeInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.PresetPayToolInfo import PresetPayToolInfo
+from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
 
 class AlipayTradeRefundResponse(AlipayResponse):
@@ -31,6 +32,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._refund_hyb_amount = None
         self._refund_preset_paytool_list = None
         self._refund_settlement_id = None
+        self._refund_voucher_detail_list = None
         self._send_back_fee = None
         self._store_name = None
         self._trade_no = None
@@ -184,6 +186,19 @@ class AlipayTradeRefundResponse(AlipayResponse):
     def refund_settlement_id(self, value):
         self._refund_settlement_id = value
     @property
+    def refund_voucher_detail_list(self):
+        return self._refund_voucher_detail_list
+
+    @refund_voucher_detail_list.setter
+    def refund_voucher_detail_list(self, value):
+        if isinstance(value, list):
+            self._refund_voucher_detail_list = list()
+            for i in value:
+                if isinstance(i, VoucherDetail):
+                    self._refund_voucher_detail_list.append(i)
+                else:
+                    self._refund_voucher_detail_list.append(VoucherDetail.from_alipay_dict(i))
+    @property
     def send_back_fee(self):
         return self._send_back_fee
 
@@ -245,6 +260,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.refund_preset_paytool_list = response['refund_preset_paytool_list']
         if 'refund_settlement_id' in response:
             self.refund_settlement_id = response['refund_settlement_id']
+        if 'refund_voucher_detail_list' in response:
+            self.refund_voucher_detail_list = response['refund_voucher_detail_list']
         if 'send_back_fee' in response:
             self.send_back_fee = response['send_back_fee']
         if 'store_name' in response:

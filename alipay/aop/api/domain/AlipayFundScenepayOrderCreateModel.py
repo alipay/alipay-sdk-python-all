@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ScenePayBusinessParamDTO import ScenePayBusinessParamDTO
+from alipay.aop.api.domain.PayChannelInfoDTO import PayChannelInfoDTO
 from alipay.aop.api.domain.QuotaRuleModelDTO import QuotaRuleModelDTO
 
 
@@ -15,6 +16,7 @@ class AlipayFundScenepayOrderCreateModel(object):
         self._identity = None
         self._identity_type = None
         self._out_biz_no = None
+        self._pay_channel_info_list = None
         self._product_code = None
         self._quota_rule_list = None
         self._sub_biz_scene = None
@@ -57,6 +59,19 @@ class AlipayFundScenepayOrderCreateModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def pay_channel_info_list(self):
+        return self._pay_channel_info_list
+
+    @pay_channel_info_list.setter
+    def pay_channel_info_list(self, value):
+        if isinstance(value, list):
+            self._pay_channel_info_list = list()
+            for i in value:
+                if isinstance(i, PayChannelInfoDTO):
+                    self._pay_channel_info_list.append(i)
+                else:
+                    self._pay_channel_info_list.append(PayChannelInfoDTO.from_alipay_dict(i))
     @property
     def product_code(self):
         return self._product_code
@@ -113,6 +128,16 @@ class AlipayFundScenepayOrderCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.pay_channel_info_list:
+            if isinstance(self.pay_channel_info_list, list):
+                for i in range(0, len(self.pay_channel_info_list)):
+                    element = self.pay_channel_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pay_channel_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.pay_channel_info_list, 'to_alipay_dict'):
+                params['pay_channel_info_list'] = self.pay_channel_info_list.to_alipay_dict()
+            else:
+                params['pay_channel_info_list'] = self.pay_channel_info_list
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -150,6 +175,8 @@ class AlipayFundScenepayOrderCreateModel(object):
             o.identity_type = d['identity_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'pay_channel_info_list' in d:
+            o.pay_channel_info_list = d['pay_channel_info_list']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'quota_rule_list' in d:

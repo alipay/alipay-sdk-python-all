@@ -13,6 +13,8 @@ class AlipayFundScenepayAuthorizeQueryModel(object):
         self._authorization_type = None
         self._biz_scene = None
         self._business_principal_info = None
+        self._out_agreement_no = None
+        self._out_biz_no = None
         self._principal_info = None
         self._product_code = None
         self._sub_biz_scene = None
@@ -41,6 +43,20 @@ class AlipayFundScenepayAuthorizeQueryModel(object):
             self._business_principal_info = value
         else:
             self._business_principal_info = ScenePayParticipantInfoDTO.from_alipay_dict(value)
+    @property
+    def out_agreement_no(self):
+        return self._out_agreement_no
+
+    @out_agreement_no.setter
+    def out_agreement_no(self, value):
+        self._out_agreement_no = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def principal_info(self):
         return self._principal_info
@@ -84,6 +100,16 @@ class AlipayFundScenepayAuthorizeQueryModel(object):
                 params['business_principal_info'] = self.business_principal_info.to_alipay_dict()
             else:
                 params['business_principal_info'] = self.business_principal_info
+        if self.out_agreement_no:
+            if hasattr(self.out_agreement_no, 'to_alipay_dict'):
+                params['out_agreement_no'] = self.out_agreement_no.to_alipay_dict()
+            else:
+                params['out_agreement_no'] = self.out_agreement_no
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.principal_info:
             if hasattr(self.principal_info, 'to_alipay_dict'):
                 params['principal_info'] = self.principal_info.to_alipay_dict()
@@ -112,6 +138,10 @@ class AlipayFundScenepayAuthorizeQueryModel(object):
             o.biz_scene = d['biz_scene']
         if 'business_principal_info' in d:
             o.business_principal_info = d['business_principal_info']
+        if 'out_agreement_no' in d:
+            o.out_agreement_no = d['out_agreement_no']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'principal_info' in d:
             o.principal_info = d['principal_info']
         if 'product_code' in d:

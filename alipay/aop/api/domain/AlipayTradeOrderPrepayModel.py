@@ -17,8 +17,11 @@ class AlipayTradeOrderPrepayModel(object):
         self._business_params = None
         self._extend_params = None
         self._goods_detail = None
+        self._merchant_return_url = None
         self._order_scene = None
         self._out_trade_no = None
+        self._payment_inst = None
+        self._payment_type = None
         self._product_code = None
         self._royalty_info = None
         self._seller_id = None
@@ -69,6 +72,13 @@ class AlipayTradeOrderPrepayModel(object):
                 else:
                     self._goods_detail.append(GoodsDetail.from_alipay_dict(i))
     @property
+    def merchant_return_url(self):
+        return self._merchant_return_url
+
+    @merchant_return_url.setter
+    def merchant_return_url(self, value):
+        self._merchant_return_url = value
+    @property
     def order_scene(self):
         return self._order_scene
 
@@ -82,6 +92,20 @@ class AlipayTradeOrderPrepayModel(object):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def payment_inst(self):
+        return self._payment_inst
+
+    @payment_inst.setter
+    def payment_inst(self, value):
+        self._payment_inst = value
+    @property
+    def payment_type(self):
+        return self._payment_type
+
+    @payment_type.setter
+    def payment_type(self, value):
+        self._payment_type = value
     @property
     def product_code(self):
         return self._product_code
@@ -173,6 +197,11 @@ class AlipayTradeOrderPrepayModel(object):
                 params['goods_detail'] = self.goods_detail.to_alipay_dict()
             else:
                 params['goods_detail'] = self.goods_detail
+        if self.merchant_return_url:
+            if hasattr(self.merchant_return_url, 'to_alipay_dict'):
+                params['merchant_return_url'] = self.merchant_return_url.to_alipay_dict()
+            else:
+                params['merchant_return_url'] = self.merchant_return_url
         if self.order_scene:
             if hasattr(self.order_scene, 'to_alipay_dict'):
                 params['order_scene'] = self.order_scene.to_alipay_dict()
@@ -183,6 +212,16 @@ class AlipayTradeOrderPrepayModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.payment_inst:
+            if hasattr(self.payment_inst, 'to_alipay_dict'):
+                params['payment_inst'] = self.payment_inst.to_alipay_dict()
+            else:
+                params['payment_inst'] = self.payment_inst
+        if self.payment_type:
+            if hasattr(self.payment_type, 'to_alipay_dict'):
+                params['payment_type'] = self.payment_type.to_alipay_dict()
+            else:
+                params['payment_type'] = self.payment_type
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -238,10 +277,16 @@ class AlipayTradeOrderPrepayModel(object):
             o.extend_params = d['extend_params']
         if 'goods_detail' in d:
             o.goods_detail = d['goods_detail']
+        if 'merchant_return_url' in d:
+            o.merchant_return_url = d['merchant_return_url']
         if 'order_scene' in d:
             o.order_scene = d['order_scene']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'payment_inst' in d:
+            o.payment_inst = d['payment_inst']
+        if 'payment_type' in d:
+            o.payment_type = d['payment_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'royalty_info' in d:

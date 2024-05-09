@@ -10,8 +10,8 @@ class ScenePayParticipantBizParamDTO(object):
     def __init__(self):
         self._authorization_id = None
         self._cert_no = None
-        self._external_agreement_no = None
-        self._external_cert_type = None
+        self._cert_type = None
+        self._channel_id = None
         self._out_card_no = None
         self._user_name = None
 
@@ -30,19 +30,19 @@ class ScenePayParticipantBizParamDTO(object):
     def cert_no(self, value):
         self._cert_no = value
     @property
-    def external_agreement_no(self):
-        return self._external_agreement_no
+    def cert_type(self):
+        return self._cert_type
 
-    @external_agreement_no.setter
-    def external_agreement_no(self, value):
-        self._external_agreement_no = value
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
-    def external_cert_type(self):
-        return self._external_cert_type
+    def channel_id(self):
+        return self._channel_id
 
-    @external_cert_type.setter
-    def external_cert_type(self, value):
-        self._external_cert_type = value
+    @channel_id.setter
+    def channel_id(self, value):
+        self._channel_id = value
     @property
     def out_card_no(self):
         return self._out_card_no
@@ -71,16 +71,16 @@ class ScenePayParticipantBizParamDTO(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
-        if self.external_agreement_no:
-            if hasattr(self.external_agreement_no, 'to_alipay_dict'):
-                params['external_agreement_no'] = self.external_agreement_no.to_alipay_dict()
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
-                params['external_agreement_no'] = self.external_agreement_no
-        if self.external_cert_type:
-            if hasattr(self.external_cert_type, 'to_alipay_dict'):
-                params['external_cert_type'] = self.external_cert_type.to_alipay_dict()
+                params['cert_type'] = self.cert_type
+        if self.channel_id:
+            if hasattr(self.channel_id, 'to_alipay_dict'):
+                params['channel_id'] = self.channel_id.to_alipay_dict()
             else:
-                params['external_cert_type'] = self.external_cert_type
+                params['channel_id'] = self.channel_id
         if self.out_card_no:
             if hasattr(self.out_card_no, 'to_alipay_dict'):
                 params['out_card_no'] = self.out_card_no.to_alipay_dict()
@@ -102,10 +102,10 @@ class ScenePayParticipantBizParamDTO(object):
             o.authorization_id = d['authorization_id']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
-        if 'external_agreement_no' in d:
-            o.external_agreement_no = d['external_agreement_no']
-        if 'external_cert_type' in d:
-            o.external_cert_type = d['external_cert_type']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
+        if 'channel_id' in d:
+            o.channel_id = d['channel_id']
         if 'out_card_no' in d:
             o.out_card_no = d['out_card_no']
         if 'user_name' in d:

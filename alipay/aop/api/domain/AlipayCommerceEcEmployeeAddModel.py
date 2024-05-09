@@ -23,9 +23,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._identity_type = None
         self._iot_check_type = None
         self._iot_vid = None
+        self._profiles = None
         self._role_list = None
         self._sign_return_url = None
         self._sign_url_carry_info = None
+        self._withholding_sign_str = None
 
     @property
     def department_ids(self):
@@ -136,6 +138,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def iot_vid(self, value):
         self._iot_vid = value
     @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -159,6 +168,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @sign_url_carry_info.setter
     def sign_url_carry_info(self, value):
         self._sign_url_carry_info = value
+    @property
+    def withholding_sign_str(self):
+        return self._withholding_sign_str
+
+    @withholding_sign_str.setter
+    def withholding_sign_str(self, value):
+        self._withholding_sign_str = value
 
 
     def to_alipay_dict(self):
@@ -243,6 +259,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
             else:
                 params['iot_vid'] = self.iot_vid
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -263,6 +284,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['sign_url_carry_info'] = self.sign_url_carry_info.to_alipay_dict()
             else:
                 params['sign_url_carry_info'] = self.sign_url_carry_info
+        if self.withholding_sign_str:
+            if hasattr(self.withholding_sign_str, 'to_alipay_dict'):
+                params['withholding_sign_str'] = self.withholding_sign_str.to_alipay_dict()
+            else:
+                params['withholding_sign_str'] = self.withholding_sign_str
         return params
 
     @staticmethod
@@ -300,12 +326,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.iot_check_type = d['iot_check_type']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
         if 'sign_return_url' in d:
             o.sign_return_url = d['sign_return_url']
         if 'sign_url_carry_info' in d:
             o.sign_url_carry_info = d['sign_url_carry_info']
+        if 'withholding_sign_str' in d:
+            o.withholding_sign_str = d['withholding_sign_str']
         return o
 
 

@@ -9,6 +9,7 @@ class AlipayOverseasOpenIndrbeneficiaryCreateModel(object):
 
     def __init__(self):
         self._business_partner = None
+        self._grayscale_type = None
         self._partner_type = None
         self._remark = None
         self._request_id = None
@@ -24,6 +25,13 @@ class AlipayOverseasOpenIndrbeneficiaryCreateModel(object):
     @business_partner.setter
     def business_partner(self, value):
         self._business_partner = value
+    @property
+    def grayscale_type(self):
+        return self._grayscale_type
+
+    @grayscale_type.setter
+    def grayscale_type(self, value):
+        self._grayscale_type = value
     @property
     def partner_type(self):
         return self._partner_type
@@ -82,6 +90,11 @@ class AlipayOverseasOpenIndrbeneficiaryCreateModel(object):
                 params['business_partner'] = self.business_partner.to_alipay_dict()
             else:
                 params['business_partner'] = self.business_partner
+        if self.grayscale_type:
+            if hasattr(self.grayscale_type, 'to_alipay_dict'):
+                params['grayscale_type'] = self.grayscale_type.to_alipay_dict()
+            else:
+                params['grayscale_type'] = self.grayscale_type
         if self.partner_type:
             if hasattr(self.partner_type, 'to_alipay_dict'):
                 params['partner_type'] = self.partner_type.to_alipay_dict()
@@ -126,6 +139,8 @@ class AlipayOverseasOpenIndrbeneficiaryCreateModel(object):
         o = AlipayOverseasOpenIndrbeneficiaryCreateModel()
         if 'business_partner' in d:
             o.business_partner = d['business_partner']
+        if 'grayscale_type' in d:
+            o.grayscale_type = d['grayscale_type']
         if 'partner_type' in d:
             o.partner_type = d['partner_type']
         if 'remark' in d:

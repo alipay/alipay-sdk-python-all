@@ -17,6 +17,7 @@ class EcEmployeeBatchAddFailInfo(object):
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
         self._fail_reason = None
+        self._profiles = None
 
     @property
     def employee_cert_no(self):
@@ -81,6 +82,13 @@ class EcEmployeeBatchAddFailInfo(object):
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
 
 
     def to_alipay_dict(self):
@@ -130,6 +138,11 @@ class EcEmployeeBatchAddFailInfo(object):
                 params['fail_reason'] = self.fail_reason.to_alipay_dict()
             else:
                 params['fail_reason'] = self.fail_reason
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         return params
 
     @staticmethod
@@ -155,6 +168,8 @@ class EcEmployeeBatchAddFailInfo(object):
             o.encrypt_mobile = d['encrypt_mobile']
         if 'fail_reason' in d:
             o.fail_reason = d['fail_reason']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         return o
 
 

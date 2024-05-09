@@ -8,6 +8,8 @@ from alipay.aop.api.constant.ParamConstants import *
 class RefundRoyaltyResult(object):
 
     def __init__(self):
+        self._ori_trans_in = None
+        self._ori_trans_out = None
         self._refund_amount = None
         self._result_code = None
         self._royalty_type = None
@@ -16,6 +18,20 @@ class RefundRoyaltyResult(object):
         self._trans_out = None
         self._trans_out_email = None
 
+    @property
+    def ori_trans_in(self):
+        return self._ori_trans_in
+
+    @ori_trans_in.setter
+    def ori_trans_in(self, value):
+        self._ori_trans_in = value
+    @property
+    def ori_trans_out(self):
+        return self._ori_trans_out
+
+    @ori_trans_out.setter
+    def ori_trans_out(self, value):
+        self._ori_trans_out = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -69,6 +85,16 @@ class RefundRoyaltyResult(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ori_trans_in:
+            if hasattr(self.ori_trans_in, 'to_alipay_dict'):
+                params['ori_trans_in'] = self.ori_trans_in.to_alipay_dict()
+            else:
+                params['ori_trans_in'] = self.ori_trans_in
+        if self.ori_trans_out:
+            if hasattr(self.ori_trans_out, 'to_alipay_dict'):
+                params['ori_trans_out'] = self.ori_trans_out.to_alipay_dict()
+            else:
+                params['ori_trans_out'] = self.ori_trans_out
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -111,6 +137,10 @@ class RefundRoyaltyResult(object):
         if not d:
             return None
         o = RefundRoyaltyResult()
+        if 'ori_trans_in' in d:
+            o.ori_trans_in = d['ori_trans_in']
+        if 'ori_trans_out' in d:
+            o.ori_trans_out = d['ori_trans_out']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'result_code' in d:

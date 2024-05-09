@@ -12,6 +12,7 @@ class AlipayCommerceAcommunicationCreditphonePeriodorderQueryModel(object):
         self._alipay_open_id = None
         self._alipay_order_no = None
         self._alipay_user_id = None
+        self._out_biz_no = None
 
     @property
     def alipay_biz_no(self):
@@ -41,6 +42,13 @@ class AlipayCommerceAcommunicationCreditphonePeriodorderQueryModel(object):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayCommerceAcommunicationCreditphonePeriodorderQueryModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayCommerceAcommunicationCreditphonePeriodorderQueryModel(object):
             o.alipay_order_no = d['alipay_order_no']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         return o
 
 

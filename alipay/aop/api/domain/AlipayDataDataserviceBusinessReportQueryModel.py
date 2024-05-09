@@ -11,6 +11,7 @@ class AlipayDataDataserviceBusinessReportQueryModel(object):
 
     def __init__(self):
         self._brand_rank_industry_dto = None
+        self._business_code = None
         self._metric_keys = None
         self._partner_id = None
         self._portrait_in_mall_dto = None
@@ -29,6 +30,13 @@ class AlipayDataDataserviceBusinessReportQueryModel(object):
                     self._brand_rank_industry_dto.append(i)
                 else:
                     self._brand_rank_industry_dto.append(BusinessIndustryDTO.from_alipay_dict(i))
+    @property
+    def business_code(self):
+        return self._business_code
+
+    @business_code.setter
+    def business_code(self, value):
+        self._business_code = value
     @property
     def metric_keys(self):
         return self._metric_keys
@@ -77,6 +85,11 @@ class AlipayDataDataserviceBusinessReportQueryModel(object):
                 params['brand_rank_industry_dto'] = self.brand_rank_industry_dto.to_alipay_dict()
             else:
                 params['brand_rank_industry_dto'] = self.brand_rank_industry_dto
+        if self.business_code:
+            if hasattr(self.business_code, 'to_alipay_dict'):
+                params['business_code'] = self.business_code.to_alipay_dict()
+            else:
+                params['business_code'] = self.business_code
         if self.metric_keys:
             if isinstance(self.metric_keys, list):
                 for i in range(0, len(self.metric_keys)):
@@ -111,6 +124,8 @@ class AlipayDataDataserviceBusinessReportQueryModel(object):
         o = AlipayDataDataserviceBusinessReportQueryModel()
         if 'brand_rank_industry_dto' in d:
             o.brand_rank_industry_dto = d['brand_rank_industry_dto']
+        if 'business_code' in d:
+            o.business_code = d['business_code']
         if 'metric_keys' in d:
             o.metric_keys = d['metric_keys']
         if 'partner_id' in d:

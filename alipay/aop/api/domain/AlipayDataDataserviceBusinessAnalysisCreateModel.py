@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayDataDataserviceBusinessAnalysisCreateModel(object):
 
     def __init__(self):
+        self._business_code = None
         self._mall_id = None
         self._mall_range = None
         self._partner_id = None
@@ -16,6 +17,13 @@ class AlipayDataDataserviceBusinessAnalysisCreateModel(object):
         self._schedule_type = None
         self._task_name = None
 
+    @property
+    def business_code(self):
+        return self._business_code
+
+    @business_code.setter
+    def business_code(self, value):
+        self._business_code = value
     @property
     def mall_id(self):
         return self._mall_id
@@ -69,6 +77,11 @@ class AlipayDataDataserviceBusinessAnalysisCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_code:
+            if hasattr(self.business_code, 'to_alipay_dict'):
+                params['business_code'] = self.business_code.to_alipay_dict()
+            else:
+                params['business_code'] = self.business_code
         if self.mall_id:
             if hasattr(self.mall_id, 'to_alipay_dict'):
                 params['mall_id'] = self.mall_id.to_alipay_dict()
@@ -111,6 +124,8 @@ class AlipayDataDataserviceBusinessAnalysisCreateModel(object):
         if not d:
             return None
         o = AlipayDataDataserviceBusinessAnalysisCreateModel()
+        if 'business_code' in d:
+            o.business_code = d['business_code']
         if 'mall_id' in d:
             o.mall_id = d['mall_id']
         if 'mall_range' in d:

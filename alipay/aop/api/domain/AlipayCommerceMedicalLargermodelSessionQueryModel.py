@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
 
     def __init__(self):
+        self._app_type = None
         self._chat_id = None
         self._city_name = None
         self._latitude = None
@@ -21,6 +22,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         self._scene_code = None
         self._session_id = None
 
+    @property
+    def app_type(self):
+        return self._app_type
+
+    @app_type.setter
+    def app_type(self, value):
+        self._app_type = value
     @property
     def chat_id(self):
         return self._chat_id
@@ -109,6 +117,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_type:
+            if hasattr(self.app_type, 'to_alipay_dict'):
+                params['app_type'] = self.app_type.to_alipay_dict()
+            else:
+                params['app_type'] = self.app_type
         if self.chat_id:
             if hasattr(self.chat_id, 'to_alipay_dict'):
                 params['chat_id'] = self.chat_id.to_alipay_dict()
@@ -176,6 +189,8 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalLargermodelSessionQueryModel()
+        if 'app_type' in d:
+            o.app_type = d['app_type']
         if 'chat_id' in d:
             o.chat_id = d['chat_id']
         if 'city_name' in d:

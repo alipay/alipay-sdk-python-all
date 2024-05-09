@@ -11,9 +11,11 @@ class AddressInfoObj(object):
         self._address = None
         self._area = None
         self._city = None
+        self._full_name = None
         self._house_number = None
         self._latitude = None
         self._longitude = None
+        self._phone = None
         self._poi_name = None
         self._province = None
 
@@ -39,6 +41,13 @@ class AddressInfoObj(object):
     def city(self, value):
         self._city = value
     @property
+    def full_name(self):
+        return self._full_name
+
+    @full_name.setter
+    def full_name(self, value):
+        self._full_name = value
+    @property
     def house_number(self):
         return self._house_number
 
@@ -59,6 +68,13 @@ class AddressInfoObj(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def phone(self):
+        return self._phone
+
+    @phone.setter
+    def phone(self, value):
+        self._phone = value
     @property
     def poi_name(self):
         return self._poi_name
@@ -92,6 +108,11 @@ class AddressInfoObj(object):
                 params['city'] = self.city.to_alipay_dict()
             else:
                 params['city'] = self.city
+        if self.full_name:
+            if hasattr(self.full_name, 'to_alipay_dict'):
+                params['full_name'] = self.full_name.to_alipay_dict()
+            else:
+                params['full_name'] = self.full_name
         if self.house_number:
             if hasattr(self.house_number, 'to_alipay_dict'):
                 params['house_number'] = self.house_number.to_alipay_dict()
@@ -107,6 +128,11 @@ class AddressInfoObj(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.phone:
+            if hasattr(self.phone, 'to_alipay_dict'):
+                params['phone'] = self.phone.to_alipay_dict()
+            else:
+                params['phone'] = self.phone
         if self.poi_name:
             if hasattr(self.poi_name, 'to_alipay_dict'):
                 params['poi_name'] = self.poi_name.to_alipay_dict()
@@ -130,12 +156,16 @@ class AddressInfoObj(object):
             o.area = d['area']
         if 'city' in d:
             o.city = d['city']
+        if 'full_name' in d:
+            o.full_name = d['full_name']
         if 'house_number' in d:
             o.house_number = d['house_number']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'phone' in d:
+            o.phone = d['phone']
         if 'poi_name' in d:
             o.poi_name = d['poi_name']
         if 'province' in d:

@@ -14,6 +14,7 @@ class AlipayMarketingActivityDeliveryCreateResponse(AlipayResponse):
         self._delivery_guide_preview_url = None
         self._delivery_id = None
         self._error_delivery_config_list = None
+        self._out_biz_no = None
         self._success_delivery_config_list = None
 
     @property
@@ -44,6 +45,13 @@ class AlipayMarketingActivityDeliveryCreateResponse(AlipayResponse):
                 else:
                     self._error_delivery_config_list.append(ErrorDeliveryConfig.from_alipay_dict(i))
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def success_delivery_config_list(self):
         return self._success_delivery_config_list
 
@@ -65,5 +73,7 @@ class AlipayMarketingActivityDeliveryCreateResponse(AlipayResponse):
             self.delivery_id = response['delivery_id']
         if 'error_delivery_config_list' in response:
             self.error_delivery_config_list = response['error_delivery_config_list']
+        if 'out_biz_no' in response:
+            self.out_biz_no = response['out_biz_no']
         if 'success_delivery_config_list' in response:
             self.success_delivery_config_list = response['success_delivery_config_list']

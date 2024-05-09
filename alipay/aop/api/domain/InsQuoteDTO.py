@@ -13,6 +13,7 @@ class InsQuoteDTO(object):
         self._ins_period = None
         self._inst_id = None
         self._original_premium = None
+        self._original_premium_rate = None
         self._premium = None
         self._premium_rate = None
         self._product_code = None
@@ -53,6 +54,13 @@ class InsQuoteDTO(object):
     @original_premium.setter
     def original_premium(self, value):
         self._original_premium = value
+    @property
+    def original_premium_rate(self):
+        return self._original_premium_rate
+
+    @original_premium_rate.setter
+    def original_premium_rate(self, value):
+        self._original_premium_rate = value
     @property
     def premium(self):
         return self._premium
@@ -133,6 +141,11 @@ class InsQuoteDTO(object):
                 params['original_premium'] = self.original_premium.to_alipay_dict()
             else:
                 params['original_premium'] = self.original_premium
+        if self.original_premium_rate:
+            if hasattr(self.original_premium_rate, 'to_alipay_dict'):
+                params['original_premium_rate'] = self.original_premium_rate.to_alipay_dict()
+            else:
+                params['original_premium_rate'] = self.original_premium_rate
         if self.premium:
             if hasattr(self.premium, 'to_alipay_dict'):
                 params['premium'] = self.premium.to_alipay_dict()
@@ -188,6 +201,8 @@ class InsQuoteDTO(object):
             o.inst_id = d['inst_id']
         if 'original_premium' in d:
             o.original_premium = d['original_premium']
+        if 'original_premium_rate' in d:
+            o.original_premium_rate = d['original_premium_rate']
         if 'premium' in d:
             o.premium = d['premium']
         if 'premium_rate' in d:

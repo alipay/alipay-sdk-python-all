@@ -15,12 +15,15 @@ class LogisticsSyncDataDTO(object):
         self._auth_type = None
         self._cancel_reason = None
         self._cancel_time = None
+        self._carrier_company_code = None
+        self._carrier_company_name = None
         self._courier_name = None
         self._courier_phone = None
         self._discount_amount = None
         self._inbound_address = None
         self._inbound_time = None
         self._insured_weight_amount = None
+        self._logistics_mail_no = None
         self._logistics_no = None
         self._main_amount = None
         self._op_code = None
@@ -28,6 +31,8 @@ class LogisticsSyncDataDTO(object):
         self._out_logistics_no = None
         self._over_weight_amount = None
         self._package_amount = None
+        self._pay_status = None
+        self._pay_time = None
         self._pay_url = None
         self._receipt_addition = None
         self._receipt_first = None
@@ -91,6 +96,20 @@ class LogisticsSyncDataDTO(object):
     def cancel_time(self, value):
         self._cancel_time = value
     @property
+    def carrier_company_code(self):
+        return self._carrier_company_code
+
+    @carrier_company_code.setter
+    def carrier_company_code(self, value):
+        self._carrier_company_code = value
+    @property
+    def carrier_company_name(self):
+        return self._carrier_company_name
+
+    @carrier_company_name.setter
+    def carrier_company_name(self, value):
+        self._carrier_company_name = value
+    @property
     def courier_name(self):
         return self._courier_name
 
@@ -132,6 +151,13 @@ class LogisticsSyncDataDTO(object):
     @insured_weight_amount.setter
     def insured_weight_amount(self, value):
         self._insured_weight_amount = value
+    @property
+    def logistics_mail_no(self):
+        return self._logistics_mail_no
+
+    @logistics_mail_no.setter
+    def logistics_mail_no(self, value):
+        self._logistics_mail_no = value
     @property
     def logistics_no(self):
         return self._logistics_no
@@ -181,6 +207,20 @@ class LogisticsSyncDataDTO(object):
     @package_amount.setter
     def package_amount(self, value):
         self._package_amount = value
+    @property
+    def pay_status(self):
+        return self._pay_status
+
+    @pay_status.setter
+    def pay_status(self, value):
+        self._pay_status = value
+    @property
+    def pay_time(self):
+        return self._pay_time
+
+    @pay_time.setter
+    def pay_time(self, value):
+        self._pay_time = value
     @property
     def pay_url(self):
         return self._pay_url
@@ -304,6 +344,16 @@ class LogisticsSyncDataDTO(object):
                 params['cancel_time'] = self.cancel_time.to_alipay_dict()
             else:
                 params['cancel_time'] = self.cancel_time
+        if self.carrier_company_code:
+            if hasattr(self.carrier_company_code, 'to_alipay_dict'):
+                params['carrier_company_code'] = self.carrier_company_code.to_alipay_dict()
+            else:
+                params['carrier_company_code'] = self.carrier_company_code
+        if self.carrier_company_name:
+            if hasattr(self.carrier_company_name, 'to_alipay_dict'):
+                params['carrier_company_name'] = self.carrier_company_name.to_alipay_dict()
+            else:
+                params['carrier_company_name'] = self.carrier_company_name
         if self.courier_name:
             if hasattr(self.courier_name, 'to_alipay_dict'):
                 params['courier_name'] = self.courier_name.to_alipay_dict()
@@ -334,6 +384,11 @@ class LogisticsSyncDataDTO(object):
                 params['insured_weight_amount'] = self.insured_weight_amount.to_alipay_dict()
             else:
                 params['insured_weight_amount'] = self.insured_weight_amount
+        if self.logistics_mail_no:
+            if hasattr(self.logistics_mail_no, 'to_alipay_dict'):
+                params['logistics_mail_no'] = self.logistics_mail_no.to_alipay_dict()
+            else:
+                params['logistics_mail_no'] = self.logistics_mail_no
         if self.logistics_no:
             if hasattr(self.logistics_no, 'to_alipay_dict'):
                 params['logistics_no'] = self.logistics_no.to_alipay_dict()
@@ -369,6 +424,16 @@ class LogisticsSyncDataDTO(object):
                 params['package_amount'] = self.package_amount.to_alipay_dict()
             else:
                 params['package_amount'] = self.package_amount
+        if self.pay_status:
+            if hasattr(self.pay_status, 'to_alipay_dict'):
+                params['pay_status'] = self.pay_status.to_alipay_dict()
+            else:
+                params['pay_status'] = self.pay_status
+        if self.pay_time:
+            if hasattr(self.pay_time, 'to_alipay_dict'):
+                params['pay_time'] = self.pay_time.to_alipay_dict()
+            else:
+                params['pay_time'] = self.pay_time
         if self.pay_url:
             if hasattr(self.pay_url, 'to_alipay_dict'):
                 params['pay_url'] = self.pay_url.to_alipay_dict()
@@ -450,6 +515,10 @@ class LogisticsSyncDataDTO(object):
             o.cancel_reason = d['cancel_reason']
         if 'cancel_time' in d:
             o.cancel_time = d['cancel_time']
+        if 'carrier_company_code' in d:
+            o.carrier_company_code = d['carrier_company_code']
+        if 'carrier_company_name' in d:
+            o.carrier_company_name = d['carrier_company_name']
         if 'courier_name' in d:
             o.courier_name = d['courier_name']
         if 'courier_phone' in d:
@@ -462,6 +531,8 @@ class LogisticsSyncDataDTO(object):
             o.inbound_time = d['inbound_time']
         if 'insured_weight_amount' in d:
             o.insured_weight_amount = d['insured_weight_amount']
+        if 'logistics_mail_no' in d:
+            o.logistics_mail_no = d['logistics_mail_no']
         if 'logistics_no' in d:
             o.logistics_no = d['logistics_no']
         if 'main_amount' in d:
@@ -476,6 +547,10 @@ class LogisticsSyncDataDTO(object):
             o.over_weight_amount = d['over_weight_amount']
         if 'package_amount' in d:
             o.package_amount = d['package_amount']
+        if 'pay_status' in d:
+            o.pay_status = d['pay_status']
+        if 'pay_time' in d:
+            o.pay_time = d['pay_time']
         if 'pay_url' in d:
             o.pay_url = d['pay_url']
         if 'receipt_addition' in d:

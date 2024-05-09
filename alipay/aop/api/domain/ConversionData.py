@@ -4,14 +4,17 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ConversionProperty import ConversionProperty
+from alipay.aop.api.domain.ConversionProperty import ConversionProperty
 
 
 class ConversionData(object):
 
     def __init__(self):
         self._ad_id = None
+        self._attributes = None
         self._biz_no = None
         self._callback_ext_info = None
+        self._cid = None
         self._conversion_amount = None
         self._conversion_id = None
         self._conversion_time = None
@@ -40,6 +43,16 @@ class ConversionData(object):
     def ad_id(self, value):
         self._ad_id = value
     @property
+    def attributes(self):
+        return self._attributes
+
+    @attributes.setter
+    def attributes(self, value):
+        if isinstance(value, ConversionProperty):
+            self._attributes = value
+        else:
+            self._attributes = ConversionProperty.from_alipay_dict(value)
+    @property
     def biz_no(self):
         return self._biz_no
 
@@ -53,6 +66,13 @@ class ConversionData(object):
     @callback_ext_info.setter
     def callback_ext_info(self, value):
         self._callback_ext_info = value
+    @property
+    def cid(self):
+        return self._cid
+
+    @cid.setter
+    def cid(self, value):
+        self._cid = value
     @property
     def conversion_amount(self):
         return self._conversion_amount
@@ -201,6 +221,11 @@ class ConversionData(object):
                 params['ad_id'] = self.ad_id.to_alipay_dict()
             else:
                 params['ad_id'] = self.ad_id
+        if self.attributes:
+            if hasattr(self.attributes, 'to_alipay_dict'):
+                params['attributes'] = self.attributes.to_alipay_dict()
+            else:
+                params['attributes'] = self.attributes
         if self.biz_no:
             if hasattr(self.biz_no, 'to_alipay_dict'):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
@@ -211,6 +236,11 @@ class ConversionData(object):
                 params['callback_ext_info'] = self.callback_ext_info.to_alipay_dict()
             else:
                 params['callback_ext_info'] = self.callback_ext_info
+        if self.cid:
+            if hasattr(self.cid, 'to_alipay_dict'):
+                params['cid'] = self.cid.to_alipay_dict()
+            else:
+                params['cid'] = self.cid
         if self.conversion_amount:
             if hasattr(self.conversion_amount, 'to_alipay_dict'):
                 params['conversion_amount'] = self.conversion_amount.to_alipay_dict()
@@ -320,10 +350,14 @@ class ConversionData(object):
         o = ConversionData()
         if 'ad_id' in d:
             o.ad_id = d['ad_id']
+        if 'attributes' in d:
+            o.attributes = d['attributes']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'callback_ext_info' in d:
             o.callback_ext_info = d['callback_ext_info']
+        if 'cid' in d:
+            o.cid = d['cid']
         if 'conversion_amount' in d:
             o.conversion_amount = d['conversion_amount']
         if 'conversion_id' in d:

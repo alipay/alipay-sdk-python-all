@@ -10,6 +10,7 @@ class ZhimaCreditEpAcceptanceLabelQueryModel(object):
     def __init__(self):
         self._ep_cert_no = None
         self._scene_code = None
+        self._show_flag = None
 
     @property
     def ep_cert_no(self):
@@ -25,6 +26,13 @@ class ZhimaCreditEpAcceptanceLabelQueryModel(object):
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def show_flag(self):
+        return self._show_flag
+
+    @show_flag.setter
+    def show_flag(self, value):
+        self._show_flag = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class ZhimaCreditEpAcceptanceLabelQueryModel(object):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.show_flag:
+            if hasattr(self.show_flag, 'to_alipay_dict'):
+                params['show_flag'] = self.show_flag.to_alipay_dict()
+            else:
+                params['show_flag'] = self.show_flag
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class ZhimaCreditEpAcceptanceLabelQueryModel(object):
             o.ep_cert_no = d['ep_cert_no']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'show_flag' in d:
+            o.show_flag = d['show_flag']
         return o
 
 

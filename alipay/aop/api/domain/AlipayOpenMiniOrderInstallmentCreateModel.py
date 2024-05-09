@@ -13,11 +13,14 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
         self._installment_no_type = None
         self._installment_price = None
         self._is_finish_performance = None
+        self._is_sync_pay = None
         self._open_id = None
         self._order_id = None
         self._out_installment_order_id = None
         self._out_order_id = None
+        self._pay_channel = None
         self._period_num = None
+        self._stage_no = None
         self._trade_no = None
         self._type = None
         self._user_id = None
@@ -58,6 +61,13 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     def is_finish_performance(self, value):
         self._is_finish_performance = value
     @property
+    def is_sync_pay(self):
+        return self._is_sync_pay
+
+    @is_sync_pay.setter
+    def is_sync_pay(self, value):
+        self._is_sync_pay = value
+    @property
     def open_id(self):
         return self._open_id
 
@@ -86,12 +96,26 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     def out_order_id(self, value):
         self._out_order_id = value
     @property
+    def pay_channel(self):
+        return self._pay_channel
+
+    @pay_channel.setter
+    def pay_channel(self, value):
+        self._pay_channel = value
+    @property
     def period_num(self):
         return self._period_num
 
     @period_num.setter
     def period_num(self, value):
         self._period_num = value
+    @property
+    def stage_no(self):
+        return self._stage_no
+
+    @stage_no.setter
+    def stage_no(self, value):
+        self._stage_no = value
     @property
     def trade_no(self):
         return self._trade_no
@@ -142,6 +166,11 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['is_finish_performance'] = self.is_finish_performance.to_alipay_dict()
             else:
                 params['is_finish_performance'] = self.is_finish_performance
+        if self.is_sync_pay:
+            if hasattr(self.is_sync_pay, 'to_alipay_dict'):
+                params['is_sync_pay'] = self.is_sync_pay.to_alipay_dict()
+            else:
+                params['is_sync_pay'] = self.is_sync_pay
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -162,11 +191,21 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.pay_channel:
+            if hasattr(self.pay_channel, 'to_alipay_dict'):
+                params['pay_channel'] = self.pay_channel.to_alipay_dict()
+            else:
+                params['pay_channel'] = self.pay_channel
         if self.period_num:
             if hasattr(self.period_num, 'to_alipay_dict'):
                 params['period_num'] = self.period_num.to_alipay_dict()
             else:
                 params['period_num'] = self.period_num
+        if self.stage_no:
+            if hasattr(self.stage_no, 'to_alipay_dict'):
+                params['stage_no'] = self.stage_no.to_alipay_dict()
+            else:
+                params['stage_no'] = self.stage_no
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -199,6 +238,8 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
             o.installment_price = d['installment_price']
         if 'is_finish_performance' in d:
             o.is_finish_performance = d['is_finish_performance']
+        if 'is_sync_pay' in d:
+            o.is_sync_pay = d['is_sync_pay']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:
@@ -207,8 +248,12 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
             o.out_installment_order_id = d['out_installment_order_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'pay_channel' in d:
+            o.pay_channel = d['pay_channel']
         if 'period_num' in d:
             o.period_num = d['period_num']
+        if 'stage_no' in d:
+            o.stage_no = d['stage_no']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'type' in d:

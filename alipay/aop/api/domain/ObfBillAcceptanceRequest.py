@@ -16,6 +16,7 @@ class ObfBillAcceptanceRequest(object):
         self._bill_start_date = None
         self._channel_commodity_code = None
         self._channel_commodity_name = None
+        self._cloud_provider = None
         self._customer_name = None
         self._idempotent_key = None
         self._ou_code = None
@@ -84,6 +85,13 @@ class ObfBillAcceptanceRequest(object):
     @channel_commodity_name.setter
     def channel_commodity_name(self, value):
         self._channel_commodity_name = value
+    @property
+    def cloud_provider(self):
+        return self._cloud_provider
+
+    @cloud_provider.setter
+    def cloud_provider(self, value):
+        self._cloud_provider = value
     @property
     def customer_name(self):
         return self._customer_name
@@ -205,6 +213,11 @@ class ObfBillAcceptanceRequest(object):
                 params['channel_commodity_name'] = self.channel_commodity_name.to_alipay_dict()
             else:
                 params['channel_commodity_name'] = self.channel_commodity_name
+        if self.cloud_provider:
+            if hasattr(self.cloud_provider, 'to_alipay_dict'):
+                params['cloud_provider'] = self.cloud_provider.to_alipay_dict()
+            else:
+                params['cloud_provider'] = self.cloud_provider
         if self.customer_name:
             if hasattr(self.customer_name, 'to_alipay_dict'):
                 params['customer_name'] = self.customer_name.to_alipay_dict()
@@ -283,6 +296,8 @@ class ObfBillAcceptanceRequest(object):
             o.channel_commodity_code = d['channel_commodity_code']
         if 'channel_commodity_name' in d:
             o.channel_commodity_name = d['channel_commodity_name']
+        if 'cloud_provider' in d:
+            o.cloud_provider = d['cloud_provider']
         if 'customer_name' in d:
             o.customer_name = d['customer_name']
         if 'idempotent_key' in d:

@@ -13,6 +13,7 @@ class AlipayFundTaxbillSignQueryModel(object):
         self._employer_code = None
         self._identification_in_belonging_employer = None
         self._product_code = None
+        self._solution_code = None
 
     @property
     def biz_scene(self):
@@ -49,6 +50,13 @@ class AlipayFundTaxbillSignQueryModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def solution_code(self):
+        return self._solution_code
+
+    @solution_code.setter
+    def solution_code(self, value):
+        self._solution_code = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayFundTaxbillSignQueryModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.solution_code:
+            if hasattr(self.solution_code, 'to_alipay_dict'):
+                params['solution_code'] = self.solution_code.to_alipay_dict()
+            else:
+                params['solution_code'] = self.solution_code
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayFundTaxbillSignQueryModel(object):
             o.identification_in_belonging_employer = d['identification_in_belonging_employer']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'solution_code' in d:
+            o.solution_code = d['solution_code']
         return o
 
 

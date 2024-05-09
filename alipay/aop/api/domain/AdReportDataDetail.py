@@ -13,7 +13,9 @@ class AdReportDataDetail(object):
         self._click = None
         self._conversion_data_list = None
         self._cost = None
+        self._creative_name = None
         self._data_id = None
+        self._group_id = None
         self._group_name = None
         self._impression = None
         self._market_target_name = None
@@ -60,12 +62,26 @@ class AdReportDataDetail(object):
     def cost(self, value):
         self._cost = value
     @property
+    def creative_name(self):
+        return self._creative_name
+
+    @creative_name.setter
+    def creative_name(self, value):
+        self._creative_name = value
+    @property
     def data_id(self):
         return self._data_id
 
     @data_id.setter
     def data_id(self, value):
         self._data_id = value
+    @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
     @property
     def group_name(self):
         return self._group_name
@@ -165,11 +181,21 @@ class AdReportDataDetail(object):
                 params['cost'] = self.cost.to_alipay_dict()
             else:
                 params['cost'] = self.cost
+        if self.creative_name:
+            if hasattr(self.creative_name, 'to_alipay_dict'):
+                params['creative_name'] = self.creative_name.to_alipay_dict()
+            else:
+                params['creative_name'] = self.creative_name
         if self.data_id:
             if hasattr(self.data_id, 'to_alipay_dict'):
                 params['data_id'] = self.data_id.to_alipay_dict()
             else:
                 params['data_id'] = self.data_id
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
         if self.group_name:
             if hasattr(self.group_name, 'to_alipay_dict'):
                 params['group_name'] = self.group_name.to_alipay_dict()
@@ -235,8 +261,12 @@ class AdReportDataDetail(object):
             o.conversion_data_list = d['conversion_data_list']
         if 'cost' in d:
             o.cost = d['cost']
+        if 'creative_name' in d:
+            o.creative_name = d['creative_name']
         if 'data_id' in d:
             o.data_id = d['data_id']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
         if 'group_name' in d:
             o.group_name = d['group_name']
         if 'impression' in d:

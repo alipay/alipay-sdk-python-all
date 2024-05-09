@@ -12,6 +12,7 @@ class EvaluateIndicate(object):
     def __init__(self):
         self._children_ids = None
         self._grade_indicates = None
+        self._isv_indicate_desc = None
         self._isv_indicate_id = None
         self._isv_indicate_img = None
         self._isv_indicate_name = None
@@ -42,6 +43,13 @@ class EvaluateIndicate(object):
                     self._grade_indicates.append(i)
                 else:
                     self._grade_indicates.append(EvaluateIndicateGrade.from_alipay_dict(i))
+    @property
+    def isv_indicate_desc(self):
+        return self._isv_indicate_desc
+
+    @isv_indicate_desc.setter
+    def isv_indicate_desc(self, value):
+        self._isv_indicate_desc = value
     @property
     def isv_indicate_id(self):
         return self._isv_indicate_id
@@ -87,6 +95,11 @@ class EvaluateIndicate(object):
                 params['grade_indicates'] = self.grade_indicates.to_alipay_dict()
             else:
                 params['grade_indicates'] = self.grade_indicates
+        if self.isv_indicate_desc:
+            if hasattr(self.isv_indicate_desc, 'to_alipay_dict'):
+                params['isv_indicate_desc'] = self.isv_indicate_desc.to_alipay_dict()
+            else:
+                params['isv_indicate_desc'] = self.isv_indicate_desc
         if self.isv_indicate_id:
             if hasattr(self.isv_indicate_id, 'to_alipay_dict'):
                 params['isv_indicate_id'] = self.isv_indicate_id.to_alipay_dict()
@@ -113,6 +126,8 @@ class EvaluateIndicate(object):
             o.children_ids = d['children_ids']
         if 'grade_indicates' in d:
             o.grade_indicates = d['grade_indicates']
+        if 'isv_indicate_desc' in d:
+            o.isv_indicate_desc = d['isv_indicate_desc']
         if 'isv_indicate_id' in d:
             o.isv_indicate_id = d['isv_indicate_id']
         if 'isv_indicate_img' in d:

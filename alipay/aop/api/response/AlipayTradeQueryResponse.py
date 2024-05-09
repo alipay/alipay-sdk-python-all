@@ -59,6 +59,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._pay_amount = None
         self._pay_currency = None
         self._payment_info_with_id_list = None
+        self._period_scene = None
         self._point_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
@@ -393,6 +394,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
                 else:
                     self._payment_info_with_id_list.append(PaymentInfoWithId.from_alipay_dict(i))
     @property
+    def period_scene(self):
+        return self._period_scene
+
+    @period_scene.setter
+    def period_scene(self, value):
+        self._period_scene = value
+    @property
     def point_amount(self):
         return self._point_amount
 
@@ -628,6 +636,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.pay_currency = response['pay_currency']
         if 'payment_info_with_id_list' in response:
             self.payment_info_with_id_list = response['payment_info_with_id_list']
+        if 'period_scene' in response:
+            self.period_scene = response['period_scene']
         if 'point_amount' in response:
             self.point_amount = response['point_amount']
         if 'receipt_amount' in response:

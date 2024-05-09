@@ -13,6 +13,9 @@ class ZhimaCreditEpAcceptanceLabelpreviewQueryResponse(AlipayResponse):
         self._has_authed = None
         self._has_data = None
         self._label_content = None
+        self._label_count = None
+        self._label_show_type = None
+        self._label_to_obtain_count = None
 
     @property
     def has_authed(self):
@@ -41,6 +44,27 @@ class ZhimaCreditEpAcceptanceLabelpreviewQueryResponse(AlipayResponse):
                     self._label_content.append(i)
                 else:
                     self._label_content.append(EpLabelContent.from_alipay_dict(i))
+    @property
+    def label_count(self):
+        return self._label_count
+
+    @label_count.setter
+    def label_count(self, value):
+        self._label_count = value
+    @property
+    def label_show_type(self):
+        return self._label_show_type
+
+    @label_show_type.setter
+    def label_show_type(self, value):
+        self._label_show_type = value
+    @property
+    def label_to_obtain_count(self):
+        return self._label_to_obtain_count
+
+    @label_to_obtain_count.setter
+    def label_to_obtain_count(self, value):
+        self._label_to_obtain_count = value
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpAcceptanceLabelpreviewQueryResponse, self).parse_response_content(response_content)
@@ -50,3 +74,9 @@ class ZhimaCreditEpAcceptanceLabelpreviewQueryResponse(AlipayResponse):
             self.has_data = response['has_data']
         if 'label_content' in response:
             self.label_content = response['label_content']
+        if 'label_count' in response:
+            self.label_count = response['label_count']
+        if 'label_show_type' in response:
+            self.label_show_type = response['label_show_type']
+        if 'label_to_obtain_count' in response:
+            self.label_to_obtain_count = response['label_to_obtain_count']

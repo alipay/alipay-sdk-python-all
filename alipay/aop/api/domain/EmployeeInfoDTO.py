@@ -22,9 +22,11 @@ class EmployeeInfoDTO(object):
         self._gmt_create = None
         self._gmt_modified = None
         self._iot_face_status = None
+        self._iot_unique_id = None
         self._iot_vid = None
         self._mobile = None
         self._open_id = None
+        self._profiles = None
         self._role_list = None
         self._user_id = None
 
@@ -126,6 +128,13 @@ class EmployeeInfoDTO(object):
     def iot_face_status(self, value):
         self._iot_face_status = value
     @property
+    def iot_unique_id(self):
+        return self._iot_unique_id
+
+    @iot_unique_id.setter
+    def iot_unique_id(self, value):
+        self._iot_unique_id = value
+    @property
     def iot_vid(self):
         return self._iot_vid
 
@@ -146,6 +155,13 @@ class EmployeeInfoDTO(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
     @property
     def role_list(self):
         return self._role_list
@@ -237,6 +253,11 @@ class EmployeeInfoDTO(object):
                 params['iot_face_status'] = self.iot_face_status.to_alipay_dict()
             else:
                 params['iot_face_status'] = self.iot_face_status
+        if self.iot_unique_id:
+            if hasattr(self.iot_unique_id, 'to_alipay_dict'):
+                params['iot_unique_id'] = self.iot_unique_id.to_alipay_dict()
+            else:
+                params['iot_unique_id'] = self.iot_unique_id
         if self.iot_vid:
             if hasattr(self.iot_vid, 'to_alipay_dict'):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
@@ -252,6 +273,11 @@ class EmployeeInfoDTO(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -300,12 +326,16 @@ class EmployeeInfoDTO(object):
             o.gmt_modified = d['gmt_modified']
         if 'iot_face_status' in d:
             o.iot_face_status = d['iot_face_status']
+        if 'iot_unique_id' in d:
+            o.iot_unique_id = d['iot_unique_id']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
         if 'user_id' in d:

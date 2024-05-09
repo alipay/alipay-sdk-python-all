@@ -7,6 +7,7 @@ from alipay.aop.api.domain.ActivityInfoModifyDTO import ActivityInfoModifyDTO
 from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
 from alipay.aop.api.domain.TicketInfoModifyDTO import TicketInfoModifyDTO
+from alipay.aop.api.domain.TourInfoDTO import TourInfoDTO
 
 
 class AlipayOpenMiniOrderDeliveryModifyModel(object):
@@ -20,6 +21,7 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
         self._out_order_id = None
         self._status = None
         self._ticket_infos = None
+        self._tour_info = None
         self._user_id = None
 
     @property
@@ -97,6 +99,16 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
                 else:
                     self._ticket_infos.append(TicketInfoModifyDTO.from_alipay_dict(i))
     @property
+    def tour_info(self):
+        return self._tour_info
+
+    @tour_info.setter
+    def tour_info(self, value):
+        if isinstance(value, TourInfoDTO):
+            self._tour_info = value
+        else:
+            self._tour_info = TourInfoDTO.from_alipay_dict(value)
+    @property
     def user_id(self):
         return self._user_id
 
@@ -157,6 +169,11 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
                 params['ticket_infos'] = self.ticket_infos.to_alipay_dict()
             else:
                 params['ticket_infos'] = self.ticket_infos
+        if self.tour_info:
+            if hasattr(self.tour_info, 'to_alipay_dict'):
+                params['tour_info'] = self.tour_info.to_alipay_dict()
+            else:
+                params['tour_info'] = self.tour_info
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -185,6 +202,8 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
             o.status = d['status']
         if 'ticket_infos' in d:
             o.ticket_infos = d['ticket_infos']
+        if 'tour_info' in d:
+            o.tour_info = d['tour_info']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

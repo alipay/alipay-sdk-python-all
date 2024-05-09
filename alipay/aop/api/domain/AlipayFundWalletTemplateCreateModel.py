@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ConsumeExtend import ConsumeExtend
+from alipay.aop.api.domain.WalletUseRule import WalletUseRule
 
 
 class AlipayFundWalletTemplateCreateModel(object):
@@ -14,6 +15,7 @@ class AlipayFundWalletTemplateCreateModel(object):
         self._out_biz_no = None
         self._product_code = None
         self._wallet_template_name = None
+        self._wallet_use_rule = None
 
     @property
     def biz_scene(self):
@@ -53,6 +55,16 @@ class AlipayFundWalletTemplateCreateModel(object):
     @wallet_template_name.setter
     def wallet_template_name(self, value):
         self._wallet_template_name = value
+    @property
+    def wallet_use_rule(self):
+        return self._wallet_use_rule
+
+    @wallet_use_rule.setter
+    def wallet_use_rule(self, value):
+        if isinstance(value, WalletUseRule):
+            self._wallet_use_rule = value
+        else:
+            self._wallet_use_rule = WalletUseRule.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -82,6 +94,11 @@ class AlipayFundWalletTemplateCreateModel(object):
                 params['wallet_template_name'] = self.wallet_template_name.to_alipay_dict()
             else:
                 params['wallet_template_name'] = self.wallet_template_name
+        if self.wallet_use_rule:
+            if hasattr(self.wallet_use_rule, 'to_alipay_dict'):
+                params['wallet_use_rule'] = self.wallet_use_rule.to_alipay_dict()
+            else:
+                params['wallet_use_rule'] = self.wallet_use_rule
         return params
 
     @staticmethod
@@ -99,6 +116,8 @@ class AlipayFundWalletTemplateCreateModel(object):
             o.product_code = d['product_code']
         if 'wallet_template_name' in d:
             o.wallet_template_name = d['wallet_template_name']
+        if 'wallet_use_rule' in d:
+            o.wallet_use_rule = d['wallet_use_rule']
         return o
 
 

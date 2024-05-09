@@ -15,6 +15,7 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
         self._employee_name = None
         self._employee_no = None
         self._enterprise_id = None
+        self._profiles = None
         self._role_list = None
 
     @property
@@ -70,6 +71,13 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
     def enterprise_id(self, value):
         self._enterprise_id = value
     @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -123,6 +131,11 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -154,6 +167,8 @@ class AlipayCommerceEcEmployeeInfoModifyModel(object):
             o.employee_no = d['employee_no']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
         return o

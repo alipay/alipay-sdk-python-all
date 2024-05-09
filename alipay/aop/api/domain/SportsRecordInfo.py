@@ -26,6 +26,7 @@ class SportsRecordInfo(object):
         self._start_time = None
         self._step_count = None
         self._step_frequency = None
+        self._step_info_valid = None
         self._step_stride = None
 
     @property
@@ -155,6 +156,13 @@ class SportsRecordInfo(object):
     def step_frequency(self, value):
         self._step_frequency = value
     @property
+    def step_info_valid(self):
+        return self._step_info_valid
+
+    @step_info_valid.setter
+    def step_info_valid(self, value):
+        self._step_info_valid = value
+    @property
     def step_stride(self):
         return self._step_stride
 
@@ -255,6 +263,11 @@ class SportsRecordInfo(object):
                 params['step_frequency'] = self.step_frequency.to_alipay_dict()
             else:
                 params['step_frequency'] = self.step_frequency
+        if self.step_info_valid:
+            if hasattr(self.step_info_valid, 'to_alipay_dict'):
+                params['step_info_valid'] = self.step_info_valid.to_alipay_dict()
+            else:
+                params['step_info_valid'] = self.step_info_valid
         if self.step_stride:
             if hasattr(self.step_stride, 'to_alipay_dict'):
                 params['step_stride'] = self.step_stride.to_alipay_dict()
@@ -303,6 +316,8 @@ class SportsRecordInfo(object):
             o.step_count = d['step_count']
         if 'step_frequency' in d:
             o.step_frequency = d['step_frequency']
+        if 'step_info_valid' in d:
+            o.step_info_valid = d['step_info_valid']
         if 'step_stride' in d:
             o.step_stride = d['step_stride']
         return o

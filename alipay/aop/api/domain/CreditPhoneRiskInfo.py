@@ -17,6 +17,7 @@ class CreditPhoneRiskInfo(object):
         self._net_age = None
         self._operator_id = None
         self._service_accept_time = None
+        self._sub_alipay_account = None
         self._sub_pid = None
         self._user_name = None
 
@@ -84,6 +85,13 @@ class CreditPhoneRiskInfo(object):
     def service_accept_time(self, value):
         self._service_accept_time = value
     @property
+    def sub_alipay_account(self):
+        return self._sub_alipay_account
+
+    @sub_alipay_account.setter
+    def sub_alipay_account(self, value):
+        self._sub_alipay_account = value
+    @property
     def sub_pid(self):
         return self._sub_pid
 
@@ -146,6 +154,11 @@ class CreditPhoneRiskInfo(object):
                 params['service_accept_time'] = self.service_accept_time.to_alipay_dict()
             else:
                 params['service_accept_time'] = self.service_accept_time
+        if self.sub_alipay_account:
+            if hasattr(self.sub_alipay_account, 'to_alipay_dict'):
+                params['sub_alipay_account'] = self.sub_alipay_account.to_alipay_dict()
+            else:
+                params['sub_alipay_account'] = self.sub_alipay_account
         if self.sub_pid:
             if hasattr(self.sub_pid, 'to_alipay_dict'):
                 params['sub_pid'] = self.sub_pid.to_alipay_dict()
@@ -181,6 +194,8 @@ class CreditPhoneRiskInfo(object):
             o.operator_id = d['operator_id']
         if 'service_accept_time' in d:
             o.service_accept_time = d['service_accept_time']
+        if 'sub_alipay_account' in d:
+            o.sub_alipay_account = d['sub_alipay_account']
         if 'sub_pid' in d:
             o.sub_pid = d['sub_pid']
         if 'user_name' in d:

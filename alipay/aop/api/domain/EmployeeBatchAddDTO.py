@@ -17,6 +17,7 @@ class EmployeeBatchAddDTO(object):
         self._employee_no = None
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
+        self._profiles = None
         self._role_list = None
 
     @property
@@ -86,6 +87,13 @@ class EmployeeBatchAddDTO(object):
     def encrypt_mobile(self, value):
         self._encrypt_mobile = value
     @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -149,6 +157,11 @@ class EmployeeBatchAddDTO(object):
                 params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
             else:
                 params['encrypt_mobile'] = self.encrypt_mobile
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -184,6 +197,8 @@ class EmployeeBatchAddDTO(object):
             o.encrypt_cert_no = d['encrypt_cert_no']
         if 'encrypt_mobile' in d:
             o.encrypt_mobile = d['encrypt_mobile']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
         return o

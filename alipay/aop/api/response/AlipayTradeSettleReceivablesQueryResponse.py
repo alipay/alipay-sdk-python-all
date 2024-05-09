@@ -10,6 +10,7 @@ class AlipayTradeSettleReceivablesQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradeSettleReceivablesQueryResponse, self).__init__()
         self._on_settle_amount = None
+        self._settled_amount = None
         self._unsettled_amount = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayTradeSettleReceivablesQueryResponse(AlipayResponse):
     @on_settle_amount.setter
     def on_settle_amount(self, value):
         self._on_settle_amount = value
+    @property
+    def settled_amount(self):
+        return self._settled_amount
+
+    @settled_amount.setter
+    def settled_amount(self, value):
+        self._settled_amount = value
     @property
     def unsettled_amount(self):
         return self._unsettled_amount
@@ -31,5 +39,7 @@ class AlipayTradeSettleReceivablesQueryResponse(AlipayResponse):
         response = super(AlipayTradeSettleReceivablesQueryResponse, self).parse_response_content(response_content)
         if 'on_settle_amount' in response:
             self.on_settle_amount = response['on_settle_amount']
+        if 'settled_amount' in response:
+            self.settled_amount = response['settled_amount']
         if 'unsettled_amount' in response:
             self.unsettled_amount = response['unsettled_amount']

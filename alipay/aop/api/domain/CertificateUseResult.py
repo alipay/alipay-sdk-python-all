@@ -88,10 +88,13 @@ class CertificateUseResult(object):
 
     @serial_info_list.setter
     def serial_info_list(self, value):
-        if isinstance(value, CertificateSerialInfo):
-            self._serial_info_list = value
-        else:
-            self._serial_info_list = CertificateSerialInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._serial_info_list = list()
+            for i in value:
+                if isinstance(i, CertificateSerialInfo):
+                    self._serial_info_list.append(i)
+                else:
+                    self._serial_info_list.append(CertificateSerialInfo.from_alipay_dict(i))
     @property
     def sku_info(self):
         return self._sku_info
@@ -154,6 +157,11 @@ class CertificateUseResult(object):
             else:
                 params['result'] = self.result
         if self.serial_info_list:
+            if isinstance(self.serial_info_list, list):
+                for i in range(0, len(self.serial_info_list)):
+                    element = self.serial_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.serial_info_list[i] = element.to_alipay_dict()
             if hasattr(self.serial_info_list, 'to_alipay_dict'):
                 params['serial_info_list'] = self.serial_info_list.to_alipay_dict()
             else:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtendStrategy import ExtendStrategy
+from alipay.aop.api.domain.WalletMarketingRule import WalletMarketingRule
 from alipay.aop.api.domain.WithdrawExtend import WithdrawExtend
 
 
@@ -17,6 +18,7 @@ class AlipayFundWalletWithdrawModel(object):
         self._out_biz_no = None
         self._product_code = None
         self._user_wallet_id = None
+        self._wallet_marketing_rule = None
         self._withdraw_extend = None
 
     @property
@@ -72,6 +74,16 @@ class AlipayFundWalletWithdrawModel(object):
     def user_wallet_id(self, value):
         self._user_wallet_id = value
     @property
+    def wallet_marketing_rule(self):
+        return self._wallet_marketing_rule
+
+    @wallet_marketing_rule.setter
+    def wallet_marketing_rule(self, value):
+        if isinstance(value, WalletMarketingRule):
+            self._wallet_marketing_rule = value
+        else:
+            self._wallet_marketing_rule = WalletMarketingRule.from_alipay_dict(value)
+    @property
     def withdraw_extend(self):
         return self._withdraw_extend
 
@@ -120,6 +132,11 @@ class AlipayFundWalletWithdrawModel(object):
                 params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
             else:
                 params['user_wallet_id'] = self.user_wallet_id
+        if self.wallet_marketing_rule:
+            if hasattr(self.wallet_marketing_rule, 'to_alipay_dict'):
+                params['wallet_marketing_rule'] = self.wallet_marketing_rule.to_alipay_dict()
+            else:
+                params['wallet_marketing_rule'] = self.wallet_marketing_rule
         if self.withdraw_extend:
             if hasattr(self.withdraw_extend, 'to_alipay_dict'):
                 params['withdraw_extend'] = self.withdraw_extend.to_alipay_dict()
@@ -146,6 +163,8 @@ class AlipayFundWalletWithdrawModel(object):
             o.product_code = d['product_code']
         if 'user_wallet_id' in d:
             o.user_wallet_id = d['user_wallet_id']
+        if 'wallet_marketing_rule' in d:
+            o.wallet_marketing_rule = d['wallet_marketing_rule']
         if 'withdraw_extend' in d:
             o.withdraw_extend = d['withdraw_extend']
         return o

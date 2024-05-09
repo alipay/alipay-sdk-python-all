@@ -11,6 +11,7 @@ class AntMerchantExpandDeliveryGoodsinfoSyncModel(object):
         self._assign_item_id = None
         self._ext_info = None
         self._logistics_no = None
+        self._qrcodes = None
         self._send_goods_tag = None
         self._tag_type = None
 
@@ -35,6 +36,13 @@ class AntMerchantExpandDeliveryGoodsinfoSyncModel(object):
     @logistics_no.setter
     def logistics_no(self, value):
         self._logistics_no = value
+    @property
+    def qrcodes(self):
+        return self._qrcodes
+
+    @qrcodes.setter
+    def qrcodes(self, value):
+        self._qrcodes = value
     @property
     def send_goods_tag(self):
         return self._send_goods_tag
@@ -68,6 +76,11 @@ class AntMerchantExpandDeliveryGoodsinfoSyncModel(object):
                 params['logistics_no'] = self.logistics_no.to_alipay_dict()
             else:
                 params['logistics_no'] = self.logistics_no
+        if self.qrcodes:
+            if hasattr(self.qrcodes, 'to_alipay_dict'):
+                params['qrcodes'] = self.qrcodes.to_alipay_dict()
+            else:
+                params['qrcodes'] = self.qrcodes
         if self.send_goods_tag:
             if hasattr(self.send_goods_tag, 'to_alipay_dict'):
                 params['send_goods_tag'] = self.send_goods_tag.to_alipay_dict()
@@ -91,6 +104,8 @@ class AntMerchantExpandDeliveryGoodsinfoSyncModel(object):
             o.ext_info = d['ext_info']
         if 'logistics_no' in d:
             o.logistics_no = d['logistics_no']
+        if 'qrcodes' in d:
+            o.qrcodes = d['qrcodes']
         if 'send_goods_tag' in d:
             o.send_goods_tag = d['send_goods_tag']
         if 'tag_type' in d:

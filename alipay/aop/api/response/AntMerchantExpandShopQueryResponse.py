@@ -15,6 +15,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AntMerchantExpandShopQueryResponse, self).__init__()
+        self._alipay_poiid = None
         self._brand_id = None
         self._business_address = None
         self._business_time = None
@@ -44,6 +45,13 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._shop_type = None
         self._store_id = None
 
+    @property
+    def alipay_poiid(self):
+        return self._alipay_poiid
+
+    @alipay_poiid.setter
+    def alipay_poiid(self, value):
+        self._alipay_poiid = value
     @property
     def brand_id(self):
         return self._brand_id
@@ -276,6 +284,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AntMerchantExpandShopQueryResponse, self).parse_response_content(response_content)
+        if 'alipay_poiid' in response:
+            self.alipay_poiid = response['alipay_poiid']
         if 'brand_id' in response:
             self.brand_id = response['brand_id']
         if 'business_address' in response:

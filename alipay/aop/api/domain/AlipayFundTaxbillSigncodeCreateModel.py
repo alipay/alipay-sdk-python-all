@@ -21,6 +21,7 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
         self._out_biz_no = None
         self._product_code = None
         self._sign_code_type = None
+        self._solution_code = None
         self._tax_optimization_mode = None
 
     @property
@@ -115,6 +116,13 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
     def sign_code_type(self, value):
         self._sign_code_type = value
     @property
+    def solution_code(self):
+        return self._solution_code
+
+    @solution_code.setter
+    def solution_code(self, value):
+        self._solution_code = value
+    @property
     def tax_optimization_mode(self):
         return self._tax_optimization_mode
 
@@ -190,6 +198,11 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
                 params['sign_code_type'] = self.sign_code_type.to_alipay_dict()
             else:
                 params['sign_code_type'] = self.sign_code_type
+        if self.solution_code:
+            if hasattr(self.solution_code, 'to_alipay_dict'):
+                params['solution_code'] = self.solution_code.to_alipay_dict()
+            else:
+                params['solution_code'] = self.solution_code
         if self.tax_optimization_mode:
             if hasattr(self.tax_optimization_mode, 'to_alipay_dict'):
                 params['tax_optimization_mode'] = self.tax_optimization_mode.to_alipay_dict()
@@ -228,6 +241,8 @@ class AlipayFundTaxbillSigncodeCreateModel(object):
             o.product_code = d['product_code']
         if 'sign_code_type' in d:
             o.sign_code_type = d['sign_code_type']
+        if 'solution_code' in d:
+            o.solution_code = d['solution_code']
         if 'tax_optimization_mode' in d:
             o.tax_optimization_mode = d['tax_optimization_mode']
         return o

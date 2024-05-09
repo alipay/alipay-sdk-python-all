@@ -11,6 +11,7 @@ from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
 from alipay.aop.api.domain.RefundInfoVO import RefundInfoVO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
+from alipay.aop.api.domain.StagePayPlanVO import StagePayPlanVO
 
 
 class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
@@ -33,6 +34,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._refund_info = None
         self._settle_type = None
         self._shop_info = None
+        self._stage_pay_plans = None
         self._status = None
         self._trade_no = None
         self._user_id = None
@@ -174,6 +176,19 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._shop_info = ShopInfoDTO.from_alipay_dict(value)
     @property
+    def stage_pay_plans(self):
+        return self._stage_pay_plans
+
+    @stage_pay_plans.setter
+    def stage_pay_plans(self, value):
+        if isinstance(value, list):
+            self._stage_pay_plans = list()
+            for i in value:
+                if isinstance(i, StagePayPlanVO):
+                    self._stage_pay_plans.append(i)
+                else:
+                    self._stage_pay_plans.append(StagePayPlanVO.from_alipay_dict(i))
+    @property
     def status(self):
         return self._status
 
@@ -229,6 +244,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.settle_type = response['settle_type']
         if 'shop_info' in response:
             self.shop_info = response['shop_info']
+        if 'stage_pay_plans' in response:
+            self.stage_pay_plans = response['stage_pay_plans']
         if 'status' in response:
             self.status = response['status']
         if 'trade_no' in response:

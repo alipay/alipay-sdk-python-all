@@ -18,11 +18,13 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
         self._indirect_merchant_info = None
         self._merchant_info = None
         self._merchant_order_no = None
+        self._merchant_return_url = None
         self._order_create_time = None
         self._order_info = None
         self._out_trade_no = None
         self._partner_id = None
         self._precreate_code_info = None
+        self._product_code = None
         self._settle_serial_no = None
         self._store_info = None
         self._total_amount = None
@@ -62,6 +64,13 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
     @merchant_order_no.setter
     def merchant_order_no(self, value):
         self._merchant_order_no = value
+    @property
+    def merchant_return_url(self):
+        return self._merchant_return_url
+
+    @merchant_return_url.setter
+    def merchant_return_url(self, value):
+        self._merchant_return_url = value
     @property
     def order_create_time(self):
         return self._order_create_time
@@ -104,6 +113,13 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
         else:
             self._precreate_code_info = TradePrecreateConfirmPrecreateCodeInfo.from_alipay_dict(value)
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
     def settle_serial_no(self):
         return self._settle_serial_no
 
@@ -145,6 +161,8 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
             self.merchant_info = response['merchant_info']
         if 'merchant_order_no' in response:
             self.merchant_order_no = response['merchant_order_no']
+        if 'merchant_return_url' in response:
+            self.merchant_return_url = response['merchant_return_url']
         if 'order_create_time' in response:
             self.order_create_time = response['order_create_time']
         if 'order_info' in response:
@@ -155,6 +173,8 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
             self.partner_id = response['partner_id']
         if 'precreate_code_info' in response:
             self.precreate_code_info = response['precreate_code_info']
+        if 'product_code' in response:
+            self.product_code = response['product_code']
         if 'settle_serial_no' in response:
             self.settle_serial_no = response['settle_serial_no']
         if 'store_info' in response:

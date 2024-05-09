@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AnttechOceanbasePassportHuaweimpCreateModel(object):
 
     def __init__(self):
+        self._credential = None
         self._customer_id = None
         self._customer_name = None
         self._email = None
         self._mobile_phone = None
 
+    @property
+    def credential(self):
+        return self._credential
+
+    @credential.setter
+    def credential(self, value):
+        self._credential = value
     @property
     def customer_id(self):
         return self._customer_id
@@ -45,6 +53,11 @@ class AnttechOceanbasePassportHuaweimpCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.credential:
+            if hasattr(self.credential, 'to_alipay_dict'):
+                params['credential'] = self.credential.to_alipay_dict()
+            else:
+                params['credential'] = self.credential
         if self.customer_id:
             if hasattr(self.customer_id, 'to_alipay_dict'):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
@@ -72,6 +85,8 @@ class AnttechOceanbasePassportHuaweimpCreateModel(object):
         if not d:
             return None
         o = AnttechOceanbasePassportHuaweimpCreateModel()
+        if 'credential' in d:
+            o.credential = d['credential']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
         if 'customer_name' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.WalletMarketingRule import WalletMarketingRule
 
 
 class AlipayFundWalletSceneSignModel(object):
@@ -13,6 +14,7 @@ class AlipayFundWalletSceneSignModel(object):
         self._principal_open_id = None
         self._product_code = None
         self._user_id = None
+        self._wallet_marketing_rule = None
         self._wallet_template_id = None
 
     @property
@@ -51,6 +53,16 @@ class AlipayFundWalletSceneSignModel(object):
     def user_id(self, value):
         self._user_id = value
     @property
+    def wallet_marketing_rule(self):
+        return self._wallet_marketing_rule
+
+    @wallet_marketing_rule.setter
+    def wallet_marketing_rule(self, value):
+        if isinstance(value, WalletMarketingRule):
+            self._wallet_marketing_rule = value
+        else:
+            self._wallet_marketing_rule = WalletMarketingRule.from_alipay_dict(value)
+    @property
     def wallet_template_id(self):
         return self._wallet_template_id
 
@@ -86,6 +98,11 @@ class AlipayFundWalletSceneSignModel(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.wallet_marketing_rule:
+            if hasattr(self.wallet_marketing_rule, 'to_alipay_dict'):
+                params['wallet_marketing_rule'] = self.wallet_marketing_rule.to_alipay_dict()
+            else:
+                params['wallet_marketing_rule'] = self.wallet_marketing_rule
         if self.wallet_template_id:
             if hasattr(self.wallet_template_id, 'to_alipay_dict'):
                 params['wallet_template_id'] = self.wallet_template_id.to_alipay_dict()
@@ -108,6 +125,8 @@ class AlipayFundWalletSceneSignModel(object):
             o.product_code = d['product_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'wallet_marketing_rule' in d:
+            o.wallet_marketing_rule = d['wallet_marketing_rule']
         if 'wallet_template_id' in d:
             o.wallet_template_id = d['wallet_template_id']
         return o

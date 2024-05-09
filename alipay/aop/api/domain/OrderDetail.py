@@ -3,8 +3,10 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
 from alipay.aop.api.domain.SubMerchant import SubMerchant
 
@@ -14,11 +16,13 @@ class OrderDetail(object):
     def __init__(self):
         self._app_id = None
         self._body = None
+        self._business_params = None
         self._extend_params = None
         self._goods_detail = None
         self._out_trade_no = None
         self._passback_params = None
         self._product_code = None
+        self._royalty_info = None
         self._seller_id = None
         self._seller_logon_id = None
         self._settle_info = None
@@ -41,6 +45,16 @@ class OrderDetail(object):
     @body.setter
     def body(self, value):
         self._body = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        if isinstance(value, BusinessParams):
+            self._business_params = value
+        else:
+            self._business_params = BusinessParams.from_alipay_dict(value)
     @property
     def extend_params(self):
         return self._extend_params
@@ -85,6 +99,16 @@ class OrderDetail(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def royalty_info(self):
+        return self._royalty_info
+
+    @royalty_info.setter
+    def royalty_info(self, value):
+        if isinstance(value, RoyaltyInfo):
+            self._royalty_info = value
+        else:
+            self._royalty_info = RoyaltyInfo.from_alipay_dict(value)
     @property
     def seller_id(self):
         return self._seller_id
@@ -154,6 +178,11 @@ class OrderDetail(object):
                 params['body'] = self.body.to_alipay_dict()
             else:
                 params['body'] = self.body
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.extend_params:
             if hasattr(self.extend_params, 'to_alipay_dict'):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
@@ -184,6 +213,11 @@ class OrderDetail(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.royalty_info:
+            if hasattr(self.royalty_info, 'to_alipay_dict'):
+                params['royalty_info'] = self.royalty_info.to_alipay_dict()
+            else:
+                params['royalty_info'] = self.royalty_info
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -230,6 +264,8 @@ class OrderDetail(object):
             o.app_id = d['app_id']
         if 'body' in d:
             o.body = d['body']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
         if 'goods_detail' in d:
@@ -240,6 +276,8 @@ class OrderDetail(object):
             o.passback_params = d['passback_params']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'royalty_info' in d:
+            o.royalty_info = d['royalty_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'seller_logon_id' in d:

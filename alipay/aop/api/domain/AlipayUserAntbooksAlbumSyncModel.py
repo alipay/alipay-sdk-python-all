@@ -17,6 +17,7 @@ class AlipayUserAntbooksAlbumSyncModel(object):
         self._album_finished = None
         self._album_free = None
         self._album_id = None
+        self._album_show_ad = None
         self._announcer = None
         self._author = None
         self._brief = None
@@ -67,6 +68,13 @@ class AlipayUserAntbooksAlbumSyncModel(object):
     @album_id.setter
     def album_id(self, value):
         self._album_id = value
+    @property
+    def album_show_ad(self):
+        return self._album_show_ad
+
+    @album_show_ad.setter
+    def album_show_ad(self, value):
+        self._album_show_ad = value
     @property
     def announcer(self):
         return self._announcer
@@ -268,6 +276,11 @@ class AlipayUserAntbooksAlbumSyncModel(object):
                 params['album_id'] = self.album_id.to_alipay_dict()
             else:
                 params['album_id'] = self.album_id
+        if self.album_show_ad:
+            if hasattr(self.album_show_ad, 'to_alipay_dict'):
+                params['album_show_ad'] = self.album_show_ad.to_alipay_dict()
+            else:
+                params['album_show_ad'] = self.album_show_ad
         if self.announcer:
             if hasattr(self.announcer, 'to_alipay_dict'):
                 params['announcer'] = self.announcer.to_alipay_dict()
@@ -413,6 +426,8 @@ class AlipayUserAntbooksAlbumSyncModel(object):
             o.album_free = d['album_free']
         if 'album_id' in d:
             o.album_id = d['album_id']
+        if 'album_show_ad' in d:
+            o.album_show_ad = d['album_show_ad']
         if 'announcer' in d:
             o.announcer = d['announcer']
         if 'author' in d:

@@ -13,6 +13,7 @@ from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
+from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
 from alipay.aop.api.domain.SubMerchantDTO import SubMerchantDTO
 
 
@@ -37,6 +38,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._seller_id = None
         self._shop_info = None
         self._source_id = None
+        self._stage_pay_plans = None
         self._sub_merchant = None
         self._timeout_express = None
         self._title = None
@@ -198,6 +200,19 @@ class AlipayOpenMiniOrderCreateModel(object):
     def source_id(self, value):
         self._source_id = value
     @property
+    def stage_pay_plans(self):
+        return self._stage_pay_plans
+
+    @stage_pay_plans.setter
+    def stage_pay_plans(self, value):
+        if isinstance(value, list):
+            self._stage_pay_plans = list()
+            for i in value:
+                if isinstance(i, StagePayPlanDTO):
+                    self._stage_pay_plans.append(i)
+                else:
+                    self._stage_pay_plans.append(StagePayPlanDTO.from_alipay_dict(i))
+    @property
     def sub_merchant(self):
         return self._sub_merchant
 
@@ -315,6 +330,16 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['source_id'] = self.source_id.to_alipay_dict()
             else:
                 params['source_id'] = self.source_id
+        if self.stage_pay_plans:
+            if isinstance(self.stage_pay_plans, list):
+                for i in range(0, len(self.stage_pay_plans)):
+                    element = self.stage_pay_plans[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.stage_pay_plans[i] = element.to_alipay_dict()
+            if hasattr(self.stage_pay_plans, 'to_alipay_dict'):
+                params['stage_pay_plans'] = self.stage_pay_plans.to_alipay_dict()
+            else:
+                params['stage_pay_plans'] = self.stage_pay_plans
         if self.sub_merchant:
             if hasattr(self.sub_merchant, 'to_alipay_dict'):
                 params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
@@ -373,6 +398,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.shop_info = d['shop_info']
         if 'source_id' in d:
             o.source_id = d['source_id']
+        if 'stage_pay_plans' in d:
+            o.stage_pay_plans = d['stage_pay_plans']
         if 'sub_merchant' in d:
             o.sub_merchant = d['sub_merchant']
         if 'timeout_express' in d:

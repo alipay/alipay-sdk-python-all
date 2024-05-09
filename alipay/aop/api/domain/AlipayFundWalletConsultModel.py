@@ -16,6 +16,7 @@ class AlipayFundWalletConsultModel(object):
         self._product_code = None
         self._search_type = None
         self._user_wallet_id = None
+        self._wallet_template_id = None
 
     @property
     def biz_scene(self):
@@ -73,6 +74,13 @@ class AlipayFundWalletConsultModel(object):
     @user_wallet_id.setter
     def user_wallet_id(self, value):
         self._user_wallet_id = value
+    @property
+    def wallet_template_id(self):
+        return self._wallet_template_id
+
+    @wallet_template_id.setter
+    def wallet_template_id(self, value):
+        self._wallet_template_id = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +125,11 @@ class AlipayFundWalletConsultModel(object):
                 params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
             else:
                 params['user_wallet_id'] = self.user_wallet_id
+        if self.wallet_template_id:
+            if hasattr(self.wallet_template_id, 'to_alipay_dict'):
+                params['wallet_template_id'] = self.wallet_template_id.to_alipay_dict()
+            else:
+                params['wallet_template_id'] = self.wallet_template_id
         return params
 
     @staticmethod
@@ -140,6 +153,8 @@ class AlipayFundWalletConsultModel(object):
             o.search_type = d['search_type']
         if 'user_wallet_id' in d:
             o.user_wallet_id = d['user_wallet_id']
+        if 'wallet_template_id' in d:
+            o.wallet_template_id = d['wallet_template_id']
         return o
 
 

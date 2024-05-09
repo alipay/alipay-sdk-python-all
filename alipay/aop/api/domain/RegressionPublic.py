@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.JhjTestNew import JhjTestNew
 
 
 class RegressionPublic(object):
@@ -11,8 +12,10 @@ class RegressionPublic(object):
         self._a_open_id = None
         self._a_test_a = None
         self._b = None
+        self._com_a = None
         self._date = None
         self._input_a = None
+        self._new_a = None
 
     @property
     def a_open_id(self):
@@ -36,6 +39,16 @@ class RegressionPublic(object):
     def b(self, value):
         self._b = value
     @property
+    def com_a(self):
+        return self._com_a
+
+    @com_a.setter
+    def com_a(self, value):
+        if isinstance(value, JhjTestNew):
+            self._com_a = value
+        else:
+            self._com_a = JhjTestNew.from_alipay_dict(value)
+    @property
     def date(self):
         return self._date
 
@@ -49,6 +62,13 @@ class RegressionPublic(object):
     @input_a.setter
     def input_a(self, value):
         self._input_a = value
+    @property
+    def new_a(self):
+        return self._new_a
+
+    @new_a.setter
+    def new_a(self, value):
+        self._new_a = value
 
 
     def to_alipay_dict(self):
@@ -68,6 +88,11 @@ class RegressionPublic(object):
                 params['b'] = self.b.to_alipay_dict()
             else:
                 params['b'] = self.b
+        if self.com_a:
+            if hasattr(self.com_a, 'to_alipay_dict'):
+                params['com_a'] = self.com_a.to_alipay_dict()
+            else:
+                params['com_a'] = self.com_a
         if self.date:
             if hasattr(self.date, 'to_alipay_dict'):
                 params['date'] = self.date.to_alipay_dict()
@@ -78,6 +103,11 @@ class RegressionPublic(object):
                 params['input_a'] = self.input_a.to_alipay_dict()
             else:
                 params['input_a'] = self.input_a
+        if self.new_a:
+            if hasattr(self.new_a, 'to_alipay_dict'):
+                params['new_a'] = self.new_a.to_alipay_dict()
+            else:
+                params['new_a'] = self.new_a
         return params
 
     @staticmethod
@@ -91,10 +121,14 @@ class RegressionPublic(object):
             o.a_test_a = d['a_test_a']
         if 'b' in d:
             o.b = d['b']
+        if 'com_a' in d:
+            o.com_a = d['com_a']
         if 'date' in d:
             o.date = d['date']
         if 'input_a' in d:
             o.input_a = d['input_a']
+        if 'new_a' in d:
+            o.new_a = d['new_a']
         return o
 
 

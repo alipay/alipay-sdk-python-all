@@ -10,6 +10,7 @@ class FundRuleModelDTO(object):
     def __init__(self):
         self._fund_agreement_no = None
         self._fund_amount = None
+        self._fund_type = None
 
     @property
     def fund_agreement_no(self):
@@ -25,6 +26,13 @@ class FundRuleModelDTO(object):
     @fund_amount.setter
     def fund_amount(self, value):
         self._fund_amount = value
+    @property
+    def fund_type(self):
+        return self._fund_type
+
+    @fund_type.setter
+    def fund_type(self, value):
+        self._fund_type = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class FundRuleModelDTO(object):
                 params['fund_amount'] = self.fund_amount.to_alipay_dict()
             else:
                 params['fund_amount'] = self.fund_amount
+        if self.fund_type:
+            if hasattr(self.fund_type, 'to_alipay_dict'):
+                params['fund_type'] = self.fund_type.to_alipay_dict()
+            else:
+                params['fund_type'] = self.fund_type
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class FundRuleModelDTO(object):
             o.fund_agreement_no = d['fund_agreement_no']
         if 'fund_amount' in d:
             o.fund_amount = d['fund_amount']
+        if 'fund_type' in d:
+            o.fund_type = d['fund_type']
         return o
 
 

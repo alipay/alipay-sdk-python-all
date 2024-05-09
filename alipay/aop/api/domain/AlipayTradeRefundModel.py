@@ -24,6 +24,7 @@ class AlipayTradeRefundModel(object):
         self._refund_goods_detail = None
         self._refund_reason = None
         self._refund_royalty_parameters = None
+        self._related_settle_confirm_no = None
         self._store_id = None
         self._terminal_id = None
         self._trade_no = None
@@ -141,6 +142,13 @@ class AlipayTradeRefundModel(object):
                 else:
                     self._refund_royalty_parameters.append(OpenApiRoyaltyDetailInfoPojo.from_alipay_dict(i))
     @property
+    def related_settle_confirm_no(self):
+        return self._related_settle_confirm_no
+
+    @related_settle_confirm_no.setter
+    def related_settle_confirm_no(self, value):
+        self._related_settle_confirm_no = value
+    @property
     def store_id(self):
         return self._store_id
 
@@ -250,6 +258,11 @@ class AlipayTradeRefundModel(object):
                 params['refund_royalty_parameters'] = self.refund_royalty_parameters.to_alipay_dict()
             else:
                 params['refund_royalty_parameters'] = self.refund_royalty_parameters
+        if self.related_settle_confirm_no:
+            if hasattr(self.related_settle_confirm_no, 'to_alipay_dict'):
+                params['related_settle_confirm_no'] = self.related_settle_confirm_no.to_alipay_dict()
+            else:
+                params['related_settle_confirm_no'] = self.related_settle_confirm_no
         if self.store_id:
             if hasattr(self.store_id, 'to_alipay_dict'):
                 params['store_id'] = self.store_id.to_alipay_dict()
@@ -298,6 +311,8 @@ class AlipayTradeRefundModel(object):
             o.refund_reason = d['refund_reason']
         if 'refund_royalty_parameters' in d:
             o.refund_royalty_parameters = d['refund_royalty_parameters']
+        if 'related_settle_confirm_no' in d:
+            o.related_settle_confirm_no = d['related_settle_confirm_no']
         if 'store_id' in d:
             o.store_id = d['store_id']
         if 'terminal_id' in d:

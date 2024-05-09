@@ -16,12 +16,14 @@ class SelfItemOrderBillDetailResponse(object):
         self._merchant_verification_no = None
         self._mini_app_id = None
         self._order_scene = None
+        self._pay_commission = None
         self._pay_discounted_price = None
         self._platform_service = None
         self._platform_service_refund = None
         self._predict_settle_time = None
         self._real_receipt_amount = None
         self._refund_fee = None
+        self._refund_pay_commission = None
         self._self_shop_name = None
         self._serial_no = None
         self._settle_amount = None
@@ -90,6 +92,13 @@ class SelfItemOrderBillDetailResponse(object):
     def order_scene(self, value):
         self._order_scene = value
     @property
+    def pay_commission(self):
+        return self._pay_commission
+
+    @pay_commission.setter
+    def pay_commission(self, value):
+        self._pay_commission = value
+    @property
     def pay_discounted_price(self):
         return self._pay_discounted_price
 
@@ -131,6 +140,13 @@ class SelfItemOrderBillDetailResponse(object):
     @refund_fee.setter
     def refund_fee(self, value):
         self._refund_fee = value
+    @property
+    def refund_pay_commission(self):
+        return self._refund_pay_commission
+
+    @refund_pay_commission.setter
+    def refund_pay_commission(self, value):
+        self._refund_pay_commission = value
     @property
     def self_shop_name(self):
         return self._self_shop_name
@@ -245,6 +261,11 @@ class SelfItemOrderBillDetailResponse(object):
                 params['order_scene'] = self.order_scene.to_alipay_dict()
             else:
                 params['order_scene'] = self.order_scene
+        if self.pay_commission:
+            if hasattr(self.pay_commission, 'to_alipay_dict'):
+                params['pay_commission'] = self.pay_commission.to_alipay_dict()
+            else:
+                params['pay_commission'] = self.pay_commission
         if self.pay_discounted_price:
             if hasattr(self.pay_discounted_price, 'to_alipay_dict'):
                 params['pay_discounted_price'] = self.pay_discounted_price.to_alipay_dict()
@@ -275,6 +296,11 @@ class SelfItemOrderBillDetailResponse(object):
                 params['refund_fee'] = self.refund_fee.to_alipay_dict()
             else:
                 params['refund_fee'] = self.refund_fee
+        if self.refund_pay_commission:
+            if hasattr(self.refund_pay_commission, 'to_alipay_dict'):
+                params['refund_pay_commission'] = self.refund_pay_commission.to_alipay_dict()
+            else:
+                params['refund_pay_commission'] = self.refund_pay_commission
         if self.self_shop_name:
             if hasattr(self.self_shop_name, 'to_alipay_dict'):
                 params['self_shop_name'] = self.self_shop_name.to_alipay_dict()
@@ -348,6 +374,8 @@ class SelfItemOrderBillDetailResponse(object):
             o.mini_app_id = d['mini_app_id']
         if 'order_scene' in d:
             o.order_scene = d['order_scene']
+        if 'pay_commission' in d:
+            o.pay_commission = d['pay_commission']
         if 'pay_discounted_price' in d:
             o.pay_discounted_price = d['pay_discounted_price']
         if 'platform_service' in d:
@@ -360,6 +388,8 @@ class SelfItemOrderBillDetailResponse(object):
             o.real_receipt_amount = d['real_receipt_amount']
         if 'refund_fee' in d:
             o.refund_fee = d['refund_fee']
+        if 'refund_pay_commission' in d:
+            o.refund_pay_commission = d['refund_pay_commission']
         if 'self_shop_name' in d:
             o.self_shop_name = d['self_shop_name']
         if 'serial_no' in d:
