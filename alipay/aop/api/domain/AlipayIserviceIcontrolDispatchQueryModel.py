@@ -11,6 +11,7 @@ class AlipayIserviceIcontrolDispatchQueryModel(object):
         self._business_type = None
         self._job_id = None
         self._question_level = None
+        self._session_label = None
 
     @property
     def business_type(self):
@@ -33,6 +34,13 @@ class AlipayIserviceIcontrolDispatchQueryModel(object):
     @question_level.setter
     def question_level(self, value):
         self._question_level = value
+    @property
+    def session_label(self):
+        return self._session_label
+
+    @session_label.setter
+    def session_label(self, value):
+        self._session_label = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayIserviceIcontrolDispatchQueryModel(object):
                 params['question_level'] = self.question_level.to_alipay_dict()
             else:
                 params['question_level'] = self.question_level
+        if self.session_label:
+            if hasattr(self.session_label, 'to_alipay_dict'):
+                params['session_label'] = self.session_label.to_alipay_dict()
+            else:
+                params['session_label'] = self.session_label
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayIserviceIcontrolDispatchQueryModel(object):
             o.job_id = d['job_id']
         if 'question_level' in d:
             o.question_level = d['question_level']
+        if 'session_label' in d:
+            o.session_label = d['session_label']
         return o
 
 

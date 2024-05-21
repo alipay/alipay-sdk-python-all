@@ -15,6 +15,7 @@ class AlipayCommerceMedicalTradeCreateandpayModel(object):
         self._callback_url = None
         self._ch_info = None
         self._chrg_bch_no = None
+        self._display_mode = None
         self._extend_params = None
         self._gmt_out_create = None
         self._gmt_time_expire = None
@@ -73,6 +74,13 @@ class AlipayCommerceMedicalTradeCreateandpayModel(object):
     @chrg_bch_no.setter
     def chrg_bch_no(self, value):
         self._chrg_bch_no = value
+    @property
+    def display_mode(self):
+        return self._display_mode
+
+    @display_mode.setter
+    def display_mode(self, value):
+        self._display_mode = value
     @property
     def extend_params(self):
         return self._extend_params
@@ -265,6 +273,11 @@ class AlipayCommerceMedicalTradeCreateandpayModel(object):
                 params['chrg_bch_no'] = self.chrg_bch_no.to_alipay_dict()
             else:
                 params['chrg_bch_no'] = self.chrg_bch_no
+        if self.display_mode:
+            if hasattr(self.display_mode, 'to_alipay_dict'):
+                params['display_mode'] = self.display_mode.to_alipay_dict()
+            else:
+                params['display_mode'] = self.display_mode
         if self.extend_params:
             if hasattr(self.extend_params, 'to_alipay_dict'):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
@@ -397,6 +410,8 @@ class AlipayCommerceMedicalTradeCreateandpayModel(object):
             o.ch_info = d['ch_info']
         if 'chrg_bch_no' in d:
             o.chrg_bch_no = d['chrg_bch_no']
+        if 'display_mode' in d:
+            o.display_mode = d['display_mode']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
         if 'gmt_out_create' in d:

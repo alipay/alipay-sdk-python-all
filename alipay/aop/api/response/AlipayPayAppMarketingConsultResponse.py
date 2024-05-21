@@ -13,12 +13,14 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
         self._anti_rank = None
         self._assign_discounts = None
         self._biz_tag = None
+        self._biz_tag_list = None
         self._blind_signature = None
         self._channel_info_list = None
         self._confused_cipher_list = None
         self._image = None
         self._marketing_rank = None
         self._pay_operation_info = None
+        self._pre_consult_id = None
         self._pre_pay_token = None
         self._text = None
 
@@ -43,6 +45,16 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
     @biz_tag.setter
     def biz_tag(self, value):
         self._biz_tag = value
+    @property
+    def biz_tag_list(self):
+        return self._biz_tag_list
+
+    @biz_tag_list.setter
+    def biz_tag_list(self, value):
+        if isinstance(value, list):
+            self._biz_tag_list = list()
+            for i in value:
+                self._biz_tag_list.append(i)
     @property
     def blind_signature(self):
         return self._blind_signature
@@ -95,6 +107,13 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
     def pay_operation_info(self, value):
         self._pay_operation_info = value
     @property
+    def pre_consult_id(self):
+        return self._pre_consult_id
+
+    @pre_consult_id.setter
+    def pre_consult_id(self, value):
+        self._pre_consult_id = value
+    @property
     def pre_pay_token(self):
         return self._pre_pay_token
 
@@ -117,6 +136,8 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             self.assign_discounts = response['assign_discounts']
         if 'biz_tag' in response:
             self.biz_tag = response['biz_tag']
+        if 'biz_tag_list' in response:
+            self.biz_tag_list = response['biz_tag_list']
         if 'blind_signature' in response:
             self.blind_signature = response['blind_signature']
         if 'channel_info_list' in response:
@@ -129,6 +150,8 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             self.marketing_rank = response['marketing_rank']
         if 'pay_operation_info' in response:
             self.pay_operation_info = response['pay_operation_info']
+        if 'pre_consult_id' in response:
+            self.pre_consult_id = response['pre_consult_id']
         if 'pre_pay_token' in response:
             self.pre_pay_token = response['pre_pay_token']
         if 'text' in response:

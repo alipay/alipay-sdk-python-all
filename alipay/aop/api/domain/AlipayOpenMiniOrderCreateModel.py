@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
+from alipay.aop.api.domain.AllocAmountInfoDTO import AllocAmountInfoDTO
 from alipay.aop.api.domain.MiniBusinessParamsDTO import MiniBusinessParamsDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
 from alipay.aop.api.domain.CreditInfoDTO import CreditInfoDTO
@@ -21,6 +22,7 @@ class AlipayOpenMiniOrderCreateModel(object):
 
     def __init__(self):
         self._address_info = None
+        self._alloc_amount_info = None
         self._business_params = None
         self._buyer_id = None
         self._buyer_logon_id = None
@@ -53,6 +55,16 @@ class AlipayOpenMiniOrderCreateModel(object):
             self._address_info = value
         else:
             self._address_info = MiniReceiverAddressInfoDTO.from_alipay_dict(value)
+    @property
+    def alloc_amount_info(self):
+        return self._alloc_amount_info
+
+    @alloc_amount_info.setter
+    def alloc_amount_info(self, value):
+        if isinstance(value, AllocAmountInfoDTO):
+            self._alloc_amount_info = value
+        else:
+            self._alloc_amount_info = AllocAmountInfoDTO.from_alipay_dict(value)
     @property
     def business_params(self):
         return self._business_params
@@ -245,6 +257,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['address_info'] = self.address_info.to_alipay_dict()
             else:
                 params['address_info'] = self.address_info
+        if self.alloc_amount_info:
+            if hasattr(self.alloc_amount_info, 'to_alipay_dict'):
+                params['alloc_amount_info'] = self.alloc_amount_info.to_alipay_dict()
+            else:
+                params['alloc_amount_info'] = self.alloc_amount_info
         if self.business_params:
             if hasattr(self.business_params, 'to_alipay_dict'):
                 params['business_params'] = self.business_params.to_alipay_dict()
@@ -364,6 +381,8 @@ class AlipayOpenMiniOrderCreateModel(object):
         o = AlipayOpenMiniOrderCreateModel()
         if 'address_info' in d:
             o.address_info = d['address_info']
+        if 'alloc_amount_info' in d:
+            o.alloc_amount_info = d['alloc_amount_info']
         if 'business_params' in d:
             o.business_params = d['business_params']
         if 'buyer_id' in d:

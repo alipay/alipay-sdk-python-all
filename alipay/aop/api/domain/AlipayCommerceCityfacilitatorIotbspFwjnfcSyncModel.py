@@ -8,14 +8,24 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
 
     def __init__(self):
+        self._merchant_app_id = None
         self._nfc_biz_tid = None
         self._nfc_sn = None
         self._open_id = None
+        self._params = None
         self._pid = None
+        self._route_page = None
         self._upper_biz_tid = None
         self._upper_sn = None
         self._url = None
 
+    @property
+    def merchant_app_id(self):
+        return self._merchant_app_id
+
+    @merchant_app_id.setter
+    def merchant_app_id(self, value):
+        self._merchant_app_id = value
     @property
     def nfc_biz_tid(self):
         return self._nfc_biz_tid
@@ -38,12 +48,26 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def params(self):
+        return self._params
+
+    @params.setter
+    def params(self, value):
+        self._params = value
+    @property
     def pid(self):
         return self._pid
 
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def route_page(self):
+        return self._route_page
+
+    @route_page.setter
+    def route_page(self, value):
+        self._route_page = value
     @property
     def upper_biz_tid(self):
         return self._upper_biz_tid
@@ -69,6 +93,11 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.merchant_app_id:
+            if hasattr(self.merchant_app_id, 'to_alipay_dict'):
+                params['merchant_app_id'] = self.merchant_app_id.to_alipay_dict()
+            else:
+                params['merchant_app_id'] = self.merchant_app_id
         if self.nfc_biz_tid:
             if hasattr(self.nfc_biz_tid, 'to_alipay_dict'):
                 params['nfc_biz_tid'] = self.nfc_biz_tid.to_alipay_dict()
@@ -84,11 +113,21 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.params:
+            if hasattr(self.params, 'to_alipay_dict'):
+                params['params'] = self.params.to_alipay_dict()
+            else:
+                params['params'] = self.params
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.route_page:
+            if hasattr(self.route_page, 'to_alipay_dict'):
+                params['route_page'] = self.route_page.to_alipay_dict()
+            else:
+                params['route_page'] = self.route_page
         if self.upper_biz_tid:
             if hasattr(self.upper_biz_tid, 'to_alipay_dict'):
                 params['upper_biz_tid'] = self.upper_biz_tid.to_alipay_dict()
@@ -111,14 +150,20 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel()
+        if 'merchant_app_id' in d:
+            o.merchant_app_id = d['merchant_app_id']
         if 'nfc_biz_tid' in d:
             o.nfc_biz_tid = d['nfc_biz_tid']
         if 'nfc_sn' in d:
             o.nfc_sn = d['nfc_sn']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'params' in d:
+            o.params = d['params']
         if 'pid' in d:
             o.pid = d['pid']
+        if 'route_page' in d:
+            o.route_page = d['route_page']
         if 'upper_biz_tid' in d:
             o.upper_biz_tid = d['upper_biz_tid']
         if 'upper_sn' in d:

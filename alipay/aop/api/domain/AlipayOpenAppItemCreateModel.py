@@ -13,6 +13,7 @@ class AlipayOpenAppItemCreateModel(object):
 
     def __init__(self):
         self._attrs = None
+        self._auto_marketing_delivery = None
         self._barcode = None
         self._category_id = None
         self._desc = None
@@ -46,6 +47,13 @@ class AlipayOpenAppItemCreateModel(object):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def auto_marketing_delivery(self):
+        return self._auto_marketing_delivery
+
+    @auto_marketing_delivery.setter
+    def auto_marketing_delivery(self, value):
+        self._auto_marketing_delivery = value
     @property
     def barcode(self):
         return self._barcode
@@ -211,6 +219,11 @@ class AlipayOpenAppItemCreateModel(object):
                 params['attrs'] = self.attrs.to_alipay_dict()
             else:
                 params['attrs'] = self.attrs
+        if self.auto_marketing_delivery:
+            if hasattr(self.auto_marketing_delivery, 'to_alipay_dict'):
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery.to_alipay_dict()
+            else:
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery
         if self.barcode:
             if hasattr(self.barcode, 'to_alipay_dict'):
                 params['barcode'] = self.barcode.to_alipay_dict()
@@ -330,6 +343,8 @@ class AlipayOpenAppItemCreateModel(object):
         o = AlipayOpenAppItemCreateModel()
         if 'attrs' in d:
             o.attrs = d['attrs']
+        if 'auto_marketing_delivery' in d:
+            o.auto_marketing_delivery = d['auto_marketing_delivery']
         if 'barcode' in d:
             o.barcode = d['barcode']
         if 'category_id' in d:

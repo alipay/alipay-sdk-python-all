@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AllocAmountInfoDTO import AllocAmountInfoDTO
 from alipay.aop.api.domain.GoodsInfoModifyDTO import GoodsInfoModifyDTO
 from alipay.aop.api.domain.PriceInfoModifyDTO import PriceInfoModifyDTO
 from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
@@ -11,6 +12,7 @@ from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
 class AlipayOpenMiniOrderModifyModel(object):
 
     def __init__(self):
+        self._alloc_amount_info = None
         self._item_infos = None
         self._open_id = None
         self._order_id = None
@@ -19,6 +21,16 @@ class AlipayOpenMiniOrderModifyModel(object):
         self._stage_pay_plans = None
         self._user_id = None
 
+    @property
+    def alloc_amount_info(self):
+        return self._alloc_amount_info
+
+    @alloc_amount_info.setter
+    def alloc_amount_info(self, value):
+        if isinstance(value, AllocAmountInfoDTO):
+            self._alloc_amount_info = value
+        else:
+            self._alloc_amount_info = AllocAmountInfoDTO.from_alipay_dict(value)
     @property
     def item_infos(self):
         return self._item_infos
@@ -87,6 +99,11 @@ class AlipayOpenMiniOrderModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alloc_amount_info:
+            if hasattr(self.alloc_amount_info, 'to_alipay_dict'):
+                params['alloc_amount_info'] = self.alloc_amount_info.to_alipay_dict()
+            else:
+                params['alloc_amount_info'] = self.alloc_amount_info
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -139,6 +156,8 @@ class AlipayOpenMiniOrderModifyModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderModifyModel()
+        if 'alloc_amount_info' in d:
+            o.alloc_amount_info = d['alloc_amount_info']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
         if 'open_id' in d:

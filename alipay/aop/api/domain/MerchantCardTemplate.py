@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
 from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 
@@ -19,6 +20,7 @@ class MerchantCardTemplate(object):
         self._image_id_list = None
         self._image_url_list = None
         self._out_card_id = None
+        self._reject_reasons = None
         self._sale_info = None
         self._settle_type = None
         self._use_info = None
@@ -92,6 +94,19 @@ class MerchantCardTemplate(object):
     @out_card_id.setter
     def out_card_id(self, value):
         self._out_card_id = value
+    @property
+    def reject_reasons(self):
+        return self._reject_reasons
+
+    @reject_reasons.setter
+    def reject_reasons(self, value):
+        if isinstance(value, list):
+            self._reject_reasons = list()
+            for i in value:
+                if isinstance(i, CardRejectReasonInfo):
+                    self._reject_reasons.append(i)
+                else:
+                    self._reject_reasons.append(CardRejectReasonInfo.from_alipay_dict(i))
     @property
     def sale_info(self):
         return self._sale_info
@@ -178,6 +193,16 @@ class MerchantCardTemplate(object):
                 params['out_card_id'] = self.out_card_id.to_alipay_dict()
             else:
                 params['out_card_id'] = self.out_card_id
+        if self.reject_reasons:
+            if isinstance(self.reject_reasons, list):
+                for i in range(0, len(self.reject_reasons)):
+                    element = self.reject_reasons[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.reject_reasons[i] = element.to_alipay_dict()
+            if hasattr(self.reject_reasons, 'to_alipay_dict'):
+                params['reject_reasons'] = self.reject_reasons.to_alipay_dict()
+            else:
+                params['reject_reasons'] = self.reject_reasons
         if self.sale_info:
             if hasattr(self.sale_info, 'to_alipay_dict'):
                 params['sale_info'] = self.sale_info.to_alipay_dict()
@@ -218,6 +243,8 @@ class MerchantCardTemplate(object):
             o.image_url_list = d['image_url_list']
         if 'out_card_id' in d:
             o.out_card_id = d['out_card_id']
+        if 'reject_reasons' in d:
+            o.reject_reasons = d['reject_reasons']
         if 'sale_info' in d:
             o.sale_info = d['sale_info']
         if 'settle_type' in d:

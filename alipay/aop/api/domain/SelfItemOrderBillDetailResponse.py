@@ -26,7 +26,10 @@ class SelfItemOrderBillDetailResponse(object):
         self._refund_pay_commission = None
         self._self_shop_name = None
         self._serial_no = None
+        self._settle_account_no = None
+        self._settle_account_type = None
         self._settle_amount = None
+        self._settle_batch_id = None
         self._settle_status = None
         self._settle_time = None
         self._trade_no = None
@@ -162,12 +165,33 @@ class SelfItemOrderBillDetailResponse(object):
     def serial_no(self, value):
         self._serial_no = value
     @property
+    def settle_account_no(self):
+        return self._settle_account_no
+
+    @settle_account_no.setter
+    def settle_account_no(self, value):
+        self._settle_account_no = value
+    @property
+    def settle_account_type(self):
+        return self._settle_account_type
+
+    @settle_account_type.setter
+    def settle_account_type(self, value):
+        self._settle_account_type = value
+    @property
     def settle_amount(self):
         return self._settle_amount
 
     @settle_amount.setter
     def settle_amount(self, value):
         self._settle_amount = value
+    @property
+    def settle_batch_id(self):
+        return self._settle_batch_id
+
+    @settle_batch_id.setter
+    def settle_batch_id(self, value):
+        self._settle_batch_id = value
     @property
     def settle_status(self):
         return self._settle_status
@@ -311,11 +335,26 @@ class SelfItemOrderBillDetailResponse(object):
                 params['serial_no'] = self.serial_no.to_alipay_dict()
             else:
                 params['serial_no'] = self.serial_no
+        if self.settle_account_no:
+            if hasattr(self.settle_account_no, 'to_alipay_dict'):
+                params['settle_account_no'] = self.settle_account_no.to_alipay_dict()
+            else:
+                params['settle_account_no'] = self.settle_account_no
+        if self.settle_account_type:
+            if hasattr(self.settle_account_type, 'to_alipay_dict'):
+                params['settle_account_type'] = self.settle_account_type.to_alipay_dict()
+            else:
+                params['settle_account_type'] = self.settle_account_type
         if self.settle_amount:
             if hasattr(self.settle_amount, 'to_alipay_dict'):
                 params['settle_amount'] = self.settle_amount.to_alipay_dict()
             else:
                 params['settle_amount'] = self.settle_amount
+        if self.settle_batch_id:
+            if hasattr(self.settle_batch_id, 'to_alipay_dict'):
+                params['settle_batch_id'] = self.settle_batch_id.to_alipay_dict()
+            else:
+                params['settle_batch_id'] = self.settle_batch_id
         if self.settle_status:
             if hasattr(self.settle_status, 'to_alipay_dict'):
                 params['settle_status'] = self.settle_status.to_alipay_dict()
@@ -394,8 +433,14 @@ class SelfItemOrderBillDetailResponse(object):
             o.self_shop_name = d['self_shop_name']
         if 'serial_no' in d:
             o.serial_no = d['serial_no']
+        if 'settle_account_no' in d:
+            o.settle_account_no = d['settle_account_no']
+        if 'settle_account_type' in d:
+            o.settle_account_type = d['settle_account_type']
         if 'settle_amount' in d:
             o.settle_amount = d['settle_amount']
+        if 'settle_batch_id' in d:
+            o.settle_batch_id = d['settle_batch_id']
         if 'settle_status' in d:
             o.settle_status = d['settle_status']
         if 'settle_time' in d:

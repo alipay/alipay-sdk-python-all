@@ -17,6 +17,7 @@ class InqueryDoctorStatusData(object):
         self._merchant_doctor_id = None
         self._num_of_people_served = None
         self._practicing_doctor_certificate_no = None
+        self._public_time = None
 
     @property
     def average_time(self):
@@ -80,6 +81,13 @@ class InqueryDoctorStatusData(object):
     @practicing_doctor_certificate_no.setter
     def practicing_doctor_certificate_no(self, value):
         self._practicing_doctor_certificate_no = value
+    @property
+    def public_time(self):
+        return self._public_time
+
+    @public_time.setter
+    def public_time(self, value):
+        self._public_time = value
 
 
     def to_alipay_dict(self):
@@ -129,6 +137,11 @@ class InqueryDoctorStatusData(object):
                 params['practicing_doctor_certificate_no'] = self.practicing_doctor_certificate_no.to_alipay_dict()
             else:
                 params['practicing_doctor_certificate_no'] = self.practicing_doctor_certificate_no
+        if self.public_time:
+            if hasattr(self.public_time, 'to_alipay_dict'):
+                params['public_time'] = self.public_time.to_alipay_dict()
+            else:
+                params['public_time'] = self.public_time
         return params
 
     @staticmethod
@@ -152,6 +165,8 @@ class InqueryDoctorStatusData(object):
             o.num_of_people_served = d['num_of_people_served']
         if 'practicing_doctor_certificate_no' in d:
             o.practicing_doctor_certificate_no = d['practicing_doctor_certificate_no']
+        if 'public_time' in d:
+            o.public_time = d['public_time']
         return o
 
 

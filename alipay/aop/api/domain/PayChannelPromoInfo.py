@@ -87,20 +87,26 @@ class PayChannelPromoInfo(object):
 
     @installment_info_list.setter
     def installment_info_list(self, value):
-        if isinstance(value, InstallmentInfo):
-            self._installment_info_list = value
-        else:
-            self._installment_info_list = InstallmentInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._installment_info_list = list()
+            for i in value:
+                if isinstance(i, InstallmentInfo):
+                    self._installment_info_list.append(i)
+                else:
+                    self._installment_info_list.append(InstallmentInfo.from_alipay_dict(i))
     @property
     def operation_list(self):
         return self._operation_list
 
     @operation_list.setter
     def operation_list(self, value):
-        if isinstance(value, PrePayOperationInfo):
-            self._operation_list = value
-        else:
-            self._operation_list = PrePayOperationInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._operation_list = list()
+            for i in value:
+                if isinstance(i, PrePayOperationInfo):
+                    self._operation_list.append(i)
+                else:
+                    self._operation_list.append(PrePayOperationInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -146,11 +152,21 @@ class PayChannelPromoInfo(object):
             else:
                 params['channel_operation_info'] = self.channel_operation_info
         if self.installment_info_list:
+            if isinstance(self.installment_info_list, list):
+                for i in range(0, len(self.installment_info_list)):
+                    element = self.installment_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.installment_info_list[i] = element.to_alipay_dict()
             if hasattr(self.installment_info_list, 'to_alipay_dict'):
                 params['installment_info_list'] = self.installment_info_list.to_alipay_dict()
             else:
                 params['installment_info_list'] = self.installment_info_list
         if self.operation_list:
+            if isinstance(self.operation_list, list):
+                for i in range(0, len(self.operation_list)):
+                    element = self.operation_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.operation_list[i] = element.to_alipay_dict()
             if hasattr(self.operation_list, 'to_alipay_dict'):
                 params['operation_list'] = self.operation_list.to_alipay_dict()
             else:

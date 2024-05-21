@@ -10,6 +10,7 @@ class AlipayCloudCloudbaseResourcepackageItempackageConsultModel(object):
     def __init__(self):
         self._biz_app_id = None
         self._commodity_code = None
+        self._coupon_codes = None
         self._effective_period_num = None
         self._effective_period_type = None
         self._purchase_number = None
@@ -29,6 +30,16 @@ class AlipayCloudCloudbaseResourcepackageItempackageConsultModel(object):
     @commodity_code.setter
     def commodity_code(self, value):
         self._commodity_code = value
+    @property
+    def coupon_codes(self):
+        return self._coupon_codes
+
+    @coupon_codes.setter
+    def coupon_codes(self, value):
+        if isinstance(value, list):
+            self._coupon_codes = list()
+            for i in value:
+                self._coupon_codes.append(i)
     @property
     def effective_period_num(self):
         return self._effective_period_num
@@ -71,6 +82,16 @@ class AlipayCloudCloudbaseResourcepackageItempackageConsultModel(object):
                 params['commodity_code'] = self.commodity_code.to_alipay_dict()
             else:
                 params['commodity_code'] = self.commodity_code
+        if self.coupon_codes:
+            if isinstance(self.coupon_codes, list):
+                for i in range(0, len(self.coupon_codes)):
+                    element = self.coupon_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.coupon_codes[i] = element.to_alipay_dict()
+            if hasattr(self.coupon_codes, 'to_alipay_dict'):
+                params['coupon_codes'] = self.coupon_codes.to_alipay_dict()
+            else:
+                params['coupon_codes'] = self.coupon_codes
         if self.effective_period_num:
             if hasattr(self.effective_period_num, 'to_alipay_dict'):
                 params['effective_period_num'] = self.effective_period_num.to_alipay_dict()
@@ -102,6 +123,8 @@ class AlipayCloudCloudbaseResourcepackageItempackageConsultModel(object):
             o.biz_app_id = d['biz_app_id']
         if 'commodity_code' in d:
             o.commodity_code = d['commodity_code']
+        if 'coupon_codes' in d:
+            o.coupon_codes = d['coupon_codes']
         if 'effective_period_num' in d:
             o.effective_period_num = d['effective_period_num']
         if 'effective_period_type' in d:

@@ -8,18 +8,42 @@ from alipay.aop.api.constant.ParamConstants import *
 class GroupUserVO(object):
 
     def __init__(self):
-        self._cert_no = None
+        self._invite_id = None
+        self._invite_open_id = None
+        self._join_time = None
+        self._login_id = None
         self._open_id = None
         self._user_id = None
         self._user_name = None
 
     @property
-    def cert_no(self):
-        return self._cert_no
+    def invite_id(self):
+        return self._invite_id
 
-    @cert_no.setter
-    def cert_no(self, value):
-        self._cert_no = value
+    @invite_id.setter
+    def invite_id(self, value):
+        self._invite_id = value
+    @property
+    def invite_open_id(self):
+        return self._invite_open_id
+
+    @invite_open_id.setter
+    def invite_open_id(self, value):
+        self._invite_open_id = value
+    @property
+    def join_time(self):
+        return self._join_time
+
+    @join_time.setter
+    def join_time(self, value):
+        self._join_time = value
+    @property
+    def login_id(self):
+        return self._login_id
+
+    @login_id.setter
+    def login_id(self, value):
+        self._login_id = value
     @property
     def open_id(self):
         return self._open_id
@@ -45,11 +69,26 @@ class GroupUserVO(object):
 
     def to_alipay_dict(self):
         params = dict()
-        if self.cert_no:
-            if hasattr(self.cert_no, 'to_alipay_dict'):
-                params['cert_no'] = self.cert_no.to_alipay_dict()
+        if self.invite_id:
+            if hasattr(self.invite_id, 'to_alipay_dict'):
+                params['invite_id'] = self.invite_id.to_alipay_dict()
             else:
-                params['cert_no'] = self.cert_no
+                params['invite_id'] = self.invite_id
+        if self.invite_open_id:
+            if hasattr(self.invite_open_id, 'to_alipay_dict'):
+                params['invite_open_id'] = self.invite_open_id.to_alipay_dict()
+            else:
+                params['invite_open_id'] = self.invite_open_id
+        if self.join_time:
+            if hasattr(self.join_time, 'to_alipay_dict'):
+                params['join_time'] = self.join_time.to_alipay_dict()
+            else:
+                params['join_time'] = self.join_time
+        if self.login_id:
+            if hasattr(self.login_id, 'to_alipay_dict'):
+                params['login_id'] = self.login_id.to_alipay_dict()
+            else:
+                params['login_id'] = self.login_id
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -72,8 +111,14 @@ class GroupUserVO(object):
         if not d:
             return None
         o = GroupUserVO()
-        if 'cert_no' in d:
-            o.cert_no = d['cert_no']
+        if 'invite_id' in d:
+            o.invite_id = d['invite_id']
+        if 'invite_open_id' in d:
+            o.invite_open_id = d['invite_open_id']
+        if 'join_time' in d:
+            o.join_time = d['join_time']
+        if 'login_id' in d:
+            o.login_id = d['login_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

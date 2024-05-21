@@ -17,11 +17,14 @@ class EcomBuyerDTO(object):
         self._bank_id = None
         self._bank_name = None
         self._bill_account_type = None
+        self._buyer_agreement_premium = None
+        self._buyer_agreement_sum_insured = None
         self._buyer_id = None
         self._buyer_nick = None
         self._buyer_order_count = None
         self._buyer_order_refund_exchange_rate = None
         self._buyer_tag_data = None
+        self._buyer_taobao_id = None
         self._id_card_no = None
         self._id_card_type = None
         self._phone = None
@@ -92,6 +95,20 @@ class EcomBuyerDTO(object):
     def bill_account_type(self, value):
         self._bill_account_type = value
     @property
+    def buyer_agreement_premium(self):
+        return self._buyer_agreement_premium
+
+    @buyer_agreement_premium.setter
+    def buyer_agreement_premium(self, value):
+        self._buyer_agreement_premium = value
+    @property
+    def buyer_agreement_sum_insured(self):
+        return self._buyer_agreement_sum_insured
+
+    @buyer_agreement_sum_insured.setter
+    def buyer_agreement_sum_insured(self, value):
+        self._buyer_agreement_sum_insured = value
+    @property
     def buyer_id(self):
         return self._buyer_id
 
@@ -126,6 +143,13 @@ class EcomBuyerDTO(object):
     @buyer_tag_data.setter
     def buyer_tag_data(self, value):
         self._buyer_tag_data = value
+    @property
+    def buyer_taobao_id(self):
+        return self._buyer_taobao_id
+
+    @buyer_taobao_id.setter
+    def buyer_taobao_id(self, value):
+        self._buyer_taobao_id = value
     @property
     def id_card_no(self):
         return self._id_card_no
@@ -210,6 +234,16 @@ class EcomBuyerDTO(object):
                 params['bill_account_type'] = self.bill_account_type.to_alipay_dict()
             else:
                 params['bill_account_type'] = self.bill_account_type
+        if self.buyer_agreement_premium:
+            if hasattr(self.buyer_agreement_premium, 'to_alipay_dict'):
+                params['buyer_agreement_premium'] = self.buyer_agreement_premium.to_alipay_dict()
+            else:
+                params['buyer_agreement_premium'] = self.buyer_agreement_premium
+        if self.buyer_agreement_sum_insured:
+            if hasattr(self.buyer_agreement_sum_insured, 'to_alipay_dict'):
+                params['buyer_agreement_sum_insured'] = self.buyer_agreement_sum_insured.to_alipay_dict()
+            else:
+                params['buyer_agreement_sum_insured'] = self.buyer_agreement_sum_insured
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -235,6 +269,11 @@ class EcomBuyerDTO(object):
                 params['buyer_tag_data'] = self.buyer_tag_data.to_alipay_dict()
             else:
                 params['buyer_tag_data'] = self.buyer_tag_data
+        if self.buyer_taobao_id:
+            if hasattr(self.buyer_taobao_id, 'to_alipay_dict'):
+                params['buyer_taobao_id'] = self.buyer_taobao_id.to_alipay_dict()
+            else:
+                params['buyer_taobao_id'] = self.buyer_taobao_id
         if self.id_card_no:
             if hasattr(self.id_card_no, 'to_alipay_dict'):
                 params['id_card_no'] = self.id_card_no.to_alipay_dict()
@@ -285,6 +324,10 @@ class EcomBuyerDTO(object):
             o.bank_name = d['bank_name']
         if 'bill_account_type' in d:
             o.bill_account_type = d['bill_account_type']
+        if 'buyer_agreement_premium' in d:
+            o.buyer_agreement_premium = d['buyer_agreement_premium']
+        if 'buyer_agreement_sum_insured' in d:
+            o.buyer_agreement_sum_insured = d['buyer_agreement_sum_insured']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'buyer_nick' in d:
@@ -295,6 +338,8 @@ class EcomBuyerDTO(object):
             o.buyer_order_refund_exchange_rate = d['buyer_order_refund_exchange_rate']
         if 'buyer_tag_data' in d:
             o.buyer_tag_data = d['buyer_tag_data']
+        if 'buyer_taobao_id' in d:
+            o.buyer_taobao_id = d['buyer_taobao_id']
         if 'id_card_no' in d:
             o.id_card_no = d['id_card_no']
         if 'id_card_type' in d:

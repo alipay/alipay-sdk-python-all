@@ -23,6 +23,7 @@ class DeductionOrderInfo(object):
         self._order_id = None
         self._period = None
         self._plan_deduction_time = None
+        self._shop_id = None
         self._sub_order_id = None
         self._trade_no = None
         self._user_id = None
@@ -133,6 +134,13 @@ class DeductionOrderInfo(object):
     def plan_deduction_time(self, value):
         self._plan_deduction_time = value
     @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
     def sub_order_id(self):
         return self._sub_order_id
 
@@ -232,6 +240,11 @@ class DeductionOrderInfo(object):
                 params['plan_deduction_time'] = self.plan_deduction_time.to_alipay_dict()
             else:
                 params['plan_deduction_time'] = self.plan_deduction_time
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.sub_order_id:
             if hasattr(self.sub_order_id, 'to_alipay_dict'):
                 params['sub_order_id'] = self.sub_order_id.to_alipay_dict()
@@ -284,6 +297,8 @@ class DeductionOrderInfo(object):
             o.period = d['period']
         if 'plan_deduction_time' in d:
             o.plan_deduction_time = d['plan_deduction_time']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'sub_order_id' in d:
             o.sub_order_id = d['sub_order_id']
         if 'trade_no' in d:

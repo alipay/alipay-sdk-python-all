@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class RelationNodeInfo(object):
 
     def __init__(self):
+        self._equity_penetration_ratio = None
         self._layer = None
         self._node_name = None
         self._node_no = None
@@ -15,6 +16,13 @@ class RelationNodeInfo(object):
         self._relation_code = None
         self._ultimate_ratio = None
 
+    @property
+    def equity_penetration_ratio(self):
+        return self._equity_penetration_ratio
+
+    @equity_penetration_ratio.setter
+    def equity_penetration_ratio(self, value):
+        self._equity_penetration_ratio = value
     @property
     def layer(self):
         return self._layer
@@ -61,6 +69,11 @@ class RelationNodeInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.equity_penetration_ratio:
+            if hasattr(self.equity_penetration_ratio, 'to_alipay_dict'):
+                params['equity_penetration_ratio'] = self.equity_penetration_ratio.to_alipay_dict()
+            else:
+                params['equity_penetration_ratio'] = self.equity_penetration_ratio
         if self.layer:
             if hasattr(self.layer, 'to_alipay_dict'):
                 params['layer'] = self.layer.to_alipay_dict()
@@ -98,6 +111,8 @@ class RelationNodeInfo(object):
         if not d:
             return None
         o = RelationNodeInfo()
+        if 'equity_penetration_ratio' in d:
+            o.equity_penetration_ratio = d['equity_penetration_ratio']
         if 'layer' in d:
             o.layer = d['layer']
         if 'node_name' in d:

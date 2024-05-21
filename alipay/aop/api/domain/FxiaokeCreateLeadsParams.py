@@ -27,6 +27,13 @@ class FxiaokeCreateLeadsParams(object):
         self._is_bid = None
         self._is_issue_for_bid = None
         self._leads_code = None
+        self._leads_deploy_resource_pedestals = None
+        self._leads_fee_model = None
+        self._leads_normandy = None
+        self._leads_other_cloud_pedestal = None
+        self._leads_product_type = None
+        self._leads_sale_channel = None
+        self._leads_sale_territory = None
         self._leads_source_partner_id = None
         self._other_partner_pid_list = None
         self._other_party_sign_subject = None
@@ -179,6 +186,55 @@ class FxiaokeCreateLeadsParams(object):
     @leads_code.setter
     def leads_code(self, value):
         self._leads_code = value
+    @property
+    def leads_deploy_resource_pedestals(self):
+        return self._leads_deploy_resource_pedestals
+
+    @leads_deploy_resource_pedestals.setter
+    def leads_deploy_resource_pedestals(self, value):
+        self._leads_deploy_resource_pedestals = value
+    @property
+    def leads_fee_model(self):
+        return self._leads_fee_model
+
+    @leads_fee_model.setter
+    def leads_fee_model(self, value):
+        self._leads_fee_model = value
+    @property
+    def leads_normandy(self):
+        return self._leads_normandy
+
+    @leads_normandy.setter
+    def leads_normandy(self, value):
+        self._leads_normandy = value
+    @property
+    def leads_other_cloud_pedestal(self):
+        return self._leads_other_cloud_pedestal
+
+    @leads_other_cloud_pedestal.setter
+    def leads_other_cloud_pedestal(self, value):
+        self._leads_other_cloud_pedestal = value
+    @property
+    def leads_product_type(self):
+        return self._leads_product_type
+
+    @leads_product_type.setter
+    def leads_product_type(self, value):
+        self._leads_product_type = value
+    @property
+    def leads_sale_channel(self):
+        return self._leads_sale_channel
+
+    @leads_sale_channel.setter
+    def leads_sale_channel(self, value):
+        self._leads_sale_channel = value
+    @property
+    def leads_sale_territory(self):
+        return self._leads_sale_territory
+
+    @leads_sale_territory.setter
+    def leads_sale_territory(self, value):
+        self._leads_sale_territory = value
     @property
     def leads_source_partner_id(self):
         return self._leads_source_partner_id
@@ -441,6 +497,41 @@ class FxiaokeCreateLeadsParams(object):
                 params['leads_code'] = self.leads_code.to_alipay_dict()
             else:
                 params['leads_code'] = self.leads_code
+        if self.leads_deploy_resource_pedestals:
+            if hasattr(self.leads_deploy_resource_pedestals, 'to_alipay_dict'):
+                params['leads_deploy_resource_pedestals'] = self.leads_deploy_resource_pedestals.to_alipay_dict()
+            else:
+                params['leads_deploy_resource_pedestals'] = self.leads_deploy_resource_pedestals
+        if self.leads_fee_model:
+            if hasattr(self.leads_fee_model, 'to_alipay_dict'):
+                params['leads_fee_model'] = self.leads_fee_model.to_alipay_dict()
+            else:
+                params['leads_fee_model'] = self.leads_fee_model
+        if self.leads_normandy:
+            if hasattr(self.leads_normandy, 'to_alipay_dict'):
+                params['leads_normandy'] = self.leads_normandy.to_alipay_dict()
+            else:
+                params['leads_normandy'] = self.leads_normandy
+        if self.leads_other_cloud_pedestal:
+            if hasattr(self.leads_other_cloud_pedestal, 'to_alipay_dict'):
+                params['leads_other_cloud_pedestal'] = self.leads_other_cloud_pedestal.to_alipay_dict()
+            else:
+                params['leads_other_cloud_pedestal'] = self.leads_other_cloud_pedestal
+        if self.leads_product_type:
+            if hasattr(self.leads_product_type, 'to_alipay_dict'):
+                params['leads_product_type'] = self.leads_product_type.to_alipay_dict()
+            else:
+                params['leads_product_type'] = self.leads_product_type
+        if self.leads_sale_channel:
+            if hasattr(self.leads_sale_channel, 'to_alipay_dict'):
+                params['leads_sale_channel'] = self.leads_sale_channel.to_alipay_dict()
+            else:
+                params['leads_sale_channel'] = self.leads_sale_channel
+        if self.leads_sale_territory:
+            if hasattr(self.leads_sale_territory, 'to_alipay_dict'):
+                params['leads_sale_territory'] = self.leads_sale_territory.to_alipay_dict()
+            else:
+                params['leads_sale_territory'] = self.leads_sale_territory
         if self.leads_source_partner_id:
             if hasattr(self.leads_source_partner_id, 'to_alipay_dict'):
                 params['leads_source_partner_id'] = self.leads_source_partner_id.to_alipay_dict()
@@ -604,6 +695,20 @@ class FxiaokeCreateLeadsParams(object):
             o.is_issue_for_bid = d['is_issue_for_bid']
         if 'leads_code' in d:
             o.leads_code = d['leads_code']
+        if 'leads_deploy_resource_pedestals' in d:
+            o.leads_deploy_resource_pedestals = d['leads_deploy_resource_pedestals']
+        if 'leads_fee_model' in d:
+            o.leads_fee_model = d['leads_fee_model']
+        if 'leads_normandy' in d:
+            o.leads_normandy = d['leads_normandy']
+        if 'leads_other_cloud_pedestal' in d:
+            o.leads_other_cloud_pedestal = d['leads_other_cloud_pedestal']
+        if 'leads_product_type' in d:
+            o.leads_product_type = d['leads_product_type']
+        if 'leads_sale_channel' in d:
+            o.leads_sale_channel = d['leads_sale_channel']
+        if 'leads_sale_territory' in d:
+            o.leads_sale_territory = d['leads_sale_territory']
         if 'leads_source_partner_id' in d:
             o.leads_source_partner_id = d['leads_source_partner_id']
         if 'other_partner_pid_list' in d:

@@ -9,6 +9,7 @@ class AlipayCloudCloudbaseResourcepackageOpenConsultModel(object):
 
     def __init__(self):
         self._biz_app_id = None
+        self._coupon_codes = None
         self._purchase_month = None
         self._spec_code = None
 
@@ -19,6 +20,16 @@ class AlipayCloudCloudbaseResourcepackageOpenConsultModel(object):
     @biz_app_id.setter
     def biz_app_id(self, value):
         self._biz_app_id = value
+    @property
+    def coupon_codes(self):
+        return self._coupon_codes
+
+    @coupon_codes.setter
+    def coupon_codes(self, value):
+        if isinstance(value, list):
+            self._coupon_codes = list()
+            for i in value:
+                self._coupon_codes.append(i)
     @property
     def purchase_month(self):
         return self._purchase_month
@@ -42,6 +53,16 @@ class AlipayCloudCloudbaseResourcepackageOpenConsultModel(object):
                 params['biz_app_id'] = self.biz_app_id.to_alipay_dict()
             else:
                 params['biz_app_id'] = self.biz_app_id
+        if self.coupon_codes:
+            if isinstance(self.coupon_codes, list):
+                for i in range(0, len(self.coupon_codes)):
+                    element = self.coupon_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.coupon_codes[i] = element.to_alipay_dict()
+            if hasattr(self.coupon_codes, 'to_alipay_dict'):
+                params['coupon_codes'] = self.coupon_codes.to_alipay_dict()
+            else:
+                params['coupon_codes'] = self.coupon_codes
         if self.purchase_month:
             if hasattr(self.purchase_month, 'to_alipay_dict'):
                 params['purchase_month'] = self.purchase_month.to_alipay_dict()
@@ -61,6 +82,8 @@ class AlipayCloudCloudbaseResourcepackageOpenConsultModel(object):
         o = AlipayCloudCloudbaseResourcepackageOpenConsultModel()
         if 'biz_app_id' in d:
             o.biz_app_id = d['biz_app_id']
+        if 'coupon_codes' in d:
+            o.coupon_codes = d['coupon_codes']
         if 'purchase_month' in d:
             o.purchase_month = d['purchase_month']
         if 'spec_code' in d:

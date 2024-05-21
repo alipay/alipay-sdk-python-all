@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EcomBuyerDTO import EcomBuyerDTO
 from alipay.aop.api.domain.EcomItemDTO import EcomItemDTO
 from alipay.aop.api.domain.EcomSellerDTO import EcomSellerDTO
 
@@ -11,12 +12,15 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
 
     def __init__(self):
         self._at_least_days = None
+        self._buyer = None
         self._ecom_item = None
         self._login_user_id = None
         self._out_session_expiration = None
         self._out_session_id = None
         self._partner_org_id = None
         self._product_code = None
+        self._product_plan_ids = None
+        self._purchase_user_type = None
         self._related_subject_type = None
         self._seller = None
         self._user_client = None
@@ -28,6 +32,16 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
     @at_least_days.setter
     def at_least_days(self, value):
         self._at_least_days = value
+    @property
+    def buyer(self):
+        return self._buyer
+
+    @buyer.setter
+    def buyer(self, value):
+        if isinstance(value, EcomBuyerDTO):
+            self._buyer = value
+        else:
+            self._buyer = EcomBuyerDTO.from_alipay_dict(value)
     @property
     def ecom_item(self):
         return self._ecom_item
@@ -77,6 +91,23 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
             for i in value:
                 self._product_code.append(i)
     @property
+    def product_plan_ids(self):
+        return self._product_plan_ids
+
+    @product_plan_ids.setter
+    def product_plan_ids(self, value):
+        if isinstance(value, list):
+            self._product_plan_ids = list()
+            for i in value:
+                self._product_plan_ids.append(i)
+    @property
+    def purchase_user_type(self):
+        return self._purchase_user_type
+
+    @purchase_user_type.setter
+    def purchase_user_type(self, value):
+        self._purchase_user_type = value
+    @property
     def related_subject_type(self):
         return self._related_subject_type
 
@@ -109,6 +140,11 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
                 params['at_least_days'] = self.at_least_days.to_alipay_dict()
             else:
                 params['at_least_days'] = self.at_least_days
+        if self.buyer:
+            if hasattr(self.buyer, 'to_alipay_dict'):
+                params['buyer'] = self.buyer.to_alipay_dict()
+            else:
+                params['buyer'] = self.buyer
         if self.ecom_item:
             if hasattr(self.ecom_item, 'to_alipay_dict'):
                 params['ecom_item'] = self.ecom_item.to_alipay_dict()
@@ -144,6 +180,21 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.product_plan_ids:
+            if isinstance(self.product_plan_ids, list):
+                for i in range(0, len(self.product_plan_ids)):
+                    element = self.product_plan_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.product_plan_ids[i] = element.to_alipay_dict()
+            if hasattr(self.product_plan_ids, 'to_alipay_dict'):
+                params['product_plan_ids'] = self.product_plan_ids.to_alipay_dict()
+            else:
+                params['product_plan_ids'] = self.product_plan_ids
+        if self.purchase_user_type:
+            if hasattr(self.purchase_user_type, 'to_alipay_dict'):
+                params['purchase_user_type'] = self.purchase_user_type.to_alipay_dict()
+            else:
+                params['purchase_user_type'] = self.purchase_user_type
         if self.related_subject_type:
             if hasattr(self.related_subject_type, 'to_alipay_dict'):
                 params['related_subject_type'] = self.related_subject_type.to_alipay_dict()
@@ -168,6 +219,8 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
         o = AlipayInsSceneEcommercePurchaselinkAuthModel()
         if 'at_least_days' in d:
             o.at_least_days = d['at_least_days']
+        if 'buyer' in d:
+            o.buyer = d['buyer']
         if 'ecom_item' in d:
             o.ecom_item = d['ecom_item']
         if 'login_user_id' in d:
@@ -180,6 +233,10 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
             o.partner_org_id = d['partner_org_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'product_plan_ids' in d:
+            o.product_plan_ids = d['product_plan_ids']
+        if 'purchase_user_type' in d:
+            o.purchase_user_type = d['purchase_user_type']
         if 'related_subject_type' in d:
             o.related_subject_type = d['related_subject_type']
         if 'seller' in d:

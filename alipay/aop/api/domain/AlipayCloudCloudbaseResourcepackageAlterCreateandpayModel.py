@@ -11,6 +11,7 @@ class AlipayCloudCloudbaseResourcepackageAlterCreateandpayModel(object):
         self._alter_spec_code = None
         self._biz_app_id = None
         self._biz_env_id = None
+        self._coupon_codes = None
 
     @property
     def alter_spec_code(self):
@@ -33,6 +34,16 @@ class AlipayCloudCloudbaseResourcepackageAlterCreateandpayModel(object):
     @biz_env_id.setter
     def biz_env_id(self, value):
         self._biz_env_id = value
+    @property
+    def coupon_codes(self):
+        return self._coupon_codes
+
+    @coupon_codes.setter
+    def coupon_codes(self, value):
+        if isinstance(value, list):
+            self._coupon_codes = list()
+            for i in value:
+                self._coupon_codes.append(i)
 
 
     def to_alipay_dict(self):
@@ -52,6 +63,16 @@ class AlipayCloudCloudbaseResourcepackageAlterCreateandpayModel(object):
                 params['biz_env_id'] = self.biz_env_id.to_alipay_dict()
             else:
                 params['biz_env_id'] = self.biz_env_id
+        if self.coupon_codes:
+            if isinstance(self.coupon_codes, list):
+                for i in range(0, len(self.coupon_codes)):
+                    element = self.coupon_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.coupon_codes[i] = element.to_alipay_dict()
+            if hasattr(self.coupon_codes, 'to_alipay_dict'):
+                params['coupon_codes'] = self.coupon_codes.to_alipay_dict()
+            else:
+                params['coupon_codes'] = self.coupon_codes
         return params
 
     @staticmethod
@@ -65,6 +86,8 @@ class AlipayCloudCloudbaseResourcepackageAlterCreateandpayModel(object):
             o.biz_app_id = d['biz_app_id']
         if 'biz_env_id' in d:
             o.biz_env_id = d['biz_env_id']
+        if 'coupon_codes' in d:
+            o.coupon_codes = d['coupon_codes']
         return o
 
 

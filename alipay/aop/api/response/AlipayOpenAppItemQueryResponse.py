@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDescInfoVO import ItemDescInfoVO
 from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
+from alipay.aop.api.domain.ItemEnrollFreezeContent import ItemEnrollFreezeContent
 from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
 from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.ItemSkuSearchVO import ItemSkuSearchVO
@@ -16,6 +17,7 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenAppItemQueryResponse, self).__init__()
         self._attrs = None
+        self._auto_marketing_delivery = None
         self._barcode = None
         self._category_id = None
         self._create_time = None
@@ -27,6 +29,7 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         self._image_list = None
         self._is_online = None
         self._item_details_page_model = None
+        self._item_enroll_freeze_content = None
         self._item_id = None
         self._item_type = None
         self._original_price = None
@@ -55,6 +58,13 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def auto_marketing_delivery(self):
+        return self._auto_marketing_delivery
+
+    @auto_marketing_delivery.setter
+    def auto_marketing_delivery(self, value):
+        self._auto_marketing_delivery = value
     @property
     def barcode(self):
         return self._barcode
@@ -144,6 +154,16 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     @item_details_page_model.setter
     def item_details_page_model(self, value):
         self._item_details_page_model = value
+    @property
+    def item_enroll_freeze_content(self):
+        return self._item_enroll_freeze_content
+
+    @item_enroll_freeze_content.setter
+    def item_enroll_freeze_content(self, value):
+        if isinstance(value, ItemEnrollFreezeContent):
+            self._item_enroll_freeze_content = value
+        else:
+            self._item_enroll_freeze_content = ItemEnrollFreezeContent.from_alipay_dict(value)
     @property
     def item_id(self):
         return self._item_id
@@ -265,6 +285,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         response = super(AlipayOpenAppItemQueryResponse, self).parse_response_content(response_content)
         if 'attrs' in response:
             self.attrs = response['attrs']
+        if 'auto_marketing_delivery' in response:
+            self.auto_marketing_delivery = response['auto_marketing_delivery']
         if 'barcode' in response:
             self.barcode = response['barcode']
         if 'category_id' in response:
@@ -287,6 +309,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.is_online = response['is_online']
         if 'item_details_page_model' in response:
             self.item_details_page_model = response['item_details_page_model']
+        if 'item_enroll_freeze_content' in response:
+            self.item_enroll_freeze_content = response['item_enroll_freeze_content']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'item_type' in response:

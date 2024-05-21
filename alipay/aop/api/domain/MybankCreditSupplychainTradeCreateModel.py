@@ -13,9 +13,11 @@ class MybankCreditSupplychainTradeCreateModel(object):
 
     def __init__(self):
         self._buyer = None
+        self._c_repay_plan = None
         self._channel = None
         self._expire_date = None
         self._ext_data = None
+        self._file_link = None
         self._out_order_no = None
         self._out_order_title = None
         self._pay_account = None
@@ -37,6 +39,13 @@ class MybankCreditSupplychainTradeCreateModel(object):
         else:
             self._buyer = Member.from_alipay_dict(value)
     @property
+    def c_repay_plan(self):
+        return self._c_repay_plan
+
+    @c_repay_plan.setter
+    def c_repay_plan(self, value):
+        self._c_repay_plan = value
+    @property
     def channel(self):
         return self._channel
 
@@ -57,6 +66,13 @@ class MybankCreditSupplychainTradeCreateModel(object):
     @ext_data.setter
     def ext_data(self, value):
         self._ext_data = value
+    @property
+    def file_link(self):
+        return self._file_link
+
+    @file_link.setter
+    def file_link(self, value):
+        self._file_link = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -138,6 +154,11 @@ class MybankCreditSupplychainTradeCreateModel(object):
                 params['buyer'] = self.buyer.to_alipay_dict()
             else:
                 params['buyer'] = self.buyer
+        if self.c_repay_plan:
+            if hasattr(self.c_repay_plan, 'to_alipay_dict'):
+                params['c_repay_plan'] = self.c_repay_plan.to_alipay_dict()
+            else:
+                params['c_repay_plan'] = self.c_repay_plan
         if self.channel:
             if hasattr(self.channel, 'to_alipay_dict'):
                 params['channel'] = self.channel.to_alipay_dict()
@@ -153,6 +174,11 @@ class MybankCreditSupplychainTradeCreateModel(object):
                 params['ext_data'] = self.ext_data.to_alipay_dict()
             else:
                 params['ext_data'] = self.ext_data
+        if self.file_link:
+            if hasattr(self.file_link, 'to_alipay_dict'):
+                params['file_link'] = self.file_link.to_alipay_dict()
+            else:
+                params['file_link'] = self.file_link
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -207,12 +233,16 @@ class MybankCreditSupplychainTradeCreateModel(object):
         o = MybankCreditSupplychainTradeCreateModel()
         if 'buyer' in d:
             o.buyer = d['buyer']
+        if 'c_repay_plan' in d:
+            o.c_repay_plan = d['c_repay_plan']
         if 'channel' in d:
             o.channel = d['channel']
         if 'expire_date' in d:
             o.expire_date = d['expire_date']
         if 'ext_data' in d:
             o.ext_data = d['ext_data']
+        if 'file_link' in d:
+            o.file_link = d['file_link']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'out_order_title' in d:

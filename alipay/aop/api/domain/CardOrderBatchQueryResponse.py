@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class CardOrderBatchQueryResponse(object):
 
     def __init__(self):
+        self._cancel_type = None
         self._card_id = None
         self._card_status = None
         self._card_template_id = None
@@ -16,10 +17,22 @@ class CardOrderBatchQueryResponse(object):
         self._name = None
         self._open_id = None
         self._order_id = None
+        self._origin_price_total = None
+        self._out_order_no = None
         self._remain_count = None
+        self._sale_price_total = None
+        self._shop_id = None
         self._total_count = None
         self._user_id = None
+        self._user_name = None
 
+    @property
+    def cancel_type(self):
+        return self._cancel_type
+
+    @cancel_type.setter
+    def cancel_type(self, value):
+        self._cancel_type = value
     @property
     def card_id(self):
         return self._card_id
@@ -77,12 +90,40 @@ class CardOrderBatchQueryResponse(object):
     def order_id(self, value):
         self._order_id = value
     @property
+    def origin_price_total(self):
+        return self._origin_price_total
+
+    @origin_price_total.setter
+    def origin_price_total(self, value):
+        self._origin_price_total = value
+    @property
+    def out_order_no(self):
+        return self._out_order_no
+
+    @out_order_no.setter
+    def out_order_no(self, value):
+        self._out_order_no = value
+    @property
     def remain_count(self):
         return self._remain_count
 
     @remain_count.setter
     def remain_count(self, value):
         self._remain_count = value
+    @property
+    def sale_price_total(self):
+        return self._sale_price_total
+
+    @sale_price_total.setter
+    def sale_price_total(self, value):
+        self._sale_price_total = value
+    @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
     @property
     def total_count(self):
         return self._total_count
@@ -97,10 +138,22 @@ class CardOrderBatchQueryResponse(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def user_name(self):
+        return self._user_name
+
+    @user_name.setter
+    def user_name(self, value):
+        self._user_name = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cancel_type:
+            if hasattr(self.cancel_type, 'to_alipay_dict'):
+                params['cancel_type'] = self.cancel_type.to_alipay_dict()
+            else:
+                params['cancel_type'] = self.cancel_type
         if self.card_id:
             if hasattr(self.card_id, 'to_alipay_dict'):
                 params['card_id'] = self.card_id.to_alipay_dict()
@@ -141,11 +194,31 @@ class CardOrderBatchQueryResponse(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.origin_price_total:
+            if hasattr(self.origin_price_total, 'to_alipay_dict'):
+                params['origin_price_total'] = self.origin_price_total.to_alipay_dict()
+            else:
+                params['origin_price_total'] = self.origin_price_total
+        if self.out_order_no:
+            if hasattr(self.out_order_no, 'to_alipay_dict'):
+                params['out_order_no'] = self.out_order_no.to_alipay_dict()
+            else:
+                params['out_order_no'] = self.out_order_no
         if self.remain_count:
             if hasattr(self.remain_count, 'to_alipay_dict'):
                 params['remain_count'] = self.remain_count.to_alipay_dict()
             else:
                 params['remain_count'] = self.remain_count
+        if self.sale_price_total:
+            if hasattr(self.sale_price_total, 'to_alipay_dict'):
+                params['sale_price_total'] = self.sale_price_total.to_alipay_dict()
+            else:
+                params['sale_price_total'] = self.sale_price_total
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.total_count:
             if hasattr(self.total_count, 'to_alipay_dict'):
                 params['total_count'] = self.total_count.to_alipay_dict()
@@ -156,6 +229,11 @@ class CardOrderBatchQueryResponse(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.user_name:
+            if hasattr(self.user_name, 'to_alipay_dict'):
+                params['user_name'] = self.user_name.to_alipay_dict()
+            else:
+                params['user_name'] = self.user_name
         return params
 
     @staticmethod
@@ -163,6 +241,8 @@ class CardOrderBatchQueryResponse(object):
         if not d:
             return None
         o = CardOrderBatchQueryResponse()
+        if 'cancel_type' in d:
+            o.cancel_type = d['cancel_type']
         if 'card_id' in d:
             o.card_id = d['card_id']
         if 'card_status' in d:
@@ -179,12 +259,22 @@ class CardOrderBatchQueryResponse(object):
             o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'origin_price_total' in d:
+            o.origin_price_total = d['origin_price_total']
+        if 'out_order_no' in d:
+            o.out_order_no = d['out_order_no']
         if 'remain_count' in d:
             o.remain_count = d['remain_count']
+        if 'sale_price_total' in d:
+            o.sale_price_total = d['sale_price_total']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'total_count' in d:
             o.total_count = d['total_count']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'user_name' in d:
+            o.user_name = d['user_name']
         return o
 
 

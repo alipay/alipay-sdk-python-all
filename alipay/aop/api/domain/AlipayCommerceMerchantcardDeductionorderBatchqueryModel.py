@@ -12,10 +12,13 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
         self._deduction_end_date = None
         self._deduction_start_date = None
         self._deduction_status = None
+        self._open_id = None
         self._order_end_date = None
         self._order_start_date = None
         self._page_num = None
         self._page_size = None
+        self._shop_id = None
+        self._user_id = None
 
     @property
     def card_id(self):
@@ -46,6 +49,13 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
     def deduction_status(self, value):
         self._deduction_status = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def order_end_date(self):
         return self._order_end_date
 
@@ -73,6 +83,20 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -97,6 +121,11 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
                 params['deduction_status'] = self.deduction_status.to_alipay_dict()
             else:
                 params['deduction_status'] = self.deduction_status
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_end_date:
             if hasattr(self.order_end_date, 'to_alipay_dict'):
                 params['order_end_date'] = self.order_end_date.to_alipay_dict()
@@ -117,6 +146,16 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -132,6 +171,8 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
             o.deduction_start_date = d['deduction_start_date']
         if 'deduction_status' in d:
             o.deduction_status = d['deduction_status']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_end_date' in d:
             o.order_end_date = d['order_end_date']
         if 'order_start_date' in d:
@@ -140,6 +181,10 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

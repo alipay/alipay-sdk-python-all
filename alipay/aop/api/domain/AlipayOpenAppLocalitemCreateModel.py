@@ -14,6 +14,7 @@ class AlipayOpenAppLocalitemCreateModel(object):
 
     def __init__(self):
         self._attrs = None
+        self._auto_marketing_delivery = None
         self._category_id = None
         self._customer_service_mobile = None
         self._guide_info = None
@@ -42,6 +43,13 @@ class AlipayOpenAppLocalitemCreateModel(object):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def auto_marketing_delivery(self):
+        return self._auto_marketing_delivery
+
+    @auto_marketing_delivery.setter
+    def auto_marketing_delivery(self, value):
+        self._auto_marketing_delivery = value
     @property
     def category_id(self):
         return self._category_id
@@ -175,6 +183,11 @@ class AlipayOpenAppLocalitemCreateModel(object):
                 params['attrs'] = self.attrs.to_alipay_dict()
             else:
                 params['attrs'] = self.attrs
+        if self.auto_marketing_delivery:
+            if hasattr(self.auto_marketing_delivery, 'to_alipay_dict'):
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery.to_alipay_dict()
+            else:
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery
         if self.category_id:
             if hasattr(self.category_id, 'to_alipay_dict'):
                 params['category_id'] = self.category_id.to_alipay_dict()
@@ -269,6 +282,8 @@ class AlipayOpenAppLocalitemCreateModel(object):
         o = AlipayOpenAppLocalitemCreateModel()
         if 'attrs' in d:
             o.attrs = d['attrs']
+        if 'auto_marketing_delivery' in d:
+            o.auto_marketing_delivery = d['auto_marketing_delivery']
         if 'category_id' in d:
             o.category_id = d['category_id']
         if 'customer_service_mobile' in d:

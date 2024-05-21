@@ -25,6 +25,7 @@ class ItemOrderBillDetailResponse(object):
         self._receipt_amount = None
         self._refund_fee = None
         self._refund_fee_list = None
+        self._rent_funder_commission_amount = None
         self._service_type = None
         self._settle_status = None
         self._settle_time = None
@@ -150,6 +151,13 @@ class ItemOrderBillDetailResponse(object):
                 else:
                     self._refund_fee_list.append(ItemOrderBillRefundResponse.from_alipay_dict(i))
     @property
+    def rent_funder_commission_amount(self):
+        return self._rent_funder_commission_amount
+
+    @rent_funder_commission_amount.setter
+    def rent_funder_commission_amount(self, value):
+        self._rent_funder_commission_amount = value
+    @property
     def service_type(self):
         return self._service_type
 
@@ -273,6 +281,11 @@ class ItemOrderBillDetailResponse(object):
                 params['refund_fee_list'] = self.refund_fee_list.to_alipay_dict()
             else:
                 params['refund_fee_list'] = self.refund_fee_list
+        if self.rent_funder_commission_amount:
+            if hasattr(self.rent_funder_commission_amount, 'to_alipay_dict'):
+                params['rent_funder_commission_amount'] = self.rent_funder_commission_amount.to_alipay_dict()
+            else:
+                params['rent_funder_commission_amount'] = self.rent_funder_commission_amount
         if self.service_type:
             if hasattr(self.service_type, 'to_alipay_dict'):
                 params['service_type'] = self.service_type.to_alipay_dict()
@@ -337,6 +350,8 @@ class ItemOrderBillDetailResponse(object):
             o.refund_fee = d['refund_fee']
         if 'refund_fee_list' in d:
             o.refund_fee_list = d['refund_fee_list']
+        if 'rent_funder_commission_amount' in d:
+            o.rent_funder_commission_amount = d['rent_funder_commission_amount']
         if 'service_type' in d:
             o.service_type = d['service_type']
         if 'settle_status' in d:

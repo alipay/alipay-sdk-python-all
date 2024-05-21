@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GroupUserVO import GroupUserVO
 from alipay.aop.api.domain.GroupUserVO import GroupUserVO
+from alipay.aop.api.domain.GroupUserVO import GroupUserVO
 
 
 class GroupInstanceInfoVO(object):
@@ -13,11 +14,16 @@ class GroupInstanceInfoVO(object):
         self._auto_create_group_instance = None
         self._forbid_admin_chat = None
         self._forbid_member_chat = None
+        self._gmt_create = None
         self._group_instance_admin_user_list = None
         self._group_instance_desc = None
         self._group_instance_id = None
         self._group_instance_master = None
+        self._group_instance_member_count = None
         self._group_instance_name = None
+        self._head_img = None
+        self._member_list = None
+        self._notice = None
         self._open_invite = None
 
     @property
@@ -41,6 +47,13 @@ class GroupInstanceInfoVO(object):
     @forbid_member_chat.setter
     def forbid_member_chat(self, value):
         self._forbid_member_chat = value
+    @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
     @property
     def group_instance_admin_user_list(self):
         return self._group_instance_admin_user_list
@@ -79,12 +92,46 @@ class GroupInstanceInfoVO(object):
         else:
             self._group_instance_master = GroupUserVO.from_alipay_dict(value)
     @property
+    def group_instance_member_count(self):
+        return self._group_instance_member_count
+
+    @group_instance_member_count.setter
+    def group_instance_member_count(self, value):
+        self._group_instance_member_count = value
+    @property
     def group_instance_name(self):
         return self._group_instance_name
 
     @group_instance_name.setter
     def group_instance_name(self, value):
         self._group_instance_name = value
+    @property
+    def head_img(self):
+        return self._head_img
+
+    @head_img.setter
+    def head_img(self, value):
+        self._head_img = value
+    @property
+    def member_list(self):
+        return self._member_list
+
+    @member_list.setter
+    def member_list(self, value):
+        if isinstance(value, list):
+            self._member_list = list()
+            for i in value:
+                if isinstance(i, GroupUserVO):
+                    self._member_list.append(i)
+                else:
+                    self._member_list.append(GroupUserVO.from_alipay_dict(i))
+    @property
+    def notice(self):
+        return self._notice
+
+    @notice.setter
+    def notice(self, value):
+        self._notice = value
     @property
     def open_invite(self):
         return self._open_invite
@@ -111,6 +158,11 @@ class GroupInstanceInfoVO(object):
                 params['forbid_member_chat'] = self.forbid_member_chat.to_alipay_dict()
             else:
                 params['forbid_member_chat'] = self.forbid_member_chat
+        if self.gmt_create:
+            if hasattr(self.gmt_create, 'to_alipay_dict'):
+                params['gmt_create'] = self.gmt_create.to_alipay_dict()
+            else:
+                params['gmt_create'] = self.gmt_create
         if self.group_instance_admin_user_list:
             if isinstance(self.group_instance_admin_user_list, list):
                 for i in range(0, len(self.group_instance_admin_user_list)):
@@ -136,11 +188,36 @@ class GroupInstanceInfoVO(object):
                 params['group_instance_master'] = self.group_instance_master.to_alipay_dict()
             else:
                 params['group_instance_master'] = self.group_instance_master
+        if self.group_instance_member_count:
+            if hasattr(self.group_instance_member_count, 'to_alipay_dict'):
+                params['group_instance_member_count'] = self.group_instance_member_count.to_alipay_dict()
+            else:
+                params['group_instance_member_count'] = self.group_instance_member_count
         if self.group_instance_name:
             if hasattr(self.group_instance_name, 'to_alipay_dict'):
                 params['group_instance_name'] = self.group_instance_name.to_alipay_dict()
             else:
                 params['group_instance_name'] = self.group_instance_name
+        if self.head_img:
+            if hasattr(self.head_img, 'to_alipay_dict'):
+                params['head_img'] = self.head_img.to_alipay_dict()
+            else:
+                params['head_img'] = self.head_img
+        if self.member_list:
+            if isinstance(self.member_list, list):
+                for i in range(0, len(self.member_list)):
+                    element = self.member_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.member_list[i] = element.to_alipay_dict()
+            if hasattr(self.member_list, 'to_alipay_dict'):
+                params['member_list'] = self.member_list.to_alipay_dict()
+            else:
+                params['member_list'] = self.member_list
+        if self.notice:
+            if hasattr(self.notice, 'to_alipay_dict'):
+                params['notice'] = self.notice.to_alipay_dict()
+            else:
+                params['notice'] = self.notice
         if self.open_invite:
             if hasattr(self.open_invite, 'to_alipay_dict'):
                 params['open_invite'] = self.open_invite.to_alipay_dict()
@@ -159,6 +236,8 @@ class GroupInstanceInfoVO(object):
             o.forbid_admin_chat = d['forbid_admin_chat']
         if 'forbid_member_chat' in d:
             o.forbid_member_chat = d['forbid_member_chat']
+        if 'gmt_create' in d:
+            o.gmt_create = d['gmt_create']
         if 'group_instance_admin_user_list' in d:
             o.group_instance_admin_user_list = d['group_instance_admin_user_list']
         if 'group_instance_desc' in d:
@@ -167,8 +246,16 @@ class GroupInstanceInfoVO(object):
             o.group_instance_id = d['group_instance_id']
         if 'group_instance_master' in d:
             o.group_instance_master = d['group_instance_master']
+        if 'group_instance_member_count' in d:
+            o.group_instance_member_count = d['group_instance_member_count']
         if 'group_instance_name' in d:
             o.group_instance_name = d['group_instance_name']
+        if 'head_img' in d:
+            o.head_img = d['head_img']
+        if 'member_list' in d:
+            o.member_list = d['member_list']
+        if 'notice' in d:
+            o.notice = d['notice']
         if 'open_invite' in d:
             o.open_invite = d['open_invite']
         return o

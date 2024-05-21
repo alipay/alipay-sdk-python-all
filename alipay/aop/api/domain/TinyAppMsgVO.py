@@ -10,6 +10,8 @@ class TinyAppMsgVO(object):
     def __init__(self):
         self._desc = None
         self._image = None
+        self._image_id = None
+        self._image_url = None
         self._tiny_app_id = None
         self._tiny_app_logo = None
         self._tiny_app_name = None
@@ -30,6 +32,20 @@ class TinyAppMsgVO(object):
     @image.setter
     def image(self, value):
         self._image = value
+    @property
+    def image_id(self):
+        return self._image_id
+
+    @image_id.setter
+    def image_id(self, value):
+        self._image_id = value
+    @property
+    def image_url(self):
+        return self._image_url
+
+    @image_url.setter
+    def image_url(self, value):
+        self._image_url = value
     @property
     def tiny_app_id(self):
         return self._tiny_app_id
@@ -79,6 +95,16 @@ class TinyAppMsgVO(object):
                 params['image'] = self.image.to_alipay_dict()
             else:
                 params['image'] = self.image
+        if self.image_id:
+            if hasattr(self.image_id, 'to_alipay_dict'):
+                params['image_id'] = self.image_id.to_alipay_dict()
+            else:
+                params['image_id'] = self.image_id
+        if self.image_url:
+            if hasattr(self.image_url, 'to_alipay_dict'):
+                params['image_url'] = self.image_url.to_alipay_dict()
+            else:
+                params['image_url'] = self.image_url
         if self.tiny_app_id:
             if hasattr(self.tiny_app_id, 'to_alipay_dict'):
                 params['tiny_app_id'] = self.tiny_app_id.to_alipay_dict()
@@ -115,6 +141,10 @@ class TinyAppMsgVO(object):
             o.desc = d['desc']
         if 'image' in d:
             o.image = d['image']
+        if 'image_id' in d:
+            o.image_id = d['image_id']
+        if 'image_url' in d:
+            o.image_url = d['image_url']
         if 'tiny_app_id' in d:
             o.tiny_app_id = d['tiny_app_id']
         if 'tiny_app_logo' in d:

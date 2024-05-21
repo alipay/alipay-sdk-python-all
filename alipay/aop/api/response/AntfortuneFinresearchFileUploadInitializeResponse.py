@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+
+
+class AntfortuneFinresearchFileUploadInitializeResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AntfortuneFinresearchFileUploadInitializeResponse, self).__init__()
+        self._file_id = None
+        self._result = None
+
+    @property
+    def file_id(self):
+        return self._file_id
+
+    @file_id.setter
+    def file_id(self, value):
+        self._file_id = value
+    @property
+    def result(self):
+        return self._result
+
+    @result.setter
+    def result(self, value):
+        self._result = value
+
+    def parse_response_content(self, response_content):
+        response = super(AntfortuneFinresearchFileUploadInitializeResponse, self).parse_response_content(response_content)
+        if 'file_id' in response:
+            self.file_id = response['file_id']
+        if 'result' in response:
+            self.result = response['result']

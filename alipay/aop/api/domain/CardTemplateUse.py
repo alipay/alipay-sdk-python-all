@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CardCycle import CardCycle
 from alipay.aop.api.domain.CardDiscountRecoverRule import CardDiscountRecoverRule
 from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
+from alipay.aop.api.domain.CardUseMethodInfo import CardUseMethodInfo
 
 
 class CardTemplateUse(object):
@@ -15,9 +16,11 @@ class CardTemplateUse(object):
         self._discount_recover_rule_info = None
         self._expire_period = None
         self._period_price_list = None
+        self._reservation_url = None
         self._usable_count = None
         self._usable_shop_list = None
         self._use_instruction = None
+        self._use_method = None
 
     @property
     def cycle_info(self):
@@ -60,6 +63,13 @@ class CardTemplateUse(object):
                 else:
                     self._period_price_list.append(CardPeriodPrice.from_alipay_dict(i))
     @property
+    def reservation_url(self):
+        return self._reservation_url
+
+    @reservation_url.setter
+    def reservation_url(self, value):
+        self._reservation_url = value
+    @property
     def usable_count(self):
         return self._usable_count
 
@@ -83,6 +93,19 @@ class CardTemplateUse(object):
     @use_instruction.setter
     def use_instruction(self, value):
         self._use_instruction = value
+    @property
+    def use_method(self):
+        return self._use_method
+
+    @use_method.setter
+    def use_method(self, value):
+        if isinstance(value, list):
+            self._use_method = list()
+            for i in value:
+                if isinstance(i, CardUseMethodInfo):
+                    self._use_method.append(i)
+                else:
+                    self._use_method.append(CardUseMethodInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -112,6 +135,11 @@ class CardTemplateUse(object):
                 params['period_price_list'] = self.period_price_list.to_alipay_dict()
             else:
                 params['period_price_list'] = self.period_price_list
+        if self.reservation_url:
+            if hasattr(self.reservation_url, 'to_alipay_dict'):
+                params['reservation_url'] = self.reservation_url.to_alipay_dict()
+            else:
+                params['reservation_url'] = self.reservation_url
         if self.usable_count:
             if hasattr(self.usable_count, 'to_alipay_dict'):
                 params['usable_count'] = self.usable_count.to_alipay_dict()
@@ -132,6 +160,16 @@ class CardTemplateUse(object):
                 params['use_instruction'] = self.use_instruction.to_alipay_dict()
             else:
                 params['use_instruction'] = self.use_instruction
+        if self.use_method:
+            if isinstance(self.use_method, list):
+                for i in range(0, len(self.use_method)):
+                    element = self.use_method[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.use_method[i] = element.to_alipay_dict()
+            if hasattr(self.use_method, 'to_alipay_dict'):
+                params['use_method'] = self.use_method.to_alipay_dict()
+            else:
+                params['use_method'] = self.use_method
         return params
 
     @staticmethod
@@ -147,12 +185,16 @@ class CardTemplateUse(object):
             o.expire_period = d['expire_period']
         if 'period_price_list' in d:
             o.period_price_list = d['period_price_list']
+        if 'reservation_url' in d:
+            o.reservation_url = d['reservation_url']
         if 'usable_count' in d:
             o.usable_count = d['usable_count']
         if 'usable_shop_list' in d:
             o.usable_shop_list = d['usable_shop_list']
         if 'use_instruction' in d:
             o.use_instruction = d['use_instruction']
+        if 'use_method' in d:
+            o.use_method = d['use_method']
         return o
 
 
