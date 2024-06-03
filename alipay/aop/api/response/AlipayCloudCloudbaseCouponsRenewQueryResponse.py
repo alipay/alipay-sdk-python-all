@@ -3,7 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
-from alipay.aop.api.domain.Coupons import Coupons
+from alipay.aop.api.domain.CouponDetail import CouponDetail
 
 
 class AlipayCloudCloudbaseCouponsRenewQueryResponse(AlipayResponse):
@@ -18,10 +18,13 @@ class AlipayCloudCloudbaseCouponsRenewQueryResponse(AlipayResponse):
 
     @coupons.setter
     def coupons(self, value):
-        if isinstance(value, Coupons):
-            self._coupons = value
-        else:
-            self._coupons = Coupons.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._coupons = list()
+            for i in value:
+                if isinstance(i, CouponDetail):
+                    self._coupons.append(i)
+                else:
+                    self._coupons.append(CouponDetail.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseCouponsRenewQueryResponse, self).parse_response_content(response_content)

@@ -12,6 +12,7 @@ class ServiceDetailInfo(object):
         self._desc = None
         self._logo = None
         self._name = None
+        self._type = None
         self._url = None
 
     @property
@@ -43,6 +44,13 @@ class ServiceDetailInfo(object):
     def name(self, value):
         self._name = value
     @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def url(self):
         return self._url
 
@@ -73,6 +81,11 @@ class ServiceDetailInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.url:
             if hasattr(self.url, 'to_alipay_dict'):
                 params['url'] = self.url.to_alipay_dict()
@@ -93,6 +106,8 @@ class ServiceDetailInfo(object):
             o.logo = d['logo']
         if 'name' in d:
             o.name = d['name']
+        if 'type' in d:
+            o.type = d['type']
         if 'url' in d:
             o.url = d['url']
         return o

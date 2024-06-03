@@ -9,10 +9,12 @@ class AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse(AlipayRespon
 
     def __init__(self):
         super(AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse, self).__init__()
+        self._additional_operate_no = None
         self._amount = None
         self._biz_scene = None
         self._currency = None
         self._operate_no = None
+        self._org_operate_no = None
         self._out_trade_no = None
         self._pay_finish_time = None
         self._payee_account_type = None
@@ -29,6 +31,13 @@ class AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse(AlipayRespon
         self._transfer_msg = None
         self._transfer_status = None
 
+    @property
+    def additional_operate_no(self):
+        return self._additional_operate_no
+
+    @additional_operate_no.setter
+    def additional_operate_no(self, value):
+        self._additional_operate_no = value
     @property
     def amount(self):
         return self._amount
@@ -57,6 +66,13 @@ class AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse(AlipayRespon
     @operate_no.setter
     def operate_no(self, value):
         self._operate_no = value
+    @property
+    def org_operate_no(self):
+        return self._org_operate_no
+
+    @org_operate_no.setter
+    def org_operate_no(self, value):
+        self._org_operate_no = value
     @property
     def out_trade_no(self):
         return self._out_trade_no
@@ -165,6 +181,8 @@ class AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse(AlipayRespon
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse, self).parse_response_content(response_content)
+        if 'additional_operate_no' in response:
+            self.additional_operate_no = response['additional_operate_no']
         if 'amount' in response:
             self.amount = response['amount']
         if 'biz_scene' in response:
@@ -173,6 +191,8 @@ class AlipayEbppIndustrySupervisionFundstransferQuerystatusResponse(AlipayRespon
             self.currency = response['currency']
         if 'operate_no' in response:
             self.operate_no = response['operate_no']
+        if 'org_operate_no' in response:
+            self.org_operate_no = response['org_operate_no']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
         if 'pay_finish_time' in response:

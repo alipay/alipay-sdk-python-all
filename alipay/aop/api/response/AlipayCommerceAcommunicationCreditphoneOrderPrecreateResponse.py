@@ -12,6 +12,7 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateResponse(AlipayRespon
         self._alipay_order_no = None
         self._biz_params = None
         self._out_order_no = None
+        self._page_order_no = None
 
     @property
     def alipay_order_no(self):
@@ -34,6 +35,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateResponse(AlipayRespon
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def page_order_no(self):
+        return self._page_order_no
+
+    @page_order_no.setter
+    def page_order_no(self, value):
+        self._page_order_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceAcommunicationCreditphoneOrderPrecreateResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateResponse(AlipayRespon
             self.biz_params = response['biz_params']
         if 'out_order_no' in response:
             self.out_order_no = response['out_order_no']
+        if 'page_order_no' in response:
+            self.page_order_no = response['page_order_no']

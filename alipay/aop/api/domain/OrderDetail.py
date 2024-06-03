@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BusinessParams import BusinessParams
 from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.PromoParam import PromoParam
 from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
 from alipay.aop.api.domain.SubMerchant import SubMerchant
@@ -22,6 +23,7 @@ class OrderDetail(object):
         self._out_trade_no = None
         self._passback_params = None
         self._product_code = None
+        self._promo_params = None
         self._royalty_info = None
         self._seller_id = None
         self._seller_logon_id = None
@@ -99,6 +101,16 @@ class OrderDetail(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def promo_params(self):
+        return self._promo_params
+
+    @promo_params.setter
+    def promo_params(self, value):
+        if isinstance(value, PromoParam):
+            self._promo_params = value
+        else:
+            self._promo_params = PromoParam.from_alipay_dict(value)
     @property
     def royalty_info(self):
         return self._royalty_info
@@ -213,6 +225,11 @@ class OrderDetail(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.promo_params:
+            if hasattr(self.promo_params, 'to_alipay_dict'):
+                params['promo_params'] = self.promo_params.to_alipay_dict()
+            else:
+                params['promo_params'] = self.promo_params
         if self.royalty_info:
             if hasattr(self.royalty_info, 'to_alipay_dict'):
                 params['royalty_info'] = self.royalty_info.to_alipay_dict()
@@ -276,6 +293,8 @@ class OrderDetail(object):
             o.passback_params = d['passback_params']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'promo_params' in d:
+            o.promo_params = d['promo_params']
         if 'royalty_info' in d:
             o.royalty_info = d['royalty_info']
         if 'seller_id' in d:

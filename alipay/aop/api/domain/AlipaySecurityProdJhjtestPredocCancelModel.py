@@ -12,6 +12,9 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
     def __init__(self):
         self._com_a = None
         self._com_c = None
+        self._is_s = None
+        self._isasdasd = None
+        self._sdd = None
         self._test_a = None
         self._test_a_openid = None
 
@@ -35,6 +38,27 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
             self._com_c = value
         else:
             self._com_c = JhjTestNew.from_alipay_dict(value)
+    @property
+    def is_s(self):
+        return self._is_s
+
+    @is_s.setter
+    def is_s(self, value):
+        self._is_s = value
+    @property
+    def isasdasd(self):
+        return self._isasdasd
+
+    @isasdasd.setter
+    def isasdasd(self, value):
+        self._isasdasd = value
+    @property
+    def sdd(self):
+        return self._sdd
+
+    @sdd.setter
+    def sdd(self, value):
+        self._sdd = value
     @property
     def test_a(self):
         return self._test_a
@@ -63,6 +87,21 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
                 params['com_c'] = self.com_c.to_alipay_dict()
             else:
                 params['com_c'] = self.com_c
+        if self.is_s:
+            if hasattr(self.is_s, 'to_alipay_dict'):
+                params['is_s'] = self.is_s.to_alipay_dict()
+            else:
+                params['is_s'] = self.is_s
+        if self.isasdasd:
+            if hasattr(self.isasdasd, 'to_alipay_dict'):
+                params['isasdasd'] = self.isasdasd.to_alipay_dict()
+            else:
+                params['isasdasd'] = self.isasdasd
+        if self.sdd:
+            if hasattr(self.sdd, 'to_alipay_dict'):
+                params['sdd'] = self.sdd.to_alipay_dict()
+            else:
+                params['sdd'] = self.sdd
         if self.test_a:
             if hasattr(self.test_a, 'to_alipay_dict'):
                 params['test_a'] = self.test_a.to_alipay_dict()
@@ -84,6 +123,12 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
             o.com_a = d['com_a']
         if 'com_c' in d:
             o.com_c = d['com_c']
+        if 'is_s' in d:
+            o.is_s = d['is_s']
+        if 'isasdasd' in d:
+            o.isasdasd = d['isasdasd']
+        if 'sdd' in d:
+            o.sdd = d['sdd']
         if 'test_a' in d:
             o.test_a = d['test_a']
         if 'test_a_openid' in d:

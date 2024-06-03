@@ -16,6 +16,7 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
         self._merchant_name = None
         self._province = None
         self._request_no = None
+        self._spu_id = None
 
     @property
     def alipay_open_id(self):
@@ -73,6 +74,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
     @request_no.setter
     def request_no(self, value):
         self._request_no = value
+    @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +125,11 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
                 params['request_no'] = self.request_no.to_alipay_dict()
             else:
                 params['request_no'] = self.request_no
+        if self.spu_id:
+            if hasattr(self.spu_id, 'to_alipay_dict'):
+                params['spu_id'] = self.spu_id.to_alipay_dict()
+            else:
+                params['spu_id'] = self.spu_id
         return params
 
     @staticmethod
@@ -140,6 +153,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
             o.province = d['province']
         if 'request_no' in d:
             o.request_no = d['request_no']
+        if 'spu_id' in d:
+            o.spu_id = d['spu_id']
         return o
 
 

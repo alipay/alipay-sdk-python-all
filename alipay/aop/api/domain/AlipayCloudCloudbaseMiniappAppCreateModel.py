@@ -10,6 +10,7 @@ class AlipayCloudCloudbaseMiniappAppCreateModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._app_name = None
+        self._biz_app_id = None
         self._open_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayCloudCloudbaseMiniappAppCreateModel(object):
     @app_name.setter
     def app_name(self, value):
         self._app_name = value
+    @property
+    def biz_app_id(self):
+        return self._biz_app_id
+
+    @biz_app_id.setter
+    def biz_app_id(self, value):
+        self._biz_app_id = value
     @property
     def open_id(self):
         return self._open_id
@@ -47,6 +55,11 @@ class AlipayCloudCloudbaseMiniappAppCreateModel(object):
                 params['app_name'] = self.app_name.to_alipay_dict()
             else:
                 params['app_name'] = self.app_name
+        if self.biz_app_id:
+            if hasattr(self.biz_app_id, 'to_alipay_dict'):
+                params['biz_app_id'] = self.biz_app_id.to_alipay_dict()
+            else:
+                params['biz_app_id'] = self.biz_app_id
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayCloudCloudbaseMiniappAppCreateModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'app_name' in d:
             o.app_name = d['app_name']
+        if 'biz_app_id' in d:
+            o.biz_app_id = d['biz_app_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
         return o

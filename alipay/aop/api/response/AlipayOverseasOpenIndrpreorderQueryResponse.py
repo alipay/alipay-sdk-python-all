@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.IndrISVAmountInfoDTO import IndrISVAmountInfoDTO
+from alipay.aop.api.domain.IndrISVPaymentInfoDTO import IndrISVPaymentInfoDTO
 from alipay.aop.api.domain.IndrISVAmountInfoDTO import IndrISVAmountInfoDTO
 from alipay.aop.api.domain.IndrISVResult import IndrISVResult
 from alipay.aop.api.domain.IndrISVOrderStatusDTO import IndrISVOrderStatusDTO
@@ -14,6 +15,7 @@ class AlipayOverseasOpenIndrpreorderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOverseasOpenIndrpreorderQueryResponse, self).__init__()
         self._payment_amount = None
+        self._payment_info = None
         self._pre_order_id = None
         self._refund_amount = None
         self._result = None
@@ -30,6 +32,16 @@ class AlipayOverseasOpenIndrpreorderQueryResponse(AlipayResponse):
             self._payment_amount = value
         else:
             self._payment_amount = IndrISVAmountInfoDTO.from_alipay_dict(value)
+    @property
+    def payment_info(self):
+        return self._payment_info
+
+    @payment_info.setter
+    def payment_info(self, value):
+        if isinstance(value, IndrISVPaymentInfoDTO):
+            self._payment_info = value
+        else:
+            self._payment_info = IndrISVPaymentInfoDTO.from_alipay_dict(value)
     @property
     def pre_order_id(self):
         return self._pre_order_id
@@ -79,6 +91,8 @@ class AlipayOverseasOpenIndrpreorderQueryResponse(AlipayResponse):
         response = super(AlipayOverseasOpenIndrpreorderQueryResponse, self).parse_response_content(response_content)
         if 'payment_amount' in response:
             self.payment_amount = response['payment_amount']
+        if 'payment_info' in response:
+            self.payment_info = response['payment_info']
         if 'pre_order_id' in response:
             self.pre_order_id = response['pre_order_id']
         if 'refund_amount' in response:

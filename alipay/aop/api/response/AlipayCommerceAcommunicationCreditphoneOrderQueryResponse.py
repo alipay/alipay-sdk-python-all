@@ -12,6 +12,7 @@ class AlipayCommerceAcommunicationCreditphoneOrderQueryResponse(AlipayResponse):
         self._alipay_order_no = None
         self._alipay_user_id = None
         self._freeze_amount = None
+        self._page_order_no = None
         self._sign_time = None
         self._status = None
 
@@ -37,6 +38,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderQueryResponse(AlipayResponse):
     def freeze_amount(self, value):
         self._freeze_amount = value
     @property
+    def page_order_no(self):
+        return self._page_order_no
+
+    @page_order_no.setter
+    def page_order_no(self, value):
+        self._page_order_no = value
+    @property
     def sign_time(self):
         return self._sign_time
 
@@ -59,6 +67,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderQueryResponse(AlipayResponse):
             self.alipay_user_id = response['alipay_user_id']
         if 'freeze_amount' in response:
             self.freeze_amount = response['freeze_amount']
+        if 'page_order_no' in response:
+            self.page_order_no = response['page_order_no']
         if 'sign_time' in response:
             self.sign_time = response['sign_time']
         if 'status' in response:

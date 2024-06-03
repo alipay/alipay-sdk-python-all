@@ -16,6 +16,7 @@ class LocalItemSkuQueryVO(object):
         self._sale_status = None
         self._sku_id = None
         self._stock_num = None
+        self._thumb_img_url = None
 
     @property
     def attrs(self):
@@ -72,6 +73,13 @@ class LocalItemSkuQueryVO(object):
     @stock_num.setter
     def stock_num(self, value):
         self._stock_num = value
+    @property
+    def thumb_img_url(self):
+        return self._thumb_img_url
+
+    @thumb_img_url.setter
+    def thumb_img_url(self, value):
+        self._thumb_img_url = value
 
 
     def to_alipay_dict(self):
@@ -116,6 +124,11 @@ class LocalItemSkuQueryVO(object):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
             else:
                 params['stock_num'] = self.stock_num
+        if self.thumb_img_url:
+            if hasattr(self.thumb_img_url, 'to_alipay_dict'):
+                params['thumb_img_url'] = self.thumb_img_url.to_alipay_dict()
+            else:
+                params['thumb_img_url'] = self.thumb_img_url
         return params
 
     @staticmethod
@@ -137,6 +150,8 @@ class LocalItemSkuQueryVO(object):
             o.sku_id = d['sku_id']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
+        if 'thumb_img_url' in d:
+            o.thumb_img_url = d['thumb_img_url']
         return o
 
 

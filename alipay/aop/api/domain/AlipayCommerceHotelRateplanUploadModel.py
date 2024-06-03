@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BookingRule import BookingRule
+from alipay.aop.api.domain.HotelPromotionStaticInfo import HotelPromotionStaticInfo
 from alipay.aop.api.domain.RatePlan import RatePlan
 from alipay.aop.api.domain.RefundRule import RefundRule
 
@@ -14,6 +15,7 @@ class AlipayCommerceHotelRateplanUploadModel(object):
         self._booking_rules = None
         self._hotel_id = None
         self._increment = None
+        self._promotion_static_info_list = None
         self._rate_plans = None
         self._refund_rules = None
 
@@ -44,6 +46,19 @@ class AlipayCommerceHotelRateplanUploadModel(object):
     @increment.setter
     def increment(self, value):
         self._increment = value
+    @property
+    def promotion_static_info_list(self):
+        return self._promotion_static_info_list
+
+    @promotion_static_info_list.setter
+    def promotion_static_info_list(self, value):
+        if isinstance(value, list):
+            self._promotion_static_info_list = list()
+            for i in value:
+                if isinstance(i, HotelPromotionStaticInfo):
+                    self._promotion_static_info_list.append(i)
+                else:
+                    self._promotion_static_info_list.append(HotelPromotionStaticInfo.from_alipay_dict(i))
     @property
     def rate_plans(self):
         return self._rate_plans
@@ -94,6 +109,16 @@ class AlipayCommerceHotelRateplanUploadModel(object):
                 params['increment'] = self.increment.to_alipay_dict()
             else:
                 params['increment'] = self.increment
+        if self.promotion_static_info_list:
+            if isinstance(self.promotion_static_info_list, list):
+                for i in range(0, len(self.promotion_static_info_list)):
+                    element = self.promotion_static_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.promotion_static_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.promotion_static_info_list, 'to_alipay_dict'):
+                params['promotion_static_info_list'] = self.promotion_static_info_list.to_alipay_dict()
+            else:
+                params['promotion_static_info_list'] = self.promotion_static_info_list
         if self.rate_plans:
             if isinstance(self.rate_plans, list):
                 for i in range(0, len(self.rate_plans)):
@@ -127,6 +152,8 @@ class AlipayCommerceHotelRateplanUploadModel(object):
             o.hotel_id = d['hotel_id']
         if 'increment' in d:
             o.increment = d['increment']
+        if 'promotion_static_info_list' in d:
+            o.promotion_static_info_list = d['promotion_static_info_list']
         if 'rate_plans' in d:
             o.rate_plans = d['rate_plans']
         if 'refund_rules' in d:

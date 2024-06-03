@@ -9,12 +9,20 @@ class AlipayOpenAppItemCategoryConsultResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenAppItemCategoryConsultResponse, self).__init__()
+        self._cat_level = None
         self._category_error_code = None
         self._category_error_desc = None
         self._category_id = None
         self._category_name = None
         self._status = None
 
+    @property
+    def cat_level(self):
+        return self._cat_level
+
+    @cat_level.setter
+    def cat_level(self, value):
+        self._cat_level = value
     @property
     def category_error_code(self):
         return self._category_error_code
@@ -53,6 +61,8 @@ class AlipayOpenAppItemCategoryConsultResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAppItemCategoryConsultResponse, self).parse_response_content(response_content)
+        if 'cat_level' in response:
+            self.cat_level = response['cat_level']
         if 'category_error_code' in response:
             self.category_error_code = response['category_error_code']
         if 'category_error_desc' in response:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.HotelPromotionDetail import HotelPromotionDetail
 
 
 class NightlyRate(object):
@@ -15,6 +16,7 @@ class NightlyRate(object):
         self._date = None
         self._member = None
         self._price_discount_value = None
+        self._promotion_list = None
         self._promotion_tag = None
         self._promotion_type = None
         self._status = None
@@ -68,6 +70,19 @@ class NightlyRate(object):
     @price_discount_value.setter
     def price_discount_value(self, value):
         self._price_discount_value = value
+    @property
+    def promotion_list(self):
+        return self._promotion_list
+
+    @promotion_list.setter
+    def promotion_list(self, value):
+        if isinstance(value, list):
+            self._promotion_list = list()
+            for i in value:
+                if isinstance(i, HotelPromotionDetail):
+                    self._promotion_list.append(i)
+                else:
+                    self._promotion_list.append(HotelPromotionDetail.from_alipay_dict(i))
     @property
     def promotion_tag(self):
         return self._promotion_tag
@@ -128,6 +143,16 @@ class NightlyRate(object):
                 params['price_discount_value'] = self.price_discount_value.to_alipay_dict()
             else:
                 params['price_discount_value'] = self.price_discount_value
+        if self.promotion_list:
+            if isinstance(self.promotion_list, list):
+                for i in range(0, len(self.promotion_list)):
+                    element = self.promotion_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.promotion_list[i] = element.to_alipay_dict()
+            if hasattr(self.promotion_list, 'to_alipay_dict'):
+                params['promotion_list'] = self.promotion_list.to_alipay_dict()
+            else:
+                params['promotion_list'] = self.promotion_list
         if self.promotion_tag:
             if hasattr(self.promotion_tag, 'to_alipay_dict'):
                 params['promotion_tag'] = self.promotion_tag.to_alipay_dict()
@@ -164,6 +189,8 @@ class NightlyRate(object):
             o.member = d['member']
         if 'price_discount_value' in d:
             o.price_discount_value = d['price_discount_value']
+        if 'promotion_list' in d:
+            o.promotion_list = d['promotion_list']
         if 'promotion_tag' in d:
             o.promotion_tag = d['promotion_tag']
         if 'promotion_type' in d:

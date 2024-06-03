@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEbppIndustrySupervisionAccountQueryModel(object):
 
     def __init__(self):
+        self._account_no = None
         self._biz_scene = None
         self._merchant_alipay_open_id = None
         self._merchant_alipay_uid = None
         self._parent_ext_account_no = None
         self._sub_account_type = None
 
+    @property
+    def account_no(self):
+        return self._account_no
+
+    @account_no.setter
+    def account_no(self, value):
+        self._account_no = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -53,6 +61,11 @@ class AlipayEbppIndustrySupervisionAccountQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.account_no:
+            if hasattr(self.account_no, 'to_alipay_dict'):
+                params['account_no'] = self.account_no.to_alipay_dict()
+            else:
+                params['account_no'] = self.account_no
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -85,6 +98,8 @@ class AlipayEbppIndustrySupervisionAccountQueryModel(object):
         if not d:
             return None
         o = AlipayEbppIndustrySupervisionAccountQueryModel()
+        if 'account_no' in d:
+            o.account_no = d['account_no']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'merchant_alipay_open_id' in d:

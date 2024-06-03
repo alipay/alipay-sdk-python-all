@@ -18,6 +18,7 @@ class TaskInstanceInfo(object):
         self._target_indicator = None
         self._task_desc = None
         self._task_end_time = None
+        self._task_img = None
         self._task_instance_id = None
         self._task_logo = None
         self._task_name = None
@@ -98,6 +99,13 @@ class TaskInstanceInfo(object):
     @task_end_time.setter
     def task_end_time(self, value):
         self._task_end_time = value
+    @property
+    def task_img(self):
+        return self._task_img
+
+    @task_img.setter
+    def task_img(self, value):
+        self._task_img = value
     @property
     def task_instance_id(self):
         return self._task_instance_id
@@ -215,6 +223,11 @@ class TaskInstanceInfo(object):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
             else:
                 params['task_end_time'] = self.task_end_time
+        if self.task_img:
+            if hasattr(self.task_img, 'to_alipay_dict'):
+                params['task_img'] = self.task_img.to_alipay_dict()
+            else:
+                params['task_img'] = self.task_img
         if self.task_instance_id:
             if hasattr(self.task_instance_id, 'to_alipay_dict'):
                 params['task_instance_id'] = self.task_instance_id.to_alipay_dict()
@@ -287,6 +300,8 @@ class TaskInstanceInfo(object):
             o.task_desc = d['task_desc']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
+        if 'task_img' in d:
+            o.task_img = d['task_img']
         if 'task_instance_id' in d:
             o.task_instance_id = d['task_instance_id']
         if 'task_logo' in d:

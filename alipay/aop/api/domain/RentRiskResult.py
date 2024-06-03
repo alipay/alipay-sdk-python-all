@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SubRentRiskResult import SubRentRiskResult
+from alipay.aop.api.domain.SubRentRiskItem import SubRentRiskItem
 
 
 class RentRiskResult(object):
@@ -14,6 +15,7 @@ class RentRiskResult(object):
         self._risk_name = None
         self._risk_rank = None
         self._sub_rent_risk_result = None
+        self._sub_risk_result_list = None
 
     @property
     def record_id(self):
@@ -53,6 +55,19 @@ class RentRiskResult(object):
             self._sub_rent_risk_result = value
         else:
             self._sub_rent_risk_result = SubRentRiskResult.from_alipay_dict(value)
+    @property
+    def sub_risk_result_list(self):
+        return self._sub_risk_result_list
+
+    @sub_risk_result_list.setter
+    def sub_risk_result_list(self, value):
+        if isinstance(value, list):
+            self._sub_risk_result_list = list()
+            for i in value:
+                if isinstance(i, SubRentRiskItem):
+                    self._sub_risk_result_list.append(i)
+                else:
+                    self._sub_risk_result_list.append(SubRentRiskItem.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -82,6 +97,16 @@ class RentRiskResult(object):
                 params['sub_rent_risk_result'] = self.sub_rent_risk_result.to_alipay_dict()
             else:
                 params['sub_rent_risk_result'] = self.sub_rent_risk_result
+        if self.sub_risk_result_list:
+            if isinstance(self.sub_risk_result_list, list):
+                for i in range(0, len(self.sub_risk_result_list)):
+                    element = self.sub_risk_result_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sub_risk_result_list[i] = element.to_alipay_dict()
+            if hasattr(self.sub_risk_result_list, 'to_alipay_dict'):
+                params['sub_risk_result_list'] = self.sub_risk_result_list.to_alipay_dict()
+            else:
+                params['sub_risk_result_list'] = self.sub_risk_result_list
         return params
 
     @staticmethod
@@ -99,6 +124,8 @@ class RentRiskResult(object):
             o.risk_rank = d['risk_rank']
         if 'sub_rent_risk_result' in d:
             o.sub_rent_risk_result = d['sub_rent_risk_result']
+        if 'sub_risk_result_list' in d:
+            o.sub_risk_result_list = d['sub_risk_result_list']
         return o
 
 

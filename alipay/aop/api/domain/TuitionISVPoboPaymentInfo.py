@@ -20,6 +20,7 @@ class TuitionISVPoboPaymentInfo(object):
         self._card_start_date = None
         self._cvv = None
         self._pre_order_id = None
+        self._quote_price = None
 
     @property
     def additional_payment_info(self):
@@ -97,6 +98,13 @@ class TuitionISVPoboPaymentInfo(object):
     @pre_order_id.setter
     def pre_order_id(self, value):
         self._pre_order_id = value
+    @property
+    def quote_price(self):
+        return self._quote_price
+
+    @quote_price.setter
+    def quote_price(self, value):
+        self._quote_price = value
 
 
     def to_alipay_dict(self):
@@ -151,6 +159,11 @@ class TuitionISVPoboPaymentInfo(object):
                 params['pre_order_id'] = self.pre_order_id.to_alipay_dict()
             else:
                 params['pre_order_id'] = self.pre_order_id
+        if self.quote_price:
+            if hasattr(self.quote_price, 'to_alipay_dict'):
+                params['quote_price'] = self.quote_price.to_alipay_dict()
+            else:
+                params['quote_price'] = self.quote_price
         return params
 
     @staticmethod
@@ -178,6 +191,8 @@ class TuitionISVPoboPaymentInfo(object):
             o.cvv = d['cvv']
         if 'pre_order_id' in d:
             o.pre_order_id = d['pre_order_id']
+        if 'quote_price' in d:
+            o.quote_price = d['quote_price']
         return o
 
 

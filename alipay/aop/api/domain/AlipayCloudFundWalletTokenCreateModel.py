@@ -9,10 +9,12 @@ class AlipayCloudFundWalletTokenCreateModel(object):
 
     def __init__(self):
         self._back_url = None
+        self._biz_scene = None
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
         self._out_biz_no = None
+        self._product_code = None
         self._real_name = None
         self._skip_result = None
         self._wallet_template_id = None
@@ -24,6 +26,13 @@ class AlipayCloudFundWalletTokenCreateModel(object):
     @back_url.setter
     def back_url(self, value):
         self._back_url = value
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def identity(self):
         return self._identity
@@ -52,6 +61,13 @@ class AlipayCloudFundWalletTokenCreateModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def real_name(self):
         return self._real_name
@@ -82,6 +98,11 @@ class AlipayCloudFundWalletTokenCreateModel(object):
                 params['back_url'] = self.back_url.to_alipay_dict()
             else:
                 params['back_url'] = self.back_url
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -102,6 +123,11 @@ class AlipayCloudFundWalletTokenCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.real_name:
             if hasattr(self.real_name, 'to_alipay_dict'):
                 params['real_name'] = self.real_name.to_alipay_dict()
@@ -126,6 +152,8 @@ class AlipayCloudFundWalletTokenCreateModel(object):
         o = AlipayCloudFundWalletTokenCreateModel()
         if 'back_url' in d:
             o.back_url = d['back_url']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_open_id' in d:
@@ -134,6 +162,8 @@ class AlipayCloudFundWalletTokenCreateModel(object):
             o.identity_type = d['identity_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'real_name' in d:
             o.real_name = d['real_name']
         if 'skip_result' in d:

@@ -30,6 +30,7 @@ class AlipayOpenAppItemCreateModel(object):
         self._price_unit = None
         self._sale_price = None
         self._sale_status = None
+        self._skip_algorithm_check = None
         self._skus = None
         self._stock_num = None
         self._title = None
@@ -179,6 +180,13 @@ class AlipayOpenAppItemCreateModel(object):
     def sale_status(self, value):
         self._sale_status = value
     @property
+    def skip_algorithm_check(self):
+        return self._skip_algorithm_check
+
+    @skip_algorithm_check.setter
+    def skip_algorithm_check(self, value):
+        self._skip_algorithm_check = value
+    @property
     def skus(self):
         return self._skus
 
@@ -314,6 +322,11 @@ class AlipayOpenAppItemCreateModel(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.skip_algorithm_check:
+            if hasattr(self.skip_algorithm_check, 'to_alipay_dict'):
+                params['skip_algorithm_check'] = self.skip_algorithm_check.to_alipay_dict()
+            else:
+                params['skip_algorithm_check'] = self.skip_algorithm_check
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -377,6 +390,8 @@ class AlipayOpenAppItemCreateModel(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'skip_algorithm_check' in d:
+            o.skip_algorithm_check = d['skip_algorithm_check']
         if 'skus' in d:
             o.skus = d['skus']
         if 'stock_num' in d:

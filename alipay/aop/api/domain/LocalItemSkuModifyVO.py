@@ -16,6 +16,7 @@ class LocalItemSkuModifyVO(object):
         self._sku_attrs = None
         self._sku_id = None
         self._stock_num = None
+        self._thumb_img_id = None
 
     @property
     def original_price(self):
@@ -72,6 +73,13 @@ class LocalItemSkuModifyVO(object):
     @stock_num.setter
     def stock_num(self, value):
         self._stock_num = value
+    @property
+    def thumb_img_id(self):
+        return self._thumb_img_id
+
+    @thumb_img_id.setter
+    def thumb_img_id(self, value):
+        self._thumb_img_id = value
 
 
     def to_alipay_dict(self):
@@ -116,6 +124,11 @@ class LocalItemSkuModifyVO(object):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
             else:
                 params['stock_num'] = self.stock_num
+        if self.thumb_img_id:
+            if hasattr(self.thumb_img_id, 'to_alipay_dict'):
+                params['thumb_img_id'] = self.thumb_img_id.to_alipay_dict()
+            else:
+                params['thumb_img_id'] = self.thumb_img_id
         return params
 
     @staticmethod
@@ -137,6 +150,8 @@ class LocalItemSkuModifyVO(object):
             o.sku_id = d['sku_id']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
+        if 'thumb_img_id' in d:
+            o.thumb_img_id = d['thumb_img_id']
         return o
 
 

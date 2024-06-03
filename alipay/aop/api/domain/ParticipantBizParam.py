@@ -13,6 +13,7 @@ class ParticipantBizParam(object):
         self._fund_ratio = None
         self._fund_type = None
         self._sub_merchant_id = None
+        self._sub_merchant_id_type = None
 
     @property
     def account_book_id(self):
@@ -49,6 +50,13 @@ class ParticipantBizParam(object):
     @sub_merchant_id.setter
     def sub_merchant_id(self, value):
         self._sub_merchant_id = value
+    @property
+    def sub_merchant_id_type(self):
+        return self._sub_merchant_id_type
+
+    @sub_merchant_id_type.setter
+    def sub_merchant_id_type(self, value):
+        self._sub_merchant_id_type = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class ParticipantBizParam(object):
                 params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
             else:
                 params['sub_merchant_id'] = self.sub_merchant_id
+        if self.sub_merchant_id_type:
+            if hasattr(self.sub_merchant_id_type, 'to_alipay_dict'):
+                params['sub_merchant_id_type'] = self.sub_merchant_id_type.to_alipay_dict()
+            else:
+                params['sub_merchant_id_type'] = self.sub_merchant_id_type
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class ParticipantBizParam(object):
             o.fund_type = d['fund_type']
         if 'sub_merchant_id' in d:
             o.sub_merchant_id = d['sub_merchant_id']
+        if 'sub_merchant_id_type' in d:
+            o.sub_merchant_id_type = d['sub_merchant_id_type']
         return o
 
 

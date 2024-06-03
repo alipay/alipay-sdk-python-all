@@ -13,6 +13,7 @@ class AlipayEbppIndustrySupervisionBillBatchqueryModel(object):
         self._merchant_account_no = None
         self._page_index = None
         self._page_size = None
+        self._scene = None
         self._start_time = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayEbppIndustrySupervisionBillBatchqueryModel(object):
     def page_size(self, value):
         self._page_size = value
     @property
+    def scene(self):
+        return self._scene
+
+    @scene.setter
+    def scene(self, value):
+        self._scene = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -86,6 +94,11 @@ class AlipayEbppIndustrySupervisionBillBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.scene:
+            if hasattr(self.scene, 'to_alipay_dict'):
+                params['scene'] = self.scene.to_alipay_dict()
+            else:
+                params['scene'] = self.scene
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayEbppIndustrySupervisionBillBatchqueryModel(object):
             o.page_index = d['page_index']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'scene' in d:
+            o.scene = d['scene']
         if 'start_time' in d:
             o.start_time = d['start_time']
         return o

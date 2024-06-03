@@ -10,6 +10,7 @@ class MaterialUnit(object):
     def __init__(self):
         self._key = None
         self._material = None
+        self._material_instance_id = None
         self._play_frequency = None
         self._play_time = None
         self._type = None
@@ -28,6 +29,13 @@ class MaterialUnit(object):
     @material.setter
     def material(self, value):
         self._material = value
+    @property
+    def material_instance_id(self):
+        return self._material_instance_id
+
+    @material_instance_id.setter
+    def material_instance_id(self, value):
+        self._material_instance_id = value
     @property
     def play_frequency(self):
         return self._play_frequency
@@ -63,6 +71,11 @@ class MaterialUnit(object):
                 params['material'] = self.material.to_alipay_dict()
             else:
                 params['material'] = self.material
+        if self.material_instance_id:
+            if hasattr(self.material_instance_id, 'to_alipay_dict'):
+                params['material_instance_id'] = self.material_instance_id.to_alipay_dict()
+            else:
+                params['material_instance_id'] = self.material_instance_id
         if self.play_frequency:
             if hasattr(self.play_frequency, 'to_alipay_dict'):
                 params['play_frequency'] = self.play_frequency.to_alipay_dict()
@@ -89,6 +102,8 @@ class MaterialUnit(object):
             o.key = d['key']
         if 'material' in d:
             o.material = d['material']
+        if 'material_instance_id' in d:
+            o.material_instance_id = d['material_instance_id']
         if 'play_frequency' in d:
             o.play_frequency = d['play_frequency']
         if 'play_time' in d:

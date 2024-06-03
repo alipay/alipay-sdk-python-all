@@ -8,13 +8,25 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudFundWalletOperationQueryModel(object):
 
     def __init__(self):
+        self._biz_scene = None
         self._biz_types = None
         self._current_page = None
         self._end_biz_dt = None
+        self._identity = None
+        self._identity_open_id = None
+        self._identity_type = None
         self._page_size = None
+        self._product_code = None
         self._start_biz_dt = None
         self._user_wallet_id = None
 
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def biz_types(self):
         return self._biz_types
@@ -40,12 +52,40 @@ class AlipayCloudFundWalletOperationQueryModel(object):
     def end_biz_dt(self, value):
         self._end_biz_dt = value
     @property
+    def identity(self):
+        return self._identity
+
+    @identity.setter
+    def identity(self, value):
+        self._identity = value
+    @property
+    def identity_open_id(self):
+        return self._identity_open_id
+
+    @identity_open_id.setter
+    def identity_open_id(self, value):
+        self._identity_open_id = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
+    @property
     def page_size(self):
         return self._page_size
 
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def start_biz_dt(self):
         return self._start_biz_dt
@@ -64,6 +104,11 @@ class AlipayCloudFundWalletOperationQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.biz_types:
             if isinstance(self.biz_types, list):
                 for i in range(0, len(self.biz_types)):
@@ -84,11 +129,31 @@ class AlipayCloudFundWalletOperationQueryModel(object):
                 params['end_biz_dt'] = self.end_biz_dt.to_alipay_dict()
             else:
                 params['end_biz_dt'] = self.end_biz_dt
+        if self.identity:
+            if hasattr(self.identity, 'to_alipay_dict'):
+                params['identity'] = self.identity.to_alipay_dict()
+            else:
+                params['identity'] = self.identity
+        if self.identity_open_id:
+            if hasattr(self.identity_open_id, 'to_alipay_dict'):
+                params['identity_open_id'] = self.identity_open_id.to_alipay_dict()
+            else:
+                params['identity_open_id'] = self.identity_open_id
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.start_biz_dt:
             if hasattr(self.start_biz_dt, 'to_alipay_dict'):
                 params['start_biz_dt'] = self.start_biz_dt.to_alipay_dict()
@@ -106,14 +171,24 @@ class AlipayCloudFundWalletOperationQueryModel(object):
         if not d:
             return None
         o = AlipayCloudFundWalletOperationQueryModel()
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'biz_types' in d:
             o.biz_types = d['biz_types']
         if 'current_page' in d:
             o.current_page = d['current_page']
         if 'end_biz_dt' in d:
             o.end_biz_dt = d['end_biz_dt']
+        if 'identity' in d:
+            o.identity = d['identity']
+        if 'identity_open_id' in d:
+            o.identity_open_id = d['identity_open_id']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'start_biz_dt' in d:
             o.start_biz_dt = d['start_biz_dt']
         if 'user_wallet_id' in d:

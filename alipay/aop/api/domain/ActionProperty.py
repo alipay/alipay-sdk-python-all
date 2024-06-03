@@ -9,6 +9,7 @@ class ActionProperty(object):
 
     def __init__(self):
         self._key = None
+        self._material_instance_id = None
         self._type = None
         self._value = None
 
@@ -19,6 +20,13 @@ class ActionProperty(object):
     @key.setter
     def key(self, value):
         self._key = value
+    @property
+    def material_instance_id(self):
+        return self._material_instance_id
+
+    @material_instance_id.setter
+    def material_instance_id(self, value):
+        self._material_instance_id = value
     @property
     def type(self):
         return self._type
@@ -42,6 +50,11 @@ class ActionProperty(object):
                 params['key'] = self.key.to_alipay_dict()
             else:
                 params['key'] = self.key
+        if self.material_instance_id:
+            if hasattr(self.material_instance_id, 'to_alipay_dict'):
+                params['material_instance_id'] = self.material_instance_id.to_alipay_dict()
+            else:
+                params['material_instance_id'] = self.material_instance_id
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -61,6 +74,8 @@ class ActionProperty(object):
         o = ActionProperty()
         if 'key' in d:
             o.key = d['key']
+        if 'material_instance_id' in d:
+            o.material_instance_id = d['material_instance_id']
         if 'type' in d:
             o.type = d['type']
         if 'value' in d:

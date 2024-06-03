@@ -9,6 +9,7 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
 
     def __init__(self):
         self._buyer_alipay_id = None
+        self._buyer_open_id = None
         self._list_type = None
         self._pd_code = None
         self._seller_login_id = None
@@ -20,6 +21,13 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
     @buyer_alipay_id.setter
     def buyer_alipay_id(self, value):
         self._buyer_alipay_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
     @property
     def list_type(self):
         return self._list_type
@@ -50,6 +58,11 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
                 params['buyer_alipay_id'] = self.buyer_alipay_id.to_alipay_dict()
             else:
                 params['buyer_alipay_id'] = self.buyer_alipay_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
         if self.list_type:
             if hasattr(self.list_type, 'to_alipay_dict'):
                 params['list_type'] = self.list_type.to_alipay_dict()
@@ -74,6 +87,8 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
         o = MybankCreditSupplychainFactoringSelleradmitQueryModel()
         if 'buyer_alipay_id' in d:
             o.buyer_alipay_id = d['buyer_alipay_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
         if 'list_type' in d:
             o.list_type = d['list_type']
         if 'pd_code' in d:

@@ -13,6 +13,7 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
         self._refuse_code = None
         self._refuse_msg = None
         self._refused = None
+        self._seller_mybank_card_no_list = None
         self._white = None
 
     @property
@@ -44,6 +45,16 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
     def refused(self, value):
         self._refused = value
     @property
+    def seller_mybank_card_no_list(self):
+        return self._seller_mybank_card_no_list
+
+    @seller_mybank_card_no_list.setter
+    def seller_mybank_card_no_list(self, value):
+        if isinstance(value, list):
+            self._seller_mybank_card_no_list = list()
+            for i in value:
+                self._seller_mybank_card_no_list.append(i)
+    @property
     def white(self):
         return self._white
 
@@ -61,5 +72,7 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
             self.refuse_msg = response['refuse_msg']
         if 'refused' in response:
             self.refused = response['refused']
+        if 'seller_mybank_card_no_list' in response:
+            self.seller_mybank_card_no_list = response['seller_mybank_card_no_list']
         if 'white' in response:
             self.white = response['white']

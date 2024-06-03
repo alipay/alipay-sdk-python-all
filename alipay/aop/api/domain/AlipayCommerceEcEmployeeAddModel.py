@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
+        self._create_share_code = None
         self._department_ids = None
         self._employee_cert_no = None
         self._employee_cert_type = None
@@ -29,6 +30,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._sign_url_carry_info = None
         self._withholding_sign_str = None
 
+    @property
+    def create_share_code(self):
+        return self._create_share_code
+
+    @create_share_code.setter
+    def create_share_code(self, value):
+        self._create_share_code = value
     @property
     def department_ids(self):
         return self._department_ids
@@ -179,6 +187,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.create_share_code:
+            if hasattr(self.create_share_code, 'to_alipay_dict'):
+                params['create_share_code'] = self.create_share_code.to_alipay_dict()
+            else:
+                params['create_share_code'] = self.create_share_code
         if self.department_ids:
             if isinstance(self.department_ids, list):
                 for i in range(0, len(self.department_ids)):
@@ -296,6 +309,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEmployeeAddModel()
+        if 'create_share_code' in d:
+            o.create_share_code = d['create_share_code']
         if 'department_ids' in d:
             o.department_ids = d['department_ids']
         if 'employee_cert_no' in d:

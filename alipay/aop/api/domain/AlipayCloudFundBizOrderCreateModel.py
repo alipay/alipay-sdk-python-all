@@ -9,6 +9,7 @@ class AlipayCloudFundBizOrderCreateModel(object):
 
     def __init__(self):
         self._amount = None
+        self._biz_industry = None
         self._buyer_id = None
         self._buyer_open_id = None
         self._ext_params = None
@@ -18,10 +19,12 @@ class AlipayCloudFundBizOrderCreateModel(object):
         self._order_id = None
         self._order_status = None
         self._out_order_no = None
+        self._pay_order_id = None
         self._pay_status = None
         self._real_amount = None
         self._seller_id = None
         self._seller_open_id = None
+        self._service_type = None
         self._source = None
         self._subject = None
 
@@ -32,6 +35,13 @@ class AlipayCloudFundBizOrderCreateModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def biz_industry(self):
+        return self._biz_industry
+
+    @biz_industry.setter
+    def biz_industry(self, value):
+        self._biz_industry = value
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -99,6 +109,13 @@ class AlipayCloudFundBizOrderCreateModel(object):
     def out_order_no(self, value):
         self._out_order_no = value
     @property
+    def pay_order_id(self):
+        return self._pay_order_id
+
+    @pay_order_id.setter
+    def pay_order_id(self, value):
+        self._pay_order_id = value
+    @property
     def pay_status(self):
         return self._pay_status
 
@@ -127,6 +144,13 @@ class AlipayCloudFundBizOrderCreateModel(object):
     def seller_open_id(self, value):
         self._seller_open_id = value
     @property
+    def service_type(self):
+        return self._service_type
+
+    @service_type.setter
+    def service_type(self, value):
+        self._service_type = value
+    @property
     def source(self):
         return self._source
 
@@ -149,6 +173,11 @@ class AlipayCloudFundBizOrderCreateModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.biz_industry:
+            if hasattr(self.biz_industry, 'to_alipay_dict'):
+                params['biz_industry'] = self.biz_industry.to_alipay_dict()
+            else:
+                params['biz_industry'] = self.biz_industry
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -199,6 +228,11 @@ class AlipayCloudFundBizOrderCreateModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.pay_order_id:
+            if hasattr(self.pay_order_id, 'to_alipay_dict'):
+                params['pay_order_id'] = self.pay_order_id.to_alipay_dict()
+            else:
+                params['pay_order_id'] = self.pay_order_id
         if self.pay_status:
             if hasattr(self.pay_status, 'to_alipay_dict'):
                 params['pay_status'] = self.pay_status.to_alipay_dict()
@@ -219,6 +253,11 @@ class AlipayCloudFundBizOrderCreateModel(object):
                 params['seller_open_id'] = self.seller_open_id.to_alipay_dict()
             else:
                 params['seller_open_id'] = self.seller_open_id
+        if self.service_type:
+            if hasattr(self.service_type, 'to_alipay_dict'):
+                params['service_type'] = self.service_type.to_alipay_dict()
+            else:
+                params['service_type'] = self.service_type
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -238,6 +277,8 @@ class AlipayCloudFundBizOrderCreateModel(object):
         o = AlipayCloudFundBizOrderCreateModel()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'biz_industry' in d:
+            o.biz_industry = d['biz_industry']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
@@ -256,6 +297,8 @@ class AlipayCloudFundBizOrderCreateModel(object):
             o.order_status = d['order_status']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'pay_order_id' in d:
+            o.pay_order_id = d['pay_order_id']
         if 'pay_status' in d:
             o.pay_status = d['pay_status']
         if 'real_amount' in d:
@@ -264,6 +307,8 @@ class AlipayCloudFundBizOrderCreateModel(object):
             o.seller_id = d['seller_id']
         if 'seller_open_id' in d:
             o.seller_open_id = d['seller_open_id']
+        if 'service_type' in d:
+            o.service_type = d['service_type']
         if 'source' in d:
             o.source = d['source']
         if 'subject' in d:

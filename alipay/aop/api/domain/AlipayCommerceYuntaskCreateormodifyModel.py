@@ -26,6 +26,7 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
         self._support_unified_material_code = None
         self._task_desc = None
         self._task_end_time = None
+        self._task_img = None
         self._task_name = None
         self._task_rule_pic = None
         self._task_start_time = None
@@ -155,6 +156,13 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
     def task_end_time(self, value):
         self._task_end_time = value
     @property
+    def task_img(self):
+        return self._task_img
+
+    @task_img.setter
+    def task_img(self, value):
+        self._task_img = value
+    @property
     def task_name(self):
         return self._task_name
 
@@ -278,6 +286,11 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
             else:
                 params['task_end_time'] = self.task_end_time
+        if self.task_img:
+            if hasattr(self.task_img, 'to_alipay_dict'):
+                params['task_img'] = self.task_img.to_alipay_dict()
+            else:
+                params['task_img'] = self.task_img
         if self.task_name:
             if hasattr(self.task_name, 'to_alipay_dict'):
                 params['task_name'] = self.task_name.to_alipay_dict()
@@ -344,6 +357,8 @@ class AlipayCommerceYuntaskCreateormodifyModel(object):
             o.task_desc = d['task_desc']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
+        if 'task_img' in d:
+            o.task_img = d['task_img']
         if 'task_name' in d:
             o.task_name = d['task_name']
         if 'task_rule_pic' in d:

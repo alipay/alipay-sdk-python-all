@@ -11,6 +11,7 @@ class IndrISVImageDTO(object):
         self._image_format = None
         self._image_id = None
         self._image_type = None
+        self._image_url = None
 
     @property
     def image_format(self):
@@ -33,6 +34,13 @@ class IndrISVImageDTO(object):
     @image_type.setter
     def image_type(self, value):
         self._image_type = value
+    @property
+    def image_url(self):
+        return self._image_url
+
+    @image_url.setter
+    def image_url(self, value):
+        self._image_url = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class IndrISVImageDTO(object):
                 params['image_type'] = self.image_type.to_alipay_dict()
             else:
                 params['image_type'] = self.image_type
+        if self.image_url:
+            if hasattr(self.image_url, 'to_alipay_dict'):
+                params['image_url'] = self.image_url.to_alipay_dict()
+            else:
+                params['image_url'] = self.image_url
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class IndrISVImageDTO(object):
             o.image_id = d['image_id']
         if 'image_type' in d:
             o.image_type = d['image_type']
+        if 'image_url' in d:
+            o.image_url = d['image_url']
         return o
 
 

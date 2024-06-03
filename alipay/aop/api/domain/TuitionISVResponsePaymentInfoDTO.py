@@ -13,6 +13,7 @@ class TuitionISVResponsePaymentInfoDTO(object):
         self._account_no = None
         self._amount = None
         self._bank_code = None
+        self._certificate_list = None
         self._country = None
         self._deadline = None
         self._payer_identity_card_number = None
@@ -52,6 +53,16 @@ class TuitionISVResponsePaymentInfoDTO(object):
     @bank_code.setter
     def bank_code(self, value):
         self._bank_code = value
+    @property
+    def certificate_list(self):
+        return self._certificate_list
+
+    @certificate_list.setter
+    def certificate_list(self, value):
+        if isinstance(value, list):
+            self._certificate_list = list()
+            for i in value:
+                self._certificate_list.append(i)
     @property
     def country(self):
         return self._country
@@ -125,6 +136,16 @@ class TuitionISVResponsePaymentInfoDTO(object):
                 params['bank_code'] = self.bank_code.to_alipay_dict()
             else:
                 params['bank_code'] = self.bank_code
+        if self.certificate_list:
+            if isinstance(self.certificate_list, list):
+                for i in range(0, len(self.certificate_list)):
+                    element = self.certificate_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.certificate_list[i] = element.to_alipay_dict()
+            if hasattr(self.certificate_list, 'to_alipay_dict'):
+                params['certificate_list'] = self.certificate_list.to_alipay_dict()
+            else:
+                params['certificate_list'] = self.certificate_list
         if self.country:
             if hasattr(self.country, 'to_alipay_dict'):
                 params['country'] = self.country.to_alipay_dict()
@@ -175,6 +196,8 @@ class TuitionISVResponsePaymentInfoDTO(object):
             o.amount = d['amount']
         if 'bank_code' in d:
             o.bank_code = d['bank_code']
+        if 'certificate_list' in d:
+            o.certificate_list = d['certificate_list']
         if 'country' in d:
             o.country = d['country']
         if 'deadline' in d:

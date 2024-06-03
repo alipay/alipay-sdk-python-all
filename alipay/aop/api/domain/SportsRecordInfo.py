@@ -17,6 +17,7 @@ class SportsRecordInfo(object):
         self._max_altitude = None
         self._min_altitude = None
         self._out_biz_code = None
+        self._plan_id = None
         self._record_date = None
         self._record_id = None
         self._speed = None
@@ -92,6 +93,13 @@ class SportsRecordInfo(object):
     @out_biz_code.setter
     def out_biz_code(self, value):
         self._out_biz_code = value
+    @property
+    def plan_id(self):
+        return self._plan_id
+
+    @plan_id.setter
+    def plan_id(self, value):
+        self._plan_id = value
     @property
     def record_date(self):
         return self._record_date
@@ -218,6 +226,11 @@ class SportsRecordInfo(object):
                 params['out_biz_code'] = self.out_biz_code.to_alipay_dict()
             else:
                 params['out_biz_code'] = self.out_biz_code
+        if self.plan_id:
+            if hasattr(self.plan_id, 'to_alipay_dict'):
+                params['plan_id'] = self.plan_id.to_alipay_dict()
+            else:
+                params['plan_id'] = self.plan_id
         if self.record_date:
             if hasattr(self.record_date, 'to_alipay_dict'):
                 params['record_date'] = self.record_date.to_alipay_dict()
@@ -298,6 +311,8 @@ class SportsRecordInfo(object):
             o.min_altitude = d['min_altitude']
         if 'out_biz_code' in d:
             o.out_biz_code = d['out_biz_code']
+        if 'plan_id' in d:
+            o.plan_id = d['plan_id']
         if 'record_date' in d:
             o.record_date = d['record_date']
         if 'record_id' in d:

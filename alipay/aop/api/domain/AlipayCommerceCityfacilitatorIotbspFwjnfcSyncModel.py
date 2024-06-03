@@ -14,6 +14,7 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
         self._open_id = None
         self._params = None
         self._pid = None
+        self._query_params = None
         self._route_page = None
         self._upper_biz_tid = None
         self._upper_sn = None
@@ -61,6 +62,13 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def query_params(self):
+        return self._query_params
+
+    @query_params.setter
+    def query_params(self, value):
+        self._query_params = value
     @property
     def route_page(self):
         return self._route_page
@@ -123,6 +131,11 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.query_params:
+            if hasattr(self.query_params, 'to_alipay_dict'):
+                params['query_params'] = self.query_params.to_alipay_dict()
+            else:
+                params['query_params'] = self.query_params
         if self.route_page:
             if hasattr(self.route_page, 'to_alipay_dict'):
                 params['route_page'] = self.route_page.to_alipay_dict()
@@ -162,6 +175,8 @@ class AlipayCommerceCityfacilitatorIotbspFwjnfcSyncModel(object):
             o.params = d['params']
         if 'pid' in d:
             o.pid = d['pid']
+        if 'query_params' in d:
+            o.query_params = d['query_params']
         if 'route_page' in d:
             o.route_page = d['route_page']
         if 'upper_biz_tid' in d:
