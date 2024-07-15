@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ETCTripItemDto import ETCTripItemDto
 
 
 class AlipayCommerceTransportEtcSettlementApplyModel(object):
@@ -12,10 +13,12 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
         self._car_type = None
         self._end_station_name = None
         self._end_time = None
+        self._etc_trip_item_list = None
         self._memo = None
         self._out_order_id = None
         self._plate_color = None
         self._plate_no = None
+        self._replenish_deduct = None
         self._seller_id = None
         self._start_station_name = None
         self._start_time = None
@@ -53,6 +56,19 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
     def end_time(self, value):
         self._end_time = value
     @property
+    def etc_trip_item_list(self):
+        return self._etc_trip_item_list
+
+    @etc_trip_item_list.setter
+    def etc_trip_item_list(self, value):
+        if isinstance(value, list):
+            self._etc_trip_item_list = list()
+            for i in value:
+                if isinstance(i, ETCTripItemDto):
+                    self._etc_trip_item_list.append(i)
+                else:
+                    self._etc_trip_item_list.append(ETCTripItemDto.from_alipay_dict(i))
+    @property
     def memo(self):
         return self._memo
 
@@ -80,6 +96,13 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
     @plate_no.setter
     def plate_no(self, value):
         self._plate_no = value
+    @property
+    def replenish_deduct(self):
+        return self._replenish_deduct
+
+    @replenish_deduct.setter
+    def replenish_deduct(self, value):
+        self._replenish_deduct = value
     @property
     def seller_id(self):
         return self._seller_id
@@ -153,6 +176,16 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.etc_trip_item_list:
+            if isinstance(self.etc_trip_item_list, list):
+                for i in range(0, len(self.etc_trip_item_list)):
+                    element = self.etc_trip_item_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.etc_trip_item_list[i] = element.to_alipay_dict()
+            if hasattr(self.etc_trip_item_list, 'to_alipay_dict'):
+                params['etc_trip_item_list'] = self.etc_trip_item_list.to_alipay_dict()
+            else:
+                params['etc_trip_item_list'] = self.etc_trip_item_list
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -173,6 +206,11 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
                 params['plate_no'] = self.plate_no.to_alipay_dict()
             else:
                 params['plate_no'] = self.plate_no
+        if self.replenish_deduct:
+            if hasattr(self.replenish_deduct, 'to_alipay_dict'):
+                params['replenish_deduct'] = self.replenish_deduct.to_alipay_dict()
+            else:
+                params['replenish_deduct'] = self.replenish_deduct
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -223,6 +261,8 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
             o.end_station_name = d['end_station_name']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'etc_trip_item_list' in d:
+            o.etc_trip_item_list = d['etc_trip_item_list']
         if 'memo' in d:
             o.memo = d['memo']
         if 'out_order_id' in d:
@@ -231,6 +271,8 @@ class AlipayCommerceTransportEtcSettlementApplyModel(object):
             o.plate_color = d['plate_color']
         if 'plate_no' in d:
             o.plate_no = d['plate_no']
+        if 'replenish_deduct' in d:
+            o.replenish_deduct = d['replenish_deduct']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'start_station_name' in d:

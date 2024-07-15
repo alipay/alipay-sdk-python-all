@@ -8,6 +8,10 @@ from alipay.aop.api.constant.ParamConstants import *
 class EcomRefundDisputeDTO(object):
 
     def __init__(self):
+        self._accident_address = None
+        self._accident_desc = None
+        self._accident_type = None
+        self._accident_type_detail = None
         self._buyer_id = None
         self._buyer_logistic_company_code = None
         self._buyer_logistic_company_name = None
@@ -27,6 +31,34 @@ class EcomRefundDisputeDTO(object):
         self._seller_id = None
         self._start_time = None
 
+    @property
+    def accident_address(self):
+        return self._accident_address
+
+    @accident_address.setter
+    def accident_address(self, value):
+        self._accident_address = value
+    @property
+    def accident_desc(self):
+        return self._accident_desc
+
+    @accident_desc.setter
+    def accident_desc(self, value):
+        self._accident_desc = value
+    @property
+    def accident_type(self):
+        return self._accident_type
+
+    @accident_type.setter
+    def accident_type(self, value):
+        self._accident_type = value
+    @property
+    def accident_type_detail(self):
+        return self._accident_type_detail
+
+    @accident_type_detail.setter
+    def accident_type_detail(self, value):
+        self._accident_type_detail = value
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -157,6 +189,26 @@ class EcomRefundDisputeDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accident_address:
+            if hasattr(self.accident_address, 'to_alipay_dict'):
+                params['accident_address'] = self.accident_address.to_alipay_dict()
+            else:
+                params['accident_address'] = self.accident_address
+        if self.accident_desc:
+            if hasattr(self.accident_desc, 'to_alipay_dict'):
+                params['accident_desc'] = self.accident_desc.to_alipay_dict()
+            else:
+                params['accident_desc'] = self.accident_desc
+        if self.accident_type:
+            if hasattr(self.accident_type, 'to_alipay_dict'):
+                params['accident_type'] = self.accident_type.to_alipay_dict()
+            else:
+                params['accident_type'] = self.accident_type
+        if self.accident_type_detail:
+            if hasattr(self.accident_type_detail, 'to_alipay_dict'):
+                params['accident_type_detail'] = self.accident_type_detail.to_alipay_dict()
+            else:
+                params['accident_type_detail'] = self.accident_type_detail
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -254,6 +306,14 @@ class EcomRefundDisputeDTO(object):
         if not d:
             return None
         o = EcomRefundDisputeDTO()
+        if 'accident_address' in d:
+            o.accident_address = d['accident_address']
+        if 'accident_desc' in d:
+            o.accident_desc = d['accident_desc']
+        if 'accident_type' in d:
+            o.accident_type = d['accident_type']
+        if 'accident_type_detail' in d:
+            o.accident_type_detail = d['accident_type_detail']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'buyer_logistic_company_code' in d:

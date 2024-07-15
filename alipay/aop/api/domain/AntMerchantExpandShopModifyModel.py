@@ -8,6 +8,8 @@ from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
+from alipay.aop.api.domain.MerchantShopIndustryInfo import MerchantShopIndustryInfo
+from alipay.aop.api.domain.ShopIndustryLicense import ShopIndustryLicense
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 
 
@@ -27,6 +29,8 @@ class AntMerchantExpandShopModifyModel(object):
         self._contact_phone = None
         self._cover = None
         self._ext_infos = None
+        self._industry_info = None
+        self._industry_license = None
         self._ip_role_id = None
         self._legal_cert_no = None
         self._legal_name = None
@@ -156,6 +160,32 @@ class AntMerchantExpandShopModifyModel(object):
                     self._ext_infos.append(i)
                 else:
                     self._ext_infos.append(ShopExtInfo.from_alipay_dict(i))
+    @property
+    def industry_info(self):
+        return self._industry_info
+
+    @industry_info.setter
+    def industry_info(self, value):
+        if isinstance(value, list):
+            self._industry_info = list()
+            for i in value:
+                if isinstance(i, MerchantShopIndustryInfo):
+                    self._industry_info.append(i)
+                else:
+                    self._industry_info.append(MerchantShopIndustryInfo.from_alipay_dict(i))
+    @property
+    def industry_license(self):
+        return self._industry_license
+
+    @industry_license.setter
+    def industry_license(self, value):
+        if isinstance(value, list):
+            self._industry_license = list()
+            for i in value:
+                if isinstance(i, ShopIndustryLicense):
+                    self._industry_license.append(i)
+                else:
+                    self._industry_license.append(ShopIndustryLicense.from_alipay_dict(i))
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -340,6 +370,26 @@ class AntMerchantExpandShopModifyModel(object):
                 params['ext_infos'] = self.ext_infos.to_alipay_dict()
             else:
                 params['ext_infos'] = self.ext_infos
+        if self.industry_info:
+            if isinstance(self.industry_info, list):
+                for i in range(0, len(self.industry_info)):
+                    element = self.industry_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.industry_info[i] = element.to_alipay_dict()
+            if hasattr(self.industry_info, 'to_alipay_dict'):
+                params['industry_info'] = self.industry_info.to_alipay_dict()
+            else:
+                params['industry_info'] = self.industry_info
+        if self.industry_license:
+            if isinstance(self.industry_license, list):
+                for i in range(0, len(self.industry_license)):
+                    element = self.industry_license[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.industry_license[i] = element.to_alipay_dict()
+            if hasattr(self.industry_license, 'to_alipay_dict'):
+                params['industry_license'] = self.industry_license.to_alipay_dict()
+            else:
+                params['industry_license'] = self.industry_license
         if self.ip_role_id:
             if hasattr(self.ip_role_id, 'to_alipay_dict'):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
@@ -448,6 +498,10 @@ class AntMerchantExpandShopModifyModel(object):
             o.cover = d['cover']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
+        if 'industry_info' in d:
+            o.industry_info = d['industry_info']
+        if 'industry_license' in d:
+            o.industry_license = d['industry_license']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
         if 'legal_cert_no' in d:

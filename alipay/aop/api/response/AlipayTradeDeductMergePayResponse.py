@@ -10,9 +10,17 @@ class AlipayTradeDeductMergePayResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeDeductMergePayResponse, self).__init__()
+        self._buyer_user_id = None
         self._order_detail_results = None
         self._out_merge_no = None
 
+    @property
+    def buyer_user_id(self):
+        return self._buyer_user_id
+
+    @buyer_user_id.setter
+    def buyer_user_id(self, value):
+        self._buyer_user_id = value
     @property
     def order_detail_results(self):
         return self._order_detail_results
@@ -36,6 +44,8 @@ class AlipayTradeDeductMergePayResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeDeductMergePayResponse, self).parse_response_content(response_content)
+        if 'buyer_user_id' in response:
+            self.buyer_user_id = response['buyer_user_id']
         if 'order_detail_results' in response:
             self.order_detail_results = response['order_detail_results']
         if 'out_merge_no' in response:

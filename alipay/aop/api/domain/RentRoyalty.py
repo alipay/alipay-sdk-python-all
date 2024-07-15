@@ -14,6 +14,7 @@ class RentRoyalty(object):
         self._royalty_status = None
         self._royalty_time = None
         self._stage = None
+        self._trade_no = None
         self._type = None
 
     @property
@@ -59,6 +60,13 @@ class RentRoyalty(object):
     def stage(self, value):
         self._stage = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def type(self):
         return self._type
 
@@ -99,6 +107,11 @@ class RentRoyalty(object):
                 params['stage'] = self.stage.to_alipay_dict()
             else:
                 params['stage'] = self.stage
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -123,6 +136,8 @@ class RentRoyalty(object):
             o.royalty_time = d['royalty_time']
         if 'stage' in d:
             o.stage = d['stage']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         if 'type' in d:
             o.type = d['type']
         return o

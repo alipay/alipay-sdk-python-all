@@ -12,8 +12,10 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._apply_scene = None
         self._apply_sub_scene = None
         self._bank_rule_id = None
+        self._car_type = None
         self._city_code = None
         self._mobile_no = None
+        self._number_of_axles = None
         self._open_id = None
         self._order_censor_status = None
         self._order_pay_status = None
@@ -21,13 +23,16 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._plate_color = None
         self._plate_no = None
         self._seller_id = None
+        self._settlement_cycle = None
         self._spu_code = None
         self._user_id = None
         self._veh_biz_scene = None
         self._vi_license_apc = None
+        self._vi_license_back_img = None
         self._vi_license_brand_model = None
         self._vi_license_car_type = None
         self._vi_license_engine = None
+        self._vi_license_front_img = None
         self._vi_license_gross_mass = None
         self._vi_license_issue_date = None
         self._vi_license_overall_dinmension = None
@@ -66,6 +71,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     def bank_rule_id(self, value):
         self._bank_rule_id = value
     @property
+    def car_type(self):
+        return self._car_type
+
+    @car_type.setter
+    def car_type(self, value):
+        self._car_type = value
+    @property
     def city_code(self):
         return self._city_code
 
@@ -79,6 +91,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @mobile_no.setter
     def mobile_no(self, value):
         self._mobile_no = value
+    @property
+    def number_of_axles(self):
+        return self._number_of_axles
+
+    @number_of_axles.setter
+    def number_of_axles(self, value):
+        self._number_of_axles = value
     @property
     def open_id(self):
         return self._open_id
@@ -129,6 +148,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     def seller_id(self, value):
         self._seller_id = value
     @property
+    def settlement_cycle(self):
+        return self._settlement_cycle
+
+    @settlement_cycle.setter
+    def settlement_cycle(self, value):
+        self._settlement_cycle = value
+    @property
     def spu_code(self):
         return self._spu_code
 
@@ -157,6 +183,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     def vi_license_apc(self, value):
         self._vi_license_apc = value
     @property
+    def vi_license_back_img(self):
+        return self._vi_license_back_img
+
+    @vi_license_back_img.setter
+    def vi_license_back_img(self, value):
+        self._vi_license_back_img = value
+    @property
     def vi_license_brand_model(self):
         return self._vi_license_brand_model
 
@@ -177,6 +210,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @vi_license_engine.setter
     def vi_license_engine(self, value):
         self._vi_license_engine = value
+    @property
+    def vi_license_front_img(self):
+        return self._vi_license_front_img
+
+    @vi_license_front_img.setter
+    def vi_license_front_img(self, value):
+        self._vi_license_front_img = value
     @property
     def vi_license_gross_mass(self):
         return self._vi_license_gross_mass
@@ -257,6 +297,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['bank_rule_id'] = self.bank_rule_id.to_alipay_dict()
             else:
                 params['bank_rule_id'] = self.bank_rule_id
+        if self.car_type:
+            if hasattr(self.car_type, 'to_alipay_dict'):
+                params['car_type'] = self.car_type.to_alipay_dict()
+            else:
+                params['car_type'] = self.car_type
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -267,6 +312,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['mobile_no'] = self.mobile_no.to_alipay_dict()
             else:
                 params['mobile_no'] = self.mobile_no
+        if self.number_of_axles:
+            if hasattr(self.number_of_axles, 'to_alipay_dict'):
+                params['number_of_axles'] = self.number_of_axles.to_alipay_dict()
+            else:
+                params['number_of_axles'] = self.number_of_axles
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -302,6 +352,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.settlement_cycle:
+            if hasattr(self.settlement_cycle, 'to_alipay_dict'):
+                params['settlement_cycle'] = self.settlement_cycle.to_alipay_dict()
+            else:
+                params['settlement_cycle'] = self.settlement_cycle
         if self.spu_code:
             if hasattr(self.spu_code, 'to_alipay_dict'):
                 params['spu_code'] = self.spu_code.to_alipay_dict()
@@ -322,6 +377,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['vi_license_apc'] = self.vi_license_apc.to_alipay_dict()
             else:
                 params['vi_license_apc'] = self.vi_license_apc
+        if self.vi_license_back_img:
+            if hasattr(self.vi_license_back_img, 'to_alipay_dict'):
+                params['vi_license_back_img'] = self.vi_license_back_img.to_alipay_dict()
+            else:
+                params['vi_license_back_img'] = self.vi_license_back_img
         if self.vi_license_brand_model:
             if hasattr(self.vi_license_brand_model, 'to_alipay_dict'):
                 params['vi_license_brand_model'] = self.vi_license_brand_model.to_alipay_dict()
@@ -337,6 +397,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['vi_license_engine'] = self.vi_license_engine.to_alipay_dict()
             else:
                 params['vi_license_engine'] = self.vi_license_engine
+        if self.vi_license_front_img:
+            if hasattr(self.vi_license_front_img, 'to_alipay_dict'):
+                params['vi_license_front_img'] = self.vi_license_front_img.to_alipay_dict()
+            else:
+                params['vi_license_front_img'] = self.vi_license_front_img
         if self.vi_license_gross_mass:
             if hasattr(self.vi_license_gross_mass, 'to_alipay_dict'):
                 params['vi_license_gross_mass'] = self.vi_license_gross_mass.to_alipay_dict()
@@ -392,10 +457,14 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.apply_sub_scene = d['apply_sub_scene']
         if 'bank_rule_id' in d:
             o.bank_rule_id = d['bank_rule_id']
+        if 'car_type' in d:
+            o.car_type = d['car_type']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'mobile_no' in d:
             o.mobile_no = d['mobile_no']
+        if 'number_of_axles' in d:
+            o.number_of_axles = d['number_of_axles']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_censor_status' in d:
@@ -410,6 +479,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.plate_no = d['plate_no']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'settlement_cycle' in d:
+            o.settlement_cycle = d['settlement_cycle']
         if 'spu_code' in d:
             o.spu_code = d['spu_code']
         if 'user_id' in d:
@@ -418,12 +489,16 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.veh_biz_scene = d['veh_biz_scene']
         if 'vi_license_apc' in d:
             o.vi_license_apc = d['vi_license_apc']
+        if 'vi_license_back_img' in d:
+            o.vi_license_back_img = d['vi_license_back_img']
         if 'vi_license_brand_model' in d:
             o.vi_license_brand_model = d['vi_license_brand_model']
         if 'vi_license_car_type' in d:
             o.vi_license_car_type = d['vi_license_car_type']
         if 'vi_license_engine' in d:
             o.vi_license_engine = d['vi_license_engine']
+        if 'vi_license_front_img' in d:
+            o.vi_license_front_img = d['vi_license_front_img']
         if 'vi_license_gross_mass' in d:
             o.vi_license_gross_mass = d['vi_license_gross_mass']
         if 'vi_license_issue_date' in d:

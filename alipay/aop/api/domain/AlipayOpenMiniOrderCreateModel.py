@@ -27,6 +27,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._buyer_id = None
         self._buyer_logon_id = None
         self._buyer_open_id = None
+        self._confirm_timeout_express = None
         self._contact_info = None
         self._credit_info = None
         self._default_receiving_address = None
@@ -96,6 +97,13 @@ class AlipayOpenMiniOrderCreateModel(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def confirm_timeout_express(self):
+        return self._confirm_timeout_express
+
+    @confirm_timeout_express.setter
+    def confirm_timeout_express(self, value):
+        self._confirm_timeout_express = value
     @property
     def contact_info(self):
         return self._contact_info
@@ -282,6 +290,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.confirm_timeout_express:
+            if hasattr(self.confirm_timeout_express, 'to_alipay_dict'):
+                params['confirm_timeout_express'] = self.confirm_timeout_express.to_alipay_dict()
+            else:
+                params['confirm_timeout_express'] = self.confirm_timeout_express
         if self.contact_info:
             if hasattr(self.contact_info, 'to_alipay_dict'):
                 params['contact_info'] = self.contact_info.to_alipay_dict()
@@ -391,6 +404,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.buyer_logon_id = d['buyer_logon_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'confirm_timeout_express' in d:
+            o.confirm_timeout_express = d['confirm_timeout_express']
         if 'contact_info' in d:
             o.contact_info = d['contact_info']
         if 'credit_info' in d:

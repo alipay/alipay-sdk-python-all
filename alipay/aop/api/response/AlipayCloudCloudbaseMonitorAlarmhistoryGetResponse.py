@@ -9,13 +9,22 @@ class AlipayCloudCloudbaseMonitorAlarmhistoryGetResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCloudCloudbaseMonitorAlarmhistoryGetResponse, self).__init__()
+        self._alarm_level = None
         self._alarm_time = None
         self._duration = None
         self._id = None
         self._recover_time = None
         self._rule_id = None
         self._rule_name = None
+        self._trigger_content = None
 
+    @property
+    def alarm_level(self):
+        return self._alarm_level
+
+    @alarm_level.setter
+    def alarm_level(self, value):
+        self._alarm_level = value
     @property
     def alarm_time(self):
         return self._alarm_time
@@ -58,9 +67,18 @@ class AlipayCloudCloudbaseMonitorAlarmhistoryGetResponse(AlipayResponse):
     @rule_name.setter
     def rule_name(self, value):
         self._rule_name = value
+    @property
+    def trigger_content(self):
+        return self._trigger_content
+
+    @trigger_content.setter
+    def trigger_content(self, value):
+        self._trigger_content = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseMonitorAlarmhistoryGetResponse, self).parse_response_content(response_content)
+        if 'alarm_level' in response:
+            self.alarm_level = response['alarm_level']
         if 'alarm_time' in response:
             self.alarm_time = response['alarm_time']
         if 'duration' in response:
@@ -73,3 +91,5 @@ class AlipayCloudCloudbaseMonitorAlarmhistoryGetResponse(AlipayResponse):
             self.rule_id = response['rule_id']
         if 'rule_name' in response:
             self.rule_name = response['rule_name']
+        if 'trigger_content' in response:
+            self.trigger_content = response['trigger_content']

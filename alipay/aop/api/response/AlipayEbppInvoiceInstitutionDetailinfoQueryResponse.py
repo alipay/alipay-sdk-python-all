@@ -25,6 +25,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         self._outer_source_id = None
         self._owner_id_list = None
         self._owner_open_id_list = None
+        self._owner_type = None
         self._scene_type = None
         self._standard_info_detail_list = None
         self._standard_info_list = None
@@ -133,6 +134,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             for i in value:
                 self._owner_open_id_list.append(i)
     @property
+    def owner_type(self):
+        return self._owner_type
+
+    @owner_type.setter
+    def owner_type(self, value):
+        self._owner_type = value
+    @property
     def scene_type(self):
         return self._scene_type
 
@@ -191,6 +199,8 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self.owner_id_list = response['owner_id_list']
         if 'owner_open_id_list' in response:
             self.owner_open_id_list = response['owner_open_id_list']
+        if 'owner_type' in response:
+            self.owner_type = response['owner_type']
         if 'scene_type' in response:
             self.scene_type = response['scene_type']
         if 'standard_info_detail_list' in response:

@@ -15,6 +15,7 @@ class AlipayCloudTraasCloudriskRentriskQueryModel(object):
         self._cert_no = None
         self._customer_detail = None
         self._customer_id = None
+        self._customer_open_id = None
         self._customer_type = None
         self._delivery_detail = None
         self._item_detail = None
@@ -49,6 +50,13 @@ class AlipayCloudTraasCloudriskRentriskQueryModel(object):
     @customer_id.setter
     def customer_id(self, value):
         self._customer_id = value
+    @property
+    def customer_open_id(self):
+        return self._customer_open_id
+
+    @customer_open_id.setter
+    def customer_open_id(self, value):
+        self._customer_open_id = value
     @property
     def customer_type(self):
         return self._customer_type
@@ -140,6 +148,11 @@ class AlipayCloudTraasCloudriskRentriskQueryModel(object):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
             else:
                 params['customer_id'] = self.customer_id
+        if self.customer_open_id:
+            if hasattr(self.customer_open_id, 'to_alipay_dict'):
+                params['customer_open_id'] = self.customer_open_id.to_alipay_dict()
+            else:
+                params['customer_open_id'] = self.customer_open_id
         if self.customer_type:
             if hasattr(self.customer_type, 'to_alipay_dict'):
                 params['customer_type'] = self.customer_type.to_alipay_dict()
@@ -198,6 +211,8 @@ class AlipayCloudTraasCloudriskRentriskQueryModel(object):
             o.customer_detail = d['customer_detail']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
+        if 'customer_open_id' in d:
+            o.customer_open_id = d['customer_open_id']
         if 'customer_type' in d:
             o.customer_type = d['customer_type']
         if 'delivery_detail' in d:

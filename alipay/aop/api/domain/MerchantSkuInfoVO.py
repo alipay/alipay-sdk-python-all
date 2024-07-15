@@ -10,6 +10,7 @@ class MerchantSkuInfoVO(object):
 
     def __init__(self):
         self._attrs = None
+        self._original_price = None
         self._out_sku_id = None
         self._sale_price = None
         self._sale_status = None
@@ -28,6 +29,13 @@ class MerchantSkuInfoVO(object):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(MerchantItemAttrVO.from_alipay_dict(i))
+    @property
+    def original_price(self):
+        return self._original_price
+
+    @original_price.setter
+    def original_price(self, value):
+        self._original_price = value
     @property
     def out_sku_id(self):
         return self._out_sku_id
@@ -70,6 +78,11 @@ class MerchantSkuInfoVO(object):
                 params['attrs'] = self.attrs.to_alipay_dict()
             else:
                 params['attrs'] = self.attrs
+        if self.original_price:
+            if hasattr(self.original_price, 'to_alipay_dict'):
+                params['original_price'] = self.original_price.to_alipay_dict()
+            else:
+                params['original_price'] = self.original_price
         if self.out_sku_id:
             if hasattr(self.out_sku_id, 'to_alipay_dict'):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
@@ -99,6 +112,8 @@ class MerchantSkuInfoVO(object):
         o = MerchantSkuInfoVO()
         if 'attrs' in d:
             o.attrs = d['attrs']
+        if 'original_price' in d:
+            o.original_price = d['original_price']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
         if 'sale_price' in d:

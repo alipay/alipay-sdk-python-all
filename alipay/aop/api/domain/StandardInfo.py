@@ -16,6 +16,7 @@ class StandardInfo(object):
         self._open_rule_id = None
         self._outer_source_id = None
         self._payment_policy = None
+        self._personal_qrcode_mode = None
         self._standard_condition_info_list = None
         self._standard_desc = None
         self._standard_id = None
@@ -66,6 +67,13 @@ class StandardInfo(object):
     @payment_policy.setter
     def payment_policy(self, value):
         self._payment_policy = value
+    @property
+    def personal_qrcode_mode(self):
+        return self._personal_qrcode_mode
+
+    @personal_qrcode_mode.setter
+    def personal_qrcode_mode(self, value):
+        self._personal_qrcode_mode = value
     @property
     def standard_condition_info_list(self):
         return self._standard_condition_info_list
@@ -134,6 +142,11 @@ class StandardInfo(object):
                 params['payment_policy'] = self.payment_policy.to_alipay_dict()
             else:
                 params['payment_policy'] = self.payment_policy
+        if self.personal_qrcode_mode:
+            if hasattr(self.personal_qrcode_mode, 'to_alipay_dict'):
+                params['personal_qrcode_mode'] = self.personal_qrcode_mode.to_alipay_dict()
+            else:
+                params['personal_qrcode_mode'] = self.personal_qrcode_mode
         if self.standard_condition_info_list:
             if isinstance(self.standard_condition_info_list, list):
                 for i in range(0, len(self.standard_condition_info_list)):
@@ -178,6 +191,8 @@ class StandardInfo(object):
             o.outer_source_id = d['outer_source_id']
         if 'payment_policy' in d:
             o.payment_policy = d['payment_policy']
+        if 'personal_qrcode_mode' in d:
+            o.personal_qrcode_mode = d['personal_qrcode_mode']
         if 'standard_condition_info_list' in d:
             o.standard_condition_info_list = d['standard_condition_info_list']
         if 'standard_desc' in d:

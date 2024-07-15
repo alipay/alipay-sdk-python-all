@@ -4,6 +4,9 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsPeriodDTO import InsPeriodDTO
+from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
+from alipay.aop.api.domain.InsTransportItineraryDTO import InsTransportItineraryDTO
+from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 from alipay.aop.api.domain.EcomLogisticsOrderDTO import EcomLogisticsOrderDTO
 from alipay.aop.api.domain.PayOrderDTO import PayOrderDTO
 from alipay.aop.api.domain.EcomSubOrderDTO import EcomSubOrderDTO
@@ -21,6 +24,7 @@ class EcomOrderDTO(object):
         self._charge_guarantee_plan_type = None
         self._credit_deposit_money = None
         self._discount_fee = None
+        self._drivers = None
         self._ext_info = None
         self._gmt_create = None
         self._item_id = None
@@ -28,10 +32,14 @@ class EcomOrderDTO(object):
         self._item_price = None
         self._item_title = None
         self._item_total_value = None
+        self._itineraries = None
+        self._leaser = None
         self._logistics_order = None
         self._main_order_id = None
+        self._order_end_time = None
         self._order_fee = None
         self._order_id = None
+        self._order_start_time = None
         self._order_type = None
         self._pay_order = None
         self._post_fee = None
@@ -40,6 +48,7 @@ class EcomOrderDTO(object):
         self._sub_order_list = None
         self._trade_days = None
         self._trade_end_time = None
+        self._trade_pictures = None
         self._trade_start_time = None
 
     @property
@@ -109,6 +118,19 @@ class EcomOrderDTO(object):
     def discount_fee(self, value):
         self._discount_fee = value
     @property
+    def drivers(self):
+        return self._drivers
+
+    @drivers.setter
+    def drivers(self, value):
+        if isinstance(value, list):
+            self._drivers = list()
+            for i in value:
+                if isinstance(i, InsOpenUserDTO):
+                    self._drivers.append(i)
+                else:
+                    self._drivers.append(InsOpenUserDTO.from_alipay_dict(i))
+    @property
     def ext_info(self):
         return self._ext_info
 
@@ -158,6 +180,26 @@ class EcomOrderDTO(object):
     def item_total_value(self, value):
         self._item_total_value = value
     @property
+    def itineraries(self):
+        return self._itineraries
+
+    @itineraries.setter
+    def itineraries(self, value):
+        if isinstance(value, InsTransportItineraryDTO):
+            self._itineraries = value
+        else:
+            self._itineraries = InsTransportItineraryDTO.from_alipay_dict(value)
+    @property
+    def leaser(self):
+        return self._leaser
+
+    @leaser.setter
+    def leaser(self, value):
+        if isinstance(value, InsOpenUserDTO):
+            self._leaser = value
+        else:
+            self._leaser = InsOpenUserDTO.from_alipay_dict(value)
+    @property
     def logistics_order(self):
         return self._logistics_order
 
@@ -175,6 +217,13 @@ class EcomOrderDTO(object):
     def main_order_id(self, value):
         self._main_order_id = value
     @property
+    def order_end_time(self):
+        return self._order_end_time
+
+    @order_end_time.setter
+    def order_end_time(self, value):
+        self._order_end_time = value
+    @property
     def order_fee(self):
         return self._order_fee
 
@@ -188,6 +237,13 @@ class EcomOrderDTO(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def order_start_time(self):
+        return self._order_start_time
+
+    @order_start_time.setter
+    def order_start_time(self, value):
+        self._order_start_time = value
     @property
     def order_type(self):
         return self._order_type
@@ -254,6 +310,16 @@ class EcomOrderDTO(object):
     def trade_end_time(self, value):
         self._trade_end_time = value
     @property
+    def trade_pictures(self):
+        return self._trade_pictures
+
+    @trade_pictures.setter
+    def trade_pictures(self, value):
+        if isinstance(value, list):
+            self._trade_pictures = list()
+            for i in value:
+                self._trade_pictures.append(i)
+    @property
     def trade_start_time(self):
         return self._trade_start_time
 
@@ -309,6 +375,16 @@ class EcomOrderDTO(object):
                 params['discount_fee'] = self.discount_fee.to_alipay_dict()
             else:
                 params['discount_fee'] = self.discount_fee
+        if self.drivers:
+            if isinstance(self.drivers, list):
+                for i in range(0, len(self.drivers)):
+                    element = self.drivers[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.drivers[i] = element.to_alipay_dict()
+            if hasattr(self.drivers, 'to_alipay_dict'):
+                params['drivers'] = self.drivers.to_alipay_dict()
+            else:
+                params['drivers'] = self.drivers
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -344,6 +420,16 @@ class EcomOrderDTO(object):
                 params['item_total_value'] = self.item_total_value.to_alipay_dict()
             else:
                 params['item_total_value'] = self.item_total_value
+        if self.itineraries:
+            if hasattr(self.itineraries, 'to_alipay_dict'):
+                params['itineraries'] = self.itineraries.to_alipay_dict()
+            else:
+                params['itineraries'] = self.itineraries
+        if self.leaser:
+            if hasattr(self.leaser, 'to_alipay_dict'):
+                params['leaser'] = self.leaser.to_alipay_dict()
+            else:
+                params['leaser'] = self.leaser
         if self.logistics_order:
             if hasattr(self.logistics_order, 'to_alipay_dict'):
                 params['logistics_order'] = self.logistics_order.to_alipay_dict()
@@ -354,6 +440,11 @@ class EcomOrderDTO(object):
                 params['main_order_id'] = self.main_order_id.to_alipay_dict()
             else:
                 params['main_order_id'] = self.main_order_id
+        if self.order_end_time:
+            if hasattr(self.order_end_time, 'to_alipay_dict'):
+                params['order_end_time'] = self.order_end_time.to_alipay_dict()
+            else:
+                params['order_end_time'] = self.order_end_time
         if self.order_fee:
             if hasattr(self.order_fee, 'to_alipay_dict'):
                 params['order_fee'] = self.order_fee.to_alipay_dict()
@@ -364,6 +455,11 @@ class EcomOrderDTO(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.order_start_time:
+            if hasattr(self.order_start_time, 'to_alipay_dict'):
+                params['order_start_time'] = self.order_start_time.to_alipay_dict()
+            else:
+                params['order_start_time'] = self.order_start_time
         if self.order_type:
             if hasattr(self.order_type, 'to_alipay_dict'):
                 params['order_type'] = self.order_type.to_alipay_dict()
@@ -409,6 +505,16 @@ class EcomOrderDTO(object):
                 params['trade_end_time'] = self.trade_end_time.to_alipay_dict()
             else:
                 params['trade_end_time'] = self.trade_end_time
+        if self.trade_pictures:
+            if isinstance(self.trade_pictures, list):
+                for i in range(0, len(self.trade_pictures)):
+                    element = self.trade_pictures[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_pictures[i] = element.to_alipay_dict()
+            if hasattr(self.trade_pictures, 'to_alipay_dict'):
+                params['trade_pictures'] = self.trade_pictures.to_alipay_dict()
+            else:
+                params['trade_pictures'] = self.trade_pictures
         if self.trade_start_time:
             if hasattr(self.trade_start_time, 'to_alipay_dict'):
                 params['trade_start_time'] = self.trade_start_time.to_alipay_dict()
@@ -439,6 +545,8 @@ class EcomOrderDTO(object):
             o.credit_deposit_money = d['credit_deposit_money']
         if 'discount_fee' in d:
             o.discount_fee = d['discount_fee']
+        if 'drivers' in d:
+            o.drivers = d['drivers']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'gmt_create' in d:
@@ -453,14 +561,22 @@ class EcomOrderDTO(object):
             o.item_title = d['item_title']
         if 'item_total_value' in d:
             o.item_total_value = d['item_total_value']
+        if 'itineraries' in d:
+            o.itineraries = d['itineraries']
+        if 'leaser' in d:
+            o.leaser = d['leaser']
         if 'logistics_order' in d:
             o.logistics_order = d['logistics_order']
         if 'main_order_id' in d:
             o.main_order_id = d['main_order_id']
+        if 'order_end_time' in d:
+            o.order_end_time = d['order_end_time']
         if 'order_fee' in d:
             o.order_fee = d['order_fee']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'order_start_time' in d:
+            o.order_start_time = d['order_start_time']
         if 'order_type' in d:
             o.order_type = d['order_type']
         if 'pay_order' in d:
@@ -477,6 +593,8 @@ class EcomOrderDTO(object):
             o.trade_days = d['trade_days']
         if 'trade_end_time' in d:
             o.trade_end_time = d['trade_end_time']
+        if 'trade_pictures' in d:
+            o.trade_pictures = d['trade_pictures']
         if 'trade_start_time' in d:
             o.trade_start_time = d['trade_start_time']
         return o

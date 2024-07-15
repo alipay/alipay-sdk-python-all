@@ -17,8 +17,10 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
         self._device_no = None
         self._device_status = None
         self._device_status_detail = None
+        self._first_actived_time = None
         self._order_id = None
         self._order_status = None
+        self._service_exp = None
         self._vehicle_id = None
 
     @property
@@ -78,6 +80,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     def device_status_detail(self, value):
         self._device_status_detail = value
     @property
+    def first_actived_time(self):
+        return self._first_actived_time
+
+    @first_actived_time.setter
+    def first_actived_time(self, value):
+        self._first_actived_time = value
+    @property
     def order_id(self):
         return self._order_id
 
@@ -91,6 +100,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     @order_status.setter
     def order_status(self, value):
         self._order_status = value
+    @property
+    def service_exp(self):
+        return self._service_exp
+
+    @service_exp.setter
+    def service_exp(self, value):
+        self._service_exp = value
     @property
     def vehicle_id(self):
         return self._vehicle_id
@@ -117,9 +133,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
             self.device_status = response['device_status']
         if 'device_status_detail' in response:
             self.device_status_detail = response['device_status_detail']
+        if 'first_actived_time' in response:
+            self.first_actived_time = response['first_actived_time']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'order_status' in response:
             self.order_status = response['order_status']
+        if 'service_exp' in response:
+            self.service_exp = response['service_exp']
         if 'vehicle_id' in response:
             self.vehicle_id = response['vehicle_id']

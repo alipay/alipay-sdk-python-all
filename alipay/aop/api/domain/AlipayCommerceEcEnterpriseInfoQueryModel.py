@@ -9,6 +9,7 @@ class AlipayCommerceEcEnterpriseInfoQueryModel(object):
 
     def __init__(self):
         self._enterprise_id = None
+        self._out_biz_no = None
 
     @property
     def enterprise_id(self):
@@ -17,6 +18,13 @@ class AlipayCommerceEcEnterpriseInfoQueryModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
 
 
     def to_alipay_dict(self):
@@ -26,6 +34,11 @@ class AlipayCommerceEcEnterpriseInfoQueryModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         return params
 
     @staticmethod
@@ -35,6 +48,8 @@ class AlipayCommerceEcEnterpriseInfoQueryModel(object):
         o = AlipayCommerceEcEnterpriseInfoQueryModel()
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         return o
 
 

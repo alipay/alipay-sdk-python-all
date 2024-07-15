@@ -11,6 +11,7 @@ class GroupAuthorizeVO(object):
         self._authorize_id = None
         self._login_id = None
         self._open_id = None
+        self._status = None
         self._type = None
         self._user_id = None
         self._user_name = None
@@ -36,6 +37,13 @@ class GroupAuthorizeVO(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def type(self):
         return self._type
@@ -76,6 +84,11 @@ class GroupAuthorizeVO(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -104,6 +117,8 @@ class GroupAuthorizeVO(object):
             o.login_id = d['login_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'status' in d:
+            o.status = d['status']
         if 'type' in d:
             o.type = d['type']
         if 'user_id' in d:

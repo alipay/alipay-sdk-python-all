@@ -9,6 +9,7 @@ class ExtendParams(object):
 
     def __init__(self):
         self._card_type = None
+        self._credit_ext_info = None
         self._hb_fq_num = None
         self._hb_fq_seller_percent = None
         self._industry_reflux_info = None
@@ -25,6 +26,13 @@ class ExtendParams(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def credit_ext_info(self):
+        return self._credit_ext_info
+
+    @credit_ext_info.setter
+    def credit_ext_info(self, value):
+        self._credit_ext_info = value
     @property
     def hb_fq_num(self):
         return self._hb_fq_num
@@ -90,6 +98,11 @@ class ExtendParams(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.credit_ext_info:
+            if hasattr(self.credit_ext_info, 'to_alipay_dict'):
+                params['credit_ext_info'] = self.credit_ext_info.to_alipay_dict()
+            else:
+                params['credit_ext_info'] = self.credit_ext_info
         if self.hb_fq_num:
             if hasattr(self.hb_fq_num, 'to_alipay_dict'):
                 params['hb_fq_num'] = self.hb_fq_num.to_alipay_dict()
@@ -139,6 +152,8 @@ class ExtendParams(object):
         o = ExtendParams()
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'credit_ext_info' in d:
+            o.credit_ext_info = d['credit_ext_info']
         if 'hb_fq_num' in d:
             o.hb_fq_num = d['hb_fq_num']
         if 'hb_fq_seller_percent' in d:

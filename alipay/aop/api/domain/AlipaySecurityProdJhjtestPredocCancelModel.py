@@ -14,6 +14,7 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
         self._com_c = None
         self._is_s = None
         self._isasdasd = None
+        self._price_a_input = None
         self._sdd = None
         self._test_a = None
         self._test_a_openid = None
@@ -52,6 +53,13 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
     @isasdasd.setter
     def isasdasd(self, value):
         self._isasdasd = value
+    @property
+    def price_a_input(self):
+        return self._price_a_input
+
+    @price_a_input.setter
+    def price_a_input(self, value):
+        self._price_a_input = value
     @property
     def sdd(self):
         return self._sdd
@@ -97,6 +105,11 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
                 params['isasdasd'] = self.isasdasd.to_alipay_dict()
             else:
                 params['isasdasd'] = self.isasdasd
+        if self.price_a_input:
+            if hasattr(self.price_a_input, 'to_alipay_dict'):
+                params['price_a_input'] = self.price_a_input.to_alipay_dict()
+            else:
+                params['price_a_input'] = self.price_a_input
         if self.sdd:
             if hasattr(self.sdd, 'to_alipay_dict'):
                 params['sdd'] = self.sdd.to_alipay_dict()
@@ -127,6 +140,8 @@ class AlipaySecurityProdJhjtestPredocCancelModel(object):
             o.is_s = d['is_s']
         if 'isasdasd' in d:
             o.isasdasd = d['isasdasd']
+        if 'price_a_input' in d:
+            o.price_a_input = d['price_a_input']
         if 'sdd' in d:
             o.sdd = d['sdd']
         if 'test_a' in d:

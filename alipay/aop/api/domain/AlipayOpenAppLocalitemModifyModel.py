@@ -138,10 +138,13 @@ class AlipayOpenAppLocalitemModifyModel(object):
 
     @skus.setter
     def skus(self, value):
-        if isinstance(value, LocalItemSkuModifyVO):
-            self._skus = value
-        else:
-            self._skus = LocalItemSkuModifyVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._skus = list()
+            for i in value:
+                if isinstance(i, LocalItemSkuModifyVO):
+                    self._skus.append(i)
+                else:
+                    self._skus.append(LocalItemSkuModifyVO.from_alipay_dict(i))
     @property
     def sold_time(self):
         return self._sold_time
@@ -246,6 +249,11 @@ class AlipayOpenAppLocalitemModifyModel(object):
             else:
                 params['path'] = self.path
         if self.skus:
+            if isinstance(self.skus, list):
+                for i in range(0, len(self.skus)):
+                    element = self.skus[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.skus[i] = element.to_alipay_dict()
             if hasattr(self.skus, 'to_alipay_dict'):
                 params['skus'] = self.skus.to_alipay_dict()
             else:

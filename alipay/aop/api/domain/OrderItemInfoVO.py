@@ -4,7 +4,9 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ItemRefundInfoVO import ItemRefundInfoVO
+from alipay.aop.api.domain.ItemTagVO import ItemTagVO
 from alipay.aop.api.domain.OrderCertificateInfoVO import OrderCertificateInfoVO
+from alipay.aop.api.domain.ShippingTimeLimitVO import ShippingTimeLimitVO
 
 
 class OrderItemInfoVO(object):
@@ -13,10 +15,12 @@ class OrderItemInfoVO(object):
         self._item_cnt = None
         self._item_id = None
         self._item_refund_info = None
+        self._item_tags = None
         self._order_certificate_infos = None
         self._out_item_id = None
         self._out_sku_id = None
         self._sale_price = None
+        self._shipping_time_limit = None
         self._sku_id = None
 
     @property
@@ -43,6 +47,16 @@ class OrderItemInfoVO(object):
             self._item_refund_info = value
         else:
             self._item_refund_info = ItemRefundInfoVO.from_alipay_dict(value)
+    @property
+    def item_tags(self):
+        return self._item_tags
+
+    @item_tags.setter
+    def item_tags(self, value):
+        if isinstance(value, ItemTagVO):
+            self._item_tags = value
+        else:
+            self._item_tags = ItemTagVO.from_alipay_dict(value)
     @property
     def order_certificate_infos(self):
         return self._order_certificate_infos
@@ -78,6 +92,16 @@ class OrderItemInfoVO(object):
     def sale_price(self, value):
         self._sale_price = value
     @property
+    def shipping_time_limit(self):
+        return self._shipping_time_limit
+
+    @shipping_time_limit.setter
+    def shipping_time_limit(self, value):
+        if isinstance(value, ShippingTimeLimitVO):
+            self._shipping_time_limit = value
+        else:
+            self._shipping_time_limit = ShippingTimeLimitVO.from_alipay_dict(value)
+    @property
     def sku_id(self):
         return self._sku_id
 
@@ -103,6 +127,11 @@ class OrderItemInfoVO(object):
                 params['item_refund_info'] = self.item_refund_info.to_alipay_dict()
             else:
                 params['item_refund_info'] = self.item_refund_info
+        if self.item_tags:
+            if hasattr(self.item_tags, 'to_alipay_dict'):
+                params['item_tags'] = self.item_tags.to_alipay_dict()
+            else:
+                params['item_tags'] = self.item_tags
         if self.order_certificate_infos:
             if isinstance(self.order_certificate_infos, list):
                 for i in range(0, len(self.order_certificate_infos)):
@@ -128,6 +157,11 @@ class OrderItemInfoVO(object):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
             else:
                 params['sale_price'] = self.sale_price
+        if self.shipping_time_limit:
+            if hasattr(self.shipping_time_limit, 'to_alipay_dict'):
+                params['shipping_time_limit'] = self.shipping_time_limit.to_alipay_dict()
+            else:
+                params['shipping_time_limit'] = self.shipping_time_limit
         if self.sku_id:
             if hasattr(self.sku_id, 'to_alipay_dict'):
                 params['sku_id'] = self.sku_id.to_alipay_dict()
@@ -146,6 +180,8 @@ class OrderItemInfoVO(object):
             o.item_id = d['item_id']
         if 'item_refund_info' in d:
             o.item_refund_info = d['item_refund_info']
+        if 'item_tags' in d:
+            o.item_tags = d['item_tags']
         if 'order_certificate_infos' in d:
             o.order_certificate_infos = d['order_certificate_infos']
         if 'out_item_id' in d:
@@ -154,6 +190,8 @@ class OrderItemInfoVO(object):
             o.out_sku_id = d['out_sku_id']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
+        if 'shipping_time_limit' in d:
+            o.shipping_time_limit = d['shipping_time_limit']
         if 'sku_id' in d:
             o.sku_id = d['sku_id']
         return o

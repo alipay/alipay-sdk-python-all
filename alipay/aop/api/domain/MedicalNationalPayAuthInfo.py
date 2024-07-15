@@ -12,6 +12,7 @@ class MedicalNationalPayAuthInfo(object):
         self._auth_stas = None
         self._auth_time = None
         self._auth_url = None
+        self._insu_org = None
         self._medical_card_id = None
         self._medical_card_inst_id = None
         self._medical_card_status = None
@@ -50,6 +51,13 @@ class MedicalNationalPayAuthInfo(object):
     @auth_url.setter
     def auth_url(self, value):
         self._auth_url = value
+    @property
+    def insu_org(self):
+        return self._insu_org
+
+    @insu_org.setter
+    def insu_org(self, value):
+        self._insu_org = value
     @property
     def medical_card_id(self):
         return self._medical_card_id
@@ -137,6 +145,11 @@ class MedicalNationalPayAuthInfo(object):
                 params['auth_url'] = self.auth_url.to_alipay_dict()
             else:
                 params['auth_url'] = self.auth_url
+        if self.insu_org:
+            if hasattr(self.insu_org, 'to_alipay_dict'):
+                params['insu_org'] = self.insu_org.to_alipay_dict()
+            else:
+                params['insu_org'] = self.insu_org
         if self.medical_card_id:
             if hasattr(self.medical_card_id, 'to_alipay_dict'):
                 params['medical_card_id'] = self.medical_card_id.to_alipay_dict()
@@ -197,6 +210,8 @@ class MedicalNationalPayAuthInfo(object):
             o.auth_time = d['auth_time']
         if 'auth_url' in d:
             o.auth_url = d['auth_url']
+        if 'insu_org' in d:
+            o.insu_org = d['insu_org']
         if 'medical_card_id' in d:
             o.medical_card_id = d['medical_card_id']
         if 'medical_card_inst_id' in d:

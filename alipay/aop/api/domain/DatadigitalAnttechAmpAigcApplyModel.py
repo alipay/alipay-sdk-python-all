@@ -9,6 +9,8 @@ class DatadigitalAnttechAmpAigcApplyModel(object):
 
     def __init__(self):
         self._context = None
+        self._device_id = None
+        self._device_id_type = None
         self._height = None
         self._mode = None
         self._param_data = None
@@ -24,6 +26,20 @@ class DatadigitalAnttechAmpAigcApplyModel(object):
     @context.setter
     def context(self, value):
         self._context = value
+    @property
+    def device_id(self):
+        return self._device_id
+
+    @device_id.setter
+    def device_id(self, value):
+        self._device_id = value
+    @property
+    def device_id_type(self):
+        return self._device_id_type
+
+    @device_id_type.setter
+    def device_id_type(self, value):
+        self._device_id_type = value
     @property
     def height(self):
         return self._height
@@ -82,6 +98,16 @@ class DatadigitalAnttechAmpAigcApplyModel(object):
                 params['context'] = self.context.to_alipay_dict()
             else:
                 params['context'] = self.context
+        if self.device_id:
+            if hasattr(self.device_id, 'to_alipay_dict'):
+                params['device_id'] = self.device_id.to_alipay_dict()
+            else:
+                params['device_id'] = self.device_id
+        if self.device_id_type:
+            if hasattr(self.device_id_type, 'to_alipay_dict'):
+                params['device_id_type'] = self.device_id_type.to_alipay_dict()
+            else:
+                params['device_id_type'] = self.device_id_type
         if self.height:
             if hasattr(self.height, 'to_alipay_dict'):
                 params['height'] = self.height.to_alipay_dict()
@@ -126,6 +152,10 @@ class DatadigitalAnttechAmpAigcApplyModel(object):
         o = DatadigitalAnttechAmpAigcApplyModel()
         if 'context' in d:
             o.context = d['context']
+        if 'device_id' in d:
+            o.device_id = d['device_id']
+        if 'device_id_type' in d:
+            o.device_id_type = d['device_id_type']
         if 'height' in d:
             o.height = d['height']
         if 'mode' in d:

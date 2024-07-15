@@ -10,6 +10,8 @@ class Participant(object):
 
     def __init__(self):
         self._bankcard_ext_info = None
+        self._cert_no = None
+        self._cert_type = None
         self._ext_info = None
         self._identity = None
         self._identity_type = None
@@ -26,6 +28,20 @@ class Participant(object):
             self._bankcard_ext_info = value
         else:
             self._bankcard_ext_info = BankcardExtInfo.from_alipay_dict(value)
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def ext_info(self):
         return self._ext_info
@@ -70,6 +86,16 @@ class Participant(object):
                 params['bankcard_ext_info'] = self.bankcard_ext_info.to_alipay_dict()
             else:
                 params['bankcard_ext_info'] = self.bankcard_ext_info
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -104,6 +130,10 @@ class Participant(object):
         o = Participant()
         if 'bankcard_ext_info' in d:
             o.bankcard_ext_info = d['bankcard_ext_info']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'identity' in d:

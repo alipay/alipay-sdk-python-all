@@ -10,11 +10,19 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenMiniOrderAnxinitemsellorderBatchqueryResponse, self).__init__()
+        self._has_next_page = None
         self._order_list = None
         self._page_size = None
         self._page_token = None
         self._total = None
 
+    @property
+    def has_next_page(self):
+        return self._has_next_page
+
+    @has_next_page.setter
+    def has_next_page(self, value):
+        self._has_next_page = value
     @property
     def order_list(self):
         return self._order_list
@@ -52,6 +60,8 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderAnxinitemsellorderBatchqueryResponse, self).parse_response_content(response_content)
+        if 'has_next_page' in response:
+            self.has_next_page = response['has_next_page']
         if 'order_list' in response:
             self.order_list = response['order_list']
         if 'page_size' in response:

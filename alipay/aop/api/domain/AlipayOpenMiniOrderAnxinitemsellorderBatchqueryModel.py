@@ -9,6 +9,7 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryModel(object):
 
     def __init__(self):
         self._create_time = None
+        self._mini_app_id = None
         self._page_size = None
         self._page_token = None
         self._trade_no = None
@@ -20,6 +21,13 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryModel(object):
     @create_time.setter
     def create_time(self, value):
         self._create_time = value
+    @property
+    def mini_app_id(self):
+        return self._mini_app_id
+
+    @mini_app_id.setter
+    def mini_app_id(self, value):
+        self._mini_app_id = value
     @property
     def page_size(self):
         return self._page_size
@@ -50,6 +58,11 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryModel(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.mini_app_id:
+            if hasattr(self.mini_app_id, 'to_alipay_dict'):
+                params['mini_app_id'] = self.mini_app_id.to_alipay_dict()
+            else:
+                params['mini_app_id'] = self.mini_app_id
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayOpenMiniOrderAnxinitemsellorderBatchqueryModel(object):
         o = AlipayOpenMiniOrderAnxinitemsellorderBatchqueryModel()
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'mini_app_id' in d:
+            o.mini_app_id = d['mini_app_id']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'page_token' in d:

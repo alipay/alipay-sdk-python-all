@@ -9,6 +9,7 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
 
     def __init__(self):
         self._biz_order_id = None
+        self._biz_url = None
         self._buyer_id = None
         self._consume_time = None
         self._open_id = None
@@ -18,6 +19,7 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
         self._status = None
         self._total_count = None
         self._usage_count = None
+        self._verify_type = None
 
     @property
     def biz_order_id(self):
@@ -26,6 +28,13 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     @biz_order_id.setter
     def biz_order_id(self, value):
         self._biz_order_id = value
+    @property
+    def biz_url(self):
+        return self._biz_url
+
+    @biz_url.setter
+    def biz_url(self, value):
+        self._biz_url = value
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -89,6 +98,13 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     @usage_count.setter
     def usage_count(self, value):
         self._usage_count = value
+    @property
+    def verify_type(self):
+        return self._verify_type
+
+    @verify_type.setter
+    def verify_type(self, value):
+        self._verify_type = value
 
 
     def to_alipay_dict(self):
@@ -98,6 +114,11 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
                 params['biz_order_id'] = self.biz_order_id.to_alipay_dict()
             else:
                 params['biz_order_id'] = self.biz_order_id
+        if self.biz_url:
+            if hasattr(self.biz_url, 'to_alipay_dict'):
+                params['biz_url'] = self.biz_url.to_alipay_dict()
+            else:
+                params['biz_url'] = self.biz_url
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -143,6 +164,11 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
                 params['usage_count'] = self.usage_count.to_alipay_dict()
             else:
                 params['usage_count'] = self.usage_count
+        if self.verify_type:
+            if hasattr(self.verify_type, 'to_alipay_dict'):
+                params['verify_type'] = self.verify_type.to_alipay_dict()
+            else:
+                params['verify_type'] = self.verify_type
         return params
 
     @staticmethod
@@ -152,6 +178,8 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
         o = AlipayCommerceMedicalCommercialPerformanceVerifyModel()
         if 'biz_order_id' in d:
             o.biz_order_id = d['biz_order_id']
+        if 'biz_url' in d:
+            o.biz_url = d['biz_url']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'consume_time' in d:
@@ -170,6 +198,8 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
             o.total_count = d['total_count']
         if 'usage_count' in d:
             o.usage_count = d['usage_count']
+        if 'verify_type' in d:
+            o.verify_type = d['verify_type']
         return o
 
 

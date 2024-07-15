@@ -12,6 +12,7 @@ class QAChatDetail(object):
         self._answer = None
         self._answer_type = None
         self._chat_uuid = None
+        self._local_timestamp = None
         self._query = None
         self._vote_type = None
 
@@ -39,6 +40,13 @@ class QAChatDetail(object):
     @chat_uuid.setter
     def chat_uuid(self, value):
         self._chat_uuid = value
+    @property
+    def local_timestamp(self):
+        return self._local_timestamp
+
+    @local_timestamp.setter
+    def local_timestamp(self, value):
+        self._local_timestamp = value
     @property
     def query(self):
         return self._query
@@ -72,6 +80,11 @@ class QAChatDetail(object):
                 params['chat_uuid'] = self.chat_uuid.to_alipay_dict()
             else:
                 params['chat_uuid'] = self.chat_uuid
+        if self.local_timestamp:
+            if hasattr(self.local_timestamp, 'to_alipay_dict'):
+                params['local_timestamp'] = self.local_timestamp.to_alipay_dict()
+            else:
+                params['local_timestamp'] = self.local_timestamp
         if self.query:
             if hasattr(self.query, 'to_alipay_dict'):
                 params['query'] = self.query.to_alipay_dict()
@@ -95,6 +108,8 @@ class QAChatDetail(object):
             o.answer_type = d['answer_type']
         if 'chat_uuid' in d:
             o.chat_uuid = d['chat_uuid']
+        if 'local_timestamp' in d:
+            o.local_timestamp = d['local_timestamp']
         if 'query' in d:
             o.query = d['query']
         if 'vote_type' in d:

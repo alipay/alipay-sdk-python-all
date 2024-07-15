@@ -11,9 +11,11 @@ class ReserveCustomer(object):
         self._customer_birthday = None
         self._customer_gender = None
         self._customer_identity_no = None
+        self._customer_identity_type = None
         self._customer_medical_status = None
         self._customer_mobile_phone = None
         self._customer_name = None
+        self._prepare_pregnancy = None
 
     @property
     def customer_birthday(self):
@@ -37,6 +39,13 @@ class ReserveCustomer(object):
     def customer_identity_no(self, value):
         self._customer_identity_no = value
     @property
+    def customer_identity_type(self):
+        return self._customer_identity_type
+
+    @customer_identity_type.setter
+    def customer_identity_type(self, value):
+        self._customer_identity_type = value
+    @property
     def customer_medical_status(self):
         return self._customer_medical_status
 
@@ -57,6 +66,13 @@ class ReserveCustomer(object):
     @customer_name.setter
     def customer_name(self, value):
         self._customer_name = value
+    @property
+    def prepare_pregnancy(self):
+        return self._prepare_pregnancy
+
+    @prepare_pregnancy.setter
+    def prepare_pregnancy(self, value):
+        self._prepare_pregnancy = value
 
 
     def to_alipay_dict(self):
@@ -76,6 +92,11 @@ class ReserveCustomer(object):
                 params['customer_identity_no'] = self.customer_identity_no.to_alipay_dict()
             else:
                 params['customer_identity_no'] = self.customer_identity_no
+        if self.customer_identity_type:
+            if hasattr(self.customer_identity_type, 'to_alipay_dict'):
+                params['customer_identity_type'] = self.customer_identity_type.to_alipay_dict()
+            else:
+                params['customer_identity_type'] = self.customer_identity_type
         if self.customer_medical_status:
             if hasattr(self.customer_medical_status, 'to_alipay_dict'):
                 params['customer_medical_status'] = self.customer_medical_status.to_alipay_dict()
@@ -91,6 +112,11 @@ class ReserveCustomer(object):
                 params['customer_name'] = self.customer_name.to_alipay_dict()
             else:
                 params['customer_name'] = self.customer_name
+        if self.prepare_pregnancy:
+            if hasattr(self.prepare_pregnancy, 'to_alipay_dict'):
+                params['prepare_pregnancy'] = self.prepare_pregnancy.to_alipay_dict()
+            else:
+                params['prepare_pregnancy'] = self.prepare_pregnancy
         return params
 
     @staticmethod
@@ -104,12 +130,16 @@ class ReserveCustomer(object):
             o.customer_gender = d['customer_gender']
         if 'customer_identity_no' in d:
             o.customer_identity_no = d['customer_identity_no']
+        if 'customer_identity_type' in d:
+            o.customer_identity_type = d['customer_identity_type']
         if 'customer_medical_status' in d:
             o.customer_medical_status = d['customer_medical_status']
         if 'customer_mobile_phone' in d:
             o.customer_mobile_phone = d['customer_mobile_phone']
         if 'customer_name' in d:
             o.customer_name = d['customer_name']
+        if 'prepare_pregnancy' in d:
+            o.prepare_pregnancy = d['prepare_pregnancy']
         return o
 
 

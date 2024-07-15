@@ -26,6 +26,7 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
         self._item_id = None
         self._out_no = None
         self._pay_amount = None
+        self._refund_status_str = None
         self._service_code = None
         self._settle_status = None
         self._status = None
@@ -152,6 +153,13 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
     def pay_amount(self, value):
         self._pay_amount = value
     @property
+    def refund_status_str(self):
+        return self._refund_status_str
+
+    @refund_status_str.setter
+    def refund_status_str(self, value):
+        self._refund_status_str = value
+    @property
     def service_code(self):
         return self._service_code
 
@@ -223,6 +231,8 @@ class AlipayEbppIndustryPerformOrderQueryResponse(AlipayResponse):
             self.out_no = response['out_no']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
+        if 'refund_status_str' in response:
+            self.refund_status_str = response['refund_status_str']
         if 'service_code' in response:
             self.service_code = response['service_code']
         if 'settle_status' in response:

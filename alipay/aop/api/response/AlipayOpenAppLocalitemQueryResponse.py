@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
 from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
+from alipay.aop.api.domain.ItemEnrollFreezeContent import ItemEnrollFreezeContent
 from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
 from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.LocalItemSkuQueryVO import LocalItemSkuQueryVO
@@ -25,6 +26,7 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._image_list = None
         self._is_online = None
         self._item_details_page_model = None
+        self._item_enroll_freeze_content = None
         self._item_id = None
         self._item_type = None
         self._merchant_name = None
@@ -121,6 +123,16 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     @item_details_page_model.setter
     def item_details_page_model(self, value):
         self._item_details_page_model = value
+    @property
+    def item_enroll_freeze_content(self):
+        return self._item_enroll_freeze_content
+
+    @item_enroll_freeze_content.setter
+    def item_enroll_freeze_content(self, value):
+        if isinstance(value, ItemEnrollFreezeContent):
+            self._item_enroll_freeze_content = value
+        else:
+            self._item_enroll_freeze_content = ItemEnrollFreezeContent.from_alipay_dict(value)
     @property
     def item_id(self):
         return self._item_id
@@ -261,6 +273,8 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.is_online = response['is_online']
         if 'item_details_page_model' in response:
             self.item_details_page_model = response['item_details_page_model']
+        if 'item_enroll_freeze_content' in response:
+            self.item_enroll_freeze_content = response['item_enroll_freeze_content']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'item_type' in response:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentCarOrderFeeInfo import RentCarOrderFeeInfo
 
 
 class RentCarStoreQuotation(object):
@@ -12,6 +13,7 @@ class RentCarStoreQuotation(object):
         self._comment_tag = None
         self._distance = None
         self._easy_card_usable_day_count = None
+        self._fee_info = None
         self._isv_discount_amount = None
         self._latitude = None
         self._longitude = None
@@ -54,6 +56,16 @@ class RentCarStoreQuotation(object):
     @easy_card_usable_day_count.setter
     def easy_card_usable_day_count(self, value):
         self._easy_card_usable_day_count = value
+    @property
+    def fee_info(self):
+        return self._fee_info
+
+    @fee_info.setter
+    def fee_info(self, value):
+        if isinstance(value, RentCarOrderFeeInfo):
+            self._fee_info = value
+        else:
+            self._fee_info = RentCarOrderFeeInfo.from_alipay_dict(value)
     @property
     def isv_discount_amount(self):
         return self._isv_discount_amount
@@ -175,6 +187,11 @@ class RentCarStoreQuotation(object):
                 params['easy_card_usable_day_count'] = self.easy_card_usable_day_count.to_alipay_dict()
             else:
                 params['easy_card_usable_day_count'] = self.easy_card_usable_day_count
+        if self.fee_info:
+            if hasattr(self.fee_info, 'to_alipay_dict'):
+                params['fee_info'] = self.fee_info.to_alipay_dict()
+            else:
+                params['fee_info'] = self.fee_info
         if self.isv_discount_amount:
             if hasattr(self.isv_discount_amount, 'to_alipay_dict'):
                 params['isv_discount_amount'] = self.isv_discount_amount.to_alipay_dict()
@@ -265,6 +282,8 @@ class RentCarStoreQuotation(object):
             o.distance = d['distance']
         if 'easy_card_usable_day_count' in d:
             o.easy_card_usable_day_count = d['easy_card_usable_day_count']
+        if 'fee_info' in d:
+            o.fee_info = d['fee_info']
         if 'isv_discount_amount' in d:
             o.isv_discount_amount = d['isv_discount_amount']
         if 'latitude' in d:

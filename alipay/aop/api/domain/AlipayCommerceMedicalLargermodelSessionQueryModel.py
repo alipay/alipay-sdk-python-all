@@ -14,6 +14,7 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         self._latitude = None
         self._longitude = None
         self._open_id = None
+        self._org_id = None
         self._out_user_id = None
         self._outer_user_type = None
         self._pre_intention = None
@@ -64,6 +65,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def org_id(self):
+        return self._org_id
+
+    @org_id.setter
+    def org_id(self, value):
+        self._org_id = value
     @property
     def out_user_id(self):
         return self._out_user_id
@@ -147,6 +155,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.org_id:
+            if hasattr(self.org_id, 'to_alipay_dict'):
+                params['org_id'] = self.org_id.to_alipay_dict()
+            else:
+                params['org_id'] = self.org_id
         if self.out_user_id:
             if hasattr(self.out_user_id, 'to_alipay_dict'):
                 params['out_user_id'] = self.out_user_id.to_alipay_dict()
@@ -201,6 +214,8 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
             o.longitude = d['longitude']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'org_id' in d:
+            o.org_id = d['org_id']
         if 'out_user_id' in d:
             o.out_user_id = d['out_user_id']
         if 'outer_user_type' in d:

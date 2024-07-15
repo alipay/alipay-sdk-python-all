@@ -10,6 +10,7 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
     def __init__(self):
         super(MybankCreditSupplychainFactoringSelleradmitQueryResponse, self).__init__()
         self._exsit = None
+        self._need_sign_ar = None
         self._refuse_code = None
         self._refuse_msg = None
         self._refused = None
@@ -23,6 +24,13 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
     @exsit.setter
     def exsit(self, value):
         self._exsit = value
+    @property
+    def need_sign_ar(self):
+        return self._need_sign_ar
+
+    @need_sign_ar.setter
+    def need_sign_ar(self, value):
+        self._need_sign_ar = value
     @property
     def refuse_code(self):
         return self._refuse_code
@@ -66,6 +74,8 @@ class MybankCreditSupplychainFactoringSelleradmitQueryResponse(AlipayResponse):
         response = super(MybankCreditSupplychainFactoringSelleradmitQueryResponse, self).parse_response_content(response_content)
         if 'exsit' in response:
             self.exsit = response['exsit']
+        if 'need_sign_ar' in response:
+            self.need_sign_ar = response['need_sign_ar']
         if 'refuse_code' in response:
             self.refuse_code = response['refuse_code']
         if 'refuse_msg' in response:

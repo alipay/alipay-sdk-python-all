@@ -15,6 +15,7 @@ class AlipayCloudCloudbaseMonitorAlarmruleModifyModel(object):
         self._biz_env_id = None
         self._id = None
         self._name = None
+        self._open = None
         self._time_config = None
         self._trigger_condition = None
         self._triggers = None
@@ -54,6 +55,13 @@ class AlipayCloudCloudbaseMonitorAlarmruleModifyModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open(self):
+        return self._open
+
+    @open.setter
+    def open(self, value):
+        self._open = value
     @property
     def time_config(self):
         return self._time_config
@@ -113,6 +121,11 @@ class AlipayCloudCloudbaseMonitorAlarmruleModifyModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.open:
+            if hasattr(self.open, 'to_alipay_dict'):
+                params['open'] = self.open.to_alipay_dict()
+            else:
+                params['open'] = self.open
         if self.time_config:
             if hasattr(self.time_config, 'to_alipay_dict'):
                 params['time_config'] = self.time_config.to_alipay_dict()
@@ -150,6 +163,8 @@ class AlipayCloudCloudbaseMonitorAlarmruleModifyModel(object):
             o.id = d['id']
         if 'name' in d:
             o.name = d['name']
+        if 'open' in d:
+            o.open = d['open']
         if 'time_config' in d:
             o.time_config = d['time_config']
         if 'trigger_condition' in d:

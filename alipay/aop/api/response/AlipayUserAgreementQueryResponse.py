@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.ExecutionPlan import ExecutionPlan
 
 
 class AlipayUserAgreementQueryResponse(AlipayResponse):
@@ -13,6 +14,7 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
         self._alipay_logon_id = None
         self._credit_auth_mode = None
         self._device_id = None
+        self._execution_plans = None
         self._external_agreement_no = None
         self._external_logon_id = None
         self._invalid_time = None
@@ -58,6 +60,19 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
     @device_id.setter
     def device_id(self, value):
         self._device_id = value
+    @property
+    def execution_plans(self):
+        return self._execution_plans
+
+    @execution_plans.setter
+    def execution_plans(self, value):
+        if isinstance(value, list):
+            self._execution_plans = list()
+            for i in value:
+                if isinstance(i, ExecutionPlan):
+                    self._execution_plans.append(i)
+                else:
+                    self._execution_plans.append(ExecutionPlan.from_alipay_dict(i))
     @property
     def external_agreement_no(self):
         return self._external_agreement_no
@@ -181,6 +196,8 @@ class AlipayUserAgreementQueryResponse(AlipayResponse):
             self.credit_auth_mode = response['credit_auth_mode']
         if 'device_id' in response:
             self.device_id = response['device_id']
+        if 'execution_plans' in response:
+            self.execution_plans = response['execution_plans']
         if 'external_agreement_no' in response:
             self.external_agreement_no = response['external_agreement_no']
         if 'external_logon_id' in response:

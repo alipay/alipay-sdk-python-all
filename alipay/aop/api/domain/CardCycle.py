@@ -11,6 +11,7 @@ class CardCycle(object):
         self._cycle_charge_type = None
         self._cycle_type = None
         self._cycle_value = None
+        self._period_item_type = None
         self._user_select_range_start = None
 
     @property
@@ -34,6 +35,13 @@ class CardCycle(object):
     @cycle_value.setter
     def cycle_value(self, value):
         self._cycle_value = value
+    @property
+    def period_item_type(self):
+        return self._period_item_type
+
+    @period_item_type.setter
+    def period_item_type(self, value):
+        self._period_item_type = value
     @property
     def user_select_range_start(self):
         return self._user_select_range_start
@@ -60,6 +68,11 @@ class CardCycle(object):
                 params['cycle_value'] = self.cycle_value.to_alipay_dict()
             else:
                 params['cycle_value'] = self.cycle_value
+        if self.period_item_type:
+            if hasattr(self.period_item_type, 'to_alipay_dict'):
+                params['period_item_type'] = self.period_item_type.to_alipay_dict()
+            else:
+                params['period_item_type'] = self.period_item_type
         if self.user_select_range_start:
             if hasattr(self.user_select_range_start, 'to_alipay_dict'):
                 params['user_select_range_start'] = self.user_select_range_start.to_alipay_dict()
@@ -78,6 +91,8 @@ class CardCycle(object):
             o.cycle_type = d['cycle_type']
         if 'cycle_value' in d:
             o.cycle_value = d['cycle_value']
+        if 'period_item_type' in d:
+            o.period_item_type = d['period_item_type']
         if 'user_select_range_start' in d:
             o.user_select_range_start = d['user_select_range_start']
         return o

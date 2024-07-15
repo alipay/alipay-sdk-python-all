@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.HotelInvoice import HotelInvoice
 from alipay.aop.api.domain.NightlyRate import NightlyRate
+from alipay.aop.api.domain.RatePlanLabel import RatePlanLabel
 
 
 class RatePlan(object):
@@ -20,7 +21,9 @@ class RatePlan(object):
         self._nightly_rates = None
         self._ota_url = None
         self._pay_type = None
+        self._pkg_product_ids = None
         self._rate_plan_id = None
+        self._rate_plan_labels = None
         self._rate_plan_name = None
         self._refund_rule_id = None
         self._refund_rule_ids = None
@@ -114,12 +117,32 @@ class RatePlan(object):
     def pay_type(self, value):
         self._pay_type = value
     @property
+    def pkg_product_ids(self):
+        return self._pkg_product_ids
+
+    @pkg_product_ids.setter
+    def pkg_product_ids(self, value):
+        self._pkg_product_ids = value
+    @property
     def rate_plan_id(self):
         return self._rate_plan_id
 
     @rate_plan_id.setter
     def rate_plan_id(self, value):
         self._rate_plan_id = value
+    @property
+    def rate_plan_labels(self):
+        return self._rate_plan_labels
+
+    @rate_plan_labels.setter
+    def rate_plan_labels(self, value):
+        if isinstance(value, list):
+            self._rate_plan_labels = list()
+            for i in value:
+                if isinstance(i, RatePlanLabel):
+                    self._rate_plan_labels.append(i)
+                else:
+                    self._rate_plan_labels.append(RatePlanLabel.from_alipay_dict(i))
     @property
     def rate_plan_name(self):
         return self._rate_plan_name
@@ -234,11 +257,26 @@ class RatePlan(object):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
             else:
                 params['pay_type'] = self.pay_type
+        if self.pkg_product_ids:
+            if hasattr(self.pkg_product_ids, 'to_alipay_dict'):
+                params['pkg_product_ids'] = self.pkg_product_ids.to_alipay_dict()
+            else:
+                params['pkg_product_ids'] = self.pkg_product_ids
         if self.rate_plan_id:
             if hasattr(self.rate_plan_id, 'to_alipay_dict'):
                 params['rate_plan_id'] = self.rate_plan_id.to_alipay_dict()
             else:
                 params['rate_plan_id'] = self.rate_plan_id
+        if self.rate_plan_labels:
+            if isinstance(self.rate_plan_labels, list):
+                for i in range(0, len(self.rate_plan_labels)):
+                    element = self.rate_plan_labels[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.rate_plan_labels[i] = element.to_alipay_dict()
+            if hasattr(self.rate_plan_labels, 'to_alipay_dict'):
+                params['rate_plan_labels'] = self.rate_plan_labels.to_alipay_dict()
+            else:
+                params['rate_plan_labels'] = self.rate_plan_labels
         if self.rate_plan_name:
             if hasattr(self.rate_plan_name, 'to_alipay_dict'):
                 params['rate_plan_name'] = self.rate_plan_name.to_alipay_dict()
@@ -301,8 +339,12 @@ class RatePlan(object):
             o.ota_url = d['ota_url']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
+        if 'pkg_product_ids' in d:
+            o.pkg_product_ids = d['pkg_product_ids']
         if 'rate_plan_id' in d:
             o.rate_plan_id = d['rate_plan_id']
+        if 'rate_plan_labels' in d:
+            o.rate_plan_labels = d['rate_plan_labels']
         if 'rate_plan_name' in d:
             o.rate_plan_name = d['rate_plan_name']
         if 'refund_rule_id' in d:

@@ -10,6 +10,10 @@ class AlipayCloudNextbuilderAgentMessageQueryModel(object):
     def __init__(self):
         self._agent_id = None
         self._conversation_id = None
+        self._from_source = None
+        self._order = None
+        self._order_by = None
+        self._outer_user_id = None
         self._page_num = None
         self._page_size = None
 
@@ -27,6 +31,34 @@ class AlipayCloudNextbuilderAgentMessageQueryModel(object):
     @conversation_id.setter
     def conversation_id(self, value):
         self._conversation_id = value
+    @property
+    def from_source(self):
+        return self._from_source
+
+    @from_source.setter
+    def from_source(self, value):
+        self._from_source = value
+    @property
+    def order(self):
+        return self._order
+
+    @order.setter
+    def order(self, value):
+        self._order = value
+    @property
+    def order_by(self):
+        return self._order_by
+
+    @order_by.setter
+    def order_by(self, value):
+        self._order_by = value
+    @property
+    def outer_user_id(self):
+        return self._outer_user_id
+
+    @outer_user_id.setter
+    def outer_user_id(self, value):
+        self._outer_user_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -55,6 +87,26 @@ class AlipayCloudNextbuilderAgentMessageQueryModel(object):
                 params['conversation_id'] = self.conversation_id.to_alipay_dict()
             else:
                 params['conversation_id'] = self.conversation_id
+        if self.from_source:
+            if hasattr(self.from_source, 'to_alipay_dict'):
+                params['from_source'] = self.from_source.to_alipay_dict()
+            else:
+                params['from_source'] = self.from_source
+        if self.order:
+            if hasattr(self.order, 'to_alipay_dict'):
+                params['order'] = self.order.to_alipay_dict()
+            else:
+                params['order'] = self.order
+        if self.order_by:
+            if hasattr(self.order_by, 'to_alipay_dict'):
+                params['order_by'] = self.order_by.to_alipay_dict()
+            else:
+                params['order_by'] = self.order_by
+        if self.outer_user_id:
+            if hasattr(self.outer_user_id, 'to_alipay_dict'):
+                params['outer_user_id'] = self.outer_user_id.to_alipay_dict()
+            else:
+                params['outer_user_id'] = self.outer_user_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -76,6 +128,14 @@ class AlipayCloudNextbuilderAgentMessageQueryModel(object):
             o.agent_id = d['agent_id']
         if 'conversation_id' in d:
             o.conversation_id = d['conversation_id']
+        if 'from_source' in d:
+            o.from_source = d['from_source']
+        if 'order' in d:
+            o.order = d['order']
+        if 'order_by' in d:
+            o.order_by = d['order_by']
+        if 'outer_user_id' in d:
+            o.outer_user_id = d['outer_user_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

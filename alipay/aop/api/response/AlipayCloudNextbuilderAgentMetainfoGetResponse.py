@@ -11,6 +11,7 @@ class AlipayCloudNextbuilderAgentMetainfoGetResponse(AlipayResponse):
         super(AlipayCloudNextbuilderAgentMetainfoGetResponse, self).__init__()
         self._agent_id = None
         self._agent_name = None
+        self._agent_type = None
         self._description = None
         self._icon = None
         self._mode = None
@@ -30,6 +31,13 @@ class AlipayCloudNextbuilderAgentMetainfoGetResponse(AlipayResponse):
     @agent_name.setter
     def agent_name(self, value):
         self._agent_name = value
+    @property
+    def agent_type(self):
+        return self._agent_type
+
+    @agent_type.setter
+    def agent_type(self, value):
+        self._agent_type = value
     @property
     def description(self):
         return self._description
@@ -68,6 +76,8 @@ class AlipayCloudNextbuilderAgentMetainfoGetResponse(AlipayResponse):
             self.agent_id = response['agent_id']
         if 'agent_name' in response:
             self.agent_name = response['agent_name']
+        if 'agent_type' in response:
+            self.agent_type = response['agent_type']
         if 'description' in response:
             self.description = response['description']
         if 'icon' in response:

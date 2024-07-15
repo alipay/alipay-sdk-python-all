@@ -20,6 +20,7 @@ class MiniGoodsDetailInfoDTO(object):
         self._goods_category = None
         self._goods_id = None
         self._goods_name = None
+        self._goods_type = None
         self._image_material_id = None
         self._item_cnt = None
         self._item_discount = None
@@ -91,6 +92,13 @@ class MiniGoodsDetailInfoDTO(object):
     @goods_name.setter
     def goods_name(self, value):
         self._goods_name = value
+    @property
+    def goods_type(self):
+        return self._goods_type
+
+    @goods_type.setter
+    def goods_type(self, value):
+        self._goods_type = value
     @property
     def image_material_id(self):
         return self._image_material_id
@@ -228,6 +236,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['goods_name'] = self.goods_name.to_alipay_dict()
             else:
                 params['goods_name'] = self.goods_name
+        if self.goods_type:
+            if hasattr(self.goods_type, 'to_alipay_dict'):
+                params['goods_type'] = self.goods_type.to_alipay_dict()
+            else:
+                params['goods_type'] = self.goods_type
         if self.image_material_id:
             if hasattr(self.image_material_id, 'to_alipay_dict'):
                 params['image_material_id'] = self.image_material_id.to_alipay_dict()
@@ -309,6 +322,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.goods_id = d['goods_id']
         if 'goods_name' in d:
             o.goods_name = d['goods_name']
+        if 'goods_type' in d:
+            o.goods_type = d['goods_type']
         if 'image_material_id' in d:
             o.image_material_id = d['image_material_id']
         if 'item_cnt' in d:

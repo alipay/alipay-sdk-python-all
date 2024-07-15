@@ -7,6 +7,8 @@ from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
+from alipay.aop.api.domain.MerchantShopIndustryInfo import MerchantShopIndustryInfo
+from alipay.aop.api.domain.ShopIndustryLicense import ShopIndustryLicense
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 from alipay.aop.api.domain.ShopRecommendInfo import ShopRecommendInfo
 
@@ -27,6 +29,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._contact_mobile = None
         self._contact_phone = None
         self._ext_infos = None
+        self._industry_info = None
+        self._industry_license = None
         self._ip_role_id = None
         self._legal_cert_no = None
         self._legal_name = None
@@ -150,6 +154,32 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
                     self._ext_infos.append(i)
                 else:
                     self._ext_infos.append(ShopExtInfo.from_alipay_dict(i))
+    @property
+    def industry_info(self):
+        return self._industry_info
+
+    @industry_info.setter
+    def industry_info(self, value):
+        if isinstance(value, list):
+            self._industry_info = list()
+            for i in value:
+                if isinstance(i, MerchantShopIndustryInfo):
+                    self._industry_info.append(i)
+                else:
+                    self._industry_info.append(MerchantShopIndustryInfo.from_alipay_dict(i))
+    @property
+    def industry_license(self):
+        return self._industry_license
+
+    @industry_license.setter
+    def industry_license(self, value):
+        if isinstance(value, list):
+            self._industry_license = list()
+            for i in value:
+                if isinstance(i, ShopIndustryLicense):
+                    self._industry_license.append(i)
+                else:
+                    self._industry_license.append(ShopIndustryLicense.from_alipay_dict(i))
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -308,6 +338,10 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.contact_phone = response['contact_phone']
         if 'ext_infos' in response:
             self.ext_infos = response['ext_infos']
+        if 'industry_info' in response:
+            self.industry_info = response['industry_info']
+        if 'industry_license' in response:
+            self.industry_license = response['industry_license']
         if 'ip_role_id' in response:
             self.ip_role_id = response['ip_role_id']
         if 'legal_cert_no' in response:

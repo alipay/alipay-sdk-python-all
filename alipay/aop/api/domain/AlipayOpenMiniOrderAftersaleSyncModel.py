@@ -20,6 +20,8 @@ class AlipayOpenMiniOrderAftersaleSyncModel(object):
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
+        self._out_refund_request_no_list = None
+        self._return_delivery_type = None
         self._user_id = None
 
     @property
@@ -102,6 +104,23 @@ class AlipayOpenMiniOrderAftersaleSyncModel(object):
     def out_order_id(self, value):
         self._out_order_id = value
     @property
+    def out_refund_request_no_list(self):
+        return self._out_refund_request_no_list
+
+    @out_refund_request_no_list.setter
+    def out_refund_request_no_list(self, value):
+        if isinstance(value, list):
+            self._out_refund_request_no_list = list()
+            for i in value:
+                self._out_refund_request_no_list.append(i)
+    @property
+    def return_delivery_type(self):
+        return self._return_delivery_type
+
+    @return_delivery_type.setter
+    def return_delivery_type(self, value):
+        self._return_delivery_type = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -167,6 +186,21 @@ class AlipayOpenMiniOrderAftersaleSyncModel(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.out_refund_request_no_list:
+            if isinstance(self.out_refund_request_no_list, list):
+                for i in range(0, len(self.out_refund_request_no_list)):
+                    element = self.out_refund_request_no_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.out_refund_request_no_list[i] = element.to_alipay_dict()
+            if hasattr(self.out_refund_request_no_list, 'to_alipay_dict'):
+                params['out_refund_request_no_list'] = self.out_refund_request_no_list.to_alipay_dict()
+            else:
+                params['out_refund_request_no_list'] = self.out_refund_request_no_list
+        if self.return_delivery_type:
+            if hasattr(self.return_delivery_type, 'to_alipay_dict'):
+                params['return_delivery_type'] = self.return_delivery_type.to_alipay_dict()
+            else:
+                params['return_delivery_type'] = self.return_delivery_type
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -199,6 +233,10 @@ class AlipayOpenMiniOrderAftersaleSyncModel(object):
             o.order_id = d['order_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'out_refund_request_no_list' in d:
+            o.out_refund_request_no_list = d['out_refund_request_no_list']
+        if 'return_delivery_type' in d:
+            o.return_delivery_type = d['return_delivery_type']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

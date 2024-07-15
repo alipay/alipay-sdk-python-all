@@ -14,6 +14,7 @@ class AlipayCommerceMedicalPaymentCreateandpayModel(object):
         self._alipay_user_id = None
         self._call_url = None
         self._extend_params = None
+        self._gmt_expire_time = None
         self._gmt_out_create = None
         self._gov_amount = None
         self._med_org_ord = None
@@ -61,6 +62,13 @@ class AlipayCommerceMedicalPaymentCreateandpayModel(object):
             self._extend_params = value
         else:
             self._extend_params = TradeExtendParams.from_alipay_dict(value)
+    @property
+    def gmt_expire_time(self):
+        return self._gmt_expire_time
+
+    @gmt_expire_time.setter
+    def gmt_expire_time(self, value):
+        self._gmt_expire_time = value
     @property
     def gmt_out_create(self):
         return self._gmt_out_create
@@ -196,6 +204,11 @@ class AlipayCommerceMedicalPaymentCreateandpayModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.gmt_expire_time:
+            if hasattr(self.gmt_expire_time, 'to_alipay_dict'):
+                params['gmt_expire_time'] = self.gmt_expire_time.to_alipay_dict()
+            else:
+                params['gmt_expire_time'] = self.gmt_expire_time
         if self.gmt_out_create:
             if hasattr(self.gmt_out_create, 'to_alipay_dict'):
                 params['gmt_out_create'] = self.gmt_out_create.to_alipay_dict()
@@ -291,6 +304,8 @@ class AlipayCommerceMedicalPaymentCreateandpayModel(object):
             o.call_url = d['call_url']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'gmt_expire_time' in d:
+            o.gmt_expire_time = d['gmt_expire_time']
         if 'gmt_out_create' in d:
             o.gmt_out_create = d['gmt_out_create']
         if 'gov_amount' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.OpenCertifyMetaInfo import OpenCertifyMetaInfo
 
 
 class DatadigitalFincloudGeneralsaasFaceVerificationQueryResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class DatadigitalFincloudGeneralsaasFaceVerificationQueryResponse(AlipayResponse
         self._alive_photo = None
         self._attack_flag = None
         self._certify_state = None
+        self._meta_info = None
         self._quality = None
         self._score = None
 
@@ -37,6 +39,16 @@ class DatadigitalFincloudGeneralsaasFaceVerificationQueryResponse(AlipayResponse
     def certify_state(self, value):
         self._certify_state = value
     @property
+    def meta_info(self):
+        return self._meta_info
+
+    @meta_info.setter
+    def meta_info(self, value):
+        if isinstance(value, OpenCertifyMetaInfo):
+            self._meta_info = value
+        else:
+            self._meta_info = OpenCertifyMetaInfo.from_alipay_dict(value)
+    @property
     def quality(self):
         return self._quality
 
@@ -59,6 +71,8 @@ class DatadigitalFincloudGeneralsaasFaceVerificationQueryResponse(AlipayResponse
             self.attack_flag = response['attack_flag']
         if 'certify_state' in response:
             self.certify_state = response['certify_state']
+        if 'meta_info' in response:
+            self.meta_info = response['meta_info']
         if 'quality' in response:
             self.quality = response['quality']
         if 'score' in response:

@@ -11,6 +11,7 @@ class DeliveryPositionContentVO(object):
 
     def __init__(self):
         self._content_fatigue = None
+        self._content_info_log = None
         self._creativity_fatigue = None
         self._image_url = None
         self._jump_url = None
@@ -26,6 +27,13 @@ class DeliveryPositionContentVO(object):
             self._content_fatigue = value
         else:
             self._content_fatigue = DeliveryFatigueContent.from_alipay_dict(value)
+    @property
+    def content_info_log(self):
+        return self._content_info_log
+
+    @content_info_log.setter
+    def content_info_log(self, value):
+        self._content_info_log = value
     @property
     def creativity_fatigue(self):
         return self._creativity_fatigue
@@ -66,6 +74,11 @@ class DeliveryPositionContentVO(object):
                 params['content_fatigue'] = self.content_fatigue.to_alipay_dict()
             else:
                 params['content_fatigue'] = self.content_fatigue
+        if self.content_info_log:
+            if hasattr(self.content_info_log, 'to_alipay_dict'):
+                params['content_info_log'] = self.content_info_log.to_alipay_dict()
+            else:
+                params['content_info_log'] = self.content_info_log
         if self.creativity_fatigue:
             if hasattr(self.creativity_fatigue, 'to_alipay_dict'):
                 params['creativity_fatigue'] = self.creativity_fatigue.to_alipay_dict()
@@ -95,6 +108,8 @@ class DeliveryPositionContentVO(object):
         o = DeliveryPositionContentVO()
         if 'content_fatigue' in d:
             o.content_fatigue = d['content_fatigue']
+        if 'content_info_log' in d:
+            o.content_info_log = d['content_info_log']
         if 'creativity_fatigue' in d:
             o.creativity_fatigue = d['creativity_fatigue']
         if 'image_url' in d:

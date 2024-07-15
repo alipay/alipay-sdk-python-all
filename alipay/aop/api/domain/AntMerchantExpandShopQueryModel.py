@@ -10,6 +10,8 @@ class AntMerchantExpandShopQueryModel(object):
     def __init__(self):
         self._address_version = None
         self._ip_role_id = None
+        self._need_industry_info = None
+        self._need_industry_license = None
         self._need_recommend = None
         self._shop_id = None
         self._store_id = None
@@ -28,6 +30,20 @@ class AntMerchantExpandShopQueryModel(object):
     @ip_role_id.setter
     def ip_role_id(self, value):
         self._ip_role_id = value
+    @property
+    def need_industry_info(self):
+        return self._need_industry_info
+
+    @need_industry_info.setter
+    def need_industry_info(self, value):
+        self._need_industry_info = value
+    @property
+    def need_industry_license(self):
+        return self._need_industry_license
+
+    @need_industry_license.setter
+    def need_industry_license(self, value):
+        self._need_industry_license = value
     @property
     def need_recommend(self):
         return self._need_recommend
@@ -63,6 +79,16 @@ class AntMerchantExpandShopQueryModel(object):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
             else:
                 params['ip_role_id'] = self.ip_role_id
+        if self.need_industry_info:
+            if hasattr(self.need_industry_info, 'to_alipay_dict'):
+                params['need_industry_info'] = self.need_industry_info.to_alipay_dict()
+            else:
+                params['need_industry_info'] = self.need_industry_info
+        if self.need_industry_license:
+            if hasattr(self.need_industry_license, 'to_alipay_dict'):
+                params['need_industry_license'] = self.need_industry_license.to_alipay_dict()
+            else:
+                params['need_industry_license'] = self.need_industry_license
         if self.need_recommend:
             if hasattr(self.need_recommend, 'to_alipay_dict'):
                 params['need_recommend'] = self.need_recommend.to_alipay_dict()
@@ -89,6 +115,10 @@ class AntMerchantExpandShopQueryModel(object):
             o.address_version = d['address_version']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
+        if 'need_industry_info' in d:
+            o.need_industry_info = d['need_industry_info']
+        if 'need_industry_license' in d:
+            o.need_industry_license = d['need_industry_license']
         if 'need_recommend' in d:
             o.need_recommend = d['need_recommend']
         if 'shop_id' in d:

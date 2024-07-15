@@ -8,7 +8,9 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEbppIndustryGovserviceRecommendQueryModel(object):
 
     def __init__(self):
+        self._actual_city_code = None
         self._channel = None
+        self._city_code = None
         self._identify_id = None
         self._open_id = None
         self._pid = None
@@ -17,12 +19,26 @@ class AlipayEbppIndustryGovserviceRecommendQueryModel(object):
         self._user_id = None
 
     @property
+    def actual_city_code(self):
+        return self._actual_city_code
+
+    @actual_city_code.setter
+    def actual_city_code(self, value):
+        self._actual_city_code = value
+    @property
     def channel(self):
         return self._channel
 
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
     @property
     def identify_id(self):
         return self._identify_id
@@ -69,11 +85,21 @@ class AlipayEbppIndustryGovserviceRecommendQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.actual_city_code:
+            if hasattr(self.actual_city_code, 'to_alipay_dict'):
+                params['actual_city_code'] = self.actual_city_code.to_alipay_dict()
+            else:
+                params['actual_city_code'] = self.actual_city_code
         if self.channel:
             if hasattr(self.channel, 'to_alipay_dict'):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
         if self.identify_id:
             if hasattr(self.identify_id, 'to_alipay_dict'):
                 params['identify_id'] = self.identify_id.to_alipay_dict()
@@ -111,8 +137,12 @@ class AlipayEbppIndustryGovserviceRecommendQueryModel(object):
         if not d:
             return None
         o = AlipayEbppIndustryGovserviceRecommendQueryModel()
+        if 'actual_city_code' in d:
+            o.actual_city_code = d['actual_city_code']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
         if 'identify_id' in d:
             o.identify_id = d['identify_id']
         if 'open_id' in d:

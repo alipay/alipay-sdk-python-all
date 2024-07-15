@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LandingActDto import LandingActDto
+from alipay.aop.api.domain.VideoInfo import VideoInfo
 
 
 class LandingTypeDto(object):
@@ -14,6 +15,7 @@ class LandingTypeDto(object):
         self._landing_name = None
         self._landing_type = None
         self._landing_url = None
+        self._product_videos = None
 
     @property
     def landing_act(self):
@@ -56,6 +58,19 @@ class LandingTypeDto(object):
     @landing_url.setter
     def landing_url(self, value):
         self._landing_url = value
+    @property
+    def product_videos(self):
+        return self._product_videos
+
+    @product_videos.setter
+    def product_videos(self, value):
+        if isinstance(value, list):
+            self._product_videos = list()
+            for i in value:
+                if isinstance(i, VideoInfo):
+                    self._product_videos.append(i)
+                else:
+                    self._product_videos.append(VideoInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -90,6 +105,16 @@ class LandingTypeDto(object):
                 params['landing_url'] = self.landing_url.to_alipay_dict()
             else:
                 params['landing_url'] = self.landing_url
+        if self.product_videos:
+            if isinstance(self.product_videos, list):
+                for i in range(0, len(self.product_videos)):
+                    element = self.product_videos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.product_videos[i] = element.to_alipay_dict()
+            if hasattr(self.product_videos, 'to_alipay_dict'):
+                params['product_videos'] = self.product_videos.to_alipay_dict()
+            else:
+                params['product_videos'] = self.product_videos
         return params
 
     @staticmethod
@@ -107,6 +132,8 @@ class LandingTypeDto(object):
             o.landing_type = d['landing_type']
         if 'landing_url' in d:
             o.landing_url = d['landing_url']
+        if 'product_videos' in d:
+            o.product_videos = d['product_videos']
         return o
 
 

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ETCRefundItemDto import ETCRefundItemDto
 
 
 class AlipayCommerceTransportEtcSettlementRefundModel(object):
@@ -12,6 +13,7 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
         self._out_order_id = None
         self._out_request_no = None
         self._refund_amount = None
+        self._refund_item_list = None
         self._refund_reason = None
 
     @property
@@ -43,6 +45,19 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
     def refund_amount(self, value):
         self._refund_amount = value
     @property
+    def refund_item_list(self):
+        return self._refund_item_list
+
+    @refund_item_list.setter
+    def refund_item_list(self, value):
+        if isinstance(value, list):
+            self._refund_item_list = list()
+            for i in value:
+                if isinstance(i, ETCRefundItemDto):
+                    self._refund_item_list.append(i)
+                else:
+                    self._refund_item_list.append(ETCRefundItemDto.from_alipay_dict(i))
+    @property
     def refund_reason(self):
         return self._refund_reason
 
@@ -73,6 +88,16 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
             else:
                 params['refund_amount'] = self.refund_amount
+        if self.refund_item_list:
+            if isinstance(self.refund_item_list, list):
+                for i in range(0, len(self.refund_item_list)):
+                    element = self.refund_item_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refund_item_list[i] = element.to_alipay_dict()
+            if hasattr(self.refund_item_list, 'to_alipay_dict'):
+                params['refund_item_list'] = self.refund_item_list.to_alipay_dict()
+            else:
+                params['refund_item_list'] = self.refund_item_list
         if self.refund_reason:
             if hasattr(self.refund_reason, 'to_alipay_dict'):
                 params['refund_reason'] = self.refund_reason.to_alipay_dict()
@@ -93,6 +118,8 @@ class AlipayCommerceTransportEtcSettlementRefundModel(object):
             o.out_request_no = d['out_request_no']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
+        if 'refund_item_list' in d:
+            o.refund_item_list = d['refund_item_list']
         if 'refund_reason' in d:
             o.refund_reason = d['refund_reason']
         return o

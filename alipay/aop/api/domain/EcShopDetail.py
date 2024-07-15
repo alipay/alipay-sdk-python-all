@@ -3,13 +3,17 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EcActivityInfo import EcActivityInfo
 from alipay.aop.api.domain.EcMccInfo import EcMccInfo
+from alipay.aop.api.domain.EcTradeIdentityInfo import EcTradeIdentityInfo
+from alipay.aop.api.domain.EcTradingAreaInfo import EcTradingAreaInfo
 
 
 class EcShopDetail(object):
 
     def __init__(self):
         self._accuracy_level = None
+        self._activity_info_list = None
         self._city_id = None
         self._city_name = None
         self._district_id = None
@@ -28,6 +32,8 @@ class EcShopDetail(object):
         self._shop_name = None
         self._shop_type = None
         self._support_invoice = None
+        self._trade_identity_info_list = None
+        self._trading_area_info = None
 
     @property
     def accuracy_level(self):
@@ -36,6 +42,19 @@ class EcShopDetail(object):
     @accuracy_level.setter
     def accuracy_level(self, value):
         self._accuracy_level = value
+    @property
+    def activity_info_list(self):
+        return self._activity_info_list
+
+    @activity_info_list.setter
+    def activity_info_list(self, value):
+        if isinstance(value, list):
+            self._activity_info_list = list()
+            for i in value:
+                if isinstance(i, EcActivityInfo):
+                    self._activity_info_list.append(i)
+                else:
+                    self._activity_info_list.append(EcActivityInfo.from_alipay_dict(i))
     @property
     def city_id(self):
         return self._city_id
@@ -168,6 +187,29 @@ class EcShopDetail(object):
     @support_invoice.setter
     def support_invoice(self, value):
         self._support_invoice = value
+    @property
+    def trade_identity_info_list(self):
+        return self._trade_identity_info_list
+
+    @trade_identity_info_list.setter
+    def trade_identity_info_list(self, value):
+        if isinstance(value, list):
+            self._trade_identity_info_list = list()
+            for i in value:
+                if isinstance(i, EcTradeIdentityInfo):
+                    self._trade_identity_info_list.append(i)
+                else:
+                    self._trade_identity_info_list.append(EcTradeIdentityInfo.from_alipay_dict(i))
+    @property
+    def trading_area_info(self):
+        return self._trading_area_info
+
+    @trading_area_info.setter
+    def trading_area_info(self, value):
+        if isinstance(value, EcTradingAreaInfo):
+            self._trading_area_info = value
+        else:
+            self._trading_area_info = EcTradingAreaInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -177,6 +219,16 @@ class EcShopDetail(object):
                 params['accuracy_level'] = self.accuracy_level.to_alipay_dict()
             else:
                 params['accuracy_level'] = self.accuracy_level
+        if self.activity_info_list:
+            if isinstance(self.activity_info_list, list):
+                for i in range(0, len(self.activity_info_list)):
+                    element = self.activity_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.activity_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.activity_info_list, 'to_alipay_dict'):
+                params['activity_info_list'] = self.activity_info_list.to_alipay_dict()
+            else:
+                params['activity_info_list'] = self.activity_info_list
         if self.city_id:
             if hasattr(self.city_id, 'to_alipay_dict'):
                 params['city_id'] = self.city_id.to_alipay_dict()
@@ -272,6 +324,21 @@ class EcShopDetail(object):
                 params['support_invoice'] = self.support_invoice.to_alipay_dict()
             else:
                 params['support_invoice'] = self.support_invoice
+        if self.trade_identity_info_list:
+            if isinstance(self.trade_identity_info_list, list):
+                for i in range(0, len(self.trade_identity_info_list)):
+                    element = self.trade_identity_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_identity_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.trade_identity_info_list, 'to_alipay_dict'):
+                params['trade_identity_info_list'] = self.trade_identity_info_list.to_alipay_dict()
+            else:
+                params['trade_identity_info_list'] = self.trade_identity_info_list
+        if self.trading_area_info:
+            if hasattr(self.trading_area_info, 'to_alipay_dict'):
+                params['trading_area_info'] = self.trading_area_info.to_alipay_dict()
+            else:
+                params['trading_area_info'] = self.trading_area_info
         return params
 
     @staticmethod
@@ -281,6 +348,8 @@ class EcShopDetail(object):
         o = EcShopDetail()
         if 'accuracy_level' in d:
             o.accuracy_level = d['accuracy_level']
+        if 'activity_info_list' in d:
+            o.activity_info_list = d['activity_info_list']
         if 'city_id' in d:
             o.city_id = d['city_id']
         if 'city_name' in d:
@@ -317,6 +386,10 @@ class EcShopDetail(object):
             o.shop_type = d['shop_type']
         if 'support_invoice' in d:
             o.support_invoice = d['support_invoice']
+        if 'trade_identity_info_list' in d:
+            o.trade_identity_info_list = d['trade_identity_info_list']
+        if 'trading_area_info' in d:
+            o.trading_area_info = d['trading_area_info']
         return o
 
 

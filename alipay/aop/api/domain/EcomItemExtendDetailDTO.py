@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsOpenVehicleDTO import InsOpenVehicleDTO
 
 
 class EcomItemExtendDetailDTO(object):
@@ -23,6 +24,7 @@ class EcomItemExtendDetailDTO(object):
         self._charge_station_prov = None
         self._charge_station_town = None
         self._charge_type = None
+        self._deductible_amount = None
         self._ext_info = None
         self._factory_ins_end_time = None
         self._game_account = None
@@ -36,6 +38,7 @@ class EcomItemExtendDetailDTO(object):
         self._pet_type = None
         self._pet_version = None
         self._plug_no = None
+        self._vehicle = None
 
     @property
     def card_type(self):
@@ -143,6 +146,13 @@ class EcomItemExtendDetailDTO(object):
     def charge_type(self, value):
         self._charge_type = value
     @property
+    def deductible_amount(self):
+        return self._deductible_amount
+
+    @deductible_amount.setter
+    def deductible_amount(self, value):
+        self._deductible_amount = value
+    @property
     def ext_info(self):
         return self._ext_info
 
@@ -233,6 +243,16 @@ class EcomItemExtendDetailDTO(object):
     @plug_no.setter
     def plug_no(self, value):
         self._plug_no = value
+    @property
+    def vehicle(self):
+        return self._vehicle
+
+    @vehicle.setter
+    def vehicle(self, value):
+        if isinstance(value, InsOpenVehicleDTO):
+            self._vehicle = value
+        else:
+            self._vehicle = InsOpenVehicleDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -312,6 +332,11 @@ class EcomItemExtendDetailDTO(object):
                 params['charge_type'] = self.charge_type.to_alipay_dict()
             else:
                 params['charge_type'] = self.charge_type
+        if self.deductible_amount:
+            if hasattr(self.deductible_amount, 'to_alipay_dict'):
+                params['deductible_amount'] = self.deductible_amount.to_alipay_dict()
+            else:
+                params['deductible_amount'] = self.deductible_amount
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -377,6 +402,11 @@ class EcomItemExtendDetailDTO(object):
                 params['plug_no'] = self.plug_no.to_alipay_dict()
             else:
                 params['plug_no'] = self.plug_no
+        if self.vehicle:
+            if hasattr(self.vehicle, 'to_alipay_dict'):
+                params['vehicle'] = self.vehicle.to_alipay_dict()
+            else:
+                params['vehicle'] = self.vehicle
         return params
 
     @staticmethod
@@ -414,6 +444,8 @@ class EcomItemExtendDetailDTO(object):
             o.charge_station_town = d['charge_station_town']
         if 'charge_type' in d:
             o.charge_type = d['charge_type']
+        if 'deductible_amount' in d:
+            o.deductible_amount = d['deductible_amount']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'factory_ins_end_time' in d:
@@ -440,6 +472,8 @@ class EcomItemExtendDetailDTO(object):
             o.pet_version = d['pet_version']
         if 'plug_no' in d:
             o.plug_no = d['plug_no']
+        if 'vehicle' in d:
+            o.vehicle = d['vehicle']
         return o
 
 

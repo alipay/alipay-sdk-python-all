@@ -9,6 +9,7 @@ class AlipayCloudNextbuilderAgentConversationQueryModel(object):
 
     def __init__(self):
         self._agent_id = None
+        self._from_source = None
         self._from_time = None
         self._outer_user_id = None
         self._page_num = None
@@ -22,6 +23,13 @@ class AlipayCloudNextbuilderAgentConversationQueryModel(object):
     @agent_id.setter
     def agent_id(self, value):
         self._agent_id = value
+    @property
+    def from_source(self):
+        return self._from_source
+
+    @from_source.setter
+    def from_source(self, value):
+        self._from_source = value
     @property
     def from_time(self):
         return self._from_time
@@ -66,6 +74,11 @@ class AlipayCloudNextbuilderAgentConversationQueryModel(object):
                 params['agent_id'] = self.agent_id.to_alipay_dict()
             else:
                 params['agent_id'] = self.agent_id
+        if self.from_source:
+            if hasattr(self.from_source, 'to_alipay_dict'):
+                params['from_source'] = self.from_source.to_alipay_dict()
+            else:
+                params['from_source'] = self.from_source
         if self.from_time:
             if hasattr(self.from_time, 'to_alipay_dict'):
                 params['from_time'] = self.from_time.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayCloudNextbuilderAgentConversationQueryModel(object):
         o = AlipayCloudNextbuilderAgentConversationQueryModel()
         if 'agent_id' in d:
             o.agent_id = d['agent_id']
+        if 'from_source' in d:
+            o.from_source = d['from_source']
         if 'from_time' in d:
             o.from_time = d['from_time']
         if 'outer_user_id' in d:

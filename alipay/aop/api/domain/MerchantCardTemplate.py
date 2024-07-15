@@ -19,6 +19,7 @@ class MerchantCardTemplate(object):
         self._category_id = None
         self._image_id_list = None
         self._image_url_list = None
+        self._msg_app_id = None
         self._out_card_id = None
         self._reject_reasons = None
         self._sale_info = None
@@ -87,6 +88,13 @@ class MerchantCardTemplate(object):
             self._image_url_list = list()
             for i in value:
                 self._image_url_list.append(i)
+    @property
+    def msg_app_id(self):
+        return self._msg_app_id
+
+    @msg_app_id.setter
+    def msg_app_id(self, value):
+        self._msg_app_id = value
     @property
     def out_card_id(self):
         return self._out_card_id
@@ -188,6 +196,11 @@ class MerchantCardTemplate(object):
                 params['image_url_list'] = self.image_url_list.to_alipay_dict()
             else:
                 params['image_url_list'] = self.image_url_list
+        if self.msg_app_id:
+            if hasattr(self.msg_app_id, 'to_alipay_dict'):
+                params['msg_app_id'] = self.msg_app_id.to_alipay_dict()
+            else:
+                params['msg_app_id'] = self.msg_app_id
         if self.out_card_id:
             if hasattr(self.out_card_id, 'to_alipay_dict'):
                 params['out_card_id'] = self.out_card_id.to_alipay_dict()
@@ -241,6 +254,8 @@ class MerchantCardTemplate(object):
             o.image_id_list = d['image_id_list']
         if 'image_url_list' in d:
             o.image_url_list = d['image_url_list']
+        if 'msg_app_id' in d:
+            o.msg_app_id = d['msg_app_id']
         if 'out_card_id' in d:
             o.out_card_id = d['out_card_id']
         if 'reject_reasons' in d:

@@ -14,6 +14,7 @@ class AlipayCommerceMedicalAuthinfoAuthQueryModel(object):
         self._extend_params = None
         self._ins_code = None
         self._ol_biz_type_code = None
+        self._online_drug_chnl_app_id = None
         self._open_id = None
         self._org_app_id = None
         self._org_chnl_crtf_code = None
@@ -58,6 +59,13 @@ class AlipayCommerceMedicalAuthinfoAuthQueryModel(object):
     @ol_biz_type_code.setter
     def ol_biz_type_code(self, value):
         self._ol_biz_type_code = value
+    @property
+    def online_drug_chnl_app_id(self):
+        return self._online_drug_chnl_app_id
+
+    @online_drug_chnl_app_id.setter
+    def online_drug_chnl_app_id(self, value):
+        self._online_drug_chnl_app_id = value
     @property
     def open_id(self):
         return self._open_id
@@ -122,6 +130,11 @@ class AlipayCommerceMedicalAuthinfoAuthQueryModel(object):
                 params['ol_biz_type_code'] = self.ol_biz_type_code.to_alipay_dict()
             else:
                 params['ol_biz_type_code'] = self.ol_biz_type_code
+        if self.online_drug_chnl_app_id:
+            if hasattr(self.online_drug_chnl_app_id, 'to_alipay_dict'):
+                params['online_drug_chnl_app_id'] = self.online_drug_chnl_app_id.to_alipay_dict()
+            else:
+                params['online_drug_chnl_app_id'] = self.online_drug_chnl_app_id
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -164,6 +177,8 @@ class AlipayCommerceMedicalAuthinfoAuthQueryModel(object):
             o.ins_code = d['ins_code']
         if 'ol_biz_type_code' in d:
             o.ol_biz_type_code = d['ol_biz_type_code']
+        if 'online_drug_chnl_app_id' in d:
+            o.online_drug_chnl_app_id = d['online_drug_chnl_app_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'org_app_id' in d:

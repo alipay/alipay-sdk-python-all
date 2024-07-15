@@ -10,6 +10,7 @@ class RentPlan(object):
     def __init__(self):
         self._actual_pay_time = None
         self._expect_pay_time = None
+        self._installment_id = None
         self._period = None
         self._plan_status = None
         self._rent_price = None
@@ -29,6 +30,13 @@ class RentPlan(object):
     @expect_pay_time.setter
     def expect_pay_time(self, value):
         self._expect_pay_time = value
+    @property
+    def installment_id(self):
+        return self._installment_id
+
+    @installment_id.setter
+    def installment_id(self, value):
+        self._installment_id = value
     @property
     def period(self):
         return self._period
@@ -71,6 +79,11 @@ class RentPlan(object):
                 params['expect_pay_time'] = self.expect_pay_time.to_alipay_dict()
             else:
                 params['expect_pay_time'] = self.expect_pay_time
+        if self.installment_id:
+            if hasattr(self.installment_id, 'to_alipay_dict'):
+                params['installment_id'] = self.installment_id.to_alipay_dict()
+            else:
+                params['installment_id'] = self.installment_id
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -102,6 +115,8 @@ class RentPlan(object):
             o.actual_pay_time = d['actual_pay_time']
         if 'expect_pay_time' in d:
             o.expect_pay_time = d['expect_pay_time']
+        if 'installment_id' in d:
+            o.installment_id = d['installment_id']
         if 'period' in d:
             o.period = d['period']
         if 'plan_status' in d:

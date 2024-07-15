@@ -18,6 +18,7 @@ class DataBillResult(object):
         self._pay_time = None
         self._real_pay_amt = None
         self._trade_total_amt = None
+        self._transaction_type = None
         self._user_trd_cnt_rank = None
 
     @property
@@ -91,6 +92,13 @@ class DataBillResult(object):
     def trade_total_amt(self, value):
         self._trade_total_amt = value
     @property
+    def transaction_type(self):
+        return self._transaction_type
+
+    @transaction_type.setter
+    def transaction_type(self, value):
+        self._transaction_type = value
+    @property
     def user_trd_cnt_rank(self):
         return self._user_trd_cnt_rank
 
@@ -151,6 +159,11 @@ class DataBillResult(object):
                 params['trade_total_amt'] = self.trade_total_amt.to_alipay_dict()
             else:
                 params['trade_total_amt'] = self.trade_total_amt
+        if self.transaction_type:
+            if hasattr(self.transaction_type, 'to_alipay_dict'):
+                params['transaction_type'] = self.transaction_type.to_alipay_dict()
+            else:
+                params['transaction_type'] = self.transaction_type
         if self.user_trd_cnt_rank:
             if hasattr(self.user_trd_cnt_rank, 'to_alipay_dict'):
                 params['user_trd_cnt_rank'] = self.user_trd_cnt_rank.to_alipay_dict()
@@ -183,6 +196,8 @@ class DataBillResult(object):
             o.real_pay_amt = d['real_pay_amt']
         if 'trade_total_amt' in d:
             o.trade_total_amt = d['trade_total_amt']
+        if 'transaction_type' in d:
+            o.transaction_type = d['transaction_type']
         if 'user_trd_cnt_rank' in d:
             o.user_trd_cnt_rank = d['user_trd_cnt_rank']
         return o

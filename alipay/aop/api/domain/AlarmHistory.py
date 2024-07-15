@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlarmHistory(object):
 
     def __init__(self):
+        self._alarm_level = None
         self._alarm_time = None
         self._duration = None
         self._id = None
@@ -17,7 +18,15 @@ class AlarmHistory(object):
         self._rule_id = None
         self._rule_name = None
         self._total = None
+        self._trigger_content = None
 
+    @property
+    def alarm_level(self):
+        return self._alarm_level
+
+    @alarm_level.setter
+    def alarm_level(self, value):
+        self._alarm_level = value
     @property
     def alarm_time(self):
         return self._alarm_time
@@ -81,10 +90,22 @@ class AlarmHistory(object):
     @total.setter
     def total(self, value):
         self._total = value
+    @property
+    def trigger_content(self):
+        return self._trigger_content
+
+    @trigger_content.setter
+    def trigger_content(self, value):
+        self._trigger_content = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alarm_level:
+            if hasattr(self.alarm_level, 'to_alipay_dict'):
+                params['alarm_level'] = self.alarm_level.to_alipay_dict()
+            else:
+                params['alarm_level'] = self.alarm_level
         if self.alarm_time:
             if hasattr(self.alarm_time, 'to_alipay_dict'):
                 params['alarm_time'] = self.alarm_time.to_alipay_dict()
@@ -130,6 +151,11 @@ class AlarmHistory(object):
                 params['total'] = self.total.to_alipay_dict()
             else:
                 params['total'] = self.total
+        if self.trigger_content:
+            if hasattr(self.trigger_content, 'to_alipay_dict'):
+                params['trigger_content'] = self.trigger_content.to_alipay_dict()
+            else:
+                params['trigger_content'] = self.trigger_content
         return params
 
     @staticmethod
@@ -137,6 +163,8 @@ class AlarmHistory(object):
         if not d:
             return None
         o = AlarmHistory()
+        if 'alarm_level' in d:
+            o.alarm_level = d['alarm_level']
         if 'alarm_time' in d:
             o.alarm_time = d['alarm_time']
         if 'duration' in d:
@@ -155,6 +183,8 @@ class AlarmHistory(object):
             o.rule_name = d['rule_name']
         if 'total' in d:
             o.total = d['total']
+        if 'trigger_content' in d:
+            o.trigger_content = d['trigger_content']
         return o
 
 

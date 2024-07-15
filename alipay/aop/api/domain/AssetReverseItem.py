@@ -37,6 +37,7 @@ class AssetReverseItem(object):
         self._reverse_apply_order_item_id = None
         self._reverse_biz_scene = None
         self._reverse_type = None
+        self._supplier_id = None
         self._to_address = None
 
     @property
@@ -227,6 +228,13 @@ class AssetReverseItem(object):
     def reverse_type(self, value):
         self._reverse_type = value
     @property
+    def supplier_id(self):
+        return self._supplier_id
+
+    @supplier_id.setter
+    def supplier_id(self, value):
+        self._supplier_id = value
+    @property
     def to_address(self):
         return self._to_address
 
@@ -370,6 +378,11 @@ class AssetReverseItem(object):
                 params['reverse_type'] = self.reverse_type.to_alipay_dict()
             else:
                 params['reverse_type'] = self.reverse_type
+        if self.supplier_id:
+            if hasattr(self.supplier_id, 'to_alipay_dict'):
+                params['supplier_id'] = self.supplier_id.to_alipay_dict()
+            else:
+                params['supplier_id'] = self.supplier_id
         if self.to_address:
             if hasattr(self.to_address, 'to_alipay_dict'):
                 params['to_address'] = self.to_address.to_alipay_dict()
@@ -432,6 +445,8 @@ class AssetReverseItem(object):
             o.reverse_biz_scene = d['reverse_biz_scene']
         if 'reverse_type' in d:
             o.reverse_type = d['reverse_type']
+        if 'supplier_id' in d:
+            o.supplier_id = d['supplier_id']
         if 'to_address' in d:
             o.to_address = d['to_address']
         return o

@@ -23,8 +23,11 @@ class CreateCustomerRequest(object):
         self._established_date = None
         self._industry = None
         self._industry_category = None
+        self._key_customer = None
         self._location = None
         self._memo = None
+        self._pub_cloud_first_level_industry = None
+        self._pub_cloud_second_level_industry = None
         self._region = None
         self._registered_address = None
         self._registered_capital = None
@@ -136,6 +139,13 @@ class CreateCustomerRequest(object):
     def industry_category(self, value):
         self._industry_category = value
     @property
+    def key_customer(self):
+        return self._key_customer
+
+    @key_customer.setter
+    def key_customer(self, value):
+        self._key_customer = value
+    @property
     def location(self):
         return self._location
 
@@ -149,6 +159,20 @@ class CreateCustomerRequest(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def pub_cloud_first_level_industry(self):
+        return self._pub_cloud_first_level_industry
+
+    @pub_cloud_first_level_industry.setter
+    def pub_cloud_first_level_industry(self, value):
+        self._pub_cloud_first_level_industry = value
+    @property
+    def pub_cloud_second_level_industry(self):
+        return self._pub_cloud_second_level_industry
+
+    @pub_cloud_second_level_industry.setter
+    def pub_cloud_second_level_industry(self, value):
+        self._pub_cloud_second_level_industry = value
     @property
     def region(self):
         return self._region
@@ -256,6 +280,11 @@ class CreateCustomerRequest(object):
                 params['industry_category'] = self.industry_category.to_alipay_dict()
             else:
                 params['industry_category'] = self.industry_category
+        if self.key_customer:
+            if hasattr(self.key_customer, 'to_alipay_dict'):
+                params['key_customer'] = self.key_customer.to_alipay_dict()
+            else:
+                params['key_customer'] = self.key_customer
         if self.location:
             if hasattr(self.location, 'to_alipay_dict'):
                 params['location'] = self.location.to_alipay_dict()
@@ -266,6 +295,16 @@ class CreateCustomerRequest(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.pub_cloud_first_level_industry:
+            if hasattr(self.pub_cloud_first_level_industry, 'to_alipay_dict'):
+                params['pub_cloud_first_level_industry'] = self.pub_cloud_first_level_industry.to_alipay_dict()
+            else:
+                params['pub_cloud_first_level_industry'] = self.pub_cloud_first_level_industry
+        if self.pub_cloud_second_level_industry:
+            if hasattr(self.pub_cloud_second_level_industry, 'to_alipay_dict'):
+                params['pub_cloud_second_level_industry'] = self.pub_cloud_second_level_industry.to_alipay_dict()
+            else:
+                params['pub_cloud_second_level_industry'] = self.pub_cloud_second_level_industry
         if self.region:
             if hasattr(self.region, 'to_alipay_dict'):
                 params['region'] = self.region.to_alipay_dict()
@@ -323,10 +362,16 @@ class CreateCustomerRequest(object):
             o.industry = d['industry']
         if 'industry_category' in d:
             o.industry_category = d['industry_category']
+        if 'key_customer' in d:
+            o.key_customer = d['key_customer']
         if 'location' in d:
             o.location = d['location']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'pub_cloud_first_level_industry' in d:
+            o.pub_cloud_first_level_industry = d['pub_cloud_first_level_industry']
+        if 'pub_cloud_second_level_industry' in d:
+            o.pub_cloud_second_level_industry = d['pub_cloud_second_level_industry']
         if 'region' in d:
             o.region = d['region']
         if 'registered_address' in d:

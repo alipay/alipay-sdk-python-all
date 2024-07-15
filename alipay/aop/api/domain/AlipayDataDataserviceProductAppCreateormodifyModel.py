@@ -7,6 +7,7 @@ from alipay.aop.api.domain.ItemAttrDto import ItemAttrDto
 from alipay.aop.api.domain.ItemCategoryDto import ItemCategoryDto
 from alipay.aop.api.domain.ItemDescInfoDto import ItemDescInfoDto
 from alipay.aop.api.domain.LandingTypeDto import LandingTypeDto
+from alipay.aop.api.domain.SellsInfo import SellsInfo
 from alipay.aop.api.domain.ItemSkuDto import ItemSkuDto
 
 
@@ -35,6 +36,7 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
         self._prod_app_id = None
         self._sale_price = None
         self._sale_status = None
+        self._sells_info = None
         self._skus = None
         self._stock_num = None
         self._title = None
@@ -215,6 +217,16 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
     def sale_status(self, value):
         self._sale_status = value
     @property
+    def sells_info(self):
+        return self._sells_info
+
+    @sells_info.setter
+    def sells_info(self, value):
+        if isinstance(value, SellsInfo):
+            self._sells_info = value
+        else:
+            self._sells_info = SellsInfo.from_alipay_dict(value)
+    @property
     def skus(self):
         return self._skus
 
@@ -370,6 +382,11 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.sells_info:
+            if hasattr(self.sells_info, 'to_alipay_dict'):
+                params['sells_info'] = self.sells_info.to_alipay_dict()
+            else:
+                params['sells_info'] = self.sells_info
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -441,6 +458,8 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'sells_info' in d:
+            o.sells_info = d['sells_info']
         if 'skus' in d:
             o.skus = d['skus']
         if 'stock_num' in d:

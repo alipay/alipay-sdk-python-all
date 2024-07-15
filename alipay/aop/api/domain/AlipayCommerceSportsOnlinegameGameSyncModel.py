@@ -22,6 +22,7 @@ class AlipayCommerceSportsOnlinegameGameSyncModel(object):
         self._online_game_event_list = None
         self._out_game_no = None
         self._poster_url = None
+        self._product_id = None
         self._sports_data_limit_count = None
         self._sports_data_source = None
         self._sports_data_type = None
@@ -130,6 +131,13 @@ class AlipayCommerceSportsOnlinegameGameSyncModel(object):
     @poster_url.setter
     def poster_url(self, value):
         self._poster_url = value
+    @property
+    def product_id(self):
+        return self._product_id
+
+    @product_id.setter
+    def product_id(self, value):
+        self._product_id = value
     @property
     def sports_data_limit_count(self):
         return self._sports_data_limit_count
@@ -277,6 +285,11 @@ class AlipayCommerceSportsOnlinegameGameSyncModel(object):
                 params['poster_url'] = self.poster_url.to_alipay_dict()
             else:
                 params['poster_url'] = self.poster_url
+        if self.product_id:
+            if hasattr(self.product_id, 'to_alipay_dict'):
+                params['product_id'] = self.product_id.to_alipay_dict()
+            else:
+                params['product_id'] = self.product_id
         if self.sports_data_limit_count:
             if hasattr(self.sports_data_limit_count, 'to_alipay_dict'):
                 params['sports_data_limit_count'] = self.sports_data_limit_count.to_alipay_dict()
@@ -365,6 +378,8 @@ class AlipayCommerceSportsOnlinegameGameSyncModel(object):
             o.out_game_no = d['out_game_no']
         if 'poster_url' in d:
             o.poster_url = d['poster_url']
+        if 'product_id' in d:
+            o.product_id = d['product_id']
         if 'sports_data_limit_count' in d:
             o.sports_data_limit_count = d['sports_data_limit_count']
         if 'sports_data_source' in d:

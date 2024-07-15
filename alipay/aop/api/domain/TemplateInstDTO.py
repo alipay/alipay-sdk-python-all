@@ -13,6 +13,7 @@ class TemplateInstDTO(object):
         self._html_preview_url = None
         self._inst_id = None
         self._oss_url = None
+        self._pdf_preview_url = None
         self._preview_url = None
 
     @property
@@ -51,6 +52,13 @@ class TemplateInstDTO(object):
     def oss_url(self, value):
         self._oss_url = value
     @property
+    def pdf_preview_url(self):
+        return self._pdf_preview_url
+
+    @pdf_preview_url.setter
+    def pdf_preview_url(self, value):
+        self._pdf_preview_url = value
+    @property
     def preview_url(self):
         return self._preview_url
 
@@ -86,6 +94,11 @@ class TemplateInstDTO(object):
                 params['oss_url'] = self.oss_url.to_alipay_dict()
             else:
                 params['oss_url'] = self.oss_url
+        if self.pdf_preview_url:
+            if hasattr(self.pdf_preview_url, 'to_alipay_dict'):
+                params['pdf_preview_url'] = self.pdf_preview_url.to_alipay_dict()
+            else:
+                params['pdf_preview_url'] = self.pdf_preview_url
         if self.preview_url:
             if hasattr(self.preview_url, 'to_alipay_dict'):
                 params['preview_url'] = self.preview_url.to_alipay_dict()
@@ -108,6 +121,8 @@ class TemplateInstDTO(object):
             o.inst_id = d['inst_id']
         if 'oss_url' in d:
             o.oss_url = d['oss_url']
+        if 'pdf_preview_url' in d:
+            o.pdf_preview_url = d['pdf_preview_url']
         if 'preview_url' in d:
             o.preview_url = d['preview_url']
         return o

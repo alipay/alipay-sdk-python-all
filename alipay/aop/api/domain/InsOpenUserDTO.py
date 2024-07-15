@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class InsOpenUserDTO(object):
 
     def __init__(self):
+        self._address = None
         self._id_card_name = None
         self._id_card_no = None
         self._id_card_type = None
@@ -17,6 +18,13 @@ class InsOpenUserDTO(object):
         self._user_name = None
         self._user_type = None
 
+    @property
+    def address(self):
+        return self._address
+
+    @address.setter
+    def address(self, value):
+        self._address = value
     @property
     def id_card_name(self):
         return self._id_card_name
@@ -77,6 +85,11 @@ class InsOpenUserDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.address:
+            if hasattr(self.address, 'to_alipay_dict'):
+                params['address'] = self.address.to_alipay_dict()
+            else:
+                params['address'] = self.address
         if self.id_card_name:
             if hasattr(self.id_card_name, 'to_alipay_dict'):
                 params['id_card_name'] = self.id_card_name.to_alipay_dict()
@@ -124,6 +137,8 @@ class InsOpenUserDTO(object):
         if not d:
             return None
         o = InsOpenUserDTO()
+        if 'address' in d:
+            o.address = d['address']
         if 'id_card_name' in d:
             o.id_card_name = d['id_card_name']
         if 'id_card_no' in d:

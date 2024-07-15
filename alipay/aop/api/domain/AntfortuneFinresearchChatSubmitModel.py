@@ -9,8 +9,10 @@ class AntfortuneFinresearchChatSubmitModel(object):
 
     def __init__(self):
         self._bu_unique_id = None
+        self._business_type = None
         self._file_ids = None
         self._file_type = None
+        self._interpret_mode = None
         self._question = None
         self._session_id = None
         self._tenant_id = None
@@ -24,6 +26,13 @@ class AntfortuneFinresearchChatSubmitModel(object):
     @bu_unique_id.setter
     def bu_unique_id(self, value):
         self._bu_unique_id = value
+    @property
+    def business_type(self):
+        return self._business_type
+
+    @business_type.setter
+    def business_type(self, value):
+        self._business_type = value
     @property
     def file_ids(self):
         return self._file_ids
@@ -41,6 +50,13 @@ class AntfortuneFinresearchChatSubmitModel(object):
     @file_type.setter
     def file_type(self, value):
         self._file_type = value
+    @property
+    def interpret_mode(self):
+        return self._interpret_mode
+
+    @interpret_mode.setter
+    def interpret_mode(self, value):
+        self._interpret_mode = value
     @property
     def question(self):
         return self._question
@@ -88,6 +104,11 @@ class AntfortuneFinresearchChatSubmitModel(object):
                 params['bu_unique_id'] = self.bu_unique_id.to_alipay_dict()
             else:
                 params['bu_unique_id'] = self.bu_unique_id
+        if self.business_type:
+            if hasattr(self.business_type, 'to_alipay_dict'):
+                params['business_type'] = self.business_type.to_alipay_dict()
+            else:
+                params['business_type'] = self.business_type
         if self.file_ids:
             if isinstance(self.file_ids, list):
                 for i in range(0, len(self.file_ids)):
@@ -103,6 +124,11 @@ class AntfortuneFinresearchChatSubmitModel(object):
                 params['file_type'] = self.file_type.to_alipay_dict()
             else:
                 params['file_type'] = self.file_type
+        if self.interpret_mode:
+            if hasattr(self.interpret_mode, 'to_alipay_dict'):
+                params['interpret_mode'] = self.interpret_mode.to_alipay_dict()
+            else:
+                params['interpret_mode'] = self.interpret_mode
         if self.question:
             if hasattr(self.question, 'to_alipay_dict'):
                 params['question'] = self.question.to_alipay_dict()
@@ -142,10 +168,14 @@ class AntfortuneFinresearchChatSubmitModel(object):
         o = AntfortuneFinresearchChatSubmitModel()
         if 'bu_unique_id' in d:
             o.bu_unique_id = d['bu_unique_id']
+        if 'business_type' in d:
+            o.business_type = d['business_type']
         if 'file_ids' in d:
             o.file_ids = d['file_ids']
         if 'file_type' in d:
             o.file_type = d['file_type']
+        if 'interpret_mode' in d:
+            o.interpret_mode = d['interpret_mode']
         if 'question' in d:
             o.question = d['question']
         if 'session_id' in d:

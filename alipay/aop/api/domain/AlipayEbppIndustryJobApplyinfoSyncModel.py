@@ -12,6 +12,9 @@ class AlipayEbppIndustryJobApplyinfoSyncModel(object):
         self._apply_info_url = None
         self._apply_status = None
         self._apply_time = None
+        self._biz_id = None
+        self._inter_address = None
+        self._inter_time = None
         self._iot_sn = None
         self._open_id = None
         self._out_apply_id = None
@@ -46,6 +49,27 @@ class AlipayEbppIndustryJobApplyinfoSyncModel(object):
     @apply_time.setter
     def apply_time(self, value):
         self._apply_time = value
+    @property
+    def biz_id(self):
+        return self._biz_id
+
+    @biz_id.setter
+    def biz_id(self, value):
+        self._biz_id = value
+    @property
+    def inter_address(self):
+        return self._inter_address
+
+    @inter_address.setter
+    def inter_address(self, value):
+        self._inter_address = value
+    @property
+    def inter_time(self):
+        return self._inter_time
+
+    @inter_time.setter
+    def inter_time(self, value):
+        self._inter_time = value
     @property
     def iot_sn(self):
         return self._iot_sn
@@ -105,6 +129,21 @@ class AlipayEbppIndustryJobApplyinfoSyncModel(object):
                 params['apply_time'] = self.apply_time.to_alipay_dict()
             else:
                 params['apply_time'] = self.apply_time
+        if self.biz_id:
+            if hasattr(self.biz_id, 'to_alipay_dict'):
+                params['biz_id'] = self.biz_id.to_alipay_dict()
+            else:
+                params['biz_id'] = self.biz_id
+        if self.inter_address:
+            if hasattr(self.inter_address, 'to_alipay_dict'):
+                params['inter_address'] = self.inter_address.to_alipay_dict()
+            else:
+                params['inter_address'] = self.inter_address
+        if self.inter_time:
+            if hasattr(self.inter_time, 'to_alipay_dict'):
+                params['inter_time'] = self.inter_time.to_alipay_dict()
+            else:
+                params['inter_time'] = self.inter_time
         if self.iot_sn:
             if hasattr(self.iot_sn, 'to_alipay_dict'):
                 params['iot_sn'] = self.iot_sn.to_alipay_dict()
@@ -145,6 +184,12 @@ class AlipayEbppIndustryJobApplyinfoSyncModel(object):
             o.apply_status = d['apply_status']
         if 'apply_time' in d:
             o.apply_time = d['apply_time']
+        if 'biz_id' in d:
+            o.biz_id = d['biz_id']
+        if 'inter_address' in d:
+            o.inter_address = d['inter_address']
+        if 'inter_time' in d:
+            o.inter_time = d['inter_time']
         if 'iot_sn' in d:
             o.iot_sn = d['iot_sn']
         if 'open_id' in d:

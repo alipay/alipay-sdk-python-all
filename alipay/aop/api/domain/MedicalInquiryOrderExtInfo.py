@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MedicalInquiryOrderEvaluateInfo import MedicalInquiryOrderEvaluateInfo
+from alipay.aop.api.domain.PlusRegisterInfo import PlusRegisterInfo
 
 
 class MedicalInquiryOrderExtInfo(object):
@@ -16,6 +17,7 @@ class MedicalInquiryOrderExtInfo(object):
         self._invoice_url = None
         self._medical_inquiry_order_evaluate_info = None
         self._order_pid = None
+        self._plus_register_info = None
         self._refund_url = None
         self._source = None
 
@@ -72,6 +74,16 @@ class MedicalInquiryOrderExtInfo(object):
     def order_pid(self, value):
         self._order_pid = value
     @property
+    def plus_register_info(self):
+        return self._plus_register_info
+
+    @plus_register_info.setter
+    def plus_register_info(self, value):
+        if isinstance(value, PlusRegisterInfo):
+            self._plus_register_info = value
+        else:
+            self._plus_register_info = PlusRegisterInfo.from_alipay_dict(value)
+    @property
     def refund_url(self):
         return self._refund_url
 
@@ -124,6 +136,11 @@ class MedicalInquiryOrderExtInfo(object):
                 params['order_pid'] = self.order_pid.to_alipay_dict()
             else:
                 params['order_pid'] = self.order_pid
+        if self.plus_register_info:
+            if hasattr(self.plus_register_info, 'to_alipay_dict'):
+                params['plus_register_info'] = self.plus_register_info.to_alipay_dict()
+            else:
+                params['plus_register_info'] = self.plus_register_info
         if self.refund_url:
             if hasattr(self.refund_url, 'to_alipay_dict'):
                 params['refund_url'] = self.refund_url.to_alipay_dict()
@@ -155,6 +172,8 @@ class MedicalInquiryOrderExtInfo(object):
             o.medical_inquiry_order_evaluate_info = d['medical_inquiry_order_evaluate_info']
         if 'order_pid' in d:
             o.order_pid = d['order_pid']
+        if 'plus_register_info' in d:
+            o.plus_register_info = d['plus_register_info']
         if 'refund_url' in d:
             o.refund_url = d['refund_url']
         if 'source' in d:

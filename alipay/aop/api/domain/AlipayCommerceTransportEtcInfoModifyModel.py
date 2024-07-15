@@ -18,10 +18,17 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
         self._plate_no = None
         self._user_id = None
         self._vi_ac = None
+        self._vi_brand_model = None
+        self._vi_car_type = None
+        self._vi_engine_no = None
         self._vi_gross_mass = None
         self._vi_height = None
         self._vi_length = None
+        self._vi_license_issue_date = None
+        self._vi_license_register_date = None
         self._vi_owner_name = None
+        self._vi_use_type = None
+        self._vi_vin = None
         self._vi_width = None
 
     @property
@@ -95,6 +102,27 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
     def vi_ac(self, value):
         self._vi_ac = value
     @property
+    def vi_brand_model(self):
+        return self._vi_brand_model
+
+    @vi_brand_model.setter
+    def vi_brand_model(self, value):
+        self._vi_brand_model = value
+    @property
+    def vi_car_type(self):
+        return self._vi_car_type
+
+    @vi_car_type.setter
+    def vi_car_type(self, value):
+        self._vi_car_type = value
+    @property
+    def vi_engine_no(self):
+        return self._vi_engine_no
+
+    @vi_engine_no.setter
+    def vi_engine_no(self, value):
+        self._vi_engine_no = value
+    @property
     def vi_gross_mass(self):
         return self._vi_gross_mass
 
@@ -116,12 +144,40 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
     def vi_length(self, value):
         self._vi_length = value
     @property
+    def vi_license_issue_date(self):
+        return self._vi_license_issue_date
+
+    @vi_license_issue_date.setter
+    def vi_license_issue_date(self, value):
+        self._vi_license_issue_date = value
+    @property
+    def vi_license_register_date(self):
+        return self._vi_license_register_date
+
+    @vi_license_register_date.setter
+    def vi_license_register_date(self, value):
+        self._vi_license_register_date = value
+    @property
     def vi_owner_name(self):
         return self._vi_owner_name
 
     @vi_owner_name.setter
     def vi_owner_name(self, value):
         self._vi_owner_name = value
+    @property
+    def vi_use_type(self):
+        return self._vi_use_type
+
+    @vi_use_type.setter
+    def vi_use_type(self, value):
+        self._vi_use_type = value
+    @property
+    def vi_vin(self):
+        return self._vi_vin
+
+    @vi_vin.setter
+    def vi_vin(self, value):
+        self._vi_vin = value
     @property
     def vi_width(self):
         return self._vi_width
@@ -183,6 +239,21 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
                 params['vi_ac'] = self.vi_ac.to_alipay_dict()
             else:
                 params['vi_ac'] = self.vi_ac
+        if self.vi_brand_model:
+            if hasattr(self.vi_brand_model, 'to_alipay_dict'):
+                params['vi_brand_model'] = self.vi_brand_model.to_alipay_dict()
+            else:
+                params['vi_brand_model'] = self.vi_brand_model
+        if self.vi_car_type:
+            if hasattr(self.vi_car_type, 'to_alipay_dict'):
+                params['vi_car_type'] = self.vi_car_type.to_alipay_dict()
+            else:
+                params['vi_car_type'] = self.vi_car_type
+        if self.vi_engine_no:
+            if hasattr(self.vi_engine_no, 'to_alipay_dict'):
+                params['vi_engine_no'] = self.vi_engine_no.to_alipay_dict()
+            else:
+                params['vi_engine_no'] = self.vi_engine_no
         if self.vi_gross_mass:
             if hasattr(self.vi_gross_mass, 'to_alipay_dict'):
                 params['vi_gross_mass'] = self.vi_gross_mass.to_alipay_dict()
@@ -198,11 +269,31 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
                 params['vi_length'] = self.vi_length.to_alipay_dict()
             else:
                 params['vi_length'] = self.vi_length
+        if self.vi_license_issue_date:
+            if hasattr(self.vi_license_issue_date, 'to_alipay_dict'):
+                params['vi_license_issue_date'] = self.vi_license_issue_date.to_alipay_dict()
+            else:
+                params['vi_license_issue_date'] = self.vi_license_issue_date
+        if self.vi_license_register_date:
+            if hasattr(self.vi_license_register_date, 'to_alipay_dict'):
+                params['vi_license_register_date'] = self.vi_license_register_date.to_alipay_dict()
+            else:
+                params['vi_license_register_date'] = self.vi_license_register_date
         if self.vi_owner_name:
             if hasattr(self.vi_owner_name, 'to_alipay_dict'):
                 params['vi_owner_name'] = self.vi_owner_name.to_alipay_dict()
             else:
                 params['vi_owner_name'] = self.vi_owner_name
+        if self.vi_use_type:
+            if hasattr(self.vi_use_type, 'to_alipay_dict'):
+                params['vi_use_type'] = self.vi_use_type.to_alipay_dict()
+            else:
+                params['vi_use_type'] = self.vi_use_type
+        if self.vi_vin:
+            if hasattr(self.vi_vin, 'to_alipay_dict'):
+                params['vi_vin'] = self.vi_vin.to_alipay_dict()
+            else:
+                params['vi_vin'] = self.vi_vin
         if self.vi_width:
             if hasattr(self.vi_width, 'to_alipay_dict'):
                 params['vi_width'] = self.vi_width.to_alipay_dict()
@@ -235,14 +326,28 @@ class AlipayCommerceTransportEtcInfoModifyModel(object):
             o.user_id = d['user_id']
         if 'vi_ac' in d:
             o.vi_ac = d['vi_ac']
+        if 'vi_brand_model' in d:
+            o.vi_brand_model = d['vi_brand_model']
+        if 'vi_car_type' in d:
+            o.vi_car_type = d['vi_car_type']
+        if 'vi_engine_no' in d:
+            o.vi_engine_no = d['vi_engine_no']
         if 'vi_gross_mass' in d:
             o.vi_gross_mass = d['vi_gross_mass']
         if 'vi_height' in d:
             o.vi_height = d['vi_height']
         if 'vi_length' in d:
             o.vi_length = d['vi_length']
+        if 'vi_license_issue_date' in d:
+            o.vi_license_issue_date = d['vi_license_issue_date']
+        if 'vi_license_register_date' in d:
+            o.vi_license_register_date = d['vi_license_register_date']
         if 'vi_owner_name' in d:
             o.vi_owner_name = d['vi_owner_name']
+        if 'vi_use_type' in d:
+            o.vi_use_type = d['vi_use_type']
+        if 'vi_vin' in d:
+            o.vi_vin = d['vi_vin']
         if 'vi_width' in d:
             o.vi_width = d['vi_width']
         return o

@@ -15,6 +15,7 @@ class BusinessParams(object):
         self._enterprise_pay_info = None
         self._good_taxes = None
         self._mc_create_trade_ip = None
+        self._priority_unfreeze_asset = None
         self._tiny_app_merchant_biz_type = None
 
     @property
@@ -67,6 +68,13 @@ class BusinessParams(object):
     def mc_create_trade_ip(self, value):
         self._mc_create_trade_ip = value
     @property
+    def priority_unfreeze_asset(self):
+        return self._priority_unfreeze_asset
+
+    @priority_unfreeze_asset.setter
+    def priority_unfreeze_asset(self, value):
+        self._priority_unfreeze_asset = value
+    @property
     def tiny_app_merchant_biz_type(self):
         return self._tiny_app_merchant_biz_type
 
@@ -112,6 +120,11 @@ class BusinessParams(object):
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip.to_alipay_dict()
             else:
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip
+        if self.priority_unfreeze_asset:
+            if hasattr(self.priority_unfreeze_asset, 'to_alipay_dict'):
+                params['priority_unfreeze_asset'] = self.priority_unfreeze_asset.to_alipay_dict()
+            else:
+                params['priority_unfreeze_asset'] = self.priority_unfreeze_asset
         if self.tiny_app_merchant_biz_type:
             if hasattr(self.tiny_app_merchant_biz_type, 'to_alipay_dict'):
                 params['tiny_app_merchant_biz_type'] = self.tiny_app_merchant_biz_type.to_alipay_dict()
@@ -138,6 +151,8 @@ class BusinessParams(object):
             o.good_taxes = d['good_taxes']
         if 'mc_create_trade_ip' in d:
             o.mc_create_trade_ip = d['mc_create_trade_ip']
+        if 'priority_unfreeze_asset' in d:
+            o.priority_unfreeze_asset = d['priority_unfreeze_asset']
         if 'tiny_app_merchant_biz_type' in d:
             o.tiny_app_merchant_biz_type = d['tiny_app_merchant_biz_type']
         return o

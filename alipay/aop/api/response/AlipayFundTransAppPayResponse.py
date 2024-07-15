@@ -11,6 +11,7 @@ class AlipayFundTransAppPayResponse(AlipayResponse):
         super(AlipayFundTransAppPayResponse, self).__init__()
         self._order_id = None
         self._out_biz_no = None
+        self._pageRedirectionData = None
         self._status = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayFundTransAppPayResponse(AlipayResponse):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def pageRedirectionData(self):
+        return self._pageRedirectionData
+
+    @pageRedirectionData.setter
+    def pageRedirectionData(self, value):
+        self._pageRedirectionData = value
+    @property
     def status(self):
         return self._status
 
@@ -41,5 +49,7 @@ class AlipayFundTransAppPayResponse(AlipayResponse):
             self.order_id = response['order_id']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
+        if 'pageRedirectionData' in response:
+            self.pageRedirectionData = response['pageRedirectionData']
         if 'status' in response:
             self.status = response['status']

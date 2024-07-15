@@ -13,6 +13,7 @@ class AlipayMarketingAssetPreconsultModel(object):
         self._item_consult_list = None
         self._open_id = None
         self._order_amount = None
+        self._promo_info = None
         self._promo_rule = None
         self._scene_code = None
         self._specified_app_id = None
@@ -52,6 +53,13 @@ class AlipayMarketingAssetPreconsultModel(object):
     @order_amount.setter
     def order_amount(self, value):
         self._order_amount = value
+    @property
+    def promo_info(self):
+        return self._promo_info
+
+    @promo_info.setter
+    def promo_info(self, value):
+        self._promo_info = value
     @property
     def promo_rule(self):
         return self._promo_rule
@@ -109,6 +117,11 @@ class AlipayMarketingAssetPreconsultModel(object):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
             else:
                 params['order_amount'] = self.order_amount
+        if self.promo_info:
+            if hasattr(self.promo_info, 'to_alipay_dict'):
+                params['promo_info'] = self.promo_info.to_alipay_dict()
+            else:
+                params['promo_info'] = self.promo_info
         if self.promo_rule:
             if hasattr(self.promo_rule, 'to_alipay_dict'):
                 params['promo_rule'] = self.promo_rule.to_alipay_dict()
@@ -144,6 +157,8 @@ class AlipayMarketingAssetPreconsultModel(object):
             o.open_id = d['open_id']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
+        if 'promo_info' in d:
+            o.promo_info = d['promo_info']
         if 'promo_rule' in d:
             o.promo_rule = d['promo_rule']
         if 'scene_code' in d:
