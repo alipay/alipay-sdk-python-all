@@ -20,6 +20,8 @@ class AlipayEbppIndustrySupervisionAccountModifyModel(object):
         self._payer_participant_id = None
         self._payer_participant_name = None
         self._payer_participant_type = None
+        self._special_funds_amount = None
+        self._special_funds_currency = None
 
     @property
     def account_no(self):
@@ -105,6 +107,20 @@ class AlipayEbppIndustrySupervisionAccountModifyModel(object):
     @payer_participant_type.setter
     def payer_participant_type(self, value):
         self._payer_participant_type = value
+    @property
+    def special_funds_amount(self):
+        return self._special_funds_amount
+
+    @special_funds_amount.setter
+    def special_funds_amount(self, value):
+        self._special_funds_amount = value
+    @property
+    def special_funds_currency(self):
+        return self._special_funds_currency
+
+    @special_funds_currency.setter
+    def special_funds_currency(self, value):
+        self._special_funds_currency = value
 
 
     def to_alipay_dict(self):
@@ -169,6 +185,16 @@ class AlipayEbppIndustrySupervisionAccountModifyModel(object):
                 params['payer_participant_type'] = self.payer_participant_type.to_alipay_dict()
             else:
                 params['payer_participant_type'] = self.payer_participant_type
+        if self.special_funds_amount:
+            if hasattr(self.special_funds_amount, 'to_alipay_dict'):
+                params['special_funds_amount'] = self.special_funds_amount.to_alipay_dict()
+            else:
+                params['special_funds_amount'] = self.special_funds_amount
+        if self.special_funds_currency:
+            if hasattr(self.special_funds_currency, 'to_alipay_dict'):
+                params['special_funds_currency'] = self.special_funds_currency.to_alipay_dict()
+            else:
+                params['special_funds_currency'] = self.special_funds_currency
         return params
 
     @staticmethod
@@ -200,6 +226,10 @@ class AlipayEbppIndustrySupervisionAccountModifyModel(object):
             o.payer_participant_name = d['payer_participant_name']
         if 'payer_participant_type' in d:
             o.payer_participant_type = d['payer_participant_type']
+        if 'special_funds_amount' in d:
+            o.special_funds_amount = d['special_funds_amount']
+        if 'special_funds_currency' in d:
+            o.special_funds_currency = d['special_funds_currency']
         return o
 
 

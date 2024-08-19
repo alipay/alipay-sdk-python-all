@@ -3,11 +3,13 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BillFeeInfo import BillFeeInfo
 
 
 class DeductionOrderInfo(object):
 
     def __init__(self):
+        self._bill_fee_info_list = None
         self._card_id = None
         self._certificate_id = None
         self._certificate_serial = None
@@ -19,15 +21,30 @@ class DeductionOrderInfo(object):
         self._deduction_status = None
         self._deduction_time = None
         self._gmt_create = None
+        self._merchant_pid = None
         self._open_id = None
         self._order_id = None
         self._period = None
         self._plan_deduction_time = None
+        self._refund_cash = None
         self._shop_id = None
         self._sub_order_id = None
         self._trade_no = None
         self._user_id = None
 
+    @property
+    def bill_fee_info_list(self):
+        return self._bill_fee_info_list
+
+    @bill_fee_info_list.setter
+    def bill_fee_info_list(self, value):
+        if isinstance(value, list):
+            self._bill_fee_info_list = list()
+            for i in value:
+                if isinstance(i, BillFeeInfo):
+                    self._bill_fee_info_list.append(i)
+                else:
+                    self._bill_fee_info_list.append(BillFeeInfo.from_alipay_dict(i))
     @property
     def card_id(self):
         return self._card_id
@@ -106,6 +123,13 @@ class DeductionOrderInfo(object):
     def gmt_create(self, value):
         self._gmt_create = value
     @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
+    @property
     def open_id(self):
         return self._open_id
 
@@ -133,6 +157,13 @@ class DeductionOrderInfo(object):
     @plan_deduction_time.setter
     def plan_deduction_time(self, value):
         self._plan_deduction_time = value
+    @property
+    def refund_cash(self):
+        return self._refund_cash
+
+    @refund_cash.setter
+    def refund_cash(self, value):
+        self._refund_cash = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -165,6 +196,16 @@ class DeductionOrderInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bill_fee_info_list:
+            if isinstance(self.bill_fee_info_list, list):
+                for i in range(0, len(self.bill_fee_info_list)):
+                    element = self.bill_fee_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.bill_fee_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.bill_fee_info_list, 'to_alipay_dict'):
+                params['bill_fee_info_list'] = self.bill_fee_info_list.to_alipay_dict()
+            else:
+                params['bill_fee_info_list'] = self.bill_fee_info_list
         if self.card_id:
             if hasattr(self.card_id, 'to_alipay_dict'):
                 params['card_id'] = self.card_id.to_alipay_dict()
@@ -220,6 +261,11 @@ class DeductionOrderInfo(object):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
             else:
                 params['gmt_create'] = self.gmt_create
+        if self.merchant_pid:
+            if hasattr(self.merchant_pid, 'to_alipay_dict'):
+                params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
+            else:
+                params['merchant_pid'] = self.merchant_pid
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -240,6 +286,11 @@ class DeductionOrderInfo(object):
                 params['plan_deduction_time'] = self.plan_deduction_time.to_alipay_dict()
             else:
                 params['plan_deduction_time'] = self.plan_deduction_time
+        if self.refund_cash:
+            if hasattr(self.refund_cash, 'to_alipay_dict'):
+                params['refund_cash'] = self.refund_cash.to_alipay_dict()
+            else:
+                params['refund_cash'] = self.refund_cash
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -267,6 +318,8 @@ class DeductionOrderInfo(object):
         if not d:
             return None
         o = DeductionOrderInfo()
+        if 'bill_fee_info_list' in d:
+            o.bill_fee_info_list = d['bill_fee_info_list']
         if 'card_id' in d:
             o.card_id = d['card_id']
         if 'certificate_id' in d:
@@ -289,6 +342,8 @@ class DeductionOrderInfo(object):
             o.deduction_time = d['deduction_time']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
+        if 'merchant_pid' in d:
+            o.merchant_pid = d['merchant_pid']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:
@@ -297,6 +352,8 @@ class DeductionOrderInfo(object):
             o.period = d['period']
         if 'plan_deduction_time' in d:
             o.plan_deduction_time = d['plan_deduction_time']
+        if 'refund_cash' in d:
+            o.refund_cash = d['refund_cash']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'sub_order_id' in d:

@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ArticleAttachmentInfo import ArticleAttachmentInfo
 from alipay.aop.api.domain.ArticleCategoryInfo import ArticleCategoryInfo
 from alipay.aop.api.domain.ArticleAttachmentInfo import ArticleAttachmentInfo
+from alipay.aop.api.domain.BaseArticleInfo import BaseArticleInfo
 
 
 class AlipayIserviceCcmSwArticleGetResponse(AlipayResponse):
@@ -27,6 +28,7 @@ class AlipayIserviceCcmSwArticleGetResponse(AlipayResponse):
         self._pictures = None
         self._publish_end = None
         self._publish_start = None
+        self._related_articles = None
         self._scene_codes = None
         self._source = None
         self._status = None
@@ -166,6 +168,19 @@ class AlipayIserviceCcmSwArticleGetResponse(AlipayResponse):
     def publish_start(self, value):
         self._publish_start = value
     @property
+    def related_articles(self):
+        return self._related_articles
+
+    @related_articles.setter
+    def related_articles(self, value):
+        if isinstance(value, list):
+            self._related_articles = list()
+            for i in value:
+                if isinstance(i, BaseArticleInfo):
+                    self._related_articles.append(i)
+                else:
+                    self._related_articles.append(BaseArticleInfo.from_alipay_dict(i))
+    @property
     def scene_codes(self):
         return self._scene_codes
 
@@ -257,6 +272,8 @@ class AlipayIserviceCcmSwArticleGetResponse(AlipayResponse):
             self.publish_end = response['publish_end']
         if 'publish_start' in response:
             self.publish_start = response['publish_start']
+        if 'related_articles' in response:
+            self.related_articles = response['related_articles']
         if 'scene_codes' in response:
             self.scene_codes = response['scene_codes']
         if 'source' in response:

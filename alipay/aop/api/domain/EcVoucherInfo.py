@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InvoiceComplianceCheckResult import InvoiceComplianceCheckResult
 
 
 class EcVoucherInfo(object):
@@ -11,6 +12,7 @@ class EcVoucherInfo(object):
         self._account_id = None
         self._employee_id = None
         self._enterprise_id = None
+        self._invoice_compliance_check_result = None
         self._open_id = None
         self._user_id = None
         self._voucher_content = None
@@ -40,6 +42,16 @@ class EcVoucherInfo(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def invoice_compliance_check_result(self):
+        return self._invoice_compliance_check_result
+
+    @invoice_compliance_check_result.setter
+    def invoice_compliance_check_result(self, value):
+        if isinstance(value, InvoiceComplianceCheckResult):
+            self._invoice_compliance_check_result = value
+        else:
+            self._invoice_compliance_check_result = InvoiceComplianceCheckResult.from_alipay_dict(value)
     @property
     def open_id(self):
         return self._open_id
@@ -108,6 +120,11 @@ class EcVoucherInfo(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.invoice_compliance_check_result:
+            if hasattr(self.invoice_compliance_check_result, 'to_alipay_dict'):
+                params['invoice_compliance_check_result'] = self.invoice_compliance_check_result.to_alipay_dict()
+            else:
+                params['invoice_compliance_check_result'] = self.invoice_compliance_check_result
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -156,6 +173,8 @@ class EcVoucherInfo(object):
             o.employee_id = d['employee_id']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'invoice_compliance_check_result' in d:
+            o.invoice_compliance_check_result = d['invoice_compliance_check_result']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

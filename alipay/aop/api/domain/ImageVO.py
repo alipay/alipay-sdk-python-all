@@ -10,11 +10,13 @@ class ImageVO(object):
     def __init__(self):
         self._create_time = None
         self._file_name = None
+        self._height = None
         self._image_directory_id = None
         self._image_id = None
         self._image_index_id = None
         self._image_url = None
         self._modify_time = None
+        self._width = None
 
     @property
     def create_time(self):
@@ -30,6 +32,13 @@ class ImageVO(object):
     @file_name.setter
     def file_name(self, value):
         self._file_name = value
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, value):
+        self._height = value
     @property
     def image_directory_id(self):
         return self._image_directory_id
@@ -65,6 +74,13 @@ class ImageVO(object):
     @modify_time.setter
     def modify_time(self, value):
         self._modify_time = value
+    @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, value):
+        self._width = value
 
 
     def to_alipay_dict(self):
@@ -79,6 +95,11 @@ class ImageVO(object):
                 params['file_name'] = self.file_name.to_alipay_dict()
             else:
                 params['file_name'] = self.file_name
+        if self.height:
+            if hasattr(self.height, 'to_alipay_dict'):
+                params['height'] = self.height.to_alipay_dict()
+            else:
+                params['height'] = self.height
         if self.image_directory_id:
             if hasattr(self.image_directory_id, 'to_alipay_dict'):
                 params['image_directory_id'] = self.image_directory_id.to_alipay_dict()
@@ -104,6 +125,11 @@ class ImageVO(object):
                 params['modify_time'] = self.modify_time.to_alipay_dict()
             else:
                 params['modify_time'] = self.modify_time
+        if self.width:
+            if hasattr(self.width, 'to_alipay_dict'):
+                params['width'] = self.width.to_alipay_dict()
+            else:
+                params['width'] = self.width
         return params
 
     @staticmethod
@@ -115,6 +141,8 @@ class ImageVO(object):
             o.create_time = d['create_time']
         if 'file_name' in d:
             o.file_name = d['file_name']
+        if 'height' in d:
+            o.height = d['height']
         if 'image_directory_id' in d:
             o.image_directory_id = d['image_directory_id']
         if 'image_id' in d:
@@ -125,6 +153,8 @@ class ImageVO(object):
             o.image_url = d['image_url']
         if 'modify_time' in d:
             o.modify_time = d['modify_time']
+        if 'width' in d:
+            o.width = d['width']
         return o
 
 

@@ -14,6 +14,7 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
         self._royalty_period = None
         self._royalty_price = None
         self._royalty_stage = None
+        self._royalty_type = None
 
     @property
     def buyer_id(self):
@@ -57,6 +58,13 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
     @royalty_stage.setter
     def royalty_stage(self, value):
         self._royalty_stage = value
+    @property
+    def royalty_type(self):
+        return self._royalty_type
+
+    @royalty_type.setter
+    def royalty_type(self, value):
+        self._royalty_type = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
                 params['royalty_stage'] = self.royalty_stage.to_alipay_dict()
             else:
                 params['royalty_stage'] = self.royalty_stage
+        if self.royalty_type:
+            if hasattr(self.royalty_type, 'to_alipay_dict'):
+                params['royalty_type'] = self.royalty_type.to_alipay_dict()
+            else:
+                params['royalty_type'] = self.royalty_type
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
             o.royalty_price = d['royalty_price']
         if 'royalty_stage' in d:
             o.royalty_stage = d['royalty_stage']
+        if 'royalty_type' in d:
+            o.royalty_type = d['royalty_type']
         return o
 
 

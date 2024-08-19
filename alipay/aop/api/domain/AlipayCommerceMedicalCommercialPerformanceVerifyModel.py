@@ -10,6 +10,7 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     def __init__(self):
         self._biz_order_id = None
         self._biz_url = None
+        self._biz_url_type = None
         self._buyer_id = None
         self._consume_time = None
         self._open_id = None
@@ -35,6 +36,13 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     @biz_url.setter
     def biz_url(self, value):
         self._biz_url = value
+    @property
+    def biz_url_type(self):
+        return self._biz_url_type
+
+    @biz_url_type.setter
+    def biz_url_type(self, value):
+        self._biz_url_type = value
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -119,6 +127,11 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
                 params['biz_url'] = self.biz_url.to_alipay_dict()
             else:
                 params['biz_url'] = self.biz_url
+        if self.biz_url_type:
+            if hasattr(self.biz_url_type, 'to_alipay_dict'):
+                params['biz_url_type'] = self.biz_url_type.to_alipay_dict()
+            else:
+                params['biz_url_type'] = self.biz_url_type
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -180,6 +193,8 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
             o.biz_order_id = d['biz_order_id']
         if 'biz_url' in d:
             o.biz_url = d['biz_url']
+        if 'biz_url_type' in d:
+            o.biz_url_type = d['biz_url_type']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'consume_time' in d:

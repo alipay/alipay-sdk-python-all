@@ -3,15 +3,21 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ParkingChargeInfo import ParkingChargeInfo
+from alipay.aop.api.domain.ParkingMembershipInfo import ParkingMembershipInfo
 
 
 class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
 
     def __init__(self):
         self._agreement_query = None
+        self._charge_info_list = None
+        self._entrance_name = None
+        self._entrance_number = None
         self._free_enter_minutes = None
         self._in_time = None
         self._is_encrypt_plate_no = None
+        self._membership_info = None
         self._need_charge = None
         self._open_appid = None
         self._open_id = None
@@ -28,6 +34,33 @@ class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
     @agreement_query.setter
     def agreement_query(self, value):
         self._agreement_query = value
+    @property
+    def charge_info_list(self):
+        return self._charge_info_list
+
+    @charge_info_list.setter
+    def charge_info_list(self, value):
+        if isinstance(value, list):
+            self._charge_info_list = list()
+            for i in value:
+                if isinstance(i, ParkingChargeInfo):
+                    self._charge_info_list.append(i)
+                else:
+                    self._charge_info_list.append(ParkingChargeInfo.from_alipay_dict(i))
+    @property
+    def entrance_name(self):
+        return self._entrance_name
+
+    @entrance_name.setter
+    def entrance_name(self, value):
+        self._entrance_name = value
+    @property
+    def entrance_number(self):
+        return self._entrance_number
+
+    @entrance_number.setter
+    def entrance_number(self, value):
+        self._entrance_number = value
     @property
     def free_enter_minutes(self):
         return self._free_enter_minutes
@@ -49,6 +82,16 @@ class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
     @is_encrypt_plate_no.setter
     def is_encrypt_plate_no(self, value):
         self._is_encrypt_plate_no = value
+    @property
+    def membership_info(self):
+        return self._membership_info
+
+    @membership_info.setter
+    def membership_info(self, value):
+        if isinstance(value, ParkingMembershipInfo):
+            self._membership_info = value
+        else:
+            self._membership_info = ParkingMembershipInfo.from_alipay_dict(value)
     @property
     def need_charge(self):
         return self._need_charge
@@ -114,6 +157,26 @@ class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
                 params['agreement_query'] = self.agreement_query.to_alipay_dict()
             else:
                 params['agreement_query'] = self.agreement_query
+        if self.charge_info_list:
+            if isinstance(self.charge_info_list, list):
+                for i in range(0, len(self.charge_info_list)):
+                    element = self.charge_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.charge_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.charge_info_list, 'to_alipay_dict'):
+                params['charge_info_list'] = self.charge_info_list.to_alipay_dict()
+            else:
+                params['charge_info_list'] = self.charge_info_list
+        if self.entrance_name:
+            if hasattr(self.entrance_name, 'to_alipay_dict'):
+                params['entrance_name'] = self.entrance_name.to_alipay_dict()
+            else:
+                params['entrance_name'] = self.entrance_name
+        if self.entrance_number:
+            if hasattr(self.entrance_number, 'to_alipay_dict'):
+                params['entrance_number'] = self.entrance_number.to_alipay_dict()
+            else:
+                params['entrance_number'] = self.entrance_number
         if self.free_enter_minutes:
             if hasattr(self.free_enter_minutes, 'to_alipay_dict'):
                 params['free_enter_minutes'] = self.free_enter_minutes.to_alipay_dict()
@@ -129,6 +192,11 @@ class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no.to_alipay_dict()
             else:
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no
+        if self.membership_info:
+            if hasattr(self.membership_info, 'to_alipay_dict'):
+                params['membership_info'] = self.membership_info.to_alipay_dict()
+            else:
+                params['membership_info'] = self.membership_info
         if self.need_charge:
             if hasattr(self.need_charge, 'to_alipay_dict'):
                 params['need_charge'] = self.need_charge.to_alipay_dict()
@@ -178,12 +246,20 @@ class AlipayCommerceTransportParkingEnterinfoSyncModel(object):
         o = AlipayCommerceTransportParkingEnterinfoSyncModel()
         if 'agreement_query' in d:
             o.agreement_query = d['agreement_query']
+        if 'charge_info_list' in d:
+            o.charge_info_list = d['charge_info_list']
+        if 'entrance_name' in d:
+            o.entrance_name = d['entrance_name']
+        if 'entrance_number' in d:
+            o.entrance_number = d['entrance_number']
         if 'free_enter_minutes' in d:
             o.free_enter_minutes = d['free_enter_minutes']
         if 'in_time' in d:
             o.in_time = d['in_time']
         if 'is_encrypt_plate_no' in d:
             o.is_encrypt_plate_no = d['is_encrypt_plate_no']
+        if 'membership_info' in d:
+            o.membership_info = d['membership_info']
         if 'need_charge' in d:
             o.need_charge = d['need_charge']
         if 'open_appid' in d:

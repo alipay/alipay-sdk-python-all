@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BusinessItem import BusinessItem
+from alipay.aop.api.domain.ParkingLotChargingRuleInfo import ParkingLotChargingRuleInfo
+from alipay.aop.api.domain.ParkingLotServiceInfo import ParkingLotServiceInfo
 
 
 class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
@@ -13,6 +15,7 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
         self._address_id = None
         self._agent_id = None
         self._business_isv = None
+        self._charging_rule = None
         self._city_id = None
         self._map_poi_address = None
         self._map_poi_name = None
@@ -25,11 +28,13 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
         self._parking_latitude = None
         self._parking_longitude = None
         self._parking_lot_type = None
+        self._parking_lot_type_code = None
         self._parking_mobile = None
         self._parking_name = None
         self._parking_poiid = None
         self._pay_type = None
         self._province_id = None
+        self._service_list = None
         self._shopingmall_id = None
         self._time_out = None
 
@@ -60,6 +65,19 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
                     self._business_isv.append(i)
                 else:
                     self._business_isv.append(BusinessItem.from_alipay_dict(i))
+    @property
+    def charging_rule(self):
+        return self._charging_rule
+
+    @charging_rule.setter
+    def charging_rule(self, value):
+        if isinstance(value, list):
+            self._charging_rule = list()
+            for i in value:
+                if isinstance(i, ParkingLotChargingRuleInfo):
+                    self._charging_rule.append(i)
+                else:
+                    self._charging_rule.append(ParkingLotChargingRuleInfo.from_alipay_dict(i))
     @property
     def city_id(self):
         return self._city_id
@@ -145,6 +163,13 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
     def parking_lot_type(self, value):
         self._parking_lot_type = value
     @property
+    def parking_lot_type_code(self):
+        return self._parking_lot_type_code
+
+    @parking_lot_type_code.setter
+    def parking_lot_type_code(self, value):
+        self._parking_lot_type_code = value
+    @property
     def parking_mobile(self):
         return self._parking_mobile
 
@@ -180,6 +205,19 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
     def province_id(self, value):
         self._province_id = value
     @property
+    def service_list(self):
+        return self._service_list
+
+    @service_list.setter
+    def service_list(self, value):
+        if isinstance(value, list):
+            self._service_list = list()
+            for i in value:
+                if isinstance(i, ParkingLotServiceInfo):
+                    self._service_list.append(i)
+                else:
+                    self._service_list.append(ParkingLotServiceInfo.from_alipay_dict(i))
+    @property
     def shopingmall_id(self):
         return self._shopingmall_id
 
@@ -202,6 +240,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.agent_id = response['agent_id']
         if 'business_isv' in response:
             self.business_isv = response['business_isv']
+        if 'charging_rule' in response:
+            self.charging_rule = response['charging_rule']
         if 'city_id' in response:
             self.city_id = response['city_id']
         if 'map_poi_address' in response:
@@ -226,6 +266,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.parking_longitude = response['parking_longitude']
         if 'parking_lot_type' in response:
             self.parking_lot_type = response['parking_lot_type']
+        if 'parking_lot_type_code' in response:
+            self.parking_lot_type_code = response['parking_lot_type_code']
         if 'parking_mobile' in response:
             self.parking_mobile = response['parking_mobile']
         if 'parking_name' in response:
@@ -236,6 +278,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.pay_type = response['pay_type']
         if 'province_id' in response:
             self.province_id = response['province_id']
+        if 'service_list' in response:
+            self.service_list = response['service_list']
         if 'shopingmall_id' in response:
             self.shopingmall_id = response['shopingmall_id']
         if 'time_out' in response:

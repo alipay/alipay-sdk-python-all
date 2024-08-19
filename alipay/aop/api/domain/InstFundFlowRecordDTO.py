@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class InstFundFlowRecordDTO(object):
 
     def __init__(self):
+        self._biz_context = None
         self._biz_scene = None
         self._credit_account_no = None
         self._credit_account_type = None
@@ -27,6 +28,13 @@ class InstFundFlowRecordDTO(object):
         self._trans_currency = None
         self._unique_no = None
 
+    @property
+    def biz_context(self):
+        return self._biz_context
+
+    @biz_context.setter
+    def biz_context(self, value):
+        self._biz_context = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -157,6 +165,11 @@ class InstFundFlowRecordDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_context:
+            if hasattr(self.biz_context, 'to_alipay_dict'):
+                params['biz_context'] = self.biz_context.to_alipay_dict()
+            else:
+                params['biz_context'] = self.biz_context
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -254,6 +267,8 @@ class InstFundFlowRecordDTO(object):
         if not d:
             return None
         o = InstFundFlowRecordDTO()
+        if 'biz_context' in d:
+            o.biz_context = d['biz_context']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'credit_account_no' in d:

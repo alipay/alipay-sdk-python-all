@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetBomAttribute import AssetBomAttribute
 from alipay.aop.api.domain.AssetBomItem import AssetBomItem
 from alipay.aop.api.domain.AssetStandard import AssetStandard
+from alipay.aop.api.domain.AssetSupplyDetail import AssetSupplyDetail
 
 
 class AssetBom(object):
@@ -17,6 +18,7 @@ class AssetBom(object):
         self._bom_items = None
         self._effect_img = None
         self._include_qrcode = None
+        self._include_sn = None
         self._is_suite = None
         self._item_id = None
         self._item_name = None
@@ -25,6 +27,7 @@ class AssetBom(object):
         self._request_id = None
         self._status = None
         self._std = None
+        self._supply_details = None
 
     @property
     def asset_sub_type(self):
@@ -80,6 +83,13 @@ class AssetBom(object):
     @include_qrcode.setter
     def include_qrcode(self, value):
         self._include_qrcode = value
+    @property
+    def include_sn(self):
+        return self._include_sn
+
+    @include_sn.setter
+    def include_sn(self, value):
+        self._include_sn = value
     @property
     def is_suite(self):
         return self._is_suite
@@ -139,6 +149,19 @@ class AssetBom(object):
             self._std = value
         else:
             self._std = AssetStandard.from_alipay_dict(value)
+    @property
+    def supply_details(self):
+        return self._supply_details
+
+    @supply_details.setter
+    def supply_details(self, value):
+        if isinstance(value, list):
+            self._supply_details = list()
+            for i in value:
+                if isinstance(i, AssetSupplyDetail):
+                    self._supply_details.append(i)
+                else:
+                    self._supply_details.append(AssetSupplyDetail.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -183,6 +206,11 @@ class AssetBom(object):
                 params['include_qrcode'] = self.include_qrcode.to_alipay_dict()
             else:
                 params['include_qrcode'] = self.include_qrcode
+        if self.include_sn:
+            if hasattr(self.include_sn, 'to_alipay_dict'):
+                params['include_sn'] = self.include_sn.to_alipay_dict()
+            else:
+                params['include_sn'] = self.include_sn
         if self.is_suite:
             if hasattr(self.is_suite, 'to_alipay_dict'):
                 params['is_suite'] = self.is_suite.to_alipay_dict()
@@ -223,6 +251,16 @@ class AssetBom(object):
                 params['std'] = self.std.to_alipay_dict()
             else:
                 params['std'] = self.std
+        if self.supply_details:
+            if isinstance(self.supply_details, list):
+                for i in range(0, len(self.supply_details)):
+                    element = self.supply_details[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.supply_details[i] = element.to_alipay_dict()
+            if hasattr(self.supply_details, 'to_alipay_dict'):
+                params['supply_details'] = self.supply_details.to_alipay_dict()
+            else:
+                params['supply_details'] = self.supply_details
         return params
 
     @staticmethod
@@ -242,6 +280,8 @@ class AssetBom(object):
             o.effect_img = d['effect_img']
         if 'include_qrcode' in d:
             o.include_qrcode = d['include_qrcode']
+        if 'include_sn' in d:
+            o.include_sn = d['include_sn']
         if 'is_suite' in d:
             o.is_suite = d['is_suite']
         if 'item_id' in d:
@@ -258,6 +298,8 @@ class AssetBom(object):
             o.status = d['status']
         if 'std' in d:
             o.std = d['std']
+        if 'supply_details' in d:
+            o.supply_details = d['supply_details']
         return o
 
 

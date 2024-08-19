@@ -10,6 +10,7 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
     def __init__(self):
         self._card_template_appid = None
         self._card_template_name = None
+        self._card_type = None
         self._page_num = None
         self._page_size = None
         self._shop_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
     @card_template_name.setter
     def card_template_name(self, value):
         self._card_template_name = value
+    @property
+    def card_type(self):
+        return self._card_type
+
+    @card_type.setter
+    def card_type(self, value):
+        self._card_type = value
     @property
     def page_num(self):
         return self._page_num
@@ -63,6 +71,11 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
                 params['card_template_name'] = self.card_template_name.to_alipay_dict()
             else:
                 params['card_template_name'] = self.card_template_name
+        if self.card_type:
+            if hasattr(self.card_type, 'to_alipay_dict'):
+                params['card_type'] = self.card_type.to_alipay_dict()
+            else:
+                params['card_type'] = self.card_type
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
             o.card_template_appid = d['card_template_appid']
         if 'card_template_name' in d:
             o.card_template_name = d['card_template_name']
+        if 'card_type' in d:
+            o.card_type = d['card_type']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

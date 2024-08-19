@@ -8,6 +8,10 @@ from alipay.aop.api.constant.ParamConstants import *
 class RentRoyalty(object):
 
     def __init__(self):
+        self._biz_order_id = None
+        self._buyer_id = None
+        self._buyer_open_id = None
+        self._current_buyout_price = None
         self._period = None
         self._royalty_after_price = None
         self._royalty_price = None
@@ -17,6 +21,34 @@ class RentRoyalty(object):
         self._trade_no = None
         self._type = None
 
+    @property
+    def biz_order_id(self):
+        return self._biz_order_id
+
+    @biz_order_id.setter
+    def biz_order_id(self, value):
+        self._biz_order_id = value
+    @property
+    def buyer_id(self):
+        return self._buyer_id
+
+    @buyer_id.setter
+    def buyer_id(self, value):
+        self._buyer_id = value
+    @property
+    def buyer_open_id(self):
+        return self._buyer_open_id
+
+    @buyer_open_id.setter
+    def buyer_open_id(self, value):
+        self._buyer_open_id = value
+    @property
+    def current_buyout_price(self):
+        return self._current_buyout_price
+
+    @current_buyout_price.setter
+    def current_buyout_price(self, value):
+        self._current_buyout_price = value
     @property
     def period(self):
         return self._period
@@ -77,6 +109,26 @@ class RentRoyalty(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_order_id:
+            if hasattr(self.biz_order_id, 'to_alipay_dict'):
+                params['biz_order_id'] = self.biz_order_id.to_alipay_dict()
+            else:
+                params['biz_order_id'] = self.biz_order_id
+        if self.buyer_id:
+            if hasattr(self.buyer_id, 'to_alipay_dict'):
+                params['buyer_id'] = self.buyer_id.to_alipay_dict()
+            else:
+                params['buyer_id'] = self.buyer_id
+        if self.buyer_open_id:
+            if hasattr(self.buyer_open_id, 'to_alipay_dict'):
+                params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
+            else:
+                params['buyer_open_id'] = self.buyer_open_id
+        if self.current_buyout_price:
+            if hasattr(self.current_buyout_price, 'to_alipay_dict'):
+                params['current_buyout_price'] = self.current_buyout_price.to_alipay_dict()
+            else:
+                params['current_buyout_price'] = self.current_buyout_price
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -124,6 +176,14 @@ class RentRoyalty(object):
         if not d:
             return None
         o = RentRoyalty()
+        if 'biz_order_id' in d:
+            o.biz_order_id = d['biz_order_id']
+        if 'buyer_id' in d:
+            o.buyer_id = d['buyer_id']
+        if 'buyer_open_id' in d:
+            o.buyer_open_id = d['buyer_open_id']
+        if 'current_buyout_price' in d:
+            o.current_buyout_price = d['current_buyout_price']
         if 'period' in d:
             o.period = d['period']
         if 'royalty_after_price' in d:

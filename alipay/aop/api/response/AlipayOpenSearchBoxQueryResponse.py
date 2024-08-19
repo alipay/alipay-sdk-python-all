@@ -4,7 +4,6 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.SearchBoxAccountModule import SearchBoxAccountModule
-from alipay.aop.api.domain.SearchBoxAreaKeyWordModule import SearchBoxAreaKeyWordModule
 from alipay.aop.api.domain.SearchBoxBasicInfoModule import SearchBoxBasicInfoModule
 from alipay.aop.api.domain.BoxBusinessDistrictModule import BoxBusinessDistrictModule
 from alipay.aop.api.domain.SearchBoxKeyWordModule import SearchBoxKeyWordModule
@@ -18,7 +17,6 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenSearchBoxQueryResponse, self).__init__()
         self._account_module = None
-        self._area_keyword_module = None
         self._basic_info_module = None
         self._box_id = None
         self._box_status = None
@@ -39,16 +37,6 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
             self._account_module = value
         else:
             self._account_module = SearchBoxAccountModule.from_alipay_dict(value)
-    @property
-    def area_keyword_module(self):
-        return self._area_keyword_module
-
-    @area_keyword_module.setter
-    def area_keyword_module(self, value):
-        if isinstance(value, SearchBoxAreaKeyWordModule):
-            self._area_keyword_module = value
-        else:
-            self._area_keyword_module = SearchBoxAreaKeyWordModule.from_alipay_dict(value)
     @property
     def basic_info_module(self):
         return self._basic_info_module
@@ -138,8 +126,6 @@ class AlipayOpenSearchBoxQueryResponse(AlipayResponse):
         response = super(AlipayOpenSearchBoxQueryResponse, self).parse_response_content(response_content)
         if 'account_module' in response:
             self.account_module = response['account_module']
-        if 'area_keyword_module' in response:
-            self.area_keyword_module = response['area_keyword_module']
         if 'basic_info_module' in response:
             self.basic_info_module = response['basic_info_module']
         if 'box_id' in response:

@@ -11,6 +11,7 @@ class XingheLendassistCarfinApplystatusencryptNotifyModel(object):
     def __init__(self):
         self._apply_no = None
         self._loan_list = None
+        self._org_status = None
         self._out_apply_no = None
         self._status = None
 
@@ -34,6 +35,13 @@ class XingheLendassistCarfinApplystatusencryptNotifyModel(object):
                     self._loan_list.append(i)
                 else:
                     self._loan_list.append(OrgLoanDetail.from_alipay_dict(i))
+    @property
+    def org_status(self):
+        return self._org_status
+
+    @org_status.setter
+    def org_status(self, value):
+        self._org_status = value
     @property
     def out_apply_no(self):
         return self._out_apply_no
@@ -67,6 +75,11 @@ class XingheLendassistCarfinApplystatusencryptNotifyModel(object):
                 params['loan_list'] = self.loan_list.to_alipay_dict()
             else:
                 params['loan_list'] = self.loan_list
+        if self.org_status:
+            if hasattr(self.org_status, 'to_alipay_dict'):
+                params['org_status'] = self.org_status.to_alipay_dict()
+            else:
+                params['org_status'] = self.org_status
         if self.out_apply_no:
             if hasattr(self.out_apply_no, 'to_alipay_dict'):
                 params['out_apply_no'] = self.out_apply_no.to_alipay_dict()
@@ -88,6 +101,8 @@ class XingheLendassistCarfinApplystatusencryptNotifyModel(object):
             o.apply_no = d['apply_no']
         if 'loan_list' in d:
             o.loan_list = d['loan_list']
+        if 'org_status' in d:
+            o.org_status = d['org_status']
         if 'out_apply_no' in d:
             o.out_apply_no = d['out_apply_no']
         if 'status' in d:

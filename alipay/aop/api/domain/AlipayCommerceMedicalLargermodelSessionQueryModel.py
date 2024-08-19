@@ -10,6 +10,7 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     def __init__(self):
         self._app_type = None
         self._chat_id = None
+        self._city_code = None
         self._city_name = None
         self._latitude = None
         self._longitude = None
@@ -37,6 +38,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     @chat_id.setter
     def chat_id(self, value):
         self._chat_id = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
     @property
     def city_name(self):
         return self._city_name
@@ -135,6 +143,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
                 params['chat_id'] = self.chat_id.to_alipay_dict()
             else:
                 params['chat_id'] = self.chat_id
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
         if self.city_name:
             if hasattr(self.city_name, 'to_alipay_dict'):
                 params['city_name'] = self.city_name.to_alipay_dict()
@@ -206,6 +219,8 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
             o.app_type = d['app_type']
         if 'chat_id' in d:
             o.chat_id = d['chat_id']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
         if 'latitude' in d:

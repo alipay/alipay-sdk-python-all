@@ -4,13 +4,16 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MedicalLlmAnswerDTO import MedicalLlmAnswerDTO
+from alipay.aop.api.domain.LlmAnswerCardDTO import LlmAnswerCardDTO
 from alipay.aop.api.domain.ExternalServiceDTO import ExternalServiceDTO
+from alipay.aop.api.domain.SuggestQuestionsDTO import SuggestQuestionsDTO
 
 
 class LlmServiceDTO(object):
 
     def __init__(self):
         self._answer = None
+        self._answer_card = None
         self._answer_type = None
         self._ant_session_id = None
         self._chat_id = None
@@ -20,6 +23,7 @@ class LlmServiceDTO(object):
         self._query_type = None
         self._scene_code = None
         self._service_result = None
+        self._suggest_questions = None
         self._template_id = None
 
     @property
@@ -35,6 +39,19 @@ class LlmServiceDTO(object):
                     self._answer.append(i)
                 else:
                     self._answer.append(MedicalLlmAnswerDTO.from_alipay_dict(i))
+    @property
+    def answer_card(self):
+        return self._answer_card
+
+    @answer_card.setter
+    def answer_card(self, value):
+        if isinstance(value, list):
+            self._answer_card = list()
+            for i in value:
+                if isinstance(i, LlmAnswerCardDTO):
+                    self._answer_card.append(i)
+                else:
+                    self._answer_card.append(LlmAnswerCardDTO.from_alipay_dict(i))
     @property
     def answer_type(self):
         return self._answer_type
@@ -105,6 +122,16 @@ class LlmServiceDTO(object):
                 else:
                     self._service_result.append(ExternalServiceDTO.from_alipay_dict(i))
     @property
+    def suggest_questions(self):
+        return self._suggest_questions
+
+    @suggest_questions.setter
+    def suggest_questions(self, value):
+        if isinstance(value, SuggestQuestionsDTO):
+            self._suggest_questions = value
+        else:
+            self._suggest_questions = SuggestQuestionsDTO.from_alipay_dict(value)
+    @property
     def template_id(self):
         return self._template_id
 
@@ -125,6 +152,16 @@ class LlmServiceDTO(object):
                 params['answer'] = self.answer.to_alipay_dict()
             else:
                 params['answer'] = self.answer
+        if self.answer_card:
+            if isinstance(self.answer_card, list):
+                for i in range(0, len(self.answer_card)):
+                    element = self.answer_card[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.answer_card[i] = element.to_alipay_dict()
+            if hasattr(self.answer_card, 'to_alipay_dict'):
+                params['answer_card'] = self.answer_card.to_alipay_dict()
+            else:
+                params['answer_card'] = self.answer_card
         if self.answer_type:
             if hasattr(self.answer_type, 'to_alipay_dict'):
                 params['answer_type'] = self.answer_type.to_alipay_dict()
@@ -175,6 +212,11 @@ class LlmServiceDTO(object):
                 params['service_result'] = self.service_result.to_alipay_dict()
             else:
                 params['service_result'] = self.service_result
+        if self.suggest_questions:
+            if hasattr(self.suggest_questions, 'to_alipay_dict'):
+                params['suggest_questions'] = self.suggest_questions.to_alipay_dict()
+            else:
+                params['suggest_questions'] = self.suggest_questions
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -189,6 +231,8 @@ class LlmServiceDTO(object):
         o = LlmServiceDTO()
         if 'answer' in d:
             o.answer = d['answer']
+        if 'answer_card' in d:
+            o.answer_card = d['answer_card']
         if 'answer_type' in d:
             o.answer_type = d['answer_type']
         if 'ant_session_id' in d:
@@ -207,6 +251,8 @@ class LlmServiceDTO(object):
             o.scene_code = d['scene_code']
         if 'service_result' in d:
             o.service_result = d['service_result']
+        if 'suggest_questions' in d:
+            o.suggest_questions = d['suggest_questions']
         if 'template_id' in d:
             o.template_id = d['template_id']
         return o

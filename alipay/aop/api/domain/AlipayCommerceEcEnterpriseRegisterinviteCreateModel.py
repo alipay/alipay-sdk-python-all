@@ -15,6 +15,7 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
         self._out_biz_no = None
         self._profiles = None
         self._register_mode = None
+        self._sign_fund_way = None
 
     @property
     def identity(self):
@@ -61,6 +62,13 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
     @register_mode.setter
     def register_mode(self, value):
         self._register_mode = value
+    @property
+    def sign_fund_way(self):
+        return self._sign_fund_way
+
+    @sign_fund_way.setter
+    def sign_fund_way(self, value):
+        self._sign_fund_way = value
 
 
     def to_alipay_dict(self):
@@ -95,6 +103,11 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
                 params['register_mode'] = self.register_mode.to_alipay_dict()
             else:
                 params['register_mode'] = self.register_mode
+        if self.sign_fund_way:
+            if hasattr(self.sign_fund_way, 'to_alipay_dict'):
+                params['sign_fund_way'] = self.sign_fund_way.to_alipay_dict()
+            else:
+                params['sign_fund_way'] = self.sign_fund_way
         return params
 
     @staticmethod
@@ -114,6 +127,8 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
             o.profiles = d['profiles']
         if 'register_mode' in d:
             o.register_mode = d['register_mode']
+        if 'sign_fund_way' in d:
+            o.sign_fund_way = d['sign_fund_way']
         return o
 
 

@@ -14,8 +14,10 @@ class AlipayCloudCloudpromoAichatFileUploadRequest(object):
         self._biz_model = biz_model
         self._customer_id = None
         self._file_extension = None
+        self._file_id = None
         self._file_name = None
         self._file_usage = None
+        self._index_column = None
         self._scene_id = None
         self._session_id = None
         self._file_content = None
@@ -51,6 +53,13 @@ class AlipayCloudCloudpromoAichatFileUploadRequest(object):
     def file_extension(self, value):
         self._file_extension = value
     @property
+    def file_id(self):
+        return self._file_id
+
+    @file_id.setter
+    def file_id(self, value):
+        self._file_id = value
+    @property
     def file_name(self):
         return self._file_name
 
@@ -64,6 +73,13 @@ class AlipayCloudCloudpromoAichatFileUploadRequest(object):
     @file_usage.setter
     def file_usage(self, value):
         self._file_usage = value
+    @property
+    def index_column(self):
+        return self._index_column
+
+    @index_column.setter
+    def index_column(self, value):
+        self._index_column = value
     @property
     def scene_id(self):
         return self._scene_id
@@ -176,6 +192,11 @@ class AlipayCloudCloudpromoAichatFileUploadRequest(object):
                 params['file_extension'] = json.dumps(obj=self.file_extension.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['file_extension'] = self.file_extension
+        if self.file_id:
+            if hasattr(self.file_id, 'to_alipay_dict'):
+                params['file_id'] = json.dumps(obj=self.file_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['file_id'] = self.file_id
         if self.file_name:
             if hasattr(self.file_name, 'to_alipay_dict'):
                 params['file_name'] = json.dumps(obj=self.file_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -186,6 +207,11 @@ class AlipayCloudCloudpromoAichatFileUploadRequest(object):
                 params['file_usage'] = json.dumps(obj=self.file_usage.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['file_usage'] = self.file_usage
+        if self.index_column:
+            if hasattr(self.index_column, 'to_alipay_dict'):
+                params['index_column'] = json.dumps(obj=self.index_column.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['index_column'] = self.index_column
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = json.dumps(obj=self.scene_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

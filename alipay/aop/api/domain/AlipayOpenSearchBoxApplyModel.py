@@ -10,7 +10,6 @@ from alipay.aop.api.domain.SearchBoxServiceInfo import SearchBoxServiceInfo
 class AlipayOpenSearchBoxApplyModel(object):
 
     def __init__(self):
-        self._area_keywords = None
         self._box_desc = None
         self._brand_id = None
         self._business_benefit_switch = None
@@ -23,16 +22,6 @@ class AlipayOpenSearchBoxApplyModel(object):
         self._service_infos = None
         self._target_appid = None
 
-    @property
-    def area_keywords(self):
-        return self._area_keywords
-
-    @area_keywords.setter
-    def area_keywords(self, value):
-        if isinstance(value, list):
-            self._area_keywords = list()
-            for i in value:
-                self._area_keywords.append(i)
     @property
     def box_desc(self):
         return self._box_desc
@@ -132,16 +121,6 @@ class AlipayOpenSearchBoxApplyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
-        if self.area_keywords:
-            if isinstance(self.area_keywords, list):
-                for i in range(0, len(self.area_keywords)):
-                    element = self.area_keywords[i]
-                    if hasattr(element, 'to_alipay_dict'):
-                        self.area_keywords[i] = element.to_alipay_dict()
-            if hasattr(self.area_keywords, 'to_alipay_dict'):
-                params['area_keywords'] = self.area_keywords.to_alipay_dict()
-            else:
-                params['area_keywords'] = self.area_keywords
         if self.box_desc:
             if hasattr(self.box_desc, 'to_alipay_dict'):
                 params['box_desc'] = self.box_desc.to_alipay_dict()
@@ -224,8 +203,6 @@ class AlipayOpenSearchBoxApplyModel(object):
         if not d:
             return None
         o = AlipayOpenSearchBoxApplyModel()
-        if 'area_keywords' in d:
-            o.area_keywords = d['area_keywords']
         if 'box_desc' in d:
             o.box_desc = d['box_desc']
         if 'brand_id' in d:

@@ -13,6 +13,7 @@ class TransferPaymentBill(object):
     def __init__(self):
         self._account_owner = None
         self._bill_amount = None
+        self._bill_provide_agency = None
         self._channel_payment_ref = None
         self._channel_remit_time = None
         self._expect_transfer_time = None
@@ -42,6 +43,13 @@ class TransferPaymentBill(object):
             self._bill_amount = value
         else:
             self._bill_amount = TransferAmount.from_alipay_dict(value)
+    @property
+    def bill_provide_agency(self):
+        return self._bill_provide_agency
+
+    @bill_provide_agency.setter
+    def bill_provide_agency(self, value):
+        self._bill_provide_agency = value
     @property
     def channel_payment_ref(self):
         return self._channel_payment_ref
@@ -118,6 +126,11 @@ class TransferPaymentBill(object):
                 params['bill_amount'] = self.bill_amount.to_alipay_dict()
             else:
                 params['bill_amount'] = self.bill_amount
+        if self.bill_provide_agency:
+            if hasattr(self.bill_provide_agency, 'to_alipay_dict'):
+                params['bill_provide_agency'] = self.bill_provide_agency.to_alipay_dict()
+            else:
+                params['bill_provide_agency'] = self.bill_provide_agency
         if self.channel_payment_ref:
             if hasattr(self.channel_payment_ref, 'to_alipay_dict'):
                 params['channel_payment_ref'] = self.channel_payment_ref.to_alipay_dict()
@@ -174,6 +187,8 @@ class TransferPaymentBill(object):
             o.account_owner = d['account_owner']
         if 'bill_amount' in d:
             o.bill_amount = d['bill_amount']
+        if 'bill_provide_agency' in d:
+            o.bill_provide_agency = d['bill_provide_agency']
         if 'channel_payment_ref' in d:
             o.channel_payment_ref = d['channel_payment_ref']
         if 'channel_remit_time' in d:

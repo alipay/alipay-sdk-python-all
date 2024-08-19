@@ -20,6 +20,7 @@ class LocalSettleBillItem(object):
         self._mini_app_id = None
         self._mvirtual_amount = None
         self._order_id = None
+        self._original_price = None
         self._out_shop_id = None
         self._out_shop_name = None
         self._settle_account_loginid_bank = None
@@ -120,6 +121,13 @@ class LocalSettleBillItem(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def original_price(self):
+        return self._original_price
+
+    @original_price.setter
+    def original_price(self, value):
+        self._original_price = value
     @property
     def out_shop_id(self):
         return self._out_shop_id
@@ -289,6 +297,11 @@ class LocalSettleBillItem(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.original_price:
+            if hasattr(self.original_price, 'to_alipay_dict'):
+                params['original_price'] = self.original_price.to_alipay_dict()
+            else:
+                params['original_price'] = self.original_price
         if self.out_shop_id:
             if hasattr(self.out_shop_id, 'to_alipay_dict'):
                 params['out_shop_id'] = self.out_shop_id.to_alipay_dict()
@@ -395,6 +408,8 @@ class LocalSettleBillItem(object):
             o.mvirtual_amount = d['mvirtual_amount']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'original_price' in d:
+            o.original_price = d['original_price']
         if 'out_shop_id' in d:
             o.out_shop_id = d['out_shop_id']
         if 'out_shop_name' in d:

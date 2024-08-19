@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AftersaleItemInfo import AftersaleItemInfo
+from alipay.aop.api.domain.OrderMediaInfo import OrderMediaInfo
 from alipay.aop.api.domain.LogisticsWaybill import LogisticsWaybill
 
 
@@ -12,9 +13,13 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenMiniOrderAftersaleQueryResponse, self).__init__()
         self._action_type = None
+        self._additional_reason = None
         self._aftersale_goods_info_list = None
         self._aftersale_id = None
+        self._aftersale_media_list = None
         self._aftersale_reason = None
+        self._apply_refund_amount = None
+        self._finally_refund_amount = None
         self._logistics_waybills = None
         self._order_id = None
         self._out_aftersale_id = None
@@ -30,6 +35,13 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     @action_type.setter
     def action_type(self, value):
         self._action_type = value
+    @property
+    def additional_reason(self):
+        return self._additional_reason
+
+    @additional_reason.setter
+    def additional_reason(self, value):
+        self._additional_reason = value
     @property
     def aftersale_goods_info_list(self):
         return self._aftersale_goods_info_list
@@ -51,12 +63,39 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     def aftersale_id(self, value):
         self._aftersale_id = value
     @property
+    def aftersale_media_list(self):
+        return self._aftersale_media_list
+
+    @aftersale_media_list.setter
+    def aftersale_media_list(self, value):
+        if isinstance(value, list):
+            self._aftersale_media_list = list()
+            for i in value:
+                if isinstance(i, OrderMediaInfo):
+                    self._aftersale_media_list.append(i)
+                else:
+                    self._aftersale_media_list.append(OrderMediaInfo.from_alipay_dict(i))
+    @property
     def aftersale_reason(self):
         return self._aftersale_reason
 
     @aftersale_reason.setter
     def aftersale_reason(self, value):
         self._aftersale_reason = value
+    @property
+    def apply_refund_amount(self):
+        return self._apply_refund_amount
+
+    @apply_refund_amount.setter
+    def apply_refund_amount(self, value):
+        self._apply_refund_amount = value
+    @property
+    def finally_refund_amount(self):
+        return self._finally_refund_amount
+
+    @finally_refund_amount.setter
+    def finally_refund_amount(self, value):
+        self._finally_refund_amount = value
     @property
     def logistics_waybills(self):
         return self._logistics_waybills
@@ -117,12 +156,20 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
         response = super(AlipayOpenMiniOrderAftersaleQueryResponse, self).parse_response_content(response_content)
         if 'action_type' in response:
             self.action_type = response['action_type']
+        if 'additional_reason' in response:
+            self.additional_reason = response['additional_reason']
         if 'aftersale_goods_info_list' in response:
             self.aftersale_goods_info_list = response['aftersale_goods_info_list']
         if 'aftersale_id' in response:
             self.aftersale_id = response['aftersale_id']
+        if 'aftersale_media_list' in response:
+            self.aftersale_media_list = response['aftersale_media_list']
         if 'aftersale_reason' in response:
             self.aftersale_reason = response['aftersale_reason']
+        if 'apply_refund_amount' in response:
+            self.apply_refund_amount = response['apply_refund_amount']
+        if 'finally_refund_amount' in response:
+            self.finally_refund_amount = response['finally_refund_amount']
         if 'logistics_waybills' in response:
             self.logistics_waybills = response['logistics_waybills']
         if 'order_id' in response:

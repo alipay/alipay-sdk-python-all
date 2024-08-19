@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BusinessItem import BusinessItem
+from alipay.aop.api.domain.ParkingLotChargingRuleInfo import ParkingLotChargingRuleInfo
+from alipay.aop.api.domain.ParkingLotServiceInfo import ParkingLotServiceInfo
 
 
 class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
@@ -11,6 +13,7 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
     def __init__(self):
         self._agent_id = None
         self._business_isv = None
+        self._charging_rule = None
         self._city_id = None
         self._contact_alipay = None
         self._contact_email = None
@@ -43,6 +46,7 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
         self._parking_type = None
         self._pay_type = None
         self._payment_mode = None
+        self._service_list = None
         self._shopingmall_id = None
         self._sum_space = None
         self._support_after_pay = None
@@ -68,6 +72,19 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                     self._business_isv.append(i)
                 else:
                     self._business_isv.append(BusinessItem.from_alipay_dict(i))
+    @property
+    def charging_rule(self):
+        return self._charging_rule
+
+    @charging_rule.setter
+    def charging_rule(self, value):
+        if isinstance(value, list):
+            self._charging_rule = list()
+            for i in value:
+                if isinstance(i, ParkingLotChargingRuleInfo):
+                    self._charging_rule.append(i)
+                else:
+                    self._charging_rule.append(ParkingLotChargingRuleInfo.from_alipay_dict(i))
     @property
     def city_id(self):
         return self._city_id
@@ -293,6 +310,19 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
     def payment_mode(self, value):
         self._payment_mode = value
     @property
+    def service_list(self):
+        return self._service_list
+
+    @service_list.setter
+    def service_list(self, value):
+        if isinstance(value, list):
+            self._service_list = list()
+            for i in value:
+                if isinstance(i, ParkingLotServiceInfo):
+                    self._service_list.append(i)
+                else:
+                    self._service_list.append(ParkingLotServiceInfo.from_alipay_dict(i))
+    @property
     def shopingmall_id(self):
         return self._shopingmall_id
 
@@ -339,6 +369,16 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                 params['business_isv'] = self.business_isv.to_alipay_dict()
             else:
                 params['business_isv'] = self.business_isv
+        if self.charging_rule:
+            if isinstance(self.charging_rule, list):
+                for i in range(0, len(self.charging_rule)):
+                    element = self.charging_rule[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.charging_rule[i] = element.to_alipay_dict()
+            if hasattr(self.charging_rule, 'to_alipay_dict'):
+                params['charging_rule'] = self.charging_rule.to_alipay_dict()
+            else:
+                params['charging_rule'] = self.charging_rule
         if self.city_id:
             if hasattr(self.city_id, 'to_alipay_dict'):
                 params['city_id'] = self.city_id.to_alipay_dict()
@@ -499,6 +539,16 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                 params['payment_mode'] = self.payment_mode.to_alipay_dict()
             else:
                 params['payment_mode'] = self.payment_mode
+        if self.service_list:
+            if isinstance(self.service_list, list):
+                for i in range(0, len(self.service_list)):
+                    element = self.service_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_list[i] = element.to_alipay_dict()
+            if hasattr(self.service_list, 'to_alipay_dict'):
+                params['service_list'] = self.service_list.to_alipay_dict()
+            else:
+                params['service_list'] = self.service_list
         if self.shopingmall_id:
             if hasattr(self.shopingmall_id, 'to_alipay_dict'):
                 params['shopingmall_id'] = self.shopingmall_id.to_alipay_dict()
@@ -530,6 +580,8 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
             o.agent_id = d['agent_id']
         if 'business_isv' in d:
             o.business_isv = d['business_isv']
+        if 'charging_rule' in d:
+            o.charging_rule = d['charging_rule']
         if 'city_id' in d:
             o.city_id = d['city_id']
         if 'contact_alipay' in d:
@@ -594,6 +646,8 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
             o.pay_type = d['pay_type']
         if 'payment_mode' in d:
             o.payment_mode = d['payment_mode']
+        if 'service_list' in d:
+            o.service_list = d['service_list']
         if 'shopingmall_id' in d:
             o.shopingmall_id = d['shopingmall_id']
         if 'sum_space' in d:

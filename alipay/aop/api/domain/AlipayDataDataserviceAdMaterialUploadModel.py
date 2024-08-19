@@ -13,6 +13,7 @@ class AlipayDataDataserviceAdMaterialUploadModel(object):
         self._biz_token = None
         self._deal_id = None
         self._deal_type = None
+        self._material_outer_id = None
         self._material_unit = None
         self._template_id = None
         self._upload_type = None
@@ -45,6 +46,13 @@ class AlipayDataDataserviceAdMaterialUploadModel(object):
     @deal_type.setter
     def deal_type(self, value):
         self._deal_type = value
+    @property
+    def material_outer_id(self):
+        return self._material_outer_id
+
+    @material_outer_id.setter
+    def material_outer_id(self, value):
+        self._material_outer_id = value
     @property
     def material_unit(self):
         return self._material_unit
@@ -93,6 +101,11 @@ class AlipayDataDataserviceAdMaterialUploadModel(object):
                 params['deal_type'] = self.deal_type.to_alipay_dict()
             else:
                 params['deal_type'] = self.deal_type
+        if self.material_outer_id:
+            if hasattr(self.material_outer_id, 'to_alipay_dict'):
+                params['material_outer_id'] = self.material_outer_id.to_alipay_dict()
+            else:
+                params['material_outer_id'] = self.material_outer_id
         if self.material_unit:
             if hasattr(self.material_unit, 'to_alipay_dict'):
                 params['material_unit'] = self.material_unit.to_alipay_dict()
@@ -123,6 +136,8 @@ class AlipayDataDataserviceAdMaterialUploadModel(object):
             o.deal_id = d['deal_id']
         if 'deal_type' in d:
             o.deal_type = d['deal_type']
+        if 'material_outer_id' in d:
+            o.material_outer_id = d['material_outer_id']
         if 'material_unit' in d:
             o.material_unit = d['material_unit']
         if 'template_id' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AmapPoiInfo import AmapPoiInfo
 from alipay.aop.api.domain.SourceMediaInfo import SourceMediaInfo
 from alipay.aop.api.domain.SourceOffer import SourceOffer
 
@@ -11,6 +12,7 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
 
     def __init__(self):
         self._permission_status = None
+        self._poi_info = None
         self._public_id = None
         self._source_author = None
         self._source_content = None
@@ -29,6 +31,16 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
     @permission_status.setter
     def permission_status(self, value):
         self._permission_status = value
+    @property
+    def poi_info(self):
+        return self._poi_info
+
+    @poi_info.setter
+    def poi_info(self, value):
+        if isinstance(value, AmapPoiInfo):
+            self._poi_info = value
+        else:
+            self._poi_info = AmapPoiInfo.from_alipay_dict(value)
     @property
     def public_id(self):
         return self._public_id
@@ -120,6 +132,11 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                 params['permission_status'] = self.permission_status.to_alipay_dict()
             else:
                 params['permission_status'] = self.permission_status
+        if self.poi_info:
+            if hasattr(self.poi_info, 'to_alipay_dict'):
+                params['poi_info'] = self.poi_info.to_alipay_dict()
+            else:
+                params['poi_info'] = self.poi_info
         if self.public_id:
             if hasattr(self.public_id, 'to_alipay_dict'):
                 params['public_id'] = self.public_id.to_alipay_dict()
@@ -189,6 +206,8 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
         o = AlipaySocialBaseContentlibStandardcontentPublishModel()
         if 'permission_status' in d:
             o.permission_status = d['permission_status']
+        if 'poi_info' in d:
+            o.poi_info = d['poi_info']
         if 'public_id' in d:
             o.public_id = d['public_id']
         if 'source_author' in d:

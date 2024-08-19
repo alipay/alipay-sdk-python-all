@@ -4,12 +4,14 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityAssistantMsgContentVO import ActivityAssistantMsgContentVO
+from alipay.aop.api.domain.BenefitAssistantMsgContentVO import BenefitAssistantMsgContentVO
 
 
 class AlipayMerchantGroupAssistantMsgCreateModel(object):
 
     def __init__(self):
         self._activity_content = None
+        self._benefit_content = None
         self._biz_type = None
         self._gmt_published = None
         self._group_ids = None
@@ -25,6 +27,16 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
             self._activity_content = value
         else:
             self._activity_content = ActivityAssistantMsgContentVO.from_alipay_dict(value)
+    @property
+    def benefit_content(self):
+        return self._benefit_content
+
+    @benefit_content.setter
+    def benefit_content(self, value):
+        if isinstance(value, BenefitAssistantMsgContentVO):
+            self._benefit_content = value
+        else:
+            self._benefit_content = BenefitAssistantMsgContentVO.from_alipay_dict(value)
     @property
     def biz_type(self):
         return self._biz_type
@@ -65,6 +77,11 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
                 params['activity_content'] = self.activity_content.to_alipay_dict()
             else:
                 params['activity_content'] = self.activity_content
+        if self.benefit_content:
+            if hasattr(self.benefit_content, 'to_alipay_dict'):
+                params['benefit_content'] = self.benefit_content.to_alipay_dict()
+            else:
+                params['benefit_content'] = self.benefit_content
         if self.biz_type:
             if hasattr(self.biz_type, 'to_alipay_dict'):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
@@ -99,6 +116,8 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
         o = AlipayMerchantGroupAssistantMsgCreateModel()
         if 'activity_content' in d:
             o.activity_content = d['activity_content']
+        if 'benefit_content' in d:
+            o.benefit_content = d['benefit_content']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
         if 'gmt_published' in d:

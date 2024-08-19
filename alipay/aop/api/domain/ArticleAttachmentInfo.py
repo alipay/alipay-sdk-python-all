@@ -9,6 +9,7 @@ class ArticleAttachmentInfo(object):
 
     def __init__(self):
         self._file_name = None
+        self._id = None
         self._key = None
         self._url = None
 
@@ -19,6 +20,13 @@ class ArticleAttachmentInfo(object):
     @file_name.setter
     def file_name(self, value):
         self._file_name = value
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
     @property
     def key(self):
         return self._key
@@ -42,6 +50,11 @@ class ArticleAttachmentInfo(object):
                 params['file_name'] = self.file_name.to_alipay_dict()
             else:
                 params['file_name'] = self.file_name
+        if self.id:
+            if hasattr(self.id, 'to_alipay_dict'):
+                params['id'] = self.id.to_alipay_dict()
+            else:
+                params['id'] = self.id
         if self.key:
             if hasattr(self.key, 'to_alipay_dict'):
                 params['key'] = self.key.to_alipay_dict()
@@ -61,6 +74,8 @@ class ArticleAttachmentInfo(object):
         o = ArticleAttachmentInfo()
         if 'file_name' in d:
             o.file_name = d['file_name']
+        if 'id' in d:
+            o.id = d['id']
         if 'key' in d:
             o.key = d['key']
         if 'url' in d:

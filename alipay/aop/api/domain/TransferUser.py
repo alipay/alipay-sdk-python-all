@@ -13,6 +13,7 @@ class TransferUser(object):
     def __init__(self):
         self._birth_date = None
         self._credential = None
+        self._gender = None
         self._nationality = None
         self._user_address = None
         self._user_email = None
@@ -37,6 +38,13 @@ class TransferUser(object):
             self._credential = value
         else:
             self._credential = TransferCredential.from_alipay_dict(value)
+    @property
+    def gender(self):
+        return self._gender
+
+    @gender.setter
+    def gender(self, value):
+        self._gender = value
     @property
     def nationality(self):
         return self._nationality
@@ -99,6 +107,11 @@ class TransferUser(object):
                 params['credential'] = self.credential.to_alipay_dict()
             else:
                 params['credential'] = self.credential
+        if self.gender:
+            if hasattr(self.gender, 'to_alipay_dict'):
+                params['gender'] = self.gender.to_alipay_dict()
+            else:
+                params['gender'] = self.gender
         if self.nationality:
             if hasattr(self.nationality, 'to_alipay_dict'):
                 params['nationality'] = self.nationality.to_alipay_dict()
@@ -140,6 +153,8 @@ class TransferUser(object):
             o.birth_date = d['birth_date']
         if 'credential' in d:
             o.credential = d['credential']
+        if 'gender' in d:
+            o.gender = d['gender']
         if 'nationality' in d:
             o.nationality = d['nationality']
         if 'user_address' in d:

@@ -13,6 +13,7 @@ class SimpleRentInfo(object):
         self._biz_order_id = None
         self._buyer_id = None
         self._buyer_open_id = None
+        self._buyout_price = None
         self._end_time = None
         self._plan_list = None
         self._price_info = None
@@ -43,6 +44,13 @@ class SimpleRentInfo(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def buyout_price(self):
+        return self._buyout_price
+
+    @buyout_price.setter
+    def buyout_price(self, value):
+        self._buyout_price = value
     @property
     def end_time(self):
         return self._end_time
@@ -130,6 +138,11 @@ class SimpleRentInfo(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.buyout_price:
+            if hasattr(self.buyout_price, 'to_alipay_dict'):
+                params['buyout_price'] = self.buyout_price.to_alipay_dict()
+            else:
+                params['buyout_price'] = self.buyout_price
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -193,6 +206,8 @@ class SimpleRentInfo(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'buyout_price' in d:
+            o.buyout_price = d['buyout_price']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'plan_list' in d:

@@ -9,6 +9,7 @@ class AntfortuneStockDarwinQueryModel(object):
 
     def __init__(self):
         self._agreement_no = None
+        self._crowd_id = None
         self._scenario = None
         self._trace = None
 
@@ -19,6 +20,13 @@ class AntfortuneStockDarwinQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def crowd_id(self):
+        return self._crowd_id
+
+    @crowd_id.setter
+    def crowd_id(self, value):
+        self._crowd_id = value
     @property
     def scenario(self):
         return self._scenario
@@ -42,6 +50,11 @@ class AntfortuneStockDarwinQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.crowd_id:
+            if hasattr(self.crowd_id, 'to_alipay_dict'):
+                params['crowd_id'] = self.crowd_id.to_alipay_dict()
+            else:
+                params['crowd_id'] = self.crowd_id
         if self.scenario:
             if hasattr(self.scenario, 'to_alipay_dict'):
                 params['scenario'] = self.scenario.to_alipay_dict()
@@ -61,6 +74,8 @@ class AntfortuneStockDarwinQueryModel(object):
         o = AntfortuneStockDarwinQueryModel()
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'crowd_id' in d:
+            o.crowd_id = d['crowd_id']
         if 'scenario' in d:
             o.scenario = d['scenario']
         if 'trace' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TaskEffectScope import TaskEffectScope
 from alipay.aop.api.domain.PlanInfo import PlanInfo
 
 
@@ -11,10 +12,12 @@ class YunTaskTemplateInfoDTO(object):
     def __init__(self):
         self._applet_id = None
         self._creator_uid = None
+        self._effect_scope = None
         self._funder_id = None
         self._funder_type = None
         self._gmt_create = None
         self._incentive = None
+        self._incentive_extended_period = None
         self._incentive_mode = None
         self._incentive_rule = None
         self._organizer_id = None
@@ -48,6 +51,16 @@ class YunTaskTemplateInfoDTO(object):
     def creator_uid(self, value):
         self._creator_uid = value
     @property
+    def effect_scope(self):
+        return self._effect_scope
+
+    @effect_scope.setter
+    def effect_scope(self, value):
+        if isinstance(value, TaskEffectScope):
+            self._effect_scope = value
+        else:
+            self._effect_scope = TaskEffectScope.from_alipay_dict(value)
+    @property
     def funder_id(self):
         return self._funder_id
 
@@ -75,6 +88,13 @@ class YunTaskTemplateInfoDTO(object):
     @incentive.setter
     def incentive(self, value):
         self._incentive = value
+    @property
+    def incentive_extended_period(self):
+        return self._incentive_extended_period
+
+    @incentive_extended_period.setter
+    def incentive_extended_period(self, value):
+        self._incentive_extended_period = value
     @property
     def incentive_mode(self):
         return self._incentive_mode
@@ -211,6 +231,11 @@ class YunTaskTemplateInfoDTO(object):
                 params['creator_uid'] = self.creator_uid.to_alipay_dict()
             else:
                 params['creator_uid'] = self.creator_uid
+        if self.effect_scope:
+            if hasattr(self.effect_scope, 'to_alipay_dict'):
+                params['effect_scope'] = self.effect_scope.to_alipay_dict()
+            else:
+                params['effect_scope'] = self.effect_scope
         if self.funder_id:
             if hasattr(self.funder_id, 'to_alipay_dict'):
                 params['funder_id'] = self.funder_id.to_alipay_dict()
@@ -231,6 +256,11 @@ class YunTaskTemplateInfoDTO(object):
                 params['incentive'] = self.incentive.to_alipay_dict()
             else:
                 params['incentive'] = self.incentive
+        if self.incentive_extended_period:
+            if hasattr(self.incentive_extended_period, 'to_alipay_dict'):
+                params['incentive_extended_period'] = self.incentive_extended_period.to_alipay_dict()
+            else:
+                params['incentive_extended_period'] = self.incentive_extended_period
         if self.incentive_mode:
             if hasattr(self.incentive_mode, 'to_alipay_dict'):
                 params['incentive_mode'] = self.incentive_mode.to_alipay_dict()
@@ -327,6 +357,8 @@ class YunTaskTemplateInfoDTO(object):
             o.applet_id = d['applet_id']
         if 'creator_uid' in d:
             o.creator_uid = d['creator_uid']
+        if 'effect_scope' in d:
+            o.effect_scope = d['effect_scope']
         if 'funder_id' in d:
             o.funder_id = d['funder_id']
         if 'funder_type' in d:
@@ -335,6 +367,8 @@ class YunTaskTemplateInfoDTO(object):
             o.gmt_create = d['gmt_create']
         if 'incentive' in d:
             o.incentive = d['incentive']
+        if 'incentive_extended_period' in d:
+            o.incentive_extended_period = d['incentive_extended_period']
         if 'incentive_mode' in d:
             o.incentive_mode = d['incentive_mode']
         if 'incentive_rule' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BackgroundWordInfo import BackgroundWordInfo
+from alipay.aop.api.domain.DeliveryOrientedRuleInfo import DeliveryOrientedRuleInfo
 from alipay.aop.api.domain.DeliveryTargetRegion import DeliveryTargetRegion
 from alipay.aop.api.domain.SearchBoxActivityVideoInfo import SearchBoxActivityVideoInfo
 
@@ -21,6 +22,7 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
         self._gmt_modified = None
         self._material_type = None
         self._material_url = None
+        self._oriented_rule = None
         self._run_status = None
         self._start_time = None
         self._status = None
@@ -96,6 +98,16 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
     @material_url.setter
     def material_url(self, value):
         self._material_url = value
+    @property
+    def oriented_rule(self):
+        return self._oriented_rule
+
+    @oriented_rule.setter
+    def oriented_rule(self, value):
+        if isinstance(value, DeliveryOrientedRuleInfo):
+            self._oriented_rule = value
+        else:
+            self._oriented_rule = DeliveryOrientedRuleInfo.from_alipay_dict(value)
     @property
     def run_status(self):
         return self._run_status
@@ -182,6 +194,8 @@ class AlipayOpenSearchBoxactivityQueryResponse(AlipayResponse):
             self.material_type = response['material_type']
         if 'material_url' in response:
             self.material_url = response['material_url']
+        if 'oriented_rule' in response:
+            self.oriented_rule = response['oriented_rule']
         if 'run_status' in response:
             self.run_status = response['run_status']
         if 'start_time' in response:

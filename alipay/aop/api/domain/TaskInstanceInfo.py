@@ -26,6 +26,7 @@ class TaskInstanceInfo(object):
         self._task_start_time = None
         self._task_template_id = None
         self._task_type = None
+        self._test_point_amount = None
         self._total_point_amount = None
         self._unexchange_point_amount = None
 
@@ -156,6 +157,13 @@ class TaskInstanceInfo(object):
     def task_type(self, value):
         self._task_type = value
     @property
+    def test_point_amount(self):
+        return self._test_point_amount
+
+    @test_point_amount.setter
+    def test_point_amount(self, value):
+        self._test_point_amount = value
+    @property
     def total_point_amount(self):
         return self._total_point_amount
 
@@ -263,6 +271,11 @@ class TaskInstanceInfo(object):
                 params['task_type'] = self.task_type.to_alipay_dict()
             else:
                 params['task_type'] = self.task_type
+        if self.test_point_amount:
+            if hasattr(self.test_point_amount, 'to_alipay_dict'):
+                params['test_point_amount'] = self.test_point_amount.to_alipay_dict()
+            else:
+                params['test_point_amount'] = self.test_point_amount
         if self.total_point_amount:
             if hasattr(self.total_point_amount, 'to_alipay_dict'):
                 params['total_point_amount'] = self.total_point_amount.to_alipay_dict()
@@ -316,6 +329,8 @@ class TaskInstanceInfo(object):
             o.task_template_id = d['task_template_id']
         if 'task_type' in d:
             o.task_type = d['task_type']
+        if 'test_point_amount' in d:
+            o.test_point_amount = d['test_point_amount']
         if 'total_point_amount' in d:
             o.total_point_amount = d['total_point_amount']
         if 'unexchange_point_amount' in d:

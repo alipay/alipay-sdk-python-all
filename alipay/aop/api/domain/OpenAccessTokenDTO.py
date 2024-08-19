@@ -9,6 +9,7 @@ class OpenAccessTokenDTO(object):
 
     def __init__(self):
         self._access_token = None
+        self._access_token_expire_time = None
         self._refresh_token = None
         self._refresh_token_expire_time = None
 
@@ -19,6 +20,13 @@ class OpenAccessTokenDTO(object):
     @access_token.setter
     def access_token(self, value):
         self._access_token = value
+    @property
+    def access_token_expire_time(self):
+        return self._access_token_expire_time
+
+    @access_token_expire_time.setter
+    def access_token_expire_time(self, value):
+        self._access_token_expire_time = value
     @property
     def refresh_token(self):
         return self._refresh_token
@@ -42,6 +50,11 @@ class OpenAccessTokenDTO(object):
                 params['access_token'] = self.access_token.to_alipay_dict()
             else:
                 params['access_token'] = self.access_token
+        if self.access_token_expire_time:
+            if hasattr(self.access_token_expire_time, 'to_alipay_dict'):
+                params['access_token_expire_time'] = self.access_token_expire_time.to_alipay_dict()
+            else:
+                params['access_token_expire_time'] = self.access_token_expire_time
         if self.refresh_token:
             if hasattr(self.refresh_token, 'to_alipay_dict'):
                 params['refresh_token'] = self.refresh_token.to_alipay_dict()
@@ -61,6 +74,8 @@ class OpenAccessTokenDTO(object):
         o = OpenAccessTokenDTO()
         if 'access_token' in d:
             o.access_token = d['access_token']
+        if 'access_token_expire_time' in d:
+            o.access_token_expire_time = d['access_token_expire_time']
         if 'refresh_token' in d:
             o.refresh_token = d['refresh_token']
         if 'refresh_token_expire_time' in d:

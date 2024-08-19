@@ -10,6 +10,7 @@ class AlipayTerminalEdgecloudHeyagentCloseModel(object):
     def __init__(self):
         self._agent_id = None
         self._open_id = None
+        self._result_code = None
         self._uid = None
         self._utdid = None
 
@@ -27,6 +28,13 @@ class AlipayTerminalEdgecloudHeyagentCloseModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def result_code(self):
+        return self._result_code
+
+    @result_code.setter
+    def result_code(self, value):
+        self._result_code = value
     @property
     def uid(self):
         return self._uid
@@ -55,6 +63,11 @@ class AlipayTerminalEdgecloudHeyagentCloseModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.result_code:
+            if hasattr(self.result_code, 'to_alipay_dict'):
+                params['result_code'] = self.result_code.to_alipay_dict()
+            else:
+                params['result_code'] = self.result_code
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayTerminalEdgecloudHeyagentCloseModel(object):
             o.agent_id = d['agent_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'result_code' in d:
+            o.result_code = d['result_code']
         if 'uid' in d:
             o.uid = d['uid']
         if 'utdid' in d:

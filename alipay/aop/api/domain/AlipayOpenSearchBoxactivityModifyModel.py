@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DeliveryOrientedRuleInfo import DeliveryOrientedRuleInfo
 from alipay.aop.api.domain.DeliveryTargetRegion import DeliveryTargetRegion
 from alipay.aop.api.domain.SearchBoxActivityVideoInfo import SearchBoxActivityVideoInfo
 
@@ -17,6 +18,7 @@ class AlipayOpenSearchBoxactivityModifyModel(object):
         self._material_id = None
         self._material_type = None
         self._merchant_id = None
+        self._oriented_rule = None
         self._start_time = None
         self._target_appid = None
         self._target_appname = None
@@ -73,6 +75,16 @@ class AlipayOpenSearchBoxactivityModifyModel(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def oriented_rule(self):
+        return self._oriented_rule
+
+    @oriented_rule.setter
+    def oriented_rule(self, value):
+        if isinstance(value, DeliveryOrientedRuleInfo):
+            self._oriented_rule = value
+        else:
+            self._oriented_rule = DeliveryOrientedRuleInfo.from_alipay_dict(value)
     @property
     def start_time(self):
         return self._start_time
@@ -163,6 +175,11 @@ class AlipayOpenSearchBoxactivityModifyModel(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.oriented_rule:
+            if hasattr(self.oriented_rule, 'to_alipay_dict'):
+                params['oriented_rule'] = self.oriented_rule.to_alipay_dict()
+            else:
+                params['oriented_rule'] = self.oriented_rule
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -219,6 +236,8 @@ class AlipayOpenSearchBoxactivityModifyModel(object):
             o.material_type = d['material_type']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'oriented_rule' in d:
+            o.oriented_rule = d['oriented_rule']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'target_appid' in d:

@@ -19,6 +19,7 @@ class AlipayCloudFundTradePayModel(object):
         self._out_trade_no = None
         self._product_code = None
         self._subject = None
+        self._user_wallet_id = None
 
     @property
     def agreement_no(self):
@@ -97,6 +98,13 @@ class AlipayCloudFundTradePayModel(object):
     @subject.setter
     def subject(self, value):
         self._subject = value
+    @property
+    def user_wallet_id(self):
+        return self._user_wallet_id
+
+    @user_wallet_id.setter
+    def user_wallet_id(self, value):
+        self._user_wallet_id = value
 
 
     def to_alipay_dict(self):
@@ -156,6 +164,11 @@ class AlipayCloudFundTradePayModel(object):
                 params['subject'] = self.subject.to_alipay_dict()
             else:
                 params['subject'] = self.subject
+        if self.user_wallet_id:
+            if hasattr(self.user_wallet_id, 'to_alipay_dict'):
+                params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
+            else:
+                params['user_wallet_id'] = self.user_wallet_id
         return params
 
     @staticmethod
@@ -185,6 +198,8 @@ class AlipayCloudFundTradePayModel(object):
             o.product_code = d['product_code']
         if 'subject' in d:
             o.subject = d['subject']
+        if 'user_wallet_id' in d:
+            o.user_wallet_id = d['user_wallet_id']
         return o
 
 

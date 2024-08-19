@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEbppIndustrySupervisionAccountCreateModel(object):
 
     def __init__(self):
+        self._auto_refund = None
         self._biz_scene = None
         self._merchant_alipay_open_id = None
         self._merchant_alipay_uid = None
@@ -26,6 +27,13 @@ class AlipayEbppIndustrySupervisionAccountCreateModel(object):
         self._special_funds_currency = None
         self._sub_account_type = None
 
+    @property
+    def auto_refund(self):
+        return self._auto_refund
+
+    @auto_refund.setter
+    def auto_refund(self, value):
+        self._auto_refund = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -149,6 +157,11 @@ class AlipayEbppIndustrySupervisionAccountCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auto_refund:
+            if hasattr(self.auto_refund, 'to_alipay_dict'):
+                params['auto_refund'] = self.auto_refund.to_alipay_dict()
+            else:
+                params['auto_refund'] = self.auto_refund
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -241,6 +254,8 @@ class AlipayEbppIndustrySupervisionAccountCreateModel(object):
         if not d:
             return None
         o = AlipayEbppIndustrySupervisionAccountCreateModel()
+        if 'auto_refund' in d:
+            o.auto_refund = d['auto_refund']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'merchant_alipay_open_id' in d:

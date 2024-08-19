@@ -9,6 +9,7 @@ class EnterpriseProfilesDTO(object):
 
     def __init__(self):
         self._create_iot_group = None
+        self._credit_applicant_mobile = None
         self._fund_biz_scene = None
         self._group_app_id = None
 
@@ -19,6 +20,13 @@ class EnterpriseProfilesDTO(object):
     @create_iot_group.setter
     def create_iot_group(self, value):
         self._create_iot_group = value
+    @property
+    def credit_applicant_mobile(self):
+        return self._credit_applicant_mobile
+
+    @credit_applicant_mobile.setter
+    def credit_applicant_mobile(self, value):
+        self._credit_applicant_mobile = value
     @property
     def fund_biz_scene(self):
         return self._fund_biz_scene
@@ -42,6 +50,11 @@ class EnterpriseProfilesDTO(object):
                 params['create_iot_group'] = self.create_iot_group.to_alipay_dict()
             else:
                 params['create_iot_group'] = self.create_iot_group
+        if self.credit_applicant_mobile:
+            if hasattr(self.credit_applicant_mobile, 'to_alipay_dict'):
+                params['credit_applicant_mobile'] = self.credit_applicant_mobile.to_alipay_dict()
+            else:
+                params['credit_applicant_mobile'] = self.credit_applicant_mobile
         if self.fund_biz_scene:
             if hasattr(self.fund_biz_scene, 'to_alipay_dict'):
                 params['fund_biz_scene'] = self.fund_biz_scene.to_alipay_dict()
@@ -61,6 +74,8 @@ class EnterpriseProfilesDTO(object):
         o = EnterpriseProfilesDTO()
         if 'create_iot_group' in d:
             o.create_iot_group = d['create_iot_group']
+        if 'credit_applicant_mobile' in d:
+            o.credit_applicant_mobile = d['credit_applicant_mobile']
         if 'fund_biz_scene' in d:
             o.fund_biz_scene = d['fund_biz_scene']
         if 'group_app_id' in d:

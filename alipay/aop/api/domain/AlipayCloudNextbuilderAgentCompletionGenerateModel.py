@@ -9,6 +9,7 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
 
     def __init__(self):
         self._agent_id = None
+        self._config_version = None
         self._inputs = None
         self._outer_user_id = None
         self._request_id = None
@@ -20,6 +21,13 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
     @agent_id.setter
     def agent_id(self, value):
         self._agent_id = value
+    @property
+    def config_version(self):
+        return self._config_version
+
+    @config_version.setter
+    def config_version(self, value):
+        self._config_version = value
     @property
     def inputs(self):
         return self._inputs
@@ -50,6 +58,11 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
                 params['agent_id'] = self.agent_id.to_alipay_dict()
             else:
                 params['agent_id'] = self.agent_id
+        if self.config_version:
+            if hasattr(self.config_version, 'to_alipay_dict'):
+                params['config_version'] = self.config_version.to_alipay_dict()
+            else:
+                params['config_version'] = self.config_version
         if self.inputs:
             if hasattr(self.inputs, 'to_alipay_dict'):
                 params['inputs'] = self.inputs.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
         o = AlipayCloudNextbuilderAgentCompletionGenerateModel()
         if 'agent_id' in d:
             o.agent_id = d['agent_id']
+        if 'config_version' in d:
+            o.config_version = d['config_version']
         if 'inputs' in d:
             o.inputs = d['inputs']
         if 'outer_user_id' in d:

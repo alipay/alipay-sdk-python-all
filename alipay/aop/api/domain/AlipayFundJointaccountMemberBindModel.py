@@ -14,6 +14,7 @@ class AlipayFundJointaccountMemberBindModel(object):
         self._account_id = None
         self._account_quota = None
         self._agreement_no = None
+        self._agreement_sign_info = None
         self._biz_scene = None
         self._business_params = None
         self._identity = None
@@ -46,6 +47,13 @@ class AlipayFundJointaccountMemberBindModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def agreement_sign_info(self):
+        return self._agreement_sign_info
+
+    @agreement_sign_info.setter
+    def agreement_sign_info(self, value):
+        self._agreement_sign_info = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -120,6 +128,11 @@ class AlipayFundJointaccountMemberBindModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.agreement_sign_info:
+            if hasattr(self.agreement_sign_info, 'to_alipay_dict'):
+                params['agreement_sign_info'] = self.agreement_sign_info.to_alipay_dict()
+            else:
+                params['agreement_sign_info'] = self.agreement_sign_info
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -168,6 +181,8 @@ class AlipayFundJointaccountMemberBindModel(object):
             o.account_quota = d['account_quota']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'agreement_sign_info' in d:
+            o.agreement_sign_info = d['agreement_sign_info']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'business_params' in d:

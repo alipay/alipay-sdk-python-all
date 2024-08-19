@@ -10,6 +10,7 @@ class PointInstruction(object):
     def __init__(self):
         self._action_type = None
         self._point_amount = None
+        self._point_type = None
         self._reason = None
         self._status = None
         self._task_name = None
@@ -29,6 +30,13 @@ class PointInstruction(object):
     @point_amount.setter
     def point_amount(self, value):
         self._point_amount = value
+    @property
+    def point_type(self):
+        return self._point_type
+
+    @point_type.setter
+    def point_type(self, value):
+        self._point_type = value
     @property
     def reason(self):
         return self._reason
@@ -71,6 +79,11 @@ class PointInstruction(object):
                 params['point_amount'] = self.point_amount.to_alipay_dict()
             else:
                 params['point_amount'] = self.point_amount
+        if self.point_type:
+            if hasattr(self.point_type, 'to_alipay_dict'):
+                params['point_type'] = self.point_type.to_alipay_dict()
+            else:
+                params['point_type'] = self.point_type
         if self.reason:
             if hasattr(self.reason, 'to_alipay_dict'):
                 params['reason'] = self.reason.to_alipay_dict()
@@ -102,6 +115,8 @@ class PointInstruction(object):
             o.action_type = d['action_type']
         if 'point_amount' in d:
             o.point_amount = d['point_amount']
+        if 'point_type' in d:
+            o.point_type = d['point_type']
         if 'reason' in d:
             o.reason = d['reason']
         if 'status' in d:

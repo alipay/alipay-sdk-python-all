@@ -9,25 +9,41 @@ from alipay.aop.api.domain.DeductionPlanInfo import DeductionPlanInfo
 class CardOrderInfo(object):
 
     def __init__(self):
+        self._available_amount = None
         self._cancel_type = None
+        self._cancelled_cash = None
         self._card_id = None
         self._card_status = None
         self._card_template_id = None
         self._card_type = None
         self._create_date = None
         self._deduction_plan_list = None
+        self._gmt_active = None
+        self._gmt_expired = None
+        self._merchant_pid = None
         self._name = None
         self._open_id = None
         self._order_id = None
         self._origin_price_total = None
         self._out_order_no = None
+        self._refund_cash = None
         self._remain_count = None
         self._sale_price_total = None
         self._shop_id = None
         self._total_count = None
+        self._trade_no = None
+        self._usable_cash = None
+        self._used_cash = None
         self._user_id = None
         self._user_name = None
 
+    @property
+    def available_amount(self):
+        return self._available_amount
+
+    @available_amount.setter
+    def available_amount(self, value):
+        self._available_amount = value
     @property
     def cancel_type(self):
         return self._cancel_type
@@ -35,6 +51,13 @@ class CardOrderInfo(object):
     @cancel_type.setter
     def cancel_type(self, value):
         self._cancel_type = value
+    @property
+    def cancelled_cash(self):
+        return self._cancelled_cash
+
+    @cancelled_cash.setter
+    def cancelled_cash(self, value):
+        self._cancelled_cash = value
     @property
     def card_id(self):
         return self._card_id
@@ -84,6 +107,27 @@ class CardOrderInfo(object):
                 else:
                     self._deduction_plan_list.append(DeductionPlanInfo.from_alipay_dict(i))
     @property
+    def gmt_active(self):
+        return self._gmt_active
+
+    @gmt_active.setter
+    def gmt_active(self, value):
+        self._gmt_active = value
+    @property
+    def gmt_expired(self):
+        return self._gmt_expired
+
+    @gmt_expired.setter
+    def gmt_expired(self, value):
+        self._gmt_expired = value
+    @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
+    @property
     def name(self):
         return self._name
 
@@ -119,6 +163,13 @@ class CardOrderInfo(object):
     def out_order_no(self, value):
         self._out_order_no = value
     @property
+    def refund_cash(self):
+        return self._refund_cash
+
+    @refund_cash.setter
+    def refund_cash(self, value):
+        self._refund_cash = value
+    @property
     def remain_count(self):
         return self._remain_count
 
@@ -147,6 +198,27 @@ class CardOrderInfo(object):
     def total_count(self, value):
         self._total_count = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
+    def usable_cash(self):
+        return self._usable_cash
+
+    @usable_cash.setter
+    def usable_cash(self, value):
+        self._usable_cash = value
+    @property
+    def used_cash(self):
+        return self._used_cash
+
+    @used_cash.setter
+    def used_cash(self, value):
+        self._used_cash = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -164,11 +236,21 @@ class CardOrderInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.available_amount:
+            if hasattr(self.available_amount, 'to_alipay_dict'):
+                params['available_amount'] = self.available_amount.to_alipay_dict()
+            else:
+                params['available_amount'] = self.available_amount
         if self.cancel_type:
             if hasattr(self.cancel_type, 'to_alipay_dict'):
                 params['cancel_type'] = self.cancel_type.to_alipay_dict()
             else:
                 params['cancel_type'] = self.cancel_type
+        if self.cancelled_cash:
+            if hasattr(self.cancelled_cash, 'to_alipay_dict'):
+                params['cancelled_cash'] = self.cancelled_cash.to_alipay_dict()
+            else:
+                params['cancelled_cash'] = self.cancelled_cash
         if self.card_id:
             if hasattr(self.card_id, 'to_alipay_dict'):
                 params['card_id'] = self.card_id.to_alipay_dict()
@@ -204,6 +286,21 @@ class CardOrderInfo(object):
                 params['deduction_plan_list'] = self.deduction_plan_list.to_alipay_dict()
             else:
                 params['deduction_plan_list'] = self.deduction_plan_list
+        if self.gmt_active:
+            if hasattr(self.gmt_active, 'to_alipay_dict'):
+                params['gmt_active'] = self.gmt_active.to_alipay_dict()
+            else:
+                params['gmt_active'] = self.gmt_active
+        if self.gmt_expired:
+            if hasattr(self.gmt_expired, 'to_alipay_dict'):
+                params['gmt_expired'] = self.gmt_expired.to_alipay_dict()
+            else:
+                params['gmt_expired'] = self.gmt_expired
+        if self.merchant_pid:
+            if hasattr(self.merchant_pid, 'to_alipay_dict'):
+                params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
+            else:
+                params['merchant_pid'] = self.merchant_pid
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -229,6 +326,11 @@ class CardOrderInfo(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.refund_cash:
+            if hasattr(self.refund_cash, 'to_alipay_dict'):
+                params['refund_cash'] = self.refund_cash.to_alipay_dict()
+            else:
+                params['refund_cash'] = self.refund_cash
         if self.remain_count:
             if hasattr(self.remain_count, 'to_alipay_dict'):
                 params['remain_count'] = self.remain_count.to_alipay_dict()
@@ -249,6 +351,21 @@ class CardOrderInfo(object):
                 params['total_count'] = self.total_count.to_alipay_dict()
             else:
                 params['total_count'] = self.total_count
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
+        if self.usable_cash:
+            if hasattr(self.usable_cash, 'to_alipay_dict'):
+                params['usable_cash'] = self.usable_cash.to_alipay_dict()
+            else:
+                params['usable_cash'] = self.usable_cash
+        if self.used_cash:
+            if hasattr(self.used_cash, 'to_alipay_dict'):
+                params['used_cash'] = self.used_cash.to_alipay_dict()
+            else:
+                params['used_cash'] = self.used_cash
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -266,8 +383,12 @@ class CardOrderInfo(object):
         if not d:
             return None
         o = CardOrderInfo()
+        if 'available_amount' in d:
+            o.available_amount = d['available_amount']
         if 'cancel_type' in d:
             o.cancel_type = d['cancel_type']
+        if 'cancelled_cash' in d:
+            o.cancelled_cash = d['cancelled_cash']
         if 'card_id' in d:
             o.card_id = d['card_id']
         if 'card_status' in d:
@@ -280,6 +401,12 @@ class CardOrderInfo(object):
             o.create_date = d['create_date']
         if 'deduction_plan_list' in d:
             o.deduction_plan_list = d['deduction_plan_list']
+        if 'gmt_active' in d:
+            o.gmt_active = d['gmt_active']
+        if 'gmt_expired' in d:
+            o.gmt_expired = d['gmt_expired']
+        if 'merchant_pid' in d:
+            o.merchant_pid = d['merchant_pid']
         if 'name' in d:
             o.name = d['name']
         if 'open_id' in d:
@@ -290,6 +417,8 @@ class CardOrderInfo(object):
             o.origin_price_total = d['origin_price_total']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'refund_cash' in d:
+            o.refund_cash = d['refund_cash']
         if 'remain_count' in d:
             o.remain_count = d['remain_count']
         if 'sale_price_total' in d:
@@ -298,6 +427,12 @@ class CardOrderInfo(object):
             o.shop_id = d['shop_id']
         if 'total_count' in d:
             o.total_count = d['total_count']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
+        if 'usable_cash' in d:
+            o.usable_cash = d['usable_cash']
+        if 'used_cash' in d:
+            o.used_cash = d['used_cash']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

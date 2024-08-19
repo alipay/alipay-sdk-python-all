@@ -8,6 +8,8 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceTransportParkingExitinfoSyncModel(object):
 
     def __init__(self):
+        self._exit_name = None
+        self._exit_number = None
         self._is_encrypt_plate_no = None
         self._open_appid = None
         self._open_id = None
@@ -17,6 +19,20 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
         self._plate_no = None
         self._service_url = None
 
+    @property
+    def exit_name(self):
+        return self._exit_name
+
+    @exit_name.setter
+    def exit_name(self, value):
+        self._exit_name = value
+    @property
+    def exit_number(self):
+        return self._exit_number
+
+    @exit_number.setter
+    def exit_number(self, value):
+        self._exit_number = value
     @property
     def is_encrypt_plate_no(self):
         return self._is_encrypt_plate_no
@@ -77,6 +93,16 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.exit_name:
+            if hasattr(self.exit_name, 'to_alipay_dict'):
+                params['exit_name'] = self.exit_name.to_alipay_dict()
+            else:
+                params['exit_name'] = self.exit_name
+        if self.exit_number:
+            if hasattr(self.exit_number, 'to_alipay_dict'):
+                params['exit_number'] = self.exit_number.to_alipay_dict()
+            else:
+                params['exit_number'] = self.exit_number
         if self.is_encrypt_plate_no:
             if hasattr(self.is_encrypt_plate_no, 'to_alipay_dict'):
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no.to_alipay_dict()
@@ -124,6 +150,10 @@ class AlipayCommerceTransportParkingExitinfoSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceTransportParkingExitinfoSyncModel()
+        if 'exit_name' in d:
+            o.exit_name = d['exit_name']
+        if 'exit_number' in d:
+            o.exit_number = d['exit_number']
         if 'is_encrypt_plate_no' in d:
             o.is_encrypt_plate_no = d['is_encrypt_plate_no']
         if 'open_appid' in d:

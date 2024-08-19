@@ -18,6 +18,7 @@ class AlipayInsSceneChannelsaleVoucherCreateModel(object):
         self._phone = None
         self._product_plan_id = None
         self._purchase_merchant_id = None
+        self._registered_subject_id = None
         self._send_type = None
 
     @property
@@ -87,6 +88,13 @@ class AlipayInsSceneChannelsaleVoucherCreateModel(object):
     def purchase_merchant_id(self, value):
         self._purchase_merchant_id = value
     @property
+    def registered_subject_id(self):
+        return self._registered_subject_id
+
+    @registered_subject_id.setter
+    def registered_subject_id(self, value):
+        self._registered_subject_id = value
+    @property
     def send_type(self):
         return self._send_type
 
@@ -142,6 +150,11 @@ class AlipayInsSceneChannelsaleVoucherCreateModel(object):
                 params['purchase_merchant_id'] = self.purchase_merchant_id.to_alipay_dict()
             else:
                 params['purchase_merchant_id'] = self.purchase_merchant_id
+        if self.registered_subject_id:
+            if hasattr(self.registered_subject_id, 'to_alipay_dict'):
+                params['registered_subject_id'] = self.registered_subject_id.to_alipay_dict()
+            else:
+                params['registered_subject_id'] = self.registered_subject_id
         if self.send_type:
             if hasattr(self.send_type, 'to_alipay_dict'):
                 params['send_type'] = self.send_type.to_alipay_dict()
@@ -172,6 +185,8 @@ class AlipayInsSceneChannelsaleVoucherCreateModel(object):
             o.product_plan_id = d['product_plan_id']
         if 'purchase_merchant_id' in d:
             o.purchase_merchant_id = d['purchase_merchant_id']
+        if 'registered_subject_id' in d:
+            o.registered_subject_id = d['registered_subject_id']
         if 'send_type' in d:
             o.send_type = d['send_type']
         return o

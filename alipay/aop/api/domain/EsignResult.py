@@ -14,6 +14,8 @@ class EsignResult(object):
         self._contractor_code = None
         self._contractor_name = None
         self._employee_alipay_logon_id = None
+        self._employee_identification = None
+        self._employee_identification_open_id = None
         self._employer_code = None
         self._identification_in_belonging_employer = None
         self._out_biz_no = None
@@ -66,6 +68,20 @@ class EsignResult(object):
     @employee_alipay_logon_id.setter
     def employee_alipay_logon_id(self, value):
         self._employee_alipay_logon_id = value
+    @property
+    def employee_identification(self):
+        return self._employee_identification
+
+    @employee_identification.setter
+    def employee_identification(self, value):
+        self._employee_identification = value
+    @property
+    def employee_identification_open_id(self):
+        return self._employee_identification_open_id
+
+    @employee_identification_open_id.setter
+    def employee_identification_open_id(self, value):
+        self._employee_identification_open_id = value
     @property
     def employer_code(self):
         return self._employer_code
@@ -163,6 +179,16 @@ class EsignResult(object):
                 params['employee_alipay_logon_id'] = self.employee_alipay_logon_id.to_alipay_dict()
             else:
                 params['employee_alipay_logon_id'] = self.employee_alipay_logon_id
+        if self.employee_identification:
+            if hasattr(self.employee_identification, 'to_alipay_dict'):
+                params['employee_identification'] = self.employee_identification.to_alipay_dict()
+            else:
+                params['employee_identification'] = self.employee_identification
+        if self.employee_identification_open_id:
+            if hasattr(self.employee_identification_open_id, 'to_alipay_dict'):
+                params['employee_identification_open_id'] = self.employee_identification_open_id.to_alipay_dict()
+            else:
+                params['employee_identification_open_id'] = self.employee_identification_open_id
         if self.employer_code:
             if hasattr(self.employer_code, 'to_alipay_dict'):
                 params['employer_code'] = self.employer_code.to_alipay_dict()
@@ -227,6 +253,10 @@ class EsignResult(object):
             o.contractor_name = d['contractor_name']
         if 'employee_alipay_logon_id' in d:
             o.employee_alipay_logon_id = d['employee_alipay_logon_id']
+        if 'employee_identification' in d:
+            o.employee_identification = d['employee_identification']
+        if 'employee_identification_open_id' in d:
+            o.employee_identification_open_id = d['employee_identification_open_id']
         if 'employer_code' in d:
             o.employer_code = d['employer_code']
         if 'identification_in_belonging_employer' in d:

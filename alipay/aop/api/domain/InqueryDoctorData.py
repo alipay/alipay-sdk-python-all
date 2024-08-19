@@ -8,11 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class InqueryDoctorData(object):
 
     def __init__(self):
+        self._auth_status = None
         self._avator = None
         self._change_type = None
         self._department_name = None
         self._doctor_desc = None
         self._doctor_name = None
+        self._educate_grade = None
+        self._ext_depart_id = None
+        self._ext_disease_id_list = None
+        self._ext_doctor_id = None
+        self._ext_hospital_id = None
         self._gender = None
         self._hospital_name = None
         self._id_no = None
@@ -23,6 +29,13 @@ class InqueryDoctorData(object):
         self._special_tags = None
         self._title = None
 
+    @property
+    def auth_status(self):
+        return self._auth_status
+
+    @auth_status.setter
+    def auth_status(self, value):
+        self._auth_status = value
     @property
     def avator(self):
         return self._avator
@@ -58,6 +71,44 @@ class InqueryDoctorData(object):
     @doctor_name.setter
     def doctor_name(self, value):
         self._doctor_name = value
+    @property
+    def educate_grade(self):
+        return self._educate_grade
+
+    @educate_grade.setter
+    def educate_grade(self, value):
+        self._educate_grade = value
+    @property
+    def ext_depart_id(self):
+        return self._ext_depart_id
+
+    @ext_depart_id.setter
+    def ext_depart_id(self, value):
+        self._ext_depart_id = value
+    @property
+    def ext_disease_id_list(self):
+        return self._ext_disease_id_list
+
+    @ext_disease_id_list.setter
+    def ext_disease_id_list(self, value):
+        if isinstance(value, list):
+            self._ext_disease_id_list = list()
+            for i in value:
+                self._ext_disease_id_list.append(i)
+    @property
+    def ext_doctor_id(self):
+        return self._ext_doctor_id
+
+    @ext_doctor_id.setter
+    def ext_doctor_id(self, value):
+        self._ext_doctor_id = value
+    @property
+    def ext_hospital_id(self):
+        return self._ext_hospital_id
+
+    @ext_hospital_id.setter
+    def ext_hospital_id(self, value):
+        self._ext_hospital_id = value
     @property
     def gender(self):
         return self._gender
@@ -125,6 +176,11 @@ class InqueryDoctorData(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auth_status:
+            if hasattr(self.auth_status, 'to_alipay_dict'):
+                params['auth_status'] = self.auth_status.to_alipay_dict()
+            else:
+                params['auth_status'] = self.auth_status
         if self.avator:
             if hasattr(self.avator, 'to_alipay_dict'):
                 params['avator'] = self.avator.to_alipay_dict()
@@ -150,6 +206,36 @@ class InqueryDoctorData(object):
                 params['doctor_name'] = self.doctor_name.to_alipay_dict()
             else:
                 params['doctor_name'] = self.doctor_name
+        if self.educate_grade:
+            if hasattr(self.educate_grade, 'to_alipay_dict'):
+                params['educate_grade'] = self.educate_grade.to_alipay_dict()
+            else:
+                params['educate_grade'] = self.educate_grade
+        if self.ext_depart_id:
+            if hasattr(self.ext_depart_id, 'to_alipay_dict'):
+                params['ext_depart_id'] = self.ext_depart_id.to_alipay_dict()
+            else:
+                params['ext_depart_id'] = self.ext_depart_id
+        if self.ext_disease_id_list:
+            if isinstance(self.ext_disease_id_list, list):
+                for i in range(0, len(self.ext_disease_id_list)):
+                    element = self.ext_disease_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ext_disease_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.ext_disease_id_list, 'to_alipay_dict'):
+                params['ext_disease_id_list'] = self.ext_disease_id_list.to_alipay_dict()
+            else:
+                params['ext_disease_id_list'] = self.ext_disease_id_list
+        if self.ext_doctor_id:
+            if hasattr(self.ext_doctor_id, 'to_alipay_dict'):
+                params['ext_doctor_id'] = self.ext_doctor_id.to_alipay_dict()
+            else:
+                params['ext_doctor_id'] = self.ext_doctor_id
+        if self.ext_hospital_id:
+            if hasattr(self.ext_hospital_id, 'to_alipay_dict'):
+                params['ext_hospital_id'] = self.ext_hospital_id.to_alipay_dict()
+            else:
+                params['ext_hospital_id'] = self.ext_hospital_id
         if self.gender:
             if hasattr(self.gender, 'to_alipay_dict'):
                 params['gender'] = self.gender.to_alipay_dict()
@@ -202,6 +288,8 @@ class InqueryDoctorData(object):
         if not d:
             return None
         o = InqueryDoctorData()
+        if 'auth_status' in d:
+            o.auth_status = d['auth_status']
         if 'avator' in d:
             o.avator = d['avator']
         if 'change_type' in d:
@@ -212,6 +300,16 @@ class InqueryDoctorData(object):
             o.doctor_desc = d['doctor_desc']
         if 'doctor_name' in d:
             o.doctor_name = d['doctor_name']
+        if 'educate_grade' in d:
+            o.educate_grade = d['educate_grade']
+        if 'ext_depart_id' in d:
+            o.ext_depart_id = d['ext_depart_id']
+        if 'ext_disease_id_list' in d:
+            o.ext_disease_id_list = d['ext_disease_id_list']
+        if 'ext_doctor_id' in d:
+            o.ext_doctor_id = d['ext_doctor_id']
+        if 'ext_hospital_id' in d:
+            o.ext_hospital_id = d['ext_hospital_id']
         if 'gender' in d:
             o.gender = d['gender']
         if 'hospital_name' in d:

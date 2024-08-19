@@ -15,6 +15,7 @@ class AlipayTradePayResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradePayResponse, self).__init__()
         self._advance_amount = None
+        self._async_pay_apply_status = None
         self._async_payment_mode = None
         self._auth_trade_pay_mode = None
         self._bkagent_resp_info = None
@@ -65,6 +66,13 @@ class AlipayTradePayResponse(AlipayResponse):
     @advance_amount.setter
     def advance_amount(self, value):
         self._advance_amount = value
+    @property
+    def async_pay_apply_status(self):
+        return self._async_pay_apply_status
+
+    @async_pay_apply_status.setter
+    def async_pay_apply_status(self, value):
+        self._async_pay_apply_status = value
     @property
     def async_payment_mode(self):
         return self._async_payment_mode
@@ -385,6 +393,8 @@ class AlipayTradePayResponse(AlipayResponse):
         response = super(AlipayTradePayResponse, self).parse_response_content(response_content)
         if 'advance_amount' in response:
             self.advance_amount = response['advance_amount']
+        if 'async_pay_apply_status' in response:
+            self.async_pay_apply_status = response['async_pay_apply_status']
         if 'async_payment_mode' in response:
             self.async_payment_mode = response['async_payment_mode']
         if 'auth_trade_pay_mode' in response:

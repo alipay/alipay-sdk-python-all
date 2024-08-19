@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
 from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
@@ -17,8 +18,10 @@ class MerchantCardTemplate(object):
         self._card_template_status = None
         self._card_type = None
         self._category_id = None
+        self._hotline = None
         self._image_id_list = None
         self._image_url_list = None
+        self._money_card_info = None
         self._msg_app_id = None
         self._out_card_id = None
         self._reject_reasons = None
@@ -69,6 +72,13 @@ class MerchantCardTemplate(object):
     def category_id(self, value):
         self._category_id = value
     @property
+    def hotline(self):
+        return self._hotline
+
+    @hotline.setter
+    def hotline(self, value):
+        self._hotline = value
+    @property
     def image_id_list(self):
         return self._image_id_list
 
@@ -88,6 +98,16 @@ class MerchantCardTemplate(object):
             self._image_url_list = list()
             for i in value:
                 self._image_url_list.append(i)
+    @property
+    def money_card_info(self):
+        return self._money_card_info
+
+    @money_card_info.setter
+    def money_card_info(self, value):
+        if isinstance(value, MoneyCardInfo):
+            self._money_card_info = value
+        else:
+            self._money_card_info = MoneyCardInfo.from_alipay_dict(value)
     @property
     def msg_app_id(self):
         return self._msg_app_id
@@ -176,6 +196,11 @@ class MerchantCardTemplate(object):
                 params['category_id'] = self.category_id.to_alipay_dict()
             else:
                 params['category_id'] = self.category_id
+        if self.hotline:
+            if hasattr(self.hotline, 'to_alipay_dict'):
+                params['hotline'] = self.hotline.to_alipay_dict()
+            else:
+                params['hotline'] = self.hotline
         if self.image_id_list:
             if isinstance(self.image_id_list, list):
                 for i in range(0, len(self.image_id_list)):
@@ -196,6 +221,11 @@ class MerchantCardTemplate(object):
                 params['image_url_list'] = self.image_url_list.to_alipay_dict()
             else:
                 params['image_url_list'] = self.image_url_list
+        if self.money_card_info:
+            if hasattr(self.money_card_info, 'to_alipay_dict'):
+                params['money_card_info'] = self.money_card_info.to_alipay_dict()
+            else:
+                params['money_card_info'] = self.money_card_info
         if self.msg_app_id:
             if hasattr(self.msg_app_id, 'to_alipay_dict'):
                 params['msg_app_id'] = self.msg_app_id.to_alipay_dict()
@@ -250,10 +280,14 @@ class MerchantCardTemplate(object):
             o.card_type = d['card_type']
         if 'category_id' in d:
             o.category_id = d['category_id']
+        if 'hotline' in d:
+            o.hotline = d['hotline']
         if 'image_id_list' in d:
             o.image_id_list = d['image_id_list']
         if 'image_url_list' in d:
             o.image_url_list = d['image_url_list']
+        if 'money_card_info' in d:
+            o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:
             o.msg_app_id = d['msg_app_id']
         if 'out_card_id' in d:
