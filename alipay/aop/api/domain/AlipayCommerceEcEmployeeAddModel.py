@@ -19,6 +19,7 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
         self._enterprise_id = None
+        self._free_sign_token = None
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
@@ -110,6 +111,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def free_sign_token(self):
+        return self._free_sign_token
+
+    @free_sign_token.setter
+    def free_sign_token(self, value):
+        self._free_sign_token = value
     @property
     def identity(self):
         return self._identity
@@ -247,6 +255,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.free_sign_token:
+            if hasattr(self.free_sign_token, 'to_alipay_dict'):
+                params['free_sign_token'] = self.free_sign_token.to_alipay_dict()
+            else:
+                params['free_sign_token'] = self.free_sign_token
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -331,6 +344,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.encrypt_mobile = d['encrypt_mobile']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'free_sign_token' in d:
+            o.free_sign_token = d['free_sign_token']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_open_id' in d:

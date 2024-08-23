@@ -13,6 +13,7 @@ class AlipayCloudCloudpromoAichatHistoryAddModel(object):
         self._question = None
         self._scene_id = None
         self._session_id = None
+        self._source_id = None
         self._time = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayCloudCloudpromoAichatHistoryAddModel(object):
     def session_id(self, value):
         self._session_id = value
     @property
+    def source_id(self):
+        return self._source_id
+
+    @source_id.setter
+    def source_id(self, value):
+        self._source_id = value
+    @property
     def time(self):
         return self._time
 
@@ -86,6 +94,11 @@ class AlipayCloudCloudpromoAichatHistoryAddModel(object):
                 params['session_id'] = self.session_id.to_alipay_dict()
             else:
                 params['session_id'] = self.session_id
+        if self.source_id:
+            if hasattr(self.source_id, 'to_alipay_dict'):
+                params['source_id'] = self.source_id.to_alipay_dict()
+            else:
+                params['source_id'] = self.source_id
         if self.time:
             if hasattr(self.time, 'to_alipay_dict'):
                 params['time'] = self.time.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayCloudCloudpromoAichatHistoryAddModel(object):
             o.scene_id = d['scene_id']
         if 'session_id' in d:
             o.session_id = d['session_id']
+        if 'source_id' in d:
+            o.source_id = d['source_id']
         if 'time' in d:
             o.time = d['time']
         return o

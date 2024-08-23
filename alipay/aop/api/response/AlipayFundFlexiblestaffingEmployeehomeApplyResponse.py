@@ -10,6 +10,7 @@ class AlipayFundFlexiblestaffingEmployeehomeApplyResponse(AlipayResponse):
     def __init__(self):
         super(AlipayFundFlexiblestaffingEmployeehomeApplyResponse, self).__init__()
         self._apply_link = None
+        self._apply_link_type = None
         self._flow_token = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayFundFlexiblestaffingEmployeehomeApplyResponse(AlipayResponse):
     @apply_link.setter
     def apply_link(self, value):
         self._apply_link = value
+    @property
+    def apply_link_type(self):
+        return self._apply_link_type
+
+    @apply_link_type.setter
+    def apply_link_type(self, value):
+        self._apply_link_type = value
     @property
     def flow_token(self):
         return self._flow_token
@@ -31,5 +39,7 @@ class AlipayFundFlexiblestaffingEmployeehomeApplyResponse(AlipayResponse):
         response = super(AlipayFundFlexiblestaffingEmployeehomeApplyResponse, self).parse_response_content(response_content)
         if 'apply_link' in response:
             self.apply_link = response['apply_link']
+        if 'apply_link_type' in response:
+            self.apply_link_type = response['apply_link_type']
         if 'flow_token' in response:
             self.flow_token = response['flow_token']

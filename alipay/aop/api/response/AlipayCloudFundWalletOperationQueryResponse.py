@@ -42,10 +42,13 @@ class AlipayCloudFundWalletOperationQueryResponse(AlipayResponse):
 
     @wallet_operations.setter
     def wallet_operations(self, value):
-        if isinstance(value, WalletOperationDetails):
-            self._wallet_operations = value
-        else:
-            self._wallet_operations = WalletOperationDetails.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._wallet_operations = list()
+            for i in value:
+                if isinstance(i, WalletOperationDetails):
+                    self._wallet_operations.append(i)
+                else:
+                    self._wallet_operations.append(WalletOperationDetails.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudFundWalletOperationQueryResponse, self).parse_response_content(response_content)

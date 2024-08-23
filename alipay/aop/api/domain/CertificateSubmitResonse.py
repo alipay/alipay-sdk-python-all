@@ -11,6 +11,7 @@ class CertificateSubmitResonse(object):
         self._card_id = None
         self._deduction_order_id = None
         self._desc = None
+        self._serial_no = None
         self._success = None
 
     @property
@@ -34,6 +35,13 @@ class CertificateSubmitResonse(object):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def serial_no(self):
+        return self._serial_no
+
+    @serial_no.setter
+    def serial_no(self, value):
+        self._serial_no = value
     @property
     def success(self):
         return self._success
@@ -60,6 +68,11 @@ class CertificateSubmitResonse(object):
                 params['desc'] = self.desc.to_alipay_dict()
             else:
                 params['desc'] = self.desc
+        if self.serial_no:
+            if hasattr(self.serial_no, 'to_alipay_dict'):
+                params['serial_no'] = self.serial_no.to_alipay_dict()
+            else:
+                params['serial_no'] = self.serial_no
         if self.success:
             if hasattr(self.success, 'to_alipay_dict'):
                 params['success'] = self.success.to_alipay_dict()
@@ -78,6 +91,8 @@ class CertificateSubmitResonse(object):
             o.deduction_order_id = d['deduction_order_id']
         if 'desc' in d:
             o.desc = d['desc']
+        if 'serial_no' in d:
+            o.serial_no = d['serial_no']
         if 'success' in d:
             o.success = d['success']
         return o

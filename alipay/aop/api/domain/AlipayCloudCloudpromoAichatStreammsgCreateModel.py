@@ -12,8 +12,11 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
         self._chat_type = None
         self._customer_id = None
         self._question = None
+        self._request_id = None
+        self._retry = None
         self._scene_id = None
         self._session_id = None
+        self._source_id = None
 
     @property
     def biz_trans_data(self):
@@ -44,6 +47,20 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
     def question(self, value):
         self._question = value
     @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
+    @property
+    def retry(self):
+        return self._retry
+
+    @retry.setter
+    def retry(self, value):
+        self._retry = value
+    @property
     def scene_id(self):
         return self._scene_id
 
@@ -57,6 +74,13 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
     @session_id.setter
     def session_id(self, value):
         self._session_id = value
+    @property
+    def source_id(self):
+        return self._source_id
+
+    @source_id.setter
+    def source_id(self, value):
+        self._source_id = value
 
 
     def to_alipay_dict(self):
@@ -81,6 +105,16 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
                 params['question'] = self.question.to_alipay_dict()
             else:
                 params['question'] = self.question
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
+        if self.retry:
+            if hasattr(self.retry, 'to_alipay_dict'):
+                params['retry'] = self.retry.to_alipay_dict()
+            else:
+                params['retry'] = self.retry
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = self.scene_id.to_alipay_dict()
@@ -91,6 +125,11 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
                 params['session_id'] = self.session_id.to_alipay_dict()
             else:
                 params['session_id'] = self.session_id
+        if self.source_id:
+            if hasattr(self.source_id, 'to_alipay_dict'):
+                params['source_id'] = self.source_id.to_alipay_dict()
+            else:
+                params['source_id'] = self.source_id
         return params
 
     @staticmethod
@@ -106,10 +145,16 @@ class AlipayCloudCloudpromoAichatStreammsgCreateModel(object):
             o.customer_id = d['customer_id']
         if 'question' in d:
             o.question = d['question']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
+        if 'retry' in d:
+            o.retry = d['retry']
         if 'scene_id' in d:
             o.scene_id = d['scene_id']
         if 'session_id' in d:
             o.session_id = d['session_id']
+        if 'source_id' in d:
+            o.source_id = d['source_id']
         return o
 
 

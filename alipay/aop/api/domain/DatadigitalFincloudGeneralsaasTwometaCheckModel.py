@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class DatadigitalFincloudGeneralsaasTwometaCheckModel(object):
 
     def __init__(self):
+        self._biz_code = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
         self._outer_biz_no = None
 
+    @property
+    def biz_code(self):
+        return self._biz_code
+
+    @biz_code.setter
+    def biz_code(self, value):
+        self._biz_code = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -45,6 +53,11 @@ class DatadigitalFincloudGeneralsaasTwometaCheckModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_code:
+            if hasattr(self.biz_code, 'to_alipay_dict'):
+                params['biz_code'] = self.biz_code.to_alipay_dict()
+            else:
+                params['biz_code'] = self.biz_code
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -72,6 +85,8 @@ class DatadigitalFincloudGeneralsaasTwometaCheckModel(object):
         if not d:
             return None
         o = DatadigitalFincloudGeneralsaasTwometaCheckModel()
+        if 'biz_code' in d:
+            o.biz_code = d['biz_code']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:

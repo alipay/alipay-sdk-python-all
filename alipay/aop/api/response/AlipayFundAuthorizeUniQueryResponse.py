@@ -11,6 +11,7 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
         super(AlipayFundAuthorizeUniQueryResponse, self).__init__()
         self._agreement_no = None
         self._biz_scene = None
+        self._open_id = None
         self._operate_time = None
         self._out_biz_no = None
         self._product_code = None
@@ -30,6 +31,13 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def operate_time(self):
         return self._operate_time
@@ -65,6 +73,8 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'biz_scene' in response:
             self.biz_scene = response['biz_scene']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'operate_time' in response:
             self.operate_time = response['operate_time']
         if 'out_biz_no' in response:
