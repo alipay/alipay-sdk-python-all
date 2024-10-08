@@ -9,6 +9,7 @@ class RefundGoodsDetail(object):
 
     def __init__(self):
         self._goods_id = None
+        self._out_certificate_no_list = None
         self._out_item_id = None
         self._out_sku_id = None
         self._refund_amount = None
@@ -20,6 +21,16 @@ class RefundGoodsDetail(object):
     @goods_id.setter
     def goods_id(self, value):
         self._goods_id = value
+    @property
+    def out_certificate_no_list(self):
+        return self._out_certificate_no_list
+
+    @out_certificate_no_list.setter
+    def out_certificate_no_list(self, value):
+        if isinstance(value, list):
+            self._out_certificate_no_list = list()
+            for i in value:
+                self._out_certificate_no_list.append(i)
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -50,6 +61,16 @@ class RefundGoodsDetail(object):
                 params['goods_id'] = self.goods_id.to_alipay_dict()
             else:
                 params['goods_id'] = self.goods_id
+        if self.out_certificate_no_list:
+            if isinstance(self.out_certificate_no_list, list):
+                for i in range(0, len(self.out_certificate_no_list)):
+                    element = self.out_certificate_no_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.out_certificate_no_list[i] = element.to_alipay_dict()
+            if hasattr(self.out_certificate_no_list, 'to_alipay_dict'):
+                params['out_certificate_no_list'] = self.out_certificate_no_list.to_alipay_dict()
+            else:
+                params['out_certificate_no_list'] = self.out_certificate_no_list
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -74,6 +95,8 @@ class RefundGoodsDetail(object):
         o = RefundGoodsDetail()
         if 'goods_id' in d:
             o.goods_id = d['goods_id']
+        if 'out_certificate_no_list' in d:
+            o.out_certificate_no_list = d['out_certificate_no_list']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:

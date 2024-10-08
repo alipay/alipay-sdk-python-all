@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AirlineExtInfo import AirlineExtInfo
 from alipay.aop.api.domain.ShareAirline import ShareAirline
 from alipay.aop.api.domain.StopInfo import StopInfo
 
@@ -12,6 +13,7 @@ class Airline(object):
     def __init__(self):
         self._ac_code = None
         self._ac_name = None
+        self._airline_ext_info = None
         self._flight_no = None
         self._is_share = None
         self._is_stop = None
@@ -34,6 +36,16 @@ class Airline(object):
     @ac_name.setter
     def ac_name(self, value):
         self._ac_name = value
+    @property
+    def airline_ext_info(self):
+        return self._airline_ext_info
+
+    @airline_ext_info.setter
+    def airline_ext_info(self, value):
+        if isinstance(value, AirlineExtInfo):
+            self._airline_ext_info = value
+        else:
+            self._airline_ext_info = AirlineExtInfo.from_alipay_dict(value)
     @property
     def flight_no(self):
         return self._flight_no
@@ -106,6 +118,11 @@ class Airline(object):
                 params['ac_name'] = self.ac_name.to_alipay_dict()
             else:
                 params['ac_name'] = self.ac_name
+        if self.airline_ext_info:
+            if hasattr(self.airline_ext_info, 'to_alipay_dict'):
+                params['airline_ext_info'] = self.airline_ext_info.to_alipay_dict()
+            else:
+                params['airline_ext_info'] = self.airline_ext_info
         if self.flight_no:
             if hasattr(self.flight_no, 'to_alipay_dict'):
                 params['flight_no'] = self.flight_no.to_alipay_dict()
@@ -157,6 +174,8 @@ class Airline(object):
             o.ac_code = d['ac_code']
         if 'ac_name' in d:
             o.ac_name = d['ac_name']
+        if 'airline_ext_info' in d:
+            o.airline_ext_info = d['airline_ext_info']
         if 'flight_no' in d:
             o.flight_no = d['flight_no']
         if 'is_share' in d:

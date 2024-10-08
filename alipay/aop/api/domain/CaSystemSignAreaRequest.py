@@ -15,6 +15,7 @@ class CaSystemSignAreaRequest(object):
         self._location_type = None
         self._position_type = None
         self._seal_id = None
+        self._seal_pic_addr = None
 
     @property
     def ca_system_cross_page_request(self):
@@ -57,6 +58,13 @@ class CaSystemSignAreaRequest(object):
     @seal_id.setter
     def seal_id(self, value):
         self._seal_id = value
+    @property
+    def seal_pic_addr(self):
+        return self._seal_pic_addr
+
+    @seal_pic_addr.setter
+    def seal_pic_addr(self, value):
+        self._seal_pic_addr = value
 
 
     def to_alipay_dict(self):
@@ -86,6 +94,11 @@ class CaSystemSignAreaRequest(object):
                 params['seal_id'] = self.seal_id.to_alipay_dict()
             else:
                 params['seal_id'] = self.seal_id
+        if self.seal_pic_addr:
+            if hasattr(self.seal_pic_addr, 'to_alipay_dict'):
+                params['seal_pic_addr'] = self.seal_pic_addr.to_alipay_dict()
+            else:
+                params['seal_pic_addr'] = self.seal_pic_addr
         return params
 
     @staticmethod
@@ -103,6 +116,8 @@ class CaSystemSignAreaRequest(object):
             o.position_type = d['position_type']
         if 'seal_id' in d:
             o.seal_id = d['seal_id']
+        if 'seal_pic_addr' in d:
+            o.seal_pic_addr = d['seal_pic_addr']
         return o
 
 

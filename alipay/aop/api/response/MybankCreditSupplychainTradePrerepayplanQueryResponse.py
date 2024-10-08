@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.InstallmentRepayPlanVO import InstallmentRepayPlanVO
+from alipay.aop.api.domain.BillTermAmountVO import BillTermAmountVO
 
 
 class MybankCreditSupplychainTradePrerepayplanQueryResponse(AlipayResponse):
@@ -15,6 +16,10 @@ class MybankCreditSupplychainTradePrerepayplanQueryResponse(AlipayResponse):
         self._ip_role_id = None
         self._out_order_no = None
         self._sale_pd_code = None
+        self._status = None
+        self._terms = None
+        self._total_amount = None
+        self._total_detail = None
 
     @property
     def installment_repay_plans(self):
@@ -57,6 +62,37 @@ class MybankCreditSupplychainTradePrerepayplanQueryResponse(AlipayResponse):
     @sale_pd_code.setter
     def sale_pd_code(self, value):
         self._sale_pd_code = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+    @property
+    def terms(self):
+        return self._terms
+
+    @terms.setter
+    def terms(self, value):
+        self._terms = value
+    @property
+    def total_amount(self):
+        return self._total_amount
+
+    @total_amount.setter
+    def total_amount(self, value):
+        self._total_amount = value
+    @property
+    def total_detail(self):
+        return self._total_detail
+
+    @total_detail.setter
+    def total_detail(self, value):
+        if isinstance(value, BillTermAmountVO):
+            self._total_detail = value
+        else:
+            self._total_detail = BillTermAmountVO.from_alipay_dict(value)
 
     def parse_response_content(self, response_content):
         response = super(MybankCreditSupplychainTradePrerepayplanQueryResponse, self).parse_response_content(response_content)
@@ -70,3 +106,11 @@ class MybankCreditSupplychainTradePrerepayplanQueryResponse(AlipayResponse):
             self.out_order_no = response['out_order_no']
         if 'sale_pd_code' in response:
             self.sale_pd_code = response['sale_pd_code']
+        if 'status' in response:
+            self.status = response['status']
+        if 'terms' in response:
+            self.terms = response['terms']
+        if 'total_amount' in response:
+            self.total_amount = response['total_amount']
+        if 'total_detail' in response:
+            self.total_detail = response['total_detail']

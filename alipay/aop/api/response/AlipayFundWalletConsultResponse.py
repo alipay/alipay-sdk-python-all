@@ -16,6 +16,7 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
         self._error_code = None
         self._error_msg = None
         self._total_amount = None
+        self._total_balance = None
         self._user_wallet_id = None
         self._user_wallet_status = None
         self._wallet_owner_status = None
@@ -70,6 +71,13 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
     def total_amount(self, value):
         self._total_amount = value
     @property
+    def total_balance(self):
+        return self._total_balance
+
+    @total_balance.setter
+    def total_balance(self, value):
+        self._total_balance = value
+    @property
     def user_wallet_id(self):
         return self._user_wallet_id
 
@@ -107,6 +115,8 @@ class AlipayFundWalletConsultResponse(AlipayResponse):
             self.error_msg = response['error_msg']
         if 'total_amount' in response:
             self.total_amount = response['total_amount']
+        if 'total_balance' in response:
+            self.total_balance = response['total_balance']
         if 'user_wallet_id' in response:
             self.user_wallet_id = response['user_wallet_id']
         if 'user_wallet_status' in response:

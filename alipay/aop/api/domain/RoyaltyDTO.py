@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class RoyaltyDTO(object):
 
     def __init__(self):
+        self._buy_out_price = None
         self._royalty_period = None
         self._royalty_price = None
         self._royalty_type = None
 
+    @property
+    def buy_out_price(self):
+        return self._buy_out_price
+
+    @buy_out_price.setter
+    def buy_out_price(self, value):
+        self._buy_out_price = value
     @property
     def royalty_period(self):
         return self._royalty_period
@@ -37,6 +45,11 @@ class RoyaltyDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.buy_out_price:
+            if hasattr(self.buy_out_price, 'to_alipay_dict'):
+                params['buy_out_price'] = self.buy_out_price.to_alipay_dict()
+            else:
+                params['buy_out_price'] = self.buy_out_price
         if self.royalty_period:
             if hasattr(self.royalty_period, 'to_alipay_dict'):
                 params['royalty_period'] = self.royalty_period.to_alipay_dict()
@@ -59,6 +72,8 @@ class RoyaltyDTO(object):
         if not d:
             return None
         o = RoyaltyDTO()
+        if 'buy_out_price' in d:
+            o.buy_out_price = d['buy_out_price']
         if 'royalty_period' in d:
             o.royalty_period = d['royalty_period']
         if 'royalty_price' in d:

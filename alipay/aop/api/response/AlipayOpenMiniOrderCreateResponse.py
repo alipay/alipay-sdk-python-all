@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CreditInfoResponse import CreditInfoResponse
 from alipay.aop.api.domain.PayInfoResponse import PayInfoResponse
 
 
@@ -10,11 +11,22 @@ class AlipayOpenMiniOrderCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenMiniOrderCreateResponse, self).__init__()
+        self._credit_info_response = None
         self._customer_display_text = None
         self._order_id = None
         self._out_order_id = None
         self._pay_info_response = None
 
+    @property
+    def credit_info_response(self):
+        return self._credit_info_response
+
+    @credit_info_response.setter
+    def credit_info_response(self, value):
+        if isinstance(value, CreditInfoResponse):
+            self._credit_info_response = value
+        else:
+            self._credit_info_response = CreditInfoResponse.from_alipay_dict(value)
     @property
     def customer_display_text(self):
         return self._customer_display_text
@@ -49,6 +61,8 @@ class AlipayOpenMiniOrderCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderCreateResponse, self).parse_response_content(response_content)
+        if 'credit_info_response' in response:
+            self.credit_info_response = response['credit_info_response']
         if 'customer_display_text' in response:
             self.customer_display_text = response['customer_display_text']
         if 'order_id' in response:

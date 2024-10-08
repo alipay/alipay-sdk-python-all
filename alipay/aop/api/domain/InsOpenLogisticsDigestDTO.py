@@ -10,8 +10,11 @@ class InsOpenLogisticsDigestDTO(object):
     def __init__(self):
         self._auth_code = None
         self._auth_type = None
+        self._carrier_company_code = None
+        self._carrier_company_name = None
         self._logistics_company_code = None
         self._logistics_company_name = None
+        self._logistics_mail_no = None
         self._logistics_no = None
         self._logistics_status = None
         self._reserve_end_time = None
@@ -32,6 +35,20 @@ class InsOpenLogisticsDigestDTO(object):
     def auth_type(self, value):
         self._auth_type = value
     @property
+    def carrier_company_code(self):
+        return self._carrier_company_code
+
+    @carrier_company_code.setter
+    def carrier_company_code(self, value):
+        self._carrier_company_code = value
+    @property
+    def carrier_company_name(self):
+        return self._carrier_company_name
+
+    @carrier_company_name.setter
+    def carrier_company_name(self, value):
+        self._carrier_company_name = value
+    @property
     def logistics_company_code(self):
         return self._logistics_company_code
 
@@ -45,6 +62,13 @@ class InsOpenLogisticsDigestDTO(object):
     @logistics_company_name.setter
     def logistics_company_name(self, value):
         self._logistics_company_name = value
+    @property
+    def logistics_mail_no(self):
+        return self._logistics_mail_no
+
+    @logistics_mail_no.setter
+    def logistics_mail_no(self, value):
+        self._logistics_mail_no = value
     @property
     def logistics_no(self):
         return self._logistics_no
@@ -87,6 +111,16 @@ class InsOpenLogisticsDigestDTO(object):
                 params['auth_type'] = self.auth_type.to_alipay_dict()
             else:
                 params['auth_type'] = self.auth_type
+        if self.carrier_company_code:
+            if hasattr(self.carrier_company_code, 'to_alipay_dict'):
+                params['carrier_company_code'] = self.carrier_company_code.to_alipay_dict()
+            else:
+                params['carrier_company_code'] = self.carrier_company_code
+        if self.carrier_company_name:
+            if hasattr(self.carrier_company_name, 'to_alipay_dict'):
+                params['carrier_company_name'] = self.carrier_company_name.to_alipay_dict()
+            else:
+                params['carrier_company_name'] = self.carrier_company_name
         if self.logistics_company_code:
             if hasattr(self.logistics_company_code, 'to_alipay_dict'):
                 params['logistics_company_code'] = self.logistics_company_code.to_alipay_dict()
@@ -97,6 +131,11 @@ class InsOpenLogisticsDigestDTO(object):
                 params['logistics_company_name'] = self.logistics_company_name.to_alipay_dict()
             else:
                 params['logistics_company_name'] = self.logistics_company_name
+        if self.logistics_mail_no:
+            if hasattr(self.logistics_mail_no, 'to_alipay_dict'):
+                params['logistics_mail_no'] = self.logistics_mail_no.to_alipay_dict()
+            else:
+                params['logistics_mail_no'] = self.logistics_mail_no
         if self.logistics_no:
             if hasattr(self.logistics_no, 'to_alipay_dict'):
                 params['logistics_no'] = self.logistics_no.to_alipay_dict()
@@ -128,10 +167,16 @@ class InsOpenLogisticsDigestDTO(object):
             o.auth_code = d['auth_code']
         if 'auth_type' in d:
             o.auth_type = d['auth_type']
+        if 'carrier_company_code' in d:
+            o.carrier_company_code = d['carrier_company_code']
+        if 'carrier_company_name' in d:
+            o.carrier_company_name = d['carrier_company_name']
         if 'logistics_company_code' in d:
             o.logistics_company_code = d['logistics_company_code']
         if 'logistics_company_name' in d:
             o.logistics_company_name = d['logistics_company_name']
+        if 'logistics_mail_no' in d:
+            o.logistics_mail_no = d['logistics_mail_no']
         if 'logistics_no' in d:
             o.logistics_no = d['logistics_no']
         if 'logistics_status' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MultiModalInputsRequest import MultiModalInputsRequest
 
 
 class AlipayCloudNextbuilderAgentChatGenerateModel(object):
@@ -11,6 +12,7 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
         self._agent_id = None
         self._config_version = None
         self._inputs = None
+        self._multi_modal_inputs = None
         self._outer_user_id = None
         self._query = None
         self._request_id = None
@@ -37,6 +39,16 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
     @inputs.setter
     def inputs(self, value):
         self._inputs = value
+    @property
+    def multi_modal_inputs(self):
+        return self._multi_modal_inputs
+
+    @multi_modal_inputs.setter
+    def multi_modal_inputs(self, value):
+        if isinstance(value, MultiModalInputsRequest):
+            self._multi_modal_inputs = value
+        else:
+            self._multi_modal_inputs = MultiModalInputsRequest.from_alipay_dict(value)
     @property
     def outer_user_id(self):
         return self._outer_user_id
@@ -84,6 +96,11 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
                 params['inputs'] = self.inputs.to_alipay_dict()
             else:
                 params['inputs'] = self.inputs
+        if self.multi_modal_inputs:
+            if hasattr(self.multi_modal_inputs, 'to_alipay_dict'):
+                params['multi_modal_inputs'] = self.multi_modal_inputs.to_alipay_dict()
+            else:
+                params['multi_modal_inputs'] = self.multi_modal_inputs
         if self.outer_user_id:
             if hasattr(self.outer_user_id, 'to_alipay_dict'):
                 params['outer_user_id'] = self.outer_user_id.to_alipay_dict()
@@ -117,6 +134,8 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
             o.config_version = d['config_version']
         if 'inputs' in d:
             o.inputs = d['inputs']
+        if 'multi_modal_inputs' in d:
+            o.multi_modal_inputs = d['multi_modal_inputs']
         if 'outer_user_id' in d:
             o.outer_user_id = d['outer_user_id']
         if 'query' in d:

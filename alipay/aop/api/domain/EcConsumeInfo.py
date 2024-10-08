@@ -18,6 +18,7 @@ class EcConsumeInfo(object):
         self._consume_category = None
         self._consume_fee_with_discount = None
         self._consume_memo = None
+        self._consume_title = None
         self._consume_type = None
         self._employee_id = None
         self._enterprise_id = None
@@ -44,6 +45,8 @@ class EcConsumeInfo(object):
         self._peer_payer_card_no = None
         self._peer_refund_amount = None
         self._peer_refund_status = None
+        self._refund_amount = None
+        self._refund_status = None
         self._related_pay_no = None
         self._scene_code = None
         self._seller_id = None
@@ -122,6 +125,13 @@ class EcConsumeInfo(object):
     @consume_memo.setter
     def consume_memo(self, value):
         self._consume_memo = value
+    @property
+    def consume_title(self):
+        return self._consume_title
+
+    @consume_title.setter
+    def consume_title(self, value):
+        self._consume_title = value
     @property
     def consume_type(self):
         return self._consume_type
@@ -305,6 +315,20 @@ class EcConsumeInfo(object):
     def peer_refund_status(self, value):
         self._peer_refund_status = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_status(self):
+        return self._refund_status
+
+    @refund_status.setter
+    def refund_status(self, value):
+        self._refund_status = value
+    @property
     def related_pay_no(self):
         return self._related_pay_no
 
@@ -407,6 +431,11 @@ class EcConsumeInfo(object):
                 params['consume_memo'] = self.consume_memo.to_alipay_dict()
             else:
                 params['consume_memo'] = self.consume_memo
+        if self.consume_title:
+            if hasattr(self.consume_title, 'to_alipay_dict'):
+                params['consume_title'] = self.consume_title.to_alipay_dict()
+            else:
+                params['consume_title'] = self.consume_title
         if self.consume_type:
             if hasattr(self.consume_type, 'to_alipay_dict'):
                 params['consume_type'] = self.consume_type.to_alipay_dict()
@@ -537,6 +566,16 @@ class EcConsumeInfo(object):
                 params['peer_refund_status'] = self.peer_refund_status.to_alipay_dict()
             else:
                 params['peer_refund_status'] = self.peer_refund_status
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
+        if self.refund_status:
+            if hasattr(self.refund_status, 'to_alipay_dict'):
+                params['refund_status'] = self.refund_status.to_alipay_dict()
+            else:
+                params['refund_status'] = self.refund_status
         if self.related_pay_no:
             if hasattr(self.related_pay_no, 'to_alipay_dict'):
                 params['related_pay_no'] = self.related_pay_no.to_alipay_dict()
@@ -599,6 +638,8 @@ class EcConsumeInfo(object):
             o.consume_fee_with_discount = d['consume_fee_with_discount']
         if 'consume_memo' in d:
             o.consume_memo = d['consume_memo']
+        if 'consume_title' in d:
+            o.consume_title = d['consume_title']
         if 'consume_type' in d:
             o.consume_type = d['consume_type']
         if 'employee_id' in d:
@@ -651,6 +692,10 @@ class EcConsumeInfo(object):
             o.peer_refund_amount = d['peer_refund_amount']
         if 'peer_refund_status' in d:
             o.peer_refund_status = d['peer_refund_status']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
+        if 'refund_status' in d:
+            o.refund_status = d['refund_status']
         if 'related_pay_no' in d:
             o.related_pay_no = d['related_pay_no']
         if 'scene_code' in d:

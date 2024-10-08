@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AxfCardBindInfo import AxfCardBindInfo
 from alipay.aop.api.domain.DeductionPlanInfo import DeductionPlanInfo
 
 
@@ -10,6 +11,7 @@ class CardOrderInfo(object):
 
     def __init__(self):
         self._available_amount = None
+        self._axf_card_bind_info = None
         self._cancel_type = None
         self._cancelled_cash = None
         self._card_id = None
@@ -39,6 +41,7 @@ class CardOrderInfo(object):
         self._used_cash = None
         self._user_id = None
         self._user_name = None
+        self._user_phone = None
 
     @property
     def available_amount(self):
@@ -47,6 +50,16 @@ class CardOrderInfo(object):
     @available_amount.setter
     def available_amount(self, value):
         self._available_amount = value
+    @property
+    def axf_card_bind_info(self):
+        return self._axf_card_bind_info
+
+    @axf_card_bind_info.setter
+    def axf_card_bind_info(self, value):
+        if isinstance(value, AxfCardBindInfo):
+            self._axf_card_bind_info = value
+        else:
+            self._axf_card_bind_info = AxfCardBindInfo.from_alipay_dict(value)
     @property
     def cancel_type(self):
         return self._cancel_type
@@ -256,6 +269,13 @@ class CardOrderInfo(object):
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def user_phone(self):
+        return self._user_phone
+
+    @user_phone.setter
+    def user_phone(self, value):
+        self._user_phone = value
 
 
     def to_alipay_dict(self):
@@ -265,6 +285,11 @@ class CardOrderInfo(object):
                 params['available_amount'] = self.available_amount.to_alipay_dict()
             else:
                 params['available_amount'] = self.available_amount
+        if self.axf_card_bind_info:
+            if hasattr(self.axf_card_bind_info, 'to_alipay_dict'):
+                params['axf_card_bind_info'] = self.axf_card_bind_info.to_alipay_dict()
+            else:
+                params['axf_card_bind_info'] = self.axf_card_bind_info
         if self.cancel_type:
             if hasattr(self.cancel_type, 'to_alipay_dict'):
                 params['cancel_type'] = self.cancel_type.to_alipay_dict()
@@ -415,6 +440,11 @@ class CardOrderInfo(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.user_phone:
+            if hasattr(self.user_phone, 'to_alipay_dict'):
+                params['user_phone'] = self.user_phone.to_alipay_dict()
+            else:
+                params['user_phone'] = self.user_phone
         return params
 
     @staticmethod
@@ -424,6 +454,8 @@ class CardOrderInfo(object):
         o = CardOrderInfo()
         if 'available_amount' in d:
             o.available_amount = d['available_amount']
+        if 'axf_card_bind_info' in d:
+            o.axf_card_bind_info = d['axf_card_bind_info']
         if 'cancel_type' in d:
             o.cancel_type = d['cancel_type']
         if 'cancelled_cash' in d:
@@ -482,6 +514,8 @@ class CardOrderInfo(object):
             o.user_id = d['user_id']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'user_phone' in d:
+            o.user_phone = d['user_phone']
         return o
 
 

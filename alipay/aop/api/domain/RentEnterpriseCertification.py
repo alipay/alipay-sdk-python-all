@@ -33,6 +33,7 @@ class RentEnterpriseCertification(object):
         self._legal_person_face_cert_image_url = None
         self._legal_person_name = None
         self._open_id = None
+        self._org_type = None
         self._partner_id = None
         self._partner_open_id = None
         self._unified_social_credit_code = None
@@ -214,6 +215,13 @@ class RentEnterpriseCertification(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def org_type(self):
+        return self._org_type
+
+    @org_type.setter
+    def org_type(self, value):
+        self._org_type = value
+    @property
     def partner_id(self):
         return self._partner_id
 
@@ -370,6 +378,11 @@ class RentEnterpriseCertification(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.org_type:
+            if hasattr(self.org_type, 'to_alipay_dict'):
+                params['org_type'] = self.org_type.to_alipay_dict()
+            else:
+                params['org_type'] = self.org_type
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -447,6 +460,8 @@ class RentEnterpriseCertification(object):
             o.legal_person_name = d['legal_person_name']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'org_type' in d:
+            o.org_type = d['org_type']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'partner_open_id' in d:

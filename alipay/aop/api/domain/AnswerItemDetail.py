@@ -14,6 +14,7 @@ class AnswerItemDetail(object):
         self._link = None
         self._location = None
         self._name = None
+        self._service_item_id = None
 
     @property
     def accept_conditions(self):
@@ -57,6 +58,13 @@ class AnswerItemDetail(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def service_item_id(self):
+        return self._service_item_id
+
+    @service_item_id.setter
+    def service_item_id(self, value):
+        self._service_item_id = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AnswerItemDetail(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.service_item_id:
+            if hasattr(self.service_item_id, 'to_alipay_dict'):
+                params['service_item_id'] = self.service_item_id.to_alipay_dict()
+            else:
+                params['service_item_id'] = self.service_item_id
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AnswerItemDetail(object):
             o.location = d['location']
         if 'name' in d:
             o.name = d['name']
+        if 'service_item_id' in d:
+            o.service_item_id = d['service_item_id']
         return o
 
 

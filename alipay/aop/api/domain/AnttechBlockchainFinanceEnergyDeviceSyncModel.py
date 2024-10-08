@@ -12,6 +12,8 @@ class AnttechBlockchainFinanceEnergyDeviceSyncModel(object):
     def __init__(self):
         self._acc_pile_data_list = None
         self._charge_device_type = None
+        self._data_list = None
+        self._data_type = None
         self._dcc_pile_data_list = None
         self._device_type = None
         self._product_agreement_code = None
@@ -38,6 +40,20 @@ class AnttechBlockchainFinanceEnergyDeviceSyncModel(object):
     @charge_device_type.setter
     def charge_device_type(self, value):
         self._charge_device_type = value
+    @property
+    def data_list(self):
+        return self._data_list
+
+    @data_list.setter
+    def data_list(self, value):
+        self._data_list = value
+    @property
+    def data_type(self):
+        return self._data_type
+
+    @data_type.setter
+    def data_type(self, value):
+        self._data_type = value
     @property
     def dcc_pile_data_list(self):
         return self._dcc_pile_data_list
@@ -98,6 +114,16 @@ class AnttechBlockchainFinanceEnergyDeviceSyncModel(object):
                 params['charge_device_type'] = self.charge_device_type.to_alipay_dict()
             else:
                 params['charge_device_type'] = self.charge_device_type
+        if self.data_list:
+            if hasattr(self.data_list, 'to_alipay_dict'):
+                params['data_list'] = self.data_list.to_alipay_dict()
+            else:
+                params['data_list'] = self.data_list
+        if self.data_type:
+            if hasattr(self.data_type, 'to_alipay_dict'):
+                params['data_type'] = self.data_type.to_alipay_dict()
+            else:
+                params['data_type'] = self.data_type
         if self.dcc_pile_data_list:
             if isinstance(self.dcc_pile_data_list, list):
                 for i in range(0, len(self.dcc_pile_data_list)):
@@ -139,6 +165,10 @@ class AnttechBlockchainFinanceEnergyDeviceSyncModel(object):
             o.acc_pile_data_list = d['acc_pile_data_list']
         if 'charge_device_type' in d:
             o.charge_device_type = d['charge_device_type']
+        if 'data_list' in d:
+            o.data_list = d['data_list']
+        if 'data_type' in d:
+            o.data_type = d['data_type']
         if 'dcc_pile_data_list' in d:
             o.dcc_pile_data_list = d['dcc_pile_data_list']
         if 'device_type' in d:

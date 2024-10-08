@@ -13,6 +13,7 @@ class RecycleFundsInfo(object):
         self._trade_amount = None
         self._trade_no = None
         self._trade_time = None
+        self._user_wallet_id = None
 
     @property
     def fund_serial_no(self):
@@ -49,6 +50,13 @@ class RecycleFundsInfo(object):
     @trade_time.setter
     def trade_time(self, value):
         self._trade_time = value
+    @property
+    def user_wallet_id(self):
+        return self._user_wallet_id
+
+    @user_wallet_id.setter
+    def user_wallet_id(self, value):
+        self._user_wallet_id = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class RecycleFundsInfo(object):
                 params['trade_time'] = self.trade_time.to_alipay_dict()
             else:
                 params['trade_time'] = self.trade_time
+        if self.user_wallet_id:
+            if hasattr(self.user_wallet_id, 'to_alipay_dict'):
+                params['user_wallet_id'] = self.user_wallet_id.to_alipay_dict()
+            else:
+                params['user_wallet_id'] = self.user_wallet_id
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class RecycleFundsInfo(object):
             o.trade_no = d['trade_no']
         if 'trade_time' in d:
             o.trade_time = d['trade_time']
+        if 'user_wallet_id' in d:
+            o.user_wallet_id = d['user_wallet_id']
         return o
 
 

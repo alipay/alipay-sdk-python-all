@@ -12,6 +12,7 @@ class ShopMaterialsValidInfo(object):
         self._desk_no = None
         self._materials_instance_id = None
         self._nfc_url = None
+        self._production_ext_info = None
         self._qr_code_url = None
         self._shop_order_no = None
 
@@ -43,6 +44,13 @@ class ShopMaterialsValidInfo(object):
     @nfc_url.setter
     def nfc_url(self, value):
         self._nfc_url = value
+    @property
+    def production_ext_info(self):
+        return self._production_ext_info
+
+    @production_ext_info.setter
+    def production_ext_info(self, value):
+        self._production_ext_info = value
     @property
     def qr_code_url(self):
         return self._qr_code_url
@@ -81,6 +89,11 @@ class ShopMaterialsValidInfo(object):
                 params['nfc_url'] = self.nfc_url.to_alipay_dict()
             else:
                 params['nfc_url'] = self.nfc_url
+        if self.production_ext_info:
+            if hasattr(self.production_ext_info, 'to_alipay_dict'):
+                params['production_ext_info'] = self.production_ext_info.to_alipay_dict()
+            else:
+                params['production_ext_info'] = self.production_ext_info
         if self.qr_code_url:
             if hasattr(self.qr_code_url, 'to_alipay_dict'):
                 params['qr_code_url'] = self.qr_code_url.to_alipay_dict()
@@ -106,6 +119,8 @@ class ShopMaterialsValidInfo(object):
             o.materials_instance_id = d['materials_instance_id']
         if 'nfc_url' in d:
             o.nfc_url = d['nfc_url']
+        if 'production_ext_info' in d:
+            o.production_ext_info = d['production_ext_info']
         if 'qr_code_url' in d:
             o.qr_code_url = d['qr_code_url']
         if 'shop_order_no' in d:

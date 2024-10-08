@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BillFeeInfo import BillFeeInfo
 
 
 class MoneyCardUseRecordDetail(object):
 
     def __init__(self):
         self._amount = None
+        self._bill_fee_info_list = None
         self._biz_type = None
         self._card_id = None
         self._cash = None
@@ -31,6 +33,19 @@ class MoneyCardUseRecordDetail(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def bill_fee_info_list(self):
+        return self._bill_fee_info_list
+
+    @bill_fee_info_list.setter
+    def bill_fee_info_list(self, value):
+        if isinstance(value, list):
+            self._bill_fee_info_list = list()
+            for i in value:
+                if isinstance(i, BillFeeInfo):
+                    self._bill_fee_info_list.append(i)
+                else:
+                    self._bill_fee_info_list.append(BillFeeInfo.from_alipay_dict(i))
     @property
     def biz_type(self):
         return self._biz_type
@@ -138,6 +153,16 @@ class MoneyCardUseRecordDetail(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.bill_fee_info_list:
+            if isinstance(self.bill_fee_info_list, list):
+                for i in range(0, len(self.bill_fee_info_list)):
+                    element = self.bill_fee_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.bill_fee_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.bill_fee_info_list, 'to_alipay_dict'):
+                params['bill_fee_info_list'] = self.bill_fee_info_list.to_alipay_dict()
+            else:
+                params['bill_fee_info_list'] = self.bill_fee_info_list
         if self.biz_type:
             if hasattr(self.biz_type, 'to_alipay_dict'):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
@@ -217,6 +242,8 @@ class MoneyCardUseRecordDetail(object):
         o = MoneyCardUseRecordDetail()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'bill_fee_info_list' in d:
+            o.bill_fee_info_list = d['bill_fee_info_list']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
         if 'card_id' in d:

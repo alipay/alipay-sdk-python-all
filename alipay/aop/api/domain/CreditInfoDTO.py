@@ -8,9 +8,25 @@ from alipay.aop.api.constant.ParamConstants import *
 class CreditInfoDTO(object):
 
     def __init__(self):
+        self._acceptance_jump_url = None
+        self._no_need_verify_identity = None
         self._out_agreement_no = None
         self._zm_service_id = None
 
+    @property
+    def acceptance_jump_url(self):
+        return self._acceptance_jump_url
+
+    @acceptance_jump_url.setter
+    def acceptance_jump_url(self, value):
+        self._acceptance_jump_url = value
+    @property
+    def no_need_verify_identity(self):
+        return self._no_need_verify_identity
+
+    @no_need_verify_identity.setter
+    def no_need_verify_identity(self, value):
+        self._no_need_verify_identity = value
     @property
     def out_agreement_no(self):
         return self._out_agreement_no
@@ -29,6 +45,16 @@ class CreditInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.acceptance_jump_url:
+            if hasattr(self.acceptance_jump_url, 'to_alipay_dict'):
+                params['acceptance_jump_url'] = self.acceptance_jump_url.to_alipay_dict()
+            else:
+                params['acceptance_jump_url'] = self.acceptance_jump_url
+        if self.no_need_verify_identity:
+            if hasattr(self.no_need_verify_identity, 'to_alipay_dict'):
+                params['no_need_verify_identity'] = self.no_need_verify_identity.to_alipay_dict()
+            else:
+                params['no_need_verify_identity'] = self.no_need_verify_identity
         if self.out_agreement_no:
             if hasattr(self.out_agreement_no, 'to_alipay_dict'):
                 params['out_agreement_no'] = self.out_agreement_no.to_alipay_dict()
@@ -46,6 +72,10 @@ class CreditInfoDTO(object):
         if not d:
             return None
         o = CreditInfoDTO()
+        if 'acceptance_jump_url' in d:
+            o.acceptance_jump_url = d['acceptance_jump_url']
+        if 'no_need_verify_identity' in d:
+            o.no_need_verify_identity = d['no_need_verify_identity']
         if 'out_agreement_no' in d:
             o.out_agreement_no = d['out_agreement_no']
         if 'zm_service_id' in d:

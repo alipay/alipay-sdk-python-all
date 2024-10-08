@@ -16,6 +16,7 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateModel(object):
         self._credit_phone_info = None
         self._detail_url = None
         self._freeze_amount = None
+        self._inst_sign_aisle_data = None
         self._out_order_no = None
         self._risk_info = None
         self._source_id = None
@@ -65,6 +66,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateModel(object):
     @freeze_amount.setter
     def freeze_amount(self, value):
         self._freeze_amount = value
+    @property
+    def inst_sign_aisle_data(self):
+        return self._inst_sign_aisle_data
+
+    @inst_sign_aisle_data.setter
+    def inst_sign_aisle_data(self, value):
+        self._inst_sign_aisle_data = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -123,6 +131,11 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateModel(object):
                 params['freeze_amount'] = self.freeze_amount.to_alipay_dict()
             else:
                 params['freeze_amount'] = self.freeze_amount
+        if self.inst_sign_aisle_data:
+            if hasattr(self.inst_sign_aisle_data, 'to_alipay_dict'):
+                params['inst_sign_aisle_data'] = self.inst_sign_aisle_data.to_alipay_dict()
+            else:
+                params['inst_sign_aisle_data'] = self.inst_sign_aisle_data
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -157,6 +170,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderPrecreateModel(object):
             o.detail_url = d['detail_url']
         if 'freeze_amount' in d:
             o.freeze_amount = d['freeze_amount']
+        if 'inst_sign_aisle_data' in d:
+            o.inst_sign_aisle_data = d['inst_sign_aisle_data']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'risk_info' in d:

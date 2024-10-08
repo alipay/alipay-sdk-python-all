@@ -12,6 +12,7 @@ class MybankCreditSupplychainTradePrerepayplanQueryModel(object):
         self._buyer = None
         self._channel = None
         self._ext_data = None
+        self._has_bill_detail = None
         self._out_order_no = None
         self._sale_pd_code = None
 
@@ -39,6 +40,13 @@ class MybankCreditSupplychainTradePrerepayplanQueryModel(object):
     @ext_data.setter
     def ext_data(self, value):
         self._ext_data = value
+    @property
+    def has_bill_detail(self):
+        return self._has_bill_detail
+
+    @has_bill_detail.setter
+    def has_bill_detail(self, value):
+        self._has_bill_detail = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -72,6 +80,11 @@ class MybankCreditSupplychainTradePrerepayplanQueryModel(object):
                 params['ext_data'] = self.ext_data.to_alipay_dict()
             else:
                 params['ext_data'] = self.ext_data
+        if self.has_bill_detail:
+            if hasattr(self.has_bill_detail, 'to_alipay_dict'):
+                params['has_bill_detail'] = self.has_bill_detail.to_alipay_dict()
+            else:
+                params['has_bill_detail'] = self.has_bill_detail
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -95,6 +108,8 @@ class MybankCreditSupplychainTradePrerepayplanQueryModel(object):
             o.channel = d['channel']
         if 'ext_data' in d:
             o.ext_data = d['ext_data']
+        if 'has_bill_detail' in d:
+            o.has_bill_detail = d['has_bill_detail']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'sale_pd_code' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class TradeExtendParams(object):
 
     def __init__(self):
+        self._channel_code = None
         self._chinfo = None
         self._insurance_subsidy_amount = None
         self._insurance_subsidy_mode = None
@@ -19,6 +20,13 @@ class TradeExtendParams(object):
         self._scene = None
         self._sys_service_provider_id = None
 
+    @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
     @property
     def chinfo(self):
         return self._chinfo
@@ -93,6 +101,11 @@ class TradeExtendParams(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.chinfo:
             if hasattr(self.chinfo, 'to_alipay_dict'):
                 params['chinfo'] = self.chinfo.to_alipay_dict()
@@ -150,6 +163,8 @@ class TradeExtendParams(object):
         if not d:
             return None
         o = TradeExtendParams()
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'chinfo' in d:
             o.chinfo = d['chinfo']
         if 'insurance_subsidy_amount' in d:

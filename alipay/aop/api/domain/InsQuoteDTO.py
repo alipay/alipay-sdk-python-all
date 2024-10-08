@@ -12,6 +12,7 @@ class InsQuoteDTO(object):
         self._discount_rate = None
         self._ins_period = None
         self._inst_id = None
+        self._market_reference_price = None
         self._original_premium = None
         self._original_premium_rate = None
         self._premium = None
@@ -47,6 +48,13 @@ class InsQuoteDTO(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def market_reference_price(self):
+        return self._market_reference_price
+
+    @market_reference_price.setter
+    def market_reference_price(self, value):
+        self._market_reference_price = value
     @property
     def original_premium(self):
         return self._original_premium
@@ -136,6 +144,11 @@ class InsQuoteDTO(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.market_reference_price:
+            if hasattr(self.market_reference_price, 'to_alipay_dict'):
+                params['market_reference_price'] = self.market_reference_price.to_alipay_dict()
+            else:
+                params['market_reference_price'] = self.market_reference_price
         if self.original_premium:
             if hasattr(self.original_premium, 'to_alipay_dict'):
                 params['original_premium'] = self.original_premium.to_alipay_dict()
@@ -199,6 +212,8 @@ class InsQuoteDTO(object):
             o.ins_period = d['ins_period']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'market_reference_price' in d:
+            o.market_reference_price = d['market_reference_price']
         if 'original_premium' in d:
             o.original_premium = d['original_premium']
         if 'original_premium_rate' in d:

@@ -10,6 +10,7 @@ class AlipayFundWalletTokenCreateModel(object):
     def __init__(self):
         self._agreement_pay_sign = None
         self._back_url = None
+        self._back_url_type = None
         self._biz_scene = None
         self._identity = None
         self._identity_open_id = None
@@ -34,6 +35,13 @@ class AlipayFundWalletTokenCreateModel(object):
     @back_url.setter
     def back_url(self, value):
         self._back_url = value
+    @property
+    def back_url_type(self):
+        return self._back_url_type
+
+    @back_url_type.setter
+    def back_url_type(self, value):
+        self._back_url_type = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -111,6 +119,11 @@ class AlipayFundWalletTokenCreateModel(object):
                 params['back_url'] = self.back_url.to_alipay_dict()
             else:
                 params['back_url'] = self.back_url
+        if self.back_url_type:
+            if hasattr(self.back_url_type, 'to_alipay_dict'):
+                params['back_url_type'] = self.back_url_type.to_alipay_dict()
+            else:
+                params['back_url_type'] = self.back_url_type
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -167,6 +180,8 @@ class AlipayFundWalletTokenCreateModel(object):
             o.agreement_pay_sign = d['agreement_pay_sign']
         if 'back_url' in d:
             o.back_url = d['back_url']
+        if 'back_url_type' in d:
+            o.back_url_type = d['back_url_type']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'identity' in d:

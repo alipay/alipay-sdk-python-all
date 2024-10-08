@@ -12,6 +12,7 @@ class InsurePlanDTO(object):
         self._discount_rate = None
         self._ins_period = None
         self._insure_plan_name = None
+        self._market_reference_price = None
         self._original_premium = None
         self._original_premium_yuan = None
         self._premium = None
@@ -47,6 +48,13 @@ class InsurePlanDTO(object):
     @insure_plan_name.setter
     def insure_plan_name(self, value):
         self._insure_plan_name = value
+    @property
+    def market_reference_price(self):
+        return self._market_reference_price
+
+    @market_reference_price.setter
+    def market_reference_price(self, value):
+        self._market_reference_price = value
     @property
     def original_premium(self):
         return self._original_premium
@@ -136,6 +144,11 @@ class InsurePlanDTO(object):
                 params['insure_plan_name'] = self.insure_plan_name.to_alipay_dict()
             else:
                 params['insure_plan_name'] = self.insure_plan_name
+        if self.market_reference_price:
+            if hasattr(self.market_reference_price, 'to_alipay_dict'):
+                params['market_reference_price'] = self.market_reference_price.to_alipay_dict()
+            else:
+                params['market_reference_price'] = self.market_reference_price
         if self.original_premium:
             if hasattr(self.original_premium, 'to_alipay_dict'):
                 params['original_premium'] = self.original_premium.to_alipay_dict()
@@ -199,6 +212,8 @@ class InsurePlanDTO(object):
             o.ins_period = d['ins_period']
         if 'insure_plan_name' in d:
             o.insure_plan_name = d['insure_plan_name']
+        if 'market_reference_price' in d:
+            o.market_reference_price = d['market_reference_price']
         if 'original_premium' in d:
             o.original_premium = d['original_premium']
         if 'original_premium_yuan' in d:

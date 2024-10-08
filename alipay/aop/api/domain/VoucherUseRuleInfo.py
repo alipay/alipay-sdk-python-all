@@ -9,12 +9,23 @@ from alipay.aop.api.domain.VoucherUseTimeInfo import VoucherUseTimeInfo
 class VoucherUseRuleInfo(object):
 
     def __init__(self):
+        self._payment_restriction_list = None
         self._quantity_limit_per_user = None
         self._quantity_limit_per_user_period_type = None
         self._voucher_max_use_times = None
         self._voucher_use_ext_info = None
         self._voucher_use_time_info = None
 
+    @property
+    def payment_restriction_list(self):
+        return self._payment_restriction_list
+
+    @payment_restriction_list.setter
+    def payment_restriction_list(self, value):
+        if isinstance(value, list):
+            self._payment_restriction_list = list()
+            for i in value:
+                self._payment_restriction_list.append(i)
     @property
     def quantity_limit_per_user(self):
         return self._quantity_limit_per_user
@@ -57,6 +68,16 @@ class VoucherUseRuleInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.payment_restriction_list:
+            if isinstance(self.payment_restriction_list, list):
+                for i in range(0, len(self.payment_restriction_list)):
+                    element = self.payment_restriction_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.payment_restriction_list[i] = element.to_alipay_dict()
+            if hasattr(self.payment_restriction_list, 'to_alipay_dict'):
+                params['payment_restriction_list'] = self.payment_restriction_list.to_alipay_dict()
+            else:
+                params['payment_restriction_list'] = self.payment_restriction_list
         if self.quantity_limit_per_user:
             if hasattr(self.quantity_limit_per_user, 'to_alipay_dict'):
                 params['quantity_limit_per_user'] = self.quantity_limit_per_user.to_alipay_dict()
@@ -89,6 +110,8 @@ class VoucherUseRuleInfo(object):
         if not d:
             return None
         o = VoucherUseRuleInfo()
+        if 'payment_restriction_list' in d:
+            o.payment_restriction_list = d['payment_restriction_list']
         if 'quantity_limit_per_user' in d:
             o.quantity_limit_per_user = d['quantity_limit_per_user']
         if 'quantity_limit_per_user_period_type' in d:

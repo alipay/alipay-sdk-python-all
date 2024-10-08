@@ -9,6 +9,7 @@ class RentPlan(object):
 
     def __init__(self):
         self._actual_pay_time = None
+        self._buyout_price = None
         self._expect_pay_time = None
         self._installment_id = None
         self._period = None
@@ -23,6 +24,13 @@ class RentPlan(object):
     @actual_pay_time.setter
     def actual_pay_time(self, value):
         self._actual_pay_time = value
+    @property
+    def buyout_price(self):
+        return self._buyout_price
+
+    @buyout_price.setter
+    def buyout_price(self, value):
+        self._buyout_price = value
     @property
     def expect_pay_time(self):
         return self._expect_pay_time
@@ -74,6 +82,11 @@ class RentPlan(object):
                 params['actual_pay_time'] = self.actual_pay_time.to_alipay_dict()
             else:
                 params['actual_pay_time'] = self.actual_pay_time
+        if self.buyout_price:
+            if hasattr(self.buyout_price, 'to_alipay_dict'):
+                params['buyout_price'] = self.buyout_price.to_alipay_dict()
+            else:
+                params['buyout_price'] = self.buyout_price
         if self.expect_pay_time:
             if hasattr(self.expect_pay_time, 'to_alipay_dict'):
                 params['expect_pay_time'] = self.expect_pay_time.to_alipay_dict()
@@ -113,6 +126,8 @@ class RentPlan(object):
         o = RentPlan()
         if 'actual_pay_time' in d:
             o.actual_pay_time = d['actual_pay_time']
+        if 'buyout_price' in d:
+            o.buyout_price = d['buyout_price']
         if 'expect_pay_time' in d:
             o.expect_pay_time = d['expect_pay_time']
         if 'installment_id' in d:

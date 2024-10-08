@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CustomeServiceInboundUpdateDTO import CustomeServiceInboundUpdateDTO
+from alipay.aop.api.domain.CustomeServiceOutBoundUpdateDTO import CustomeServiceOutBoundUpdateDTO
 from alipay.aop.api.domain.ServiceTicketUpdateDTO import ServiceTicketUpdateDTO
 
 
@@ -11,6 +12,7 @@ class AlipayIserviceIcontrolServiceorderModifyModel(object):
 
     def __init__(self):
         self._csi_payload = None
+        self._cso_payload = None
         self._dispatch_mode = None
         self._order_type = None
         self._origin_service_uniq_code = None
@@ -30,6 +32,16 @@ class AlipayIserviceIcontrolServiceorderModifyModel(object):
             self._csi_payload = value
         else:
             self._csi_payload = CustomeServiceInboundUpdateDTO.from_alipay_dict(value)
+    @property
+    def cso_payload(self):
+        return self._cso_payload
+
+    @cso_payload.setter
+    def cso_payload(self, value):
+        if isinstance(value, CustomeServiceOutBoundUpdateDTO):
+            self._cso_payload = value
+        else:
+            self._cso_payload = CustomeServiceOutBoundUpdateDTO.from_alipay_dict(value)
     @property
     def dispatch_mode(self):
         return self._dispatch_mode
@@ -98,6 +110,11 @@ class AlipayIserviceIcontrolServiceorderModifyModel(object):
                 params['csi_payload'] = self.csi_payload.to_alipay_dict()
             else:
                 params['csi_payload'] = self.csi_payload
+        if self.cso_payload:
+            if hasattr(self.cso_payload, 'to_alipay_dict'):
+                params['cso_payload'] = self.cso_payload.to_alipay_dict()
+            else:
+                params['cso_payload'] = self.cso_payload
         if self.dispatch_mode:
             if hasattr(self.dispatch_mode, 'to_alipay_dict'):
                 params['dispatch_mode'] = self.dispatch_mode.to_alipay_dict()
@@ -147,6 +164,8 @@ class AlipayIserviceIcontrolServiceorderModifyModel(object):
         o = AlipayIserviceIcontrolServiceorderModifyModel()
         if 'csi_payload' in d:
             o.csi_payload = d['csi_payload']
+        if 'cso_payload' in d:
+            o.cso_payload = d['cso_payload']
         if 'dispatch_mode' in d:
             o.dispatch_mode = d['dispatch_mode']
         if 'order_type' in d:

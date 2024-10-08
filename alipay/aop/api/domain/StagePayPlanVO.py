@@ -25,10 +25,13 @@ class StagePayPlanVO(object):
 
     @stage_pay_plan_infos.setter
     def stage_pay_plan_infos(self, value):
-        if isinstance(value, StagePayPlanInfoVO):
-            self._stage_pay_plan_infos = value
-        else:
-            self._stage_pay_plan_infos = StagePayPlanInfoVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._stage_pay_plan_infos = list()
+            for i in value:
+                if isinstance(i, StagePayPlanInfoVO):
+                    self._stage_pay_plan_infos.append(i)
+                else:
+                    self._stage_pay_plan_infos.append(StagePayPlanInfoVO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -39,6 +42,11 @@ class StagePayPlanVO(object):
             else:
                 params['stage_no'] = self.stage_no
         if self.stage_pay_plan_infos:
+            if isinstance(self.stage_pay_plan_infos, list):
+                for i in range(0, len(self.stage_pay_plan_infos)):
+                    element = self.stage_pay_plan_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.stage_pay_plan_infos[i] = element.to_alipay_dict()
             if hasattr(self.stage_pay_plan_infos, 'to_alipay_dict'):
                 params['stage_pay_plan_infos'] = self.stage_pay_plan_infos.to_alipay_dict()
             else:

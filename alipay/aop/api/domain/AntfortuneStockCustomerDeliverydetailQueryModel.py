@@ -10,6 +10,7 @@ class AntfortuneStockCustomerDeliverydetailQueryModel(object):
     def __init__(self):
         self._agreement_no = None
         self._position_code = None
+        self._position_feature = None
 
     @property
     def agreement_no(self):
@@ -28,6 +29,13 @@ class AntfortuneStockCustomerDeliverydetailQueryModel(object):
             self._position_code = list()
             for i in value:
                 self._position_code.append(i)
+    @property
+    def position_feature(self):
+        return self._position_feature
+
+    @position_feature.setter
+    def position_feature(self, value):
+        self._position_feature = value
 
 
     def to_alipay_dict(self):
@@ -47,6 +55,11 @@ class AntfortuneStockCustomerDeliverydetailQueryModel(object):
                 params['position_code'] = self.position_code.to_alipay_dict()
             else:
                 params['position_code'] = self.position_code
+        if self.position_feature:
+            if hasattr(self.position_feature, 'to_alipay_dict'):
+                params['position_feature'] = self.position_feature.to_alipay_dict()
+            else:
+                params['position_feature'] = self.position_feature
         return params
 
     @staticmethod
@@ -58,6 +71,8 @@ class AntfortuneStockCustomerDeliverydetailQueryModel(object):
             o.agreement_no = d['agreement_no']
         if 'position_code' in d:
             o.position_code = d['position_code']
+        if 'position_feature' in d:
+            o.position_feature = d['position_feature']
         return o
 
 

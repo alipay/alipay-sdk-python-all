@@ -13,6 +13,7 @@ class GroupChangedNotice(object):
         self._group_id = None
         self._mem_change_cnt = None
         self._mem_change_list = None
+        self._pid = None
         self._update_info = None
 
     @property
@@ -50,6 +51,13 @@ class GroupChangedNotice(object):
                 else:
                     self._mem_change_list.append(GroupMemberDetail.from_alipay_dict(i))
     @property
+    def pid(self):
+        return self._pid
+
+    @pid.setter
+    def pid(self, value):
+        self._pid = value
+    @property
     def update_info(self):
         return self._update_info
 
@@ -85,6 +93,11 @@ class GroupChangedNotice(object):
                 params['mem_change_list'] = self.mem_change_list.to_alipay_dict()
             else:
                 params['mem_change_list'] = self.mem_change_list
+        if self.pid:
+            if hasattr(self.pid, 'to_alipay_dict'):
+                params['pid'] = self.pid.to_alipay_dict()
+            else:
+                params['pid'] = self.pid
         if self.update_info:
             if hasattr(self.update_info, 'to_alipay_dict'):
                 params['update_info'] = self.update_info.to_alipay_dict()
@@ -105,6 +118,8 @@ class GroupChangedNotice(object):
             o.mem_change_cnt = d['mem_change_cnt']
         if 'mem_change_list' in d:
             o.mem_change_list = d['mem_change_list']
+        if 'pid' in d:
+            o.pid = d['pid']
         if 'update_info' in d:
             o.update_info = d['update_info']
         return o

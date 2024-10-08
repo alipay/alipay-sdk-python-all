@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MedicalLlmAnswerDTO import MedicalLlmAnswerDTO
 from alipay.aop.api.domain.LlmAnswerCardDTO import LlmAnswerCardDTO
+from alipay.aop.api.domain.ChatContentDTO import ChatContentDTO
 from alipay.aop.api.domain.ExternalServiceDTO import ExternalServiceDTO
 from alipay.aop.api.domain.SuggestQuestionsDTO import SuggestQuestionsDTO
 
@@ -17,6 +18,7 @@ class LlmServiceDTO(object):
         self._answer_type = None
         self._ant_session_id = None
         self._chat_id = None
+        self._content_list = None
         self._intention = None
         self._is_finished = None
         self._is_with_draw = None
@@ -73,6 +75,19 @@ class LlmServiceDTO(object):
     @chat_id.setter
     def chat_id(self, value):
         self._chat_id = value
+    @property
+    def content_list(self):
+        return self._content_list
+
+    @content_list.setter
+    def content_list(self, value):
+        if isinstance(value, list):
+            self._content_list = list()
+            for i in value:
+                if isinstance(i, ChatContentDTO):
+                    self._content_list.append(i)
+                else:
+                    self._content_list.append(ChatContentDTO.from_alipay_dict(i))
     @property
     def intention(self):
         return self._intention
@@ -177,6 +192,16 @@ class LlmServiceDTO(object):
                 params['chat_id'] = self.chat_id.to_alipay_dict()
             else:
                 params['chat_id'] = self.chat_id
+        if self.content_list:
+            if isinstance(self.content_list, list):
+                for i in range(0, len(self.content_list)):
+                    element = self.content_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.content_list[i] = element.to_alipay_dict()
+            if hasattr(self.content_list, 'to_alipay_dict'):
+                params['content_list'] = self.content_list.to_alipay_dict()
+            else:
+                params['content_list'] = self.content_list
         if self.intention:
             if hasattr(self.intention, 'to_alipay_dict'):
                 params['intention'] = self.intention.to_alipay_dict()
@@ -239,6 +264,8 @@ class LlmServiceDTO(object):
             o.ant_session_id = d['ant_session_id']
         if 'chat_id' in d:
             o.chat_id = d['chat_id']
+        if 'content_list' in d:
+            o.content_list = d['content_list']
         if 'intention' in d:
             o.intention = d['intention']
         if 'is_finished' in d:

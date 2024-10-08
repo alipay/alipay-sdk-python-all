@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.LngAndLatParam import LngAndLatParam
 
 
 class SiteSelectionParam(object):
@@ -12,6 +13,7 @@ class SiteSelectionParam(object):
         self._date_from = None
         self._date_to = None
         self._index_list = None
+        self._lng_lat_list = None
         self._min_parking_period = None
         self._parking_days = None
 
@@ -46,6 +48,19 @@ class SiteSelectionParam(object):
             self._index_list = list()
             for i in value:
                 self._index_list.append(i)
+    @property
+    def lng_lat_list(self):
+        return self._lng_lat_list
+
+    @lng_lat_list.setter
+    def lng_lat_list(self, value):
+        if isinstance(value, list):
+            self._lng_lat_list = list()
+            for i in value:
+                if isinstance(i, LngAndLatParam):
+                    self._lng_lat_list.append(i)
+                else:
+                    self._lng_lat_list.append(LngAndLatParam.from_alipay_dict(i))
     @property
     def min_parking_period(self):
         return self._min_parking_period
@@ -89,6 +104,16 @@ class SiteSelectionParam(object):
                 params['index_list'] = self.index_list.to_alipay_dict()
             else:
                 params['index_list'] = self.index_list
+        if self.lng_lat_list:
+            if isinstance(self.lng_lat_list, list):
+                for i in range(0, len(self.lng_lat_list)):
+                    element = self.lng_lat_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.lng_lat_list[i] = element.to_alipay_dict()
+            if hasattr(self.lng_lat_list, 'to_alipay_dict'):
+                params['lng_lat_list'] = self.lng_lat_list.to_alipay_dict()
+            else:
+                params['lng_lat_list'] = self.lng_lat_list
         if self.min_parking_period:
             if hasattr(self.min_parking_period, 'to_alipay_dict'):
                 params['min_parking_period'] = self.min_parking_period.to_alipay_dict()
@@ -114,6 +139,8 @@ class SiteSelectionParam(object):
             o.date_to = d['date_to']
         if 'index_list' in d:
             o.index_list = d['index_list']
+        if 'lng_lat_list' in d:
+            o.lng_lat_list = d['lng_lat_list']
         if 'min_parking_period' in d:
             o.min_parking_period = d['min_parking_period']
         if 'parking_days' in d:

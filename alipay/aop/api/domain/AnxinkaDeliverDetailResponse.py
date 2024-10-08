@@ -8,12 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AnxinkaDeliverDetailResponse(object):
 
     def __init__(self):
+        self._agent_commission = None
+        self._agent_name = None
         self._card_no = None
         self._merchant_order_no = None
         self._order_id = None
+        self._refund_agent_commission = None
         self._refund_amount = None
         self._refund_cash = None
+        self._refund_saas_commission = None
         self._refund_time = None
+        self._saas_commission = None
+        self._saas_name = None
+        self._settle_batch_no = None
         self._settle_pid = None
         self._settle_shop_id = None
         self._settle_shop_memo = None
@@ -24,6 +31,20 @@ class AnxinkaDeliverDetailResponse(object):
         self._use_status = None
         self._use_time = None
 
+    @property
+    def agent_commission(self):
+        return self._agent_commission
+
+    @agent_commission.setter
+    def agent_commission(self, value):
+        self._agent_commission = value
+    @property
+    def agent_name(self):
+        return self._agent_name
+
+    @agent_name.setter
+    def agent_name(self, value):
+        self._agent_name = value
     @property
     def card_no(self):
         return self._card_no
@@ -46,6 +67,13 @@ class AnxinkaDeliverDetailResponse(object):
     def order_id(self, value):
         self._order_id = value
     @property
+    def refund_agent_commission(self):
+        return self._refund_agent_commission
+
+    @refund_agent_commission.setter
+    def refund_agent_commission(self, value):
+        self._refund_agent_commission = value
+    @property
     def refund_amount(self):
         return self._refund_amount
 
@@ -60,12 +88,40 @@ class AnxinkaDeliverDetailResponse(object):
     def refund_cash(self, value):
         self._refund_cash = value
     @property
+    def refund_saas_commission(self):
+        return self._refund_saas_commission
+
+    @refund_saas_commission.setter
+    def refund_saas_commission(self, value):
+        self._refund_saas_commission = value
+    @property
     def refund_time(self):
         return self._refund_time
 
     @refund_time.setter
     def refund_time(self, value):
         self._refund_time = value
+    @property
+    def saas_commission(self):
+        return self._saas_commission
+
+    @saas_commission.setter
+    def saas_commission(self, value):
+        self._saas_commission = value
+    @property
+    def saas_name(self):
+        return self._saas_name
+
+    @saas_name.setter
+    def saas_name(self, value):
+        self._saas_name = value
+    @property
+    def settle_batch_no(self):
+        return self._settle_batch_no
+
+    @settle_batch_no.setter
+    def settle_batch_no(self, value):
+        self._settle_batch_no = value
     @property
     def settle_pid(self):
         return self._settle_pid
@@ -133,6 +189,16 @@ class AnxinkaDeliverDetailResponse(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_commission:
+            if hasattr(self.agent_commission, 'to_alipay_dict'):
+                params['agent_commission'] = self.agent_commission.to_alipay_dict()
+            else:
+                params['agent_commission'] = self.agent_commission
+        if self.agent_name:
+            if hasattr(self.agent_name, 'to_alipay_dict'):
+                params['agent_name'] = self.agent_name.to_alipay_dict()
+            else:
+                params['agent_name'] = self.agent_name
         if self.card_no:
             if hasattr(self.card_no, 'to_alipay_dict'):
                 params['card_no'] = self.card_no.to_alipay_dict()
@@ -148,6 +214,11 @@ class AnxinkaDeliverDetailResponse(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.refund_agent_commission:
+            if hasattr(self.refund_agent_commission, 'to_alipay_dict'):
+                params['refund_agent_commission'] = self.refund_agent_commission.to_alipay_dict()
+            else:
+                params['refund_agent_commission'] = self.refund_agent_commission
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -158,11 +229,31 @@ class AnxinkaDeliverDetailResponse(object):
                 params['refund_cash'] = self.refund_cash.to_alipay_dict()
             else:
                 params['refund_cash'] = self.refund_cash
+        if self.refund_saas_commission:
+            if hasattr(self.refund_saas_commission, 'to_alipay_dict'):
+                params['refund_saas_commission'] = self.refund_saas_commission.to_alipay_dict()
+            else:
+                params['refund_saas_commission'] = self.refund_saas_commission
         if self.refund_time:
             if hasattr(self.refund_time, 'to_alipay_dict'):
                 params['refund_time'] = self.refund_time.to_alipay_dict()
             else:
                 params['refund_time'] = self.refund_time
+        if self.saas_commission:
+            if hasattr(self.saas_commission, 'to_alipay_dict'):
+                params['saas_commission'] = self.saas_commission.to_alipay_dict()
+            else:
+                params['saas_commission'] = self.saas_commission
+        if self.saas_name:
+            if hasattr(self.saas_name, 'to_alipay_dict'):
+                params['saas_name'] = self.saas_name.to_alipay_dict()
+            else:
+                params['saas_name'] = self.saas_name
+        if self.settle_batch_no:
+            if hasattr(self.settle_batch_no, 'to_alipay_dict'):
+                params['settle_batch_no'] = self.settle_batch_no.to_alipay_dict()
+            else:
+                params['settle_batch_no'] = self.settle_batch_no
         if self.settle_pid:
             if hasattr(self.settle_pid, 'to_alipay_dict'):
                 params['settle_pid'] = self.settle_pid.to_alipay_dict()
@@ -215,18 +306,32 @@ class AnxinkaDeliverDetailResponse(object):
         if not d:
             return None
         o = AnxinkaDeliverDetailResponse()
+        if 'agent_commission' in d:
+            o.agent_commission = d['agent_commission']
+        if 'agent_name' in d:
+            o.agent_name = d['agent_name']
         if 'card_no' in d:
             o.card_no = d['card_no']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'refund_agent_commission' in d:
+            o.refund_agent_commission = d['refund_agent_commission']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_cash' in d:
             o.refund_cash = d['refund_cash']
+        if 'refund_saas_commission' in d:
+            o.refund_saas_commission = d['refund_saas_commission']
         if 'refund_time' in d:
             o.refund_time = d['refund_time']
+        if 'saas_commission' in d:
+            o.saas_commission = d['saas_commission']
+        if 'saas_name' in d:
+            o.saas_name = d['saas_name']
+        if 'settle_batch_no' in d:
+            o.settle_batch_no = d['settle_batch_no']
         if 'settle_pid' in d:
             o.settle_pid = d['settle_pid']
         if 'settle_shop_id' in d:

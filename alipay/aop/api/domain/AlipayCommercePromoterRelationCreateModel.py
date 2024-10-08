@@ -12,6 +12,7 @@ class AlipayCommercePromoterRelationCreateModel(object):
         self._mini_app_id = None
         self._promoter_id = None
         self._promoter_open_id = None
+        self._related_shop_list = None
         self._role = None
         self._shop_id = None
         self._store_id = None
@@ -44,6 +45,16 @@ class AlipayCommercePromoterRelationCreateModel(object):
     @promoter_open_id.setter
     def promoter_open_id(self, value):
         self._promoter_open_id = value
+    @property
+    def related_shop_list(self):
+        return self._related_shop_list
+
+    @related_shop_list.setter
+    def related_shop_list(self, value):
+        if isinstance(value, list):
+            self._related_shop_list = list()
+            for i in value:
+                self._related_shop_list.append(i)
     @property
     def role(self):
         return self._role
@@ -89,6 +100,16 @@ class AlipayCommercePromoterRelationCreateModel(object):
                 params['promoter_open_id'] = self.promoter_open_id.to_alipay_dict()
             else:
                 params['promoter_open_id'] = self.promoter_open_id
+        if self.related_shop_list:
+            if isinstance(self.related_shop_list, list):
+                for i in range(0, len(self.related_shop_list)):
+                    element = self.related_shop_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.related_shop_list[i] = element.to_alipay_dict()
+            if hasattr(self.related_shop_list, 'to_alipay_dict'):
+                params['related_shop_list'] = self.related_shop_list.to_alipay_dict()
+            else:
+                params['related_shop_list'] = self.related_shop_list
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -119,6 +140,8 @@ class AlipayCommercePromoterRelationCreateModel(object):
             o.promoter_id = d['promoter_id']
         if 'promoter_open_id' in d:
             o.promoter_open_id = d['promoter_open_id']
+        if 'related_shop_list' in d:
+            o.related_shop_list = d['related_shop_list']
         if 'role' in d:
             o.role = d['role']
         if 'shop_id' in d:

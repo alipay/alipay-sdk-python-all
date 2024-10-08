@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AcceptInfoVO import AcceptInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
@@ -18,6 +19,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenMiniOrderQueryResponse, self).__init__()
+        self._accept_info = None
         self._address_info = None
         self._booking_info = None
         self._contact_info = None
@@ -39,6 +41,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._trade_no = None
         self._user_id = None
 
+    @property
+    def accept_info(self):
+        return self._accept_info
+
+    @accept_info.setter
+    def accept_info(self, value):
+        if isinstance(value, AcceptInfoVO):
+            self._accept_info = value
+        else:
+            self._accept_info = AcceptInfoVO.from_alipay_dict(value)
     @property
     def address_info(self):
         return self._address_info
@@ -212,6 +224,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderQueryResponse, self).parse_response_content(response_content)
+        if 'accept_info' in response:
+            self.accept_info = response['accept_info']
         if 'address_info' in response:
             self.address_info = response['address_info']
         if 'booking_info' in response:

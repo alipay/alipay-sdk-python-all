@@ -15,6 +15,7 @@ class AlipayCommerceYuntaskHunterQueryModel(object):
         self._page = None
         self._page_size = None
         self._shop_id = None
+        self._task_type = None
         self._type = None
 
     @property
@@ -67,6 +68,13 @@ class AlipayCommerceYuntaskHunterQueryModel(object):
     def shop_id(self, value):
         self._shop_id = value
     @property
+    def task_type(self):
+        return self._task_type
+
+    @task_type.setter
+    def task_type(self, value):
+        self._task_type = value
+    @property
     def type(self):
         return self._type
 
@@ -112,6 +120,11 @@ class AlipayCommerceYuntaskHunterQueryModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.task_type:
+            if hasattr(self.task_type, 'to_alipay_dict'):
+                params['task_type'] = self.task_type.to_alipay_dict()
+            else:
+                params['task_type'] = self.task_type
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -138,6 +151,8 @@ class AlipayCommerceYuntaskHunterQueryModel(object):
             o.page_size = d['page_size']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'task_type' in d:
+            o.task_type = d['task_type']
         if 'type' in d:
             o.type = d['type']
         return o

@@ -11,6 +11,7 @@ class AlipayCommerceRentEnterpriseCertificationQueryModel(object):
         self._open_id = None
         self._partner_id = None
         self._partner_open_id = None
+        self._unified_social_credit_code = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceRentEnterpriseCertificationQueryModel(object):
     @partner_open_id.setter
     def partner_open_id(self, value):
         self._partner_open_id = value
+    @property
+    def unified_social_credit_code(self):
+        return self._unified_social_credit_code
+
+    @unified_social_credit_code.setter
+    def unified_social_credit_code(self, value):
+        self._unified_social_credit_code = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayCommerceRentEnterpriseCertificationQueryModel(object):
                 params['partner_open_id'] = self.partner_open_id.to_alipay_dict()
             else:
                 params['partner_open_id'] = self.partner_open_id
+        if self.unified_social_credit_code:
+            if hasattr(self.unified_social_credit_code, 'to_alipay_dict'):
+                params['unified_social_credit_code'] = self.unified_social_credit_code.to_alipay_dict()
+            else:
+                params['unified_social_credit_code'] = self.unified_social_credit_code
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceRentEnterpriseCertificationQueryModel(object):
             o.partner_id = d['partner_id']
         if 'partner_open_id' in d:
             o.partner_open_id = d['partner_open_id']
+        if 'unified_social_credit_code' in d:
+            o.unified_social_credit_code = d['unified_social_credit_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

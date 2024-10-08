@@ -11,6 +11,7 @@ class VoucherUseGuideInfo(object):
     def __init__(self):
         self._mini_app_use_guide_info = None
         self._use_guide_mode = None
+        self._use_url = None
 
     @property
     def mini_app_use_guide_info(self):
@@ -32,6 +33,13 @@ class VoucherUseGuideInfo(object):
             self._use_guide_mode = list()
             for i in value:
                 self._use_guide_mode.append(i)
+    @property
+    def use_url(self):
+        return self._use_url
+
+    @use_url.setter
+    def use_url(self, value):
+        self._use_url = value
 
 
     def to_alipay_dict(self):
@@ -51,6 +59,11 @@ class VoucherUseGuideInfo(object):
                 params['use_guide_mode'] = self.use_guide_mode.to_alipay_dict()
             else:
                 params['use_guide_mode'] = self.use_guide_mode
+        if self.use_url:
+            if hasattr(self.use_url, 'to_alipay_dict'):
+                params['use_url'] = self.use_url.to_alipay_dict()
+            else:
+                params['use_url'] = self.use_url
         return params
 
     @staticmethod
@@ -62,6 +75,8 @@ class VoucherUseGuideInfo(object):
             o.mini_app_use_guide_info = d['mini_app_use_guide_info']
         if 'use_guide_mode' in d:
             o.use_guide_mode = d['use_guide_mode']
+        if 'use_url' in d:
+            o.use_url = d['use_url']
         return o
 
 

@@ -10,6 +10,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def __init__(self):
         self._apply_no = None
         self._credit_amt = None
+        self._current_status = None
+        self._cust_status = None
         self._fin_drawdown_no = None
         self._fin_org = None
         self._loan_amt = None
@@ -40,6 +42,20 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     @credit_amt.setter
     def credit_amt(self, value):
         self._credit_amt = value
+    @property
+    def current_status(self):
+        return self._current_status
+
+    @current_status.setter
+    def current_status(self, value):
+        self._current_status = value
+    @property
+    def cust_status(self):
+        return self._cust_status
+
+    @cust_status.setter
+    def cust_status(self, value):
+        self._cust_status = value
     @property
     def fin_drawdown_no(self):
         return self._fin_drawdown_no
@@ -159,6 +175,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['credit_amt'] = self.credit_amt.to_alipay_dict()
             else:
                 params['credit_amt'] = self.credit_amt
+        if self.current_status:
+            if hasattr(self.current_status, 'to_alipay_dict'):
+                params['current_status'] = self.current_status.to_alipay_dict()
+            else:
+                params['current_status'] = self.current_status
+        if self.cust_status:
+            if hasattr(self.cust_status, 'to_alipay_dict'):
+                params['cust_status'] = self.cust_status.to_alipay_dict()
+            else:
+                params['cust_status'] = self.cust_status
         if self.fin_drawdown_no:
             if hasattr(self.fin_drawdown_no, 'to_alipay_dict'):
                 params['fin_drawdown_no'] = self.fin_drawdown_no.to_alipay_dict()
@@ -245,6 +271,10 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.apply_no = d['apply_no']
         if 'credit_amt' in d:
             o.credit_amt = d['credit_amt']
+        if 'current_status' in d:
+            o.current_status = d['current_status']
+        if 'cust_status' in d:
+            o.cust_status = d['cust_status']
         if 'fin_drawdown_no' in d:
             o.fin_drawdown_no = d['fin_drawdown_no']
         if 'fin_org' in d:

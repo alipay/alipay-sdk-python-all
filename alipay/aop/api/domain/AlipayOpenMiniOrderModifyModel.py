@@ -7,6 +7,7 @@ from alipay.aop.api.domain.AllocAmountInfoDTO import AllocAmountInfoDTO
 from alipay.aop.api.domain.GoodsInfoModifyDTO import GoodsInfoModifyDTO
 from alipay.aop.api.domain.PriceInfoModifyDTO import PriceInfoModifyDTO
 from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
+from alipay.aop.api.domain.SubMerchantModifyDTO import SubMerchantModifyDTO
 
 
 class AlipayOpenMiniOrderModifyModel(object):
@@ -19,6 +20,7 @@ class AlipayOpenMiniOrderModifyModel(object):
         self._out_order_id = None
         self._price_info = None
         self._stage_pay_plans = None
+        self._sub_merchant = None
         self._user_id = None
 
     @property
@@ -89,6 +91,16 @@ class AlipayOpenMiniOrderModifyModel(object):
                 else:
                     self._stage_pay_plans.append(StagePayPlanDTO.from_alipay_dict(i))
     @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SubMerchantModifyDTO):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchantModifyDTO.from_alipay_dict(value)
+    @property
     def user_id(self):
         return self._user_id
 
@@ -144,6 +156,11 @@ class AlipayOpenMiniOrderModifyModel(object):
                 params['stage_pay_plans'] = self.stage_pay_plans.to_alipay_dict()
             else:
                 params['stage_pay_plans'] = self.stage_pay_plans
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -170,6 +187,8 @@ class AlipayOpenMiniOrderModifyModel(object):
             o.price_info = d['price_info']
         if 'stage_pay_plans' in d:
             o.stage_pay_plans = d['stage_pay_plans']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

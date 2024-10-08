@@ -16,6 +16,7 @@ class AlipayCloudCloudpromoAichatSessionCreateResponse(AlipayResponse):
         self._agent_info = None
         self._customer_like = None
         self._guess_question_list = None
+        self._new_session_id = None
         self._session_id = None
         self._welcome_message = None
 
@@ -57,6 +58,13 @@ class AlipayCloudCloudpromoAichatSessionCreateResponse(AlipayResponse):
             for i in value:
                 self._guess_question_list.append(i)
     @property
+    def new_session_id(self):
+        return self._new_session_id
+
+    @new_session_id.setter
+    def new_session_id(self, value):
+        self._new_session_id = value
+    @property
     def session_id(self):
         return self._session_id
 
@@ -84,6 +92,8 @@ class AlipayCloudCloudpromoAichatSessionCreateResponse(AlipayResponse):
             self.customer_like = response['customer_like']
         if 'guess_question_list' in response:
             self.guess_question_list = response['guess_question_list']
+        if 'new_session_id' in response:
+            self.new_session_id = response['new_session_id']
         if 'session_id' in response:
             self.session_id = response['session_id']
         if 'welcome_message' in response:

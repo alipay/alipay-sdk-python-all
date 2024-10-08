@@ -11,6 +11,7 @@ class BillFeeInfo(object):
         self._commission_cash = None
         self._commission_pid = None
         self._commission_pid_name = None
+        self._commission_rate = None
         self._commission_refund_cash = None
         self._commission_refund_time = None
         self._commission_time = None
@@ -37,6 +38,13 @@ class BillFeeInfo(object):
     @commission_pid_name.setter
     def commission_pid_name(self, value):
         self._commission_pid_name = value
+    @property
+    def commission_rate(self):
+        return self._commission_rate
+
+    @commission_rate.setter
+    def commission_rate(self, value):
+        self._commission_rate = value
     @property
     def commission_refund_cash(self):
         return self._commission_refund_cash
@@ -84,6 +92,11 @@ class BillFeeInfo(object):
                 params['commission_pid_name'] = self.commission_pid_name.to_alipay_dict()
             else:
                 params['commission_pid_name'] = self.commission_pid_name
+        if self.commission_rate:
+            if hasattr(self.commission_rate, 'to_alipay_dict'):
+                params['commission_rate'] = self.commission_rate.to_alipay_dict()
+            else:
+                params['commission_rate'] = self.commission_rate
         if self.commission_refund_cash:
             if hasattr(self.commission_refund_cash, 'to_alipay_dict'):
                 params['commission_refund_cash'] = self.commission_refund_cash.to_alipay_dict()
@@ -117,6 +130,8 @@ class BillFeeInfo(object):
             o.commission_pid = d['commission_pid']
         if 'commission_pid_name' in d:
             o.commission_pid_name = d['commission_pid_name']
+        if 'commission_rate' in d:
+            o.commission_rate = d['commission_rate']
         if 'commission_refund_cash' in d:
             o.commission_refund_cash = d['commission_refund_cash']
         if 'commission_refund_time' in d:

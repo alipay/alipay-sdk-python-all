@@ -15,6 +15,7 @@ class GroupInstanceInfoVO(object):
         self._forbid_admin_chat = None
         self._forbid_member_chat = None
         self._gmt_create = None
+        self._group_id = None
         self._group_instance_admin_user_list = None
         self._group_instance_desc = None
         self._group_instance_id = None
@@ -54,6 +55,13 @@ class GroupInstanceInfoVO(object):
     @gmt_create.setter
     def gmt_create(self, value):
         self._gmt_create = value
+    @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
     @property
     def group_instance_admin_user_list(self):
         return self._group_instance_admin_user_list
@@ -163,6 +171,11 @@ class GroupInstanceInfoVO(object):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
             else:
                 params['gmt_create'] = self.gmt_create
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
         if self.group_instance_admin_user_list:
             if isinstance(self.group_instance_admin_user_list, list):
                 for i in range(0, len(self.group_instance_admin_user_list)):
@@ -238,6 +251,8 @@ class GroupInstanceInfoVO(object):
             o.forbid_member_chat = d['forbid_member_chat']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
         if 'group_instance_admin_user_list' in d:
             o.group_instance_admin_user_list = d['group_instance_admin_user_list']
         if 'group_instance_desc' in d:

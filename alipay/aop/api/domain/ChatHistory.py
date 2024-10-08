@@ -10,6 +10,7 @@ class ChatHistory(object):
     def __init__(self):
         self._answer = None
         self._question = None
+        self._request_id = None
         self._time = None
 
     @property
@@ -26,6 +27,13 @@ class ChatHistory(object):
     @question.setter
     def question(self, value):
         self._question = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
     @property
     def time(self):
         return self._time
@@ -47,6 +55,11 @@ class ChatHistory(object):
                 params['question'] = self.question.to_alipay_dict()
             else:
                 params['question'] = self.question
+        if self.request_id:
+            if hasattr(self.request_id, 'to_alipay_dict'):
+                params['request_id'] = self.request_id.to_alipay_dict()
+            else:
+                params['request_id'] = self.request_id
         if self.time:
             if hasattr(self.time, 'to_alipay_dict'):
                 params['time'] = self.time.to_alipay_dict()
@@ -63,6 +76,8 @@ class ChatHistory(object):
             o.answer = d['answer']
         if 'question' in d:
             o.question = d['question']
+        if 'request_id' in d:
+            o.request_id = d['request_id']
         if 'time' in d:
             o.time = d['time']
         return o

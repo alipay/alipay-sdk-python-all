@@ -13,12 +13,14 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
         self._discount_amount = None
         self._discount_information = None
         self._free_exit_minutes = None
+        self._inactive_user = None
         self._is_encrypt_plate_no = None
         self._mobile_number = None
         self._open_appid = None
         self._open_id = None
         self._out_order_no = None
         self._out_serial_no = None
+        self._pay_frequency = None
         self._payment_amount = None
         self._payment_time = None
         self._payment_type = None
@@ -63,6 +65,13 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
     def free_exit_minutes(self, value):
         self._free_exit_minutes = value
     @property
+    def inactive_user(self):
+        return self._inactive_user
+
+    @inactive_user.setter
+    def inactive_user(self, value):
+        self._inactive_user = value
+    @property
     def is_encrypt_plate_no(self):
         return self._is_encrypt_plate_no
 
@@ -104,6 +113,13 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
     @out_serial_no.setter
     def out_serial_no(self, value):
         self._out_serial_no = value
+    @property
+    def pay_frequency(self):
+        return self._pay_frequency
+
+    @pay_frequency.setter
+    def pay_frequency(self, value):
+        self._pay_frequency = value
     @property
     def payment_amount(self):
         return self._payment_amount
@@ -189,6 +205,11 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
                 params['free_exit_minutes'] = self.free_exit_minutes.to_alipay_dict()
             else:
                 params['free_exit_minutes'] = self.free_exit_minutes
+        if self.inactive_user:
+            if hasattr(self.inactive_user, 'to_alipay_dict'):
+                params['inactive_user'] = self.inactive_user.to_alipay_dict()
+            else:
+                params['inactive_user'] = self.inactive_user
         if self.is_encrypt_plate_no:
             if hasattr(self.is_encrypt_plate_no, 'to_alipay_dict'):
                 params['is_encrypt_plate_no'] = self.is_encrypt_plate_no.to_alipay_dict()
@@ -219,6 +240,11 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
                 params['out_serial_no'] = self.out_serial_no.to_alipay_dict()
             else:
                 params['out_serial_no'] = self.out_serial_no
+        if self.pay_frequency:
+            if hasattr(self.pay_frequency, 'to_alipay_dict'):
+                params['pay_frequency'] = self.pay_frequency.to_alipay_dict()
+            else:
+                params['pay_frequency'] = self.pay_frequency
         if self.payment_amount:
             if hasattr(self.payment_amount, 'to_alipay_dict'):
                 params['payment_amount'] = self.payment_amount.to_alipay_dict()
@@ -274,6 +300,8 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
             o.discount_information = d['discount_information']
         if 'free_exit_minutes' in d:
             o.free_exit_minutes = d['free_exit_minutes']
+        if 'inactive_user' in d:
+            o.inactive_user = d['inactive_user']
         if 'is_encrypt_plate_no' in d:
             o.is_encrypt_plate_no = d['is_encrypt_plate_no']
         if 'mobile_number' in d:
@@ -286,6 +314,8 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
             o.out_order_no = d['out_order_no']
         if 'out_serial_no' in d:
             o.out_serial_no = d['out_serial_no']
+        if 'pay_frequency' in d:
+            o.pay_frequency = d['pay_frequency']
         if 'payment_amount' in d:
             o.payment_amount = d['payment_amount']
         if 'payment_time' in d:

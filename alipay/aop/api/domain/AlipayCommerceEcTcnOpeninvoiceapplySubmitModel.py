@@ -17,9 +17,11 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
         self._buyer_name = None
         self._buyer_tax_no = None
         self._buyer_tel = None
+        self._email = None
         self._industry_type = None
         self._invoice_amount = None
         self._invoice_type = None
+        self._phone = None
         self._platform_apply_id = None
         self._travel_info_list = None
 
@@ -79,6 +81,13 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
     def buyer_tel(self, value):
         self._buyer_tel = value
     @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
+    @property
     def industry_type(self):
         return self._industry_type
 
@@ -99,6 +108,13 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
     @invoice_type.setter
     def invoice_type(self, value):
         self._invoice_type = value
+    @property
+    def phone(self):
+        return self._phone
+
+    @phone.setter
+    def phone(self, value):
+        self._phone = value
     @property
     def platform_apply_id(self):
         return self._platform_apply_id
@@ -163,6 +179,11 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
                 params['buyer_tel'] = self.buyer_tel.to_alipay_dict()
             else:
                 params['buyer_tel'] = self.buyer_tel
+        if self.email:
+            if hasattr(self.email, 'to_alipay_dict'):
+                params['email'] = self.email.to_alipay_dict()
+            else:
+                params['email'] = self.email
         if self.industry_type:
             if hasattr(self.industry_type, 'to_alipay_dict'):
                 params['industry_type'] = self.industry_type.to_alipay_dict()
@@ -178,6 +199,11 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
             else:
                 params['invoice_type'] = self.invoice_type
+        if self.phone:
+            if hasattr(self.phone, 'to_alipay_dict'):
+                params['phone'] = self.phone.to_alipay_dict()
+            else:
+                params['phone'] = self.phone
         if self.platform_apply_id:
             if hasattr(self.platform_apply_id, 'to_alipay_dict'):
                 params['platform_apply_id'] = self.platform_apply_id.to_alipay_dict()
@@ -214,12 +240,16 @@ class AlipayCommerceEcTcnOpeninvoiceapplySubmitModel(object):
             o.buyer_tax_no = d['buyer_tax_no']
         if 'buyer_tel' in d:
             o.buyer_tel = d['buyer_tel']
+        if 'email' in d:
+            o.email = d['email']
         if 'industry_type' in d:
             o.industry_type = d['industry_type']
         if 'invoice_amount' in d:
             o.invoice_amount = d['invoice_amount']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
+        if 'phone' in d:
+            o.phone = d['phone']
         if 'platform_apply_id' in d:
             o.platform_apply_id = d['platform_apply_id']
         if 'travel_info_list' in d:

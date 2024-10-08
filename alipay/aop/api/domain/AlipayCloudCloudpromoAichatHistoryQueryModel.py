@@ -9,6 +9,8 @@ class AlipayCloudCloudpromoAichatHistoryQueryModel(object):
 
     def __init__(self):
         self._customer_id = None
+        self._greater_request_id = None
+        self._less_request_id = None
         self._num = None
         self._page = None
         self._scene_id = None
@@ -21,6 +23,20 @@ class AlipayCloudCloudpromoAichatHistoryQueryModel(object):
     @customer_id.setter
     def customer_id(self, value):
         self._customer_id = value
+    @property
+    def greater_request_id(self):
+        return self._greater_request_id
+
+    @greater_request_id.setter
+    def greater_request_id(self, value):
+        self._greater_request_id = value
+    @property
+    def less_request_id(self):
+        return self._less_request_id
+
+    @less_request_id.setter
+    def less_request_id(self, value):
+        self._less_request_id = value
     @property
     def num(self):
         return self._num
@@ -58,6 +74,16 @@ class AlipayCloudCloudpromoAichatHistoryQueryModel(object):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
             else:
                 params['customer_id'] = self.customer_id
+        if self.greater_request_id:
+            if hasattr(self.greater_request_id, 'to_alipay_dict'):
+                params['greater_request_id'] = self.greater_request_id.to_alipay_dict()
+            else:
+                params['greater_request_id'] = self.greater_request_id
+        if self.less_request_id:
+            if hasattr(self.less_request_id, 'to_alipay_dict'):
+                params['less_request_id'] = self.less_request_id.to_alipay_dict()
+            else:
+                params['less_request_id'] = self.less_request_id
         if self.num:
             if hasattr(self.num, 'to_alipay_dict'):
                 params['num'] = self.num.to_alipay_dict()
@@ -87,6 +113,10 @@ class AlipayCloudCloudpromoAichatHistoryQueryModel(object):
         o = AlipayCloudCloudpromoAichatHistoryQueryModel()
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
+        if 'greater_request_id' in d:
+            o.greater_request_id = d['greater_request_id']
+        if 'less_request_id' in d:
+            o.less_request_id = d['less_request_id']
         if 'num' in d:
             o.num = d['num']
         if 'page' in d:

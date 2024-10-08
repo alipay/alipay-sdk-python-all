@@ -15,6 +15,7 @@ class LandingTypeDto(object):
         self._landing_name = None
         self._landing_type = None
         self._landing_url = None
+        self._pic_info_list = None
         self._product_videos = None
 
     @property
@@ -58,6 +59,16 @@ class LandingTypeDto(object):
     @landing_url.setter
     def landing_url(self, value):
         self._landing_url = value
+    @property
+    def pic_info_list(self):
+        return self._pic_info_list
+
+    @pic_info_list.setter
+    def pic_info_list(self, value):
+        if isinstance(value, list):
+            self._pic_info_list = list()
+            for i in value:
+                self._pic_info_list.append(i)
     @property
     def product_videos(self):
         return self._product_videos
@@ -105,6 +116,16 @@ class LandingTypeDto(object):
                 params['landing_url'] = self.landing_url.to_alipay_dict()
             else:
                 params['landing_url'] = self.landing_url
+        if self.pic_info_list:
+            if isinstance(self.pic_info_list, list):
+                for i in range(0, len(self.pic_info_list)):
+                    element = self.pic_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pic_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.pic_info_list, 'to_alipay_dict'):
+                params['pic_info_list'] = self.pic_info_list.to_alipay_dict()
+            else:
+                params['pic_info_list'] = self.pic_info_list
         if self.product_videos:
             if isinstance(self.product_videos, list):
                 for i in range(0, len(self.product_videos)):
@@ -132,6 +153,8 @@ class LandingTypeDto(object):
             o.landing_type = d['landing_type']
         if 'landing_url' in d:
             o.landing_url = d['landing_url']
+        if 'pic_info_list' in d:
+            o.pic_info_list = d['pic_info_list']
         if 'product_videos' in d:
             o.product_videos = d['product_videos']
         return o

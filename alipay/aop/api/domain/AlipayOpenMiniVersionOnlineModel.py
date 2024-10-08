@@ -11,6 +11,7 @@ class AlipayOpenMiniVersionOnlineModel(object):
         self._app_version = None
         self._bundle_id = None
         self._downgrade = None
+        self._permit_registration_limit_release = None
 
     @property
     def app_version(self):
@@ -33,6 +34,13 @@ class AlipayOpenMiniVersionOnlineModel(object):
     @downgrade.setter
     def downgrade(self, value):
         self._downgrade = value
+    @property
+    def permit_registration_limit_release(self):
+        return self._permit_registration_limit_release
+
+    @permit_registration_limit_release.setter
+    def permit_registration_limit_release(self, value):
+        self._permit_registration_limit_release = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayOpenMiniVersionOnlineModel(object):
                 params['downgrade'] = self.downgrade.to_alipay_dict()
             else:
                 params['downgrade'] = self.downgrade
+        if self.permit_registration_limit_release:
+            if hasattr(self.permit_registration_limit_release, 'to_alipay_dict'):
+                params['permit_registration_limit_release'] = self.permit_registration_limit_release.to_alipay_dict()
+            else:
+                params['permit_registration_limit_release'] = self.permit_registration_limit_release
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayOpenMiniVersionOnlineModel(object):
             o.bundle_id = d['bundle_id']
         if 'downgrade' in d:
             o.downgrade = d['downgrade']
+        if 'permit_registration_limit_release' in d:
+            o.permit_registration_limit_release = d['permit_registration_limit_release']
         return o
 
 

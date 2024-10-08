@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
+from alipay.aop.api.domain.AgreementSignInfoDTO import AgreementSignInfoDTO
 from alipay.aop.api.domain.AllocAmountInfoDTO import AllocAmountInfoDTO
 from alipay.aop.api.domain.MiniBusinessParamsDTO import MiniBusinessParamsDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
@@ -11,6 +12,7 @@ from alipay.aop.api.domain.CreditInfoDTO import CreditInfoDTO
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
 from alipay.aop.api.domain.LogisticsInfoDTO import LogisticsInfoDTO
 from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
+from alipay.aop.api.domain.FundAuthFreezeInfoDTO import FundAuthFreezeInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
@@ -22,6 +24,7 @@ class AlipayOpenMiniOrderCreateModel(object):
 
     def __init__(self):
         self._address_info = None
+        self._agreement_sign_info = None
         self._alloc_amount_info = None
         self._business_params = None
         self._buyer_id = None
@@ -33,12 +36,14 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._default_receiving_address = None
         self._delivery_detail = None
         self._ext_info = None
+        self._fund_auth_freeze_info = None
         self._merchant_biz_type = None
         self._order_detail = None
         self._out_order_id = None
         self._path = None
         self._promo_detail_info = None
         self._seller_id = None
+        self._service_provider_model = None
         self._shop_info = None
         self._source_id = None
         self._stage_pay_plans = None
@@ -56,6 +61,16 @@ class AlipayOpenMiniOrderCreateModel(object):
             self._address_info = value
         else:
             self._address_info = MiniReceiverAddressInfoDTO.from_alipay_dict(value)
+    @property
+    def agreement_sign_info(self):
+        return self._agreement_sign_info
+
+    @agreement_sign_info.setter
+    def agreement_sign_info(self, value):
+        if isinstance(value, AgreementSignInfoDTO):
+            self._agreement_sign_info = value
+        else:
+            self._agreement_sign_info = AgreementSignInfoDTO.from_alipay_dict(value)
     @property
     def alloc_amount_info(self):
         return self._alloc_amount_info
@@ -155,6 +170,16 @@ class AlipayOpenMiniOrderCreateModel(object):
         else:
             self._ext_info = MiniOrderExtInfoDTO.from_alipay_dict(value)
     @property
+    def fund_auth_freeze_info(self):
+        return self._fund_auth_freeze_info
+
+    @fund_auth_freeze_info.setter
+    def fund_auth_freeze_info(self, value):
+        if isinstance(value, FundAuthFreezeInfoDTO):
+            self._fund_auth_freeze_info = value
+        else:
+            self._fund_auth_freeze_info = FundAuthFreezeInfoDTO.from_alipay_dict(value)
+    @property
     def merchant_biz_type(self):
         return self._merchant_biz_type
 
@@ -202,6 +227,13 @@ class AlipayOpenMiniOrderCreateModel(object):
     @seller_id.setter
     def seller_id(self, value):
         self._seller_id = value
+    @property
+    def service_provider_model(self):
+        return self._service_provider_model
+
+    @service_provider_model.setter
+    def service_provider_model(self, value):
+        self._service_provider_model = value
     @property
     def shop_info(self):
         return self._shop_info
@@ -265,6 +297,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['address_info'] = self.address_info.to_alipay_dict()
             else:
                 params['address_info'] = self.address_info
+        if self.agreement_sign_info:
+            if hasattr(self.agreement_sign_info, 'to_alipay_dict'):
+                params['agreement_sign_info'] = self.agreement_sign_info.to_alipay_dict()
+            else:
+                params['agreement_sign_info'] = self.agreement_sign_info
         if self.alloc_amount_info:
             if hasattr(self.alloc_amount_info, 'to_alipay_dict'):
                 params['alloc_amount_info'] = self.alloc_amount_info.to_alipay_dict()
@@ -320,6 +357,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.fund_auth_freeze_info:
+            if hasattr(self.fund_auth_freeze_info, 'to_alipay_dict'):
+                params['fund_auth_freeze_info'] = self.fund_auth_freeze_info.to_alipay_dict()
+            else:
+                params['fund_auth_freeze_info'] = self.fund_auth_freeze_info
         if self.merchant_biz_type:
             if hasattr(self.merchant_biz_type, 'to_alipay_dict'):
                 params['merchant_biz_type'] = self.merchant_biz_type.to_alipay_dict()
@@ -350,6 +392,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.service_provider_model:
+            if hasattr(self.service_provider_model, 'to_alipay_dict'):
+                params['service_provider_model'] = self.service_provider_model.to_alipay_dict()
+            else:
+                params['service_provider_model'] = self.service_provider_model
         if self.shop_info:
             if hasattr(self.shop_info, 'to_alipay_dict'):
                 params['shop_info'] = self.shop_info.to_alipay_dict()
@@ -394,6 +441,8 @@ class AlipayOpenMiniOrderCreateModel(object):
         o = AlipayOpenMiniOrderCreateModel()
         if 'address_info' in d:
             o.address_info = d['address_info']
+        if 'agreement_sign_info' in d:
+            o.agreement_sign_info = d['agreement_sign_info']
         if 'alloc_amount_info' in d:
             o.alloc_amount_info = d['alloc_amount_info']
         if 'business_params' in d:
@@ -416,6 +465,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.delivery_detail = d['delivery_detail']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'fund_auth_freeze_info' in d:
+            o.fund_auth_freeze_info = d['fund_auth_freeze_info']
         if 'merchant_biz_type' in d:
             o.merchant_biz_type = d['merchant_biz_type']
         if 'order_detail' in d:
@@ -428,6 +479,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.promo_detail_info = d['promo_detail_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'service_provider_model' in d:
+            o.service_provider_model = d['service_provider_model']
         if 'shop_info' in d:
             o.shop_info = d['shop_info']
         if 'source_id' in d:

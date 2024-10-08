@@ -15,6 +15,7 @@ class GroupBaseInfoVO(object):
         self._group_id = None
         self._group_member_count = None
         self._group_name = None
+        self._modify_history_group = None
         self._related_app_id = None
         self._related_app_logo = None
 
@@ -73,6 +74,13 @@ class GroupBaseInfoVO(object):
     @group_name.setter
     def group_name(self, value):
         self._group_name = value
+    @property
+    def modify_history_group(self):
+        return self._modify_history_group
+
+    @modify_history_group.setter
+    def modify_history_group(self, value):
+        self._modify_history_group = value
     @property
     def related_app_id(self):
         return self._related_app_id
@@ -136,6 +144,11 @@ class GroupBaseInfoVO(object):
                 params['group_name'] = self.group_name.to_alipay_dict()
             else:
                 params['group_name'] = self.group_name
+        if self.modify_history_group:
+            if hasattr(self.modify_history_group, 'to_alipay_dict'):
+                params['modify_history_group'] = self.modify_history_group.to_alipay_dict()
+            else:
+                params['modify_history_group'] = self.modify_history_group
         if self.related_app_id:
             if hasattr(self.related_app_id, 'to_alipay_dict'):
                 params['related_app_id'] = self.related_app_id.to_alipay_dict()
@@ -167,6 +180,8 @@ class GroupBaseInfoVO(object):
             o.group_member_count = d['group_member_count']
         if 'group_name' in d:
             o.group_name = d['group_name']
+        if 'modify_history_group' in d:
+            o.modify_history_group = d['modify_history_group']
         if 'related_app_id' in d:
             o.related_app_id = d['related_app_id']
         if 'related_app_logo' in d:

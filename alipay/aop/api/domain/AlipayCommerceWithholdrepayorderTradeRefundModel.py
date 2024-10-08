@@ -1,0 +1,330 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.RefundGoodsDetail import RefundGoodsDetail
+from alipay.aop.api.domain.OpenApiRoyaltyDetailInfoPojo import OpenApiRoyaltyDetailInfoPojo
+
+
+class AlipayCommerceWithholdrepayorderTradeRefundModel(object):
+
+    def __init__(self):
+        self._goods_detail = None
+        self._operator_id = None
+        self._org_pid = None
+        self._out_request_no = None
+        self._out_trade_no = None
+        self._query_options = None
+        self._refund_advance_account = None
+        self._refund_advance_account_type = None
+        self._refund_amount = None
+        self._refund_currency = None
+        self._refund_goods_detail = None
+        self._refund_reason = None
+        self._refund_royalty_parameters = None
+        self._refund_trans_out = None
+        self._refund_trans_out_type = None
+        self._related_settle_confirm_no = None
+        self._store_id = None
+        self._terminal_id = None
+        self._trade_no = None
+
+    @property
+    def goods_detail(self):
+        return self._goods_detail
+
+    @goods_detail.setter
+    def goods_detail(self, value):
+        if isinstance(value, GoodsDetail):
+            self._goods_detail = value
+        else:
+            self._goods_detail = GoodsDetail.from_alipay_dict(value)
+    @property
+    def operator_id(self):
+        return self._operator_id
+
+    @operator_id.setter
+    def operator_id(self, value):
+        self._operator_id = value
+    @property
+    def org_pid(self):
+        return self._org_pid
+
+    @org_pid.setter
+    def org_pid(self, value):
+        self._org_pid = value
+    @property
+    def out_request_no(self):
+        return self._out_request_no
+
+    @out_request_no.setter
+    def out_request_no(self, value):
+        self._out_request_no = value
+    @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        if isinstance(value, list):
+            self._query_options = list()
+            for i in value:
+                self._query_options.append(i)
+    @property
+    def refund_advance_account(self):
+        return self._refund_advance_account
+
+    @refund_advance_account.setter
+    def refund_advance_account(self, value):
+        self._refund_advance_account = value
+    @property
+    def refund_advance_account_type(self):
+        return self._refund_advance_account_type
+
+    @refund_advance_account_type.setter
+    def refund_advance_account_type(self, value):
+        self._refund_advance_account_type = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_currency(self):
+        return self._refund_currency
+
+    @refund_currency.setter
+    def refund_currency(self, value):
+        self._refund_currency = value
+    @property
+    def refund_goods_detail(self):
+        return self._refund_goods_detail
+
+    @refund_goods_detail.setter
+    def refund_goods_detail(self, value):
+        if isinstance(value, RefundGoodsDetail):
+            self._refund_goods_detail = value
+        else:
+            self._refund_goods_detail = RefundGoodsDetail.from_alipay_dict(value)
+    @property
+    def refund_reason(self):
+        return self._refund_reason
+
+    @refund_reason.setter
+    def refund_reason(self, value):
+        self._refund_reason = value
+    @property
+    def refund_royalty_parameters(self):
+        return self._refund_royalty_parameters
+
+    @refund_royalty_parameters.setter
+    def refund_royalty_parameters(self, value):
+        if isinstance(value, OpenApiRoyaltyDetailInfoPojo):
+            self._refund_royalty_parameters = value
+        else:
+            self._refund_royalty_parameters = OpenApiRoyaltyDetailInfoPojo.from_alipay_dict(value)
+    @property
+    def refund_trans_out(self):
+        return self._refund_trans_out
+
+    @refund_trans_out.setter
+    def refund_trans_out(self, value):
+        self._refund_trans_out = value
+    @property
+    def refund_trans_out_type(self):
+        return self._refund_trans_out_type
+
+    @refund_trans_out_type.setter
+    def refund_trans_out_type(self, value):
+        self._refund_trans_out_type = value
+    @property
+    def related_settle_confirm_no(self):
+        return self._related_settle_confirm_no
+
+    @related_settle_confirm_no.setter
+    def related_settle_confirm_no(self, value):
+        self._related_settle_confirm_no = value
+    @property
+    def store_id(self):
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, value):
+        self._store_id = value
+    @property
+    def terminal_id(self):
+        return self._terminal_id
+
+    @terminal_id.setter
+    def terminal_id(self, value):
+        self._terminal_id = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.goods_detail:
+            if hasattr(self.goods_detail, 'to_alipay_dict'):
+                params['goods_detail'] = self.goods_detail.to_alipay_dict()
+            else:
+                params['goods_detail'] = self.goods_detail
+        if self.operator_id:
+            if hasattr(self.operator_id, 'to_alipay_dict'):
+                params['operator_id'] = self.operator_id.to_alipay_dict()
+            else:
+                params['operator_id'] = self.operator_id
+        if self.org_pid:
+            if hasattr(self.org_pid, 'to_alipay_dict'):
+                params['org_pid'] = self.org_pid.to_alipay_dict()
+            else:
+                params['org_pid'] = self.org_pid
+        if self.out_request_no:
+            if hasattr(self.out_request_no, 'to_alipay_dict'):
+                params['out_request_no'] = self.out_request_no.to_alipay_dict()
+            else:
+                params['out_request_no'] = self.out_request_no
+        if self.out_trade_no:
+            if hasattr(self.out_trade_no, 'to_alipay_dict'):
+                params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
+            else:
+                params['out_trade_no'] = self.out_trade_no
+        if self.query_options:
+            if isinstance(self.query_options, list):
+                for i in range(0, len(self.query_options)):
+                    element = self.query_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_options[i] = element.to_alipay_dict()
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
+        if self.refund_advance_account:
+            if hasattr(self.refund_advance_account, 'to_alipay_dict'):
+                params['refund_advance_account'] = self.refund_advance_account.to_alipay_dict()
+            else:
+                params['refund_advance_account'] = self.refund_advance_account
+        if self.refund_advance_account_type:
+            if hasattr(self.refund_advance_account_type, 'to_alipay_dict'):
+                params['refund_advance_account_type'] = self.refund_advance_account_type.to_alipay_dict()
+            else:
+                params['refund_advance_account_type'] = self.refund_advance_account_type
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
+        if self.refund_currency:
+            if hasattr(self.refund_currency, 'to_alipay_dict'):
+                params['refund_currency'] = self.refund_currency.to_alipay_dict()
+            else:
+                params['refund_currency'] = self.refund_currency
+        if self.refund_goods_detail:
+            if hasattr(self.refund_goods_detail, 'to_alipay_dict'):
+                params['refund_goods_detail'] = self.refund_goods_detail.to_alipay_dict()
+            else:
+                params['refund_goods_detail'] = self.refund_goods_detail
+        if self.refund_reason:
+            if hasattr(self.refund_reason, 'to_alipay_dict'):
+                params['refund_reason'] = self.refund_reason.to_alipay_dict()
+            else:
+                params['refund_reason'] = self.refund_reason
+        if self.refund_royalty_parameters:
+            if hasattr(self.refund_royalty_parameters, 'to_alipay_dict'):
+                params['refund_royalty_parameters'] = self.refund_royalty_parameters.to_alipay_dict()
+            else:
+                params['refund_royalty_parameters'] = self.refund_royalty_parameters
+        if self.refund_trans_out:
+            if hasattr(self.refund_trans_out, 'to_alipay_dict'):
+                params['refund_trans_out'] = self.refund_trans_out.to_alipay_dict()
+            else:
+                params['refund_trans_out'] = self.refund_trans_out
+        if self.refund_trans_out_type:
+            if hasattr(self.refund_trans_out_type, 'to_alipay_dict'):
+                params['refund_trans_out_type'] = self.refund_trans_out_type.to_alipay_dict()
+            else:
+                params['refund_trans_out_type'] = self.refund_trans_out_type
+        if self.related_settle_confirm_no:
+            if hasattr(self.related_settle_confirm_no, 'to_alipay_dict'):
+                params['related_settle_confirm_no'] = self.related_settle_confirm_no.to_alipay_dict()
+            else:
+                params['related_settle_confirm_no'] = self.related_settle_confirm_no
+        if self.store_id:
+            if hasattr(self.store_id, 'to_alipay_dict'):
+                params['store_id'] = self.store_id.to_alipay_dict()
+            else:
+                params['store_id'] = self.store_id
+        if self.terminal_id:
+            if hasattr(self.terminal_id, 'to_alipay_dict'):
+                params['terminal_id'] = self.terminal_id.to_alipay_dict()
+            else:
+                params['terminal_id'] = self.terminal_id
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AlipayCommerceWithholdrepayorderTradeRefundModel()
+        if 'goods_detail' in d:
+            o.goods_detail = d['goods_detail']
+        if 'operator_id' in d:
+            o.operator_id = d['operator_id']
+        if 'org_pid' in d:
+            o.org_pid = d['org_pid']
+        if 'out_request_no' in d:
+            o.out_request_no = d['out_request_no']
+        if 'out_trade_no' in d:
+            o.out_trade_no = d['out_trade_no']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
+        if 'refund_advance_account' in d:
+            o.refund_advance_account = d['refund_advance_account']
+        if 'refund_advance_account_type' in d:
+            o.refund_advance_account_type = d['refund_advance_account_type']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
+        if 'refund_currency' in d:
+            o.refund_currency = d['refund_currency']
+        if 'refund_goods_detail' in d:
+            o.refund_goods_detail = d['refund_goods_detail']
+        if 'refund_reason' in d:
+            o.refund_reason = d['refund_reason']
+        if 'refund_royalty_parameters' in d:
+            o.refund_royalty_parameters = d['refund_royalty_parameters']
+        if 'refund_trans_out' in d:
+            o.refund_trans_out = d['refund_trans_out']
+        if 'refund_trans_out_type' in d:
+            o.refund_trans_out_type = d['refund_trans_out_type']
+        if 'related_settle_confirm_no' in d:
+            o.related_settle_confirm_no = d['related_settle_confirm_no']
+        if 'store_id' in d:
+            o.store_id = d['store_id']
+        if 'terminal_id' in d:
+            o.terminal_id = d['terminal_id']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
+        return o
+
+

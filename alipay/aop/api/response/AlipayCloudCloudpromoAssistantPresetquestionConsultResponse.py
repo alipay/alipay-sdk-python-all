@@ -13,6 +13,7 @@ class AlipayCloudCloudpromoAssistantPresetquestionConsultResponse(AlipayResponse
         self._answer_content = None
         self._ask_time = None
         self._customer_id = None
+        self._request_id = None
         self._session_id = None
         self._suggestion_questions = None
 
@@ -37,6 +38,13 @@ class AlipayCloudCloudpromoAssistantPresetquestionConsultResponse(AlipayResponse
     @customer_id.setter
     def customer_id(self, value):
         self._customer_id = value
+    @property
+    def request_id(self):
+        return self._request_id
+
+    @request_id.setter
+    def request_id(self, value):
+        self._request_id = value
     @property
     def session_id(self):
         return self._session_id
@@ -66,6 +74,8 @@ class AlipayCloudCloudpromoAssistantPresetquestionConsultResponse(AlipayResponse
             self.ask_time = response['ask_time']
         if 'customer_id' in response:
             self.customer_id = response['customer_id']
+        if 'request_id' in response:
+            self.request_id = response['request_id']
         if 'session_id' in response:
             self.session_id = response['session_id']
         if 'suggestion_questions' in response:
