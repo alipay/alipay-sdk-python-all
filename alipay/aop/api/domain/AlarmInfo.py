@@ -10,6 +10,7 @@ class AlarmInfo(object):
     def __init__(self):
         self._ad_code = None
         self._ad_code_list = None
+        self._alarm_publish_unit = None
         self._content = None
         self._end_time = None
         self._level = None
@@ -36,6 +37,13 @@ class AlarmInfo(object):
             self._ad_code_list = list()
             for i in value:
                 self._ad_code_list.append(i)
+    @property
+    def alarm_publish_unit(self):
+        return self._alarm_publish_unit
+
+    @alarm_publish_unit.setter
+    def alarm_publish_unit(self, value):
+        self._alarm_publish_unit = value
     @property
     def content(self):
         return self._content
@@ -111,6 +119,11 @@ class AlarmInfo(object):
                 params['ad_code_list'] = self.ad_code_list.to_alipay_dict()
             else:
                 params['ad_code_list'] = self.ad_code_list
+        if self.alarm_publish_unit:
+            if hasattr(self.alarm_publish_unit, 'to_alipay_dict'):
+                params['alarm_publish_unit'] = self.alarm_publish_unit.to_alipay_dict()
+            else:
+                params['alarm_publish_unit'] = self.alarm_publish_unit
         if self.content:
             if hasattr(self.content, 'to_alipay_dict'):
                 params['content'] = self.content.to_alipay_dict()
@@ -162,6 +175,8 @@ class AlarmInfo(object):
             o.ad_code = d['ad_code']
         if 'ad_code_list' in d:
             o.ad_code_list = d['ad_code_list']
+        if 'alarm_publish_unit' in d:
+            o.alarm_publish_unit = d['alarm_publish_unit']
         if 'content' in d:
             o.content = d['content']
         if 'end_time' in d:

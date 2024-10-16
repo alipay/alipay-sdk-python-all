@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMerchantcardDeductionorderQueryModel(object):
 
     def __init__(self):
+        self._card_id = None
         self._deduction_order_id = None
         self._open_id = None
         self._user_id = None
 
+    @property
+    def card_id(self):
+        return self._card_id
+
+    @card_id.setter
+    def card_id(self, value):
+        self._card_id = value
     @property
     def deduction_order_id(self):
         return self._deduction_order_id
@@ -37,6 +45,11 @@ class AlipayCommerceMerchantcardDeductionorderQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_id:
+            if hasattr(self.card_id, 'to_alipay_dict'):
+                params['card_id'] = self.card_id.to_alipay_dict()
+            else:
+                params['card_id'] = self.card_id
         if self.deduction_order_id:
             if hasattr(self.deduction_order_id, 'to_alipay_dict'):
                 params['deduction_order_id'] = self.deduction_order_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceMerchantcardDeductionorderQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMerchantcardDeductionorderQueryModel()
+        if 'card_id' in d:
+            o.card_id = d['card_id']
         if 'deduction_order_id' in d:
             o.deduction_order_id = d['deduction_order_id']
         if 'open_id' in d:

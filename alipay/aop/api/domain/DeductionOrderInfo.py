@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BillFeeInfo import BillFeeInfo
+from alipay.aop.api.domain.DeductionOrderOnceInfo import DeductionOrderOnceInfo
 
 
 class DeductionOrderInfo(object):
@@ -14,9 +15,12 @@ class DeductionOrderInfo(object):
         self._certificate_id = None
         self._certificate_serial = None
         self._deduction_amount = None
+        self._deduction_cash = None
+        self._deduction_count = None
         self._deduction_fail_reason = None
         self._deduction_fail_times = None
         self._deduction_order_id = None
+        self._deduction_order_once_info_list = None
         self._deduction_order_type = None
         self._deduction_status = None
         self._deduction_time = None
@@ -24,13 +28,16 @@ class DeductionOrderInfo(object):
         self._merchant_pid = None
         self._open_id = None
         self._order_id = None
+        self._payment_no = None
         self._period = None
         self._plan_deduction_time = None
+        self._redeem_way = None
         self._refund_cash = None
         self._shop_id = None
         self._sub_order_id = None
         self._trade_no = None
         self._user_id = None
+        self._user_refuse_reason = None
 
     @property
     def bill_fee_info_list(self):
@@ -74,6 +81,20 @@ class DeductionOrderInfo(object):
     def deduction_amount(self, value):
         self._deduction_amount = value
     @property
+    def deduction_cash(self):
+        return self._deduction_cash
+
+    @deduction_cash.setter
+    def deduction_cash(self, value):
+        self._deduction_cash = value
+    @property
+    def deduction_count(self):
+        return self._deduction_count
+
+    @deduction_count.setter
+    def deduction_count(self, value):
+        self._deduction_count = value
+    @property
     def deduction_fail_reason(self):
         return self._deduction_fail_reason
 
@@ -94,6 +115,19 @@ class DeductionOrderInfo(object):
     @deduction_order_id.setter
     def deduction_order_id(self, value):
         self._deduction_order_id = value
+    @property
+    def deduction_order_once_info_list(self):
+        return self._deduction_order_once_info_list
+
+    @deduction_order_once_info_list.setter
+    def deduction_order_once_info_list(self, value):
+        if isinstance(value, list):
+            self._deduction_order_once_info_list = list()
+            for i in value:
+                if isinstance(i, DeductionOrderOnceInfo):
+                    self._deduction_order_once_info_list.append(i)
+                else:
+                    self._deduction_order_once_info_list.append(DeductionOrderOnceInfo.from_alipay_dict(i))
     @property
     def deduction_order_type(self):
         return self._deduction_order_type
@@ -144,6 +178,13 @@ class DeductionOrderInfo(object):
     def order_id(self, value):
         self._order_id = value
     @property
+    def payment_no(self):
+        return self._payment_no
+
+    @payment_no.setter
+    def payment_no(self, value):
+        self._payment_no = value
+    @property
     def period(self):
         return self._period
 
@@ -157,6 +198,13 @@ class DeductionOrderInfo(object):
     @plan_deduction_time.setter
     def plan_deduction_time(self, value):
         self._plan_deduction_time = value
+    @property
+    def redeem_way(self):
+        return self._redeem_way
+
+    @redeem_way.setter
+    def redeem_way(self, value):
+        self._redeem_way = value
     @property
     def refund_cash(self):
         return self._refund_cash
@@ -192,6 +240,13 @@ class DeductionOrderInfo(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def user_refuse_reason(self):
+        return self._user_refuse_reason
+
+    @user_refuse_reason.setter
+    def user_refuse_reason(self, value):
+        self._user_refuse_reason = value
 
 
     def to_alipay_dict(self):
@@ -226,6 +281,16 @@ class DeductionOrderInfo(object):
                 params['deduction_amount'] = self.deduction_amount.to_alipay_dict()
             else:
                 params['deduction_amount'] = self.deduction_amount
+        if self.deduction_cash:
+            if hasattr(self.deduction_cash, 'to_alipay_dict'):
+                params['deduction_cash'] = self.deduction_cash.to_alipay_dict()
+            else:
+                params['deduction_cash'] = self.deduction_cash
+        if self.deduction_count:
+            if hasattr(self.deduction_count, 'to_alipay_dict'):
+                params['deduction_count'] = self.deduction_count.to_alipay_dict()
+            else:
+                params['deduction_count'] = self.deduction_count
         if self.deduction_fail_reason:
             if hasattr(self.deduction_fail_reason, 'to_alipay_dict'):
                 params['deduction_fail_reason'] = self.deduction_fail_reason.to_alipay_dict()
@@ -241,6 +306,16 @@ class DeductionOrderInfo(object):
                 params['deduction_order_id'] = self.deduction_order_id.to_alipay_dict()
             else:
                 params['deduction_order_id'] = self.deduction_order_id
+        if self.deduction_order_once_info_list:
+            if isinstance(self.deduction_order_once_info_list, list):
+                for i in range(0, len(self.deduction_order_once_info_list)):
+                    element = self.deduction_order_once_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.deduction_order_once_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.deduction_order_once_info_list, 'to_alipay_dict'):
+                params['deduction_order_once_info_list'] = self.deduction_order_once_info_list.to_alipay_dict()
+            else:
+                params['deduction_order_once_info_list'] = self.deduction_order_once_info_list
         if self.deduction_order_type:
             if hasattr(self.deduction_order_type, 'to_alipay_dict'):
                 params['deduction_order_type'] = self.deduction_order_type.to_alipay_dict()
@@ -276,6 +351,11 @@ class DeductionOrderInfo(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.payment_no:
+            if hasattr(self.payment_no, 'to_alipay_dict'):
+                params['payment_no'] = self.payment_no.to_alipay_dict()
+            else:
+                params['payment_no'] = self.payment_no
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -286,6 +366,11 @@ class DeductionOrderInfo(object):
                 params['plan_deduction_time'] = self.plan_deduction_time.to_alipay_dict()
             else:
                 params['plan_deduction_time'] = self.plan_deduction_time
+        if self.redeem_way:
+            if hasattr(self.redeem_way, 'to_alipay_dict'):
+                params['redeem_way'] = self.redeem_way.to_alipay_dict()
+            else:
+                params['redeem_way'] = self.redeem_way
         if self.refund_cash:
             if hasattr(self.refund_cash, 'to_alipay_dict'):
                 params['refund_cash'] = self.refund_cash.to_alipay_dict()
@@ -311,6 +396,11 @@ class DeductionOrderInfo(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.user_refuse_reason:
+            if hasattr(self.user_refuse_reason, 'to_alipay_dict'):
+                params['user_refuse_reason'] = self.user_refuse_reason.to_alipay_dict()
+            else:
+                params['user_refuse_reason'] = self.user_refuse_reason
         return params
 
     @staticmethod
@@ -328,12 +418,18 @@ class DeductionOrderInfo(object):
             o.certificate_serial = d['certificate_serial']
         if 'deduction_amount' in d:
             o.deduction_amount = d['deduction_amount']
+        if 'deduction_cash' in d:
+            o.deduction_cash = d['deduction_cash']
+        if 'deduction_count' in d:
+            o.deduction_count = d['deduction_count']
         if 'deduction_fail_reason' in d:
             o.deduction_fail_reason = d['deduction_fail_reason']
         if 'deduction_fail_times' in d:
             o.deduction_fail_times = d['deduction_fail_times']
         if 'deduction_order_id' in d:
             o.deduction_order_id = d['deduction_order_id']
+        if 'deduction_order_once_info_list' in d:
+            o.deduction_order_once_info_list = d['deduction_order_once_info_list']
         if 'deduction_order_type' in d:
             o.deduction_order_type = d['deduction_order_type']
         if 'deduction_status' in d:
@@ -348,10 +444,14 @@ class DeductionOrderInfo(object):
             o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'payment_no' in d:
+            o.payment_no = d['payment_no']
         if 'period' in d:
             o.period = d['period']
         if 'plan_deduction_time' in d:
             o.plan_deduction_time = d['plan_deduction_time']
+        if 'redeem_way' in d:
+            o.redeem_way = d['redeem_way']
         if 'refund_cash' in d:
             o.refund_cash = d['refund_cash']
         if 'shop_id' in d:
@@ -362,6 +462,8 @@ class DeductionOrderInfo(object):
             o.trade_no = d['trade_no']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'user_refuse_reason' in d:
+            o.user_refuse_reason = d['user_refuse_reason']
         return o
 
 

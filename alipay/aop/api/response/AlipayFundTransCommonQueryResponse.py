@@ -13,6 +13,7 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._deduct_bill_info = None
         self._error_code = None
         self._fail_reason = None
+        self._inflow_settle_serial_no = None
         self._order_fee = None
         self._order_id = None
         self._out_biz_no = None
@@ -55,6 +56,13 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def inflow_settle_serial_no(self):
+        return self._inflow_settle_serial_no
+
+    @inflow_settle_serial_no.setter
+    def inflow_settle_serial_no(self, value):
+        self._inflow_settle_serial_no = value
     @property
     def order_fee(self):
         return self._order_fee
@@ -157,6 +165,8 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.error_code = response['error_code']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
+        if 'inflow_settle_serial_no' in response:
+            self.inflow_settle_serial_no = response['inflow_settle_serial_no']
         if 'order_fee' in response:
             self.order_fee = response['order_fee']
         if 'order_id' in response:

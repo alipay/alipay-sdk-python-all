@@ -9,6 +9,8 @@ class TransferCarData(object):
 
     def __init__(self):
         self._acid = None
+        self._activity_end_date = None
+        self._activity_start_date = None
         self._attr_car_source_battery_owner_type = None
         self._audit_full_date = None
         self._auto_type = None
@@ -42,6 +44,7 @@ class TransferCarData(object):
         self._transfer_count = None
         self._transfer_date = None
         self._transmission_type = None
+        self._vehicle_display_status = None
 
     @property
     def acid(self):
@@ -50,6 +53,20 @@ class TransferCarData(object):
     @acid.setter
     def acid(self, value):
         self._acid = value
+    @property
+    def activity_end_date(self):
+        return self._activity_end_date
+
+    @activity_end_date.setter
+    def activity_end_date(self, value):
+        self._activity_end_date = value
+    @property
+    def activity_start_date(self):
+        return self._activity_start_date
+
+    @activity_start_date.setter
+    def activity_start_date(self, value):
+        self._activity_start_date = value
     @property
     def attr_car_source_battery_owner_type(self):
         return self._attr_car_source_battery_owner_type
@@ -290,6 +307,13 @@ class TransferCarData(object):
     @transmission_type.setter
     def transmission_type(self, value):
         self._transmission_type = value
+    @property
+    def vehicle_display_status(self):
+        return self._vehicle_display_status
+
+    @vehicle_display_status.setter
+    def vehicle_display_status(self, value):
+        self._vehicle_display_status = value
 
 
     def to_alipay_dict(self):
@@ -299,6 +323,16 @@ class TransferCarData(object):
                 params['acid'] = self.acid.to_alipay_dict()
             else:
                 params['acid'] = self.acid
+        if self.activity_end_date:
+            if hasattr(self.activity_end_date, 'to_alipay_dict'):
+                params['activity_end_date'] = self.activity_end_date.to_alipay_dict()
+            else:
+                params['activity_end_date'] = self.activity_end_date
+        if self.activity_start_date:
+            if hasattr(self.activity_start_date, 'to_alipay_dict'):
+                params['activity_start_date'] = self.activity_start_date.to_alipay_dict()
+            else:
+                params['activity_start_date'] = self.activity_start_date
         if self.attr_car_source_battery_owner_type:
             if hasattr(self.attr_car_source_battery_owner_type, 'to_alipay_dict'):
                 params['attr_car_source_battery_owner_type'] = self.attr_car_source_battery_owner_type.to_alipay_dict()
@@ -479,6 +513,11 @@ class TransferCarData(object):
                 params['transmission_type'] = self.transmission_type.to_alipay_dict()
             else:
                 params['transmission_type'] = self.transmission_type
+        if self.vehicle_display_status:
+            if hasattr(self.vehicle_display_status, 'to_alipay_dict'):
+                params['vehicle_display_status'] = self.vehicle_display_status.to_alipay_dict()
+            else:
+                params['vehicle_display_status'] = self.vehicle_display_status
         return params
 
     @staticmethod
@@ -488,6 +527,10 @@ class TransferCarData(object):
         o = TransferCarData()
         if 'acid' in d:
             o.acid = d['acid']
+        if 'activity_end_date' in d:
+            o.activity_end_date = d['activity_end_date']
+        if 'activity_start_date' in d:
+            o.activity_start_date = d['activity_start_date']
         if 'attr_car_source_battery_owner_type' in d:
             o.attr_car_source_battery_owner_type = d['attr_car_source_battery_owner_type']
         if 'audit_full_date' in d:
@@ -554,6 +597,8 @@ class TransferCarData(object):
             o.transfer_date = d['transfer_date']
         if 'transmission_type' in d:
             o.transmission_type = d['transmission_type']
+        if 'vehicle_display_status' in d:
+            o.vehicle_display_status = d['vehicle_display_status']
         return o
 
 

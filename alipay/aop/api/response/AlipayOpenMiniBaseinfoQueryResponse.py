@@ -16,6 +16,7 @@ class AlipayOpenMiniBaseinfoQueryResponse(AlipayResponse):
         self._app_slogan = None
         self._category_names = None
         self._package_names = None
+        self._registration_limit_release = None
         self._safe_domains = None
         self._service_email = None
         self._service_phone = None
@@ -73,6 +74,13 @@ class AlipayOpenMiniBaseinfoQueryResponse(AlipayResponse):
             for i in value:
                 self._package_names.append(i)
     @property
+    def registration_limit_release(self):
+        return self._registration_limit_release
+
+    @registration_limit_release.setter
+    def registration_limit_release(self, value):
+        self._registration_limit_release = value
+    @property
     def safe_domains(self):
         return self._safe_domains
 
@@ -113,6 +121,8 @@ class AlipayOpenMiniBaseinfoQueryResponse(AlipayResponse):
             self.category_names = response['category_names']
         if 'package_names' in response:
             self.package_names = response['package_names']
+        if 'registration_limit_release' in response:
+            self.registration_limit_release = response['registration_limit_release']
         if 'safe_domains' in response:
             self.safe_domains = response['safe_domains']
         if 'service_email' in response:

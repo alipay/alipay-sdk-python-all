@@ -9,6 +9,7 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
 
     def __init__(self):
         self._card_id = None
+        self._card_type = None
         self._deduction_end_date = None
         self._deduction_start_date = None
         self._deduction_status = None
@@ -27,6 +28,13 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
     @card_id.setter
     def card_id(self, value):
         self._card_id = value
+    @property
+    def card_type(self):
+        return self._card_type
+
+    @card_type.setter
+    def card_type(self, value):
+        self._card_type = value
     @property
     def deduction_end_date(self):
         return self._deduction_end_date
@@ -106,6 +114,11 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
                 params['card_id'] = self.card_id.to_alipay_dict()
             else:
                 params['card_id'] = self.card_id
+        if self.card_type:
+            if hasattr(self.card_type, 'to_alipay_dict'):
+                params['card_type'] = self.card_type.to_alipay_dict()
+            else:
+                params['card_type'] = self.card_type
         if self.deduction_end_date:
             if hasattr(self.deduction_end_date, 'to_alipay_dict'):
                 params['deduction_end_date'] = self.deduction_end_date.to_alipay_dict()
@@ -165,6 +178,8 @@ class AlipayCommerceMerchantcardDeductionorderBatchqueryModel(object):
         o = AlipayCommerceMerchantcardDeductionorderBatchqueryModel()
         if 'card_id' in d:
             o.card_id = d['card_id']
+        if 'card_type' in d:
+            o.card_type = d['card_type']
         if 'deduction_end_date' in d:
             o.deduction_end_date = d['deduction_end_date']
         if 'deduction_start_date' in d:

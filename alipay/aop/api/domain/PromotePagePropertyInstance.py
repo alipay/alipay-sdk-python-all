@@ -10,6 +10,7 @@ class PromotePagePropertyInstance(object):
     def __init__(self):
         self._key = None
         self._name = None
+        self._type = None
         self._value = None
 
     @property
@@ -26,6 +27,13 @@ class PromotePagePropertyInstance(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
     @property
     def value(self):
         return self._value
@@ -47,6 +55,11 @@ class PromotePagePropertyInstance(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.value:
             if hasattr(self.value, 'to_alipay_dict'):
                 params['value'] = self.value.to_alipay_dict()
@@ -63,6 +76,8 @@ class PromotePagePropertyInstance(object):
             o.key = d['key']
         if 'name' in d:
             o.name = d['name']
+        if 'type' in d:
+            o.type = d['type']
         if 'value' in d:
             o.value = d['value']
         return o

@@ -12,6 +12,7 @@ from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.IntactChargeInfo import IntactChargeInfo
 from alipay.aop.api.domain.PaymentInfoWithId import PaymentInfoWithId
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.TapPayInfo import TapPayInfo
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -34,6 +35,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._buyer_user_id = None
         self._buyer_user_name = None
         self._buyer_user_type = None
+        self._cashier_type = None
         self._charge_amount = None
         self._charge_flags = None
         self._charge_info_list = None
@@ -73,6 +75,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._store_id = None
         self._store_name = None
         self._subject = None
+        self._tap_pay_info = None
         self._terminal_id = None
         self._total_amount = None
         self._trade_no = None
@@ -183,6 +186,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @buyer_user_type.setter
     def buyer_user_type(self, value):
         self._buyer_user_type = value
+    @property
+    def cashier_type(self):
+        return self._cashier_type
+
+    @cashier_type.setter
+    def cashier_type(self, value):
+        self._cashier_type = value
     @property
     def charge_amount(self):
         return self._charge_amount
@@ -499,6 +509,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def subject(self, value):
         self._subject = value
     @property
+    def tap_pay_info(self):
+        return self._tap_pay_info
+
+    @tap_pay_info.setter
+    def tap_pay_info(self, value):
+        if isinstance(value, TapPayInfo):
+            self._tap_pay_info = value
+        else:
+            self._tap_pay_info = TapPayInfo.from_alipay_dict(value)
+    @property
     def terminal_id(self):
         return self._terminal_id
 
@@ -594,6 +614,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.buyer_user_name = response['buyer_user_name']
         if 'buyer_user_type' in response:
             self.buyer_user_type = response['buyer_user_type']
+        if 'cashier_type' in response:
+            self.cashier_type = response['cashier_type']
         if 'charge_amount' in response:
             self.charge_amount = response['charge_amount']
         if 'charge_flags' in response:
@@ -672,6 +694,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.store_name = response['store_name']
         if 'subject' in response:
             self.subject = response['subject']
+        if 'tap_pay_info' in response:
+            self.tap_pay_info = response['tap_pay_info']
         if 'terminal_id' in response:
             self.terminal_id = response['terminal_id']
         if 'total_amount' in response:
