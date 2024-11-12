@@ -13,6 +13,7 @@ class AlipayTerminalEdgecloudHeyagentCreateModel(object):
         self._app_name = None
         self._application_id = None
         self._biz_name = None
+        self._boot_type = None
         self._open_id = None
         self._task_time_out_thres = None
         self._uid = None
@@ -53,6 +54,13 @@ class AlipayTerminalEdgecloudHeyagentCreateModel(object):
     @biz_name.setter
     def biz_name(self, value):
         self._biz_name = value
+    @property
+    def boot_type(self):
+        return self._boot_type
+
+    @boot_type.setter
+    def boot_type(self, value):
+        self._boot_type = value
     @property
     def open_id(self):
         return self._open_id
@@ -110,6 +118,11 @@ class AlipayTerminalEdgecloudHeyagentCreateModel(object):
                 params['biz_name'] = self.biz_name.to_alipay_dict()
             else:
                 params['biz_name'] = self.biz_name
+        if self.boot_type:
+            if hasattr(self.boot_type, 'to_alipay_dict'):
+                params['boot_type'] = self.boot_type.to_alipay_dict()
+            else:
+                params['boot_type'] = self.boot_type
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -147,6 +160,8 @@ class AlipayTerminalEdgecloudHeyagentCreateModel(object):
             o.application_id = d['application_id']
         if 'biz_name' in d:
             o.biz_name = d['biz_name']
+        if 'boot_type' in d:
+            o.boot_type = d['boot_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'task_time_out_thres' in d:

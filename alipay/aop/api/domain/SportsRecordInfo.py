@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class SportsRecordInfo(object):
 
     def __init__(self):
+        self._accel_step_frequency = None
         self._calorie = None
         self._distance = None
         self._duration = None
@@ -30,6 +31,13 @@ class SportsRecordInfo(object):
         self._step_info_valid = None
         self._step_stride = None
 
+    @property
+    def accel_step_frequency(self):
+        return self._accel_step_frequency
+
+    @accel_step_frequency.setter
+    def accel_step_frequency(self, value):
+        self._accel_step_frequency = value
     @property
     def calorie(self):
         return self._calorie
@@ -181,6 +189,11 @@ class SportsRecordInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accel_step_frequency:
+            if hasattr(self.accel_step_frequency, 'to_alipay_dict'):
+                params['accel_step_frequency'] = self.accel_step_frequency.to_alipay_dict()
+            else:
+                params['accel_step_frequency'] = self.accel_step_frequency
         if self.calorie:
             if hasattr(self.calorie, 'to_alipay_dict'):
                 params['calorie'] = self.calorie.to_alipay_dict()
@@ -293,6 +306,8 @@ class SportsRecordInfo(object):
         if not d:
             return None
         o = SportsRecordInfo()
+        if 'accel_step_frequency' in d:
+            o.accel_step_frequency = d['accel_step_frequency']
         if 'calorie' in d:
             o.calorie = d['calorie']
         if 'distance' in d:

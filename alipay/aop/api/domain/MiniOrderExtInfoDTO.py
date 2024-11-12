@@ -16,6 +16,7 @@ class MiniOrderExtInfoDTO(object):
         self._order_str = None
         self._order_trade_type = None
         self._out_order_risk_info = None
+        self._submit_order_callback_ext_str = None
         self._trade_no = None
 
     @property
@@ -75,6 +76,13 @@ class MiniOrderExtInfoDTO(object):
     def out_order_risk_info(self, value):
         self._out_order_risk_info = value
     @property
+    def submit_order_callback_ext_str(self):
+        return self._submit_order_callback_ext_str
+
+    @submit_order_callback_ext_str.setter
+    def submit_order_callback_ext_str(self, value):
+        self._submit_order_callback_ext_str = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -125,6 +133,11 @@ class MiniOrderExtInfoDTO(object):
                 params['out_order_risk_info'] = self.out_order_risk_info.to_alipay_dict()
             else:
                 params['out_order_risk_info'] = self.out_order_risk_info
+        if self.submit_order_callback_ext_str:
+            if hasattr(self.submit_order_callback_ext_str, 'to_alipay_dict'):
+                params['submit_order_callback_ext_str'] = self.submit_order_callback_ext_str.to_alipay_dict()
+            else:
+                params['submit_order_callback_ext_str'] = self.submit_order_callback_ext_str
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -153,6 +166,8 @@ class MiniOrderExtInfoDTO(object):
             o.order_trade_type = d['order_trade_type']
         if 'out_order_risk_info' in d:
             o.out_order_risk_info = d['out_order_risk_info']
+        if 'submit_order_callback_ext_str' in d:
+            o.submit_order_callback_ext_str = d['submit_order_callback_ext_str']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         return o

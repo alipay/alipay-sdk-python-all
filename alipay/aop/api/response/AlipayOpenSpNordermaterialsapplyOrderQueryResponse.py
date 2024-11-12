@@ -10,6 +10,7 @@ class AlipayOpenSpNordermaterialsapplyOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenSpNordermaterialsapplyOrderQueryResponse, self).__init__()
         self._apply_status = None
+        self._apply_status_code = None
         self._materials_num = None
         self._refuse_reason = None
         self._shop_num = None
@@ -21,6 +22,13 @@ class AlipayOpenSpNordermaterialsapplyOrderQueryResponse(AlipayResponse):
     @apply_status.setter
     def apply_status(self, value):
         self._apply_status = value
+    @property
+    def apply_status_code(self):
+        return self._apply_status_code
+
+    @apply_status_code.setter
+    def apply_status_code(self, value):
+        self._apply_status_code = value
     @property
     def materials_num(self):
         return self._materials_num
@@ -47,6 +55,8 @@ class AlipayOpenSpNordermaterialsapplyOrderQueryResponse(AlipayResponse):
         response = super(AlipayOpenSpNordermaterialsapplyOrderQueryResponse, self).parse_response_content(response_content)
         if 'apply_status' in response:
             self.apply_status = response['apply_status']
+        if 'apply_status_code' in response:
+            self.apply_status_code = response['apply_status_code']
         if 'materials_num' in response:
             self.materials_num = response['materials_num']
         if 'refuse_reason' in response:

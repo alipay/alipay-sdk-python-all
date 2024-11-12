@@ -11,12 +11,14 @@ class MerchantSettleInInfo(object):
     def __init__(self):
         self._gmt_create = None
         self._gmt_modified = None
+        self._indirect_period_card_status = None
         self._last_apply_orders = None
         self._mcc_code = None
         self._merchant_id = None
         self._name = None
         self._period_card_status = None
         self._status = None
+        self._xian_xiang_times_card_status = None
 
     @property
     def gmt_create(self):
@@ -32,6 +34,13 @@ class MerchantSettleInInfo(object):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def indirect_period_card_status(self):
+        return self._indirect_period_card_status
+
+    @indirect_period_card_status.setter
+    def indirect_period_card_status(self, value):
+        self._indirect_period_card_status = value
     @property
     def last_apply_orders(self):
         return self._last_apply_orders
@@ -80,6 +89,13 @@ class MerchantSettleInInfo(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def xian_xiang_times_card_status(self):
+        return self._xian_xiang_times_card_status
+
+    @xian_xiang_times_card_status.setter
+    def xian_xiang_times_card_status(self, value):
+        self._xian_xiang_times_card_status = value
 
 
     def to_alipay_dict(self):
@@ -94,6 +110,11 @@ class MerchantSettleInInfo(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.indirect_period_card_status:
+            if hasattr(self.indirect_period_card_status, 'to_alipay_dict'):
+                params['indirect_period_card_status'] = self.indirect_period_card_status.to_alipay_dict()
+            else:
+                params['indirect_period_card_status'] = self.indirect_period_card_status
         if self.last_apply_orders:
             if isinstance(self.last_apply_orders, list):
                 for i in range(0, len(self.last_apply_orders)):
@@ -129,6 +150,11 @@ class MerchantSettleInInfo(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.xian_xiang_times_card_status:
+            if hasattr(self.xian_xiang_times_card_status, 'to_alipay_dict'):
+                params['xian_xiang_times_card_status'] = self.xian_xiang_times_card_status.to_alipay_dict()
+            else:
+                params['xian_xiang_times_card_status'] = self.xian_xiang_times_card_status
         return params
 
     @staticmethod
@@ -140,6 +166,8 @@ class MerchantSettleInInfo(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'indirect_period_card_status' in d:
+            o.indirect_period_card_status = d['indirect_period_card_status']
         if 'last_apply_orders' in d:
             o.last_apply_orders = d['last_apply_orders']
         if 'mcc_code' in d:
@@ -152,6 +180,8 @@ class MerchantSettleInInfo(object):
             o.period_card_status = d['period_card_status']
         if 'status' in d:
             o.status = d['status']
+        if 'xian_xiang_times_card_status' in d:
+            o.xian_xiang_times_card_status = d['xian_xiang_times_card_status']
         return o
 
 

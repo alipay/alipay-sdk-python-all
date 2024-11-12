@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CardPropertyCycle import CardPropertyCycle
 from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
 
 
 class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
 
     def __init__(self):
+        self._card_property_cycle = None
         self._card_template_id = None
         self._card_template_name = None
         self._card_type = None
@@ -16,6 +18,16 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
         self._period_price_list = None
         self._sale_price = None
 
+    @property
+    def card_property_cycle(self):
+        return self._card_property_cycle
+
+    @card_property_cycle.setter
+    def card_property_cycle(self, value):
+        if isinstance(value, CardPropertyCycle):
+            self._card_property_cycle = value
+        else:
+            self._card_property_cycle = CardPropertyCycle.from_alipay_dict(value)
     @property
     def card_template_id(self):
         return self._card_template_id
@@ -68,6 +80,11 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_property_cycle:
+            if hasattr(self.card_property_cycle, 'to_alipay_dict'):
+                params['card_property_cycle'] = self.card_property_cycle.to_alipay_dict()
+            else:
+                params['card_property_cycle'] = self.card_property_cycle
         if self.card_template_id:
             if hasattr(self.card_template_id, 'to_alipay_dict'):
                 params['card_template_id'] = self.card_template_id.to_alipay_dict()
@@ -110,6 +127,8 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceMerchantcardPricepropertyCreateModel()
+        if 'card_property_cycle' in d:
+            o.card_property_cycle = d['card_property_cycle']
         if 'card_template_id' in d:
             o.card_template_id = d['card_template_id']
         if 'card_template_name' in d:

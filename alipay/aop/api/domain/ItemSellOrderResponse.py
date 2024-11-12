@@ -15,11 +15,13 @@ class ItemSellOrderResponse(object):
         self._item_name = None
         self._item_price = None
         self._item_type = None
+        self._merchant_discount_amount = None
         self._merchant_order_no = None
         self._order_id = None
         self._order_scene = None
         self._order_status = None
         self._pay_commission = None
+        self._platform_discount_amount = None
         self._pre_receipt_amount = None
         self._pre_user_fund_amount = None
         self._predict_settle_time = None
@@ -85,6 +87,13 @@ class ItemSellOrderResponse(object):
     def item_type(self, value):
         self._item_type = value
     @property
+    def merchant_discount_amount(self):
+        return self._merchant_discount_amount
+
+    @merchant_discount_amount.setter
+    def merchant_discount_amount(self, value):
+        self._merchant_discount_amount = value
+    @property
     def merchant_order_no(self):
         return self._merchant_order_no
 
@@ -119,6 +128,13 @@ class ItemSellOrderResponse(object):
     @pay_commission.setter
     def pay_commission(self, value):
         self._pay_commission = value
+    @property
+    def platform_discount_amount(self):
+        return self._platform_discount_amount
+
+    @platform_discount_amount.setter
+    def platform_discount_amount(self, value):
+        self._platform_discount_amount = value
     @property
     def pre_receipt_amount(self):
         return self._pre_receipt_amount
@@ -256,6 +272,11 @@ class ItemSellOrderResponse(object):
                 params['item_type'] = self.item_type.to_alipay_dict()
             else:
                 params['item_type'] = self.item_type
+        if self.merchant_discount_amount:
+            if hasattr(self.merchant_discount_amount, 'to_alipay_dict'):
+                params['merchant_discount_amount'] = self.merchant_discount_amount.to_alipay_dict()
+            else:
+                params['merchant_discount_amount'] = self.merchant_discount_amount
         if self.merchant_order_no:
             if hasattr(self.merchant_order_no, 'to_alipay_dict'):
                 params['merchant_order_no'] = self.merchant_order_no.to_alipay_dict()
@@ -281,6 +302,11 @@ class ItemSellOrderResponse(object):
                 params['pay_commission'] = self.pay_commission.to_alipay_dict()
             else:
                 params['pay_commission'] = self.pay_commission
+        if self.platform_discount_amount:
+            if hasattr(self.platform_discount_amount, 'to_alipay_dict'):
+                params['platform_discount_amount'] = self.platform_discount_amount.to_alipay_dict()
+            else:
+                params['platform_discount_amount'] = self.platform_discount_amount
         if self.pre_receipt_amount:
             if hasattr(self.pre_receipt_amount, 'to_alipay_dict'):
                 params['pre_receipt_amount'] = self.pre_receipt_amount.to_alipay_dict()
@@ -372,6 +398,8 @@ class ItemSellOrderResponse(object):
             o.item_price = d['item_price']
         if 'item_type' in d:
             o.item_type = d['item_type']
+        if 'merchant_discount_amount' in d:
+            o.merchant_discount_amount = d['merchant_discount_amount']
         if 'merchant_order_no' in d:
             o.merchant_order_no = d['merchant_order_no']
         if 'order_id' in d:
@@ -382,6 +410,8 @@ class ItemSellOrderResponse(object):
             o.order_status = d['order_status']
         if 'pay_commission' in d:
             o.pay_commission = d['pay_commission']
+        if 'platform_discount_amount' in d:
+            o.platform_discount_amount = d['platform_discount_amount']
         if 'pre_receipt_amount' in d:
             o.pre_receipt_amount = d['pre_receipt_amount']
         if 'pre_user_fund_amount' in d:

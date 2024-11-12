@@ -11,6 +11,8 @@ class RiskApiConfig(object):
 
     def __init__(self):
         self._category_risks = None
+        self._deposit_type = None
+        self._evaluation_id = None
         self._quota_gradient_rule = None
 
     @property
@@ -26,6 +28,20 @@ class RiskApiConfig(object):
                     self._category_risks.append(i)
                 else:
                     self._category_risks.append(CategoryRiskInfoApiConfig.from_alipay_dict(i))
+    @property
+    def deposit_type(self):
+        return self._deposit_type
+
+    @deposit_type.setter
+    def deposit_type(self, value):
+        self._deposit_type = value
+    @property
+    def evaluation_id(self):
+        return self._evaluation_id
+
+    @evaluation_id.setter
+    def evaluation_id(self, value):
+        self._evaluation_id = value
     @property
     def quota_gradient_rule(self):
         return self._quota_gradient_rule
@@ -50,6 +66,16 @@ class RiskApiConfig(object):
                 params['category_risks'] = self.category_risks.to_alipay_dict()
             else:
                 params['category_risks'] = self.category_risks
+        if self.deposit_type:
+            if hasattr(self.deposit_type, 'to_alipay_dict'):
+                params['deposit_type'] = self.deposit_type.to_alipay_dict()
+            else:
+                params['deposit_type'] = self.deposit_type
+        if self.evaluation_id:
+            if hasattr(self.evaluation_id, 'to_alipay_dict'):
+                params['evaluation_id'] = self.evaluation_id.to_alipay_dict()
+            else:
+                params['evaluation_id'] = self.evaluation_id
         if self.quota_gradient_rule:
             if hasattr(self.quota_gradient_rule, 'to_alipay_dict'):
                 params['quota_gradient_rule'] = self.quota_gradient_rule.to_alipay_dict()
@@ -64,6 +90,10 @@ class RiskApiConfig(object):
         o = RiskApiConfig()
         if 'category_risks' in d:
             o.category_risks = d['category_risks']
+        if 'deposit_type' in d:
+            o.deposit_type = d['deposit_type']
+        if 'evaluation_id' in d:
+            o.evaluation_id = d['evaluation_id']
         if 'quota_gradient_rule' in d:
             o.quota_gradient_rule = d['quota_gradient_rule']
         return o

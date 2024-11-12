@@ -10,6 +10,7 @@ class ShopDeliveryInfo(object):
     def __init__(self):
         self._delivery_status = None
         self._logistics_code = None
+        self._logistics_name = None
         self._materials_num = None
         self._waybill_no = None
 
@@ -27,6 +28,13 @@ class ShopDeliveryInfo(object):
     @logistics_code.setter
     def logistics_code(self, value):
         self._logistics_code = value
+    @property
+    def logistics_name(self):
+        return self._logistics_name
+
+    @logistics_name.setter
+    def logistics_name(self, value):
+        self._logistics_name = value
     @property
     def materials_num(self):
         return self._materials_num
@@ -55,6 +63,11 @@ class ShopDeliveryInfo(object):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
             else:
                 params['logistics_code'] = self.logistics_code
+        if self.logistics_name:
+            if hasattr(self.logistics_name, 'to_alipay_dict'):
+                params['logistics_name'] = self.logistics_name.to_alipay_dict()
+            else:
+                params['logistics_name'] = self.logistics_name
         if self.materials_num:
             if hasattr(self.materials_num, 'to_alipay_dict'):
                 params['materials_num'] = self.materials_num.to_alipay_dict()
@@ -76,6 +89,8 @@ class ShopDeliveryInfo(object):
             o.delivery_status = d['delivery_status']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
+        if 'logistics_name' in d:
+            o.logistics_name = d['logistics_name']
         if 'materials_num' in d:
             o.materials_num = d['materials_num']
         if 'waybill_no' in d:

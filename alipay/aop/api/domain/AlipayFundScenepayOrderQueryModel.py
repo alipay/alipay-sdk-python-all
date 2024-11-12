@@ -12,6 +12,7 @@ class AlipayFundScenepayOrderQueryModel(object):
         self._biz_scene = None
         self._identity = None
         self._identity_type = None
+        self._name = None
         self._out_biz_no = None
         self._product_code = None
         self._sub_biz_scene = None
@@ -44,6 +45,13 @@ class AlipayFundScenepayOrderQueryModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -89,6 +97,11 @@ class AlipayFundScenepayOrderQueryModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayFundScenepayOrderQueryModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'name' in d:
+            o.name = d['name']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:

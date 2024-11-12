@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class DeductionPlanInfo(object):
 
     def __init__(self):
+        self._certificate_serial_no = None
         self._deduction_amount = None
         self._deduction_plan_status = None
         self._original_amount = None
         self._period = None
         self._plan_deduction_time = None
 
+    @property
+    def certificate_serial_no(self):
+        return self._certificate_serial_no
+
+    @certificate_serial_no.setter
+    def certificate_serial_no(self, value):
+        self._certificate_serial_no = value
     @property
     def deduction_amount(self):
         return self._deduction_amount
@@ -53,6 +61,11 @@ class DeductionPlanInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_serial_no:
+            if hasattr(self.certificate_serial_no, 'to_alipay_dict'):
+                params['certificate_serial_no'] = self.certificate_serial_no.to_alipay_dict()
+            else:
+                params['certificate_serial_no'] = self.certificate_serial_no
         if self.deduction_amount:
             if hasattr(self.deduction_amount, 'to_alipay_dict'):
                 params['deduction_amount'] = self.deduction_amount.to_alipay_dict()
@@ -85,6 +98,8 @@ class DeductionPlanInfo(object):
         if not d:
             return None
         o = DeductionPlanInfo()
+        if 'certificate_serial_no' in d:
+            o.certificate_serial_no = d['certificate_serial_no']
         if 'deduction_amount' in d:
             o.deduction_amount = d['deduction_amount']
         if 'deduction_plan_status' in d:

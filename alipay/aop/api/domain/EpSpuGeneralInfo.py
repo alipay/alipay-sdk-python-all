@@ -12,6 +12,7 @@ class EpSpuGeneralInfo(object):
         self._cate_1_name_std = None
         self._cate_2_code_std = None
         self._cate_2_name_std = None
+        self._confidence = None
         self._confindence = None
         self._item_id = None
         self._item_mark_date = None
@@ -45,6 +46,13 @@ class EpSpuGeneralInfo(object):
     @cate_2_name_std.setter
     def cate_2_name_std(self, value):
         self._cate_2_name_std = value
+    @property
+    def confidence(self):
+        return self._confidence
+
+    @confidence.setter
+    def confidence(self, value):
+        self._confidence = value
     @property
     def confindence(self):
         return self._confindence
@@ -97,6 +105,11 @@ class EpSpuGeneralInfo(object):
                 params['cate_2_name_std'] = self.cate_2_name_std.to_alipay_dict()
             else:
                 params['cate_2_name_std'] = self.cate_2_name_std
+        if self.confidence:
+            if hasattr(self.confidence, 'to_alipay_dict'):
+                params['confidence'] = self.confidence.to_alipay_dict()
+            else:
+                params['confidence'] = self.confidence
         if self.confindence:
             if hasattr(self.confindence, 'to_alipay_dict'):
                 params['confindence'] = self.confindence.to_alipay_dict()
@@ -132,6 +145,8 @@ class EpSpuGeneralInfo(object):
             o.cate_2_code_std = d['cate_2_code_std']
         if 'cate_2_name_std' in d:
             o.cate_2_name_std = d['cate_2_name_std']
+        if 'confidence' in d:
+            o.confidence = d['confidence']
         if 'confindence' in d:
             o.confindence = d['confindence']
         if 'item_id' in d:

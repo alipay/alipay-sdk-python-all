@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BillFeeInfo import BillFeeInfo
+from alipay.aop.api.domain.DamagesInfo import DamagesInfo
 from alipay.aop.api.domain.DeductionOrderOnceInfo import DeductionOrderOnceInfo
 
 
@@ -14,6 +15,7 @@ class DeductionOrderInfo(object):
         self._card_id = None
         self._certificate_id = None
         self._certificate_serial = None
+        self._damages_info = None
         self._deduction_amount = None
         self._deduction_cash = None
         self._deduction_count = None
@@ -73,6 +75,16 @@ class DeductionOrderInfo(object):
     @certificate_serial.setter
     def certificate_serial(self, value):
         self._certificate_serial = value
+    @property
+    def damages_info(self):
+        return self._damages_info
+
+    @damages_info.setter
+    def damages_info(self, value):
+        if isinstance(value, DamagesInfo):
+            self._damages_info = value
+        else:
+            self._damages_info = DamagesInfo.from_alipay_dict(value)
     @property
     def deduction_amount(self):
         return self._deduction_amount
@@ -276,6 +288,11 @@ class DeductionOrderInfo(object):
                 params['certificate_serial'] = self.certificate_serial.to_alipay_dict()
             else:
                 params['certificate_serial'] = self.certificate_serial
+        if self.damages_info:
+            if hasattr(self.damages_info, 'to_alipay_dict'):
+                params['damages_info'] = self.damages_info.to_alipay_dict()
+            else:
+                params['damages_info'] = self.damages_info
         if self.deduction_amount:
             if hasattr(self.deduction_amount, 'to_alipay_dict'):
                 params['deduction_amount'] = self.deduction_amount.to_alipay_dict()
@@ -416,6 +433,8 @@ class DeductionOrderInfo(object):
             o.certificate_id = d['certificate_id']
         if 'certificate_serial' in d:
             o.certificate_serial = d['certificate_serial']
+        if 'damages_info' in d:
+            o.damages_info = d['damages_info']
         if 'deduction_amount' in d:
             o.deduction_amount = d['deduction_amount']
         if 'deduction_cash' in d:

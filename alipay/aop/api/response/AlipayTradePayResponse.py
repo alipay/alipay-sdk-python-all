@@ -7,6 +7,7 @@ from alipay.aop.api.domain.BkAgentRespInfo import BkAgentRespInfo
 from alipay.aop.api.domain.ChargeInfo import ChargeInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
+from alipay.aop.api.domain.TapPayInfo import TapPayInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
 
@@ -46,6 +47,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._pay_amount = None
         self._pay_currency = None
         self._point_amount = None
+        self._pre_auth_pay_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
         self._settle_amount = None
@@ -53,6 +55,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._settle_trans_rate = None
         self._settlement_id = None
         self._store_name = None
+        self._tap_pay_info = None
         self._total_amount = None
         self._trade_no = None
         self._trans_currency = None
@@ -299,6 +302,13 @@ class AlipayTradePayResponse(AlipayResponse):
     def point_amount(self, value):
         self._point_amount = value
     @property
+    def pre_auth_pay_amount(self):
+        return self._pre_auth_pay_amount
+
+    @pre_auth_pay_amount.setter
+    def pre_auth_pay_amount(self, value):
+        self._pre_auth_pay_amount = value
+    @property
     def receipt_amount(self):
         return self._receipt_amount
 
@@ -347,6 +357,16 @@ class AlipayTradePayResponse(AlipayResponse):
     @store_name.setter
     def store_name(self, value):
         self._store_name = value
+    @property
+    def tap_pay_info(self):
+        return self._tap_pay_info
+
+    @tap_pay_info.setter
+    def tap_pay_info(self, value):
+        if isinstance(value, TapPayInfo):
+            self._tap_pay_info = value
+        else:
+            self._tap_pay_info = TapPayInfo.from_alipay_dict(value)
     @property
     def total_amount(self):
         return self._total_amount
@@ -455,6 +475,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.pay_currency = response['pay_currency']
         if 'point_amount' in response:
             self.point_amount = response['point_amount']
+        if 'pre_auth_pay_amount' in response:
+            self.pre_auth_pay_amount = response['pre_auth_pay_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
         if 'receipt_currency_type' in response:
@@ -469,6 +491,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.settlement_id = response['settlement_id']
         if 'store_name' in response:
             self.store_name = response['store_name']
+        if 'tap_pay_info' in response:
+            self.tap_pay_info = response['tap_pay_info']
         if 'total_amount' in response:
             self.total_amount = response['total_amount']
         if 'trade_no' in response:

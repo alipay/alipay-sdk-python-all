@@ -12,12 +12,16 @@ class EpSpuSpecificInfo(object):
         self._cate_1_code_std = None
         self._cate_1_name_cbu = None
         self._cate_1_name_std = None
+        self._cate_1_pro_cnt = None
         self._cate_2_code_cbu = None
         self._cate_2_code_std = None
         self._cate_2_name_cbu = None
         self._cate_2_name_std = None
+        self._cate_2_pro_cnt = None
         self._cate_3_code_cbu = None
         self._cate_3_name_cbu = None
+        self._cate_3_pro_cnt = None
+        self._confidence = None
         self._confindence = None
         self._item_id = None
         self._item_mark_date = None
@@ -52,6 +56,13 @@ class EpSpuSpecificInfo(object):
     def cate_1_name_std(self, value):
         self._cate_1_name_std = value
     @property
+    def cate_1_pro_cnt(self):
+        return self._cate_1_pro_cnt
+
+    @cate_1_pro_cnt.setter
+    def cate_1_pro_cnt(self, value):
+        self._cate_1_pro_cnt = value
+    @property
     def cate_2_code_cbu(self):
         return self._cate_2_code_cbu
 
@@ -80,6 +91,13 @@ class EpSpuSpecificInfo(object):
     def cate_2_name_std(self, value):
         self._cate_2_name_std = value
     @property
+    def cate_2_pro_cnt(self):
+        return self._cate_2_pro_cnt
+
+    @cate_2_pro_cnt.setter
+    def cate_2_pro_cnt(self, value):
+        self._cate_2_pro_cnt = value
+    @property
     def cate_3_code_cbu(self):
         return self._cate_3_code_cbu
 
@@ -93,6 +111,20 @@ class EpSpuSpecificInfo(object):
     @cate_3_name_cbu.setter
     def cate_3_name_cbu(self, value):
         self._cate_3_name_cbu = value
+    @property
+    def cate_3_pro_cnt(self):
+        return self._cate_3_pro_cnt
+
+    @cate_3_pro_cnt.setter
+    def cate_3_pro_cnt(self, value):
+        self._cate_3_pro_cnt = value
+    @property
+    def confidence(self):
+        return self._confidence
+
+    @confidence.setter
+    def confidence(self, value):
+        self._confidence = value
     @property
     def confindence(self):
         return self._confindence
@@ -145,6 +177,11 @@ class EpSpuSpecificInfo(object):
                 params['cate_1_name_std'] = self.cate_1_name_std.to_alipay_dict()
             else:
                 params['cate_1_name_std'] = self.cate_1_name_std
+        if self.cate_1_pro_cnt:
+            if hasattr(self.cate_1_pro_cnt, 'to_alipay_dict'):
+                params['cate_1_pro_cnt'] = self.cate_1_pro_cnt.to_alipay_dict()
+            else:
+                params['cate_1_pro_cnt'] = self.cate_1_pro_cnt
         if self.cate_2_code_cbu:
             if hasattr(self.cate_2_code_cbu, 'to_alipay_dict'):
                 params['cate_2_code_cbu'] = self.cate_2_code_cbu.to_alipay_dict()
@@ -165,6 +202,11 @@ class EpSpuSpecificInfo(object):
                 params['cate_2_name_std'] = self.cate_2_name_std.to_alipay_dict()
             else:
                 params['cate_2_name_std'] = self.cate_2_name_std
+        if self.cate_2_pro_cnt:
+            if hasattr(self.cate_2_pro_cnt, 'to_alipay_dict'):
+                params['cate_2_pro_cnt'] = self.cate_2_pro_cnt.to_alipay_dict()
+            else:
+                params['cate_2_pro_cnt'] = self.cate_2_pro_cnt
         if self.cate_3_code_cbu:
             if hasattr(self.cate_3_code_cbu, 'to_alipay_dict'):
                 params['cate_3_code_cbu'] = self.cate_3_code_cbu.to_alipay_dict()
@@ -175,6 +217,16 @@ class EpSpuSpecificInfo(object):
                 params['cate_3_name_cbu'] = self.cate_3_name_cbu.to_alipay_dict()
             else:
                 params['cate_3_name_cbu'] = self.cate_3_name_cbu
+        if self.cate_3_pro_cnt:
+            if hasattr(self.cate_3_pro_cnt, 'to_alipay_dict'):
+                params['cate_3_pro_cnt'] = self.cate_3_pro_cnt.to_alipay_dict()
+            else:
+                params['cate_3_pro_cnt'] = self.cate_3_pro_cnt
+        if self.confidence:
+            if hasattr(self.confidence, 'to_alipay_dict'):
+                params['confidence'] = self.confidence.to_alipay_dict()
+            else:
+                params['confidence'] = self.confidence
         if self.confindence:
             if hasattr(self.confindence, 'to_alipay_dict'):
                 params['confindence'] = self.confindence.to_alipay_dict()
@@ -210,6 +262,8 @@ class EpSpuSpecificInfo(object):
             o.cate_1_name_cbu = d['cate_1_name_cbu']
         if 'cate_1_name_std' in d:
             o.cate_1_name_std = d['cate_1_name_std']
+        if 'cate_1_pro_cnt' in d:
+            o.cate_1_pro_cnt = d['cate_1_pro_cnt']
         if 'cate_2_code_cbu' in d:
             o.cate_2_code_cbu = d['cate_2_code_cbu']
         if 'cate_2_code_std' in d:
@@ -218,10 +272,16 @@ class EpSpuSpecificInfo(object):
             o.cate_2_name_cbu = d['cate_2_name_cbu']
         if 'cate_2_name_std' in d:
             o.cate_2_name_std = d['cate_2_name_std']
+        if 'cate_2_pro_cnt' in d:
+            o.cate_2_pro_cnt = d['cate_2_pro_cnt']
         if 'cate_3_code_cbu' in d:
             o.cate_3_code_cbu = d['cate_3_code_cbu']
         if 'cate_3_name_cbu' in d:
             o.cate_3_name_cbu = d['cate_3_name_cbu']
+        if 'cate_3_pro_cnt' in d:
+            o.cate_3_pro_cnt = d['cate_3_pro_cnt']
+        if 'confidence' in d:
+            o.confidence = d['confidence']
         if 'confindence' in d:
             o.confindence = d['confindence']
         if 'item_id' in d:

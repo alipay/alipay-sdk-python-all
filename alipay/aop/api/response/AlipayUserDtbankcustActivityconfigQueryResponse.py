@@ -26,6 +26,8 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         self._crowd_info = None
         self._preference_type_info = None
         self._use_scene = None
+        self._voucher_template_id = None
+        self._white_list_info = None
 
     @property
     def activity_id(self):
@@ -122,6 +124,20 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
     @use_scene.setter
     def use_scene(self, value):
         self._use_scene = value
+    @property
+    def voucher_template_id(self):
+        return self._voucher_template_id
+
+    @voucher_template_id.setter
+    def voucher_template_id(self, value):
+        self._voucher_template_id = value
+    @property
+    def white_list_info(self):
+        return self._white_list_info
+
+    @white_list_info.setter
+    def white_list_info(self, value):
+        self._white_list_info = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserDtbankcustActivityconfigQueryResponse, self).parse_response_content(response_content)
@@ -147,3 +163,7 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
             self.preference_type_info = response['preference_type_info']
         if 'use_scene' in response:
             self.use_scene = response['use_scene']
+        if 'voucher_template_id' in response:
+            self.voucher_template_id = response['voucher_template_id']
+        if 'white_list_info' in response:
+            self.white_list_info = response['white_list_info']

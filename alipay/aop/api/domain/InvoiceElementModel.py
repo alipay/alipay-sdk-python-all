@@ -12,6 +12,7 @@ class InvoiceElementModel(object):
         self._expense_status = None
         self._extend_fields = None
         self._fake_code = None
+        self._file_type = None
         self._has_pdf_file = None
         self._has_risk = None
         self._invoice_amount = None
@@ -56,6 +57,13 @@ class InvoiceElementModel(object):
     @fake_code.setter
     def fake_code(self, value):
         self._fake_code = value
+    @property
+    def file_type(self):
+        return self._file_type
+
+    @file_type.setter
+    def file_type(self, value):
+        self._file_type = value
     @property
     def has_pdf_file(self):
         return self._has_pdf_file
@@ -235,6 +243,11 @@ class InvoiceElementModel(object):
                 params['fake_code'] = self.fake_code.to_alipay_dict()
             else:
                 params['fake_code'] = self.fake_code
+        if self.file_type:
+            if hasattr(self.file_type, 'to_alipay_dict'):
+                params['file_type'] = self.file_type.to_alipay_dict()
+            else:
+                params['file_type'] = self.file_type
         if self.has_pdf_file:
             if hasattr(self.has_pdf_file, 'to_alipay_dict'):
                 params['has_pdf_file'] = self.has_pdf_file.to_alipay_dict()
@@ -363,6 +376,8 @@ class InvoiceElementModel(object):
             o.extend_fields = d['extend_fields']
         if 'fake_code' in d:
             o.fake_code = d['fake_code']
+        if 'file_type' in d:
+            o.file_type = d['file_type']
         if 'has_pdf_file' in d:
             o.has_pdf_file = d['has_pdf_file']
         if 'has_risk' in d:

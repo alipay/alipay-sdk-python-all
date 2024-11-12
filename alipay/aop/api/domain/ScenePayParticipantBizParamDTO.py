@@ -12,6 +12,7 @@ class ScenePayParticipantBizParamDTO(object):
         self._cert_no = None
         self._cert_type = None
         self._channel_id = None
+        self._city_traffic_industry_tag = None
         self._out_card_no = None
         self._user_name = None
 
@@ -43,6 +44,13 @@ class ScenePayParticipantBizParamDTO(object):
     @channel_id.setter
     def channel_id(self, value):
         self._channel_id = value
+    @property
+    def city_traffic_industry_tag(self):
+        return self._city_traffic_industry_tag
+
+    @city_traffic_industry_tag.setter
+    def city_traffic_industry_tag(self, value):
+        self._city_traffic_industry_tag = value
     @property
     def out_card_no(self):
         return self._out_card_no
@@ -81,6 +89,11 @@ class ScenePayParticipantBizParamDTO(object):
                 params['channel_id'] = self.channel_id.to_alipay_dict()
             else:
                 params['channel_id'] = self.channel_id
+        if self.city_traffic_industry_tag:
+            if hasattr(self.city_traffic_industry_tag, 'to_alipay_dict'):
+                params['city_traffic_industry_tag'] = self.city_traffic_industry_tag.to_alipay_dict()
+            else:
+                params['city_traffic_industry_tag'] = self.city_traffic_industry_tag
         if self.out_card_no:
             if hasattr(self.out_card_no, 'to_alipay_dict'):
                 params['out_card_no'] = self.out_card_no.to_alipay_dict()
@@ -106,6 +119,8 @@ class ScenePayParticipantBizParamDTO(object):
             o.cert_type = d['cert_type']
         if 'channel_id' in d:
             o.channel_id = d['channel_id']
+        if 'city_traffic_industry_tag' in d:
+            o.city_traffic_industry_tag = d['city_traffic_industry_tag']
         if 'out_card_no' in d:
             o.out_card_no = d['out_card_no']
         if 'user_name' in d:

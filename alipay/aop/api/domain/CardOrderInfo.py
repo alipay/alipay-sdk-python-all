@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AxfCardBindInfo import AxfCardBindInfo
+from alipay.aop.api.domain.DamagesConsultInfo import DamagesConsultInfo
+from alipay.aop.api.domain.DamagesInfo import DamagesInfo
 from alipay.aop.api.domain.DeductionPlanInfo import DeductionPlanInfo
 
 
@@ -19,10 +21,13 @@ class CardOrderInfo(object):
         self._card_template_id = None
         self._card_type = None
         self._create_date = None
+        self._damages_consult = None
+        self._damages_info = None
         self._deduction_plan_list = None
         self._discount_cash = None
         self._discount_plan_cash = None
         self._discount_refund_cash = None
+        self._funding_model = None
         self._gmt_active = None
         self._gmt_expired = None
         self._merchant_pid = None
@@ -110,6 +115,26 @@ class CardOrderInfo(object):
     def create_date(self, value):
         self._create_date = value
     @property
+    def damages_consult(self):
+        return self._damages_consult
+
+    @damages_consult.setter
+    def damages_consult(self, value):
+        if isinstance(value, DamagesConsultInfo):
+            self._damages_consult = value
+        else:
+            self._damages_consult = DamagesConsultInfo.from_alipay_dict(value)
+    @property
+    def damages_info(self):
+        return self._damages_info
+
+    @damages_info.setter
+    def damages_info(self, value):
+        if isinstance(value, DamagesInfo):
+            self._damages_info = value
+        else:
+            self._damages_info = DamagesInfo.from_alipay_dict(value)
+    @property
     def deduction_plan_list(self):
         return self._deduction_plan_list
 
@@ -143,6 +168,13 @@ class CardOrderInfo(object):
     @discount_refund_cash.setter
     def discount_refund_cash(self, value):
         self._discount_refund_cash = value
+    @property
+    def funding_model(self):
+        return self._funding_model
+
+    @funding_model.setter
+    def funding_model(self, value):
+        self._funding_model = value
     @property
     def gmt_active(self):
         return self._gmt_active
@@ -325,6 +357,16 @@ class CardOrderInfo(object):
                 params['create_date'] = self.create_date.to_alipay_dict()
             else:
                 params['create_date'] = self.create_date
+        if self.damages_consult:
+            if hasattr(self.damages_consult, 'to_alipay_dict'):
+                params['damages_consult'] = self.damages_consult.to_alipay_dict()
+            else:
+                params['damages_consult'] = self.damages_consult
+        if self.damages_info:
+            if hasattr(self.damages_info, 'to_alipay_dict'):
+                params['damages_info'] = self.damages_info.to_alipay_dict()
+            else:
+                params['damages_info'] = self.damages_info
         if self.deduction_plan_list:
             if isinstance(self.deduction_plan_list, list):
                 for i in range(0, len(self.deduction_plan_list)):
@@ -350,6 +392,11 @@ class CardOrderInfo(object):
                 params['discount_refund_cash'] = self.discount_refund_cash.to_alipay_dict()
             else:
                 params['discount_refund_cash'] = self.discount_refund_cash
+        if self.funding_model:
+            if hasattr(self.funding_model, 'to_alipay_dict'):
+                params['funding_model'] = self.funding_model.to_alipay_dict()
+            else:
+                params['funding_model'] = self.funding_model
         if self.gmt_active:
             if hasattr(self.gmt_active, 'to_alipay_dict'):
                 params['gmt_active'] = self.gmt_active.to_alipay_dict()
@@ -470,6 +517,10 @@ class CardOrderInfo(object):
             o.card_type = d['card_type']
         if 'create_date' in d:
             o.create_date = d['create_date']
+        if 'damages_consult' in d:
+            o.damages_consult = d['damages_consult']
+        if 'damages_info' in d:
+            o.damages_info = d['damages_info']
         if 'deduction_plan_list' in d:
             o.deduction_plan_list = d['deduction_plan_list']
         if 'discount_cash' in d:
@@ -478,6 +529,8 @@ class CardOrderInfo(object):
             o.discount_plan_cash = d['discount_plan_cash']
         if 'discount_refund_cash' in d:
             o.discount_refund_cash = d['discount_refund_cash']
+        if 'funding_model' in d:
+            o.funding_model = d['funding_model']
         if 'gmt_active' in d:
             o.gmt_active = d['gmt_active']
         if 'gmt_expired' in d:

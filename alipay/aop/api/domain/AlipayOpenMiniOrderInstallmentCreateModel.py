@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InstallmentNoInfoDTO import InstallmentNoInfoDTO
 
 
 class AlipayOpenMiniOrderInstallmentCreateModel(object):
@@ -10,6 +11,7 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     def __init__(self):
         self._addon_period_num = None
         self._installment_no = None
+        self._installment_no_info_list = None
         self._installment_no_type = None
         self._installment_price = None
         self._is_finish_performance = None
@@ -39,6 +41,19 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     @installment_no.setter
     def installment_no(self, value):
         self._installment_no = value
+    @property
+    def installment_no_info_list(self):
+        return self._installment_no_info_list
+
+    @installment_no_info_list.setter
+    def installment_no_info_list(self, value):
+        if isinstance(value, list):
+            self._installment_no_info_list = list()
+            for i in value:
+                if isinstance(i, InstallmentNoInfoDTO):
+                    self._installment_no_info_list.append(i)
+                else:
+                    self._installment_no_info_list.append(InstallmentNoInfoDTO.from_alipay_dict(i))
     @property
     def installment_no_type(self):
         return self._installment_no_type
@@ -151,6 +166,16 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['installment_no'] = self.installment_no.to_alipay_dict()
             else:
                 params['installment_no'] = self.installment_no
+        if self.installment_no_info_list:
+            if isinstance(self.installment_no_info_list, list):
+                for i in range(0, len(self.installment_no_info_list)):
+                    element = self.installment_no_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.installment_no_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.installment_no_info_list, 'to_alipay_dict'):
+                params['installment_no_info_list'] = self.installment_no_info_list.to_alipay_dict()
+            else:
+                params['installment_no_info_list'] = self.installment_no_info_list
         if self.installment_no_type:
             if hasattr(self.installment_no_type, 'to_alipay_dict'):
                 params['installment_no_type'] = self.installment_no_type.to_alipay_dict()
@@ -232,6 +257,8 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
             o.addon_period_num = d['addon_period_num']
         if 'installment_no' in d:
             o.installment_no = d['installment_no']
+        if 'installment_no_info_list' in d:
+            o.installment_no_info_list = d['installment_no_info_list']
         if 'installment_no_type' in d:
             o.installment_no_type = d['installment_no_type']
         if 'installment_price' in d:

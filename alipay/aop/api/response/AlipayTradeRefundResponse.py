@@ -21,6 +21,7 @@ class AlipayTradeRefundResponse(AlipayResponse):
         self._has_deposit_back = None
         self._open_id = None
         self._out_trade_no = None
+        self._pre_auth_cancel_fee = None
         self._present_refund_buyer_amount = None
         self._present_refund_discount_amount = None
         self._present_refund_mdiscount_amount = None
@@ -93,6 +94,13 @@ class AlipayTradeRefundResponse(AlipayResponse):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def pre_auth_cancel_fee(self):
+        return self._pre_auth_cancel_fee
+
+    @pre_auth_cancel_fee.setter
+    def pre_auth_cancel_fee(self, value):
+        self._pre_auth_cancel_fee = value
     @property
     def present_refund_buyer_amount(self):
         return self._present_refund_buyer_amount
@@ -238,6 +246,8 @@ class AlipayTradeRefundResponse(AlipayResponse):
             self.open_id = response['open_id']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'pre_auth_cancel_fee' in response:
+            self.pre_auth_cancel_fee = response['pre_auth_cancel_fee']
         if 'present_refund_buyer_amount' in response:
             self.present_refund_buyer_amount = response['present_refund_buyer_amount']
         if 'present_refund_discount_amount' in response:

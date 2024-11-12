@@ -10,6 +10,7 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenSpNordermaterialsapplyOrderCreateResponse, self).__init__()
         self._apply_id = None
+        self._biz_scene_code = None
         self._materials_template_type = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateResponse(AlipayResponse):
     @apply_id.setter
     def apply_id(self, value):
         self._apply_id = value
+    @property
+    def biz_scene_code(self):
+        return self._biz_scene_code
+
+    @biz_scene_code.setter
+    def biz_scene_code(self, value):
+        self._biz_scene_code = value
     @property
     def materials_template_type(self):
         return self._materials_template_type
@@ -31,5 +39,7 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateResponse(AlipayResponse):
         response = super(AlipayOpenSpNordermaterialsapplyOrderCreateResponse, self).parse_response_content(response_content)
         if 'apply_id' in response:
             self.apply_id = response['apply_id']
+        if 'biz_scene_code' in response:
+            self.biz_scene_code = response['biz_scene_code']
         if 'materials_template_type' in response:
             self.materials_template_type = response['materials_template_type']

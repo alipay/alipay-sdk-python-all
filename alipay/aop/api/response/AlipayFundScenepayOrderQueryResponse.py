@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ScenePayBusinessParamDTO import ScenePayBusinessParamDTO
+from alipay.aop.api.domain.ScenePayParticipantInfoDTO import ScenePayParticipantInfoDTO
 
 
 class AlipayFundScenepayOrderQueryResponse(AlipayResponse):
@@ -19,6 +20,7 @@ class AlipayFundScenepayOrderQueryResponse(AlipayResponse):
         self._order_status = None
         self._out_biz_no = None
         self._out_trade_no = None
+        self._partner_info = None
         self._refund_detail_list = None
         self._total_amount = None
         self._trade_no = None
@@ -90,6 +92,16 @@ class AlipayFundScenepayOrderQueryResponse(AlipayResponse):
     def out_trade_no(self, value):
         self._out_trade_no = value
     @property
+    def partner_info(self):
+        return self._partner_info
+
+    @partner_info.setter
+    def partner_info(self, value):
+        if isinstance(value, ScenePayParticipantInfoDTO):
+            self._partner_info = value
+        else:
+            self._partner_info = ScenePayParticipantInfoDTO.from_alipay_dict(value)
+    @property
     def refund_detail_list(self):
         return self._refund_detail_list
 
@@ -131,6 +143,8 @@ class AlipayFundScenepayOrderQueryResponse(AlipayResponse):
             self.out_biz_no = response['out_biz_no']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'partner_info' in response:
+            self.partner_info = response['partner_info']
         if 'refund_detail_list' in response:
             self.refund_detail_list = response['refund_detail_list']
         if 'total_amount' in response:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BaseInfoApiConfig import BaseInfoApiConfig
+from alipay.aop.api.domain.RiskApiConfig import RiskApiConfig
 from alipay.aop.api.domain.PromiseApiConfig import PromiseApiConfig
 from alipay.aop.api.domain.RiskApiConfig import RiskApiConfig
 
@@ -15,6 +16,7 @@ class ZhimaMerchantCreditserviceQueryResponse(AlipayResponse):
         self._base_info_config = None
         self._create_type = None
         self._credit_service_id = None
+        self._evaluation_risk_configs = None
         self._gmt_create = None
         self._gmt_modified = None
         self._gmt_offline = None
@@ -56,6 +58,19 @@ class ZhimaMerchantCreditserviceQueryResponse(AlipayResponse):
     @credit_service_id.setter
     def credit_service_id(self, value):
         self._credit_service_id = value
+    @property
+    def evaluation_risk_configs(self):
+        return self._evaluation_risk_configs
+
+    @evaluation_risk_configs.setter
+    def evaluation_risk_configs(self, value):
+        if isinstance(value, list):
+            self._evaluation_risk_configs = list()
+            for i in value:
+                if isinstance(i, RiskApiConfig):
+                    self._evaluation_risk_configs.append(i)
+                else:
+                    self._evaluation_risk_configs.append(RiskApiConfig.from_alipay_dict(i))
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -183,6 +198,8 @@ class ZhimaMerchantCreditserviceQueryResponse(AlipayResponse):
             self.create_type = response['create_type']
         if 'credit_service_id' in response:
             self.credit_service_id = response['credit_service_id']
+        if 'evaluation_risk_configs' in response:
+            self.evaluation_risk_configs = response['evaluation_risk_configs']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
         if 'gmt_modified' in response:

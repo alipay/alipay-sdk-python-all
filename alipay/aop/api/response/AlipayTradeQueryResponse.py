@@ -64,6 +64,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._payment_info_with_id_list = None
         self._period_scene = None
         self._point_amount = None
+        self._pre_auth_pay_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
         self._req_goods_detail = None
@@ -426,6 +427,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def point_amount(self, value):
         self._point_amount = value
     @property
+    def pre_auth_pay_amount(self):
+        return self._pre_auth_pay_amount
+
+    @pre_auth_pay_amount.setter
+    def pre_auth_pay_amount(self, value):
+        self._pre_auth_pay_amount = value
+    @property
     def receipt_amount(self):
         return self._receipt_amount
 
@@ -672,6 +680,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.period_scene = response['period_scene']
         if 'point_amount' in response:
             self.point_amount = response['point_amount']
+        if 'pre_auth_pay_amount' in response:
+            self.pre_auth_pay_amount = response['pre_auth_pay_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
         if 'receipt_currency_type' in response:

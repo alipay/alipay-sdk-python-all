@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BaseInfoApiConfig import BaseInfoApiConfig
+from alipay.aop.api.domain.RiskApiConfig import RiskApiConfig
 from alipay.aop.api.domain.ExtInfoApiConfig import ExtInfoApiConfig
 from alipay.aop.api.domain.PromiseApiConfig import PromiseApiConfig
 from alipay.aop.api.domain.RiskApiConfig import RiskApiConfig
@@ -15,6 +16,7 @@ class ZhimaMerchantCreditserviceCreateModel(object):
         self._base_info_config = None
         self._biz_no = None
         self._create_type = None
+        self._evaluation_risk_configs = None
         self._ext_info_config = None
         self._promise_config = None
         self._risk_config = None
@@ -46,6 +48,19 @@ class ZhimaMerchantCreditserviceCreateModel(object):
     @create_type.setter
     def create_type(self, value):
         self._create_type = value
+    @property
+    def evaluation_risk_configs(self):
+        return self._evaluation_risk_configs
+
+    @evaluation_risk_configs.setter
+    def evaluation_risk_configs(self, value):
+        if isinstance(value, list):
+            self._evaluation_risk_configs = list()
+            for i in value:
+                if isinstance(i, RiskApiConfig):
+                    self._evaluation_risk_configs.append(i)
+                else:
+                    self._evaluation_risk_configs.append(RiskApiConfig.from_alipay_dict(i))
     @property
     def ext_info_config(self):
         return self._ext_info_config
@@ -116,6 +131,16 @@ class ZhimaMerchantCreditserviceCreateModel(object):
                 params['create_type'] = self.create_type.to_alipay_dict()
             else:
                 params['create_type'] = self.create_type
+        if self.evaluation_risk_configs:
+            if isinstance(self.evaluation_risk_configs, list):
+                for i in range(0, len(self.evaluation_risk_configs)):
+                    element = self.evaluation_risk_configs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.evaluation_risk_configs[i] = element.to_alipay_dict()
+            if hasattr(self.evaluation_risk_configs, 'to_alipay_dict'):
+                params['evaluation_risk_configs'] = self.evaluation_risk_configs.to_alipay_dict()
+            else:
+                params['evaluation_risk_configs'] = self.evaluation_risk_configs
         if self.ext_info_config:
             if hasattr(self.ext_info_config, 'to_alipay_dict'):
                 params['ext_info_config'] = self.ext_info_config.to_alipay_dict()
@@ -159,6 +184,8 @@ class ZhimaMerchantCreditserviceCreateModel(object):
             o.biz_no = d['biz_no']
         if 'create_type' in d:
             o.create_type = d['create_type']
+        if 'evaluation_risk_configs' in d:
+            o.evaluation_risk_configs = d['evaluation_risk_configs']
         if 'ext_info_config' in d:
             o.ext_info_config = d['ext_info_config']
         if 'promise_config' in d:

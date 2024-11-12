@@ -28,6 +28,7 @@ class AlipayEbppIndustryJobDailySyncModel(object):
         self._part_time_mode = None
         self._pay_period = None
         self._salary = None
+        self._source = None
         self._start_date = None
         self._work_interval_end = None
         self._work_interval_start = None
@@ -177,6 +178,13 @@ class AlipayEbppIndustryJobDailySyncModel(object):
     def salary(self, value):
         self._salary = value
     @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
     def start_date(self):
         return self._start_date
 
@@ -320,6 +328,11 @@ class AlipayEbppIndustryJobDailySyncModel(object):
                 params['salary'] = self.salary.to_alipay_dict()
             else:
                 params['salary'] = self.salary
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -390,6 +403,8 @@ class AlipayEbppIndustryJobDailySyncModel(object):
             o.pay_period = d['pay_period']
         if 'salary' in d:
             o.salary = d['salary']
+        if 'source' in d:
+            o.source = d['source']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'work_interval_end' in d:

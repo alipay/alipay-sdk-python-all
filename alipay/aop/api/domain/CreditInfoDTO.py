@@ -9,6 +9,8 @@ class CreditInfoDTO(object):
 
     def __init__(self):
         self._acceptance_jump_url = None
+        self._credit_deposit_period_pay_type = None
+        self._credit_product_code = None
         self._no_need_verify_identity = None
         self._out_agreement_no = None
         self._zm_service_id = None
@@ -20,6 +22,20 @@ class CreditInfoDTO(object):
     @acceptance_jump_url.setter
     def acceptance_jump_url(self, value):
         self._acceptance_jump_url = value
+    @property
+    def credit_deposit_period_pay_type(self):
+        return self._credit_deposit_period_pay_type
+
+    @credit_deposit_period_pay_type.setter
+    def credit_deposit_period_pay_type(self, value):
+        self._credit_deposit_period_pay_type = value
+    @property
+    def credit_product_code(self):
+        return self._credit_product_code
+
+    @credit_product_code.setter
+    def credit_product_code(self, value):
+        self._credit_product_code = value
     @property
     def no_need_verify_identity(self):
         return self._no_need_verify_identity
@@ -50,6 +66,16 @@ class CreditInfoDTO(object):
                 params['acceptance_jump_url'] = self.acceptance_jump_url.to_alipay_dict()
             else:
                 params['acceptance_jump_url'] = self.acceptance_jump_url
+        if self.credit_deposit_period_pay_type:
+            if hasattr(self.credit_deposit_period_pay_type, 'to_alipay_dict'):
+                params['credit_deposit_period_pay_type'] = self.credit_deposit_period_pay_type.to_alipay_dict()
+            else:
+                params['credit_deposit_period_pay_type'] = self.credit_deposit_period_pay_type
+        if self.credit_product_code:
+            if hasattr(self.credit_product_code, 'to_alipay_dict'):
+                params['credit_product_code'] = self.credit_product_code.to_alipay_dict()
+            else:
+                params['credit_product_code'] = self.credit_product_code
         if self.no_need_verify_identity:
             if hasattr(self.no_need_verify_identity, 'to_alipay_dict'):
                 params['no_need_verify_identity'] = self.no_need_verify_identity.to_alipay_dict()
@@ -74,6 +100,10 @@ class CreditInfoDTO(object):
         o = CreditInfoDTO()
         if 'acceptance_jump_url' in d:
             o.acceptance_jump_url = d['acceptance_jump_url']
+        if 'credit_deposit_period_pay_type' in d:
+            o.credit_deposit_period_pay_type = d['credit_deposit_period_pay_type']
+        if 'credit_product_code' in d:
+            o.credit_product_code = d['credit_product_code']
         if 'no_need_verify_identity' in d:
             o.no_need_verify_identity = d['no_need_verify_identity']
         if 'out_agreement_no' in d:

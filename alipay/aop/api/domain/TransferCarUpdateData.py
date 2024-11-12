@@ -8,11 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class TransferCarUpdateData(object):
 
     def __init__(self):
+        self._activity_end_date = None
         self._isv_update_date = None
         self._out_id = None
         self._price = None
         self._status = None
+        self._vehicle_display_status = None
 
+    @property
+    def activity_end_date(self):
+        return self._activity_end_date
+
+    @activity_end_date.setter
+    def activity_end_date(self, value):
+        self._activity_end_date = value
     @property
     def isv_update_date(self):
         return self._isv_update_date
@@ -41,10 +50,22 @@ class TransferCarUpdateData(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def vehicle_display_status(self):
+        return self._vehicle_display_status
+
+    @vehicle_display_status.setter
+    def vehicle_display_status(self, value):
+        self._vehicle_display_status = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_end_date:
+            if hasattr(self.activity_end_date, 'to_alipay_dict'):
+                params['activity_end_date'] = self.activity_end_date.to_alipay_dict()
+            else:
+                params['activity_end_date'] = self.activity_end_date
         if self.isv_update_date:
             if hasattr(self.isv_update_date, 'to_alipay_dict'):
                 params['isv_update_date'] = self.isv_update_date.to_alipay_dict()
@@ -65,6 +86,11 @@ class TransferCarUpdateData(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.vehicle_display_status:
+            if hasattr(self.vehicle_display_status, 'to_alipay_dict'):
+                params['vehicle_display_status'] = self.vehicle_display_status.to_alipay_dict()
+            else:
+                params['vehicle_display_status'] = self.vehicle_display_status
         return params
 
     @staticmethod
@@ -72,6 +98,8 @@ class TransferCarUpdateData(object):
         if not d:
             return None
         o = TransferCarUpdateData()
+        if 'activity_end_date' in d:
+            o.activity_end_date = d['activity_end_date']
         if 'isv_update_date' in d:
             o.isv_update_date = d['isv_update_date']
         if 'out_id' in d:
@@ -80,6 +108,8 @@ class TransferCarUpdateData(object):
             o.price = d['price']
         if 'status' in d:
             o.status = d['status']
+        if 'vehicle_display_status' in d:
+            o.vehicle_display_status = d['vehicle_display_status']
         return o
 
 

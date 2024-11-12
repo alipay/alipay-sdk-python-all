@@ -10,6 +10,8 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
     def __init__(self):
         self._amount = None
         self._bank_code = None
+        self._bill_detail_url = None
+        self._card_no = None
         self._channel = None
         self._company_cert_no = None
         self._company_name = None
@@ -35,6 +37,20 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
     @bank_code.setter
     def bank_code(self, value):
         self._bank_code = value
+    @property
+    def bill_detail_url(self):
+        return self._bill_detail_url
+
+    @bill_detail_url.setter
+    def bill_detail_url(self, value):
+        self._bill_detail_url = value
+    @property
+    def card_no(self):
+        return self._card_no
+
+    @card_no.setter
+    def card_no(self, value):
+        self._card_no = value
     @property
     def channel(self):
         return self._channel
@@ -119,6 +135,16 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
                 params['bank_code'] = self.bank_code.to_alipay_dict()
             else:
                 params['bank_code'] = self.bank_code
+        if self.bill_detail_url:
+            if hasattr(self.bill_detail_url, 'to_alipay_dict'):
+                params['bill_detail_url'] = self.bill_detail_url.to_alipay_dict()
+            else:
+                params['bill_detail_url'] = self.bill_detail_url
+        if self.card_no:
+            if hasattr(self.card_no, 'to_alipay_dict'):
+                params['card_no'] = self.card_no.to_alipay_dict()
+            else:
+                params['card_no'] = self.card_no
         if self.channel:
             if hasattr(self.channel, 'to_alipay_dict'):
                 params['channel'] = self.channel.to_alipay_dict()
@@ -180,6 +206,10 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
             o.amount = d['amount']
         if 'bank_code' in d:
             o.bank_code = d['bank_code']
+        if 'bill_detail_url' in d:
+            o.bill_detail_url = d['bill_detail_url']
+        if 'card_no' in d:
+            o.card_no = d['card_no']
         if 'channel' in d:
             o.channel = d['channel']
         if 'company_cert_no' in d:

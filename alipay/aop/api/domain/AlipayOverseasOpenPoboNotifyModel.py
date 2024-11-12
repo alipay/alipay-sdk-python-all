@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.TuitionISVPoboBeneficiaryInfo import TuitionISVPoboBeneficiaryInfo
 from alipay.aop.api.domain.TuitionISVPoboBuyerInfo import TuitionISVPoboBuyerInfo
+from alipay.aop.api.domain.IndrPoboManualOperationApplyRequestDTO import IndrPoboManualOperationApplyRequestDTO
 from alipay.aop.api.domain.TuitionISVPoboPaymentInfo import TuitionISVPoboPaymentInfo
 from alipay.aop.api.domain.TuitionISVPoboPaymentResult import TuitionISVPoboPaymentResult
 
@@ -14,6 +15,7 @@ class AlipayOverseasOpenPoboNotifyModel(object):
     def __init__(self):
         self._beneficiary_info = None
         self._buyer_info = None
+        self._manual_operation_apply = None
         self._order_id = None
         self._payment_info = None
         self._payment_result = None
@@ -38,6 +40,16 @@ class AlipayOverseasOpenPoboNotifyModel(object):
             self._buyer_info = value
         else:
             self._buyer_info = TuitionISVPoboBuyerInfo.from_alipay_dict(value)
+    @property
+    def manual_operation_apply(self):
+        return self._manual_operation_apply
+
+    @manual_operation_apply.setter
+    def manual_operation_apply(self, value):
+        if isinstance(value, IndrPoboManualOperationApplyRequestDTO):
+            self._manual_operation_apply = value
+        else:
+            self._manual_operation_apply = IndrPoboManualOperationApplyRequestDTO.from_alipay_dict(value)
     @property
     def order_id(self):
         return self._order_id
@@ -79,6 +91,11 @@ class AlipayOverseasOpenPoboNotifyModel(object):
                 params['buyer_info'] = self.buyer_info.to_alipay_dict()
             else:
                 params['buyer_info'] = self.buyer_info
+        if self.manual_operation_apply:
+            if hasattr(self.manual_operation_apply, 'to_alipay_dict'):
+                params['manual_operation_apply'] = self.manual_operation_apply.to_alipay_dict()
+            else:
+                params['manual_operation_apply'] = self.manual_operation_apply
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -105,6 +122,8 @@ class AlipayOverseasOpenPoboNotifyModel(object):
             o.beneficiary_info = d['beneficiary_info']
         if 'buyer_info' in d:
             o.buyer_info = d['buyer_info']
+        if 'manual_operation_apply' in d:
+            o.manual_operation_apply = d['manual_operation_apply']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'payment_info' in d:

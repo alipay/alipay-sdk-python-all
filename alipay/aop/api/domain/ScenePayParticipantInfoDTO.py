@@ -9,10 +9,26 @@ from alipay.aop.api.domain.ScenePayParticipantBizParamDTO import ScenePayPartici
 class ScenePayParticipantInfoDTO(object):
 
     def __init__(self):
+        self._mcc = None
+        self._name = None
         self._participant_biz_param = None
         self._participant_id = None
         self._participant_id_type = None
 
+    @property
+    def mcc(self):
+        return self._mcc
+
+    @mcc.setter
+    def mcc(self, value):
+        self._mcc = value
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
     @property
     def participant_biz_param(self):
         return self._participant_biz_param
@@ -41,6 +57,16 @@ class ScenePayParticipantInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.mcc:
+            if hasattr(self.mcc, 'to_alipay_dict'):
+                params['mcc'] = self.mcc.to_alipay_dict()
+            else:
+                params['mcc'] = self.mcc
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
         if self.participant_biz_param:
             if hasattr(self.participant_biz_param, 'to_alipay_dict'):
                 params['participant_biz_param'] = self.participant_biz_param.to_alipay_dict()
@@ -63,6 +89,10 @@ class ScenePayParticipantInfoDTO(object):
         if not d:
             return None
         o = ScenePayParticipantInfoDTO()
+        if 'mcc' in d:
+            o.mcc = d['mcc']
+        if 'name' in d:
+            o.name = d['name']
         if 'participant_biz_param' in d:
             o.participant_biz_param = d['participant_biz_param']
         if 'participant_id' in d:

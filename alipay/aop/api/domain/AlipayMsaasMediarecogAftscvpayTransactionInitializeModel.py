@@ -16,6 +16,8 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
         self._open_id = None
         self._record_video = None
         self._scene = None
+        self._sub_merchant_id = None
+        self._sub_merchant_name = None
         self._terminal_id = None
         self._total_floors = None
         self._transaction_id = None
@@ -71,6 +73,20 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
     @scene.setter
     def scene(self, value):
         self._scene = value
+    @property
+    def sub_merchant_id(self):
+        return self._sub_merchant_id
+
+    @sub_merchant_id.setter
+    def sub_merchant_id(self, value):
+        self._sub_merchant_id = value
+    @property
+    def sub_merchant_name(self):
+        return self._sub_merchant_name
+
+    @sub_merchant_name.setter
+    def sub_merchant_name(self, value):
+        self._sub_merchant_name = value
     @property
     def terminal_id(self):
         return self._terminal_id
@@ -158,6 +174,16 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.sub_merchant_id:
+            if hasattr(self.sub_merchant_id, 'to_alipay_dict'):
+                params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
+            else:
+                params['sub_merchant_id'] = self.sub_merchant_id
+        if self.sub_merchant_name:
+            if hasattr(self.sub_merchant_name, 'to_alipay_dict'):
+                params['sub_merchant_name'] = self.sub_merchant_name.to_alipay_dict()
+            else:
+                params['sub_merchant_name'] = self.sub_merchant_name
         if self.terminal_id:
             if hasattr(self.terminal_id, 'to_alipay_dict'):
                 params['terminal_id'] = self.terminal_id.to_alipay_dict()
@@ -212,6 +238,10 @@ class AlipayMsaasMediarecogAftscvpayTransactionInitializeModel(object):
             o.record_video = d['record_video']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'sub_merchant_id' in d:
+            o.sub_merchant_id = d['sub_merchant_id']
+        if 'sub_merchant_name' in d:
+            o.sub_merchant_name = d['sub_merchant_name']
         if 'terminal_id' in d:
             o.terminal_id = d['terminal_id']
         if 'total_floors' in d:

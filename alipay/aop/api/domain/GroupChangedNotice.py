@@ -11,6 +11,8 @@ class GroupChangedNotice(object):
     def __init__(self):
         self._create_time = None
         self._group_id = None
+        self._group_instance_id = None
+        self._group_oid = None
         self._mem_change_cnt = None
         self._mem_change_list = None
         self._pid = None
@@ -30,6 +32,20 @@ class GroupChangedNotice(object):
     @group_id.setter
     def group_id(self, value):
         self._group_id = value
+    @property
+    def group_instance_id(self):
+        return self._group_instance_id
+
+    @group_instance_id.setter
+    def group_instance_id(self, value):
+        self._group_instance_id = value
+    @property
+    def group_oid(self):
+        return self._group_oid
+
+    @group_oid.setter
+    def group_oid(self, value):
+        self._group_oid = value
     @property
     def mem_change_cnt(self):
         return self._mem_change_cnt
@@ -78,6 +94,16 @@ class GroupChangedNotice(object):
                 params['group_id'] = self.group_id.to_alipay_dict()
             else:
                 params['group_id'] = self.group_id
+        if self.group_instance_id:
+            if hasattr(self.group_instance_id, 'to_alipay_dict'):
+                params['group_instance_id'] = self.group_instance_id.to_alipay_dict()
+            else:
+                params['group_instance_id'] = self.group_instance_id
+        if self.group_oid:
+            if hasattr(self.group_oid, 'to_alipay_dict'):
+                params['group_oid'] = self.group_oid.to_alipay_dict()
+            else:
+                params['group_oid'] = self.group_oid
         if self.mem_change_cnt:
             if hasattr(self.mem_change_cnt, 'to_alipay_dict'):
                 params['mem_change_cnt'] = self.mem_change_cnt.to_alipay_dict()
@@ -114,6 +140,10 @@ class GroupChangedNotice(object):
             o.create_time = d['create_time']
         if 'group_id' in d:
             o.group_id = d['group_id']
+        if 'group_instance_id' in d:
+            o.group_instance_id = d['group_instance_id']
+        if 'group_oid' in d:
+            o.group_oid = d['group_oid']
         if 'mem_change_cnt' in d:
             o.mem_change_cnt = d['mem_change_cnt']
         if 'mem_change_list' in d:

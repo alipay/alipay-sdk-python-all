@@ -25,6 +25,7 @@ class AnxinkaDeliverDetailResponse(object):
         self._settle_shop_id = None
         self._settle_shop_memo = None
         self._settle_shop_name = None
+        self._third_settlement_amount = None
         self._trade_no = None
         self._use_amount = None
         self._use_cash = None
@@ -151,6 +152,13 @@ class AnxinkaDeliverDetailResponse(object):
     def settle_shop_name(self, value):
         self._settle_shop_name = value
     @property
+    def third_settlement_amount(self):
+        return self._third_settlement_amount
+
+    @third_settlement_amount.setter
+    def third_settlement_amount(self, value):
+        self._third_settlement_amount = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -274,6 +282,11 @@ class AnxinkaDeliverDetailResponse(object):
                 params['settle_shop_name'] = self.settle_shop_name.to_alipay_dict()
             else:
                 params['settle_shop_name'] = self.settle_shop_name
+        if self.third_settlement_amount:
+            if hasattr(self.third_settlement_amount, 'to_alipay_dict'):
+                params['third_settlement_amount'] = self.third_settlement_amount.to_alipay_dict()
+            else:
+                params['third_settlement_amount'] = self.third_settlement_amount
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -340,6 +353,8 @@ class AnxinkaDeliverDetailResponse(object):
             o.settle_shop_memo = d['settle_shop_memo']
         if 'settle_shop_name' in d:
             o.settle_shop_name = d['settle_shop_name']
+        if 'third_settlement_amount' in d:
+            o.third_settlement_amount = d['third_settlement_amount']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'use_amount' in d:

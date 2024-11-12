@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
+from alipay.aop.api.domain.TimesCardInfo import TimesCardInfo
 from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 
 
@@ -29,6 +30,7 @@ class MerchantCardTemplate(object):
         self._reject_reasons = None
         self._sale_info = None
         self._settle_type = None
+        self._times_card_info = None
         self._use_info = None
 
     @property
@@ -175,6 +177,16 @@ class MerchantCardTemplate(object):
     def settle_type(self, value):
         self._settle_type = value
     @property
+    def times_card_info(self):
+        return self._times_card_info
+
+    @times_card_info.setter
+    def times_card_info(self, value):
+        if isinstance(value, TimesCardInfo):
+            self._times_card_info = value
+        else:
+            self._times_card_info = TimesCardInfo.from_alipay_dict(value)
+    @property
     def use_info(self):
         return self._use_info
 
@@ -298,6 +310,11 @@ class MerchantCardTemplate(object):
                 params['settle_type'] = self.settle_type.to_alipay_dict()
             else:
                 params['settle_type'] = self.settle_type
+        if self.times_card_info:
+            if hasattr(self.times_card_info, 'to_alipay_dict'):
+                params['times_card_info'] = self.times_card_info.to_alipay_dict()
+            else:
+                params['times_card_info'] = self.times_card_info
         if self.use_info:
             if hasattr(self.use_info, 'to_alipay_dict'):
                 params['use_info'] = self.use_info.to_alipay_dict()
@@ -344,6 +361,8 @@ class MerchantCardTemplate(object):
             o.sale_info = d['sale_info']
         if 'settle_type' in d:
             o.settle_type = d['settle_type']
+        if 'times_card_info' in d:
+            o.times_card_info = d['times_card_info']
         if 'use_info' in d:
             o.use_info = d['use_info']
         return o

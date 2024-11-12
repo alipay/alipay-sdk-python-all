@@ -11,6 +11,9 @@ class CustomeServiceInboundCreateDTO(object):
         self._biz_package_code = None
         self._channel_id = None
         self._channel_type = None
+        self._event_action = None
+        self._event_content = None
+        self._event_time = None
         self._origin_seat_id = None
         self._origin_service_uniq_code = None
         self._phone_number = None
@@ -44,6 +47,27 @@ class CustomeServiceInboundCreateDTO(object):
     @channel_type.setter
     def channel_type(self, value):
         self._channel_type = value
+    @property
+    def event_action(self):
+        return self._event_action
+
+    @event_action.setter
+    def event_action(self, value):
+        self._event_action = value
+    @property
+    def event_content(self):
+        return self._event_content
+
+    @event_content.setter
+    def event_content(self, value):
+        self._event_content = value
+    @property
+    def event_time(self):
+        return self._event_time
+
+    @event_time.setter
+    def event_time(self, value):
+        self._event_time = value
     @property
     def origin_seat_id(self):
         return self._origin_seat_id
@@ -140,6 +164,21 @@ class CustomeServiceInboundCreateDTO(object):
                 params['channel_type'] = self.channel_type.to_alipay_dict()
             else:
                 params['channel_type'] = self.channel_type
+        if self.event_action:
+            if hasattr(self.event_action, 'to_alipay_dict'):
+                params['event_action'] = self.event_action.to_alipay_dict()
+            else:
+                params['event_action'] = self.event_action
+        if self.event_content:
+            if hasattr(self.event_content, 'to_alipay_dict'):
+                params['event_content'] = self.event_content.to_alipay_dict()
+            else:
+                params['event_content'] = self.event_content
+        if self.event_time:
+            if hasattr(self.event_time, 'to_alipay_dict'):
+                params['event_time'] = self.event_time.to_alipay_dict()
+            else:
+                params['event_time'] = self.event_time
         if self.origin_seat_id:
             if hasattr(self.origin_seat_id, 'to_alipay_dict'):
                 params['origin_seat_id'] = self.origin_seat_id.to_alipay_dict()
@@ -208,6 +247,12 @@ class CustomeServiceInboundCreateDTO(object):
             o.channel_id = d['channel_id']
         if 'channel_type' in d:
             o.channel_type = d['channel_type']
+        if 'event_action' in d:
+            o.event_action = d['event_action']
+        if 'event_content' in d:
+            o.event_content = d['event_content']
+        if 'event_time' in d:
+            o.event_time = d['event_time']
         if 'origin_seat_id' in d:
             o.origin_seat_id = d['origin_seat_id']
         if 'origin_service_uniq_code' in d:

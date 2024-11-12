@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class InsurancePayExtendParams(object):
 
     def __init__(self):
+        self._channel_code = None
         self._medical_card_id = None
         self._medical_card_inst_id = None
         self._sys_service_provider_id = None
 
+    @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
     @property
     def medical_card_id(self):
         return self._medical_card_id
@@ -37,6 +45,11 @@ class InsurancePayExtendParams(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.medical_card_id:
             if hasattr(self.medical_card_id, 'to_alipay_dict'):
                 params['medical_card_id'] = self.medical_card_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class InsurancePayExtendParams(object):
         if not d:
             return None
         o = InsurancePayExtendParams()
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'medical_card_id' in d:
             o.medical_card_id = d['medical_card_id']
         if 'medical_card_inst_id' in d:

@@ -18,9 +18,12 @@ class CardOrderBatchQueryResponse(object):
         self._card_template_id = None
         self._card_type = None
         self._create_date = None
+        self._damages_rate = None
+        self._damages_type = None
         self._discount_cash = None
         self._discount_plan_cash = None
         self._discount_refund_cash = None
+        self._funding_model = None
         self._gmt_active = None
         self._gmt_expired = None
         self._merchant_pid = None
@@ -108,6 +111,20 @@ class CardOrderBatchQueryResponse(object):
     def create_date(self, value):
         self._create_date = value
     @property
+    def damages_rate(self):
+        return self._damages_rate
+
+    @damages_rate.setter
+    def damages_rate(self, value):
+        self._damages_rate = value
+    @property
+    def damages_type(self):
+        return self._damages_type
+
+    @damages_type.setter
+    def damages_type(self, value):
+        self._damages_type = value
+    @property
     def discount_cash(self):
         return self._discount_cash
 
@@ -128,6 +145,13 @@ class CardOrderBatchQueryResponse(object):
     @discount_refund_cash.setter
     def discount_refund_cash(self, value):
         self._discount_refund_cash = value
+    @property
+    def funding_model(self):
+        return self._funding_model
+
+    @funding_model.setter
+    def funding_model(self, value):
+        self._funding_model = value
     @property
     def gmt_active(self):
         return self._gmt_active
@@ -310,6 +334,16 @@ class CardOrderBatchQueryResponse(object):
                 params['create_date'] = self.create_date.to_alipay_dict()
             else:
                 params['create_date'] = self.create_date
+        if self.damages_rate:
+            if hasattr(self.damages_rate, 'to_alipay_dict'):
+                params['damages_rate'] = self.damages_rate.to_alipay_dict()
+            else:
+                params['damages_rate'] = self.damages_rate
+        if self.damages_type:
+            if hasattr(self.damages_type, 'to_alipay_dict'):
+                params['damages_type'] = self.damages_type.to_alipay_dict()
+            else:
+                params['damages_type'] = self.damages_type
         if self.discount_cash:
             if hasattr(self.discount_cash, 'to_alipay_dict'):
                 params['discount_cash'] = self.discount_cash.to_alipay_dict()
@@ -325,6 +359,11 @@ class CardOrderBatchQueryResponse(object):
                 params['discount_refund_cash'] = self.discount_refund_cash.to_alipay_dict()
             else:
                 params['discount_refund_cash'] = self.discount_refund_cash
+        if self.funding_model:
+            if hasattr(self.funding_model, 'to_alipay_dict'):
+                params['funding_model'] = self.funding_model.to_alipay_dict()
+            else:
+                params['funding_model'] = self.funding_model
         if self.gmt_active:
             if hasattr(self.gmt_active, 'to_alipay_dict'):
                 params['gmt_active'] = self.gmt_active.to_alipay_dict()
@@ -445,12 +484,18 @@ class CardOrderBatchQueryResponse(object):
             o.card_type = d['card_type']
         if 'create_date' in d:
             o.create_date = d['create_date']
+        if 'damages_rate' in d:
+            o.damages_rate = d['damages_rate']
+        if 'damages_type' in d:
+            o.damages_type = d['damages_type']
         if 'discount_cash' in d:
             o.discount_cash = d['discount_cash']
         if 'discount_plan_cash' in d:
             o.discount_plan_cash = d['discount_plan_cash']
         if 'discount_refund_cash' in d:
             o.discount_refund_cash = d['discount_refund_cash']
+        if 'funding_model' in d:
+            o.funding_model = d['funding_model']
         if 'gmt_active' in d:
             o.gmt_active = d['gmt_active']
         if 'gmt_expired' in d:

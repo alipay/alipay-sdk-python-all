@@ -10,6 +10,7 @@ class ApartmentContactInfo(object):
     def __init__(self):
         self._contact_name = None
         self._contact_profile_pic = None
+        self._im_url = None
         self._mobile = None
 
     @property
@@ -26,6 +27,13 @@ class ApartmentContactInfo(object):
     @contact_profile_pic.setter
     def contact_profile_pic(self, value):
         self._contact_profile_pic = value
+    @property
+    def im_url(self):
+        return self._im_url
+
+    @im_url.setter
+    def im_url(self, value):
+        self._im_url = value
     @property
     def mobile(self):
         return self._mobile
@@ -47,6 +55,11 @@ class ApartmentContactInfo(object):
                 params['contact_profile_pic'] = self.contact_profile_pic.to_alipay_dict()
             else:
                 params['contact_profile_pic'] = self.contact_profile_pic
+        if self.im_url:
+            if hasattr(self.im_url, 'to_alipay_dict'):
+                params['im_url'] = self.im_url.to_alipay_dict()
+            else:
+                params['im_url'] = self.im_url
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -63,6 +76,8 @@ class ApartmentContactInfo(object):
             o.contact_name = d['contact_name']
         if 'contact_profile_pic' in d:
             o.contact_profile_pic = d['contact_profile_pic']
+        if 'im_url' in d:
+            o.im_url = d['im_url']
         if 'mobile' in d:
             o.mobile = d['mobile']
         return o
