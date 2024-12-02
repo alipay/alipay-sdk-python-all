@@ -12,6 +12,8 @@ class AlipayDataDataserviceSchemaerrorcodeRainyQueryRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._string_must = None
+        self._string_regex_num = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -29,6 +31,20 @@ class AlipayDataDataserviceSchemaerrorcodeRainyQueryRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def string_must(self):
+        return self._string_must
+
+    @string_must.setter
+    def string_must(self, value):
+        self._string_must = value
+    @property
+    def string_regex_num(self):
+        return self._string_regex_num
+
+    @string_regex_num.setter
+    def string_regex_num(self, value):
+        self._string_regex_num = value
 
 
     @property
@@ -108,6 +124,16 @@ class AlipayDataDataserviceSchemaerrorcodeRainyQueryRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.string_must:
+            if hasattr(self.string_must, 'to_alipay_dict'):
+                params['string_must'] = json.dumps(obj=self.string_must.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['string_must'] = self.string_must
+        if self.string_regex_num:
+            if hasattr(self.string_regex_num, 'to_alipay_dict'):
+                params['string_regex_num'] = json.dumps(obj=self.string_regex_num.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['string_regex_num'] = self.string_regex_num
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

@@ -8,12 +8,16 @@ from alipay.aop.api.constant.ParamConstants import *
 class CollaborateTask(object):
 
     def __init__(self):
+        self._activity_desc = None
+        self._activity_id = None
+        self._activity_type = None
         self._address = None
         self._city_code = None
         self._city_name = None
         self._dispatched_time = None
         self._district_code = None
         self._district_name = None
+        self._installer_no = None
         self._product_id = None
         self._product_name = None
         self._product_tags = None
@@ -24,6 +28,27 @@ class CollaborateTask(object):
         self._task_no = None
         self._tel = None
 
+    @property
+    def activity_desc(self):
+        return self._activity_desc
+
+    @activity_desc.setter
+    def activity_desc(self, value):
+        self._activity_desc = value
+    @property
+    def activity_id(self):
+        return self._activity_id
+
+    @activity_id.setter
+    def activity_id(self, value):
+        self._activity_id = value
+    @property
+    def activity_type(self):
+        return self._activity_type
+
+    @activity_type.setter
+    def activity_type(self, value):
+        self._activity_type = value
     @property
     def address(self):
         return self._address
@@ -66,6 +91,13 @@ class CollaborateTask(object):
     @district_name.setter
     def district_name(self, value):
         self._district_name = value
+    @property
+    def installer_no(self):
+        return self._installer_no
+
+    @installer_no.setter
+    def installer_no(self, value):
+        self._installer_no = value
     @property
     def product_id(self):
         return self._product_id
@@ -139,6 +171,21 @@ class CollaborateTask(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_desc:
+            if hasattr(self.activity_desc, 'to_alipay_dict'):
+                params['activity_desc'] = self.activity_desc.to_alipay_dict()
+            else:
+                params['activity_desc'] = self.activity_desc
+        if self.activity_id:
+            if hasattr(self.activity_id, 'to_alipay_dict'):
+                params['activity_id'] = self.activity_id.to_alipay_dict()
+            else:
+                params['activity_id'] = self.activity_id
+        if self.activity_type:
+            if hasattr(self.activity_type, 'to_alipay_dict'):
+                params['activity_type'] = self.activity_type.to_alipay_dict()
+            else:
+                params['activity_type'] = self.activity_type
         if self.address:
             if hasattr(self.address, 'to_alipay_dict'):
                 params['address'] = self.address.to_alipay_dict()
@@ -169,6 +216,11 @@ class CollaborateTask(object):
                 params['district_name'] = self.district_name.to_alipay_dict()
             else:
                 params['district_name'] = self.district_name
+        if self.installer_no:
+            if hasattr(self.installer_no, 'to_alipay_dict'):
+                params['installer_no'] = self.installer_no.to_alipay_dict()
+            else:
+                params['installer_no'] = self.installer_no
         if self.product_id:
             if hasattr(self.product_id, 'to_alipay_dict'):
                 params['product_id'] = self.product_id.to_alipay_dict()
@@ -231,6 +283,12 @@ class CollaborateTask(object):
         if not d:
             return None
         o = CollaborateTask()
+        if 'activity_desc' in d:
+            o.activity_desc = d['activity_desc']
+        if 'activity_id' in d:
+            o.activity_id = d['activity_id']
+        if 'activity_type' in d:
+            o.activity_type = d['activity_type']
         if 'address' in d:
             o.address = d['address']
         if 'city_code' in d:
@@ -243,6 +301,8 @@ class CollaborateTask(object):
             o.district_code = d['district_code']
         if 'district_name' in d:
             o.district_name = d['district_name']
+        if 'installer_no' in d:
+            o.installer_no = d['installer_no']
         if 'product_id' in d:
             o.product_id = d['product_id']
         if 'product_name' in d:

@@ -14,6 +14,7 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
         self._operator_user_id = None
         self._out_user_id = None
         self._parent_phone = None
+        self._query_asset = None
         self._school_std_code = None
         self._student_name = None
         self._sub_code = None
@@ -60,6 +61,13 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
     @parent_phone.setter
     def parent_phone(self, value):
         self._parent_phone = value
+    @property
+    def query_asset(self):
+        return self._query_asset
+
+    @query_asset.setter
+    def query_asset(self, value):
+        self._query_asset = value
     @property
     def school_std_code(self):
         return self._school_std_code
@@ -115,6 +123,11 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
                 params['parent_phone'] = self.parent_phone.to_alipay_dict()
             else:
                 params['parent_phone'] = self.parent_phone
+        if self.query_asset:
+            if hasattr(self.query_asset, 'to_alipay_dict'):
+                params['query_asset'] = self.query_asset.to_alipay_dict()
+            else:
+                params['query_asset'] = self.query_asset
         if self.school_std_code:
             if hasattr(self.school_std_code, 'to_alipay_dict'):
                 params['school_std_code'] = self.school_std_code.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayCommerceEducateSceneTokenCreateModel(object):
             o.out_user_id = d['out_user_id']
         if 'parent_phone' in d:
             o.parent_phone = d['parent_phone']
+        if 'query_asset' in d:
+            o.query_asset = d['query_asset']
         if 'school_std_code' in d:
             o.school_std_code = d['school_std_code']
         if 'student_name' in d:

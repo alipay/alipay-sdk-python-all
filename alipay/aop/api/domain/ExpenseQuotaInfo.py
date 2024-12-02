@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ExpenseQuotaInfo(object):
 
     def __init__(self):
+        self._currency = None
         self._effective_end_date = None
         self._effective_start_date = None
         self._enterprise_id = None
@@ -24,6 +25,13 @@ class ExpenseQuotaInfo(object):
         self._target_id = None
         self._target_type = None
 
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective_end_date(self):
         return self._effective_end_date
@@ -133,6 +141,11 @@ class ExpenseQuotaInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.effective_end_date:
             if hasattr(self.effective_end_date, 'to_alipay_dict'):
                 params['effective_end_date'] = self.effective_end_date.to_alipay_dict()
@@ -215,6 +228,8 @@ class ExpenseQuotaInfo(object):
         if not d:
             return None
         o = ExpenseQuotaInfo()
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'effective_end_date' in d:
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:

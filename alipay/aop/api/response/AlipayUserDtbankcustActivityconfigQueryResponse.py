@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.DtBankActivityTimeInfo import DtBankActivityTimeInfo
 from alipay.aop.api.domain.DtBankActivityTypeInfo import DtBankActivityTypeInfo
+from alipay.aop.api.domain.DtbankActivityAlertConfigInfo import DtbankActivityAlertConfigInfo
 from alipay.aop.api.domain.DtBankInfo import DtBankInfo
 from alipay.aop.api.domain.DtBankBudgetInfo import DtBankBudgetInfo
 from alipay.aop.api.domain.DtBankCrowdInfo import DtBankCrowdInfo
@@ -20,6 +21,7 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         self._activity_status = None
         self._activity_time_info = None
         self._activity_type_info = None
+        self._alert_config_info = None
         self._bank_info = None
         self._budget_info = None
         self._count_limit = None
@@ -70,6 +72,16 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
             self._activity_type_info = value
         else:
             self._activity_type_info = DtBankActivityTypeInfo.from_alipay_dict(value)
+    @property
+    def alert_config_info(self):
+        return self._alert_config_info
+
+    @alert_config_info.setter
+    def alert_config_info(self, value):
+        if isinstance(value, DtbankActivityAlertConfigInfo):
+            self._alert_config_info = value
+        else:
+            self._alert_config_info = DtbankActivityAlertConfigInfo.from_alipay_dict(value)
     @property
     def bank_info(self):
         return self._bank_info
@@ -151,6 +163,8 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
             self.activity_time_info = response['activity_time_info']
         if 'activity_type_info' in response:
             self.activity_type_info = response['activity_type_info']
+        if 'alert_config_info' in response:
+            self.alert_config_info = response['alert_config_info']
         if 'bank_info' in response:
             self.bank_info = response['bank_info']
         if 'budget_info' in response:

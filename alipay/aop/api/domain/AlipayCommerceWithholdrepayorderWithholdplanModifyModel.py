@@ -15,6 +15,7 @@ class AlipayCommerceWithholdrepayorderWithholdplanModifyModel(object):
         self._out_biz_no = None
         self._repay_plan = None
         self._sign_scene = None
+        self._stage = None
         self._user_id = None
 
     @property
@@ -66,6 +67,13 @@ class AlipayCommerceWithholdrepayorderWithholdplanModifyModel(object):
     def sign_scene(self, value):
         self._sign_scene = value
     @property
+    def stage(self):
+        return self._stage
+
+    @stage.setter
+    def stage(self, value):
+        self._stage = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -111,6 +119,11 @@ class AlipayCommerceWithholdrepayorderWithholdplanModifyModel(object):
                 params['sign_scene'] = self.sign_scene.to_alipay_dict()
             else:
                 params['sign_scene'] = self.sign_scene
+        if self.stage:
+            if hasattr(self.stage, 'to_alipay_dict'):
+                params['stage'] = self.stage.to_alipay_dict()
+            else:
+                params['stage'] = self.stage
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -135,6 +148,8 @@ class AlipayCommerceWithholdrepayorderWithholdplanModifyModel(object):
             o.repay_plan = d['repay_plan']
         if 'sign_scene' in d:
             o.sign_scene = d['sign_scene']
+        if 'stage' in d:
+            o.stage = d['stage']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

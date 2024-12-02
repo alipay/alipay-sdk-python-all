@@ -45,6 +45,7 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
         self._parking_type = None
         self._pay_type = None
         self._payment_mode = None
+        self._serivce_url = None
         self._service_list = None
         self._shopingmall_id = None
         self._sum_space = None
@@ -302,6 +303,13 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
     def payment_mode(self, value):
         self._payment_mode = value
     @property
+    def serivce_url(self):
+        return self._serivce_url
+
+    @serivce_url.setter
+    def serivce_url(self, value):
+        self._serivce_url = value
+    @property
     def service_list(self):
         return self._service_list
 
@@ -526,6 +534,11 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
                 params['payment_mode'] = self.payment_mode.to_alipay_dict()
             else:
                 params['payment_mode'] = self.payment_mode
+        if self.serivce_url:
+            if hasattr(self.serivce_url, 'to_alipay_dict'):
+                params['serivce_url'] = self.serivce_url.to_alipay_dict()
+            else:
+                params['serivce_url'] = self.serivce_url
         if self.service_list:
             if isinstance(self.service_list, list):
                 for i in range(0, len(self.service_list)):
@@ -631,6 +644,8 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
             o.pay_type = d['pay_type']
         if 'payment_mode' in d:
             o.payment_mode = d['payment_mode']
+        if 'serivce_url' in d:
+            o.serivce_url = d['serivce_url']
         if 'service_list' in d:
             o.service_list = d['service_list']
         if 'shopingmall_id' in d:

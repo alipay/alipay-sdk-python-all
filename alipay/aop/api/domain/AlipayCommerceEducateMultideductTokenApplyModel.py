@@ -13,6 +13,7 @@ class AlipayCommerceEducateMultideductTokenApplyModel(object):
         self._operation_type = None
         self._parent_phone = None
         self._pay_config = None
+        self._query_asset = None
         self._school_code = None
         self._user_cert_no = None
         self._user_cert_type = None
@@ -50,6 +51,13 @@ class AlipayCommerceEducateMultideductTokenApplyModel(object):
             self._pay_config = value
         else:
             self._pay_config = PayConfig.from_alipay_dict(value)
+    @property
+    def query_asset(self):
+        return self._query_asset
+
+    @query_asset.setter
+    def query_asset(self, value):
+        self._query_asset = value
     @property
     def school_code(self):
         return self._school_code
@@ -109,6 +117,11 @@ class AlipayCommerceEducateMultideductTokenApplyModel(object):
                 params['pay_config'] = self.pay_config.to_alipay_dict()
             else:
                 params['pay_config'] = self.pay_config
+        if self.query_asset:
+            if hasattr(self.query_asset, 'to_alipay_dict'):
+                params['query_asset'] = self.query_asset.to_alipay_dict()
+            else:
+                params['query_asset'] = self.query_asset
         if self.school_code:
             if hasattr(self.school_code, 'to_alipay_dict'):
                 params['school_code'] = self.school_code.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayCommerceEducateMultideductTokenApplyModel(object):
             o.parent_phone = d['parent_phone']
         if 'pay_config' in d:
             o.pay_config = d['pay_config']
+        if 'query_asset' in d:
+            o.query_asset = d['query_asset']
         if 'school_code' in d:
             o.school_code = d['school_code']
         if 'user_cert_no' in d:

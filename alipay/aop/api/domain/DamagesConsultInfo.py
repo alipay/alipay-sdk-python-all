@@ -14,6 +14,7 @@ class DamagesConsultInfo(object):
         self._damages_type = None
         self._need_damages = None
         self._refund_cash = None
+        self._refuse_close_reason = None
 
     @property
     def can_close(self):
@@ -57,6 +58,13 @@ class DamagesConsultInfo(object):
     @refund_cash.setter
     def refund_cash(self, value):
         self._refund_cash = value
+    @property
+    def refuse_close_reason(self):
+        return self._refuse_close_reason
+
+    @refuse_close_reason.setter
+    def refuse_close_reason(self, value):
+        self._refuse_close_reason = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class DamagesConsultInfo(object):
                 params['refund_cash'] = self.refund_cash.to_alipay_dict()
             else:
                 params['refund_cash'] = self.refund_cash
+        if self.refuse_close_reason:
+            if hasattr(self.refuse_close_reason, 'to_alipay_dict'):
+                params['refuse_close_reason'] = self.refuse_close_reason.to_alipay_dict()
+            else:
+                params['refuse_close_reason'] = self.refuse_close_reason
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class DamagesConsultInfo(object):
             o.need_damages = d['need_damages']
         if 'refund_cash' in d:
             o.refund_cash = d['refund_cash']
+        if 'refuse_close_reason' in d:
+            o.refuse_close_reason = d['refuse_close_reason']
         return o
 
 

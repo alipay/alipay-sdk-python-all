@@ -9,12 +9,21 @@ from alipay.aop.api.domain.DtBankCouponAvailableTime import DtBankCouponAvailabl
 class DtBankFirstBindCardGiftInfo(object):
 
     def __init__(self):
+        self._allow_voucher_split = None
         self._assigned_pid_list = None
         self._bank_code_config_account_limit = None
         self._bind_source_list = None
         self._coupon_available_time = None
         self._coupon_instruction_list = None
+        self._threshold_text = None
 
+    @property
+    def allow_voucher_split(self):
+        return self._allow_voucher_split
+
+    @allow_voucher_split.setter
+    def allow_voucher_split(self, value):
+        self._allow_voucher_split = value
     @property
     def assigned_pid_list(self):
         return self._assigned_pid_list
@@ -62,10 +71,22 @@ class DtBankFirstBindCardGiftInfo(object):
             self._coupon_instruction_list = list()
             for i in value:
                 self._coupon_instruction_list.append(i)
+    @property
+    def threshold_text(self):
+        return self._threshold_text
+
+    @threshold_text.setter
+    def threshold_text(self, value):
+        self._threshold_text = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.allow_voucher_split:
+            if hasattr(self.allow_voucher_split, 'to_alipay_dict'):
+                params['allow_voucher_split'] = self.allow_voucher_split.to_alipay_dict()
+            else:
+                params['allow_voucher_split'] = self.allow_voucher_split
         if self.assigned_pid_list:
             if isinstance(self.assigned_pid_list, list):
                 for i in range(0, len(self.assigned_pid_list)):
@@ -106,6 +127,11 @@ class DtBankFirstBindCardGiftInfo(object):
                 params['coupon_instruction_list'] = self.coupon_instruction_list.to_alipay_dict()
             else:
                 params['coupon_instruction_list'] = self.coupon_instruction_list
+        if self.threshold_text:
+            if hasattr(self.threshold_text, 'to_alipay_dict'):
+                params['threshold_text'] = self.threshold_text.to_alipay_dict()
+            else:
+                params['threshold_text'] = self.threshold_text
         return params
 
     @staticmethod
@@ -113,6 +139,8 @@ class DtBankFirstBindCardGiftInfo(object):
         if not d:
             return None
         o = DtBankFirstBindCardGiftInfo()
+        if 'allow_voucher_split' in d:
+            o.allow_voucher_split = d['allow_voucher_split']
         if 'assigned_pid_list' in d:
             o.assigned_pid_list = d['assigned_pid_list']
         if 'bank_code_config_account_limit' in d:
@@ -123,6 +151,8 @@ class DtBankFirstBindCardGiftInfo(object):
             o.coupon_available_time = d['coupon_available_time']
         if 'coupon_instruction_list' in d:
             o.coupon_instruction_list = d['coupon_instruction_list']
+        if 'threshold_text' in d:
+            o.threshold_text = d['threshold_text']
         return o
 
 

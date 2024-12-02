@@ -12,6 +12,7 @@ class GroupChangedNotice(object):
         self._create_time = None
         self._group_id = None
         self._group_instance_id = None
+        self._group_name = None
         self._group_oid = None
         self._mem_change_cnt = None
         self._mem_change_list = None
@@ -39,6 +40,13 @@ class GroupChangedNotice(object):
     @group_instance_id.setter
     def group_instance_id(self, value):
         self._group_instance_id = value
+    @property
+    def group_name(self):
+        return self._group_name
+
+    @group_name.setter
+    def group_name(self, value):
+        self._group_name = value
     @property
     def group_oid(self):
         return self._group_oid
@@ -99,6 +107,11 @@ class GroupChangedNotice(object):
                 params['group_instance_id'] = self.group_instance_id.to_alipay_dict()
             else:
                 params['group_instance_id'] = self.group_instance_id
+        if self.group_name:
+            if hasattr(self.group_name, 'to_alipay_dict'):
+                params['group_name'] = self.group_name.to_alipay_dict()
+            else:
+                params['group_name'] = self.group_name
         if self.group_oid:
             if hasattr(self.group_oid, 'to_alipay_dict'):
                 params['group_oid'] = self.group_oid.to_alipay_dict()
@@ -142,6 +155,8 @@ class GroupChangedNotice(object):
             o.group_id = d['group_id']
         if 'group_instance_id' in d:
             o.group_instance_id = d['group_instance_id']
+        if 'group_name' in d:
+            o.group_name = d['group_name']
         if 'group_oid' in d:
             o.group_oid = d['group_oid']
         if 'mem_change_cnt' in d:

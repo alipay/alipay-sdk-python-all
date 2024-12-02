@@ -18,6 +18,7 @@ class NDeviceMetricsListForDayResponse(object):
         self._city_name = None
         self._district_code = None
         self._district_name = None
+        self._do_check_in = None
         self._has_nfc_trade = None
         self._leads_worker_id = None
         self._leads_worker_name = None
@@ -104,6 +105,13 @@ class NDeviceMetricsListForDayResponse(object):
     @district_name.setter
     def district_name(self, value):
         self._district_name = value
+    @property
+    def do_check_in(self):
+        return self._do_check_in
+
+    @do_check_in.setter
+    def do_check_in(self, value):
+        self._do_check_in = value
     @property
     def has_nfc_trade(self):
         return self._has_nfc_trade
@@ -263,6 +271,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['district_name'] = self.district_name.to_alipay_dict()
             else:
                 params['district_name'] = self.district_name
+        if self.do_check_in:
+            if hasattr(self.do_check_in, 'to_alipay_dict'):
+                params['do_check_in'] = self.do_check_in.to_alipay_dict()
+            else:
+                params['do_check_in'] = self.do_check_in
         if self.has_nfc_trade:
             if hasattr(self.has_nfc_trade, 'to_alipay_dict'):
                 params['has_nfc_trade'] = self.has_nfc_trade.to_alipay_dict()
@@ -365,6 +378,8 @@ class NDeviceMetricsListForDayResponse(object):
             o.district_code = d['district_code']
         if 'district_name' in d:
             o.district_name = d['district_name']
+        if 'do_check_in' in d:
+            o.do_check_in = d['do_check_in']
         if 'has_nfc_trade' in d:
             o.has_nfc_trade = d['has_nfc_trade']
         if 'leads_worker_id' in d:

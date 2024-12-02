@@ -44,6 +44,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._promo_detail_info = None
         self._seller_id = None
         self._service_provider_model = None
+        self._service_type = None
         self._shop_info = None
         self._source_id = None
         self._stage_pay_plans = None
@@ -235,6 +236,13 @@ class AlipayOpenMiniOrderCreateModel(object):
     def service_provider_model(self, value):
         self._service_provider_model = value
     @property
+    def service_type(self):
+        return self._service_type
+
+    @service_type.setter
+    def service_type(self, value):
+        self._service_type = value
+    @property
     def shop_info(self):
         return self._shop_info
 
@@ -397,6 +405,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['service_provider_model'] = self.service_provider_model.to_alipay_dict()
             else:
                 params['service_provider_model'] = self.service_provider_model
+        if self.service_type:
+            if hasattr(self.service_type, 'to_alipay_dict'):
+                params['service_type'] = self.service_type.to_alipay_dict()
+            else:
+                params['service_type'] = self.service_type
         if self.shop_info:
             if hasattr(self.shop_info, 'to_alipay_dict'):
                 params['shop_info'] = self.shop_info.to_alipay_dict()
@@ -481,6 +494,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.seller_id = d['seller_id']
         if 'service_provider_model' in d:
             o.service_provider_model = d['service_provider_model']
+        if 'service_type' in d:
+            o.service_type = d['service_type']
         if 'shop_info' in d:
             o.shop_info = d['shop_info']
         if 'source_id' in d:

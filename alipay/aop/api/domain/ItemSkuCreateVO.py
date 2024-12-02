@@ -16,6 +16,7 @@ class ItemSkuCreateVO(object):
         self._sale_price = None
         self._sale_status = None
         self._sku_attrs = None
+        self._sku_type = None
         self._stock_num = None
         self._thumb_img = None
 
@@ -75,6 +76,13 @@ class ItemSkuCreateVO(object):
                 else:
                     self._sku_attrs.append(ItemSkuAttrVO.from_alipay_dict(i))
     @property
+    def sku_type(self):
+        return self._sku_type
+
+    @sku_type.setter
+    def sku_type(self, value):
+        self._sku_type = value
+    @property
     def stock_num(self):
         return self._stock_num
 
@@ -132,6 +140,11 @@ class ItemSkuCreateVO(object):
                 params['sku_attrs'] = self.sku_attrs.to_alipay_dict()
             else:
                 params['sku_attrs'] = self.sku_attrs
+        if self.sku_type:
+            if hasattr(self.sku_type, 'to_alipay_dict'):
+                params['sku_type'] = self.sku_type.to_alipay_dict()
+            else:
+                params['sku_type'] = self.sku_type
         if self.stock_num:
             if hasattr(self.stock_num, 'to_alipay_dict'):
                 params['stock_num'] = self.stock_num.to_alipay_dict()
@@ -163,6 +176,8 @@ class ItemSkuCreateVO(object):
             o.sale_status = d['sale_status']
         if 'sku_attrs' in d:
             o.sku_attrs = d['sku_attrs']
+        if 'sku_type' in d:
+            o.sku_type = d['sku_type']
         if 'stock_num' in d:
             o.stock_num = d['stock_num']
         if 'thumb_img' in d:

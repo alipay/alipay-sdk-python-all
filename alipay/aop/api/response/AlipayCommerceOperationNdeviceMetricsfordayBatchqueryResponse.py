@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.NDeviceMetricsListForDayResponse import NDeviceMetricsListForDayResponse
+from alipay.aop.api.domain.NDeviceMetricsListForDayResponse import NDeviceMetricsListForDayResponse
 
 
 class AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse(AlipayRespon
     def __init__(self):
         super(AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse, self).__init__()
         self._count = None
+        self._data = None
         self._list = None
         self._page_num = None
         self._page_size = None
@@ -22,6 +24,19 @@ class AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse(AlipayRespon
     @count.setter
     def count(self, value):
         self._count = value
+    @property
+    def data(self):
+        return self._data
+
+    @data.setter
+    def data(self, value):
+        if isinstance(value, list):
+            self._data = list()
+            for i in value:
+                if isinstance(i, NDeviceMetricsListForDayResponse):
+                    self._data.append(i)
+                else:
+                    self._data.append(NDeviceMetricsListForDayResponse.from_alipay_dict(i))
     @property
     def list(self):
         return self._list
@@ -51,6 +66,8 @@ class AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse(AlipayRespon
         response = super(AlipayCommerceOperationNdeviceMetricsfordayBatchqueryResponse, self).parse_response_content(response_content)
         if 'count' in response:
             self.count = response['count']
+        if 'data' in response:
+            self.data = response['data']
         if 'list' in response:
             self.list = response['list']
         if 'page_num' in response:

@@ -29,6 +29,7 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
         self._legal_person_id_card_front = None
         self._legal_person_name = None
         self._li_xin_ep = None
+        self._mobile_phone = None
         self._user_name = None
 
     @property
@@ -175,6 +176,13 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
     def li_xin_ep(self, value):
         self._li_xin_ep = value
     @property
+    def mobile_phone(self):
+        return self._mobile_phone
+
+    @mobile_phone.setter
+    def mobile_phone(self, value):
+        self._mobile_phone = value
+    @property
     def user_name(self):
         return self._user_name
 
@@ -224,5 +232,7 @@ class ZhimaCreditEpCertificationQueryResponse(AlipayResponse):
             self.legal_person_name = response['legal_person_name']
         if 'li_xin_ep' in response:
             self.li_xin_ep = response['li_xin_ep']
+        if 'mobile_phone' in response:
+            self.mobile_phone = response['mobile_phone']
         if 'user_name' in response:
             self.user_name = response['user_name']

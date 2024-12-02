@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class DtBankPreferenceIntelligentRule(object):
 
     def __init__(self):
+        self._avg_discount_amount = None
         self._max_amount = None
         self._min_amount = None
         self._optimization_target = None
 
+    @property
+    def avg_discount_amount(self):
+        return self._avg_discount_amount
+
+    @avg_discount_amount.setter
+    def avg_discount_amount(self, value):
+        self._avg_discount_amount = value
     @property
     def max_amount(self):
         return self._max_amount
@@ -37,6 +45,11 @@ class DtBankPreferenceIntelligentRule(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.avg_discount_amount:
+            if hasattr(self.avg_discount_amount, 'to_alipay_dict'):
+                params['avg_discount_amount'] = self.avg_discount_amount.to_alipay_dict()
+            else:
+                params['avg_discount_amount'] = self.avg_discount_amount
         if self.max_amount:
             if hasattr(self.max_amount, 'to_alipay_dict'):
                 params['max_amount'] = self.max_amount.to_alipay_dict()
@@ -59,6 +72,8 @@ class DtBankPreferenceIntelligentRule(object):
         if not d:
             return None
         o = DtBankPreferenceIntelligentRule()
+        if 'avg_discount_amount' in d:
+            o.avg_discount_amount = d['avg_discount_amount']
         if 'max_amount' in d:
             o.max_amount = d['max_amount']
         if 'min_amount' in d:

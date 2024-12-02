@@ -28,6 +28,7 @@ class AlipayCommerceWithholdrepayorderAgreementQueryResponse(AlipayResponse):
         self._sign_scene = None
         self._sign_time = None
         self._single_quota = None
+        self._stage = None
         self._status = None
         self._third_party_type = None
         self._valid_time = None
@@ -159,6 +160,13 @@ class AlipayCommerceWithholdrepayorderAgreementQueryResponse(AlipayResponse):
     def single_quota(self, value):
         self._single_quota = value
     @property
+    def stage(self):
+        return self._stage
+
+    @stage.setter
+    def stage(self, value):
+        self._stage = value
+    @property
     def status(self):
         return self._status
 
@@ -223,6 +231,8 @@ class AlipayCommerceWithholdrepayorderAgreementQueryResponse(AlipayResponse):
             self.sign_time = response['sign_time']
         if 'single_quota' in response:
             self.single_quota = response['single_quota']
+        if 'stage' in response:
+            self.stage = response['stage']
         if 'status' in response:
             self.status = response['status']
         if 'third_party_type' in response:

@@ -16,6 +16,7 @@ class AlipayOpenMiniOrderCreateResponse(AlipayResponse):
         self._order_id = None
         self._out_order_id = None
         self._pay_info_response = None
+        self._service_type = None
 
     @property
     def credit_info_response(self):
@@ -58,6 +59,13 @@ class AlipayOpenMiniOrderCreateResponse(AlipayResponse):
             self._pay_info_response = value
         else:
             self._pay_info_response = PayInfoResponse.from_alipay_dict(value)
+    @property
+    def service_type(self):
+        return self._service_type
+
+    @service_type.setter
+    def service_type(self, value):
+        self._service_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderCreateResponse, self).parse_response_content(response_content)
@@ -71,3 +79,5 @@ class AlipayOpenMiniOrderCreateResponse(AlipayResponse):
             self.out_order_id = response['out_order_id']
         if 'pay_info_response' in response:
             self.pay_info_response = response['pay_info_response']
+        if 'service_type' in response:
+            self.service_type = response['service_type']

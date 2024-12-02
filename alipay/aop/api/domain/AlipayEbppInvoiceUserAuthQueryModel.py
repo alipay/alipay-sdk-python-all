@@ -9,6 +9,7 @@ class AlipayEbppInvoiceUserAuthQueryModel(object):
 
     def __init__(self):
         self._mobile_phone = None
+        self._redirect_url = None
         self._source_tag = None
         self._user_email = None
 
@@ -19,6 +20,13 @@ class AlipayEbppInvoiceUserAuthQueryModel(object):
     @mobile_phone.setter
     def mobile_phone(self, value):
         self._mobile_phone = value
+    @property
+    def redirect_url(self):
+        return self._redirect_url
+
+    @redirect_url.setter
+    def redirect_url(self, value):
+        self._redirect_url = value
     @property
     def source_tag(self):
         return self._source_tag
@@ -42,6 +50,11 @@ class AlipayEbppInvoiceUserAuthQueryModel(object):
                 params['mobile_phone'] = self.mobile_phone.to_alipay_dict()
             else:
                 params['mobile_phone'] = self.mobile_phone
+        if self.redirect_url:
+            if hasattr(self.redirect_url, 'to_alipay_dict'):
+                params['redirect_url'] = self.redirect_url.to_alipay_dict()
+            else:
+                params['redirect_url'] = self.redirect_url
         if self.source_tag:
             if hasattr(self.source_tag, 'to_alipay_dict'):
                 params['source_tag'] = self.source_tag.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayEbppInvoiceUserAuthQueryModel(object):
         o = AlipayEbppInvoiceUserAuthQueryModel()
         if 'mobile_phone' in d:
             o.mobile_phone = d['mobile_phone']
+        if 'redirect_url' in d:
+            o.redirect_url = d['redirect_url']
         if 'source_tag' in d:
             o.source_tag = d['source_tag']
         if 'user_email' in d:

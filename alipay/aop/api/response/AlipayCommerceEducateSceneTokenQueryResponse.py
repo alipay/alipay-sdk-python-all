@@ -9,6 +9,7 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEducateSceneTokenQueryResponse, self).__init__()
+        self._asset = None
         self._biz_code = None
         self._open_id = None
         self._out_user_id = None
@@ -22,6 +23,13 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
         self._school_std_code = None
         self._user_id = None
 
+    @property
+    def asset(self):
+        return self._asset
+
+    @asset.setter
+    def asset(self, value):
+        self._asset = value
     @property
     def biz_code(self):
         return self._biz_code
@@ -112,6 +120,8 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEducateSceneTokenQueryResponse, self).parse_response_content(response_content)
+        if 'asset' in response:
+            self.asset = response['asset']
         if 'biz_code' in response:
             self.biz_code = response['biz_code']
         if 'open_id' in response:

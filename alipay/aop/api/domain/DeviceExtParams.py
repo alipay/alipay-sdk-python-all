@@ -12,6 +12,7 @@ class DeviceExtParams(object):
         self._external_shop_id = None
         self._payment_type = None
         self._shop_name = None
+        self._shop_nick_name = None
         self._source = None
         self._spi_app_id = None
         self._terminal_bind_info = None
@@ -44,6 +45,13 @@ class DeviceExtParams(object):
     @shop_name.setter
     def shop_name(self, value):
         self._shop_name = value
+    @property
+    def shop_nick_name(self):
+        return self._shop_nick_name
+
+    @shop_nick_name.setter
+    def shop_nick_name(self, value):
+        self._shop_nick_name = value
     @property
     def source(self):
         return self._source
@@ -89,6 +97,11 @@ class DeviceExtParams(object):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
             else:
                 params['shop_name'] = self.shop_name
+        if self.shop_nick_name:
+            if hasattr(self.shop_nick_name, 'to_alipay_dict'):
+                params['shop_nick_name'] = self.shop_nick_name.to_alipay_dict()
+            else:
+                params['shop_nick_name'] = self.shop_nick_name
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -119,6 +132,8 @@ class DeviceExtParams(object):
             o.payment_type = d['payment_type']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
+        if 'shop_nick_name' in d:
+            o.shop_nick_name = d['shop_nick_name']
         if 'source' in d:
             o.source = d['source']
         if 'spi_app_id' in d:

@@ -13,6 +13,7 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
         self._inputs = None
         self._outer_user_id = None
         self._request_id = None
+        self._session_id = None
 
     @property
     def agent_id(self):
@@ -49,6 +50,13 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def session_id(self):
+        return self._session_id
+
+    @session_id.setter
+    def session_id(self, value):
+        self._session_id = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.session_id:
+            if hasattr(self.session_id, 'to_alipay_dict'):
+                params['session_id'] = self.session_id.to_alipay_dict()
+            else:
+                params['session_id'] = self.session_id
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayCloudNextbuilderAgentCompletionGenerateModel(object):
             o.outer_user_id = d['outer_user_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'session_id' in d:
+            o.session_id = d['session_id']
         return o
 
 

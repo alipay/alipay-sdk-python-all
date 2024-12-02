@@ -11,6 +11,7 @@ class FxiaokeCreateLeadsParams(object):
     def __init__(self):
         self._actual_lead_party = None
         self._ali_cloud_bpid_list = None
+        self._alicloud_settlement_mode = None
         self._bid_type = None
         self._cbm_work_no_list = None
         self._cloud_platform_region = None
@@ -23,6 +24,11 @@ class FxiaokeCreateLeadsParams(object):
         self._deploy_type = None
         self._expect_bid_date = None
         self._expect_sign_date = None
+        self._final_customer_sign_other_party_subject_id = None
+        self._final_customer_sign_other_party_subject_name = None
+        self._final_customer_sign_subject_id = None
+        self._final_customer_sign_subject_name = None
+        self._general_agent_cooperation_type = None
         self._id = None
         self._is_bid = None
         self._is_issue_for_bid = None
@@ -31,10 +37,14 @@ class FxiaokeCreateLeadsParams(object):
         self._leads_fee_model = None
         self._leads_normandy = None
         self._leads_other_cloud_pedestal = None
+        self._leads_other_partners = None
+        self._leads_other_partners_name = None
         self._leads_product_type = None
         self._leads_sale_channel = None
         self._leads_sale_territory = None
         self._leads_source_partner_id = None
+        self._ob_sign_other_party_subject_id = None
+        self._ob_sign_other_party_subject_name = None
         self._other_partner_pid_list = None
         self._other_party_sign_subject = None
         self._other_party_sign_subject_id = None
@@ -71,6 +81,13 @@ class FxiaokeCreateLeadsParams(object):
     @ali_cloud_bpid_list.setter
     def ali_cloud_bpid_list(self, value):
         self._ali_cloud_bpid_list = value
+    @property
+    def alicloud_settlement_mode(self):
+        return self._alicloud_settlement_mode
+
+    @alicloud_settlement_mode.setter
+    def alicloud_settlement_mode(self, value):
+        self._alicloud_settlement_mode = value
     @property
     def bid_type(self):
         return self._bid_type
@@ -159,6 +176,41 @@ class FxiaokeCreateLeadsParams(object):
     def expect_sign_date(self, value):
         self._expect_sign_date = value
     @property
+    def final_customer_sign_other_party_subject_id(self):
+        return self._final_customer_sign_other_party_subject_id
+
+    @final_customer_sign_other_party_subject_id.setter
+    def final_customer_sign_other_party_subject_id(self, value):
+        self._final_customer_sign_other_party_subject_id = value
+    @property
+    def final_customer_sign_other_party_subject_name(self):
+        return self._final_customer_sign_other_party_subject_name
+
+    @final_customer_sign_other_party_subject_name.setter
+    def final_customer_sign_other_party_subject_name(self, value):
+        self._final_customer_sign_other_party_subject_name = value
+    @property
+    def final_customer_sign_subject_id(self):
+        return self._final_customer_sign_subject_id
+
+    @final_customer_sign_subject_id.setter
+    def final_customer_sign_subject_id(self, value):
+        self._final_customer_sign_subject_id = value
+    @property
+    def final_customer_sign_subject_name(self):
+        return self._final_customer_sign_subject_name
+
+    @final_customer_sign_subject_name.setter
+    def final_customer_sign_subject_name(self, value):
+        self._final_customer_sign_subject_name = value
+    @property
+    def general_agent_cooperation_type(self):
+        return self._general_agent_cooperation_type
+
+    @general_agent_cooperation_type.setter
+    def general_agent_cooperation_type(self, value):
+        self._general_agent_cooperation_type = value
+    @property
     def id(self):
         return self._id
 
@@ -215,6 +267,20 @@ class FxiaokeCreateLeadsParams(object):
     def leads_other_cloud_pedestal(self, value):
         self._leads_other_cloud_pedestal = value
     @property
+    def leads_other_partners(self):
+        return self._leads_other_partners
+
+    @leads_other_partners.setter
+    def leads_other_partners(self, value):
+        self._leads_other_partners = value
+    @property
+    def leads_other_partners_name(self):
+        return self._leads_other_partners_name
+
+    @leads_other_partners_name.setter
+    def leads_other_partners_name(self, value):
+        self._leads_other_partners_name = value
+    @property
     def leads_product_type(self):
         return self._leads_product_type
 
@@ -242,6 +308,20 @@ class FxiaokeCreateLeadsParams(object):
     @leads_source_partner_id.setter
     def leads_source_partner_id(self, value):
         self._leads_source_partner_id = value
+    @property
+    def ob_sign_other_party_subject_id(self):
+        return self._ob_sign_other_party_subject_id
+
+    @ob_sign_other_party_subject_id.setter
+    def ob_sign_other_party_subject_id(self, value):
+        self._ob_sign_other_party_subject_id = value
+    @property
+    def ob_sign_other_party_subject_name(self):
+        return self._ob_sign_other_party_subject_name
+
+    @ob_sign_other_party_subject_name.setter
+    def ob_sign_other_party_subject_name(self, value):
+        self._ob_sign_other_party_subject_name = value
     @property
     def other_partner_pid_list(self):
         return self._other_partner_pid_list
@@ -412,6 +492,11 @@ class FxiaokeCreateLeadsParams(object):
                 params['ali_cloud_bpid_list'] = self.ali_cloud_bpid_list.to_alipay_dict()
             else:
                 params['ali_cloud_bpid_list'] = self.ali_cloud_bpid_list
+        if self.alicloud_settlement_mode:
+            if hasattr(self.alicloud_settlement_mode, 'to_alipay_dict'):
+                params['alicloud_settlement_mode'] = self.alicloud_settlement_mode.to_alipay_dict()
+            else:
+                params['alicloud_settlement_mode'] = self.alicloud_settlement_mode
         if self.bid_type:
             if hasattr(self.bid_type, 'to_alipay_dict'):
                 params['bid_type'] = self.bid_type.to_alipay_dict()
@@ -477,6 +562,31 @@ class FxiaokeCreateLeadsParams(object):
                 params['expect_sign_date'] = self.expect_sign_date.to_alipay_dict()
             else:
                 params['expect_sign_date'] = self.expect_sign_date
+        if self.final_customer_sign_other_party_subject_id:
+            if hasattr(self.final_customer_sign_other_party_subject_id, 'to_alipay_dict'):
+                params['final_customer_sign_other_party_subject_id'] = self.final_customer_sign_other_party_subject_id.to_alipay_dict()
+            else:
+                params['final_customer_sign_other_party_subject_id'] = self.final_customer_sign_other_party_subject_id
+        if self.final_customer_sign_other_party_subject_name:
+            if hasattr(self.final_customer_sign_other_party_subject_name, 'to_alipay_dict'):
+                params['final_customer_sign_other_party_subject_name'] = self.final_customer_sign_other_party_subject_name.to_alipay_dict()
+            else:
+                params['final_customer_sign_other_party_subject_name'] = self.final_customer_sign_other_party_subject_name
+        if self.final_customer_sign_subject_id:
+            if hasattr(self.final_customer_sign_subject_id, 'to_alipay_dict'):
+                params['final_customer_sign_subject_id'] = self.final_customer_sign_subject_id.to_alipay_dict()
+            else:
+                params['final_customer_sign_subject_id'] = self.final_customer_sign_subject_id
+        if self.final_customer_sign_subject_name:
+            if hasattr(self.final_customer_sign_subject_name, 'to_alipay_dict'):
+                params['final_customer_sign_subject_name'] = self.final_customer_sign_subject_name.to_alipay_dict()
+            else:
+                params['final_customer_sign_subject_name'] = self.final_customer_sign_subject_name
+        if self.general_agent_cooperation_type:
+            if hasattr(self.general_agent_cooperation_type, 'to_alipay_dict'):
+                params['general_agent_cooperation_type'] = self.general_agent_cooperation_type.to_alipay_dict()
+            else:
+                params['general_agent_cooperation_type'] = self.general_agent_cooperation_type
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -517,6 +627,16 @@ class FxiaokeCreateLeadsParams(object):
                 params['leads_other_cloud_pedestal'] = self.leads_other_cloud_pedestal.to_alipay_dict()
             else:
                 params['leads_other_cloud_pedestal'] = self.leads_other_cloud_pedestal
+        if self.leads_other_partners:
+            if hasattr(self.leads_other_partners, 'to_alipay_dict'):
+                params['leads_other_partners'] = self.leads_other_partners.to_alipay_dict()
+            else:
+                params['leads_other_partners'] = self.leads_other_partners
+        if self.leads_other_partners_name:
+            if hasattr(self.leads_other_partners_name, 'to_alipay_dict'):
+                params['leads_other_partners_name'] = self.leads_other_partners_name.to_alipay_dict()
+            else:
+                params['leads_other_partners_name'] = self.leads_other_partners_name
         if self.leads_product_type:
             if hasattr(self.leads_product_type, 'to_alipay_dict'):
                 params['leads_product_type'] = self.leads_product_type.to_alipay_dict()
@@ -537,6 +657,16 @@ class FxiaokeCreateLeadsParams(object):
                 params['leads_source_partner_id'] = self.leads_source_partner_id.to_alipay_dict()
             else:
                 params['leads_source_partner_id'] = self.leads_source_partner_id
+        if self.ob_sign_other_party_subject_id:
+            if hasattr(self.ob_sign_other_party_subject_id, 'to_alipay_dict'):
+                params['ob_sign_other_party_subject_id'] = self.ob_sign_other_party_subject_id.to_alipay_dict()
+            else:
+                params['ob_sign_other_party_subject_id'] = self.ob_sign_other_party_subject_id
+        if self.ob_sign_other_party_subject_name:
+            if hasattr(self.ob_sign_other_party_subject_name, 'to_alipay_dict'):
+                params['ob_sign_other_party_subject_name'] = self.ob_sign_other_party_subject_name.to_alipay_dict()
+            else:
+                params['ob_sign_other_party_subject_name'] = self.ob_sign_other_party_subject_name
         if self.other_partner_pid_list:
             if isinstance(self.other_partner_pid_list, list):
                 for i in range(0, len(self.other_partner_pid_list)):
@@ -663,6 +793,8 @@ class FxiaokeCreateLeadsParams(object):
             o.actual_lead_party = d['actual_lead_party']
         if 'ali_cloud_bpid_list' in d:
             o.ali_cloud_bpid_list = d['ali_cloud_bpid_list']
+        if 'alicloud_settlement_mode' in d:
+            o.alicloud_settlement_mode = d['alicloud_settlement_mode']
         if 'bid_type' in d:
             o.bid_type = d['bid_type']
         if 'cbm_work_no_list' in d:
@@ -687,6 +819,16 @@ class FxiaokeCreateLeadsParams(object):
             o.expect_bid_date = d['expect_bid_date']
         if 'expect_sign_date' in d:
             o.expect_sign_date = d['expect_sign_date']
+        if 'final_customer_sign_other_party_subject_id' in d:
+            o.final_customer_sign_other_party_subject_id = d['final_customer_sign_other_party_subject_id']
+        if 'final_customer_sign_other_party_subject_name' in d:
+            o.final_customer_sign_other_party_subject_name = d['final_customer_sign_other_party_subject_name']
+        if 'final_customer_sign_subject_id' in d:
+            o.final_customer_sign_subject_id = d['final_customer_sign_subject_id']
+        if 'final_customer_sign_subject_name' in d:
+            o.final_customer_sign_subject_name = d['final_customer_sign_subject_name']
+        if 'general_agent_cooperation_type' in d:
+            o.general_agent_cooperation_type = d['general_agent_cooperation_type']
         if 'id' in d:
             o.id = d['id']
         if 'is_bid' in d:
@@ -703,6 +845,10 @@ class FxiaokeCreateLeadsParams(object):
             o.leads_normandy = d['leads_normandy']
         if 'leads_other_cloud_pedestal' in d:
             o.leads_other_cloud_pedestal = d['leads_other_cloud_pedestal']
+        if 'leads_other_partners' in d:
+            o.leads_other_partners = d['leads_other_partners']
+        if 'leads_other_partners_name' in d:
+            o.leads_other_partners_name = d['leads_other_partners_name']
         if 'leads_product_type' in d:
             o.leads_product_type = d['leads_product_type']
         if 'leads_sale_channel' in d:
@@ -711,6 +857,10 @@ class FxiaokeCreateLeadsParams(object):
             o.leads_sale_territory = d['leads_sale_territory']
         if 'leads_source_partner_id' in d:
             o.leads_source_partner_id = d['leads_source_partner_id']
+        if 'ob_sign_other_party_subject_id' in d:
+            o.ob_sign_other_party_subject_id = d['ob_sign_other_party_subject_id']
+        if 'ob_sign_other_party_subject_name' in d:
+            o.ob_sign_other_party_subject_name = d['ob_sign_other_party_subject_name']
         if 'other_partner_pid_list' in d:
             o.other_partner_pid_list = d['other_partner_pid_list']
         if 'other_party_sign_subject' in d:

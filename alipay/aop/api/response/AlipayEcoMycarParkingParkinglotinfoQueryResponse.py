@@ -34,6 +34,7 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
         self._parking_poiid = None
         self._pay_type = None
         self._province_id = None
+        self._serivce_url = None
         self._service_list = None
         self._shopingmall_id = None
         self._time_out = None
@@ -205,6 +206,13 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
     def province_id(self, value):
         self._province_id = value
     @property
+    def serivce_url(self):
+        return self._serivce_url
+
+    @serivce_url.setter
+    def serivce_url(self, value):
+        self._serivce_url = value
+    @property
     def service_list(self):
         return self._service_list
 
@@ -278,6 +286,8 @@ class AlipayEcoMycarParkingParkinglotinfoQueryResponse(AlipayResponse):
             self.pay_type = response['pay_type']
         if 'province_id' in response:
             self.province_id = response['province_id']
+        if 'serivce_url' in response:
+            self.serivce_url = response['serivce_url']
         if 'service_list' in response:
             self.service_list = response['service_list']
         if 'shopingmall_id' in response:

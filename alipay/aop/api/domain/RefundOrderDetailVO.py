@@ -24,6 +24,7 @@ class RefundOrderDetailVO(object):
         self._medicare = None
         self._mi_amount = None
         self._operator_role = None
+        self._order_no = None
         self._packing_fee = None
         self._reason = None
         self._reason_code = None
@@ -146,6 +147,13 @@ class RefundOrderDetailVO(object):
     @operator_role.setter
     def operator_role(self, value):
         self._operator_role = value
+    @property
+    def order_no(self):
+        return self._order_no
+
+    @order_no.setter
+    def order_no(self, value):
+        self._order_no = value
     @property
     def packing_fee(self):
         return self._packing_fee
@@ -307,6 +315,11 @@ class RefundOrderDetailVO(object):
                 params['operator_role'] = self.operator_role.to_alipay_dict()
             else:
                 params['operator_role'] = self.operator_role
+        if self.order_no:
+            if hasattr(self.order_no, 'to_alipay_dict'):
+                params['order_no'] = self.order_no.to_alipay_dict()
+            else:
+                params['order_no'] = self.order_no
         if self.packing_fee:
             if hasattr(self.packing_fee, 'to_alipay_dict'):
                 params['packing_fee'] = self.packing_fee.to_alipay_dict()
@@ -397,6 +410,8 @@ class RefundOrderDetailVO(object):
             o.mi_amount = d['mi_amount']
         if 'operator_role' in d:
             o.operator_role = d['operator_role']
+        if 'order_no' in d:
+            o.order_no = d['order_no']
         if 'packing_fee' in d:
             o.packing_fee = d['packing_fee']
         if 'reason' in d:

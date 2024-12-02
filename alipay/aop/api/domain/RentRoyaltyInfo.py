@@ -13,6 +13,7 @@ class RentRoyaltyInfo(object):
         self._buyer_open_id = None
         self._invest_pid = None
         self._order_id = None
+        self._out_order_id = None
         self._royalty_list = None
         self._status = None
 
@@ -44,6 +45,13 @@ class RentRoyaltyInfo(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
     @property
     def royalty_list(self):
         return self._royalty_list
@@ -88,6 +96,11 @@ class RentRoyaltyInfo(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.royalty_list:
             if isinstance(self.royalty_list, list):
                 for i in range(0, len(self.royalty_list)):
@@ -118,6 +131,8 @@ class RentRoyaltyInfo(object):
             o.invest_pid = d['invest_pid']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'royalty_list' in d:
             o.royalty_list = d['royalty_list']
         if 'status' in d:

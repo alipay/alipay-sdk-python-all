@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CreditGoInfo import CreditGoInfo
 
 
 class CreditInfoDTO(object):
@@ -10,6 +11,7 @@ class CreditInfoDTO(object):
     def __init__(self):
         self._acceptance_jump_url = None
         self._credit_deposit_period_pay_type = None
+        self._credit_go_info = None
         self._credit_product_code = None
         self._no_need_verify_identity = None
         self._out_agreement_no = None
@@ -29,6 +31,16 @@ class CreditInfoDTO(object):
     @credit_deposit_period_pay_type.setter
     def credit_deposit_period_pay_type(self, value):
         self._credit_deposit_period_pay_type = value
+    @property
+    def credit_go_info(self):
+        return self._credit_go_info
+
+    @credit_go_info.setter
+    def credit_go_info(self, value):
+        if isinstance(value, CreditGoInfo):
+            self._credit_go_info = value
+        else:
+            self._credit_go_info = CreditGoInfo.from_alipay_dict(value)
     @property
     def credit_product_code(self):
         return self._credit_product_code
@@ -71,6 +83,11 @@ class CreditInfoDTO(object):
                 params['credit_deposit_period_pay_type'] = self.credit_deposit_period_pay_type.to_alipay_dict()
             else:
                 params['credit_deposit_period_pay_type'] = self.credit_deposit_period_pay_type
+        if self.credit_go_info:
+            if hasattr(self.credit_go_info, 'to_alipay_dict'):
+                params['credit_go_info'] = self.credit_go_info.to_alipay_dict()
+            else:
+                params['credit_go_info'] = self.credit_go_info
         if self.credit_product_code:
             if hasattr(self.credit_product_code, 'to_alipay_dict'):
                 params['credit_product_code'] = self.credit_product_code.to_alipay_dict()
@@ -102,6 +119,8 @@ class CreditInfoDTO(object):
             o.acceptance_jump_url = d['acceptance_jump_url']
         if 'credit_deposit_period_pay_type' in d:
             o.credit_deposit_period_pay_type = d['credit_deposit_period_pay_type']
+        if 'credit_go_info' in d:
+            o.credit_go_info = d['credit_go_info']
         if 'credit_product_code' in d:
             o.credit_product_code = d['credit_product_code']
         if 'no_need_verify_identity' in d:

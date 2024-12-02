@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SpecifyUserInfo import SpecifyUserInfo
 
 
 class AlipayUserDtbankcustChannelvoucherSendModel(object):
@@ -13,6 +14,7 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
         self._open_id = None
         self._out_biz_no = None
         self._phone_id = None
+        self._specify_user_info = None
         self._user_id = None
 
     @property
@@ -51,6 +53,16 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
     def phone_id(self, value):
         self._phone_id = value
     @property
+    def specify_user_info(self):
+        return self._specify_user_info
+
+    @specify_user_info.setter
+    def specify_user_info(self, value):
+        if isinstance(value, SpecifyUserInfo):
+            self._specify_user_info = value
+        else:
+            self._specify_user_info = SpecifyUserInfo.from_alipay_dict(value)
+    @property
     def user_id(self):
         return self._user_id
 
@@ -86,6 +98,11 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
                 params['phone_id'] = self.phone_id.to_alipay_dict()
             else:
                 params['phone_id'] = self.phone_id
+        if self.specify_user_info:
+            if hasattr(self.specify_user_info, 'to_alipay_dict'):
+                params['specify_user_info'] = self.specify_user_info.to_alipay_dict()
+            else:
+                params['specify_user_info'] = self.specify_user_info
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -108,6 +125,8 @@ class AlipayUserDtbankcustChannelvoucherSendModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'phone_id' in d:
             o.phone_id = d['phone_id']
+        if 'specify_user_info' in d:
+            o.specify_user_info = d['specify_user_info']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

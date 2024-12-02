@@ -25,10 +25,13 @@ class DtBankPreferenceMultiStagedRule(object):
 
     @staged_discount_list.setter
     def staged_discount_list(self, value):
-        if isinstance(value, DtBankStagedThresholdInfo):
-            self._staged_discount_list = value
-        else:
-            self._staged_discount_list = DtBankStagedThresholdInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._staged_discount_list = list()
+            for i in value:
+                if isinstance(i, DtBankStagedThresholdInfo):
+                    self._staged_discount_list.append(i)
+                else:
+                    self._staged_discount_list.append(DtBankStagedThresholdInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -39,6 +42,11 @@ class DtBankPreferenceMultiStagedRule(object):
             else:
                 params['max_reduce_amount'] = self.max_reduce_amount
         if self.staged_discount_list:
+            if isinstance(self.staged_discount_list, list):
+                for i in range(0, len(self.staged_discount_list)):
+                    element = self.staged_discount_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.staged_discount_list[i] = element.to_alipay_dict()
             if hasattr(self.staged_discount_list, 'to_alipay_dict'):
                 params['staged_discount_list'] = self.staged_discount_list.to_alipay_dict()
             else:

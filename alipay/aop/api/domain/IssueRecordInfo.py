@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class IssueRecordInfo(object):
 
     def __init__(self):
+        self._currency = None
         self._issue_quota = None
         self._issue_status = None
         self._owner_id = None
@@ -16,6 +17,13 @@ class IssueRecordInfo(object):
         self._quota_id = None
         self._user_name = None
 
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def issue_quota(self):
         return self._issue_quota
@@ -69,6 +77,11 @@ class IssueRecordInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.issue_quota:
             if hasattr(self.issue_quota, 'to_alipay_dict'):
                 params['issue_quota'] = self.issue_quota.to_alipay_dict()
@@ -111,6 +124,8 @@ class IssueRecordInfo(object):
         if not d:
             return None
         o = IssueRecordInfo()
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'issue_quota' in d:
             o.issue_quota = d['issue_quota']
         if 'issue_status' in d:

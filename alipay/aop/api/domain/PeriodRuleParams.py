@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SceneRuleParams import SceneRuleParams
 
 
 class PeriodRuleParams(object):
@@ -11,6 +12,7 @@ class PeriodRuleParams(object):
         self._execute_time = None
         self._period = None
         self._period_type = None
+        self._scene_rule_params = None
         self._single_amount = None
         self._total_amount = None
         self._total_payments = None
@@ -36,6 +38,16 @@ class PeriodRuleParams(object):
     @period_type.setter
     def period_type(self, value):
         self._period_type = value
+    @property
+    def scene_rule_params(self):
+        return self._scene_rule_params
+
+    @scene_rule_params.setter
+    def scene_rule_params(self, value):
+        if isinstance(value, SceneRuleParams):
+            self._scene_rule_params = value
+        else:
+            self._scene_rule_params = SceneRuleParams.from_alipay_dict(value)
     @property
     def single_amount(self):
         return self._single_amount
@@ -76,6 +88,11 @@ class PeriodRuleParams(object):
                 params['period_type'] = self.period_type.to_alipay_dict()
             else:
                 params['period_type'] = self.period_type
+        if self.scene_rule_params:
+            if hasattr(self.scene_rule_params, 'to_alipay_dict'):
+                params['scene_rule_params'] = self.scene_rule_params.to_alipay_dict()
+            else:
+                params['scene_rule_params'] = self.scene_rule_params
         if self.single_amount:
             if hasattr(self.single_amount, 'to_alipay_dict'):
                 params['single_amount'] = self.single_amount.to_alipay_dict()
@@ -104,6 +121,8 @@ class PeriodRuleParams(object):
             o.period = d['period']
         if 'period_type' in d:
             o.period_type = d['period_type']
+        if 'scene_rule_params' in d:
+            o.scene_rule_params = d['scene_rule_params']
         if 'single_amount' in d:
             o.single_amount = d['single_amount']
         if 'total_amount' in d:

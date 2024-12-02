@@ -11,6 +11,7 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
         super(AlipayCommerceEducateMultideductQueryResponse, self).__init__()
         self._agreement_no = None
         self._agreement_status = None
+        self._asset = None
         self._open_id = None
         self._school_code = None
         self._user_id = None
@@ -30,6 +31,13 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
     @agreement_status.setter
     def agreement_status(self, value):
         self._agreement_status = value
+    @property
+    def asset(self):
+        return self._asset
+
+    @asset.setter
+    def asset(self, value):
+        self._asset = value
     @property
     def open_id(self):
         return self._open_id
@@ -65,6 +73,8 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'agreement_status' in response:
             self.agreement_status = response['agreement_status']
+        if 'asset' in response:
+            self.asset = response['asset']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'school_code' in response:

@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SaleInfo import SaleInfo
 from alipay.aop.api.domain.ShopRatingInfo import ShopRatingInfo
+from alipay.aop.api.domain.ProductDetailInfo import ProductDetailInfo
+from alipay.aop.api.domain.ProductDetailInfo import ProductDetailInfo
 
 
 class EcomStoreInfo(object):
@@ -35,6 +37,8 @@ class EcomStoreInfo(object):
         self._shop_rating = None
         self._shop_status = None
         self._shop_type = None
+        self._standard_amt_top_10_products = None
+        self._standard_volume_top_10_products = None
         self._uscc = None
 
     @property
@@ -228,6 +232,32 @@ class EcomStoreInfo(object):
     def shop_type(self, value):
         self._shop_type = value
     @property
+    def standard_amt_top_10_products(self):
+        return self._standard_amt_top_10_products
+
+    @standard_amt_top_10_products.setter
+    def standard_amt_top_10_products(self, value):
+        if isinstance(value, list):
+            self._standard_amt_top_10_products = list()
+            for i in value:
+                if isinstance(i, ProductDetailInfo):
+                    self._standard_amt_top_10_products.append(i)
+                else:
+                    self._standard_amt_top_10_products.append(ProductDetailInfo.from_alipay_dict(i))
+    @property
+    def standard_volume_top_10_products(self):
+        return self._standard_volume_top_10_products
+
+    @standard_volume_top_10_products.setter
+    def standard_volume_top_10_products(self, value):
+        if isinstance(value, list):
+            self._standard_volume_top_10_products = list()
+            for i in value:
+                if isinstance(i, ProductDetailInfo):
+                    self._standard_volume_top_10_products.append(i)
+                else:
+                    self._standard_volume_top_10_products.append(ProductDetailInfo.from_alipay_dict(i))
+    @property
     def uscc(self):
         return self._uscc
 
@@ -378,6 +408,26 @@ class EcomStoreInfo(object):
                 params['shop_type'] = self.shop_type.to_alipay_dict()
             else:
                 params['shop_type'] = self.shop_type
+        if self.standard_amt_top_10_products:
+            if isinstance(self.standard_amt_top_10_products, list):
+                for i in range(0, len(self.standard_amt_top_10_products)):
+                    element = self.standard_amt_top_10_products[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.standard_amt_top_10_products[i] = element.to_alipay_dict()
+            if hasattr(self.standard_amt_top_10_products, 'to_alipay_dict'):
+                params['standard_amt_top_10_products'] = self.standard_amt_top_10_products.to_alipay_dict()
+            else:
+                params['standard_amt_top_10_products'] = self.standard_amt_top_10_products
+        if self.standard_volume_top_10_products:
+            if isinstance(self.standard_volume_top_10_products, list):
+                for i in range(0, len(self.standard_volume_top_10_products)):
+                    element = self.standard_volume_top_10_products[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.standard_volume_top_10_products[i] = element.to_alipay_dict()
+            if hasattr(self.standard_volume_top_10_products, 'to_alipay_dict'):
+                params['standard_volume_top_10_products'] = self.standard_volume_top_10_products.to_alipay_dict()
+            else:
+                params['standard_volume_top_10_products'] = self.standard_volume_top_10_products
         if self.uscc:
             if hasattr(self.uscc, 'to_alipay_dict'):
                 params['uscc'] = self.uscc.to_alipay_dict()
@@ -440,6 +490,10 @@ class EcomStoreInfo(object):
             o.shop_status = d['shop_status']
         if 'shop_type' in d:
             o.shop_type = d['shop_type']
+        if 'standard_amt_top_10_products' in d:
+            o.standard_amt_top_10_products = d['standard_amt_top_10_products']
+        if 'standard_volume_top_10_products' in d:
+            o.standard_volume_top_10_products = d['standard_volume_top_10_products']
         if 'uscc' in d:
             o.uscc = d['uscc']
         return o

@@ -9,6 +9,7 @@ class ChannelStatistic(object):
 
     def __init__(self):
         self._pay_channel = None
+        self._refund_amount = None
         self._settle_amount = None
         self._trade_amount = None
         self._trade_count = None
@@ -20,6 +21,13 @@ class ChannelStatistic(object):
     @pay_channel.setter
     def pay_channel(self, value):
         self._pay_channel = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
     @property
     def settle_amount(self):
         return self._settle_amount
@@ -50,6 +58,11 @@ class ChannelStatistic(object):
                 params['pay_channel'] = self.pay_channel.to_alipay_dict()
             else:
                 params['pay_channel'] = self.pay_channel
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
         if self.settle_amount:
             if hasattr(self.settle_amount, 'to_alipay_dict'):
                 params['settle_amount'] = self.settle_amount.to_alipay_dict()
@@ -74,6 +87,8 @@ class ChannelStatistic(object):
         o = ChannelStatistic()
         if 'pay_channel' in d:
             o.pay_channel = d['pay_channel']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
         if 'settle_amount' in d:
             o.settle_amount = d['settle_amount']
         if 'trade_amount' in d:

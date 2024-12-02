@@ -4,18 +4,21 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.WalletMarketingRule import WalletMarketingRule
+from alipay.aop.api.domain.WalletUserIdentityInfo import WalletUserIdentityInfo
 
 
 class AlipayFundWalletSceneSignModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._need_check_identity = None
         self._out_biz_no = None
         self._principal_open_id = None
         self._product_code = None
         self._user_id = None
         self._wallet_marketing_rule = None
         self._wallet_template_id = None
+        self._wallet_user_identity_info = None
 
     @property
     def biz_scene(self):
@@ -24,6 +27,13 @@ class AlipayFundWalletSceneSignModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def need_check_identity(self):
+        return self._need_check_identity
+
+    @need_check_identity.setter
+    def need_check_identity(self, value):
+        self._need_check_identity = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -69,6 +79,16 @@ class AlipayFundWalletSceneSignModel(object):
     @wallet_template_id.setter
     def wallet_template_id(self, value):
         self._wallet_template_id = value
+    @property
+    def wallet_user_identity_info(self):
+        return self._wallet_user_identity_info
+
+    @wallet_user_identity_info.setter
+    def wallet_user_identity_info(self, value):
+        if isinstance(value, WalletUserIdentityInfo):
+            self._wallet_user_identity_info = value
+        else:
+            self._wallet_user_identity_info = WalletUserIdentityInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -78,6 +98,11 @@ class AlipayFundWalletSceneSignModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.need_check_identity:
+            if hasattr(self.need_check_identity, 'to_alipay_dict'):
+                params['need_check_identity'] = self.need_check_identity.to_alipay_dict()
+            else:
+                params['need_check_identity'] = self.need_check_identity
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -108,6 +133,11 @@ class AlipayFundWalletSceneSignModel(object):
                 params['wallet_template_id'] = self.wallet_template_id.to_alipay_dict()
             else:
                 params['wallet_template_id'] = self.wallet_template_id
+        if self.wallet_user_identity_info:
+            if hasattr(self.wallet_user_identity_info, 'to_alipay_dict'):
+                params['wallet_user_identity_info'] = self.wallet_user_identity_info.to_alipay_dict()
+            else:
+                params['wallet_user_identity_info'] = self.wallet_user_identity_info
         return params
 
     @staticmethod
@@ -117,6 +147,8 @@ class AlipayFundWalletSceneSignModel(object):
         o = AlipayFundWalletSceneSignModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'need_check_identity' in d:
+            o.need_check_identity = d['need_check_identity']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'principal_open_id' in d:
@@ -129,6 +161,8 @@ class AlipayFundWalletSceneSignModel(object):
             o.wallet_marketing_rule = d['wallet_marketing_rule']
         if 'wallet_template_id' in d:
             o.wallet_template_id = d['wallet_template_id']
+        if 'wallet_user_identity_info' in d:
+            o.wallet_user_identity_info = d['wallet_user_identity_info']
         return o
 
 

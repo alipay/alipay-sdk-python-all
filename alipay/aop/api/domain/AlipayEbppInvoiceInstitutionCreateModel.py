@@ -14,6 +14,7 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._adapter_type = None
         self._agreement_no = None
         self._consult_mode = None
+        self._currency = None
         self._effective_end_date = None
         self._effective_start_date = None
         self._enterprise_id = None
@@ -56,6 +57,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     @consult_mode.setter
     def consult_mode(self, value):
         self._consult_mode = value
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective_end_date(self):
         return self._effective_end_date
@@ -189,6 +197,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['consult_mode'] = self.consult_mode.to_alipay_dict()
             else:
                 params['consult_mode'] = self.consult_mode
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.effective_end_date:
             if hasattr(self.effective_end_date, 'to_alipay_dict'):
                 params['effective_end_date'] = self.effective_end_date.to_alipay_dict()
@@ -289,6 +302,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.agreement_no = d['agreement_no']
         if 'consult_mode' in d:
             o.consult_mode = d['consult_mode']
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'effective_end_date' in d:
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:

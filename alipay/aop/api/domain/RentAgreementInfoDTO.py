@@ -10,6 +10,7 @@ class RentAgreementInfoDTO(object):
     def __init__(self):
         self._agreement_no = None
         self._deduct_agreement_no = None
+        self._personal_product_code = None
         self._rent_user_id = None
         self._rent_user_open_id = None
         self._status = None
@@ -28,6 +29,13 @@ class RentAgreementInfoDTO(object):
     @deduct_agreement_no.setter
     def deduct_agreement_no(self, value):
         self._deduct_agreement_no = value
+    @property
+    def personal_product_code(self):
+        return self._personal_product_code
+
+    @personal_product_code.setter
+    def personal_product_code(self, value):
+        self._personal_product_code = value
     @property
     def rent_user_id(self):
         return self._rent_user_id
@@ -63,6 +71,11 @@ class RentAgreementInfoDTO(object):
                 params['deduct_agreement_no'] = self.deduct_agreement_no.to_alipay_dict()
             else:
                 params['deduct_agreement_no'] = self.deduct_agreement_no
+        if self.personal_product_code:
+            if hasattr(self.personal_product_code, 'to_alipay_dict'):
+                params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
+            else:
+                params['personal_product_code'] = self.personal_product_code
         if self.rent_user_id:
             if hasattr(self.rent_user_id, 'to_alipay_dict'):
                 params['rent_user_id'] = self.rent_user_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class RentAgreementInfoDTO(object):
             o.agreement_no = d['agreement_no']
         if 'deduct_agreement_no' in d:
             o.deduct_agreement_no = d['deduct_agreement_no']
+        if 'personal_product_code' in d:
+            o.personal_product_code = d['personal_product_code']
         if 'rent_user_id' in d:
             o.rent_user_id = d['rent_user_id']
         if 'rent_user_open_id' in d:

@@ -9,6 +9,7 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
 
     def __init__(self):
         self._agreement_no = None
+        self._agreement_type = None
         self._file_id = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def agreement_type(self):
+        return self._agreement_type
+
+    @agreement_type.setter
+    def agreement_type(self, value):
+        self._agreement_type = value
     @property
     def file_id(self):
         return self._file_id
@@ -34,6 +42,11 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.agreement_type:
+            if hasattr(self.agreement_type, 'to_alipay_dict'):
+                params['agreement_type'] = self.agreement_type.to_alipay_dict()
+            else:
+                params['agreement_type'] = self.agreement_type
         if self.file_id:
             if hasattr(self.file_id, 'to_alipay_dict'):
                 params['file_id'] = self.file_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
         o = AlipayDataBillAccountbookereceiptQueryModel()
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'agreement_type' in d:
+            o.agreement_type = d['agreement_type']
         if 'file_id' in d:
             o.file_id = d['file_id']
         return o

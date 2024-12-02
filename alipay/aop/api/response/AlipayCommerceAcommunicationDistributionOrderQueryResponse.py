@@ -15,6 +15,7 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
         self._inst_order_id = None
         self._order_status = None
         self._order_status_code = None
+        self._order_status_desc = None
 
     @property
     def alipay_order_id(self):
@@ -57,6 +58,13 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
     @order_status_code.setter
     def order_status_code(self, value):
         self._order_status_code = value
+    @property
+    def order_status_desc(self):
+        return self._order_status_desc
+
+    @order_status_desc.setter
+    def order_status_desc(self, value):
+        self._order_status_desc = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceAcommunicationDistributionOrderQueryResponse, self).parse_response_content(response_content)
@@ -70,3 +78,5 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
             self.order_status = response['order_status']
         if 'order_status_code' in response:
             self.order_status_code = response['order_status_code']
+        if 'order_status_desc' in response:
+            self.order_status_desc = response['order_status_desc']

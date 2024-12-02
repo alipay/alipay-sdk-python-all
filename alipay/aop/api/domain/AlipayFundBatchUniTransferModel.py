@@ -12,6 +12,7 @@ class AlipayFundBatchUniTransferModel(object):
     def __init__(self):
         self._biz_scene = None
         self._business_params = None
+        self._order_title = None
         self._original_order_id = None
         self._out_batch_no = None
         self._payer_info = None
@@ -35,6 +36,13 @@ class AlipayFundBatchUniTransferModel(object):
     @business_params.setter
     def business_params(self, value):
         self._business_params = value
+    @property
+    def order_title(self):
+        return self._order_title
+
+    @order_title.setter
+    def order_title(self, value):
+        self._order_title = value
     @property
     def original_order_id(self):
         return self._original_order_id
@@ -114,6 +122,11 @@ class AlipayFundBatchUniTransferModel(object):
                 params['business_params'] = self.business_params.to_alipay_dict()
             else:
                 params['business_params'] = self.business_params
+        if self.order_title:
+            if hasattr(self.order_title, 'to_alipay_dict'):
+                params['order_title'] = self.order_title.to_alipay_dict()
+            else:
+                params['order_title'] = self.order_title
         if self.original_order_id:
             if hasattr(self.original_order_id, 'to_alipay_dict'):
                 params['original_order_id'] = self.original_order_id.to_alipay_dict()
@@ -170,6 +183,8 @@ class AlipayFundBatchUniTransferModel(object):
             o.biz_scene = d['biz_scene']
         if 'business_params' in d:
             o.business_params = d['business_params']
+        if 'order_title' in d:
+            o.order_title = d['order_title']
         if 'original_order_id' in d:
             o.original_order_id = d['original_order_id']
         if 'out_batch_no' in d:

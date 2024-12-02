@@ -9,6 +9,7 @@ class InstitutionBasicInfo(object):
 
     def __init__(self):
         self._consult_mode = None
+        self._currency = None
         self._effective = None
         self._effective_end_date = None
         self._effective_start_date = None
@@ -23,6 +24,13 @@ class InstitutionBasicInfo(object):
     @consult_mode.setter
     def consult_mode(self, value):
         self._consult_mode = value
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective(self):
         return self._effective
@@ -74,6 +82,11 @@ class InstitutionBasicInfo(object):
                 params['consult_mode'] = self.consult_mode.to_alipay_dict()
             else:
                 params['consult_mode'] = self.consult_mode
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.effective:
             if hasattr(self.effective, 'to_alipay_dict'):
                 params['effective'] = self.effective.to_alipay_dict()
@@ -113,6 +126,8 @@ class InstitutionBasicInfo(object):
         o = InstitutionBasicInfo()
         if 'consult_mode' in d:
             o.consult_mode = d['consult_mode']
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'effective' in d:
             o.effective = d['effective']
         if 'effective_end_date' in d:
