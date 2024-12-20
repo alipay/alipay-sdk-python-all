@@ -14,6 +14,7 @@ class AlipayCommerceTransportChargerPrivatebindSyncModel(object):
         self._open_id = None
         self._operate_time = None
         self._operator_uid = None
+        self._phone_num = None
         self._user_id = None
 
     @property
@@ -55,6 +56,13 @@ class AlipayCommerceTransportChargerPrivatebindSyncModel(object):
     def operator_uid(self, value):
         self._operator_uid = value
     @property
+    def phone_num(self):
+        return self._phone_num
+
+    @phone_num.setter
+    def phone_num(self, value):
+        self._phone_num = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -90,6 +98,11 @@ class AlipayCommerceTransportChargerPrivatebindSyncModel(object):
                 params['operator_uid'] = self.operator_uid.to_alipay_dict()
             else:
                 params['operator_uid'] = self.operator_uid
+        if self.phone_num:
+            if hasattr(self.phone_num, 'to_alipay_dict'):
+                params['phone_num'] = self.phone_num.to_alipay_dict()
+            else:
+                params['phone_num'] = self.phone_num
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -112,6 +125,8 @@ class AlipayCommerceTransportChargerPrivatebindSyncModel(object):
             o.operate_time = d['operate_time']
         if 'operator_uid' in d:
             o.operator_uid = d['operator_uid']
+        if 'phone_num' in d:
+            o.phone_num = d['phone_num']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

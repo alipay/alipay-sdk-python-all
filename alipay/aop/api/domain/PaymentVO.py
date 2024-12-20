@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class PaymentVO(object):
 
     def __init__(self):
+        self._amount_discount = None
         self._amount_item = None
         self._amount_original = None
         self._amount_user = None
@@ -20,6 +21,13 @@ class PaymentVO(object):
         self._packing_fee = None
         self._time_markup_price = None
 
+    @property
+    def amount_discount(self):
+        return self._amount_discount
+
+    @amount_discount.setter
+    def amount_discount(self, value):
+        self._amount_discount = value
     @property
     def amount_item(self):
         return self._amount_item
@@ -101,6 +109,11 @@ class PaymentVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_discount:
+            if hasattr(self.amount_discount, 'to_alipay_dict'):
+                params['amount_discount'] = self.amount_discount.to_alipay_dict()
+            else:
+                params['amount_discount'] = self.amount_discount
         if self.amount_item:
             if hasattr(self.amount_item, 'to_alipay_dict'):
                 params['amount_item'] = self.amount_item.to_alipay_dict()
@@ -163,6 +176,8 @@ class PaymentVO(object):
         if not d:
             return None
         o = PaymentVO()
+        if 'amount_discount' in d:
+            o.amount_discount = d['amount_discount']
         if 'amount_item' in d:
             o.amount_item = d['amount_item']
         if 'amount_original' in d:

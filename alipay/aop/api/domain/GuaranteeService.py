@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GuaranteeDetail import GuaranteeDetail
 from alipay.aop.api.domain.GuaranteeDetail import GuaranteeDetail
+from alipay.aop.api.domain.RentCarGuaranteeDetailDescription import RentCarGuaranteeDetailDescription
 from alipay.aop.api.domain.GuaranteeDetail import GuaranteeDetail
 from alipay.aop.api.domain.GuaranteeDetail import GuaranteeDetail
 from alipay.aop.api.domain.GuaranteeDetail import GuaranteeDetail
@@ -17,6 +18,7 @@ class GuaranteeService(object):
         self._advance_payment_guarantee = None
         self._amount = None
         self._depreciation_guarantee = None
+        self._guarantee_detail_description = None
         self._name = None
         self._passenger_guarantee = None
         self._service_description = None
@@ -55,6 +57,19 @@ class GuaranteeService(object):
             self._depreciation_guarantee = value
         else:
             self._depreciation_guarantee = GuaranteeDetail.from_alipay_dict(value)
+    @property
+    def guarantee_detail_description(self):
+        return self._guarantee_detail_description
+
+    @guarantee_detail_description.setter
+    def guarantee_detail_description(self, value):
+        if isinstance(value, list):
+            self._guarantee_detail_description = list()
+            for i in value:
+                if isinstance(i, RentCarGuaranteeDetailDescription):
+                    self._guarantee_detail_description.append(i)
+                else:
+                    self._guarantee_detail_description.append(RentCarGuaranteeDetailDescription.from_alipay_dict(i))
     @property
     def name(self):
         return self._name
@@ -162,6 +177,16 @@ class GuaranteeService(object):
                 params['depreciation_guarantee'] = self.depreciation_guarantee.to_alipay_dict()
             else:
                 params['depreciation_guarantee'] = self.depreciation_guarantee
+        if self.guarantee_detail_description:
+            if isinstance(self.guarantee_detail_description, list):
+                for i in range(0, len(self.guarantee_detail_description)):
+                    element = self.guarantee_detail_description[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.guarantee_detail_description[i] = element.to_alipay_dict()
+            if hasattr(self.guarantee_detail_description, 'to_alipay_dict'):
+                params['guarantee_detail_description'] = self.guarantee_detail_description.to_alipay_dict()
+            else:
+                params['guarantee_detail_description'] = self.guarantee_detail_description
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -235,6 +260,8 @@ class GuaranteeService(object):
             o.amount = d['amount']
         if 'depreciation_guarantee' in d:
             o.depreciation_guarantee = d['depreciation_guarantee']
+        if 'guarantee_detail_description' in d:
+            o.guarantee_detail_description = d['guarantee_detail_description']
         if 'name' in d:
             o.name = d['name']
         if 'passenger_guarantee' in d:

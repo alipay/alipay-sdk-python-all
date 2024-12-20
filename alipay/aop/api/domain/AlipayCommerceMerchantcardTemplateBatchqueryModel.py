@@ -11,9 +11,11 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
         self._card_template_appid = None
         self._card_template_name = None
         self._card_type = None
+        self._open_id = None
         self._page_num = None
         self._page_size = None
         self._shop_id = None
+        self._user_id = None
 
     @property
     def card_template_appid(self):
@@ -37,6 +39,13 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
     def card_type(self, value):
         self._card_type = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def page_num(self):
         return self._page_num
 
@@ -57,6 +66,13 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
     @shop_id.setter
     def shop_id(self, value):
         self._shop_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -76,6 +92,11 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -91,6 +112,11 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -104,12 +130,16 @@ class AlipayCommerceMerchantcardTemplateBatchqueryModel(object):
             o.card_template_name = d['card_template_name']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

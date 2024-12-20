@@ -23,6 +23,7 @@ class PunishBreakInfo(object):
         self._publish_date = None
         self._reg_case_date = None
         self._trpe = None
+        self._type = None
         self._un_perform_part = None
 
     @property
@@ -131,6 +132,13 @@ class PunishBreakInfo(object):
     def trpe(self, value):
         self._trpe = value
     @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def un_perform_part(self):
         return self._un_perform_part
 
@@ -216,6 +224,11 @@ class PunishBreakInfo(object):
                 params['trpe'] = self.trpe.to_alipay_dict()
             else:
                 params['trpe'] = self.trpe
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.un_perform_part:
             if hasattr(self.un_perform_part, 'to_alipay_dict'):
                 params['un_perform_part'] = self.un_perform_part.to_alipay_dict()
@@ -258,6 +271,8 @@ class PunishBreakInfo(object):
             o.reg_case_date = d['reg_case_date']
         if 'trpe' in d:
             o.trpe = d['trpe']
+        if 'type' in d:
+            o.type = d['type']
         if 'un_perform_part' in d:
             o.un_perform_part = d['un_perform_part']
         return o

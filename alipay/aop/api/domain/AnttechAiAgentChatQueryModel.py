@@ -12,6 +12,7 @@ class AnttechAiAgentChatQueryModel(object):
     def __init__(self):
         self._agent_id = None
         self._chat_contents = None
+        self._heartbeat_mode = None
         self._scene_param = None
         self._session_id = None
 
@@ -35,6 +36,13 @@ class AnttechAiAgentChatQueryModel(object):
                     self._chat_contents.append(i)
                 else:
                     self._chat_contents.append(DTAgentChatContent.from_alipay_dict(i))
+    @property
+    def heartbeat_mode(self):
+        return self._heartbeat_mode
+
+    @heartbeat_mode.setter
+    def heartbeat_mode(self, value):
+        self._heartbeat_mode = value
     @property
     def scene_param(self):
         return self._scene_param
@@ -71,6 +79,11 @@ class AnttechAiAgentChatQueryModel(object):
                 params['chat_contents'] = self.chat_contents.to_alipay_dict()
             else:
                 params['chat_contents'] = self.chat_contents
+        if self.heartbeat_mode:
+            if hasattr(self.heartbeat_mode, 'to_alipay_dict'):
+                params['heartbeat_mode'] = self.heartbeat_mode.to_alipay_dict()
+            else:
+                params['heartbeat_mode'] = self.heartbeat_mode
         if self.scene_param:
             if hasattr(self.scene_param, 'to_alipay_dict'):
                 params['scene_param'] = self.scene_param.to_alipay_dict()
@@ -92,6 +105,8 @@ class AnttechAiAgentChatQueryModel(object):
             o.agent_id = d['agent_id']
         if 'chat_contents' in d:
             o.chat_contents = d['chat_contents']
+        if 'heartbeat_mode' in d:
+            o.heartbeat_mode = d['heartbeat_mode']
         if 'scene_param' in d:
             o.scene_param = d['scene_param']
         if 'session_id' in d:

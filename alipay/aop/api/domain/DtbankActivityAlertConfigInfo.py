@@ -12,6 +12,7 @@ class DtbankActivityAlertConfigInfo(object):
         self._app_id_list = None
         self._budget_alert_notify_type = None
         self._phone_no_list = None
+        self._write_off_rate_alert_value = None
 
     @property
     def alert_value(self):
@@ -47,6 +48,13 @@ class DtbankActivityAlertConfigInfo(object):
             self._phone_no_list = list()
             for i in value:
                 self._phone_no_list.append(i)
+    @property
+    def write_off_rate_alert_value(self):
+        return self._write_off_rate_alert_value
+
+    @write_off_rate_alert_value.setter
+    def write_off_rate_alert_value(self, value):
+        self._write_off_rate_alert_value = value
 
 
     def to_alipay_dict(self):
@@ -81,6 +89,11 @@ class DtbankActivityAlertConfigInfo(object):
                 params['phone_no_list'] = self.phone_no_list.to_alipay_dict()
             else:
                 params['phone_no_list'] = self.phone_no_list
+        if self.write_off_rate_alert_value:
+            if hasattr(self.write_off_rate_alert_value, 'to_alipay_dict'):
+                params['write_off_rate_alert_value'] = self.write_off_rate_alert_value.to_alipay_dict()
+            else:
+                params['write_off_rate_alert_value'] = self.write_off_rate_alert_value
         return params
 
     @staticmethod
@@ -96,6 +109,8 @@ class DtbankActivityAlertConfigInfo(object):
             o.budget_alert_notify_type = d['budget_alert_notify_type']
         if 'phone_no_list' in d:
             o.phone_no_list = d['phone_no_list']
+        if 'write_off_rate_alert_value' in d:
+            o.write_off_rate_alert_value = d['write_off_rate_alert_value']
         return o
 
 

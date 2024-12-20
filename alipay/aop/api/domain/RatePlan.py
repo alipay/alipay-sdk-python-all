@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CancelRule import CancelRule
 from alipay.aop.api.domain.HotelInvoice import HotelInvoice
 from alipay.aop.api.domain.NightlyRate import NightlyRate
 from alipay.aop.api.domain.RatePlanLabel import RatePlanLabel
@@ -12,6 +13,7 @@ class RatePlan(object):
 
     def __init__(self):
         self._booking_rule_ids = None
+        self._cancel_rules = None
         self._confirm_minutes = None
         self._customer_type = None
         self._identification = None
@@ -41,6 +43,19 @@ class RatePlan(object):
             self._booking_rule_ids = list()
             for i in value:
                 self._booking_rule_ids.append(i)
+    @property
+    def cancel_rules(self):
+        return self._cancel_rules
+
+    @cancel_rules.setter
+    def cancel_rules(self, value):
+        if isinstance(value, list):
+            self._cancel_rules = list()
+            for i in value:
+                if isinstance(i, CancelRule):
+                    self._cancel_rules.append(i)
+                else:
+                    self._cancel_rules.append(CancelRule.from_alipay_dict(i))
     @property
     def confirm_minutes(self):
         return self._confirm_minutes
@@ -202,6 +217,16 @@ class RatePlan(object):
                 params['booking_rule_ids'] = self.booking_rule_ids.to_alipay_dict()
             else:
                 params['booking_rule_ids'] = self.booking_rule_ids
+        if self.cancel_rules:
+            if isinstance(self.cancel_rules, list):
+                for i in range(0, len(self.cancel_rules)):
+                    element = self.cancel_rules[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.cancel_rules[i] = element.to_alipay_dict()
+            if hasattr(self.cancel_rules, 'to_alipay_dict'):
+                params['cancel_rules'] = self.cancel_rules.to_alipay_dict()
+            else:
+                params['cancel_rules'] = self.cancel_rules
         if self.confirm_minutes:
             if hasattr(self.confirm_minutes, 'to_alipay_dict'):
                 params['confirm_minutes'] = self.confirm_minutes.to_alipay_dict()
@@ -321,6 +346,8 @@ class RatePlan(object):
         o = RatePlan()
         if 'booking_rule_ids' in d:
             o.booking_rule_ids = d['booking_rule_ids']
+        if 'cancel_rules' in d:
+            o.cancel_rules = d['cancel_rules']
         if 'confirm_minutes' in d:
             o.confirm_minutes = d['confirm_minutes']
         if 'customer_type' in d:

@@ -51,6 +51,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._sub_merchant = None
         self._timeout_express = None
         self._title = None
+        self._trade_app_id = None
 
     @property
     def address_info(self):
@@ -296,6 +297,13 @@ class AlipayOpenMiniOrderCreateModel(object):
     @title.setter
     def title(self, value):
         self._title = value
+    @property
+    def trade_app_id(self):
+        return self._trade_app_id
+
+    @trade_app_id.setter
+    def trade_app_id(self, value):
+        self._trade_app_id = value
 
 
     def to_alipay_dict(self):
@@ -445,6 +453,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['title'] = self.title.to_alipay_dict()
             else:
                 params['title'] = self.title
+        if self.trade_app_id:
+            if hasattr(self.trade_app_id, 'to_alipay_dict'):
+                params['trade_app_id'] = self.trade_app_id.to_alipay_dict()
+            else:
+                params['trade_app_id'] = self.trade_app_id
         return params
 
     @staticmethod
@@ -508,6 +521,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.timeout_express = d['timeout_express']
         if 'title' in d:
             o.title = d['title']
+        if 'trade_app_id' in d:
+            o.trade_app_id = d['trade_app_id']
         return o
 
 

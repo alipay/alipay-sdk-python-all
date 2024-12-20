@@ -11,6 +11,8 @@ class AlipayOfflineProviderCollaborateTaskIncompleteModel(object):
         self._biz_time = None
         self._out_biz_no = None
         self._reason_code = None
+        self._reason_desc = None
+        self._reason_sub_code = None
         self._task_no = None
 
     @property
@@ -34,6 +36,20 @@ class AlipayOfflineProviderCollaborateTaskIncompleteModel(object):
     @reason_code.setter
     def reason_code(self, value):
         self._reason_code = value
+    @property
+    def reason_desc(self):
+        return self._reason_desc
+
+    @reason_desc.setter
+    def reason_desc(self, value):
+        self._reason_desc = value
+    @property
+    def reason_sub_code(self):
+        return self._reason_sub_code
+
+    @reason_sub_code.setter
+    def reason_sub_code(self, value):
+        self._reason_sub_code = value
     @property
     def task_no(self):
         return self._task_no
@@ -60,6 +76,16 @@ class AlipayOfflineProviderCollaborateTaskIncompleteModel(object):
                 params['reason_code'] = self.reason_code.to_alipay_dict()
             else:
                 params['reason_code'] = self.reason_code
+        if self.reason_desc:
+            if hasattr(self.reason_desc, 'to_alipay_dict'):
+                params['reason_desc'] = self.reason_desc.to_alipay_dict()
+            else:
+                params['reason_desc'] = self.reason_desc
+        if self.reason_sub_code:
+            if hasattr(self.reason_sub_code, 'to_alipay_dict'):
+                params['reason_sub_code'] = self.reason_sub_code.to_alipay_dict()
+            else:
+                params['reason_sub_code'] = self.reason_sub_code
         if self.task_no:
             if hasattr(self.task_no, 'to_alipay_dict'):
                 params['task_no'] = self.task_no.to_alipay_dict()
@@ -78,6 +104,10 @@ class AlipayOfflineProviderCollaborateTaskIncompleteModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'reason_code' in d:
             o.reason_code = d['reason_code']
+        if 'reason_desc' in d:
+            o.reason_desc = d['reason_desc']
+        if 'reason_sub_code' in d:
+            o.reason_sub_code = d['reason_sub_code']
         if 'task_no' in d:
             o.task_no = d['task_no']
         return o

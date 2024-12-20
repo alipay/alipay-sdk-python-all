@@ -18,6 +18,7 @@ class AssetProduceItem(object):
         self._biz_tag = None
         self._biz_type = None
         self._city = None
+        self._code_group_flag = None
         self._combination_batch_no = None
         self._combination_count = None
         self._combination_orders = None
@@ -45,6 +46,7 @@ class AssetProduceItem(object):
         self._receiver_address = None
         self._receiver_mobile = None
         self._receiver_name = None
+        self._related_out_biz_no = None
         self._supplier_pid = None
         self._template_id = None
         self._template_name = None
@@ -120,6 +122,13 @@ class AssetProduceItem(object):
     @city.setter
     def city(self, value):
         self._city = value
+    @property
+    def code_group_flag(self):
+        return self._code_group_flag
+
+    @code_group_flag.setter
+    def code_group_flag(self, value):
+        self._code_group_flag = value
     @property
     def combination_batch_no(self):
         return self._combination_batch_no
@@ -313,6 +322,13 @@ class AssetProduceItem(object):
     def receiver_name(self, value):
         self._receiver_name = value
     @property
+    def related_out_biz_no(self):
+        return self._related_out_biz_no
+
+    @related_out_biz_no.setter
+    def related_out_biz_no(self, value):
+        self._related_out_biz_no = value
+    @property
     def supplier_pid(self):
         return self._supplier_pid
 
@@ -394,6 +410,11 @@ class AssetProduceItem(object):
                 params['city'] = self.city.to_alipay_dict()
             else:
                 params['city'] = self.city
+        if self.code_group_flag:
+            if hasattr(self.code_group_flag, 'to_alipay_dict'):
+                params['code_group_flag'] = self.code_group_flag.to_alipay_dict()
+            else:
+                params['code_group_flag'] = self.code_group_flag
         if self.combination_batch_no:
             if hasattr(self.combination_batch_no, 'to_alipay_dict'):
                 params['combination_batch_no'] = self.combination_batch_no.to_alipay_dict()
@@ -534,6 +555,11 @@ class AssetProduceItem(object):
                 params['receiver_name'] = self.receiver_name.to_alipay_dict()
             else:
                 params['receiver_name'] = self.receiver_name
+        if self.related_out_biz_no:
+            if hasattr(self.related_out_biz_no, 'to_alipay_dict'):
+                params['related_out_biz_no'] = self.related_out_biz_no.to_alipay_dict()
+            else:
+                params['related_out_biz_no'] = self.related_out_biz_no
         if self.supplier_pid:
             if hasattr(self.supplier_pid, 'to_alipay_dict'):
                 params['supplier_pid'] = self.supplier_pid.to_alipay_dict()
@@ -581,6 +607,8 @@ class AssetProduceItem(object):
             o.biz_type = d['biz_type']
         if 'city' in d:
             o.city = d['city']
+        if 'code_group_flag' in d:
+            o.code_group_flag = d['code_group_flag']
         if 'combination_batch_no' in d:
             o.combination_batch_no = d['combination_batch_no']
         if 'combination_count' in d:
@@ -635,6 +663,8 @@ class AssetProduceItem(object):
             o.receiver_mobile = d['receiver_mobile']
         if 'receiver_name' in d:
             o.receiver_name = d['receiver_name']
+        if 'related_out_biz_no' in d:
+            o.related_out_biz_no = d['related_out_biz_no']
         if 'supplier_pid' in d:
             o.supplier_pid = d['supplier_pid']
         if 'template_id' in d:

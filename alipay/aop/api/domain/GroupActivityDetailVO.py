@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CouponActivityContentVO import CouponActivityContentVO
 from alipay.aop.api.domain.CustomActivityContentVO import CustomActivityContentVO
 
 
@@ -11,6 +12,7 @@ class GroupActivityDetailVO(object):
     def __init__(self):
         self._biz_type = None
         self._client_position = None
+        self._coupon_content = None
         self._custom_content = None
         self._gmt_end = None
         self._gmt_start = None
@@ -33,6 +35,16 @@ class GroupActivityDetailVO(object):
     @client_position.setter
     def client_position(self, value):
         self._client_position = value
+    @property
+    def coupon_content(self):
+        return self._coupon_content
+
+    @coupon_content.setter
+    def coupon_content(self, value):
+        if isinstance(value, CouponActivityContentVO):
+            self._coupon_content = value
+        else:
+            self._coupon_content = CouponActivityContentVO.from_alipay_dict(value)
     @property
     def custom_content(self):
         return self._custom_content
@@ -102,6 +114,11 @@ class GroupActivityDetailVO(object):
                 params['client_position'] = self.client_position.to_alipay_dict()
             else:
                 params['client_position'] = self.client_position
+        if self.coupon_content:
+            if hasattr(self.coupon_content, 'to_alipay_dict'):
+                params['coupon_content'] = self.coupon_content.to_alipay_dict()
+            else:
+                params['coupon_content'] = self.coupon_content
         if self.custom_content:
             if hasattr(self.custom_content, 'to_alipay_dict'):
                 params['custom_content'] = self.custom_content.to_alipay_dict()
@@ -153,6 +170,8 @@ class GroupActivityDetailVO(object):
             o.biz_type = d['biz_type']
         if 'client_position' in d:
             o.client_position = d['client_position']
+        if 'coupon_content' in d:
+            o.coupon_content = d['coupon_content']
         if 'custom_content' in d:
             o.custom_content = d['custom_content']
         if 'gmt_end' in d:

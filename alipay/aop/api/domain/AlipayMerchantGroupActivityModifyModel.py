@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CouponActivityContentVO import CouponActivityContentVO
 from alipay.aop.api.domain.CustomActivityContentVO import CustomActivityContentVO
 
 
@@ -10,6 +11,7 @@ class AlipayMerchantGroupActivityModifyModel(object):
 
     def __init__(self):
         self._biz_type = None
+        self._coupon_content = None
         self._custom_content = None
         self._gmt_end = None
         self._gmt_start = None
@@ -24,6 +26,16 @@ class AlipayMerchantGroupActivityModifyModel(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def coupon_content(self):
+        return self._coupon_content
+
+    @coupon_content.setter
+    def coupon_content(self, value):
+        if isinstance(value, CouponActivityContentVO):
+            self._coupon_content = value
+        else:
+            self._coupon_content = CouponActivityContentVO.from_alipay_dict(value)
     @property
     def custom_content(self):
         return self._custom_content
@@ -81,6 +93,11 @@ class AlipayMerchantGroupActivityModifyModel(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.coupon_content:
+            if hasattr(self.coupon_content, 'to_alipay_dict'):
+                params['coupon_content'] = self.coupon_content.to_alipay_dict()
+            else:
+                params['coupon_content'] = self.coupon_content
         if self.custom_content:
             if hasattr(self.custom_content, 'to_alipay_dict'):
                 params['custom_content'] = self.custom_content.to_alipay_dict()
@@ -125,6 +142,8 @@ class AlipayMerchantGroupActivityModifyModel(object):
         o = AlipayMerchantGroupActivityModifyModel()
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'coupon_content' in d:
+            o.coupon_content = d['coupon_content']
         if 'custom_content' in d:
             o.custom_content = d['custom_content']
         if 'gmt_end' in d:

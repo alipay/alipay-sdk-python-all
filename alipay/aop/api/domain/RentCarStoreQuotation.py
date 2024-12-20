@@ -17,6 +17,7 @@ class RentCarStoreQuotation(object):
         self._isv_discount_amount = None
         self._latitude = None
         self._longitude = None
+        self._one_price_discount = None
         self._quote_id = None
         self._service_score = None
         self._special_services = None
@@ -87,6 +88,13 @@ class RentCarStoreQuotation(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def one_price_discount(self):
+        return self._one_price_discount
+
+    @one_price_discount.setter
+    def one_price_discount(self, value):
+        self._one_price_discount = value
     @property
     def quote_id(self):
         return self._quote_id
@@ -207,6 +215,11 @@ class RentCarStoreQuotation(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.one_price_discount:
+            if hasattr(self.one_price_discount, 'to_alipay_dict'):
+                params['one_price_discount'] = self.one_price_discount.to_alipay_dict()
+            else:
+                params['one_price_discount'] = self.one_price_discount
         if self.quote_id:
             if hasattr(self.quote_id, 'to_alipay_dict'):
                 params['quote_id'] = self.quote_id.to_alipay_dict()
@@ -290,6 +303,8 @@ class RentCarStoreQuotation(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'one_price_discount' in d:
+            o.one_price_discount = d['one_price_discount']
         if 'quote_id' in d:
             o.quote_id = d['quote_id']
         if 'service_score' in d:

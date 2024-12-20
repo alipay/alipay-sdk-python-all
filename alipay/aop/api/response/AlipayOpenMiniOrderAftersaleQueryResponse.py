@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AftersaleItemInfo import AftersaleItemInfo
 from alipay.aop.api.domain.OrderMediaInfo import OrderMediaInfo
 from alipay.aop.api.domain.LogisticsWaybill import LogisticsWaybill
+from alipay.aop.api.domain.AftersaleServiceTag import AftersaleServiceTag
 
 
 class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
@@ -24,6 +25,7 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
         self._order_id = None
         self._out_aftersale_id = None
         self._path = None
+        self._service_tag_list = None
         self._status = None
         self._status_code = None
         self._type = None
@@ -131,6 +133,19 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     def path(self, value):
         self._path = value
     @property
+    def service_tag_list(self):
+        return self._service_tag_list
+
+    @service_tag_list.setter
+    def service_tag_list(self, value):
+        if isinstance(value, list):
+            self._service_tag_list = list()
+            for i in value:
+                if isinstance(i, AftersaleServiceTag):
+                    self._service_tag_list.append(i)
+                else:
+                    self._service_tag_list.append(AftersaleServiceTag.from_alipay_dict(i))
+    @property
     def status(self):
         return self._status
 
@@ -178,6 +193,8 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
             self.out_aftersale_id = response['out_aftersale_id']
         if 'path' in response:
             self.path = response['path']
+        if 'service_tag_list' in response:
+            self.service_tag_list = response['service_tag_list']
         if 'status' in response:
             self.status = response['status']
         if 'status_code' in response:

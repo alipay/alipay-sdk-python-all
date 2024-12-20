@@ -10,6 +10,7 @@ class AlipayPointDetail(object):
     def __init__(self):
         self._biz_group_no = None
         self._gmt_create = None
+        self._id = None
         self._in_out_type = None
         self._order_id = None
         self._point = None
@@ -29,6 +30,13 @@ class AlipayPointDetail(object):
     @gmt_create.setter
     def gmt_create(self, value):
         self._gmt_create = value
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
     @property
     def in_out_type(self):
         return self._in_out_type
@@ -71,6 +79,11 @@ class AlipayPointDetail(object):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
             else:
                 params['gmt_create'] = self.gmt_create
+        if self.id:
+            if hasattr(self.id, 'to_alipay_dict'):
+                params['id'] = self.id.to_alipay_dict()
+            else:
+                params['id'] = self.id
         if self.in_out_type:
             if hasattr(self.in_out_type, 'to_alipay_dict'):
                 params['in_out_type'] = self.in_out_type.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayPointDetail(object):
             o.biz_group_no = d['biz_group_no']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
+        if 'id' in d:
+            o.id = d['id']
         if 'in_out_type' in d:
             o.in_out_type = d['in_out_type']
         if 'order_id' in d:

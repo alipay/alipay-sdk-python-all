@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CardPromoInfo import CardPromoInfo
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
@@ -13,6 +14,7 @@ from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 class MerchantCardTemplate(object):
 
     def __init__(self):
+        self._card_promo_list = None
         self._card_template_app_id = None
         self._card_template_id = None
         self._card_template_name = None
@@ -33,6 +35,19 @@ class MerchantCardTemplate(object):
         self._times_card_info = None
         self._use_info = None
 
+    @property
+    def card_promo_list(self):
+        return self._card_promo_list
+
+    @card_promo_list.setter
+    def card_promo_list(self, value):
+        if isinstance(value, list):
+            self._card_promo_list = list()
+            for i in value:
+                if isinstance(i, CardPromoInfo):
+                    self._card_promo_list.append(i)
+                else:
+                    self._card_promo_list.append(CardPromoInfo.from_alipay_dict(i))
     @property
     def card_template_app_id(self):
         return self._card_template_app_id
@@ -200,6 +215,16 @@ class MerchantCardTemplate(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.card_promo_list:
+            if isinstance(self.card_promo_list, list):
+                for i in range(0, len(self.card_promo_list)):
+                    element = self.card_promo_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.card_promo_list[i] = element.to_alipay_dict()
+            if hasattr(self.card_promo_list, 'to_alipay_dict'):
+                params['card_promo_list'] = self.card_promo_list.to_alipay_dict()
+            else:
+                params['card_promo_list'] = self.card_promo_list
         if self.card_template_app_id:
             if hasattr(self.card_template_app_id, 'to_alipay_dict'):
                 params['card_template_app_id'] = self.card_template_app_id.to_alipay_dict()
@@ -327,6 +352,8 @@ class MerchantCardTemplate(object):
         if not d:
             return None
         o = MerchantCardTemplate()
+        if 'card_promo_list' in d:
+            o.card_promo_list = d['card_promo_list']
         if 'card_template_app_id' in d:
             o.card_template_app_id = d['card_template_app_id']
         if 'card_template_id' in d:

@@ -33,6 +33,7 @@ class DeductionOrderInfo(object):
         self._payment_no = None
         self._period = None
         self._plan_deduction_time = None
+        self._platform_discount_price = None
         self._redeem_way = None
         self._refund_cash = None
         self._shop_id = None
@@ -211,6 +212,13 @@ class DeductionOrderInfo(object):
     def plan_deduction_time(self, value):
         self._plan_deduction_time = value
     @property
+    def platform_discount_price(self):
+        return self._platform_discount_price
+
+    @platform_discount_price.setter
+    def platform_discount_price(self, value):
+        self._platform_discount_price = value
+    @property
     def redeem_way(self):
         return self._redeem_way
 
@@ -383,6 +391,11 @@ class DeductionOrderInfo(object):
                 params['plan_deduction_time'] = self.plan_deduction_time.to_alipay_dict()
             else:
                 params['plan_deduction_time'] = self.plan_deduction_time
+        if self.platform_discount_price:
+            if hasattr(self.platform_discount_price, 'to_alipay_dict'):
+                params['platform_discount_price'] = self.platform_discount_price.to_alipay_dict()
+            else:
+                params['platform_discount_price'] = self.platform_discount_price
         if self.redeem_way:
             if hasattr(self.redeem_way, 'to_alipay_dict'):
                 params['redeem_way'] = self.redeem_way.to_alipay_dict()
@@ -469,6 +482,8 @@ class DeductionOrderInfo(object):
             o.period = d['period']
         if 'plan_deduction_time' in d:
             o.plan_deduction_time = d['plan_deduction_time']
+        if 'platform_discount_price' in d:
+            o.platform_discount_price = d['platform_discount_price']
         if 'redeem_way' in d:
             o.redeem_way = d['redeem_way']
         if 'refund_cash' in d:

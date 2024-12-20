@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.DiscountVO import DiscountVO
 from alipay.aop.api.domain.ItemsVO import ItemsVO
 from alipay.aop.api.domain.MedicareInfoVO import MedicareInfoVO
 from alipay.aop.api.domain.OrderInfoVO import OrderInfoVO
@@ -15,6 +16,7 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceMedicalOrderDetailQueryResponse, self).__init__()
+        self._discount = None
         self._items = None
         self._medicare = None
         self._order = None
@@ -22,6 +24,19 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
         self._store = None
         self._user = None
 
+    @property
+    def discount(self):
+        return self._discount
+
+    @discount.setter
+    def discount(self, value):
+        if isinstance(value, list):
+            self._discount = list()
+            for i in value:
+                if isinstance(i, DiscountVO):
+                    self._discount.append(i)
+                else:
+                    self._discount.append(DiscountVO.from_alipay_dict(i))
     @property
     def items(self):
         return self._items
@@ -88,6 +103,8 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceMedicalOrderDetailQueryResponse, self).parse_response_content(response_content)
+        if 'discount' in response:
+            self.discount = response['discount']
         if 'items' in response:
             self.items = response['items']
         if 'medicare' in response:

@@ -9,11 +9,27 @@ from alipay.aop.api.domain.MedicalInsuredCityList import MedicalInsuredCityList
 class MedicalCardInfoList(object):
 
     def __init__(self):
+        self._family_medical_card_id = None
+        self._family_user_id = None
         self._insured_cities = None
         self._insured_status = None
         self._medical_card_id = None
         self._status = None
 
+    @property
+    def family_medical_card_id(self):
+        return self._family_medical_card_id
+
+    @family_medical_card_id.setter
+    def family_medical_card_id(self, value):
+        self._family_medical_card_id = value
+    @property
+    def family_user_id(self):
+        return self._family_user_id
+
+    @family_user_id.setter
+    def family_user_id(self, value):
+        self._family_user_id = value
     @property
     def insured_cities(self):
         return self._insured_cities
@@ -49,6 +65,16 @@ class MedicalCardInfoList(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.family_medical_card_id:
+            if hasattr(self.family_medical_card_id, 'to_alipay_dict'):
+                params['family_medical_card_id'] = self.family_medical_card_id.to_alipay_dict()
+            else:
+                params['family_medical_card_id'] = self.family_medical_card_id
+        if self.family_user_id:
+            if hasattr(self.family_user_id, 'to_alipay_dict'):
+                params['family_user_id'] = self.family_user_id.to_alipay_dict()
+            else:
+                params['family_user_id'] = self.family_user_id
         if self.insured_cities:
             if hasattr(self.insured_cities, 'to_alipay_dict'):
                 params['insured_cities'] = self.insured_cities.to_alipay_dict()
@@ -76,6 +102,10 @@ class MedicalCardInfoList(object):
         if not d:
             return None
         o = MedicalCardInfoList()
+        if 'family_medical_card_id' in d:
+            o.family_medical_card_id = d['family_medical_card_id']
+        if 'family_user_id' in d:
+            o.family_user_id = d['family_user_id']
         if 'insured_cities' in d:
             o.insured_cities = d['insured_cities']
         if 'insured_status' in d:

@@ -20,6 +20,8 @@ class RentPayQueryBillDetailListResponse(object):
         self._pay_cert_num = None
         self._pay_cert_type = None
         self._payment_date = None
+        self._rent_bank_name = None
+        self._rent_card_num = None
         self._self_amount = None
         self._settle_serial_no = None
         self._total_amount = None
@@ -109,6 +111,20 @@ class RentPayQueryBillDetailListResponse(object):
     @payment_date.setter
     def payment_date(self, value):
         self._payment_date = value
+    @property
+    def rent_bank_name(self):
+        return self._rent_bank_name
+
+    @rent_bank_name.setter
+    def rent_bank_name(self, value):
+        self._rent_bank_name = value
+    @property
+    def rent_card_num(self):
+        return self._rent_card_num
+
+    @rent_card_num.setter
+    def rent_card_num(self, value):
+        self._rent_card_num = value
     @property
     def self_amount(self):
         return self._self_amount
@@ -201,6 +217,16 @@ class RentPayQueryBillDetailListResponse(object):
                 params['payment_date'] = self.payment_date.to_alipay_dict()
             else:
                 params['payment_date'] = self.payment_date
+        if self.rent_bank_name:
+            if hasattr(self.rent_bank_name, 'to_alipay_dict'):
+                params['rent_bank_name'] = self.rent_bank_name.to_alipay_dict()
+            else:
+                params['rent_bank_name'] = self.rent_bank_name
+        if self.rent_card_num:
+            if hasattr(self.rent_card_num, 'to_alipay_dict'):
+                params['rent_card_num'] = self.rent_card_num.to_alipay_dict()
+            else:
+                params['rent_card_num'] = self.rent_card_num
         if self.self_amount:
             if hasattr(self.self_amount, 'to_alipay_dict'):
                 params['self_amount'] = self.self_amount.to_alipay_dict()
@@ -252,6 +278,10 @@ class RentPayQueryBillDetailListResponse(object):
             o.pay_cert_type = d['pay_cert_type']
         if 'payment_date' in d:
             o.payment_date = d['payment_date']
+        if 'rent_bank_name' in d:
+            o.rent_bank_name = d['rent_bank_name']
+        if 'rent_card_num' in d:
+            o.rent_card_num = d['rent_card_num']
         if 'self_amount' in d:
             o.self_amount = d['self_amount']
         if 'settle_serial_no' in d:

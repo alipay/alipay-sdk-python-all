@@ -9,6 +9,7 @@ class RiskStrategy(object):
 
     def __init__(self):
         self._has_detail = None
+        self._risk_level = None
         self._strategy_hit_flag = None
         self._strategy_id = None
         self._strategy_name = None
@@ -23,6 +24,13 @@ class RiskStrategy(object):
     @has_detail.setter
     def has_detail(self, value):
         self._has_detail = value
+    @property
+    def risk_level(self):
+        return self._risk_level
+
+    @risk_level.setter
+    def risk_level(self, value):
+        self._risk_level = value
     @property
     def strategy_hit_flag(self):
         return self._strategy_hit_flag
@@ -74,6 +82,11 @@ class RiskStrategy(object):
                 params['has_detail'] = self.has_detail.to_alipay_dict()
             else:
                 params['has_detail'] = self.has_detail
+        if self.risk_level:
+            if hasattr(self.risk_level, 'to_alipay_dict'):
+                params['risk_level'] = self.risk_level.to_alipay_dict()
+            else:
+                params['risk_level'] = self.risk_level
         if self.strategy_hit_flag:
             if hasattr(self.strategy_hit_flag, 'to_alipay_dict'):
                 params['strategy_hit_flag'] = self.strategy_hit_flag.to_alipay_dict()
@@ -113,6 +126,8 @@ class RiskStrategy(object):
         o = RiskStrategy()
         if 'has_detail' in d:
             o.has_detail = d['has_detail']
+        if 'risk_level' in d:
+            o.risk_level = d['risk_level']
         if 'strategy_hit_flag' in d:
             o.strategy_hit_flag = d['strategy_hit_flag']
         if 'strategy_id' in d:

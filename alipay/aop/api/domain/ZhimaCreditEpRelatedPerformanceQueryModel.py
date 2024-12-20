@@ -11,6 +11,7 @@ class ZhimaCreditEpRelatedPerformanceQueryModel(object):
         self._company_key = None
         self._product_code = None
         self._ry_cert_no = None
+        self._ry_cert_no_sha_256 = None
         self._ry_name = None
 
     @property
@@ -34,6 +35,13 @@ class ZhimaCreditEpRelatedPerformanceQueryModel(object):
     @ry_cert_no.setter
     def ry_cert_no(self, value):
         self._ry_cert_no = value
+    @property
+    def ry_cert_no_sha_256(self):
+        return self._ry_cert_no_sha_256
+
+    @ry_cert_no_sha_256.setter
+    def ry_cert_no_sha_256(self, value):
+        self._ry_cert_no_sha_256 = value
     @property
     def ry_name(self):
         return self._ry_name
@@ -60,6 +68,11 @@ class ZhimaCreditEpRelatedPerformanceQueryModel(object):
                 params['ry_cert_no'] = self.ry_cert_no.to_alipay_dict()
             else:
                 params['ry_cert_no'] = self.ry_cert_no
+        if self.ry_cert_no_sha_256:
+            if hasattr(self.ry_cert_no_sha_256, 'to_alipay_dict'):
+                params['ry_cert_no_sha_256'] = self.ry_cert_no_sha_256.to_alipay_dict()
+            else:
+                params['ry_cert_no_sha_256'] = self.ry_cert_no_sha_256
         if self.ry_name:
             if hasattr(self.ry_name, 'to_alipay_dict'):
                 params['ry_name'] = self.ry_name.to_alipay_dict()
@@ -78,6 +91,8 @@ class ZhimaCreditEpRelatedPerformanceQueryModel(object):
             o.product_code = d['product_code']
         if 'ry_cert_no' in d:
             o.ry_cert_no = d['ry_cert_no']
+        if 'ry_cert_no_sha_256' in d:
+            o.ry_cert_no_sha_256 = d['ry_cert_no_sha_256']
         if 'ry_name' in d:
             o.ry_name = d['ry_name']
         return o

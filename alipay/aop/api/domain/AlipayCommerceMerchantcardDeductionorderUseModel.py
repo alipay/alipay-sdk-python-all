@@ -12,6 +12,7 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
         self._card_id = None
         self._count = None
         self._open_id = None
+        self._out_biz_id = None
         self._shop_id = None
         self._user_id = None
 
@@ -43,6 +44,13 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def out_biz_id(self):
+        return self._out_biz_id
+
+    @out_biz_id.setter
+    def out_biz_id(self, value):
+        self._out_biz_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -81,6 +89,11 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.out_biz_id:
+            if hasattr(self.out_biz_id, 'to_alipay_dict'):
+                params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
+            else:
+                params['out_biz_id'] = self.out_biz_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
             o.count = d['count']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'out_biz_id' in d:
+            o.out_biz_id = d['out_biz_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'user_id' in d:

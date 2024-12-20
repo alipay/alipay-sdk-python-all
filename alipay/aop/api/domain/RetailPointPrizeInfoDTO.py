@@ -10,11 +10,14 @@ class RetailPointPrizeInfoDTO(object):
     def __init__(self):
         self._discount_amount = None
         self._floor_amount = None
+        self._join_limit = None
         self._nfc_pay = None
         self._point_count = None
         self._prize_id = None
         self._prize_name = None
+        self._remaining_join_count = None
         self._retail_activity_id = None
+        self._status = None
 
     @property
     def discount_amount(self):
@@ -30,6 +33,13 @@ class RetailPointPrizeInfoDTO(object):
     @floor_amount.setter
     def floor_amount(self, value):
         self._floor_amount = value
+    @property
+    def join_limit(self):
+        return self._join_limit
+
+    @join_limit.setter
+    def join_limit(self, value):
+        self._join_limit = value
     @property
     def nfc_pay(self):
         return self._nfc_pay
@@ -59,12 +69,26 @@ class RetailPointPrizeInfoDTO(object):
     def prize_name(self, value):
         self._prize_name = value
     @property
+    def remaining_join_count(self):
+        return self._remaining_join_count
+
+    @remaining_join_count.setter
+    def remaining_join_count(self, value):
+        self._remaining_join_count = value
+    @property
     def retail_activity_id(self):
         return self._retail_activity_id
 
     @retail_activity_id.setter
     def retail_activity_id(self, value):
         self._retail_activity_id = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
 
     def to_alipay_dict(self):
@@ -79,6 +103,11 @@ class RetailPointPrizeInfoDTO(object):
                 params['floor_amount'] = self.floor_amount.to_alipay_dict()
             else:
                 params['floor_amount'] = self.floor_amount
+        if self.join_limit:
+            if hasattr(self.join_limit, 'to_alipay_dict'):
+                params['join_limit'] = self.join_limit.to_alipay_dict()
+            else:
+                params['join_limit'] = self.join_limit
         if self.nfc_pay:
             if hasattr(self.nfc_pay, 'to_alipay_dict'):
                 params['nfc_pay'] = self.nfc_pay.to_alipay_dict()
@@ -99,11 +128,21 @@ class RetailPointPrizeInfoDTO(object):
                 params['prize_name'] = self.prize_name.to_alipay_dict()
             else:
                 params['prize_name'] = self.prize_name
+        if self.remaining_join_count:
+            if hasattr(self.remaining_join_count, 'to_alipay_dict'):
+                params['remaining_join_count'] = self.remaining_join_count.to_alipay_dict()
+            else:
+                params['remaining_join_count'] = self.remaining_join_count
         if self.retail_activity_id:
             if hasattr(self.retail_activity_id, 'to_alipay_dict'):
                 params['retail_activity_id'] = self.retail_activity_id.to_alipay_dict()
             else:
                 params['retail_activity_id'] = self.retail_activity_id
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         return params
 
     @staticmethod
@@ -115,6 +154,8 @@ class RetailPointPrizeInfoDTO(object):
             o.discount_amount = d['discount_amount']
         if 'floor_amount' in d:
             o.floor_amount = d['floor_amount']
+        if 'join_limit' in d:
+            o.join_limit = d['join_limit']
         if 'nfc_pay' in d:
             o.nfc_pay = d['nfc_pay']
         if 'point_count' in d:
@@ -123,8 +164,12 @@ class RetailPointPrizeInfoDTO(object):
             o.prize_id = d['prize_id']
         if 'prize_name' in d:
             o.prize_name = d['prize_name']
+        if 'remaining_join_count' in d:
+            o.remaining_join_count = d['remaining_join_count']
         if 'retail_activity_id' in d:
             o.retail_activity_id = d['retail_activity_id']
+        if 'status' in d:
+            o.status = d['status']
         return o
 
 

@@ -20,6 +20,7 @@ class AlipayMerchantTradeAccountNotifyModel(object):
         self._payer_user_type = None
         self._shop_id = None
         self._shop_name = None
+        self._sub_trade_channel = None
         self._third_party_merchant_no = None
         self._third_party_trade_no = None
         self._total_amount = None
@@ -111,6 +112,13 @@ class AlipayMerchantTradeAccountNotifyModel(object):
     @shop_name.setter
     def shop_name(self, value):
         self._shop_name = value
+    @property
+    def sub_trade_channel(self):
+        return self._sub_trade_channel
+
+    @sub_trade_channel.setter
+    def sub_trade_channel(self, value):
+        self._sub_trade_channel = value
     @property
     def third_party_merchant_no(self):
         return self._third_party_merchant_no
@@ -224,6 +232,11 @@ class AlipayMerchantTradeAccountNotifyModel(object):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
             else:
                 params['shop_name'] = self.shop_name
+        if self.sub_trade_channel:
+            if hasattr(self.sub_trade_channel, 'to_alipay_dict'):
+                params['sub_trade_channel'] = self.sub_trade_channel.to_alipay_dict()
+            else:
+                params['sub_trade_channel'] = self.sub_trade_channel
         if self.third_party_merchant_no:
             if hasattr(self.third_party_merchant_no, 'to_alipay_dict'):
                 params['third_party_merchant_no'] = self.third_party_merchant_no.to_alipay_dict()
@@ -288,6 +301,8 @@ class AlipayMerchantTradeAccountNotifyModel(object):
             o.shop_id = d['shop_id']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
+        if 'sub_trade_channel' in d:
+            o.sub_trade_channel = d['sub_trade_channel']
         if 'third_party_merchant_no' in d:
             o.third_party_merchant_no = d['third_party_merchant_no']
         if 'third_party_trade_no' in d:

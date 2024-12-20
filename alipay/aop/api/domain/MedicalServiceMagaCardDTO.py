@@ -12,6 +12,7 @@ class MedicalServiceMagaCardDTO(object):
         self._icon_url = None
         self._jump_url = None
         self._name = None
+        self._third_service_flag = None
         self._title = None
 
     @property
@@ -43,6 +44,13 @@ class MedicalServiceMagaCardDTO(object):
     def name(self, value):
         self._name = value
     @property
+    def third_service_flag(self):
+        return self._third_service_flag
+
+    @third_service_flag.setter
+    def third_service_flag(self, value):
+        self._third_service_flag = value
+    @property
     def title(self):
         return self._title
 
@@ -73,6 +81,11 @@ class MedicalServiceMagaCardDTO(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.third_service_flag:
+            if hasattr(self.third_service_flag, 'to_alipay_dict'):
+                params['third_service_flag'] = self.third_service_flag.to_alipay_dict()
+            else:
+                params['third_service_flag'] = self.third_service_flag
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -93,6 +106,8 @@ class MedicalServiceMagaCardDTO(object):
             o.jump_url = d['jump_url']
         if 'name' in d:
             o.name = d['name']
+        if 'third_service_flag' in d:
+            o.third_service_flag = d['third_service_flag']
         if 'title' in d:
             o.title = d['title']
         return o

@@ -15,6 +15,7 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
         self._ant_apply_no = None
         self._ant_policy_no = None
         self._available_advance_amount = None
+        self._business_no = None
         self._business_time = None
         self._cert_no = None
         self._cert_type = None
@@ -71,6 +72,13 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
     @available_advance_amount.setter
     def available_advance_amount(self, value):
         self._available_advance_amount = value
+    @property
+    def business_no(self):
+        return self._business_no
+
+    @business_no.setter
+    def business_no(self, value):
+        self._business_no = value
     @property
     def business_time(self):
         return self._business_time
@@ -202,6 +210,11 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
                 params['available_advance_amount'] = self.available_advance_amount.to_alipay_dict()
             else:
                 params['available_advance_amount'] = self.available_advance_amount
+        if self.business_no:
+            if hasattr(self.business_no, 'to_alipay_dict'):
+                params['business_no'] = self.business_no.to_alipay_dict()
+            else:
+                params['business_no'] = self.business_no
         if self.business_time:
             if hasattr(self.business_time, 'to_alipay_dict'):
                 params['business_time'] = self.business_time.to_alipay_dict()
@@ -291,6 +304,8 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
             o.ant_policy_no = d['ant_policy_no']
         if 'available_advance_amount' in d:
             o.available_advance_amount = d['available_advance_amount']
+        if 'business_no' in d:
+            o.business_no = d['business_no']
         if 'business_time' in d:
             o.business_time = d['business_time']
         if 'cert_no' in d:
