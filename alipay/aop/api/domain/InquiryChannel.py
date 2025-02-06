@@ -15,6 +15,7 @@ class InquiryChannel(object):
         self._inquiry_type = None
         self._inquiry_url = None
         self._register_flag = None
+        self._service_duration = None
 
     @property
     def inquiry_doctor_shift_case_list(self):
@@ -64,6 +65,13 @@ class InquiryChannel(object):
     @register_flag.setter
     def register_flag(self, value):
         self._register_flag = value
+    @property
+    def service_duration(self):
+        return self._service_duration
+
+    @service_duration.setter
+    def service_duration(self, value):
+        self._service_duration = value
 
 
     def to_alipay_dict(self):
@@ -103,6 +111,11 @@ class InquiryChannel(object):
                 params['register_flag'] = self.register_flag.to_alipay_dict()
             else:
                 params['register_flag'] = self.register_flag
+        if self.service_duration:
+            if hasattr(self.service_duration, 'to_alipay_dict'):
+                params['service_duration'] = self.service_duration.to_alipay_dict()
+            else:
+                params['service_duration'] = self.service_duration
         return params
 
     @staticmethod
@@ -122,6 +135,8 @@ class InquiryChannel(object):
             o.inquiry_url = d['inquiry_url']
         if 'register_flag' in d:
             o.register_flag = d['register_flag']
+        if 'service_duration' in d:
+            o.service_duration = d['service_duration']
         return o
 
 

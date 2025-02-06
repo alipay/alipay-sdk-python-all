@@ -43,6 +43,7 @@ class EpBusinessBasicInfo(object):
         self._type = None
         self._type_code = None
         self._tyshxydm = None
+        self._zczbbz = None
         self._zxhhr = None
         self._zxswhhr = None
         self._zxswhhrwpdb = None
@@ -295,6 +296,13 @@ class EpBusinessBasicInfo(object):
     def tyshxydm(self, value):
         self._tyshxydm = value
     @property
+    def zczbbz(self):
+        return self._zczbbz
+
+    @zczbbz.setter
+    def zczbbz(self, value):
+        self._zczbbz = value
+    @property
     def zxhhr(self):
         return self._zxhhr
 
@@ -499,6 +507,11 @@ class EpBusinessBasicInfo(object):
                 params['tyshxydm'] = self.tyshxydm.to_alipay_dict()
             else:
                 params['tyshxydm'] = self.tyshxydm
+        if self.zczbbz:
+            if hasattr(self.zczbbz, 'to_alipay_dict'):
+                params['zczbbz'] = self.zczbbz.to_alipay_dict()
+            else:
+                params['zczbbz'] = self.zczbbz
         if self.zxhhr:
             if hasattr(self.zxhhr, 'to_alipay_dict'):
                 params['zxhhr'] = self.zxhhr.to_alipay_dict()
@@ -589,6 +602,8 @@ class EpBusinessBasicInfo(object):
             o.type_code = d['type_code']
         if 'tyshxydm' in d:
             o.tyshxydm = d['tyshxydm']
+        if 'zczbbz' in d:
+            o.zczbbz = d['zczbbz']
         if 'zxhhr' in d:
             o.zxhhr = d['zxhhr']
         if 'zxswhhr' in d:

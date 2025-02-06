@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayUserDtbankDailybillCreateModel(object):
 
     def __init__(self):
+        self._bill_source = None
         self._bill_type = None
         self._end_time = None
         self._start_time = None
 
+    @property
+    def bill_source(self):
+        return self._bill_source
+
+    @bill_source.setter
+    def bill_source(self, value):
+        self._bill_source = value
     @property
     def bill_type(self):
         return self._bill_type
@@ -37,6 +45,11 @@ class AlipayUserDtbankDailybillCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bill_source:
+            if hasattr(self.bill_source, 'to_alipay_dict'):
+                params['bill_source'] = self.bill_source.to_alipay_dict()
+            else:
+                params['bill_source'] = self.bill_source
         if self.bill_type:
             if hasattr(self.bill_type, 'to_alipay_dict'):
                 params['bill_type'] = self.bill_type.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayUserDtbankDailybillCreateModel(object):
         if not d:
             return None
         o = AlipayUserDtbankDailybillCreateModel()
+        if 'bill_source' in d:
+            o.bill_source = d['bill_source']
         if 'bill_type' in d:
             o.bill_type = d['bill_type']
         if 'end_time' in d:

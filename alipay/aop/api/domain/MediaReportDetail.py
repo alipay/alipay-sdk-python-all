@@ -10,14 +10,18 @@ class MediaReportDetail(object):
     def __init__(self):
         self._ad_pos_id = None
         self._ad_pos_name = None
+        self._ad_pos_type = None
+        self._ad_pos_type_name = None
         self._app_name = None
         self._application_id = None
         self._click = None
         self._click_rate = None
+        self._component_exposure = None
         self._cpm = None
         self._date = None
         self._es_income = None
         self._exposure = None
+        self._space_code_list = None
 
     @property
     def ad_pos_id(self):
@@ -33,6 +37,20 @@ class MediaReportDetail(object):
     @ad_pos_name.setter
     def ad_pos_name(self, value):
         self._ad_pos_name = value
+    @property
+    def ad_pos_type(self):
+        return self._ad_pos_type
+
+    @ad_pos_type.setter
+    def ad_pos_type(self, value):
+        self._ad_pos_type = value
+    @property
+    def ad_pos_type_name(self):
+        return self._ad_pos_type_name
+
+    @ad_pos_type_name.setter
+    def ad_pos_type_name(self, value):
+        self._ad_pos_type_name = value
     @property
     def app_name(self):
         return self._app_name
@@ -62,6 +80,13 @@ class MediaReportDetail(object):
     def click_rate(self, value):
         self._click_rate = value
     @property
+    def component_exposure(self):
+        return self._component_exposure
+
+    @component_exposure.setter
+    def component_exposure(self, value):
+        self._component_exposure = value
+    @property
     def cpm(self):
         return self._cpm
 
@@ -89,6 +114,13 @@ class MediaReportDetail(object):
     @exposure.setter
     def exposure(self, value):
         self._exposure = value
+    @property
+    def space_code_list(self):
+        return self._space_code_list
+
+    @space_code_list.setter
+    def space_code_list(self, value):
+        self._space_code_list = value
 
 
     def to_alipay_dict(self):
@@ -103,6 +135,16 @@ class MediaReportDetail(object):
                 params['ad_pos_name'] = self.ad_pos_name.to_alipay_dict()
             else:
                 params['ad_pos_name'] = self.ad_pos_name
+        if self.ad_pos_type:
+            if hasattr(self.ad_pos_type, 'to_alipay_dict'):
+                params['ad_pos_type'] = self.ad_pos_type.to_alipay_dict()
+            else:
+                params['ad_pos_type'] = self.ad_pos_type
+        if self.ad_pos_type_name:
+            if hasattr(self.ad_pos_type_name, 'to_alipay_dict'):
+                params['ad_pos_type_name'] = self.ad_pos_type_name.to_alipay_dict()
+            else:
+                params['ad_pos_type_name'] = self.ad_pos_type_name
         if self.app_name:
             if hasattr(self.app_name, 'to_alipay_dict'):
                 params['app_name'] = self.app_name.to_alipay_dict()
@@ -123,6 +165,11 @@ class MediaReportDetail(object):
                 params['click_rate'] = self.click_rate.to_alipay_dict()
             else:
                 params['click_rate'] = self.click_rate
+        if self.component_exposure:
+            if hasattr(self.component_exposure, 'to_alipay_dict'):
+                params['component_exposure'] = self.component_exposure.to_alipay_dict()
+            else:
+                params['component_exposure'] = self.component_exposure
         if self.cpm:
             if hasattr(self.cpm, 'to_alipay_dict'):
                 params['cpm'] = self.cpm.to_alipay_dict()
@@ -143,6 +190,11 @@ class MediaReportDetail(object):
                 params['exposure'] = self.exposure.to_alipay_dict()
             else:
                 params['exposure'] = self.exposure
+        if self.space_code_list:
+            if hasattr(self.space_code_list, 'to_alipay_dict'):
+                params['space_code_list'] = self.space_code_list.to_alipay_dict()
+            else:
+                params['space_code_list'] = self.space_code_list
         return params
 
     @staticmethod
@@ -154,6 +206,10 @@ class MediaReportDetail(object):
             o.ad_pos_id = d['ad_pos_id']
         if 'ad_pos_name' in d:
             o.ad_pos_name = d['ad_pos_name']
+        if 'ad_pos_type' in d:
+            o.ad_pos_type = d['ad_pos_type']
+        if 'ad_pos_type_name' in d:
+            o.ad_pos_type_name = d['ad_pos_type_name']
         if 'app_name' in d:
             o.app_name = d['app_name']
         if 'application_id' in d:
@@ -162,6 +218,8 @@ class MediaReportDetail(object):
             o.click = d['click']
         if 'click_rate' in d:
             o.click_rate = d['click_rate']
+        if 'component_exposure' in d:
+            o.component_exposure = d['component_exposure']
         if 'cpm' in d:
             o.cpm = d['cpm']
         if 'date' in d:
@@ -170,6 +228,8 @@ class MediaReportDetail(object):
             o.es_income = d['es_income']
         if 'exposure' in d:
             o.exposure = d['exposure']
+        if 'space_code_list' in d:
+            o.space_code_list = d['space_code_list']
         return o
 
 

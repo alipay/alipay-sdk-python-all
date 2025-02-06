@@ -26,6 +26,7 @@ class CollaborateTask(object):
         self._shop_name = None
         self._smid_list = None
         self._task_no = None
+        self._task_tags = None
         self._tel = None
 
     @property
@@ -161,6 +162,16 @@ class CollaborateTask(object):
     def task_no(self, value):
         self._task_no = value
     @property
+    def task_tags(self):
+        return self._task_tags
+
+    @task_tags.setter
+    def task_tags(self, value):
+        if isinstance(value, list):
+            self._task_tags = list()
+            for i in value:
+                self._task_tags.append(i)
+    @property
     def tel(self):
         return self._tel
 
@@ -271,6 +282,16 @@ class CollaborateTask(object):
                 params['task_no'] = self.task_no.to_alipay_dict()
             else:
                 params['task_no'] = self.task_no
+        if self.task_tags:
+            if isinstance(self.task_tags, list):
+                for i in range(0, len(self.task_tags)):
+                    element = self.task_tags[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.task_tags[i] = element.to_alipay_dict()
+            if hasattr(self.task_tags, 'to_alipay_dict'):
+                params['task_tags'] = self.task_tags.to_alipay_dict()
+            else:
+                params['task_tags'] = self.task_tags
         if self.tel:
             if hasattr(self.tel, 'to_alipay_dict'):
                 params['tel'] = self.tel.to_alipay_dict()
@@ -319,6 +340,8 @@ class CollaborateTask(object):
             o.smid_list = d['smid_list']
         if 'task_no' in d:
             o.task_no = d['task_no']
+        if 'task_tags' in d:
+            o.task_tags = d['task_tags']
         if 'tel' in d:
             o.tel = d['tel']
         return o

@@ -11,6 +11,7 @@ class DatadigitalFincloudGeneralsaasMobilethreemetaSimpleCheckModel(object):
         self._biz_code = None
         self._cert_name = None
         self._cert_no = None
+        self._cert_type = None
         self._outer_biz_no = None
         self._phone = None
 
@@ -35,6 +36,13 @@ class DatadigitalFincloudGeneralsaasMobilethreemetaSimpleCheckModel(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def outer_biz_no(self):
         return self._outer_biz_no
@@ -68,6 +76,11 @@ class DatadigitalFincloudGeneralsaasMobilethreemetaSimpleCheckModel(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.outer_biz_no:
             if hasattr(self.outer_biz_no, 'to_alipay_dict'):
                 params['outer_biz_no'] = self.outer_biz_no.to_alipay_dict()
@@ -91,6 +104,8 @@ class DatadigitalFincloudGeneralsaasMobilethreemetaSimpleCheckModel(object):
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'outer_biz_no' in d:
             o.outer_biz_no = d['outer_biz_no']
         if 'phone' in d:

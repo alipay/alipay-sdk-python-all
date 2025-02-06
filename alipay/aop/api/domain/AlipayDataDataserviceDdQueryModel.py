@@ -27,7 +27,10 @@ class AlipayDataDataserviceDdQueryModel(object):
 
     @qwe.setter
     def qwe(self, value):
-        self._qwe = value
+        if isinstance(value, list):
+            self._qwe = list()
+            for i in value:
+                self._qwe.append(i)
     @property
     def test_openid(self):
         return self._test_openid
@@ -59,6 +62,11 @@ class AlipayDataDataserviceDdQueryModel(object):
             else:
                 params['amount'] = self.amount
         if self.qwe:
+            if isinstance(self.qwe, list):
+                for i in range(0, len(self.qwe)):
+                    element = self.qwe[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.qwe[i] = element.to_alipay_dict()
             if hasattr(self.qwe, 'to_alipay_dict'):
                 params['qwe'] = self.qwe.to_alipay_dict()
             else:

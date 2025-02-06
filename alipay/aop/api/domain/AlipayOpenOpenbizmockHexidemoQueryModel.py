@@ -11,12 +11,14 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
     def __init__(self):
         self._child_nodes = None
         self._file_param = None
+        self._mock_name = None
         self._open_id = None
         self._other_open_id = None
         self._other_user_id = None
         self._out_biz_no = None
         self._pattern_param = None
         self._req_num = None
+        self._res = None
         self._user_id = None
 
     @property
@@ -36,6 +38,13 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
     @file_param.setter
     def file_param(self, value):
         self._file_param = value
+    @property
+    def mock_name(self):
+        return self._mock_name
+
+    @mock_name.setter
+    def mock_name(self, value):
+        self._mock_name = value
     @property
     def open_id(self):
         return self._open_id
@@ -82,6 +91,13 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
     def req_num(self, value):
         self._req_num = value
     @property
+    def res(self):
+        return self._res
+
+    @res.setter
+    def res(self, value):
+        self._res = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -102,6 +118,11 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
                 params['file_param'] = self.file_param.to_alipay_dict()
             else:
                 params['file_param'] = self.file_param
+        if self.mock_name:
+            if hasattr(self.mock_name, 'to_alipay_dict'):
+                params['mock_name'] = self.mock_name.to_alipay_dict()
+            else:
+                params['mock_name'] = self.mock_name
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -137,6 +158,11 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
                 params['req_num'] = self.req_num.to_alipay_dict()
             else:
                 params['req_num'] = self.req_num
+        if self.res:
+            if hasattr(self.res, 'to_alipay_dict'):
+                params['res'] = self.res.to_alipay_dict()
+            else:
+                params['res'] = self.res
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -153,6 +179,8 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
             o.child_nodes = d['child_nodes']
         if 'file_param' in d:
             o.file_param = d['file_param']
+        if 'mock_name' in d:
+            o.mock_name = d['mock_name']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'other_open_id' in d:
@@ -165,6 +193,8 @@ class AlipayOpenOpenbizmockHexidemoQueryModel(object):
             o.pattern_param = d['pattern_param']
         if 'req_num' in d:
             o.req_num = d['req_num']
+        if 'res' in d:
+            o.res = d['res']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

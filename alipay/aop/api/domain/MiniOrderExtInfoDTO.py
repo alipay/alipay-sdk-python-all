@@ -12,6 +12,7 @@ class MiniOrderExtInfoDTO(object):
         self._alipay_account = None
         self._credit_code = None
         self._deduct_sign_scene = None
+        self._deposit_payment = None
         self._door_time = None
         self._order_str = None
         self._order_trade_type = None
@@ -47,6 +48,13 @@ class MiniOrderExtInfoDTO(object):
     @deduct_sign_scene.setter
     def deduct_sign_scene(self, value):
         self._deduct_sign_scene = value
+    @property
+    def deposit_payment(self):
+        return self._deposit_payment
+
+    @deposit_payment.setter
+    def deposit_payment(self, value):
+        self._deposit_payment = value
     @property
     def door_time(self):
         return self._door_time
@@ -113,6 +121,11 @@ class MiniOrderExtInfoDTO(object):
                 params['deduct_sign_scene'] = self.deduct_sign_scene.to_alipay_dict()
             else:
                 params['deduct_sign_scene'] = self.deduct_sign_scene
+        if self.deposit_payment:
+            if hasattr(self.deposit_payment, 'to_alipay_dict'):
+                params['deposit_payment'] = self.deposit_payment.to_alipay_dict()
+            else:
+                params['deposit_payment'] = self.deposit_payment
         if self.door_time:
             if hasattr(self.door_time, 'to_alipay_dict'):
                 params['door_time'] = self.door_time.to_alipay_dict()
@@ -158,6 +171,8 @@ class MiniOrderExtInfoDTO(object):
             o.credit_code = d['credit_code']
         if 'deduct_sign_scene' in d:
             o.deduct_sign_scene = d['deduct_sign_scene']
+        if 'deposit_payment' in d:
+            o.deposit_payment = d['deposit_payment']
         if 'door_time' in d:
             o.door_time = d['door_time']
         if 'order_str' in d:

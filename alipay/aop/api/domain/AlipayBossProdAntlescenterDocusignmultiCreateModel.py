@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ApprovalFlowInfo import ApprovalFlowInfo
 from alipay.aop.api.domain.CreateESignTaskFileVO import CreateESignTaskFileVO
+from alipay.aop.api.domain.CarbonCopies import CarbonCopies
 from alipay.aop.api.domain.ContractInformation import ContractInformation
 from alipay.aop.api.domain.MultiSignerAndTabVosDTO import MultiSignerAndTabVosDTO
 from alipay.aop.api.domain.CreateESignTaskFileVO import CreateESignTaskFileVO
@@ -21,6 +22,7 @@ class AlipayBossProdAntlescenterDocusignmultiCreateModel(object):
         self._approval_flow_info_list = None
         self._attachement_file_list = None
         self._business_line_code = None
+        self._carbon_copies = None
         self._contract_id = None
         self._contract_information = None
         self._contract_version = None
@@ -104,6 +106,19 @@ class AlipayBossProdAntlescenterDocusignmultiCreateModel(object):
     @business_line_code.setter
     def business_line_code(self, value):
         self._business_line_code = value
+    @property
+    def carbon_copies(self):
+        return self._carbon_copies
+
+    @carbon_copies.setter
+    def carbon_copies(self, value):
+        if isinstance(value, list):
+            self._carbon_copies = list()
+            for i in value:
+                if isinstance(i, CarbonCopies):
+                    self._carbon_copies.append(i)
+                else:
+                    self._carbon_copies.append(CarbonCopies.from_alipay_dict(i))
     @property
     def contract_id(self):
         return self._contract_id
@@ -271,6 +286,16 @@ class AlipayBossProdAntlescenterDocusignmultiCreateModel(object):
                 params['business_line_code'] = self.business_line_code.to_alipay_dict()
             else:
                 params['business_line_code'] = self.business_line_code
+        if self.carbon_copies:
+            if isinstance(self.carbon_copies, list):
+                for i in range(0, len(self.carbon_copies)):
+                    element = self.carbon_copies[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.carbon_copies[i] = element.to_alipay_dict()
+            if hasattr(self.carbon_copies, 'to_alipay_dict'):
+                params['carbon_copies'] = self.carbon_copies.to_alipay_dict()
+            else:
+                params['carbon_copies'] = self.carbon_copies
         if self.contract_id:
             if hasattr(self.contract_id, 'to_alipay_dict'):
                 params['contract_id'] = self.contract_id.to_alipay_dict()
@@ -374,6 +399,8 @@ class AlipayBossProdAntlescenterDocusignmultiCreateModel(object):
             o.attachement_file_list = d['attachement_file_list']
         if 'business_line_code' in d:
             o.business_line_code = d['business_line_code']
+        if 'carbon_copies' in d:
+            o.carbon_copies = d['carbon_copies']
         if 'contract_id' in d:
             o.contract_id = d['contract_id']
         if 'contract_information' in d:

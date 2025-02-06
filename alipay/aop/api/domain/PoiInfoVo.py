@@ -13,20 +13,27 @@ class PoiInfoVo(object):
         self._audio_url = None
         self._avatar = None
         self._buy_url = None
+        self._comfort_level = None
         self._description = None
         self._distance = None
+        self._historical_curiosities = None
         self._img_list = None
+        self._introduction = None
         self._item_id = None
         self._latitude = None
+        self._line_type = None
         self._longitude = None
         self._meters = None
         self._photo_suggest_image_list = None
         self._photo_suggest_text = None
         self._poi_type = None
+        self._polyline = None
         self._related_merchant_list = None
         self._related_ticket_list = None
         self._tags = None
         self._title = None
+        self._travel_distance = None
+        self._travel_duration = None
 
     @property
     def address(self):
@@ -64,6 +71,13 @@ class PoiInfoVo(object):
     def buy_url(self, value):
         self._buy_url = value
     @property
+    def comfort_level(self):
+        return self._comfort_level
+
+    @comfort_level.setter
+    def comfort_level(self, value):
+        self._comfort_level = value
+    @property
     def description(self):
         return self._description
 
@@ -78,6 +92,13 @@ class PoiInfoVo(object):
     def distance(self, value):
         self._distance = value
     @property
+    def historical_curiosities(self):
+        return self._historical_curiosities
+
+    @historical_curiosities.setter
+    def historical_curiosities(self, value):
+        self._historical_curiosities = value
+    @property
     def img_list(self):
         return self._img_list
 
@@ -87,6 +108,13 @@ class PoiInfoVo(object):
             self._img_list = list()
             for i in value:
                 self._img_list.append(i)
+    @property
+    def introduction(self):
+        return self._introduction
+
+    @introduction.setter
+    def introduction(self, value):
+        self._introduction = value
     @property
     def item_id(self):
         return self._item_id
@@ -101,6 +129,13 @@ class PoiInfoVo(object):
     @latitude.setter
     def latitude(self, value):
         self._latitude = value
+    @property
+    def line_type(self):
+        return self._line_type
+
+    @line_type.setter
+    def line_type(self, value):
+        self._line_type = value
     @property
     def longitude(self):
         return self._longitude
@@ -140,6 +175,16 @@ class PoiInfoVo(object):
     def poi_type(self, value):
         self._poi_type = value
     @property
+    def polyline(self):
+        return self._polyline
+
+    @polyline.setter
+    def polyline(self, value):
+        if isinstance(value, list):
+            self._polyline = list()
+            for i in value:
+                self._polyline.append(i)
+    @property
     def related_merchant_list(self):
         return self._related_merchant_list
 
@@ -173,6 +218,20 @@ class PoiInfoVo(object):
     @title.setter
     def title(self, value):
         self._title = value
+    @property
+    def travel_distance(self):
+        return self._travel_distance
+
+    @travel_distance.setter
+    def travel_distance(self, value):
+        self._travel_distance = value
+    @property
+    def travel_duration(self):
+        return self._travel_duration
+
+    @travel_duration.setter
+    def travel_duration(self, value):
+        self._travel_duration = value
 
 
     def to_alipay_dict(self):
@@ -202,6 +261,11 @@ class PoiInfoVo(object):
                 params['buy_url'] = self.buy_url.to_alipay_dict()
             else:
                 params['buy_url'] = self.buy_url
+        if self.comfort_level:
+            if hasattr(self.comfort_level, 'to_alipay_dict'):
+                params['comfort_level'] = self.comfort_level.to_alipay_dict()
+            else:
+                params['comfort_level'] = self.comfort_level
         if self.description:
             if hasattr(self.description, 'to_alipay_dict'):
                 params['description'] = self.description.to_alipay_dict()
@@ -212,6 +276,11 @@ class PoiInfoVo(object):
                 params['distance'] = self.distance.to_alipay_dict()
             else:
                 params['distance'] = self.distance
+        if self.historical_curiosities:
+            if hasattr(self.historical_curiosities, 'to_alipay_dict'):
+                params['historical_curiosities'] = self.historical_curiosities.to_alipay_dict()
+            else:
+                params['historical_curiosities'] = self.historical_curiosities
         if self.img_list:
             if isinstance(self.img_list, list):
                 for i in range(0, len(self.img_list)):
@@ -222,6 +291,11 @@ class PoiInfoVo(object):
                 params['img_list'] = self.img_list.to_alipay_dict()
             else:
                 params['img_list'] = self.img_list
+        if self.introduction:
+            if hasattr(self.introduction, 'to_alipay_dict'):
+                params['introduction'] = self.introduction.to_alipay_dict()
+            else:
+                params['introduction'] = self.introduction
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -232,6 +306,11 @@ class PoiInfoVo(object):
                 params['latitude'] = self.latitude.to_alipay_dict()
             else:
                 params['latitude'] = self.latitude
+        if self.line_type:
+            if hasattr(self.line_type, 'to_alipay_dict'):
+                params['line_type'] = self.line_type.to_alipay_dict()
+            else:
+                params['line_type'] = self.line_type
         if self.longitude:
             if hasattr(self.longitude, 'to_alipay_dict'):
                 params['longitude'] = self.longitude.to_alipay_dict()
@@ -262,6 +341,16 @@ class PoiInfoVo(object):
                 params['poi_type'] = self.poi_type.to_alipay_dict()
             else:
                 params['poi_type'] = self.poi_type
+        if self.polyline:
+            if isinstance(self.polyline, list):
+                for i in range(0, len(self.polyline)):
+                    element = self.polyline[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.polyline[i] = element.to_alipay_dict()
+            if hasattr(self.polyline, 'to_alipay_dict'):
+                params['polyline'] = self.polyline.to_alipay_dict()
+            else:
+                params['polyline'] = self.polyline
         if self.related_merchant_list:
             if isinstance(self.related_merchant_list, list):
                 for i in range(0, len(self.related_merchant_list)):
@@ -292,6 +381,16 @@ class PoiInfoVo(object):
                 params['title'] = self.title.to_alipay_dict()
             else:
                 params['title'] = self.title
+        if self.travel_distance:
+            if hasattr(self.travel_distance, 'to_alipay_dict'):
+                params['travel_distance'] = self.travel_distance.to_alipay_dict()
+            else:
+                params['travel_distance'] = self.travel_distance
+        if self.travel_duration:
+            if hasattr(self.travel_duration, 'to_alipay_dict'):
+                params['travel_duration'] = self.travel_duration.to_alipay_dict()
+            else:
+                params['travel_duration'] = self.travel_duration
         return params
 
     @staticmethod
@@ -309,16 +408,24 @@ class PoiInfoVo(object):
             o.avatar = d['avatar']
         if 'buy_url' in d:
             o.buy_url = d['buy_url']
+        if 'comfort_level' in d:
+            o.comfort_level = d['comfort_level']
         if 'description' in d:
             o.description = d['description']
         if 'distance' in d:
             o.distance = d['distance']
+        if 'historical_curiosities' in d:
+            o.historical_curiosities = d['historical_curiosities']
         if 'img_list' in d:
             o.img_list = d['img_list']
+        if 'introduction' in d:
+            o.introduction = d['introduction']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'latitude' in d:
             o.latitude = d['latitude']
+        if 'line_type' in d:
+            o.line_type = d['line_type']
         if 'longitude' in d:
             o.longitude = d['longitude']
         if 'meters' in d:
@@ -329,6 +436,8 @@ class PoiInfoVo(object):
             o.photo_suggest_text = d['photo_suggest_text']
         if 'poi_type' in d:
             o.poi_type = d['poi_type']
+        if 'polyline' in d:
+            o.polyline = d['polyline']
         if 'related_merchant_list' in d:
             o.related_merchant_list = d['related_merchant_list']
         if 'related_ticket_list' in d:
@@ -337,6 +446,10 @@ class PoiInfoVo(object):
             o.tags = d['tags']
         if 'title' in d:
             o.title = d['title']
+        if 'travel_distance' in d:
+            o.travel_distance = d['travel_distance']
+        if 'travel_duration' in d:
+            o.travel_duration = d['travel_duration']
         return o
 
 

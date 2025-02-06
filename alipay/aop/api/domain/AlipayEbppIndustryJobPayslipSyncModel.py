@@ -22,6 +22,7 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
         self._remark = None
         self._salary_time = None
         self._user_id = None
+        self._user_name = None
 
     @property
     def amount(self):
@@ -121,6 +122,13 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def user_name(self):
+        return self._user_name
+
+    @user_name.setter
+    def user_name(self, value):
+        self._user_name = value
 
 
     def to_alipay_dict(self):
@@ -195,6 +203,11 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.user_name:
+            if hasattr(self.user_name, 'to_alipay_dict'):
+                params['user_name'] = self.user_name.to_alipay_dict()
+            else:
+                params['user_name'] = self.user_name
         return params
 
     @staticmethod
@@ -230,6 +243,8 @@ class AlipayEbppIndustryJobPayslipSyncModel(object):
             o.salary_time = d['salary_time']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'user_name' in d:
+            o.user_name = d['user_name']
         return o
 
 

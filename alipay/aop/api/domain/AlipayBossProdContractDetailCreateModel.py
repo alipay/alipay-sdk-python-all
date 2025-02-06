@@ -12,6 +12,7 @@ from alipay.aop.api.domain.OpenApiPersonSaDTO import OpenApiPersonSaDTO
 from alipay.aop.api.domain.OpenApiPartnerSaDTO import OpenApiPartnerSaDTO
 from alipay.aop.api.domain.OpenApiPartnerSaDTO import OpenApiPartnerSaDTO
 from alipay.aop.api.domain.OpenApiPersonSaDTO import OpenApiPersonSaDTO
+from alipay.aop.api.domain.OpenApiContractFileSaDTO import OpenApiContractFileSaDTO
 
 
 class AlipayBossProdContractDetailCreateModel(object):
@@ -29,9 +30,11 @@ class AlipayBossProdContractDetailCreateModel(object):
         self._legal_people = None
         self._negotiators = None
         self._opposite_parts = None
+        self._ou_data_relationship = None
         self._our_parts = None
         self._owners = None
         self._source_system_id = None
+        self._template_files = None
         self._tenant = None
         self._voucher_id = None
 
@@ -159,6 +162,13 @@ class AlipayBossProdContractDetailCreateModel(object):
                 else:
                     self._opposite_parts.append(OpenApiPartnerSaDTO.from_alipay_dict(i))
     @property
+    def ou_data_relationship(self):
+        return self._ou_data_relationship
+
+    @ou_data_relationship.setter
+    def ou_data_relationship(self, value):
+        self._ou_data_relationship = value
+    @property
     def our_parts(self):
         return self._our_parts
 
@@ -191,6 +201,19 @@ class AlipayBossProdContractDetailCreateModel(object):
     @source_system_id.setter
     def source_system_id(self, value):
         self._source_system_id = value
+    @property
+    def template_files(self):
+        return self._template_files
+
+    @template_files.setter
+    def template_files(self, value):
+        if isinstance(value, list):
+            self._template_files = list()
+            for i in value:
+                if isinstance(i, OpenApiContractFileSaDTO):
+                    self._template_files.append(i)
+                else:
+                    self._template_files.append(OpenApiContractFileSaDTO.from_alipay_dict(i))
     @property
     def tenant(self):
         return self._tenant
@@ -299,6 +322,11 @@ class AlipayBossProdContractDetailCreateModel(object):
                 params['opposite_parts'] = self.opposite_parts.to_alipay_dict()
             else:
                 params['opposite_parts'] = self.opposite_parts
+        if self.ou_data_relationship:
+            if hasattr(self.ou_data_relationship, 'to_alipay_dict'):
+                params['ou_data_relationship'] = self.ou_data_relationship.to_alipay_dict()
+            else:
+                params['ou_data_relationship'] = self.ou_data_relationship
         if self.our_parts:
             if isinstance(self.our_parts, list):
                 for i in range(0, len(self.our_parts)):
@@ -324,6 +352,16 @@ class AlipayBossProdContractDetailCreateModel(object):
                 params['source_system_id'] = self.source_system_id.to_alipay_dict()
             else:
                 params['source_system_id'] = self.source_system_id
+        if self.template_files:
+            if isinstance(self.template_files, list):
+                for i in range(0, len(self.template_files)):
+                    element = self.template_files[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.template_files[i] = element.to_alipay_dict()
+            if hasattr(self.template_files, 'to_alipay_dict'):
+                params['template_files'] = self.template_files.to_alipay_dict()
+            else:
+                params['template_files'] = self.template_files
         if self.tenant:
             if hasattr(self.tenant, 'to_alipay_dict'):
                 params['tenant'] = self.tenant.to_alipay_dict()
@@ -365,12 +403,16 @@ class AlipayBossProdContractDetailCreateModel(object):
             o.negotiators = d['negotiators']
         if 'opposite_parts' in d:
             o.opposite_parts = d['opposite_parts']
+        if 'ou_data_relationship' in d:
+            o.ou_data_relationship = d['ou_data_relationship']
         if 'our_parts' in d:
             o.our_parts = d['our_parts']
         if 'owners' in d:
             o.owners = d['owners']
         if 'source_system_id' in d:
             o.source_system_id = d['source_system_id']
+        if 'template_files' in d:
+            o.template_files = d['template_files']
         if 'tenant' in d:
             o.tenant = d['tenant']
         if 'voucher_id' in d:

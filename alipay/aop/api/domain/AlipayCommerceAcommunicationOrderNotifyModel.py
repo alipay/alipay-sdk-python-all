@@ -9,6 +9,7 @@ class AlipayCommerceAcommunicationOrderNotifyModel(object):
 
     def __init__(self):
         self._alipay_order_no = None
+        self._channel = None
         self._code = None
         self._msg = None
         self._out_order_no = None
@@ -21,6 +22,13 @@ class AlipayCommerceAcommunicationOrderNotifyModel(object):
     @alipay_order_no.setter
     def alipay_order_no(self, value):
         self._alipay_order_no = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def code(self):
         return self._code
@@ -58,6 +66,11 @@ class AlipayCommerceAcommunicationOrderNotifyModel(object):
                 params['alipay_order_no'] = self.alipay_order_no.to_alipay_dict()
             else:
                 params['alipay_order_no'] = self.alipay_order_no
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.code:
             if hasattr(self.code, 'to_alipay_dict'):
                 params['code'] = self.code.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayCommerceAcommunicationOrderNotifyModel(object):
         o = AlipayCommerceAcommunicationOrderNotifyModel()
         if 'alipay_order_no' in d:
             o.alipay_order_no = d['alipay_order_no']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'code' in d:
             o.code = d['code']
         if 'msg' in d:

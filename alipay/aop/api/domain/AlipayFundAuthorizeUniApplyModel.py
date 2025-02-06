@@ -17,6 +17,7 @@ class AlipayFundAuthorizeUniApplyModel(object):
         self._auth_expire_time = None
         self._authorize_link_type = None
         self._back_url = None
+        self._back_url_type = None
         self._biz_scene = None
         self._channel = None
         self._out_biz_no = None
@@ -64,6 +65,13 @@ class AlipayFundAuthorizeUniApplyModel(object):
     @back_url.setter
     def back_url(self, value):
         self._back_url = value
+    @property
+    def back_url_type(self):
+        return self._back_url_type
+
+    @back_url_type.setter
+    def back_url_type(self, value):
+        self._back_url_type = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -158,6 +166,11 @@ class AlipayFundAuthorizeUniApplyModel(object):
                 params['back_url'] = self.back_url.to_alipay_dict()
             else:
                 params['back_url'] = self.back_url
+        if self.back_url_type:
+            if hasattr(self.back_url_type, 'to_alipay_dict'):
+                params['back_url_type'] = self.back_url_type.to_alipay_dict()
+            else:
+                params['back_url_type'] = self.back_url_type
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -215,6 +228,8 @@ class AlipayFundAuthorizeUniApplyModel(object):
             o.authorize_link_type = d['authorize_link_type']
         if 'back_url' in d:
             o.back_url = d['back_url']
+        if 'back_url_type' in d:
+            o.back_url_type = d['back_url_type']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'channel' in d:

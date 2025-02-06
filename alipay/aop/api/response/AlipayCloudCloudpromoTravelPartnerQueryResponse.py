@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.PoiInfoVo import PoiInfoVo
 from alipay.aop.api.domain.PoiInfoVo import PoiInfoVo
+from alipay.aop.api.domain.PoiInfoVo import PoiInfoVo
 from alipay.aop.api.domain.PoiListDayVo import PoiListDayVo
 from alipay.aop.api.domain.PoiInfoVo import PoiInfoVo
 
@@ -15,10 +16,15 @@ class AlipayCloudCloudpromoTravelPartnerQueryResponse(AlipayResponse):
         super(AlipayCloudCloudpromoTravelPartnerQueryResponse, self).__init__()
         self._assist_status = None
         self._attractions_count = None
+        self._audio_poi_info = None
         self._calorie = None
+        self._current_attraction_count = None
+        self._current_distance = None
+        self._current_duration = None
         self._current_poi_info = None
         self._distance = None
         self._duration = None
+        self._finish_view = None
         self._introduction = None
         self._item_id = None
         self._need_poll = None
@@ -51,12 +57,43 @@ class AlipayCloudCloudpromoTravelPartnerQueryResponse(AlipayResponse):
     def attractions_count(self, value):
         self._attractions_count = value
     @property
+    def audio_poi_info(self):
+        return self._audio_poi_info
+
+    @audio_poi_info.setter
+    def audio_poi_info(self, value):
+        if isinstance(value, PoiInfoVo):
+            self._audio_poi_info = value
+        else:
+            self._audio_poi_info = PoiInfoVo.from_alipay_dict(value)
+    @property
     def calorie(self):
         return self._calorie
 
     @calorie.setter
     def calorie(self, value):
         self._calorie = value
+    @property
+    def current_attraction_count(self):
+        return self._current_attraction_count
+
+    @current_attraction_count.setter
+    def current_attraction_count(self, value):
+        self._current_attraction_count = value
+    @property
+    def current_distance(self):
+        return self._current_distance
+
+    @current_distance.setter
+    def current_distance(self, value):
+        self._current_distance = value
+    @property
+    def current_duration(self):
+        return self._current_duration
+
+    @current_duration.setter
+    def current_duration(self, value):
+        self._current_duration = value
     @property
     def current_poi_info(self):
         return self._current_poi_info
@@ -81,6 +118,13 @@ class AlipayCloudCloudpromoTravelPartnerQueryResponse(AlipayResponse):
     @duration.setter
     def duration(self, value):
         self._duration = value
+    @property
+    def finish_view(self):
+        return self._finish_view
+
+    @finish_view.setter
+    def finish_view(self, value):
+        self._finish_view = value
     @property
     def introduction(self):
         return self._introduction
@@ -221,14 +265,24 @@ class AlipayCloudCloudpromoTravelPartnerQueryResponse(AlipayResponse):
             self.assist_status = response['assist_status']
         if 'attractions_count' in response:
             self.attractions_count = response['attractions_count']
+        if 'audio_poi_info' in response:
+            self.audio_poi_info = response['audio_poi_info']
         if 'calorie' in response:
             self.calorie = response['calorie']
+        if 'current_attraction_count' in response:
+            self.current_attraction_count = response['current_attraction_count']
+        if 'current_distance' in response:
+            self.current_distance = response['current_distance']
+        if 'current_duration' in response:
+            self.current_duration = response['current_duration']
         if 'current_poi_info' in response:
             self.current_poi_info = response['current_poi_info']
         if 'distance' in response:
             self.distance = response['distance']
         if 'duration' in response:
             self.duration = response['duration']
+        if 'finish_view' in response:
+            self.finish_view = response['finish_view']
         if 'introduction' in response:
             self.introduction = response['introduction']
         if 'item_id' in response:

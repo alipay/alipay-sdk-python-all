@@ -24,10 +24,12 @@ class EmployeeInfoDTO(object):
         self._iot_face_status = None
         self._iot_unique_id = None
         self._iot_vid = None
+        self._job_level_show = None
         self._mobile = None
         self._open_id = None
         self._profiles = None
         self._role_list = None
+        self._tl_employee_id = None
         self._user_id = None
 
     @property
@@ -142,6 +144,13 @@ class EmployeeInfoDTO(object):
     def iot_vid(self, value):
         self._iot_vid = value
     @property
+    def job_level_show(self):
+        return self._job_level_show
+
+    @job_level_show.setter
+    def job_level_show(self, value):
+        self._job_level_show = value
+    @property
     def mobile(self):
         return self._mobile
 
@@ -172,6 +181,13 @@ class EmployeeInfoDTO(object):
             self._role_list = list()
             for i in value:
                 self._role_list.append(i)
+    @property
+    def tl_employee_id(self):
+        return self._tl_employee_id
+
+    @tl_employee_id.setter
+    def tl_employee_id(self, value):
+        self._tl_employee_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -263,6 +279,11 @@ class EmployeeInfoDTO(object):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
             else:
                 params['iot_vid'] = self.iot_vid
+        if self.job_level_show:
+            if hasattr(self.job_level_show, 'to_alipay_dict'):
+                params['job_level_show'] = self.job_level_show.to_alipay_dict()
+            else:
+                params['job_level_show'] = self.job_level_show
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -288,6 +309,11 @@ class EmployeeInfoDTO(object):
                 params['role_list'] = self.role_list.to_alipay_dict()
             else:
                 params['role_list'] = self.role_list
+        if self.tl_employee_id:
+            if hasattr(self.tl_employee_id, 'to_alipay_dict'):
+                params['tl_employee_id'] = self.tl_employee_id.to_alipay_dict()
+            else:
+                params['tl_employee_id'] = self.tl_employee_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -330,6 +356,8 @@ class EmployeeInfoDTO(object):
             o.iot_unique_id = d['iot_unique_id']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
+        if 'job_level_show' in d:
+            o.job_level_show = d['job_level_show']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'open_id' in d:
@@ -338,6 +366,8 @@ class EmployeeInfoDTO(object):
             o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
+        if 'tl_employee_id' in d:
+            o.tl_employee_id = d['tl_employee_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

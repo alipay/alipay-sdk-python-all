@@ -9,6 +9,7 @@ from alipay.aop.api.domain.DtbankActivityAlertConfigInfo import DtbankActivityAl
 from alipay.aop.api.domain.DtBankInfo import DtBankInfo
 from alipay.aop.api.domain.DtBankBudgetInfo import DtBankBudgetInfo
 from alipay.aop.api.domain.DtBankCrowdInfo import DtBankCrowdInfo
+from alipay.aop.api.domain.DtbankActivityDataEffectInfo import DtbankActivityDataEffectInfo
 from alipay.aop.api.domain.DtBankPreferenceTypeInfo import DtBankPreferenceTypeInfo
 
 
@@ -26,6 +27,7 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         self._budget_info = None
         self._count_limit = None
         self._crowd_info = None
+        self._data_effect_info = None
         self._preference_type_info = None
         self._use_scene = None
         self._voucher_template_id = None
@@ -120,6 +122,16 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         else:
             self._crowd_info = DtBankCrowdInfo.from_alipay_dict(value)
     @property
+    def data_effect_info(self):
+        return self._data_effect_info
+
+    @data_effect_info.setter
+    def data_effect_info(self, value):
+        if isinstance(value, DtbankActivityDataEffectInfo):
+            self._data_effect_info = value
+        else:
+            self._data_effect_info = DtbankActivityDataEffectInfo.from_alipay_dict(value)
+    @property
     def preference_type_info(self):
         return self._preference_type_info
 
@@ -173,6 +185,8 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
             self.count_limit = response['count_limit']
         if 'crowd_info' in response:
             self.crowd_info = response['crowd_info']
+        if 'data_effect_info' in response:
+            self.data_effect_info = response['data_effect_info']
         if 'preference_type_info' in response:
             self.preference_type_info = response['preference_type_info']
         if 'use_scene' in response:

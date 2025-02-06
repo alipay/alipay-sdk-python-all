@@ -10,6 +10,7 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
     def __init__(self):
         self._alipay_uid = None
         self._amount = None
+        self._authorization_list = None
         self._biz_scene = None
         self._currency = None
         self._open_id = None
@@ -31,6 +32,16 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def authorization_list(self):
+        return self._authorization_list
+
+    @authorization_list.setter
+    def authorization_list(self, value):
+        if isinstance(value, list):
+            self._authorization_list = list()
+            for i in value:
+                self._authorization_list.append(i)
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -87,6 +98,16 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.authorization_list:
+            if isinstance(self.authorization_list, list):
+                for i in range(0, len(self.authorization_list)):
+                    element = self.authorization_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.authorization_list[i] = element.to_alipay_dict()
+            if hasattr(self.authorization_list, 'to_alipay_dict'):
+                params['authorization_list'] = self.authorization_list.to_alipay_dict()
+            else:
+                params['authorization_list'] = self.authorization_list
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -128,6 +149,8 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
             o.alipay_uid = d['alipay_uid']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'authorization_list' in d:
+            o.authorization_list = d['authorization_list']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'currency' in d:

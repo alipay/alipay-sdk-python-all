@@ -11,6 +11,7 @@ class DepartmentInfoDTO(object):
         self._department_code = None
         self._department_id = None
         self._department_name = None
+        self._dept_charge_employee_id = None
         self._gmt_create = None
         self._gmt_modified = None
         self._parent_department_id = None
@@ -36,6 +37,13 @@ class DepartmentInfoDTO(object):
     @department_name.setter
     def department_name(self, value):
         self._department_name = value
+    @property
+    def dept_charge_employee_id(self):
+        return self._dept_charge_employee_id
+
+    @dept_charge_employee_id.setter
+    def dept_charge_employee_id(self, value):
+        self._dept_charge_employee_id = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -76,6 +84,11 @@ class DepartmentInfoDTO(object):
                 params['department_name'] = self.department_name.to_alipay_dict()
             else:
                 params['department_name'] = self.department_name
+        if self.dept_charge_employee_id:
+            if hasattr(self.dept_charge_employee_id, 'to_alipay_dict'):
+                params['dept_charge_employee_id'] = self.dept_charge_employee_id.to_alipay_dict()
+            else:
+                params['dept_charge_employee_id'] = self.dept_charge_employee_id
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -104,6 +117,8 @@ class DepartmentInfoDTO(object):
             o.department_id = d['department_id']
         if 'department_name' in d:
             o.department_name = d['department_name']
+        if 'dept_charge_employee_id' in d:
+            o.dept_charge_employee_id = d['dept_charge_employee_id']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

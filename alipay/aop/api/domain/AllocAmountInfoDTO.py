@@ -11,6 +11,7 @@ class AllocAmountInfoDTO(object):
 
     def __init__(self):
         self._buy_out_royalty = None
+        self._invest_app_id = None
         self._invest_id = None
         self._rent_royalty_details = None
 
@@ -24,6 +25,13 @@ class AllocAmountInfoDTO(object):
             self._buy_out_royalty = value
         else:
             self._buy_out_royalty = RoyaltyDTO.from_alipay_dict(value)
+    @property
+    def invest_app_id(self):
+        return self._invest_app_id
+
+    @invest_app_id.setter
+    def invest_app_id(self, value):
+        self._invest_app_id = value
     @property
     def invest_id(self):
         return self._invest_id
@@ -53,6 +61,11 @@ class AllocAmountInfoDTO(object):
                 params['buy_out_royalty'] = self.buy_out_royalty.to_alipay_dict()
             else:
                 params['buy_out_royalty'] = self.buy_out_royalty
+        if self.invest_app_id:
+            if hasattr(self.invest_app_id, 'to_alipay_dict'):
+                params['invest_app_id'] = self.invest_app_id.to_alipay_dict()
+            else:
+                params['invest_app_id'] = self.invest_app_id
         if self.invest_id:
             if hasattr(self.invest_id, 'to_alipay_dict'):
                 params['invest_id'] = self.invest_id.to_alipay_dict()
@@ -77,6 +90,8 @@ class AllocAmountInfoDTO(object):
         o = AllocAmountInfoDTO()
         if 'buy_out_royalty' in d:
             o.buy_out_royalty = d['buy_out_royalty']
+        if 'invest_app_id' in d:
+            o.invest_app_id = d['invest_app_id']
         if 'invest_id' in d:
             o.invest_id = d['invest_id']
         if 'rent_royalty_details' in d:

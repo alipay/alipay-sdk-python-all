@@ -12,6 +12,7 @@ class PlatformDrugInfo(object):
         self._drug_generic_name = None
         self._drug_id = None
         self._drug_name = None
+        self._drug_url = None
         self._manufacturer = None
         self._medicine_quantity = None
         self._price = None
@@ -45,6 +46,13 @@ class PlatformDrugInfo(object):
     @drug_name.setter
     def drug_name(self, value):
         self._drug_name = value
+    @property
+    def drug_url(self):
+        return self._drug_url
+
+    @drug_url.setter
+    def drug_url(self, value):
+        self._drug_url = value
     @property
     def manufacturer(self):
         return self._manufacturer
@@ -97,6 +105,11 @@ class PlatformDrugInfo(object):
                 params['drug_name'] = self.drug_name.to_alipay_dict()
             else:
                 params['drug_name'] = self.drug_name
+        if self.drug_url:
+            if hasattr(self.drug_url, 'to_alipay_dict'):
+                params['drug_url'] = self.drug_url.to_alipay_dict()
+            else:
+                params['drug_url'] = self.drug_url
         if self.manufacturer:
             if hasattr(self.manufacturer, 'to_alipay_dict'):
                 params['manufacturer'] = self.manufacturer.to_alipay_dict()
@@ -132,6 +145,8 @@ class PlatformDrugInfo(object):
             o.drug_id = d['drug_id']
         if 'drug_name' in d:
             o.drug_name = d['drug_name']
+        if 'drug_url' in d:
+            o.drug_url = d['drug_url']
         if 'manufacturer' in d:
             o.manufacturer = d['manufacturer']
         if 'medicine_quantity' in d:

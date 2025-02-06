@@ -13,6 +13,7 @@ class AlipayCommerceWithholdTaskCreateModel(object):
         self._end_time = None
         self._open_id = None
         self._out_biz_no = None
+        self._out_trade_no = None
         self._uid = None
 
     @property
@@ -51,6 +52,13 @@ class AlipayCommerceWithholdTaskCreateModel(object):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def out_trade_no(self):
+        return self._out_trade_no
+
+    @out_trade_no.setter
+    def out_trade_no(self, value):
+        self._out_trade_no = value
+    @property
     def uid(self):
         return self._uid
 
@@ -86,6 +94,11 @@ class AlipayCommerceWithholdTaskCreateModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.out_trade_no:
+            if hasattr(self.out_trade_no, 'to_alipay_dict'):
+                params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
+            else:
+                params['out_trade_no'] = self.out_trade_no
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -108,6 +121,8 @@ class AlipayCommerceWithholdTaskCreateModel(object):
             o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'out_trade_no' in d:
+            o.out_trade_no = d['out_trade_no']
         if 'uid' in d:
             o.uid = d['uid']
         return o

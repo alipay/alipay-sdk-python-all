@@ -28,6 +28,7 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
         self._policy_no = None
         self._source = None
         self._status = None
+        self._supplement_tag = None
         self._user_id = None
 
     @property
@@ -170,6 +171,13 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
     def status(self, value):
         self._status = value
     @property
+    def supplement_tag(self):
+        return self._supplement_tag
+
+    @supplement_tag.setter
+    def supplement_tag(self, value):
+        self._supplement_tag = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -280,6 +288,11 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.supplement_tag:
+            if hasattr(self.supplement_tag, 'to_alipay_dict'):
+                params['supplement_tag'] = self.supplement_tag.to_alipay_dict()
+            else:
+                params['supplement_tag'] = self.supplement_tag
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -330,6 +343,8 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
             o.source = d['source']
         if 'status' in d:
             o.status = d['status']
+        if 'supplement_tag' in d:
+            o.supplement_tag = d['supplement_tag']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

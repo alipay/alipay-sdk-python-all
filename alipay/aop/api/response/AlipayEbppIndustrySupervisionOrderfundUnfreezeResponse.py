@@ -11,6 +11,7 @@ class AlipayEbppIndustrySupervisionOrderfundUnfreezeResponse(AlipayResponse):
         super(AlipayEbppIndustrySupervisionOrderfundUnfreezeResponse, self).__init__()
         self._amount = None
         self._currency = None
+        self._operate_no = None
         self._out_flow_id = None
         self._relation_out_order_no = None
 
@@ -28,6 +29,13 @@ class AlipayEbppIndustrySupervisionOrderfundUnfreezeResponse(AlipayResponse):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def operate_no(self):
+        return self._operate_no
+
+    @operate_no.setter
+    def operate_no(self, value):
+        self._operate_no = value
     @property
     def out_flow_id(self):
         return self._out_flow_id
@@ -49,6 +57,8 @@ class AlipayEbppIndustrySupervisionOrderfundUnfreezeResponse(AlipayResponse):
             self.amount = response['amount']
         if 'currency' in response:
             self.currency = response['currency']
+        if 'operate_no' in response:
+            self.operate_no = response['operate_no']
         if 'out_flow_id' in response:
             self.out_flow_id = response['out_flow_id']
         if 'relation_out_order_no' in response:

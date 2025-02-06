@@ -14,6 +14,7 @@ class AlipayDataDataserviceMediaReportQueryModel(object):
         self._m_pid = None
         self._page_no = None
         self._page_size = None
+        self._space_code = None
         self._start_date = None
         self._type = None
 
@@ -59,6 +60,13 @@ class AlipayDataDataserviceMediaReportQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def space_code(self):
+        return self._space_code
+
+    @space_code.setter
+    def space_code(self, value):
+        self._space_code = value
     @property
     def start_date(self):
         return self._start_date
@@ -107,6 +115,11 @@ class AlipayDataDataserviceMediaReportQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.space_code:
+            if hasattr(self.space_code, 'to_alipay_dict'):
+                params['space_code'] = self.space_code.to_alipay_dict()
+            else:
+                params['space_code'] = self.space_code
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -136,6 +149,8 @@ class AlipayDataDataserviceMediaReportQueryModel(object):
             o.page_no = d['page_no']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'space_code' in d:
+            o.space_code = d['space_code']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'type' in d:

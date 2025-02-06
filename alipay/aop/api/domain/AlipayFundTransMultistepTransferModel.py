@@ -10,6 +10,7 @@ class AlipayFundTransMultistepTransferModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._business_params = None
         self._order_details = None
         self._out_biz_no = None
         self._passback_params = None
@@ -25,6 +26,13 @@ class AlipayFundTransMultistepTransferModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        self._business_params = value
     @property
     def order_details(self):
         return self._order_details
@@ -89,6 +97,11 @@ class AlipayFundTransMultistepTransferModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.order_details:
             if isinstance(self.order_details, list):
                 for i in range(0, len(self.order_details)):
@@ -138,6 +151,8 @@ class AlipayFundTransMultistepTransferModel(object):
         o = AlipayFundTransMultistepTransferModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'order_details' in d:
             o.order_details = d['order_details']
         if 'out_biz_no' in d:

@@ -15,6 +15,7 @@ class ExamInfoDTO(object):
         self._exam_end_time = None
         self._exam_start_time = None
         self._passport_id = None
+        self._year_of_birth = None
 
     @property
     def certificate_issue_date(self):
@@ -65,6 +66,13 @@ class ExamInfoDTO(object):
     @passport_id.setter
     def passport_id(self, value):
         self._passport_id = value
+    @property
+    def year_of_birth(self):
+        return self._year_of_birth
+
+    @year_of_birth.setter
+    def year_of_birth(self, value):
+        self._year_of_birth = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class ExamInfoDTO(object):
                 params['passport_id'] = self.passport_id.to_alipay_dict()
             else:
                 params['passport_id'] = self.passport_id
+        if self.year_of_birth:
+            if hasattr(self.year_of_birth, 'to_alipay_dict'):
+                params['year_of_birth'] = self.year_of_birth.to_alipay_dict()
+            else:
+                params['year_of_birth'] = self.year_of_birth
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class ExamInfoDTO(object):
             o.exam_start_time = d['exam_start_time']
         if 'passport_id' in d:
             o.passport_id = d['passport_id']
+        if 'year_of_birth' in d:
+            o.year_of_birth = d['year_of_birth']
         return o
 
 

@@ -15,6 +15,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._doctor_inquiry_link_page = None
         self._doctor_out_id = None
         self._doctor_out_name = None
+        self._doctor_refuse_reason = None
         self._first_reply = None
         self._gmt_adoption = None
         self._gmt_cancel = None
@@ -22,6 +23,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._gmt_paid = None
         self._gmt_refund = None
         self._gmt_refund_applying = None
+        self._inquiry_complete_status = None
         self._notice = None
         self._real_amount = None
         self._refund_amount = None
@@ -29,6 +31,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._reject_refund_reason = None
         self._remind_pay = None
         self._reply_content = None
+        self._service_end_time = None
 
     @property
     def alipay_trade_no(self):
@@ -80,6 +83,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     def doctor_out_name(self, value):
         self._doctor_out_name = value
     @property
+    def doctor_refuse_reason(self):
+        return self._doctor_refuse_reason
+
+    @doctor_refuse_reason.setter
+    def doctor_refuse_reason(self, value):
+        self._doctor_refuse_reason = value
+    @property
     def first_reply(self):
         return self._first_reply
 
@@ -129,6 +139,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     def gmt_refund_applying(self, value):
         self._gmt_refund_applying = value
     @property
+    def inquiry_complete_status(self):
+        return self._inquiry_complete_status
+
+    @inquiry_complete_status.setter
+    def inquiry_complete_status(self, value):
+        self._inquiry_complete_status = value
+    @property
     def notice(self):
         return self._notice
 
@@ -177,6 +194,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @reply_content.setter
     def reply_content(self, value):
         self._reply_content = value
+    @property
+    def service_end_time(self):
+        return self._service_end_time
+
+    @service_end_time.setter
+    def service_end_time(self, value):
+        self._service_end_time = value
 
 
     def to_alipay_dict(self):
@@ -216,6 +240,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['doctor_out_name'] = self.doctor_out_name.to_alipay_dict()
             else:
                 params['doctor_out_name'] = self.doctor_out_name
+        if self.doctor_refuse_reason:
+            if hasattr(self.doctor_refuse_reason, 'to_alipay_dict'):
+                params['doctor_refuse_reason'] = self.doctor_refuse_reason.to_alipay_dict()
+            else:
+                params['doctor_refuse_reason'] = self.doctor_refuse_reason
         if self.first_reply:
             if hasattr(self.first_reply, 'to_alipay_dict'):
                 params['first_reply'] = self.first_reply.to_alipay_dict()
@@ -251,6 +280,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['gmt_refund_applying'] = self.gmt_refund_applying.to_alipay_dict()
             else:
                 params['gmt_refund_applying'] = self.gmt_refund_applying
+        if self.inquiry_complete_status:
+            if hasattr(self.inquiry_complete_status, 'to_alipay_dict'):
+                params['inquiry_complete_status'] = self.inquiry_complete_status.to_alipay_dict()
+            else:
+                params['inquiry_complete_status'] = self.inquiry_complete_status
         if self.notice:
             if hasattr(self.notice, 'to_alipay_dict'):
                 params['notice'] = self.notice.to_alipay_dict()
@@ -286,6 +320,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['reply_content'] = self.reply_content.to_alipay_dict()
             else:
                 params['reply_content'] = self.reply_content
+        if self.service_end_time:
+            if hasattr(self.service_end_time, 'to_alipay_dict'):
+                params['service_end_time'] = self.service_end_time.to_alipay_dict()
+            else:
+                params['service_end_time'] = self.service_end_time
         return params
 
     @staticmethod
@@ -307,6 +346,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.doctor_out_id = d['doctor_out_id']
         if 'doctor_out_name' in d:
             o.doctor_out_name = d['doctor_out_name']
+        if 'doctor_refuse_reason' in d:
+            o.doctor_refuse_reason = d['doctor_refuse_reason']
         if 'first_reply' in d:
             o.first_reply = d['first_reply']
         if 'gmt_adoption' in d:
@@ -321,6 +362,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.gmt_refund = d['gmt_refund']
         if 'gmt_refund_applying' in d:
             o.gmt_refund_applying = d['gmt_refund_applying']
+        if 'inquiry_complete_status' in d:
+            o.inquiry_complete_status = d['inquiry_complete_status']
         if 'notice' in d:
             o.notice = d['notice']
         if 'real_amount' in d:
@@ -335,6 +378,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.remind_pay = d['remind_pay']
         if 'reply_content' in d:
             o.reply_content = d['reply_content']
+        if 'service_end_time' in d:
+            o.service_end_time = d['service_end_time']
         return o
 
 

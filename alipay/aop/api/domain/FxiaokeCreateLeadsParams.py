@@ -30,6 +30,7 @@ class FxiaokeCreateLeadsParams(object):
         self._final_customer_sign_subject_name = None
         self._general_agent_cooperation_type = None
         self._id = None
+        self._if_resource_pool = None
         self._is_bid = None
         self._is_issue_for_bid = None
         self._leads_code = None
@@ -217,6 +218,13 @@ class FxiaokeCreateLeadsParams(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def if_resource_pool(self):
+        return self._if_resource_pool
+
+    @if_resource_pool.setter
+    def if_resource_pool(self, value):
+        self._if_resource_pool = value
     @property
     def is_bid(self):
         return self._is_bid
@@ -592,6 +600,11 @@ class FxiaokeCreateLeadsParams(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.if_resource_pool:
+            if hasattr(self.if_resource_pool, 'to_alipay_dict'):
+                params['if_resource_pool'] = self.if_resource_pool.to_alipay_dict()
+            else:
+                params['if_resource_pool'] = self.if_resource_pool
         if self.is_bid:
             if hasattr(self.is_bid, 'to_alipay_dict'):
                 params['is_bid'] = self.is_bid.to_alipay_dict()
@@ -831,6 +844,8 @@ class FxiaokeCreateLeadsParams(object):
             o.general_agent_cooperation_type = d['general_agent_cooperation_type']
         if 'id' in d:
             o.id = d['id']
+        if 'if_resource_pool' in d:
+            o.if_resource_pool = d['if_resource_pool']
         if 'is_bid' in d:
             o.is_bid = d['is_bid']
         if 'is_issue_for_bid' in d:

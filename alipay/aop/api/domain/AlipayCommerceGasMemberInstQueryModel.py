@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceGasMemberInstQueryModel(object):
 
     def __init__(self):
+        self._member_no = None
         self._open_id = None
         self._user_id = None
 
+    @property
+    def member_no(self):
+        return self._member_no
+
+    @member_no.setter
+    def member_no(self, value):
+        self._member_no = value
     @property
     def open_id(self):
         return self._open_id
@@ -29,6 +37,11 @@ class AlipayCommerceGasMemberInstQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.member_no:
+            if hasattr(self.member_no, 'to_alipay_dict'):
+                params['member_no'] = self.member_no.to_alipay_dict()
+            else:
+                params['member_no'] = self.member_no
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayCommerceGasMemberInstQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceGasMemberInstQueryModel()
+        if 'member_no' in d:
+            o.member_no = d['member_no']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'user_id' in d:

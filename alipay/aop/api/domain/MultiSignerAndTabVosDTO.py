@@ -9,6 +9,7 @@ from alipay.aop.api.domain.SealTabsVO import SealTabsVO
 class MultiSignerAndTabVosDTO(object):
 
     def __init__(self):
+        self._auto = None
         self._email_body = None
         self._email_subject = None
         self._need_emai_notice = None
@@ -21,6 +22,13 @@ class MultiSignerAndTabVosDTO(object):
         self._supported_language = None
         self._tabs = None
 
+    @property
+    def auto(self):
+        return self._auto
+
+    @auto.setter
+    def auto(self, value):
+        self._auto = value
     @property
     def email_body(self):
         return self._email_body
@@ -108,6 +116,11 @@ class MultiSignerAndTabVosDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auto:
+            if hasattr(self.auto, 'to_alipay_dict'):
+                params['auto'] = self.auto.to_alipay_dict()
+            else:
+                params['auto'] = self.auto
         if self.email_body:
             if hasattr(self.email_body, 'to_alipay_dict'):
                 params['email_body'] = self.email_body.to_alipay_dict()
@@ -175,6 +188,8 @@ class MultiSignerAndTabVosDTO(object):
         if not d:
             return None
         o = MultiSignerAndTabVosDTO()
+        if 'auto' in d:
+            o.auto = d['auto']
         if 'email_body' in d:
             o.email_body = d['email_body']
         if 'email_subject' in d:

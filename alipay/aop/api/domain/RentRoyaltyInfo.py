@@ -11,6 +11,7 @@ class RentRoyaltyInfo(object):
     def __init__(self):
         self._buyer_id = None
         self._buyer_open_id = None
+        self._invest_app_id = None
         self._invest_pid = None
         self._order_id = None
         self._out_order_id = None
@@ -31,6 +32,13 @@ class RentRoyaltyInfo(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def invest_app_id(self):
+        return self._invest_app_id
+
+    @invest_app_id.setter
+    def invest_app_id(self, value):
+        self._invest_app_id = value
     @property
     def invest_pid(self):
         return self._invest_pid
@@ -86,6 +94,11 @@ class RentRoyaltyInfo(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.invest_app_id:
+            if hasattr(self.invest_app_id, 'to_alipay_dict'):
+                params['invest_app_id'] = self.invest_app_id.to_alipay_dict()
+            else:
+                params['invest_app_id'] = self.invest_app_id
         if self.invest_pid:
             if hasattr(self.invest_pid, 'to_alipay_dict'):
                 params['invest_pid'] = self.invest_pid.to_alipay_dict()
@@ -127,6 +140,8 @@ class RentRoyaltyInfo(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'invest_app_id' in d:
+            o.invest_app_id = d['invest_app_id']
         if 'invest_pid' in d:
             o.invest_pid = d['invest_pid']
         if 'order_id' in d:

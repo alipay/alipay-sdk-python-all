@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class JobAddress(object):
 
     def __init__(self):
+        self._address_name = None
         self._detail = None
         self._geo = None
         self._region_code = None
 
+    @property
+    def address_name(self):
+        return self._address_name
+
+    @address_name.setter
+    def address_name(self, value):
+        self._address_name = value
     @property
     def detail(self):
         return self._detail
@@ -37,6 +45,11 @@ class JobAddress(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.address_name:
+            if hasattr(self.address_name, 'to_alipay_dict'):
+                params['address_name'] = self.address_name.to_alipay_dict()
+            else:
+                params['address_name'] = self.address_name
         if self.detail:
             if hasattr(self.detail, 'to_alipay_dict'):
                 params['detail'] = self.detail.to_alipay_dict()
@@ -59,6 +72,8 @@ class JobAddress(object):
         if not d:
             return None
         o = JobAddress()
+        if 'address_name' in d:
+            o.address_name = d['address_name']
         if 'detail' in d:
             o.detail = d['detail']
         if 'geo' in d:

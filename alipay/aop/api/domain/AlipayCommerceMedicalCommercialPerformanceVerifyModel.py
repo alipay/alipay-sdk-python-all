@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.VerifyLogisticsDetail import VerifyLogisticsDetail
 
 
 class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
@@ -20,6 +21,7 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
         self._status = None
         self._total_count = None
         self._usage_count = None
+        self._verify_logistics_detail = None
         self._verify_type = None
 
     @property
@@ -107,6 +109,16 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     def usage_count(self, value):
         self._usage_count = value
     @property
+    def verify_logistics_detail(self):
+        return self._verify_logistics_detail
+
+    @verify_logistics_detail.setter
+    def verify_logistics_detail(self, value):
+        if isinstance(value, VerifyLogisticsDetail):
+            self._verify_logistics_detail = value
+        else:
+            self._verify_logistics_detail = VerifyLogisticsDetail.from_alipay_dict(value)
+    @property
     def verify_type(self):
         return self._verify_type
 
@@ -177,6 +189,11 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
                 params['usage_count'] = self.usage_count.to_alipay_dict()
             else:
                 params['usage_count'] = self.usage_count
+        if self.verify_logistics_detail:
+            if hasattr(self.verify_logistics_detail, 'to_alipay_dict'):
+                params['verify_logistics_detail'] = self.verify_logistics_detail.to_alipay_dict()
+            else:
+                params['verify_logistics_detail'] = self.verify_logistics_detail
         if self.verify_type:
             if hasattr(self.verify_type, 'to_alipay_dict'):
                 params['verify_type'] = self.verify_type.to_alipay_dict()
@@ -213,6 +230,8 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
             o.total_count = d['total_count']
         if 'usage_count' in d:
             o.usage_count = d['usage_count']
+        if 'verify_logistics_detail' in d:
+            o.verify_logistics_detail = d['verify_logistics_detail']
         if 'verify_type' in d:
             o.verify_type = d['verify_type']
         return o

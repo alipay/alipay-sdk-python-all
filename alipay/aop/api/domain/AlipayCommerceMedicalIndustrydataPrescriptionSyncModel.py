@@ -13,6 +13,7 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
         self._alipay_order_id = None
         self._alipay_user_id = None
         self._audit_pharmacist_name = None
+        self._clinic_desc = None
         self._doctor_name = None
         self._drug_list = None
         self._group_no = None
@@ -62,6 +63,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
     @audit_pharmacist_name.setter
     def audit_pharmacist_name(self, value):
         self._audit_pharmacist_name = value
+    @property
+    def clinic_desc(self):
+        return self._clinic_desc
+
+    @clinic_desc.setter
+    def clinic_desc(self, value):
+        self._clinic_desc = value
     @property
     def doctor_name(self):
         return self._doctor_name
@@ -232,6 +240,11 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['audit_pharmacist_name'] = self.audit_pharmacist_name.to_alipay_dict()
             else:
                 params['audit_pharmacist_name'] = self.audit_pharmacist_name
+        if self.clinic_desc:
+            if hasattr(self.clinic_desc, 'to_alipay_dict'):
+                params['clinic_desc'] = self.clinic_desc.to_alipay_dict()
+            else:
+                params['clinic_desc'] = self.clinic_desc
         if self.doctor_name:
             if hasattr(self.doctor_name, 'to_alipay_dict'):
                 params['doctor_name'] = self.doctor_name.to_alipay_dict()
@@ -352,6 +365,8 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'audit_pharmacist_name' in d:
             o.audit_pharmacist_name = d['audit_pharmacist_name']
+        if 'clinic_desc' in d:
+            o.clinic_desc = d['clinic_desc']
         if 'doctor_name' in d:
             o.doctor_name = d['doctor_name']
         if 'drug_list' in d:

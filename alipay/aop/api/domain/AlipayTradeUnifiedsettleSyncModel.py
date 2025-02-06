@@ -4,22 +4,25 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.UnifiedSettleExtendParams import UnifiedSettleExtendParams
+from alipay.aop.api.domain.SettleInfo import SettleInfo
+from alipay.aop.api.domain.SubMerchant import SubMerchant
 
 
 class AlipayTradeUnifiedsettleSyncModel(object):
 
     def __init__(self):
         self._acquire_mode = None
-        self._biz_type = None
+        self._amount = None
         self._extend_params = None
         self._external_inst_biz_date = None
         self._external_inst_channel = None
         self._external_inst_create_date = None
         self._out_request_no = None
         self._out_trade_no = None
-        self._pay_amount = None
         self._product_code = None
-        self._refund_amount = None
+        self._request_type = None
+        self._settle_info = None
+        self._sub_merchant = None
 
     @property
     def acquire_mode(self):
@@ -29,12 +32,12 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     def acquire_mode(self, value):
         self._acquire_mode = value
     @property
-    def biz_type(self):
-        return self._biz_type
+    def amount(self):
+        return self._amount
 
-    @biz_type.setter
-    def biz_type(self, value):
-        self._biz_type = value
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
     @property
     def extend_params(self):
         return self._extend_params
@@ -81,13 +84,6 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     def out_trade_no(self, value):
         self._out_trade_no = value
     @property
-    def pay_amount(self):
-        return self._pay_amount
-
-    @pay_amount.setter
-    def pay_amount(self, value):
-        self._pay_amount = value
-    @property
     def product_code(self):
         return self._product_code
 
@@ -95,12 +91,32 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
-    def refund_amount(self):
-        return self._refund_amount
+    def request_type(self):
+        return self._request_type
 
-    @refund_amount.setter
-    def refund_amount(self, value):
-        self._refund_amount = value
+    @request_type.setter
+    def request_type(self, value):
+        self._request_type = value
+    @property
+    def settle_info(self):
+        return self._settle_info
+
+    @settle_info.setter
+    def settle_info(self, value):
+        if isinstance(value, SettleInfo):
+            self._settle_info = value
+        else:
+            self._settle_info = SettleInfo.from_alipay_dict(value)
+    @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, SubMerchant):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = SubMerchant.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -110,11 +126,11 @@ class AlipayTradeUnifiedsettleSyncModel(object):
                 params['acquire_mode'] = self.acquire_mode.to_alipay_dict()
             else:
                 params['acquire_mode'] = self.acquire_mode
-        if self.biz_type:
-            if hasattr(self.biz_type, 'to_alipay_dict'):
-                params['biz_type'] = self.biz_type.to_alipay_dict()
+        if self.amount:
+            if hasattr(self.amount, 'to_alipay_dict'):
+                params['amount'] = self.amount.to_alipay_dict()
             else:
-                params['biz_type'] = self.biz_type
+                params['amount'] = self.amount
         if self.extend_params:
             if hasattr(self.extend_params, 'to_alipay_dict'):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
@@ -145,21 +161,26 @@ class AlipayTradeUnifiedsettleSyncModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
-        if self.pay_amount:
-            if hasattr(self.pay_amount, 'to_alipay_dict'):
-                params['pay_amount'] = self.pay_amount.to_alipay_dict()
-            else:
-                params['pay_amount'] = self.pay_amount
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
-        if self.refund_amount:
-            if hasattr(self.refund_amount, 'to_alipay_dict'):
-                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+        if self.request_type:
+            if hasattr(self.request_type, 'to_alipay_dict'):
+                params['request_type'] = self.request_type.to_alipay_dict()
             else:
-                params['refund_amount'] = self.refund_amount
+                params['request_type'] = self.request_type
+        if self.settle_info:
+            if hasattr(self.settle_info, 'to_alipay_dict'):
+                params['settle_info'] = self.settle_info.to_alipay_dict()
+            else:
+                params['settle_info'] = self.settle_info
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         return params
 
     @staticmethod
@@ -169,8 +190,8 @@ class AlipayTradeUnifiedsettleSyncModel(object):
         o = AlipayTradeUnifiedsettleSyncModel()
         if 'acquire_mode' in d:
             o.acquire_mode = d['acquire_mode']
-        if 'biz_type' in d:
-            o.biz_type = d['biz_type']
+        if 'amount' in d:
+            o.amount = d['amount']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
         if 'external_inst_biz_date' in d:
@@ -183,12 +204,14 @@ class AlipayTradeUnifiedsettleSyncModel(object):
             o.out_request_no = d['out_request_no']
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
-        if 'pay_amount' in d:
-            o.pay_amount = d['pay_amount']
         if 'product_code' in d:
             o.product_code = d['product_code']
-        if 'refund_amount' in d:
-            o.refund_amount = d['refund_amount']
+        if 'request_type' in d:
+            o.request_type = d['request_type']
+        if 'settle_info' in d:
+            o.settle_info = d['settle_info']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         return o
 
 

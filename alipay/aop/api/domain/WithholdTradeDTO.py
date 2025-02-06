@@ -9,7 +9,9 @@ class WithholdTradeDTO(object):
 
     def __init__(self):
         self._bill_no = None
+        self._deduct = None
         self._deduct_amount = None
+        self._gmt_pay = None
         self._status = None
         self._trade_no = None
 
@@ -21,12 +23,26 @@ class WithholdTradeDTO(object):
     def bill_no(self, value):
         self._bill_no = value
     @property
+    def deduct(self):
+        return self._deduct
+
+    @deduct.setter
+    def deduct(self, value):
+        self._deduct = value
+    @property
     def deduct_amount(self):
         return self._deduct_amount
 
     @deduct_amount.setter
     def deduct_amount(self, value):
         self._deduct_amount = value
+    @property
+    def gmt_pay(self):
+        return self._gmt_pay
+
+    @gmt_pay.setter
+    def gmt_pay(self, value):
+        self._gmt_pay = value
     @property
     def status(self):
         return self._status
@@ -50,11 +66,21 @@ class WithholdTradeDTO(object):
                 params['bill_no'] = self.bill_no.to_alipay_dict()
             else:
                 params['bill_no'] = self.bill_no
+        if self.deduct:
+            if hasattr(self.deduct, 'to_alipay_dict'):
+                params['deduct'] = self.deduct.to_alipay_dict()
+            else:
+                params['deduct'] = self.deduct
         if self.deduct_amount:
             if hasattr(self.deduct_amount, 'to_alipay_dict'):
                 params['deduct_amount'] = self.deduct_amount.to_alipay_dict()
             else:
                 params['deduct_amount'] = self.deduct_amount
+        if self.gmt_pay:
+            if hasattr(self.gmt_pay, 'to_alipay_dict'):
+                params['gmt_pay'] = self.gmt_pay.to_alipay_dict()
+            else:
+                params['gmt_pay'] = self.gmt_pay
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -74,8 +100,12 @@ class WithholdTradeDTO(object):
         o = WithholdTradeDTO()
         if 'bill_no' in d:
             o.bill_no = d['bill_no']
+        if 'deduct' in d:
+            o.deduct = d['deduct']
         if 'deduct_amount' in d:
             o.deduct_amount = d['deduct_amount']
+        if 'gmt_pay' in d:
+            o.gmt_pay = d['gmt_pay']
         if 'status' in d:
             o.status = d['status']
         if 'trade_no' in d:

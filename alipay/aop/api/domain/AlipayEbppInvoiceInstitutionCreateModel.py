@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InstitutionScopeInfo import InstitutionScopeInfo
 from alipay.aop.api.domain.IssueRuleInfo import IssueRuleInfo
 from alipay.aop.api.domain.StandardInfo import StandardInfo
 
@@ -21,6 +22,7 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._expense_type = None
         self._institution_desc = None
         self._institution_name = None
+        self._institution_scope_info = None
         self._issue_rule_info_list = None
         self._outer_source_id = None
         self._owner_id_list = None
@@ -106,6 +108,16 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     @institution_name.setter
     def institution_name(self, value):
         self._institution_name = value
+    @property
+    def institution_scope_info(self):
+        return self._institution_scope_info
+
+    @institution_scope_info.setter
+    def institution_scope_info(self, value):
+        if isinstance(value, InstitutionScopeInfo):
+            self._institution_scope_info = value
+        else:
+            self._institution_scope_info = InstitutionScopeInfo.from_alipay_dict(value)
     @property
     def issue_rule_info_list(self):
         return self._issue_rule_info_list
@@ -232,6 +244,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['institution_name'] = self.institution_name.to_alipay_dict()
             else:
                 params['institution_name'] = self.institution_name
+        if self.institution_scope_info:
+            if hasattr(self.institution_scope_info, 'to_alipay_dict'):
+                params['institution_scope_info'] = self.institution_scope_info.to_alipay_dict()
+            else:
+                params['institution_scope_info'] = self.institution_scope_info
         if self.issue_rule_info_list:
             if isinstance(self.issue_rule_info_list, list):
                 for i in range(0, len(self.issue_rule_info_list)):
@@ -316,6 +333,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.institution_desc = d['institution_desc']
         if 'institution_name' in d:
             o.institution_name = d['institution_name']
+        if 'institution_scope_info' in d:
+            o.institution_scope_info = d['institution_scope_info']
         if 'issue_rule_info_list' in d:
             o.issue_rule_info_list = d['issue_rule_info_list']
         if 'outer_source_id' in d:

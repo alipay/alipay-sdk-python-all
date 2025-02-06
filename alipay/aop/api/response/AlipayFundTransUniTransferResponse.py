@@ -10,11 +10,13 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
     def __init__(self):
         super(AlipayFundTransUniTransferResponse, self).__init__()
         self._amount = None
+        self._link = None
         self._order_id = None
         self._out_biz_no = None
         self._pay_fund_order_id = None
         self._settle_serial_no = None
         self._status = None
+        self._sub_status = None
         self._trans_date = None
 
     @property
@@ -24,6 +26,13 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def link(self):
+        return self._link
+
+    @link.setter
+    def link(self, value):
+        self._link = value
     @property
     def order_id(self):
         return self._order_id
@@ -60,6 +69,13 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
     def status(self, value):
         self._status = value
     @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
+    @property
     def trans_date(self):
         return self._trans_date
 
@@ -71,6 +87,8 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
         response = super(AlipayFundTransUniTransferResponse, self).parse_response_content(response_content)
         if 'amount' in response:
             self.amount = response['amount']
+        if 'link' in response:
+            self.link = response['link']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'out_biz_no' in response:
@@ -81,5 +99,7 @@ class AlipayFundTransUniTransferResponse(AlipayResponse):
             self.settle_serial_no = response['settle_serial_no']
         if 'status' in response:
             self.status = response['status']
+        if 'sub_status' in response:
+            self.sub_status = response['sub_status']
         if 'trans_date' in response:
             self.trans_date = response['trans_date']

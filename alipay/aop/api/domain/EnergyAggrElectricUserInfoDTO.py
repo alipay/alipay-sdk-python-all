@@ -15,6 +15,7 @@ class EnergyAggrElectricUserInfoDTO(object):
         self._contact_name = None
         self._contact_num = None
         self._electric_account_id = None
+        self._gmt_create = None
         self._payment_type = None
         self._province = None
         self._social_credit_code = None
@@ -68,6 +69,13 @@ class EnergyAggrElectricUserInfoDTO(object):
     @electric_account_id.setter
     def electric_account_id(self, value):
         self._electric_account_id = value
+    @property
+    def gmt_create(self):
+        return self._gmt_create
+
+    @gmt_create.setter
+    def gmt_create(self, value):
+        self._gmt_create = value
     @property
     def payment_type(self):
         return self._payment_type
@@ -128,6 +136,11 @@ class EnergyAggrElectricUserInfoDTO(object):
                 params['electric_account_id'] = self.electric_account_id.to_alipay_dict()
             else:
                 params['electric_account_id'] = self.electric_account_id
+        if self.gmt_create:
+            if hasattr(self.gmt_create, 'to_alipay_dict'):
+                params['gmt_create'] = self.gmt_create.to_alipay_dict()
+            else:
+                params['gmt_create'] = self.gmt_create
         if self.payment_type:
             if hasattr(self.payment_type, 'to_alipay_dict'):
                 params['payment_type'] = self.payment_type.to_alipay_dict()
@@ -164,6 +177,8 @@ class EnergyAggrElectricUserInfoDTO(object):
             o.contact_num = d['contact_num']
         if 'electric_account_id' in d:
             o.electric_account_id = d['electric_account_id']
+        if 'gmt_create' in d:
+            o.gmt_create = d['gmt_create']
         if 'payment_type' in d:
             o.payment_type = d['payment_type']
         if 'province' in d:

@@ -9,6 +9,7 @@ class OpenApiContractFileSaDTO(object):
 
     def __init__(self):
         self._file_name = None
+        self._file_sign_type = None
         self._file_url = None
 
     @property
@@ -18,6 +19,13 @@ class OpenApiContractFileSaDTO(object):
     @file_name.setter
     def file_name(self, value):
         self._file_name = value
+    @property
+    def file_sign_type(self):
+        return self._file_sign_type
+
+    @file_sign_type.setter
+    def file_sign_type(self, value):
+        self._file_sign_type = value
     @property
     def file_url(self):
         return self._file_url
@@ -34,6 +42,11 @@ class OpenApiContractFileSaDTO(object):
                 params['file_name'] = self.file_name.to_alipay_dict()
             else:
                 params['file_name'] = self.file_name
+        if self.file_sign_type:
+            if hasattr(self.file_sign_type, 'to_alipay_dict'):
+                params['file_sign_type'] = self.file_sign_type.to_alipay_dict()
+            else:
+                params['file_sign_type'] = self.file_sign_type
         if self.file_url:
             if hasattr(self.file_url, 'to_alipay_dict'):
                 params['file_url'] = self.file_url.to_alipay_dict()
@@ -48,6 +61,8 @@ class OpenApiContractFileSaDTO(object):
         o = OpenApiContractFileSaDTO()
         if 'file_name' in d:
             o.file_name = d['file_name']
+        if 'file_sign_type' in d:
+            o.file_sign_type = d['file_sign_type']
         if 'file_url' in d:
             o.file_url = d['file_url']
         return o

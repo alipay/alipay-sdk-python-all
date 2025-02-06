@@ -10,6 +10,7 @@ class AnttechOceanbasePassportCreateModel(object):
     def __init__(self):
         self._credential = None
         self._email = None
+        self._entity_role_type = None
         self._mobile_phone = None
 
     @property
@@ -26,6 +27,13 @@ class AnttechOceanbasePassportCreateModel(object):
     @email.setter
     def email(self, value):
         self._email = value
+    @property
+    def entity_role_type(self):
+        return self._entity_role_type
+
+    @entity_role_type.setter
+    def entity_role_type(self, value):
+        self._entity_role_type = value
     @property
     def mobile_phone(self):
         return self._mobile_phone
@@ -47,6 +55,11 @@ class AnttechOceanbasePassportCreateModel(object):
                 params['email'] = self.email.to_alipay_dict()
             else:
                 params['email'] = self.email
+        if self.entity_role_type:
+            if hasattr(self.entity_role_type, 'to_alipay_dict'):
+                params['entity_role_type'] = self.entity_role_type.to_alipay_dict()
+            else:
+                params['entity_role_type'] = self.entity_role_type
         if self.mobile_phone:
             if hasattr(self.mobile_phone, 'to_alipay_dict'):
                 params['mobile_phone'] = self.mobile_phone.to_alipay_dict()
@@ -63,6 +76,8 @@ class AnttechOceanbasePassportCreateModel(object):
             o.credential = d['credential']
         if 'email' in d:
             o.email = d['email']
+        if 'entity_role_type' in d:
+            o.entity_role_type = d['entity_role_type']
         if 'mobile_phone' in d:
             o.mobile_phone = d['mobile_phone']
         return o

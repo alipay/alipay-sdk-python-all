@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BizTagEntity import BizTagEntity
 from alipay.aop.api.domain.PayChannelPromoInfo import PayChannelPromoInfo
 
 
@@ -13,6 +14,7 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
         self._anti_rank = None
         self._assign_discounts = None
         self._biz_tag = None
+        self._biz_tag_entity_list = None
         self._biz_tag_list = None
         self._blind_signature = None
         self._channel_info_list = None
@@ -45,6 +47,19 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
     @biz_tag.setter
     def biz_tag(self, value):
         self._biz_tag = value
+    @property
+    def biz_tag_entity_list(self):
+        return self._biz_tag_entity_list
+
+    @biz_tag_entity_list.setter
+    def biz_tag_entity_list(self, value):
+        if isinstance(value, list):
+            self._biz_tag_entity_list = list()
+            for i in value:
+                if isinstance(i, BizTagEntity):
+                    self._biz_tag_entity_list.append(i)
+                else:
+                    self._biz_tag_entity_list.append(BizTagEntity.from_alipay_dict(i))
     @property
     def biz_tag_list(self):
         return self._biz_tag_list
@@ -136,6 +151,8 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             self.assign_discounts = response['assign_discounts']
         if 'biz_tag' in response:
             self.biz_tag = response['biz_tag']
+        if 'biz_tag_entity_list' in response:
+            self.biz_tag_entity_list = response['biz_tag_entity_list']
         if 'biz_tag_list' in response:
             self.biz_tag_list = response['biz_tag_list']
         if 'blind_signature' in response:

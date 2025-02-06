@@ -8,13 +8,22 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFundTransRefundModel(object):
 
     def __init__(self):
+        self._biz_scene = None
         self._business_params = None
         self._order_id = None
         self._out_request_no = None
         self._passback_params = None
+        self._product_code = None
         self._refund_amount = None
         self._remark = None
 
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def business_params(self):
         return self._business_params
@@ -44,6 +53,13 @@ class AlipayFundTransRefundModel(object):
     def passback_params(self, value):
         self._passback_params = value
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
     def refund_amount(self):
         return self._refund_amount
 
@@ -61,6 +77,11 @@ class AlipayFundTransRefundModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.business_params:
             if hasattr(self.business_params, 'to_alipay_dict'):
                 params['business_params'] = self.business_params.to_alipay_dict()
@@ -81,6 +102,11 @@ class AlipayFundTransRefundModel(object):
                 params['passback_params'] = self.passback_params.to_alipay_dict()
             else:
                 params['passback_params'] = self.passback_params
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -98,6 +124,8 @@ class AlipayFundTransRefundModel(object):
         if not d:
             return None
         o = AlipayFundTransRefundModel()
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'business_params' in d:
             o.business_params = d['business_params']
         if 'order_id' in d:
@@ -106,6 +134,8 @@ class AlipayFundTransRefundModel(object):
             o.out_request_no = d['out_request_no']
         if 'passback_params' in d:
             o.passback_params = d['passback_params']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'remark' in d:

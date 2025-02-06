@@ -3,6 +3,9 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ModifyIssueRuleDetailInfo import ModifyIssueRuleDetailInfo
+from alipay.aop.api.domain.ModifyScopeInfo import ModifyScopeInfo
+from alipay.aop.api.domain.ModifyStandardDetailInfo import ModifyStandardDetailInfo
 
 
 class AlipayEbppInvoiceInstitutionModifyModel(object):
@@ -18,6 +21,9 @@ class AlipayEbppInvoiceInstitutionModifyModel(object):
         self._institution_desc = None
         self._institution_id = None
         self._institution_name = None
+        self._modify_issue_rule_detail_info = None
+        self._modify_scope_info = None
+        self._modify_standard_detail_info = None
 
     @property
     def account_id(self):
@@ -89,6 +95,36 @@ class AlipayEbppInvoiceInstitutionModifyModel(object):
     @institution_name.setter
     def institution_name(self, value):
         self._institution_name = value
+    @property
+    def modify_issue_rule_detail_info(self):
+        return self._modify_issue_rule_detail_info
+
+    @modify_issue_rule_detail_info.setter
+    def modify_issue_rule_detail_info(self, value):
+        if isinstance(value, ModifyIssueRuleDetailInfo):
+            self._modify_issue_rule_detail_info = value
+        else:
+            self._modify_issue_rule_detail_info = ModifyIssueRuleDetailInfo.from_alipay_dict(value)
+    @property
+    def modify_scope_info(self):
+        return self._modify_scope_info
+
+    @modify_scope_info.setter
+    def modify_scope_info(self, value):
+        if isinstance(value, ModifyScopeInfo):
+            self._modify_scope_info = value
+        else:
+            self._modify_scope_info = ModifyScopeInfo.from_alipay_dict(value)
+    @property
+    def modify_standard_detail_info(self):
+        return self._modify_standard_detail_info
+
+    @modify_standard_detail_info.setter
+    def modify_standard_detail_info(self, value):
+        if isinstance(value, ModifyStandardDetailInfo):
+            self._modify_standard_detail_info = value
+        else:
+            self._modify_standard_detail_info = ModifyStandardDetailInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -143,6 +179,21 @@ class AlipayEbppInvoiceInstitutionModifyModel(object):
                 params['institution_name'] = self.institution_name.to_alipay_dict()
             else:
                 params['institution_name'] = self.institution_name
+        if self.modify_issue_rule_detail_info:
+            if hasattr(self.modify_issue_rule_detail_info, 'to_alipay_dict'):
+                params['modify_issue_rule_detail_info'] = self.modify_issue_rule_detail_info.to_alipay_dict()
+            else:
+                params['modify_issue_rule_detail_info'] = self.modify_issue_rule_detail_info
+        if self.modify_scope_info:
+            if hasattr(self.modify_scope_info, 'to_alipay_dict'):
+                params['modify_scope_info'] = self.modify_scope_info.to_alipay_dict()
+            else:
+                params['modify_scope_info'] = self.modify_scope_info
+        if self.modify_standard_detail_info:
+            if hasattr(self.modify_standard_detail_info, 'to_alipay_dict'):
+                params['modify_standard_detail_info'] = self.modify_standard_detail_info.to_alipay_dict()
+            else:
+                params['modify_standard_detail_info'] = self.modify_standard_detail_info
         return params
 
     @staticmethod
@@ -170,6 +221,12 @@ class AlipayEbppInvoiceInstitutionModifyModel(object):
             o.institution_id = d['institution_id']
         if 'institution_name' in d:
             o.institution_name = d['institution_name']
+        if 'modify_issue_rule_detail_info' in d:
+            o.modify_issue_rule_detail_info = d['modify_issue_rule_detail_info']
+        if 'modify_scope_info' in d:
+            o.modify_scope_info = d['modify_scope_info']
+        if 'modify_standard_detail_info' in d:
+            o.modify_standard_detail_info = d['modify_standard_detail_info']
         return o
 
 

@@ -11,6 +11,7 @@ from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
 from alipay.aop.api.domain.RefundInfoVO import RefundInfoVO
+from alipay.aop.api.domain.RentInfoVO import RentInfoVO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 from alipay.aop.api.domain.StagePayPlanVO import StagePayPlanVO
 
@@ -34,6 +35,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._path = None
         self._receive_time = None
         self._refund_info = None
+        self._rent_info = None
         self._settle_type = None
         self._shop_info = None
         self._stage_pay_plans = None
@@ -171,6 +173,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._refund_info = RefundInfoVO.from_alipay_dict(value)
     @property
+    def rent_info(self):
+        return self._rent_info
+
+    @rent_info.setter
+    def rent_info(self, value):
+        if isinstance(value, RentInfoVO):
+            self._rent_info = value
+        else:
+            self._rent_info = RentInfoVO.from_alipay_dict(value)
+    @property
     def settle_type(self):
         return self._settle_type
 
@@ -254,6 +266,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.receive_time = response['receive_time']
         if 'refund_info' in response:
             self.refund_info = response['refund_info']
+        if 'rent_info' in response:
+            self.rent_info = response['rent_info']
         if 'settle_type' in response:
             self.settle_type = response['settle_type']
         if 'shop_info' in response:

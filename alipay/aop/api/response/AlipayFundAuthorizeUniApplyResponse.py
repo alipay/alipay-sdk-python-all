@@ -11,6 +11,7 @@ class AlipayFundAuthorizeUniApplyResponse(AlipayResponse):
         super(AlipayFundAuthorizeUniApplyResponse, self).__init__()
         self._authorize_link = None
         self._authorize_link_type = None
+        self._authorize_token = None
         self._biz_scene = None
         self._out_biz_no = None
         self._product_code = None
@@ -29,6 +30,13 @@ class AlipayFundAuthorizeUniApplyResponse(AlipayResponse):
     @authorize_link_type.setter
     def authorize_link_type(self, value):
         self._authorize_link_type = value
+    @property
+    def authorize_token(self):
+        return self._authorize_token
+
+    @authorize_token.setter
+    def authorize_token(self, value):
+        self._authorize_token = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -57,6 +65,8 @@ class AlipayFundAuthorizeUniApplyResponse(AlipayResponse):
             self.authorize_link = response['authorize_link']
         if 'authorize_link_type' in response:
             self.authorize_link_type = response['authorize_link_type']
+        if 'authorize_token' in response:
+            self.authorize_token = response['authorize_token']
         if 'biz_scene' in response:
             self.biz_scene = response['biz_scene']
         if 'out_biz_no' in response:

@@ -17,6 +17,7 @@ class RentInfo(object):
         self._buyer_open_id = None
         self._buyout_price = None
         self._end_time = None
+        self._invest_app_id = None
         self._order_info = None
         self._out_order_id = None
         self._plan_list = None
@@ -64,6 +65,13 @@ class RentInfo(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def invest_app_id(self):
+        return self._invest_app_id
+
+    @invest_app_id.setter
+    def invest_app_id(self, value):
+        self._invest_app_id = value
     @property
     def order_info(self):
         return self._order_info
@@ -191,6 +199,11 @@ class RentInfo(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.invest_app_id:
+            if hasattr(self.invest_app_id, 'to_alipay_dict'):
+                params['invest_app_id'] = self.invest_app_id.to_alipay_dict()
+            else:
+                params['invest_app_id'] = self.invest_app_id
         if self.order_info:
             if hasattr(self.order_info, 'to_alipay_dict'):
                 params['order_info'] = self.order_info.to_alipay_dict()
@@ -278,6 +291,8 @@ class RentInfo(object):
             o.buyout_price = d['buyout_price']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'invest_app_id' in d:
+            o.invest_app_id = d['invest_app_id']
         if 'order_info' in d:
             o.order_info = d['order_info']
         if 'out_order_id' in d:

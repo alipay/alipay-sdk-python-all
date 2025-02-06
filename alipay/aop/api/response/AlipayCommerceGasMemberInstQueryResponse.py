@@ -10,6 +10,8 @@ class AlipayCommerceGasMemberInstQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceGasMemberInstQueryResponse, self).__init__()
         self._member_no = None
+        self._open_id = None
+        self._user_id = None
 
     @property
     def member_no(self):
@@ -18,8 +20,26 @@ class AlipayCommerceGasMemberInstQueryResponse(AlipayResponse):
     @member_no.setter
     def member_no(self, value):
         self._member_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceGasMemberInstQueryResponse, self).parse_response_content(response_content)
         if 'member_no' in response:
             self.member_no = response['member_no']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
+        if 'user_id' in response:
+            self.user_id = response['user_id']
