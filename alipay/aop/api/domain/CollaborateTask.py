@@ -14,6 +14,7 @@ class CollaborateTask(object):
         self._address = None
         self._city_code = None
         self._city_name = None
+        self._contact_name = None
         self._dispatched_time = None
         self._district_code = None
         self._district_name = None
@@ -71,6 +72,13 @@ class CollaborateTask(object):
     @city_name.setter
     def city_name(self, value):
         self._city_name = value
+    @property
+    def contact_name(self):
+        return self._contact_name
+
+    @contact_name.setter
+    def contact_name(self, value):
+        self._contact_name = value
     @property
     def dispatched_time(self):
         return self._dispatched_time
@@ -212,6 +220,11 @@ class CollaborateTask(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.contact_name:
+            if hasattr(self.contact_name, 'to_alipay_dict'):
+                params['contact_name'] = self.contact_name.to_alipay_dict()
+            else:
+                params['contact_name'] = self.contact_name
         if self.dispatched_time:
             if hasattr(self.dispatched_time, 'to_alipay_dict'):
                 params['dispatched_time'] = self.dispatched_time.to_alipay_dict()
@@ -316,6 +329,8 @@ class CollaborateTask(object):
             o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'contact_name' in d:
+            o.contact_name = d['contact_name']
         if 'dispatched_time' in d:
             o.dispatched_time = d['dispatched_time']
         if 'district_code' in d:

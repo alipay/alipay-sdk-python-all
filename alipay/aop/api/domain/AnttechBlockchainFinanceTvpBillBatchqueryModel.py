@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TrustAccountInfo import TrustAccountInfo
 from alipay.aop.api.domain.TrustEntityInfo import TrustEntityInfo
 from alipay.aop.api.domain.TrustEntityInfo import TrustEntityInfo
 
@@ -12,6 +13,7 @@ class AnttechBlockchainFinanceTvpBillBatchqueryModel(object):
     def __init__(self):
         self._page_index = None
         self._page_size = None
+        self._payee_account = None
         self._payee_entity = None
         self._payer_entity = None
         self._product_code = None
@@ -31,6 +33,16 @@ class AnttechBlockchainFinanceTvpBillBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def payee_account(self):
+        return self._payee_account
+
+    @payee_account.setter
+    def payee_account(self, value):
+        if isinstance(value, TrustAccountInfo):
+            self._payee_account = value
+        else:
+            self._payee_account = TrustAccountInfo.from_alipay_dict(value)
     @property
     def payee_entity(self):
         return self._payee_entity
@@ -79,6 +91,11 @@ class AnttechBlockchainFinanceTvpBillBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.payee_account:
+            if hasattr(self.payee_account, 'to_alipay_dict'):
+                params['payee_account'] = self.payee_account.to_alipay_dict()
+            else:
+                params['payee_account'] = self.payee_account
         if self.payee_entity:
             if hasattr(self.payee_entity, 'to_alipay_dict'):
                 params['payee_entity'] = self.payee_entity.to_alipay_dict()
@@ -110,6 +127,8 @@ class AnttechBlockchainFinanceTvpBillBatchqueryModel(object):
             o.page_index = d['page_index']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'payee_account' in d:
+            o.payee_account = d['payee_account']
         if 'payee_entity' in d:
             o.payee_entity = d['payee_entity']
         if 'payer_entity' in d:

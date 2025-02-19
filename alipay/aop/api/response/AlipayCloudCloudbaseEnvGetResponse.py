@@ -10,17 +10,27 @@ class AlipayCloudCloudbaseEnvGetResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCloudCloudbaseEnvGetResponse, self).__init__()
+        self._billing_model = None
         self._cloudbase_api_gateway_ak = None
         self._cloudbase_api_gateway_sk = None
         self._description = None
         self._env_id = None
         self._env_vars = None
         self._name = None
+        self._pkg_create_time = None
         self._pkg_expiration_time = None
         self._region = None
+        self._resource_pkg_status = None
         self._status = None
         self._workspace_pkg_name = None
 
+    @property
+    def billing_model(self):
+        return self._billing_model
+
+    @billing_model.setter
+    def billing_model(self, value):
+        self._billing_model = value
     @property
     def cloudbase_api_gateway_ak(self):
         return self._cloudbase_api_gateway_ak
@@ -70,6 +80,13 @@ class AlipayCloudCloudbaseEnvGetResponse(AlipayResponse):
     def name(self, value):
         self._name = value
     @property
+    def pkg_create_time(self):
+        return self._pkg_create_time
+
+    @pkg_create_time.setter
+    def pkg_create_time(self, value):
+        self._pkg_create_time = value
+    @property
     def pkg_expiration_time(self):
         return self._pkg_expiration_time
 
@@ -83,6 +100,13 @@ class AlipayCloudCloudbaseEnvGetResponse(AlipayResponse):
     @region.setter
     def region(self, value):
         self._region = value
+    @property
+    def resource_pkg_status(self):
+        return self._resource_pkg_status
+
+    @resource_pkg_status.setter
+    def resource_pkg_status(self, value):
+        self._resource_pkg_status = value
     @property
     def status(self):
         return self._status
@@ -100,6 +124,8 @@ class AlipayCloudCloudbaseEnvGetResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseEnvGetResponse, self).parse_response_content(response_content)
+        if 'billing_model' in response:
+            self.billing_model = response['billing_model']
         if 'cloudbase_api_gateway_ak' in response:
             self.cloudbase_api_gateway_ak = response['cloudbase_api_gateway_ak']
         if 'cloudbase_api_gateway_sk' in response:
@@ -112,10 +138,14 @@ class AlipayCloudCloudbaseEnvGetResponse(AlipayResponse):
             self.env_vars = response['env_vars']
         if 'name' in response:
             self.name = response['name']
+        if 'pkg_create_time' in response:
+            self.pkg_create_time = response['pkg_create_time']
         if 'pkg_expiration_time' in response:
             self.pkg_expiration_time = response['pkg_expiration_time']
         if 'region' in response:
             self.region = response['region']
+        if 'resource_pkg_status' in response:
+            self.resource_pkg_status = response['resource_pkg_status']
         if 'status' in response:
             self.status = response['status']
         if 'workspace_pkg_name' in response:

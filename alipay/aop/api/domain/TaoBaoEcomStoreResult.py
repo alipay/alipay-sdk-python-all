@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.PenCaseInfo import PenCaseInfo
 from alipay.aop.api.domain.TaoBaoEcomStoreInfo import TaoBaoEcomStoreInfo
+from alipay.aop.api.domain.FrShopIndexInfo import FrShopIndexInfo
 from alipay.aop.api.domain.PunishBreakInfo import PunishBreakInfo
 from alipay.aop.api.domain.PunishedInfo import PunishedInfo
 from alipay.aop.api.domain.RelatedPerformanceInfo import RelatedPerformanceInfo
@@ -15,6 +16,7 @@ class TaoBaoEcomStoreResult(object):
     def __init__(self):
         self._case_info_list = None
         self._ecom_shop_info = None
+        self._fr_shop_index_info = None
         self._punish_break_list = None
         self._punished_list = None
         self._ry_pos_fr_list = None
@@ -45,6 +47,16 @@ class TaoBaoEcomStoreResult(object):
                     self._ecom_shop_info.append(i)
                 else:
                     self._ecom_shop_info.append(TaoBaoEcomStoreInfo.from_alipay_dict(i))
+    @property
+    def fr_shop_index_info(self):
+        return self._fr_shop_index_info
+
+    @fr_shop_index_info.setter
+    def fr_shop_index_info(self, value):
+        if isinstance(value, FrShopIndexInfo):
+            self._fr_shop_index_info = value
+        else:
+            self._fr_shop_index_info = FrShopIndexInfo.from_alipay_dict(value)
     @property
     def punish_break_list(self):
         return self._punish_break_list
@@ -108,6 +120,11 @@ class TaoBaoEcomStoreResult(object):
                 params['ecom_shop_info'] = self.ecom_shop_info.to_alipay_dict()
             else:
                 params['ecom_shop_info'] = self.ecom_shop_info
+        if self.fr_shop_index_info:
+            if hasattr(self.fr_shop_index_info, 'to_alipay_dict'):
+                params['fr_shop_index_info'] = self.fr_shop_index_info.to_alipay_dict()
+            else:
+                params['fr_shop_index_info'] = self.fr_shop_index_info
         if self.punish_break_list:
             if isinstance(self.punish_break_list, list):
                 for i in range(0, len(self.punish_break_list)):
@@ -149,6 +166,8 @@ class TaoBaoEcomStoreResult(object):
             o.case_info_list = d['case_info_list']
         if 'ecom_shop_info' in d:
             o.ecom_shop_info = d['ecom_shop_info']
+        if 'fr_shop_index_info' in d:
+            o.fr_shop_index_info = d['fr_shop_index_info']
         if 'punish_break_list' in d:
             o.punish_break_list = d['punish_break_list']
         if 'punished_list' in d:

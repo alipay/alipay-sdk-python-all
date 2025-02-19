@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SkuInfoVO import SkuInfoVO
+from alipay.aop.api.domain.SkuInfoVO import SkuInfoVO
 
 
 class ItemInfoDetail(object):
@@ -19,6 +20,7 @@ class ItemInfoDetail(object):
         self._parent_tag_id = None
         self._parent_tag_name = None
         self._sku_info_list = None
+        self._sku_list = None
         self._tag_code = None
         self._tag_id = None
         self._tag_name = None
@@ -97,6 +99,19 @@ class ItemInfoDetail(object):
             self._sku_info_list = value
         else:
             self._sku_info_list = SkuInfoVO.from_alipay_dict(value)
+    @property
+    def sku_list(self):
+        return self._sku_list
+
+    @sku_list.setter
+    def sku_list(self, value):
+        if isinstance(value, list):
+            self._sku_list = list()
+            for i in value:
+                if isinstance(i, SkuInfoVO):
+                    self._sku_list.append(i)
+                else:
+                    self._sku_list.append(SkuInfoVO.from_alipay_dict(i))
     @property
     def tag_code(self):
         return self._tag_code
@@ -179,6 +194,16 @@ class ItemInfoDetail(object):
                 params['sku_info_list'] = self.sku_info_list.to_alipay_dict()
             else:
                 params['sku_info_list'] = self.sku_info_list
+        if self.sku_list:
+            if isinstance(self.sku_list, list):
+                for i in range(0, len(self.sku_list)):
+                    element = self.sku_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_list[i] = element.to_alipay_dict()
+            if hasattr(self.sku_list, 'to_alipay_dict'):
+                params['sku_list'] = self.sku_list.to_alipay_dict()
+            else:
+                params['sku_list'] = self.sku_list
         if self.tag_code:
             if hasattr(self.tag_code, 'to_alipay_dict'):
                 params['tag_code'] = self.tag_code.to_alipay_dict()
@@ -226,6 +251,8 @@ class ItemInfoDetail(object):
             o.parent_tag_name = d['parent_tag_name']
         if 'sku_info_list' in d:
             o.sku_info_list = d['sku_info_list']
+        if 'sku_list' in d:
+            o.sku_list = d['sku_list']
         if 'tag_code' in d:
             o.tag_code = d['tag_code']
         if 'tag_id' in d:

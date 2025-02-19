@@ -13,6 +13,7 @@ class AlipayCommerceMedicalHealthArchiveSaveModel(object):
         self._data_id = None
         self._data_name = None
         self._data_source = None
+        self._data_sub_type = None
         self._data_type = None
         self._open_id = None
         self._pic_type = None
@@ -57,6 +58,13 @@ class AlipayCommerceMedicalHealthArchiveSaveModel(object):
     @data_source.setter
     def data_source(self, value):
         self._data_source = value
+    @property
+    def data_sub_type(self):
+        return self._data_sub_type
+
+    @data_sub_type.setter
+    def data_sub_type(self, value):
+        self._data_sub_type = value
     @property
     def data_type(self):
         return self._data_type
@@ -142,6 +150,11 @@ class AlipayCommerceMedicalHealthArchiveSaveModel(object):
                 params['data_source'] = self.data_source.to_alipay_dict()
             else:
                 params['data_source'] = self.data_source
+        if self.data_sub_type:
+            if hasattr(self.data_sub_type, 'to_alipay_dict'):
+                params['data_sub_type'] = self.data_sub_type.to_alipay_dict()
+            else:
+                params['data_sub_type'] = self.data_sub_type
         if self.data_type:
             if hasattr(self.data_type, 'to_alipay_dict'):
                 params['data_type'] = self.data_type.to_alipay_dict()
@@ -199,6 +212,8 @@ class AlipayCommerceMedicalHealthArchiveSaveModel(object):
             o.data_name = d['data_name']
         if 'data_source' in d:
             o.data_source = d['data_source']
+        if 'data_sub_type' in d:
+            o.data_sub_type = d['data_sub_type']
         if 'data_type' in d:
             o.data_type = d['data_type']
         if 'open_id' in d:

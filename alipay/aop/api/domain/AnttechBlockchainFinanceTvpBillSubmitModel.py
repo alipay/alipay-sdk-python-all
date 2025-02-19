@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TrustAccountInfo import TrustAccountInfo
 from alipay.aop.api.domain.TrustEntityInfo import TrustEntityInfo
 from alipay.aop.api.domain.TrustEntityInfo import TrustEntityInfo
 
@@ -16,11 +17,14 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
         self._bill_name = None
         self._billing_date = None
         self._end_date = None
+        self._expire_time = None
         self._original_total_amount = None
         self._out_bill_no = None
+        self._payee_account = None
         self._payee_entity = None
         self._payer_entity = None
         self._product_code = None
+        self._remark = None
         self._start_date = None
         self._type = None
 
@@ -67,6 +71,13 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
     def end_date(self, value):
         self._end_date = value
     @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
+    @property
     def original_total_amount(self):
         return self._original_total_amount
 
@@ -80,6 +91,16 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
     @out_bill_no.setter
     def out_bill_no(self, value):
         self._out_bill_no = value
+    @property
+    def payee_account(self):
+        return self._payee_account
+
+    @payee_account.setter
+    def payee_account(self, value):
+        if isinstance(value, TrustAccountInfo):
+            self._payee_account = value
+        else:
+            self._payee_account = TrustAccountInfo.from_alipay_dict(value)
     @property
     def payee_entity(self):
         return self._payee_entity
@@ -107,6 +128,13 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
     @property
     def start_date(self):
         return self._start_date
@@ -155,6 +183,11 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
                 params['end_date'] = self.end_date.to_alipay_dict()
             else:
                 params['end_date'] = self.end_date
+        if self.expire_time:
+            if hasattr(self.expire_time, 'to_alipay_dict'):
+                params['expire_time'] = self.expire_time.to_alipay_dict()
+            else:
+                params['expire_time'] = self.expire_time
         if self.original_total_amount:
             if hasattr(self.original_total_amount, 'to_alipay_dict'):
                 params['original_total_amount'] = self.original_total_amount.to_alipay_dict()
@@ -165,6 +198,11 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
                 params['out_bill_no'] = self.out_bill_no.to_alipay_dict()
             else:
                 params['out_bill_no'] = self.out_bill_no
+        if self.payee_account:
+            if hasattr(self.payee_account, 'to_alipay_dict'):
+                params['payee_account'] = self.payee_account.to_alipay_dict()
+            else:
+                params['payee_account'] = self.payee_account
         if self.payee_entity:
             if hasattr(self.payee_entity, 'to_alipay_dict'):
                 params['payee_entity'] = self.payee_entity.to_alipay_dict()
@@ -180,6 +218,11 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.remark:
+            if hasattr(self.remark, 'to_alipay_dict'):
+                params['remark'] = self.remark.to_alipay_dict()
+            else:
+                params['remark'] = self.remark
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -209,16 +252,22 @@ class AnttechBlockchainFinanceTvpBillSubmitModel(object):
             o.billing_date = d['billing_date']
         if 'end_date' in d:
             o.end_date = d['end_date']
+        if 'expire_time' in d:
+            o.expire_time = d['expire_time']
         if 'original_total_amount' in d:
             o.original_total_amount = d['original_total_amount']
         if 'out_bill_no' in d:
             o.out_bill_no = d['out_bill_no']
+        if 'payee_account' in d:
+            o.payee_account = d['payee_account']
         if 'payee_entity' in d:
             o.payee_entity = d['payee_entity']
         if 'payer_entity' in d:
             o.payer_entity = d['payer_entity']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'remark' in d:
+            o.remark = d['remark']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'type' in d:

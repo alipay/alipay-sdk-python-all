@@ -15,6 +15,7 @@ class TrustBillOrder(object):
         self._desc = None
         self._original_total_amount = None
         self._out_bill_no = None
+        self._remark = None
         self._status = None
 
     @property
@@ -67,6 +68,13 @@ class TrustBillOrder(object):
     def out_bill_no(self, value):
         self._out_bill_no = value
     @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
+    @property
     def status(self):
         return self._status
 
@@ -112,6 +120,11 @@ class TrustBillOrder(object):
                 params['out_bill_no'] = self.out_bill_no.to_alipay_dict()
             else:
                 params['out_bill_no'] = self.out_bill_no
+        if self.remark:
+            if hasattr(self.remark, 'to_alipay_dict'):
+                params['remark'] = self.remark.to_alipay_dict()
+            else:
+                params['remark'] = self.remark
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -138,6 +151,8 @@ class TrustBillOrder(object):
             o.original_total_amount = d['original_total_amount']
         if 'out_bill_no' in d:
             o.out_bill_no = d['out_bill_no']
+        if 'remark' in d:
+            o.remark = d['remark']
         if 'status' in d:
             o.status = d['status']
         return o

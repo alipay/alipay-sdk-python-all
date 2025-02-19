@@ -18,8 +18,10 @@ class AnttechBlockchainFinanceTvpBillQueryResponse(AlipayResponse):
         self._billing_date = None
         self._desc = None
         self._end_date = None
+        self._expire_time = None
         self._original_total_amount = None
         self._out_bill_no = None
+        self._remark = None
         self._start_date = None
         self._status = None
         self._type = None
@@ -87,6 +89,13 @@ class AnttechBlockchainFinanceTvpBillQueryResponse(AlipayResponse):
     def end_date(self, value):
         self._end_date = value
     @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
+    @property
     def original_total_amount(self):
         return self._original_total_amount
 
@@ -100,6 +109,13 @@ class AnttechBlockchainFinanceTvpBillQueryResponse(AlipayResponse):
     @out_bill_no.setter
     def out_bill_no(self, value):
         self._out_bill_no = value
+    @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
     @property
     def start_date(self):
         return self._start_date
@@ -140,10 +156,14 @@ class AnttechBlockchainFinanceTvpBillQueryResponse(AlipayResponse):
             self.desc = response['desc']
         if 'end_date' in response:
             self.end_date = response['end_date']
+        if 'expire_time' in response:
+            self.expire_time = response['expire_time']
         if 'original_total_amount' in response:
             self.original_total_amount = response['original_total_amount']
         if 'out_bill_no' in response:
             self.out_bill_no = response['out_bill_no']
+        if 'remark' in response:
+            self.remark = response['remark']
         if 'start_date' in response:
             self.start_date = response['start_date']
         if 'status' in response:

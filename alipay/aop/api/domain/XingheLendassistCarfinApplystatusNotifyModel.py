@@ -3,17 +3,22 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.Credit import Credit
 
 
 class XingheLendassistCarfinApplystatusNotifyModel(object):
 
     def __init__(self):
         self._apply_no = None
+        self._company_info_completed = None
         self._credit_amt = None
+        self._credit_amt_expire_date = None
+        self._credit_list = None
         self._current_status = None
         self._cust_status = None
         self._fin_drawdown_no = None
         self._fin_org = None
+        self._identity_verified = None
         self._loan_amt = None
         self._loan_date = None
         self._loan_rate = None
@@ -36,12 +41,39 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def apply_no(self, value):
         self._apply_no = value
     @property
+    def company_info_completed(self):
+        return self._company_info_completed
+
+    @company_info_completed.setter
+    def company_info_completed(self, value):
+        self._company_info_completed = value
+    @property
     def credit_amt(self):
         return self._credit_amt
 
     @credit_amt.setter
     def credit_amt(self, value):
         self._credit_amt = value
+    @property
+    def credit_amt_expire_date(self):
+        return self._credit_amt_expire_date
+
+    @credit_amt_expire_date.setter
+    def credit_amt_expire_date(self, value):
+        self._credit_amt_expire_date = value
+    @property
+    def credit_list(self):
+        return self._credit_list
+
+    @credit_list.setter
+    def credit_list(self, value):
+        if isinstance(value, list):
+            self._credit_list = list()
+            for i in value:
+                if isinstance(i, Credit):
+                    self._credit_list.append(i)
+                else:
+                    self._credit_list.append(Credit.from_alipay_dict(i))
     @property
     def current_status(self):
         return self._current_status
@@ -70,6 +102,13 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     @fin_org.setter
     def fin_org(self, value):
         self._fin_org = value
+    @property
+    def identity_verified(self):
+        return self._identity_verified
+
+    @identity_verified.setter
+    def identity_verified(self, value):
+        self._identity_verified = value
     @property
     def loan_amt(self):
         return self._loan_amt
@@ -170,11 +209,31 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['apply_no'] = self.apply_no.to_alipay_dict()
             else:
                 params['apply_no'] = self.apply_no
+        if self.company_info_completed:
+            if hasattr(self.company_info_completed, 'to_alipay_dict'):
+                params['company_info_completed'] = self.company_info_completed.to_alipay_dict()
+            else:
+                params['company_info_completed'] = self.company_info_completed
         if self.credit_amt:
             if hasattr(self.credit_amt, 'to_alipay_dict'):
                 params['credit_amt'] = self.credit_amt.to_alipay_dict()
             else:
                 params['credit_amt'] = self.credit_amt
+        if self.credit_amt_expire_date:
+            if hasattr(self.credit_amt_expire_date, 'to_alipay_dict'):
+                params['credit_amt_expire_date'] = self.credit_amt_expire_date.to_alipay_dict()
+            else:
+                params['credit_amt_expire_date'] = self.credit_amt_expire_date
+        if self.credit_list:
+            if isinstance(self.credit_list, list):
+                for i in range(0, len(self.credit_list)):
+                    element = self.credit_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.credit_list[i] = element.to_alipay_dict()
+            if hasattr(self.credit_list, 'to_alipay_dict'):
+                params['credit_list'] = self.credit_list.to_alipay_dict()
+            else:
+                params['credit_list'] = self.credit_list
         if self.current_status:
             if hasattr(self.current_status, 'to_alipay_dict'):
                 params['current_status'] = self.current_status.to_alipay_dict()
@@ -195,6 +254,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['fin_org'] = self.fin_org.to_alipay_dict()
             else:
                 params['fin_org'] = self.fin_org
+        if self.identity_verified:
+            if hasattr(self.identity_verified, 'to_alipay_dict'):
+                params['identity_verified'] = self.identity_verified.to_alipay_dict()
+            else:
+                params['identity_verified'] = self.identity_verified
         if self.loan_amt:
             if hasattr(self.loan_amt, 'to_alipay_dict'):
                 params['loan_amt'] = self.loan_amt.to_alipay_dict()
@@ -269,8 +333,14 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         o = XingheLendassistCarfinApplystatusNotifyModel()
         if 'apply_no' in d:
             o.apply_no = d['apply_no']
+        if 'company_info_completed' in d:
+            o.company_info_completed = d['company_info_completed']
         if 'credit_amt' in d:
             o.credit_amt = d['credit_amt']
+        if 'credit_amt_expire_date' in d:
+            o.credit_amt_expire_date = d['credit_amt_expire_date']
+        if 'credit_list' in d:
+            o.credit_list = d['credit_list']
         if 'current_status' in d:
             o.current_status = d['current_status']
         if 'cust_status' in d:
@@ -279,6 +349,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.fin_drawdown_no = d['fin_drawdown_no']
         if 'fin_org' in d:
             o.fin_org = d['fin_org']
+        if 'identity_verified' in d:
+            o.identity_verified = d['identity_verified']
         if 'loan_amt' in d:
             o.loan_amt = d['loan_amt']
         if 'loan_date' in d:

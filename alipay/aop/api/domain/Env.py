@@ -9,17 +9,27 @@ from alipay.aop.api.domain.EnvVar import EnvVar
 class Env(object):
 
     def __init__(self):
+        self._billing_model = None
         self._cloudbase_api_gateway_ak = None
         self._cloudbase_api_gateway_sk = None
         self._description = None
         self._env_id = None
         self._env_vars = None
         self._name = None
+        self._pkg_create_time = None
         self._pkg_expiration_time = None
         self._region = None
+        self._resource_pkg_status = None
         self._status = None
         self._workspace_pkg_name = None
 
+    @property
+    def billing_model(self):
+        return self._billing_model
+
+    @billing_model.setter
+    def billing_model(self, value):
+        self._billing_model = value
     @property
     def cloudbase_api_gateway_ak(self):
         return self._cloudbase_api_gateway_ak
@@ -69,6 +79,13 @@ class Env(object):
     def name(self, value):
         self._name = value
     @property
+    def pkg_create_time(self):
+        return self._pkg_create_time
+
+    @pkg_create_time.setter
+    def pkg_create_time(self, value):
+        self._pkg_create_time = value
+    @property
     def pkg_expiration_time(self):
         return self._pkg_expiration_time
 
@@ -82,6 +99,13 @@ class Env(object):
     @region.setter
     def region(self, value):
         self._region = value
+    @property
+    def resource_pkg_status(self):
+        return self._resource_pkg_status
+
+    @resource_pkg_status.setter
+    def resource_pkg_status(self, value):
+        self._resource_pkg_status = value
     @property
     def status(self):
         return self._status
@@ -100,6 +124,11 @@ class Env(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.billing_model:
+            if hasattr(self.billing_model, 'to_alipay_dict'):
+                params['billing_model'] = self.billing_model.to_alipay_dict()
+            else:
+                params['billing_model'] = self.billing_model
         if self.cloudbase_api_gateway_ak:
             if hasattr(self.cloudbase_api_gateway_ak, 'to_alipay_dict'):
                 params['cloudbase_api_gateway_ak'] = self.cloudbase_api_gateway_ak.to_alipay_dict()
@@ -135,6 +164,11 @@ class Env(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.pkg_create_time:
+            if hasattr(self.pkg_create_time, 'to_alipay_dict'):
+                params['pkg_create_time'] = self.pkg_create_time.to_alipay_dict()
+            else:
+                params['pkg_create_time'] = self.pkg_create_time
         if self.pkg_expiration_time:
             if hasattr(self.pkg_expiration_time, 'to_alipay_dict'):
                 params['pkg_expiration_time'] = self.pkg_expiration_time.to_alipay_dict()
@@ -145,6 +179,11 @@ class Env(object):
                 params['region'] = self.region.to_alipay_dict()
             else:
                 params['region'] = self.region
+        if self.resource_pkg_status:
+            if hasattr(self.resource_pkg_status, 'to_alipay_dict'):
+                params['resource_pkg_status'] = self.resource_pkg_status.to_alipay_dict()
+            else:
+                params['resource_pkg_status'] = self.resource_pkg_status
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -162,6 +201,8 @@ class Env(object):
         if not d:
             return None
         o = Env()
+        if 'billing_model' in d:
+            o.billing_model = d['billing_model']
         if 'cloudbase_api_gateway_ak' in d:
             o.cloudbase_api_gateway_ak = d['cloudbase_api_gateway_ak']
         if 'cloudbase_api_gateway_sk' in d:
@@ -174,10 +215,14 @@ class Env(object):
             o.env_vars = d['env_vars']
         if 'name' in d:
             o.name = d['name']
+        if 'pkg_create_time' in d:
+            o.pkg_create_time = d['pkg_create_time']
         if 'pkg_expiration_time' in d:
             o.pkg_expiration_time = d['pkg_expiration_time']
         if 'region' in d:
             o.region = d['region']
+        if 'resource_pkg_status' in d:
+            o.resource_pkg_status = d['resource_pkg_status']
         if 'status' in d:
             o.status = d['status']
         if 'workspace_pkg_name' in d:

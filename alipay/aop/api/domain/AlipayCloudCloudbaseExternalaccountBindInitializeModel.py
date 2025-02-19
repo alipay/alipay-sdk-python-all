@@ -12,6 +12,7 @@ class AlipayCloudCloudbaseExternalaccountBindInitializeModel(object):
         self._account_name = None
         self._card_no = None
         self._card_type = None
+        self._main_logon_id = None
         self._wallet_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayCloudCloudbaseExternalaccountBindInitializeModel(object):
     def card_type(self, value):
         self._card_type = value
     @property
+    def main_logon_id(self):
+        return self._main_logon_id
+
+    @main_logon_id.setter
+    def main_logon_id(self, value):
+        self._main_logon_id = value
+    @property
     def wallet_id(self):
         return self._wallet_id
 
@@ -73,6 +81,11 @@ class AlipayCloudCloudbaseExternalaccountBindInitializeModel(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.main_logon_id:
+            if hasattr(self.main_logon_id, 'to_alipay_dict'):
+                params['main_logon_id'] = self.main_logon_id.to_alipay_dict()
+            else:
+                params['main_logon_id'] = self.main_logon_id
         if self.wallet_id:
             if hasattr(self.wallet_id, 'to_alipay_dict'):
                 params['wallet_id'] = self.wallet_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayCloudCloudbaseExternalaccountBindInitializeModel(object):
             o.card_no = d['card_no']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'main_logon_id' in d:
+            o.main_logon_id = d['main_logon_id']
         if 'wallet_id' in d:
             o.wallet_id = d['wallet_id']
         return o
