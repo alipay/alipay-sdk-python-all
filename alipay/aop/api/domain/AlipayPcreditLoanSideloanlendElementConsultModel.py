@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloanlendElementConsultModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._extension = None
+        self._loan_type = None
         self._open_id = None
         self._product_code = None
 
@@ -27,6 +28,13 @@ class AlipayPcreditLoanSideloanlendElementConsultModel(object):
     @extension.setter
     def extension(self, value):
         self._extension = value
+    @property
+    def loan_type(self):
+        return self._loan_type
+
+    @loan_type.setter
+    def loan_type(self, value):
+        self._loan_type = value
     @property
     def open_id(self):
         return self._open_id
@@ -55,6 +63,11 @@ class AlipayPcreditLoanSideloanlendElementConsultModel(object):
                 params['extension'] = self.extension.to_alipay_dict()
             else:
                 params['extension'] = self.extension
+        if self.loan_type:
+            if hasattr(self.loan_type, 'to_alipay_dict'):
+                params['loan_type'] = self.loan_type.to_alipay_dict()
+            else:
+                params['loan_type'] = self.loan_type
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayPcreditLoanSideloanlendElementConsultModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'extension' in d:
             o.extension = d['extension']
+        if 'loan_type' in d:
+            o.loan_type = d['loan_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'product_code' in d:

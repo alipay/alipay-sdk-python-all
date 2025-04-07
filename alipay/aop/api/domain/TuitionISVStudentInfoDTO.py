@@ -13,6 +13,7 @@ class TuitionISVStudentInfoDTO(object):
         self._first_name = None
         self._identity_card_number = None
         self._last_name = None
+        self._length_of_schooling = None
         self._student_name = None
         self._student_number = None
         self._student_phone_number = None
@@ -52,6 +53,13 @@ class TuitionISVStudentInfoDTO(object):
     @last_name.setter
     def last_name(self, value):
         self._last_name = value
+    @property
+    def length_of_schooling(self):
+        return self._length_of_schooling
+
+    @length_of_schooling.setter
+    def length_of_schooling(self, value):
+        self._length_of_schooling = value
     @property
     def student_name(self):
         return self._student_name
@@ -102,6 +110,11 @@ class TuitionISVStudentInfoDTO(object):
                 params['last_name'] = self.last_name.to_alipay_dict()
             else:
                 params['last_name'] = self.last_name
+        if self.length_of_schooling:
+            if hasattr(self.length_of_schooling, 'to_alipay_dict'):
+                params['length_of_schooling'] = self.length_of_schooling.to_alipay_dict()
+            else:
+                params['length_of_schooling'] = self.length_of_schooling
         if self.student_name:
             if hasattr(self.student_name, 'to_alipay_dict'):
                 params['student_name'] = self.student_name.to_alipay_dict()
@@ -134,6 +147,8 @@ class TuitionISVStudentInfoDTO(object):
             o.identity_card_number = d['identity_card_number']
         if 'last_name' in d:
             o.last_name = d['last_name']
+        if 'length_of_schooling' in d:
+            o.length_of_schooling = d['length_of_schooling']
         if 'student_name' in d:
             o.student_name = d['student_name']
         if 'student_number' in d:

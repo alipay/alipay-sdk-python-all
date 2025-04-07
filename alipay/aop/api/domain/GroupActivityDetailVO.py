@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CouponActivityContentVO import CouponActivityContentVO
 from alipay.aop.api.domain.CustomActivityContentVO import CustomActivityContentVO
+from alipay.aop.api.domain.GoodsActivityContentVO import GoodsActivityContentVO
 
 
 class GroupActivityDetailVO(object):
@@ -16,6 +17,7 @@ class GroupActivityDetailVO(object):
         self._custom_content = None
         self._gmt_end = None
         self._gmt_start = None
+        self._goods_content = None
         self._group_activity_id = None
         self._group_ids = None
         self._priority = None
@@ -69,6 +71,16 @@ class GroupActivityDetailVO(object):
     @gmt_start.setter
     def gmt_start(self, value):
         self._gmt_start = value
+    @property
+    def goods_content(self):
+        return self._goods_content
+
+    @goods_content.setter
+    def goods_content(self, value):
+        if isinstance(value, GoodsActivityContentVO):
+            self._goods_content = value
+        else:
+            self._goods_content = GoodsActivityContentVO.from_alipay_dict(value)
     @property
     def group_activity_id(self):
         return self._group_activity_id
@@ -134,6 +146,11 @@ class GroupActivityDetailVO(object):
                 params['gmt_start'] = self.gmt_start.to_alipay_dict()
             else:
                 params['gmt_start'] = self.gmt_start
+        if self.goods_content:
+            if hasattr(self.goods_content, 'to_alipay_dict'):
+                params['goods_content'] = self.goods_content.to_alipay_dict()
+            else:
+                params['goods_content'] = self.goods_content
         if self.group_activity_id:
             if hasattr(self.group_activity_id, 'to_alipay_dict'):
                 params['group_activity_id'] = self.group_activity_id.to_alipay_dict()
@@ -178,6 +195,8 @@ class GroupActivityDetailVO(object):
             o.gmt_end = d['gmt_end']
         if 'gmt_start' in d:
             o.gmt_start = d['gmt_start']
+        if 'goods_content' in d:
+            o.goods_content = d['goods_content']
         if 'group_activity_id' in d:
             o.group_activity_id = d['group_activity_id']
         if 'group_ids' in d:

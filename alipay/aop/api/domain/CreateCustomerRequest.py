@@ -11,6 +11,7 @@ class CreateCustomerRequest(object):
         self._bd = None
         self._charge_person_name = None
         self._cid = None
+        self._cloud_tag = None
         self._country = None
         self._creator = None
         self._customer_industry = None
@@ -24,8 +25,10 @@ class CreateCustomerRequest(object):
         self._industry = None
         self._industry_category = None
         self._key_customer = None
+        self._leads_cloud_tag = None
         self._location = None
         self._memo = None
+        self._platform_cloud_tag = None
         self._pub_cloud_first_level_industry = None
         self._pub_cloud_second_level_industry = None
         self._region = None
@@ -54,6 +57,13 @@ class CreateCustomerRequest(object):
     @cid.setter
     def cid(self, value):
         self._cid = value
+    @property
+    def cloud_tag(self):
+        return self._cloud_tag
+
+    @cloud_tag.setter
+    def cloud_tag(self, value):
+        self._cloud_tag = value
     @property
     def country(self):
         return self._country
@@ -146,6 +156,13 @@ class CreateCustomerRequest(object):
     def key_customer(self, value):
         self._key_customer = value
     @property
+    def leads_cloud_tag(self):
+        return self._leads_cloud_tag
+
+    @leads_cloud_tag.setter
+    def leads_cloud_tag(self, value):
+        self._leads_cloud_tag = value
+    @property
     def location(self):
         return self._location
 
@@ -159,6 +176,13 @@ class CreateCustomerRequest(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def platform_cloud_tag(self):
+        return self._platform_cloud_tag
+
+    @platform_cloud_tag.setter
+    def platform_cloud_tag(self, value):
+        self._platform_cloud_tag = value
     @property
     def pub_cloud_first_level_industry(self):
         return self._pub_cloud_first_level_industry
@@ -220,6 +244,11 @@ class CreateCustomerRequest(object):
                 params['cid'] = self.cid.to_alipay_dict()
             else:
                 params['cid'] = self.cid
+        if self.cloud_tag:
+            if hasattr(self.cloud_tag, 'to_alipay_dict'):
+                params['cloud_tag'] = self.cloud_tag.to_alipay_dict()
+            else:
+                params['cloud_tag'] = self.cloud_tag
         if self.country:
             if hasattr(self.country, 'to_alipay_dict'):
                 params['country'] = self.country.to_alipay_dict()
@@ -285,6 +314,11 @@ class CreateCustomerRequest(object):
                 params['key_customer'] = self.key_customer.to_alipay_dict()
             else:
                 params['key_customer'] = self.key_customer
+        if self.leads_cloud_tag:
+            if hasattr(self.leads_cloud_tag, 'to_alipay_dict'):
+                params['leads_cloud_tag'] = self.leads_cloud_tag.to_alipay_dict()
+            else:
+                params['leads_cloud_tag'] = self.leads_cloud_tag
         if self.location:
             if hasattr(self.location, 'to_alipay_dict'):
                 params['location'] = self.location.to_alipay_dict()
@@ -295,6 +329,11 @@ class CreateCustomerRequest(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.platform_cloud_tag:
+            if hasattr(self.platform_cloud_tag, 'to_alipay_dict'):
+                params['platform_cloud_tag'] = self.platform_cloud_tag.to_alipay_dict()
+            else:
+                params['platform_cloud_tag'] = self.platform_cloud_tag
         if self.pub_cloud_first_level_industry:
             if hasattr(self.pub_cloud_first_level_industry, 'to_alipay_dict'):
                 params['pub_cloud_first_level_industry'] = self.pub_cloud_first_level_industry.to_alipay_dict()
@@ -338,6 +377,8 @@ class CreateCustomerRequest(object):
             o.charge_person_name = d['charge_person_name']
         if 'cid' in d:
             o.cid = d['cid']
+        if 'cloud_tag' in d:
+            o.cloud_tag = d['cloud_tag']
         if 'country' in d:
             o.country = d['country']
         if 'creator' in d:
@@ -364,10 +405,14 @@ class CreateCustomerRequest(object):
             o.industry_category = d['industry_category']
         if 'key_customer' in d:
             o.key_customer = d['key_customer']
+        if 'leads_cloud_tag' in d:
+            o.leads_cloud_tag = d['leads_cloud_tag']
         if 'location' in d:
             o.location = d['location']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'platform_cloud_tag' in d:
+            o.platform_cloud_tag = d['platform_cloud_tag']
         if 'pub_cloud_first_level_industry' in d:
             o.pub_cloud_first_level_industry = d['pub_cloud_first_level_industry']
         if 'pub_cloud_second_level_industry' in d:

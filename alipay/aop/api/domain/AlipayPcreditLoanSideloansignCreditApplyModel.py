@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloansignCreditApplyModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._credit_apply_no = None
+        self._credit_type = None
         self._customer_id = None
         self._extension = None
         self._fund_supplier_code = None
@@ -31,6 +32,13 @@ class AlipayPcreditLoanSideloansignCreditApplyModel(object):
     @credit_apply_no.setter
     def credit_apply_no(self, value):
         self._credit_apply_no = value
+    @property
+    def credit_type(self):
+        return self._credit_type
+
+    @credit_type.setter
+    def credit_type(self, value):
+        self._credit_type = value
     @property
     def customer_id(self):
         return self._customer_id
@@ -87,6 +95,11 @@ class AlipayPcreditLoanSideloansignCreditApplyModel(object):
                 params['credit_apply_no'] = self.credit_apply_no.to_alipay_dict()
             else:
                 params['credit_apply_no'] = self.credit_apply_no
+        if self.credit_type:
+            if hasattr(self.credit_type, 'to_alipay_dict'):
+                params['credit_type'] = self.credit_type.to_alipay_dict()
+            else:
+                params['credit_type'] = self.credit_type
         if self.customer_id:
             if hasattr(self.customer_id, 'to_alipay_dict'):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
@@ -128,6 +141,8 @@ class AlipayPcreditLoanSideloansignCreditApplyModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'credit_apply_no' in d:
             o.credit_apply_no = d['credit_apply_no']
+        if 'credit_type' in d:
+            o.credit_type = d['credit_type']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
         if 'extension' in d:

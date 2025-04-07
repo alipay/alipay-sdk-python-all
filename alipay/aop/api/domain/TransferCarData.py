@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CheckReportData import CheckReportData
 
 
 class TransferCarData(object):
@@ -15,6 +16,7 @@ class TransferCarData(object):
         self._audit_full_date = None
         self._auto_type = None
         self._brand_name = None
+        self._brand_official_store = None
         self._call_phone = None
         self._car_color = None
         self._car_desc = None
@@ -23,6 +25,7 @@ class TransferCarData(object):
         self._car_source_type = None
         self._car_tags = None
         self._car_year = None
+        self._check_report_data = None
         self._city_code = None
         self._displacement = None
         self._drive_distance = None
@@ -45,6 +48,8 @@ class TransferCarData(object):
         self._transfer_date = None
         self._transmission_type = None
         self._vehicle_display_status = None
+        self._vehicle_video_url = None
+        self._vin = None
 
     @property
     def acid(self):
@@ -95,6 +100,13 @@ class TransferCarData(object):
     @brand_name.setter
     def brand_name(self, value):
         self._brand_name = value
+    @property
+    def brand_official_store(self):
+        return self._brand_official_store
+
+    @brand_official_store.setter
+    def brand_official_store(self, value):
+        self._brand_official_store = value
     @property
     def call_phone(self):
         return self._call_phone
@@ -154,6 +166,16 @@ class TransferCarData(object):
     @car_year.setter
     def car_year(self, value):
         self._car_year = value
+    @property
+    def check_report_data(self):
+        return self._check_report_data
+
+    @check_report_data.setter
+    def check_report_data(self, value):
+        if isinstance(value, CheckReportData):
+            self._check_report_data = value
+        else:
+            self._check_report_data = CheckReportData.from_alipay_dict(value)
     @property
     def city_code(self):
         return self._city_code
@@ -314,6 +336,20 @@ class TransferCarData(object):
     @vehicle_display_status.setter
     def vehicle_display_status(self, value):
         self._vehicle_display_status = value
+    @property
+    def vehicle_video_url(self):
+        return self._vehicle_video_url
+
+    @vehicle_video_url.setter
+    def vehicle_video_url(self, value):
+        self._vehicle_video_url = value
+    @property
+    def vin(self):
+        return self._vin
+
+    @vin.setter
+    def vin(self, value):
+        self._vin = value
 
 
     def to_alipay_dict(self):
@@ -353,6 +389,11 @@ class TransferCarData(object):
                 params['brand_name'] = self.brand_name.to_alipay_dict()
             else:
                 params['brand_name'] = self.brand_name
+        if self.brand_official_store:
+            if hasattr(self.brand_official_store, 'to_alipay_dict'):
+                params['brand_official_store'] = self.brand_official_store.to_alipay_dict()
+            else:
+                params['brand_official_store'] = self.brand_official_store
         if self.call_phone:
             if hasattr(self.call_phone, 'to_alipay_dict'):
                 params['call_phone'] = self.call_phone.to_alipay_dict()
@@ -398,6 +439,11 @@ class TransferCarData(object):
                 params['car_year'] = self.car_year.to_alipay_dict()
             else:
                 params['car_year'] = self.car_year
+        if self.check_report_data:
+            if hasattr(self.check_report_data, 'to_alipay_dict'):
+                params['check_report_data'] = self.check_report_data.to_alipay_dict()
+            else:
+                params['check_report_data'] = self.check_report_data
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -518,6 +564,16 @@ class TransferCarData(object):
                 params['vehicle_display_status'] = self.vehicle_display_status.to_alipay_dict()
             else:
                 params['vehicle_display_status'] = self.vehicle_display_status
+        if self.vehicle_video_url:
+            if hasattr(self.vehicle_video_url, 'to_alipay_dict'):
+                params['vehicle_video_url'] = self.vehicle_video_url.to_alipay_dict()
+            else:
+                params['vehicle_video_url'] = self.vehicle_video_url
+        if self.vin:
+            if hasattr(self.vin, 'to_alipay_dict'):
+                params['vin'] = self.vin.to_alipay_dict()
+            else:
+                params['vin'] = self.vin
         return params
 
     @staticmethod
@@ -539,6 +595,8 @@ class TransferCarData(object):
             o.auto_type = d['auto_type']
         if 'brand_name' in d:
             o.brand_name = d['brand_name']
+        if 'brand_official_store' in d:
+            o.brand_official_store = d['brand_official_store']
         if 'call_phone' in d:
             o.call_phone = d['call_phone']
         if 'car_color' in d:
@@ -555,6 +613,8 @@ class TransferCarData(object):
             o.car_tags = d['car_tags']
         if 'car_year' in d:
             o.car_year = d['car_year']
+        if 'check_report_data' in d:
+            o.check_report_data = d['check_report_data']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'displacement' in d:
@@ -599,6 +659,10 @@ class TransferCarData(object):
             o.transmission_type = d['transmission_type']
         if 'vehicle_display_status' in d:
             o.vehicle_display_status = d['vehicle_display_status']
+        if 'vehicle_video_url' in d:
+            o.vehicle_video_url = d['vehicle_video_url']
+        if 'vin' in d:
+            o.vin = d['vin']
         return o
 
 

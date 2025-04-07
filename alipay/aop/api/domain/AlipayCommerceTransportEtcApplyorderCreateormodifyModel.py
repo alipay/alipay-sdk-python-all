@@ -22,6 +22,7 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._out_order_id = None
         self._plate_color = None
         self._plate_no = None
+        self._product_id = None
         self._seller_id = None
         self._settlement_cycle = None
         self._spu_code = None
@@ -140,6 +141,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @plate_no.setter
     def plate_no(self, value):
         self._plate_no = value
+    @property
+    def product_id(self):
+        return self._product_id
+
+    @product_id.setter
+    def product_id(self, value):
+        self._product_id = value
     @property
     def seller_id(self):
         return self._seller_id
@@ -347,6 +355,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['plate_no'] = self.plate_no.to_alipay_dict()
             else:
                 params['plate_no'] = self.plate_no
+        if self.product_id:
+            if hasattr(self.product_id, 'to_alipay_dict'):
+                params['product_id'] = self.product_id.to_alipay_dict()
+            else:
+                params['product_id'] = self.product_id
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -477,6 +490,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.plate_color = d['plate_color']
         if 'plate_no' in d:
             o.plate_no = d['plate_no']
+        if 'product_id' in d:
+            o.product_id = d['product_id']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'settlement_cycle' in d:

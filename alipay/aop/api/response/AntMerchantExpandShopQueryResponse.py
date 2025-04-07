@@ -44,6 +44,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._shop_category = None
         self._shop_id = None
         self._shop_info_status = None
+        self._shop_main_type = None
         self._shop_name = None
         self._shop_recommend_info = None
         self._shop_type = None
@@ -281,6 +282,13 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     def shop_info_status(self, value):
         self._shop_info_status = value
     @property
+    def shop_main_type(self):
+        return self._shop_main_type
+
+    @shop_main_type.setter
+    def shop_main_type(self, value):
+        self._shop_main_type = value
+    @property
     def shop_name(self):
         return self._shop_name
 
@@ -368,6 +376,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.shop_id = response['shop_id']
         if 'shop_info_status' in response:
             self.shop_info_status = response['shop_info_status']
+        if 'shop_main_type' in response:
+            self.shop_main_type = response['shop_main_type']
         if 'shop_name' in response:
             self.shop_name = response['shop_name']
         if 'shop_recommend_info' in response:

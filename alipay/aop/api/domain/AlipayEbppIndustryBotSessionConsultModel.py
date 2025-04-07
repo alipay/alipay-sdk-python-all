@@ -19,6 +19,7 @@ class AlipayEbppIndustryBotSessionConsultModel(object):
         self._scene_code = None
         self._session_id = None
         self._stream_output = None
+        self._think_output = None
         self._user_id = None
 
     @property
@@ -95,6 +96,13 @@ class AlipayEbppIndustryBotSessionConsultModel(object):
     def stream_output(self, value):
         self._stream_output = value
     @property
+    def think_output(self):
+        return self._think_output
+
+    @think_output.setter
+    def think_output(self, value):
+        self._think_output = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -155,6 +163,11 @@ class AlipayEbppIndustryBotSessionConsultModel(object):
                 params['stream_output'] = self.stream_output.to_alipay_dict()
             else:
                 params['stream_output'] = self.stream_output
+        if self.think_output:
+            if hasattr(self.think_output, 'to_alipay_dict'):
+                params['think_output'] = self.think_output.to_alipay_dict()
+            else:
+                params['think_output'] = self.think_output
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -187,6 +200,8 @@ class AlipayEbppIndustryBotSessionConsultModel(object):
             o.session_id = d['session_id']
         if 'stream_output' in d:
             o.stream_output = d['stream_output']
+        if 'think_output' in d:
+            o.think_output = d['think_output']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -16,6 +16,7 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
         self._enterprise_id = None
         self._tax_register_no = None
         self._telephone = None
+        self._title_code = None
         self._title_name = None
 
     @property
@@ -75,6 +76,13 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
     def telephone(self, value):
         self._telephone = value
     @property
+    def title_code(self):
+        return self._title_code
+
+    @title_code.setter
+    def title_code(self, value):
+        self._title_code = value
+    @property
     def title_name(self):
         return self._title_name
 
@@ -125,6 +133,11 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
                 params['telephone'] = self.telephone.to_alipay_dict()
             else:
                 params['telephone'] = self.telephone
+        if self.title_code:
+            if hasattr(self.title_code, 'to_alipay_dict'):
+                params['title_code'] = self.title_code.to_alipay_dict()
+            else:
+                params['title_code'] = self.title_code
         if self.title_name:
             if hasattr(self.title_name, 'to_alipay_dict'):
                 params['title_name'] = self.title_name.to_alipay_dict()
@@ -153,6 +166,8 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleCreateModel(object):
             o.tax_register_no = d['tax_register_no']
         if 'telephone' in d:
             o.telephone = d['telephone']
+        if 'title_code' in d:
+            o.title_code = d['title_code']
         if 'title_name' in d:
             o.title_name = d['title_name']
         return o

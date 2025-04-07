@@ -19,7 +19,9 @@ class PaymentVO(object):
         self._merchant_receive = None
         self._mi_amount = None
         self._packing_fee = None
+        self._pay_num = None
         self._time_markup_price = None
+        self._yk_pay_no = None
 
     @property
     def amount_discount(self):
@@ -99,12 +101,26 @@ class PaymentVO(object):
     def packing_fee(self, value):
         self._packing_fee = value
     @property
+    def pay_num(self):
+        return self._pay_num
+
+    @pay_num.setter
+    def pay_num(self, value):
+        self._pay_num = value
+    @property
     def time_markup_price(self):
         return self._time_markup_price
 
     @time_markup_price.setter
     def time_markup_price(self, value):
         self._time_markup_price = value
+    @property
+    def yk_pay_no(self):
+        return self._yk_pay_no
+
+    @yk_pay_no.setter
+    def yk_pay_no(self, value):
+        self._yk_pay_no = value
 
 
     def to_alipay_dict(self):
@@ -164,11 +180,21 @@ class PaymentVO(object):
                 params['packing_fee'] = self.packing_fee.to_alipay_dict()
             else:
                 params['packing_fee'] = self.packing_fee
+        if self.pay_num:
+            if hasattr(self.pay_num, 'to_alipay_dict'):
+                params['pay_num'] = self.pay_num.to_alipay_dict()
+            else:
+                params['pay_num'] = self.pay_num
         if self.time_markup_price:
             if hasattr(self.time_markup_price, 'to_alipay_dict'):
                 params['time_markup_price'] = self.time_markup_price.to_alipay_dict()
             else:
                 params['time_markup_price'] = self.time_markup_price
+        if self.yk_pay_no:
+            if hasattr(self.yk_pay_no, 'to_alipay_dict'):
+                params['yk_pay_no'] = self.yk_pay_no.to_alipay_dict()
+            else:
+                params['yk_pay_no'] = self.yk_pay_no
         return params
 
     @staticmethod
@@ -198,8 +224,12 @@ class PaymentVO(object):
             o.mi_amount = d['mi_amount']
         if 'packing_fee' in d:
             o.packing_fee = d['packing_fee']
+        if 'pay_num' in d:
+            o.pay_num = d['pay_num']
         if 'time_markup_price' in d:
             o.time_markup_price = d['time_markup_price']
+        if 'yk_pay_no' in d:
+            o.yk_pay_no = d['yk_pay_no']
         return o
 
 

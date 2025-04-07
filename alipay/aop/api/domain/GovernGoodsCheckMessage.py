@@ -11,6 +11,7 @@ class GovernGoodsCheckMessage(object):
         self._merchant_id = None
         self._need_grovern_point = None
         self._result = None
+        self._type = None
 
     @property
     def merchant_id(self):
@@ -33,6 +34,13 @@ class GovernGoodsCheckMessage(object):
     @result.setter
     def result(self, value):
         self._result = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class GovernGoodsCheckMessage(object):
                 params['result'] = self.result.to_alipay_dict()
             else:
                 params['result'] = self.result
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class GovernGoodsCheckMessage(object):
             o.need_grovern_point = d['need_grovern_point']
         if 'result' in d:
             o.result = d['result']
+        if 'type' in d:
+            o.type = d['type']
         return o
 
 

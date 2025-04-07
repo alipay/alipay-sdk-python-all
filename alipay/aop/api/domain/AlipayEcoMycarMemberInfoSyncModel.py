@@ -9,6 +9,7 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
 
     def __init__(self):
         self._card_id = None
+        self._closed = None
         self._issuance_date = None
         self._occur_time = None
         self._open_date = None
@@ -26,6 +27,13 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
     @card_id.setter
     def card_id(self, value):
         self._card_id = value
+    @property
+    def closed(self):
+        return self._closed
+
+    @closed.setter
+    def closed(self, value):
+        self._closed = value
     @property
     def issuance_date(self):
         return self._issuance_date
@@ -98,6 +106,11 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
                 params['card_id'] = self.card_id.to_alipay_dict()
             else:
                 params['card_id'] = self.card_id
+        if self.closed:
+            if hasattr(self.closed, 'to_alipay_dict'):
+                params['closed'] = self.closed.to_alipay_dict()
+            else:
+                params['closed'] = self.closed
         if self.issuance_date:
             if hasattr(self.issuance_date, 'to_alipay_dict'):
                 params['issuance_date'] = self.issuance_date.to_alipay_dict()
@@ -152,6 +165,8 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
         o = AlipayEcoMycarMemberInfoSyncModel()
         if 'card_id' in d:
             o.card_id = d['card_id']
+        if 'closed' in d:
+            o.closed = d['closed']
         if 'issuance_date' in d:
             o.issuance_date = d['issuance_date']
         if 'occur_time' in d:

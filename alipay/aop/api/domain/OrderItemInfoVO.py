@@ -6,23 +6,42 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ItemRefundInfoVO import ItemRefundInfoVO
 from alipay.aop.api.domain.ItemTagVO import ItemTagVO
 from alipay.aop.api.domain.OrderCertificateInfoVO import OrderCertificateInfoVO
+from alipay.aop.api.domain.RentItemInfoVO import RentItemInfoVO
 from alipay.aop.api.domain.ShippingTimeLimitVO import ShippingTimeLimitVO
 
 
 class OrderItemInfoVO(object):
 
     def __init__(self):
+        self._category_id = None
+        self._item_brand = None
         self._item_cnt = None
+        self._item_condition = None
         self._item_id = None
         self._item_refund_info = None
         self._item_tags = None
         self._order_certificate_infos = None
         self._out_item_id = None
         self._out_sku_id = None
+        self._rent_item_info = None
         self._sale_price = None
         self._shipping_time_limit = None
         self._sku_id = None
 
+    @property
+    def category_id(self):
+        return self._category_id
+
+    @category_id.setter
+    def category_id(self, value):
+        self._category_id = value
+    @property
+    def item_brand(self):
+        return self._item_brand
+
+    @item_brand.setter
+    def item_brand(self, value):
+        self._item_brand = value
     @property
     def item_cnt(self):
         return self._item_cnt
@@ -30,6 +49,13 @@ class OrderItemInfoVO(object):
     @item_cnt.setter
     def item_cnt(self, value):
         self._item_cnt = value
+    @property
+    def item_condition(self):
+        return self._item_condition
+
+    @item_condition.setter
+    def item_condition(self, value):
+        self._item_condition = value
     @property
     def item_id(self):
         return self._item_id
@@ -85,6 +111,16 @@ class OrderItemInfoVO(object):
     def out_sku_id(self, value):
         self._out_sku_id = value
     @property
+    def rent_item_info(self):
+        return self._rent_item_info
+
+    @rent_item_info.setter
+    def rent_item_info(self, value):
+        if isinstance(value, RentItemInfoVO):
+            self._rent_item_info = value
+        else:
+            self._rent_item_info = RentItemInfoVO.from_alipay_dict(value)
+    @property
     def sale_price(self):
         return self._sale_price
 
@@ -112,11 +148,26 @@ class OrderItemInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.category_id:
+            if hasattr(self.category_id, 'to_alipay_dict'):
+                params['category_id'] = self.category_id.to_alipay_dict()
+            else:
+                params['category_id'] = self.category_id
+        if self.item_brand:
+            if hasattr(self.item_brand, 'to_alipay_dict'):
+                params['item_brand'] = self.item_brand.to_alipay_dict()
+            else:
+                params['item_brand'] = self.item_brand
         if self.item_cnt:
             if hasattr(self.item_cnt, 'to_alipay_dict'):
                 params['item_cnt'] = self.item_cnt.to_alipay_dict()
             else:
                 params['item_cnt'] = self.item_cnt
+        if self.item_condition:
+            if hasattr(self.item_condition, 'to_alipay_dict'):
+                params['item_condition'] = self.item_condition.to_alipay_dict()
+            else:
+                params['item_condition'] = self.item_condition
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -152,6 +203,11 @@ class OrderItemInfoVO(object):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
             else:
                 params['out_sku_id'] = self.out_sku_id
+        if self.rent_item_info:
+            if hasattr(self.rent_item_info, 'to_alipay_dict'):
+                params['rent_item_info'] = self.rent_item_info.to_alipay_dict()
+            else:
+                params['rent_item_info'] = self.rent_item_info
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -174,8 +230,14 @@ class OrderItemInfoVO(object):
         if not d:
             return None
         o = OrderItemInfoVO()
+        if 'category_id' in d:
+            o.category_id = d['category_id']
+        if 'item_brand' in d:
+            o.item_brand = d['item_brand']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
+        if 'item_condition' in d:
+            o.item_condition = d['item_condition']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_refund_info' in d:
@@ -188,6 +250,8 @@ class OrderItemInfoVO(object):
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
+        if 'rent_item_info' in d:
+            o.rent_item_info = d['rent_item_info']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'shipping_time_limit' in d:

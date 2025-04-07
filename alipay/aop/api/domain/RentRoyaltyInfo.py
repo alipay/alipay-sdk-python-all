@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentPlan import RentPlan
 from alipay.aop.api.domain.RentRoyalty import RentRoyalty
 
 
@@ -15,6 +16,7 @@ class RentRoyaltyInfo(object):
         self._invest_pid = None
         self._order_id = None
         self._out_order_id = None
+        self._plan_list = None
         self._royalty_list = None
         self._status = None
 
@@ -60,6 +62,19 @@ class RentRoyaltyInfo(object):
     @out_order_id.setter
     def out_order_id(self, value):
         self._out_order_id = value
+    @property
+    def plan_list(self):
+        return self._plan_list
+
+    @plan_list.setter
+    def plan_list(self, value):
+        if isinstance(value, list):
+            self._plan_list = list()
+            for i in value:
+                if isinstance(i, RentPlan):
+                    self._plan_list.append(i)
+                else:
+                    self._plan_list.append(RentPlan.from_alipay_dict(i))
     @property
     def royalty_list(self):
         return self._royalty_list
@@ -114,6 +129,16 @@ class RentRoyaltyInfo(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.plan_list:
+            if isinstance(self.plan_list, list):
+                for i in range(0, len(self.plan_list)):
+                    element = self.plan_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.plan_list[i] = element.to_alipay_dict()
+            if hasattr(self.plan_list, 'to_alipay_dict'):
+                params['plan_list'] = self.plan_list.to_alipay_dict()
+            else:
+                params['plan_list'] = self.plan_list
         if self.royalty_list:
             if isinstance(self.royalty_list, list):
                 for i in range(0, len(self.royalty_list)):
@@ -148,6 +173,8 @@ class RentRoyaltyInfo(object):
             o.order_id = d['order_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'plan_list' in d:
+            o.plan_list = d['plan_list']
         if 'royalty_list' in d:
             o.royalty_list = d['royalty_list']
         if 'status' in d:

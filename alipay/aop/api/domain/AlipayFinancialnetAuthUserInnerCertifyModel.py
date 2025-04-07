@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayFinancialnetAuthUserInnerCertifyModel(object):
 
     def __init__(self):
+        self._area_code = None
         self._open_id = None
         self._source = None
         self._user_id = None
 
+    @property
+    def area_code(self):
+        return self._area_code
+
+    @area_code.setter
+    def area_code(self, value):
+        self._area_code = value
     @property
     def open_id(self):
         return self._open_id
@@ -37,6 +45,11 @@ class AlipayFinancialnetAuthUserInnerCertifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.area_code:
+            if hasattr(self.area_code, 'to_alipay_dict'):
+                params['area_code'] = self.area_code.to_alipay_dict()
+            else:
+                params['area_code'] = self.area_code
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayFinancialnetAuthUserInnerCertifyModel(object):
         if not d:
             return None
         o = AlipayFinancialnetAuthUserInnerCertifyModel()
+        if 'area_code' in d:
+            o.area_code = d['area_code']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'source' in d:

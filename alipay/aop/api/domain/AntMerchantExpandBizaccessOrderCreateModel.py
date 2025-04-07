@@ -3,7 +3,9 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateInfoForEntry import CertificateInfoForEntry
 from alipay.aop.api.domain.IsvCommissionInfo import IsvCommissionInfo
+from alipay.aop.api.domain.CertificateInfoForEntry import CertificateInfoForEntry
 from alipay.aop.api.domain.CommonMerchantLicenseInfo import CommonMerchantLicenseInfo
 from alipay.aop.api.domain.MerchantPriceRelatedInfo import MerchantPriceRelatedInfo
 from alipay.aop.api.domain.CommonMerchantLicenseInfo import CommonMerchantLicenseInfo
@@ -12,18 +14,34 @@ from alipay.aop.api.domain.CommonMerchantLicenseInfo import CommonMerchantLicens
 class AntMerchantExpandBizaccessOrderCreateModel(object):
 
     def __init__(self):
+        self._benefit_info = None
         self._isv_commission_info = None
+        self._legal_info = None
+        self._legal_person_logon_id = None
         self._license_info = None
         self._mcc_code = None
         self._merchant_logon_id = None
         self._merchant_name = None
+        self._merchant_type = None
         self._need_interface_auth = None
         self._need_operation_auth = None
+        self._need_register_merchant = None
+        self._optional_front_prod_code = None
         self._phone = None
         self._price_infos = None
         self._qualifications = None
         self._scene_biz_code = None
 
+    @property
+    def benefit_info(self):
+        return self._benefit_info
+
+    @benefit_info.setter
+    def benefit_info(self, value):
+        if isinstance(value, CertificateInfoForEntry):
+            self._benefit_info = value
+        else:
+            self._benefit_info = CertificateInfoForEntry.from_alipay_dict(value)
     @property
     def isv_commission_info(self):
         return self._isv_commission_info
@@ -37,6 +55,23 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
                     self._isv_commission_info.append(i)
                 else:
                     self._isv_commission_info.append(IsvCommissionInfo.from_alipay_dict(i))
+    @property
+    def legal_info(self):
+        return self._legal_info
+
+    @legal_info.setter
+    def legal_info(self, value):
+        if isinstance(value, CertificateInfoForEntry):
+            self._legal_info = value
+        else:
+            self._legal_info = CertificateInfoForEntry.from_alipay_dict(value)
+    @property
+    def legal_person_logon_id(self):
+        return self._legal_person_logon_id
+
+    @legal_person_logon_id.setter
+    def legal_person_logon_id(self, value):
+        self._legal_person_logon_id = value
     @property
     def license_info(self):
         return self._license_info
@@ -69,6 +104,13 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
     def merchant_name(self, value):
         self._merchant_name = value
     @property
+    def merchant_type(self):
+        return self._merchant_type
+
+    @merchant_type.setter
+    def merchant_type(self, value):
+        self._merchant_type = value
+    @property
     def need_interface_auth(self):
         return self._need_interface_auth
 
@@ -82,6 +124,23 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
     @need_operation_auth.setter
     def need_operation_auth(self, value):
         self._need_operation_auth = value
+    @property
+    def need_register_merchant(self):
+        return self._need_register_merchant
+
+    @need_register_merchant.setter
+    def need_register_merchant(self, value):
+        self._need_register_merchant = value
+    @property
+    def optional_front_prod_code(self):
+        return self._optional_front_prod_code
+
+    @optional_front_prod_code.setter
+    def optional_front_prod_code(self, value):
+        if isinstance(value, list):
+            self._optional_front_prod_code = list()
+            for i in value:
+                self._optional_front_prod_code.append(i)
     @property
     def phone(self):
         return self._phone
@@ -129,6 +188,11 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.benefit_info:
+            if hasattr(self.benefit_info, 'to_alipay_dict'):
+                params['benefit_info'] = self.benefit_info.to_alipay_dict()
+            else:
+                params['benefit_info'] = self.benefit_info
         if self.isv_commission_info:
             if isinstance(self.isv_commission_info, list):
                 for i in range(0, len(self.isv_commission_info)):
@@ -139,6 +203,16 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
                 params['isv_commission_info'] = self.isv_commission_info.to_alipay_dict()
             else:
                 params['isv_commission_info'] = self.isv_commission_info
+        if self.legal_info:
+            if hasattr(self.legal_info, 'to_alipay_dict'):
+                params['legal_info'] = self.legal_info.to_alipay_dict()
+            else:
+                params['legal_info'] = self.legal_info
+        if self.legal_person_logon_id:
+            if hasattr(self.legal_person_logon_id, 'to_alipay_dict'):
+                params['legal_person_logon_id'] = self.legal_person_logon_id.to_alipay_dict()
+            else:
+                params['legal_person_logon_id'] = self.legal_person_logon_id
         if self.license_info:
             if hasattr(self.license_info, 'to_alipay_dict'):
                 params['license_info'] = self.license_info.to_alipay_dict()
@@ -159,6 +233,11 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.merchant_type:
+            if hasattr(self.merchant_type, 'to_alipay_dict'):
+                params['merchant_type'] = self.merchant_type.to_alipay_dict()
+            else:
+                params['merchant_type'] = self.merchant_type
         if self.need_interface_auth:
             if hasattr(self.need_interface_auth, 'to_alipay_dict'):
                 params['need_interface_auth'] = self.need_interface_auth.to_alipay_dict()
@@ -169,6 +248,21 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
                 params['need_operation_auth'] = self.need_operation_auth.to_alipay_dict()
             else:
                 params['need_operation_auth'] = self.need_operation_auth
+        if self.need_register_merchant:
+            if hasattr(self.need_register_merchant, 'to_alipay_dict'):
+                params['need_register_merchant'] = self.need_register_merchant.to_alipay_dict()
+            else:
+                params['need_register_merchant'] = self.need_register_merchant
+        if self.optional_front_prod_code:
+            if isinstance(self.optional_front_prod_code, list):
+                for i in range(0, len(self.optional_front_prod_code)):
+                    element = self.optional_front_prod_code[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_front_prod_code[i] = element.to_alipay_dict()
+            if hasattr(self.optional_front_prod_code, 'to_alipay_dict'):
+                params['optional_front_prod_code'] = self.optional_front_prod_code.to_alipay_dict()
+            else:
+                params['optional_front_prod_code'] = self.optional_front_prod_code
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -211,8 +305,14 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
         if not d:
             return None
         o = AntMerchantExpandBizaccessOrderCreateModel()
+        if 'benefit_info' in d:
+            o.benefit_info = d['benefit_info']
         if 'isv_commission_info' in d:
             o.isv_commission_info = d['isv_commission_info']
+        if 'legal_info' in d:
+            o.legal_info = d['legal_info']
+        if 'legal_person_logon_id' in d:
+            o.legal_person_logon_id = d['legal_person_logon_id']
         if 'license_info' in d:
             o.license_info = d['license_info']
         if 'mcc_code' in d:
@@ -221,10 +321,16 @@ class AntMerchantExpandBizaccessOrderCreateModel(object):
             o.merchant_logon_id = d['merchant_logon_id']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'merchant_type' in d:
+            o.merchant_type = d['merchant_type']
         if 'need_interface_auth' in d:
             o.need_interface_auth = d['need_interface_auth']
         if 'need_operation_auth' in d:
             o.need_operation_auth = d['need_operation_auth']
+        if 'need_register_merchant' in d:
+            o.need_register_merchant = d['need_register_merchant']
+        if 'optional_front_prod_code' in d:
+            o.optional_front_prod_code = d['optional_front_prod_code']
         if 'phone' in d:
             o.phone = d['phone']
         if 'price_infos' in d:

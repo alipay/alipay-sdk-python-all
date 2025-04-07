@@ -17,6 +17,7 @@ class InsOpenPolicyDigestDTO(object):
         self._pre_order_id = None
         self._premium = None
         self._product_code = None
+        self._self_delivery_sum_insured = None
         self._sum_insured = None
 
     @property
@@ -83,6 +84,13 @@ class InsOpenPolicyDigestDTO(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def self_delivery_sum_insured(self):
+        return self._self_delivery_sum_insured
+
+    @self_delivery_sum_insured.setter
+    def self_delivery_sum_insured(self, value):
+        self._self_delivery_sum_insured = value
+    @property
     def sum_insured(self):
         return self._sum_insured
 
@@ -138,6 +146,11 @@ class InsOpenPolicyDigestDTO(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.self_delivery_sum_insured:
+            if hasattr(self.self_delivery_sum_insured, 'to_alipay_dict'):
+                params['self_delivery_sum_insured'] = self.self_delivery_sum_insured.to_alipay_dict()
+            else:
+                params['self_delivery_sum_insured'] = self.self_delivery_sum_insured
         if self.sum_insured:
             if hasattr(self.sum_insured, 'to_alipay_dict'):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
@@ -168,6 +181,8 @@ class InsOpenPolicyDigestDTO(object):
             o.premium = d['premium']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'self_delivery_sum_insured' in d:
+            o.self_delivery_sum_insured = d['self_delivery_sum_insured']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
         return o

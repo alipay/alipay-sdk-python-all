@@ -9,6 +9,7 @@ class AlipayPcreditLoanSideloanlendAmountConsultResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditLoanSideloanlendAmountConsultResponse, self).__init__()
+        self._account_status = None
         self._credit_quota = None
         self._daily_interest_rate = None
         self._end_time = None
@@ -27,6 +28,13 @@ class AlipayPcreditLoanSideloanlendAmountConsultResponse(AlipayResponse):
         self._temp_interest_rate_end_time = None
         self._temp_interest_rate_start_time = None
 
+    @property
+    def account_status(self):
+        return self._account_status
+
+    @account_status.setter
+    def account_status(self, value):
+        self._account_status = value
     @property
     def credit_quota(self):
         return self._credit_quota
@@ -149,6 +157,8 @@ class AlipayPcreditLoanSideloanlendAmountConsultResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditLoanSideloanlendAmountConsultResponse, self).parse_response_content(response_content)
+        if 'account_status' in response:
+            self.account_status = response['account_status']
         if 'credit_quota' in response:
             self.credit_quota = response['credit_quota']
         if 'daily_interest_rate' in response:

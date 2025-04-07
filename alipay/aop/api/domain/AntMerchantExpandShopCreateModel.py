@@ -41,6 +41,7 @@ class AntMerchantExpandShopCreateModel(object):
         self._scene = None
         self._settle_alipay_logon_id = None
         self._shop_category = None
+        self._shop_main_type = None
         self._shop_name = None
         self._shop_type = None
         self._store_id = None
@@ -269,6 +270,13 @@ class AntMerchantExpandShopCreateModel(object):
     def shop_category(self, value):
         self._shop_category = value
     @property
+    def shop_main_type(self):
+        return self._shop_main_type
+
+    @shop_main_type.setter
+    def shop_main_type(self, value):
+        self._shop_main_type = value
+    @property
     def shop_name(self):
         return self._shop_name
 
@@ -458,6 +466,11 @@ class AntMerchantExpandShopCreateModel(object):
                 params['shop_category'] = self.shop_category.to_alipay_dict()
             else:
                 params['shop_category'] = self.shop_category
+        if self.shop_main_type:
+            if hasattr(self.shop_main_type, 'to_alipay_dict'):
+                params['shop_main_type'] = self.shop_main_type.to_alipay_dict()
+            else:
+                params['shop_main_type'] = self.shop_main_type
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -530,6 +543,8 @@ class AntMerchantExpandShopCreateModel(object):
             o.settle_alipay_logon_id = d['settle_alipay_logon_id']
         if 'shop_category' in d:
             o.shop_category = d['shop_category']
+        if 'shop_main_type' in d:
+            o.shop_main_type = d['shop_main_type']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'shop_type' in d:

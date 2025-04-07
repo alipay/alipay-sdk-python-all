@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EpIndustryModel import EpIndustryModel
 from alipay.aop.api.domain.EpStockInfo import EpStockInfo
 
 
@@ -19,6 +20,7 @@ class EpBusinessBasicInfo(object):
         self._chief_representative = None
         self._email = None
         self._frdb = None
+        self._industry_model = None
         self._investors = None
         self._jycs = None
         self._legal_representative = None
@@ -121,6 +123,16 @@ class EpBusinessBasicInfo(object):
     @frdb.setter
     def frdb(self, value):
         self._frdb = value
+    @property
+    def industry_model(self):
+        return self._industry_model
+
+    @industry_model.setter
+    def industry_model(self, value):
+        if isinstance(value, EpIndustryModel):
+            self._industry_model = value
+        else:
+            self._industry_model = EpIndustryModel.from_alipay_dict(value)
     @property
     def investors(self):
         return self._investors
@@ -382,6 +394,11 @@ class EpBusinessBasicInfo(object):
                 params['frdb'] = self.frdb.to_alipay_dict()
             else:
                 params['frdb'] = self.frdb
+        if self.industry_model:
+            if hasattr(self.industry_model, 'to_alipay_dict'):
+                params['industry_model'] = self.industry_model.to_alipay_dict()
+            else:
+                params['industry_model'] = self.industry_model
         if self.investors:
             if hasattr(self.investors, 'to_alipay_dict'):
                 params['investors'] = self.investors.to_alipay_dict()
@@ -554,6 +571,8 @@ class EpBusinessBasicInfo(object):
             o.email = d['email']
         if 'frdb' in d:
             o.frdb = d['frdb']
+        if 'industry_model' in d:
+            o.industry_model = d['industry_model']
         if 'investors' in d:
             o.investors = d['investors']
         if 'jycs' in d:

@@ -15,6 +15,7 @@ from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.FundAuthFreezeInfoDTO import FundAuthFreezeInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
+from alipay.aop.api.domain.MiniOrderAddressInfoDTO import MiniOrderAddressInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
 from alipay.aop.api.domain.SubMerchantDTO import SubMerchantDTO
@@ -37,12 +38,14 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._delivery_detail = None
         self._ext_info = None
         self._fund_auth_freeze_info = None
+        self._memo = None
         self._merchant_biz_type = None
         self._order_detail = None
         self._out_order_id = None
         self._path = None
         self._promo_detail_info = None
         self._seller_id = None
+        self._send_address_info = None
         self._service_provider_model = None
         self._service_type = None
         self._shop_info = None
@@ -182,6 +185,13 @@ class AlipayOpenMiniOrderCreateModel(object):
         else:
             self._fund_auth_freeze_info = FundAuthFreezeInfoDTO.from_alipay_dict(value)
     @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
+    @property
     def merchant_biz_type(self):
         return self._merchant_biz_type
 
@@ -229,6 +239,16 @@ class AlipayOpenMiniOrderCreateModel(object):
     @seller_id.setter
     def seller_id(self, value):
         self._seller_id = value
+    @property
+    def send_address_info(self):
+        return self._send_address_info
+
+    @send_address_info.setter
+    def send_address_info(self, value):
+        if isinstance(value, MiniOrderAddressInfoDTO):
+            self._send_address_info = value
+        else:
+            self._send_address_info = MiniOrderAddressInfoDTO.from_alipay_dict(value)
     @property
     def service_provider_model(self):
         return self._service_provider_model
@@ -378,6 +398,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['fund_auth_freeze_info'] = self.fund_auth_freeze_info.to_alipay_dict()
             else:
                 params['fund_auth_freeze_info'] = self.fund_auth_freeze_info
+        if self.memo:
+            if hasattr(self.memo, 'to_alipay_dict'):
+                params['memo'] = self.memo.to_alipay_dict()
+            else:
+                params['memo'] = self.memo
         if self.merchant_biz_type:
             if hasattr(self.merchant_biz_type, 'to_alipay_dict'):
                 params['merchant_biz_type'] = self.merchant_biz_type.to_alipay_dict()
@@ -408,6 +433,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.send_address_info:
+            if hasattr(self.send_address_info, 'to_alipay_dict'):
+                params['send_address_info'] = self.send_address_info.to_alipay_dict()
+            else:
+                params['send_address_info'] = self.send_address_info
         if self.service_provider_model:
             if hasattr(self.service_provider_model, 'to_alipay_dict'):
                 params['service_provider_model'] = self.service_provider_model.to_alipay_dict()
@@ -493,6 +523,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.ext_info = d['ext_info']
         if 'fund_auth_freeze_info' in d:
             o.fund_auth_freeze_info = d['fund_auth_freeze_info']
+        if 'memo' in d:
+            o.memo = d['memo']
         if 'merchant_biz_type' in d:
             o.merchant_biz_type = d['merchant_biz_type']
         if 'order_detail' in d:
@@ -505,6 +537,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.promo_detail_info = d['promo_detail_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'send_address_info' in d:
+            o.send_address_info = d['send_address_info']
         if 'service_provider_model' in d:
             o.service_provider_model = d['service_provider_model']
         if 'service_type' in d:

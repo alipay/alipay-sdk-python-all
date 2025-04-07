@@ -12,6 +12,7 @@ class AlipayCommerceMedicalMedagentKnowledgeAppendModel(object):
         self._agent_id = None
         self._biz_type = None
         self._id = None
+        self._metadata = None
         self._open_id = None
         self._operation_type = None
         self._qa = None
@@ -41,6 +42,13 @@ class AlipayCommerceMedicalMedagentKnowledgeAppendModel(object):
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def metadata(self):
+        return self._metadata
+
+    @metadata.setter
+    def metadata(self, value):
+        self._metadata = value
     @property
     def open_id(self):
         return self._open_id
@@ -115,6 +123,11 @@ class AlipayCommerceMedicalMedagentKnowledgeAppendModel(object):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.metadata:
+            if hasattr(self.metadata, 'to_alipay_dict'):
+                params['metadata'] = self.metadata.to_alipay_dict()
+            else:
+                params['metadata'] = self.metadata
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -168,6 +181,8 @@ class AlipayCommerceMedicalMedagentKnowledgeAppendModel(object):
             o.biz_type = d['biz_type']
         if 'id' in d:
             o.id = d['id']
+        if 'metadata' in d:
+            o.metadata = d['metadata']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'operation_type' in d:

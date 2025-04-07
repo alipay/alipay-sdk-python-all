@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SalesSolutionExt import SalesSolutionExt
 
 
 class DeviceExtAttribute(object):
@@ -10,6 +11,8 @@ class DeviceExtAttribute(object):
     def __init__(self):
         self._external_id = None
         self._external_shop_id = None
+        self._sales_entry_order_id = None
+        self._sales_solution_ext = None
         self._shop_name = None
         self._shop_nick_name = None
         self._solution_id = None
@@ -31,6 +34,23 @@ class DeviceExtAttribute(object):
     @external_shop_id.setter
     def external_shop_id(self, value):
         self._external_shop_id = value
+    @property
+    def sales_entry_order_id(self):
+        return self._sales_entry_order_id
+
+    @sales_entry_order_id.setter
+    def sales_entry_order_id(self, value):
+        self._sales_entry_order_id = value
+    @property
+    def sales_solution_ext(self):
+        return self._sales_solution_ext
+
+    @sales_solution_ext.setter
+    def sales_solution_ext(self, value):
+        if isinstance(value, SalesSolutionExt):
+            self._sales_solution_ext = value
+        else:
+            self._sales_solution_ext = SalesSolutionExt.from_alipay_dict(value)
     @property
     def shop_name(self):
         return self._shop_name
@@ -87,6 +107,16 @@ class DeviceExtAttribute(object):
                 params['external_shop_id'] = self.external_shop_id.to_alipay_dict()
             else:
                 params['external_shop_id'] = self.external_shop_id
+        if self.sales_entry_order_id:
+            if hasattr(self.sales_entry_order_id, 'to_alipay_dict'):
+                params['sales_entry_order_id'] = self.sales_entry_order_id.to_alipay_dict()
+            else:
+                params['sales_entry_order_id'] = self.sales_entry_order_id
+        if self.sales_solution_ext:
+            if hasattr(self.sales_solution_ext, 'to_alipay_dict'):
+                params['sales_solution_ext'] = self.sales_solution_ext.to_alipay_dict()
+            else:
+                params['sales_solution_ext'] = self.sales_solution_ext
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -128,6 +158,10 @@ class DeviceExtAttribute(object):
             o.external_id = d['external_id']
         if 'external_shop_id' in d:
             o.external_shop_id = d['external_shop_id']
+        if 'sales_entry_order_id' in d:
+            o.sales_entry_order_id = d['sales_entry_order_id']
+        if 'sales_solution_ext' in d:
+            o.sales_solution_ext = d['sales_solution_ext']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'shop_nick_name' in d:

@@ -11,6 +11,7 @@ from alipay.aop.api.domain.EcomSellerDTO import EcomSellerDTO
 class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
 
     def __init__(self):
+        self._assign_withdraw_account_no = None
         self._at_least_days = None
         self._buyer = None
         self._ecom_item = None
@@ -25,6 +26,13 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
         self._seller = None
         self._user_client = None
 
+    @property
+    def assign_withdraw_account_no(self):
+        return self._assign_withdraw_account_no
+
+    @assign_withdraw_account_no.setter
+    def assign_withdraw_account_no(self, value):
+        self._assign_withdraw_account_no = value
     @property
     def at_least_days(self):
         return self._at_least_days
@@ -135,6 +143,11 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.assign_withdraw_account_no:
+            if hasattr(self.assign_withdraw_account_no, 'to_alipay_dict'):
+                params['assign_withdraw_account_no'] = self.assign_withdraw_account_no.to_alipay_dict()
+            else:
+                params['assign_withdraw_account_no'] = self.assign_withdraw_account_no
         if self.at_least_days:
             if hasattr(self.at_least_days, 'to_alipay_dict'):
                 params['at_least_days'] = self.at_least_days.to_alipay_dict()
@@ -217,6 +230,8 @@ class AlipayInsSceneEcommercePurchaselinkAuthModel(object):
         if not d:
             return None
         o = AlipayInsSceneEcommercePurchaselinkAuthModel()
+        if 'assign_withdraw_account_no' in d:
+            o.assign_withdraw_account_no = d['assign_withdraw_account_no']
         if 'at_least_days' in d:
             o.at_least_days = d['at_least_days']
         if 'buyer' in d:

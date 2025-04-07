@@ -21,6 +21,8 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
         self._order_id = None
         self._order_status = None
         self._service_exp = None
+        self._vehicle_corp_id = None
+        self._vehicle_corp_name = None
         self._vehicle_id = None
 
     @property
@@ -108,6 +110,20 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     def service_exp(self, value):
         self._service_exp = value
     @property
+    def vehicle_corp_id(self):
+        return self._vehicle_corp_id
+
+    @vehicle_corp_id.setter
+    def vehicle_corp_id(self, value):
+        self._vehicle_corp_id = value
+    @property
+    def vehicle_corp_name(self):
+        return self._vehicle_corp_name
+
+    @vehicle_corp_name.setter
+    def vehicle_corp_name(self, value):
+        self._vehicle_corp_name = value
+    @property
     def vehicle_id(self):
         return self._vehicle_id
 
@@ -141,5 +157,9 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
             self.order_status = response['order_status']
         if 'service_exp' in response:
             self.service_exp = response['service_exp']
+        if 'vehicle_corp_id' in response:
+            self.vehicle_corp_id = response['vehicle_corp_id']
+        if 'vehicle_corp_name' in response:
+            self.vehicle_corp_name = response['vehicle_corp_name']
         if 'vehicle_id' in response:
             self.vehicle_id = response['vehicle_id']

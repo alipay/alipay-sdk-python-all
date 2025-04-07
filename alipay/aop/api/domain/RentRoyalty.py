@@ -13,6 +13,7 @@ class RentRoyalty(object):
         self._buyer_open_id = None
         self._current_buyout_after_price = None
         self._current_buyout_price = None
+        self._expect_royalty_time = None
         self._out_order_id = None
         self._period = None
         self._royalty_after_price = None
@@ -21,6 +22,7 @@ class RentRoyalty(object):
         self._royalty_price = None
         self._royalty_status = None
         self._royalty_time = None
+        self._royalty_trigger_type = None
         self._settle_serial_no = None
         self._stage = None
         self._trade_no = None
@@ -61,6 +63,13 @@ class RentRoyalty(object):
     @current_buyout_price.setter
     def current_buyout_price(self, value):
         self._current_buyout_price = value
+    @property
+    def expect_royalty_time(self):
+        return self._expect_royalty_time
+
+    @expect_royalty_time.setter
+    def expect_royalty_time(self, value):
+        self._expect_royalty_time = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -118,6 +127,13 @@ class RentRoyalty(object):
     def royalty_time(self, value):
         self._royalty_time = value
     @property
+    def royalty_trigger_type(self):
+        return self._royalty_trigger_type
+
+    @royalty_trigger_type.setter
+    def royalty_trigger_type(self, value):
+        self._royalty_trigger_type = value
+    @property
     def settle_serial_no(self):
         return self._settle_serial_no
 
@@ -174,6 +190,11 @@ class RentRoyalty(object):
                 params['current_buyout_price'] = self.current_buyout_price.to_alipay_dict()
             else:
                 params['current_buyout_price'] = self.current_buyout_price
+        if self.expect_royalty_time:
+            if hasattr(self.expect_royalty_time, 'to_alipay_dict'):
+                params['expect_royalty_time'] = self.expect_royalty_time.to_alipay_dict()
+            else:
+                params['expect_royalty_time'] = self.expect_royalty_time
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -214,6 +235,11 @@ class RentRoyalty(object):
                 params['royalty_time'] = self.royalty_time.to_alipay_dict()
             else:
                 params['royalty_time'] = self.royalty_time
+        if self.royalty_trigger_type:
+            if hasattr(self.royalty_trigger_type, 'to_alipay_dict'):
+                params['royalty_trigger_type'] = self.royalty_trigger_type.to_alipay_dict()
+            else:
+                params['royalty_trigger_type'] = self.royalty_trigger_type
         if self.settle_serial_no:
             if hasattr(self.settle_serial_no, 'to_alipay_dict'):
                 params['settle_serial_no'] = self.settle_serial_no.to_alipay_dict()
@@ -251,6 +277,8 @@ class RentRoyalty(object):
             o.current_buyout_after_price = d['current_buyout_after_price']
         if 'current_buyout_price' in d:
             o.current_buyout_price = d['current_buyout_price']
+        if 'expect_royalty_time' in d:
+            o.expect_royalty_time = d['expect_royalty_time']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'period' in d:
@@ -267,6 +295,8 @@ class RentRoyalty(object):
             o.royalty_status = d['royalty_status']
         if 'royalty_time' in d:
             o.royalty_time = d['royalty_time']
+        if 'royalty_trigger_type' in d:
+            o.royalty_trigger_type = d['royalty_trigger_type']
         if 'settle_serial_no' in d:
             o.settle_serial_no = d['settle_serial_no']
         if 'stage' in d:

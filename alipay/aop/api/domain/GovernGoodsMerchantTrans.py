@@ -11,6 +11,8 @@ class GovernGoodsMerchantTrans(object):
         self._error_transaction_id = None
         self._manual_trans_count = None
         self._merchant_id = None
+        self._sub_merchant_id = None
+        self._task_type = None
         self._trans_count = None
 
     @property
@@ -37,6 +39,20 @@ class GovernGoodsMerchantTrans(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def sub_merchant_id(self):
+        return self._sub_merchant_id
+
+    @sub_merchant_id.setter
+    def sub_merchant_id(self, value):
+        self._sub_merchant_id = value
+    @property
+    def task_type(self):
+        return self._task_type
+
+    @task_type.setter
+    def task_type(self, value):
+        self._task_type = value
     @property
     def trans_count(self):
         return self._trans_count
@@ -68,6 +84,16 @@ class GovernGoodsMerchantTrans(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.sub_merchant_id:
+            if hasattr(self.sub_merchant_id, 'to_alipay_dict'):
+                params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
+            else:
+                params['sub_merchant_id'] = self.sub_merchant_id
+        if self.task_type:
+            if hasattr(self.task_type, 'to_alipay_dict'):
+                params['task_type'] = self.task_type.to_alipay_dict()
+            else:
+                params['task_type'] = self.task_type
         if self.trans_count:
             if hasattr(self.trans_count, 'to_alipay_dict'):
                 params['trans_count'] = self.trans_count.to_alipay_dict()
@@ -86,6 +112,10 @@ class GovernGoodsMerchantTrans(object):
             o.manual_trans_count = d['manual_trans_count']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'sub_merchant_id' in d:
+            o.sub_merchant_id = d['sub_merchant_id']
+        if 'task_type' in d:
+            o.task_type = d['task_type']
         if 'trans_count' in d:
             o.trans_count = d['trans_count']
         return o

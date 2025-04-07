@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityInfoDTO import ActivityInfoDTO
 from alipay.aop.api.domain.EffectiveDatesDTO import EffectiveDatesDTO
 from alipay.aop.api.domain.ItemInstallmentInfoDTO import ItemInstallmentInfoDTO
+from alipay.aop.api.domain.RentGoodsInfoDTO import RentGoodsInfoDTO
 from alipay.aop.api.domain.RentInfoDTO import RentInfoDTO
 from alipay.aop.api.domain.TicketInfoDTO import TicketInfoDTO
 
@@ -22,12 +23,18 @@ class MiniGoodsDetailInfoDTO(object):
         self._goods_name = None
         self._goods_type = None
         self._image_material_id = None
+        self._item_brand = None
         self._item_cnt = None
+        self._item_condition = None
         self._item_discount = None
         self._item_installment_info = None
+        self._max_sale_price = None
+        self._min_sale_price = None
         self._out_item_id = None
         self._out_sku_id = None
         self._platform_item_version_id = None
+        self._price_mode = None
+        self._rent_goods_info = None
         self._rent_info = None
         self._sale_price = None
         self._sale_real_price = None
@@ -107,12 +114,26 @@ class MiniGoodsDetailInfoDTO(object):
     def image_material_id(self, value):
         self._image_material_id = value
     @property
+    def item_brand(self):
+        return self._item_brand
+
+    @item_brand.setter
+    def item_brand(self, value):
+        self._item_brand = value
+    @property
     def item_cnt(self):
         return self._item_cnt
 
     @item_cnt.setter
     def item_cnt(self, value):
         self._item_cnt = value
+    @property
+    def item_condition(self):
+        return self._item_condition
+
+    @item_condition.setter
+    def item_condition(self, value):
+        self._item_condition = value
     @property
     def item_discount(self):
         return self._item_discount
@@ -130,6 +151,20 @@ class MiniGoodsDetailInfoDTO(object):
             self._item_installment_info = value
         else:
             self._item_installment_info = ItemInstallmentInfoDTO.from_alipay_dict(value)
+    @property
+    def max_sale_price(self):
+        return self._max_sale_price
+
+    @max_sale_price.setter
+    def max_sale_price(self, value):
+        self._max_sale_price = value
+    @property
+    def min_sale_price(self):
+        return self._min_sale_price
+
+    @min_sale_price.setter
+    def min_sale_price(self, value):
+        self._min_sale_price = value
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -151,6 +186,23 @@ class MiniGoodsDetailInfoDTO(object):
     @platform_item_version_id.setter
     def platform_item_version_id(self, value):
         self._platform_item_version_id = value
+    @property
+    def price_mode(self):
+        return self._price_mode
+
+    @price_mode.setter
+    def price_mode(self, value):
+        self._price_mode = value
+    @property
+    def rent_goods_info(self):
+        return self._rent_goods_info
+
+    @rent_goods_info.setter
+    def rent_goods_info(self, value):
+        if isinstance(value, RentGoodsInfoDTO):
+            self._rent_goods_info = value
+        else:
+            self._rent_goods_info = RentGoodsInfoDTO.from_alipay_dict(value)
     @property
     def rent_info(self):
         return self._rent_info
@@ -246,11 +298,21 @@ class MiniGoodsDetailInfoDTO(object):
                 params['image_material_id'] = self.image_material_id.to_alipay_dict()
             else:
                 params['image_material_id'] = self.image_material_id
+        if self.item_brand:
+            if hasattr(self.item_brand, 'to_alipay_dict'):
+                params['item_brand'] = self.item_brand.to_alipay_dict()
+            else:
+                params['item_brand'] = self.item_brand
         if self.item_cnt:
             if hasattr(self.item_cnt, 'to_alipay_dict'):
                 params['item_cnt'] = self.item_cnt.to_alipay_dict()
             else:
                 params['item_cnt'] = self.item_cnt
+        if self.item_condition:
+            if hasattr(self.item_condition, 'to_alipay_dict'):
+                params['item_condition'] = self.item_condition.to_alipay_dict()
+            else:
+                params['item_condition'] = self.item_condition
         if self.item_discount:
             if hasattr(self.item_discount, 'to_alipay_dict'):
                 params['item_discount'] = self.item_discount.to_alipay_dict()
@@ -261,6 +323,16 @@ class MiniGoodsDetailInfoDTO(object):
                 params['item_installment_info'] = self.item_installment_info.to_alipay_dict()
             else:
                 params['item_installment_info'] = self.item_installment_info
+        if self.max_sale_price:
+            if hasattr(self.max_sale_price, 'to_alipay_dict'):
+                params['max_sale_price'] = self.max_sale_price.to_alipay_dict()
+            else:
+                params['max_sale_price'] = self.max_sale_price
+        if self.min_sale_price:
+            if hasattr(self.min_sale_price, 'to_alipay_dict'):
+                params['min_sale_price'] = self.min_sale_price.to_alipay_dict()
+            else:
+                params['min_sale_price'] = self.min_sale_price
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -276,6 +348,16 @@ class MiniGoodsDetailInfoDTO(object):
                 params['platform_item_version_id'] = self.platform_item_version_id.to_alipay_dict()
             else:
                 params['platform_item_version_id'] = self.platform_item_version_id
+        if self.price_mode:
+            if hasattr(self.price_mode, 'to_alipay_dict'):
+                params['price_mode'] = self.price_mode.to_alipay_dict()
+            else:
+                params['price_mode'] = self.price_mode
+        if self.rent_goods_info:
+            if hasattr(self.rent_goods_info, 'to_alipay_dict'):
+                params['rent_goods_info'] = self.rent_goods_info.to_alipay_dict()
+            else:
+                params['rent_goods_info'] = self.rent_goods_info
         if self.rent_info:
             if hasattr(self.rent_info, 'to_alipay_dict'):
                 params['rent_info'] = self.rent_info.to_alipay_dict()
@@ -326,18 +408,30 @@ class MiniGoodsDetailInfoDTO(object):
             o.goods_type = d['goods_type']
         if 'image_material_id' in d:
             o.image_material_id = d['image_material_id']
+        if 'item_brand' in d:
+            o.item_brand = d['item_brand']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
+        if 'item_condition' in d:
+            o.item_condition = d['item_condition']
         if 'item_discount' in d:
             o.item_discount = d['item_discount']
         if 'item_installment_info' in d:
             o.item_installment_info = d['item_installment_info']
+        if 'max_sale_price' in d:
+            o.max_sale_price = d['max_sale_price']
+        if 'min_sale_price' in d:
+            o.min_sale_price = d['min_sale_price']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
         if 'platform_item_version_id' in d:
             o.platform_item_version_id = d['platform_item_version_id']
+        if 'price_mode' in d:
+            o.price_mode = d['price_mode']
+        if 'rent_goods_info' in d:
+            o.rent_goods_info = d['rent_goods_info']
         if 'rent_info' in d:
             o.rent_info = d['rent_info']
         if 'sale_price' in d:

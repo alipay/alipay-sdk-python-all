@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EmployeeAccountingEntityDTO import EmployeeAccountingEntityDTO
 from alipay.aop.api.domain.EmployeeDepartmentDTO import EmployeeDepartmentDTO
 
 
 class EmployeeInfoDTO(object):
 
     def __init__(self):
+        self._accounting_entity_list = None
         self._activate = None
         self._department_list = None
         self._email = None
@@ -25,6 +27,7 @@ class EmployeeInfoDTO(object):
         self._iot_unique_id = None
         self._iot_vid = None
         self._job_level_show = None
+        self._label_names = None
         self._mobile = None
         self._open_id = None
         self._profiles = None
@@ -32,6 +35,19 @@ class EmployeeInfoDTO(object):
         self._tl_employee_id = None
         self._user_id = None
 
+    @property
+    def accounting_entity_list(self):
+        return self._accounting_entity_list
+
+    @accounting_entity_list.setter
+    def accounting_entity_list(self, value):
+        if isinstance(value, list):
+            self._accounting_entity_list = list()
+            for i in value:
+                if isinstance(i, EmployeeAccountingEntityDTO):
+                    self._accounting_entity_list.append(i)
+                else:
+                    self._accounting_entity_list.append(EmployeeAccountingEntityDTO.from_alipay_dict(i))
     @property
     def activate(self):
         return self._activate
@@ -151,6 +167,16 @@ class EmployeeInfoDTO(object):
     def job_level_show(self, value):
         self._job_level_show = value
     @property
+    def label_names(self):
+        return self._label_names
+
+    @label_names.setter
+    def label_names(self, value):
+        if isinstance(value, list):
+            self._label_names = list()
+            for i in value:
+                self._label_names.append(i)
+    @property
     def mobile(self):
         return self._mobile
 
@@ -199,6 +225,16 @@ class EmployeeInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accounting_entity_list:
+            if isinstance(self.accounting_entity_list, list):
+                for i in range(0, len(self.accounting_entity_list)):
+                    element = self.accounting_entity_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.accounting_entity_list[i] = element.to_alipay_dict()
+            if hasattr(self.accounting_entity_list, 'to_alipay_dict'):
+                params['accounting_entity_list'] = self.accounting_entity_list.to_alipay_dict()
+            else:
+                params['accounting_entity_list'] = self.accounting_entity_list
         if self.activate:
             if hasattr(self.activate, 'to_alipay_dict'):
                 params['activate'] = self.activate.to_alipay_dict()
@@ -284,6 +320,16 @@ class EmployeeInfoDTO(object):
                 params['job_level_show'] = self.job_level_show.to_alipay_dict()
             else:
                 params['job_level_show'] = self.job_level_show
+        if self.label_names:
+            if isinstance(self.label_names, list):
+                for i in range(0, len(self.label_names)):
+                    element = self.label_names[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.label_names[i] = element.to_alipay_dict()
+            if hasattr(self.label_names, 'to_alipay_dict'):
+                params['label_names'] = self.label_names.to_alipay_dict()
+            else:
+                params['label_names'] = self.label_names
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -326,6 +372,8 @@ class EmployeeInfoDTO(object):
         if not d:
             return None
         o = EmployeeInfoDTO()
+        if 'accounting_entity_list' in d:
+            o.accounting_entity_list = d['accounting_entity_list']
         if 'activate' in d:
             o.activate = d['activate']
         if 'department_list' in d:
@@ -358,6 +406,8 @@ class EmployeeInfoDTO(object):
             o.iot_vid = d['iot_vid']
         if 'job_level_show' in d:
             o.job_level_show = d['job_level_show']
+        if 'label_names' in d:
+            o.label_names = d['label_names']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'open_id' in d:

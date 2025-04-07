@@ -15,6 +15,7 @@ class AlipayCommerceTransportEtcenterpriseVehicleModifyModel(object):
         self._agent_name = None
         self._corp_id = None
         self._corp_vehicle_id = None
+        self._vehicle_corp_id = None
         self._vehicle_info = None
         self._vehicle_owner_info = None
 
@@ -53,6 +54,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleModifyModel(object):
     @corp_vehicle_id.setter
     def corp_vehicle_id(self, value):
         self._corp_vehicle_id = value
+    @property
+    def vehicle_corp_id(self):
+        return self._vehicle_corp_id
+
+    @vehicle_corp_id.setter
+    def vehicle_corp_id(self, value):
+        self._vehicle_corp_id = value
     @property
     def vehicle_info(self):
         return self._vehicle_info
@@ -102,6 +110,11 @@ class AlipayCommerceTransportEtcenterpriseVehicleModifyModel(object):
                 params['corp_vehicle_id'] = self.corp_vehicle_id.to_alipay_dict()
             else:
                 params['corp_vehicle_id'] = self.corp_vehicle_id
+        if self.vehicle_corp_id:
+            if hasattr(self.vehicle_corp_id, 'to_alipay_dict'):
+                params['vehicle_corp_id'] = self.vehicle_corp_id.to_alipay_dict()
+            else:
+                params['vehicle_corp_id'] = self.vehicle_corp_id
         if self.vehicle_info:
             if hasattr(self.vehicle_info, 'to_alipay_dict'):
                 params['vehicle_info'] = self.vehicle_info.to_alipay_dict()
@@ -129,6 +142,8 @@ class AlipayCommerceTransportEtcenterpriseVehicleModifyModel(object):
             o.corp_id = d['corp_id']
         if 'corp_vehicle_id' in d:
             o.corp_vehicle_id = d['corp_vehicle_id']
+        if 'vehicle_corp_id' in d:
+            o.vehicle_corp_id = d['vehicle_corp_id']
         if 'vehicle_info' in d:
             o.vehicle_info = d['vehicle_info']
         if 'vehicle_owner_info' in d:

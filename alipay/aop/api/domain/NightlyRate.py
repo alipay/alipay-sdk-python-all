@@ -14,6 +14,7 @@ class NightlyRate(object):
         self._breakfast = None
         self._cost = None
         self._date = None
+        self._inventory = None
         self._member = None
         self._price_discount_value = None
         self._promotion_list = None
@@ -56,6 +57,13 @@ class NightlyRate(object):
     @date.setter
     def date(self, value):
         self._date = value
+    @property
+    def inventory(self):
+        return self._inventory
+
+    @inventory.setter
+    def inventory(self, value):
+        self._inventory = value
     @property
     def member(self):
         return self._member
@@ -133,6 +141,11 @@ class NightlyRate(object):
                 params['date'] = self.date.to_alipay_dict()
             else:
                 params['date'] = self.date
+        if self.inventory:
+            if hasattr(self.inventory, 'to_alipay_dict'):
+                params['inventory'] = self.inventory.to_alipay_dict()
+            else:
+                params['inventory'] = self.inventory
         if self.member:
             if hasattr(self.member, 'to_alipay_dict'):
                 params['member'] = self.member.to_alipay_dict()
@@ -185,6 +198,8 @@ class NightlyRate(object):
             o.cost = d['cost']
         if 'date' in d:
             o.date = d['date']
+        if 'inventory' in d:
+            o.inventory = d['inventory']
         if 'member' in d:
             o.member = d['member']
         if 'price_discount_value' in d:

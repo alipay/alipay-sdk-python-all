@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Credit import Credit
+from alipay.aop.api.domain.CarfinStatusNotifyOther import CarfinStatusNotifyOther
 
 
 class XingheLendassistCarfinApplystatusNotifyModel(object):
@@ -18,6 +19,7 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._cust_status = None
         self._fin_drawdown_no = None
         self._fin_org = None
+        self._fund_rate = None
         self._identity_verified = None
         self._loan_amt = None
         self._loan_date = None
@@ -26,10 +28,12 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._loan_term_unit = None
         self._mortgage_rate = None
         self._org_drawdown_no = None
+        self._other = None
         self._out_apply_no = None
         self._refuse_code = None
         self._refuse_msg = None
         self._repay_type = None
+        self._service_fee_rate = None
         self._status = None
         self._valuate_price = None
 
@@ -103,6 +107,13 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def fin_org(self, value):
         self._fin_org = value
     @property
+    def fund_rate(self):
+        return self._fund_rate
+
+    @fund_rate.setter
+    def fund_rate(self, value):
+        self._fund_rate = value
+    @property
     def identity_verified(self):
         return self._identity_verified
 
@@ -159,6 +170,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def org_drawdown_no(self, value):
         self._org_drawdown_no = value
     @property
+    def other(self):
+        return self._other
+
+    @other.setter
+    def other(self, value):
+        if isinstance(value, CarfinStatusNotifyOther):
+            self._other = value
+        else:
+            self._other = CarfinStatusNotifyOther.from_alipay_dict(value)
+    @property
     def out_apply_no(self):
         return self._out_apply_no
 
@@ -186,6 +207,13 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     @repay_type.setter
     def repay_type(self, value):
         self._repay_type = value
+    @property
+    def service_fee_rate(self):
+        return self._service_fee_rate
+
+    @service_fee_rate.setter
+    def service_fee_rate(self, value):
+        self._service_fee_rate = value
     @property
     def status(self):
         return self._status
@@ -254,6 +282,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['fin_org'] = self.fin_org.to_alipay_dict()
             else:
                 params['fin_org'] = self.fin_org
+        if self.fund_rate:
+            if hasattr(self.fund_rate, 'to_alipay_dict'):
+                params['fund_rate'] = self.fund_rate.to_alipay_dict()
+            else:
+                params['fund_rate'] = self.fund_rate
         if self.identity_verified:
             if hasattr(self.identity_verified, 'to_alipay_dict'):
                 params['identity_verified'] = self.identity_verified.to_alipay_dict()
@@ -294,6 +327,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['org_drawdown_no'] = self.org_drawdown_no.to_alipay_dict()
             else:
                 params['org_drawdown_no'] = self.org_drawdown_no
+        if self.other:
+            if hasattr(self.other, 'to_alipay_dict'):
+                params['other'] = self.other.to_alipay_dict()
+            else:
+                params['other'] = self.other
         if self.out_apply_no:
             if hasattr(self.out_apply_no, 'to_alipay_dict'):
                 params['out_apply_no'] = self.out_apply_no.to_alipay_dict()
@@ -314,6 +352,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['repay_type'] = self.repay_type.to_alipay_dict()
             else:
                 params['repay_type'] = self.repay_type
+        if self.service_fee_rate:
+            if hasattr(self.service_fee_rate, 'to_alipay_dict'):
+                params['service_fee_rate'] = self.service_fee_rate.to_alipay_dict()
+            else:
+                params['service_fee_rate'] = self.service_fee_rate
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -349,6 +392,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.fin_drawdown_no = d['fin_drawdown_no']
         if 'fin_org' in d:
             o.fin_org = d['fin_org']
+        if 'fund_rate' in d:
+            o.fund_rate = d['fund_rate']
         if 'identity_verified' in d:
             o.identity_verified = d['identity_verified']
         if 'loan_amt' in d:
@@ -365,6 +410,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.mortgage_rate = d['mortgage_rate']
         if 'org_drawdown_no' in d:
             o.org_drawdown_no = d['org_drawdown_no']
+        if 'other' in d:
+            o.other = d['other']
         if 'out_apply_no' in d:
             o.out_apply_no = d['out_apply_no']
         if 'refuse_code' in d:
@@ -373,6 +420,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.refuse_msg = d['refuse_msg']
         if 'repay_type' in d:
             o.repay_type = d['repay_type']
+        if 'service_fee_rate' in d:
+            o.service_fee_rate = d['service_fee_rate']
         if 'status' in d:
             o.status = d['status']
         if 'valuate_price' in d:

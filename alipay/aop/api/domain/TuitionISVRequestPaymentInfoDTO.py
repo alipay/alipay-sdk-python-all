@@ -11,11 +11,13 @@ class TuitionISVRequestPaymentInfoDTO(object):
     def __init__(self):
         self._account_id = None
         self._amount = None
+        self._biller_code = None
         self._certificate_list = None
         self._deadline = None
         self._payer_identity_card_number = None
         self._payer_phone_number = None
         self._post_script = None
+        self._reference_number = None
         self._school_id = None
 
     @property
@@ -35,6 +37,13 @@ class TuitionISVRequestPaymentInfoDTO(object):
             self._amount = value
         else:
             self._amount = TuitionMoneyDTO.from_alipay_dict(value)
+    @property
+    def biller_code(self):
+        return self._biller_code
+
+    @biller_code.setter
+    def biller_code(self, value):
+        self._biller_code = value
     @property
     def certificate_list(self):
         return self._certificate_list
@@ -71,6 +80,13 @@ class TuitionISVRequestPaymentInfoDTO(object):
     def post_script(self, value):
         self._post_script = value
     @property
+    def reference_number(self):
+        return self._reference_number
+
+    @reference_number.setter
+    def reference_number(self, value):
+        self._reference_number = value
+    @property
     def school_id(self):
         return self._school_id
 
@@ -91,6 +107,11 @@ class TuitionISVRequestPaymentInfoDTO(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.biller_code:
+            if hasattr(self.biller_code, 'to_alipay_dict'):
+                params['biller_code'] = self.biller_code.to_alipay_dict()
+            else:
+                params['biller_code'] = self.biller_code
         if self.certificate_list:
             if hasattr(self.certificate_list, 'to_alipay_dict'):
                 params['certificate_list'] = self.certificate_list.to_alipay_dict()
@@ -116,6 +137,11 @@ class TuitionISVRequestPaymentInfoDTO(object):
                 params['post_script'] = self.post_script.to_alipay_dict()
             else:
                 params['post_script'] = self.post_script
+        if self.reference_number:
+            if hasattr(self.reference_number, 'to_alipay_dict'):
+                params['reference_number'] = self.reference_number.to_alipay_dict()
+            else:
+                params['reference_number'] = self.reference_number
         if self.school_id:
             if hasattr(self.school_id, 'to_alipay_dict'):
                 params['school_id'] = self.school_id.to_alipay_dict()
@@ -132,6 +158,8 @@ class TuitionISVRequestPaymentInfoDTO(object):
             o.account_id = d['account_id']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'biller_code' in d:
+            o.biller_code = d['biller_code']
         if 'certificate_list' in d:
             o.certificate_list = d['certificate_list']
         if 'deadline' in d:
@@ -142,6 +170,8 @@ class TuitionISVRequestPaymentInfoDTO(object):
             o.payer_phone_number = d['payer_phone_number']
         if 'post_script' in d:
             o.post_script = d['post_script']
+        if 'reference_number' in d:
+            o.reference_number = d['reference_number']
         if 'school_id' in d:
             o.school_id = d['school_id']
         return o

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayDataDataserviceAdProductModifyModel(object):
 
     def __init__(self):
+        self._alipay_oid = None
         self._alipay_pid = None
         self._biz_token = None
         self._entity_type = None
@@ -15,6 +16,13 @@ class AlipayDataDataserviceAdProductModifyModel(object):
         self._source = None
         self._source_status = None
 
+    @property
+    def alipay_oid(self):
+        return self._alipay_oid
+
+    @alipay_oid.setter
+    def alipay_oid(self, value):
+        self._alipay_oid = value
     @property
     def alipay_pid(self):
         return self._alipay_pid
@@ -61,6 +69,11 @@ class AlipayDataDataserviceAdProductModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_oid:
+            if hasattr(self.alipay_oid, 'to_alipay_dict'):
+                params['alipay_oid'] = self.alipay_oid.to_alipay_dict()
+            else:
+                params['alipay_oid'] = self.alipay_oid
         if self.alipay_pid:
             if hasattr(self.alipay_pid, 'to_alipay_dict'):
                 params['alipay_pid'] = self.alipay_pid.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayDataDataserviceAdProductModifyModel(object):
         if not d:
             return None
         o = AlipayDataDataserviceAdProductModifyModel()
+        if 'alipay_oid' in d:
+            o.alipay_oid = d['alipay_oid']
         if 'alipay_pid' in d:
             o.alipay_pid = d['alipay_pid']
         if 'biz_token' in d:

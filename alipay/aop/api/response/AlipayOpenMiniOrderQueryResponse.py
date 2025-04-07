@@ -9,9 +9,11 @@ from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
+from alipay.aop.api.domain.LandingChannelInfoVO import LandingChannelInfoVO
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
 from alipay.aop.api.domain.RefundInfoVO import RefundInfoVO
 from alipay.aop.api.domain.RentInfoVO import RentInfoVO
+from alipay.aop.api.domain.MiniOrderAddressInfoDTO import MiniOrderAddressInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 from alipay.aop.api.domain.StagePayPlanVO import StagePayPlanVO
 
@@ -27,6 +29,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._create_time = None
         self._default_receiving_address = None
         self._delivery_detail = None
+        self._landing_channel_info = None
         self._merchant_biz_type = None
         self._open_id = None
         self._order_detail = None
@@ -36,6 +39,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._receive_time = None
         self._refund_info = None
         self._rent_info = None
+        self._send_address_info = None
         self._settle_type = None
         self._shop_info = None
         self._stage_pay_plans = None
@@ -111,6 +115,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._delivery_detail = DeliveryDetailInfoVO.from_alipay_dict(value)
     @property
+    def landing_channel_info(self):
+        return self._landing_channel_info
+
+    @landing_channel_info.setter
+    def landing_channel_info(self, value):
+        if isinstance(value, LandingChannelInfoVO):
+            self._landing_channel_info = value
+        else:
+            self._landing_channel_info = LandingChannelInfoVO.from_alipay_dict(value)
+    @property
     def merchant_biz_type(self):
         return self._merchant_biz_type
 
@@ -183,6 +197,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._rent_info = RentInfoVO.from_alipay_dict(value)
     @property
+    def send_address_info(self):
+        return self._send_address_info
+
+    @send_address_info.setter
+    def send_address_info(self, value):
+        if isinstance(value, MiniOrderAddressInfoDTO):
+            self._send_address_info = value
+        else:
+            self._send_address_info = MiniOrderAddressInfoDTO.from_alipay_dict(value)
+    @property
     def settle_type(self):
         return self._settle_type
 
@@ -250,6 +274,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.default_receiving_address = response['default_receiving_address']
         if 'delivery_detail' in response:
             self.delivery_detail = response['delivery_detail']
+        if 'landing_channel_info' in response:
+            self.landing_channel_info = response['landing_channel_info']
         if 'merchant_biz_type' in response:
             self.merchant_biz_type = response['merchant_biz_type']
         if 'open_id' in response:
@@ -268,6 +294,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.refund_info = response['refund_info']
         if 'rent_info' in response:
             self.rent_info = response['rent_info']
+        if 'send_address_info' in response:
+            self.send_address_info = response['send_address_info']
         if 'settle_type' in response:
             self.settle_type = response['settle_type']
         if 'shop_info' in response:

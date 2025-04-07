@@ -13,7 +13,9 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
     def __init__(self):
         self._check_items = None
         self._merchant_no = None
+        self._merchant_report_url = None
         self._openid = None
+        self._out_order_id = None
         self._product_info = None
         self._summary = None
         self._user_id = None
@@ -39,12 +41,26 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
     def merchant_no(self, value):
         self._merchant_no = value
     @property
+    def merchant_report_url(self):
+        return self._merchant_report_url
+
+    @merchant_report_url.setter
+    def merchant_report_url(self, value):
+        self._merchant_report_url = value
+    @property
     def openid(self):
         return self._openid
 
     @openid.setter
     def openid(self, value):
         self._openid = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
     @property
     def product_info(self):
         return self._product_info
@@ -91,11 +107,21 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
                 params['merchant_no'] = self.merchant_no.to_alipay_dict()
             else:
                 params['merchant_no'] = self.merchant_no
+        if self.merchant_report_url:
+            if hasattr(self.merchant_report_url, 'to_alipay_dict'):
+                params['merchant_report_url'] = self.merchant_report_url.to_alipay_dict()
+            else:
+                params['merchant_report_url'] = self.merchant_report_url
         if self.openid:
             if hasattr(self.openid, 'to_alipay_dict'):
                 params['openid'] = self.openid.to_alipay_dict()
             else:
                 params['openid'] = self.openid
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.product_info:
             if hasattr(self.product_info, 'to_alipay_dict'):
                 params['product_info'] = self.product_info.to_alipay_dict()
@@ -122,8 +148,12 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
             o.check_items = d['check_items']
         if 'merchant_no' in d:
             o.merchant_no = d['merchant_no']
+        if 'merchant_report_url' in d:
+            o.merchant_report_url = d['merchant_report_url']
         if 'openid' in d:
             o.openid = d['openid']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'product_info' in d:
             o.product_info = d['product_info']
         if 'summary' in d:

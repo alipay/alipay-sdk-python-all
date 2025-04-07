@@ -10,14 +10,31 @@ class AlipayEbppBillchargeOrderBatchcreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppBillchargeOrderBatchcreateResponse, self).__init__()
+        self._bill_no = None
+        self._merge_trade_no = None
         self._open_id = None
         self._order_no = None
         self._out_biz_id = None
         self._status = None
         self._sub_order_list = None
         self._total_pay_amount = None
+        self._trade_no = None
         self._user_id = None
 
+    @property
+    def bill_no(self):
+        return self._bill_no
+
+    @bill_no.setter
+    def bill_no(self, value):
+        self._bill_no = value
+    @property
+    def merge_trade_no(self):
+        return self._merge_trade_no
+
+    @merge_trade_no.setter
+    def merge_trade_no(self, value):
+        self._merge_trade_no = value
     @property
     def open_id(self):
         return self._open_id
@@ -67,6 +84,13 @@ class AlipayEbppBillchargeOrderBatchcreateResponse(AlipayResponse):
     def total_pay_amount(self, value):
         self._total_pay_amount = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -76,6 +100,10 @@ class AlipayEbppBillchargeOrderBatchcreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppBillchargeOrderBatchcreateResponse, self).parse_response_content(response_content)
+        if 'bill_no' in response:
+            self.bill_no = response['bill_no']
+        if 'merge_trade_no' in response:
+            self.merge_trade_no = response['merge_trade_no']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'order_no' in response:
@@ -88,5 +116,7 @@ class AlipayEbppBillchargeOrderBatchcreateResponse(AlipayResponse):
             self.sub_order_list = response['sub_order_list']
         if 'total_pay_amount' in response:
             self.total_pay_amount = response['total_pay_amount']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']
         if 'user_id' in response:
             self.user_id = response['user_id']

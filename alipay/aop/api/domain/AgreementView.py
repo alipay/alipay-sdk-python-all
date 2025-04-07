@@ -9,15 +9,24 @@ from alipay.aop.api.domain.InstitutionVO import InstitutionVO
 class AgreementView(object):
 
     def __init__(self):
+        self._agreement_status = None
         self._agreement_version = None
         self._code = None
         self._content = None
         self._content_type = None
+        self._contract_no = None
         self._force_read = None
         self._fund_supplier = None
         self._mandatory_reading_time = None
         self._name = None
 
+    @property
+    def agreement_status(self):
+        return self._agreement_status
+
+    @agreement_status.setter
+    def agreement_status(self, value):
+        self._agreement_status = value
     @property
     def agreement_version(self):
         return self._agreement_version
@@ -46,6 +55,13 @@ class AgreementView(object):
     @content_type.setter
     def content_type(self, value):
         self._content_type = value
+    @property
+    def contract_no(self):
+        return self._contract_no
+
+    @contract_no.setter
+    def contract_no(self, value):
+        self._contract_no = value
     @property
     def force_read(self):
         return self._force_read
@@ -81,6 +97,11 @@ class AgreementView(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_status:
+            if hasattr(self.agreement_status, 'to_alipay_dict'):
+                params['agreement_status'] = self.agreement_status.to_alipay_dict()
+            else:
+                params['agreement_status'] = self.agreement_status
         if self.agreement_version:
             if hasattr(self.agreement_version, 'to_alipay_dict'):
                 params['agreement_version'] = self.agreement_version.to_alipay_dict()
@@ -101,6 +122,11 @@ class AgreementView(object):
                 params['content_type'] = self.content_type.to_alipay_dict()
             else:
                 params['content_type'] = self.content_type
+        if self.contract_no:
+            if hasattr(self.contract_no, 'to_alipay_dict'):
+                params['contract_no'] = self.contract_no.to_alipay_dict()
+            else:
+                params['contract_no'] = self.contract_no
         if self.force_read:
             if hasattr(self.force_read, 'to_alipay_dict'):
                 params['force_read'] = self.force_read.to_alipay_dict()
@@ -128,6 +154,8 @@ class AgreementView(object):
         if not d:
             return None
         o = AgreementView()
+        if 'agreement_status' in d:
+            o.agreement_status = d['agreement_status']
         if 'agreement_version' in d:
             o.agreement_version = d['agreement_version']
         if 'code' in d:
@@ -136,6 +164,8 @@ class AgreementView(object):
             o.content = d['content']
         if 'content_type' in d:
             o.content_type = d['content_type']
+        if 'contract_no' in d:
+            o.contract_no = d['contract_no']
         if 'force_read' in d:
             o.force_read = d['force_read']
         if 'fund_supplier' in d:

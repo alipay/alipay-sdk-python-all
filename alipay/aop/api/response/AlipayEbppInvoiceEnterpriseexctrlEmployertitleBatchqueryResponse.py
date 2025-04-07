@@ -12,6 +12,7 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryResponse(AlipayRes
         super(AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryResponse, self).__init__()
         self._code = None
         self._msg = None
+        self._title_code = None
         self._title_info_list = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryResponse(AlipayRes
     @msg.setter
     def msg(self, value):
         self._msg = value
+    @property
+    def title_code(self):
+        return self._title_code
+
+    @title_code.setter
+    def title_code(self, value):
+        self._title_code = value
     @property
     def title_info_list(self):
         return self._title_info_list
@@ -48,5 +56,7 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryResponse(AlipayRes
             self.code = response['code']
         if 'msg' in response:
             self.msg = response['msg']
+        if 'title_code' in response:
+            self.title_code = response['title_code']
         if 'title_info_list' in response:
             self.title_info_list = response['title_info_list']

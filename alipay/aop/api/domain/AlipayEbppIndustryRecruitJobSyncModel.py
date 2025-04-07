@@ -28,6 +28,7 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
         self._job_name = None
         self._job_off_reason = None
         self._job_type = None
+        self._out_hire_user_id = None
         self._out_job_id = None
         self._part_time_mode = None
         self._performance_bonus = None
@@ -36,6 +37,7 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
         self._salary_min = None
         self._salary_unit = None
         self._server_job_url = None
+        self._source = None
         self._work_end_date = None
         self._work_end_time = None
         self._work_require = None
@@ -183,6 +185,13 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
     def job_type(self, value):
         self._job_type = value
     @property
+    def out_hire_user_id(self):
+        return self._out_hire_user_id
+
+    @out_hire_user_id.setter
+    def out_hire_user_id(self, value):
+        self._out_hire_user_id = value
+    @property
     def out_job_id(self):
         return self._out_job_id
 
@@ -238,6 +247,13 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
     @server_job_url.setter
     def server_job_url(self, value):
         self._server_job_url = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
     @property
     def work_end_date(self):
         return self._work_end_date
@@ -387,6 +403,11 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
                 params['job_type'] = self.job_type.to_alipay_dict()
             else:
                 params['job_type'] = self.job_type
+        if self.out_hire_user_id:
+            if hasattr(self.out_hire_user_id, 'to_alipay_dict'):
+                params['out_hire_user_id'] = self.out_hire_user_id.to_alipay_dict()
+            else:
+                params['out_hire_user_id'] = self.out_hire_user_id
         if self.out_job_id:
             if hasattr(self.out_job_id, 'to_alipay_dict'):
                 params['out_job_id'] = self.out_job_id.to_alipay_dict()
@@ -427,6 +448,11 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
                 params['server_job_url'] = self.server_job_url.to_alipay_dict()
             else:
                 params['server_job_url'] = self.server_job_url
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.work_end_date:
             if hasattr(self.work_end_date, 'to_alipay_dict'):
                 params['work_end_date'] = self.work_end_date.to_alipay_dict()
@@ -507,6 +533,8 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
             o.job_off_reason = d['job_off_reason']
         if 'job_type' in d:
             o.job_type = d['job_type']
+        if 'out_hire_user_id' in d:
+            o.out_hire_user_id = d['out_hire_user_id']
         if 'out_job_id' in d:
             o.out_job_id = d['out_job_id']
         if 'part_time_mode' in d:
@@ -523,6 +551,8 @@ class AlipayEbppIndustryRecruitJobSyncModel(object):
             o.salary_unit = d['salary_unit']
         if 'server_job_url' in d:
             o.server_job_url = d['server_job_url']
+        if 'source' in d:
+            o.source = d['source']
         if 'work_end_date' in d:
             o.work_end_date = d['work_end_date']
         if 'work_end_time' in d:

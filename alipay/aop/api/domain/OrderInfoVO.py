@@ -16,6 +16,7 @@ class OrderInfoVO(object):
         self._finish_time = None
         self._mi_type = None
         self._note = None
+        self._order_scene = None
         self._order_seq = None
         self._order_status = None
         self._pay_time = None
@@ -85,6 +86,13 @@ class OrderInfoVO(object):
     @note.setter
     def note(self, value):
         self._note = value
+    @property
+    def order_scene(self):
+        return self._order_scene
+
+    @order_scene.setter
+    def order_scene(self, value):
+        self._order_scene = value
     @property
     def order_seq(self):
         return self._order_seq
@@ -213,6 +221,11 @@ class OrderInfoVO(object):
                 params['note'] = self.note.to_alipay_dict()
             else:
                 params['note'] = self.note
+        if self.order_scene:
+            if hasattr(self.order_scene, 'to_alipay_dict'):
+                params['order_scene'] = self.order_scene.to_alipay_dict()
+            else:
+                params['order_scene'] = self.order_scene
         if self.order_seq:
             if hasattr(self.order_seq, 'to_alipay_dict'):
                 params['order_seq'] = self.order_seq.to_alipay_dict()
@@ -296,6 +309,8 @@ class OrderInfoVO(object):
             o.mi_type = d['mi_type']
         if 'note' in d:
             o.note = d['note']
+        if 'order_scene' in d:
+            o.order_scene = d['order_scene']
         if 'order_seq' in d:
             o.order_seq = d['order_seq']
         if 'order_status' in d:

@@ -29,6 +29,7 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
         self._original_price = None
         self._out_item_id = None
         self._out_source = None
+        self._owner_oid = None
         self._owner_pid = None
         self._path = None
         self._price_unit = None
@@ -167,6 +168,13 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
     @out_source.setter
     def out_source(self, value):
         self._out_source = value
+    @property
+    def owner_oid(self):
+        return self._owner_oid
+
+    @owner_oid.setter
+    def owner_oid(self, value):
+        self._owner_oid = value
     @property
     def owner_pid(self):
         return self._owner_pid
@@ -347,6 +355,11 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
                 params['out_source'] = self.out_source.to_alipay_dict()
             else:
                 params['out_source'] = self.out_source
+        if self.owner_oid:
+            if hasattr(self.owner_oid, 'to_alipay_dict'):
+                params['owner_oid'] = self.owner_oid.to_alipay_dict()
+            else:
+                params['owner_oid'] = self.owner_oid
         if self.owner_pid:
             if hasattr(self.owner_pid, 'to_alipay_dict'):
                 params['owner_pid'] = self.owner_pid.to_alipay_dict()
@@ -444,6 +457,8 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
             o.out_item_id = d['out_item_id']
         if 'out_source' in d:
             o.out_source = d['out_source']
+        if 'owner_oid' in d:
+            o.owner_oid = d['owner_oid']
         if 'owner_pid' in d:
             o.owner_pid = d['owner_pid']
         if 'path' in d:

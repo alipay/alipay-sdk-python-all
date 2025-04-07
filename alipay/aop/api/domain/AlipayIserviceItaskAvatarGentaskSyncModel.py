@@ -11,6 +11,7 @@ class AlipayIserviceItaskAvatarGentaskSyncModel(object):
     def __init__(self):
         self._location = None
         self._multi_page_config = None
+        self._need_water_mark = None
         self._ori_text = None
         self._ori_text_list = None
         self._project_id = None
@@ -42,6 +43,13 @@ class AlipayIserviceItaskAvatarGentaskSyncModel(object):
                     self._multi_page_config.append(i)
                 else:
                     self._multi_page_config.append(AvatarMultiPageConfig.from_alipay_dict(i))
+    @property
+    def need_water_mark(self):
+        return self._need_water_mark
+
+    @need_water_mark.setter
+    def need_water_mark(self, value):
+        self._need_water_mark = value
     @property
     def ori_text(self):
         return self._ori_text
@@ -134,6 +142,11 @@ class AlipayIserviceItaskAvatarGentaskSyncModel(object):
                 params['multi_page_config'] = self.multi_page_config.to_alipay_dict()
             else:
                 params['multi_page_config'] = self.multi_page_config
+        if self.need_water_mark:
+            if hasattr(self.need_water_mark, 'to_alipay_dict'):
+                params['need_water_mark'] = self.need_water_mark.to_alipay_dict()
+            else:
+                params['need_water_mark'] = self.need_water_mark
         if self.ori_text:
             if hasattr(self.ori_text, 'to_alipay_dict'):
                 params['ori_text'] = self.ori_text.to_alipay_dict()
@@ -200,6 +213,8 @@ class AlipayIserviceItaskAvatarGentaskSyncModel(object):
             o.location = d['location']
         if 'multi_page_config' in d:
             o.multi_page_config = d['multi_page_config']
+        if 'need_water_mark' in d:
+            o.need_water_mark = d['need_water_mark']
         if 'ori_text' in d:
             o.ori_text = d['ori_text']
         if 'ori_text_list' in d:

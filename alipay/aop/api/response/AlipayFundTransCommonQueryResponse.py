@@ -12,6 +12,9 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._arrival_time_end = None
         self._deduct_bill_info = None
         self._error_code = None
+        self._fail_inst_error_code = None
+        self._fail_inst_name = None
+        self._fail_inst_reason = None
         self._fail_reason = None
         self._inflow_settle_serial_no = None
         self._order_fee = None
@@ -52,6 +55,27 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     @error_code.setter
     def error_code(self, value):
         self._error_code = value
+    @property
+    def fail_inst_error_code(self):
+        return self._fail_inst_error_code
+
+    @fail_inst_error_code.setter
+    def fail_inst_error_code(self, value):
+        self._fail_inst_error_code = value
+    @property
+    def fail_inst_name(self):
+        return self._fail_inst_name
+
+    @fail_inst_name.setter
+    def fail_inst_name(self, value):
+        self._fail_inst_name = value
+    @property
+    def fail_inst_reason(self):
+        return self._fail_inst_reason
+
+    @fail_inst_reason.setter
+    def fail_inst_reason(self, value):
+        self._fail_inst_reason = value
     @property
     def fail_reason(self):
         return self._fail_reason
@@ -187,6 +211,12 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.deduct_bill_info = response['deduct_bill_info']
         if 'error_code' in response:
             self.error_code = response['error_code']
+        if 'fail_inst_error_code' in response:
+            self.fail_inst_error_code = response['fail_inst_error_code']
+        if 'fail_inst_name' in response:
+            self.fail_inst_name = response['fail_inst_name']
+        if 'fail_inst_reason' in response:
+            self.fail_inst_reason = response['fail_inst_reason']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
         if 'inflow_settle_serial_no' in response:

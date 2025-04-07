@@ -11,6 +11,7 @@ class HotelInvoice(object):
         self._invoice_mode = None
         self._invoice_purpose = None
         self._invoice_type = None
+        self._order_invoice = None
         self._postage_provider = None
 
     @property
@@ -37,6 +38,13 @@ class HotelInvoice(object):
             self._invoice_type = list()
             for i in value:
                 self._invoice_type.append(i)
+    @property
+    def order_invoice(self):
+        return self._order_invoice
+
+    @order_invoice.setter
+    def order_invoice(self, value):
+        self._order_invoice = value
     @property
     def postage_provider(self):
         return self._postage_provider
@@ -68,6 +76,11 @@ class HotelInvoice(object):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
             else:
                 params['invoice_type'] = self.invoice_type
+        if self.order_invoice:
+            if hasattr(self.order_invoice, 'to_alipay_dict'):
+                params['order_invoice'] = self.order_invoice.to_alipay_dict()
+            else:
+                params['order_invoice'] = self.order_invoice
         if self.postage_provider:
             if hasattr(self.postage_provider, 'to_alipay_dict'):
                 params['postage_provider'] = self.postage_provider.to_alipay_dict()
@@ -86,6 +99,8 @@ class HotelInvoice(object):
             o.invoice_purpose = d['invoice_purpose']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
+        if 'order_invoice' in d:
+            o.order_invoice = d['order_invoice']
         if 'postage_provider' in d:
             o.postage_provider = d['postage_provider']
         return o

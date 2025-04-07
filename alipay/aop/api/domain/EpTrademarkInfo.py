@@ -18,6 +18,7 @@ class EpTrademarkInfo(object):
         self._category = None
         self._intl_cls = None
         self._jointly_owned_trademark = None
+        self._logo_oss_path = None
         self._name = None
         self._private_date_end = None
         self._private_date_start = None
@@ -90,6 +91,13 @@ class EpTrademarkInfo(object):
     @jointly_owned_trademark.setter
     def jointly_owned_trademark(self, value):
         self._jointly_owned_trademark = value
+    @property
+    def logo_oss_path(self):
+        return self._logo_oss_path
+
+    @logo_oss_path.setter
+    def logo_oss_path(self, value):
+        self._logo_oss_path = value
     @property
     def name(self):
         return self._name
@@ -201,6 +209,11 @@ class EpTrademarkInfo(object):
                 params['jointly_owned_trademark'] = self.jointly_owned_trademark.to_alipay_dict()
             else:
                 params['jointly_owned_trademark'] = self.jointly_owned_trademark
+        if self.logo_oss_path:
+            if hasattr(self.logo_oss_path, 'to_alipay_dict'):
+                params['logo_oss_path'] = self.logo_oss_path.to_alipay_dict()
+            else:
+                params['logo_oss_path'] = self.logo_oss_path
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -271,6 +284,8 @@ class EpTrademarkInfo(object):
             o.intl_cls = d['intl_cls']
         if 'jointly_owned_trademark' in d:
             o.jointly_owned_trademark = d['jointly_owned_trademark']
+        if 'logo_oss_path' in d:
+            o.logo_oss_path = d['logo_oss_path']
         if 'name' in d:
             o.name = d['name']
         if 'private_date_end' in d:

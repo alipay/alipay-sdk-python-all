@@ -46,13 +46,17 @@ class ArInvoiceOpenApiResponse(object):
         self._memo = None
         self._no_bill_invoice_flag = None
         self._online = None
+        self._out_business_no_list = None
         self._payee = None
+        self._pdf_file_name = None
+        self._pdf_file_url = None
         self._recent_mail_id = None
         self._red = None
         self._red_amt = None
         self._rel_blue_invoices = None
         self._rel_red_invoices = None
         self._reviewer = None
+        self._sales_product_name_list = None
         self._seller_address = None
         self._seller_bank_account = None
         self._seller_bank_name = None
@@ -298,12 +302,36 @@ class ArInvoiceOpenApiResponse(object):
     def online(self, value):
         self._online = value
     @property
+    def out_business_no_list(self):
+        return self._out_business_no_list
+
+    @out_business_no_list.setter
+    def out_business_no_list(self, value):
+        if isinstance(value, list):
+            self._out_business_no_list = list()
+            for i in value:
+                self._out_business_no_list.append(i)
+    @property
     def payee(self):
         return self._payee
 
     @payee.setter
     def payee(self, value):
         self._payee = value
+    @property
+    def pdf_file_name(self):
+        return self._pdf_file_name
+
+    @pdf_file_name.setter
+    def pdf_file_name(self, value):
+        self._pdf_file_name = value
+    @property
+    def pdf_file_url(self):
+        return self._pdf_file_url
+
+    @pdf_file_url.setter
+    def pdf_file_url(self, value):
+        self._pdf_file_url = value
     @property
     def recent_mail_id(self):
         return self._recent_mail_id
@@ -361,6 +389,16 @@ class ArInvoiceOpenApiResponse(object):
     @reviewer.setter
     def reviewer(self, value):
         self._reviewer = value
+    @property
+    def sales_product_name_list(self):
+        return self._sales_product_name_list
+
+    @sales_product_name_list.setter
+    def sales_product_name_list(self, value):
+        if isinstance(value, list):
+            self._sales_product_name_list = list()
+            for i in value:
+                self._sales_product_name_list.append(i)
     @property
     def seller_address(self):
         return self._seller_address
@@ -579,11 +617,31 @@ class ArInvoiceOpenApiResponse(object):
                 params['online'] = self.online.to_alipay_dict()
             else:
                 params['online'] = self.online
+        if self.out_business_no_list:
+            if isinstance(self.out_business_no_list, list):
+                for i in range(0, len(self.out_business_no_list)):
+                    element = self.out_business_no_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.out_business_no_list[i] = element.to_alipay_dict()
+            if hasattr(self.out_business_no_list, 'to_alipay_dict'):
+                params['out_business_no_list'] = self.out_business_no_list.to_alipay_dict()
+            else:
+                params['out_business_no_list'] = self.out_business_no_list
         if self.payee:
             if hasattr(self.payee, 'to_alipay_dict'):
                 params['payee'] = self.payee.to_alipay_dict()
             else:
                 params['payee'] = self.payee
+        if self.pdf_file_name:
+            if hasattr(self.pdf_file_name, 'to_alipay_dict'):
+                params['pdf_file_name'] = self.pdf_file_name.to_alipay_dict()
+            else:
+                params['pdf_file_name'] = self.pdf_file_name
+        if self.pdf_file_url:
+            if hasattr(self.pdf_file_url, 'to_alipay_dict'):
+                params['pdf_file_url'] = self.pdf_file_url.to_alipay_dict()
+            else:
+                params['pdf_file_url'] = self.pdf_file_url
         if self.recent_mail_id:
             if hasattr(self.recent_mail_id, 'to_alipay_dict'):
                 params['recent_mail_id'] = self.recent_mail_id.to_alipay_dict()
@@ -624,6 +682,16 @@ class ArInvoiceOpenApiResponse(object):
                 params['reviewer'] = self.reviewer.to_alipay_dict()
             else:
                 params['reviewer'] = self.reviewer
+        if self.sales_product_name_list:
+            if isinstance(self.sales_product_name_list, list):
+                for i in range(0, len(self.sales_product_name_list)):
+                    element = self.sales_product_name_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sales_product_name_list[i] = element.to_alipay_dict()
+            if hasattr(self.sales_product_name_list, 'to_alipay_dict'):
+                params['sales_product_name_list'] = self.sales_product_name_list.to_alipay_dict()
+            else:
+                params['sales_product_name_list'] = self.sales_product_name_list
         if self.seller_address:
             if hasattr(self.seller_address, 'to_alipay_dict'):
                 params['seller_address'] = self.seller_address.to_alipay_dict()
@@ -730,8 +798,14 @@ class ArInvoiceOpenApiResponse(object):
             o.no_bill_invoice_flag = d['no_bill_invoice_flag']
         if 'online' in d:
             o.online = d['online']
+        if 'out_business_no_list' in d:
+            o.out_business_no_list = d['out_business_no_list']
         if 'payee' in d:
             o.payee = d['payee']
+        if 'pdf_file_name' in d:
+            o.pdf_file_name = d['pdf_file_name']
+        if 'pdf_file_url' in d:
+            o.pdf_file_url = d['pdf_file_url']
         if 'recent_mail_id' in d:
             o.recent_mail_id = d['recent_mail_id']
         if 'red' in d:
@@ -744,6 +818,8 @@ class ArInvoiceOpenApiResponse(object):
             o.rel_red_invoices = d['rel_red_invoices']
         if 'reviewer' in d:
             o.reviewer = d['reviewer']
+        if 'sales_product_name_list' in d:
+            o.sales_product_name_list = d['sales_product_name_list']
         if 'seller_address' in d:
             o.seller_address = d['seller_address']
         if 'seller_bank_account' in d:

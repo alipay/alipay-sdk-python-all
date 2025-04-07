@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class EmployeeBatchAddDTO(object):
 
     def __init__(self):
+        self._accounting_entity_ids = None
         self._department_ids = None
         self._employee_cert_no = None
         self._employee_cert_type = None
@@ -17,9 +18,20 @@ class EmployeeBatchAddDTO(object):
         self._employee_no = None
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
+        self._label_names = None
         self._profiles = None
         self._role_list = None
 
+    @property
+    def accounting_entity_ids(self):
+        return self._accounting_entity_ids
+
+    @accounting_entity_ids.setter
+    def accounting_entity_ids(self, value):
+        if isinstance(value, list):
+            self._accounting_entity_ids = list()
+            for i in value:
+                self._accounting_entity_ids.append(i)
     @property
     def department_ids(self):
         return self._department_ids
@@ -87,6 +99,16 @@ class EmployeeBatchAddDTO(object):
     def encrypt_mobile(self, value):
         self._encrypt_mobile = value
     @property
+    def label_names(self):
+        return self._label_names
+
+    @label_names.setter
+    def label_names(self, value):
+        if isinstance(value, list):
+            self._label_names = list()
+            for i in value:
+                self._label_names.append(i)
+    @property
     def profiles(self):
         return self._profiles
 
@@ -107,6 +129,16 @@ class EmployeeBatchAddDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accounting_entity_ids:
+            if isinstance(self.accounting_entity_ids, list):
+                for i in range(0, len(self.accounting_entity_ids)):
+                    element = self.accounting_entity_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.accounting_entity_ids[i] = element.to_alipay_dict()
+            if hasattr(self.accounting_entity_ids, 'to_alipay_dict'):
+                params['accounting_entity_ids'] = self.accounting_entity_ids.to_alipay_dict()
+            else:
+                params['accounting_entity_ids'] = self.accounting_entity_ids
         if self.department_ids:
             if isinstance(self.department_ids, list):
                 for i in range(0, len(self.department_ids)):
@@ -157,6 +189,16 @@ class EmployeeBatchAddDTO(object):
                 params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
             else:
                 params['encrypt_mobile'] = self.encrypt_mobile
+        if self.label_names:
+            if isinstance(self.label_names, list):
+                for i in range(0, len(self.label_names)):
+                    element = self.label_names[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.label_names[i] = element.to_alipay_dict()
+            if hasattr(self.label_names, 'to_alipay_dict'):
+                params['label_names'] = self.label_names.to_alipay_dict()
+            else:
+                params['label_names'] = self.label_names
         if self.profiles:
             if hasattr(self.profiles, 'to_alipay_dict'):
                 params['profiles'] = self.profiles.to_alipay_dict()
@@ -179,6 +221,8 @@ class EmployeeBatchAddDTO(object):
         if not d:
             return None
         o = EmployeeBatchAddDTO()
+        if 'accounting_entity_ids' in d:
+            o.accounting_entity_ids = d['accounting_entity_ids']
         if 'department_ids' in d:
             o.department_ids = d['department_ids']
         if 'employee_cert_no' in d:
@@ -197,6 +241,8 @@ class EmployeeBatchAddDTO(object):
             o.encrypt_cert_no = d['encrypt_cert_no']
         if 'encrypt_mobile' in d:
             o.encrypt_mobile = d['encrypt_mobile']
+        if 'label_names' in d:
+            o.label_names = d['label_names']
         if 'profiles' in d:
             o.profiles = d['profiles']
         if 'role_list' in d:

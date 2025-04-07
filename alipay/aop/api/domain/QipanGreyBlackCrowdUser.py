@@ -14,6 +14,7 @@ class QipanGreyBlackCrowdUser(object):
         self._encrypt_type = None
         self._storage_time = None
         self._trade_no = None
+        self._user_tags = None
 
     @property
     def encrypt_alipay_id(self):
@@ -57,6 +58,13 @@ class QipanGreyBlackCrowdUser(object):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def user_tags(self):
+        return self._user_tags
+
+    @user_tags.setter
+    def user_tags(self, value):
+        self._user_tags = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class QipanGreyBlackCrowdUser(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.user_tags:
+            if hasattr(self.user_tags, 'to_alipay_dict'):
+                params['user_tags'] = self.user_tags.to_alipay_dict()
+            else:
+                params['user_tags'] = self.user_tags
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class QipanGreyBlackCrowdUser(object):
             o.storage_time = d['storage_time']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'user_tags' in d:
+            o.user_tags = d['user_tags']
         return o
 
 

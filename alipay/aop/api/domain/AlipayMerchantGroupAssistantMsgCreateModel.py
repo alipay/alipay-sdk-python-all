@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityAssistantMsgContentVO import ActivityAssistantMsgContentVO
 from alipay.aop.api.domain.BenefitAssistantMsgContentVO import BenefitAssistantMsgContentVO
+from alipay.aop.api.domain.GoodsAssistantMsgContentVO import GoodsAssistantMsgContentVO
 
 
 class AlipayMerchantGroupAssistantMsgCreateModel(object):
@@ -14,6 +15,7 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
         self._benefit_content = None
         self._biz_type = None
         self._gmt_published = None
+        self._goods_content = None
         self._group_ids = None
         self._name = None
 
@@ -51,6 +53,16 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
     @gmt_published.setter
     def gmt_published(self, value):
         self._gmt_published = value
+    @property
+    def goods_content(self):
+        return self._goods_content
+
+    @goods_content.setter
+    def goods_content(self, value):
+        if isinstance(value, GoodsAssistantMsgContentVO):
+            self._goods_content = value
+        else:
+            self._goods_content = GoodsAssistantMsgContentVO.from_alipay_dict(value)
     @property
     def group_ids(self):
         return self._group_ids
@@ -92,6 +104,11 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
                 params['gmt_published'] = self.gmt_published.to_alipay_dict()
             else:
                 params['gmt_published'] = self.gmt_published
+        if self.goods_content:
+            if hasattr(self.goods_content, 'to_alipay_dict'):
+                params['goods_content'] = self.goods_content.to_alipay_dict()
+            else:
+                params['goods_content'] = self.goods_content
         if self.group_ids:
             if isinstance(self.group_ids, list):
                 for i in range(0, len(self.group_ids)):
@@ -122,6 +139,8 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
             o.biz_type = d['biz_type']
         if 'gmt_published' in d:
             o.gmt_published = d['gmt_published']
+        if 'goods_content' in d:
+            o.goods_content = d['goods_content']
         if 'group_ids' in d:
             o.group_ids = d['group_ids']
         if 'name' in d:

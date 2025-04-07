@@ -8,6 +8,7 @@ from alipay.aop.api.domain.EcomBuyerDTO import EcomBuyerDTO
 from alipay.aop.api.domain.EcomItemDTO import EcomItemDTO
 from alipay.aop.api.domain.EcomOrderDTO import EcomOrderDTO
 from alipay.aop.api.domain.EcomRefundDisputeDTO import EcomRefundDisputeDTO
+from alipay.aop.api.domain.EcomLogisticsOrderDTO import EcomLogisticsOrderDTO
 from alipay.aop.api.domain.EcomSellerDTO import EcomSellerDTO
 
 
@@ -25,6 +26,7 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
         self._policy_no = None
         self._policy_no_list = None
         self._refund_dispute = None
+        self._refund_logistics_order = None
         self._report_operator_type = None
         self._report_out_biz_no = None
         self._seller = None
@@ -129,6 +131,16 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
         else:
             self._refund_dispute = EcomRefundDisputeDTO.from_alipay_dict(value)
     @property
+    def refund_logistics_order(self):
+        return self._refund_logistics_order
+
+    @refund_logistics_order.setter
+    def refund_logistics_order(self, value):
+        if isinstance(value, EcomLogisticsOrderDTO):
+            self._refund_logistics_order = value
+        else:
+            self._refund_logistics_order = EcomLogisticsOrderDTO.from_alipay_dict(value)
+    @property
     def report_operator_type(self):
         return self._report_operator_type
 
@@ -228,6 +240,11 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
                 params['refund_dispute'] = self.refund_dispute.to_alipay_dict()
             else:
                 params['refund_dispute'] = self.refund_dispute
+        if self.refund_logistics_order:
+            if hasattr(self.refund_logistics_order, 'to_alipay_dict'):
+                params['refund_logistics_order'] = self.refund_logistics_order.to_alipay_dict()
+            else:
+                params['refund_logistics_order'] = self.refund_logistics_order
         if self.report_operator_type:
             if hasattr(self.report_operator_type, 'to_alipay_dict'):
                 params['report_operator_type'] = self.report_operator_type.to_alipay_dict()
@@ -277,6 +294,8 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
             o.policy_no_list = d['policy_no_list']
         if 'refund_dispute' in d:
             o.refund_dispute = d['refund_dispute']
+        if 'refund_logistics_order' in d:
+            o.refund_logistics_order = d['refund_logistics_order']
         if 'report_operator_type' in d:
             o.report_operator_type = d['report_operator_type']
         if 'report_out_biz_no' in d:

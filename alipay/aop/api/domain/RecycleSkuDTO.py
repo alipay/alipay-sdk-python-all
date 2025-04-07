@@ -10,10 +10,18 @@ from alipay.aop.api.domain.RecycleSkuPriceDTO import RecycleSkuPriceDTO
 class RecycleSkuDTO(object):
 
     def __init__(self):
+        self._expired_time = None
         self._sku_attrs = None
         self._sku_price = None
         self._status = None
 
+    @property
+    def expired_time(self):
+        return self._expired_time
+
+    @expired_time.setter
+    def expired_time(self, value):
+        self._expired_time = value
     @property
     def sku_attrs(self):
         return self._sku_attrs
@@ -48,6 +56,11 @@ class RecycleSkuDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.expired_time:
+            if hasattr(self.expired_time, 'to_alipay_dict'):
+                params['expired_time'] = self.expired_time.to_alipay_dict()
+            else:
+                params['expired_time'] = self.expired_time
         if self.sku_attrs:
             if isinstance(self.sku_attrs, list):
                 for i in range(0, len(self.sku_attrs)):
@@ -75,6 +88,8 @@ class RecycleSkuDTO(object):
         if not d:
             return None
         o = RecycleSkuDTO()
+        if 'expired_time' in d:
+            o.expired_time = d['expired_time']
         if 'sku_attrs' in d:
             o.sku_attrs = d['sku_attrs']
         if 'sku_price' in d:

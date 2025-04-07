@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GroupMsgScheduleConfigVO import GroupMsgScheduleConfigVO
 from alipay.aop.api.domain.GroupMessageVO import GroupMessageVO
 
 
@@ -11,9 +12,11 @@ class GroupMsgDetailVO(object):
     def __init__(self):
         self._at_all = None
         self._biz_id = None
+        self._error_msg = None
         self._gmt_create = None
         self._gmt_modified = None
         self._group_ids = None
+        self._group_msg_schedule_config = None
         self._merchant_name = None
         self._msg_data = None
         self._msg_id = None
@@ -36,6 +39,13 @@ class GroupMsgDetailVO(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def error_msg(self):
+        return self._error_msg
+
+    @error_msg.setter
+    def error_msg(self, value):
+        self._error_msg = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -60,6 +70,16 @@ class GroupMsgDetailVO(object):
             self._group_ids = list()
             for i in value:
                 self._group_ids.append(i)
+    @property
+    def group_msg_schedule_config(self):
+        return self._group_msg_schedule_config
+
+    @group_msg_schedule_config.setter
+    def group_msg_schedule_config(self, value):
+        if isinstance(value, GroupMsgScheduleConfigVO):
+            self._group_msg_schedule_config = value
+        else:
+            self._group_msg_schedule_config = GroupMsgScheduleConfigVO.from_alipay_dict(value)
     @property
     def merchant_name(self):
         return self._merchant_name
@@ -126,6 +146,11 @@ class GroupMsgDetailVO(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.error_msg:
+            if hasattr(self.error_msg, 'to_alipay_dict'):
+                params['error_msg'] = self.error_msg.to_alipay_dict()
+            else:
+                params['error_msg'] = self.error_msg
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -146,6 +171,11 @@ class GroupMsgDetailVO(object):
                 params['group_ids'] = self.group_ids.to_alipay_dict()
             else:
                 params['group_ids'] = self.group_ids
+        if self.group_msg_schedule_config:
+            if hasattr(self.group_msg_schedule_config, 'to_alipay_dict'):
+                params['group_msg_schedule_config'] = self.group_msg_schedule_config.to_alipay_dict()
+            else:
+                params['group_msg_schedule_config'] = self.group_msg_schedule_config
         if self.merchant_name:
             if hasattr(self.merchant_name, 'to_alipay_dict'):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
@@ -192,12 +222,16 @@ class GroupMsgDetailVO(object):
             o.at_all = d['at_all']
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'error_msg' in d:
+            o.error_msg = d['error_msg']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
         if 'group_ids' in d:
             o.group_ids = d['group_ids']
+        if 'group_msg_schedule_config' in d:
+            o.group_msg_schedule_config = d['group_msg_schedule_config']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
         if 'msg_data' in d:

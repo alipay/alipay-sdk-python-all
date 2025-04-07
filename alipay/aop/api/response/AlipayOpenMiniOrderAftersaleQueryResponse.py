@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AftersaleAddressInfoVO import AftersaleAddressInfoVO
 from alipay.aop.api.domain.AftersaleItemInfo import AftersaleItemInfo
 from alipay.aop.api.domain.OrderMediaInfo import OrderMediaInfo
 from alipay.aop.api.domain.LogisticsWaybill import LogisticsWaybill
@@ -15,11 +16,13 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
         super(AlipayOpenMiniOrderAftersaleQueryResponse, self).__init__()
         self._action_type = None
         self._additional_reason = None
+        self._address_info = None
         self._aftersale_goods_info_list = None
         self._aftersale_id = None
         self._aftersale_media_list = None
         self._aftersale_reason = None
         self._apply_refund_amount = None
+        self._create_time = None
         self._finally_refund_amount = None
         self._logistics_waybills = None
         self._order_id = None
@@ -44,6 +47,16 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     @additional_reason.setter
     def additional_reason(self, value):
         self._additional_reason = value
+    @property
+    def address_info(self):
+        return self._address_info
+
+    @address_info.setter
+    def address_info(self, value):
+        if isinstance(value, AftersaleAddressInfoVO):
+            self._address_info = value
+        else:
+            self._address_info = AftersaleAddressInfoVO.from_alipay_dict(value)
     @property
     def aftersale_goods_info_list(self):
         return self._aftersale_goods_info_list
@@ -91,6 +104,13 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     @apply_refund_amount.setter
     def apply_refund_amount(self, value):
         self._apply_refund_amount = value
+    @property
+    def create_time(self):
+        return self._create_time
+
+    @create_time.setter
+    def create_time(self, value):
+        self._create_time = value
     @property
     def finally_refund_amount(self):
         return self._finally_refund_amount
@@ -173,6 +193,8 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
             self.action_type = response['action_type']
         if 'additional_reason' in response:
             self.additional_reason = response['additional_reason']
+        if 'address_info' in response:
+            self.address_info = response['address_info']
         if 'aftersale_goods_info_list' in response:
             self.aftersale_goods_info_list = response['aftersale_goods_info_list']
         if 'aftersale_id' in response:
@@ -183,6 +205,8 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
             self.aftersale_reason = response['aftersale_reason']
         if 'apply_refund_amount' in response:
             self.apply_refund_amount = response['apply_refund_amount']
+        if 'create_time' in response:
+            self.create_time = response['create_time']
         if 'finally_refund_amount' in response:
             self.finally_refund_amount = response['finally_refund_amount']
         if 'logistics_waybills' in response:

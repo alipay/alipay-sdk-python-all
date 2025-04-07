@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class ZhimaCreditEpCrossborderEcomcompanydetailQueryModel(object):
 
     def __init__(self):
+        self._auth_id = None
         self._company_key = None
         self._product_code = None
 
+    @property
+    def auth_id(self):
+        return self._auth_id
+
+    @auth_id.setter
+    def auth_id(self, value):
+        self._auth_id = value
     @property
     def company_key(self):
         return self._company_key
@@ -29,6 +37,11 @@ class ZhimaCreditEpCrossborderEcomcompanydetailQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auth_id:
+            if hasattr(self.auth_id, 'to_alipay_dict'):
+                params['auth_id'] = self.auth_id.to_alipay_dict()
+            else:
+                params['auth_id'] = self.auth_id
         if self.company_key:
             if hasattr(self.company_key, 'to_alipay_dict'):
                 params['company_key'] = self.company_key.to_alipay_dict()
@@ -46,6 +59,8 @@ class ZhimaCreditEpCrossborderEcomcompanydetailQueryModel(object):
         if not d:
             return None
         o = ZhimaCreditEpCrossborderEcomcompanydetailQueryModel()
+        if 'auth_id' in d:
+            o.auth_id = d['auth_id']
         if 'company_key' in d:
             o.company_key = d['company_key']
         if 'product_code' in d:

@@ -19,6 +19,7 @@ class AntMerchantExpandEcoOrderCreateModel(object):
         self._receive_time = None
         self._send_time = None
         self._shop_code = None
+        self._tag_ids = None
 
     @property
     def busi_platform(self):
@@ -103,6 +104,16 @@ class AntMerchantExpandEcoOrderCreateModel(object):
     @shop_code.setter
     def shop_code(self, value):
         self._shop_code = value
+    @property
+    def tag_ids(self):
+        return self._tag_ids
+
+    @tag_ids.setter
+    def tag_ids(self, value):
+        if isinstance(value, list):
+            self._tag_ids = list()
+            for i in value:
+                self._tag_ids.append(i)
 
 
     def to_alipay_dict(self):
@@ -172,6 +183,16 @@ class AntMerchantExpandEcoOrderCreateModel(object):
                 params['shop_code'] = self.shop_code.to_alipay_dict()
             else:
                 params['shop_code'] = self.shop_code
+        if self.tag_ids:
+            if isinstance(self.tag_ids, list):
+                for i in range(0, len(self.tag_ids)):
+                    element = self.tag_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.tag_ids[i] = element.to_alipay_dict()
+            if hasattr(self.tag_ids, 'to_alipay_dict'):
+                params['tag_ids'] = self.tag_ids.to_alipay_dict()
+            else:
+                params['tag_ids'] = self.tag_ids
         return params
 
     @staticmethod
@@ -201,6 +222,8 @@ class AntMerchantExpandEcoOrderCreateModel(object):
             o.send_time = d['send_time']
         if 'shop_code' in d:
             o.shop_code = d['shop_code']
+        if 'tag_ids' in d:
+            o.tag_ids = d['tag_ids']
         return o
 
 

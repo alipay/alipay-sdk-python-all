@@ -11,6 +11,7 @@ class AlipayEbppBillchargeUnionorderQueryModel(object):
         self._open_id = None
         self._out_biz_id = None
         self._source = None
+        self._sub_order_no = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayEbppBillchargeUnionorderQueryModel(object):
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def sub_order_no(self):
+        return self._sub_order_no
+
+    @sub_order_no.setter
+    def sub_order_no(self, value):
+        self._sub_order_no = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayEbppBillchargeUnionorderQueryModel(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.sub_order_no:
+            if hasattr(self.sub_order_no, 'to_alipay_dict'):
+                params['sub_order_no'] = self.sub_order_no.to_alipay_dict()
+            else:
+                params['sub_order_no'] = self.sub_order_no
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayEbppBillchargeUnionorderQueryModel(object):
             o.out_biz_id = d['out_biz_id']
         if 'source' in d:
             o.source = d['source']
+        if 'sub_order_no' in d:
+            o.sub_order_no = d['sub_order_no']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

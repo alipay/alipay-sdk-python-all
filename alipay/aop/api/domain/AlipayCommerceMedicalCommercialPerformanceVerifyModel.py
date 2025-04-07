@@ -18,6 +18,7 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
         self._order_id = None
         self._out_biz_no = None
         self._out_product_id = None
+        self._special_biz_info = None
         self._status = None
         self._total_count = None
         self._usage_count = None
@@ -87,6 +88,13 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
     @out_product_id.setter
     def out_product_id(self, value):
         self._out_product_id = value
+    @property
+    def special_biz_info(self):
+        return self._special_biz_info
+
+    @special_biz_info.setter
+    def special_biz_info(self, value):
+        self._special_biz_info = value
     @property
     def status(self):
         return self._status
@@ -174,6 +182,11 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
                 params['out_product_id'] = self.out_product_id.to_alipay_dict()
             else:
                 params['out_product_id'] = self.out_product_id
+        if self.special_biz_info:
+            if hasattr(self.special_biz_info, 'to_alipay_dict'):
+                params['special_biz_info'] = self.special_biz_info.to_alipay_dict()
+            else:
+                params['special_biz_info'] = self.special_biz_info
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -224,6 +237,8 @@ class AlipayCommerceMedicalCommercialPerformanceVerifyModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'out_product_id' in d:
             o.out_product_id = d['out_product_id']
+        if 'special_biz_info' in d:
+            o.special_biz_info = d['special_biz_info']
         if 'status' in d:
             o.status = d['status']
         if 'total_count' in d:

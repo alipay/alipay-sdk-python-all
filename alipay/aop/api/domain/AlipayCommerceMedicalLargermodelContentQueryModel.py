@@ -20,6 +20,7 @@ class AlipayCommerceMedicalLargermodelContentQueryModel(object):
         self._out_user_id = None
         self._out_user_type = None
         self._page_id = None
+        self._query_stage = None
         self._scene_code = None
         self._username = None
 
@@ -108,6 +109,13 @@ class AlipayCommerceMedicalLargermodelContentQueryModel(object):
     def page_id(self, value):
         self._page_id = value
     @property
+    def query_stage(self):
+        return self._query_stage
+
+    @query_stage.setter
+    def query_stage(self, value):
+        self._query_stage = value
+    @property
     def scene_code(self):
         return self._scene_code
 
@@ -185,6 +193,11 @@ class AlipayCommerceMedicalLargermodelContentQueryModel(object):
                 params['page_id'] = self.page_id.to_alipay_dict()
             else:
                 params['page_id'] = self.page_id
+        if self.query_stage:
+            if hasattr(self.query_stage, 'to_alipay_dict'):
+                params['query_stage'] = self.query_stage.to_alipay_dict()
+            else:
+                params['query_stage'] = self.query_stage
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -226,6 +239,8 @@ class AlipayCommerceMedicalLargermodelContentQueryModel(object):
             o.out_user_type = d['out_user_type']
         if 'page_id' in d:
             o.page_id = d['page_id']
+        if 'query_stage' in d:
+            o.query_stage = d['query_stage']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'username' in d:

@@ -11,6 +11,8 @@ class DeliveryDetailInfoVO(object):
     def __init__(self):
         self._delivery_list = None
         self._finish_all_delivery = None
+        self._status = None
+        self._type = None
 
     @property
     def delivery_list(self):
@@ -32,6 +34,20 @@ class DeliveryDetailInfoVO(object):
     @finish_all_delivery.setter
     def finish_all_delivery(self, value):
         self._finish_all_delivery = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
 
 
     def to_alipay_dict(self):
@@ -51,6 +67,16 @@ class DeliveryDetailInfoVO(object):
                 params['finish_all_delivery'] = self.finish_all_delivery.to_alipay_dict()
             else:
                 params['finish_all_delivery'] = self.finish_all_delivery
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         return params
 
     @staticmethod
@@ -62,6 +88,10 @@ class DeliveryDetailInfoVO(object):
             o.delivery_list = d['delivery_list']
         if 'finish_all_delivery' in d:
             o.finish_all_delivery = d['finish_all_delivery']
+        if 'status' in d:
+            o.status = d['status']
+        if 'type' in d:
+            o.type = d['type']
         return o
 
 

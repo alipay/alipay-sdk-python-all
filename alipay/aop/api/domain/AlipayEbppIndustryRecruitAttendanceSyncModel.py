@@ -18,6 +18,8 @@ class AlipayEbppIndustryRecruitAttendanceSyncModel(object):
         self._out_apply_id = None
         self._out_attendance_id = None
         self._out_job_id = None
+        self._out_user_id = None
+        self._source = None
 
     @property
     def attendance_type(self):
@@ -89,6 +91,20 @@ class AlipayEbppIndustryRecruitAttendanceSyncModel(object):
     @out_job_id.setter
     def out_job_id(self, value):
         self._out_job_id = value
+    @property
+    def out_user_id(self):
+        return self._out_user_id
+
+    @out_user_id.setter
+    def out_user_id(self, value):
+        self._out_user_id = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +159,16 @@ class AlipayEbppIndustryRecruitAttendanceSyncModel(object):
                 params['out_job_id'] = self.out_job_id.to_alipay_dict()
             else:
                 params['out_job_id'] = self.out_job_id
+        if self.out_user_id:
+            if hasattr(self.out_user_id, 'to_alipay_dict'):
+                params['out_user_id'] = self.out_user_id.to_alipay_dict()
+            else:
+                params['out_user_id'] = self.out_user_id
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -170,6 +196,10 @@ class AlipayEbppIndustryRecruitAttendanceSyncModel(object):
             o.out_attendance_id = d['out_attendance_id']
         if 'out_job_id' in d:
             o.out_job_id = d['out_job_id']
+        if 'out_user_id' in d:
+            o.out_user_id = d['out_user_id']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

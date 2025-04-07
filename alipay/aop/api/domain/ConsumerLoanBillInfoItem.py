@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ConsumerLoanBillLoanRelation import ConsumerLoanBillLoanRelation
 
 
 class ConsumerLoanBillInfoItem(object):
@@ -10,6 +11,7 @@ class ConsumerLoanBillInfoItem(object):
     def __init__(self):
         self._allowed_pay_off_early_date = None
         self._bill_id = None
+        self._commission_amount = None
         self._current_period_paid_amount = None
         self._current_period_paid_time = None
         self._damage_amount = None
@@ -20,7 +22,9 @@ class ConsumerLoanBillInfoItem(object):
         self._loan_count = None
         self._penalty_interest_amount = None
         self._principal_amount = None
+        self._related_loan_info = None
         self._repay_amount = None
+        self._repay_bill_amount = None
         self._repay_date = None
         self._select_type = None
         self._status = None
@@ -39,6 +43,13 @@ class ConsumerLoanBillInfoItem(object):
     @bill_id.setter
     def bill_id(self, value):
         self._bill_id = value
+    @property
+    def commission_amount(self):
+        return self._commission_amount
+
+    @commission_amount.setter
+    def commission_amount(self, value):
+        self._commission_amount = value
     @property
     def current_period_paid_amount(self):
         return self._current_period_paid_amount
@@ -110,12 +121,32 @@ class ConsumerLoanBillInfoItem(object):
     def principal_amount(self, value):
         self._principal_amount = value
     @property
+    def related_loan_info(self):
+        return self._related_loan_info
+
+    @related_loan_info.setter
+    def related_loan_info(self, value):
+        if isinstance(value, list):
+            self._related_loan_info = list()
+            for i in value:
+                if isinstance(i, ConsumerLoanBillLoanRelation):
+                    self._related_loan_info.append(i)
+                else:
+                    self._related_loan_info.append(ConsumerLoanBillLoanRelation.from_alipay_dict(i))
+    @property
     def repay_amount(self):
         return self._repay_amount
 
     @repay_amount.setter
     def repay_amount(self, value):
         self._repay_amount = value
+    @property
+    def repay_bill_amount(self):
+        return self._repay_bill_amount
+
+    @repay_bill_amount.setter
+    def repay_bill_amount(self, value):
+        self._repay_bill_amount = value
     @property
     def repay_date(self):
         return self._repay_date
@@ -151,6 +182,11 @@ class ConsumerLoanBillInfoItem(object):
                 params['bill_id'] = self.bill_id.to_alipay_dict()
             else:
                 params['bill_id'] = self.bill_id
+        if self.commission_amount:
+            if hasattr(self.commission_amount, 'to_alipay_dict'):
+                params['commission_amount'] = self.commission_amount.to_alipay_dict()
+            else:
+                params['commission_amount'] = self.commission_amount
         if self.current_period_paid_amount:
             if hasattr(self.current_period_paid_amount, 'to_alipay_dict'):
                 params['current_period_paid_amount'] = self.current_period_paid_amount.to_alipay_dict()
@@ -201,11 +237,26 @@ class ConsumerLoanBillInfoItem(object):
                 params['principal_amount'] = self.principal_amount.to_alipay_dict()
             else:
                 params['principal_amount'] = self.principal_amount
+        if self.related_loan_info:
+            if isinstance(self.related_loan_info, list):
+                for i in range(0, len(self.related_loan_info)):
+                    element = self.related_loan_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.related_loan_info[i] = element.to_alipay_dict()
+            if hasattr(self.related_loan_info, 'to_alipay_dict'):
+                params['related_loan_info'] = self.related_loan_info.to_alipay_dict()
+            else:
+                params['related_loan_info'] = self.related_loan_info
         if self.repay_amount:
             if hasattr(self.repay_amount, 'to_alipay_dict'):
                 params['repay_amount'] = self.repay_amount.to_alipay_dict()
             else:
                 params['repay_amount'] = self.repay_amount
+        if self.repay_bill_amount:
+            if hasattr(self.repay_bill_amount, 'to_alipay_dict'):
+                params['repay_bill_amount'] = self.repay_bill_amount.to_alipay_dict()
+            else:
+                params['repay_bill_amount'] = self.repay_bill_amount
         if self.repay_date:
             if hasattr(self.repay_date, 'to_alipay_dict'):
                 params['repay_date'] = self.repay_date.to_alipay_dict()
@@ -232,6 +283,8 @@ class ConsumerLoanBillInfoItem(object):
             o.allowed_pay_off_early_date = d['allowed_pay_off_early_date']
         if 'bill_id' in d:
             o.bill_id = d['bill_id']
+        if 'commission_amount' in d:
+            o.commission_amount = d['commission_amount']
         if 'current_period_paid_amount' in d:
             o.current_period_paid_amount = d['current_period_paid_amount']
         if 'current_period_paid_time' in d:
@@ -252,8 +305,12 @@ class ConsumerLoanBillInfoItem(object):
             o.penalty_interest_amount = d['penalty_interest_amount']
         if 'principal_amount' in d:
             o.principal_amount = d['principal_amount']
+        if 'related_loan_info' in d:
+            o.related_loan_info = d['related_loan_info']
         if 'repay_amount' in d:
             o.repay_amount = d['repay_amount']
+        if 'repay_bill_amount' in d:
+            o.repay_bill_amount = d['repay_bill_amount']
         if 'repay_date' in d:
             o.repay_date = d['repay_date']
         if 'select_type' in d:

@@ -21,6 +21,7 @@ class OrderDataSyncRequest(object):
         self._env = None
         self._expired_end_time = None
         self._expired_start_time = None
+        self._isv_pid = None
         self._item_code = None
         self._kabao_id = None
         self._merchant_name = None
@@ -131,6 +132,13 @@ class OrderDataSyncRequest(object):
     @expired_start_time.setter
     def expired_start_time(self, value):
         self._expired_start_time = value
+    @property
+    def isv_pid(self):
+        return self._isv_pid
+
+    @isv_pid.setter
+    def isv_pid(self, value):
+        self._isv_pid = value
     @property
     def item_code(self):
         return self._item_code
@@ -333,6 +341,11 @@ class OrderDataSyncRequest(object):
                 params['expired_start_time'] = self.expired_start_time.to_alipay_dict()
             else:
                 params['expired_start_time'] = self.expired_start_time
+        if self.isv_pid:
+            if hasattr(self.isv_pid, 'to_alipay_dict'):
+                params['isv_pid'] = self.isv_pid.to_alipay_dict()
+            else:
+                params['isv_pid'] = self.isv_pid
         if self.item_code:
             if hasattr(self.item_code, 'to_alipay_dict'):
                 params['item_code'] = self.item_code.to_alipay_dict()
@@ -459,6 +472,8 @@ class OrderDataSyncRequest(object):
             o.expired_end_time = d['expired_end_time']
         if 'expired_start_time' in d:
             o.expired_start_time = d['expired_start_time']
+        if 'isv_pid' in d:
+            o.isv_pid = d['isv_pid']
         if 'item_code' in d:
             o.item_code = d['item_code']
         if 'kabao_id' in d:

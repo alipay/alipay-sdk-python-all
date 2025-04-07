@@ -42,6 +42,7 @@ class AntMerchantExpandShopModifyModel(object):
         self._settle_alipay_logon_id = None
         self._shop_category = None
         self._shop_id = None
+        self._shop_main_type = None
         self._shop_name = None
         self._store_id = None
 
@@ -273,6 +274,13 @@ class AntMerchantExpandShopModifyModel(object):
     def shop_id(self, value):
         self._shop_id = value
     @property
+    def shop_main_type(self):
+        return self._shop_main_type
+
+    @shop_main_type.setter
+    def shop_main_type(self, value):
+        self._shop_main_type = value
+    @property
     def shop_name(self):
         return self._shop_name
 
@@ -455,6 +463,11 @@ class AntMerchantExpandShopModifyModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_main_type:
+            if hasattr(self.shop_main_type, 'to_alipay_dict'):
+                params['shop_main_type'] = self.shop_main_type.to_alipay_dict()
+            else:
+                params['shop_main_type'] = self.shop_main_type
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -524,6 +537,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.shop_category = d['shop_category']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_main_type' in d:
+            o.shop_main_type = d['shop_main_type']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'store_id' in d:

@@ -9,6 +9,7 @@ class AlipayDataDataserviceTreeapitenthRainystestQueryModel(object):
 
     def __init__(self):
         self._demo = None
+        self._demo_boolean = None
 
     @property
     def demo(self):
@@ -17,6 +18,13 @@ class AlipayDataDataserviceTreeapitenthRainystestQueryModel(object):
     @demo.setter
     def demo(self, value):
         self._demo = value
+    @property
+    def demo_boolean(self):
+        return self._demo_boolean
+
+    @demo_boolean.setter
+    def demo_boolean(self, value):
+        self._demo_boolean = value
 
 
     def to_alipay_dict(self):
@@ -26,6 +34,11 @@ class AlipayDataDataserviceTreeapitenthRainystestQueryModel(object):
                 params['demo'] = self.demo.to_alipay_dict()
             else:
                 params['demo'] = self.demo
+        if self.demo_boolean:
+            if hasattr(self.demo_boolean, 'to_alipay_dict'):
+                params['demo_boolean'] = self.demo_boolean.to_alipay_dict()
+            else:
+                params['demo_boolean'] = self.demo_boolean
         return params
 
     @staticmethod
@@ -35,6 +48,8 @@ class AlipayDataDataserviceTreeapitenthRainystestQueryModel(object):
         o = AlipayDataDataserviceTreeapitenthRainystestQueryModel()
         if 'demo' in d:
             o.demo = d['demo']
+        if 'demo_boolean' in d:
+            o.demo_boolean = d['demo_boolean']
         return o
 
 

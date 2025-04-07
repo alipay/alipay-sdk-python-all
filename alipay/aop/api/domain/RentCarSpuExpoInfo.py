@@ -11,6 +11,8 @@ class RentCarSpuExpoInfo(object):
         self._car_type = None
         self._city_name = None
         self._expo_rank = None
+        self._order_rank = None
+        self._spu_id = None
         self._spu_name = None
         self._veh_name = None
 
@@ -35,6 +37,20 @@ class RentCarSpuExpoInfo(object):
     @expo_rank.setter
     def expo_rank(self, value):
         self._expo_rank = value
+    @property
+    def order_rank(self):
+        return self._order_rank
+
+    @order_rank.setter
+    def order_rank(self, value):
+        self._order_rank = value
+    @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
     @property
     def spu_name(self):
         return self._spu_name
@@ -68,6 +84,16 @@ class RentCarSpuExpoInfo(object):
                 params['expo_rank'] = self.expo_rank.to_alipay_dict()
             else:
                 params['expo_rank'] = self.expo_rank
+        if self.order_rank:
+            if hasattr(self.order_rank, 'to_alipay_dict'):
+                params['order_rank'] = self.order_rank.to_alipay_dict()
+            else:
+                params['order_rank'] = self.order_rank
+        if self.spu_id:
+            if hasattr(self.spu_id, 'to_alipay_dict'):
+                params['spu_id'] = self.spu_id.to_alipay_dict()
+            else:
+                params['spu_id'] = self.spu_id
         if self.spu_name:
             if hasattr(self.spu_name, 'to_alipay_dict'):
                 params['spu_name'] = self.spu_name.to_alipay_dict()
@@ -91,6 +117,10 @@ class RentCarSpuExpoInfo(object):
             o.city_name = d['city_name']
         if 'expo_rank' in d:
             o.expo_rank = d['expo_rank']
+        if 'order_rank' in d:
+            o.order_rank = d['order_rank']
+        if 'spu_id' in d:
+            o.spu_id = d['spu_id']
         if 'spu_name' in d:
             o.spu_name = d['spu_name']
         if 'veh_name' in d:

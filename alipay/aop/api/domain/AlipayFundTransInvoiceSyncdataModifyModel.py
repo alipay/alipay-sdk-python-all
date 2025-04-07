@@ -26,6 +26,7 @@ class AlipayFundTransInvoiceSyncdataModifyModel(object):
         self._payer_name = None
         self._status = None
         self._time = None
+        self._trade_no_list = None
         self._type = None
         self._url = None
         self._user_id = None
@@ -158,6 +159,13 @@ class AlipayFundTransInvoiceSyncdataModifyModel(object):
     def time(self, value):
         self._time = value
     @property
+    def trade_no_list(self):
+        return self._trade_no_list
+
+    @trade_no_list.setter
+    def trade_no_list(self, value):
+        self._trade_no_list = value
+    @property
     def type(self):
         return self._type
 
@@ -279,6 +287,11 @@ class AlipayFundTransInvoiceSyncdataModifyModel(object):
                 params['time'] = self.time.to_alipay_dict()
             else:
                 params['time'] = self.time
+        if self.trade_no_list:
+            if hasattr(self.trade_no_list, 'to_alipay_dict'):
+                params['trade_no_list'] = self.trade_no_list.to_alipay_dict()
+            else:
+                params['trade_no_list'] = self.trade_no_list
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -342,6 +355,8 @@ class AlipayFundTransInvoiceSyncdataModifyModel(object):
             o.status = d['status']
         if 'time' in d:
             o.time = d['time']
+        if 'trade_no_list' in d:
+            o.trade_no_list = d['trade_no_list']
         if 'type' in d:
             o.type = d['type']
         if 'url' in d:

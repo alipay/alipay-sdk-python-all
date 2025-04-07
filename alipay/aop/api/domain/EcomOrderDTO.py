@@ -43,6 +43,7 @@ class EcomOrderDTO(object):
         self._order_type = None
         self._pay_order = None
         self._post_fee = None
+        self._post_type = None
         self._seller_id = None
         self._seller_nick = None
         self._sub_order_list = None
@@ -269,6 +270,13 @@ class EcomOrderDTO(object):
     def post_fee(self, value):
         self._post_fee = value
     @property
+    def post_type(self):
+        return self._post_type
+
+    @post_type.setter
+    def post_type(self, value):
+        self._post_type = value
+    @property
     def seller_id(self):
         return self._seller_id
 
@@ -475,6 +483,11 @@ class EcomOrderDTO(object):
                 params['post_fee'] = self.post_fee.to_alipay_dict()
             else:
                 params['post_fee'] = self.post_fee
+        if self.post_type:
+            if hasattr(self.post_type, 'to_alipay_dict'):
+                params['post_type'] = self.post_type.to_alipay_dict()
+            else:
+                params['post_type'] = self.post_type
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -583,6 +596,8 @@ class EcomOrderDTO(object):
             o.pay_order = d['pay_order']
         if 'post_fee' in d:
             o.post_fee = d['post_fee']
+        if 'post_type' in d:
+            o.post_type = d['post_type']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'seller_nick' in d:

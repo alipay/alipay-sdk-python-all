@@ -9,6 +9,7 @@ class RoyaltyDTO(object):
 
     def __init__(self):
         self._buy_out_price = None
+        self._expect_royalty_time = None
         self._royalty_period = None
         self._royalty_price = None
         self._royalty_type = None
@@ -20,6 +21,13 @@ class RoyaltyDTO(object):
     @buy_out_price.setter
     def buy_out_price(self, value):
         self._buy_out_price = value
+    @property
+    def expect_royalty_time(self):
+        return self._expect_royalty_time
+
+    @expect_royalty_time.setter
+    def expect_royalty_time(self, value):
+        self._expect_royalty_time = value
     @property
     def royalty_period(self):
         return self._royalty_period
@@ -50,6 +58,11 @@ class RoyaltyDTO(object):
                 params['buy_out_price'] = self.buy_out_price.to_alipay_dict()
             else:
                 params['buy_out_price'] = self.buy_out_price
+        if self.expect_royalty_time:
+            if hasattr(self.expect_royalty_time, 'to_alipay_dict'):
+                params['expect_royalty_time'] = self.expect_royalty_time.to_alipay_dict()
+            else:
+                params['expect_royalty_time'] = self.expect_royalty_time
         if self.royalty_period:
             if hasattr(self.royalty_period, 'to_alipay_dict'):
                 params['royalty_period'] = self.royalty_period.to_alipay_dict()
@@ -74,6 +87,8 @@ class RoyaltyDTO(object):
         o = RoyaltyDTO()
         if 'buy_out_price' in d:
             o.buy_out_price = d['buy_out_price']
+        if 'expect_royalty_time' in d:
+            o.expect_royalty_time = d['expect_royalty_time']
         if 'royalty_period' in d:
             o.royalty_period = d['royalty_period']
         if 'royalty_price' in d:

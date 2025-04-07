@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class CreditPricing(object):
 
     def __init__(self):
+        self._amount = None
         self._int_rate = None
         self._loan_term = None
         self._loan_term_unit = None
         self._repay_type = None
 
+    @property
+    def amount(self):
+        return self._amount
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
     @property
     def int_rate(self):
         return self._int_rate
@@ -45,6 +53,11 @@ class CreditPricing(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount:
+            if hasattr(self.amount, 'to_alipay_dict'):
+                params['amount'] = self.amount.to_alipay_dict()
+            else:
+                params['amount'] = self.amount
         if self.int_rate:
             if hasattr(self.int_rate, 'to_alipay_dict'):
                 params['int_rate'] = self.int_rate.to_alipay_dict()
@@ -72,6 +85,8 @@ class CreditPricing(object):
         if not d:
             return None
         o = CreditPricing()
+        if 'amount' in d:
+            o.amount = d['amount']
         if 'int_rate' in d:
             o.int_rate = d['int_rate']
         if 'loan_term' in d:

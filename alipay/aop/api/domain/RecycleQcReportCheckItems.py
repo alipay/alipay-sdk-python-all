@@ -11,6 +11,7 @@ class RecycleQcReportCheckItems(object):
     def __init__(self):
         self._attr_name = None
         self._items = None
+        self._question_code = None
 
     @property
     def attr_name(self):
@@ -32,6 +33,13 @@ class RecycleQcReportCheckItems(object):
                     self._items.append(i)
                 else:
                     self._items.append(RecycleQcReportCheckItem.from_alipay_dict(i))
+    @property
+    def question_code(self):
+        return self._question_code
+
+    @question_code.setter
+    def question_code(self, value):
+        self._question_code = value
 
 
     def to_alipay_dict(self):
@@ -51,6 +59,11 @@ class RecycleQcReportCheckItems(object):
                 params['items'] = self.items.to_alipay_dict()
             else:
                 params['items'] = self.items
+        if self.question_code:
+            if hasattr(self.question_code, 'to_alipay_dict'):
+                params['question_code'] = self.question_code.to_alipay_dict()
+            else:
+                params['question_code'] = self.question_code
         return params
 
     @staticmethod
@@ -62,6 +75,8 @@ class RecycleQcReportCheckItems(object):
             o.attr_name = d['attr_name']
         if 'items' in d:
             o.items = d['items']
+        if 'question_code' in d:
+            o.question_code = d['question_code']
         return o
 
 

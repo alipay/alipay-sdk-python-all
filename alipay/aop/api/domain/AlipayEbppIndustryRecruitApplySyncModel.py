@@ -21,7 +21,9 @@ class AlipayEbppIndustryRecruitApplySyncModel(object):
         self._iot_sn = None
         self._out_apply_id = None
         self._out_job_id = None
+        self._out_user_id = None
         self._server_apply_url = None
+        self._source = None
 
     @property
     def apply_change_time(self):
@@ -115,12 +117,26 @@ class AlipayEbppIndustryRecruitApplySyncModel(object):
     def out_job_id(self, value):
         self._out_job_id = value
     @property
+    def out_user_id(self):
+        return self._out_user_id
+
+    @out_user_id.setter
+    def out_user_id(self, value):
+        self._out_user_id = value
+    @property
     def server_apply_url(self):
         return self._server_apply_url
 
     @server_apply_url.setter
     def server_apply_url(self, value):
         self._server_apply_url = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -190,11 +206,21 @@ class AlipayEbppIndustryRecruitApplySyncModel(object):
                 params['out_job_id'] = self.out_job_id.to_alipay_dict()
             else:
                 params['out_job_id'] = self.out_job_id
+        if self.out_user_id:
+            if hasattr(self.out_user_id, 'to_alipay_dict'):
+                params['out_user_id'] = self.out_user_id.to_alipay_dict()
+            else:
+                params['out_user_id'] = self.out_user_id
         if self.server_apply_url:
             if hasattr(self.server_apply_url, 'to_alipay_dict'):
                 params['server_apply_url'] = self.server_apply_url.to_alipay_dict()
             else:
                 params['server_apply_url'] = self.server_apply_url
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -228,8 +254,12 @@ class AlipayEbppIndustryRecruitApplySyncModel(object):
             o.out_apply_id = d['out_apply_id']
         if 'out_job_id' in d:
             o.out_job_id = d['out_job_id']
+        if 'out_user_id' in d:
+            o.out_user_id = d['out_user_id']
         if 'server_apply_url' in d:
             o.server_apply_url = d['server_apply_url']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

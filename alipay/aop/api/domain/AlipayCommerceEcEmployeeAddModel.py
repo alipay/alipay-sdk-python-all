@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
+        self._accounting_entity_ids = None
         self._create_share_code = None
         self._department_ids = None
         self._employee_cert_no = None
@@ -25,12 +26,23 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._identity_type = None
         self._iot_check_type = None
         self._iot_vid = None
+        self._label_names = None
         self._profiles = None
         self._role_list = None
         self._sign_return_url = None
         self._sign_url_carry_info = None
         self._withholding_sign_str = None
 
+    @property
+    def accounting_entity_ids(self):
+        return self._accounting_entity_ids
+
+    @accounting_entity_ids.setter
+    def accounting_entity_ids(self, value):
+        if isinstance(value, list):
+            self._accounting_entity_ids = list()
+            for i in value:
+                self._accounting_entity_ids.append(i)
     @property
     def create_share_code(self):
         return self._create_share_code
@@ -154,6 +166,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def iot_vid(self, value):
         self._iot_vid = value
     @property
+    def label_names(self):
+        return self._label_names
+
+    @label_names.setter
+    def label_names(self, value):
+        if isinstance(value, list):
+            self._label_names = list()
+            for i in value:
+                self._label_names.append(i)
+    @property
     def profiles(self):
         return self._profiles
 
@@ -195,6 +217,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accounting_entity_ids:
+            if isinstance(self.accounting_entity_ids, list):
+                for i in range(0, len(self.accounting_entity_ids)):
+                    element = self.accounting_entity_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.accounting_entity_ids[i] = element.to_alipay_dict()
+            if hasattr(self.accounting_entity_ids, 'to_alipay_dict'):
+                params['accounting_entity_ids'] = self.accounting_entity_ids.to_alipay_dict()
+            else:
+                params['accounting_entity_ids'] = self.accounting_entity_ids
         if self.create_share_code:
             if hasattr(self.create_share_code, 'to_alipay_dict'):
                 params['create_share_code'] = self.create_share_code.to_alipay_dict()
@@ -285,6 +317,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
             else:
                 params['iot_vid'] = self.iot_vid
+        if self.label_names:
+            if isinstance(self.label_names, list):
+                for i in range(0, len(self.label_names)):
+                    element = self.label_names[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.label_names[i] = element.to_alipay_dict()
+            if hasattr(self.label_names, 'to_alipay_dict'):
+                params['label_names'] = self.label_names.to_alipay_dict()
+            else:
+                params['label_names'] = self.label_names
         if self.profiles:
             if hasattr(self.profiles, 'to_alipay_dict'):
                 params['profiles'] = self.profiles.to_alipay_dict()
@@ -322,6 +364,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEmployeeAddModel()
+        if 'accounting_entity_ids' in d:
+            o.accounting_entity_ids = d['accounting_entity_ids']
         if 'create_share_code' in d:
             o.create_share_code = d['create_share_code']
         if 'department_ids' in d:
@@ -356,6 +400,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.iot_check_type = d['iot_check_type']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
+        if 'label_names' in d:
+            o.label_names = d['label_names']
         if 'profiles' in d:
             o.profiles = d['profiles']
         if 'role_list' in d:

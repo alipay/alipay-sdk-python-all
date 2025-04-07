@@ -11,6 +11,7 @@ class AlipayOverseasOpenAccountConsultModel(object):
         self._account_name = None
         self._account_no = None
         self._bank_code = None
+        self._biller_code = None
         self._country = None
         self._receipt_method = None
         self._school_id = None
@@ -37,6 +38,13 @@ class AlipayOverseasOpenAccountConsultModel(object):
     @bank_code.setter
     def bank_code(self, value):
         self._bank_code = value
+    @property
+    def biller_code(self):
+        return self._biller_code
+
+    @biller_code.setter
+    def biller_code(self, value):
+        self._biller_code = value
     @property
     def country(self):
         return self._country
@@ -84,6 +92,11 @@ class AlipayOverseasOpenAccountConsultModel(object):
                 params['bank_code'] = self.bank_code.to_alipay_dict()
             else:
                 params['bank_code'] = self.bank_code
+        if self.biller_code:
+            if hasattr(self.biller_code, 'to_alipay_dict'):
+                params['biller_code'] = self.biller_code.to_alipay_dict()
+            else:
+                params['biller_code'] = self.biller_code
         if self.country:
             if hasattr(self.country, 'to_alipay_dict'):
                 params['country'] = self.country.to_alipay_dict()
@@ -117,6 +130,8 @@ class AlipayOverseasOpenAccountConsultModel(object):
             o.account_no = d['account_no']
         if 'bank_code' in d:
             o.bank_code = d['bank_code']
+        if 'biller_code' in d:
+            o.biller_code = d['biller_code']
         if 'country' in d:
             o.country = d['country']
         if 'receipt_method' in d:

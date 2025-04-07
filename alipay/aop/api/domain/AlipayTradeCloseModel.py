@@ -3,15 +3,27 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CloseExtendParams import CloseExtendParams
 
 
 class AlipayTradeCloseModel(object):
 
     def __init__(self):
+        self._extend_params = None
         self._operator_id = None
         self._out_trade_no = None
         self._trade_no = None
 
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, CloseExtendParams):
+            self._extend_params = value
+        else:
+            self._extend_params = CloseExtendParams.from_alipay_dict(value)
     @property
     def operator_id(self):
         return self._operator_id
@@ -37,6 +49,11 @@ class AlipayTradeCloseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -59,6 +76,8 @@ class AlipayTradeCloseModel(object):
         if not d:
             return None
         o = AlipayTradeCloseModel()
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'out_trade_no' in d:

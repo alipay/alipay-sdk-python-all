@@ -16,11 +16,13 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
         self._out_attendance_ids = None
         self._out_job_id = None
         self._out_settlement_id = None
+        self._out_user_id = None
         self._real_attendance_time = None
         self._real_settle_amount = None
         self._server_settlement_url = None
         self._settle_amount = None
         self._settle_status = None
+        self._source = None
 
     @property
     def attendance_time(self):
@@ -82,6 +84,13 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
     def out_settlement_id(self, value):
         self._out_settlement_id = value
     @property
+    def out_user_id(self):
+        return self._out_user_id
+
+    @out_user_id.setter
+    def out_user_id(self, value):
+        self._out_user_id = value
+    @property
     def real_attendance_time(self):
         return self._real_attendance_time
 
@@ -116,6 +125,13 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
     @settle_status.setter
     def settle_status(self, value):
         self._settle_status = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -165,6 +181,11 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
                 params['out_settlement_id'] = self.out_settlement_id.to_alipay_dict()
             else:
                 params['out_settlement_id'] = self.out_settlement_id
+        if self.out_user_id:
+            if hasattr(self.out_user_id, 'to_alipay_dict'):
+                params['out_user_id'] = self.out_user_id.to_alipay_dict()
+            else:
+                params['out_user_id'] = self.out_user_id
         if self.real_attendance_time:
             if hasattr(self.real_attendance_time, 'to_alipay_dict'):
                 params['real_attendance_time'] = self.real_attendance_time.to_alipay_dict()
@@ -190,6 +211,11 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
                 params['settle_status'] = self.settle_status.to_alipay_dict()
             else:
                 params['settle_status'] = self.settle_status
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -213,6 +239,8 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
             o.out_job_id = d['out_job_id']
         if 'out_settlement_id' in d:
             o.out_settlement_id = d['out_settlement_id']
+        if 'out_user_id' in d:
+            o.out_user_id = d['out_user_id']
         if 'real_attendance_time' in d:
             o.real_attendance_time = d['real_attendance_time']
         if 'real_settle_amount' in d:
@@ -223,6 +251,8 @@ class AlipayEbppIndustryRecruitSettlementSyncModel(object):
             o.settle_amount = d['settle_amount']
         if 'settle_status' in d:
             o.settle_status = d['settle_status']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

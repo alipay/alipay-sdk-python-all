@@ -12,6 +12,9 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
         self._agent_id = None
         self._config_version = None
         self._inputs = None
+        self._latitude = None
+        self._llm_thinking = None
+        self._longitude = None
         self._multi_modal_inputs = None
         self._outer_user_id = None
         self._query = None
@@ -39,6 +42,27 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
     @inputs.setter
     def inputs(self, value):
         self._inputs = value
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def llm_thinking(self):
+        return self._llm_thinking
+
+    @llm_thinking.setter
+    def llm_thinking(self, value):
+        self._llm_thinking = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
     @property
     def multi_modal_inputs(self):
         return self._multi_modal_inputs
@@ -96,6 +120,21 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
                 params['inputs'] = self.inputs.to_alipay_dict()
             else:
                 params['inputs'] = self.inputs
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
+        if self.llm_thinking:
+            if hasattr(self.llm_thinking, 'to_alipay_dict'):
+                params['llm_thinking'] = self.llm_thinking.to_alipay_dict()
+            else:
+                params['llm_thinking'] = self.llm_thinking
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
         if self.multi_modal_inputs:
             if hasattr(self.multi_modal_inputs, 'to_alipay_dict'):
                 params['multi_modal_inputs'] = self.multi_modal_inputs.to_alipay_dict()
@@ -134,6 +173,12 @@ class AlipayCloudNextbuilderAgentChatGenerateModel(object):
             o.config_version = d['config_version']
         if 'inputs' in d:
             o.inputs = d['inputs']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
+        if 'llm_thinking' in d:
+            o.llm_thinking = d['llm_thinking']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
         if 'multi_modal_inputs' in d:
             o.multi_modal_inputs = d['multi_modal_inputs']
         if 'outer_user_id' in d:

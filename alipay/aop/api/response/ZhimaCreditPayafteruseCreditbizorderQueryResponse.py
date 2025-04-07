@@ -15,6 +15,7 @@ class ZhimaCreditPayafteruseCreditbizorderQueryResponse(AlipayResponse):
         self._order_status = None
         self._product_code = None
         self._total_amount = None
+        self._total_credit_pay_amount = None
         self._trade_no = None
         self._zm_service_id = None
 
@@ -61,6 +62,13 @@ class ZhimaCreditPayafteruseCreditbizorderQueryResponse(AlipayResponse):
     def total_amount(self, value):
         self._total_amount = value
     @property
+    def total_credit_pay_amount(self):
+        return self._total_credit_pay_amount
+
+    @total_credit_pay_amount.setter
+    def total_credit_pay_amount(self, value):
+        self._total_credit_pay_amount = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -89,6 +97,8 @@ class ZhimaCreditPayafteruseCreditbizorderQueryResponse(AlipayResponse):
             self.product_code = response['product_code']
         if 'total_amount' in response:
             self.total_amount = response['total_amount']
+        if 'total_credit_pay_amount' in response:
+            self.total_credit_pay_amount = response['total_credit_pay_amount']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
         if 'zm_service_id' in response:
