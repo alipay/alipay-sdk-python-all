@@ -27,6 +27,8 @@ class MiniGoodsDetailInfoDTO(object):
         self._item_cnt = None
         self._item_condition = None
         self._item_discount = None
+        self._item_fineness = None
+        self._item_fineness_grade = None
         self._item_installment_info = None
         self._max_sale_price = None
         self._min_sale_price = None
@@ -141,6 +143,20 @@ class MiniGoodsDetailInfoDTO(object):
     @item_discount.setter
     def item_discount(self, value):
         self._item_discount = value
+    @property
+    def item_fineness(self):
+        return self._item_fineness
+
+    @item_fineness.setter
+    def item_fineness(self, value):
+        self._item_fineness = value
+    @property
+    def item_fineness_grade(self):
+        return self._item_fineness_grade
+
+    @item_fineness_grade.setter
+    def item_fineness_grade(self, value):
+        self._item_fineness_grade = value
     @property
     def item_installment_info(self):
         return self._item_installment_info
@@ -318,6 +334,16 @@ class MiniGoodsDetailInfoDTO(object):
                 params['item_discount'] = self.item_discount.to_alipay_dict()
             else:
                 params['item_discount'] = self.item_discount
+        if self.item_fineness:
+            if hasattr(self.item_fineness, 'to_alipay_dict'):
+                params['item_fineness'] = self.item_fineness.to_alipay_dict()
+            else:
+                params['item_fineness'] = self.item_fineness
+        if self.item_fineness_grade:
+            if hasattr(self.item_fineness_grade, 'to_alipay_dict'):
+                params['item_fineness_grade'] = self.item_fineness_grade.to_alipay_dict()
+            else:
+                params['item_fineness_grade'] = self.item_fineness_grade
         if self.item_installment_info:
             if hasattr(self.item_installment_info, 'to_alipay_dict'):
                 params['item_installment_info'] = self.item_installment_info.to_alipay_dict()
@@ -416,6 +442,10 @@ class MiniGoodsDetailInfoDTO(object):
             o.item_condition = d['item_condition']
         if 'item_discount' in d:
             o.item_discount = d['item_discount']
+        if 'item_fineness' in d:
+            o.item_fineness = d['item_fineness']
+        if 'item_fineness_grade' in d:
+            o.item_fineness_grade = d['item_fineness_grade']
         if 'item_installment_info' in d:
             o.item_installment_info = d['item_installment_info']
         if 'max_sale_price' in d:

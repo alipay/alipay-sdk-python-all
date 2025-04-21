@@ -13,6 +13,7 @@ class GroupInstanceInfoVO(object):
     def __init__(self):
         self._auto_create_group_instance = None
         self._forbid_admin_chat = None
+        self._forbid_join_multiple_group_chat = None
         self._forbid_member_chat = None
         self._gmt_create = None
         self._group_id = None
@@ -41,6 +42,13 @@ class GroupInstanceInfoVO(object):
     @forbid_admin_chat.setter
     def forbid_admin_chat(self, value):
         self._forbid_admin_chat = value
+    @property
+    def forbid_join_multiple_group_chat(self):
+        return self._forbid_join_multiple_group_chat
+
+    @forbid_join_multiple_group_chat.setter
+    def forbid_join_multiple_group_chat(self, value):
+        self._forbid_join_multiple_group_chat = value
     @property
     def forbid_member_chat(self):
         return self._forbid_member_chat
@@ -161,6 +169,11 @@ class GroupInstanceInfoVO(object):
                 params['forbid_admin_chat'] = self.forbid_admin_chat.to_alipay_dict()
             else:
                 params['forbid_admin_chat'] = self.forbid_admin_chat
+        if self.forbid_join_multiple_group_chat:
+            if hasattr(self.forbid_join_multiple_group_chat, 'to_alipay_dict'):
+                params['forbid_join_multiple_group_chat'] = self.forbid_join_multiple_group_chat.to_alipay_dict()
+            else:
+                params['forbid_join_multiple_group_chat'] = self.forbid_join_multiple_group_chat
         if self.forbid_member_chat:
             if hasattr(self.forbid_member_chat, 'to_alipay_dict'):
                 params['forbid_member_chat'] = self.forbid_member_chat.to_alipay_dict()
@@ -247,6 +260,8 @@ class GroupInstanceInfoVO(object):
             o.auto_create_group_instance = d['auto_create_group_instance']
         if 'forbid_admin_chat' in d:
             o.forbid_admin_chat = d['forbid_admin_chat']
+        if 'forbid_join_multiple_group_chat' in d:
+            o.forbid_join_multiple_group_chat = d['forbid_join_multiple_group_chat']
         if 'forbid_member_chat' in d:
             o.forbid_member_chat = d['forbid_member_chat']
         if 'gmt_create' in d:

@@ -16,8 +16,10 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         self._biz_info = None
         self._out_trade_no = None
         self._scene_code = None
+        self._delivery_list_content = None
         self._evidentiary_content = None
         self._invoice_content = None
+        self._sales_list_content = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -65,6 +67,15 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         self._scene_code = value
 
     @property
+    def delivery_list_content(self):
+        return self._delivery_list_content
+
+    @delivery_list_content.setter
+    def delivery_list_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._delivery_list_content = value
+    @property
     def evidentiary_content(self):
         return self._evidentiary_content
 
@@ -82,6 +93,15 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         if not isinstance(value, FileItem):
             return
         self._invoice_content = value
+    @property
+    def sales_list_content(self):
+        return self._sales_list_content
+
+    @sales_list_content.setter
+    def sales_list_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._sales_list_content = value
 
     @property
     def version(self):
@@ -196,8 +216,12 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.delivery_list_content:
+            multipart_params['delivery_list_content'] = self.delivery_list_content
         if self.evidentiary_content:
             multipart_params['evidentiary_content'] = self.evidentiary_content
         if self.invoice_content:
             multipart_params['invoice_content'] = self.invoice_content
+        if self.sales_list_content:
+            multipart_params['sales_list_content'] = self.sales_list_content
         return multipart_params

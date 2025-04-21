@@ -13,9 +13,11 @@ class AlipayOpenMiniAmpeChatSendModel(object):
         self._ampe_product_id = None
         self._intent_code = None
         self._locations = None
+        self._open_id = None
         self._query = None
         self._req_no = None
         self._session_id = None
+        self._user_id = None
         self._user_key = None
 
     @property
@@ -53,6 +55,13 @@ class AlipayOpenMiniAmpeChatSendModel(object):
                 else:
                     self._locations.append(ChatLocation.from_alipay_dict(i))
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def query(self):
         return self._query
 
@@ -73,6 +82,13 @@ class AlipayOpenMiniAmpeChatSendModel(object):
     @session_id.setter
     def session_id(self, value):
         self._session_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
     @property
     def user_key(self):
         return self._user_key
@@ -109,6 +125,11 @@ class AlipayOpenMiniAmpeChatSendModel(object):
                 params['locations'] = self.locations.to_alipay_dict()
             else:
                 params['locations'] = self.locations
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.query:
             if hasattr(self.query, 'to_alipay_dict'):
                 params['query'] = self.query.to_alipay_dict()
@@ -124,6 +145,11 @@ class AlipayOpenMiniAmpeChatSendModel(object):
                 params['session_id'] = self.session_id.to_alipay_dict()
             else:
                 params['session_id'] = self.session_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         if self.user_key:
             if hasattr(self.user_key, 'to_alipay_dict'):
                 params['user_key'] = self.user_key.to_alipay_dict()
@@ -144,12 +170,16 @@ class AlipayOpenMiniAmpeChatSendModel(object):
             o.intent_code = d['intent_code']
         if 'locations' in d:
             o.locations = d['locations']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'query' in d:
             o.query = d['query']
         if 'req_no' in d:
             o.req_no = d['req_no']
         if 'session_id' in d:
             o.session_id = d['session_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         if 'user_key' in d:
             o.user_key = d['user_key']
         return o

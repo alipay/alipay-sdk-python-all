@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDirectModifySku import ItemDirectModifySku
 
 
 class AlipayOpenAppItemDirectModifyModel(object):
 
     def __init__(self):
+        self._attrs = None
         self._item_id = None
         self._original_price = None
         self._out_item_id = None
@@ -17,6 +19,19 @@ class AlipayOpenAppItemDirectModifyModel(object):
         self._skus = None
         self._stock_num = None
 
+    @property
+    def attrs(self):
+        return self._attrs
+
+    @attrs.setter
+    def attrs(self, value):
+        if isinstance(value, list):
+            self._attrs = list()
+            for i in value:
+                if isinstance(i, AppItemAttrVO):
+                    self._attrs.append(i)
+                else:
+                    self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
     @property
     def item_id(self):
         return self._item_id
@@ -76,6 +91,16 @@ class AlipayOpenAppItemDirectModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.attrs:
+            if isinstance(self.attrs, list):
+                for i in range(0, len(self.attrs)):
+                    element = self.attrs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.attrs[i] = element.to_alipay_dict()
+            if hasattr(self.attrs, 'to_alipay_dict'):
+                params['attrs'] = self.attrs.to_alipay_dict()
+            else:
+                params['attrs'] = self.attrs
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -123,6 +148,8 @@ class AlipayOpenAppItemDirectModifyModel(object):
         if not d:
             return None
         o = AlipayOpenAppItemDirectModifyModel()
+        if 'attrs' in d:
+            o.attrs = d['attrs']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'original_price' in d:

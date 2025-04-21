@@ -10,14 +10,20 @@ class InputInvoiceRegisterOpenApiDTO(object):
 
     def __init__(self):
         self._amount = None
+        self._ant_group_register_flag = None
         self._authorized_dealer = None
+        self._certify_deduct_flag = None
         self._check_sum = None
         self._cipher_text = None
         self._currency = None
+        self._development_fund = None
         self._effective_tax_amount = None
         self._electronic_type = None
         self._excluding_tax_amount = None
+        self._fare = None
         self._file_download_http_url = None
+        self._fuel_surcharge = None
+        self._full_elc_flag = None
         self._image_file_name = None
         self._invoice_code = None
         self._invoice_date = None
@@ -66,12 +72,26 @@ class InputInvoiceRegisterOpenApiDTO(object):
     def amount(self, value):
         self._amount = value
     @property
+    def ant_group_register_flag(self):
+        return self._ant_group_register_flag
+
+    @ant_group_register_flag.setter
+    def ant_group_register_flag(self, value):
+        self._ant_group_register_flag = value
+    @property
     def authorized_dealer(self):
         return self._authorized_dealer
 
     @authorized_dealer.setter
     def authorized_dealer(self, value):
         self._authorized_dealer = value
+    @property
+    def certify_deduct_flag(self):
+        return self._certify_deduct_flag
+
+    @certify_deduct_flag.setter
+    def certify_deduct_flag(self, value):
+        self._certify_deduct_flag = value
     @property
     def check_sum(self):
         return self._check_sum
@@ -94,6 +114,13 @@ class InputInvoiceRegisterOpenApiDTO(object):
     def currency(self, value):
         self._currency = value
     @property
+    def development_fund(self):
+        return self._development_fund
+
+    @development_fund.setter
+    def development_fund(self, value):
+        self._development_fund = value
+    @property
     def effective_tax_amount(self):
         return self._effective_tax_amount
 
@@ -115,12 +142,33 @@ class InputInvoiceRegisterOpenApiDTO(object):
     def excluding_tax_amount(self, value):
         self._excluding_tax_amount = value
     @property
+    def fare(self):
+        return self._fare
+
+    @fare.setter
+    def fare(self, value):
+        self._fare = value
+    @property
     def file_download_http_url(self):
         return self._file_download_http_url
 
     @file_download_http_url.setter
     def file_download_http_url(self, value):
         self._file_download_http_url = value
+    @property
+    def fuel_surcharge(self):
+        return self._fuel_surcharge
+
+    @fuel_surcharge.setter
+    def fuel_surcharge(self, value):
+        self._fuel_surcharge = value
+    @property
+    def full_elc_flag(self):
+        return self._full_elc_flag
+
+    @full_elc_flag.setter
+    def full_elc_flag(self, value):
+        self._full_elc_flag = value
     @property
     def image_file_name(self):
         return self._image_file_name
@@ -409,11 +457,21 @@ class InputInvoiceRegisterOpenApiDTO(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.ant_group_register_flag:
+            if hasattr(self.ant_group_register_flag, 'to_alipay_dict'):
+                params['ant_group_register_flag'] = self.ant_group_register_flag.to_alipay_dict()
+            else:
+                params['ant_group_register_flag'] = self.ant_group_register_flag
         if self.authorized_dealer:
             if hasattr(self.authorized_dealer, 'to_alipay_dict'):
                 params['authorized_dealer'] = self.authorized_dealer.to_alipay_dict()
             else:
                 params['authorized_dealer'] = self.authorized_dealer
+        if self.certify_deduct_flag:
+            if hasattr(self.certify_deduct_flag, 'to_alipay_dict'):
+                params['certify_deduct_flag'] = self.certify_deduct_flag.to_alipay_dict()
+            else:
+                params['certify_deduct_flag'] = self.certify_deduct_flag
         if self.check_sum:
             if hasattr(self.check_sum, 'to_alipay_dict'):
                 params['check_sum'] = self.check_sum.to_alipay_dict()
@@ -429,6 +487,11 @@ class InputInvoiceRegisterOpenApiDTO(object):
                 params['currency'] = self.currency.to_alipay_dict()
             else:
                 params['currency'] = self.currency
+        if self.development_fund:
+            if hasattr(self.development_fund, 'to_alipay_dict'):
+                params['development_fund'] = self.development_fund.to_alipay_dict()
+            else:
+                params['development_fund'] = self.development_fund
         if self.effective_tax_amount:
             if hasattr(self.effective_tax_amount, 'to_alipay_dict'):
                 params['effective_tax_amount'] = self.effective_tax_amount.to_alipay_dict()
@@ -444,11 +507,26 @@ class InputInvoiceRegisterOpenApiDTO(object):
                 params['excluding_tax_amount'] = self.excluding_tax_amount.to_alipay_dict()
             else:
                 params['excluding_tax_amount'] = self.excluding_tax_amount
+        if self.fare:
+            if hasattr(self.fare, 'to_alipay_dict'):
+                params['fare'] = self.fare.to_alipay_dict()
+            else:
+                params['fare'] = self.fare
         if self.file_download_http_url:
             if hasattr(self.file_download_http_url, 'to_alipay_dict'):
                 params['file_download_http_url'] = self.file_download_http_url.to_alipay_dict()
             else:
                 params['file_download_http_url'] = self.file_download_http_url
+        if self.fuel_surcharge:
+            if hasattr(self.fuel_surcharge, 'to_alipay_dict'):
+                params['fuel_surcharge'] = self.fuel_surcharge.to_alipay_dict()
+            else:
+                params['fuel_surcharge'] = self.fuel_surcharge
+        if self.full_elc_flag:
+            if hasattr(self.full_elc_flag, 'to_alipay_dict'):
+                params['full_elc_flag'] = self.full_elc_flag.to_alipay_dict()
+            else:
+                params['full_elc_flag'] = self.full_elc_flag
         if self.image_file_name:
             if hasattr(self.image_file_name, 'to_alipay_dict'):
                 params['image_file_name'] = self.image_file_name.to_alipay_dict()
@@ -658,22 +736,34 @@ class InputInvoiceRegisterOpenApiDTO(object):
         o = InputInvoiceRegisterOpenApiDTO()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'ant_group_register_flag' in d:
+            o.ant_group_register_flag = d['ant_group_register_flag']
         if 'authorized_dealer' in d:
             o.authorized_dealer = d['authorized_dealer']
+        if 'certify_deduct_flag' in d:
+            o.certify_deduct_flag = d['certify_deduct_flag']
         if 'check_sum' in d:
             o.check_sum = d['check_sum']
         if 'cipher_text' in d:
             o.cipher_text = d['cipher_text']
         if 'currency' in d:
             o.currency = d['currency']
+        if 'development_fund' in d:
+            o.development_fund = d['development_fund']
         if 'effective_tax_amount' in d:
             o.effective_tax_amount = d['effective_tax_amount']
         if 'electronic_type' in d:
             o.electronic_type = d['electronic_type']
         if 'excluding_tax_amount' in d:
             o.excluding_tax_amount = d['excluding_tax_amount']
+        if 'fare' in d:
+            o.fare = d['fare']
         if 'file_download_http_url' in d:
             o.file_download_http_url = d['file_download_http_url']
+        if 'fuel_surcharge' in d:
+            o.fuel_surcharge = d['fuel_surcharge']
+        if 'full_elc_flag' in d:
+            o.full_elc_flag = d['full_elc_flag']
         if 'image_file_name' in d:
             o.image_file_name = d['image_file_name']
         if 'invoice_code' in d:

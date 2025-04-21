@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
 
     def __init__(self):
+        self._business_license_no = None
         self._buyer_alipay_id = None
         self._buyer_open_id = None
         self._list_type = None
         self._pd_code = None
         self._seller_login_id = None
 
+    @property
+    def business_license_no(self):
+        return self._business_license_no
+
+    @business_license_no.setter
+    def business_license_no(self, value):
+        self._business_license_no = value
     @property
     def buyer_alipay_id(self):
         return self._buyer_alipay_id
@@ -53,6 +61,11 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_license_no:
+            if hasattr(self.business_license_no, 'to_alipay_dict'):
+                params['business_license_no'] = self.business_license_no.to_alipay_dict()
+            else:
+                params['business_license_no'] = self.business_license_no
         if self.buyer_alipay_id:
             if hasattr(self.buyer_alipay_id, 'to_alipay_dict'):
                 params['buyer_alipay_id'] = self.buyer_alipay_id.to_alipay_dict()
@@ -85,6 +98,8 @@ class MybankCreditSupplychainFactoringSelleradmitQueryModel(object):
         if not d:
             return None
         o = MybankCreditSupplychainFactoringSelleradmitQueryModel()
+        if 'business_license_no' in d:
+            o.business_license_no = d['business_license_no']
         if 'buyer_alipay_id' in d:
             o.buyer_alipay_id = d['buyer_alipay_id']
         if 'buyer_open_id' in d:

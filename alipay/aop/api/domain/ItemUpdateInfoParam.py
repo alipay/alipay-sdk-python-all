@@ -9,6 +9,8 @@ from alipay.aop.api.domain.SkuUpdateInfoParam import SkuUpdateInfoParam
 class ItemUpdateInfoParam(object):
 
     def __init__(self):
+        self._disease_code = None
+        self._disease_name = None
         self._insurance = None
         self._insurance_code = None
         self._item_code = None
@@ -16,6 +18,20 @@ class ItemUpdateInfoParam(object):
         self._status = None
         self._tag_code = None
 
+    @property
+    def disease_code(self):
+        return self._disease_code
+
+    @disease_code.setter
+    def disease_code(self, value):
+        self._disease_code = value
+    @property
+    def disease_name(self):
+        return self._disease_name
+
+    @disease_name.setter
+    def disease_name(self, value):
+        self._disease_name = value
     @property
     def insurance(self):
         return self._insurance
@@ -68,6 +84,16 @@ class ItemUpdateInfoParam(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.disease_code:
+            if hasattr(self.disease_code, 'to_alipay_dict'):
+                params['disease_code'] = self.disease_code.to_alipay_dict()
+            else:
+                params['disease_code'] = self.disease_code
+        if self.disease_name:
+            if hasattr(self.disease_name, 'to_alipay_dict'):
+                params['disease_name'] = self.disease_name.to_alipay_dict()
+            else:
+                params['disease_name'] = self.disease_name
         if self.insurance:
             if hasattr(self.insurance, 'to_alipay_dict'):
                 params['insurance'] = self.insurance.to_alipay_dict()
@@ -110,6 +136,10 @@ class ItemUpdateInfoParam(object):
         if not d:
             return None
         o = ItemUpdateInfoParam()
+        if 'disease_code' in d:
+            o.disease_code = d['disease_code']
+        if 'disease_name' in d:
+            o.disease_name = d['disease_name']
         if 'insurance' in d:
             o.insurance = d['insurance']
         if 'insurance_code' in d:

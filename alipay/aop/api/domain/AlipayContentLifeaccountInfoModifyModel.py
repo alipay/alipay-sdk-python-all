@@ -9,6 +9,7 @@ class AlipayContentLifeaccountInfoModifyModel(object):
 
     def __init__(self):
         self._doctor_desc = None
+        self._hdf_id_encrypted = None
         self._logo_url = None
         self._public_desc = None
         self._public_id = None
@@ -21,6 +22,13 @@ class AlipayContentLifeaccountInfoModifyModel(object):
     @doctor_desc.setter
     def doctor_desc(self, value):
         self._doctor_desc = value
+    @property
+    def hdf_id_encrypted(self):
+        return self._hdf_id_encrypted
+
+    @hdf_id_encrypted.setter
+    def hdf_id_encrypted(self, value):
+        self._hdf_id_encrypted = value
     @property
     def logo_url(self):
         return self._logo_url
@@ -58,6 +66,11 @@ class AlipayContentLifeaccountInfoModifyModel(object):
                 params['doctor_desc'] = self.doctor_desc.to_alipay_dict()
             else:
                 params['doctor_desc'] = self.doctor_desc
+        if self.hdf_id_encrypted:
+            if hasattr(self.hdf_id_encrypted, 'to_alipay_dict'):
+                params['hdf_id_encrypted'] = self.hdf_id_encrypted.to_alipay_dict()
+            else:
+                params['hdf_id_encrypted'] = self.hdf_id_encrypted
         if self.logo_url:
             if hasattr(self.logo_url, 'to_alipay_dict'):
                 params['logo_url'] = self.logo_url.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayContentLifeaccountInfoModifyModel(object):
         o = AlipayContentLifeaccountInfoModifyModel()
         if 'doctor_desc' in d:
             o.doctor_desc = d['doctor_desc']
+        if 'hdf_id_encrypted' in d:
+            o.hdf_id_encrypted = d['hdf_id_encrypted']
         if 'logo_url' in d:
             o.logo_url = d['logo_url']
         if 'public_desc' in d:

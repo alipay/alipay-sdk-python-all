@@ -34,6 +34,7 @@ class OrderDataSyncRequest(object):
         self._refund_price = None
         self._refund_time = None
         self._remain_count = None
+        self._smid = None
         self._solution_type = None
         self._status = None
         self._total_count = None
@@ -224,6 +225,13 @@ class OrderDataSyncRequest(object):
     def remain_count(self, value):
         self._remain_count = value
     @property
+    def smid(self):
+        return self._smid
+
+    @smid.setter
+    def smid(self, value):
+        self._smid = value
+    @property
     def solution_type(self):
         return self._solution_type
 
@@ -406,6 +414,11 @@ class OrderDataSyncRequest(object):
                 params['remain_count'] = self.remain_count.to_alipay_dict()
             else:
                 params['remain_count'] = self.remain_count
+        if self.smid:
+            if hasattr(self.smid, 'to_alipay_dict'):
+                params['smid'] = self.smid.to_alipay_dict()
+            else:
+                params['smid'] = self.smid
         if self.solution_type:
             if hasattr(self.solution_type, 'to_alipay_dict'):
                 params['solution_type'] = self.solution_type.to_alipay_dict()
@@ -498,6 +511,8 @@ class OrderDataSyncRequest(object):
             o.refund_time = d['refund_time']
         if 'remain_count' in d:
             o.remain_count = d['remain_count']
+        if 'smid' in d:
+            o.smid = d['smid']
         if 'solution_type' in d:
             o.solution_type = d['solution_type']
         if 'status' in d:

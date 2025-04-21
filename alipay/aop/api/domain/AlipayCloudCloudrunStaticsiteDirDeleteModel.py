@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudCloudrunStaticsiteDirDeleteModel(object):
 
     def __init__(self):
+        self._assume_token = None
         self._dir_name = None
         self._env = None
         self._path = None
 
+    @property
+    def assume_token(self):
+        return self._assume_token
+
+    @assume_token.setter
+    def assume_token(self, value):
+        self._assume_token = value
     @property
     def dir_name(self):
         return self._dir_name
@@ -37,6 +45,11 @@ class AlipayCloudCloudrunStaticsiteDirDeleteModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.assume_token:
+            if hasattr(self.assume_token, 'to_alipay_dict'):
+                params['assume_token'] = self.assume_token.to_alipay_dict()
+            else:
+                params['assume_token'] = self.assume_token
         if self.dir_name:
             if hasattr(self.dir_name, 'to_alipay_dict'):
                 params['dir_name'] = self.dir_name.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCloudCloudrunStaticsiteDirDeleteModel(object):
         if not d:
             return None
         o = AlipayCloudCloudrunStaticsiteDirDeleteModel()
+        if 'assume_token' in d:
+            o.assume_token = d['assume_token']
         if 'dir_name' in d:
             o.dir_name = d['dir_name']
         if 'env' in d:

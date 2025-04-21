@@ -9,6 +9,7 @@ class AlipayPayAppPocketmoneyPromoBatchqueryModel(object):
 
     def __init__(self):
         self._biz_no_list = None
+        self._biz_scene_list = None
         self._device_id = None
         self._extra_device_id = None
         self._os_type = None
@@ -24,6 +25,16 @@ class AlipayPayAppPocketmoneyPromoBatchqueryModel(object):
             self._biz_no_list = list()
             for i in value:
                 self._biz_no_list.append(i)
+    @property
+    def biz_scene_list(self):
+        return self._biz_scene_list
+
+    @biz_scene_list.setter
+    def biz_scene_list(self, value):
+        if isinstance(value, list):
+            self._biz_scene_list = list()
+            for i in value:
+                self._biz_scene_list.append(i)
     @property
     def device_id(self):
         return self._device_id
@@ -66,6 +77,16 @@ class AlipayPayAppPocketmoneyPromoBatchqueryModel(object):
                 params['biz_no_list'] = self.biz_no_list.to_alipay_dict()
             else:
                 params['biz_no_list'] = self.biz_no_list
+        if self.biz_scene_list:
+            if isinstance(self.biz_scene_list, list):
+                for i in range(0, len(self.biz_scene_list)):
+                    element = self.biz_scene_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.biz_scene_list[i] = element.to_alipay_dict()
+            if hasattr(self.biz_scene_list, 'to_alipay_dict'):
+                params['biz_scene_list'] = self.biz_scene_list.to_alipay_dict()
+            else:
+                params['biz_scene_list'] = self.biz_scene_list
         if self.device_id:
             if hasattr(self.device_id, 'to_alipay_dict'):
                 params['device_id'] = self.device_id.to_alipay_dict()
@@ -95,6 +116,8 @@ class AlipayPayAppPocketmoneyPromoBatchqueryModel(object):
         o = AlipayPayAppPocketmoneyPromoBatchqueryModel()
         if 'biz_no_list' in d:
             o.biz_no_list = d['biz_no_list']
+        if 'biz_scene_list' in d:
+            o.biz_scene_list = d['biz_scene_list']
         if 'device_id' in d:
             o.device_id = d['device_id']
         if 'extra_device_id' in d:

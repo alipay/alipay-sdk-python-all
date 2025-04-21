@@ -10,10 +10,12 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
     def __init__(self):
         self._alipay_open_id = None
         self._alipay_user_id = None
+        self._cert_no = None
         self._freeze_amount = None
         self._isp_abbr_cn = None
         self._merchant_id = None
         self._merchant_name = None
+        self._mobile = None
         self._province = None
         self._request_no = None
         self._spu_id = None
@@ -32,6 +34,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
     @property
     def freeze_amount(self):
         return self._freeze_amount
@@ -60,6 +69,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
     @merchant_name.setter
     def merchant_name(self, value):
         self._merchant_name = value
+    @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
     @property
     def province(self):
         return self._province
@@ -95,6 +111,11 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
         if self.freeze_amount:
             if hasattr(self.freeze_amount, 'to_alipay_dict'):
                 params['freeze_amount'] = self.freeze_amount.to_alipay_dict()
@@ -115,6 +136,11 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.mobile:
+            if hasattr(self.mobile, 'to_alipay_dict'):
+                params['mobile'] = self.mobile.to_alipay_dict()
+            else:
+                params['mobile'] = self.mobile
         if self.province:
             if hasattr(self.province, 'to_alipay_dict'):
                 params['province'] = self.province.to_alipay_dict()
@@ -141,6 +167,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
             o.alipay_open_id = d['alipay_open_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
         if 'freeze_amount' in d:
             o.freeze_amount = d['freeze_amount']
         if 'isp_abbr_cn' in d:
@@ -149,6 +177,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
             o.merchant_id = d['merchant_id']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'mobile' in d:
+            o.mobile = d['mobile']
         if 'province' in d:
             o.province = d['province']
         if 'request_no' in d:

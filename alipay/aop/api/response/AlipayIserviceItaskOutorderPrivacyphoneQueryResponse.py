@@ -11,6 +11,7 @@ class AlipayIserviceItaskOutorderPrivacyphoneQueryResponse(AlipayResponse):
         super(AlipayIserviceItaskOutorderPrivacyphoneQueryResponse, self).__init__()
         self._current_expire_time = None
         self._privacy_bind_phone = None
+        self._user_phone_type = None
 
     @property
     def current_expire_time(self):
@@ -26,6 +27,13 @@ class AlipayIserviceItaskOutorderPrivacyphoneQueryResponse(AlipayResponse):
     @privacy_bind_phone.setter
     def privacy_bind_phone(self, value):
         self._privacy_bind_phone = value
+    @property
+    def user_phone_type(self):
+        return self._user_phone_type
+
+    @user_phone_type.setter
+    def user_phone_type(self, value):
+        self._user_phone_type = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayIserviceItaskOutorderPrivacyphoneQueryResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayIserviceItaskOutorderPrivacyphoneQueryResponse(AlipayResponse):
             self.current_expire_time = response['current_expire_time']
         if 'privacy_bind_phone' in response:
             self.privacy_bind_phone = response['privacy_bind_phone']
+        if 'user_phone_type' in response:
+            self.user_phone_type = response['user_phone_type']

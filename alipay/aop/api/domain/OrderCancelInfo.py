@@ -10,6 +10,7 @@ class OrderCancelInfo(object):
     def __init__(self):
         self._operator = None
         self._reason = None
+        self._reason_code = None
 
     @property
     def operator(self):
@@ -25,6 +26,13 @@ class OrderCancelInfo(object):
     @reason.setter
     def reason(self, value):
         self._reason = value
+    @property
+    def reason_code(self):
+        return self._reason_code
+
+    @reason_code.setter
+    def reason_code(self, value):
+        self._reason_code = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class OrderCancelInfo(object):
                 params['reason'] = self.reason.to_alipay_dict()
             else:
                 params['reason'] = self.reason
+        if self.reason_code:
+            if hasattr(self.reason_code, 'to_alipay_dict'):
+                params['reason_code'] = self.reason_code.to_alipay_dict()
+            else:
+                params['reason_code'] = self.reason_code
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class OrderCancelInfo(object):
             o.operator = d['operator']
         if 'reason' in d:
             o.reason = d['reason']
+        if 'reason_code' in d:
+            o.reason_code = d['reason_code']
         return o
 
 

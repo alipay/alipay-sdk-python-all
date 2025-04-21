@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EduDepartmentNode import EduDepartmentNode
 from alipay.aop.api.domain.EduDepartmentNode import EduDepartmentNode
+from alipay.aop.api.domain.EduNodeInfo import EduNodeInfo
+from alipay.aop.api.domain.EduRoleInfo import EduRoleInfo
 
 
 class EduRosterInfo(object):
@@ -12,9 +14,11 @@ class EduRosterInfo(object):
     def __init__(self):
         self._bind_status = None
         self._cert_no = None
+        self._cert_no_tail = None
         self._cert_type = None
         self._department_info = None
         self._department_info_list = None
+        self._email = None
         self._employee_no = None
         self._expire_time = None
         self._gender = None
@@ -22,6 +26,8 @@ class EduRosterInfo(object):
         self._inst_name = None
         self._mobile = None
         self._name = None
+        self._node_info_list = None
+        self._role_info_list = None
         self._role_name = None
         self._role_type = None
         self._roster_id = None
@@ -40,6 +46,13 @@ class EduRosterInfo(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_no_tail(self):
+        return self._cert_no_tail
+
+    @cert_no_tail.setter
+    def cert_no_tail(self, value):
+        self._cert_no_tail = value
     @property
     def cert_type(self):
         return self._cert_type
@@ -70,6 +83,13 @@ class EduRosterInfo(object):
                     self._department_info_list.append(i)
                 else:
                     self._department_info_list.append(EduDepartmentNode.from_alipay_dict(i))
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, value):
+        self._email = value
     @property
     def employee_no(self):
         return self._employee_no
@@ -120,6 +140,32 @@ class EduRosterInfo(object):
     def name(self, value):
         self._name = value
     @property
+    def node_info_list(self):
+        return self._node_info_list
+
+    @node_info_list.setter
+    def node_info_list(self, value):
+        if isinstance(value, list):
+            self._node_info_list = list()
+            for i in value:
+                if isinstance(i, EduNodeInfo):
+                    self._node_info_list.append(i)
+                else:
+                    self._node_info_list.append(EduNodeInfo.from_alipay_dict(i))
+    @property
+    def role_info_list(self):
+        return self._role_info_list
+
+    @role_info_list.setter
+    def role_info_list(self, value):
+        if isinstance(value, list):
+            self._role_info_list = list()
+            for i in value:
+                if isinstance(i, EduRoleInfo):
+                    self._role_info_list.append(i)
+                else:
+                    self._role_info_list.append(EduRoleInfo.from_alipay_dict(i))
+    @property
     def role_name(self):
         return self._role_name
 
@@ -154,6 +200,11 @@ class EduRosterInfo(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_no_tail:
+            if hasattr(self.cert_no_tail, 'to_alipay_dict'):
+                params['cert_no_tail'] = self.cert_no_tail.to_alipay_dict()
+            else:
+                params['cert_no_tail'] = self.cert_no_tail
         if self.cert_type:
             if hasattr(self.cert_type, 'to_alipay_dict'):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
@@ -174,6 +225,11 @@ class EduRosterInfo(object):
                 params['department_info_list'] = self.department_info_list.to_alipay_dict()
             else:
                 params['department_info_list'] = self.department_info_list
+        if self.email:
+            if hasattr(self.email, 'to_alipay_dict'):
+                params['email'] = self.email.to_alipay_dict()
+            else:
+                params['email'] = self.email
         if self.employee_no:
             if hasattr(self.employee_no, 'to_alipay_dict'):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
@@ -209,6 +265,26 @@ class EduRosterInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.node_info_list:
+            if isinstance(self.node_info_list, list):
+                for i in range(0, len(self.node_info_list)):
+                    element = self.node_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.node_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.node_info_list, 'to_alipay_dict'):
+                params['node_info_list'] = self.node_info_list.to_alipay_dict()
+            else:
+                params['node_info_list'] = self.node_info_list
+        if self.role_info_list:
+            if isinstance(self.role_info_list, list):
+                for i in range(0, len(self.role_info_list)):
+                    element = self.role_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.role_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.role_info_list, 'to_alipay_dict'):
+                params['role_info_list'] = self.role_info_list.to_alipay_dict()
+            else:
+                params['role_info_list'] = self.role_info_list
         if self.role_name:
             if hasattr(self.role_name, 'to_alipay_dict'):
                 params['role_name'] = self.role_name.to_alipay_dict()
@@ -235,12 +311,16 @@ class EduRosterInfo(object):
             o.bind_status = d['bind_status']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_no_tail' in d:
+            o.cert_no_tail = d['cert_no_tail']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
         if 'department_info' in d:
             o.department_info = d['department_info']
         if 'department_info_list' in d:
             o.department_info_list = d['department_info_list']
+        if 'email' in d:
+            o.email = d['email']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
         if 'expire_time' in d:
@@ -255,6 +335,10 @@ class EduRosterInfo(object):
             o.mobile = d['mobile']
         if 'name' in d:
             o.name = d['name']
+        if 'node_info_list' in d:
+            o.node_info_list = d['node_info_list']
+        if 'role_info_list' in d:
+            o.role_info_list = d['role_info_list']
         if 'role_name' in d:
             o.role_name = d['role_name']
         if 'role_type' in d:

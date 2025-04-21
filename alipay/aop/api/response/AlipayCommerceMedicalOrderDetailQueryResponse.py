@@ -8,6 +8,7 @@ from alipay.aop.api.domain.ItemsVO import ItemsVO
 from alipay.aop.api.domain.MedicareInfoVO import MedicareInfoVO
 from alipay.aop.api.domain.OrderInfoVO import OrderInfoVO
 from alipay.aop.api.domain.PaymentVO import PaymentVO
+from alipay.aop.api.domain.PrescriptionVO import PrescriptionVO
 from alipay.aop.api.domain.StoreVO import StoreVO
 from alipay.aop.api.domain.UserSimpleVO import UserSimpleVO
 
@@ -21,6 +22,7 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
         self._medicare = None
         self._order = None
         self._payment = None
+        self._prescriptions = None
         self._store = None
         self._user = None
 
@@ -81,6 +83,19 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
         else:
             self._payment = PaymentVO.from_alipay_dict(value)
     @property
+    def prescriptions(self):
+        return self._prescriptions
+
+    @prescriptions.setter
+    def prescriptions(self, value):
+        if isinstance(value, list):
+            self._prescriptions = list()
+            for i in value:
+                if isinstance(i, PrescriptionVO):
+                    self._prescriptions.append(i)
+                else:
+                    self._prescriptions.append(PrescriptionVO.from_alipay_dict(i))
+    @property
     def store(self):
         return self._store
 
@@ -113,6 +128,8 @@ class AlipayCommerceMedicalOrderDetailQueryResponse(AlipayResponse):
             self.order = response['order']
         if 'payment' in response:
             self.payment = response['payment']
+        if 'prescriptions' in response:
+            self.prescriptions = response['prescriptions']
         if 'store' in response:
             self.store = response['store']
         if 'user' in response:

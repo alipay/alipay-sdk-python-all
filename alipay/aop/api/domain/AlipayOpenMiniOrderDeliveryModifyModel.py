@@ -32,6 +32,7 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
         self._status = None
         self._ticket_infos = None
         self._tour_info = None
+        self._user_confirm_price = None
         self._user_id = None
 
     @property
@@ -176,6 +177,13 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
         else:
             self._tour_info = TourInfoDTO.from_alipay_dict(value)
     @property
+    def user_confirm_price(self):
+        return self._user_confirm_price
+
+    @user_confirm_price.setter
+    def user_confirm_price(self, value):
+        self._user_confirm_price = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -276,6 +284,11 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
                 params['tour_info'] = self.tour_info.to_alipay_dict()
             else:
                 params['tour_info'] = self.tour_info
+        if self.user_confirm_price:
+            if hasattr(self.user_confirm_price, 'to_alipay_dict'):
+                params['user_confirm_price'] = self.user_confirm_price.to_alipay_dict()
+            else:
+                params['user_confirm_price'] = self.user_confirm_price
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -318,6 +331,8 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
             o.ticket_infos = d['ticket_infos']
         if 'tour_info' in d:
             o.tour_info = d['tour_info']
+        if 'user_confirm_price' in d:
+            o.user_confirm_price = d['user_confirm_price']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -10,6 +10,7 @@ from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
 from alipay.aop.api.domain.LandingChannelInfoVO import LandingChannelInfoVO
+from alipay.aop.api.domain.OrderCancelInfo import OrderCancelInfo
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
 from alipay.aop.api.domain.RefundInfoVO import RefundInfoVO
 from alipay.aop.api.domain.RentInfoVO import RentInfoVO
@@ -32,6 +33,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._landing_channel_info = None
         self._merchant_biz_type = None
         self._open_id = None
+        self._order_cancel_info = None
         self._order_detail = None
         self._order_id = None
         self._out_order_id = None
@@ -138,6 +140,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def order_cancel_info(self):
+        return self._order_cancel_info
+
+    @order_cancel_info.setter
+    def order_cancel_info(self, value):
+        if isinstance(value, OrderCancelInfo):
+            self._order_cancel_info = value
+        else:
+            self._order_cancel_info = OrderCancelInfo.from_alipay_dict(value)
     @property
     def order_detail(self):
         return self._order_detail
@@ -280,6 +292,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.merchant_biz_type = response['merchant_biz_type']
         if 'open_id' in response:
             self.open_id = response['open_id']
+        if 'order_cancel_info' in response:
+            self.order_cancel_info = response['order_cancel_info']
         if 'order_detail' in response:
             self.order_detail = response['order_detail']
         if 'order_id' in response:

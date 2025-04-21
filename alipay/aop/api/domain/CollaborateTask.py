@@ -24,8 +24,10 @@ class CollaborateTask(object):
         self._product_tags = None
         self._province_code = None
         self._province_name = None
+        self._sales_order_id = None
         self._shop_name = None
         self._smid_list = None
+        self._solution_id = None
         self._task_no = None
         self._task_tags = None
         self._tel = None
@@ -146,6 +148,13 @@ class CollaborateTask(object):
     def province_name(self, value):
         self._province_name = value
     @property
+    def sales_order_id(self):
+        return self._sales_order_id
+
+    @sales_order_id.setter
+    def sales_order_id(self, value):
+        self._sales_order_id = value
+    @property
     def shop_name(self):
         return self._shop_name
 
@@ -162,6 +171,13 @@ class CollaborateTask(object):
             self._smid_list = list()
             for i in value:
                 self._smid_list.append(i)
+    @property
+    def solution_id(self):
+        return self._solution_id
+
+    @solution_id.setter
+    def solution_id(self, value):
+        self._solution_id = value
     @property
     def task_no(self):
         return self._task_no
@@ -275,6 +291,11 @@ class CollaborateTask(object):
                 params['province_name'] = self.province_name.to_alipay_dict()
             else:
                 params['province_name'] = self.province_name
+        if self.sales_order_id:
+            if hasattr(self.sales_order_id, 'to_alipay_dict'):
+                params['sales_order_id'] = self.sales_order_id.to_alipay_dict()
+            else:
+                params['sales_order_id'] = self.sales_order_id
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -290,6 +311,11 @@ class CollaborateTask(object):
                 params['smid_list'] = self.smid_list.to_alipay_dict()
             else:
                 params['smid_list'] = self.smid_list
+        if self.solution_id:
+            if hasattr(self.solution_id, 'to_alipay_dict'):
+                params['solution_id'] = self.solution_id.to_alipay_dict()
+            else:
+                params['solution_id'] = self.solution_id
         if self.task_no:
             if hasattr(self.task_no, 'to_alipay_dict'):
                 params['task_no'] = self.task_no.to_alipay_dict()
@@ -349,10 +375,14 @@ class CollaborateTask(object):
             o.province_code = d['province_code']
         if 'province_name' in d:
             o.province_name = d['province_name']
+        if 'sales_order_id' in d:
+            o.sales_order_id = d['sales_order_id']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'smid_list' in d:
             o.smid_list = d['smid_list']
+        if 'solution_id' in d:
+            o.solution_id = d['solution_id']
         if 'task_no' in d:
             o.task_no = d['task_no']
         if 'task_tags' in d:

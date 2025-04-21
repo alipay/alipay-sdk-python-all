@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EnterpriseBaseInfoDTO import EnterpriseBaseInfoDTO
 from alipay.aop.api.domain.EnterpriseProfilesDTO import EnterpriseProfilesDTO
 
 
 class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
 
     def __init__(self):
+        self._base_info = None
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
@@ -17,6 +19,16 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
         self._register_mode = None
         self._sign_fund_way = None
 
+    @property
+    def base_info(self):
+        return self._base_info
+
+    @base_info.setter
+    def base_info(self, value):
+        if isinstance(value, EnterpriseBaseInfoDTO):
+            self._base_info = value
+        else:
+            self._base_info = EnterpriseBaseInfoDTO.from_alipay_dict(value)
     @property
     def identity(self):
         return self._identity
@@ -73,6 +85,11 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.base_info:
+            if hasattr(self.base_info, 'to_alipay_dict'):
+                params['base_info'] = self.base_info.to_alipay_dict()
+            else:
+                params['base_info'] = self.base_info
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -115,6 +132,8 @@ class AlipayCommerceEcEnterpriseRegisterinviteCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEnterpriseRegisterinviteCreateModel()
+        if 'base_info' in d:
+            o.base_info = d['base_info']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_open_id' in d:

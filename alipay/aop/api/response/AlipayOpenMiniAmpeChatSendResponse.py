@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AmpeDeviceInfo import AmpeDeviceInfo
 
 
 class AlipayOpenMiniAmpeChatSendResponse(AlipayResponse):
@@ -10,6 +11,7 @@ class AlipayOpenMiniAmpeChatSendResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenMiniAmpeChatSendResponse, self).__init__()
         self._content = None
+        self._device_info = None
         self._req_no = None
         self._session_id = None
 
@@ -20,6 +22,16 @@ class AlipayOpenMiniAmpeChatSendResponse(AlipayResponse):
     @content.setter
     def content(self, value):
         self._content = value
+    @property
+    def device_info(self):
+        return self._device_info
+
+    @device_info.setter
+    def device_info(self, value):
+        if isinstance(value, AmpeDeviceInfo):
+            self._device_info = value
+        else:
+            self._device_info = AmpeDeviceInfo.from_alipay_dict(value)
     @property
     def req_no(self):
         return self._req_no
@@ -39,6 +51,8 @@ class AlipayOpenMiniAmpeChatSendResponse(AlipayResponse):
         response = super(AlipayOpenMiniAmpeChatSendResponse, self).parse_response_content(response_content)
         if 'content' in response:
             self.content = response['content']
+        if 'device_info' in response:
+            self.device_info = response['device_info']
         if 'req_no' in response:
             self.req_no = response['req_no']
         if 'session_id' in response:

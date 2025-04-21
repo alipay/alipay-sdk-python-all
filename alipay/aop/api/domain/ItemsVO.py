@@ -11,7 +11,9 @@ class ItemsVO(object):
         self._amount_item = None
         self._app_item_code = None
         self._is_mi_item = None
+        self._is_rx_item = None
         self._item_name = None
+        self._mi_code = None
         self._price_original = None
         self._price_sale = None
         self._quantity_item = None
@@ -43,12 +45,26 @@ class ItemsVO(object):
     def is_mi_item(self, value):
         self._is_mi_item = value
     @property
+    def is_rx_item(self):
+        return self._is_rx_item
+
+    @is_rx_item.setter
+    def is_rx_item(self, value):
+        self._is_rx_item = value
+    @property
     def item_name(self):
         return self._item_name
 
     @item_name.setter
     def item_name(self, value):
         self._item_name = value
+    @property
+    def mi_code(self):
+        return self._mi_code
+
+    @mi_code.setter
+    def mi_code(self, value):
+        self._mi_code = value
     @property
     def price_original(self):
         return self._price_original
@@ -124,11 +140,21 @@ class ItemsVO(object):
                 params['is_mi_item'] = self.is_mi_item.to_alipay_dict()
             else:
                 params['is_mi_item'] = self.is_mi_item
+        if self.is_rx_item:
+            if hasattr(self.is_rx_item, 'to_alipay_dict'):
+                params['is_rx_item'] = self.is_rx_item.to_alipay_dict()
+            else:
+                params['is_rx_item'] = self.is_rx_item
         if self.item_name:
             if hasattr(self.item_name, 'to_alipay_dict'):
                 params['item_name'] = self.item_name.to_alipay_dict()
             else:
                 params['item_name'] = self.item_name
+        if self.mi_code:
+            if hasattr(self.mi_code, 'to_alipay_dict'):
+                params['mi_code'] = self.mi_code.to_alipay_dict()
+            else:
+                params['mi_code'] = self.mi_code
         if self.price_original:
             if hasattr(self.price_original, 'to_alipay_dict'):
                 params['price_original'] = self.price_original.to_alipay_dict()
@@ -182,8 +208,12 @@ class ItemsVO(object):
             o.app_item_code = d['app_item_code']
         if 'is_mi_item' in d:
             o.is_mi_item = d['is_mi_item']
+        if 'is_rx_item' in d:
+            o.is_rx_item = d['is_rx_item']
         if 'item_name' in d:
             o.item_name = d['item_name']
+        if 'mi_code' in d:
+            o.mi_code = d['mi_code']
         if 'price_original' in d:
             o.price_original = d['price_original']
         if 'price_sale' in d:

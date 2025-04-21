@@ -25,6 +25,7 @@ class OrderInfoVO(object):
         self._predict_delivery_end_time = None
         self._predict_delivery_start_time = None
         self._quantity = None
+        self._rx_type = None
         self._update_time = None
         self._user_expect_end_time = None
         self._user_expect_start_time = None
@@ -150,6 +151,13 @@ class OrderInfoVO(object):
     def quantity(self, value):
         self._quantity = value
     @property
+    def rx_type(self):
+        return self._rx_type
+
+    @rx_type.setter
+    def rx_type(self, value):
+        self._rx_type = value
+    @property
     def update_time(self):
         return self._update_time
 
@@ -266,6 +274,11 @@ class OrderInfoVO(object):
                 params['quantity'] = self.quantity.to_alipay_dict()
             else:
                 params['quantity'] = self.quantity
+        if self.rx_type:
+            if hasattr(self.rx_type, 'to_alipay_dict'):
+                params['rx_type'] = self.rx_type.to_alipay_dict()
+            else:
+                params['rx_type'] = self.rx_type
         if self.update_time:
             if hasattr(self.update_time, 'to_alipay_dict'):
                 params['update_time'] = self.update_time.to_alipay_dict()
@@ -327,6 +340,8 @@ class OrderInfoVO(object):
             o.predict_delivery_start_time = d['predict_delivery_start_time']
         if 'quantity' in d:
             o.quantity = d['quantity']
+        if 'rx_type' in d:
+            o.rx_type = d['rx_type']
         if 'update_time' in d:
             o.update_time = d['update_time']
         if 'user_expect_end_time' in d:

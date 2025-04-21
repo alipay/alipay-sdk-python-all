@@ -9,6 +9,8 @@ class AlipayPayAppPocketmoneyPromoConsultModel(object):
 
     def __init__(self):
         self._biz_no = None
+        self._biz_scene = None
+        self._biz_value = None
         self._device_id = None
         self._extra_device_id = None
         self._os_type = None
@@ -22,6 +24,20 @@ class AlipayPayAppPocketmoneyPromoConsultModel(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
+    @property
+    def biz_value(self):
+        return self._biz_value
+
+    @biz_value.setter
+    def biz_value(self, value):
+        self._biz_value = value
     @property
     def device_id(self):
         return self._device_id
@@ -66,6 +82,16 @@ class AlipayPayAppPocketmoneyPromoConsultModel(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
+        if self.biz_value:
+            if hasattr(self.biz_value, 'to_alipay_dict'):
+                params['biz_value'] = self.biz_value.to_alipay_dict()
+            else:
+                params['biz_value'] = self.biz_value
         if self.device_id:
             if hasattr(self.device_id, 'to_alipay_dict'):
                 params['device_id'] = self.device_id.to_alipay_dict()
@@ -100,6 +126,10 @@ class AlipayPayAppPocketmoneyPromoConsultModel(object):
         o = AlipayPayAppPocketmoneyPromoConsultModel()
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
+        if 'biz_value' in d:
+            o.biz_value = d['biz_value']
         if 'device_id' in d:
             o.device_id = d['device_id']
         if 'extra_device_id' in d:

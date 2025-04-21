@@ -9,6 +9,8 @@ class ConsumerLoanBillRepayPlanInfoItem(object):
 
     def __init__(self):
         self._bill_id = None
+        self._loan_id = None
+        self._period_no = None
         self._repay_amount = None
         self._repay_date = None
         self._status = None
@@ -20,6 +22,20 @@ class ConsumerLoanBillRepayPlanInfoItem(object):
     @bill_id.setter
     def bill_id(self, value):
         self._bill_id = value
+    @property
+    def loan_id(self):
+        return self._loan_id
+
+    @loan_id.setter
+    def loan_id(self, value):
+        self._loan_id = value
+    @property
+    def period_no(self):
+        return self._period_no
+
+    @period_no.setter
+    def period_no(self, value):
+        self._period_no = value
     @property
     def repay_amount(self):
         return self._repay_amount
@@ -50,6 +66,16 @@ class ConsumerLoanBillRepayPlanInfoItem(object):
                 params['bill_id'] = self.bill_id.to_alipay_dict()
             else:
                 params['bill_id'] = self.bill_id
+        if self.loan_id:
+            if hasattr(self.loan_id, 'to_alipay_dict'):
+                params['loan_id'] = self.loan_id.to_alipay_dict()
+            else:
+                params['loan_id'] = self.loan_id
+        if self.period_no:
+            if hasattr(self.period_no, 'to_alipay_dict'):
+                params['period_no'] = self.period_no.to_alipay_dict()
+            else:
+                params['period_no'] = self.period_no
         if self.repay_amount:
             if hasattr(self.repay_amount, 'to_alipay_dict'):
                 params['repay_amount'] = self.repay_amount.to_alipay_dict()
@@ -74,6 +100,10 @@ class ConsumerLoanBillRepayPlanInfoItem(object):
         o = ConsumerLoanBillRepayPlanInfoItem()
         if 'bill_id' in d:
             o.bill_id = d['bill_id']
+        if 'loan_id' in d:
+            o.loan_id = d['loan_id']
+        if 'period_no' in d:
+            o.period_no = d['period_no']
         if 'repay_amount' in d:
             o.repay_amount = d['repay_amount']
         if 'repay_date' in d:

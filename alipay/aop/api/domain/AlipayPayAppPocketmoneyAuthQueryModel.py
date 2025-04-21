@@ -10,6 +10,7 @@ class AlipayPayAppPocketmoneyAuthQueryModel(object):
     def __init__(self):
         self._device_id = None
         self._extra_device_id = None
+        self._solution_vendor = None
         self._vendor_parent_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayPayAppPocketmoneyAuthQueryModel(object):
     @extra_device_id.setter
     def extra_device_id(self, value):
         self._extra_device_id = value
+    @property
+    def solution_vendor(self):
+        return self._solution_vendor
+
+    @solution_vendor.setter
+    def solution_vendor(self, value):
+        self._solution_vendor = value
     @property
     def vendor_parent_id(self):
         return self._vendor_parent_id
@@ -47,6 +55,11 @@ class AlipayPayAppPocketmoneyAuthQueryModel(object):
                 params['extra_device_id'] = self.extra_device_id.to_alipay_dict()
             else:
                 params['extra_device_id'] = self.extra_device_id
+        if self.solution_vendor:
+            if hasattr(self.solution_vendor, 'to_alipay_dict'):
+                params['solution_vendor'] = self.solution_vendor.to_alipay_dict()
+            else:
+                params['solution_vendor'] = self.solution_vendor
         if self.vendor_parent_id:
             if hasattr(self.vendor_parent_id, 'to_alipay_dict'):
                 params['vendor_parent_id'] = self.vendor_parent_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayPayAppPocketmoneyAuthQueryModel(object):
             o.device_id = d['device_id']
         if 'extra_device_id' in d:
             o.extra_device_id = d['extra_device_id']
+        if 'solution_vendor' in d:
+            o.solution_vendor = d['solution_vendor']
         if 'vendor_parent_id' in d:
             o.vendor_parent_id = d['vendor_parent_id']
         return o

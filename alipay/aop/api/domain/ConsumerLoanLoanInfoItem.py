@@ -14,6 +14,7 @@ class ConsumerLoanLoanInfoItem(object):
         self._last_penalty_interest_amount = None
         self._last_period_count = None
         self._last_principal_amount = None
+        self._last_total_repay_amount = None
         self._loan_amount = None
         self._loan_date = None
         self._loan_id = None
@@ -63,6 +64,13 @@ class ConsumerLoanLoanInfoItem(object):
     @last_principal_amount.setter
     def last_principal_amount(self, value):
         self._last_principal_amount = value
+    @property
+    def last_total_repay_amount(self):
+        return self._last_total_repay_amount
+
+    @last_total_repay_amount.setter
+    def last_total_repay_amount(self, value):
+        self._last_total_repay_amount = value
     @property
     def loan_amount(self):
         return self._loan_amount
@@ -139,6 +147,11 @@ class ConsumerLoanLoanInfoItem(object):
                 params['last_principal_amount'] = self.last_principal_amount.to_alipay_dict()
             else:
                 params['last_principal_amount'] = self.last_principal_amount
+        if self.last_total_repay_amount:
+            if hasattr(self.last_total_repay_amount, 'to_alipay_dict'):
+                params['last_total_repay_amount'] = self.last_total_repay_amount.to_alipay_dict()
+            else:
+                params['last_total_repay_amount'] = self.last_total_repay_amount
         if self.loan_amount:
             if hasattr(self.loan_amount, 'to_alipay_dict'):
                 params['loan_amount'] = self.loan_amount.to_alipay_dict()
@@ -188,6 +201,8 @@ class ConsumerLoanLoanInfoItem(object):
             o.last_period_count = d['last_period_count']
         if 'last_principal_amount' in d:
             o.last_principal_amount = d['last_principal_amount']
+        if 'last_total_repay_amount' in d:
+            o.last_total_repay_amount = d['last_total_repay_amount']
         if 'loan_amount' in d:
             o.loan_amount = d['loan_amount']
         if 'loan_date' in d:

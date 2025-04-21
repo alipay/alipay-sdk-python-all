@@ -15,6 +15,8 @@ class SimpleRentInfo(object):
         self._buyer_id = None
         self._buyer_open_id = None
         self._buyout_price = None
+        self._early_settle = None
+        self._early_settle_price = None
         self._end_time = None
         self._out_order_id = None
         self._plan_list = None
@@ -55,6 +57,20 @@ class SimpleRentInfo(object):
     @buyout_price.setter
     def buyout_price(self, value):
         self._buyout_price = value
+    @property
+    def early_settle(self):
+        return self._early_settle
+
+    @early_settle.setter
+    def early_settle(self, value):
+        self._early_settle = value
+    @property
+    def early_settle_price(self):
+        return self._early_settle_price
+
+    @early_settle_price.setter
+    def early_settle_price(self, value):
+        self._early_settle_price = value
     @property
     def end_time(self):
         return self._end_time
@@ -174,6 +190,16 @@ class SimpleRentInfo(object):
                 params['buyout_price'] = self.buyout_price.to_alipay_dict()
             else:
                 params['buyout_price'] = self.buyout_price
+        if self.early_settle:
+            if hasattr(self.early_settle, 'to_alipay_dict'):
+                params['early_settle'] = self.early_settle.to_alipay_dict()
+            else:
+                params['early_settle'] = self.early_settle
+        if self.early_settle_price:
+            if hasattr(self.early_settle_price, 'to_alipay_dict'):
+                params['early_settle_price'] = self.early_settle_price.to_alipay_dict()
+            else:
+                params['early_settle_price'] = self.early_settle_price
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -259,6 +285,10 @@ class SimpleRentInfo(object):
             o.buyer_open_id = d['buyer_open_id']
         if 'buyout_price' in d:
             o.buyout_price = d['buyout_price']
+        if 'early_settle' in d:
+            o.early_settle = d['early_settle']
+        if 'early_settle_price' in d:
+            o.early_settle_price = d['early_settle_price']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'out_order_id' in d:

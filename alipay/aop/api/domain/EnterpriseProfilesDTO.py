@@ -12,6 +12,7 @@ class EnterpriseProfilesDTO(object):
         self._credit_applicant_mobile = None
         self._fund_biz_scene = None
         self._group_app_id = None
+        self._pc_invite_url_mode = None
 
     @property
     def create_iot_group(self):
@@ -41,6 +42,13 @@ class EnterpriseProfilesDTO(object):
     @group_app_id.setter
     def group_app_id(self, value):
         self._group_app_id = value
+    @property
+    def pc_invite_url_mode(self):
+        return self._pc_invite_url_mode
+
+    @pc_invite_url_mode.setter
+    def pc_invite_url_mode(self, value):
+        self._pc_invite_url_mode = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class EnterpriseProfilesDTO(object):
                 params['group_app_id'] = self.group_app_id.to_alipay_dict()
             else:
                 params['group_app_id'] = self.group_app_id
+        if self.pc_invite_url_mode:
+            if hasattr(self.pc_invite_url_mode, 'to_alipay_dict'):
+                params['pc_invite_url_mode'] = self.pc_invite_url_mode.to_alipay_dict()
+            else:
+                params['pc_invite_url_mode'] = self.pc_invite_url_mode
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class EnterpriseProfilesDTO(object):
             o.fund_biz_scene = d['fund_biz_scene']
         if 'group_app_id' in d:
             o.group_app_id = d['group_app_id']
+        if 'pc_invite_url_mode' in d:
+            o.pc_invite_url_mode = d['pc_invite_url_mode']
         return o
 
 

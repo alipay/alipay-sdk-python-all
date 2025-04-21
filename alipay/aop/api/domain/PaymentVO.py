@@ -20,6 +20,7 @@ class PaymentVO(object):
         self._mi_amount = None
         self._packing_fee = None
         self._pay_num = None
+        self._self_trade_no = None
         self._time_markup_price = None
         self._yk_pay_no = None
 
@@ -108,6 +109,13 @@ class PaymentVO(object):
     def pay_num(self, value):
         self._pay_num = value
     @property
+    def self_trade_no(self):
+        return self._self_trade_no
+
+    @self_trade_no.setter
+    def self_trade_no(self, value):
+        self._self_trade_no = value
+    @property
     def time_markup_price(self):
         return self._time_markup_price
 
@@ -185,6 +193,11 @@ class PaymentVO(object):
                 params['pay_num'] = self.pay_num.to_alipay_dict()
             else:
                 params['pay_num'] = self.pay_num
+        if self.self_trade_no:
+            if hasattr(self.self_trade_no, 'to_alipay_dict'):
+                params['self_trade_no'] = self.self_trade_no.to_alipay_dict()
+            else:
+                params['self_trade_no'] = self.self_trade_no
         if self.time_markup_price:
             if hasattr(self.time_markup_price, 'to_alipay_dict'):
                 params['time_markup_price'] = self.time_markup_price.to_alipay_dict()
@@ -226,6 +239,8 @@ class PaymentVO(object):
             o.packing_fee = d['packing_fee']
         if 'pay_num' in d:
             o.pay_num = d['pay_num']
+        if 'self_trade_no' in d:
+            o.self_trade_no = d['self_trade_no']
         if 'time_markup_price' in d:
             o.time_markup_price = d['time_markup_price']
         if 'yk_pay_no' in d:

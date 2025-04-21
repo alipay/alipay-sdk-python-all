@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudCloudrunStaticsiteCacheruleRefreshModel(object):
 
     def __init__(self):
+        self._assume_token = None
         self._data = None
         self._env = None
         self._id_app = None
         self._type = None
 
+    @property
+    def assume_token(self):
+        return self._assume_token
+
+    @assume_token.setter
+    def assume_token(self, value):
+        self._assume_token = value
     @property
     def data(self):
         return self._data
@@ -45,6 +53,11 @@ class AlipayCloudCloudrunStaticsiteCacheruleRefreshModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.assume_token:
+            if hasattr(self.assume_token, 'to_alipay_dict'):
+                params['assume_token'] = self.assume_token.to_alipay_dict()
+            else:
+                params['assume_token'] = self.assume_token
         if self.data:
             if hasattr(self.data, 'to_alipay_dict'):
                 params['data'] = self.data.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayCloudCloudrunStaticsiteCacheruleRefreshModel(object):
         if not d:
             return None
         o = AlipayCloudCloudrunStaticsiteCacheruleRefreshModel()
+        if 'assume_token' in d:
+            o.assume_token = d['assume_token']
         if 'data' in d:
             o.data = d['data']
         if 'env' in d:

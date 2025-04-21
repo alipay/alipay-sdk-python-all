@@ -14,9 +14,11 @@ class OrderItemInfoVO(object):
 
     def __init__(self):
         self._category_id = None
+        self._erp_code = None
         self._item_brand = None
         self._item_cnt = None
         self._item_condition = None
+        self._item_condition_grade = None
         self._item_id = None
         self._item_refund_info = None
         self._item_tags = None
@@ -35,6 +37,13 @@ class OrderItemInfoVO(object):
     @category_id.setter
     def category_id(self, value):
         self._category_id = value
+    @property
+    def erp_code(self):
+        return self._erp_code
+
+    @erp_code.setter
+    def erp_code(self, value):
+        self._erp_code = value
     @property
     def item_brand(self):
         return self._item_brand
@@ -56,6 +65,13 @@ class OrderItemInfoVO(object):
     @item_condition.setter
     def item_condition(self, value):
         self._item_condition = value
+    @property
+    def item_condition_grade(self):
+        return self._item_condition_grade
+
+    @item_condition_grade.setter
+    def item_condition_grade(self, value):
+        self._item_condition_grade = value
     @property
     def item_id(self):
         return self._item_id
@@ -153,6 +169,11 @@ class OrderItemInfoVO(object):
                 params['category_id'] = self.category_id.to_alipay_dict()
             else:
                 params['category_id'] = self.category_id
+        if self.erp_code:
+            if hasattr(self.erp_code, 'to_alipay_dict'):
+                params['erp_code'] = self.erp_code.to_alipay_dict()
+            else:
+                params['erp_code'] = self.erp_code
         if self.item_brand:
             if hasattr(self.item_brand, 'to_alipay_dict'):
                 params['item_brand'] = self.item_brand.to_alipay_dict()
@@ -168,6 +189,11 @@ class OrderItemInfoVO(object):
                 params['item_condition'] = self.item_condition.to_alipay_dict()
             else:
                 params['item_condition'] = self.item_condition
+        if self.item_condition_grade:
+            if hasattr(self.item_condition_grade, 'to_alipay_dict'):
+                params['item_condition_grade'] = self.item_condition_grade.to_alipay_dict()
+            else:
+                params['item_condition_grade'] = self.item_condition_grade
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -232,12 +258,16 @@ class OrderItemInfoVO(object):
         o = OrderItemInfoVO()
         if 'category_id' in d:
             o.category_id = d['category_id']
+        if 'erp_code' in d:
+            o.erp_code = d['erp_code']
         if 'item_brand' in d:
             o.item_brand = d['item_brand']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
         if 'item_condition' in d:
             o.item_condition = d['item_condition']
+        if 'item_condition_grade' in d:
+            o.item_condition_grade = d['item_condition_grade']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_refund_info' in d:

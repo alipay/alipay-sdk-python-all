@@ -10,6 +10,7 @@ class OutOrderUserInfo(object):
     def __init__(self):
         self._user_name = None
         self._user_phone = None
+        self._user_phone_type = None
 
     @property
     def user_name(self):
@@ -25,6 +26,13 @@ class OutOrderUserInfo(object):
     @user_phone.setter
     def user_phone(self, value):
         self._user_phone = value
+    @property
+    def user_phone_type(self):
+        return self._user_phone_type
+
+    @user_phone_type.setter
+    def user_phone_type(self, value):
+        self._user_phone_type = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class OutOrderUserInfo(object):
                 params['user_phone'] = self.user_phone.to_alipay_dict()
             else:
                 params['user_phone'] = self.user_phone
+        if self.user_phone_type:
+            if hasattr(self.user_phone_type, 'to_alipay_dict'):
+                params['user_phone_type'] = self.user_phone_type.to_alipay_dict()
+            else:
+                params['user_phone_type'] = self.user_phone_type
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class OutOrderUserInfo(object):
             o.user_name = d['user_name']
         if 'user_phone' in d:
             o.user_phone = d['user_phone']
+        if 'user_phone_type' in d:
+            o.user_phone_type = d['user_phone_type']
         return o
 
 

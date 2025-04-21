@@ -10,6 +10,7 @@ class DeviceExtParams(object):
     def __init__(self):
         self._external_id = None
         self._external_shop_id = None
+        self._isv_device_version_tag = None
         self._payment_type = None
         self._shop_name = None
         self._shop_nick_name = None
@@ -31,6 +32,13 @@ class DeviceExtParams(object):
     @external_shop_id.setter
     def external_shop_id(self, value):
         self._external_shop_id = value
+    @property
+    def isv_device_version_tag(self):
+        return self._isv_device_version_tag
+
+    @isv_device_version_tag.setter
+    def isv_device_version_tag(self, value):
+        self._isv_device_version_tag = value
     @property
     def payment_type(self):
         return self._payment_type
@@ -87,6 +95,11 @@ class DeviceExtParams(object):
                 params['external_shop_id'] = self.external_shop_id.to_alipay_dict()
             else:
                 params['external_shop_id'] = self.external_shop_id
+        if self.isv_device_version_tag:
+            if hasattr(self.isv_device_version_tag, 'to_alipay_dict'):
+                params['isv_device_version_tag'] = self.isv_device_version_tag.to_alipay_dict()
+            else:
+                params['isv_device_version_tag'] = self.isv_device_version_tag
         if self.payment_type:
             if hasattr(self.payment_type, 'to_alipay_dict'):
                 params['payment_type'] = self.payment_type.to_alipay_dict()
@@ -128,6 +141,8 @@ class DeviceExtParams(object):
             o.external_id = d['external_id']
         if 'external_shop_id' in d:
             o.external_shop_id = d['external_shop_id']
+        if 'isv_device_version_tag' in d:
+            o.isv_device_version_tag = d['isv_device_version_tag']
         if 'payment_type' in d:
             o.payment_type = d['payment_type']
         if 'shop_name' in d:

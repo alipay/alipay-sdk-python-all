@@ -14,8 +14,12 @@ class AlipayFundJointaccountPageAuthModel(object):
         self._channel = None
         self._identity = None
         self._identity_type = None
+        self._invitee_id = None
+        self._invitee_open_id = None
+        self._open_id = None
         self._page = None
         self._product_code = None
+        self._relation_id = None
 
     @property
     def account_id(self):
@@ -60,6 +64,27 @@ class AlipayFundJointaccountPageAuthModel(object):
     def identity_type(self, value):
         self._identity_type = value
     @property
+    def invitee_id(self):
+        return self._invitee_id
+
+    @invitee_id.setter
+    def invitee_id(self, value):
+        self._invitee_id = value
+    @property
+    def invitee_open_id(self):
+        return self._invitee_open_id
+
+    @invitee_open_id.setter
+    def invitee_open_id(self, value):
+        self._invitee_open_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def page(self):
         return self._page
 
@@ -73,6 +98,13 @@ class AlipayFundJointaccountPageAuthModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def relation_id(self):
+        return self._relation_id
+
+    @relation_id.setter
+    def relation_id(self, value):
+        self._relation_id = value
 
 
     def to_alipay_dict(self):
@@ -107,6 +139,21 @@ class AlipayFundJointaccountPageAuthModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.invitee_id:
+            if hasattr(self.invitee_id, 'to_alipay_dict'):
+                params['invitee_id'] = self.invitee_id.to_alipay_dict()
+            else:
+                params['invitee_id'] = self.invitee_id
+        if self.invitee_open_id:
+            if hasattr(self.invitee_open_id, 'to_alipay_dict'):
+                params['invitee_open_id'] = self.invitee_open_id.to_alipay_dict()
+            else:
+                params['invitee_open_id'] = self.invitee_open_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.page:
             if hasattr(self.page, 'to_alipay_dict'):
                 params['page'] = self.page.to_alipay_dict()
@@ -117,6 +164,11 @@ class AlipayFundJointaccountPageAuthModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.relation_id:
+            if hasattr(self.relation_id, 'to_alipay_dict'):
+                params['relation_id'] = self.relation_id.to_alipay_dict()
+            else:
+                params['relation_id'] = self.relation_id
         return params
 
     @staticmethod
@@ -136,10 +188,18 @@ class AlipayFundJointaccountPageAuthModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'invitee_id' in d:
+            o.invitee_id = d['invitee_id']
+        if 'invitee_open_id' in d:
+            o.invitee_open_id = d['invitee_open_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'page' in d:
             o.page = d['page']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'relation_id' in d:
+            o.relation_id = d['relation_id']
         return o
 
 

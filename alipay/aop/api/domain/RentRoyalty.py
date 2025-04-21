@@ -14,12 +14,15 @@ class RentRoyalty(object):
         self._current_buyout_after_price = None
         self._current_buyout_price = None
         self._expect_royalty_time = None
+        self._is_current_request = None
         self._out_order_id = None
         self._period = None
         self._royalty_after_price = None
         self._royalty_deliver_type = None
         self._royalty_installment_no = None
+        self._royalty_interest_price = None
         self._royalty_price = None
+        self._royalty_principal_price = None
         self._royalty_status = None
         self._royalty_time = None
         self._royalty_trigger_type = None
@@ -71,6 +74,13 @@ class RentRoyalty(object):
     def expect_royalty_time(self, value):
         self._expect_royalty_time = value
     @property
+    def is_current_request(self):
+        return self._is_current_request
+
+    @is_current_request.setter
+    def is_current_request(self, value):
+        self._is_current_request = value
+    @property
     def out_order_id(self):
         return self._out_order_id
 
@@ -106,12 +116,26 @@ class RentRoyalty(object):
     def royalty_installment_no(self, value):
         self._royalty_installment_no = value
     @property
+    def royalty_interest_price(self):
+        return self._royalty_interest_price
+
+    @royalty_interest_price.setter
+    def royalty_interest_price(self, value):
+        self._royalty_interest_price = value
+    @property
     def royalty_price(self):
         return self._royalty_price
 
     @royalty_price.setter
     def royalty_price(self, value):
         self._royalty_price = value
+    @property
+    def royalty_principal_price(self):
+        return self._royalty_principal_price
+
+    @royalty_principal_price.setter
+    def royalty_principal_price(self, value):
+        self._royalty_principal_price = value
     @property
     def royalty_status(self):
         return self._royalty_status
@@ -195,6 +219,11 @@ class RentRoyalty(object):
                 params['expect_royalty_time'] = self.expect_royalty_time.to_alipay_dict()
             else:
                 params['expect_royalty_time'] = self.expect_royalty_time
+        if self.is_current_request:
+            if hasattr(self.is_current_request, 'to_alipay_dict'):
+                params['is_current_request'] = self.is_current_request.to_alipay_dict()
+            else:
+                params['is_current_request'] = self.is_current_request
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -220,11 +249,21 @@ class RentRoyalty(object):
                 params['royalty_installment_no'] = self.royalty_installment_no.to_alipay_dict()
             else:
                 params['royalty_installment_no'] = self.royalty_installment_no
+        if self.royalty_interest_price:
+            if hasattr(self.royalty_interest_price, 'to_alipay_dict'):
+                params['royalty_interest_price'] = self.royalty_interest_price.to_alipay_dict()
+            else:
+                params['royalty_interest_price'] = self.royalty_interest_price
         if self.royalty_price:
             if hasattr(self.royalty_price, 'to_alipay_dict'):
                 params['royalty_price'] = self.royalty_price.to_alipay_dict()
             else:
                 params['royalty_price'] = self.royalty_price
+        if self.royalty_principal_price:
+            if hasattr(self.royalty_principal_price, 'to_alipay_dict'):
+                params['royalty_principal_price'] = self.royalty_principal_price.to_alipay_dict()
+            else:
+                params['royalty_principal_price'] = self.royalty_principal_price
         if self.royalty_status:
             if hasattr(self.royalty_status, 'to_alipay_dict'):
                 params['royalty_status'] = self.royalty_status.to_alipay_dict()
@@ -279,6 +318,8 @@ class RentRoyalty(object):
             o.current_buyout_price = d['current_buyout_price']
         if 'expect_royalty_time' in d:
             o.expect_royalty_time = d['expect_royalty_time']
+        if 'is_current_request' in d:
+            o.is_current_request = d['is_current_request']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'period' in d:
@@ -289,8 +330,12 @@ class RentRoyalty(object):
             o.royalty_deliver_type = d['royalty_deliver_type']
         if 'royalty_installment_no' in d:
             o.royalty_installment_no = d['royalty_installment_no']
+        if 'royalty_interest_price' in d:
+            o.royalty_interest_price = d['royalty_interest_price']
         if 'royalty_price' in d:
             o.royalty_price = d['royalty_price']
+        if 'royalty_principal_price' in d:
+            o.royalty_principal_price = d['royalty_principal_price']
         if 'royalty_status' in d:
             o.royalty_status = d['royalty_status']
         if 'royalty_time' in d:

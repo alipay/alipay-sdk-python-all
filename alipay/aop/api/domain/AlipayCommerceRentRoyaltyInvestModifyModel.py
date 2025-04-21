@@ -10,9 +10,12 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
     def __init__(self):
         self._buyer_id = None
         self._buyer_open_id = None
+        self._expect_royalty_time = None
         self._order_id = None
+        self._royalty_interest_price = None
         self._royalty_period = None
         self._royalty_price = None
+        self._royalty_principal_price = None
         self._royalty_stage = None
         self._royalty_type = None
 
@@ -31,12 +34,26 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
     def buyer_open_id(self, value):
         self._buyer_open_id = value
     @property
+    def expect_royalty_time(self):
+        return self._expect_royalty_time
+
+    @expect_royalty_time.setter
+    def expect_royalty_time(self, value):
+        self._expect_royalty_time = value
+    @property
     def order_id(self):
         return self._order_id
 
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def royalty_interest_price(self):
+        return self._royalty_interest_price
+
+    @royalty_interest_price.setter
+    def royalty_interest_price(self, value):
+        self._royalty_interest_price = value
     @property
     def royalty_period(self):
         return self._royalty_period
@@ -51,6 +68,13 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
     @royalty_price.setter
     def royalty_price(self, value):
         self._royalty_price = value
+    @property
+    def royalty_principal_price(self):
+        return self._royalty_principal_price
+
+    @royalty_principal_price.setter
+    def royalty_principal_price(self, value):
+        self._royalty_principal_price = value
     @property
     def royalty_stage(self):
         return self._royalty_stage
@@ -79,11 +103,21 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.expect_royalty_time:
+            if hasattr(self.expect_royalty_time, 'to_alipay_dict'):
+                params['expect_royalty_time'] = self.expect_royalty_time.to_alipay_dict()
+            else:
+                params['expect_royalty_time'] = self.expect_royalty_time
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.royalty_interest_price:
+            if hasattr(self.royalty_interest_price, 'to_alipay_dict'):
+                params['royalty_interest_price'] = self.royalty_interest_price.to_alipay_dict()
+            else:
+                params['royalty_interest_price'] = self.royalty_interest_price
         if self.royalty_period:
             if hasattr(self.royalty_period, 'to_alipay_dict'):
                 params['royalty_period'] = self.royalty_period.to_alipay_dict()
@@ -94,6 +128,11 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
                 params['royalty_price'] = self.royalty_price.to_alipay_dict()
             else:
                 params['royalty_price'] = self.royalty_price
+        if self.royalty_principal_price:
+            if hasattr(self.royalty_principal_price, 'to_alipay_dict'):
+                params['royalty_principal_price'] = self.royalty_principal_price.to_alipay_dict()
+            else:
+                params['royalty_principal_price'] = self.royalty_principal_price
         if self.royalty_stage:
             if hasattr(self.royalty_stage, 'to_alipay_dict'):
                 params['royalty_stage'] = self.royalty_stage.to_alipay_dict()
@@ -115,12 +154,18 @@ class AlipayCommerceRentRoyaltyInvestModifyModel(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'expect_royalty_time' in d:
+            o.expect_royalty_time = d['expect_royalty_time']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'royalty_interest_price' in d:
+            o.royalty_interest_price = d['royalty_interest_price']
         if 'royalty_period' in d:
             o.royalty_period = d['royalty_period']
         if 'royalty_price' in d:
             o.royalty_price = d['royalty_price']
+        if 'royalty_principal_price' in d:
+            o.royalty_principal_price = d['royalty_principal_price']
         if 'royalty_stage' in d:
             o.royalty_stage = d['royalty_stage']
         if 'royalty_type' in d:

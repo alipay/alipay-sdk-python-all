@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class WatchPromoPrizeDetail(object):
 
     def __init__(self):
+        self._biz_data = None
         self._biz_no = None
         self._jump_alipay_url = None
         self._prize_state = None
         self._prize_type = None
         self._skin_id = None
 
+    @property
+    def biz_data(self):
+        return self._biz_data
+
+    @biz_data.setter
+    def biz_data(self, value):
+        self._biz_data = value
     @property
     def biz_no(self):
         return self._biz_no
@@ -53,6 +61,11 @@ class WatchPromoPrizeDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_data:
+            if hasattr(self.biz_data, 'to_alipay_dict'):
+                params['biz_data'] = self.biz_data.to_alipay_dict()
+            else:
+                params['biz_data'] = self.biz_data
         if self.biz_no:
             if hasattr(self.biz_no, 'to_alipay_dict'):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
@@ -85,6 +98,8 @@ class WatchPromoPrizeDetail(object):
         if not d:
             return None
         o = WatchPromoPrizeDetail()
+        if 'biz_data' in d:
+            o.biz_data = d['biz_data']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'jump_alipay_url' in d:

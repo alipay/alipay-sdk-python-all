@@ -12,6 +12,7 @@ class AlipayOfflinePaysaasOrderQueryResponse(AlipayResponse):
         self._isv_order_no = None
         self._order_status = None
         self._pay_time = None
+        self._third_order_no = None
 
     @property
     def isv_order_no(self):
@@ -34,6 +35,13 @@ class AlipayOfflinePaysaasOrderQueryResponse(AlipayResponse):
     @pay_time.setter
     def pay_time(self, value):
         self._pay_time = value
+    @property
+    def third_order_no(self):
+        return self._third_order_no
+
+    @third_order_no.setter
+    def third_order_no(self, value):
+        self._third_order_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOfflinePaysaasOrderQueryResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayOfflinePaysaasOrderQueryResponse(AlipayResponse):
             self.order_status = response['order_status']
         if 'pay_time' in response:
             self.pay_time = response['pay_time']
+        if 'third_order_no' in response:
+            self.third_order_no = response['third_order_no']

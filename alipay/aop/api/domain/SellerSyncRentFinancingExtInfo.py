@@ -9,6 +9,11 @@ from alipay.aop.api.domain.RentPeriod import RentPeriod
 class SellerSyncRentFinancingExtInfo(object):
 
     def __init__(self):
+        self._beneficiary_account_number = None
+        self._beneficiary_bank_name = None
+        self._beneficiary_name = None
+        self._buyout_financing_amount = None
+        self._buyout_repayment_type = None
         self._financing_amount = None
         self._financing_period = None
         self._financing_rate = None
@@ -20,8 +25,44 @@ class SellerSyncRentFinancingExtInfo(object):
         self._payee_account = None
         self._payee_account_open_id = None
         self._payee_memo = None
+        self._rent_financing_amount = None
         self._repayment_type = None
 
+    @property
+    def beneficiary_account_number(self):
+        return self._beneficiary_account_number
+
+    @beneficiary_account_number.setter
+    def beneficiary_account_number(self, value):
+        self._beneficiary_account_number = value
+    @property
+    def beneficiary_bank_name(self):
+        return self._beneficiary_bank_name
+
+    @beneficiary_bank_name.setter
+    def beneficiary_bank_name(self, value):
+        self._beneficiary_bank_name = value
+    @property
+    def beneficiary_name(self):
+        return self._beneficiary_name
+
+    @beneficiary_name.setter
+    def beneficiary_name(self, value):
+        self._beneficiary_name = value
+    @property
+    def buyout_financing_amount(self):
+        return self._buyout_financing_amount
+
+    @buyout_financing_amount.setter
+    def buyout_financing_amount(self, value):
+        self._buyout_financing_amount = value
+    @property
+    def buyout_repayment_type(self):
+        return self._buyout_repayment_type
+
+    @buyout_repayment_type.setter
+    def buyout_repayment_type(self, value):
+        self._buyout_repayment_type = value
     @property
     def financing_amount(self):
         return self._financing_amount
@@ -103,6 +144,13 @@ class SellerSyncRentFinancingExtInfo(object):
     def payee_memo(self, value):
         self._payee_memo = value
     @property
+    def rent_financing_amount(self):
+        return self._rent_financing_amount
+
+    @rent_financing_amount.setter
+    def rent_financing_amount(self, value):
+        self._rent_financing_amount = value
+    @property
     def repayment_type(self):
         return self._repayment_type
 
@@ -113,6 +161,31 @@ class SellerSyncRentFinancingExtInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.beneficiary_account_number:
+            if hasattr(self.beneficiary_account_number, 'to_alipay_dict'):
+                params['beneficiary_account_number'] = self.beneficiary_account_number.to_alipay_dict()
+            else:
+                params['beneficiary_account_number'] = self.beneficiary_account_number
+        if self.beneficiary_bank_name:
+            if hasattr(self.beneficiary_bank_name, 'to_alipay_dict'):
+                params['beneficiary_bank_name'] = self.beneficiary_bank_name.to_alipay_dict()
+            else:
+                params['beneficiary_bank_name'] = self.beneficiary_bank_name
+        if self.beneficiary_name:
+            if hasattr(self.beneficiary_name, 'to_alipay_dict'):
+                params['beneficiary_name'] = self.beneficiary_name.to_alipay_dict()
+            else:
+                params['beneficiary_name'] = self.beneficiary_name
+        if self.buyout_financing_amount:
+            if hasattr(self.buyout_financing_amount, 'to_alipay_dict'):
+                params['buyout_financing_amount'] = self.buyout_financing_amount.to_alipay_dict()
+            else:
+                params['buyout_financing_amount'] = self.buyout_financing_amount
+        if self.buyout_repayment_type:
+            if hasattr(self.buyout_repayment_type, 'to_alipay_dict'):
+                params['buyout_repayment_type'] = self.buyout_repayment_type.to_alipay_dict()
+            else:
+                params['buyout_repayment_type'] = self.buyout_repayment_type
         if self.financing_amount:
             if hasattr(self.financing_amount, 'to_alipay_dict'):
                 params['financing_amount'] = self.financing_amount.to_alipay_dict()
@@ -168,6 +241,11 @@ class SellerSyncRentFinancingExtInfo(object):
                 params['payee_memo'] = self.payee_memo.to_alipay_dict()
             else:
                 params['payee_memo'] = self.payee_memo
+        if self.rent_financing_amount:
+            if hasattr(self.rent_financing_amount, 'to_alipay_dict'):
+                params['rent_financing_amount'] = self.rent_financing_amount.to_alipay_dict()
+            else:
+                params['rent_financing_amount'] = self.rent_financing_amount
         if self.repayment_type:
             if hasattr(self.repayment_type, 'to_alipay_dict'):
                 params['repayment_type'] = self.repayment_type.to_alipay_dict()
@@ -180,6 +258,16 @@ class SellerSyncRentFinancingExtInfo(object):
         if not d:
             return None
         o = SellerSyncRentFinancingExtInfo()
+        if 'beneficiary_account_number' in d:
+            o.beneficiary_account_number = d['beneficiary_account_number']
+        if 'beneficiary_bank_name' in d:
+            o.beneficiary_bank_name = d['beneficiary_bank_name']
+        if 'beneficiary_name' in d:
+            o.beneficiary_name = d['beneficiary_name']
+        if 'buyout_financing_amount' in d:
+            o.buyout_financing_amount = d['buyout_financing_amount']
+        if 'buyout_repayment_type' in d:
+            o.buyout_repayment_type = d['buyout_repayment_type']
         if 'financing_amount' in d:
             o.financing_amount = d['financing_amount']
         if 'financing_period' in d:
@@ -202,6 +290,8 @@ class SellerSyncRentFinancingExtInfo(object):
             o.payee_account_open_id = d['payee_account_open_id']
         if 'payee_memo' in d:
             o.payee_memo = d['payee_memo']
+        if 'rent_financing_amount' in d:
+            o.rent_financing_amount = d['rent_financing_amount']
         if 'repayment_type' in d:
             o.repayment_type = d['repayment_type']
         return o
