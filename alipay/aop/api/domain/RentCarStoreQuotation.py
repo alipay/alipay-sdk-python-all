@@ -17,6 +17,7 @@ class RentCarStoreQuotation(object):
         self._isv_discount_amount = None
         self._latitude = None
         self._longitude = None
+        self._minor_injury_exemption_amount = None
         self._one_price_discount = None
         self._quote_id = None
         self._service_score = None
@@ -88,6 +89,13 @@ class RentCarStoreQuotation(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def minor_injury_exemption_amount(self):
+        return self._minor_injury_exemption_amount
+
+    @minor_injury_exemption_amount.setter
+    def minor_injury_exemption_amount(self, value):
+        self._minor_injury_exemption_amount = value
     @property
     def one_price_discount(self):
         return self._one_price_discount
@@ -215,6 +223,11 @@ class RentCarStoreQuotation(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.minor_injury_exemption_amount:
+            if hasattr(self.minor_injury_exemption_amount, 'to_alipay_dict'):
+                params['minor_injury_exemption_amount'] = self.minor_injury_exemption_amount.to_alipay_dict()
+            else:
+                params['minor_injury_exemption_amount'] = self.minor_injury_exemption_amount
         if self.one_price_discount:
             if hasattr(self.one_price_discount, 'to_alipay_dict'):
                 params['one_price_discount'] = self.one_price_discount.to_alipay_dict()
@@ -303,6 +316,8 @@ class RentCarStoreQuotation(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'minor_injury_exemption_amount' in d:
+            o.minor_injury_exemption_amount = d['minor_injury_exemption_amount']
         if 'one_price_discount' in d:
             o.one_price_discount = d['one_price_discount']
         if 'quote_id' in d:

@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._bank_card_id = None
+        self._coupon_code_list = None
         self._extension = None
         self._loan_amount = None
         self._loan_apply_no = None
@@ -18,6 +19,7 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
         self._loan_term_unit = None
         self._open_id = None
         self._product_code = None
+        self._promotion_amount = None
         self._repayment_day = None
         self._repayment_method = None
         self._verify_id = None
@@ -36,6 +38,16 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     @bank_card_id.setter
     def bank_card_id(self, value):
         self._bank_card_id = value
+    @property
+    def coupon_code_list(self):
+        return self._coupon_code_list
+
+    @coupon_code_list.setter
+    def coupon_code_list(self, value):
+        if isinstance(value, list):
+            self._coupon_code_list = list()
+            for i in value:
+                self._coupon_code_list.append(i)
     @property
     def extension(self):
         return self._extension
@@ -93,6 +105,13 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def promotion_amount(self):
+        return self._promotion_amount
+
+    @promotion_amount.setter
+    def promotion_amount(self, value):
+        self._promotion_amount = value
+    @property
     def repayment_day(self):
         return self._repayment_day
 
@@ -127,6 +146,16 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['bank_card_id'] = self.bank_card_id.to_alipay_dict()
             else:
                 params['bank_card_id'] = self.bank_card_id
+        if self.coupon_code_list:
+            if isinstance(self.coupon_code_list, list):
+                for i in range(0, len(self.coupon_code_list)):
+                    element = self.coupon_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.coupon_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.coupon_code_list, 'to_alipay_dict'):
+                params['coupon_code_list'] = self.coupon_code_list.to_alipay_dict()
+            else:
+                params['coupon_code_list'] = self.coupon_code_list
         if self.extension:
             if hasattr(self.extension, 'to_alipay_dict'):
                 params['extension'] = self.extension.to_alipay_dict()
@@ -167,6 +196,11 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.promotion_amount:
+            if hasattr(self.promotion_amount, 'to_alipay_dict'):
+                params['promotion_amount'] = self.promotion_amount.to_alipay_dict()
+            else:
+                params['promotion_amount'] = self.promotion_amount
         if self.repayment_day:
             if hasattr(self.repayment_day, 'to_alipay_dict'):
                 params['repayment_day'] = self.repayment_day.to_alipay_dict()
@@ -193,6 +227,8 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'bank_card_id' in d:
             o.bank_card_id = d['bank_card_id']
+        if 'coupon_code_list' in d:
+            o.coupon_code_list = d['coupon_code_list']
         if 'extension' in d:
             o.extension = d['extension']
         if 'loan_amount' in d:
@@ -209,6 +245,8 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'promotion_amount' in d:
+            o.promotion_amount = d['promotion_amount']
         if 'repayment_day' in d:
             o.repayment_day = d['repayment_day']
         if 'repayment_method' in d:

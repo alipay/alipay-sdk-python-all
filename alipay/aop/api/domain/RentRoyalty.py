@@ -17,6 +17,7 @@ class RentRoyalty(object):
         self._is_current_request = None
         self._out_order_id = None
         self._period = None
+        self._repay_time = None
         self._royalty_after_price = None
         self._royalty_deliver_type = None
         self._royalty_installment_no = None
@@ -94,6 +95,13 @@ class RentRoyalty(object):
     @period.setter
     def period(self, value):
         self._period = value
+    @property
+    def repay_time(self):
+        return self._repay_time
+
+    @repay_time.setter
+    def repay_time(self, value):
+        self._repay_time = value
     @property
     def royalty_after_price(self):
         return self._royalty_after_price
@@ -234,6 +242,11 @@ class RentRoyalty(object):
                 params['period'] = self.period.to_alipay_dict()
             else:
                 params['period'] = self.period
+        if self.repay_time:
+            if hasattr(self.repay_time, 'to_alipay_dict'):
+                params['repay_time'] = self.repay_time.to_alipay_dict()
+            else:
+                params['repay_time'] = self.repay_time
         if self.royalty_after_price:
             if hasattr(self.royalty_after_price, 'to_alipay_dict'):
                 params['royalty_after_price'] = self.royalty_after_price.to_alipay_dict()
@@ -324,6 +337,8 @@ class RentRoyalty(object):
             o.out_order_id = d['out_order_id']
         if 'period' in d:
             o.period = d['period']
+        if 'repay_time' in d:
+            o.repay_time = d['repay_time']
         if 'royalty_after_price' in d:
             o.royalty_after_price = d['royalty_after_price']
         if 'royalty_deliver_type' in d:

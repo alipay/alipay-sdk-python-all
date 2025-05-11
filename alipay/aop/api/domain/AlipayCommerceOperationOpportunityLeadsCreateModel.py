@@ -19,6 +19,7 @@ class AlipayCommerceOperationOpportunityLeadsCreateModel(object):
         self._cashier_info = None
         self._certificate_info = None
         self._contact_person_info = None
+        self._device_type = None
         self._extra_credentials = None
         self._mcc_info = None
         self._opportunity_id = None
@@ -69,6 +70,13 @@ class AlipayCommerceOperationOpportunityLeadsCreateModel(object):
             self._contact_person_info = value
         else:
             self._contact_person_info = BsContactPersonInfo.from_alipay_dict(value)
+    @property
+    def device_type(self):
+        return self._device_type
+
+    @device_type.setter
+    def device_type(self, value):
+        self._device_type = value
     @property
     def extra_credentials(self):
         return self._extra_credentials
@@ -149,6 +157,11 @@ class AlipayCommerceOperationOpportunityLeadsCreateModel(object):
                 params['contact_person_info'] = self.contact_person_info.to_alipay_dict()
             else:
                 params['contact_person_info'] = self.contact_person_info
+        if self.device_type:
+            if hasattr(self.device_type, 'to_alipay_dict'):
+                params['device_type'] = self.device_type.to_alipay_dict()
+            else:
+                params['device_type'] = self.device_type
         if self.extra_credentials:
             if hasattr(self.extra_credentials, 'to_alipay_dict'):
                 params['extra_credentials'] = self.extra_credentials.to_alipay_dict()
@@ -194,6 +207,8 @@ class AlipayCommerceOperationOpportunityLeadsCreateModel(object):
             o.certificate_info = d['certificate_info']
         if 'contact_person_info' in d:
             o.contact_person_info = d['contact_person_info']
+        if 'device_type' in d:
+            o.device_type = d['device_type']
         if 'extra_credentials' in d:
             o.extra_credentials = d['extra_credentials']
         if 'mcc_info' in d:

@@ -9,6 +9,8 @@ from alipay.aop.api.domain.AxfCardBindInfo import AxfCardBindInfo
 class CardOrderBatchQueryResponse(object):
 
     def __init__(self):
+        self._aftersales_id = None
+        self._aftersales_status = None
         self._available_amount = None
         self._axf_card_bind_info = None
         self._cancel_type = None
@@ -44,6 +46,20 @@ class CardOrderBatchQueryResponse(object):
         self._user_name = None
         self._user_phone = None
 
+    @property
+    def aftersales_id(self):
+        return self._aftersales_id
+
+    @aftersales_id.setter
+    def aftersales_id(self, value):
+        self._aftersales_id = value
+    @property
+    def aftersales_status(self):
+        return self._aftersales_status
+
+    @aftersales_status.setter
+    def aftersales_status(self, value):
+        self._aftersales_status = value
     @property
     def available_amount(self):
         return self._available_amount
@@ -289,6 +305,16 @@ class CardOrderBatchQueryResponse(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aftersales_id:
+            if hasattr(self.aftersales_id, 'to_alipay_dict'):
+                params['aftersales_id'] = self.aftersales_id.to_alipay_dict()
+            else:
+                params['aftersales_id'] = self.aftersales_id
+        if self.aftersales_status:
+            if hasattr(self.aftersales_status, 'to_alipay_dict'):
+                params['aftersales_status'] = self.aftersales_status.to_alipay_dict()
+            else:
+                params['aftersales_status'] = self.aftersales_status
         if self.available_amount:
             if hasattr(self.available_amount, 'to_alipay_dict'):
                 params['available_amount'] = self.available_amount.to_alipay_dict()
@@ -466,6 +492,10 @@ class CardOrderBatchQueryResponse(object):
         if not d:
             return None
         o = CardOrderBatchQueryResponse()
+        if 'aftersales_id' in d:
+            o.aftersales_id = d['aftersales_id']
+        if 'aftersales_status' in d:
+            o.aftersales_status = d['aftersales_status']
         if 'available_amount' in d:
             o.available_amount = d['available_amount']
         if 'axf_card_bind_info' in d:

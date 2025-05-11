@@ -12,6 +12,7 @@ class AlipayFundCardDepositConsultResponse(AlipayResponse):
         self._cert_no = None
         self._denomination = None
         self._expired_time = None
+        self._generate_card_order_id = None
         self._status = None
 
     @property
@@ -36,6 +37,13 @@ class AlipayFundCardDepositConsultResponse(AlipayResponse):
     def expired_time(self, value):
         self._expired_time = value
     @property
+    def generate_card_order_id(self):
+        return self._generate_card_order_id
+
+    @generate_card_order_id.setter
+    def generate_card_order_id(self, value):
+        self._generate_card_order_id = value
+    @property
     def status(self):
         return self._status
 
@@ -51,5 +59,7 @@ class AlipayFundCardDepositConsultResponse(AlipayResponse):
             self.denomination = response['denomination']
         if 'expired_time' in response:
             self.expired_time = response['expired_time']
+        if 'generate_card_order_id' in response:
+            self.generate_card_order_id = response['generate_card_order_id']
         if 'status' in response:
             self.status = response['status']

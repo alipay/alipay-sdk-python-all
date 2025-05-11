@@ -17,6 +17,7 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
         self._new_point_id = None
         self._new_point_name = None
         self._nfc_status = None
+        self._old_place_id = None
         self._old_point_id = None
         self._operator_type = None
         self._out_place_id = None
@@ -72,6 +73,13 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
     @nfc_status.setter
     def nfc_status(self, value):
         self._nfc_status = value
+    @property
+    def old_place_id(self):
+        return self._old_place_id
+
+    @old_place_id.setter
+    def old_place_id(self, value):
+        self._old_place_id = value
     @property
     def old_point_id(self):
         return self._old_point_id
@@ -152,6 +160,11 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
                 params['nfc_status'] = self.nfc_status.to_alipay_dict()
             else:
                 params['nfc_status'] = self.nfc_status
+        if self.old_place_id:
+            if hasattr(self.old_place_id, 'to_alipay_dict'):
+                params['old_place_id'] = self.old_place_id.to_alipay_dict()
+            else:
+                params['old_place_id'] = self.old_place_id
         if self.old_point_id:
             if hasattr(self.old_point_id, 'to_alipay_dict'):
                 params['old_point_id'] = self.old_point_id.to_alipay_dict()
@@ -198,6 +211,8 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
             o.new_point_name = d['new_point_name']
         if 'nfc_status' in d:
             o.nfc_status = d['nfc_status']
+        if 'old_place_id' in d:
+            o.old_place_id = d['old_place_id']
         if 'old_point_id' in d:
             o.old_point_id = d['old_point_id']
         if 'operator_type' in d:

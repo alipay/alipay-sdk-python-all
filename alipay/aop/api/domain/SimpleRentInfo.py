@@ -18,6 +18,8 @@ class SimpleRentInfo(object):
         self._early_settle = None
         self._early_settle_price = None
         self._end_time = None
+        self._loan_price = None
+        self._loan_time = None
         self._out_order_id = None
         self._plan_list = None
         self._price_info = None
@@ -78,6 +80,20 @@ class SimpleRentInfo(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def loan_price(self):
+        return self._loan_price
+
+    @loan_price.setter
+    def loan_price(self, value):
+        self._loan_price = value
+    @property
+    def loan_time(self):
+        return self._loan_time
+
+    @loan_time.setter
+    def loan_time(self, value):
+        self._loan_time = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -205,6 +221,16 @@ class SimpleRentInfo(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.loan_price:
+            if hasattr(self.loan_price, 'to_alipay_dict'):
+                params['loan_price'] = self.loan_price.to_alipay_dict()
+            else:
+                params['loan_price'] = self.loan_price
+        if self.loan_time:
+            if hasattr(self.loan_time, 'to_alipay_dict'):
+                params['loan_time'] = self.loan_time.to_alipay_dict()
+            else:
+                params['loan_time'] = self.loan_time
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -291,6 +317,10 @@ class SimpleRentInfo(object):
             o.early_settle_price = d['early_settle_price']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'loan_price' in d:
+            o.loan_price = d['loan_price']
+        if 'loan_time' in d:
+            o.loan_time = d['loan_time']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plan_list' in d:

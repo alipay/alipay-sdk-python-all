@@ -11,6 +11,7 @@ class AlipayCommerceMedicalPromoBenefitModifyModel(object):
     def __init__(self):
         self._category_id = None
         self._category_name = None
+        self._item_action = None
         self._item_id = None
         self._item_title = None
         self._main_pic_url = None
@@ -32,6 +33,13 @@ class AlipayCommerceMedicalPromoBenefitModifyModel(object):
     @category_name.setter
     def category_name(self, value):
         self._category_name = value
+    @property
+    def item_action(self):
+        return self._item_action
+
+    @item_action.setter
+    def item_action(self, value):
+        self._item_action = value
     @property
     def item_id(self):
         return self._item_id
@@ -94,6 +102,11 @@ class AlipayCommerceMedicalPromoBenefitModifyModel(object):
                 params['category_name'] = self.category_name.to_alipay_dict()
             else:
                 params['category_name'] = self.category_name
+        if self.item_action:
+            if hasattr(self.item_action, 'to_alipay_dict'):
+                params['item_action'] = self.item_action.to_alipay_dict()
+            else:
+                params['item_action'] = self.item_action
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -140,6 +153,8 @@ class AlipayCommerceMedicalPromoBenefitModifyModel(object):
             o.category_id = d['category_id']
         if 'category_name' in d:
             o.category_name = d['category_name']
+        if 'item_action' in d:
+            o.item_action = d['item_action']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_title' in d:

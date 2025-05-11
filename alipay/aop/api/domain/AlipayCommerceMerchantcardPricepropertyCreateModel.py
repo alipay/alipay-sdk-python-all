@@ -14,6 +14,7 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
         self._card_template_id = None
         self._card_template_name = None
         self._card_type = None
+        self._charge_now = None
         self._original_price = None
         self._period_price_list = None
         self._sale_price = None
@@ -49,6 +50,13 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
     @card_type.setter
     def card_type(self, value):
         self._card_type = value
+    @property
+    def charge_now(self):
+        return self._charge_now
+
+    @charge_now.setter
+    def charge_now(self, value):
+        self._charge_now = value
     @property
     def original_price(self):
         return self._original_price
@@ -100,6 +108,11 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
                 params['card_type'] = self.card_type.to_alipay_dict()
             else:
                 params['card_type'] = self.card_type
+        if self.charge_now:
+            if hasattr(self.charge_now, 'to_alipay_dict'):
+                params['charge_now'] = self.charge_now.to_alipay_dict()
+            else:
+                params['charge_now'] = self.charge_now
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -135,6 +148,8 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
             o.card_template_name = d['card_template_name']
         if 'card_type' in d:
             o.card_type = d['card_type']
+        if 'charge_now' in d:
+            o.charge_now = d['charge_now']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'period_price_list' in d:

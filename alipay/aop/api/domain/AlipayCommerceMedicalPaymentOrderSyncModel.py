@@ -22,6 +22,7 @@ class AlipayCommerceMedicalPaymentOrderSyncModel(object):
         self._other_pay_channel = None
         self._out_biz_no = None
         self._own_pay_amt = None
+        self._pay_code = None
         self._payment_city_code = None
         self._payment_place = None
         self._payment_place_code = None
@@ -131,6 +132,13 @@ class AlipayCommerceMedicalPaymentOrderSyncModel(object):
     @own_pay_amt.setter
     def own_pay_amt(self, value):
         self._own_pay_amt = value
+    @property
+    def pay_code(self):
+        return self._pay_code
+
+    @pay_code.setter
+    def pay_code(self, value):
+        self._pay_code = value
     @property
     def payment_city_code(self):
         return self._payment_city_code
@@ -266,6 +274,11 @@ class AlipayCommerceMedicalPaymentOrderSyncModel(object):
                 params['own_pay_amt'] = self.own_pay_amt.to_alipay_dict()
             else:
                 params['own_pay_amt'] = self.own_pay_amt
+        if self.pay_code:
+            if hasattr(self.pay_code, 'to_alipay_dict'):
+                params['pay_code'] = self.pay_code.to_alipay_dict()
+            else:
+                params['pay_code'] = self.pay_code
         if self.payment_city_code:
             if hasattr(self.payment_city_code, 'to_alipay_dict'):
                 params['payment_city_code'] = self.payment_city_code.to_alipay_dict()
@@ -339,6 +352,8 @@ class AlipayCommerceMedicalPaymentOrderSyncModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'own_pay_amt' in d:
             o.own_pay_amt = d['own_pay_amt']
+        if 'pay_code' in d:
+            o.pay_code = d['pay_code']
         if 'payment_city_code' in d:
             o.payment_city_code = d['payment_city_code']
         if 'payment_place' in d:

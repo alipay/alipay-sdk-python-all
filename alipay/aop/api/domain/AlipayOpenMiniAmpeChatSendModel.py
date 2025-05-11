@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AmpeDeviceInfo import AmpeDeviceInfo
 from alipay.aop.api.domain.ChatLocation import ChatLocation
 
 
@@ -11,6 +12,7 @@ class AlipayOpenMiniAmpeChatSendModel(object):
     def __init__(self):
         self._ampe_device_id = None
         self._ampe_product_id = None
+        self._device_info = None
         self._intent_code = None
         self._locations = None
         self._open_id = None
@@ -34,6 +36,16 @@ class AlipayOpenMiniAmpeChatSendModel(object):
     @ampe_product_id.setter
     def ampe_product_id(self, value):
         self._ampe_product_id = value
+    @property
+    def device_info(self):
+        return self._device_info
+
+    @device_info.setter
+    def device_info(self, value):
+        if isinstance(value, AmpeDeviceInfo):
+            self._device_info = value
+        else:
+            self._device_info = AmpeDeviceInfo.from_alipay_dict(value)
     @property
     def intent_code(self):
         return self._intent_code
@@ -110,6 +122,11 @@ class AlipayOpenMiniAmpeChatSendModel(object):
                 params['ampe_product_id'] = self.ampe_product_id.to_alipay_dict()
             else:
                 params['ampe_product_id'] = self.ampe_product_id
+        if self.device_info:
+            if hasattr(self.device_info, 'to_alipay_dict'):
+                params['device_info'] = self.device_info.to_alipay_dict()
+            else:
+                params['device_info'] = self.device_info
         if self.intent_code:
             if hasattr(self.intent_code, 'to_alipay_dict'):
                 params['intent_code'] = self.intent_code.to_alipay_dict()
@@ -166,6 +183,8 @@ class AlipayOpenMiniAmpeChatSendModel(object):
             o.ampe_device_id = d['ampe_device_id']
         if 'ampe_product_id' in d:
             o.ampe_product_id = d['ampe_product_id']
+        if 'device_info' in d:
+            o.device_info = d['device_info']
         if 'intent_code' in d:
             o.intent_code = d['intent_code']
         if 'locations' in d:

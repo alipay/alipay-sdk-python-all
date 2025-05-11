@@ -11,6 +11,7 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditLoanSideloanlendCalcConsultResponse, self).__init__()
+        self._coupon_code_list = None
         self._credit_quota = None
         self._daily_interest_rate = None
         self._extension = None
@@ -27,6 +28,16 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
         self._surplus_quota = None
         self._total_amount = None
 
+    @property
+    def coupon_code_list(self):
+        return self._coupon_code_list
+
+    @coupon_code_list.setter
+    def coupon_code_list(self, value):
+        if isinstance(value, list):
+            self._coupon_code_list = list()
+            for i in value:
+                self._coupon_code_list.append(i)
     @property
     def credit_quota(self):
         return self._credit_quota
@@ -144,6 +155,8 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditLoanSideloanlendCalcConsultResponse, self).parse_response_content(response_content)
+        if 'coupon_code_list' in response:
+            self.coupon_code_list = response['coupon_code_list']
         if 'credit_quota' in response:
             self.credit_quota = response['credit_quota']
         if 'daily_interest_rate' in response:

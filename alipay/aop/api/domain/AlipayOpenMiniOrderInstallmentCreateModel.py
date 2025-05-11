@@ -21,6 +21,7 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
         self._out_installment_order_id = None
         self._out_order_id = None
         self._pay_channel = None
+        self._pay_product_code = None
         self._pay_time = None
         self._period_num = None
         self._stage_no = None
@@ -118,6 +119,13 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
     @pay_channel.setter
     def pay_channel(self, value):
         self._pay_channel = value
+    @property
+    def pay_product_code(self):
+        return self._pay_product_code
+
+    @pay_product_code.setter
+    def pay_product_code(self, value):
+        self._pay_product_code = value
     @property
     def pay_time(self):
         return self._pay_time
@@ -229,6 +237,11 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
                 params['pay_channel'] = self.pay_channel.to_alipay_dict()
             else:
                 params['pay_channel'] = self.pay_channel
+        if self.pay_product_code:
+            if hasattr(self.pay_product_code, 'to_alipay_dict'):
+                params['pay_product_code'] = self.pay_product_code.to_alipay_dict()
+            else:
+                params['pay_product_code'] = self.pay_product_code
         if self.pay_time:
             if hasattr(self.pay_time, 'to_alipay_dict'):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
@@ -290,6 +303,8 @@ class AlipayOpenMiniOrderInstallmentCreateModel(object):
             o.out_order_id = d['out_order_id']
         if 'pay_channel' in d:
             o.pay_channel = d['pay_channel']
+        if 'pay_product_code' in d:
+            o.pay_product_code = d['pay_product_code']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
         if 'period_num' in d:

@@ -12,6 +12,7 @@ class DeliveryInfoDTO(object):
         self._delivery_id = None
         self._item_info_list = None
         self._period = None
+        self._send_division_code = None
         self._waybill_id = None
 
     @property
@@ -41,6 +42,13 @@ class DeliveryInfoDTO(object):
     @period.setter
     def period(self, value):
         self._period = value
+    @property
+    def send_division_code(self):
+        return self._send_division_code
+
+    @send_division_code.setter
+    def send_division_code(self, value):
+        self._send_division_code = value
     @property
     def waybill_id(self):
         return self._waybill_id
@@ -72,6 +80,11 @@ class DeliveryInfoDTO(object):
                 params['period'] = self.period.to_alipay_dict()
             else:
                 params['period'] = self.period
+        if self.send_division_code:
+            if hasattr(self.send_division_code, 'to_alipay_dict'):
+                params['send_division_code'] = self.send_division_code.to_alipay_dict()
+            else:
+                params['send_division_code'] = self.send_division_code
         if self.waybill_id:
             if hasattr(self.waybill_id, 'to_alipay_dict'):
                 params['waybill_id'] = self.waybill_id.to_alipay_dict()
@@ -90,6 +103,8 @@ class DeliveryInfoDTO(object):
             o.item_info_list = d['item_info_list']
         if 'period' in d:
             o.period = d['period']
+        if 'send_division_code' in d:
+            o.send_division_code = d['send_division_code']
         if 'waybill_id' in d:
             o.waybill_id = d['waybill_id']
         return o

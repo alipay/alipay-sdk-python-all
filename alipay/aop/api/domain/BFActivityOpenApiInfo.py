@@ -4,12 +4,14 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BFActivityFundInfo import BFActivityFundInfo
+from alipay.aop.api.domain.BFActivityFundInfoNew import BFActivityFundInfoNew
 
 
 class BFActivityOpenApiInfo(object):
 
     def __init__(self):
         self._activity_fund_infos = None
+        self._activity_fund_infos_new = None
         self._aggr_id = None
         self._available = None
         self._gmt_active = None
@@ -20,6 +22,7 @@ class BFActivityOpenApiInfo(object):
         self._partner_id = None
         self._pc_id = None
         self._product_id = None
+        self._product_type = None
         self._rate_version = None
 
     @property
@@ -35,6 +38,19 @@ class BFActivityOpenApiInfo(object):
                     self._activity_fund_infos.append(i)
                 else:
                     self._activity_fund_infos.append(BFActivityFundInfo.from_alipay_dict(i))
+    @property
+    def activity_fund_infos_new(self):
+        return self._activity_fund_infos_new
+
+    @activity_fund_infos_new.setter
+    def activity_fund_infos_new(self, value):
+        if isinstance(value, list):
+            self._activity_fund_infos_new = list()
+            for i in value:
+                if isinstance(i, BFActivityFundInfoNew):
+                    self._activity_fund_infos_new.append(i)
+                else:
+                    self._activity_fund_infos_new.append(BFActivityFundInfoNew.from_alipay_dict(i))
     @property
     def aggr_id(self):
         return self._aggr_id
@@ -106,6 +122,13 @@ class BFActivityOpenApiInfo(object):
     def product_id(self, value):
         self._product_id = value
     @property
+    def product_type(self):
+        return self._product_type
+
+    @product_type.setter
+    def product_type(self, value):
+        self._product_type = value
+    @property
     def rate_version(self):
         return self._rate_version
 
@@ -126,6 +149,16 @@ class BFActivityOpenApiInfo(object):
                 params['activity_fund_infos'] = self.activity_fund_infos.to_alipay_dict()
             else:
                 params['activity_fund_infos'] = self.activity_fund_infos
+        if self.activity_fund_infos_new:
+            if isinstance(self.activity_fund_infos_new, list):
+                for i in range(0, len(self.activity_fund_infos_new)):
+                    element = self.activity_fund_infos_new[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.activity_fund_infos_new[i] = element.to_alipay_dict()
+            if hasattr(self.activity_fund_infos_new, 'to_alipay_dict'):
+                params['activity_fund_infos_new'] = self.activity_fund_infos_new.to_alipay_dict()
+            else:
+                params['activity_fund_infos_new'] = self.activity_fund_infos_new
         if self.aggr_id:
             if hasattr(self.aggr_id, 'to_alipay_dict'):
                 params['aggr_id'] = self.aggr_id.to_alipay_dict()
@@ -176,6 +209,11 @@ class BFActivityOpenApiInfo(object):
                 params['product_id'] = self.product_id.to_alipay_dict()
             else:
                 params['product_id'] = self.product_id
+        if self.product_type:
+            if hasattr(self.product_type, 'to_alipay_dict'):
+                params['product_type'] = self.product_type.to_alipay_dict()
+            else:
+                params['product_type'] = self.product_type
         if self.rate_version:
             if hasattr(self.rate_version, 'to_alipay_dict'):
                 params['rate_version'] = self.rate_version.to_alipay_dict()
@@ -190,6 +228,8 @@ class BFActivityOpenApiInfo(object):
         o = BFActivityOpenApiInfo()
         if 'activity_fund_infos' in d:
             o.activity_fund_infos = d['activity_fund_infos']
+        if 'activity_fund_infos_new' in d:
+            o.activity_fund_infos_new = d['activity_fund_infos_new']
         if 'aggr_id' in d:
             o.aggr_id = d['aggr_id']
         if 'available' in d:
@@ -210,6 +250,8 @@ class BFActivityOpenApiInfo(object):
             o.pc_id = d['pc_id']
         if 'product_id' in d:
             o.product_id = d['product_id']
+        if 'product_type' in d:
+            o.product_type = d['product_type']
         if 'rate_version' in d:
             o.rate_version = d['rate_version']
         return o

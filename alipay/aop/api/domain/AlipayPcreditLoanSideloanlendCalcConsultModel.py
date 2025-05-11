@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._apply_loan_amount = None
+        self._coupon_code_list = None
         self._extension = None
         self._loan_term = None
         self._loan_term_unit = None
@@ -31,6 +32,16 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
     @apply_loan_amount.setter
     def apply_loan_amount(self, value):
         self._apply_loan_amount = value
+    @property
+    def coupon_code_list(self):
+        return self._coupon_code_list
+
+    @coupon_code_list.setter
+    def coupon_code_list(self, value):
+        if isinstance(value, list):
+            self._coupon_code_list = list()
+            for i in value:
+                self._coupon_code_list.append(i)
     @property
     def extension(self):
         return self._extension
@@ -87,6 +98,16 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
                 params['apply_loan_amount'] = self.apply_loan_amount.to_alipay_dict()
             else:
                 params['apply_loan_amount'] = self.apply_loan_amount
+        if self.coupon_code_list:
+            if isinstance(self.coupon_code_list, list):
+                for i in range(0, len(self.coupon_code_list)):
+                    element = self.coupon_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.coupon_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.coupon_code_list, 'to_alipay_dict'):
+                params['coupon_code_list'] = self.coupon_code_list.to_alipay_dict()
+            else:
+                params['coupon_code_list'] = self.coupon_code_list
         if self.extension:
             if hasattr(self.extension, 'to_alipay_dict'):
                 params['extension'] = self.extension.to_alipay_dict()
@@ -128,6 +149,8 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'apply_loan_amount' in d:
             o.apply_loan_amount = d['apply_loan_amount']
+        if 'coupon_code_list' in d:
+            o.coupon_code_list = d['coupon_code_list']
         if 'extension' in d:
             o.extension = d['extension']
         if 'loan_term' in d:

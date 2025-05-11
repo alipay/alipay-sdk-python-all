@@ -9,6 +9,7 @@ class CreditPricing(object):
 
     def __init__(self):
         self._amount = None
+        self._default_credit_pricing = None
         self._int_rate = None
         self._loan_term = None
         self._loan_term_unit = None
@@ -21,6 +22,13 @@ class CreditPricing(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def default_credit_pricing(self):
+        return self._default_credit_pricing
+
+    @default_credit_pricing.setter
+    def default_credit_pricing(self, value):
+        self._default_credit_pricing = value
     @property
     def int_rate(self):
         return self._int_rate
@@ -58,6 +66,11 @@ class CreditPricing(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.default_credit_pricing:
+            if hasattr(self.default_credit_pricing, 'to_alipay_dict'):
+                params['default_credit_pricing'] = self.default_credit_pricing.to_alipay_dict()
+            else:
+                params['default_credit_pricing'] = self.default_credit_pricing
         if self.int_rate:
             if hasattr(self.int_rate, 'to_alipay_dict'):
                 params['int_rate'] = self.int_rate.to_alipay_dict()
@@ -87,6 +100,8 @@ class CreditPricing(object):
         o = CreditPricing()
         if 'amount' in d:
             o.amount = d['amount']
+        if 'default_credit_pricing' in d:
+            o.default_credit_pricing = d['default_credit_pricing']
         if 'int_rate' in d:
             o.int_rate = d['int_rate']
         if 'loan_term' in d:

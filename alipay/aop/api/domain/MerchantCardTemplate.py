@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BreakCostsInfo import BreakCostsInfo
 from alipay.aop.api.domain.CardPromoInfo import CardPromoInfo
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
@@ -14,6 +15,7 @@ from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 class MerchantCardTemplate(object):
 
     def __init__(self):
+        self._break_costs_info = None
         self._card_promo_list = None
         self._card_template_app_id = None
         self._card_template_id = None
@@ -28,13 +30,25 @@ class MerchantCardTemplate(object):
         self._image_url_list = None
         self._money_card_info = None
         self._msg_app_id = None
+        self._online_sale_switch = None
         self._out_card_id = None
         self._reject_reasons = None
         self._sale_info = None
         self._settle_type = None
+        self._support_withdraw = None
         self._times_card_info = None
         self._use_info = None
 
+    @property
+    def break_costs_info(self):
+        return self._break_costs_info
+
+    @break_costs_info.setter
+    def break_costs_info(self, value):
+        if isinstance(value, BreakCostsInfo):
+            self._break_costs_info = value
+        else:
+            self._break_costs_info = BreakCostsInfo.from_alipay_dict(value)
     @property
     def card_promo_list(self):
         return self._card_promo_list
@@ -155,6 +169,13 @@ class MerchantCardTemplate(object):
     def msg_app_id(self, value):
         self._msg_app_id = value
     @property
+    def online_sale_switch(self):
+        return self._online_sale_switch
+
+    @online_sale_switch.setter
+    def online_sale_switch(self, value):
+        self._online_sale_switch = value
+    @property
     def out_card_id(self):
         return self._out_card_id
 
@@ -192,6 +213,13 @@ class MerchantCardTemplate(object):
     def settle_type(self, value):
         self._settle_type = value
     @property
+    def support_withdraw(self):
+        return self._support_withdraw
+
+    @support_withdraw.setter
+    def support_withdraw(self, value):
+        self._support_withdraw = value
+    @property
     def times_card_info(self):
         return self._times_card_info
 
@@ -215,6 +243,11 @@ class MerchantCardTemplate(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.break_costs_info:
+            if hasattr(self.break_costs_info, 'to_alipay_dict'):
+                params['break_costs_info'] = self.break_costs_info.to_alipay_dict()
+            else:
+                params['break_costs_info'] = self.break_costs_info
         if self.card_promo_list:
             if isinstance(self.card_promo_list, list):
                 for i in range(0, len(self.card_promo_list)):
@@ -310,6 +343,11 @@ class MerchantCardTemplate(object):
                 params['msg_app_id'] = self.msg_app_id.to_alipay_dict()
             else:
                 params['msg_app_id'] = self.msg_app_id
+        if self.online_sale_switch:
+            if hasattr(self.online_sale_switch, 'to_alipay_dict'):
+                params['online_sale_switch'] = self.online_sale_switch.to_alipay_dict()
+            else:
+                params['online_sale_switch'] = self.online_sale_switch
         if self.out_card_id:
             if hasattr(self.out_card_id, 'to_alipay_dict'):
                 params['out_card_id'] = self.out_card_id.to_alipay_dict()
@@ -335,6 +373,11 @@ class MerchantCardTemplate(object):
                 params['settle_type'] = self.settle_type.to_alipay_dict()
             else:
                 params['settle_type'] = self.settle_type
+        if self.support_withdraw:
+            if hasattr(self.support_withdraw, 'to_alipay_dict'):
+                params['support_withdraw'] = self.support_withdraw.to_alipay_dict()
+            else:
+                params['support_withdraw'] = self.support_withdraw
         if self.times_card_info:
             if hasattr(self.times_card_info, 'to_alipay_dict'):
                 params['times_card_info'] = self.times_card_info.to_alipay_dict()
@@ -352,6 +395,8 @@ class MerchantCardTemplate(object):
         if not d:
             return None
         o = MerchantCardTemplate()
+        if 'break_costs_info' in d:
+            o.break_costs_info = d['break_costs_info']
         if 'card_promo_list' in d:
             o.card_promo_list = d['card_promo_list']
         if 'card_template_app_id' in d:
@@ -380,6 +425,8 @@ class MerchantCardTemplate(object):
             o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:
             o.msg_app_id = d['msg_app_id']
+        if 'online_sale_switch' in d:
+            o.online_sale_switch = d['online_sale_switch']
         if 'out_card_id' in d:
             o.out_card_id = d['out_card_id']
         if 'reject_reasons' in d:
@@ -388,6 +435,8 @@ class MerchantCardTemplate(object):
             o.sale_info = d['sale_info']
         if 'settle_type' in d:
             o.settle_type = d['settle_type']
+        if 'support_withdraw' in d:
+            o.support_withdraw = d['support_withdraw']
         if 'times_card_info' in d:
             o.times_card_info = d['times_card_info']
         if 'use_info' in d:

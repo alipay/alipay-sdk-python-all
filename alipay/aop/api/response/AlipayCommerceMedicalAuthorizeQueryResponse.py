@@ -10,6 +10,7 @@ class AlipayCommerceMedicalAuthorizeQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceMedicalAuthorizeQueryResponse, self).__init__()
         self._institution_ecode_status = None
+        self._page_result_url = None
         self._page_suggestion = None
         self._page_url = None
         self._status = None
@@ -21,6 +22,13 @@ class AlipayCommerceMedicalAuthorizeQueryResponse(AlipayResponse):
     @institution_ecode_status.setter
     def institution_ecode_status(self, value):
         self._institution_ecode_status = value
+    @property
+    def page_result_url(self):
+        return self._page_result_url
+
+    @page_result_url.setter
+    def page_result_url(self, value):
+        self._page_result_url = value
     @property
     def page_suggestion(self):
         return self._page_suggestion
@@ -47,6 +55,8 @@ class AlipayCommerceMedicalAuthorizeQueryResponse(AlipayResponse):
         response = super(AlipayCommerceMedicalAuthorizeQueryResponse, self).parse_response_content(response_content)
         if 'institution_ecode_status' in response:
             self.institution_ecode_status = response['institution_ecode_status']
+        if 'page_result_url' in response:
+            self.page_result_url = response['page_result_url']
         if 'page_suggestion' in response:
             self.page_suggestion = response['page_suggestion']
         if 'page_url' in response:

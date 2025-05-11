@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalAuthorizeQueryModel(object):
 
     def __init__(self):
+        self._device_sn = None
         self._ftoken = None
         self._open_id = None
         self._org_no = None
         self._user_id = None
 
+    @property
+    def device_sn(self):
+        return self._device_sn
+
+    @device_sn.setter
+    def device_sn(self, value):
+        self._device_sn = value
     @property
     def ftoken(self):
         return self._ftoken
@@ -45,6 +53,11 @@ class AlipayCommerceMedicalAuthorizeQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.device_sn:
+            if hasattr(self.device_sn, 'to_alipay_dict'):
+                params['device_sn'] = self.device_sn.to_alipay_dict()
+            else:
+                params['device_sn'] = self.device_sn
         if self.ftoken:
             if hasattr(self.ftoken, 'to_alipay_dict'):
                 params['ftoken'] = self.ftoken.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayCommerceMedicalAuthorizeQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalAuthorizeQueryModel()
+        if 'device_sn' in d:
+            o.device_sn = d['device_sn']
         if 'ftoken' in d:
             o.ftoken = d['ftoken']
         if 'open_id' in d:

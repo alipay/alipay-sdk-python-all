@@ -10,6 +10,7 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
     def __init__(self):
         self._base_64_audio_data = None
         self._device_id = None
+        self._device_name = None
         self._flow_data = None
         self._long_verify_session_id = None
         self._out_biz_id = None
@@ -31,6 +32,13 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
     @device_id.setter
     def device_id(self, value):
         self._device_id = value
+    @property
+    def device_name(self):
+        return self._device_name
+
+    @device_name.setter
+    def device_name(self, value):
+        self._device_name = value
     @property
     def flow_data(self):
         return self._flow_data
@@ -87,6 +95,11 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
                 params['device_id'] = self.device_id.to_alipay_dict()
             else:
                 params['device_id'] = self.device_id
+        if self.device_name:
+            if hasattr(self.device_name, 'to_alipay_dict'):
+                params['device_name'] = self.device_name.to_alipay_dict()
+            else:
+                params['device_name'] = self.device_name
         if self.flow_data:
             if hasattr(self.flow_data, 'to_alipay_dict'):
                 params['flow_data'] = self.flow_data.to_alipay_dict()
@@ -128,6 +141,8 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
             o.base_64_audio_data = d['base_64_audio_data']
         if 'device_id' in d:
             o.device_id = d['device_id']
+        if 'device_name' in d:
+            o.device_name = d['device_name']
         if 'flow_data' in d:
             o.flow_data = d['flow_data']
         if 'long_verify_session_id' in d:

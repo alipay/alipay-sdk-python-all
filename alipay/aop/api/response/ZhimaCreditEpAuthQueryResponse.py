@@ -11,6 +11,7 @@ class ZhimaCreditEpAuthQueryResponse(AlipayResponse):
         super(ZhimaCreditEpAuthQueryResponse, self).__init__()
         self._ep_cert_no = None
         self._ep_name = None
+        self._ext_info = None
         self._legal_person_cert_no = None
         self._legal_person_name = None
         self._phone_no = None
@@ -29,6 +30,13 @@ class ZhimaCreditEpAuthQueryResponse(AlipayResponse):
     @ep_name.setter
     def ep_name(self, value):
         self._ep_name = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def legal_person_cert_no(self):
         return self._legal_person_cert_no
@@ -57,6 +65,8 @@ class ZhimaCreditEpAuthQueryResponse(AlipayResponse):
             self.ep_cert_no = response['ep_cert_no']
         if 'ep_name' in response:
             self.ep_name = response['ep_name']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'legal_person_cert_no' in response:
             self.legal_person_cert_no = response['legal_person_cert_no']
         if 'legal_person_name' in response:

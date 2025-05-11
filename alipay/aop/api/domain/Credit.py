@@ -11,6 +11,7 @@ class Credit(object):
     def __init__(self):
         self._credit_amt = None
         self._credit_pricing_list = None
+        self._default_credit = None
         self._expire_time = None
         self._loan_type = None
         self._product_code = None
@@ -35,6 +36,13 @@ class Credit(object):
                     self._credit_pricing_list.append(i)
                 else:
                     self._credit_pricing_list.append(CreditPricing.from_alipay_dict(i))
+    @property
+    def default_credit(self):
+        return self._default_credit
+
+    @default_credit.setter
+    def default_credit(self, value):
+        self._default_credit = value
     @property
     def expire_time(self):
         return self._expire_time
@@ -75,6 +83,11 @@ class Credit(object):
                 params['credit_pricing_list'] = self.credit_pricing_list.to_alipay_dict()
             else:
                 params['credit_pricing_list'] = self.credit_pricing_list
+        if self.default_credit:
+            if hasattr(self.default_credit, 'to_alipay_dict'):
+                params['default_credit'] = self.default_credit.to_alipay_dict()
+            else:
+                params['default_credit'] = self.default_credit
         if self.expire_time:
             if hasattr(self.expire_time, 'to_alipay_dict'):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
@@ -101,6 +114,8 @@ class Credit(object):
             o.credit_amt = d['credit_amt']
         if 'credit_pricing_list' in d:
             o.credit_pricing_list = d['credit_pricing_list']
+        if 'default_credit' in d:
+            o.default_credit = d['default_credit']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
         if 'loan_type' in d:

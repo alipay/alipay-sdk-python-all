@@ -20,6 +20,7 @@ class SkuInfoVO(object):
         self._volume_width = None
         self._weight = None
         self._weight_unit = None
+        self._weight_v_2 = None
 
     @property
     def price(self):
@@ -105,6 +106,13 @@ class SkuInfoVO(object):
     @weight_unit.setter
     def weight_unit(self, value):
         self._weight_unit = value
+    @property
+    def weight_v_2(self):
+        return self._weight_v_2
+
+    @weight_v_2.setter
+    def weight_v_2(self, value):
+        self._weight_v_2 = value
 
 
     def to_alipay_dict(self):
@@ -169,6 +177,11 @@ class SkuInfoVO(object):
                 params['weight_unit'] = self.weight_unit.to_alipay_dict()
             else:
                 params['weight_unit'] = self.weight_unit
+        if self.weight_v_2:
+            if hasattr(self.weight_v_2, 'to_alipay_dict'):
+                params['weight_v_2'] = self.weight_v_2.to_alipay_dict()
+            else:
+                params['weight_v_2'] = self.weight_v_2
         return params
 
     @staticmethod
@@ -200,6 +213,8 @@ class SkuInfoVO(object):
             o.weight = d['weight']
         if 'weight_unit' in d:
             o.weight_unit = d['weight_unit']
+        if 'weight_v_2' in d:
+            o.weight_v_2 = d['weight_v_2']
         return o
 
 

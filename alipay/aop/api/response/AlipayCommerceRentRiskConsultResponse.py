@@ -16,6 +16,7 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
         self._high_risk_models = None
         self._product_edition = None
         self._risk_infos = None
+        self._vam_group = None
 
     @property
     def extremely_low_risk_models(self):
@@ -57,6 +58,13 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
                     self._risk_infos.append(i)
                 else:
                     self._risk_infos.append(RentRiskInfoVO.from_alipay_dict(i))
+    @property
+    def vam_group(self):
+        return self._vam_group
+
+    @vam_group.setter
+    def vam_group(self, value):
+        self._vam_group = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceRentRiskConsultResponse, self).parse_response_content(response_content)
@@ -68,3 +76,5 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
             self.product_edition = response['product_edition']
         if 'risk_infos' in response:
             self.risk_infos = response['risk_infos']
+        if 'vam_group' in response:
+            self.vam_group = response['vam_group']

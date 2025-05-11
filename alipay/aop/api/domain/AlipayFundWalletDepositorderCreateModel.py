@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ParticipantForm import ParticipantForm
+from alipay.aop.api.domain.ValidateUserPrincipal import ValidateUserPrincipal
 
 
 class AlipayFundWalletDepositorderCreateModel(object):
@@ -22,6 +23,7 @@ class AlipayFundWalletDepositorderCreateModel(object):
         self._time_expire = None
         self._user_wallet_id = None
         self._valid_date = None
+        self._validate_user_principal_list = None
 
     @property
     def amount(self):
@@ -117,6 +119,19 @@ class AlipayFundWalletDepositorderCreateModel(object):
     @valid_date.setter
     def valid_date(self, value):
         self._valid_date = value
+    @property
+    def validate_user_principal_list(self):
+        return self._validate_user_principal_list
+
+    @validate_user_principal_list.setter
+    def validate_user_principal_list(self, value):
+        if isinstance(value, list):
+            self._validate_user_principal_list = list()
+            for i in value:
+                if isinstance(i, ValidateUserPrincipal):
+                    self._validate_user_principal_list.append(i)
+                else:
+                    self._validate_user_principal_list.append(ValidateUserPrincipal.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -186,6 +201,16 @@ class AlipayFundWalletDepositorderCreateModel(object):
                 params['valid_date'] = self.valid_date.to_alipay_dict()
             else:
                 params['valid_date'] = self.valid_date
+        if self.validate_user_principal_list:
+            if isinstance(self.validate_user_principal_list, list):
+                for i in range(0, len(self.validate_user_principal_list)):
+                    element = self.validate_user_principal_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.validate_user_principal_list[i] = element.to_alipay_dict()
+            if hasattr(self.validate_user_principal_list, 'to_alipay_dict'):
+                params['validate_user_principal_list'] = self.validate_user_principal_list.to_alipay_dict()
+            else:
+                params['validate_user_principal_list'] = self.validate_user_principal_list
         return params
 
     @staticmethod
@@ -219,6 +244,8 @@ class AlipayFundWalletDepositorderCreateModel(object):
             o.user_wallet_id = d['user_wallet_id']
         if 'valid_date' in d:
             o.valid_date = d['valid_date']
+        if 'validate_user_principal_list' in d:
+            o.validate_user_principal_list = d['validate_user_principal_list']
         return o
 
 

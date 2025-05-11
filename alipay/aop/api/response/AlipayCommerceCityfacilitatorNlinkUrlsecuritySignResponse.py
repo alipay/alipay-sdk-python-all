@@ -9,12 +9,20 @@ class AlipayCommerceCityfacilitatorNlinkUrlsecuritySignResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceCityfacilitatorNlinkUrlsecuritySignResponse, self).__init__()
+        self._biztid = None
         self._cost_time = None
         self._msg_info = None
         self._server_sign = None
         self._trace_id_info = None
         self._url = None
 
+    @property
+    def biztid(self):
+        return self._biztid
+
+    @biztid.setter
+    def biztid(self, value):
+        self._biztid = value
     @property
     def cost_time(self):
         return self._cost_time
@@ -53,6 +61,8 @@ class AlipayCommerceCityfacilitatorNlinkUrlsecuritySignResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceCityfacilitatorNlinkUrlsecuritySignResponse, self).parse_response_content(response_content)
+        if 'biztid' in response:
+            self.biztid = response['biztid']
         if 'cost_time' in response:
             self.cost_time = response['cost_time']
         if 'msg_info' in response:

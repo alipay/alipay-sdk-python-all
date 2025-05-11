@@ -8,8 +8,16 @@ from alipay.aop.api.constant.ParamConstants import *
 class JhUserPageDetailTest(object):
 
     def __init__(self):
+        self._status = None
         self._user_id = None
 
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def user_id(self):
         return self._user_id
@@ -21,6 +29,11 @@ class JhUserPageDetailTest(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -33,6 +46,8 @@ class JhUserPageDetailTest(object):
         if not d:
             return None
         o = JhUserPageDetailTest()
+        if 'status' in d:
+            o.status = d['status']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

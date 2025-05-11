@@ -18,6 +18,8 @@ class AlipayOpenAgentBaseinfoModifyModel(object):
         self._card_guide = None
         self._card_type = None
         self._continue_ask = None
+        self._custom_card_body = None
+        self._custom_card_id = None
         self._support_qa_mode = None
 
     @property
@@ -94,6 +96,20 @@ class AlipayOpenAgentBaseinfoModifyModel(object):
     def continue_ask(self, value):
         self._continue_ask = value
     @property
+    def custom_card_body(self):
+        return self._custom_card_body
+
+    @custom_card_body.setter
+    def custom_card_body(self, value):
+        self._custom_card_body = value
+    @property
+    def custom_card_id(self):
+        return self._custom_card_id
+
+    @custom_card_id.setter
+    def custom_card_id(self, value):
+        self._custom_card_id = value
+    @property
     def support_qa_mode(self):
         return self._support_qa_mode
 
@@ -162,6 +178,16 @@ class AlipayOpenAgentBaseinfoModifyModel(object):
                 params['continue_ask'] = self.continue_ask.to_alipay_dict()
             else:
                 params['continue_ask'] = self.continue_ask
+        if self.custom_card_body:
+            if hasattr(self.custom_card_body, 'to_alipay_dict'):
+                params['custom_card_body'] = self.custom_card_body.to_alipay_dict()
+            else:
+                params['custom_card_body'] = self.custom_card_body
+        if self.custom_card_id:
+            if hasattr(self.custom_card_id, 'to_alipay_dict'):
+                params['custom_card_id'] = self.custom_card_id.to_alipay_dict()
+            else:
+                params['custom_card_id'] = self.custom_card_id
         if self.support_qa_mode:
             if isinstance(self.support_qa_mode, list):
                 for i in range(0, len(self.support_qa_mode)):
@@ -199,6 +225,10 @@ class AlipayOpenAgentBaseinfoModifyModel(object):
             o.card_type = d['card_type']
         if 'continue_ask' in d:
             o.continue_ask = d['continue_ask']
+        if 'custom_card_body' in d:
+            o.custom_card_body = d['custom_card_body']
+        if 'custom_card_id' in d:
+            o.custom_card_id = d['custom_card_id']
         if 'support_qa_mode' in d:
             o.support_qa_mode = d['support_qa_mode']
         return o

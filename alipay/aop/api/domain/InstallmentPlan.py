@@ -12,6 +12,7 @@ class InstallmentPlan(object):
         self._installment_no = None
         self._interest = None
         self._principal = None
+        self._promotion_amount = None
         self._total_amount = None
 
     @property
@@ -43,6 +44,13 @@ class InstallmentPlan(object):
     def principal(self, value):
         self._principal = value
     @property
+    def promotion_amount(self):
+        return self._promotion_amount
+
+    @promotion_amount.setter
+    def promotion_amount(self, value):
+        self._promotion_amount = value
+    @property
     def total_amount(self):
         return self._total_amount
 
@@ -73,6 +81,11 @@ class InstallmentPlan(object):
                 params['principal'] = self.principal.to_alipay_dict()
             else:
                 params['principal'] = self.principal
+        if self.promotion_amount:
+            if hasattr(self.promotion_amount, 'to_alipay_dict'):
+                params['promotion_amount'] = self.promotion_amount.to_alipay_dict()
+            else:
+                params['promotion_amount'] = self.promotion_amount
         if self.total_amount:
             if hasattr(self.total_amount, 'to_alipay_dict'):
                 params['total_amount'] = self.total_amount.to_alipay_dict()
@@ -93,6 +106,8 @@ class InstallmentPlan(object):
             o.interest = d['interest']
         if 'principal' in d:
             o.principal = d['principal']
+        if 'promotion_amount' in d:
+            o.promotion_amount = d['promotion_amount']
         if 'total_amount' in d:
             o.total_amount = d['total_amount']
         return o

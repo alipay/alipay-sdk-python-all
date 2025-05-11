@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AntMerchantExpandEcoNfcBindModel(object):
 
     def __init__(self):
+        self._eco_code = None
         self._nfc_token = None
         self._tag_id = None
         self._upload_qrcode_url = None
 
+    @property
+    def eco_code(self):
+        return self._eco_code
+
+    @eco_code.setter
+    def eco_code(self, value):
+        self._eco_code = value
     @property
     def nfc_token(self):
         return self._nfc_token
@@ -37,6 +45,11 @@ class AntMerchantExpandEcoNfcBindModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.eco_code:
+            if hasattr(self.eco_code, 'to_alipay_dict'):
+                params['eco_code'] = self.eco_code.to_alipay_dict()
+            else:
+                params['eco_code'] = self.eco_code
         if self.nfc_token:
             if hasattr(self.nfc_token, 'to_alipay_dict'):
                 params['nfc_token'] = self.nfc_token.to_alipay_dict()
@@ -59,6 +72,8 @@ class AntMerchantExpandEcoNfcBindModel(object):
         if not d:
             return None
         o = AntMerchantExpandEcoNfcBindModel()
+        if 'eco_code' in d:
+            o.eco_code = d['eco_code']
         if 'nfc_token' in d:
             o.nfc_token = d['nfc_token']
         if 'tag_id' in d:

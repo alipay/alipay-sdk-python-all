@@ -15,6 +15,7 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
         self._period = None
         self._period_type = None
         self._period_value = None
+        self._update_action = None
         self._update_type = None
         self._user_id = None
 
@@ -68,6 +69,13 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
     def period_value(self, value):
         self._period_value = value
     @property
+    def update_action(self):
+        return self._update_action
+
+    @update_action.setter
+    def update_action(self, value):
+        self._update_action = value
+    @property
     def update_type(self):
         return self._update_type
 
@@ -120,6 +128,11 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
                 params['period_value'] = self.period_value.to_alipay_dict()
             else:
                 params['period_value'] = self.period_value
+        if self.update_action:
+            if hasattr(self.update_action, 'to_alipay_dict'):
+                params['update_action'] = self.update_action.to_alipay_dict()
+            else:
+                params['update_action'] = self.update_action
         if self.update_type:
             if hasattr(self.update_type, 'to_alipay_dict'):
                 params['update_type'] = self.update_type.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
             o.period_type = d['period_type']
         if 'period_value' in d:
             o.period_value = d['period_value']
+        if 'update_action' in d:
+            o.update_action = d['update_action']
         if 'update_type' in d:
             o.update_type = d['update_type']
         if 'user_id' in d:

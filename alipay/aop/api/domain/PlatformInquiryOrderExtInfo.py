@@ -12,6 +12,7 @@ class PlatformInquiryOrderExtInfo(object):
     def __init__(self):
         self._alipay_channel_order_flag = None
         self._approve_comment = None
+        self._channel_desc = None
         self._chat_url = None
         self._complaint = None
         self._doctor_inquiry_link_page = None
@@ -36,6 +37,13 @@ class PlatformInquiryOrderExtInfo(object):
     @approve_comment.setter
     def approve_comment(self, value):
         self._approve_comment = value
+    @property
+    def channel_desc(self):
+        return self._channel_desc
+
+    @channel_desc.setter
+    def channel_desc(self, value):
+        self._channel_desc = value
     @property
     def chat_url(self):
         return self._chat_url
@@ -119,6 +127,11 @@ class PlatformInquiryOrderExtInfo(object):
                 params['approve_comment'] = self.approve_comment.to_alipay_dict()
             else:
                 params['approve_comment'] = self.approve_comment
+        if self.channel_desc:
+            if hasattr(self.channel_desc, 'to_alipay_dict'):
+                params['channel_desc'] = self.channel_desc.to_alipay_dict()
+            else:
+                params['channel_desc'] = self.channel_desc
         if self.chat_url:
             if hasattr(self.chat_url, 'to_alipay_dict'):
                 params['chat_url'] = self.chat_url.to_alipay_dict()
@@ -175,6 +188,8 @@ class PlatformInquiryOrderExtInfo(object):
             o.alipay_channel_order_flag = d['alipay_channel_order_flag']
         if 'approve_comment' in d:
             o.approve_comment = d['approve_comment']
+        if 'channel_desc' in d:
+            o.channel_desc = d['channel_desc']
         if 'chat_url' in d:
             o.chat_url = d['chat_url']
         if 'complaint' in d:

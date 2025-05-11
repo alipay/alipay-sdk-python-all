@@ -12,6 +12,8 @@ class RentRoyaltyInfo(object):
     def __init__(self):
         self._buyer_id = None
         self._buyer_open_id = None
+        self._early_settle = None
+        self._early_settle_price = None
         self._invest_app_id = None
         self._invest_pid = None
         self._order_id = None
@@ -34,6 +36,20 @@ class RentRoyaltyInfo(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def early_settle(self):
+        return self._early_settle
+
+    @early_settle.setter
+    def early_settle(self, value):
+        self._early_settle = value
+    @property
+    def early_settle_price(self):
+        return self._early_settle_price
+
+    @early_settle_price.setter
+    def early_settle_price(self, value):
+        self._early_settle_price = value
     @property
     def invest_app_id(self):
         return self._invest_app_id
@@ -109,6 +125,16 @@ class RentRoyaltyInfo(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.early_settle:
+            if hasattr(self.early_settle, 'to_alipay_dict'):
+                params['early_settle'] = self.early_settle.to_alipay_dict()
+            else:
+                params['early_settle'] = self.early_settle
+        if self.early_settle_price:
+            if hasattr(self.early_settle_price, 'to_alipay_dict'):
+                params['early_settle_price'] = self.early_settle_price.to_alipay_dict()
+            else:
+                params['early_settle_price'] = self.early_settle_price
         if self.invest_app_id:
             if hasattr(self.invest_app_id, 'to_alipay_dict'):
                 params['invest_app_id'] = self.invest_app_id.to_alipay_dict()
@@ -165,6 +191,10 @@ class RentRoyaltyInfo(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'early_settle' in d:
+            o.early_settle = d['early_settle']
+        if 'early_settle_price' in d:
+            o.early_settle_price = d['early_settle_price']
         if 'invest_app_id' in d:
             o.invest_app_id = d['invest_app_id']
         if 'invest_pid' in d:

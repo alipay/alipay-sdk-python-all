@@ -26,6 +26,7 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._loan_rate = None
         self._loan_term = None
         self._loan_term_unit = None
+        self._merged_approval_flag = None
         self._mortgage_rate = None
         self._org_drawdown_no = None
         self._other = None
@@ -35,6 +36,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._repay_type = None
         self._service_fee_rate = None
         self._status = None
+        self._supplement_info_flag = None
+        self._user_tier = None
         self._valuate_price = None
 
     @property
@@ -156,6 +159,13 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def loan_term_unit(self, value):
         self._loan_term_unit = value
     @property
+    def merged_approval_flag(self):
+        return self._merged_approval_flag
+
+    @merged_approval_flag.setter
+    def merged_approval_flag(self, value):
+        self._merged_approval_flag = value
+    @property
     def mortgage_rate(self):
         return self._mortgage_rate
 
@@ -221,6 +231,20 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def supplement_info_flag(self):
+        return self._supplement_info_flag
+
+    @supplement_info_flag.setter
+    def supplement_info_flag(self, value):
+        self._supplement_info_flag = value
+    @property
+    def user_tier(self):
+        return self._user_tier
+
+    @user_tier.setter
+    def user_tier(self, value):
+        self._user_tier = value
     @property
     def valuate_price(self):
         return self._valuate_price
@@ -317,6 +341,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['loan_term_unit'] = self.loan_term_unit.to_alipay_dict()
             else:
                 params['loan_term_unit'] = self.loan_term_unit
+        if self.merged_approval_flag:
+            if hasattr(self.merged_approval_flag, 'to_alipay_dict'):
+                params['merged_approval_flag'] = self.merged_approval_flag.to_alipay_dict()
+            else:
+                params['merged_approval_flag'] = self.merged_approval_flag
         if self.mortgage_rate:
             if hasattr(self.mortgage_rate, 'to_alipay_dict'):
                 params['mortgage_rate'] = self.mortgage_rate.to_alipay_dict()
@@ -362,6 +391,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.supplement_info_flag:
+            if hasattr(self.supplement_info_flag, 'to_alipay_dict'):
+                params['supplement_info_flag'] = self.supplement_info_flag.to_alipay_dict()
+            else:
+                params['supplement_info_flag'] = self.supplement_info_flag
+        if self.user_tier:
+            if hasattr(self.user_tier, 'to_alipay_dict'):
+                params['user_tier'] = self.user_tier.to_alipay_dict()
+            else:
+                params['user_tier'] = self.user_tier
         if self.valuate_price:
             if hasattr(self.valuate_price, 'to_alipay_dict'):
                 params['valuate_price'] = self.valuate_price.to_alipay_dict()
@@ -406,6 +445,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.loan_term = d['loan_term']
         if 'loan_term_unit' in d:
             o.loan_term_unit = d['loan_term_unit']
+        if 'merged_approval_flag' in d:
+            o.merged_approval_flag = d['merged_approval_flag']
         if 'mortgage_rate' in d:
             o.mortgage_rate = d['mortgage_rate']
         if 'org_drawdown_no' in d:
@@ -424,6 +465,10 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.service_fee_rate = d['service_fee_rate']
         if 'status' in d:
             o.status = d['status']
+        if 'supplement_info_flag' in d:
+            o.supplement_info_flag = d['supplement_info_flag']
+        if 'user_tier' in d:
+            o.user_tier = d['user_tier']
         if 'valuate_price' in d:
             o.valuate_price = d['valuate_price']
         return o

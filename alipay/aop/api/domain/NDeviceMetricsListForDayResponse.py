@@ -34,6 +34,7 @@ class NDeviceMetricsListForDayResponse(object):
         self._shipping_time = None
         self._sn = None
         self._store_id = None
+        self._trd_nfc_device_usercnt = None
 
     @property
     def alipay_amount(self):
@@ -217,6 +218,13 @@ class NDeviceMetricsListForDayResponse(object):
     @store_id.setter
     def store_id(self, value):
         self._store_id = value
+    @property
+    def trd_nfc_device_usercnt(self):
+        return self._trd_nfc_device_usercnt
+
+    @trd_nfc_device_usercnt.setter
+    def trd_nfc_device_usercnt(self, value):
+        self._trd_nfc_device_usercnt = value
 
 
     def to_alipay_dict(self):
@@ -351,6 +359,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['store_id'] = self.store_id.to_alipay_dict()
             else:
                 params['store_id'] = self.store_id
+        if self.trd_nfc_device_usercnt:
+            if hasattr(self.trd_nfc_device_usercnt, 'to_alipay_dict'):
+                params['trd_nfc_device_usercnt'] = self.trd_nfc_device_usercnt.to_alipay_dict()
+            else:
+                params['trd_nfc_device_usercnt'] = self.trd_nfc_device_usercnt
         return params
 
     @staticmethod
@@ -410,6 +423,8 @@ class NDeviceMetricsListForDayResponse(object):
             o.sn = d['sn']
         if 'store_id' in d:
             o.store_id = d['store_id']
+        if 'trd_nfc_device_usercnt' in d:
+            o.trd_nfc_device_usercnt = d['trd_nfc_device_usercnt']
         return o
 
 

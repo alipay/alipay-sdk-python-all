@@ -11,6 +11,7 @@ class AlipayCommerceEducatePlaceInfoBatchqueryModel(object):
         self._inst_id = None
         self._page_num = None
         self._page_size = None
+        self._parent_id = None
         self._place_label = None
         self._place_name = None
 
@@ -35,6 +36,13 @@ class AlipayCommerceEducatePlaceInfoBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def parent_id(self):
+        return self._parent_id
+
+    @parent_id.setter
+    def parent_id(self, value):
+        self._parent_id = value
     @property
     def place_label(self):
         return self._place_label
@@ -68,6 +76,11 @@ class AlipayCommerceEducatePlaceInfoBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.parent_id:
+            if hasattr(self.parent_id, 'to_alipay_dict'):
+                params['parent_id'] = self.parent_id.to_alipay_dict()
+            else:
+                params['parent_id'] = self.parent_id
         if self.place_label:
             if hasattr(self.place_label, 'to_alipay_dict'):
                 params['place_label'] = self.place_label.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayCommerceEducatePlaceInfoBatchqueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'parent_id' in d:
+            o.parent_id = d['parent_id']
         if 'place_label' in d:
             o.place_label = d['place_label']
         if 'place_name' in d:

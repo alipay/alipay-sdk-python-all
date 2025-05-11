@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class EtcTripInfo(object):
 
     def __init__(self):
+        self._advance_status = None
         self._end_station_name = None
         self._out_order_id = None
         self._start_station_name = None
@@ -15,10 +16,18 @@ class EtcTripInfo(object):
         self._sub_type = None
         self._total_amount = None
         self._trade_no = None
+        self._trade_status = None
         self._trip_end_time = None
         self._trip_id = None
         self._trip_start_time = None
 
+    @property
+    def advance_status(self):
+        return self._advance_status
+
+    @advance_status.setter
+    def advance_status(self, value):
+        self._advance_status = value
     @property
     def end_station_name(self):
         return self._end_station_name
@@ -69,6 +78,13 @@ class EtcTripInfo(object):
     def trade_no(self, value):
         self._trade_no = value
     @property
+    def trade_status(self):
+        return self._trade_status
+
+    @trade_status.setter
+    def trade_status(self, value):
+        self._trade_status = value
+    @property
     def trip_end_time(self):
         return self._trip_end_time
 
@@ -93,6 +109,11 @@ class EtcTripInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.advance_status:
+            if hasattr(self.advance_status, 'to_alipay_dict'):
+                params['advance_status'] = self.advance_status.to_alipay_dict()
+            else:
+                params['advance_status'] = self.advance_status
         if self.end_station_name:
             if hasattr(self.end_station_name, 'to_alipay_dict'):
                 params['end_station_name'] = self.end_station_name.to_alipay_dict()
@@ -128,6 +149,11 @@ class EtcTripInfo(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.trade_status:
+            if hasattr(self.trade_status, 'to_alipay_dict'):
+                params['trade_status'] = self.trade_status.to_alipay_dict()
+            else:
+                params['trade_status'] = self.trade_status
         if self.trip_end_time:
             if hasattr(self.trip_end_time, 'to_alipay_dict'):
                 params['trip_end_time'] = self.trip_end_time.to_alipay_dict()
@@ -150,6 +176,8 @@ class EtcTripInfo(object):
         if not d:
             return None
         o = EtcTripInfo()
+        if 'advance_status' in d:
+            o.advance_status = d['advance_status']
         if 'end_station_name' in d:
             o.end_station_name = d['end_station_name']
         if 'out_order_id' in d:
@@ -164,6 +192,8 @@ class EtcTripInfo(object):
             o.total_amount = d['total_amount']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'trade_status' in d:
+            o.trade_status = d['trade_status']
         if 'trip_end_time' in d:
             o.trip_end_time = d['trip_end_time']
         if 'trip_id' in d:

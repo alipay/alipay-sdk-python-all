@@ -16,8 +16,10 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
         self._inactive_user = None
         self._is_encrypt_plate_no = None
         self._mobile_number = None
+        self._node_type = None
         self._open_appid = None
         self._open_id = None
+        self._order_create_time = None
         self._out_order_no = None
         self._out_serial_no = None
         self._pay_frequency = None
@@ -86,6 +88,13 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
     def mobile_number(self, value):
         self._mobile_number = value
     @property
+    def node_type(self):
+        return self._node_type
+
+    @node_type.setter
+    def node_type(self, value):
+        self._node_type = value
+    @property
     def open_appid(self):
         return self._open_appid
 
@@ -99,6 +108,13 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def order_create_time(self):
+        return self._order_create_time
+
+    @order_create_time.setter
+    def order_create_time(self, value):
+        self._order_create_time = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -220,6 +236,11 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
                 params['mobile_number'] = self.mobile_number.to_alipay_dict()
             else:
                 params['mobile_number'] = self.mobile_number
+        if self.node_type:
+            if hasattr(self.node_type, 'to_alipay_dict'):
+                params['node_type'] = self.node_type.to_alipay_dict()
+            else:
+                params['node_type'] = self.node_type
         if self.open_appid:
             if hasattr(self.open_appid, 'to_alipay_dict'):
                 params['open_appid'] = self.open_appid.to_alipay_dict()
@@ -230,6 +251,11 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.order_create_time:
+            if hasattr(self.order_create_time, 'to_alipay_dict'):
+                params['order_create_time'] = self.order_create_time.to_alipay_dict()
+            else:
+                params['order_create_time'] = self.order_create_time
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -306,10 +332,14 @@ class AlipayCommerceTransportParkingPaymentinfoSyncModel(object):
             o.is_encrypt_plate_no = d['is_encrypt_plate_no']
         if 'mobile_number' in d:
             o.mobile_number = d['mobile_number']
+        if 'node_type' in d:
+            o.node_type = d['node_type']
         if 'open_appid' in d:
             o.open_appid = d['open_appid']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'order_create_time' in d:
+            o.order_create_time = d['order_create_time']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'out_serial_no' in d:

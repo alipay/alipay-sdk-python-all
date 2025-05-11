@@ -14,6 +14,8 @@ class RecycleSkuPriceDTO(object):
         self._min_price = None
         self._price_ext = None
         self._price_extend = None
+        self._sale_price = None
+        self._sku_price_type = None
 
     @property
     def max_price(self):
@@ -52,6 +54,20 @@ class RecycleSkuPriceDTO(object):
             self._price_extend = value
         else:
             self._price_extend = RecycleSkuPriceExtDTO.from_alipay_dict(value)
+    @property
+    def sale_price(self):
+        return self._sale_price
+
+    @sale_price.setter
+    def sale_price(self, value):
+        self._sale_price = value
+    @property
+    def sku_price_type(self):
+        return self._sku_price_type
+
+    @sku_price_type.setter
+    def sku_price_type(self, value):
+        self._sku_price_type = value
 
 
     def to_alipay_dict(self):
@@ -81,6 +97,16 @@ class RecycleSkuPriceDTO(object):
                 params['price_extend'] = self.price_extend.to_alipay_dict()
             else:
                 params['price_extend'] = self.price_extend
+        if self.sale_price:
+            if hasattr(self.sale_price, 'to_alipay_dict'):
+                params['sale_price'] = self.sale_price.to_alipay_dict()
+            else:
+                params['sale_price'] = self.sale_price
+        if self.sku_price_type:
+            if hasattr(self.sku_price_type, 'to_alipay_dict'):
+                params['sku_price_type'] = self.sku_price_type.to_alipay_dict()
+            else:
+                params['sku_price_type'] = self.sku_price_type
         return params
 
     @staticmethod
@@ -96,6 +122,10 @@ class RecycleSkuPriceDTO(object):
             o.price_ext = d['price_ext']
         if 'price_extend' in d:
             o.price_extend = d['price_extend']
+        if 'sale_price' in d:
+            o.sale_price = d['sale_price']
+        if 'sku_price_type' in d:
+            o.sku_price_type = d['sku_price_type']
         return o
 
 

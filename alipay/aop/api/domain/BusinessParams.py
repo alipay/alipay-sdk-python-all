@@ -13,6 +13,7 @@ class BusinessParams(object):
         self._card_type = None
         self._enterprise_pay_amount = None
         self._enterprise_pay_info = None
+        self._force_pwd = None
         self._good_taxes = None
         self._mc_create_trade_ip = None
         self._priority_unfreeze_asset = None
@@ -53,6 +54,13 @@ class BusinessParams(object):
     @enterprise_pay_info.setter
     def enterprise_pay_info(self, value):
         self._enterprise_pay_info = value
+    @property
+    def force_pwd(self):
+        return self._force_pwd
+
+    @force_pwd.setter
+    def force_pwd(self, value):
+        self._force_pwd = value
     @property
     def good_taxes(self):
         return self._good_taxes
@@ -110,6 +118,11 @@ class BusinessParams(object):
                 params['enterprise_pay_info'] = self.enterprise_pay_info.to_alipay_dict()
             else:
                 params['enterprise_pay_info'] = self.enterprise_pay_info
+        if self.force_pwd:
+            if hasattr(self.force_pwd, 'to_alipay_dict'):
+                params['force_pwd'] = self.force_pwd.to_alipay_dict()
+            else:
+                params['force_pwd'] = self.force_pwd
         if self.good_taxes:
             if hasattr(self.good_taxes, 'to_alipay_dict'):
                 params['good_taxes'] = self.good_taxes.to_alipay_dict()
@@ -147,6 +160,8 @@ class BusinessParams(object):
             o.enterprise_pay_amount = d['enterprise_pay_amount']
         if 'enterprise_pay_info' in d:
             o.enterprise_pay_info = d['enterprise_pay_info']
+        if 'force_pwd' in d:
+            o.force_pwd = d['force_pwd']
         if 'good_taxes' in d:
             o.good_taxes = d['good_taxes']
         if 'mc_create_trade_ip' in d:

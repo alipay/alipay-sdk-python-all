@@ -12,6 +12,7 @@ class InquiryChannel(object):
         self._inquiry_doctor_shift_case_list = None
         self._inquiry_mode = None
         self._inquiry_price = None
+        self._inquiry_status = None
         self._inquiry_type = None
         self._inquiry_url = None
         self._register_flag = None
@@ -44,6 +45,13 @@ class InquiryChannel(object):
     @inquiry_price.setter
     def inquiry_price(self, value):
         self._inquiry_price = value
+    @property
+    def inquiry_status(self):
+        return self._inquiry_status
+
+    @inquiry_status.setter
+    def inquiry_status(self, value):
+        self._inquiry_status = value
     @property
     def inquiry_type(self):
         return self._inquiry_type
@@ -96,6 +104,11 @@ class InquiryChannel(object):
                 params['inquiry_price'] = self.inquiry_price.to_alipay_dict()
             else:
                 params['inquiry_price'] = self.inquiry_price
+        if self.inquiry_status:
+            if hasattr(self.inquiry_status, 'to_alipay_dict'):
+                params['inquiry_status'] = self.inquiry_status.to_alipay_dict()
+            else:
+                params['inquiry_status'] = self.inquiry_status
         if self.inquiry_type:
             if hasattr(self.inquiry_type, 'to_alipay_dict'):
                 params['inquiry_type'] = self.inquiry_type.to_alipay_dict()
@@ -129,6 +142,8 @@ class InquiryChannel(object):
             o.inquiry_mode = d['inquiry_mode']
         if 'inquiry_price' in d:
             o.inquiry_price = d['inquiry_price']
+        if 'inquiry_status' in d:
+            o.inquiry_status = d['inquiry_status']
         if 'inquiry_type' in d:
             o.inquiry_type = d['inquiry_type']
         if 'inquiry_url' in d:
