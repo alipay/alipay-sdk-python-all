@@ -12,6 +12,7 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
         super(AlipayPcreditLoanSideloansignCreditConsultResponse, self).__init__()
         self._admit = None
         self._alipay_desensitize_login_id = None
+        self._cool_off_type = None
         self._extension = None
         self._fail_reason_code = None
         self._fail_reason_message = None
@@ -37,6 +38,13 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
     @alipay_desensitize_login_id.setter
     def alipay_desensitize_login_id(self, value):
         self._alipay_desensitize_login_id = value
+    @property
+    def cool_off_type(self):
+        return self._cool_off_type
+
+    @cool_off_type.setter
+    def cool_off_type(self, value):
+        self._cool_off_type = value
     @property
     def extension(self):
         return self._extension
@@ -117,6 +125,8 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
             self.admit = response['admit']
         if 'alipay_desensitize_login_id' in response:
             self.alipay_desensitize_login_id = response['alipay_desensitize_login_id']
+        if 'cool_off_type' in response:
+            self.cool_off_type = response['cool_off_type']
         if 'extension' in response:
             self.extension = response['extension']
         if 'fail_reason_code' in response:

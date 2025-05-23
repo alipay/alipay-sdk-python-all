@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
+from alipay.aop.api.domain.ComplexBusinessTime import ComplexBusinessTime
 
 
 class ShopQueryOpenApiVO(object):
@@ -14,6 +15,7 @@ class ShopQueryOpenApiVO(object):
         self._business_time = None
         self._contact_mobile = None
         self._contact_phone = None
+        self._new_business_time = None
         self._new_shop_category = None
         self._shop_category = None
         self._shop_id = None
@@ -60,6 +62,19 @@ class ShopQueryOpenApiVO(object):
     @contact_phone.setter
     def contact_phone(self, value):
         self._contact_phone = value
+    @property
+    def new_business_time(self):
+        return self._new_business_time
+
+    @new_business_time.setter
+    def new_business_time(self, value):
+        if isinstance(value, list):
+            self._new_business_time = list()
+            for i in value:
+                if isinstance(i, ComplexBusinessTime):
+                    self._new_business_time.append(i)
+                else:
+                    self._new_business_time.append(ComplexBusinessTime.from_alipay_dict(i))
     @property
     def new_shop_category(self):
         return self._new_shop_category
@@ -145,6 +160,16 @@ class ShopQueryOpenApiVO(object):
                 params['contact_phone'] = self.contact_phone.to_alipay_dict()
             else:
                 params['contact_phone'] = self.contact_phone
+        if self.new_business_time:
+            if isinstance(self.new_business_time, list):
+                for i in range(0, len(self.new_business_time)):
+                    element = self.new_business_time[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.new_business_time[i] = element.to_alipay_dict()
+            if hasattr(self.new_business_time, 'to_alipay_dict'):
+                params['new_business_time'] = self.new_business_time.to_alipay_dict()
+            else:
+                params['new_business_time'] = self.new_business_time
         if self.new_shop_category:
             if hasattr(self.new_shop_category, 'to_alipay_dict'):
                 params['new_shop_category'] = self.new_shop_category.to_alipay_dict()
@@ -200,6 +225,8 @@ class ShopQueryOpenApiVO(object):
             o.contact_mobile = d['contact_mobile']
         if 'contact_phone' in d:
             o.contact_phone = d['contact_phone']
+        if 'new_business_time' in d:
+            o.new_business_time = d['new_business_time']
         if 'new_shop_category' in d:
             o.new_shop_category = d['new_shop_category']
         if 'shop_category' in d:

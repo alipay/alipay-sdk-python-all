@@ -18,6 +18,7 @@ class CardTemplateUse(object):
         self._period_price_list = None
         self._reservation_url = None
         self._show_shop = None
+        self._show_shop_ids = None
         self._usable_count = None
         self._usable_shop_list = None
         self._use_instruction = None
@@ -77,6 +78,16 @@ class CardTemplateUse(object):
     @show_shop.setter
     def show_shop(self, value):
         self._show_shop = value
+    @property
+    def show_shop_ids(self):
+        return self._show_shop_ids
+
+    @show_shop_ids.setter
+    def show_shop_ids(self, value):
+        if isinstance(value, list):
+            self._show_shop_ids = list()
+            for i in value:
+                self._show_shop_ids.append(i)
     @property
     def usable_count(self):
         return self._usable_count
@@ -153,6 +164,16 @@ class CardTemplateUse(object):
                 params['show_shop'] = self.show_shop.to_alipay_dict()
             else:
                 params['show_shop'] = self.show_shop
+        if self.show_shop_ids:
+            if isinstance(self.show_shop_ids, list):
+                for i in range(0, len(self.show_shop_ids)):
+                    element = self.show_shop_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.show_shop_ids[i] = element.to_alipay_dict()
+            if hasattr(self.show_shop_ids, 'to_alipay_dict'):
+                params['show_shop_ids'] = self.show_shop_ids.to_alipay_dict()
+            else:
+                params['show_shop_ids'] = self.show_shop_ids
         if self.usable_count:
             if hasattr(self.usable_count, 'to_alipay_dict'):
                 params['usable_count'] = self.usable_count.to_alipay_dict()
@@ -202,6 +223,8 @@ class CardTemplateUse(object):
             o.reservation_url = d['reservation_url']
         if 'show_shop' in d:
             o.show_shop = d['show_shop']
+        if 'show_shop_ids' in d:
+            o.show_shop_ids = d['show_shop_ids']
         if 'usable_count' in d:
             o.usable_count = d['usable_count']
         if 'usable_shop_list' in d:

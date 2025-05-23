@@ -16,6 +16,7 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
         self._guide_info = None
         self._item_id = None
         self._out_item_id = None
+        self._sale_status = None
         self._skus = None
         self._sold_time = None
 
@@ -59,6 +60,13 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
     @out_item_id.setter
     def out_item_id(self, value):
         self._out_item_id = value
+    @property
+    def sale_status(self):
+        return self._sale_status
+
+    @sale_status.setter
+    def sale_status(self, value):
+        self._sale_status = value
     @property
     def skus(self):
         return self._skus
@@ -116,6 +124,11 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
             else:
                 params['out_item_id'] = self.out_item_id
+        if self.sale_status:
+            if hasattr(self.sale_status, 'to_alipay_dict'):
+                params['sale_status'] = self.sale_status.to_alipay_dict()
+            else:
+                params['sale_status'] = self.sale_status
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -146,6 +159,8 @@ class AlipayOpenAppLocalitemDirectModifyModel(object):
             o.item_id = d['item_id']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
+        if 'sale_status' in d:
+            o.sale_status = d['sale_status']
         if 'skus' in d:
             o.skus = d['skus']
         if 'sold_time' in d:

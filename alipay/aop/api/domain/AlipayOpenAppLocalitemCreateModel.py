@@ -25,6 +25,7 @@ class AlipayOpenAppLocalitemCreateModel(object):
         self._merchant_name = None
         self._out_item_id = None
         self._path = None
+        self._sale_status = None
         self._skus = None
         self._sold_time = None
         self._spu_id = None
@@ -132,6 +133,13 @@ class AlipayOpenAppLocalitemCreateModel(object):
     @path.setter
     def path(self, value):
         self._path = value
+    @property
+    def sale_status(self):
+        return self._sale_status
+
+    @sale_status.setter
+    def sale_status(self, value):
+        self._sale_status = value
     @property
     def skus(self):
         return self._skus
@@ -248,6 +256,11 @@ class AlipayOpenAppLocalitemCreateModel(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.sale_status:
+            if hasattr(self.sale_status, 'to_alipay_dict'):
+                params['sale_status'] = self.sale_status.to_alipay_dict()
+            else:
+                params['sale_status'] = self.sale_status
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -304,6 +317,8 @@ class AlipayOpenAppLocalitemCreateModel(object):
             o.out_item_id = d['out_item_id']
         if 'path' in d:
             o.path = d['path']
+        if 'sale_status' in d:
+            o.sale_status = d['sale_status']
         if 'skus' in d:
             o.skus = d['skus']
         if 'sold_time' in d:

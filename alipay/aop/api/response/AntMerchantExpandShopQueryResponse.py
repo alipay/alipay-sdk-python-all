@@ -9,6 +9,7 @@ from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
 from alipay.aop.api.domain.MerchantShopIndustryInfo import MerchantShopIndustryInfo
 from alipay.aop.api.domain.ShopIndustryLicense import ShopIndustryLicense
+from alipay.aop.api.domain.ComplexBusinessTime import ComplexBusinessTime
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 from alipay.aop.api.domain.ShopRecommendInfo import ShopRecommendInfo
 
@@ -36,6 +37,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._legal_name = None
         self._license_auth_letter_image = None
         self._memo = None
+        self._new_business_time = None
         self._new_shop_category = None
         self._out_door_images = None
         self._qualifications = None
@@ -217,6 +219,19 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     def memo(self, value):
         self._memo = value
     @property
+    def new_business_time(self):
+        return self._new_business_time
+
+    @new_business_time.setter
+    def new_business_time(self, value):
+        if isinstance(value, list):
+            self._new_business_time = list()
+            for i in value:
+                if isinstance(i, ComplexBusinessTime):
+                    self._new_business_time.append(i)
+                else:
+                    self._new_business_time.append(ComplexBusinessTime.from_alipay_dict(i))
+    @property
     def new_shop_category(self):
         return self._new_shop_category
 
@@ -360,6 +375,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.license_auth_letter_image = response['license_auth_letter_image']
         if 'memo' in response:
             self.memo = response['memo']
+        if 'new_business_time' in response:
+            self.new_business_time = response['new_business_time']
         if 'new_shop_category' in response:
             self.new_shop_category = response['new_shop_category']
         if 'out_door_images' in response:

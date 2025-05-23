@@ -40,6 +40,7 @@ class AlipayCommerceHousingHouseSaleAddModel(object):
         self._other = None
         self._owner_id = None
         self._owner_name = None
+        self._page = None
         self._parking_space = None
         self._power_of_attorney = None
         self._property_code = None
@@ -291,6 +292,13 @@ class AlipayCommerceHousingHouseSaleAddModel(object):
     @owner_name.setter
     def owner_name(self, value):
         self._owner_name = value
+    @property
+    def page(self):
+        return self._page
+
+    @page.setter
+    def page(self, value):
+        self._page = value
     @property
     def parking_space(self):
         return self._parking_space
@@ -595,6 +603,11 @@ class AlipayCommerceHousingHouseSaleAddModel(object):
                 params['owner_name'] = self.owner_name.to_alipay_dict()
             else:
                 params['owner_name'] = self.owner_name
+        if self.page:
+            if hasattr(self.page, 'to_alipay_dict'):
+                params['page'] = self.page.to_alipay_dict()
+            else:
+                params['page'] = self.page
         if self.parking_space:
             if hasattr(self.parking_space, 'to_alipay_dict'):
                 params['parking_space'] = self.parking_space.to_alipay_dict()
@@ -761,6 +774,8 @@ class AlipayCommerceHousingHouseSaleAddModel(object):
             o.owner_id = d['owner_id']
         if 'owner_name' in d:
             o.owner_name = d['owner_name']
+        if 'page' in d:
+            o.page = d['page']
         if 'parking_space' in d:
             o.parking_space = d['parking_space']
         if 'power_of_attorney' in d:

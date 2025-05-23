@@ -18,6 +18,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._company_clerk_id = None
         self._company_supplier_id = None
         self._gmt_success = None
+        self._memo = None
         self._order_amount = None
         self._order_id = None
         self._order_invoice_list = None
@@ -72,6 +73,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
     @gmt_success.setter
     def gmt_success(self, value):
         self._gmt_success = value
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -232,6 +240,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
             self.company_supplier_id = response['company_supplier_id']
         if 'gmt_success' in response:
             self.gmt_success = response['gmt_success']
+        if 'memo' in response:
+            self.memo = response['memo']
         if 'order_amount' in response:
             self.order_amount = response['order_amount']
         if 'order_id' in response:

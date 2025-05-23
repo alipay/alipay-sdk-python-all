@@ -12,6 +12,7 @@ class AlipayCommerceMedicalPromoPointPayModel(object):
         self._biz_id = None
         self._biz_no = None
         self._item_id = None
+        self._kz_info = None
         self._lm_order_id = None
         self._med_benefit_id = None
         self._open_id = None
@@ -47,6 +48,13 @@ class AlipayCommerceMedicalPromoPointPayModel(object):
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def kz_info(self):
+        return self._kz_info
+
+    @kz_info.setter
+    def kz_info(self, value):
+        self._kz_info = value
     @property
     def lm_order_id(self):
         return self._lm_order_id
@@ -113,6 +121,11 @@ class AlipayCommerceMedicalPromoPointPayModel(object):
                 params['item_id'] = self.item_id.to_alipay_dict()
             else:
                 params['item_id'] = self.item_id
+        if self.kz_info:
+            if hasattr(self.kz_info, 'to_alipay_dict'):
+                params['kz_info'] = self.kz_info.to_alipay_dict()
+            else:
+                params['kz_info'] = self.kz_info
         if self.lm_order_id:
             if hasattr(self.lm_order_id, 'to_alipay_dict'):
                 params['lm_order_id'] = self.lm_order_id.to_alipay_dict()
@@ -158,6 +171,8 @@ class AlipayCommerceMedicalPromoPointPayModel(object):
             o.biz_no = d['biz_no']
         if 'item_id' in d:
             o.item_id = d['item_id']
+        if 'kz_info' in d:
+            o.kz_info = d['kz_info']
         if 'lm_order_id' in d:
             o.lm_order_id = d['lm_order_id']
         if 'med_benefit_id' in d:

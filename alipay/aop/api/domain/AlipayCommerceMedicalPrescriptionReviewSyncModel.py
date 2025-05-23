@@ -8,13 +8,31 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
 
     def __init__(self):
+        self._out_pharmacist_code = None
+        self._out_pharmacist_name = None
         self._pharmacist_code = None
         self._prescription_code = None
         self._prescription_id = None
         self._reject_reason = None
         self._review_result = None
+        self._signed_prsc_pdf_url = None
+        self._signed_prsc_pic_url = None
         self._store_code = None
 
+    @property
+    def out_pharmacist_code(self):
+        return self._out_pharmacist_code
+
+    @out_pharmacist_code.setter
+    def out_pharmacist_code(self, value):
+        self._out_pharmacist_code = value
+    @property
+    def out_pharmacist_name(self):
+        return self._out_pharmacist_name
+
+    @out_pharmacist_name.setter
+    def out_pharmacist_name(self, value):
+        self._out_pharmacist_name = value
     @property
     def pharmacist_code(self):
         return self._pharmacist_code
@@ -51,6 +69,20 @@ class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
     def review_result(self, value):
         self._review_result = value
     @property
+    def signed_prsc_pdf_url(self):
+        return self._signed_prsc_pdf_url
+
+    @signed_prsc_pdf_url.setter
+    def signed_prsc_pdf_url(self, value):
+        self._signed_prsc_pdf_url = value
+    @property
+    def signed_prsc_pic_url(self):
+        return self._signed_prsc_pic_url
+
+    @signed_prsc_pic_url.setter
+    def signed_prsc_pic_url(self, value):
+        self._signed_prsc_pic_url = value
+    @property
     def store_code(self):
         return self._store_code
 
@@ -61,6 +93,16 @@ class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.out_pharmacist_code:
+            if hasattr(self.out_pharmacist_code, 'to_alipay_dict'):
+                params['out_pharmacist_code'] = self.out_pharmacist_code.to_alipay_dict()
+            else:
+                params['out_pharmacist_code'] = self.out_pharmacist_code
+        if self.out_pharmacist_name:
+            if hasattr(self.out_pharmacist_name, 'to_alipay_dict'):
+                params['out_pharmacist_name'] = self.out_pharmacist_name.to_alipay_dict()
+            else:
+                params['out_pharmacist_name'] = self.out_pharmacist_name
         if self.pharmacist_code:
             if hasattr(self.pharmacist_code, 'to_alipay_dict'):
                 params['pharmacist_code'] = self.pharmacist_code.to_alipay_dict()
@@ -86,6 +128,16 @@ class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
                 params['review_result'] = self.review_result.to_alipay_dict()
             else:
                 params['review_result'] = self.review_result
+        if self.signed_prsc_pdf_url:
+            if hasattr(self.signed_prsc_pdf_url, 'to_alipay_dict'):
+                params['signed_prsc_pdf_url'] = self.signed_prsc_pdf_url.to_alipay_dict()
+            else:
+                params['signed_prsc_pdf_url'] = self.signed_prsc_pdf_url
+        if self.signed_prsc_pic_url:
+            if hasattr(self.signed_prsc_pic_url, 'to_alipay_dict'):
+                params['signed_prsc_pic_url'] = self.signed_prsc_pic_url.to_alipay_dict()
+            else:
+                params['signed_prsc_pic_url'] = self.signed_prsc_pic_url
         if self.store_code:
             if hasattr(self.store_code, 'to_alipay_dict'):
                 params['store_code'] = self.store_code.to_alipay_dict()
@@ -98,6 +150,10 @@ class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalPrescriptionReviewSyncModel()
+        if 'out_pharmacist_code' in d:
+            o.out_pharmacist_code = d['out_pharmacist_code']
+        if 'out_pharmacist_name' in d:
+            o.out_pharmacist_name = d['out_pharmacist_name']
         if 'pharmacist_code' in d:
             o.pharmacist_code = d['pharmacist_code']
         if 'prescription_code' in d:
@@ -108,6 +164,10 @@ class AlipayCommerceMedicalPrescriptionReviewSyncModel(object):
             o.reject_reason = d['reject_reason']
         if 'review_result' in d:
             o.review_result = d['review_result']
+        if 'signed_prsc_pdf_url' in d:
+            o.signed_prsc_pdf_url = d['signed_prsc_pdf_url']
+        if 'signed_prsc_pic_url' in d:
+            o.signed_prsc_pic_url = d['signed_prsc_pic_url']
         if 'store_code' in d:
             o.store_code = d['store_code']
         return o

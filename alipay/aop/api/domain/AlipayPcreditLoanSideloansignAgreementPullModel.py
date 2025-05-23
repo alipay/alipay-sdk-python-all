@@ -13,6 +13,7 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
         self._credit_type = None
         self._extension = None
         self._fund_supplier_code = None
+        self._fund_supplier_code_list = None
         self._open_id = None
         self._product_code = None
 
@@ -51,6 +52,16 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
     @fund_supplier_code.setter
     def fund_supplier_code(self, value):
         self._fund_supplier_code = value
+    @property
+    def fund_supplier_code_list(self):
+        return self._fund_supplier_code_list
+
+    @fund_supplier_code_list.setter
+    def fund_supplier_code_list(self, value):
+        if isinstance(value, list):
+            self._fund_supplier_code_list = list()
+            for i in value:
+                self._fund_supplier_code_list.append(i)
     @property
     def open_id(self):
         return self._open_id
@@ -94,6 +105,16 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
                 params['fund_supplier_code'] = self.fund_supplier_code.to_alipay_dict()
             else:
                 params['fund_supplier_code'] = self.fund_supplier_code
+        if self.fund_supplier_code_list:
+            if isinstance(self.fund_supplier_code_list, list):
+                for i in range(0, len(self.fund_supplier_code_list)):
+                    element = self.fund_supplier_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.fund_supplier_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.fund_supplier_code_list, 'to_alipay_dict'):
+                params['fund_supplier_code_list'] = self.fund_supplier_code_list.to_alipay_dict()
+            else:
+                params['fund_supplier_code_list'] = self.fund_supplier_code_list
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -121,6 +142,8 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
             o.extension = d['extension']
         if 'fund_supplier_code' in d:
             o.fund_supplier_code = d['fund_supplier_code']
+        if 'fund_supplier_code_list' in d:
+            o.fund_supplier_code_list = d['fund_supplier_code_list']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'product_code' in d:

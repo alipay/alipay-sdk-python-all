@@ -18,6 +18,10 @@ class RentRoyalty(object):
         self._out_order_id = None
         self._period = None
         self._repay_time = None
+        self._repayment_interest_price = None
+        self._repayment_principal_price = None
+        self._repayment_time = None
+        self._repayment_total_price = None
         self._royalty_after_price = None
         self._royalty_deliver_type = None
         self._royalty_installment_no = None
@@ -102,6 +106,34 @@ class RentRoyalty(object):
     @repay_time.setter
     def repay_time(self, value):
         self._repay_time = value
+    @property
+    def repayment_interest_price(self):
+        return self._repayment_interest_price
+
+    @repayment_interest_price.setter
+    def repayment_interest_price(self, value):
+        self._repayment_interest_price = value
+    @property
+    def repayment_principal_price(self):
+        return self._repayment_principal_price
+
+    @repayment_principal_price.setter
+    def repayment_principal_price(self, value):
+        self._repayment_principal_price = value
+    @property
+    def repayment_time(self):
+        return self._repayment_time
+
+    @repayment_time.setter
+    def repayment_time(self, value):
+        self._repayment_time = value
+    @property
+    def repayment_total_price(self):
+        return self._repayment_total_price
+
+    @repayment_total_price.setter
+    def repayment_total_price(self, value):
+        self._repayment_total_price = value
     @property
     def royalty_after_price(self):
         return self._royalty_after_price
@@ -247,6 +279,26 @@ class RentRoyalty(object):
                 params['repay_time'] = self.repay_time.to_alipay_dict()
             else:
                 params['repay_time'] = self.repay_time
+        if self.repayment_interest_price:
+            if hasattr(self.repayment_interest_price, 'to_alipay_dict'):
+                params['repayment_interest_price'] = self.repayment_interest_price.to_alipay_dict()
+            else:
+                params['repayment_interest_price'] = self.repayment_interest_price
+        if self.repayment_principal_price:
+            if hasattr(self.repayment_principal_price, 'to_alipay_dict'):
+                params['repayment_principal_price'] = self.repayment_principal_price.to_alipay_dict()
+            else:
+                params['repayment_principal_price'] = self.repayment_principal_price
+        if self.repayment_time:
+            if hasattr(self.repayment_time, 'to_alipay_dict'):
+                params['repayment_time'] = self.repayment_time.to_alipay_dict()
+            else:
+                params['repayment_time'] = self.repayment_time
+        if self.repayment_total_price:
+            if hasattr(self.repayment_total_price, 'to_alipay_dict'):
+                params['repayment_total_price'] = self.repayment_total_price.to_alipay_dict()
+            else:
+                params['repayment_total_price'] = self.repayment_total_price
         if self.royalty_after_price:
             if hasattr(self.royalty_after_price, 'to_alipay_dict'):
                 params['royalty_after_price'] = self.royalty_after_price.to_alipay_dict()
@@ -339,6 +391,14 @@ class RentRoyalty(object):
             o.period = d['period']
         if 'repay_time' in d:
             o.repay_time = d['repay_time']
+        if 'repayment_interest_price' in d:
+            o.repayment_interest_price = d['repayment_interest_price']
+        if 'repayment_principal_price' in d:
+            o.repayment_principal_price = d['repayment_principal_price']
+        if 'repayment_time' in d:
+            o.repayment_time = d['repayment_time']
+        if 'repayment_total_price' in d:
+            o.repayment_total_price = d['repayment_total_price']
         if 'royalty_after_price' in d:
             o.royalty_after_price = d['royalty_after_price']
         if 'royalty_deliver_type' in d:

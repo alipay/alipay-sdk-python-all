@@ -10,6 +10,7 @@ class AlipayCommerceHousingCommunityAddModel(object):
     def __init__(self):
         self._apartment_facilities = None
         self._apartment_services = None
+        self._avg_price = None
         self._business_district = None
         self._city_code = None
         self._closed_community = None
@@ -66,6 +67,13 @@ class AlipayCommerceHousingCommunityAddModel(object):
             self._apartment_services = list()
             for i in value:
                 self._apartment_services.append(i)
+    @property
+    def avg_price(self):
+        return self._avg_price
+
+    @avg_price.setter
+    def avg_price(self, value):
+        self._avg_price = value
     @property
     def business_district(self):
         return self._business_district
@@ -344,6 +352,11 @@ class AlipayCommerceHousingCommunityAddModel(object):
                 params['apartment_services'] = self.apartment_services.to_alipay_dict()
             else:
                 params['apartment_services'] = self.apartment_services
+        if self.avg_price:
+            if hasattr(self.avg_price, 'to_alipay_dict'):
+                params['avg_price'] = self.avg_price.to_alipay_dict()
+            else:
+                params['avg_price'] = self.avg_price
         if self.business_district:
             if hasattr(self.business_district, 'to_alipay_dict'):
                 params['business_district'] = self.business_district.to_alipay_dict()
@@ -545,6 +558,8 @@ class AlipayCommerceHousingCommunityAddModel(object):
             o.apartment_facilities = d['apartment_facilities']
         if 'apartment_services' in d:
             o.apartment_services = d['apartment_services']
+        if 'avg_price' in d:
+            o.avg_price = d['avg_price']
         if 'business_district' in d:
             o.business_district = d['business_district']
         if 'city_code' in d:

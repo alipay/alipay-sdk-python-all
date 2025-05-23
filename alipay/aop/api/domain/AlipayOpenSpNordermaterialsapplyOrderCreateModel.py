@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
 
     def __init__(self):
+        self._channel = None
         self._materials_template_code = None
         self._test_flag = None
 
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def materials_template_code(self):
         return self._materials_template_code
@@ -29,6 +37,11 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.materials_template_code:
             if hasattr(self.materials_template_code, 'to_alipay_dict'):
                 params['materials_template_code'] = self.materials_template_code.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
         if not d:
             return None
         o = AlipayOpenSpNordermaterialsapplyOrderCreateModel()
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'materials_template_code' in d:
             o.materials_template_code = d['materials_template_code']
         if 'test_flag' in d:

@@ -14,6 +14,7 @@ class AlipayCommerceMedicalPromoOrderSyncModel(object):
         self._cost_num = None
         self._detail_flag = None
         self._item_list = None
+        self._kz_info = None
         self._lm_order_id = None
         self._main_flag = None
         self._main_lm_order_id = None
@@ -69,6 +70,13 @@ class AlipayCommerceMedicalPromoOrderSyncModel(object):
     @item_list.setter
     def item_list(self, value):
         self._item_list = value
+    @property
+    def kz_info(self):
+        return self._kz_info
+
+    @kz_info.setter
+    def kz_info(self, value):
+        self._kz_info = value
     @property
     def lm_order_id(self):
         return self._lm_order_id
@@ -187,6 +195,11 @@ class AlipayCommerceMedicalPromoOrderSyncModel(object):
                 params['item_list'] = self.item_list.to_alipay_dict()
             else:
                 params['item_list'] = self.item_list
+        if self.kz_info:
+            if hasattr(self.kz_info, 'to_alipay_dict'):
+                params['kz_info'] = self.kz_info.to_alipay_dict()
+            else:
+                params['kz_info'] = self.kz_info
         if self.lm_order_id:
             if hasattr(self.lm_order_id, 'to_alipay_dict'):
                 params['lm_order_id'] = self.lm_order_id.to_alipay_dict()
@@ -266,6 +279,8 @@ class AlipayCommerceMedicalPromoOrderSyncModel(object):
             o.detail_flag = d['detail_flag']
         if 'item_list' in d:
             o.item_list = d['item_list']
+        if 'kz_info' in d:
+            o.kz_info = d['kz_info']
         if 'lm_order_id' in d:
             o.lm_order_id = d['lm_order_id']
         if 'main_flag' in d:

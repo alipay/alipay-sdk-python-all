@@ -34,6 +34,7 @@ class AlipayCommerceHousingApartmentAddModel(object):
         self._intentional_application = None
         self._orientation = None
         self._other = None
+        self._page = None
         self._property_description = None
         self._property_features = None
         self._property_title = None
@@ -248,6 +249,13 @@ class AlipayCommerceHousingApartmentAddModel(object):
     @other.setter
     def other(self, value):
         self._other = value
+    @property
+    def page(self):
+        return self._page
+
+    @page.setter
+    def page(self, value):
+        self._page = value
     @property
     def property_description(self):
         return self._property_description
@@ -509,6 +517,11 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['other'] = self.other.to_alipay_dict()
             else:
                 params['other'] = self.other
+        if self.page:
+            if hasattr(self.page, 'to_alipay_dict'):
+                params['page'] = self.page.to_alipay_dict()
+            else:
+                params['page'] = self.page
         if self.property_description:
             if hasattr(self.property_description, 'to_alipay_dict'):
                 params['property_description'] = self.property_description.to_alipay_dict()
@@ -643,6 +656,8 @@ class AlipayCommerceHousingApartmentAddModel(object):
             o.orientation = d['orientation']
         if 'other' in d:
             o.other = d['other']
+        if 'page' in d:
+            o.page = d['page']
         if 'property_description' in d:
             o.property_description = d['property_description']
         if 'property_features' in d:

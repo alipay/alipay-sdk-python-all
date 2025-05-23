@@ -11,6 +11,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
         super(AlipayCommerceEcRecyclinginvoiceOrderCreateResponse, self).__init__()
         self._collection_invoice_page_alipay_url = None
         self._collection_invoice_page_url = None
+        self._memo = None
         self._order_id = None
         self._outer_order_id = None
         self._payment_invoice_page_alipay_url = None
@@ -32,6 +33,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
     @collection_invoice_page_url.setter
     def collection_invoice_page_url(self, value):
         self._collection_invoice_page_url = value
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
     @property
     def order_id(self):
         return self._order_id
@@ -81,6 +89,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
             self.collection_invoice_page_alipay_url = response['collection_invoice_page_alipay_url']
         if 'collection_invoice_page_url' in response:
             self.collection_invoice_page_url = response['collection_invoice_page_url']
+        if 'memo' in response:
+            self.memo = response['memo']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'outer_order_id' in response:

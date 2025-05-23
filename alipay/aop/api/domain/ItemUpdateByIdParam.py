@@ -1,0 +1,142 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SkuUpdateByCodeParam import SkuUpdateByCodeParam
+
+
+class ItemUpdateByIdParam(object):
+
+    def __init__(self):
+        self._disease_code = None
+        self._disease_name = None
+        self._insurance = None
+        self._insurance_code = None
+        self._item_id = None
+        self._sku_list = None
+        self._tag_code = None
+
+    @property
+    def disease_code(self):
+        return self._disease_code
+
+    @disease_code.setter
+    def disease_code(self, value):
+        self._disease_code = value
+    @property
+    def disease_name(self):
+        return self._disease_name
+
+    @disease_name.setter
+    def disease_name(self, value):
+        self._disease_name = value
+    @property
+    def insurance(self):
+        return self._insurance
+
+    @insurance.setter
+    def insurance(self, value):
+        self._insurance = value
+    @property
+    def insurance_code(self):
+        return self._insurance_code
+
+    @insurance_code.setter
+    def insurance_code(self, value):
+        self._insurance_code = value
+    @property
+    def item_id(self):
+        return self._item_id
+
+    @item_id.setter
+    def item_id(self, value):
+        self._item_id = value
+    @property
+    def sku_list(self):
+        return self._sku_list
+
+    @sku_list.setter
+    def sku_list(self, value):
+        if isinstance(value, list):
+            self._sku_list = list()
+            for i in value:
+                if isinstance(i, SkuUpdateByCodeParam):
+                    self._sku_list.append(i)
+                else:
+                    self._sku_list.append(SkuUpdateByCodeParam.from_alipay_dict(i))
+    @property
+    def tag_code(self):
+        return self._tag_code
+
+    @tag_code.setter
+    def tag_code(self, value):
+        self._tag_code = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.disease_code:
+            if hasattr(self.disease_code, 'to_alipay_dict'):
+                params['disease_code'] = self.disease_code.to_alipay_dict()
+            else:
+                params['disease_code'] = self.disease_code
+        if self.disease_name:
+            if hasattr(self.disease_name, 'to_alipay_dict'):
+                params['disease_name'] = self.disease_name.to_alipay_dict()
+            else:
+                params['disease_name'] = self.disease_name
+        if self.insurance:
+            if hasattr(self.insurance, 'to_alipay_dict'):
+                params['insurance'] = self.insurance.to_alipay_dict()
+            else:
+                params['insurance'] = self.insurance
+        if self.insurance_code:
+            if hasattr(self.insurance_code, 'to_alipay_dict'):
+                params['insurance_code'] = self.insurance_code.to_alipay_dict()
+            else:
+                params['insurance_code'] = self.insurance_code
+        if self.item_id:
+            if hasattr(self.item_id, 'to_alipay_dict'):
+                params['item_id'] = self.item_id.to_alipay_dict()
+            else:
+                params['item_id'] = self.item_id
+        if self.sku_list:
+            if isinstance(self.sku_list, list):
+                for i in range(0, len(self.sku_list)):
+                    element = self.sku_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_list[i] = element.to_alipay_dict()
+            if hasattr(self.sku_list, 'to_alipay_dict'):
+                params['sku_list'] = self.sku_list.to_alipay_dict()
+            else:
+                params['sku_list'] = self.sku_list
+        if self.tag_code:
+            if hasattr(self.tag_code, 'to_alipay_dict'):
+                params['tag_code'] = self.tag_code.to_alipay_dict()
+            else:
+                params['tag_code'] = self.tag_code
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = ItemUpdateByIdParam()
+        if 'disease_code' in d:
+            o.disease_code = d['disease_code']
+        if 'disease_name' in d:
+            o.disease_name = d['disease_name']
+        if 'insurance' in d:
+            o.insurance = d['insurance']
+        if 'insurance_code' in d:
+            o.insurance_code = d['insurance_code']
+        if 'item_id' in d:
+            o.item_id = d['item_id']
+        if 'sku_list' in d:
+            o.sku_list = d['sku_list']
+        if 'tag_code' in d:
+            o.tag_code = d['tag_code']
+        return o
+
+

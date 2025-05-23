@@ -27,6 +27,7 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
         self._plan_name = None
         self._principal_id = None
         self._scene_code = None
+        self._smart_switch = None
         self._status = None
         self._template_id = None
 
@@ -155,6 +156,13 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
     def scene_code(self, value):
         self._scene_code = value
     @property
+    def smart_switch(self):
+        return self._smart_switch
+
+    @smart_switch.setter
+    def smart_switch(self, value):
+        self._smart_switch = value
+    @property
     def status(self):
         return self._status
 
@@ -203,6 +211,8 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
             self.principal_id = response['principal_id']
         if 'scene_code' in response:
             self.scene_code = response['scene_code']
+        if 'smart_switch' in response:
+            self.smart_switch = response['smart_switch']
         if 'status' in response:
             self.status = response['status']
         if 'template_id' in response:

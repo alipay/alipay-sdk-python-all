@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.OmsItemSkuInfoReq import OmsItemSkuInfoReq
+from alipay.aop.api.domain.OmsItemSkuInfoReq import OmsItemSkuInfoReq
 
 
 class OmsItemInfoReq(object):
@@ -17,6 +18,7 @@ class OmsItemInfoReq(object):
         self._item_name = None
         self._platform = None
         self._sku_info_list = None
+        self._sku_list_v_2 = None
         self._status = None
         self._tag_code = None
         self._tag_name = None
@@ -81,6 +83,19 @@ class OmsItemInfoReq(object):
             self._sku_info_list = value
         else:
             self._sku_info_list = OmsItemSkuInfoReq.from_alipay_dict(value)
+    @property
+    def sku_list_v_2(self):
+        return self._sku_list_v_2
+
+    @sku_list_v_2.setter
+    def sku_list_v_2(self, value):
+        if isinstance(value, list):
+            self._sku_list_v_2 = list()
+            for i in value:
+                if isinstance(i, OmsItemSkuInfoReq):
+                    self._sku_list_v_2.append(i)
+                else:
+                    self._sku_list_v_2.append(OmsItemSkuInfoReq.from_alipay_dict(i))
     @property
     def status(self):
         return self._status
@@ -153,6 +168,16 @@ class OmsItemInfoReq(object):
                 params['sku_info_list'] = self.sku_info_list.to_alipay_dict()
             else:
                 params['sku_info_list'] = self.sku_info_list
+        if self.sku_list_v_2:
+            if isinstance(self.sku_list_v_2, list):
+                for i in range(0, len(self.sku_list_v_2)):
+                    element = self.sku_list_v_2[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_list_v_2[i] = element.to_alipay_dict()
+            if hasattr(self.sku_list_v_2, 'to_alipay_dict'):
+                params['sku_list_v_2'] = self.sku_list_v_2.to_alipay_dict()
+            else:
+                params['sku_list_v_2'] = self.sku_list_v_2
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -196,6 +221,8 @@ class OmsItemInfoReq(object):
             o.platform = d['platform']
         if 'sku_info_list' in d:
             o.sku_info_list = d['sku_info_list']
+        if 'sku_list_v_2' in d:
+            o.sku_list_v_2 = d['sku_list_v_2']
         if 'status' in d:
             o.status = d['status']
         if 'tag_code' in d:

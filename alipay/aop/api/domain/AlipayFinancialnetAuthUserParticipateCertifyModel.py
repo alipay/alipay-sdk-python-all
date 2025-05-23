@@ -12,6 +12,7 @@ class AlipayFinancialnetAuthUserParticipateCertifyModel(object):
         self._cert_type = None
         self._name = None
         self._phone = None
+        self._region_code = None
         self._source = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayFinancialnetAuthUserParticipateCertifyModel(object):
     def phone(self, value):
         self._phone = value
     @property
+    def region_code(self):
+        return self._region_code
+
+    @region_code.setter
+    def region_code(self, value):
+        self._region_code = value
+    @property
     def source(self):
         return self._source
 
@@ -73,6 +81,11 @@ class AlipayFinancialnetAuthUserParticipateCertifyModel(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.region_code:
+            if hasattr(self.region_code, 'to_alipay_dict'):
+                params['region_code'] = self.region_code.to_alipay_dict()
+            else:
+                params['region_code'] = self.region_code
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayFinancialnetAuthUserParticipateCertifyModel(object):
             o.name = d['name']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'region_code' in d:
+            o.region_code = d['region_code']
         if 'source' in d:
             o.source = d['source']
         return o

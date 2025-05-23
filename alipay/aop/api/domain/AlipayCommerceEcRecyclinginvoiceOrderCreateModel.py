@@ -11,6 +11,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def __init__(self):
         self._company_clerk_id = None
         self._company_supplier_id = None
+        self._memo = None
         self._order_item_list = None
         self._outer_order_id = None
         self._personal_tax_project = None
@@ -31,6 +32,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     @company_supplier_id.setter
     def company_supplier_id(self, value):
         self._company_supplier_id = value
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
     @property
     def order_item_list(self):
         return self._order_item_list
@@ -86,6 +94,11 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
                 params['company_supplier_id'] = self.company_supplier_id.to_alipay_dict()
             else:
                 params['company_supplier_id'] = self.company_supplier_id
+        if self.memo:
+            if hasattr(self.memo, 'to_alipay_dict'):
+                params['memo'] = self.memo.to_alipay_dict()
+            else:
+                params['memo'] = self.memo
         if self.order_item_list:
             if isinstance(self.order_item_list, list):
                 for i in range(0, len(self.order_item_list)):
@@ -127,6 +140,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
             o.company_clerk_id = d['company_clerk_id']
         if 'company_supplier_id' in d:
             o.company_supplier_id = d['company_supplier_id']
+        if 'memo' in d:
+            o.memo = d['memo']
         if 'order_item_list' in d:
             o.order_item_list = d['order_item_list']
         if 'outer_order_id' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class RentItemExtInfo(object):
 
     def __init__(self):
+        self._after_coupon_price = None
         self._item_brand = None
         self._item_category = None
         self._item_color = None
@@ -19,6 +20,13 @@ class RentItemExtInfo(object):
         self._purchasing_price = None
         self._serial_no = None
 
+    @property
+    def after_coupon_price(self):
+        return self._after_coupon_price
+
+    @after_coupon_price.setter
+    def after_coupon_price(self, value):
+        self._after_coupon_price = value
     @property
     def item_brand(self):
         return self._item_brand
@@ -93,6 +101,11 @@ class RentItemExtInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.after_coupon_price:
+            if hasattr(self.after_coupon_price, 'to_alipay_dict'):
+                params['after_coupon_price'] = self.after_coupon_price.to_alipay_dict()
+            else:
+                params['after_coupon_price'] = self.after_coupon_price
         if self.item_brand:
             if hasattr(self.item_brand, 'to_alipay_dict'):
                 params['item_brand'] = self.item_brand.to_alipay_dict()
@@ -150,6 +163,8 @@ class RentItemExtInfo(object):
         if not d:
             return None
         o = RentItemExtInfo()
+        if 'after_coupon_price' in d:
+            o.after_coupon_price = d['after_coupon_price']
         if 'item_brand' in d:
             o.item_brand = d['item_brand']
         if 'item_category' in d:

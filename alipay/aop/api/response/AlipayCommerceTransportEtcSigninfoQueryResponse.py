@@ -10,6 +10,7 @@ class AlipayCommerceTransportEtcSigninfoQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceTransportEtcSigninfoQueryResponse, self).__init__()
         self._biz_agreement_no = None
+        self._order_status = None
         self._sign_status = None
         self._sign_status_code = None
 
@@ -20,6 +21,13 @@ class AlipayCommerceTransportEtcSigninfoQueryResponse(AlipayResponse):
     @biz_agreement_no.setter
     def biz_agreement_no(self, value):
         self._biz_agreement_no = value
+    @property
+    def order_status(self):
+        return self._order_status
+
+    @order_status.setter
+    def order_status(self, value):
+        self._order_status = value
     @property
     def sign_status(self):
         return self._sign_status
@@ -39,6 +47,8 @@ class AlipayCommerceTransportEtcSigninfoQueryResponse(AlipayResponse):
         response = super(AlipayCommerceTransportEtcSigninfoQueryResponse, self).parse_response_content(response_content)
         if 'biz_agreement_no' in response:
             self.biz_agreement_no = response['biz_agreement_no']
+        if 'order_status' in response:
+            self.order_status = response['order_status']
         if 'sign_status' in response:
             self.sign_status = response['sign_status']
         if 'sign_status_code' in response:

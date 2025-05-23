@@ -9,11 +9,19 @@ from alipay.aop.api.domain.RecyclinginvoiceOrderAuditItem import Recyclinginvoic
 class AlipayCommerceEcRecyclinginvoiceOrderAuditModel(object):
 
     def __init__(self):
+        self._memo = None
         self._order_id = None
         self._order_item_list = None
         self._product_id = None
         self._tax_no = None
 
+    @property
+    def memo(self):
+        return self._memo
+
+    @memo.setter
+    def memo(self, value):
+        self._memo = value
     @property
     def order_id(self):
         return self._order_id
@@ -52,6 +60,11 @@ class AlipayCommerceEcRecyclinginvoiceOrderAuditModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.memo:
+            if hasattr(self.memo, 'to_alipay_dict'):
+                params['memo'] = self.memo.to_alipay_dict()
+            else:
+                params['memo'] = self.memo
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -84,6 +97,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderAuditModel(object):
         if not d:
             return None
         o = AlipayCommerceEcRecyclinginvoiceOrderAuditModel()
+        if 'memo' in d:
+            o.memo = d['memo']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'order_item_list' in d:

@@ -18,8 +18,10 @@ class RentInfo(object):
         self._buyout_price = None
         self._early_settle = None
         self._early_settle_price = None
+        self._early_settle_time = None
         self._end_time = None
         self._invest_app_id = None
+        self._invest_pid = None
         self._order_info = None
         self._out_order_id = None
         self._plan_list = None
@@ -75,6 +77,13 @@ class RentInfo(object):
     def early_settle_price(self, value):
         self._early_settle_price = value
     @property
+    def early_settle_time(self):
+        return self._early_settle_time
+
+    @early_settle_time.setter
+    def early_settle_time(self, value):
+        self._early_settle_time = value
+    @property
     def end_time(self):
         return self._end_time
 
@@ -88,6 +97,13 @@ class RentInfo(object):
     @invest_app_id.setter
     def invest_app_id(self, value):
         self._invest_app_id = value
+    @property
+    def invest_pid(self):
+        return self._invest_pid
+
+    @invest_pid.setter
+    def invest_pid(self, value):
+        self._invest_pid = value
     @property
     def order_info(self):
         return self._order_info
@@ -220,6 +236,11 @@ class RentInfo(object):
                 params['early_settle_price'] = self.early_settle_price.to_alipay_dict()
             else:
                 params['early_settle_price'] = self.early_settle_price
+        if self.early_settle_time:
+            if hasattr(self.early_settle_time, 'to_alipay_dict'):
+                params['early_settle_time'] = self.early_settle_time.to_alipay_dict()
+            else:
+                params['early_settle_time'] = self.early_settle_time
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -230,6 +251,11 @@ class RentInfo(object):
                 params['invest_app_id'] = self.invest_app_id.to_alipay_dict()
             else:
                 params['invest_app_id'] = self.invest_app_id
+        if self.invest_pid:
+            if hasattr(self.invest_pid, 'to_alipay_dict'):
+                params['invest_pid'] = self.invest_pid.to_alipay_dict()
+            else:
+                params['invest_pid'] = self.invest_pid
         if self.order_info:
             if hasattr(self.order_info, 'to_alipay_dict'):
                 params['order_info'] = self.order_info.to_alipay_dict()
@@ -319,10 +345,14 @@ class RentInfo(object):
             o.early_settle = d['early_settle']
         if 'early_settle_price' in d:
             o.early_settle_price = d['early_settle_price']
+        if 'early_settle_time' in d:
+            o.early_settle_time = d['early_settle_time']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'invest_app_id' in d:
             o.invest_app_id = d['invest_app_id']
+        if 'invest_pid' in d:
+            o.invest_pid = d['invest_pid']
         if 'order_info' in d:
             o.order_info = d['order_info']
         if 'out_order_id' in d:

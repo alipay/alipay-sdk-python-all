@@ -10,6 +10,7 @@ class AlipayOpenAgentVersionAuditModel(object):
     def __init__(self):
         self._app_version = None
         self._bundle_id = None
+        self._bundle_ids = None
 
     @property
     def app_version(self):
@@ -25,6 +26,16 @@ class AlipayOpenAgentVersionAuditModel(object):
     @bundle_id.setter
     def bundle_id(self, value):
         self._bundle_id = value
+    @property
+    def bundle_ids(self):
+        return self._bundle_ids
+
+    @bundle_ids.setter
+    def bundle_ids(self, value):
+        if isinstance(value, list):
+            self._bundle_ids = list()
+            for i in value:
+                self._bundle_ids.append(i)
 
 
     def to_alipay_dict(self):
@@ -39,6 +50,16 @@ class AlipayOpenAgentVersionAuditModel(object):
                 params['bundle_id'] = self.bundle_id.to_alipay_dict()
             else:
                 params['bundle_id'] = self.bundle_id
+        if self.bundle_ids:
+            if isinstance(self.bundle_ids, list):
+                for i in range(0, len(self.bundle_ids)):
+                    element = self.bundle_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.bundle_ids[i] = element.to_alipay_dict()
+            if hasattr(self.bundle_ids, 'to_alipay_dict'):
+                params['bundle_ids'] = self.bundle_ids.to_alipay_dict()
+            else:
+                params['bundle_ids'] = self.bundle_ids
         return params
 
     @staticmethod
@@ -50,6 +71,8 @@ class AlipayOpenAgentVersionAuditModel(object):
             o.app_version = d['app_version']
         if 'bundle_id' in d:
             o.bundle_id = d['bundle_id']
+        if 'bundle_ids' in d:
+            o.bundle_ids = d['bundle_ids']
         return o
 
 

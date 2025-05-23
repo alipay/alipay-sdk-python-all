@@ -16,6 +16,9 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
         self._confirm_time = None
         self._confirm_type = None
         self._order_id = None
+        self._repayment_interest_price = None
+        self._repayment_principal_price = None
+        self._repayment_total_price = None
         self._royalty_period = None
         self._royalty_stage = None
         self._royalty_type = None
@@ -76,6 +79,27 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def repayment_interest_price(self):
+        return self._repayment_interest_price
+
+    @repayment_interest_price.setter
+    def repayment_interest_price(self, value):
+        self._repayment_interest_price = value
+    @property
+    def repayment_principal_price(self):
+        return self._repayment_principal_price
+
+    @repayment_principal_price.setter
+    def repayment_principal_price(self, value):
+        self._repayment_principal_price = value
+    @property
+    def repayment_total_price(self):
+        return self._repayment_total_price
+
+    @repayment_total_price.setter
+    def repayment_total_price(self, value):
+        self._repayment_total_price = value
     @property
     def royalty_period(self):
         return self._royalty_period
@@ -141,6 +165,21 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.repayment_interest_price:
+            if hasattr(self.repayment_interest_price, 'to_alipay_dict'):
+                params['repayment_interest_price'] = self.repayment_interest_price.to_alipay_dict()
+            else:
+                params['repayment_interest_price'] = self.repayment_interest_price
+        if self.repayment_principal_price:
+            if hasattr(self.repayment_principal_price, 'to_alipay_dict'):
+                params['repayment_principal_price'] = self.repayment_principal_price.to_alipay_dict()
+            else:
+                params['repayment_principal_price'] = self.repayment_principal_price
+        if self.repayment_total_price:
+            if hasattr(self.repayment_total_price, 'to_alipay_dict'):
+                params['repayment_total_price'] = self.repayment_total_price.to_alipay_dict()
+            else:
+                params['repayment_total_price'] = self.repayment_total_price
         if self.royalty_period:
             if hasattr(self.royalty_period, 'to_alipay_dict'):
                 params['royalty_period'] = self.royalty_period.to_alipay_dict()
@@ -179,6 +218,12 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
             o.confirm_type = d['confirm_type']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'repayment_interest_price' in d:
+            o.repayment_interest_price = d['repayment_interest_price']
+        if 'repayment_principal_price' in d:
+            o.repayment_principal_price = d['repayment_principal_price']
+        if 'repayment_total_price' in d:
+            o.repayment_total_price = d['repayment_total_price']
         if 'royalty_period' in d:
             o.royalty_period = d['royalty_period']
         if 'royalty_stage' in d:

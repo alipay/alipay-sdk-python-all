@@ -9,6 +9,7 @@ class AlipayCommerceHousingCommunityBatchqueryModel(object):
 
     def __init__(self):
         self._city_code = None
+        self._community_name = None
         self._district_code = None
         self._page_num = None
         self._page_size = None
@@ -20,6 +21,13 @@ class AlipayCommerceHousingCommunityBatchqueryModel(object):
     @city_code.setter
     def city_code(self, value):
         self._city_code = value
+    @property
+    def community_name(self):
+        return self._community_name
+
+    @community_name.setter
+    def community_name(self, value):
+        self._community_name = value
     @property
     def district_code(self):
         return self._district_code
@@ -50,6 +58,11 @@ class AlipayCommerceHousingCommunityBatchqueryModel(object):
                 params['city_code'] = self.city_code.to_alipay_dict()
             else:
                 params['city_code'] = self.city_code
+        if self.community_name:
+            if hasattr(self.community_name, 'to_alipay_dict'):
+                params['community_name'] = self.community_name.to_alipay_dict()
+            else:
+                params['community_name'] = self.community_name
         if self.district_code:
             if hasattr(self.district_code, 'to_alipay_dict'):
                 params['district_code'] = self.district_code.to_alipay_dict()
@@ -74,6 +87,8 @@ class AlipayCommerceHousingCommunityBatchqueryModel(object):
         o = AlipayCommerceHousingCommunityBatchqueryModel()
         if 'city_code' in d:
             o.city_code = d['city_code']
+        if 'community_name' in d:
+            o.community_name = d['community_name']
         if 'district_code' in d:
             o.district_code = d['district_code']
         if 'page_num' in d:
