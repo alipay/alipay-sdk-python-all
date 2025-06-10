@@ -4,12 +4,15 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AftersaleItemInfoDTO import AftersaleItemInfoDTO
+from alipay.aop.api.domain.AftersaleAddressInfoDTO import AftersaleAddressInfoDTO
 
 
 class AlipayOpenMiniOrderAftersaleCreateModel(object):
 
     def __init__(self):
+        self._aftersale_reason_code = None
         self._item_infos = None
+        self._merchant_address_info = None
         self._open_id = None
         self._order_id = None
         self._out_aftersale_id = None
@@ -20,6 +23,13 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
         self._type = None
         self._user_id = None
 
+    @property
+    def aftersale_reason_code(self):
+        return self._aftersale_reason_code
+
+    @aftersale_reason_code.setter
+    def aftersale_reason_code(self, value):
+        self._aftersale_reason_code = value
     @property
     def item_infos(self):
         return self._item_infos
@@ -33,6 +43,16 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
                     self._item_infos.append(i)
                 else:
                     self._item_infos.append(AftersaleItemInfoDTO.from_alipay_dict(i))
+    @property
+    def merchant_address_info(self):
+        return self._merchant_address_info
+
+    @merchant_address_info.setter
+    def merchant_address_info(self, value):
+        if isinstance(value, AftersaleAddressInfoDTO):
+            self._merchant_address_info = value
+        else:
+            self._merchant_address_info = AftersaleAddressInfoDTO.from_alipay_dict(value)
     @property
     def open_id(self):
         return self._open_id
@@ -100,6 +120,11 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aftersale_reason_code:
+            if hasattr(self.aftersale_reason_code, 'to_alipay_dict'):
+                params['aftersale_reason_code'] = self.aftersale_reason_code.to_alipay_dict()
+            else:
+                params['aftersale_reason_code'] = self.aftersale_reason_code
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -110,6 +135,11 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
                 params['item_infos'] = self.item_infos.to_alipay_dict()
             else:
                 params['item_infos'] = self.item_infos
+        if self.merchant_address_info:
+            if hasattr(self.merchant_address_info, 'to_alipay_dict'):
+                params['merchant_address_info'] = self.merchant_address_info.to_alipay_dict()
+            else:
+                params['merchant_address_info'] = self.merchant_address_info
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -162,8 +192,12 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
         if not d:
             return None
         o = AlipayOpenMiniOrderAftersaleCreateModel()
+        if 'aftersale_reason_code' in d:
+            o.aftersale_reason_code = d['aftersale_reason_code']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
+        if 'merchant_address_info' in d:
+            o.merchant_address_info = d['merchant_address_info']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

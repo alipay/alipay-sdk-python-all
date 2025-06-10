@@ -23,6 +23,7 @@ class EmployeeInfoDTO(object):
         self._encrypt_mobile = None
         self._gmt_create = None
         self._gmt_modified = None
+        self._invoice_email = None
         self._iot_face_status = None
         self._iot_unique_id = None
         self._iot_vid = None
@@ -138,6 +139,13 @@ class EmployeeInfoDTO(object):
     @gmt_modified.setter
     def gmt_modified(self, value):
         self._gmt_modified = value
+    @property
+    def invoice_email(self):
+        return self._invoice_email
+
+    @invoice_email.setter
+    def invoice_email(self, value):
+        self._invoice_email = value
     @property
     def iot_face_status(self):
         return self._iot_face_status
@@ -300,6 +308,11 @@ class EmployeeInfoDTO(object):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
             else:
                 params['gmt_modified'] = self.gmt_modified
+        if self.invoice_email:
+            if hasattr(self.invoice_email, 'to_alipay_dict'):
+                params['invoice_email'] = self.invoice_email.to_alipay_dict()
+            else:
+                params['invoice_email'] = self.invoice_email
         if self.iot_face_status:
             if hasattr(self.iot_face_status, 'to_alipay_dict'):
                 params['iot_face_status'] = self.iot_face_status.to_alipay_dict()
@@ -398,6 +411,8 @@ class EmployeeInfoDTO(object):
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
+        if 'invoice_email' in d:
+            o.invoice_email = d['invoice_email']
         if 'iot_face_status' in d:
             o.iot_face_status = d['iot_face_status']
         if 'iot_unique_id' in d:

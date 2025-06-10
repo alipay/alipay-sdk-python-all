@@ -3,25 +3,39 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EduCheckInRuleConfigExt import EduCheckInRuleConfigExt
 from alipay.aop.api.domain.EduPlaceInfo import EduPlaceInfo
 
 
 class EduCheckInRule(object):
 
     def __init__(self):
+        self._course_config_ext = None
         self._enable_status = None
         self._end_time = None
         self._frequency_type = None
         self._inst_id = None
+        self._nfc_check = None
         self._picture_check = None
         self._place_check = None
         self._place_list = None
         self._radius = None
         self._rule_id = None
         self._rule_name = None
+        self._rule_type = None
         self._start_time = None
         self._week_day_list = None
 
+    @property
+    def course_config_ext(self):
+        return self._course_config_ext
+
+    @course_config_ext.setter
+    def course_config_ext(self, value):
+        if isinstance(value, EduCheckInRuleConfigExt):
+            self._course_config_ext = value
+        else:
+            self._course_config_ext = EduCheckInRuleConfigExt.from_alipay_dict(value)
     @property
     def enable_status(self):
         return self._enable_status
@@ -50,6 +64,13 @@ class EduCheckInRule(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def nfc_check(self):
+        return self._nfc_check
+
+    @nfc_check.setter
+    def nfc_check(self, value):
+        self._nfc_check = value
     @property
     def picture_check(self):
         return self._picture_check
@@ -99,6 +120,13 @@ class EduCheckInRule(object):
     def rule_name(self, value):
         self._rule_name = value
     @property
+    def rule_type(self):
+        return self._rule_type
+
+    @rule_type.setter
+    def rule_type(self, value):
+        self._rule_type = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -119,6 +147,11 @@ class EduCheckInRule(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.course_config_ext:
+            if hasattr(self.course_config_ext, 'to_alipay_dict'):
+                params['course_config_ext'] = self.course_config_ext.to_alipay_dict()
+            else:
+                params['course_config_ext'] = self.course_config_ext
         if self.enable_status:
             if hasattr(self.enable_status, 'to_alipay_dict'):
                 params['enable_status'] = self.enable_status.to_alipay_dict()
@@ -139,6 +172,11 @@ class EduCheckInRule(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.nfc_check:
+            if hasattr(self.nfc_check, 'to_alipay_dict'):
+                params['nfc_check'] = self.nfc_check.to_alipay_dict()
+            else:
+                params['nfc_check'] = self.nfc_check
         if self.picture_check:
             if hasattr(self.picture_check, 'to_alipay_dict'):
                 params['picture_check'] = self.picture_check.to_alipay_dict()
@@ -174,6 +212,11 @@ class EduCheckInRule(object):
                 params['rule_name'] = self.rule_name.to_alipay_dict()
             else:
                 params['rule_name'] = self.rule_name
+        if self.rule_type:
+            if hasattr(self.rule_type, 'to_alipay_dict'):
+                params['rule_type'] = self.rule_type.to_alipay_dict()
+            else:
+                params['rule_type'] = self.rule_type
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -196,6 +239,8 @@ class EduCheckInRule(object):
         if not d:
             return None
         o = EduCheckInRule()
+        if 'course_config_ext' in d:
+            o.course_config_ext = d['course_config_ext']
         if 'enable_status' in d:
             o.enable_status = d['enable_status']
         if 'end_time' in d:
@@ -204,6 +249,8 @@ class EduCheckInRule(object):
             o.frequency_type = d['frequency_type']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'nfc_check' in d:
+            o.nfc_check = d['nfc_check']
         if 'picture_check' in d:
             o.picture_check = d['picture_check']
         if 'place_check' in d:
@@ -216,6 +263,8 @@ class EduCheckInRule(object):
             o.rule_id = d['rule_id']
         if 'rule_name' in d:
             o.rule_name = d['rule_name']
+        if 'rule_type' in d:
+            o.rule_type = d['rule_type']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'week_day_list' in d:

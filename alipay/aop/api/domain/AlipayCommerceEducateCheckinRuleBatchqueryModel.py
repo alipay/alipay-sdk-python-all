@@ -13,6 +13,7 @@ class AlipayCommerceEducateCheckinRuleBatchqueryModel(object):
         self._page_num = None
         self._page_size = None
         self._rule_name = None
+        self._rule_type = None
 
     @property
     def enable_status(self):
@@ -49,6 +50,13 @@ class AlipayCommerceEducateCheckinRuleBatchqueryModel(object):
     @rule_name.setter
     def rule_name(self, value):
         self._rule_name = value
+    @property
+    def rule_type(self):
+        return self._rule_type
+
+    @rule_type.setter
+    def rule_type(self, value):
+        self._rule_type = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayCommerceEducateCheckinRuleBatchqueryModel(object):
                 params['rule_name'] = self.rule_name.to_alipay_dict()
             else:
                 params['rule_name'] = self.rule_name
+        if self.rule_type:
+            if hasattr(self.rule_type, 'to_alipay_dict'):
+                params['rule_type'] = self.rule_type.to_alipay_dict()
+            else:
+                params['rule_type'] = self.rule_type
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayCommerceEducateCheckinRuleBatchqueryModel(object):
             o.page_size = d['page_size']
         if 'rule_name' in d:
             o.rule_name = d['rule_name']
+        if 'rule_type' in d:
+            o.rule_type = d['rule_type']
         return o
 
 

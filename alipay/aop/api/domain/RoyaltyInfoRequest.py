@@ -11,6 +11,7 @@ class RoyaltyInfoRequest(object):
         self._buy_out_royalty = None
         self._expect_royalty_time = None
         self._repay_time = None
+        self._royalty_interest_date = None
         self._royalty_interest_price = None
         self._royalty_period = None
         self._royalty_price = None
@@ -38,6 +39,13 @@ class RoyaltyInfoRequest(object):
     @repay_time.setter
     def repay_time(self, value):
         self._repay_time = value
+    @property
+    def royalty_interest_date(self):
+        return self._royalty_interest_date
+
+    @royalty_interest_date.setter
+    def royalty_interest_date(self, value):
+        self._royalty_interest_date = value
     @property
     def royalty_interest_price(self):
         return self._royalty_interest_price
@@ -92,6 +100,11 @@ class RoyaltyInfoRequest(object):
                 params['repay_time'] = self.repay_time.to_alipay_dict()
             else:
                 params['repay_time'] = self.repay_time
+        if self.royalty_interest_date:
+            if hasattr(self.royalty_interest_date, 'to_alipay_dict'):
+                params['royalty_interest_date'] = self.royalty_interest_date.to_alipay_dict()
+            else:
+                params['royalty_interest_date'] = self.royalty_interest_date
         if self.royalty_interest_price:
             if hasattr(self.royalty_interest_price, 'to_alipay_dict'):
                 params['royalty_interest_price'] = self.royalty_interest_price.to_alipay_dict()
@@ -130,6 +143,8 @@ class RoyaltyInfoRequest(object):
             o.expect_royalty_time = d['expect_royalty_time']
         if 'repay_time' in d:
             o.repay_time = d['repay_time']
+        if 'royalty_interest_date' in d:
+            o.royalty_interest_date = d['royalty_interest_date']
         if 'royalty_interest_price' in d:
             o.royalty_interest_price = d['royalty_interest_price']
         if 'royalty_period' in d:

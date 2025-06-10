@@ -10,6 +10,7 @@ class AnttechOceanbasePassportHuaweimpCreateResponse(AlipayResponse):
     def __init__(self):
         super(AnttechOceanbasePassportHuaweimpCreateResponse, self).__init__()
         self._account_name = None
+        self._entity_role_id = None
         self._idempotent = None
         self._passport_id = None
 
@@ -20,6 +21,13 @@ class AnttechOceanbasePassportHuaweimpCreateResponse(AlipayResponse):
     @account_name.setter
     def account_name(self, value):
         self._account_name = value
+    @property
+    def entity_role_id(self):
+        return self._entity_role_id
+
+    @entity_role_id.setter
+    def entity_role_id(self, value):
+        self._entity_role_id = value
     @property
     def idempotent(self):
         return self._idempotent
@@ -39,6 +47,8 @@ class AnttechOceanbasePassportHuaweimpCreateResponse(AlipayResponse):
         response = super(AnttechOceanbasePassportHuaweimpCreateResponse, self).parse_response_content(response_content)
         if 'account_name' in response:
             self.account_name = response['account_name']
+        if 'entity_role_id' in response:
+            self.entity_role_id = response['entity_role_id']
         if 'idempotent' in response:
             self.idempotent = response['idempotent']
         if 'passport_id' in response:

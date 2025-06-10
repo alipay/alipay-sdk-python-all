@@ -18,6 +18,7 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
         self._open_id = None
         self._role_name = None
         self._role_type = None
+        self._roster_id = None
         self._user_id = None
 
     @property
@@ -84,6 +85,13 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
     def role_type(self, value):
         self._role_type = value
     @property
+    def roster_id(self):
+        return self._roster_id
+
+    @roster_id.setter
+    def roster_id(self, value):
+        self._roster_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -111,5 +119,7 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
             self.role_name = response['role_name']
         if 'role_type' in response:
             self.role_type = response['role_type']
+        if 'roster_id' in response:
+            self.roster_id = response['roster_id']
         if 'user_id' in response:
             self.user_id = response['user_id']

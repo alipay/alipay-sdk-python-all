@@ -13,6 +13,7 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
     def __init__(self):
         self._agent_id = None
         self._business_isv = None
+        self._charge_sum_space = None
         self._charging_rule = None
         self._city_id = None
         self._contact_alipay = None
@@ -46,6 +47,7 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
         self._parking_type = None
         self._pay_type = None
         self._payment_mode = None
+        self._remain_space = None
         self._serivce_url = None
         self._service_list = None
         self._shopingmall_id = None
@@ -73,6 +75,13 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                     self._business_isv.append(i)
                 else:
                     self._business_isv.append(BusinessItem.from_alipay_dict(i))
+    @property
+    def charge_sum_space(self):
+        return self._charge_sum_space
+
+    @charge_sum_space.setter
+    def charge_sum_space(self, value):
+        self._charge_sum_space = value
     @property
     def charging_rule(self):
         return self._charging_rule
@@ -311,6 +320,13 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
     def payment_mode(self, value):
         self._payment_mode = value
     @property
+    def remain_space(self):
+        return self._remain_space
+
+    @remain_space.setter
+    def remain_space(self, value):
+        self._remain_space = value
+    @property
     def serivce_url(self):
         return self._serivce_url
 
@@ -377,6 +393,11 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                 params['business_isv'] = self.business_isv.to_alipay_dict()
             else:
                 params['business_isv'] = self.business_isv
+        if self.charge_sum_space:
+            if hasattr(self.charge_sum_space, 'to_alipay_dict'):
+                params['charge_sum_space'] = self.charge_sum_space.to_alipay_dict()
+            else:
+                params['charge_sum_space'] = self.charge_sum_space
         if self.charging_rule:
             if isinstance(self.charging_rule, list):
                 for i in range(0, len(self.charging_rule)):
@@ -547,6 +568,11 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
                 params['payment_mode'] = self.payment_mode.to_alipay_dict()
             else:
                 params['payment_mode'] = self.payment_mode
+        if self.remain_space:
+            if hasattr(self.remain_space, 'to_alipay_dict'):
+                params['remain_space'] = self.remain_space.to_alipay_dict()
+            else:
+                params['remain_space'] = self.remain_space
         if self.serivce_url:
             if hasattr(self.serivce_url, 'to_alipay_dict'):
                 params['serivce_url'] = self.serivce_url.to_alipay_dict()
@@ -593,6 +619,8 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
             o.agent_id = d['agent_id']
         if 'business_isv' in d:
             o.business_isv = d['business_isv']
+        if 'charge_sum_space' in d:
+            o.charge_sum_space = d['charge_sum_space']
         if 'charging_rule' in d:
             o.charging_rule = d['charging_rule']
         if 'city_id' in d:
@@ -659,6 +687,8 @@ class AlipayEcoMycarParkingParkinglotinfoUpdateModel(object):
             o.pay_type = d['pay_type']
         if 'payment_mode' in d:
             o.payment_mode = d['payment_mode']
+        if 'remain_space' in d:
+            o.remain_space = d['remain_space']
         if 'serivce_url' in d:
             o.serivce_url = d['serivce_url']
         if 'service_list' in d:

@@ -50,6 +50,7 @@ class AssetProduceItem(object):
         self._supplier_pid = None
         self._template_id = None
         self._template_name = None
+        self._urgent_order_flag = None
         self._work_process = None
 
     @property
@@ -350,6 +351,13 @@ class AssetProduceItem(object):
     def template_name(self, value):
         self._template_name = value
     @property
+    def urgent_order_flag(self):
+        return self._urgent_order_flag
+
+    @urgent_order_flag.setter
+    def urgent_order_flag(self, value):
+        self._urgent_order_flag = value
+    @property
     def work_process(self):
         return self._work_process
 
@@ -575,6 +583,11 @@ class AssetProduceItem(object):
                 params['template_name'] = self.template_name.to_alipay_dict()
             else:
                 params['template_name'] = self.template_name
+        if self.urgent_order_flag:
+            if hasattr(self.urgent_order_flag, 'to_alipay_dict'):
+                params['urgent_order_flag'] = self.urgent_order_flag.to_alipay_dict()
+            else:
+                params['urgent_order_flag'] = self.urgent_order_flag
         if self.work_process:
             if hasattr(self.work_process, 'to_alipay_dict'):
                 params['work_process'] = self.work_process.to_alipay_dict()
@@ -671,6 +684,8 @@ class AssetProduceItem(object):
             o.template_id = d['template_id']
         if 'template_name' in d:
             o.template_name = d['template_name']
+        if 'urgent_order_flag' in d:
+            o.urgent_order_flag = d['urgent_order_flag']
         if 'work_process' in d:
             o.work_process = d['work_process']
         return o

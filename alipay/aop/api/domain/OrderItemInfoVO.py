@@ -13,6 +13,7 @@ from alipay.aop.api.domain.ShippingTimeLimitVO import ShippingTimeLimitVO
 class OrderItemInfoVO(object):
 
     def __init__(self):
+        self._bar_code = None
         self._category_id = None
         self._erp_code = None
         self._item_brand = None
@@ -30,6 +31,13 @@ class OrderItemInfoVO(object):
         self._shipping_time_limit = None
         self._sku_id = None
 
+    @property
+    def bar_code(self):
+        return self._bar_code
+
+    @bar_code.setter
+    def bar_code(self, value):
+        self._bar_code = value
     @property
     def category_id(self):
         return self._category_id
@@ -164,6 +172,11 @@ class OrderItemInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bar_code:
+            if hasattr(self.bar_code, 'to_alipay_dict'):
+                params['bar_code'] = self.bar_code.to_alipay_dict()
+            else:
+                params['bar_code'] = self.bar_code
         if self.category_id:
             if hasattr(self.category_id, 'to_alipay_dict'):
                 params['category_id'] = self.category_id.to_alipay_dict()
@@ -256,6 +269,8 @@ class OrderItemInfoVO(object):
         if not d:
             return None
         o = OrderItemInfoVO()
+        if 'bar_code' in d:
+            o.bar_code = d['bar_code']
         if 'category_id' in d:
             o.category_id = d['category_id']
         if 'erp_code' in d:

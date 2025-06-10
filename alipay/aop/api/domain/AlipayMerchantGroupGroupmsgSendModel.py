@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GroupMsgScheduleConfigVO import GroupMsgScheduleConfigVO
 from alipay.aop.api.domain.GroupMessageVO import GroupMessageVO
+from alipay.aop.api.domain.GroupMessageVO import GroupMessageVO
 
 
 class AlipayMerchantGroupGroupmsgSendModel(object):
@@ -15,6 +16,7 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
         self._group_ids = None
         self._group_msg_schedule_config = None
         self._msg_data = None
+        self._msg_data_list = None
         self._msg_id = None
         self._send_strategy = None
         self._send_time = None
@@ -64,6 +66,19 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
             self._msg_data = value
         else:
             self._msg_data = GroupMessageVO.from_alipay_dict(value)
+    @property
+    def msg_data_list(self):
+        return self._msg_data_list
+
+    @msg_data_list.setter
+    def msg_data_list(self, value):
+        if isinstance(value, list):
+            self._msg_data_list = list()
+            for i in value:
+                if isinstance(i, GroupMessageVO):
+                    self._msg_data_list.append(i)
+                else:
+                    self._msg_data_list.append(GroupMessageVO.from_alipay_dict(i))
     @property
     def msg_id(self):
         return self._msg_id
@@ -126,6 +141,16 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
                 params['msg_data'] = self.msg_data.to_alipay_dict()
             else:
                 params['msg_data'] = self.msg_data
+        if self.msg_data_list:
+            if isinstance(self.msg_data_list, list):
+                for i in range(0, len(self.msg_data_list)):
+                    element = self.msg_data_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.msg_data_list[i] = element.to_alipay_dict()
+            if hasattr(self.msg_data_list, 'to_alipay_dict'):
+                params['msg_data_list'] = self.msg_data_list.to_alipay_dict()
+            else:
+                params['msg_data_list'] = self.msg_data_list
         if self.msg_id:
             if hasattr(self.msg_id, 'to_alipay_dict'):
                 params['msg_id'] = self.msg_id.to_alipay_dict()
@@ -163,6 +188,8 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
             o.group_msg_schedule_config = d['group_msg_schedule_config']
         if 'msg_data' in d:
             o.msg_data = d['msg_data']
+        if 'msg_data_list' in d:
+            o.msg_data_list = d['msg_data_list']
         if 'msg_id' in d:
             o.msg_id = d['msg_id']
         if 'send_strategy' in d:

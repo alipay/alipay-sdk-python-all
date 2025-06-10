@@ -8,11 +8,16 @@ from alipay.aop.api.constant.ParamConstants import *
 class CreditPhoneRiskInfo(object):
 
     def __init__(self):
+        self._acc_time = None
         self._branch_company = None
+        self._cert_no = None
         self._contract_reg_cust_flag = None
         self._merchant_addr = None
+        self._merchant_city = None
+        self._merchant_district = None
         self._merchant_id = None
         self._merchant_name = None
+        self._merchant_province = None
         self._monetary_6m = None
         self._net_age = None
         self._operator_id = None
@@ -20,7 +25,15 @@ class CreditPhoneRiskInfo(object):
         self._sub_alipay_account = None
         self._sub_pid = None
         self._user_name = None
+        self._user_province = None
 
+    @property
+    def acc_time(self):
+        return self._acc_time
+
+    @acc_time.setter
+    def acc_time(self, value):
+        self._acc_time = value
     @property
     def branch_company(self):
         return self._branch_company
@@ -28,6 +41,13 @@ class CreditPhoneRiskInfo(object):
     @branch_company.setter
     def branch_company(self, value):
         self._branch_company = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
     @property
     def contract_reg_cust_flag(self):
         return self._contract_reg_cust_flag
@@ -43,6 +63,20 @@ class CreditPhoneRiskInfo(object):
     def merchant_addr(self, value):
         self._merchant_addr = value
     @property
+    def merchant_city(self):
+        return self._merchant_city
+
+    @merchant_city.setter
+    def merchant_city(self, value):
+        self._merchant_city = value
+    @property
+    def merchant_district(self):
+        return self._merchant_district
+
+    @merchant_district.setter
+    def merchant_district(self, value):
+        self._merchant_district = value
+    @property
     def merchant_id(self):
         return self._merchant_id
 
@@ -56,6 +90,13 @@ class CreditPhoneRiskInfo(object):
     @merchant_name.setter
     def merchant_name(self, value):
         self._merchant_name = value
+    @property
+    def merchant_province(self):
+        return self._merchant_province
+
+    @merchant_province.setter
+    def merchant_province(self, value):
+        self._merchant_province = value
     @property
     def monetary_6m(self):
         return self._monetary_6m
@@ -105,15 +146,32 @@ class CreditPhoneRiskInfo(object):
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def user_province(self):
+        return self._user_province
+
+    @user_province.setter
+    def user_province(self, value):
+        self._user_province = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.acc_time:
+            if hasattr(self.acc_time, 'to_alipay_dict'):
+                params['acc_time'] = self.acc_time.to_alipay_dict()
+            else:
+                params['acc_time'] = self.acc_time
         if self.branch_company:
             if hasattr(self.branch_company, 'to_alipay_dict'):
                 params['branch_company'] = self.branch_company.to_alipay_dict()
             else:
                 params['branch_company'] = self.branch_company
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
         if self.contract_reg_cust_flag:
             if hasattr(self.contract_reg_cust_flag, 'to_alipay_dict'):
                 params['contract_reg_cust_flag'] = self.contract_reg_cust_flag.to_alipay_dict()
@@ -124,6 +182,16 @@ class CreditPhoneRiskInfo(object):
                 params['merchant_addr'] = self.merchant_addr.to_alipay_dict()
             else:
                 params['merchant_addr'] = self.merchant_addr
+        if self.merchant_city:
+            if hasattr(self.merchant_city, 'to_alipay_dict'):
+                params['merchant_city'] = self.merchant_city.to_alipay_dict()
+            else:
+                params['merchant_city'] = self.merchant_city
+        if self.merchant_district:
+            if hasattr(self.merchant_district, 'to_alipay_dict'):
+                params['merchant_district'] = self.merchant_district.to_alipay_dict()
+            else:
+                params['merchant_district'] = self.merchant_district
         if self.merchant_id:
             if hasattr(self.merchant_id, 'to_alipay_dict'):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
@@ -134,6 +202,11 @@ class CreditPhoneRiskInfo(object):
                 params['merchant_name'] = self.merchant_name.to_alipay_dict()
             else:
                 params['merchant_name'] = self.merchant_name
+        if self.merchant_province:
+            if hasattr(self.merchant_province, 'to_alipay_dict'):
+                params['merchant_province'] = self.merchant_province.to_alipay_dict()
+            else:
+                params['merchant_province'] = self.merchant_province
         if self.monetary_6m:
             if hasattr(self.monetary_6m, 'to_alipay_dict'):
                 params['monetary_6m'] = self.monetary_6m.to_alipay_dict()
@@ -169,6 +242,11 @@ class CreditPhoneRiskInfo(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.user_province:
+            if hasattr(self.user_province, 'to_alipay_dict'):
+                params['user_province'] = self.user_province.to_alipay_dict()
+            else:
+                params['user_province'] = self.user_province
         return params
 
     @staticmethod
@@ -176,16 +254,26 @@ class CreditPhoneRiskInfo(object):
         if not d:
             return None
         o = CreditPhoneRiskInfo()
+        if 'acc_time' in d:
+            o.acc_time = d['acc_time']
         if 'branch_company' in d:
             o.branch_company = d['branch_company']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
         if 'contract_reg_cust_flag' in d:
             o.contract_reg_cust_flag = d['contract_reg_cust_flag']
         if 'merchant_addr' in d:
             o.merchant_addr = d['merchant_addr']
+        if 'merchant_city' in d:
+            o.merchant_city = d['merchant_city']
+        if 'merchant_district' in d:
+            o.merchant_district = d['merchant_district']
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
         if 'merchant_name' in d:
             o.merchant_name = d['merchant_name']
+        if 'merchant_province' in d:
+            o.merchant_province = d['merchant_province']
         if 'monetary_6m' in d:
             o.monetary_6m = d['monetary_6m']
         if 'net_age' in d:
@@ -200,6 +288,8 @@ class CreditPhoneRiskInfo(object):
             o.sub_pid = d['sub_pid']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'user_province' in d:
+            o.user_province = d['user_province']
         return o
 
 

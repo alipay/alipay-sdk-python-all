@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloanrepayResultQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditLoanSideloanrepayResultQueryResponse, self).__init__()
+        self._charge_back_amount = None
         self._fail_reason_code = None
         self._fail_reason_message = None
         self._institution_repayment_no = None
@@ -26,6 +27,13 @@ class AlipayPcreditLoanSideloanrepayResultQueryResponse(AlipayResponse):
         self._return_sub_code = None
         self._return_sub_message = None
 
+    @property
+    def charge_back_amount(self):
+        return self._charge_back_amount
+
+    @charge_back_amount.setter
+    def charge_back_amount(self, value):
+        self._charge_back_amount = value
     @property
     def fail_reason_code(self):
         return self._fail_reason_code
@@ -140,6 +148,8 @@ class AlipayPcreditLoanSideloanrepayResultQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditLoanSideloanrepayResultQueryResponse, self).parse_response_content(response_content)
+        if 'charge_back_amount' in response:
+            self.charge_back_amount = response['charge_back_amount']
         if 'fail_reason_code' in response:
             self.fail_reason_code = response['fail_reason_code']
         if 'fail_reason_message' in response:

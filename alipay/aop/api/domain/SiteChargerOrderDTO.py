@@ -9,6 +9,7 @@ class SiteChargerOrderDTO(object):
 
     def __init__(self):
         self._connector_id = None
+        self._device_order_id = None
         self._end_time = None
         self._open_id = None
         self._operator_id = None
@@ -19,6 +20,7 @@ class SiteChargerOrderDTO(object):
         self._start_time = None
         self._station_id = None
         self._station_name = None
+        self._sub_operator_id = None
         self._total_elec_money = None
         self._total_money = None
         self._total_power = None
@@ -34,6 +36,13 @@ class SiteChargerOrderDTO(object):
     @connector_id.setter
     def connector_id(self, value):
         self._connector_id = value
+    @property
+    def device_order_id(self):
+        return self._device_order_id
+
+    @device_order_id.setter
+    def device_order_id(self, value):
+        self._device_order_id = value
     @property
     def end_time(self):
         return self._end_time
@@ -105,6 +114,13 @@ class SiteChargerOrderDTO(object):
     def station_name(self, value):
         self._station_name = value
     @property
+    def sub_operator_id(self):
+        return self._sub_operator_id
+
+    @sub_operator_id.setter
+    def sub_operator_id(self, value):
+        self._sub_operator_id = value
+    @property
     def total_elec_money(self):
         return self._total_elec_money
 
@@ -162,6 +178,11 @@ class SiteChargerOrderDTO(object):
                 params['connector_id'] = self.connector_id.to_alipay_dict()
             else:
                 params['connector_id'] = self.connector_id
+        if self.device_order_id:
+            if hasattr(self.device_order_id, 'to_alipay_dict'):
+                params['device_order_id'] = self.device_order_id.to_alipay_dict()
+            else:
+                params['device_order_id'] = self.device_order_id
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -212,6 +233,11 @@ class SiteChargerOrderDTO(object):
                 params['station_name'] = self.station_name.to_alipay_dict()
             else:
                 params['station_name'] = self.station_name
+        if self.sub_operator_id:
+            if hasattr(self.sub_operator_id, 'to_alipay_dict'):
+                params['sub_operator_id'] = self.sub_operator_id.to_alipay_dict()
+            else:
+                params['sub_operator_id'] = self.sub_operator_id
         if self.total_elec_money:
             if hasattr(self.total_elec_money, 'to_alipay_dict'):
                 params['total_elec_money'] = self.total_elec_money.to_alipay_dict()
@@ -256,6 +282,8 @@ class SiteChargerOrderDTO(object):
         o = SiteChargerOrderDTO()
         if 'connector_id' in d:
             o.connector_id = d['connector_id']
+        if 'device_order_id' in d:
+            o.device_order_id = d['device_order_id']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'open_id' in d:
@@ -276,6 +304,8 @@ class SiteChargerOrderDTO(object):
             o.station_id = d['station_id']
         if 'station_name' in d:
             o.station_name = d['station_name']
+        if 'sub_operator_id' in d:
+            o.sub_operator_id = d['sub_operator_id']
         if 'total_elec_money' in d:
             o.total_elec_money = d['total_elec_money']
         if 'total_money' in d:

@@ -13,6 +13,7 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
         self._name = None
         self._page_num = None
         self._page_size = None
+        self._role_type = None
 
     @property
     def employee_no(self):
@@ -49,6 +50,13 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def role_type(self):
+        return self._role_type
+
+    @role_type.setter
+    def role_type(self, value):
+        self._role_type = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.role_type:
+            if hasattr(self.role_type, 'to_alipay_dict'):
+                params['role_type'] = self.role_type.to_alipay_dict()
+            else:
+                params['role_type'] = self.role_type
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'role_type' in d:
+            o.role_type = d['role_type']
         return o
 
 

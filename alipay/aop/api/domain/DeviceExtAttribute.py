@@ -11,6 +11,7 @@ class DeviceExtAttribute(object):
     def __init__(self):
         self._external_id = None
         self._external_shop_id = None
+        self._isv_access_token = None
         self._isv_device_version_tag = None
         self._sales_entry_order_id = None
         self._sales_solution_ext = None
@@ -35,6 +36,13 @@ class DeviceExtAttribute(object):
     @external_shop_id.setter
     def external_shop_id(self, value):
         self._external_shop_id = value
+    @property
+    def isv_access_token(self):
+        return self._isv_access_token
+
+    @isv_access_token.setter
+    def isv_access_token(self, value):
+        self._isv_access_token = value
     @property
     def isv_device_version_tag(self):
         return self._isv_device_version_tag
@@ -115,6 +123,11 @@ class DeviceExtAttribute(object):
                 params['external_shop_id'] = self.external_shop_id.to_alipay_dict()
             else:
                 params['external_shop_id'] = self.external_shop_id
+        if self.isv_access_token:
+            if hasattr(self.isv_access_token, 'to_alipay_dict'):
+                params['isv_access_token'] = self.isv_access_token.to_alipay_dict()
+            else:
+                params['isv_access_token'] = self.isv_access_token
         if self.isv_device_version_tag:
             if hasattr(self.isv_device_version_tag, 'to_alipay_dict'):
                 params['isv_device_version_tag'] = self.isv_device_version_tag.to_alipay_dict()
@@ -171,6 +184,8 @@ class DeviceExtAttribute(object):
             o.external_id = d['external_id']
         if 'external_shop_id' in d:
             o.external_shop_id = d['external_shop_id']
+        if 'isv_access_token' in d:
+            o.isv_access_token = d['isv_access_token']
         if 'isv_device_version_tag' in d:
             o.isv_device_version_tag = d['isv_device_version_tag']
         if 'sales_entry_order_id' in d:

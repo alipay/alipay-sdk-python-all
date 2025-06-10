@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AxfCardBindInfo import AxfCardBindInfo
+from alipay.aop.api.domain.AxfOrderMemoInfo import AxfOrderMemoInfo
 
 
 class CardOrderBatchQueryResponse(object):
@@ -13,6 +14,7 @@ class CardOrderBatchQueryResponse(object):
         self._aftersales_status = None
         self._available_amount = None
         self._axf_card_bind_info = None
+        self._axf_order_memo_info = None
         self._cancel_type = None
         self._cancelled_cash = None
         self._card_id = None
@@ -77,6 +79,16 @@ class CardOrderBatchQueryResponse(object):
             self._axf_card_bind_info = value
         else:
             self._axf_card_bind_info = AxfCardBindInfo.from_alipay_dict(value)
+    @property
+    def axf_order_memo_info(self):
+        return self._axf_order_memo_info
+
+    @axf_order_memo_info.setter
+    def axf_order_memo_info(self, value):
+        if isinstance(value, AxfOrderMemoInfo):
+            self._axf_order_memo_info = value
+        else:
+            self._axf_order_memo_info = AxfOrderMemoInfo.from_alipay_dict(value)
     @property
     def cancel_type(self):
         return self._cancel_type
@@ -325,6 +337,11 @@ class CardOrderBatchQueryResponse(object):
                 params['axf_card_bind_info'] = self.axf_card_bind_info.to_alipay_dict()
             else:
                 params['axf_card_bind_info'] = self.axf_card_bind_info
+        if self.axf_order_memo_info:
+            if hasattr(self.axf_order_memo_info, 'to_alipay_dict'):
+                params['axf_order_memo_info'] = self.axf_order_memo_info.to_alipay_dict()
+            else:
+                params['axf_order_memo_info'] = self.axf_order_memo_info
         if self.cancel_type:
             if hasattr(self.cancel_type, 'to_alipay_dict'):
                 params['cancel_type'] = self.cancel_type.to_alipay_dict()
@@ -500,6 +517,8 @@ class CardOrderBatchQueryResponse(object):
             o.available_amount = d['available_amount']
         if 'axf_card_bind_info' in d:
             o.axf_card_bind_info = d['axf_card_bind_info']
+        if 'axf_order_memo_info' in d:
+            o.axf_order_memo_info = d['axf_order_memo_info']
         if 'cancel_type' in d:
             o.cancel_type = d['cancel_type']
         if 'cancelled_cash' in d:

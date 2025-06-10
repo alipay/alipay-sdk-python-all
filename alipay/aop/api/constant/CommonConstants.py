@@ -10,7 +10,7 @@ import threading
 import sys
 
 
-ALIPAY_SDK_PYTHON_VERSION = "alipay-sdk-python-3.7.582.ALL"
+ALIPAY_SDK_PYTHON_VERSION = "alipay-sdk-python-3.7.603.ALL"
 
 PYTHON_VERSION_3 = True
 if sys.version_info < (3, 0):

@@ -10,6 +10,8 @@ class AlipayCommerceLogisticsWaybillOperationConfirmModel(object):
     def __init__(self):
         self._channel = None
         self._channel_waybill_operation_scope = None
+        self._identity_tag = None
+        self._identity_type = None
         self._lbx = None
         self._logistics_code = None
         self._open_id = None
@@ -32,6 +34,20 @@ class AlipayCommerceLogisticsWaybillOperationConfirmModel(object):
     @channel_waybill_operation_scope.setter
     def channel_waybill_operation_scope(self, value):
         self._channel_waybill_operation_scope = value
+    @property
+    def identity_tag(self):
+        return self._identity_tag
+
+    @identity_tag.setter
+    def identity_tag(self, value):
+        self._identity_tag = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
     @property
     def lbx(self):
         return self._lbx
@@ -95,6 +111,16 @@ class AlipayCommerceLogisticsWaybillOperationConfirmModel(object):
                 params['channel_waybill_operation_scope'] = self.channel_waybill_operation_scope.to_alipay_dict()
             else:
                 params['channel_waybill_operation_scope'] = self.channel_waybill_operation_scope
+        if self.identity_tag:
+            if hasattr(self.identity_tag, 'to_alipay_dict'):
+                params['identity_tag'] = self.identity_tag.to_alipay_dict()
+            else:
+                params['identity_tag'] = self.identity_tag
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.lbx:
             if hasattr(self.lbx, 'to_alipay_dict'):
                 params['lbx'] = self.lbx.to_alipay_dict()
@@ -141,6 +167,10 @@ class AlipayCommerceLogisticsWaybillOperationConfirmModel(object):
             o.channel = d['channel']
         if 'channel_waybill_operation_scope' in d:
             o.channel_waybill_operation_scope = d['channel_waybill_operation_scope']
+        if 'identity_tag' in d:
+            o.identity_tag = d['identity_tag']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'lbx' in d:
             o.lbx = d['lbx']
         if 'logistics_code' in d:

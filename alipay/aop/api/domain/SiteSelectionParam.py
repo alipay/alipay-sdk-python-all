@@ -15,7 +15,9 @@ class SiteSelectionParam(object):
         self._index_list = None
         self._lng_lat_list = None
         self._min_parking_period = None
+        self._params = None
         self._parking_days = None
+        self._service_fee = None
 
     @property
     def city_code(self):
@@ -69,12 +71,26 @@ class SiteSelectionParam(object):
     def min_parking_period(self, value):
         self._min_parking_period = value
     @property
+    def params(self):
+        return self._params
+
+    @params.setter
+    def params(self, value):
+        self._params = value
+    @property
     def parking_days(self):
         return self._parking_days
 
     @parking_days.setter
     def parking_days(self, value):
         self._parking_days = value
+    @property
+    def service_fee(self):
+        return self._service_fee
+
+    @service_fee.setter
+    def service_fee(self, value):
+        self._service_fee = value
 
 
     def to_alipay_dict(self):
@@ -119,11 +135,21 @@ class SiteSelectionParam(object):
                 params['min_parking_period'] = self.min_parking_period.to_alipay_dict()
             else:
                 params['min_parking_period'] = self.min_parking_period
+        if self.params:
+            if hasattr(self.params, 'to_alipay_dict'):
+                params['params'] = self.params.to_alipay_dict()
+            else:
+                params['params'] = self.params
         if self.parking_days:
             if hasattr(self.parking_days, 'to_alipay_dict'):
                 params['parking_days'] = self.parking_days.to_alipay_dict()
             else:
                 params['parking_days'] = self.parking_days
+        if self.service_fee:
+            if hasattr(self.service_fee, 'to_alipay_dict'):
+                params['service_fee'] = self.service_fee.to_alipay_dict()
+            else:
+                params['service_fee'] = self.service_fee
         return params
 
     @staticmethod
@@ -143,8 +169,12 @@ class SiteSelectionParam(object):
             o.lng_lat_list = d['lng_lat_list']
         if 'min_parking_period' in d:
             o.min_parking_period = d['min_parking_period']
+        if 'params' in d:
+            o.params = d['params']
         if 'parking_days' in d:
             o.parking_days = d['parking_days']
+        if 'service_fee' in d:
+            o.service_fee = d['service_fee']
         return o
 
 

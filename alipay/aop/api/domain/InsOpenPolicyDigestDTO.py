@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsOpenPolicyLiabilityDigestDTO import InsOpenPolicyLiabilityDigestDTO
 
 
 class InsOpenPolicyDigestDTO(object):
@@ -10,6 +11,7 @@ class InsOpenPolicyDigestDTO(object):
     def __init__(self):
         self._inst_id = None
         self._inst_policy_no = None
+        self._liabilities = None
         self._policy_effect_time = None
         self._policy_end_time = None
         self._policy_no = None
@@ -34,6 +36,19 @@ class InsOpenPolicyDigestDTO(object):
     @inst_policy_no.setter
     def inst_policy_no(self, value):
         self._inst_policy_no = value
+    @property
+    def liabilities(self):
+        return self._liabilities
+
+    @liabilities.setter
+    def liabilities(self, value):
+        if isinstance(value, list):
+            self._liabilities = list()
+            for i in value:
+                if isinstance(i, InsOpenPolicyLiabilityDigestDTO):
+                    self._liabilities.append(i)
+                else:
+                    self._liabilities.append(InsOpenPolicyLiabilityDigestDTO.from_alipay_dict(i))
     @property
     def policy_effect_time(self):
         return self._policy_effect_time
@@ -111,6 +126,16 @@ class InsOpenPolicyDigestDTO(object):
                 params['inst_policy_no'] = self.inst_policy_no.to_alipay_dict()
             else:
                 params['inst_policy_no'] = self.inst_policy_no
+        if self.liabilities:
+            if isinstance(self.liabilities, list):
+                for i in range(0, len(self.liabilities)):
+                    element = self.liabilities[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.liabilities[i] = element.to_alipay_dict()
+            if hasattr(self.liabilities, 'to_alipay_dict'):
+                params['liabilities'] = self.liabilities.to_alipay_dict()
+            else:
+                params['liabilities'] = self.liabilities
         if self.policy_effect_time:
             if hasattr(self.policy_effect_time, 'to_alipay_dict'):
                 params['policy_effect_time'] = self.policy_effect_time.to_alipay_dict()
@@ -167,6 +192,8 @@ class InsOpenPolicyDigestDTO(object):
             o.inst_id = d['inst_id']
         if 'inst_policy_no' in d:
             o.inst_policy_no = d['inst_policy_no']
+        if 'liabilities' in d:
+            o.liabilities = d['liabilities']
         if 'policy_effect_time' in d:
             o.policy_effect_time = d['policy_effect_time']
         if 'policy_end_time' in d:

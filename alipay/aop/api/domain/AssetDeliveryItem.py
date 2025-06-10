@@ -54,6 +54,7 @@ class AssetDeliveryItem(object):
         self._supplier_id = None
         self._supplier_name = None
         self._to_address = None
+        self._urgent_order_flag = None
         self._work_process = None
 
     @property
@@ -366,6 +367,13 @@ class AssetDeliveryItem(object):
         else:
             self._to_address = AssetDeliveryAddress.from_alipay_dict(value)
     @property
+    def urgent_order_flag(self):
+        return self._urgent_order_flag
+
+    @urgent_order_flag.setter
+    def urgent_order_flag(self, value):
+        self._urgent_order_flag = value
+    @property
     def work_process(self):
         return self._work_process
 
@@ -591,6 +599,11 @@ class AssetDeliveryItem(object):
                 params['to_address'] = self.to_address.to_alipay_dict()
             else:
                 params['to_address'] = self.to_address
+        if self.urgent_order_flag:
+            if hasattr(self.urgent_order_flag, 'to_alipay_dict'):
+                params['urgent_order_flag'] = self.urgent_order_flag.to_alipay_dict()
+            else:
+                params['urgent_order_flag'] = self.urgent_order_flag
         if self.work_process:
             if hasattr(self.work_process, 'to_alipay_dict'):
                 params['work_process'] = self.work_process.to_alipay_dict()
@@ -687,6 +700,8 @@ class AssetDeliveryItem(object):
             o.supplier_name = d['supplier_name']
         if 'to_address' in d:
             o.to_address = d['to_address']
+        if 'urgent_order_flag' in d:
+            o.urgent_order_flag = d['urgent_order_flag']
         if 'work_process' in d:
             o.work_process = d['work_process']
         return o

@@ -13,8 +13,11 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
         self._buyer_open_id = None
         self._invest_app_id = None
         self._invest_id = None
+        self._loan_amount = None
+        self._operate_type = None
         self._order_id = None
         self._royalty_publish_detail = None
+        self._total_royalty_price = None
 
     @property
     def buyer_id(self):
@@ -45,6 +48,20 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
     def invest_id(self, value):
         self._invest_id = value
     @property
+    def loan_amount(self):
+        return self._loan_amount
+
+    @loan_amount.setter
+    def loan_amount(self, value):
+        self._loan_amount = value
+    @property
+    def operate_type(self):
+        return self._operate_type
+
+    @operate_type.setter
+    def operate_type(self, value):
+        self._operate_type = value
+    @property
     def order_id(self):
         return self._order_id
 
@@ -64,6 +81,13 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
                     self._royalty_publish_detail.append(i)
                 else:
                     self._royalty_publish_detail.append(RentRoyaltyPublishDetailRequest.from_alipay_dict(i))
+    @property
+    def total_royalty_price(self):
+        return self._total_royalty_price
+
+    @total_royalty_price.setter
+    def total_royalty_price(self, value):
+        self._total_royalty_price = value
 
 
     def to_alipay_dict(self):
@@ -88,6 +112,16 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
                 params['invest_id'] = self.invest_id.to_alipay_dict()
             else:
                 params['invest_id'] = self.invest_id
+        if self.loan_amount:
+            if hasattr(self.loan_amount, 'to_alipay_dict'):
+                params['loan_amount'] = self.loan_amount.to_alipay_dict()
+            else:
+                params['loan_amount'] = self.loan_amount
+        if self.operate_type:
+            if hasattr(self.operate_type, 'to_alipay_dict'):
+                params['operate_type'] = self.operate_type.to_alipay_dict()
+            else:
+                params['operate_type'] = self.operate_type
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -103,6 +137,11 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
                 params['royalty_publish_detail'] = self.royalty_publish_detail.to_alipay_dict()
             else:
                 params['royalty_publish_detail'] = self.royalty_publish_detail
+        if self.total_royalty_price:
+            if hasattr(self.total_royalty_price, 'to_alipay_dict'):
+                params['total_royalty_price'] = self.total_royalty_price.to_alipay_dict()
+            else:
+                params['total_royalty_price'] = self.total_royalty_price
         return params
 
     @staticmethod
@@ -118,10 +157,16 @@ class AlipayCommerceRentRoyaltyInvestPublishModel(object):
             o.invest_app_id = d['invest_app_id']
         if 'invest_id' in d:
             o.invest_id = d['invest_id']
+        if 'loan_amount' in d:
+            o.loan_amount = d['loan_amount']
+        if 'operate_type' in d:
+            o.operate_type = d['operate_type']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'royalty_publish_detail' in d:
             o.royalty_publish_detail = d['royalty_publish_detail']
+        if 'total_royalty_price' in d:
+            o.total_royalty_price = d['total_royalty_price']
         return o
 
 

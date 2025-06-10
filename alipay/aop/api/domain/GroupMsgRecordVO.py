@@ -15,6 +15,7 @@ class GroupMsgRecordVO(object):
         self._group_msg_schedule_config = None
         self._msg_id = None
         self._msg_type = None
+        self._send_batch = None
         self._send_status = None
         self._send_strategy = None
         self._send_time = None
@@ -68,6 +69,13 @@ class GroupMsgRecordVO(object):
     @msg_type.setter
     def msg_type(self, value):
         self._msg_type = value
+    @property
+    def send_batch(self):
+        return self._send_batch
+
+    @send_batch.setter
+    def send_batch(self, value):
+        self._send_batch = value
     @property
     def send_status(self):
         return self._send_status
@@ -135,6 +143,11 @@ class GroupMsgRecordVO(object):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
             else:
                 params['msg_type'] = self.msg_type
+        if self.send_batch:
+            if hasattr(self.send_batch, 'to_alipay_dict'):
+                params['send_batch'] = self.send_batch.to_alipay_dict()
+            else:
+                params['send_batch'] = self.send_batch
         if self.send_status:
             if hasattr(self.send_status, 'to_alipay_dict'):
                 params['send_status'] = self.send_status.to_alipay_dict()
@@ -174,6 +187,8 @@ class GroupMsgRecordVO(object):
             o.msg_id = d['msg_id']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
+        if 'send_batch' in d:
+            o.send_batch = d['send_batch']
         if 'send_status' in d:
             o.send_status = d['send_status']
         if 'send_strategy' in d:

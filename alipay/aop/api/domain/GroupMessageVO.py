@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CouponMsgVO import CouponMsgVO
+from alipay.aop.api.domain.GoodsMsgVO import GoodsMsgVO
 from alipay.aop.api.domain.ImageMsgVO import ImageMsgVO
 from alipay.aop.api.domain.LinkMsgVO import LinkMsgVO
 from alipay.aop.api.domain.TextMsgVO import TextMsgVO
@@ -14,6 +15,7 @@ class GroupMessageVO(object):
 
     def __init__(self):
         self._coupon_msg_content = None
+        self._goods_msg_content = None
         self._image_msg_content = None
         self._link_msg_content = None
         self._msg_type = None
@@ -30,6 +32,16 @@ class GroupMessageVO(object):
             self._coupon_msg_content = value
         else:
             self._coupon_msg_content = CouponMsgVO.from_alipay_dict(value)
+    @property
+    def goods_msg_content(self):
+        return self._goods_msg_content
+
+    @goods_msg_content.setter
+    def goods_msg_content(self, value):
+        if isinstance(value, GoodsMsgVO):
+            self._goods_msg_content = value
+        else:
+            self._goods_msg_content = GoodsMsgVO.from_alipay_dict(value)
     @property
     def image_msg_content(self):
         return self._image_msg_content
@@ -86,6 +98,11 @@ class GroupMessageVO(object):
                 params['coupon_msg_content'] = self.coupon_msg_content.to_alipay_dict()
             else:
                 params['coupon_msg_content'] = self.coupon_msg_content
+        if self.goods_msg_content:
+            if hasattr(self.goods_msg_content, 'to_alipay_dict'):
+                params['goods_msg_content'] = self.goods_msg_content.to_alipay_dict()
+            else:
+                params['goods_msg_content'] = self.goods_msg_content
         if self.image_msg_content:
             if hasattr(self.image_msg_content, 'to_alipay_dict'):
                 params['image_msg_content'] = self.image_msg_content.to_alipay_dict()
@@ -120,6 +137,8 @@ class GroupMessageVO(object):
         o = GroupMessageVO()
         if 'coupon_msg_content' in d:
             o.coupon_msg_content = d['coupon_msg_content']
+        if 'goods_msg_content' in d:
+            o.goods_msg_content = d['goods_msg_content']
         if 'image_msg_content' in d:
             o.image_msg_content = d['image_msg_content']
         if 'link_msg_content' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
         self._check_in_result = None
         self._check_in_start_time = None
         self._check_in_type = None
+        self._course_id_list = None
         self._employee_no = None
         self._inst_id = None
         self._name = None
@@ -19,6 +20,7 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
         self._page_num = None
         self._page_size = None
         self._place_id_list = None
+        self._teacher_roster_id = None
 
     @property
     def check_in_end_time(self):
@@ -48,6 +50,16 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
     @check_in_type.setter
     def check_in_type(self, value):
         self._check_in_type = value
+    @property
+    def course_id_list(self):
+        return self._course_id_list
+
+    @course_id_list.setter
+    def course_id_list(self, value):
+        if isinstance(value, list):
+            self._course_id_list = list()
+            for i in value:
+                self._course_id_list.append(i)
     @property
     def employee_no(self):
         return self._employee_no
@@ -103,6 +115,13 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
             self._place_id_list = list()
             for i in value:
                 self._place_id_list.append(i)
+    @property
+    def teacher_roster_id(self):
+        return self._teacher_roster_id
+
+    @teacher_roster_id.setter
+    def teacher_roster_id(self, value):
+        self._teacher_roster_id = value
 
 
     def to_alipay_dict(self):
@@ -127,6 +146,16 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
                 params['check_in_type'] = self.check_in_type.to_alipay_dict()
             else:
                 params['check_in_type'] = self.check_in_type
+        if self.course_id_list:
+            if isinstance(self.course_id_list, list):
+                for i in range(0, len(self.course_id_list)):
+                    element = self.course_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.course_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.course_id_list, 'to_alipay_dict'):
+                params['course_id_list'] = self.course_id_list.to_alipay_dict()
+            else:
+                params['course_id_list'] = self.course_id_list
         if self.employee_no:
             if hasattr(self.employee_no, 'to_alipay_dict'):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
@@ -172,6 +201,11 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
                 params['place_id_list'] = self.place_id_list.to_alipay_dict()
             else:
                 params['place_id_list'] = self.place_id_list
+        if self.teacher_roster_id:
+            if hasattr(self.teacher_roster_id, 'to_alipay_dict'):
+                params['teacher_roster_id'] = self.teacher_roster_id.to_alipay_dict()
+            else:
+                params['teacher_roster_id'] = self.teacher_roster_id
         return params
 
     @staticmethod
@@ -187,6 +221,8 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
             o.check_in_start_time = d['check_in_start_time']
         if 'check_in_type' in d:
             o.check_in_type = d['check_in_type']
+        if 'course_id_list' in d:
+            o.course_id_list = d['course_id_list']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
         if 'inst_id' in d:
@@ -201,6 +237,8 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
             o.page_size = d['page_size']
         if 'place_id_list' in d:
             o.place_id_list = d['place_id_list']
+        if 'teacher_roster_id' in d:
+            o.teacher_roster_id = d['teacher_roster_id']
         return o
 
 

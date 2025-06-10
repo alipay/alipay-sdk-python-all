@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcApprovalQueryModel(object):
 
     def __init__(self):
+        self._approval_id = None
         self._enterprise_id = None
         self._platform_approval_id = None
 
+    @property
+    def approval_id(self):
+        return self._approval_id
+
+    @approval_id.setter
+    def approval_id(self, value):
+        self._approval_id = value
     @property
     def enterprise_id(self):
         return self._enterprise_id
@@ -29,6 +37,11 @@ class AlipayCommerceEcApprovalQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.approval_id:
+            if hasattr(self.approval_id, 'to_alipay_dict'):
+                params['approval_id'] = self.approval_id.to_alipay_dict()
+            else:
+                params['approval_id'] = self.approval_id
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayCommerceEcApprovalQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceEcApprovalQueryModel()
+        if 'approval_id' in d:
+            o.approval_id = d['approval_id']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'platform_approval_id' in d:

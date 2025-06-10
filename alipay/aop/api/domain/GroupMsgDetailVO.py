@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GroupMsgScheduleConfigVO import GroupMsgScheduleConfigVO
 from alipay.aop.api.domain.GroupMessageVO import GroupMessageVO
+from alipay.aop.api.domain.GroupMessageVO import GroupMessageVO
 
 
 class GroupMsgDetailVO(object):
@@ -19,7 +20,9 @@ class GroupMsgDetailVO(object):
         self._group_msg_schedule_config = None
         self._merchant_name = None
         self._msg_data = None
+        self._msg_data_list = None
         self._msg_id = None
+        self._send_batch = None
         self._send_status = None
         self._send_strategy = None
         self._send_time = None
@@ -98,12 +101,32 @@ class GroupMsgDetailVO(object):
         else:
             self._msg_data = GroupMessageVO.from_alipay_dict(value)
     @property
+    def msg_data_list(self):
+        return self._msg_data_list
+
+    @msg_data_list.setter
+    def msg_data_list(self, value):
+        if isinstance(value, list):
+            self._msg_data_list = list()
+            for i in value:
+                if isinstance(i, GroupMessageVO):
+                    self._msg_data_list.append(i)
+                else:
+                    self._msg_data_list.append(GroupMessageVO.from_alipay_dict(i))
+    @property
     def msg_id(self):
         return self._msg_id
 
     @msg_id.setter
     def msg_id(self, value):
         self._msg_id = value
+    @property
+    def send_batch(self):
+        return self._send_batch
+
+    @send_batch.setter
+    def send_batch(self, value):
+        self._send_batch = value
     @property
     def send_status(self):
         return self._send_status
@@ -186,11 +209,26 @@ class GroupMsgDetailVO(object):
                 params['msg_data'] = self.msg_data.to_alipay_dict()
             else:
                 params['msg_data'] = self.msg_data
+        if self.msg_data_list:
+            if isinstance(self.msg_data_list, list):
+                for i in range(0, len(self.msg_data_list)):
+                    element = self.msg_data_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.msg_data_list[i] = element.to_alipay_dict()
+            if hasattr(self.msg_data_list, 'to_alipay_dict'):
+                params['msg_data_list'] = self.msg_data_list.to_alipay_dict()
+            else:
+                params['msg_data_list'] = self.msg_data_list
         if self.msg_id:
             if hasattr(self.msg_id, 'to_alipay_dict'):
                 params['msg_id'] = self.msg_id.to_alipay_dict()
             else:
                 params['msg_id'] = self.msg_id
+        if self.send_batch:
+            if hasattr(self.send_batch, 'to_alipay_dict'):
+                params['send_batch'] = self.send_batch.to_alipay_dict()
+            else:
+                params['send_batch'] = self.send_batch
         if self.send_status:
             if hasattr(self.send_status, 'to_alipay_dict'):
                 params['send_status'] = self.send_status.to_alipay_dict()
@@ -236,8 +274,12 @@ class GroupMsgDetailVO(object):
             o.merchant_name = d['merchant_name']
         if 'msg_data' in d:
             o.msg_data = d['msg_data']
+        if 'msg_data_list' in d:
+            o.msg_data_list = d['msg_data_list']
         if 'msg_id' in d:
             o.msg_id = d['msg_id']
+        if 'send_batch' in d:
+            o.send_batch = d['send_batch']
         if 'send_status' in d:
             o.send_status = d['send_status']
         if 'send_strategy' in d:

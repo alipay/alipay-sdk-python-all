@@ -15,6 +15,7 @@ class AntMerchantExpandBizaccessOrderCheckModel(object):
 
     def __init__(self):
         self._benefit_info = None
+        self._external_id = None
         self._isv_commission_info = None
         self._legal_info = None
         self._legal_person_logon_id = None
@@ -42,6 +43,13 @@ class AntMerchantExpandBizaccessOrderCheckModel(object):
             self._benefit_info = value
         else:
             self._benefit_info = CertificateInfoForEntry.from_alipay_dict(value)
+    @property
+    def external_id(self):
+        return self._external_id
+
+    @external_id.setter
+    def external_id(self, value):
+        self._external_id = value
     @property
     def isv_commission_info(self):
         return self._isv_commission_info
@@ -193,6 +201,11 @@ class AntMerchantExpandBizaccessOrderCheckModel(object):
                 params['benefit_info'] = self.benefit_info.to_alipay_dict()
             else:
                 params['benefit_info'] = self.benefit_info
+        if self.external_id:
+            if hasattr(self.external_id, 'to_alipay_dict'):
+                params['external_id'] = self.external_id.to_alipay_dict()
+            else:
+                params['external_id'] = self.external_id
         if self.isv_commission_info:
             if isinstance(self.isv_commission_info, list):
                 for i in range(0, len(self.isv_commission_info)):
@@ -307,6 +320,8 @@ class AntMerchantExpandBizaccessOrderCheckModel(object):
         o = AntMerchantExpandBizaccessOrderCheckModel()
         if 'benefit_info' in d:
             o.benefit_info = d['benefit_info']
+        if 'external_id' in d:
+            o.external_id = d['external_id']
         if 'isv_commission_info' in d:
             o.isv_commission_info = d['isv_commission_info']
         if 'legal_info' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
         self._biz_scene = None
         self._logistics_code = None
         self._mode = None
+        self._operate_no = None
         self._partner_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
     def mode(self, value):
         self._mode = value
     @property
+    def operate_no(self):
+        return self._operate_no
+
+    @operate_no.setter
+    def operate_no(self, value):
+        self._operate_no = value
+    @property
     def partner_id(self):
         return self._partner_id
 
@@ -73,6 +81,11 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.operate_no:
+            if hasattr(self.operate_no, 'to_alipay_dict'):
+                params['operate_no'] = self.operate_no.to_alipay_dict()
+            else:
+                params['operate_no'] = self.operate_no
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
             o.logistics_code = d['logistics_code']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'operate_no' in d:
+            o.operate_no = d['operate_no']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         return o

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RentPeriod import RentPeriod
+from alipay.aop.api.domain.RentPeriod import RentPeriod
 from alipay.aop.api.domain.RentFile import RentFile
 
 
@@ -14,6 +15,7 @@ class RentFinancingExtInfo(object):
         self._beneficiary_bank_name = None
         self._beneficiary_name = None
         self._buyout_financing_amount = None
+        self._buyout_financing_period = None
         self._buyout_repayment_type = None
         self._financing_amount = None
         self._financing_period = None
@@ -29,6 +31,7 @@ class RentFinancingExtInfo(object):
         self._payee_memo = None
         self._rent_financing_amount = None
         self._repayment_type = None
+        self._start_financing_period = None
 
     @property
     def beneficiary_account_number(self):
@@ -58,6 +61,16 @@ class RentFinancingExtInfo(object):
     @buyout_financing_amount.setter
     def buyout_financing_amount(self, value):
         self._buyout_financing_amount = value
+    @property
+    def buyout_financing_period(self):
+        return self._buyout_financing_period
+
+    @buyout_financing_period.setter
+    def buyout_financing_period(self, value):
+        if isinstance(value, RentPeriod):
+            self._buyout_financing_period = value
+        else:
+            self._buyout_financing_period = RentPeriod.from_alipay_dict(value)
     @property
     def buyout_repayment_type(self):
         return self._buyout_repayment_type
@@ -169,6 +182,13 @@ class RentFinancingExtInfo(object):
     @repayment_type.setter
     def repayment_type(self, value):
         self._repayment_type = value
+    @property
+    def start_financing_period(self):
+        return self._start_financing_period
+
+    @start_financing_period.setter
+    def start_financing_period(self, value):
+        self._start_financing_period = value
 
 
     def to_alipay_dict(self):
@@ -193,6 +213,11 @@ class RentFinancingExtInfo(object):
                 params['buyout_financing_amount'] = self.buyout_financing_amount.to_alipay_dict()
             else:
                 params['buyout_financing_amount'] = self.buyout_financing_amount
+        if self.buyout_financing_period:
+            if hasattr(self.buyout_financing_period, 'to_alipay_dict'):
+                params['buyout_financing_period'] = self.buyout_financing_period.to_alipay_dict()
+            else:
+                params['buyout_financing_period'] = self.buyout_financing_period
         if self.buyout_repayment_type:
             if hasattr(self.buyout_repayment_type, 'to_alipay_dict'):
                 params['buyout_repayment_type'] = self.buyout_repayment_type.to_alipay_dict()
@@ -268,6 +293,11 @@ class RentFinancingExtInfo(object):
                 params['repayment_type'] = self.repayment_type.to_alipay_dict()
             else:
                 params['repayment_type'] = self.repayment_type
+        if self.start_financing_period:
+            if hasattr(self.start_financing_period, 'to_alipay_dict'):
+                params['start_financing_period'] = self.start_financing_period.to_alipay_dict()
+            else:
+                params['start_financing_period'] = self.start_financing_period
         return params
 
     @staticmethod
@@ -283,6 +313,8 @@ class RentFinancingExtInfo(object):
             o.beneficiary_name = d['beneficiary_name']
         if 'buyout_financing_amount' in d:
             o.buyout_financing_amount = d['buyout_financing_amount']
+        if 'buyout_financing_period' in d:
+            o.buyout_financing_period = d['buyout_financing_period']
         if 'buyout_repayment_type' in d:
             o.buyout_repayment_type = d['buyout_repayment_type']
         if 'financing_amount' in d:
@@ -313,6 +345,8 @@ class RentFinancingExtInfo(object):
             o.rent_financing_amount = d['rent_financing_amount']
         if 'repayment_type' in d:
             o.repayment_type = d['repayment_type']
+        if 'start_financing_period' in d:
+            o.start_financing_period = d['start_financing_period']
         return o
 
 

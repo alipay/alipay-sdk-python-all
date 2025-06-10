@@ -11,8 +11,10 @@ class AlipayCommerceTransportNfccardSendModel(object):
         self._card_issuer_pid = None
         self._card_no = None
         self._card_status = None
+        self._card_type = None
         self._ext_info = None
         self._issue_org_no = None
+        self._open_id = None
         self._sign_status = None
         self._sign_time = None
         self._unsign_time = None
@@ -40,6 +42,13 @@ class AlipayCommerceTransportNfccardSendModel(object):
     def card_status(self, value):
         self._card_status = value
     @property
+    def card_type(self):
+        return self._card_type
+
+    @card_type.setter
+    def card_type(self, value):
+        self._card_type = value
+    @property
     def ext_info(self):
         return self._ext_info
 
@@ -53,6 +62,13 @@ class AlipayCommerceTransportNfccardSendModel(object):
     @issue_org_no.setter
     def issue_org_no(self, value):
         self._issue_org_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def sign_status(self):
         return self._sign_status
@@ -100,6 +116,11 @@ class AlipayCommerceTransportNfccardSendModel(object):
                 params['card_status'] = self.card_status.to_alipay_dict()
             else:
                 params['card_status'] = self.card_status
+        if self.card_type:
+            if hasattr(self.card_type, 'to_alipay_dict'):
+                params['card_type'] = self.card_type.to_alipay_dict()
+            else:
+                params['card_type'] = self.card_type
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
@@ -110,6 +131,11 @@ class AlipayCommerceTransportNfccardSendModel(object):
                 params['issue_org_no'] = self.issue_org_no.to_alipay_dict()
             else:
                 params['issue_org_no'] = self.issue_org_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.sign_status:
             if hasattr(self.sign_status, 'to_alipay_dict'):
                 params['sign_status'] = self.sign_status.to_alipay_dict()
@@ -143,10 +169,14 @@ class AlipayCommerceTransportNfccardSendModel(object):
             o.card_no = d['card_no']
         if 'card_status' in d:
             o.card_status = d['card_status']
+        if 'card_type' in d:
+            o.card_type = d['card_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'issue_org_no' in d:
             o.issue_org_no = d['issue_org_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'sign_status' in d:
             o.sign_status = d['sign_status']
         if 'sign_time' in d:

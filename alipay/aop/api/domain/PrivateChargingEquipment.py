@@ -21,6 +21,7 @@ class PrivateChargingEquipment(object):
         self._rated_current = None
         self._rated_power = None
         self._rated_voltage = None
+        self._s_brand_code = None
 
     @property
     def bind_qrcode(self):
@@ -116,6 +117,13 @@ class PrivateChargingEquipment(object):
     @rated_voltage.setter
     def rated_voltage(self, value):
         self._rated_voltage = value
+    @property
+    def s_brand_code(self):
+        return self._s_brand_code
+
+    @s_brand_code.setter
+    def s_brand_code(self, value):
+        self._s_brand_code = value
 
 
     def to_alipay_dict(self):
@@ -190,6 +198,11 @@ class PrivateChargingEquipment(object):
                 params['rated_voltage'] = self.rated_voltage.to_alipay_dict()
             else:
                 params['rated_voltage'] = self.rated_voltage
+        if self.s_brand_code:
+            if hasattr(self.s_brand_code, 'to_alipay_dict'):
+                params['s_brand_code'] = self.s_brand_code.to_alipay_dict()
+            else:
+                params['s_brand_code'] = self.s_brand_code
         return params
 
     @staticmethod
@@ -223,6 +236,8 @@ class PrivateChargingEquipment(object):
             o.rated_power = d['rated_power']
         if 'rated_voltage' in d:
             o.rated_voltage = d['rated_voltage']
+        if 's_brand_code' in d:
+            o.s_brand_code = d['s_brand_code']
         return o
 
 

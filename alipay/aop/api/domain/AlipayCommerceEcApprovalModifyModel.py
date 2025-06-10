@@ -10,6 +10,9 @@ from alipay.aop.api.domain.ApprovalTripDTO import ApprovalTripDTO
 class AlipayCommerceEcApprovalModifyModel(object):
 
     def __init__(self):
+        self._apply_finish_time = None
+        self._apply_start_time = None
+        self._approval_status = None
         self._enterprise_id = None
         self._institution_id_list = None
         self._platform_approval_id = None
@@ -17,6 +20,27 @@ class AlipayCommerceEcApprovalModifyModel(object):
         self._traveler_list = None
         self._trip_info_list = None
 
+    @property
+    def apply_finish_time(self):
+        return self._apply_finish_time
+
+    @apply_finish_time.setter
+    def apply_finish_time(self, value):
+        self._apply_finish_time = value
+    @property
+    def apply_start_time(self):
+        return self._apply_start_time
+
+    @apply_start_time.setter
+    def apply_start_time(self, value):
+        self._apply_start_time = value
+    @property
+    def approval_status(self):
+        return self._approval_status
+
+    @approval_status.setter
+    def approval_status(self, value):
+        self._approval_status = value
     @property
     def enterprise_id(self):
         return self._enterprise_id
@@ -78,6 +102,21 @@ class AlipayCommerceEcApprovalModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apply_finish_time:
+            if hasattr(self.apply_finish_time, 'to_alipay_dict'):
+                params['apply_finish_time'] = self.apply_finish_time.to_alipay_dict()
+            else:
+                params['apply_finish_time'] = self.apply_finish_time
+        if self.apply_start_time:
+            if hasattr(self.apply_start_time, 'to_alipay_dict'):
+                params['apply_start_time'] = self.apply_start_time.to_alipay_dict()
+            else:
+                params['apply_start_time'] = self.apply_start_time
+        if self.approval_status:
+            if hasattr(self.approval_status, 'to_alipay_dict'):
+                params['approval_status'] = self.approval_status.to_alipay_dict()
+            else:
+                params['approval_status'] = self.approval_status
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -130,6 +169,12 @@ class AlipayCommerceEcApprovalModifyModel(object):
         if not d:
             return None
         o = AlipayCommerceEcApprovalModifyModel()
+        if 'apply_finish_time' in d:
+            o.apply_finish_time = d['apply_finish_time']
+        if 'apply_start_time' in d:
+            o.apply_start_time = d['apply_start_time']
+        if 'approval_status' in d:
+            o.approval_status = d['approval_status']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'institution_id_list' in d:

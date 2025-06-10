@@ -14,6 +14,7 @@ class EnterpriseInfoDTO(object):
         self._auth_status = None
         self._auth_time = None
         self._enterprise_alias = None
+        self._enterprise_alias_audit_status = None
         self._enterprise_code = None
         self._enterprise_email = None
         self._enterprise_id = None
@@ -69,6 +70,13 @@ class EnterpriseInfoDTO(object):
     @enterprise_alias.setter
     def enterprise_alias(self, value):
         self._enterprise_alias = value
+    @property
+    def enterprise_alias_audit_status(self):
+        return self._enterprise_alias_audit_status
+
+    @enterprise_alias_audit_status.setter
+    def enterprise_alias_audit_status(self, value):
+        self._enterprise_alias_audit_status = value
     @property
     def enterprise_code(self):
         return self._enterprise_code
@@ -187,6 +195,11 @@ class EnterpriseInfoDTO(object):
                 params['enterprise_alias'] = self.enterprise_alias.to_alipay_dict()
             else:
                 params['enterprise_alias'] = self.enterprise_alias
+        if self.enterprise_alias_audit_status:
+            if hasattr(self.enterprise_alias_audit_status, 'to_alipay_dict'):
+                params['enterprise_alias_audit_status'] = self.enterprise_alias_audit_status.to_alipay_dict()
+            else:
+                params['enterprise_alias_audit_status'] = self.enterprise_alias_audit_status
         if self.enterprise_code:
             if hasattr(self.enterprise_code, 'to_alipay_dict'):
                 params['enterprise_code'] = self.enterprise_code.to_alipay_dict()
@@ -266,6 +279,8 @@ class EnterpriseInfoDTO(object):
             o.auth_time = d['auth_time']
         if 'enterprise_alias' in d:
             o.enterprise_alias = d['enterprise_alias']
+        if 'enterprise_alias_audit_status' in d:
+            o.enterprise_alias_audit_status = d['enterprise_alias_audit_status']
         if 'enterprise_code' in d:
             o.enterprise_code = d['enterprise_code']
         if 'enterprise_email' in d:

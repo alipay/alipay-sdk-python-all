@@ -15,6 +15,7 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
         self._confirm_result = None
         self._confirm_time = None
         self._confirm_type = None
+        self._loan_amount = None
         self._order_id = None
         self._repayment_interest_price = None
         self._repayment_principal_price = None
@@ -72,6 +73,13 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
     @confirm_type.setter
     def confirm_type(self, value):
         self._confirm_type = value
+    @property
+    def loan_amount(self):
+        return self._loan_amount
+
+    @loan_amount.setter
+    def loan_amount(self, value):
+        self._loan_amount = value
     @property
     def order_id(self):
         return self._order_id
@@ -160,6 +168,11 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
                 params['confirm_type'] = self.confirm_type.to_alipay_dict()
             else:
                 params['confirm_type'] = self.confirm_type
+        if self.loan_amount:
+            if hasattr(self.loan_amount, 'to_alipay_dict'):
+                params['loan_amount'] = self.loan_amount.to_alipay_dict()
+            else:
+                params['loan_amount'] = self.loan_amount
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -216,6 +229,8 @@ class AlipayCommerceRentOrderInvestConfirmModel(object):
             o.confirm_time = d['confirm_time']
         if 'confirm_type' in d:
             o.confirm_type = d['confirm_type']
+        if 'loan_amount' in d:
+            o.loan_amount = d['loan_amount']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'repayment_interest_price' in d:

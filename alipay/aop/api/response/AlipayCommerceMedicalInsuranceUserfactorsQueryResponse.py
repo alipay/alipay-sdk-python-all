@@ -12,6 +12,8 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
         self._cert_no = None
         self._cert_type = None
         self._name = None
+        self._open_id = None
+        self._user_id = None
 
     @property
     def cert_no(self):
@@ -34,6 +36,20 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceMedicalInsuranceUserfactorsQueryResponse, self).parse_response_content(response_content)
@@ -43,3 +59,7 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
             self.cert_type = response['cert_type']
         if 'name' in response:
             self.name = response['name']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
+        if 'user_id' in response:
+            self.user_id = response['user_id']

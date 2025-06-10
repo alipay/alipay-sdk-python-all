@@ -8,23 +8,35 @@ from alipay.aop.api.constant.ParamConstants import *
 class CreditPhoneInfo(object):
 
     def __init__(self):
+        self._busi_id = None
         self._busi_level = None
         self._busi_name = None
         self._busi_type = None
+        self._contace_mobile_no = None
         self._due_date = None
         self._first_month_price = None
         self._installment_numbers = None
         self._isp_abbr_cn = None
+        self._isp_order_no = None
+        self._item_name = None
         self._max_amount_per_installment = None
         self._overdue_days = None
         self._pay_date = None
         self._pre_busi_level = None
         self._province = None
+        self._province_bill_date = None
         self._require_month_count = None
         self._service_mobile = None
         self._spu_id = None
         self._total_bonus = None
 
+    @property
+    def busi_id(self):
+        return self._busi_id
+
+    @busi_id.setter
+    def busi_id(self, value):
+        self._busi_id = value
     @property
     def busi_level(self):
         return self._busi_level
@@ -46,6 +58,13 @@ class CreditPhoneInfo(object):
     @busi_type.setter
     def busi_type(self, value):
         self._busi_type = value
+    @property
+    def contace_mobile_no(self):
+        return self._contace_mobile_no
+
+    @contace_mobile_no.setter
+    def contace_mobile_no(self, value):
+        self._contace_mobile_no = value
     @property
     def due_date(self):
         return self._due_date
@@ -74,6 +93,20 @@ class CreditPhoneInfo(object):
     @isp_abbr_cn.setter
     def isp_abbr_cn(self, value):
         self._isp_abbr_cn = value
+    @property
+    def isp_order_no(self):
+        return self._isp_order_no
+
+    @isp_order_no.setter
+    def isp_order_no(self, value):
+        self._isp_order_no = value
+    @property
+    def item_name(self):
+        return self._item_name
+
+    @item_name.setter
+    def item_name(self, value):
+        self._item_name = value
     @property
     def max_amount_per_installment(self):
         return self._max_amount_per_installment
@@ -110,6 +143,13 @@ class CreditPhoneInfo(object):
     def province(self, value):
         self._province = value
     @property
+    def province_bill_date(self):
+        return self._province_bill_date
+
+    @province_bill_date.setter
+    def province_bill_date(self, value):
+        self._province_bill_date = value
+    @property
     def require_month_count(self):
         return self._require_month_count
 
@@ -141,6 +181,11 @@ class CreditPhoneInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.busi_id:
+            if hasattr(self.busi_id, 'to_alipay_dict'):
+                params['busi_id'] = self.busi_id.to_alipay_dict()
+            else:
+                params['busi_id'] = self.busi_id
         if self.busi_level:
             if hasattr(self.busi_level, 'to_alipay_dict'):
                 params['busi_level'] = self.busi_level.to_alipay_dict()
@@ -156,6 +201,11 @@ class CreditPhoneInfo(object):
                 params['busi_type'] = self.busi_type.to_alipay_dict()
             else:
                 params['busi_type'] = self.busi_type
+        if self.contace_mobile_no:
+            if hasattr(self.contace_mobile_no, 'to_alipay_dict'):
+                params['contace_mobile_no'] = self.contace_mobile_no.to_alipay_dict()
+            else:
+                params['contace_mobile_no'] = self.contace_mobile_no
         if self.due_date:
             if hasattr(self.due_date, 'to_alipay_dict'):
                 params['due_date'] = self.due_date.to_alipay_dict()
@@ -176,6 +226,16 @@ class CreditPhoneInfo(object):
                 params['isp_abbr_cn'] = self.isp_abbr_cn.to_alipay_dict()
             else:
                 params['isp_abbr_cn'] = self.isp_abbr_cn
+        if self.isp_order_no:
+            if hasattr(self.isp_order_no, 'to_alipay_dict'):
+                params['isp_order_no'] = self.isp_order_no.to_alipay_dict()
+            else:
+                params['isp_order_no'] = self.isp_order_no
+        if self.item_name:
+            if hasattr(self.item_name, 'to_alipay_dict'):
+                params['item_name'] = self.item_name.to_alipay_dict()
+            else:
+                params['item_name'] = self.item_name
         if self.max_amount_per_installment:
             if hasattr(self.max_amount_per_installment, 'to_alipay_dict'):
                 params['max_amount_per_installment'] = self.max_amount_per_installment.to_alipay_dict()
@@ -201,6 +261,11 @@ class CreditPhoneInfo(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.province_bill_date:
+            if hasattr(self.province_bill_date, 'to_alipay_dict'):
+                params['province_bill_date'] = self.province_bill_date.to_alipay_dict()
+            else:
+                params['province_bill_date'] = self.province_bill_date
         if self.require_month_count:
             if hasattr(self.require_month_count, 'to_alipay_dict'):
                 params['require_month_count'] = self.require_month_count.to_alipay_dict()
@@ -228,12 +293,16 @@ class CreditPhoneInfo(object):
         if not d:
             return None
         o = CreditPhoneInfo()
+        if 'busi_id' in d:
+            o.busi_id = d['busi_id']
         if 'busi_level' in d:
             o.busi_level = d['busi_level']
         if 'busi_name' in d:
             o.busi_name = d['busi_name']
         if 'busi_type' in d:
             o.busi_type = d['busi_type']
+        if 'contace_mobile_no' in d:
+            o.contace_mobile_no = d['contace_mobile_no']
         if 'due_date' in d:
             o.due_date = d['due_date']
         if 'first_month_price' in d:
@@ -242,6 +311,10 @@ class CreditPhoneInfo(object):
             o.installment_numbers = d['installment_numbers']
         if 'isp_abbr_cn' in d:
             o.isp_abbr_cn = d['isp_abbr_cn']
+        if 'isp_order_no' in d:
+            o.isp_order_no = d['isp_order_no']
+        if 'item_name' in d:
+            o.item_name = d['item_name']
         if 'max_amount_per_installment' in d:
             o.max_amount_per_installment = d['max_amount_per_installment']
         if 'overdue_days' in d:
@@ -252,6 +325,8 @@ class CreditPhoneInfo(object):
             o.pre_busi_level = d['pre_busi_level']
         if 'province' in d:
             o.province = d['province']
+        if 'province_bill_date' in d:
+            o.province_bill_date = d['province_bill_date']
         if 'require_month_count' in d:
             o.require_month_count = d['require_month_count']
         if 'service_mobile' in d:

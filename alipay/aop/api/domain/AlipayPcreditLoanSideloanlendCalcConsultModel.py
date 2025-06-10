@@ -10,6 +10,7 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._apply_loan_amount = None
+        self._calc_time = None
         self._coupon_code_list = None
         self._extension = None
         self._loan_term = None
@@ -32,6 +33,13 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
     @apply_loan_amount.setter
     def apply_loan_amount(self, value):
         self._apply_loan_amount = value
+    @property
+    def calc_time(self):
+        return self._calc_time
+
+    @calc_time.setter
+    def calc_time(self, value):
+        self._calc_time = value
     @property
     def coupon_code_list(self):
         return self._coupon_code_list
@@ -98,6 +106,11 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
                 params['apply_loan_amount'] = self.apply_loan_amount.to_alipay_dict()
             else:
                 params['apply_loan_amount'] = self.apply_loan_amount
+        if self.calc_time:
+            if hasattr(self.calc_time, 'to_alipay_dict'):
+                params['calc_time'] = self.calc_time.to_alipay_dict()
+            else:
+                params['calc_time'] = self.calc_time
         if self.coupon_code_list:
             if isinstance(self.coupon_code_list, list):
                 for i in range(0, len(self.coupon_code_list)):
@@ -149,6 +162,8 @@ class AlipayPcreditLoanSideloanlendCalcConsultModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'apply_loan_amount' in d:
             o.apply_loan_amount = d['apply_loan_amount']
+        if 'calc_time' in d:
+            o.calc_time = d['calc_time']
         if 'coupon_code_list' in d:
             o.coupon_code_list = d['coupon_code_list']
         if 'extension' in d:

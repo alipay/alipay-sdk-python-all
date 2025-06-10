@@ -21,6 +21,7 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
         self._claim_pay_mode = None
         self._claim_report_biz_info = None
         self._item = None
+        self._liability_no = None
         self._order_dto = None
         self._partner_org_id = None
         self._policy_no = None
@@ -86,6 +87,13 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
             self._item = value
         else:
             self._item = EcomItemDTO.from_alipay_dict(value)
+    @property
+    def liability_no(self):
+        return self._liability_no
+
+    @liability_no.setter
+    def liability_no(self, value):
+        self._liability_no = value
     @property
     def order_dto(self):
         return self._order_dto
@@ -210,6 +218,11 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
                 params['item'] = self.item.to_alipay_dict()
             else:
                 params['item'] = self.item
+        if self.liability_no:
+            if hasattr(self.liability_no, 'to_alipay_dict'):
+                params['liability_no'] = self.liability_no.to_alipay_dict()
+            else:
+                params['liability_no'] = self.liability_no
         if self.order_dto:
             if hasattr(self.order_dto, 'to_alipay_dict'):
                 params['order_dto'] = self.order_dto.to_alipay_dict()
@@ -284,6 +297,8 @@ class AlipayInsSceneEcommerceClaimApplyModel(object):
             o.claim_report_biz_info = d['claim_report_biz_info']
         if 'item' in d:
             o.item = d['item']
+        if 'liability_no' in d:
+            o.liability_no = d['liability_no']
         if 'order_dto' in d:
             o.order_dto = d['order_dto']
         if 'partner_org_id' in d:

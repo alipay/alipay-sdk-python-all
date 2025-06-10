@@ -9,15 +9,21 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
 
     def __init__(self):
         self._enable_status = None
+        self._end_minutes = None
         self._end_time = None
+        self._end_type = None
         self._frequency_type = None
         self._inst_id = None
+        self._nfc_check = None
         self._picture_check = None
         self._place_check = None
         self._place_id_list = None
         self._radius = None
         self._rule_name = None
+        self._rule_type = None
+        self._start_minutes = None
         self._start_time = None
+        self._start_type = None
         self._week_day_list = None
 
     @property
@@ -28,12 +34,26 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     def enable_status(self, value):
         self._enable_status = value
     @property
+    def end_minutes(self):
+        return self._end_minutes
+
+    @end_minutes.setter
+    def end_minutes(self, value):
+        self._end_minutes = value
+    @property
     def end_time(self):
         return self._end_time
 
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def end_type(self):
+        return self._end_type
+
+    @end_type.setter
+    def end_type(self, value):
+        self._end_type = value
     @property
     def frequency_type(self):
         return self._frequency_type
@@ -48,6 +68,13 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def nfc_check(self):
+        return self._nfc_check
+
+    @nfc_check.setter
+    def nfc_check(self, value):
+        self._nfc_check = value
     @property
     def picture_check(self):
         return self._picture_check
@@ -87,12 +114,33 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     def rule_name(self, value):
         self._rule_name = value
     @property
+    def rule_type(self):
+        return self._rule_type
+
+    @rule_type.setter
+    def rule_type(self, value):
+        self._rule_type = value
+    @property
+    def start_minutes(self):
+        return self._start_minutes
+
+    @start_minutes.setter
+    def start_minutes(self, value):
+        self._start_minutes = value
+    @property
     def start_time(self):
         return self._start_time
 
     @start_time.setter
     def start_time(self, value):
         self._start_time = value
+    @property
+    def start_type(self):
+        return self._start_type
+
+    @start_type.setter
+    def start_type(self, value):
+        self._start_type = value
     @property
     def week_day_list(self):
         return self._week_day_list
@@ -112,11 +160,21 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
                 params['enable_status'] = self.enable_status.to_alipay_dict()
             else:
                 params['enable_status'] = self.enable_status
+        if self.end_minutes:
+            if hasattr(self.end_minutes, 'to_alipay_dict'):
+                params['end_minutes'] = self.end_minutes.to_alipay_dict()
+            else:
+                params['end_minutes'] = self.end_minutes
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.end_type:
+            if hasattr(self.end_type, 'to_alipay_dict'):
+                params['end_type'] = self.end_type.to_alipay_dict()
+            else:
+                params['end_type'] = self.end_type
         if self.frequency_type:
             if hasattr(self.frequency_type, 'to_alipay_dict'):
                 params['frequency_type'] = self.frequency_type.to_alipay_dict()
@@ -127,6 +185,11 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.nfc_check:
+            if hasattr(self.nfc_check, 'to_alipay_dict'):
+                params['nfc_check'] = self.nfc_check.to_alipay_dict()
+            else:
+                params['nfc_check'] = self.nfc_check
         if self.picture_check:
             if hasattr(self.picture_check, 'to_alipay_dict'):
                 params['picture_check'] = self.picture_check.to_alipay_dict()
@@ -157,11 +220,26 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
                 params['rule_name'] = self.rule_name.to_alipay_dict()
             else:
                 params['rule_name'] = self.rule_name
+        if self.rule_type:
+            if hasattr(self.rule_type, 'to_alipay_dict'):
+                params['rule_type'] = self.rule_type.to_alipay_dict()
+            else:
+                params['rule_type'] = self.rule_type
+        if self.start_minutes:
+            if hasattr(self.start_minutes, 'to_alipay_dict'):
+                params['start_minutes'] = self.start_minutes.to_alipay_dict()
+            else:
+                params['start_minutes'] = self.start_minutes
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
             else:
                 params['start_time'] = self.start_time
+        if self.start_type:
+            if hasattr(self.start_type, 'to_alipay_dict'):
+                params['start_type'] = self.start_type.to_alipay_dict()
+            else:
+                params['start_type'] = self.start_type
         if self.week_day_list:
             if isinstance(self.week_day_list, list):
                 for i in range(0, len(self.week_day_list)):
@@ -181,12 +259,18 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
         o = AlipayCommerceEducateCheckinRuleCreateModel()
         if 'enable_status' in d:
             o.enable_status = d['enable_status']
+        if 'end_minutes' in d:
+            o.end_minutes = d['end_minutes']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'end_type' in d:
+            o.end_type = d['end_type']
         if 'frequency_type' in d:
             o.frequency_type = d['frequency_type']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'nfc_check' in d:
+            o.nfc_check = d['nfc_check']
         if 'picture_check' in d:
             o.picture_check = d['picture_check']
         if 'place_check' in d:
@@ -197,8 +281,14 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
             o.radius = d['radius']
         if 'rule_name' in d:
             o.rule_name = d['rule_name']
+        if 'rule_type' in d:
+            o.rule_type = d['rule_type']
+        if 'start_minutes' in d:
+            o.start_minutes = d['start_minutes']
         if 'start_time' in d:
             o.start_time = d['start_time']
+        if 'start_type' in d:
+            o.start_type = d['start_type']
         if 'week_day_list' in d:
             o.week_day_list = d['week_day_list']
         return o

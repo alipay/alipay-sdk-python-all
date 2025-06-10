@@ -13,6 +13,7 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
     def __init__(self):
         self._agent_id = None
         self._business_isv = None
+        self._charge_sum_space = None
         self._charging_rule = None
         self._city_id = None
         self._contact_alipay = None
@@ -72,6 +73,13 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
                     self._business_isv.append(i)
                 else:
                     self._business_isv.append(BusinessItem.from_alipay_dict(i))
+    @property
+    def charge_sum_space(self):
+        return self._charge_sum_space
+
+    @charge_sum_space.setter
+    def charge_sum_space(self, value):
+        self._charge_sum_space = value
     @property
     def charging_rule(self):
         return self._charging_rule
@@ -369,6 +377,11 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
                 params['business_isv'] = self.business_isv.to_alipay_dict()
             else:
                 params['business_isv'] = self.business_isv
+        if self.charge_sum_space:
+            if hasattr(self.charge_sum_space, 'to_alipay_dict'):
+                params['charge_sum_space'] = self.charge_sum_space.to_alipay_dict()
+            else:
+                params['charge_sum_space'] = self.charge_sum_space
         if self.charging_rule:
             if isinstance(self.charging_rule, list):
                 for i in range(0, len(self.charging_rule)):
@@ -580,6 +593,8 @@ class AlipayEcoMycarParkingParkinglotinfoCreateModel(object):
             o.agent_id = d['agent_id']
         if 'business_isv' in d:
             o.business_isv = d['business_isv']
+        if 'charge_sum_space' in d:
+            o.charge_sum_space = d['charge_sum_space']
         if 'charging_rule' in d:
             o.charging_rule = d['charging_rule']
         if 'city_id' in d:
