@@ -10,11 +10,19 @@ from alipay.aop.api.domain.PassAccountDTO import PassAccountDTO
 class PassportDetailDTO(object):
 
     def __init__(self):
+        self._company_name = None
         self._id = None
         self._member = None
         self._pass_accounts = None
         self._status = None
 
+    @property
+    def company_name(self):
+        return self._company_name
+
+    @company_name.setter
+    def company_name(self, value):
+        self._company_name = value
     @property
     def id(self):
         return self._id
@@ -56,6 +64,11 @@ class PassportDetailDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.company_name:
+            if hasattr(self.company_name, 'to_alipay_dict'):
+                params['company_name'] = self.company_name.to_alipay_dict()
+            else:
+                params['company_name'] = self.company_name
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -88,6 +101,8 @@ class PassportDetailDTO(object):
         if not d:
             return None
         o = PassportDetailDTO()
+        if 'company_name' in d:
+            o.company_name = d['company_name']
         if 'id' in d:
             o.id = d['id']
         if 'member' in d:

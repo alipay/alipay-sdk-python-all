@@ -21,6 +21,7 @@ class LeadsDTO(object):
         self._lead_id = None
         self._ob_sa_name = None
         self._ob_sa_work_no = None
+        self._project_name = None
         self._project_phase = None
         self._project_phase_name = None
         self._sign_probability = None
@@ -118,6 +119,13 @@ class LeadsDTO(object):
     def ob_sa_work_no(self, value):
         self._ob_sa_work_no = value
     @property
+    def project_name(self):
+        return self._project_name
+
+    @project_name.setter
+    def project_name(self, value):
+        self._project_name = value
+    @property
     def project_phase(self):
         return self._project_phase
 
@@ -214,6 +222,11 @@ class LeadsDTO(object):
                 params['ob_sa_work_no'] = self.ob_sa_work_no.to_alipay_dict()
             else:
                 params['ob_sa_work_no'] = self.ob_sa_work_no
+        if self.project_name:
+            if hasattr(self.project_name, 'to_alipay_dict'):
+                params['project_name'] = self.project_name.to_alipay_dict()
+            else:
+                params['project_name'] = self.project_name
         if self.project_phase:
             if hasattr(self.project_phase, 'to_alipay_dict'):
                 params['project_phase'] = self.project_phase.to_alipay_dict()
@@ -267,6 +280,8 @@ class LeadsDTO(object):
             o.ob_sa_name = d['ob_sa_name']
         if 'ob_sa_work_no' in d:
             o.ob_sa_work_no = d['ob_sa_work_no']
+        if 'project_name' in d:
+            o.project_name = d['project_name']
         if 'project_phase' in d:
             o.project_phase = d['project_phase']
         if 'project_phase_name' in d:

@@ -9,9 +9,17 @@ class AlipayOpenAgentBaseinfoModifyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenAgentBaseinfoModifyResponse, self).__init__()
+        self._reject_reason = None
         self._reject_resion = None
         self._safe_result = None
 
+    @property
+    def reject_reason(self):
+        return self._reject_reason
+
+    @reject_reason.setter
+    def reject_reason(self, value):
+        self._reject_reason = value
     @property
     def reject_resion(self):
         return self._reject_resion
@@ -29,6 +37,8 @@ class AlipayOpenAgentBaseinfoModifyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAgentBaseinfoModifyResponse, self).parse_response_content(response_content)
+        if 'reject_reason' in response:
+            self.reject_reason = response['reject_reason']
         if 'reject_resion' in response:
             self.reject_resion = response['reject_resion']
         if 'safe_result' in response:

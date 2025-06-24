@@ -10,13 +10,16 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
     def __init__(self):
         self._apply_id = None
         self._area = None
+        self._area_code = None
         self._city = None
+        self._city_code = None
         self._delivery_address = None
         self._detail_address = None
         self._merchant_name = None
         self._order_app_id = None
         self._out_biz_no = None
         self._province = None
+        self._province_code = None
         self._rebate_pid = None
         self._receiver_name = None
         self._receiver_phone = None
@@ -38,12 +41,26 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
     def area(self, value):
         self._area = value
     @property
+    def area_code(self):
+        return self._area_code
+
+    @area_code.setter
+    def area_code(self, value):
+        self._area_code = value
+    @property
     def city(self):
         return self._city
 
     @city.setter
     def city(self, value):
         self._city = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
     @property
     def delivery_address(self):
         return self._delivery_address
@@ -86,6 +103,13 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
     @province.setter
     def province(self, value):
         self._province = value
+    @property
+    def province_code(self):
+        return self._province_code
+
+    @province_code.setter
+    def province_code(self, value):
+        self._province_code = value
     @property
     def rebate_pid(self):
         return self._rebate_pid
@@ -135,11 +159,21 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
                 params['area'] = self.area.to_alipay_dict()
             else:
                 params['area'] = self.area
+        if self.area_code:
+            if hasattr(self.area_code, 'to_alipay_dict'):
+                params['area_code'] = self.area_code.to_alipay_dict()
+            else:
+                params['area_code'] = self.area_code
         if self.city:
             if hasattr(self.city, 'to_alipay_dict'):
                 params['city'] = self.city.to_alipay_dict()
             else:
                 params['city'] = self.city
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
         if self.delivery_address:
             if hasattr(self.delivery_address, 'to_alipay_dict'):
                 params['delivery_address'] = self.delivery_address.to_alipay_dict()
@@ -170,6 +204,11 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.province_code:
+            if hasattr(self.province_code, 'to_alipay_dict'):
+                params['province_code'] = self.province_code.to_alipay_dict()
+            else:
+                params['province_code'] = self.province_code
         if self.rebate_pid:
             if hasattr(self.rebate_pid, 'to_alipay_dict'):
                 params['rebate_pid'] = self.rebate_pid.to_alipay_dict()
@@ -206,8 +245,12 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
             o.apply_id = d['apply_id']
         if 'area' in d:
             o.area = d['area']
+        if 'area_code' in d:
+            o.area_code = d['area_code']
         if 'city' in d:
             o.city = d['city']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
         if 'delivery_address' in d:
             o.delivery_address = d['delivery_address']
         if 'detail_address' in d:
@@ -220,6 +263,8 @@ class AlipayOpenSpNordermaterialsapplyShopCreateModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'province' in d:
             o.province = d['province']
+        if 'province_code' in d:
+            o.province_code = d['province_code']
         if 'rebate_pid' in d:
             o.rebate_pid = d['rebate_pid']
         if 'receiver_name' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FreigtFlowAccount import FreigtFlowAccount
+from alipay.aop.api.domain.FreightFlowSubAccountOwnerInfo import FreightFlowSubAccountOwnerInfo
 
 
 class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
@@ -16,6 +17,7 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
         self._out_user_name = None
         self._parent_info = None
         self._partner_id = None
+        self._sub_account_owner_info = None
 
     @property
     def logistics_code(self):
@@ -69,6 +71,16 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
     @partner_id.setter
     def partner_id(self, value):
         self._partner_id = value
+    @property
+    def sub_account_owner_info(self):
+        return self._sub_account_owner_info
+
+    @sub_account_owner_info.setter
+    def sub_account_owner_info(self, value):
+        if isinstance(value, FreightFlowSubAccountOwnerInfo):
+            self._sub_account_owner_info = value
+        else:
+            self._sub_account_owner_info = FreightFlowSubAccountOwnerInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -108,6 +120,11 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.sub_account_owner_info:
+            if hasattr(self.sub_account_owner_info, 'to_alipay_dict'):
+                params['sub_account_owner_info'] = self.sub_account_owner_info.to_alipay_dict()
+            else:
+                params['sub_account_owner_info'] = self.sub_account_owner_info
         return params
 
     @staticmethod
@@ -129,6 +146,8 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
             o.parent_info = d['parent_info']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'sub_account_owner_info' in d:
+            o.sub_account_owner_info = d['sub_account_owner_info']
         return o
 
 

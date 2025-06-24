@@ -34,6 +34,7 @@ class InvoiceApplyOpenApi(object):
         self._register_country = None
         self._service_mth = None
         self._source = None
+        self._specify_apply_amount = None
         self._tax_classification_code = None
         self._tax_rate = None
         self._tax_rate_tags = None
@@ -218,6 +219,13 @@ class InvoiceApplyOpenApi(object):
     def source(self, value):
         self._source = value
     @property
+    def specify_apply_amount(self):
+        return self._specify_apply_amount
+
+    @specify_apply_amount.setter
+    def specify_apply_amount(self, value):
+        self._specify_apply_amount = value
+    @property
     def tax_classification_code(self):
         return self._tax_classification_code
 
@@ -374,6 +382,11 @@ class InvoiceApplyOpenApi(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.specify_apply_amount:
+            if hasattr(self.specify_apply_amount, 'to_alipay_dict'):
+                params['specify_apply_amount'] = self.specify_apply_amount.to_alipay_dict()
+            else:
+                params['specify_apply_amount'] = self.specify_apply_amount
         if self.tax_classification_code:
             if hasattr(self.tax_classification_code, 'to_alipay_dict'):
                 params['tax_classification_code'] = self.tax_classification_code.to_alipay_dict()
@@ -451,6 +464,8 @@ class InvoiceApplyOpenApi(object):
             o.service_mth = d['service_mth']
         if 'source' in d:
             o.source = d['source']
+        if 'specify_apply_amount' in d:
+            o.specify_apply_amount = d['specify_apply_amount']
         if 'tax_classification_code' in d:
             o.tax_classification_code = d['tax_classification_code']
         if 'tax_rate' in d:

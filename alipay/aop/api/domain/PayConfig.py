@@ -12,6 +12,7 @@ class PayConfig(object):
         self._card_holder_name = None
         self._card_no = None
         self._open_asset_role = None
+        self._open_single_account = None
         self._use_bank_channel = None
 
     @property
@@ -43,6 +44,13 @@ class PayConfig(object):
     def open_asset_role(self, value):
         self._open_asset_role = value
     @property
+    def open_single_account(self):
+        return self._open_single_account
+
+    @open_single_account.setter
+    def open_single_account(self, value):
+        self._open_single_account = value
+    @property
     def use_bank_channel(self):
         return self._use_bank_channel
 
@@ -73,6 +81,11 @@ class PayConfig(object):
                 params['open_asset_role'] = self.open_asset_role.to_alipay_dict()
             else:
                 params['open_asset_role'] = self.open_asset_role
+        if self.open_single_account:
+            if hasattr(self.open_single_account, 'to_alipay_dict'):
+                params['open_single_account'] = self.open_single_account.to_alipay_dict()
+            else:
+                params['open_single_account'] = self.open_single_account
         if self.use_bank_channel:
             if hasattr(self.use_bank_channel, 'to_alipay_dict'):
                 params['use_bank_channel'] = self.use_bank_channel.to_alipay_dict()
@@ -93,6 +106,8 @@ class PayConfig(object):
             o.card_no = d['card_no']
         if 'open_asset_role' in d:
             o.open_asset_role = d['open_asset_role']
+        if 'open_single_account' in d:
+            o.open_single_account = d['open_single_account']
         if 'use_bank_channel' in d:
             o.use_bank_channel = d['use_bank_channel']
         return o

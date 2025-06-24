@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class AddressPoi(object):
 
     def __init__(self):
+        self._ad_code = None
         self._county_code = None
         self._lat = None
         self._lon = None
         self._name = None
         self._poi_id = None
 
+    @property
+    def ad_code(self):
+        return self._ad_code
+
+    @ad_code.setter
+    def ad_code(self, value):
+        self._ad_code = value
     @property
     def county_code(self):
         return self._county_code
@@ -53,6 +61,11 @@ class AddressPoi(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ad_code:
+            if hasattr(self.ad_code, 'to_alipay_dict'):
+                params['ad_code'] = self.ad_code.to_alipay_dict()
+            else:
+                params['ad_code'] = self.ad_code
         if self.county_code:
             if hasattr(self.county_code, 'to_alipay_dict'):
                 params['county_code'] = self.county_code.to_alipay_dict()
@@ -85,6 +98,8 @@ class AddressPoi(object):
         if not d:
             return None
         o = AddressPoi()
+        if 'ad_code' in d:
+            o.ad_code = d['ad_code']
         if 'county_code' in d:
             o.county_code = d['county_code']
         if 'lat' in d:

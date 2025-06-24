@@ -8,13 +8,22 @@ from alipay.aop.api.constant.ParamConstants import *
 class BsExtraCredentials(object):
 
     def __init__(self):
+        self._brand_id = None
         self._brand_name = None
         self._merchant_confirmation_letter = None
         self._power_bank = None
         self._power_bank_img = None
+        self._store_id = None
         self._supply_isv_contact_phone_no = None
         self._supply_isv_leads_level = None
 
+    @property
+    def brand_id(self):
+        return self._brand_id
+
+    @brand_id.setter
+    def brand_id(self, value):
+        self._brand_id = value
     @property
     def brand_name(self):
         return self._brand_name
@@ -44,6 +53,13 @@ class BsExtraCredentials(object):
     def power_bank_img(self, value):
         self._power_bank_img = value
     @property
+    def store_id(self):
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, value):
+        self._store_id = value
+    @property
     def supply_isv_contact_phone_no(self):
         return self._supply_isv_contact_phone_no
 
@@ -61,6 +77,11 @@ class BsExtraCredentials(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.brand_id:
+            if hasattr(self.brand_id, 'to_alipay_dict'):
+                params['brand_id'] = self.brand_id.to_alipay_dict()
+            else:
+                params['brand_id'] = self.brand_id
         if self.brand_name:
             if hasattr(self.brand_name, 'to_alipay_dict'):
                 params['brand_name'] = self.brand_name.to_alipay_dict()
@@ -81,6 +102,11 @@ class BsExtraCredentials(object):
                 params['power_bank_img'] = self.power_bank_img.to_alipay_dict()
             else:
                 params['power_bank_img'] = self.power_bank_img
+        if self.store_id:
+            if hasattr(self.store_id, 'to_alipay_dict'):
+                params['store_id'] = self.store_id.to_alipay_dict()
+            else:
+                params['store_id'] = self.store_id
         if self.supply_isv_contact_phone_no:
             if hasattr(self.supply_isv_contact_phone_no, 'to_alipay_dict'):
                 params['supply_isv_contact_phone_no'] = self.supply_isv_contact_phone_no.to_alipay_dict()
@@ -98,6 +124,8 @@ class BsExtraCredentials(object):
         if not d:
             return None
         o = BsExtraCredentials()
+        if 'brand_id' in d:
+            o.brand_id = d['brand_id']
         if 'brand_name' in d:
             o.brand_name = d['brand_name']
         if 'merchant_confirmation_letter' in d:
@@ -106,6 +134,8 @@ class BsExtraCredentials(object):
             o.power_bank = d['power_bank']
         if 'power_bank_img' in d:
             o.power_bank_img = d['power_bank_img']
+        if 'store_id' in d:
+            o.store_id = d['store_id']
         if 'supply_isv_contact_phone_no' in d:
             o.supply_isv_contact_phone_no = d['supply_isv_contact_phone_no']
         if 'supply_isv_leads_level' in d:

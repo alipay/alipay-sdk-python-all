@@ -9,6 +9,7 @@ class AlipayPcreditLoanSideloansignCreditApplyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditLoanSideloansignCreditApplyResponse, self).__init__()
+        self._cool_off_type = None
         self._credit_status = None
         self._fail_reason_code = None
         self._fail_reason_message = None
@@ -17,6 +18,13 @@ class AlipayPcreditLoanSideloansignCreditApplyResponse(AlipayResponse):
         self._return_sub_code = None
         self._return_sub_message = None
 
+    @property
+    def cool_off_type(self):
+        return self._cool_off_type
+
+    @cool_off_type.setter
+    def cool_off_type(self, value):
+        self._cool_off_type = value
     @property
     def credit_status(self):
         return self._credit_status
@@ -69,6 +77,8 @@ class AlipayPcreditLoanSideloansignCreditApplyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditLoanSideloansignCreditApplyResponse, self).parse_response_content(response_content)
+        if 'cool_off_type' in response:
+            self.cool_off_type = response['cool_off_type']
         if 'credit_status' in response:
             self.credit_status = response['credit_status']
         if 'fail_reason_code' in response:

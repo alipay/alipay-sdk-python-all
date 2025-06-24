@@ -10,6 +10,8 @@ from alipay.aop.api.domain.EduPlaceInfo import EduPlaceInfo
 class EduCheckInRule(object):
 
     def __init__(self):
+        self._auth_activity_id = None
+        self._authentication_type = None
         self._course_config_ext = None
         self._enable_status = None
         self._end_time = None
@@ -26,6 +28,20 @@ class EduCheckInRule(object):
         self._start_time = None
         self._week_day_list = None
 
+    @property
+    def auth_activity_id(self):
+        return self._auth_activity_id
+
+    @auth_activity_id.setter
+    def auth_activity_id(self, value):
+        self._auth_activity_id = value
+    @property
+    def authentication_type(self):
+        return self._authentication_type
+
+    @authentication_type.setter
+    def authentication_type(self, value):
+        self._authentication_type = value
     @property
     def course_config_ext(self):
         return self._course_config_ext
@@ -147,6 +163,16 @@ class EduCheckInRule(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auth_activity_id:
+            if hasattr(self.auth_activity_id, 'to_alipay_dict'):
+                params['auth_activity_id'] = self.auth_activity_id.to_alipay_dict()
+            else:
+                params['auth_activity_id'] = self.auth_activity_id
+        if self.authentication_type:
+            if hasattr(self.authentication_type, 'to_alipay_dict'):
+                params['authentication_type'] = self.authentication_type.to_alipay_dict()
+            else:
+                params['authentication_type'] = self.authentication_type
         if self.course_config_ext:
             if hasattr(self.course_config_ext, 'to_alipay_dict'):
                 params['course_config_ext'] = self.course_config_ext.to_alipay_dict()
@@ -239,6 +265,10 @@ class EduCheckInRule(object):
         if not d:
             return None
         o = EduCheckInRule()
+        if 'auth_activity_id' in d:
+            o.auth_activity_id = d['auth_activity_id']
+        if 'authentication_type' in d:
+            o.authentication_type = d['authentication_type']
         if 'course_config_ext' in d:
             o.course_config_ext = d['course_config_ext']
         if 'enable_status' in d:

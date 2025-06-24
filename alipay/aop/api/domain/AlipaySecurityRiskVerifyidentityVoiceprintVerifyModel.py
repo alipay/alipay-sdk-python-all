@@ -14,6 +14,7 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
         self._flow_data = None
         self._long_verify_session_id = None
         self._out_biz_id = None
+        self._scene_id = None
         self._verify_session_id = None
         self._voice_data_type = None
         self._voice_verify_step = None
@@ -60,6 +61,13 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
     @out_biz_id.setter
     def out_biz_id(self, value):
         self._out_biz_id = value
+    @property
+    def scene_id(self):
+        return self._scene_id
+
+    @scene_id.setter
+    def scene_id(self, value):
+        self._scene_id = value
     @property
     def verify_session_id(self):
         return self._verify_session_id
@@ -115,6 +123,11 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
                 params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
             else:
                 params['out_biz_id'] = self.out_biz_id
+        if self.scene_id:
+            if hasattr(self.scene_id, 'to_alipay_dict'):
+                params['scene_id'] = self.scene_id.to_alipay_dict()
+            else:
+                params['scene_id'] = self.scene_id
         if self.verify_session_id:
             if hasattr(self.verify_session_id, 'to_alipay_dict'):
                 params['verify_session_id'] = self.verify_session_id.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipaySecurityRiskVerifyidentityVoiceprintVerifyModel(object):
             o.long_verify_session_id = d['long_verify_session_id']
         if 'out_biz_id' in d:
             o.out_biz_id = d['out_biz_id']
+        if 'scene_id' in d:
+            o.scene_id = d['scene_id']
         if 'verify_session_id' in d:
             o.verify_session_id = d['verify_session_id']
         if 'voice_data_type' in d:

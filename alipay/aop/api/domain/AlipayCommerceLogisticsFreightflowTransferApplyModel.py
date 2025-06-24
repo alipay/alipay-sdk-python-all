@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FreightFlowParticipantInfo import FreightFlowParticipantInfo
 from alipay.aop.api.domain.FreightFlowParticipantInfo import FreightFlowParticipantInfo
+from alipay.aop.api.domain.FreightFlowWaybillInfo import FreightFlowWaybillInfo
 
 
 class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
@@ -20,6 +21,8 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
         self._payee_participant = None
         self._payer_participant = None
         self._request_time = None
+        self._trans_purpose = None
+        self._waybill_info = None
 
     @property
     def amount(self):
@@ -97,6 +100,23 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
     @request_time.setter
     def request_time(self, value):
         self._request_time = value
+    @property
+    def trans_purpose(self):
+        return self._trans_purpose
+
+    @trans_purpose.setter
+    def trans_purpose(self, value):
+        self._trans_purpose = value
+    @property
+    def waybill_info(self):
+        return self._waybill_info
+
+    @waybill_info.setter
+    def waybill_info(self, value):
+        if isinstance(value, FreightFlowWaybillInfo):
+            self._waybill_info = value
+        else:
+            self._waybill_info = FreightFlowWaybillInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -151,6 +171,16 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
                 params['request_time'] = self.request_time.to_alipay_dict()
             else:
                 params['request_time'] = self.request_time
+        if self.trans_purpose:
+            if hasattr(self.trans_purpose, 'to_alipay_dict'):
+                params['trans_purpose'] = self.trans_purpose.to_alipay_dict()
+            else:
+                params['trans_purpose'] = self.trans_purpose
+        if self.waybill_info:
+            if hasattr(self.waybill_info, 'to_alipay_dict'):
+                params['waybill_info'] = self.waybill_info.to_alipay_dict()
+            else:
+                params['waybill_info'] = self.waybill_info
         return params
 
     @staticmethod
@@ -178,6 +208,10 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
             o.payer_participant = d['payer_participant']
         if 'request_time' in d:
             o.request_time = d['request_time']
+        if 'trans_purpose' in d:
+            o.trans_purpose = d['trans_purpose']
+        if 'waybill_info' in d:
+            o.waybill_info = d['waybill_info']
         return o
 
 

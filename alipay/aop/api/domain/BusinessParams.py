@@ -9,6 +9,7 @@ class BusinessParams(object):
 
     def __init__(self):
         self._actual_order_time = None
+        self._buyer_memo = None
         self._campus_card = None
         self._card_type = None
         self._enterprise_pay_amount = None
@@ -26,6 +27,13 @@ class BusinessParams(object):
     @actual_order_time.setter
     def actual_order_time(self, value):
         self._actual_order_time = value
+    @property
+    def buyer_memo(self):
+        return self._buyer_memo
+
+    @buyer_memo.setter
+    def buyer_memo(self, value):
+        self._buyer_memo = value
     @property
     def campus_card(self):
         return self._campus_card
@@ -98,6 +106,11 @@ class BusinessParams(object):
                 params['actual_order_time'] = self.actual_order_time.to_alipay_dict()
             else:
                 params['actual_order_time'] = self.actual_order_time
+        if self.buyer_memo:
+            if hasattr(self.buyer_memo, 'to_alipay_dict'):
+                params['buyer_memo'] = self.buyer_memo.to_alipay_dict()
+            else:
+                params['buyer_memo'] = self.buyer_memo
         if self.campus_card:
             if hasattr(self.campus_card, 'to_alipay_dict'):
                 params['campus_card'] = self.campus_card.to_alipay_dict()
@@ -152,6 +165,8 @@ class BusinessParams(object):
         o = BusinessParams()
         if 'actual_order_time' in d:
             o.actual_order_time = d['actual_order_time']
+        if 'buyer_memo' in d:
+            o.buyer_memo = d['buyer_memo']
         if 'campus_card' in d:
             o.campus_card = d['campus_card']
         if 'card_type' in d:

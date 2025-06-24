@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ProductInvoiceCheckResult import ProductInvoiceCheckResult
 from alipay.aop.api.domain.CompanyProductConfig import CompanyProductConfig
 
 
 class CompanyProduct(object):
 
     def __init__(self):
+        self._check_error_list = None
         self._company_account_id = None
         self._company_product_config = None
         self._product_id = None
         self._product_name = None
 
+    @property
+    def check_error_list(self):
+        return self._check_error_list
+
+    @check_error_list.setter
+    def check_error_list(self, value):
+        if isinstance(value, ProductInvoiceCheckResult):
+            self._check_error_list = value
+        else:
+            self._check_error_list = ProductInvoiceCheckResult.from_alipay_dict(value)
     @property
     def company_account_id(self):
         return self._company_account_id
@@ -49,6 +61,11 @@ class CompanyProduct(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.check_error_list:
+            if hasattr(self.check_error_list, 'to_alipay_dict'):
+                params['check_error_list'] = self.check_error_list.to_alipay_dict()
+            else:
+                params['check_error_list'] = self.check_error_list
         if self.company_account_id:
             if hasattr(self.company_account_id, 'to_alipay_dict'):
                 params['company_account_id'] = self.company_account_id.to_alipay_dict()
@@ -76,6 +93,8 @@ class CompanyProduct(object):
         if not d:
             return None
         o = CompanyProduct()
+        if 'check_error_list' in d:
+            o.check_error_list = d['check_error_list']
         if 'company_account_id' in d:
             o.company_account_id = d['company_account_id']
         if 'company_product_config' in d:

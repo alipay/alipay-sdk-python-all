@@ -13,6 +13,8 @@ class BsShopInfoDetail(object):
         self._city_name = None
         self._district_code = None
         self._district_name = None
+        self._latitude = None
+        self._longitude = None
         self._name = None
         self._province_code = None
         self._province_name = None
@@ -52,6 +54,20 @@ class BsShopInfoDetail(object):
     @district_name.setter
     def district_name(self, value):
         self._district_name = value
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
     @property
     def name(self):
         return self._name
@@ -102,6 +118,16 @@ class BsShopInfoDetail(object):
                 params['district_name'] = self.district_name.to_alipay_dict()
             else:
                 params['district_name'] = self.district_name
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -134,6 +160,10 @@ class BsShopInfoDetail(object):
             o.district_code = d['district_code']
         if 'district_name' in d:
             o.district_name = d['district_name']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
         if 'name' in d:
             o.name = d['name']
         if 'province_code' in d:

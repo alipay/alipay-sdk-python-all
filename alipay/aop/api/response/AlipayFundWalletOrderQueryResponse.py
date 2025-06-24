@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.PaymentFundInfo import PaymentFundInfo
 from alipay.aop.api.domain.RefundPaymentAssetInfo import RefundPaymentAssetInfo
 
 
@@ -12,6 +13,7 @@ class AlipayFundWalletOrderQueryResponse(AlipayResponse):
         super(AlipayFundWalletOrderQueryResponse, self).__init__()
         self._actual_amount = None
         self._execute_time = None
+        self._payment_fund_info = None
         self._refund_payment_asset_infos = None
         self._total_amount = None
         self._trans_status = None
@@ -30,6 +32,16 @@ class AlipayFundWalletOrderQueryResponse(AlipayResponse):
     @execute_time.setter
     def execute_time(self, value):
         self._execute_time = value
+    @property
+    def payment_fund_info(self):
+        return self._payment_fund_info
+
+    @payment_fund_info.setter
+    def payment_fund_info(self, value):
+        if isinstance(value, PaymentFundInfo):
+            self._payment_fund_info = value
+        else:
+            self._payment_fund_info = PaymentFundInfo.from_alipay_dict(value)
     @property
     def refund_payment_asset_infos(self):
         return self._refund_payment_asset_infos
@@ -64,6 +76,8 @@ class AlipayFundWalletOrderQueryResponse(AlipayResponse):
             self.actual_amount = response['actual_amount']
         if 'execute_time' in response:
             self.execute_time = response['execute_time']
+        if 'payment_fund_info' in response:
+            self.payment_fund_info = response['payment_fund_info']
         if 'refund_payment_asset_infos' in response:
             self.refund_payment_asset_infos = response['refund_payment_asset_infos']
         if 'total_amount' in response:

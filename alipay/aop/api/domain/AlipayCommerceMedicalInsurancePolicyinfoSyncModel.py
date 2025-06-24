@@ -32,6 +32,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._premium = None
         self._prod_name = None
         self._prod_no = None
+        self._product_scheme_code = None
         self._source_policy_no = None
         self._status = None
         self._sum_insured = None
@@ -208,6 +209,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
     @prod_no.setter
     def prod_no(self, value):
         self._prod_no = value
+    @property
+    def product_scheme_code(self):
+        return self._product_scheme_code
+
+    @product_scheme_code.setter
+    def product_scheme_code(self, value):
+        self._product_scheme_code = value
     @property
     def source_policy_no(self):
         return self._source_policy_no
@@ -402,6 +410,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['prod_no'] = self.prod_no.to_alipay_dict()
             else:
                 params['prod_no'] = self.prod_no
+        if self.product_scheme_code:
+            if hasattr(self.product_scheme_code, 'to_alipay_dict'):
+                params['product_scheme_code'] = self.product_scheme_code.to_alipay_dict()
+            else:
+                params['product_scheme_code'] = self.product_scheme_code
         if self.source_policy_no:
             if hasattr(self.source_policy_no, 'to_alipay_dict'):
                 params['source_policy_no'] = self.source_policy_no.to_alipay_dict()
@@ -501,6 +514,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.prod_name = d['prod_name']
         if 'prod_no' in d:
             o.prod_no = d['prod_no']
+        if 'product_scheme_code' in d:
+            o.product_scheme_code = d['product_scheme_code']
         if 'source_policy_no' in d:
             o.source_policy_no = d['source_policy_no']
         if 'status' in d:

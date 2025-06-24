@@ -9,7 +9,10 @@ from alipay.aop.api.domain.ItemConsultRequest import ItemConsultRequest
 class AlipayMarketingAssetPreconsultModel(object):
 
     def __init__(self):
+        self._biz_no = None
         self._business_param = None
+        self._cert_no = None
+        self._cert_type = None
         self._item_consult_list = None
         self._open_id = None
         self._order_amount = None
@@ -20,12 +23,33 @@ class AlipayMarketingAssetPreconsultModel(object):
         self._user_id = None
 
     @property
+    def biz_no(self):
+        return self._biz_no
+
+    @biz_no.setter
+    def biz_no(self, value):
+        self._biz_no = value
+    @property
     def business_param(self):
         return self._business_param
 
     @business_param.setter
     def business_param(self, value):
         self._business_param = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def item_consult_list(self):
         return self._item_consult_list
@@ -92,11 +116,26 @@ class AlipayMarketingAssetPreconsultModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_no:
+            if hasattr(self.biz_no, 'to_alipay_dict'):
+                params['biz_no'] = self.biz_no.to_alipay_dict()
+            else:
+                params['biz_no'] = self.biz_no
         if self.business_param:
             if hasattr(self.business_param, 'to_alipay_dict'):
                 params['business_param'] = self.business_param.to_alipay_dict()
             else:
                 params['business_param'] = self.business_param
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.item_consult_list:
             if isinstance(self.item_consult_list, list):
                 for i in range(0, len(self.item_consult_list)):
@@ -149,8 +188,14 @@ class AlipayMarketingAssetPreconsultModel(object):
         if not d:
             return None
         o = AlipayMarketingAssetPreconsultModel()
+        if 'biz_no' in d:
+            o.biz_no = d['biz_no']
         if 'business_param' in d:
             o.business_param = d['business_param']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'item_consult_list' in d:
             o.item_consult_list = d['item_consult_list']
         if 'open_id' in d:

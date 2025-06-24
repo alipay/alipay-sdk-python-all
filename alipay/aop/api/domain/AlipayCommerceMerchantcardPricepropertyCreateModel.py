@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BreakCosts import BreakCosts
+from alipay.aop.api.domain.BreakCostsExemptRule import BreakCostsExemptRule
 from alipay.aop.api.domain.CardPropertyCycle import CardPropertyCycle
 from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
 
@@ -10,6 +12,8 @@ from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
 class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
 
     def __init__(self):
+        self._break_costs = None
+        self._break_costs_exempt_rule = None
         self._card_property_cycle = None
         self._card_template_id = None
         self._card_template_name = None
@@ -19,6 +23,26 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
         self._period_price_list = None
         self._sale_price = None
 
+    @property
+    def break_costs(self):
+        return self._break_costs
+
+    @break_costs.setter
+    def break_costs(self, value):
+        if isinstance(value, BreakCosts):
+            self._break_costs = value
+        else:
+            self._break_costs = BreakCosts.from_alipay_dict(value)
+    @property
+    def break_costs_exempt_rule(self):
+        return self._break_costs_exempt_rule
+
+    @break_costs_exempt_rule.setter
+    def break_costs_exempt_rule(self, value):
+        if isinstance(value, BreakCostsExemptRule):
+            self._break_costs_exempt_rule = value
+        else:
+            self._break_costs_exempt_rule = BreakCostsExemptRule.from_alipay_dict(value)
     @property
     def card_property_cycle(self):
         return self._card_property_cycle
@@ -88,6 +112,16 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.break_costs:
+            if hasattr(self.break_costs, 'to_alipay_dict'):
+                params['break_costs'] = self.break_costs.to_alipay_dict()
+            else:
+                params['break_costs'] = self.break_costs
+        if self.break_costs_exempt_rule:
+            if hasattr(self.break_costs_exempt_rule, 'to_alipay_dict'):
+                params['break_costs_exempt_rule'] = self.break_costs_exempt_rule.to_alipay_dict()
+            else:
+                params['break_costs_exempt_rule'] = self.break_costs_exempt_rule
         if self.card_property_cycle:
             if hasattr(self.card_property_cycle, 'to_alipay_dict'):
                 params['card_property_cycle'] = self.card_property_cycle.to_alipay_dict()
@@ -140,6 +174,10 @@ class AlipayCommerceMerchantcardPricepropertyCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceMerchantcardPricepropertyCreateModel()
+        if 'break_costs' in d:
+            o.break_costs = d['break_costs']
+        if 'break_costs_exempt_rule' in d:
+            o.break_costs_exempt_rule = d['break_costs_exempt_rule']
         if 'card_property_cycle' in d:
             o.card_property_cycle = d['card_property_cycle']
         if 'card_template_id' in d:

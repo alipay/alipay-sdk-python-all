@@ -20,6 +20,7 @@ class AlipayCloudCloudbaseRedisInstanceGetResponse(AlipayResponse):
         self._region = None
         self._shard_number = None
         self._status = None
+        self._zone = None
 
     @property
     def architecture_type(self):
@@ -98,6 +99,13 @@ class AlipayCloudCloudbaseRedisInstanceGetResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def zone(self):
+        return self._zone
+
+    @zone.setter
+    def zone(self, value):
+        self._zone = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCloudCloudbaseRedisInstanceGetResponse, self).parse_response_content(response_content)
@@ -123,3 +131,5 @@ class AlipayCloudCloudbaseRedisInstanceGetResponse(AlipayResponse):
             self.shard_number = response['shard_number']
         if 'status' in response:
             self.status = response['status']
+        if 'zone' in response:
+            self.zone = response['zone']

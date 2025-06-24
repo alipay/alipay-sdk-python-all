@@ -12,6 +12,7 @@ class ObArtifactSyncDTO(object):
     def __init__(self):
         self._artifact_fullname = None
         self._artifact_version = None
+        self._boss_id = None
         self._branch_or_tag = None
         self._build_id = None
         self._commit_id = None
@@ -45,6 +46,13 @@ class ObArtifactSyncDTO(object):
     @artifact_version.setter
     def artifact_version(self, value):
         self._artifact_version = value
+    @property
+    def boss_id(self):
+        return self._boss_id
+
+    @boss_id.setter
+    def boss_id(self, value):
+        self._boss_id = value
     @property
     def branch_or_tag(self):
         return self._branch_or_tag
@@ -197,6 +205,11 @@ class ObArtifactSyncDTO(object):
                 params['artifact_version'] = self.artifact_version.to_alipay_dict()
             else:
                 params['artifact_version'] = self.artifact_version
+        if self.boss_id:
+            if hasattr(self.boss_id, 'to_alipay_dict'):
+                params['boss_id'] = self.boss_id.to_alipay_dict()
+            else:
+                params['boss_id'] = self.boss_id
         if self.branch_or_tag:
             if hasattr(self.branch_or_tag, 'to_alipay_dict'):
                 params['branch_or_tag'] = self.branch_or_tag.to_alipay_dict()
@@ -308,6 +321,8 @@ class ObArtifactSyncDTO(object):
             o.artifact_fullname = d['artifact_fullname']
         if 'artifact_version' in d:
             o.artifact_version = d['artifact_version']
+        if 'boss_id' in d:
+            o.boss_id = d['boss_id']
         if 'branch_or_tag' in d:
             o.branch_or_tag = d['branch_or_tag']
         if 'build_id' in d:

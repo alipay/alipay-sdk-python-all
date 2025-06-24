@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.StandardConditionInfo import StandardConditionInfo
+from alipay.aop.api.domain.AssetShareSourceInfo import AssetShareSourceInfo
 from alipay.aop.api.domain.StandardConditionInfo import StandardConditionInfo
 
 
@@ -11,6 +12,7 @@ class ModifyStandardInfo(object):
 
     def __init__(self):
         self._add_condition_list = None
+        self._asset_share_source_info = None
         self._consume_mode = None
         self._delete_condition_id_list = None
         self._modify_condition_list = None
@@ -34,6 +36,16 @@ class ModifyStandardInfo(object):
                     self._add_condition_list.append(i)
                 else:
                     self._add_condition_list.append(StandardConditionInfo.from_alipay_dict(i))
+    @property
+    def asset_share_source_info(self):
+        return self._asset_share_source_info
+
+    @asset_share_source_info.setter
+    def asset_share_source_info(self, value):
+        if isinstance(value, AssetShareSourceInfo):
+            self._asset_share_source_info = value
+        else:
+            self._asset_share_source_info = AssetShareSourceInfo.from_alipay_dict(value)
     @property
     def consume_mode(self):
         return self._consume_mode
@@ -120,6 +132,11 @@ class ModifyStandardInfo(object):
                 params['add_condition_list'] = self.add_condition_list.to_alipay_dict()
             else:
                 params['add_condition_list'] = self.add_condition_list
+        if self.asset_share_source_info:
+            if hasattr(self.asset_share_source_info, 'to_alipay_dict'):
+                params['asset_share_source_info'] = self.asset_share_source_info.to_alipay_dict()
+            else:
+                params['asset_share_source_info'] = self.asset_share_source_info
         if self.consume_mode:
             if hasattr(self.consume_mode, 'to_alipay_dict'):
                 params['consume_mode'] = self.consume_mode.to_alipay_dict()
@@ -184,6 +201,8 @@ class ModifyStandardInfo(object):
         o = ModifyStandardInfo()
         if 'add_condition_list' in d:
             o.add_condition_list = d['add_condition_list']
+        if 'asset_share_source_info' in d:
+            o.asset_share_source_info = d['asset_share_source_info']
         if 'consume_mode' in d:
             o.consume_mode = d['consume_mode']
         if 'delete_condition_id_list' in d:

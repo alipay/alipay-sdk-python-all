@@ -24,6 +24,7 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._institution_name = None
         self._institution_scope_info = None
         self._issue_rule_info_list = None
+        self._multi_employee_share_mode = None
         self._outer_source_id = None
         self._owner_id_list = None
         self._owner_open_id_list = None
@@ -131,6 +132,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                     self._issue_rule_info_list.append(i)
                 else:
                     self._issue_rule_info_list.append(IssueRuleInfo.from_alipay_dict(i))
+    @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
     @property
     def outer_source_id(self):
         return self._outer_source_id
@@ -259,6 +267,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['issue_rule_info_list'] = self.issue_rule_info_list.to_alipay_dict()
             else:
                 params['issue_rule_info_list'] = self.issue_rule_info_list
+        if self.multi_employee_share_mode:
+            if hasattr(self.multi_employee_share_mode, 'to_alipay_dict'):
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode.to_alipay_dict()
+            else:
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode
         if self.outer_source_id:
             if hasattr(self.outer_source_id, 'to_alipay_dict'):
                 params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
@@ -337,6 +350,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.institution_scope_info = d['institution_scope_info']
         if 'issue_rule_info_list' in d:
             o.issue_rule_info_list = d['issue_rule_info_list']
+        if 'multi_employee_share_mode' in d:
+            o.multi_employee_share_mode = d['multi_employee_share_mode']
         if 'outer_source_id' in d:
             o.outer_source_id = d['outer_source_id']
         if 'owner_id_list' in d:

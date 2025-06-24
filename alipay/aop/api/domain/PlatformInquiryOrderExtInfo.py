@@ -19,6 +19,7 @@ class PlatformInquiryOrderExtInfo(object):
         self._invoice_url = None
         self._medical_inquiry_order_evaluate_info = None
         self._order_pid = None
+        self._original_price = None
         self._plus_register_info = None
         self._refund_url = None
         self._source = None
@@ -89,6 +90,13 @@ class PlatformInquiryOrderExtInfo(object):
     @order_pid.setter
     def order_pid(self, value):
         self._order_pid = value
+    @property
+    def original_price(self):
+        return self._original_price
+
+    @original_price.setter
+    def original_price(self, value):
+        self._original_price = value
     @property
     def plus_register_info(self):
         return self._plus_register_info
@@ -162,6 +170,11 @@ class PlatformInquiryOrderExtInfo(object):
                 params['order_pid'] = self.order_pid.to_alipay_dict()
             else:
                 params['order_pid'] = self.order_pid
+        if self.original_price:
+            if hasattr(self.original_price, 'to_alipay_dict'):
+                params['original_price'] = self.original_price.to_alipay_dict()
+            else:
+                params['original_price'] = self.original_price
         if self.plus_register_info:
             if hasattr(self.plus_register_info, 'to_alipay_dict'):
                 params['plus_register_info'] = self.plus_register_info.to_alipay_dict()
@@ -202,6 +215,8 @@ class PlatformInquiryOrderExtInfo(object):
             o.medical_inquiry_order_evaluate_info = d['medical_inquiry_order_evaluate_info']
         if 'order_pid' in d:
             o.order_pid = d['order_pid']
+        if 'original_price' in d:
+            o.original_price = d['original_price']
         if 'plus_register_info' in d:
             o.plus_register_info = d['plus_register_info']
         if 'refund_url' in d:

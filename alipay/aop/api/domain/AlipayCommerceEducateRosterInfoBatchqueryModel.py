@@ -10,7 +10,9 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
     def __init__(self):
         self._employee_no = None
         self._inst_id = None
+        self._mobile = None
         self._name = None
+        self._node_id = None
         self._page_num = None
         self._page_size = None
         self._role_type = None
@@ -30,12 +32,26 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
     def inst_id(self, value):
         self._inst_id = value
     @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
+    @property
     def name(self):
         return self._name
 
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def node_id(self):
+        return self._node_id
+
+    @node_id.setter
+    def node_id(self, value):
+        self._node_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -71,11 +87,21 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.mobile:
+            if hasattr(self.mobile, 'to_alipay_dict'):
+                params['mobile'] = self.mobile.to_alipay_dict()
+            else:
+                params['mobile'] = self.mobile
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.node_id:
+            if hasattr(self.node_id, 'to_alipay_dict'):
+                params['node_id'] = self.node_id.to_alipay_dict()
+            else:
+                params['node_id'] = self.node_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -102,8 +128,12 @@ class AlipayCommerceEducateRosterInfoBatchqueryModel(object):
             o.employee_no = d['employee_no']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'mobile' in d:
+            o.mobile = d['mobile']
         if 'name' in d:
             o.name = d['name']
+        if 'node_id' in d:
+            o.node_id = d['node_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

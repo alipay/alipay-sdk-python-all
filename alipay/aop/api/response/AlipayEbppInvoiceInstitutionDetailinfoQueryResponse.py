@@ -23,6 +23,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         self._institution_id = None
         self._institution_name = None
         self._issue_rule_info_list = None
+        self._multi_employee_share_mode = None
         self._outer_source_id = None
         self._owner_id_list = None
         self._owner_open_id_list = None
@@ -115,6 +116,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
                 else:
                     self._issue_rule_info_list.append(IssueRuleInfo.from_alipay_dict(i))
     @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
+    @property
     def outer_source_id(self):
         return self._outer_source_id
 
@@ -203,6 +211,8 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self.institution_name = response['institution_name']
         if 'issue_rule_info_list' in response:
             self.issue_rule_info_list = response['issue_rule_info_list']
+        if 'multi_employee_share_mode' in response:
+            self.multi_employee_share_mode = response['multi_employee_share_mode']
         if 'outer_source_id' in response:
             self.outer_source_id = response['outer_source_id']
         if 'owner_id_list' in response:

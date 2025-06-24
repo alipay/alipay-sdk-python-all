@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.NOrderTagBindResp import NOrderTagBindResp
 
 
 class AlipayOpenSpNordertagPositionBindModel(object):
 
     def __init__(self):
         self._cloi_no = None
+        self._ext_param = None
         self._operate = None
         self._position_id = None
 
@@ -22,6 +24,16 @@ class AlipayOpenSpNordertagPositionBindModel(object):
             self._cloi_no = list()
             for i in value:
                 self._cloi_no.append(i)
+    @property
+    def ext_param(self):
+        return self._ext_param
+
+    @ext_param.setter
+    def ext_param(self, value):
+        if isinstance(value, NOrderTagBindResp):
+            self._ext_param = value
+        else:
+            self._ext_param = NOrderTagBindResp.from_alipay_dict(value)
     @property
     def operate(self):
         return self._operate
@@ -50,6 +62,11 @@ class AlipayOpenSpNordertagPositionBindModel(object):
                 params['cloi_no'] = self.cloi_no.to_alipay_dict()
             else:
                 params['cloi_no'] = self.cloi_no
+        if self.ext_param:
+            if hasattr(self.ext_param, 'to_alipay_dict'):
+                params['ext_param'] = self.ext_param.to_alipay_dict()
+            else:
+                params['ext_param'] = self.ext_param
         if self.operate:
             if hasattr(self.operate, 'to_alipay_dict'):
                 params['operate'] = self.operate.to_alipay_dict()
@@ -69,6 +86,8 @@ class AlipayOpenSpNordertagPositionBindModel(object):
         o = AlipayOpenSpNordertagPositionBindModel()
         if 'cloi_no' in d:
             o.cloi_no = d['cloi_no']
+        if 'ext_param' in d:
+            o.ext_param = d['ext_param']
         if 'operate' in d:
             o.operate = d['operate']
         if 'position_id' in d:

@@ -18,6 +18,7 @@ class AftersalesInfo(object):
         self._desc = None
         self._proofs = None
         self._reason = None
+        self._signed_order_agreement = None
 
     @property
     def aftersales_id(self):
@@ -92,6 +93,13 @@ class AftersalesInfo(object):
     @reason.setter
     def reason(self, value):
         self._reason = value
+    @property
+    def signed_order_agreement(self):
+        return self._signed_order_agreement
+
+    @signed_order_agreement.setter
+    def signed_order_agreement(self, value):
+        self._signed_order_agreement = value
 
 
     def to_alipay_dict(self):
@@ -151,6 +159,11 @@ class AftersalesInfo(object):
                 params['reason'] = self.reason.to_alipay_dict()
             else:
                 params['reason'] = self.reason
+        if self.signed_order_agreement:
+            if hasattr(self.signed_order_agreement, 'to_alipay_dict'):
+                params['signed_order_agreement'] = self.signed_order_agreement.to_alipay_dict()
+            else:
+                params['signed_order_agreement'] = self.signed_order_agreement
         return params
 
     @staticmethod
@@ -178,6 +191,8 @@ class AftersalesInfo(object):
             o.proofs = d['proofs']
         if 'reason' in d:
             o.reason = d['reason']
+        if 'signed_order_agreement' in d:
+            o.signed_order_agreement = d['signed_order_agreement']
         return o
 
 

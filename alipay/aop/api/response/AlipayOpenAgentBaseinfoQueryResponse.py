@@ -21,6 +21,8 @@ class AlipayOpenAgentBaseinfoQueryResponse(AlipayResponse):
         self._continue_ask = None
         self._custom_card_body = None
         self._custom_card_id = None
+        self._default_qa_mode = None
+        self._leading_questions = None
         self._support_qa_mode = None
 
     @property
@@ -111,6 +113,23 @@ class AlipayOpenAgentBaseinfoQueryResponse(AlipayResponse):
     def custom_card_id(self, value):
         self._custom_card_id = value
     @property
+    def default_qa_mode(self):
+        return self._default_qa_mode
+
+    @default_qa_mode.setter
+    def default_qa_mode(self, value):
+        self._default_qa_mode = value
+    @property
+    def leading_questions(self):
+        return self._leading_questions
+
+    @leading_questions.setter
+    def leading_questions(self, value):
+        if isinstance(value, list):
+            self._leading_questions = list()
+            for i in value:
+                self._leading_questions.append(i)
+    @property
     def support_qa_mode(self):
         return self._support_qa_mode
 
@@ -147,5 +166,9 @@ class AlipayOpenAgentBaseinfoQueryResponse(AlipayResponse):
             self.custom_card_body = response['custom_card_body']
         if 'custom_card_id' in response:
             self.custom_card_id = response['custom_card_id']
+        if 'default_qa_mode' in response:
+            self.default_qa_mode = response['default_qa_mode']
+        if 'leading_questions' in response:
+            self.leading_questions = response['leading_questions']
         if 'support_qa_mode' in response:
             self.support_qa_mode = response['support_qa_mode']

@@ -1,0 +1,160 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class AlipayCommerceMedicalBenefitPointPayModel(object):
+
+    def __init__(self):
+        self._biz_id = None
+        self._buy_quantity = None
+        self._item_id = None
+        self._kz_info = None
+        self._med_benefit_id = None
+        self._open_id = None
+        self._order_id = None
+        self._sku_id = None
+        self._user_id = None
+
+    @property
+    def biz_id(self):
+        return self._biz_id
+
+    @biz_id.setter
+    def biz_id(self, value):
+        self._biz_id = value
+    @property
+    def buy_quantity(self):
+        return self._buy_quantity
+
+    @buy_quantity.setter
+    def buy_quantity(self, value):
+        self._buy_quantity = value
+    @property
+    def item_id(self):
+        return self._item_id
+
+    @item_id.setter
+    def item_id(self, value):
+        self._item_id = value
+    @property
+    def kz_info(self):
+        return self._kz_info
+
+    @kz_info.setter
+    def kz_info(self, value):
+        self._kz_info = value
+    @property
+    def med_benefit_id(self):
+        return self._med_benefit_id
+
+    @med_benefit_id.setter
+    def med_benefit_id(self, value):
+        self._med_benefit_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
+    def sku_id(self):
+        return self._sku_id
+
+    @sku_id.setter
+    def sku_id(self, value):
+        self._sku_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.biz_id:
+            if hasattr(self.biz_id, 'to_alipay_dict'):
+                params['biz_id'] = self.biz_id.to_alipay_dict()
+            else:
+                params['biz_id'] = self.biz_id
+        if self.buy_quantity:
+            if hasattr(self.buy_quantity, 'to_alipay_dict'):
+                params['buy_quantity'] = self.buy_quantity.to_alipay_dict()
+            else:
+                params['buy_quantity'] = self.buy_quantity
+        if self.item_id:
+            if hasattr(self.item_id, 'to_alipay_dict'):
+                params['item_id'] = self.item_id.to_alipay_dict()
+            else:
+                params['item_id'] = self.item_id
+        if self.kz_info:
+            if hasattr(self.kz_info, 'to_alipay_dict'):
+                params['kz_info'] = self.kz_info.to_alipay_dict()
+            else:
+                params['kz_info'] = self.kz_info
+        if self.med_benefit_id:
+            if hasattr(self.med_benefit_id, 'to_alipay_dict'):
+                params['med_benefit_id'] = self.med_benefit_id.to_alipay_dict()
+            else:
+                params['med_benefit_id'] = self.med_benefit_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
+        if self.sku_id:
+            if hasattr(self.sku_id, 'to_alipay_dict'):
+                params['sku_id'] = self.sku_id.to_alipay_dict()
+            else:
+                params['sku_id'] = self.sku_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AlipayCommerceMedicalBenefitPointPayModel()
+        if 'biz_id' in d:
+            o.biz_id = d['biz_id']
+        if 'buy_quantity' in d:
+            o.buy_quantity = d['buy_quantity']
+        if 'item_id' in d:
+            o.item_id = d['item_id']
+        if 'kz_info' in d:
+            o.kz_info = d['kz_info']
+        if 'med_benefit_id' in d:
+            o.med_benefit_id = d['med_benefit_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
+        if 'sku_id' in d:
+            o.sku_id = d['sku_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
+        return o
+
+

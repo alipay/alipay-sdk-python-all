@@ -16,6 +16,7 @@ class InstitutionBasicInfo(object):
         self._institution_desc = None
         self._institution_id = None
         self._institution_name = None
+        self._multi_employee_share_mode = None
 
     @property
     def consult_mode(self):
@@ -73,6 +74,13 @@ class InstitutionBasicInfo(object):
     @institution_name.setter
     def institution_name(self, value):
         self._institution_name = value
+    @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +125,11 @@ class InstitutionBasicInfo(object):
                 params['institution_name'] = self.institution_name.to_alipay_dict()
             else:
                 params['institution_name'] = self.institution_name
+        if self.multi_employee_share_mode:
+            if hasattr(self.multi_employee_share_mode, 'to_alipay_dict'):
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode.to_alipay_dict()
+            else:
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode
         return params
 
     @staticmethod
@@ -140,6 +153,8 @@ class InstitutionBasicInfo(object):
             o.institution_id = d['institution_id']
         if 'institution_name' in d:
             o.institution_name = d['institution_name']
+        if 'multi_employee_share_mode' in d:
+            o.multi_employee_share_mode = d['multi_employee_share_mode']
         return o
 
 

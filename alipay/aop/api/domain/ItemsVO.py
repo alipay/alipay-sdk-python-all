@@ -3,13 +3,16 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DiscountVO import DiscountVO
 
 
 class ItemsVO(object):
 
     def __init__(self):
+        self._amount_discount_item = None
         self._amount_item = None
         self._app_item_code = None
+        self._discount = None
         self._is_mi_item = None
         self._is_rx_item = None
         self._item_name = None
@@ -24,6 +27,13 @@ class ItemsVO(object):
         self._weight_unit = None
 
     @property
+    def amount_discount_item(self):
+        return self._amount_discount_item
+
+    @amount_discount_item.setter
+    def amount_discount_item(self, value):
+        self._amount_discount_item = value
+    @property
     def amount_item(self):
         return self._amount_item
 
@@ -37,6 +47,19 @@ class ItemsVO(object):
     @app_item_code.setter
     def app_item_code(self, value):
         self._app_item_code = value
+    @property
+    def discount(self):
+        return self._discount
+
+    @discount.setter
+    def discount(self, value):
+        if isinstance(value, list):
+            self._discount = list()
+            for i in value:
+                if isinstance(i, DiscountVO):
+                    self._discount.append(i)
+                else:
+                    self._discount.append(DiscountVO.from_alipay_dict(i))
     @property
     def is_mi_item(self):
         return self._is_mi_item
@@ -125,6 +148,11 @@ class ItemsVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount_discount_item:
+            if hasattr(self.amount_discount_item, 'to_alipay_dict'):
+                params['amount_discount_item'] = self.amount_discount_item.to_alipay_dict()
+            else:
+                params['amount_discount_item'] = self.amount_discount_item
         if self.amount_item:
             if hasattr(self.amount_item, 'to_alipay_dict'):
                 params['amount_item'] = self.amount_item.to_alipay_dict()
@@ -135,6 +163,16 @@ class ItemsVO(object):
                 params['app_item_code'] = self.app_item_code.to_alipay_dict()
             else:
                 params['app_item_code'] = self.app_item_code
+        if self.discount:
+            if isinstance(self.discount, list):
+                for i in range(0, len(self.discount)):
+                    element = self.discount[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.discount[i] = element.to_alipay_dict()
+            if hasattr(self.discount, 'to_alipay_dict'):
+                params['discount'] = self.discount.to_alipay_dict()
+            else:
+                params['discount'] = self.discount
         if self.is_mi_item:
             if hasattr(self.is_mi_item, 'to_alipay_dict'):
                 params['is_mi_item'] = self.is_mi_item.to_alipay_dict()
@@ -202,10 +240,14 @@ class ItemsVO(object):
         if not d:
             return None
         o = ItemsVO()
+        if 'amount_discount_item' in d:
+            o.amount_discount_item = d['amount_discount_item']
         if 'amount_item' in d:
             o.amount_item = d['amount_item']
         if 'app_item_code' in d:
             o.app_item_code = d['app_item_code']
+        if 'discount' in d:
+            o.discount = d['discount']
         if 'is_mi_item' in d:
             o.is_mi_item = d['is_mi_item']
         if 'is_rx_item' in d:

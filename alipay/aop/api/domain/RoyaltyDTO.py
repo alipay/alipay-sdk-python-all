@@ -10,8 +10,10 @@ class RoyaltyDTO(object):
     def __init__(self):
         self._buy_out_price = None
         self._expect_royalty_time = None
+        self._royalty_interest_price = None
         self._royalty_period = None
         self._royalty_price = None
+        self._royalty_principal_price = None
         self._royalty_type = None
 
     @property
@@ -29,6 +31,13 @@ class RoyaltyDTO(object):
     def expect_royalty_time(self, value):
         self._expect_royalty_time = value
     @property
+    def royalty_interest_price(self):
+        return self._royalty_interest_price
+
+    @royalty_interest_price.setter
+    def royalty_interest_price(self, value):
+        self._royalty_interest_price = value
+    @property
     def royalty_period(self):
         return self._royalty_period
 
@@ -42,6 +51,13 @@ class RoyaltyDTO(object):
     @royalty_price.setter
     def royalty_price(self, value):
         self._royalty_price = value
+    @property
+    def royalty_principal_price(self):
+        return self._royalty_principal_price
+
+    @royalty_principal_price.setter
+    def royalty_principal_price(self, value):
+        self._royalty_principal_price = value
     @property
     def royalty_type(self):
         return self._royalty_type
@@ -63,6 +79,11 @@ class RoyaltyDTO(object):
                 params['expect_royalty_time'] = self.expect_royalty_time.to_alipay_dict()
             else:
                 params['expect_royalty_time'] = self.expect_royalty_time
+        if self.royalty_interest_price:
+            if hasattr(self.royalty_interest_price, 'to_alipay_dict'):
+                params['royalty_interest_price'] = self.royalty_interest_price.to_alipay_dict()
+            else:
+                params['royalty_interest_price'] = self.royalty_interest_price
         if self.royalty_period:
             if hasattr(self.royalty_period, 'to_alipay_dict'):
                 params['royalty_period'] = self.royalty_period.to_alipay_dict()
@@ -73,6 +94,11 @@ class RoyaltyDTO(object):
                 params['royalty_price'] = self.royalty_price.to_alipay_dict()
             else:
                 params['royalty_price'] = self.royalty_price
+        if self.royalty_principal_price:
+            if hasattr(self.royalty_principal_price, 'to_alipay_dict'):
+                params['royalty_principal_price'] = self.royalty_principal_price.to_alipay_dict()
+            else:
+                params['royalty_principal_price'] = self.royalty_principal_price
         if self.royalty_type:
             if hasattr(self.royalty_type, 'to_alipay_dict'):
                 params['royalty_type'] = self.royalty_type.to_alipay_dict()
@@ -89,10 +115,14 @@ class RoyaltyDTO(object):
             o.buy_out_price = d['buy_out_price']
         if 'expect_royalty_time' in d:
             o.expect_royalty_time = d['expect_royalty_time']
+        if 'royalty_interest_price' in d:
+            o.royalty_interest_price = d['royalty_interest_price']
         if 'royalty_period' in d:
             o.royalty_period = d['royalty_period']
         if 'royalty_price' in d:
             o.royalty_price = d['royalty_price']
+        if 'royalty_principal_price' in d:
+            o.royalty_principal_price = d['royalty_principal_price']
         if 'royalty_type' in d:
             o.royalty_type = d['royalty_type']
         return o
