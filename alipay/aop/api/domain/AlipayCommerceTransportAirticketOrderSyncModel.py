@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.TrafficAirticketOrderCommodityInfo import TrafficAirticketOrderCommodityInfo
 from alipay.aop.api.domain.TrafficAirticketOrderDiscountInfo import TrafficAirticketOrderDiscountInfo
+from alipay.aop.api.domain.TrafficAirTicketPassengerEncryptedInfo import TrafficAirTicketPassengerEncryptedInfo
 from alipay.aop.api.domain.TrafficAirticketOrderPassengerInfo import TrafficAirticketOrderPassengerInfo
 
 
@@ -25,6 +26,7 @@ class AlipayCommerceTransportAirticketOrderSyncModel(object):
         self._modified_time = None
         self._ori_out_biz_no = None
         self._out_biz_no = None
+        self._passenger_info_encrypted_list = None
         self._passenger_info_list = None
         self._pay_amount = None
         self._source_channel = None
@@ -143,6 +145,19 @@ class AlipayCommerceTransportAirticketOrderSyncModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def passenger_info_encrypted_list(self):
+        return self._passenger_info_encrypted_list
+
+    @passenger_info_encrypted_list.setter
+    def passenger_info_encrypted_list(self, value):
+        if isinstance(value, list):
+            self._passenger_info_encrypted_list = list()
+            for i in value:
+                if isinstance(i, TrafficAirTicketPassengerEncryptedInfo):
+                    self._passenger_info_encrypted_list.append(i)
+                else:
+                    self._passenger_info_encrypted_list.append(TrafficAirTicketPassengerEncryptedInfo.from_alipay_dict(i))
     @property
     def passenger_info_list(self):
         return self._passenger_info_list
@@ -282,6 +297,16 @@ class AlipayCommerceTransportAirticketOrderSyncModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.passenger_info_encrypted_list:
+            if isinstance(self.passenger_info_encrypted_list, list):
+                for i in range(0, len(self.passenger_info_encrypted_list)):
+                    element = self.passenger_info_encrypted_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.passenger_info_encrypted_list[i] = element.to_alipay_dict()
+            if hasattr(self.passenger_info_encrypted_list, 'to_alipay_dict'):
+                params['passenger_info_encrypted_list'] = self.passenger_info_encrypted_list.to_alipay_dict()
+            else:
+                params['passenger_info_encrypted_list'] = self.passenger_info_encrypted_list
         if self.passenger_info_list:
             if isinstance(self.passenger_info_list, list):
                 for i in range(0, len(self.passenger_info_list)):
@@ -357,6 +382,8 @@ class AlipayCommerceTransportAirticketOrderSyncModel(object):
             o.ori_out_biz_no = d['ori_out_biz_no']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'passenger_info_encrypted_list' in d:
+            o.passenger_info_encrypted_list = d['passenger_info_encrypted_list']
         if 'passenger_info_list' in d:
             o.passenger_info_list = d['passenger_info_list']
         if 'pay_amount' in d:

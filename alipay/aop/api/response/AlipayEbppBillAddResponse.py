@@ -22,6 +22,7 @@ class AlipayEbppBillAddResponse(AlipayResponse):
         self._pay_amount = None
         self._service_amount = None
         self._sub_order_type = None
+        self._trade_no = None
 
     @property
     def alipay_order_no(self):
@@ -114,6 +115,13 @@ class AlipayEbppBillAddResponse(AlipayResponse):
     @sub_order_type.setter
     def sub_order_type(self, value):
         self._sub_order_type = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppBillAddResponse, self).parse_response_content(response_content)
@@ -143,3 +151,5 @@ class AlipayEbppBillAddResponse(AlipayResponse):
             self.service_amount = response['service_amount']
         if 'sub_order_type' in response:
             self.sub_order_type = response['sub_order_type']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']

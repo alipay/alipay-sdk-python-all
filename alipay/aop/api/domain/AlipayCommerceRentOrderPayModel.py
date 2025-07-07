@@ -9,6 +9,7 @@ from alipay.aop.api.domain.RentPayItemDTO import RentPayItemDTO
 class AlipayCommerceRentOrderPayModel(object):
 
     def __init__(self):
+        self._aftersale_id = None
         self._order_id = None
         self._out_trade_no = None
         self._pay_amount = None
@@ -19,6 +20,13 @@ class AlipayCommerceRentOrderPayModel(object):
         self._reason_code = None
         self._reason_desc = None
 
+    @property
+    def aftersale_id(self):
+        return self._aftersale_id
+
+    @aftersale_id.setter
+    def aftersale_id(self, value):
+        self._aftersale_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -92,6 +100,11 @@ class AlipayCommerceRentOrderPayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aftersale_id:
+            if hasattr(self.aftersale_id, 'to_alipay_dict'):
+                params['aftersale_id'] = self.aftersale_id.to_alipay_dict()
+            else:
+                params['aftersale_id'] = self.aftersale_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayCommerceRentOrderPayModel(object):
         if not d:
             return None
         o = AlipayCommerceRentOrderPayModel()
+        if 'aftersale_id' in d:
+            o.aftersale_id = d['aftersale_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'out_trade_no' in d:

@@ -12,6 +12,7 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
         self._biz_agreement_no = None
         self._biz_code = None
         self._biz_msg = None
+        self._card_no = None
         self._deduct_sign_status = None
         self._device_biz_time = None
         self._device_no = None
@@ -46,6 +47,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     @biz_msg.setter
     def biz_msg(self, value):
         self._biz_msg = value
+    @property
+    def card_no(self):
+        return self._card_no
+
+    @card_no.setter
+    def card_no(self, value):
+        self._card_no = value
     @property
     def deduct_sign_status(self):
         return self._deduct_sign_status
@@ -139,6 +147,8 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
             self.biz_code = response['biz_code']
         if 'biz_msg' in response:
             self.biz_msg = response['biz_msg']
+        if 'card_no' in response:
+            self.card_no = response['card_no']
         if 'deduct_sign_status' in response:
             self.deduct_sign_status = response['deduct_sign_status']
         if 'device_biz_time' in response:

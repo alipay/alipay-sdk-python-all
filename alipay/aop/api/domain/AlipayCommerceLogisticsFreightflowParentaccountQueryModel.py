@@ -11,6 +11,8 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
         self._account_card_no = None
         self._logistics_code = None
         self._mode = None
+        self._mybank_app_id = None
+        self._mybank_scene_code = None
 
     @property
     def account_card_no(self):
@@ -33,6 +35,20 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
     @mode.setter
     def mode(self, value):
         self._mode = value
+    @property
+    def mybank_app_id(self):
+        return self._mybank_app_id
+
+    @mybank_app_id.setter
+    def mybank_app_id(self, value):
+        self._mybank_app_id = value
+    @property
+    def mybank_scene_code(self):
+        return self._mybank_scene_code
+
+    @mybank_scene_code.setter
+    def mybank_scene_code(self, value):
+        self._mybank_scene_code = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +68,16 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.mybank_app_id:
+            if hasattr(self.mybank_app_id, 'to_alipay_dict'):
+                params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
+            else:
+                params['mybank_app_id'] = self.mybank_app_id
+        if self.mybank_scene_code:
+            if hasattr(self.mybank_scene_code, 'to_alipay_dict'):
+                params['mybank_scene_code'] = self.mybank_scene_code.to_alipay_dict()
+            else:
+                params['mybank_scene_code'] = self.mybank_scene_code
         return params
 
     @staticmethod
@@ -65,6 +91,10 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
             o.logistics_code = d['logistics_code']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'mybank_app_id' in d:
+            o.mybank_app_id = d['mybank_app_id']
+        if 'mybank_scene_code' in d:
+            o.mybank_scene_code = d['mybank_scene_code']
         return o
 
 

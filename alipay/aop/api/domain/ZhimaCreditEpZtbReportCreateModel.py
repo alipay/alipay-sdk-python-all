@@ -13,12 +13,16 @@ class ZhimaCreditEpZtbReportCreateModel(object):
         self._bidder_ep_name = None
         self._bidding_ep_cert_no = None
         self._bidding_ep_name = None
+        self._customer_id = None
         self._heading_object = None
+        self._order_type = None
         self._out_biz_no = None
+        self._pack_type = None
         self._project_area_code = None
         self._project_area_desc = None
         self._project_budget = None
         self._project_name = None
+        self._report_amount = None
         self._scene_code = None
         self._text_object = None
 
@@ -58,6 +62,13 @@ class ZhimaCreditEpZtbReportCreateModel(object):
     def bidding_ep_name(self, value):
         self._bidding_ep_name = value
     @property
+    def customer_id(self):
+        return self._customer_id
+
+    @customer_id.setter
+    def customer_id(self, value):
+        self._customer_id = value
+    @property
     def heading_object(self):
         return self._heading_object
 
@@ -65,12 +76,26 @@ class ZhimaCreditEpZtbReportCreateModel(object):
     def heading_object(self, value):
         self._heading_object = value
     @property
+    def order_type(self):
+        return self._order_type
+
+    @order_type.setter
+    def order_type(self, value):
+        self._order_type = value
+    @property
     def out_biz_no(self):
         return self._out_biz_no
 
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def pack_type(self):
+        return self._pack_type
+
+    @pack_type.setter
+    def pack_type(self, value):
+        self._pack_type = value
     @property
     def project_area_code(self):
         return self._project_area_code
@@ -99,6 +124,13 @@ class ZhimaCreditEpZtbReportCreateModel(object):
     @project_name.setter
     def project_name(self, value):
         self._project_name = value
+    @property
+    def report_amount(self):
+        return self._report_amount
+
+    @report_amount.setter
+    def report_amount(self, value):
+        self._report_amount = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -142,16 +174,31 @@ class ZhimaCreditEpZtbReportCreateModel(object):
                 params['bidding_ep_name'] = self.bidding_ep_name.to_alipay_dict()
             else:
                 params['bidding_ep_name'] = self.bidding_ep_name
+        if self.customer_id:
+            if hasattr(self.customer_id, 'to_alipay_dict'):
+                params['customer_id'] = self.customer_id.to_alipay_dict()
+            else:
+                params['customer_id'] = self.customer_id
         if self.heading_object:
             if hasattr(self.heading_object, 'to_alipay_dict'):
                 params['heading_object'] = self.heading_object.to_alipay_dict()
             else:
                 params['heading_object'] = self.heading_object
+        if self.order_type:
+            if hasattr(self.order_type, 'to_alipay_dict'):
+                params['order_type'] = self.order_type.to_alipay_dict()
+            else:
+                params['order_type'] = self.order_type
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.pack_type:
+            if hasattr(self.pack_type, 'to_alipay_dict'):
+                params['pack_type'] = self.pack_type.to_alipay_dict()
+            else:
+                params['pack_type'] = self.pack_type
         if self.project_area_code:
             if hasattr(self.project_area_code, 'to_alipay_dict'):
                 params['project_area_code'] = self.project_area_code.to_alipay_dict()
@@ -172,6 +219,11 @@ class ZhimaCreditEpZtbReportCreateModel(object):
                 params['project_name'] = self.project_name.to_alipay_dict()
             else:
                 params['project_name'] = self.project_name
+        if self.report_amount:
+            if hasattr(self.report_amount, 'to_alipay_dict'):
+                params['report_amount'] = self.report_amount.to_alipay_dict()
+            else:
+                params['report_amount'] = self.report_amount
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -199,10 +251,16 @@ class ZhimaCreditEpZtbReportCreateModel(object):
             o.bidding_ep_cert_no = d['bidding_ep_cert_no']
         if 'bidding_ep_name' in d:
             o.bidding_ep_name = d['bidding_ep_name']
+        if 'customer_id' in d:
+            o.customer_id = d['customer_id']
         if 'heading_object' in d:
             o.heading_object = d['heading_object']
+        if 'order_type' in d:
+            o.order_type = d['order_type']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'pack_type' in d:
+            o.pack_type = d['pack_type']
         if 'project_area_code' in d:
             o.project_area_code = d['project_area_code']
         if 'project_area_desc' in d:
@@ -211,6 +269,8 @@ class ZhimaCreditEpZtbReportCreateModel(object):
             o.project_budget = d['project_budget']
         if 'project_name' in d:
             o.project_name = d['project_name']
+        if 'report_amount' in d:
+            o.report_amount = d['report_amount']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'text_object' in d:

@@ -19,8 +19,14 @@ class MoneyCardUseRecordDetail(object):
         self._order_id = None
         self._owner_open_id = None
         self._owner_uid = None
+        self._refund_amount = None
+        self._refund_time = None
+        self._sell_rel_shop_id = None
+        self._sell_shop_id = None
         self._trade_no = None
         self._trade_pid = None
+        self._use_amount = None
+        self._use_rel_shop_id = None
         self._use_shop_id = None
         self._use_shop_name = None
         self._use_shop_note = None
@@ -103,6 +109,34 @@ class MoneyCardUseRecordDetail(object):
     def owner_uid(self, value):
         self._owner_uid = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_time(self):
+        return self._refund_time
+
+    @refund_time.setter
+    def refund_time(self, value):
+        self._refund_time = value
+    @property
+    def sell_rel_shop_id(self):
+        return self._sell_rel_shop_id
+
+    @sell_rel_shop_id.setter
+    def sell_rel_shop_id(self, value):
+        self._sell_rel_shop_id = value
+    @property
+    def sell_shop_id(self):
+        return self._sell_shop_id
+
+    @sell_shop_id.setter
+    def sell_shop_id(self, value):
+        self._sell_shop_id = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -116,6 +150,20 @@ class MoneyCardUseRecordDetail(object):
     @trade_pid.setter
     def trade_pid(self, value):
         self._trade_pid = value
+    @property
+    def use_amount(self):
+        return self._use_amount
+
+    @use_amount.setter
+    def use_amount(self, value):
+        self._use_amount = value
+    @property
+    def use_rel_shop_id(self):
+        return self._use_rel_shop_id
+
+    @use_rel_shop_id.setter
+    def use_rel_shop_id(self, value):
+        self._use_rel_shop_id = value
     @property
     def use_shop_id(self):
         return self._use_shop_id
@@ -203,6 +251,26 @@ class MoneyCardUseRecordDetail(object):
                 params['owner_uid'] = self.owner_uid.to_alipay_dict()
             else:
                 params['owner_uid'] = self.owner_uid
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
+        if self.refund_time:
+            if hasattr(self.refund_time, 'to_alipay_dict'):
+                params['refund_time'] = self.refund_time.to_alipay_dict()
+            else:
+                params['refund_time'] = self.refund_time
+        if self.sell_rel_shop_id:
+            if hasattr(self.sell_rel_shop_id, 'to_alipay_dict'):
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id.to_alipay_dict()
+            else:
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id
+        if self.sell_shop_id:
+            if hasattr(self.sell_shop_id, 'to_alipay_dict'):
+                params['sell_shop_id'] = self.sell_shop_id.to_alipay_dict()
+            else:
+                params['sell_shop_id'] = self.sell_shop_id
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -213,6 +281,16 @@ class MoneyCardUseRecordDetail(object):
                 params['trade_pid'] = self.trade_pid.to_alipay_dict()
             else:
                 params['trade_pid'] = self.trade_pid
+        if self.use_amount:
+            if hasattr(self.use_amount, 'to_alipay_dict'):
+                params['use_amount'] = self.use_amount.to_alipay_dict()
+            else:
+                params['use_amount'] = self.use_amount
+        if self.use_rel_shop_id:
+            if hasattr(self.use_rel_shop_id, 'to_alipay_dict'):
+                params['use_rel_shop_id'] = self.use_rel_shop_id.to_alipay_dict()
+            else:
+                params['use_rel_shop_id'] = self.use_rel_shop_id
         if self.use_shop_id:
             if hasattr(self.use_shop_id, 'to_alipay_dict'):
                 params['use_shop_id'] = self.use_shop_id.to_alipay_dict()
@@ -260,10 +338,22 @@ class MoneyCardUseRecordDetail(object):
             o.owner_open_id = d['owner_open_id']
         if 'owner_uid' in d:
             o.owner_uid = d['owner_uid']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
+        if 'refund_time' in d:
+            o.refund_time = d['refund_time']
+        if 'sell_rel_shop_id' in d:
+            o.sell_rel_shop_id = d['sell_rel_shop_id']
+        if 'sell_shop_id' in d:
+            o.sell_shop_id = d['sell_shop_id']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'trade_pid' in d:
             o.trade_pid = d['trade_pid']
+        if 'use_amount' in d:
+            o.use_amount = d['use_amount']
+        if 'use_rel_shop_id' in d:
+            o.use_rel_shop_id = d['use_rel_shop_id']
         if 'use_shop_id' in d:
             o.use_shop_id = d['use_shop_id']
         if 'use_shop_name' in d:

@@ -17,6 +17,8 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
         self._logistics_code = None
         self._memo = None
         self._mode = None
+        self._mybank_app_id = None
+        self._mybank_scene_code = None
         self._partner_id = None
         self._payee_participant = None
         self._payer_participant = None
@@ -71,6 +73,20 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
     @mode.setter
     def mode(self, value):
         self._mode = value
+    @property
+    def mybank_app_id(self):
+        return self._mybank_app_id
+
+    @mybank_app_id.setter
+    def mybank_app_id(self, value):
+        self._mybank_app_id = value
+    @property
+    def mybank_scene_code(self):
+        return self._mybank_scene_code
+
+    @mybank_scene_code.setter
+    def mybank_scene_code(self, value):
+        self._mybank_scene_code = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -144,6 +160,16 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.mybank_app_id:
+            if hasattr(self.mybank_app_id, 'to_alipay_dict'):
+                params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
+            else:
+                params['mybank_app_id'] = self.mybank_app_id
+        if self.mybank_scene_code:
+            if hasattr(self.mybank_scene_code, 'to_alipay_dict'):
+                params['mybank_scene_code'] = self.mybank_scene_code.to_alipay_dict()
+            else:
+                params['mybank_scene_code'] = self.mybank_scene_code
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -185,6 +211,10 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
             o.memo = d['memo']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'mybank_app_id' in d:
+            o.mybank_app_id = d['mybank_app_id']
+        if 'mybank_scene_code' in d:
+            o.mybank_scene_code = d['mybank_scene_code']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'payee_participant' in d:

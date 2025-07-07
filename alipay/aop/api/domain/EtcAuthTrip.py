@@ -10,6 +10,8 @@ class EtcAuthTrip(object):
     def __init__(self):
         self._end_station_name = None
         self._end_station_time = None
+        self._out_waybill_no = None
+        self._pay_time = None
         self._plate_color = None
         self._plate_no = None
         self._start_station_name = None
@@ -17,6 +19,7 @@ class EtcAuthTrip(object):
         self._sub_scene = None
         self._total_amount = None
         self._trade_id = None
+        self._waybill_no = None
 
     @property
     def end_station_name(self):
@@ -32,6 +35,20 @@ class EtcAuthTrip(object):
     @end_station_time.setter
     def end_station_time(self, value):
         self._end_station_time = value
+    @property
+    def out_waybill_no(self):
+        return self._out_waybill_no
+
+    @out_waybill_no.setter
+    def out_waybill_no(self, value):
+        self._out_waybill_no = value
+    @property
+    def pay_time(self):
+        return self._pay_time
+
+    @pay_time.setter
+    def pay_time(self, value):
+        self._pay_time = value
     @property
     def plate_color(self):
         return self._plate_color
@@ -81,6 +98,13 @@ class EtcAuthTrip(object):
     @trade_id.setter
     def trade_id(self, value):
         self._trade_id = value
+    @property
+    def waybill_no(self):
+        return self._waybill_no
+
+    @waybill_no.setter
+    def waybill_no(self, value):
+        self._waybill_no = value
 
 
     def to_alipay_dict(self):
@@ -95,6 +119,16 @@ class EtcAuthTrip(object):
                 params['end_station_time'] = self.end_station_time.to_alipay_dict()
             else:
                 params['end_station_time'] = self.end_station_time
+        if self.out_waybill_no:
+            if hasattr(self.out_waybill_no, 'to_alipay_dict'):
+                params['out_waybill_no'] = self.out_waybill_no.to_alipay_dict()
+            else:
+                params['out_waybill_no'] = self.out_waybill_no
+        if self.pay_time:
+            if hasattr(self.pay_time, 'to_alipay_dict'):
+                params['pay_time'] = self.pay_time.to_alipay_dict()
+            else:
+                params['pay_time'] = self.pay_time
         if self.plate_color:
             if hasattr(self.plate_color, 'to_alipay_dict'):
                 params['plate_color'] = self.plate_color.to_alipay_dict()
@@ -130,6 +164,11 @@ class EtcAuthTrip(object):
                 params['trade_id'] = self.trade_id.to_alipay_dict()
             else:
                 params['trade_id'] = self.trade_id
+        if self.waybill_no:
+            if hasattr(self.waybill_no, 'to_alipay_dict'):
+                params['waybill_no'] = self.waybill_no.to_alipay_dict()
+            else:
+                params['waybill_no'] = self.waybill_no
         return params
 
     @staticmethod
@@ -141,6 +180,10 @@ class EtcAuthTrip(object):
             o.end_station_name = d['end_station_name']
         if 'end_station_time' in d:
             o.end_station_time = d['end_station_time']
+        if 'out_waybill_no' in d:
+            o.out_waybill_no = d['out_waybill_no']
+        if 'pay_time' in d:
+            o.pay_time = d['pay_time']
         if 'plate_color' in d:
             o.plate_color = d['plate_color']
         if 'plate_no' in d:
@@ -155,6 +198,8 @@ class EtcAuthTrip(object):
             o.total_amount = d['total_amount']
         if 'trade_id' in d:
             o.trade_id = d['trade_id']
+        if 'waybill_no' in d:
+            o.waybill_no = d['waybill_no']
         return o
 
 

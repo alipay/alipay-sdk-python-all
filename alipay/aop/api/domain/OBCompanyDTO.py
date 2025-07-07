@@ -9,6 +9,7 @@ from alipay.aop.api.domain.OBContractDTO import OBContractDTO
 class OBCompanyDTO(object):
 
     def __init__(self):
+        self._cert_no = None
         self._contract_list = None
         self._entity_id = None
         self._entity_name = None
@@ -16,6 +17,13 @@ class OBCompanyDTO(object):
         self._org_id = None
         self._work_order_permission = None
 
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
     @property
     def contract_list(self):
         return self._contract_list
@@ -68,6 +76,11 @@ class OBCompanyDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
         if self.contract_list:
             if isinstance(self.contract_list, list):
                 for i in range(0, len(self.contract_list)):
@@ -110,6 +123,8 @@ class OBCompanyDTO(object):
         if not d:
             return None
         o = OBCompanyDTO()
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
         if 'contract_list' in d:
             o.contract_list = d['contract_list']
         if 'entity_id' in d:

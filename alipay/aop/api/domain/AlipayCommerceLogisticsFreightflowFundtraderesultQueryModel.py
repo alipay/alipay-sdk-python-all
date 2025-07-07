@@ -11,6 +11,7 @@ class AlipayCommerceLogisticsFreightflowFundtraderesultQueryModel(object):
         self._biz_no = None
         self._logistics_code = None
         self._mode = None
+        self._mybank_app_id = None
         self._order_no = None
         self._partner_id = None
 
@@ -35,6 +36,13 @@ class AlipayCommerceLogisticsFreightflowFundtraderesultQueryModel(object):
     @mode.setter
     def mode(self, value):
         self._mode = value
+    @property
+    def mybank_app_id(self):
+        return self._mybank_app_id
+
+    @mybank_app_id.setter
+    def mybank_app_id(self, value):
+        self._mybank_app_id = value
     @property
     def order_no(self):
         return self._order_no
@@ -68,6 +76,11 @@ class AlipayCommerceLogisticsFreightflowFundtraderesultQueryModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.mybank_app_id:
+            if hasattr(self.mybank_app_id, 'to_alipay_dict'):
+                params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
+            else:
+                params['mybank_app_id'] = self.mybank_app_id
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
@@ -91,6 +104,8 @@ class AlipayCommerceLogisticsFreightflowFundtraderesultQueryModel(object):
             o.logistics_code = d['logistics_code']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'mybank_app_id' in d:
+            o.mybank_app_id = d['mybank_app_id']
         if 'order_no' in d:
             o.order_no = d['order_no']
         if 'partner_id' in d:

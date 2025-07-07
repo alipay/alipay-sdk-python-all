@@ -35,10 +35,17 @@ class DeductionOrderInfo(object):
         self._plan_deduction_time = None
         self._platform_discount_price = None
         self._redeem_way = None
+        self._refund_amount = None
         self._refund_cash = None
+        self._refund_time = None
+        self._sell_rel_shop_id = None
+        self._sell_shop_id = None
         self._shop_id = None
         self._sub_order_id = None
         self._trade_no = None
+        self._use_amount = None
+        self._use_rel_shop_id = None
+        self._use_shop_name = None
         self._user_id = None
         self._user_refuse_reason = None
 
@@ -226,12 +233,40 @@ class DeductionOrderInfo(object):
     def redeem_way(self, value):
         self._redeem_way = value
     @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
     def refund_cash(self):
         return self._refund_cash
 
     @refund_cash.setter
     def refund_cash(self, value):
         self._refund_cash = value
+    @property
+    def refund_time(self):
+        return self._refund_time
+
+    @refund_time.setter
+    def refund_time(self, value):
+        self._refund_time = value
+    @property
+    def sell_rel_shop_id(self):
+        return self._sell_rel_shop_id
+
+    @sell_rel_shop_id.setter
+    def sell_rel_shop_id(self, value):
+        self._sell_rel_shop_id = value
+    @property
+    def sell_shop_id(self):
+        return self._sell_shop_id
+
+    @sell_shop_id.setter
+    def sell_shop_id(self, value):
+        self._sell_shop_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -253,6 +288,27 @@ class DeductionOrderInfo(object):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def use_amount(self):
+        return self._use_amount
+
+    @use_amount.setter
+    def use_amount(self, value):
+        self._use_amount = value
+    @property
+    def use_rel_shop_id(self):
+        return self._use_rel_shop_id
+
+    @use_rel_shop_id.setter
+    def use_rel_shop_id(self, value):
+        self._use_rel_shop_id = value
+    @property
+    def use_shop_name(self):
+        return self._use_shop_name
+
+    @use_shop_name.setter
+    def use_shop_name(self, value):
+        self._use_shop_name = value
     @property
     def user_id(self):
         return self._user_id
@@ -401,11 +457,31 @@ class DeductionOrderInfo(object):
                 params['redeem_way'] = self.redeem_way.to_alipay_dict()
             else:
                 params['redeem_way'] = self.redeem_way
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
         if self.refund_cash:
             if hasattr(self.refund_cash, 'to_alipay_dict'):
                 params['refund_cash'] = self.refund_cash.to_alipay_dict()
             else:
                 params['refund_cash'] = self.refund_cash
+        if self.refund_time:
+            if hasattr(self.refund_time, 'to_alipay_dict'):
+                params['refund_time'] = self.refund_time.to_alipay_dict()
+            else:
+                params['refund_time'] = self.refund_time
+        if self.sell_rel_shop_id:
+            if hasattr(self.sell_rel_shop_id, 'to_alipay_dict'):
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id.to_alipay_dict()
+            else:
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id
+        if self.sell_shop_id:
+            if hasattr(self.sell_shop_id, 'to_alipay_dict'):
+                params['sell_shop_id'] = self.sell_shop_id.to_alipay_dict()
+            else:
+                params['sell_shop_id'] = self.sell_shop_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -421,6 +497,21 @@ class DeductionOrderInfo(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.use_amount:
+            if hasattr(self.use_amount, 'to_alipay_dict'):
+                params['use_amount'] = self.use_amount.to_alipay_dict()
+            else:
+                params['use_amount'] = self.use_amount
+        if self.use_rel_shop_id:
+            if hasattr(self.use_rel_shop_id, 'to_alipay_dict'):
+                params['use_rel_shop_id'] = self.use_rel_shop_id.to_alipay_dict()
+            else:
+                params['use_rel_shop_id'] = self.use_rel_shop_id
+        if self.use_shop_name:
+            if hasattr(self.use_shop_name, 'to_alipay_dict'):
+                params['use_shop_name'] = self.use_shop_name.to_alipay_dict()
+            else:
+                params['use_shop_name'] = self.use_shop_name
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -486,14 +577,28 @@ class DeductionOrderInfo(object):
             o.platform_discount_price = d['platform_discount_price']
         if 'redeem_way' in d:
             o.redeem_way = d['redeem_way']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
         if 'refund_cash' in d:
             o.refund_cash = d['refund_cash']
+        if 'refund_time' in d:
+            o.refund_time = d['refund_time']
+        if 'sell_rel_shop_id' in d:
+            o.sell_rel_shop_id = d['sell_rel_shop_id']
+        if 'sell_shop_id' in d:
+            o.sell_shop_id = d['sell_shop_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'sub_order_id' in d:
             o.sub_order_id = d['sub_order_id']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'use_amount' in d:
+            o.use_amount = d['use_amount']
+        if 'use_rel_shop_id' in d:
+            o.use_rel_shop_id = d['use_rel_shop_id']
+        if 'use_shop_name' in d:
+            o.use_shop_name = d['use_shop_name']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_refuse_reason' in d:

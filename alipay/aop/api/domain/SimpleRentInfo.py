@@ -15,6 +15,9 @@ class SimpleRentInfo(object):
         self._buyer_id = None
         self._buyer_open_id = None
         self._buyout_price = None
+        self._current_royalty_amount = None
+        self._current_royalty_mode = None
+        self._current_royalty_time = None
         self._early_settle = None
         self._early_settle_price = None
         self._end_time = None
@@ -59,6 +62,27 @@ class SimpleRentInfo(object):
     @buyout_price.setter
     def buyout_price(self, value):
         self._buyout_price = value
+    @property
+    def current_royalty_amount(self):
+        return self._current_royalty_amount
+
+    @current_royalty_amount.setter
+    def current_royalty_amount(self, value):
+        self._current_royalty_amount = value
+    @property
+    def current_royalty_mode(self):
+        return self._current_royalty_mode
+
+    @current_royalty_mode.setter
+    def current_royalty_mode(self, value):
+        self._current_royalty_mode = value
+    @property
+    def current_royalty_time(self):
+        return self._current_royalty_time
+
+    @current_royalty_time.setter
+    def current_royalty_time(self, value):
+        self._current_royalty_time = value
     @property
     def early_settle(self):
         return self._early_settle
@@ -206,6 +230,21 @@ class SimpleRentInfo(object):
                 params['buyout_price'] = self.buyout_price.to_alipay_dict()
             else:
                 params['buyout_price'] = self.buyout_price
+        if self.current_royalty_amount:
+            if hasattr(self.current_royalty_amount, 'to_alipay_dict'):
+                params['current_royalty_amount'] = self.current_royalty_amount.to_alipay_dict()
+            else:
+                params['current_royalty_amount'] = self.current_royalty_amount
+        if self.current_royalty_mode:
+            if hasattr(self.current_royalty_mode, 'to_alipay_dict'):
+                params['current_royalty_mode'] = self.current_royalty_mode.to_alipay_dict()
+            else:
+                params['current_royalty_mode'] = self.current_royalty_mode
+        if self.current_royalty_time:
+            if hasattr(self.current_royalty_time, 'to_alipay_dict'):
+                params['current_royalty_time'] = self.current_royalty_time.to_alipay_dict()
+            else:
+                params['current_royalty_time'] = self.current_royalty_time
         if self.early_settle:
             if hasattr(self.early_settle, 'to_alipay_dict'):
                 params['early_settle'] = self.early_settle.to_alipay_dict()
@@ -311,6 +350,12 @@ class SimpleRentInfo(object):
             o.buyer_open_id = d['buyer_open_id']
         if 'buyout_price' in d:
             o.buyout_price = d['buyout_price']
+        if 'current_royalty_amount' in d:
+            o.current_royalty_amount = d['current_royalty_amount']
+        if 'current_royalty_mode' in d:
+            o.current_royalty_mode = d['current_royalty_mode']
+        if 'current_royalty_time' in d:
+            o.current_royalty_time = d['current_royalty_time']
         if 'early_settle' in d:
             o.early_settle = d['early_settle']
         if 'early_settle_price' in d:

@@ -10,6 +10,7 @@ class OfflineTextQc(object):
 
     def __init__(self):
         self._caller_phone = None
+        self._channel = None
         self._content = None
         self._incoming_time = None
         self._rounds = None
@@ -21,6 +22,13 @@ class OfflineTextQc(object):
     @caller_phone.setter
     def caller_phone(self, value):
         self._caller_phone = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def content(self):
         return self._content
@@ -57,6 +65,11 @@ class OfflineTextQc(object):
                 params['caller_phone'] = self.caller_phone.to_alipay_dict()
             else:
                 params['caller_phone'] = self.caller_phone
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.content:
             if isinstance(self.content, list):
                 for i in range(0, len(self.content)):
@@ -86,6 +99,8 @@ class OfflineTextQc(object):
         o = OfflineTextQc()
         if 'caller_phone' in d:
             o.caller_phone = d['caller_phone']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'content' in d:
             o.content = d['content']
         if 'incoming_time' in d:

@@ -10,6 +10,10 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
     def __init__(self):
         self._logistics_code = None
         self._mode = None
+        self._mybank_app_id = None
+        self._mybank_scene_code = None
+        self._mybank_scene_type = None
+        self._mybank_sub_scene = None
         self._partner_id = None
         self._sub_bank_card_no = None
 
@@ -27,6 +31,34 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
     @mode.setter
     def mode(self, value):
         self._mode = value
+    @property
+    def mybank_app_id(self):
+        return self._mybank_app_id
+
+    @mybank_app_id.setter
+    def mybank_app_id(self, value):
+        self._mybank_app_id = value
+    @property
+    def mybank_scene_code(self):
+        return self._mybank_scene_code
+
+    @mybank_scene_code.setter
+    def mybank_scene_code(self, value):
+        self._mybank_scene_code = value
+    @property
+    def mybank_scene_type(self):
+        return self._mybank_scene_type
+
+    @mybank_scene_type.setter
+    def mybank_scene_type(self, value):
+        self._mybank_scene_type = value
+    @property
+    def mybank_sub_scene(self):
+        return self._mybank_sub_scene
+
+    @mybank_sub_scene.setter
+    def mybank_sub_scene(self, value):
+        self._mybank_sub_scene = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -55,6 +87,26 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.mybank_app_id:
+            if hasattr(self.mybank_app_id, 'to_alipay_dict'):
+                params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
+            else:
+                params['mybank_app_id'] = self.mybank_app_id
+        if self.mybank_scene_code:
+            if hasattr(self.mybank_scene_code, 'to_alipay_dict'):
+                params['mybank_scene_code'] = self.mybank_scene_code.to_alipay_dict()
+            else:
+                params['mybank_scene_code'] = self.mybank_scene_code
+        if self.mybank_scene_type:
+            if hasattr(self.mybank_scene_type, 'to_alipay_dict'):
+                params['mybank_scene_type'] = self.mybank_scene_type.to_alipay_dict()
+            else:
+                params['mybank_scene_type'] = self.mybank_scene_type
+        if self.mybank_sub_scene:
+            if hasattr(self.mybank_sub_scene, 'to_alipay_dict'):
+                params['mybank_sub_scene'] = self.mybank_sub_scene.to_alipay_dict()
+            else:
+                params['mybank_sub_scene'] = self.mybank_sub_scene
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -76,6 +128,14 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
             o.logistics_code = d['logistics_code']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'mybank_app_id' in d:
+            o.mybank_app_id = d['mybank_app_id']
+        if 'mybank_scene_code' in d:
+            o.mybank_scene_code = d['mybank_scene_code']
+        if 'mybank_scene_type' in d:
+            o.mybank_scene_type = d['mybank_scene_type']
+        if 'mybank_sub_scene' in d:
+            o.mybank_sub_scene = d['mybank_sub_scene']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'sub_bank_card_no' in d:

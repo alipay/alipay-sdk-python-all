@@ -12,6 +12,7 @@ class ZhimaCreditEpSceneAccountSyncModel(object):
         self._ep_cert_no = None
         self._fail_reason = None
         self._open_status = None
+        self._sync_content = None
 
     @property
     def biz_no(self):
@@ -41,6 +42,16 @@ class ZhimaCreditEpSceneAccountSyncModel(object):
     @open_status.setter
     def open_status(self, value):
         self._open_status = value
+    @property
+    def sync_content(self):
+        return self._sync_content
+
+    @sync_content.setter
+    def sync_content(self, value):
+        if isinstance(value, list):
+            self._sync_content = list()
+            for i in value:
+                self._sync_content.append(i)
 
 
     def to_alipay_dict(self):
@@ -65,6 +76,16 @@ class ZhimaCreditEpSceneAccountSyncModel(object):
                 params['open_status'] = self.open_status.to_alipay_dict()
             else:
                 params['open_status'] = self.open_status
+        if self.sync_content:
+            if isinstance(self.sync_content, list):
+                for i in range(0, len(self.sync_content)):
+                    element = self.sync_content[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sync_content[i] = element.to_alipay_dict()
+            if hasattr(self.sync_content, 'to_alipay_dict'):
+                params['sync_content'] = self.sync_content.to_alipay_dict()
+            else:
+                params['sync_content'] = self.sync_content
         return params
 
     @staticmethod
@@ -80,6 +101,8 @@ class ZhimaCreditEpSceneAccountSyncModel(object):
             o.fail_reason = d['fail_reason']
         if 'open_status' in d:
             o.open_status = d['open_status']
+        if 'sync_content' in d:
+            o.sync_content = d['sync_content']
         return o
 
 

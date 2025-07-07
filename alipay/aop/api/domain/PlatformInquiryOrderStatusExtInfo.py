@@ -12,10 +12,12 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._cancel_reason = None
         self._chat_url = None
         self._complaint = None
+        self._doctor_avatar = None
         self._doctor_inquiry_link_page = None
         self._doctor_out_id = None
         self._doctor_out_name = None
         self._doctor_refuse_reason = None
+        self._doctor_title = None
         self._first_reply = None
         self._gmt_adoption = None
         self._gmt_cancel = None
@@ -23,6 +25,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._gmt_paid = None
         self._gmt_refund = None
         self._gmt_refund_applying = None
+        self._hospital_name = None
         self._inquiry_complete_status = None
         self._notice = None
         self._real_amount = None
@@ -62,6 +65,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     def complaint(self, value):
         self._complaint = value
     @property
+    def doctor_avatar(self):
+        return self._doctor_avatar
+
+    @doctor_avatar.setter
+    def doctor_avatar(self, value):
+        self._doctor_avatar = value
+    @property
     def doctor_inquiry_link_page(self):
         return self._doctor_inquiry_link_page
 
@@ -89,6 +99,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @doctor_refuse_reason.setter
     def doctor_refuse_reason(self, value):
         self._doctor_refuse_reason = value
+    @property
+    def doctor_title(self):
+        return self._doctor_title
+
+    @doctor_title.setter
+    def doctor_title(self, value):
+        self._doctor_title = value
     @property
     def first_reply(self):
         return self._first_reply
@@ -138,6 +155,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @gmt_refund_applying.setter
     def gmt_refund_applying(self, value):
         self._gmt_refund_applying = value
+    @property
+    def hospital_name(self):
+        return self._hospital_name
+
+    @hospital_name.setter
+    def hospital_name(self, value):
+        self._hospital_name = value
     @property
     def inquiry_complete_status(self):
         return self._inquiry_complete_status
@@ -225,6 +249,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['complaint'] = self.complaint.to_alipay_dict()
             else:
                 params['complaint'] = self.complaint
+        if self.doctor_avatar:
+            if hasattr(self.doctor_avatar, 'to_alipay_dict'):
+                params['doctor_avatar'] = self.doctor_avatar.to_alipay_dict()
+            else:
+                params['doctor_avatar'] = self.doctor_avatar
         if self.doctor_inquiry_link_page:
             if hasattr(self.doctor_inquiry_link_page, 'to_alipay_dict'):
                 params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page.to_alipay_dict()
@@ -245,6 +274,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['doctor_refuse_reason'] = self.doctor_refuse_reason.to_alipay_dict()
             else:
                 params['doctor_refuse_reason'] = self.doctor_refuse_reason
+        if self.doctor_title:
+            if hasattr(self.doctor_title, 'to_alipay_dict'):
+                params['doctor_title'] = self.doctor_title.to_alipay_dict()
+            else:
+                params['doctor_title'] = self.doctor_title
         if self.first_reply:
             if hasattr(self.first_reply, 'to_alipay_dict'):
                 params['first_reply'] = self.first_reply.to_alipay_dict()
@@ -280,6 +314,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['gmt_refund_applying'] = self.gmt_refund_applying.to_alipay_dict()
             else:
                 params['gmt_refund_applying'] = self.gmt_refund_applying
+        if self.hospital_name:
+            if hasattr(self.hospital_name, 'to_alipay_dict'):
+                params['hospital_name'] = self.hospital_name.to_alipay_dict()
+            else:
+                params['hospital_name'] = self.hospital_name
         if self.inquiry_complete_status:
             if hasattr(self.inquiry_complete_status, 'to_alipay_dict'):
                 params['inquiry_complete_status'] = self.inquiry_complete_status.to_alipay_dict()
@@ -340,6 +379,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.chat_url = d['chat_url']
         if 'complaint' in d:
             o.complaint = d['complaint']
+        if 'doctor_avatar' in d:
+            o.doctor_avatar = d['doctor_avatar']
         if 'doctor_inquiry_link_page' in d:
             o.doctor_inquiry_link_page = d['doctor_inquiry_link_page']
         if 'doctor_out_id' in d:
@@ -348,6 +389,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.doctor_out_name = d['doctor_out_name']
         if 'doctor_refuse_reason' in d:
             o.doctor_refuse_reason = d['doctor_refuse_reason']
+        if 'doctor_title' in d:
+            o.doctor_title = d['doctor_title']
         if 'first_reply' in d:
             o.first_reply = d['first_reply']
         if 'gmt_adoption' in d:
@@ -362,6 +405,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.gmt_refund = d['gmt_refund']
         if 'gmt_refund_applying' in d:
             o.gmt_refund_applying = d['gmt_refund_applying']
+        if 'hospital_name' in d:
+            o.hospital_name = d['hospital_name']
         if 'inquiry_complete_status' in d:
             o.inquiry_complete_status = d['inquiry_complete_status']
         if 'notice' in d:

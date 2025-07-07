@@ -13,6 +13,7 @@ class AntMerchantExpandBizaccessOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AntMerchantExpandBizaccessOrderQueryResponse, self).__init__()
         self._fail_reasons = None
+        self._merchant_pid = None
         self._order_content = None
         self._order_id = None
         self._order_status = None
@@ -32,6 +33,13 @@ class AntMerchantExpandBizaccessOrderQueryResponse(AlipayResponse):
                     self._fail_reasons.append(i)
                 else:
                     self._fail_reasons.append(IsvBizOpenOrderFailReason.from_alipay_dict(i))
+    @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
     @property
     def order_content(self):
         return self._order_content
@@ -81,6 +89,8 @@ class AntMerchantExpandBizaccessOrderQueryResponse(AlipayResponse):
         response = super(AntMerchantExpandBizaccessOrderQueryResponse, self).parse_response_content(response_content)
         if 'fail_reasons' in response:
             self.fail_reasons = response['fail_reasons']
+        if 'merchant_pid' in response:
+            self.merchant_pid = response['merchant_pid']
         if 'order_content' in response:
             self.order_content = response['order_content']
         if 'order_id' in response:

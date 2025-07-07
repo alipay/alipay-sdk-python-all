@@ -14,7 +14,9 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
         self._logistics_code = None
         self._memo = None
         self._mode = None
+        self._mybank_app_id = None
         self._partner_id = None
+        self._pay_expire_time = None
         self._payee_card_name = None
         self._payee_id = None
         self._total_amount = None
@@ -62,12 +64,26 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
     def mode(self, value):
         self._mode = value
     @property
+    def mybank_app_id(self):
+        return self._mybank_app_id
+
+    @mybank_app_id.setter
+    def mybank_app_id(self, value):
+        self._mybank_app_id = value
+    @property
     def partner_id(self):
         return self._partner_id
 
     @partner_id.setter
     def partner_id(self, value):
         self._partner_id = value
+    @property
+    def pay_expire_time(self):
+        return self._pay_expire_time
+
+    @pay_expire_time.setter
+    def pay_expire_time(self, value):
+        self._pay_expire_time = value
     @property
     def payee_card_name(self):
         return self._payee_card_name
@@ -123,11 +139,21 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
                 params['mode'] = self.mode.to_alipay_dict()
             else:
                 params['mode'] = self.mode
+        if self.mybank_app_id:
+            if hasattr(self.mybank_app_id, 'to_alipay_dict'):
+                params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
+            else:
+                params['mybank_app_id'] = self.mybank_app_id
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.pay_expire_time:
+            if hasattr(self.pay_expire_time, 'to_alipay_dict'):
+                params['pay_expire_time'] = self.pay_expire_time.to_alipay_dict()
+            else:
+                params['pay_expire_time'] = self.pay_expire_time
         if self.payee_card_name:
             if hasattr(self.payee_card_name, 'to_alipay_dict'):
                 params['payee_card_name'] = self.payee_card_name.to_alipay_dict()
@@ -162,8 +188,12 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
             o.memo = d['memo']
         if 'mode' in d:
             o.mode = d['mode']
+        if 'mybank_app_id' in d:
+            o.mybank_app_id = d['mybank_app_id']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'pay_expire_time' in d:
+            o.pay_expire_time = d['pay_expire_time']
         if 'payee_card_name' in d:
             o.payee_card_name = d['payee_card_name']
         if 'payee_id' in d:

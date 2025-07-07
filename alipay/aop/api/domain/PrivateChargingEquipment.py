@@ -18,6 +18,8 @@ class PrivateChargingEquipment(object):
         self._equip_type = None
         self._equip_type_no = None
         self._modes = None
+        self._network_data_begin_time = None
+        self._network_data_end_time = None
         self._rated_current = None
         self._rated_power = None
         self._rated_voltage = None
@@ -96,6 +98,20 @@ class PrivateChargingEquipment(object):
             self._modes = list()
             for i in value:
                 self._modes.append(i)
+    @property
+    def network_data_begin_time(self):
+        return self._network_data_begin_time
+
+    @network_data_begin_time.setter
+    def network_data_begin_time(self, value):
+        self._network_data_begin_time = value
+    @property
+    def network_data_end_time(self):
+        return self._network_data_end_time
+
+    @network_data_end_time.setter
+    def network_data_end_time(self, value):
+        self._network_data_end_time = value
     @property
     def rated_current(self):
         return self._rated_current
@@ -183,6 +199,16 @@ class PrivateChargingEquipment(object):
                 params['modes'] = self.modes.to_alipay_dict()
             else:
                 params['modes'] = self.modes
+        if self.network_data_begin_time:
+            if hasattr(self.network_data_begin_time, 'to_alipay_dict'):
+                params['network_data_begin_time'] = self.network_data_begin_time.to_alipay_dict()
+            else:
+                params['network_data_begin_time'] = self.network_data_begin_time
+        if self.network_data_end_time:
+            if hasattr(self.network_data_end_time, 'to_alipay_dict'):
+                params['network_data_end_time'] = self.network_data_end_time.to_alipay_dict()
+            else:
+                params['network_data_end_time'] = self.network_data_end_time
         if self.rated_current:
             if hasattr(self.rated_current, 'to_alipay_dict'):
                 params['rated_current'] = self.rated_current.to_alipay_dict()
@@ -230,6 +256,10 @@ class PrivateChargingEquipment(object):
             o.equip_type_no = d['equip_type_no']
         if 'modes' in d:
             o.modes = d['modes']
+        if 'network_data_begin_time' in d:
+            o.network_data_begin_time = d['network_data_begin_time']
+        if 'network_data_end_time' in d:
+            o.network_data_end_time = d['network_data_end_time']
         if 'rated_current' in d:
             o.rated_current = d['rated_current']
         if 'rated_power' in d:

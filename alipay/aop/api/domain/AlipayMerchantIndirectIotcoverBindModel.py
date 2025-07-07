@@ -10,6 +10,7 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
     def __init__(self):
         self._agreement_no = None
         self._device_id = None
+        self._encode_url = None
         self._smid = None
         self._supplier_id = None
 
@@ -27,6 +28,13 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
     @device_id.setter
     def device_id(self, value):
         self._device_id = value
+    @property
+    def encode_url(self):
+        return self._encode_url
+
+    @encode_url.setter
+    def encode_url(self, value):
+        self._encode_url = value
     @property
     def smid(self):
         return self._smid
@@ -55,6 +63,11 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
                 params['device_id'] = self.device_id.to_alipay_dict()
             else:
                 params['device_id'] = self.device_id
+        if self.encode_url:
+            if hasattr(self.encode_url, 'to_alipay_dict'):
+                params['encode_url'] = self.encode_url.to_alipay_dict()
+            else:
+                params['encode_url'] = self.encode_url
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
             o.agreement_no = d['agreement_no']
         if 'device_id' in d:
             o.device_id = d['device_id']
+        if 'encode_url' in d:
+            o.encode_url = d['encode_url']
         if 'smid' in d:
             o.smid = d['smid']
         if 'supplier_id' in d:

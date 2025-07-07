@@ -10,6 +10,7 @@ class AlipayCommerceTransportEtcenterpriseWaybillUploadModel(object):
     def __init__(self):
         self._corp_id = None
         self._corp_vehicle_id = None
+        self._deduct_type = None
         self._highway_fee = None
         self._plate_color = None
         self._plate_no = None
@@ -35,6 +36,13 @@ class AlipayCommerceTransportEtcenterpriseWaybillUploadModel(object):
     @corp_vehicle_id.setter
     def corp_vehicle_id(self, value):
         self._corp_vehicle_id = value
+    @property
+    def deduct_type(self):
+        return self._deduct_type
+
+    @deduct_type.setter
+    def deduct_type(self, value):
+        self._deduct_type = value
     @property
     def highway_fee(self):
         return self._highway_fee
@@ -119,6 +127,11 @@ class AlipayCommerceTransportEtcenterpriseWaybillUploadModel(object):
                 params['corp_vehicle_id'] = self.corp_vehicle_id.to_alipay_dict()
             else:
                 params['corp_vehicle_id'] = self.corp_vehicle_id
+        if self.deduct_type:
+            if hasattr(self.deduct_type, 'to_alipay_dict'):
+                params['deduct_type'] = self.deduct_type.to_alipay_dict()
+            else:
+                params['deduct_type'] = self.deduct_type
         if self.highway_fee:
             if hasattr(self.highway_fee, 'to_alipay_dict'):
                 params['highway_fee'] = self.highway_fee.to_alipay_dict()
@@ -180,6 +193,8 @@ class AlipayCommerceTransportEtcenterpriseWaybillUploadModel(object):
             o.corp_id = d['corp_id']
         if 'corp_vehicle_id' in d:
             o.corp_vehicle_id = d['corp_vehicle_id']
+        if 'deduct_type' in d:
+            o.deduct_type = d['deduct_type']
         if 'highway_fee' in d:
             o.highway_fee = d['highway_fee']
         if 'plate_color' in d:

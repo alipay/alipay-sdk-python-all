@@ -8,11 +8,27 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
 
     def __init__(self):
+        self._alipay_user_id = None
+        self._isv_code = None
         self._number_no = None
         self._order_id = None
         self._platform_code = None
         self._register_id = None
 
+    @property
+    def alipay_user_id(self):
+        return self._alipay_user_id
+
+    @alipay_user_id.setter
+    def alipay_user_id(self, value):
+        self._alipay_user_id = value
+    @property
+    def isv_code(self):
+        return self._isv_code
+
+    @isv_code.setter
+    def isv_code(self, value):
+        self._isv_code = value
     @property
     def number_no(self):
         return self._number_no
@@ -45,6 +61,16 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_user_id:
+            if hasattr(self.alipay_user_id, 'to_alipay_dict'):
+                params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
+            else:
+                params['alipay_user_id'] = self.alipay_user_id
+        if self.isv_code:
+            if hasattr(self.isv_code, 'to_alipay_dict'):
+                params['isv_code'] = self.isv_code.to_alipay_dict()
+            else:
+                params['isv_code'] = self.isv_code
         if self.number_no:
             if hasattr(self.number_no, 'to_alipay_dict'):
                 params['number_no'] = self.number_no.to_alipay_dict()
@@ -72,6 +98,10 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalRegisterCancelorderNotifyModel()
+        if 'alipay_user_id' in d:
+            o.alipay_user_id = d['alipay_user_id']
+        if 'isv_code' in d:
+            o.isv_code = d['isv_code']
         if 'number_no' in d:
             o.number_no = d['number_no']
         if 'order_id' in d:

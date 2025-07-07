@@ -12,6 +12,7 @@ class AlipayCommerceCityfacilitatorNamelistSyncModel(object):
         self._partner_block_id = None
         self._reason = None
         self._remark = None
+        self._scene_type = None
         self._type = None
         self._type_sub_code = None
         self._user_block_id = None
@@ -45,6 +46,13 @@ class AlipayCommerceCityfacilitatorNamelistSyncModel(object):
     @remark.setter
     def remark(self, value):
         self._remark = value
+    @property
+    def scene_type(self):
+        return self._scene_type
+
+    @scene_type.setter
+    def scene_type(self, value):
+        self._scene_type = value
     @property
     def type(self):
         return self._type
@@ -97,6 +105,11 @@ class AlipayCommerceCityfacilitatorNamelistSyncModel(object):
                 params['remark'] = self.remark.to_alipay_dict()
             else:
                 params['remark'] = self.remark
+        if self.scene_type:
+            if hasattr(self.scene_type, 'to_alipay_dict'):
+                params['scene_type'] = self.scene_type.to_alipay_dict()
+            else:
+                params['scene_type'] = self.scene_type
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayCommerceCityfacilitatorNamelistSyncModel(object):
             o.reason = d['reason']
         if 'remark' in d:
             o.remark = d['remark']
+        if 'scene_type' in d:
+            o.scene_type = d['scene_type']
         if 'type' in d:
             o.type = d['type']
         if 'type_sub_code' in d:

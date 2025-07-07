@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class FsFundInfoForm(object):
 
     def __init__(self):
+        self._amount = None
         self._fund_provider = None
         self._fund_type = None
         self._fund_user_id = None
 
+    @property
+    def amount(self):
+        return self._amount
+
+    @amount.setter
+    def amount(self, value):
+        self._amount = value
     @property
     def fund_provider(self):
         return self._fund_provider
@@ -37,6 +45,11 @@ class FsFundInfoForm(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.amount:
+            if hasattr(self.amount, 'to_alipay_dict'):
+                params['amount'] = self.amount.to_alipay_dict()
+            else:
+                params['amount'] = self.amount
         if self.fund_provider:
             if hasattr(self.fund_provider, 'to_alipay_dict'):
                 params['fund_provider'] = self.fund_provider.to_alipay_dict()
@@ -59,6 +72,8 @@ class FsFundInfoForm(object):
         if not d:
             return None
         o = FsFundInfoForm()
+        if 'amount' in d:
+            o.amount = d['amount']
         if 'fund_provider' in d:
             o.fund_provider = d['fund_provider']
         if 'fund_type' in d:

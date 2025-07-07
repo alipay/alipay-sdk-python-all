@@ -16,6 +16,7 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
         self._enterprise_id = None
         self._file_download_url = None
         self._file_type = None
+        self._industry_specific_infos = None
         self._invoice_check_result = None
         self._invoice_check_time = None
         self._invoice_code = None
@@ -38,7 +39,9 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
         self._payer_mobile = None
         self._payer_name = None
         self._payer_register_no = None
+        self._related_pay_no = None
         self._related_to_consume = None
+        self._specific_factor = None
         self._sum_amount = None
         self._tax_amount = None
         self._without_tax_amount = None
@@ -92,6 +95,16 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
     @file_type.setter
     def file_type(self, value):
         self._file_type = value
+    @property
+    def industry_specific_infos(self):
+        return self._industry_specific_infos
+
+    @industry_specific_infos.setter
+    def industry_specific_infos(self, value):
+        if isinstance(value, list):
+            self._industry_specific_infos = list()
+            for i in value:
+                self._industry_specific_infos.append(i)
     @property
     def invoice_check_result(self):
         return self._invoice_check_result
@@ -247,12 +260,26 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
     def payer_register_no(self, value):
         self._payer_register_no = value
     @property
+    def related_pay_no(self):
+        return self._related_pay_no
+
+    @related_pay_no.setter
+    def related_pay_no(self, value):
+        self._related_pay_no = value
+    @property
     def related_to_consume(self):
         return self._related_to_consume
 
     @related_to_consume.setter
     def related_to_consume(self, value):
         self._related_to_consume = value
+    @property
+    def specific_factor(self):
+        return self._specific_factor
+
+    @specific_factor.setter
+    def specific_factor(self, value):
+        self._specific_factor = value
     @property
     def sum_amount(self):
         return self._sum_amount
@@ -291,6 +318,8 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
             self.file_download_url = response['file_download_url']
         if 'file_type' in response:
             self.file_type = response['file_type']
+        if 'industry_specific_infos' in response:
+            self.industry_specific_infos = response['industry_specific_infos']
         if 'invoice_check_result' in response:
             self.invoice_check_result = response['invoice_check_result']
         if 'invoice_check_time' in response:
@@ -335,8 +364,12 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
             self.payer_name = response['payer_name']
         if 'payer_register_no' in response:
             self.payer_register_no = response['payer_register_no']
+        if 'related_pay_no' in response:
+            self.related_pay_no = response['related_pay_no']
         if 'related_to_consume' in response:
             self.related_to_consume = response['related_to_consume']
+        if 'specific_factor' in response:
+            self.specific_factor = response['specific_factor']
         if 'sum_amount' in response:
             self.sum_amount = response['sum_amount']
         if 'tax_amount' in response:

@@ -13,7 +13,10 @@ class AlipayOpenSpNdeviceWorkstatusQueryResponse(AlipayResponse):
         self._device_sn = None
         self._device_type = None
         self._leads_id = None
+        self._operator_contact_number = None
+        self._operator_name = None
         self._out_store_id = None
+        self._position_id = None
         self._related_device_sn = None
 
     @property
@@ -45,12 +48,33 @@ class AlipayOpenSpNdeviceWorkstatusQueryResponse(AlipayResponse):
     def leads_id(self, value):
         self._leads_id = value
     @property
+    def operator_contact_number(self):
+        return self._operator_contact_number
+
+    @operator_contact_number.setter
+    def operator_contact_number(self, value):
+        self._operator_contact_number = value
+    @property
+    def operator_name(self):
+        return self._operator_name
+
+    @operator_name.setter
+    def operator_name(self, value):
+        self._operator_name = value
+    @property
     def out_store_id(self):
         return self._out_store_id
 
     @out_store_id.setter
     def out_store_id(self, value):
         self._out_store_id = value
+    @property
+    def position_id(self):
+        return self._position_id
+
+    @position_id.setter
+    def position_id(self, value):
+        self._position_id = value
     @property
     def related_device_sn(self):
         return self._related_device_sn
@@ -69,7 +93,13 @@ class AlipayOpenSpNdeviceWorkstatusQueryResponse(AlipayResponse):
             self.device_type = response['device_type']
         if 'leads_id' in response:
             self.leads_id = response['leads_id']
+        if 'operator_contact_number' in response:
+            self.operator_contact_number = response['operator_contact_number']
+        if 'operator_name' in response:
+            self.operator_name = response['operator_name']
         if 'out_store_id' in response:
             self.out_store_id = response['out_store_id']
+        if 'position_id' in response:
+            self.position_id = response['position_id']
         if 'related_device_sn' in response:
             self.related_device_sn = response['related_device_sn']

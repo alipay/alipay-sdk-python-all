@@ -8,16 +8,33 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCloudCloudpromoTravelPicCreateModel(object):
 
     def __init__(self):
+        self._footer_title = None
+        self._logo = None
         self._pic_1 = None
         self._pic_2 = None
         self._pic_3 = None
         self._pic_4 = None
+        self._share_desc = None
         self._template_id = None
         self._text_1 = None
         self._text_2 = None
         self._text_3 = None
         self._text_4 = None
 
+    @property
+    def footer_title(self):
+        return self._footer_title
+
+    @footer_title.setter
+    def footer_title(self, value):
+        self._footer_title = value
+    @property
+    def logo(self):
+        return self._logo
+
+    @logo.setter
+    def logo(self, value):
+        self._logo = value
     @property
     def pic_1(self):
         return self._pic_1
@@ -46,6 +63,13 @@ class AlipayCloudCloudpromoTravelPicCreateModel(object):
     @pic_4.setter
     def pic_4(self, value):
         self._pic_4 = value
+    @property
+    def share_desc(self):
+        return self._share_desc
+
+    @share_desc.setter
+    def share_desc(self, value):
+        self._share_desc = value
     @property
     def template_id(self):
         return self._template_id
@@ -85,6 +109,16 @@ class AlipayCloudCloudpromoTravelPicCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.footer_title:
+            if hasattr(self.footer_title, 'to_alipay_dict'):
+                params['footer_title'] = self.footer_title.to_alipay_dict()
+            else:
+                params['footer_title'] = self.footer_title
+        if self.logo:
+            if hasattr(self.logo, 'to_alipay_dict'):
+                params['logo'] = self.logo.to_alipay_dict()
+            else:
+                params['logo'] = self.logo
         if self.pic_1:
             if hasattr(self.pic_1, 'to_alipay_dict'):
                 params['pic_1'] = self.pic_1.to_alipay_dict()
@@ -105,6 +139,11 @@ class AlipayCloudCloudpromoTravelPicCreateModel(object):
                 params['pic_4'] = self.pic_4.to_alipay_dict()
             else:
                 params['pic_4'] = self.pic_4
+        if self.share_desc:
+            if hasattr(self.share_desc, 'to_alipay_dict'):
+                params['share_desc'] = self.share_desc.to_alipay_dict()
+            else:
+                params['share_desc'] = self.share_desc
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -137,6 +176,10 @@ class AlipayCloudCloudpromoTravelPicCreateModel(object):
         if not d:
             return None
         o = AlipayCloudCloudpromoTravelPicCreateModel()
+        if 'footer_title' in d:
+            o.footer_title = d['footer_title']
+        if 'logo' in d:
+            o.logo = d['logo']
         if 'pic_1' in d:
             o.pic_1 = d['pic_1']
         if 'pic_2' in d:
@@ -145,6 +188,8 @@ class AlipayCloudCloudpromoTravelPicCreateModel(object):
             o.pic_3 = d['pic_3']
         if 'pic_4' in d:
             o.pic_4 = d['pic_4']
+        if 'share_desc' in d:
+            o.share_desc = d['share_desc']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'text_1' in d:

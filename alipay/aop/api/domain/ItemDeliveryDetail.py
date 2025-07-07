@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AssetItemVersion import AssetItemVersion
 
 
 class ItemDeliveryDetail(object):
@@ -11,6 +12,7 @@ class ItemDeliveryDetail(object):
         self._amount = None
         self._assign_item_id = None
         self._batch_no = None
+        self._item_version_info = None
         self._logistic_code = None
         self._logistics_name = None
         self._logistics_no = None
@@ -37,6 +39,16 @@ class ItemDeliveryDetail(object):
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def item_version_info(self):
+        return self._item_version_info
+
+    @item_version_info.setter
+    def item_version_info(self, value):
+        if isinstance(value, AssetItemVersion):
+            self._item_version_info = value
+        else:
+            self._item_version_info = AssetItemVersion.from_alipay_dict(value)
     @property
     def logistic_code(self):
         return self._logistic_code
@@ -84,6 +96,11 @@ class ItemDeliveryDetail(object):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
             else:
                 params['batch_no'] = self.batch_no
+        if self.item_version_info:
+            if hasattr(self.item_version_info, 'to_alipay_dict'):
+                params['item_version_info'] = self.item_version_info.to_alipay_dict()
+            else:
+                params['item_version_info'] = self.item_version_info
         if self.logistic_code:
             if hasattr(self.logistic_code, 'to_alipay_dict'):
                 params['logistic_code'] = self.logistic_code.to_alipay_dict()
@@ -117,6 +134,8 @@ class ItemDeliveryDetail(object):
             o.assign_item_id = d['assign_item_id']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
+        if 'item_version_info' in d:
+            o.item_version_info = d['item_version_info']
         if 'logistic_code' in d:
             o.logistic_code = d['logistic_code']
         if 'logistics_name' in d:

@@ -12,6 +12,7 @@ class UnifiedSettleExtendParams(object):
         self._memo = None
         self._original_order_amount = None
         self._refund_reason = None
+        self._settle_mode = None
 
     @property
     def bank_memo(self):
@@ -41,6 +42,13 @@ class UnifiedSettleExtendParams(object):
     @refund_reason.setter
     def refund_reason(self, value):
         self._refund_reason = value
+    @property
+    def settle_mode(self):
+        return self._settle_mode
+
+    @settle_mode.setter
+    def settle_mode(self, value):
+        self._settle_mode = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class UnifiedSettleExtendParams(object):
                 params['refund_reason'] = self.refund_reason.to_alipay_dict()
             else:
                 params['refund_reason'] = self.refund_reason
+        if self.settle_mode:
+            if hasattr(self.settle_mode, 'to_alipay_dict'):
+                params['settle_mode'] = self.settle_mode.to_alipay_dict()
+            else:
+                params['settle_mode'] = self.settle_mode
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class UnifiedSettleExtendParams(object):
             o.original_order_amount = d['original_order_amount']
         if 'refund_reason' in d:
             o.refund_reason = d['refund_reason']
+        if 'settle_mode' in d:
+            o.settle_mode = d['settle_mode']
         return o
 
 

@@ -12,6 +12,7 @@ class AlipayCommerceLogisticsIncentivecodeOperationSyncModel(object):
         self._alipay_trade_status = None
         self._incentive_code = None
         self._logistics_code = None
+        self._material_type = None
         self._operation_dynamic_sales_type = None
         self._operation_latitude = None
         self._operation_longitude = None
@@ -52,6 +53,13 @@ class AlipayCommerceLogisticsIncentivecodeOperationSyncModel(object):
     @logistics_code.setter
     def logistics_code(self, value):
         self._logistics_code = value
+    @property
+    def material_type(self):
+        return self._material_type
+
+    @material_type.setter
+    def material_type(self, value):
+        self._material_type = value
     @property
     def operation_dynamic_sales_type(self):
         return self._operation_dynamic_sales_type
@@ -153,6 +161,11 @@ class AlipayCommerceLogisticsIncentivecodeOperationSyncModel(object):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
             else:
                 params['logistics_code'] = self.logistics_code
+        if self.material_type:
+            if hasattr(self.material_type, 'to_alipay_dict'):
+                params['material_type'] = self.material_type.to_alipay_dict()
+            else:
+                params['material_type'] = self.material_type
         if self.operation_dynamic_sales_type:
             if hasattr(self.operation_dynamic_sales_type, 'to_alipay_dict'):
                 params['operation_dynamic_sales_type'] = self.operation_dynamic_sales_type.to_alipay_dict()
@@ -223,6 +236,8 @@ class AlipayCommerceLogisticsIncentivecodeOperationSyncModel(object):
             o.incentive_code = d['incentive_code']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
+        if 'material_type' in d:
+            o.material_type = d['material_type']
         if 'operation_dynamic_sales_type' in d:
             o.operation_dynamic_sales_type = d['operation_dynamic_sales_type']
         if 'operation_latitude' in d:

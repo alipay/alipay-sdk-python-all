@@ -49,6 +49,7 @@ class CardOrderInfo(object):
         self._remain_amount = None
         self._remain_count = None
         self._sale_price_total = None
+        self._sell_rel_shop_id = None
         self._shop_id = None
         self._signed_order_agreement = None
         self._total_count = None
@@ -332,6 +333,13 @@ class CardOrderInfo(object):
     def sale_price_total(self, value):
         self._sale_price_total = value
     @property
+    def sell_rel_shop_id(self):
+        return self._sell_rel_shop_id
+
+    @sell_rel_shop_id.setter
+    def sell_rel_shop_id(self, value):
+        self._sell_rel_shop_id = value
+    @property
     def shop_id(self):
         return self._shop_id
 
@@ -597,6 +605,11 @@ class CardOrderInfo(object):
                 params['sale_price_total'] = self.sale_price_total.to_alipay_dict()
             else:
                 params['sale_price_total'] = self.sale_price_total
+        if self.sell_rel_shop_id:
+            if hasattr(self.sell_rel_shop_id, 'to_alipay_dict'):
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id.to_alipay_dict()
+            else:
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -731,6 +744,8 @@ class CardOrderInfo(object):
             o.remain_count = d['remain_count']
         if 'sale_price_total' in d:
             o.sale_price_total = d['sale_price_total']
+        if 'sell_rel_shop_id' in d:
+            o.sell_rel_shop_id = d['sell_rel_shop_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'signed_order_agreement' in d:

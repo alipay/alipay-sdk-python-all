@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.VoucherList import VoucherList
 
 
 class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
@@ -19,6 +20,7 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
         self._start_time = None
         self._usage_count = None
         self._user_id = None
+        self._voucher_list = None
 
     @property
     def biz_order_id(self):
@@ -90,6 +92,19 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def voucher_list(self):
+        return self._voucher_list
+
+    @voucher_list.setter
+    def voucher_list(self, value):
+        if isinstance(value, list):
+            self._voucher_list = list()
+            for i in value:
+                if isinstance(i, VoucherList):
+                    self._voucher_list.append(i)
+                else:
+                    self._voucher_list.append(VoucherList.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceMedicalCommercialMemberQueryResponse, self).parse_response_content(response_content)
@@ -113,3 +128,5 @@ class AlipayCommerceMedicalCommercialMemberQueryResponse(AlipayResponse):
             self.usage_count = response['usage_count']
         if 'user_id' in response:
             self.user_id = response['user_id']
+        if 'voucher_list' in response:
+            self.voucher_list = response['voucher_list']

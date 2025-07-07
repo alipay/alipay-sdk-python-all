@@ -9,6 +9,7 @@ class AlipayFundWalletRuleQueryModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._entity_condition = None
         self._page_no = None
         self._page_size = None
         self._product_code = None
@@ -21,6 +22,13 @@ class AlipayFundWalletRuleQueryModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def entity_condition(self):
+        return self._entity_condition
+
+    @entity_condition.setter
+    def entity_condition(self, value):
+        self._entity_condition = value
     @property
     def page_no(self):
         return self._page_no
@@ -58,6 +66,11 @@ class AlipayFundWalletRuleQueryModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.entity_condition:
+            if hasattr(self.entity_condition, 'to_alipay_dict'):
+                params['entity_condition'] = self.entity_condition.to_alipay_dict()
+            else:
+                params['entity_condition'] = self.entity_condition
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayFundWalletRuleQueryModel(object):
         o = AlipayFundWalletRuleQueryModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'entity_condition' in d:
+            o.entity_condition = d['entity_condition']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

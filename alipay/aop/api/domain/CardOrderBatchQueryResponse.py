@@ -33,17 +33,26 @@ class CardOrderBatchQueryResponse(object):
         self._merchant_pid = None
         self._name = None
         self._open_id = None
+        self._order_amount = None
         self._order_id = None
+        self._order_scene = None
         self._origin_price_total = None
         self._out_order_no = None
+        self._penalty_amount = None
+        self._refund_amount = None
         self._refund_cash = None
+        self._refund_time = None
+        self._remain_amount = None
         self._remain_count = None
         self._sale_price_total = None
+        self._sell_rel_shop_id = None
         self._shop_id = None
         self._total_count = None
         self._trade_no = None
         self._usable_cash = None
+        self._used_amount = None
         self._used_cash = None
+        self._used_count = None
         self._user_id = None
         self._user_name = None
         self._user_phone = None
@@ -216,12 +225,26 @@ class CardOrderBatchQueryResponse(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def order_amount(self):
+        return self._order_amount
+
+    @order_amount.setter
+    def order_amount(self, value):
+        self._order_amount = value
+    @property
     def order_id(self):
         return self._order_id
 
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def order_scene(self):
+        return self._order_scene
+
+    @order_scene.setter
+    def order_scene(self, value):
+        self._order_scene = value
     @property
     def origin_price_total(self):
         return self._origin_price_total
@@ -237,12 +260,40 @@ class CardOrderBatchQueryResponse(object):
     def out_order_no(self, value):
         self._out_order_no = value
     @property
+    def penalty_amount(self):
+        return self._penalty_amount
+
+    @penalty_amount.setter
+    def penalty_amount(self, value):
+        self._penalty_amount = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
     def refund_cash(self):
         return self._refund_cash
 
     @refund_cash.setter
     def refund_cash(self, value):
         self._refund_cash = value
+    @property
+    def refund_time(self):
+        return self._refund_time
+
+    @refund_time.setter
+    def refund_time(self, value):
+        self._refund_time = value
+    @property
+    def remain_amount(self):
+        return self._remain_amount
+
+    @remain_amount.setter
+    def remain_amount(self, value):
+        self._remain_amount = value
     @property
     def remain_count(self):
         return self._remain_count
@@ -257,6 +308,13 @@ class CardOrderBatchQueryResponse(object):
     @sale_price_total.setter
     def sale_price_total(self, value):
         self._sale_price_total = value
+    @property
+    def sell_rel_shop_id(self):
+        return self._sell_rel_shop_id
+
+    @sell_rel_shop_id.setter
+    def sell_rel_shop_id(self, value):
+        self._sell_rel_shop_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -286,12 +344,26 @@ class CardOrderBatchQueryResponse(object):
     def usable_cash(self, value):
         self._usable_cash = value
     @property
+    def used_amount(self):
+        return self._used_amount
+
+    @used_amount.setter
+    def used_amount(self, value):
+        self._used_amount = value
+    @property
     def used_cash(self):
         return self._used_cash
 
     @used_cash.setter
     def used_cash(self, value):
         self._used_cash = value
+    @property
+    def used_count(self):
+        return self._used_count
+
+    @used_count.setter
+    def used_count(self, value):
+        self._used_count = value
     @property
     def user_id(self):
         return self._user_id
@@ -432,11 +504,21 @@ class CardOrderBatchQueryResponse(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.order_amount:
+            if hasattr(self.order_amount, 'to_alipay_dict'):
+                params['order_amount'] = self.order_amount.to_alipay_dict()
+            else:
+                params['order_amount'] = self.order_amount
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.order_scene:
+            if hasattr(self.order_scene, 'to_alipay_dict'):
+                params['order_scene'] = self.order_scene.to_alipay_dict()
+            else:
+                params['order_scene'] = self.order_scene
         if self.origin_price_total:
             if hasattr(self.origin_price_total, 'to_alipay_dict'):
                 params['origin_price_total'] = self.origin_price_total.to_alipay_dict()
@@ -447,11 +529,31 @@ class CardOrderBatchQueryResponse(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.penalty_amount:
+            if hasattr(self.penalty_amount, 'to_alipay_dict'):
+                params['penalty_amount'] = self.penalty_amount.to_alipay_dict()
+            else:
+                params['penalty_amount'] = self.penalty_amount
+        if self.refund_amount:
+            if hasattr(self.refund_amount, 'to_alipay_dict'):
+                params['refund_amount'] = self.refund_amount.to_alipay_dict()
+            else:
+                params['refund_amount'] = self.refund_amount
         if self.refund_cash:
             if hasattr(self.refund_cash, 'to_alipay_dict'):
                 params['refund_cash'] = self.refund_cash.to_alipay_dict()
             else:
                 params['refund_cash'] = self.refund_cash
+        if self.refund_time:
+            if hasattr(self.refund_time, 'to_alipay_dict'):
+                params['refund_time'] = self.refund_time.to_alipay_dict()
+            else:
+                params['refund_time'] = self.refund_time
+        if self.remain_amount:
+            if hasattr(self.remain_amount, 'to_alipay_dict'):
+                params['remain_amount'] = self.remain_amount.to_alipay_dict()
+            else:
+                params['remain_amount'] = self.remain_amount
         if self.remain_count:
             if hasattr(self.remain_count, 'to_alipay_dict'):
                 params['remain_count'] = self.remain_count.to_alipay_dict()
@@ -462,6 +564,11 @@ class CardOrderBatchQueryResponse(object):
                 params['sale_price_total'] = self.sale_price_total.to_alipay_dict()
             else:
                 params['sale_price_total'] = self.sale_price_total
+        if self.sell_rel_shop_id:
+            if hasattr(self.sell_rel_shop_id, 'to_alipay_dict'):
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id.to_alipay_dict()
+            else:
+                params['sell_rel_shop_id'] = self.sell_rel_shop_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -482,11 +589,21 @@ class CardOrderBatchQueryResponse(object):
                 params['usable_cash'] = self.usable_cash.to_alipay_dict()
             else:
                 params['usable_cash'] = self.usable_cash
+        if self.used_amount:
+            if hasattr(self.used_amount, 'to_alipay_dict'):
+                params['used_amount'] = self.used_amount.to_alipay_dict()
+            else:
+                params['used_amount'] = self.used_amount
         if self.used_cash:
             if hasattr(self.used_cash, 'to_alipay_dict'):
                 params['used_cash'] = self.used_cash.to_alipay_dict()
             else:
                 params['used_cash'] = self.used_cash
+        if self.used_count:
+            if hasattr(self.used_count, 'to_alipay_dict'):
+                params['used_count'] = self.used_count.to_alipay_dict()
+            else:
+                params['used_count'] = self.used_count
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -555,18 +672,32 @@ class CardOrderBatchQueryResponse(object):
             o.name = d['name']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'order_amount' in d:
+            o.order_amount = d['order_amount']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'order_scene' in d:
+            o.order_scene = d['order_scene']
         if 'origin_price_total' in d:
             o.origin_price_total = d['origin_price_total']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'penalty_amount' in d:
+            o.penalty_amount = d['penalty_amount']
+        if 'refund_amount' in d:
+            o.refund_amount = d['refund_amount']
         if 'refund_cash' in d:
             o.refund_cash = d['refund_cash']
+        if 'refund_time' in d:
+            o.refund_time = d['refund_time']
+        if 'remain_amount' in d:
+            o.remain_amount = d['remain_amount']
         if 'remain_count' in d:
             o.remain_count = d['remain_count']
         if 'sale_price_total' in d:
             o.sale_price_total = d['sale_price_total']
+        if 'sell_rel_shop_id' in d:
+            o.sell_rel_shop_id = d['sell_rel_shop_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'total_count' in d:
@@ -575,8 +706,12 @@ class CardOrderBatchQueryResponse(object):
             o.trade_no = d['trade_no']
         if 'usable_cash' in d:
             o.usable_cash = d['usable_cash']
+        if 'used_amount' in d:
+            o.used_amount = d['used_amount']
         if 'used_cash' in d:
             o.used_cash = d['used_cash']
+        if 'used_count' in d:
+            o.used_count = d['used_count']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

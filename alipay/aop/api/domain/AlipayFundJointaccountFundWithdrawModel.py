@@ -15,6 +15,7 @@ class AlipayFundJointaccountFundWithdrawModel(object):
         self._channel = None
         self._identity = None
         self._identity_type = None
+        self._open_id = None
         self._order_title = None
         self._out_biz_no = None
         self._product_code = None
@@ -68,6 +69,13 @@ class AlipayFundJointaccountFundWithdrawModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_title(self):
         return self._order_title
@@ -128,6 +136,11 @@ class AlipayFundJointaccountFundWithdrawModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -164,6 +177,8 @@ class AlipayFundJointaccountFundWithdrawModel(object):
             o.identity = d['identity']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_biz_no' in d:

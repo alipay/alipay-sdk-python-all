@@ -10,6 +10,7 @@ class AssetTransferDetailDTO(object):
     def __init__(self):
         self._amount = None
         self._asset_id = None
+        self._biz_param = None
         self._biz_type = None
         self._cash = None
         self._count = None
@@ -37,6 +38,13 @@ class AssetTransferDetailDTO(object):
     @asset_id.setter
     def asset_id(self, value):
         self._asset_id = value
+    @property
+    def biz_param(self):
+        return self._biz_param
+
+    @biz_param.setter
+    def biz_param(self, value):
+        self._biz_param = value
     @property
     def biz_type(self):
         return self._biz_type
@@ -135,6 +143,11 @@ class AssetTransferDetailDTO(object):
                 params['asset_id'] = self.asset_id.to_alipay_dict()
             else:
                 params['asset_id'] = self.asset_id
+        if self.biz_param:
+            if hasattr(self.biz_param, 'to_alipay_dict'):
+                params['biz_param'] = self.biz_param.to_alipay_dict()
+            else:
+                params['biz_param'] = self.biz_param
         if self.biz_type:
             if hasattr(self.biz_type, 'to_alipay_dict'):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
@@ -206,6 +219,8 @@ class AssetTransferDetailDTO(object):
             o.amount = d['amount']
         if 'asset_id' in d:
             o.asset_id = d['asset_id']
+        if 'biz_param' in d:
+            o.biz_param = d['biz_param']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
         if 'cash' in d:

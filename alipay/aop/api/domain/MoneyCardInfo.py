@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.UseDuration import UseDuration
+from alipay.aop.api.domain.CardUseMethodInfo import CardUseMethodInfo
 
 
 class MoneyCardInfo(object):
@@ -20,6 +21,7 @@ class MoneyCardInfo(object):
         self._stock_num = None
         self._support_withdraw = None
         self._use_duration = None
+        self._use_method = None
         self._use_type = None
 
     @property
@@ -106,6 +108,19 @@ class MoneyCardInfo(object):
         else:
             self._use_duration = UseDuration.from_alipay_dict(value)
     @property
+    def use_method(self):
+        return self._use_method
+
+    @use_method.setter
+    def use_method(self, value):
+        if isinstance(value, list):
+            self._use_method = list()
+            for i in value:
+                if isinstance(i, CardUseMethodInfo):
+                    self._use_method.append(i)
+                else:
+                    self._use_method.append(CardUseMethodInfo.from_alipay_dict(i))
+    @property
     def use_type(self):
         return self._use_type
 
@@ -176,6 +191,16 @@ class MoneyCardInfo(object):
                 params['use_duration'] = self.use_duration.to_alipay_dict()
             else:
                 params['use_duration'] = self.use_duration
+        if self.use_method:
+            if isinstance(self.use_method, list):
+                for i in range(0, len(self.use_method)):
+                    element = self.use_method[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.use_method[i] = element.to_alipay_dict()
+            if hasattr(self.use_method, 'to_alipay_dict'):
+                params['use_method'] = self.use_method.to_alipay_dict()
+            else:
+                params['use_method'] = self.use_method
         if self.use_type:
             if hasattr(self.use_type, 'to_alipay_dict'):
                 params['use_type'] = self.use_type.to_alipay_dict()
@@ -210,6 +235,8 @@ class MoneyCardInfo(object):
             o.support_withdraw = d['support_withdraw']
         if 'use_duration' in d:
             o.use_duration = d['use_duration']
+        if 'use_method' in d:
+            o.use_method = d['use_method']
         if 'use_type' in d:
             o.use_type = d['use_type']
         return o

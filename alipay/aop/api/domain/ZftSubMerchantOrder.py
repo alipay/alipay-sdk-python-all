@@ -22,6 +22,7 @@ class ZftSubMerchantOrder(object):
         self._merchant_name = None
         self._order_id = None
         self._reason = None
+        self._safe_binding_logon_id = None
         self._smid = None
         self._status = None
         self._sub_confirm = None
@@ -126,6 +127,13 @@ class ZftSubMerchantOrder(object):
     @reason.setter
     def reason(self, value):
         self._reason = value
+    @property
+    def safe_binding_logon_id(self):
+        return self._safe_binding_logon_id
+
+    @safe_binding_logon_id.setter
+    def safe_binding_logon_id(self, value):
+        self._safe_binding_logon_id = value
     @property
     def smid(self):
         return self._smid
@@ -235,6 +243,11 @@ class ZftSubMerchantOrder(object):
                 params['reason'] = self.reason.to_alipay_dict()
             else:
                 params['reason'] = self.reason
+        if self.safe_binding_logon_id:
+            if hasattr(self.safe_binding_logon_id, 'to_alipay_dict'):
+                params['safe_binding_logon_id'] = self.safe_binding_logon_id.to_alipay_dict()
+            else:
+                params['safe_binding_logon_id'] = self.safe_binding_logon_id
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -295,6 +308,8 @@ class ZftSubMerchantOrder(object):
             o.order_id = d['order_id']
         if 'reason' in d:
             o.reason = d['reason']
+        if 'safe_binding_logon_id' in d:
+            o.safe_binding_logon_id = d['safe_binding_logon_id']
         if 'smid' in d:
             o.smid = d['smid']
         if 'status' in d:

@@ -15,11 +15,18 @@ class PlatformInquiryOrderExtInfo(object):
         self._channel_desc = None
         self._chat_url = None
         self._complaint = None
+        self._doctor_avatar = None
         self._doctor_inquiry_link_page = None
+        self._doctor_title = None
+        self._doctor_type = None
+        self._hospital_name = None
         self._invoice_url = None
         self._medical_inquiry_order_evaluate_info = None
+        self._order_from = None
         self._order_pid = None
+        self._order_spu = None
         self._original_price = None
+        self._out_biz_no = None
         self._plus_register_info = None
         self._refund_url = None
         self._source = None
@@ -60,12 +67,40 @@ class PlatformInquiryOrderExtInfo(object):
     def complaint(self, value):
         self._complaint = value
     @property
+    def doctor_avatar(self):
+        return self._doctor_avatar
+
+    @doctor_avatar.setter
+    def doctor_avatar(self, value):
+        self._doctor_avatar = value
+    @property
     def doctor_inquiry_link_page(self):
         return self._doctor_inquiry_link_page
 
     @doctor_inquiry_link_page.setter
     def doctor_inquiry_link_page(self, value):
         self._doctor_inquiry_link_page = value
+    @property
+    def doctor_title(self):
+        return self._doctor_title
+
+    @doctor_title.setter
+    def doctor_title(self, value):
+        self._doctor_title = value
+    @property
+    def doctor_type(self):
+        return self._doctor_type
+
+    @doctor_type.setter
+    def doctor_type(self, value):
+        self._doctor_type = value
+    @property
+    def hospital_name(self):
+        return self._hospital_name
+
+    @hospital_name.setter
+    def hospital_name(self, value):
+        self._hospital_name = value
     @property
     def invoice_url(self):
         return self._invoice_url
@@ -84,6 +119,13 @@ class PlatformInquiryOrderExtInfo(object):
         else:
             self._medical_inquiry_order_evaluate_info = PlatformInquiryOrderEvaluateInfo.from_alipay_dict(value)
     @property
+    def order_from(self):
+        return self._order_from
+
+    @order_from.setter
+    def order_from(self, value):
+        self._order_from = value
+    @property
     def order_pid(self):
         return self._order_pid
 
@@ -91,12 +133,26 @@ class PlatformInquiryOrderExtInfo(object):
     def order_pid(self, value):
         self._order_pid = value
     @property
+    def order_spu(self):
+        return self._order_spu
+
+    @order_spu.setter
+    def order_spu(self, value):
+        self._order_spu = value
+    @property
     def original_price(self):
         return self._original_price
 
     @original_price.setter
     def original_price(self, value):
         self._original_price = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
     @property
     def plus_register_info(self):
         return self._plus_register_info
@@ -150,11 +206,31 @@ class PlatformInquiryOrderExtInfo(object):
                 params['complaint'] = self.complaint.to_alipay_dict()
             else:
                 params['complaint'] = self.complaint
+        if self.doctor_avatar:
+            if hasattr(self.doctor_avatar, 'to_alipay_dict'):
+                params['doctor_avatar'] = self.doctor_avatar.to_alipay_dict()
+            else:
+                params['doctor_avatar'] = self.doctor_avatar
         if self.doctor_inquiry_link_page:
             if hasattr(self.doctor_inquiry_link_page, 'to_alipay_dict'):
                 params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page.to_alipay_dict()
             else:
                 params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page
+        if self.doctor_title:
+            if hasattr(self.doctor_title, 'to_alipay_dict'):
+                params['doctor_title'] = self.doctor_title.to_alipay_dict()
+            else:
+                params['doctor_title'] = self.doctor_title
+        if self.doctor_type:
+            if hasattr(self.doctor_type, 'to_alipay_dict'):
+                params['doctor_type'] = self.doctor_type.to_alipay_dict()
+            else:
+                params['doctor_type'] = self.doctor_type
+        if self.hospital_name:
+            if hasattr(self.hospital_name, 'to_alipay_dict'):
+                params['hospital_name'] = self.hospital_name.to_alipay_dict()
+            else:
+                params['hospital_name'] = self.hospital_name
         if self.invoice_url:
             if hasattr(self.invoice_url, 'to_alipay_dict'):
                 params['invoice_url'] = self.invoice_url.to_alipay_dict()
@@ -165,16 +241,31 @@ class PlatformInquiryOrderExtInfo(object):
                 params['medical_inquiry_order_evaluate_info'] = self.medical_inquiry_order_evaluate_info.to_alipay_dict()
             else:
                 params['medical_inquiry_order_evaluate_info'] = self.medical_inquiry_order_evaluate_info
+        if self.order_from:
+            if hasattr(self.order_from, 'to_alipay_dict'):
+                params['order_from'] = self.order_from.to_alipay_dict()
+            else:
+                params['order_from'] = self.order_from
         if self.order_pid:
             if hasattr(self.order_pid, 'to_alipay_dict'):
                 params['order_pid'] = self.order_pid.to_alipay_dict()
             else:
                 params['order_pid'] = self.order_pid
+        if self.order_spu:
+            if hasattr(self.order_spu, 'to_alipay_dict'):
+                params['order_spu'] = self.order_spu.to_alipay_dict()
+            else:
+                params['order_spu'] = self.order_spu
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
             else:
                 params['original_price'] = self.original_price
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.plus_register_info:
             if hasattr(self.plus_register_info, 'to_alipay_dict'):
                 params['plus_register_info'] = self.plus_register_info.to_alipay_dict()
@@ -207,16 +298,30 @@ class PlatformInquiryOrderExtInfo(object):
             o.chat_url = d['chat_url']
         if 'complaint' in d:
             o.complaint = d['complaint']
+        if 'doctor_avatar' in d:
+            o.doctor_avatar = d['doctor_avatar']
         if 'doctor_inquiry_link_page' in d:
             o.doctor_inquiry_link_page = d['doctor_inquiry_link_page']
+        if 'doctor_title' in d:
+            o.doctor_title = d['doctor_title']
+        if 'doctor_type' in d:
+            o.doctor_type = d['doctor_type']
+        if 'hospital_name' in d:
+            o.hospital_name = d['hospital_name']
         if 'invoice_url' in d:
             o.invoice_url = d['invoice_url']
         if 'medical_inquiry_order_evaluate_info' in d:
             o.medical_inquiry_order_evaluate_info = d['medical_inquiry_order_evaluate_info']
+        if 'order_from' in d:
+            o.order_from = d['order_from']
         if 'order_pid' in d:
             o.order_pid = d['order_pid']
+        if 'order_spu' in d:
+            o.order_spu = d['order_spu']
         if 'original_price' in d:
             o.original_price = d['original_price']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'plus_register_info' in d:
             o.plus_register_info = d['plus_register_info']
         if 'refund_url' in d:

@@ -19,6 +19,8 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
         self._equip_sn = None
         self._equip_status = None
         self._equip_type_no = None
+        self._network_data_begin_time = None
+        self._network_data_end_time = None
         self._operator_id = None
         self._operator_uid = None
         self._rated_current = None
@@ -104,6 +106,20 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
     @equip_type_no.setter
     def equip_type_no(self, value):
         self._equip_type_no = value
+    @property
+    def network_data_begin_time(self):
+        return self._network_data_begin_time
+
+    @network_data_begin_time.setter
+    def network_data_begin_time(self, value):
+        self._network_data_begin_time = value
+    @property
+    def network_data_end_time(self):
+        return self._network_data_end_time
+
+    @network_data_end_time.setter
+    def network_data_end_time(self, value):
+        self._network_data_end_time = value
     @property
     def operator_id(self):
         return self._operator_id
@@ -212,6 +228,16 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
                 params['equip_type_no'] = self.equip_type_no.to_alipay_dict()
             else:
                 params['equip_type_no'] = self.equip_type_no
+        if self.network_data_begin_time:
+            if hasattr(self.network_data_begin_time, 'to_alipay_dict'):
+                params['network_data_begin_time'] = self.network_data_begin_time.to_alipay_dict()
+            else:
+                params['network_data_begin_time'] = self.network_data_begin_time
+        if self.network_data_end_time:
+            if hasattr(self.network_data_end_time, 'to_alipay_dict'):
+                params['network_data_end_time'] = self.network_data_end_time.to_alipay_dict()
+            else:
+                params['network_data_end_time'] = self.network_data_end_time
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -276,6 +302,10 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
             o.equip_status = d['equip_status']
         if 'equip_type_no' in d:
             o.equip_type_no = d['equip_type_no']
+        if 'network_data_begin_time' in d:
+            o.network_data_begin_time = d['network_data_begin_time']
+        if 'network_data_end_time' in d:
+            o.network_data_end_time = d['network_data_end_time']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'operator_uid' in d:
