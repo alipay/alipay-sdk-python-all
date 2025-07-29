@@ -11,6 +11,7 @@ class AlipayCommerceRecycleOrderDelegateBatchqueryModel(object):
         self._delegate_type = None
         self._open_id = None
         self._order_status = None
+        self._order_status_list = None
         self._page_no = None
         self._page_size = None
         self._recycle_category_list = None
@@ -37,6 +38,16 @@ class AlipayCommerceRecycleOrderDelegateBatchqueryModel(object):
     @order_status.setter
     def order_status(self, value):
         self._order_status = value
+    @property
+    def order_status_list(self):
+        return self._order_status_list
+
+    @order_status_list.setter
+    def order_status_list(self, value):
+        if isinstance(value, list):
+            self._order_status_list = list()
+            for i in value:
+                self._order_status_list.append(i)
     @property
     def page_no(self):
         return self._page_no
@@ -87,6 +98,16 @@ class AlipayCommerceRecycleOrderDelegateBatchqueryModel(object):
                 params['order_status'] = self.order_status.to_alipay_dict()
             else:
                 params['order_status'] = self.order_status
+        if self.order_status_list:
+            if isinstance(self.order_status_list, list):
+                for i in range(0, len(self.order_status_list)):
+                    element = self.order_status_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.order_status_list[i] = element.to_alipay_dict()
+            if hasattr(self.order_status_list, 'to_alipay_dict'):
+                params['order_status_list'] = self.order_status_list.to_alipay_dict()
+            else:
+                params['order_status_list'] = self.order_status_list
         if self.page_no:
             if hasattr(self.page_no, 'to_alipay_dict'):
                 params['page_no'] = self.page_no.to_alipay_dict()
@@ -125,6 +146,8 @@ class AlipayCommerceRecycleOrderDelegateBatchqueryModel(object):
             o.open_id = d['open_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
+        if 'order_status_list' in d:
+            o.order_status_list = d['order_status_list']
         if 'page_no' in d:
             o.page_no = d['page_no']
         if 'page_size' in d:

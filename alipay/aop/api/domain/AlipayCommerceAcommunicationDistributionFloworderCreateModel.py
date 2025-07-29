@@ -8,14 +8,23 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
 
     def __init__(self):
+        self._alipay_user_id = None
         self._inst_order_id = None
         self._item_id = None
         self._mobile = None
+        self._open_id = None
         self._pay_type = None
         self._price = None
         self._protocol_sequence_id = None
         self._sms_code = None
 
+    @property
+    def alipay_user_id(self):
+        return self._alipay_user_id
+
+    @alipay_user_id.setter
+    def alipay_user_id(self, value):
+        self._alipay_user_id = value
     @property
     def inst_order_id(self):
         return self._inst_order_id
@@ -37,6 +46,13 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def pay_type(self):
         return self._pay_type
@@ -69,6 +85,11 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alipay_user_id:
+            if hasattr(self.alipay_user_id, 'to_alipay_dict'):
+                params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
+            else:
+                params['alipay_user_id'] = self.alipay_user_id
         if self.inst_order_id:
             if hasattr(self.inst_order_id, 'to_alipay_dict'):
                 params['inst_order_id'] = self.inst_order_id.to_alipay_dict()
@@ -84,6 +105,11 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.pay_type:
             if hasattr(self.pay_type, 'to_alipay_dict'):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
@@ -111,12 +137,16 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceAcommunicationDistributionFloworderCreateModel()
+        if 'alipay_user_id' in d:
+            o.alipay_user_id = d['alipay_user_id']
         if 'inst_order_id' in d:
             o.inst_order_id = d['inst_order_id']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
         if 'price' in d:

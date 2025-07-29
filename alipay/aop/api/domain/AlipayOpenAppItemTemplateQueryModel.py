@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenAppItemTemplateQueryModel(object):
 
     def __init__(self):
+        self._business_model = None
         self._category_id = None
         self._item_type = None
 
+    @property
+    def business_model(self):
+        return self._business_model
+
+    @business_model.setter
+    def business_model(self, value):
+        self._business_model = value
     @property
     def category_id(self):
         return self._category_id
@@ -29,6 +37,11 @@ class AlipayOpenAppItemTemplateQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_model:
+            if hasattr(self.business_model, 'to_alipay_dict'):
+                params['business_model'] = self.business_model.to_alipay_dict()
+            else:
+                params['business_model'] = self.business_model
         if self.category_id:
             if hasattr(self.category_id, 'to_alipay_dict'):
                 params['category_id'] = self.category_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayOpenAppItemTemplateQueryModel(object):
         if not d:
             return None
         o = AlipayOpenAppItemTemplateQueryModel()
+        if 'business_model' in d:
+            o.business_model = d['business_model']
         if 'category_id' in d:
             o.category_id = d['category_id']
         if 'item_type' in d:

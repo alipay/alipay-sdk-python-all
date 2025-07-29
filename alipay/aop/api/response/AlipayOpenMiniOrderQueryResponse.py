@@ -9,6 +9,7 @@ from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
+from alipay.aop.api.domain.MiniOrderExtInfoVO import MiniOrderExtInfoVO
 from alipay.aop.api.domain.LandingChannelInfoVO import LandingChannelInfoVO
 from alipay.aop.api.domain.OrderCancelInfo import OrderCancelInfo
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
@@ -30,6 +31,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._create_time = None
         self._default_receiving_address = None
         self._delivery_detail = None
+        self._ext_info = None
         self._landing_channel_info = None
         self._merchant_biz_type = None
         self._open_id = None
@@ -116,6 +118,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self._delivery_detail = value
         else:
             self._delivery_detail = DeliveryDetailInfoVO.from_alipay_dict(value)
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, MiniOrderExtInfoVO):
+            self._ext_info = value
+        else:
+            self._ext_info = MiniOrderExtInfoVO.from_alipay_dict(value)
     @property
     def landing_channel_info(self):
         return self._landing_channel_info
@@ -286,6 +298,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.default_receiving_address = response['default_receiving_address']
         if 'delivery_detail' in response:
             self.delivery_detail = response['delivery_detail']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'landing_channel_info' in response:
             self.landing_channel_info = response['landing_channel_info']
         if 'merchant_biz_type' in response:

@@ -12,6 +12,7 @@ class PaymentVO(object):
         self._amount_item = None
         self._amount_original = None
         self._amount_user = None
+        self._commission_trade_nos = None
         self._delivery_discount_fee = None
         self._delivery_fee = None
         self._delivery_price = None
@@ -52,6 +53,16 @@ class PaymentVO(object):
     @amount_user.setter
     def amount_user(self, value):
         self._amount_user = value
+    @property
+    def commission_trade_nos(self):
+        return self._commission_trade_nos
+
+    @commission_trade_nos.setter
+    def commission_trade_nos(self, value):
+        if isinstance(value, list):
+            self._commission_trade_nos = list()
+            for i in value:
+                self._commission_trade_nos.append(i)
     @property
     def delivery_discount_fee(self):
         return self._delivery_discount_fee
@@ -153,6 +164,16 @@ class PaymentVO(object):
                 params['amount_user'] = self.amount_user.to_alipay_dict()
             else:
                 params['amount_user'] = self.amount_user
+        if self.commission_trade_nos:
+            if isinstance(self.commission_trade_nos, list):
+                for i in range(0, len(self.commission_trade_nos)):
+                    element = self.commission_trade_nos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.commission_trade_nos[i] = element.to_alipay_dict()
+            if hasattr(self.commission_trade_nos, 'to_alipay_dict'):
+                params['commission_trade_nos'] = self.commission_trade_nos.to_alipay_dict()
+            else:
+                params['commission_trade_nos'] = self.commission_trade_nos
         if self.delivery_discount_fee:
             if hasattr(self.delivery_discount_fee, 'to_alipay_dict'):
                 params['delivery_discount_fee'] = self.delivery_discount_fee.to_alipay_dict()
@@ -223,6 +244,8 @@ class PaymentVO(object):
             o.amount_original = d['amount_original']
         if 'amount_user' in d:
             o.amount_user = d['amount_user']
+        if 'commission_trade_nos' in d:
+            o.commission_trade_nos = d['commission_trade_nos']
         if 'delivery_discount_fee' in d:
             o.delivery_discount_fee = d['delivery_discount_fee']
         if 'delivery_fee' in d:

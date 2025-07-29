@@ -7,6 +7,7 @@ from alipay.aop.api.domain.AssetBomAttribute import AssetBomAttribute
 from alipay.aop.api.domain.AssetBomItem import AssetBomItem
 from alipay.aop.api.domain.AssetStandard import AssetStandard
 from alipay.aop.api.domain.AssetSupplyDetail import AssetSupplyDetail
+from alipay.aop.api.domain.AssetItemVersion import AssetItemVersion
 
 
 class AssetBom(object):
@@ -28,6 +29,7 @@ class AssetBom(object):
         self._status = None
         self._std = None
         self._supply_details = None
+        self._version_info_list = None
 
     @property
     def asset_sub_type(self):
@@ -162,6 +164,19 @@ class AssetBom(object):
                     self._supply_details.append(i)
                 else:
                     self._supply_details.append(AssetSupplyDetail.from_alipay_dict(i))
+    @property
+    def version_info_list(self):
+        return self._version_info_list
+
+    @version_info_list.setter
+    def version_info_list(self, value):
+        if isinstance(value, list):
+            self._version_info_list = list()
+            for i in value:
+                if isinstance(i, AssetItemVersion):
+                    self._version_info_list.append(i)
+                else:
+                    self._version_info_list.append(AssetItemVersion.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -261,6 +276,16 @@ class AssetBom(object):
                 params['supply_details'] = self.supply_details.to_alipay_dict()
             else:
                 params['supply_details'] = self.supply_details
+        if self.version_info_list:
+            if isinstance(self.version_info_list, list):
+                for i in range(0, len(self.version_info_list)):
+                    element = self.version_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.version_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.version_info_list, 'to_alipay_dict'):
+                params['version_info_list'] = self.version_info_list.to_alipay_dict()
+            else:
+                params['version_info_list'] = self.version_info_list
         return params
 
     @staticmethod
@@ -300,6 +325,8 @@ class AssetBom(object):
             o.std = d['std']
         if 'supply_details' in d:
             o.supply_details = d['supply_details']
+        if 'version_info_list' in d:
+            o.version_info_list = d['version_info_list']
         return o
 
 

@@ -16,6 +16,8 @@ class RecycleDeliveryVO(object):
         self._logistic_platform = None
         self._staff_phone = None
         self._start_time = None
+        self._user_address = None
+        self._user_phone = None
 
     @property
     def actual_time(self):
@@ -73,6 +75,20 @@ class RecycleDeliveryVO(object):
     @start_time.setter
     def start_time(self, value):
         self._start_time = value
+    @property
+    def user_address(self):
+        return self._user_address
+
+    @user_address.setter
+    def user_address(self, value):
+        self._user_address = value
+    @property
+    def user_phone(self):
+        return self._user_phone
+
+    @user_phone.setter
+    def user_phone(self, value):
+        self._user_phone = value
 
 
     def to_alipay_dict(self):
@@ -117,6 +133,16 @@ class RecycleDeliveryVO(object):
                 params['start_time'] = self.start_time.to_alipay_dict()
             else:
                 params['start_time'] = self.start_time
+        if self.user_address:
+            if hasattr(self.user_address, 'to_alipay_dict'):
+                params['user_address'] = self.user_address.to_alipay_dict()
+            else:
+                params['user_address'] = self.user_address
+        if self.user_phone:
+            if hasattr(self.user_phone, 'to_alipay_dict'):
+                params['user_phone'] = self.user_phone.to_alipay_dict()
+            else:
+                params['user_phone'] = self.user_phone
         return params
 
     @staticmethod
@@ -140,6 +166,10 @@ class RecycleDeliveryVO(object):
             o.staff_phone = d['staff_phone']
         if 'start_time' in d:
             o.start_time = d['start_time']
+        if 'user_address' in d:
+            o.user_address = d['user_address']
+        if 'user_phone' in d:
+            o.user_phone = d['user_phone']
         return o
 
 

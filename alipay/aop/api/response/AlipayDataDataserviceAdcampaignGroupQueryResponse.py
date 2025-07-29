@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.OpenLbsEntry import OpenLbsEntry
+from alipay.aop.api.domain.SearchWord import SearchWord
 
 
 class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
@@ -46,10 +47,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._plan_id = None
         self._plan_name = None
         self._principal_id = None
+        self._referral_traffic_switch = None
         self._region_list = None
         self._region_type = None
         self._scene_code = None
+        self._search_word_list = None
         self._target_cpa = None
+        self._target_roi = None
         self._theme_crowd_list = None
 
     @property
@@ -338,6 +342,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     def principal_id(self, value):
         self._principal_id = value
     @property
+    def referral_traffic_switch(self):
+        return self._referral_traffic_switch
+
+    @referral_traffic_switch.setter
+    def referral_traffic_switch(self, value):
+        self._referral_traffic_switch = value
+    @property
     def region_list(self):
         return self._region_list
 
@@ -362,12 +373,32 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     def scene_code(self, value):
         self._scene_code = value
     @property
+    def search_word_list(self):
+        return self._search_word_list
+
+    @search_word_list.setter
+    def search_word_list(self, value):
+        if isinstance(value, list):
+            self._search_word_list = list()
+            for i in value:
+                if isinstance(i, SearchWord):
+                    self._search_word_list.append(i)
+                else:
+                    self._search_word_list.append(SearchWord.from_alipay_dict(i))
+    @property
     def target_cpa(self):
         return self._target_cpa
 
     @target_cpa.setter
     def target_cpa(self, value):
         self._target_cpa = value
+    @property
+    def target_roi(self):
+        return self._target_roi
+
+    @target_roi.setter
+    def target_roi(self, value):
+        self._target_roi = value
     @property
     def theme_crowd_list(self):
         return self._theme_crowd_list
@@ -453,13 +484,19 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.plan_name = response['plan_name']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'referral_traffic_switch' in response:
+            self.referral_traffic_switch = response['referral_traffic_switch']
         if 'region_list' in response:
             self.region_list = response['region_list']
         if 'region_type' in response:
             self.region_type = response['region_type']
         if 'scene_code' in response:
             self.scene_code = response['scene_code']
+        if 'search_word_list' in response:
+            self.search_word_list = response['search_word_list']
         if 'target_cpa' in response:
             self.target_cpa = response['target_cpa']
+        if 'target_roi' in response:
+            self.target_roi = response['target_roi']
         if 'theme_crowd_list' in response:
             self.theme_crowd_list = response['theme_crowd_list']

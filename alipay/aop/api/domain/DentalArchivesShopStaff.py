@@ -11,6 +11,7 @@ class DentalArchivesShopStaff(object):
         self._alipay_logon_id = None
         self._role = None
         self._staff_name = None
+        self._staff_user_id = None
 
     @property
     def alipay_logon_id(self):
@@ -33,6 +34,13 @@ class DentalArchivesShopStaff(object):
     @staff_name.setter
     def staff_name(self, value):
         self._staff_name = value
+    @property
+    def staff_user_id(self):
+        return self._staff_user_id
+
+    @staff_user_id.setter
+    def staff_user_id(self, value):
+        self._staff_user_id = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class DentalArchivesShopStaff(object):
                 params['staff_name'] = self.staff_name.to_alipay_dict()
             else:
                 params['staff_name'] = self.staff_name
+        if self.staff_user_id:
+            if hasattr(self.staff_user_id, 'to_alipay_dict'):
+                params['staff_user_id'] = self.staff_user_id.to_alipay_dict()
+            else:
+                params['staff_user_id'] = self.staff_user_id
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class DentalArchivesShopStaff(object):
             o.role = d['role']
         if 'staff_name' in d:
             o.staff_name = d['staff_name']
+        if 'staff_user_id' in d:
+            o.staff_user_id = d['staff_user_id']
         return o
 
 

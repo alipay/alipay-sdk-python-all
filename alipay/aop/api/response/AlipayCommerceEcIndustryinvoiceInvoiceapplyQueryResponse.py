@@ -23,17 +23,21 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
         self._invoice_amount = None
         self._invoice_amount_without_tax = None
         self._invoice_apply_id = None
+        self._invoice_date = None
         self._invoice_fail_code = None
         self._invoice_fail_desc = None
         self._invoice_item_list = None
         self._invoice_kind = None
         self._invoice_no = None
+        self._invoice_red_reason = None
         self._invoice_status = None
         self._invoice_tax_amount = None
+        self._invoice_type = None
         self._outer_apply_id = None
         self._pdf_file_url = None
         self._product_id = None
         self._real_property_business_list = None
+        self._related_blue_invoice_no = None
         self._seller_name = None
         self._seller_tax_no = None
         self._tax_no = None
@@ -117,6 +121,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     def invoice_apply_id(self, value):
         self._invoice_apply_id = value
     @property
+    def invoice_date(self):
+        return self._invoice_date
+
+    @invoice_date.setter
+    def invoice_date(self, value):
+        self._invoice_date = value
+    @property
     def invoice_fail_code(self):
         return self._invoice_fail_code
 
@@ -158,6 +169,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     def invoice_no(self, value):
         self._invoice_no = value
     @property
+    def invoice_red_reason(self):
+        return self._invoice_red_reason
+
+    @invoice_red_reason.setter
+    def invoice_red_reason(self, value):
+        self._invoice_red_reason = value
+    @property
     def invoice_status(self):
         return self._invoice_status
 
@@ -171,6 +189,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     @invoice_tax_amount.setter
     def invoice_tax_amount(self, value):
         self._invoice_tax_amount = value
+    @property
+    def invoice_type(self):
+        return self._invoice_type
+
+    @invoice_type.setter
+    def invoice_type(self, value):
+        self._invoice_type = value
     @property
     def outer_apply_id(self):
         return self._outer_apply_id
@@ -205,6 +230,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
                     self._real_property_business_list.append(i)
                 else:
                     self._real_property_business_list.append(IndustryInvoiceRealPropertyBusiness.from_alipay_dict(i))
+    @property
+    def related_blue_invoice_no(self):
+        return self._related_blue_invoice_no
+
+    @related_blue_invoice_no.setter
+    def related_blue_invoice_no(self, value):
+        self._related_blue_invoice_no = value
     @property
     def seller_name(self):
         return self._seller_name
@@ -264,6 +296,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.invoice_amount_without_tax = response['invoice_amount_without_tax']
         if 'invoice_apply_id' in response:
             self.invoice_apply_id = response['invoice_apply_id']
+        if 'invoice_date' in response:
+            self.invoice_date = response['invoice_date']
         if 'invoice_fail_code' in response:
             self.invoice_fail_code = response['invoice_fail_code']
         if 'invoice_fail_desc' in response:
@@ -274,10 +308,14 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.invoice_kind = response['invoice_kind']
         if 'invoice_no' in response:
             self.invoice_no = response['invoice_no']
+        if 'invoice_red_reason' in response:
+            self.invoice_red_reason = response['invoice_red_reason']
         if 'invoice_status' in response:
             self.invoice_status = response['invoice_status']
         if 'invoice_tax_amount' in response:
             self.invoice_tax_amount = response['invoice_tax_amount']
+        if 'invoice_type' in response:
+            self.invoice_type = response['invoice_type']
         if 'outer_apply_id' in response:
             self.outer_apply_id = response['outer_apply_id']
         if 'pdf_file_url' in response:
@@ -286,6 +324,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.product_id = response['product_id']
         if 'real_property_business_list' in response:
             self.real_property_business_list = response['real_property_business_list']
+        if 'related_blue_invoice_no' in response:
+            self.related_blue_invoice_no = response['related_blue_invoice_no']
         if 'seller_name' in response:
             self.seller_name = response['seller_name']
         if 'seller_tax_no' in response:

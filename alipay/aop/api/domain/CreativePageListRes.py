@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CreativeRefuseExtendInfoRes import CreativeRefuseExtendInfoRes
 
 
 class CreativePageListRes(object):
@@ -10,6 +11,7 @@ class CreativePageListRes(object):
     def __init__(self):
         self._ad_id = None
         self._ad_name = None
+        self._audit_refuse_reason = None
         self._creative_biz_status = None
         self._creative_type = None
         self._gmt_modified = None
@@ -21,6 +23,7 @@ class CreativePageListRes(object):
         self._plan_name = None
         self._principal_id = None
         self._punish_reason = None
+        self._refuse_extend_info_res = None
         self._risk_status = None
         self._scene_code = None
         self._status = None
@@ -40,6 +43,13 @@ class CreativePageListRes(object):
     @ad_name.setter
     def ad_name(self, value):
         self._ad_name = value
+    @property
+    def audit_refuse_reason(self):
+        return self._audit_refuse_reason
+
+    @audit_refuse_reason.setter
+    def audit_refuse_reason(self, value):
+        self._audit_refuse_reason = value
     @property
     def creative_biz_status(self):
         return self._creative_biz_status
@@ -118,6 +128,16 @@ class CreativePageListRes(object):
     def punish_reason(self, value):
         self._punish_reason = value
     @property
+    def refuse_extend_info_res(self):
+        return self._refuse_extend_info_res
+
+    @refuse_extend_info_res.setter
+    def refuse_extend_info_res(self, value):
+        if isinstance(value, CreativeRefuseExtendInfoRes):
+            self._refuse_extend_info_res = value
+        else:
+            self._refuse_extend_info_res = CreativeRefuseExtendInfoRes.from_alipay_dict(value)
+    @property
     def risk_status(self):
         return self._risk_status
 
@@ -159,6 +179,11 @@ class CreativePageListRes(object):
                 params['ad_name'] = self.ad_name.to_alipay_dict()
             else:
                 params['ad_name'] = self.ad_name
+        if self.audit_refuse_reason:
+            if hasattr(self.audit_refuse_reason, 'to_alipay_dict'):
+                params['audit_refuse_reason'] = self.audit_refuse_reason.to_alipay_dict()
+            else:
+                params['audit_refuse_reason'] = self.audit_refuse_reason
         if self.creative_biz_status:
             if hasattr(self.creative_biz_status, 'to_alipay_dict'):
                 params['creative_biz_status'] = self.creative_biz_status.to_alipay_dict()
@@ -214,6 +239,11 @@ class CreativePageListRes(object):
                 params['punish_reason'] = self.punish_reason.to_alipay_dict()
             else:
                 params['punish_reason'] = self.punish_reason
+        if self.refuse_extend_info_res:
+            if hasattr(self.refuse_extend_info_res, 'to_alipay_dict'):
+                params['refuse_extend_info_res'] = self.refuse_extend_info_res.to_alipay_dict()
+            else:
+                params['refuse_extend_info_res'] = self.refuse_extend_info_res
         if self.risk_status:
             if hasattr(self.risk_status, 'to_alipay_dict'):
                 params['risk_status'] = self.risk_status.to_alipay_dict()
@@ -245,6 +275,8 @@ class CreativePageListRes(object):
             o.ad_id = d['ad_id']
         if 'ad_name' in d:
             o.ad_name = d['ad_name']
+        if 'audit_refuse_reason' in d:
+            o.audit_refuse_reason = d['audit_refuse_reason']
         if 'creative_biz_status' in d:
             o.creative_biz_status = d['creative_biz_status']
         if 'creative_type' in d:
@@ -267,6 +299,8 @@ class CreativePageListRes(object):
             o.principal_id = d['principal_id']
         if 'punish_reason' in d:
             o.punish_reason = d['punish_reason']
+        if 'refuse_extend_info_res' in d:
+            o.refuse_extend_info_res = d['refuse_extend_info_res']
         if 'risk_status' in d:
             o.risk_status = d['risk_status']
         if 'scene_code' in d:

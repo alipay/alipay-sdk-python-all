@@ -20,6 +20,7 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._buyer_tel = None
         self._invoice_item_list = None
         self._invoice_kind = None
+        self._invoice_red_reason = None
         self._invoice_type = None
         self._outer_apply_id = None
         self._product_id = None
@@ -98,6 +99,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     @invoice_kind.setter
     def invoice_kind(self, value):
         self._invoice_kind = value
+    @property
+    def invoice_red_reason(self):
+        return self._invoice_red_reason
+
+    @invoice_red_reason.setter
+    def invoice_red_reason(self, value):
+        self._invoice_red_reason = value
     @property
     def invoice_type(self):
         return self._invoice_type
@@ -220,6 +228,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
             else:
                 params['invoice_kind'] = self.invoice_kind
+        if self.invoice_red_reason:
+            if hasattr(self.invoice_red_reason, 'to_alipay_dict'):
+                params['invoice_red_reason'] = self.invoice_red_reason.to_alipay_dict()
+            else:
+                params['invoice_red_reason'] = self.invoice_red_reason
         if self.invoice_type:
             if hasattr(self.invoice_type, 'to_alipay_dict'):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
@@ -295,6 +308,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.invoice_item_list = d['invoice_item_list']
         if 'invoice_kind' in d:
             o.invoice_kind = d['invoice_kind']
+        if 'invoice_red_reason' in d:
+            o.invoice_red_reason = d['invoice_red_reason']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
         if 'outer_apply_id' in d:

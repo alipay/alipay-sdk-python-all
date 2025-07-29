@@ -9,6 +9,7 @@ class AlipayContentLiveCommentSyncModel(object):
 
     def __init__(self):
         self._alipay_live_id = None
+        self._alipay_target_id = None
         self._comment_text = None
         self._commenter_name = None
         self._commenter_role = None
@@ -17,6 +18,7 @@ class AlipayContentLiveCommentSyncModel(object):
         self._out_user_identity = None
         self._scene = None
         self._tail_link_url = None
+        self._visible_scope = None
 
     @property
     def alipay_live_id(self):
@@ -25,6 +27,13 @@ class AlipayContentLiveCommentSyncModel(object):
     @alipay_live_id.setter
     def alipay_live_id(self, value):
         self._alipay_live_id = value
+    @property
+    def alipay_target_id(self):
+        return self._alipay_target_id
+
+    @alipay_target_id.setter
+    def alipay_target_id(self, value):
+        self._alipay_target_id = value
     @property
     def comment_text(self):
         return self._comment_text
@@ -81,6 +90,13 @@ class AlipayContentLiveCommentSyncModel(object):
     @tail_link_url.setter
     def tail_link_url(self, value):
         self._tail_link_url = value
+    @property
+    def visible_scope(self):
+        return self._visible_scope
+
+    @visible_scope.setter
+    def visible_scope(self, value):
+        self._visible_scope = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +106,11 @@ class AlipayContentLiveCommentSyncModel(object):
                 params['alipay_live_id'] = self.alipay_live_id.to_alipay_dict()
             else:
                 params['alipay_live_id'] = self.alipay_live_id
+        if self.alipay_target_id:
+            if hasattr(self.alipay_target_id, 'to_alipay_dict'):
+                params['alipay_target_id'] = self.alipay_target_id.to_alipay_dict()
+            else:
+                params['alipay_target_id'] = self.alipay_target_id
         if self.comment_text:
             if hasattr(self.comment_text, 'to_alipay_dict'):
                 params['comment_text'] = self.comment_text.to_alipay_dict()
@@ -130,6 +151,11 @@ class AlipayContentLiveCommentSyncModel(object):
                 params['tail_link_url'] = self.tail_link_url.to_alipay_dict()
             else:
                 params['tail_link_url'] = self.tail_link_url
+        if self.visible_scope:
+            if hasattr(self.visible_scope, 'to_alipay_dict'):
+                params['visible_scope'] = self.visible_scope.to_alipay_dict()
+            else:
+                params['visible_scope'] = self.visible_scope
         return params
 
     @staticmethod
@@ -139,6 +165,8 @@ class AlipayContentLiveCommentSyncModel(object):
         o = AlipayContentLiveCommentSyncModel()
         if 'alipay_live_id' in d:
             o.alipay_live_id = d['alipay_live_id']
+        if 'alipay_target_id' in d:
+            o.alipay_target_id = d['alipay_target_id']
         if 'comment_text' in d:
             o.comment_text = d['comment_text']
         if 'commenter_name' in d:
@@ -155,6 +183,8 @@ class AlipayContentLiveCommentSyncModel(object):
             o.scene = d['scene']
         if 'tail_link_url' in d:
             o.tail_link_url = d['tail_link_url']
+        if 'visible_scope' in d:
+            o.visible_scope = d['visible_scope']
         return o
 
 

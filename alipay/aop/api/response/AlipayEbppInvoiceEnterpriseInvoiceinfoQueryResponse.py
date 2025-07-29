@@ -16,6 +16,7 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
         self._enterprise_id = None
         self._file_download_url = None
         self._file_type = None
+        self._image_url = None
         self._industry_specific_infos = None
         self._invoice_check_result = None
         self._invoice_check_time = None
@@ -95,6 +96,13 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
     @file_type.setter
     def file_type(self, value):
         self._file_type = value
+    @property
+    def image_url(self):
+        return self._image_url
+
+    @image_url.setter
+    def image_url(self, value):
+        self._image_url = value
     @property
     def industry_specific_infos(self):
         return self._industry_specific_infos
@@ -318,6 +326,8 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
             self.file_download_url = response['file_download_url']
         if 'file_type' in response:
             self.file_type = response['file_type']
+        if 'image_url' in response:
+            self.image_url = response['image_url']
         if 'industry_specific_infos' in response:
             self.industry_specific_infos = response['industry_specific_infos']
         if 'invoice_check_result' in response:

@@ -15,6 +15,7 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradePrecreateConfirmResponse, self).__init__()
         self._acquiring_mode = None
+        self._expect_channel_route = None
         self._indirect_merchant_info = None
         self._merchant_info = None
         self._merchant_order_no = None
@@ -37,6 +38,13 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
     @acquiring_mode.setter
     def acquiring_mode(self, value):
         self._acquiring_mode = value
+    @property
+    def expect_channel_route(self):
+        return self._expect_channel_route
+
+    @expect_channel_route.setter
+    def expect_channel_route(self, value):
+        self._expect_channel_route = value
     @property
     def indirect_merchant_info(self):
         return self._indirect_merchant_info
@@ -155,6 +163,8 @@ class AlipayTradePrecreateConfirmResponse(AlipayResponse):
         response = super(AlipayTradePrecreateConfirmResponse, self).parse_response_content(response_content)
         if 'acquiring_mode' in response:
             self.acquiring_mode = response['acquiring_mode']
+        if 'expect_channel_route' in response:
+            self.expect_channel_route = response['expect_channel_route']
         if 'indirect_merchant_info' in response:
             self.indirect_merchant_info = response['indirect_merchant_info']
         if 'merchant_info' in response:

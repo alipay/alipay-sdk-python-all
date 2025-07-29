@@ -11,6 +11,11 @@ class PrscVO(object):
     def __init__(self):
         self._channel = None
         self._create_time = None
+        self._gender = None
+        self._patient_age = None
+        self._patient_id_no = None
+        self._patient_name = None
+        self._patient_phone_no = None
         self._prescri_review = None
         self._prsc_biz_type = None
         self._rx_code = None
@@ -37,6 +42,41 @@ class PrscVO(object):
     @create_time.setter
     def create_time(self, value):
         self._create_time = value
+    @property
+    def gender(self):
+        return self._gender
+
+    @gender.setter
+    def gender(self, value):
+        self._gender = value
+    @property
+    def patient_age(self):
+        return self._patient_age
+
+    @patient_age.setter
+    def patient_age(self, value):
+        self._patient_age = value
+    @property
+    def patient_id_no(self):
+        return self._patient_id_no
+
+    @patient_id_no.setter
+    def patient_id_no(self, value):
+        self._patient_id_no = value
+    @property
+    def patient_name(self):
+        return self._patient_name
+
+    @patient_name.setter
+    def patient_name(self, value):
+        self._patient_name = value
+    @property
+    def patient_phone_no(self):
+        return self._patient_phone_no
+
+    @patient_phone_no.setter
+    def patient_phone_no(self, value):
+        self._patient_phone_no = value
     @property
     def prescri_review(self):
         return self._prescri_review
@@ -131,6 +171,31 @@ class PrscVO(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.gender:
+            if hasattr(self.gender, 'to_alipay_dict'):
+                params['gender'] = self.gender.to_alipay_dict()
+            else:
+                params['gender'] = self.gender
+        if self.patient_age:
+            if hasattr(self.patient_age, 'to_alipay_dict'):
+                params['patient_age'] = self.patient_age.to_alipay_dict()
+            else:
+                params['patient_age'] = self.patient_age
+        if self.patient_id_no:
+            if hasattr(self.patient_id_no, 'to_alipay_dict'):
+                params['patient_id_no'] = self.patient_id_no.to_alipay_dict()
+            else:
+                params['patient_id_no'] = self.patient_id_no
+        if self.patient_name:
+            if hasattr(self.patient_name, 'to_alipay_dict'):
+                params['patient_name'] = self.patient_name.to_alipay_dict()
+            else:
+                params['patient_name'] = self.patient_name
+        if self.patient_phone_no:
+            if hasattr(self.patient_phone_no, 'to_alipay_dict'):
+                params['patient_phone_no'] = self.patient_phone_no.to_alipay_dict()
+            else:
+                params['patient_phone_no'] = self.patient_phone_no
         if self.prescri_review:
             if hasattr(self.prescri_review, 'to_alipay_dict'):
                 params['prescri_review'] = self.prescri_review.to_alipay_dict()
@@ -197,6 +262,16 @@ class PrscVO(object):
             o.channel = d['channel']
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'gender' in d:
+            o.gender = d['gender']
+        if 'patient_age' in d:
+            o.patient_age = d['patient_age']
+        if 'patient_id_no' in d:
+            o.patient_id_no = d['patient_id_no']
+        if 'patient_name' in d:
+            o.patient_name = d['patient_name']
+        if 'patient_phone_no' in d:
+            o.patient_phone_no = d['patient_phone_no']
         if 'prescri_review' in d:
             o.prescri_review = d['prescri_review']
         if 'prsc_biz_type' in d:

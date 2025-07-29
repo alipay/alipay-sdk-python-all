@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.OpenLbsEntry import OpenLbsEntry
+from alipay.aop.api.domain.SearchWord import SearchWord
 
 
 class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
@@ -36,9 +37,12 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
         self._os_list = None
         self._plan_id = None
         self._principal_tag = None
+        self._referral_traffic_switch = None
         self._region_list = None
         self._region_type = None
+        self._search_word_list = None
         self._target_cpa = None
+        self._target_roi = None
         self._theme_crowd_list = None
 
     @property
@@ -264,6 +268,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
     def principal_tag(self, value):
         self._principal_tag = value
     @property
+    def referral_traffic_switch(self):
+        return self._referral_traffic_switch
+
+    @referral_traffic_switch.setter
+    def referral_traffic_switch(self, value):
+        self._referral_traffic_switch = value
+    @property
     def region_list(self):
         return self._region_list
 
@@ -281,12 +292,32 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
     def region_type(self, value):
         self._region_type = value
     @property
+    def search_word_list(self):
+        return self._search_word_list
+
+    @search_word_list.setter
+    def search_word_list(self, value):
+        if isinstance(value, list):
+            self._search_word_list = list()
+            for i in value:
+                if isinstance(i, SearchWord):
+                    self._search_word_list.append(i)
+                else:
+                    self._search_word_list.append(SearchWord.from_alipay_dict(i))
+    @property
     def target_cpa(self):
         return self._target_cpa
 
     @target_cpa.setter
     def target_cpa(self, value):
         self._target_cpa = value
+    @property
+    def target_roi(self):
+        return self._target_roi
+
+    @target_roi.setter
+    def target_roi(self, value):
+        self._target_roi = value
     @property
     def theme_crowd_list(self):
         return self._theme_crowd_list
@@ -486,6 +517,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.referral_traffic_switch:
+            if hasattr(self.referral_traffic_switch, 'to_alipay_dict'):
+                params['referral_traffic_switch'] = self.referral_traffic_switch.to_alipay_dict()
+            else:
+                params['referral_traffic_switch'] = self.referral_traffic_switch
         if self.region_list:
             if isinstance(self.region_list, list):
                 for i in range(0, len(self.region_list)):
@@ -501,11 +537,26 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['region_type'] = self.region_type.to_alipay_dict()
             else:
                 params['region_type'] = self.region_type
+        if self.search_word_list:
+            if isinstance(self.search_word_list, list):
+                for i in range(0, len(self.search_word_list)):
+                    element = self.search_word_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.search_word_list[i] = element.to_alipay_dict()
+            if hasattr(self.search_word_list, 'to_alipay_dict'):
+                params['search_word_list'] = self.search_word_list.to_alipay_dict()
+            else:
+                params['search_word_list'] = self.search_word_list
         if self.target_cpa:
             if hasattr(self.target_cpa, 'to_alipay_dict'):
                 params['target_cpa'] = self.target_cpa.to_alipay_dict()
             else:
                 params['target_cpa'] = self.target_cpa
+        if self.target_roi:
+            if hasattr(self.target_roi, 'to_alipay_dict'):
+                params['target_roi'] = self.target_roi.to_alipay_dict()
+            else:
+                params['target_roi'] = self.target_roi
         if self.theme_crowd_list:
             if isinstance(self.theme_crowd_list, list):
                 for i in range(0, len(self.theme_crowd_list)):
@@ -577,12 +628,18 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.plan_id = d['plan_id']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'referral_traffic_switch' in d:
+            o.referral_traffic_switch = d['referral_traffic_switch']
         if 'region_list' in d:
             o.region_list = d['region_list']
         if 'region_type' in d:
             o.region_type = d['region_type']
+        if 'search_word_list' in d:
+            o.search_word_list = d['search_word_list']
         if 'target_cpa' in d:
             o.target_cpa = d['target_cpa']
+        if 'target_roi' in d:
+            o.target_roi = d['target_roi']
         if 'theme_crowd_list' in d:
             o.theme_crowd_list = d['theme_crowd_list']
         return o

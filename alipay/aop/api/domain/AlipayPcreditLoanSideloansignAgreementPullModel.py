@@ -16,6 +16,7 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
         self._fund_supplier_code_list = None
         self._open_id = None
         self._product_code = None
+        self._sub_credit_type = None
 
     @property
     def agreement_type(self):
@@ -76,6 +77,13 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def sub_credit_type(self):
+        return self._sub_credit_type
+
+    @sub_credit_type.setter
+    def sub_credit_type(self, value):
+        self._sub_credit_type = value
 
 
     def to_alipay_dict(self):
@@ -125,6 +133,11 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.sub_credit_type:
+            if hasattr(self.sub_credit_type, 'to_alipay_dict'):
+                params['sub_credit_type'] = self.sub_credit_type.to_alipay_dict()
+            else:
+                params['sub_credit_type'] = self.sub_credit_type
         return params
 
     @staticmethod
@@ -148,6 +161,8 @@ class AlipayPcreditLoanSideloansignAgreementPullModel(object):
             o.open_id = d['open_id']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'sub_credit_type' in d:
+            o.sub_credit_type = d['sub_credit_type']
         return o
 
 

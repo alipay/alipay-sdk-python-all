@@ -10,10 +10,20 @@ from alipay.aop.api.domain.RainyComplexTypesTheFourth import RainyComplexTypesTh
 class RainyComplexTypesTheFourteen(object):
 
     def __init__(self):
+        self._demo = None
         self._demo_case = None
+        self._demo_empty = None
+        self._demo_other_value = None
         self._open_id = None
         self._weak_ref = None
 
+    @property
+    def demo(self):
+        return self._demo
+
+    @demo.setter
+    def demo(self, value):
+        self._demo = value
     @property
     def demo_case(self):
         return self._demo_case
@@ -24,6 +34,20 @@ class RainyComplexTypesTheFourteen(object):
             self._demo_case = value
         else:
             self._demo_case = RainyComplexTypesRefWeakFirst.from_alipay_dict(value)
+    @property
+    def demo_empty(self):
+        return self._demo_empty
+
+    @demo_empty.setter
+    def demo_empty(self, value):
+        self._demo_empty = value
+    @property
+    def demo_other_value(self):
+        return self._demo_other_value
+
+    @demo_other_value.setter
+    def demo_other_value(self, value):
+        self._demo_other_value = value
     @property
     def open_id(self):
         return self._open_id
@@ -48,11 +72,26 @@ class RainyComplexTypesTheFourteen(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.demo:
+            if hasattr(self.demo, 'to_alipay_dict'):
+                params['demo'] = self.demo.to_alipay_dict()
+            else:
+                params['demo'] = self.demo
         if self.demo_case:
             if hasattr(self.demo_case, 'to_alipay_dict'):
                 params['demo_case'] = self.demo_case.to_alipay_dict()
             else:
                 params['demo_case'] = self.demo_case
+        if self.demo_empty:
+            if hasattr(self.demo_empty, 'to_alipay_dict'):
+                params['demo_empty'] = self.demo_empty.to_alipay_dict()
+            else:
+                params['demo_empty'] = self.demo_empty
+        if self.demo_other_value:
+            if hasattr(self.demo_other_value, 'to_alipay_dict'):
+                params['demo_other_value'] = self.demo_other_value.to_alipay_dict()
+            else:
+                params['demo_other_value'] = self.demo_other_value
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -75,8 +114,14 @@ class RainyComplexTypesTheFourteen(object):
         if not d:
             return None
         o = RainyComplexTypesTheFourteen()
+        if 'demo' in d:
+            o.demo = d['demo']
         if 'demo_case' in d:
             o.demo_case = d['demo_case']
+        if 'demo_empty' in d:
+            o.demo_empty = d['demo_empty']
+        if 'demo_other_value' in d:
+            o.demo_other_value = d['demo_other_value']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'weak_ref' in d:

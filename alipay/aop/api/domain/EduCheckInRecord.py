@@ -10,10 +10,13 @@ class EduCheckInRecord(object):
     def __init__(self):
         self._check_in_picture = None
         self._check_in_result = None
+        self._check_in_source_type = None
         self._check_in_time = None
         self._check_in_type = None
         self._employee_no = None
         self._inst_id = None
+        self._latitude = None
+        self._longitude = None
         self._name = None
         self._node_id = None
         self._node_name = None
@@ -36,6 +39,13 @@ class EduCheckInRecord(object):
     @check_in_result.setter
     def check_in_result(self, value):
         self._check_in_result = value
+    @property
+    def check_in_source_type(self):
+        return self._check_in_source_type
+
+    @check_in_source_type.setter
+    def check_in_source_type(self, value):
+        self._check_in_source_type = value
     @property
     def check_in_time(self):
         return self._check_in_time
@@ -64,6 +74,20 @@ class EduCheckInRecord(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
     @property
     def name(self):
         return self._name
@@ -127,6 +151,11 @@ class EduCheckInRecord(object):
                 params['check_in_result'] = self.check_in_result.to_alipay_dict()
             else:
                 params['check_in_result'] = self.check_in_result
+        if self.check_in_source_type:
+            if hasattr(self.check_in_source_type, 'to_alipay_dict'):
+                params['check_in_source_type'] = self.check_in_source_type.to_alipay_dict()
+            else:
+                params['check_in_source_type'] = self.check_in_source_type
         if self.check_in_time:
             if hasattr(self.check_in_time, 'to_alipay_dict'):
                 params['check_in_time'] = self.check_in_time.to_alipay_dict()
@@ -147,6 +176,16 @@ class EduCheckInRecord(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -193,6 +232,8 @@ class EduCheckInRecord(object):
             o.check_in_picture = d['check_in_picture']
         if 'check_in_result' in d:
             o.check_in_result = d['check_in_result']
+        if 'check_in_source_type' in d:
+            o.check_in_source_type = d['check_in_source_type']
         if 'check_in_time' in d:
             o.check_in_time = d['check_in_time']
         if 'check_in_type' in d:
@@ -201,6 +242,10 @@ class EduCheckInRecord(object):
             o.employee_no = d['employee_no']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
         if 'name' in d:
             o.name = d['name']
         if 'node_id' in d:

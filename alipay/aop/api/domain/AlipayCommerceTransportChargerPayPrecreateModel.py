@@ -9,10 +9,13 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
 
     def __init__(self):
         self._connector_id = None
+        self._latitude = None
+        self._longitude = None
         self._open_id = None
         self._order_type = None
         self._out_trade_no = None
         self._station_id = None
+        self._station_name = None
         self._subject = None
         self._user_id = None
         self._vin = None
@@ -24,6 +27,20 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
     @connector_id.setter
     def connector_id(self, value):
         self._connector_id = value
+    @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
     @property
     def open_id(self):
         return self._open_id
@@ -52,6 +69,13 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
     @station_id.setter
     def station_id(self, value):
         self._station_id = value
+    @property
+    def station_name(self):
+        return self._station_name
+
+    @station_name.setter
+    def station_name(self, value):
+        self._station_name = value
     @property
     def subject(self):
         return self._subject
@@ -82,6 +106,16 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
                 params['connector_id'] = self.connector_id.to_alipay_dict()
             else:
                 params['connector_id'] = self.connector_id
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -102,6 +136,11 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
                 params['station_id'] = self.station_id.to_alipay_dict()
             else:
                 params['station_id'] = self.station_id
+        if self.station_name:
+            if hasattr(self.station_name, 'to_alipay_dict'):
+                params['station_name'] = self.station_name.to_alipay_dict()
+            else:
+                params['station_name'] = self.station_name
         if self.subject:
             if hasattr(self.subject, 'to_alipay_dict'):
                 params['subject'] = self.subject.to_alipay_dict()
@@ -126,6 +165,10 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
         o = AlipayCommerceTransportChargerPayPrecreateModel()
         if 'connector_id' in d:
             o.connector_id = d['connector_id']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_type' in d:
@@ -134,6 +177,8 @@ class AlipayCommerceTransportChargerPayPrecreateModel(object):
             o.out_trade_no = d['out_trade_no']
         if 'station_id' in d:
             o.station_id = d['station_id']
+        if 'station_name' in d:
+            o.station_name = d['station_name']
         if 'subject' in d:
             o.subject = d['subject']
         if 'user_id' in d:

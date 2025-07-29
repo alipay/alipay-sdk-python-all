@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.CreativeActionProperty import CreativeActionProperty
 from alipay.aop.api.domain.CreativeMaterial import CreativeMaterial
+from alipay.aop.api.domain.CreativeRefuseExtendInfoRes import CreativeRefuseExtendInfoRes
 
 
 class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
@@ -15,7 +16,9 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
         self._action_type = None
         self._ad_id = None
         self._ad_name = None
+        self._audit_refuse_reason = None
         self._click_track_url = None
+        self._creative_biz_status = None
         self._gmt_modified = None
         self._group_id = None
         self._group_name = None
@@ -26,6 +29,9 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
         self._plan_id = None
         self._plan_name = None
         self._principal_id = None
+        self._punish_reason = None
+        self._refuse_extend_info_res = None
+        self._risk_status = None
         self._scene_code = None
         self._smart_switch = None
         self._status = None
@@ -66,12 +72,26 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
     def ad_name(self, value):
         self._ad_name = value
     @property
+    def audit_refuse_reason(self):
+        return self._audit_refuse_reason
+
+    @audit_refuse_reason.setter
+    def audit_refuse_reason(self, value):
+        self._audit_refuse_reason = value
+    @property
     def click_track_url(self):
         return self._click_track_url
 
     @click_track_url.setter
     def click_track_url(self, value):
         self._click_track_url = value
+    @property
+    def creative_biz_status(self):
+        return self._creative_biz_status
+
+    @creative_biz_status.setter
+    def creative_biz_status(self, value):
+        self._creative_biz_status = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -149,6 +169,30 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
     def principal_id(self, value):
         self._principal_id = value
     @property
+    def punish_reason(self):
+        return self._punish_reason
+
+    @punish_reason.setter
+    def punish_reason(self, value):
+        self._punish_reason = value
+    @property
+    def refuse_extend_info_res(self):
+        return self._refuse_extend_info_res
+
+    @refuse_extend_info_res.setter
+    def refuse_extend_info_res(self, value):
+        if isinstance(value, CreativeRefuseExtendInfoRes):
+            self._refuse_extend_info_res = value
+        else:
+            self._refuse_extend_info_res = CreativeRefuseExtendInfoRes.from_alipay_dict(value)
+    @property
+    def risk_status(self):
+        return self._risk_status
+
+    @risk_status.setter
+    def risk_status(self, value):
+        self._risk_status = value
+    @property
     def scene_code(self):
         return self._scene_code
 
@@ -187,8 +231,12 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
             self.ad_id = response['ad_id']
         if 'ad_name' in response:
             self.ad_name = response['ad_name']
+        if 'audit_refuse_reason' in response:
+            self.audit_refuse_reason = response['audit_refuse_reason']
         if 'click_track_url' in response:
             self.click_track_url = response['click_track_url']
+        if 'creative_biz_status' in response:
+            self.creative_biz_status = response['creative_biz_status']
         if 'gmt_modified' in response:
             self.gmt_modified = response['gmt_modified']
         if 'group_id' in response:
@@ -209,6 +257,12 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
             self.plan_name = response['plan_name']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'punish_reason' in response:
+            self.punish_reason = response['punish_reason']
+        if 'refuse_extend_info_res' in response:
+            self.refuse_extend_info_res = response['refuse_extend_info_res']
+        if 'risk_status' in response:
+            self.risk_status = response['risk_status']
         if 'scene_code' in response:
             self.scene_code = response['scene_code']
         if 'smart_switch' in response:

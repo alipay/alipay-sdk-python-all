@@ -20,6 +20,7 @@ from alipay.aop.api.domain.RentZstInfoDTO import RentZstInfoDTO
 class AlipayCommerceRentOrderCreateModel(object):
 
     def __init__(self):
+        self._activity_consult_id = None
         self._address_info = None
         self._buyer_id = None
         self._buyer_open_id = None
@@ -44,6 +45,13 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._trade_app_id = None
         self._zst_info = None
 
+    @property
+    def activity_consult_id(self):
+        return self._activity_consult_id
+
+    @activity_consult_id.setter
+    def activity_consult_id(self, value):
+        self._activity_consult_id = value
     @property
     def address_info(self):
         return self._address_info
@@ -248,6 +256,11 @@ class AlipayCommerceRentOrderCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_consult_id:
+            if hasattr(self.activity_consult_id, 'to_alipay_dict'):
+                params['activity_consult_id'] = self.activity_consult_id.to_alipay_dict()
+            else:
+                params['activity_consult_id'] = self.activity_consult_id
         if self.address_info:
             if hasattr(self.address_info, 'to_alipay_dict'):
                 params['address_info'] = self.address_info.to_alipay_dict()
@@ -375,6 +388,8 @@ class AlipayCommerceRentOrderCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceRentOrderCreateModel()
+        if 'activity_consult_id' in d:
+            o.activity_consult_id = d['activity_consult_id']
         if 'address_info' in d:
             o.address_info = d['address_info']
         if 'buyer_id' in d:

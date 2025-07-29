@@ -18,6 +18,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._doctor_out_name = None
         self._doctor_refuse_reason = None
         self._doctor_title = None
+        self._doctor_type = None
         self._first_reply = None
         self._gmt_adoption = None
         self._gmt_cancel = None
@@ -106,6 +107,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @doctor_title.setter
     def doctor_title(self, value):
         self._doctor_title = value
+    @property
+    def doctor_type(self):
+        return self._doctor_type
+
+    @doctor_type.setter
+    def doctor_type(self, value):
+        self._doctor_type = value
     @property
     def first_reply(self):
         return self._first_reply
@@ -279,6 +287,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['doctor_title'] = self.doctor_title.to_alipay_dict()
             else:
                 params['doctor_title'] = self.doctor_title
+        if self.doctor_type:
+            if hasattr(self.doctor_type, 'to_alipay_dict'):
+                params['doctor_type'] = self.doctor_type.to_alipay_dict()
+            else:
+                params['doctor_type'] = self.doctor_type
         if self.first_reply:
             if hasattr(self.first_reply, 'to_alipay_dict'):
                 params['first_reply'] = self.first_reply.to_alipay_dict()
@@ -391,6 +404,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.doctor_refuse_reason = d['doctor_refuse_reason']
         if 'doctor_title' in d:
             o.doctor_title = d['doctor_title']
+        if 'doctor_type' in d:
+            o.doctor_type = d['doctor_type']
         if 'first_reply' in d:
             o.first_reply = d['first_reply']
         if 'gmt_adoption' in d:

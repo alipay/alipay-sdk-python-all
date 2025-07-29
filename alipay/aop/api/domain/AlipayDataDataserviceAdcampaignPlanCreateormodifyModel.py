@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MarketTargetConfiguration import MarketTargetConfiguration
 
 
 class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
@@ -11,10 +12,12 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
         self._budget = None
         self._end_date = None
         self._market_target_code = None
+        self._market_target_config = None
         self._plan_id = None
         self._plan_name = None
         self._plan_unlimited_budget_switch = None
         self._principal_tag = None
+        self._rtb_freeze_order_id = None
         self._start_date = None
         self._time_schema = None
 
@@ -39,6 +42,16 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
     @market_target_code.setter
     def market_target_code(self, value):
         self._market_target_code = value
+    @property
+    def market_target_config(self):
+        return self._market_target_config
+
+    @market_target_config.setter
+    def market_target_config(self, value):
+        if isinstance(value, MarketTargetConfiguration):
+            self._market_target_config = value
+        else:
+            self._market_target_config = MarketTargetConfiguration.from_alipay_dict(value)
     @property
     def plan_id(self):
         return self._plan_id
@@ -67,6 +80,13 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
     @principal_tag.setter
     def principal_tag(self, value):
         self._principal_tag = value
+    @property
+    def rtb_freeze_order_id(self):
+        return self._rtb_freeze_order_id
+
+    @rtb_freeze_order_id.setter
+    def rtb_freeze_order_id(self, value):
+        self._rtb_freeze_order_id = value
     @property
     def start_date(self):
         return self._start_date
@@ -100,6 +120,11 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
                 params['market_target_code'] = self.market_target_code.to_alipay_dict()
             else:
                 params['market_target_code'] = self.market_target_code
+        if self.market_target_config:
+            if hasattr(self.market_target_config, 'to_alipay_dict'):
+                params['market_target_config'] = self.market_target_config.to_alipay_dict()
+            else:
+                params['market_target_config'] = self.market_target_config
         if self.plan_id:
             if hasattr(self.plan_id, 'to_alipay_dict'):
                 params['plan_id'] = self.plan_id.to_alipay_dict()
@@ -120,6 +145,11 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.rtb_freeze_order_id:
+            if hasattr(self.rtb_freeze_order_id, 'to_alipay_dict'):
+                params['rtb_freeze_order_id'] = self.rtb_freeze_order_id.to_alipay_dict()
+            else:
+                params['rtb_freeze_order_id'] = self.rtb_freeze_order_id
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -143,6 +173,8 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
             o.end_date = d['end_date']
         if 'market_target_code' in d:
             o.market_target_code = d['market_target_code']
+        if 'market_target_config' in d:
+            o.market_target_config = d['market_target_config']
         if 'plan_id' in d:
             o.plan_id = d['plan_id']
         if 'plan_name' in d:
@@ -151,6 +183,8 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
             o.plan_unlimited_budget_switch = d['plan_unlimited_budget_switch']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'rtb_freeze_order_id' in d:
+            o.rtb_freeze_order_id = d['rtb_freeze_order_id']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'time_schema' in d:

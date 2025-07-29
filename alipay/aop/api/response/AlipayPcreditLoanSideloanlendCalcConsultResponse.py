@@ -11,10 +11,13 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayPcreditLoanSideloanlendCalcConsultResponse, self).__init__()
+        self._admit = None
         self._coupon_code_list = None
         self._credit_quota = None
         self._daily_interest_rate = None
         self._extension = None
+        self._fail_reason_code = None
+        self._fail_reason_message = None
         self._fund_supplier = None
         self._installment_plan_list = None
         self._interest = None
@@ -28,6 +31,13 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
         self._surplus_quota = None
         self._total_amount = None
 
+    @property
+    def admit(self):
+        return self._admit
+
+    @admit.setter
+    def admit(self, value):
+        self._admit = value
     @property
     def coupon_code_list(self):
         return self._coupon_code_list
@@ -59,6 +69,20 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
     @extension.setter
     def extension(self, value):
         self._extension = value
+    @property
+    def fail_reason_code(self):
+        return self._fail_reason_code
+
+    @fail_reason_code.setter
+    def fail_reason_code(self, value):
+        self._fail_reason_code = value
+    @property
+    def fail_reason_message(self):
+        return self._fail_reason_message
+
+    @fail_reason_message.setter
+    def fail_reason_message(self, value):
+        self._fail_reason_message = value
     @property
     def fund_supplier(self):
         return self._fund_supplier
@@ -155,6 +179,8 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditLoanSideloanlendCalcConsultResponse, self).parse_response_content(response_content)
+        if 'admit' in response:
+            self.admit = response['admit']
         if 'coupon_code_list' in response:
             self.coupon_code_list = response['coupon_code_list']
         if 'credit_quota' in response:
@@ -163,6 +189,10 @@ class AlipayPcreditLoanSideloanlendCalcConsultResponse(AlipayResponse):
             self.daily_interest_rate = response['daily_interest_rate']
         if 'extension' in response:
             self.extension = response['extension']
+        if 'fail_reason_code' in response:
+            self.fail_reason_code = response['fail_reason_code']
+        if 'fail_reason_message' in response:
+            self.fail_reason_message = response['fail_reason_message']
         if 'fund_supplier' in response:
             self.fund_supplier = response['fund_supplier']
         if 'installment_plan_list' in response:

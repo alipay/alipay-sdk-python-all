@@ -10,6 +10,7 @@ class WalletMarketingRule(object):
     def __init__(self):
         self._ma_type = None
         self._ma_value = None
+        self._refund_marketing_account_no = None
         self._refund_marketing_amount = None
 
     @property
@@ -26,6 +27,13 @@ class WalletMarketingRule(object):
     @ma_value.setter
     def ma_value(self, value):
         self._ma_value = value
+    @property
+    def refund_marketing_account_no(self):
+        return self._refund_marketing_account_no
+
+    @refund_marketing_account_no.setter
+    def refund_marketing_account_no(self, value):
+        self._refund_marketing_account_no = value
     @property
     def refund_marketing_amount(self):
         return self._refund_marketing_amount
@@ -47,6 +55,11 @@ class WalletMarketingRule(object):
                 params['ma_value'] = self.ma_value.to_alipay_dict()
             else:
                 params['ma_value'] = self.ma_value
+        if self.refund_marketing_account_no:
+            if hasattr(self.refund_marketing_account_no, 'to_alipay_dict'):
+                params['refund_marketing_account_no'] = self.refund_marketing_account_no.to_alipay_dict()
+            else:
+                params['refund_marketing_account_no'] = self.refund_marketing_account_no
         if self.refund_marketing_amount:
             if hasattr(self.refund_marketing_amount, 'to_alipay_dict'):
                 params['refund_marketing_amount'] = self.refund_marketing_amount.to_alipay_dict()
@@ -63,6 +76,8 @@ class WalletMarketingRule(object):
             o.ma_type = d['ma_type']
         if 'ma_value' in d:
             o.ma_value = d['ma_value']
+        if 'refund_marketing_account_no' in d:
+            o.refund_marketing_account_no = d['refund_marketing_account_no']
         if 'refund_marketing_amount' in d:
             o.refund_marketing_amount = d['refund_marketing_amount']
         return o

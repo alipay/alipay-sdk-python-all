@@ -9,6 +9,7 @@ from alipay.aop.api.domain.SalesSolutionExt import SalesSolutionExt
 class DeviceExtAttribute(object):
 
     def __init__(self):
+        self._accessory_sn = None
         self._external_id = None
         self._external_shop_id = None
         self._isv_access_token = None
@@ -22,6 +23,13 @@ class DeviceExtAttribute(object):
         self._spi_app_id = None
         self._terminal_bind_info = None
 
+    @property
+    def accessory_sn(self):
+        return self._accessory_sn
+
+    @accessory_sn.setter
+    def accessory_sn(self, value):
+        self._accessory_sn = value
     @property
     def external_id(self):
         return self._external_id
@@ -113,6 +121,11 @@ class DeviceExtAttribute(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accessory_sn:
+            if hasattr(self.accessory_sn, 'to_alipay_dict'):
+                params['accessory_sn'] = self.accessory_sn.to_alipay_dict()
+            else:
+                params['accessory_sn'] = self.accessory_sn
         if self.external_id:
             if hasattr(self.external_id, 'to_alipay_dict'):
                 params['external_id'] = self.external_id.to_alipay_dict()
@@ -180,6 +193,8 @@ class DeviceExtAttribute(object):
         if not d:
             return None
         o = DeviceExtAttribute()
+        if 'accessory_sn' in d:
+            o.accessory_sn = d['accessory_sn']
         if 'external_id' in d:
             o.external_id = d['external_id']
         if 'external_shop_id' in d:

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Credit import Credit
 from alipay.aop.api.domain.CarfinStatusNotifyOther import CarfinStatusNotifyOther
+from alipay.aop.api.domain.SupplementCategoryInfo import SupplementCategoryInfo
 
 
 class XingheLendassistCarfinApplystatusNotifyModel(object):
@@ -36,6 +37,7 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._repay_type = None
         self._service_fee_rate = None
         self._status = None
+        self._supplement_category_list = None
         self._supplement_info_flag = None
         self._user_tier = None
         self._valuate_price = None
@@ -232,6 +234,19 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def status(self, value):
         self._status = value
     @property
+    def supplement_category_list(self):
+        return self._supplement_category_list
+
+    @supplement_category_list.setter
+    def supplement_category_list(self, value):
+        if isinstance(value, list):
+            self._supplement_category_list = list()
+            for i in value:
+                if isinstance(i, SupplementCategoryInfo):
+                    self._supplement_category_list.append(i)
+                else:
+                    self._supplement_category_list.append(SupplementCategoryInfo.from_alipay_dict(i))
+    @property
     def supplement_info_flag(self):
         return self._supplement_info_flag
 
@@ -391,6 +406,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.supplement_category_list:
+            if isinstance(self.supplement_category_list, list):
+                for i in range(0, len(self.supplement_category_list)):
+                    element = self.supplement_category_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.supplement_category_list[i] = element.to_alipay_dict()
+            if hasattr(self.supplement_category_list, 'to_alipay_dict'):
+                params['supplement_category_list'] = self.supplement_category_list.to_alipay_dict()
+            else:
+                params['supplement_category_list'] = self.supplement_category_list
         if self.supplement_info_flag:
             if hasattr(self.supplement_info_flag, 'to_alipay_dict'):
                 params['supplement_info_flag'] = self.supplement_info_flag.to_alipay_dict()
@@ -465,6 +490,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.service_fee_rate = d['service_fee_rate']
         if 'status' in d:
             o.status = d['status']
+        if 'supplement_category_list' in d:
+            o.supplement_category_list = d['supplement_category_list']
         if 'supplement_info_flag' in d:
             o.supplement_info_flag = d['supplement_info_flag']
         if 'user_tier' in d:

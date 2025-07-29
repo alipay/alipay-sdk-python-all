@@ -10,6 +10,7 @@ class AssetReverseSupplierApplyDetail(object):
 
     def __init__(self):
         self._express_sn_details = None
+        self._reverse_supplier_type = None
         self._supplier_id = None
         self._supplier_pid = None
         self._warehouse_id = None
@@ -27,6 +28,13 @@ class AssetReverseSupplierApplyDetail(object):
                     self._express_sn_details.append(i)
                 else:
                     self._express_sn_details.append(AssetReverseSupplierApplyExpressSnDetails.from_alipay_dict(i))
+    @property
+    def reverse_supplier_type(self):
+        return self._reverse_supplier_type
+
+    @reverse_supplier_type.setter
+    def reverse_supplier_type(self, value):
+        self._reverse_supplier_type = value
     @property
     def supplier_id(self):
         return self._supplier_id
@@ -62,6 +70,11 @@ class AssetReverseSupplierApplyDetail(object):
                 params['express_sn_details'] = self.express_sn_details.to_alipay_dict()
             else:
                 params['express_sn_details'] = self.express_sn_details
+        if self.reverse_supplier_type:
+            if hasattr(self.reverse_supplier_type, 'to_alipay_dict'):
+                params['reverse_supplier_type'] = self.reverse_supplier_type.to_alipay_dict()
+            else:
+                params['reverse_supplier_type'] = self.reverse_supplier_type
         if self.supplier_id:
             if hasattr(self.supplier_id, 'to_alipay_dict'):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
@@ -86,6 +99,8 @@ class AssetReverseSupplierApplyDetail(object):
         o = AssetReverseSupplierApplyDetail()
         if 'express_sn_details' in d:
             o.express_sn_details = d['express_sn_details']
+        if 'reverse_supplier_type' in d:
+            o.reverse_supplier_type = d['reverse_supplier_type']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
         if 'supplier_pid' in d:

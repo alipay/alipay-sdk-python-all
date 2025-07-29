@@ -10,6 +10,7 @@ class AlipaySecurityRiskPolicyQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipaySecurityRiskPolicyQueryResponse, self).__init__()
         self._has_to_check = None
+        self._inner_system_code = None
         self._level = None
         self._query_success = None
         self._security_id = None
@@ -26,6 +27,16 @@ class AlipaySecurityRiskPolicyQueryResponse(AlipayResponse):
     @has_to_check.setter
     def has_to_check(self, value):
         self._has_to_check = value
+    @property
+    def inner_system_code(self):
+        return self._inner_system_code
+
+    @inner_system_code.setter
+    def inner_system_code(self, value):
+        if isinstance(value, list):
+            self._inner_system_code = list()
+            for i in value:
+                self._inner_system_code.append(i)
     @property
     def level(self):
         return self._level
@@ -87,6 +98,8 @@ class AlipaySecurityRiskPolicyQueryResponse(AlipayResponse):
         response = super(AlipaySecurityRiskPolicyQueryResponse, self).parse_response_content(response_content)
         if 'has_to_check' in response:
             self.has_to_check = response['has_to_check']
+        if 'inner_system_code' in response:
+            self.inner_system_code = response['inner_system_code']
         if 'level' in response:
             self.level = response['level']
         if 'query_success' in response:

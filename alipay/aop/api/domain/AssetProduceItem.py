@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OptionalItemInfo import OptionalItemInfo
 
 
 class AssetProduceItem(object):
@@ -31,6 +32,8 @@ class AssetProduceItem(object):
         self._logistics_name = None
         self._logistics_no = None
         self._memo = None
+        self._optional_item_flag = None
+        self._optional_item_infos = None
         self._ou_code = None
         self._ou_name = None
         self._parent_template_id = None
@@ -217,6 +220,26 @@ class AssetProduceItem(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def optional_item_flag(self):
+        return self._optional_item_flag
+
+    @optional_item_flag.setter
+    def optional_item_flag(self, value):
+        self._optional_item_flag = value
+    @property
+    def optional_item_infos(self):
+        return self._optional_item_infos
+
+    @optional_item_infos.setter
+    def optional_item_infos(self, value):
+        if isinstance(value, list):
+            self._optional_item_infos = list()
+            for i in value:
+                if isinstance(i, OptionalItemInfo):
+                    self._optional_item_infos.append(i)
+                else:
+                    self._optional_item_infos.append(OptionalItemInfo.from_alipay_dict(i))
     @property
     def ou_code(self):
         return self._ou_code
@@ -488,6 +511,21 @@ class AssetProduceItem(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.optional_item_flag:
+            if hasattr(self.optional_item_flag, 'to_alipay_dict'):
+                params['optional_item_flag'] = self.optional_item_flag.to_alipay_dict()
+            else:
+                params['optional_item_flag'] = self.optional_item_flag
+        if self.optional_item_infos:
+            if isinstance(self.optional_item_infos, list):
+                for i in range(0, len(self.optional_item_infos)):
+                    element = self.optional_item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.optional_item_infos, 'to_alipay_dict'):
+                params['optional_item_infos'] = self.optional_item_infos.to_alipay_dict()
+            else:
+                params['optional_item_infos'] = self.optional_item_infos
         if self.ou_code:
             if hasattr(self.ou_code, 'to_alipay_dict'):
                 params['ou_code'] = self.ou_code.to_alipay_dict()
@@ -646,6 +684,10 @@ class AssetProduceItem(object):
             o.logistics_no = d['logistics_no']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'optional_item_flag' in d:
+            o.optional_item_flag = d['optional_item_flag']
+        if 'optional_item_infos' in d:
+            o.optional_item_infos = d['optional_item_infos']
         if 'ou_code' in d:
             o.ou_code = d['ou_code']
         if 'ou_name' in d:

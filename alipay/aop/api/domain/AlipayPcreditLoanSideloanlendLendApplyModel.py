@@ -11,12 +11,14 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
         self._alipay_user_id = None
         self._bank_card_id = None
         self._coupon_code_list = None
+        self._credit_apply_no = None
         self._extension = None
         self._loan_amount = None
         self._loan_apply_no = None
         self._loan_purpose = None
         self._loan_term = None
         self._loan_term_unit = None
+        self._loan_type = None
         self._open_id = None
         self._product_code = None
         self._promotion_amount = None
@@ -48,6 +50,13 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             self._coupon_code_list = list()
             for i in value:
                 self._coupon_code_list.append(i)
+    @property
+    def credit_apply_no(self):
+        return self._credit_apply_no
+
+    @credit_apply_no.setter
+    def credit_apply_no(self, value):
+        self._credit_apply_no = value
     @property
     def extension(self):
         return self._extension
@@ -90,6 +99,13 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     @loan_term_unit.setter
     def loan_term_unit(self, value):
         self._loan_term_unit = value
+    @property
+    def loan_type(self):
+        return self._loan_type
+
+    @loan_type.setter
+    def loan_type(self, value):
+        self._loan_type = value
     @property
     def open_id(self):
         return self._open_id
@@ -156,6 +172,11 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['coupon_code_list'] = self.coupon_code_list.to_alipay_dict()
             else:
                 params['coupon_code_list'] = self.coupon_code_list
+        if self.credit_apply_no:
+            if hasattr(self.credit_apply_no, 'to_alipay_dict'):
+                params['credit_apply_no'] = self.credit_apply_no.to_alipay_dict()
+            else:
+                params['credit_apply_no'] = self.credit_apply_no
         if self.extension:
             if hasattr(self.extension, 'to_alipay_dict'):
                 params['extension'] = self.extension.to_alipay_dict()
@@ -186,6 +207,11 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['loan_term_unit'] = self.loan_term_unit.to_alipay_dict()
             else:
                 params['loan_term_unit'] = self.loan_term_unit
+        if self.loan_type:
+            if hasattr(self.loan_type, 'to_alipay_dict'):
+                params['loan_type'] = self.loan_type.to_alipay_dict()
+            else:
+                params['loan_type'] = self.loan_type
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -229,6 +255,8 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             o.bank_card_id = d['bank_card_id']
         if 'coupon_code_list' in d:
             o.coupon_code_list = d['coupon_code_list']
+        if 'credit_apply_no' in d:
+            o.credit_apply_no = d['credit_apply_no']
         if 'extension' in d:
             o.extension = d['extension']
         if 'loan_amount' in d:
@@ -241,6 +269,8 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             o.loan_term = d['loan_term']
         if 'loan_term_unit' in d:
             o.loan_term_unit = d['loan_term_unit']
+        if 'loan_type' in d:
+            o.loan_type = d['loan_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'product_code' in d:

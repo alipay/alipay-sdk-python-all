@@ -19,6 +19,7 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         self._attrs = None
         self._auto_marketing_delivery = None
         self._barcode = None
+        self._business_model = None
         self._category_id = None
         self._create_time = None
         self._desc = None
@@ -72,6 +73,13 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     @barcode.setter
     def barcode(self, value):
         self._barcode = value
+    @property
+    def business_model(self):
+        return self._business_model
+
+    @business_model.setter
+    def business_model(self, value):
+        self._business_model = value
     @property
     def category_id(self):
         return self._category_id
@@ -289,6 +297,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.auto_marketing_delivery = response['auto_marketing_delivery']
         if 'barcode' in response:
             self.barcode = response['barcode']
+        if 'business_model' in response:
+            self.business_model = response['business_model']
         if 'category_id' in response:
             self.category_id = response['category_id']
         if 'create_time' in response:

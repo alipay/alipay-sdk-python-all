@@ -29,6 +29,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._pay_trade_no = None
         self._person_list = None
         self._policy_no = None
+        self._policy_type = None
         self._premium = None
         self._prod_name = None
         self._prod_no = None
@@ -188,6 +189,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
     @policy_no.setter
     def policy_no(self, value):
         self._policy_no = value
+    @property
+    def policy_type(self):
+        return self._policy_type
+
+    @policy_type.setter
+    def policy_type(self, value):
+        self._policy_type = value
     @property
     def premium(self):
         return self._premium
@@ -395,6 +403,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['policy_no'] = self.policy_no.to_alipay_dict()
             else:
                 params['policy_no'] = self.policy_no
+        if self.policy_type:
+            if hasattr(self.policy_type, 'to_alipay_dict'):
+                params['policy_type'] = self.policy_type.to_alipay_dict()
+            else:
+                params['policy_type'] = self.policy_type
         if self.premium:
             if hasattr(self.premium, 'to_alipay_dict'):
                 params['premium'] = self.premium.to_alipay_dict()
@@ -508,6 +521,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.person_list = d['person_list']
         if 'policy_no' in d:
             o.policy_no = d['policy_no']
+        if 'policy_type' in d:
+            o.policy_type = d['policy_type']
         if 'premium' in d:
             o.premium = d['premium']
         if 'prod_name' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LogisticsInfo import LogisticsInfo
+from alipay.aop.api.domain.OptionalItemInfo import OptionalItemInfo
 
 
 class AssetDeliveryDetail(object):
@@ -14,6 +15,7 @@ class AssetDeliveryDetail(object):
         self._batch_no = None
         self._ext_info = None
         self._logistics_infos = None
+        self._optional_item_infos = None
         self._voucher_time = None
 
     @property
@@ -58,6 +60,19 @@ class AssetDeliveryDetail(object):
                 else:
                     self._logistics_infos.append(LogisticsInfo.from_alipay_dict(i))
     @property
+    def optional_item_infos(self):
+        return self._optional_item_infos
+
+    @optional_item_infos.setter
+    def optional_item_infos(self, value):
+        if isinstance(value, list):
+            self._optional_item_infos = list()
+            for i in value:
+                if isinstance(i, OptionalItemInfo):
+                    self._optional_item_infos.append(i)
+                else:
+                    self._optional_item_infos.append(OptionalItemInfo.from_alipay_dict(i))
+    @property
     def voucher_time(self):
         return self._voucher_time
 
@@ -98,6 +113,16 @@ class AssetDeliveryDetail(object):
                 params['logistics_infos'] = self.logistics_infos.to_alipay_dict()
             else:
                 params['logistics_infos'] = self.logistics_infos
+        if self.optional_item_infos:
+            if isinstance(self.optional_item_infos, list):
+                for i in range(0, len(self.optional_item_infos)):
+                    element = self.optional_item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.optional_item_infos, 'to_alipay_dict'):
+                params['optional_item_infos'] = self.optional_item_infos.to_alipay_dict()
+            else:
+                params['optional_item_infos'] = self.optional_item_infos
         if self.voucher_time:
             if hasattr(self.voucher_time, 'to_alipay_dict'):
                 params['voucher_time'] = self.voucher_time.to_alipay_dict()
@@ -120,6 +145,8 @@ class AssetDeliveryDetail(object):
             o.ext_info = d['ext_info']
         if 'logistics_infos' in d:
             o.logistics_infos = d['logistics_infos']
+        if 'optional_item_infos' in d:
+            o.optional_item_infos = d['optional_item_infos']
         if 'voucher_time' in d:
             o.voucher_time = d['voucher_time']
         return o

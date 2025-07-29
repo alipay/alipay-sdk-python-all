@@ -17,6 +17,8 @@ class RecycleAssessProductVO(object):
         self._out_sku_name = None
         self._product_category = None
         self._product_code = None
+        self._product_logo = None
+        self._product_name = None
         self._unit_type = None
 
     @property
@@ -83,6 +85,20 @@ class RecycleAssessProductVO(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def product_logo(self):
+        return self._product_logo
+
+    @product_logo.setter
+    def product_logo(self, value):
+        self._product_logo = value
+    @property
+    def product_name(self):
+        return self._product_name
+
+    @product_name.setter
+    def product_name(self, value):
+        self._product_name = value
+    @property
     def unit_type(self):
         return self._unit_type
 
@@ -138,6 +154,16 @@ class RecycleAssessProductVO(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.product_logo:
+            if hasattr(self.product_logo, 'to_alipay_dict'):
+                params['product_logo'] = self.product_logo.to_alipay_dict()
+            else:
+                params['product_logo'] = self.product_logo
+        if self.product_name:
+            if hasattr(self.product_name, 'to_alipay_dict'):
+                params['product_name'] = self.product_name.to_alipay_dict()
+            else:
+                params['product_name'] = self.product_name
         if self.unit_type:
             if hasattr(self.unit_type, 'to_alipay_dict'):
                 params['unit_type'] = self.unit_type.to_alipay_dict()
@@ -168,6 +194,10 @@ class RecycleAssessProductVO(object):
             o.product_category = d['product_category']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'product_logo' in d:
+            o.product_logo = d['product_logo']
+        if 'product_name' in d:
+            o.product_name = d['product_name']
         if 'unit_type' in d:
             o.unit_type = d['unit_type']
         return o

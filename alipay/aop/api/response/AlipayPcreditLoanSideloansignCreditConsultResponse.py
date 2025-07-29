@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.GrantBankCard import GrantBankCard
 from alipay.aop.api.domain.InstitutionVO import InstitutionVO
 
 
@@ -13,6 +14,7 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
         self._admit = None
         self._alipay_desensitize_login_id = None
         self._cool_off_type = None
+        self._default_bank_card = None
         self._extension = None
         self._fail_reason_code = None
         self._fail_reason_message = None
@@ -45,6 +47,16 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
     @cool_off_type.setter
     def cool_off_type(self, value):
         self._cool_off_type = value
+    @property
+    def default_bank_card(self):
+        return self._default_bank_card
+
+    @default_bank_card.setter
+    def default_bank_card(self, value):
+        if isinstance(value, GrantBankCard):
+            self._default_bank_card = value
+        else:
+            self._default_bank_card = GrantBankCard.from_alipay_dict(value)
     @property
     def extension(self):
         return self._extension
@@ -127,6 +139,8 @@ class AlipayPcreditLoanSideloansignCreditConsultResponse(AlipayResponse):
             self.alipay_desensitize_login_id = response['alipay_desensitize_login_id']
         if 'cool_off_type' in response:
             self.cool_off_type = response['cool_off_type']
+        if 'default_bank_card' in response:
+            self.default_bank_card = response['default_bank_card']
         if 'extension' in response:
             self.extension = response['extension']
         if 'fail_reason_code' in response:

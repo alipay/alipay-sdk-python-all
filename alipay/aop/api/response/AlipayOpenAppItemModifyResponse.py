@@ -10,10 +10,18 @@ class AlipayOpenAppItemModifyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOpenAppItemModifyResponse, self).__init__()
+        self._business_model = None
         self._item_id = None
         self._out_item_id = None
         self._skus = None
 
+    @property
+    def business_model(self):
+        return self._business_model
+
+    @business_model.setter
+    def business_model(self, value):
+        self._business_model = value
     @property
     def item_id(self):
         return self._item_id
@@ -44,6 +52,8 @@ class AlipayOpenAppItemModifyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenAppItemModifyResponse, self).parse_response_content(response_content)
+        if 'business_model' in response:
+            self.business_model = response['business_model']
         if 'item_id' in response:
             self.item_id = response['item_id']
         if 'out_item_id' in response:

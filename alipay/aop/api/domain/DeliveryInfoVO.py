@@ -10,6 +10,7 @@ class DeliveryInfoVO(object):
 
     def __init__(self):
         self._delivery_id = None
+        self._first_delivery_time = None
         self._item_info_list = None
         self._waybill_id = None
 
@@ -20,6 +21,13 @@ class DeliveryInfoVO(object):
     @delivery_id.setter
     def delivery_id(self, value):
         self._delivery_id = value
+    @property
+    def first_delivery_time(self):
+        return self._first_delivery_time
+
+    @first_delivery_time.setter
+    def first_delivery_time(self, value):
+        self._first_delivery_time = value
     @property
     def item_info_list(self):
         return self._item_info_list
@@ -49,6 +57,11 @@ class DeliveryInfoVO(object):
                 params['delivery_id'] = self.delivery_id.to_alipay_dict()
             else:
                 params['delivery_id'] = self.delivery_id
+        if self.first_delivery_time:
+            if hasattr(self.first_delivery_time, 'to_alipay_dict'):
+                params['first_delivery_time'] = self.first_delivery_time.to_alipay_dict()
+            else:
+                params['first_delivery_time'] = self.first_delivery_time
         if self.item_info_list:
             if isinstance(self.item_info_list, list):
                 for i in range(0, len(self.item_info_list)):
@@ -73,6 +86,8 @@ class DeliveryInfoVO(object):
         o = DeliveryInfoVO()
         if 'delivery_id' in d:
             o.delivery_id = d['delivery_id']
+        if 'first_delivery_time' in d:
+            o.first_delivery_time = d['first_delivery_time']
         if 'item_info_list' in d:
             o.item_info_list = d['item_info_list']
         if 'waybill_id' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.CreativePageListRes import CreativePageListRes
+from alipay.aop.api.domain.CreativePageListRes import CreativePageListRes
 from alipay.aop.api.domain.AdCamPagination import AdCamPagination
 
 
@@ -11,9 +12,23 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayDataDataserviceAdcampaignCreativeBatchqueryResponse, self).__init__()
+        self._content_list = None
         self._list = None
         self._pagination = None
 
+    @property
+    def content_list(self):
+        return self._content_list
+
+    @content_list.setter
+    def content_list(self, value):
+        if isinstance(value, list):
+            self._content_list = list()
+            for i in value:
+                if isinstance(i, CreativePageListRes):
+                    self._content_list.append(i)
+                else:
+                    self._content_list.append(CreativePageListRes.from_alipay_dict(i))
     @property
     def list(self):
         return self._list
@@ -37,6 +52,8 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayDataDataserviceAdcampaignCreativeBatchqueryResponse, self).parse_response_content(response_content)
+        if 'content_list' in response:
+            self.content_list = response['content_list']
         if 'list' in response:
             self.list = response['list']
         if 'pagination' in response:

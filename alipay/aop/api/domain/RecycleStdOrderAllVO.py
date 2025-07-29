@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RecycleStdOrderBaseVO import RecycleStdOrderBaseVO
 from alipay.aop.api.domain.RecycleDeliveryVO import RecycleDeliveryVO
+from alipay.aop.api.domain.RecycleStdOrderFundSubSidyVO import RecycleStdOrderFundSubSidyVO
+from alipay.aop.api.domain.RecycleStdOrderMerchantInfoVO import RecycleStdOrderMerchantInfoVO
 from alipay.aop.api.domain.RecycleDeliveryVO import RecycleDeliveryVO
 
 
@@ -13,6 +15,8 @@ class RecycleStdOrderAllVO(object):
     def __init__(self):
         self._order_base = None
         self._order_delivery = None
+        self._order_fund_subsidy = None
+        self._order_merchant = None
         self._order_sendback = None
 
     @property
@@ -35,6 +39,26 @@ class RecycleStdOrderAllVO(object):
             self._order_delivery = value
         else:
             self._order_delivery = RecycleDeliveryVO.from_alipay_dict(value)
+    @property
+    def order_fund_subsidy(self):
+        return self._order_fund_subsidy
+
+    @order_fund_subsidy.setter
+    def order_fund_subsidy(self, value):
+        if isinstance(value, RecycleStdOrderFundSubSidyVO):
+            self._order_fund_subsidy = value
+        else:
+            self._order_fund_subsidy = RecycleStdOrderFundSubSidyVO.from_alipay_dict(value)
+    @property
+    def order_merchant(self):
+        return self._order_merchant
+
+    @order_merchant.setter
+    def order_merchant(self, value):
+        if isinstance(value, RecycleStdOrderMerchantInfoVO):
+            self._order_merchant = value
+        else:
+            self._order_merchant = RecycleStdOrderMerchantInfoVO.from_alipay_dict(value)
     @property
     def order_sendback(self):
         return self._order_sendback
@@ -59,6 +83,16 @@ class RecycleStdOrderAllVO(object):
                 params['order_delivery'] = self.order_delivery.to_alipay_dict()
             else:
                 params['order_delivery'] = self.order_delivery
+        if self.order_fund_subsidy:
+            if hasattr(self.order_fund_subsidy, 'to_alipay_dict'):
+                params['order_fund_subsidy'] = self.order_fund_subsidy.to_alipay_dict()
+            else:
+                params['order_fund_subsidy'] = self.order_fund_subsidy
+        if self.order_merchant:
+            if hasattr(self.order_merchant, 'to_alipay_dict'):
+                params['order_merchant'] = self.order_merchant.to_alipay_dict()
+            else:
+                params['order_merchant'] = self.order_merchant
         if self.order_sendback:
             if hasattr(self.order_sendback, 'to_alipay_dict'):
                 params['order_sendback'] = self.order_sendback.to_alipay_dict()
@@ -75,6 +109,10 @@ class RecycleStdOrderAllVO(object):
             o.order_base = d['order_base']
         if 'order_delivery' in d:
             o.order_delivery = d['order_delivery']
+        if 'order_fund_subsidy' in d:
+            o.order_fund_subsidy = d['order_fund_subsidy']
+        if 'order_merchant' in d:
+            o.order_merchant = d['order_merchant']
         if 'order_sendback' in d:
             o.order_sendback = d['order_sendback']
         return o

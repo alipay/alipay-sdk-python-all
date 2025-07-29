@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RentBuyerExtInfo import RentBuyerExtInfo
 from alipay.aop.api.domain.RentDeliveryExtInfo import RentDeliveryExtInfo
 from alipay.aop.api.domain.RentFinancingExtInfo import RentFinancingExtInfo
+from alipay.aop.api.domain.RentHistoricalAssetFinancingExtInfoDTO import RentHistoricalAssetFinancingExtInfoDTO
 from alipay.aop.api.domain.RentItemExtInfo import RentItemExtInfo
 from alipay.aop.api.domain.RentOrderExtInfo import RentOrderExtInfo
 
@@ -16,6 +17,7 @@ class RentExtInfo(object):
         self._buyer_ext_info = None
         self._delivery_ext_info = None
         self._financing_ext_info = None
+        self._historical_asset_financing_ext_info = None
         self._item_ext_info = None
         self._order_ext_info = None
 
@@ -52,6 +54,16 @@ class RentExtInfo(object):
                     self._financing_ext_info.append(i)
                 else:
                     self._financing_ext_info.append(RentFinancingExtInfo.from_alipay_dict(i))
+    @property
+    def historical_asset_financing_ext_info(self):
+        return self._historical_asset_financing_ext_info
+
+    @historical_asset_financing_ext_info.setter
+    def historical_asset_financing_ext_info(self, value):
+        if isinstance(value, RentHistoricalAssetFinancingExtInfoDTO):
+            self._historical_asset_financing_ext_info = value
+        else:
+            self._historical_asset_financing_ext_info = RentHistoricalAssetFinancingExtInfoDTO.from_alipay_dict(value)
     @property
     def item_ext_info(self):
         return self._item_ext_info
@@ -96,6 +108,11 @@ class RentExtInfo(object):
                 params['financing_ext_info'] = self.financing_ext_info.to_alipay_dict()
             else:
                 params['financing_ext_info'] = self.financing_ext_info
+        if self.historical_asset_financing_ext_info:
+            if hasattr(self.historical_asset_financing_ext_info, 'to_alipay_dict'):
+                params['historical_asset_financing_ext_info'] = self.historical_asset_financing_ext_info.to_alipay_dict()
+            else:
+                params['historical_asset_financing_ext_info'] = self.historical_asset_financing_ext_info
         if self.item_ext_info:
             if hasattr(self.item_ext_info, 'to_alipay_dict'):
                 params['item_ext_info'] = self.item_ext_info.to_alipay_dict()
@@ -119,6 +136,8 @@ class RentExtInfo(object):
             o.delivery_ext_info = d['delivery_ext_info']
         if 'financing_ext_info' in d:
             o.financing_ext_info = d['financing_ext_info']
+        if 'historical_asset_financing_ext_info' in d:
+            o.historical_asset_financing_ext_info = d['historical_asset_financing_ext_info']
         if 'item_ext_info' in d:
             o.item_ext_info = d['item_ext_info']
         if 'order_ext_info' in d:

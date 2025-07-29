@@ -16,9 +16,11 @@ class AlipayCommerceHousingApartmentAddModel(object):
         self._apartment_services = None
         self._apartment_video = None
         self._apartment_vr = None
+        self._bath_room = None
         self._bed_room = None
         self._business_district = None
         self._city_code = None
+        self._construction_year = None
         self._contact_person = None
         self._contact_person_phone = None
         self._contact_persons_photo = None
@@ -32,8 +34,12 @@ class AlipayCommerceHousingApartmentAddModel(object):
         self._house_structure = None
         self._housing_type = None
         self._intentional_application = None
+        self._kitchen = None
+        self._living_room = None
         self._orientation = None
         self._other = None
+        self._owner_id = None
+        self._owner_name = None
         self._page = None
         self._property_description = None
         self._property_features = None
@@ -47,6 +53,7 @@ class AlipayCommerceHousingApartmentAddModel(object):
         self._status = None
         self._usable_area_end = None
         self._usable_area_start = None
+        self._verification_code = None
         self._viewing_time = None
 
     @property
@@ -121,6 +128,13 @@ class AlipayCommerceHousingApartmentAddModel(object):
     def apartment_vr(self, value):
         self._apartment_vr = value
     @property
+    def bath_room(self):
+        return self._bath_room
+
+    @bath_room.setter
+    def bath_room(self, value):
+        self._bath_room = value
+    @property
     def bed_room(self):
         return self._bed_room
 
@@ -141,6 +155,13 @@ class AlipayCommerceHousingApartmentAddModel(object):
     @city_code.setter
     def city_code(self, value):
         self._city_code = value
+    @property
+    def construction_year(self):
+        return self._construction_year
+
+    @construction_year.setter
+    def construction_year(self, value):
+        self._construction_year = value
     @property
     def contact_person(self):
         return self._contact_person
@@ -236,6 +257,20 @@ class AlipayCommerceHousingApartmentAddModel(object):
     def intentional_application(self, value):
         self._intentional_application = value
     @property
+    def kitchen(self):
+        return self._kitchen
+
+    @kitchen.setter
+    def kitchen(self, value):
+        self._kitchen = value
+    @property
+    def living_room(self):
+        return self._living_room
+
+    @living_room.setter
+    def living_room(self, value):
+        self._living_room = value
+    @property
     def orientation(self):
         return self._orientation
 
@@ -249,6 +284,20 @@ class AlipayCommerceHousingApartmentAddModel(object):
     @other.setter
     def other(self, value):
         self._other = value
+    @property
+    def owner_id(self):
+        return self._owner_id
+
+    @owner_id.setter
+    def owner_id(self, value):
+        self._owner_id = value
+    @property
+    def owner_name(self):
+        return self._owner_name
+
+    @owner_name.setter
+    def owner_name(self, value):
+        self._owner_name = value
     @property
     def page(self):
         return self._page
@@ -344,6 +393,13 @@ class AlipayCommerceHousingApartmentAddModel(object):
     def usable_area_start(self, value):
         self._usable_area_start = value
     @property
+    def verification_code(self):
+        return self._verification_code
+
+    @verification_code.setter
+    def verification_code(self, value):
+        self._verification_code = value
+    @property
     def viewing_time(self):
         return self._viewing_time
 
@@ -422,6 +478,11 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['apartment_vr'] = self.apartment_vr.to_alipay_dict()
             else:
                 params['apartment_vr'] = self.apartment_vr
+        if self.bath_room:
+            if hasattr(self.bath_room, 'to_alipay_dict'):
+                params['bath_room'] = self.bath_room.to_alipay_dict()
+            else:
+                params['bath_room'] = self.bath_room
         if self.bed_room:
             if hasattr(self.bed_room, 'to_alipay_dict'):
                 params['bed_room'] = self.bed_room.to_alipay_dict()
@@ -437,6 +498,11 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['city_code'] = self.city_code.to_alipay_dict()
             else:
                 params['city_code'] = self.city_code
+        if self.construction_year:
+            if hasattr(self.construction_year, 'to_alipay_dict'):
+                params['construction_year'] = self.construction_year.to_alipay_dict()
+            else:
+                params['construction_year'] = self.construction_year
         if self.contact_person:
             if hasattr(self.contact_person, 'to_alipay_dict'):
                 params['contact_person'] = self.contact_person.to_alipay_dict()
@@ -507,6 +573,16 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['intentional_application'] = self.intentional_application.to_alipay_dict()
             else:
                 params['intentional_application'] = self.intentional_application
+        if self.kitchen:
+            if hasattr(self.kitchen, 'to_alipay_dict'):
+                params['kitchen'] = self.kitchen.to_alipay_dict()
+            else:
+                params['kitchen'] = self.kitchen
+        if self.living_room:
+            if hasattr(self.living_room, 'to_alipay_dict'):
+                params['living_room'] = self.living_room.to_alipay_dict()
+            else:
+                params['living_room'] = self.living_room
         if self.orientation:
             if hasattr(self.orientation, 'to_alipay_dict'):
                 params['orientation'] = self.orientation.to_alipay_dict()
@@ -517,6 +593,16 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['other'] = self.other.to_alipay_dict()
             else:
                 params['other'] = self.other
+        if self.owner_id:
+            if hasattr(self.owner_id, 'to_alipay_dict'):
+                params['owner_id'] = self.owner_id.to_alipay_dict()
+            else:
+                params['owner_id'] = self.owner_id
+        if self.owner_name:
+            if hasattr(self.owner_name, 'to_alipay_dict'):
+                params['owner_name'] = self.owner_name.to_alipay_dict()
+            else:
+                params['owner_name'] = self.owner_name
         if self.page:
             if hasattr(self.page, 'to_alipay_dict'):
                 params['page'] = self.page.to_alipay_dict()
@@ -587,6 +673,11 @@ class AlipayCommerceHousingApartmentAddModel(object):
                 params['usable_area_start'] = self.usable_area_start.to_alipay_dict()
             else:
                 params['usable_area_start'] = self.usable_area_start
+        if self.verification_code:
+            if hasattr(self.verification_code, 'to_alipay_dict'):
+                params['verification_code'] = self.verification_code.to_alipay_dict()
+            else:
+                params['verification_code'] = self.verification_code
         if self.viewing_time:
             if isinstance(self.viewing_time, list):
                 for i in range(0, len(self.viewing_time)):
@@ -620,12 +711,16 @@ class AlipayCommerceHousingApartmentAddModel(object):
             o.apartment_video = d['apartment_video']
         if 'apartment_vr' in d:
             o.apartment_vr = d['apartment_vr']
+        if 'bath_room' in d:
+            o.bath_room = d['bath_room']
         if 'bed_room' in d:
             o.bed_room = d['bed_room']
         if 'business_district' in d:
             o.business_district = d['business_district']
         if 'city_code' in d:
             o.city_code = d['city_code']
+        if 'construction_year' in d:
+            o.construction_year = d['construction_year']
         if 'contact_person' in d:
             o.contact_person = d['contact_person']
         if 'contact_person_phone' in d:
@@ -652,10 +747,18 @@ class AlipayCommerceHousingApartmentAddModel(object):
             o.housing_type = d['housing_type']
         if 'intentional_application' in d:
             o.intentional_application = d['intentional_application']
+        if 'kitchen' in d:
+            o.kitchen = d['kitchen']
+        if 'living_room' in d:
+            o.living_room = d['living_room']
         if 'orientation' in d:
             o.orientation = d['orientation']
         if 'other' in d:
             o.other = d['other']
+        if 'owner_id' in d:
+            o.owner_id = d['owner_id']
+        if 'owner_name' in d:
+            o.owner_name = d['owner_name']
         if 'page' in d:
             o.page = d['page']
         if 'property_description' in d:
@@ -682,6 +785,8 @@ class AlipayCommerceHousingApartmentAddModel(object):
             o.usable_area_end = d['usable_area_end']
         if 'usable_area_start' in d:
             o.usable_area_start = d['usable_area_start']
+        if 'verification_code' in d:
+            o.verification_code = d['verification_code']
         if 'viewing_time' in d:
             o.viewing_time = d['viewing_time']
         return o

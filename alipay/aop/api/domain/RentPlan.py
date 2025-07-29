@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SellerSyncRentPayInfo import SellerSyncRentPayInfo
 
 
 class RentPlan(object):
@@ -15,6 +16,7 @@ class RentPlan(object):
         self._period = None
         self._plan_status = None
         self._rent_price = None
+        self._seller_sync_rent_pay_info = None
         self._stage = None
 
     @property
@@ -67,6 +69,16 @@ class RentPlan(object):
     def rent_price(self, value):
         self._rent_price = value
     @property
+    def seller_sync_rent_pay_info(self):
+        return self._seller_sync_rent_pay_info
+
+    @seller_sync_rent_pay_info.setter
+    def seller_sync_rent_pay_info(self, value):
+        if isinstance(value, SellerSyncRentPayInfo):
+            self._seller_sync_rent_pay_info = value
+        else:
+            self._seller_sync_rent_pay_info = SellerSyncRentPayInfo.from_alipay_dict(value)
+    @property
     def stage(self):
         return self._stage
 
@@ -112,6 +124,11 @@ class RentPlan(object):
                 params['rent_price'] = self.rent_price.to_alipay_dict()
             else:
                 params['rent_price'] = self.rent_price
+        if self.seller_sync_rent_pay_info:
+            if hasattr(self.seller_sync_rent_pay_info, 'to_alipay_dict'):
+                params['seller_sync_rent_pay_info'] = self.seller_sync_rent_pay_info.to_alipay_dict()
+            else:
+                params['seller_sync_rent_pay_info'] = self.seller_sync_rent_pay_info
         if self.stage:
             if hasattr(self.stage, 'to_alipay_dict'):
                 params['stage'] = self.stage.to_alipay_dict()
@@ -138,6 +155,8 @@ class RentPlan(object):
             o.plan_status = d['plan_status']
         if 'rent_price' in d:
             o.rent_price = d['rent_price']
+        if 'seller_sync_rent_pay_info' in d:
+            o.seller_sync_rent_pay_info = d['seller_sync_rent_pay_info']
         if 'stage' in d:
             o.stage = d['stage']
         return o

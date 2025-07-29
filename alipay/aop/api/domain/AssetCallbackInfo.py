@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AssetSubFeedbackInfo import AssetSubFeedbackInfo
+from alipay.aop.api.domain.AssetItemVersionFeedBackInfo import AssetItemVersionFeedBackInfo
 
 
 class AssetCallbackInfo(object):
@@ -14,6 +15,7 @@ class AssetCallbackInfo(object):
         self._callback_infos = None
         self._error_code = None
         self._error_desc = None
+        self._feedback_info = None
         self._success = None
 
     @property
@@ -58,6 +60,16 @@ class AssetCallbackInfo(object):
     def error_desc(self, value):
         self._error_desc = value
     @property
+    def feedback_info(self):
+        return self._feedback_info
+
+    @feedback_info.setter
+    def feedback_info(self, value):
+        if isinstance(value, AssetItemVersionFeedBackInfo):
+            self._feedback_info = value
+        else:
+            self._feedback_info = AssetItemVersionFeedBackInfo.from_alipay_dict(value)
+    @property
     def success(self):
         return self._success
 
@@ -98,6 +110,11 @@ class AssetCallbackInfo(object):
                 params['error_desc'] = self.error_desc.to_alipay_dict()
             else:
                 params['error_desc'] = self.error_desc
+        if self.feedback_info:
+            if hasattr(self.feedback_info, 'to_alipay_dict'):
+                params['feedback_info'] = self.feedback_info.to_alipay_dict()
+            else:
+                params['feedback_info'] = self.feedback_info
         if self.success:
             if hasattr(self.success, 'to_alipay_dict'):
                 params['success'] = self.success.to_alipay_dict()
@@ -120,6 +137,8 @@ class AssetCallbackInfo(object):
             o.error_code = d['error_code']
         if 'error_desc' in d:
             o.error_desc = d['error_desc']
+        if 'feedback_info' in d:
+            o.feedback_info = d['feedback_info']
         if 'success' in d:
             o.success = d['success']
         return o

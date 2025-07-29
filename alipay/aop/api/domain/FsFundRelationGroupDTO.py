@@ -11,6 +11,7 @@ class FsFundRelationGroupDTO(object):
     def __init__(self):
         self._fund_relation_details = None
         self._fund_strategy = None
+        self._group_id = None
 
     @property
     def fund_relation_details(self):
@@ -32,6 +33,13 @@ class FsFundRelationGroupDTO(object):
     @fund_strategy.setter
     def fund_strategy(self, value):
         self._fund_strategy = value
+    @property
+    def group_id(self):
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        self._group_id = value
 
 
     def to_alipay_dict(self):
@@ -51,6 +59,11 @@ class FsFundRelationGroupDTO(object):
                 params['fund_strategy'] = self.fund_strategy.to_alipay_dict()
             else:
                 params['fund_strategy'] = self.fund_strategy
+        if self.group_id:
+            if hasattr(self.group_id, 'to_alipay_dict'):
+                params['group_id'] = self.group_id.to_alipay_dict()
+            else:
+                params['group_id'] = self.group_id
         return params
 
     @staticmethod
@@ -62,6 +75,8 @@ class FsFundRelationGroupDTO(object):
             o.fund_relation_details = d['fund_relation_details']
         if 'fund_strategy' in d:
             o.fund_strategy = d['fund_strategy']
+        if 'group_id' in d:
+            o.group_id = d['group_id']
         return o
 
 

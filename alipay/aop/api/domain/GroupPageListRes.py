@@ -27,6 +27,7 @@ class GroupPageListRes(object):
         self._principal_id = None
         self._scene_code = None
         self._target_cpa = None
+        self._target_roi = None
 
     @property
     def bid_type(self):
@@ -161,6 +162,13 @@ class GroupPageListRes(object):
     @target_cpa.setter
     def target_cpa(self, value):
         self._target_cpa = value
+    @property
+    def target_roi(self):
+        return self._target_roi
+
+    @target_roi.setter
+    def target_roi(self, value):
+        self._target_roi = value
 
 
     def to_alipay_dict(self):
@@ -260,6 +268,11 @@ class GroupPageListRes(object):
                 params['target_cpa'] = self.target_cpa.to_alipay_dict()
             else:
                 params['target_cpa'] = self.target_cpa
+        if self.target_roi:
+            if hasattr(self.target_roi, 'to_alipay_dict'):
+                params['target_roi'] = self.target_roi.to_alipay_dict()
+            else:
+                params['target_roi'] = self.target_roi
         return params
 
     @staticmethod
@@ -305,6 +318,8 @@ class GroupPageListRes(object):
             o.scene_code = d['scene_code']
         if 'target_cpa' in d:
             o.target_cpa = d['target_cpa']
+        if 'target_roi' in d:
+            o.target_roi = d['target_roi']
         return o
 
 

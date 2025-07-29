@@ -12,6 +12,7 @@ class AlipayTradeOrderPrepayResponse(AlipayResponse):
         super(AlipayTradeOrderPrepayResponse, self).__init__()
         self._jump_info = None
         self._out_trade_no = None
+        self._prepay_id = None
         self._tn = None
         self._trade_no = None
 
@@ -33,6 +34,13 @@ class AlipayTradeOrderPrepayResponse(AlipayResponse):
     def out_trade_no(self, value):
         self._out_trade_no = value
     @property
+    def prepay_id(self):
+        return self._prepay_id
+
+    @prepay_id.setter
+    def prepay_id(self, value):
+        self._prepay_id = value
+    @property
     def tn(self):
         return self._tn
 
@@ -53,6 +61,8 @@ class AlipayTradeOrderPrepayResponse(AlipayResponse):
             self.jump_info = response['jump_info']
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'prepay_id' in response:
+            self.prepay_id = response['prepay_id']
         if 'tn' in response:
             self.tn = response['tn']
         if 'trade_no' in response:

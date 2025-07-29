@@ -9,6 +9,7 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
 
     def __init__(self):
         self._domain = None
+        self._include_sites = None
         self._page_size = None
         self._query = None
         self._scene = None
@@ -21,6 +22,13 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
     @domain.setter
     def domain(self, value):
         self._domain = value
+    @property
+    def include_sites(self):
+        return self._include_sites
+
+    @include_sites.setter
+    def include_sites(self, value):
+        self._include_sites = value
     @property
     def page_size(self):
         return self._page_size
@@ -58,6 +66,11 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
                 params['domain'] = self.domain.to_alipay_dict()
             else:
                 params['domain'] = self.domain
+        if self.include_sites:
+            if hasattr(self.include_sites, 'to_alipay_dict'):
+                params['include_sites'] = self.include_sites.to_alipay_dict()
+            else:
+                params['include_sites'] = self.include_sites
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
@@ -87,6 +100,8 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
         o = DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel()
         if 'domain' in d:
             o.domain = d['domain']
+        if 'include_sites' in d:
+            o.include_sites = d['include_sites']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'query' in d:

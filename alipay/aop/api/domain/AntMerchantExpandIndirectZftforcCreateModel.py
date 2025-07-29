@@ -21,6 +21,7 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
         self._mcc = None
         self._name = None
         self._service = None
+        self._sign_time_with_isv = None
         self._sites = None
         self._sub_scene = None
 
@@ -111,6 +112,13 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
             for i in value:
                 self._service.append(i)
     @property
+    def sign_time_with_isv(self):
+        return self._sign_time_with_isv
+
+    @sign_time_with_isv.setter
+    def sign_time_with_isv(self, value):
+        self._sign_time_with_isv = value
+    @property
     def sites(self):
         return self._sites
 
@@ -199,6 +207,11 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
                 params['service'] = self.service.to_alipay_dict()
             else:
                 params['service'] = self.service
+        if self.sign_time_with_isv:
+            if hasattr(self.sign_time_with_isv, 'to_alipay_dict'):
+                params['sign_time_with_isv'] = self.sign_time_with_isv.to_alipay_dict()
+            else:
+                params['sign_time_with_isv'] = self.sign_time_with_isv
         if self.sites:
             if isinstance(self.sites, list):
                 for i in range(0, len(self.sites)):
@@ -243,6 +256,8 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
             o.name = d['name']
         if 'service' in d:
             o.service = d['service']
+        if 'sign_time_with_isv' in d:
+            o.sign_time_with_isv = d['sign_time_with_isv']
         if 'sites' in d:
             o.sites = d['sites']
         if 'sub_scene' in d:

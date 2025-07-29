@@ -26,6 +26,8 @@ class RentRoyalty(object):
         self._royalty_deliver_type = None
         self._royalty_installment_no = None
         self._royalty_interest_price = None
+        self._royalty_payment_method = None
+        self._royalty_payment_method_note = None
         self._royalty_price = None
         self._royalty_principal_price = None
         self._royalty_status = None
@@ -162,6 +164,20 @@ class RentRoyalty(object):
     @royalty_interest_price.setter
     def royalty_interest_price(self, value):
         self._royalty_interest_price = value
+    @property
+    def royalty_payment_method(self):
+        return self._royalty_payment_method
+
+    @royalty_payment_method.setter
+    def royalty_payment_method(self, value):
+        self._royalty_payment_method = value
+    @property
+    def royalty_payment_method_note(self):
+        return self._royalty_payment_method_note
+
+    @royalty_payment_method_note.setter
+    def royalty_payment_method_note(self, value):
+        self._royalty_payment_method_note = value
     @property
     def royalty_price(self):
         return self._royalty_price
@@ -319,6 +335,16 @@ class RentRoyalty(object):
                 params['royalty_interest_price'] = self.royalty_interest_price.to_alipay_dict()
             else:
                 params['royalty_interest_price'] = self.royalty_interest_price
+        if self.royalty_payment_method:
+            if hasattr(self.royalty_payment_method, 'to_alipay_dict'):
+                params['royalty_payment_method'] = self.royalty_payment_method.to_alipay_dict()
+            else:
+                params['royalty_payment_method'] = self.royalty_payment_method
+        if self.royalty_payment_method_note:
+            if hasattr(self.royalty_payment_method_note, 'to_alipay_dict'):
+                params['royalty_payment_method_note'] = self.royalty_payment_method_note.to_alipay_dict()
+            else:
+                params['royalty_payment_method_note'] = self.royalty_payment_method_note
         if self.royalty_price:
             if hasattr(self.royalty_price, 'to_alipay_dict'):
                 params['royalty_price'] = self.royalty_price.to_alipay_dict()
@@ -407,6 +433,10 @@ class RentRoyalty(object):
             o.royalty_installment_no = d['royalty_installment_no']
         if 'royalty_interest_price' in d:
             o.royalty_interest_price = d['royalty_interest_price']
+        if 'royalty_payment_method' in d:
+            o.royalty_payment_method = d['royalty_payment_method']
+        if 'royalty_payment_method_note' in d:
+            o.royalty_payment_method_note = d['royalty_payment_method_note']
         if 'royalty_price' in d:
             o.royalty_price = d['royalty_price']
         if 'royalty_principal_price' in d:

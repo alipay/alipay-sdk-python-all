@@ -16,6 +16,7 @@ class OrderInfoVO(object):
         self._finish_time = None
         self._mi_type = None
         self._note = None
+        self._open_id = None
         self._order_scene = None
         self._order_seq = None
         self._order_status = None
@@ -29,6 +30,7 @@ class OrderInfoVO(object):
         self._update_time = None
         self._user_expect_end_time = None
         self._user_expect_start_time = None
+        self._user_id = None
         self._weight = None
 
     @property
@@ -87,6 +89,13 @@ class OrderInfoVO(object):
     @note.setter
     def note(self, value):
         self._note = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_scene(self):
         return self._order_scene
@@ -179,6 +188,13 @@ class OrderInfoVO(object):
     def user_expect_start_time(self, value):
         self._user_expect_start_time = value
     @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+    @property
     def weight(self):
         return self._weight
 
@@ -229,6 +245,11 @@ class OrderInfoVO(object):
                 params['note'] = self.note.to_alipay_dict()
             else:
                 params['note'] = self.note
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_scene:
             if hasattr(self.order_scene, 'to_alipay_dict'):
                 params['order_scene'] = self.order_scene.to_alipay_dict()
@@ -294,6 +315,11 @@ class OrderInfoVO(object):
                 params['user_expect_start_time'] = self.user_expect_start_time.to_alipay_dict()
             else:
                 params['user_expect_start_time'] = self.user_expect_start_time
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         if self.weight:
             if hasattr(self.weight, 'to_alipay_dict'):
                 params['weight'] = self.weight.to_alipay_dict()
@@ -322,6 +348,8 @@ class OrderInfoVO(object):
             o.mi_type = d['mi_type']
         if 'note' in d:
             o.note = d['note']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_scene' in d:
             o.order_scene = d['order_scene']
         if 'order_seq' in d:
@@ -348,6 +376,8 @@ class OrderInfoVO(object):
             o.user_expect_end_time = d['user_expect_end_time']
         if 'user_expect_start_time' in d:
             o.user_expect_start_time = d['user_expect_start_time']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         if 'weight' in d:
             o.weight = d['weight']
         return o

@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class EnterpriseProfilesDTO(object):
 
     def __init__(self):
+        self._access_channel = None
         self._create_iot_group = None
         self._credit_applicant_mobile = None
         self._fund_biz_scene = None
         self._group_app_id = None
         self._pc_invite_url_mode = None
 
+    @property
+    def access_channel(self):
+        return self._access_channel
+
+    @access_channel.setter
+    def access_channel(self, value):
+        self._access_channel = value
     @property
     def create_iot_group(self):
         return self._create_iot_group
@@ -53,6 +61,11 @@ class EnterpriseProfilesDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.access_channel:
+            if hasattr(self.access_channel, 'to_alipay_dict'):
+                params['access_channel'] = self.access_channel.to_alipay_dict()
+            else:
+                params['access_channel'] = self.access_channel
         if self.create_iot_group:
             if hasattr(self.create_iot_group, 'to_alipay_dict'):
                 params['create_iot_group'] = self.create_iot_group.to_alipay_dict()
@@ -85,6 +98,8 @@ class EnterpriseProfilesDTO(object):
         if not d:
             return None
         o = EnterpriseProfilesDTO()
+        if 'access_channel' in d:
+            o.access_channel = d['access_channel']
         if 'create_iot_group' in d:
             o.create_iot_group = d['create_iot_group']
         if 'credit_applicant_mobile' in d:

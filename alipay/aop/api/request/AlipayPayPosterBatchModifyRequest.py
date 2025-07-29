@@ -12,8 +12,10 @@ class AlipayPayPosterBatchModifyRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._device_ids = None
         self._end_time = None
         self._img_url = None
+        self._merchant_id = None
         self._offline = None
         self._operator = None
         self._plan_id = None
@@ -37,6 +39,16 @@ class AlipayPayPosterBatchModifyRequest(object):
         self._biz_model = value
 
     @property
+    def device_ids(self):
+        return self._device_ids
+
+    @device_ids.setter
+    def device_ids(self, value):
+        if isinstance(value, list):
+            self._device_ids = list()
+            for i in value:
+                self._device_ids.append(i)
+    @property
     def end_time(self):
         return self._end_time
 
@@ -50,6 +62,13 @@ class AlipayPayPosterBatchModifyRequest(object):
     @img_url.setter
     def img_url(self, value):
         self._img_url = value
+    @property
+    def merchant_id(self):
+        return self._merchant_id
+
+    @merchant_id.setter
+    def merchant_id(self, value):
+        self._merchant_id = value
     @property
     def offline(self):
         return self._offline
@@ -166,6 +185,13 @@ class AlipayPayPosterBatchModifyRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.device_ids:
+            if isinstance(self.device_ids, list):
+                for i in range(0, len(self.device_ids)):
+                    element = self.device_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.device_ids[i] = element.to_alipay_dict()
+                params['device_ids'] = json.dumps(obj=self.device_ids, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = json.dumps(obj=self.end_time.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -176,6 +202,11 @@ class AlipayPayPosterBatchModifyRequest(object):
                 params['img_url'] = json.dumps(obj=self.img_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['img_url'] = self.img_url
+        if self.merchant_id:
+            if hasattr(self.merchant_id, 'to_alipay_dict'):
+                params['merchant_id'] = json.dumps(obj=self.merchant_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['merchant_id'] = self.merchant_id
         if self.offline:
             if hasattr(self.offline, 'to_alipay_dict'):
                 params['offline'] = json.dumps(obj=self.offline.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

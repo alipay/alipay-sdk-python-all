@@ -11,6 +11,7 @@ class AntMerchantExpandBizaccessOrderCheckResponse(AlipayResponse):
     def __init__(self):
         super(AntMerchantExpandBizaccessOrderCheckResponse, self).__init__()
         self._fail_reasons = None
+        self._order_id = None
 
     @property
     def fail_reasons(self):
@@ -25,8 +26,17 @@ class AntMerchantExpandBizaccessOrderCheckResponse(AlipayResponse):
                     self._fail_reasons.append(i)
                 else:
                     self._fail_reasons.append(IsvBizOpenOrderFailReason.from_alipay_dict(i))
+    @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
 
     def parse_response_content(self, response_content):
         response = super(AntMerchantExpandBizaccessOrderCheckResponse, self).parse_response_content(response_content)
         if 'fail_reasons' in response:
             self.fail_reasons = response['fail_reasons']
+        if 'order_id' in response:
+            self.order_id = response['order_id']
