@@ -9,6 +9,7 @@ class DentalArchivesShopStaff(object):
 
     def __init__(self):
         self._alipay_logon_id = None
+        self._open_id = None
         self._role = None
         self._staff_name = None
         self._staff_user_id = None
@@ -20,6 +21,13 @@ class DentalArchivesShopStaff(object):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def role(self):
         return self._role
@@ -50,6 +58,11 @@ class DentalArchivesShopStaff(object):
                 params['alipay_logon_id'] = self.alipay_logon_id.to_alipay_dict()
             else:
                 params['alipay_logon_id'] = self.alipay_logon_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -74,6 +87,8 @@ class DentalArchivesShopStaff(object):
         o = DentalArchivesShopStaff()
         if 'alipay_logon_id' in d:
             o.alipay_logon_id = d['alipay_logon_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'role' in d:
             o.role = d['role']
         if 'staff_name' in d:

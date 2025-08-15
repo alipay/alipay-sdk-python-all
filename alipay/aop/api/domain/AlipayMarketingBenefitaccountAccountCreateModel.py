@@ -12,6 +12,7 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
 
     def __init__(self):
         self._authorization_info = None
+        self._biz_from = None
         self._biz_no = None
         self._effective_time = None
         self._expired_time = None
@@ -31,6 +32,13 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
             self._authorization_info = value
         else:
             self._authorization_info = FsAuthorizationInfoForm.from_alipay_dict(value)
+    @property
+    def biz_from(self):
+        return self._biz_from
+
+    @biz_from.setter
+    def biz_from(self, value):
+        self._biz_from = value
     @property
     def biz_no(self):
         return self._biz_no
@@ -108,6 +116,11 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
                 params['authorization_info'] = self.authorization_info.to_alipay_dict()
             else:
                 params['authorization_info'] = self.authorization_info
+        if self.biz_from:
+            if hasattr(self.biz_from, 'to_alipay_dict'):
+                params['biz_from'] = self.biz_from.to_alipay_dict()
+            else:
+                params['biz_from'] = self.biz_from
         if self.biz_no:
             if hasattr(self.biz_no, 'to_alipay_dict'):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
@@ -167,6 +180,8 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
         o = AlipayMarketingBenefitaccountAccountCreateModel()
         if 'authorization_info' in d:
             o.authorization_info = d['authorization_info']
+        if 'biz_from' in d:
+            o.biz_from = d['biz_from']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'effective_time' in d:

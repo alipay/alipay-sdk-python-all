@@ -20,6 +20,7 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
         self._role_type = None
         self._roster_id = None
         self._user_id = None
+        self._white_name_list = None
 
     @property
     def department_name(self):
@@ -98,6 +99,16 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def white_name_list(self):
+        return self._white_name_list
+
+    @white_name_list.setter
+    def white_name_list(self, value):
+        if isinstance(value, list):
+            self._white_name_list = list()
+            for i in value:
+                self._white_name_list.append(i)
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEducateRosterIdentityQueryResponse, self).parse_response_content(response_content)
@@ -123,3 +134,5 @@ class AlipayCommerceEducateRosterIdentityQueryResponse(AlipayResponse):
             self.roster_id = response['roster_id']
         if 'user_id' in response:
             self.user_id = response['user_id']
+        if 'white_name_list' in response:
+            self.white_name_list = response['white_name_list']

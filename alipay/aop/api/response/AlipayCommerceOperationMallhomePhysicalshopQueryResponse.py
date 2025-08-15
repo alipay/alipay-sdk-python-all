@@ -35,10 +35,13 @@ class AlipayCommerceOperationMallhomePhysicalshopQueryResponse(AlipayResponse):
 
     @physical_shop_list.setter
     def physical_shop_list(self, value):
-        if isinstance(value, PhysicalShopInfo):
-            self._physical_shop_list = value
-        else:
-            self._physical_shop_list = PhysicalShopInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._physical_shop_list = list()
+            for i in value:
+                if isinstance(i, PhysicalShopInfo):
+                    self._physical_shop_list.append(i)
+                else:
+                    self._physical_shop_list.append(PhysicalShopInfo.from_alipay_dict(i))
     @property
     def total(self):
         return self._total

@@ -13,6 +13,7 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     def __init__(self):
         self._acquire_mode = None
         self._amount = None
+        self._biz_scene = None
         self._extend_params = None
         self._external_inst_biz_date = None
         self._external_inst_channel = None
@@ -38,6 +39,13 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     @amount.setter
     def amount(self, value):
         self._amount = value
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def extend_params(self):
         return self._extend_params
@@ -131,6 +139,11 @@ class AlipayTradeUnifiedsettleSyncModel(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.biz_scene:
+            if hasattr(self.biz_scene, 'to_alipay_dict'):
+                params['biz_scene'] = self.biz_scene.to_alipay_dict()
+            else:
+                params['biz_scene'] = self.biz_scene
         if self.extend_params:
             if hasattr(self.extend_params, 'to_alipay_dict'):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
@@ -192,6 +205,8 @@ class AlipayTradeUnifiedsettleSyncModel(object):
             o.acquire_mode = d['acquire_mode']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'biz_scene' in d:
+            o.biz_scene = d['biz_scene']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
         if 'external_inst_biz_date' in d:

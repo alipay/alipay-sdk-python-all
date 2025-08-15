@@ -10,6 +10,7 @@ from alipay.aop.api.domain.RentGoodsDetailInfoVO import RentGoodsDetailInfoVO
 from alipay.aop.api.domain.RentPathInfoVO import RentPathInfoVO
 from alipay.aop.api.domain.RentOrderPriceInfoVO import RentOrderPriceInfoVO
 from alipay.aop.api.domain.RentPromoInfoVO import RentPromoInfoVO
+from alipay.aop.api.domain.RentOrderPayInfoVO import RentOrderPayInfoVO
 from alipay.aop.api.domain.RentPlanInfoVO import RentPlanInfoVO
 from alipay.aop.api.domain.RentSignInfoVO import RentSignInfoVO
 from alipay.aop.api.domain.RentOrderStatementInfoVO import RentOrderStatementInfoVO
@@ -26,6 +27,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._buyer_open_id = None
         self._default_receiving_address = None
         self._delivery_info = None
+        self._face_verify_result = None
         self._item_infos = None
         self._memo = None
         self._order_create_time = None
@@ -35,6 +37,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._path_info = None
         self._price_info = None
         self._promo_info = None
+        self._rent_pay_infos = None
         self._rent_plan_info = None
         self._rent_sign_info = None
         self._rent_statement_infos = None
@@ -89,6 +92,13 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self._delivery_info = value
         else:
             self._delivery_info = RentOrderDeliveryInfoVO.from_alipay_dict(value)
+    @property
+    def face_verify_result(self):
+        return self._face_verify_result
+
+    @face_verify_result.setter
+    def face_verify_result(self, value):
+        self._face_verify_result = value
     @property
     def item_infos(self):
         return self._item_infos
@@ -167,6 +177,19 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self._promo_info = value
         else:
             self._promo_info = RentPromoInfoVO.from_alipay_dict(value)
+    @property
+    def rent_pay_infos(self):
+        return self._rent_pay_infos
+
+    @rent_pay_infos.setter
+    def rent_pay_infos(self, value):
+        if isinstance(value, list):
+            self._rent_pay_infos = list()
+            for i in value:
+                if isinstance(i, RentOrderPayInfoVO):
+                    self._rent_pay_infos.append(i)
+                else:
+                    self._rent_pay_infos.append(RentOrderPayInfoVO.from_alipay_dict(i))
     @property
     def rent_plan_info(self):
         return self._rent_plan_info
@@ -267,6 +290,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.default_receiving_address = response['default_receiving_address']
         if 'delivery_info' in response:
             self.delivery_info = response['delivery_info']
+        if 'face_verify_result' in response:
+            self.face_verify_result = response['face_verify_result']
         if 'item_infos' in response:
             self.item_infos = response['item_infos']
         if 'memo' in response:
@@ -285,6 +310,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.price_info = response['price_info']
         if 'promo_info' in response:
             self.promo_info = response['promo_info']
+        if 'rent_pay_infos' in response:
+            self.rent_pay_infos = response['rent_pay_infos']
         if 'rent_plan_info' in response:
             self.rent_plan_info = response['rent_plan_info']
         if 'rent_sign_info' in response:

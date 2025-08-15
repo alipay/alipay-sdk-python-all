@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.LandingTypeDto import LandingTypeDto
 
 
 class ServiceEntity(object):
@@ -12,6 +13,7 @@ class ServiceEntity(object):
         self._service_entity_app_name = None
         self._service_entity_app_url = None
         self._service_entity_desc = None
+        self._service_entity_landing_page = None
         self._service_entity_name = None
         self._service_entity_no = None
         self._service_entity_out_id = None
@@ -52,6 +54,19 @@ class ServiceEntity(object):
     @service_entity_desc.setter
     def service_entity_desc(self, value):
         self._service_entity_desc = value
+    @property
+    def service_entity_landing_page(self):
+        return self._service_entity_landing_page
+
+    @service_entity_landing_page.setter
+    def service_entity_landing_page(self, value):
+        if isinstance(value, list):
+            self._service_entity_landing_page = list()
+            for i in value:
+                if isinstance(i, LandingTypeDto):
+                    self._service_entity_landing_page.append(i)
+                else:
+                    self._service_entity_landing_page.append(LandingTypeDto.from_alipay_dict(i))
     @property
     def service_entity_name(self):
         return self._service_entity_name
@@ -159,6 +174,16 @@ class ServiceEntity(object):
                 params['service_entity_desc'] = self.service_entity_desc.to_alipay_dict()
             else:
                 params['service_entity_desc'] = self.service_entity_desc
+        if self.service_entity_landing_page:
+            if isinstance(self.service_entity_landing_page, list):
+                for i in range(0, len(self.service_entity_landing_page)):
+                    element = self.service_entity_landing_page[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.service_entity_landing_page[i] = element.to_alipay_dict()
+            if hasattr(self.service_entity_landing_page, 'to_alipay_dict'):
+                params['service_entity_landing_page'] = self.service_entity_landing_page.to_alipay_dict()
+            else:
+                params['service_entity_landing_page'] = self.service_entity_landing_page
         if self.service_entity_name:
             if hasattr(self.service_entity_name, 'to_alipay_dict'):
                 params['service_entity_name'] = self.service_entity_name.to_alipay_dict()
@@ -239,6 +264,8 @@ class ServiceEntity(object):
             o.service_entity_app_url = d['service_entity_app_url']
         if 'service_entity_desc' in d:
             o.service_entity_desc = d['service_entity_desc']
+        if 'service_entity_landing_page' in d:
+            o.service_entity_landing_page = d['service_entity_landing_page']
         if 'service_entity_name' in d:
             o.service_entity_name = d['service_entity_name']
         if 'service_entity_no' in d:

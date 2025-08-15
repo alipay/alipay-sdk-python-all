@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.EnterpriseInvoiceItemDTO import EnterpriseInvoiceItemDTO
 
 
 class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
@@ -22,6 +23,7 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
         self._invoice_check_time = None
         self._invoice_code = None
         self._invoice_date = None
+        self._invoice_item_list = None
         self._invoice_kind = None
         self._invoice_memo = None
         self._invoice_no = None
@@ -141,6 +143,19 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
     @invoice_date.setter
     def invoice_date(self, value):
         self._invoice_date = value
+    @property
+    def invoice_item_list(self):
+        return self._invoice_item_list
+
+    @invoice_item_list.setter
+    def invoice_item_list(self, value):
+        if isinstance(value, list):
+            self._invoice_item_list = list()
+            for i in value:
+                if isinstance(i, EnterpriseInvoiceItemDTO):
+                    self._invoice_item_list.append(i)
+                else:
+                    self._invoice_item_list.append(EnterpriseInvoiceItemDTO.from_alipay_dict(i))
     @property
     def invoice_kind(self):
         return self._invoice_kind
@@ -338,6 +353,8 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
             self.invoice_code = response['invoice_code']
         if 'invoice_date' in response:
             self.invoice_date = response['invoice_date']
+        if 'invoice_item_list' in response:
+            self.invoice_item_list = response['invoice_item_list']
         if 'invoice_kind' in response:
             self.invoice_kind = response['invoice_kind']
         if 'invoice_memo' in response:

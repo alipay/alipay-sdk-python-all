@@ -9,10 +9,12 @@ class UnifiedSettleExtendParams(object):
 
     def __init__(self):
         self._bank_memo = None
+        self._inst_order_id = None
         self._memo = None
         self._original_order_amount = None
         self._refund_reason = None
         self._settle_mode = None
+        self._trans_memo = None
 
     @property
     def bank_memo(self):
@@ -21,6 +23,13 @@ class UnifiedSettleExtendParams(object):
     @bank_memo.setter
     def bank_memo(self, value):
         self._bank_memo = value
+    @property
+    def inst_order_id(self):
+        return self._inst_order_id
+
+    @inst_order_id.setter
+    def inst_order_id(self, value):
+        self._inst_order_id = value
     @property
     def memo(self):
         return self._memo
@@ -49,6 +58,13 @@ class UnifiedSettleExtendParams(object):
     @settle_mode.setter
     def settle_mode(self, value):
         self._settle_mode = value
+    @property
+    def trans_memo(self):
+        return self._trans_memo
+
+    @trans_memo.setter
+    def trans_memo(self, value):
+        self._trans_memo = value
 
 
     def to_alipay_dict(self):
@@ -58,6 +74,11 @@ class UnifiedSettleExtendParams(object):
                 params['bank_memo'] = self.bank_memo.to_alipay_dict()
             else:
                 params['bank_memo'] = self.bank_memo
+        if self.inst_order_id:
+            if hasattr(self.inst_order_id, 'to_alipay_dict'):
+                params['inst_order_id'] = self.inst_order_id.to_alipay_dict()
+            else:
+                params['inst_order_id'] = self.inst_order_id
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -78,6 +99,11 @@ class UnifiedSettleExtendParams(object):
                 params['settle_mode'] = self.settle_mode.to_alipay_dict()
             else:
                 params['settle_mode'] = self.settle_mode
+        if self.trans_memo:
+            if hasattr(self.trans_memo, 'to_alipay_dict'):
+                params['trans_memo'] = self.trans_memo.to_alipay_dict()
+            else:
+                params['trans_memo'] = self.trans_memo
         return params
 
     @staticmethod
@@ -87,6 +113,8 @@ class UnifiedSettleExtendParams(object):
         o = UnifiedSettleExtendParams()
         if 'bank_memo' in d:
             o.bank_memo = d['bank_memo']
+        if 'inst_order_id' in d:
+            o.inst_order_id = d['inst_order_id']
         if 'memo' in d:
             o.memo = d['memo']
         if 'original_order_amount' in d:
@@ -95,6 +123,8 @@ class UnifiedSettleExtendParams(object):
             o.refund_reason = d['refund_reason']
         if 'settle_mode' in d:
             o.settle_mode = d['settle_mode']
+        if 'trans_memo' in d:
+            o.trans_memo = d['trans_memo']
         return o
 
 

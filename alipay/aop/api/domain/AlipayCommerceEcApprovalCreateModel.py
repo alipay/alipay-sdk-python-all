@@ -17,6 +17,7 @@ class AlipayCommerceEcApprovalCreateModel(object):
         self._enterprise_id = None
         self._expense_type_sub_category = None
         self._institution_id_list = None
+        self._out_ext = None
         self._payment_type = None
         self._platform_approval_id = None
         self._purpose = None
@@ -76,6 +77,13 @@ class AlipayCommerceEcApprovalCreateModel(object):
             self._institution_id_list = list()
             for i in value:
                 self._institution_id_list.append(i)
+    @property
+    def out_ext(self):
+        return self._out_ext
+
+    @out_ext.setter
+    def out_ext(self, value):
+        self._out_ext = value
     @property
     def payment_type(self):
         return self._payment_type
@@ -174,6 +182,11 @@ class AlipayCommerceEcApprovalCreateModel(object):
                 params['institution_id_list'] = self.institution_id_list.to_alipay_dict()
             else:
                 params['institution_id_list'] = self.institution_id_list
+        if self.out_ext:
+            if hasattr(self.out_ext, 'to_alipay_dict'):
+                params['out_ext'] = self.out_ext.to_alipay_dict()
+            else:
+                params['out_ext'] = self.out_ext
         if self.payment_type:
             if hasattr(self.payment_type, 'to_alipay_dict'):
                 params['payment_type'] = self.payment_type.to_alipay_dict()
@@ -235,6 +248,8 @@ class AlipayCommerceEcApprovalCreateModel(object):
             o.expense_type_sub_category = d['expense_type_sub_category']
         if 'institution_id_list' in d:
             o.institution_id_list = d['institution_id_list']
+        if 'out_ext' in d:
+            o.out_ext = d['out_ext']
         if 'payment_type' in d:
             o.payment_type = d['payment_type']
         if 'platform_approval_id' in d:

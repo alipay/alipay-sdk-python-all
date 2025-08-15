@@ -15,6 +15,7 @@ class AlipayUserTaxRefundModel(object):
         self._qr_code = None
         self._refund_amount = None
         self._refund_biz_no = None
+        self._user_name = None
 
     @property
     def account_book_id(self):
@@ -65,6 +66,13 @@ class AlipayUserTaxRefundModel(object):
     @refund_biz_no.setter
     def refund_biz_no(self, value):
         self._refund_biz_no = value
+    @property
+    def user_name(self):
+        return self._user_name
+
+    @user_name.setter
+    def user_name(self, value):
+        self._user_name = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class AlipayUserTaxRefundModel(object):
                 params['refund_biz_no'] = self.refund_biz_no.to_alipay_dict()
             else:
                 params['refund_biz_no'] = self.refund_biz_no
+        if self.user_name:
+            if hasattr(self.user_name, 'to_alipay_dict'):
+                params['user_name'] = self.user_name.to_alipay_dict()
+            else:
+                params['user_name'] = self.user_name
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class AlipayUserTaxRefundModel(object):
             o.refund_amount = d['refund_amount']
         if 'refund_biz_no' in d:
             o.refund_biz_no = d['refund_biz_no']
+        if 'user_name' in d:
+            o.user_name = d['user_name']
         return o
 
 

@@ -15,6 +15,7 @@ class AnttechOceanbaseInvoiceApplyModel(object):
         self._buyer = None
         self._creator_id = None
         self._currency_code = None
+        self._finance_remarks = None
         self._invoice_amount = None
         self._invoice_remarks = None
         self._objects = None
@@ -59,6 +60,13 @@ class AnttechOceanbaseInvoiceApplyModel(object):
     @currency_code.setter
     def currency_code(self, value):
         self._currency_code = value
+    @property
+    def finance_remarks(self):
+        return self._finance_remarks
+
+    @finance_remarks.setter
+    def finance_remarks(self, value):
+        self._finance_remarks = value
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -129,6 +137,11 @@ class AnttechOceanbaseInvoiceApplyModel(object):
                 params['currency_code'] = self.currency_code.to_alipay_dict()
             else:
                 params['currency_code'] = self.currency_code
+        if self.finance_remarks:
+            if hasattr(self.finance_remarks, 'to_alipay_dict'):
+                params['finance_remarks'] = self.finance_remarks.to_alipay_dict()
+            else:
+                params['finance_remarks'] = self.finance_remarks
         if self.invoice_amount:
             if hasattr(self.invoice_amount, 'to_alipay_dict'):
                 params['invoice_amount'] = self.invoice_amount.to_alipay_dict()
@@ -176,6 +189,8 @@ class AnttechOceanbaseInvoiceApplyModel(object):
             o.creator_id = d['creator_id']
         if 'currency_code' in d:
             o.currency_code = d['currency_code']
+        if 'finance_remarks' in d:
+            o.finance_remarks = d['finance_remarks']
         if 'invoice_amount' in d:
             o.invoice_amount = d['invoice_amount']
         if 'invoice_remarks' in d:

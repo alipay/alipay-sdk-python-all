@@ -12,6 +12,9 @@ class AlipayCommerceFhyeduEvaluationSyncModel(object):
         self._assessment = None
         self._course_id = None
         self._course_name = None
+        self._evaluation_id = None
+        self._evaluation_time = None
+        self._evaluator = None
         self._inst_id = None
         self._sched_id = None
         self._score_list = None
@@ -38,6 +41,27 @@ class AlipayCommerceFhyeduEvaluationSyncModel(object):
     @course_name.setter
     def course_name(self, value):
         self._course_name = value
+    @property
+    def evaluation_id(self):
+        return self._evaluation_id
+
+    @evaluation_id.setter
+    def evaluation_id(self, value):
+        self._evaluation_id = value
+    @property
+    def evaluation_time(self):
+        return self._evaluation_time
+
+    @evaluation_time.setter
+    def evaluation_time(self, value):
+        self._evaluation_time = value
+    @property
+    def evaluator(self):
+        return self._evaluator
+
+    @evaluator.setter
+    def evaluator(self, value):
+        self._evaluator = value
     @property
     def inst_id(self):
         return self._inst_id
@@ -91,6 +115,21 @@ class AlipayCommerceFhyeduEvaluationSyncModel(object):
                 params['course_name'] = self.course_name.to_alipay_dict()
             else:
                 params['course_name'] = self.course_name
+        if self.evaluation_id:
+            if hasattr(self.evaluation_id, 'to_alipay_dict'):
+                params['evaluation_id'] = self.evaluation_id.to_alipay_dict()
+            else:
+                params['evaluation_id'] = self.evaluation_id
+        if self.evaluation_time:
+            if hasattr(self.evaluation_time, 'to_alipay_dict'):
+                params['evaluation_time'] = self.evaluation_time.to_alipay_dict()
+            else:
+                params['evaluation_time'] = self.evaluation_time
+        if self.evaluator:
+            if hasattr(self.evaluator, 'to_alipay_dict'):
+                params['evaluator'] = self.evaluator.to_alipay_dict()
+            else:
+                params['evaluator'] = self.evaluator
         if self.inst_id:
             if hasattr(self.inst_id, 'to_alipay_dict'):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
@@ -129,6 +168,12 @@ class AlipayCommerceFhyeduEvaluationSyncModel(object):
             o.course_id = d['course_id']
         if 'course_name' in d:
             o.course_name = d['course_name']
+        if 'evaluation_id' in d:
+            o.evaluation_id = d['evaluation_id']
+        if 'evaluation_time' in d:
+            o.evaluation_time = d['evaluation_time']
+        if 'evaluator' in d:
+            o.evaluator = d['evaluator']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
         if 'sched_id' in d:

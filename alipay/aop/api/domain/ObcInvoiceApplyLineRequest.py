@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ObcInvoiceObjectRequest import ObcInvoiceObjectRequest
 
 
 class ObcInvoiceApplyLineRequest(object):
 
     def __init__(self):
         self._currency_code = None
+        self._details = None
         self._invoice_amount = None
         self._invoice_specification = None
         self._price = None
@@ -25,6 +27,19 @@ class ObcInvoiceApplyLineRequest(object):
     @currency_code.setter
     def currency_code(self, value):
         self._currency_code = value
+    @property
+    def details(self):
+        return self._details
+
+    @details.setter
+    def details(self, value):
+        if isinstance(value, list):
+            self._details = list()
+            for i in value:
+                if isinstance(i, ObcInvoiceObjectRequest):
+                    self._details.append(i)
+                else:
+                    self._details.append(ObcInvoiceObjectRequest.from_alipay_dict(i))
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -90,6 +105,16 @@ class ObcInvoiceApplyLineRequest(object):
                 params['currency_code'] = self.currency_code.to_alipay_dict()
             else:
                 params['currency_code'] = self.currency_code
+        if self.details:
+            if isinstance(self.details, list):
+                for i in range(0, len(self.details)):
+                    element = self.details[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.details[i] = element.to_alipay_dict()
+            if hasattr(self.details, 'to_alipay_dict'):
+                params['details'] = self.details.to_alipay_dict()
+            else:
+                params['details'] = self.details
         if self.invoice_amount:
             if hasattr(self.invoice_amount, 'to_alipay_dict'):
                 params['invoice_amount'] = self.invoice_amount.to_alipay_dict()
@@ -139,6 +164,8 @@ class ObcInvoiceApplyLineRequest(object):
         o = ObcInvoiceApplyLineRequest()
         if 'currency_code' in d:
             o.currency_code = d['currency_code']
+        if 'details' in d:
+            o.details = d['details']
         if 'invoice_amount' in d:
             o.invoice_amount = d['invoice_amount']
         if 'invoice_specification' in d:

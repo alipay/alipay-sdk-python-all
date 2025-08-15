@@ -33,10 +33,13 @@ class NDeviceMetricsListForDayResponse(object):
         self._open_id = None
         self._province_code = None
         self._province_name = None
+        self._refund_order_amt = None
+        self._refund_order_cnt = None
         self._register_time = None
         self._shipping_time = None
         self._sn = None
         self._store_id = None
+        self._trd_amt_2_n_user_cnt_fromlight_30_d = None
         self._trd_nfc_device_usercnt = None
 
     @property
@@ -215,6 +218,20 @@ class NDeviceMetricsListForDayResponse(object):
     def province_name(self, value):
         self._province_name = value
     @property
+    def refund_order_amt(self):
+        return self._refund_order_amt
+
+    @refund_order_amt.setter
+    def refund_order_amt(self, value):
+        self._refund_order_amt = value
+    @property
+    def refund_order_cnt(self):
+        return self._refund_order_cnt
+
+    @refund_order_cnt.setter
+    def refund_order_cnt(self, value):
+        self._refund_order_cnt = value
+    @property
     def register_time(self):
         return self._register_time
 
@@ -242,6 +259,13 @@ class NDeviceMetricsListForDayResponse(object):
     @store_id.setter
     def store_id(self, value):
         self._store_id = value
+    @property
+    def trd_amt_2_n_user_cnt_fromlight_30_d(self):
+        return self._trd_amt_2_n_user_cnt_fromlight_30_d
+
+    @trd_amt_2_n_user_cnt_fromlight_30_d.setter
+    def trd_amt_2_n_user_cnt_fromlight_30_d(self, value):
+        self._trd_amt_2_n_user_cnt_fromlight_30_d = value
     @property
     def trd_nfc_device_usercnt(self):
         return self._trd_nfc_device_usercnt
@@ -378,6 +402,16 @@ class NDeviceMetricsListForDayResponse(object):
                 params['province_name'] = self.province_name.to_alipay_dict()
             else:
                 params['province_name'] = self.province_name
+        if self.refund_order_amt:
+            if hasattr(self.refund_order_amt, 'to_alipay_dict'):
+                params['refund_order_amt'] = self.refund_order_amt.to_alipay_dict()
+            else:
+                params['refund_order_amt'] = self.refund_order_amt
+        if self.refund_order_cnt:
+            if hasattr(self.refund_order_cnt, 'to_alipay_dict'):
+                params['refund_order_cnt'] = self.refund_order_cnt.to_alipay_dict()
+            else:
+                params['refund_order_cnt'] = self.refund_order_cnt
         if self.register_time:
             if hasattr(self.register_time, 'to_alipay_dict'):
                 params['register_time'] = self.register_time.to_alipay_dict()
@@ -398,6 +432,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['store_id'] = self.store_id.to_alipay_dict()
             else:
                 params['store_id'] = self.store_id
+        if self.trd_amt_2_n_user_cnt_fromlight_30_d:
+            if hasattr(self.trd_amt_2_n_user_cnt_fromlight_30_d, 'to_alipay_dict'):
+                params['trd_amt_2_n_user_cnt_fromlight_30_d'] = self.trd_amt_2_n_user_cnt_fromlight_30_d.to_alipay_dict()
+            else:
+                params['trd_amt_2_n_user_cnt_fromlight_30_d'] = self.trd_amt_2_n_user_cnt_fromlight_30_d
         if self.trd_nfc_device_usercnt:
             if hasattr(self.trd_nfc_device_usercnt, 'to_alipay_dict'):
                 params['trd_nfc_device_usercnt'] = self.trd_nfc_device_usercnt.to_alipay_dict()
@@ -460,6 +499,10 @@ class NDeviceMetricsListForDayResponse(object):
             o.province_code = d['province_code']
         if 'province_name' in d:
             o.province_name = d['province_name']
+        if 'refund_order_amt' in d:
+            o.refund_order_amt = d['refund_order_amt']
+        if 'refund_order_cnt' in d:
+            o.refund_order_cnt = d['refund_order_cnt']
         if 'register_time' in d:
             o.register_time = d['register_time']
         if 'shipping_time' in d:
@@ -468,6 +511,8 @@ class NDeviceMetricsListForDayResponse(object):
             o.sn = d['sn']
         if 'store_id' in d:
             o.store_id = d['store_id']
+        if 'trd_amt_2_n_user_cnt_fromlight_30_d' in d:
+            o.trd_amt_2_n_user_cnt_fromlight_30_d = d['trd_amt_2_n_user_cnt_fromlight_30_d']
         if 'trd_nfc_device_usercnt' in d:
             o.trd_nfc_device_usercnt = d['trd_nfc_device_usercnt']
         return o

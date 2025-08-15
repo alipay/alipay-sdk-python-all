@@ -18,6 +18,7 @@ class AlipayEbppIndustryEarthquakeSyncModel(object):
         self._loc_name = None
         self._magnitude = None
         self._mqtt_header = None
+        self._msg_type = None
         self._ori_time = None
         self._source = None
         self._source_id = None
@@ -92,6 +93,13 @@ class AlipayEbppIndustryEarthquakeSyncModel(object):
                     self._mqtt_header.append(i)
                 else:
                     self._mqtt_header.append(MQTTHeaderParam.from_alipay_dict(i))
+    @property
+    def msg_type(self):
+        return self._msg_type
+
+    @msg_type.setter
+    def msg_type(self, value):
+        self._msg_type = value
     @property
     def ori_time(self):
         return self._ori_time
@@ -174,6 +182,11 @@ class AlipayEbppIndustryEarthquakeSyncModel(object):
                 params['mqtt_header'] = self.mqtt_header.to_alipay_dict()
             else:
                 params['mqtt_header'] = self.mqtt_header
+        if self.msg_type:
+            if hasattr(self.msg_type, 'to_alipay_dict'):
+                params['msg_type'] = self.msg_type.to_alipay_dict()
+            else:
+                params['msg_type'] = self.msg_type
         if self.ori_time:
             if hasattr(self.ori_time, 'to_alipay_dict'):
                 params['ori_time'] = self.ori_time.to_alipay_dict()
@@ -219,6 +232,8 @@ class AlipayEbppIndustryEarthquakeSyncModel(object):
             o.magnitude = d['magnitude']
         if 'mqtt_header' in d:
             o.mqtt_header = d['mqtt_header']
+        if 'msg_type' in d:
+            o.msg_type = d['msg_type']
         if 'ori_time' in d:
             o.ori_time = d['ori_time']
         if 'source' in d:

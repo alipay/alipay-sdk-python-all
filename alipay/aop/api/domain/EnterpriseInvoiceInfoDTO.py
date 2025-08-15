@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.EnterpriseInvoiceItemDTO import EnterpriseInvoiceItemDTO
 
 
 class EnterpriseInvoiceInfoDTO(object):
@@ -11,14 +12,17 @@ class EnterpriseInvoiceInfoDTO(object):
         self._anti_fake_code = None
         self._batch_id = None
         self._checker = None
+        self._collect_source = None
         self._employee_id = None
         self._enterprise_id = None
         self._file_download_url = None
         self._file_type = None
+        self._industry_specific_infos = None
         self._invoice_check_result = None
         self._invoice_check_time = None
         self._invoice_code = None
         self._invoice_date = None
+        self._invoice_item_list = None
         self._invoice_kind = None
         self._invoice_memo = None
         self._invoice_no = None
@@ -38,6 +42,7 @@ class EnterpriseInvoiceInfoDTO(object):
         self._payer_name = None
         self._payer_register_no = None
         self._related_to_consume = None
+        self._specific_factor = None
         self._sum_amount = None
         self._tax_amount = None
         self._without_tax_amount = None
@@ -63,6 +68,13 @@ class EnterpriseInvoiceInfoDTO(object):
     @checker.setter
     def checker(self, value):
         self._checker = value
+    @property
+    def collect_source(self):
+        return self._collect_source
+
+    @collect_source.setter
+    def collect_source(self, value):
+        self._collect_source = value
     @property
     def employee_id(self):
         return self._employee_id
@@ -92,6 +104,16 @@ class EnterpriseInvoiceInfoDTO(object):
     def file_type(self, value):
         self._file_type = value
     @property
+    def industry_specific_infos(self):
+        return self._industry_specific_infos
+
+    @industry_specific_infos.setter
+    def industry_specific_infos(self, value):
+        if isinstance(value, list):
+            self._industry_specific_infos = list()
+            for i in value:
+                self._industry_specific_infos.append(i)
+    @property
     def invoice_check_result(self):
         return self._invoice_check_result
 
@@ -119,6 +141,19 @@ class EnterpriseInvoiceInfoDTO(object):
     @invoice_date.setter
     def invoice_date(self, value):
         self._invoice_date = value
+    @property
+    def invoice_item_list(self):
+        return self._invoice_item_list
+
+    @invoice_item_list.setter
+    def invoice_item_list(self, value):
+        if isinstance(value, list):
+            self._invoice_item_list = list()
+            for i in value:
+                if isinstance(i, EnterpriseInvoiceItemDTO):
+                    self._invoice_item_list.append(i)
+                else:
+                    self._invoice_item_list.append(EnterpriseInvoiceItemDTO.from_alipay_dict(i))
     @property
     def invoice_kind(self):
         return self._invoice_kind
@@ -253,6 +288,13 @@ class EnterpriseInvoiceInfoDTO(object):
     def related_to_consume(self, value):
         self._related_to_consume = value
     @property
+    def specific_factor(self):
+        return self._specific_factor
+
+    @specific_factor.setter
+    def specific_factor(self, value):
+        self._specific_factor = value
+    @property
     def sum_amount(self):
         return self._sum_amount
 
@@ -292,6 +334,11 @@ class EnterpriseInvoiceInfoDTO(object):
                 params['checker'] = self.checker.to_alipay_dict()
             else:
                 params['checker'] = self.checker
+        if self.collect_source:
+            if hasattr(self.collect_source, 'to_alipay_dict'):
+                params['collect_source'] = self.collect_source.to_alipay_dict()
+            else:
+                params['collect_source'] = self.collect_source
         if self.employee_id:
             if hasattr(self.employee_id, 'to_alipay_dict'):
                 params['employee_id'] = self.employee_id.to_alipay_dict()
@@ -312,6 +359,16 @@ class EnterpriseInvoiceInfoDTO(object):
                 params['file_type'] = self.file_type.to_alipay_dict()
             else:
                 params['file_type'] = self.file_type
+        if self.industry_specific_infos:
+            if isinstance(self.industry_specific_infos, list):
+                for i in range(0, len(self.industry_specific_infos)):
+                    element = self.industry_specific_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.industry_specific_infos[i] = element.to_alipay_dict()
+            if hasattr(self.industry_specific_infos, 'to_alipay_dict'):
+                params['industry_specific_infos'] = self.industry_specific_infos.to_alipay_dict()
+            else:
+                params['industry_specific_infos'] = self.industry_specific_infos
         if self.invoice_check_result:
             if hasattr(self.invoice_check_result, 'to_alipay_dict'):
                 params['invoice_check_result'] = self.invoice_check_result.to_alipay_dict()
@@ -332,6 +389,16 @@ class EnterpriseInvoiceInfoDTO(object):
                 params['invoice_date'] = self.invoice_date.to_alipay_dict()
             else:
                 params['invoice_date'] = self.invoice_date
+        if self.invoice_item_list:
+            if isinstance(self.invoice_item_list, list):
+                for i in range(0, len(self.invoice_item_list)):
+                    element = self.invoice_item_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.invoice_item_list[i] = element.to_alipay_dict()
+            if hasattr(self.invoice_item_list, 'to_alipay_dict'):
+                params['invoice_item_list'] = self.invoice_item_list.to_alipay_dict()
+            else:
+                params['invoice_item_list'] = self.invoice_item_list
         if self.invoice_kind:
             if hasattr(self.invoice_kind, 'to_alipay_dict'):
                 params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
@@ -427,6 +494,11 @@ class EnterpriseInvoiceInfoDTO(object):
                 params['related_to_consume'] = self.related_to_consume.to_alipay_dict()
             else:
                 params['related_to_consume'] = self.related_to_consume
+        if self.specific_factor:
+            if hasattr(self.specific_factor, 'to_alipay_dict'):
+                params['specific_factor'] = self.specific_factor.to_alipay_dict()
+            else:
+                params['specific_factor'] = self.specific_factor
         if self.sum_amount:
             if hasattr(self.sum_amount, 'to_alipay_dict'):
                 params['sum_amount'] = self.sum_amount.to_alipay_dict()
@@ -455,6 +527,8 @@ class EnterpriseInvoiceInfoDTO(object):
             o.batch_id = d['batch_id']
         if 'checker' in d:
             o.checker = d['checker']
+        if 'collect_source' in d:
+            o.collect_source = d['collect_source']
         if 'employee_id' in d:
             o.employee_id = d['employee_id']
         if 'enterprise_id' in d:
@@ -463,6 +537,8 @@ class EnterpriseInvoiceInfoDTO(object):
             o.file_download_url = d['file_download_url']
         if 'file_type' in d:
             o.file_type = d['file_type']
+        if 'industry_specific_infos' in d:
+            o.industry_specific_infos = d['industry_specific_infos']
         if 'invoice_check_result' in d:
             o.invoice_check_result = d['invoice_check_result']
         if 'invoice_check_time' in d:
@@ -471,6 +547,8 @@ class EnterpriseInvoiceInfoDTO(object):
             o.invoice_code = d['invoice_code']
         if 'invoice_date' in d:
             o.invoice_date = d['invoice_date']
+        if 'invoice_item_list' in d:
+            o.invoice_item_list = d['invoice_item_list']
         if 'invoice_kind' in d:
             o.invoice_kind = d['invoice_kind']
         if 'invoice_memo' in d:
@@ -509,6 +587,8 @@ class EnterpriseInvoiceInfoDTO(object):
             o.payer_register_no = d['payer_register_no']
         if 'related_to_consume' in d:
             o.related_to_consume = d['related_to_consume']
+        if 'specific_factor' in d:
+            o.specific_factor = d['specific_factor']
         if 'sum_amount' in d:
             o.sum_amount = d['sum_amount']
         if 'tax_amount' in d:

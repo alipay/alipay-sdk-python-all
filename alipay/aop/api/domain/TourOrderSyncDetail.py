@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TourVoucherDetail import TourVoucherDetail
 
 
 class TourOrderSyncDetail(object):
@@ -11,10 +12,14 @@ class TourOrderSyncDetail(object):
         self._biz_source_num = None
         self._cert_no = None
         self._name = None
+        self._order_amount = None
         self._order_info = None
+        self._order_status = None
         self._out_biz_no = None
         self._project_id = None
         self._tele_no = None
+        self._tour_voucher_list = None
+        self._trade_no = None
 
     @property
     def biz_source_num(self):
@@ -38,12 +43,26 @@ class TourOrderSyncDetail(object):
     def name(self, value):
         self._name = value
     @property
+    def order_amount(self):
+        return self._order_amount
+
+    @order_amount.setter
+    def order_amount(self, value):
+        self._order_amount = value
+    @property
     def order_info(self):
         return self._order_info
 
     @order_info.setter
     def order_info(self, value):
         self._order_info = value
+    @property
+    def order_status(self):
+        return self._order_status
+
+    @order_status.setter
+    def order_status(self, value):
+        self._order_status = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -65,6 +84,26 @@ class TourOrderSyncDetail(object):
     @tele_no.setter
     def tele_no(self, value):
         self._tele_no = value
+    @property
+    def tour_voucher_list(self):
+        return self._tour_voucher_list
+
+    @tour_voucher_list.setter
+    def tour_voucher_list(self, value):
+        if isinstance(value, list):
+            self._tour_voucher_list = list()
+            for i in value:
+                if isinstance(i, TourVoucherDetail):
+                    self._tour_voucher_list.append(i)
+                else:
+                    self._tour_voucher_list.append(TourVoucherDetail.from_alipay_dict(i))
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
 
     def to_alipay_dict(self):
@@ -84,11 +123,21 @@ class TourOrderSyncDetail(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.order_amount:
+            if hasattr(self.order_amount, 'to_alipay_dict'):
+                params['order_amount'] = self.order_amount.to_alipay_dict()
+            else:
+                params['order_amount'] = self.order_amount
         if self.order_info:
             if hasattr(self.order_info, 'to_alipay_dict'):
                 params['order_info'] = self.order_info.to_alipay_dict()
             else:
                 params['order_info'] = self.order_info
+        if self.order_status:
+            if hasattr(self.order_status, 'to_alipay_dict'):
+                params['order_status'] = self.order_status.to_alipay_dict()
+            else:
+                params['order_status'] = self.order_status
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -104,6 +153,21 @@ class TourOrderSyncDetail(object):
                 params['tele_no'] = self.tele_no.to_alipay_dict()
             else:
                 params['tele_no'] = self.tele_no
+        if self.tour_voucher_list:
+            if isinstance(self.tour_voucher_list, list):
+                for i in range(0, len(self.tour_voucher_list)):
+                    element = self.tour_voucher_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.tour_voucher_list[i] = element.to_alipay_dict()
+            if hasattr(self.tour_voucher_list, 'to_alipay_dict'):
+                params['tour_voucher_list'] = self.tour_voucher_list.to_alipay_dict()
+            else:
+                params['tour_voucher_list'] = self.tour_voucher_list
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         return params
 
     @staticmethod
@@ -117,14 +181,22 @@ class TourOrderSyncDetail(object):
             o.cert_no = d['cert_no']
         if 'name' in d:
             o.name = d['name']
+        if 'order_amount' in d:
+            o.order_amount = d['order_amount']
         if 'order_info' in d:
             o.order_info = d['order_info']
+        if 'order_status' in d:
+            o.order_status = d['order_status']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'tele_no' in d:
             o.tele_no = d['tele_no']
+        if 'tour_voucher_list' in d:
+            o.tour_voucher_list = d['tour_voucher_list']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         return o
 
 

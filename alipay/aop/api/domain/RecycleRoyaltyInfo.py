@@ -12,6 +12,8 @@ class RecycleRoyaltyInfo(object):
         self._desc = None
         self._role_type = None
         self._trans_in = None
+        self._trans_in_login_id = None
+        self._trans_in_open_id = None
         self._trans_in_type = None
         self._trans_stage = None
 
@@ -43,6 +45,20 @@ class RecycleRoyaltyInfo(object):
     @trans_in.setter
     def trans_in(self, value):
         self._trans_in = value
+    @property
+    def trans_in_login_id(self):
+        return self._trans_in_login_id
+
+    @trans_in_login_id.setter
+    def trans_in_login_id(self, value):
+        self._trans_in_login_id = value
+    @property
+    def trans_in_open_id(self):
+        return self._trans_in_open_id
+
+    @trans_in_open_id.setter
+    def trans_in_open_id(self, value):
+        self._trans_in_open_id = value
     @property
     def trans_in_type(self):
         return self._trans_in_type
@@ -81,6 +97,16 @@ class RecycleRoyaltyInfo(object):
                 params['trans_in'] = self.trans_in.to_alipay_dict()
             else:
                 params['trans_in'] = self.trans_in
+        if self.trans_in_login_id:
+            if hasattr(self.trans_in_login_id, 'to_alipay_dict'):
+                params['trans_in_login_id'] = self.trans_in_login_id.to_alipay_dict()
+            else:
+                params['trans_in_login_id'] = self.trans_in_login_id
+        if self.trans_in_open_id:
+            if hasattr(self.trans_in_open_id, 'to_alipay_dict'):
+                params['trans_in_open_id'] = self.trans_in_open_id.to_alipay_dict()
+            else:
+                params['trans_in_open_id'] = self.trans_in_open_id
         if self.trans_in_type:
             if hasattr(self.trans_in_type, 'to_alipay_dict'):
                 params['trans_in_type'] = self.trans_in_type.to_alipay_dict()
@@ -106,6 +132,10 @@ class RecycleRoyaltyInfo(object):
             o.role_type = d['role_type']
         if 'trans_in' in d:
             o.trans_in = d['trans_in']
+        if 'trans_in_login_id' in d:
+            o.trans_in_login_id = d['trans_in_login_id']
+        if 'trans_in_open_id' in d:
+            o.trans_in_open_id = d['trans_in_open_id']
         if 'trans_in_type' in d:
             o.trans_in_type = d['trans_in_type']
         if 'trans_stage' in d:

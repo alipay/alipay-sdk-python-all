@@ -9,8 +9,12 @@ class RecycleRoyaltyRelationVO(object):
 
     def __init__(self):
         self._bind_role_id = None
+        self._bind_role_login_id = None
+        self._bind_role_open_id = None
         self._bind_role_type = None
         self._bind_wallet_id = None
+        self._bind_wallet_login_id = None
+        self._bind_wallet_open_id = None
         self._bind_wallet_type = None
 
     @property
@@ -20,6 +24,20 @@ class RecycleRoyaltyRelationVO(object):
     @bind_role_id.setter
     def bind_role_id(self, value):
         self._bind_role_id = value
+    @property
+    def bind_role_login_id(self):
+        return self._bind_role_login_id
+
+    @bind_role_login_id.setter
+    def bind_role_login_id(self, value):
+        self._bind_role_login_id = value
+    @property
+    def bind_role_open_id(self):
+        return self._bind_role_open_id
+
+    @bind_role_open_id.setter
+    def bind_role_open_id(self, value):
+        self._bind_role_open_id = value
     @property
     def bind_role_type(self):
         return self._bind_role_type
@@ -34,6 +52,20 @@ class RecycleRoyaltyRelationVO(object):
     @bind_wallet_id.setter
     def bind_wallet_id(self, value):
         self._bind_wallet_id = value
+    @property
+    def bind_wallet_login_id(self):
+        return self._bind_wallet_login_id
+
+    @bind_wallet_login_id.setter
+    def bind_wallet_login_id(self, value):
+        self._bind_wallet_login_id = value
+    @property
+    def bind_wallet_open_id(self):
+        return self._bind_wallet_open_id
+
+    @bind_wallet_open_id.setter
+    def bind_wallet_open_id(self, value):
+        self._bind_wallet_open_id = value
     @property
     def bind_wallet_type(self):
         return self._bind_wallet_type
@@ -50,6 +82,16 @@ class RecycleRoyaltyRelationVO(object):
                 params['bind_role_id'] = self.bind_role_id.to_alipay_dict()
             else:
                 params['bind_role_id'] = self.bind_role_id
+        if self.bind_role_login_id:
+            if hasattr(self.bind_role_login_id, 'to_alipay_dict'):
+                params['bind_role_login_id'] = self.bind_role_login_id.to_alipay_dict()
+            else:
+                params['bind_role_login_id'] = self.bind_role_login_id
+        if self.bind_role_open_id:
+            if hasattr(self.bind_role_open_id, 'to_alipay_dict'):
+                params['bind_role_open_id'] = self.bind_role_open_id.to_alipay_dict()
+            else:
+                params['bind_role_open_id'] = self.bind_role_open_id
         if self.bind_role_type:
             if hasattr(self.bind_role_type, 'to_alipay_dict'):
                 params['bind_role_type'] = self.bind_role_type.to_alipay_dict()
@@ -60,6 +102,16 @@ class RecycleRoyaltyRelationVO(object):
                 params['bind_wallet_id'] = self.bind_wallet_id.to_alipay_dict()
             else:
                 params['bind_wallet_id'] = self.bind_wallet_id
+        if self.bind_wallet_login_id:
+            if hasattr(self.bind_wallet_login_id, 'to_alipay_dict'):
+                params['bind_wallet_login_id'] = self.bind_wallet_login_id.to_alipay_dict()
+            else:
+                params['bind_wallet_login_id'] = self.bind_wallet_login_id
+        if self.bind_wallet_open_id:
+            if hasattr(self.bind_wallet_open_id, 'to_alipay_dict'):
+                params['bind_wallet_open_id'] = self.bind_wallet_open_id.to_alipay_dict()
+            else:
+                params['bind_wallet_open_id'] = self.bind_wallet_open_id
         if self.bind_wallet_type:
             if hasattr(self.bind_wallet_type, 'to_alipay_dict'):
                 params['bind_wallet_type'] = self.bind_wallet_type.to_alipay_dict()
@@ -74,10 +126,18 @@ class RecycleRoyaltyRelationVO(object):
         o = RecycleRoyaltyRelationVO()
         if 'bind_role_id' in d:
             o.bind_role_id = d['bind_role_id']
+        if 'bind_role_login_id' in d:
+            o.bind_role_login_id = d['bind_role_login_id']
+        if 'bind_role_open_id' in d:
+            o.bind_role_open_id = d['bind_role_open_id']
         if 'bind_role_type' in d:
             o.bind_role_type = d['bind_role_type']
         if 'bind_wallet_id' in d:
             o.bind_wallet_id = d['bind_wallet_id']
+        if 'bind_wallet_login_id' in d:
+            o.bind_wallet_login_id = d['bind_wallet_login_id']
+        if 'bind_wallet_open_id' in d:
+            o.bind_wallet_open_id = d['bind_wallet_open_id']
         if 'bind_wallet_type' in d:
             o.bind_wallet_type = d['bind_wallet_type']
         return o

@@ -20,6 +20,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._effect_end_time = None
         self._effect_start_time = None
         self._electronic_policy_url = None
+        self._ext_info = None
         self._first_premium = None
         self._insured_time = None
         self._issue_time = None
@@ -120,6 +121,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
     @electronic_policy_url.setter
     def electronic_policy_url(self, value):
         self._electronic_policy_url = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def first_premium(self):
         return self._first_premium
@@ -353,6 +361,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['electronic_policy_url'] = self.electronic_policy_url.to_alipay_dict()
             else:
                 params['electronic_policy_url'] = self.electronic_policy_url
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.first_premium:
             if hasattr(self.first_premium, 'to_alipay_dict'):
                 params['first_premium'] = self.first_premium.to_alipay_dict()
@@ -503,6 +516,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.effect_start_time = d['effect_start_time']
         if 'electronic_policy_url' in d:
             o.electronic_policy_url = d['electronic_policy_url']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'first_premium' in d:
             o.first_premium = d['first_premium']
         if 'insured_time' in d:

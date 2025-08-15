@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RealtimeQcDialog import RealtimeQcDialog
 
 
 class RealtimeTextQc(object):
@@ -10,6 +11,7 @@ class RealtimeTextQc(object):
     def __init__(self):
         self._current_time = None
         self._dialog_id = None
+        self._realtime_qc_dialog = None
         self._role = None
         self._service_source = None
         self._start_time = None
@@ -29,6 +31,16 @@ class RealtimeTextQc(object):
     @dialog_id.setter
     def dialog_id(self, value):
         self._dialog_id = value
+    @property
+    def realtime_qc_dialog(self):
+        return self._realtime_qc_dialog
+
+    @realtime_qc_dialog.setter
+    def realtime_qc_dialog(self, value):
+        if isinstance(value, RealtimeQcDialog):
+            self._realtime_qc_dialog = value
+        else:
+            self._realtime_qc_dialog = RealtimeQcDialog.from_alipay_dict(value)
     @property
     def role(self):
         return self._role
@@ -71,6 +83,11 @@ class RealtimeTextQc(object):
                 params['dialog_id'] = self.dialog_id.to_alipay_dict()
             else:
                 params['dialog_id'] = self.dialog_id
+        if self.realtime_qc_dialog:
+            if hasattr(self.realtime_qc_dialog, 'to_alipay_dict'):
+                params['realtime_qc_dialog'] = self.realtime_qc_dialog.to_alipay_dict()
+            else:
+                params['realtime_qc_dialog'] = self.realtime_qc_dialog
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -102,6 +119,8 @@ class RealtimeTextQc(object):
             o.current_time = d['current_time']
         if 'dialog_id' in d:
             o.dialog_id = d['dialog_id']
+        if 'realtime_qc_dialog' in d:
+            o.realtime_qc_dialog = d['realtime_qc_dialog']
         if 'role' in d:
             o.role = d['role']
         if 'service_source' in d:

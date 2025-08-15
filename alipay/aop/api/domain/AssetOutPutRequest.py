@@ -10,6 +10,7 @@ class AssetOutPutRequest(object):
     def __init__(self):
         self._cert_no = None
         self._out_biz_no = None
+        self._out_voucher_id = None
         self._project_id = None
         self._tele_no = None
 
@@ -27,6 +28,13 @@ class AssetOutPutRequest(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def out_voucher_id(self):
+        return self._out_voucher_id
+
+    @out_voucher_id.setter
+    def out_voucher_id(self, value):
+        self._out_voucher_id = value
     @property
     def project_id(self):
         return self._project_id
@@ -55,6 +63,11 @@ class AssetOutPutRequest(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.out_voucher_id:
+            if hasattr(self.out_voucher_id, 'to_alipay_dict'):
+                params['out_voucher_id'] = self.out_voucher_id.to_alipay_dict()
+            else:
+                params['out_voucher_id'] = self.out_voucher_id
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AssetOutPutRequest(object):
             o.cert_no = d['cert_no']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'out_voucher_id' in d:
+            o.out_voucher_id = d['out_voucher_id']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'tele_no' in d:

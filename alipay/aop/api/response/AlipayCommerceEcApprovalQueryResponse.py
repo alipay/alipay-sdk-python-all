@@ -19,7 +19,9 @@ class AlipayCommerceEcApprovalQueryResponse(AlipayResponse):
         self._category = None
         self._employee_id = None
         self._enterprise_id = None
+        self._ex_json = None
         self._expense_type_sub_category = None
+        self._out_ext = None
         self._payment_type = None
         self._platform_approval_id = None
         self._purpose = None
@@ -94,12 +96,26 @@ class AlipayCommerceEcApprovalQueryResponse(AlipayResponse):
     def enterprise_id(self, value):
         self._enterprise_id = value
     @property
+    def ex_json(self):
+        return self._ex_json
+
+    @ex_json.setter
+    def ex_json(self, value):
+        self._ex_json = value
+    @property
     def expense_type_sub_category(self):
         return self._expense_type_sub_category
 
     @expense_type_sub_category.setter
     def expense_type_sub_category(self, value):
         self._expense_type_sub_category = value
+    @property
+    def out_ext(self):
+        return self._out_ext
+
+    @out_ext.setter
+    def out_ext(self, value):
+        self._out_ext = value
     @property
     def payment_type(self):
         return self._payment_type
@@ -147,8 +163,12 @@ class AlipayCommerceEcApprovalQueryResponse(AlipayResponse):
             self.employee_id = response['employee_id']
         if 'enterprise_id' in response:
             self.enterprise_id = response['enterprise_id']
+        if 'ex_json' in response:
+            self.ex_json = response['ex_json']
         if 'expense_type_sub_category' in response:
             self.expense_type_sub_category = response['expense_type_sub_category']
+        if 'out_ext' in response:
+            self.out_ext = response['out_ext']
         if 'payment_type' in response:
             self.payment_type = response['payment_type']
         if 'platform_approval_id' in response:

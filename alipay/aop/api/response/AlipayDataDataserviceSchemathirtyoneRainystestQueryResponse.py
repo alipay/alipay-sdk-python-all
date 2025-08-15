@@ -12,6 +12,7 @@ class AlipayDataDataserviceSchemathirtyoneRainystestQueryResponse(AlipayResponse
     def __init__(self):
         super(AlipayDataDataserviceSchemathirtyoneRainystestQueryResponse, self).__init__()
         self._demo = None
+        self._demo_empty_vv = None
         self._demo_emtpy = None
         self._demo_other = None
         self._demo_weak_ref = None
@@ -24,6 +25,13 @@ class AlipayDataDataserviceSchemathirtyoneRainystestQueryResponse(AlipayResponse
     @demo.setter
     def demo(self, value):
         self._demo = value
+    @property
+    def demo_empty_vv(self):
+        return self._demo_empty_vv
+
+    @demo_empty_vv.setter
+    def demo_empty_vv(self, value):
+        self._demo_empty_vv = value
     @property
     def demo_emtpy(self):
         return self._demo_emtpy
@@ -63,6 +71,8 @@ class AlipayDataDataserviceSchemathirtyoneRainystestQueryResponse(AlipayResponse
         response = super(AlipayDataDataserviceSchemathirtyoneRainystestQueryResponse, self).parse_response_content(response_content)
         if 'demo' in response:
             self.demo = response['demo']
+        if 'demo_empty_vv' in response:
+            self.demo_empty_vv = response['demo_empty_vv']
         if 'demo_emtpy' in response:
             self.demo_emtpy = response['demo_emtpy']
         if 'demo_other' in response:

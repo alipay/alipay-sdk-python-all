@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityInfoModifyDTO import ActivityInfoModifyDTO
 from alipay.aop.api.domain.MiniReceiverAddressInfoDTO import MiniReceiverAddressInfoDTO
+from alipay.aop.api.domain.AttrExtInfoDTO import AttrExtInfoDTO
 from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoDTO import ContactInfoDTO
 from alipay.aop.api.domain.GoodsInfoModifyDTO import GoodsInfoModifyDTO
@@ -19,6 +20,7 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
     def __init__(self):
         self._activity_infos = None
         self._address_info = None
+        self._attr_ext_info_list = None
         self._booking_info = None
         self._contact_info = None
         self._item_infos = None
@@ -58,6 +60,19 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
             self._address_info = value
         else:
             self._address_info = MiniReceiverAddressInfoDTO.from_alipay_dict(value)
+    @property
+    def attr_ext_info_list(self):
+        return self._attr_ext_info_list
+
+    @attr_ext_info_list.setter
+    def attr_ext_info_list(self, value):
+        if isinstance(value, list):
+            self._attr_ext_info_list = list()
+            for i in value:
+                if isinstance(i, AttrExtInfoDTO):
+                    self._attr_ext_info_list.append(i)
+                else:
+                    self._attr_ext_info_list.append(AttrExtInfoDTO.from_alipay_dict(i))
     @property
     def booking_info(self):
         return self._booking_info
@@ -209,6 +224,16 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
                 params['address_info'] = self.address_info.to_alipay_dict()
             else:
                 params['address_info'] = self.address_info
+        if self.attr_ext_info_list:
+            if isinstance(self.attr_ext_info_list, list):
+                for i in range(0, len(self.attr_ext_info_list)):
+                    element = self.attr_ext_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.attr_ext_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.attr_ext_info_list, 'to_alipay_dict'):
+                params['attr_ext_info_list'] = self.attr_ext_info_list.to_alipay_dict()
+            else:
+                params['attr_ext_info_list'] = self.attr_ext_info_list
         if self.booking_info:
             if hasattr(self.booking_info, 'to_alipay_dict'):
                 params['booking_info'] = self.booking_info.to_alipay_dict()
@@ -305,6 +330,8 @@ class AlipayOpenMiniOrderDeliveryModifyModel(object):
             o.activity_infos = d['activity_infos']
         if 'address_info' in d:
             o.address_info = d['address_info']
+        if 'attr_ext_info_list' in d:
+            o.attr_ext_info_list = d['attr_ext_info_list']
         if 'booking_info' in d:
             o.booking_info = d['booking_info']
         if 'contact_info' in d:

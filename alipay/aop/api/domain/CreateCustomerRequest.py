@@ -15,6 +15,7 @@ class CreateCustomerRequest(object):
         self._country = None
         self._creator = None
         self._customer_industry = None
+        self._customer_short_name = None
         self._customer_source = None
         self._ep_cert_no = None
         self._ep_name = None
@@ -85,6 +86,13 @@ class CreateCustomerRequest(object):
     @customer_industry.setter
     def customer_industry(self, value):
         self._customer_industry = value
+    @property
+    def customer_short_name(self):
+        return self._customer_short_name
+
+    @customer_short_name.setter
+    def customer_short_name(self, value):
+        self._customer_short_name = value
     @property
     def customer_source(self):
         return self._customer_source
@@ -264,6 +272,11 @@ class CreateCustomerRequest(object):
                 params['customer_industry'] = self.customer_industry.to_alipay_dict()
             else:
                 params['customer_industry'] = self.customer_industry
+        if self.customer_short_name:
+            if hasattr(self.customer_short_name, 'to_alipay_dict'):
+                params['customer_short_name'] = self.customer_short_name.to_alipay_dict()
+            else:
+                params['customer_short_name'] = self.customer_short_name
         if self.customer_source:
             if hasattr(self.customer_source, 'to_alipay_dict'):
                 params['customer_source'] = self.customer_source.to_alipay_dict()
@@ -385,6 +398,8 @@ class CreateCustomerRequest(object):
             o.creator = d['creator']
         if 'customer_industry' in d:
             o.customer_industry = d['customer_industry']
+        if 'customer_short_name' in d:
+            o.customer_short_name = d['customer_short_name']
         if 'customer_source' in d:
             o.customer_source = d['customer_source']
         if 'ep_cert_no' in d:

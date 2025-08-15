@@ -14,8 +14,10 @@ class RentBuyerExtInfo(object):
     def __init__(self):
         self._cert_address = None
         self._cert_back_pic = None
+        self._cert_expire_time = None
         self._cert_font_pic = None
         self._cert_no = None
+        self._cert_start_time = None
         self._live_pic = None
         self._mobile = None
         self._name = None
@@ -41,6 +43,13 @@ class RentBuyerExtInfo(object):
         else:
             self._cert_back_pic = RentFile.from_alipay_dict(value)
     @property
+    def cert_expire_time(self):
+        return self._cert_expire_time
+
+    @cert_expire_time.setter
+    def cert_expire_time(self, value):
+        self._cert_expire_time = value
+    @property
     def cert_font_pic(self):
         return self._cert_font_pic
 
@@ -57,6 +66,13 @@ class RentBuyerExtInfo(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_start_time(self):
+        return self._cert_start_time
+
+    @cert_start_time.setter
+    def cert_start_time(self, value):
+        self._cert_start_time = value
     @property
     def live_pic(self):
         return self._live_pic
@@ -95,6 +111,11 @@ class RentBuyerExtInfo(object):
                 params['cert_back_pic'] = self.cert_back_pic.to_alipay_dict()
             else:
                 params['cert_back_pic'] = self.cert_back_pic
+        if self.cert_expire_time:
+            if hasattr(self.cert_expire_time, 'to_alipay_dict'):
+                params['cert_expire_time'] = self.cert_expire_time.to_alipay_dict()
+            else:
+                params['cert_expire_time'] = self.cert_expire_time
         if self.cert_font_pic:
             if hasattr(self.cert_font_pic, 'to_alipay_dict'):
                 params['cert_font_pic'] = self.cert_font_pic.to_alipay_dict()
@@ -105,6 +126,11 @@ class RentBuyerExtInfo(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_start_time:
+            if hasattr(self.cert_start_time, 'to_alipay_dict'):
+                params['cert_start_time'] = self.cert_start_time.to_alipay_dict()
+            else:
+                params['cert_start_time'] = self.cert_start_time
         if self.live_pic:
             if hasattr(self.live_pic, 'to_alipay_dict'):
                 params['live_pic'] = self.live_pic.to_alipay_dict()
@@ -131,10 +157,14 @@ class RentBuyerExtInfo(object):
             o.cert_address = d['cert_address']
         if 'cert_back_pic' in d:
             o.cert_back_pic = d['cert_back_pic']
+        if 'cert_expire_time' in d:
+            o.cert_expire_time = d['cert_expire_time']
         if 'cert_font_pic' in d:
             o.cert_font_pic = d['cert_font_pic']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_start_time' in d:
+            o.cert_start_time = d['cert_start_time']
         if 'live_pic' in d:
             o.live_pic = d['live_pic']
         if 'mobile' in d:
