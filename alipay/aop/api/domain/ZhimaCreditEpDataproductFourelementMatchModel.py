@@ -11,6 +11,8 @@ class ZhimaCreditEpDataproductFourelementMatchModel(object):
         self._credit_code = None
         self._ent_name = None
         self._fr_cert_no = None
+        self._fr_cert_no_md_5 = None
+        self._fr_cert_no_sha_256 = None
         self._fr_name = None
         self._product_code = None
         self._reg_no = None
@@ -36,6 +38,20 @@ class ZhimaCreditEpDataproductFourelementMatchModel(object):
     @fr_cert_no.setter
     def fr_cert_no(self, value):
         self._fr_cert_no = value
+    @property
+    def fr_cert_no_md_5(self):
+        return self._fr_cert_no_md_5
+
+    @fr_cert_no_md_5.setter
+    def fr_cert_no_md_5(self, value):
+        self._fr_cert_no_md_5 = value
+    @property
+    def fr_cert_no_sha_256(self):
+        return self._fr_cert_no_sha_256
+
+    @fr_cert_no_sha_256.setter
+    def fr_cert_no_sha_256(self, value):
+        self._fr_cert_no_sha_256 = value
     @property
     def fr_name(self):
         return self._fr_name
@@ -76,6 +92,16 @@ class ZhimaCreditEpDataproductFourelementMatchModel(object):
                 params['fr_cert_no'] = self.fr_cert_no.to_alipay_dict()
             else:
                 params['fr_cert_no'] = self.fr_cert_no
+        if self.fr_cert_no_md_5:
+            if hasattr(self.fr_cert_no_md_5, 'to_alipay_dict'):
+                params['fr_cert_no_md_5'] = self.fr_cert_no_md_5.to_alipay_dict()
+            else:
+                params['fr_cert_no_md_5'] = self.fr_cert_no_md_5
+        if self.fr_cert_no_sha_256:
+            if hasattr(self.fr_cert_no_sha_256, 'to_alipay_dict'):
+                params['fr_cert_no_sha_256'] = self.fr_cert_no_sha_256.to_alipay_dict()
+            else:
+                params['fr_cert_no_sha_256'] = self.fr_cert_no_sha_256
         if self.fr_name:
             if hasattr(self.fr_name, 'to_alipay_dict'):
                 params['fr_name'] = self.fr_name.to_alipay_dict()
@@ -104,6 +130,10 @@ class ZhimaCreditEpDataproductFourelementMatchModel(object):
             o.ent_name = d['ent_name']
         if 'fr_cert_no' in d:
             o.fr_cert_no = d['fr_cert_no']
+        if 'fr_cert_no_md_5' in d:
+            o.fr_cert_no_md_5 = d['fr_cert_no_md_5']
+        if 'fr_cert_no_sha_256' in d:
+            o.fr_cert_no_sha_256 = d['fr_cert_no_sha_256']
         if 'fr_name' in d:
             o.fr_name = d['fr_name']
         if 'product_code' in d:

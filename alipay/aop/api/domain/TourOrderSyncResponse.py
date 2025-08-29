@@ -13,6 +13,7 @@ class TourOrderSyncResponse(object):
         self._out_voucher_id = None
         self._user_id = None
         self._vid = None
+        self._vourcher_user_ids = None
 
     @property
     def open_id(self):
@@ -49,6 +50,16 @@ class TourOrderSyncResponse(object):
     @vid.setter
     def vid(self, value):
         self._vid = value
+    @property
+    def vourcher_user_ids(self):
+        return self._vourcher_user_ids
+
+    @vourcher_user_ids.setter
+    def vourcher_user_ids(self, value):
+        if isinstance(value, list):
+            self._vourcher_user_ids = list()
+            for i in value:
+                self._vourcher_user_ids.append(i)
 
 
     def to_alipay_dict(self):
@@ -78,6 +89,16 @@ class TourOrderSyncResponse(object):
                 params['vid'] = self.vid.to_alipay_dict()
             else:
                 params['vid'] = self.vid
+        if self.vourcher_user_ids:
+            if isinstance(self.vourcher_user_ids, list):
+                for i in range(0, len(self.vourcher_user_ids)):
+                    element = self.vourcher_user_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.vourcher_user_ids[i] = element.to_alipay_dict()
+            if hasattr(self.vourcher_user_ids, 'to_alipay_dict'):
+                params['vourcher_user_ids'] = self.vourcher_user_ids.to_alipay_dict()
+            else:
+                params['vourcher_user_ids'] = self.vourcher_user_ids
         return params
 
     @staticmethod
@@ -95,6 +116,8 @@ class TourOrderSyncResponse(object):
             o.user_id = d['user_id']
         if 'vid' in d:
             o.vid = d['vid']
+        if 'vourcher_user_ids' in d:
+            o.vourcher_user_ids = d['vourcher_user_ids']
         return o
 
 

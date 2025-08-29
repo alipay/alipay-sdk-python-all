@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ReliableEnterpriseProfilesDTO import ReliableEnterpriseProfilesDTO
 
 
 class AlipayCommerceEcEnterpriseInfoModifyModel(object):
@@ -11,6 +12,7 @@ class AlipayCommerceEcEnterpriseInfoModifyModel(object):
         self._enterprise_alias = None
         self._enterprise_id = None
         self._enterprise_name = None
+        self._reliable_profiles = None
 
     @property
     def enterprise_alias(self):
@@ -33,6 +35,16 @@ class AlipayCommerceEcEnterpriseInfoModifyModel(object):
     @enterprise_name.setter
     def enterprise_name(self, value):
         self._enterprise_name = value
+    @property
+    def reliable_profiles(self):
+        return self._reliable_profiles
+
+    @reliable_profiles.setter
+    def reliable_profiles(self, value):
+        if isinstance(value, ReliableEnterpriseProfilesDTO):
+            self._reliable_profiles = value
+        else:
+            self._reliable_profiles = ReliableEnterpriseProfilesDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -52,6 +64,11 @@ class AlipayCommerceEcEnterpriseInfoModifyModel(object):
                 params['enterprise_name'] = self.enterprise_name.to_alipay_dict()
             else:
                 params['enterprise_name'] = self.enterprise_name
+        if self.reliable_profiles:
+            if hasattr(self.reliable_profiles, 'to_alipay_dict'):
+                params['reliable_profiles'] = self.reliable_profiles.to_alipay_dict()
+            else:
+                params['reliable_profiles'] = self.reliable_profiles
         return params
 
     @staticmethod
@@ -65,6 +82,8 @@ class AlipayCommerceEcEnterpriseInfoModifyModel(object):
             o.enterprise_id = d['enterprise_id']
         if 'enterprise_name' in d:
             o.enterprise_name = d['enterprise_name']
+        if 'reliable_profiles' in d:
+            o.reliable_profiles = d['reliable_profiles']
         return o
 
 

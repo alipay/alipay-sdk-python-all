@@ -13,6 +13,7 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryModel(object):
         self._enterprise_id = None
         self._page_num = None
         self._page_size = None
+        self._tax_register_no = None
 
     @property
     def account_id(self):
@@ -49,6 +50,13 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def tax_register_no(self):
+        return self._tax_register_no
+
+    @tax_register_no.setter
+    def tax_register_no(self, value):
+        self._tax_register_no = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.tax_register_no:
+            if hasattr(self.tax_register_no, 'to_alipay_dict'):
+                params['tax_register_no'] = self.tax_register_no.to_alipay_dict()
+            else:
+                params['tax_register_no'] = self.tax_register_no
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayEbppInvoiceEnterpriseexctrlEmployertitleBatchqueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'tax_register_no' in d:
+            o.tax_register_no = d['tax_register_no']
         return o
 
 

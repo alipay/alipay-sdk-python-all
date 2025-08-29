@@ -11,6 +11,7 @@ class RentBuyoutInfoDTO(object):
         self._buyout_installment_no = None
         self._origin_order_id = None
         self._pay_notify_url = None
+        self._sync_pay = None
 
     @property
     def buyout_installment_no(self):
@@ -33,6 +34,13 @@ class RentBuyoutInfoDTO(object):
     @pay_notify_url.setter
     def pay_notify_url(self, value):
         self._pay_notify_url = value
+    @property
+    def sync_pay(self):
+        return self._sync_pay
+
+    @sync_pay.setter
+    def sync_pay(self, value):
+        self._sync_pay = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class RentBuyoutInfoDTO(object):
                 params['pay_notify_url'] = self.pay_notify_url.to_alipay_dict()
             else:
                 params['pay_notify_url'] = self.pay_notify_url
+        if self.sync_pay:
+            if hasattr(self.sync_pay, 'to_alipay_dict'):
+                params['sync_pay'] = self.sync_pay.to_alipay_dict()
+            else:
+                params['sync_pay'] = self.sync_pay
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class RentBuyoutInfoDTO(object):
             o.origin_order_id = d['origin_order_id']
         if 'pay_notify_url' in d:
             o.pay_notify_url = d['pay_notify_url']
+        if 'sync_pay' in d:
+            o.sync_pay = d['sync_pay']
         return o
 
 

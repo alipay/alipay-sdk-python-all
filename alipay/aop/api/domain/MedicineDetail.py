@@ -9,6 +9,7 @@ class MedicineDetail(object):
 
     def __init__(self):
         self._description = None
+        self._discount_price = None
         self._id = None
         self._image = None
         self._name = None
@@ -21,6 +22,13 @@ class MedicineDetail(object):
     @description.setter
     def description(self, value):
         self._description = value
+    @property
+    def discount_price(self):
+        return self._discount_price
+
+    @discount_price.setter
+    def discount_price(self, value):
+        self._discount_price = value
     @property
     def id(self):
         return self._id
@@ -58,6 +66,11 @@ class MedicineDetail(object):
                 params['description'] = self.description.to_alipay_dict()
             else:
                 params['description'] = self.description
+        if self.discount_price:
+            if hasattr(self.discount_price, 'to_alipay_dict'):
+                params['discount_price'] = self.discount_price.to_alipay_dict()
+            else:
+                params['discount_price'] = self.discount_price
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -87,6 +100,8 @@ class MedicineDetail(object):
         o = MedicineDetail()
         if 'description' in d:
             o.description = d['description']
+        if 'discount_price' in d:
+            o.discount_price = d['discount_price']
         if 'id' in d:
             o.id = d['id']
         if 'image' in d:

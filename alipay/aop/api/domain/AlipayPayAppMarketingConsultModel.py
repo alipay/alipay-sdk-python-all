@@ -11,6 +11,8 @@ class AlipayPayAppMarketingConsultModel(object):
     def __init__(self):
         self._biz_scene = None
         self._blind_mobile = None
+        self._cert_no = None
+        self._cert_type = None
         self._confused_mobile_list = None
         self._device_id = None
         self._device_type = None
@@ -46,6 +48,20 @@ class AlipayPayAppMarketingConsultModel(object):
     @blind_mobile.setter
     def blind_mobile(self, value):
         self._blind_mobile = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def confused_mobile_list(self):
         return self._confused_mobile_list
@@ -209,6 +225,16 @@ class AlipayPayAppMarketingConsultModel(object):
                 params['blind_mobile'] = self.blind_mobile.to_alipay_dict()
             else:
                 params['blind_mobile'] = self.blind_mobile
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.confused_mobile_list:
             if isinstance(self.confused_mobile_list, list):
                 for i in range(0, len(self.confused_mobile_list)):
@@ -330,6 +356,10 @@ class AlipayPayAppMarketingConsultModel(object):
             o.biz_scene = d['biz_scene']
         if 'blind_mobile' in d:
             o.blind_mobile = d['blind_mobile']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'confused_mobile_list' in d:
             o.confused_mobile_list = d['confused_mobile_list']
         if 'device_id' in d:

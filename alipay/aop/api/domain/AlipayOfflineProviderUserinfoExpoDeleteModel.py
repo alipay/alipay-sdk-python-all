@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOfflineProviderUserinfoExpoDeleteModel(object):
 
     def __init__(self):
+        self._identity_card = None
         self._phone = None
         self._time_uuid = None
 
+    @property
+    def identity_card(self):
+        return self._identity_card
+
+    @identity_card.setter
+    def identity_card(self, value):
+        self._identity_card = value
     @property
     def phone(self):
         return self._phone
@@ -29,6 +37,11 @@ class AlipayOfflineProviderUserinfoExpoDeleteModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.identity_card:
+            if hasattr(self.identity_card, 'to_alipay_dict'):
+                params['identity_card'] = self.identity_card.to_alipay_dict()
+            else:
+                params['identity_card'] = self.identity_card
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayOfflineProviderUserinfoExpoDeleteModel(object):
         if not d:
             return None
         o = AlipayOfflineProviderUserinfoExpoDeleteModel()
+        if 'identity_card' in d:
+            o.identity_card = d['identity_card']
         if 'phone' in d:
             o.phone = d['phone']
         if 'time_uuid' in d:

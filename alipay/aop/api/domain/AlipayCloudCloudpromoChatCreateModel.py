@@ -14,6 +14,7 @@ class AlipayCloudCloudpromoChatCreateModel(object):
         self._business_data = None
         self._conversation_id = None
         self._extra_params = None
+        self._inc_access_id = None
         self._load_test = None
         self._question = None
         self._retry = None
@@ -57,6 +58,13 @@ class AlipayCloudCloudpromoChatCreateModel(object):
             self._extra_params = value
         else:
             self._extra_params = ChatExtraParams.from_alipay_dict(value)
+    @property
+    def inc_access_id(self):
+        return self._inc_access_id
+
+    @inc_access_id.setter
+    def inc_access_id(self, value):
+        self._inc_access_id = value
     @property
     def load_test(self):
         return self._load_test
@@ -114,6 +122,11 @@ class AlipayCloudCloudpromoChatCreateModel(object):
                 params['extra_params'] = self.extra_params.to_alipay_dict()
             else:
                 params['extra_params'] = self.extra_params
+        if self.inc_access_id:
+            if hasattr(self.inc_access_id, 'to_alipay_dict'):
+                params['inc_access_id'] = self.inc_access_id.to_alipay_dict()
+            else:
+                params['inc_access_id'] = self.inc_access_id
         if self.load_test:
             if hasattr(self.load_test, 'to_alipay_dict'):
                 params['load_test'] = self.load_test.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayCloudCloudpromoChatCreateModel(object):
             o.conversation_id = d['conversation_id']
         if 'extra_params' in d:
             o.extra_params = d['extra_params']
+        if 'inc_access_id' in d:
+            o.inc_access_id = d['inc_access_id']
         if 'load_test' in d:
             o.load_test = d['load_test']
         if 'question' in d:

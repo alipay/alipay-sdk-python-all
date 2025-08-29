@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityAssistantMsgContentVO import ActivityAssistantMsgContentVO
 from alipay.aop.api.domain.BenefitAssistantMsgContentVO import BenefitAssistantMsgContentVO
 from alipay.aop.api.domain.GoodsAssistantMsgContentVO import GoodsAssistantMsgContentVO
+from alipay.aop.api.domain.RedPacketAssistantMsgContentVO import RedPacketAssistantMsgContentVO
 
 
 class AssistantMsgDetailVO(object):
@@ -19,6 +20,7 @@ class AssistantMsgDetailVO(object):
         self._goods_content = None
         self._group_ids = None
         self._name = None
+        self._red_packet_content = None
         self._status = None
 
     @property
@@ -90,6 +92,16 @@ class AssistantMsgDetailVO(object):
     def name(self, value):
         self._name = value
     @property
+    def red_packet_content(self):
+        return self._red_packet_content
+
+    @red_packet_content.setter
+    def red_packet_content(self, value):
+        if isinstance(value, RedPacketAssistantMsgContentVO):
+            self._red_packet_content = value
+        else:
+            self._red_packet_content = RedPacketAssistantMsgContentVO.from_alipay_dict(value)
+    @property
     def status(self):
         return self._status
 
@@ -145,6 +157,11 @@ class AssistantMsgDetailVO(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.red_packet_content:
+            if hasattr(self.red_packet_content, 'to_alipay_dict'):
+                params['red_packet_content'] = self.red_packet_content.to_alipay_dict()
+            else:
+                params['red_packet_content'] = self.red_packet_content
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -173,6 +190,8 @@ class AssistantMsgDetailVO(object):
             o.group_ids = d['group_ids']
         if 'name' in d:
             o.name = d['name']
+        if 'red_packet_content' in d:
+            o.red_packet_content = d['red_packet_content']
         if 'status' in d:
             o.status = d['status']
         return o

@@ -13,6 +13,7 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
         self._page_size = None
         self._principal_id = None
         self._principal_tag = None
+        self._service_entity_app_id = None
         self._service_entity_out_source = None
         self._service_entity_type = None
 
@@ -51,6 +52,13 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
     @principal_tag.setter
     def principal_tag(self, value):
         self._principal_tag = value
+    @property
+    def service_entity_app_id(self):
+        return self._service_entity_app_id
+
+    @service_entity_app_id.setter
+    def service_entity_app_id(self, value):
+        self._service_entity_app_id = value
     @property
     def service_entity_out_source(self):
         return self._service_entity_out_source
@@ -94,6 +102,11 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.service_entity_app_id:
+            if hasattr(self.service_entity_app_id, 'to_alipay_dict'):
+                params['service_entity_app_id'] = self.service_entity_app_id.to_alipay_dict()
+            else:
+                params['service_entity_app_id'] = self.service_entity_app_id
         if self.service_entity_out_source:
             if hasattr(self.service_entity_out_source, 'to_alipay_dict'):
                 params['service_entity_out_source'] = self.service_entity_out_source.to_alipay_dict()
@@ -121,6 +134,8 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
             o.principal_id = d['principal_id']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'service_entity_app_id' in d:
+            o.service_entity_app_id = d['service_entity_app_id']
         if 'service_entity_out_source' in d:
             o.service_entity_out_source = d['service_entity_out_source']
         if 'service_entity_type' in d:

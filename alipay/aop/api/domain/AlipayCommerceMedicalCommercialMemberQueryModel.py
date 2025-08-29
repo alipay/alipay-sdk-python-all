@@ -11,6 +11,7 @@ class AlipayCommerceMedicalCommercialMemberQueryModel(object):
         self._open_id = None
         self._order_id = None
         self._out_product_id = None
+        self._sku_id = None
         self._user_id = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceMedicalCommercialMemberQueryModel(object):
     @out_product_id.setter
     def out_product_id(self, value):
         self._out_product_id = value
+    @property
+    def sku_id(self):
+        return self._sku_id
+
+    @sku_id.setter
+    def sku_id(self, value):
+        self._sku_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -60,6 +68,11 @@ class AlipayCommerceMedicalCommercialMemberQueryModel(object):
                 params['out_product_id'] = self.out_product_id.to_alipay_dict()
             else:
                 params['out_product_id'] = self.out_product_id
+        if self.sku_id:
+            if hasattr(self.sku_id, 'to_alipay_dict'):
+                params['sku_id'] = self.sku_id.to_alipay_dict()
+            else:
+                params['sku_id'] = self.sku_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceMedicalCommercialMemberQueryModel(object):
             o.order_id = d['order_id']
         if 'out_product_id' in d:
             o.out_product_id = d['out_product_id']
+        if 'sku_id' in d:
+            o.sku_id = d['sku_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

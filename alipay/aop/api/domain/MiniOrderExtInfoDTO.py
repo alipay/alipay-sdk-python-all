@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AttrExtInfoDTO import AttrExtInfoDTO
 
 
 class MiniOrderExtInfoDTO(object):
@@ -10,6 +11,7 @@ class MiniOrderExtInfoDTO(object):
     def __init__(self):
         self._addition_rebate_base_price = None
         self._alipay_account = None
+        self._attr_ext_info_list = None
         self._credit_code = None
         self._deduct_sign_scene = None
         self._deposit_payment = None
@@ -34,6 +36,19 @@ class MiniOrderExtInfoDTO(object):
     @alipay_account.setter
     def alipay_account(self, value):
         self._alipay_account = value
+    @property
+    def attr_ext_info_list(self):
+        return self._attr_ext_info_list
+
+    @attr_ext_info_list.setter
+    def attr_ext_info_list(self, value):
+        if isinstance(value, list):
+            self._attr_ext_info_list = list()
+            for i in value:
+                if isinstance(i, AttrExtInfoDTO):
+                    self._attr_ext_info_list.append(i)
+                else:
+                    self._attr_ext_info_list.append(AttrExtInfoDTO.from_alipay_dict(i))
     @property
     def credit_code(self):
         return self._credit_code
@@ -111,6 +126,16 @@ class MiniOrderExtInfoDTO(object):
                 params['alipay_account'] = self.alipay_account.to_alipay_dict()
             else:
                 params['alipay_account'] = self.alipay_account
+        if self.attr_ext_info_list:
+            if isinstance(self.attr_ext_info_list, list):
+                for i in range(0, len(self.attr_ext_info_list)):
+                    element = self.attr_ext_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.attr_ext_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.attr_ext_info_list, 'to_alipay_dict'):
+                params['attr_ext_info_list'] = self.attr_ext_info_list.to_alipay_dict()
+            else:
+                params['attr_ext_info_list'] = self.attr_ext_info_list
         if self.credit_code:
             if hasattr(self.credit_code, 'to_alipay_dict'):
                 params['credit_code'] = self.credit_code.to_alipay_dict()
@@ -167,6 +192,8 @@ class MiniOrderExtInfoDTO(object):
             o.addition_rebate_base_price = d['addition_rebate_base_price']
         if 'alipay_account' in d:
             o.alipay_account = d['alipay_account']
+        if 'attr_ext_info_list' in d:
+            o.attr_ext_info_list = d['attr_ext_info_list']
         if 'credit_code' in d:
             o.credit_code = d['credit_code']
         if 'deduct_sign_scene' in d:

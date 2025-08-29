@@ -11,6 +11,7 @@ class AlipayCommerceAcommunicationDiscountPhonePayModel(object):
         self._client_ip = None
         self._face = None
         self._item_id = None
+        self._item_tag = None
         self._mobile = None
         self._out_biz_no = None
         self._price = None
@@ -38,6 +39,13 @@ class AlipayCommerceAcommunicationDiscountPhonePayModel(object):
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def item_tag(self):
+        return self._item_tag
+
+    @item_tag.setter
+    def item_tag(self, value):
+        self._item_tag = value
     @property
     def mobile(self):
         return self._mobile
@@ -92,6 +100,11 @@ class AlipayCommerceAcommunicationDiscountPhonePayModel(object):
                 params['item_id'] = self.item_id.to_alipay_dict()
             else:
                 params['item_id'] = self.item_id
+        if self.item_tag:
+            if hasattr(self.item_tag, 'to_alipay_dict'):
+                params['item_tag'] = self.item_tag.to_alipay_dict()
+            else:
+                params['item_tag'] = self.item_tag
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -130,6 +143,8 @@ class AlipayCommerceAcommunicationDiscountPhonePayModel(object):
             o.face = d['face']
         if 'item_id' in d:
             o.item_id = d['item_id']
+        if 'item_tag' in d:
+            o.item_tag = d['item_tag']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'out_biz_no' in d:

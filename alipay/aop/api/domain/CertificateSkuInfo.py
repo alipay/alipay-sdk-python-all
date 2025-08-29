@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class CertificateSkuInfo(object):
 
     def __init__(self):
+        self._commodity = None
         self._item_id = None
         self._item_type = None
         self._out_item_id = None
@@ -15,6 +16,13 @@ class CertificateSkuInfo(object):
         self._sku_id = None
         self._title = None
 
+    @property
+    def commodity(self):
+        return self._commodity
+
+    @commodity.setter
+    def commodity(self, value):
+        self._commodity = value
     @property
     def item_id(self):
         return self._item_id
@@ -61,6 +69,11 @@ class CertificateSkuInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.commodity:
+            if hasattr(self.commodity, 'to_alipay_dict'):
+                params['commodity'] = self.commodity.to_alipay_dict()
+            else:
+                params['commodity'] = self.commodity
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -98,6 +111,8 @@ class CertificateSkuInfo(object):
         if not d:
             return None
         o = CertificateSkuInfo()
+        if 'commodity' in d:
+            o.commodity = d['commodity']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_type' in d:

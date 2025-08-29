@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.IotSpeechContentConfig import IotSpeechContentConfig
 
 
 class AlipayMerchantIndirectIotcoverBindModel(object):
@@ -12,6 +13,7 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
         self._device_id = None
         self._encode_url = None
         self._smid = None
+        self._speech_content = None
         self._supplier_id = None
 
     @property
@@ -43,6 +45,16 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
     def smid(self, value):
         self._smid = value
     @property
+    def speech_content(self):
+        return self._speech_content
+
+    @speech_content.setter
+    def speech_content(self, value):
+        if isinstance(value, IotSpeechContentConfig):
+            self._speech_content = value
+        else:
+            self._speech_content = IotSpeechContentConfig.from_alipay_dict(value)
+    @property
     def supplier_id(self):
         return self._supplier_id
 
@@ -73,6 +85,11 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
                 params['smid'] = self.smid.to_alipay_dict()
             else:
                 params['smid'] = self.smid
+        if self.speech_content:
+            if hasattr(self.speech_content, 'to_alipay_dict'):
+                params['speech_content'] = self.speech_content.to_alipay_dict()
+            else:
+                params['speech_content'] = self.speech_content
         if self.supplier_id:
             if hasattr(self.supplier_id, 'to_alipay_dict'):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
@@ -93,6 +110,8 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
             o.encode_url = d['encode_url']
         if 'smid' in d:
             o.smid = d['smid']
+        if 'speech_content' in d:
+            o.speech_content = d['speech_content']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
         return o

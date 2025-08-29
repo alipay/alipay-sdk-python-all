@@ -28,6 +28,7 @@ class RefundOrderDetailVO(object):
         self._packing_fee = None
         self._reason = None
         self._reason_code = None
+        self._refund_commission_nos = None
         self._refund_msg = None
         self._refund_order_no = None
         self._refund_status = None
@@ -175,6 +176,16 @@ class RefundOrderDetailVO(object):
     @reason_code.setter
     def reason_code(self, value):
         self._reason_code = value
+    @property
+    def refund_commission_nos(self):
+        return self._refund_commission_nos
+
+    @refund_commission_nos.setter
+    def refund_commission_nos(self, value):
+        if isinstance(value, list):
+            self._refund_commission_nos = list()
+            for i in value:
+                self._refund_commission_nos.append(i)
     @property
     def refund_msg(self):
         return self._refund_msg
@@ -335,6 +346,16 @@ class RefundOrderDetailVO(object):
                 params['reason_code'] = self.reason_code.to_alipay_dict()
             else:
                 params['reason_code'] = self.reason_code
+        if self.refund_commission_nos:
+            if isinstance(self.refund_commission_nos, list):
+                for i in range(0, len(self.refund_commission_nos)):
+                    element = self.refund_commission_nos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refund_commission_nos[i] = element.to_alipay_dict()
+            if hasattr(self.refund_commission_nos, 'to_alipay_dict'):
+                params['refund_commission_nos'] = self.refund_commission_nos.to_alipay_dict()
+            else:
+                params['refund_commission_nos'] = self.refund_commission_nos
         if self.refund_msg:
             if hasattr(self.refund_msg, 'to_alipay_dict'):
                 params['refund_msg'] = self.refund_msg.to_alipay_dict()
@@ -418,6 +439,8 @@ class RefundOrderDetailVO(object):
             o.reason = d['reason']
         if 'reason_code' in d:
             o.reason_code = d['reason_code']
+        if 'refund_commission_nos' in d:
+            o.refund_commission_nos = d['refund_commission_nos']
         if 'refund_msg' in d:
             o.refund_msg = d['refund_msg']
         if 'refund_order_no' in d:

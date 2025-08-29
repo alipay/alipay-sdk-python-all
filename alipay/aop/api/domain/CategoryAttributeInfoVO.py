@@ -17,6 +17,7 @@ class CategoryAttributeInfoVO(object):
         self._attr_value_type = None
         self._category_id = None
         self._custom_input = None
+        self._decided = None
         self._multi_select = None
         self._required = None
         self._status = None
@@ -83,6 +84,13 @@ class CategoryAttributeInfoVO(object):
     @custom_input.setter
     def custom_input(self, value):
         self._custom_input = value
+    @property
+    def decided(self):
+        return self._decided
+
+    @decided.setter
+    def decided(self, value):
+        self._decided = value
     @property
     def multi_select(self):
         return self._multi_select
@@ -153,6 +161,11 @@ class CategoryAttributeInfoVO(object):
                 params['custom_input'] = self.custom_input.to_alipay_dict()
             else:
                 params['custom_input'] = self.custom_input
+        if self.decided:
+            if hasattr(self.decided, 'to_alipay_dict'):
+                params['decided'] = self.decided.to_alipay_dict()
+            else:
+                params['decided'] = self.decided
         if self.multi_select:
             if hasattr(self.multi_select, 'to_alipay_dict'):
                 params['multi_select'] = self.multi_select.to_alipay_dict()
@@ -191,6 +204,8 @@ class CategoryAttributeInfoVO(object):
             o.category_id = d['category_id']
         if 'custom_input' in d:
             o.custom_input = d['custom_input']
+        if 'decided' in d:
+            o.decided = d['decided']
         if 'multi_select' in d:
             o.multi_select = d['multi_select']
         if 'required' in d:

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BizTagEntity import BizTagEntity
 from alipay.aop.api.domain.PayChannelPromoInfo import PayChannelPromoInfo
+from alipay.aop.api.domain.DiscountQuotaInfo import DiscountQuotaInfo
 
 
 class AlipayPayAppMarketingConsultResponse(AlipayResponse):
@@ -19,6 +20,7 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
         self._blind_signature = None
         self._channel_info_list = None
         self._confused_cipher_list = None
+        self._discount_quota_infos = None
         self._image = None
         self._marketing_rank = None
         self._pay_operation_info = None
@@ -101,6 +103,19 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             for i in value:
                 self._confused_cipher_list.append(i)
     @property
+    def discount_quota_infos(self):
+        return self._discount_quota_infos
+
+    @discount_quota_infos.setter
+    def discount_quota_infos(self, value):
+        if isinstance(value, list):
+            self._discount_quota_infos = list()
+            for i in value:
+                if isinstance(i, DiscountQuotaInfo):
+                    self._discount_quota_infos.append(i)
+                else:
+                    self._discount_quota_infos.append(DiscountQuotaInfo.from_alipay_dict(i))
+    @property
     def image(self):
         return self._image
 
@@ -161,6 +176,8 @@ class AlipayPayAppMarketingConsultResponse(AlipayResponse):
             self.channel_info_list = response['channel_info_list']
         if 'confused_cipher_list' in response:
             self.confused_cipher_list = response['confused_cipher_list']
+        if 'discount_quota_infos' in response:
+            self.discount_quota_infos = response['discount_quota_infos']
         if 'image' in response:
             self.image = response['image']
         if 'marketing_rank' in response:

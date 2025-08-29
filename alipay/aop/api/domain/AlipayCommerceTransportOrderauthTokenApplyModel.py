@@ -13,7 +13,10 @@ class AlipayCommerceTransportOrderauthTokenApplyModel(object):
         self._auth_industry = None
         self._ext_info = None
         self._id_card_number = None
+        self._open_id = None
         self._phone_number = None
+        self._user_id = None
+        self._user_info_source = None
 
     @property
     def auth_appid(self):
@@ -47,12 +50,33 @@ class AlipayCommerceTransportOrderauthTokenApplyModel(object):
     def id_card_number(self, value):
         self._id_card_number = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def phone_number(self):
         return self._phone_number
 
     @phone_number.setter
     def phone_number(self, value):
         self._phone_number = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
+    @property
+    def user_info_source(self):
+        return self._user_info_source
+
+    @user_info_source.setter
+    def user_info_source(self, value):
+        self._user_info_source = value
 
 
     def to_alipay_dict(self):
@@ -77,11 +101,26 @@ class AlipayCommerceTransportOrderauthTokenApplyModel(object):
                 params['id_card_number'] = self.id_card_number.to_alipay_dict()
             else:
                 params['id_card_number'] = self.id_card_number
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.phone_number:
             if hasattr(self.phone_number, 'to_alipay_dict'):
                 params['phone_number'] = self.phone_number.to_alipay_dict()
             else:
                 params['phone_number'] = self.phone_number
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
+        if self.user_info_source:
+            if hasattr(self.user_info_source, 'to_alipay_dict'):
+                params['user_info_source'] = self.user_info_source.to_alipay_dict()
+            else:
+                params['user_info_source'] = self.user_info_source
         return params
 
     @staticmethod
@@ -97,8 +136,14 @@ class AlipayCommerceTransportOrderauthTokenApplyModel(object):
             o.ext_info = d['ext_info']
         if 'id_card_number' in d:
             o.id_card_number = d['id_card_number']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'phone_number' in d:
             o.phone_number = d['phone_number']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
+        if 'user_info_source' in d:
+            o.user_info_source = d['user_info_source']
         return o
 
 

@@ -10,6 +10,7 @@ class DeliveryMerchantInfoDTO(object):
     def __init__(self):
         self._deduct_out = None
         self._deduct_out_type = None
+        self._merchant_pid = None
         self._mrchant_pid = None
 
     @property
@@ -26,6 +27,13 @@ class DeliveryMerchantInfoDTO(object):
     @deduct_out_type.setter
     def deduct_out_type(self, value):
         self._deduct_out_type = value
+    @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
     @property
     def mrchant_pid(self):
         return self._mrchant_pid
@@ -47,6 +55,11 @@ class DeliveryMerchantInfoDTO(object):
                 params['deduct_out_type'] = self.deduct_out_type.to_alipay_dict()
             else:
                 params['deduct_out_type'] = self.deduct_out_type
+        if self.merchant_pid:
+            if hasattr(self.merchant_pid, 'to_alipay_dict'):
+                params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
+            else:
+                params['merchant_pid'] = self.merchant_pid
         if self.mrchant_pid:
             if hasattr(self.mrchant_pid, 'to_alipay_dict'):
                 params['mrchant_pid'] = self.mrchant_pid.to_alipay_dict()
@@ -63,6 +76,8 @@ class DeliveryMerchantInfoDTO(object):
             o.deduct_out = d['deduct_out']
         if 'deduct_out_type' in d:
             o.deduct_out_type = d['deduct_out_type']
+        if 'merchant_pid' in d:
+            o.merchant_pid = d['merchant_pid']
         if 'mrchant_pid' in d:
             o.mrchant_pid = d['mrchant_pid']
         return o

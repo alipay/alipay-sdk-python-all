@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SellerSyncRentBuyerExtInfo import SellerSyncRentBuyerExtInfo
 from alipay.aop.api.domain.SellerSyncRentDeliveryExtInfo import SellerSyncRentDeliveryExtInfo
 from alipay.aop.api.domain.SellerSyncRentFinancingExtInfo import SellerSyncRentFinancingExtInfo
+from alipay.aop.api.domain.SellerSyncRentHeadLeaseExtInfo import SellerSyncRentHeadLeaseExtInfo
 from alipay.aop.api.domain.RentHistoricalAssetFinancingExtInfoDTO import RentHistoricalAssetFinancingExtInfoDTO
 from alipay.aop.api.domain.SellerSyncRentItemExtInfo import SellerSyncRentItemExtInfo
 from alipay.aop.api.domain.SellerSyncRentOrderExtInfo import SellerSyncRentOrderExtInfo
@@ -23,6 +24,7 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
         self._buyer_open_id = None
         self._delivery_ext_info = None
         self._financing_ext_info = None
+        self._head_lease_ext_info = None
         self._historical_asset_financing_ext_info = None
         self._item_ext_info = None
         self._order_ext_info = None
@@ -34,6 +36,8 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
         self._buyer_live_pic = None
         self._delivery_received_pic = None
         self._financing_rent_protocol = None
+        self._head_lease_protocol = None
+        self._platform_service_protocol = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -98,6 +102,16 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
                     self._financing_ext_info.append(i)
                 else:
                     self._financing_ext_info.append(SellerSyncRentFinancingExtInfo.from_alipay_dict(i))
+    @property
+    def head_lease_ext_info(self):
+        return self._head_lease_ext_info
+
+    @head_lease_ext_info.setter
+    def head_lease_ext_info(self, value):
+        if isinstance(value, SellerSyncRentHeadLeaseExtInfo):
+            self._head_lease_ext_info = value
+        else:
+            self._head_lease_ext_info = SellerSyncRentHeadLeaseExtInfo.from_alipay_dict(value)
     @property
     def historical_asset_financing_ext_info(self):
         return self._historical_asset_financing_ext_info
@@ -195,6 +209,24 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
         if not isinstance(value, FileItem):
             return
         self._financing_rent_protocol = value
+    @property
+    def head_lease_protocol(self):
+        return self._head_lease_protocol
+
+    @head_lease_protocol.setter
+    def head_lease_protocol(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._head_lease_protocol = value
+    @property
+    def platform_service_protocol(self):
+        return self._platform_service_protocol
+
+    @platform_service_protocol.setter
+    def platform_service_protocol(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._platform_service_protocol = value
 
     @property
     def version(self):
@@ -300,6 +332,11 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
                     if hasattr(element, 'to_alipay_dict'):
                         self.financing_ext_info[i] = element.to_alipay_dict()
                 params['financing_ext_info'] = json.dumps(obj=self.financing_ext_info, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.head_lease_ext_info:
+            if hasattr(self.head_lease_ext_info, 'to_alipay_dict'):
+                params['head_lease_ext_info'] = json.dumps(obj=self.head_lease_ext_info.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['head_lease_ext_info'] = self.head_lease_ext_info
         if self.historical_asset_financing_ext_info:
             if hasattr(self.historical_asset_financing_ext_info, 'to_alipay_dict'):
                 params['historical_asset_financing_ext_info'] = json.dumps(obj=self.historical_asset_financing_ext_info.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -356,4 +393,8 @@ class AlipayCommerceRentOrderExtSyncRequest(object):
             multipart_params['delivery_received_pic'] = self.delivery_received_pic
         if self.financing_rent_protocol:
             multipart_params['financing_rent_protocol'] = self.financing_rent_protocol
+        if self.head_lease_protocol:
+            multipart_params['head_lease_protocol'] = self.head_lease_protocol
+        if self.platform_service_protocol:
+            multipart_params['platform_service_protocol'] = self.platform_service_protocol
         return multipart_params

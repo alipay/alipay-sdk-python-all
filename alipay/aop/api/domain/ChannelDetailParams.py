@@ -12,6 +12,7 @@ class ChannelDetailParams(object):
         self._credit_risk_info = None
         self._marketing_flag = None
         self._refuse_code = None
+        self._user_has_sign = None
 
     @property
     def card_group_name(self):
@@ -41,6 +42,13 @@ class ChannelDetailParams(object):
     @refuse_code.setter
     def refuse_code(self, value):
         self._refuse_code = value
+    @property
+    def user_has_sign(self):
+        return self._user_has_sign
+
+    @user_has_sign.setter
+    def user_has_sign(self, value):
+        self._user_has_sign = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class ChannelDetailParams(object):
                 params['refuse_code'] = self.refuse_code.to_alipay_dict()
             else:
                 params['refuse_code'] = self.refuse_code
+        if self.user_has_sign:
+            if hasattr(self.user_has_sign, 'to_alipay_dict'):
+                params['user_has_sign'] = self.user_has_sign.to_alipay_dict()
+            else:
+                params['user_has_sign'] = self.user_has_sign
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class ChannelDetailParams(object):
             o.marketing_flag = d['marketing_flag']
         if 'refuse_code' in d:
             o.refuse_code = d['refuse_code']
+        if 'user_has_sign' in d:
+            o.user_has_sign = d['user_has_sign']
         return o
 
 

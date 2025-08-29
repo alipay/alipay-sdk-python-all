@@ -13,7 +13,9 @@ class AlipayMerchantIndirectIotbindQueryResponse(AlipayResponse):
         self._bind_time = None
         self._device_id = None
         self._encode_url = None
+        self._msg_id = None
         self._smid = None
+        self._speech_content = None
         self._supplier_id = None
 
     @property
@@ -45,12 +47,26 @@ class AlipayMerchantIndirectIotbindQueryResponse(AlipayResponse):
     def encode_url(self, value):
         self._encode_url = value
     @property
+    def msg_id(self):
+        return self._msg_id
+
+    @msg_id.setter
+    def msg_id(self, value):
+        self._msg_id = value
+    @property
     def smid(self):
         return self._smid
 
     @smid.setter
     def smid(self, value):
         self._smid = value
+    @property
+    def speech_content(self):
+        return self._speech_content
+
+    @speech_content.setter
+    def speech_content(self, value):
+        self._speech_content = value
     @property
     def supplier_id(self):
         return self._supplier_id
@@ -69,7 +85,11 @@ class AlipayMerchantIndirectIotbindQueryResponse(AlipayResponse):
             self.device_id = response['device_id']
         if 'encode_url' in response:
             self.encode_url = response['encode_url']
+        if 'msg_id' in response:
+            self.msg_id = response['msg_id']
         if 'smid' in response:
             self.smid = response['smid']
+        if 'speech_content' in response:
+            self.speech_content = response['speech_content']
         if 'supplier_id' in response:
             self.supplier_id = response['supplier_id']

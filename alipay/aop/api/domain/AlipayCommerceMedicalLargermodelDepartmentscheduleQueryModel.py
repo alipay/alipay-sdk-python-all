@@ -19,7 +19,9 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
         self._extract_item_score_info = None
         self._filter_item = None
         self._hos_grade_list = None
+        self._hos_institution_code_list = None
         self._hos_name_list = None
+        self._hos_uniq_code_list = None
         self._latitude = None
         self._longitude = None
         self._open_id = None
@@ -108,6 +110,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
             for i in value:
                 self._hos_grade_list.append(i)
     @property
+    def hos_institution_code_list(self):
+        return self._hos_institution_code_list
+
+    @hos_institution_code_list.setter
+    def hos_institution_code_list(self, value):
+        if isinstance(value, list):
+            self._hos_institution_code_list = list()
+            for i in value:
+                self._hos_institution_code_list.append(i)
+    @property
     def hos_name_list(self):
         return self._hos_name_list
 
@@ -117,6 +129,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
             self._hos_name_list = list()
             for i in value:
                 self._hos_name_list.append(i)
+    @property
+    def hos_uniq_code_list(self):
+        return self._hos_uniq_code_list
+
+    @hos_uniq_code_list.setter
+    def hos_uniq_code_list(self, value):
+        if isinstance(value, list):
+            self._hos_uniq_code_list = list()
+            for i in value:
+                self._hos_uniq_code_list.append(i)
     @property
     def latitude(self):
         return self._latitude
@@ -290,6 +312,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
                 params['hos_grade_list'] = self.hos_grade_list.to_alipay_dict()
             else:
                 params['hos_grade_list'] = self.hos_grade_list
+        if self.hos_institution_code_list:
+            if isinstance(self.hos_institution_code_list, list):
+                for i in range(0, len(self.hos_institution_code_list)):
+                    element = self.hos_institution_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.hos_institution_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.hos_institution_code_list, 'to_alipay_dict'):
+                params['hos_institution_code_list'] = self.hos_institution_code_list.to_alipay_dict()
+            else:
+                params['hos_institution_code_list'] = self.hos_institution_code_list
         if self.hos_name_list:
             if isinstance(self.hos_name_list, list):
                 for i in range(0, len(self.hos_name_list)):
@@ -300,6 +332,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
                 params['hos_name_list'] = self.hos_name_list.to_alipay_dict()
             else:
                 params['hos_name_list'] = self.hos_name_list
+        if self.hos_uniq_code_list:
+            if isinstance(self.hos_uniq_code_list, list):
+                for i in range(0, len(self.hos_uniq_code_list)):
+                    element = self.hos_uniq_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.hos_uniq_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.hos_uniq_code_list, 'to_alipay_dict'):
+                params['hos_uniq_code_list'] = self.hos_uniq_code_list.to_alipay_dict()
+            else:
+                params['hos_uniq_code_list'] = self.hos_uniq_code_list
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -408,8 +450,12 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
             o.filter_item = d['filter_item']
         if 'hos_grade_list' in d:
             o.hos_grade_list = d['hos_grade_list']
+        if 'hos_institution_code_list' in d:
+            o.hos_institution_code_list = d['hos_institution_code_list']
         if 'hos_name_list' in d:
             o.hos_name_list = d['hos_name_list']
+        if 'hos_uniq_code_list' in d:
+            o.hos_uniq_code_list = d['hos_uniq_code_list']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

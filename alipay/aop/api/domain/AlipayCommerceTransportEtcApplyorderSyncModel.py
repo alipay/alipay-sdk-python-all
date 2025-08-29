@@ -10,6 +10,7 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     def __init__(self):
         self._biz_agreement_no = None
         self._biz_time = None
+        self._cancel_code = None
         self._cancel_reason = None
         self._card_no = None
         self._censor_code = None
@@ -55,6 +56,13 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     @biz_time.setter
     def biz_time(self, value):
         self._biz_time = value
+    @property
+    def cancel_code(self):
+        return self._cancel_code
+
+    @cancel_code.setter
+    def cancel_code(self, value):
+        self._cancel_code = value
     @property
     def cancel_reason(self):
         return self._cancel_reason
@@ -279,6 +287,11 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['biz_time'] = self.biz_time.to_alipay_dict()
             else:
                 params['biz_time'] = self.biz_time
+        if self.cancel_code:
+            if hasattr(self.cancel_code, 'to_alipay_dict'):
+                params['cancel_code'] = self.cancel_code.to_alipay_dict()
+            else:
+                params['cancel_code'] = self.cancel_code
         if self.cancel_reason:
             if hasattr(self.cancel_reason, 'to_alipay_dict'):
                 params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
@@ -440,6 +453,8 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.biz_agreement_no = d['biz_agreement_no']
         if 'biz_time' in d:
             o.biz_time = d['biz_time']
+        if 'cancel_code' in d:
+            o.cancel_code = d['cancel_code']
         if 'cancel_reason' in d:
             o.cancel_reason = d['cancel_reason']
         if 'card_no' in d:

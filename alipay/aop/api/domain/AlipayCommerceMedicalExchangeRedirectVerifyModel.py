@@ -11,6 +11,7 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
         self._benefit_id = None
         self._biz_no = None
         self._phone = None
+        self._renew = None
 
     @property
     def benefit_id(self):
@@ -33,6 +34,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def renew(self):
+        return self._renew
+
+    @renew.setter
+    def renew(self, value):
+        self._renew = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.renew:
+            if hasattr(self.renew, 'to_alipay_dict'):
+                params['renew'] = self.renew.to_alipay_dict()
+            else:
+                params['renew'] = self.renew
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
             o.biz_no = d['biz_no']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'renew' in d:
+            o.renew = d['renew']
         return o
 
 

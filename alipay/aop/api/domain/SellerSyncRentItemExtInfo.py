@@ -16,6 +16,7 @@ class SellerSyncRentItemExtInfo(object):
         self._item_name = None
         self._item_ram = None
         self._item_state = None
+        self._official_price = None
         self._provider_name = None
         self._purchasing_price = None
         self._serial_no = None
@@ -76,6 +77,13 @@ class SellerSyncRentItemExtInfo(object):
     @item_state.setter
     def item_state(self, value):
         self._item_state = value
+    @property
+    def official_price(self):
+        return self._official_price
+
+    @official_price.setter
+    def official_price(self, value):
+        self._official_price = value
     @property
     def provider_name(self):
         return self._provider_name
@@ -141,6 +149,11 @@ class SellerSyncRentItemExtInfo(object):
                 params['item_state'] = self.item_state.to_alipay_dict()
             else:
                 params['item_state'] = self.item_state
+        if self.official_price:
+            if hasattr(self.official_price, 'to_alipay_dict'):
+                params['official_price'] = self.official_price.to_alipay_dict()
+            else:
+                params['official_price'] = self.official_price
         if self.provider_name:
             if hasattr(self.provider_name, 'to_alipay_dict'):
                 params['provider_name'] = self.provider_name.to_alipay_dict()
@@ -179,6 +192,8 @@ class SellerSyncRentItemExtInfo(object):
             o.item_ram = d['item_ram']
         if 'item_state' in d:
             o.item_state = d['item_state']
+        if 'official_price' in d:
+            o.official_price = d['official_price']
         if 'provider_name' in d:
             o.provider_name = d['provider_name']
         if 'purchasing_price' in d:

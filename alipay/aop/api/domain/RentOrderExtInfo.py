@@ -9,6 +9,7 @@ class RentOrderExtInfo(object):
 
     def __init__(self):
         self._order_sign_price = None
+        self._order_type = None
         self._rent_end_time = None
         self._rent_mode = None
         self._rent_start_time = None
@@ -20,6 +21,13 @@ class RentOrderExtInfo(object):
     @order_sign_price.setter
     def order_sign_price(self, value):
         self._order_sign_price = value
+    @property
+    def order_type(self):
+        return self._order_type
+
+    @order_type.setter
+    def order_type(self, value):
+        self._order_type = value
     @property
     def rent_end_time(self):
         return self._rent_end_time
@@ -50,6 +58,11 @@ class RentOrderExtInfo(object):
                 params['order_sign_price'] = self.order_sign_price.to_alipay_dict()
             else:
                 params['order_sign_price'] = self.order_sign_price
+        if self.order_type:
+            if hasattr(self.order_type, 'to_alipay_dict'):
+                params['order_type'] = self.order_type.to_alipay_dict()
+            else:
+                params['order_type'] = self.order_type
         if self.rent_end_time:
             if hasattr(self.rent_end_time, 'to_alipay_dict'):
                 params['rent_end_time'] = self.rent_end_time.to_alipay_dict()
@@ -74,6 +87,8 @@ class RentOrderExtInfo(object):
         o = RentOrderExtInfo()
         if 'order_sign_price' in d:
             o.order_sign_price = d['order_sign_price']
+        if 'order_type' in d:
+            o.order_type = d['order_type']
         if 'rent_end_time' in d:
             o.rent_end_time = d['rent_end_time']
         if 'rent_mode' in d:

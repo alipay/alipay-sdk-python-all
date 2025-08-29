@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RentPayItemDTO import RentPayItemDTO
+from alipay.aop.api.domain.RentSubMerchantDTO import RentSubMerchantDTO
 
 
 class AlipayCommerceRentOrderPayModel(object):
@@ -19,6 +20,7 @@ class AlipayCommerceRentOrderPayModel(object):
         self._pay_timeout_express = None
         self._reason_code = None
         self._reason_desc = None
+        self._sub_merchant = None
 
     @property
     def aftersale_id(self):
@@ -96,6 +98,16 @@ class AlipayCommerceRentOrderPayModel(object):
     @reason_desc.setter
     def reason_desc(self, value):
         self._reason_desc = value
+    @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, RentSubMerchantDTO):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = RentSubMerchantDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -155,6 +167,11 @@ class AlipayCommerceRentOrderPayModel(object):
                 params['reason_desc'] = self.reason_desc.to_alipay_dict()
             else:
                 params['reason_desc'] = self.reason_desc
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         return params
 
     @staticmethod
@@ -182,6 +199,8 @@ class AlipayCommerceRentOrderPayModel(object):
             o.reason_code = d['reason_code']
         if 'reason_desc' in d:
             o.reason_desc = d['reason_desc']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         return o
 
 

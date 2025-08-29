@@ -9,6 +9,7 @@ class AlipayOpenMiniQrcodeUnbindModel(object):
 
     def __init__(self):
         self._route_group = None
+        self._route_url = None
 
     @property
     def route_group(self):
@@ -17,6 +18,13 @@ class AlipayOpenMiniQrcodeUnbindModel(object):
     @route_group.setter
     def route_group(self, value):
         self._route_group = value
+    @property
+    def route_url(self):
+        return self._route_url
+
+    @route_url.setter
+    def route_url(self, value):
+        self._route_url = value
 
 
     def to_alipay_dict(self):
@@ -26,6 +34,11 @@ class AlipayOpenMiniQrcodeUnbindModel(object):
                 params['route_group'] = self.route_group.to_alipay_dict()
             else:
                 params['route_group'] = self.route_group
+        if self.route_url:
+            if hasattr(self.route_url, 'to_alipay_dict'):
+                params['route_url'] = self.route_url.to_alipay_dict()
+            else:
+                params['route_url'] = self.route_url
         return params
 
     @staticmethod
@@ -35,6 +48,8 @@ class AlipayOpenMiniQrcodeUnbindModel(object):
         o = AlipayOpenMiniQrcodeUnbindModel()
         if 'route_group' in d:
             o.route_group = d['route_group']
+        if 'route_url' in d:
+            o.route_url = d['route_url']
         return o
 
 

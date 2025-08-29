@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Buyer import Buyer
+from alipay.aop.api.domain.AmountDTO import AmountDTO
 from alipay.aop.api.domain.TravelItemInfo import TravelItemInfo
 from alipay.aop.api.domain.TravelerLogisticsInfo import TravelerLogisticsInfo
 from alipay.aop.api.domain.AmountDTO import AmountDTO
@@ -14,6 +15,7 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
 
     def __init__(self):
         self._buyer_info = None
+        self._discount_amount = None
         self._ext_info = None
         self._industry_code = None
         self._item_order_list = None
@@ -26,6 +28,7 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
         self._out_biz_no = None
         self._pay_amount = None
         self._payment_no = None
+        self._source_app = None
         self._user_id = None
 
     @property
@@ -38,6 +41,16 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
             self._buyer_info = value
         else:
             self._buyer_info = Buyer.from_alipay_dict(value)
+    @property
+    def discount_amount(self):
+        return self._discount_amount
+
+    @discount_amount.setter
+    def discount_amount(self, value):
+        if isinstance(value, AmountDTO):
+            self._discount_amount = value
+        else:
+            self._discount_amount = AmountDTO.from_alipay_dict(value)
     @property
     def ext_info(self):
         return self._ext_info
@@ -144,6 +157,13 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
     def payment_no(self, value):
         self._payment_no = value
     @property
+    def source_app(self):
+        return self._source_app
+
+    @source_app.setter
+    def source_app(self, value):
+        self._source_app = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -159,6 +179,11 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
                 params['buyer_info'] = self.buyer_info.to_alipay_dict()
             else:
                 params['buyer_info'] = self.buyer_info
+        if self.discount_amount:
+            if hasattr(self.discount_amount, 'to_alipay_dict'):
+                params['discount_amount'] = self.discount_amount.to_alipay_dict()
+            else:
+                params['discount_amount'] = self.discount_amount
         if self.ext_info:
             if isinstance(self.ext_info, list):
                 for i in range(0, len(self.ext_info)):
@@ -234,6 +259,11 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
                 params['payment_no'] = self.payment_no.to_alipay_dict()
             else:
                 params['payment_no'] = self.payment_no
+        if self.source_app:
+            if hasattr(self.source_app, 'to_alipay_dict'):
+                params['source_app'] = self.source_app.to_alipay_dict()
+            else:
+                params['source_app'] = self.source_app
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -248,6 +278,8 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
         o = AlipayVoyagerIndustryOrderSyncModel()
         if 'buyer_info' in d:
             o.buyer_info = d['buyer_info']
+        if 'discount_amount' in d:
+            o.discount_amount = d['discount_amount']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
         if 'industry_code' in d:
@@ -272,6 +304,8 @@ class AlipayVoyagerIndustryOrderSyncModel(object):
             o.pay_amount = d['pay_amount']
         if 'payment_no' in d:
             o.payment_no = d['payment_no']
+        if 'source_app' in d:
+            o.source_app = d['source_app']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

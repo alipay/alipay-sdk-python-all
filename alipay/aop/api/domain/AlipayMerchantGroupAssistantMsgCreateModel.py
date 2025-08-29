@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityAssistantMsgContentVO import ActivityAssistantMsgContentVO
 from alipay.aop.api.domain.BenefitAssistantMsgContentVO import BenefitAssistantMsgContentVO
 from alipay.aop.api.domain.GoodsAssistantMsgContentVO import GoodsAssistantMsgContentVO
+from alipay.aop.api.domain.RedPacketAssistantMsgContentVO import RedPacketAssistantMsgContentVO
 
 
 class AlipayMerchantGroupAssistantMsgCreateModel(object):
@@ -18,6 +19,7 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
         self._goods_content = None
         self._group_ids = None
         self._name = None
+        self._red_packet_content = None
 
     @property
     def activity_content(self):
@@ -80,6 +82,16 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def red_packet_content(self):
+        return self._red_packet_content
+
+    @red_packet_content.setter
+    def red_packet_content(self, value):
+        if isinstance(value, RedPacketAssistantMsgContentVO):
+            self._red_packet_content = value
+        else:
+            self._red_packet_content = RedPacketAssistantMsgContentVO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -124,6 +136,11 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.red_packet_content:
+            if hasattr(self.red_packet_content, 'to_alipay_dict'):
+                params['red_packet_content'] = self.red_packet_content.to_alipay_dict()
+            else:
+                params['red_packet_content'] = self.red_packet_content
         return params
 
     @staticmethod
@@ -145,6 +162,8 @@ class AlipayMerchantGroupAssistantMsgCreateModel(object):
             o.group_ids = d['group_ids']
         if 'name' in d:
             o.name = d['name']
+        if 'red_packet_content' in d:
+            o.red_packet_content = d['red_packet_content']
         return o
 
 

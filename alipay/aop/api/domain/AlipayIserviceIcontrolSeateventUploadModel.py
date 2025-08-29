@@ -9,11 +9,19 @@ from alipay.aop.api.domain.IcInboundSeatEventModel import IcInboundSeatEventMode
 class AlipayIserviceIcontrolSeateventUploadModel(object):
 
     def __init__(self):
+        self._channel_type = None
         self._ic_inbound_seat_event_payload = None
         self._order_id = None
         self._order_type = None
         self._service_uniq_code = None
 
+    @property
+    def channel_type(self):
+        return self._channel_type
+
+    @channel_type.setter
+    def channel_type(self, value):
+        self._channel_type = value
     @property
     def ic_inbound_seat_event_payload(self):
         return self._ic_inbound_seat_event_payload
@@ -49,6 +57,11 @@ class AlipayIserviceIcontrolSeateventUploadModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.channel_type:
+            if hasattr(self.channel_type, 'to_alipay_dict'):
+                params['channel_type'] = self.channel_type.to_alipay_dict()
+            else:
+                params['channel_type'] = self.channel_type
         if self.ic_inbound_seat_event_payload:
             if hasattr(self.ic_inbound_seat_event_payload, 'to_alipay_dict'):
                 params['ic_inbound_seat_event_payload'] = self.ic_inbound_seat_event_payload.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayIserviceIcontrolSeateventUploadModel(object):
         if not d:
             return None
         o = AlipayIserviceIcontrolSeateventUploadModel()
+        if 'channel_type' in d:
+            o.channel_type = d['channel_type']
         if 'ic_inbound_seat_event_payload' in d:
             o.ic_inbound_seat_event_payload = d['ic_inbound_seat_event_payload']
         if 'order_id' in d:

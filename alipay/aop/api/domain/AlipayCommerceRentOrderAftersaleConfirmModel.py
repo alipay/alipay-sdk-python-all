@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AftersaleMediaInfoVO import AftersaleMediaInfoVO
+from alipay.aop.api.domain.AftersaleCompensationInfoVO import AftersaleCompensationInfoVO
 from alipay.aop.api.domain.AftersalePayItemVO import AftersalePayItemVO
 
 
@@ -15,6 +16,7 @@ class AlipayCommerceRentOrderAftersaleConfirmModel(object):
         self._aftersale_id = None
         self._buyer_id = None
         self._buyer_open_id = None
+        self._compensation_info = None
         self._operation_type = None
         self._out_aftersale_id = None
         self._pay_amount = None
@@ -62,6 +64,16 @@ class AlipayCommerceRentOrderAftersaleConfirmModel(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def compensation_info(self):
+        return self._compensation_info
+
+    @compensation_info.setter
+    def compensation_info(self, value):
+        if isinstance(value, AftersaleCompensationInfoVO):
+            self._compensation_info = value
+        else:
+            self._compensation_info = AftersaleCompensationInfoVO.from_alipay_dict(value)
     @property
     def operation_type(self):
         return self._operation_type
@@ -137,6 +149,11 @@ class AlipayCommerceRentOrderAftersaleConfirmModel(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.compensation_info:
+            if hasattr(self.compensation_info, 'to_alipay_dict'):
+                params['compensation_info'] = self.compensation_info.to_alipay_dict()
+            else:
+                params['compensation_info'] = self.compensation_info
         if self.operation_type:
             if hasattr(self.operation_type, 'to_alipay_dict'):
                 params['operation_type'] = self.operation_type.to_alipay_dict()
@@ -184,6 +201,8 @@ class AlipayCommerceRentOrderAftersaleConfirmModel(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'compensation_info' in d:
+            o.compensation_info = d['compensation_info']
         if 'operation_type' in d:
             o.operation_type = d['operation_type']
         if 'out_aftersale_id' in d:

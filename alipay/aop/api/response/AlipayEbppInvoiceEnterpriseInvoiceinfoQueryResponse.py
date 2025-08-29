@@ -13,6 +13,7 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
         self._anti_fake_code = None
         self._batch_id = None
         self._checker = None
+        self._collect_source = None
         self._employee_id = None
         self._enterprise_id = None
         self._file_download_url = None
@@ -70,6 +71,13 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
     @checker.setter
     def checker(self, value):
         self._checker = value
+    @property
+    def collect_source(self):
+        return self._collect_source
+
+    @collect_source.setter
+    def collect_source(self, value):
+        self._collect_source = value
     @property
     def employee_id(self):
         return self._employee_id
@@ -333,6 +341,8 @@ class AlipayEbppInvoiceEnterpriseInvoiceinfoQueryResponse(AlipayResponse):
             self.batch_id = response['batch_id']
         if 'checker' in response:
             self.checker = response['checker']
+        if 'collect_source' in response:
+            self.collect_source = response['collect_source']
         if 'employee_id' in response:
             self.employee_id = response['employee_id']
         if 'enterprise_id' in response:

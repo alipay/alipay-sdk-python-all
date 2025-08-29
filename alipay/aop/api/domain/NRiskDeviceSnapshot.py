@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.NRiskDeviceSnapshotExtInfo import NRiskDeviceSnapshotExtInfo
 
 
 class NRiskDeviceSnapshot(object):
@@ -10,6 +11,7 @@ class NRiskDeviceSnapshot(object):
     def __init__(self):
         self._customer_brand = None
         self._device_type = None
+        self._ext_info = None
         self._last_trade_time = None
         self._last_turn_on_time = None
         self._poi_address = None
@@ -30,6 +32,16 @@ class NRiskDeviceSnapshot(object):
     @device_type.setter
     def device_type(self, value):
         self._device_type = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, NRiskDeviceSnapshotExtInfo):
+            self._ext_info = value
+        else:
+            self._ext_info = NRiskDeviceSnapshotExtInfo.from_alipay_dict(value)
     @property
     def last_trade_time(self):
         return self._last_trade_time
@@ -79,6 +91,11 @@ class NRiskDeviceSnapshot(object):
                 params['device_type'] = self.device_type.to_alipay_dict()
             else:
                 params['device_type'] = self.device_type
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.last_trade_time:
             if hasattr(self.last_trade_time, 'to_alipay_dict'):
                 params['last_trade_time'] = self.last_trade_time.to_alipay_dict()
@@ -115,6 +132,8 @@ class NRiskDeviceSnapshot(object):
             o.customer_brand = d['customer_brand']
         if 'device_type' in d:
             o.device_type = d['device_type']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'last_trade_time' in d:
             o.last_trade_time = d['last_trade_time']
         if 'last_turn_on_time' in d:

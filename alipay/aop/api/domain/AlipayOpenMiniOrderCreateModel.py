@@ -15,6 +15,7 @@ from alipay.aop.api.domain.MiniOrderExtInfoDTO import MiniOrderExtInfoDTO
 from alipay.aop.api.domain.FundAuthFreezeInfoDTO import FundAuthFreezeInfoDTO
 from alipay.aop.api.domain.MiniOrderDetailDTO import MiniOrderDetailDTO
 from alipay.aop.api.domain.PromoDetailInfoDTO import PromoDetailInfoDTO
+from alipay.aop.api.domain.RoyaltyInfo import RoyaltyInfo
 from alipay.aop.api.domain.MiniOrderAddressInfoDTO import MiniOrderAddressInfoDTO
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 from alipay.aop.api.domain.StagePayPlanDTO import StagePayPlanDTO
@@ -44,6 +45,7 @@ class AlipayOpenMiniOrderCreateModel(object):
         self._out_order_id = None
         self._path = None
         self._promo_detail_info = None
+        self._royalty_info = None
         self._seller_id = None
         self._send_address_info = None
         self._service_provider_model = None
@@ -232,6 +234,16 @@ class AlipayOpenMiniOrderCreateModel(object):
             self._promo_detail_info = value
         else:
             self._promo_detail_info = PromoDetailInfoDTO.from_alipay_dict(value)
+    @property
+    def royalty_info(self):
+        return self._royalty_info
+
+    @royalty_info.setter
+    def royalty_info(self, value):
+        if isinstance(value, RoyaltyInfo):
+            self._royalty_info = value
+        else:
+            self._royalty_info = RoyaltyInfo.from_alipay_dict(value)
     @property
     def seller_id(self):
         return self._seller_id
@@ -428,6 +440,11 @@ class AlipayOpenMiniOrderCreateModel(object):
                 params['promo_detail_info'] = self.promo_detail_info.to_alipay_dict()
             else:
                 params['promo_detail_info'] = self.promo_detail_info
+        if self.royalty_info:
+            if hasattr(self.royalty_info, 'to_alipay_dict'):
+                params['royalty_info'] = self.royalty_info.to_alipay_dict()
+            else:
+                params['royalty_info'] = self.royalty_info
         if self.seller_id:
             if hasattr(self.seller_id, 'to_alipay_dict'):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
@@ -535,6 +552,8 @@ class AlipayOpenMiniOrderCreateModel(object):
             o.path = d['path']
         if 'promo_detail_info' in d:
             o.promo_detail_info = d['promo_detail_info']
+        if 'royalty_info' in d:
+            o.royalty_info = d['royalty_info']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
         if 'send_address_info' in d:

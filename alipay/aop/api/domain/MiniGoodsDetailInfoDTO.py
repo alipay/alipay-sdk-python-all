@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ActivityInfoDTO import ActivityInfoDTO
+from alipay.aop.api.domain.AttrExtInfoDTO import AttrExtInfoDTO
 from alipay.aop.api.domain.EffectiveDatesDTO import EffectiveDatesDTO
 from alipay.aop.api.domain.ItemInstallmentInfoDTO import ItemInstallmentInfoDTO
 from alipay.aop.api.domain.RentGoodsInfoDTO import RentGoodsInfoDTO
@@ -15,6 +16,7 @@ class MiniGoodsDetailInfoDTO(object):
 
     def __init__(self):
         self._activity_info = None
+        self._attr_ext_info_list = None
         self._body = None
         self._categories_tree = None
         self._effective_dates = None
@@ -53,6 +55,19 @@ class MiniGoodsDetailInfoDTO(object):
             self._activity_info = value
         else:
             self._activity_info = ActivityInfoDTO.from_alipay_dict(value)
+    @property
+    def attr_ext_info_list(self):
+        return self._attr_ext_info_list
+
+    @attr_ext_info_list.setter
+    def attr_ext_info_list(self, value):
+        if isinstance(value, list):
+            self._attr_ext_info_list = list()
+            for i in value:
+                if isinstance(i, AttrExtInfoDTO):
+                    self._attr_ext_info_list.append(i)
+                else:
+                    self._attr_ext_info_list.append(AttrExtInfoDTO.from_alipay_dict(i))
     @property
     def body(self):
         return self._body
@@ -269,6 +284,16 @@ class MiniGoodsDetailInfoDTO(object):
                 params['activity_info'] = self.activity_info.to_alipay_dict()
             else:
                 params['activity_info'] = self.activity_info
+        if self.attr_ext_info_list:
+            if isinstance(self.attr_ext_info_list, list):
+                for i in range(0, len(self.attr_ext_info_list)):
+                    element = self.attr_ext_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.attr_ext_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.attr_ext_info_list, 'to_alipay_dict'):
+                params['attr_ext_info_list'] = self.attr_ext_info_list.to_alipay_dict()
+            else:
+                params['attr_ext_info_list'] = self.attr_ext_info_list
         if self.body:
             if hasattr(self.body, 'to_alipay_dict'):
                 params['body'] = self.body.to_alipay_dict()
@@ -418,6 +443,8 @@ class MiniGoodsDetailInfoDTO(object):
         o = MiniGoodsDetailInfoDTO()
         if 'activity_info' in d:
             o.activity_info = d['activity_info']
+        if 'attr_ext_info_list' in d:
+            o.attr_ext_info_list = d['attr_ext_info_list']
         if 'body' in d:
             o.body = d['body']
         if 'categories_tree' in d:

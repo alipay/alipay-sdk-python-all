@@ -9,6 +9,7 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
 
     def __init__(self):
         self._alipay_user_id = None
+        self._encrypted_mobile = None
         self._item_id = None
         self._mobile = None
         self._open_id = None
@@ -21,6 +22,13 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
     @alipay_user_id.setter
     def alipay_user_id(self, value):
         self._alipay_user_id = value
+    @property
+    def encrypted_mobile(self):
+        return self._encrypted_mobile
+
+    @encrypted_mobile.setter
+    def encrypted_mobile(self, value):
+        self._encrypted_mobile = value
     @property
     def item_id(self):
         return self._item_id
@@ -58,6 +66,11 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.encrypted_mobile:
+            if hasattr(self.encrypted_mobile, 'to_alipay_dict'):
+                params['encrypted_mobile'] = self.encrypted_mobile.to_alipay_dict()
+            else:
+                params['encrypted_mobile'] = self.encrypted_mobile
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
         o = AlipayCommerceAcommunicationDistributionFlowPreconsultModel()
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'encrypted_mobile' in d:
+            o.encrypted_mobile = d['encrypted_mobile']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'mobile' in d:

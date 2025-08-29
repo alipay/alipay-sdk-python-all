@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RecycleInspectDigitalProductOpenVO import RecycleInspectDigitalProductOpenVO
 
 
 class RecycleInspectProductVO(object):
 
     def __init__(self):
+        self._digital_product_info = None
         self._inspect_price = None
         self._out_sku_id = None
         self._out_sku_name = None
         self._product_category = None
         self._product_code = None
 
+    @property
+    def digital_product_info(self):
+        return self._digital_product_info
+
+    @digital_product_info.setter
+    def digital_product_info(self, value):
+        if isinstance(value, RecycleInspectDigitalProductOpenVO):
+            self._digital_product_info = value
+        else:
+            self._digital_product_info = RecycleInspectDigitalProductOpenVO.from_alipay_dict(value)
     @property
     def inspect_price(self):
         return self._inspect_price
@@ -53,6 +65,11 @@ class RecycleInspectProductVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.digital_product_info:
+            if hasattr(self.digital_product_info, 'to_alipay_dict'):
+                params['digital_product_info'] = self.digital_product_info.to_alipay_dict()
+            else:
+                params['digital_product_info'] = self.digital_product_info
         if self.inspect_price:
             if hasattr(self.inspect_price, 'to_alipay_dict'):
                 params['inspect_price'] = self.inspect_price.to_alipay_dict()
@@ -85,6 +102,8 @@ class RecycleInspectProductVO(object):
         if not d:
             return None
         o = RecycleInspectProductVO()
+        if 'digital_product_info' in d:
+            o.digital_product_info = d['digital_product_info']
         if 'inspect_price' in d:
             o.inspect_price = d['inspect_price']
         if 'out_sku_id' in d:

@@ -18,6 +18,7 @@ class ChatExtraParams(object):
         self._latitude = None
         self._longitude = None
         self._phone_no = None
+        self._plugin_env = None
 
     @property
     def agent_ext_info(self):
@@ -89,6 +90,13 @@ class ChatExtraParams(object):
     @phone_no.setter
     def phone_no(self, value):
         self._phone_no = value
+    @property
+    def plugin_env(self):
+        return self._plugin_env
+
+    @plugin_env.setter
+    def plugin_env(self, value):
+        self._plugin_env = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +151,11 @@ class ChatExtraParams(object):
                 params['phone_no'] = self.phone_no.to_alipay_dict()
             else:
                 params['phone_no'] = self.phone_no
+        if self.plugin_env:
+            if hasattr(self.plugin_env, 'to_alipay_dict'):
+                params['plugin_env'] = self.plugin_env.to_alipay_dict()
+            else:
+                params['plugin_env'] = self.plugin_env
         return params
 
     @staticmethod
@@ -170,6 +183,8 @@ class ChatExtraParams(object):
             o.longitude = d['longitude']
         if 'phone_no' in d:
             o.phone_no = d['phone_no']
+        if 'plugin_env' in d:
+            o.plugin_env = d['plugin_env']
         return o
 
 

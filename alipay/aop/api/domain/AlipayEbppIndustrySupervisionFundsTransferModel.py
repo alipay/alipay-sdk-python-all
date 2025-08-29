@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayEbppIndustrySupervisionFundsTransferModel(object):
 
     def __init__(self):
+        self._agreement_no = None
         self._amount = None
         self._biz_scene = None
         self._currency = None
@@ -24,6 +25,13 @@ class AlipayEbppIndustrySupervisionFundsTransferModel(object):
         self._remark = None
         self._scene = None
 
+    @property
+    def agreement_no(self):
+        return self._agreement_no
+
+    @agreement_no.setter
+    def agreement_no(self, value):
+        self._agreement_no = value
     @property
     def amount(self):
         return self._amount
@@ -133,6 +141,11 @@ class AlipayEbppIndustrySupervisionFundsTransferModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agreement_no:
+            if hasattr(self.agreement_no, 'to_alipay_dict'):
+                params['agreement_no'] = self.agreement_no.to_alipay_dict()
+            else:
+                params['agreement_no'] = self.agreement_no
         if self.amount:
             if hasattr(self.amount, 'to_alipay_dict'):
                 params['amount'] = self.amount.to_alipay_dict()
@@ -215,6 +228,8 @@ class AlipayEbppIndustrySupervisionFundsTransferModel(object):
         if not d:
             return None
         o = AlipayEbppIndustrySupervisionFundsTransferModel()
+        if 'agreement_no' in d:
+            o.agreement_no = d['agreement_no']
         if 'amount' in d:
             o.amount = d['amount']
         if 'biz_scene' in d:

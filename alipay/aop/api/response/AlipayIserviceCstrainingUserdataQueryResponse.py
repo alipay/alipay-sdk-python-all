@@ -12,6 +12,7 @@ class AlipayIserviceCstrainingUserdataQueryResponse(AlipayResponse):
         self._page_num = None
         self._page_size = None
         self._result_list = None
+        self._results_list = None
         self._total_size = None
 
     @property
@@ -36,6 +37,16 @@ class AlipayIserviceCstrainingUserdataQueryResponse(AlipayResponse):
     def result_list(self, value):
         self._result_list = value
     @property
+    def results_list(self):
+        return self._results_list
+
+    @results_list.setter
+    def results_list(self, value):
+        if isinstance(value, list):
+            self._results_list = list()
+            for i in value:
+                self._results_list.append(i)
+    @property
     def total_size(self):
         return self._total_size
 
@@ -51,5 +62,7 @@ class AlipayIserviceCstrainingUserdataQueryResponse(AlipayResponse):
             self.page_size = response['page_size']
         if 'result_list' in response:
             self.result_list = response['result_list']
+        if 'results_list' in response:
+            self.results_list = response['results_list']
         if 'total_size' in response:
             self.total_size = response['total_size']

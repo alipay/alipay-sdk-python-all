@@ -9,6 +9,8 @@ from alipay.aop.api.domain.AdReportConversionDataDetail import AdReportConversio
 class AdReportDataDetail(object):
 
     def __init__(self):
+        self._action_point = None
+        self._action_point_id = None
         self._agent_alipay_account = None
         self._agent_name = None
         self._avg_conv_cost = None
@@ -21,12 +23,25 @@ class AdReportDataDetail(object):
         self._cost_format = None
         self._cpc = None
         self._cpm = None
+        self._creative_id = None
         self._creative_name = None
         self._cvr = None
         self._data_id = None
         self._group_id = None
         self._group_name = None
         self._impression = None
+        self._main_picture_height = None
+        self._main_picture_id = None
+        self._main_picture_name = None
+        self._main_picture_url = None
+        self._main_picture_width = None
+        self._main_title = None
+        self._main_title_id = None
+        self._main_video_height = None
+        self._main_video_id = None
+        self._main_video_name = None
+        self._main_video_url = None
+        self._main_video_width = None
         self._market_target_name = None
         self._order_id = None
         self._order_name = None
@@ -36,7 +51,23 @@ class AdReportDataDetail(object):
         self._principal_name = None
         self._principal_pid = None
         self._scene_name = None
+        self._sub_title = None
+        self._sub_title_id = None
 
+    @property
+    def action_point(self):
+        return self._action_point
+
+    @action_point.setter
+    def action_point(self, value):
+        self._action_point = value
+    @property
+    def action_point_id(self):
+        return self._action_point_id
+
+    @action_point_id.setter
+    def action_point_id(self, value):
+        self._action_point_id = value
     @property
     def agent_alipay_account(self):
         return self._agent_alipay_account
@@ -128,6 +159,13 @@ class AdReportDataDetail(object):
     def cpm(self, value):
         self._cpm = value
     @property
+    def creative_id(self):
+        return self._creative_id
+
+    @creative_id.setter
+    def creative_id(self, value):
+        self._creative_id = value
+    @property
     def creative_name(self):
         return self._creative_name
 
@@ -169,6 +207,90 @@ class AdReportDataDetail(object):
     @impression.setter
     def impression(self, value):
         self._impression = value
+    @property
+    def main_picture_height(self):
+        return self._main_picture_height
+
+    @main_picture_height.setter
+    def main_picture_height(self, value):
+        self._main_picture_height = value
+    @property
+    def main_picture_id(self):
+        return self._main_picture_id
+
+    @main_picture_id.setter
+    def main_picture_id(self, value):
+        self._main_picture_id = value
+    @property
+    def main_picture_name(self):
+        return self._main_picture_name
+
+    @main_picture_name.setter
+    def main_picture_name(self, value):
+        self._main_picture_name = value
+    @property
+    def main_picture_url(self):
+        return self._main_picture_url
+
+    @main_picture_url.setter
+    def main_picture_url(self, value):
+        self._main_picture_url = value
+    @property
+    def main_picture_width(self):
+        return self._main_picture_width
+
+    @main_picture_width.setter
+    def main_picture_width(self, value):
+        self._main_picture_width = value
+    @property
+    def main_title(self):
+        return self._main_title
+
+    @main_title.setter
+    def main_title(self, value):
+        self._main_title = value
+    @property
+    def main_title_id(self):
+        return self._main_title_id
+
+    @main_title_id.setter
+    def main_title_id(self, value):
+        self._main_title_id = value
+    @property
+    def main_video_height(self):
+        return self._main_video_height
+
+    @main_video_height.setter
+    def main_video_height(self, value):
+        self._main_video_height = value
+    @property
+    def main_video_id(self):
+        return self._main_video_id
+
+    @main_video_id.setter
+    def main_video_id(self, value):
+        self._main_video_id = value
+    @property
+    def main_video_name(self):
+        return self._main_video_name
+
+    @main_video_name.setter
+    def main_video_name(self, value):
+        self._main_video_name = value
+    @property
+    def main_video_url(self):
+        return self._main_video_url
+
+    @main_video_url.setter
+    def main_video_url(self, value):
+        self._main_video_url = value
+    @property
+    def main_video_width(self):
+        return self._main_video_width
+
+    @main_video_width.setter
+    def main_video_width(self, value):
+        self._main_video_width = value
     @property
     def market_target_name(self):
         return self._market_target_name
@@ -232,10 +354,34 @@ class AdReportDataDetail(object):
     @scene_name.setter
     def scene_name(self, value):
         self._scene_name = value
+    @property
+    def sub_title(self):
+        return self._sub_title
+
+    @sub_title.setter
+    def sub_title(self, value):
+        self._sub_title = value
+    @property
+    def sub_title_id(self):
+        return self._sub_title_id
+
+    @sub_title_id.setter
+    def sub_title_id(self, value):
+        self._sub_title_id = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.action_point:
+            if hasattr(self.action_point, 'to_alipay_dict'):
+                params['action_point'] = self.action_point.to_alipay_dict()
+            else:
+                params['action_point'] = self.action_point
+        if self.action_point_id:
+            if hasattr(self.action_point_id, 'to_alipay_dict'):
+                params['action_point_id'] = self.action_point_id.to_alipay_dict()
+            else:
+                params['action_point_id'] = self.action_point_id
         if self.agent_alipay_account:
             if hasattr(self.agent_alipay_account, 'to_alipay_dict'):
                 params['agent_alipay_account'] = self.agent_alipay_account.to_alipay_dict()
@@ -301,6 +447,11 @@ class AdReportDataDetail(object):
                 params['cpm'] = self.cpm.to_alipay_dict()
             else:
                 params['cpm'] = self.cpm
+        if self.creative_id:
+            if hasattr(self.creative_id, 'to_alipay_dict'):
+                params['creative_id'] = self.creative_id.to_alipay_dict()
+            else:
+                params['creative_id'] = self.creative_id
         if self.creative_name:
             if hasattr(self.creative_name, 'to_alipay_dict'):
                 params['creative_name'] = self.creative_name.to_alipay_dict()
@@ -331,6 +482,66 @@ class AdReportDataDetail(object):
                 params['impression'] = self.impression.to_alipay_dict()
             else:
                 params['impression'] = self.impression
+        if self.main_picture_height:
+            if hasattr(self.main_picture_height, 'to_alipay_dict'):
+                params['main_picture_height'] = self.main_picture_height.to_alipay_dict()
+            else:
+                params['main_picture_height'] = self.main_picture_height
+        if self.main_picture_id:
+            if hasattr(self.main_picture_id, 'to_alipay_dict'):
+                params['main_picture_id'] = self.main_picture_id.to_alipay_dict()
+            else:
+                params['main_picture_id'] = self.main_picture_id
+        if self.main_picture_name:
+            if hasattr(self.main_picture_name, 'to_alipay_dict'):
+                params['main_picture_name'] = self.main_picture_name.to_alipay_dict()
+            else:
+                params['main_picture_name'] = self.main_picture_name
+        if self.main_picture_url:
+            if hasattr(self.main_picture_url, 'to_alipay_dict'):
+                params['main_picture_url'] = self.main_picture_url.to_alipay_dict()
+            else:
+                params['main_picture_url'] = self.main_picture_url
+        if self.main_picture_width:
+            if hasattr(self.main_picture_width, 'to_alipay_dict'):
+                params['main_picture_width'] = self.main_picture_width.to_alipay_dict()
+            else:
+                params['main_picture_width'] = self.main_picture_width
+        if self.main_title:
+            if hasattr(self.main_title, 'to_alipay_dict'):
+                params['main_title'] = self.main_title.to_alipay_dict()
+            else:
+                params['main_title'] = self.main_title
+        if self.main_title_id:
+            if hasattr(self.main_title_id, 'to_alipay_dict'):
+                params['main_title_id'] = self.main_title_id.to_alipay_dict()
+            else:
+                params['main_title_id'] = self.main_title_id
+        if self.main_video_height:
+            if hasattr(self.main_video_height, 'to_alipay_dict'):
+                params['main_video_height'] = self.main_video_height.to_alipay_dict()
+            else:
+                params['main_video_height'] = self.main_video_height
+        if self.main_video_id:
+            if hasattr(self.main_video_id, 'to_alipay_dict'):
+                params['main_video_id'] = self.main_video_id.to_alipay_dict()
+            else:
+                params['main_video_id'] = self.main_video_id
+        if self.main_video_name:
+            if hasattr(self.main_video_name, 'to_alipay_dict'):
+                params['main_video_name'] = self.main_video_name.to_alipay_dict()
+            else:
+                params['main_video_name'] = self.main_video_name
+        if self.main_video_url:
+            if hasattr(self.main_video_url, 'to_alipay_dict'):
+                params['main_video_url'] = self.main_video_url.to_alipay_dict()
+            else:
+                params['main_video_url'] = self.main_video_url
+        if self.main_video_width:
+            if hasattr(self.main_video_width, 'to_alipay_dict'):
+                params['main_video_width'] = self.main_video_width.to_alipay_dict()
+            else:
+                params['main_video_width'] = self.main_video_width
         if self.market_target_name:
             if hasattr(self.market_target_name, 'to_alipay_dict'):
                 params['market_target_name'] = self.market_target_name.to_alipay_dict()
@@ -376,6 +587,16 @@ class AdReportDataDetail(object):
                 params['scene_name'] = self.scene_name.to_alipay_dict()
             else:
                 params['scene_name'] = self.scene_name
+        if self.sub_title:
+            if hasattr(self.sub_title, 'to_alipay_dict'):
+                params['sub_title'] = self.sub_title.to_alipay_dict()
+            else:
+                params['sub_title'] = self.sub_title
+        if self.sub_title_id:
+            if hasattr(self.sub_title_id, 'to_alipay_dict'):
+                params['sub_title_id'] = self.sub_title_id.to_alipay_dict()
+            else:
+                params['sub_title_id'] = self.sub_title_id
         return params
 
     @staticmethod
@@ -383,6 +604,10 @@ class AdReportDataDetail(object):
         if not d:
             return None
         o = AdReportDataDetail()
+        if 'action_point' in d:
+            o.action_point = d['action_point']
+        if 'action_point_id' in d:
+            o.action_point_id = d['action_point_id']
         if 'agent_alipay_account' in d:
             o.agent_alipay_account = d['agent_alipay_account']
         if 'agent_name' in d:
@@ -407,6 +632,8 @@ class AdReportDataDetail(object):
             o.cpc = d['cpc']
         if 'cpm' in d:
             o.cpm = d['cpm']
+        if 'creative_id' in d:
+            o.creative_id = d['creative_id']
         if 'creative_name' in d:
             o.creative_name = d['creative_name']
         if 'cvr' in d:
@@ -419,6 +646,30 @@ class AdReportDataDetail(object):
             o.group_name = d['group_name']
         if 'impression' in d:
             o.impression = d['impression']
+        if 'main_picture_height' in d:
+            o.main_picture_height = d['main_picture_height']
+        if 'main_picture_id' in d:
+            o.main_picture_id = d['main_picture_id']
+        if 'main_picture_name' in d:
+            o.main_picture_name = d['main_picture_name']
+        if 'main_picture_url' in d:
+            o.main_picture_url = d['main_picture_url']
+        if 'main_picture_width' in d:
+            o.main_picture_width = d['main_picture_width']
+        if 'main_title' in d:
+            o.main_title = d['main_title']
+        if 'main_title_id' in d:
+            o.main_title_id = d['main_title_id']
+        if 'main_video_height' in d:
+            o.main_video_height = d['main_video_height']
+        if 'main_video_id' in d:
+            o.main_video_id = d['main_video_id']
+        if 'main_video_name' in d:
+            o.main_video_name = d['main_video_name']
+        if 'main_video_url' in d:
+            o.main_video_url = d['main_video_url']
+        if 'main_video_width' in d:
+            o.main_video_width = d['main_video_width']
         if 'market_target_name' in d:
             o.market_target_name = d['market_target_name']
         if 'order_id' in d:
@@ -437,6 +688,10 @@ class AdReportDataDetail(object):
             o.principal_pid = d['principal_pid']
         if 'scene_name' in d:
             o.scene_name = d['scene_name']
+        if 'sub_title' in d:
+            o.sub_title = d['sub_title']
+        if 'sub_title_id' in d:
+            o.sub_title_id = d['sub_title_id']
         return o
 
 

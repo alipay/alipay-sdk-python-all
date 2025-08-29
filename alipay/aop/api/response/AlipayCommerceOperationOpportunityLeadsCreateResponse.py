@@ -10,6 +10,7 @@ class AlipayCommerceOperationOpportunityLeadsCreateResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceOperationOpportunityLeadsCreateResponse, self).__init__()
         self._installation_code = None
+        self._leads_id = None
         self._opportunity_id = None
         self._opportunity_status = None
         self._opportunity_status_info = None
@@ -23,6 +24,13 @@ class AlipayCommerceOperationOpportunityLeadsCreateResponse(AlipayResponse):
     @installation_code.setter
     def installation_code(self, value):
         self._installation_code = value
+    @property
+    def leads_id(self):
+        return self._leads_id
+
+    @leads_id.setter
+    def leads_id(self, value):
+        self._leads_id = value
     @property
     def opportunity_id(self):
         return self._opportunity_id
@@ -63,6 +71,8 @@ class AlipayCommerceOperationOpportunityLeadsCreateResponse(AlipayResponse):
         response = super(AlipayCommerceOperationOpportunityLeadsCreateResponse, self).parse_response_content(response_content)
         if 'installation_code' in response:
             self.installation_code = response['installation_code']
+        if 'leads_id' in response:
+            self.leads_id = response['leads_id']
         if 'opportunity_id' in response:
             self.opportunity_id = response['opportunity_id']
         if 'opportunity_status' in response:

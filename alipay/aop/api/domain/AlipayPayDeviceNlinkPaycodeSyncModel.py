@@ -9,6 +9,7 @@ class AlipayPayDeviceNlinkPaycodeSyncModel(object):
 
     def __init__(self):
         self._biz_user_id = None
+        self._create_time = None
         self._expire_time = None
         self._ntoken = None
         self._paycode = None
@@ -22,6 +23,13 @@ class AlipayPayDeviceNlinkPaycodeSyncModel(object):
     @biz_user_id.setter
     def biz_user_id(self, value):
         self._biz_user_id = value
+    @property
+    def create_time(self):
+        return self._create_time
+
+    @create_time.setter
+    def create_time(self, value):
+        self._create_time = value
     @property
     def expire_time(self):
         return self._expire_time
@@ -66,6 +74,11 @@ class AlipayPayDeviceNlinkPaycodeSyncModel(object):
                 params['biz_user_id'] = self.biz_user_id.to_alipay_dict()
             else:
                 params['biz_user_id'] = self.biz_user_id
+        if self.create_time:
+            if hasattr(self.create_time, 'to_alipay_dict'):
+                params['create_time'] = self.create_time.to_alipay_dict()
+            else:
+                params['create_time'] = self.create_time
         if self.expire_time:
             if hasattr(self.expire_time, 'to_alipay_dict'):
                 params['expire_time'] = self.expire_time.to_alipay_dict()
@@ -100,6 +113,8 @@ class AlipayPayDeviceNlinkPaycodeSyncModel(object):
         o = AlipayPayDeviceNlinkPaycodeSyncModel()
         if 'biz_user_id' in d:
             o.biz_user_id = d['biz_user_id']
+        if 'create_time' in d:
+            o.create_time = d['create_time']
         if 'expire_time' in d:
             o.expire_time = d['expire_time']
         if 'ntoken' in d:
