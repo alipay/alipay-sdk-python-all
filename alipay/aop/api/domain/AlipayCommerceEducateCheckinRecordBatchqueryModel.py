@@ -11,6 +11,7 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
         self._check_in_end_time = None
         self._check_in_result = None
         self._check_in_start_time = None
+        self._check_in_status = None
         self._check_in_type = None
         self._course_id_list = None
         self._employee_no = None
@@ -43,6 +44,13 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
     @check_in_start_time.setter
     def check_in_start_time(self, value):
         self._check_in_start_time = value
+    @property
+    def check_in_status(self):
+        return self._check_in_status
+
+    @check_in_status.setter
+    def check_in_status(self, value):
+        self._check_in_status = value
     @property
     def check_in_type(self):
         return self._check_in_type
@@ -141,6 +149,11 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
                 params['check_in_start_time'] = self.check_in_start_time.to_alipay_dict()
             else:
                 params['check_in_start_time'] = self.check_in_start_time
+        if self.check_in_status:
+            if hasattr(self.check_in_status, 'to_alipay_dict'):
+                params['check_in_status'] = self.check_in_status.to_alipay_dict()
+            else:
+                params['check_in_status'] = self.check_in_status
         if self.check_in_type:
             if hasattr(self.check_in_type, 'to_alipay_dict'):
                 params['check_in_type'] = self.check_in_type.to_alipay_dict()
@@ -219,6 +232,8 @@ class AlipayCommerceEducateCheckinRecordBatchqueryModel(object):
             o.check_in_result = d['check_in_result']
         if 'check_in_start_time' in d:
             o.check_in_start_time = d['check_in_start_time']
+        if 'check_in_status' in d:
+            o.check_in_status = d['check_in_status']
         if 'check_in_type' in d:
             o.check_in_type = d['check_in_type']
         if 'course_id_list' in d:

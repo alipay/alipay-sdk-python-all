@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.TextLinkVO import TextLinkVO
 
 
 class ImageTextMsgVO(object):
@@ -12,6 +13,7 @@ class ImageTextMsgVO(object):
         self._image = None
         self._image_id = None
         self._image_url = None
+        self._text_link_list = None
         self._title = None
         self._url = None
 
@@ -43,6 +45,19 @@ class ImageTextMsgVO(object):
     @image_url.setter
     def image_url(self, value):
         self._image_url = value
+    @property
+    def text_link_list(self):
+        return self._text_link_list
+
+    @text_link_list.setter
+    def text_link_list(self, value):
+        if isinstance(value, list):
+            self._text_link_list = list()
+            for i in value:
+                if isinstance(i, TextLinkVO):
+                    self._text_link_list.append(i)
+                else:
+                    self._text_link_list.append(TextLinkVO.from_alipay_dict(i))
     @property
     def title(self):
         return self._title
@@ -81,6 +96,16 @@ class ImageTextMsgVO(object):
                 params['image_url'] = self.image_url.to_alipay_dict()
             else:
                 params['image_url'] = self.image_url
+        if self.text_link_list:
+            if isinstance(self.text_link_list, list):
+                for i in range(0, len(self.text_link_list)):
+                    element = self.text_link_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.text_link_list[i] = element.to_alipay_dict()
+            if hasattr(self.text_link_list, 'to_alipay_dict'):
+                params['text_link_list'] = self.text_link_list.to_alipay_dict()
+            else:
+                params['text_link_list'] = self.text_link_list
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -106,6 +131,8 @@ class ImageTextMsgVO(object):
             o.image_id = d['image_id']
         if 'image_url' in d:
             o.image_url = d['image_url']
+        if 'text_link_list' in d:
+            o.text_link_list = d['text_link_list']
         if 'title' in d:
             o.title = d['title']
         if 'url' in d:

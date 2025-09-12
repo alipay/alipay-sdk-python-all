@@ -12,12 +12,15 @@ class IndustryInvoiceItemInfo(object):
         self._invoice_amount = None
         self._invoice_line_property = None
         self._item_amount = None
+        self._item_amount_without_tax = None
         self._item_code = None
         self._item_name = None
         self._item_num = None
         self._item_spec = None
+        self._item_tax_amount = None
         self._item_tax_rate = None
         self._item_unit = None
+        self._item_unit_amount = None
         self._related_blue_serial_no = None
         self._serial_no = None
         self._tax_code = None
@@ -51,6 +54,13 @@ class IndustryInvoiceItemInfo(object):
     def item_amount(self, value):
         self._item_amount = value
     @property
+    def item_amount_without_tax(self):
+        return self._item_amount_without_tax
+
+    @item_amount_without_tax.setter
+    def item_amount_without_tax(self, value):
+        self._item_amount_without_tax = value
+    @property
     def item_code(self):
         return self._item_code
 
@@ -79,6 +89,13 @@ class IndustryInvoiceItemInfo(object):
     def item_spec(self, value):
         self._item_spec = value
     @property
+    def item_tax_amount(self):
+        return self._item_tax_amount
+
+    @item_tax_amount.setter
+    def item_tax_amount(self, value):
+        self._item_tax_amount = value
+    @property
     def item_tax_rate(self):
         return self._item_tax_rate
 
@@ -92,6 +109,13 @@ class IndustryInvoiceItemInfo(object):
     @item_unit.setter
     def item_unit(self, value):
         self._item_unit = value
+    @property
+    def item_unit_amount(self):
+        return self._item_unit_amount
+
+    @item_unit_amount.setter
+    def item_unit_amount(self, value):
+        self._item_unit_amount = value
     @property
     def related_blue_serial_no(self):
         return self._related_blue_serial_no
@@ -137,6 +161,11 @@ class IndustryInvoiceItemInfo(object):
                 params['item_amount'] = self.item_amount.to_alipay_dict()
             else:
                 params['item_amount'] = self.item_amount
+        if self.item_amount_without_tax:
+            if hasattr(self.item_amount_without_tax, 'to_alipay_dict'):
+                params['item_amount_without_tax'] = self.item_amount_without_tax.to_alipay_dict()
+            else:
+                params['item_amount_without_tax'] = self.item_amount_without_tax
         if self.item_code:
             if hasattr(self.item_code, 'to_alipay_dict'):
                 params['item_code'] = self.item_code.to_alipay_dict()
@@ -157,6 +186,11 @@ class IndustryInvoiceItemInfo(object):
                 params['item_spec'] = self.item_spec.to_alipay_dict()
             else:
                 params['item_spec'] = self.item_spec
+        if self.item_tax_amount:
+            if hasattr(self.item_tax_amount, 'to_alipay_dict'):
+                params['item_tax_amount'] = self.item_tax_amount.to_alipay_dict()
+            else:
+                params['item_tax_amount'] = self.item_tax_amount
         if self.item_tax_rate:
             if hasattr(self.item_tax_rate, 'to_alipay_dict'):
                 params['item_tax_rate'] = self.item_tax_rate.to_alipay_dict()
@@ -167,6 +201,11 @@ class IndustryInvoiceItemInfo(object):
                 params['item_unit'] = self.item_unit.to_alipay_dict()
             else:
                 params['item_unit'] = self.item_unit
+        if self.item_unit_amount:
+            if hasattr(self.item_unit_amount, 'to_alipay_dict'):
+                params['item_unit_amount'] = self.item_unit_amount.to_alipay_dict()
+            else:
+                params['item_unit_amount'] = self.item_unit_amount
         if self.related_blue_serial_no:
             if hasattr(self.related_blue_serial_no, 'to_alipay_dict'):
                 params['related_blue_serial_no'] = self.related_blue_serial_no.to_alipay_dict()
@@ -197,6 +236,8 @@ class IndustryInvoiceItemInfo(object):
             o.invoice_line_property = d['invoice_line_property']
         if 'item_amount' in d:
             o.item_amount = d['item_amount']
+        if 'item_amount_without_tax' in d:
+            o.item_amount_without_tax = d['item_amount_without_tax']
         if 'item_code' in d:
             o.item_code = d['item_code']
         if 'item_name' in d:
@@ -205,10 +246,14 @@ class IndustryInvoiceItemInfo(object):
             o.item_num = d['item_num']
         if 'item_spec' in d:
             o.item_spec = d['item_spec']
+        if 'item_tax_amount' in d:
+            o.item_tax_amount = d['item_tax_amount']
         if 'item_tax_rate' in d:
             o.item_tax_rate = d['item_tax_rate']
         if 'item_unit' in d:
             o.item_unit = d['item_unit']
+        if 'item_unit_amount' in d:
+            o.item_unit_amount = d['item_unit_amount']
         if 'related_blue_serial_no' in d:
             o.related_blue_serial_no = d['related_blue_serial_no']
         if 'serial_no' in d:

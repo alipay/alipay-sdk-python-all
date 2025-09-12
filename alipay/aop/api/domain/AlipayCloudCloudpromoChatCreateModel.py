@@ -18,6 +18,7 @@ class AlipayCloudCloudpromoChatCreateModel(object):
         self._load_test = None
         self._question = None
         self._retry = None
+        self._session_id = None
         self._user_id = None
 
     @property
@@ -87,6 +88,13 @@ class AlipayCloudCloudpromoChatCreateModel(object):
     def retry(self, value):
         self._retry = value
     @property
+    def session_id(self):
+        return self._session_id
+
+    @session_id.setter
+    def session_id(self, value):
+        self._session_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -142,6 +150,11 @@ class AlipayCloudCloudpromoChatCreateModel(object):
                 params['retry'] = self.retry.to_alipay_dict()
             else:
                 params['retry'] = self.retry
+        if self.session_id:
+            if hasattr(self.session_id, 'to_alipay_dict'):
+                params['session_id'] = self.session_id.to_alipay_dict()
+            else:
+                params['session_id'] = self.session_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -172,6 +185,8 @@ class AlipayCloudCloudpromoChatCreateModel(object):
             o.question = d['question']
         if 'retry' in d:
             o.retry = d['retry']
+        if 'session_id' in d:
+            o.session_id = d['session_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

@@ -15,6 +15,8 @@ class DeviceExtAttribute(object):
         self._isv_access_token = None
         self._isv_device_version_tag = None
         self._sales_entry_order_id = None
+        self._sales_order_id = None
+        self._sales_pre_order_id = None
         self._sales_solution_ext = None
         self._shop_name = None
         self._shop_nick_name = None
@@ -65,6 +67,20 @@ class DeviceExtAttribute(object):
     @sales_entry_order_id.setter
     def sales_entry_order_id(self, value):
         self._sales_entry_order_id = value
+    @property
+    def sales_order_id(self):
+        return self._sales_order_id
+
+    @sales_order_id.setter
+    def sales_order_id(self, value):
+        self._sales_order_id = value
+    @property
+    def sales_pre_order_id(self):
+        return self._sales_pre_order_id
+
+    @sales_pre_order_id.setter
+    def sales_pre_order_id(self, value):
+        self._sales_pre_order_id = value
     @property
     def sales_solution_ext(self):
         return self._sales_solution_ext
@@ -151,6 +167,16 @@ class DeviceExtAttribute(object):
                 params['sales_entry_order_id'] = self.sales_entry_order_id.to_alipay_dict()
             else:
                 params['sales_entry_order_id'] = self.sales_entry_order_id
+        if self.sales_order_id:
+            if hasattr(self.sales_order_id, 'to_alipay_dict'):
+                params['sales_order_id'] = self.sales_order_id.to_alipay_dict()
+            else:
+                params['sales_order_id'] = self.sales_order_id
+        if self.sales_pre_order_id:
+            if hasattr(self.sales_pre_order_id, 'to_alipay_dict'):
+                params['sales_pre_order_id'] = self.sales_pre_order_id.to_alipay_dict()
+            else:
+                params['sales_pre_order_id'] = self.sales_pre_order_id
         if self.sales_solution_ext:
             if hasattr(self.sales_solution_ext, 'to_alipay_dict'):
                 params['sales_solution_ext'] = self.sales_solution_ext.to_alipay_dict()
@@ -205,6 +231,10 @@ class DeviceExtAttribute(object):
             o.isv_device_version_tag = d['isv_device_version_tag']
         if 'sales_entry_order_id' in d:
             o.sales_entry_order_id = d['sales_entry_order_id']
+        if 'sales_order_id' in d:
+            o.sales_order_id = d['sales_order_id']
+        if 'sales_pre_order_id' in d:
+            o.sales_pre_order_id = d['sales_pre_order_id']
         if 'sales_solution_ext' in d:
             o.sales_solution_ext = d['sales_solution_ext']
         if 'shop_name' in d:

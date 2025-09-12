@@ -23,6 +23,7 @@ class MerchantCardTemplate(object):
         self._card_template_status = None
         self._card_type = None
         self._category_id = None
+        self._funding_model = None
         self._hotline = None
         self._image_detail_id_list = None
         self._image_detail_url_list = None
@@ -105,6 +106,16 @@ class MerchantCardTemplate(object):
     @category_id.setter
     def category_id(self, value):
         self._category_id = value
+    @property
+    def funding_model(self):
+        return self._funding_model
+
+    @funding_model.setter
+    def funding_model(self, value):
+        if isinstance(value, list):
+            self._funding_model = list()
+            for i in value:
+                self._funding_model.append(i)
     @property
     def hotline(self):
         return self._hotline
@@ -296,6 +307,16 @@ class MerchantCardTemplate(object):
                 params['category_id'] = self.category_id.to_alipay_dict()
             else:
                 params['category_id'] = self.category_id
+        if self.funding_model:
+            if isinstance(self.funding_model, list):
+                for i in range(0, len(self.funding_model)):
+                    element = self.funding_model[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.funding_model[i] = element.to_alipay_dict()
+            if hasattr(self.funding_model, 'to_alipay_dict'):
+                params['funding_model'] = self.funding_model.to_alipay_dict()
+            else:
+                params['funding_model'] = self.funding_model
         if self.hotline:
             if hasattr(self.hotline, 'to_alipay_dict'):
                 params['hotline'] = self.hotline.to_alipay_dict()
@@ -424,6 +445,8 @@ class MerchantCardTemplate(object):
             o.card_type = d['card_type']
         if 'category_id' in d:
             o.category_id = d['category_id']
+        if 'funding_model' in d:
+            o.funding_model = d['funding_model']
         if 'hotline' in d:
             o.hotline = d['hotline']
         if 'image_detail_id_list' in d:

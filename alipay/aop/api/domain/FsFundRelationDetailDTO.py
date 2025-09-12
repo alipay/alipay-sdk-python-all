@@ -11,6 +11,7 @@ class FsFundRelationDetailDTO(object):
         self._allowed_float_up = None
         self._allows_skip_budget_deduction = None
         self._ceiling_amount = None
+        self._fund_principal = None
         self._fund_priority = None
         self._fund_provider = None
         self._fund_ratio = None
@@ -38,6 +39,13 @@ class FsFundRelationDetailDTO(object):
     @ceiling_amount.setter
     def ceiling_amount(self, value):
         self._ceiling_amount = value
+    @property
+    def fund_principal(self):
+        return self._fund_principal
+
+    @fund_principal.setter
+    def fund_principal(self, value):
+        self._fund_principal = value
     @property
     def fund_priority(self):
         return self._fund_priority
@@ -92,6 +100,11 @@ class FsFundRelationDetailDTO(object):
                 params['ceiling_amount'] = self.ceiling_amount.to_alipay_dict()
             else:
                 params['ceiling_amount'] = self.ceiling_amount
+        if self.fund_principal:
+            if hasattr(self.fund_principal, 'to_alipay_dict'):
+                params['fund_principal'] = self.fund_principal.to_alipay_dict()
+            else:
+                params['fund_principal'] = self.fund_principal
         if self.fund_priority:
             if hasattr(self.fund_priority, 'to_alipay_dict'):
                 params['fund_priority'] = self.fund_priority.to_alipay_dict()
@@ -130,6 +143,8 @@ class FsFundRelationDetailDTO(object):
             o.allows_skip_budget_deduction = d['allows_skip_budget_deduction']
         if 'ceiling_amount' in d:
             o.ceiling_amount = d['ceiling_amount']
+        if 'fund_principal' in d:
+            o.fund_principal = d['fund_principal']
         if 'fund_priority' in d:
             o.fund_priority = d['fund_priority']
         if 'fund_provider' in d:

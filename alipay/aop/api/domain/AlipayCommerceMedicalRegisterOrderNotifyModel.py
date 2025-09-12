@@ -31,6 +31,7 @@ class AlipayCommerceMedicalRegisterOrderNotifyModel(object):
         self._number_id = None
         self._number_seq_no = None
         self._order_no = None
+        self._order_prop = None
         self._order_status = None
         self._order_time = None
         self._out_order_id = None
@@ -203,6 +204,13 @@ class AlipayCommerceMedicalRegisterOrderNotifyModel(object):
     @order_no.setter
     def order_no(self, value):
         self._order_no = value
+    @property
+    def order_prop(self):
+        return self._order_prop
+
+    @order_prop.setter
+    def order_prop(self, value):
+        self._order_prop = value
     @property
     def order_status(self):
         return self._order_status
@@ -392,6 +400,11 @@ class AlipayCommerceMedicalRegisterOrderNotifyModel(object):
                 params['order_no'] = self.order_no.to_alipay_dict()
             else:
                 params['order_no'] = self.order_no
+        if self.order_prop:
+            if hasattr(self.order_prop, 'to_alipay_dict'):
+                params['order_prop'] = self.order_prop.to_alipay_dict()
+            else:
+                params['order_prop'] = self.order_prop
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -495,6 +508,8 @@ class AlipayCommerceMedicalRegisterOrderNotifyModel(object):
             o.number_seq_no = d['number_seq_no']
         if 'order_no' in d:
             o.order_no = d['order_no']
+        if 'order_prop' in d:
+            o.order_prop = d['order_prop']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'order_time' in d:

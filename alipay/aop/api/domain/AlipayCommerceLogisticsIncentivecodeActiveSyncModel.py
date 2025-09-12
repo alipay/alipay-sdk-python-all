@@ -15,12 +15,15 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
         self._active_detail_address = None
         self._active_latitude = None
         self._active_longitude = None
+        self._active_out_shop_id = None
         self._active_province = None
+        self._active_shop_name = None
         self._active_street = None
         self._active_time = None
         self._active_type = None
         self._incentive_code = None
         self._logistics_code = None
+        self._material_type = None
 
     @property
     def active_area(self):
@@ -72,12 +75,26 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
     def active_longitude(self, value):
         self._active_longitude = value
     @property
+    def active_out_shop_id(self):
+        return self._active_out_shop_id
+
+    @active_out_shop_id.setter
+    def active_out_shop_id(self, value):
+        self._active_out_shop_id = value
+    @property
     def active_province(self):
         return self._active_province
 
     @active_province.setter
     def active_province(self, value):
         self._active_province = value
+    @property
+    def active_shop_name(self):
+        return self._active_shop_name
+
+    @active_shop_name.setter
+    def active_shop_name(self, value):
+        self._active_shop_name = value
     @property
     def active_street(self):
         return self._active_street
@@ -113,6 +130,13 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
     @logistics_code.setter
     def logistics_code(self, value):
         self._logistics_code = value
+    @property
+    def material_type(self):
+        return self._material_type
+
+    @material_type.setter
+    def material_type(self, value):
+        self._material_type = value
 
 
     def to_alipay_dict(self):
@@ -152,11 +176,21 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
                 params['active_longitude'] = self.active_longitude.to_alipay_dict()
             else:
                 params['active_longitude'] = self.active_longitude
+        if self.active_out_shop_id:
+            if hasattr(self.active_out_shop_id, 'to_alipay_dict'):
+                params['active_out_shop_id'] = self.active_out_shop_id.to_alipay_dict()
+            else:
+                params['active_out_shop_id'] = self.active_out_shop_id
         if self.active_province:
             if hasattr(self.active_province, 'to_alipay_dict'):
                 params['active_province'] = self.active_province.to_alipay_dict()
             else:
                 params['active_province'] = self.active_province
+        if self.active_shop_name:
+            if hasattr(self.active_shop_name, 'to_alipay_dict'):
+                params['active_shop_name'] = self.active_shop_name.to_alipay_dict()
+            else:
+                params['active_shop_name'] = self.active_shop_name
         if self.active_street:
             if hasattr(self.active_street, 'to_alipay_dict'):
                 params['active_street'] = self.active_street.to_alipay_dict()
@@ -182,6 +216,11 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
             else:
                 params['logistics_code'] = self.logistics_code
+        if self.material_type:
+            if hasattr(self.material_type, 'to_alipay_dict'):
+                params['material_type'] = self.material_type.to_alipay_dict()
+            else:
+                params['material_type'] = self.material_type
         return params
 
     @staticmethod
@@ -203,8 +242,12 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
             o.active_latitude = d['active_latitude']
         if 'active_longitude' in d:
             o.active_longitude = d['active_longitude']
+        if 'active_out_shop_id' in d:
+            o.active_out_shop_id = d['active_out_shop_id']
         if 'active_province' in d:
             o.active_province = d['active_province']
+        if 'active_shop_name' in d:
+            o.active_shop_name = d['active_shop_name']
         if 'active_street' in d:
             o.active_street = d['active_street']
         if 'active_time' in d:
@@ -215,6 +258,8 @@ class AlipayCommerceLogisticsIncentivecodeActiveSyncModel(object):
             o.incentive_code = d['incentive_code']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
+        if 'material_type' in d:
+            o.material_type = d['material_type']
         return o
 
 

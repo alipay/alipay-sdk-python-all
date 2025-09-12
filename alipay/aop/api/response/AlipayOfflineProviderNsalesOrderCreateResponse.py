@@ -12,6 +12,7 @@ class AlipayOfflineProviderNsalesOrderCreateResponse(AlipayResponse):
         self._express_timeout = None
         self._order_url = None
         self._sales_entry_order_id = None
+        self._sales_entry_pre_order_id = None
 
     @property
     def express_timeout(self):
@@ -34,6 +35,13 @@ class AlipayOfflineProviderNsalesOrderCreateResponse(AlipayResponse):
     @sales_entry_order_id.setter
     def sales_entry_order_id(self, value):
         self._sales_entry_order_id = value
+    @property
+    def sales_entry_pre_order_id(self):
+        return self._sales_entry_pre_order_id
+
+    @sales_entry_pre_order_id.setter
+    def sales_entry_pre_order_id(self, value):
+        self._sales_entry_pre_order_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayOfflineProviderNsalesOrderCreateResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayOfflineProviderNsalesOrderCreateResponse(AlipayResponse):
             self.order_url = response['order_url']
         if 'sales_entry_order_id' in response:
             self.sales_entry_order_id = response['sales_entry_order_id']
+        if 'sales_entry_pre_order_id' in response:
+            self.sales_entry_pre_order_id = response['sales_entry_pre_order_id']

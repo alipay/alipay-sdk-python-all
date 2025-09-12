@@ -13,6 +13,7 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
     def __init__(self):
         self._authorization_info = None
         self._biz_from = None
+        self._biz_identity = None
         self._biz_no = None
         self._effective_time = None
         self._expired_time = None
@@ -21,6 +22,7 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
         self._mnotify_url = None
         self._name = None
         self._publisher_user_id = None
+        self._verify_id = None
 
     @property
     def authorization_info(self):
@@ -39,6 +41,13 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
     @biz_from.setter
     def biz_from(self, value):
         self._biz_from = value
+    @property
+    def biz_identity(self):
+        return self._biz_identity
+
+    @biz_identity.setter
+    def biz_identity(self, value):
+        self._biz_identity = value
     @property
     def biz_no(self):
         return self._biz_no
@@ -107,6 +116,13 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
     @publisher_user_id.setter
     def publisher_user_id(self, value):
         self._publisher_user_id = value
+    @property
+    def verify_id(self):
+        return self._verify_id
+
+    @verify_id.setter
+    def verify_id(self, value):
+        self._verify_id = value
 
 
     def to_alipay_dict(self):
@@ -121,6 +137,11 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
                 params['biz_from'] = self.biz_from.to_alipay_dict()
             else:
                 params['biz_from'] = self.biz_from
+        if self.biz_identity:
+            if hasattr(self.biz_identity, 'to_alipay_dict'):
+                params['biz_identity'] = self.biz_identity.to_alipay_dict()
+            else:
+                params['biz_identity'] = self.biz_identity
         if self.biz_no:
             if hasattr(self.biz_no, 'to_alipay_dict'):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
@@ -171,6 +192,11 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
                 params['publisher_user_id'] = self.publisher_user_id.to_alipay_dict()
             else:
                 params['publisher_user_id'] = self.publisher_user_id
+        if self.verify_id:
+            if hasattr(self.verify_id, 'to_alipay_dict'):
+                params['verify_id'] = self.verify_id.to_alipay_dict()
+            else:
+                params['verify_id'] = self.verify_id
         return params
 
     @staticmethod
@@ -182,6 +208,8 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
             o.authorization_info = d['authorization_info']
         if 'biz_from' in d:
             o.biz_from = d['biz_from']
+        if 'biz_identity' in d:
+            o.biz_identity = d['biz_identity']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'effective_time' in d:
@@ -198,6 +226,8 @@ class AlipayMarketingBenefitaccountAccountCreateModel(object):
             o.name = d['name']
         if 'publisher_user_id' in d:
             o.publisher_user_id = d['publisher_user_id']
+        if 'verify_id' in d:
+            o.verify_id = d['verify_id']
         return o
 
 

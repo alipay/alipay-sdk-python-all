@@ -14,6 +14,9 @@ class AntMerchantExpandEcoOrderCreateModel(object):
         self._order_status = None
         self._order_time = None
         self._out_order_id = None
+        self._product_image_file_keys = None
+        self._product_name = None
+        self._product_specifications = None
         self._qrcode_imgs = None
         self._qrcode_tokens = None
         self._receive_time = None
@@ -63,6 +66,30 @@ class AntMerchantExpandEcoOrderCreateModel(object):
     @out_order_id.setter
     def out_order_id(self, value):
         self._out_order_id = value
+    @property
+    def product_image_file_keys(self):
+        return self._product_image_file_keys
+
+    @product_image_file_keys.setter
+    def product_image_file_keys(self, value):
+        if isinstance(value, list):
+            self._product_image_file_keys = list()
+            for i in value:
+                self._product_image_file_keys.append(i)
+    @property
+    def product_name(self):
+        return self._product_name
+
+    @product_name.setter
+    def product_name(self, value):
+        self._product_name = value
+    @property
+    def product_specifications(self):
+        return self._product_specifications
+
+    @product_specifications.setter
+    def product_specifications(self, value):
+        self._product_specifications = value
     @property
     def qrcode_imgs(self):
         return self._qrcode_imgs
@@ -148,6 +175,26 @@ class AntMerchantExpandEcoOrderCreateModel(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.product_image_file_keys:
+            if isinstance(self.product_image_file_keys, list):
+                for i in range(0, len(self.product_image_file_keys)):
+                    element = self.product_image_file_keys[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.product_image_file_keys[i] = element.to_alipay_dict()
+            if hasattr(self.product_image_file_keys, 'to_alipay_dict'):
+                params['product_image_file_keys'] = self.product_image_file_keys.to_alipay_dict()
+            else:
+                params['product_image_file_keys'] = self.product_image_file_keys
+        if self.product_name:
+            if hasattr(self.product_name, 'to_alipay_dict'):
+                params['product_name'] = self.product_name.to_alipay_dict()
+            else:
+                params['product_name'] = self.product_name
+        if self.product_specifications:
+            if hasattr(self.product_specifications, 'to_alipay_dict'):
+                params['product_specifications'] = self.product_specifications.to_alipay_dict()
+            else:
+                params['product_specifications'] = self.product_specifications
         if self.qrcode_imgs:
             if isinstance(self.qrcode_imgs, list):
                 for i in range(0, len(self.qrcode_imgs)):
@@ -212,6 +259,12 @@ class AntMerchantExpandEcoOrderCreateModel(object):
             o.order_time = d['order_time']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'product_image_file_keys' in d:
+            o.product_image_file_keys = d['product_image_file_keys']
+        if 'product_name' in d:
+            o.product_name = d['product_name']
+        if 'product_specifications' in d:
+            o.product_specifications = d['product_specifications']
         if 'qrcode_imgs' in d:
             o.qrcode_imgs = d['qrcode_imgs']
         if 'qrcode_tokens' in d:

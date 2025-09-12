@@ -11,7 +11,13 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     def __init__(self):
         self._auth_activity_id = None
         self._authentication_type = None
+        self._check_out_end_minutes = None
+        self._check_out_end_type = None
+        self._check_out_start_minutes = None
+        self._check_out_start_type = None
         self._dormitory_config = None
+        self._enable_check_in = None
+        self._enable_check_out = None
         self._enable_status = None
         self._end_minutes = None
         self._end_time = None
@@ -45,6 +51,34 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     def authentication_type(self, value):
         self._authentication_type = value
     @property
+    def check_out_end_minutes(self):
+        return self._check_out_end_minutes
+
+    @check_out_end_minutes.setter
+    def check_out_end_minutes(self, value):
+        self._check_out_end_minutes = value
+    @property
+    def check_out_end_type(self):
+        return self._check_out_end_type
+
+    @check_out_end_type.setter
+    def check_out_end_type(self, value):
+        self._check_out_end_type = value
+    @property
+    def check_out_start_minutes(self):
+        return self._check_out_start_minutes
+
+    @check_out_start_minutes.setter
+    def check_out_start_minutes(self, value):
+        self._check_out_start_minutes = value
+    @property
+    def check_out_start_type(self):
+        return self._check_out_start_type
+
+    @check_out_start_type.setter
+    def check_out_start_type(self, value):
+        self._check_out_start_type = value
+    @property
     def dormitory_config(self):
         return self._dormitory_config
 
@@ -54,6 +88,20 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
             self._dormitory_config = value
         else:
             self._dormitory_config = DormitoryConfig.from_alipay_dict(value)
+    @property
+    def enable_check_in(self):
+        return self._enable_check_in
+
+    @enable_check_in.setter
+    def enable_check_in(self, value):
+        self._enable_check_in = value
+    @property
+    def enable_check_out(self):
+        return self._enable_check_out
+
+    @enable_check_out.setter
+    def enable_check_out(self, value):
+        self._enable_check_out = value
     @property
     def enable_status(self):
         return self._enable_status
@@ -193,11 +241,41 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
                 params['authentication_type'] = self.authentication_type.to_alipay_dict()
             else:
                 params['authentication_type'] = self.authentication_type
+        if self.check_out_end_minutes:
+            if hasattr(self.check_out_end_minutes, 'to_alipay_dict'):
+                params['check_out_end_minutes'] = self.check_out_end_minutes.to_alipay_dict()
+            else:
+                params['check_out_end_minutes'] = self.check_out_end_minutes
+        if self.check_out_end_type:
+            if hasattr(self.check_out_end_type, 'to_alipay_dict'):
+                params['check_out_end_type'] = self.check_out_end_type.to_alipay_dict()
+            else:
+                params['check_out_end_type'] = self.check_out_end_type
+        if self.check_out_start_minutes:
+            if hasattr(self.check_out_start_minutes, 'to_alipay_dict'):
+                params['check_out_start_minutes'] = self.check_out_start_minutes.to_alipay_dict()
+            else:
+                params['check_out_start_minutes'] = self.check_out_start_minutes
+        if self.check_out_start_type:
+            if hasattr(self.check_out_start_type, 'to_alipay_dict'):
+                params['check_out_start_type'] = self.check_out_start_type.to_alipay_dict()
+            else:
+                params['check_out_start_type'] = self.check_out_start_type
         if self.dormitory_config:
             if hasattr(self.dormitory_config, 'to_alipay_dict'):
                 params['dormitory_config'] = self.dormitory_config.to_alipay_dict()
             else:
                 params['dormitory_config'] = self.dormitory_config
+        if self.enable_check_in:
+            if hasattr(self.enable_check_in, 'to_alipay_dict'):
+                params['enable_check_in'] = self.enable_check_in.to_alipay_dict()
+            else:
+                params['enable_check_in'] = self.enable_check_in
+        if self.enable_check_out:
+            if hasattr(self.enable_check_out, 'to_alipay_dict'):
+                params['enable_check_out'] = self.enable_check_out.to_alipay_dict()
+            else:
+                params['enable_check_out'] = self.enable_check_out
         if self.enable_status:
             if hasattr(self.enable_status, 'to_alipay_dict'):
                 params['enable_status'] = self.enable_status.to_alipay_dict()
@@ -304,8 +382,20 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
             o.auth_activity_id = d['auth_activity_id']
         if 'authentication_type' in d:
             o.authentication_type = d['authentication_type']
+        if 'check_out_end_minutes' in d:
+            o.check_out_end_minutes = d['check_out_end_minutes']
+        if 'check_out_end_type' in d:
+            o.check_out_end_type = d['check_out_end_type']
+        if 'check_out_start_minutes' in d:
+            o.check_out_start_minutes = d['check_out_start_minutes']
+        if 'check_out_start_type' in d:
+            o.check_out_start_type = d['check_out_start_type']
         if 'dormitory_config' in d:
             o.dormitory_config = d['dormitory_config']
+        if 'enable_check_in' in d:
+            o.enable_check_in = d['enable_check_in']
+        if 'enable_check_out' in d:
+            o.enable_check_out = d['enable_check_out']
         if 'enable_status' in d:
             o.enable_status = d['enable_status']
         if 'end_minutes' in d:

@@ -10,6 +10,7 @@ class UserIntentionInfo(object):
     def __init__(self):
         self._city_code = None
         self._city_name = None
+        self._expect_job_code = None
         self._expect_job_type = None
         self._expect_salary_max = None
         self._expect_salary_min = None
@@ -31,6 +32,13 @@ class UserIntentionInfo(object):
     @city_name.setter
     def city_name(self, value):
         self._city_name = value
+    @property
+    def expect_job_code(self):
+        return self._expect_job_code
+
+    @expect_job_code.setter
+    def expect_job_code(self, value):
+        self._expect_job_code = value
     @property
     def expect_job_type(self):
         return self._expect_job_type
@@ -87,6 +95,11 @@ class UserIntentionInfo(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.expect_job_code:
+            if hasattr(self.expect_job_code, 'to_alipay_dict'):
+                params['expect_job_code'] = self.expect_job_code.to_alipay_dict()
+            else:
+                params['expect_job_code'] = self.expect_job_code
         if self.expect_job_type:
             if hasattr(self.expect_job_type, 'to_alipay_dict'):
                 params['expect_job_type'] = self.expect_job_type.to_alipay_dict()
@@ -128,6 +141,8 @@ class UserIntentionInfo(object):
             o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'expect_job_code' in d:
+            o.expect_job_code = d['expect_job_code']
         if 'expect_job_type' in d:
             o.expect_job_type = d['expect_job_type']
         if 'expect_salary_max' in d:

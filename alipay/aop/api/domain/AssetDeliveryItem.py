@@ -54,6 +54,10 @@ class AssetDeliveryItem(object):
         self._priority = None
         self._produce_order_item_id = None
         self._record_type = None
+        self._related_children_out_biz_no_count = None
+        self._related_others_out_biz_no = None
+        self._related_out_biz_no = None
+        self._related_parent_out_biz_no = None
         self._supplier_id = None
         self._supplier_name = None
         self._to_address = None
@@ -366,6 +370,37 @@ class AssetDeliveryItem(object):
     def record_type(self, value):
         self._record_type = value
     @property
+    def related_children_out_biz_no_count(self):
+        return self._related_children_out_biz_no_count
+
+    @related_children_out_biz_no_count.setter
+    def related_children_out_biz_no_count(self, value):
+        self._related_children_out_biz_no_count = value
+    @property
+    def related_others_out_biz_no(self):
+        return self._related_others_out_biz_no
+
+    @related_others_out_biz_no.setter
+    def related_others_out_biz_no(self, value):
+        if isinstance(value, list):
+            self._related_others_out_biz_no = list()
+            for i in value:
+                self._related_others_out_biz_no.append(i)
+    @property
+    def related_out_biz_no(self):
+        return self._related_out_biz_no
+
+    @related_out_biz_no.setter
+    def related_out_biz_no(self, value):
+        self._related_out_biz_no = value
+    @property
+    def related_parent_out_biz_no(self):
+        return self._related_parent_out_biz_no
+
+    @related_parent_out_biz_no.setter
+    def related_parent_out_biz_no(self, value):
+        self._related_parent_out_biz_no = value
+    @property
     def supplier_id(self):
         return self._supplier_id
 
@@ -622,6 +657,31 @@ class AssetDeliveryItem(object):
                 params['record_type'] = self.record_type.to_alipay_dict()
             else:
                 params['record_type'] = self.record_type
+        if self.related_children_out_biz_no_count:
+            if hasattr(self.related_children_out_biz_no_count, 'to_alipay_dict'):
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count.to_alipay_dict()
+            else:
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count
+        if self.related_others_out_biz_no:
+            if isinstance(self.related_others_out_biz_no, list):
+                for i in range(0, len(self.related_others_out_biz_no)):
+                    element = self.related_others_out_biz_no[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.related_others_out_biz_no[i] = element.to_alipay_dict()
+            if hasattr(self.related_others_out_biz_no, 'to_alipay_dict'):
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no.to_alipay_dict()
+            else:
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no
+        if self.related_out_biz_no:
+            if hasattr(self.related_out_biz_no, 'to_alipay_dict'):
+                params['related_out_biz_no'] = self.related_out_biz_no.to_alipay_dict()
+            else:
+                params['related_out_biz_no'] = self.related_out_biz_no
+        if self.related_parent_out_biz_no:
+            if hasattr(self.related_parent_out_biz_no, 'to_alipay_dict'):
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no.to_alipay_dict()
+            else:
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no
         if self.supplier_id:
             if hasattr(self.supplier_id, 'to_alipay_dict'):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
@@ -736,6 +796,14 @@ class AssetDeliveryItem(object):
             o.produce_order_item_id = d['produce_order_item_id']
         if 'record_type' in d:
             o.record_type = d['record_type']
+        if 'related_children_out_biz_no_count' in d:
+            o.related_children_out_biz_no_count = d['related_children_out_biz_no_count']
+        if 'related_others_out_biz_no' in d:
+            o.related_others_out_biz_no = d['related_others_out_biz_no']
+        if 'related_out_biz_no' in d:
+            o.related_out_biz_no = d['related_out_biz_no']
+        if 'related_parent_out_biz_no' in d:
+            o.related_parent_out_biz_no = d['related_parent_out_biz_no']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
         if 'supplier_name' in d:

@@ -11,8 +11,11 @@ class EduCheckInRecord(object):
         self._check_in_picture = None
         self._check_in_result = None
         self._check_in_source_type = None
+        self._check_in_status = None
         self._check_in_time = None
         self._check_in_type = None
+        self._check_out_picture = None
+        self._check_out_time = None
         self._employee_no = None
         self._inst_id = None
         self._latitude = None
@@ -47,6 +50,13 @@ class EduCheckInRecord(object):
     def check_in_source_type(self, value):
         self._check_in_source_type = value
     @property
+    def check_in_status(self):
+        return self._check_in_status
+
+    @check_in_status.setter
+    def check_in_status(self, value):
+        self._check_in_status = value
+    @property
     def check_in_time(self):
         return self._check_in_time
 
@@ -60,6 +70,20 @@ class EduCheckInRecord(object):
     @check_in_type.setter
     def check_in_type(self, value):
         self._check_in_type = value
+    @property
+    def check_out_picture(self):
+        return self._check_out_picture
+
+    @check_out_picture.setter
+    def check_out_picture(self, value):
+        self._check_out_picture = value
+    @property
+    def check_out_time(self):
+        return self._check_out_time
+
+    @check_out_time.setter
+    def check_out_time(self, value):
+        self._check_out_time = value
     @property
     def employee_no(self):
         return self._employee_no
@@ -156,6 +180,11 @@ class EduCheckInRecord(object):
                 params['check_in_source_type'] = self.check_in_source_type.to_alipay_dict()
             else:
                 params['check_in_source_type'] = self.check_in_source_type
+        if self.check_in_status:
+            if hasattr(self.check_in_status, 'to_alipay_dict'):
+                params['check_in_status'] = self.check_in_status.to_alipay_dict()
+            else:
+                params['check_in_status'] = self.check_in_status
         if self.check_in_time:
             if hasattr(self.check_in_time, 'to_alipay_dict'):
                 params['check_in_time'] = self.check_in_time.to_alipay_dict()
@@ -166,6 +195,16 @@ class EduCheckInRecord(object):
                 params['check_in_type'] = self.check_in_type.to_alipay_dict()
             else:
                 params['check_in_type'] = self.check_in_type
+        if self.check_out_picture:
+            if hasattr(self.check_out_picture, 'to_alipay_dict'):
+                params['check_out_picture'] = self.check_out_picture.to_alipay_dict()
+            else:
+                params['check_out_picture'] = self.check_out_picture
+        if self.check_out_time:
+            if hasattr(self.check_out_time, 'to_alipay_dict'):
+                params['check_out_time'] = self.check_out_time.to_alipay_dict()
+            else:
+                params['check_out_time'] = self.check_out_time
         if self.employee_no:
             if hasattr(self.employee_no, 'to_alipay_dict'):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
@@ -234,10 +273,16 @@ class EduCheckInRecord(object):
             o.check_in_result = d['check_in_result']
         if 'check_in_source_type' in d:
             o.check_in_source_type = d['check_in_source_type']
+        if 'check_in_status' in d:
+            o.check_in_status = d['check_in_status']
         if 'check_in_time' in d:
             o.check_in_time = d['check_in_time']
         if 'check_in_type' in d:
             o.check_in_type = d['check_in_type']
+        if 'check_out_picture' in d:
+            o.check_out_picture = d['check_out_picture']
+        if 'check_out_time' in d:
+            o.check_out_time = d['check_out_time']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
         if 'inst_id' in d:

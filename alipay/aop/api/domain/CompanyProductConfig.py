@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class CompanyProductConfig(object):
 
     def __init__(self):
+        self._invite_suppliers_after_order_confirm = None
         self._invoice_kind = None
         self._order_audit = None
         self._tax_method = None
         self._tax_rate = None
 
+    @property
+    def invite_suppliers_after_order_confirm(self):
+        return self._invite_suppliers_after_order_confirm
+
+    @invite_suppliers_after_order_confirm.setter
+    def invite_suppliers_after_order_confirm(self, value):
+        self._invite_suppliers_after_order_confirm = value
     @property
     def invoice_kind(self):
         return self._invoice_kind
@@ -45,6 +53,11 @@ class CompanyProductConfig(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.invite_suppliers_after_order_confirm:
+            if hasattr(self.invite_suppliers_after_order_confirm, 'to_alipay_dict'):
+                params['invite_suppliers_after_order_confirm'] = self.invite_suppliers_after_order_confirm.to_alipay_dict()
+            else:
+                params['invite_suppliers_after_order_confirm'] = self.invite_suppliers_after_order_confirm
         if self.invoice_kind:
             if hasattr(self.invoice_kind, 'to_alipay_dict'):
                 params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
@@ -72,6 +85,8 @@ class CompanyProductConfig(object):
         if not d:
             return None
         o = CompanyProductConfig()
+        if 'invite_suppliers_after_order_confirm' in d:
+            o.invite_suppliers_after_order_confirm = d['invite_suppliers_after_order_confirm']
         if 'invoice_kind' in d:
             o.invoice_kind = d['invoice_kind']
         if 'order_audit' in d:

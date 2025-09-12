@@ -13,6 +13,7 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMarketingBenefitaccountAccountQueryResponse, self).__init__()
         self._benefit_account_no = None
+        self._biz_identity = None
         self._current_amount = None
         self._effective_time = None
         self._expired_time = None
@@ -20,6 +21,7 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
         self._fund_pre_auth_info = None
         self._fund_relation_groups = None
         self._name = None
+        self._out_card_no = None
         self._status = None
         self._total_amount = None
 
@@ -30,6 +32,13 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
     @benefit_account_no.setter
     def benefit_account_no(self, value):
         self._benefit_account_no = value
+    @property
+    def biz_identity(self):
+        return self._biz_identity
+
+    @biz_identity.setter
+    def biz_identity(self, value):
+        self._biz_identity = value
     @property
     def current_amount(self):
         return self._current_amount
@@ -95,6 +104,13 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
     def name(self, value):
         self._name = value
     @property
+    def out_card_no(self):
+        return self._out_card_no
+
+    @out_card_no.setter
+    def out_card_no(self, value):
+        self._out_card_no = value
+    @property
     def status(self):
         return self._status
 
@@ -113,6 +129,8 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
         response = super(AlipayMarketingBenefitaccountAccountQueryResponse, self).parse_response_content(response_content)
         if 'benefit_account_no' in response:
             self.benefit_account_no = response['benefit_account_no']
+        if 'biz_identity' in response:
+            self.biz_identity = response['biz_identity']
         if 'current_amount' in response:
             self.current_amount = response['current_amount']
         if 'effective_time' in response:
@@ -127,6 +145,8 @@ class AlipayMarketingBenefitaccountAccountQueryResponse(AlipayResponse):
             self.fund_relation_groups = response['fund_relation_groups']
         if 'name' in response:
             self.name = response['name']
+        if 'out_card_no' in response:
+            self.out_card_no = response['out_card_no']
         if 'status' in response:
             self.status = response['status']
         if 'total_amount' in response:

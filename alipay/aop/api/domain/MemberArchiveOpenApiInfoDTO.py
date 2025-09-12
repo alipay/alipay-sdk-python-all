@@ -9,6 +9,7 @@ class MemberArchiveOpenApiInfoDTO(object):
 
     def __init__(self):
         self._age = None
+        self._archive_no = None
         self._avatar = None
         self._birthday = None
         self._desensitization_id_number = None
@@ -28,6 +29,13 @@ class MemberArchiveOpenApiInfoDTO(object):
     @age.setter
     def age(self, value):
         self._age = value
+    @property
+    def archive_no(self):
+        return self._archive_no
+
+    @archive_no.setter
+    def archive_no(self, value):
+        self._archive_no = value
     @property
     def avatar(self):
         return self._avatar
@@ -114,6 +122,11 @@ class MemberArchiveOpenApiInfoDTO(object):
                 params['age'] = self.age.to_alipay_dict()
             else:
                 params['age'] = self.age
+        if self.archive_no:
+            if hasattr(self.archive_no, 'to_alipay_dict'):
+                params['archive_no'] = self.archive_no.to_alipay_dict()
+            else:
+                params['archive_no'] = self.archive_no
         if self.avatar:
             if hasattr(self.avatar, 'to_alipay_dict'):
                 params['avatar'] = self.avatar.to_alipay_dict()
@@ -178,6 +191,8 @@ class MemberArchiveOpenApiInfoDTO(object):
         o = MemberArchiveOpenApiInfoDTO()
         if 'age' in d:
             o.age = d['age']
+        if 'archive_no' in d:
+            o.archive_no = d['archive_no']
         if 'avatar' in d:
             o.avatar = d['avatar']
         if 'birthday' in d:

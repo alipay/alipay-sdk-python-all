@@ -15,6 +15,7 @@ class AlipayOfflineProviderCollaborateDevicebindApplyResponse(AlipayResponse):
         self._device_sn = None
         self._in_white_list = None
         self._out_biz_no = None
+        self._promo_activity_id = None
         self._sales_entry_order_id = None
         self._solution_id = None
 
@@ -61,6 +62,13 @@ class AlipayOfflineProviderCollaborateDevicebindApplyResponse(AlipayResponse):
     def out_biz_no(self, value):
         self._out_biz_no = value
     @property
+    def promo_activity_id(self):
+        return self._promo_activity_id
+
+    @promo_activity_id.setter
+    def promo_activity_id(self, value):
+        self._promo_activity_id = value
+    @property
     def sales_entry_order_id(self):
         return self._sales_entry_order_id
 
@@ -89,6 +97,8 @@ class AlipayOfflineProviderCollaborateDevicebindApplyResponse(AlipayResponse):
             self.in_white_list = response['in_white_list']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
+        if 'promo_activity_id' in response:
+            self.promo_activity_id = response['promo_activity_id']
         if 'sales_entry_order_id' in response:
             self.sales_entry_order_id = response['sales_entry_order_id']
         if 'solution_id' in response:

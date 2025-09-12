@@ -11,6 +11,7 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
         self._biz_id = None
         self._item_id = None
         self._open_id = None
+        self._right_id = None
         self._scene_code = None
         self._sku_id = None
         self._user_id = None
@@ -36,6 +37,13 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def right_id(self):
+        return self._right_id
+
+    @right_id.setter
+    def right_id(self, value):
+        self._right_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -76,6 +84,11 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.right_id:
+            if hasattr(self.right_id, 'to_alipay_dict'):
+                params['right_id'] = self.right_id.to_alipay_dict()
+            else:
+                params['right_id'] = self.right_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
             o.item_id = d['item_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'right_id' in d:
+            o.right_id = d['right_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'sku_id' in d:

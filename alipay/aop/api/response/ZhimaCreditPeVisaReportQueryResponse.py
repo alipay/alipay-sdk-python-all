@@ -9,10 +9,27 @@ class ZhimaCreditPeVisaReportQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaCreditPeVisaReportQueryResponse, self).__init__()
+        self._name_spell = None
+        self._passport_no = None
         self._report_apply_status = None
         self._report_content_files = None
         self._user_permit_status = None
+        self._valid_time = None
 
+    @property
+    def name_spell(self):
+        return self._name_spell
+
+    @name_spell.setter
+    def name_spell(self, value):
+        self._name_spell = value
+    @property
+    def passport_no(self):
+        return self._passport_no
+
+    @passport_no.setter
+    def passport_no(self, value):
+        self._passport_no = value
     @property
     def report_apply_status(self):
         return self._report_apply_status
@@ -37,12 +54,25 @@ class ZhimaCreditPeVisaReportQueryResponse(AlipayResponse):
     @user_permit_status.setter
     def user_permit_status(self, value):
         self._user_permit_status = value
+    @property
+    def valid_time(self):
+        return self._valid_time
+
+    @valid_time.setter
+    def valid_time(self, value):
+        self._valid_time = value
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditPeVisaReportQueryResponse, self).parse_response_content(response_content)
+        if 'name_spell' in response:
+            self.name_spell = response['name_spell']
+        if 'passport_no' in response:
+            self.passport_no = response['passport_no']
         if 'report_apply_status' in response:
             self.report_apply_status = response['report_apply_status']
         if 'report_content_files' in response:
             self.report_content_files = response['report_content_files']
         if 'user_permit_status' in response:
             self.user_permit_status = response['user_permit_status']
+        if 'valid_time' in response:
+            self.valid_time = response['valid_time']

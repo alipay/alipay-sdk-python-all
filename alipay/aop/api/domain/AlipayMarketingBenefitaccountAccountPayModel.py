@@ -13,6 +13,7 @@ class AlipayMarketingBenefitaccountAccountPayModel(object):
         self._biz_dt = None
         self._biz_no = None
         self._extend_info = None
+        self._fund_principal = None
         self._fund_provider = None
         self._fund_user_id = None
         self._other_pay = None
@@ -56,6 +57,13 @@ class AlipayMarketingBenefitaccountAccountPayModel(object):
     @extend_info.setter
     def extend_info(self, value):
         self._extend_info = value
+    @property
+    def fund_principal(self):
+        return self._fund_principal
+
+    @fund_principal.setter
+    def fund_principal(self, value):
+        self._fund_principal = value
     @property
     def fund_provider(self):
         return self._fund_provider
@@ -134,6 +142,11 @@ class AlipayMarketingBenefitaccountAccountPayModel(object):
                 params['extend_info'] = self.extend_info.to_alipay_dict()
             else:
                 params['extend_info'] = self.extend_info
+        if self.fund_principal:
+            if hasattr(self.fund_principal, 'to_alipay_dict'):
+                params['fund_principal'] = self.fund_principal.to_alipay_dict()
+            else:
+                params['fund_principal'] = self.fund_principal
         if self.fund_provider:
             if hasattr(self.fund_provider, 'to_alipay_dict'):
                 params['fund_provider'] = self.fund_provider.to_alipay_dict()
@@ -186,6 +199,8 @@ class AlipayMarketingBenefitaccountAccountPayModel(object):
             o.biz_no = d['biz_no']
         if 'extend_info' in d:
             o.extend_info = d['extend_info']
+        if 'fund_principal' in d:
+            o.fund_principal = d['fund_principal']
         if 'fund_provider' in d:
             o.fund_provider = d['fund_provider']
         if 'fund_user_id' in d:
