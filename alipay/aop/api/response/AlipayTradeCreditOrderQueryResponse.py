@@ -16,6 +16,7 @@ class AlipayTradeCreditOrderQueryResponse(AlipayResponse):
         self._credit_quota_confirm_time = None
         self._credit_quota_pay_time = None
         self._credit_refund_fee = None
+        self._credit_task_first_exec_time = None
         self._credit_total_fee = None
         self._guarantee_pay_time = None
         self._out_trade_no = None
@@ -72,6 +73,13 @@ class AlipayTradeCreditOrderQueryResponse(AlipayResponse):
     @credit_refund_fee.setter
     def credit_refund_fee(self, value):
         self._credit_refund_fee = value
+    @property
+    def credit_task_first_exec_time(self):
+        return self._credit_task_first_exec_time
+
+    @credit_task_first_exec_time.setter
+    def credit_task_first_exec_time(self, value):
+        self._credit_task_first_exec_time = value
     @property
     def credit_total_fee(self):
         return self._credit_total_fee
@@ -131,6 +139,8 @@ class AlipayTradeCreditOrderQueryResponse(AlipayResponse):
             self.credit_quota_pay_time = response['credit_quota_pay_time']
         if 'credit_refund_fee' in response:
             self.credit_refund_fee = response['credit_refund_fee']
+        if 'credit_task_first_exec_time' in response:
+            self.credit_task_first_exec_time = response['credit_task_first_exec_time']
         if 'credit_total_fee' in response:
             self.credit_total_fee = response['credit_total_fee']
         if 'guarantee_pay_time' in response:

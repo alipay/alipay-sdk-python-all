@@ -14,6 +14,7 @@ class AlipayPcreditLoanHonorLoanBatchqueryModel(object):
         self._open_id = None
         self._out_trace_id = None
         self._page_size = None
+        self._product_code = None
         self._request_source = None
         self._status = None
 
@@ -59,6 +60,13 @@ class AlipayPcreditLoanHonorLoanBatchqueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def request_source(self):
         return self._request_source
@@ -107,6 +115,11 @@ class AlipayPcreditLoanHonorLoanBatchqueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.request_source:
             if hasattr(self.request_source, 'to_alipay_dict'):
                 params['request_source'] = self.request_source.to_alipay_dict()
@@ -136,6 +149,8 @@ class AlipayPcreditLoanHonorLoanBatchqueryModel(object):
             o.out_trace_id = d['out_trace_id']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'request_source' in d:
             o.request_source = d['request_source']
         if 'status' in d:

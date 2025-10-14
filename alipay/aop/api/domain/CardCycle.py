@@ -10,6 +10,7 @@ class CardCycle(object):
     def __init__(self):
         self._charge_now = None
         self._cycle_charge_type = None
+        self._cycle_range = None
         self._cycle_type = None
         self._cycle_value = None
         self._period_item_type = None
@@ -29,6 +30,13 @@ class CardCycle(object):
     @cycle_charge_type.setter
     def cycle_charge_type(self, value):
         self._cycle_charge_type = value
+    @property
+    def cycle_range(self):
+        return self._cycle_range
+
+    @cycle_range.setter
+    def cycle_range(self, value):
+        self._cycle_range = value
     @property
     def cycle_type(self):
         return self._cycle_type
@@ -71,6 +79,11 @@ class CardCycle(object):
                 params['cycle_charge_type'] = self.cycle_charge_type.to_alipay_dict()
             else:
                 params['cycle_charge_type'] = self.cycle_charge_type
+        if self.cycle_range:
+            if hasattr(self.cycle_range, 'to_alipay_dict'):
+                params['cycle_range'] = self.cycle_range.to_alipay_dict()
+            else:
+                params['cycle_range'] = self.cycle_range
         if self.cycle_type:
             if hasattr(self.cycle_type, 'to_alipay_dict'):
                 params['cycle_type'] = self.cycle_type.to_alipay_dict()
@@ -102,6 +115,8 @@ class CardCycle(object):
             o.charge_now = d['charge_now']
         if 'cycle_charge_type' in d:
             o.cycle_charge_type = d['cycle_charge_type']
+        if 'cycle_range' in d:
+            o.cycle_range = d['cycle_range']
         if 'cycle_type' in d:
             o.cycle_type = d['cycle_type']
         if 'cycle_value' in d:

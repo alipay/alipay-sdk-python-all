@@ -18,6 +18,7 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
         self._source_content = None
         self._source_link = None
         self._source_media_infos = None
+        self._source_music_code = None
         self._source_offers = None
         self._source_publish_date = None
         self._source_summary = None
@@ -82,6 +83,13 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                     self._source_media_infos.append(i)
                 else:
                     self._source_media_infos.append(SourceMediaInfo.from_alipay_dict(i))
+    @property
+    def source_music_code(self):
+        return self._source_music_code
+
+    @source_music_code.setter
+    def source_music_code(self, value):
+        self._source_music_code = value
     @property
     def source_offers(self):
         return self._source_offers
@@ -167,6 +175,11 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                 params['source_media_infos'] = self.source_media_infos.to_alipay_dict()
             else:
                 params['source_media_infos'] = self.source_media_infos
+        if self.source_music_code:
+            if hasattr(self.source_music_code, 'to_alipay_dict'):
+                params['source_music_code'] = self.source_music_code.to_alipay_dict()
+            else:
+                params['source_music_code'] = self.source_music_code
         if self.source_offers:
             if isinstance(self.source_offers, list):
                 for i in range(0, len(self.source_offers)):
@@ -218,6 +231,8 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
             o.source_link = d['source_link']
         if 'source_media_infos' in d:
             o.source_media_infos = d['source_media_infos']
+        if 'source_music_code' in d:
+            o.source_music_code = d['source_music_code']
         if 'source_offers' in d:
             o.source_offers = d['source_offers']
         if 'source_publish_date' in d:

@@ -18,6 +18,7 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
         self._price = None
         self._protocol_sequence_id = None
         self._sms_code = None
+        self._target_account = None
 
     @property
     def alipay_user_id(self):
@@ -89,6 +90,13 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
     @sms_code.setter
     def sms_code(self, value):
         self._sms_code = value
+    @property
+    def target_account(self):
+        return self._target_account
+
+    @target_account.setter
+    def target_account(self, value):
+        self._target_account = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +151,11 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
                 params['sms_code'] = self.sms_code.to_alipay_dict()
             else:
                 params['sms_code'] = self.sms_code
+        if self.target_account:
+            if hasattr(self.target_account, 'to_alipay_dict'):
+                params['target_account'] = self.target_account.to_alipay_dict()
+            else:
+                params['target_account'] = self.target_account
         return params
 
     @staticmethod
@@ -170,6 +183,8 @@ class AlipayCommerceAcommunicationDistributionFloworderCreateModel(object):
             o.protocol_sequence_id = d['protocol_sequence_id']
         if 'sms_code' in d:
             o.sms_code = d['sms_code']
+        if 'target_account' in d:
+            o.target_account = d['target_account']
         return o
 
 

@@ -15,6 +15,7 @@ class AlipayPcreditLoanHonorBindApplyModel(object):
         self._channel_customer_id = None
         self._open_id = None
         self._out_trace_id = None
+        self._product_code = None
         self._request_source = None
         self._risk_info = None
         self._verify_callback_url = None
@@ -68,6 +69,13 @@ class AlipayPcreditLoanHonorBindApplyModel(object):
     @out_trace_id.setter
     def out_trace_id(self, value):
         self._out_trace_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def request_source(self):
         return self._request_source
@@ -128,6 +136,11 @@ class AlipayPcreditLoanHonorBindApplyModel(object):
                 params['out_trace_id'] = self.out_trace_id.to_alipay_dict()
             else:
                 params['out_trace_id'] = self.out_trace_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.request_source:
             if hasattr(self.request_source, 'to_alipay_dict'):
                 params['request_source'] = self.request_source.to_alipay_dict()
@@ -164,6 +177,8 @@ class AlipayPcreditLoanHonorBindApplyModel(object):
             o.open_id = d['open_id']
         if 'out_trace_id' in d:
             o.out_trace_id = d['out_trace_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'request_source' in d:
             o.request_source = d['request_source']
         if 'risk_info' in d:

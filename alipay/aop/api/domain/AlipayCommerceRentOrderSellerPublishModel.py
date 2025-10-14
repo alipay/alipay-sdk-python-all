@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RoyaltyPublishDetailInfo import RoyaltyPublishDetailInfo
+from alipay.aop.api.domain.RentSubMerchant import RentSubMerchant
 
 
 class AlipayCommerceRentOrderSellerPublishModel(object):
@@ -16,6 +17,7 @@ class AlipayCommerceRentOrderSellerPublishModel(object):
         self._operate_type = None
         self._order_id = None
         self._royalty_publish_detail = None
+        self._sub_merchant = None
 
     @property
     def buyer_id(self):
@@ -72,6 +74,16 @@ class AlipayCommerceRentOrderSellerPublishModel(object):
                     self._royalty_publish_detail.append(i)
                 else:
                     self._royalty_publish_detail.append(RoyaltyPublishDetailInfo.from_alipay_dict(i))
+    @property
+    def sub_merchant(self):
+        return self._sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value):
+        if isinstance(value, RentSubMerchant):
+            self._sub_merchant = value
+        else:
+            self._sub_merchant = RentSubMerchant.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -116,6 +128,11 @@ class AlipayCommerceRentOrderSellerPublishModel(object):
                 params['royalty_publish_detail'] = self.royalty_publish_detail.to_alipay_dict()
             else:
                 params['royalty_publish_detail'] = self.royalty_publish_detail
+        if self.sub_merchant:
+            if hasattr(self.sub_merchant, 'to_alipay_dict'):
+                params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
+            else:
+                params['sub_merchant'] = self.sub_merchant
         return params
 
     @staticmethod
@@ -137,6 +154,8 @@ class AlipayCommerceRentOrderSellerPublishModel(object):
             o.order_id = d['order_id']
         if 'royalty_publish_detail' in d:
             o.royalty_publish_detail = d['royalty_publish_detail']
+        if 'sub_merchant' in d:
+            o.sub_merchant = d['sub_merchant']
         return o
 
 

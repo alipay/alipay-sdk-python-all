@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SearchDocAbstractBO import SearchDocAbstractBO
+from alipay.aop.api.domain.SearchScoreInfoBO import SearchScoreInfoBO
 
 
 class OpenSearchDocBO(object):
@@ -10,6 +12,7 @@ class OpenSearchDocBO(object):
     def __init__(self):
         self._abstract_extract = None
         self._channel = None
+        self._chunk = None
         self._doc = None
         self._doc_abstract = None
         self._doc_id = None
@@ -20,6 +23,8 @@ class OpenSearchDocBO(object):
         self._publish_timestamp = None
         self._rel_score = None
         self._scale_score = None
+        self._search_doc_abstract = None
+        self._search_score_info = None
         self._source = None
         self._title = None
         self._type = None
@@ -38,6 +43,13 @@ class OpenSearchDocBO(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def chunk(self):
+        return self._chunk
+
+    @chunk.setter
+    def chunk(self, value):
+        self._chunk = value
     @property
     def doc(self):
         return self._doc
@@ -109,6 +121,26 @@ class OpenSearchDocBO(object):
     def scale_score(self, value):
         self._scale_score = value
     @property
+    def search_doc_abstract(self):
+        return self._search_doc_abstract
+
+    @search_doc_abstract.setter
+    def search_doc_abstract(self, value):
+        if isinstance(value, SearchDocAbstractBO):
+            self._search_doc_abstract = value
+        else:
+            self._search_doc_abstract = SearchDocAbstractBO.from_alipay_dict(value)
+    @property
+    def search_score_info(self):
+        return self._search_score_info
+
+    @search_score_info.setter
+    def search_score_info(self, value):
+        if isinstance(value, SearchScoreInfoBO):
+            self._search_score_info = value
+        else:
+            self._search_score_info = SearchScoreInfoBO.from_alipay_dict(value)
+    @property
     def source(self):
         return self._source
 
@@ -143,6 +175,11 @@ class OpenSearchDocBO(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.chunk:
+            if hasattr(self.chunk, 'to_alipay_dict'):
+                params['chunk'] = self.chunk.to_alipay_dict()
+            else:
+                params['chunk'] = self.chunk
         if self.doc:
             if hasattr(self.doc, 'to_alipay_dict'):
                 params['doc'] = self.doc.to_alipay_dict()
@@ -193,6 +230,16 @@ class OpenSearchDocBO(object):
                 params['scale_score'] = self.scale_score.to_alipay_dict()
             else:
                 params['scale_score'] = self.scale_score
+        if self.search_doc_abstract:
+            if hasattr(self.search_doc_abstract, 'to_alipay_dict'):
+                params['search_doc_abstract'] = self.search_doc_abstract.to_alipay_dict()
+            else:
+                params['search_doc_abstract'] = self.search_doc_abstract
+        if self.search_score_info:
+            if hasattr(self.search_score_info, 'to_alipay_dict'):
+                params['search_score_info'] = self.search_score_info.to_alipay_dict()
+            else:
+                params['search_score_info'] = self.search_score_info
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -219,6 +266,8 @@ class OpenSearchDocBO(object):
             o.abstract_extract = d['abstract_extract']
         if 'channel' in d:
             o.channel = d['channel']
+        if 'chunk' in d:
+            o.chunk = d['chunk']
         if 'doc' in d:
             o.doc = d['doc']
         if 'doc_abstract' in d:
@@ -239,6 +288,10 @@ class OpenSearchDocBO(object):
             o.rel_score = d['rel_score']
         if 'scale_score' in d:
             o.scale_score = d['scale_score']
+        if 'search_doc_abstract' in d:
+            o.search_doc_abstract = d['search_doc_abstract']
+        if 'search_score_info' in d:
+            o.search_score_info = d['search_score_info']
         if 'source' in d:
             o.source = d['source']
         if 'title' in d:

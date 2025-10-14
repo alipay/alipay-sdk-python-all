@@ -11,6 +11,7 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
         self._agreement_no = None
         self._agreement_type = None
         self._file_id = None
+        self._secure = None
 
     @property
     def agreement_no(self):
@@ -33,6 +34,13 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
     @file_id.setter
     def file_id(self, value):
         self._file_id = value
+    @property
+    def secure(self):
+        return self._secure
+
+    @secure.setter
+    def secure(self, value):
+        self._secure = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
                 params['file_id'] = self.file_id.to_alipay_dict()
             else:
                 params['file_id'] = self.file_id
+        if self.secure:
+            if hasattr(self.secure, 'to_alipay_dict'):
+                params['secure'] = self.secure.to_alipay_dict()
+            else:
+                params['secure'] = self.secure
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayDataBillAccountbookereceiptQueryModel(object):
             o.agreement_type = d['agreement_type']
         if 'file_id' in d:
             o.file_id = d['file_id']
+        if 'secure' in d:
+            o.secure = d['secure']
         return o
 
 

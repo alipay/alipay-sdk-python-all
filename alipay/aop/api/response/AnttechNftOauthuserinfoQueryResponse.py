@@ -10,6 +10,7 @@ class AnttechNftOauthuserinfoQueryResponse(AlipayResponse):
     def __init__(self):
         super(AnttechNftOauthuserinfoQueryResponse, self).__init__()
         self._avatar = None
+        self._is_real_name_verified = None
         self._nick_name = None
         self._ou_id = None
         self._phone = None
@@ -22,6 +23,13 @@ class AnttechNftOauthuserinfoQueryResponse(AlipayResponse):
     @avatar.setter
     def avatar(self, value):
         self._avatar = value
+    @property
+    def is_real_name_verified(self):
+        return self._is_real_name_verified
+
+    @is_real_name_verified.setter
+    def is_real_name_verified(self, value):
+        self._is_real_name_verified = value
     @property
     def nick_name(self):
         return self._nick_name
@@ -55,6 +63,8 @@ class AnttechNftOauthuserinfoQueryResponse(AlipayResponse):
         response = super(AnttechNftOauthuserinfoQueryResponse, self).parse_response_content(response_content)
         if 'avatar' in response:
             self.avatar = response['avatar']
+        if 'is_real_name_verified' in response:
+            self.is_real_name_verified = response['is_real_name_verified']
         if 'nick_name' in response:
             self.nick_name = response['nick_name']
         if 'ou_id' in response:

@@ -8,10 +8,26 @@ from alipay.aop.api.constant.ParamConstants import *
 class RentCarRefundItem(object):
 
     def __init__(self):
+        self._bill_merchant_order_id = None
+        self._bill_refund_batch_no = None
         self._refund_amount = None
         self._refund_result = None
         self._trade_no = None
 
+    @property
+    def bill_merchant_order_id(self):
+        return self._bill_merchant_order_id
+
+    @bill_merchant_order_id.setter
+    def bill_merchant_order_id(self, value):
+        self._bill_merchant_order_id = value
+    @property
+    def bill_refund_batch_no(self):
+        return self._bill_refund_batch_no
+
+    @bill_refund_batch_no.setter
+    def bill_refund_batch_no(self, value):
+        self._bill_refund_batch_no = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -37,6 +53,16 @@ class RentCarRefundItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bill_merchant_order_id:
+            if hasattr(self.bill_merchant_order_id, 'to_alipay_dict'):
+                params['bill_merchant_order_id'] = self.bill_merchant_order_id.to_alipay_dict()
+            else:
+                params['bill_merchant_order_id'] = self.bill_merchant_order_id
+        if self.bill_refund_batch_no:
+            if hasattr(self.bill_refund_batch_no, 'to_alipay_dict'):
+                params['bill_refund_batch_no'] = self.bill_refund_batch_no.to_alipay_dict()
+            else:
+                params['bill_refund_batch_no'] = self.bill_refund_batch_no
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -59,6 +85,10 @@ class RentCarRefundItem(object):
         if not d:
             return None
         o = RentCarRefundItem()
+        if 'bill_merchant_order_id' in d:
+            o.bill_merchant_order_id = d['bill_merchant_order_id']
+        if 'bill_refund_batch_no' in d:
+            o.bill_refund_batch_no = d['bill_refund_batch_no']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_result' in d:

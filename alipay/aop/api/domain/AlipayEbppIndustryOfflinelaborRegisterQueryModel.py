@@ -13,6 +13,8 @@ class AlipayEbppIndustryOfflinelaborRegisterQueryModel(object):
         self._job_name = None
         self._out_regist_id = None
         self._out_regist_no = None
+        self._out_register_id = None
+        self._out_register_no = None
         self._page_num = None
         self._page_size = None
         self._project_id = None
@@ -57,6 +59,20 @@ class AlipayEbppIndustryOfflinelaborRegisterQueryModel(object):
     @out_regist_no.setter
     def out_regist_no(self, value):
         self._out_regist_no = value
+    @property
+    def out_register_id(self):
+        return self._out_register_id
+
+    @out_register_id.setter
+    def out_register_id(self, value):
+        self._out_register_id = value
+    @property
+    def out_register_no(self):
+        return self._out_register_no
+
+    @out_register_no.setter
+    def out_register_no(self, value):
+        self._out_register_no = value
     @property
     def page_num(self):
         return self._page_num
@@ -142,6 +158,16 @@ class AlipayEbppIndustryOfflinelaborRegisterQueryModel(object):
                 params['out_regist_no'] = self.out_regist_no.to_alipay_dict()
             else:
                 params['out_regist_no'] = self.out_regist_no
+        if self.out_register_id:
+            if hasattr(self.out_register_id, 'to_alipay_dict'):
+                params['out_register_id'] = self.out_register_id.to_alipay_dict()
+            else:
+                params['out_register_id'] = self.out_register_id
+        if self.out_register_no:
+            if hasattr(self.out_register_no, 'to_alipay_dict'):
+                params['out_register_no'] = self.out_register_no.to_alipay_dict()
+            else:
+                params['out_register_no'] = self.out_register_no
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -199,6 +225,10 @@ class AlipayEbppIndustryOfflinelaborRegisterQueryModel(object):
             o.out_regist_id = d['out_regist_id']
         if 'out_regist_no' in d:
             o.out_regist_no = d['out_regist_no']
+        if 'out_register_id' in d:
+            o.out_register_id = d['out_register_id']
+        if 'out_register_no' in d:
+            o.out_register_no = d['out_register_no']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

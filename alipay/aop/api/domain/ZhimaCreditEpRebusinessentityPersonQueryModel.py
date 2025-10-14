@@ -9,6 +9,8 @@ class ZhimaCreditEpRebusinessentityPersonQueryModel(object):
 
     def __init__(self):
         self._person_cert_no = None
+        self._person_cert_no_md_5 = None
+        self._person_cert_no_sha_256 = None
         self._person_name = None
         self._platform_id_list = None
         self._platform_type_list = None
@@ -23,6 +25,20 @@ class ZhimaCreditEpRebusinessentityPersonQueryModel(object):
     @person_cert_no.setter
     def person_cert_no(self, value):
         self._person_cert_no = value
+    @property
+    def person_cert_no_md_5(self):
+        return self._person_cert_no_md_5
+
+    @person_cert_no_md_5.setter
+    def person_cert_no_md_5(self, value):
+        self._person_cert_no_md_5 = value
+    @property
+    def person_cert_no_sha_256(self):
+        return self._person_cert_no_sha_256
+
+    @person_cert_no_sha_256.setter
+    def person_cert_no_sha_256(self, value):
+        self._person_cert_no_sha_256 = value
     @property
     def person_name(self):
         return self._person_name
@@ -83,6 +99,16 @@ class ZhimaCreditEpRebusinessentityPersonQueryModel(object):
                 params['person_cert_no'] = self.person_cert_no.to_alipay_dict()
             else:
                 params['person_cert_no'] = self.person_cert_no
+        if self.person_cert_no_md_5:
+            if hasattr(self.person_cert_no_md_5, 'to_alipay_dict'):
+                params['person_cert_no_md_5'] = self.person_cert_no_md_5.to_alipay_dict()
+            else:
+                params['person_cert_no_md_5'] = self.person_cert_no_md_5
+        if self.person_cert_no_sha_256:
+            if hasattr(self.person_cert_no_sha_256, 'to_alipay_dict'):
+                params['person_cert_no_sha_256'] = self.person_cert_no_sha_256.to_alipay_dict()
+            else:
+                params['person_cert_no_sha_256'] = self.person_cert_no_sha_256
         if self.person_name:
             if hasattr(self.person_name, 'to_alipay_dict'):
                 params['person_name'] = self.person_name.to_alipay_dict()
@@ -137,6 +163,10 @@ class ZhimaCreditEpRebusinessentityPersonQueryModel(object):
         o = ZhimaCreditEpRebusinessentityPersonQueryModel()
         if 'person_cert_no' in d:
             o.person_cert_no = d['person_cert_no']
+        if 'person_cert_no_md_5' in d:
+            o.person_cert_no_md_5 = d['person_cert_no_md_5']
+        if 'person_cert_no_sha_256' in d:
+            o.person_cert_no_sha_256 = d['person_cert_no_sha_256']
         if 'person_name' in d:
             o.person_name = d['person_name']
         if 'platform_id_list' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipaySocialAntiepLinkedmallenergyPayModel(object):
 
     def __init__(self):
+        self._biz_context = None
         self._biz_id = None
         self._deducted_date = None
         self._item_id = None
@@ -20,6 +21,13 @@ class AlipaySocialAntiepLinkedmallenergyPayModel(object):
         self._sku_id = None
         self._user_id = None
 
+    @property
+    def biz_context(self):
+        return self._biz_context
+
+    @biz_context.setter
+    def biz_context(self, value):
+        self._biz_context = value
     @property
     def biz_id(self):
         return self._biz_id
@@ -101,6 +109,11 @@ class AlipaySocialAntiepLinkedmallenergyPayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_context:
+            if hasattr(self.biz_context, 'to_alipay_dict'):
+                params['biz_context'] = self.biz_context.to_alipay_dict()
+            else:
+                params['biz_context'] = self.biz_context
         if self.biz_id:
             if hasattr(self.biz_id, 'to_alipay_dict'):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
@@ -163,6 +176,8 @@ class AlipaySocialAntiepLinkedmallenergyPayModel(object):
         if not d:
             return None
         o = AlipaySocialAntiepLinkedmallenergyPayModel()
+        if 'biz_context' in d:
+            o.biz_context = d['biz_context']
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
         if 'deducted_date' in d:

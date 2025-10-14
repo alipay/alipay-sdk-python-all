@@ -10,8 +10,11 @@ class SportsToolRecord(object):
     def __init__(self):
         self._accel_step_frequency = None
         self._calorie = None
+        self._client_step = None
+        self._client_step_frequency = None
         self._distance = None
         self._duration = None
+        self._end_step = None
         self._finish_face_verify_pass = None
         self._finish_time = None
         self._from_app_id = None
@@ -26,6 +29,7 @@ class SportsToolRecord(object):
         self._sport_status = None
         self._sport_type = None
         self._start_face_verify_pass = None
+        self._start_step = None
         self._start_time = None
         self._step_count = None
         self._step_frequency = None
@@ -47,6 +51,20 @@ class SportsToolRecord(object):
     def calorie(self, value):
         self._calorie = value
     @property
+    def client_step(self):
+        return self._client_step
+
+    @client_step.setter
+    def client_step(self, value):
+        self._client_step = value
+    @property
+    def client_step_frequency(self):
+        return self._client_step_frequency
+
+    @client_step_frequency.setter
+    def client_step_frequency(self, value):
+        self._client_step_frequency = value
+    @property
     def distance(self):
         return self._distance
 
@@ -60,6 +78,13 @@ class SportsToolRecord(object):
     @duration.setter
     def duration(self, value):
         self._duration = value
+    @property
+    def end_step(self):
+        return self._end_step
+
+    @end_step.setter
+    def end_step(self, value):
+        self._end_step = value
     @property
     def finish_face_verify_pass(self):
         return self._finish_face_verify_pass
@@ -159,6 +184,13 @@ class SportsToolRecord(object):
     def start_face_verify_pass(self, value):
         self._start_face_verify_pass = value
     @property
+    def start_step(self):
+        return self._start_step
+
+    @start_step.setter
+    def start_step(self, value):
+        self._start_step = value
+    @property
     def start_time(self):
         return self._start_time
 
@@ -207,6 +239,16 @@ class SportsToolRecord(object):
                 params['calorie'] = self.calorie.to_alipay_dict()
             else:
                 params['calorie'] = self.calorie
+        if self.client_step:
+            if hasattr(self.client_step, 'to_alipay_dict'):
+                params['client_step'] = self.client_step.to_alipay_dict()
+            else:
+                params['client_step'] = self.client_step
+        if self.client_step_frequency:
+            if hasattr(self.client_step_frequency, 'to_alipay_dict'):
+                params['client_step_frequency'] = self.client_step_frequency.to_alipay_dict()
+            else:
+                params['client_step_frequency'] = self.client_step_frequency
         if self.distance:
             if hasattr(self.distance, 'to_alipay_dict'):
                 params['distance'] = self.distance.to_alipay_dict()
@@ -217,6 +259,11 @@ class SportsToolRecord(object):
                 params['duration'] = self.duration.to_alipay_dict()
             else:
                 params['duration'] = self.duration
+        if self.end_step:
+            if hasattr(self.end_step, 'to_alipay_dict'):
+                params['end_step'] = self.end_step.to_alipay_dict()
+            else:
+                params['end_step'] = self.end_step
         if self.finish_face_verify_pass:
             if hasattr(self.finish_face_verify_pass, 'to_alipay_dict'):
                 params['finish_face_verify_pass'] = self.finish_face_verify_pass.to_alipay_dict()
@@ -287,6 +334,11 @@ class SportsToolRecord(object):
                 params['start_face_verify_pass'] = self.start_face_verify_pass.to_alipay_dict()
             else:
                 params['start_face_verify_pass'] = self.start_face_verify_pass
+        if self.start_step:
+            if hasattr(self.start_step, 'to_alipay_dict'):
+                params['start_step'] = self.start_step.to_alipay_dict()
+            else:
+                params['start_step'] = self.start_step
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -323,10 +375,16 @@ class SportsToolRecord(object):
             o.accel_step_frequency = d['accel_step_frequency']
         if 'calorie' in d:
             o.calorie = d['calorie']
+        if 'client_step' in d:
+            o.client_step = d['client_step']
+        if 'client_step_frequency' in d:
+            o.client_step_frequency = d['client_step_frequency']
         if 'distance' in d:
             o.distance = d['distance']
         if 'duration' in d:
             o.duration = d['duration']
+        if 'end_step' in d:
+            o.end_step = d['end_step']
         if 'finish_face_verify_pass' in d:
             o.finish_face_verify_pass = d['finish_face_verify_pass']
         if 'finish_time' in d:
@@ -355,6 +413,8 @@ class SportsToolRecord(object):
             o.sport_type = d['sport_type']
         if 'start_face_verify_pass' in d:
             o.start_face_verify_pass = d['start_face_verify_pass']
+        if 'start_step' in d:
+            o.start_step = d['start_step']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'step_count' in d:

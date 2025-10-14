@@ -18,6 +18,7 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
         self._open_id = None
         self._out_order_no = None
         self._out_trace_id = None
+        self._product_code = None
         self._repay_amount = None
         self._repay_no = None
         self._request_source = None
@@ -93,6 +94,13 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
     def out_trace_id(self, value):
         self._out_trace_id = value
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
     def repay_amount(self):
         return self._repay_amount
 
@@ -167,6 +175,11 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
                 params['out_trace_id'] = self.out_trace_id.to_alipay_dict()
             else:
                 params['out_trace_id'] = self.out_trace_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.repay_amount:
             if hasattr(self.repay_amount, 'to_alipay_dict'):
                 params['repay_amount'] = self.repay_amount.to_alipay_dict()
@@ -209,6 +222,8 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
             o.out_order_no = d['out_order_no']
         if 'out_trace_id' in d:
             o.out_trace_id = d['out_trace_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'repay_amount' in d:
             o.repay_amount = d['repay_amount']
         if 'repay_no' in d:

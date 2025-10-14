@@ -10,6 +10,8 @@ class ChannelDetailParams(object):
     def __init__(self):
         self._card_group_name = None
         self._credit_risk_info = None
+        self._gov_subsidy = None
+        self._inst_subsidy = None
         self._marketing_flag = None
         self._refuse_code = None
         self._user_has_sign = None
@@ -28,6 +30,20 @@ class ChannelDetailParams(object):
     @credit_risk_info.setter
     def credit_risk_info(self, value):
         self._credit_risk_info = value
+    @property
+    def gov_subsidy(self):
+        return self._gov_subsidy
+
+    @gov_subsidy.setter
+    def gov_subsidy(self, value):
+        self._gov_subsidy = value
+    @property
+    def inst_subsidy(self):
+        return self._inst_subsidy
+
+    @inst_subsidy.setter
+    def inst_subsidy(self, value):
+        self._inst_subsidy = value
     @property
     def marketing_flag(self):
         return self._marketing_flag
@@ -63,6 +79,16 @@ class ChannelDetailParams(object):
                 params['credit_risk_info'] = self.credit_risk_info.to_alipay_dict()
             else:
                 params['credit_risk_info'] = self.credit_risk_info
+        if self.gov_subsidy:
+            if hasattr(self.gov_subsidy, 'to_alipay_dict'):
+                params['gov_subsidy'] = self.gov_subsidy.to_alipay_dict()
+            else:
+                params['gov_subsidy'] = self.gov_subsidy
+        if self.inst_subsidy:
+            if hasattr(self.inst_subsidy, 'to_alipay_dict'):
+                params['inst_subsidy'] = self.inst_subsidy.to_alipay_dict()
+            else:
+                params['inst_subsidy'] = self.inst_subsidy
         if self.marketing_flag:
             if hasattr(self.marketing_flag, 'to_alipay_dict'):
                 params['marketing_flag'] = self.marketing_flag.to_alipay_dict()
@@ -89,6 +115,10 @@ class ChannelDetailParams(object):
             o.card_group_name = d['card_group_name']
         if 'credit_risk_info' in d:
             o.credit_risk_info = d['credit_risk_info']
+        if 'gov_subsidy' in d:
+            o.gov_subsidy = d['gov_subsidy']
+        if 'inst_subsidy' in d:
+            o.inst_subsidy = d['inst_subsidy']
         if 'marketing_flag' in d:
             o.marketing_flag = d['marketing_flag']
         if 'refuse_code' in d:

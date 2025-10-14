@@ -11,6 +11,9 @@ class RentRoyalty(object):
         self._biz_order_id = None
         self._buyer_id = None
         self._buyer_open_id = None
+        self._buyout_repay_time = None
+        self._buyout_royalty_interest_price = None
+        self._buyout_royalty_principal_price = None
         self._current_buyout_after_price = None
         self._current_buyout_price = None
         self._expect_royalty_time = None
@@ -59,6 +62,27 @@ class RentRoyalty(object):
     @buyer_open_id.setter
     def buyer_open_id(self, value):
         self._buyer_open_id = value
+    @property
+    def buyout_repay_time(self):
+        return self._buyout_repay_time
+
+    @buyout_repay_time.setter
+    def buyout_repay_time(self, value):
+        self._buyout_repay_time = value
+    @property
+    def buyout_royalty_interest_price(self):
+        return self._buyout_royalty_interest_price
+
+    @buyout_royalty_interest_price.setter
+    def buyout_royalty_interest_price(self, value):
+        self._buyout_royalty_interest_price = value
+    @property
+    def buyout_royalty_principal_price(self):
+        return self._buyout_royalty_principal_price
+
+    @buyout_royalty_principal_price.setter
+    def buyout_royalty_principal_price(self, value):
+        self._buyout_royalty_principal_price = value
     @property
     def current_buyout_after_price(self):
         return self._current_buyout_after_price
@@ -260,6 +284,21 @@ class RentRoyalty(object):
                 params['buyer_open_id'] = self.buyer_open_id.to_alipay_dict()
             else:
                 params['buyer_open_id'] = self.buyer_open_id
+        if self.buyout_repay_time:
+            if hasattr(self.buyout_repay_time, 'to_alipay_dict'):
+                params['buyout_repay_time'] = self.buyout_repay_time.to_alipay_dict()
+            else:
+                params['buyout_repay_time'] = self.buyout_repay_time
+        if self.buyout_royalty_interest_price:
+            if hasattr(self.buyout_royalty_interest_price, 'to_alipay_dict'):
+                params['buyout_royalty_interest_price'] = self.buyout_royalty_interest_price.to_alipay_dict()
+            else:
+                params['buyout_royalty_interest_price'] = self.buyout_royalty_interest_price
+        if self.buyout_royalty_principal_price:
+            if hasattr(self.buyout_royalty_principal_price, 'to_alipay_dict'):
+                params['buyout_royalty_principal_price'] = self.buyout_royalty_principal_price.to_alipay_dict()
+            else:
+                params['buyout_royalty_principal_price'] = self.buyout_royalty_principal_price
         if self.current_buyout_after_price:
             if hasattr(self.current_buyout_after_price, 'to_alipay_dict'):
                 params['current_buyout_after_price'] = self.current_buyout_after_price.to_alipay_dict()
@@ -403,6 +442,12 @@ class RentRoyalty(object):
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:
             o.buyer_open_id = d['buyer_open_id']
+        if 'buyout_repay_time' in d:
+            o.buyout_repay_time = d['buyout_repay_time']
+        if 'buyout_royalty_interest_price' in d:
+            o.buyout_royalty_interest_price = d['buyout_royalty_interest_price']
+        if 'buyout_royalty_principal_price' in d:
+            o.buyout_royalty_principal_price = d['buyout_royalty_principal_price']
         if 'current_buyout_after_price' in d:
             o.current_buyout_after_price = d['current_buyout_after_price']
         if 'current_buyout_price' in d:

@@ -34,12 +34,14 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
         self._license_auth_letter_image = None
         self._mcc = None
         self._name = None
+        self._need_send_todo_notify = None
         self._out_door_images = None
         self._oversea_settle_account = None
         self._oversea_settle_open_id = None
         self._qualifications = None
         self._service = None
         self._service_phone = None
+        self._sign_confirm_type = None
         self._sign_time_with_isv = None
         self._sites = None
         self._trade_scene = None
@@ -187,6 +189,13 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
     def name(self, value):
         self._name = value
     @property
+    def need_send_todo_notify(self):
+        return self._need_send_todo_notify
+
+    @need_send_todo_notify.setter
+    def need_send_todo_notify(self, value):
+        self._need_send_todo_notify = value
+    @property
     def out_door_images(self):
         return self._out_door_images
 
@@ -237,6 +246,13 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
     @service_phone.setter
     def service_phone(self, value):
         self._service_phone = value
+    @property
+    def sign_confirm_type(self):
+        return self._sign_confirm_type
+
+    @sign_confirm_type.setter
+    def sign_confirm_type(self, value):
+        self._sign_confirm_type = value
     @property
     def sign_time_with_isv(self):
         return self._sign_time_with_isv
@@ -368,6 +384,11 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.need_send_todo_notify:
+            if hasattr(self.need_send_todo_notify, 'to_alipay_dict'):
+                params['need_send_todo_notify'] = self.need_send_todo_notify.to_alipay_dict()
+            else:
+                params['need_send_todo_notify'] = self.need_send_todo_notify
         if self.out_door_images:
             if hasattr(self.out_door_images, 'to_alipay_dict'):
                 params['out_door_images'] = self.out_door_images.to_alipay_dict()
@@ -408,6 +429,11 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
                 params['service_phone'] = self.service_phone.to_alipay_dict()
             else:
                 params['service_phone'] = self.service_phone
+        if self.sign_confirm_type:
+            if hasattr(self.sign_confirm_type, 'to_alipay_dict'):
+                params['sign_confirm_type'] = self.sign_confirm_type.to_alipay_dict()
+            else:
+                params['sign_confirm_type'] = self.sign_confirm_type
         if self.sign_time_with_isv:
             if hasattr(self.sign_time_with_isv, 'to_alipay_dict'):
                 params['sign_time_with_isv'] = self.sign_time_with_isv.to_alipay_dict()
@@ -476,6 +502,8 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
             o.mcc = d['mcc']
         if 'name' in d:
             o.name = d['name']
+        if 'need_send_todo_notify' in d:
+            o.need_send_todo_notify = d['need_send_todo_notify']
         if 'out_door_images' in d:
             o.out_door_images = d['out_door_images']
         if 'oversea_settle_account' in d:
@@ -488,6 +516,8 @@ class AntMerchantExpandIndirectZftSimplecreateModel(object):
             o.service = d['service']
         if 'service_phone' in d:
             o.service_phone = d['service_phone']
+        if 'sign_confirm_type' in d:
+            o.sign_confirm_type = d['sign_confirm_type']
         if 'sign_time_with_isv' in d:
             o.sign_time_with_isv = d['sign_time_with_isv']
         if 'sites' in d:

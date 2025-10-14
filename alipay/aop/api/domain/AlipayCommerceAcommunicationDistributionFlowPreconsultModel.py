@@ -14,6 +14,7 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
         self._mobile = None
         self._open_id = None
         self._request_id = None
+        self._target_account = None
 
     @property
     def alipay_user_id(self):
@@ -57,6 +58,13 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
     @request_id.setter
     def request_id(self, value):
         self._request_id = value
+    @property
+    def target_account(self):
+        return self._target_account
+
+    @target_account.setter
+    def target_account(self, value):
+        self._target_account = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
                 params['request_id'] = self.request_id.to_alipay_dict()
             else:
                 params['request_id'] = self.request_id
+        if self.target_account:
+            if hasattr(self.target_account, 'to_alipay_dict'):
+                params['target_account'] = self.target_account.to_alipay_dict()
+            else:
+                params['target_account'] = self.target_account
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class AlipayCommerceAcommunicationDistributionFlowPreconsultModel(object):
             o.open_id = d['open_id']
         if 'request_id' in d:
             o.request_id = d['request_id']
+        if 'target_account' in d:
+            o.target_account = d['target_account']
         return o
 
 

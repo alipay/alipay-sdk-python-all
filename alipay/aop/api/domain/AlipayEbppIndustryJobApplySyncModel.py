@@ -13,6 +13,7 @@ class AlipayEbppIndustryJobApplySyncModel(object):
         self._apply_status = None
         self._apply_time = None
         self._biz_id = None
+        self._channel = None
         self._inter_address = None
         self._inter_time = None
         self._iot_sn = None
@@ -54,6 +55,13 @@ class AlipayEbppIndustryJobApplySyncModel(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def inter_address(self):
         return self._inter_address
@@ -118,6 +126,11 @@ class AlipayEbppIndustryJobApplySyncModel(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.inter_address:
             if hasattr(self.inter_address, 'to_alipay_dict'):
                 params['inter_address'] = self.inter_address.to_alipay_dict()
@@ -160,6 +173,8 @@ class AlipayEbppIndustryJobApplySyncModel(object):
             o.apply_time = d['apply_time']
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'inter_address' in d:
             o.inter_address = d['inter_address']
         if 'inter_time' in d:

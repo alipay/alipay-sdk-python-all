@@ -13,7 +13,9 @@ class AlipayCommerceMedicalCardExchangeApplyModel(object):
         self._benefit_id = None
         self._biz_no = None
         self._cooperate_mode = None
+        self._open_id = None
         self._phone = None
+        self._user_id = None
 
     @property
     def apply_sum(self):
@@ -51,12 +53,26 @@ class AlipayCommerceMedicalCardExchangeApplyModel(object):
     def cooperate_mode(self, value):
         self._cooperate_mode = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def phone(self):
         return self._phone
 
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -86,11 +102,21 @@ class AlipayCommerceMedicalCardExchangeApplyModel(object):
                 params['cooperate_mode'] = self.cooperate_mode.to_alipay_dict()
             else:
                 params['cooperate_mode'] = self.cooperate_mode
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -108,8 +134,12 @@ class AlipayCommerceMedicalCardExchangeApplyModel(object):
             o.biz_no = d['biz_no']
         if 'cooperate_mode' in d:
             o.cooperate_mode = d['cooperate_mode']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

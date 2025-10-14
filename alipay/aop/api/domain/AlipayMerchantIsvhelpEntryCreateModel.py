@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ExtInfoMap import ExtInfoMap
 from alipay.aop.api.domain.MerchantEntryBeneficiaryInfo import MerchantEntryBeneficiaryInfo
 from alipay.aop.api.domain.MerchantEntryLegalInfo import MerchantEntryLegalInfo
 from alipay.aop.api.domain.MerchantEntryOrgInfo import MerchantEntryOrgInfo
@@ -12,6 +13,7 @@ class AlipayMerchantIsvhelpEntryCreateModel(object):
 
     def __init__(self):
         self._beneficiary_is_legal = None
+        self._ext_info = None
         self._external_id = None
         self._merchant_entry_beneficiary_info = None
         self._merchant_entry_legal_info = None
@@ -24,6 +26,16 @@ class AlipayMerchantIsvhelpEntryCreateModel(object):
     @beneficiary_is_legal.setter
     def beneficiary_is_legal(self, value):
         self._beneficiary_is_legal = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, ExtInfoMap):
+            self._ext_info = value
+        else:
+            self._ext_info = ExtInfoMap.from_alipay_dict(value)
     @property
     def external_id(self):
         return self._external_id
@@ -70,6 +82,11 @@ class AlipayMerchantIsvhelpEntryCreateModel(object):
                 params['beneficiary_is_legal'] = self.beneficiary_is_legal.to_alipay_dict()
             else:
                 params['beneficiary_is_legal'] = self.beneficiary_is_legal
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.external_id:
             if hasattr(self.external_id, 'to_alipay_dict'):
                 params['external_id'] = self.external_id.to_alipay_dict()
@@ -99,6 +116,8 @@ class AlipayMerchantIsvhelpEntryCreateModel(object):
         o = AlipayMerchantIsvhelpEntryCreateModel()
         if 'beneficiary_is_legal' in d:
             o.beneficiary_is_legal = d['beneficiary_is_legal']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'external_id' in d:
             o.external_id = d['external_id']
         if 'merchant_entry_beneficiary_info' in d:

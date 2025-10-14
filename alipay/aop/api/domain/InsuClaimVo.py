@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ClaimAttachmentUrlVo import ClaimAttachmentUrlVo
 from alipay.aop.api.domain.InsuClaimAttachmentVo import InsuClaimAttachmentVo
 
 
@@ -12,6 +13,7 @@ class InsuClaimVo(object):
         self._accident_date = None
         self._accident_reason = None
         self._attachment_url = None
+        self._claim_attachment_url_vo = None
         self._claim_attachment_vo = None
         self._claim_flag = None
         self._contact_email = None
@@ -63,6 +65,16 @@ class InsuClaimVo(object):
             self._attachment_url = list()
             for i in value:
                 self._attachment_url.append(i)
+    @property
+    def claim_attachment_url_vo(self):
+        return self._claim_attachment_url_vo
+
+    @claim_attachment_url_vo.setter
+    def claim_attachment_url_vo(self, value):
+        if isinstance(value, ClaimAttachmentUrlVo):
+            self._claim_attachment_url_vo = value
+        else:
+            self._claim_attachment_url_vo = ClaimAttachmentUrlVo.from_alipay_dict(value)
     @property
     def claim_attachment_vo(self):
         return self._claim_attachment_vo
@@ -272,6 +284,11 @@ class InsuClaimVo(object):
                 params['attachment_url'] = self.attachment_url.to_alipay_dict()
             else:
                 params['attachment_url'] = self.attachment_url
+        if self.claim_attachment_url_vo:
+            if hasattr(self.claim_attachment_url_vo, 'to_alipay_dict'):
+                params['claim_attachment_url_vo'] = self.claim_attachment_url_vo.to_alipay_dict()
+            else:
+                params['claim_attachment_url_vo'] = self.claim_attachment_url_vo
         if self.claim_attachment_vo:
             if hasattr(self.claim_attachment_vo, 'to_alipay_dict'):
                 params['claim_attachment_vo'] = self.claim_attachment_vo.to_alipay_dict()
@@ -415,6 +432,8 @@ class InsuClaimVo(object):
             o.accident_reason = d['accident_reason']
         if 'attachment_url' in d:
             o.attachment_url = d['attachment_url']
+        if 'claim_attachment_url_vo' in d:
+            o.claim_attachment_url_vo = d['claim_attachment_url_vo']
         if 'claim_attachment_vo' in d:
             o.claim_attachment_vo = d['claim_attachment_vo']
         if 'claim_flag' in d:

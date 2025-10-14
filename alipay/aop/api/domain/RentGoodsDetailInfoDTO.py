@@ -9,7 +9,9 @@ class RentGoodsDetailInfoDTO(object):
 
     def __init__(self):
         self._body = None
+        self._goods_picture_ids = None
         self._image_material_id = None
+        self._imei = None
         self._item_brand = None
         self._item_category = None
         self._item_cnt = None
@@ -32,12 +34,29 @@ class RentGoodsDetailInfoDTO(object):
     def body(self, value):
         self._body = value
     @property
+    def goods_picture_ids(self):
+        return self._goods_picture_ids
+
+    @goods_picture_ids.setter
+    def goods_picture_ids(self, value):
+        if isinstance(value, list):
+            self._goods_picture_ids = list()
+            for i in value:
+                self._goods_picture_ids.append(i)
+    @property
     def image_material_id(self):
         return self._image_material_id
 
     @image_material_id.setter
     def image_material_id(self, value):
         self._image_material_id = value
+    @property
+    def imei(self):
+        return self._imei
+
+    @imei.setter
+    def imei(self, value):
+        self._imei = value
     @property
     def item_brand(self):
         return self._item_brand
@@ -138,11 +157,26 @@ class RentGoodsDetailInfoDTO(object):
                 params['body'] = self.body.to_alipay_dict()
             else:
                 params['body'] = self.body
+        if self.goods_picture_ids:
+            if isinstance(self.goods_picture_ids, list):
+                for i in range(0, len(self.goods_picture_ids)):
+                    element = self.goods_picture_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.goods_picture_ids[i] = element.to_alipay_dict()
+            if hasattr(self.goods_picture_ids, 'to_alipay_dict'):
+                params['goods_picture_ids'] = self.goods_picture_ids.to_alipay_dict()
+            else:
+                params['goods_picture_ids'] = self.goods_picture_ids
         if self.image_material_id:
             if hasattr(self.image_material_id, 'to_alipay_dict'):
                 params['image_material_id'] = self.image_material_id.to_alipay_dict()
             else:
                 params['image_material_id'] = self.image_material_id
+        if self.imei:
+            if hasattr(self.imei, 'to_alipay_dict'):
+                params['imei'] = self.imei.to_alipay_dict()
+            else:
+                params['imei'] = self.imei
         if self.item_brand:
             if hasattr(self.item_brand, 'to_alipay_dict'):
                 params['item_brand'] = self.item_brand.to_alipay_dict()
@@ -217,8 +251,12 @@ class RentGoodsDetailInfoDTO(object):
         o = RentGoodsDetailInfoDTO()
         if 'body' in d:
             o.body = d['body']
+        if 'goods_picture_ids' in d:
+            o.goods_picture_ids = d['goods_picture_ids']
         if 'image_material_id' in d:
             o.image_material_id = d['image_material_id']
+        if 'imei' in d:
+            o.imei = d['imei']
         if 'item_brand' in d:
             o.item_brand = d['item_brand']
         if 'item_category' in d:

@@ -18,6 +18,7 @@ class AlipayMarketingBenefitaccountAccountRefundModel(object):
         self._operator_name = None
         self._publisher_user_id = None
         self._refund_strategy = None
+        self._verify_id = None
 
     @property
     def amount(self):
@@ -88,6 +89,13 @@ class AlipayMarketingBenefitaccountAccountRefundModel(object):
     @refund_strategy.setter
     def refund_strategy(self, value):
         self._refund_strategy = value
+    @property
+    def verify_id(self):
+        return self._verify_id
+
+    @verify_id.setter
+    def verify_id(self, value):
+        self._verify_id = value
 
 
     def to_alipay_dict(self):
@@ -142,6 +150,11 @@ class AlipayMarketingBenefitaccountAccountRefundModel(object):
                 params['refund_strategy'] = self.refund_strategy.to_alipay_dict()
             else:
                 params['refund_strategy'] = self.refund_strategy
+        if self.verify_id:
+            if hasattr(self.verify_id, 'to_alipay_dict'):
+                params['verify_id'] = self.verify_id.to_alipay_dict()
+            else:
+                params['verify_id'] = self.verify_id
         return params
 
     @staticmethod
@@ -167,6 +180,8 @@ class AlipayMarketingBenefitaccountAccountRefundModel(object):
             o.publisher_user_id = d['publisher_user_id']
         if 'refund_strategy' in d:
             o.refund_strategy = d['refund_strategy']
+        if 'verify_id' in d:
+            o.verify_id = d['verify_id']
         return o
 
 

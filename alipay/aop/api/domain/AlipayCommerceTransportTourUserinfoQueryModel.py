@@ -9,6 +9,7 @@ class AlipayCommerceTransportTourUserinfoQueryModel(object):
 
     def __init__(self):
         self._code_token = None
+        self._identity_type_list = None
         self._open_id = None
         self._scenic_id = None
         self._user_id = None
@@ -20,6 +21,16 @@ class AlipayCommerceTransportTourUserinfoQueryModel(object):
     @code_token.setter
     def code_token(self, value):
         self._code_token = value
+    @property
+    def identity_type_list(self):
+        return self._identity_type_list
+
+    @identity_type_list.setter
+    def identity_type_list(self, value):
+        if isinstance(value, list):
+            self._identity_type_list = list()
+            for i in value:
+                self._identity_type_list.append(i)
     @property
     def open_id(self):
         return self._open_id
@@ -50,6 +61,16 @@ class AlipayCommerceTransportTourUserinfoQueryModel(object):
                 params['code_token'] = self.code_token.to_alipay_dict()
             else:
                 params['code_token'] = self.code_token
+        if self.identity_type_list:
+            if isinstance(self.identity_type_list, list):
+                for i in range(0, len(self.identity_type_list)):
+                    element = self.identity_type_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.identity_type_list[i] = element.to_alipay_dict()
+            if hasattr(self.identity_type_list, 'to_alipay_dict'):
+                params['identity_type_list'] = self.identity_type_list.to_alipay_dict()
+            else:
+                params['identity_type_list'] = self.identity_type_list
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -74,6 +95,8 @@ class AlipayCommerceTransportTourUserinfoQueryModel(object):
         o = AlipayCommerceTransportTourUserinfoQueryModel()
         if 'code_token' in d:
             o.code_token = d['code_token']
+        if 'identity_type_list' in d:
+            o.identity_type_list = d['identity_type_list']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'scenic_id' in d:

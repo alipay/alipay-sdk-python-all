@@ -27,10 +27,13 @@ class AlipayCommerceTransportChargerCobrandcardactivityQueryResponse(AlipayRespo
 
     @activity_phases.setter
     def activity_phases(self, value):
-        if isinstance(value, ActivityPhase):
-            self._activity_phases = value
-        else:
-            self._activity_phases = ActivityPhase.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._activity_phases = list()
+            for i in value:
+                if isinstance(i, ActivityPhase):
+                    self._activity_phases.append(i)
+                else:
+                    self._activity_phases.append(ActivityPhase.from_alipay_dict(i))
     @property
     def current_count(self):
         return self._current_count

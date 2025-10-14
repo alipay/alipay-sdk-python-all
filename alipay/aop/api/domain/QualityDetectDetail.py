@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class QualityDetectDetail(object):
 
     def __init__(self):
+        self._burning_time_stamp = None
         self._detect_detail = None
         self._dynamic_nfc_url = None
         self._nfc_url = None
         self._quality_time_stamp = None
         self._unique_id = None
 
+    @property
+    def burning_time_stamp(self):
+        return self._burning_time_stamp
+
+    @burning_time_stamp.setter
+    def burning_time_stamp(self, value):
+        self._burning_time_stamp = value
     @property
     def detect_detail(self):
         return self._detect_detail
@@ -53,6 +61,11 @@ class QualityDetectDetail(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.burning_time_stamp:
+            if hasattr(self.burning_time_stamp, 'to_alipay_dict'):
+                params['burning_time_stamp'] = self.burning_time_stamp.to_alipay_dict()
+            else:
+                params['burning_time_stamp'] = self.burning_time_stamp
         if self.detect_detail:
             if hasattr(self.detect_detail, 'to_alipay_dict'):
                 params['detect_detail'] = self.detect_detail.to_alipay_dict()
@@ -85,6 +98,8 @@ class QualityDetectDetail(object):
         if not d:
             return None
         o = QualityDetectDetail()
+        if 'burning_time_stamp' in d:
+            o.burning_time_stamp = d['burning_time_stamp']
         if 'detect_detail' in d:
             o.detect_detail = d['detect_detail']
         if 'dynamic_nfc_url' in d:

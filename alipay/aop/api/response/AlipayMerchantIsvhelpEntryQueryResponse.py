@@ -10,6 +10,7 @@ class AlipayMerchantIsvhelpEntryQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayMerchantIsvhelpEntryQueryResponse, self).__init__()
         self._alipay_logon_id = None
+        self._alipay_partner = None
         self._biz_status = None
         self._certify_link = None
         self._external_id = None
@@ -22,6 +23,13 @@ class AlipayMerchantIsvhelpEntryQueryResponse(AlipayResponse):
     @alipay_logon_id.setter
     def alipay_logon_id(self, value):
         self._alipay_logon_id = value
+    @property
+    def alipay_partner(self):
+        return self._alipay_partner
+
+    @alipay_partner.setter
+    def alipay_partner(self, value):
+        self._alipay_partner = value
     @property
     def biz_status(self):
         return self._biz_status
@@ -58,6 +66,8 @@ class AlipayMerchantIsvhelpEntryQueryResponse(AlipayResponse):
         response = super(AlipayMerchantIsvhelpEntryQueryResponse, self).parse_response_content(response_content)
         if 'alipay_logon_id' in response:
             self.alipay_logon_id = response['alipay_logon_id']
+        if 'alipay_partner' in response:
+            self.alipay_partner = response['alipay_partner']
         if 'biz_status' in response:
             self.biz_status = response['biz_status']
         if 'certify_link' in response:

@@ -18,6 +18,7 @@ class AlipayFundWalletTokenCreateModel(object):
         self._identity_open_id = None
         self._identity_type = None
         self._need_check_identity = None
+        self._need_guide_auto_deposit = None
         self._out_biz_no = None
         self._product_code = None
         self._real_name = None
@@ -89,6 +90,13 @@ class AlipayFundWalletTokenCreateModel(object):
     @need_check_identity.setter
     def need_check_identity(self, value):
         self._need_check_identity = value
+    @property
+    def need_guide_auto_deposit(self):
+        return self._need_guide_auto_deposit
+
+    @need_guide_auto_deposit.setter
+    def need_guide_auto_deposit(self, value):
+        self._need_guide_auto_deposit = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -190,6 +198,11 @@ class AlipayFundWalletTokenCreateModel(object):
                 params['need_check_identity'] = self.need_check_identity.to_alipay_dict()
             else:
                 params['need_check_identity'] = self.need_check_identity
+        if self.need_guide_auto_deposit:
+            if hasattr(self.need_guide_auto_deposit, 'to_alipay_dict'):
+                params['need_guide_auto_deposit'] = self.need_guide_auto_deposit.to_alipay_dict()
+            else:
+                params['need_guide_auto_deposit'] = self.need_guide_auto_deposit
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -250,6 +263,8 @@ class AlipayFundWalletTokenCreateModel(object):
             o.identity_type = d['identity_type']
         if 'need_check_identity' in d:
             o.need_check_identity = d['need_check_identity']
+        if 'need_guide_auto_deposit' in d:
+            o.need_guide_auto_deposit = d['need_guide_auto_deposit']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:

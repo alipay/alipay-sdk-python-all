@@ -10,6 +10,7 @@ class SupplierQueryOpenResult(object):
     def __init__(self):
         self._account_type = None
         self._supplier_account_no = None
+        self._supplier_id = None
         self._supplier_name = None
         self._supplier_phone = None
 
@@ -27,6 +28,13 @@ class SupplierQueryOpenResult(object):
     @supplier_account_no.setter
     def supplier_account_no(self, value):
         self._supplier_account_no = value
+    @property
+    def supplier_id(self):
+        return self._supplier_id
+
+    @supplier_id.setter
+    def supplier_id(self, value):
+        self._supplier_id = value
     @property
     def supplier_name(self):
         return self._supplier_name
@@ -55,6 +63,11 @@ class SupplierQueryOpenResult(object):
                 params['supplier_account_no'] = self.supplier_account_no.to_alipay_dict()
             else:
                 params['supplier_account_no'] = self.supplier_account_no
+        if self.supplier_id:
+            if hasattr(self.supplier_id, 'to_alipay_dict'):
+                params['supplier_id'] = self.supplier_id.to_alipay_dict()
+            else:
+                params['supplier_id'] = self.supplier_id
         if self.supplier_name:
             if hasattr(self.supplier_name, 'to_alipay_dict'):
                 params['supplier_name'] = self.supplier_name.to_alipay_dict()
@@ -76,6 +89,8 @@ class SupplierQueryOpenResult(object):
             o.account_type = d['account_type']
         if 'supplier_account_no' in d:
             o.supplier_account_no = d['supplier_account_no']
+        if 'supplier_id' in d:
+            o.supplier_id = d['supplier_id']
         if 'supplier_name' in d:
             o.supplier_name = d['supplier_name']
         if 'supplier_phone' in d:

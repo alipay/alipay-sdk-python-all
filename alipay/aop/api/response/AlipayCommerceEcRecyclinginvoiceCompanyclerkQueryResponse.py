@@ -12,6 +12,7 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
         self._clerk_name = None
         self._clerk_phone = None
         self._clerk_role = None
+        self._clerk_status = None
         self._company_clerk_id = None
         self._out_clerk_id = None
 
@@ -37,6 +38,13 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
     def clerk_role(self, value):
         self._clerk_role = value
     @property
+    def clerk_status(self):
+        return self._clerk_status
+
+    @clerk_status.setter
+    def clerk_status(self, value):
+        self._clerk_status = value
+    @property
     def company_clerk_id(self):
         return self._company_clerk_id
 
@@ -59,6 +67,8 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
             self.clerk_phone = response['clerk_phone']
         if 'clerk_role' in response:
             self.clerk_role = response['clerk_role']
+        if 'clerk_status' in response:
+            self.clerk_status = response['clerk_status']
         if 'company_clerk_id' in response:
             self.company_clerk_id = response['company_clerk_id']
         if 'out_clerk_id' in response:

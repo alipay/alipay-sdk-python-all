@@ -11,6 +11,7 @@ class AlipayCommerceTransportTourUserinfoQueryResponse(AlipayResponse):
         super(AlipayCommerceTransportTourUserinfoQueryResponse, self).__init__()
         self._cert_no = None
         self._cert_type = None
+        self._identity_check_result = None
         self._name = None
         self._tele_no = None
 
@@ -28,6 +29,13 @@ class AlipayCommerceTransportTourUserinfoQueryResponse(AlipayResponse):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def identity_check_result(self):
+        return self._identity_check_result
+
+    @identity_check_result.setter
+    def identity_check_result(self, value):
+        self._identity_check_result = value
     @property
     def name(self):
         return self._name
@@ -49,6 +57,8 @@ class AlipayCommerceTransportTourUserinfoQueryResponse(AlipayResponse):
             self.cert_no = response['cert_no']
         if 'cert_type' in response:
             self.cert_type = response['cert_type']
+        if 'identity_check_result' in response:
+            self.identity_check_result = response['identity_check_result']
         if 'name' in response:
             self.name = response['name']
         if 'tele_no' in response:

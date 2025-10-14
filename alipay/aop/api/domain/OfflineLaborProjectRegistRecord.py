@@ -19,6 +19,8 @@ class OfflineLaborProjectRegistRecord(object):
         self._job_name = None
         self._open_id = None
         self._out_regist_id = None
+        self._out_register_id = None
+        self._out_register_no = None
         self._phone_number = None
         self._project_name = None
         self._register_time = None
@@ -103,6 +105,20 @@ class OfflineLaborProjectRegistRecord(object):
     @out_regist_id.setter
     def out_regist_id(self, value):
         self._out_regist_id = value
+    @property
+    def out_register_id(self):
+        return self._out_register_id
+
+    @out_register_id.setter
+    def out_register_id(self, value):
+        self._out_register_id = value
+    @property
+    def out_register_no(self):
+        return self._out_register_no
+
+    @out_register_no.setter
+    def out_register_no(self, value):
+        self._out_register_no = value
     @property
     def phone_number(self):
         return self._phone_number
@@ -204,6 +220,16 @@ class OfflineLaborProjectRegistRecord(object):
                 params['out_regist_id'] = self.out_regist_id.to_alipay_dict()
             else:
                 params['out_regist_id'] = self.out_regist_id
+        if self.out_register_id:
+            if hasattr(self.out_register_id, 'to_alipay_dict'):
+                params['out_register_id'] = self.out_register_id.to_alipay_dict()
+            else:
+                params['out_register_id'] = self.out_register_id
+        if self.out_register_no:
+            if hasattr(self.out_register_no, 'to_alipay_dict'):
+                params['out_register_no'] = self.out_register_no.to_alipay_dict()
+            else:
+                params['out_register_no'] = self.out_register_no
         if self.phone_number:
             if hasattr(self.phone_number, 'to_alipay_dict'):
                 params['phone_number'] = self.phone_number.to_alipay_dict()
@@ -263,6 +289,10 @@ class OfflineLaborProjectRegistRecord(object):
             o.open_id = d['open_id']
         if 'out_regist_id' in d:
             o.out_regist_id = d['out_regist_id']
+        if 'out_register_id' in d:
+            o.out_register_id = d['out_register_id']
+        if 'out_register_no' in d:
+            o.out_register_no = d['out_register_no']
         if 'phone_number' in d:
             o.phone_number = d['phone_number']
         if 'project_name' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.UnifiedSettleExtendParams import UnifiedSettleExtendParams
+from alipay.aop.api.domain.UnifiedSettleRefundInfo import UnifiedSettleRefundInfo
 from alipay.aop.api.domain.SettleInfo import SettleInfo
 from alipay.aop.api.domain.SubMerchant import SubMerchant
 
@@ -21,6 +22,7 @@ class AlipayTradeUnifiedsettleSyncModel(object):
         self._out_request_no = None
         self._out_trade_no = None
         self._product_code = None
+        self._refund_info = None
         self._request_type = None
         self._settle_info = None
         self._sub_merchant = None
@@ -98,6 +100,16 @@ class AlipayTradeUnifiedsettleSyncModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def refund_info(self):
+        return self._refund_info
+
+    @refund_info.setter
+    def refund_info(self, value):
+        if isinstance(value, UnifiedSettleRefundInfo):
+            self._refund_info = value
+        else:
+            self._refund_info = UnifiedSettleRefundInfo.from_alipay_dict(value)
     @property
     def request_type(self):
         return self._request_type
@@ -179,6 +191,11 @@ class AlipayTradeUnifiedsettleSyncModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.refund_info:
+            if hasattr(self.refund_info, 'to_alipay_dict'):
+                params['refund_info'] = self.refund_info.to_alipay_dict()
+            else:
+                params['refund_info'] = self.refund_info
         if self.request_type:
             if hasattr(self.request_type, 'to_alipay_dict'):
                 params['request_type'] = self.request_type.to_alipay_dict()
@@ -221,6 +238,8 @@ class AlipayTradeUnifiedsettleSyncModel(object):
             o.out_trade_no = d['out_trade_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'refund_info' in d:
+            o.refund_info = d['refund_info']
         if 'request_type' in d:
             o.request_type = d['request_type']
         if 'settle_info' in d:

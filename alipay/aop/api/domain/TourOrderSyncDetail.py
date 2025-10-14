@@ -17,6 +17,7 @@ class TourOrderSyncDetail(object):
         self._order_status = None
         self._out_biz_no = None
         self._project_id = None
+        self._scene_type = None
         self._tele_no = None
         self._tour_voucher_list = None
         self._trade_no = None
@@ -77,6 +78,13 @@ class TourOrderSyncDetail(object):
     @project_id.setter
     def project_id(self, value):
         self._project_id = value
+    @property
+    def scene_type(self):
+        return self._scene_type
+
+    @scene_type.setter
+    def scene_type(self, value):
+        self._scene_type = value
     @property
     def tele_no(self):
         return self._tele_no
@@ -148,6 +156,11 @@ class TourOrderSyncDetail(object):
                 params['project_id'] = self.project_id.to_alipay_dict()
             else:
                 params['project_id'] = self.project_id
+        if self.scene_type:
+            if hasattr(self.scene_type, 'to_alipay_dict'):
+                params['scene_type'] = self.scene_type.to_alipay_dict()
+            else:
+                params['scene_type'] = self.scene_type
         if self.tele_no:
             if hasattr(self.tele_no, 'to_alipay_dict'):
                 params['tele_no'] = self.tele_no.to_alipay_dict()
@@ -191,6 +204,8 @@ class TourOrderSyncDetail(object):
             o.out_biz_no = d['out_biz_no']
         if 'project_id' in d:
             o.project_id = d['project_id']
+        if 'scene_type' in d:
+            o.scene_type = d['scene_type']
         if 'tele_no' in d:
             o.tele_no = d['tele_no']
         if 'tour_voucher_list' in d:

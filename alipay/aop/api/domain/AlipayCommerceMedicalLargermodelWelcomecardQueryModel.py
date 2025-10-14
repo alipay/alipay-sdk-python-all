@@ -9,6 +9,7 @@ class AlipayCommerceMedicalLargermodelWelcomecardQueryModel(object):
 
     def __init__(self):
         self._city_code = None
+        self._config_id = None
         self._latitude = None
         self._longitude = None
         self._open_id = None
@@ -24,6 +25,13 @@ class AlipayCommerceMedicalLargermodelWelcomecardQueryModel(object):
     @city_code.setter
     def city_code(self, value):
         self._city_code = value
+    @property
+    def config_id(self):
+        return self._config_id
+
+    @config_id.setter
+    def config_id(self, value):
+        self._config_id = value
     @property
     def latitude(self):
         return self._latitude
@@ -82,6 +90,11 @@ class AlipayCommerceMedicalLargermodelWelcomecardQueryModel(object):
                 params['city_code'] = self.city_code.to_alipay_dict()
             else:
                 params['city_code'] = self.city_code
+        if self.config_id:
+            if hasattr(self.config_id, 'to_alipay_dict'):
+                params['config_id'] = self.config_id.to_alipay_dict()
+            else:
+                params['config_id'] = self.config_id
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -126,6 +139,8 @@ class AlipayCommerceMedicalLargermodelWelcomecardQueryModel(object):
         o = AlipayCommerceMedicalLargermodelWelcomecardQueryModel()
         if 'city_code' in d:
             o.city_code = d['city_code']
+        if 'config_id' in d:
+            o.config_id = d['config_id']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:

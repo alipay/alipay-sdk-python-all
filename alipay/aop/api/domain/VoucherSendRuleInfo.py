@@ -15,8 +15,11 @@ class VoucherSendRuleInfo(object):
         self._publish_end_time = None
         self._publish_start_time = None
         self._quantity = None
+        self._quantity_day_limit_per_user = None
         self._quantity_limit_per_user = None
         self._quantity_limit_per_user_period_type = None
+        self._quantity_month_limit_per_user = None
+        self._quantity_week_limit_per_user = None
         self._real_name_limit = None
 
     @property
@@ -69,6 +72,13 @@ class VoucherSendRuleInfo(object):
     def quantity(self, value):
         self._quantity = value
     @property
+    def quantity_day_limit_per_user(self):
+        return self._quantity_day_limit_per_user
+
+    @quantity_day_limit_per_user.setter
+    def quantity_day_limit_per_user(self, value):
+        self._quantity_day_limit_per_user = value
+    @property
     def quantity_limit_per_user(self):
         return self._quantity_limit_per_user
 
@@ -82,6 +92,20 @@ class VoucherSendRuleInfo(object):
     @quantity_limit_per_user_period_type.setter
     def quantity_limit_per_user_period_type(self, value):
         self._quantity_limit_per_user_period_type = value
+    @property
+    def quantity_month_limit_per_user(self):
+        return self._quantity_month_limit_per_user
+
+    @quantity_month_limit_per_user.setter
+    def quantity_month_limit_per_user(self, value):
+        self._quantity_month_limit_per_user = value
+    @property
+    def quantity_week_limit_per_user(self):
+        return self._quantity_week_limit_per_user
+
+    @quantity_week_limit_per_user.setter
+    def quantity_week_limit_per_user(self, value):
+        self._quantity_week_limit_per_user = value
     @property
     def real_name_limit(self):
         return self._real_name_limit
@@ -128,6 +152,11 @@ class VoucherSendRuleInfo(object):
                 params['quantity'] = self.quantity.to_alipay_dict()
             else:
                 params['quantity'] = self.quantity
+        if self.quantity_day_limit_per_user:
+            if hasattr(self.quantity_day_limit_per_user, 'to_alipay_dict'):
+                params['quantity_day_limit_per_user'] = self.quantity_day_limit_per_user.to_alipay_dict()
+            else:
+                params['quantity_day_limit_per_user'] = self.quantity_day_limit_per_user
         if self.quantity_limit_per_user:
             if hasattr(self.quantity_limit_per_user, 'to_alipay_dict'):
                 params['quantity_limit_per_user'] = self.quantity_limit_per_user.to_alipay_dict()
@@ -138,6 +167,16 @@ class VoucherSendRuleInfo(object):
                 params['quantity_limit_per_user_period_type'] = self.quantity_limit_per_user_period_type.to_alipay_dict()
             else:
                 params['quantity_limit_per_user_period_type'] = self.quantity_limit_per_user_period_type
+        if self.quantity_month_limit_per_user:
+            if hasattr(self.quantity_month_limit_per_user, 'to_alipay_dict'):
+                params['quantity_month_limit_per_user'] = self.quantity_month_limit_per_user.to_alipay_dict()
+            else:
+                params['quantity_month_limit_per_user'] = self.quantity_month_limit_per_user
+        if self.quantity_week_limit_per_user:
+            if hasattr(self.quantity_week_limit_per_user, 'to_alipay_dict'):
+                params['quantity_week_limit_per_user'] = self.quantity_week_limit_per_user.to_alipay_dict()
+            else:
+                params['quantity_week_limit_per_user'] = self.quantity_week_limit_per_user
         if self.real_name_limit:
             if hasattr(self.real_name_limit, 'to_alipay_dict'):
                 params['real_name_limit'] = self.real_name_limit.to_alipay_dict()
@@ -164,10 +203,16 @@ class VoucherSendRuleInfo(object):
             o.publish_start_time = d['publish_start_time']
         if 'quantity' in d:
             o.quantity = d['quantity']
+        if 'quantity_day_limit_per_user' in d:
+            o.quantity_day_limit_per_user = d['quantity_day_limit_per_user']
         if 'quantity_limit_per_user' in d:
             o.quantity_limit_per_user = d['quantity_limit_per_user']
         if 'quantity_limit_per_user_period_type' in d:
             o.quantity_limit_per_user_period_type = d['quantity_limit_per_user_period_type']
+        if 'quantity_month_limit_per_user' in d:
+            o.quantity_month_limit_per_user = d['quantity_month_limit_per_user']
+        if 'quantity_week_limit_per_user' in d:
+            o.quantity_week_limit_per_user = d['quantity_week_limit_per_user']
         if 'real_name_limit' in d:
             o.real_name_limit = d['real_name_limit']
         return o

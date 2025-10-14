@@ -15,6 +15,7 @@ class AlipayPcreditLoanHonorContractdetailQueryModel(object):
         self._open_id = None
         self._out_trace_id = None
         self._pre_consult_id = None
+        self._product_code = None
         self._request_source = None
         self._type = None
 
@@ -68,6 +69,13 @@ class AlipayPcreditLoanHonorContractdetailQueryModel(object):
     def pre_consult_id(self, value):
         self._pre_consult_id = value
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
     def request_source(self):
         return self._request_source
 
@@ -120,6 +128,11 @@ class AlipayPcreditLoanHonorContractdetailQueryModel(object):
                 params['pre_consult_id'] = self.pre_consult_id.to_alipay_dict()
             else:
                 params['pre_consult_id'] = self.pre_consult_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.request_source:
             if hasattr(self.request_source, 'to_alipay_dict'):
                 params['request_source'] = self.request_source.to_alipay_dict()
@@ -151,6 +164,8 @@ class AlipayPcreditLoanHonorContractdetailQueryModel(object):
             o.out_trace_id = d['out_trace_id']
         if 'pre_consult_id' in d:
             o.pre_consult_id = d['pre_consult_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'request_source' in d:
             o.request_source = d['request_source']
         if 'type' in d:

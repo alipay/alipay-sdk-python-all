@@ -26,6 +26,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._external_logon_id = None
         self._identity_params = None
         self._merchant_process_url = None
+        self._out_risk_info = None
         self._pass_params = None
         self._period_rule_params = None
         self._personal_product_code = None
@@ -113,6 +114,13 @@ class AlipayUserAgreementPageSignModel(object):
     @merchant_process_url.setter
     def merchant_process_url(self, value):
         self._merchant_process_url = value
+    @property
+    def out_risk_info(self):
+        return self._out_risk_info
+
+    @out_risk_info.setter
+    def out_risk_info(self, value):
+        self._out_risk_info = value
     @property
     def pass_params(self):
         return self._pass_params
@@ -278,6 +286,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['merchant_process_url'] = self.merchant_process_url.to_alipay_dict()
             else:
                 params['merchant_process_url'] = self.merchant_process_url
+        if self.out_risk_info:
+            if hasattr(self.out_risk_info, 'to_alipay_dict'):
+                params['out_risk_info'] = self.out_risk_info.to_alipay_dict()
+            else:
+                params['out_risk_info'] = self.out_risk_info
         if self.pass_params:
             if hasattr(self.pass_params, 'to_alipay_dict'):
                 params['pass_params'] = self.pass_params.to_alipay_dict()
@@ -373,6 +386,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.identity_params = d['identity_params']
         if 'merchant_process_url' in d:
             o.merchant_process_url = d['merchant_process_url']
+        if 'out_risk_info' in d:
+            o.out_risk_info = d['out_risk_info']
         if 'pass_params' in d:
             o.pass_params = d['pass_params']
         if 'period_rule_params' in d:

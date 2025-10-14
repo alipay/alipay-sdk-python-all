@@ -13,6 +13,7 @@ class TourOrderSyncResponse(object):
         self._out_voucher_id = None
         self._user_id = None
         self._vid = None
+        self._voucher_user_ids = None
         self._vourcher_user_ids = None
 
     @property
@@ -50,6 +51,16 @@ class TourOrderSyncResponse(object):
     @vid.setter
     def vid(self, value):
         self._vid = value
+    @property
+    def voucher_user_ids(self):
+        return self._voucher_user_ids
+
+    @voucher_user_ids.setter
+    def voucher_user_ids(self, value):
+        if isinstance(value, list):
+            self._voucher_user_ids = list()
+            for i in value:
+                self._voucher_user_ids.append(i)
     @property
     def vourcher_user_ids(self):
         return self._vourcher_user_ids
@@ -89,6 +100,16 @@ class TourOrderSyncResponse(object):
                 params['vid'] = self.vid.to_alipay_dict()
             else:
                 params['vid'] = self.vid
+        if self.voucher_user_ids:
+            if isinstance(self.voucher_user_ids, list):
+                for i in range(0, len(self.voucher_user_ids)):
+                    element = self.voucher_user_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.voucher_user_ids[i] = element.to_alipay_dict()
+            if hasattr(self.voucher_user_ids, 'to_alipay_dict'):
+                params['voucher_user_ids'] = self.voucher_user_ids.to_alipay_dict()
+            else:
+                params['voucher_user_ids'] = self.voucher_user_ids
         if self.vourcher_user_ids:
             if isinstance(self.vourcher_user_ids, list):
                 for i in range(0, len(self.vourcher_user_ids)):
@@ -116,6 +137,8 @@ class TourOrderSyncResponse(object):
             o.user_id = d['user_id']
         if 'vid' in d:
             o.vid = d['vid']
+        if 'voucher_user_ids' in d:
+            o.voucher_user_ids = d['voucher_user_ids']
         if 'vourcher_user_ids' in d:
             o.vourcher_user_ids = d['vourcher_user_ids']
         return o

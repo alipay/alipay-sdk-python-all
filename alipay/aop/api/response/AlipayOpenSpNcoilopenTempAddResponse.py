@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+
+
+class AlipayOpenSpNcoilopenTempAddResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayOpenSpNcoilopenTempAddResponse, self).__init__()
+        self._biz_id = None
+        self._record_id = None
+
+    @property
+    def biz_id(self):
+        return self._biz_id
+
+    @biz_id.setter
+    def biz_id(self, value):
+        self._biz_id = value
+    @property
+    def record_id(self):
+        return self._record_id
+
+    @record_id.setter
+    def record_id(self, value):
+        self._record_id = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayOpenSpNcoilopenTempAddResponse, self).parse_response_content(response_content)
+        if 'biz_id' in response:
+            self.biz_id = response['biz_id']
+        if 'record_id' in response:
+            self.record_id = response['record_id']

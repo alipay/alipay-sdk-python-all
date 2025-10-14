@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ChatExtraParams import ChatExtraParams
+from alipay.aop.api.domain.MediaContent import MediaContent
 
 
 class AlipayCloudCloudpromoChatCreateModel(object):
@@ -16,6 +17,7 @@ class AlipayCloudCloudpromoChatCreateModel(object):
         self._extra_params = None
         self._inc_access_id = None
         self._load_test = None
+        self._media_contents = None
         self._question = None
         self._retry = None
         self._session_id = None
@@ -73,6 +75,19 @@ class AlipayCloudCloudpromoChatCreateModel(object):
     @load_test.setter
     def load_test(self, value):
         self._load_test = value
+    @property
+    def media_contents(self):
+        return self._media_contents
+
+    @media_contents.setter
+    def media_contents(self, value):
+        if isinstance(value, list):
+            self._media_contents = list()
+            for i in value:
+                if isinstance(i, MediaContent):
+                    self._media_contents.append(i)
+                else:
+                    self._media_contents.append(MediaContent.from_alipay_dict(i))
     @property
     def question(self):
         return self._question
@@ -140,6 +155,16 @@ class AlipayCloudCloudpromoChatCreateModel(object):
                 params['load_test'] = self.load_test.to_alipay_dict()
             else:
                 params['load_test'] = self.load_test
+        if self.media_contents:
+            if isinstance(self.media_contents, list):
+                for i in range(0, len(self.media_contents)):
+                    element = self.media_contents[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.media_contents[i] = element.to_alipay_dict()
+            if hasattr(self.media_contents, 'to_alipay_dict'):
+                params['media_contents'] = self.media_contents.to_alipay_dict()
+            else:
+                params['media_contents'] = self.media_contents
         if self.question:
             if hasattr(self.question, 'to_alipay_dict'):
                 params['question'] = self.question.to_alipay_dict()
@@ -181,6 +206,8 @@ class AlipayCloudCloudpromoChatCreateModel(object):
             o.inc_access_id = d['inc_access_id']
         if 'load_test' in d:
             o.load_test = d['load_test']
+        if 'media_contents' in d:
+            o.media_contents = d['media_contents']
         if 'question' in d:
             o.question = d['question']
         if 'retry' in d:

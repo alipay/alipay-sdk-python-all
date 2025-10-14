@@ -12,6 +12,7 @@ class AlipayPcreditLoanHonorUserbindCheckModel(object):
         self._ctf_code = None
         self._mobile_no = None
         self._out_trace_id = None
+        self._product_code = None
         self._real_name = None
         self._request_source = None
 
@@ -43,6 +44,13 @@ class AlipayPcreditLoanHonorUserbindCheckModel(object):
     @out_trace_id.setter
     def out_trace_id(self, value):
         self._out_trace_id = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def real_name(self):
         return self._real_name
@@ -81,6 +89,11 @@ class AlipayPcreditLoanHonorUserbindCheckModel(object):
                 params['out_trace_id'] = self.out_trace_id.to_alipay_dict()
             else:
                 params['out_trace_id'] = self.out_trace_id
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.real_name:
             if hasattr(self.real_name, 'to_alipay_dict'):
                 params['real_name'] = self.real_name.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayPcreditLoanHonorUserbindCheckModel(object):
             o.mobile_no = d['mobile_no']
         if 'out_trace_id' in d:
             o.out_trace_id = d['out_trace_id']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'real_name' in d:
             o.real_name = d['real_name']
         if 'request_source' in d:

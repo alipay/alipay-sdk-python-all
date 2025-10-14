@@ -12,6 +12,7 @@ class LandingTypeDto(object):
     def __init__(self):
         self._landing_act = None
         self._landing_id = None
+        self._landing_level = None
         self._landing_name = None
         self._landing_type = None
         self._landing_url = None
@@ -38,6 +39,13 @@ class LandingTypeDto(object):
     @landing_id.setter
     def landing_id(self, value):
         self._landing_id = value
+    @property
+    def landing_level(self):
+        return self._landing_level
+
+    @landing_level.setter
+    def landing_level(self, value):
+        self._landing_level = value
     @property
     def landing_name(self):
         return self._landing_name
@@ -101,6 +109,11 @@ class LandingTypeDto(object):
                 params['landing_id'] = self.landing_id.to_alipay_dict()
             else:
                 params['landing_id'] = self.landing_id
+        if self.landing_level:
+            if hasattr(self.landing_level, 'to_alipay_dict'):
+                params['landing_level'] = self.landing_level.to_alipay_dict()
+            else:
+                params['landing_level'] = self.landing_level
         if self.landing_name:
             if hasattr(self.landing_name, 'to_alipay_dict'):
                 params['landing_name'] = self.landing_name.to_alipay_dict()
@@ -147,6 +160,8 @@ class LandingTypeDto(object):
             o.landing_act = d['landing_act']
         if 'landing_id' in d:
             o.landing_id = d['landing_id']
+        if 'landing_level' in d:
+            o.landing_level = d['landing_level']
         if 'landing_name' in d:
             o.landing_name = d['landing_name']
         if 'landing_type' in d:

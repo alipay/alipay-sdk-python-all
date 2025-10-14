@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalServiceMagaQueryModel(object):
 
     def __init__(self):
+        self._config_id = None
         self._org_id = None
         self._out_user_id = None
 
+    @property
+    def config_id(self):
+        return self._config_id
+
+    @config_id.setter
+    def config_id(self, value):
+        self._config_id = value
     @property
     def org_id(self):
         return self._org_id
@@ -29,6 +37,11 @@ class AlipayCommerceMedicalServiceMagaQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.config_id:
+            if hasattr(self.config_id, 'to_alipay_dict'):
+                params['config_id'] = self.config_id.to_alipay_dict()
+            else:
+                params['config_id'] = self.config_id
         if self.org_id:
             if hasattr(self.org_id, 'to_alipay_dict'):
                 params['org_id'] = self.org_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayCommerceMedicalServiceMagaQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalServiceMagaQueryModel()
+        if 'config_id' in d:
+            o.config_id = d['config_id']
         if 'org_id' in d:
             o.org_id = d['org_id']
         if 'out_user_id' in d:

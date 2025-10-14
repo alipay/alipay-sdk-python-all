@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DrugDTO import DrugDTO
 
 
 class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
@@ -13,6 +14,7 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
         self._emergency = None
         self._general_name_list = None
         self._item_name_list = None
+        self._pre_select_drug_list = None
 
     @property
     def ant_ser_contract_no(self):
@@ -58,6 +60,19 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
             self._item_name_list = list()
             for i in value:
                 self._item_name_list.append(i)
+    @property
+    def pre_select_drug_list(self):
+        return self._pre_select_drug_list
+
+    @pre_select_drug_list.setter
+    def pre_select_drug_list(self, value):
+        if isinstance(value, list):
+            self._pre_select_drug_list = list()
+            for i in value:
+                if isinstance(i, DrugDTO):
+                    self._pre_select_drug_list.append(i)
+                else:
+                    self._pre_select_drug_list.append(DrugDTO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -102,6 +117,16 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
                 params['item_name_list'] = self.item_name_list.to_alipay_dict()
             else:
                 params['item_name_list'] = self.item_name_list
+        if self.pre_select_drug_list:
+            if isinstance(self.pre_select_drug_list, list):
+                for i in range(0, len(self.pre_select_drug_list)):
+                    element = self.pre_select_drug_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pre_select_drug_list[i] = element.to_alipay_dict()
+            if hasattr(self.pre_select_drug_list, 'to_alipay_dict'):
+                params['pre_select_drug_list'] = self.pre_select_drug_list.to_alipay_dict()
+            else:
+                params['pre_select_drug_list'] = self.pre_select_drug_list
         return params
 
     @staticmethod
@@ -119,6 +144,8 @@ class AlipayInsSceneHealthDrugcatalogueBatchqueryModel(object):
             o.general_name_list = d['general_name_list']
         if 'item_name_list' in d:
             o.item_name_list = d['item_name_list']
+        if 'pre_select_drug_list' in d:
+            o.pre_select_drug_list = d['pre_select_drug_list']
         return o
 
 

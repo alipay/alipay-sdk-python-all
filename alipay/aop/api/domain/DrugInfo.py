@@ -18,6 +18,8 @@ class DrugInfo(object):
         self._ext_drug_code = None
         self._ext_drug_name = None
         self._generic_name = None
+        self._risk_confirm = None
+        self._risk_level = None
         self._spec = None
         self._usage_dosage_desc = None
 
@@ -92,6 +94,20 @@ class DrugInfo(object):
     def generic_name(self, value):
         self._generic_name = value
     @property
+    def risk_confirm(self):
+        return self._risk_confirm
+
+    @risk_confirm.setter
+    def risk_confirm(self, value):
+        self._risk_confirm = value
+    @property
+    def risk_level(self):
+        return self._risk_level
+
+    @risk_level.setter
+    def risk_level(self, value):
+        self._risk_level = value
+    @property
     def spec(self):
         return self._spec
 
@@ -159,6 +175,16 @@ class DrugInfo(object):
                 params['generic_name'] = self.generic_name.to_alipay_dict()
             else:
                 params['generic_name'] = self.generic_name
+        if self.risk_confirm:
+            if hasattr(self.risk_confirm, 'to_alipay_dict'):
+                params['risk_confirm'] = self.risk_confirm.to_alipay_dict()
+            else:
+                params['risk_confirm'] = self.risk_confirm
+        if self.risk_level:
+            if hasattr(self.risk_level, 'to_alipay_dict'):
+                params['risk_level'] = self.risk_level.to_alipay_dict()
+            else:
+                params['risk_level'] = self.risk_level
         if self.spec:
             if hasattr(self.spec, 'to_alipay_dict'):
                 params['spec'] = self.spec.to_alipay_dict()
@@ -196,6 +222,10 @@ class DrugInfo(object):
             o.ext_drug_name = d['ext_drug_name']
         if 'generic_name' in d:
             o.generic_name = d['generic_name']
+        if 'risk_confirm' in d:
+            o.risk_confirm = d['risk_confirm']
+        if 'risk_level' in d:
+            o.risk_level = d['risk_level']
         if 'spec' in d:
             o.spec = d['spec']
         if 'usage_dosage_desc' in d:

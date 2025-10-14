@@ -9,6 +9,7 @@ class BroadcastReportItem(object):
 
     def __init__(self):
         self._biz_active_time = None
+        self._biz_touch_active_time = None
         self._coop_mode = None
         self._device_sn = None
         self._first_marketing_broadcast = None
@@ -29,6 +30,13 @@ class BroadcastReportItem(object):
     @biz_active_time.setter
     def biz_active_time(self, value):
         self._biz_active_time = value
+    @property
+    def biz_touch_active_time(self):
+        return self._biz_touch_active_time
+
+    @biz_touch_active_time.setter
+    def biz_touch_active_time(self, value):
+        self._biz_touch_active_time = value
     @property
     def coop_mode(self):
         return self._coop_mode
@@ -122,6 +130,11 @@ class BroadcastReportItem(object):
                 params['biz_active_time'] = self.biz_active_time.to_alipay_dict()
             else:
                 params['biz_active_time'] = self.biz_active_time
+        if self.biz_touch_active_time:
+            if hasattr(self.biz_touch_active_time, 'to_alipay_dict'):
+                params['biz_touch_active_time'] = self.biz_touch_active_time.to_alipay_dict()
+            else:
+                params['biz_touch_active_time'] = self.biz_touch_active_time
         if self.coop_mode:
             if hasattr(self.coop_mode, 'to_alipay_dict'):
                 params['coop_mode'] = self.coop_mode.to_alipay_dict()
@@ -191,6 +204,8 @@ class BroadcastReportItem(object):
         o = BroadcastReportItem()
         if 'biz_active_time' in d:
             o.biz_active_time = d['biz_active_time']
+        if 'biz_touch_active_time' in d:
+            o.biz_touch_active_time = d['biz_touch_active_time']
         if 'coop_mode' in d:
             o.coop_mode = d['coop_mode']
         if 'device_sn' in d:

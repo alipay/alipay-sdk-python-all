@@ -12,6 +12,8 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
         self._agreement_no = None
         self._device_id = None
         self._encode_url = None
+        self._merchant_name = None
+        self._screen_pay_qr_link = None
         self._smid = None
         self._speech_content = None
         self._supplier_id = None
@@ -37,6 +39,20 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
     @encode_url.setter
     def encode_url(self, value):
         self._encode_url = value
+    @property
+    def merchant_name(self):
+        return self._merchant_name
+
+    @merchant_name.setter
+    def merchant_name(self, value):
+        self._merchant_name = value
+    @property
+    def screen_pay_qr_link(self):
+        return self._screen_pay_qr_link
+
+    @screen_pay_qr_link.setter
+    def screen_pay_qr_link(self, value):
+        self._screen_pay_qr_link = value
     @property
     def smid(self):
         return self._smid
@@ -80,6 +96,16 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
                 params['encode_url'] = self.encode_url.to_alipay_dict()
             else:
                 params['encode_url'] = self.encode_url
+        if self.merchant_name:
+            if hasattr(self.merchant_name, 'to_alipay_dict'):
+                params['merchant_name'] = self.merchant_name.to_alipay_dict()
+            else:
+                params['merchant_name'] = self.merchant_name
+        if self.screen_pay_qr_link:
+            if hasattr(self.screen_pay_qr_link, 'to_alipay_dict'):
+                params['screen_pay_qr_link'] = self.screen_pay_qr_link.to_alipay_dict()
+            else:
+                params['screen_pay_qr_link'] = self.screen_pay_qr_link
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -108,6 +134,10 @@ class AlipayMerchantIndirectIotcoverBindModel(object):
             o.device_id = d['device_id']
         if 'encode_url' in d:
             o.encode_url = d['encode_url']
+        if 'merchant_name' in d:
+            o.merchant_name = d['merchant_name']
+        if 'screen_pay_qr_link' in d:
+            o.screen_pay_qr_link = d['screen_pay_qr_link']
         if 'smid' in d:
             o.smid = d['smid']
         if 'speech_content' in d:

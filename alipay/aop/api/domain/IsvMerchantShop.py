@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MerchantShopAddress import MerchantShopAddress
+from alipay.aop.api.domain.AlipayMerchantInfo import AlipayMerchantInfo
 
 
 class IsvMerchantShop(object):
@@ -11,6 +12,7 @@ class IsvMerchantShop(object):
     def __init__(self):
         self._address = None
         self._device_type = None
+        self._merchant_info = None
         self._merchant_phone = None
         self._out_shop_id = None
         self._out_shop_name = None
@@ -32,6 +34,16 @@ class IsvMerchantShop(object):
     @device_type.setter
     def device_type(self, value):
         self._device_type = value
+    @property
+    def merchant_info(self):
+        return self._merchant_info
+
+    @merchant_info.setter
+    def merchant_info(self, value):
+        if isinstance(value, AlipayMerchantInfo):
+            self._merchant_info = value
+        else:
+            self._merchant_info = AlipayMerchantInfo.from_alipay_dict(value)
     @property
     def merchant_phone(self):
         return self._merchant_phone
@@ -67,6 +79,11 @@ class IsvMerchantShop(object):
                 params['device_type'] = self.device_type.to_alipay_dict()
             else:
                 params['device_type'] = self.device_type
+        if self.merchant_info:
+            if hasattr(self.merchant_info, 'to_alipay_dict'):
+                params['merchant_info'] = self.merchant_info.to_alipay_dict()
+            else:
+                params['merchant_info'] = self.merchant_info
         if self.merchant_phone:
             if hasattr(self.merchant_phone, 'to_alipay_dict'):
                 params['merchant_phone'] = self.merchant_phone.to_alipay_dict()
@@ -93,6 +110,8 @@ class IsvMerchantShop(object):
             o.address = d['address']
         if 'device_type' in d:
             o.device_type = d['device_type']
+        if 'merchant_info' in d:
+            o.merchant_info = d['merchant_info']
         if 'merchant_phone' in d:
             o.merchant_phone = d['merchant_phone']
         if 'out_shop_id' in d:

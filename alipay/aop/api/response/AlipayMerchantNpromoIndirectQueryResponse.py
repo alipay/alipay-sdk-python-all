@@ -17,6 +17,7 @@ class AlipayMerchantNpromoIndirectQueryResponse(AlipayResponse):
         self._pop_btn_img = None
         self._pop_header_img = None
         self._pop_url = None
+        self._remark = None
         self._scene = None
         self._show = None
 
@@ -76,6 +77,13 @@ class AlipayMerchantNpromoIndirectQueryResponse(AlipayResponse):
     def pop_url(self, value):
         self._pop_url = value
     @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
+    @property
     def scene(self):
         return self._scene
 
@@ -106,6 +114,8 @@ class AlipayMerchantNpromoIndirectQueryResponse(AlipayResponse):
             self.pop_header_img = response['pop_header_img']
         if 'pop_url' in response:
             self.pop_url = response['pop_url']
+        if 'remark' in response:
+            self.remark = response['remark']
         if 'scene' in response:
             self.scene = response['scene']
         if 'show' in response:

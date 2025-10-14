@@ -9,6 +9,7 @@ class CloudDomain(object):
 
     def __init__(self):
         self._cname = None
+        self._connect_status = None
         self._force_https = None
         self._has_cert = None
         self._is_custom = None
@@ -23,6 +24,13 @@ class CloudDomain(object):
     @cname.setter
     def cname(self, value):
         self._cname = value
+    @property
+    def connect_status(self):
+        return self._connect_status
+
+    @connect_status.setter
+    def connect_status(self, value):
+        self._connect_status = value
     @property
     def force_https(self):
         return self._force_https
@@ -74,6 +82,11 @@ class CloudDomain(object):
                 params['cname'] = self.cname.to_alipay_dict()
             else:
                 params['cname'] = self.cname
+        if self.connect_status:
+            if hasattr(self.connect_status, 'to_alipay_dict'):
+                params['connect_status'] = self.connect_status.to_alipay_dict()
+            else:
+                params['connect_status'] = self.connect_status
         if self.force_https:
             if hasattr(self.force_https, 'to_alipay_dict'):
                 params['force_https'] = self.force_https.to_alipay_dict()
@@ -113,6 +126,8 @@ class CloudDomain(object):
         o = CloudDomain()
         if 'cname' in d:
             o.cname = d['cname']
+        if 'connect_status' in d:
+            o.connect_status = d['connect_status']
         if 'force_https' in d:
             o.force_https = d['force_https']
         if 'has_cert' in d:

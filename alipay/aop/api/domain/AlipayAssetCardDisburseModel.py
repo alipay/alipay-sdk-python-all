@@ -19,6 +19,7 @@ class AlipayAssetCardDisburseModel(object):
         self._payee_open_id = None
         self._payee_user_id = None
         self._payer_user_id = None
+        self._payer_user_openid = None
         self._template_id = None
         self._user_id = None
 
@@ -100,6 +101,13 @@ class AlipayAssetCardDisburseModel(object):
     def payer_user_id(self, value):
         self._payer_user_id = value
     @property
+    def payer_user_openid(self):
+        return self._payer_user_openid
+
+    @payer_user_openid.setter
+    def payer_user_openid(self, value):
+        self._payer_user_openid = value
+    @property
     def template_id(self):
         return self._template_id
 
@@ -172,6 +180,11 @@ class AlipayAssetCardDisburseModel(object):
                 params['payer_user_id'] = self.payer_user_id.to_alipay_dict()
             else:
                 params['payer_user_id'] = self.payer_user_id
+        if self.payer_user_openid:
+            if hasattr(self.payer_user_openid, 'to_alipay_dict'):
+                params['payer_user_openid'] = self.payer_user_openid.to_alipay_dict()
+            else:
+                params['payer_user_openid'] = self.payer_user_openid
         if self.template_id:
             if hasattr(self.template_id, 'to_alipay_dict'):
                 params['template_id'] = self.template_id.to_alipay_dict()
@@ -211,6 +224,8 @@ class AlipayAssetCardDisburseModel(object):
             o.payee_user_id = d['payee_user_id']
         if 'payer_user_id' in d:
             o.payer_user_id = d['payer_user_id']
+        if 'payer_user_openid' in d:
+            o.payer_user_openid = d['payer_user_openid']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'user_id' in d:

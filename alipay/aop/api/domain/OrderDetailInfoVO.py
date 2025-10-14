@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AttrExtInfoDTO import AttrExtInfoDTO
 from alipay.aop.api.domain.GroupBuyInfo import GroupBuyInfo
 from alipay.aop.api.domain.OrderItemInfoVO import OrderItemInfoVO
 from alipay.aop.api.domain.OrderTagInfo import OrderTagInfo
@@ -15,6 +16,7 @@ from alipay.aop.api.domain.PromoInfoVO import PromoInfoVO
 class OrderDetailInfoVO(object):
 
     def __init__(self):
+        self._business_order_tag_info_list = None
         self._group_buy_info = None
         self._item_infos = None
         self._order_tag_info = None
@@ -23,6 +25,19 @@ class OrderDetailInfoVO(object):
         self._promo_apply_info = None
         self._promo_info = None
 
+    @property
+    def business_order_tag_info_list(self):
+        return self._business_order_tag_info_list
+
+    @business_order_tag_info_list.setter
+    def business_order_tag_info_list(self, value):
+        if isinstance(value, list):
+            self._business_order_tag_info_list = list()
+            for i in value:
+                if isinstance(i, AttrExtInfoDTO):
+                    self._business_order_tag_info_list.append(i)
+                else:
+                    self._business_order_tag_info_list.append(AttrExtInfoDTO.from_alipay_dict(i))
     @property
     def group_buy_info(self):
         return self._group_buy_info
@@ -100,6 +115,16 @@ class OrderDetailInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_order_tag_info_list:
+            if isinstance(self.business_order_tag_info_list, list):
+                for i in range(0, len(self.business_order_tag_info_list)):
+                    element = self.business_order_tag_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.business_order_tag_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.business_order_tag_info_list, 'to_alipay_dict'):
+                params['business_order_tag_info_list'] = self.business_order_tag_info_list.to_alipay_dict()
+            else:
+                params['business_order_tag_info_list'] = self.business_order_tag_info_list
         if self.group_buy_info:
             if hasattr(self.group_buy_info, 'to_alipay_dict'):
                 params['group_buy_info'] = self.group_buy_info.to_alipay_dict()
@@ -147,6 +172,8 @@ class OrderDetailInfoVO(object):
         if not d:
             return None
         o = OrderDetailInfoVO()
+        if 'business_order_tag_info_list' in d:
+            o.business_order_tag_info_list = d['business_order_tag_info_list']
         if 'group_buy_info' in d:
             o.group_buy_info = d['group_buy_info']
         if 'item_infos' in d:

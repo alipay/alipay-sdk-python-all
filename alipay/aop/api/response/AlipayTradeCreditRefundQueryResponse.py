@@ -13,6 +13,7 @@ class AlipayTradeCreditRefundQueryResponse(AlipayResponse):
         self._gmt_refund = None
         self._order_amount = None
         self._refund_amount = None
+        self._trade_no = None
 
     @property
     def credit_biz_order_id(self):
@@ -42,6 +43,13 @@ class AlipayTradeCreditRefundQueryResponse(AlipayResponse):
     @refund_amount.setter
     def refund_amount(self, value):
         self._refund_amount = value
+    @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeCreditRefundQueryResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class AlipayTradeCreditRefundQueryResponse(AlipayResponse):
             self.order_amount = response['order_amount']
         if 'refund_amount' in response:
             self.refund_amount = response['refund_amount']
+        if 'trade_no' in response:
+            self.trade_no = response['trade_no']

@@ -8,6 +8,7 @@ from alipay.aop.api.domain.RentBuyoutInfoDTO import RentBuyoutInfoDTO
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoDTO import RentOrderReceiverAddressInfoDTO
 from alipay.aop.api.domain.RentOrderDeliveryInfoDTO import RentOrderDeliveryInfoDTO
 from alipay.aop.api.domain.RentGoodsDetailInfoDTO import RentGoodsDetailInfoDTO
+from alipay.aop.api.domain.RentOfflineShoppingDTO import RentOfflineShoppingDTO
 from alipay.aop.api.domain.RentPathInfoDTO import RentPathInfoDTO
 from alipay.aop.api.domain.RentOrderPriceInfoDTO import RentOrderPriceInfoDTO
 from alipay.aop.api.domain.RentReletInfoDTO import RentReletInfoDTO
@@ -30,6 +31,7 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._delivery_info = None
         self._item_infos = None
         self._memo = None
+        self._offline_shopping_info = None
         self._order_type = None
         self._out_order_id = None
         self._parent_order_id = None
@@ -133,6 +135,16 @@ class AlipayCommerceRentOrderCreateModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def offline_shopping_info(self):
+        return self._offline_shopping_info
+
+    @offline_shopping_info.setter
+    def offline_shopping_info(self, value):
+        if isinstance(value, RentOfflineShoppingDTO):
+            self._offline_shopping_info = value
+        else:
+            self._offline_shopping_info = RentOfflineShoppingDTO.from_alipay_dict(value)
     @property
     def order_type(self):
         return self._order_type
@@ -311,6 +323,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.offline_shopping_info:
+            if hasattr(self.offline_shopping_info, 'to_alipay_dict'):
+                params['offline_shopping_info'] = self.offline_shopping_info.to_alipay_dict()
+            else:
+                params['offline_shopping_info'] = self.offline_shopping_info
         if self.order_type:
             if hasattr(self.order_type, 'to_alipay_dict'):
                 params['order_type'] = self.order_type.to_alipay_dict()
@@ -408,6 +425,8 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.item_infos = d['item_infos']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'offline_shopping_info' in d:
+            o.offline_shopping_info = d['offline_shopping_info']
         if 'order_type' in d:
             o.order_type = d['order_type']
         if 'out_order_id' in d:

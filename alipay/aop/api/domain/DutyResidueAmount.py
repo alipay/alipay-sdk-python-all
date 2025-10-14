@@ -12,6 +12,7 @@ class DutyResidueAmount(object):
         self._claim_duty_name = None
         self._duty_deductible_excess = None
         self._duty_residue_amount = None
+        self._waiting_period = None
 
     @property
     def claim_duty_code(self):
@@ -41,6 +42,13 @@ class DutyResidueAmount(object):
     @duty_residue_amount.setter
     def duty_residue_amount(self, value):
         self._duty_residue_amount = value
+    @property
+    def waiting_period(self):
+        return self._waiting_period
+
+    @waiting_period.setter
+    def waiting_period(self, value):
+        self._waiting_period = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class DutyResidueAmount(object):
                 params['duty_residue_amount'] = self.duty_residue_amount.to_alipay_dict()
             else:
                 params['duty_residue_amount'] = self.duty_residue_amount
+        if self.waiting_period:
+            if hasattr(self.waiting_period, 'to_alipay_dict'):
+                params['waiting_period'] = self.waiting_period.to_alipay_dict()
+            else:
+                params['waiting_period'] = self.waiting_period
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class DutyResidueAmount(object):
             o.duty_deductible_excess = d['duty_deductible_excess']
         if 'duty_residue_amount' in d:
             o.duty_residue_amount = d['duty_residue_amount']
+        if 'waiting_period' in d:
+            o.waiting_period = d['waiting_period']
         return o
 
 
