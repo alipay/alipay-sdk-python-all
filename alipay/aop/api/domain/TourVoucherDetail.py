@@ -10,6 +10,7 @@ class TourVoucherDetail(object):
     def __init__(self):
         self._cert_no = None
         self._code_info = None
+        self._identity_name = None
         self._identity_type = None
         self._name = None
         self._out_vercher_id = None
@@ -37,12 +38,22 @@ class TourVoucherDetail(object):
     def code_info(self, value):
         self._code_info = value
     @property
+    def identity_name(self):
+        return self._identity_name
+
+    @identity_name.setter
+    def identity_name(self, value):
+        self._identity_name = value
+    @property
     def identity_type(self):
         return self._identity_type
 
     @identity_type.setter
     def identity_type(self, value):
-        self._identity_type = value
+        if isinstance(value, list):
+            self._identity_type = list()
+            for i in value:
+                self._identity_type.append(i)
     @property
     def name(self):
         return self._name
@@ -127,7 +138,17 @@ class TourVoucherDetail(object):
                 params['code_info'] = self.code_info.to_alipay_dict()
             else:
                 params['code_info'] = self.code_info
+        if self.identity_name:
+            if hasattr(self.identity_name, 'to_alipay_dict'):
+                params['identity_name'] = self.identity_name.to_alipay_dict()
+            else:
+                params['identity_name'] = self.identity_name
         if self.identity_type:
+            if isinstance(self.identity_type, list):
+                for i in range(0, len(self.identity_type)):
+                    element = self.identity_type[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.identity_type[i] = element.to_alipay_dict()
             if hasattr(self.identity_type, 'to_alipay_dict'):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
@@ -193,6 +214,8 @@ class TourVoucherDetail(object):
             o.cert_no = d['cert_no']
         if 'code_info' in d:
             o.code_info = d['code_info']
+        if 'identity_name' in d:
+            o.identity_name = d['identity_name']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
         if 'name' in d:

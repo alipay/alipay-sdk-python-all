@@ -10,6 +10,7 @@ class AlipayIserviceCcmCrmCallrecordQueryModel(object):
     def __init__(self):
         self._current_page = None
         self._data_id = None
+        self._data_type = None
         self._page_size = None
         self._tenant_id = None
 
@@ -27,6 +28,13 @@ class AlipayIserviceCcmCrmCallrecordQueryModel(object):
     @data_id.setter
     def data_id(self, value):
         self._data_id = value
+    @property
+    def data_type(self):
+        return self._data_type
+
+    @data_type.setter
+    def data_type(self, value):
+        self._data_type = value
     @property
     def page_size(self):
         return self._page_size
@@ -55,6 +63,11 @@ class AlipayIserviceCcmCrmCallrecordQueryModel(object):
                 params['data_id'] = self.data_id.to_alipay_dict()
             else:
                 params['data_id'] = self.data_id
+        if self.data_type:
+            if hasattr(self.data_type, 'to_alipay_dict'):
+                params['data_type'] = self.data_type.to_alipay_dict()
+            else:
+                params['data_type'] = self.data_type
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayIserviceCcmCrmCallrecordQueryModel(object):
             o.current_page = d['current_page']
         if 'data_id' in d:
             o.data_id = d['data_id']
+        if 'data_type' in d:
+            o.data_type = d['data_type']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'tenant_id' in d:

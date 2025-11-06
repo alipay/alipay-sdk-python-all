@@ -41,6 +41,7 @@ class EnterpriseInvoiceInfoDTO(object):
         self._payer_mobile = None
         self._payer_name = None
         self._payer_register_no = None
+        self._reimburse_status = None
         self._related_to_consume = None
         self._specific_factor = None
         self._sum_amount = None
@@ -281,6 +282,13 @@ class EnterpriseInvoiceInfoDTO(object):
     def payer_register_no(self, value):
         self._payer_register_no = value
     @property
+    def reimburse_status(self):
+        return self._reimburse_status
+
+    @reimburse_status.setter
+    def reimburse_status(self, value):
+        self._reimburse_status = value
+    @property
     def related_to_consume(self):
         return self._related_to_consume
 
@@ -489,6 +497,11 @@ class EnterpriseInvoiceInfoDTO(object):
                 params['payer_register_no'] = self.payer_register_no.to_alipay_dict()
             else:
                 params['payer_register_no'] = self.payer_register_no
+        if self.reimburse_status:
+            if hasattr(self.reimburse_status, 'to_alipay_dict'):
+                params['reimburse_status'] = self.reimburse_status.to_alipay_dict()
+            else:
+                params['reimburse_status'] = self.reimburse_status
         if self.related_to_consume:
             if hasattr(self.related_to_consume, 'to_alipay_dict'):
                 params['related_to_consume'] = self.related_to_consume.to_alipay_dict()
@@ -585,6 +598,8 @@ class EnterpriseInvoiceInfoDTO(object):
             o.payer_name = d['payer_name']
         if 'payer_register_no' in d:
             o.payer_register_no = d['payer_register_no']
+        if 'reimburse_status' in d:
+            o.reimburse_status = d['reimburse_status']
         if 'related_to_consume' in d:
             o.related_to_consume = d['related_to_consume']
         if 'specific_factor' in d:

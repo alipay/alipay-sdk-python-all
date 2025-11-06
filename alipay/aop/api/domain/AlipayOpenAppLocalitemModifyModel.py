@@ -13,6 +13,7 @@ from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 class AlipayOpenAppLocalitemModifyModel(object):
 
     def __init__(self):
+        self._a_store_id = None
         self._attrs = None
         self._category_id = None
         self._customer_service_mobile = None
@@ -31,6 +32,13 @@ class AlipayOpenAppLocalitemModifyModel(object):
         self._spu_id = None
         self._title = None
 
+    @property
+    def a_store_id(self):
+        return self._a_store_id
+
+    @a_store_id.setter
+    def a_store_id(self, value):
+        self._a_store_id = value
     @property
     def attrs(self):
         return self._attrs
@@ -181,6 +189,11 @@ class AlipayOpenAppLocalitemModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.a_store_id:
+            if hasattr(self.a_store_id, 'to_alipay_dict'):
+                params['a_store_id'] = self.a_store_id.to_alipay_dict()
+            else:
+                params['a_store_id'] = self.a_store_id
         if self.attrs:
             if isinstance(self.attrs, list):
                 for i in range(0, len(self.attrs)):
@@ -293,6 +306,8 @@ class AlipayOpenAppLocalitemModifyModel(object):
         if not d:
             return None
         o = AlipayOpenAppLocalitemModifyModel()
+        if 'a_store_id' in d:
+            o.a_store_id = d['a_store_id']
         if 'attrs' in d:
             o.attrs = d['attrs']
         if 'category_id' in d:

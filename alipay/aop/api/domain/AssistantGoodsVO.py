@@ -9,6 +9,7 @@ class AssistantGoodsVO(object):
 
     def __init__(self):
         self._crowd_code = None
+        self._crowd_type = None
         self._goods_item_id = None
         self._related_app_id = None
 
@@ -19,6 +20,13 @@ class AssistantGoodsVO(object):
     @crowd_code.setter
     def crowd_code(self, value):
         self._crowd_code = value
+    @property
+    def crowd_type(self):
+        return self._crowd_type
+
+    @crowd_type.setter
+    def crowd_type(self, value):
+        self._crowd_type = value
     @property
     def goods_item_id(self):
         return self._goods_item_id
@@ -42,6 +50,11 @@ class AssistantGoodsVO(object):
                 params['crowd_code'] = self.crowd_code.to_alipay_dict()
             else:
                 params['crowd_code'] = self.crowd_code
+        if self.crowd_type:
+            if hasattr(self.crowd_type, 'to_alipay_dict'):
+                params['crowd_type'] = self.crowd_type.to_alipay_dict()
+            else:
+                params['crowd_type'] = self.crowd_type
         if self.goods_item_id:
             if hasattr(self.goods_item_id, 'to_alipay_dict'):
                 params['goods_item_id'] = self.goods_item_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class AssistantGoodsVO(object):
         o = AssistantGoodsVO()
         if 'crowd_code' in d:
             o.crowd_code = d['crowd_code']
+        if 'crowd_type' in d:
+            o.crowd_type = d['crowd_type']
         if 'goods_item_id' in d:
             o.goods_item_id = d['goods_item_id']
         if 'related_app_id' in d:

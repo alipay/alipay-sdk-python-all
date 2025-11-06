@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceLogisticsLinkGetModel(object):
 
     def __init__(self):
+        self._expressman_alipay_logon_id = None
         self._logistics_biz_scene_action = None
         self._merchant_request_source = None
         self._merchant_station_code = None
@@ -15,6 +16,13 @@ class AlipayCommerceLogisticsLinkGetModel(object):
         self._merchant_station_name = None
         self._merchant_station_shop_id = None
 
+    @property
+    def expressman_alipay_logon_id(self):
+        return self._expressman_alipay_logon_id
+
+    @expressman_alipay_logon_id.setter
+    def expressman_alipay_logon_id(self, value):
+        self._expressman_alipay_logon_id = value
     @property
     def logistics_biz_scene_action(self):
         return self._logistics_biz_scene_action
@@ -61,6 +69,11 @@ class AlipayCommerceLogisticsLinkGetModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.expressman_alipay_logon_id:
+            if hasattr(self.expressman_alipay_logon_id, 'to_alipay_dict'):
+                params['expressman_alipay_logon_id'] = self.expressman_alipay_logon_id.to_alipay_dict()
+            else:
+                params['expressman_alipay_logon_id'] = self.expressman_alipay_logon_id
         if self.logistics_biz_scene_action:
             if hasattr(self.logistics_biz_scene_action, 'to_alipay_dict'):
                 params['logistics_biz_scene_action'] = self.logistics_biz_scene_action.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayCommerceLogisticsLinkGetModel(object):
         if not d:
             return None
         o = AlipayCommerceLogisticsLinkGetModel()
+        if 'expressman_alipay_logon_id' in d:
+            o.expressman_alipay_logon_id = d['expressman_alipay_logon_id']
         if 'logistics_biz_scene_action' in d:
             o.logistics_biz_scene_action = d['logistics_biz_scene_action']
         if 'merchant_request_source' in d:

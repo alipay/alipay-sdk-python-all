@@ -21,8 +21,10 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
         self._last_stop_date = None
         self._os_status = None
         self._pool_id = None
+        self._rest_flow_amount = None
         self._sw_order_id = None
         self._total_flow_amount = None
+        self._used_flow_amount = None
         self._vendor_id = None
 
     @property
@@ -117,6 +119,13 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
     def pool_id(self, value):
         self._pool_id = value
     @property
+    def rest_flow_amount(self):
+        return self._rest_flow_amount
+
+    @rest_flow_amount.setter
+    def rest_flow_amount(self, value):
+        self._rest_flow_amount = value
+    @property
     def sw_order_id(self):
         return self._sw_order_id
 
@@ -130,6 +139,13 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
     @total_flow_amount.setter
     def total_flow_amount(self, value):
         self._total_flow_amount = value
+    @property
+    def used_flow_amount(self):
+        return self._used_flow_amount
+
+    @used_flow_amount.setter
+    def used_flow_amount(self, value):
+        self._used_flow_amount = value
     @property
     def vendor_id(self):
         return self._vendor_id
@@ -206,6 +222,11 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
                 params['pool_id'] = self.pool_id.to_alipay_dict()
             else:
                 params['pool_id'] = self.pool_id
+        if self.rest_flow_amount:
+            if hasattr(self.rest_flow_amount, 'to_alipay_dict'):
+                params['rest_flow_amount'] = self.rest_flow_amount.to_alipay_dict()
+            else:
+                params['rest_flow_amount'] = self.rest_flow_amount
         if self.sw_order_id:
             if hasattr(self.sw_order_id, 'to_alipay_dict'):
                 params['sw_order_id'] = self.sw_order_id.to_alipay_dict()
@@ -216,6 +237,11 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
                 params['total_flow_amount'] = self.total_flow_amount.to_alipay_dict()
             else:
                 params['total_flow_amount'] = self.total_flow_amount
+        if self.used_flow_amount:
+            if hasattr(self.used_flow_amount, 'to_alipay_dict'):
+                params['used_flow_amount'] = self.used_flow_amount.to_alipay_dict()
+            else:
+                params['used_flow_amount'] = self.used_flow_amount
         if self.vendor_id:
             if hasattr(self.vendor_id, 'to_alipay_dict'):
                 params['vendor_id'] = self.vendor_id.to_alipay_dict()
@@ -254,10 +280,14 @@ class AlipayTerminalEdgecloudSwnetflowCardfullSyncModel(object):
             o.os_status = d['os_status']
         if 'pool_id' in d:
             o.pool_id = d['pool_id']
+        if 'rest_flow_amount' in d:
+            o.rest_flow_amount = d['rest_flow_amount']
         if 'sw_order_id' in d:
             o.sw_order_id = d['sw_order_id']
         if 'total_flow_amount' in d:
             o.total_flow_amount = d['total_flow_amount']
+        if 'used_flow_amount' in d:
+            o.used_flow_amount = d['used_flow_amount']
         if 'vendor_id' in d:
             o.vendor_id = d['vendor_id']
         return o

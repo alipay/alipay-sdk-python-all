@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CardCycle import CardCycle
 from alipay.aop.api.domain.CardDiscountRecoverRule import CardDiscountRecoverRule
 from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
+from alipay.aop.api.domain.CardPurchaseNotice import CardPurchaseNotice
 from alipay.aop.api.domain.CardUseMethodInfo import CardUseMethodInfo
 
 
@@ -16,6 +17,7 @@ class CardTemplateUse(object):
         self._discount_recover_rule_info = None
         self._expire_period = None
         self._period_price_list = None
+        self._purchase_notice = None
         self._reservation_url = None
         self._show_shop = None
         self._show_shop_ids = None
@@ -64,6 +66,16 @@ class CardTemplateUse(object):
                     self._period_price_list.append(i)
                 else:
                     self._period_price_list.append(CardPeriodPrice.from_alipay_dict(i))
+    @property
+    def purchase_notice(self):
+        return self._purchase_notice
+
+    @purchase_notice.setter
+    def purchase_notice(self, value):
+        if isinstance(value, CardPurchaseNotice):
+            self._purchase_notice = value
+        else:
+            self._purchase_notice = CardPurchaseNotice.from_alipay_dict(value)
     @property
     def reservation_url(self):
         return self._reservation_url
@@ -154,6 +166,11 @@ class CardTemplateUse(object):
                 params['period_price_list'] = self.period_price_list.to_alipay_dict()
             else:
                 params['period_price_list'] = self.period_price_list
+        if self.purchase_notice:
+            if hasattr(self.purchase_notice, 'to_alipay_dict'):
+                params['purchase_notice'] = self.purchase_notice.to_alipay_dict()
+            else:
+                params['purchase_notice'] = self.purchase_notice
         if self.reservation_url:
             if hasattr(self.reservation_url, 'to_alipay_dict'):
                 params['reservation_url'] = self.reservation_url.to_alipay_dict()
@@ -219,6 +236,8 @@ class CardTemplateUse(object):
             o.expire_period = d['expire_period']
         if 'period_price_list' in d:
             o.period_price_list = d['period_price_list']
+        if 'purchase_notice' in d:
+            o.purchase_notice = d['purchase_notice']
         if 'reservation_url' in d:
             o.reservation_url = d['reservation_url']
         if 'show_shop' in d:

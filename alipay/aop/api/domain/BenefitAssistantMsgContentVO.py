@@ -11,6 +11,7 @@ class BenefitAssistantMsgContentVO(object):
         self._activity_id = None
         self._activity_id_list = None
         self._crowd_code = None
+        self._crowd_type = None
         self._multi_coupon = None
         self._recommend_text = None
 
@@ -38,6 +39,13 @@ class BenefitAssistantMsgContentVO(object):
     @crowd_code.setter
     def crowd_code(self, value):
         self._crowd_code = value
+    @property
+    def crowd_type(self):
+        return self._crowd_type
+
+    @crowd_type.setter
+    def crowd_type(self, value):
+        self._crowd_type = value
     @property
     def multi_coupon(self):
         return self._multi_coupon
@@ -76,6 +84,11 @@ class BenefitAssistantMsgContentVO(object):
                 params['crowd_code'] = self.crowd_code.to_alipay_dict()
             else:
                 params['crowd_code'] = self.crowd_code
+        if self.crowd_type:
+            if hasattr(self.crowd_type, 'to_alipay_dict'):
+                params['crowd_type'] = self.crowd_type.to_alipay_dict()
+            else:
+                params['crowd_type'] = self.crowd_type
         if self.multi_coupon:
             if hasattr(self.multi_coupon, 'to_alipay_dict'):
                 params['multi_coupon'] = self.multi_coupon.to_alipay_dict()
@@ -99,6 +112,8 @@ class BenefitAssistantMsgContentVO(object):
             o.activity_id_list = d['activity_id_list']
         if 'crowd_code' in d:
             o.crowd_code = d['crowd_code']
+        if 'crowd_type' in d:
+            o.crowd_type = d['crowd_type']
         if 'multi_coupon' in d:
             o.multi_coupon = d['multi_coupon']
         if 'recommend_text' in d:

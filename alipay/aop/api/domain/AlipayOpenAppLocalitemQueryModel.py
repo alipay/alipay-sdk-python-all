@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenAppLocalitemQueryModel(object):
 
     def __init__(self):
+        self._a_store_id = None
         self._item_id = None
         self._need_edit_spu = None
         self._out_item_id = None
 
+    @property
+    def a_store_id(self):
+        return self._a_store_id
+
+    @a_store_id.setter
+    def a_store_id(self, value):
+        self._a_store_id = value
     @property
     def item_id(self):
         return self._item_id
@@ -37,6 +45,11 @@ class AlipayOpenAppLocalitemQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.a_store_id:
+            if hasattr(self.a_store_id, 'to_alipay_dict'):
+                params['a_store_id'] = self.a_store_id.to_alipay_dict()
+            else:
+                params['a_store_id'] = self.a_store_id
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayOpenAppLocalitemQueryModel(object):
         if not d:
             return None
         o = AlipayOpenAppLocalitemQueryModel()
+        if 'a_store_id' in d:
+            o.a_store_id = d['a_store_id']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'need_edit_spu' in d:

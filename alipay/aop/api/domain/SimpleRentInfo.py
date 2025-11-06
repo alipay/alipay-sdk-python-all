@@ -23,6 +23,8 @@ class SimpleRentInfo(object):
         self._end_time = None
         self._loan_price = None
         self._loan_time = None
+        self._merchant_app_id = None
+        self._merchant_uscc = None
         self._out_order_id = None
         self._plan_list = None
         self._price_info = None
@@ -118,6 +120,20 @@ class SimpleRentInfo(object):
     @loan_time.setter
     def loan_time(self, value):
         self._loan_time = value
+    @property
+    def merchant_app_id(self):
+        return self._merchant_app_id
+
+    @merchant_app_id.setter
+    def merchant_app_id(self, value):
+        self._merchant_app_id = value
+    @property
+    def merchant_uscc(self):
+        return self._merchant_uscc
+
+    @merchant_uscc.setter
+    def merchant_uscc(self, value):
+        self._merchant_uscc = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -270,6 +286,16 @@ class SimpleRentInfo(object):
                 params['loan_time'] = self.loan_time.to_alipay_dict()
             else:
                 params['loan_time'] = self.loan_time
+        if self.merchant_app_id:
+            if hasattr(self.merchant_app_id, 'to_alipay_dict'):
+                params['merchant_app_id'] = self.merchant_app_id.to_alipay_dict()
+            else:
+                params['merchant_app_id'] = self.merchant_app_id
+        if self.merchant_uscc:
+            if hasattr(self.merchant_uscc, 'to_alipay_dict'):
+                params['merchant_uscc'] = self.merchant_uscc.to_alipay_dict()
+            else:
+                params['merchant_uscc'] = self.merchant_uscc
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -366,6 +392,10 @@ class SimpleRentInfo(object):
             o.loan_price = d['loan_price']
         if 'loan_time' in d:
             o.loan_time = d['loan_time']
+        if 'merchant_app_id' in d:
+            o.merchant_app_id = d['merchant_app_id']
+        if 'merchant_uscc' in d:
+            o.merchant_uscc = d['merchant_uscc']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plan_list' in d:

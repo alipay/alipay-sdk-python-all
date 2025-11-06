@@ -9,7 +9,10 @@ class AlipaySecurityRiskJointdecisionTradeSendModel(object):
 
     def __init__(self):
         self._out_trade_no = None
+        self._payee_account = None
+        self._payee_account_open_id = None
         self._pid = None
+        self._risk_custom_info = None
         self._risk_trade_feedback = None
         self._risk_trade_feedback_time = None
         self._scene = None
@@ -25,12 +28,33 @@ class AlipaySecurityRiskJointdecisionTradeSendModel(object):
     def out_trade_no(self, value):
         self._out_trade_no = value
     @property
+    def payee_account(self):
+        return self._payee_account
+
+    @payee_account.setter
+    def payee_account(self, value):
+        self._payee_account = value
+    @property
+    def payee_account_open_id(self):
+        return self._payee_account_open_id
+
+    @payee_account_open_id.setter
+    def payee_account_open_id(self, value):
+        self._payee_account_open_id = value
+    @property
     def pid(self):
         return self._pid
 
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def risk_custom_info(self):
+        return self._risk_custom_info
+
+    @risk_custom_info.setter
+    def risk_custom_info(self, value):
+        self._risk_custom_info = value
     @property
     def risk_trade_feedback(self):
         return self._risk_trade_feedback
@@ -82,11 +106,26 @@ class AlipaySecurityRiskJointdecisionTradeSendModel(object):
                 params['out_trade_no'] = self.out_trade_no.to_alipay_dict()
             else:
                 params['out_trade_no'] = self.out_trade_no
+        if self.payee_account:
+            if hasattr(self.payee_account, 'to_alipay_dict'):
+                params['payee_account'] = self.payee_account.to_alipay_dict()
+            else:
+                params['payee_account'] = self.payee_account
+        if self.payee_account_open_id:
+            if hasattr(self.payee_account_open_id, 'to_alipay_dict'):
+                params['payee_account_open_id'] = self.payee_account_open_id.to_alipay_dict()
+            else:
+                params['payee_account_open_id'] = self.payee_account_open_id
         if self.pid:
             if hasattr(self.pid, 'to_alipay_dict'):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.risk_custom_info:
+            if hasattr(self.risk_custom_info, 'to_alipay_dict'):
+                params['risk_custom_info'] = self.risk_custom_info.to_alipay_dict()
+            else:
+                params['risk_custom_info'] = self.risk_custom_info
         if self.risk_trade_feedback:
             if hasattr(self.risk_trade_feedback, 'to_alipay_dict'):
                 params['risk_trade_feedback'] = self.risk_trade_feedback.to_alipay_dict()
@@ -126,8 +165,14 @@ class AlipaySecurityRiskJointdecisionTradeSendModel(object):
         o = AlipaySecurityRiskJointdecisionTradeSendModel()
         if 'out_trade_no' in d:
             o.out_trade_no = d['out_trade_no']
+        if 'payee_account' in d:
+            o.payee_account = d['payee_account']
+        if 'payee_account_open_id' in d:
+            o.payee_account_open_id = d['payee_account_open_id']
         if 'pid' in d:
             o.pid = d['pid']
+        if 'risk_custom_info' in d:
+            o.risk_custom_info = d['risk_custom_info']
         if 'risk_trade_feedback' in d:
             o.risk_trade_feedback = d['risk_trade_feedback']
         if 'risk_trade_feedback_time' in d:

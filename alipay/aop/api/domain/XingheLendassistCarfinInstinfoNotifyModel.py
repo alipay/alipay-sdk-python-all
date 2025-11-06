@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CarInfo import CarInfo
+from alipay.aop.api.domain.DMVLocation import DMVLocation
 from alipay.aop.api.domain.FileDetail import FileDetail
 from alipay.aop.api.domain.ValuationInfo import ValuationInfo
 
@@ -13,6 +14,7 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
     def __init__(self):
         self._apply_no = None
         self._car_info = None
+        self._dmv_location = None
         self._file_list = None
         self._out_apply_no = None
         self._postback_list = None
@@ -35,6 +37,16 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             self._car_info = value
         else:
             self._car_info = CarInfo.from_alipay_dict(value)
+    @property
+    def dmv_location(self):
+        return self._dmv_location
+
+    @dmv_location.setter
+    def dmv_location(self, value):
+        if isinstance(value, DMVLocation):
+            self._dmv_location = value
+        else:
+            self._dmv_location = DMVLocation.from_alipay_dict(value)
     @property
     def file_list(self):
         return self._file_list
@@ -89,6 +101,11 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
                 params['car_info'] = self.car_info.to_alipay_dict()
             else:
                 params['car_info'] = self.car_info
+        if self.dmv_location:
+            if hasattr(self.dmv_location, 'to_alipay_dict'):
+                params['dmv_location'] = self.dmv_location.to_alipay_dict()
+            else:
+                params['dmv_location'] = self.dmv_location
         if self.file_list:
             if isinstance(self.file_list, list):
                 for i in range(0, len(self.file_list)):
@@ -130,6 +147,8 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             o.apply_no = d['apply_no']
         if 'car_info' in d:
             o.car_info = d['car_info']
+        if 'dmv_location' in d:
+            o.dmv_location = d['dmv_location']
         if 'file_list' in d:
             o.file_list = d['file_list']
         if 'out_apply_no' in d:

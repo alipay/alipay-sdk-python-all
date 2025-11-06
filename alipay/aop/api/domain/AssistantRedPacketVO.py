@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AssistantRedPacketVO(object):
 
     def __init__(self):
+        self._crowd_type = None
         self._red_packet_id = None
         self._visible_users = None
 
+    @property
+    def crowd_type(self):
+        return self._crowd_type
+
+    @crowd_type.setter
+    def crowd_type(self, value):
+        self._crowd_type = value
     @property
     def red_packet_id(self):
         return self._red_packet_id
@@ -29,6 +37,11 @@ class AssistantRedPacketVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.crowd_type:
+            if hasattr(self.crowd_type, 'to_alipay_dict'):
+                params['crowd_type'] = self.crowd_type.to_alipay_dict()
+            else:
+                params['crowd_type'] = self.crowd_type
         if self.red_packet_id:
             if hasattr(self.red_packet_id, 'to_alipay_dict'):
                 params['red_packet_id'] = self.red_packet_id.to_alipay_dict()
@@ -46,6 +59,8 @@ class AssistantRedPacketVO(object):
         if not d:
             return None
         o = AssistantRedPacketVO()
+        if 'crowd_type' in d:
+            o.crowd_type = d['crowd_type']
         if 'red_packet_id' in d:
             o.red_packet_id = d['red_packet_id']
         if 'visible_users' in d:

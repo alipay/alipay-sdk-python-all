@@ -12,6 +12,7 @@ class BreakCostsInfo(object):
         self._break_costs_seven_days = None
         self._damages_rate = None
         self._damages_type = None
+        self._damages_value = None
         self._no_break_costs_flag = None
         self._no_break_costs_unit = None
         self._no_break_costs_value = None
@@ -44,6 +45,13 @@ class BreakCostsInfo(object):
     @damages_type.setter
     def damages_type(self, value):
         self._damages_type = value
+    @property
+    def damages_value(self):
+        return self._damages_value
+
+    @damages_value.setter
+    def damages_value(self, value):
+        self._damages_value = value
     @property
     def no_break_costs_flag(self):
         return self._no_break_costs_flag
@@ -89,6 +97,11 @@ class BreakCostsInfo(object):
                 params['damages_type'] = self.damages_type.to_alipay_dict()
             else:
                 params['damages_type'] = self.damages_type
+        if self.damages_value:
+            if hasattr(self.damages_value, 'to_alipay_dict'):
+                params['damages_value'] = self.damages_value.to_alipay_dict()
+            else:
+                params['damages_value'] = self.damages_value
         if self.no_break_costs_flag:
             if hasattr(self.no_break_costs_flag, 'to_alipay_dict'):
                 params['no_break_costs_flag'] = self.no_break_costs_flag.to_alipay_dict()
@@ -119,6 +132,8 @@ class BreakCostsInfo(object):
             o.damages_rate = d['damages_rate']
         if 'damages_type' in d:
             o.damages_type = d['damages_type']
+        if 'damages_value' in d:
+            o.damages_value = d['damages_value']
         if 'no_break_costs_flag' in d:
             o.no_break_costs_flag = d['no_break_costs_flag']
         if 'no_break_costs_unit' in d:

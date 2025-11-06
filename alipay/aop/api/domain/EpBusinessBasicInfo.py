@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EpIndustryModel import EpIndustryModel
+from alipay.aop.api.domain.ZmEpRegistrationPlaceInfo import ZmEpRegistrationPlaceInfo
 from alipay.aop.api.domain.EpStockInfo import EpStockInfo
 
 
@@ -37,6 +38,7 @@ class EpBusinessBasicInfo(object):
         self._register_status = None
         self._registr_id = None
         self._registration_capital = None
+        self._registration_place = None
         self._revocation_date = None
         self._sanitized_name = None
         self._sent_company_name = None
@@ -245,6 +247,16 @@ class EpBusinessBasicInfo(object):
     @registration_capital.setter
     def registration_capital(self, value):
         self._registration_capital = value
+    @property
+    def registration_place(self):
+        return self._registration_place
+
+    @registration_place.setter
+    def registration_place(self, value):
+        if isinstance(value, ZmEpRegistrationPlaceInfo):
+            self._registration_place = value
+        else:
+            self._registration_place = ZmEpRegistrationPlaceInfo.from_alipay_dict(value)
     @property
     def revocation_date(self):
         return self._revocation_date
@@ -479,6 +491,11 @@ class EpBusinessBasicInfo(object):
                 params['registration_capital'] = self.registration_capital.to_alipay_dict()
             else:
                 params['registration_capital'] = self.registration_capital
+        if self.registration_place:
+            if hasattr(self.registration_place, 'to_alipay_dict'):
+                params['registration_place'] = self.registration_place.to_alipay_dict()
+            else:
+                params['registration_place'] = self.registration_place
         if self.revocation_date:
             if hasattr(self.revocation_date, 'to_alipay_dict'):
                 params['revocation_date'] = self.revocation_date.to_alipay_dict()
@@ -605,6 +622,8 @@ class EpBusinessBasicInfo(object):
             o.registr_id = d['registr_id']
         if 'registration_capital' in d:
             o.registration_capital = d['registration_capital']
+        if 'registration_place' in d:
+            o.registration_place = d['registration_place']
         if 'revocation_date' in d:
             o.revocation_date = d['revocation_date']
         if 'sanitized_name' in d:

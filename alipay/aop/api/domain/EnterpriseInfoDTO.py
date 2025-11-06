@@ -23,6 +23,7 @@ class EnterpriseInfoDTO(object):
         self._gmt_modified = None
         self._iot_group_id = None
         self._iot_logic_group_id = None
+        self._out_biz_no = None
         self._platform_code = None
         self._platform_out_id = None
         self._sign_status = None
@@ -134,6 +135,13 @@ class EnterpriseInfoDTO(object):
     def iot_logic_group_id(self, value):
         self._iot_logic_group_id = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def platform_code(self):
         return self._platform_code
 
@@ -240,6 +248,11 @@ class EnterpriseInfoDTO(object):
                 params['iot_logic_group_id'] = self.iot_logic_group_id.to_alipay_dict()
             else:
                 params['iot_logic_group_id'] = self.iot_logic_group_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.platform_code:
             if hasattr(self.platform_code, 'to_alipay_dict'):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
@@ -297,6 +310,8 @@ class EnterpriseInfoDTO(object):
             o.iot_group_id = d['iot_group_id']
         if 'iot_logic_group_id' in d:
             o.iot_logic_group_id = d['iot_logic_group_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
         if 'platform_out_id' in d:

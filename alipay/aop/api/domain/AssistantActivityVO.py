@@ -11,6 +11,7 @@ class AssistantActivityVO(object):
         self._action_name = None
         self._action_url = None
         self._crowd_code = None
+        self._crowd_type = None
         self._desc = None
         self._image_id = None
         self._title = None
@@ -36,6 +37,13 @@ class AssistantActivityVO(object):
     @crowd_code.setter
     def crowd_code(self, value):
         self._crowd_code = value
+    @property
+    def crowd_type(self):
+        return self._crowd_type
+
+    @crowd_type.setter
+    def crowd_type(self, value):
+        self._crowd_type = value
     @property
     def desc(self):
         return self._desc
@@ -76,6 +84,11 @@ class AssistantActivityVO(object):
                 params['crowd_code'] = self.crowd_code.to_alipay_dict()
             else:
                 params['crowd_code'] = self.crowd_code
+        if self.crowd_type:
+            if hasattr(self.crowd_type, 'to_alipay_dict'):
+                params['crowd_type'] = self.crowd_type.to_alipay_dict()
+            else:
+                params['crowd_type'] = self.crowd_type
         if self.desc:
             if hasattr(self.desc, 'to_alipay_dict'):
                 params['desc'] = self.desc.to_alipay_dict()
@@ -104,6 +117,8 @@ class AssistantActivityVO(object):
             o.action_url = d['action_url']
         if 'crowd_code' in d:
             o.crowd_code = d['crowd_code']
+        if 'crowd_type' in d:
+            o.crowd_type = d['crowd_type']
         if 'desc' in d:
             o.desc = d['desc']
         if 'image_id' in d:

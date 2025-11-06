@@ -15,6 +15,7 @@ from alipay.aop.api.domain.RentPromoInfoVO import RentPromoInfoVO
 from alipay.aop.api.domain.RentAftersaleOrderVO import RentAftersaleOrderVO
 from alipay.aop.api.domain.RentOrderPayInfoVO import RentOrderPayInfoVO
 from alipay.aop.api.domain.RentPlanInfoVO import RentPlanInfoVO
+from alipay.aop.api.domain.RentRefundInfoVO import RentRefundInfoVO
 from alipay.aop.api.domain.RentSignInfoVO import RentSignInfoVO
 from alipay.aop.api.domain.RentOrderStatementInfoVO import RentOrderStatementInfoVO
 from alipay.aop.api.domain.RentSubMerchantVO import RentSubMerchantVO
@@ -45,6 +46,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._rent_aftersale_orders = None
         self._rent_pay_infos = None
         self._rent_plan_info = None
+        self._rent_refund_infos = None
         self._rent_sign_info = None
         self._rent_statement_infos = None
         self._settle_type = None
@@ -241,6 +243,19 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         else:
             self._rent_plan_info = RentPlanInfoVO.from_alipay_dict(value)
     @property
+    def rent_refund_infos(self):
+        return self._rent_refund_infos
+
+    @rent_refund_infos.setter
+    def rent_refund_infos(self, value):
+        if isinstance(value, list):
+            self._rent_refund_infos = list()
+            for i in value:
+                if isinstance(i, RentRefundInfoVO):
+                    self._rent_refund_infos.append(i)
+                else:
+                    self._rent_refund_infos.append(RentRefundInfoVO.from_alipay_dict(i))
+    @property
     def rent_sign_info(self):
         return self._rent_sign_info
 
@@ -367,6 +382,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.rent_pay_infos = response['rent_pay_infos']
         if 'rent_plan_info' in response:
             self.rent_plan_info = response['rent_plan_info']
+        if 'rent_refund_infos' in response:
+            self.rent_refund_infos = response['rent_refund_infos']
         if 'rent_sign_info' in response:
             self.rent_sign_info = response['rent_sign_info']
         if 'rent_statement_infos' in response:

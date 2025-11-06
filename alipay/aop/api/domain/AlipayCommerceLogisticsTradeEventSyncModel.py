@@ -14,6 +14,7 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
         self._incentive_code = None
         self._logistics_code = None
         self._material_type = None
+        self._only_record = None
         self._operation_source = None
         self._order_no = None
         self._pay_open_id = None
@@ -62,6 +63,13 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
     @material_type.setter
     def material_type(self, value):
         self._material_type = value
+    @property
+    def only_record(self):
+        return self._only_record
+
+    @only_record.setter
+    def only_record(self, value):
+        self._only_record = value
     @property
     def operation_source(self):
         return self._operation_source
@@ -131,6 +139,11 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
                 params['material_type'] = self.material_type.to_alipay_dict()
             else:
                 params['material_type'] = self.material_type
+        if self.only_record:
+            if hasattr(self.only_record, 'to_alipay_dict'):
+                params['only_record'] = self.only_record.to_alipay_dict()
+            else:
+                params['only_record'] = self.only_record
         if self.operation_source:
             if hasattr(self.operation_source, 'to_alipay_dict'):
                 params['operation_source'] = self.operation_source.to_alipay_dict()
@@ -175,6 +188,8 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
             o.logistics_code = d['logistics_code']
         if 'material_type' in d:
             o.material_type = d['material_type']
+        if 'only_record' in d:
+            o.only_record = d['only_record']
         if 'operation_source' in d:
             o.operation_source = d['operation_source']
         if 'order_no' in d:

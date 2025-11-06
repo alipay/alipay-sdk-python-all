@@ -11,6 +11,7 @@ class ZmEpAePrepayExtParam(object):
         self._gmt_audit = None
         self._pay_time = None
         self._ship_time = None
+        self._tenant_site = None
 
     @property
     def gmt_audit(self):
@@ -33,6 +34,13 @@ class ZmEpAePrepayExtParam(object):
     @ship_time.setter
     def ship_time(self, value):
         self._ship_time = value
+    @property
+    def tenant_site(self):
+        return self._tenant_site
+
+    @tenant_site.setter
+    def tenant_site(self, value):
+        self._tenant_site = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class ZmEpAePrepayExtParam(object):
                 params['ship_time'] = self.ship_time.to_alipay_dict()
             else:
                 params['ship_time'] = self.ship_time
+        if self.tenant_site:
+            if hasattr(self.tenant_site, 'to_alipay_dict'):
+                params['tenant_site'] = self.tenant_site.to_alipay_dict()
+            else:
+                params['tenant_site'] = self.tenant_site
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class ZmEpAePrepayExtParam(object):
             o.pay_time = d['pay_time']
         if 'ship_time' in d:
             o.ship_time = d['ship_time']
+        if 'tenant_site' in d:
+            o.tenant_site = d['tenant_site']
         return o
 
 

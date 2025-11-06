@@ -39,6 +39,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._status = None
         self._supplement_category_list = None
         self._supplement_info_flag = None
+        self._supplement_reason = None
+        self._support_lend_before_mortgage = None
         self._user_tier = None
         self._valuate_price = None
 
@@ -254,6 +256,20 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def supplement_info_flag(self, value):
         self._supplement_info_flag = value
     @property
+    def supplement_reason(self):
+        return self._supplement_reason
+
+    @supplement_reason.setter
+    def supplement_reason(self, value):
+        self._supplement_reason = value
+    @property
+    def support_lend_before_mortgage(self):
+        return self._support_lend_before_mortgage
+
+    @support_lend_before_mortgage.setter
+    def support_lend_before_mortgage(self, value):
+        self._support_lend_before_mortgage = value
+    @property
     def user_tier(self):
         return self._user_tier
 
@@ -421,6 +437,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['supplement_info_flag'] = self.supplement_info_flag.to_alipay_dict()
             else:
                 params['supplement_info_flag'] = self.supplement_info_flag
+        if self.supplement_reason:
+            if hasattr(self.supplement_reason, 'to_alipay_dict'):
+                params['supplement_reason'] = self.supplement_reason.to_alipay_dict()
+            else:
+                params['supplement_reason'] = self.supplement_reason
+        if self.support_lend_before_mortgage:
+            if hasattr(self.support_lend_before_mortgage, 'to_alipay_dict'):
+                params['support_lend_before_mortgage'] = self.support_lend_before_mortgage.to_alipay_dict()
+            else:
+                params['support_lend_before_mortgage'] = self.support_lend_before_mortgage
         if self.user_tier:
             if hasattr(self.user_tier, 'to_alipay_dict'):
                 params['user_tier'] = self.user_tier.to_alipay_dict()
@@ -494,6 +520,10 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.supplement_category_list = d['supplement_category_list']
         if 'supplement_info_flag' in d:
             o.supplement_info_flag = d['supplement_info_flag']
+        if 'supplement_reason' in d:
+            o.supplement_reason = d['supplement_reason']
+        if 'support_lend_before_mortgage' in d:
+            o.support_lend_before_mortgage = d['support_lend_before_mortgage']
         if 'user_tier' in d:
             o.user_tier = d['user_tier']
         if 'valuate_price' in d:

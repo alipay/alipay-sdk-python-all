@@ -28,6 +28,7 @@ class CallRecord(object):
         self._release_time = None
         self._ring_time = None
         self._start_time = None
+        self._summary = None
         self._talk_time = None
 
     @property
@@ -171,6 +172,13 @@ class CallRecord(object):
     def start_time(self, value):
         self._start_time = value
     @property
+    def summary(self):
+        return self._summary
+
+    @summary.setter
+    def summary(self, value):
+        self._summary = value
+    @property
     def talk_time(self):
         return self._talk_time
 
@@ -281,6 +289,11 @@ class CallRecord(object):
                 params['start_time'] = self.start_time.to_alipay_dict()
             else:
                 params['start_time'] = self.start_time
+        if self.summary:
+            if hasattr(self.summary, 'to_alipay_dict'):
+                params['summary'] = self.summary.to_alipay_dict()
+            else:
+                params['summary'] = self.summary
         if self.talk_time:
             if hasattr(self.talk_time, 'to_alipay_dict'):
                 params['talk_time'] = self.talk_time.to_alipay_dict()
@@ -333,6 +346,8 @@ class CallRecord(object):
             o.ring_time = d['ring_time']
         if 'start_time' in d:
             o.start_time = d['start_time']
+        if 'summary' in d:
+            o.summary = d['summary']
         if 'talk_time' in d:
             o.talk_time = d['talk_time']
         return o

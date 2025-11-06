@@ -11,8 +11,12 @@ class AlipayCircularZftIndirectCreateModel(object):
 
     def __init__(self):
         self._binding_alipay_logon_id = None
+        self._cert_name = None
+        self._cert_no = None
         self._contact_info = None
         self._default_settle_rule = None
+        self._legal_cert_no = None
+        self._legal_name = None
         self._scene_code = None
 
     @property
@@ -22,6 +26,20 @@ class AlipayCircularZftIndirectCreateModel(object):
     @binding_alipay_logon_id.setter
     def binding_alipay_logon_id(self, value):
         self._binding_alipay_logon_id = value
+    @property
+    def cert_name(self):
+        return self._cert_name
+
+    @cert_name.setter
+    def cert_name(self, value):
+        self._cert_name = value
+    @property
+    def cert_no(self):
+        return self._cert_no
+
+    @cert_no.setter
+    def cert_no(self, value):
+        self._cert_no = value
     @property
     def contact_info(self):
         return self._contact_info
@@ -43,6 +61,20 @@ class AlipayCircularZftIndirectCreateModel(object):
         else:
             self._default_settle_rule = ZftDefaultSettleRule.from_alipay_dict(value)
     @property
+    def legal_cert_no(self):
+        return self._legal_cert_no
+
+    @legal_cert_no.setter
+    def legal_cert_no(self, value):
+        self._legal_cert_no = value
+    @property
+    def legal_name(self):
+        return self._legal_name
+
+    @legal_name.setter
+    def legal_name(self, value):
+        self._legal_name = value
+    @property
     def scene_code(self):
         return self._scene_code
 
@@ -58,6 +90,16 @@ class AlipayCircularZftIndirectCreateModel(object):
                 params['binding_alipay_logon_id'] = self.binding_alipay_logon_id.to_alipay_dict()
             else:
                 params['binding_alipay_logon_id'] = self.binding_alipay_logon_id
+        if self.cert_name:
+            if hasattr(self.cert_name, 'to_alipay_dict'):
+                params['cert_name'] = self.cert_name.to_alipay_dict()
+            else:
+                params['cert_name'] = self.cert_name
+        if self.cert_no:
+            if hasattr(self.cert_no, 'to_alipay_dict'):
+                params['cert_no'] = self.cert_no.to_alipay_dict()
+            else:
+                params['cert_no'] = self.cert_no
         if self.contact_info:
             if hasattr(self.contact_info, 'to_alipay_dict'):
                 params['contact_info'] = self.contact_info.to_alipay_dict()
@@ -68,6 +110,16 @@ class AlipayCircularZftIndirectCreateModel(object):
                 params['default_settle_rule'] = self.default_settle_rule.to_alipay_dict()
             else:
                 params['default_settle_rule'] = self.default_settle_rule
+        if self.legal_cert_no:
+            if hasattr(self.legal_cert_no, 'to_alipay_dict'):
+                params['legal_cert_no'] = self.legal_cert_no.to_alipay_dict()
+            else:
+                params['legal_cert_no'] = self.legal_cert_no
+        if self.legal_name:
+            if hasattr(self.legal_name, 'to_alipay_dict'):
+                params['legal_name'] = self.legal_name.to_alipay_dict()
+            else:
+                params['legal_name'] = self.legal_name
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -82,10 +134,18 @@ class AlipayCircularZftIndirectCreateModel(object):
         o = AlipayCircularZftIndirectCreateModel()
         if 'binding_alipay_logon_id' in d:
             o.binding_alipay_logon_id = d['binding_alipay_logon_id']
+        if 'cert_name' in d:
+            o.cert_name = d['cert_name']
+        if 'cert_no' in d:
+            o.cert_no = d['cert_no']
         if 'contact_info' in d:
             o.contact_info = d['contact_info']
         if 'default_settle_rule' in d:
             o.default_settle_rule = d['default_settle_rule']
+        if 'legal_cert_no' in d:
+            o.legal_cert_no = d['legal_cert_no']
+        if 'legal_name' in d:
+            o.legal_name = d['legal_name']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         return o

@@ -13,6 +13,7 @@ class AlipayCircularAgreementSignModel(object):
         self._relation_openid = None
         self._relation_uid = None
         self._scene_code = None
+        self._sign_channel = None
 
     @property
     def bind_wallet_id(self):
@@ -49,6 +50,13 @@ class AlipayCircularAgreementSignModel(object):
     @scene_code.setter
     def scene_code(self, value):
         self._scene_code = value
+    @property
+    def sign_channel(self):
+        return self._sign_channel
+
+    @sign_channel.setter
+    def sign_channel(self, value):
+        self._sign_channel = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class AlipayCircularAgreementSignModel(object):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
             else:
                 params['scene_code'] = self.scene_code
+        if self.sign_channel:
+            if hasattr(self.sign_channel, 'to_alipay_dict'):
+                params['sign_channel'] = self.sign_channel.to_alipay_dict()
+            else:
+                params['sign_channel'] = self.sign_channel
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class AlipayCircularAgreementSignModel(object):
             o.relation_uid = d['relation_uid']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
+        if 'sign_channel' in d:
+            o.sign_channel = d['sign_channel']
         return o
 
 

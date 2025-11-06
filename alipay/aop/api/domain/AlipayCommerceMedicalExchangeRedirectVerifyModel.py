@@ -12,8 +12,10 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
         self._biz_no = None
         self._exchange_code = None
         self._open_id = None
+        self._out_service_start_time = None
         self._phone = None
         self._renew = None
+        self._service_end_time = None
         self._user_id = None
 
     @property
@@ -45,6 +47,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def out_service_start_time(self):
+        return self._out_service_start_time
+
+    @out_service_start_time.setter
+    def out_service_start_time(self, value):
+        self._out_service_start_time = value
+    @property
     def phone(self):
         return self._phone
 
@@ -58,6 +67,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
     @renew.setter
     def renew(self, value):
         self._renew = value
+    @property
+    def service_end_time(self):
+        return self._service_end_time
+
+    @service_end_time.setter
+    def service_end_time(self, value):
+        self._service_end_time = value
     @property
     def user_id(self):
         return self._user_id
@@ -89,6 +105,11 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.out_service_start_time:
+            if hasattr(self.out_service_start_time, 'to_alipay_dict'):
+                params['out_service_start_time'] = self.out_service_start_time.to_alipay_dict()
+            else:
+                params['out_service_start_time'] = self.out_service_start_time
         if self.phone:
             if hasattr(self.phone, 'to_alipay_dict'):
                 params['phone'] = self.phone.to_alipay_dict()
@@ -99,6 +120,11 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
                 params['renew'] = self.renew.to_alipay_dict()
             else:
                 params['renew'] = self.renew
+        if self.service_end_time:
+            if hasattr(self.service_end_time, 'to_alipay_dict'):
+                params['service_end_time'] = self.service_end_time.to_alipay_dict()
+            else:
+                params['service_end_time'] = self.service_end_time
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -119,10 +145,14 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
             o.exchange_code = d['exchange_code']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'out_service_start_time' in d:
+            o.out_service_start_time = d['out_service_start_time']
         if 'phone' in d:
             o.phone = d['phone']
         if 'renew' in d:
             o.renew = d['renew']
+        if 'service_end_time' in d:
+            o.service_end_time = d['service_end_time']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

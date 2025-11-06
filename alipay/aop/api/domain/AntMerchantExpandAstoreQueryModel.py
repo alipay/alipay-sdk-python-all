@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class AntMerchantExpandAstoreQueryModel(object):
+
+    def __init__(self):
+        self._a_store_id = None
+        self._out_biz_no = None
+
+    @property
+    def a_store_id(self):
+        return self._a_store_id
+
+    @a_store_id.setter
+    def a_store_id(self, value):
+        self._a_store_id = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.a_store_id:
+            if hasattr(self.a_store_id, 'to_alipay_dict'):
+                params['a_store_id'] = self.a_store_id.to_alipay_dict()
+            else:
+                params['a_store_id'] = self.a_store_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = AntMerchantExpandAstoreQueryModel()
+        if 'a_store_id' in d:
+            o.a_store_id = d['a_store_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
+        return o
+
+

@@ -10,9 +10,13 @@ class CarInfo(object):
     def __init__(self):
         self._address = None
         self._car_brand = None
+        self._car_brand_id = None
         self._car_license = None
+        self._car_model_source = None
         self._car_series = None
+        self._car_series_id = None
         self._car_type = None
+        self._car_type_id = None
         self._car_vin = None
         self._engine_no = None
         self._first_register_date = None
@@ -34,12 +38,26 @@ class CarInfo(object):
     def car_brand(self, value):
         self._car_brand = value
     @property
+    def car_brand_id(self):
+        return self._car_brand_id
+
+    @car_brand_id.setter
+    def car_brand_id(self, value):
+        self._car_brand_id = value
+    @property
     def car_license(self):
         return self._car_license
 
     @car_license.setter
     def car_license(self, value):
         self._car_license = value
+    @property
+    def car_model_source(self):
+        return self._car_model_source
+
+    @car_model_source.setter
+    def car_model_source(self, value):
+        self._car_model_source = value
     @property
     def car_series(self):
         return self._car_series
@@ -48,12 +66,26 @@ class CarInfo(object):
     def car_series(self, value):
         self._car_series = value
     @property
+    def car_series_id(self):
+        return self._car_series_id
+
+    @car_series_id.setter
+    def car_series_id(self, value):
+        self._car_series_id = value
+    @property
     def car_type(self):
         return self._car_type
 
     @car_type.setter
     def car_type(self, value):
         self._car_type = value
+    @property
+    def car_type_id(self):
+        return self._car_type_id
+
+    @car_type_id.setter
+    def car_type_id(self, value):
+        self._car_type_id = value
     @property
     def car_vin(self):
         return self._car_vin
@@ -103,21 +135,41 @@ class CarInfo(object):
                 params['car_brand'] = self.car_brand.to_alipay_dict()
             else:
                 params['car_brand'] = self.car_brand
+        if self.car_brand_id:
+            if hasattr(self.car_brand_id, 'to_alipay_dict'):
+                params['car_brand_id'] = self.car_brand_id.to_alipay_dict()
+            else:
+                params['car_brand_id'] = self.car_brand_id
         if self.car_license:
             if hasattr(self.car_license, 'to_alipay_dict'):
                 params['car_license'] = self.car_license.to_alipay_dict()
             else:
                 params['car_license'] = self.car_license
+        if self.car_model_source:
+            if hasattr(self.car_model_source, 'to_alipay_dict'):
+                params['car_model_source'] = self.car_model_source.to_alipay_dict()
+            else:
+                params['car_model_source'] = self.car_model_source
         if self.car_series:
             if hasattr(self.car_series, 'to_alipay_dict'):
                 params['car_series'] = self.car_series.to_alipay_dict()
             else:
                 params['car_series'] = self.car_series
+        if self.car_series_id:
+            if hasattr(self.car_series_id, 'to_alipay_dict'):
+                params['car_series_id'] = self.car_series_id.to_alipay_dict()
+            else:
+                params['car_series_id'] = self.car_series_id
         if self.car_type:
             if hasattr(self.car_type, 'to_alipay_dict'):
                 params['car_type'] = self.car_type.to_alipay_dict()
             else:
                 params['car_type'] = self.car_type
+        if self.car_type_id:
+            if hasattr(self.car_type_id, 'to_alipay_dict'):
+                params['car_type_id'] = self.car_type_id.to_alipay_dict()
+            else:
+                params['car_type_id'] = self.car_type_id
         if self.car_vin:
             if hasattr(self.car_vin, 'to_alipay_dict'):
                 params['car_vin'] = self.car_vin.to_alipay_dict()
@@ -154,12 +206,20 @@ class CarInfo(object):
             o.address = d['address']
         if 'car_brand' in d:
             o.car_brand = d['car_brand']
+        if 'car_brand_id' in d:
+            o.car_brand_id = d['car_brand_id']
         if 'car_license' in d:
             o.car_license = d['car_license']
+        if 'car_model_source' in d:
+            o.car_model_source = d['car_model_source']
         if 'car_series' in d:
             o.car_series = d['car_series']
+        if 'car_series_id' in d:
+            o.car_series_id = d['car_series_id']
         if 'car_type' in d:
             o.car_type = d['car_type']
+        if 'car_type_id' in d:
+            o.car_type_id = d['car_type_id']
         if 'car_vin' in d:
             o.car_vin = d['car_vin']
         if 'engine_no' in d:

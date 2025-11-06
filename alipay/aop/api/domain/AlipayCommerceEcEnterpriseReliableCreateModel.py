@@ -12,6 +12,7 @@ class AlipayCommerceEcEnterpriseReliableCreateModel(object):
     def __init__(self):
         self._base_info = None
         self._identity = None
+        self._identity_open_id = None
         self._identity_type = None
         self._out_biz_no = None
         self._profiles = None
@@ -33,6 +34,13 @@ class AlipayCommerceEcEnterpriseReliableCreateModel(object):
     @identity.setter
     def identity(self, value):
         self._identity = value
+    @property
+    def identity_open_id(self):
+        return self._identity_open_id
+
+    @identity_open_id.setter
+    def identity_open_id(self, value):
+        self._identity_open_id = value
     @property
     def identity_type(self):
         return self._identity_type
@@ -71,6 +79,11 @@ class AlipayCommerceEcEnterpriseReliableCreateModel(object):
                 params['identity'] = self.identity.to_alipay_dict()
             else:
                 params['identity'] = self.identity
+        if self.identity_open_id:
+            if hasattr(self.identity_open_id, 'to_alipay_dict'):
+                params['identity_open_id'] = self.identity_open_id.to_alipay_dict()
+            else:
+                params['identity_open_id'] = self.identity_open_id
         if self.identity_type:
             if hasattr(self.identity_type, 'to_alipay_dict'):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
@@ -97,6 +110,8 @@ class AlipayCommerceEcEnterpriseReliableCreateModel(object):
             o.base_info = d['base_info']
         if 'identity' in d:
             o.identity = d['identity']
+        if 'identity_open_id' in d:
+            o.identity_open_id = d['identity_open_id']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
         if 'out_biz_no' in d:

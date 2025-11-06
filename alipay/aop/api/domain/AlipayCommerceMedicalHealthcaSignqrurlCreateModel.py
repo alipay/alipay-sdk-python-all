@@ -14,6 +14,7 @@ class AlipayCommerceMedicalHealthcaSignqrurlCreateModel(object):
         self._pos_page = None
         self._pos_x = None
         self._pos_y = None
+        self._redirect_url = None
         self._request_id = None
         self._seal_height = None
         self._seal_width = None
@@ -63,6 +64,13 @@ class AlipayCommerceMedicalHealthcaSignqrurlCreateModel(object):
     @pos_y.setter
     def pos_y(self, value):
         self._pos_y = value
+    @property
+    def redirect_url(self):
+        return self._redirect_url
+
+    @redirect_url.setter
+    def redirect_url(self, value):
+        self._redirect_url = value
     @property
     def request_id(self):
         return self._request_id
@@ -139,6 +147,11 @@ class AlipayCommerceMedicalHealthcaSignqrurlCreateModel(object):
                 params['pos_y'] = self.pos_y.to_alipay_dict()
             else:
                 params['pos_y'] = self.pos_y
+        if self.redirect_url:
+            if hasattr(self.redirect_url, 'to_alipay_dict'):
+                params['redirect_url'] = self.redirect_url.to_alipay_dict()
+            else:
+                params['redirect_url'] = self.redirect_url
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -188,6 +201,8 @@ class AlipayCommerceMedicalHealthcaSignqrurlCreateModel(object):
             o.pos_x = d['pos_x']
         if 'pos_y' in d:
             o.pos_y = d['pos_y']
+        if 'redirect_url' in d:
+            o.redirect_url = d['redirect_url']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'seal_height' in d:
