@@ -29,7 +29,7 @@ Created on 5/23/2018
 @author: antopen
 """
 PACKAGE = "alipay"
-NAME = "alipay-sdk-python"
+NAME = "alipay_sdk_python"
 DESCRIPTION = "The official Aliyun SDK for Python."
 AUTHOR = "antopen"
 AUTHOR_EMAIL = "antopen@aliyun.com"
