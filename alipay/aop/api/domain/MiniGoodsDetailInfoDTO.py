@@ -43,6 +43,7 @@ class MiniGoodsDetailInfoDTO(object):
         self._sale_price = None
         self._sale_real_price = None
         self._show_url = None
+        self._submit_order_callback_item_ext_str = None
         self._ticket_info = None
 
     @property
@@ -266,6 +267,13 @@ class MiniGoodsDetailInfoDTO(object):
     def show_url(self, value):
         self._show_url = value
     @property
+    def submit_order_callback_item_ext_str(self):
+        return self._submit_order_callback_item_ext_str
+
+    @submit_order_callback_item_ext_str.setter
+    def submit_order_callback_item_ext_str(self, value):
+        self._submit_order_callback_item_ext_str = value
+    @property
     def ticket_info(self):
         return self._ticket_info
 
@@ -429,6 +437,11 @@ class MiniGoodsDetailInfoDTO(object):
                 params['show_url'] = self.show_url.to_alipay_dict()
             else:
                 params['show_url'] = self.show_url
+        if self.submit_order_callback_item_ext_str:
+            if hasattr(self.submit_order_callback_item_ext_str, 'to_alipay_dict'):
+                params['submit_order_callback_item_ext_str'] = self.submit_order_callback_item_ext_str.to_alipay_dict()
+            else:
+                params['submit_order_callback_item_ext_str'] = self.submit_order_callback_item_ext_str
         if self.ticket_info:
             if hasattr(self.ticket_info, 'to_alipay_dict'):
                 params['ticket_info'] = self.ticket_info.to_alipay_dict()
@@ -497,6 +510,8 @@ class MiniGoodsDetailInfoDTO(object):
             o.sale_real_price = d['sale_real_price']
         if 'show_url' in d:
             o.show_url = d['show_url']
+        if 'submit_order_callback_item_ext_str' in d:
+            o.submit_order_callback_item_ext_str = d['submit_order_callback_item_ext_str']
         if 'ticket_info' in d:
             o.ticket_info = d['ticket_info']
         return o

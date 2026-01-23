@@ -14,6 +14,7 @@ class BenefitActionComponent(object):
         self._longitude = None
         self._out_biz_no = None
         self._out_biz_type = None
+        self._send_price = None
         self._skip_voucher_info = None
         self._source = None
 
@@ -59,6 +60,13 @@ class BenefitActionComponent(object):
     @out_biz_type.setter
     def out_biz_type(self, value):
         self._out_biz_type = value
+    @property
+    def send_price(self):
+        return self._send_price
+
+    @send_price.setter
+    def send_price(self, value):
+        self._send_price = value
     @property
     def skip_voucher_info(self):
         return self._skip_voucher_info
@@ -107,6 +115,11 @@ class BenefitActionComponent(object):
                 params['out_biz_type'] = self.out_biz_type.to_alipay_dict()
             else:
                 params['out_biz_type'] = self.out_biz_type
+        if self.send_price:
+            if hasattr(self.send_price, 'to_alipay_dict'):
+                params['send_price'] = self.send_price.to_alipay_dict()
+            else:
+                params['send_price'] = self.send_price
         if self.skip_voucher_info:
             if hasattr(self.skip_voucher_info, 'to_alipay_dict'):
                 params['skip_voucher_info'] = self.skip_voucher_info.to_alipay_dict()
@@ -136,6 +149,8 @@ class BenefitActionComponent(object):
             o.out_biz_no = d['out_biz_no']
         if 'out_biz_type' in d:
             o.out_biz_type = d['out_biz_type']
+        if 'send_price' in d:
+            o.send_price = d['send_price']
         if 'skip_voucher_info' in d:
             o.skip_voucher_info = d['skip_voucher_info']
         if 'source' in d:

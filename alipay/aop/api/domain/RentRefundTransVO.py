@@ -10,6 +10,7 @@ class RentRefundTransVO(object):
 
     def __init__(self):
         self._out_request_no = None
+        self._real_refund_time = None
         self._refund_amount = None
         self._refund_items = None
         self._status = None
@@ -21,6 +22,13 @@ class RentRefundTransVO(object):
     @out_request_no.setter
     def out_request_no(self, value):
         self._out_request_no = value
+    @property
+    def real_refund_time(self):
+        return self._real_refund_time
+
+    @real_refund_time.setter
+    def real_refund_time(self, value):
+        self._real_refund_time = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -57,6 +65,11 @@ class RentRefundTransVO(object):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
             else:
                 params['out_request_no'] = self.out_request_no
+        if self.real_refund_time:
+            if hasattr(self.real_refund_time, 'to_alipay_dict'):
+                params['real_refund_time'] = self.real_refund_time.to_alipay_dict()
+            else:
+                params['real_refund_time'] = self.real_refund_time
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -86,6 +99,8 @@ class RentRefundTransVO(object):
         o = RentRefundTransVO()
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
+        if 'real_refund_time' in d:
+            o.real_refund_time = d['real_refund_time']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_items' in d:

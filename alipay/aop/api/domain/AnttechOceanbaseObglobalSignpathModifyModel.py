@@ -10,6 +10,7 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
     def __init__(self):
         self._alicloud_settlement_mode = None
         self._approval_status = None
+        self._based_on_agency_agreement_flag = None
         self._final_customer_sign_other_party_subject_id = None
         self._final_customer_sign_other_party_subject_name = None
         self._general_agent_cooperation_type = None
@@ -19,6 +20,7 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
         self._modifier = None
         self._ob_sign_other_party_subject_id = None
         self._ob_sign_other_party_subject_name = None
+        self._our_sign_subject = None
         self._sign_path = None
 
     @property
@@ -35,6 +37,13 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
     @approval_status.setter
     def approval_status(self, value):
         self._approval_status = value
+    @property
+    def based_on_agency_agreement_flag(self):
+        return self._based_on_agency_agreement_flag
+
+    @based_on_agency_agreement_flag.setter
+    def based_on_agency_agreement_flag(self, value):
+        self._based_on_agency_agreement_flag = value
     @property
     def final_customer_sign_other_party_subject_id(self):
         return self._final_customer_sign_other_party_subject_id
@@ -99,6 +108,13 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
     def ob_sign_other_party_subject_name(self, value):
         self._ob_sign_other_party_subject_name = value
     @property
+    def our_sign_subject(self):
+        return self._our_sign_subject
+
+    @our_sign_subject.setter
+    def our_sign_subject(self, value):
+        self._our_sign_subject = value
+    @property
     def sign_path(self):
         return self._sign_path
 
@@ -119,6 +135,11 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
                 params['approval_status'] = self.approval_status.to_alipay_dict()
             else:
                 params['approval_status'] = self.approval_status
+        if self.based_on_agency_agreement_flag:
+            if hasattr(self.based_on_agency_agreement_flag, 'to_alipay_dict'):
+                params['based_on_agency_agreement_flag'] = self.based_on_agency_agreement_flag.to_alipay_dict()
+            else:
+                params['based_on_agency_agreement_flag'] = self.based_on_agency_agreement_flag
         if self.final_customer_sign_other_party_subject_id:
             if hasattr(self.final_customer_sign_other_party_subject_id, 'to_alipay_dict'):
                 params['final_customer_sign_other_party_subject_id'] = self.final_customer_sign_other_party_subject_id.to_alipay_dict()
@@ -164,6 +185,11 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
                 params['ob_sign_other_party_subject_name'] = self.ob_sign_other_party_subject_name.to_alipay_dict()
             else:
                 params['ob_sign_other_party_subject_name'] = self.ob_sign_other_party_subject_name
+        if self.our_sign_subject:
+            if hasattr(self.our_sign_subject, 'to_alipay_dict'):
+                params['our_sign_subject'] = self.our_sign_subject.to_alipay_dict()
+            else:
+                params['our_sign_subject'] = self.our_sign_subject
         if self.sign_path:
             if hasattr(self.sign_path, 'to_alipay_dict'):
                 params['sign_path'] = self.sign_path.to_alipay_dict()
@@ -180,6 +206,8 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
             o.alicloud_settlement_mode = d['alicloud_settlement_mode']
         if 'approval_status' in d:
             o.approval_status = d['approval_status']
+        if 'based_on_agency_agreement_flag' in d:
+            o.based_on_agency_agreement_flag = d['based_on_agency_agreement_flag']
         if 'final_customer_sign_other_party_subject_id' in d:
             o.final_customer_sign_other_party_subject_id = d['final_customer_sign_other_party_subject_id']
         if 'final_customer_sign_other_party_subject_name' in d:
@@ -198,6 +226,8 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
             o.ob_sign_other_party_subject_id = d['ob_sign_other_party_subject_id']
         if 'ob_sign_other_party_subject_name' in d:
             o.ob_sign_other_party_subject_name = d['ob_sign_other_party_subject_name']
+        if 'our_sign_subject' in d:
+            o.our_sign_subject = d['our_sign_subject']
         if 'sign_path' in d:
             o.sign_path = d['sign_path']
         return o

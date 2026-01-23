@@ -13,6 +13,7 @@ class AlipayOpenSpInteopOrderQueryResponse(AlipayResponse):
         self._inteop_order_no = None
         self._inteop_order_status = None
         self._inteop_sub_order_infos = None
+        self._merchant_oid = None
         self._wp_qr_code = None
         self._wp_qr_code_img_url = None
         self._wp_web_link = None
@@ -45,6 +46,13 @@ class AlipayOpenSpInteopOrderQueryResponse(AlipayResponse):
                 else:
                     self._inteop_sub_order_infos.append(InteOpSubOrderInfo.from_alipay_dict(i))
     @property
+    def merchant_oid(self):
+        return self._merchant_oid
+
+    @merchant_oid.setter
+    def merchant_oid(self, value):
+        self._merchant_oid = value
+    @property
     def wp_qr_code(self):
         return self._wp_qr_code
 
@@ -74,6 +82,8 @@ class AlipayOpenSpInteopOrderQueryResponse(AlipayResponse):
             self.inteop_order_status = response['inteop_order_status']
         if 'inteop_sub_order_infos' in response:
             self.inteop_sub_order_infos = response['inteop_sub_order_infos']
+        if 'merchant_oid' in response:
+            self.merchant_oid = response['merchant_oid']
         if 'wp_qr_code' in response:
             self.wp_qr_code = response['wp_qr_code']
         if 'wp_qr_code_img_url' in response:

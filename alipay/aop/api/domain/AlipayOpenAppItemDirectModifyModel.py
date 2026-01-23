@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
 from alipay.aop.api.domain.ItemDirectModifySku import ItemDirectModifySku
 
 
@@ -11,6 +12,7 @@ class AlipayOpenAppItemDirectModifyModel(object):
 
     def __init__(self):
         self._attrs = None
+        self._guide_info = None
         self._item_id = None
         self._original_price = None
         self._out_item_id = None
@@ -32,6 +34,19 @@ class AlipayOpenAppItemDirectModifyModel(object):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
     @property
     def item_id(self):
         return self._item_id
@@ -101,6 +116,16 @@ class AlipayOpenAppItemDirectModifyModel(object):
                 params['attrs'] = self.attrs.to_alipay_dict()
             else:
                 params['attrs'] = self.attrs
+        if self.guide_info:
+            if isinstance(self.guide_info, list):
+                for i in range(0, len(self.guide_info)):
+                    element = self.guide_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.guide_info[i] = element.to_alipay_dict()
+            if hasattr(self.guide_info, 'to_alipay_dict'):
+                params['guide_info'] = self.guide_info.to_alipay_dict()
+            else:
+                params['guide_info'] = self.guide_info
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -150,6 +175,8 @@ class AlipayOpenAppItemDirectModifyModel(object):
         o = AlipayOpenAppItemDirectModifyModel()
         if 'attrs' in d:
             o.attrs = d['attrs']
+        if 'guide_info' in d:
+            o.guide_info = d['guide_info']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'original_price' in d:

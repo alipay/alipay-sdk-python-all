@@ -9,6 +9,7 @@ from alipay.aop.api.domain.RentOrderDeliveryInfoVO import RentOrderDeliveryInfoV
 from alipay.aop.api.domain.RentOrderExtendInfoVO import RentOrderExtendInfoVO
 from alipay.aop.api.domain.RentFastAuditInfoVO import RentFastAuditInfoVO
 from alipay.aop.api.domain.RentGoodsDetailInfoVO import RentGoodsDetailInfoVO
+from alipay.aop.api.domain.RentOfflineShoppingVO import RentOfflineShoppingVO
 from alipay.aop.api.domain.RentPathInfoVO import RentPathInfoVO
 from alipay.aop.api.domain.RentOrderPriceInfoVO import RentOrderPriceInfoVO
 from alipay.aop.api.domain.RentPromoInfoVO import RentPromoInfoVO
@@ -18,6 +19,7 @@ from alipay.aop.api.domain.RentPlanInfoVO import RentPlanInfoVO
 from alipay.aop.api.domain.RentRefundInfoVO import RentRefundInfoVO
 from alipay.aop.api.domain.RentSignInfoVO import RentSignInfoVO
 from alipay.aop.api.domain.RentOrderStatementInfoVO import RentOrderStatementInfoVO
+from alipay.aop.api.domain.RentServiceTicketInfo import RentServiceTicketInfo
 from alipay.aop.api.domain.RentSubMerchantVO import RentSubMerchantVO
 from alipay.aop.api.domain.RentFulfillmentDeliveryInfoVO import RentFulfillmentDeliveryInfoVO
 
@@ -36,10 +38,12 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._fast_audit_info = None
         self._item_infos = None
         self._memo = None
+        self._offline_shopping_info = None
         self._order_create_time = None
         self._order_id = None
         self._order_type = None
         self._out_order_id = None
+        self._outer_order_source = None
         self._path_info = None
         self._price_info = None
         self._promo_info = None
@@ -49,6 +53,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._rent_refund_infos = None
         self._rent_sign_info = None
         self._rent_statement_infos = None
+        self._service_ticket_infos = None
         self._settle_type = None
         self._status = None
         self._sub_merchant = None
@@ -149,6 +154,16 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
     def memo(self, value):
         self._memo = value
     @property
+    def offline_shopping_info(self):
+        return self._offline_shopping_info
+
+    @offline_shopping_info.setter
+    def offline_shopping_info(self, value):
+        if isinstance(value, RentOfflineShoppingVO):
+            self._offline_shopping_info = value
+        else:
+            self._offline_shopping_info = RentOfflineShoppingVO.from_alipay_dict(value)
+    @property
     def order_create_time(self):
         return self._order_create_time
 
@@ -176,6 +191,13 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
     @out_order_id.setter
     def out_order_id(self, value):
         self._out_order_id = value
+    @property
+    def outer_order_source(self):
+        return self._outer_order_source
+
+    @outer_order_source.setter
+    def outer_order_source(self, value):
+        self._outer_order_source = value
     @property
     def path_info(self):
         return self._path_info
@@ -279,6 +301,19 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
                 else:
                     self._rent_statement_infos.append(RentOrderStatementInfoVO.from_alipay_dict(i))
     @property
+    def service_ticket_infos(self):
+        return self._service_ticket_infos
+
+    @service_ticket_infos.setter
+    def service_ticket_infos(self, value):
+        if isinstance(value, list):
+            self._service_ticket_infos = list()
+            for i in value:
+                if isinstance(i, RentServiceTicketInfo):
+                    self._service_ticket_infos.append(i)
+                else:
+                    self._service_ticket_infos.append(RentServiceTicketInfo.from_alipay_dict(i))
+    @property
     def settle_type(self):
         return self._settle_type
 
@@ -362,6 +397,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.item_infos = response['item_infos']
         if 'memo' in response:
             self.memo = response['memo']
+        if 'offline_shopping_info' in response:
+            self.offline_shopping_info = response['offline_shopping_info']
         if 'order_create_time' in response:
             self.order_create_time = response['order_create_time']
         if 'order_id' in response:
@@ -370,6 +407,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.order_type = response['order_type']
         if 'out_order_id' in response:
             self.out_order_id = response['out_order_id']
+        if 'outer_order_source' in response:
+            self.outer_order_source = response['outer_order_source']
         if 'path_info' in response:
             self.path_info = response['path_info']
         if 'price_info' in response:
@@ -388,6 +427,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.rent_sign_info = response['rent_sign_info']
         if 'rent_statement_infos' in response:
             self.rent_statement_infos = response['rent_statement_infos']
+        if 'service_ticket_infos' in response:
+            self.service_ticket_infos = response['service_ticket_infos']
         if 'settle_type' in response:
             self.settle_type = response['settle_type']
         if 'status' in response:

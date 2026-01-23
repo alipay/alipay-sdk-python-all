@@ -33,6 +33,7 @@ class MerchantCardTemplate(object):
         self._msg_app_id = None
         self._need_order_agreement = None
         self._online_sale_switch = None
+        self._online_show_switch = None
         self._out_card_id = None
         self._reject_reasons = None
         self._sale_info = None
@@ -194,6 +195,13 @@ class MerchantCardTemplate(object):
     @online_sale_switch.setter
     def online_sale_switch(self, value):
         self._online_sale_switch = value
+    @property
+    def online_show_switch(self):
+        return self._online_show_switch
+
+    @online_show_switch.setter
+    def online_show_switch(self, value):
+        self._online_show_switch = value
     @property
     def out_card_id(self):
         return self._out_card_id
@@ -382,6 +390,11 @@ class MerchantCardTemplate(object):
                 params['online_sale_switch'] = self.online_sale_switch.to_alipay_dict()
             else:
                 params['online_sale_switch'] = self.online_sale_switch
+        if self.online_show_switch:
+            if hasattr(self.online_show_switch, 'to_alipay_dict'):
+                params['online_show_switch'] = self.online_show_switch.to_alipay_dict()
+            else:
+                params['online_show_switch'] = self.online_show_switch
         if self.out_card_id:
             if hasattr(self.out_card_id, 'to_alipay_dict'):
                 params['out_card_id'] = self.out_card_id.to_alipay_dict()
@@ -465,6 +478,8 @@ class MerchantCardTemplate(object):
             o.need_order_agreement = d['need_order_agreement']
         if 'online_sale_switch' in d:
             o.online_sale_switch = d['online_sale_switch']
+        if 'online_show_switch' in d:
+            o.online_show_switch = d['online_show_switch']
         if 'out_card_id' in d:
             o.out_card_id = d['out_card_id']
         if 'reject_reasons' in d:

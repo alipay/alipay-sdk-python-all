@@ -15,6 +15,7 @@ from alipay.aop.api.domain.RentReletInfoDTO import RentReletInfoDTO
 from alipay.aop.api.domain.RentPlanInfoDTO import RentPlanInfoDTO
 from alipay.aop.api.domain.RentSignInfoDTO import RentSignInfoDTO
 from alipay.aop.api.domain.RentSubMerchantDTO import RentSubMerchantDTO
+from alipay.aop.api.domain.RentSupplementaryInfoDTO import RentSupplementaryInfoDTO
 from alipay.aop.api.domain.RentZstInfoDTO import RentZstInfoDTO
 
 
@@ -34,6 +35,7 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._offline_shopping_info = None
         self._order_type = None
         self._out_order_id = None
+        self._outer_order_source = None
         self._parent_order_id = None
         self._path_info = None
         self._price_info = None
@@ -43,6 +45,7 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._service_provider_model = None
         self._source_id = None
         self._sub_merchant = None
+        self._supplementary_info = None
         self._title = None
         self._trade_app_id = None
         self._zst_info = None
@@ -160,6 +163,13 @@ class AlipayCommerceRentOrderCreateModel(object):
     def out_order_id(self, value):
         self._out_order_id = value
     @property
+    def outer_order_source(self):
+        return self._outer_order_source
+
+    @outer_order_source.setter
+    def outer_order_source(self, value):
+        self._outer_order_source = value
+    @property
     def parent_order_id(self):
         return self._parent_order_id
 
@@ -240,6 +250,16 @@ class AlipayCommerceRentOrderCreateModel(object):
             self._sub_merchant = value
         else:
             self._sub_merchant = RentSubMerchantDTO.from_alipay_dict(value)
+    @property
+    def supplementary_info(self):
+        return self._supplementary_info
+
+    @supplementary_info.setter
+    def supplementary_info(self, value):
+        if isinstance(value, RentSupplementaryInfoDTO):
+            self._supplementary_info = value
+        else:
+            self._supplementary_info = RentSupplementaryInfoDTO.from_alipay_dict(value)
     @property
     def title(self):
         return self._title
@@ -338,6 +358,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.outer_order_source:
+            if hasattr(self.outer_order_source, 'to_alipay_dict'):
+                params['outer_order_source'] = self.outer_order_source.to_alipay_dict()
+            else:
+                params['outer_order_source'] = self.outer_order_source
         if self.parent_order_id:
             if hasattr(self.parent_order_id, 'to_alipay_dict'):
                 params['parent_order_id'] = self.parent_order_id.to_alipay_dict()
@@ -383,6 +408,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
             else:
                 params['sub_merchant'] = self.sub_merchant
+        if self.supplementary_info:
+            if hasattr(self.supplementary_info, 'to_alipay_dict'):
+                params['supplementary_info'] = self.supplementary_info.to_alipay_dict()
+            else:
+                params['supplementary_info'] = self.supplementary_info
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -431,6 +461,8 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.order_type = d['order_type']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'outer_order_source' in d:
+            o.outer_order_source = d['outer_order_source']
         if 'parent_order_id' in d:
             o.parent_order_id = d['parent_order_id']
         if 'path_info' in d:
@@ -449,6 +481,8 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.source_id = d['source_id']
         if 'sub_merchant' in d:
             o.sub_merchant = d['sub_merchant']
+        if 'supplementary_info' in d:
+            o.supplementary_info = d['supplementary_info']
         if 'title' in d:
             o.title = d['title']
         if 'trade_app_id' in d:

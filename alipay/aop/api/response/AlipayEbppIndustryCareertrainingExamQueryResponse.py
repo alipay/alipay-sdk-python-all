@@ -10,6 +10,7 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppIndustryCareertrainingExamQueryResponse, self).__init__()
+        self._audit_status = None
         self._certificate_code_list = None
         self._city_code_list = None
         self._description = None
@@ -20,6 +21,7 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
         self._exam_status = None
         self._exam_time_notes = None
         self._head_image_list = None
+        self._industry_show_status = None
         self._max_price = None
         self._min_price = None
         self._org_code = None
@@ -32,6 +34,13 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
         self._remark = None
         self._service_url = None
 
+    @property
+    def audit_status(self):
+        return self._audit_status
+
+    @audit_status.setter
+    def audit_status(self, value):
+        self._audit_status = value
     @property
     def certificate_code_list(self):
         return self._certificate_code_list
@@ -118,6 +127,13 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
             for i in value:
                 self._head_image_list.append(i)
     @property
+    def industry_show_status(self):
+        return self._industry_show_status
+
+    @industry_show_status.setter
+    def industry_show_status(self, value):
+        self._industry_show_status = value
+    @property
     def max_price(self):
         return self._max_price
 
@@ -197,6 +213,8 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppIndustryCareertrainingExamQueryResponse, self).parse_response_content(response_content)
+        if 'audit_status' in response:
+            self.audit_status = response['audit_status']
         if 'certificate_code_list' in response:
             self.certificate_code_list = response['certificate_code_list']
         if 'city_code_list' in response:
@@ -217,6 +235,8 @@ class AlipayEbppIndustryCareertrainingExamQueryResponse(AlipayResponse):
             self.exam_time_notes = response['exam_time_notes']
         if 'head_image_list' in response:
             self.head_image_list = response['head_image_list']
+        if 'industry_show_status' in response:
+            self.industry_show_status = response['industry_show_status']
         if 'max_price' in response:
             self.max_price = response['max_price']
         if 'min_price' in response:

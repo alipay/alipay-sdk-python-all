@@ -19,6 +19,7 @@ class RentGoodsDetailInfoDTO(object):
         self._item_fineness = None
         self._item_fineness_grade = None
         self._item_name = None
+        self._item_type = None
         self._item_value = None
         self._out_item_id = None
         self._out_sku_id = None
@@ -106,6 +107,13 @@ class RentGoodsDetailInfoDTO(object):
     @item_name.setter
     def item_name(self, value):
         self._item_name = value
+    @property
+    def item_type(self):
+        return self._item_type
+
+    @item_type.setter
+    def item_type(self, value):
+        self._item_type = value
     @property
     def item_value(self):
         return self._item_value
@@ -212,6 +220,11 @@ class RentGoodsDetailInfoDTO(object):
                 params['item_name'] = self.item_name.to_alipay_dict()
             else:
                 params['item_name'] = self.item_name
+        if self.item_type:
+            if hasattr(self.item_type, 'to_alipay_dict'):
+                params['item_type'] = self.item_type.to_alipay_dict()
+            else:
+                params['item_type'] = self.item_type
         if self.item_value:
             if hasattr(self.item_value, 'to_alipay_dict'):
                 params['item_value'] = self.item_value.to_alipay_dict()
@@ -271,6 +284,8 @@ class RentGoodsDetailInfoDTO(object):
             o.item_fineness_grade = d['item_fineness_grade']
         if 'item_name' in d:
             o.item_name = d['item_name']
+        if 'item_type' in d:
+            o.item_type = d['item_type']
         if 'item_value' in d:
             o.item_value = d['item_value']
         if 'out_item_id' in d:

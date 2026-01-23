@@ -11,6 +11,7 @@ class TourOrderSyncDetail(object):
     def __init__(self):
         self._biz_source_num = None
         self._cert_no = None
+        self._cert_type = None
         self._name = None
         self._order_amount = None
         self._order_info = None
@@ -36,6 +37,13 @@ class TourOrderSyncDetail(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def name(self):
         return self._name
@@ -126,6 +134,11 @@ class TourOrderSyncDetail(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -192,6 +205,8 @@ class TourOrderSyncDetail(object):
             o.biz_source_num = d['biz_source_num']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'name' in d:
             o.name = d['name']
         if 'order_amount' in d:

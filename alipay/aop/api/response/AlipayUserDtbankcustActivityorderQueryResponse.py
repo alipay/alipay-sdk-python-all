@@ -13,6 +13,7 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
         self._activity_order_id = None
         self._out_biz_no = None
         self._status = None
+        self._voucher_id = None
 
     @property
     def activity_id(self):
@@ -42,6 +43,13 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def voucher_id(self):
+        return self._voucher_id
+
+    @voucher_id.setter
+    def voucher_id(self, value):
+        self._voucher_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayUserDtbankcustActivityorderQueryResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
             self.out_biz_no = response['out_biz_no']
         if 'status' in response:
             self.status = response['status']
+        if 'voucher_id' in response:
+            self.voucher_id = response['voucher_id']

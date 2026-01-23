@@ -18,6 +18,8 @@ class DeliveryTrack(object):
         self._receiver_longitude = None
         self._remaining_delivery_minutes = None
         self._remaining_distance_km = None
+        self._shop_latitude = None
+        self._shop_longitude = None
 
     @property
     def arrive_timeslot(self):
@@ -85,6 +87,20 @@ class DeliveryTrack(object):
     @remaining_distance_km.setter
     def remaining_distance_km(self, value):
         self._remaining_distance_km = value
+    @property
+    def shop_latitude(self):
+        return self._shop_latitude
+
+    @shop_latitude.setter
+    def shop_latitude(self, value):
+        self._shop_latitude = value
+    @property
+    def shop_longitude(self):
+        return self._shop_longitude
+
+    @shop_longitude.setter
+    def shop_longitude(self, value):
+        self._shop_longitude = value
 
 
     def to_alipay_dict(self):
@@ -134,6 +150,16 @@ class DeliveryTrack(object):
                 params['remaining_distance_km'] = self.remaining_distance_km.to_alipay_dict()
             else:
                 params['remaining_distance_km'] = self.remaining_distance_km
+        if self.shop_latitude:
+            if hasattr(self.shop_latitude, 'to_alipay_dict'):
+                params['shop_latitude'] = self.shop_latitude.to_alipay_dict()
+            else:
+                params['shop_latitude'] = self.shop_latitude
+        if self.shop_longitude:
+            if hasattr(self.shop_longitude, 'to_alipay_dict'):
+                params['shop_longitude'] = self.shop_longitude.to_alipay_dict()
+            else:
+                params['shop_longitude'] = self.shop_longitude
         return params
 
     @staticmethod
@@ -159,6 +185,10 @@ class DeliveryTrack(object):
             o.remaining_delivery_minutes = d['remaining_delivery_minutes']
         if 'remaining_distance_km' in d:
             o.remaining_distance_km = d['remaining_distance_km']
+        if 'shop_latitude' in d:
+            o.shop_latitude = d['shop_latitude']
+        if 'shop_longitude' in d:
+            o.shop_longitude = d['shop_longitude']
         return o
 
 

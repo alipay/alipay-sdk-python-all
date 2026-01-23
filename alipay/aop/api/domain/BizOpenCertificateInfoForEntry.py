@@ -10,8 +10,8 @@ class BizOpenCertificateInfoForEntry(object):
     def __init__(self):
         self._cert_name = None
         self._cert_no = None
-        self._cert_pic_url_type = None
-        self._cert_pic_urls = None
+        self._cert_pic_type = None
+        self._cert_pics = None
         self._cert_type = None
         self._gmt_invalid = None
         self._gmt_valid = None
@@ -31,22 +31,22 @@ class BizOpenCertificateInfoForEntry(object):
     def cert_no(self, value):
         self._cert_no = value
     @property
-    def cert_pic_url_type(self):
-        return self._cert_pic_url_type
+    def cert_pic_type(self):
+        return self._cert_pic_type
 
-    @cert_pic_url_type.setter
-    def cert_pic_url_type(self, value):
-        self._cert_pic_url_type = value
+    @cert_pic_type.setter
+    def cert_pic_type(self, value):
+        self._cert_pic_type = value
     @property
-    def cert_pic_urls(self):
-        return self._cert_pic_urls
+    def cert_pics(self):
+        return self._cert_pics
 
-    @cert_pic_urls.setter
-    def cert_pic_urls(self, value):
+    @cert_pics.setter
+    def cert_pics(self, value):
         if isinstance(value, list):
-            self._cert_pic_urls = list()
+            self._cert_pics = list()
             for i in value:
-                self._cert_pic_urls.append(i)
+                self._cert_pics.append(i)
     @property
     def cert_type(self):
         return self._cert_type
@@ -82,21 +82,21 @@ class BizOpenCertificateInfoForEntry(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
-        if self.cert_pic_url_type:
-            if hasattr(self.cert_pic_url_type, 'to_alipay_dict'):
-                params['cert_pic_url_type'] = self.cert_pic_url_type.to_alipay_dict()
+        if self.cert_pic_type:
+            if hasattr(self.cert_pic_type, 'to_alipay_dict'):
+                params['cert_pic_type'] = self.cert_pic_type.to_alipay_dict()
             else:
-                params['cert_pic_url_type'] = self.cert_pic_url_type
-        if self.cert_pic_urls:
-            if isinstance(self.cert_pic_urls, list):
-                for i in range(0, len(self.cert_pic_urls)):
-                    element = self.cert_pic_urls[i]
+                params['cert_pic_type'] = self.cert_pic_type
+        if self.cert_pics:
+            if isinstance(self.cert_pics, list):
+                for i in range(0, len(self.cert_pics)):
+                    element = self.cert_pics[i]
                     if hasattr(element, 'to_alipay_dict'):
-                        self.cert_pic_urls[i] = element.to_alipay_dict()
-            if hasattr(self.cert_pic_urls, 'to_alipay_dict'):
-                params['cert_pic_urls'] = self.cert_pic_urls.to_alipay_dict()
+                        self.cert_pics[i] = element.to_alipay_dict()
+            if hasattr(self.cert_pics, 'to_alipay_dict'):
+                params['cert_pics'] = self.cert_pics.to_alipay_dict()
             else:
-                params['cert_pic_urls'] = self.cert_pic_urls
+                params['cert_pics'] = self.cert_pics
         if self.cert_type:
             if hasattr(self.cert_type, 'to_alipay_dict'):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
@@ -123,10 +123,10 @@ class BizOpenCertificateInfoForEntry(object):
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
-        if 'cert_pic_url_type' in d:
-            o.cert_pic_url_type = d['cert_pic_url_type']
-        if 'cert_pic_urls' in d:
-            o.cert_pic_urls = d['cert_pic_urls']
+        if 'cert_pic_type' in d:
+            o.cert_pic_type = d['cert_pic_type']
+        if 'cert_pics' in d:
+            o.cert_pics = d['cert_pics']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
         if 'gmt_invalid' in d:

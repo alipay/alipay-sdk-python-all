@@ -9,9 +9,17 @@ from alipay.aop.api.domain.GFAOpenAPIReverseBillAcceptance import GFAOpenAPIReve
 class AlipayBossFncGfacceptanceBillReverseModel(object):
 
     def __init__(self):
+        self._open_id = None
         self._principal_id = None
         self._reverse_bill_acceptance = None
 
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def principal_id(self):
         return self._principal_id
@@ -33,6 +41,11 @@ class AlipayBossFncGfacceptanceBillReverseModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.principal_id:
             if hasattr(self.principal_id, 'to_alipay_dict'):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
@@ -50,6 +63,8 @@ class AlipayBossFncGfacceptanceBillReverseModel(object):
         if not d:
             return None
         o = AlipayBossFncGfacceptanceBillReverseModel()
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
         if 'reverse_bill_acceptance' in d:

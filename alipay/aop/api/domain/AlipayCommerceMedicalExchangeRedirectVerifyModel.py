@@ -10,6 +10,7 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
     def __init__(self):
         self._benefit_id = None
         self._biz_no = None
+        self._channel = None
         self._exchange_code = None
         self._open_id = None
         self._out_service_start_time = None
@@ -32,6 +33,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def channel(self):
+        return self._channel
+
+    @channel.setter
+    def channel(self, value):
+        self._channel = value
     @property
     def exchange_code(self):
         return self._exchange_code
@@ -95,6 +103,11 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.channel:
+            if hasattr(self.channel, 'to_alipay_dict'):
+                params['channel'] = self.channel.to_alipay_dict()
+            else:
+                params['channel'] = self.channel
         if self.exchange_code:
             if hasattr(self.exchange_code, 'to_alipay_dict'):
                 params['exchange_code'] = self.exchange_code.to_alipay_dict()
@@ -141,6 +154,8 @@ class AlipayCommerceMedicalExchangeRedirectVerifyModel(object):
             o.benefit_id = d['benefit_id']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'channel' in d:
+            o.channel = d['channel']
         if 'exchange_code' in d:
             o.exchange_code = d['exchange_code']
         if 'open_id' in d:

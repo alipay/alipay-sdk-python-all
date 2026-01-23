@@ -11,6 +11,7 @@ class VoucherRelativePeriodInfo(object):
     def __init__(self):
         self._time_restrict_info = None
         self._valid_days_after_receive = None
+        self._valid_days_relative_type = None
         self._wait_days_after_receive = None
 
     @property
@@ -30,6 +31,13 @@ class VoucherRelativePeriodInfo(object):
     @valid_days_after_receive.setter
     def valid_days_after_receive(self, value):
         self._valid_days_after_receive = value
+    @property
+    def valid_days_relative_type(self):
+        return self._valid_days_relative_type
+
+    @valid_days_relative_type.setter
+    def valid_days_relative_type(self, value):
+        self._valid_days_relative_type = value
     @property
     def wait_days_after_receive(self):
         return self._wait_days_after_receive
@@ -51,6 +59,11 @@ class VoucherRelativePeriodInfo(object):
                 params['valid_days_after_receive'] = self.valid_days_after_receive.to_alipay_dict()
             else:
                 params['valid_days_after_receive'] = self.valid_days_after_receive
+        if self.valid_days_relative_type:
+            if hasattr(self.valid_days_relative_type, 'to_alipay_dict'):
+                params['valid_days_relative_type'] = self.valid_days_relative_type.to_alipay_dict()
+            else:
+                params['valid_days_relative_type'] = self.valid_days_relative_type
         if self.wait_days_after_receive:
             if hasattr(self.wait_days_after_receive, 'to_alipay_dict'):
                 params['wait_days_after_receive'] = self.wait_days_after_receive.to_alipay_dict()
@@ -67,6 +80,8 @@ class VoucherRelativePeriodInfo(object):
             o.time_restrict_info = d['time_restrict_info']
         if 'valid_days_after_receive' in d:
             o.valid_days_after_receive = d['valid_days_after_receive']
+        if 'valid_days_relative_type' in d:
+            o.valid_days_relative_type = d['valid_days_relative_type']
         if 'wait_days_after_receive' in d:
             o.wait_days_after_receive = d['wait_days_after_receive']
         return o

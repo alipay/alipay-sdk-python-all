@@ -10,6 +10,8 @@ class AlipayCommerceTransportOrderauthTokenApplyResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceTransportOrderauthTokenApplyResponse, self).__init__()
         self._industry_auth_token = None
+        self._open_id = None
+        self._user_id = None
 
     @property
     def industry_auth_token(self):
@@ -18,8 +20,26 @@ class AlipayCommerceTransportOrderauthTokenApplyResponse(AlipayResponse):
     @industry_auth_token.setter
     def industry_auth_token(self, value):
         self._industry_auth_token = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceTransportOrderauthTokenApplyResponse, self).parse_response_content(response_content)
         if 'industry_auth_token' in response:
             self.industry_auth_token = response['industry_auth_token']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
+        if 'user_id' in response:
+            self.user_id = response['user_id']

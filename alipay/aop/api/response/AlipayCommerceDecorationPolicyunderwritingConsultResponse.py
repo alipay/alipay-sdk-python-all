@@ -12,10 +12,13 @@ class AlipayCommerceDecorationPolicyunderwritingConsultResponse(AlipayResponse):
         super(AlipayCommerceDecorationPolicyunderwritingConsultResponse, self).__init__()
         self._message = None
         self._order_no = None
+        self._out_order_no = None
         self._policy_end_date = None
         self._policy_start_date = None
         self._policy_status = None
         self._premium = None
+        self._product_code = None
+        self._project_id = None
         self._sub_order_no_list = None
         self._total_premium = None
 
@@ -33,6 +36,13 @@ class AlipayCommerceDecorationPolicyunderwritingConsultResponse(AlipayResponse):
     @order_no.setter
     def order_no(self, value):
         self._order_no = value
+    @property
+    def out_order_no(self):
+        return self._out_order_no
+
+    @out_order_no.setter
+    def out_order_no(self, value):
+        self._out_order_no = value
     @property
     def policy_end_date(self):
         return self._policy_end_date
@@ -62,6 +72,20 @@ class AlipayCommerceDecorationPolicyunderwritingConsultResponse(AlipayResponse):
     def premium(self, value):
         self._premium = value
     @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
+    def project_id(self):
+        return self._project_id
+
+    @project_id.setter
+    def project_id(self, value):
+        self._project_id = value
+    @property
     def sub_order_no_list(self):
         return self._sub_order_no_list
 
@@ -88,6 +112,8 @@ class AlipayCommerceDecorationPolicyunderwritingConsultResponse(AlipayResponse):
             self.message = response['message']
         if 'order_no' in response:
             self.order_no = response['order_no']
+        if 'out_order_no' in response:
+            self.out_order_no = response['out_order_no']
         if 'policy_end_date' in response:
             self.policy_end_date = response['policy_end_date']
         if 'policy_start_date' in response:
@@ -96,6 +122,10 @@ class AlipayCommerceDecorationPolicyunderwritingConsultResponse(AlipayResponse):
             self.policy_status = response['policy_status']
         if 'premium' in response:
             self.premium = response['premium']
+        if 'product_code' in response:
+            self.product_code = response['product_code']
+        if 'project_id' in response:
+            self.project_id = response['project_id']
         if 'sub_order_no_list' in response:
             self.sub_order_no_list = response['sub_order_no_list']
         if 'total_premium' in response:

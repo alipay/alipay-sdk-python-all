@@ -12,6 +12,7 @@ class InpatientRecord(object):
         self._data_id = None
         self._days = None
         self._department_name = None
+        self._discharge_date = None
         self._hospital_name = None
         self._in_date = None
         self._recovery_date = None
@@ -43,6 +44,13 @@ class InpatientRecord(object):
     @department_name.setter
     def department_name(self, value):
         self._department_name = value
+    @property
+    def discharge_date(self):
+        return self._discharge_date
+
+    @discharge_date.setter
+    def discharge_date(self, value):
+        self._discharge_date = value
     @property
     def hospital_name(self):
         return self._hospital_name
@@ -128,6 +136,11 @@ class InpatientRecord(object):
                 params['department_name'] = self.department_name.to_alipay_dict()
             else:
                 params['department_name'] = self.department_name
+        if self.discharge_date:
+            if hasattr(self.discharge_date, 'to_alipay_dict'):
+                params['discharge_date'] = self.discharge_date.to_alipay_dict()
+            else:
+                params['discharge_date'] = self.discharge_date
         if self.hospital_name:
             if hasattr(self.hospital_name, 'to_alipay_dict'):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
@@ -186,6 +199,8 @@ class InpatientRecord(object):
             o.days = d['days']
         if 'department_name' in d:
             o.department_name = d['department_name']
+        if 'discharge_date' in d:
+            o.discharge_date = d['discharge_date']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
         if 'in_date' in d:

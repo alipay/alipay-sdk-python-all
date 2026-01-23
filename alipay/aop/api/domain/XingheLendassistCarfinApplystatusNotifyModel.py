@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Credit import Credit
 from alipay.aop.api.domain.CarfinStatusNotifyOther import CarfinStatusNotifyOther
+from alipay.aop.api.domain.CarfinLendServiceInfo import CarfinLendServiceInfo
 from alipay.aop.api.domain.SupplementCategoryInfo import SupplementCategoryInfo
 
 
@@ -36,6 +37,7 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
         self._refuse_msg = None
         self._repay_type = None
         self._service_fee_rate = None
+        self._service_info = None
         self._status = None
         self._supplement_category_list = None
         self._supplement_info_flag = None
@@ -229,6 +231,16 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
     def service_fee_rate(self, value):
         self._service_fee_rate = value
     @property
+    def service_info(self):
+        return self._service_info
+
+    @service_info.setter
+    def service_info(self, value):
+        if isinstance(value, CarfinLendServiceInfo):
+            self._service_info = value
+        else:
+            self._service_info = CarfinLendServiceInfo.from_alipay_dict(value)
+    @property
     def status(self):
         return self._status
 
@@ -417,6 +429,11 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
                 params['service_fee_rate'] = self.service_fee_rate.to_alipay_dict()
             else:
                 params['service_fee_rate'] = self.service_fee_rate
+        if self.service_info:
+            if hasattr(self.service_info, 'to_alipay_dict'):
+                params['service_info'] = self.service_info.to_alipay_dict()
+            else:
+                params['service_info'] = self.service_info
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -514,6 +531,8 @@ class XingheLendassistCarfinApplystatusNotifyModel(object):
             o.repay_type = d['repay_type']
         if 'service_fee_rate' in d:
             o.service_fee_rate = d['service_fee_rate']
+        if 'service_info' in d:
+            o.service_info = d['service_info']
         if 'status' in d:
             o.status = d['status']
         if 'supplement_category_list' in d:

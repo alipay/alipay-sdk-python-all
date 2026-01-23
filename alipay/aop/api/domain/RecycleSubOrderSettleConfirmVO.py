@@ -9,6 +9,7 @@ class RecycleSubOrderSettleConfirmVO(object):
 
     def __init__(self):
         self._sub_order_id = None
+        self._sub_order_inspect_price = None
         self._sub_out_order_id = None
 
     @property
@@ -18,6 +19,13 @@ class RecycleSubOrderSettleConfirmVO(object):
     @sub_order_id.setter
     def sub_order_id(self, value):
         self._sub_order_id = value
+    @property
+    def sub_order_inspect_price(self):
+        return self._sub_order_inspect_price
+
+    @sub_order_inspect_price.setter
+    def sub_order_inspect_price(self, value):
+        self._sub_order_inspect_price = value
     @property
     def sub_out_order_id(self):
         return self._sub_out_order_id
@@ -34,6 +42,11 @@ class RecycleSubOrderSettleConfirmVO(object):
                 params['sub_order_id'] = self.sub_order_id.to_alipay_dict()
             else:
                 params['sub_order_id'] = self.sub_order_id
+        if self.sub_order_inspect_price:
+            if hasattr(self.sub_order_inspect_price, 'to_alipay_dict'):
+                params['sub_order_inspect_price'] = self.sub_order_inspect_price.to_alipay_dict()
+            else:
+                params['sub_order_inspect_price'] = self.sub_order_inspect_price
         if self.sub_out_order_id:
             if hasattr(self.sub_out_order_id, 'to_alipay_dict'):
                 params['sub_out_order_id'] = self.sub_out_order_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class RecycleSubOrderSettleConfirmVO(object):
         o = RecycleSubOrderSettleConfirmVO()
         if 'sub_order_id' in d:
             o.sub_order_id = d['sub_order_id']
+        if 'sub_order_inspect_price' in d:
+            o.sub_order_inspect_price = d['sub_order_inspect_price']
         if 'sub_out_order_id' in d:
             o.sub_out_order_id = d['sub_out_order_id']
         return o

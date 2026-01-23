@@ -11,6 +11,7 @@ class ZftIndirectRelation(object):
         self._memo = None
         self._relation_openid = None
         self._relation_uid = None
+        self._sign_confirm = None
         self._status = None
         self._sub_confirm = None
 
@@ -35,6 +36,13 @@ class ZftIndirectRelation(object):
     @relation_uid.setter
     def relation_uid(self, value):
         self._relation_uid = value
+    @property
+    def sign_confirm(self):
+        return self._sign_confirm
+
+    @sign_confirm.setter
+    def sign_confirm(self, value):
+        self._sign_confirm = value
     @property
     def status(self):
         return self._status
@@ -68,6 +76,11 @@ class ZftIndirectRelation(object):
                 params['relation_uid'] = self.relation_uid.to_alipay_dict()
             else:
                 params['relation_uid'] = self.relation_uid
+        if self.sign_confirm:
+            if hasattr(self.sign_confirm, 'to_alipay_dict'):
+                params['sign_confirm'] = self.sign_confirm.to_alipay_dict()
+            else:
+                params['sign_confirm'] = self.sign_confirm
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -91,6 +104,8 @@ class ZftIndirectRelation(object):
             o.relation_openid = d['relation_openid']
         if 'relation_uid' in d:
             o.relation_uid = d['relation_uid']
+        if 'sign_confirm' in d:
+            o.sign_confirm = d['sign_confirm']
         if 'status' in d:
             o.status = d['status']
         if 'sub_confirm' in d:

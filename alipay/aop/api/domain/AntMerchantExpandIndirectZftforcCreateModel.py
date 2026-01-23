@@ -15,11 +15,14 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
         self._binding_alipay_logon_id = None
         self._cert_no = None
         self._cert_type = None
+        self._city_name = None
         self._contact_infos = None
         self._external_id = None
         self._jump_back_url = None
         self._mcc = None
+        self._merchant_type_forc = None
         self._name = None
+        self._province_name = None
         self._service = None
         self._sign_time_with_isv = None
         self._sites = None
@@ -61,6 +64,13 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def city_name(self):
+        return self._city_name
+
+    @city_name.setter
+    def city_name(self, value):
+        self._city_name = value
+    @property
     def contact_infos(self):
         return self._contact_infos
 
@@ -95,12 +105,26 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
     def mcc(self, value):
         self._mcc = value
     @property
+    def merchant_type_forc(self):
+        return self._merchant_type_forc
+
+    @merchant_type_forc.setter
+    def merchant_type_forc(self, value):
+        self._merchant_type_forc = value
+    @property
     def name(self):
         return self._name
 
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def province_name(self):
+        return self._province_name
+
+    @province_name.setter
+    def province_name(self, value):
+        self._province_name = value
     @property
     def service(self):
         return self._service
@@ -167,6 +191,11 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.city_name:
+            if hasattr(self.city_name, 'to_alipay_dict'):
+                params['city_name'] = self.city_name.to_alipay_dict()
+            else:
+                params['city_name'] = self.city_name
         if self.contact_infos:
             if isinstance(self.contact_infos, list):
                 for i in range(0, len(self.contact_infos)):
@@ -192,11 +221,21 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
                 params['mcc'] = self.mcc.to_alipay_dict()
             else:
                 params['mcc'] = self.mcc
+        if self.merchant_type_forc:
+            if hasattr(self.merchant_type_forc, 'to_alipay_dict'):
+                params['merchant_type_forc'] = self.merchant_type_forc.to_alipay_dict()
+            else:
+                params['merchant_type_forc'] = self.merchant_type_forc
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.province_name:
+            if hasattr(self.province_name, 'to_alipay_dict'):
+                params['province_name'] = self.province_name.to_alipay_dict()
+            else:
+                params['province_name'] = self.province_name
         if self.service:
             if isinstance(self.service, list):
                 for i in range(0, len(self.service)):
@@ -244,6 +283,8 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'city_name' in d:
+            o.city_name = d['city_name']
         if 'contact_infos' in d:
             o.contact_infos = d['contact_infos']
         if 'external_id' in d:
@@ -252,8 +293,12 @@ class AntMerchantExpandIndirectZftforcCreateModel(object):
             o.jump_back_url = d['jump_back_url']
         if 'mcc' in d:
             o.mcc = d['mcc']
+        if 'merchant_type_forc' in d:
+            o.merchant_type_forc = d['merchant_type_forc']
         if 'name' in d:
             o.name = d['name']
+        if 'province_name' in d:
+            o.province_name = d['province_name']
         if 'service' in d:
             o.service = d['service']
         if 'sign_time_with_isv' in d:

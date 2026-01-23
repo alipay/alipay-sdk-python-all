@@ -10,6 +10,7 @@ from alipay.aop.api.domain.VideoInfo import VideoInfo
 class LandingTypeDto(object):
 
     def __init__(self):
+        self._aggregated_info_list = None
         self._landing_act = None
         self._landing_id = None
         self._landing_level = None
@@ -19,6 +20,16 @@ class LandingTypeDto(object):
         self._pic_info_list = None
         self._product_videos = None
 
+    @property
+    def aggregated_info_list(self):
+        return self._aggregated_info_list
+
+    @aggregated_info_list.setter
+    def aggregated_info_list(self, value):
+        if isinstance(value, list):
+            self._aggregated_info_list = list()
+            for i in value:
+                self._aggregated_info_list.append(i)
     @property
     def landing_act(self):
         return self._landing_act
@@ -94,6 +105,16 @@ class LandingTypeDto(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aggregated_info_list:
+            if isinstance(self.aggregated_info_list, list):
+                for i in range(0, len(self.aggregated_info_list)):
+                    element = self.aggregated_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.aggregated_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.aggregated_info_list, 'to_alipay_dict'):
+                params['aggregated_info_list'] = self.aggregated_info_list.to_alipay_dict()
+            else:
+                params['aggregated_info_list'] = self.aggregated_info_list
         if self.landing_act:
             if isinstance(self.landing_act, list):
                 for i in range(0, len(self.landing_act)):
@@ -156,6 +177,8 @@ class LandingTypeDto(object):
         if not d:
             return None
         o = LandingTypeDto()
+        if 'aggregated_info_list' in d:
+            o.aggregated_info_list = d['aggregated_info_list']
         if 'landing_act' in d:
             o.landing_act = d['landing_act']
         if 'landing_id' in d:

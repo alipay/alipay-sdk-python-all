@@ -8,16 +8,29 @@ from alipay.aop.api.constant.ParamConstants import *
 class NDeviceMetricsListForDayResponse(object):
 
     def __init__(self):
+        self._act_instructions_dvc = None
+        self._advance_plan = None
         self._alipay_amount = None
+        self._alipay_amt_2_restrict_2_order_cnt = None
         self._alipay_transaction_count = None
+        self._be_access_my_tiny_cmd_td = None
+        self._be_change_device = None
+        self._be_high_tpv_shop = None
         self._be_lighted_up = None
         self._be_register = None
+        self._be_special_shop = None
         self._be_turnon_device = None
+        self._be_unified_collect = None
         self._binding_location = None
+        self._change_device_sn = None
+        self._change_device_time = None
         self._city_code = None
         self._city_name = None
+        self._cont_non_turnon_days_mtd = None
+        self._cur_bind_status = None
         self._device_system = None
         self._device_type = None
+        self._digital_poi_id = None
         self._district_code = None
         self._district_name = None
         self._do_check_in = None
@@ -26,12 +39,14 @@ class NDeviceMetricsListForDayResponse(object):
         self._effective_turnon_device = None
         self._has_nfc_trade = None
         self._has_nfc_trade_greater_2 = None
+        self._instructions_work_time = None
         self._last_30_checkin_days = None
         self._last_30_sales_over_2_days = None
         self._last_30_valid_boot_days = None
         self._last_7_checkin_days = None
         self._leads_location = None
         self._leads_location_address = None
+        self._leads_poi_id = None
         self._leads_worker_id = None
         self._leads_worker_name = None
         self._light_up_time = None
@@ -39,9 +54,13 @@ class NDeviceMetricsListForDayResponse(object):
         self._metrics_date = None
         self._micro_command_active_7_day = None
         self._nfc_amount = None
+        self._nfc_amt_2_days_last_bind_30_d = None
+        self._nfc_amt_2_restrict_2_order_cnt = None
+        self._nfc_amt_2_user_cnt_last_bind_30_d = None
         self._nfc_trade_greater_2 = None
         self._nfc_transaction_count = None
         self._open_id = None
+        self._poi_first_sign_time = None
         self._province_code = None
         self._province_name = None
         self._real_consume_fee = None
@@ -50,15 +69,34 @@ class NDeviceMetricsListForDayResponse(object):
         self._refund_order_cnt = None
         self._register_time = None
         self._shipping_time = None
+        self._sign_days_last_bind_30_d = None
+        self._sign_days_last_bind_7_d = None
         self._sn = None
         self._store_first_sale_1_yuan_date = None
         self._store_id = None
         self._total_lighted_months = None
         self._trd_amt_2_n_user_cnt_fromlight_30_d = None
+        self._trd_amt_2_user_cnt = None
+        self._trd_amt_3_user_cnt = None
         self._trd_greater_2_nfc_device_usercnt = None
         self._trd_nfc_device_usercnt = None
         self._update_register_time = None
+        self._valid_open_days_last_bind_30_d = None
 
+    @property
+    def act_instructions_dvc(self):
+        return self._act_instructions_dvc
+
+    @act_instructions_dvc.setter
+    def act_instructions_dvc(self, value):
+        self._act_instructions_dvc = value
+    @property
+    def advance_plan(self):
+        return self._advance_plan
+
+    @advance_plan.setter
+    def advance_plan(self, value):
+        self._advance_plan = value
     @property
     def alipay_amount(self):
         return self._alipay_amount
@@ -67,12 +105,40 @@ class NDeviceMetricsListForDayResponse(object):
     def alipay_amount(self, value):
         self._alipay_amount = value
     @property
+    def alipay_amt_2_restrict_2_order_cnt(self):
+        return self._alipay_amt_2_restrict_2_order_cnt
+
+    @alipay_amt_2_restrict_2_order_cnt.setter
+    def alipay_amt_2_restrict_2_order_cnt(self, value):
+        self._alipay_amt_2_restrict_2_order_cnt = value
+    @property
     def alipay_transaction_count(self):
         return self._alipay_transaction_count
 
     @alipay_transaction_count.setter
     def alipay_transaction_count(self, value):
         self._alipay_transaction_count = value
+    @property
+    def be_access_my_tiny_cmd_td(self):
+        return self._be_access_my_tiny_cmd_td
+
+    @be_access_my_tiny_cmd_td.setter
+    def be_access_my_tiny_cmd_td(self, value):
+        self._be_access_my_tiny_cmd_td = value
+    @property
+    def be_change_device(self):
+        return self._be_change_device
+
+    @be_change_device.setter
+    def be_change_device(self, value):
+        self._be_change_device = value
+    @property
+    def be_high_tpv_shop(self):
+        return self._be_high_tpv_shop
+
+    @be_high_tpv_shop.setter
+    def be_high_tpv_shop(self, value):
+        self._be_high_tpv_shop = value
     @property
     def be_lighted_up(self):
         return self._be_lighted_up
@@ -88,6 +154,13 @@ class NDeviceMetricsListForDayResponse(object):
     def be_register(self, value):
         self._be_register = value
     @property
+    def be_special_shop(self):
+        return self._be_special_shop
+
+    @be_special_shop.setter
+    def be_special_shop(self, value):
+        self._be_special_shop = value
+    @property
     def be_turnon_device(self):
         return self._be_turnon_device
 
@@ -95,12 +168,33 @@ class NDeviceMetricsListForDayResponse(object):
     def be_turnon_device(self, value):
         self._be_turnon_device = value
     @property
+    def be_unified_collect(self):
+        return self._be_unified_collect
+
+    @be_unified_collect.setter
+    def be_unified_collect(self, value):
+        self._be_unified_collect = value
+    @property
     def binding_location(self):
         return self._binding_location
 
     @binding_location.setter
     def binding_location(self, value):
         self._binding_location = value
+    @property
+    def change_device_sn(self):
+        return self._change_device_sn
+
+    @change_device_sn.setter
+    def change_device_sn(self, value):
+        self._change_device_sn = value
+    @property
+    def change_device_time(self):
+        return self._change_device_time
+
+    @change_device_time.setter
+    def change_device_time(self, value):
+        self._change_device_time = value
     @property
     def city_code(self):
         return self._city_code
@@ -116,6 +210,20 @@ class NDeviceMetricsListForDayResponse(object):
     def city_name(self, value):
         self._city_name = value
     @property
+    def cont_non_turnon_days_mtd(self):
+        return self._cont_non_turnon_days_mtd
+
+    @cont_non_turnon_days_mtd.setter
+    def cont_non_turnon_days_mtd(self, value):
+        self._cont_non_turnon_days_mtd = value
+    @property
+    def cur_bind_status(self):
+        return self._cur_bind_status
+
+    @cur_bind_status.setter
+    def cur_bind_status(self, value):
+        self._cur_bind_status = value
+    @property
     def device_system(self):
         return self._device_system
 
@@ -129,6 +237,13 @@ class NDeviceMetricsListForDayResponse(object):
     @device_type.setter
     def device_type(self, value):
         self._device_type = value
+    @property
+    def digital_poi_id(self):
+        return self._digital_poi_id
+
+    @digital_poi_id.setter
+    def digital_poi_id(self, value):
+        self._digital_poi_id = value
     @property
     def district_code(self):
         return self._district_code
@@ -186,6 +301,13 @@ class NDeviceMetricsListForDayResponse(object):
     def has_nfc_trade_greater_2(self, value):
         self._has_nfc_trade_greater_2 = value
     @property
+    def instructions_work_time(self):
+        return self._instructions_work_time
+
+    @instructions_work_time.setter
+    def instructions_work_time(self, value):
+        self._instructions_work_time = value
+    @property
     def last_30_checkin_days(self):
         return self._last_30_checkin_days
 
@@ -227,6 +349,13 @@ class NDeviceMetricsListForDayResponse(object):
     @leads_location_address.setter
     def leads_location_address(self, value):
         self._leads_location_address = value
+    @property
+    def leads_poi_id(self):
+        return self._leads_poi_id
+
+    @leads_poi_id.setter
+    def leads_poi_id(self, value):
+        self._leads_poi_id = value
     @property
     def leads_worker_id(self):
         return self._leads_worker_id
@@ -277,6 +406,27 @@ class NDeviceMetricsListForDayResponse(object):
     def nfc_amount(self, value):
         self._nfc_amount = value
     @property
+    def nfc_amt_2_days_last_bind_30_d(self):
+        return self._nfc_amt_2_days_last_bind_30_d
+
+    @nfc_amt_2_days_last_bind_30_d.setter
+    def nfc_amt_2_days_last_bind_30_d(self, value):
+        self._nfc_amt_2_days_last_bind_30_d = value
+    @property
+    def nfc_amt_2_restrict_2_order_cnt(self):
+        return self._nfc_amt_2_restrict_2_order_cnt
+
+    @nfc_amt_2_restrict_2_order_cnt.setter
+    def nfc_amt_2_restrict_2_order_cnt(self, value):
+        self._nfc_amt_2_restrict_2_order_cnt = value
+    @property
+    def nfc_amt_2_user_cnt_last_bind_30_d(self):
+        return self._nfc_amt_2_user_cnt_last_bind_30_d
+
+    @nfc_amt_2_user_cnt_last_bind_30_d.setter
+    def nfc_amt_2_user_cnt_last_bind_30_d(self, value):
+        self._nfc_amt_2_user_cnt_last_bind_30_d = value
+    @property
     def nfc_trade_greater_2(self):
         return self._nfc_trade_greater_2
 
@@ -297,6 +447,13 @@ class NDeviceMetricsListForDayResponse(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def poi_first_sign_time(self):
+        return self._poi_first_sign_time
+
+    @poi_first_sign_time.setter
+    def poi_first_sign_time(self, value):
+        self._poi_first_sign_time = value
     @property
     def province_code(self):
         return self._province_code
@@ -354,6 +511,20 @@ class NDeviceMetricsListForDayResponse(object):
     def shipping_time(self, value):
         self._shipping_time = value
     @property
+    def sign_days_last_bind_30_d(self):
+        return self._sign_days_last_bind_30_d
+
+    @sign_days_last_bind_30_d.setter
+    def sign_days_last_bind_30_d(self, value):
+        self._sign_days_last_bind_30_d = value
+    @property
+    def sign_days_last_bind_7_d(self):
+        return self._sign_days_last_bind_7_d
+
+    @sign_days_last_bind_7_d.setter
+    def sign_days_last_bind_7_d(self, value):
+        self._sign_days_last_bind_7_d = value
+    @property
     def sn(self):
         return self._sn
 
@@ -389,6 +560,20 @@ class NDeviceMetricsListForDayResponse(object):
     def trd_amt_2_n_user_cnt_fromlight_30_d(self, value):
         self._trd_amt_2_n_user_cnt_fromlight_30_d = value
     @property
+    def trd_amt_2_user_cnt(self):
+        return self._trd_amt_2_user_cnt
+
+    @trd_amt_2_user_cnt.setter
+    def trd_amt_2_user_cnt(self, value):
+        self._trd_amt_2_user_cnt = value
+    @property
+    def trd_amt_3_user_cnt(self):
+        return self._trd_amt_3_user_cnt
+
+    @trd_amt_3_user_cnt.setter
+    def trd_amt_3_user_cnt(self, value):
+        self._trd_amt_3_user_cnt = value
+    @property
     def trd_greater_2_nfc_device_usercnt(self):
         return self._trd_greater_2_nfc_device_usercnt
 
@@ -409,20 +594,57 @@ class NDeviceMetricsListForDayResponse(object):
     @update_register_time.setter
     def update_register_time(self, value):
         self._update_register_time = value
+    @property
+    def valid_open_days_last_bind_30_d(self):
+        return self._valid_open_days_last_bind_30_d
+
+    @valid_open_days_last_bind_30_d.setter
+    def valid_open_days_last_bind_30_d(self, value):
+        self._valid_open_days_last_bind_30_d = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.act_instructions_dvc:
+            if hasattr(self.act_instructions_dvc, 'to_alipay_dict'):
+                params['act_instructions_dvc'] = self.act_instructions_dvc.to_alipay_dict()
+            else:
+                params['act_instructions_dvc'] = self.act_instructions_dvc
+        if self.advance_plan:
+            if hasattr(self.advance_plan, 'to_alipay_dict'):
+                params['advance_plan'] = self.advance_plan.to_alipay_dict()
+            else:
+                params['advance_plan'] = self.advance_plan
         if self.alipay_amount:
             if hasattr(self.alipay_amount, 'to_alipay_dict'):
                 params['alipay_amount'] = self.alipay_amount.to_alipay_dict()
             else:
                 params['alipay_amount'] = self.alipay_amount
+        if self.alipay_amt_2_restrict_2_order_cnt:
+            if hasattr(self.alipay_amt_2_restrict_2_order_cnt, 'to_alipay_dict'):
+                params['alipay_amt_2_restrict_2_order_cnt'] = self.alipay_amt_2_restrict_2_order_cnt.to_alipay_dict()
+            else:
+                params['alipay_amt_2_restrict_2_order_cnt'] = self.alipay_amt_2_restrict_2_order_cnt
         if self.alipay_transaction_count:
             if hasattr(self.alipay_transaction_count, 'to_alipay_dict'):
                 params['alipay_transaction_count'] = self.alipay_transaction_count.to_alipay_dict()
             else:
                 params['alipay_transaction_count'] = self.alipay_transaction_count
+        if self.be_access_my_tiny_cmd_td:
+            if hasattr(self.be_access_my_tiny_cmd_td, 'to_alipay_dict'):
+                params['be_access_my_tiny_cmd_td'] = self.be_access_my_tiny_cmd_td.to_alipay_dict()
+            else:
+                params['be_access_my_tiny_cmd_td'] = self.be_access_my_tiny_cmd_td
+        if self.be_change_device:
+            if hasattr(self.be_change_device, 'to_alipay_dict'):
+                params['be_change_device'] = self.be_change_device.to_alipay_dict()
+            else:
+                params['be_change_device'] = self.be_change_device
+        if self.be_high_tpv_shop:
+            if hasattr(self.be_high_tpv_shop, 'to_alipay_dict'):
+                params['be_high_tpv_shop'] = self.be_high_tpv_shop.to_alipay_dict()
+            else:
+                params['be_high_tpv_shop'] = self.be_high_tpv_shop
         if self.be_lighted_up:
             if hasattr(self.be_lighted_up, 'to_alipay_dict'):
                 params['be_lighted_up'] = self.be_lighted_up.to_alipay_dict()
@@ -433,16 +655,36 @@ class NDeviceMetricsListForDayResponse(object):
                 params['be_register'] = self.be_register.to_alipay_dict()
             else:
                 params['be_register'] = self.be_register
+        if self.be_special_shop:
+            if hasattr(self.be_special_shop, 'to_alipay_dict'):
+                params['be_special_shop'] = self.be_special_shop.to_alipay_dict()
+            else:
+                params['be_special_shop'] = self.be_special_shop
         if self.be_turnon_device:
             if hasattr(self.be_turnon_device, 'to_alipay_dict'):
                 params['be_turnon_device'] = self.be_turnon_device.to_alipay_dict()
             else:
                 params['be_turnon_device'] = self.be_turnon_device
+        if self.be_unified_collect:
+            if hasattr(self.be_unified_collect, 'to_alipay_dict'):
+                params['be_unified_collect'] = self.be_unified_collect.to_alipay_dict()
+            else:
+                params['be_unified_collect'] = self.be_unified_collect
         if self.binding_location:
             if hasattr(self.binding_location, 'to_alipay_dict'):
                 params['binding_location'] = self.binding_location.to_alipay_dict()
             else:
                 params['binding_location'] = self.binding_location
+        if self.change_device_sn:
+            if hasattr(self.change_device_sn, 'to_alipay_dict'):
+                params['change_device_sn'] = self.change_device_sn.to_alipay_dict()
+            else:
+                params['change_device_sn'] = self.change_device_sn
+        if self.change_device_time:
+            if hasattr(self.change_device_time, 'to_alipay_dict'):
+                params['change_device_time'] = self.change_device_time.to_alipay_dict()
+            else:
+                params['change_device_time'] = self.change_device_time
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -453,6 +695,16 @@ class NDeviceMetricsListForDayResponse(object):
                 params['city_name'] = self.city_name.to_alipay_dict()
             else:
                 params['city_name'] = self.city_name
+        if self.cont_non_turnon_days_mtd:
+            if hasattr(self.cont_non_turnon_days_mtd, 'to_alipay_dict'):
+                params['cont_non_turnon_days_mtd'] = self.cont_non_turnon_days_mtd.to_alipay_dict()
+            else:
+                params['cont_non_turnon_days_mtd'] = self.cont_non_turnon_days_mtd
+        if self.cur_bind_status:
+            if hasattr(self.cur_bind_status, 'to_alipay_dict'):
+                params['cur_bind_status'] = self.cur_bind_status.to_alipay_dict()
+            else:
+                params['cur_bind_status'] = self.cur_bind_status
         if self.device_system:
             if hasattr(self.device_system, 'to_alipay_dict'):
                 params['device_system'] = self.device_system.to_alipay_dict()
@@ -463,6 +715,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['device_type'] = self.device_type.to_alipay_dict()
             else:
                 params['device_type'] = self.device_type
+        if self.digital_poi_id:
+            if hasattr(self.digital_poi_id, 'to_alipay_dict'):
+                params['digital_poi_id'] = self.digital_poi_id.to_alipay_dict()
+            else:
+                params['digital_poi_id'] = self.digital_poi_id
         if self.district_code:
             if hasattr(self.district_code, 'to_alipay_dict'):
                 params['district_code'] = self.district_code.to_alipay_dict()
@@ -503,6 +760,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['has_nfc_trade_greater_2'] = self.has_nfc_trade_greater_2.to_alipay_dict()
             else:
                 params['has_nfc_trade_greater_2'] = self.has_nfc_trade_greater_2
+        if self.instructions_work_time:
+            if hasattr(self.instructions_work_time, 'to_alipay_dict'):
+                params['instructions_work_time'] = self.instructions_work_time.to_alipay_dict()
+            else:
+                params['instructions_work_time'] = self.instructions_work_time
         if self.last_30_checkin_days:
             if hasattr(self.last_30_checkin_days, 'to_alipay_dict'):
                 params['last_30_checkin_days'] = self.last_30_checkin_days.to_alipay_dict()
@@ -533,6 +795,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['leads_location_address'] = self.leads_location_address.to_alipay_dict()
             else:
                 params['leads_location_address'] = self.leads_location_address
+        if self.leads_poi_id:
+            if hasattr(self.leads_poi_id, 'to_alipay_dict'):
+                params['leads_poi_id'] = self.leads_poi_id.to_alipay_dict()
+            else:
+                params['leads_poi_id'] = self.leads_poi_id
         if self.leads_worker_id:
             if hasattr(self.leads_worker_id, 'to_alipay_dict'):
                 params['leads_worker_id'] = self.leads_worker_id.to_alipay_dict()
@@ -568,6 +835,21 @@ class NDeviceMetricsListForDayResponse(object):
                 params['nfc_amount'] = self.nfc_amount.to_alipay_dict()
             else:
                 params['nfc_amount'] = self.nfc_amount
+        if self.nfc_amt_2_days_last_bind_30_d:
+            if hasattr(self.nfc_amt_2_days_last_bind_30_d, 'to_alipay_dict'):
+                params['nfc_amt_2_days_last_bind_30_d'] = self.nfc_amt_2_days_last_bind_30_d.to_alipay_dict()
+            else:
+                params['nfc_amt_2_days_last_bind_30_d'] = self.nfc_amt_2_days_last_bind_30_d
+        if self.nfc_amt_2_restrict_2_order_cnt:
+            if hasattr(self.nfc_amt_2_restrict_2_order_cnt, 'to_alipay_dict'):
+                params['nfc_amt_2_restrict_2_order_cnt'] = self.nfc_amt_2_restrict_2_order_cnt.to_alipay_dict()
+            else:
+                params['nfc_amt_2_restrict_2_order_cnt'] = self.nfc_amt_2_restrict_2_order_cnt
+        if self.nfc_amt_2_user_cnt_last_bind_30_d:
+            if hasattr(self.nfc_amt_2_user_cnt_last_bind_30_d, 'to_alipay_dict'):
+                params['nfc_amt_2_user_cnt_last_bind_30_d'] = self.nfc_amt_2_user_cnt_last_bind_30_d.to_alipay_dict()
+            else:
+                params['nfc_amt_2_user_cnt_last_bind_30_d'] = self.nfc_amt_2_user_cnt_last_bind_30_d
         if self.nfc_trade_greater_2:
             if hasattr(self.nfc_trade_greater_2, 'to_alipay_dict'):
                 params['nfc_trade_greater_2'] = self.nfc_trade_greater_2.to_alipay_dict()
@@ -583,6 +865,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.poi_first_sign_time:
+            if hasattr(self.poi_first_sign_time, 'to_alipay_dict'):
+                params['poi_first_sign_time'] = self.poi_first_sign_time.to_alipay_dict()
+            else:
+                params['poi_first_sign_time'] = self.poi_first_sign_time
         if self.province_code:
             if hasattr(self.province_code, 'to_alipay_dict'):
                 params['province_code'] = self.province_code.to_alipay_dict()
@@ -623,6 +910,16 @@ class NDeviceMetricsListForDayResponse(object):
                 params['shipping_time'] = self.shipping_time.to_alipay_dict()
             else:
                 params['shipping_time'] = self.shipping_time
+        if self.sign_days_last_bind_30_d:
+            if hasattr(self.sign_days_last_bind_30_d, 'to_alipay_dict'):
+                params['sign_days_last_bind_30_d'] = self.sign_days_last_bind_30_d.to_alipay_dict()
+            else:
+                params['sign_days_last_bind_30_d'] = self.sign_days_last_bind_30_d
+        if self.sign_days_last_bind_7_d:
+            if hasattr(self.sign_days_last_bind_7_d, 'to_alipay_dict'):
+                params['sign_days_last_bind_7_d'] = self.sign_days_last_bind_7_d.to_alipay_dict()
+            else:
+                params['sign_days_last_bind_7_d'] = self.sign_days_last_bind_7_d
         if self.sn:
             if hasattr(self.sn, 'to_alipay_dict'):
                 params['sn'] = self.sn.to_alipay_dict()
@@ -648,6 +945,16 @@ class NDeviceMetricsListForDayResponse(object):
                 params['trd_amt_2_n_user_cnt_fromlight_30_d'] = self.trd_amt_2_n_user_cnt_fromlight_30_d.to_alipay_dict()
             else:
                 params['trd_amt_2_n_user_cnt_fromlight_30_d'] = self.trd_amt_2_n_user_cnt_fromlight_30_d
+        if self.trd_amt_2_user_cnt:
+            if hasattr(self.trd_amt_2_user_cnt, 'to_alipay_dict'):
+                params['trd_amt_2_user_cnt'] = self.trd_amt_2_user_cnt.to_alipay_dict()
+            else:
+                params['trd_amt_2_user_cnt'] = self.trd_amt_2_user_cnt
+        if self.trd_amt_3_user_cnt:
+            if hasattr(self.trd_amt_3_user_cnt, 'to_alipay_dict'):
+                params['trd_amt_3_user_cnt'] = self.trd_amt_3_user_cnt.to_alipay_dict()
+            else:
+                params['trd_amt_3_user_cnt'] = self.trd_amt_3_user_cnt
         if self.trd_greater_2_nfc_device_usercnt:
             if hasattr(self.trd_greater_2_nfc_device_usercnt, 'to_alipay_dict'):
                 params['trd_greater_2_nfc_device_usercnt'] = self.trd_greater_2_nfc_device_usercnt.to_alipay_dict()
@@ -663,6 +970,11 @@ class NDeviceMetricsListForDayResponse(object):
                 params['update_register_time'] = self.update_register_time.to_alipay_dict()
             else:
                 params['update_register_time'] = self.update_register_time
+        if self.valid_open_days_last_bind_30_d:
+            if hasattr(self.valid_open_days_last_bind_30_d, 'to_alipay_dict'):
+                params['valid_open_days_last_bind_30_d'] = self.valid_open_days_last_bind_30_d.to_alipay_dict()
+            else:
+                params['valid_open_days_last_bind_30_d'] = self.valid_open_days_last_bind_30_d
         return params
 
     @staticmethod
@@ -670,26 +982,52 @@ class NDeviceMetricsListForDayResponse(object):
         if not d:
             return None
         o = NDeviceMetricsListForDayResponse()
+        if 'act_instructions_dvc' in d:
+            o.act_instructions_dvc = d['act_instructions_dvc']
+        if 'advance_plan' in d:
+            o.advance_plan = d['advance_plan']
         if 'alipay_amount' in d:
             o.alipay_amount = d['alipay_amount']
+        if 'alipay_amt_2_restrict_2_order_cnt' in d:
+            o.alipay_amt_2_restrict_2_order_cnt = d['alipay_amt_2_restrict_2_order_cnt']
         if 'alipay_transaction_count' in d:
             o.alipay_transaction_count = d['alipay_transaction_count']
+        if 'be_access_my_tiny_cmd_td' in d:
+            o.be_access_my_tiny_cmd_td = d['be_access_my_tiny_cmd_td']
+        if 'be_change_device' in d:
+            o.be_change_device = d['be_change_device']
+        if 'be_high_tpv_shop' in d:
+            o.be_high_tpv_shop = d['be_high_tpv_shop']
         if 'be_lighted_up' in d:
             o.be_lighted_up = d['be_lighted_up']
         if 'be_register' in d:
             o.be_register = d['be_register']
+        if 'be_special_shop' in d:
+            o.be_special_shop = d['be_special_shop']
         if 'be_turnon_device' in d:
             o.be_turnon_device = d['be_turnon_device']
+        if 'be_unified_collect' in d:
+            o.be_unified_collect = d['be_unified_collect']
         if 'binding_location' in d:
             o.binding_location = d['binding_location']
+        if 'change_device_sn' in d:
+            o.change_device_sn = d['change_device_sn']
+        if 'change_device_time' in d:
+            o.change_device_time = d['change_device_time']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
+        if 'cont_non_turnon_days_mtd' in d:
+            o.cont_non_turnon_days_mtd = d['cont_non_turnon_days_mtd']
+        if 'cur_bind_status' in d:
+            o.cur_bind_status = d['cur_bind_status']
         if 'device_system' in d:
             o.device_system = d['device_system']
         if 'device_type' in d:
             o.device_type = d['device_type']
+        if 'digital_poi_id' in d:
+            o.digital_poi_id = d['digital_poi_id']
         if 'district_code' in d:
             o.district_code = d['district_code']
         if 'district_name' in d:
@@ -706,6 +1044,8 @@ class NDeviceMetricsListForDayResponse(object):
             o.has_nfc_trade = d['has_nfc_trade']
         if 'has_nfc_trade_greater_2' in d:
             o.has_nfc_trade_greater_2 = d['has_nfc_trade_greater_2']
+        if 'instructions_work_time' in d:
+            o.instructions_work_time = d['instructions_work_time']
         if 'last_30_checkin_days' in d:
             o.last_30_checkin_days = d['last_30_checkin_days']
         if 'last_30_sales_over_2_days' in d:
@@ -718,6 +1058,8 @@ class NDeviceMetricsListForDayResponse(object):
             o.leads_location = d['leads_location']
         if 'leads_location_address' in d:
             o.leads_location_address = d['leads_location_address']
+        if 'leads_poi_id' in d:
+            o.leads_poi_id = d['leads_poi_id']
         if 'leads_worker_id' in d:
             o.leads_worker_id = d['leads_worker_id']
         if 'leads_worker_name' in d:
@@ -732,12 +1074,20 @@ class NDeviceMetricsListForDayResponse(object):
             o.micro_command_active_7_day = d['micro_command_active_7_day']
         if 'nfc_amount' in d:
             o.nfc_amount = d['nfc_amount']
+        if 'nfc_amt_2_days_last_bind_30_d' in d:
+            o.nfc_amt_2_days_last_bind_30_d = d['nfc_amt_2_days_last_bind_30_d']
+        if 'nfc_amt_2_restrict_2_order_cnt' in d:
+            o.nfc_amt_2_restrict_2_order_cnt = d['nfc_amt_2_restrict_2_order_cnt']
+        if 'nfc_amt_2_user_cnt_last_bind_30_d' in d:
+            o.nfc_amt_2_user_cnt_last_bind_30_d = d['nfc_amt_2_user_cnt_last_bind_30_d']
         if 'nfc_trade_greater_2' in d:
             o.nfc_trade_greater_2 = d['nfc_trade_greater_2']
         if 'nfc_transaction_count' in d:
             o.nfc_transaction_count = d['nfc_transaction_count']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'poi_first_sign_time' in d:
+            o.poi_first_sign_time = d['poi_first_sign_time']
         if 'province_code' in d:
             o.province_code = d['province_code']
         if 'province_name' in d:
@@ -754,6 +1104,10 @@ class NDeviceMetricsListForDayResponse(object):
             o.register_time = d['register_time']
         if 'shipping_time' in d:
             o.shipping_time = d['shipping_time']
+        if 'sign_days_last_bind_30_d' in d:
+            o.sign_days_last_bind_30_d = d['sign_days_last_bind_30_d']
+        if 'sign_days_last_bind_7_d' in d:
+            o.sign_days_last_bind_7_d = d['sign_days_last_bind_7_d']
         if 'sn' in d:
             o.sn = d['sn']
         if 'store_first_sale_1_yuan_date' in d:
@@ -764,12 +1118,18 @@ class NDeviceMetricsListForDayResponse(object):
             o.total_lighted_months = d['total_lighted_months']
         if 'trd_amt_2_n_user_cnt_fromlight_30_d' in d:
             o.trd_amt_2_n_user_cnt_fromlight_30_d = d['trd_amt_2_n_user_cnt_fromlight_30_d']
+        if 'trd_amt_2_user_cnt' in d:
+            o.trd_amt_2_user_cnt = d['trd_amt_2_user_cnt']
+        if 'trd_amt_3_user_cnt' in d:
+            o.trd_amt_3_user_cnt = d['trd_amt_3_user_cnt']
         if 'trd_greater_2_nfc_device_usercnt' in d:
             o.trd_greater_2_nfc_device_usercnt = d['trd_greater_2_nfc_device_usercnt']
         if 'trd_nfc_device_usercnt' in d:
             o.trd_nfc_device_usercnt = d['trd_nfc_device_usercnt']
         if 'update_register_time' in d:
             o.update_register_time = d['update_register_time']
+        if 'valid_open_days_last_bind_30_d' in d:
+            o.valid_open_days_last_bind_30_d = d['valid_open_days_last_bind_30_d']
         return o
 
 

@@ -14,6 +14,7 @@ class AlipayCommerceMedicalNpsScoreSubmitModel(object):
         self._feed_back_list = None
         self._open_id = None
         self._org_id = None
+        self._org_name = None
         self._out_user_id = None
         self._rating_type = None
         self._remark = None
@@ -63,6 +64,13 @@ class AlipayCommerceMedicalNpsScoreSubmitModel(object):
     @org_id.setter
     def org_id(self, value):
         self._org_id = value
+    @property
+    def org_name(self):
+        return self._org_name
+
+    @org_name.setter
+    def org_name(self, value):
+        self._org_name = value
     @property
     def out_user_id(self):
         return self._out_user_id
@@ -139,6 +147,11 @@ class AlipayCommerceMedicalNpsScoreSubmitModel(object):
                 params['org_id'] = self.org_id.to_alipay_dict()
             else:
                 params['org_id'] = self.org_id
+        if self.org_name:
+            if hasattr(self.org_name, 'to_alipay_dict'):
+                params['org_name'] = self.org_name.to_alipay_dict()
+            else:
+                params['org_name'] = self.org_name
         if self.out_user_id:
             if hasattr(self.out_user_id, 'to_alipay_dict'):
                 params['out_user_id'] = self.out_user_id.to_alipay_dict()
@@ -188,6 +201,8 @@ class AlipayCommerceMedicalNpsScoreSubmitModel(object):
             o.open_id = d['open_id']
         if 'org_id' in d:
             o.org_id = d['org_id']
+        if 'org_name' in d:
+            o.org_name = d['org_name']
         if 'out_user_id' in d:
             o.out_user_id = d['out_user_id']
         if 'rating_type' in d:

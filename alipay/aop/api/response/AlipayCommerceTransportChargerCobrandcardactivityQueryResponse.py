@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ActivityPhase import ActivityPhase
+from alipay.aop.api.domain.CardOpenRewardInfo import CardOpenRewardInfo
 
 
 class AlipayCommerceTransportChargerCobrandcardactivityQueryResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class AlipayCommerceTransportChargerCobrandcardactivityQueryResponse(AlipayRespo
         super(AlipayCommerceTransportChargerCobrandcardactivityQueryResponse, self).__init__()
         self._activity_id = None
         self._activity_phases = None
+        self._card_open_reward_info = None
         self._current_count = None
 
     @property
@@ -35,6 +37,16 @@ class AlipayCommerceTransportChargerCobrandcardactivityQueryResponse(AlipayRespo
                 else:
                     self._activity_phases.append(ActivityPhase.from_alipay_dict(i))
     @property
+    def card_open_reward_info(self):
+        return self._card_open_reward_info
+
+    @card_open_reward_info.setter
+    def card_open_reward_info(self, value):
+        if isinstance(value, CardOpenRewardInfo):
+            self._card_open_reward_info = value
+        else:
+            self._card_open_reward_info = CardOpenRewardInfo.from_alipay_dict(value)
+    @property
     def current_count(self):
         return self._current_count
 
@@ -48,5 +60,7 @@ class AlipayCommerceTransportChargerCobrandcardactivityQueryResponse(AlipayRespo
             self.activity_id = response['activity_id']
         if 'activity_phases' in response:
             self.activity_phases = response['activity_phases']
+        if 'card_open_reward_info' in response:
+            self.card_open_reward_info = response['card_open_reward_info']
         if 'current_count' in response:
             self.current_count = response['current_count']

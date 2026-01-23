@@ -10,6 +10,7 @@ class AlipayBossFncGfacceptanceSyncbillAcceptModel(object):
 
     def __init__(self):
         self._bill_acceptance = None
+        self._open_id = None
         self._principal_id = None
         self._test_mode = None
 
@@ -23,6 +24,13 @@ class AlipayBossFncGfacceptanceSyncbillAcceptModel(object):
             self._bill_acceptance = value
         else:
             self._bill_acceptance = GFAOpenAPIBillAcceptance.from_alipay_dict(value)
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def principal_id(self):
         return self._principal_id
@@ -46,6 +54,11 @@ class AlipayBossFncGfacceptanceSyncbillAcceptModel(object):
                 params['bill_acceptance'] = self.bill_acceptance.to_alipay_dict()
             else:
                 params['bill_acceptance'] = self.bill_acceptance
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.principal_id:
             if hasattr(self.principal_id, 'to_alipay_dict'):
                 params['principal_id'] = self.principal_id.to_alipay_dict()
@@ -65,6 +78,8 @@ class AlipayBossFncGfacceptanceSyncbillAcceptModel(object):
         o = AlipayBossFncGfacceptanceSyncbillAcceptModel()
         if 'bill_acceptance' in d:
             o.bill_acceptance = d['bill_acceptance']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'principal_id' in d:
             o.principal_id = d['principal_id']
         if 'test_mode' in d:

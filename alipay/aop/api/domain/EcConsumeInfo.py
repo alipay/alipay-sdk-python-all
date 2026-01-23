@@ -42,6 +42,7 @@ class EcConsumeInfo(object):
         self._payer_logon_id = None
         self._payer_name = None
         self._peer_pay_amount = None
+        self._peer_payer_card_name = None
         self._peer_payer_card_no = None
         self._peer_refund_amount = None
         self._peer_refund_status = None
@@ -293,6 +294,13 @@ class EcConsumeInfo(object):
     @peer_pay_amount.setter
     def peer_pay_amount(self, value):
         self._peer_pay_amount = value
+    @property
+    def peer_payer_card_name(self):
+        return self._peer_payer_card_name
+
+    @peer_payer_card_name.setter
+    def peer_payer_card_name(self, value):
+        self._peer_payer_card_name = value
     @property
     def peer_payer_card_no(self):
         return self._peer_payer_card_no
@@ -551,6 +559,11 @@ class EcConsumeInfo(object):
                 params['peer_pay_amount'] = self.peer_pay_amount.to_alipay_dict()
             else:
                 params['peer_pay_amount'] = self.peer_pay_amount
+        if self.peer_payer_card_name:
+            if hasattr(self.peer_payer_card_name, 'to_alipay_dict'):
+                params['peer_payer_card_name'] = self.peer_payer_card_name.to_alipay_dict()
+            else:
+                params['peer_payer_card_name'] = self.peer_payer_card_name
         if self.peer_payer_card_no:
             if hasattr(self.peer_payer_card_no, 'to_alipay_dict'):
                 params['peer_payer_card_no'] = self.peer_payer_card_no.to_alipay_dict()
@@ -686,6 +699,8 @@ class EcConsumeInfo(object):
             o.payer_name = d['payer_name']
         if 'peer_pay_amount' in d:
             o.peer_pay_amount = d['peer_pay_amount']
+        if 'peer_payer_card_name' in d:
+            o.peer_payer_card_name = d['peer_payer_card_name']
         if 'peer_payer_card_no' in d:
             o.peer_payer_card_no = d['peer_payer_card_no']
         if 'peer_refund_amount' in d:

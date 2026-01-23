@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ActivityBaseInfo import ActivityBaseInfo
+from alipay.aop.api.domain.AuditResultInfo import AuditResultInfo
 from alipay.aop.api.domain.BelongMerchantInfo import BelongMerchantInfo
 from alipay.aop.api.domain.CustomerGuide import CustomerGuide
 from alipay.aop.api.domain.VoucherSummary import VoucherSummary
@@ -28,6 +29,7 @@ class AlipayMarketingActivityOrdervoucherQueryResponse(AlipayResponse):
         self._activity_name = None
         self._activity_operation_status = None
         self._activity_status = None
+        self._audit_result_info = None
         self._belong_merchant_info = None
         self._biz_tag = None
         self._customer_guide = None
@@ -84,6 +86,16 @@ class AlipayMarketingActivityOrdervoucherQueryResponse(AlipayResponse):
     @activity_status.setter
     def activity_status(self, value):
         self._activity_status = value
+    @property
+    def audit_result_info(self):
+        return self._audit_result_info
+
+    @audit_result_info.setter
+    def audit_result_info(self, value):
+        if isinstance(value, AuditResultInfo):
+            self._audit_result_info = value
+        else:
+            self._audit_result_info = AuditResultInfo.from_alipay_dict(value)
     @property
     def belong_merchant_info(self):
         return self._belong_merchant_info
@@ -255,6 +267,8 @@ class AlipayMarketingActivityOrdervoucherQueryResponse(AlipayResponse):
             self.activity_operation_status = response['activity_operation_status']
         if 'activity_status' in response:
             self.activity_status = response['activity_status']
+        if 'audit_result_info' in response:
+            self.audit_result_info = response['audit_result_info']
         if 'belong_merchant_info' in response:
             self.belong_merchant_info = response['belong_merchant_info']
         if 'biz_tag' in response:

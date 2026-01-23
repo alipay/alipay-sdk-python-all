@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AgreementFile import AgreementFile
 from alipay.aop.api.domain.Credit import Credit
 from alipay.aop.api.domain.LendDrawdown import LendDrawdown
+from alipay.aop.api.domain.CarfinGuaranteeInst import CarfinGuaranteeInst
 from alipay.aop.api.domain.SupplementCategoryInfo import SupplementCategoryInfo
 
 
@@ -16,6 +17,7 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
         self._apply_no = None
         self._credit_list = None
         self._drawdown_list = None
+        self._guarantee_inst = None
         self._lend_apply_no = None
         self._mortgage_channel = None
         self._need_change_bind_card = None
@@ -75,6 +77,16 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
                     self._drawdown_list.append(i)
                 else:
                     self._drawdown_list.append(LendDrawdown.from_alipay_dict(i))
+    @property
+    def guarantee_inst(self):
+        return self._guarantee_inst
+
+    @guarantee_inst.setter
+    def guarantee_inst(self, value):
+        if isinstance(value, CarfinGuaranteeInst):
+            self._guarantee_inst = value
+        else:
+            self._guarantee_inst = CarfinGuaranteeInst.from_alipay_dict(value)
     @property
     def lend_apply_no(self):
         return self._lend_apply_no
@@ -204,6 +216,11 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
                 params['drawdown_list'] = self.drawdown_list.to_alipay_dict()
             else:
                 params['drawdown_list'] = self.drawdown_list
+        if self.guarantee_inst:
+            if hasattr(self.guarantee_inst, 'to_alipay_dict'):
+                params['guarantee_inst'] = self.guarantee_inst.to_alipay_dict()
+            else:
+                params['guarantee_inst'] = self.guarantee_inst
         if self.lend_apply_no:
             if hasattr(self.lend_apply_no, 'to_alipay_dict'):
                 params['lend_apply_no'] = self.lend_apply_no.to_alipay_dict()
@@ -284,6 +301,8 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
             o.credit_list = d['credit_list']
         if 'drawdown_list' in d:
             o.drawdown_list = d['drawdown_list']
+        if 'guarantee_inst' in d:
+            o.guarantee_inst = d['guarantee_inst']
         if 'lend_apply_no' in d:
             o.lend_apply_no = d['lend_apply_no']
         if 'mortgage_channel' in d:

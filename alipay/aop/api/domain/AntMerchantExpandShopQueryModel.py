@@ -9,11 +9,13 @@ class AntMerchantExpandShopQueryModel(object):
 
     def __init__(self):
         self._address_version = None
+        self._biz_source = None
         self._ip_role_id = None
         self._need_industry_info = None
         self._need_industry_license = None
         self._need_recommend = None
         self._shop_id = None
+        self._shop_type = None
         self._store_id = None
 
     @property
@@ -23,6 +25,13 @@ class AntMerchantExpandShopQueryModel(object):
     @address_version.setter
     def address_version(self, value):
         self._address_version = value
+    @property
+    def biz_source(self):
+        return self._biz_source
+
+    @biz_source.setter
+    def biz_source(self, value):
+        self._biz_source = value
     @property
     def ip_role_id(self):
         return self._ip_role_id
@@ -59,6 +68,13 @@ class AntMerchantExpandShopQueryModel(object):
     def shop_id(self, value):
         self._shop_id = value
     @property
+    def shop_type(self):
+        return self._shop_type
+
+    @shop_type.setter
+    def shop_type(self, value):
+        self._shop_type = value
+    @property
     def store_id(self):
         return self._store_id
 
@@ -74,6 +90,11 @@ class AntMerchantExpandShopQueryModel(object):
                 params['address_version'] = self.address_version.to_alipay_dict()
             else:
                 params['address_version'] = self.address_version
+        if self.biz_source:
+            if hasattr(self.biz_source, 'to_alipay_dict'):
+                params['biz_source'] = self.biz_source.to_alipay_dict()
+            else:
+                params['biz_source'] = self.biz_source
         if self.ip_role_id:
             if hasattr(self.ip_role_id, 'to_alipay_dict'):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
@@ -99,6 +120,11 @@ class AntMerchantExpandShopQueryModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_type:
+            if hasattr(self.shop_type, 'to_alipay_dict'):
+                params['shop_type'] = self.shop_type.to_alipay_dict()
+            else:
+                params['shop_type'] = self.shop_type
         if self.store_id:
             if hasattr(self.store_id, 'to_alipay_dict'):
                 params['store_id'] = self.store_id.to_alipay_dict()
@@ -113,6 +139,8 @@ class AntMerchantExpandShopQueryModel(object):
         o = AntMerchantExpandShopQueryModel()
         if 'address_version' in d:
             o.address_version = d['address_version']
+        if 'biz_source' in d:
+            o.biz_source = d['biz_source']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
         if 'need_industry_info' in d:
@@ -123,6 +151,8 @@ class AntMerchantExpandShopQueryModel(object):
             o.need_recommend = d['need_recommend']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_type' in d:
+            o.shop_type = d['shop_type']
         if 'store_id' in d:
             o.store_id = d['store_id']
         return o

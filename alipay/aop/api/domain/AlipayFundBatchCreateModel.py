@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.Participant import Participant
 from alipay.aop.api.domain.TransOrderDetail import TransOrderDetail
+from alipay.aop.api.domain.TransferSceneReportInfo import TransferSceneReportInfo
 
 
 class AlipayFundBatchCreateModel(object):
@@ -22,6 +23,8 @@ class AlipayFundBatchCreateModel(object):
         self._total_count = None
         self._total_trans_amount = None
         self._trans_order_list = None
+        self._transfer_scene_name = None
+        self._transfer_scene_report_infos = None
 
     @property
     def biz_scene(self):
@@ -116,6 +119,26 @@ class AlipayFundBatchCreateModel(object):
                     self._trans_order_list.append(i)
                 else:
                     self._trans_order_list.append(TransOrderDetail.from_alipay_dict(i))
+    @property
+    def transfer_scene_name(self):
+        return self._transfer_scene_name
+
+    @transfer_scene_name.setter
+    def transfer_scene_name(self, value):
+        self._transfer_scene_name = value
+    @property
+    def transfer_scene_report_infos(self):
+        return self._transfer_scene_report_infos
+
+    @transfer_scene_report_infos.setter
+    def transfer_scene_report_infos(self, value):
+        if isinstance(value, list):
+            self._transfer_scene_report_infos = list()
+            for i in value:
+                if isinstance(i, TransferSceneReportInfo):
+                    self._transfer_scene_report_infos.append(i)
+                else:
+                    self._transfer_scene_report_infos.append(TransferSceneReportInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -185,6 +208,21 @@ class AlipayFundBatchCreateModel(object):
                 params['trans_order_list'] = self.trans_order_list.to_alipay_dict()
             else:
                 params['trans_order_list'] = self.trans_order_list
+        if self.transfer_scene_name:
+            if hasattr(self.transfer_scene_name, 'to_alipay_dict'):
+                params['transfer_scene_name'] = self.transfer_scene_name.to_alipay_dict()
+            else:
+                params['transfer_scene_name'] = self.transfer_scene_name
+        if self.transfer_scene_report_infos:
+            if isinstance(self.transfer_scene_report_infos, list):
+                for i in range(0, len(self.transfer_scene_report_infos)):
+                    element = self.transfer_scene_report_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.transfer_scene_report_infos[i] = element.to_alipay_dict()
+            if hasattr(self.transfer_scene_report_infos, 'to_alipay_dict'):
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos.to_alipay_dict()
+            else:
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos
         return params
 
     @staticmethod
@@ -216,6 +254,10 @@ class AlipayFundBatchCreateModel(object):
             o.total_trans_amount = d['total_trans_amount']
         if 'trans_order_list' in d:
             o.trans_order_list = d['trans_order_list']
+        if 'transfer_scene_name' in d:
+            o.transfer_scene_name = d['transfer_scene_name']
+        if 'transfer_scene_report_infos' in d:
+            o.transfer_scene_report_infos = d['transfer_scene_report_infos']
         return o
 
 

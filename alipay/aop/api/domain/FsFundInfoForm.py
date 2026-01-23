@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RecycleInfoForm import RecycleInfoForm
 from alipay.aop.api.domain.RepayBankInfo import RepayBankInfo
 
 
@@ -14,6 +15,7 @@ class FsFundInfoForm(object):
         self._fund_provider = None
         self._fund_type = None
         self._fund_user_id = None
+        self._recycle_info = None
         self._repay_bank_info = None
 
     @property
@@ -51,6 +53,16 @@ class FsFundInfoForm(object):
     @fund_user_id.setter
     def fund_user_id(self, value):
         self._fund_user_id = value
+    @property
+    def recycle_info(self):
+        return self._recycle_info
+
+    @recycle_info.setter
+    def recycle_info(self, value):
+        if isinstance(value, RecycleInfoForm):
+            self._recycle_info = value
+        else:
+            self._recycle_info = RecycleInfoForm.from_alipay_dict(value)
     @property
     def repay_bank_info(self):
         return self._repay_bank_info
@@ -90,6 +102,11 @@ class FsFundInfoForm(object):
                 params['fund_user_id'] = self.fund_user_id.to_alipay_dict()
             else:
                 params['fund_user_id'] = self.fund_user_id
+        if self.recycle_info:
+            if hasattr(self.recycle_info, 'to_alipay_dict'):
+                params['recycle_info'] = self.recycle_info.to_alipay_dict()
+            else:
+                params['recycle_info'] = self.recycle_info
         if self.repay_bank_info:
             if hasattr(self.repay_bank_info, 'to_alipay_dict'):
                 params['repay_bank_info'] = self.repay_bank_info.to_alipay_dict()
@@ -112,6 +129,8 @@ class FsFundInfoForm(object):
             o.fund_type = d['fund_type']
         if 'fund_user_id' in d:
             o.fund_user_id = d['fund_user_id']
+        if 'recycle_info' in d:
+            o.recycle_info = d['recycle_info']
         if 'repay_bank_info' in d:
             o.repay_bank_info = d['repay_bank_info']
         return o

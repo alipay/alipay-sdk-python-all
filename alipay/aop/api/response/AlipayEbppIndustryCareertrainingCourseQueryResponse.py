@@ -12,8 +12,11 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppIndustryCareertrainingCourseQueryResponse, self).__init__()
+        self._audit_status = None
         self._category_id = None
+        self._category_id_list = None
         self._certificate_code_list = None
+        self._certification_course = None
         self._city_code_list = None
         self._course_cover_video = None
         self._course_end_date = None
@@ -28,7 +31,9 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
         self._course_tags = None
         self._description = None
         self._details_image_list = None
+        self._has_trial = None
         self._head_image_list = None
+        self._industry_show_status = None
         self._org_code = None
         self._out_course_id = None
         self._remark = None
@@ -38,12 +43,29 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
         self._teacher_info = None
 
     @property
+    def audit_status(self):
+        return self._audit_status
+
+    @audit_status.setter
+    def audit_status(self, value):
+        self._audit_status = value
+    @property
     def category_id(self):
         return self._category_id
 
     @category_id.setter
     def category_id(self, value):
         self._category_id = value
+    @property
+    def category_id_list(self):
+        return self._category_id_list
+
+    @category_id_list.setter
+    def category_id_list(self, value):
+        if isinstance(value, list):
+            self._category_id_list = list()
+            for i in value:
+                self._category_id_list.append(i)
     @property
     def certificate_code_list(self):
         return self._certificate_code_list
@@ -54,6 +76,13 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
             self._certificate_code_list = list()
             for i in value:
                 self._certificate_code_list.append(i)
+    @property
+    def certification_course(self):
+        return self._certification_course
+
+    @certification_course.setter
+    def certification_course(self, value):
+        self._certification_course = value
     @property
     def city_code_list(self):
         return self._city_code_list
@@ -168,6 +197,13 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
             for i in value:
                 self._details_image_list.append(i)
     @property
+    def has_trial(self):
+        return self._has_trial
+
+    @has_trial.setter
+    def has_trial(self, value):
+        self._has_trial = value
+    @property
     def head_image_list(self):
         return self._head_image_list
 
@@ -177,6 +213,13 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
             self._head_image_list = list()
             for i in value:
                 self._head_image_list.append(i)
+    @property
+    def industry_show_status(self):
+        return self._industry_show_status
+
+    @industry_show_status.setter
+    def industry_show_status(self, value):
+        self._industry_show_status = value
     @property
     def org_code(self):
         return self._org_code
@@ -238,10 +281,16 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppIndustryCareertrainingCourseQueryResponse, self).parse_response_content(response_content)
+        if 'audit_status' in response:
+            self.audit_status = response['audit_status']
         if 'category_id' in response:
             self.category_id = response['category_id']
+        if 'category_id_list' in response:
+            self.category_id_list = response['category_id_list']
         if 'certificate_code_list' in response:
             self.certificate_code_list = response['certificate_code_list']
+        if 'certification_course' in response:
+            self.certification_course = response['certification_course']
         if 'city_code_list' in response:
             self.city_code_list = response['city_code_list']
         if 'course_cover_video' in response:
@@ -270,8 +319,12 @@ class AlipayEbppIndustryCareertrainingCourseQueryResponse(AlipayResponse):
             self.description = response['description']
         if 'details_image_list' in response:
             self.details_image_list = response['details_image_list']
+        if 'has_trial' in response:
+            self.has_trial = response['has_trial']
         if 'head_image_list' in response:
             self.head_image_list = response['head_image_list']
+        if 'industry_show_status' in response:
+            self.industry_show_status = response['industry_show_status']
         if 'org_code' in response:
             self.org_code = response['org_code']
         if 'out_course_id' in response:

@@ -11,11 +11,13 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
         self._alipay_chat_id = None
         self._alipay_msg_id = None
         self._alipay_order_id = None
+        self._channel_code = None
         self._merchant_user_id = None
         self._out_biz_no = None
         self._out_chat_id = None
         self._out_msg_id = None
         self._recall_reason = None
+        self._scene_code = None
 
     @property
     def alipay_chat_id(self):
@@ -38,6 +40,13 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
     @alipay_order_id.setter
     def alipay_order_id(self, value):
         self._alipay_order_id = value
+    @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
     @property
     def merchant_user_id(self):
         return self._merchant_user_id
@@ -73,6 +82,13 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
     @recall_reason.setter
     def recall_reason(self, value):
         self._recall_reason = value
+    @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
 
 
     def to_alipay_dict(self):
@@ -92,6 +108,11 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
                 params['alipay_order_id'] = self.alipay_order_id.to_alipay_dict()
             else:
                 params['alipay_order_id'] = self.alipay_order_id
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.merchant_user_id:
             if hasattr(self.merchant_user_id, 'to_alipay_dict'):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
@@ -117,6 +138,11 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
                 params['recall_reason'] = self.recall_reason.to_alipay_dict()
             else:
                 params['recall_reason'] = self.recall_reason
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
         return params
 
     @staticmethod
@@ -130,6 +156,8 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
             o.alipay_msg_id = d['alipay_msg_id']
         if 'alipay_order_id' in d:
             o.alipay_order_id = d['alipay_order_id']
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
         if 'out_biz_no' in d:
@@ -140,6 +168,8 @@ class AlipayCommerceMedicalIndustrydataImCancelModel(object):
             o.out_msg_id = d['out_msg_id']
         if 'recall_reason' in d:
             o.recall_reason = d['recall_reason']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
         return o
 
 

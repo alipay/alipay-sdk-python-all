@@ -24,12 +24,20 @@ class AntMerchantExpandShopCreateModel(object):
         self._cert_image = None
         self._cert_name = None
         self._cert_no = None
+        self._cert_start_expire_time = None
         self._cert_type = None
         self._contact_infos = None
         self._contact_mobile = None
         self._contact_phone = None
         self._cover = None
+        self._expire_time = None
         self._ext_infos = None
+        self._fund_proofs = None
+        self._fund_type = None
+        self._identity_back_url = None
+        self._identity_end_time = None
+        self._identity_front_url = None
+        self._identity_start_time = None
         self._industry_info = None
         self._industry_license = None
         self._ip_role_id = None
@@ -113,6 +121,13 @@ class AntMerchantExpandShopCreateModel(object):
     def cert_no(self, value):
         self._cert_no = value
     @property
+    def cert_start_expire_time(self):
+        return self._cert_start_expire_time
+
+    @cert_start_expire_time.setter
+    def cert_start_expire_time(self, value):
+        self._cert_start_expire_time = value
+    @property
     def cert_type(self):
         return self._cert_type
 
@@ -154,6 +169,13 @@ class AntMerchantExpandShopCreateModel(object):
     def cover(self, value):
         self._cover = value
     @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
+    @property
     def ext_infos(self):
         return self._ext_infos
 
@@ -166,6 +188,51 @@ class AntMerchantExpandShopCreateModel(object):
                     self._ext_infos.append(i)
                 else:
                     self._ext_infos.append(ShopExtInfo.from_alipay_dict(i))
+    @property
+    def fund_proofs(self):
+        return self._fund_proofs
+
+    @fund_proofs.setter
+    def fund_proofs(self, value):
+        if isinstance(value, list):
+            self._fund_proofs = list()
+            for i in value:
+                self._fund_proofs.append(i)
+    @property
+    def fund_type(self):
+        return self._fund_type
+
+    @fund_type.setter
+    def fund_type(self, value):
+        self._fund_type = value
+    @property
+    def identity_back_url(self):
+        return self._identity_back_url
+
+    @identity_back_url.setter
+    def identity_back_url(self, value):
+        self._identity_back_url = value
+    @property
+    def identity_end_time(self):
+        return self._identity_end_time
+
+    @identity_end_time.setter
+    def identity_end_time(self, value):
+        self._identity_end_time = value
+    @property
+    def identity_front_url(self):
+        return self._identity_front_url
+
+    @identity_front_url.setter
+    def identity_front_url(self, value):
+        self._identity_front_url = value
+    @property
+    def identity_start_time(self):
+        return self._identity_start_time
+
+    @identity_start_time.setter
+    def identity_start_time(self, value):
+        self._identity_start_time = value
     @property
     def industry_info(self):
         return self._industry_info
@@ -361,6 +428,11 @@ class AntMerchantExpandShopCreateModel(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_start_expire_time:
+            if hasattr(self.cert_start_expire_time, 'to_alipay_dict'):
+                params['cert_start_expire_time'] = self.cert_start_expire_time.to_alipay_dict()
+            else:
+                params['cert_start_expire_time'] = self.cert_start_expire_time
         if self.cert_type:
             if hasattr(self.cert_type, 'to_alipay_dict'):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
@@ -391,6 +463,11 @@ class AntMerchantExpandShopCreateModel(object):
                 params['cover'] = self.cover.to_alipay_dict()
             else:
                 params['cover'] = self.cover
+        if self.expire_time:
+            if hasattr(self.expire_time, 'to_alipay_dict'):
+                params['expire_time'] = self.expire_time.to_alipay_dict()
+            else:
+                params['expire_time'] = self.expire_time
         if self.ext_infos:
             if isinstance(self.ext_infos, list):
                 for i in range(0, len(self.ext_infos)):
@@ -401,6 +478,41 @@ class AntMerchantExpandShopCreateModel(object):
                 params['ext_infos'] = self.ext_infos.to_alipay_dict()
             else:
                 params['ext_infos'] = self.ext_infos
+        if self.fund_proofs:
+            if isinstance(self.fund_proofs, list):
+                for i in range(0, len(self.fund_proofs)):
+                    element = self.fund_proofs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.fund_proofs[i] = element.to_alipay_dict()
+            if hasattr(self.fund_proofs, 'to_alipay_dict'):
+                params['fund_proofs'] = self.fund_proofs.to_alipay_dict()
+            else:
+                params['fund_proofs'] = self.fund_proofs
+        if self.fund_type:
+            if hasattr(self.fund_type, 'to_alipay_dict'):
+                params['fund_type'] = self.fund_type.to_alipay_dict()
+            else:
+                params['fund_type'] = self.fund_type
+        if self.identity_back_url:
+            if hasattr(self.identity_back_url, 'to_alipay_dict'):
+                params['identity_back_url'] = self.identity_back_url.to_alipay_dict()
+            else:
+                params['identity_back_url'] = self.identity_back_url
+        if self.identity_end_time:
+            if hasattr(self.identity_end_time, 'to_alipay_dict'):
+                params['identity_end_time'] = self.identity_end_time.to_alipay_dict()
+            else:
+                params['identity_end_time'] = self.identity_end_time
+        if self.identity_front_url:
+            if hasattr(self.identity_front_url, 'to_alipay_dict'):
+                params['identity_front_url'] = self.identity_front_url.to_alipay_dict()
+            else:
+                params['identity_front_url'] = self.identity_front_url
+        if self.identity_start_time:
+            if hasattr(self.identity_start_time, 'to_alipay_dict'):
+                params['identity_start_time'] = self.identity_start_time.to_alipay_dict()
+            else:
+                params['identity_start_time'] = self.identity_start_time
         if self.industry_info:
             if isinstance(self.industry_info, list):
                 for i in range(0, len(self.industry_info)):
@@ -532,6 +644,8 @@ class AntMerchantExpandShopCreateModel(object):
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_start_expire_time' in d:
+            o.cert_start_expire_time = d['cert_start_expire_time']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
         if 'contact_infos' in d:
@@ -542,8 +656,22 @@ class AntMerchantExpandShopCreateModel(object):
             o.contact_phone = d['contact_phone']
         if 'cover' in d:
             o.cover = d['cover']
+        if 'expire_time' in d:
+            o.expire_time = d['expire_time']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
+        if 'fund_proofs' in d:
+            o.fund_proofs = d['fund_proofs']
+        if 'fund_type' in d:
+            o.fund_type = d['fund_type']
+        if 'identity_back_url' in d:
+            o.identity_back_url = d['identity_back_url']
+        if 'identity_end_time' in d:
+            o.identity_end_time = d['identity_end_time']
+        if 'identity_front_url' in d:
+            o.identity_front_url = d['identity_front_url']
+        if 'identity_start_time' in d:
+            o.identity_start_time = d['identity_start_time']
         if 'industry_info' in d:
             o.industry_info = d['industry_info']
         if 'industry_license' in d:

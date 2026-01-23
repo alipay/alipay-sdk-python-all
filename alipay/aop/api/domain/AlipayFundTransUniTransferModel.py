@@ -7,6 +7,7 @@ from alipay.aop.api.domain.MutipleCurrencyDetail import MutipleCurrencyDetail
 from alipay.aop.api.domain.Participant import Participant
 from alipay.aop.api.domain.Participant import Participant
 from alipay.aop.api.domain.SignData import SignData
+from alipay.aop.api.domain.TransferSceneReportInfo import TransferSceneReportInfo
 
 
 class AlipayFundTransUniTransferModel(object):
@@ -25,6 +26,8 @@ class AlipayFundTransUniTransferModel(object):
         self._remark = None
         self._sign_data = None
         self._trans_amount = None
+        self._transfer_scene_name = None
+        self._transfer_scene_report_infos = None
 
     @property
     def biz_scene(self):
@@ -129,6 +132,26 @@ class AlipayFundTransUniTransferModel(object):
     @trans_amount.setter
     def trans_amount(self, value):
         self._trans_amount = value
+    @property
+    def transfer_scene_name(self):
+        return self._transfer_scene_name
+
+    @transfer_scene_name.setter
+    def transfer_scene_name(self, value):
+        self._transfer_scene_name = value
+    @property
+    def transfer_scene_report_infos(self):
+        return self._transfer_scene_report_infos
+
+    @transfer_scene_report_infos.setter
+    def transfer_scene_report_infos(self, value):
+        if isinstance(value, list):
+            self._transfer_scene_report_infos = list()
+            for i in value:
+                if isinstance(i, TransferSceneReportInfo):
+                    self._transfer_scene_report_infos.append(i)
+                else:
+                    self._transfer_scene_report_infos.append(TransferSceneReportInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -198,6 +221,21 @@ class AlipayFundTransUniTransferModel(object):
                 params['trans_amount'] = self.trans_amount.to_alipay_dict()
             else:
                 params['trans_amount'] = self.trans_amount
+        if self.transfer_scene_name:
+            if hasattr(self.transfer_scene_name, 'to_alipay_dict'):
+                params['transfer_scene_name'] = self.transfer_scene_name.to_alipay_dict()
+            else:
+                params['transfer_scene_name'] = self.transfer_scene_name
+        if self.transfer_scene_report_infos:
+            if isinstance(self.transfer_scene_report_infos, list):
+                for i in range(0, len(self.transfer_scene_report_infos)):
+                    element = self.transfer_scene_report_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.transfer_scene_report_infos[i] = element.to_alipay_dict()
+            if hasattr(self.transfer_scene_report_infos, 'to_alipay_dict'):
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos.to_alipay_dict()
+            else:
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos
         return params
 
     @staticmethod
@@ -231,6 +269,10 @@ class AlipayFundTransUniTransferModel(object):
             o.sign_data = d['sign_data']
         if 'trans_amount' in d:
             o.trans_amount = d['trans_amount']
+        if 'transfer_scene_name' in d:
+            o.transfer_scene_name = d['transfer_scene_name']
+        if 'transfer_scene_report_infos' in d:
+            o.transfer_scene_report_infos = d['transfer_scene_report_infos']
         return o
 
 

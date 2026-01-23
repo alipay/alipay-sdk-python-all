@@ -1,0 +1,115 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class BrandFileInfoOpenApi(object):
+
+    def __init__(self):
+        self._file_id = None
+        self._file_name = None
+        self._file_type = None
+        self._file_url = None
+        self._valid_end = None
+        self._valid_start = None
+
+    @property
+    def file_id(self):
+        return self._file_id
+
+    @file_id.setter
+    def file_id(self, value):
+        self._file_id = value
+    @property
+    def file_name(self):
+        return self._file_name
+
+    @file_name.setter
+    def file_name(self, value):
+        self._file_name = value
+    @property
+    def file_type(self):
+        return self._file_type
+
+    @file_type.setter
+    def file_type(self, value):
+        self._file_type = value
+    @property
+    def file_url(self):
+        return self._file_url
+
+    @file_url.setter
+    def file_url(self, value):
+        self._file_url = value
+    @property
+    def valid_end(self):
+        return self._valid_end
+
+    @valid_end.setter
+    def valid_end(self, value):
+        self._valid_end = value
+    @property
+    def valid_start(self):
+        return self._valid_start
+
+    @valid_start.setter
+    def valid_start(self, value):
+        self._valid_start = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.file_id:
+            if hasattr(self.file_id, 'to_alipay_dict'):
+                params['file_id'] = self.file_id.to_alipay_dict()
+            else:
+                params['file_id'] = self.file_id
+        if self.file_name:
+            if hasattr(self.file_name, 'to_alipay_dict'):
+                params['file_name'] = self.file_name.to_alipay_dict()
+            else:
+                params['file_name'] = self.file_name
+        if self.file_type:
+            if hasattr(self.file_type, 'to_alipay_dict'):
+                params['file_type'] = self.file_type.to_alipay_dict()
+            else:
+                params['file_type'] = self.file_type
+        if self.file_url:
+            if hasattr(self.file_url, 'to_alipay_dict'):
+                params['file_url'] = self.file_url.to_alipay_dict()
+            else:
+                params['file_url'] = self.file_url
+        if self.valid_end:
+            if hasattr(self.valid_end, 'to_alipay_dict'):
+                params['valid_end'] = self.valid_end.to_alipay_dict()
+            else:
+                params['valid_end'] = self.valid_end
+        if self.valid_start:
+            if hasattr(self.valid_start, 'to_alipay_dict'):
+                params['valid_start'] = self.valid_start.to_alipay_dict()
+            else:
+                params['valid_start'] = self.valid_start
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = BrandFileInfoOpenApi()
+        if 'file_id' in d:
+            o.file_id = d['file_id']
+        if 'file_name' in d:
+            o.file_name = d['file_name']
+        if 'file_type' in d:
+            o.file_type = d['file_type']
+        if 'file_url' in d:
+            o.file_url = d['file_url']
+        if 'valid_end' in d:
+            o.valid_end = d['valid_end']
+        if 'valid_start' in d:
+            o.valid_start = d['valid_start']
+        return o
+
+

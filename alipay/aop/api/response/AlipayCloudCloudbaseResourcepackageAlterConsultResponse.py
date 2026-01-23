@@ -11,6 +11,8 @@ class AlipayCloudCloudbaseResourcepackageAlterConsultResponse(AlipayResponse):
         super(AlipayCloudCloudbaseResourcepackageAlterConsultResponse, self).__init__()
         self._alter_type = None
         self._currency = None
+        self._original_payment_direction = None
+        self._original_total_amount = None
         self._payment_direction = None
         self._trade_total_amount = None
 
@@ -28,6 +30,20 @@ class AlipayCloudCloudbaseResourcepackageAlterConsultResponse(AlipayResponse):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def original_payment_direction(self):
+        return self._original_payment_direction
+
+    @original_payment_direction.setter
+    def original_payment_direction(self, value):
+        self._original_payment_direction = value
+    @property
+    def original_total_amount(self):
+        return self._original_total_amount
+
+    @original_total_amount.setter
+    def original_total_amount(self, value):
+        self._original_total_amount = value
     @property
     def payment_direction(self):
         return self._payment_direction
@@ -49,6 +65,10 @@ class AlipayCloudCloudbaseResourcepackageAlterConsultResponse(AlipayResponse):
             self.alter_type = response['alter_type']
         if 'currency' in response:
             self.currency = response['currency']
+        if 'original_payment_direction' in response:
+            self.original_payment_direction = response['original_payment_direction']
+        if 'original_total_amount' in response:
+            self.original_total_amount = response['original_total_amount']
         if 'payment_direction' in response:
             self.payment_direction = response['payment_direction']
         if 'trade_total_amount' in response:

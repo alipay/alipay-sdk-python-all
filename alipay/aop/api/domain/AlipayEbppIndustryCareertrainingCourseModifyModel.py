@@ -10,7 +10,9 @@ from alipay.aop.api.domain.TeacherVO import TeacherVO
 class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
 
     def __init__(self):
+        self._category_id_list = None
         self._certificate_code_list = None
+        self._certification_course = None
         self._city_code_list = None
         self._course_cover_video = None
         self._course_end_date = None
@@ -24,12 +26,23 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
         self._course_tags = None
         self._description = None
         self._details_image_list = None
+        self._has_trial = None
         self._head_image_list = None
         self._remark = None
         self._service_url = None
         self._student_requirement = None
         self._teacher_info = None
 
+    @property
+    def category_id_list(self):
+        return self._category_id_list
+
+    @category_id_list.setter
+    def category_id_list(self, value):
+        if isinstance(value, list):
+            self._category_id_list = list()
+            for i in value:
+                self._category_id_list.append(i)
     @property
     def certificate_code_list(self):
         return self._certificate_code_list
@@ -40,6 +53,13 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
             self._certificate_code_list = list()
             for i in value:
                 self._certificate_code_list.append(i)
+    @property
+    def certification_course(self):
+        return self._certification_course
+
+    @certification_course.setter
+    def certification_course(self, value):
+        self._certification_course = value
     @property
     def city_code_list(self):
         return self._city_code_list
@@ -147,6 +167,13 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
             for i in value:
                 self._details_image_list.append(i)
     @property
+    def has_trial(self):
+        return self._has_trial
+
+    @has_trial.setter
+    def has_trial(self, value):
+        self._has_trial = value
+    @property
     def head_image_list(self):
         return self._head_image_list
 
@@ -194,6 +221,16 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.category_id_list:
+            if isinstance(self.category_id_list, list):
+                for i in range(0, len(self.category_id_list)):
+                    element = self.category_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.category_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.category_id_list, 'to_alipay_dict'):
+                params['category_id_list'] = self.category_id_list.to_alipay_dict()
+            else:
+                params['category_id_list'] = self.category_id_list
         if self.certificate_code_list:
             if isinstance(self.certificate_code_list, list):
                 for i in range(0, len(self.certificate_code_list)):
@@ -204,6 +241,11 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
                 params['certificate_code_list'] = self.certificate_code_list.to_alipay_dict()
             else:
                 params['certificate_code_list'] = self.certificate_code_list
+        if self.certification_course:
+            if hasattr(self.certification_course, 'to_alipay_dict'):
+                params['certification_course'] = self.certification_course.to_alipay_dict()
+            else:
+                params['certification_course'] = self.certification_course
         if self.city_code_list:
             if isinstance(self.city_code_list, list):
                 for i in range(0, len(self.city_code_list)):
@@ -289,6 +331,11 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
                 params['details_image_list'] = self.details_image_list.to_alipay_dict()
             else:
                 params['details_image_list'] = self.details_image_list
+        if self.has_trial:
+            if hasattr(self.has_trial, 'to_alipay_dict'):
+                params['has_trial'] = self.has_trial.to_alipay_dict()
+            else:
+                params['has_trial'] = self.has_trial
         if self.head_image_list:
             if isinstance(self.head_image_list, list):
                 for i in range(0, len(self.head_image_list)):
@@ -331,8 +378,12 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
         if not d:
             return None
         o = AlipayEbppIndustryCareertrainingCourseModifyModel()
+        if 'category_id_list' in d:
+            o.category_id_list = d['category_id_list']
         if 'certificate_code_list' in d:
             o.certificate_code_list = d['certificate_code_list']
+        if 'certification_course' in d:
+            o.certification_course = d['certification_course']
         if 'city_code_list' in d:
             o.city_code_list = d['city_code_list']
         if 'course_cover_video' in d:
@@ -359,6 +410,8 @@ class AlipayEbppIndustryCareertrainingCourseModifyModel(object):
             o.description = d['description']
         if 'details_image_list' in d:
             o.details_image_list = d['details_image_list']
+        if 'has_trial' in d:
+            o.has_trial = d['has_trial']
         if 'head_image_list' in d:
             o.head_image_list = d['head_image_list']
         if 'remark' in d:

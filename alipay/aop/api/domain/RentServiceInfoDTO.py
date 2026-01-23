@@ -11,6 +11,7 @@ class RentServiceInfoDTO(object):
         self._account_book_id = None
         self._available_amount = None
         self._service_no = None
+        self._status = None
 
     @property
     def account_book_id(self):
@@ -33,6 +34,13 @@ class RentServiceInfoDTO(object):
     @service_no.setter
     def service_no(self, value):
         self._service_no = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class RentServiceInfoDTO(object):
                 params['service_no'] = self.service_no.to_alipay_dict()
             else:
                 params['service_no'] = self.service_no
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class RentServiceInfoDTO(object):
             o.available_amount = d['available_amount']
         if 'service_no' in d:
             o.service_no = d['service_no']
+        if 'status' in d:
+            o.status = d['status']
         return o
 
 

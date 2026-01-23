@@ -11,14 +11,17 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
     def __init__(self):
         self._alipay_chat_id = None
         self._alipay_order_id = None
+        self._channel_code = None
         self._content = None
         self._merchant_user_id = None
+        self._msg_time = None
         self._msg_type = None
         self._out_biz_no = None
         self._out_chat_id = None
         self._out_doctor_id = None
         self._out_msg_id = None
         self._provider_type = None
+        self._scene_code = None
         self._service_provider_name = None
 
     @property
@@ -36,6 +39,13 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
     def alipay_order_id(self, value):
         self._alipay_order_id = value
     @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
+    @property
     def content(self):
         return self._content
 
@@ -52,6 +62,13 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
     @merchant_user_id.setter
     def merchant_user_id(self, value):
         self._merchant_user_id = value
+    @property
+    def msg_time(self):
+        return self._msg_time
+
+    @msg_time.setter
+    def msg_time(self, value):
+        self._msg_time = value
     @property
     def msg_type(self):
         return self._msg_type
@@ -95,6 +112,13 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
     def provider_type(self, value):
         self._provider_type = value
     @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
+    @property
     def service_provider_name(self):
         return self._service_provider_name
 
@@ -115,6 +139,11 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
                 params['alipay_order_id'] = self.alipay_order_id.to_alipay_dict()
             else:
                 params['alipay_order_id'] = self.alipay_order_id
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.content:
             if hasattr(self.content, 'to_alipay_dict'):
                 params['content'] = self.content.to_alipay_dict()
@@ -125,6 +154,11 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
             else:
                 params['merchant_user_id'] = self.merchant_user_id
+        if self.msg_time:
+            if hasattr(self.msg_time, 'to_alipay_dict'):
+                params['msg_time'] = self.msg_time.to_alipay_dict()
+            else:
+                params['msg_time'] = self.msg_time
         if self.msg_type:
             if hasattr(self.msg_type, 'to_alipay_dict'):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
@@ -155,6 +189,11 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
                 params['provider_type'] = self.provider_type.to_alipay_dict()
             else:
                 params['provider_type'] = self.provider_type
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
         if self.service_provider_name:
             if hasattr(self.service_provider_name, 'to_alipay_dict'):
                 params['service_provider_name'] = self.service_provider_name.to_alipay_dict()
@@ -171,10 +210,14 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
             o.alipay_chat_id = d['alipay_chat_id']
         if 'alipay_order_id' in d:
             o.alipay_order_id = d['alipay_order_id']
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'content' in d:
             o.content = d['content']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
+        if 'msg_time' in d:
+            o.msg_time = d['msg_time']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
         if 'out_biz_no' in d:
@@ -187,6 +230,8 @@ class AlipayCommerceMedicalIndustrydataImSyncModel(object):
             o.out_msg_id = d['out_msg_id']
         if 'provider_type' in d:
             o.provider_type = d['provider_type']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
         if 'service_provider_name' in d:
             o.service_provider_name = d['service_provider_name']
         return o

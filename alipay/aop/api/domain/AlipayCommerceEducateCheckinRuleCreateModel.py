@@ -11,6 +11,7 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     def __init__(self):
         self._auth_activity_id = None
         self._authentication_type = None
+        self._cheat_check = None
         self._check_out_end_minutes = None
         self._check_out_end_type = None
         self._check_out_start_minutes = None
@@ -50,6 +51,13 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
     @authentication_type.setter
     def authentication_type(self, value):
         self._authentication_type = value
+    @property
+    def cheat_check(self):
+        return self._cheat_check
+
+    @cheat_check.setter
+    def cheat_check(self, value):
+        self._cheat_check = value
     @property
     def check_out_end_minutes(self):
         return self._check_out_end_minutes
@@ -241,6 +249,11 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
                 params['authentication_type'] = self.authentication_type.to_alipay_dict()
             else:
                 params['authentication_type'] = self.authentication_type
+        if self.cheat_check:
+            if hasattr(self.cheat_check, 'to_alipay_dict'):
+                params['cheat_check'] = self.cheat_check.to_alipay_dict()
+            else:
+                params['cheat_check'] = self.cheat_check
         if self.check_out_end_minutes:
             if hasattr(self.check_out_end_minutes, 'to_alipay_dict'):
                 params['check_out_end_minutes'] = self.check_out_end_minutes.to_alipay_dict()
@@ -382,6 +395,8 @@ class AlipayCommerceEducateCheckinRuleCreateModel(object):
             o.auth_activity_id = d['auth_activity_id']
         if 'authentication_type' in d:
             o.authentication_type = d['authentication_type']
+        if 'cheat_check' in d:
+            o.cheat_check = d['cheat_check']
         if 'check_out_end_minutes' in d:
             o.check_out_end_minutes = d['check_out_end_minutes']
         if 'check_out_end_type' in d:

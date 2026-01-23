@@ -9,6 +9,7 @@ class VideoInfo(object):
 
     def __init__(self):
         self._duration = None
+        self._first_frame_url = None
         self._height = None
         self._origin_url = None
         self._oss_url = None
@@ -25,6 +26,13 @@ class VideoInfo(object):
     @duration.setter
     def duration(self, value):
         self._duration = value
+    @property
+    def first_frame_url(self):
+        return self._first_frame_url
+
+    @first_frame_url.setter
+    def first_frame_url(self, value):
+        self._first_frame_url = value
     @property
     def height(self):
         return self._height
@@ -90,6 +98,11 @@ class VideoInfo(object):
                 params['duration'] = self.duration.to_alipay_dict()
             else:
                 params['duration'] = self.duration
+        if self.first_frame_url:
+            if hasattr(self.first_frame_url, 'to_alipay_dict'):
+                params['first_frame_url'] = self.first_frame_url.to_alipay_dict()
+            else:
+                params['first_frame_url'] = self.first_frame_url
         if self.height:
             if hasattr(self.height, 'to_alipay_dict'):
                 params['height'] = self.height.to_alipay_dict()
@@ -139,6 +152,8 @@ class VideoInfo(object):
         o = VideoInfo()
         if 'duration' in d:
             o.duration = d['duration']
+        if 'first_frame_url' in d:
+            o.first_frame_url = d['first_frame_url']
         if 'height' in d:
             o.height = d['height']
         if 'origin_url' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InstitutionVO import InstitutionVO
 
 
 class AlipayPcreditLoanSideloanlendLendApplyModel(object):
@@ -10,9 +11,11 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._bank_card_id = None
+        self._candidate_credit_fund_supplier_list = None
         self._coupon_code_list = None
         self._credit_apply_no = None
         self._extension = None
+        self._loan_additional_process = None
         self._loan_amount = None
         self._loan_apply_no = None
         self._loan_purpose = None
@@ -41,6 +44,19 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     def bank_card_id(self, value):
         self._bank_card_id = value
     @property
+    def candidate_credit_fund_supplier_list(self):
+        return self._candidate_credit_fund_supplier_list
+
+    @candidate_credit_fund_supplier_list.setter
+    def candidate_credit_fund_supplier_list(self, value):
+        if isinstance(value, list):
+            self._candidate_credit_fund_supplier_list = list()
+            for i in value:
+                if isinstance(i, InstitutionVO):
+                    self._candidate_credit_fund_supplier_list.append(i)
+                else:
+                    self._candidate_credit_fund_supplier_list.append(InstitutionVO.from_alipay_dict(i))
+    @property
     def coupon_code_list(self):
         return self._coupon_code_list
 
@@ -64,6 +80,13 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
     @extension.setter
     def extension(self, value):
         self._extension = value
+    @property
+    def loan_additional_process(self):
+        return self._loan_additional_process
+
+    @loan_additional_process.setter
+    def loan_additional_process(self, value):
+        self._loan_additional_process = value
     @property
     def loan_amount(self):
         return self._loan_amount
@@ -162,6 +185,16 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['bank_card_id'] = self.bank_card_id.to_alipay_dict()
             else:
                 params['bank_card_id'] = self.bank_card_id
+        if self.candidate_credit_fund_supplier_list:
+            if isinstance(self.candidate_credit_fund_supplier_list, list):
+                for i in range(0, len(self.candidate_credit_fund_supplier_list)):
+                    element = self.candidate_credit_fund_supplier_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.candidate_credit_fund_supplier_list[i] = element.to_alipay_dict()
+            if hasattr(self.candidate_credit_fund_supplier_list, 'to_alipay_dict'):
+                params['candidate_credit_fund_supplier_list'] = self.candidate_credit_fund_supplier_list.to_alipay_dict()
+            else:
+                params['candidate_credit_fund_supplier_list'] = self.candidate_credit_fund_supplier_list
         if self.coupon_code_list:
             if isinstance(self.coupon_code_list, list):
                 for i in range(0, len(self.coupon_code_list)):
@@ -182,6 +215,11 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
                 params['extension'] = self.extension.to_alipay_dict()
             else:
                 params['extension'] = self.extension
+        if self.loan_additional_process:
+            if hasattr(self.loan_additional_process, 'to_alipay_dict'):
+                params['loan_additional_process'] = self.loan_additional_process.to_alipay_dict()
+            else:
+                params['loan_additional_process'] = self.loan_additional_process
         if self.loan_amount:
             if hasattr(self.loan_amount, 'to_alipay_dict'):
                 params['loan_amount'] = self.loan_amount.to_alipay_dict()
@@ -253,12 +291,16 @@ class AlipayPcreditLoanSideloanlendLendApplyModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'bank_card_id' in d:
             o.bank_card_id = d['bank_card_id']
+        if 'candidate_credit_fund_supplier_list' in d:
+            o.candidate_credit_fund_supplier_list = d['candidate_credit_fund_supplier_list']
         if 'coupon_code_list' in d:
             o.coupon_code_list = d['coupon_code_list']
         if 'credit_apply_no' in d:
             o.credit_apply_no = d['credit_apply_no']
         if 'extension' in d:
             o.extension = d['extension']
+        if 'loan_additional_process' in d:
+            o.loan_additional_process = d['loan_additional_process']
         if 'loan_amount' in d:
             o.loan_amount = d['loan_amount']
         if 'loan_apply_no' in d:

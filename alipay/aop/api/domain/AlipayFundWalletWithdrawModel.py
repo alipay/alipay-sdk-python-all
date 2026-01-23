@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtendStrategy import ExtendStrategy
+from alipay.aop.api.domain.MerchantChargingRule import MerchantChargingRule
 from alipay.aop.api.domain.WalletMarketingRule import WalletMarketingRule
 from alipay.aop.api.domain.WithdrawExtend import WithdrawExtend
 
@@ -14,6 +15,7 @@ class AlipayFundWalletWithdrawModel(object):
         self._amount = None
         self._biz_scene = None
         self._extend_strategy = None
+        self._merchant_charging_rule = None
         self._order_title = None
         self._out_biz_no = None
         self._product_code = None
@@ -45,6 +47,16 @@ class AlipayFundWalletWithdrawModel(object):
             self._extend_strategy = value
         else:
             self._extend_strategy = ExtendStrategy.from_alipay_dict(value)
+    @property
+    def merchant_charging_rule(self):
+        return self._merchant_charging_rule
+
+    @merchant_charging_rule.setter
+    def merchant_charging_rule(self, value):
+        if isinstance(value, MerchantChargingRule):
+            self._merchant_charging_rule = value
+        else:
+            self._merchant_charging_rule = MerchantChargingRule.from_alipay_dict(value)
     @property
     def order_title(self):
         return self._order_title
@@ -112,6 +124,11 @@ class AlipayFundWalletWithdrawModel(object):
                 params['extend_strategy'] = self.extend_strategy.to_alipay_dict()
             else:
                 params['extend_strategy'] = self.extend_strategy
+        if self.merchant_charging_rule:
+            if hasattr(self.merchant_charging_rule, 'to_alipay_dict'):
+                params['merchant_charging_rule'] = self.merchant_charging_rule.to_alipay_dict()
+            else:
+                params['merchant_charging_rule'] = self.merchant_charging_rule
         if self.order_title:
             if hasattr(self.order_title, 'to_alipay_dict'):
                 params['order_title'] = self.order_title.to_alipay_dict()
@@ -155,6 +172,8 @@ class AlipayFundWalletWithdrawModel(object):
             o.biz_scene = d['biz_scene']
         if 'extend_strategy' in d:
             o.extend_strategy = d['extend_strategy']
+        if 'merchant_charging_rule' in d:
+            o.merchant_charging_rule = d['merchant_charging_rule']
         if 'order_title' in d:
             o.order_title = d['order_title']
         if 'out_biz_no' in d:

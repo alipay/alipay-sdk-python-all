@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FreightFlowOrderSupInfo import FreightFlowOrderSupInfo
 
 
 class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
@@ -15,10 +16,13 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
         self._memo = None
         self._mode = None
         self._mybank_app_id = None
+        self._order_source_channel = None
+        self._order_sup_info = None
         self._partner_id = None
         self._pay_expire_time = None
         self._payee_card_name = None
         self._payee_id = None
+        self._result_callback_url = None
         self._total_amount = None
 
     @property
@@ -71,6 +75,23 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
     def mybank_app_id(self, value):
         self._mybank_app_id = value
     @property
+    def order_source_channel(self):
+        return self._order_source_channel
+
+    @order_source_channel.setter
+    def order_source_channel(self, value):
+        self._order_source_channel = value
+    @property
+    def order_sup_info(self):
+        return self._order_sup_info
+
+    @order_sup_info.setter
+    def order_sup_info(self, value):
+        if isinstance(value, FreightFlowOrderSupInfo):
+            self._order_sup_info = value
+        else:
+            self._order_sup_info = FreightFlowOrderSupInfo.from_alipay_dict(value)
+    @property
     def partner_id(self):
         return self._partner_id
 
@@ -98,6 +119,13 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
     @payee_id.setter
     def payee_id(self, value):
         self._payee_id = value
+    @property
+    def result_callback_url(self):
+        return self._result_callback_url
+
+    @result_callback_url.setter
+    def result_callback_url(self, value):
+        self._result_callback_url = value
     @property
     def total_amount(self):
         return self._total_amount
@@ -144,6 +172,16 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
                 params['mybank_app_id'] = self.mybank_app_id.to_alipay_dict()
             else:
                 params['mybank_app_id'] = self.mybank_app_id
+        if self.order_source_channel:
+            if hasattr(self.order_source_channel, 'to_alipay_dict'):
+                params['order_source_channel'] = self.order_source_channel.to_alipay_dict()
+            else:
+                params['order_source_channel'] = self.order_source_channel
+        if self.order_sup_info:
+            if hasattr(self.order_sup_info, 'to_alipay_dict'):
+                params['order_sup_info'] = self.order_sup_info.to_alipay_dict()
+            else:
+                params['order_sup_info'] = self.order_sup_info
         if self.partner_id:
             if hasattr(self.partner_id, 'to_alipay_dict'):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
@@ -164,6 +202,11 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
                 params['payee_id'] = self.payee_id.to_alipay_dict()
             else:
                 params['payee_id'] = self.payee_id
+        if self.result_callback_url:
+            if hasattr(self.result_callback_url, 'to_alipay_dict'):
+                params['result_callback_url'] = self.result_callback_url.to_alipay_dict()
+            else:
+                params['result_callback_url'] = self.result_callback_url
         if self.total_amount:
             if hasattr(self.total_amount, 'to_alipay_dict'):
                 params['total_amount'] = self.total_amount.to_alipay_dict()
@@ -190,6 +233,10 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
             o.mode = d['mode']
         if 'mybank_app_id' in d:
             o.mybank_app_id = d['mybank_app_id']
+        if 'order_source_channel' in d:
+            o.order_source_channel = d['order_source_channel']
+        if 'order_sup_info' in d:
+            o.order_sup_info = d['order_sup_info']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
         if 'pay_expire_time' in d:
@@ -198,6 +245,8 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateModel(object):
             o.payee_card_name = d['payee_card_name']
         if 'payee_id' in d:
             o.payee_id = d['payee_id']
+        if 'result_callback_url' in d:
+            o.result_callback_url = d['result_callback_url']
         if 'total_amount' in d:
             o.total_amount = d['total_amount']
         return o

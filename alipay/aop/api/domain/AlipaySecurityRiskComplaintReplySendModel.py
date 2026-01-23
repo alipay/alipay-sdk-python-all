@@ -9,6 +9,7 @@ class AlipaySecurityRiskComplaintReplySendModel(object):
 
     def __init__(self):
         self._complaint_id = None
+        self._record_id = None
         self._reply_content = None
 
     @property
@@ -18,6 +19,13 @@ class AlipaySecurityRiskComplaintReplySendModel(object):
     @complaint_id.setter
     def complaint_id(self, value):
         self._complaint_id = value
+    @property
+    def record_id(self):
+        return self._record_id
+
+    @record_id.setter
+    def record_id(self, value):
+        self._record_id = value
     @property
     def reply_content(self):
         return self._reply_content
@@ -34,6 +42,11 @@ class AlipaySecurityRiskComplaintReplySendModel(object):
                 params['complaint_id'] = self.complaint_id.to_alipay_dict()
             else:
                 params['complaint_id'] = self.complaint_id
+        if self.record_id:
+            if hasattr(self.record_id, 'to_alipay_dict'):
+                params['record_id'] = self.record_id.to_alipay_dict()
+            else:
+                params['record_id'] = self.record_id
         if self.reply_content:
             if hasattr(self.reply_content, 'to_alipay_dict'):
                 params['reply_content'] = self.reply_content.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipaySecurityRiskComplaintReplySendModel(object):
         o = AlipaySecurityRiskComplaintReplySendModel()
         if 'complaint_id' in d:
             o.complaint_id = d['complaint_id']
+        if 'record_id' in d:
+            o.record_id = d['record_id']
         if 'reply_content' in d:
             o.reply_content = d['reply_content']
         return o

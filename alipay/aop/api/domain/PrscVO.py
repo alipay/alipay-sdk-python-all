@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.DrugInfoVO import DrugInfoVO
 from alipay.aop.api.domain.PrescReview import PrescReview
 
 
@@ -11,7 +12,11 @@ class PrscVO(object):
     def __init__(self):
         self._channel = None
         self._create_time = None
+        self._depart_name = None
+        self._diagnosis = None
+        self._drug_info_list = None
         self._gender = None
+        self._instruction = None
         self._patient_age = None
         self._patient_id_no = None
         self._patient_name = None
@@ -43,12 +48,46 @@ class PrscVO(object):
     def create_time(self, value):
         self._create_time = value
     @property
+    def depart_name(self):
+        return self._depart_name
+
+    @depart_name.setter
+    def depart_name(self, value):
+        self._depart_name = value
+    @property
+    def diagnosis(self):
+        return self._diagnosis
+
+    @diagnosis.setter
+    def diagnosis(self, value):
+        self._diagnosis = value
+    @property
+    def drug_info_list(self):
+        return self._drug_info_list
+
+    @drug_info_list.setter
+    def drug_info_list(self, value):
+        if isinstance(value, list):
+            self._drug_info_list = list()
+            for i in value:
+                if isinstance(i, DrugInfoVO):
+                    self._drug_info_list.append(i)
+                else:
+                    self._drug_info_list.append(DrugInfoVO.from_alipay_dict(i))
+    @property
     def gender(self):
         return self._gender
 
     @gender.setter
     def gender(self, value):
         self._gender = value
+    @property
+    def instruction(self):
+        return self._instruction
+
+    @instruction.setter
+    def instruction(self, value):
+        self._instruction = value
     @property
     def patient_age(self):
         return self._patient_age
@@ -171,11 +210,36 @@ class PrscVO(object):
                 params['create_time'] = self.create_time.to_alipay_dict()
             else:
                 params['create_time'] = self.create_time
+        if self.depart_name:
+            if hasattr(self.depart_name, 'to_alipay_dict'):
+                params['depart_name'] = self.depart_name.to_alipay_dict()
+            else:
+                params['depart_name'] = self.depart_name
+        if self.diagnosis:
+            if hasattr(self.diagnosis, 'to_alipay_dict'):
+                params['diagnosis'] = self.diagnosis.to_alipay_dict()
+            else:
+                params['diagnosis'] = self.diagnosis
+        if self.drug_info_list:
+            if isinstance(self.drug_info_list, list):
+                for i in range(0, len(self.drug_info_list)):
+                    element = self.drug_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.drug_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.drug_info_list, 'to_alipay_dict'):
+                params['drug_info_list'] = self.drug_info_list.to_alipay_dict()
+            else:
+                params['drug_info_list'] = self.drug_info_list
         if self.gender:
             if hasattr(self.gender, 'to_alipay_dict'):
                 params['gender'] = self.gender.to_alipay_dict()
             else:
                 params['gender'] = self.gender
+        if self.instruction:
+            if hasattr(self.instruction, 'to_alipay_dict'):
+                params['instruction'] = self.instruction.to_alipay_dict()
+            else:
+                params['instruction'] = self.instruction
         if self.patient_age:
             if hasattr(self.patient_age, 'to_alipay_dict'):
                 params['patient_age'] = self.patient_age.to_alipay_dict()
@@ -262,8 +326,16 @@ class PrscVO(object):
             o.channel = d['channel']
         if 'create_time' in d:
             o.create_time = d['create_time']
+        if 'depart_name' in d:
+            o.depart_name = d['depart_name']
+        if 'diagnosis' in d:
+            o.diagnosis = d['diagnosis']
+        if 'drug_info_list' in d:
+            o.drug_info_list = d['drug_info_list']
         if 'gender' in d:
             o.gender = d['gender']
+        if 'instruction' in d:
+            o.instruction = d['instruction']
         if 'patient_age' in d:
             o.patient_age = d['patient_age']
         if 'patient_id_no' in d:

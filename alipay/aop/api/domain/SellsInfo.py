@@ -11,6 +11,7 @@ class SellsInfo(object):
         self._customer_sells = None
         self._display_sells = None
         self._real_sells = None
+        self._virtual_sells_range = None
 
     @property
     def customer_sells(self):
@@ -33,6 +34,13 @@ class SellsInfo(object):
     @real_sells.setter
     def real_sells(self, value):
         self._real_sells = value
+    @property
+    def virtual_sells_range(self):
+        return self._virtual_sells_range
+
+    @virtual_sells_range.setter
+    def virtual_sells_range(self, value):
+        self._virtual_sells_range = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class SellsInfo(object):
                 params['real_sells'] = self.real_sells.to_alipay_dict()
             else:
                 params['real_sells'] = self.real_sells
+        if self.virtual_sells_range:
+            if hasattr(self.virtual_sells_range, 'to_alipay_dict'):
+                params['virtual_sells_range'] = self.virtual_sells_range.to_alipay_dict()
+            else:
+                params['virtual_sells_range'] = self.virtual_sells_range
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class SellsInfo(object):
             o.display_sells = d['display_sells']
         if 'real_sells' in d:
             o.real_sells = d['real_sells']
+        if 'virtual_sells_range' in d:
+            o.virtual_sells_range = d['virtual_sells_range']
         return o
 
 

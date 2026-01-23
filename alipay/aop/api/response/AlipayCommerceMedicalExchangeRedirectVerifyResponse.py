@@ -12,8 +12,10 @@ class AlipayCommerceMedicalExchangeRedirectVerifyResponse(AlipayResponse):
         self._card_no = None
         self._expire_time = None
         self._open = None
+        self._open_id = None
         self._phone = None
         self._redirect_url = None
+        self._user_id = None
 
     @property
     def card_no(self):
@@ -37,6 +39,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyResponse(AlipayResponse):
     def open(self, value):
         self._open = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def phone(self):
         return self._phone
 
@@ -50,6 +59,13 @@ class AlipayCommerceMedicalExchangeRedirectVerifyResponse(AlipayResponse):
     @redirect_url.setter
     def redirect_url(self, value):
         self._redirect_url = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceMedicalExchangeRedirectVerifyResponse, self).parse_response_content(response_content)
@@ -59,7 +75,11 @@ class AlipayCommerceMedicalExchangeRedirectVerifyResponse(AlipayResponse):
             self.expire_time = response['expire_time']
         if 'open' in response:
             self.open = response['open']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'phone' in response:
             self.phone = response['phone']
         if 'redirect_url' in response:
             self.redirect_url = response['redirect_url']
+        if 'user_id' in response:
+            self.user_id = response['user_id']

@@ -15,6 +15,7 @@ class CompanyItem(object):
         self._item_spec = None
         self._item_tax_rate = None
         self._item_unit = None
+        self._item_unit_amount_with_tax = None
         self._out_item_id = None
         self._tax_code = None
 
@@ -68,6 +69,13 @@ class CompanyItem(object):
     def item_unit(self, value):
         self._item_unit = value
     @property
+    def item_unit_amount_with_tax(self):
+        return self._item_unit_amount_with_tax
+
+    @item_unit_amount_with_tax.setter
+    def item_unit_amount_with_tax(self, value):
+        self._item_unit_amount_with_tax = value
+    @property
     def out_item_id(self):
         return self._out_item_id
 
@@ -120,6 +128,11 @@ class CompanyItem(object):
                 params['item_unit'] = self.item_unit.to_alipay_dict()
             else:
                 params['item_unit'] = self.item_unit
+        if self.item_unit_amount_with_tax:
+            if hasattr(self.item_unit_amount_with_tax, 'to_alipay_dict'):
+                params['item_unit_amount_with_tax'] = self.item_unit_amount_with_tax.to_alipay_dict()
+            else:
+                params['item_unit_amount_with_tax'] = self.item_unit_amount_with_tax
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -151,6 +164,8 @@ class CompanyItem(object):
             o.item_tax_rate = d['item_tax_rate']
         if 'item_unit' in d:
             o.item_unit = d['item_unit']
+        if 'item_unit_amount_with_tax' in d:
+            o.item_unit_amount_with_tax = d['item_unit_amount_with_tax']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'tax_code' in d:

@@ -9,6 +9,7 @@ class DeductionRefundOrderInfo(object):
 
     def __init__(self):
         self._biz_time = None
+        self._out_order_no = None
         self._refund_amount = None
         self._refund_cash = None
         self._refund_order_id = None
@@ -21,6 +22,13 @@ class DeductionRefundOrderInfo(object):
     @biz_time.setter
     def biz_time(self, value):
         self._biz_time = value
+    @property
+    def out_order_no(self):
+        return self._out_order_no
+
+    @out_order_no.setter
+    def out_order_no(self, value):
+        self._out_order_no = value
     @property
     def refund_amount(self):
         return self._refund_amount
@@ -58,6 +66,11 @@ class DeductionRefundOrderInfo(object):
                 params['biz_time'] = self.biz_time.to_alipay_dict()
             else:
                 params['biz_time'] = self.biz_time
+        if self.out_order_no:
+            if hasattr(self.out_order_no, 'to_alipay_dict'):
+                params['out_order_no'] = self.out_order_no.to_alipay_dict()
+            else:
+                params['out_order_no'] = self.out_order_no
         if self.refund_amount:
             if hasattr(self.refund_amount, 'to_alipay_dict'):
                 params['refund_amount'] = self.refund_amount.to_alipay_dict()
@@ -87,6 +100,8 @@ class DeductionRefundOrderInfo(object):
         o = DeductionRefundOrderInfo()
         if 'biz_time' in d:
             o.biz_time = d['biz_time']
+        if 'out_order_no' in d:
+            o.out_order_no = d['out_order_no']
         if 'refund_amount' in d:
             o.refund_amount = d['refund_amount']
         if 'refund_cash' in d:

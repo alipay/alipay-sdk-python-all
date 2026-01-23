@@ -10,6 +10,7 @@ class AlipayTradeFinanceCreateModel(object):
     def __init__(self):
         self._amount = None
         self._biz_date = None
+        self._business_params = None
         self._out_order_no = None
         self._out_request_no = None
         self._settlement_no = None
@@ -28,6 +29,13 @@ class AlipayTradeFinanceCreateModel(object):
     @biz_date.setter
     def biz_date(self, value):
         self._biz_date = value
+    @property
+    def business_params(self):
+        return self._business_params
+
+    @business_params.setter
+    def business_params(self, value):
+        self._business_params = value
     @property
     def out_order_no(self):
         return self._out_order_no
@@ -63,6 +71,11 @@ class AlipayTradeFinanceCreateModel(object):
                 params['biz_date'] = self.biz_date.to_alipay_dict()
             else:
                 params['biz_date'] = self.biz_date
+        if self.business_params:
+            if hasattr(self.business_params, 'to_alipay_dict'):
+                params['business_params'] = self.business_params.to_alipay_dict()
+            else:
+                params['business_params'] = self.business_params
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayTradeFinanceCreateModel(object):
             o.amount = d['amount']
         if 'biz_date' in d:
             o.biz_date = d['biz_date']
+        if 'business_params' in d:
+            o.business_params = d['business_params']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         if 'out_request_no' in d:

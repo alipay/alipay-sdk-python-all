@@ -14,6 +14,7 @@ class AlipayCommerceHotelLockerDeviceSyncModel(object):
         self._building_no = None
         self._device_id = None
         self._device_isv_code = None
+        self._device_mac = None
         self._device_name = None
         self._device_p_code = None
         self._device_sn = None
@@ -70,6 +71,13 @@ class AlipayCommerceHotelLockerDeviceSyncModel(object):
     @device_isv_code.setter
     def device_isv_code(self, value):
         self._device_isv_code = value
+    @property
+    def device_mac(self):
+        return self._device_mac
+
+    @device_mac.setter
+    def device_mac(self, value):
+        self._device_mac = value
     @property
     def device_name(self):
         return self._device_name
@@ -195,6 +203,11 @@ class AlipayCommerceHotelLockerDeviceSyncModel(object):
                 params['device_isv_code'] = self.device_isv_code.to_alipay_dict()
             else:
                 params['device_isv_code'] = self.device_isv_code
+        if self.device_mac:
+            if hasattr(self.device_mac, 'to_alipay_dict'):
+                params['device_mac'] = self.device_mac.to_alipay_dict()
+            else:
+                params['device_mac'] = self.device_mac
         if self.device_name:
             if hasattr(self.device_name, 'to_alipay_dict'):
                 params['device_name'] = self.device_name.to_alipay_dict()
@@ -279,6 +292,8 @@ class AlipayCommerceHotelLockerDeviceSyncModel(object):
             o.device_id = d['device_id']
         if 'device_isv_code' in d:
             o.device_isv_code = d['device_isv_code']
+        if 'device_mac' in d:
+            o.device_mac = d['device_mac']
         if 'device_name' in d:
             o.device_name = d['device_name']
         if 'device_p_code' in d:

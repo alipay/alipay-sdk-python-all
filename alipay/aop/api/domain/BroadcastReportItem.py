@@ -16,9 +16,15 @@ class BroadcastReportItem(object):
         self._is_have_jl_coil = None
         self._isv_pid = None
         self._last_bind_merchant_id = None
+        self._merchant_city_name = None
+        self._merchant_district_name = None
+        self._merchant_province_name = None
         self._monthly_marketing_count = None
         self._monthly_touch_tx_count_above_2 = None
         self._monthly_tx_count_above_2 = None
+        self._pay_count_and_current_month_n_pay_count_standard = None
+        self._pay_count_and_next_month_n_pay_count_standard = None
+        self._pay_count_standard = None
         self._supplier_id = None
         self._tag_id = None
         self._work_date_range = None
@@ -80,6 +86,27 @@ class BroadcastReportItem(object):
     def last_bind_merchant_id(self, value):
         self._last_bind_merchant_id = value
     @property
+    def merchant_city_name(self):
+        return self._merchant_city_name
+
+    @merchant_city_name.setter
+    def merchant_city_name(self, value):
+        self._merchant_city_name = value
+    @property
+    def merchant_district_name(self):
+        return self._merchant_district_name
+
+    @merchant_district_name.setter
+    def merchant_district_name(self, value):
+        self._merchant_district_name = value
+    @property
+    def merchant_province_name(self):
+        return self._merchant_province_name
+
+    @merchant_province_name.setter
+    def merchant_province_name(self, value):
+        self._merchant_province_name = value
+    @property
     def monthly_marketing_count(self):
         return self._monthly_marketing_count
 
@@ -100,6 +127,27 @@ class BroadcastReportItem(object):
     @monthly_tx_count_above_2.setter
     def monthly_tx_count_above_2(self, value):
         self._monthly_tx_count_above_2 = value
+    @property
+    def pay_count_and_current_month_n_pay_count_standard(self):
+        return self._pay_count_and_current_month_n_pay_count_standard
+
+    @pay_count_and_current_month_n_pay_count_standard.setter
+    def pay_count_and_current_month_n_pay_count_standard(self, value):
+        self._pay_count_and_current_month_n_pay_count_standard = value
+    @property
+    def pay_count_and_next_month_n_pay_count_standard(self):
+        return self._pay_count_and_next_month_n_pay_count_standard
+
+    @pay_count_and_next_month_n_pay_count_standard.setter
+    def pay_count_and_next_month_n_pay_count_standard(self, value):
+        self._pay_count_and_next_month_n_pay_count_standard = value
+    @property
+    def pay_count_standard(self):
+        return self._pay_count_standard
+
+    @pay_count_standard.setter
+    def pay_count_standard(self, value):
+        self._pay_count_standard = value
     @property
     def supplier_id(self):
         return self._supplier_id
@@ -165,6 +213,21 @@ class BroadcastReportItem(object):
                 params['last_bind_merchant_id'] = self.last_bind_merchant_id.to_alipay_dict()
             else:
                 params['last_bind_merchant_id'] = self.last_bind_merchant_id
+        if self.merchant_city_name:
+            if hasattr(self.merchant_city_name, 'to_alipay_dict'):
+                params['merchant_city_name'] = self.merchant_city_name.to_alipay_dict()
+            else:
+                params['merchant_city_name'] = self.merchant_city_name
+        if self.merchant_district_name:
+            if hasattr(self.merchant_district_name, 'to_alipay_dict'):
+                params['merchant_district_name'] = self.merchant_district_name.to_alipay_dict()
+            else:
+                params['merchant_district_name'] = self.merchant_district_name
+        if self.merchant_province_name:
+            if hasattr(self.merchant_province_name, 'to_alipay_dict'):
+                params['merchant_province_name'] = self.merchant_province_name.to_alipay_dict()
+            else:
+                params['merchant_province_name'] = self.merchant_province_name
         if self.monthly_marketing_count:
             if hasattr(self.monthly_marketing_count, 'to_alipay_dict'):
                 params['monthly_marketing_count'] = self.monthly_marketing_count.to_alipay_dict()
@@ -180,6 +243,21 @@ class BroadcastReportItem(object):
                 params['monthly_tx_count_above_2'] = self.monthly_tx_count_above_2.to_alipay_dict()
             else:
                 params['monthly_tx_count_above_2'] = self.monthly_tx_count_above_2
+        if self.pay_count_and_current_month_n_pay_count_standard:
+            if hasattr(self.pay_count_and_current_month_n_pay_count_standard, 'to_alipay_dict'):
+                params['pay_count_and_current_month_n_pay_count_standard'] = self.pay_count_and_current_month_n_pay_count_standard.to_alipay_dict()
+            else:
+                params['pay_count_and_current_month_n_pay_count_standard'] = self.pay_count_and_current_month_n_pay_count_standard
+        if self.pay_count_and_next_month_n_pay_count_standard:
+            if hasattr(self.pay_count_and_next_month_n_pay_count_standard, 'to_alipay_dict'):
+                params['pay_count_and_next_month_n_pay_count_standard'] = self.pay_count_and_next_month_n_pay_count_standard.to_alipay_dict()
+            else:
+                params['pay_count_and_next_month_n_pay_count_standard'] = self.pay_count_and_next_month_n_pay_count_standard
+        if self.pay_count_standard:
+            if hasattr(self.pay_count_standard, 'to_alipay_dict'):
+                params['pay_count_standard'] = self.pay_count_standard.to_alipay_dict()
+            else:
+                params['pay_count_standard'] = self.pay_count_standard
         if self.supplier_id:
             if hasattr(self.supplier_id, 'to_alipay_dict'):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
@@ -218,12 +296,24 @@ class BroadcastReportItem(object):
             o.isv_pid = d['isv_pid']
         if 'last_bind_merchant_id' in d:
             o.last_bind_merchant_id = d['last_bind_merchant_id']
+        if 'merchant_city_name' in d:
+            o.merchant_city_name = d['merchant_city_name']
+        if 'merchant_district_name' in d:
+            o.merchant_district_name = d['merchant_district_name']
+        if 'merchant_province_name' in d:
+            o.merchant_province_name = d['merchant_province_name']
         if 'monthly_marketing_count' in d:
             o.monthly_marketing_count = d['monthly_marketing_count']
         if 'monthly_touch_tx_count_above_2' in d:
             o.monthly_touch_tx_count_above_2 = d['monthly_touch_tx_count_above_2']
         if 'monthly_tx_count_above_2' in d:
             o.monthly_tx_count_above_2 = d['monthly_tx_count_above_2']
+        if 'pay_count_and_current_month_n_pay_count_standard' in d:
+            o.pay_count_and_current_month_n_pay_count_standard = d['pay_count_and_current_month_n_pay_count_standard']
+        if 'pay_count_and_next_month_n_pay_count_standard' in d:
+            o.pay_count_and_next_month_n_pay_count_standard = d['pay_count_and_next_month_n_pay_count_standard']
+        if 'pay_count_standard' in d:
+            o.pay_count_standard = d['pay_count_standard']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
         if 'tag_id' in d:

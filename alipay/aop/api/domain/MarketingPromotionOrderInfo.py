@@ -29,6 +29,7 @@ class MarketingPromotionOrderInfo(object):
         self._order_title = None
         self._product_list = None
         self._promo_id = None
+        self._promo_type = None
         self._second_level_emp_id = None
         self._service_category_code = None
         self._signup_id = None
@@ -182,6 +183,13 @@ class MarketingPromotionOrderInfo(object):
     def promo_id(self, value):
         self._promo_id = value
     @property
+    def promo_type(self):
+        return self._promo_type
+
+    @promo_type.setter
+    def promo_type(self, value):
+        self._promo_type = value
+    @property
     def second_level_emp_id(self):
         return self._second_level_emp_id
 
@@ -325,6 +333,11 @@ class MarketingPromotionOrderInfo(object):
                 params['promo_id'] = self.promo_id.to_alipay_dict()
             else:
                 params['promo_id'] = self.promo_id
+        if self.promo_type:
+            if hasattr(self.promo_type, 'to_alipay_dict'):
+                params['promo_type'] = self.promo_type.to_alipay_dict()
+            else:
+                params['promo_type'] = self.promo_type
         if self.second_level_emp_id:
             if hasattr(self.second_level_emp_id, 'to_alipay_dict'):
                 params['second_level_emp_id'] = self.second_level_emp_id.to_alipay_dict()
@@ -397,6 +410,8 @@ class MarketingPromotionOrderInfo(object):
             o.product_list = d['product_list']
         if 'promo_id' in d:
             o.promo_id = d['promo_id']
+        if 'promo_type' in d:
+            o.promo_type = d['promo_type']
         if 'second_level_emp_id' in d:
             o.second_level_emp_id = d['second_level_emp_id']
         if 'service_category_code' in d:

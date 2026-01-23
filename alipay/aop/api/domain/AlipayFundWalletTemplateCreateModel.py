@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.WalletMerchantChargeInfo import WalletMerchantChargeInfo
 from alipay.aop.api.domain.ConsumeExtend import ConsumeExtend
 from alipay.aop.api.domain.WalletUseRule import WalletUseRule
 
@@ -12,10 +13,12 @@ class AlipayFundWalletTemplateCreateModel(object):
     def __init__(self):
         self._biz_identity = None
         self._biz_scene = None
+        self._charge_info_list = None
         self._consume_extend = None
         self._has_large_details_scene = None
         self._out_biz_no = None
         self._product_code = None
+        self._support_merchant_charge = None
         self._support_wallet_use_rule_define = None
         self._wallet_template_name = None
         self._wallet_use_rule = None
@@ -34,6 +37,19 @@ class AlipayFundWalletTemplateCreateModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def charge_info_list(self):
+        return self._charge_info_list
+
+    @charge_info_list.setter
+    def charge_info_list(self, value):
+        if isinstance(value, list):
+            self._charge_info_list = list()
+            for i in value:
+                if isinstance(i, WalletMerchantChargeInfo):
+                    self._charge_info_list.append(i)
+                else:
+                    self._charge_info_list.append(WalletMerchantChargeInfo.from_alipay_dict(i))
     @property
     def consume_extend(self):
         return self._consume_extend
@@ -65,6 +81,13 @@ class AlipayFundWalletTemplateCreateModel(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def support_merchant_charge(self):
+        return self._support_merchant_charge
+
+    @support_merchant_charge.setter
+    def support_merchant_charge(self, value):
+        self._support_merchant_charge = value
     @property
     def support_wallet_use_rule_define(self):
         return self._support_wallet_use_rule_define
@@ -103,6 +126,16 @@ class AlipayFundWalletTemplateCreateModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.charge_info_list:
+            if isinstance(self.charge_info_list, list):
+                for i in range(0, len(self.charge_info_list)):
+                    element = self.charge_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.charge_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.charge_info_list, 'to_alipay_dict'):
+                params['charge_info_list'] = self.charge_info_list.to_alipay_dict()
+            else:
+                params['charge_info_list'] = self.charge_info_list
         if self.consume_extend:
             if hasattr(self.consume_extend, 'to_alipay_dict'):
                 params['consume_extend'] = self.consume_extend.to_alipay_dict()
@@ -123,6 +156,11 @@ class AlipayFundWalletTemplateCreateModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.support_merchant_charge:
+            if hasattr(self.support_merchant_charge, 'to_alipay_dict'):
+                params['support_merchant_charge'] = self.support_merchant_charge.to_alipay_dict()
+            else:
+                params['support_merchant_charge'] = self.support_merchant_charge
         if self.support_wallet_use_rule_define:
             if hasattr(self.support_wallet_use_rule_define, 'to_alipay_dict'):
                 params['support_wallet_use_rule_define'] = self.support_wallet_use_rule_define.to_alipay_dict()
@@ -149,6 +187,8 @@ class AlipayFundWalletTemplateCreateModel(object):
             o.biz_identity = d['biz_identity']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'charge_info_list' in d:
+            o.charge_info_list = d['charge_info_list']
         if 'consume_extend' in d:
             o.consume_extend = d['consume_extend']
         if 'has_large_details_scene' in d:
@@ -157,6 +197,8 @@ class AlipayFundWalletTemplateCreateModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'support_merchant_charge' in d:
+            o.support_merchant_charge = d['support_merchant_charge']
         if 'support_wallet_use_rule_define' in d:
             o.support_wallet_use_rule_define = d['support_wallet_use_rule_define']
         if 'wallet_template_name' in d:

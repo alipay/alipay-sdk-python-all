@@ -23,6 +23,7 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
         self._province = None
         self._request_no = None
         self._spu_id = None
+        self._total_bonus = None
         self._user_name = None
 
     @property
@@ -131,6 +132,13 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
     def spu_id(self, value):
         self._spu_id = value
     @property
+    def total_bonus(self):
+        return self._total_bonus
+
+    @total_bonus.setter
+    def total_bonus(self, value):
+        self._total_bonus = value
+    @property
     def user_name(self):
         return self._user_name
 
@@ -216,6 +224,11 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
                 params['spu_id'] = self.spu_id.to_alipay_dict()
             else:
                 params['spu_id'] = self.spu_id
+        if self.total_bonus:
+            if hasattr(self.total_bonus, 'to_alipay_dict'):
+                params['total_bonus'] = self.total_bonus.to_alipay_dict()
+            else:
+                params['total_bonus'] = self.total_bonus
         if self.user_name:
             if hasattr(self.user_name, 'to_alipay_dict'):
                 params['user_name'] = self.user_name.to_alipay_dict()
@@ -258,6 +271,8 @@ class AlipayCommerceAcommunicationCreditphoneOrderPreconsultModel(object):
             o.request_no = d['request_no']
         if 'spu_id' in d:
             o.spu_id = d['spu_id']
+        if 'total_bonus' in d:
+            o.total_bonus = d['total_bonus']
         if 'user_name' in d:
             o.user_name = d['user_name']
         return o

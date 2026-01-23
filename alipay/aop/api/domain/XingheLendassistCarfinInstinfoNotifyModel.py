@@ -5,7 +5,9 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CarInfo import CarInfo
 from alipay.aop.api.domain.DMVLocation import DMVLocation
+from alipay.aop.api.domain.DrivingLicenseInfo import DrivingLicenseInfo
 from alipay.aop.api.domain.FileDetail import FileDetail
+from alipay.aop.api.domain.CarfinRegistrationInfo import CarfinRegistrationInfo
 from alipay.aop.api.domain.ValuationInfo import ValuationInfo
 
 
@@ -15,9 +17,12 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
         self._apply_no = None
         self._car_info = None
         self._dmv_location = None
+        self._driving_license_info = None
         self._file_list = None
         self._out_apply_no = None
         self._postback_list = None
+        self._postback_scene = None
+        self._registration_info = None
         self._valuation_info = None
 
     @property
@@ -47,6 +52,16 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             self._dmv_location = value
         else:
             self._dmv_location = DMVLocation.from_alipay_dict(value)
+    @property
+    def driving_license_info(self):
+        return self._driving_license_info
+
+    @driving_license_info.setter
+    def driving_license_info(self, value):
+        if isinstance(value, DrivingLicenseInfo):
+            self._driving_license_info = value
+        else:
+            self._driving_license_info = DrivingLicenseInfo.from_alipay_dict(value)
     @property
     def file_list(self):
         return self._file_list
@@ -78,6 +93,23 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             for i in value:
                 self._postback_list.append(i)
     @property
+    def postback_scene(self):
+        return self._postback_scene
+
+    @postback_scene.setter
+    def postback_scene(self, value):
+        self._postback_scene = value
+    @property
+    def registration_info(self):
+        return self._registration_info
+
+    @registration_info.setter
+    def registration_info(self, value):
+        if isinstance(value, CarfinRegistrationInfo):
+            self._registration_info = value
+        else:
+            self._registration_info = CarfinRegistrationInfo.from_alipay_dict(value)
+    @property
     def valuation_info(self):
         return self._valuation_info
 
@@ -106,6 +138,11 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
                 params['dmv_location'] = self.dmv_location.to_alipay_dict()
             else:
                 params['dmv_location'] = self.dmv_location
+        if self.driving_license_info:
+            if hasattr(self.driving_license_info, 'to_alipay_dict'):
+                params['driving_license_info'] = self.driving_license_info.to_alipay_dict()
+            else:
+                params['driving_license_info'] = self.driving_license_info
         if self.file_list:
             if isinstance(self.file_list, list):
                 for i in range(0, len(self.file_list)):
@@ -131,6 +168,16 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
                 params['postback_list'] = self.postback_list.to_alipay_dict()
             else:
                 params['postback_list'] = self.postback_list
+        if self.postback_scene:
+            if hasattr(self.postback_scene, 'to_alipay_dict'):
+                params['postback_scene'] = self.postback_scene.to_alipay_dict()
+            else:
+                params['postback_scene'] = self.postback_scene
+        if self.registration_info:
+            if hasattr(self.registration_info, 'to_alipay_dict'):
+                params['registration_info'] = self.registration_info.to_alipay_dict()
+            else:
+                params['registration_info'] = self.registration_info
         if self.valuation_info:
             if hasattr(self.valuation_info, 'to_alipay_dict'):
                 params['valuation_info'] = self.valuation_info.to_alipay_dict()
@@ -149,12 +196,18 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             o.car_info = d['car_info']
         if 'dmv_location' in d:
             o.dmv_location = d['dmv_location']
+        if 'driving_license_info' in d:
+            o.driving_license_info = d['driving_license_info']
         if 'file_list' in d:
             o.file_list = d['file_list']
         if 'out_apply_no' in d:
             o.out_apply_no = d['out_apply_no']
         if 'postback_list' in d:
             o.postback_list = d['postback_list']
+        if 'postback_scene' in d:
+            o.postback_scene = d['postback_scene']
+        if 'registration_info' in d:
+            o.registration_info = d['registration_info']
         if 'valuation_info' in d:
             o.valuation_info = d['valuation_info']
         return o

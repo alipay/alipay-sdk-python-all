@@ -10,6 +10,7 @@ class IdentityMaterials(object):
     def __init__(self):
         self._description = None
         self._material_content = None
+        self._material_name = None
         self._material_type = None
         self._pic_urls = None
 
@@ -27,6 +28,13 @@ class IdentityMaterials(object):
     @material_content.setter
     def material_content(self, value):
         self._material_content = value
+    @property
+    def material_name(self):
+        return self._material_name
+
+    @material_name.setter
+    def material_name(self, value):
+        self._material_name = value
     @property
     def material_type(self):
         return self._material_type
@@ -58,6 +66,11 @@ class IdentityMaterials(object):
                 params['material_content'] = self.material_content.to_alipay_dict()
             else:
                 params['material_content'] = self.material_content
+        if self.material_name:
+            if hasattr(self.material_name, 'to_alipay_dict'):
+                params['material_name'] = self.material_name.to_alipay_dict()
+            else:
+                params['material_name'] = self.material_name
         if self.material_type:
             if hasattr(self.material_type, 'to_alipay_dict'):
                 params['material_type'] = self.material_type.to_alipay_dict()
@@ -84,6 +97,8 @@ class IdentityMaterials(object):
             o.description = d['description']
         if 'material_content' in d:
             o.material_content = d['material_content']
+        if 'material_name' in d:
+            o.material_name = d['material_name']
         if 'material_type' in d:
             o.material_type = d['material_type']
         if 'pic_urls' in d:

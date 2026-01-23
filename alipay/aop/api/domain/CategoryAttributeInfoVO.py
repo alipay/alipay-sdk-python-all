@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AttributeValueInfo import AttributeValueInfo
+from alipay.aop.api.domain.FeatureMapVO import FeatureMapVO
+from alipay.aop.api.domain.MeasureInfoVO import MeasureInfoVO
 
 
 class CategoryAttributeInfoVO(object):
@@ -18,6 +20,8 @@ class CategoryAttributeInfoVO(object):
         self._category_id = None
         self._custom_input = None
         self._decided = None
+        self._feature_info = None
+        self._measure_info = None
         self._multi_select = None
         self._required = None
         self._status = None
@@ -91,6 +95,26 @@ class CategoryAttributeInfoVO(object):
     @decided.setter
     def decided(self, value):
         self._decided = value
+    @property
+    def feature_info(self):
+        return self._feature_info
+
+    @feature_info.setter
+    def feature_info(self, value):
+        if isinstance(value, FeatureMapVO):
+            self._feature_info = value
+        else:
+            self._feature_info = FeatureMapVO.from_alipay_dict(value)
+    @property
+    def measure_info(self):
+        return self._measure_info
+
+    @measure_info.setter
+    def measure_info(self, value):
+        if isinstance(value, MeasureInfoVO):
+            self._measure_info = value
+        else:
+            self._measure_info = MeasureInfoVO.from_alipay_dict(value)
     @property
     def multi_select(self):
         return self._multi_select
@@ -166,6 +190,16 @@ class CategoryAttributeInfoVO(object):
                 params['decided'] = self.decided.to_alipay_dict()
             else:
                 params['decided'] = self.decided
+        if self.feature_info:
+            if hasattr(self.feature_info, 'to_alipay_dict'):
+                params['feature_info'] = self.feature_info.to_alipay_dict()
+            else:
+                params['feature_info'] = self.feature_info
+        if self.measure_info:
+            if hasattr(self.measure_info, 'to_alipay_dict'):
+                params['measure_info'] = self.measure_info.to_alipay_dict()
+            else:
+                params['measure_info'] = self.measure_info
         if self.multi_select:
             if hasattr(self.multi_select, 'to_alipay_dict'):
                 params['multi_select'] = self.multi_select.to_alipay_dict()
@@ -206,6 +240,10 @@ class CategoryAttributeInfoVO(object):
             o.custom_input = d['custom_input']
         if 'decided' in d:
             o.decided = d['decided']
+        if 'feature_info' in d:
+            o.feature_info = d['feature_info']
+        if 'measure_info' in d:
+            o.measure_info = d['measure_info']
         if 'multi_select' in d:
             o.multi_select = d['multi_select']
         if 'required' in d:

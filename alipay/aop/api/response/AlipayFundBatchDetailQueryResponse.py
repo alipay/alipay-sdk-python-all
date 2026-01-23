@@ -30,6 +30,7 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
         self._payer_open_id = None
         self._payment_amount = None
         self._payment_currency = None
+        self._prepare_fund_order_id = None
         self._product_code = None
         self._sign_principal = None
         self._success_amount = None
@@ -185,6 +186,13 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
     def payment_currency(self, value):
         self._payment_currency = value
     @property
+    def prepare_fund_order_id(self):
+        return self._prepare_fund_order_id
+
+    @prepare_fund_order_id.setter
+    def prepare_fund_order_id(self, value):
+        self._prepare_fund_order_id = value
+    @property
     def product_code(self):
         return self._product_code
 
@@ -276,6 +284,8 @@ class AlipayFundBatchDetailQueryResponse(AlipayResponse):
             self.payment_amount = response['payment_amount']
         if 'payment_currency' in response:
             self.payment_currency = response['payment_currency']
+        if 'prepare_fund_order_id' in response:
+            self.prepare_fund_order_id = response['prepare_fund_order_id']
         if 'product_code' in response:
             self.product_code = response['product_code']
         if 'sign_principal' in response:

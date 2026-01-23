@@ -11,9 +11,11 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
     def __init__(self):
         super(AlipayCommerceAcommunicationDistributionOrderQueryResponse, self).__init__()
         self._alipay_order_id = None
+        self._alipay_user_id = None
         self._biz_order_message_list = None
         self._camp_id = None
         self._inst_order_id = None
+        self._open_id = None
         self._order_status = None
         self._order_status_code = None
         self._order_status_desc = None
@@ -28,6 +30,13 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
     @alipay_order_id.setter
     def alipay_order_id(self, value):
         self._alipay_order_id = value
+    @property
+    def alipay_user_id(self):
+        return self._alipay_user_id
+
+    @alipay_user_id.setter
+    def alipay_user_id(self, value):
+        self._alipay_user_id = value
     @property
     def biz_order_message_list(self):
         return self._biz_order_message_list
@@ -55,6 +64,13 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
     @inst_order_id.setter
     def inst_order_id(self, value):
         self._inst_order_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -102,12 +118,16 @@ class AlipayCommerceAcommunicationDistributionOrderQueryResponse(AlipayResponse)
         response = super(AlipayCommerceAcommunicationDistributionOrderQueryResponse, self).parse_response_content(response_content)
         if 'alipay_order_id' in response:
             self.alipay_order_id = response['alipay_order_id']
+        if 'alipay_user_id' in response:
+            self.alipay_user_id = response['alipay_user_id']
         if 'biz_order_message_list' in response:
             self.biz_order_message_list = response['biz_order_message_list']
         if 'camp_id' in response:
             self.camp_id = response['camp_id']
         if 'inst_order_id' in response:
             self.inst_order_id = response['inst_order_id']
+        if 'open_id' in response:
+            self.open_id = response['open_id']
         if 'order_status' in response:
             self.order_status = response['order_status']
         if 'order_status_code' in response:

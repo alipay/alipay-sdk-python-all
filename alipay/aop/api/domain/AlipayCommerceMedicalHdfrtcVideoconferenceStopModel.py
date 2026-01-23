@@ -8,6 +8,8 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalHdfrtcVideoconferenceStopModel(object):
 
     def __init__(self):
+        self._device_model = None
+        self._device_source = None
         self._end_type = None
         self._role = None
         self._source_type = None
@@ -15,6 +17,20 @@ class AlipayCommerceMedicalHdfrtcVideoconferenceStopModel(object):
         self._user_id = None
         self._video_conference_id = None
 
+    @property
+    def device_model(self):
+        return self._device_model
+
+    @device_model.setter
+    def device_model(self, value):
+        self._device_model = value
+    @property
+    def device_source(self):
+        return self._device_source
+
+    @device_source.setter
+    def device_source(self, value):
+        self._device_source = value
     @property
     def end_type(self):
         return self._end_type
@@ -61,6 +77,16 @@ class AlipayCommerceMedicalHdfrtcVideoconferenceStopModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.device_model:
+            if hasattr(self.device_model, 'to_alipay_dict'):
+                params['device_model'] = self.device_model.to_alipay_dict()
+            else:
+                params['device_model'] = self.device_model
+        if self.device_source:
+            if hasattr(self.device_source, 'to_alipay_dict'):
+                params['device_source'] = self.device_source.to_alipay_dict()
+            else:
+                params['device_source'] = self.device_source
         if self.end_type:
             if hasattr(self.end_type, 'to_alipay_dict'):
                 params['end_type'] = self.end_type.to_alipay_dict()
@@ -98,6 +124,10 @@ class AlipayCommerceMedicalHdfrtcVideoconferenceStopModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalHdfrtcVideoconferenceStopModel()
+        if 'device_model' in d:
+            o.device_model = d['device_model']
+        if 'device_source' in d:
+            o.device_source = d['device_source']
         if 'end_type' in d:
             o.end_type = d['end_type']
         if 'role' in d:

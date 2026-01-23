@@ -11,6 +11,7 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
         super(AlipayMerchantInfoShareResponse, self).__init__()
         self._address = None
         self._area = None
+        self._business_license_url = None
         self._business_scope = None
         self._cert_no = None
         self._cert_pic_exist = None
@@ -18,6 +19,9 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
         self._city = None
         self._expire_date = None
         self._is_certified = None
+        self._legal_person_cert_no = None
+        self._legal_person_cert_type = None
+        self._legal_person_expire_date = None
         self._legal_person_real_name = None
         self._name = None
         self._partner_id = None
@@ -38,6 +42,13 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
     @area.setter
     def area(self, value):
         self._area = value
+    @property
+    def business_license_url(self):
+        return self._business_license_url
+
+    @business_license_url.setter
+    def business_license_url(self, value):
+        self._business_license_url = value
     @property
     def business_scope(self):
         return self._business_scope
@@ -88,6 +99,27 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
     def is_certified(self, value):
         self._is_certified = value
     @property
+    def legal_person_cert_no(self):
+        return self._legal_person_cert_no
+
+    @legal_person_cert_no.setter
+    def legal_person_cert_no(self, value):
+        self._legal_person_cert_no = value
+    @property
+    def legal_person_cert_type(self):
+        return self._legal_person_cert_type
+
+    @legal_person_cert_type.setter
+    def legal_person_cert_type(self, value):
+        self._legal_person_cert_type = value
+    @property
+    def legal_person_expire_date(self):
+        return self._legal_person_expire_date
+
+    @legal_person_expire_date.setter
+    def legal_person_expire_date(self, value):
+        self._legal_person_expire_date = value
+    @property
     def legal_person_real_name(self):
         return self._legal_person_real_name
 
@@ -129,6 +161,8 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
             self.address = response['address']
         if 'area' in response:
             self.area = response['area']
+        if 'business_license_url' in response:
+            self.business_license_url = response['business_license_url']
         if 'business_scope' in response:
             self.business_scope = response['business_scope']
         if 'cert_no' in response:
@@ -143,6 +177,12 @@ class AlipayMerchantInfoShareResponse(AlipayResponse):
             self.expire_date = response['expire_date']
         if 'is_certified' in response:
             self.is_certified = response['is_certified']
+        if 'legal_person_cert_no' in response:
+            self.legal_person_cert_no = response['legal_person_cert_no']
+        if 'legal_person_cert_type' in response:
+            self.legal_person_cert_type = response['legal_person_cert_type']
+        if 'legal_person_expire_date' in response:
+            self.legal_person_expire_date = response['legal_person_expire_date']
         if 'legal_person_real_name' in response:
             self.legal_person_real_name = response['legal_person_real_name']
         if 'name' in response:

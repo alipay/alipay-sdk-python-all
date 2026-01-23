@@ -10,6 +10,7 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceLogisticsFreightflowFundtradeCreateResponse, self).__init__()
         self._biz_no = None
+        self._channel_pay_info = None
         self._order_pay_url = None
         self._status = None
         self._trade_no = None
@@ -21,6 +22,13 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateResponse(AlipayResponse):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def channel_pay_info(self):
+        return self._channel_pay_info
+
+    @channel_pay_info.setter
+    def channel_pay_info(self, value):
+        self._channel_pay_info = value
     @property
     def order_pay_url(self):
         return self._order_pay_url
@@ -47,6 +55,8 @@ class AlipayCommerceLogisticsFreightflowFundtradeCreateResponse(AlipayResponse):
         response = super(AlipayCommerceLogisticsFreightflowFundtradeCreateResponse, self).parse_response_content(response_content)
         if 'biz_no' in response:
             self.biz_no = response['biz_no']
+        if 'channel_pay_info' in response:
+            self.channel_pay_info = response['channel_pay_info']
         if 'order_pay_url' in response:
             self.order_pay_url = response['order_pay_url']
         if 'status' in response:

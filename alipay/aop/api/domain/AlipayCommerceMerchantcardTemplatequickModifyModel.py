@@ -11,6 +11,7 @@ class AlipayCommerceMerchantcardTemplatequickModifyModel(object):
     def __init__(self):
         self._card_template_id = None
         self._online_sale_switch = None
+        self._online_show_switch = None
         self._sale_info = None
         self._saleable_count = None
 
@@ -28,6 +29,13 @@ class AlipayCommerceMerchantcardTemplatequickModifyModel(object):
     @online_sale_switch.setter
     def online_sale_switch(self, value):
         self._online_sale_switch = value
+    @property
+    def online_show_switch(self):
+        return self._online_show_switch
+
+    @online_show_switch.setter
+    def online_show_switch(self, value):
+        self._online_show_switch = value
     @property
     def sale_info(self):
         return self._sale_info
@@ -59,6 +67,11 @@ class AlipayCommerceMerchantcardTemplatequickModifyModel(object):
                 params['online_sale_switch'] = self.online_sale_switch.to_alipay_dict()
             else:
                 params['online_sale_switch'] = self.online_sale_switch
+        if self.online_show_switch:
+            if hasattr(self.online_show_switch, 'to_alipay_dict'):
+                params['online_show_switch'] = self.online_show_switch.to_alipay_dict()
+            else:
+                params['online_show_switch'] = self.online_show_switch
         if self.sale_info:
             if hasattr(self.sale_info, 'to_alipay_dict'):
                 params['sale_info'] = self.sale_info.to_alipay_dict()
@@ -80,6 +93,8 @@ class AlipayCommerceMerchantcardTemplatequickModifyModel(object):
             o.card_template_id = d['card_template_id']
         if 'online_sale_switch' in d:
             o.online_sale_switch = d['online_sale_switch']
+        if 'online_show_switch' in d:
+            o.online_show_switch = d['online_show_switch']
         if 'sale_info' in d:
             o.sale_info = d['sale_info']
         if 'saleable_count' in d:

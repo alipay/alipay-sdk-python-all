@@ -10,6 +10,7 @@ class AlipayCircularAgreementQueryModel(object):
     def __init__(self):
         self._bind_wallet_id = None
         self._bind_wallet_type = None
+        self._binding_alipay_logon_id = None
         self._page_num = None
         self._page_size = None
         self._relation_openid = None
@@ -30,6 +31,13 @@ class AlipayCircularAgreementQueryModel(object):
     @bind_wallet_type.setter
     def bind_wallet_type(self, value):
         self._bind_wallet_type = value
+    @property
+    def binding_alipay_logon_id(self):
+        return self._binding_alipay_logon_id
+
+    @binding_alipay_logon_id.setter
+    def binding_alipay_logon_id(self, value):
+        self._binding_alipay_logon_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -79,6 +87,11 @@ class AlipayCircularAgreementQueryModel(object):
                 params['bind_wallet_type'] = self.bind_wallet_type.to_alipay_dict()
             else:
                 params['bind_wallet_type'] = self.bind_wallet_type
+        if self.binding_alipay_logon_id:
+            if hasattr(self.binding_alipay_logon_id, 'to_alipay_dict'):
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id.to_alipay_dict()
+            else:
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayCircularAgreementQueryModel(object):
             o.bind_wallet_id = d['bind_wallet_id']
         if 'bind_wallet_type' in d:
             o.bind_wallet_type = d['bind_wallet_type']
+        if 'binding_alipay_logon_id' in d:
+            o.binding_alipay_logon_id = d['binding_alipay_logon_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

@@ -8,6 +8,7 @@ from alipay.aop.api.domain.AxfOrderMemoInfo import AxfOrderMemoInfo
 from alipay.aop.api.domain.DamagesConsultInfo import DamagesConsultInfo
 from alipay.aop.api.domain.DamagesInfo import DamagesInfo
 from alipay.aop.api.domain.DeductionPlanInfo import DeductionPlanInfo
+from alipay.aop.api.domain.CardExpandOrderInfo import CardExpandOrderInfo
 
 
 class CardOrderInfo(object):
@@ -34,6 +35,7 @@ class CardOrderInfo(object):
         self._funding_model = None
         self._gmt_active = None
         self._gmt_expired = None
+        self._latest_expand_order_info = None
         self._merchant_pid = None
         self._name = None
         self._open_id = None
@@ -227,6 +229,16 @@ class CardOrderInfo(object):
     @gmt_expired.setter
     def gmt_expired(self, value):
         self._gmt_expired = value
+    @property
+    def latest_expand_order_info(self):
+        return self._latest_expand_order_info
+
+    @latest_expand_order_info.setter
+    def latest_expand_order_info(self, value):
+        if isinstance(value, CardExpandOrderInfo):
+            self._latest_expand_order_info = value
+        else:
+            self._latest_expand_order_info = CardExpandOrderInfo.from_alipay_dict(value)
     @property
     def merchant_pid(self):
         return self._merchant_pid
@@ -530,6 +542,11 @@ class CardOrderInfo(object):
                 params['gmt_expired'] = self.gmt_expired.to_alipay_dict()
             else:
                 params['gmt_expired'] = self.gmt_expired
+        if self.latest_expand_order_info:
+            if hasattr(self.latest_expand_order_info, 'to_alipay_dict'):
+                params['latest_expand_order_info'] = self.latest_expand_order_info.to_alipay_dict()
+            else:
+                params['latest_expand_order_info'] = self.latest_expand_order_info
         if self.merchant_pid:
             if hasattr(self.merchant_pid, 'to_alipay_dict'):
                 params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
@@ -714,6 +731,8 @@ class CardOrderInfo(object):
             o.gmt_active = d['gmt_active']
         if 'gmt_expired' in d:
             o.gmt_expired = d['gmt_expired']
+        if 'latest_expand_order_info' in d:
+            o.latest_expand_order_info = d['latest_expand_order_info']
         if 'merchant_pid' in d:
             o.merchant_pid = d['merchant_pid']
         if 'name' in d:

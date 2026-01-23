@@ -14,9 +14,9 @@ class AlipayOpenSpInteopSettleCreateModel(object):
         self._benefit_info = None
         self._inteop_order_no = None
         self._legal_info = None
-        self._legal_person_logon_id = None
         self._license_info = None
         self._merchant_type = None
+        self._operator_login_id = None
 
     @property
     def benefit_info(self):
@@ -46,13 +46,6 @@ class AlipayOpenSpInteopSettleCreateModel(object):
         else:
             self._legal_info = BizOpenCertificateInfoForEntry.from_alipay_dict(value)
     @property
-    def legal_person_logon_id(self):
-        return self._legal_person_logon_id
-
-    @legal_person_logon_id.setter
-    def legal_person_logon_id(self, value):
-        self._legal_person_logon_id = value
-    @property
     def license_info(self):
         return self._license_info
 
@@ -69,6 +62,13 @@ class AlipayOpenSpInteopSettleCreateModel(object):
     @merchant_type.setter
     def merchant_type(self, value):
         self._merchant_type = value
+    @property
+    def operator_login_id(self):
+        return self._operator_login_id
+
+    @operator_login_id.setter
+    def operator_login_id(self, value):
+        self._operator_login_id = value
 
 
     def to_alipay_dict(self):
@@ -88,11 +88,6 @@ class AlipayOpenSpInteopSettleCreateModel(object):
                 params['legal_info'] = self.legal_info.to_alipay_dict()
             else:
                 params['legal_info'] = self.legal_info
-        if self.legal_person_logon_id:
-            if hasattr(self.legal_person_logon_id, 'to_alipay_dict'):
-                params['legal_person_logon_id'] = self.legal_person_logon_id.to_alipay_dict()
-            else:
-                params['legal_person_logon_id'] = self.legal_person_logon_id
         if self.license_info:
             if hasattr(self.license_info, 'to_alipay_dict'):
                 params['license_info'] = self.license_info.to_alipay_dict()
@@ -103,6 +98,11 @@ class AlipayOpenSpInteopSettleCreateModel(object):
                 params['merchant_type'] = self.merchant_type.to_alipay_dict()
             else:
                 params['merchant_type'] = self.merchant_type
+        if self.operator_login_id:
+            if hasattr(self.operator_login_id, 'to_alipay_dict'):
+                params['operator_login_id'] = self.operator_login_id.to_alipay_dict()
+            else:
+                params['operator_login_id'] = self.operator_login_id
         return params
 
     @staticmethod
@@ -116,12 +116,12 @@ class AlipayOpenSpInteopSettleCreateModel(object):
             o.inteop_order_no = d['inteop_order_no']
         if 'legal_info' in d:
             o.legal_info = d['legal_info']
-        if 'legal_person_logon_id' in d:
-            o.legal_person_logon_id = d['legal_person_logon_id']
         if 'license_info' in d:
             o.license_info = d['license_info']
         if 'merchant_type' in d:
             o.merchant_type = d['merchant_type']
+        if 'operator_login_id' in d:
+            o.operator_login_id = d['operator_login_id']
         return o
 
 

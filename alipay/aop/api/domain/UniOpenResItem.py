@@ -9,11 +9,19 @@ from alipay.aop.api.domain.UniOpenResItemDetailInfos import UniOpenResItemDetail
 class UniOpenResItem(object):
 
     def __init__(self):
+        self._detail_info = None
         self._detail_infos = None
         self._fail_reason = None
         self._open_type = None
         self._status = None
 
+    @property
+    def detail_info(self):
+        return self._detail_info
+
+    @detail_info.setter
+    def detail_info(self, value):
+        self._detail_info = value
     @property
     def detail_infos(self):
         return self._detail_infos
@@ -49,6 +57,11 @@ class UniOpenResItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.detail_info:
+            if hasattr(self.detail_info, 'to_alipay_dict'):
+                params['detail_info'] = self.detail_info.to_alipay_dict()
+            else:
+                params['detail_info'] = self.detail_info
         if self.detail_infos:
             if hasattr(self.detail_infos, 'to_alipay_dict'):
                 params['detail_infos'] = self.detail_infos.to_alipay_dict()
@@ -76,6 +89,8 @@ class UniOpenResItem(object):
         if not d:
             return None
         o = UniOpenResItem()
+        if 'detail_info' in d:
+            o.detail_info = d['detail_info']
         if 'detail_infos' in d:
             o.detail_infos = d['detail_infos']
         if 'fail_reason' in d:

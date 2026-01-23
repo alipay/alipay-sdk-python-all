@@ -22,9 +22,11 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
         self._hos_institution_code_list = None
         self._hos_name_list = None
         self._hos_uniq_code_list = None
+        self._hospital_depart_name_list = None
         self._latitude = None
         self._longitude = None
         self._open_id = None
+        self._order_prop = None
         self._page_key = None
         self._page_no = None
         self._page_size = None
@@ -140,6 +142,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
             for i in value:
                 self._hos_uniq_code_list.append(i)
     @property
+    def hospital_depart_name_list(self):
+        return self._hospital_depart_name_list
+
+    @hospital_depart_name_list.setter
+    def hospital_depart_name_list(self, value):
+        if isinstance(value, list):
+            self._hospital_depart_name_list = list()
+            for i in value:
+                self._hospital_depart_name_list.append(i)
+    @property
     def latitude(self):
         return self._latitude
 
@@ -160,6 +172,13 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def order_prop(self):
+        return self._order_prop
+
+    @order_prop.setter
+    def order_prop(self, value):
+        self._order_prop = value
     @property
     def page_key(self):
         return self._page_key
@@ -342,6 +361,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
                 params['hos_uniq_code_list'] = self.hos_uniq_code_list.to_alipay_dict()
             else:
                 params['hos_uniq_code_list'] = self.hos_uniq_code_list
+        if self.hospital_depart_name_list:
+            if isinstance(self.hospital_depart_name_list, list):
+                for i in range(0, len(self.hospital_depart_name_list)):
+                    element = self.hospital_depart_name_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.hospital_depart_name_list[i] = element.to_alipay_dict()
+            if hasattr(self.hospital_depart_name_list, 'to_alipay_dict'):
+                params['hospital_depart_name_list'] = self.hospital_depart_name_list.to_alipay_dict()
+            else:
+                params['hospital_depart_name_list'] = self.hospital_depart_name_list
         if self.latitude:
             if hasattr(self.latitude, 'to_alipay_dict'):
                 params['latitude'] = self.latitude.to_alipay_dict()
@@ -357,6 +386,11 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.order_prop:
+            if hasattr(self.order_prop, 'to_alipay_dict'):
+                params['order_prop'] = self.order_prop.to_alipay_dict()
+            else:
+                params['order_prop'] = self.order_prop
         if self.page_key:
             if hasattr(self.page_key, 'to_alipay_dict'):
                 params['page_key'] = self.page_key.to_alipay_dict()
@@ -456,12 +490,16 @@ class AlipayCommerceMedicalLargermodelDepartmentscheduleQueryModel(object):
             o.hos_name_list = d['hos_name_list']
         if 'hos_uniq_code_list' in d:
             o.hos_uniq_code_list = d['hos_uniq_code_list']
+        if 'hospital_depart_name_list' in d:
+            o.hospital_depart_name_list = d['hospital_depart_name_list']
         if 'latitude' in d:
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'order_prop' in d:
+            o.order_prop = d['order_prop']
         if 'page_key' in d:
             o.page_key = d['page_key']
         if 'page_no' in d:

@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class ExamAttrsItemVO(object):
 
     def __init__(self):
+        self._attr_desc = None
         self._attr_key = None
         self._attr_value = None
 
+    @property
+    def attr_desc(self):
+        return self._attr_desc
+
+    @attr_desc.setter
+    def attr_desc(self, value):
+        self._attr_desc = value
     @property
     def attr_key(self):
         return self._attr_key
@@ -29,6 +37,11 @@ class ExamAttrsItemVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.attr_desc:
+            if hasattr(self.attr_desc, 'to_alipay_dict'):
+                params['attr_desc'] = self.attr_desc.to_alipay_dict()
+            else:
+                params['attr_desc'] = self.attr_desc
         if self.attr_key:
             if hasattr(self.attr_key, 'to_alipay_dict'):
                 params['attr_key'] = self.attr_key.to_alipay_dict()
@@ -46,6 +59,8 @@ class ExamAttrsItemVO(object):
         if not d:
             return None
         o = ExamAttrsItemVO()
+        if 'attr_desc' in d:
+            o.attr_desc = d['attr_desc']
         if 'attr_key' in d:
             o.attr_key = d['attr_key']
         if 'attr_value' in d:

@@ -15,6 +15,9 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
         self._card_no = None
         self._censor_code = None
         self._censor_info = None
+        self._charge_agreement_code = None
+        self._charge_agreement_no = None
+        self._charge_agreement_pid = None
         self._corp_id = None
         self._delivery_code = None
         self._delivery_name = None
@@ -28,6 +31,9 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
         self._out_biz_no = None
         self._plate_color = None
         self._plate_no = None
+        self._trip_pay_agreement_code = None
+        self._trip_pay_agreement_no = None
+        self._trip_pay_agreement_pid = None
         self._user_id = None
         self._vi_license_apc = None
         self._vi_license_brand_model = None
@@ -91,6 +97,27 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     @censor_info.setter
     def censor_info(self, value):
         self._censor_info = value
+    @property
+    def charge_agreement_code(self):
+        return self._charge_agreement_code
+
+    @charge_agreement_code.setter
+    def charge_agreement_code(self, value):
+        self._charge_agreement_code = value
+    @property
+    def charge_agreement_no(self):
+        return self._charge_agreement_no
+
+    @charge_agreement_no.setter
+    def charge_agreement_no(self, value):
+        self._charge_agreement_no = value
+    @property
+    def charge_agreement_pid(self):
+        return self._charge_agreement_pid
+
+    @charge_agreement_pid.setter
+    def charge_agreement_pid(self, value):
+        self._charge_agreement_pid = value
     @property
     def corp_id(self):
         return self._corp_id
@@ -182,6 +209,27 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
     @plate_no.setter
     def plate_no(self, value):
         self._plate_no = value
+    @property
+    def trip_pay_agreement_code(self):
+        return self._trip_pay_agreement_code
+
+    @trip_pay_agreement_code.setter
+    def trip_pay_agreement_code(self, value):
+        self._trip_pay_agreement_code = value
+    @property
+    def trip_pay_agreement_no(self):
+        return self._trip_pay_agreement_no
+
+    @trip_pay_agreement_no.setter
+    def trip_pay_agreement_no(self, value):
+        self._trip_pay_agreement_no = value
+    @property
+    def trip_pay_agreement_pid(self):
+        return self._trip_pay_agreement_pid
+
+    @trip_pay_agreement_pid.setter
+    def trip_pay_agreement_pid(self, value):
+        self._trip_pay_agreement_pid = value
     @property
     def user_id(self):
         return self._user_id
@@ -312,6 +360,21 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['censor_info'] = self.censor_info.to_alipay_dict()
             else:
                 params['censor_info'] = self.censor_info
+        if self.charge_agreement_code:
+            if hasattr(self.charge_agreement_code, 'to_alipay_dict'):
+                params['charge_agreement_code'] = self.charge_agreement_code.to_alipay_dict()
+            else:
+                params['charge_agreement_code'] = self.charge_agreement_code
+        if self.charge_agreement_no:
+            if hasattr(self.charge_agreement_no, 'to_alipay_dict'):
+                params['charge_agreement_no'] = self.charge_agreement_no.to_alipay_dict()
+            else:
+                params['charge_agreement_no'] = self.charge_agreement_no
+        if self.charge_agreement_pid:
+            if hasattr(self.charge_agreement_pid, 'to_alipay_dict'):
+                params['charge_agreement_pid'] = self.charge_agreement_pid.to_alipay_dict()
+            else:
+                params['charge_agreement_pid'] = self.charge_agreement_pid
         if self.corp_id:
             if hasattr(self.corp_id, 'to_alipay_dict'):
                 params['corp_id'] = self.corp_id.to_alipay_dict()
@@ -377,6 +440,21 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
                 params['plate_no'] = self.plate_no.to_alipay_dict()
             else:
                 params['plate_no'] = self.plate_no
+        if self.trip_pay_agreement_code:
+            if hasattr(self.trip_pay_agreement_code, 'to_alipay_dict'):
+                params['trip_pay_agreement_code'] = self.trip_pay_agreement_code.to_alipay_dict()
+            else:
+                params['trip_pay_agreement_code'] = self.trip_pay_agreement_code
+        if self.trip_pay_agreement_no:
+            if hasattr(self.trip_pay_agreement_no, 'to_alipay_dict'):
+                params['trip_pay_agreement_no'] = self.trip_pay_agreement_no.to_alipay_dict()
+            else:
+                params['trip_pay_agreement_no'] = self.trip_pay_agreement_no
+        if self.trip_pay_agreement_pid:
+            if hasattr(self.trip_pay_agreement_pid, 'to_alipay_dict'):
+                params['trip_pay_agreement_pid'] = self.trip_pay_agreement_pid.to_alipay_dict()
+            else:
+                params['trip_pay_agreement_pid'] = self.trip_pay_agreement_pid
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -463,6 +541,12 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.censor_code = d['censor_code']
         if 'censor_info' in d:
             o.censor_info = d['censor_info']
+        if 'charge_agreement_code' in d:
+            o.charge_agreement_code = d['charge_agreement_code']
+        if 'charge_agreement_no' in d:
+            o.charge_agreement_no = d['charge_agreement_no']
+        if 'charge_agreement_pid' in d:
+            o.charge_agreement_pid = d['charge_agreement_pid']
         if 'corp_id' in d:
             o.corp_id = d['corp_id']
         if 'delivery_code' in d:
@@ -489,6 +573,12 @@ class AlipayCommerceTransportEtcApplyorderSyncModel(object):
             o.plate_color = d['plate_color']
         if 'plate_no' in d:
             o.plate_no = d['plate_no']
+        if 'trip_pay_agreement_code' in d:
+            o.trip_pay_agreement_code = d['trip_pay_agreement_code']
+        if 'trip_pay_agreement_no' in d:
+            o.trip_pay_agreement_no = d['trip_pay_agreement_no']
+        if 'trip_pay_agreement_pid' in d:
+            o.trip_pay_agreement_pid = d['trip_pay_agreement_pid']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'vi_license_apc' in d:

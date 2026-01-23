@@ -17,6 +17,9 @@ class AlipayTradeSolutionprodUnifiedopenApplyModel(object):
         self._out_biz_no = None
         self._real_name = None
         self._solution_code = None
+        self._target_logon_id = None
+        self._target_user_id = None
+        self._target_user_open_id = None
 
     @property
     def back_url(self):
@@ -80,6 +83,27 @@ class AlipayTradeSolutionprodUnifiedopenApplyModel(object):
     @solution_code.setter
     def solution_code(self, value):
         self._solution_code = value
+    @property
+    def target_logon_id(self):
+        return self._target_logon_id
+
+    @target_logon_id.setter
+    def target_logon_id(self, value):
+        self._target_logon_id = value
+    @property
+    def target_user_id(self):
+        return self._target_user_id
+
+    @target_user_id.setter
+    def target_user_id(self, value):
+        self._target_user_id = value
+    @property
+    def target_user_open_id(self):
+        return self._target_user_open_id
+
+    @target_user_open_id.setter
+    def target_user_open_id(self, value):
+        self._target_user_open_id = value
 
 
     def to_alipay_dict(self):
@@ -129,6 +153,21 @@ class AlipayTradeSolutionprodUnifiedopenApplyModel(object):
                 params['solution_code'] = self.solution_code.to_alipay_dict()
             else:
                 params['solution_code'] = self.solution_code
+        if self.target_logon_id:
+            if hasattr(self.target_logon_id, 'to_alipay_dict'):
+                params['target_logon_id'] = self.target_logon_id.to_alipay_dict()
+            else:
+                params['target_logon_id'] = self.target_logon_id
+        if self.target_user_id:
+            if hasattr(self.target_user_id, 'to_alipay_dict'):
+                params['target_user_id'] = self.target_user_id.to_alipay_dict()
+            else:
+                params['target_user_id'] = self.target_user_id
+        if self.target_user_open_id:
+            if hasattr(self.target_user_open_id, 'to_alipay_dict'):
+                params['target_user_open_id'] = self.target_user_open_id.to_alipay_dict()
+            else:
+                params['target_user_open_id'] = self.target_user_open_id
         return params
 
     @staticmethod
@@ -152,6 +191,12 @@ class AlipayTradeSolutionprodUnifiedopenApplyModel(object):
             o.real_name = d['real_name']
         if 'solution_code' in d:
             o.solution_code = d['solution_code']
+        if 'target_logon_id' in d:
+            o.target_logon_id = d['target_logon_id']
+        if 'target_user_id' in d:
+            o.target_user_id = d['target_user_id']
+        if 'target_user_open_id' in d:
+            o.target_user_open_id = d['target_user_open_id']
         return o
 
 

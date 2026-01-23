@@ -9,6 +9,7 @@ from alipay.aop.api.domain.ExamAttrsItemVO import ExamAttrsItemVO
 class ExamVO(object):
 
     def __init__(self):
+        self._audit_status = None
         self._certificate_code_list = None
         self._city_code_list = None
         self._description = None
@@ -19,6 +20,7 @@ class ExamVO(object):
         self._exam_status = None
         self._exam_time_notes = None
         self._head_image_list = None
+        self._industry_show_status = None
         self._max_price = None
         self._min_price = None
         self._org_code = None
@@ -31,6 +33,13 @@ class ExamVO(object):
         self._remark = None
         self._service_url = None
 
+    @property
+    def audit_status(self):
+        return self._audit_status
+
+    @audit_status.setter
+    def audit_status(self, value):
+        self._audit_status = value
     @property
     def certificate_code_list(self):
         return self._certificate_code_list
@@ -117,6 +126,13 @@ class ExamVO(object):
             for i in value:
                 self._head_image_list.append(i)
     @property
+    def industry_show_status(self):
+        return self._industry_show_status
+
+    @industry_show_status.setter
+    def industry_show_status(self, value):
+        self._industry_show_status = value
+    @property
     def max_price(self):
         return self._max_price
 
@@ -197,6 +213,11 @@ class ExamVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.audit_status:
+            if hasattr(self.audit_status, 'to_alipay_dict'):
+                params['audit_status'] = self.audit_status.to_alipay_dict()
+            else:
+                params['audit_status'] = self.audit_status
         if self.certificate_code_list:
             if isinstance(self.certificate_code_list, list):
                 for i in range(0, len(self.certificate_code_list)):
@@ -267,6 +288,11 @@ class ExamVO(object):
                 params['head_image_list'] = self.head_image_list.to_alipay_dict()
             else:
                 params['head_image_list'] = self.head_image_list
+        if self.industry_show_status:
+            if hasattr(self.industry_show_status, 'to_alipay_dict'):
+                params['industry_show_status'] = self.industry_show_status.to_alipay_dict()
+            else:
+                params['industry_show_status'] = self.industry_show_status
         if self.max_price:
             if hasattr(self.max_price, 'to_alipay_dict'):
                 params['max_price'] = self.max_price.to_alipay_dict()
@@ -329,6 +355,8 @@ class ExamVO(object):
         if not d:
             return None
         o = ExamVO()
+        if 'audit_status' in d:
+            o.audit_status = d['audit_status']
         if 'certificate_code_list' in d:
             o.certificate_code_list = d['certificate_code_list']
         if 'city_code_list' in d:
@@ -349,6 +377,8 @@ class ExamVO(object):
             o.exam_time_notes = d['exam_time_notes']
         if 'head_image_list' in d:
             o.head_image_list = d['head_image_list']
+        if 'industry_show_status' in d:
+            o.industry_show_status = d['industry_show_status']
         if 'max_price' in d:
             o.max_price = d['max_price']
         if 'min_price' in d:

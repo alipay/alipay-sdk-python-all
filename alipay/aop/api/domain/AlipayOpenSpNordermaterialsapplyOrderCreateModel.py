@@ -9,6 +9,7 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
 
     def __init__(self):
         self._channel = None
+        self._combined_order_no = None
         self._materials_template_code = None
         self._test_flag = None
 
@@ -19,6 +20,13 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def combined_order_no(self):
+        return self._combined_order_no
+
+    @combined_order_no.setter
+    def combined_order_no(self, value):
+        self._combined_order_no = value
     @property
     def materials_template_code(self):
         return self._materials_template_code
@@ -42,6 +50,11 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.combined_order_no:
+            if hasattr(self.combined_order_no, 'to_alipay_dict'):
+                params['combined_order_no'] = self.combined_order_no.to_alipay_dict()
+            else:
+                params['combined_order_no'] = self.combined_order_no
         if self.materials_template_code:
             if hasattr(self.materials_template_code, 'to_alipay_dict'):
                 params['materials_template_code'] = self.materials_template_code.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayOpenSpNordermaterialsapplyOrderCreateModel(object):
         o = AlipayOpenSpNordermaterialsapplyOrderCreateModel()
         if 'channel' in d:
             o.channel = d['channel']
+        if 'combined_order_no' in d:
+            o.combined_order_no = d['combined_order_no']
         if 'materials_template_code' in d:
             o.materials_template_code = d['materials_template_code']
         if 'test_flag' in d:

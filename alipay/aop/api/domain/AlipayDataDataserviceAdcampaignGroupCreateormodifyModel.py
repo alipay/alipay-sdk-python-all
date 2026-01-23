@@ -24,11 +24,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
         self._filter_converted_event_list = None
         self._filter_converted_scope = None
         self._filter_converted_time_range = None
+        self._filter_taobao_alliance_crowd_time_range = None
         self._gender_list = None
         self._group_budget = None
         self._group_charge = None
         self._group_id = None
         self._group_inherit = None
+        self._group_inherit_switch = None
         self._group_name = None
         self._include_customized_crowd_list = None
         self._interest_list = None
@@ -159,6 +161,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
     def filter_converted_time_range(self, value):
         self._filter_converted_time_range = value
     @property
+    def filter_taobao_alliance_crowd_time_range(self):
+        return self._filter_taobao_alliance_crowd_time_range
+
+    @filter_taobao_alliance_crowd_time_range.setter
+    def filter_taobao_alliance_crowd_time_range(self, value):
+        self._filter_taobao_alliance_crowd_time_range = value
+    @property
     def gender_list(self):
         return self._gender_list
 
@@ -196,6 +205,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
     @group_inherit.setter
     def group_inherit(self, value):
         self._group_inherit = value
+    @property
+    def group_inherit_switch(self):
+        return self._group_inherit_switch
+
+    @group_inherit_switch.setter
+    def group_inherit_switch(self, value):
+        self._group_inherit_switch = value
     @property
     def group_name(self):
         return self._group_name
@@ -427,6 +443,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['filter_converted_time_range'] = self.filter_converted_time_range.to_alipay_dict()
             else:
                 params['filter_converted_time_range'] = self.filter_converted_time_range
+        if self.filter_taobao_alliance_crowd_time_range:
+            if hasattr(self.filter_taobao_alliance_crowd_time_range, 'to_alipay_dict'):
+                params['filter_taobao_alliance_crowd_time_range'] = self.filter_taobao_alliance_crowd_time_range.to_alipay_dict()
+            else:
+                params['filter_taobao_alliance_crowd_time_range'] = self.filter_taobao_alliance_crowd_time_range
         if self.gender_list:
             if isinstance(self.gender_list, list):
                 for i in range(0, len(self.gender_list)):
@@ -457,6 +478,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['group_inherit'] = self.group_inherit.to_alipay_dict()
             else:
                 params['group_inherit'] = self.group_inherit
+        if self.group_inherit_switch:
+            if hasattr(self.group_inherit_switch, 'to_alipay_dict'):
+                params['group_inherit_switch'] = self.group_inherit_switch.to_alipay_dict()
+            else:
+                params['group_inherit_switch'] = self.group_inherit_switch
         if self.group_name:
             if hasattr(self.group_name, 'to_alipay_dict'):
                 params['group_name'] = self.group_name.to_alipay_dict()
@@ -602,6 +628,8 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.filter_converted_scope = d['filter_converted_scope']
         if 'filter_converted_time_range' in d:
             o.filter_converted_time_range = d['filter_converted_time_range']
+        if 'filter_taobao_alliance_crowd_time_range' in d:
+            o.filter_taobao_alliance_crowd_time_range = d['filter_taobao_alliance_crowd_time_range']
         if 'gender_list' in d:
             o.gender_list = d['gender_list']
         if 'group_budget' in d:
@@ -612,6 +640,8 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.group_id = d['group_id']
         if 'group_inherit' in d:
             o.group_inherit = d['group_inherit']
+        if 'group_inherit_switch' in d:
+            o.group_inherit_switch = d['group_inherit_switch']
         if 'group_name' in d:
             o.group_name = d['group_name']
         if 'include_customized_crowd_list' in d:

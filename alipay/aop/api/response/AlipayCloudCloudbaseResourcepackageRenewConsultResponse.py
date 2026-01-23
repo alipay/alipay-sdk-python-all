@@ -10,6 +10,7 @@ class AlipayCloudCloudbaseResourcepackageRenewConsultResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCloudCloudbaseResourcepackageRenewConsultResponse, self).__init__()
         self._currency = None
+        self._original_total_amount = None
         self._trade_total_amount = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayCloudCloudbaseResourcepackageRenewConsultResponse(AlipayResponse):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def original_total_amount(self):
+        return self._original_total_amount
+
+    @original_total_amount.setter
+    def original_total_amount(self, value):
+        self._original_total_amount = value
     @property
     def trade_total_amount(self):
         return self._trade_total_amount
@@ -31,5 +39,7 @@ class AlipayCloudCloudbaseResourcepackageRenewConsultResponse(AlipayResponse):
         response = super(AlipayCloudCloudbaseResourcepackageRenewConsultResponse, self).parse_response_content(response_content)
         if 'currency' in response:
             self.currency = response['currency']
+        if 'original_total_amount' in response:
+            self.original_total_amount = response['original_total_amount']
         if 'trade_total_amount' in response:
             self.trade_total_amount = response['trade_total_amount']

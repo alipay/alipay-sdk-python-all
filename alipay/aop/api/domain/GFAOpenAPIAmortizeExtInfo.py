@@ -15,6 +15,7 @@ class GFAOpenAPIAmortizeExtInfo(object):
         self._amortize_volume = None
         self._gmt_end = None
         self._gmt_valid = None
+        self._refund_amortize_amount = None
         self._total_amortize_amount = None
 
     @property
@@ -67,6 +68,13 @@ class GFAOpenAPIAmortizeExtInfo(object):
     def gmt_valid(self, value):
         self._gmt_valid = value
     @property
+    def refund_amortize_amount(self):
+        return self._refund_amortize_amount
+
+    @refund_amortize_amount.setter
+    def refund_amortize_amount(self, value):
+        self._refund_amortize_amount = value
+    @property
     def total_amortize_amount(self):
         return self._total_amortize_amount
 
@@ -112,6 +120,11 @@ class GFAOpenAPIAmortizeExtInfo(object):
                 params['gmt_valid'] = self.gmt_valid.to_alipay_dict()
             else:
                 params['gmt_valid'] = self.gmt_valid
+        if self.refund_amortize_amount:
+            if hasattr(self.refund_amortize_amount, 'to_alipay_dict'):
+                params['refund_amortize_amount'] = self.refund_amortize_amount.to_alipay_dict()
+            else:
+                params['refund_amortize_amount'] = self.refund_amortize_amount
         if self.total_amortize_amount:
             if hasattr(self.total_amortize_amount, 'to_alipay_dict'):
                 params['total_amortize_amount'] = self.total_amortize_amount.to_alipay_dict()
@@ -138,6 +151,8 @@ class GFAOpenAPIAmortizeExtInfo(object):
             o.gmt_end = d['gmt_end']
         if 'gmt_valid' in d:
             o.gmt_valid = d['gmt_valid']
+        if 'refund_amortize_amount' in d:
+            o.refund_amortize_amount = d['refund_amortize_amount']
         if 'total_amortize_amount' in d:
             o.total_amortize_amount = d['total_amortize_amount']
         return o

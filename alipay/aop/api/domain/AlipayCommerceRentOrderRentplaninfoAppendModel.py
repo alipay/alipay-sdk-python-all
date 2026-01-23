@@ -3,19 +3,32 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentPlanCancelInfo import RentPlanCancelInfo
 from alipay.aop.api.domain.RentInstallmentInfo import RentInstallmentInfo
 
 
 class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
 
     def __init__(self):
+        self._cancel_info = None
         self._installments = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
         self._rent_end_time = None
+        self._type = None
         self._user_id = None
 
+    @property
+    def cancel_info(self):
+        return self._cancel_info
+
+    @cancel_info.setter
+    def cancel_info(self, value):
+        if isinstance(value, RentPlanCancelInfo):
+            self._cancel_info = value
+        else:
+            self._cancel_info = RentPlanCancelInfo.from_alipay_dict(value)
     @property
     def installments(self):
         return self._installments
@@ -58,6 +71,13 @@ class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
     def rent_end_time(self, value):
         self._rent_end_time = value
     @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -68,6 +88,11 @@ class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cancel_info:
+            if hasattr(self.cancel_info, 'to_alipay_dict'):
+                params['cancel_info'] = self.cancel_info.to_alipay_dict()
+            else:
+                params['cancel_info'] = self.cancel_info
         if self.installments:
             if isinstance(self.installments, list):
                 for i in range(0, len(self.installments)):
@@ -98,6 +123,11 @@ class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
                 params['rent_end_time'] = self.rent_end_time.to_alipay_dict()
             else:
                 params['rent_end_time'] = self.rent_end_time
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -110,6 +140,8 @@ class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
         if not d:
             return None
         o = AlipayCommerceRentOrderRentplaninfoAppendModel()
+        if 'cancel_info' in d:
+            o.cancel_info = d['cancel_info']
         if 'installments' in d:
             o.installments = d['installments']
         if 'open_id' in d:
@@ -120,6 +152,8 @@ class AlipayCommerceRentOrderRentplaninfoAppendModel(object):
             o.out_order_id = d['out_order_id']
         if 'rent_end_time' in d:
             o.rent_end_time = d['rent_end_time']
+        if 'type' in d:
+            o.type = d['type']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

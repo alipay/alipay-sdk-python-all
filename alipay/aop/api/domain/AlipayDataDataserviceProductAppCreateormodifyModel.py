@@ -9,6 +9,7 @@ from alipay.aop.api.domain.ItemDescInfoDto import ItemDescInfoDto
 from alipay.aop.api.domain.LandingTypeDto import LandingTypeDto
 from alipay.aop.api.domain.SellsInfo import SellsInfo
 from alipay.aop.api.domain.ItemSkuDto import ItemSkuDto
+from alipay.aop.api.domain.VideoInfo import VideoInfo
 
 
 class AlipayDataDataserviceProductAppCreateormodifyModel(object):
@@ -41,6 +42,7 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
         self._skus = None
         self._stock_num = None
         self._title = None
+        self._video_list = None
 
     @property
     def attrs(self):
@@ -261,6 +263,19 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
     @title.setter
     def title(self, value):
         self._title = value
+    @property
+    def video_list(self):
+        return self._video_list
+
+    @video_list.setter
+    def video_list(self, value):
+        if isinstance(value, list):
+            self._video_list = list()
+            for i in value:
+                if isinstance(i, VideoInfo):
+                    self._video_list.append(i)
+                else:
+                    self._video_list.append(VideoInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -420,6 +435,16 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
                 params['title'] = self.title.to_alipay_dict()
             else:
                 params['title'] = self.title
+        if self.video_list:
+            if isinstance(self.video_list, list):
+                for i in range(0, len(self.video_list)):
+                    element = self.video_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.video_list[i] = element.to_alipay_dict()
+            if hasattr(self.video_list, 'to_alipay_dict'):
+                params['video_list'] = self.video_list.to_alipay_dict()
+            else:
+                params['video_list'] = self.video_list
         return params
 
     @staticmethod
@@ -481,6 +506,8 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
             o.stock_num = d['stock_num']
         if 'title' in d:
             o.title = d['title']
+        if 'video_list' in d:
+            o.video_list = d['video_list']
         return o
 
 

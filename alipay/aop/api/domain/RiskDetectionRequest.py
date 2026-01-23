@@ -18,6 +18,7 @@ class RiskDetectionRequest(object):
         self._ext_info = None
         self._identity_id = None
         self._risk_detection_parameters = None
+        self._risk_point_codes = None
         self._second_level_business_link = None
         self._settle_ip_role_id = None
 
@@ -86,6 +87,16 @@ class RiskDetectionRequest(object):
                 else:
                     self._risk_detection_parameters.append(RiskDetectionMap.from_alipay_dict(i))
     @property
+    def risk_point_codes(self):
+        return self._risk_point_codes
+
+    @risk_point_codes.setter
+    def risk_point_codes(self, value):
+        if isinstance(value, list):
+            self._risk_point_codes = list()
+            for i in value:
+                self._risk_point_codes.append(i)
+    @property
     def second_level_business_link(self):
         return self._second_level_business_link
 
@@ -148,6 +159,16 @@ class RiskDetectionRequest(object):
                 params['risk_detection_parameters'] = self.risk_detection_parameters.to_alipay_dict()
             else:
                 params['risk_detection_parameters'] = self.risk_detection_parameters
+        if self.risk_point_codes:
+            if isinstance(self.risk_point_codes, list):
+                for i in range(0, len(self.risk_point_codes)):
+                    element = self.risk_point_codes[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.risk_point_codes[i] = element.to_alipay_dict()
+            if hasattr(self.risk_point_codes, 'to_alipay_dict'):
+                params['risk_point_codes'] = self.risk_point_codes.to_alipay_dict()
+            else:
+                params['risk_point_codes'] = self.risk_point_codes
         if self.second_level_business_link:
             if hasattr(self.second_level_business_link, 'to_alipay_dict'):
                 params['second_level_business_link'] = self.second_level_business_link.to_alipay_dict()
@@ -179,6 +200,8 @@ class RiskDetectionRequest(object):
             o.identity_id = d['identity_id']
         if 'risk_detection_parameters' in d:
             o.risk_detection_parameters = d['risk_detection_parameters']
+        if 'risk_point_codes' in d:
+            o.risk_point_codes = d['risk_point_codes']
         if 'second_level_business_link' in d:
             o.second_level_business_link = d['second_level_business_link']
         if 'settle_ip_role_id' in d:

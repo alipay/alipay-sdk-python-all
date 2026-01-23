@@ -10,6 +10,7 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
 
     def __init__(self):
         self._budget = None
+        self._charge_type = None
         self._end_date = None
         self._market_target_code = None
         self._market_target_config = None
@@ -28,6 +29,13 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
     @budget.setter
     def budget(self, value):
         self._budget = value
+    @property
+    def charge_type(self):
+        return self._charge_type
+
+    @charge_type.setter
+    def charge_type(self, value):
+        self._charge_type = value
     @property
     def end_date(self):
         return self._end_date
@@ -110,6 +118,11 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
                 params['budget'] = self.budget.to_alipay_dict()
             else:
                 params['budget'] = self.budget
+        if self.charge_type:
+            if hasattr(self.charge_type, 'to_alipay_dict'):
+                params['charge_type'] = self.charge_type.to_alipay_dict()
+            else:
+                params['charge_type'] = self.charge_type
         if self.end_date:
             if hasattr(self.end_date, 'to_alipay_dict'):
                 params['end_date'] = self.end_date.to_alipay_dict()
@@ -169,6 +182,8 @@ class AlipayDataDataserviceAdcampaignPlanCreateormodifyModel(object):
         o = AlipayDataDataserviceAdcampaignPlanCreateormodifyModel()
         if 'budget' in d:
             o.budget = d['budget']
+        if 'charge_type' in d:
+            o.charge_type = d['charge_type']
         if 'end_date' in d:
             o.end_date = d['end_date']
         if 'market_target_code' in d:

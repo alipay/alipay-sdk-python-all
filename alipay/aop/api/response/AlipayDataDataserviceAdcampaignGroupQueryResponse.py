@@ -28,12 +28,14 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._filter_converted_event_list = None
         self._filter_converted_scope = None
         self._filter_converted_time_range = None
+        self._filter_taobao_alliance_crowd_time_range = None
         self._gender_list = None
         self._gmt_modified = None
         self._group_budget = None
         self._group_charge = None
         self._group_id = None
         self._group_inherit = None
+        self._group_inherit_switch = None
         self._group_name = None
         self._group_status = None
         self._include_customized_crowd_list = None
@@ -191,6 +193,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     def filter_converted_time_range(self, value):
         self._filter_converted_time_range = value
     @property
+    def filter_taobao_alliance_crowd_time_range(self):
+        return self._filter_taobao_alliance_crowd_time_range
+
+    @filter_taobao_alliance_crowd_time_range.setter
+    def filter_taobao_alliance_crowd_time_range(self, value):
+        self._filter_taobao_alliance_crowd_time_range = value
+    @property
     def gender_list(self):
         return self._gender_list
 
@@ -235,6 +244,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     @group_inherit.setter
     def group_inherit(self, value):
         self._group_inherit = value
+    @property
+    def group_inherit_switch(self):
+        return self._group_inherit_switch
+
+    @group_inherit_switch.setter
+    def group_inherit_switch(self, value):
+        self._group_inherit_switch = value
     @property
     def group_name(self):
         return self._group_name
@@ -446,6 +462,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.filter_converted_scope = response['filter_converted_scope']
         if 'filter_converted_time_range' in response:
             self.filter_converted_time_range = response['filter_converted_time_range']
+        if 'filter_taobao_alliance_crowd_time_range' in response:
+            self.filter_taobao_alliance_crowd_time_range = response['filter_taobao_alliance_crowd_time_range']
         if 'gender_list' in response:
             self.gender_list = response['gender_list']
         if 'gmt_modified' in response:
@@ -458,6 +476,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.group_id = response['group_id']
         if 'group_inherit' in response:
             self.group_inherit = response['group_inherit']
+        if 'group_inherit_switch' in response:
+            self.group_inherit_switch = response['group_inherit_switch']
         if 'group_name' in response:
             self.group_name = response['group_name']
         if 'group_status' in response:

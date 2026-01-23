@@ -14,6 +14,7 @@ class UnifiedSettleExtendParams(object):
         self._original_order_amount = None
         self._refund_reason = None
         self._settle_mode = None
+        self._trade_no = None
         self._trans_memo = None
 
     @property
@@ -59,6 +60,13 @@ class UnifiedSettleExtendParams(object):
     def settle_mode(self, value):
         self._settle_mode = value
     @property
+    def trade_no(self):
+        return self._trade_no
+
+    @trade_no.setter
+    def trade_no(self, value):
+        self._trade_no = value
+    @property
     def trans_memo(self):
         return self._trans_memo
 
@@ -99,6 +107,11 @@ class UnifiedSettleExtendParams(object):
                 params['settle_mode'] = self.settle_mode.to_alipay_dict()
             else:
                 params['settle_mode'] = self.settle_mode
+        if self.trade_no:
+            if hasattr(self.trade_no, 'to_alipay_dict'):
+                params['trade_no'] = self.trade_no.to_alipay_dict()
+            else:
+                params['trade_no'] = self.trade_no
         if self.trans_memo:
             if hasattr(self.trans_memo, 'to_alipay_dict'):
                 params['trans_memo'] = self.trans_memo.to_alipay_dict()
@@ -123,6 +136,8 @@ class UnifiedSettleExtendParams(object):
             o.refund_reason = d['refund_reason']
         if 'settle_mode' in d:
             o.settle_mode = d['settle_mode']
+        if 'trade_no' in d:
+            o.trade_no = d['trade_no']
         if 'trans_memo' in d:
             o.trans_memo = d['trans_memo']
         return o

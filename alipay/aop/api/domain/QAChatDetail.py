@@ -12,6 +12,7 @@ class QAChatDetail(object):
         self._answer = None
         self._answer_type = None
         self._chat_uuid = None
+        self._component_code = None
         self._local_timestamp = None
         self._query = None
         self._vote_type = None
@@ -40,6 +41,13 @@ class QAChatDetail(object):
     @chat_uuid.setter
     def chat_uuid(self, value):
         self._chat_uuid = value
+    @property
+    def component_code(self):
+        return self._component_code
+
+    @component_code.setter
+    def component_code(self, value):
+        self._component_code = value
     @property
     def local_timestamp(self):
         return self._local_timestamp
@@ -80,6 +88,11 @@ class QAChatDetail(object):
                 params['chat_uuid'] = self.chat_uuid.to_alipay_dict()
             else:
                 params['chat_uuid'] = self.chat_uuid
+        if self.component_code:
+            if hasattr(self.component_code, 'to_alipay_dict'):
+                params['component_code'] = self.component_code.to_alipay_dict()
+            else:
+                params['component_code'] = self.component_code
         if self.local_timestamp:
             if hasattr(self.local_timestamp, 'to_alipay_dict'):
                 params['local_timestamp'] = self.local_timestamp.to_alipay_dict()
@@ -108,6 +121,8 @@ class QAChatDetail(object):
             o.answer_type = d['answer_type']
         if 'chat_uuid' in d:
             o.chat_uuid = d['chat_uuid']
+        if 'component_code' in d:
+            o.component_code = d['component_code']
         if 'local_timestamp' in d:
             o.local_timestamp = d['local_timestamp']
         if 'query' in d:

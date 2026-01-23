@@ -24,6 +24,7 @@ class OfflineLaborProjectRegistRecord(object):
         self._phone_number = None
         self._project_name = None
         self._register_time = None
+        self._social_risk_desc = None
         self._social_risk_info = None
         self._user_id = None
         self._user_name = None
@@ -141,6 +142,13 @@ class OfflineLaborProjectRegistRecord(object):
     def register_time(self, value):
         self._register_time = value
     @property
+    def social_risk_desc(self):
+        return self._social_risk_desc
+
+    @social_risk_desc.setter
+    def social_risk_desc(self, value):
+        self._social_risk_desc = value
+    @property
     def social_risk_info(self):
         return self._social_risk_info
 
@@ -245,6 +253,11 @@ class OfflineLaborProjectRegistRecord(object):
                 params['register_time'] = self.register_time.to_alipay_dict()
             else:
                 params['register_time'] = self.register_time
+        if self.social_risk_desc:
+            if hasattr(self.social_risk_desc, 'to_alipay_dict'):
+                params['social_risk_desc'] = self.social_risk_desc.to_alipay_dict()
+            else:
+                params['social_risk_desc'] = self.social_risk_desc
         if self.social_risk_info:
             if hasattr(self.social_risk_info, 'to_alipay_dict'):
                 params['social_risk_info'] = self.social_risk_info.to_alipay_dict()
@@ -299,6 +312,8 @@ class OfflineLaborProjectRegistRecord(object):
             o.project_name = d['project_name']
         if 'register_time' in d:
             o.register_time = d['register_time']
+        if 'social_risk_desc' in d:
+            o.social_risk_desc = d['social_risk_desc']
         if 'social_risk_info' in d:
             o.social_risk_info = d['social_risk_info']
         if 'user_id' in d:

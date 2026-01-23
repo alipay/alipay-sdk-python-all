@@ -14,6 +14,7 @@ class AlipayCommerceRentOrderPaySyncModel(object):
         self._out_trade_no = None
         self._pay_channel = None
         self._pay_items = None
+        self._pay_time = None
         self._trade_no = None
 
     @property
@@ -58,6 +59,13 @@ class AlipayCommerceRentOrderPaySyncModel(object):
                 else:
                     self._pay_items.append(RentPayItemDTO.from_alipay_dict(i))
     @property
+    def pay_time(self):
+        return self._pay_time
+
+    @pay_time.setter
+    def pay_time(self, value):
+        self._pay_time = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -98,6 +106,11 @@ class AlipayCommerceRentOrderPaySyncModel(object):
                 params['pay_items'] = self.pay_items.to_alipay_dict()
             else:
                 params['pay_items'] = self.pay_items
+        if self.pay_time:
+            if hasattr(self.pay_time, 'to_alipay_dict'):
+                params['pay_time'] = self.pay_time.to_alipay_dict()
+            else:
+                params['pay_time'] = self.pay_time
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -120,6 +133,8 @@ class AlipayCommerceRentOrderPaySyncModel(object):
             o.pay_channel = d['pay_channel']
         if 'pay_items' in d:
             o.pay_items = d['pay_items']
+        if 'pay_time' in d:
+            o.pay_time = d['pay_time']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         return o

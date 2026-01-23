@@ -22,6 +22,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._brand_id = None
         self._business_address = None
         self._business_time = None
+        self._card_account_no = None
         self._cert_image = None
         self._cert_name = None
         self._cert_no = None
@@ -89,6 +90,13 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
                     self._business_time.append(i)
                 else:
                     self._business_time.append(ShopBusinessTime.from_alipay_dict(i))
+    @property
+    def card_account_no(self):
+        return self._card_account_no
+
+    @card_account_no.setter
+    def card_account_no(self, value):
+        self._card_account_no = value
     @property
     def cert_image(self):
         return self._cert_image
@@ -345,6 +353,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.business_address = response['business_address']
         if 'business_time' in response:
             self.business_time = response['business_time']
+        if 'card_account_no' in response:
+            self.card_account_no = response['card_account_no']
         if 'cert_image' in response:
             self.cert_image = response['cert_image']
         if 'cert_name' in response:

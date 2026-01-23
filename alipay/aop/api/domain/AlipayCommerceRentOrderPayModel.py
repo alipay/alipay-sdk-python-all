@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentPayExtendParamsDTO import RentPayExtendParamsDTO
 from alipay.aop.api.domain.RentPayItemDTO import RentPayItemDTO
 from alipay.aop.api.domain.RentSubMerchantDTO import RentSubMerchantDTO
 
@@ -11,6 +12,7 @@ class AlipayCommerceRentOrderPayModel(object):
 
     def __init__(self):
         self._aftersale_id = None
+        self._extend_params = None
         self._order_id = None
         self._out_trade_no = None
         self._pay_amount = None
@@ -29,6 +31,16 @@ class AlipayCommerceRentOrderPayModel(object):
     @aftersale_id.setter
     def aftersale_id(self, value):
         self._aftersale_id = value
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, RentPayExtendParamsDTO):
+            self._extend_params = value
+        else:
+            self._extend_params = RentPayExtendParamsDTO.from_alipay_dict(value)
     @property
     def order_id(self):
         return self._order_id
@@ -117,6 +129,11 @@ class AlipayCommerceRentOrderPayModel(object):
                 params['aftersale_id'] = self.aftersale_id.to_alipay_dict()
             else:
                 params['aftersale_id'] = self.aftersale_id
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -181,6 +198,8 @@ class AlipayCommerceRentOrderPayModel(object):
         o = AlipayCommerceRentOrderPayModel()
         if 'aftersale_id' in d:
             o.aftersale_id = d['aftersale_id']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'out_trade_no' in d:

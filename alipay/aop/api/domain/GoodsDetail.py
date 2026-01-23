@@ -12,6 +12,7 @@ class GoodsDetail(object):
         self._body = None
         self._categories_tree = None
         self._goods_category = None
+        self._goods_ean_id = None
         self._goods_id = None
         self._goods_name = None
         self._out_item_id = None
@@ -48,6 +49,13 @@ class GoodsDetail(object):
     @goods_category.setter
     def goods_category(self, value):
         self._goods_category = value
+    @property
+    def goods_ean_id(self):
+        return self._goods_ean_id
+
+    @goods_ean_id.setter
+    def goods_ean_id(self, value):
+        self._goods_ean_id = value
     @property
     def goods_id(self):
         return self._goods_id
@@ -121,6 +129,11 @@ class GoodsDetail(object):
                 params['goods_category'] = self.goods_category.to_alipay_dict()
             else:
                 params['goods_category'] = self.goods_category
+        if self.goods_ean_id:
+            if hasattr(self.goods_ean_id, 'to_alipay_dict'):
+                params['goods_ean_id'] = self.goods_ean_id.to_alipay_dict()
+            else:
+                params['goods_ean_id'] = self.goods_ean_id
         if self.goods_id:
             if hasattr(self.goods_id, 'to_alipay_dict'):
                 params['goods_id'] = self.goods_id.to_alipay_dict()
@@ -171,6 +184,8 @@ class GoodsDetail(object):
             o.categories_tree = d['categories_tree']
         if 'goods_category' in d:
             o.goods_category = d['goods_category']
+        if 'goods_ean_id' in d:
+            o.goods_ean_id = d['goods_ean_id']
         if 'goods_id' in d:
             o.goods_id = d['goods_id']
         if 'goods_name' in d:

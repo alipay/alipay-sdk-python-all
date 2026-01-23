@@ -30,6 +30,7 @@ class DeductionOrderInfo(object):
         self._merchant_pid = None
         self._open_id = None
         self._order_id = None
+        self._original_deduction_order_id = None
         self._payment_no = None
         self._period = None
         self._plan_deduction_time = None
@@ -197,6 +198,13 @@ class DeductionOrderInfo(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def original_deduction_order_id(self):
+        return self._original_deduction_order_id
+
+    @original_deduction_order_id.setter
+    def original_deduction_order_id(self, value):
+        self._original_deduction_order_id = value
     @property
     def payment_no(self):
         return self._payment_no
@@ -432,6 +440,11 @@ class DeductionOrderInfo(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.original_deduction_order_id:
+            if hasattr(self.original_deduction_order_id, 'to_alipay_dict'):
+                params['original_deduction_order_id'] = self.original_deduction_order_id.to_alipay_dict()
+            else:
+                params['original_deduction_order_id'] = self.original_deduction_order_id
         if self.payment_no:
             if hasattr(self.payment_no, 'to_alipay_dict'):
                 params['payment_no'] = self.payment_no.to_alipay_dict()
@@ -567,6 +580,8 @@ class DeductionOrderInfo(object):
             o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'original_deduction_order_id' in d:
+            o.original_deduction_order_id = d['original_deduction_order_id']
         if 'payment_no' in d:
             o.payment_no = d['payment_no']
         if 'period' in d:

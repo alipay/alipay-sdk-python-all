@@ -10,10 +10,14 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
 
     def __init__(self):
         self._alipay_order_id = None
+        self._channel_code = None
         self._merchant_user_id = None
+        self._open_id = None
         self._out_biz_no = None
         self._out_chat_id = None
+        self._scene_code = None
         self._service_providers = None
+        self._user_id = None
 
     @property
     def alipay_order_id(self):
@@ -23,12 +27,26 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
     def alipay_order_id(self, value):
         self._alipay_order_id = value
     @property
+    def channel_code(self):
+        return self._channel_code
+
+    @channel_code.setter
+    def channel_code(self, value):
+        self._channel_code = value
+    @property
     def merchant_user_id(self):
         return self._merchant_user_id
 
     @merchant_user_id.setter
     def merchant_user_id(self, value):
         self._merchant_user_id = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -44,6 +62,13 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
     def out_chat_id(self, value):
         self._out_chat_id = value
     @property
+    def scene_code(self):
+        return self._scene_code
+
+    @scene_code.setter
+    def scene_code(self, value):
+        self._scene_code = value
+    @property
     def service_providers(self):
         return self._service_providers
 
@@ -56,6 +81,13 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
                     self._service_providers.append(i)
                 else:
                     self._service_providers.append(ServiceProvider.from_alipay_dict(i))
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -65,11 +97,21 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
                 params['alipay_order_id'] = self.alipay_order_id.to_alipay_dict()
             else:
                 params['alipay_order_id'] = self.alipay_order_id
+        if self.channel_code:
+            if hasattr(self.channel_code, 'to_alipay_dict'):
+                params['channel_code'] = self.channel_code.to_alipay_dict()
+            else:
+                params['channel_code'] = self.channel_code
         if self.merchant_user_id:
             if hasattr(self.merchant_user_id, 'to_alipay_dict'):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
             else:
                 params['merchant_user_id'] = self.merchant_user_id
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.out_biz_no:
             if hasattr(self.out_biz_no, 'to_alipay_dict'):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
@@ -80,6 +122,11 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
                 params['out_chat_id'] = self.out_chat_id.to_alipay_dict()
             else:
                 params['out_chat_id'] = self.out_chat_id
+        if self.scene_code:
+            if hasattr(self.scene_code, 'to_alipay_dict'):
+                params['scene_code'] = self.scene_code.to_alipay_dict()
+            else:
+                params['scene_code'] = self.scene_code
         if self.service_providers:
             if isinstance(self.service_providers, list):
                 for i in range(0, len(self.service_providers)):
@@ -90,6 +137,11 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
                 params['service_providers'] = self.service_providers.to_alipay_dict()
             else:
                 params['service_providers'] = self.service_providers
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -99,14 +151,22 @@ class AlipayCommerceMedicalIndustrydataImAddModel(object):
         o = AlipayCommerceMedicalIndustrydataImAddModel()
         if 'alipay_order_id' in d:
             o.alipay_order_id = d['alipay_order_id']
+        if 'channel_code' in d:
+            o.channel_code = d['channel_code']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
         if 'out_chat_id' in d:
             o.out_chat_id = d['out_chat_id']
+        if 'scene_code' in d:
+            o.scene_code = d['scene_code']
         if 'service_providers' in d:
             o.service_providers = d['service_providers']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

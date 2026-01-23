@@ -10,8 +10,10 @@ class AlipayCommerceMedicalMemberChatQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceMedicalMemberChatQueryResponse, self).__init__()
         self._avatar = None
+        self._doctor_inquiry_status = None
         self._doctor_message = None
         self._doctor_url = None
+        self._intention_source = None
         self._nick_name = None
         self._slogan = None
         self._source = None
@@ -24,6 +26,13 @@ class AlipayCommerceMedicalMemberChatQueryResponse(AlipayResponse):
     @avatar.setter
     def avatar(self, value):
         self._avatar = value
+    @property
+    def doctor_inquiry_status(self):
+        return self._doctor_inquiry_status
+
+    @doctor_inquiry_status.setter
+    def doctor_inquiry_status(self, value):
+        self._doctor_inquiry_status = value
     @property
     def doctor_message(self):
         return self._doctor_message
@@ -38,6 +47,13 @@ class AlipayCommerceMedicalMemberChatQueryResponse(AlipayResponse):
     @doctor_url.setter
     def doctor_url(self, value):
         self._doctor_url = value
+    @property
+    def intention_source(self):
+        return self._intention_source
+
+    @intention_source.setter
+    def intention_source(self, value):
+        self._intention_source = value
     @property
     def nick_name(self):
         return self._nick_name
@@ -71,10 +87,14 @@ class AlipayCommerceMedicalMemberChatQueryResponse(AlipayResponse):
         response = super(AlipayCommerceMedicalMemberChatQueryResponse, self).parse_response_content(response_content)
         if 'avatar' in response:
             self.avatar = response['avatar']
+        if 'doctor_inquiry_status' in response:
+            self.doctor_inquiry_status = response['doctor_inquiry_status']
         if 'doctor_message' in response:
             self.doctor_message = response['doctor_message']
         if 'doctor_url' in response:
             self.doctor_url = response['doctor_url']
+        if 'intention_source' in response:
+            self.intention_source = response['intention_source']
         if 'nick_name' in response:
             self.nick_name = response['nick_name']
         if 'slogan' in response:

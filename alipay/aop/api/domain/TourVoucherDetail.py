@@ -9,6 +9,7 @@ class TourVoucherDetail(object):
 
     def __init__(self):
         self._cert_no = None
+        self._cert_type = None
         self._code_info = None
         self._identity_name = None
         self._identity_type = None
@@ -30,6 +31,13 @@ class TourVoucherDetail(object):
     @cert_no.setter
     def cert_no(self, value):
         self._cert_no = value
+    @property
+    def cert_type(self):
+        return self._cert_type
+
+    @cert_type.setter
+    def cert_type(self, value):
+        self._cert_type = value
     @property
     def code_info(self):
         return self._code_info
@@ -133,6 +141,11 @@ class TourVoucherDetail(object):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
             else:
                 params['cert_no'] = self.cert_no
+        if self.cert_type:
+            if hasattr(self.cert_type, 'to_alipay_dict'):
+                params['cert_type'] = self.cert_type.to_alipay_dict()
+            else:
+                params['cert_type'] = self.cert_type
         if self.code_info:
             if hasattr(self.code_info, 'to_alipay_dict'):
                 params['code_info'] = self.code_info.to_alipay_dict()
@@ -212,6 +225,8 @@ class TourVoucherDetail(object):
         o = TourVoucherDetail()
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
+        if 'cert_type' in d:
+            o.cert_type = d['cert_type']
         if 'code_info' in d:
             o.code_info = d['code_info']
         if 'identity_name' in d:

@@ -8,12 +8,28 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalHdfrtcVideoconferenceRestartModel(object):
 
     def __init__(self):
+        self._device_model = None
+        self._device_source = None
         self._role = None
         self._source_type = None
         self._space_id = None
         self._user_id = None
         self._video_conference_id = None
 
+    @property
+    def device_model(self):
+        return self._device_model
+
+    @device_model.setter
+    def device_model(self, value):
+        self._device_model = value
+    @property
+    def device_source(self):
+        return self._device_source
+
+    @device_source.setter
+    def device_source(self, value):
+        self._device_source = value
     @property
     def role(self):
         return self._role
@@ -53,6 +69,16 @@ class AlipayCommerceMedicalHdfrtcVideoconferenceRestartModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.device_model:
+            if hasattr(self.device_model, 'to_alipay_dict'):
+                params['device_model'] = self.device_model.to_alipay_dict()
+            else:
+                params['device_model'] = self.device_model
+        if self.device_source:
+            if hasattr(self.device_source, 'to_alipay_dict'):
+                params['device_source'] = self.device_source.to_alipay_dict()
+            else:
+                params['device_source'] = self.device_source
         if self.role:
             if hasattr(self.role, 'to_alipay_dict'):
                 params['role'] = self.role.to_alipay_dict()
@@ -85,6 +111,10 @@ class AlipayCommerceMedicalHdfrtcVideoconferenceRestartModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalHdfrtcVideoconferenceRestartModel()
+        if 'device_model' in d:
+            o.device_model = d['device_model']
+        if 'device_source' in d:
+            o.device_source = d['device_source']
         if 'role' in d:
             o.role = d['role']
         if 'source_type' in d:

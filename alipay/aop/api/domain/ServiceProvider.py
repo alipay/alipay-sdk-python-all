@@ -10,6 +10,7 @@ class ServiceProvider(object):
     def __init__(self):
         self._avatar_url = None
         self._out_doctor_id = None
+        self._provider_id = None
         self._provider_type = None
         self._service_provider_name = None
 
@@ -27,6 +28,13 @@ class ServiceProvider(object):
     @out_doctor_id.setter
     def out_doctor_id(self, value):
         self._out_doctor_id = value
+    @property
+    def provider_id(self):
+        return self._provider_id
+
+    @provider_id.setter
+    def provider_id(self, value):
+        self._provider_id = value
     @property
     def provider_type(self):
         return self._provider_type
@@ -55,6 +63,11 @@ class ServiceProvider(object):
                 params['out_doctor_id'] = self.out_doctor_id.to_alipay_dict()
             else:
                 params['out_doctor_id'] = self.out_doctor_id
+        if self.provider_id:
+            if hasattr(self.provider_id, 'to_alipay_dict'):
+                params['provider_id'] = self.provider_id.to_alipay_dict()
+            else:
+                params['provider_id'] = self.provider_id
         if self.provider_type:
             if hasattr(self.provider_type, 'to_alipay_dict'):
                 params['provider_type'] = self.provider_type.to_alipay_dict()
@@ -76,6 +89,8 @@ class ServiceProvider(object):
             o.avatar_url = d['avatar_url']
         if 'out_doctor_id' in d:
             o.out_doctor_id = d['out_doctor_id']
+        if 'provider_id' in d:
+            o.provider_id = d['provider_id']
         if 'provider_type' in d:
             o.provider_type = d['provider_type']
         if 'service_provider_name' in d:

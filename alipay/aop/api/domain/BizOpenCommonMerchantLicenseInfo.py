@@ -12,7 +12,7 @@ class BizOpenCommonMerchantLicenseInfo(object):
         self._cert_no = None
         self._effective_date = None
         self._license_name = None
-        self._license_urls = None
+        self._license_pics = None
         self._reg_capital = None
         self._type = None
 
@@ -45,15 +45,15 @@ class BizOpenCommonMerchantLicenseInfo(object):
     def license_name(self, value):
         self._license_name = value
     @property
-    def license_urls(self):
-        return self._license_urls
+    def license_pics(self):
+        return self._license_pics
 
-    @license_urls.setter
-    def license_urls(self, value):
+    @license_pics.setter
+    def license_pics(self, value):
         if isinstance(value, list):
-            self._license_urls = list()
+            self._license_pics = list()
             for i in value:
-                self._license_urls.append(i)
+                self._license_pics.append(i)
     @property
     def reg_capital(self):
         return self._reg_capital
@@ -92,16 +92,16 @@ class BizOpenCommonMerchantLicenseInfo(object):
                 params['license_name'] = self.license_name.to_alipay_dict()
             else:
                 params['license_name'] = self.license_name
-        if self.license_urls:
-            if isinstance(self.license_urls, list):
-                for i in range(0, len(self.license_urls)):
-                    element = self.license_urls[i]
+        if self.license_pics:
+            if isinstance(self.license_pics, list):
+                for i in range(0, len(self.license_pics)):
+                    element = self.license_pics[i]
                     if hasattr(element, 'to_alipay_dict'):
-                        self.license_urls[i] = element.to_alipay_dict()
-            if hasattr(self.license_urls, 'to_alipay_dict'):
-                params['license_urls'] = self.license_urls.to_alipay_dict()
+                        self.license_pics[i] = element.to_alipay_dict()
+            if hasattr(self.license_pics, 'to_alipay_dict'):
+                params['license_pics'] = self.license_pics.to_alipay_dict()
             else:
-                params['license_urls'] = self.license_urls
+                params['license_pics'] = self.license_pics
         if self.reg_capital:
             if hasattr(self.reg_capital, 'to_alipay_dict'):
                 params['reg_capital'] = self.reg_capital.to_alipay_dict()
@@ -127,8 +127,8 @@ class BizOpenCommonMerchantLicenseInfo(object):
             o.effective_date = d['effective_date']
         if 'license_name' in d:
             o.license_name = d['license_name']
-        if 'license_urls' in d:
-            o.license_urls = d['license_urls']
+        if 'license_pics' in d:
+            o.license_pics = d['license_pics']
         if 'reg_capital' in d:
             o.reg_capital = d['reg_capital']
         if 'type' in d:

@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CarfinLendServiceInfo import CarfinLendServiceInfo
 
 
 class LendDrawdown(object):
@@ -22,6 +23,7 @@ class LendDrawdown(object):
         self._product_code = None
         self._repay_type = None
         self._service_fee_rate = None
+        self._service_info = None
         self._valuate_price = None
 
     @property
@@ -123,6 +125,16 @@ class LendDrawdown(object):
     def service_fee_rate(self, value):
         self._service_fee_rate = value
     @property
+    def service_info(self):
+        return self._service_info
+
+    @service_info.setter
+    def service_info(self, value):
+        if isinstance(value, CarfinLendServiceInfo):
+            self._service_info = value
+        else:
+            self._service_info = CarfinLendServiceInfo.from_alipay_dict(value)
+    @property
     def valuate_price(self):
         return self._valuate_price
 
@@ -203,6 +215,11 @@ class LendDrawdown(object):
                 params['service_fee_rate'] = self.service_fee_rate.to_alipay_dict()
             else:
                 params['service_fee_rate'] = self.service_fee_rate
+        if self.service_info:
+            if hasattr(self.service_info, 'to_alipay_dict'):
+                params['service_info'] = self.service_info.to_alipay_dict()
+            else:
+                params['service_info'] = self.service_info
         if self.valuate_price:
             if hasattr(self.valuate_price, 'to_alipay_dict'):
                 params['valuate_price'] = self.valuate_price.to_alipay_dict()
@@ -243,6 +260,8 @@ class LendDrawdown(object):
             o.repay_type = d['repay_type']
         if 'service_fee_rate' in d:
             o.service_fee_rate = d['service_fee_rate']
+        if 'service_info' in d:
+            o.service_info = d['service_info']
         if 'valuate_price' in d:
             o.valuate_price = d['valuate_price']
         return o

@@ -42,6 +42,7 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
         self._patient_moblie = None
         self._patient_name = None
         self._pay_type = None
+        self._pickup_end_time = None
         self._platform_code = None
         self._register_date = None
         self._register_id = None
@@ -288,6 +289,13 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     def pay_type(self, value):
         self._pay_type = value
     @property
+    def pickup_end_time(self):
+        return self._pickup_end_time
+
+    @pickup_end_time.setter
+    def pickup_end_time(self, value):
+        self._pickup_end_time = value
+    @property
     def platform_code(self):
         return self._platform_code
 
@@ -503,6 +511,11 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
             else:
                 params['pay_type'] = self.pay_type
+        if self.pickup_end_time:
+            if hasattr(self.pickup_end_time, 'to_alipay_dict'):
+                params['pickup_end_time'] = self.pickup_end_time.to_alipay_dict()
+            else:
+                params['pickup_end_time'] = self.pickup_end_time
         if self.platform_code:
             if hasattr(self.platform_code, 'to_alipay_dict'):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
@@ -608,6 +621,8 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
             o.patient_name = d['patient_name']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
+        if 'pickup_end_time' in d:
+            o.pickup_end_time = d['pickup_end_time']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
         if 'register_date' in d:

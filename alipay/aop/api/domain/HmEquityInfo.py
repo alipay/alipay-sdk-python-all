@@ -11,10 +11,13 @@ class HmEquityInfo(object):
         self._activated = None
         self._equity_code = None
         self._equity_name = None
+        self._equity_package_code = None
         self._equity_type = None
         self._residue_quota = None
         self._total_quota = None
         self._valid_date = None
+        self._valid_date_end = None
+        self._valid_date_start = None
 
     @property
     def activated(self):
@@ -37,6 +40,13 @@ class HmEquityInfo(object):
     @equity_name.setter
     def equity_name(self, value):
         self._equity_name = value
+    @property
+    def equity_package_code(self):
+        return self._equity_package_code
+
+    @equity_package_code.setter
+    def equity_package_code(self, value):
+        self._equity_package_code = value
     @property
     def equity_type(self):
         return self._equity_type
@@ -65,6 +75,20 @@ class HmEquityInfo(object):
     @valid_date.setter
     def valid_date(self, value):
         self._valid_date = value
+    @property
+    def valid_date_end(self):
+        return self._valid_date_end
+
+    @valid_date_end.setter
+    def valid_date_end(self, value):
+        self._valid_date_end = value
+    @property
+    def valid_date_start(self):
+        return self._valid_date_start
+
+    @valid_date_start.setter
+    def valid_date_start(self, value):
+        self._valid_date_start = value
 
 
     def to_alipay_dict(self):
@@ -84,6 +108,11 @@ class HmEquityInfo(object):
                 params['equity_name'] = self.equity_name.to_alipay_dict()
             else:
                 params['equity_name'] = self.equity_name
+        if self.equity_package_code:
+            if hasattr(self.equity_package_code, 'to_alipay_dict'):
+                params['equity_package_code'] = self.equity_package_code.to_alipay_dict()
+            else:
+                params['equity_package_code'] = self.equity_package_code
         if self.equity_type:
             if hasattr(self.equity_type, 'to_alipay_dict'):
                 params['equity_type'] = self.equity_type.to_alipay_dict()
@@ -104,6 +133,16 @@ class HmEquityInfo(object):
                 params['valid_date'] = self.valid_date.to_alipay_dict()
             else:
                 params['valid_date'] = self.valid_date
+        if self.valid_date_end:
+            if hasattr(self.valid_date_end, 'to_alipay_dict'):
+                params['valid_date_end'] = self.valid_date_end.to_alipay_dict()
+            else:
+                params['valid_date_end'] = self.valid_date_end
+        if self.valid_date_start:
+            if hasattr(self.valid_date_start, 'to_alipay_dict'):
+                params['valid_date_start'] = self.valid_date_start.to_alipay_dict()
+            else:
+                params['valid_date_start'] = self.valid_date_start
         return params
 
     @staticmethod
@@ -117,6 +156,8 @@ class HmEquityInfo(object):
             o.equity_code = d['equity_code']
         if 'equity_name' in d:
             o.equity_name = d['equity_name']
+        if 'equity_package_code' in d:
+            o.equity_package_code = d['equity_package_code']
         if 'equity_type' in d:
             o.equity_type = d['equity_type']
         if 'residue_quota' in d:
@@ -125,6 +166,10 @@ class HmEquityInfo(object):
             o.total_quota = d['total_quota']
         if 'valid_date' in d:
             o.valid_date = d['valid_date']
+        if 'valid_date_end' in d:
+            o.valid_date_end = d['valid_date_end']
+        if 'valid_date_start' in d:
+            o.valid_date_start = d['valid_date_start']
         return o
 
 

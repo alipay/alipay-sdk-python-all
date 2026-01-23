@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PolicyAccountInfoModel import PolicyAccountInfoModel
 from alipay.aop.api.domain.IdentityMaterials import IdentityMaterials
 from alipay.aop.api.domain.SeltInfoList import SeltInfoList
 
@@ -10,18 +11,23 @@ from alipay.aop.api.domain.SeltInfoList import SeltInfoList
 class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
 
     def __init__(self):
+        self._account_info = None
         self._apply_no = None
         self._biz_no = None
         self._case_reopened = None
+        self._case_setl_reapply = None
         self._cert_no = None
         self._cert_type = None
+        self._claim_detail = None
         self._claim_no = None
+        self._claim_rel_policy_no_list = None
         self._claim_report_no = None
         self._claim_status = None
         self._company_type = None
         self._identity_materials = None
         self._lack_materials_sense = None
         self._name = None
+        self._note_type = None
         self._note_url = None
         self._open_id = None
         self._reject_reason = None
@@ -31,6 +37,16 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
         self._total_claim_amount = None
         self._user_id = None
 
+    @property
+    def account_info(self):
+        return self._account_info
+
+    @account_info.setter
+    def account_info(self, value):
+        if isinstance(value, PolicyAccountInfoModel):
+            self._account_info = value
+        else:
+            self._account_info = PolicyAccountInfoModel.from_alipay_dict(value)
     @property
     def apply_no(self):
         return self._apply_no
@@ -53,6 +69,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     def case_reopened(self, value):
         self._case_reopened = value
     @property
+    def case_setl_reapply(self):
+        return self._case_setl_reapply
+
+    @case_setl_reapply.setter
+    def case_setl_reapply(self, value):
+        self._case_setl_reapply = value
+    @property
     def cert_no(self):
         return self._cert_no
 
@@ -67,12 +90,29 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def claim_detail(self):
+        return self._claim_detail
+
+    @claim_detail.setter
+    def claim_detail(self, value):
+        self._claim_detail = value
+    @property
     def claim_no(self):
         return self._claim_no
 
     @claim_no.setter
     def claim_no(self, value):
         self._claim_no = value
+    @property
+    def claim_rel_policy_no_list(self):
+        return self._claim_rel_policy_no_list
+
+    @claim_rel_policy_no_list.setter
+    def claim_rel_policy_no_list(self, value):
+        if isinstance(value, list):
+            self._claim_rel_policy_no_list = list()
+            for i in value:
+                self._claim_rel_policy_no_list.append(i)
     @property
     def claim_report_no(self):
         return self._claim_report_no
@@ -121,6 +161,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def note_type(self):
+        return self._note_type
+
+    @note_type.setter
+    def note_type(self, value):
+        self._note_type = value
     @property
     def note_url(self):
         return self._note_url
@@ -187,6 +234,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.account_info:
+            if hasattr(self.account_info, 'to_alipay_dict'):
+                params['account_info'] = self.account_info.to_alipay_dict()
+            else:
+                params['account_info'] = self.account_info
         if self.apply_no:
             if hasattr(self.apply_no, 'to_alipay_dict'):
                 params['apply_no'] = self.apply_no.to_alipay_dict()
@@ -202,6 +254,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['case_reopened'] = self.case_reopened.to_alipay_dict()
             else:
                 params['case_reopened'] = self.case_reopened
+        if self.case_setl_reapply:
+            if hasattr(self.case_setl_reapply, 'to_alipay_dict'):
+                params['case_setl_reapply'] = self.case_setl_reapply.to_alipay_dict()
+            else:
+                params['case_setl_reapply'] = self.case_setl_reapply
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -212,11 +269,26 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
             else:
                 params['cert_type'] = self.cert_type
+        if self.claim_detail:
+            if hasattr(self.claim_detail, 'to_alipay_dict'):
+                params['claim_detail'] = self.claim_detail.to_alipay_dict()
+            else:
+                params['claim_detail'] = self.claim_detail
         if self.claim_no:
             if hasattr(self.claim_no, 'to_alipay_dict'):
                 params['claim_no'] = self.claim_no.to_alipay_dict()
             else:
                 params['claim_no'] = self.claim_no
+        if self.claim_rel_policy_no_list:
+            if isinstance(self.claim_rel_policy_no_list, list):
+                for i in range(0, len(self.claim_rel_policy_no_list)):
+                    element = self.claim_rel_policy_no_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.claim_rel_policy_no_list[i] = element.to_alipay_dict()
+            if hasattr(self.claim_rel_policy_no_list, 'to_alipay_dict'):
+                params['claim_rel_policy_no_list'] = self.claim_rel_policy_no_list.to_alipay_dict()
+            else:
+                params['claim_rel_policy_no_list'] = self.claim_rel_policy_no_list
         if self.claim_report_no:
             if hasattr(self.claim_report_no, 'to_alipay_dict'):
                 params['claim_report_no'] = self.claim_report_no.to_alipay_dict()
@@ -252,6 +324,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.note_type:
+            if hasattr(self.note_type, 'to_alipay_dict'):
+                params['note_type'] = self.note_type.to_alipay_dict()
+            else:
+                params['note_type'] = self.note_type
         if self.note_url:
             if hasattr(self.note_url, 'to_alipay_dict'):
                 params['note_url'] = self.note_url.to_alipay_dict()
@@ -304,18 +381,26 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalInsuranceClaimreportModifyModel()
+        if 'account_info' in d:
+            o.account_info = d['account_info']
         if 'apply_no' in d:
             o.apply_no = d['apply_no']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
         if 'case_reopened' in d:
             o.case_reopened = d['case_reopened']
+        if 'case_setl_reapply' in d:
+            o.case_setl_reapply = d['case_setl_reapply']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
+        if 'claim_detail' in d:
+            o.claim_detail = d['claim_detail']
         if 'claim_no' in d:
             o.claim_no = d['claim_no']
+        if 'claim_rel_policy_no_list' in d:
+            o.claim_rel_policy_no_list = d['claim_rel_policy_no_list']
         if 'claim_report_no' in d:
             o.claim_report_no = d['claim_report_no']
         if 'claim_status' in d:
@@ -328,6 +413,8 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
             o.lack_materials_sense = d['lack_materials_sense']
         if 'name' in d:
             o.name = d['name']
+        if 'note_type' in d:
+            o.note_type = d['note_type']
         if 'note_url' in d:
             o.note_url = d['note_url']
         if 'open_id' in d:

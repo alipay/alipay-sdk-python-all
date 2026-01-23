@@ -16,6 +16,7 @@ class AlipayCommerceMedicalInsuranceUserskipQueryModel(object):
         self._open_id = None
         self._out_user_id = None
         self._product_id = None
+        self._tpa_id = None
         self._user_id = None
 
     @property
@@ -75,6 +76,13 @@ class AlipayCommerceMedicalInsuranceUserskipQueryModel(object):
     def product_id(self, value):
         self._product_id = value
     @property
+    def tpa_id(self):
+        return self._tpa_id
+
+    @tpa_id.setter
+    def tpa_id(self, value):
+        self._tpa_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -125,6 +133,11 @@ class AlipayCommerceMedicalInsuranceUserskipQueryModel(object):
                 params['product_id'] = self.product_id.to_alipay_dict()
             else:
                 params['product_id'] = self.product_id
+        if self.tpa_id:
+            if hasattr(self.tpa_id, 'to_alipay_dict'):
+                params['tpa_id'] = self.tpa_id.to_alipay_dict()
+            else:
+                params['tpa_id'] = self.tpa_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -153,6 +166,8 @@ class AlipayCommerceMedicalInsuranceUserskipQueryModel(object):
             o.out_user_id = d['out_user_id']
         if 'product_id' in d:
             o.product_id = d['product_id']
+        if 'tpa_id' in d:
+            o.tpa_id = d['tpa_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

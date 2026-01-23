@@ -13,6 +13,7 @@ class AlipaySecurityRiskComplaintProcessFinishModel(object):
         self._img_file_list = None
         self._process_code = None
         self._remark = None
+        self._reply_content = None
 
     @property
     def id_list(self):
@@ -51,6 +52,13 @@ class AlipaySecurityRiskComplaintProcessFinishModel(object):
     @remark.setter
     def remark(self, value):
         self._remark = value
+    @property
+    def reply_content(self):
+        return self._reply_content
+
+    @reply_content.setter
+    def reply_content(self, value):
+        self._reply_content = value
 
 
     def to_alipay_dict(self):
@@ -85,6 +93,11 @@ class AlipaySecurityRiskComplaintProcessFinishModel(object):
                 params['remark'] = self.remark.to_alipay_dict()
             else:
                 params['remark'] = self.remark
+        if self.reply_content:
+            if hasattr(self.reply_content, 'to_alipay_dict'):
+                params['reply_content'] = self.reply_content.to_alipay_dict()
+            else:
+                params['reply_content'] = self.reply_content
         return params
 
     @staticmethod
@@ -100,6 +113,8 @@ class AlipaySecurityRiskComplaintProcessFinishModel(object):
             o.process_code = d['process_code']
         if 'remark' in d:
             o.remark = d['remark']
+        if 'reply_content' in d:
+            o.reply_content = d['reply_content']
         return o
 
 

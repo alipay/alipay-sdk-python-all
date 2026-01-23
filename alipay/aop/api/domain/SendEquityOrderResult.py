@@ -17,6 +17,8 @@ class SendEquityOrderResult(object):
         self._order_status = None
         self._order_time = None
         self._send_sub_order_result = None
+        self._voucher_id = None
+        self._voucher_url = None
 
     @property
     def equity_id(self):
@@ -80,6 +82,20 @@ class SendEquityOrderResult(object):
                     self._send_sub_order_result.append(i)
                 else:
                     self._send_sub_order_result.append(SendSubOrderResult.from_alipay_dict(i))
+    @property
+    def voucher_id(self):
+        return self._voucher_id
+
+    @voucher_id.setter
+    def voucher_id(self, value):
+        self._voucher_id = value
+    @property
+    def voucher_url(self):
+        return self._voucher_url
+
+    @voucher_url.setter
+    def voucher_url(self, value):
+        self._voucher_url = value
 
 
     def to_alipay_dict(self):
@@ -129,6 +145,16 @@ class SendEquityOrderResult(object):
                 params['send_sub_order_result'] = self.send_sub_order_result.to_alipay_dict()
             else:
                 params['send_sub_order_result'] = self.send_sub_order_result
+        if self.voucher_id:
+            if hasattr(self.voucher_id, 'to_alipay_dict'):
+                params['voucher_id'] = self.voucher_id.to_alipay_dict()
+            else:
+                params['voucher_id'] = self.voucher_id
+        if self.voucher_url:
+            if hasattr(self.voucher_url, 'to_alipay_dict'):
+                params['voucher_url'] = self.voucher_url.to_alipay_dict()
+            else:
+                params['voucher_url'] = self.voucher_url
         return params
 
     @staticmethod
@@ -152,6 +178,10 @@ class SendEquityOrderResult(object):
             o.order_time = d['order_time']
         if 'send_sub_order_result' in d:
             o.send_sub_order_result = d['send_sub_order_result']
+        if 'voucher_id' in d:
+            o.voucher_id = d['voucher_id']
+        if 'voucher_url' in d:
+            o.voucher_url = d['voucher_url']
         return o
 
 

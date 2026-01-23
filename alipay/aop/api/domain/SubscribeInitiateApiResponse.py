@@ -9,10 +9,18 @@ from alipay.aop.api.domain.SubscriptionPackageDetailDTO import SubscriptionPacka
 class SubscribeInitiateApiResponse(object):
 
     def __init__(self):
+        self._qr_code_image_url = None
         self._subscribe_token = None
         self._subscribe_url = None
         self._subscription_packages = None
 
+    @property
+    def qr_code_image_url(self):
+        return self._qr_code_image_url
+
+    @qr_code_image_url.setter
+    def qr_code_image_url(self, value):
+        self._qr_code_image_url = value
     @property
     def subscribe_token(self):
         return self._subscribe_token
@@ -41,6 +49,11 @@ class SubscribeInitiateApiResponse(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.qr_code_image_url:
+            if hasattr(self.qr_code_image_url, 'to_alipay_dict'):
+                params['qr_code_image_url'] = self.qr_code_image_url.to_alipay_dict()
+            else:
+                params['qr_code_image_url'] = self.qr_code_image_url
         if self.subscribe_token:
             if hasattr(self.subscribe_token, 'to_alipay_dict'):
                 params['subscribe_token'] = self.subscribe_token.to_alipay_dict()
@@ -63,6 +76,8 @@ class SubscribeInitiateApiResponse(object):
         if not d:
             return None
         o = SubscribeInitiateApiResponse()
+        if 'qr_code_image_url' in d:
+            o.qr_code_image_url = d['qr_code_image_url']
         if 'subscribe_token' in d:
             o.subscribe_token = d['subscribe_token']
         if 'subscribe_url' in d:

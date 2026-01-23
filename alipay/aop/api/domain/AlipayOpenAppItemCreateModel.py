@@ -14,6 +14,7 @@ class AlipayOpenAppItemCreateModel(object):
     def __init__(self):
         self._attrs = None
         self._auto_marketing_delivery = None
+        self._auto_premium_pool = None
         self._barcode = None
         self._business_model = None
         self._category_id = None
@@ -56,6 +57,13 @@ class AlipayOpenAppItemCreateModel(object):
     @auto_marketing_delivery.setter
     def auto_marketing_delivery(self, value):
         self._auto_marketing_delivery = value
+    @property
+    def auto_premium_pool(self):
+        return self._auto_premium_pool
+
+    @auto_premium_pool.setter
+    def auto_premium_pool(self, value):
+        self._auto_premium_pool = value
     @property
     def barcode(self):
         return self._barcode
@@ -240,6 +248,11 @@ class AlipayOpenAppItemCreateModel(object):
                 params['auto_marketing_delivery'] = self.auto_marketing_delivery.to_alipay_dict()
             else:
                 params['auto_marketing_delivery'] = self.auto_marketing_delivery
+        if self.auto_premium_pool:
+            if hasattr(self.auto_premium_pool, 'to_alipay_dict'):
+                params['auto_premium_pool'] = self.auto_premium_pool.to_alipay_dict()
+            else:
+                params['auto_premium_pool'] = self.auto_premium_pool
         if self.barcode:
             if hasattr(self.barcode, 'to_alipay_dict'):
                 params['barcode'] = self.barcode.to_alipay_dict()
@@ -371,6 +384,8 @@ class AlipayOpenAppItemCreateModel(object):
             o.attrs = d['attrs']
         if 'auto_marketing_delivery' in d:
             o.auto_marketing_delivery = d['auto_marketing_delivery']
+        if 'auto_premium_pool' in d:
+            o.auto_premium_pool = d['auto_premium_pool']
         if 'barcode' in d:
             o.barcode = d['barcode']
         if 'business_model' in d:

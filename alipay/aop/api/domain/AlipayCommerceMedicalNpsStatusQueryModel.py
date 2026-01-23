@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalNpsStatusQueryModel(object):
 
     def __init__(self):
+        self._entrance_type = None
         self._open_id = None
         self._out_user_id = None
         self._scene_code = None
 
+    @property
+    def entrance_type(self):
+        return self._entrance_type
+
+    @entrance_type.setter
+    def entrance_type(self, value):
+        self._entrance_type = value
     @property
     def open_id(self):
         return self._open_id
@@ -37,6 +45,11 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.entrance_type:
+            if hasattr(self.entrance_type, 'to_alipay_dict'):
+                params['entrance_type'] = self.entrance_type.to_alipay_dict()
+            else:
+                params['entrance_type'] = self.entrance_type
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalNpsStatusQueryModel()
+        if 'entrance_type' in d:
+            o.entrance_type = d['entrance_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_user_id' in d:

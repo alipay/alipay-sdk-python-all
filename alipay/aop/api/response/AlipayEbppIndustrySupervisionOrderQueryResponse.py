@@ -20,6 +20,7 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
         self._out_order_no = None
         self._paid_amount = None
         self._transfer_out_amount = None
+        self._un_frozen_amount = None
         self._unpaid_amount = None
 
     @property
@@ -103,6 +104,13 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
     def transfer_out_amount(self, value):
         self._transfer_out_amount = value
     @property
+    def un_frozen_amount(self):
+        return self._un_frozen_amount
+
+    @un_frozen_amount.setter
+    def un_frozen_amount(self, value):
+        self._un_frozen_amount = value
+    @property
     def unpaid_amount(self):
         return self._unpaid_amount
 
@@ -134,5 +142,7 @@ class AlipayEbppIndustrySupervisionOrderQueryResponse(AlipayResponse):
             self.paid_amount = response['paid_amount']
         if 'transfer_out_amount' in response:
             self.transfer_out_amount = response['transfer_out_amount']
+        if 'un_frozen_amount' in response:
+            self.un_frozen_amount = response['un_frozen_amount']
         if 'unpaid_amount' in response:
             self.unpaid_amount = response['unpaid_amount']

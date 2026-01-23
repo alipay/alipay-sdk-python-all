@@ -18,6 +18,7 @@ class AlipayOverseasTransferConfirmModel(object):
         self._pass_through_info = None
         self._payer_agent_id = None
         self._payer_payment_method = None
+        self._receipt_channel_code = None
         self._transfer_from_amount = None
         self._transfer_notify_url = None
         self._transfer_quote = None
@@ -80,6 +81,13 @@ class AlipayOverseasTransferConfirmModel(object):
     @payer_payment_method.setter
     def payer_payment_method(self, value):
         self._payer_payment_method = value
+    @property
+    def receipt_channel_code(self):
+        return self._receipt_channel_code
+
+    @receipt_channel_code.setter
+    def receipt_channel_code(self, value):
+        self._receipt_channel_code = value
     @property
     def transfer_from_amount(self):
         return self._transfer_from_amount
@@ -165,6 +173,11 @@ class AlipayOverseasTransferConfirmModel(object):
                 params['payer_payment_method'] = self.payer_payment_method.to_alipay_dict()
             else:
                 params['payer_payment_method'] = self.payer_payment_method
+        if self.receipt_channel_code:
+            if hasattr(self.receipt_channel_code, 'to_alipay_dict'):
+                params['receipt_channel_code'] = self.receipt_channel_code.to_alipay_dict()
+            else:
+                params['receipt_channel_code'] = self.receipt_channel_code
         if self.transfer_from_amount:
             if hasattr(self.transfer_from_amount, 'to_alipay_dict'):
                 params['transfer_from_amount'] = self.transfer_from_amount.to_alipay_dict()
@@ -213,6 +226,8 @@ class AlipayOverseasTransferConfirmModel(object):
             o.payer_agent_id = d['payer_agent_id']
         if 'payer_payment_method' in d:
             o.payer_payment_method = d['payer_payment_method']
+        if 'receipt_channel_code' in d:
+            o.receipt_channel_code = d['receipt_channel_code']
         if 'transfer_from_amount' in d:
             o.transfer_from_amount = d['transfer_from_amount']
         if 'transfer_notify_url' in d:

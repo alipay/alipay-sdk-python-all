@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
 
     def __init__(self):
+        self._charge_type_list = None
         self._current = None
         self._first_market_target_code = None
         self._market_target_code = None
@@ -17,6 +18,16 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
         self._scene_code = None
         self._search_keywords = None
 
+    @property
+    def charge_type_list(self):
+        return self._charge_type_list
+
+    @charge_type_list.setter
+    def charge_type_list(self, value):
+        if isinstance(value, list):
+            self._charge_type_list = list()
+            for i in value:
+                self._charge_type_list.append(i)
     @property
     def current(self):
         return self._current
@@ -80,6 +91,16 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.charge_type_list:
+            if isinstance(self.charge_type_list, list):
+                for i in range(0, len(self.charge_type_list)):
+                    element = self.charge_type_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.charge_type_list[i] = element.to_alipay_dict()
+            if hasattr(self.charge_type_list, 'to_alipay_dict'):
+                params['charge_type_list'] = self.charge_type_list.to_alipay_dict()
+            else:
+                params['charge_type_list'] = self.charge_type_list
         if self.current:
             if hasattr(self.current, 'to_alipay_dict'):
                 params['current'] = self.current.to_alipay_dict()
@@ -132,6 +153,8 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
         if not d:
             return None
         o = AlipayDataDataserviceAdcampaignPlanBatchqueryModel()
+        if 'charge_type_list' in d:
+            o.charge_type_list = d['charge_type_list']
         if 'current' in d:
             o.current = d['current']
         if 'first_market_target_code' in d:

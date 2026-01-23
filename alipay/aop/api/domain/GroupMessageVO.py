@@ -8,6 +8,7 @@ from alipay.aop.api.domain.GoodsMsgVO import GoodsMsgVO
 from alipay.aop.api.domain.ImageMsgVO import ImageMsgVO
 from alipay.aop.api.domain.ImageTextMsgVO import ImageTextMsgVO
 from alipay.aop.api.domain.LinkMsgVO import LinkMsgVO
+from alipay.aop.api.domain.RedPacketMsgVO import RedPacketMsgVO
 from alipay.aop.api.domain.TextMsgVO import TextMsgVO
 from alipay.aop.api.domain.TinyAppMsgVO import TinyAppMsgVO
 
@@ -21,6 +22,7 @@ class GroupMessageVO(object):
         self._image_text_msg_content = None
         self._link_msg_content = None
         self._msg_type = None
+        self._red_packet_msg_content = None
         self._text_msg_content = None
         self._tiny_app_msg_content = None
 
@@ -82,6 +84,16 @@ class GroupMessageVO(object):
     def msg_type(self, value):
         self._msg_type = value
     @property
+    def red_packet_msg_content(self):
+        return self._red_packet_msg_content
+
+    @red_packet_msg_content.setter
+    def red_packet_msg_content(self, value):
+        if isinstance(value, RedPacketMsgVO):
+            self._red_packet_msg_content = value
+        else:
+            self._red_packet_msg_content = RedPacketMsgVO.from_alipay_dict(value)
+    @property
     def text_msg_content(self):
         return self._text_msg_content
 
@@ -135,6 +147,11 @@ class GroupMessageVO(object):
                 params['msg_type'] = self.msg_type.to_alipay_dict()
             else:
                 params['msg_type'] = self.msg_type
+        if self.red_packet_msg_content:
+            if hasattr(self.red_packet_msg_content, 'to_alipay_dict'):
+                params['red_packet_msg_content'] = self.red_packet_msg_content.to_alipay_dict()
+            else:
+                params['red_packet_msg_content'] = self.red_packet_msg_content
         if self.text_msg_content:
             if hasattr(self.text_msg_content, 'to_alipay_dict'):
                 params['text_msg_content'] = self.text_msg_content.to_alipay_dict()
@@ -164,6 +181,8 @@ class GroupMessageVO(object):
             o.link_msg_content = d['link_msg_content']
         if 'msg_type' in d:
             o.msg_type = d['msg_type']
+        if 'red_packet_msg_content' in d:
+            o.red_packet_msg_content = d['red_packet_msg_content']
         if 'text_msg_content' in d:
             o.text_msg_content = d['text_msg_content']
         if 'tiny_app_msg_content' in d:

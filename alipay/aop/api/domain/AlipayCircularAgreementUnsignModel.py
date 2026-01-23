@@ -10,6 +10,7 @@ class AlipayCircularAgreementUnsignModel(object):
     def __init__(self):
         self._bind_wallet_id = None
         self._bind_wallet_type = None
+        self._binding_alipay_logon_id = None
         self._relation_openid = None
         self._relation_uid = None
         self._scene_code = None
@@ -28,6 +29,13 @@ class AlipayCircularAgreementUnsignModel(object):
     @bind_wallet_type.setter
     def bind_wallet_type(self, value):
         self._bind_wallet_type = value
+    @property
+    def binding_alipay_logon_id(self):
+        return self._binding_alipay_logon_id
+
+    @binding_alipay_logon_id.setter
+    def binding_alipay_logon_id(self, value):
+        self._binding_alipay_logon_id = value
     @property
     def relation_openid(self):
         return self._relation_openid
@@ -63,6 +71,11 @@ class AlipayCircularAgreementUnsignModel(object):
                 params['bind_wallet_type'] = self.bind_wallet_type.to_alipay_dict()
             else:
                 params['bind_wallet_type'] = self.bind_wallet_type
+        if self.binding_alipay_logon_id:
+            if hasattr(self.binding_alipay_logon_id, 'to_alipay_dict'):
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id.to_alipay_dict()
+            else:
+                params['binding_alipay_logon_id'] = self.binding_alipay_logon_id
         if self.relation_openid:
             if hasattr(self.relation_openid, 'to_alipay_dict'):
                 params['relation_openid'] = self.relation_openid.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCircularAgreementUnsignModel(object):
             o.bind_wallet_id = d['bind_wallet_id']
         if 'bind_wallet_type' in d:
             o.bind_wallet_type = d['bind_wallet_type']
+        if 'binding_alipay_logon_id' in d:
+            o.binding_alipay_logon_id = d['binding_alipay_logon_id']
         if 'relation_openid' in d:
             o.relation_openid = d['relation_openid']
         if 'relation_uid' in d:

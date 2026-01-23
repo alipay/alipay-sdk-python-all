@@ -10,6 +10,7 @@ class RentFundAuthFreezeInfoVO(object):
     def __init__(self):
         self._auth_no = None
         self._freeze_notify_url = None
+        self._fund_auth_scene = None
         self._payee_user_id = None
         self._risk_assessment_price = None
         self._sign_status = None
@@ -29,6 +30,13 @@ class RentFundAuthFreezeInfoVO(object):
     @freeze_notify_url.setter
     def freeze_notify_url(self, value):
         self._freeze_notify_url = value
+    @property
+    def fund_auth_scene(self):
+        return self._fund_auth_scene
+
+    @fund_auth_scene.setter
+    def fund_auth_scene(self, value):
+        self._fund_auth_scene = value
     @property
     def payee_user_id(self):
         return self._payee_user_id
@@ -71,6 +79,11 @@ class RentFundAuthFreezeInfoVO(object):
                 params['freeze_notify_url'] = self.freeze_notify_url.to_alipay_dict()
             else:
                 params['freeze_notify_url'] = self.freeze_notify_url
+        if self.fund_auth_scene:
+            if hasattr(self.fund_auth_scene, 'to_alipay_dict'):
+                params['fund_auth_scene'] = self.fund_auth_scene.to_alipay_dict()
+            else:
+                params['fund_auth_scene'] = self.fund_auth_scene
         if self.payee_user_id:
             if hasattr(self.payee_user_id, 'to_alipay_dict'):
                 params['payee_user_id'] = self.payee_user_id.to_alipay_dict()
@@ -102,6 +115,8 @@ class RentFundAuthFreezeInfoVO(object):
             o.auth_no = d['auth_no']
         if 'freeze_notify_url' in d:
             o.freeze_notify_url = d['freeze_notify_url']
+        if 'fund_auth_scene' in d:
+            o.fund_auth_scene = d['fund_auth_scene']
         if 'payee_user_id' in d:
             o.payee_user_id = d['payee_user_id']
         if 'risk_assessment_price' in d:

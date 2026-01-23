@@ -16,7 +16,9 @@ class AlipayOverseasTransferQueryResponse(AlipayResponse):
         self._payer_agent_id = None
         self._transfer_from_amount = None
         self._transfer_id = None
+        self._transfer_payment_order_id = None
         self._transfer_quote = None
+        self._transfer_refund_order_id = None
         self._transfer_result = None
         self._transfer_time = None
         self._transfer_to_amount = None
@@ -71,12 +73,26 @@ class AlipayOverseasTransferQueryResponse(AlipayResponse):
     def transfer_id(self, value):
         self._transfer_id = value
     @property
+    def transfer_payment_order_id(self):
+        return self._transfer_payment_order_id
+
+    @transfer_payment_order_id.setter
+    def transfer_payment_order_id(self, value):
+        self._transfer_payment_order_id = value
+    @property
     def transfer_quote(self):
         return self._transfer_quote
 
     @transfer_quote.setter
     def transfer_quote(self, value):
         self._transfer_quote = value
+    @property
+    def transfer_refund_order_id(self):
+        return self._transfer_refund_order_id
+
+    @transfer_refund_order_id.setter
+    def transfer_refund_order_id(self, value):
+        self._transfer_refund_order_id = value
     @property
     def transfer_result(self):
         return self._transfer_result
@@ -115,8 +131,12 @@ class AlipayOverseasTransferQueryResponse(AlipayResponse):
             self.transfer_from_amount = response['transfer_from_amount']
         if 'transfer_id' in response:
             self.transfer_id = response['transfer_id']
+        if 'transfer_payment_order_id' in response:
+            self.transfer_payment_order_id = response['transfer_payment_order_id']
         if 'transfer_quote' in response:
             self.transfer_quote = response['transfer_quote']
+        if 'transfer_refund_order_id' in response:
+            self.transfer_refund_order_id = response['transfer_refund_order_id']
         if 'transfer_result' in response:
             self.transfer_result = response['transfer_result']
         if 'transfer_time' in response:

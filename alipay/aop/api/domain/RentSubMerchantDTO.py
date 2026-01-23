@@ -9,6 +9,7 @@ class RentSubMerchantDTO(object):
 
     def __init__(self):
         self._merchant_id = None
+        self._merchant_openid = None
         self._merchant_type = None
 
     @property
@@ -18,6 +19,13 @@ class RentSubMerchantDTO(object):
     @merchant_id.setter
     def merchant_id(self, value):
         self._merchant_id = value
+    @property
+    def merchant_openid(self):
+        return self._merchant_openid
+
+    @merchant_openid.setter
+    def merchant_openid(self, value):
+        self._merchant_openid = value
     @property
     def merchant_type(self):
         return self._merchant_type
@@ -34,6 +42,11 @@ class RentSubMerchantDTO(object):
                 params['merchant_id'] = self.merchant_id.to_alipay_dict()
             else:
                 params['merchant_id'] = self.merchant_id
+        if self.merchant_openid:
+            if hasattr(self.merchant_openid, 'to_alipay_dict'):
+                params['merchant_openid'] = self.merchant_openid.to_alipay_dict()
+            else:
+                params['merchant_openid'] = self.merchant_openid
         if self.merchant_type:
             if hasattr(self.merchant_type, 'to_alipay_dict'):
                 params['merchant_type'] = self.merchant_type.to_alipay_dict()
@@ -48,6 +61,8 @@ class RentSubMerchantDTO(object):
         o = RentSubMerchantDTO()
         if 'merchant_id' in d:
             o.merchant_id = d['merchant_id']
+        if 'merchant_openid' in d:
+            o.merchant_openid = d['merchant_openid']
         if 'merchant_type' in d:
             o.merchant_type = d['merchant_type']
         return o

@@ -12,6 +12,7 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
         self._expressman_open_id = None
         self._expressman_user_id = None
         self._incentive_code = None
+        self._log_ext_info = None
         self._logistics_code = None
         self._material_type = None
         self._only_record = None
@@ -49,6 +50,13 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
     @incentive_code.setter
     def incentive_code(self, value):
         self._incentive_code = value
+    @property
+    def log_ext_info(self):
+        return self._log_ext_info
+
+    @log_ext_info.setter
+    def log_ext_info(self, value):
+        self._log_ext_info = value
     @property
     def logistics_code(self):
         return self._logistics_code
@@ -129,6 +137,11 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
                 params['incentive_code'] = self.incentive_code.to_alipay_dict()
             else:
                 params['incentive_code'] = self.incentive_code
+        if self.log_ext_info:
+            if hasattr(self.log_ext_info, 'to_alipay_dict'):
+                params['log_ext_info'] = self.log_ext_info.to_alipay_dict()
+            else:
+                params['log_ext_info'] = self.log_ext_info
         if self.logistics_code:
             if hasattr(self.logistics_code, 'to_alipay_dict'):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
@@ -184,6 +197,8 @@ class AlipayCommerceLogisticsTradeEventSyncModel(object):
             o.expressman_user_id = d['expressman_user_id']
         if 'incentive_code' in d:
             o.incentive_code = d['incentive_code']
+        if 'log_ext_info' in d:
+            o.log_ext_info = d['log_ext_info']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
         if 'material_type' in d:

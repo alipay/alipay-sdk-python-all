@@ -11,6 +11,7 @@ class ZhimaCreditEpInfoSearchQueryResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditEpInfoSearchQueryResponse, self).__init__()
         self._basic_info_models = None
+        self._data_found = None
         self._has_next = None
         self._page_index = None
         self._page_total = None
@@ -29,6 +30,13 @@ class ZhimaCreditEpInfoSearchQueryResponse(AlipayResponse):
                     self._basic_info_models.append(i)
                 else:
                     self._basic_info_models.append(EpSearchBasicInfo.from_alipay_dict(i))
+    @property
+    def data_found(self):
+        return self._data_found
+
+    @data_found.setter
+    def data_found(self, value):
+        self._data_found = value
     @property
     def has_next(self):
         return self._has_next
@@ -62,6 +70,8 @@ class ZhimaCreditEpInfoSearchQueryResponse(AlipayResponse):
         response = super(ZhimaCreditEpInfoSearchQueryResponse, self).parse_response_content(response_content)
         if 'basic_info_models' in response:
             self.basic_info_models = response['basic_info_models']
+        if 'data_found' in response:
+            self.data_found = response['data_found']
         if 'has_next' in response:
             self.has_next = response['has_next']
         if 'page_index' in response:

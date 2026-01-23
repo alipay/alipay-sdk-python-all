@@ -9,7 +9,17 @@ class AlipayMultimediaTestCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayMultimediaTestCreateResponse, self).__init__()
+        self._tc_case = None
 
+    @property
+    def tc_case(self):
+        return self._tc_case
+
+    @tc_case.setter
+    def tc_case(self, value):
+        self._tc_case = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayMultimediaTestCreateResponse, self).parse_response_content(response_content)
+        if 'tc_case' in response:
+            self.tc_case = response['tc_case']

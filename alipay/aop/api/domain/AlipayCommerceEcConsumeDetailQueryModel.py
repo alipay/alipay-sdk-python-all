@@ -10,6 +10,7 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
     def __init__(self):
         self._account_id = None
         self._agreement_no = None
+        self._ant_shop_id = None
         self._enterprise_id = None
         self._pay_no = None
         self._query_options = None
@@ -28,6 +29,13 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def ant_shop_id(self):
+        return self._ant_shop_id
+
+    @ant_shop_id.setter
+    def ant_shop_id(self, value):
+        self._ant_shop_id = value
     @property
     def enterprise_id(self):
         return self._enterprise_id
@@ -66,6 +74,11 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.ant_shop_id:
+            if hasattr(self.ant_shop_id, 'to_alipay_dict'):
+                params['ant_shop_id'] = self.ant_shop_id.to_alipay_dict()
+            else:
+                params['ant_shop_id'] = self.ant_shop_id
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -97,6 +110,8 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
             o.account_id = d['account_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'ant_shop_id' in d:
+            o.ant_shop_id = d['ant_shop_id']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'pay_no' in d:

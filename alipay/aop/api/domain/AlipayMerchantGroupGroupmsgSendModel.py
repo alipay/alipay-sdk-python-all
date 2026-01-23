@@ -20,6 +20,7 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
         self._msg_id = None
         self._send_strategy = None
         self._send_time = None
+        self._send_to_admin = None
         self._title = None
 
     @property
@@ -101,6 +102,13 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
     def send_time(self, value):
         self._send_time = value
     @property
+    def send_to_admin(self):
+        return self._send_to_admin
+
+    @send_to_admin.setter
+    def send_to_admin(self, value):
+        self._send_to_admin = value
+    @property
     def title(self):
         return self._title
 
@@ -166,6 +174,11 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
                 params['send_time'] = self.send_time.to_alipay_dict()
             else:
                 params['send_time'] = self.send_time
+        if self.send_to_admin:
+            if hasattr(self.send_to_admin, 'to_alipay_dict'):
+                params['send_to_admin'] = self.send_to_admin.to_alipay_dict()
+            else:
+                params['send_to_admin'] = self.send_to_admin
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -196,6 +209,8 @@ class AlipayMerchantGroupGroupmsgSendModel(object):
             o.send_strategy = d['send_strategy']
         if 'send_time' in d:
             o.send_time = d['send_time']
+        if 'send_to_admin' in d:
+            o.send_to_admin = d['send_to_admin']
         if 'title' in d:
             o.title = d['title']
         return o

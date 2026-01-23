@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.NcoilopenAddressInfo import NcoilopenAddressInfo
 from alipay.aop.api.domain.ExtAttributeInfo import ExtAttributeInfo
+from alipay.aop.api.domain.TempBusinessExtInfo import TempBusinessExtInfo
 
 
 class AlipayOpenSpNcoilopenTempAddModel(object):
@@ -20,6 +21,7 @@ class AlipayOpenSpNcoilopenTempAddModel(object):
         self._position_name = None
         self._print_qr_code_url = None
         self._reference_id = None
+        self._temp_business_ext_info = None
 
     @property
     def address_info_map(self):
@@ -100,6 +102,16 @@ class AlipayOpenSpNcoilopenTempAddModel(object):
     @reference_id.setter
     def reference_id(self, value):
         self._reference_id = value
+    @property
+    def temp_business_ext_info(self):
+        return self._temp_business_ext_info
+
+    @temp_business_ext_info.setter
+    def temp_business_ext_info(self, value):
+        if isinstance(value, TempBusinessExtInfo):
+            self._temp_business_ext_info = value
+        else:
+            self._temp_business_ext_info = TempBusinessExtInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -159,6 +171,11 @@ class AlipayOpenSpNcoilopenTempAddModel(object):
                 params['reference_id'] = self.reference_id.to_alipay_dict()
             else:
                 params['reference_id'] = self.reference_id
+        if self.temp_business_ext_info:
+            if hasattr(self.temp_business_ext_info, 'to_alipay_dict'):
+                params['temp_business_ext_info'] = self.temp_business_ext_info.to_alipay_dict()
+            else:
+                params['temp_business_ext_info'] = self.temp_business_ext_info
         return params
 
     @staticmethod
@@ -186,6 +203,8 @@ class AlipayOpenSpNcoilopenTempAddModel(object):
             o.print_qr_code_url = d['print_qr_code_url']
         if 'reference_id' in d:
             o.reference_id = d['reference_id']
+        if 'temp_business_ext_info' in d:
+            o.temp_business_ext_info = d['temp_business_ext_info']
         return o
 
 

@@ -22,11 +22,16 @@ class UpdatePartnerRequest(object):
         self._established_date = None
         self._industry = None
         self._industry_category = None
+        self._is_effective = None
         self._location = None
         self._memo = None
         self._partner_channel_type = None
+        self._partner_policy = None
         self._partner_type_list = None
         self._pid = None
+        self._policy_end_time = None
+        self._policy_no = None
+        self._policy_start_time = None
         self._region = None
         self._registered_address = None
         self._registered_capital = None
@@ -132,6 +137,13 @@ class UpdatePartnerRequest(object):
     def industry_category(self, value):
         self._industry_category = value
     @property
+    def is_effective(self):
+        return self._is_effective
+
+    @is_effective.setter
+    def is_effective(self, value):
+        self._is_effective = value
+    @property
     def location(self):
         return self._location
 
@@ -153,6 +165,13 @@ class UpdatePartnerRequest(object):
     def partner_channel_type(self, value):
         self._partner_channel_type = value
     @property
+    def partner_policy(self):
+        return self._partner_policy
+
+    @partner_policy.setter
+    def partner_policy(self, value):
+        self._partner_policy = value
+    @property
     def partner_type_list(self):
         return self._partner_type_list
 
@@ -169,6 +188,27 @@ class UpdatePartnerRequest(object):
     @pid.setter
     def pid(self, value):
         self._pid = value
+    @property
+    def policy_end_time(self):
+        return self._policy_end_time
+
+    @policy_end_time.setter
+    def policy_end_time(self, value):
+        self._policy_end_time = value
+    @property
+    def policy_no(self):
+        return self._policy_no
+
+    @policy_no.setter
+    def policy_no(self, value):
+        self._policy_no = value
+    @property
+    def policy_start_time(self):
+        return self._policy_start_time
+
+    @policy_start_time.setter
+    def policy_start_time(self, value):
+        self._policy_start_time = value
     @property
     def region(self):
         return self._region
@@ -278,6 +318,11 @@ class UpdatePartnerRequest(object):
                 params['industry_category'] = self.industry_category.to_alipay_dict()
             else:
                 params['industry_category'] = self.industry_category
+        if self.is_effective:
+            if hasattr(self.is_effective, 'to_alipay_dict'):
+                params['is_effective'] = self.is_effective.to_alipay_dict()
+            else:
+                params['is_effective'] = self.is_effective
         if self.location:
             if hasattr(self.location, 'to_alipay_dict'):
                 params['location'] = self.location.to_alipay_dict()
@@ -293,6 +338,11 @@ class UpdatePartnerRequest(object):
                 params['partner_channel_type'] = self.partner_channel_type.to_alipay_dict()
             else:
                 params['partner_channel_type'] = self.partner_channel_type
+        if self.partner_policy:
+            if hasattr(self.partner_policy, 'to_alipay_dict'):
+                params['partner_policy'] = self.partner_policy.to_alipay_dict()
+            else:
+                params['partner_policy'] = self.partner_policy
         if self.partner_type_list:
             if isinstance(self.partner_type_list, list):
                 for i in range(0, len(self.partner_type_list)):
@@ -308,6 +358,21 @@ class UpdatePartnerRequest(object):
                 params['pid'] = self.pid.to_alipay_dict()
             else:
                 params['pid'] = self.pid
+        if self.policy_end_time:
+            if hasattr(self.policy_end_time, 'to_alipay_dict'):
+                params['policy_end_time'] = self.policy_end_time.to_alipay_dict()
+            else:
+                params['policy_end_time'] = self.policy_end_time
+        if self.policy_no:
+            if hasattr(self.policy_no, 'to_alipay_dict'):
+                params['policy_no'] = self.policy_no.to_alipay_dict()
+            else:
+                params['policy_no'] = self.policy_no
+        if self.policy_start_time:
+            if hasattr(self.policy_start_time, 'to_alipay_dict'):
+                params['policy_start_time'] = self.policy_start_time.to_alipay_dict()
+            else:
+                params['policy_start_time'] = self.policy_start_time
         if self.region:
             if hasattr(self.region, 'to_alipay_dict'):
                 params['region'] = self.region.to_alipay_dict()
@@ -368,16 +433,26 @@ class UpdatePartnerRequest(object):
             o.industry = d['industry']
         if 'industry_category' in d:
             o.industry_category = d['industry_category']
+        if 'is_effective' in d:
+            o.is_effective = d['is_effective']
         if 'location' in d:
             o.location = d['location']
         if 'memo' in d:
             o.memo = d['memo']
         if 'partner_channel_type' in d:
             o.partner_channel_type = d['partner_channel_type']
+        if 'partner_policy' in d:
+            o.partner_policy = d['partner_policy']
         if 'partner_type_list' in d:
             o.partner_type_list = d['partner_type_list']
         if 'pid' in d:
             o.pid = d['pid']
+        if 'policy_end_time' in d:
+            o.policy_end_time = d['policy_end_time']
+        if 'policy_no' in d:
+            o.policy_no = d['policy_no']
+        if 'policy_start_time' in d:
+            o.policy_start_time = d['policy_start_time']
         if 'region' in d:
             o.region = d['region']
         if 'registered_address' in d:

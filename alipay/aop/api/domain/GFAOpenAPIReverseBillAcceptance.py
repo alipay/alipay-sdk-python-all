@@ -27,6 +27,7 @@ class GFAOpenAPIReverseBillAcceptance(object):
         self._gmt_receive = None
         self._gmt_service = None
         self._nonpayment_amount = None
+        self._out_bill_no = None
         self._out_business_no = None
         self._pay_status = None
         self._payee_participant = None
@@ -34,9 +35,11 @@ class GFAOpenAPIReverseBillAcceptance(object):
         self._product_code = None
         self._properties = None
         self._real_amount = None
+        self._rel_out_bill_no = None
         self._rel_out_business_no = None
         self._rel_sub_out_business_no = None
         self._service_amount = None
+        self._service_amount_new = None
         self._service_type = None
         self._settle_participant = None
         self._sign_participant = None
@@ -146,6 +149,13 @@ class GFAOpenAPIReverseBillAcceptance(object):
     def nonpayment_amount(self, value):
         self._nonpayment_amount = value
     @property
+    def out_bill_no(self):
+        return self._out_bill_no
+
+    @out_bill_no.setter
+    def out_bill_no(self, value):
+        self._out_bill_no = value
+    @property
     def out_business_no(self):
         return self._out_business_no
 
@@ -201,6 +211,13 @@ class GFAOpenAPIReverseBillAcceptance(object):
     def real_amount(self, value):
         self._real_amount = value
     @property
+    def rel_out_bill_no(self):
+        return self._rel_out_bill_no
+
+    @rel_out_bill_no.setter
+    def rel_out_bill_no(self, value):
+        self._rel_out_bill_no = value
+    @property
     def rel_out_business_no(self):
         return self._rel_out_business_no
 
@@ -221,6 +238,13 @@ class GFAOpenAPIReverseBillAcceptance(object):
     @service_amount.setter
     def service_amount(self, value):
         self._service_amount = value
+    @property
+    def service_amount_new(self):
+        return self._service_amount_new
+
+    @service_amount_new.setter
+    def service_amount_new(self, value):
+        self._service_amount_new = value
     @property
     def service_type(self):
         return self._service_type
@@ -343,6 +367,11 @@ class GFAOpenAPIReverseBillAcceptance(object):
                 params['nonpayment_amount'] = self.nonpayment_amount.to_alipay_dict()
             else:
                 params['nonpayment_amount'] = self.nonpayment_amount
+        if self.out_bill_no:
+            if hasattr(self.out_bill_no, 'to_alipay_dict'):
+                params['out_bill_no'] = self.out_bill_no.to_alipay_dict()
+            else:
+                params['out_bill_no'] = self.out_bill_no
         if self.out_business_no:
             if hasattr(self.out_business_no, 'to_alipay_dict'):
                 params['out_business_no'] = self.out_business_no.to_alipay_dict()
@@ -378,6 +407,11 @@ class GFAOpenAPIReverseBillAcceptance(object):
                 params['real_amount'] = self.real_amount.to_alipay_dict()
             else:
                 params['real_amount'] = self.real_amount
+        if self.rel_out_bill_no:
+            if hasattr(self.rel_out_bill_no, 'to_alipay_dict'):
+                params['rel_out_bill_no'] = self.rel_out_bill_no.to_alipay_dict()
+            else:
+                params['rel_out_bill_no'] = self.rel_out_bill_no
         if self.rel_out_business_no:
             if hasattr(self.rel_out_business_no, 'to_alipay_dict'):
                 params['rel_out_business_no'] = self.rel_out_business_no.to_alipay_dict()
@@ -393,6 +427,11 @@ class GFAOpenAPIReverseBillAcceptance(object):
                 params['service_amount'] = self.service_amount.to_alipay_dict()
             else:
                 params['service_amount'] = self.service_amount
+        if self.service_amount_new:
+            if hasattr(self.service_amount_new, 'to_alipay_dict'):
+                params['service_amount_new'] = self.service_amount_new.to_alipay_dict()
+            else:
+                params['service_amount_new'] = self.service_amount_new
         if self.service_type:
             if hasattr(self.service_type, 'to_alipay_dict'):
                 params['service_type'] = self.service_type.to_alipay_dict()
@@ -458,6 +497,8 @@ class GFAOpenAPIReverseBillAcceptance(object):
             o.gmt_service = d['gmt_service']
         if 'nonpayment_amount' in d:
             o.nonpayment_amount = d['nonpayment_amount']
+        if 'out_bill_no' in d:
+            o.out_bill_no = d['out_bill_no']
         if 'out_business_no' in d:
             o.out_business_no = d['out_business_no']
         if 'pay_status' in d:
@@ -472,12 +513,16 @@ class GFAOpenAPIReverseBillAcceptance(object):
             o.properties = d['properties']
         if 'real_amount' in d:
             o.real_amount = d['real_amount']
+        if 'rel_out_bill_no' in d:
+            o.rel_out_bill_no = d['rel_out_bill_no']
         if 'rel_out_business_no' in d:
             o.rel_out_business_no = d['rel_out_business_no']
         if 'rel_sub_out_business_no' in d:
             o.rel_sub_out_business_no = d['rel_sub_out_business_no']
         if 'service_amount' in d:
             o.service_amount = d['service_amount']
+        if 'service_amount_new' in d:
+            o.service_amount_new = d['service_amount_new']
         if 'service_type' in d:
             o.service_type = d['service_type']
         if 'settle_participant' in d:

@@ -9,6 +9,7 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
 
     def __init__(self):
         self._biz_from = None
+        self._cert_code = None
         self._cert_type = None
         self._check_by_license = None
         self._encrypt_code = None
@@ -24,6 +25,13 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
     @biz_from.setter
     def biz_from(self, value):
         self._biz_from = value
+    @property
+    def cert_code(self):
+        return self._cert_code
+
+    @cert_code.setter
+    def cert_code(self, value):
+        self._cert_code = value
     @property
     def cert_type(self):
         return self._cert_type
@@ -82,6 +90,11 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
                 params['biz_from'] = self.biz_from.to_alipay_dict()
             else:
                 params['biz_from'] = self.biz_from
+        if self.cert_code:
+            if hasattr(self.cert_code, 'to_alipay_dict'):
+                params['cert_code'] = self.cert_code.to_alipay_dict()
+            else:
+                params['cert_code'] = self.cert_code
         if self.cert_type:
             if hasattr(self.cert_type, 'to_alipay_dict'):
                 params['cert_type'] = self.cert_type.to_alipay_dict()
@@ -126,6 +139,8 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
         o = AlipayUserAuthenticationConsistencyCheckModel()
         if 'biz_from' in d:
             o.biz_from = d['biz_from']
+        if 'cert_code' in d:
+            o.cert_code = d['cert_code']
         if 'cert_type' in d:
             o.cert_type = d['cert_type']
         if 'check_by_license' in d:

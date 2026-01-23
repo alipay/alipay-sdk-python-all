@@ -4,8 +4,10 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
+from alipay.aop.api.domain.ConsultFailReason import ConsultFailReason
 from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
 from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
+from alipay.aop.api.domain.RiskBasicInfoVO import RiskBasicInfoVO
 from alipay.aop.api.domain.RentRiskInfoVO import RentRiskInfoVO
 from alipay.aop.api.domain.ShipGoodsRiskVO import ShipGoodsRiskVO
 
@@ -15,9 +17,11 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceRentRiskConsultResponse, self).__init__()
         self._comprehensive_risk_models = None
+        self._consult_fail_reason = None
         self._extremely_low_risk_models = None
         self._high_risk_models = None
         self._product_edition = None
+        self._risk_basic_info = None
         self._risk_infos = None
         self._ship_goods_risk_models = None
         self._vam_group = None
@@ -32,6 +36,19 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
             self._comprehensive_risk_models = value
         else:
             self._comprehensive_risk_models = RentRiskProVO.from_alipay_dict(value)
+    @property
+    def consult_fail_reason(self):
+        return self._consult_fail_reason
+
+    @consult_fail_reason.setter
+    def consult_fail_reason(self, value):
+        if isinstance(value, list):
+            self._consult_fail_reason = list()
+            for i in value:
+                if isinstance(i, ConsultFailReason):
+                    self._consult_fail_reason.append(i)
+                else:
+                    self._consult_fail_reason.append(ConsultFailReason.from_alipay_dict(i))
     @property
     def extremely_low_risk_models(self):
         return self._extremely_low_risk_models
@@ -59,6 +76,16 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
     @product_edition.setter
     def product_edition(self, value):
         self._product_edition = value
+    @property
+    def risk_basic_info(self):
+        return self._risk_basic_info
+
+    @risk_basic_info.setter
+    def risk_basic_info(self, value):
+        if isinstance(value, RiskBasicInfoVO):
+            self._risk_basic_info = value
+        else:
+            self._risk_basic_info = RiskBasicInfoVO.from_alipay_dict(value)
     @property
     def risk_infos(self):
         return self._risk_infos
@@ -97,12 +124,16 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
         response = super(AlipayCommerceRentRiskConsultResponse, self).parse_response_content(response_content)
         if 'comprehensive_risk_models' in response:
             self.comprehensive_risk_models = response['comprehensive_risk_models']
+        if 'consult_fail_reason' in response:
+            self.consult_fail_reason = response['consult_fail_reason']
         if 'extremely_low_risk_models' in response:
             self.extremely_low_risk_models = response['extremely_low_risk_models']
         if 'high_risk_models' in response:
             self.high_risk_models = response['high_risk_models']
         if 'product_edition' in response:
             self.product_edition = response['product_edition']
+        if 'risk_basic_info' in response:
+            self.risk_basic_info = response['risk_basic_info']
         if 'risk_infos' in response:
             self.risk_infos = response['risk_infos']
         if 'ship_goods_risk_models' in response:

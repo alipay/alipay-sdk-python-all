@@ -11,6 +11,7 @@ class RentSkuInfo(object):
     def __init__(self):
         self._attrs = None
         self._out_sku_id = None
+        self._sku_name = None
         self._spu_id = None
 
     @property
@@ -33,6 +34,13 @@ class RentSkuInfo(object):
     @out_sku_id.setter
     def out_sku_id(self, value):
         self._out_sku_id = value
+    @property
+    def sku_name(self):
+        return self._sku_name
+
+    @sku_name.setter
+    def sku_name(self, value):
+        self._sku_name = value
     @property
     def spu_id(self):
         return self._spu_id
@@ -59,6 +67,11 @@ class RentSkuInfo(object):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
             else:
                 params['out_sku_id'] = self.out_sku_id
+        if self.sku_name:
+            if hasattr(self.sku_name, 'to_alipay_dict'):
+                params['sku_name'] = self.sku_name.to_alipay_dict()
+            else:
+                params['sku_name'] = self.sku_name
         if self.spu_id:
             if hasattr(self.spu_id, 'to_alipay_dict'):
                 params['spu_id'] = self.spu_id.to_alipay_dict()
@@ -75,6 +88,8 @@ class RentSkuInfo(object):
             o.attrs = d['attrs']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
+        if 'sku_name' in d:
+            o.sku_name = d['sku_name']
         if 'spu_id' in d:
             o.spu_id = d['spu_id']
         return o

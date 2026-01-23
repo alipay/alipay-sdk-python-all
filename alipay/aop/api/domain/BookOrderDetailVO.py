@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BooKAttributesDTO import BooKAttributesDTO
 from alipay.aop.api.domain.BookInfoVO import BookInfoVO
 from alipay.aop.api.domain.BookOrderVO import BookOrderVO
 
@@ -10,9 +11,20 @@ from alipay.aop.api.domain.BookOrderVO import BookOrderVO
 class BookOrderDetailVO(object):
 
     def __init__(self):
+        self._attr_info = None
         self._book_infos = None
         self._book_order = None
 
+    @property
+    def attr_info(self):
+        return self._attr_info
+
+    @attr_info.setter
+    def attr_info(self, value):
+        if isinstance(value, BooKAttributesDTO):
+            self._attr_info = value
+        else:
+            self._attr_info = BooKAttributesDTO.from_alipay_dict(value)
     @property
     def book_infos(self):
         return self._book_infos
@@ -40,6 +52,11 @@ class BookOrderDetailVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.attr_info:
+            if hasattr(self.attr_info, 'to_alipay_dict'):
+                params['attr_info'] = self.attr_info.to_alipay_dict()
+            else:
+                params['attr_info'] = self.attr_info
         if self.book_infos:
             if isinstance(self.book_infos, list):
                 for i in range(0, len(self.book_infos)):
@@ -62,6 +79,8 @@ class BookOrderDetailVO(object):
         if not d:
             return None
         o = BookOrderDetailVO()
+        if 'attr_info' in d:
+            o.attr_info = d['attr_info']
         if 'book_infos' in d:
             o.book_infos = d['book_infos']
         if 'book_order' in d:

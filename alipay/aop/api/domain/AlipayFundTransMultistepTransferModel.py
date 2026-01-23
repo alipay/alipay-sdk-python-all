@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MultiStepTransOrderDetailRequest import MultiStepTransOrderDetailRequest
+from alipay.aop.api.domain.TransferSceneReportInfo import TransferSceneReportInfo
 
 
 class AlipayFundTransMultistepTransferModel(object):
@@ -18,6 +19,8 @@ class AlipayFundTransMultistepTransferModel(object):
         self._remark = None
         self._total_amount = None
         self._total_count = None
+        self._transfer_scene_name = None
+        self._transfer_scene_report_infos = None
 
     @property
     def biz_scene(self):
@@ -88,6 +91,26 @@ class AlipayFundTransMultistepTransferModel(object):
     @total_count.setter
     def total_count(self, value):
         self._total_count = value
+    @property
+    def transfer_scene_name(self):
+        return self._transfer_scene_name
+
+    @transfer_scene_name.setter
+    def transfer_scene_name(self, value):
+        self._transfer_scene_name = value
+    @property
+    def transfer_scene_report_infos(self):
+        return self._transfer_scene_report_infos
+
+    @transfer_scene_report_infos.setter
+    def transfer_scene_report_infos(self, value):
+        if isinstance(value, list):
+            self._transfer_scene_report_infos = list()
+            for i in value:
+                if isinstance(i, TransferSceneReportInfo):
+                    self._transfer_scene_report_infos.append(i)
+                else:
+                    self._transfer_scene_report_infos.append(TransferSceneReportInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -142,6 +165,21 @@ class AlipayFundTransMultistepTransferModel(object):
                 params['total_count'] = self.total_count.to_alipay_dict()
             else:
                 params['total_count'] = self.total_count
+        if self.transfer_scene_name:
+            if hasattr(self.transfer_scene_name, 'to_alipay_dict'):
+                params['transfer_scene_name'] = self.transfer_scene_name.to_alipay_dict()
+            else:
+                params['transfer_scene_name'] = self.transfer_scene_name
+        if self.transfer_scene_report_infos:
+            if isinstance(self.transfer_scene_report_infos, list):
+                for i in range(0, len(self.transfer_scene_report_infos)):
+                    element = self.transfer_scene_report_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.transfer_scene_report_infos[i] = element.to_alipay_dict()
+            if hasattr(self.transfer_scene_report_infos, 'to_alipay_dict'):
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos.to_alipay_dict()
+            else:
+                params['transfer_scene_report_infos'] = self.transfer_scene_report_infos
         return params
 
     @staticmethod
@@ -167,6 +205,10 @@ class AlipayFundTransMultistepTransferModel(object):
             o.total_amount = d['total_amount']
         if 'total_count' in d:
             o.total_count = d['total_count']
+        if 'transfer_scene_name' in d:
+            o.transfer_scene_name = d['transfer_scene_name']
+        if 'transfer_scene_report_infos' in d:
+            o.transfer_scene_report_infos = d['transfer_scene_report_infos']
         return o
 
 

@@ -1,0 +1,130 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+
+
+class BrandChainBankCardInfo(object):
+
+    def __init__(self):
+        self._account_branch_name = None
+        self._account_holder_name = None
+        self._account_inst_address = None
+        self._account_inst_name = None
+        self._bank_card_no = None
+        self._pbc_bank_code = None
+        self._usage_type = None
+
+    @property
+    def account_branch_name(self):
+        return self._account_branch_name
+
+    @account_branch_name.setter
+    def account_branch_name(self, value):
+        self._account_branch_name = value
+    @property
+    def account_holder_name(self):
+        return self._account_holder_name
+
+    @account_holder_name.setter
+    def account_holder_name(self, value):
+        self._account_holder_name = value
+    @property
+    def account_inst_address(self):
+        return self._account_inst_address
+
+    @account_inst_address.setter
+    def account_inst_address(self, value):
+        self._account_inst_address = value
+    @property
+    def account_inst_name(self):
+        return self._account_inst_name
+
+    @account_inst_name.setter
+    def account_inst_name(self, value):
+        self._account_inst_name = value
+    @property
+    def bank_card_no(self):
+        return self._bank_card_no
+
+    @bank_card_no.setter
+    def bank_card_no(self, value):
+        self._bank_card_no = value
+    @property
+    def pbc_bank_code(self):
+        return self._pbc_bank_code
+
+    @pbc_bank_code.setter
+    def pbc_bank_code(self, value):
+        self._pbc_bank_code = value
+    @property
+    def usage_type(self):
+        return self._usage_type
+
+    @usage_type.setter
+    def usage_type(self, value):
+        self._usage_type = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.account_branch_name:
+            if hasattr(self.account_branch_name, 'to_alipay_dict'):
+                params['account_branch_name'] = self.account_branch_name.to_alipay_dict()
+            else:
+                params['account_branch_name'] = self.account_branch_name
+        if self.account_holder_name:
+            if hasattr(self.account_holder_name, 'to_alipay_dict'):
+                params['account_holder_name'] = self.account_holder_name.to_alipay_dict()
+            else:
+                params['account_holder_name'] = self.account_holder_name
+        if self.account_inst_address:
+            if hasattr(self.account_inst_address, 'to_alipay_dict'):
+                params['account_inst_address'] = self.account_inst_address.to_alipay_dict()
+            else:
+                params['account_inst_address'] = self.account_inst_address
+        if self.account_inst_name:
+            if hasattr(self.account_inst_name, 'to_alipay_dict'):
+                params['account_inst_name'] = self.account_inst_name.to_alipay_dict()
+            else:
+                params['account_inst_name'] = self.account_inst_name
+        if self.bank_card_no:
+            if hasattr(self.bank_card_no, 'to_alipay_dict'):
+                params['bank_card_no'] = self.bank_card_no.to_alipay_dict()
+            else:
+                params['bank_card_no'] = self.bank_card_no
+        if self.pbc_bank_code:
+            if hasattr(self.pbc_bank_code, 'to_alipay_dict'):
+                params['pbc_bank_code'] = self.pbc_bank_code.to_alipay_dict()
+            else:
+                params['pbc_bank_code'] = self.pbc_bank_code
+        if self.usage_type:
+            if hasattr(self.usage_type, 'to_alipay_dict'):
+                params['usage_type'] = self.usage_type.to_alipay_dict()
+            else:
+                params['usage_type'] = self.usage_type
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = BrandChainBankCardInfo()
+        if 'account_branch_name' in d:
+            o.account_branch_name = d['account_branch_name']
+        if 'account_holder_name' in d:
+            o.account_holder_name = d['account_holder_name']
+        if 'account_inst_address' in d:
+            o.account_inst_address = d['account_inst_address']
+        if 'account_inst_name' in d:
+            o.account_inst_name = d['account_inst_name']
+        if 'bank_card_no' in d:
+            o.bank_card_no = d['bank_card_no']
+        if 'pbc_bank_code' in d:
+            o.pbc_bank_code = d['pbc_bank_code']
+        if 'usage_type' in d:
+            o.usage_type = d['usage_type']
+        return o
+
+

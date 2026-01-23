@@ -11,6 +11,7 @@ class ZhimaCreditEpDossierCertificateQueryResponse(AlipayResponse):
     def __init__(self):
         super(ZhimaCreditEpDossierCertificateQueryResponse, self).__init__()
         self._data = None
+        self._data_found = None
 
     @property
     def data(self):
@@ -22,8 +23,17 @@ class ZhimaCreditEpDossierCertificateQueryResponse(AlipayResponse):
             self._data = value
         else:
             self._data = ZmepCertificateDataInfo.from_alipay_dict(value)
+    @property
+    def data_found(self):
+        return self._data_found
+
+    @data_found.setter
+    def data_found(self, value):
+        self._data_found = value
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpDossierCertificateQueryResponse, self).parse_response_content(response_content)
         if 'data' in response:
             self.data = response['data']
+        if 'data_found' in response:
+            self.data_found = response['data_found']

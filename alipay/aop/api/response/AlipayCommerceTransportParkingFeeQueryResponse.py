@@ -16,6 +16,7 @@ class AlipayCommerceTransportParkingFeeQueryResponse(AlipayResponse):
         self._gaode_map_poi_latitude = None
         self._gaode_map_poi_longitude = None
         self._in_place_time = None
+        self._license_plate_no = None
         self._park_duration_time = None
         self._parking_lot_address = None
         self._parking_lot_name = None
@@ -72,6 +73,13 @@ class AlipayCommerceTransportParkingFeeQueryResponse(AlipayResponse):
     def in_place_time(self, value):
         self._in_place_time = value
     @property
+    def license_plate_no(self):
+        return self._license_plate_no
+
+    @license_plate_no.setter
+    def license_plate_no(self, value):
+        self._license_plate_no = value
+    @property
     def park_duration_time(self):
         return self._park_duration_time
 
@@ -123,6 +131,8 @@ class AlipayCommerceTransportParkingFeeQueryResponse(AlipayResponse):
             self.gaode_map_poi_longitude = response['gaode_map_poi_longitude']
         if 'in_place_time' in response:
             self.in_place_time = response['in_place_time']
+        if 'license_plate_no' in response:
+            self.license_plate_no = response['license_plate_no']
         if 'park_duration_time' in response:
             self.park_duration_time = response['park_duration_time']
         if 'parking_lot_address' in response:
