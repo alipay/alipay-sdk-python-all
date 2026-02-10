@@ -64,6 +64,7 @@ class FxiaokeCreateLeadsParams(object):
         self._resource_foundation = None
         self._sign_path = None
         self._sign_probability = None
+        self._sign_probability_year = None
         self._site = None
         self._software_subscription_years_expand_ten = None
         self._source = None
@@ -467,6 +468,13 @@ class FxiaokeCreateLeadsParams(object):
     def sign_probability(self, value):
         self._sign_probability = value
     @property
+    def sign_probability_year(self):
+        return self._sign_probability_year
+
+    @sign_probability_year.setter
+    def sign_probability_year(self, value):
+        self._sign_probability_year = value
+    @property
     def site(self):
         return self._site
 
@@ -788,6 +796,11 @@ class FxiaokeCreateLeadsParams(object):
                 params['sign_probability'] = self.sign_probability.to_alipay_dict()
             else:
                 params['sign_probability'] = self.sign_probability
+        if self.sign_probability_year:
+            if hasattr(self.sign_probability_year, 'to_alipay_dict'):
+                params['sign_probability_year'] = self.sign_probability_year.to_alipay_dict()
+            else:
+                params['sign_probability_year'] = self.sign_probability_year
         if self.site:
             if hasattr(self.site, 'to_alipay_dict'):
                 params['site'] = self.site.to_alipay_dict()
@@ -925,6 +938,8 @@ class FxiaokeCreateLeadsParams(object):
             o.sign_path = d['sign_path']
         if 'sign_probability' in d:
             o.sign_probability = d['sign_probability']
+        if 'sign_probability_year' in d:
+            o.sign_probability_year = d['sign_probability_year']
         if 'site' in d:
             o.site = d['site']
         if 'software_subscription_years_expand_ten' in d:

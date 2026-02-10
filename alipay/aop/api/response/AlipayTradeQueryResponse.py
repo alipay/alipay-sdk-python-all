@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BkAgentRespInfo import BkAgentRespInfo
 from alipay.aop.api.domain.ChargeInfo import ChargeInfo
 from alipay.aop.api.domain.EnterprisePayInfo import EnterprisePayInfo
+from alipay.aop.api.domain.ExternalPayerInfo import ExternalPayerInfo
 from alipay.aop.api.domain.FulfillmentDetail import FulfillmentDetail
 from alipay.aop.api.domain.TradeFundBill import TradeFundBill
 from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
@@ -45,6 +46,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._discount_goods_detail = None
         self._enterprise_pay_info = None
         self._ext_infos = None
+        self._external_payer_info = None
         self._fulfillment_detail_list = None
         self._fund_bill_list = None
         self._hb_fq_pay_info = None
@@ -85,6 +87,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._trade_status = None
         self._trans_currency = None
         self._trans_pay_rate = None
+        self._unpaid_reason = None
         self._voucher_detail_list = None
 
     @property
@@ -267,6 +270,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @ext_infos.setter
     def ext_infos(self, value):
         self._ext_infos = value
+    @property
+    def external_payer_info(self):
+        return self._external_payer_info
+
+    @external_payer_info.setter
+    def external_payer_info(self, value):
+        if isinstance(value, ExternalPayerInfo):
+            self._external_payer_info = value
+        else:
+            self._external_payer_info = ExternalPayerInfo.from_alipay_dict(value)
     @property
     def fulfillment_detail_list(self):
         return self._fulfillment_detail_list
@@ -587,6 +600,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def trans_pay_rate(self, value):
         self._trans_pay_rate = value
     @property
+    def unpaid_reason(self):
+        return self._unpaid_reason
+
+    @unpaid_reason.setter
+    def unpaid_reason(self, value):
+        self._unpaid_reason = value
+    @property
     def voucher_detail_list(self):
         return self._voucher_detail_list
 
@@ -650,6 +670,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.enterprise_pay_info = response['enterprise_pay_info']
         if 'ext_infos' in response:
             self.ext_infos = response['ext_infos']
+        if 'external_payer_info' in response:
+            self.external_payer_info = response['external_payer_info']
         if 'fulfillment_detail_list' in response:
             self.fulfillment_detail_list = response['fulfillment_detail_list']
         if 'fund_bill_list' in response:
@@ -730,5 +752,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.trans_currency = response['trans_currency']
         if 'trans_pay_rate' in response:
             self.trans_pay_rate = response['trans_pay_rate']
+        if 'unpaid_reason' in response:
+            self.unpaid_reason = response['unpaid_reason']
         if 'voucher_detail_list' in response:
             self.voucher_detail_list = response['voucher_detail_list']

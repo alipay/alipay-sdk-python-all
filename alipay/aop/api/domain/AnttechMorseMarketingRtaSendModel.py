@@ -12,12 +12,14 @@ class AnttechMorseMarketingRtaSendModel(object):
         self._cert_encryption = None
         self._encryption_type = None
         self._extend_params = None
+        self._login_id = None
         self._login_id_encryption = None
         self._mobile_encryption = None
         self._out_biz_no = None
         self._resource_id = None
         self._send_type = None
         self._user_pass_time = None
+        self._voucher_amount = None
 
     @property
     def campaign_id(self):
@@ -47,6 +49,13 @@ class AnttechMorseMarketingRtaSendModel(object):
     @extend_params.setter
     def extend_params(self, value):
         self._extend_params = value
+    @property
+    def login_id(self):
+        return self._login_id
+
+    @login_id.setter
+    def login_id(self, value):
+        self._login_id = value
     @property
     def login_id_encryption(self):
         return self._login_id_encryption
@@ -89,6 +98,13 @@ class AnttechMorseMarketingRtaSendModel(object):
     @user_pass_time.setter
     def user_pass_time(self, value):
         self._user_pass_time = value
+    @property
+    def voucher_amount(self):
+        return self._voucher_amount
+
+    @voucher_amount.setter
+    def voucher_amount(self, value):
+        self._voucher_amount = value
 
 
     def to_alipay_dict(self):
@@ -113,6 +129,11 @@ class AnttechMorseMarketingRtaSendModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.login_id:
+            if hasattr(self.login_id, 'to_alipay_dict'):
+                params['login_id'] = self.login_id.to_alipay_dict()
+            else:
+                params['login_id'] = self.login_id
         if self.login_id_encryption:
             if hasattr(self.login_id_encryption, 'to_alipay_dict'):
                 params['login_id_encryption'] = self.login_id_encryption.to_alipay_dict()
@@ -143,6 +164,11 @@ class AnttechMorseMarketingRtaSendModel(object):
                 params['user_pass_time'] = self.user_pass_time.to_alipay_dict()
             else:
                 params['user_pass_time'] = self.user_pass_time
+        if self.voucher_amount:
+            if hasattr(self.voucher_amount, 'to_alipay_dict'):
+                params['voucher_amount'] = self.voucher_amount.to_alipay_dict()
+            else:
+                params['voucher_amount'] = self.voucher_amount
         return params
 
     @staticmethod
@@ -158,6 +184,8 @@ class AnttechMorseMarketingRtaSendModel(object):
             o.encryption_type = d['encryption_type']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'login_id' in d:
+            o.login_id = d['login_id']
         if 'login_id_encryption' in d:
             o.login_id_encryption = d['login_id_encryption']
         if 'mobile_encryption' in d:
@@ -170,6 +198,8 @@ class AnttechMorseMarketingRtaSendModel(object):
             o.send_type = d['send_type']
         if 'user_pass_time' in d:
             o.user_pass_time = d['user_pass_time']
+        if 'voucher_amount' in d:
+            o.voucher_amount = d['voucher_amount']
         return o
 
 

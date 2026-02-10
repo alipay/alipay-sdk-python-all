@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ConsultExtendInfo import ConsultExtendInfo
+from alipay.aop.api.domain.MultipleCampaignChannel import MultipleCampaignChannel
 
 
 class CampaignPrize(object):
@@ -12,11 +14,13 @@ class CampaignPrize(object):
         self._campaign_channel = None
         self._campaign_channel_code = None
         self._campaign_id = None
+        self._consult_extend_info = None
         self._idea_content = None
         self._idea_type = None
         self._link = None
         self._max_amount = None
         self._min_amount = None
+        self._multiple_campaign_channel = None
         self._threshold = None
 
     @property
@@ -47,6 +51,16 @@ class CampaignPrize(object):
     @campaign_id.setter
     def campaign_id(self, value):
         self._campaign_id = value
+    @property
+    def consult_extend_info(self):
+        return self._consult_extend_info
+
+    @consult_extend_info.setter
+    def consult_extend_info(self, value):
+        if isinstance(value, ConsultExtendInfo):
+            self._consult_extend_info = value
+        else:
+            self._consult_extend_info = ConsultExtendInfo.from_alipay_dict(value)
     @property
     def idea_content(self):
         return self._idea_content
@@ -83,6 +97,19 @@ class CampaignPrize(object):
     def min_amount(self, value):
         self._min_amount = value
     @property
+    def multiple_campaign_channel(self):
+        return self._multiple_campaign_channel
+
+    @multiple_campaign_channel.setter
+    def multiple_campaign_channel(self, value):
+        if isinstance(value, list):
+            self._multiple_campaign_channel = list()
+            for i in value:
+                if isinstance(i, MultipleCampaignChannel):
+                    self._multiple_campaign_channel.append(i)
+                else:
+                    self._multiple_campaign_channel.append(MultipleCampaignChannel.from_alipay_dict(i))
+    @property
     def threshold(self):
         return self._threshold
 
@@ -113,6 +140,11 @@ class CampaignPrize(object):
                 params['campaign_id'] = self.campaign_id.to_alipay_dict()
             else:
                 params['campaign_id'] = self.campaign_id
+        if self.consult_extend_info:
+            if hasattr(self.consult_extend_info, 'to_alipay_dict'):
+                params['consult_extend_info'] = self.consult_extend_info.to_alipay_dict()
+            else:
+                params['consult_extend_info'] = self.consult_extend_info
         if self.idea_content:
             if hasattr(self.idea_content, 'to_alipay_dict'):
                 params['idea_content'] = self.idea_content.to_alipay_dict()
@@ -138,6 +170,16 @@ class CampaignPrize(object):
                 params['min_amount'] = self.min_amount.to_alipay_dict()
             else:
                 params['min_amount'] = self.min_amount
+        if self.multiple_campaign_channel:
+            if isinstance(self.multiple_campaign_channel, list):
+                for i in range(0, len(self.multiple_campaign_channel)):
+                    element = self.multiple_campaign_channel[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.multiple_campaign_channel[i] = element.to_alipay_dict()
+            if hasattr(self.multiple_campaign_channel, 'to_alipay_dict'):
+                params['multiple_campaign_channel'] = self.multiple_campaign_channel.to_alipay_dict()
+            else:
+                params['multiple_campaign_channel'] = self.multiple_campaign_channel
         if self.threshold:
             if hasattr(self.threshold, 'to_alipay_dict'):
                 params['threshold'] = self.threshold.to_alipay_dict()
@@ -158,6 +200,8 @@ class CampaignPrize(object):
             o.campaign_channel_code = d['campaign_channel_code']
         if 'campaign_id' in d:
             o.campaign_id = d['campaign_id']
+        if 'consult_extend_info' in d:
+            o.consult_extend_info = d['consult_extend_info']
         if 'idea_content' in d:
             o.idea_content = d['idea_content']
         if 'idea_type' in d:
@@ -168,6 +212,8 @@ class CampaignPrize(object):
             o.max_amount = d['max_amount']
         if 'min_amount' in d:
             o.min_amount = d['min_amount']
+        if 'multiple_campaign_channel' in d:
+            o.multiple_campaign_channel = d['multiple_campaign_channel']
         if 'threshold' in d:
             o.threshold = d['threshold']
         return o

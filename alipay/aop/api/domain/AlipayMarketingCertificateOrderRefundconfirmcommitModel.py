@@ -12,6 +12,7 @@ class AlipayMarketingCertificateOrderRefundconfirmcommitModel(object):
         self._code = None
         self._order_id = None
         self._reason = None
+        self._refund_order_id = None
         self._result = None
         self._user_id = None
         self._user_open_id = None
@@ -44,6 +45,13 @@ class AlipayMarketingCertificateOrderRefundconfirmcommitModel(object):
     @reason.setter
     def reason(self, value):
         self._reason = value
+    @property
+    def refund_order_id(self):
+        return self._refund_order_id
+
+    @refund_order_id.setter
+    def refund_order_id(self, value):
+        self._refund_order_id = value
     @property
     def result(self):
         return self._result
@@ -89,6 +97,11 @@ class AlipayMarketingCertificateOrderRefundconfirmcommitModel(object):
                 params['reason'] = self.reason.to_alipay_dict()
             else:
                 params['reason'] = self.reason
+        if self.refund_order_id:
+            if hasattr(self.refund_order_id, 'to_alipay_dict'):
+                params['refund_order_id'] = self.refund_order_id.to_alipay_dict()
+            else:
+                params['refund_order_id'] = self.refund_order_id
         if self.result:
             if hasattr(self.result, 'to_alipay_dict'):
                 params['result'] = self.result.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayMarketingCertificateOrderRefundconfirmcommitModel(object):
             o.order_id = d['order_id']
         if 'reason' in d:
             o.reason = d['reason']
+        if 'refund_order_id' in d:
+            o.refund_order_id = d['refund_order_id']
         if 'result' in d:
             o.result = d['result']
         if 'user_id' in d:

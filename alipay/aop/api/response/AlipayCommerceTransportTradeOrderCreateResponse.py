@@ -10,6 +10,7 @@ class AlipayCommerceTransportTradeOrderCreateResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceTransportTradeOrderCreateResponse, self).__init__()
         self._bill_no = None
+        self._out_no = None
         self._trade_no = None
 
     @property
@@ -19,6 +20,13 @@ class AlipayCommerceTransportTradeOrderCreateResponse(AlipayResponse):
     @bill_no.setter
     def bill_no(self, value):
         self._bill_no = value
+    @property
+    def out_no(self):
+        return self._out_no
+
+    @out_no.setter
+    def out_no(self, value):
+        self._out_no = value
     @property
     def trade_no(self):
         return self._trade_no
@@ -31,5 +39,7 @@ class AlipayCommerceTransportTradeOrderCreateResponse(AlipayResponse):
         response = super(AlipayCommerceTransportTradeOrderCreateResponse, self).parse_response_content(response_content)
         if 'bill_no' in response:
             self.bill_no = response['bill_no']
+        if 'out_no' in response:
+            self.out_no = response['out_no']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']

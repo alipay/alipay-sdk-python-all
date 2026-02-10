@@ -12,6 +12,7 @@ class AlipayFundWalletSceneSignResponse(AlipayResponse):
         self._asset_no = None
         self._available_amount = None
         self._biz_scene = None
+        self._external_account_no = None
         self._out_biz_no = None
         self._total_amount = None
         self._user_wallet_id = None
@@ -37,6 +38,13 @@ class AlipayFundWalletSceneSignResponse(AlipayResponse):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def external_account_no(self):
+        return self._external_account_no
+
+    @external_account_no.setter
+    def external_account_no(self, value):
+        self._external_account_no = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -67,6 +75,8 @@ class AlipayFundWalletSceneSignResponse(AlipayResponse):
             self.available_amount = response['available_amount']
         if 'biz_scene' in response:
             self.biz_scene = response['biz_scene']
+        if 'external_account_no' in response:
+            self.external_account_no = response['external_account_no']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'total_amount' in response:

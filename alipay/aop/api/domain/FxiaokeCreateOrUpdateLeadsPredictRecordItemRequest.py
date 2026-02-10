@@ -10,6 +10,7 @@ class FxiaokeCreateOrUpdateLeadsPredictRecordItemRequest(object):
     def __init__(self):
         self._commodity_cate_code = None
         self._contract_amount = None
+        self._leads_predict_order_currency = None
         self._software_subscription_years = None
 
     @property
@@ -26,6 +27,13 @@ class FxiaokeCreateOrUpdateLeadsPredictRecordItemRequest(object):
     @contract_amount.setter
     def contract_amount(self, value):
         self._contract_amount = value
+    @property
+    def leads_predict_order_currency(self):
+        return self._leads_predict_order_currency
+
+    @leads_predict_order_currency.setter
+    def leads_predict_order_currency(self, value):
+        self._leads_predict_order_currency = value
     @property
     def software_subscription_years(self):
         return self._software_subscription_years
@@ -47,6 +55,11 @@ class FxiaokeCreateOrUpdateLeadsPredictRecordItemRequest(object):
                 params['contract_amount'] = self.contract_amount.to_alipay_dict()
             else:
                 params['contract_amount'] = self.contract_amount
+        if self.leads_predict_order_currency:
+            if hasattr(self.leads_predict_order_currency, 'to_alipay_dict'):
+                params['leads_predict_order_currency'] = self.leads_predict_order_currency.to_alipay_dict()
+            else:
+                params['leads_predict_order_currency'] = self.leads_predict_order_currency
         if self.software_subscription_years:
             if hasattr(self.software_subscription_years, 'to_alipay_dict'):
                 params['software_subscription_years'] = self.software_subscription_years.to_alipay_dict()
@@ -63,6 +76,8 @@ class FxiaokeCreateOrUpdateLeadsPredictRecordItemRequest(object):
             o.commodity_cate_code = d['commodity_cate_code']
         if 'contract_amount' in d:
             o.contract_amount = d['contract_amount']
+        if 'leads_predict_order_currency' in d:
+            o.leads_predict_order_currency = d['leads_predict_order_currency']
         if 'software_subscription_years' in d:
             o.software_subscription_years = d['software_subscription_years']
         return o

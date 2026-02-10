@@ -13,6 +13,7 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
         super(AnttechMorseMarketingRtaSendResponse, self).__init__()
         self._biz_no = None
         self._campaign_id = None
+        self._idempotent = None
         self._out_biz_no = None
         self._send_equity_order_list = None
         self._send_equity_order_result_list = None
@@ -34,6 +35,13 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
     @campaign_id.setter
     def campaign_id(self, value):
         self._campaign_id = value
+    @property
+    def idempotent(self):
+        return self._idempotent
+
+    @idempotent.setter
+    def idempotent(self, value):
+        self._idempotent = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -92,6 +100,8 @@ class AnttechMorseMarketingRtaSendResponse(AlipayResponse):
             self.biz_no = response['biz_no']
         if 'campaign_id' in response:
             self.campaign_id = response['campaign_id']
+        if 'idempotent' in response:
+            self.idempotent = response['idempotent']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'send_equity_order_list' in response:

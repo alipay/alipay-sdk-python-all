@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BizInfoMap import BizInfoMap
 from alipay.aop.api.domain.OtherInfo import OtherInfo
+from alipay.aop.api.domain.TargetPoint import TargetPoint
 
 
 class RobbyOpenTaskCreateModel(object):
@@ -16,6 +17,7 @@ class RobbyOpenTaskCreateModel(object):
         self._scene = None
         self._sn = None
         self._sub_biz_no = None
+        self._target_point = None
         self._task_type = None
         self._time_out = None
 
@@ -71,6 +73,16 @@ class RobbyOpenTaskCreateModel(object):
     def sub_biz_no(self, value):
         self._sub_biz_no = value
     @property
+    def target_point(self):
+        return self._target_point
+
+    @target_point.setter
+    def target_point(self, value):
+        if isinstance(value, TargetPoint):
+            self._target_point = value
+        else:
+            self._target_point = TargetPoint.from_alipay_dict(value)
+    @property
     def task_type(self):
         return self._task_type
 
@@ -123,6 +135,11 @@ class RobbyOpenTaskCreateModel(object):
                 params['sub_biz_no'] = self.sub_biz_no.to_alipay_dict()
             else:
                 params['sub_biz_no'] = self.sub_biz_no
+        if self.target_point:
+            if hasattr(self.target_point, 'to_alipay_dict'):
+                params['target_point'] = self.target_point.to_alipay_dict()
+            else:
+                params['target_point'] = self.target_point
         if self.task_type:
             if hasattr(self.task_type, 'to_alipay_dict'):
                 params['task_type'] = self.task_type.to_alipay_dict()
@@ -152,6 +169,8 @@ class RobbyOpenTaskCreateModel(object):
             o.sn = d['sn']
         if 'sub_biz_no' in d:
             o.sub_biz_no = d['sub_biz_no']
+        if 'target_point' in d:
+            o.target_point = d['target_point']
         if 'task_type' in d:
             o.task_type = d['task_type']
         if 'time_out' in d:

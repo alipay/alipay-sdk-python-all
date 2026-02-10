@@ -15,6 +15,7 @@ class AlipayUserAgreementAgentQueryResponse(AlipayResponse):
         self._external_logon_id = None
         self._external_user_id = None
         self._invalid_time = None
+        self._principal_id = None
         self._status = None
         self._valid_time = None
 
@@ -61,6 +62,13 @@ class AlipayUserAgreementAgentQueryResponse(AlipayResponse):
     def invalid_time(self, value):
         self._invalid_time = value
     @property
+    def principal_id(self):
+        return self._principal_id
+
+    @principal_id.setter
+    def principal_id(self, value):
+        self._principal_id = value
+    @property
     def status(self):
         return self._status
 
@@ -89,6 +97,8 @@ class AlipayUserAgreementAgentQueryResponse(AlipayResponse):
             self.external_user_id = response['external_user_id']
         if 'invalid_time' in response:
             self.invalid_time = response['invalid_time']
+        if 'principal_id' in response:
+            self.principal_id = response['principal_id']
         if 'status' in response:
             self.status = response['status']
         if 'valid_time' in response:

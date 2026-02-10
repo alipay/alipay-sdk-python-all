@@ -11,6 +11,7 @@ class StationLocationInfo(object):
         self._lat = None
         self._lon = None
         self._name = None
+        self._nick_name = None
         self._station_id = None
 
     @property
@@ -34,6 +35,13 @@ class StationLocationInfo(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def nick_name(self):
+        return self._nick_name
+
+    @nick_name.setter
+    def nick_name(self, value):
+        self._nick_name = value
     @property
     def station_id(self):
         return self._station_id
@@ -60,6 +68,11 @@ class StationLocationInfo(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.nick_name:
+            if hasattr(self.nick_name, 'to_alipay_dict'):
+                params['nick_name'] = self.nick_name.to_alipay_dict()
+            else:
+                params['nick_name'] = self.nick_name
         if self.station_id:
             if hasattr(self.station_id, 'to_alipay_dict'):
                 params['station_id'] = self.station_id.to_alipay_dict()
@@ -78,6 +91,8 @@ class StationLocationInfo(object):
             o.lon = d['lon']
         if 'name' in d:
             o.name = d['name']
+        if 'nick_name' in d:
+            o.nick_name = d['nick_name']
         if 'station_id' in d:
             o.station_id = d['station_id']
         return o

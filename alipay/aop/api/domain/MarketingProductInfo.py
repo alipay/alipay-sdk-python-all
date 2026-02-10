@@ -17,6 +17,7 @@ class MarketingProductInfo(object):
         self._assess_type = None
         self._inspect_amount = None
         self._inspect_quantity = None
+        self._product_category_code = None
         self._unit_type = None
 
     @property
@@ -83,6 +84,13 @@ class MarketingProductInfo(object):
     def inspect_quantity(self, value):
         self._inspect_quantity = value
     @property
+    def product_category_code(self):
+        return self._product_category_code
+
+    @product_category_code.setter
+    def product_category_code(self, value):
+        self._product_category_code = value
+    @property
     def unit_type(self):
         return self._unit_type
 
@@ -138,6 +146,11 @@ class MarketingProductInfo(object):
                 params['inspect_quantity'] = self.inspect_quantity.to_alipay_dict()
             else:
                 params['inspect_quantity'] = self.inspect_quantity
+        if self.product_category_code:
+            if hasattr(self.product_category_code, 'to_alipay_dict'):
+                params['product_category_code'] = self.product_category_code.to_alipay_dict()
+            else:
+                params['product_category_code'] = self.product_category_code
         if self.unit_type:
             if hasattr(self.unit_type, 'to_alipay_dict'):
                 params['unit_type'] = self.unit_type.to_alipay_dict()
@@ -168,6 +181,8 @@ class MarketingProductInfo(object):
             o.inspect_amount = d['inspect_amount']
         if 'inspect_quantity' in d:
             o.inspect_quantity = d['inspect_quantity']
+        if 'product_category_code' in d:
+            o.product_category_code = d['product_category_code']
         if 'unit_type' in d:
             o.unit_type = d['unit_type']
         return o

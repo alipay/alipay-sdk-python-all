@@ -18,6 +18,7 @@ class AlipayCommerceTransportTradeOrderCreateModel(object):
         self._out_biz_no = None
         self._out_sub_biz_no = None
         self._partner_unique_code = None
+        self._portable = None
         self._price = None
         self._quantity = None
         self._smid = None
@@ -94,6 +95,13 @@ class AlipayCommerceTransportTradeOrderCreateModel(object):
     @partner_unique_code.setter
     def partner_unique_code(self, value):
         self._partner_unique_code = value
+    @property
+    def portable(self):
+        return self._portable
+
+    @portable.setter
+    def portable(self, value):
+        self._portable = value
     @property
     def price(self):
         return self._price
@@ -230,6 +238,11 @@ class AlipayCommerceTransportTradeOrderCreateModel(object):
                 params['partner_unique_code'] = self.partner_unique_code.to_alipay_dict()
             else:
                 params['partner_unique_code'] = self.partner_unique_code
+        if self.portable:
+            if hasattr(self.portable, 'to_alipay_dict'):
+                params['portable'] = self.portable.to_alipay_dict()
+            else:
+                params['portable'] = self.portable
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
@@ -315,6 +328,8 @@ class AlipayCommerceTransportTradeOrderCreateModel(object):
             o.out_sub_biz_no = d['out_sub_biz_no']
         if 'partner_unique_code' in d:
             o.partner_unique_code = d['partner_unique_code']
+        if 'portable' in d:
+            o.portable = d['portable']
         if 'price' in d:
             o.price = d['price']
         if 'quantity' in d:

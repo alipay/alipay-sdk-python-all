@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BreakCostsInfo import BreakCostsInfo
 from alipay.aop.api.domain.CardPromoInfo import CardPromoInfo
+from alipay.aop.api.domain.AxfItemAttr import AxfItemAttr
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
@@ -15,6 +16,8 @@ from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 class MerchantCardTemplate(object):
 
     def __init__(self):
+        self._ax_item_type = None
+        self._booking_mode = None
         self._break_costs_info = None
         self._card_promo_list = None
         self._card_template_app_id = None
@@ -29,6 +32,8 @@ class MerchantCardTemplate(object):
         self._image_detail_url_list = None
         self._image_id_list = None
         self._image_url_list = None
+        self._item_attrs = None
+        self._item_category_code = None
         self._money_card_info = None
         self._msg_app_id = None
         self._need_order_agreement = None
@@ -42,6 +47,20 @@ class MerchantCardTemplate(object):
         self._times_card_info = None
         self._use_info = None
 
+    @property
+    def ax_item_type(self):
+        return self._ax_item_type
+
+    @ax_item_type.setter
+    def ax_item_type(self, value):
+        self._ax_item_type = value
+    @property
+    def booking_mode(self):
+        return self._booking_mode
+
+    @booking_mode.setter
+    def booking_mode(self, value):
+        self._booking_mode = value
     @property
     def break_costs_info(self):
         return self._break_costs_info
@@ -165,6 +184,26 @@ class MerchantCardTemplate(object):
             for i in value:
                 self._image_url_list.append(i)
     @property
+    def item_attrs(self):
+        return self._item_attrs
+
+    @item_attrs.setter
+    def item_attrs(self, value):
+        if isinstance(value, list):
+            self._item_attrs = list()
+            for i in value:
+                if isinstance(i, AxfItemAttr):
+                    self._item_attrs.append(i)
+                else:
+                    self._item_attrs.append(AxfItemAttr.from_alipay_dict(i))
+    @property
+    def item_category_code(self):
+        return self._item_category_code
+
+    @item_category_code.setter
+    def item_category_code(self, value):
+        self._item_category_code = value
+    @property
     def money_card_info(self):
         return self._money_card_info
 
@@ -270,6 +309,16 @@ class MerchantCardTemplate(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ax_item_type:
+            if hasattr(self.ax_item_type, 'to_alipay_dict'):
+                params['ax_item_type'] = self.ax_item_type.to_alipay_dict()
+            else:
+                params['ax_item_type'] = self.ax_item_type
+        if self.booking_mode:
+            if hasattr(self.booking_mode, 'to_alipay_dict'):
+                params['booking_mode'] = self.booking_mode.to_alipay_dict()
+            else:
+                params['booking_mode'] = self.booking_mode
         if self.break_costs_info:
             if hasattr(self.break_costs_info, 'to_alipay_dict'):
                 params['break_costs_info'] = self.break_costs_info.to_alipay_dict()
@@ -370,6 +419,21 @@ class MerchantCardTemplate(object):
                 params['image_url_list'] = self.image_url_list.to_alipay_dict()
             else:
                 params['image_url_list'] = self.image_url_list
+        if self.item_attrs:
+            if isinstance(self.item_attrs, list):
+                for i in range(0, len(self.item_attrs)):
+                    element = self.item_attrs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_attrs[i] = element.to_alipay_dict()
+            if hasattr(self.item_attrs, 'to_alipay_dict'):
+                params['item_attrs'] = self.item_attrs.to_alipay_dict()
+            else:
+                params['item_attrs'] = self.item_attrs
+        if self.item_category_code:
+            if hasattr(self.item_category_code, 'to_alipay_dict'):
+                params['item_category_code'] = self.item_category_code.to_alipay_dict()
+            else:
+                params['item_category_code'] = self.item_category_code
         if self.money_card_info:
             if hasattr(self.money_card_info, 'to_alipay_dict'):
                 params['money_card_info'] = self.money_card_info.to_alipay_dict()
@@ -442,6 +506,10 @@ class MerchantCardTemplate(object):
         if not d:
             return None
         o = MerchantCardTemplate()
+        if 'ax_item_type' in d:
+            o.ax_item_type = d['ax_item_type']
+        if 'booking_mode' in d:
+            o.booking_mode = d['booking_mode']
         if 'break_costs_info' in d:
             o.break_costs_info = d['break_costs_info']
         if 'card_promo_list' in d:
@@ -470,6 +538,10 @@ class MerchantCardTemplate(object):
             o.image_id_list = d['image_id_list']
         if 'image_url_list' in d:
             o.image_url_list = d['image_url_list']
+        if 'item_attrs' in d:
+            o.item_attrs = d['item_attrs']
+        if 'item_category_code' in d:
+            o.item_category_code = d['item_category_code']
         if 'money_card_info' in d:
             o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:

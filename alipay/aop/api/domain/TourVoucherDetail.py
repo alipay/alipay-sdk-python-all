@@ -20,6 +20,7 @@ class TourVoucherDetail(object):
         self._source_num = None
         self._status = None
         self._tele_no = None
+        self._verify_method = None
         self._verify_open_id = None
         self._verify_user_id = None
         self._voucher_info = None
@@ -112,6 +113,13 @@ class TourVoucherDetail(object):
     def tele_no(self, value):
         self._tele_no = value
     @property
+    def verify_method(self):
+        return self._verify_method
+
+    @verify_method.setter
+    def verify_method(self, value):
+        self._verify_method = value
+    @property
     def verify_open_id(self):
         return self._verify_open_id
 
@@ -201,6 +209,11 @@ class TourVoucherDetail(object):
                 params['tele_no'] = self.tele_no.to_alipay_dict()
             else:
                 params['tele_no'] = self.tele_no
+        if self.verify_method:
+            if hasattr(self.verify_method, 'to_alipay_dict'):
+                params['verify_method'] = self.verify_method.to_alipay_dict()
+            else:
+                params['verify_method'] = self.verify_method
         if self.verify_open_id:
             if hasattr(self.verify_open_id, 'to_alipay_dict'):
                 params['verify_open_id'] = self.verify_open_id.to_alipay_dict()
@@ -247,6 +260,8 @@ class TourVoucherDetail(object):
             o.status = d['status']
         if 'tele_no' in d:
             o.tele_no = d['tele_no']
+        if 'verify_method' in d:
+            o.verify_method = d['verify_method']
         if 'verify_open_id' in d:
             o.verify_open_id = d['verify_open_id']
         if 'verify_user_id' in d:

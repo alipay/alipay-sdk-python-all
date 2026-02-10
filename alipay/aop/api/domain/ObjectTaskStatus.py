@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class ObjectTaskStatus(object):
 
     def __init__(self):
+        self._basket_no = None
         self._biz_object_no = None
         self._number = None
         self._status = None
 
+    @property
+    def basket_no(self):
+        return self._basket_no
+
+    @basket_no.setter
+    def basket_no(self, value):
+        self._basket_no = value
     @property
     def biz_object_no(self):
         return self._biz_object_no
@@ -37,6 +45,11 @@ class ObjectTaskStatus(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.basket_no:
+            if hasattr(self.basket_no, 'to_alipay_dict'):
+                params['basket_no'] = self.basket_no.to_alipay_dict()
+            else:
+                params['basket_no'] = self.basket_no
         if self.biz_object_no:
             if hasattr(self.biz_object_no, 'to_alipay_dict'):
                 params['biz_object_no'] = self.biz_object_no.to_alipay_dict()
@@ -59,6 +72,8 @@ class ObjectTaskStatus(object):
         if not d:
             return None
         o = ObjectTaskStatus()
+        if 'basket_no' in d:
+            o.basket_no = d['basket_no']
         if 'biz_object_no' in d:
             o.biz_object_no = d['biz_object_no']
         if 'number' in d:

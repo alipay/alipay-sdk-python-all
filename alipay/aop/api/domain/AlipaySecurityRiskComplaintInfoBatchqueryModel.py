@@ -18,6 +18,7 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
         self._task_id = None
         self._task_id_list = None
         self._trade_no = None
+        self._upgrade = None
 
     @property
     def current_page_num(self):
@@ -95,6 +96,13 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def upgrade(self):
+        return self._upgrade
+
+    @upgrade.setter
+    def upgrade(self, value):
+        self._upgrade = value
 
 
     def to_alipay_dict(self):
@@ -159,6 +167,11 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.upgrade:
+            if hasattr(self.upgrade, 'to_alipay_dict'):
+                params['upgrade'] = self.upgrade.to_alipay_dict()
+            else:
+                params['upgrade'] = self.upgrade
         return params
 
     @staticmethod
@@ -186,6 +199,8 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
             o.task_id_list = d['task_id_list']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'upgrade' in d:
+            o.upgrade = d['upgrade']
         return o
 
 

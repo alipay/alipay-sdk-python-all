@@ -20,6 +20,8 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
         self._gmt_overdue = None
         self._gmt_process = None
         self._gmt_risk_finish_time = None
+        self._gmt_upgrade = None
+        self._gmt_upgrade_risk_finish_time = None
         self._id = None
         self._opposite_name = None
         self._opposite_pid = None
@@ -31,6 +33,7 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
         self._status_description = None
         self._task_id = None
         self._trade_no = None
+        self._upgrade_content = None
 
     @property
     def certify_info(self):
@@ -112,6 +115,20 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
     def gmt_risk_finish_time(self, value):
         self._gmt_risk_finish_time = value
     @property
+    def gmt_upgrade(self):
+        return self._gmt_upgrade
+
+    @gmt_upgrade.setter
+    def gmt_upgrade(self, value):
+        self._gmt_upgrade = value
+    @property
+    def gmt_upgrade_risk_finish_time(self):
+        return self._gmt_upgrade_risk_finish_time
+
+    @gmt_upgrade_risk_finish_time.setter
+    def gmt_upgrade_risk_finish_time(self, value):
+        self._gmt_upgrade_risk_finish_time = value
+    @property
     def id(self):
         return self._id
 
@@ -191,6 +208,13 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def upgrade_content(self):
+        return self._upgrade_content
+
+    @upgrade_content.setter
+    def upgrade_content(self, value):
+        self._upgrade_content = value
 
     def parse_response_content(self, response_content):
         response = super(AlipaySecurityRiskComplaintInfoQueryResponse, self).parse_response_content(response_content)
@@ -214,6 +238,10 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
             self.gmt_process = response['gmt_process']
         if 'gmt_risk_finish_time' in response:
             self.gmt_risk_finish_time = response['gmt_risk_finish_time']
+        if 'gmt_upgrade' in response:
+            self.gmt_upgrade = response['gmt_upgrade']
+        if 'gmt_upgrade_risk_finish_time' in response:
+            self.gmt_upgrade_risk_finish_time = response['gmt_upgrade_risk_finish_time']
         if 'id' in response:
             self.id = response['id']
         if 'opposite_name' in response:
@@ -236,3 +264,5 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
             self.task_id = response['task_id']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
+        if 'upgrade_content' in response:
+            self.upgrade_content = response['upgrade_content']

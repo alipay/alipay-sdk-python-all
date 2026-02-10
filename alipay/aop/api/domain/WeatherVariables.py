@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class WeatherVariables(object):
 
     def __init__(self):
+        self._apparent_temperature = None
         self._cloud_cover = None
         self._cloud_cover_high = None
         self._cloud_cover_low = None
@@ -15,30 +16,47 @@ class WeatherVariables(object):
         self._dew_point_2_m = None
         self._dew_point_2m = None
         self._diffuse_radiation = None
+        self._diffuse_radiation_instant = None
         self._direct_normal_irradiance = None
+        self._direct_normal_irradiance_instant = None
         self._direct_radiation = None
+        self._direct_radiation_instant = None
+        self._precipitation = None
         self._precipitation_probability = None
         self._pressure_msl = None
+        self._rain = None
         self._relative_humidity_2_m = None
         self._relative_humidity_2m = None
         self._shortwave_radiation = None
+        self._shortwave_radiation_instant = None
+        self._snowfall = None
         self._surface_pressure = None
         self._temperature_2_m = None
         self._temperature_2m = None
         self._variable_date = None
+        self._weather_code = None
         self._wind_direction_10_m = None
         self._wind_direction_10m = None
         self._wind_direction_120_m = None
         self._wind_direction_120m = None
+        self._wind_direction_180_m = None
         self._wind_direction_80_m = None
         self._wind_direction_80m = None
         self._wind_speed_10_m = None
         self._wind_speed_10m = None
         self._wind_speed_120_m = None
         self._wind_speed_120m = None
+        self._wind_speed_180_m = None
         self._wind_speed_80_m = None
         self._wind_speed_80m = None
 
+    @property
+    def apparent_temperature(self):
+        return self._apparent_temperature
+
+    @apparent_temperature.setter
+    def apparent_temperature(self, value):
+        self._apparent_temperature = value
     @property
     def cloud_cover(self):
         return self._cloud_cover
@@ -89,6 +107,13 @@ class WeatherVariables(object):
     def diffuse_radiation(self, value):
         self._diffuse_radiation = value
     @property
+    def diffuse_radiation_instant(self):
+        return self._diffuse_radiation_instant
+
+    @diffuse_radiation_instant.setter
+    def diffuse_radiation_instant(self, value):
+        self._diffuse_radiation_instant = value
+    @property
     def direct_normal_irradiance(self):
         return self._direct_normal_irradiance
 
@@ -96,12 +121,33 @@ class WeatherVariables(object):
     def direct_normal_irradiance(self, value):
         self._direct_normal_irradiance = value
     @property
+    def direct_normal_irradiance_instant(self):
+        return self._direct_normal_irradiance_instant
+
+    @direct_normal_irradiance_instant.setter
+    def direct_normal_irradiance_instant(self, value):
+        self._direct_normal_irradiance_instant = value
+    @property
     def direct_radiation(self):
         return self._direct_radiation
 
     @direct_radiation.setter
     def direct_radiation(self, value):
         self._direct_radiation = value
+    @property
+    def direct_radiation_instant(self):
+        return self._direct_radiation_instant
+
+    @direct_radiation_instant.setter
+    def direct_radiation_instant(self, value):
+        self._direct_radiation_instant = value
+    @property
+    def precipitation(self):
+        return self._precipitation
+
+    @precipitation.setter
+    def precipitation(self, value):
+        self._precipitation = value
     @property
     def precipitation_probability(self):
         return self._precipitation_probability
@@ -116,6 +162,13 @@ class WeatherVariables(object):
     @pressure_msl.setter
     def pressure_msl(self, value):
         self._pressure_msl = value
+    @property
+    def rain(self):
+        return self._rain
+
+    @rain.setter
+    def rain(self, value):
+        self._rain = value
     @property
     def relative_humidity_2_m(self):
         return self._relative_humidity_2_m
@@ -137,6 +190,20 @@ class WeatherVariables(object):
     @shortwave_radiation.setter
     def shortwave_radiation(self, value):
         self._shortwave_radiation = value
+    @property
+    def shortwave_radiation_instant(self):
+        return self._shortwave_radiation_instant
+
+    @shortwave_radiation_instant.setter
+    def shortwave_radiation_instant(self, value):
+        self._shortwave_radiation_instant = value
+    @property
+    def snowfall(self):
+        return self._snowfall
+
+    @snowfall.setter
+    def snowfall(self, value):
+        self._snowfall = value
     @property
     def surface_pressure(self):
         return self._surface_pressure
@@ -166,6 +233,13 @@ class WeatherVariables(object):
     def variable_date(self, value):
         self._variable_date = value
     @property
+    def weather_code(self):
+        return self._weather_code
+
+    @weather_code.setter
+    def weather_code(self, value):
+        self._weather_code = value
+    @property
     def wind_direction_10_m(self):
         return self._wind_direction_10_m
 
@@ -193,6 +267,13 @@ class WeatherVariables(object):
     @wind_direction_120m.setter
     def wind_direction_120m(self, value):
         self._wind_direction_120m = value
+    @property
+    def wind_direction_180_m(self):
+        return self._wind_direction_180_m
+
+    @wind_direction_180_m.setter
+    def wind_direction_180_m(self, value):
+        self._wind_direction_180_m = value
     @property
     def wind_direction_80_m(self):
         return self._wind_direction_80_m
@@ -236,6 +317,13 @@ class WeatherVariables(object):
     def wind_speed_120m(self, value):
         self._wind_speed_120m = value
     @property
+    def wind_speed_180_m(self):
+        return self._wind_speed_180_m
+
+    @wind_speed_180_m.setter
+    def wind_speed_180_m(self, value):
+        self._wind_speed_180_m = value
+    @property
     def wind_speed_80_m(self):
         return self._wind_speed_80_m
 
@@ -253,6 +341,11 @@ class WeatherVariables(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apparent_temperature:
+            if hasattr(self.apparent_temperature, 'to_alipay_dict'):
+                params['apparent_temperature'] = self.apparent_temperature.to_alipay_dict()
+            else:
+                params['apparent_temperature'] = self.apparent_temperature
         if self.cloud_cover:
             if hasattr(self.cloud_cover, 'to_alipay_dict'):
                 params['cloud_cover'] = self.cloud_cover.to_alipay_dict()
@@ -288,16 +381,36 @@ class WeatherVariables(object):
                 params['diffuse_radiation'] = self.diffuse_radiation.to_alipay_dict()
             else:
                 params['diffuse_radiation'] = self.diffuse_radiation
+        if self.diffuse_radiation_instant:
+            if hasattr(self.diffuse_radiation_instant, 'to_alipay_dict'):
+                params['diffuse_radiation_instant'] = self.diffuse_radiation_instant.to_alipay_dict()
+            else:
+                params['diffuse_radiation_instant'] = self.diffuse_radiation_instant
         if self.direct_normal_irradiance:
             if hasattr(self.direct_normal_irradiance, 'to_alipay_dict'):
                 params['direct_normal_irradiance'] = self.direct_normal_irradiance.to_alipay_dict()
             else:
                 params['direct_normal_irradiance'] = self.direct_normal_irradiance
+        if self.direct_normal_irradiance_instant:
+            if hasattr(self.direct_normal_irradiance_instant, 'to_alipay_dict'):
+                params['direct_normal_irradiance_instant'] = self.direct_normal_irradiance_instant.to_alipay_dict()
+            else:
+                params['direct_normal_irradiance_instant'] = self.direct_normal_irradiance_instant
         if self.direct_radiation:
             if hasattr(self.direct_radiation, 'to_alipay_dict'):
                 params['direct_radiation'] = self.direct_radiation.to_alipay_dict()
             else:
                 params['direct_radiation'] = self.direct_radiation
+        if self.direct_radiation_instant:
+            if hasattr(self.direct_radiation_instant, 'to_alipay_dict'):
+                params['direct_radiation_instant'] = self.direct_radiation_instant.to_alipay_dict()
+            else:
+                params['direct_radiation_instant'] = self.direct_radiation_instant
+        if self.precipitation:
+            if hasattr(self.precipitation, 'to_alipay_dict'):
+                params['precipitation'] = self.precipitation.to_alipay_dict()
+            else:
+                params['precipitation'] = self.precipitation
         if self.precipitation_probability:
             if hasattr(self.precipitation_probability, 'to_alipay_dict'):
                 params['precipitation_probability'] = self.precipitation_probability.to_alipay_dict()
@@ -308,6 +421,11 @@ class WeatherVariables(object):
                 params['pressure_msl'] = self.pressure_msl.to_alipay_dict()
             else:
                 params['pressure_msl'] = self.pressure_msl
+        if self.rain:
+            if hasattr(self.rain, 'to_alipay_dict'):
+                params['rain'] = self.rain.to_alipay_dict()
+            else:
+                params['rain'] = self.rain
         if self.relative_humidity_2_m:
             if hasattr(self.relative_humidity_2_m, 'to_alipay_dict'):
                 params['relative_humidity_2_m'] = self.relative_humidity_2_m.to_alipay_dict()
@@ -323,6 +441,16 @@ class WeatherVariables(object):
                 params['shortwave_radiation'] = self.shortwave_radiation.to_alipay_dict()
             else:
                 params['shortwave_radiation'] = self.shortwave_radiation
+        if self.shortwave_radiation_instant:
+            if hasattr(self.shortwave_radiation_instant, 'to_alipay_dict'):
+                params['shortwave_radiation_instant'] = self.shortwave_radiation_instant.to_alipay_dict()
+            else:
+                params['shortwave_radiation_instant'] = self.shortwave_radiation_instant
+        if self.snowfall:
+            if hasattr(self.snowfall, 'to_alipay_dict'):
+                params['snowfall'] = self.snowfall.to_alipay_dict()
+            else:
+                params['snowfall'] = self.snowfall
         if self.surface_pressure:
             if hasattr(self.surface_pressure, 'to_alipay_dict'):
                 params['surface_pressure'] = self.surface_pressure.to_alipay_dict()
@@ -343,6 +471,11 @@ class WeatherVariables(object):
                 params['variable_date'] = self.variable_date.to_alipay_dict()
             else:
                 params['variable_date'] = self.variable_date
+        if self.weather_code:
+            if hasattr(self.weather_code, 'to_alipay_dict'):
+                params['weather_code'] = self.weather_code.to_alipay_dict()
+            else:
+                params['weather_code'] = self.weather_code
         if self.wind_direction_10_m:
             if hasattr(self.wind_direction_10_m, 'to_alipay_dict'):
                 params['wind_direction_10_m'] = self.wind_direction_10_m.to_alipay_dict()
@@ -363,6 +496,11 @@ class WeatherVariables(object):
                 params['wind_direction_120m'] = self.wind_direction_120m.to_alipay_dict()
             else:
                 params['wind_direction_120m'] = self.wind_direction_120m
+        if self.wind_direction_180_m:
+            if hasattr(self.wind_direction_180_m, 'to_alipay_dict'):
+                params['wind_direction_180_m'] = self.wind_direction_180_m.to_alipay_dict()
+            else:
+                params['wind_direction_180_m'] = self.wind_direction_180_m
         if self.wind_direction_80_m:
             if hasattr(self.wind_direction_80_m, 'to_alipay_dict'):
                 params['wind_direction_80_m'] = self.wind_direction_80_m.to_alipay_dict()
@@ -393,6 +531,11 @@ class WeatherVariables(object):
                 params['wind_speed_120m'] = self.wind_speed_120m.to_alipay_dict()
             else:
                 params['wind_speed_120m'] = self.wind_speed_120m
+        if self.wind_speed_180_m:
+            if hasattr(self.wind_speed_180_m, 'to_alipay_dict'):
+                params['wind_speed_180_m'] = self.wind_speed_180_m.to_alipay_dict()
+            else:
+                params['wind_speed_180_m'] = self.wind_speed_180_m
         if self.wind_speed_80_m:
             if hasattr(self.wind_speed_80_m, 'to_alipay_dict'):
                 params['wind_speed_80_m'] = self.wind_speed_80_m.to_alipay_dict()
@@ -410,6 +553,8 @@ class WeatherVariables(object):
         if not d:
             return None
         o = WeatherVariables()
+        if 'apparent_temperature' in d:
+            o.apparent_temperature = d['apparent_temperature']
         if 'cloud_cover' in d:
             o.cloud_cover = d['cloud_cover']
         if 'cloud_cover_high' in d:
@@ -424,20 +569,34 @@ class WeatherVariables(object):
             o.dew_point_2m = d['dew_point_2m']
         if 'diffuse_radiation' in d:
             o.diffuse_radiation = d['diffuse_radiation']
+        if 'diffuse_radiation_instant' in d:
+            o.diffuse_radiation_instant = d['diffuse_radiation_instant']
         if 'direct_normal_irradiance' in d:
             o.direct_normal_irradiance = d['direct_normal_irradiance']
+        if 'direct_normal_irradiance_instant' in d:
+            o.direct_normal_irradiance_instant = d['direct_normal_irradiance_instant']
         if 'direct_radiation' in d:
             o.direct_radiation = d['direct_radiation']
+        if 'direct_radiation_instant' in d:
+            o.direct_radiation_instant = d['direct_radiation_instant']
+        if 'precipitation' in d:
+            o.precipitation = d['precipitation']
         if 'precipitation_probability' in d:
             o.precipitation_probability = d['precipitation_probability']
         if 'pressure_msl' in d:
             o.pressure_msl = d['pressure_msl']
+        if 'rain' in d:
+            o.rain = d['rain']
         if 'relative_humidity_2_m' in d:
             o.relative_humidity_2_m = d['relative_humidity_2_m']
         if 'relative_humidity_2m' in d:
             o.relative_humidity_2m = d['relative_humidity_2m']
         if 'shortwave_radiation' in d:
             o.shortwave_radiation = d['shortwave_radiation']
+        if 'shortwave_radiation_instant' in d:
+            o.shortwave_radiation_instant = d['shortwave_radiation_instant']
+        if 'snowfall' in d:
+            o.snowfall = d['snowfall']
         if 'surface_pressure' in d:
             o.surface_pressure = d['surface_pressure']
         if 'temperature_2_m' in d:
@@ -446,6 +605,8 @@ class WeatherVariables(object):
             o.temperature_2m = d['temperature_2m']
         if 'variable_date' in d:
             o.variable_date = d['variable_date']
+        if 'weather_code' in d:
+            o.weather_code = d['weather_code']
         if 'wind_direction_10_m' in d:
             o.wind_direction_10_m = d['wind_direction_10_m']
         if 'wind_direction_10m' in d:
@@ -454,6 +615,8 @@ class WeatherVariables(object):
             o.wind_direction_120_m = d['wind_direction_120_m']
         if 'wind_direction_120m' in d:
             o.wind_direction_120m = d['wind_direction_120m']
+        if 'wind_direction_180_m' in d:
+            o.wind_direction_180_m = d['wind_direction_180_m']
         if 'wind_direction_80_m' in d:
             o.wind_direction_80_m = d['wind_direction_80_m']
         if 'wind_direction_80m' in d:
@@ -466,6 +629,8 @@ class WeatherVariables(object):
             o.wind_speed_120_m = d['wind_speed_120_m']
         if 'wind_speed_120m' in d:
             o.wind_speed_120m = d['wind_speed_120m']
+        if 'wind_speed_180_m' in d:
+            o.wind_speed_180_m = d['wind_speed_180_m']
         if 'wind_speed_80_m' in d:
             o.wind_speed_80_m = d['wind_speed_80_m']
         if 'wind_speed_80m' in d:

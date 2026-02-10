@@ -13,6 +13,7 @@ class VehicleDetailInfo(object):
         self._car_label = None
         self._car_level = None
         self._car_model_id = None
+        self._lable = None
         self._name = None
         self._vehicle_color = None
         self._vehicle_license = None
@@ -53,6 +54,13 @@ class VehicleDetailInfo(object):
     @car_model_id.setter
     def car_model_id(self, value):
         self._car_model_id = value
+    @property
+    def lable(self):
+        return self._lable
+
+    @lable.setter
+    def lable(self, value):
+        self._lable = value
     @property
     def name(self):
         return self._name
@@ -110,6 +118,11 @@ class VehicleDetailInfo(object):
                 params['car_model_id'] = self.car_model_id.to_alipay_dict()
             else:
                 params['car_model_id'] = self.car_model_id
+        if self.lable:
+            if hasattr(self.lable, 'to_alipay_dict'):
+                params['lable'] = self.lable.to_alipay_dict()
+            else:
+                params['lable'] = self.lable
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -147,6 +160,8 @@ class VehicleDetailInfo(object):
             o.car_level = d['car_level']
         if 'car_model_id' in d:
             o.car_model_id = d['car_model_id']
+        if 'lable' in d:
+            o.lable = d['lable']
         if 'name' in d:
             o.name = d['name']
         if 'vehicle_color' in d:

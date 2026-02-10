@@ -17,7 +17,12 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
         self._hdf_disease_name = None
         self._hdf_tag_code = None
         self._limit = None
+        self._need_case = None
         self._open_id = None
+        self._operation = None
+        self._patient_age = None
+        self._patient_sex = None
+        self._pregnant_receive = None
         self._price = None
         self._province_code = None
         self._scene_code = None
@@ -94,12 +99,47 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
     def limit(self, value):
         self._limit = value
     @property
+    def need_case(self):
+        return self._need_case
+
+    @need_case.setter
+    def need_case(self, value):
+        self._need_case = value
+    @property
     def open_id(self):
         return self._open_id
 
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def operation(self):
+        return self._operation
+
+    @operation.setter
+    def operation(self, value):
+        self._operation = value
+    @property
+    def patient_age(self):
+        return self._patient_age
+
+    @patient_age.setter
+    def patient_age(self, value):
+        self._patient_age = value
+    @property
+    def patient_sex(self):
+        return self._patient_sex
+
+    @patient_sex.setter
+    def patient_sex(self, value):
+        self._patient_sex = value
+    @property
+    def pregnant_receive(self):
+        return self._pregnant_receive
+
+    @pregnant_receive.setter
+    def pregnant_receive(self, value):
+        self._pregnant_receive = value
     @property
     def price(self):
         return self._price
@@ -197,11 +237,36 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
                 params['limit'] = self.limit.to_alipay_dict()
             else:
                 params['limit'] = self.limit
+        if self.need_case:
+            if hasattr(self.need_case, 'to_alipay_dict'):
+                params['need_case'] = self.need_case.to_alipay_dict()
+            else:
+                params['need_case'] = self.need_case
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.operation:
+            if hasattr(self.operation, 'to_alipay_dict'):
+                params['operation'] = self.operation.to_alipay_dict()
+            else:
+                params['operation'] = self.operation
+        if self.patient_age:
+            if hasattr(self.patient_age, 'to_alipay_dict'):
+                params['patient_age'] = self.patient_age.to_alipay_dict()
+            else:
+                params['patient_age'] = self.patient_age
+        if self.patient_sex:
+            if hasattr(self.patient_sex, 'to_alipay_dict'):
+                params['patient_sex'] = self.patient_sex.to_alipay_dict()
+            else:
+                params['patient_sex'] = self.patient_sex
+        if self.pregnant_receive:
+            if hasattr(self.pregnant_receive, 'to_alipay_dict'):
+                params['pregnant_receive'] = self.pregnant_receive.to_alipay_dict()
+            else:
+                params['pregnant_receive'] = self.pregnant_receive
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
@@ -257,8 +322,18 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
             o.hdf_tag_code = d['hdf_tag_code']
         if 'limit' in d:
             o.limit = d['limit']
+        if 'need_case' in d:
+            o.need_case = d['need_case']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'operation' in d:
+            o.operation = d['operation']
+        if 'patient_age' in d:
+            o.patient_age = d['patient_age']
+        if 'patient_sex' in d:
+            o.patient_sex = d['patient_sex']
+        if 'pregnant_receive' in d:
+            o.pregnant_receive = d['pregnant_receive']
         if 'price' in d:
             o.price = d['price']
         if 'province_code' in d:

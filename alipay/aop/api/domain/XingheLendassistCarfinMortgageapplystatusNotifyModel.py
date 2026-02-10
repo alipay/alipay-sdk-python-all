@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CarfinPreMortgageInfo import CarfinPreMortgageInfo
+from alipay.aop.api.domain.XhExpressPostInfo import XhExpressPostInfo
 
 
 class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
@@ -14,6 +15,7 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
         self._out_mortgage_no = None
         self._pre_mortgage_info = None
         self._proxy_invalid_file_list = None
+        self._receiver_info = None
         self._refuse_msg = None
         self._status = None
         self._supple_agreement_list = None
@@ -60,6 +62,16 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
             self._proxy_invalid_file_list = list()
             for i in value:
                 self._proxy_invalid_file_list.append(i)
+    @property
+    def receiver_info(self):
+        return self._receiver_info
+
+    @receiver_info.setter
+    def receiver_info(self, value):
+        if isinstance(value, XhExpressPostInfo):
+            self._receiver_info = value
+        else:
+            self._receiver_info = XhExpressPostInfo.from_alipay_dict(value)
     @property
     def refuse_msg(self):
         return self._refuse_msg
@@ -128,6 +140,11 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
                 params['proxy_invalid_file_list'] = self.proxy_invalid_file_list.to_alipay_dict()
             else:
                 params['proxy_invalid_file_list'] = self.proxy_invalid_file_list
+        if self.receiver_info:
+            if hasattr(self.receiver_info, 'to_alipay_dict'):
+                params['receiver_info'] = self.receiver_info.to_alipay_dict()
+            else:
+                params['receiver_info'] = self.receiver_info
         if self.refuse_msg:
             if hasattr(self.refuse_msg, 'to_alipay_dict'):
                 params['refuse_msg'] = self.refuse_msg.to_alipay_dict()
@@ -175,6 +192,8 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
             o.pre_mortgage_info = d['pre_mortgage_info']
         if 'proxy_invalid_file_list' in d:
             o.proxy_invalid_file_list = d['proxy_invalid_file_list']
+        if 'receiver_info' in d:
+            o.receiver_info = d['receiver_info']
         if 'refuse_msg' in d:
             o.refuse_msg = d['refuse_msg']
         if 'status' in d:

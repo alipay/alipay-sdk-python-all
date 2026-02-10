@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.ExceptionInfo import ExceptionInfo
 from alipay.aop.api.domain.ObjectTaskStatus import ObjectTaskStatus
 
 
@@ -11,6 +12,7 @@ class RobbyOpenTaskStatusQueryResponse(AlipayResponse):
     def __init__(self):
         super(RobbyOpenTaskStatusQueryResponse, self).__init__()
         self._biz_no = None
+        self._exception_info_list = None
         self._object_task_status_list = None
         self._sub_biz_no = None
         self._task_no = None
@@ -23,6 +25,19 @@ class RobbyOpenTaskStatusQueryResponse(AlipayResponse):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def exception_info_list(self):
+        return self._exception_info_list
+
+    @exception_info_list.setter
+    def exception_info_list(self, value):
+        if isinstance(value, list):
+            self._exception_info_list = list()
+            for i in value:
+                if isinstance(i, ExceptionInfo):
+                    self._exception_info_list.append(i)
+                else:
+                    self._exception_info_list.append(ExceptionInfo.from_alipay_dict(i))
     @property
     def object_task_status_list(self):
         return self._object_task_status_list
@@ -62,6 +77,8 @@ class RobbyOpenTaskStatusQueryResponse(AlipayResponse):
         response = super(RobbyOpenTaskStatusQueryResponse, self).parse_response_content(response_content)
         if 'biz_no' in response:
             self.biz_no = response['biz_no']
+        if 'exception_info_list' in response:
+            self.exception_info_list = response['exception_info_list']
         if 'object_task_status_list' in response:
             self.object_task_status_list = response['object_task_status_list']
         if 'sub_biz_no' in response:
