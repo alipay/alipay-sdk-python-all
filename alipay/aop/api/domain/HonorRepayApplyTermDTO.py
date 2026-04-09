@@ -13,6 +13,7 @@ class HonorRepayApplyTermDTO(object):
         self._term_no = None
         self._term_penalty = None
         self._term_principal = None
+        self._term_violate_fee = None
 
     @property
     def term_amount(self):
@@ -49,6 +50,13 @@ class HonorRepayApplyTermDTO(object):
     @term_principal.setter
     def term_principal(self, value):
         self._term_principal = value
+    @property
+    def term_violate_fee(self):
+        return self._term_violate_fee
+
+    @term_violate_fee.setter
+    def term_violate_fee(self, value):
+        self._term_violate_fee = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class HonorRepayApplyTermDTO(object):
                 params['term_principal'] = self.term_principal.to_alipay_dict()
             else:
                 params['term_principal'] = self.term_principal
+        if self.term_violate_fee:
+            if hasattr(self.term_violate_fee, 'to_alipay_dict'):
+                params['term_violate_fee'] = self.term_violate_fee.to_alipay_dict()
+            else:
+                params['term_violate_fee'] = self.term_violate_fee
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class HonorRepayApplyTermDTO(object):
             o.term_penalty = d['term_penalty']
         if 'term_principal' in d:
             o.term_principal = d['term_principal']
+        if 'term_violate_fee' in d:
+            o.term_violate_fee = d['term_violate_fee']
         return o
 
 

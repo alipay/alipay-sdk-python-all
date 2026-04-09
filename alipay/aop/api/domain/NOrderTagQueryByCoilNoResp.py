@@ -9,6 +9,7 @@ class NOrderTagQueryByCoilNoResp(object):
 
     def __init__(self):
         self._bind_status = None
+        self._coil_no = None
         self._position_id = None
         self._qr_code_url = None
 
@@ -19,6 +20,13 @@ class NOrderTagQueryByCoilNoResp(object):
     @bind_status.setter
     def bind_status(self, value):
         self._bind_status = value
+    @property
+    def coil_no(self):
+        return self._coil_no
+
+    @coil_no.setter
+    def coil_no(self, value):
+        self._coil_no = value
     @property
     def position_id(self):
         return self._position_id
@@ -42,6 +50,11 @@ class NOrderTagQueryByCoilNoResp(object):
                 params['bind_status'] = self.bind_status.to_alipay_dict()
             else:
                 params['bind_status'] = self.bind_status
+        if self.coil_no:
+            if hasattr(self.coil_no, 'to_alipay_dict'):
+                params['coil_no'] = self.coil_no.to_alipay_dict()
+            else:
+                params['coil_no'] = self.coil_no
         if self.position_id:
             if hasattr(self.position_id, 'to_alipay_dict'):
                 params['position_id'] = self.position_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class NOrderTagQueryByCoilNoResp(object):
         o = NOrderTagQueryByCoilNoResp()
         if 'bind_status' in d:
             o.bind_status = d['bind_status']
+        if 'coil_no' in d:
+            o.coil_no = d['coil_no']
         if 'position_id' in d:
             o.position_id = d['position_id']
         if 'qr_code_url' in d:

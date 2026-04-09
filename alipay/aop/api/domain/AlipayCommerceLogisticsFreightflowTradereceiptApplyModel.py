@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 
 
 class AlipayCommerceLogisticsFreightflowTradereceiptApplyModel(object):
@@ -16,6 +17,7 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyModel(object):
         self._out_trade_no = None
         self._partner_id = None
         self._receipt_type = None
+        self._spdb_spec_params = None
         self._trade_no = None
         self._trade_type = None
 
@@ -76,6 +78,16 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyModel(object):
     def receipt_type(self, value):
         self._receipt_type = value
     @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -133,6 +145,11 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyModel(object):
                 params['receipt_type'] = self.receipt_type.to_alipay_dict()
             else:
                 params['receipt_type'] = self.receipt_type
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
         if self.trade_no:
             if hasattr(self.trade_no, 'to_alipay_dict'):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
@@ -166,6 +183,8 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyModel(object):
             o.partner_id = d['partner_id']
         if 'receipt_type' in d:
             o.receipt_type = d['receipt_type']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
         if 'trade_type' in d:

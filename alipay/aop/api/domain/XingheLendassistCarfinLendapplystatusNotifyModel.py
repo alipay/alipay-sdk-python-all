@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AgreementFile import AgreementFile
+from alipay.aop.api.domain.CarfinMortgageReceivedFile import CarfinMortgageReceivedFile
 from alipay.aop.api.domain.Credit import Credit
 from alipay.aop.api.domain.LendDrawdown import LendDrawdown
 from alipay.aop.api.domain.CarfinGuaranteeInst import CarfinGuaranteeInst
@@ -15,6 +16,7 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
     def __init__(self):
         self._agreement_file_list = None
         self._apply_no = None
+        self._approve_file_list = None
         self._credit_list = None
         self._drawdown_list = None
         self._guarantee_inst = None
@@ -51,6 +53,19 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
     @apply_no.setter
     def apply_no(self, value):
         self._apply_no = value
+    @property
+    def approve_file_list(self):
+        return self._approve_file_list
+
+    @approve_file_list.setter
+    def approve_file_list(self, value):
+        if isinstance(value, list):
+            self._approve_file_list = list()
+            for i in value:
+                if isinstance(i, CarfinMortgageReceivedFile):
+                    self._approve_file_list.append(i)
+                else:
+                    self._approve_file_list.append(CarfinMortgageReceivedFile.from_alipay_dict(i))
     @property
     def credit_list(self):
         return self._credit_list
@@ -196,6 +211,16 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
                 params['apply_no'] = self.apply_no.to_alipay_dict()
             else:
                 params['apply_no'] = self.apply_no
+        if self.approve_file_list:
+            if isinstance(self.approve_file_list, list):
+                for i in range(0, len(self.approve_file_list)):
+                    element = self.approve_file_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.approve_file_list[i] = element.to_alipay_dict()
+            if hasattr(self.approve_file_list, 'to_alipay_dict'):
+                params['approve_file_list'] = self.approve_file_list.to_alipay_dict()
+            else:
+                params['approve_file_list'] = self.approve_file_list
         if self.credit_list:
             if isinstance(self.credit_list, list):
                 for i in range(0, len(self.credit_list)):
@@ -297,6 +322,8 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
             o.agreement_file_list = d['agreement_file_list']
         if 'apply_no' in d:
             o.apply_no = d['apply_no']
+        if 'approve_file_list' in d:
+            o.approve_file_list = d['approve_file_list']
         if 'credit_list' in d:
             o.credit_list = d['credit_list']
         if 'drawdown_list' in d:

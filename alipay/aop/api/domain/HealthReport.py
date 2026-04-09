@@ -13,6 +13,8 @@ class HealthReport(object):
         self._age = None
         self._data_id = None
         self._data_source = None
+        self._file_type = None
+        self._file_url = None
         self._hospital_name = None
         self._hospital_org_id = None
         self._inspection_report_list = None
@@ -43,6 +45,20 @@ class HealthReport(object):
     @data_source.setter
     def data_source(self, value):
         self._data_source = value
+    @property
+    def file_type(self):
+        return self._file_type
+
+    @file_type.setter
+    def file_type(self, value):
+        self._file_type = value
+    @property
+    def file_url(self):
+        return self._file_url
+
+    @file_url.setter
+    def file_url(self, value):
+        self._file_url = value
     @property
     def hospital_name(self):
         return self._hospital_name
@@ -130,6 +146,16 @@ class HealthReport(object):
                 params['data_source'] = self.data_source.to_alipay_dict()
             else:
                 params['data_source'] = self.data_source
+        if self.file_type:
+            if hasattr(self.file_type, 'to_alipay_dict'):
+                params['file_type'] = self.file_type.to_alipay_dict()
+            else:
+                params['file_type'] = self.file_type
+        if self.file_url:
+            if hasattr(self.file_url, 'to_alipay_dict'):
+                params['file_url'] = self.file_url.to_alipay_dict()
+            else:
+                params['file_url'] = self.file_url
         if self.hospital_name:
             if hasattr(self.hospital_name, 'to_alipay_dict'):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
@@ -193,6 +219,10 @@ class HealthReport(object):
             o.data_id = d['data_id']
         if 'data_source' in d:
             o.data_source = d['data_source']
+        if 'file_type' in d:
+            o.file_type = d['file_type']
+        if 'file_url' in d:
+            o.file_url = d['file_url']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
         if 'hospital_org_id' in d:

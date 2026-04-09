@@ -10,6 +10,7 @@ class RobbyOpenObjectInfoBatchqueryModel(object):
     def __init__(self):
         self._biz_no = None
         self._biz_object_no_list = None
+        self._object_library_id = None
 
     @property
     def biz_no(self):
@@ -28,6 +29,13 @@ class RobbyOpenObjectInfoBatchqueryModel(object):
             self._biz_object_no_list = list()
             for i in value:
                 self._biz_object_no_list.append(i)
+    @property
+    def object_library_id(self):
+        return self._object_library_id
+
+    @object_library_id.setter
+    def object_library_id(self, value):
+        self._object_library_id = value
 
 
     def to_alipay_dict(self):
@@ -47,6 +55,11 @@ class RobbyOpenObjectInfoBatchqueryModel(object):
                 params['biz_object_no_list'] = self.biz_object_no_list.to_alipay_dict()
             else:
                 params['biz_object_no_list'] = self.biz_object_no_list
+        if self.object_library_id:
+            if hasattr(self.object_library_id, 'to_alipay_dict'):
+                params['object_library_id'] = self.object_library_id.to_alipay_dict()
+            else:
+                params['object_library_id'] = self.object_library_id
         return params
 
     @staticmethod
@@ -58,6 +71,8 @@ class RobbyOpenObjectInfoBatchqueryModel(object):
             o.biz_no = d['biz_no']
         if 'biz_object_no_list' in d:
             o.biz_object_no_list = d['biz_object_no_list']
+        if 'object_library_id' in d:
+            o.object_library_id = d['object_library_id']
         return o
 
 

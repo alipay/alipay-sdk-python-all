@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.OrderElectronicReceipt import OrderElectronicReceipt
 from alipay.aop.api.domain.OrderInvoice import OrderInvoice
 from alipay.aop.api.domain.RecyclinginvoiceOrderItem import RecyclinginvoiceOrderItem
 from alipay.aop.api.domain.OrderPayment import OrderPayment
@@ -20,6 +21,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._gmt_success = None
         self._memo = None
         self._order_amount = None
+        self._order_electronic_receipt = None
         self._order_id = None
         self._order_invoice_list = None
         self._order_item_list = None
@@ -87,6 +89,16 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
     @order_amount.setter
     def order_amount(self, value):
         self._order_amount = value
+    @property
+    def order_electronic_receipt(self):
+        return self._order_electronic_receipt
+
+    @order_electronic_receipt.setter
+    def order_electronic_receipt(self, value):
+        if isinstance(value, OrderElectronicReceipt):
+            self._order_electronic_receipt = value
+        else:
+            self._order_electronic_receipt = OrderElectronicReceipt.from_alipay_dict(value)
     @property
     def order_id(self):
         return self._order_id
@@ -244,6 +256,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
             self.memo = response['memo']
         if 'order_amount' in response:
             self.order_amount = response['order_amount']
+        if 'order_electronic_receipt' in response:
+            self.order_electronic_receipt = response['order_electronic_receipt']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'order_invoice_list' in response:

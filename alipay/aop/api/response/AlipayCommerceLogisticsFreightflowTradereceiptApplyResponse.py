@@ -10,6 +10,7 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyResponse(AlipayResponse
     def __init__(self):
         super(AlipayCommerceLogisticsFreightflowTradereceiptApplyResponse, self).__init__()
         self._pdf_download_url = None
+        self._status = None
 
     @property
     def pdf_download_url(self):
@@ -18,8 +19,17 @@ class AlipayCommerceLogisticsFreightflowTradereceiptApplyResponse(AlipayResponse
     @pdf_download_url.setter
     def pdf_download_url(self, value):
         self._pdf_download_url = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceLogisticsFreightflowTradereceiptApplyResponse, self).parse_response_content(response_content)
         if 'pdf_download_url' in response:
             self.pdf_download_url = response['pdf_download_url']
+        if 'status' in response:
+            self.status = response['status']

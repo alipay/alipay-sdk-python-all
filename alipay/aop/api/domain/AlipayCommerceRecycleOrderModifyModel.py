@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RecycleModifyAddressInfo import RecycleModifyAddressInfo
+from alipay.aop.api.domain.RecycleAuctionDeliveryInfoVO import RecycleAuctionDeliveryInfoVO
 from alipay.aop.api.domain.RecycleSendContactInfo import RecycleSendContactInfo
 
 
@@ -11,6 +12,7 @@ class AlipayCommerceRecycleOrderModifyModel(object):
 
     def __init__(self):
         self._address_info = None
+        self._auction_delivery_info = None
         self._modify_reason = None
         self._open_id = None
         self._order_id = None
@@ -28,6 +30,16 @@ class AlipayCommerceRecycleOrderModifyModel(object):
             self._address_info = value
         else:
             self._address_info = RecycleModifyAddressInfo.from_alipay_dict(value)
+    @property
+    def auction_delivery_info(self):
+        return self._auction_delivery_info
+
+    @auction_delivery_info.setter
+    def auction_delivery_info(self, value):
+        if isinstance(value, RecycleAuctionDeliveryInfoVO):
+            self._auction_delivery_info = value
+        else:
+            self._auction_delivery_info = RecycleAuctionDeliveryInfoVO.from_alipay_dict(value)
     @property
     def modify_reason(self):
         return self._modify_reason
@@ -82,6 +94,11 @@ class AlipayCommerceRecycleOrderModifyModel(object):
                 params['address_info'] = self.address_info.to_alipay_dict()
             else:
                 params['address_info'] = self.address_info
+        if self.auction_delivery_info:
+            if hasattr(self.auction_delivery_info, 'to_alipay_dict'):
+                params['auction_delivery_info'] = self.auction_delivery_info.to_alipay_dict()
+            else:
+                params['auction_delivery_info'] = self.auction_delivery_info
         if self.modify_reason:
             if hasattr(self.modify_reason, 'to_alipay_dict'):
                 params['modify_reason'] = self.modify_reason.to_alipay_dict()
@@ -121,6 +138,8 @@ class AlipayCommerceRecycleOrderModifyModel(object):
         o = AlipayCommerceRecycleOrderModifyModel()
         if 'address_info' in d:
             o.address_info = d['address_info']
+        if 'auction_delivery_info' in d:
+            o.auction_delivery_info = d['auction_delivery_info']
         if 'modify_reason' in d:
             o.modify_reason = d['modify_reason']
         if 'open_id' in d:

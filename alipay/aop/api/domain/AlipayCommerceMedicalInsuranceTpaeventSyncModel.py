@@ -12,7 +12,14 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
         self._event_action = None
         self._hospital_code = None
         self._hospital_name = None
+        self._individual_policy_no = None
+        self._open_id = None
+        self._outlet_code = None
+        self._outlet_name = None
+        self._outlet_type = None
+        self._policy_no = None
         self._tpa_id = None
+        self._user_id = None
         self._visit_date = None
 
     @property
@@ -44,12 +51,61 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
     def hospital_name(self, value):
         self._hospital_name = value
     @property
+    def individual_policy_no(self):
+        return self._individual_policy_no
+
+    @individual_policy_no.setter
+    def individual_policy_no(self, value):
+        self._individual_policy_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
+    def outlet_code(self):
+        return self._outlet_code
+
+    @outlet_code.setter
+    def outlet_code(self, value):
+        self._outlet_code = value
+    @property
+    def outlet_name(self):
+        return self._outlet_name
+
+    @outlet_name.setter
+    def outlet_name(self, value):
+        self._outlet_name = value
+    @property
+    def outlet_type(self):
+        return self._outlet_type
+
+    @outlet_type.setter
+    def outlet_type(self, value):
+        self._outlet_type = value
+    @property
+    def policy_no(self):
+        return self._policy_no
+
+    @policy_no.setter
+    def policy_no(self, value):
+        self._policy_no = value
+    @property
     def tpa_id(self):
         return self._tpa_id
 
     @tpa_id.setter
     def tpa_id(self, value):
         self._tpa_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
     @property
     def visit_date(self):
         return self._visit_date
@@ -81,11 +137,46 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
             else:
                 params['hospital_name'] = self.hospital_name
+        if self.individual_policy_no:
+            if hasattr(self.individual_policy_no, 'to_alipay_dict'):
+                params['individual_policy_no'] = self.individual_policy_no.to_alipay_dict()
+            else:
+                params['individual_policy_no'] = self.individual_policy_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
+        if self.outlet_code:
+            if hasattr(self.outlet_code, 'to_alipay_dict'):
+                params['outlet_code'] = self.outlet_code.to_alipay_dict()
+            else:
+                params['outlet_code'] = self.outlet_code
+        if self.outlet_name:
+            if hasattr(self.outlet_name, 'to_alipay_dict'):
+                params['outlet_name'] = self.outlet_name.to_alipay_dict()
+            else:
+                params['outlet_name'] = self.outlet_name
+        if self.outlet_type:
+            if hasattr(self.outlet_type, 'to_alipay_dict'):
+                params['outlet_type'] = self.outlet_type.to_alipay_dict()
+            else:
+                params['outlet_type'] = self.outlet_type
+        if self.policy_no:
+            if hasattr(self.policy_no, 'to_alipay_dict'):
+                params['policy_no'] = self.policy_no.to_alipay_dict()
+            else:
+                params['policy_no'] = self.policy_no
         if self.tpa_id:
             if hasattr(self.tpa_id, 'to_alipay_dict'):
                 params['tpa_id'] = self.tpa_id.to_alipay_dict()
             else:
                 params['tpa_id'] = self.tpa_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         if self.visit_date:
             if hasattr(self.visit_date, 'to_alipay_dict'):
                 params['visit_date'] = self.visit_date.to_alipay_dict()
@@ -106,8 +197,22 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
             o.hospital_code = d['hospital_code']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
+        if 'individual_policy_no' in d:
+            o.individual_policy_no = d['individual_policy_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
+        if 'outlet_code' in d:
+            o.outlet_code = d['outlet_code']
+        if 'outlet_name' in d:
+            o.outlet_name = d['outlet_name']
+        if 'outlet_type' in d:
+            o.outlet_type = d['outlet_type']
+        if 'policy_no' in d:
+            o.policy_no = d['policy_no']
         if 'tpa_id' in d:
             o.tpa_id = d['tpa_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         if 'visit_date' in d:
             o.visit_date = d['visit_date']
         return o

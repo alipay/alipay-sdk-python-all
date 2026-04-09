@@ -15,14 +15,17 @@ class AssetDeliveryItem(object):
     def __init__(self):
         self._action_type = None
         self._amount = None
+        self._apply_order_amount = None
         self._apply_order_date = None
         self._apply_order_id = None
+        self._asset_resource = None
         self._assign_item_id = None
         self._assign_out_order_id = None
         self._biz_line = None
         self._biz_scene = None
         self._biz_tag = None
         self._biz_type = None
+        self._code_group_ser_number = None
         self._combination_batch_no = None
         self._combination_count = None
         self._combination_orders = None
@@ -39,6 +42,7 @@ class AssetDeliveryItem(object):
         self._from_address = None
         self._gmt_assign = None
         self._is_combination_order = None
+        self._is_kit_pack = None
         self._item_id = None
         self._item_name = None
         self._logistics_info = None
@@ -55,6 +59,8 @@ class AssetDeliveryItem(object):
         self._produce_order_item_id = None
         self._record_type = None
         self._related_children_out_biz_no_count = None
+        self._related_kit_item_id = None
+        self._related_kit_item_name = None
         self._related_others_out_biz_no = None
         self._related_out_biz_no = None
         self._related_parent_out_biz_no = None
@@ -79,6 +85,13 @@ class AssetDeliveryItem(object):
     def amount(self, value):
         self._amount = value
     @property
+    def apply_order_amount(self):
+        return self._apply_order_amount
+
+    @apply_order_amount.setter
+    def apply_order_amount(self, value):
+        self._apply_order_amount = value
+    @property
     def apply_order_date(self):
         return self._apply_order_date
 
@@ -92,6 +105,13 @@ class AssetDeliveryItem(object):
     @apply_order_id.setter
     def apply_order_id(self, value):
         self._apply_order_id = value
+    @property
+    def asset_resource(self):
+        return self._asset_resource
+
+    @asset_resource.setter
+    def asset_resource(self, value):
+        self._asset_resource = value
     @property
     def assign_item_id(self):
         return self._assign_item_id
@@ -134,6 +154,13 @@ class AssetDeliveryItem(object):
     @biz_type.setter
     def biz_type(self, value):
         self._biz_type = value
+    @property
+    def code_group_ser_number(self):
+        return self._code_group_ser_number
+
+    @code_group_ser_number.setter
+    def code_group_ser_number(self, value):
+        self._code_group_ser_number = value
     @property
     def combination_batch_no(self):
         return self._combination_batch_no
@@ -256,6 +283,13 @@ class AssetDeliveryItem(object):
     def is_combination_order(self, value):
         self._is_combination_order = value
     @property
+    def is_kit_pack(self):
+        return self._is_kit_pack
+
+    @is_kit_pack.setter
+    def is_kit_pack(self, value):
+        self._is_kit_pack = value
+    @property
     def item_id(self):
         return self._item_id
 
@@ -377,6 +411,20 @@ class AssetDeliveryItem(object):
     def related_children_out_biz_no_count(self, value):
         self._related_children_out_biz_no_count = value
     @property
+    def related_kit_item_id(self):
+        return self._related_kit_item_id
+
+    @related_kit_item_id.setter
+    def related_kit_item_id(self, value):
+        self._related_kit_item_id = value
+    @property
+    def related_kit_item_name(self):
+        return self._related_kit_item_name
+
+    @related_kit_item_name.setter
+    def related_kit_item_name(self, value):
+        self._related_kit_item_name = value
+    @property
     def related_others_out_biz_no(self):
         return self._related_others_out_biz_no
 
@@ -452,6 +500,11 @@ class AssetDeliveryItem(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.apply_order_amount:
+            if hasattr(self.apply_order_amount, 'to_alipay_dict'):
+                params['apply_order_amount'] = self.apply_order_amount.to_alipay_dict()
+            else:
+                params['apply_order_amount'] = self.apply_order_amount
         if self.apply_order_date:
             if hasattr(self.apply_order_date, 'to_alipay_dict'):
                 params['apply_order_date'] = self.apply_order_date.to_alipay_dict()
@@ -462,6 +515,11 @@ class AssetDeliveryItem(object):
                 params['apply_order_id'] = self.apply_order_id.to_alipay_dict()
             else:
                 params['apply_order_id'] = self.apply_order_id
+        if self.asset_resource:
+            if hasattr(self.asset_resource, 'to_alipay_dict'):
+                params['asset_resource'] = self.asset_resource.to_alipay_dict()
+            else:
+                params['asset_resource'] = self.asset_resource
         if self.assign_item_id:
             if hasattr(self.assign_item_id, 'to_alipay_dict'):
                 params['assign_item_id'] = self.assign_item_id.to_alipay_dict()
@@ -492,6 +550,11 @@ class AssetDeliveryItem(object):
                 params['biz_type'] = self.biz_type.to_alipay_dict()
             else:
                 params['biz_type'] = self.biz_type
+        if self.code_group_ser_number:
+            if hasattr(self.code_group_ser_number, 'to_alipay_dict'):
+                params['code_group_ser_number'] = self.code_group_ser_number.to_alipay_dict()
+            else:
+                params['code_group_ser_number'] = self.code_group_ser_number
         if self.combination_batch_no:
             if hasattr(self.combination_batch_no, 'to_alipay_dict'):
                 params['combination_batch_no'] = self.combination_batch_no.to_alipay_dict()
@@ -577,6 +640,11 @@ class AssetDeliveryItem(object):
                 params['is_combination_order'] = self.is_combination_order.to_alipay_dict()
             else:
                 params['is_combination_order'] = self.is_combination_order
+        if self.is_kit_pack:
+            if hasattr(self.is_kit_pack, 'to_alipay_dict'):
+                params['is_kit_pack'] = self.is_kit_pack.to_alipay_dict()
+            else:
+                params['is_kit_pack'] = self.is_kit_pack
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -662,6 +730,16 @@ class AssetDeliveryItem(object):
                 params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count.to_alipay_dict()
             else:
                 params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count
+        if self.related_kit_item_id:
+            if hasattr(self.related_kit_item_id, 'to_alipay_dict'):
+                params['related_kit_item_id'] = self.related_kit_item_id.to_alipay_dict()
+            else:
+                params['related_kit_item_id'] = self.related_kit_item_id
+        if self.related_kit_item_name:
+            if hasattr(self.related_kit_item_name, 'to_alipay_dict'):
+                params['related_kit_item_name'] = self.related_kit_item_name.to_alipay_dict()
+            else:
+                params['related_kit_item_name'] = self.related_kit_item_name
         if self.related_others_out_biz_no:
             if isinstance(self.related_others_out_biz_no, list):
                 for i in range(0, len(self.related_others_out_biz_no)):
@@ -718,10 +796,14 @@ class AssetDeliveryItem(object):
             o.action_type = d['action_type']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'apply_order_amount' in d:
+            o.apply_order_amount = d['apply_order_amount']
         if 'apply_order_date' in d:
             o.apply_order_date = d['apply_order_date']
         if 'apply_order_id' in d:
             o.apply_order_id = d['apply_order_id']
+        if 'asset_resource' in d:
+            o.asset_resource = d['asset_resource']
         if 'assign_item_id' in d:
             o.assign_item_id = d['assign_item_id']
         if 'assign_out_order_id' in d:
@@ -734,6 +816,8 @@ class AssetDeliveryItem(object):
             o.biz_tag = d['biz_tag']
         if 'biz_type' in d:
             o.biz_type = d['biz_type']
+        if 'code_group_ser_number' in d:
+            o.code_group_ser_number = d['code_group_ser_number']
         if 'combination_batch_no' in d:
             o.combination_batch_no = d['combination_batch_no']
         if 'combination_count' in d:
@@ -766,6 +850,8 @@ class AssetDeliveryItem(object):
             o.gmt_assign = d['gmt_assign']
         if 'is_combination_order' in d:
             o.is_combination_order = d['is_combination_order']
+        if 'is_kit_pack' in d:
+            o.is_kit_pack = d['is_kit_pack']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_name' in d:
@@ -798,6 +884,10 @@ class AssetDeliveryItem(object):
             o.record_type = d['record_type']
         if 'related_children_out_biz_no_count' in d:
             o.related_children_out_biz_no_count = d['related_children_out_biz_no_count']
+        if 'related_kit_item_id' in d:
+            o.related_kit_item_id = d['related_kit_item_id']
+        if 'related_kit_item_name' in d:
+            o.related_kit_item_name = d['related_kit_item_name']
         if 'related_others_out_biz_no' in d:
             o.related_others_out_biz_no = d['related_others_out_biz_no']
         if 'related_out_biz_no' in d:

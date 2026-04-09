@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FulfillmentMediaInfo import FulfillmentMediaInfo
 from alipay.aop.api.domain.FulfillmentDeliveryInfo import FulfillmentDeliveryInfo
+from alipay.aop.api.domain.FulfillmentDeviceInfo import FulfillmentDeviceInfo
 
 
 class AlipayCommerceRentOrderFulfillmentSendModel(object):
@@ -12,6 +13,7 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
     def __init__(self):
         self._additional_media_list = None
         self._delivery_list = None
+        self._device_list = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
@@ -45,6 +47,19 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
                     self._delivery_list.append(i)
                 else:
                     self._delivery_list.append(FulfillmentDeliveryInfo.from_alipay_dict(i))
+    @property
+    def device_list(self):
+        return self._device_list
+
+    @device_list.setter
+    def device_list(self, value):
+        if isinstance(value, list):
+            self._device_list = list()
+            for i in value:
+                if isinstance(i, FulfillmentDeviceInfo):
+                    self._device_list.append(i)
+                else:
+                    self._device_list.append(FulfillmentDeviceInfo.from_alipay_dict(i))
     @property
     def open_id(self):
         return self._open_id
@@ -111,6 +126,16 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
                 params['delivery_list'] = self.delivery_list.to_alipay_dict()
             else:
                 params['delivery_list'] = self.delivery_list
+        if self.device_list:
+            if isinstance(self.device_list, list):
+                for i in range(0, len(self.device_list)):
+                    element = self.device_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.device_list[i] = element.to_alipay_dict()
+            if hasattr(self.device_list, 'to_alipay_dict'):
+                params['device_list'] = self.device_list.to_alipay_dict()
+            else:
+                params['device_list'] = self.device_list
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -152,6 +177,8 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
             o.additional_media_list = d['additional_media_list']
         if 'delivery_list' in d:
             o.delivery_list = d['delivery_list']
+        if 'device_list' in d:
+            o.device_list = d['device_list']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

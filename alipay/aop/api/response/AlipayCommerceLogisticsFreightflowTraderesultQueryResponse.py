@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.FreightFlowSpdbTradeQueryResultDetail import FreightFlowSpdbTradeQueryResultDetail
 
 
 class AlipayCommerceLogisticsFreightflowTraderesultQueryResponse(AlipayResponse):
@@ -15,6 +16,7 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryResponse(AlipayResponse)
         self._mode = None
         self._partner_id = None
         self._request_time = None
+        self._spdb_trade_query_result_detail = None
         self._status = None
 
     @property
@@ -60,6 +62,16 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryResponse(AlipayResponse)
     def request_time(self, value):
         self._request_time = value
     @property
+    def spdb_trade_query_result_detail(self):
+        return self._spdb_trade_query_result_detail
+
+    @spdb_trade_query_result_detail.setter
+    def spdb_trade_query_result_detail(self, value):
+        if isinstance(value, FreightFlowSpdbTradeQueryResultDetail):
+            self._spdb_trade_query_result_detail = value
+        else:
+            self._spdb_trade_query_result_detail = FreightFlowSpdbTradeQueryResultDetail.from_alipay_dict(value)
+    @property
     def status(self):
         return self._status
 
@@ -81,5 +93,7 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryResponse(AlipayResponse)
             self.partner_id = response['partner_id']
         if 'request_time' in response:
             self.request_time = response['request_time']
+        if 'spdb_trade_query_result_detail' in response:
+            self.spdb_trade_query_result_detail = response['spdb_trade_query_result_detail']
         if 'status' in response:
             self.status = response['status']

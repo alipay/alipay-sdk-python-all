@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RainyComplexTypesTheThird import RainyComplexTypesTheThird
 
 
 class AlipaySecurityDataOpenidtestcaseRainytestQueryResponse(AlipayResponse):
@@ -10,6 +11,7 @@ class AlipaySecurityDataOpenidtestcaseRainytestQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipaySecurityDataOpenidtestcaseRainytestQueryResponse, self).__init__()
         self._open_id = None
+        self._openid_complex = None
         self._user_id = None
 
     @property
@@ -19,6 +21,16 @@ class AlipaySecurityDataOpenidtestcaseRainytestQueryResponse(AlipayResponse):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def openid_complex(self):
+        return self._openid_complex
+
+    @openid_complex.setter
+    def openid_complex(self, value):
+        if isinstance(value, RainyComplexTypesTheThird):
+            self._openid_complex = value
+        else:
+            self._openid_complex = RainyComplexTypesTheThird.from_alipay_dict(value)
     @property
     def user_id(self):
         return self._user_id
@@ -31,5 +43,7 @@ class AlipaySecurityDataOpenidtestcaseRainytestQueryResponse(AlipayResponse):
         response = super(AlipaySecurityDataOpenidtestcaseRainytestQueryResponse, self).parse_response_content(response_content)
         if 'open_id' in response:
             self.open_id = response['open_id']
+        if 'openid_complex' in response:
+            self.openid_complex = response['openid_complex']
         if 'user_id' in response:
             self.user_id = response['user_id']

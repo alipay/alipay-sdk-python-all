@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class IdentityMaterials(object):
 
     def __init__(self):
+        self._content_type = None
         self._description = None
         self._material_content = None
         self._material_name = None
         self._material_type = None
         self._pic_urls = None
 
+    @property
+    def content_type(self):
+        return self._content_type
+
+    @content_type.setter
+    def content_type(self, value):
+        self._content_type = value
     @property
     def description(self):
         return self._description
@@ -56,6 +64,11 @@ class IdentityMaterials(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.content_type:
+            if hasattr(self.content_type, 'to_alipay_dict'):
+                params['content_type'] = self.content_type.to_alipay_dict()
+            else:
+                params['content_type'] = self.content_type
         if self.description:
             if hasattr(self.description, 'to_alipay_dict'):
                 params['description'] = self.description.to_alipay_dict()
@@ -93,6 +106,8 @@ class IdentityMaterials(object):
         if not d:
             return None
         o = IdentityMaterials()
+        if 'content_type' in d:
+            o.content_type = d['content_type']
         if 'description' in d:
             o.description = d['description']
         if 'material_content' in d:

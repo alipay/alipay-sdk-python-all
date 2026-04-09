@@ -13,6 +13,7 @@ class RecycleProductInfo(object):
         self._entity_image_url_list = None
         self._invoice_image_url_list = None
         self._product_code = None
+        self._product_id = None
         self._product_name = None
         self._quantity = None
         self._quantity_max = None
@@ -61,6 +62,13 @@ class RecycleProductInfo(object):
     @product_code.setter
     def product_code(self, value):
         self._product_code = value
+    @property
+    def product_id(self):
+        return self._product_id
+
+    @product_id.setter
+    def product_id(self, value):
+        self._product_id = value
     @property
     def product_name(self):
         return self._product_name
@@ -142,6 +150,11 @@ class RecycleProductInfo(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.product_id:
+            if hasattr(self.product_id, 'to_alipay_dict'):
+                params['product_id'] = self.product_id.to_alipay_dict()
+            else:
+                params['product_id'] = self.product_id
         if self.product_name:
             if hasattr(self.product_name, 'to_alipay_dict'):
                 params['product_name'] = self.product_name.to_alipay_dict()
@@ -189,6 +202,8 @@ class RecycleProductInfo(object):
             o.invoice_image_url_list = d['invoice_image_url_list']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'product_id' in d:
+            o.product_id = d['product_id']
         if 'product_name' in d:
             o.product_name = d['product_name']
         if 'quantity' in d:

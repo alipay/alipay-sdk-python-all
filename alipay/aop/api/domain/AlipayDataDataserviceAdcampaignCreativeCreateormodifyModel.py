@@ -18,7 +18,10 @@ class AlipayDataDataserviceAdcampaignCreativeCreateormodifyModel(object):
         self._group_id = None
         self._impression_track_url = None
         self._material_list = None
+        self._native_flag = None
+        self._permission_level = None
         self._principal_tag = None
+        self._public_id = None
         self._smart_switch = None
         self._template_id = None
 
@@ -91,12 +94,33 @@ class AlipayDataDataserviceAdcampaignCreativeCreateormodifyModel(object):
                 else:
                     self._material_list.append(CreativeMaterial.from_alipay_dict(i))
     @property
+    def native_flag(self):
+        return self._native_flag
+
+    @native_flag.setter
+    def native_flag(self, value):
+        self._native_flag = value
+    @property
+    def permission_level(self):
+        return self._permission_level
+
+    @permission_level.setter
+    def permission_level(self, value):
+        self._permission_level = value
+    @property
     def principal_tag(self):
         return self._principal_tag
 
     @principal_tag.setter
     def principal_tag(self, value):
         self._principal_tag = value
+    @property
+    def public_id(self):
+        return self._public_id
+
+    @public_id.setter
+    def public_id(self, value):
+        self._public_id = value
     @property
     def smart_switch(self):
         return self._smart_switch
@@ -165,11 +189,26 @@ class AlipayDataDataserviceAdcampaignCreativeCreateormodifyModel(object):
                 params['material_list'] = self.material_list.to_alipay_dict()
             else:
                 params['material_list'] = self.material_list
+        if self.native_flag:
+            if hasattr(self.native_flag, 'to_alipay_dict'):
+                params['native_flag'] = self.native_flag.to_alipay_dict()
+            else:
+                params['native_flag'] = self.native_flag
+        if self.permission_level:
+            if hasattr(self.permission_level, 'to_alipay_dict'):
+                params['permission_level'] = self.permission_level.to_alipay_dict()
+            else:
+                params['permission_level'] = self.permission_level
         if self.principal_tag:
             if hasattr(self.principal_tag, 'to_alipay_dict'):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.public_id:
+            if hasattr(self.public_id, 'to_alipay_dict'):
+                params['public_id'] = self.public_id.to_alipay_dict()
+            else:
+                params['public_id'] = self.public_id
         if self.smart_switch:
             if hasattr(self.smart_switch, 'to_alipay_dict'):
                 params['smart_switch'] = self.smart_switch.to_alipay_dict()
@@ -203,8 +242,14 @@ class AlipayDataDataserviceAdcampaignCreativeCreateormodifyModel(object):
             o.impression_track_url = d['impression_track_url']
         if 'material_list' in d:
             o.material_list = d['material_list']
+        if 'native_flag' in d:
+            o.native_flag = d['native_flag']
+        if 'permission_level' in d:
+            o.permission_level = d['permission_level']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'public_id' in d:
+            o.public_id = d['public_id']
         if 'smart_switch' in d:
             o.smart_switch = d['smart_switch']
         if 'template_id' in d:

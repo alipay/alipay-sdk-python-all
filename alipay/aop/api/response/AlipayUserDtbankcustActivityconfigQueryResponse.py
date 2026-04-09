@@ -8,6 +8,7 @@ from alipay.aop.api.domain.DtBankActivityTypeInfo import DtBankActivityTypeInfo
 from alipay.aop.api.domain.DtbankActivityAlertConfigInfo import DtbankActivityAlertConfigInfo
 from alipay.aop.api.domain.DtBankInfo import DtBankInfo
 from alipay.aop.api.domain.DtBankBudgetInfo import DtBankBudgetInfo
+from alipay.aop.api.domain.CombinePrizeDiscountInfo import CombinePrizeDiscountInfo
 from alipay.aop.api.domain.DtBankCrowdInfo import DtBankCrowdInfo
 from alipay.aop.api.domain.DtbankActivityDataEffectInfo import DtbankActivityDataEffectInfo
 from alipay.aop.api.domain.DtBankPreferenceTypeInfo import DtBankPreferenceTypeInfo
@@ -25,6 +26,7 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         self._alert_config_info = None
         self._bank_info = None
         self._budget_info = None
+        self._combine_prize_discount_info = None
         self._count_limit = None
         self._crowd_info = None
         self._data_effect_info = None
@@ -105,6 +107,16 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
         else:
             self._budget_info = DtBankBudgetInfo.from_alipay_dict(value)
     @property
+    def combine_prize_discount_info(self):
+        return self._combine_prize_discount_info
+
+    @combine_prize_discount_info.setter
+    def combine_prize_discount_info(self, value):
+        if isinstance(value, CombinePrizeDiscountInfo):
+            self._combine_prize_discount_info = value
+        else:
+            self._combine_prize_discount_info = CombinePrizeDiscountInfo.from_alipay_dict(value)
+    @property
     def count_limit(self):
         return self._count_limit
 
@@ -181,6 +193,8 @@ class AlipayUserDtbankcustActivityconfigQueryResponse(AlipayResponse):
             self.bank_info = response['bank_info']
         if 'budget_info' in response:
             self.budget_info = response['budget_info']
+        if 'combine_prize_discount_info' in response:
+            self.combine_prize_discount_info = response['combine_prize_discount_info']
         if 'count_limit' in response:
             self.count_limit = response['count_limit']
         if 'crowd_info' in response:

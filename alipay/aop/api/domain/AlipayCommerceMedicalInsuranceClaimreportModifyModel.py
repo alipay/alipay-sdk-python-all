@@ -14,6 +14,7 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
         self._account_info = None
         self._apply_no = None
         self._biz_no = None
+        self._biz_time = None
         self._case_reopened = None
         self._case_setl_reapply = None
         self._cert_no = None
@@ -25,15 +26,20 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
         self._claim_status = None
         self._company_type = None
         self._identity_materials = None
+        self._image_batch_no = None
         self._lack_materials_sense = None
         self._name = None
         self._note_type = None
         self._note_url = None
         self._open_id = None
+        self._out_biz_no = None
         self._reject_reason = None
         self._report_no = None
         self._selt_info_list = None
+        self._settle_ids = None
         self._source = None
+        self._sscr = None
+        self._submit_no = None
         self._total_claim_amount = None
         self._user_id = None
 
@@ -61,6 +67,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def biz_time(self):
+        return self._biz_time
+
+    @biz_time.setter
+    def biz_time(self, value):
+        self._biz_time = value
     @property
     def case_reopened(self):
         return self._case_reopened
@@ -148,6 +161,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 else:
                     self._identity_materials.append(IdentityMaterials.from_alipay_dict(i))
     @property
+    def image_batch_no(self):
+        return self._image_batch_no
+
+    @image_batch_no.setter
+    def image_batch_no(self, value):
+        self._image_batch_no = value
+    @property
     def lack_materials_sense(self):
         return self._lack_materials_sense
 
@@ -183,6 +203,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
     def reject_reason(self):
         return self._reject_reason
 
@@ -210,12 +237,33 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 else:
                     self._selt_info_list.append(SeltInfoList.from_alipay_dict(i))
     @property
+    def settle_ids(self):
+        return self._settle_ids
+
+    @settle_ids.setter
+    def settle_ids(self, value):
+        self._settle_ids = value
+    @property
     def source(self):
         return self._source
 
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def sscr(self):
+        return self._sscr
+
+    @sscr.setter
+    def sscr(self, value):
+        self._sscr = value
+    @property
+    def submit_no(self):
+        return self._submit_no
+
+    @submit_no.setter
+    def submit_no(self, value):
+        self._submit_no = value
     @property
     def total_claim_amount(self):
         return self._total_claim_amount
@@ -249,6 +297,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['biz_no'] = self.biz_no.to_alipay_dict()
             else:
                 params['biz_no'] = self.biz_no
+        if self.biz_time:
+            if hasattr(self.biz_time, 'to_alipay_dict'):
+                params['biz_time'] = self.biz_time.to_alipay_dict()
+            else:
+                params['biz_time'] = self.biz_time
         if self.case_reopened:
             if hasattr(self.case_reopened, 'to_alipay_dict'):
                 params['case_reopened'] = self.case_reopened.to_alipay_dict()
@@ -314,6 +367,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['identity_materials'] = self.identity_materials.to_alipay_dict()
             else:
                 params['identity_materials'] = self.identity_materials
+        if self.image_batch_no:
+            if hasattr(self.image_batch_no, 'to_alipay_dict'):
+                params['image_batch_no'] = self.image_batch_no.to_alipay_dict()
+            else:
+                params['image_batch_no'] = self.image_batch_no
         if self.lack_materials_sense:
             if hasattr(self.lack_materials_sense, 'to_alipay_dict'):
                 params['lack_materials_sense'] = self.lack_materials_sense.to_alipay_dict()
@@ -339,6 +397,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
         if self.reject_reason:
             if hasattr(self.reject_reason, 'to_alipay_dict'):
                 params['reject_reason'] = self.reject_reason.to_alipay_dict()
@@ -359,11 +422,26 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['selt_info_list'] = self.selt_info_list.to_alipay_dict()
             else:
                 params['selt_info_list'] = self.selt_info_list
+        if self.settle_ids:
+            if hasattr(self.settle_ids, 'to_alipay_dict'):
+                params['settle_ids'] = self.settle_ids.to_alipay_dict()
+            else:
+                params['settle_ids'] = self.settle_ids
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.sscr:
+            if hasattr(self.sscr, 'to_alipay_dict'):
+                params['sscr'] = self.sscr.to_alipay_dict()
+            else:
+                params['sscr'] = self.sscr
+        if self.submit_no:
+            if hasattr(self.submit_no, 'to_alipay_dict'):
+                params['submit_no'] = self.submit_no.to_alipay_dict()
+            else:
+                params['submit_no'] = self.submit_no
         if self.total_claim_amount:
             if hasattr(self.total_claim_amount, 'to_alipay_dict'):
                 params['total_claim_amount'] = self.total_claim_amount.to_alipay_dict()
@@ -387,6 +465,8 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
             o.apply_no = d['apply_no']
         if 'biz_no' in d:
             o.biz_no = d['biz_no']
+        if 'biz_time' in d:
+            o.biz_time = d['biz_time']
         if 'case_reopened' in d:
             o.case_reopened = d['case_reopened']
         if 'case_setl_reapply' in d:
@@ -409,6 +489,8 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
             o.company_type = d['company_type']
         if 'identity_materials' in d:
             o.identity_materials = d['identity_materials']
+        if 'image_batch_no' in d:
+            o.image_batch_no = d['image_batch_no']
         if 'lack_materials_sense' in d:
             o.lack_materials_sense = d['lack_materials_sense']
         if 'name' in d:
@@ -419,14 +501,22 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
             o.note_url = d['note_url']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
         if 'reject_reason' in d:
             o.reject_reason = d['reject_reason']
         if 'report_no' in d:
             o.report_no = d['report_no']
         if 'selt_info_list' in d:
             o.selt_info_list = d['selt_info_list']
+        if 'settle_ids' in d:
+            o.settle_ids = d['settle_ids']
         if 'source' in d:
             o.source = d['source']
+        if 'sscr' in d:
+            o.sscr = d['sscr']
+        if 'submit_no' in d:
+            o.submit_no = d['submit_no']
         if 'total_claim_amount' in d:
             o.total_claim_amount = d['total_claim_amount']
         if 'user_id' in d:

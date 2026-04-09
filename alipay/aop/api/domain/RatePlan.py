@@ -13,9 +13,12 @@ class RatePlan(object):
 
     def __init__(self):
         self._booking_rule_ids = None
+        self._brand_code = None
         self._cancel_rules = None
         self._confirm_minutes = None
         self._customer_type = None
+        self._group_short_name = None
+        self._has_member_right = None
         self._identification = None
         self._identification_type = None
         self._instant_confirmation = None
@@ -24,6 +27,7 @@ class RatePlan(object):
         self._ota_url = None
         self._pay_type = None
         self._pkg_product_ids = None
+        self._price_type = None
         self._rate_plan_id = None
         self._rate_plan_labels = None
         self._rate_plan_name = None
@@ -31,6 +35,8 @@ class RatePlan(object):
         self._refund_rule_ids = None
         self._room_id = None
         self._status = None
+        self._supplier_seller_id = None
+        self._supplier_seller_name = None
         self._supplier_source = None
 
     @property
@@ -43,6 +49,13 @@ class RatePlan(object):
             self._booking_rule_ids = list()
             for i in value:
                 self._booking_rule_ids.append(i)
+    @property
+    def brand_code(self):
+        return self._brand_code
+
+    @brand_code.setter
+    def brand_code(self, value):
+        self._brand_code = value
     @property
     def cancel_rules(self):
         return self._cancel_rules
@@ -70,6 +83,20 @@ class RatePlan(object):
     @customer_type.setter
     def customer_type(self, value):
         self._customer_type = value
+    @property
+    def group_short_name(self):
+        return self._group_short_name
+
+    @group_short_name.setter
+    def group_short_name(self, value):
+        self._group_short_name = value
+    @property
+    def has_member_right(self):
+        return self._has_member_right
+
+    @has_member_right.setter
+    def has_member_right(self, value):
+        self._has_member_right = value
     @property
     def identification(self):
         return self._identification
@@ -139,6 +166,13 @@ class RatePlan(object):
     def pkg_product_ids(self, value):
         self._pkg_product_ids = value
     @property
+    def price_type(self):
+        return self._price_type
+
+    @price_type.setter
+    def price_type(self, value):
+        self._price_type = value
+    @property
     def rate_plan_id(self):
         return self._rate_plan_id
 
@@ -197,6 +231,20 @@ class RatePlan(object):
     def status(self, value):
         self._status = value
     @property
+    def supplier_seller_id(self):
+        return self._supplier_seller_id
+
+    @supplier_seller_id.setter
+    def supplier_seller_id(self, value):
+        self._supplier_seller_id = value
+    @property
+    def supplier_seller_name(self):
+        return self._supplier_seller_name
+
+    @supplier_seller_name.setter
+    def supplier_seller_name(self, value):
+        self._supplier_seller_name = value
+    @property
     def supplier_source(self):
         return self._supplier_source
 
@@ -217,6 +265,11 @@ class RatePlan(object):
                 params['booking_rule_ids'] = self.booking_rule_ids.to_alipay_dict()
             else:
                 params['booking_rule_ids'] = self.booking_rule_ids
+        if self.brand_code:
+            if hasattr(self.brand_code, 'to_alipay_dict'):
+                params['brand_code'] = self.brand_code.to_alipay_dict()
+            else:
+                params['brand_code'] = self.brand_code
         if self.cancel_rules:
             if isinstance(self.cancel_rules, list):
                 for i in range(0, len(self.cancel_rules)):
@@ -237,6 +290,16 @@ class RatePlan(object):
                 params['customer_type'] = self.customer_type.to_alipay_dict()
             else:
                 params['customer_type'] = self.customer_type
+        if self.group_short_name:
+            if hasattr(self.group_short_name, 'to_alipay_dict'):
+                params['group_short_name'] = self.group_short_name.to_alipay_dict()
+            else:
+                params['group_short_name'] = self.group_short_name
+        if self.has_member_right:
+            if hasattr(self.has_member_right, 'to_alipay_dict'):
+                params['has_member_right'] = self.has_member_right.to_alipay_dict()
+            else:
+                params['has_member_right'] = self.has_member_right
         if self.identification:
             if hasattr(self.identification, 'to_alipay_dict'):
                 params['identification'] = self.identification.to_alipay_dict()
@@ -287,6 +350,11 @@ class RatePlan(object):
                 params['pkg_product_ids'] = self.pkg_product_ids.to_alipay_dict()
             else:
                 params['pkg_product_ids'] = self.pkg_product_ids
+        if self.price_type:
+            if hasattr(self.price_type, 'to_alipay_dict'):
+                params['price_type'] = self.price_type.to_alipay_dict()
+            else:
+                params['price_type'] = self.price_type
         if self.rate_plan_id:
             if hasattr(self.rate_plan_id, 'to_alipay_dict'):
                 params['rate_plan_id'] = self.rate_plan_id.to_alipay_dict()
@@ -332,6 +400,16 @@ class RatePlan(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.supplier_seller_id:
+            if hasattr(self.supplier_seller_id, 'to_alipay_dict'):
+                params['supplier_seller_id'] = self.supplier_seller_id.to_alipay_dict()
+            else:
+                params['supplier_seller_id'] = self.supplier_seller_id
+        if self.supplier_seller_name:
+            if hasattr(self.supplier_seller_name, 'to_alipay_dict'):
+                params['supplier_seller_name'] = self.supplier_seller_name.to_alipay_dict()
+            else:
+                params['supplier_seller_name'] = self.supplier_seller_name
         if self.supplier_source:
             if hasattr(self.supplier_source, 'to_alipay_dict'):
                 params['supplier_source'] = self.supplier_source.to_alipay_dict()
@@ -346,12 +424,18 @@ class RatePlan(object):
         o = RatePlan()
         if 'booking_rule_ids' in d:
             o.booking_rule_ids = d['booking_rule_ids']
+        if 'brand_code' in d:
+            o.brand_code = d['brand_code']
         if 'cancel_rules' in d:
             o.cancel_rules = d['cancel_rules']
         if 'confirm_minutes' in d:
             o.confirm_minutes = d['confirm_minutes']
         if 'customer_type' in d:
             o.customer_type = d['customer_type']
+        if 'group_short_name' in d:
+            o.group_short_name = d['group_short_name']
+        if 'has_member_right' in d:
+            o.has_member_right = d['has_member_right']
         if 'identification' in d:
             o.identification = d['identification']
         if 'identification_type' in d:
@@ -368,6 +452,8 @@ class RatePlan(object):
             o.pay_type = d['pay_type']
         if 'pkg_product_ids' in d:
             o.pkg_product_ids = d['pkg_product_ids']
+        if 'price_type' in d:
+            o.price_type = d['price_type']
         if 'rate_plan_id' in d:
             o.rate_plan_id = d['rate_plan_id']
         if 'rate_plan_labels' in d:
@@ -382,6 +468,10 @@ class RatePlan(object):
             o.room_id = d['room_id']
         if 'status' in d:
             o.status = d['status']
+        if 'supplier_seller_id' in d:
+            o.supplier_seller_id = d['supplier_seller_id']
+        if 'supplier_seller_name' in d:
+            o.supplier_seller_name = d['supplier_seller_name']
         if 'supplier_source' in d:
             o.supplier_source = d['supplier_source']
         return o

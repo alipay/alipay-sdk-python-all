@@ -10,6 +10,7 @@ class AlipayCommerceMedicalRegisterPayfinishNotifyModel(object):
     def __init__(self):
         self._alipay_user_id = None
         self._isv_code = None
+        self._open_id = None
         self._order_id = None
         self._platform_code = None
 
@@ -27,6 +28,13 @@ class AlipayCommerceMedicalRegisterPayfinishNotifyModel(object):
     @isv_code.setter
     def isv_code(self, value):
         self._isv_code = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -55,6 +63,11 @@ class AlipayCommerceMedicalRegisterPayfinishNotifyModel(object):
                 params['isv_code'] = self.isv_code.to_alipay_dict()
             else:
                 params['isv_code'] = self.isv_code
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayCommerceMedicalRegisterPayfinishNotifyModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'isv_code' in d:
             o.isv_code = d['isv_code']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'platform_code' in d:

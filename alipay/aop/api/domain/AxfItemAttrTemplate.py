@@ -9,7 +9,9 @@ from alipay.aop.api.domain.AxfEnumValueItem import AxfEnumValueItem
 class AxfItemAttrTemplate(object):
 
     def __init__(self):
+        self._attr_desc = None
         self._attr_key = None
+        self._attr_name = None
         self._attr_type = None
         self._category_code = None
         self._enum_values = None
@@ -19,12 +21,26 @@ class AxfItemAttrTemplate(object):
         self._required = None
 
     @property
+    def attr_desc(self):
+        return self._attr_desc
+
+    @attr_desc.setter
+    def attr_desc(self, value):
+        self._attr_desc = value
+    @property
     def attr_key(self):
         return self._attr_key
 
     @attr_key.setter
     def attr_key(self, value):
         self._attr_key = value
+    @property
+    def attr_name(self):
+        return self._attr_name
+
+    @attr_name.setter
+    def attr_name(self, value):
+        self._attr_name = value
     @property
     def attr_type(self):
         return self._attr_type
@@ -84,11 +100,21 @@ class AxfItemAttrTemplate(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.attr_desc:
+            if hasattr(self.attr_desc, 'to_alipay_dict'):
+                params['attr_desc'] = self.attr_desc.to_alipay_dict()
+            else:
+                params['attr_desc'] = self.attr_desc
         if self.attr_key:
             if hasattr(self.attr_key, 'to_alipay_dict'):
                 params['attr_key'] = self.attr_key.to_alipay_dict()
             else:
                 params['attr_key'] = self.attr_key
+        if self.attr_name:
+            if hasattr(self.attr_name, 'to_alipay_dict'):
+                params['attr_name'] = self.attr_name.to_alipay_dict()
+            else:
+                params['attr_name'] = self.attr_name
         if self.attr_type:
             if hasattr(self.attr_type, 'to_alipay_dict'):
                 params['attr_type'] = self.attr_type.to_alipay_dict()
@@ -136,8 +162,12 @@ class AxfItemAttrTemplate(object):
         if not d:
             return None
         o = AxfItemAttrTemplate()
+        if 'attr_desc' in d:
+            o.attr_desc = d['attr_desc']
         if 'attr_key' in d:
             o.attr_key = d['attr_key']
+        if 'attr_name' in d:
+            o.attr_name = d['attr_name']
         if 'attr_type' in d:
             o.attr_type = d['attr_type']
         if 'category_code' in d:

@@ -11,15 +11,21 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
         self._action = None
         self._alipay_user_id = None
         self._appoint_part = None
+        self._buss_type = None
+        self._campus_address = None
+        self._campus_name = None
         self._cancel_reason = None
         self._cancel_time = None
         self._channel = None
         self._clinic_end_time = None
         self._clinic_start_time = None
         self._clinic_time = None
+        self._disease_description = None
+        self._disease_name = None
         self._doctor_id = None
         self._doctor_name = None
         self._fee = None
+        self._hint_message = None
         self._hospital_number_no = None
         self._isv_code = None
         self._isv_hos_dept_name = None
@@ -43,11 +49,15 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
         self._patient_name = None
         self._pay_type = None
         self._pickup_end_time = None
+        self._pickup_end_time_desc = None
         self._platform_code = None
         self._register_date = None
+        self._register_evaluate = None
         self._register_id = None
+        self._register_ticket = None
         self._scene_code = None
         self._shift_type = None
+        self._status_reason = None
         self._sub_scene_code = None
 
     @property
@@ -71,6 +81,27 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     @appoint_part.setter
     def appoint_part(self, value):
         self._appoint_part = value
+    @property
+    def buss_type(self):
+        return self._buss_type
+
+    @buss_type.setter
+    def buss_type(self, value):
+        self._buss_type = value
+    @property
+    def campus_address(self):
+        return self._campus_address
+
+    @campus_address.setter
+    def campus_address(self, value):
+        self._campus_address = value
+    @property
+    def campus_name(self):
+        return self._campus_name
+
+    @campus_name.setter
+    def campus_name(self, value):
+        self._campus_name = value
     @property
     def cancel_reason(self):
         return self._cancel_reason
@@ -114,6 +145,20 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     def clinic_time(self, value):
         self._clinic_time = value
     @property
+    def disease_description(self):
+        return self._disease_description
+
+    @disease_description.setter
+    def disease_description(self, value):
+        self._disease_description = value
+    @property
+    def disease_name(self):
+        return self._disease_name
+
+    @disease_name.setter
+    def disease_name(self, value):
+        self._disease_name = value
+    @property
     def doctor_id(self):
         return self._doctor_id
 
@@ -134,6 +179,13 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     @fee.setter
     def fee(self, value):
         self._fee = value
+    @property
+    def hint_message(self):
+        return self._hint_message
+
+    @hint_message.setter
+    def hint_message(self, value):
+        self._hint_message = value
     @property
     def hospital_number_no(self):
         return self._hospital_number_no
@@ -296,6 +348,13 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     def pickup_end_time(self, value):
         self._pickup_end_time = value
     @property
+    def pickup_end_time_desc(self):
+        return self._pickup_end_time_desc
+
+    @pickup_end_time_desc.setter
+    def pickup_end_time_desc(self, value):
+        self._pickup_end_time_desc = value
+    @property
     def platform_code(self):
         return self._platform_code
 
@@ -310,12 +369,26 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     def register_date(self, value):
         self._register_date = value
     @property
+    def register_evaluate(self):
+        return self._register_evaluate
+
+    @register_evaluate.setter
+    def register_evaluate(self, value):
+        self._register_evaluate = value
+    @property
     def register_id(self):
         return self._register_id
 
     @register_id.setter
     def register_id(self, value):
         self._register_id = value
+    @property
+    def register_ticket(self):
+        return self._register_ticket
+
+    @register_ticket.setter
+    def register_ticket(self, value):
+        self._register_ticket = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -330,6 +403,13 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
     @shift_type.setter
     def shift_type(self, value):
         self._shift_type = value
+    @property
+    def status_reason(self):
+        return self._status_reason
+
+    @status_reason.setter
+    def status_reason(self, value):
+        self._status_reason = value
     @property
     def sub_scene_code(self):
         return self._sub_scene_code
@@ -356,6 +436,21 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['appoint_part'] = self.appoint_part.to_alipay_dict()
             else:
                 params['appoint_part'] = self.appoint_part
+        if self.buss_type:
+            if hasattr(self.buss_type, 'to_alipay_dict'):
+                params['buss_type'] = self.buss_type.to_alipay_dict()
+            else:
+                params['buss_type'] = self.buss_type
+        if self.campus_address:
+            if hasattr(self.campus_address, 'to_alipay_dict'):
+                params['campus_address'] = self.campus_address.to_alipay_dict()
+            else:
+                params['campus_address'] = self.campus_address
+        if self.campus_name:
+            if hasattr(self.campus_name, 'to_alipay_dict'):
+                params['campus_name'] = self.campus_name.to_alipay_dict()
+            else:
+                params['campus_name'] = self.campus_name
         if self.cancel_reason:
             if hasattr(self.cancel_reason, 'to_alipay_dict'):
                 params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
@@ -386,6 +481,16 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['clinic_time'] = self.clinic_time.to_alipay_dict()
             else:
                 params['clinic_time'] = self.clinic_time
+        if self.disease_description:
+            if hasattr(self.disease_description, 'to_alipay_dict'):
+                params['disease_description'] = self.disease_description.to_alipay_dict()
+            else:
+                params['disease_description'] = self.disease_description
+        if self.disease_name:
+            if hasattr(self.disease_name, 'to_alipay_dict'):
+                params['disease_name'] = self.disease_name.to_alipay_dict()
+            else:
+                params['disease_name'] = self.disease_name
         if self.doctor_id:
             if hasattr(self.doctor_id, 'to_alipay_dict'):
                 params['doctor_id'] = self.doctor_id.to_alipay_dict()
@@ -401,6 +506,11 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['fee'] = self.fee.to_alipay_dict()
             else:
                 params['fee'] = self.fee
+        if self.hint_message:
+            if hasattr(self.hint_message, 'to_alipay_dict'):
+                params['hint_message'] = self.hint_message.to_alipay_dict()
+            else:
+                params['hint_message'] = self.hint_message
         if self.hospital_number_no:
             if hasattr(self.hospital_number_no, 'to_alipay_dict'):
                 params['hospital_number_no'] = self.hospital_number_no.to_alipay_dict()
@@ -516,6 +626,11 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['pickup_end_time'] = self.pickup_end_time.to_alipay_dict()
             else:
                 params['pickup_end_time'] = self.pickup_end_time
+        if self.pickup_end_time_desc:
+            if hasattr(self.pickup_end_time_desc, 'to_alipay_dict'):
+                params['pickup_end_time_desc'] = self.pickup_end_time_desc.to_alipay_dict()
+            else:
+                params['pickup_end_time_desc'] = self.pickup_end_time_desc
         if self.platform_code:
             if hasattr(self.platform_code, 'to_alipay_dict'):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
@@ -526,11 +641,21 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['register_date'] = self.register_date.to_alipay_dict()
             else:
                 params['register_date'] = self.register_date
+        if self.register_evaluate:
+            if hasattr(self.register_evaluate, 'to_alipay_dict'):
+                params['register_evaluate'] = self.register_evaluate.to_alipay_dict()
+            else:
+                params['register_evaluate'] = self.register_evaluate
         if self.register_id:
             if hasattr(self.register_id, 'to_alipay_dict'):
                 params['register_id'] = self.register_id.to_alipay_dict()
             else:
                 params['register_id'] = self.register_id
+        if self.register_ticket:
+            if hasattr(self.register_ticket, 'to_alipay_dict'):
+                params['register_ticket'] = self.register_ticket.to_alipay_dict()
+            else:
+                params['register_ticket'] = self.register_ticket
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -541,6 +666,11 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
                 params['shift_type'] = self.shift_type.to_alipay_dict()
             else:
                 params['shift_type'] = self.shift_type
+        if self.status_reason:
+            if hasattr(self.status_reason, 'to_alipay_dict'):
+                params['status_reason'] = self.status_reason.to_alipay_dict()
+            else:
+                params['status_reason'] = self.status_reason
         if self.sub_scene_code:
             if hasattr(self.sub_scene_code, 'to_alipay_dict'):
                 params['sub_scene_code'] = self.sub_scene_code.to_alipay_dict()
@@ -559,6 +689,12 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
             o.alipay_user_id = d['alipay_user_id']
         if 'appoint_part' in d:
             o.appoint_part = d['appoint_part']
+        if 'buss_type' in d:
+            o.buss_type = d['buss_type']
+        if 'campus_address' in d:
+            o.campus_address = d['campus_address']
+        if 'campus_name' in d:
+            o.campus_name = d['campus_name']
         if 'cancel_reason' in d:
             o.cancel_reason = d['cancel_reason']
         if 'cancel_time' in d:
@@ -571,12 +707,18 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
             o.clinic_start_time = d['clinic_start_time']
         if 'clinic_time' in d:
             o.clinic_time = d['clinic_time']
+        if 'disease_description' in d:
+            o.disease_description = d['disease_description']
+        if 'disease_name' in d:
+            o.disease_name = d['disease_name']
         if 'doctor_id' in d:
             o.doctor_id = d['doctor_id']
         if 'doctor_name' in d:
             o.doctor_name = d['doctor_name']
         if 'fee' in d:
             o.fee = d['fee']
+        if 'hint_message' in d:
+            o.hint_message = d['hint_message']
         if 'hospital_number_no' in d:
             o.hospital_number_no = d['hospital_number_no']
         if 'isv_code' in d:
@@ -623,16 +765,24 @@ class AlipayCommerceMedicalRegisterOrderSyncModel(object):
             o.pay_type = d['pay_type']
         if 'pickup_end_time' in d:
             o.pickup_end_time = d['pickup_end_time']
+        if 'pickup_end_time_desc' in d:
+            o.pickup_end_time_desc = d['pickup_end_time_desc']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
         if 'register_date' in d:
             o.register_date = d['register_date']
+        if 'register_evaluate' in d:
+            o.register_evaluate = d['register_evaluate']
         if 'register_id' in d:
             o.register_id = d['register_id']
+        if 'register_ticket' in d:
+            o.register_ticket = d['register_ticket']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'shift_type' in d:
             o.shift_type = d['shift_type']
+        if 'status_reason' in d:
+            o.status_reason = d['status_reason']
         if 'sub_scene_code' in d:
             o.sub_scene_code = d['sub_scene_code']
         return o

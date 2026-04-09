@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 
 
 class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
@@ -13,6 +14,8 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
         self._mode = None
         self._mybank_app_id = None
         self._mybank_scene_code = None
+        self._partner_id = None
+        self._spdb_spec_params = None
 
     @property
     def account_card_no(self):
@@ -49,6 +52,23 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
     @mybank_scene_code.setter
     def mybank_scene_code(self, value):
         self._mybank_scene_code = value
+    @property
+    def partner_id(self):
+        return self._partner_id
+
+    @partner_id.setter
+    def partner_id(self, value):
+        self._partner_id = value
+    @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -78,6 +98,16 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
                 params['mybank_scene_code'] = self.mybank_scene_code.to_alipay_dict()
             else:
                 params['mybank_scene_code'] = self.mybank_scene_code
+        if self.partner_id:
+            if hasattr(self.partner_id, 'to_alipay_dict'):
+                params['partner_id'] = self.partner_id.to_alipay_dict()
+            else:
+                params['partner_id'] = self.partner_id
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
         return params
 
     @staticmethod
@@ -95,6 +125,10 @@ class AlipayCommerceLogisticsFreightflowParentaccountQueryModel(object):
             o.mybank_app_id = d['mybank_app_id']
         if 'mybank_scene_code' in d:
             o.mybank_scene_code = d['mybank_scene_code']
+        if 'partner_id' in d:
+            o.partner_id = d['partner_id']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
         return o
 
 

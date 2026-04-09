@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CombinePrizeResult import CombinePrizeResult
 
 
 class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
@@ -12,6 +13,7 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
         self._account_no = None
         self._activity_id = None
         self._activity_order_id = None
+        self._combine_prize_result = None
         self._discount_threshold_amt = None
         self._discount_type = None
         self._discount_value = None
@@ -40,6 +42,16 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
     @activity_order_id.setter
     def activity_order_id(self, value):
         self._activity_order_id = value
+    @property
+    def combine_prize_result(self):
+        return self._combine_prize_result
+
+    @combine_prize_result.setter
+    def combine_prize_result(self, value):
+        if isinstance(value, CombinePrizeResult):
+            self._combine_prize_result = value
+        else:
+            self._combine_prize_result = CombinePrizeResult.from_alipay_dict(value)
     @property
     def discount_threshold_amt(self):
         return self._discount_threshold_amt
@@ -91,6 +103,8 @@ class AlipayUserDtbankcustChannelvoucherSendResponse(AlipayResponse):
             self.activity_id = response['activity_id']
         if 'activity_order_id' in response:
             self.activity_order_id = response['activity_order_id']
+        if 'combine_prize_result' in response:
+            self.combine_prize_result = response['combine_prize_result']
         if 'discount_threshold_amt' in response:
             self.discount_threshold_amt = response['discount_threshold_amt']
         if 'discount_type' in response:

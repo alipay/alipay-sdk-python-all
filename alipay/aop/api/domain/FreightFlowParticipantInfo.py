@@ -8,12 +8,20 @@ from alipay.aop.api.constant.ParamConstants import *
 class FreightFlowParticipantInfo(object):
 
     def __init__(self):
+        self._participant_bank_name = None
         self._participant_customer_type = None
         self._participant_id = None
         self._participant_inst_code = None
         self._participant_name = None
         self._participant_type = None
 
+    @property
+    def participant_bank_name(self):
+        return self._participant_bank_name
+
+    @participant_bank_name.setter
+    def participant_bank_name(self, value):
+        self._participant_bank_name = value
     @property
     def participant_customer_type(self):
         return self._participant_customer_type
@@ -53,6 +61,11 @@ class FreightFlowParticipantInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.participant_bank_name:
+            if hasattr(self.participant_bank_name, 'to_alipay_dict'):
+                params['participant_bank_name'] = self.participant_bank_name.to_alipay_dict()
+            else:
+                params['participant_bank_name'] = self.participant_bank_name
         if self.participant_customer_type:
             if hasattr(self.participant_customer_type, 'to_alipay_dict'):
                 params['participant_customer_type'] = self.participant_customer_type.to_alipay_dict()
@@ -85,6 +98,8 @@ class FreightFlowParticipantInfo(object):
         if not d:
             return None
         o = FreightFlowParticipantInfo()
+        if 'participant_bank_name' in d:
+            o.participant_bank_name = d['participant_bank_name']
         if 'participant_customer_type' in d:
             o.participant_customer_type = d['participant_customer_type']
         if 'participant_id' in d:

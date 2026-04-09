@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 
 
 class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
@@ -15,6 +16,7 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
         self._mybank_scene_type = None
         self._mybank_sub_scene = None
         self._partner_id = None
+        self._spdb_spec_params = None
         self._sub_bank_card_no = None
 
     @property
@@ -67,6 +69,16 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
     def partner_id(self, value):
         self._partner_id = value
     @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
+    @property
     def sub_bank_card_no(self):
         return self._sub_bank_card_no
 
@@ -112,6 +124,11 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
         if self.sub_bank_card_no:
             if hasattr(self.sub_bank_card_no, 'to_alipay_dict'):
                 params['sub_bank_card_no'] = self.sub_bank_card_no.to_alipay_dict()
@@ -138,6 +155,8 @@ class AlipayCommerceLogisticsFreightflowSubaccountQueryModel(object):
             o.mybank_sub_scene = d['mybank_sub_scene']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
         if 'sub_bank_card_no' in d:
             o.sub_bank_card_no = d['sub_bank_card_no']
         return o

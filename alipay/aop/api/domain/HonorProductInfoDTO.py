@@ -11,6 +11,7 @@ class HonorProductInfoDTO(object):
         self._apr = None
         self._day_rate = None
         self._early_repay = None
+        self._fee_rate = None
         self._repay_method = None
         self._temp_apr = None
         self._temp_day_rate = None
@@ -38,6 +39,13 @@ class HonorProductInfoDTO(object):
     @early_repay.setter
     def early_repay(self, value):
         self._early_repay = value
+    @property
+    def fee_rate(self):
+        return self._fee_rate
+
+    @fee_rate.setter
+    def fee_rate(self, value):
+        self._fee_rate = value
     @property
     def repay_method(self):
         return self._repay_method
@@ -95,6 +103,11 @@ class HonorProductInfoDTO(object):
                 params['early_repay'] = self.early_repay.to_alipay_dict()
             else:
                 params['early_repay'] = self.early_repay
+        if self.fee_rate:
+            if hasattr(self.fee_rate, 'to_alipay_dict'):
+                params['fee_rate'] = self.fee_rate.to_alipay_dict()
+            else:
+                params['fee_rate'] = self.fee_rate
         if self.repay_method:
             if hasattr(self.repay_method, 'to_alipay_dict'):
                 params['repay_method'] = self.repay_method.to_alipay_dict()
@@ -138,6 +151,8 @@ class HonorProductInfoDTO(object):
             o.day_rate = d['day_rate']
         if 'early_repay' in d:
             o.early_repay = d['early_repay']
+        if 'fee_rate' in d:
+            o.fee_rate = d['fee_rate']
         if 'repay_method' in d:
             o.repay_method = d['repay_method']
         if 'temp_apr' in d:

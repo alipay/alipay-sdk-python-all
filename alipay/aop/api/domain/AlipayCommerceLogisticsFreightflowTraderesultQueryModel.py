@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FreigtFlowSpdbBizSeqNo import FreigtFlowSpdbBizSeqNo
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 
 
 class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
@@ -15,6 +17,10 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
         self._mybank_app_id = None
         self._operate_no = None
         self._partner_id = None
+        self._spdb_parent_account_no = None
+        self._spdb_seq_no = None
+        self._spdb_spec_params = None
+        self._spdb_tran_tp_dsc = None
 
     @property
     def biz_no(self):
@@ -65,6 +71,40 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
     @partner_id.setter
     def partner_id(self, value):
         self._partner_id = value
+    @property
+    def spdb_parent_account_no(self):
+        return self._spdb_parent_account_no
+
+    @spdb_parent_account_no.setter
+    def spdb_parent_account_no(self, value):
+        self._spdb_parent_account_no = value
+    @property
+    def spdb_seq_no(self):
+        return self._spdb_seq_no
+
+    @spdb_seq_no.setter
+    def spdb_seq_no(self, value):
+        if isinstance(value, FreigtFlowSpdbBizSeqNo):
+            self._spdb_seq_no = value
+        else:
+            self._spdb_seq_no = FreigtFlowSpdbBizSeqNo.from_alipay_dict(value)
+    @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
+    @property
+    def spdb_tran_tp_dsc(self):
+        return self._spdb_tran_tp_dsc
+
+    @spdb_tran_tp_dsc.setter
+    def spdb_tran_tp_dsc(self, value):
+        self._spdb_tran_tp_dsc = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +144,26 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.spdb_parent_account_no:
+            if hasattr(self.spdb_parent_account_no, 'to_alipay_dict'):
+                params['spdb_parent_account_no'] = self.spdb_parent_account_no.to_alipay_dict()
+            else:
+                params['spdb_parent_account_no'] = self.spdb_parent_account_no
+        if self.spdb_seq_no:
+            if hasattr(self.spdb_seq_no, 'to_alipay_dict'):
+                params['spdb_seq_no'] = self.spdb_seq_no.to_alipay_dict()
+            else:
+                params['spdb_seq_no'] = self.spdb_seq_no
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
+        if self.spdb_tran_tp_dsc:
+            if hasattr(self.spdb_tran_tp_dsc, 'to_alipay_dict'):
+                params['spdb_tran_tp_dsc'] = self.spdb_tran_tp_dsc.to_alipay_dict()
+            else:
+                params['spdb_tran_tp_dsc'] = self.spdb_tran_tp_dsc
         return params
 
     @staticmethod
@@ -125,6 +185,14 @@ class AlipayCommerceLogisticsFreightflowTraderesultQueryModel(object):
             o.operate_no = d['operate_no']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'spdb_parent_account_no' in d:
+            o.spdb_parent_account_no = d['spdb_parent_account_no']
+        if 'spdb_seq_no' in d:
+            o.spdb_seq_no = d['spdb_seq_no']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
+        if 'spdb_tran_tp_dsc' in d:
+            o.spdb_tran_tp_dsc = d['spdb_tran_tp_dsc']
         return o
 
 

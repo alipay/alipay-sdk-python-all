@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CombinePrizeResult import CombinePrizeResult
 
 
 class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
         super(AlipayUserDtbankcustActivityorderQueryResponse, self).__init__()
         self._activity_id = None
         self._activity_order_id = None
+        self._combine_prize_result = None
         self._out_biz_no = None
         self._status = None
         self._voucher_id = None
@@ -29,6 +31,16 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
     @activity_order_id.setter
     def activity_order_id(self, value):
         self._activity_order_id = value
+    @property
+    def combine_prize_result(self):
+        return self._combine_prize_result
+
+    @combine_prize_result.setter
+    def combine_prize_result(self, value):
+        if isinstance(value, CombinePrizeResult):
+            self._combine_prize_result = value
+        else:
+            self._combine_prize_result = CombinePrizeResult.from_alipay_dict(value)
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -57,6 +69,8 @@ class AlipayUserDtbankcustActivityorderQueryResponse(AlipayResponse):
             self.activity_id = response['activity_id']
         if 'activity_order_id' in response:
             self.activity_order_id = response['activity_order_id']
+        if 'combine_prize_result' in response:
+            self.combine_prize_result = response['combine_prize_result']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'status' in response:

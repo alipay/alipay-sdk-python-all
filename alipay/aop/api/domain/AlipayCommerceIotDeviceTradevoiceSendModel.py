@@ -11,6 +11,7 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
         self._amount = None
         self._biz_tid = None
         self._msg_id = None
+        self._out_order_no = None
         self._smid = None
         self._trade_id = None
         self._trade_type = None
@@ -36,6 +37,13 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
     @msg_id.setter
     def msg_id(self, value):
         self._msg_id = value
+    @property
+    def out_order_no(self):
+        return self._out_order_no
+
+    @out_order_no.setter
+    def out_order_no(self, value):
+        self._out_order_no = value
     @property
     def smid(self):
         return self._smid
@@ -76,6 +84,11 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
                 params['msg_id'] = self.msg_id.to_alipay_dict()
             else:
                 params['msg_id'] = self.msg_id
+        if self.out_order_no:
+            if hasattr(self.out_order_no, 'to_alipay_dict'):
+                params['out_order_no'] = self.out_order_no.to_alipay_dict()
+            else:
+                params['out_order_no'] = self.out_order_no
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
             o.biz_tid = d['biz_tid']
         if 'msg_id' in d:
             o.msg_id = d['msg_id']
+        if 'out_order_no' in d:
+            o.out_order_no = d['out_order_no']
         if 'smid' in d:
             o.smid = d['smid']
         if 'trade_id' in d:

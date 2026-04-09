@@ -12,6 +12,7 @@ class AlipayDataDataexchangeSchematestapiRainystestQueryRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._biz_content = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -29,6 +30,13 @@ class AlipayDataDataexchangeSchematestapiRainystestQueryRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def biz_content(self):
+        return self._biz_content
+
+    @biz_content.setter
+    def biz_content(self, value):
+        self._biz_content = value
 
 
     @property
@@ -108,6 +116,11 @@ class AlipayDataDataexchangeSchematestapiRainystestQueryRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.biz_content:
+            if hasattr(self.biz_content, 'to_alipay_dict'):
+                params['biz_content'] = json.dumps(obj=self.biz_content.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['biz_content'] = self.biz_content
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

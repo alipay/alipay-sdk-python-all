@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LandingTypeDto import LandingTypeDto
+from alipay.aop.api.domain.VideoInfo import VideoInfo
 
 
 class AlipayDataDataserviceProductLandinginfoCreateormodifyModel(object):
@@ -12,6 +13,7 @@ class AlipayDataDataserviceProductLandinginfoCreateormodifyModel(object):
         self._item_id = None
         self._landing = None
         self._out_item_id = None
+        self._video_info_list = None
 
     @property
     def item_id(self):
@@ -40,6 +42,19 @@ class AlipayDataDataserviceProductLandinginfoCreateormodifyModel(object):
     @out_item_id.setter
     def out_item_id(self, value):
         self._out_item_id = value
+    @property
+    def video_info_list(self):
+        return self._video_info_list
+
+    @video_info_list.setter
+    def video_info_list(self, value):
+        if isinstance(value, list):
+            self._video_info_list = list()
+            for i in value:
+                if isinstance(i, VideoInfo):
+                    self._video_info_list.append(i)
+                else:
+                    self._video_info_list.append(VideoInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -64,6 +79,16 @@ class AlipayDataDataserviceProductLandinginfoCreateormodifyModel(object):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
             else:
                 params['out_item_id'] = self.out_item_id
+        if self.video_info_list:
+            if isinstance(self.video_info_list, list):
+                for i in range(0, len(self.video_info_list)):
+                    element = self.video_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.video_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.video_info_list, 'to_alipay_dict'):
+                params['video_info_list'] = self.video_info_list.to_alipay_dict()
+            else:
+                params['video_info_list'] = self.video_info_list
         return params
 
     @staticmethod
@@ -77,6 +102,8 @@ class AlipayDataDataserviceProductLandinginfoCreateormodifyModel(object):
             o.landing = d['landing']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
+        if 'video_info_list' in d:
+            o.video_info_list = d['video_info_list']
         return o
 
 

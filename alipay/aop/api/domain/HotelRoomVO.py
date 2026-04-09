@@ -11,6 +11,7 @@ class HotelRoomVO(object):
         self._build = None
         self._feature_tag_list = None
         self._floor = None
+        self._room_area = None
         self._room_no = None
 
     @property
@@ -37,6 +38,13 @@ class HotelRoomVO(object):
     @floor.setter
     def floor(self, value):
         self._floor = value
+    @property
+    def room_area(self):
+        return self._room_area
+
+    @room_area.setter
+    def room_area(self, value):
+        self._room_area = value
     @property
     def room_no(self):
         return self._room_no
@@ -68,6 +76,11 @@ class HotelRoomVO(object):
                 params['floor'] = self.floor.to_alipay_dict()
             else:
                 params['floor'] = self.floor
+        if self.room_area:
+            if hasattr(self.room_area, 'to_alipay_dict'):
+                params['room_area'] = self.room_area.to_alipay_dict()
+            else:
+                params['room_area'] = self.room_area
         if self.room_no:
             if hasattr(self.room_no, 'to_alipay_dict'):
                 params['room_no'] = self.room_no.to_alipay_dict()
@@ -86,6 +99,8 @@ class HotelRoomVO(object):
             o.feature_tag_list = d['feature_tag_list']
         if 'floor' in d:
             o.floor = d['floor']
+        if 'room_area' in d:
+            o.room_area = d['room_area']
         if 'room_no' in d:
             o.room_no = d['room_no']
         return o

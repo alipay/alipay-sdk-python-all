@@ -8,8 +8,16 @@ from alipay.aop.api.constant.ParamConstants import *
 class VoucherUseDetailInfo(object):
 
     def __init__(self):
+        self._voucher_use_amount = None
         self._voucher_use_times = None
 
+    @property
+    def voucher_use_amount(self):
+        return self._voucher_use_amount
+
+    @voucher_use_amount.setter
+    def voucher_use_amount(self, value):
+        self._voucher_use_amount = value
     @property
     def voucher_use_times(self):
         return self._voucher_use_times
@@ -21,6 +29,11 @@ class VoucherUseDetailInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.voucher_use_amount:
+            if hasattr(self.voucher_use_amount, 'to_alipay_dict'):
+                params['voucher_use_amount'] = self.voucher_use_amount.to_alipay_dict()
+            else:
+                params['voucher_use_amount'] = self.voucher_use_amount
         if self.voucher_use_times:
             if hasattr(self.voucher_use_times, 'to_alipay_dict'):
                 params['voucher_use_times'] = self.voucher_use_times.to_alipay_dict()
@@ -33,6 +46,8 @@ class VoucherUseDetailInfo(object):
         if not d:
             return None
         o = VoucherUseDetailInfo()
+        if 'voucher_use_amount' in d:
+            o.voucher_use_amount = d['voucher_use_amount']
         if 'voucher_use_times' in d:
             o.voucher_use_times = d['voucher_use_times']
         return o

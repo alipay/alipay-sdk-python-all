@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalLargermodelFeedbackQueryModel(object):
 
     def __init__(self):
+        self._agent_name = None
         self._feedback_channel = None
         self._scene_code = None
         self._service_status = None
 
+    @property
+    def agent_name(self):
+        return self._agent_name
+
+    @agent_name.setter
+    def agent_name(self, value):
+        self._agent_name = value
     @property
     def feedback_channel(self):
         return self._feedback_channel
@@ -37,6 +45,11 @@ class AlipayCommerceMedicalLargermodelFeedbackQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_name:
+            if hasattr(self.agent_name, 'to_alipay_dict'):
+                params['agent_name'] = self.agent_name.to_alipay_dict()
+            else:
+                params['agent_name'] = self.agent_name
         if self.feedback_channel:
             if hasattr(self.feedback_channel, 'to_alipay_dict'):
                 params['feedback_channel'] = self.feedback_channel.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceMedicalLargermodelFeedbackQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalLargermodelFeedbackQueryModel()
+        if 'agent_name' in d:
+            o.agent_name = d['agent_name']
         if 'feedback_channel' in d:
             o.feedback_channel = d['feedback_channel']
         if 'scene_code' in d:

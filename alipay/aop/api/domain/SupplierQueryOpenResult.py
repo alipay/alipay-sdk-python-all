@@ -13,6 +13,7 @@ class SupplierQueryOpenResult(object):
         self._supplier_id = None
         self._supplier_name = None
         self._supplier_phone = None
+        self._supplier_status = None
 
     @property
     def account_type(self):
@@ -49,6 +50,13 @@ class SupplierQueryOpenResult(object):
     @supplier_phone.setter
     def supplier_phone(self, value):
         self._supplier_phone = value
+    @property
+    def supplier_status(self):
+        return self._supplier_status
+
+    @supplier_status.setter
+    def supplier_status(self, value):
+        self._supplier_status = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class SupplierQueryOpenResult(object):
                 params['supplier_phone'] = self.supplier_phone.to_alipay_dict()
             else:
                 params['supplier_phone'] = self.supplier_phone
+        if self.supplier_status:
+            if hasattr(self.supplier_status, 'to_alipay_dict'):
+                params['supplier_status'] = self.supplier_status.to_alipay_dict()
+            else:
+                params['supplier_status'] = self.supplier_status
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class SupplierQueryOpenResult(object):
             o.supplier_name = d['supplier_name']
         if 'supplier_phone' in d:
             o.supplier_phone = d['supplier_phone']
+        if 'supplier_status' in d:
+            o.supplier_status = d['supplier_status']
         return o
 
 

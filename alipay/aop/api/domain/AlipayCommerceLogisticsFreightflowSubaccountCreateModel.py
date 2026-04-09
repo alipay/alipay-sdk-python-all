@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FreigtFlowAccount import FreigtFlowAccount
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 from alipay.aop.api.domain.FreightFlowSubAccountOwnerInfo import FreightFlowSubAccountOwnerInfo
 
 
@@ -21,6 +22,7 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
         self._out_user_name = None
         self._parent_info = None
         self._partner_id = None
+        self._spdb_spec_params = None
         self._sub_account_owner_info = None
 
     @property
@@ -104,6 +106,16 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
     def partner_id(self, value):
         self._partner_id = value
     @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
+    @property
     def sub_account_owner_info(self):
         return self._sub_account_owner_info
 
@@ -172,6 +184,11 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
                 params['partner_id'] = self.partner_id.to_alipay_dict()
             else:
                 params['partner_id'] = self.partner_id
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
         if self.sub_account_owner_info:
             if hasattr(self.sub_account_owner_info, 'to_alipay_dict'):
                 params['sub_account_owner_info'] = self.sub_account_owner_info.to_alipay_dict()
@@ -206,6 +223,8 @@ class AlipayCommerceLogisticsFreightflowSubaccountCreateModel(object):
             o.parent_info = d['parent_info']
         if 'partner_id' in d:
             o.partner_id = d['partner_id']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
         if 'sub_account_owner_info' in d:
             o.sub_account_owner_info = d['sub_account_owner_info']
         return o

@@ -15,6 +15,7 @@ class AlipayCommerceMedicalOuterorderStatusNotifyModel(object):
         self._doctor_name = None
         self._doctor_title = None
         self._fulfillment_order_id = None
+        self._medical_report_url = None
         self._order_status = None
         self._partner_order_id = None
         self._prescription_url = None
@@ -69,6 +70,13 @@ class AlipayCommerceMedicalOuterorderStatusNotifyModel(object):
     @fulfillment_order_id.setter
     def fulfillment_order_id(self, value):
         self._fulfillment_order_id = value
+    @property
+    def medical_report_url(self):
+        return self._medical_report_url
+
+    @medical_report_url.setter
+    def medical_report_url(self, value):
+        self._medical_report_url = value
     @property
     def order_status(self):
         return self._order_status
@@ -136,6 +144,11 @@ class AlipayCommerceMedicalOuterorderStatusNotifyModel(object):
                 params['fulfillment_order_id'] = self.fulfillment_order_id.to_alipay_dict()
             else:
                 params['fulfillment_order_id'] = self.fulfillment_order_id
+        if self.medical_report_url:
+            if hasattr(self.medical_report_url, 'to_alipay_dict'):
+                params['medical_report_url'] = self.medical_report_url.to_alipay_dict()
+            else:
+                params['medical_report_url'] = self.medical_report_url
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -177,6 +190,8 @@ class AlipayCommerceMedicalOuterorderStatusNotifyModel(object):
             o.doctor_title = d['doctor_title']
         if 'fulfillment_order_id' in d:
             o.fulfillment_order_id = d['fulfillment_order_id']
+        if 'medical_report_url' in d:
+            o.medical_report_url = d['medical_report_url']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'partner_order_id' in d:

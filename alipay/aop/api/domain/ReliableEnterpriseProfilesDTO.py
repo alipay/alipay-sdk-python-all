@@ -17,6 +17,7 @@ class ReliableEnterpriseProfilesDTO(object):
         self._legal_person_cert_no = None
         self._platform_gmt_create = None
         self._tax_no = None
+        self._utm_chain = None
         self._utm_content = None
         self._utm_source = None
 
@@ -84,6 +85,13 @@ class ReliableEnterpriseProfilesDTO(object):
     def tax_no(self, value):
         self._tax_no = value
     @property
+    def utm_chain(self):
+        return self._utm_chain
+
+    @utm_chain.setter
+    def utm_chain(self, value):
+        self._utm_chain = value
+    @property
     def utm_content(self):
         return self._utm_content
 
@@ -146,6 +154,11 @@ class ReliableEnterpriseProfilesDTO(object):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
             else:
                 params['tax_no'] = self.tax_no
+        if self.utm_chain:
+            if hasattr(self.utm_chain, 'to_alipay_dict'):
+                params['utm_chain'] = self.utm_chain.to_alipay_dict()
+            else:
+                params['utm_chain'] = self.utm_chain
         if self.utm_content:
             if hasattr(self.utm_content, 'to_alipay_dict'):
                 params['utm_content'] = self.utm_content.to_alipay_dict()
@@ -181,6 +194,8 @@ class ReliableEnterpriseProfilesDTO(object):
             o.platform_gmt_create = d['platform_gmt_create']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
+        if 'utm_chain' in d:
+            o.utm_chain = d['utm_chain']
         if 'utm_content' in d:
             o.utm_content = d['utm_content']
         if 'utm_source' in d:

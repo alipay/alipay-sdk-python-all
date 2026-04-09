@@ -9,6 +9,7 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
 
     def __init__(self):
         self._aq_open_id = None
+        self._district_code = None
         self._doctor_cert_no = None
         self._doctor_cert_no_encrypt = None
         self._doctor_group = None
@@ -20,10 +21,12 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
         self._encrypt_type = None
         self._sign_biz_id = None
         self._sign_biz_type = None
+        self._sign_date = None
         self._sign_end_date = None
         self._sign_start_date = None
         self._source = None
         self._status = None
+        self._street_code = None
         self._user_cert_no = None
         self._user_cert_no_encrypt = None
         self._user_real_name = None
@@ -36,6 +39,13 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
     @aq_open_id.setter
     def aq_open_id(self, value):
         self._aq_open_id = value
+    @property
+    def district_code(self):
+        return self._district_code
+
+    @district_code.setter
+    def district_code(self, value):
+        self._district_code = value
     @property
     def doctor_cert_no(self):
         return self._doctor_cert_no
@@ -114,6 +124,13 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
     def sign_biz_type(self, value):
         self._sign_biz_type = value
     @property
+    def sign_date(self):
+        return self._sign_date
+
+    @sign_date.setter
+    def sign_date(self, value):
+        self._sign_date = value
+    @property
     def sign_end_date(self):
         return self._sign_end_date
 
@@ -141,6 +158,13 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def street_code(self):
+        return self._street_code
+
+    @street_code.setter
+    def street_code(self, value):
+        self._street_code = value
     @property
     def user_cert_no(self):
         return self._user_cert_no
@@ -178,6 +202,11 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
                 params['aq_open_id'] = self.aq_open_id.to_alipay_dict()
             else:
                 params['aq_open_id'] = self.aq_open_id
+        if self.district_code:
+            if hasattr(self.district_code, 'to_alipay_dict'):
+                params['district_code'] = self.district_code.to_alipay_dict()
+            else:
+                params['district_code'] = self.district_code
         if self.doctor_cert_no:
             if hasattr(self.doctor_cert_no, 'to_alipay_dict'):
                 params['doctor_cert_no'] = self.doctor_cert_no.to_alipay_dict()
@@ -233,6 +262,11 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
                 params['sign_biz_type'] = self.sign_biz_type.to_alipay_dict()
             else:
                 params['sign_biz_type'] = self.sign_biz_type
+        if self.sign_date:
+            if hasattr(self.sign_date, 'to_alipay_dict'):
+                params['sign_date'] = self.sign_date.to_alipay_dict()
+            else:
+                params['sign_date'] = self.sign_date
         if self.sign_end_date:
             if hasattr(self.sign_end_date, 'to_alipay_dict'):
                 params['sign_end_date'] = self.sign_end_date.to_alipay_dict()
@@ -253,6 +287,11 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.street_code:
+            if hasattr(self.street_code, 'to_alipay_dict'):
+                params['street_code'] = self.street_code.to_alipay_dict()
+            else:
+                params['street_code'] = self.street_code
         if self.user_cert_no:
             if hasattr(self.user_cert_no, 'to_alipay_dict'):
                 params['user_cert_no'] = self.user_cert_no.to_alipay_dict()
@@ -282,6 +321,8 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
         o = AlipayCommerceMedicalUserHomedoctorSyncModel()
         if 'aq_open_id' in d:
             o.aq_open_id = d['aq_open_id']
+        if 'district_code' in d:
+            o.district_code = d['district_code']
         if 'doctor_cert_no' in d:
             o.doctor_cert_no = d['doctor_cert_no']
         if 'doctor_cert_no_encrypt' in d:
@@ -304,6 +345,8 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
             o.sign_biz_id = d['sign_biz_id']
         if 'sign_biz_type' in d:
             o.sign_biz_type = d['sign_biz_type']
+        if 'sign_date' in d:
+            o.sign_date = d['sign_date']
         if 'sign_end_date' in d:
             o.sign_end_date = d['sign_end_date']
         if 'sign_start_date' in d:
@@ -312,6 +355,8 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
             o.source = d['source']
         if 'status' in d:
             o.status = d['status']
+        if 'street_code' in d:
+            o.street_code = d['street_code']
         if 'user_cert_no' in d:
             o.user_cert_no = d['user_cert_no']
         if 'user_cert_no_encrypt' in d:

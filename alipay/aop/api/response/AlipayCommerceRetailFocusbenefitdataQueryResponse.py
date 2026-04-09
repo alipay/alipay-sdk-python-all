@@ -10,6 +10,7 @@ class AlipayCommerceRetailFocusbenefitdataQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceRetailFocusbenefitdataQueryResponse, self).__init__()
         self._data_list = None
+        self._digest = None
         self._page_index = None
         self._page_size = None
         self._total_count = None
@@ -21,6 +22,13 @@ class AlipayCommerceRetailFocusbenefitdataQueryResponse(AlipayResponse):
     @data_list.setter
     def data_list(self, value):
         self._data_list = value
+    @property
+    def digest(self):
+        return self._digest
+
+    @digest.setter
+    def digest(self, value):
+        self._digest = value
     @property
     def page_index(self):
         return self._page_index
@@ -47,6 +55,8 @@ class AlipayCommerceRetailFocusbenefitdataQueryResponse(AlipayResponse):
         response = super(AlipayCommerceRetailFocusbenefitdataQueryResponse, self).parse_response_content(response_content)
         if 'data_list' in response:
             self.data_list = response['data_list']
+        if 'digest' in response:
+            self.digest = response['digest']
         if 'page_index' in response:
             self.page_index = response['page_index']
         if 'page_size' in response:

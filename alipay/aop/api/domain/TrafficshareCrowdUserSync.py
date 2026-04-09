@@ -10,6 +10,7 @@ class TrafficshareCrowdUserSync(object):
     def __init__(self):
         self._add_increment_flag = None
         self._device_number = None
+        self._merchant_user_identity = None
         self._operation_type = None
         self._phone_number = None
 
@@ -27,6 +28,13 @@ class TrafficshareCrowdUserSync(object):
     @device_number.setter
     def device_number(self, value):
         self._device_number = value
+    @property
+    def merchant_user_identity(self):
+        return self._merchant_user_identity
+
+    @merchant_user_identity.setter
+    def merchant_user_identity(self, value):
+        self._merchant_user_identity = value
     @property
     def operation_type(self):
         return self._operation_type
@@ -55,6 +63,11 @@ class TrafficshareCrowdUserSync(object):
                 params['device_number'] = self.device_number.to_alipay_dict()
             else:
                 params['device_number'] = self.device_number
+        if self.merchant_user_identity:
+            if hasattr(self.merchant_user_identity, 'to_alipay_dict'):
+                params['merchant_user_identity'] = self.merchant_user_identity.to_alipay_dict()
+            else:
+                params['merchant_user_identity'] = self.merchant_user_identity
         if self.operation_type:
             if hasattr(self.operation_type, 'to_alipay_dict'):
                 params['operation_type'] = self.operation_type.to_alipay_dict()
@@ -76,6 +89,8 @@ class TrafficshareCrowdUserSync(object):
             o.add_increment_flag = d['add_increment_flag']
         if 'device_number' in d:
             o.device_number = d['device_number']
+        if 'merchant_user_identity' in d:
+            o.merchant_user_identity = d['merchant_user_identity']
         if 'operation_type' in d:
             o.operation_type = d['operation_type']
         if 'phone_number' in d:

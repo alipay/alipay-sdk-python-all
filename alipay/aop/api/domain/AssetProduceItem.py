@@ -28,6 +28,7 @@ class AssetProduceItem(object):
         self._data_version = None
         self._district = None
         self._is_combination_order = None
+        self._is_kit_pack = None
         self._logistics_code = None
         self._logistics_name = None
         self._logistics_no = None
@@ -50,6 +51,8 @@ class AssetProduceItem(object):
         self._receiver_mobile = None
         self._receiver_name = None
         self._related_children_out_biz_no_count = None
+        self._related_kit_item_id = None
+        self._related_kit_item_name = None
         self._related_others_out_biz_no = None
         self._related_out_biz_no = None
         self._related_parent_out_biz_no = None
@@ -195,6 +198,13 @@ class AssetProduceItem(object):
     @is_combination_order.setter
     def is_combination_order(self, value):
         self._is_combination_order = value
+    @property
+    def is_kit_pack(self):
+        return self._is_kit_pack
+
+    @is_kit_pack.setter
+    def is_kit_pack(self, value):
+        self._is_kit_pack = value
     @property
     def logistics_code(self):
         return self._logistics_code
@@ -355,6 +365,20 @@ class AssetProduceItem(object):
     @related_children_out_biz_no_count.setter
     def related_children_out_biz_no_count(self, value):
         self._related_children_out_biz_no_count = value
+    @property
+    def related_kit_item_id(self):
+        return self._related_kit_item_id
+
+    @related_kit_item_id.setter
+    def related_kit_item_id(self, value):
+        self._related_kit_item_id = value
+    @property
+    def related_kit_item_name(self):
+        return self._related_kit_item_name
+
+    @related_kit_item_name.setter
+    def related_kit_item_name(self, value):
+        self._related_kit_item_name = value
     @property
     def related_others_out_biz_no(self):
         return self._related_others_out_biz_no
@@ -518,6 +542,11 @@ class AssetProduceItem(object):
                 params['is_combination_order'] = self.is_combination_order.to_alipay_dict()
             else:
                 params['is_combination_order'] = self.is_combination_order
+        if self.is_kit_pack:
+            if hasattr(self.is_kit_pack, 'to_alipay_dict'):
+                params['is_kit_pack'] = self.is_kit_pack.to_alipay_dict()
+            else:
+                params['is_kit_pack'] = self.is_kit_pack
         if self.logistics_code:
             if hasattr(self.logistics_code, 'to_alipay_dict'):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
@@ -633,6 +662,16 @@ class AssetProduceItem(object):
                 params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count.to_alipay_dict()
             else:
                 params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count
+        if self.related_kit_item_id:
+            if hasattr(self.related_kit_item_id, 'to_alipay_dict'):
+                params['related_kit_item_id'] = self.related_kit_item_id.to_alipay_dict()
+            else:
+                params['related_kit_item_id'] = self.related_kit_item_id
+        if self.related_kit_item_name:
+            if hasattr(self.related_kit_item_name, 'to_alipay_dict'):
+                params['related_kit_item_name'] = self.related_kit_item_name.to_alipay_dict()
+            else:
+                params['related_kit_item_name'] = self.related_kit_item_name
         if self.related_others_out_biz_no:
             if isinstance(self.related_others_out_biz_no, list):
                 for i in range(0, len(self.related_others_out_biz_no)):
@@ -723,6 +762,8 @@ class AssetProduceItem(object):
             o.district = d['district']
         if 'is_combination_order' in d:
             o.is_combination_order = d['is_combination_order']
+        if 'is_kit_pack' in d:
+            o.is_kit_pack = d['is_kit_pack']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
         if 'logistics_name' in d:
@@ -767,6 +808,10 @@ class AssetProduceItem(object):
             o.receiver_name = d['receiver_name']
         if 'related_children_out_biz_no_count' in d:
             o.related_children_out_biz_no_count = d['related_children_out_biz_no_count']
+        if 'related_kit_item_id' in d:
+            o.related_kit_item_id = d['related_kit_item_id']
+        if 'related_kit_item_name' in d:
+            o.related_kit_item_name = d['related_kit_item_name']
         if 'related_others_out_biz_no' in d:
             o.related_others_out_biz_no = d['related_others_out_biz_no']
         if 'related_out_biz_no' in d:

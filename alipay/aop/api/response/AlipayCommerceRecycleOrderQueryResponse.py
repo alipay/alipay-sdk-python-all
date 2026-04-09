@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RecycleAuctionInfoVO import RecycleAuctionInfoVO
 from alipay.aop.api.domain.RecycleSubOrderInfoVO import RecycleSubOrderInfoVO
 
 
@@ -10,12 +11,31 @@ class AlipayCommerceRecycleOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceRecycleOrderQueryResponse, self).__init__()
+        self._auction_info = None
+        self._merchant_alias = None
         self._open_id = None
         self._order_id = None
         self._order_status = None
         self._out_order_id = None
         self._sub_order_info_list = None
 
+    @property
+    def auction_info(self):
+        return self._auction_info
+
+    @auction_info.setter
+    def auction_info(self, value):
+        if isinstance(value, RecycleAuctionInfoVO):
+            self._auction_info = value
+        else:
+            self._auction_info = RecycleAuctionInfoVO.from_alipay_dict(value)
+    @property
+    def merchant_alias(self):
+        return self._merchant_alias
+
+    @merchant_alias.setter
+    def merchant_alias(self, value):
+        self._merchant_alias = value
     @property
     def open_id(self):
         return self._open_id
@@ -60,6 +80,10 @@ class AlipayCommerceRecycleOrderQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceRecycleOrderQueryResponse, self).parse_response_content(response_content)
+        if 'auction_info' in response:
+            self.auction_info = response['auction_info']
+        if 'merchant_alias' in response:
+            self.merchant_alias = response['merchant_alias']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'order_id' in response:

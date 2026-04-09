@@ -1,0 +1,75 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+
+
+class AlipayCommerceMedicalDoctoragentconfigQueryResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayCommerceMedicalDoctoragentconfigQueryResponse, self).__init__()
+        self._avatar = None
+        self._avatar_id = None
+        self._discovery_page_avatar = None
+        self._link = None
+        self._status = None
+        self._welcome_card_avatar = None
+
+    @property
+    def avatar(self):
+        return self._avatar
+
+    @avatar.setter
+    def avatar(self, value):
+        self._avatar = value
+    @property
+    def avatar_id(self):
+        return self._avatar_id
+
+    @avatar_id.setter
+    def avatar_id(self, value):
+        self._avatar_id = value
+    @property
+    def discovery_page_avatar(self):
+        return self._discovery_page_avatar
+
+    @discovery_page_avatar.setter
+    def discovery_page_avatar(self, value):
+        self._discovery_page_avatar = value
+    @property
+    def link(self):
+        return self._link
+
+    @link.setter
+    def link(self, value):
+        self._link = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+    @property
+    def welcome_card_avatar(self):
+        return self._welcome_card_avatar
+
+    @welcome_card_avatar.setter
+    def welcome_card_avatar(self, value):
+        self._welcome_card_avatar = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayCommerceMedicalDoctoragentconfigQueryResponse, self).parse_response_content(response_content)
+        if 'avatar' in response:
+            self.avatar = response['avatar']
+        if 'avatar_id' in response:
+            self.avatar_id = response['avatar_id']
+        if 'discovery_page_avatar' in response:
+            self.discovery_page_avatar = response['discovery_page_avatar']
+        if 'link' in response:
+            self.link = response['link']
+        if 'status' in response:
+            self.status = response['status']
+        if 'welcome_card_avatar' in response:
+            self.welcome_card_avatar = response['welcome_card_avatar']

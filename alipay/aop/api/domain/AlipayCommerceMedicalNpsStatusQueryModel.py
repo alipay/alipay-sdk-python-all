@@ -10,6 +10,7 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
     def __init__(self):
         self._entrance_type = None
         self._open_id = None
+        self._org_id = None
         self._out_user_id = None
         self._scene_code = None
 
@@ -27,6 +28,13 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def org_id(self):
+        return self._org_id
+
+    @org_id.setter
+    def org_id(self, value):
+        self._org_id = value
     @property
     def out_user_id(self):
         return self._out_user_id
@@ -55,6 +63,11 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.org_id:
+            if hasattr(self.org_id, 'to_alipay_dict'):
+                params['org_id'] = self.org_id.to_alipay_dict()
+            else:
+                params['org_id'] = self.org_id
         if self.out_user_id:
             if hasattr(self.out_user_id, 'to_alipay_dict'):
                 params['out_user_id'] = self.out_user_id.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayCommerceMedicalNpsStatusQueryModel(object):
             o.entrance_type = d['entrance_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'org_id' in d:
+            o.org_id = d['org_id']
         if 'out_user_id' in d:
             o.out_user_id = d['out_user_id']
         if 'scene_code' in d:

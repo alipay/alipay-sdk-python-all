@@ -3,15 +3,30 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AssistantLicenseInfo import AssistantLicenseInfo
 
 
 class ZhimaCreditEpAssistantMembershippackageCreateResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaCreditEpAssistantMembershippackageCreateResponse, self).__init__()
+        self._license_detail_list = None
         self._licenses = None
         self._package_id = None
 
+    @property
+    def license_detail_list(self):
+        return self._license_detail_list
+
+    @license_detail_list.setter
+    def license_detail_list(self, value):
+        if isinstance(value, list):
+            self._license_detail_list = list()
+            for i in value:
+                if isinstance(i, AssistantLicenseInfo):
+                    self._license_detail_list.append(i)
+                else:
+                    self._license_detail_list.append(AssistantLicenseInfo.from_alipay_dict(i))
     @property
     def licenses(self):
         return self._licenses
@@ -32,6 +47,8 @@ class ZhimaCreditEpAssistantMembershippackageCreateResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditEpAssistantMembershippackageCreateResponse, self).parse_response_content(response_content)
+        if 'license_detail_list' in response:
+            self.license_detail_list = response['license_detail_list']
         if 'licenses' in response:
             self.licenses = response['licenses']
         if 'package_id' in response:

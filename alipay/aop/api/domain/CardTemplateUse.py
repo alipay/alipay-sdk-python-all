@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.LifeserviceItemCalendarPrice import LifeserviceItemCalendarPrice
 from alipay.aop.api.domain.CardCycle import CardCycle
 from alipay.aop.api.domain.CardDiscountRecoverRule import CardDiscountRecoverRule
 from alipay.aop.api.domain.CardPeriodPrice import CardPeriodPrice
@@ -13,10 +14,12 @@ from alipay.aop.api.domain.CardUseMethodInfo import CardUseMethodInfo
 class CardTemplateUse(object):
 
     def __init__(self):
+        self._calendar_price = None
         self._cycle_info = None
         self._discount_recover_rule_info = None
         self._expire_period = None
         self._period_price_list = None
+        self._price_mode = None
         self._purchase_notice = None
         self._reservation_url = None
         self._show_shop = None
@@ -26,6 +29,16 @@ class CardTemplateUse(object):
         self._use_instruction = None
         self._use_method = None
 
+    @property
+    def calendar_price(self):
+        return self._calendar_price
+
+    @calendar_price.setter
+    def calendar_price(self, value):
+        if isinstance(value, LifeserviceItemCalendarPrice):
+            self._calendar_price = value
+        else:
+            self._calendar_price = LifeserviceItemCalendarPrice.from_alipay_dict(value)
     @property
     def cycle_info(self):
         return self._cycle_info
@@ -66,6 +79,13 @@ class CardTemplateUse(object):
                     self._period_price_list.append(i)
                 else:
                     self._period_price_list.append(CardPeriodPrice.from_alipay_dict(i))
+    @property
+    def price_mode(self):
+        return self._price_mode
+
+    @price_mode.setter
+    def price_mode(self, value):
+        self._price_mode = value
     @property
     def purchase_notice(self):
         return self._purchase_notice
@@ -141,6 +161,11 @@ class CardTemplateUse(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.calendar_price:
+            if hasattr(self.calendar_price, 'to_alipay_dict'):
+                params['calendar_price'] = self.calendar_price.to_alipay_dict()
+            else:
+                params['calendar_price'] = self.calendar_price
         if self.cycle_info:
             if hasattr(self.cycle_info, 'to_alipay_dict'):
                 params['cycle_info'] = self.cycle_info.to_alipay_dict()
@@ -166,6 +191,11 @@ class CardTemplateUse(object):
                 params['period_price_list'] = self.period_price_list.to_alipay_dict()
             else:
                 params['period_price_list'] = self.period_price_list
+        if self.price_mode:
+            if hasattr(self.price_mode, 'to_alipay_dict'):
+                params['price_mode'] = self.price_mode.to_alipay_dict()
+            else:
+                params['price_mode'] = self.price_mode
         if self.purchase_notice:
             if hasattr(self.purchase_notice, 'to_alipay_dict'):
                 params['purchase_notice'] = self.purchase_notice.to_alipay_dict()
@@ -228,6 +258,8 @@ class CardTemplateUse(object):
         if not d:
             return None
         o = CardTemplateUse()
+        if 'calendar_price' in d:
+            o.calendar_price = d['calendar_price']
         if 'cycle_info' in d:
             o.cycle_info = d['cycle_info']
         if 'discount_recover_rule_info' in d:
@@ -236,6 +268,8 @@ class CardTemplateUse(object):
             o.expire_period = d['expire_period']
         if 'period_price_list' in d:
             o.period_price_list = d['period_price_list']
+        if 'price_mode' in d:
+            o.price_mode = d['price_mode']
         if 'purchase_notice' in d:
             o.purchase_notice = d['purchase_notice']
         if 'reservation_url' in d:

@@ -12,6 +12,7 @@ from alipay.aop.api.domain.ProductDetail import ProductDetail
 from alipay.aop.api.domain.ProductPriceInfo import ProductPriceInfo
 from alipay.aop.api.domain.InteOpShopInfo import InteOpShopInfo
 from alipay.aop.api.domain.InteOpSpecialLicenseInfo import InteOpSpecialLicenseInfo
+from alipay.aop.api.domain.InteOpSpecialLicenseInfo import InteOpSpecialLicenseInfo
 from alipay.aop.api.domain.InteOpWebSiteInfo import InteOpWebSiteInfo
 
 
@@ -28,6 +29,7 @@ class AlipayOpenSpInteopProductCreateModel(object):
         self._inteop_product_price_details = None
         self._inteop_shop_info = None
         self._inteop_special_license_info = None
+        self._inteop_special_license_infos = None
         self._inteop_web_site_info = None
         self._mcc_code = None
         self._mobile_type = None
@@ -138,6 +140,19 @@ class AlipayOpenSpInteopProductCreateModel(object):
         else:
             self._inteop_special_license_info = InteOpSpecialLicenseInfo.from_alipay_dict(value)
     @property
+    def inteop_special_license_infos(self):
+        return self._inteop_special_license_infos
+
+    @inteop_special_license_infos.setter
+    def inteop_special_license_infos(self, value):
+        if isinstance(value, list):
+            self._inteop_special_license_infos = list()
+            for i in value:
+                if isinstance(i, InteOpSpecialLicenseInfo):
+                    self._inteop_special_license_infos.append(i)
+                else:
+                    self._inteop_special_license_infos.append(InteOpSpecialLicenseInfo.from_alipay_dict(i))
+    @property
     def inteop_web_site_info(self):
         return self._inteop_web_site_info
 
@@ -239,6 +254,16 @@ class AlipayOpenSpInteopProductCreateModel(object):
                 params['inteop_special_license_info'] = self.inteop_special_license_info.to_alipay_dict()
             else:
                 params['inteop_special_license_info'] = self.inteop_special_license_info
+        if self.inteop_special_license_infos:
+            if isinstance(self.inteop_special_license_infos, list):
+                for i in range(0, len(self.inteop_special_license_infos)):
+                    element = self.inteop_special_license_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.inteop_special_license_infos[i] = element.to_alipay_dict()
+            if hasattr(self.inteop_special_license_infos, 'to_alipay_dict'):
+                params['inteop_special_license_infos'] = self.inteop_special_license_infos.to_alipay_dict()
+            else:
+                params['inteop_special_license_infos'] = self.inteop_special_license_infos
         if self.inteop_web_site_info:
             if hasattr(self.inteop_web_site_info, 'to_alipay_dict'):
                 params['inteop_web_site_info'] = self.inteop_web_site_info.to_alipay_dict()
@@ -291,6 +316,8 @@ class AlipayOpenSpInteopProductCreateModel(object):
             o.inteop_shop_info = d['inteop_shop_info']
         if 'inteop_special_license_info' in d:
             o.inteop_special_license_info = d['inteop_special_license_info']
+        if 'inteop_special_license_infos' in d:
+            o.inteop_special_license_infos = d['inteop_special_license_infos']
         if 'inteop_web_site_info' in d:
             o.inteop_web_site_info = d['inteop_web_site_info']
         if 'mcc_code' in d:

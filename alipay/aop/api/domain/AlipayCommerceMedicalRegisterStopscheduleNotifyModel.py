@@ -12,9 +12,11 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
         self._hospital_id = None
         self._isv_code = None
         self._notify_type = None
+        self._number_ids = None
         self._platform_code = None
         self._reason = None
         self._register_ids = None
+        self._stop_prop = None
         self._type = None
 
     @property
@@ -46,6 +48,13 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
     def notify_type(self, value):
         self._notify_type = value
     @property
+    def number_ids(self):
+        return self._number_ids
+
+    @number_ids.setter
+    def number_ids(self, value):
+        self._number_ids = value
+    @property
     def platform_code(self):
         return self._platform_code
 
@@ -66,6 +75,13 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
     @register_ids.setter
     def register_ids(self, value):
         self._register_ids = value
+    @property
+    def stop_prop(self):
+        return self._stop_prop
+
+    @stop_prop.setter
+    def stop_prop(self, value):
+        self._stop_prop = value
     @property
     def type(self):
         return self._type
@@ -97,6 +113,11 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
                 params['notify_type'] = self.notify_type.to_alipay_dict()
             else:
                 params['notify_type'] = self.notify_type
+        if self.number_ids:
+            if hasattr(self.number_ids, 'to_alipay_dict'):
+                params['number_ids'] = self.number_ids.to_alipay_dict()
+            else:
+                params['number_ids'] = self.number_ids
         if self.platform_code:
             if hasattr(self.platform_code, 'to_alipay_dict'):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
@@ -112,6 +133,11 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
                 params['register_ids'] = self.register_ids.to_alipay_dict()
             else:
                 params['register_ids'] = self.register_ids
+        if self.stop_prop:
+            if hasattr(self.stop_prop, 'to_alipay_dict'):
+                params['stop_prop'] = self.stop_prop.to_alipay_dict()
+            else:
+                params['stop_prop'] = self.stop_prop
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -132,12 +158,16 @@ class AlipayCommerceMedicalRegisterStopscheduleNotifyModel(object):
             o.isv_code = d['isv_code']
         if 'notify_type' in d:
             o.notify_type = d['notify_type']
+        if 'number_ids' in d:
+            o.number_ids = d['number_ids']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
         if 'reason' in d:
             o.reason = d['reason']
         if 'register_ids' in d:
             o.register_ids = d['register_ids']
+        if 'stop_prop' in d:
+            o.stop_prop = d['stop_prop']
         if 'type' in d:
             o.type = d['type']
         return o

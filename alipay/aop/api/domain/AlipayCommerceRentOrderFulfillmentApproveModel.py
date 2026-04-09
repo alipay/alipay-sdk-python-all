@@ -3,17 +3,29 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FulfillmentApproveExtraInfo import FulfillmentApproveExtraInfo
 
 
 class AlipayCommerceRentOrderFulfillmentApproveModel(object):
 
     def __init__(self):
+        self._extra_info = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
         self._reason_code = None
         self._user_id = None
 
+    @property
+    def extra_info(self):
+        return self._extra_info
+
+    @extra_info.setter
+    def extra_info(self, value):
+        if isinstance(value, FulfillmentApproveExtraInfo):
+            self._extra_info = value
+        else:
+            self._extra_info = FulfillmentApproveExtraInfo.from_alipay_dict(value)
     @property
     def open_id(self):
         return self._open_id
@@ -53,6 +65,11 @@ class AlipayCommerceRentOrderFulfillmentApproveModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.extra_info:
+            if hasattr(self.extra_info, 'to_alipay_dict'):
+                params['extra_info'] = self.extra_info.to_alipay_dict()
+            else:
+                params['extra_info'] = self.extra_info
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -85,6 +102,8 @@ class AlipayCommerceRentOrderFulfillmentApproveModel(object):
         if not d:
             return None
         o = AlipayCommerceRentOrderFulfillmentApproveModel()
+        if 'extra_info' in d:
+            o.extra_info = d['extra_info']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

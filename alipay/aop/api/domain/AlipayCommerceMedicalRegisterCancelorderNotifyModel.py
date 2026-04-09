@@ -11,6 +11,7 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
         self._alipay_user_id = None
         self._isv_code = None
         self._number_no = None
+        self._open_id = None
         self._order_id = None
         self._platform_code = None
         self._register_id = None
@@ -36,6 +37,13 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
     @number_no.setter
     def number_no(self, value):
         self._number_no = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -76,6 +84,11 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
                 params['number_no'] = self.number_no.to_alipay_dict()
             else:
                 params['number_no'] = self.number_no
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommerceMedicalRegisterCancelorderNotifyModel(object):
             o.isv_code = d['isv_code']
         if 'number_no' in d:
             o.number_no = d['number_no']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'platform_code' in d:

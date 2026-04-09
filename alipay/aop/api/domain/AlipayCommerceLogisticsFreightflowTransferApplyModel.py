@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FreightFlowParticipantInfo import FreightFlowParticipantInfo
 from alipay.aop.api.domain.FreightFlowParticipantInfo import FreightFlowParticipantInfo
+from alipay.aop.api.domain.FreightFlowSpdbSpecParams import FreightFlowSpdbSpecParams
 from alipay.aop.api.domain.FreightFlowWaybillInfo import FreightFlowWaybillInfo
 
 
@@ -23,6 +24,7 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
         self._payee_participant = None
         self._payer_participant = None
         self._request_time = None
+        self._spdb_spec_params = None
         self._trans_purpose = None
         self._waybill_info = None
 
@@ -117,6 +119,16 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
     def request_time(self, value):
         self._request_time = value
     @property
+    def spdb_spec_params(self):
+        return self._spdb_spec_params
+
+    @spdb_spec_params.setter
+    def spdb_spec_params(self, value):
+        if isinstance(value, FreightFlowSpdbSpecParams):
+            self._spdb_spec_params = value
+        else:
+            self._spdb_spec_params = FreightFlowSpdbSpecParams.from_alipay_dict(value)
+    @property
     def trans_purpose(self):
         return self._trans_purpose
 
@@ -197,6 +209,11 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
                 params['request_time'] = self.request_time.to_alipay_dict()
             else:
                 params['request_time'] = self.request_time
+        if self.spdb_spec_params:
+            if hasattr(self.spdb_spec_params, 'to_alipay_dict'):
+                params['spdb_spec_params'] = self.spdb_spec_params.to_alipay_dict()
+            else:
+                params['spdb_spec_params'] = self.spdb_spec_params
         if self.trans_purpose:
             if hasattr(self.trans_purpose, 'to_alipay_dict'):
                 params['trans_purpose'] = self.trans_purpose.to_alipay_dict()
@@ -238,6 +255,8 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
             o.payer_participant = d['payer_participant']
         if 'request_time' in d:
             o.request_time = d['request_time']
+        if 'spdb_spec_params' in d:
+            o.spdb_spec_params = d['spdb_spec_params']
         if 'trans_purpose' in d:
             o.trans_purpose = d['trans_purpose']
         if 'waybill_info' in d:

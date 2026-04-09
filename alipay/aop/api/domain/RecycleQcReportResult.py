@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class RecycleQcReportResult(object):
 
     def __init__(self):
+        self._defect_option = None
         self._image_id_list = None
         self._option_code = None
         self._text = None
 
+    @property
+    def defect_option(self):
+        return self._defect_option
+
+    @defect_option.setter
+    def defect_option(self, value):
+        self._defect_option = value
     @property
     def image_id_list(self):
         return self._image_id_list
@@ -40,6 +48,11 @@ class RecycleQcReportResult(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.defect_option:
+            if hasattr(self.defect_option, 'to_alipay_dict'):
+                params['defect_option'] = self.defect_option.to_alipay_dict()
+            else:
+                params['defect_option'] = self.defect_option
         if self.image_id_list:
             if isinstance(self.image_id_list, list):
                 for i in range(0, len(self.image_id_list)):
@@ -67,6 +80,8 @@ class RecycleQcReportResult(object):
         if not d:
             return None
         o = RecycleQcReportResult()
+        if 'defect_option' in d:
+            o.defect_option = d['defect_option']
         if 'image_id_list' in d:
             o.image_id_list = d['image_id_list']
         if 'option_code' in d:

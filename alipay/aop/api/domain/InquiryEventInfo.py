@@ -11,6 +11,7 @@ class InquiryEventInfo(object):
         self._consult_summary_url = None
         self._consult_time = None
         self._doctor_name = None
+        self._medical_report_url = None
         self._patient_name = None
         self._prescription_url = None
         self._reserve_jump_url = None
@@ -38,6 +39,13 @@ class InquiryEventInfo(object):
     @doctor_name.setter
     def doctor_name(self, value):
         self._doctor_name = value
+    @property
+    def medical_report_url(self):
+        return self._medical_report_url
+
+    @medical_report_url.setter
+    def medical_report_url(self, value):
+        self._medical_report_url = value
     @property
     def patient_name(self):
         return self._patient_name
@@ -92,6 +100,11 @@ class InquiryEventInfo(object):
                 params['doctor_name'] = self.doctor_name.to_alipay_dict()
             else:
                 params['doctor_name'] = self.doctor_name
+        if self.medical_report_url:
+            if hasattr(self.medical_report_url, 'to_alipay_dict'):
+                params['medical_report_url'] = self.medical_report_url.to_alipay_dict()
+            else:
+                params['medical_report_url'] = self.medical_report_url
         if self.patient_name:
             if hasattr(self.patient_name, 'to_alipay_dict'):
                 params['patient_name'] = self.patient_name.to_alipay_dict()
@@ -130,6 +143,8 @@ class InquiryEventInfo(object):
             o.consult_time = d['consult_time']
         if 'doctor_name' in d:
             o.doctor_name = d['doctor_name']
+        if 'medical_report_url' in d:
+            o.medical_report_url = d['medical_report_url']
         if 'patient_name' in d:
             o.patient_name = d['patient_name']
         if 'prescription_url' in d:

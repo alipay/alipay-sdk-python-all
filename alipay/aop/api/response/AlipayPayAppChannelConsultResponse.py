@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ChannelInfo import ChannelInfo
+from alipay.aop.api.domain.BizExtInfo import BizExtInfo
 
 
 class AlipayPayAppChannelConsultResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
     def __init__(self):
         super(AlipayPayAppChannelConsultResponse, self).__init__()
         self._channel_info_list = None
+        self._ext_info = None
         self._pre_consult_id = None
         self._real_alipay_account_id = None
         self._real_alipay_open_id = None
@@ -30,6 +32,16 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
                     self._channel_info_list.append(i)
                 else:
                     self._channel_info_list.append(ChannelInfo.from_alipay_dict(i))
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, BizExtInfo):
+            self._ext_info = value
+        else:
+            self._ext_info = BizExtInfo.from_alipay_dict(value)
     @property
     def pre_consult_id(self):
         return self._pre_consult_id
@@ -70,6 +82,8 @@ class AlipayPayAppChannelConsultResponse(AlipayResponse):
         response = super(AlipayPayAppChannelConsultResponse, self).parse_response_content(response_content)
         if 'channel_info_list' in response:
             self.channel_info_list = response['channel_info_list']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
         if 'pre_consult_id' in response:
             self.pre_consult_id = response['pre_consult_id']
         if 'real_alipay_account_id' in response:

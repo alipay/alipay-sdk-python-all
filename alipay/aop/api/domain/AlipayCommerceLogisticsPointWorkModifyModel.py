@@ -21,6 +21,7 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
         self._old_point_id = None
         self._operator_type = None
         self._out_place_id = None
+        self._tenant_code = None
         self._work_place_address = None
         self._work_point_address = None
 
@@ -102,6 +103,13 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
     def out_place_id(self, value):
         self._out_place_id = value
     @property
+    def tenant_code(self):
+        return self._tenant_code
+
+    @tenant_code.setter
+    def tenant_code(self, value):
+        self._tenant_code = value
+    @property
     def work_place_address(self):
         return self._work_place_address
 
@@ -180,6 +188,11 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
                 params['out_place_id'] = self.out_place_id.to_alipay_dict()
             else:
                 params['out_place_id'] = self.out_place_id
+        if self.tenant_code:
+            if hasattr(self.tenant_code, 'to_alipay_dict'):
+                params['tenant_code'] = self.tenant_code.to_alipay_dict()
+            else:
+                params['tenant_code'] = self.tenant_code
         if self.work_place_address:
             if hasattr(self.work_place_address, 'to_alipay_dict'):
                 params['work_place_address'] = self.work_place_address.to_alipay_dict()
@@ -219,6 +232,8 @@ class AlipayCommerceLogisticsPointWorkModifyModel(object):
             o.operator_type = d['operator_type']
         if 'out_place_id' in d:
             o.out_place_id = d['out_place_id']
+        if 'tenant_code' in d:
+            o.tenant_code = d['tenant_code']
         if 'work_place_address' in d:
             o.work_place_address = d['work_place_address']
         if 'work_point_address' in d:

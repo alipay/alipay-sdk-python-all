@@ -10,6 +10,7 @@ class AlipayTradePrecreateResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradePrecreateResponse, self).__init__()
         self._out_trade_no = None
+        self._prepay_id = None
         self._qr_code = None
         self._share_code = None
 
@@ -20,6 +21,13 @@ class AlipayTradePrecreateResponse(AlipayResponse):
     @out_trade_no.setter
     def out_trade_no(self, value):
         self._out_trade_no = value
+    @property
+    def prepay_id(self):
+        return self._prepay_id
+
+    @prepay_id.setter
+    def prepay_id(self, value):
+        self._prepay_id = value
     @property
     def qr_code(self):
         return self._qr_code
@@ -39,6 +47,8 @@ class AlipayTradePrecreateResponse(AlipayResponse):
         response = super(AlipayTradePrecreateResponse, self).parse_response_content(response_content)
         if 'out_trade_no' in response:
             self.out_trade_no = response['out_trade_no']
+        if 'prepay_id' in response:
+            self.prepay_id = response['prepay_id']
         if 'qr_code' in response:
             self.qr_code = response['qr_code']
         if 'share_code' in response:

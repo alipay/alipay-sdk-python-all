@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.BenefitSendTime import BenefitSendTime
+from alipay.aop.api.domain.CombinePrizeDiscountInfo import CombinePrizeDiscountInfo
 from alipay.aop.api.domain.CouponEffectTime import CouponEffectTime
 from alipay.aop.api.domain.CouponTemplateConsumeInfo import CouponTemplateConsumeInfo
 from alipay.aop.api.domain.DiscountInfoConfig import DiscountInfoConfig
@@ -19,6 +20,7 @@ class AlipayUserDtbankcustChannelvoucherconfigQueryResponse(AlipayResponse):
         self._bank_card_type = None
         self._benefit_send_time = None
         self._card_bin_list = None
+        self._combine_prize_discount_info = None
         self._coupon_effect_time = None
         self._coupon_template_consume_info = None
         self._discount_info_config = None
@@ -74,6 +76,16 @@ class AlipayUserDtbankcustChannelvoucherconfigQueryResponse(AlipayResponse):
             self._card_bin_list = list()
             for i in value:
                 self._card_bin_list.append(i)
+    @property
+    def combine_prize_discount_info(self):
+        return self._combine_prize_discount_info
+
+    @combine_prize_discount_info.setter
+    def combine_prize_discount_info(self, value):
+        if isinstance(value, CombinePrizeDiscountInfo):
+            self._combine_prize_discount_info = value
+        else:
+            self._combine_prize_discount_info = CombinePrizeDiscountInfo.from_alipay_dict(value)
     @property
     def coupon_effect_time(self):
         return self._coupon_effect_time
@@ -143,6 +155,8 @@ class AlipayUserDtbankcustChannelvoucherconfigQueryResponse(AlipayResponse):
             self.benefit_send_time = response['benefit_send_time']
         if 'card_bin_list' in response:
             self.card_bin_list = response['card_bin_list']
+        if 'combine_prize_discount_info' in response:
+            self.combine_prize_discount_info = response['combine_prize_discount_info']
         if 'coupon_effect_time' in response:
             self.coupon_effect_time = response['coupon_effect_time']
         if 'coupon_template_consume_info' in response:

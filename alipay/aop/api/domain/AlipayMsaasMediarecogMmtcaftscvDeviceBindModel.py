@@ -8,13 +8,22 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
 
     def __init__(self):
+        self._device_door_type = None
         self._device_id = None
         self._dynamic_device = None
         self._isv_pid = None
         self._isv_tid = None
+        self._position = None
         self._register_type = None
         self._weight_device = None
 
+    @property
+    def device_door_type(self):
+        return self._device_door_type
+
+    @device_door_type.setter
+    def device_door_type(self, value):
+        self._device_door_type = value
     @property
     def device_id(self):
         return self._device_id
@@ -44,6 +53,13 @@ class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
     def isv_tid(self, value):
         self._isv_tid = value
     @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, value):
+        self._position = value
+    @property
     def register_type(self):
         return self._register_type
 
@@ -61,6 +77,11 @@ class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.device_door_type:
+            if hasattr(self.device_door_type, 'to_alipay_dict'):
+                params['device_door_type'] = self.device_door_type.to_alipay_dict()
+            else:
+                params['device_door_type'] = self.device_door_type
         if self.device_id:
             if hasattr(self.device_id, 'to_alipay_dict'):
                 params['device_id'] = self.device_id.to_alipay_dict()
@@ -81,6 +102,11 @@ class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
                 params['isv_tid'] = self.isv_tid.to_alipay_dict()
             else:
                 params['isv_tid'] = self.isv_tid
+        if self.position:
+            if hasattr(self.position, 'to_alipay_dict'):
+                params['position'] = self.position.to_alipay_dict()
+            else:
+                params['position'] = self.position
         if self.register_type:
             if hasattr(self.register_type, 'to_alipay_dict'):
                 params['register_type'] = self.register_type.to_alipay_dict()
@@ -98,6 +124,8 @@ class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
         if not d:
             return None
         o = AlipayMsaasMediarecogMmtcaftscvDeviceBindModel()
+        if 'device_door_type' in d:
+            o.device_door_type = d['device_door_type']
         if 'device_id' in d:
             o.device_id = d['device_id']
         if 'dynamic_device' in d:
@@ -106,6 +134,8 @@ class AlipayMsaasMediarecogMmtcaftscvDeviceBindModel(object):
             o.isv_pid = d['isv_pid']
         if 'isv_tid' in d:
             o.isv_tid = d['isv_tid']
+        if 'position' in d:
+            o.position = d['position']
         if 'register_type' in d:
             o.register_type = d['register_type']
         if 'weight_device' in d:

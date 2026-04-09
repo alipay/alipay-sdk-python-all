@@ -32,6 +32,7 @@ class AlipayTradePrecreateModel(object):
         self._operator_id = None
         self._out_trade_no = None
         self._passback_params = None
+        self._payment_type = None
         self._product_code = None
         self._qr_code_timeout_express = None
         self._query_options = None
@@ -177,6 +178,13 @@ class AlipayTradePrecreateModel(object):
     @passback_params.setter
     def passback_params(self, value):
         self._passback_params = value
+    @property
+    def payment_type(self):
+        return self._payment_type
+
+    @payment_type.setter
+    def payment_type(self, value):
+        self._payment_type = value
     @property
     def product_code(self):
         return self._product_code
@@ -376,6 +384,11 @@ class AlipayTradePrecreateModel(object):
                 params['passback_params'] = self.passback_params.to_alipay_dict()
             else:
                 params['passback_params'] = self.passback_params
+        if self.payment_type:
+            if hasattr(self.payment_type, 'to_alipay_dict'):
+                params['payment_type'] = self.payment_type.to_alipay_dict()
+            else:
+                params['payment_type'] = self.payment_type
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -490,6 +503,8 @@ class AlipayTradePrecreateModel(object):
             o.out_trade_no = d['out_trade_no']
         if 'passback_params' in d:
             o.passback_params = d['passback_params']
+        if 'payment_type' in d:
+            o.payment_type = d['payment_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'qr_code_timeout_express' in d:

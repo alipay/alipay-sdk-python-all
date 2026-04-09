@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FundConstraints import FundConstraints
 
 
 class AlipayCommerceEcFundSignApplyModel(object):
@@ -11,6 +12,7 @@ class AlipayCommerceEcFundSignApplyModel(object):
         self._account_type = None
         self._enterprise_id = None
         self._fund_account_type = None
+        self._fund_constraint = None
         self._fund_source = None
         self._identity_verify = None
         self._sign_terminal = None
@@ -39,6 +41,16 @@ class AlipayCommerceEcFundSignApplyModel(object):
     @fund_account_type.setter
     def fund_account_type(self, value):
         self._fund_account_type = value
+    @property
+    def fund_constraint(self):
+        return self._fund_constraint
+
+    @fund_constraint.setter
+    def fund_constraint(self, value):
+        if isinstance(value, FundConstraints):
+            self._fund_constraint = value
+        else:
+            self._fund_constraint = FundConstraints.from_alipay_dict(value)
     @property
     def fund_source(self):
         return self._fund_source
@@ -100,6 +112,11 @@ class AlipayCommerceEcFundSignApplyModel(object):
                 params['fund_account_type'] = self.fund_account_type.to_alipay_dict()
             else:
                 params['fund_account_type'] = self.fund_account_type
+        if self.fund_constraint:
+            if hasattr(self.fund_constraint, 'to_alipay_dict'):
+                params['fund_constraint'] = self.fund_constraint.to_alipay_dict()
+            else:
+                params['fund_constraint'] = self.fund_constraint
         if self.fund_source:
             if hasattr(self.fund_source, 'to_alipay_dict'):
                 params['fund_source'] = self.fund_source.to_alipay_dict()
@@ -143,6 +160,8 @@ class AlipayCommerceEcFundSignApplyModel(object):
             o.enterprise_id = d['enterprise_id']
         if 'fund_account_type' in d:
             o.fund_account_type = d['fund_account_type']
+        if 'fund_constraint' in d:
+            o.fund_constraint = d['fund_constraint']
         if 'fund_source' in d:
             o.fund_source = d['fund_source']
         if 'identity_verify' in d:

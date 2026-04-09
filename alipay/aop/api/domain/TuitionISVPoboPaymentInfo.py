@@ -19,6 +19,7 @@ class TuitionISVPoboPaymentInfo(object):
         self._card_no = None
         self._card_start_date = None
         self._cvv = None
+        self._cvv_encrypted = None
         self._pre_order_id = None
         self._quote_price = None
 
@@ -92,6 +93,13 @@ class TuitionISVPoboPaymentInfo(object):
     def cvv(self, value):
         self._cvv = value
     @property
+    def cvv_encrypted(self):
+        return self._cvv_encrypted
+
+    @cvv_encrypted.setter
+    def cvv_encrypted(self, value):
+        self._cvv_encrypted = value
+    @property
     def pre_order_id(self):
         return self._pre_order_id
 
@@ -154,6 +162,11 @@ class TuitionISVPoboPaymentInfo(object):
                 params['cvv'] = self.cvv.to_alipay_dict()
             else:
                 params['cvv'] = self.cvv
+        if self.cvv_encrypted:
+            if hasattr(self.cvv_encrypted, 'to_alipay_dict'):
+                params['cvv_encrypted'] = self.cvv_encrypted.to_alipay_dict()
+            else:
+                params['cvv_encrypted'] = self.cvv_encrypted
         if self.pre_order_id:
             if hasattr(self.pre_order_id, 'to_alipay_dict'):
                 params['pre_order_id'] = self.pre_order_id.to_alipay_dict()
@@ -189,6 +202,8 @@ class TuitionISVPoboPaymentInfo(object):
             o.card_start_date = d['card_start_date']
         if 'cvv' in d:
             o.cvv = d['cvv']
+        if 'cvv_encrypted' in d:
+            o.cvv_encrypted = d['cvv_encrypted']
         if 'pre_order_id' in d:
             o.pre_order_id = d['pre_order_id']
         if 'quote_price' in d:

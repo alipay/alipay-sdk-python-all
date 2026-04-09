@@ -32,6 +32,7 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._merchant_name = None
         self._out_item_id = None
         self._path = None
+        self._poi_ids = None
         self._risk_info = None
         self._scene_risk_info = None
         self._skus = None
@@ -169,6 +170,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     def path(self, value):
         self._path = value
     @property
+    def poi_ids(self):
+        return self._poi_ids
+
+    @poi_ids.setter
+    def poi_ids(self, value):
+        self._poi_ids = value
+    @property
     def risk_info(self):
         return self._risk_info
 
@@ -285,6 +293,8 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.out_item_id = response['out_item_id']
         if 'path' in response:
             self.path = response['path']
+        if 'poi_ids' in response:
+            self.poi_ids = response['poi_ids']
         if 'risk_info' in response:
             self.risk_info = response['risk_info']
         if 'scene_risk_info' in response:

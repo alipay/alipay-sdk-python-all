@@ -10,6 +10,7 @@ class RecycleQcReportSummaryInfo(object):
     def __init__(self):
         self._image_id_list = None
         self._inconsistent_text = None
+        self._product_real_image_id_list = None
         self._text = None
 
     @property
@@ -29,6 +30,16 @@ class RecycleQcReportSummaryInfo(object):
     @inconsistent_text.setter
     def inconsistent_text(self, value):
         self._inconsistent_text = value
+    @property
+    def product_real_image_id_list(self):
+        return self._product_real_image_id_list
+
+    @product_real_image_id_list.setter
+    def product_real_image_id_list(self, value):
+        if isinstance(value, list):
+            self._product_real_image_id_list = list()
+            for i in value:
+                self._product_real_image_id_list.append(i)
     @property
     def text(self):
         return self._text
@@ -55,6 +66,16 @@ class RecycleQcReportSummaryInfo(object):
                 params['inconsistent_text'] = self.inconsistent_text.to_alipay_dict()
             else:
                 params['inconsistent_text'] = self.inconsistent_text
+        if self.product_real_image_id_list:
+            if isinstance(self.product_real_image_id_list, list):
+                for i in range(0, len(self.product_real_image_id_list)):
+                    element = self.product_real_image_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.product_real_image_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.product_real_image_id_list, 'to_alipay_dict'):
+                params['product_real_image_id_list'] = self.product_real_image_id_list.to_alipay_dict()
+            else:
+                params['product_real_image_id_list'] = self.product_real_image_id_list
         if self.text:
             if hasattr(self.text, 'to_alipay_dict'):
                 params['text'] = self.text.to_alipay_dict()
@@ -71,6 +92,8 @@ class RecycleQcReportSummaryInfo(object):
             o.image_id_list = d['image_id_list']
         if 'inconsistent_text' in d:
             o.inconsistent_text = d['inconsistent_text']
+        if 'product_real_image_id_list' in d:
+            o.product_real_image_id_list = d['product_real_image_id_list']
         if 'text' in d:
             o.text = d['text']
         return o

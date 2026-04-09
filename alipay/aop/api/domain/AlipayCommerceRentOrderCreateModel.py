@@ -24,6 +24,7 @@ class AlipayCommerceRentOrderCreateModel(object):
     def __init__(self):
         self._activity_consult_id = None
         self._address_info = None
+        self._biz_identity = None
         self._buyer_id = None
         self._buyer_open_id = None
         self._buyout_info = None
@@ -67,6 +68,13 @@ class AlipayCommerceRentOrderCreateModel(object):
             self._address_info = value
         else:
             self._address_info = RentOrderReceiverAddressInfoDTO.from_alipay_dict(value)
+    @property
+    def biz_identity(self):
+        return self._biz_identity
+
+    @biz_identity.setter
+    def biz_identity(self, value):
+        self._biz_identity = value
     @property
     def buyer_id(self):
         return self._buyer_id
@@ -298,6 +306,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['address_info'] = self.address_info.to_alipay_dict()
             else:
                 params['address_info'] = self.address_info
+        if self.biz_identity:
+            if hasattr(self.biz_identity, 'to_alipay_dict'):
+                params['biz_identity'] = self.biz_identity.to_alipay_dict()
+            else:
+                params['biz_identity'] = self.biz_identity
         if self.buyer_id:
             if hasattr(self.buyer_id, 'to_alipay_dict'):
                 params['buyer_id'] = self.buyer_id.to_alipay_dict()
@@ -439,6 +452,8 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.activity_consult_id = d['activity_consult_id']
         if 'address_info' in d:
             o.address_info = d['address_info']
+        if 'biz_identity' in d:
+            o.biz_identity = d['biz_identity']
         if 'buyer_id' in d:
             o.buyer_id = d['buyer_id']
         if 'buyer_open_id' in d:

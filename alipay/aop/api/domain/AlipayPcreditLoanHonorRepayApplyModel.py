@@ -22,6 +22,7 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
         self._repay_amount = None
         self._repay_no = None
         self._request_source = None
+        self._total_violate_fee = None
 
     @property
     def alipay_user_id(self):
@@ -121,6 +122,13 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
     @request_source.setter
     def request_source(self, value):
         self._request_source = value
+    @property
+    def total_violate_fee(self):
+        return self._total_violate_fee
+
+    @total_violate_fee.setter
+    def total_violate_fee(self, value):
+        self._total_violate_fee = value
 
 
     def to_alipay_dict(self):
@@ -195,6 +203,11 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
                 params['request_source'] = self.request_source.to_alipay_dict()
             else:
                 params['request_source'] = self.request_source
+        if self.total_violate_fee:
+            if hasattr(self.total_violate_fee, 'to_alipay_dict'):
+                params['total_violate_fee'] = self.total_violate_fee.to_alipay_dict()
+            else:
+                params['total_violate_fee'] = self.total_violate_fee
         return params
 
     @staticmethod
@@ -230,6 +243,8 @@ class AlipayPcreditLoanHonorRepayApplyModel(object):
             o.repay_no = d['repay_no']
         if 'request_source' in d:
             o.request_source = d['request_source']
+        if 'total_violate_fee' in d:
+            o.total_violate_fee = d['total_violate_fee']
         return o
 
 

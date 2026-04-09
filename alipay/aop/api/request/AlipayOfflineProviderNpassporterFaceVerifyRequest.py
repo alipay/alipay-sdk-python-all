@@ -17,6 +17,7 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
         self._photo_url = None
         self._project_id = None
         self._solution_type = None
+        self._sub_project_id = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -70,6 +71,13 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
     @solution_type.setter
     def solution_type(self, value):
         self._solution_type = value
+    @property
+    def sub_project_id(self):
+        return self._sub_project_id
+
+    @sub_project_id.setter
+    def sub_project_id(self, value):
+        self._sub_project_id = value
 
     @property
     def file_content(self):
@@ -183,6 +191,11 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
                 params['solution_type'] = json.dumps(obj=self.solution_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['solution_type'] = self.solution_type
+        if self.sub_project_id:
+            if hasattr(self.sub_project_id, 'to_alipay_dict'):
+                params['sub_project_id'] = json.dumps(obj=self.sub_project_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['sub_project_id'] = self.sub_project_id
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

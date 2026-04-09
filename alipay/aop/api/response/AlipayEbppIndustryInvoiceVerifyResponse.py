@@ -5,7 +5,9 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.InvoiceAirplaneItinerary import InvoiceAirplaneItinerary
 from alipay.aop.api.domain.InvoiceItemDTO import InvoiceItemDTO
+from alipay.aop.api.domain.MotorVehicleSales import MotorVehicleSales
 from alipay.aop.api.domain.InvoicePassenger import InvoicePassenger
+from alipay.aop.api.domain.SecondVehicleSales import SecondVehicleSales
 from alipay.aop.api.domain.InvoiceTrainItinerary import InvoiceTrainItinerary
 
 
@@ -25,7 +27,10 @@ class AlipayEbppIndustryInvoiceVerifyResponse(AlipayResponse):
         self._invoice_kind = None
         self._invoice_tax_amount = None
         self._item_list = None
+        self._motor_vehicle_sales = None
         self._passenger_list = None
+        self._proxy_issued = None
+        self._second_vehicle_sales = None
         self._seller_address = None
         self._seller_bank_account = None
         self._seller_bank_name = None
@@ -130,6 +135,16 @@ class AlipayEbppIndustryInvoiceVerifyResponse(AlipayResponse):
                 else:
                     self._item_list.append(InvoiceItemDTO.from_alipay_dict(i))
     @property
+    def motor_vehicle_sales(self):
+        return self._motor_vehicle_sales
+
+    @motor_vehicle_sales.setter
+    def motor_vehicle_sales(self, value):
+        if isinstance(value, MotorVehicleSales):
+            self._motor_vehicle_sales = value
+        else:
+            self._motor_vehicle_sales = MotorVehicleSales.from_alipay_dict(value)
+    @property
     def passenger_list(self):
         return self._passenger_list
 
@@ -142,6 +157,23 @@ class AlipayEbppIndustryInvoiceVerifyResponse(AlipayResponse):
                     self._passenger_list.append(i)
                 else:
                     self._passenger_list.append(InvoicePassenger.from_alipay_dict(i))
+    @property
+    def proxy_issued(self):
+        return self._proxy_issued
+
+    @proxy_issued.setter
+    def proxy_issued(self, value):
+        self._proxy_issued = value
+    @property
+    def second_vehicle_sales(self):
+        return self._second_vehicle_sales
+
+    @second_vehicle_sales.setter
+    def second_vehicle_sales(self, value):
+        if isinstance(value, SecondVehicleSales):
+            self._second_vehicle_sales = value
+        else:
+            self._second_vehicle_sales = SecondVehicleSales.from_alipay_dict(value)
     @property
     def seller_address(self):
         return self._seller_address
@@ -235,8 +267,14 @@ class AlipayEbppIndustryInvoiceVerifyResponse(AlipayResponse):
             self.invoice_tax_amount = response['invoice_tax_amount']
         if 'item_list' in response:
             self.item_list = response['item_list']
+        if 'motor_vehicle_sales' in response:
+            self.motor_vehicle_sales = response['motor_vehicle_sales']
         if 'passenger_list' in response:
             self.passenger_list = response['passenger_list']
+        if 'proxy_issued' in response:
+            self.proxy_issued = response['proxy_issued']
+        if 'second_vehicle_sales' in response:
+            self.second_vehicle_sales = response['second_vehicle_sales']
         if 'seller_address' in response:
             self.seller_address = response['seller_address']
         if 'seller_bank_account' in response:

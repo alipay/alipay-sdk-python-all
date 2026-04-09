@@ -12,6 +12,7 @@ class AlipayPayAgentVoiceUploadModel(object):
         self._agreement_no = None
         self._base_64_audio_data = None
         self._device_name = None
+        self._mode = None
         self._scene = None
         self._voice_data_type = None
         self._voice_verify_step = None
@@ -44,6 +45,13 @@ class AlipayPayAgentVoiceUploadModel(object):
     @device_name.setter
     def device_name(self, value):
         self._device_name = value
+    @property
+    def mode(self):
+        return self._mode
+
+    @mode.setter
+    def mode(self, value):
+        self._mode = value
     @property
     def scene(self):
         return self._scene
@@ -89,6 +97,11 @@ class AlipayPayAgentVoiceUploadModel(object):
                 params['device_name'] = self.device_name.to_alipay_dict()
             else:
                 params['device_name'] = self.device_name
+        if self.mode:
+            if hasattr(self.mode, 'to_alipay_dict'):
+                params['mode'] = self.mode.to_alipay_dict()
+            else:
+                params['mode'] = self.mode
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayPayAgentVoiceUploadModel(object):
             o.base_64_audio_data = d['base_64_audio_data']
         if 'device_name' in d:
             o.device_name = d['device_name']
+        if 'mode' in d:
+            o.mode = d['mode']
         if 'scene' in d:
             o.scene = d['scene']
         if 'voice_data_type' in d:

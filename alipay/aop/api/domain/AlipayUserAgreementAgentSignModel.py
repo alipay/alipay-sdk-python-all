@@ -13,6 +13,8 @@ class AlipayUserAgreementAgentSignModel(object):
         self._external_agreement_no = None
         self._external_logon_id = None
         self._personal_product_code = None
+        self._user_token = None
+        self._user_token_type = None
 
     @property
     def access_params(self):
@@ -45,6 +47,20 @@ class AlipayUserAgreementAgentSignModel(object):
     @personal_product_code.setter
     def personal_product_code(self, value):
         self._personal_product_code = value
+    @property
+    def user_token(self):
+        return self._user_token
+
+    @user_token.setter
+    def user_token(self, value):
+        self._user_token = value
+    @property
+    def user_token_type(self):
+        return self._user_token_type
+
+    @user_token_type.setter
+    def user_token_type(self, value):
+        self._user_token_type = value
 
 
     def to_alipay_dict(self):
@@ -69,6 +85,16 @@ class AlipayUserAgreementAgentSignModel(object):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
             else:
                 params['personal_product_code'] = self.personal_product_code
+        if self.user_token:
+            if hasattr(self.user_token, 'to_alipay_dict'):
+                params['user_token'] = self.user_token.to_alipay_dict()
+            else:
+                params['user_token'] = self.user_token
+        if self.user_token_type:
+            if hasattr(self.user_token_type, 'to_alipay_dict'):
+                params['user_token_type'] = self.user_token_type.to_alipay_dict()
+            else:
+                params['user_token_type'] = self.user_token_type
         return params
 
     @staticmethod
@@ -84,6 +110,10 @@ class AlipayUserAgreementAgentSignModel(object):
             o.external_logon_id = d['external_logon_id']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
+        if 'user_token' in d:
+            o.user_token = d['user_token']
+        if 'user_token_type' in d:
+            o.user_token_type = d['user_token_type']
         return o
 
 

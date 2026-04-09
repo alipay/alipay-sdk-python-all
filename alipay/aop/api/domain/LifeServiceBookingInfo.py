@@ -16,6 +16,7 @@ class LifeServiceBookingInfo(object):
         self._end_time = None
         self._item_id = None
         self._nick = None
+        self._open_id = None
         self._order_id = None
         self._out_item_id = None
         self._out_room_id = None
@@ -31,6 +32,7 @@ class LifeServiceBookingInfo(object):
         self._start_time = None
         self._status = None
         self._technician_id = None
+        self._user_id = None
 
     @property
     def booking_attrs(self):
@@ -87,6 +89,13 @@ class LifeServiceBookingInfo(object):
     @nick.setter
     def nick(self, value):
         self._nick = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def order_id(self):
         return self._order_id
@@ -192,6 +201,13 @@ class LifeServiceBookingInfo(object):
     @technician_id.setter
     def technician_id(self, value):
         self._technician_id = value
+    @property
+    def user_id(self):
+        return self._user_id
+
+    @user_id.setter
+    def user_id(self, value):
+        self._user_id = value
 
 
     def to_alipay_dict(self):
@@ -236,6 +252,11 @@ class LifeServiceBookingInfo(object):
                 params['nick'] = self.nick.to_alipay_dict()
             else:
                 params['nick'] = self.nick
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -311,6 +332,11 @@ class LifeServiceBookingInfo(object):
                 params['technician_id'] = self.technician_id.to_alipay_dict()
             else:
                 params['technician_id'] = self.technician_id
+        if self.user_id:
+            if hasattr(self.user_id, 'to_alipay_dict'):
+                params['user_id'] = self.user_id.to_alipay_dict()
+            else:
+                params['user_id'] = self.user_id
         return params
 
     @staticmethod
@@ -332,6 +358,8 @@ class LifeServiceBookingInfo(object):
             o.item_id = d['item_id']
         if 'nick' in d:
             o.nick = d['nick']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'out_item_id' in d:
@@ -362,6 +390,8 @@ class LifeServiceBookingInfo(object):
             o.status = d['status']
         if 'technician_id' in d:
             o.technician_id = d['technician_id']
+        if 'user_id' in d:
+            o.user_id = d['user_id']
         return o
 
 

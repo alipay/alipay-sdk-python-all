@@ -28,8 +28,10 @@ class PlatformInquiryOrderExtInfo(object):
         self._original_price = None
         self._out_biz_no = None
         self._plus_register_info = None
+        self._product_name = None
         self._refund_url = None
         self._source = None
+        self._user_type = None
 
     @property
     def alipay_channel_order_flag(self):
@@ -164,6 +166,13 @@ class PlatformInquiryOrderExtInfo(object):
         else:
             self._plus_register_info = PlatformPlusRegisterInfo.from_alipay_dict(value)
     @property
+    def product_name(self):
+        return self._product_name
+
+    @product_name.setter
+    def product_name(self, value):
+        self._product_name = value
+    @property
     def refund_url(self):
         return self._refund_url
 
@@ -177,6 +186,13 @@ class PlatformInquiryOrderExtInfo(object):
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def user_type(self):
+        return self._user_type
+
+    @user_type.setter
+    def user_type(self, value):
+        self._user_type = value
 
 
     def to_alipay_dict(self):
@@ -271,6 +287,11 @@ class PlatformInquiryOrderExtInfo(object):
                 params['plus_register_info'] = self.plus_register_info.to_alipay_dict()
             else:
                 params['plus_register_info'] = self.plus_register_info
+        if self.product_name:
+            if hasattr(self.product_name, 'to_alipay_dict'):
+                params['product_name'] = self.product_name.to_alipay_dict()
+            else:
+                params['product_name'] = self.product_name
         if self.refund_url:
             if hasattr(self.refund_url, 'to_alipay_dict'):
                 params['refund_url'] = self.refund_url.to_alipay_dict()
@@ -281,6 +302,11 @@ class PlatformInquiryOrderExtInfo(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.user_type:
+            if hasattr(self.user_type, 'to_alipay_dict'):
+                params['user_type'] = self.user_type.to_alipay_dict()
+            else:
+                params['user_type'] = self.user_type
         return params
 
     @staticmethod
@@ -324,10 +350,14 @@ class PlatformInquiryOrderExtInfo(object):
             o.out_biz_no = d['out_biz_no']
         if 'plus_register_info' in d:
             o.plus_register_info = d['plus_register_info']
+        if 'product_name' in d:
+            o.product_name = d['product_name']
         if 'refund_url' in d:
             o.refund_url = d['refund_url']
         if 'source' in d:
             o.source = d['source']
+        if 'user_type' in d:
+            o.user_type = d['user_type']
         return o
 
 

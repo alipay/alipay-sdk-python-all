@@ -12,6 +12,7 @@ class AlipayCommerceTransportCarsaleBtoborderSyncModel(object):
         self._buy_city_code = None
         self._buy_mobile_no = None
         self._car_city_code = None
+        self._charge_amount = None
         self._open_id = None
         self._order_amount = None
         self._order_id = None
@@ -51,6 +52,13 @@ class AlipayCommerceTransportCarsaleBtoborderSyncModel(object):
     @car_city_code.setter
     def car_city_code(self, value):
         self._car_city_code = value
+    @property
+    def charge_amount(self):
+        return self._charge_amount
+
+    @charge_amount.setter
+    def charge_amount(self, value):
+        self._charge_amount = value
     @property
     def open_id(self):
         return self._open_id
@@ -192,6 +200,11 @@ class AlipayCommerceTransportCarsaleBtoborderSyncModel(object):
                 params['car_city_code'] = self.car_city_code.to_alipay_dict()
             else:
                 params['car_city_code'] = self.car_city_code
+        if self.charge_amount:
+            if hasattr(self.charge_amount, 'to_alipay_dict'):
+                params['charge_amount'] = self.charge_amount.to_alipay_dict()
+            else:
+                params['charge_amount'] = self.charge_amount
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -290,6 +303,8 @@ class AlipayCommerceTransportCarsaleBtoborderSyncModel(object):
             o.buy_mobile_no = d['buy_mobile_no']
         if 'car_city_code' in d:
             o.car_city_code = d['car_city_code']
+        if 'charge_amount' in d:
+            o.charge_amount = d['charge_amount']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_amount' in d:

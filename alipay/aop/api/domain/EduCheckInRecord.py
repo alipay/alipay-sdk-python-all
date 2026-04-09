@@ -20,6 +20,7 @@ class EduCheckInRecord(object):
         self._inst_id = None
         self._latitude = None
         self._longitude = None
+        self._min_stay_minutes = None
         self._name = None
         self._node_id = None
         self._node_name = None
@@ -112,6 +113,13 @@ class EduCheckInRecord(object):
     @longitude.setter
     def longitude(self, value):
         self._longitude = value
+    @property
+    def min_stay_minutes(self):
+        return self._min_stay_minutes
+
+    @min_stay_minutes.setter
+    def min_stay_minutes(self, value):
+        self._min_stay_minutes = value
     @property
     def name(self):
         return self._name
@@ -225,6 +233,11 @@ class EduCheckInRecord(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.min_stay_minutes:
+            if hasattr(self.min_stay_minutes, 'to_alipay_dict'):
+                params['min_stay_minutes'] = self.min_stay_minutes.to_alipay_dict()
+            else:
+                params['min_stay_minutes'] = self.min_stay_minutes
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -291,6 +304,8 @@ class EduCheckInRecord(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'min_stay_minutes' in d:
+            o.min_stay_minutes = d['min_stay_minutes']
         if 'name' in d:
             o.name = d['name']
         if 'node_id' in d:

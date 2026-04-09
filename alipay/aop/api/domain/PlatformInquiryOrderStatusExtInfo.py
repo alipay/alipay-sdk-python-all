@@ -29,6 +29,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._hospital_name = None
         self._inquiry_complete_status = None
         self._notice = None
+        self._product_name = None
         self._real_amount = None
         self._refund_amount = None
         self._refund_reason = None
@@ -184,6 +185,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @notice.setter
     def notice(self, value):
         self._notice = value
+    @property
+    def product_name(self):
+        return self._product_name
+
+    @product_name.setter
+    def product_name(self, value):
+        self._product_name = value
     @property
     def real_amount(self):
         return self._real_amount
@@ -342,6 +350,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['notice'] = self.notice.to_alipay_dict()
             else:
                 params['notice'] = self.notice
+        if self.product_name:
+            if hasattr(self.product_name, 'to_alipay_dict'):
+                params['product_name'] = self.product_name.to_alipay_dict()
+            else:
+                params['product_name'] = self.product_name
         if self.real_amount:
             if hasattr(self.real_amount, 'to_alipay_dict'):
                 params['real_amount'] = self.real_amount.to_alipay_dict()
@@ -426,6 +439,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.inquiry_complete_status = d['inquiry_complete_status']
         if 'notice' in d:
             o.notice = d['notice']
+        if 'product_name' in d:
+            o.product_name = d['product_name']
         if 'real_amount' in d:
             o.real_amount = d['real_amount']
         if 'refund_amount' in d:

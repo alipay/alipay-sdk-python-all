@@ -8,10 +8,21 @@ from alipay.aop.api.constant.ParamConstants import *
 class ScheduleWeekPlanInfo(object):
 
     def __init__(self):
+        self._break_time = None
         self._close_time = None
         self._day_of_week = None
         self._open_time = None
 
+    @property
+    def break_time(self):
+        return self._break_time
+
+    @break_time.setter
+    def break_time(self, value):
+        if isinstance(value, list):
+            self._break_time = list()
+            for i in value:
+                self._break_time.append(i)
     @property
     def close_time(self):
         return self._close_time
@@ -37,6 +48,16 @@ class ScheduleWeekPlanInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.break_time:
+            if isinstance(self.break_time, list):
+                for i in range(0, len(self.break_time)):
+                    element = self.break_time[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.break_time[i] = element.to_alipay_dict()
+            if hasattr(self.break_time, 'to_alipay_dict'):
+                params['break_time'] = self.break_time.to_alipay_dict()
+            else:
+                params['break_time'] = self.break_time
         if self.close_time:
             if hasattr(self.close_time, 'to_alipay_dict'):
                 params['close_time'] = self.close_time.to_alipay_dict()
@@ -59,6 +80,8 @@ class ScheduleWeekPlanInfo(object):
         if not d:
             return None
         o = ScheduleWeekPlanInfo()
+        if 'break_time' in d:
+            o.break_time = d['break_time']
         if 'close_time' in d:
             o.close_time = d['close_time']
         if 'day_of_week' in d:

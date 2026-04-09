@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.DormitoryConfig import DormitoryConfig
+from alipay.aop.api.domain.VenueConfigModel import VenueConfigModel
 
 
 class AlipayCommerceEducateCheckinRuleModifyModel(object):
@@ -36,6 +37,7 @@ class AlipayCommerceEducateCheckinRuleModifyModel(object):
         self._start_minutes = None
         self._start_time = None
         self._start_type = None
+        self._venue_config = None
         self._week_day_list = None
 
     @property
@@ -234,6 +236,16 @@ class AlipayCommerceEducateCheckinRuleModifyModel(object):
     def start_type(self, value):
         self._start_type = value
     @property
+    def venue_config(self):
+        return self._venue_config
+
+    @venue_config.setter
+    def venue_config(self, value):
+        if isinstance(value, VenueConfigModel):
+            self._venue_config = value
+        else:
+            self._venue_config = VenueConfigModel.from_alipay_dict(value)
+    @property
     def week_day_list(self):
         return self._week_day_list
 
@@ -387,6 +399,11 @@ class AlipayCommerceEducateCheckinRuleModifyModel(object):
                 params['start_type'] = self.start_type.to_alipay_dict()
             else:
                 params['start_type'] = self.start_type
+        if self.venue_config:
+            if hasattr(self.venue_config, 'to_alipay_dict'):
+                params['venue_config'] = self.venue_config.to_alipay_dict()
+            else:
+                params['venue_config'] = self.venue_config
         if self.week_day_list:
             if isinstance(self.week_day_list, list):
                 for i in range(0, len(self.week_day_list)):
@@ -458,6 +475,8 @@ class AlipayCommerceEducateCheckinRuleModifyModel(object):
             o.start_time = d['start_time']
         if 'start_type' in d:
             o.start_type = d['start_type']
+        if 'venue_config' in d:
+            o.venue_config = d['venue_config']
         if 'week_day_list' in d:
             o.week_day_list = d['week_day_list']
         return o

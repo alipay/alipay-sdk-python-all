@@ -9,6 +9,7 @@ class CreativeMaterial(object):
 
     def __init__(self):
         self._key = None
+        self._native_flag = None
         self._type = None
         self._url = None
         self._value = None
@@ -20,6 +21,13 @@ class CreativeMaterial(object):
     @key.setter
     def key(self, value):
         self._key = value
+    @property
+    def native_flag(self):
+        return self._native_flag
+
+    @native_flag.setter
+    def native_flag(self, value):
+        self._native_flag = value
     @property
     def type(self):
         return self._type
@@ -50,6 +58,11 @@ class CreativeMaterial(object):
                 params['key'] = self.key.to_alipay_dict()
             else:
                 params['key'] = self.key
+        if self.native_flag:
+            if hasattr(self.native_flag, 'to_alipay_dict'):
+                params['native_flag'] = self.native_flag.to_alipay_dict()
+            else:
+                params['native_flag'] = self.native_flag
         if self.type:
             if hasattr(self.type, 'to_alipay_dict'):
                 params['type'] = self.type.to_alipay_dict()
@@ -74,6 +87,8 @@ class CreativeMaterial(object):
         o = CreativeMaterial()
         if 'key' in d:
             o.key = d['key']
+        if 'native_flag' in d:
+            o.native_flag = d['native_flag']
         if 'type' in d:
             o.type = d['type']
         if 'url' in d:

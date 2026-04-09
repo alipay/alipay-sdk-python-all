@@ -26,9 +26,12 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
         self._market_target_code = None
         self._market_target_name = None
         self._material_list = None
+        self._native_flag = None
+        self._permission_level = None
         self._plan_id = None
         self._plan_name = None
         self._principal_id = None
+        self._public_id = None
         self._punish_reason = None
         self._refuse_extend_info_res = None
         self._risk_status = None
@@ -148,6 +151,20 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
                 else:
                     self._material_list.append(CreativeMaterial.from_alipay_dict(i))
     @property
+    def native_flag(self):
+        return self._native_flag
+
+    @native_flag.setter
+    def native_flag(self, value):
+        self._native_flag = value
+    @property
+    def permission_level(self):
+        return self._permission_level
+
+    @permission_level.setter
+    def permission_level(self, value):
+        self._permission_level = value
+    @property
     def plan_id(self):
         return self._plan_id
 
@@ -168,6 +185,13 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
     @principal_id.setter
     def principal_id(self, value):
         self._principal_id = value
+    @property
+    def public_id(self):
+        return self._public_id
+
+    @public_id.setter
+    def public_id(self, value):
+        self._public_id = value
     @property
     def punish_reason(self):
         return self._punish_reason
@@ -251,12 +275,18 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
             self.market_target_name = response['market_target_name']
         if 'material_list' in response:
             self.material_list = response['material_list']
+        if 'native_flag' in response:
+            self.native_flag = response['native_flag']
+        if 'permission_level' in response:
+            self.permission_level = response['permission_level']
         if 'plan_id' in response:
             self.plan_id = response['plan_id']
         if 'plan_name' in response:
             self.plan_name = response['plan_name']
         if 'principal_id' in response:
             self.principal_id = response['principal_id']
+        if 'public_id' in response:
+            self.public_id = response['public_id']
         if 'punish_reason' in response:
             self.punish_reason = response['punish_reason']
         if 'refuse_extend_info_res' in response:

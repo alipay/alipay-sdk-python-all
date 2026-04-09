@@ -39,6 +39,7 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
         self._os_list = None
         self._plan_id = None
         self._principal_tag = None
+        self._promotion_open_traffic_switch = None
         self._referral_traffic_switch = None
         self._region_list = None
         self._region_type = None
@@ -283,6 +284,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
     @principal_tag.setter
     def principal_tag(self, value):
         self._principal_tag = value
+    @property
+    def promotion_open_traffic_switch(self):
+        return self._promotion_open_traffic_switch
+
+    @promotion_open_traffic_switch.setter
+    def promotion_open_traffic_switch(self, value):
+        self._promotion_open_traffic_switch = value
     @property
     def referral_traffic_switch(self):
         return self._referral_traffic_switch
@@ -543,6 +551,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.promotion_open_traffic_switch:
+            if hasattr(self.promotion_open_traffic_switch, 'to_alipay_dict'):
+                params['promotion_open_traffic_switch'] = self.promotion_open_traffic_switch.to_alipay_dict()
+            else:
+                params['promotion_open_traffic_switch'] = self.promotion_open_traffic_switch
         if self.referral_traffic_switch:
             if hasattr(self.referral_traffic_switch, 'to_alipay_dict'):
                 params['referral_traffic_switch'] = self.referral_traffic_switch.to_alipay_dict()
@@ -658,6 +671,8 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.plan_id = d['plan_id']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'promotion_open_traffic_switch' in d:
+            o.promotion_open_traffic_switch = d['promotion_open_traffic_switch']
         if 'referral_traffic_switch' in d:
             o.referral_traffic_switch = d['referral_traffic_switch']
         if 'region_list' in d:

@@ -11,6 +11,8 @@ class AlipayCommerceLogisticsFreightflowTransferApplyResponse(AlipayResponse):
         super(AlipayCommerceLogisticsFreightflowTransferApplyResponse, self).__init__()
         self._bank_operate_no = None
         self._biz_no = None
+        self._charges = None
+        self._charges_payer = None
         self._partner_id = None
         self._status = None
 
@@ -28,6 +30,20 @@ class AlipayCommerceLogisticsFreightflowTransferApplyResponse(AlipayResponse):
     @biz_no.setter
     def biz_no(self, value):
         self._biz_no = value
+    @property
+    def charges(self):
+        return self._charges
+
+    @charges.setter
+    def charges(self, value):
+        self._charges = value
+    @property
+    def charges_payer(self):
+        return self._charges_payer
+
+    @charges_payer.setter
+    def charges_payer(self, value):
+        self._charges_payer = value
     @property
     def partner_id(self):
         return self._partner_id
@@ -49,6 +65,10 @@ class AlipayCommerceLogisticsFreightflowTransferApplyResponse(AlipayResponse):
             self.bank_operate_no = response['bank_operate_no']
         if 'biz_no' in response:
             self.biz_no = response['biz_no']
+        if 'charges' in response:
+            self.charges = response['charges']
+        if 'charges_payer' in response:
+            self.charges_payer = response['charges_payer']
         if 'partner_id' in response:
             self.partner_id = response['partner_id']
         if 'status' in response:

@@ -11,11 +11,13 @@ class CertBillDetail(object):
         self._alipay_verify_time = None
         self._certificate_id = None
         self._code = None
+        self._et_settle_time = None
         self._item_id = None
         self._item_type = None
         self._m_shop_id = None
         self._m_use_order_id = None
         self._merchant_discount = None
+        self._net_income = None
         self._order_id = None
         self._origin_price = None
         self._platform_discount = None
@@ -26,6 +28,7 @@ class CertBillDetail(object):
         self._settle_amount = None
         self._settle_time = None
         self._settle_type = None
+        self._status = None
         self._total_alloc_amount = None
         self._total_commission_amount = None
         self._trade_time = None
@@ -54,6 +57,13 @@ class CertBillDetail(object):
     @code.setter
     def code(self, value):
         self._code = value
+    @property
+    def et_settle_time(self):
+        return self._et_settle_time
+
+    @et_settle_time.setter
+    def et_settle_time(self, value):
+        self._et_settle_time = value
     @property
     def item_id(self):
         return self._item_id
@@ -89,6 +99,13 @@ class CertBillDetail(object):
     @merchant_discount.setter
     def merchant_discount(self, value):
         self._merchant_discount = value
+    @property
+    def net_income(self):
+        return self._net_income
+
+    @net_income.setter
+    def net_income(self, value):
+        self._net_income = value
     @property
     def order_id(self):
         return self._order_id
@@ -160,6 +177,13 @@ class CertBillDetail(object):
     def settle_type(self, value):
         self._settle_type = value
     @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
+    @property
     def total_alloc_amount(self):
         return self._total_alloc_amount
 
@@ -220,6 +244,11 @@ class CertBillDetail(object):
                 params['code'] = self.code.to_alipay_dict()
             else:
                 params['code'] = self.code
+        if self.et_settle_time:
+            if hasattr(self.et_settle_time, 'to_alipay_dict'):
+                params['et_settle_time'] = self.et_settle_time.to_alipay_dict()
+            else:
+                params['et_settle_time'] = self.et_settle_time
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -245,6 +274,11 @@ class CertBillDetail(object):
                 params['merchant_discount'] = self.merchant_discount.to_alipay_dict()
             else:
                 params['merchant_discount'] = self.merchant_discount
+        if self.net_income:
+            if hasattr(self.net_income, 'to_alipay_dict'):
+                params['net_income'] = self.net_income.to_alipay_dict()
+            else:
+                params['net_income'] = self.net_income
         if self.order_id:
             if hasattr(self.order_id, 'to_alipay_dict'):
                 params['order_id'] = self.order_id.to_alipay_dict()
@@ -295,6 +329,11 @@ class CertBillDetail(object):
                 params['settle_type'] = self.settle_type.to_alipay_dict()
             else:
                 params['settle_type'] = self.settle_type
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.total_alloc_amount:
             if hasattr(self.total_alloc_amount, 'to_alipay_dict'):
                 params['total_alloc_amount'] = self.total_alloc_amount.to_alipay_dict()
@@ -338,6 +377,8 @@ class CertBillDetail(object):
             o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
+        if 'et_settle_time' in d:
+            o.et_settle_time = d['et_settle_time']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_type' in d:
@@ -348,6 +389,8 @@ class CertBillDetail(object):
             o.m_use_order_id = d['m_use_order_id']
         if 'merchant_discount' in d:
             o.merchant_discount = d['merchant_discount']
+        if 'net_income' in d:
+            o.net_income = d['net_income']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'origin_price' in d:
@@ -368,6 +411,8 @@ class CertBillDetail(object):
             o.settle_time = d['settle_time']
         if 'settle_type' in d:
             o.settle_type = d['settle_type']
+        if 'status' in d:
+            o.status = d['status']
         if 'total_alloc_amount' in d:
             o.total_alloc_amount = d['total_alloc_amount']
         if 'total_commission_amount' in d:

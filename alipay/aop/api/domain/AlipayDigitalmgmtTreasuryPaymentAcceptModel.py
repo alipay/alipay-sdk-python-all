@@ -10,6 +10,7 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
     def __init__(self):
         self._active_or_passive = None
         self._bank_code = None
+        self._biz_ref_no = None
         self._branch_code = None
         self._charge_bearer = None
         self._creator = None
@@ -26,8 +27,10 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
         self._creditor_fin_inst_id = None
         self._creditor_iban = None
         self._creditor_inst_abbr = None
+        self._creditor_inst_city = None
         self._creditor_inst_country_code = None
         self._creditor_inst_name = None
+        self._creditor_inst_province = None
         self._creditor_post_code = None
         self._creditor_town_name = None
         self._creditor_type = None
@@ -61,6 +64,13 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
     @bank_code.setter
     def bank_code(self, value):
         self._bank_code = value
+    @property
+    def biz_ref_no(self):
+        return self._biz_ref_no
+
+    @biz_ref_no.setter
+    def biz_ref_no(self, value):
+        self._biz_ref_no = value
     @property
     def branch_code(self):
         return self._branch_code
@@ -174,6 +184,13 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
     def creditor_inst_abbr(self, value):
         self._creditor_inst_abbr = value
     @property
+    def creditor_inst_city(self):
+        return self._creditor_inst_city
+
+    @creditor_inst_city.setter
+    def creditor_inst_city(self, value):
+        self._creditor_inst_city = value
+    @property
     def creditor_inst_country_code(self):
         return self._creditor_inst_country_code
 
@@ -187,6 +204,13 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
     @creditor_inst_name.setter
     def creditor_inst_name(self, value):
         self._creditor_inst_name = value
+    @property
+    def creditor_inst_province(self):
+        return self._creditor_inst_province
+
+    @creditor_inst_province.setter
+    def creditor_inst_province(self, value):
+        self._creditor_inst_province = value
     @property
     def creditor_post_code(self):
         return self._creditor_post_code
@@ -327,6 +351,11 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
                 params['bank_code'] = self.bank_code.to_alipay_dict()
             else:
                 params['bank_code'] = self.bank_code
+        if self.biz_ref_no:
+            if hasattr(self.biz_ref_no, 'to_alipay_dict'):
+                params['biz_ref_no'] = self.biz_ref_no.to_alipay_dict()
+            else:
+                params['biz_ref_no'] = self.biz_ref_no
         if self.branch_code:
             if hasattr(self.branch_code, 'to_alipay_dict'):
                 params['branch_code'] = self.branch_code.to_alipay_dict()
@@ -407,6 +436,11 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
                 params['creditor_inst_abbr'] = self.creditor_inst_abbr.to_alipay_dict()
             else:
                 params['creditor_inst_abbr'] = self.creditor_inst_abbr
+        if self.creditor_inst_city:
+            if hasattr(self.creditor_inst_city, 'to_alipay_dict'):
+                params['creditor_inst_city'] = self.creditor_inst_city.to_alipay_dict()
+            else:
+                params['creditor_inst_city'] = self.creditor_inst_city
         if self.creditor_inst_country_code:
             if hasattr(self.creditor_inst_country_code, 'to_alipay_dict'):
                 params['creditor_inst_country_code'] = self.creditor_inst_country_code.to_alipay_dict()
@@ -417,6 +451,11 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
                 params['creditor_inst_name'] = self.creditor_inst_name.to_alipay_dict()
             else:
                 params['creditor_inst_name'] = self.creditor_inst_name
+        if self.creditor_inst_province:
+            if hasattr(self.creditor_inst_province, 'to_alipay_dict'):
+                params['creditor_inst_province'] = self.creditor_inst_province.to_alipay_dict()
+            else:
+                params['creditor_inst_province'] = self.creditor_inst_province
         if self.creditor_post_code:
             if hasattr(self.creditor_post_code, 'to_alipay_dict'):
                 params['creditor_post_code'] = self.creditor_post_code.to_alipay_dict()
@@ -518,6 +557,8 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
             o.active_or_passive = d['active_or_passive']
         if 'bank_code' in d:
             o.bank_code = d['bank_code']
+        if 'biz_ref_no' in d:
+            o.biz_ref_no = d['biz_ref_no']
         if 'branch_code' in d:
             o.branch_code = d['branch_code']
         if 'charge_bearer' in d:
@@ -550,10 +591,14 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
             o.creditor_iban = d['creditor_iban']
         if 'creditor_inst_abbr' in d:
             o.creditor_inst_abbr = d['creditor_inst_abbr']
+        if 'creditor_inst_city' in d:
+            o.creditor_inst_city = d['creditor_inst_city']
         if 'creditor_inst_country_code' in d:
             o.creditor_inst_country_code = d['creditor_inst_country_code']
         if 'creditor_inst_name' in d:
             o.creditor_inst_name = d['creditor_inst_name']
+        if 'creditor_inst_province' in d:
+            o.creditor_inst_province = d['creditor_inst_province']
         if 'creditor_post_code' in d:
             o.creditor_post_code = d['creditor_post_code']
         if 'creditor_town_name' in d:

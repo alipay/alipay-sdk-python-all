@@ -12,6 +12,7 @@ class CollaborateTask(object):
         self._activity_id = None
         self._activity_type = None
         self._address = None
+        self._biz_industry = None
         self._city_code = None
         self._city_name = None
         self._contact_name = None
@@ -32,6 +33,7 @@ class CollaborateTask(object):
         self._task_no = None
         self._task_tags = None
         self._tel = None
+        self._using_biz_tools = None
 
     @property
     def activity_desc(self):
@@ -61,6 +63,13 @@ class CollaborateTask(object):
     @address.setter
     def address(self, value):
         self._address = value
+    @property
+    def biz_industry(self):
+        return self._biz_industry
+
+    @biz_industry.setter
+    def biz_industry(self, value):
+        self._biz_industry = value
     @property
     def city_code(self):
         return self._city_code
@@ -210,6 +219,16 @@ class CollaborateTask(object):
     @tel.setter
     def tel(self, value):
         self._tel = value
+    @property
+    def using_biz_tools(self):
+        return self._using_biz_tools
+
+    @using_biz_tools.setter
+    def using_biz_tools(self, value):
+        if isinstance(value, list):
+            self._using_biz_tools = list()
+            for i in value:
+                self._using_biz_tools.append(i)
 
 
     def to_alipay_dict(self):
@@ -234,6 +253,11 @@ class CollaborateTask(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
+        if self.biz_industry:
+            if hasattr(self.biz_industry, 'to_alipay_dict'):
+                params['biz_industry'] = self.biz_industry.to_alipay_dict()
+            else:
+                params['biz_industry'] = self.biz_industry
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -349,6 +373,16 @@ class CollaborateTask(object):
                 params['tel'] = self.tel.to_alipay_dict()
             else:
                 params['tel'] = self.tel
+        if self.using_biz_tools:
+            if isinstance(self.using_biz_tools, list):
+                for i in range(0, len(self.using_biz_tools)):
+                    element = self.using_biz_tools[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.using_biz_tools[i] = element.to_alipay_dict()
+            if hasattr(self.using_biz_tools, 'to_alipay_dict'):
+                params['using_biz_tools'] = self.using_biz_tools.to_alipay_dict()
+            else:
+                params['using_biz_tools'] = self.using_biz_tools
         return params
 
     @staticmethod
@@ -364,6 +398,8 @@ class CollaborateTask(object):
             o.activity_type = d['activity_type']
         if 'address' in d:
             o.address = d['address']
+        if 'biz_industry' in d:
+            o.biz_industry = d['biz_industry']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'city_name' in d:
@@ -404,6 +440,8 @@ class CollaborateTask(object):
             o.task_tags = d['task_tags']
         if 'tel' in d:
             o.tel = d['tel']
+        if 'using_biz_tools' in d:
+            o.using_biz_tools = d['using_biz_tools']
         return o
 
 

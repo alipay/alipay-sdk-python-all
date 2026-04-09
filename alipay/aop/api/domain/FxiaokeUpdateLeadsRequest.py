@@ -12,6 +12,7 @@ class FxiaokeUpdateLeadsRequest(object):
         self._leads_code = None
         self._leads_source_partner_id = None
         self._modifier = None
+        self._source = None
 
     @property
     def bd_work_no(self):
@@ -41,6 +42,13 @@ class FxiaokeUpdateLeadsRequest(object):
     @modifier.setter
     def modifier(self, value):
         self._modifier = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class FxiaokeUpdateLeadsRequest(object):
                 params['modifier'] = self.modifier.to_alipay_dict()
             else:
                 params['modifier'] = self.modifier
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class FxiaokeUpdateLeadsRequest(object):
             o.leads_source_partner_id = d['leads_source_partner_id']
         if 'modifier' in d:
             o.modifier = d['modifier']
+        if 'source' in d:
+            o.source = d['source']
         return o
 
 

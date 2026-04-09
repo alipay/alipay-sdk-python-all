@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.GoodInfo import GoodInfo
+from alipay.aop.api.domain.GoodInfo import GoodInfo
 from alipay.aop.api.domain.WeightFloor import WeightFloor
 
 
@@ -15,7 +16,9 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
         self._goods_infos = None
         self._open_id = None
         self._req_id = None
+        self._right_goods_infos = None
         self._scene = None
+        self._single_pad_door_pos = None
         self._sub_merchant_id = None
         self._sub_merchant_name = None
         self._terminal_id = None
@@ -65,12 +68,32 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
     def req_id(self, value):
         self._req_id = value
     @property
+    def right_goods_infos(self):
+        return self._right_goods_infos
+
+    @right_goods_infos.setter
+    def right_goods_infos(self, value):
+        if isinstance(value, list):
+            self._right_goods_infos = list()
+            for i in value:
+                if isinstance(i, GoodInfo):
+                    self._right_goods_infos.append(i)
+                else:
+                    self._right_goods_infos.append(GoodInfo.from_alipay_dict(i))
+    @property
     def scene(self):
         return self._scene
 
     @scene.setter
     def scene(self, value):
         self._scene = value
+    @property
+    def single_pad_door_pos(self):
+        return self._single_pad_door_pos
+
+    @single_pad_door_pos.setter
+    def single_pad_door_pos(self, value):
+        self._single_pad_door_pos = value
     @property
     def sub_merchant_id(self):
         return self._sub_merchant_id
@@ -153,11 +176,26 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
                 params['req_id'] = self.req_id.to_alipay_dict()
             else:
                 params['req_id'] = self.req_id
+        if self.right_goods_infos:
+            if isinstance(self.right_goods_infos, list):
+                for i in range(0, len(self.right_goods_infos)):
+                    element = self.right_goods_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.right_goods_infos[i] = element.to_alipay_dict()
+            if hasattr(self.right_goods_infos, 'to_alipay_dict'):
+                params['right_goods_infos'] = self.right_goods_infos.to_alipay_dict()
+            else:
+                params['right_goods_infos'] = self.right_goods_infos
         if self.scene:
             if hasattr(self.scene, 'to_alipay_dict'):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.single_pad_door_pos:
+            if hasattr(self.single_pad_door_pos, 'to_alipay_dict'):
+                params['single_pad_door_pos'] = self.single_pad_door_pos.to_alipay_dict()
+            else:
+                params['single_pad_door_pos'] = self.single_pad_door_pos
         if self.sub_merchant_id:
             if hasattr(self.sub_merchant_id, 'to_alipay_dict'):
                 params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
@@ -210,8 +248,12 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
             o.open_id = d['open_id']
         if 'req_id' in d:
             o.req_id = d['req_id']
+        if 'right_goods_infos' in d:
+            o.right_goods_infos = d['right_goods_infos']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'single_pad_door_pos' in d:
+            o.single_pad_door_pos = d['single_pad_door_pos']
         if 'sub_merchant_id' in d:
             o.sub_merchant_id = d['sub_merchant_id']
         if 'sub_merchant_name' in d:
