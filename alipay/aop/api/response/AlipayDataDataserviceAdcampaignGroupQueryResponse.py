@@ -19,6 +19,7 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._boost_end_date = None
         self._boost_id = None
         self._boost_start_date = None
+        self._charge_type = None
         self._city_level_list = None
         self._converted_event = None
         self._converted_event_grp = None
@@ -44,6 +45,7 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._lbs_list = None
         self._market_target_code = None
         self._market_target_name = None
+        self._new_target_roi = None
         self._one_boost_status = None
         self._os_list = None
         self._plan_id = None
@@ -120,6 +122,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     @boost_start_date.setter
     def boost_start_date(self, value):
         self._boost_start_date = value
+    @property
+    def charge_type(self):
+        return self._charge_type
+
+    @charge_type.setter
+    def charge_type(self, value):
+        self._charge_type = value
     @property
     def city_level_list(self):
         return self._city_level_list
@@ -320,6 +329,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     def market_target_name(self, value):
         self._market_target_name = value
     @property
+    def new_target_roi(self):
+        return self._new_target_roi
+
+    @new_target_roi.setter
+    def new_target_roi(self, value):
+        self._new_target_roi = value
+    @property
     def one_boost_status(self):
         return self._one_boost_status
 
@@ -444,6 +460,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.boost_id = response['boost_id']
         if 'boost_start_date' in response:
             self.boost_start_date = response['boost_start_date']
+        if 'charge_type' in response:
+            self.charge_type = response['charge_type']
         if 'city_level_list' in response:
             self.city_level_list = response['city_level_list']
         if 'converted_event' in response:
@@ -494,6 +512,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.market_target_code = response['market_target_code']
         if 'market_target_name' in response:
             self.market_target_name = response['market_target_name']
+        if 'new_target_roi' in response:
+            self.new_target_roi = response['new_target_roi']
         if 'one_boost_status' in response:
             self.one_boost_status = response['one_boost_status']
         if 'os_list' in response:

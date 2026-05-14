@@ -11,6 +11,7 @@ class ReliableEnterpriseBaseInfoDTO(object):
         self._auth_status = None
         self._enterprise_code = None
         self._enterprise_name = None
+        self._industry = None
 
     @property
     def auth_status(self):
@@ -33,6 +34,13 @@ class ReliableEnterpriseBaseInfoDTO(object):
     @enterprise_name.setter
     def enterprise_name(self, value):
         self._enterprise_name = value
+    @property
+    def industry(self):
+        return self._industry
+
+    @industry.setter
+    def industry(self, value):
+        self._industry = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class ReliableEnterpriseBaseInfoDTO(object):
                 params['enterprise_name'] = self.enterprise_name.to_alipay_dict()
             else:
                 params['enterprise_name'] = self.enterprise_name
+        if self.industry:
+            if hasattr(self.industry, 'to_alipay_dict'):
+                params['industry'] = self.industry.to_alipay_dict()
+            else:
+                params['industry'] = self.industry
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class ReliableEnterpriseBaseInfoDTO(object):
             o.enterprise_code = d['enterprise_code']
         if 'enterprise_name' in d:
             o.enterprise_name = d['enterprise_name']
+        if 'industry' in d:
+            o.industry = d['industry']
         return o
 
 

@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class TourTicketInfo(object):
 
     def __init__(self):
+        self._ticket_id = None
         self._ticket_name = None
         self._ticket_price = None
         self._ticket_target_audience = None
 
+    @property
+    def ticket_id(self):
+        return self._ticket_id
+
+    @ticket_id.setter
+    def ticket_id(self, value):
+        self._ticket_id = value
     @property
     def ticket_name(self):
         return self._ticket_name
@@ -37,6 +45,11 @@ class TourTicketInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ticket_id:
+            if hasattr(self.ticket_id, 'to_alipay_dict'):
+                params['ticket_id'] = self.ticket_id.to_alipay_dict()
+            else:
+                params['ticket_id'] = self.ticket_id
         if self.ticket_name:
             if hasattr(self.ticket_name, 'to_alipay_dict'):
                 params['ticket_name'] = self.ticket_name.to_alipay_dict()
@@ -59,6 +72,8 @@ class TourTicketInfo(object):
         if not d:
             return None
         o = TourTicketInfo()
+        if 'ticket_id' in d:
+            o.ticket_id = d['ticket_id']
         if 'ticket_name' in d:
             o.ticket_name = d['ticket_name']
         if 'ticket_price' in d:

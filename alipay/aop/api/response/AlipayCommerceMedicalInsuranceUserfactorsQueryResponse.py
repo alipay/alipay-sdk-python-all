@@ -11,6 +11,7 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
         super(AlipayCommerceMedicalInsuranceUserfactorsQueryResponse, self).__init__()
         self._cert_no = None
         self._cert_type = None
+        self._mobile = None
         self._name = None
         self._open_id = None
         self._user_id = None
@@ -29,6 +30,13 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
     @property
     def name(self):
         return self._name
@@ -57,6 +65,8 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
             self.cert_no = response['cert_no']
         if 'cert_type' in response:
             self.cert_type = response['cert_type']
+        if 'mobile' in response:
+            self.mobile = response['mobile']
         if 'name' in response:
             self.name = response['name']
         if 'open_id' in response:

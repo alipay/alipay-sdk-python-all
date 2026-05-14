@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
+from alipay.aop.api.domain.EcomOrderDTO import EcomOrderDTO
 
 
 class AlipayInsSceneCommonPremissionAuthModel(object):
@@ -14,6 +15,7 @@ class AlipayInsSceneCommonPremissionAuthModel(object):
         self._holder = None
         self._insureds = None
         self._login_user_id = None
+        self._order_dto = None
         self._out_session_id = None
         self._partner_org_id = None
 
@@ -54,6 +56,16 @@ class AlipayInsSceneCommonPremissionAuthModel(object):
     @login_user_id.setter
     def login_user_id(self, value):
         self._login_user_id = value
+    @property
+    def order_dto(self):
+        return self._order_dto
+
+    @order_dto.setter
+    def order_dto(self, value):
+        if isinstance(value, EcomOrderDTO):
+            self._order_dto = value
+        else:
+            self._order_dto = EcomOrderDTO.from_alipay_dict(value)
     @property
     def out_session_id(self):
         return self._out_session_id
@@ -97,6 +109,11 @@ class AlipayInsSceneCommonPremissionAuthModel(object):
                 params['login_user_id'] = self.login_user_id.to_alipay_dict()
             else:
                 params['login_user_id'] = self.login_user_id
+        if self.order_dto:
+            if hasattr(self.order_dto, 'to_alipay_dict'):
+                params['order_dto'] = self.order_dto.to_alipay_dict()
+            else:
+                params['order_dto'] = self.order_dto
         if self.out_session_id:
             if hasattr(self.out_session_id, 'to_alipay_dict'):
                 params['out_session_id'] = self.out_session_id.to_alipay_dict()
@@ -122,6 +139,8 @@ class AlipayInsSceneCommonPremissionAuthModel(object):
             o.insureds = d['insureds']
         if 'login_user_id' in d:
             o.login_user_id = d['login_user_id']
+        if 'order_dto' in d:
+            o.order_dto = d['order_dto']
         if 'out_session_id' in d:
             o.out_session_id = d['out_session_id']
         if 'partner_org_id' in d:

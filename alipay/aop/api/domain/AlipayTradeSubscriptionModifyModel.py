@@ -12,6 +12,9 @@ class AlipayTradeSubscriptionModifyModel(object):
         self._cancel_at_period_end = None
         self._description = None
         self._items = None
+        self._modify_type = None
+        self._pay_amount = None
+        self._preserve_billing_cycle = None
         self._subscribe_title = None
         self._subscription_id = None
 
@@ -42,6 +45,27 @@ class AlipayTradeSubscriptionModifyModel(object):
                     self._items.append(i)
                 else:
                     self._items.append(SubscriptionItem.from_alipay_dict(i))
+    @property
+    def modify_type(self):
+        return self._modify_type
+
+    @modify_type.setter
+    def modify_type(self, value):
+        self._modify_type = value
+    @property
+    def pay_amount(self):
+        return self._pay_amount
+
+    @pay_amount.setter
+    def pay_amount(self, value):
+        self._pay_amount = value
+    @property
+    def preserve_billing_cycle(self):
+        return self._preserve_billing_cycle
+
+    @preserve_billing_cycle.setter
+    def preserve_billing_cycle(self, value):
+        self._preserve_billing_cycle = value
     @property
     def subscribe_title(self):
         return self._subscribe_title
@@ -80,6 +104,21 @@ class AlipayTradeSubscriptionModifyModel(object):
                 params['items'] = self.items.to_alipay_dict()
             else:
                 params['items'] = self.items
+        if self.modify_type:
+            if hasattr(self.modify_type, 'to_alipay_dict'):
+                params['modify_type'] = self.modify_type.to_alipay_dict()
+            else:
+                params['modify_type'] = self.modify_type
+        if self.pay_amount:
+            if hasattr(self.pay_amount, 'to_alipay_dict'):
+                params['pay_amount'] = self.pay_amount.to_alipay_dict()
+            else:
+                params['pay_amount'] = self.pay_amount
+        if self.preserve_billing_cycle:
+            if hasattr(self.preserve_billing_cycle, 'to_alipay_dict'):
+                params['preserve_billing_cycle'] = self.preserve_billing_cycle.to_alipay_dict()
+            else:
+                params['preserve_billing_cycle'] = self.preserve_billing_cycle
         if self.subscribe_title:
             if hasattr(self.subscribe_title, 'to_alipay_dict'):
                 params['subscribe_title'] = self.subscribe_title.to_alipay_dict()
@@ -103,6 +142,12 @@ class AlipayTradeSubscriptionModifyModel(object):
             o.description = d['description']
         if 'items' in d:
             o.items = d['items']
+        if 'modify_type' in d:
+            o.modify_type = d['modify_type']
+        if 'pay_amount' in d:
+            o.pay_amount = d['pay_amount']
+        if 'preserve_billing_cycle' in d:
+            o.preserve_billing_cycle = d['preserve_billing_cycle']
         if 'subscribe_title' in d:
             o.subscribe_title = d['subscribe_title']
         if 'subscription_id' in d:

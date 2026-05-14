@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RentExtInfo import RentExtInfo
 from alipay.aop.api.domain.RentInfo import RentInfo
+from alipay.aop.api.domain.RentPromoInfoVO import RentPromoInfoVO
 from alipay.aop.api.domain.RentRiskInfo import RentRiskInfo
 
 
@@ -14,6 +15,7 @@ class AlipayCommerceRentOrderInvestQueryResponse(AlipayResponse):
         super(AlipayCommerceRentOrderInvestQueryResponse, self).__init__()
         self._rent_ext_info = None
         self._rent_info = None
+        self._rent_promo_info = None
         self._rent_risk_info = None
 
     @property
@@ -37,6 +39,16 @@ class AlipayCommerceRentOrderInvestQueryResponse(AlipayResponse):
         else:
             self._rent_info = RentInfo.from_alipay_dict(value)
     @property
+    def rent_promo_info(self):
+        return self._rent_promo_info
+
+    @rent_promo_info.setter
+    def rent_promo_info(self, value):
+        if isinstance(value, RentPromoInfoVO):
+            self._rent_promo_info = value
+        else:
+            self._rent_promo_info = RentPromoInfoVO.from_alipay_dict(value)
+    @property
     def rent_risk_info(self):
         return self._rent_risk_info
 
@@ -56,5 +68,7 @@ class AlipayCommerceRentOrderInvestQueryResponse(AlipayResponse):
             self.rent_ext_info = response['rent_ext_info']
         if 'rent_info' in response:
             self.rent_info = response['rent_info']
+        if 'rent_promo_info' in response:
+            self.rent_promo_info = response['rent_promo_info']
         if 'rent_risk_info' in response:
             self.rent_risk_info = response['rent_risk_info']

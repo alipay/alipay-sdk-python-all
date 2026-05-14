@@ -14,12 +14,14 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
         self._apply_time = None
         self._insurance_company_code = None
         self._insured_list = None
+        self._open_jzb_pid = None
         self._order_amount = None
         self._out_order_no = None
         self._policy_end_date = None
         self._policy_org_holder = None
         self._policy_start_date = None
         self._product_code = None
+        self._project_file_id = None
         self._project_id = None
         self._subject_matter = None
 
@@ -50,6 +52,13 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
                     self._insured_list.append(i)
                 else:
                     self._insured_list.append(InsuredVO.from_alipay_dict(i))
+    @property
+    def open_jzb_pid(self):
+        return self._open_jzb_pid
+
+    @open_jzb_pid.setter
+    def open_jzb_pid(self, value):
+        self._open_jzb_pid = value
     @property
     def order_amount(self):
         return self._order_amount
@@ -96,6 +105,13 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def project_file_id(self):
+        return self._project_file_id
+
+    @project_file_id.setter
+    def project_file_id(self, value):
+        self._project_file_id = value
+    @property
     def project_id(self):
         return self._project_id
 
@@ -139,6 +155,11 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
                 params['insured_list'] = self.insured_list.to_alipay_dict()
             else:
                 params['insured_list'] = self.insured_list
+        if self.open_jzb_pid:
+            if hasattr(self.open_jzb_pid, 'to_alipay_dict'):
+                params['open_jzb_pid'] = self.open_jzb_pid.to_alipay_dict()
+            else:
+                params['open_jzb_pid'] = self.open_jzb_pid
         if self.order_amount:
             if hasattr(self.order_amount, 'to_alipay_dict'):
                 params['order_amount'] = self.order_amount.to_alipay_dict()
@@ -169,6 +190,11 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.project_file_id:
+            if hasattr(self.project_file_id, 'to_alipay_dict'):
+                params['project_file_id'] = self.project_file_id.to_alipay_dict()
+            else:
+                params['project_file_id'] = self.project_file_id
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -197,6 +223,8 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
             o.insurance_company_code = d['insurance_company_code']
         if 'insured_list' in d:
             o.insured_list = d['insured_list']
+        if 'open_jzb_pid' in d:
+            o.open_jzb_pid = d['open_jzb_pid']
         if 'order_amount' in d:
             o.order_amount = d['order_amount']
         if 'out_order_no' in d:
@@ -209,6 +237,8 @@ class AlipayCommerceDecorationPolicyunderwritingConsultModel(object):
             o.policy_start_date = d['policy_start_date']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'project_file_id' in d:
+            o.project_file_id = d['project_file_id']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'subject_matter' in d:

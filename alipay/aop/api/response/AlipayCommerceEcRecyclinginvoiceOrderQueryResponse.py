@@ -33,6 +33,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._payment_invoice_page_url = None
         self._payment_invoice_qr_code_url = None
         self._product_id = None
+        self._proxy_seller_invoice_page_alipay_url = None
+        self._proxy_seller_invoice_page_url = None
         self._seller_name = None
         self._seller_open_id = None
         self._seller_phone = None
@@ -198,6 +200,20 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
     def product_id(self, value):
         self._product_id = value
     @property
+    def proxy_seller_invoice_page_alipay_url(self):
+        return self._proxy_seller_invoice_page_alipay_url
+
+    @proxy_seller_invoice_page_alipay_url.setter
+    def proxy_seller_invoice_page_alipay_url(self, value):
+        self._proxy_seller_invoice_page_alipay_url = value
+    @property
+    def proxy_seller_invoice_page_url(self):
+        return self._proxy_seller_invoice_page_url
+
+    @proxy_seller_invoice_page_url.setter
+    def proxy_seller_invoice_page_url(self, value):
+        self._proxy_seller_invoice_page_url = value
+    @property
     def seller_name(self):
         return self._seller_name
 
@@ -280,6 +296,10 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
             self.payment_invoice_qr_code_url = response['payment_invoice_qr_code_url']
         if 'product_id' in response:
             self.product_id = response['product_id']
+        if 'proxy_seller_invoice_page_alipay_url' in response:
+            self.proxy_seller_invoice_page_alipay_url = response['proxy_seller_invoice_page_alipay_url']
+        if 'proxy_seller_invoice_page_url' in response:
+            self.proxy_seller_invoice_page_url = response['proxy_seller_invoice_page_url']
         if 'seller_name' in response:
             self.seller_name = response['seller_name']
         if 'seller_open_id' in response:

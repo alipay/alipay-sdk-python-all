@@ -30,6 +30,7 @@ class AssetProduceItem(object):
         self._is_combination_order = None
         self._is_kit_pack = None
         self._logistics_code = None
+        self._logistics_mode = None
         self._logistics_name = None
         self._logistics_no = None
         self._memo = None
@@ -212,6 +213,13 @@ class AssetProduceItem(object):
     @logistics_code.setter
     def logistics_code(self, value):
         self._logistics_code = value
+    @property
+    def logistics_mode(self):
+        return self._logistics_mode
+
+    @logistics_mode.setter
+    def logistics_mode(self, value):
+        self._logistics_mode = value
     @property
     def logistics_name(self):
         return self._logistics_name
@@ -552,6 +560,11 @@ class AssetProduceItem(object):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
             else:
                 params['logistics_code'] = self.logistics_code
+        if self.logistics_mode:
+            if hasattr(self.logistics_mode, 'to_alipay_dict'):
+                params['logistics_mode'] = self.logistics_mode.to_alipay_dict()
+            else:
+                params['logistics_mode'] = self.logistics_mode
         if self.logistics_name:
             if hasattr(self.logistics_name, 'to_alipay_dict'):
                 params['logistics_name'] = self.logistics_name.to_alipay_dict()
@@ -766,6 +779,8 @@ class AssetProduceItem(object):
             o.is_kit_pack = d['is_kit_pack']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
+        if 'logistics_mode' in d:
+            o.logistics_mode = d['logistics_mode']
         if 'logistics_name' in d:
             o.logistics_name = d['logistics_name']
         if 'logistics_no' in d:

@@ -10,6 +10,9 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
     def __init__(self):
         self._code_value = None
         self._event_action = None
+        self._ext_data = None
+        self._hospital_branch_code = None
+        self._hospital_branch_name = None
         self._hospital_code = None
         self._hospital_name = None
         self._individual_policy_no = None
@@ -36,6 +39,27 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
     @event_action.setter
     def event_action(self, value):
         self._event_action = value
+    @property
+    def ext_data(self):
+        return self._ext_data
+
+    @ext_data.setter
+    def ext_data(self, value):
+        self._ext_data = value
+    @property
+    def hospital_branch_code(self):
+        return self._hospital_branch_code
+
+    @hospital_branch_code.setter
+    def hospital_branch_code(self, value):
+        self._hospital_branch_code = value
+    @property
+    def hospital_branch_name(self):
+        return self._hospital_branch_name
+
+    @hospital_branch_name.setter
+    def hospital_branch_name(self, value):
+        self._hospital_branch_name = value
     @property
     def hospital_code(self):
         return self._hospital_code
@@ -127,6 +151,21 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
                 params['event_action'] = self.event_action.to_alipay_dict()
             else:
                 params['event_action'] = self.event_action
+        if self.ext_data:
+            if hasattr(self.ext_data, 'to_alipay_dict'):
+                params['ext_data'] = self.ext_data.to_alipay_dict()
+            else:
+                params['ext_data'] = self.ext_data
+        if self.hospital_branch_code:
+            if hasattr(self.hospital_branch_code, 'to_alipay_dict'):
+                params['hospital_branch_code'] = self.hospital_branch_code.to_alipay_dict()
+            else:
+                params['hospital_branch_code'] = self.hospital_branch_code
+        if self.hospital_branch_name:
+            if hasattr(self.hospital_branch_name, 'to_alipay_dict'):
+                params['hospital_branch_name'] = self.hospital_branch_name.to_alipay_dict()
+            else:
+                params['hospital_branch_name'] = self.hospital_branch_name
         if self.hospital_code:
             if hasattr(self.hospital_code, 'to_alipay_dict'):
                 params['hospital_code'] = self.hospital_code.to_alipay_dict()
@@ -193,6 +232,12 @@ class AlipayCommerceMedicalInsuranceTpaeventSyncModel(object):
             o.code_value = d['code_value']
         if 'event_action' in d:
             o.event_action = d['event_action']
+        if 'ext_data' in d:
+            o.ext_data = d['ext_data']
+        if 'hospital_branch_code' in d:
+            o.hospital_branch_code = d['hospital_branch_code']
+        if 'hospital_branch_name' in d:
+            o.hospital_branch_name = d['hospital_branch_name']
         if 'hospital_code' in d:
             o.hospital_code = d['hospital_code']
         if 'hospital_name' in d:

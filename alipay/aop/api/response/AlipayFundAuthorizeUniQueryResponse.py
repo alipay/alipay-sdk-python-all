@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BankAuthUserInfo import BankAuthUserInfo
 
 
 class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
@@ -10,6 +11,7 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayFundAuthorizeUniQueryResponse, self).__init__()
         self._agreement_no = None
+        self._auth_user_info = None
         self._authorize_electronic_receipt = None
         self._biz_scene = None
         self._open_id = None
@@ -26,6 +28,16 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def auth_user_info(self):
+        return self._auth_user_info
+
+    @auth_user_info.setter
+    def auth_user_info(self, value):
+        if isinstance(value, BankAuthUserInfo):
+            self._auth_user_info = value
+        else:
+            self._auth_user_info = BankAuthUserInfo.from_alipay_dict(value)
     @property
     def authorize_electronic_receipt(self):
         return self._authorize_electronic_receipt
@@ -87,6 +99,8 @@ class AlipayFundAuthorizeUniQueryResponse(AlipayResponse):
         response = super(AlipayFundAuthorizeUniQueryResponse, self).parse_response_content(response_content)
         if 'agreement_no' in response:
             self.agreement_no = response['agreement_no']
+        if 'auth_user_info' in response:
+            self.auth_user_info = response['auth_user_info']
         if 'authorize_electronic_receipt' in response:
             self.authorize_electronic_receipt = response['authorize_electronic_receipt']
         if 'biz_scene' in response:

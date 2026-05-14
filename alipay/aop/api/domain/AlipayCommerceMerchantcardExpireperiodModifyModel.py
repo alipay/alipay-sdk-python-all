@@ -10,6 +10,7 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
     def __init__(self):
         self._appoint_date = None
         self._card_id = None
+        self._expand_reason = None
         self._open_id = None
         self._out_biz_no = None
         self._period = None
@@ -33,6 +34,13 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
     @card_id.setter
     def card_id(self, value):
         self._card_id = value
+    @property
+    def expand_reason(self):
+        return self._expand_reason
+
+    @expand_reason.setter
+    def expand_reason(self, value):
+        self._expand_reason = value
     @property
     def open_id(self):
         return self._open_id
@@ -103,6 +111,11 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
                 params['card_id'] = self.card_id.to_alipay_dict()
             else:
                 params['card_id'] = self.card_id
+        if self.expand_reason:
+            if hasattr(self.expand_reason, 'to_alipay_dict'):
+                params['expand_reason'] = self.expand_reason.to_alipay_dict()
+            else:
+                params['expand_reason'] = self.expand_reason
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -154,6 +167,8 @@ class AlipayCommerceMerchantcardExpireperiodModifyModel(object):
             o.appoint_date = d['appoint_date']
         if 'card_id' in d:
             o.card_id = d['card_id']
+        if 'expand_reason' in d:
+            o.expand_reason = d['expand_reason']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_biz_no' in d:

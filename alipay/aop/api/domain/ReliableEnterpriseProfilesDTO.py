@@ -16,6 +16,7 @@ class ReliableEnterpriseProfilesDTO(object):
         self._count_employee = None
         self._legal_person_cert_no = None
         self._platform_gmt_create = None
+        self._sign_fund_inst_id = None
         self._tax_no = None
         self._utm_chain = None
         self._utm_content = None
@@ -77,6 +78,13 @@ class ReliableEnterpriseProfilesDTO(object):
     @platform_gmt_create.setter
     def platform_gmt_create(self, value):
         self._platform_gmt_create = value
+    @property
+    def sign_fund_inst_id(self):
+        return self._sign_fund_inst_id
+
+    @sign_fund_inst_id.setter
+    def sign_fund_inst_id(self, value):
+        self._sign_fund_inst_id = value
     @property
     def tax_no(self):
         return self._tax_no
@@ -149,6 +157,11 @@ class ReliableEnterpriseProfilesDTO(object):
                 params['platform_gmt_create'] = self.platform_gmt_create.to_alipay_dict()
             else:
                 params['platform_gmt_create'] = self.platform_gmt_create
+        if self.sign_fund_inst_id:
+            if hasattr(self.sign_fund_inst_id, 'to_alipay_dict'):
+                params['sign_fund_inst_id'] = self.sign_fund_inst_id.to_alipay_dict()
+            else:
+                params['sign_fund_inst_id'] = self.sign_fund_inst_id
         if self.tax_no:
             if hasattr(self.tax_no, 'to_alipay_dict'):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
@@ -192,6 +205,8 @@ class ReliableEnterpriseProfilesDTO(object):
             o.legal_person_cert_no = d['legal_person_cert_no']
         if 'platform_gmt_create' in d:
             o.platform_gmt_create = d['platform_gmt_create']
+        if 'sign_fund_inst_id' in d:
+            o.sign_fund_inst_id = d['sign_fund_inst_id']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
         if 'utm_chain' in d:

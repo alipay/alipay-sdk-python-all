@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayAipayAgentPaymentVerifyModel(object):
 
     def __init__(self):
+        self._client_session = None
         self._payment_proof = None
         self._trade_no = None
 
+    @property
+    def client_session(self):
+        return self._client_session
+
+    @client_session.setter
+    def client_session(self, value):
+        self._client_session = value
     @property
     def payment_proof(self):
         return self._payment_proof
@@ -29,6 +37,11 @@ class AlipayAipayAgentPaymentVerifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.client_session:
+            if hasattr(self.client_session, 'to_alipay_dict'):
+                params['client_session'] = self.client_session.to_alipay_dict()
+            else:
+                params['client_session'] = self.client_session
         if self.payment_proof:
             if hasattr(self.payment_proof, 'to_alipay_dict'):
                 params['payment_proof'] = self.payment_proof.to_alipay_dict()
@@ -46,6 +59,8 @@ class AlipayAipayAgentPaymentVerifyModel(object):
         if not d:
             return None
         o = AlipayAipayAgentPaymentVerifyModel()
+        if 'client_session' in d:
+            o.client_session = d['client_session']
         if 'payment_proof' in d:
             o.payment_proof = d['payment_proof']
         if 'trade_no' in d:

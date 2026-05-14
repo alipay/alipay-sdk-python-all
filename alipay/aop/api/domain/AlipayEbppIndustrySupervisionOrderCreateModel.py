@@ -16,6 +16,8 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
         self._open_id = None
         self._order_detail_url = None
         self._order_title = None
+        self._out_contract_no = None
+        self._out_contract_type = None
         self._out_order_no = None
 
     @property
@@ -78,6 +80,20 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
     def order_title(self, value):
         self._order_title = value
     @property
+    def out_contract_no(self):
+        return self._out_contract_no
+
+    @out_contract_no.setter
+    def out_contract_no(self, value):
+        self._out_contract_no = value
+    @property
+    def out_contract_type(self):
+        return self._out_contract_type
+
+    @out_contract_type.setter
+    def out_contract_type(self, value):
+        self._out_contract_type = value
+    @property
     def out_order_no(self):
         return self._out_order_no
 
@@ -133,6 +149,16 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
                 params['order_title'] = self.order_title.to_alipay_dict()
             else:
                 params['order_title'] = self.order_title
+        if self.out_contract_no:
+            if hasattr(self.out_contract_no, 'to_alipay_dict'):
+                params['out_contract_no'] = self.out_contract_no.to_alipay_dict()
+            else:
+                params['out_contract_no'] = self.out_contract_no
+        if self.out_contract_type:
+            if hasattr(self.out_contract_type, 'to_alipay_dict'):
+                params['out_contract_type'] = self.out_contract_type.to_alipay_dict()
+            else:
+                params['out_contract_type'] = self.out_contract_type
         if self.out_order_no:
             if hasattr(self.out_order_no, 'to_alipay_dict'):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
@@ -161,6 +187,10 @@ class AlipayEbppIndustrySupervisionOrderCreateModel(object):
             o.order_detail_url = d['order_detail_url']
         if 'order_title' in d:
             o.order_title = d['order_title']
+        if 'out_contract_no' in d:
+            o.out_contract_no = d['out_contract_no']
+        if 'out_contract_type' in d:
+            o.out_contract_type = d['out_contract_type']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
         return o

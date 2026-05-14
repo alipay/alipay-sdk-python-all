@@ -75,10 +75,13 @@ class AlipayCommerceMedicalSearchResultQueryResponse(AlipayResponse):
 
     @key_list.setter
     def key_list(self, value):
-        if isinstance(value, KeyInfo):
-            self._key_list = value
-        else:
-            self._key_list = KeyInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._key_list = list()
+            for i in value:
+                if isinstance(i, KeyInfo):
+                    self._key_list.append(i)
+                else:
+                    self._key_list.append(KeyInfo.from_alipay_dict(i))
     @property
     def medical_record_list(self):
         return self._medical_record_list

@@ -32,6 +32,7 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
         self._service_entity_outid = None
         self._special_name = None
         self._start_date = None
+        self._sub_status = None
         self._time_schema = None
         self._tiny_app_id = None
         self._tiny_app_name = None
@@ -194,6 +195,13 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
     def start_date(self, value):
         self._start_date = value
     @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
+    @property
     def time_schema(self):
         return self._time_schema
 
@@ -261,6 +269,8 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
             self.special_name = response['special_name']
         if 'start_date' in response:
             self.start_date = response['start_date']
+        if 'sub_status' in response:
+            self.sub_status = response['sub_status']
         if 'time_schema' in response:
             self.time_schema = response['time_schema']
         if 'tiny_app_id' in response:

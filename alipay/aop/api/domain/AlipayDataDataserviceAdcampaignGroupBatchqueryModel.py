@@ -9,6 +9,7 @@ class AlipayDataDataserviceAdcampaignGroupBatchqueryModel(object):
 
     def __init__(self):
         self._bid_type = None
+        self._charge_type = None
         self._current = None
         self._first_market_target_code = None
         self._group_status_list = None
@@ -26,6 +27,13 @@ class AlipayDataDataserviceAdcampaignGroupBatchqueryModel(object):
     @bid_type.setter
     def bid_type(self, value):
         self._bid_type = value
+    @property
+    def charge_type(self):
+        return self._charge_type
+
+    @charge_type.setter
+    def charge_type(self, value):
+        self._charge_type = value
     @property
     def current(self):
         return self._current
@@ -101,6 +109,11 @@ class AlipayDataDataserviceAdcampaignGroupBatchqueryModel(object):
                 params['bid_type'] = self.bid_type.to_alipay_dict()
             else:
                 params['bid_type'] = self.bid_type
+        if self.charge_type:
+            if hasattr(self.charge_type, 'to_alipay_dict'):
+                params['charge_type'] = self.charge_type.to_alipay_dict()
+            else:
+                params['charge_type'] = self.charge_type
         if self.current:
             if hasattr(self.current, 'to_alipay_dict'):
                 params['current'] = self.current.to_alipay_dict()
@@ -160,6 +173,8 @@ class AlipayDataDataserviceAdcampaignGroupBatchqueryModel(object):
         o = AlipayDataDataserviceAdcampaignGroupBatchqueryModel()
         if 'bid_type' in d:
             o.bid_type = d['bid_type']
+        if 'charge_type' in d:
+            o.charge_type = d['charge_type']
         if 'current' in d:
             o.current = d['current']
         if 'first_market_target_code' in d:

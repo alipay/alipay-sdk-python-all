@@ -10,6 +10,7 @@ class AlipayCommerceMedicalSmsShorturlGetModel(object):
     def __init__(self):
         self._identity_id = None
         self._identity_type = None
+        self._param_info = None
         self._rule_id = None
         self._scene = None
         self._sub_scene = None
@@ -28,6 +29,13 @@ class AlipayCommerceMedicalSmsShorturlGetModel(object):
     @identity_type.setter
     def identity_type(self, value):
         self._identity_type = value
+    @property
+    def param_info(self):
+        return self._param_info
+
+    @param_info.setter
+    def param_info(self, value):
+        self._param_info = value
     @property
     def rule_id(self):
         return self._rule_id
@@ -63,6 +71,11 @@ class AlipayCommerceMedicalSmsShorturlGetModel(object):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
             else:
                 params['identity_type'] = self.identity_type
+        if self.param_info:
+            if hasattr(self.param_info, 'to_alipay_dict'):
+                params['param_info'] = self.param_info.to_alipay_dict()
+            else:
+                params['param_info'] = self.param_info
         if self.rule_id:
             if hasattr(self.rule_id, 'to_alipay_dict'):
                 params['rule_id'] = self.rule_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceMedicalSmsShorturlGetModel(object):
             o.identity_id = d['identity_id']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
+        if 'param_info' in d:
+            o.param_info = d['param_info']
         if 'rule_id' in d:
             o.rule_id = d['rule_id']
         if 'scene' in d:

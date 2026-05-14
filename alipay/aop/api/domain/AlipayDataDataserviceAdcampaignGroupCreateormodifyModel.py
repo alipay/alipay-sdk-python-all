@@ -35,6 +35,7 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
         self._include_customized_crowd_list = None
         self._interest_list = None
         self._lbs_list = None
+        self._new_target_roi = None
         self._one_boost_status = None
         self._os_list = None
         self._plan_id = None
@@ -253,6 +254,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                     self._lbs_list.append(i)
                 else:
                     self._lbs_list.append(OpenLbsEntry.from_alipay_dict(i))
+    @property
+    def new_target_roi(self):
+        return self._new_target_roi
+
+    @new_target_roi.setter
+    def new_target_roi(self, value):
+        self._new_target_roi = value
     @property
     def one_boost_status(self):
         return self._one_boost_status
@@ -526,6 +534,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['lbs_list'] = self.lbs_list.to_alipay_dict()
             else:
                 params['lbs_list'] = self.lbs_list
+        if self.new_target_roi:
+            if hasattr(self.new_target_roi, 'to_alipay_dict'):
+                params['new_target_roi'] = self.new_target_roi.to_alipay_dict()
+            else:
+                params['new_target_roi'] = self.new_target_roi
         if self.one_boost_status:
             if hasattr(self.one_boost_status, 'to_alipay_dict'):
                 params['one_boost_status'] = self.one_boost_status.to_alipay_dict()
@@ -663,6 +676,8 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.interest_list = d['interest_list']
         if 'lbs_list' in d:
             o.lbs_list = d['lbs_list']
+        if 'new_target_roi' in d:
+            o.new_target_roi = d['new_target_roi']
         if 'one_boost_status' in d:
             o.one_boost_status = d['one_boost_status']
         if 'os_list' in d:

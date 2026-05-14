@@ -3,13 +3,21 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InquiryInfoParam import InquiryInfoParam
+from alipay.aop.api.domain.InspectInfoParam import InspectInfoParam
 
 
 class SkuCreateInfoParam(object):
 
     def __init__(self):
+        self._external_key = None
+        self._inquiry_info = None
+        self._inspect_info = None
+        self._name = None
+        self._origin_price = None
         self._price = None
         self._shelf_code = None
+        self._show_to_customer = None
         self._sku_code = None
         self._stock = None
         self._upc = None
@@ -19,6 +27,47 @@ class SkuCreateInfoParam(object):
         self._weight = None
         self._weight_unit = None
 
+    @property
+    def external_key(self):
+        return self._external_key
+
+    @external_key.setter
+    def external_key(self, value):
+        self._external_key = value
+    @property
+    def inquiry_info(self):
+        return self._inquiry_info
+
+    @inquiry_info.setter
+    def inquiry_info(self, value):
+        if isinstance(value, InquiryInfoParam):
+            self._inquiry_info = value
+        else:
+            self._inquiry_info = InquiryInfoParam.from_alipay_dict(value)
+    @property
+    def inspect_info(self):
+        return self._inspect_info
+
+    @inspect_info.setter
+    def inspect_info(self, value):
+        if isinstance(value, InspectInfoParam):
+            self._inspect_info = value
+        else:
+            self._inspect_info = InspectInfoParam.from_alipay_dict(value)
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        self._name = value
+    @property
+    def origin_price(self):
+        return self._origin_price
+
+    @origin_price.setter
+    def origin_price(self, value):
+        self._origin_price = value
     @property
     def price(self):
         return self._price
@@ -33,6 +82,13 @@ class SkuCreateInfoParam(object):
     @shelf_code.setter
     def shelf_code(self, value):
         self._shelf_code = value
+    @property
+    def show_to_customer(self):
+        return self._show_to_customer
+
+    @show_to_customer.setter
+    def show_to_customer(self, value):
+        self._show_to_customer = value
     @property
     def sku_code(self):
         return self._sku_code
@@ -93,6 +149,31 @@ class SkuCreateInfoParam(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.external_key:
+            if hasattr(self.external_key, 'to_alipay_dict'):
+                params['external_key'] = self.external_key.to_alipay_dict()
+            else:
+                params['external_key'] = self.external_key
+        if self.inquiry_info:
+            if hasattr(self.inquiry_info, 'to_alipay_dict'):
+                params['inquiry_info'] = self.inquiry_info.to_alipay_dict()
+            else:
+                params['inquiry_info'] = self.inquiry_info
+        if self.inspect_info:
+            if hasattr(self.inspect_info, 'to_alipay_dict'):
+                params['inspect_info'] = self.inspect_info.to_alipay_dict()
+            else:
+                params['inspect_info'] = self.inspect_info
+        if self.name:
+            if hasattr(self.name, 'to_alipay_dict'):
+                params['name'] = self.name.to_alipay_dict()
+            else:
+                params['name'] = self.name
+        if self.origin_price:
+            if hasattr(self.origin_price, 'to_alipay_dict'):
+                params['origin_price'] = self.origin_price.to_alipay_dict()
+            else:
+                params['origin_price'] = self.origin_price
         if self.price:
             if hasattr(self.price, 'to_alipay_dict'):
                 params['price'] = self.price.to_alipay_dict()
@@ -103,6 +184,11 @@ class SkuCreateInfoParam(object):
                 params['shelf_code'] = self.shelf_code.to_alipay_dict()
             else:
                 params['shelf_code'] = self.shelf_code
+        if self.show_to_customer:
+            if hasattr(self.show_to_customer, 'to_alipay_dict'):
+                params['show_to_customer'] = self.show_to_customer.to_alipay_dict()
+            else:
+                params['show_to_customer'] = self.show_to_customer
         if self.sku_code:
             if hasattr(self.sku_code, 'to_alipay_dict'):
                 params['sku_code'] = self.sku_code.to_alipay_dict()
@@ -150,10 +236,22 @@ class SkuCreateInfoParam(object):
         if not d:
             return None
         o = SkuCreateInfoParam()
+        if 'external_key' in d:
+            o.external_key = d['external_key']
+        if 'inquiry_info' in d:
+            o.inquiry_info = d['inquiry_info']
+        if 'inspect_info' in d:
+            o.inspect_info = d['inspect_info']
+        if 'name' in d:
+            o.name = d['name']
+        if 'origin_price' in d:
+            o.origin_price = d['origin_price']
         if 'price' in d:
             o.price = d['price']
         if 'shelf_code' in d:
             o.shelf_code = d['shelf_code']
+        if 'show_to_customer' in d:
+            o.show_to_customer = d['show_to_customer']
         if 'sku_code' in d:
             o.sku_code = d['sku_code']
         if 'stock' in d:

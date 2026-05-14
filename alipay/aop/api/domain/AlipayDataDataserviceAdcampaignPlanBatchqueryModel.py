@@ -17,6 +17,7 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
         self._principal_tag = None
         self._scene_code = None
         self._search_keywords = None
+        self._sub_status = None
 
     @property
     def charge_type_list(self):
@@ -87,6 +88,13 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
     @search_keywords.setter
     def search_keywords(self, value):
         self._search_keywords = value
+    @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
 
 
     def to_alipay_dict(self):
@@ -146,6 +154,11 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
                 params['search_keywords'] = self.search_keywords.to_alipay_dict()
             else:
                 params['search_keywords'] = self.search_keywords
+        if self.sub_status:
+            if hasattr(self.sub_status, 'to_alipay_dict'):
+                params['sub_status'] = self.sub_status.to_alipay_dict()
+            else:
+                params['sub_status'] = self.sub_status
         return params
 
     @staticmethod
@@ -171,6 +184,8 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
             o.scene_code = d['scene_code']
         if 'search_keywords' in d:
             o.search_keywords = d['search_keywords']
+        if 'sub_status' in d:
+            o.sub_status = d['sub_status']
         return o
 
 

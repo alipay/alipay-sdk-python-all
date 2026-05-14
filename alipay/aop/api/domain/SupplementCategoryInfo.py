@@ -11,6 +11,7 @@ class SupplementCategoryInfo(object):
         self._supplement_category = None
         self._supplement_details_list = None
         self._supplement_payment_amt = None
+        self._supplement_reason_for_customer_service = None
 
     @property
     def supplement_category(self):
@@ -36,6 +37,13 @@ class SupplementCategoryInfo(object):
     @supplement_payment_amt.setter
     def supplement_payment_amt(self, value):
         self._supplement_payment_amt = value
+    @property
+    def supplement_reason_for_customer_service(self):
+        return self._supplement_reason_for_customer_service
+
+    @supplement_reason_for_customer_service.setter
+    def supplement_reason_for_customer_service(self, value):
+        self._supplement_reason_for_customer_service = value
 
 
     def to_alipay_dict(self):
@@ -60,6 +68,11 @@ class SupplementCategoryInfo(object):
                 params['supplement_payment_amt'] = self.supplement_payment_amt.to_alipay_dict()
             else:
                 params['supplement_payment_amt'] = self.supplement_payment_amt
+        if self.supplement_reason_for_customer_service:
+            if hasattr(self.supplement_reason_for_customer_service, 'to_alipay_dict'):
+                params['supplement_reason_for_customer_service'] = self.supplement_reason_for_customer_service.to_alipay_dict()
+            else:
+                params['supplement_reason_for_customer_service'] = self.supplement_reason_for_customer_service
         return params
 
     @staticmethod
@@ -73,6 +86,8 @@ class SupplementCategoryInfo(object):
             o.supplement_details_list = d['supplement_details_list']
         if 'supplement_payment_amt' in d:
             o.supplement_payment_amt = d['supplement_payment_amt']
+        if 'supplement_reason_for_customer_service' in d:
+            o.supplement_reason_for_customer_service = d['supplement_reason_for_customer_service']
         return o
 
 

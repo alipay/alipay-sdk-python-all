@@ -10,6 +10,7 @@ class AlipayOpenMiniBillDailyQueryModel(object):
     def __init__(self):
         self._page_num = None
         self._page_size = None
+        self._settle_date = None
         self._use_date = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayOpenMiniBillDailyQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def settle_date(self):
+        return self._settle_date
+
+    @settle_date.setter
+    def settle_date(self, value):
+        self._settle_date = value
     @property
     def use_date(self):
         return self._use_date
@@ -47,6 +55,11 @@ class AlipayOpenMiniBillDailyQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.settle_date:
+            if hasattr(self.settle_date, 'to_alipay_dict'):
+                params['settle_date'] = self.settle_date.to_alipay_dict()
+            else:
+                params['settle_date'] = self.settle_date
         if self.use_date:
             if hasattr(self.use_date, 'to_alipay_dict'):
                 params['use_date'] = self.use_date.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayOpenMiniBillDailyQueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'settle_date' in d:
+            o.settle_date = d['settle_date']
         if 'use_date' in d:
             o.use_date = d['use_date']
         return o

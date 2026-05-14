@@ -11,7 +11,9 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
         super(AlipayTradeSubscriptionModifyResponse, self).__init__()
         self._alipay_jump_schema = None
         self._alipay_schema = None
+        self._order_no = None
         self._pay_amount = None
+        self._promotion_info = None
         self._subscription_id = None
 
     @property
@@ -29,12 +31,26 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
     def alipay_schema(self, value):
         self._alipay_schema = value
     @property
+    def order_no(self):
+        return self._order_no
+
+    @order_no.setter
+    def order_no(self, value):
+        self._order_no = value
+    @property
     def pay_amount(self):
         return self._pay_amount
 
     @pay_amount.setter
     def pay_amount(self, value):
         self._pay_amount = value
+    @property
+    def promotion_info(self):
+        return self._promotion_info
+
+    @promotion_info.setter
+    def promotion_info(self, value):
+        self._promotion_info = value
     @property
     def subscription_id(self):
         return self._subscription_id
@@ -49,7 +65,11 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
             self.alipay_jump_schema = response['alipay_jump_schema']
         if 'alipay_schema' in response:
             self.alipay_schema = response['alipay_schema']
+        if 'order_no' in response:
+            self.order_no = response['order_no']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
+        if 'promotion_info' in response:
+            self.promotion_info = response['promotion_info']
         if 'subscription_id' in response:
             self.subscription_id = response['subscription_id']

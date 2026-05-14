@@ -16,10 +16,19 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         self._biz_info = None
         self._out_trade_no = None
         self._scene_code = None
+        self._activate_content = None
         self._delivery_list_content = None
         self._evidentiary_content = None
         self._invoice_content = None
+        self._on_site_content = None
+        self._other_content_1 = None
+        self._other_content_2 = None
+        self._other_content_3 = None
+        self._other_content_4 = None
+        self._other_content_5 = None
         self._sales_list_content = None
+        self._sn_body_content = None
+        self._sn_content = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -67,6 +76,15 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         self._scene_code = value
 
     @property
+    def activate_content(self):
+        return self._activate_content
+
+    @activate_content.setter
+    def activate_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._activate_content = value
+    @property
     def delivery_list_content(self):
         return self._delivery_list_content
 
@@ -94,6 +112,60 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
             return
         self._invoice_content = value
     @property
+    def on_site_content(self):
+        return self._on_site_content
+
+    @on_site_content.setter
+    def on_site_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._on_site_content = value
+    @property
+    def other_content_1(self):
+        return self._other_content_1
+
+    @other_content_1.setter
+    def other_content_1(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._other_content_1 = value
+    @property
+    def other_content_2(self):
+        return self._other_content_2
+
+    @other_content_2.setter
+    def other_content_2(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._other_content_2 = value
+    @property
+    def other_content_3(self):
+        return self._other_content_3
+
+    @other_content_3.setter
+    def other_content_3(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._other_content_3 = value
+    @property
+    def other_content_4(self):
+        return self._other_content_4
+
+    @other_content_4.setter
+    def other_content_4(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._other_content_4 = value
+    @property
+    def other_content_5(self):
+        return self._other_content_5
+
+    @other_content_5.setter
+    def other_content_5(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._other_content_5 = value
+    @property
     def sales_list_content(self):
         return self._sales_list_content
 
@@ -102,6 +174,24 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
         if not isinstance(value, FileItem):
             return
         self._sales_list_content = value
+    @property
+    def sn_body_content(self):
+        return self._sn_body_content
+
+    @sn_body_content.setter
+    def sn_body_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._sn_body_content = value
+    @property
+    def sn_content(self):
+        return self._sn_content
+
+    @sn_content.setter
+    def sn_content(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._sn_content = value
 
     @property
     def version(self):
@@ -216,12 +306,30 @@ class AlipayMarketingVerificationTradeAuditRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.activate_content:
+            multipart_params['activate_content'] = self.activate_content
         if self.delivery_list_content:
             multipart_params['delivery_list_content'] = self.delivery_list_content
         if self.evidentiary_content:
             multipart_params['evidentiary_content'] = self.evidentiary_content
         if self.invoice_content:
             multipart_params['invoice_content'] = self.invoice_content
+        if self.on_site_content:
+            multipart_params['on_site_content'] = self.on_site_content
+        if self.other_content_1:
+            multipart_params['other_content_1'] = self.other_content_1
+        if self.other_content_2:
+            multipart_params['other_content_2'] = self.other_content_2
+        if self.other_content_3:
+            multipart_params['other_content_3'] = self.other_content_3
+        if self.other_content_4:
+            multipart_params['other_content_4'] = self.other_content_4
+        if self.other_content_5:
+            multipart_params['other_content_5'] = self.other_content_5
         if self.sales_list_content:
             multipart_params['sales_list_content'] = self.sales_list_content
+        if self.sn_body_content:
+            multipart_params['sn_body_content'] = self.sn_body_content
+        if self.sn_content:
+            multipart_params['sn_content'] = self.sn_content
         return multipart_params

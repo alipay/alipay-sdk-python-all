@@ -10,6 +10,7 @@ class CertificateInstanceAmountInfo(object):
     def __init__(self):
         self._merchant_discount_amount = None
         self._original_price = None
+        self._other_discount_amount = None
         self._pay_amount = None
         self._platform_discount_amount = None
         self._receipt_amount = None
@@ -29,6 +30,13 @@ class CertificateInstanceAmountInfo(object):
     @original_price.setter
     def original_price(self, value):
         self._original_price = value
+    @property
+    def other_discount_amount(self):
+        return self._other_discount_amount
+
+    @other_discount_amount.setter
+    def other_discount_amount(self, value):
+        self._other_discount_amount = value
     @property
     def pay_amount(self):
         return self._pay_amount
@@ -71,6 +79,11 @@ class CertificateInstanceAmountInfo(object):
                 params['original_price'] = self.original_price.to_alipay_dict()
             else:
                 params['original_price'] = self.original_price
+        if self.other_discount_amount:
+            if hasattr(self.other_discount_amount, 'to_alipay_dict'):
+                params['other_discount_amount'] = self.other_discount_amount.to_alipay_dict()
+            else:
+                params['other_discount_amount'] = self.other_discount_amount
         if self.pay_amount:
             if hasattr(self.pay_amount, 'to_alipay_dict'):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
@@ -102,6 +115,8 @@ class CertificateInstanceAmountInfo(object):
             o.merchant_discount_amount = d['merchant_discount_amount']
         if 'original_price' in d:
             o.original_price = d['original_price']
+        if 'other_discount_amount' in d:
+            o.other_discount_amount = d['other_discount_amount']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
         if 'platform_discount_amount' in d:

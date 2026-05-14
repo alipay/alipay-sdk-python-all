@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalPromoEventNotifyModel(object):
 
     def __init__(self):
+        self._app_source = None
         self._event_code = None
         self._event_name = None
         self._finish_time = None
@@ -17,6 +18,13 @@ class AlipayCommerceMedicalPromoEventNotifyModel(object):
         self._service_name = None
         self._user_id = None
 
+    @property
+    def app_source(self):
+        return self._app_source
+
+    @app_source.setter
+    def app_source(self, value):
+        self._app_source = value
     @property
     def event_code(self):
         return self._event_code
@@ -77,6 +85,11 @@ class AlipayCommerceMedicalPromoEventNotifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.app_source:
+            if hasattr(self.app_source, 'to_alipay_dict'):
+                params['app_source'] = self.app_source.to_alipay_dict()
+            else:
+                params['app_source'] = self.app_source
         if self.event_code:
             if hasattr(self.event_code, 'to_alipay_dict'):
                 params['event_code'] = self.event_code.to_alipay_dict()
@@ -124,6 +137,8 @@ class AlipayCommerceMedicalPromoEventNotifyModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalPromoEventNotifyModel()
+        if 'app_source' in d:
+            o.app_source = d['app_source']
         if 'event_code' in d:
             o.event_code = d['event_code']
         if 'event_name' in d:

@@ -23,6 +23,7 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
         self._payee_participant = None
         self._payer_participant = None
         self._request_time = None
+        self._sub_function = None
 
     @property
     def agreement_no(self):
@@ -121,6 +122,13 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
     @request_time.setter
     def request_time(self, value):
         self._request_time = value
+    @property
+    def sub_function(self):
+        return self._sub_function
+
+    @sub_function.setter
+    def sub_function(self, value):
+        self._sub_function = value
 
 
     def to_alipay_dict(self):
@@ -190,6 +198,11 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
                 params['request_time'] = self.request_time.to_alipay_dict()
             else:
                 params['request_time'] = self.request_time
+        if self.sub_function:
+            if hasattr(self.sub_function, 'to_alipay_dict'):
+                params['sub_function'] = self.sub_function.to_alipay_dict()
+            else:
+                params['sub_function'] = self.sub_function
         return params
 
     @staticmethod
@@ -223,6 +236,8 @@ class AlipayCommerceLogisticsFreightflowAuthorizetransferApplyModel(object):
             o.payer_participant = d['payer_participant']
         if 'request_time' in d:
             o.request_time = d['request_time']
+        if 'sub_function' in d:
+            o.sub_function = d['sub_function']
         return o
 
 

@@ -15,6 +15,7 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
         self._amount = None
         self._biz_no = None
         self._currency = None
+        self._ext_info = None
         self._logistics_code = None
         self._memo = None
         self._mode = None
@@ -49,6 +50,13 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
     @currency.setter
     def currency(self, value):
         self._currency = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def logistics_code(self):
         return self._logistics_code
@@ -164,6 +172,11 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
                 params['currency'] = self.currency.to_alipay_dict()
             else:
                 params['currency'] = self.currency
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.logistics_code:
             if hasattr(self.logistics_code, 'to_alipay_dict'):
                 params['logistics_code'] = self.logistics_code.to_alipay_dict()
@@ -237,6 +250,8 @@ class AlipayCommerceLogisticsFreightflowTransferApplyModel(object):
             o.biz_no = d['biz_no']
         if 'currency' in d:
             o.currency = d['currency']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'logistics_code' in d:
             o.logistics_code = d['logistics_code']
         if 'memo' in d:

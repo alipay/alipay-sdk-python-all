@@ -11,7 +11,9 @@ class AlipayOfflineProviderExpoNfccheckinSubmitModel(object):
         self._activity_code = None
         self._check_place = None
         self._check_template_type = None
+        self._external_place_mark = None
         self._open_id = None
+        self._request_src = None
         self._solution_config_code = None
         self._trade_no = None
         self._user_id = None
@@ -38,12 +40,26 @@ class AlipayOfflineProviderExpoNfccheckinSubmitModel(object):
     def check_template_type(self, value):
         self._check_template_type = value
     @property
+    def external_place_mark(self):
+        return self._external_place_mark
+
+    @external_place_mark.setter
+    def external_place_mark(self, value):
+        self._external_place_mark = value
+    @property
     def open_id(self):
         return self._open_id
 
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def request_src(self):
+        return self._request_src
+
+    @request_src.setter
+    def request_src(self, value):
+        self._request_src = value
     @property
     def solution_config_code(self):
         return self._solution_config_code
@@ -84,11 +100,21 @@ class AlipayOfflineProviderExpoNfccheckinSubmitModel(object):
                 params['check_template_type'] = self.check_template_type.to_alipay_dict()
             else:
                 params['check_template_type'] = self.check_template_type
+        if self.external_place_mark:
+            if hasattr(self.external_place_mark, 'to_alipay_dict'):
+                params['external_place_mark'] = self.external_place_mark.to_alipay_dict()
+            else:
+                params['external_place_mark'] = self.external_place_mark
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.request_src:
+            if hasattr(self.request_src, 'to_alipay_dict'):
+                params['request_src'] = self.request_src.to_alipay_dict()
+            else:
+                params['request_src'] = self.request_src
         if self.solution_config_code:
             if hasattr(self.solution_config_code, 'to_alipay_dict'):
                 params['solution_config_code'] = self.solution_config_code.to_alipay_dict()
@@ -117,8 +143,12 @@ class AlipayOfflineProviderExpoNfccheckinSubmitModel(object):
             o.check_place = d['check_place']
         if 'check_template_type' in d:
             o.check_template_type = d['check_template_type']
+        if 'external_place_mark' in d:
+            o.external_place_mark = d['external_place_mark']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'request_src' in d:
+            o.request_src = d['request_src']
         if 'solution_config_code' in d:
             o.solution_config_code = d['solution_config_code']
         if 'trade_no' in d:

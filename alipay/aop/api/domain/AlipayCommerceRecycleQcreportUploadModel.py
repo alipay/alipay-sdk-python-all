@@ -17,6 +17,7 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
         self._openid = None
         self._out_order_id = None
         self._product_info = None
+        self._report_confirm = None
         self._summary = None
         self._user_id = None
 
@@ -71,6 +72,13 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
             self._product_info = value
         else:
             self._product_info = RecycleQcReportProductInfo.from_alipay_dict(value)
+    @property
+    def report_confirm(self):
+        return self._report_confirm
+
+    @report_confirm.setter
+    def report_confirm(self, value):
+        self._report_confirm = value
     @property
     def summary(self):
         return self._summary
@@ -127,6 +135,11 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
                 params['product_info'] = self.product_info.to_alipay_dict()
             else:
                 params['product_info'] = self.product_info
+        if self.report_confirm:
+            if hasattr(self.report_confirm, 'to_alipay_dict'):
+                params['report_confirm'] = self.report_confirm.to_alipay_dict()
+            else:
+                params['report_confirm'] = self.report_confirm
         if self.summary:
             if hasattr(self.summary, 'to_alipay_dict'):
                 params['summary'] = self.summary.to_alipay_dict()
@@ -156,6 +169,8 @@ class AlipayCommerceRecycleQcreportUploadModel(object):
             o.out_order_id = d['out_order_id']
         if 'product_info' in d:
             o.product_info = d['product_info']
+        if 'report_confirm' in d:
+            o.report_confirm = d['report_confirm']
         if 'summary' in d:
             o.summary = d['summary']
         if 'user_id' in d:

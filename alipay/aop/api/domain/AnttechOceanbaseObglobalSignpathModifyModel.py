@@ -13,6 +13,8 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
         self._based_on_agency_agreement_flag = None
         self._final_customer_sign_other_party_subject_id = None
         self._final_customer_sign_other_party_subject_name = None
+        self._final_customer_sign_subject_id = None
+        self._final_customer_sign_subject_name = None
         self._general_agent_cooperation_type = None
         self._leads_code = None
         self._leads_other_partners = None
@@ -58,6 +60,20 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
     @final_customer_sign_other_party_subject_name.setter
     def final_customer_sign_other_party_subject_name(self, value):
         self._final_customer_sign_other_party_subject_name = value
+    @property
+    def final_customer_sign_subject_id(self):
+        return self._final_customer_sign_subject_id
+
+    @final_customer_sign_subject_id.setter
+    def final_customer_sign_subject_id(self, value):
+        self._final_customer_sign_subject_id = value
+    @property
+    def final_customer_sign_subject_name(self):
+        return self._final_customer_sign_subject_name
+
+    @final_customer_sign_subject_name.setter
+    def final_customer_sign_subject_name(self, value):
+        self._final_customer_sign_subject_name = value
     @property
     def general_agent_cooperation_type(self):
         return self._general_agent_cooperation_type
@@ -150,6 +166,16 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
                 params['final_customer_sign_other_party_subject_name'] = self.final_customer_sign_other_party_subject_name.to_alipay_dict()
             else:
                 params['final_customer_sign_other_party_subject_name'] = self.final_customer_sign_other_party_subject_name
+        if self.final_customer_sign_subject_id:
+            if hasattr(self.final_customer_sign_subject_id, 'to_alipay_dict'):
+                params['final_customer_sign_subject_id'] = self.final_customer_sign_subject_id.to_alipay_dict()
+            else:
+                params['final_customer_sign_subject_id'] = self.final_customer_sign_subject_id
+        if self.final_customer_sign_subject_name:
+            if hasattr(self.final_customer_sign_subject_name, 'to_alipay_dict'):
+                params['final_customer_sign_subject_name'] = self.final_customer_sign_subject_name.to_alipay_dict()
+            else:
+                params['final_customer_sign_subject_name'] = self.final_customer_sign_subject_name
         if self.general_agent_cooperation_type:
             if hasattr(self.general_agent_cooperation_type, 'to_alipay_dict'):
                 params['general_agent_cooperation_type'] = self.general_agent_cooperation_type.to_alipay_dict()
@@ -212,6 +238,10 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
             o.final_customer_sign_other_party_subject_id = d['final_customer_sign_other_party_subject_id']
         if 'final_customer_sign_other_party_subject_name' in d:
             o.final_customer_sign_other_party_subject_name = d['final_customer_sign_other_party_subject_name']
+        if 'final_customer_sign_subject_id' in d:
+            o.final_customer_sign_subject_id = d['final_customer_sign_subject_id']
+        if 'final_customer_sign_subject_name' in d:
+            o.final_customer_sign_subject_name = d['final_customer_sign_subject_name']
         if 'general_agent_cooperation_type' in d:
             o.general_agent_cooperation_type = d['general_agent_cooperation_type']
         if 'leads_code' in d:

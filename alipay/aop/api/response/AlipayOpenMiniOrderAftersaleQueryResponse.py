@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AftersaleAddressInfoVO import AftersaleAddressInfoVO
 from alipay.aop.api.domain.AftersaleItemInfo import AftersaleItemInfo
 from alipay.aop.api.domain.OrderMediaInfo import OrderMediaInfo
+from alipay.aop.api.domain.AftersaleFundsDetailItem import AftersaleFundsDetailItem
 from alipay.aop.api.domain.LogisticsWaybill import LogisticsWaybill
 from alipay.aop.api.domain.AftersaleServiceTag import AftersaleServiceTag
 
@@ -23,7 +24,9 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
         self._aftersale_reason = None
         self._apply_refund_amount = None
         self._create_time = None
+        self._discount_amount = None
         self._finally_refund_amount = None
+        self._funds_details = None
         self._logistics_waybills = None
         self._order_id = None
         self._out_aftersale_id = None
@@ -112,12 +115,29 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     def create_time(self, value):
         self._create_time = value
     @property
+    def discount_amount(self):
+        return self._discount_amount
+
+    @discount_amount.setter
+    def discount_amount(self, value):
+        self._discount_amount = value
+    @property
     def finally_refund_amount(self):
         return self._finally_refund_amount
 
     @finally_refund_amount.setter
     def finally_refund_amount(self, value):
         self._finally_refund_amount = value
+    @property
+    def funds_details(self):
+        return self._funds_details
+
+    @funds_details.setter
+    def funds_details(self, value):
+        if isinstance(value, AftersaleFundsDetailItem):
+            self._funds_details = value
+        else:
+            self._funds_details = AftersaleFundsDetailItem.from_alipay_dict(value)
     @property
     def logistics_waybills(self):
         return self._logistics_waybills
@@ -207,8 +227,12 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
             self.apply_refund_amount = response['apply_refund_amount']
         if 'create_time' in response:
             self.create_time = response['create_time']
+        if 'discount_amount' in response:
+            self.discount_amount = response['discount_amount']
         if 'finally_refund_amount' in response:
             self.finally_refund_amount = response['finally_refund_amount']
+        if 'funds_details' in response:
+            self.funds_details = response['funds_details']
         if 'logistics_waybills' in response:
             self.logistics_waybills = response['logistics_waybills']
         if 'order_id' in response:

@@ -17,6 +17,7 @@ class AlipayCommerceEducateStudentIdentityVerifyResponse(AlipayResponse):
         self._member_ship_status = None
         self._school_id = None
         self._school_name = None
+        self._student_status = None
         self._time_stamp = None
         self._type = None
 
@@ -77,6 +78,13 @@ class AlipayCommerceEducateStudentIdentityVerifyResponse(AlipayResponse):
     def school_name(self, value):
         self._school_name = value
     @property
+    def student_status(self):
+        return self._student_status
+
+    @student_status.setter
+    def student_status(self, value):
+        self._student_status = value
+    @property
     def time_stamp(self):
         return self._time_stamp
 
@@ -109,6 +117,8 @@ class AlipayCommerceEducateStudentIdentityVerifyResponse(AlipayResponse):
             self.school_id = response['school_id']
         if 'school_name' in response:
             self.school_name = response['school_name']
+        if 'student_status' in response:
+            self.student_status = response['student_status']
         if 'time_stamp' in response:
             self.time_stamp = response['time_stamp']
         if 'type' in response:

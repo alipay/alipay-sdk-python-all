@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenAppOrdermanagerCertificateuseQueryModel(object):
 
     def __init__(self):
+        self._a_store_id = None
         self._page_num = None
         self._page_size = None
         self._store_id = None
@@ -16,6 +17,13 @@ class AlipayOpenAppOrdermanagerCertificateuseQueryModel(object):
         self._write_off_start = None
         self._write_off_status = None
 
+    @property
+    def a_store_id(self):
+        return self._a_store_id
+
+    @a_store_id.setter
+    def a_store_id(self, value):
+        self._a_store_id = value
     @property
     def page_num(self):
         return self._page_num
@@ -72,6 +80,11 @@ class AlipayOpenAppOrdermanagerCertificateuseQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.a_store_id:
+            if hasattr(self.a_store_id, 'to_alipay_dict'):
+                params['a_store_id'] = self.a_store_id.to_alipay_dict()
+            else:
+                params['a_store_id'] = self.a_store_id
         if self.page_num:
             if hasattr(self.page_num, 'to_alipay_dict'):
                 params['page_num'] = self.page_num.to_alipay_dict()
@@ -119,6 +132,8 @@ class AlipayOpenAppOrdermanagerCertificateuseQueryModel(object):
         if not d:
             return None
         o = AlipayOpenAppOrdermanagerCertificateuseQueryModel()
+        if 'a_store_id' in d:
+            o.a_store_id = d['a_store_id']
         if 'page_num' in d:
             o.page_num = d['page_num']
         if 'page_size' in d:

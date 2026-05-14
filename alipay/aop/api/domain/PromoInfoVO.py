@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.GovernmentPromoDetailInfoVO import GovernmentPromoDetailInfoVO
 from alipay.aop.api.domain.MerchantPromoDetailInfoVO import MerchantPromoDetailInfoVO
 from alipay.aop.api.domain.PlatformPromoDetailInfoVO import PlatformPromoDetailInfoVO
 from alipay.aop.api.domain.StagePromoDetailInfoVO import StagePromoDetailInfoVO
@@ -11,6 +12,8 @@ from alipay.aop.api.domain.StagePromoDetailInfoVO import StagePromoDetailInfoVO
 class PromoInfoVO(object):
 
     def __init__(self):
+        self._government_promo_detail = None
+        self._government_total_amount = None
         self._merchant_promo_detail = None
         self._merchant_total_amount = None
         self._order_amount = None
@@ -20,6 +23,23 @@ class PromoInfoVO(object):
         self._stage_promo_detail_list = None
         self._total_amount = None
 
+    @property
+    def government_promo_detail(self):
+        return self._government_promo_detail
+
+    @government_promo_detail.setter
+    def government_promo_detail(self, value):
+        if isinstance(value, GovernmentPromoDetailInfoVO):
+            self._government_promo_detail = value
+        else:
+            self._government_promo_detail = GovernmentPromoDetailInfoVO.from_alipay_dict(value)
+    @property
+    def government_total_amount(self):
+        return self._government_total_amount
+
+    @government_total_amount.setter
+    def government_total_amount(self, value):
+        self._government_total_amount = value
     @property
     def merchant_promo_detail(self):
         return self._merchant_promo_detail
@@ -92,6 +112,16 @@ class PromoInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.government_promo_detail:
+            if hasattr(self.government_promo_detail, 'to_alipay_dict'):
+                params['government_promo_detail'] = self.government_promo_detail.to_alipay_dict()
+            else:
+                params['government_promo_detail'] = self.government_promo_detail
+        if self.government_total_amount:
+            if hasattr(self.government_total_amount, 'to_alipay_dict'):
+                params['government_total_amount'] = self.government_total_amount.to_alipay_dict()
+            else:
+                params['government_total_amount'] = self.government_total_amount
         if self.merchant_promo_detail:
             if hasattr(self.merchant_promo_detail, 'to_alipay_dict'):
                 params['merchant_promo_detail'] = self.merchant_promo_detail.to_alipay_dict()
@@ -144,6 +174,10 @@ class PromoInfoVO(object):
         if not d:
             return None
         o = PromoInfoVO()
+        if 'government_promo_detail' in d:
+            o.government_promo_detail = d['government_promo_detail']
+        if 'government_total_amount' in d:
+            o.government_total_amount = d['government_total_amount']
         if 'merchant_promo_detail' in d:
             o.merchant_promo_detail = d['merchant_promo_detail']
         if 'merchant_total_amount' in d:

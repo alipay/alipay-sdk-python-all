@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.SubscriptionQueryItem import SubscriptionQueryItem
+from alipay.aop.api.domain.SubscriptionQueryPendingItem import SubscriptionQueryPendingItem
 
 
 class Subscription(object):
@@ -16,10 +17,14 @@ class Subscription(object):
         self._current_period_start = None
         self._customer_id = None
         self._items = None
+        self._metadata = None
+        self._pending_items = None
         self._start_date = None
         self._subscribe_title = None
         self._subscription_id = None
         self._subscription_status = None
+        self._trial_end = None
+        self._trial_start = None
 
     @property
     def cancel_at_period_end(self):
@@ -77,6 +82,26 @@ class Subscription(object):
                 else:
                     self._items.append(SubscriptionQueryItem.from_alipay_dict(i))
     @property
+    def metadata(self):
+        return self._metadata
+
+    @metadata.setter
+    def metadata(self, value):
+        self._metadata = value
+    @property
+    def pending_items(self):
+        return self._pending_items
+
+    @pending_items.setter
+    def pending_items(self, value):
+        if isinstance(value, list):
+            self._pending_items = list()
+            for i in value:
+                if isinstance(i, SubscriptionQueryPendingItem):
+                    self._pending_items.append(i)
+                else:
+                    self._pending_items.append(SubscriptionQueryPendingItem.from_alipay_dict(i))
+    @property
     def start_date(self):
         return self._start_date
 
@@ -104,6 +129,20 @@ class Subscription(object):
     @subscription_status.setter
     def subscription_status(self, value):
         self._subscription_status = value
+    @property
+    def trial_end(self):
+        return self._trial_end
+
+    @trial_end.setter
+    def trial_end(self, value):
+        self._trial_end = value
+    @property
+    def trial_start(self):
+        return self._trial_start
+
+    @trial_start.setter
+    def trial_start(self, value):
+        self._trial_start = value
 
 
     def to_alipay_dict(self):
@@ -148,6 +187,21 @@ class Subscription(object):
                 params['items'] = self.items.to_alipay_dict()
             else:
                 params['items'] = self.items
+        if self.metadata:
+            if hasattr(self.metadata, 'to_alipay_dict'):
+                params['metadata'] = self.metadata.to_alipay_dict()
+            else:
+                params['metadata'] = self.metadata
+        if self.pending_items:
+            if isinstance(self.pending_items, list):
+                for i in range(0, len(self.pending_items)):
+                    element = self.pending_items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pending_items[i] = element.to_alipay_dict()
+            if hasattr(self.pending_items, 'to_alipay_dict'):
+                params['pending_items'] = self.pending_items.to_alipay_dict()
+            else:
+                params['pending_items'] = self.pending_items
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -168,6 +222,16 @@ class Subscription(object):
                 params['subscription_status'] = self.subscription_status.to_alipay_dict()
             else:
                 params['subscription_status'] = self.subscription_status
+        if self.trial_end:
+            if hasattr(self.trial_end, 'to_alipay_dict'):
+                params['trial_end'] = self.trial_end.to_alipay_dict()
+            else:
+                params['trial_end'] = self.trial_end
+        if self.trial_start:
+            if hasattr(self.trial_start, 'to_alipay_dict'):
+                params['trial_start'] = self.trial_start.to_alipay_dict()
+            else:
+                params['trial_start'] = self.trial_start
         return params
 
     @staticmethod
@@ -189,6 +253,10 @@ class Subscription(object):
             o.customer_id = d['customer_id']
         if 'items' in d:
             o.items = d['items']
+        if 'metadata' in d:
+            o.metadata = d['metadata']
+        if 'pending_items' in d:
+            o.pending_items = d['pending_items']
         if 'start_date' in d:
             o.start_date = d['start_date']
         if 'subscribe_title' in d:
@@ -197,6 +265,10 @@ class Subscription(object):
             o.subscription_id = d['subscription_id']
         if 'subscription_status' in d:
             o.subscription_status = d['subscription_status']
+        if 'trial_end' in d:
+            o.trial_end = d['trial_end']
+        if 'trial_start' in d:
+            o.trial_start = d['trial_start']
         return o
 
 

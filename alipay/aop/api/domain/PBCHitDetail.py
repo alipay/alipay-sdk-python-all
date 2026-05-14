@@ -18,6 +18,7 @@ class PBCHitDetail(object):
         self._record_nation = None
         self._record_type = None
         self._reference_id = None
+        self._scan_event_id = None
 
     @property
     def match_param(self):
@@ -89,6 +90,13 @@ class PBCHitDetail(object):
     @reference_id.setter
     def reference_id(self, value):
         self._reference_id = value
+    @property
+    def scan_event_id(self):
+        return self._scan_event_id
+
+    @scan_event_id.setter
+    def scan_event_id(self, value):
+        self._scan_event_id = value
 
 
     def to_alipay_dict(self):
@@ -143,6 +151,11 @@ class PBCHitDetail(object):
                 params['reference_id'] = self.reference_id.to_alipay_dict()
             else:
                 params['reference_id'] = self.reference_id
+        if self.scan_event_id:
+            if hasattr(self.scan_event_id, 'to_alipay_dict'):
+                params['scan_event_id'] = self.scan_event_id.to_alipay_dict()
+            else:
+                params['scan_event_id'] = self.scan_event_id
         return params
 
     @staticmethod
@@ -170,6 +183,8 @@ class PBCHitDetail(object):
             o.record_type = d['record_type']
         if 'reference_id' in d:
             o.reference_id = d['reference_id']
+        if 'scan_event_id' in d:
+            o.scan_event_id = d['scan_event_id']
         return o
 
 

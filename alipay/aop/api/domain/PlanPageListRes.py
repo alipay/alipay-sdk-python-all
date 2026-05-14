@@ -24,6 +24,7 @@ class PlanPageListRes(object):
         self._scene_code = None
         self._sell_mode = None
         self._start_date = None
+        self._sub_status = None
         self._time_schema = None
 
     @property
@@ -135,6 +136,13 @@ class PlanPageListRes(object):
     def start_date(self, value):
         self._start_date = value
     @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
+    @property
     def time_schema(self):
         return self._time_schema
 
@@ -220,6 +228,11 @@ class PlanPageListRes(object):
                 params['start_date'] = self.start_date.to_alipay_dict()
             else:
                 params['start_date'] = self.start_date
+        if self.sub_status:
+            if hasattr(self.sub_status, 'to_alipay_dict'):
+                params['sub_status'] = self.sub_status.to_alipay_dict()
+            else:
+                params['sub_status'] = self.sub_status
         if self.time_schema:
             if hasattr(self.time_schema, 'to_alipay_dict'):
                 params['time_schema'] = self.time_schema.to_alipay_dict()
@@ -262,6 +275,8 @@ class PlanPageListRes(object):
             o.sell_mode = d['sell_mode']
         if 'start_date' in d:
             o.start_date = d['start_date']
+        if 'sub_status' in d:
+            o.sub_status = d['sub_status']
         if 'time_schema' in d:
             o.time_schema = d['time_schema']
         return o

@@ -12,6 +12,7 @@ class AlipayOpenSpNopenModuleUnbindModel(object):
         self._device_sn = None
         self._item_id = None
         self._mcu_id = None
+        self._regenerate_link = None
         self._se_uuid = None
         self._sn = None
         self._supplier_id = None
@@ -45,6 +46,13 @@ class AlipayOpenSpNopenModuleUnbindModel(object):
     @mcu_id.setter
     def mcu_id(self, value):
         self._mcu_id = value
+    @property
+    def regenerate_link(self):
+        return self._regenerate_link
+
+    @regenerate_link.setter
+    def regenerate_link(self, value):
+        self._regenerate_link = value
     @property
     def se_uuid(self):
         return self._se_uuid
@@ -97,6 +105,11 @@ class AlipayOpenSpNopenModuleUnbindModel(object):
                 params['mcu_id'] = self.mcu_id.to_alipay_dict()
             else:
                 params['mcu_id'] = self.mcu_id
+        if self.regenerate_link:
+            if hasattr(self.regenerate_link, 'to_alipay_dict'):
+                params['regenerate_link'] = self.regenerate_link.to_alipay_dict()
+            else:
+                params['regenerate_link'] = self.regenerate_link
         if self.se_uuid:
             if hasattr(self.se_uuid, 'to_alipay_dict'):
                 params['se_uuid'] = self.se_uuid.to_alipay_dict()
@@ -132,6 +145,8 @@ class AlipayOpenSpNopenModuleUnbindModel(object):
             o.item_id = d['item_id']
         if 'mcu_id' in d:
             o.mcu_id = d['mcu_id']
+        if 'regenerate_link' in d:
+            o.regenerate_link = d['regenerate_link']
         if 'se_uuid' in d:
             o.se_uuid = d['se_uuid']
         if 'sn' in d:

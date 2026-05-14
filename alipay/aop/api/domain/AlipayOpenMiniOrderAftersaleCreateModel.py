@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateInfoDTO import CertificateInfoDTO
 from alipay.aop.api.domain.AftersaleItemInfoDTO import AftersaleItemInfoDTO
 from alipay.aop.api.domain.AftersaleAddressInfoDTO import AftersaleAddressInfoDTO
 
@@ -11,6 +12,7 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
 
     def __init__(self):
         self._aftersale_reason_code = None
+        self._certificate_infos = None
         self._item_infos = None
         self._merchant_address_info = None
         self._open_id = None
@@ -30,6 +32,19 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
     @aftersale_reason_code.setter
     def aftersale_reason_code(self, value):
         self._aftersale_reason_code = value
+    @property
+    def certificate_infos(self):
+        return self._certificate_infos
+
+    @certificate_infos.setter
+    def certificate_infos(self, value):
+        if isinstance(value, list):
+            self._certificate_infos = list()
+            for i in value:
+                if isinstance(i, CertificateInfoDTO):
+                    self._certificate_infos.append(i)
+                else:
+                    self._certificate_infos.append(CertificateInfoDTO.from_alipay_dict(i))
     @property
     def item_infos(self):
         return self._item_infos
@@ -125,6 +140,16 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
                 params['aftersale_reason_code'] = self.aftersale_reason_code.to_alipay_dict()
             else:
                 params['aftersale_reason_code'] = self.aftersale_reason_code
+        if self.certificate_infos:
+            if isinstance(self.certificate_infos, list):
+                for i in range(0, len(self.certificate_infos)):
+                    element = self.certificate_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.certificate_infos[i] = element.to_alipay_dict()
+            if hasattr(self.certificate_infos, 'to_alipay_dict'):
+                params['certificate_infos'] = self.certificate_infos.to_alipay_dict()
+            else:
+                params['certificate_infos'] = self.certificate_infos
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -194,6 +219,8 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
         o = AlipayOpenMiniOrderAftersaleCreateModel()
         if 'aftersale_reason_code' in d:
             o.aftersale_reason_code = d['aftersale_reason_code']
+        if 'certificate_infos' in d:
+            o.certificate_infos = d['certificate_infos']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
         if 'merchant_address_info' in d:

@@ -9,6 +9,7 @@ from alipay.aop.api.domain.IdentityParams import IdentityParams
 from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.ProdParams import ProdParams
 from alipay.aop.api.domain.SpecifiedAsset import SpecifiedAsset
+from alipay.aop.api.domain.SpecifiedDeductRuleParams import SpecifiedDeductRuleParams
 from alipay.aop.api.domain.SpecifiedChannelParam import SpecifiedChannelParam
 from alipay.aop.api.domain.SubMerchantParams import SubMerchantParams
 from alipay.aop.api.domain.ZmAuthParams import ZmAuthParams
@@ -36,6 +37,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._sign_scene = None
         self._sign_validity_period = None
         self._specified_asset = None
+        self._specified_deduct_rule_params = None
         self._specified_sort_channel_params = None
         self._sub_merchant = None
         self._third_party_type = None
@@ -194,6 +196,16 @@ class AlipayUserAgreementPageSignModel(object):
         else:
             self._specified_asset = SpecifiedAsset.from_alipay_dict(value)
     @property
+    def specified_deduct_rule_params(self):
+        return self._specified_deduct_rule_params
+
+    @specified_deduct_rule_params.setter
+    def specified_deduct_rule_params(self, value):
+        if isinstance(value, SpecifiedDeductRuleParams):
+            self._specified_deduct_rule_params = value
+        else:
+            self._specified_deduct_rule_params = SpecifiedDeductRuleParams.from_alipay_dict(value)
+    @property
     def specified_sort_channel_params(self):
         return self._specified_sort_channel_params
 
@@ -336,6 +348,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['specified_asset'] = self.specified_asset.to_alipay_dict()
             else:
                 params['specified_asset'] = self.specified_asset
+        if self.specified_deduct_rule_params:
+            if hasattr(self.specified_deduct_rule_params, 'to_alipay_dict'):
+                params['specified_deduct_rule_params'] = self.specified_deduct_rule_params.to_alipay_dict()
+            else:
+                params['specified_deduct_rule_params'] = self.specified_deduct_rule_params
         if self.specified_sort_channel_params:
             if hasattr(self.specified_sort_channel_params, 'to_alipay_dict'):
                 params['specified_sort_channel_params'] = self.specified_sort_channel_params.to_alipay_dict()
@@ -406,6 +423,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.sign_validity_period = d['sign_validity_period']
         if 'specified_asset' in d:
             o.specified_asset = d['specified_asset']
+        if 'specified_deduct_rule_params' in d:
+            o.specified_deduct_rule_params = d['specified_deduct_rule_params']
         if 'specified_sort_channel_params' in d:
             o.specified_sort_channel_params = d['specified_sort_channel_params']
         if 'sub_merchant' in d:

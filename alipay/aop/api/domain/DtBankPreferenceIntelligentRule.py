@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CycleAvgDiscountAmountConfig import CycleAvgDiscountAmountConfig
 
 
 class DtBankPreferenceIntelligentRule(object):
 
     def __init__(self):
         self._avg_discount_amount = None
+        self._avg_discount_amount_type = None
+        self._cycle_avg_discount_amount_config_list = None
         self._max_amount = None
         self._min_amount = None
         self._optimization_target = None
@@ -20,6 +23,26 @@ class DtBankPreferenceIntelligentRule(object):
     @avg_discount_amount.setter
     def avg_discount_amount(self, value):
         self._avg_discount_amount = value
+    @property
+    def avg_discount_amount_type(self):
+        return self._avg_discount_amount_type
+
+    @avg_discount_amount_type.setter
+    def avg_discount_amount_type(self, value):
+        self._avg_discount_amount_type = value
+    @property
+    def cycle_avg_discount_amount_config_list(self):
+        return self._cycle_avg_discount_amount_config_list
+
+    @cycle_avg_discount_amount_config_list.setter
+    def cycle_avg_discount_amount_config_list(self, value):
+        if isinstance(value, list):
+            self._cycle_avg_discount_amount_config_list = list()
+            for i in value:
+                if isinstance(i, CycleAvgDiscountAmountConfig):
+                    self._cycle_avg_discount_amount_config_list.append(i)
+                else:
+                    self._cycle_avg_discount_amount_config_list.append(CycleAvgDiscountAmountConfig.from_alipay_dict(i))
     @property
     def max_amount(self):
         return self._max_amount
@@ -50,6 +73,21 @@ class DtBankPreferenceIntelligentRule(object):
                 params['avg_discount_amount'] = self.avg_discount_amount.to_alipay_dict()
             else:
                 params['avg_discount_amount'] = self.avg_discount_amount
+        if self.avg_discount_amount_type:
+            if hasattr(self.avg_discount_amount_type, 'to_alipay_dict'):
+                params['avg_discount_amount_type'] = self.avg_discount_amount_type.to_alipay_dict()
+            else:
+                params['avg_discount_amount_type'] = self.avg_discount_amount_type
+        if self.cycle_avg_discount_amount_config_list:
+            if isinstance(self.cycle_avg_discount_amount_config_list, list):
+                for i in range(0, len(self.cycle_avg_discount_amount_config_list)):
+                    element = self.cycle_avg_discount_amount_config_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.cycle_avg_discount_amount_config_list[i] = element.to_alipay_dict()
+            if hasattr(self.cycle_avg_discount_amount_config_list, 'to_alipay_dict'):
+                params['cycle_avg_discount_amount_config_list'] = self.cycle_avg_discount_amount_config_list.to_alipay_dict()
+            else:
+                params['cycle_avg_discount_amount_config_list'] = self.cycle_avg_discount_amount_config_list
         if self.max_amount:
             if hasattr(self.max_amount, 'to_alipay_dict'):
                 params['max_amount'] = self.max_amount.to_alipay_dict()
@@ -74,6 +112,10 @@ class DtBankPreferenceIntelligentRule(object):
         o = DtBankPreferenceIntelligentRule()
         if 'avg_discount_amount' in d:
             o.avg_discount_amount = d['avg_discount_amount']
+        if 'avg_discount_amount_type' in d:
+            o.avg_discount_amount_type = d['avg_discount_amount_type']
+        if 'cycle_avg_discount_amount_config_list' in d:
+            o.cycle_avg_discount_amount_config_list = d['cycle_avg_discount_amount_config_list']
         if 'max_amount' in d:
             o.max_amount = d['max_amount']
         if 'min_amount' in d:

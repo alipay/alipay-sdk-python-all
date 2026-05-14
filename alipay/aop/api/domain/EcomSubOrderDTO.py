@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EcomItemDTO import EcomItemDTO
+from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 
 
 class EcomSubOrderDTO(object):
@@ -15,6 +16,7 @@ class EcomSubOrderDTO(object):
         self._order_fee = None
         self._order_id = None
         self._trade_end_time = None
+        self._watch_man = None
 
     @property
     def buy_amount(self):
@@ -61,6 +63,16 @@ class EcomSubOrderDTO(object):
     @trade_end_time.setter
     def trade_end_time(self, value):
         self._trade_end_time = value
+    @property
+    def watch_man(self):
+        return self._watch_man
+
+    @watch_man.setter
+    def watch_man(self, value):
+        if isinstance(value, InsOpenUserDTO):
+            self._watch_man = value
+        else:
+            self._watch_man = InsOpenUserDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -95,6 +107,11 @@ class EcomSubOrderDTO(object):
                 params['trade_end_time'] = self.trade_end_time.to_alipay_dict()
             else:
                 params['trade_end_time'] = self.trade_end_time
+        if self.watch_man:
+            if hasattr(self.watch_man, 'to_alipay_dict'):
+                params['watch_man'] = self.watch_man.to_alipay_dict()
+            else:
+                params['watch_man'] = self.watch_man
         return params
 
     @staticmethod
@@ -114,6 +131,8 @@ class EcomSubOrderDTO(object):
             o.order_id = d['order_id']
         if 'trade_end_time' in d:
             o.trade_end_time = d['trade_end_time']
+        if 'watch_man' in d:
+            o.watch_man = d['watch_man']
         return o
 
 

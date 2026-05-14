@@ -3,15 +3,30 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AftersaleCertificateInfo import AftersaleCertificateInfo
 
 
 class AftersaleItemInfo(object):
 
     def __init__(self):
+        self._certificate_vo_list = None
         self._item_cnt = None
         self._out_item_id = None
         self._out_sku_id = None
 
+    @property
+    def certificate_vo_list(self):
+        return self._certificate_vo_list
+
+    @certificate_vo_list.setter
+    def certificate_vo_list(self, value):
+        if isinstance(value, list):
+            self._certificate_vo_list = list()
+            for i in value:
+                if isinstance(i, AftersaleCertificateInfo):
+                    self._certificate_vo_list.append(i)
+                else:
+                    self._certificate_vo_list.append(AftersaleCertificateInfo.from_alipay_dict(i))
     @property
     def item_cnt(self):
         return self._item_cnt
@@ -37,6 +52,16 @@ class AftersaleItemInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.certificate_vo_list:
+            if isinstance(self.certificate_vo_list, list):
+                for i in range(0, len(self.certificate_vo_list)):
+                    element = self.certificate_vo_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.certificate_vo_list[i] = element.to_alipay_dict()
+            if hasattr(self.certificate_vo_list, 'to_alipay_dict'):
+                params['certificate_vo_list'] = self.certificate_vo_list.to_alipay_dict()
+            else:
+                params['certificate_vo_list'] = self.certificate_vo_list
         if self.item_cnt:
             if hasattr(self.item_cnt, 'to_alipay_dict'):
                 params['item_cnt'] = self.item_cnt.to_alipay_dict()
@@ -59,6 +84,8 @@ class AftersaleItemInfo(object):
         if not d:
             return None
         o = AftersaleItemInfo()
+        if 'certificate_vo_list' in d:
+            o.certificate_vo_list = d['certificate_vo_list']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
         if 'out_item_id' in d:

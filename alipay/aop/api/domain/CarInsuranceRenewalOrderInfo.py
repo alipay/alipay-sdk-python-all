@@ -8,6 +8,10 @@ from alipay.aop.api.constant.ParamConstants import *
 class CarInsuranceRenewalOrderInfo(object):
 
     def __init__(self):
+        self._city_code = None
+        self._commercial_insurance_amount = None
+        self._compulsory_insurance_amount = None
+        self._energy_type = None
         self._engine_no = None
         self._insurance_company_name = None
         self._order_amount = None
@@ -24,6 +28,34 @@ class CarInsuranceRenewalOrderInfo(object):
         self._vi_number = None
         self._vin = None
 
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
+    @property
+    def commercial_insurance_amount(self):
+        return self._commercial_insurance_amount
+
+    @commercial_insurance_amount.setter
+    def commercial_insurance_amount(self, value):
+        self._commercial_insurance_amount = value
+    @property
+    def compulsory_insurance_amount(self):
+        return self._compulsory_insurance_amount
+
+    @compulsory_insurance_amount.setter
+    def compulsory_insurance_amount(self, value):
+        self._compulsory_insurance_amount = value
+    @property
+    def energy_type(self):
+        return self._energy_type
+
+    @energy_type.setter
+    def energy_type(self, value):
+        self._energy_type = value
     @property
     def engine_no(self):
         return self._engine_no
@@ -133,6 +165,26 @@ class CarInsuranceRenewalOrderInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
+        if self.commercial_insurance_amount:
+            if hasattr(self.commercial_insurance_amount, 'to_alipay_dict'):
+                params['commercial_insurance_amount'] = self.commercial_insurance_amount.to_alipay_dict()
+            else:
+                params['commercial_insurance_amount'] = self.commercial_insurance_amount
+        if self.compulsory_insurance_amount:
+            if hasattr(self.compulsory_insurance_amount, 'to_alipay_dict'):
+                params['compulsory_insurance_amount'] = self.compulsory_insurance_amount.to_alipay_dict()
+            else:
+                params['compulsory_insurance_amount'] = self.compulsory_insurance_amount
+        if self.energy_type:
+            if hasattr(self.energy_type, 'to_alipay_dict'):
+                params['energy_type'] = self.energy_type.to_alipay_dict()
+            else:
+                params['energy_type'] = self.energy_type
         if self.engine_no:
             if hasattr(self.engine_no, 'to_alipay_dict'):
                 params['engine_no'] = self.engine_no.to_alipay_dict()
@@ -215,6 +267,14 @@ class CarInsuranceRenewalOrderInfo(object):
         if not d:
             return None
         o = CarInsuranceRenewalOrderInfo()
+        if 'city_code' in d:
+            o.city_code = d['city_code']
+        if 'commercial_insurance_amount' in d:
+            o.commercial_insurance_amount = d['commercial_insurance_amount']
+        if 'compulsory_insurance_amount' in d:
+            o.compulsory_insurance_amount = d['compulsory_insurance_amount']
+        if 'energy_type' in d:
+            o.energy_type = d['energy_type']
         if 'engine_no' in d:
             o.engine_no = d['engine_no']
         if 'insurance_company_name' in d:

@@ -9,11 +9,19 @@ from alipay.aop.api.domain.VoucherDetailInfoDTO import VoucherDetailInfoDTO
 class PayInfoVO(object):
 
     def __init__(self):
+        self._apple_iap_api = None
         self._pay_channels = None
         self._pay_time = None
         self._transaction_id = None
         self._voucher_detail_list = None
 
+    @property
+    def apple_iap_api(self):
+        return self._apple_iap_api
+
+    @apple_iap_api.setter
+    def apple_iap_api(self, value):
+        self._apple_iap_api = value
     @property
     def pay_channels(self):
         return self._pay_channels
@@ -55,6 +63,11 @@ class PayInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.apple_iap_api:
+            if hasattr(self.apple_iap_api, 'to_alipay_dict'):
+                params['apple_iap_api'] = self.apple_iap_api.to_alipay_dict()
+            else:
+                params['apple_iap_api'] = self.apple_iap_api
         if self.pay_channels:
             if isinstance(self.pay_channels, list):
                 for i in range(0, len(self.pay_channels)):
@@ -92,6 +105,8 @@ class PayInfoVO(object):
         if not d:
             return None
         o = PayInfoVO()
+        if 'apple_iap_api' in d:
+            o.apple_iap_api = d['apple_iap_api']
         if 'pay_channels' in d:
             o.pay_channels = d['pay_channels']
         if 'pay_time' in d:

@@ -9,6 +9,7 @@ from alipay.aop.api.domain.DrivingLicenseInfo import DrivingLicenseInfo
 from alipay.aop.api.domain.FileDetail import FileDetail
 from alipay.aop.api.domain.CarfinRegistrationInfo import CarfinRegistrationInfo
 from alipay.aop.api.domain.ValuationInfo import ValuationInfo
+from alipay.aop.api.domain.CarfinVehicleVerificationInfo import CarfinVehicleVerificationInfo
 
 
 class XingheLendassistCarfinInstinfoNotifyModel(object):
@@ -24,6 +25,7 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
         self._postback_scene = None
         self._registration_info = None
         self._valuation_info = None
+        self._vehicle_verification_info = None
 
     @property
     def apply_no(self):
@@ -119,6 +121,16 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             self._valuation_info = value
         else:
             self._valuation_info = ValuationInfo.from_alipay_dict(value)
+    @property
+    def vehicle_verification_info(self):
+        return self._vehicle_verification_info
+
+    @vehicle_verification_info.setter
+    def vehicle_verification_info(self, value):
+        if isinstance(value, CarfinVehicleVerificationInfo):
+            self._vehicle_verification_info = value
+        else:
+            self._vehicle_verification_info = CarfinVehicleVerificationInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -183,6 +195,11 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
                 params['valuation_info'] = self.valuation_info.to_alipay_dict()
             else:
                 params['valuation_info'] = self.valuation_info
+        if self.vehicle_verification_info:
+            if hasattr(self.vehicle_verification_info, 'to_alipay_dict'):
+                params['vehicle_verification_info'] = self.vehicle_verification_info.to_alipay_dict()
+            else:
+                params['vehicle_verification_info'] = self.vehicle_verification_info
         return params
 
     @staticmethod
@@ -210,6 +227,8 @@ class XingheLendassistCarfinInstinfoNotifyModel(object):
             o.registration_info = d['registration_info']
         if 'valuation_info' in d:
             o.valuation_info = d['valuation_info']
+        if 'vehicle_verification_info' in d:
+            o.vehicle_verification_info = d['vehicle_verification_info']
         return o
 
 

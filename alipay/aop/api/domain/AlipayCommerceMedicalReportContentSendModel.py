@@ -10,6 +10,7 @@ class AlipayCommerceMedicalReportContentSendModel(object):
     def __init__(self):
         self._content = None
         self._content_type = None
+        self._encrypt_type = None
         self._ext_params = None
         self._open_id = None
         self._org_id = None
@@ -30,6 +31,13 @@ class AlipayCommerceMedicalReportContentSendModel(object):
     @content_type.setter
     def content_type(self, value):
         self._content_type = value
+    @property
+    def encrypt_type(self):
+        return self._encrypt_type
+
+    @encrypt_type.setter
+    def encrypt_type(self, value):
+        self._encrypt_type = value
     @property
     def ext_params(self):
         return self._ext_params
@@ -79,6 +87,11 @@ class AlipayCommerceMedicalReportContentSendModel(object):
                 params['content_type'] = self.content_type.to_alipay_dict()
             else:
                 params['content_type'] = self.content_type
+        if self.encrypt_type:
+            if hasattr(self.encrypt_type, 'to_alipay_dict'):
+                params['encrypt_type'] = self.encrypt_type.to_alipay_dict()
+            else:
+                params['encrypt_type'] = self.encrypt_type
         if self.ext_params:
             if hasattr(self.ext_params, 'to_alipay_dict'):
                 params['ext_params'] = self.ext_params.to_alipay_dict()
@@ -115,6 +128,8 @@ class AlipayCommerceMedicalReportContentSendModel(object):
             o.content = d['content']
         if 'content_type' in d:
             o.content_type = d['content_type']
+        if 'encrypt_type' in d:
+            o.encrypt_type = d['encrypt_type']
         if 'ext_params' in d:
             o.ext_params = d['ext_params']
         if 'open_id' in d:

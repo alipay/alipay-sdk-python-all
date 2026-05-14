@@ -10,6 +10,7 @@ from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
 from alipay.aop.api.domain.RiskBasicInfoVO import RiskBasicInfoVO
 from alipay.aop.api.domain.RentRiskInfoVO import RentRiskInfoVO
 from alipay.aop.api.domain.ShipGoodsRiskVO import ShipGoodsRiskVO
+from alipay.aop.api.domain.VerticalRiskVO import VerticalRiskVO
 
 
 class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
@@ -25,6 +26,7 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
         self._risk_infos = None
         self._ship_goods_risk_models = None
         self._vam_group = None
+        self._vertical_risk_models = None
 
     @property
     def comprehensive_risk_models(self):
@@ -119,6 +121,16 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
     @vam_group.setter
     def vam_group(self, value):
         self._vam_group = value
+    @property
+    def vertical_risk_models(self):
+        return self._vertical_risk_models
+
+    @vertical_risk_models.setter
+    def vertical_risk_models(self, value):
+        if isinstance(value, VerticalRiskVO):
+            self._vertical_risk_models = value
+        else:
+            self._vertical_risk_models = VerticalRiskVO.from_alipay_dict(value)
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceRentRiskConsultResponse, self).parse_response_content(response_content)
@@ -140,3 +152,5 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
             self.ship_goods_risk_models = response['ship_goods_risk_models']
         if 'vam_group' in response:
             self.vam_group = response['vam_group']
+        if 'vertical_risk_models' in response:
+            self.vertical_risk_models = response['vertical_risk_models']

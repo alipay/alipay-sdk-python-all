@@ -17,6 +17,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
         self._payment_invoice_page_alipay_url = None
         self._payment_invoice_page_url = None
         self._payment_invoice_qr_code_url = None
+        self._proxy_seller_invoice_page_alipay_url = None
+        self._proxy_seller_invoice_page_url = None
         self._tax_authority_remind = None
 
     @property
@@ -76,6 +78,20 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
     def payment_invoice_qr_code_url(self, value):
         self._payment_invoice_qr_code_url = value
     @property
+    def proxy_seller_invoice_page_alipay_url(self):
+        return self._proxy_seller_invoice_page_alipay_url
+
+    @proxy_seller_invoice_page_alipay_url.setter
+    def proxy_seller_invoice_page_alipay_url(self, value):
+        self._proxy_seller_invoice_page_alipay_url = value
+    @property
+    def proxy_seller_invoice_page_url(self):
+        return self._proxy_seller_invoice_page_url
+
+    @proxy_seller_invoice_page_url.setter
+    def proxy_seller_invoice_page_url(self, value):
+        self._proxy_seller_invoice_page_url = value
+    @property
     def tax_authority_remind(self):
         return self._tax_authority_remind
 
@@ -101,5 +117,9 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateResponse(AlipayResponse):
             self.payment_invoice_page_url = response['payment_invoice_page_url']
         if 'payment_invoice_qr_code_url' in response:
             self.payment_invoice_qr_code_url = response['payment_invoice_qr_code_url']
+        if 'proxy_seller_invoice_page_alipay_url' in response:
+            self.proxy_seller_invoice_page_alipay_url = response['proxy_seller_invoice_page_alipay_url']
+        if 'proxy_seller_invoice_page_url' in response:
+            self.proxy_seller_invoice_page_url = response['proxy_seller_invoice_page_url']
         if 'tax_authority_remind' in response:
             self.tax_authority_remind = response['tax_authority_remind']

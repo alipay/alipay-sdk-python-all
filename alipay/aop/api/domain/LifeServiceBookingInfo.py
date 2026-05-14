@@ -9,10 +9,13 @@ from alipay.aop.api.domain.LifeServiceAttr import LifeServiceAttr
 class LifeServiceBookingInfo(object):
 
     def __init__(self):
+        self._auto_confirm_deduction_time = None
         self._booking_attrs = None
         self._booking_create_time = None
         self._booking_date = None
+        self._booking_deduction_status = None
         self._booking_id = None
+        self._deduction_order_id = None
         self._end_time = None
         self._item_id = None
         self._nick = None
@@ -34,6 +37,13 @@ class LifeServiceBookingInfo(object):
         self._technician_id = None
         self._user_id = None
 
+    @property
+    def auto_confirm_deduction_time(self):
+        return self._auto_confirm_deduction_time
+
+    @auto_confirm_deduction_time.setter
+    def auto_confirm_deduction_time(self, value):
+        self._auto_confirm_deduction_time = value
     @property
     def booking_attrs(self):
         return self._booking_attrs
@@ -62,12 +72,26 @@ class LifeServiceBookingInfo(object):
     def booking_date(self, value):
         self._booking_date = value
     @property
+    def booking_deduction_status(self):
+        return self._booking_deduction_status
+
+    @booking_deduction_status.setter
+    def booking_deduction_status(self, value):
+        self._booking_deduction_status = value
+    @property
     def booking_id(self):
         return self._booking_id
 
     @booking_id.setter
     def booking_id(self, value):
         self._booking_id = value
+    @property
+    def deduction_order_id(self):
+        return self._deduction_order_id
+
+    @deduction_order_id.setter
+    def deduction_order_id(self, value):
+        self._deduction_order_id = value
     @property
     def end_time(self):
         return self._end_time
@@ -212,6 +236,11 @@ class LifeServiceBookingInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auto_confirm_deduction_time:
+            if hasattr(self.auto_confirm_deduction_time, 'to_alipay_dict'):
+                params['auto_confirm_deduction_time'] = self.auto_confirm_deduction_time.to_alipay_dict()
+            else:
+                params['auto_confirm_deduction_time'] = self.auto_confirm_deduction_time
         if self.booking_attrs:
             if isinstance(self.booking_attrs, list):
                 for i in range(0, len(self.booking_attrs)):
@@ -232,11 +261,21 @@ class LifeServiceBookingInfo(object):
                 params['booking_date'] = self.booking_date.to_alipay_dict()
             else:
                 params['booking_date'] = self.booking_date
+        if self.booking_deduction_status:
+            if hasattr(self.booking_deduction_status, 'to_alipay_dict'):
+                params['booking_deduction_status'] = self.booking_deduction_status.to_alipay_dict()
+            else:
+                params['booking_deduction_status'] = self.booking_deduction_status
         if self.booking_id:
             if hasattr(self.booking_id, 'to_alipay_dict'):
                 params['booking_id'] = self.booking_id.to_alipay_dict()
             else:
                 params['booking_id'] = self.booking_id
+        if self.deduction_order_id:
+            if hasattr(self.deduction_order_id, 'to_alipay_dict'):
+                params['deduction_order_id'] = self.deduction_order_id.to_alipay_dict()
+            else:
+                params['deduction_order_id'] = self.deduction_order_id
         if self.end_time:
             if hasattr(self.end_time, 'to_alipay_dict'):
                 params['end_time'] = self.end_time.to_alipay_dict()
@@ -344,14 +383,20 @@ class LifeServiceBookingInfo(object):
         if not d:
             return None
         o = LifeServiceBookingInfo()
+        if 'auto_confirm_deduction_time' in d:
+            o.auto_confirm_deduction_time = d['auto_confirm_deduction_time']
         if 'booking_attrs' in d:
             o.booking_attrs = d['booking_attrs']
         if 'booking_create_time' in d:
             o.booking_create_time = d['booking_create_time']
         if 'booking_date' in d:
             o.booking_date = d['booking_date']
+        if 'booking_deduction_status' in d:
+            o.booking_deduction_status = d['booking_deduction_status']
         if 'booking_id' in d:
             o.booking_id = d['booking_id']
+        if 'deduction_order_id' in d:
+            o.deduction_order_id = d['deduction_order_id']
         if 'end_time' in d:
             o.end_time = d['end_time']
         if 'item_id' in d:

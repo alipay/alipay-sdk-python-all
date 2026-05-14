@@ -14,6 +14,7 @@ class CoverageLiability(object):
         self._liability_name = None
         self._liability_no = None
         self._sum_insured = None
+        self._wait_period_day = None
         self._wait_period_end = None
 
     @property
@@ -59,6 +60,13 @@ class CoverageLiability(object):
     def sum_insured(self, value):
         self._sum_insured = value
     @property
+    def wait_period_day(self):
+        return self._wait_period_day
+
+    @wait_period_day.setter
+    def wait_period_day(self, value):
+        self._wait_period_day = value
+    @property
     def wait_period_end(self):
         return self._wait_period_end
 
@@ -99,6 +107,11 @@ class CoverageLiability(object):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
             else:
                 params['sum_insured'] = self.sum_insured
+        if self.wait_period_day:
+            if hasattr(self.wait_period_day, 'to_alipay_dict'):
+                params['wait_period_day'] = self.wait_period_day.to_alipay_dict()
+            else:
+                params['wait_period_day'] = self.wait_period_day
         if self.wait_period_end:
             if hasattr(self.wait_period_end, 'to_alipay_dict'):
                 params['wait_period_end'] = self.wait_period_end.to_alipay_dict()
@@ -123,6 +136,8 @@ class CoverageLiability(object):
             o.liability_no = d['liability_no']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
+        if 'wait_period_day' in d:
+            o.wait_period_day = d['wait_period_day']
         if 'wait_period_end' in d:
             o.wait_period_end = d['wait_period_end']
         return o

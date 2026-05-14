@@ -46,6 +46,7 @@ class AssetDeliveryItem(object):
         self._item_id = None
         self._item_name = None
         self._logistics_info = None
+        self._logistics_mode = None
         self._memo = None
         self._operate_info = None
         self._optional_item_flag = None
@@ -313,6 +314,13 @@ class AssetDeliveryItem(object):
             self._logistics_info = value
         else:
             self._logistics_info = LogisticsInfo.from_alipay_dict(value)
+    @property
+    def logistics_mode(self):
+        return self._logistics_mode
+
+    @logistics_mode.setter
+    def logistics_mode(self, value):
+        self._logistics_mode = value
     @property
     def memo(self):
         return self._memo
@@ -660,6 +668,11 @@ class AssetDeliveryItem(object):
                 params['logistics_info'] = self.logistics_info.to_alipay_dict()
             else:
                 params['logistics_info'] = self.logistics_info
+        if self.logistics_mode:
+            if hasattr(self.logistics_mode, 'to_alipay_dict'):
+                params['logistics_mode'] = self.logistics_mode.to_alipay_dict()
+            else:
+                params['logistics_mode'] = self.logistics_mode
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -858,6 +871,8 @@ class AssetDeliveryItem(object):
             o.item_name = d['item_name']
         if 'logistics_info' in d:
             o.logistics_info = d['logistics_info']
+        if 'logistics_mode' in d:
+            o.logistics_mode = d['logistics_mode']
         if 'memo' in d:
             o.memo = d['memo']
         if 'operate_info' in d:

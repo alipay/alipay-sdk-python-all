@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceFundBindCreateModel(object):
 
     def __init__(self):
+        self._bank_card_no = None
         self._cert_no = None
         self._cert_type = None
         self._expire_time = None
@@ -15,6 +16,13 @@ class AlipayCommerceFundBindCreateModel(object):
         self._real_name = None
         self._redirect_url = None
 
+    @property
+    def bank_card_no(self):
+        return self._bank_card_no
+
+    @bank_card_no.setter
+    def bank_card_no(self, value):
+        self._bank_card_no = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -61,6 +69,11 @@ class AlipayCommerceFundBindCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bank_card_no:
+            if hasattr(self.bank_card_no, 'to_alipay_dict'):
+                params['bank_card_no'] = self.bank_card_no.to_alipay_dict()
+            else:
+                params['bank_card_no'] = self.bank_card_no
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -98,6 +111,8 @@ class AlipayCommerceFundBindCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceFundBindCreateModel()
+        if 'bank_card_no' in d:
+            o.bank_card_no = d['bank_card_no']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'cert_type' in d:

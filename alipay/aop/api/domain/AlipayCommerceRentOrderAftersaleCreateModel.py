@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AftersaleMediaInfoVO import AftersaleMediaInfoVO
 from alipay.aop.api.domain.AftersalePayItemVO import AftersalePayItemVO
+from alipay.aop.api.domain.AftersaleRefundItemVO import AftersaleRefundItemVO
 
 
 class AlipayCommerceRentOrderAftersaleCreateModel(object):
@@ -20,6 +21,7 @@ class AlipayCommerceRentOrderAftersaleCreateModel(object):
         self._path = None
         self._pay_items = None
         self._reason_code = None
+        self._refund_items = None
 
     @property
     def additional_description(self):
@@ -103,6 +105,19 @@ class AlipayCommerceRentOrderAftersaleCreateModel(object):
     @reason_code.setter
     def reason_code(self, value):
         self._reason_code = value
+    @property
+    def refund_items(self):
+        return self._refund_items
+
+    @refund_items.setter
+    def refund_items(self, value):
+        if isinstance(value, list):
+            self._refund_items = list()
+            for i in value:
+                if isinstance(i, AftersaleRefundItemVO):
+                    self._refund_items.append(i)
+                else:
+                    self._refund_items.append(AftersaleRefundItemVO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -167,6 +182,16 @@ class AlipayCommerceRentOrderAftersaleCreateModel(object):
                 params['reason_code'] = self.reason_code.to_alipay_dict()
             else:
                 params['reason_code'] = self.reason_code
+        if self.refund_items:
+            if isinstance(self.refund_items, list):
+                for i in range(0, len(self.refund_items)):
+                    element = self.refund_items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.refund_items[i] = element.to_alipay_dict()
+            if hasattr(self.refund_items, 'to_alipay_dict'):
+                params['refund_items'] = self.refund_items.to_alipay_dict()
+            else:
+                params['refund_items'] = self.refund_items
         return params
 
     @staticmethod
@@ -194,6 +219,8 @@ class AlipayCommerceRentOrderAftersaleCreateModel(object):
             o.pay_items = d['pay_items']
         if 'reason_code' in d:
             o.reason_code = d['reason_code']
+        if 'refund_items' in d:
+            o.refund_items = d['refund_items']
         return o
 
 

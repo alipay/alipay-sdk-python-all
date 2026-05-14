@@ -3,17 +3,32 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.FulfillmentAdditionalMediaInfo import FulfillmentAdditionalMediaInfo
 
 
 class AlipayCommerceRentOrderFulfillmentReceiveModel(object):
 
     def __init__(self):
+        self._additional_media_list = None
         self._open_id = None
         self._order_id = None
         self._out_order_id = None
         self._type = None
         self._user_id = None
 
+    @property
+    def additional_media_list(self):
+        return self._additional_media_list
+
+    @additional_media_list.setter
+    def additional_media_list(self, value):
+        if isinstance(value, list):
+            self._additional_media_list = list()
+            for i in value:
+                if isinstance(i, FulfillmentAdditionalMediaInfo):
+                    self._additional_media_list.append(i)
+                else:
+                    self._additional_media_list.append(FulfillmentAdditionalMediaInfo.from_alipay_dict(i))
     @property
     def open_id(self):
         return self._open_id
@@ -53,6 +68,16 @@ class AlipayCommerceRentOrderFulfillmentReceiveModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.additional_media_list:
+            if isinstance(self.additional_media_list, list):
+                for i in range(0, len(self.additional_media_list)):
+                    element = self.additional_media_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.additional_media_list[i] = element.to_alipay_dict()
+            if hasattr(self.additional_media_list, 'to_alipay_dict'):
+                params['additional_media_list'] = self.additional_media_list.to_alipay_dict()
+            else:
+                params['additional_media_list'] = self.additional_media_list
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -85,6 +110,8 @@ class AlipayCommerceRentOrderFulfillmentReceiveModel(object):
         if not d:
             return None
         o = AlipayCommerceRentOrderFulfillmentReceiveModel()
+        if 'additional_media_list' in d:
+            o.additional_media_list = d['additional_media_list']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:

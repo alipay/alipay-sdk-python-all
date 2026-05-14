@@ -14,6 +14,7 @@ class CertBillDetail(object):
         self._et_settle_time = None
         self._item_id = None
         self._item_type = None
+        self._m_item_id = None
         self._m_shop_id = None
         self._m_use_order_id = None
         self._merchant_discount = None
@@ -34,6 +35,10 @@ class CertBillDetail(object):
         self._trade_time = None
         self._use_shop_id = None
         self._use_shop_name = None
+        self._verify_op = None
+        self._verify_op_name = None
+        self._verify_point_id = None
+        self._verify_point_name = None
         self._verify_time = None
 
     @property
@@ -78,6 +83,13 @@ class CertBillDetail(object):
     @item_type.setter
     def item_type(self, value):
         self._item_type = value
+    @property
+    def m_item_id(self):
+        return self._m_item_id
+
+    @m_item_id.setter
+    def m_item_id(self, value):
+        self._m_item_id = value
     @property
     def m_shop_id(self):
         return self._m_shop_id
@@ -219,6 +231,34 @@ class CertBillDetail(object):
     def use_shop_name(self, value):
         self._use_shop_name = value
     @property
+    def verify_op(self):
+        return self._verify_op
+
+    @verify_op.setter
+    def verify_op(self, value):
+        self._verify_op = value
+    @property
+    def verify_op_name(self):
+        return self._verify_op_name
+
+    @verify_op_name.setter
+    def verify_op_name(self, value):
+        self._verify_op_name = value
+    @property
+    def verify_point_id(self):
+        return self._verify_point_id
+
+    @verify_point_id.setter
+    def verify_point_id(self, value):
+        self._verify_point_id = value
+    @property
+    def verify_point_name(self):
+        return self._verify_point_name
+
+    @verify_point_name.setter
+    def verify_point_name(self, value):
+        self._verify_point_name = value
+    @property
     def verify_time(self):
         return self._verify_time
 
@@ -259,6 +299,11 @@ class CertBillDetail(object):
                 params['item_type'] = self.item_type.to_alipay_dict()
             else:
                 params['item_type'] = self.item_type
+        if self.m_item_id:
+            if hasattr(self.m_item_id, 'to_alipay_dict'):
+                params['m_item_id'] = self.m_item_id.to_alipay_dict()
+            else:
+                params['m_item_id'] = self.m_item_id
         if self.m_shop_id:
             if hasattr(self.m_shop_id, 'to_alipay_dict'):
                 params['m_shop_id'] = self.m_shop_id.to_alipay_dict()
@@ -359,6 +404,26 @@ class CertBillDetail(object):
                 params['use_shop_name'] = self.use_shop_name.to_alipay_dict()
             else:
                 params['use_shop_name'] = self.use_shop_name
+        if self.verify_op:
+            if hasattr(self.verify_op, 'to_alipay_dict'):
+                params['verify_op'] = self.verify_op.to_alipay_dict()
+            else:
+                params['verify_op'] = self.verify_op
+        if self.verify_op_name:
+            if hasattr(self.verify_op_name, 'to_alipay_dict'):
+                params['verify_op_name'] = self.verify_op_name.to_alipay_dict()
+            else:
+                params['verify_op_name'] = self.verify_op_name
+        if self.verify_point_id:
+            if hasattr(self.verify_point_id, 'to_alipay_dict'):
+                params['verify_point_id'] = self.verify_point_id.to_alipay_dict()
+            else:
+                params['verify_point_id'] = self.verify_point_id
+        if self.verify_point_name:
+            if hasattr(self.verify_point_name, 'to_alipay_dict'):
+                params['verify_point_name'] = self.verify_point_name.to_alipay_dict()
+            else:
+                params['verify_point_name'] = self.verify_point_name
         if self.verify_time:
             if hasattr(self.verify_time, 'to_alipay_dict'):
                 params['verify_time'] = self.verify_time.to_alipay_dict()
@@ -383,6 +448,8 @@ class CertBillDetail(object):
             o.item_id = d['item_id']
         if 'item_type' in d:
             o.item_type = d['item_type']
+        if 'm_item_id' in d:
+            o.m_item_id = d['m_item_id']
         if 'm_shop_id' in d:
             o.m_shop_id = d['m_shop_id']
         if 'm_use_order_id' in d:
@@ -423,6 +490,14 @@ class CertBillDetail(object):
             o.use_shop_id = d['use_shop_id']
         if 'use_shop_name' in d:
             o.use_shop_name = d['use_shop_name']
+        if 'verify_op' in d:
+            o.verify_op = d['verify_op']
+        if 'verify_op_name' in d:
+            o.verify_op_name = d['verify_op_name']
+        if 'verify_point_id' in d:
+            o.verify_point_id = d['verify_point_id']
+        if 'verify_point_name' in d:
+            o.verify_point_name = d['verify_point_name']
         if 'verify_time' in d:
             o.verify_time = d['verify_time']
         return o

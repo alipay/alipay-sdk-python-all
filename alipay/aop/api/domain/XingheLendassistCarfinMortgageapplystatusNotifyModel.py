@@ -10,6 +10,7 @@ from alipay.aop.api.domain.XhExpressPostInfo import XhExpressPostInfo
 class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
 
     def __init__(self):
+        self._current_status = None
         self._jksxh = None
         self._mortgage_no = None
         self._out_mortgage_no = None
@@ -21,6 +22,13 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
         self._supple_agreement_list = None
         self._supple_file_list = None
 
+    @property
+    def current_status(self):
+        return self._current_status
+
+    @current_status.setter
+    def current_status(self, value):
+        self._current_status = value
     @property
     def jksxh(self):
         return self._jksxh
@@ -110,6 +118,11 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.current_status:
+            if hasattr(self.current_status, 'to_alipay_dict'):
+                params['current_status'] = self.current_status.to_alipay_dict()
+            else:
+                params['current_status'] = self.current_status
         if self.jksxh:
             if hasattr(self.jksxh, 'to_alipay_dict'):
                 params['jksxh'] = self.jksxh.to_alipay_dict()
@@ -182,6 +195,8 @@ class XingheLendassistCarfinMortgageapplystatusNotifyModel(object):
         if not d:
             return None
         o = XingheLendassistCarfinMortgageapplystatusNotifyModel()
+        if 'current_status' in d:
+            o.current_status = d['current_status']
         if 'jksxh' in d:
             o.jksxh = d['jksxh']
         if 'mortgage_no' in d:

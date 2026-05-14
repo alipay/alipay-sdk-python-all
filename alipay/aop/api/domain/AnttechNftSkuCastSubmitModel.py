@@ -11,6 +11,7 @@ class AnttechNftSkuCastSubmitModel(object):
         self._apply_no = None
         self._author = None
         self._creation_time = None
+        self._custom_flag = None
         self._issuer = None
         self._quantity = None
         self._sku_ac_color = None
@@ -44,6 +45,13 @@ class AnttechNftSkuCastSubmitModel(object):
     @creation_time.setter
     def creation_time(self, value):
         self._creation_time = value
+    @property
+    def custom_flag(self):
+        return self._custom_flag
+
+    @custom_flag.setter
+    def custom_flag(self, value):
+        self._custom_flag = value
     @property
     def issuer(self):
         return self._issuer
@@ -140,6 +148,11 @@ class AnttechNftSkuCastSubmitModel(object):
                 params['creation_time'] = self.creation_time.to_alipay_dict()
             else:
                 params['creation_time'] = self.creation_time
+        if self.custom_flag:
+            if hasattr(self.custom_flag, 'to_alipay_dict'):
+                params['custom_flag'] = self.custom_flag.to_alipay_dict()
+            else:
+                params['custom_flag'] = self.custom_flag
         if self.issuer:
             if hasattr(self.issuer, 'to_alipay_dict'):
                 params['issuer'] = self.issuer.to_alipay_dict()
@@ -208,6 +221,8 @@ class AnttechNftSkuCastSubmitModel(object):
             o.author = d['author']
         if 'creation_time' in d:
             o.creation_time = d['creation_time']
+        if 'custom_flag' in d:
+            o.custom_flag = d['custom_flag']
         if 'issuer' in d:
             o.issuer = d['issuer']
         if 'quantity' in d:

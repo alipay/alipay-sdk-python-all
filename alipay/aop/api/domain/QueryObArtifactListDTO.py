@@ -9,6 +9,7 @@ class QueryObArtifactListDTO(object):
 
     def __init__(self):
         self._artifact_version = None
+        self._boss_code = None
         self._boss_id = None
         self._download_url = None
         self._fullname = None
@@ -25,6 +26,13 @@ class QueryObArtifactListDTO(object):
     @artifact_version.setter
     def artifact_version(self, value):
         self._artifact_version = value
+    @property
+    def boss_code(self):
+        return self._boss_code
+
+    @boss_code.setter
+    def boss_code(self, value):
+        self._boss_code = value
     @property
     def boss_id(self):
         return self._boss_id
@@ -90,6 +98,11 @@ class QueryObArtifactListDTO(object):
                 params['artifact_version'] = self.artifact_version.to_alipay_dict()
             else:
                 params['artifact_version'] = self.artifact_version
+        if self.boss_code:
+            if hasattr(self.boss_code, 'to_alipay_dict'):
+                params['boss_code'] = self.boss_code.to_alipay_dict()
+            else:
+                params['boss_code'] = self.boss_code
         if self.boss_id:
             if hasattr(self.boss_id, 'to_alipay_dict'):
                 params['boss_id'] = self.boss_id.to_alipay_dict()
@@ -139,6 +152,8 @@ class QueryObArtifactListDTO(object):
         o = QueryObArtifactListDTO()
         if 'artifact_version' in d:
             o.artifact_version = d['artifact_version']
+        if 'boss_code' in d:
+            o.boss_code = d['boss_code']
         if 'boss_id' in d:
             o.boss_id = d['boss_id']
         if 'download_url' in d:

@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.BreakCostsInfo import BreakCostsInfo
 from alipay.aop.api.domain.CardPromoInfo import CardPromoInfo
 from alipay.aop.api.domain.AxfItemAttr import AxfItemAttr
+from alipay.aop.api.domain.LsItemCustomAttr import LsItemCustomAttr
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
@@ -27,6 +28,7 @@ class MerchantCardTemplate(object):
         self._card_template_status = None
         self._card_type = None
         self._category_id = None
+        self._fulfillment_type = None
         self._funding_model = None
         self._hotline = None
         self._image_detail_id_list = None
@@ -35,6 +37,7 @@ class MerchantCardTemplate(object):
         self._image_url_list = None
         self._item_attrs = None
         self._item_category_code = None
+        self._item_custom_attrs = None
         self._money_card_info = None
         self._msg_app_id = None
         self._need_order_agreement = None
@@ -135,6 +138,13 @@ class MerchantCardTemplate(object):
     def category_id(self, value):
         self._category_id = value
     @property
+    def fulfillment_type(self):
+        return self._fulfillment_type
+
+    @fulfillment_type.setter
+    def fulfillment_type(self, value):
+        self._fulfillment_type = value
+    @property
     def funding_model(self):
         return self._funding_model
 
@@ -211,6 +221,19 @@ class MerchantCardTemplate(object):
     @item_category_code.setter
     def item_category_code(self, value):
         self._item_category_code = value
+    @property
+    def item_custom_attrs(self):
+        return self._item_custom_attrs
+
+    @item_custom_attrs.setter
+    def item_custom_attrs(self, value):
+        if isinstance(value, list):
+            self._item_custom_attrs = list()
+            for i in value:
+                if isinstance(i, LsItemCustomAttr):
+                    self._item_custom_attrs.append(i)
+                else:
+                    self._item_custom_attrs.append(LsItemCustomAttr.from_alipay_dict(i))
     @property
     def money_card_info(self):
         return self._money_card_info
@@ -377,6 +400,11 @@ class MerchantCardTemplate(object):
                 params['category_id'] = self.category_id.to_alipay_dict()
             else:
                 params['category_id'] = self.category_id
+        if self.fulfillment_type:
+            if hasattr(self.fulfillment_type, 'to_alipay_dict'):
+                params['fulfillment_type'] = self.fulfillment_type.to_alipay_dict()
+            else:
+                params['fulfillment_type'] = self.fulfillment_type
         if self.funding_model:
             if isinstance(self.funding_model, list):
                 for i in range(0, len(self.funding_model)):
@@ -447,6 +475,16 @@ class MerchantCardTemplate(object):
                 params['item_category_code'] = self.item_category_code.to_alipay_dict()
             else:
                 params['item_category_code'] = self.item_category_code
+        if self.item_custom_attrs:
+            if isinstance(self.item_custom_attrs, list):
+                for i in range(0, len(self.item_custom_attrs)):
+                    element = self.item_custom_attrs[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_custom_attrs[i] = element.to_alipay_dict()
+            if hasattr(self.item_custom_attrs, 'to_alipay_dict'):
+                params['item_custom_attrs'] = self.item_custom_attrs.to_alipay_dict()
+            else:
+                params['item_custom_attrs'] = self.item_custom_attrs
         if self.money_card_info:
             if hasattr(self.money_card_info, 'to_alipay_dict'):
                 params['money_card_info'] = self.money_card_info.to_alipay_dict()
@@ -541,6 +579,8 @@ class MerchantCardTemplate(object):
             o.card_type = d['card_type']
         if 'category_id' in d:
             o.category_id = d['category_id']
+        if 'fulfillment_type' in d:
+            o.fulfillment_type = d['fulfillment_type']
         if 'funding_model' in d:
             o.funding_model = d['funding_model']
         if 'hotline' in d:
@@ -557,6 +597,8 @@ class MerchantCardTemplate(object):
             o.item_attrs = d['item_attrs']
         if 'item_category_code' in d:
             o.item_category_code = d['item_category_code']
+        if 'item_custom_attrs' in d:
+            o.item_custom_attrs = d['item_custom_attrs']
         if 'money_card_info' in d:
             o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:

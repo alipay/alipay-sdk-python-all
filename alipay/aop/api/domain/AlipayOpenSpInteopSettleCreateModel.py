@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.SettleBankCardInfo import SettleBankCardInfo
+from alipay.aop.api.domain.BizOpenCertificateInfoForEntry import BizOpenCertificateInfoForEntry
 from alipay.aop.api.domain.BizOpenCertificateInfoForEntry import BizOpenCertificateInfoForEntry
 from alipay.aop.api.domain.BizOpenCertificateInfoForEntry import BizOpenCertificateInfoForEntry
 from alipay.aop.api.domain.BizOpenCommonMerchantLicenseInfo import BizOpenCommonMerchantLicenseInfo
@@ -11,13 +13,25 @@ from alipay.aop.api.domain.BizOpenCommonMerchantLicenseInfo import BizOpenCommon
 class AlipayOpenSpInteopSettleCreateModel(object):
 
     def __init__(self):
+        self._bank_card_info = None
         self._benefit_info = None
+        self._benefit_infos = None
         self._inteop_order_no = None
         self._legal_info = None
         self._license_info = None
         self._merchant_type = None
         self._operator_login_id = None
 
+    @property
+    def bank_card_info(self):
+        return self._bank_card_info
+
+    @bank_card_info.setter
+    def bank_card_info(self, value):
+        if isinstance(value, SettleBankCardInfo):
+            self._bank_card_info = value
+        else:
+            self._bank_card_info = SettleBankCardInfo.from_alipay_dict(value)
     @property
     def benefit_info(self):
         return self._benefit_info
@@ -28,6 +42,19 @@ class AlipayOpenSpInteopSettleCreateModel(object):
             self._benefit_info = value
         else:
             self._benefit_info = BizOpenCertificateInfoForEntry.from_alipay_dict(value)
+    @property
+    def benefit_infos(self):
+        return self._benefit_infos
+
+    @benefit_infos.setter
+    def benefit_infos(self, value):
+        if isinstance(value, list):
+            self._benefit_infos = list()
+            for i in value:
+                if isinstance(i, BizOpenCertificateInfoForEntry):
+                    self._benefit_infos.append(i)
+                else:
+                    self._benefit_infos.append(BizOpenCertificateInfoForEntry.from_alipay_dict(i))
     @property
     def inteop_order_no(self):
         return self._inteop_order_no
@@ -73,11 +100,26 @@ class AlipayOpenSpInteopSettleCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bank_card_info:
+            if hasattr(self.bank_card_info, 'to_alipay_dict'):
+                params['bank_card_info'] = self.bank_card_info.to_alipay_dict()
+            else:
+                params['bank_card_info'] = self.bank_card_info
         if self.benefit_info:
             if hasattr(self.benefit_info, 'to_alipay_dict'):
                 params['benefit_info'] = self.benefit_info.to_alipay_dict()
             else:
                 params['benefit_info'] = self.benefit_info
+        if self.benefit_infos:
+            if isinstance(self.benefit_infos, list):
+                for i in range(0, len(self.benefit_infos)):
+                    element = self.benefit_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.benefit_infos[i] = element.to_alipay_dict()
+            if hasattr(self.benefit_infos, 'to_alipay_dict'):
+                params['benefit_infos'] = self.benefit_infos.to_alipay_dict()
+            else:
+                params['benefit_infos'] = self.benefit_infos
         if self.inteop_order_no:
             if hasattr(self.inteop_order_no, 'to_alipay_dict'):
                 params['inteop_order_no'] = self.inteop_order_no.to_alipay_dict()
@@ -110,8 +152,12 @@ class AlipayOpenSpInteopSettleCreateModel(object):
         if not d:
             return None
         o = AlipayOpenSpInteopSettleCreateModel()
+        if 'bank_card_info' in d:
+            o.bank_card_info = d['bank_card_info']
         if 'benefit_info' in d:
             o.benefit_info = d['benefit_info']
+        if 'benefit_infos' in d:
+            o.benefit_infos = d['benefit_infos']
         if 'inteop_order_no' in d:
             o.inteop_order_no = d['inteop_order_no']
         if 'legal_info' in d:

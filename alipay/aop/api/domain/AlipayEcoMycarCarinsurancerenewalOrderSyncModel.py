@@ -16,6 +16,7 @@ class AlipayEcoMycarCarinsurancerenewalOrderSyncModel(object):
         self._order_id = None
         self._out_biz_id = None
         self._out_order_no = None
+        self._remark = None
         self._source_channel = None
         self._user_id = None
 
@@ -72,6 +73,13 @@ class AlipayEcoMycarCarinsurancerenewalOrderSyncModel(object):
     def out_order_no(self, value):
         self._out_order_no = value
     @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
+    @property
     def source_channel(self):
         return self._source_channel
 
@@ -124,6 +132,11 @@ class AlipayEcoMycarCarinsurancerenewalOrderSyncModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.remark:
+            if hasattr(self.remark, 'to_alipay_dict'):
+                params['remark'] = self.remark.to_alipay_dict()
+            else:
+                params['remark'] = self.remark
         if self.source_channel:
             if hasattr(self.source_channel, 'to_alipay_dict'):
                 params['source_channel'] = self.source_channel.to_alipay_dict()
@@ -155,6 +168,8 @@ class AlipayEcoMycarCarinsurancerenewalOrderSyncModel(object):
             o.out_biz_id = d['out_biz_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'remark' in d:
+            o.remark = d['remark']
         if 'source_channel' in d:
             o.source_channel = d['source_channel']
         if 'user_id' in d:

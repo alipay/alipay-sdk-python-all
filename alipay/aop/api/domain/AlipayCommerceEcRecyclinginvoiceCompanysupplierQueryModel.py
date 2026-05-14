@@ -12,6 +12,7 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierQueryModel(object):
         self._page_num = None
         self._page_size = None
         self._supplier_id = None
+        self._supplier_phone = None
         self._tax_no = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierQueryModel(object):
     def supplier_id(self, value):
         self._supplier_id = value
     @property
+    def supplier_phone(self):
+        return self._supplier_phone
+
+    @supplier_phone.setter
+    def supplier_phone(self, value):
+        self._supplier_phone = value
+    @property
     def tax_no(self):
         return self._tax_no
 
@@ -73,6 +81,11 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierQueryModel(object):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
             else:
                 params['supplier_id'] = self.supplier_id
+        if self.supplier_phone:
+            if hasattr(self.supplier_phone, 'to_alipay_dict'):
+                params['supplier_phone'] = self.supplier_phone.to_alipay_dict()
+            else:
+                params['supplier_phone'] = self.supplier_phone
         if self.tax_no:
             if hasattr(self.tax_no, 'to_alipay_dict'):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierQueryModel(object):
             o.page_size = d['page_size']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
+        if 'supplier_phone' in d:
+            o.supplier_phone = d['supplier_phone']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
         return o

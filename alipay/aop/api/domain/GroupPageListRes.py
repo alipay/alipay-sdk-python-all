@@ -13,6 +13,7 @@ class GroupPageListRes(object):
         self._boost_end_date = None
         self._boost_id = None
         self._boost_start_date = None
+        self._charge_type = None
         self._gmt_modified = None
         self._group_budget = None
         self._group_charge = None
@@ -21,6 +22,7 @@ class GroupPageListRes(object):
         self._group_status = None
         self._market_target_code = None
         self._market_target_name = None
+        self._new_target_roi = None
         self._one_boost_status = None
         self._plan_id = None
         self._plan_name = None
@@ -64,6 +66,13 @@ class GroupPageListRes(object):
     @boost_start_date.setter
     def boost_start_date(self, value):
         self._boost_start_date = value
+    @property
+    def charge_type(self):
+        return self._charge_type
+
+    @charge_type.setter
+    def charge_type(self, value):
+        self._charge_type = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -120,6 +129,13 @@ class GroupPageListRes(object):
     @market_target_name.setter
     def market_target_name(self, value):
         self._market_target_name = value
+    @property
+    def new_target_roi(self):
+        return self._new_target_roi
+
+    @new_target_roi.setter
+    def new_target_roi(self, value):
+        self._new_target_roi = value
     @property
     def one_boost_status(self):
         return self._one_boost_status
@@ -198,6 +214,11 @@ class GroupPageListRes(object):
                 params['boost_start_date'] = self.boost_start_date.to_alipay_dict()
             else:
                 params['boost_start_date'] = self.boost_start_date
+        if self.charge_type:
+            if hasattr(self.charge_type, 'to_alipay_dict'):
+                params['charge_type'] = self.charge_type.to_alipay_dict()
+            else:
+                params['charge_type'] = self.charge_type
         if self.gmt_modified:
             if hasattr(self.gmt_modified, 'to_alipay_dict'):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
@@ -238,6 +259,11 @@ class GroupPageListRes(object):
                 params['market_target_name'] = self.market_target_name.to_alipay_dict()
             else:
                 params['market_target_name'] = self.market_target_name
+        if self.new_target_roi:
+            if hasattr(self.new_target_roi, 'to_alipay_dict'):
+                params['new_target_roi'] = self.new_target_roi.to_alipay_dict()
+            else:
+                params['new_target_roi'] = self.new_target_roi
         if self.one_boost_status:
             if hasattr(self.one_boost_status, 'to_alipay_dict'):
                 params['one_boost_status'] = self.one_boost_status.to_alipay_dict()
@@ -290,6 +316,8 @@ class GroupPageListRes(object):
             o.boost_id = d['boost_id']
         if 'boost_start_date' in d:
             o.boost_start_date = d['boost_start_date']
+        if 'charge_type' in d:
+            o.charge_type = d['charge_type']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
         if 'group_budget' in d:
@@ -306,6 +334,8 @@ class GroupPageListRes(object):
             o.market_target_code = d['market_target_code']
         if 'market_target_name' in d:
             o.market_target_name = d['market_target_name']
+        if 'new_target_roi' in d:
+            o.new_target_roi = d['new_target_roi']
         if 'one_boost_status' in d:
             o.one_boost_status = d['one_boost_status']
         if 'plan_id' in d:

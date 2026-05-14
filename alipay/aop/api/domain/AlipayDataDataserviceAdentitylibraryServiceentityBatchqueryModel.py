@@ -9,6 +9,8 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
 
     def __init__(self):
         self._current = None
+        self._goods_id = None
+        self._goods_name = None
         self._market_target_code = None
         self._page_size = None
         self._principal_id = None
@@ -24,6 +26,20 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
     @current.setter
     def current(self, value):
         self._current = value
+    @property
+    def goods_id(self):
+        return self._goods_id
+
+    @goods_id.setter
+    def goods_id(self, value):
+        self._goods_id = value
+    @property
+    def goods_name(self):
+        return self._goods_name
+
+    @goods_name.setter
+    def goods_name(self, value):
+        self._goods_name = value
     @property
     def market_target_code(self):
         return self._market_target_code
@@ -82,6 +98,16 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
                 params['current'] = self.current.to_alipay_dict()
             else:
                 params['current'] = self.current
+        if self.goods_id:
+            if hasattr(self.goods_id, 'to_alipay_dict'):
+                params['goods_id'] = self.goods_id.to_alipay_dict()
+            else:
+                params['goods_id'] = self.goods_id
+        if self.goods_name:
+            if hasattr(self.goods_name, 'to_alipay_dict'):
+                params['goods_name'] = self.goods_name.to_alipay_dict()
+            else:
+                params['goods_name'] = self.goods_name
         if self.market_target_code:
             if hasattr(self.market_target_code, 'to_alipay_dict'):
                 params['market_target_code'] = self.market_target_code.to_alipay_dict()
@@ -126,6 +152,10 @@ class AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel(object):
         o = AlipayDataDataserviceAdentitylibraryServiceentityBatchqueryModel()
         if 'current' in d:
             o.current = d['current']
+        if 'goods_id' in d:
+            o.goods_id = d['goods_id']
+        if 'goods_name' in d:
+            o.goods_name = d['goods_name']
         if 'market_target_code' in d:
             o.market_target_code = d['market_target_code']
         if 'page_size' in d:

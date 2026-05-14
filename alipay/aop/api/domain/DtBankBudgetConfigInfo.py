@@ -10,6 +10,7 @@ class DtBankBudgetConfigInfo(object):
     def __init__(self):
         self._daily_budget_type = None
         self._daily_budget_value = None
+        self._daily_discount_remaining_register_count = None
         self._min_send_count = None
         self._total_budget = None
 
@@ -27,6 +28,13 @@ class DtBankBudgetConfigInfo(object):
     @daily_budget_value.setter
     def daily_budget_value(self, value):
         self._daily_budget_value = value
+    @property
+    def daily_discount_remaining_register_count(self):
+        return self._daily_discount_remaining_register_count
+
+    @daily_discount_remaining_register_count.setter
+    def daily_discount_remaining_register_count(self, value):
+        self._daily_discount_remaining_register_count = value
     @property
     def min_send_count(self):
         return self._min_send_count
@@ -55,6 +63,11 @@ class DtBankBudgetConfigInfo(object):
                 params['daily_budget_value'] = self.daily_budget_value.to_alipay_dict()
             else:
                 params['daily_budget_value'] = self.daily_budget_value
+        if self.daily_discount_remaining_register_count:
+            if hasattr(self.daily_discount_remaining_register_count, 'to_alipay_dict'):
+                params['daily_discount_remaining_register_count'] = self.daily_discount_remaining_register_count.to_alipay_dict()
+            else:
+                params['daily_discount_remaining_register_count'] = self.daily_discount_remaining_register_count
         if self.min_send_count:
             if hasattr(self.min_send_count, 'to_alipay_dict'):
                 params['min_send_count'] = self.min_send_count.to_alipay_dict()
@@ -76,6 +89,8 @@ class DtBankBudgetConfigInfo(object):
             o.daily_budget_type = d['daily_budget_type']
         if 'daily_budget_value' in d:
             o.daily_budget_value = d['daily_budget_value']
+        if 'daily_discount_remaining_register_count' in d:
+            o.daily_discount_remaining_register_count = d['daily_discount_remaining_register_count']
         if 'min_send_count' in d:
             o.min_send_count = d['min_send_count']
         if 'total_budget' in d:

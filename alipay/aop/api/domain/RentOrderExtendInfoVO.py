@@ -9,6 +9,7 @@ class RentOrderExtendInfoVO(object):
 
     def __init__(self):
         self._promised_send_time = None
+        self._rent_dispatch_id = None
         self._scene_id = None
         self._union_rent_tag = None
 
@@ -19,6 +20,13 @@ class RentOrderExtendInfoVO(object):
     @promised_send_time.setter
     def promised_send_time(self, value):
         self._promised_send_time = value
+    @property
+    def rent_dispatch_id(self):
+        return self._rent_dispatch_id
+
+    @rent_dispatch_id.setter
+    def rent_dispatch_id(self, value):
+        self._rent_dispatch_id = value
     @property
     def scene_id(self):
         return self._scene_id
@@ -42,6 +50,11 @@ class RentOrderExtendInfoVO(object):
                 params['promised_send_time'] = self.promised_send_time.to_alipay_dict()
             else:
                 params['promised_send_time'] = self.promised_send_time
+        if self.rent_dispatch_id:
+            if hasattr(self.rent_dispatch_id, 'to_alipay_dict'):
+                params['rent_dispatch_id'] = self.rent_dispatch_id.to_alipay_dict()
+            else:
+                params['rent_dispatch_id'] = self.rent_dispatch_id
         if self.scene_id:
             if hasattr(self.scene_id, 'to_alipay_dict'):
                 params['scene_id'] = self.scene_id.to_alipay_dict()
@@ -61,6 +74,8 @@ class RentOrderExtendInfoVO(object):
         o = RentOrderExtendInfoVO()
         if 'promised_send_time' in d:
             o.promised_send_time = d['promised_send_time']
+        if 'rent_dispatch_id' in d:
+            o.rent_dispatch_id = d['rent_dispatch_id']
         if 'scene_id' in d:
             o.scene_id = d['scene_id']
         if 'union_rent_tag' in d:

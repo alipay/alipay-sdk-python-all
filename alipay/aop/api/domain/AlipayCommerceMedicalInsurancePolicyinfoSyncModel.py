@@ -29,6 +29,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._pay_time = None
         self._pay_trade_no = None
         self._person_list = None
+        self._policy_entity_type = None
         self._policy_no = None
         self._policy_type = None
         self._premium = None
@@ -190,6 +191,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                     self._person_list.append(i)
                 else:
                     self._person_list.append(RelatedPerson.from_alipay_dict(i))
+    @property
+    def policy_entity_type(self):
+        return self._policy_entity_type
+
+    @policy_entity_type.setter
+    def policy_entity_type(self, value):
+        self._policy_entity_type = value
     @property
     def policy_no(self):
         return self._policy_no
@@ -411,6 +419,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['person_list'] = self.person_list.to_alipay_dict()
             else:
                 params['person_list'] = self.person_list
+        if self.policy_entity_type:
+            if hasattr(self.policy_entity_type, 'to_alipay_dict'):
+                params['policy_entity_type'] = self.policy_entity_type.to_alipay_dict()
+            else:
+                params['policy_entity_type'] = self.policy_entity_type
         if self.policy_no:
             if hasattr(self.policy_no, 'to_alipay_dict'):
                 params['policy_no'] = self.policy_no.to_alipay_dict()
@@ -534,6 +547,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.pay_trade_no = d['pay_trade_no']
         if 'person_list' in d:
             o.person_list = d['person_list']
+        if 'policy_entity_type' in d:
+            o.policy_entity_type = d['policy_entity_type']
         if 'policy_no' in d:
             o.policy_no = d['policy_no']
         if 'policy_type' in d:
