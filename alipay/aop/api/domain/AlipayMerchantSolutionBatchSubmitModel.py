@@ -10,6 +10,7 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
 
     def __init__(self):
         self._file_info = None
+        self._mrch_type = None
         self._out_batch_no = None
         self._scene_code = None
         self._solution_code = None
@@ -27,6 +28,13 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
                     self._file_info.append(i)
                 else:
                     self._file_info.append(AlipaySolutionFile.from_alipay_dict(i))
+    @property
+    def mrch_type(self):
+        return self._mrch_type
+
+    @mrch_type.setter
+    def mrch_type(self, value):
+        self._mrch_type = value
     @property
     def out_batch_no(self):
         return self._out_batch_no
@@ -62,6 +70,11 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
                 params['file_info'] = self.file_info.to_alipay_dict()
             else:
                 params['file_info'] = self.file_info
+        if self.mrch_type:
+            if hasattr(self.mrch_type, 'to_alipay_dict'):
+                params['mrch_type'] = self.mrch_type.to_alipay_dict()
+            else:
+                params['mrch_type'] = self.mrch_type
         if self.out_batch_no:
             if hasattr(self.out_batch_no, 'to_alipay_dict'):
                 params['out_batch_no'] = self.out_batch_no.to_alipay_dict()
@@ -86,6 +99,8 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
         o = AlipayMerchantSolutionBatchSubmitModel()
         if 'file_info' in d:
             o.file_info = d['file_info']
+        if 'mrch_type' in d:
+            o.mrch_type = d['mrch_type']
         if 'out_batch_no' in d:
             o.out_batch_no = d['out_batch_no']
         if 'scene_code' in d:

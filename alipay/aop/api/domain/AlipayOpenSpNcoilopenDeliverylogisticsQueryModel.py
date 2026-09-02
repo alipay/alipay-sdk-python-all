@@ -9,6 +9,7 @@ class AlipayOpenSpNcoilopenDeliverylogisticsQueryModel(object):
 
     def __init__(self):
         self._biz_id = None
+        self._order_sale_id = None
         self._receiver_name = None
         self._receiver_phone = None
 
@@ -19,6 +20,13 @@ class AlipayOpenSpNcoilopenDeliverylogisticsQueryModel(object):
     @biz_id.setter
     def biz_id(self, value):
         self._biz_id = value
+    @property
+    def order_sale_id(self):
+        return self._order_sale_id
+
+    @order_sale_id.setter
+    def order_sale_id(self, value):
+        self._order_sale_id = value
     @property
     def receiver_name(self):
         return self._receiver_name
@@ -42,6 +50,11 @@ class AlipayOpenSpNcoilopenDeliverylogisticsQueryModel(object):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
             else:
                 params['biz_id'] = self.biz_id
+        if self.order_sale_id:
+            if hasattr(self.order_sale_id, 'to_alipay_dict'):
+                params['order_sale_id'] = self.order_sale_id.to_alipay_dict()
+            else:
+                params['order_sale_id'] = self.order_sale_id
         if self.receiver_name:
             if hasattr(self.receiver_name, 'to_alipay_dict'):
                 params['receiver_name'] = self.receiver_name.to_alipay_dict()
@@ -61,6 +74,8 @@ class AlipayOpenSpNcoilopenDeliverylogisticsQueryModel(object):
         o = AlipayOpenSpNcoilopenDeliverylogisticsQueryModel()
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
+        if 'order_sale_id' in d:
+            o.order_sale_id = d['order_sale_id']
         if 'receiver_name' in d:
             o.receiver_name = d['receiver_name']
         if 'receiver_phone' in d:

@@ -16,6 +16,8 @@ class OutpatientRecord(object):
         self._illness_history = None
         self._physical_exam = None
         self._result = None
+        self._tcm_diagnosis_result = None
+        self._tcm_four_diagnosis = None
         self._treatment_advice = None
         self._type = None
 
@@ -76,6 +78,20 @@ class OutpatientRecord(object):
     def result(self, value):
         self._result = value
     @property
+    def tcm_diagnosis_result(self):
+        return self._tcm_diagnosis_result
+
+    @tcm_diagnosis_result.setter
+    def tcm_diagnosis_result(self, value):
+        self._tcm_diagnosis_result = value
+    @property
+    def tcm_four_diagnosis(self):
+        return self._tcm_four_diagnosis
+
+    @tcm_four_diagnosis.setter
+    def tcm_four_diagnosis(self, value):
+        self._tcm_four_diagnosis = value
+    @property
     def treatment_advice(self):
         return self._treatment_advice
 
@@ -133,6 +149,16 @@ class OutpatientRecord(object):
                 params['result'] = self.result.to_alipay_dict()
             else:
                 params['result'] = self.result
+        if self.tcm_diagnosis_result:
+            if hasattr(self.tcm_diagnosis_result, 'to_alipay_dict'):
+                params['tcm_diagnosis_result'] = self.tcm_diagnosis_result.to_alipay_dict()
+            else:
+                params['tcm_diagnosis_result'] = self.tcm_diagnosis_result
+        if self.tcm_four_diagnosis:
+            if hasattr(self.tcm_four_diagnosis, 'to_alipay_dict'):
+                params['tcm_four_diagnosis'] = self.tcm_four_diagnosis.to_alipay_dict()
+            else:
+                params['tcm_four_diagnosis'] = self.tcm_four_diagnosis
         if self.treatment_advice:
             if hasattr(self.treatment_advice, 'to_alipay_dict'):
                 params['treatment_advice'] = self.treatment_advice.to_alipay_dict()
@@ -166,6 +192,10 @@ class OutpatientRecord(object):
             o.physical_exam = d['physical_exam']
         if 'result' in d:
             o.result = d['result']
+        if 'tcm_diagnosis_result' in d:
+            o.tcm_diagnosis_result = d['tcm_diagnosis_result']
+        if 'tcm_four_diagnosis' in d:
+            o.tcm_four_diagnosis = d['tcm_four_diagnosis']
         if 'treatment_advice' in d:
             o.treatment_advice = d['treatment_advice']
         if 'type' in d:

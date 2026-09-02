@@ -9,6 +9,7 @@ from alipay.aop.api.domain.InsPeriodDTO import InsPeriodDTO
 class InsQuoteDTO(object):
 
     def __init__(self):
+        self._basic_sum_insured = None
         self._discount_rate = None
         self._ins_period = None
         self._inst_id = None
@@ -23,7 +24,15 @@ class InsQuoteDTO(object):
         self._quote_id = None
         self._recommend_flow_id = None
         self._sum_insured = None
+        self._sum_insured_rate = None
 
+    @property
+    def basic_sum_insured(self):
+        return self._basic_sum_insured
+
+    @basic_sum_insured.setter
+    def basic_sum_insured(self, value):
+        self._basic_sum_insured = value
     @property
     def discount_rate(self):
         return self._discount_rate
@@ -125,10 +134,22 @@ class InsQuoteDTO(object):
     @sum_insured.setter
     def sum_insured(self, value):
         self._sum_insured = value
+    @property
+    def sum_insured_rate(self):
+        return self._sum_insured_rate
+
+    @sum_insured_rate.setter
+    def sum_insured_rate(self, value):
+        self._sum_insured_rate = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.basic_sum_insured:
+            if hasattr(self.basic_sum_insured, 'to_alipay_dict'):
+                params['basic_sum_insured'] = self.basic_sum_insured.to_alipay_dict()
+            else:
+                params['basic_sum_insured'] = self.basic_sum_insured
         if self.discount_rate:
             if hasattr(self.discount_rate, 'to_alipay_dict'):
                 params['discount_rate'] = self.discount_rate.to_alipay_dict()
@@ -199,6 +220,11 @@ class InsQuoteDTO(object):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
             else:
                 params['sum_insured'] = self.sum_insured
+        if self.sum_insured_rate:
+            if hasattr(self.sum_insured_rate, 'to_alipay_dict'):
+                params['sum_insured_rate'] = self.sum_insured_rate.to_alipay_dict()
+            else:
+                params['sum_insured_rate'] = self.sum_insured_rate
         return params
 
     @staticmethod
@@ -206,6 +232,8 @@ class InsQuoteDTO(object):
         if not d:
             return None
         o = InsQuoteDTO()
+        if 'basic_sum_insured' in d:
+            o.basic_sum_insured = d['basic_sum_insured']
         if 'discount_rate' in d:
             o.discount_rate = d['discount_rate']
         if 'ins_period' in d:
@@ -234,6 +262,8 @@ class InsQuoteDTO(object):
             o.recommend_flow_id = d['recommend_flow_id']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
+        if 'sum_insured_rate' in d:
+            o.sum_insured_rate = d['sum_insured_rate']
         return o
 
 

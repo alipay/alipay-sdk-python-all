@@ -9,6 +9,8 @@ class CustomerQueryResponseDTO(object):
 
     def __init__(self):
         self._bid = None
+        self._cid = None
+        self._customer_industry = None
         self._ep_cert_no = None
         self._ep_name = None
         self._owner_bd_name = None
@@ -21,6 +23,20 @@ class CustomerQueryResponseDTO(object):
     @bid.setter
     def bid(self, value):
         self._bid = value
+    @property
+    def cid(self):
+        return self._cid
+
+    @cid.setter
+    def cid(self, value):
+        self._cid = value
+    @property
+    def customer_industry(self):
+        return self._customer_industry
+
+    @customer_industry.setter
+    def customer_industry(self, value):
+        self._customer_industry = value
     @property
     def ep_cert_no(self):
         return self._ep_cert_no
@@ -58,6 +74,16 @@ class CustomerQueryResponseDTO(object):
                 params['bid'] = self.bid.to_alipay_dict()
             else:
                 params['bid'] = self.bid
+        if self.cid:
+            if hasattr(self.cid, 'to_alipay_dict'):
+                params['cid'] = self.cid.to_alipay_dict()
+            else:
+                params['cid'] = self.cid
+        if self.customer_industry:
+            if hasattr(self.customer_industry, 'to_alipay_dict'):
+                params['customer_industry'] = self.customer_industry.to_alipay_dict()
+            else:
+                params['customer_industry'] = self.customer_industry
         if self.ep_cert_no:
             if hasattr(self.ep_cert_no, 'to_alipay_dict'):
                 params['ep_cert_no'] = self.ep_cert_no.to_alipay_dict()
@@ -87,6 +113,10 @@ class CustomerQueryResponseDTO(object):
         o = CustomerQueryResponseDTO()
         if 'bid' in d:
             o.bid = d['bid']
+        if 'cid' in d:
+            o.cid = d['cid']
+        if 'customer_industry' in d:
+            o.customer_industry = d['customer_industry']
         if 'ep_cert_no' in d:
             o.ep_cert_no = d['ep_cert_no']
         if 'ep_name' in d:

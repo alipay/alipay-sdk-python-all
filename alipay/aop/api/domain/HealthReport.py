@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BasicExaminationReport import BasicExaminationReport
 from alipay.aop.api.domain.HealthInspectionReport import HealthInspectionReport
 from alipay.aop.api.domain.HealthLaboratoryReport import HealthLaboratoryReport
 
@@ -11,6 +12,7 @@ class HealthReport(object):
 
     def __init__(self):
         self._age = None
+        self._basic_physical_examination_report_list = None
         self._data_id = None
         self._data_source = None
         self._file_type = None
@@ -23,6 +25,7 @@ class HealthReport(object):
         self._report_id = None
         self._report_name = None
         self._report_time = None
+        self._report_type = None
 
     @property
     def age(self):
@@ -31,6 +34,19 @@ class HealthReport(object):
     @age.setter
     def age(self, value):
         self._age = value
+    @property
+    def basic_physical_examination_report_list(self):
+        return self._basic_physical_examination_report_list
+
+    @basic_physical_examination_report_list.setter
+    def basic_physical_examination_report_list(self, value):
+        if isinstance(value, list):
+            self._basic_physical_examination_report_list = list()
+            for i in value:
+                if isinstance(i, BasicExaminationReport):
+                    self._basic_physical_examination_report_list.append(i)
+                else:
+                    self._basic_physical_examination_report_list.append(BasicExaminationReport.from_alipay_dict(i))
     @property
     def data_id(self):
         return self._data_id
@@ -127,6 +143,13 @@ class HealthReport(object):
     @report_time.setter
     def report_time(self, value):
         self._report_time = value
+    @property
+    def report_type(self):
+        return self._report_type
+
+    @report_type.setter
+    def report_type(self, value):
+        self._report_type = value
 
 
     def to_alipay_dict(self):
@@ -136,6 +159,16 @@ class HealthReport(object):
                 params['age'] = self.age.to_alipay_dict()
             else:
                 params['age'] = self.age
+        if self.basic_physical_examination_report_list:
+            if isinstance(self.basic_physical_examination_report_list, list):
+                for i in range(0, len(self.basic_physical_examination_report_list)):
+                    element = self.basic_physical_examination_report_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.basic_physical_examination_report_list[i] = element.to_alipay_dict()
+            if hasattr(self.basic_physical_examination_report_list, 'to_alipay_dict'):
+                params['basic_physical_examination_report_list'] = self.basic_physical_examination_report_list.to_alipay_dict()
+            else:
+                params['basic_physical_examination_report_list'] = self.basic_physical_examination_report_list
         if self.data_id:
             if hasattr(self.data_id, 'to_alipay_dict'):
                 params['data_id'] = self.data_id.to_alipay_dict()
@@ -206,6 +239,11 @@ class HealthReport(object):
                 params['report_time'] = self.report_time.to_alipay_dict()
             else:
                 params['report_time'] = self.report_time
+        if self.report_type:
+            if hasattr(self.report_type, 'to_alipay_dict'):
+                params['report_type'] = self.report_type.to_alipay_dict()
+            else:
+                params['report_type'] = self.report_type
         return params
 
     @staticmethod
@@ -215,6 +253,8 @@ class HealthReport(object):
         o = HealthReport()
         if 'age' in d:
             o.age = d['age']
+        if 'basic_physical_examination_report_list' in d:
+            o.basic_physical_examination_report_list = d['basic_physical_examination_report_list']
         if 'data_id' in d:
             o.data_id = d['data_id']
         if 'data_source' in d:
@@ -239,6 +279,8 @@ class HealthReport(object):
             o.report_name = d['report_name']
         if 'report_time' in d:
             o.report_time = d['report_time']
+        if 'report_type' in d:
+            o.report_type = d['report_type']
         return o
 
 

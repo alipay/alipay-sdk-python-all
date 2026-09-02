@@ -18,6 +18,7 @@ class AplusVerifyDetailList(object):
         self._item_id = None
         self._item_title = None
         self._merchant_fund_amount = None
+        self._merchant_no_fund_amount = None
         self._merchant_real_receipt_amount = None
         self._order_amount = None
         self._order_no = None
@@ -103,6 +104,13 @@ class AplusVerifyDetailList(object):
     @merchant_fund_amount.setter
     def merchant_fund_amount(self, value):
         self._merchant_fund_amount = value
+    @property
+    def merchant_no_fund_amount(self):
+        return self._merchant_no_fund_amount
+
+    @merchant_no_fund_amount.setter
+    def merchant_no_fund_amount(self, value):
+        self._merchant_no_fund_amount = value
     @property
     def merchant_real_receipt_amount(self):
         return self._merchant_real_receipt_amount
@@ -255,6 +263,11 @@ class AplusVerifyDetailList(object):
                 params['merchant_fund_amount'] = self.merchant_fund_amount.to_alipay_dict()
             else:
                 params['merchant_fund_amount'] = self.merchant_fund_amount
+        if self.merchant_no_fund_amount:
+            if hasattr(self.merchant_no_fund_amount, 'to_alipay_dict'):
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount.to_alipay_dict()
+            else:
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount
         if self.merchant_real_receipt_amount:
             if hasattr(self.merchant_real_receipt_amount, 'to_alipay_dict'):
                 params['merchant_real_receipt_amount'] = self.merchant_real_receipt_amount.to_alipay_dict()
@@ -352,6 +365,8 @@ class AplusVerifyDetailList(object):
             o.item_title = d['item_title']
         if 'merchant_fund_amount' in d:
             o.merchant_fund_amount = d['merchant_fund_amount']
+        if 'merchant_no_fund_amount' in d:
+            o.merchant_no_fund_amount = d['merchant_no_fund_amount']
         if 'merchant_real_receipt_amount' in d:
             o.merchant_real_receipt_amount = d['merchant_real_receipt_amount']
         if 'order_amount' in d:

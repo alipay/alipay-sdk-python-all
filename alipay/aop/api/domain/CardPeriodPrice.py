@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class CardPeriodPrice(object):
 
     def __init__(self):
+        self._new_customer_price = None
         self._original_price = None
         self._period = None
         self._sale_price = None
 
+    @property
+    def new_customer_price(self):
+        return self._new_customer_price
+
+    @new_customer_price.setter
+    def new_customer_price(self, value):
+        self._new_customer_price = value
     @property
     def original_price(self):
         return self._original_price
@@ -37,6 +45,11 @@ class CardPeriodPrice(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.new_customer_price:
+            if hasattr(self.new_customer_price, 'to_alipay_dict'):
+                params['new_customer_price'] = self.new_customer_price.to_alipay_dict()
+            else:
+                params['new_customer_price'] = self.new_customer_price
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -59,6 +72,8 @@ class CardPeriodPrice(object):
         if not d:
             return None
         o = CardPeriodPrice()
+        if 'new_customer_price' in d:
+            o.new_customer_price = d['new_customer_price']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'period' in d:

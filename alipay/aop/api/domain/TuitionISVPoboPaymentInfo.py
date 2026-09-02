@@ -12,6 +12,9 @@ class TuitionISVPoboPaymentInfo(object):
     def __init__(self):
         self._additional_payment_info = None
         self._amount = None
+        self._bank_address = None
+        self._bank_name = None
+        self._bank_region = None
         self._card_brand = None
         self._card_expiry_date = None
         self._card_holder_address = None
@@ -22,6 +25,8 @@ class TuitionISVPoboPaymentInfo(object):
         self._cvv_encrypted = None
         self._pre_order_id = None
         self._quote_price = None
+        self._routing_number = None
+        self._virtual_account_number = None
 
     @property
     def additional_payment_info(self):
@@ -40,6 +45,27 @@ class TuitionISVPoboPaymentInfo(object):
             self._amount = value
         else:
             self._amount = TuitionMoneyDTO.from_alipay_dict(value)
+    @property
+    def bank_address(self):
+        return self._bank_address
+
+    @bank_address.setter
+    def bank_address(self, value):
+        self._bank_address = value
+    @property
+    def bank_name(self):
+        return self._bank_name
+
+    @bank_name.setter
+    def bank_name(self, value):
+        self._bank_name = value
+    @property
+    def bank_region(self):
+        return self._bank_region
+
+    @bank_region.setter
+    def bank_region(self, value):
+        self._bank_region = value
     @property
     def card_brand(self):
         return self._card_brand
@@ -113,6 +139,20 @@ class TuitionISVPoboPaymentInfo(object):
     @quote_price.setter
     def quote_price(self, value):
         self._quote_price = value
+    @property
+    def routing_number(self):
+        return self._routing_number
+
+    @routing_number.setter
+    def routing_number(self, value):
+        self._routing_number = value
+    @property
+    def virtual_account_number(self):
+        return self._virtual_account_number
+
+    @virtual_account_number.setter
+    def virtual_account_number(self, value):
+        self._virtual_account_number = value
 
 
     def to_alipay_dict(self):
@@ -127,6 +167,21 @@ class TuitionISVPoboPaymentInfo(object):
                 params['amount'] = self.amount.to_alipay_dict()
             else:
                 params['amount'] = self.amount
+        if self.bank_address:
+            if hasattr(self.bank_address, 'to_alipay_dict'):
+                params['bank_address'] = self.bank_address.to_alipay_dict()
+            else:
+                params['bank_address'] = self.bank_address
+        if self.bank_name:
+            if hasattr(self.bank_name, 'to_alipay_dict'):
+                params['bank_name'] = self.bank_name.to_alipay_dict()
+            else:
+                params['bank_name'] = self.bank_name
+        if self.bank_region:
+            if hasattr(self.bank_region, 'to_alipay_dict'):
+                params['bank_region'] = self.bank_region.to_alipay_dict()
+            else:
+                params['bank_region'] = self.bank_region
         if self.card_brand:
             if hasattr(self.card_brand, 'to_alipay_dict'):
                 params['card_brand'] = self.card_brand.to_alipay_dict()
@@ -177,6 +232,16 @@ class TuitionISVPoboPaymentInfo(object):
                 params['quote_price'] = self.quote_price.to_alipay_dict()
             else:
                 params['quote_price'] = self.quote_price
+        if self.routing_number:
+            if hasattr(self.routing_number, 'to_alipay_dict'):
+                params['routing_number'] = self.routing_number.to_alipay_dict()
+            else:
+                params['routing_number'] = self.routing_number
+        if self.virtual_account_number:
+            if hasattr(self.virtual_account_number, 'to_alipay_dict'):
+                params['virtual_account_number'] = self.virtual_account_number.to_alipay_dict()
+            else:
+                params['virtual_account_number'] = self.virtual_account_number
         return params
 
     @staticmethod
@@ -188,6 +253,12 @@ class TuitionISVPoboPaymentInfo(object):
             o.additional_payment_info = d['additional_payment_info']
         if 'amount' in d:
             o.amount = d['amount']
+        if 'bank_address' in d:
+            o.bank_address = d['bank_address']
+        if 'bank_name' in d:
+            o.bank_name = d['bank_name']
+        if 'bank_region' in d:
+            o.bank_region = d['bank_region']
         if 'card_brand' in d:
             o.card_brand = d['card_brand']
         if 'card_expiry_date' in d:
@@ -208,6 +279,10 @@ class TuitionISVPoboPaymentInfo(object):
             o.pre_order_id = d['pre_order_id']
         if 'quote_price' in d:
             o.quote_price = d['quote_price']
+        if 'routing_number' in d:
+            o.routing_number = d['routing_number']
+        if 'virtual_account_number' in d:
+            o.virtual_account_number = d['virtual_account_number']
         return o
 
 

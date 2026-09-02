@@ -25,6 +25,7 @@ class AlipayCommerceMedicalInsuranceTpaclaimstatusNotifyModel(object):
         self._direct_pay_quota = None
         self._dplan_code = None
         self._dplan_name = None
+        self._ext_info = None
         self._insured_cert_no = None
         self._insured_cert_type = None
         self._insured_name = None
@@ -136,6 +137,13 @@ class AlipayCommerceMedicalInsuranceTpaclaimstatusNotifyModel(object):
     @dplan_name.setter
     def dplan_name(self, value):
         self._dplan_name = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def insured_cert_no(self):
         return self._insured_cert_no
@@ -309,6 +317,11 @@ class AlipayCommerceMedicalInsuranceTpaclaimstatusNotifyModel(object):
                 params['dplan_name'] = self.dplan_name.to_alipay_dict()
             else:
                 params['dplan_name'] = self.dplan_name
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.insured_cert_no:
             if hasattr(self.insured_cert_no, 'to_alipay_dict'):
                 params['insured_cert_no'] = self.insured_cert_no.to_alipay_dict()
@@ -414,6 +427,8 @@ class AlipayCommerceMedicalInsuranceTpaclaimstatusNotifyModel(object):
             o.dplan_code = d['dplan_code']
         if 'dplan_name' in d:
             o.dplan_name = d['dplan_name']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'insured_cert_no' in d:
             o.insured_cert_no = d['insured_cert_no']
         if 'insured_cert_type' in d:

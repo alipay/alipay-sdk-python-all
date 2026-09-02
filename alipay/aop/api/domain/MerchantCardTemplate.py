@@ -20,6 +20,7 @@ class MerchantCardTemplate(object):
         self._ax_item_type = None
         self._booking_cancel_deadline = None
         self._booking_mode = None
+        self._brand_id = None
         self._break_costs_info = None
         self._card_promo_list = None
         self._card_template_app_id = None
@@ -72,6 +73,13 @@ class MerchantCardTemplate(object):
     @booking_mode.setter
     def booking_mode(self, value):
         self._booking_mode = value
+    @property
+    def brand_id(self):
+        return self._brand_id
+
+    @brand_id.setter
+    def brand_id(self, value):
+        self._brand_id = value
     @property
     def break_costs_info(self):
         return self._break_costs_info
@@ -355,6 +363,11 @@ class MerchantCardTemplate(object):
                 params['booking_mode'] = self.booking_mode.to_alipay_dict()
             else:
                 params['booking_mode'] = self.booking_mode
+        if self.brand_id:
+            if hasattr(self.brand_id, 'to_alipay_dict'):
+                params['brand_id'] = self.brand_id.to_alipay_dict()
+            else:
+                params['brand_id'] = self.brand_id
         if self.break_costs_info:
             if hasattr(self.break_costs_info, 'to_alipay_dict'):
                 params['break_costs_info'] = self.break_costs_info.to_alipay_dict()
@@ -563,6 +576,8 @@ class MerchantCardTemplate(object):
             o.booking_cancel_deadline = d['booking_cancel_deadline']
         if 'booking_mode' in d:
             o.booking_mode = d['booking_mode']
+        if 'brand_id' in d:
+            o.brand_id = d['brand_id']
         if 'break_costs_info' in d:
             o.break_costs_info = d['break_costs_info']
         if 'card_promo_list' in d:

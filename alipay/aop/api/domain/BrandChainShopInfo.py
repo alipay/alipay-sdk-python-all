@@ -15,6 +15,7 @@ class BrandChainShopInfo(object):
         self._contact_phone = None
         self._detail_address = None
         self._district_code = None
+        self._interior_image = None
         self._out_door_images = None
         self._province_code = None
         self._shop_brand_id = None
@@ -69,6 +70,13 @@ class BrandChainShopInfo(object):
     @district_code.setter
     def district_code(self, value):
         self._district_code = value
+    @property
+    def interior_image(self):
+        return self._interior_image
+
+    @interior_image.setter
+    def interior_image(self, value):
+        self._interior_image = value
     @property
     def out_door_images(self):
         return self._out_door_images
@@ -143,6 +151,11 @@ class BrandChainShopInfo(object):
                 params['district_code'] = self.district_code.to_alipay_dict()
             else:
                 params['district_code'] = self.district_code
+        if self.interior_image:
+            if hasattr(self.interior_image, 'to_alipay_dict'):
+                params['interior_image'] = self.interior_image.to_alipay_dict()
+            else:
+                params['interior_image'] = self.interior_image
         if self.out_door_images:
             if hasattr(self.out_door_images, 'to_alipay_dict'):
                 params['out_door_images'] = self.out_door_images.to_alipay_dict()
@@ -187,6 +200,8 @@ class BrandChainShopInfo(object):
             o.detail_address = d['detail_address']
         if 'district_code' in d:
             o.district_code = d['district_code']
+        if 'interior_image' in d:
+            o.interior_image = d['interior_image']
         if 'out_door_images' in d:
             o.out_door_images = d['out_door_images']
         if 'province_code' in d:

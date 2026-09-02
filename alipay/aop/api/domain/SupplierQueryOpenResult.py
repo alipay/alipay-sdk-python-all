@@ -9,6 +9,10 @@ class SupplierQueryOpenResult(object):
 
     def __init__(self):
         self._account_type = None
+        self._bank_card_no_masked = None
+        self._bank_code = None
+        self._bank_name = None
+        self._has_bank_card = None
         self._supplier_account_no = None
         self._supplier_id = None
         self._supplier_name = None
@@ -22,6 +26,34 @@ class SupplierQueryOpenResult(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def bank_card_no_masked(self):
+        return self._bank_card_no_masked
+
+    @bank_card_no_masked.setter
+    def bank_card_no_masked(self, value):
+        self._bank_card_no_masked = value
+    @property
+    def bank_code(self):
+        return self._bank_code
+
+    @bank_code.setter
+    def bank_code(self, value):
+        self._bank_code = value
+    @property
+    def bank_name(self):
+        return self._bank_name
+
+    @bank_name.setter
+    def bank_name(self, value):
+        self._bank_name = value
+    @property
+    def has_bank_card(self):
+        return self._has_bank_card
+
+    @has_bank_card.setter
+    def has_bank_card(self, value):
+        self._has_bank_card = value
     @property
     def supplier_account_no(self):
         return self._supplier_account_no
@@ -66,6 +98,26 @@ class SupplierQueryOpenResult(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.bank_card_no_masked:
+            if hasattr(self.bank_card_no_masked, 'to_alipay_dict'):
+                params['bank_card_no_masked'] = self.bank_card_no_masked.to_alipay_dict()
+            else:
+                params['bank_card_no_masked'] = self.bank_card_no_masked
+        if self.bank_code:
+            if hasattr(self.bank_code, 'to_alipay_dict'):
+                params['bank_code'] = self.bank_code.to_alipay_dict()
+            else:
+                params['bank_code'] = self.bank_code
+        if self.bank_name:
+            if hasattr(self.bank_name, 'to_alipay_dict'):
+                params['bank_name'] = self.bank_name.to_alipay_dict()
+            else:
+                params['bank_name'] = self.bank_name
+        if self.has_bank_card:
+            if hasattr(self.has_bank_card, 'to_alipay_dict'):
+                params['has_bank_card'] = self.has_bank_card.to_alipay_dict()
+            else:
+                params['has_bank_card'] = self.has_bank_card
         if self.supplier_account_no:
             if hasattr(self.supplier_account_no, 'to_alipay_dict'):
                 params['supplier_account_no'] = self.supplier_account_no.to_alipay_dict()
@@ -100,6 +152,14 @@ class SupplierQueryOpenResult(object):
         o = SupplierQueryOpenResult()
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'bank_card_no_masked' in d:
+            o.bank_card_no_masked = d['bank_card_no_masked']
+        if 'bank_code' in d:
+            o.bank_code = d['bank_code']
+        if 'bank_name' in d:
+            o.bank_name = d['bank_name']
+        if 'has_bank_card' in d:
+            o.has_bank_card = d['has_bank_card']
         if 'supplier_account_no' in d:
             o.supplier_account_no = d['supplier_account_no']
         if 'supplier_id' in d:

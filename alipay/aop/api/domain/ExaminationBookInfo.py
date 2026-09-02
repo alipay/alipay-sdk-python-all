@@ -10,11 +10,15 @@ class ExaminationBookInfo(object):
     def __init__(self):
         self._book_end_time = None
         self._book_start_time = None
+        self._city = None
+        self._district = None
         self._gender = None
         self._id_card = None
         self._id_type = None
+        self._location = None
         self._name = None
         self._phone = None
+        self._province = None
         self._store_address = None
         self._store_name = None
         self._time = None
@@ -33,6 +37,20 @@ class ExaminationBookInfo(object):
     @book_start_time.setter
     def book_start_time(self, value):
         self._book_start_time = value
+    @property
+    def city(self):
+        return self._city
+
+    @city.setter
+    def city(self, value):
+        self._city = value
+    @property
+    def district(self):
+        return self._district
+
+    @district.setter
+    def district(self, value):
+        self._district = value
     @property
     def gender(self):
         return self._gender
@@ -55,6 +73,13 @@ class ExaminationBookInfo(object):
     def id_type(self, value):
         self._id_type = value
     @property
+    def location(self):
+        return self._location
+
+    @location.setter
+    def location(self, value):
+        self._location = value
+    @property
     def name(self):
         return self._name
 
@@ -68,6 +93,13 @@ class ExaminationBookInfo(object):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def province(self):
+        return self._province
+
+    @province.setter
+    def province(self, value):
+        self._province = value
     @property
     def store_address(self):
         return self._store_address
@@ -103,6 +135,16 @@ class ExaminationBookInfo(object):
                 params['book_start_time'] = self.book_start_time.to_alipay_dict()
             else:
                 params['book_start_time'] = self.book_start_time
+        if self.city:
+            if hasattr(self.city, 'to_alipay_dict'):
+                params['city'] = self.city.to_alipay_dict()
+            else:
+                params['city'] = self.city
+        if self.district:
+            if hasattr(self.district, 'to_alipay_dict'):
+                params['district'] = self.district.to_alipay_dict()
+            else:
+                params['district'] = self.district
         if self.gender:
             if hasattr(self.gender, 'to_alipay_dict'):
                 params['gender'] = self.gender.to_alipay_dict()
@@ -118,6 +160,11 @@ class ExaminationBookInfo(object):
                 params['id_type'] = self.id_type.to_alipay_dict()
             else:
                 params['id_type'] = self.id_type
+        if self.location:
+            if hasattr(self.location, 'to_alipay_dict'):
+                params['location'] = self.location.to_alipay_dict()
+            else:
+                params['location'] = self.location
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -128,6 +175,11 @@ class ExaminationBookInfo(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.province:
+            if hasattr(self.province, 'to_alipay_dict'):
+                params['province'] = self.province.to_alipay_dict()
+            else:
+                params['province'] = self.province
         if self.store_address:
             if hasattr(self.store_address, 'to_alipay_dict'):
                 params['store_address'] = self.store_address.to_alipay_dict()
@@ -154,16 +206,24 @@ class ExaminationBookInfo(object):
             o.book_end_time = d['book_end_time']
         if 'book_start_time' in d:
             o.book_start_time = d['book_start_time']
+        if 'city' in d:
+            o.city = d['city']
+        if 'district' in d:
+            o.district = d['district']
         if 'gender' in d:
             o.gender = d['gender']
         if 'id_card' in d:
             o.id_card = d['id_card']
         if 'id_type' in d:
             o.id_type = d['id_type']
+        if 'location' in d:
+            o.location = d['location']
         if 'name' in d:
             o.name = d['name']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'province' in d:
+            o.province = d['province']
         if 'store_address' in d:
             o.store_address = d['store_address']
         if 'store_name' in d:

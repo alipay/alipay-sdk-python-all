@@ -19,6 +19,7 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
         self._province_code = None
         self._scene = None
         self._sms_code = None
+        self._supplier_pid = None
 
     @property
     def address_detail(self):
@@ -97,6 +98,13 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
     @sms_code.setter
     def sms_code(self, value):
         self._sms_code = value
+    @property
+    def supplier_pid(self):
+        return self._supplier_pid
+
+    @supplier_pid.setter
+    def supplier_pid(self, value):
+        self._supplier_pid = value
 
 
     def to_alipay_dict(self):
@@ -156,6 +164,11 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
                 params['sms_code'] = self.sms_code.to_alipay_dict()
             else:
                 params['sms_code'] = self.sms_code
+        if self.supplier_pid:
+            if hasattr(self.supplier_pid, 'to_alipay_dict'):
+                params['supplier_pid'] = self.supplier_pid.to_alipay_dict()
+            else:
+                params['supplier_pid'] = self.supplier_pid
         return params
 
     @staticmethod
@@ -185,6 +198,8 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
             o.scene = d['scene']
         if 'sms_code' in d:
             o.sms_code = d['sms_code']
+        if 'supplier_pid' in d:
+            o.supplier_pid = d['supplier_pid']
         return o
 
 

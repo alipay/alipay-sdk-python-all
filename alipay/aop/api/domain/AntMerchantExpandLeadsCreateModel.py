@@ -27,6 +27,7 @@ class AntMerchantExpandLeadsCreateModel(object):
         self._mcc_l_2 = None
         self._out_biz_id = None
         self._out_door_pic_oss_key = None
+        self._owner_id = None
         self._province_code = None
         self._scene_code = None
         self._store_id = None
@@ -167,6 +168,13 @@ class AntMerchantExpandLeadsCreateModel(object):
     def out_door_pic_oss_key(self, value):
         self._out_door_pic_oss_key = value
     @property
+    def owner_id(self):
+        return self._owner_id
+
+    @owner_id.setter
+    def owner_id(self, value):
+        self._owner_id = value
+    @property
     def province_code(self):
         return self._province_code
 
@@ -300,6 +308,11 @@ class AntMerchantExpandLeadsCreateModel(object):
                 params['out_door_pic_oss_key'] = self.out_door_pic_oss_key.to_alipay_dict()
             else:
                 params['out_door_pic_oss_key'] = self.out_door_pic_oss_key
+        if self.owner_id:
+            if hasattr(self.owner_id, 'to_alipay_dict'):
+                params['owner_id'] = self.owner_id.to_alipay_dict()
+            else:
+                params['owner_id'] = self.owner_id
         if self.province_code:
             if hasattr(self.province_code, 'to_alipay_dict'):
                 params['province_code'] = self.province_code.to_alipay_dict()
@@ -370,6 +383,8 @@ class AntMerchantExpandLeadsCreateModel(object):
             o.out_biz_id = d['out_biz_id']
         if 'out_door_pic_oss_key' in d:
             o.out_door_pic_oss_key = d['out_door_pic_oss_key']
+        if 'owner_id' in d:
+            o.owner_id = d['owner_id']
         if 'province_code' in d:
             o.province_code = d['province_code']
         if 'scene_code' in d:

@@ -13,6 +13,7 @@ class MybankEcnyWelfarewalletOpenPreconsultResponse(AlipayResponse):
         self._has_wallet = None
         self._open_wallet_url = None
         self._refuse_reason = None
+        self._wallet_id = None
 
     @property
     def allow_show(self):
@@ -42,6 +43,13 @@ class MybankEcnyWelfarewalletOpenPreconsultResponse(AlipayResponse):
     @refuse_reason.setter
     def refuse_reason(self, value):
         self._refuse_reason = value
+    @property
+    def wallet_id(self):
+        return self._wallet_id
+
+    @wallet_id.setter
+    def wallet_id(self, value):
+        self._wallet_id = value
 
     def parse_response_content(self, response_content):
         response = super(MybankEcnyWelfarewalletOpenPreconsultResponse, self).parse_response_content(response_content)
@@ -53,3 +61,5 @@ class MybankEcnyWelfarewalletOpenPreconsultResponse(AlipayResponse):
             self.open_wallet_url = response['open_wallet_url']
         if 'refuse_reason' in response:
             self.refuse_reason = response['refuse_reason']
+        if 'wallet_id' in response:
+            self.wallet_id = response['wallet_id']

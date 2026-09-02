@@ -11,6 +11,7 @@ class CertificateSerialInfo(object):
     def __init__(self):
         self._amount_info = None
         self._serial_no = None
+        self._shop_id = None
         self._status = None
 
     @property
@@ -30,6 +31,13 @@ class CertificateSerialInfo(object):
     @serial_no.setter
     def serial_no(self, value):
         self._serial_no = value
+    @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
     @property
     def status(self):
         return self._status
@@ -51,6 +59,11 @@ class CertificateSerialInfo(object):
                 params['serial_no'] = self.serial_no.to_alipay_dict()
             else:
                 params['serial_no'] = self.serial_no
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -67,6 +80,8 @@ class CertificateSerialInfo(object):
             o.amount_info = d['amount_info']
         if 'serial_no' in d:
             o.serial_no = d['serial_no']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'status' in d:
             o.status = d['status']
         return o

@@ -10,6 +10,10 @@ class NOrderTagBindResp(object):
     def __init__(self):
         self._bind_pic = None
         self._nfc_url = None
+        self._operate_time = None
+        self._operator_name = None
+        self._operator_phone = None
+        self._route_url = None
 
     @property
     def bind_pic(self):
@@ -31,6 +35,37 @@ class NOrderTagBindResp(object):
             self._nfc_url = list()
             for i in value:
                 self._nfc_url.append(i)
+    @property
+    def operate_time(self):
+        return self._operate_time
+
+    @operate_time.setter
+    def operate_time(self, value):
+        self._operate_time = value
+    @property
+    def operator_name(self):
+        return self._operator_name
+
+    @operator_name.setter
+    def operator_name(self, value):
+        self._operator_name = value
+    @property
+    def operator_phone(self):
+        return self._operator_phone
+
+    @operator_phone.setter
+    def operator_phone(self, value):
+        self._operator_phone = value
+    @property
+    def route_url(self):
+        return self._route_url
+
+    @route_url.setter
+    def route_url(self, value):
+        if isinstance(value, list):
+            self._route_url = list()
+            for i in value:
+                self._route_url.append(i)
 
 
     def to_alipay_dict(self):
@@ -55,6 +90,31 @@ class NOrderTagBindResp(object):
                 params['nfc_url'] = self.nfc_url.to_alipay_dict()
             else:
                 params['nfc_url'] = self.nfc_url
+        if self.operate_time:
+            if hasattr(self.operate_time, 'to_alipay_dict'):
+                params['operate_time'] = self.operate_time.to_alipay_dict()
+            else:
+                params['operate_time'] = self.operate_time
+        if self.operator_name:
+            if hasattr(self.operator_name, 'to_alipay_dict'):
+                params['operator_name'] = self.operator_name.to_alipay_dict()
+            else:
+                params['operator_name'] = self.operator_name
+        if self.operator_phone:
+            if hasattr(self.operator_phone, 'to_alipay_dict'):
+                params['operator_phone'] = self.operator_phone.to_alipay_dict()
+            else:
+                params['operator_phone'] = self.operator_phone
+        if self.route_url:
+            if isinstance(self.route_url, list):
+                for i in range(0, len(self.route_url)):
+                    element = self.route_url[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.route_url[i] = element.to_alipay_dict()
+            if hasattr(self.route_url, 'to_alipay_dict'):
+                params['route_url'] = self.route_url.to_alipay_dict()
+            else:
+                params['route_url'] = self.route_url
         return params
 
     @staticmethod
@@ -66,6 +126,14 @@ class NOrderTagBindResp(object):
             o.bind_pic = d['bind_pic']
         if 'nfc_url' in d:
             o.nfc_url = d['nfc_url']
+        if 'operate_time' in d:
+            o.operate_time = d['operate_time']
+        if 'operator_name' in d:
+            o.operator_name = d['operator_name']
+        if 'operator_phone' in d:
+            o.operator_phone = d['operator_phone']
+        if 'route_url' in d:
+            o.route_url = d['route_url']
         return o
 
 

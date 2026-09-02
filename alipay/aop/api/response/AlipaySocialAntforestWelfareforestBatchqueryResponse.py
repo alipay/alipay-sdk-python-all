@@ -10,9 +10,17 @@ class AlipaySocialAntforestWelfareforestBatchqueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipaySocialAntforestWelfareforestBatchqueryResponse, self).__init__()
+        self._current_timestamp = None
         self._global_display_info = None
         self._welfare_forest_detail_list = None
 
+    @property
+    def current_timestamp(self):
+        return self._current_timestamp
+
+    @current_timestamp.setter
+    def current_timestamp(self, value):
+        self._current_timestamp = value
     @property
     def global_display_info(self):
         return self._global_display_info
@@ -36,6 +44,8 @@ class AlipaySocialAntforestWelfareforestBatchqueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipaySocialAntforestWelfareforestBatchqueryResponse, self).parse_response_content(response_content)
+        if 'current_timestamp' in response:
+            self.current_timestamp = response['current_timestamp']
         if 'global_display_info' in response:
             self.global_display_info = response['global_display_info']
         if 'welfare_forest_detail_list' in response:

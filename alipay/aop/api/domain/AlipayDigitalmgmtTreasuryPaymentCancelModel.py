@@ -12,6 +12,7 @@ class AlipayDigitalmgmtTreasuryPaymentCancelModel(object):
         self._out_biz_no = None
         self._source = None
         self._tnt_inst_id = None
+        self._trans_inst_id = None
 
     @property
     def operator(self):
@@ -41,6 +42,13 @@ class AlipayDigitalmgmtTreasuryPaymentCancelModel(object):
     @tnt_inst_id.setter
     def tnt_inst_id(self, value):
         self._tnt_inst_id = value
+    @property
+    def trans_inst_id(self):
+        return self._trans_inst_id
+
+    @trans_inst_id.setter
+    def trans_inst_id(self, value):
+        self._trans_inst_id = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayDigitalmgmtTreasuryPaymentCancelModel(object):
                 params['tnt_inst_id'] = self.tnt_inst_id.to_alipay_dict()
             else:
                 params['tnt_inst_id'] = self.tnt_inst_id
+        if self.trans_inst_id:
+            if hasattr(self.trans_inst_id, 'to_alipay_dict'):
+                params['trans_inst_id'] = self.trans_inst_id.to_alipay_dict()
+            else:
+                params['trans_inst_id'] = self.trans_inst_id
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayDigitalmgmtTreasuryPaymentCancelModel(object):
             o.source = d['source']
         if 'tnt_inst_id' in d:
             o.tnt_inst_id = d['tnt_inst_id']
+        if 'trans_inst_id' in d:
+            o.trans_inst_id = d['trans_inst_id']
         return o
 
 

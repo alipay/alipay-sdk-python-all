@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.CustomUnitAmount import CustomUnitAmount
 from alipay.aop.api.domain.NexusPayProduct import NexusPayProduct
 from alipay.aop.api.domain.RecurringConfig import RecurringConfig
 
@@ -12,6 +13,9 @@ class AlipayTradePriceQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayTradePriceQueryResponse, self).__init__()
         self._active = None
+        self._custom_unit_amount = None
+        self._eligibility_expire_time = None
+        self._eligibility_type = None
         self._gmt_create = None
         self._id = None
         self._metadata = None
@@ -28,6 +32,30 @@ class AlipayTradePriceQueryResponse(AlipayResponse):
     @active.setter
     def active(self, value):
         self._active = value
+    @property
+    def custom_unit_amount(self):
+        return self._custom_unit_amount
+
+    @custom_unit_amount.setter
+    def custom_unit_amount(self, value):
+        if isinstance(value, CustomUnitAmount):
+            self._custom_unit_amount = value
+        else:
+            self._custom_unit_amount = CustomUnitAmount.from_alipay_dict(value)
+    @property
+    def eligibility_expire_time(self):
+        return self._eligibility_expire_time
+
+    @eligibility_expire_time.setter
+    def eligibility_expire_time(self, value):
+        self._eligibility_expire_time = value
+    @property
+    def eligibility_type(self):
+        return self._eligibility_type
+
+    @eligibility_type.setter
+    def eligibility_type(self, value):
+        self._eligibility_type = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -95,6 +123,12 @@ class AlipayTradePriceQueryResponse(AlipayResponse):
         response = super(AlipayTradePriceQueryResponse, self).parse_response_content(response_content)
         if 'active' in response:
             self.active = response['active']
+        if 'custom_unit_amount' in response:
+            self.custom_unit_amount = response['custom_unit_amount']
+        if 'eligibility_expire_time' in response:
+            self.eligibility_expire_time = response['eligibility_expire_time']
+        if 'eligibility_type' in response:
+            self.eligibility_type = response['eligibility_type']
         if 'gmt_create' in response:
             self.gmt_create = response['gmt_create']
         if 'id' in response:

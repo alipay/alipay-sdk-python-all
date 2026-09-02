@@ -37,6 +37,7 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
         self._debtor_fin_inst_id = None
         self._event_code = None
         self._expect_payment_date = None
+        self._middle_biz_ref_no = None
         self._open_api_bop_transaction_code = None
         self._open_api_bop_transaction_code_remark = None
         self._open_api_instructed_amount = None
@@ -253,6 +254,13 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
     @expect_payment_date.setter
     def expect_payment_date(self, value):
         self._expect_payment_date = value
+    @property
+    def middle_biz_ref_no(self):
+        return self._middle_biz_ref_no
+
+    @middle_biz_ref_no.setter
+    def middle_biz_ref_no(self, value):
+        self._middle_biz_ref_no = value
     @property
     def open_api_bop_transaction_code(self):
         return self._open_api_bop_transaction_code
@@ -486,6 +494,11 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
                 params['expect_payment_date'] = self.expect_payment_date.to_alipay_dict()
             else:
                 params['expect_payment_date'] = self.expect_payment_date
+        if self.middle_biz_ref_no:
+            if hasattr(self.middle_biz_ref_no, 'to_alipay_dict'):
+                params['middle_biz_ref_no'] = self.middle_biz_ref_no.to_alipay_dict()
+            else:
+                params['middle_biz_ref_no'] = self.middle_biz_ref_no
         if self.open_api_bop_transaction_code:
             if hasattr(self.open_api_bop_transaction_code, 'to_alipay_dict'):
                 params['open_api_bop_transaction_code'] = self.open_api_bop_transaction_code.to_alipay_dict()
@@ -611,6 +624,8 @@ class AlipayDigitalmgmtTreasuryPaymentAcceptModel(object):
             o.event_code = d['event_code']
         if 'expect_payment_date' in d:
             o.expect_payment_date = d['expect_payment_date']
+        if 'middle_biz_ref_no' in d:
+            o.middle_biz_ref_no = d['middle_biz_ref_no']
         if 'open_api_bop_transaction_code' in d:
             o.open_api_bop_transaction_code = d['open_api_bop_transaction_code']
         if 'open_api_bop_transaction_code_remark' in d:

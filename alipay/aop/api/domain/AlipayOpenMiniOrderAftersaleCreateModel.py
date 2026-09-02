@@ -12,6 +12,7 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
 
     def __init__(self):
         self._aftersale_reason_code = None
+        self._astore_id = None
         self._certificate_infos = None
         self._item_infos = None
         self._merchant_address_info = None
@@ -32,6 +33,13 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
     @aftersale_reason_code.setter
     def aftersale_reason_code(self, value):
         self._aftersale_reason_code = value
+    @property
+    def astore_id(self):
+        return self._astore_id
+
+    @astore_id.setter
+    def astore_id(self, value):
+        self._astore_id = value
     @property
     def certificate_infos(self):
         return self._certificate_infos
@@ -140,6 +148,11 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
                 params['aftersale_reason_code'] = self.aftersale_reason_code.to_alipay_dict()
             else:
                 params['aftersale_reason_code'] = self.aftersale_reason_code
+        if self.astore_id:
+            if hasattr(self.astore_id, 'to_alipay_dict'):
+                params['astore_id'] = self.astore_id.to_alipay_dict()
+            else:
+                params['astore_id'] = self.astore_id
         if self.certificate_infos:
             if isinstance(self.certificate_infos, list):
                 for i in range(0, len(self.certificate_infos)):
@@ -219,6 +232,8 @@ class AlipayOpenMiniOrderAftersaleCreateModel(object):
         o = AlipayOpenMiniOrderAftersaleCreateModel()
         if 'aftersale_reason_code' in d:
             o.aftersale_reason_code = d['aftersale_reason_code']
+        if 'astore_id' in d:
+            o.astore_id = d['astore_id']
         if 'certificate_infos' in d:
             o.certificate_infos = d['certificate_infos']
         if 'item_infos' in d:

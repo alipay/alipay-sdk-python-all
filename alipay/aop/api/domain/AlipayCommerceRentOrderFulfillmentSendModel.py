@@ -13,6 +13,7 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
     def __init__(self):
         self._additional_media_list = None
         self._delivery_list = None
+        self._delivery_type = None
         self._device_list = None
         self._open_id = None
         self._order_id = None
@@ -47,6 +48,13 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
                     self._delivery_list.append(i)
                 else:
                     self._delivery_list.append(FulfillmentDeliveryInfo.from_alipay_dict(i))
+    @property
+    def delivery_type(self):
+        return self._delivery_type
+
+    @delivery_type.setter
+    def delivery_type(self, value):
+        self._delivery_type = value
     @property
     def device_list(self):
         return self._device_list
@@ -126,6 +134,11 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
                 params['delivery_list'] = self.delivery_list.to_alipay_dict()
             else:
                 params['delivery_list'] = self.delivery_list
+        if self.delivery_type:
+            if hasattr(self.delivery_type, 'to_alipay_dict'):
+                params['delivery_type'] = self.delivery_type.to_alipay_dict()
+            else:
+                params['delivery_type'] = self.delivery_type
         if self.device_list:
             if isinstance(self.device_list, list):
                 for i in range(0, len(self.device_list)):
@@ -177,6 +190,8 @@ class AlipayCommerceRentOrderFulfillmentSendModel(object):
             o.additional_media_list = d['additional_media_list']
         if 'delivery_list' in d:
             o.delivery_list = d['delivery_list']
+        if 'delivery_type' in d:
+            o.delivery_type = d['delivery_type']
         if 'device_list' in d:
             o.device_list = d['device_list']
         if 'open_id' in d:

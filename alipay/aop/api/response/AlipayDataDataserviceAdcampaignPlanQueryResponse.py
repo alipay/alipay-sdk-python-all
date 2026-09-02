@@ -12,6 +12,7 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
         super(AlipayDataDataserviceAdcampaignPlanQueryResponse, self).__init__()
         self._budget = None
         self._charge_type = None
+        self._delivery_mode = None
         self._end_date = None
         self._gmt_modified = None
         self._market_target_code = None
@@ -51,6 +52,13 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
     @charge_type.setter
     def charge_type(self, value):
         self._charge_type = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def end_date(self):
         return self._end_date
@@ -229,6 +237,8 @@ class AlipayDataDataserviceAdcampaignPlanQueryResponse(AlipayResponse):
             self.budget = response['budget']
         if 'charge_type' in response:
             self.charge_type = response['charge_type']
+        if 'delivery_mode' in response:
+            self.delivery_mode = response['delivery_mode']
         if 'end_date' in response:
             self.end_date = response['end_date']
         if 'gmt_modified' in response:

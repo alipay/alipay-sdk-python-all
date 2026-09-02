@@ -8,13 +8,30 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
 
     def __init__(self):
+        self._deposit_amount = None
+        self._ext_info = None
         self._open_id = None
         self._pre_auth_audit_status = None
         self._pre_auth_audit_status_msg = None
         self._pre_auth_no = None
         self._pre_auth_quota = None
+        self._tpa_id = None
         self._user_id = None
 
+    @property
+    def deposit_amount(self):
+        return self._deposit_amount
+
+    @deposit_amount.setter
+    def deposit_amount(self, value):
+        self._deposit_amount = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def open_id(self):
         return self._open_id
@@ -51,6 +68,13 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
     def pre_auth_quota(self, value):
         self._pre_auth_quota = value
     @property
+    def tpa_id(self):
+        return self._tpa_id
+
+    @tpa_id.setter
+    def tpa_id(self, value):
+        self._tpa_id = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -61,6 +85,16 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.deposit_amount:
+            if hasattr(self.deposit_amount, 'to_alipay_dict'):
+                params['deposit_amount'] = self.deposit_amount.to_alipay_dict()
+            else:
+                params['deposit_amount'] = self.deposit_amount
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -86,6 +120,11 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
                 params['pre_auth_quota'] = self.pre_auth_quota.to_alipay_dict()
             else:
                 params['pre_auth_quota'] = self.pre_auth_quota
+        if self.tpa_id:
+            if hasattr(self.tpa_id, 'to_alipay_dict'):
+                params['tpa_id'] = self.tpa_id.to_alipay_dict()
+            else:
+                params['tpa_id'] = self.tpa_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -98,6 +137,10 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel()
+        if 'deposit_amount' in d:
+            o.deposit_amount = d['deposit_amount']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'pre_auth_audit_status' in d:
@@ -108,6 +151,8 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
             o.pre_auth_no = d['pre_auth_no']
         if 'pre_auth_quota' in d:
             o.pre_auth_quota = d['pre_auth_quota']
+        if 'tpa_id' in d:
+            o.tpa_id = d['tpa_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

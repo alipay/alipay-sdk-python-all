@@ -9,6 +9,7 @@ class CertificateInstanceAmountInfo(object):
 
     def __init__(self):
         self._merchant_discount_amount = None
+        self._merchant_no_fund_amount = None
         self._original_price = None
         self._other_discount_amount = None
         self._pay_amount = None
@@ -23,6 +24,13 @@ class CertificateInstanceAmountInfo(object):
     @merchant_discount_amount.setter
     def merchant_discount_amount(self, value):
         self._merchant_discount_amount = value
+    @property
+    def merchant_no_fund_amount(self):
+        return self._merchant_no_fund_amount
+
+    @merchant_no_fund_amount.setter
+    def merchant_no_fund_amount(self, value):
+        self._merchant_no_fund_amount = value
     @property
     def original_price(self):
         return self._original_price
@@ -74,6 +82,11 @@ class CertificateInstanceAmountInfo(object):
                 params['merchant_discount_amount'] = self.merchant_discount_amount.to_alipay_dict()
             else:
                 params['merchant_discount_amount'] = self.merchant_discount_amount
+        if self.merchant_no_fund_amount:
+            if hasattr(self.merchant_no_fund_amount, 'to_alipay_dict'):
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount.to_alipay_dict()
+            else:
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -113,6 +126,8 @@ class CertificateInstanceAmountInfo(object):
         o = CertificateInstanceAmountInfo()
         if 'merchant_discount_amount' in d:
             o.merchant_discount_amount = d['merchant_discount_amount']
+        if 'merchant_no_fund_amount' in d:
+            o.merchant_no_fund_amount = d['merchant_no_fund_amount']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'other_discount_amount' in d:

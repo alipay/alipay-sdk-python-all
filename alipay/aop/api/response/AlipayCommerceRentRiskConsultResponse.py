@@ -9,7 +9,9 @@ from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
 from alipay.aop.api.domain.RentRiskProVO import RentRiskProVO
 from alipay.aop.api.domain.RiskBasicInfoVO import RiskBasicInfoVO
 from alipay.aop.api.domain.RentRiskInfoVO import RentRiskInfoVO
+from alipay.aop.api.domain.ShipAssessmentResultVO import ShipAssessmentResultVO
 from alipay.aop.api.domain.ShipGoodsRiskVO import ShipGoodsRiskVO
+from alipay.aop.api.domain.TailoredRiskModelsVO import TailoredRiskModelsVO
 from alipay.aop.api.domain.VerticalRiskVO import VerticalRiskVO
 
 
@@ -24,7 +26,9 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
         self._product_edition = None
         self._risk_basic_info = None
         self._risk_infos = None
+        self._ship_assessment_results = None
         self._ship_goods_risk_models = None
+        self._tailored_risk_models = None
         self._vam_group = None
         self._vertical_risk_models = None
 
@@ -102,6 +106,16 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
                 else:
                     self._risk_infos.append(RentRiskInfoVO.from_alipay_dict(i))
     @property
+    def ship_assessment_results(self):
+        return self._ship_assessment_results
+
+    @ship_assessment_results.setter
+    def ship_assessment_results(self, value):
+        if isinstance(value, ShipAssessmentResultVO):
+            self._ship_assessment_results = value
+        else:
+            self._ship_assessment_results = ShipAssessmentResultVO.from_alipay_dict(value)
+    @property
     def ship_goods_risk_models(self):
         return self._ship_goods_risk_models
 
@@ -114,6 +128,19 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
                     self._ship_goods_risk_models.append(i)
                 else:
                     self._ship_goods_risk_models.append(ShipGoodsRiskVO.from_alipay_dict(i))
+    @property
+    def tailored_risk_models(self):
+        return self._tailored_risk_models
+
+    @tailored_risk_models.setter
+    def tailored_risk_models(self, value):
+        if isinstance(value, list):
+            self._tailored_risk_models = list()
+            for i in value:
+                if isinstance(i, TailoredRiskModelsVO):
+                    self._tailored_risk_models.append(i)
+                else:
+                    self._tailored_risk_models.append(TailoredRiskModelsVO.from_alipay_dict(i))
     @property
     def vam_group(self):
         return self._vam_group
@@ -148,8 +175,12 @@ class AlipayCommerceRentRiskConsultResponse(AlipayResponse):
             self.risk_basic_info = response['risk_basic_info']
         if 'risk_infos' in response:
             self.risk_infos = response['risk_infos']
+        if 'ship_assessment_results' in response:
+            self.ship_assessment_results = response['ship_assessment_results']
         if 'ship_goods_risk_models' in response:
             self.ship_goods_risk_models = response['ship_goods_risk_models']
+        if 'tailored_risk_models' in response:
+            self.tailored_risk_models = response['tailored_risk_models']
         if 'vam_group' in response:
             self.vam_group = response['vam_group']
         if 'vertical_risk_models' in response:

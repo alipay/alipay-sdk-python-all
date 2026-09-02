@@ -10,6 +10,8 @@ class AlipayCommerceOperationPromoAwardQueryModel(object):
     def __init__(self):
         self._activity_code = None
         self._end_time = None
+        self._page_num = None
+        self._page_size = None
         self._start_time = None
         self._subject_id = None
         self._subject_type = None
@@ -28,6 +30,20 @@ class AlipayCommerceOperationPromoAwardQueryModel(object):
     @end_time.setter
     def end_time(self, value):
         self._end_time = value
+    @property
+    def page_num(self):
+        return self._page_num
+
+    @page_num.setter
+    def page_num(self, value):
+        self._page_num = value
+    @property
+    def page_size(self):
+        return self._page_size
+
+    @page_size.setter
+    def page_size(self, value):
+        self._page_size = value
     @property
     def start_time(self):
         return self._start_time
@@ -63,6 +79,16 @@ class AlipayCommerceOperationPromoAwardQueryModel(object):
                 params['end_time'] = self.end_time.to_alipay_dict()
             else:
                 params['end_time'] = self.end_time
+        if self.page_num:
+            if hasattr(self.page_num, 'to_alipay_dict'):
+                params['page_num'] = self.page_num.to_alipay_dict()
+            else:
+                params['page_num'] = self.page_num
+        if self.page_size:
+            if hasattr(self.page_size, 'to_alipay_dict'):
+                params['page_size'] = self.page_size.to_alipay_dict()
+            else:
+                params['page_size'] = self.page_size
         if self.start_time:
             if hasattr(self.start_time, 'to_alipay_dict'):
                 params['start_time'] = self.start_time.to_alipay_dict()
@@ -89,6 +115,10 @@ class AlipayCommerceOperationPromoAwardQueryModel(object):
             o.activity_code = d['activity_code']
         if 'end_time' in d:
             o.end_time = d['end_time']
+        if 'page_num' in d:
+            o.page_num = d['page_num']
+        if 'page_size' in d:
+            o.page_size = d['page_size']
         if 'start_time' in d:
             o.start_time = d['start_time']
         if 'subject_id' in d:

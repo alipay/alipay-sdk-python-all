@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AccessParams import AccessParams
 from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
 from alipay.aop.api.domain.OpenApiSpecifiedChannelParamsPojo import OpenApiSpecifiedChannelParamsPojo
+from alipay.aop.api.domain.SpecifiedDeductRuleParams import SpecifiedDeductRuleParams
 from alipay.aop.api.domain.SignMerchantParams import SignMerchantParams
 
 
@@ -23,6 +24,7 @@ class SignParams(object):
         self._recommend_sort_channel_params = None
         self._sign_notify_url = None
         self._sign_scene = None
+        self._specified_deduct_rule_params = None
         self._sub_merchant = None
 
     @property
@@ -115,6 +117,16 @@ class SignParams(object):
     def sign_scene(self, value):
         self._sign_scene = value
     @property
+    def specified_deduct_rule_params(self):
+        return self._specified_deduct_rule_params
+
+    @specified_deduct_rule_params.setter
+    def specified_deduct_rule_params(self, value):
+        if isinstance(value, SpecifiedDeductRuleParams):
+            self._specified_deduct_rule_params = value
+        else:
+            self._specified_deduct_rule_params = SpecifiedDeductRuleParams.from_alipay_dict(value)
+    @property
     def sub_merchant(self):
         return self._sub_merchant
 
@@ -188,6 +200,11 @@ class SignParams(object):
                 params['sign_scene'] = self.sign_scene.to_alipay_dict()
             else:
                 params['sign_scene'] = self.sign_scene
+        if self.specified_deduct_rule_params:
+            if hasattr(self.specified_deduct_rule_params, 'to_alipay_dict'):
+                params['specified_deduct_rule_params'] = self.specified_deduct_rule_params.to_alipay_dict()
+            else:
+                params['specified_deduct_rule_params'] = self.specified_deduct_rule_params
         if self.sub_merchant:
             if hasattr(self.sub_merchant, 'to_alipay_dict'):
                 params['sub_merchant'] = self.sub_merchant.to_alipay_dict()
@@ -222,6 +239,8 @@ class SignParams(object):
             o.sign_notify_url = d['sign_notify_url']
         if 'sign_scene' in d:
             o.sign_scene = d['sign_scene']
+        if 'specified_deduct_rule_params' in d:
+            o.specified_deduct_rule_params = d['specified_deduct_rule_params']
         if 'sub_merchant' in d:
             o.sub_merchant = d['sub_merchant']
         return o

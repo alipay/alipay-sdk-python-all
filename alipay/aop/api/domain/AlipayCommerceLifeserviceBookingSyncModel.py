@@ -12,6 +12,7 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
         self._action = None
         self._booking_attr = None
         self._booking_id = None
+        self._reject_reason = None
         self._shop_id = None
 
     @property
@@ -41,6 +42,13 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
     @booking_id.setter
     def booking_id(self, value):
         self._booking_id = value
+    @property
+    def reject_reason(self):
+        return self._reject_reason
+
+    @reject_reason.setter
+    def reject_reason(self, value):
+        self._reject_reason = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -72,6 +80,11 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
                 params['booking_id'] = self.booking_id.to_alipay_dict()
             else:
                 params['booking_id'] = self.booking_id
+        if self.reject_reason:
+            if hasattr(self.reject_reason, 'to_alipay_dict'):
+                params['reject_reason'] = self.reject_reason.to_alipay_dict()
+            else:
+                params['reject_reason'] = self.reject_reason
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -90,6 +103,8 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
             o.booking_attr = d['booking_attr']
         if 'booking_id' in d:
             o.booking_id = d['booking_id']
+        if 'reject_reason' in d:
+            o.reject_reason = d['reject_reason']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         return o

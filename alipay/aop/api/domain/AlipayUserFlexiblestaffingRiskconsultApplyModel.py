@@ -17,6 +17,7 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
         self._position = None
         self._product_code = None
         self._risk_scene = None
+        self._special_check_items = None
 
     @property
     def biz_scene(self):
@@ -73,6 +74,16 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
     @risk_scene.setter
     def risk_scene(self, value):
         self._risk_scene = value
+    @property
+    def special_check_items(self):
+        return self._special_check_items
+
+    @special_check_items.setter
+    def special_check_items(self, value):
+        if isinstance(value, list):
+            self._special_check_items = list()
+            for i in value:
+                self._special_check_items.append(i)
 
 
     def to_alipay_dict(self):
@@ -112,6 +123,16 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
                 params['risk_scene'] = self.risk_scene.to_alipay_dict()
             else:
                 params['risk_scene'] = self.risk_scene
+        if self.special_check_items:
+            if isinstance(self.special_check_items, list):
+                for i in range(0, len(self.special_check_items)):
+                    element = self.special_check_items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.special_check_items[i] = element.to_alipay_dict()
+            if hasattr(self.special_check_items, 'to_alipay_dict'):
+                params['special_check_items'] = self.special_check_items.to_alipay_dict()
+            else:
+                params['special_check_items'] = self.special_check_items
         return params
 
     @staticmethod
@@ -133,6 +154,8 @@ class AlipayUserFlexiblestaffingRiskconsultApplyModel(object):
             o.product_code = d['product_code']
         if 'risk_scene' in d:
             o.risk_scene = d['risk_scene']
+        if 'special_check_items' in d:
+            o.special_check_items = d['special_check_items']
         return o
 
 

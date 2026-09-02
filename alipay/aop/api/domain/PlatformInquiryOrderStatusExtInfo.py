@@ -37,6 +37,7 @@ class PlatformInquiryOrderStatusExtInfo(object):
         self._remind_pay = None
         self._reply_content = None
         self._service_end_time = None
+        self._service_expect_end_time = None
 
     @property
     def alipay_trade_no(self):
@@ -241,6 +242,13 @@ class PlatformInquiryOrderStatusExtInfo(object):
     @service_end_time.setter
     def service_end_time(self, value):
         self._service_end_time = value
+    @property
+    def service_expect_end_time(self):
+        return self._service_expect_end_time
+
+    @service_expect_end_time.setter
+    def service_expect_end_time(self, value):
+        self._service_expect_end_time = value
 
 
     def to_alipay_dict(self):
@@ -390,6 +398,11 @@ class PlatformInquiryOrderStatusExtInfo(object):
                 params['service_end_time'] = self.service_end_time.to_alipay_dict()
             else:
                 params['service_end_time'] = self.service_end_time
+        if self.service_expect_end_time:
+            if hasattr(self.service_expect_end_time, 'to_alipay_dict'):
+                params['service_expect_end_time'] = self.service_expect_end_time.to_alipay_dict()
+            else:
+                params['service_expect_end_time'] = self.service_expect_end_time
         return params
 
     @staticmethod
@@ -455,6 +468,8 @@ class PlatformInquiryOrderStatusExtInfo(object):
             o.reply_content = d['reply_content']
         if 'service_end_time' in d:
             o.service_end_time = d['service_end_time']
+        if 'service_expect_end_time' in d:
+            o.service_expect_end_time = d['service_expect_end_time']
         return o
 
 

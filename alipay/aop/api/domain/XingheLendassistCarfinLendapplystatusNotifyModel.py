@@ -8,6 +8,7 @@ from alipay.aop.api.domain.CarfinMortgageReceivedFile import CarfinMortgageRecei
 from alipay.aop.api.domain.Credit import Credit
 from alipay.aop.api.domain.LendDrawdown import LendDrawdown
 from alipay.aop.api.domain.CarfinGuaranteeInst import CarfinGuaranteeInst
+from alipay.aop.api.domain.CarfinLendApplyStatusNotifyOther import CarfinLendApplyStatusNotifyOther
 from alipay.aop.api.domain.SupplementCategoryInfo import SupplementCategoryInfo
 
 
@@ -23,7 +24,9 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
         self._lend_apply_no = None
         self._mortgage_channel = None
         self._need_change_bind_card = None
+        self._need_resign_agreement = None
         self._need_urgent_processing = None
+        self._other = None
         self._out_apply_no = None
         self._out_lend_apply_no = None
         self._refuse_code = None
@@ -124,12 +127,29 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
     def need_change_bind_card(self, value):
         self._need_change_bind_card = value
     @property
+    def need_resign_agreement(self):
+        return self._need_resign_agreement
+
+    @need_resign_agreement.setter
+    def need_resign_agreement(self, value):
+        self._need_resign_agreement = value
+    @property
     def need_urgent_processing(self):
         return self._need_urgent_processing
 
     @need_urgent_processing.setter
     def need_urgent_processing(self, value):
         self._need_urgent_processing = value
+    @property
+    def other(self):
+        return self._other
+
+    @other.setter
+    def other(self, value):
+        if isinstance(value, CarfinLendApplyStatusNotifyOther):
+            self._other = value
+        else:
+            self._other = CarfinLendApplyStatusNotifyOther.from_alipay_dict(value)
     @property
     def out_apply_no(self):
         return self._out_apply_no
@@ -261,11 +281,21 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
                 params['need_change_bind_card'] = self.need_change_bind_card.to_alipay_dict()
             else:
                 params['need_change_bind_card'] = self.need_change_bind_card
+        if self.need_resign_agreement:
+            if hasattr(self.need_resign_agreement, 'to_alipay_dict'):
+                params['need_resign_agreement'] = self.need_resign_agreement.to_alipay_dict()
+            else:
+                params['need_resign_agreement'] = self.need_resign_agreement
         if self.need_urgent_processing:
             if hasattr(self.need_urgent_processing, 'to_alipay_dict'):
                 params['need_urgent_processing'] = self.need_urgent_processing.to_alipay_dict()
             else:
                 params['need_urgent_processing'] = self.need_urgent_processing
+        if self.other:
+            if hasattr(self.other, 'to_alipay_dict'):
+                params['other'] = self.other.to_alipay_dict()
+            else:
+                params['other'] = self.other
         if self.out_apply_no:
             if hasattr(self.out_apply_no, 'to_alipay_dict'):
                 params['out_apply_no'] = self.out_apply_no.to_alipay_dict()
@@ -336,8 +366,12 @@ class XingheLendassistCarfinLendapplystatusNotifyModel(object):
             o.mortgage_channel = d['mortgage_channel']
         if 'need_change_bind_card' in d:
             o.need_change_bind_card = d['need_change_bind_card']
+        if 'need_resign_agreement' in d:
+            o.need_resign_agreement = d['need_resign_agreement']
         if 'need_urgent_processing' in d:
             o.need_urgent_processing = d['need_urgent_processing']
+        if 'other' in d:
+            o.other = d['other']
         if 'out_apply_no' in d:
             o.out_apply_no = d['out_apply_no']
         if 'out_lend_apply_no' in d:

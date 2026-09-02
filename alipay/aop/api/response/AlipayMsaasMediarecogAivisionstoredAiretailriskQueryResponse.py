@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.AIRetailRiskKeyEvent import AIRetailRiskKeyEvent
 
 
 class AlipayMsaasMediarecogAivisionstoredAiretailriskQueryResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayMsaasMediarecogAivisionstoredAiretailriskQueryResponse(AlipayRespons
         super(AlipayMsaasMediarecogAivisionstoredAiretailriskQueryResponse, self).__init__()
         self._desc = None
         self._has_risk = None
+        self._key_actions = None
         self._pics = None
         self._report_time = None
         self._risk_type = None
@@ -29,6 +31,19 @@ class AlipayMsaasMediarecogAivisionstoredAiretailriskQueryResponse(AlipayRespons
     @has_risk.setter
     def has_risk(self, value):
         self._has_risk = value
+    @property
+    def key_actions(self):
+        return self._key_actions
+
+    @key_actions.setter
+    def key_actions(self, value):
+        if isinstance(value, list):
+            self._key_actions = list()
+            for i in value:
+                if isinstance(i, AIRetailRiskKeyEvent):
+                    self._key_actions.append(i)
+                else:
+                    self._key_actions.append(AIRetailRiskKeyEvent.from_alipay_dict(i))
     @property
     def pics(self):
         return self._pics
@@ -60,6 +75,8 @@ class AlipayMsaasMediarecogAivisionstoredAiretailriskQueryResponse(AlipayRespons
             self.desc = response['desc']
         if 'has_risk' in response:
             self.has_risk = response['has_risk']
+        if 'key_actions' in response:
+            self.key_actions = response['key_actions']
         if 'pics' in response:
             self.pics = response['pics']
         if 'report_time' in response:

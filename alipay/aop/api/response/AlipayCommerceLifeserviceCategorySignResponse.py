@@ -9,7 +9,27 @@ class AlipayCommerceLifeserviceCategorySignResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceLifeserviceCategorySignResponse, self).__init__()
+        self._apply_no = None
+        self._status = None
 
+    @property
+    def apply_no(self):
+        return self._apply_no
+
+    @apply_no.setter
+    def apply_no(self, value):
+        self._apply_no = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceLifeserviceCategorySignResponse, self).parse_response_content(response_content)
+        if 'apply_no' in response:
+            self.apply_no = response['apply_no']
+        if 'status' in response:
+            self.status = response['status']

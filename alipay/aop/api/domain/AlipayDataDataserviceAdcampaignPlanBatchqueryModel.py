@@ -10,6 +10,7 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
     def __init__(self):
         self._charge_type_list = None
         self._current = None
+        self._delivery_mode = None
         self._first_market_target_code = None
         self._market_target_code = None
         self._page_size = None
@@ -36,6 +37,13 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
     @current.setter
     def current(self, value):
         self._current = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def first_market_target_code(self):
         return self._first_market_target_code
@@ -114,6 +122,11 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
                 params['current'] = self.current.to_alipay_dict()
             else:
                 params['current'] = self.current
+        if self.delivery_mode:
+            if hasattr(self.delivery_mode, 'to_alipay_dict'):
+                params['delivery_mode'] = self.delivery_mode.to_alipay_dict()
+            else:
+                params['delivery_mode'] = self.delivery_mode
         if self.first_market_target_code:
             if hasattr(self.first_market_target_code, 'to_alipay_dict'):
                 params['first_market_target_code'] = self.first_market_target_code.to_alipay_dict()
@@ -170,6 +183,8 @@ class AlipayDataDataserviceAdcampaignPlanBatchqueryModel(object):
             o.charge_type_list = d['charge_type_list']
         if 'current' in d:
             o.current = d['current']
+        if 'delivery_mode' in d:
+            o.delivery_mode = d['delivery_mode']
         if 'first_market_target_code' in d:
             o.first_market_target_code = d['first_market_target_code']
         if 'market_target_code' in d:

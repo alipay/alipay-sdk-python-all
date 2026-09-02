@@ -12,6 +12,8 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
         super(AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse, self).__init__()
         self._account_no = None
         self._account_type = None
+        self._belong_contractor_cert_no = None
+        self._belong_family_head_cert_no = None
         self._cert_no = None
         self._confirm_status = None
         self._farmer_auth_url = None
@@ -19,6 +21,7 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
         self._farmer_item_list = None
         self._farmer_name = None
         self._farmer_type_list = None
+        self._is_contractor = None
         self._is_family_master = None
         self._proxy_cert_no = None
         self._proxy_name = None
@@ -37,6 +40,20 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def belong_contractor_cert_no(self):
+        return self._belong_contractor_cert_no
+
+    @belong_contractor_cert_no.setter
+    def belong_contractor_cert_no(self, value):
+        self._belong_contractor_cert_no = value
+    @property
+    def belong_family_head_cert_no(self):
+        return self._belong_family_head_cert_no
+
+    @belong_family_head_cert_no.setter
+    def belong_family_head_cert_no(self, value):
+        self._belong_family_head_cert_no = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -96,6 +113,13 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
             for i in value:
                 self._farmer_type_list.append(i)
     @property
+    def is_contractor(self):
+        return self._is_contractor
+
+    @is_contractor.setter
+    def is_contractor(self, value):
+        self._is_contractor = value
+    @property
     def is_family_master(self):
         return self._is_family_master
 
@@ -123,6 +147,10 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
             self.account_no = response['account_no']
         if 'account_type' in response:
             self.account_type = response['account_type']
+        if 'belong_contractor_cert_no' in response:
+            self.belong_contractor_cert_no = response['belong_contractor_cert_no']
+        if 'belong_family_head_cert_no' in response:
+            self.belong_family_head_cert_no = response['belong_family_head_cert_no']
         if 'cert_no' in response:
             self.cert_no = response['cert_no']
         if 'confirm_status' in response:
@@ -137,6 +165,8 @@ class AlipayCommerceEcRecyclinginvoiceFarmerQueryResponse(AlipayResponse):
             self.farmer_name = response['farmer_name']
         if 'farmer_type_list' in response:
             self.farmer_type_list = response['farmer_type_list']
+        if 'is_contractor' in response:
+            self.is_contractor = response['is_contractor']
         if 'is_family_master' in response:
             self.is_family_master = response['is_family_master']
         if 'proxy_cert_no' in response:

@@ -1,0 +1,95 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.response.AlipayResponse import AlipayResponse
+
+
+class AlipayTradeSubscriptionSubmodeModifyResponse(AlipayResponse):
+
+    def __init__(self):
+        super(AlipayTradeSubscriptionSubmodeModifyResponse, self).__init__()
+        self._alipay_jump_schema = None
+        self._alipay_schema = None
+        self._order_no = None
+        self._pay_amount = None
+        self._promotion_info = None
+        self._refund_amount = None
+        self._refund_order_id = None
+        self._subscription_id = None
+
+    @property
+    def alipay_jump_schema(self):
+        return self._alipay_jump_schema
+
+    @alipay_jump_schema.setter
+    def alipay_jump_schema(self, value):
+        self._alipay_jump_schema = value
+    @property
+    def alipay_schema(self):
+        return self._alipay_schema
+
+    @alipay_schema.setter
+    def alipay_schema(self, value):
+        self._alipay_schema = value
+    @property
+    def order_no(self):
+        return self._order_no
+
+    @order_no.setter
+    def order_no(self, value):
+        self._order_no = value
+    @property
+    def pay_amount(self):
+        return self._pay_amount
+
+    @pay_amount.setter
+    def pay_amount(self, value):
+        self._pay_amount = value
+    @property
+    def promotion_info(self):
+        return self._promotion_info
+
+    @promotion_info.setter
+    def promotion_info(self, value):
+        self._promotion_info = value
+    @property
+    def refund_amount(self):
+        return self._refund_amount
+
+    @refund_amount.setter
+    def refund_amount(self, value):
+        self._refund_amount = value
+    @property
+    def refund_order_id(self):
+        return self._refund_order_id
+
+    @refund_order_id.setter
+    def refund_order_id(self, value):
+        self._refund_order_id = value
+    @property
+    def subscription_id(self):
+        return self._subscription_id
+
+    @subscription_id.setter
+    def subscription_id(self, value):
+        self._subscription_id = value
+
+    def parse_response_content(self, response_content):
+        response = super(AlipayTradeSubscriptionSubmodeModifyResponse, self).parse_response_content(response_content)
+        if 'alipay_jump_schema' in response:
+            self.alipay_jump_schema = response['alipay_jump_schema']
+        if 'alipay_schema' in response:
+            self.alipay_schema = response['alipay_schema']
+        if 'order_no' in response:
+            self.order_no = response['order_no']
+        if 'pay_amount' in response:
+            self.pay_amount = response['pay_amount']
+        if 'promotion_info' in response:
+            self.promotion_info = response['promotion_info']
+        if 'refund_amount' in response:
+            self.refund_amount = response['refund_amount']
+        if 'refund_order_id' in response:
+            self.refund_order_id = response['refund_order_id']
+        if 'subscription_id' in response:
+            self.subscription_id = response['subscription_id']

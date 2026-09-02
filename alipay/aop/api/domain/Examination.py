@@ -7,6 +7,8 @@ from alipay.aop.api.domain.ExaminationBookInfo import ExaminationBookInfo
 from alipay.aop.api.domain.ExaminationCheckInfo import ExaminationCheckInfo
 from alipay.aop.api.domain.ExaminationDeliverInfo import ExaminationDeliverInfo
 from alipay.aop.api.domain.ExaminationItemVO import ExaminationItemVO
+from alipay.aop.api.domain.OrderAmountInfo import OrderAmountInfo
+from alipay.aop.api.domain.PatientInfoForFulfillmentList import PatientInfoForFulfillmentList
 from alipay.aop.api.domain.ExaminationPayInfo import ExaminationPayInfo
 
 
@@ -15,11 +17,14 @@ class Examination(object):
     def __init__(self):
         self._application_id = None
         self._book_info = None
+        self._cancel_type = None
         self._check_info = None
         self._deliver_info = None
         self._fulfillment_status = None
         self._items = None
+        self._order_amount_info = None
         self._order_no = None
+        self._patient_infos = None
         self._pay_info = None
         self._relation_order_no = None
         self._seller_code = None
@@ -46,6 +51,13 @@ class Examination(object):
             self._book_info = value
         else:
             self._book_info = ExaminationBookInfo.from_alipay_dict(value)
+    @property
+    def cancel_type(self):
+        return self._cancel_type
+
+    @cancel_type.setter
+    def cancel_type(self, value):
+        self._cancel_type = value
     @property
     def check_info(self):
         return self._check_info
@@ -87,12 +99,35 @@ class Examination(object):
                 else:
                     self._items.append(ExaminationItemVO.from_alipay_dict(i))
     @property
+    def order_amount_info(self):
+        return self._order_amount_info
+
+    @order_amount_info.setter
+    def order_amount_info(self, value):
+        if isinstance(value, OrderAmountInfo):
+            self._order_amount_info = value
+        else:
+            self._order_amount_info = OrderAmountInfo.from_alipay_dict(value)
+    @property
     def order_no(self):
         return self._order_no
 
     @order_no.setter
     def order_no(self, value):
         self._order_no = value
+    @property
+    def patient_infos(self):
+        return self._patient_infos
+
+    @patient_infos.setter
+    def patient_infos(self, value):
+        if isinstance(value, list):
+            self._patient_infos = list()
+            for i in value:
+                if isinstance(i, PatientInfoForFulfillmentList):
+                    self._patient_infos.append(i)
+                else:
+                    self._patient_infos.append(PatientInfoForFulfillmentList.from_alipay_dict(i))
     @property
     def pay_info(self):
         return self._pay_info
@@ -166,6 +201,11 @@ class Examination(object):
                 params['book_info'] = self.book_info.to_alipay_dict()
             else:
                 params['book_info'] = self.book_info
+        if self.cancel_type:
+            if hasattr(self.cancel_type, 'to_alipay_dict'):
+                params['cancel_type'] = self.cancel_type.to_alipay_dict()
+            else:
+                params['cancel_type'] = self.cancel_type
         if self.check_info:
             if hasattr(self.check_info, 'to_alipay_dict'):
                 params['check_info'] = self.check_info.to_alipay_dict()
@@ -191,11 +231,26 @@ class Examination(object):
                 params['items'] = self.items.to_alipay_dict()
             else:
                 params['items'] = self.items
+        if self.order_amount_info:
+            if hasattr(self.order_amount_info, 'to_alipay_dict'):
+                params['order_amount_info'] = self.order_amount_info.to_alipay_dict()
+            else:
+                params['order_amount_info'] = self.order_amount_info
         if self.order_no:
             if hasattr(self.order_no, 'to_alipay_dict'):
                 params['order_no'] = self.order_no.to_alipay_dict()
             else:
                 params['order_no'] = self.order_no
+        if self.patient_infos:
+            if isinstance(self.patient_infos, list):
+                for i in range(0, len(self.patient_infos)):
+                    element = self.patient_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.patient_infos[i] = element.to_alipay_dict()
+            if hasattr(self.patient_infos, 'to_alipay_dict'):
+                params['patient_infos'] = self.patient_infos.to_alipay_dict()
+            else:
+                params['patient_infos'] = self.patient_infos
         if self.pay_info:
             if hasattr(self.pay_info, 'to_alipay_dict'):
                 params['pay_info'] = self.pay_info.to_alipay_dict()
@@ -247,6 +302,8 @@ class Examination(object):
             o.application_id = d['application_id']
         if 'book_info' in d:
             o.book_info = d['book_info']
+        if 'cancel_type' in d:
+            o.cancel_type = d['cancel_type']
         if 'check_info' in d:
             o.check_info = d['check_info']
         if 'deliver_info' in d:
@@ -255,8 +312,12 @@ class Examination(object):
             o.fulfillment_status = d['fulfillment_status']
         if 'items' in d:
             o.items = d['items']
+        if 'order_amount_info' in d:
+            o.order_amount_info = d['order_amount_info']
         if 'order_no' in d:
             o.order_no = d['order_no']
+        if 'patient_infos' in d:
+            o.patient_infos = d['patient_infos']
         if 'pay_info' in d:
             o.pay_info = d['pay_info']
         if 'relation_order_no' in d:

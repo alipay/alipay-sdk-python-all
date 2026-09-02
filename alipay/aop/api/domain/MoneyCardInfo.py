@@ -23,6 +23,7 @@ class MoneyCardInfo(object):
         self._use_duration = None
         self._use_method = None
         self._use_type = None
+        self._zft_smid_list = None
 
     @property
     def effective_duration(self):
@@ -127,6 +128,16 @@ class MoneyCardInfo(object):
     @use_type.setter
     def use_type(self, value):
         self._use_type = value
+    @property
+    def zft_smid_list(self):
+        return self._zft_smid_list
+
+    @zft_smid_list.setter
+    def zft_smid_list(self, value):
+        if isinstance(value, list):
+            self._zft_smid_list = list()
+            for i in value:
+                self._zft_smid_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -206,6 +217,16 @@ class MoneyCardInfo(object):
                 params['use_type'] = self.use_type.to_alipay_dict()
             else:
                 params['use_type'] = self.use_type
+        if self.zft_smid_list:
+            if isinstance(self.zft_smid_list, list):
+                for i in range(0, len(self.zft_smid_list)):
+                    element = self.zft_smid_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.zft_smid_list[i] = element.to_alipay_dict()
+            if hasattr(self.zft_smid_list, 'to_alipay_dict'):
+                params['zft_smid_list'] = self.zft_smid_list.to_alipay_dict()
+            else:
+                params['zft_smid_list'] = self.zft_smid_list
         return params
 
     @staticmethod
@@ -239,6 +260,8 @@ class MoneyCardInfo(object):
             o.use_method = d['use_method']
         if 'use_type' in d:
             o.use_type = d['use_type']
+        if 'zft_smid_list' in d:
+            o.zft_smid_list = d['zft_smid_list']
         return o
 
 

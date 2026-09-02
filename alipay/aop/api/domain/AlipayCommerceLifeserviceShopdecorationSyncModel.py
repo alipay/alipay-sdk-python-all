@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LifeServiceShopBusinessTime import LifeServiceShopBusinessTime
+from alipay.aop.api.domain.ShopCategoryImage import ShopCategoryImage
 from alipay.aop.api.domain.LifeServiceAttr import LifeServiceAttr
 
 
@@ -11,6 +12,7 @@ class AlipayCommerceLifeserviceShopdecorationSyncModel(object):
 
     def __init__(self):
         self._shop_business_time = None
+        self._shop_category_images = None
         self._shop_commercial_tags = None
         self._shop_decoration_attrs = None
         self._shop_id = None
@@ -30,6 +32,19 @@ class AlipayCommerceLifeserviceShopdecorationSyncModel(object):
                     self._shop_business_time.append(i)
                 else:
                     self._shop_business_time.append(LifeServiceShopBusinessTime.from_alipay_dict(i))
+    @property
+    def shop_category_images(self):
+        return self._shop_category_images
+
+    @shop_category_images.setter
+    def shop_category_images(self, value):
+        if isinstance(value, list):
+            self._shop_category_images = list()
+            for i in value:
+                if isinstance(i, ShopCategoryImage):
+                    self._shop_category_images.append(i)
+                else:
+                    self._shop_category_images.append(ShopCategoryImage.from_alipay_dict(i))
     @property
     def shop_commercial_tags(self):
         return self._shop_commercial_tags
@@ -91,6 +106,16 @@ class AlipayCommerceLifeserviceShopdecorationSyncModel(object):
                 params['shop_business_time'] = self.shop_business_time.to_alipay_dict()
             else:
                 params['shop_business_time'] = self.shop_business_time
+        if self.shop_category_images:
+            if isinstance(self.shop_category_images, list):
+                for i in range(0, len(self.shop_category_images)):
+                    element = self.shop_category_images[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.shop_category_images[i] = element.to_alipay_dict()
+            if hasattr(self.shop_category_images, 'to_alipay_dict'):
+                params['shop_category_images'] = self.shop_category_images.to_alipay_dict()
+            else:
+                params['shop_category_images'] = self.shop_category_images
         if self.shop_commercial_tags:
             if isinstance(self.shop_commercial_tags, list):
                 for i in range(0, len(self.shop_commercial_tags)):
@@ -140,6 +165,8 @@ class AlipayCommerceLifeserviceShopdecorationSyncModel(object):
         o = AlipayCommerceLifeserviceShopdecorationSyncModel()
         if 'shop_business_time' in d:
             o.shop_business_time = d['shop_business_time']
+        if 'shop_category_images' in d:
+            o.shop_category_images = d['shop_category_images']
         if 'shop_commercial_tags' in d:
             o.shop_commercial_tags = d['shop_commercial_tags']
         if 'shop_decoration_attrs' in d:

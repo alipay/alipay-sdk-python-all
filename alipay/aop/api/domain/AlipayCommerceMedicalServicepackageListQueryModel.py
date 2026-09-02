@@ -11,6 +11,7 @@ class AlipayCommerceMedicalServicepackageListQueryModel(object):
         self._is_purchased = None
         self._lead_doctor_id = None
         self._package_id_list = None
+        self._service_pkg_order_no = None
 
     @property
     def is_purchased(self):
@@ -36,6 +37,13 @@ class AlipayCommerceMedicalServicepackageListQueryModel(object):
             self._package_id_list = list()
             for i in value:
                 self._package_id_list.append(i)
+    @property
+    def service_pkg_order_no(self):
+        return self._service_pkg_order_no
+
+    @service_pkg_order_no.setter
+    def service_pkg_order_no(self, value):
+        self._service_pkg_order_no = value
 
 
     def to_alipay_dict(self):
@@ -60,6 +68,11 @@ class AlipayCommerceMedicalServicepackageListQueryModel(object):
                 params['package_id_list'] = self.package_id_list.to_alipay_dict()
             else:
                 params['package_id_list'] = self.package_id_list
+        if self.service_pkg_order_no:
+            if hasattr(self.service_pkg_order_no, 'to_alipay_dict'):
+                params['service_pkg_order_no'] = self.service_pkg_order_no.to_alipay_dict()
+            else:
+                params['service_pkg_order_no'] = self.service_pkg_order_no
         return params
 
     @staticmethod
@@ -73,6 +86,8 @@ class AlipayCommerceMedicalServicepackageListQueryModel(object):
             o.lead_doctor_id = d['lead_doctor_id']
         if 'package_id_list' in d:
             o.package_id_list = d['package_id_list']
+        if 'service_pkg_order_no' in d:
+            o.service_pkg_order_no = d['service_pkg_order_no']
         return o
 
 

@@ -12,6 +12,7 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._biz_code = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
@@ -39,6 +40,13 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def biz_code(self):
+        return self._biz_code
+
+    @biz_code.setter
+    def biz_code(self, value):
+        self._biz_code = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -190,6 +198,11 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.biz_code:
+            if hasattr(self.biz_code, 'to_alipay_dict'):
+                params['biz_code'] = json.dumps(obj=self.biz_code.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['biz_code'] = self.biz_code
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = json.dumps(obj=self.cert_name.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

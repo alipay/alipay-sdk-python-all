@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RedirectUrlParam import RedirectUrlParam
 
 
 class MsgData(object):
@@ -23,6 +24,7 @@ class MsgData(object):
         self._patient_id = None
         self._patient_name = None
         self._redirect_url = None
+        self._redirect_url_params = None
         self._service_end_time = None
         self._service_package_id = None
         self._service_package_name = None
@@ -134,6 +136,16 @@ class MsgData(object):
     def redirect_url(self, value):
         self._redirect_url = value
     @property
+    def redirect_url_params(self):
+        return self._redirect_url_params
+
+    @redirect_url_params.setter
+    def redirect_url_params(self, value):
+        if isinstance(value, RedirectUrlParam):
+            self._redirect_url_params = value
+        else:
+            self._redirect_url_params = RedirectUrlParam.from_alipay_dict(value)
+    @property
     def service_end_time(self):
         return self._service_end_time
 
@@ -240,6 +252,11 @@ class MsgData(object):
                 params['redirect_url'] = self.redirect_url.to_alipay_dict()
             else:
                 params['redirect_url'] = self.redirect_url
+        if self.redirect_url_params:
+            if hasattr(self.redirect_url_params, 'to_alipay_dict'):
+                params['redirect_url_params'] = self.redirect_url_params.to_alipay_dict()
+            else:
+                params['redirect_url_params'] = self.redirect_url_params
         if self.service_end_time:
             if hasattr(self.service_end_time, 'to_alipay_dict'):
                 params['service_end_time'] = self.service_end_time.to_alipay_dict()
@@ -297,6 +314,8 @@ class MsgData(object):
             o.patient_name = d['patient_name']
         if 'redirect_url' in d:
             o.redirect_url = d['redirect_url']
+        if 'redirect_url_params' in d:
+            o.redirect_url_params = d['redirect_url_params']
         if 'service_end_time' in d:
             o.service_end_time = d['service_end_time']
         if 'service_package_id' in d:

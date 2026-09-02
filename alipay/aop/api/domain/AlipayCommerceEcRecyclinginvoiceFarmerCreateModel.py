@@ -12,10 +12,13 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
     def __init__(self):
         self._account_no = None
         self._account_type = None
+        self._belong_contractor_cert_no = None
+        self._belong_family_head_cert_no = None
         self._cert_no = None
         self._farmer_item_list = None
         self._farmer_name = None
         self._farmer_type_list = None
+        self._is_contractor = None
         self._is_family_master = None
         self._recycling_proxy = None
 
@@ -33,6 +36,20 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def belong_contractor_cert_no(self):
+        return self._belong_contractor_cert_no
+
+    @belong_contractor_cert_no.setter
+    def belong_contractor_cert_no(self, value):
+        self._belong_contractor_cert_no = value
+    @property
+    def belong_family_head_cert_no(self):
+        return self._belong_family_head_cert_no
+
+    @belong_family_head_cert_no.setter
+    def belong_family_head_cert_no(self, value):
+        self._belong_family_head_cert_no = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -71,6 +88,13 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
             for i in value:
                 self._farmer_type_list.append(i)
     @property
+    def is_contractor(self):
+        return self._is_contractor
+
+    @is_contractor.setter
+    def is_contractor(self, value):
+        self._is_contractor = value
+    @property
     def is_family_master(self):
         return self._is_family_master
 
@@ -101,6 +125,16 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.belong_contractor_cert_no:
+            if hasattr(self.belong_contractor_cert_no, 'to_alipay_dict'):
+                params['belong_contractor_cert_no'] = self.belong_contractor_cert_no.to_alipay_dict()
+            else:
+                params['belong_contractor_cert_no'] = self.belong_contractor_cert_no
+        if self.belong_family_head_cert_no:
+            if hasattr(self.belong_family_head_cert_no, 'to_alipay_dict'):
+                params['belong_family_head_cert_no'] = self.belong_family_head_cert_no.to_alipay_dict()
+            else:
+                params['belong_family_head_cert_no'] = self.belong_family_head_cert_no
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -131,6 +165,11 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
                 params['farmer_type_list'] = self.farmer_type_list.to_alipay_dict()
             else:
                 params['farmer_type_list'] = self.farmer_type_list
+        if self.is_contractor:
+            if hasattr(self.is_contractor, 'to_alipay_dict'):
+                params['is_contractor'] = self.is_contractor.to_alipay_dict()
+            else:
+                params['is_contractor'] = self.is_contractor
         if self.is_family_master:
             if hasattr(self.is_family_master, 'to_alipay_dict'):
                 params['is_family_master'] = self.is_family_master.to_alipay_dict()
@@ -152,6 +191,10 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
             o.account_no = d['account_no']
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'belong_contractor_cert_no' in d:
+            o.belong_contractor_cert_no = d['belong_contractor_cert_no']
+        if 'belong_family_head_cert_no' in d:
+            o.belong_family_head_cert_no = d['belong_family_head_cert_no']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'farmer_item_list' in d:
@@ -160,6 +203,8 @@ class AlipayCommerceEcRecyclinginvoiceFarmerCreateModel(object):
             o.farmer_name = d['farmer_name']
         if 'farmer_type_list' in d:
             o.farmer_type_list = d['farmer_type_list']
+        if 'is_contractor' in d:
+            o.is_contractor = d['is_contractor']
         if 'is_family_master' in d:
             o.is_family_master = d['is_family_master']
         if 'recycling_proxy' in d:

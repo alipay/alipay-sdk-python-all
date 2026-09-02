@@ -36,13 +36,10 @@ class AlipayEbppIndustryOfflinelaborRegisterQueryResponse(AlipayResponse):
 
     @record_list.setter
     def record_list(self, value):
-        if isinstance(value, list):
-            self._record_list = list()
-            for i in value:
-                if isinstance(i, OfflineLaborProjectRegistRecord):
-                    self._record_list.append(i)
-                else:
-                    self._record_list.append(OfflineLaborProjectRegistRecord.from_alipay_dict(i))
+        if isinstance(value, OfflineLaborProjectRegistRecord):
+            self._record_list = value
+        else:
+            self._record_list = OfflineLaborProjectRegistRecord.from_alipay_dict(value)
     @property
     def total(self):
         return self._total

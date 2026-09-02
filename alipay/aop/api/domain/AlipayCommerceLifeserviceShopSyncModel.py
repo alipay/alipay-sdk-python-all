@@ -18,6 +18,7 @@ class AlipayCommerceLifeserviceShopSyncModel(object):
         self._shop_attrs = None
         self._shop_id = None
         self._shop_type = None
+        self._show_shop_assign = None
         self._status = None
         self._stock_fetch_type = None
         self._stock_query_app_id = None
@@ -85,6 +86,13 @@ class AlipayCommerceLifeserviceShopSyncModel(object):
     @shop_type.setter
     def shop_type(self, value):
         self._shop_type = value
+    @property
+    def show_shop_assign(self):
+        return self._show_shop_assign
+
+    @show_shop_assign.setter
+    def show_shop_assign(self, value):
+        self._show_shop_assign = value
     @property
     def status(self):
         return self._status
@@ -168,6 +176,11 @@ class AlipayCommerceLifeserviceShopSyncModel(object):
                 params['shop_type'] = self.shop_type.to_alipay_dict()
             else:
                 params['shop_type'] = self.shop_type
+        if self.show_shop_assign:
+            if hasattr(self.show_shop_assign, 'to_alipay_dict'):
+                params['show_shop_assign'] = self.show_shop_assign.to_alipay_dict()
+            else:
+                params['show_shop_assign'] = self.show_shop_assign
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -216,6 +229,8 @@ class AlipayCommerceLifeserviceShopSyncModel(object):
             o.shop_id = d['shop_id']
         if 'shop_type' in d:
             o.shop_type = d['shop_type']
+        if 'show_shop_assign' in d:
+            o.show_shop_assign = d['show_shop_assign']
         if 'status' in d:
             o.status = d['status']
         if 'stock_fetch_type' in d:

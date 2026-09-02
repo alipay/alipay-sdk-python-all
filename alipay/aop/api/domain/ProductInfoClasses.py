@@ -10,12 +10,20 @@ from alipay.aop.api.domain.OnlineShopClasses import OnlineShopClasses
 class ProductInfoClasses(object):
 
     def __init__(self):
+        self._business_category = None
         self._file_list = None
         self._online_store_info_list = None
         self._product_description = None
         self._product_name = None
         self._service_url = None
 
+    @property
+    def business_category(self):
+        return self._business_category
+
+    @business_category.setter
+    def business_category(self, value):
+        self._business_category = value
     @property
     def file_list(self):
         return self._file_list
@@ -70,6 +78,11 @@ class ProductInfoClasses(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_category:
+            if hasattr(self.business_category, 'to_alipay_dict'):
+                params['business_category'] = self.business_category.to_alipay_dict()
+            else:
+                params['business_category'] = self.business_category
         if self.file_list:
             if isinstance(self.file_list, list):
                 for i in range(0, len(self.file_list)):
@@ -117,6 +130,8 @@ class ProductInfoClasses(object):
         if not d:
             return None
         o = ProductInfoClasses()
+        if 'business_category' in d:
+            o.business_category = d['business_category']
         if 'file_list' in d:
             o.file_list = d['file_list']
         if 'online_store_info_list' in d:

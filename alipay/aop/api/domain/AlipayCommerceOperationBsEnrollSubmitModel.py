@@ -11,6 +11,7 @@ class AlipayCommerceOperationBsEnrollSubmitModel(object):
 
     def __init__(self):
         self._out_activity_id = None
+        self._out_activity_ids = None
         self._participants = None
         self._participants_new = None
         self._plan_id = None
@@ -23,6 +24,16 @@ class AlipayCommerceOperationBsEnrollSubmitModel(object):
     @out_activity_id.setter
     def out_activity_id(self, value):
         self._out_activity_id = value
+    @property
+    def out_activity_ids(self):
+        return self._out_activity_ids
+
+    @out_activity_ids.setter
+    def out_activity_ids(self, value):
+        if isinstance(value, list):
+            self._out_activity_ids = list()
+            for i in value:
+                self._out_activity_ids.append(i)
     @property
     def participants(self):
         return self._participants
@@ -72,6 +83,16 @@ class AlipayCommerceOperationBsEnrollSubmitModel(object):
                 params['out_activity_id'] = self.out_activity_id.to_alipay_dict()
             else:
                 params['out_activity_id'] = self.out_activity_id
+        if self.out_activity_ids:
+            if isinstance(self.out_activity_ids, list):
+                for i in range(0, len(self.out_activity_ids)):
+                    element = self.out_activity_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.out_activity_ids[i] = element.to_alipay_dict()
+            if hasattr(self.out_activity_ids, 'to_alipay_dict'):
+                params['out_activity_ids'] = self.out_activity_ids.to_alipay_dict()
+            else:
+                params['out_activity_ids'] = self.out_activity_ids
         if self.participants:
             if isinstance(self.participants, list):
                 for i in range(0, len(self.participants)):
@@ -111,6 +132,8 @@ class AlipayCommerceOperationBsEnrollSubmitModel(object):
         o = AlipayCommerceOperationBsEnrollSubmitModel()
         if 'out_activity_id' in d:
             o.out_activity_id = d['out_activity_id']
+        if 'out_activity_ids' in d:
+            o.out_activity_ids = d['out_activity_ids']
         if 'participants' in d:
             o.participants = d['participants']
         if 'participants_new' in d:

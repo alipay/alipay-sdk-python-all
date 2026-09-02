@@ -11,9 +11,11 @@ class AlipayUserAgreementDelegationQueryResponse(AlipayResponse):
         super(AlipayUserAgreementDelegationQueryResponse, self).__init__()
         self._agreement_no = None
         self._delegation_id = None
+        self._delegation_scene = None
         self._delegation_tag = None
         self._external_delegation_id = None
         self._max_total_amount = None
+        self._quota_amount = None
         self._remaining_amount = None
         self._remaining_times = None
         self._status = None
@@ -36,6 +38,13 @@ class AlipayUserAgreementDelegationQueryResponse(AlipayResponse):
     def delegation_id(self, value):
         self._delegation_id = value
     @property
+    def delegation_scene(self):
+        return self._delegation_scene
+
+    @delegation_scene.setter
+    def delegation_scene(self, value):
+        self._delegation_scene = value
+    @property
     def delegation_tag(self):
         return self._delegation_tag
 
@@ -56,6 +65,13 @@ class AlipayUserAgreementDelegationQueryResponse(AlipayResponse):
     @max_total_amount.setter
     def max_total_amount(self, value):
         self._max_total_amount = value
+    @property
+    def quota_amount(self):
+        return self._quota_amount
+
+    @quota_amount.setter
+    def quota_amount(self, value):
+        self._quota_amount = value
     @property
     def remaining_amount(self):
         return self._remaining_amount
@@ -105,12 +121,16 @@ class AlipayUserAgreementDelegationQueryResponse(AlipayResponse):
             self.agreement_no = response['agreement_no']
         if 'delegation_id' in response:
             self.delegation_id = response['delegation_id']
+        if 'delegation_scene' in response:
+            self.delegation_scene = response['delegation_scene']
         if 'delegation_tag' in response:
             self.delegation_tag = response['delegation_tag']
         if 'external_delegation_id' in response:
             self.external_delegation_id = response['external_delegation_id']
         if 'max_total_amount' in response:
             self.max_total_amount = response['max_total_amount']
+        if 'quota_amount' in response:
+            self.quota_amount = response['quota_amount']
         if 'remaining_amount' in response:
             self.remaining_amount = response['remaining_amount']
         if 'remaining_times' in response:

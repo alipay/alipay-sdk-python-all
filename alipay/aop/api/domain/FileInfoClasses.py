@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class FileInfoClasses(object):
 
     def __init__(self):
+        self._agent_recognized_content = None
         self._description = None
         self._file_name = None
         self._type = None
         self._url = None
 
+    @property
+    def agent_recognized_content(self):
+        return self._agent_recognized_content
+
+    @agent_recognized_content.setter
+    def agent_recognized_content(self, value):
+        self._agent_recognized_content = value
     @property
     def description(self):
         return self._description
@@ -45,6 +53,11 @@ class FileInfoClasses(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_recognized_content:
+            if hasattr(self.agent_recognized_content, 'to_alipay_dict'):
+                params['agent_recognized_content'] = self.agent_recognized_content.to_alipay_dict()
+            else:
+                params['agent_recognized_content'] = self.agent_recognized_content
         if self.description:
             if hasattr(self.description, 'to_alipay_dict'):
                 params['description'] = self.description.to_alipay_dict()
@@ -72,6 +85,8 @@ class FileInfoClasses(object):
         if not d:
             return None
         o = FileInfoClasses()
+        if 'agent_recognized_content' in d:
+            o.agent_recognized_content = d['agent_recognized_content']
         if 'description' in d:
             o.description = d['description']
         if 'file_name' in d:

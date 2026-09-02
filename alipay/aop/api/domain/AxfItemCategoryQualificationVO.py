@@ -11,6 +11,7 @@ class AxfItemCategoryQualificationVO(object):
         self._param_description = None
         self._qualification_name = None
         self._qualification_type = None
+        self._required = None
 
     @property
     def param_description(self):
@@ -33,6 +34,13 @@ class AxfItemCategoryQualificationVO(object):
     @qualification_type.setter
     def qualification_type(self, value):
         self._qualification_type = value
+    @property
+    def required(self):
+        return self._required
+
+    @required.setter
+    def required(self, value):
+        self._required = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AxfItemCategoryQualificationVO(object):
                 params['qualification_type'] = self.qualification_type.to_alipay_dict()
             else:
                 params['qualification_type'] = self.qualification_type
+        if self.required:
+            if hasattr(self.required, 'to_alipay_dict'):
+                params['required'] = self.required.to_alipay_dict()
+            else:
+                params['required'] = self.required
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AxfItemCategoryQualificationVO(object):
             o.qualification_name = d['qualification_name']
         if 'qualification_type' in d:
             o.qualification_type = d['qualification_type']
+        if 'required' in d:
+            o.required = d['required']
         return o
 
 

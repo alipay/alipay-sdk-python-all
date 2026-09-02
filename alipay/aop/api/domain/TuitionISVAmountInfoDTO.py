@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BankChargeDTO import BankChargeDTO
 from alipay.aop.api.domain.TuitionISVChargeDetailDTO import TuitionISVChargeDetailDTO
 from alipay.aop.api.domain.TuitionMoneyDTO import TuitionMoneyDTO
 from alipay.aop.api.domain.TuitionMoneyDTO import TuitionMoneyDTO
@@ -12,12 +13,23 @@ from alipay.aop.api.domain.TuitionMoneyDTO import TuitionMoneyDTO
 class TuitionISVAmountInfoDTO(object):
 
     def __init__(self):
+        self._bank_charge_detail = None
         self._charge_details = None
         self._exchange_rate = None
         self._original_amount = None
         self._target_amount = None
         self._total_amount = None
 
+    @property
+    def bank_charge_detail(self):
+        return self._bank_charge_detail
+
+    @bank_charge_detail.setter
+    def bank_charge_detail(self, value):
+        if isinstance(value, BankChargeDTO):
+            self._bank_charge_detail = value
+        else:
+            self._bank_charge_detail = BankChargeDTO.from_alipay_dict(value)
     @property
     def charge_details(self):
         return self._charge_details
@@ -72,6 +84,11 @@ class TuitionISVAmountInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bank_charge_detail:
+            if hasattr(self.bank_charge_detail, 'to_alipay_dict'):
+                params['bank_charge_detail'] = self.bank_charge_detail.to_alipay_dict()
+            else:
+                params['bank_charge_detail'] = self.bank_charge_detail
         if self.charge_details:
             if isinstance(self.charge_details, list):
                 for i in range(0, len(self.charge_details)):
@@ -109,6 +126,8 @@ class TuitionISVAmountInfoDTO(object):
         if not d:
             return None
         o = TuitionISVAmountInfoDTO()
+        if 'bank_charge_detail' in d:
+            o.bank_charge_detail = d['bank_charge_detail']
         if 'charge_details' in d:
             o.charge_details = d['charge_details']
         if 'exchange_rate' in d:

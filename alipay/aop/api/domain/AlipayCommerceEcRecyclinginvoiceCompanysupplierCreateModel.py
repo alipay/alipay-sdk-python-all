@@ -9,6 +9,9 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierCreateModel(object):
 
     def __init__(self):
         self._account_type = None
+        self._bank_card_no = None
+        self._bank_code = None
+        self._has_bank_card = None
         self._outer_supplier_id = None
         self._supplier_account_no = None
         self._supplier_name = None
@@ -22,6 +25,27 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierCreateModel(object):
     @account_type.setter
     def account_type(self, value):
         self._account_type = value
+    @property
+    def bank_card_no(self):
+        return self._bank_card_no
+
+    @bank_card_no.setter
+    def bank_card_no(self, value):
+        self._bank_card_no = value
+    @property
+    def bank_code(self):
+        return self._bank_code
+
+    @bank_code.setter
+    def bank_code(self, value):
+        self._bank_code = value
+    @property
+    def has_bank_card(self):
+        return self._has_bank_card
+
+    @has_bank_card.setter
+    def has_bank_card(self, value):
+        self._has_bank_card = value
     @property
     def outer_supplier_id(self):
         return self._outer_supplier_id
@@ -66,6 +90,21 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierCreateModel(object):
                 params['account_type'] = self.account_type.to_alipay_dict()
             else:
                 params['account_type'] = self.account_type
+        if self.bank_card_no:
+            if hasattr(self.bank_card_no, 'to_alipay_dict'):
+                params['bank_card_no'] = self.bank_card_no.to_alipay_dict()
+            else:
+                params['bank_card_no'] = self.bank_card_no
+        if self.bank_code:
+            if hasattr(self.bank_code, 'to_alipay_dict'):
+                params['bank_code'] = self.bank_code.to_alipay_dict()
+            else:
+                params['bank_code'] = self.bank_code
+        if self.has_bank_card:
+            if hasattr(self.has_bank_card, 'to_alipay_dict'):
+                params['has_bank_card'] = self.has_bank_card.to_alipay_dict()
+            else:
+                params['has_bank_card'] = self.has_bank_card
         if self.outer_supplier_id:
             if hasattr(self.outer_supplier_id, 'to_alipay_dict'):
                 params['outer_supplier_id'] = self.outer_supplier_id.to_alipay_dict()
@@ -100,6 +139,12 @@ class AlipayCommerceEcRecyclinginvoiceCompanysupplierCreateModel(object):
         o = AlipayCommerceEcRecyclinginvoiceCompanysupplierCreateModel()
         if 'account_type' in d:
             o.account_type = d['account_type']
+        if 'bank_card_no' in d:
+            o.bank_card_no = d['bank_card_no']
+        if 'bank_code' in d:
+            o.bank_code = d['bank_code']
+        if 'has_bank_card' in d:
+            o.has_bank_card = d['has_bank_card']
         if 'outer_supplier_id' in d:
             o.outer_supplier_id = d['outer_supplier_id']
         if 'supplier_account_no' in d:

@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CertificateReverseInfo import CertificateReverseInfo
 
 
 class AlipayMarketingCertificateCertificationRefundModel(object):
 
     def __init__(self):
         self._biz_dt = None
+        self._certificate_reverse_info_list = None
         self._code = None
         self._open_id = None
         self._order_id = None
@@ -23,6 +25,19 @@ class AlipayMarketingCertificateCertificationRefundModel(object):
     @biz_dt.setter
     def biz_dt(self, value):
         self._biz_dt = value
+    @property
+    def certificate_reverse_info_list(self):
+        return self._certificate_reverse_info_list
+
+    @certificate_reverse_info_list.setter
+    def certificate_reverse_info_list(self, value):
+        if isinstance(value, list):
+            self._certificate_reverse_info_list = list()
+            for i in value:
+                if isinstance(i, CertificateReverseInfo):
+                    self._certificate_reverse_info_list.append(i)
+                else:
+                    self._certificate_reverse_info_list.append(CertificateReverseInfo.from_alipay_dict(i))
     @property
     def code(self):
         return self._code
@@ -77,6 +92,16 @@ class AlipayMarketingCertificateCertificationRefundModel(object):
                 params['biz_dt'] = self.biz_dt.to_alipay_dict()
             else:
                 params['biz_dt'] = self.biz_dt
+        if self.certificate_reverse_info_list:
+            if isinstance(self.certificate_reverse_info_list, list):
+                for i in range(0, len(self.certificate_reverse_info_list)):
+                    element = self.certificate_reverse_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.certificate_reverse_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.certificate_reverse_info_list, 'to_alipay_dict'):
+                params['certificate_reverse_info_list'] = self.certificate_reverse_info_list.to_alipay_dict()
+            else:
+                params['certificate_reverse_info_list'] = self.certificate_reverse_info_list
         if self.code:
             if hasattr(self.code, 'to_alipay_dict'):
                 params['code'] = self.code.to_alipay_dict()
@@ -121,6 +146,8 @@ class AlipayMarketingCertificateCertificationRefundModel(object):
         o = AlipayMarketingCertificateCertificationRefundModel()
         if 'biz_dt' in d:
             o.biz_dt = d['biz_dt']
+        if 'certificate_reverse_info_list' in d:
+            o.certificate_reverse_info_list = d['certificate_reverse_info_list']
         if 'code' in d:
             o.code = d['code']
         if 'open_id' in d:

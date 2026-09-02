@@ -9,6 +9,7 @@ class CustomerServiceInfo(object):
 
     def __init__(self):
         self._employee_no = None
+        self._gender = None
         self._mobile = None
         self._name = None
 
@@ -19,6 +20,13 @@ class CustomerServiceInfo(object):
     @employee_no.setter
     def employee_no(self, value):
         self._employee_no = value
+    @property
+    def gender(self):
+        return self._gender
+
+    @gender.setter
+    def gender(self, value):
+        self._gender = value
     @property
     def mobile(self):
         return self._mobile
@@ -42,6 +50,11 @@ class CustomerServiceInfo(object):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
             else:
                 params['employee_no'] = self.employee_no
+        if self.gender:
+            if hasattr(self.gender, 'to_alipay_dict'):
+                params['gender'] = self.gender.to_alipay_dict()
+            else:
+                params['gender'] = self.gender
         if self.mobile:
             if hasattr(self.mobile, 'to_alipay_dict'):
                 params['mobile'] = self.mobile.to_alipay_dict()
@@ -61,6 +74,8 @@ class CustomerServiceInfo(object):
         o = CustomerServiceInfo()
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
+        if 'gender' in d:
+            o.gender = d['gender']
         if 'mobile' in d:
             o.mobile = d['mobile']
         if 'name' in d:

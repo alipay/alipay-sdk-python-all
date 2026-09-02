@@ -12,6 +12,7 @@ class CertificateSkuInfo(object):
         self._item_id = None
         self._item_type = None
         self._out_item_id = None
+        self._out_product_id = None
         self._out_sku_id = None
         self._sku_id = None
         self._title = None
@@ -44,6 +45,13 @@ class CertificateSkuInfo(object):
     @out_item_id.setter
     def out_item_id(self, value):
         self._out_item_id = value
+    @property
+    def out_product_id(self):
+        return self._out_product_id
+
+    @out_product_id.setter
+    def out_product_id(self, value):
+        self._out_product_id = value
     @property
     def out_sku_id(self):
         return self._out_sku_id
@@ -89,6 +97,11 @@ class CertificateSkuInfo(object):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
             else:
                 params['out_item_id'] = self.out_item_id
+        if self.out_product_id:
+            if hasattr(self.out_product_id, 'to_alipay_dict'):
+                params['out_product_id'] = self.out_product_id.to_alipay_dict()
+            else:
+                params['out_product_id'] = self.out_product_id
         if self.out_sku_id:
             if hasattr(self.out_sku_id, 'to_alipay_dict'):
                 params['out_sku_id'] = self.out_sku_id.to_alipay_dict()
@@ -119,6 +132,8 @@ class CertificateSkuInfo(object):
             o.item_type = d['item_type']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
+        if 'out_product_id' in d:
+            o.out_product_id = d['out_product_id']
         if 'out_sku_id' in d:
             o.out_sku_id = d['out_sku_id']
         if 'sku_id' in d:

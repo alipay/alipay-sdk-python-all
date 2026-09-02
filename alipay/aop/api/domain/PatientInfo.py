@@ -20,7 +20,9 @@ class PatientInfo(object):
         self._patient_birthday = None
         self._patient_gender = None
         self._patient_id = None
+        self._patient_id_no = None
         self._patient_name = None
+        self._patient_phone_num = None
         self._pregnancy_status = None
         self._preparation_status = None
         self._weight = None
@@ -110,12 +112,26 @@ class PatientInfo(object):
     def patient_id(self, value):
         self._patient_id = value
     @property
+    def patient_id_no(self):
+        return self._patient_id_no
+
+    @patient_id_no.setter
+    def patient_id_no(self, value):
+        self._patient_id_no = value
+    @property
     def patient_name(self):
         return self._patient_name
 
     @patient_name.setter
     def patient_name(self, value):
         self._patient_name = value
+    @property
+    def patient_phone_num(self):
+        return self._patient_phone_num
+
+    @patient_phone_num.setter
+    def patient_phone_num(self, value):
+        self._patient_phone_num = value
     @property
     def pregnancy_status(self):
         return self._pregnancy_status
@@ -201,11 +217,21 @@ class PatientInfo(object):
                 params['patient_id'] = self.patient_id.to_alipay_dict()
             else:
                 params['patient_id'] = self.patient_id
+        if self.patient_id_no:
+            if hasattr(self.patient_id_no, 'to_alipay_dict'):
+                params['patient_id_no'] = self.patient_id_no.to_alipay_dict()
+            else:
+                params['patient_id_no'] = self.patient_id_no
         if self.patient_name:
             if hasattr(self.patient_name, 'to_alipay_dict'):
                 params['patient_name'] = self.patient_name.to_alipay_dict()
             else:
                 params['patient_name'] = self.patient_name
+        if self.patient_phone_num:
+            if hasattr(self.patient_phone_num, 'to_alipay_dict'):
+                params['patient_phone_num'] = self.patient_phone_num.to_alipay_dict()
+            else:
+                params['patient_phone_num'] = self.patient_phone_num
         if self.pregnancy_status:
             if hasattr(self.pregnancy_status, 'to_alipay_dict'):
                 params['pregnancy_status'] = self.pregnancy_status.to_alipay_dict()
@@ -252,8 +278,12 @@ class PatientInfo(object):
             o.patient_gender = d['patient_gender']
         if 'patient_id' in d:
             o.patient_id = d['patient_id']
+        if 'patient_id_no' in d:
+            o.patient_id_no = d['patient_id_no']
         if 'patient_name' in d:
             o.patient_name = d['patient_name']
+        if 'patient_phone_num' in d:
+            o.patient_phone_num = d['patient_phone_num']
         if 'pregnancy_status' in d:
             o.pregnancy_status = d['pregnancy_status']
         if 'preparation_status' in d:

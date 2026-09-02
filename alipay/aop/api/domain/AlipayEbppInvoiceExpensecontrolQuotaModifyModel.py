@@ -11,6 +11,7 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
         self._account_id = None
         self._action = None
         self._agreement_no = None
+        self._allow_negative = None
         self._amount = None
         self._enterprise_id = None
         self._outer_source_id = None
@@ -39,6 +40,13 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def allow_negative(self):
+        return self._allow_negative
+
+    @allow_negative.setter
+    def allow_negative(self, value):
+        self._allow_negative = value
     @property
     def amount(self):
         return self._amount
@@ -100,6 +108,11 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.allow_negative:
+            if hasattr(self.allow_negative, 'to_alipay_dict'):
+                params['allow_negative'] = self.allow_negative.to_alipay_dict()
+            else:
+                params['allow_negative'] = self.allow_negative
         if self.amount:
             if hasattr(self.amount, 'to_alipay_dict'):
                 params['amount'] = self.amount.to_alipay_dict()
@@ -143,6 +156,8 @@ class AlipayEbppInvoiceExpensecontrolQuotaModifyModel(object):
             o.action = d['action']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'allow_negative' in d:
+            o.allow_negative = d['allow_negative']
         if 'amount' in d:
             o.amount = d['amount']
         if 'enterprise_id' in d:

@@ -14,6 +14,7 @@ class CreativePageListRes(object):
         self._audit_refuse_reason = None
         self._creative_biz_status = None
         self._creative_type = None
+        self._delivery_mode = None
         self._gmt_modified = None
         self._group_id = None
         self._group_name = None
@@ -64,6 +65,13 @@ class CreativePageListRes(object):
     @creative_type.setter
     def creative_type(self, value):
         self._creative_type = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -194,6 +202,11 @@ class CreativePageListRes(object):
                 params['creative_type'] = self.creative_type.to_alipay_dict()
             else:
                 params['creative_type'] = self.creative_type
+        if self.delivery_mode:
+            if hasattr(self.delivery_mode, 'to_alipay_dict'):
+                params['delivery_mode'] = self.delivery_mode.to_alipay_dict()
+            else:
+                params['delivery_mode'] = self.delivery_mode
         if self.gmt_modified:
             if hasattr(self.gmt_modified, 'to_alipay_dict'):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
@@ -281,6 +294,8 @@ class CreativePageListRes(object):
             o.creative_biz_status = d['creative_biz_status']
         if 'creative_type' in d:
             o.creative_type = d['creative_type']
+        if 'delivery_mode' in d:
+            o.delivery_mode = d['delivery_mode']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
         if 'group_id' in d:

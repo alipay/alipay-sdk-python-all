@@ -11,6 +11,7 @@ class AlipayCommerceCommissionRuleCreateModel(object):
         self._ant_shop_id = None
         self._charged_account_login_id = None
         self._charged_account_name = None
+        self._commission_amount_type = None
         self._commission_ratio = None
         self._end_date = None
         self._start_date = None
@@ -36,6 +37,13 @@ class AlipayCommerceCommissionRuleCreateModel(object):
     @charged_account_name.setter
     def charged_account_name(self, value):
         self._charged_account_name = value
+    @property
+    def commission_amount_type(self):
+        return self._commission_amount_type
+
+    @commission_amount_type.setter
+    def commission_amount_type(self, value):
+        self._commission_amount_type = value
     @property
     def commission_ratio(self):
         return self._commission_ratio
@@ -76,6 +84,11 @@ class AlipayCommerceCommissionRuleCreateModel(object):
                 params['charged_account_name'] = self.charged_account_name.to_alipay_dict()
             else:
                 params['charged_account_name'] = self.charged_account_name
+        if self.commission_amount_type:
+            if hasattr(self.commission_amount_type, 'to_alipay_dict'):
+                params['commission_amount_type'] = self.commission_amount_type.to_alipay_dict()
+            else:
+                params['commission_amount_type'] = self.commission_amount_type
         if self.commission_ratio:
             if hasattr(self.commission_ratio, 'to_alipay_dict'):
                 params['commission_ratio'] = self.commission_ratio.to_alipay_dict()
@@ -104,6 +117,8 @@ class AlipayCommerceCommissionRuleCreateModel(object):
             o.charged_account_login_id = d['charged_account_login_id']
         if 'charged_account_name' in d:
             o.charged_account_name = d['charged_account_name']
+        if 'commission_amount_type' in d:
+            o.commission_amount_type = d['commission_amount_type']
         if 'commission_ratio' in d:
             o.commission_ratio = d['commission_ratio']
         if 'end_date' in d:

@@ -11,6 +11,7 @@ class ZhimaCustomerJobworthAuthenticationQueryResponse(AlipayResponse):
         super(ZhimaCustomerJobworthAuthenticationQueryResponse, self).__init__()
         self._identity_result = None
         self._identity_result_skip_url = None
+        self._merchant_identity_id = None
         self._open_id = None
         self._token_status = None
         self._user_id = None
@@ -29,6 +30,13 @@ class ZhimaCustomerJobworthAuthenticationQueryResponse(AlipayResponse):
     @identity_result_skip_url.setter
     def identity_result_skip_url(self, value):
         self._identity_result_skip_url = value
+    @property
+    def merchant_identity_id(self):
+        return self._merchant_identity_id
+
+    @merchant_identity_id.setter
+    def merchant_identity_id(self, value):
+        self._merchant_identity_id = value
     @property
     def open_id(self):
         return self._open_id
@@ -57,6 +65,8 @@ class ZhimaCustomerJobworthAuthenticationQueryResponse(AlipayResponse):
             self.identity_result = response['identity_result']
         if 'identity_result_skip_url' in response:
             self.identity_result_skip_url = response['identity_result_skip_url']
+        if 'merchant_identity_id' in response:
+            self.merchant_identity_id = response['merchant_identity_id']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'token_status' in response:

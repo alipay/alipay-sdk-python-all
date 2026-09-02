@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.FulfillmentBizInfo import FulfillmentBizInfo
+from alipay.aop.api.domain.OrderBizInfo import OrderBizInfo
 
 
 class FulfillmentInfoVO(object):
@@ -12,6 +13,8 @@ class FulfillmentInfoVO(object):
         self._fulfillment_biz_info = None
         self._fulfillment_id = None
         self._open_id = None
+        self._order_biz_info = None
+        self._service_package_order_no = None
         self._trade_order_id = None
         self._type = None
         self._user_id = None
@@ -40,6 +43,23 @@ class FulfillmentInfoVO(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def order_biz_info(self):
+        return self._order_biz_info
+
+    @order_biz_info.setter
+    def order_biz_info(self, value):
+        if isinstance(value, OrderBizInfo):
+            self._order_biz_info = value
+        else:
+            self._order_biz_info = OrderBizInfo.from_alipay_dict(value)
+    @property
+    def service_package_order_no(self):
+        return self._service_package_order_no
+
+    @service_package_order_no.setter
+    def service_package_order_no(self, value):
+        self._service_package_order_no = value
     @property
     def trade_order_id(self):
         return self._trade_order_id
@@ -80,6 +100,16 @@ class FulfillmentInfoVO(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.order_biz_info:
+            if hasattr(self.order_biz_info, 'to_alipay_dict'):
+                params['order_biz_info'] = self.order_biz_info.to_alipay_dict()
+            else:
+                params['order_biz_info'] = self.order_biz_info
+        if self.service_package_order_no:
+            if hasattr(self.service_package_order_no, 'to_alipay_dict'):
+                params['service_package_order_no'] = self.service_package_order_no.to_alipay_dict()
+            else:
+                params['service_package_order_no'] = self.service_package_order_no
         if self.trade_order_id:
             if hasattr(self.trade_order_id, 'to_alipay_dict'):
                 params['trade_order_id'] = self.trade_order_id.to_alipay_dict()
@@ -108,6 +138,10 @@ class FulfillmentInfoVO(object):
             o.fulfillment_id = d['fulfillment_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'order_biz_info' in d:
+            o.order_biz_info = d['order_biz_info']
+        if 'service_package_order_no' in d:
+            o.service_package_order_no = d['service_package_order_no']
         if 'trade_order_id' in d:
             o.trade_order_id = d['trade_order_id']
         if 'type' in d:

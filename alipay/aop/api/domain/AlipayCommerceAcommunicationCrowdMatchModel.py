@@ -9,6 +9,8 @@ class AlipayCommerceAcommunicationCrowdMatchModel(object):
 
     def __init__(self):
         self._crowd_id = None
+        self._mobile = None
+        self._open_id = None
         self._user_id = None
 
     @property
@@ -21,6 +23,20 @@ class AlipayCommerceAcommunicationCrowdMatchModel(object):
             self._crowd_id = list()
             for i in value:
                 self._crowd_id.append(i)
+    @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
+    @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -42,6 +58,16 @@ class AlipayCommerceAcommunicationCrowdMatchModel(object):
                 params['crowd_id'] = self.crowd_id.to_alipay_dict()
             else:
                 params['crowd_id'] = self.crowd_id
+        if self.mobile:
+            if hasattr(self.mobile, 'to_alipay_dict'):
+                params['mobile'] = self.mobile.to_alipay_dict()
+            else:
+                params['mobile'] = self.mobile
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -56,6 +82,10 @@ class AlipayCommerceAcommunicationCrowdMatchModel(object):
         o = AlipayCommerceAcommunicationCrowdMatchModel()
         if 'crowd_id' in d:
             o.crowd_id = d['crowd_id']
+        if 'mobile' in d:
+            o.mobile = d['mobile']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

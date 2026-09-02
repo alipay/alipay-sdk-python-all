@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.MessageConfig import MessageConfig
 
 
 class AlipayCommerceMedicalReportSmsSendModel(object):
@@ -12,7 +13,9 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
         self._cert_type = None
         self._department = None
         self._hospital_name = None
+        self._message_config = None
         self._name = None
+        self._out_order_no = None
         self._phone_number = None
         self._report_count = None
         self._report_ids = None
@@ -51,12 +54,29 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
     def hospital_name(self, value):
         self._hospital_name = value
     @property
+    def message_config(self):
+        return self._message_config
+
+    @message_config.setter
+    def message_config(self, value):
+        if isinstance(value, MessageConfig):
+            self._message_config = value
+        else:
+            self._message_config = MessageConfig.from_alipay_dict(value)
+    @property
     def name(self):
         return self._name
 
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def out_order_no(self):
+        return self._out_order_no
+
+    @out_order_no.setter
+    def out_order_no(self, value):
+        self._out_order_no = value
     @property
     def phone_number(self):
         return self._phone_number
@@ -137,11 +157,21 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
             else:
                 params['hospital_name'] = self.hospital_name
+        if self.message_config:
+            if hasattr(self.message_config, 'to_alipay_dict'):
+                params['message_config'] = self.message_config.to_alipay_dict()
+            else:
+                params['message_config'] = self.message_config
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.out_order_no:
+            if hasattr(self.out_order_no, 'to_alipay_dict'):
+                params['out_order_no'] = self.out_order_no.to_alipay_dict()
+            else:
+                params['out_order_no'] = self.out_order_no
         if self.phone_number:
             if hasattr(self.phone_number, 'to_alipay_dict'):
                 params['phone_number'] = self.phone_number.to_alipay_dict()
@@ -197,8 +227,12 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
             o.department = d['department']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
+        if 'message_config' in d:
+            o.message_config = d['message_config']
         if 'name' in d:
             o.name = d['name']
+        if 'out_order_no' in d:
+            o.out_order_no = d['out_order_no']
         if 'phone_number' in d:
             o.phone_number = d['phone_number']
         if 'report_count' in d:

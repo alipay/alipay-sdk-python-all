@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcChargeBillQueryModel(object):
 
     def __init__(self):
+        self._ant_shop_id = None
         self._bill_no = None
         self._enterprise_id = None
         self._pay_no = None
 
+    @property
+    def ant_shop_id(self):
+        return self._ant_shop_id
+
+    @ant_shop_id.setter
+    def ant_shop_id(self, value):
+        self._ant_shop_id = value
     @property
     def bill_no(self):
         return self._bill_no
@@ -37,6 +45,11 @@ class AlipayCommerceEcChargeBillQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ant_shop_id:
+            if hasattr(self.ant_shop_id, 'to_alipay_dict'):
+                params['ant_shop_id'] = self.ant_shop_id.to_alipay_dict()
+            else:
+                params['ant_shop_id'] = self.ant_shop_id
         if self.bill_no:
             if hasattr(self.bill_no, 'to_alipay_dict'):
                 params['bill_no'] = self.bill_no.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayCommerceEcChargeBillQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceEcChargeBillQueryModel()
+        if 'ant_shop_id' in d:
+            o.ant_shop_id = d['ant_shop_id']
         if 'bill_no' in d:
             o.bill_no = d['bill_no']
         if 'enterprise_id' in d:

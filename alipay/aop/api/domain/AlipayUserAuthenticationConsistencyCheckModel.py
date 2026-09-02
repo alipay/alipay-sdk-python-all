@@ -14,7 +14,10 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
         self._check_by_license = None
         self._encrypt_code = None
         self._ent_name = None
+        self._new_reg_merchant = None
         self._open_id = None
+        self._operator_id_no = None
+        self._operator_name = None
         self._user_id = None
         self._user_type = None
 
@@ -61,12 +64,33 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
     def ent_name(self, value):
         self._ent_name = value
     @property
+    def new_reg_merchant(self):
+        return self._new_reg_merchant
+
+    @new_reg_merchant.setter
+    def new_reg_merchant(self, value):
+        self._new_reg_merchant = value
+    @property
     def open_id(self):
         return self._open_id
 
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def operator_id_no(self):
+        return self._operator_id_no
+
+    @operator_id_no.setter
+    def operator_id_no(self, value):
+        self._operator_id_no = value
+    @property
+    def operator_name(self):
+        return self._operator_name
+
+    @operator_name.setter
+    def operator_name(self, value):
+        self._operator_name = value
     @property
     def user_id(self):
         return self._user_id
@@ -115,11 +139,26 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
                 params['ent_name'] = self.ent_name.to_alipay_dict()
             else:
                 params['ent_name'] = self.ent_name
+        if self.new_reg_merchant:
+            if hasattr(self.new_reg_merchant, 'to_alipay_dict'):
+                params['new_reg_merchant'] = self.new_reg_merchant.to_alipay_dict()
+            else:
+                params['new_reg_merchant'] = self.new_reg_merchant
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.operator_id_no:
+            if hasattr(self.operator_id_no, 'to_alipay_dict'):
+                params['operator_id_no'] = self.operator_id_no.to_alipay_dict()
+            else:
+                params['operator_id_no'] = self.operator_id_no
+        if self.operator_name:
+            if hasattr(self.operator_name, 'to_alipay_dict'):
+                params['operator_name'] = self.operator_name.to_alipay_dict()
+            else:
+                params['operator_name'] = self.operator_name
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -149,8 +188,14 @@ class AlipayUserAuthenticationConsistencyCheckModel(object):
             o.encrypt_code = d['encrypt_code']
         if 'ent_name' in d:
             o.ent_name = d['ent_name']
+        if 'new_reg_merchant' in d:
+            o.new_reg_merchant = d['new_reg_merchant']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'operator_id_no' in d:
+            o.operator_id_no = d['operator_id_no']
+        if 'operator_name' in d:
+            o.operator_name = d['operator_name']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_type' in d:

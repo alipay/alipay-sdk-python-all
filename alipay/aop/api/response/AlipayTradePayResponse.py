@@ -33,6 +33,7 @@ class AlipayTradePayResponse(AlipayResponse):
         self._charge_flags = None
         self._charge_info_list = None
         self._credit_biz_order_id = None
+        self._credit_biz_order_status = None
         self._credit_pay_mode = None
         self._discount_amount = None
         self._discount_goods_detail = None
@@ -195,6 +196,13 @@ class AlipayTradePayResponse(AlipayResponse):
     @credit_biz_order_id.setter
     def credit_biz_order_id(self, value):
         self._credit_biz_order_id = value
+    @property
+    def credit_biz_order_status(self):
+        return self._credit_biz_order_status
+
+    @credit_biz_order_status.setter
+    def credit_biz_order_status(self, value):
+        self._credit_biz_order_status = value
     @property
     def credit_pay_mode(self):
         return self._credit_pay_mode
@@ -455,6 +463,8 @@ class AlipayTradePayResponse(AlipayResponse):
             self.charge_info_list = response['charge_info_list']
         if 'credit_biz_order_id' in response:
             self.credit_biz_order_id = response['credit_biz_order_id']
+        if 'credit_biz_order_status' in response:
+            self.credit_biz_order_status = response['credit_biz_order_status']
         if 'credit_pay_mode' in response:
             self.credit_pay_mode = response['credit_pay_mode']
         if 'discount_amount' in response:

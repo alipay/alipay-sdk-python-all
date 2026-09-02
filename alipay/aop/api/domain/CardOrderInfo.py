@@ -54,6 +54,7 @@ class CardOrderInfo(object):
         self._sell_rel_shop_id = None
         self._shop_id = None
         self._signed_order_agreement = None
+        self._sub_account_id = None
         self._total_count = None
         self._trade_no = None
         self._usable_cash = None
@@ -63,6 +64,7 @@ class CardOrderInfo(object):
         self._user_id = None
         self._user_name = None
         self._user_phone = None
+        self._zft_smid_list = None
 
     @property
     def aftersales_id(self):
@@ -366,6 +368,13 @@ class CardOrderInfo(object):
     def signed_order_agreement(self, value):
         self._signed_order_agreement = value
     @property
+    def sub_account_id(self):
+        return self._sub_account_id
+
+    @sub_account_id.setter
+    def sub_account_id(self, value):
+        self._sub_account_id = value
+    @property
     def total_count(self):
         return self._total_count
 
@@ -428,6 +437,16 @@ class CardOrderInfo(object):
     @user_phone.setter
     def user_phone(self, value):
         self._user_phone = value
+    @property
+    def zft_smid_list(self):
+        return self._zft_smid_list
+
+    @zft_smid_list.setter
+    def zft_smid_list(self, value):
+        if isinstance(value, list):
+            self._zft_smid_list = list()
+            for i in value:
+                self._zft_smid_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -637,6 +656,11 @@ class CardOrderInfo(object):
                 params['signed_order_agreement'] = self.signed_order_agreement.to_alipay_dict()
             else:
                 params['signed_order_agreement'] = self.signed_order_agreement
+        if self.sub_account_id:
+            if hasattr(self.sub_account_id, 'to_alipay_dict'):
+                params['sub_account_id'] = self.sub_account_id.to_alipay_dict()
+            else:
+                params['sub_account_id'] = self.sub_account_id
         if self.total_count:
             if hasattr(self.total_count, 'to_alipay_dict'):
                 params['total_count'] = self.total_count.to_alipay_dict()
@@ -682,6 +706,16 @@ class CardOrderInfo(object):
                 params['user_phone'] = self.user_phone.to_alipay_dict()
             else:
                 params['user_phone'] = self.user_phone
+        if self.zft_smid_list:
+            if isinstance(self.zft_smid_list, list):
+                for i in range(0, len(self.zft_smid_list)):
+                    element = self.zft_smid_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.zft_smid_list[i] = element.to_alipay_dict()
+            if hasattr(self.zft_smid_list, 'to_alipay_dict'):
+                params['zft_smid_list'] = self.zft_smid_list.to_alipay_dict()
+            else:
+                params['zft_smid_list'] = self.zft_smid_list
         return params
 
     @staticmethod
@@ -769,6 +803,8 @@ class CardOrderInfo(object):
             o.shop_id = d['shop_id']
         if 'signed_order_agreement' in d:
             o.signed_order_agreement = d['signed_order_agreement']
+        if 'sub_account_id' in d:
+            o.sub_account_id = d['sub_account_id']
         if 'total_count' in d:
             o.total_count = d['total_count']
         if 'trade_no' in d:
@@ -787,6 +823,8 @@ class CardOrderInfo(object):
             o.user_name = d['user_name']
         if 'user_phone' in d:
             o.user_phone = d['user_phone']
+        if 'zft_smid_list' in d:
+            o.zft_smid_list = d['zft_smid_list']
         return o
 
 

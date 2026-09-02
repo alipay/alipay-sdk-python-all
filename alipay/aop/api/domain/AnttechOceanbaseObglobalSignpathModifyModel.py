@@ -24,6 +24,7 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
         self._ob_sign_other_party_subject_name = None
         self._our_sign_subject = None
         self._sign_path = None
+        self._sign_path_approval_pass_time = None
 
     @property
     def alicloud_settlement_mode(self):
@@ -137,6 +138,13 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
     @sign_path.setter
     def sign_path(self, value):
         self._sign_path = value
+    @property
+    def sign_path_approval_pass_time(self):
+        return self._sign_path_approval_pass_time
+
+    @sign_path_approval_pass_time.setter
+    def sign_path_approval_pass_time(self, value):
+        self._sign_path_approval_pass_time = value
 
 
     def to_alipay_dict(self):
@@ -221,6 +229,11 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
                 params['sign_path'] = self.sign_path.to_alipay_dict()
             else:
                 params['sign_path'] = self.sign_path
+        if self.sign_path_approval_pass_time:
+            if hasattr(self.sign_path_approval_pass_time, 'to_alipay_dict'):
+                params['sign_path_approval_pass_time'] = self.sign_path_approval_pass_time.to_alipay_dict()
+            else:
+                params['sign_path_approval_pass_time'] = self.sign_path_approval_pass_time
         return params
 
     @staticmethod
@@ -260,6 +273,8 @@ class AnttechOceanbaseObglobalSignpathModifyModel(object):
             o.our_sign_subject = d['our_sign_subject']
         if 'sign_path' in d:
             o.sign_path = d['sign_path']
+        if 'sign_path_approval_pass_time' in d:
+            o.sign_path_approval_pass_time = d['sign_path_approval_pass_time']
         return o
 
 

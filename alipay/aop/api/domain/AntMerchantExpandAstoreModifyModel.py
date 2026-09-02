@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ProofInfo import ProofInfo
 from alipay.aop.api.domain.SettleInfoModel import SettleInfoModel
 
 
@@ -11,6 +12,7 @@ class AntMerchantExpandAstoreModifyModel(object):
     def __init__(self):
         self._a_store_id = None
         self._mobile = None
+        self._proof_info = None
         self._settle_infos = None
 
     @property
@@ -27,6 +29,16 @@ class AntMerchantExpandAstoreModifyModel(object):
     @mobile.setter
     def mobile(self, value):
         self._mobile = value
+    @property
+    def proof_info(self):
+        return self._proof_info
+
+    @proof_info.setter
+    def proof_info(self, value):
+        if isinstance(value, ProofInfo):
+            self._proof_info = value
+        else:
+            self._proof_info = ProofInfo.from_alipay_dict(value)
     @property
     def settle_infos(self):
         return self._settle_infos
@@ -51,6 +63,11 @@ class AntMerchantExpandAstoreModifyModel(object):
                 params['mobile'] = self.mobile.to_alipay_dict()
             else:
                 params['mobile'] = self.mobile
+        if self.proof_info:
+            if hasattr(self.proof_info, 'to_alipay_dict'):
+                params['proof_info'] = self.proof_info.to_alipay_dict()
+            else:
+                params['proof_info'] = self.proof_info
         if self.settle_infos:
             if hasattr(self.settle_infos, 'to_alipay_dict'):
                 params['settle_infos'] = self.settle_infos.to_alipay_dict()
@@ -67,6 +84,8 @@ class AntMerchantExpandAstoreModifyModel(object):
             o.a_store_id = d['a_store_id']
         if 'mobile' in d:
             o.mobile = d['mobile']
+        if 'proof_info' in d:
+            o.proof_info = d['proof_info']
         if 'settle_infos' in d:
             o.settle_infos = d['settle_infos']
         return o

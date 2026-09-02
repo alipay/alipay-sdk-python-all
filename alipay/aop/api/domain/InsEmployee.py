@@ -13,6 +13,7 @@ class InsEmployee(object):
         self._cert_type = None
         self._job = None
         self._job_level = None
+        self._out_employee_biz_no = None
         self._out_employee_id = None
         self._phone = None
 
@@ -51,6 +52,13 @@ class InsEmployee(object):
     @job_level.setter
     def job_level(self, value):
         self._job_level = value
+    @property
+    def out_employee_biz_no(self):
+        return self._out_employee_biz_no
+
+    @out_employee_biz_no.setter
+    def out_employee_biz_no(self, value):
+        self._out_employee_biz_no = value
     @property
     def out_employee_id(self):
         return self._out_employee_id
@@ -94,6 +102,11 @@ class InsEmployee(object):
                 params['job_level'] = self.job_level.to_alipay_dict()
             else:
                 params['job_level'] = self.job_level
+        if self.out_employee_biz_no:
+            if hasattr(self.out_employee_biz_no, 'to_alipay_dict'):
+                params['out_employee_biz_no'] = self.out_employee_biz_no.to_alipay_dict()
+            else:
+                params['out_employee_biz_no'] = self.out_employee_biz_no
         if self.out_employee_id:
             if hasattr(self.out_employee_id, 'to_alipay_dict'):
                 params['out_employee_id'] = self.out_employee_id.to_alipay_dict()
@@ -121,6 +134,8 @@ class InsEmployee(object):
             o.job = d['job']
         if 'job_level' in d:
             o.job_level = d['job_level']
+        if 'out_employee_biz_no' in d:
+            o.out_employee_biz_no = d['out_employee_biz_no']
         if 'out_employee_id' in d:
             o.out_employee_id = d['out_employee_id']
         if 'phone' in d:

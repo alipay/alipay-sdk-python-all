@@ -26,6 +26,7 @@ class StoreInfoVO(object):
         self._mi_state = None
         self._status = None
         self._store_code = None
+        self._store_id = None
         self._store_logo = None
         self._store_name = None
 
@@ -155,6 +156,13 @@ class StoreInfoVO(object):
     def store_code(self, value):
         self._store_code = value
     @property
+    def store_id(self):
+        return self._store_id
+
+    @store_id.setter
+    def store_id(self, value):
+        self._store_id = value
+    @property
     def store_logo(self):
         return self._store_logo
 
@@ -262,6 +270,11 @@ class StoreInfoVO(object):
                 params['store_code'] = self.store_code.to_alipay_dict()
             else:
                 params['store_code'] = self.store_code
+        if self.store_id:
+            if hasattr(self.store_id, 'to_alipay_dict'):
+                params['store_id'] = self.store_id.to_alipay_dict()
+            else:
+                params['store_id'] = self.store_id
         if self.store_logo:
             if hasattr(self.store_logo, 'to_alipay_dict'):
                 params['store_logo'] = self.store_logo.to_alipay_dict()
@@ -313,6 +326,8 @@ class StoreInfoVO(object):
             o.status = d['status']
         if 'store_code' in d:
             o.store_code = d['store_code']
+        if 'store_id' in d:
+            o.store_id = d['store_id']
         if 'store_logo' in d:
             o.store_logo = d['store_logo']
         if 'store_name' in d:

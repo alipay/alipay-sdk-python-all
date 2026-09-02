@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RentGoodsDetailInfoVO import RentGoodsDetailInfoVO
 from alipay.aop.api.domain.SimpleOrderInfo import SimpleOrderInfo
 from alipay.aop.api.domain.RentPlan import RentPlan
 from alipay.aop.api.domain.RentDetail import RentDetail
@@ -22,9 +23,11 @@ class RentInfo(object):
         self._end_time = None
         self._invest_app_id = None
         self._invest_pid = None
+        self._item_infos = None
         self._merchant_app_id = None
         self._merchant_uscc = None
         self._order_info = None
+        self._order_zst_type = None
         self._out_order_id = None
         self._plan_list = None
         self._price_info = None
@@ -107,6 +110,19 @@ class RentInfo(object):
     def invest_pid(self, value):
         self._invest_pid = value
     @property
+    def item_infos(self):
+        return self._item_infos
+
+    @item_infos.setter
+    def item_infos(self, value):
+        if isinstance(value, list):
+            self._item_infos = list()
+            for i in value:
+                if isinstance(i, RentGoodsDetailInfoVO):
+                    self._item_infos.append(i)
+                else:
+                    self._item_infos.append(RentGoodsDetailInfoVO.from_alipay_dict(i))
+    @property
     def merchant_app_id(self):
         return self._merchant_app_id
 
@@ -130,6 +146,13 @@ class RentInfo(object):
             self._order_info = value
         else:
             self._order_info = SimpleOrderInfo.from_alipay_dict(value)
+    @property
+    def order_zst_type(self):
+        return self._order_zst_type
+
+    @order_zst_type.setter
+    def order_zst_type(self, value):
+        self._order_zst_type = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -272,6 +295,16 @@ class RentInfo(object):
                 params['invest_pid'] = self.invest_pid.to_alipay_dict()
             else:
                 params['invest_pid'] = self.invest_pid
+        if self.item_infos:
+            if isinstance(self.item_infos, list):
+                for i in range(0, len(self.item_infos)):
+                    element = self.item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.item_infos, 'to_alipay_dict'):
+                params['item_infos'] = self.item_infos.to_alipay_dict()
+            else:
+                params['item_infos'] = self.item_infos
         if self.merchant_app_id:
             if hasattr(self.merchant_app_id, 'to_alipay_dict'):
                 params['merchant_app_id'] = self.merchant_app_id.to_alipay_dict()
@@ -287,6 +320,11 @@ class RentInfo(object):
                 params['order_info'] = self.order_info.to_alipay_dict()
             else:
                 params['order_info'] = self.order_info
+        if self.order_zst_type:
+            if hasattr(self.order_zst_type, 'to_alipay_dict'):
+                params['order_zst_type'] = self.order_zst_type.to_alipay_dict()
+            else:
+                params['order_zst_type'] = self.order_zst_type
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -379,12 +417,16 @@ class RentInfo(object):
             o.invest_app_id = d['invest_app_id']
         if 'invest_pid' in d:
             o.invest_pid = d['invest_pid']
+        if 'item_infos' in d:
+            o.item_infos = d['item_infos']
         if 'merchant_app_id' in d:
             o.merchant_app_id = d['merchant_app_id']
         if 'merchant_uscc' in d:
             o.merchant_uscc = d['merchant_uscc']
         if 'order_info' in d:
             o.order_info = d['order_info']
+        if 'order_zst_type' in d:
+            o.order_zst_type = d['order_zst_type']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plan_list' in d:

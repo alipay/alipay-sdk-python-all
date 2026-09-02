@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
 
     def __init__(self):
+        self._content_type = None
         self._domain = None
         self._include_sites = None
         self._page_size = None
@@ -15,6 +16,13 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
         self._scene = None
         self._search_mode = None
 
+    @property
+    def content_type(self):
+        return self._content_type
+
+    @content_type.setter
+    def content_type(self, value):
+        self._content_type = value
     @property
     def domain(self):
         return self._domain
@@ -61,6 +69,11 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.content_type:
+            if hasattr(self.content_type, 'to_alipay_dict'):
+                params['content_type'] = self.content_type.to_alipay_dict()
+            else:
+                params['content_type'] = self.content_type
         if self.domain:
             if hasattr(self.domain, 'to_alipay_dict'):
                 params['domain'] = self.domain.to_alipay_dict()
@@ -98,6 +111,8 @@ class DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel(object):
         if not d:
             return None
         o = DatadigitalFincloudFinsaasInsuranceOpensearchQueryModel()
+        if 'content_type' in d:
+            o.content_type = d['content_type']
         if 'domain' in d:
             o.domain = d['domain']
         if 'include_sites' in d:

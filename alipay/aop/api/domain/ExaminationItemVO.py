@@ -11,10 +11,13 @@ class ExaminationItemVO(object):
     def __init__(self):
         self._amount_discount_amount = None
         self._amount_item = None
+        self._combine_item = None
         self._consumable_amount = None
         self._discount = None
         self._drug_amount = None
+        self._id = None
         self._item_code = None
+        self._parent_id = None
         self._price_sale = None
         self._quantity = None
         self._sku_id = None
@@ -33,6 +36,13 @@ class ExaminationItemVO(object):
     @amount_item.setter
     def amount_item(self, value):
         self._amount_item = value
+    @property
+    def combine_item(self):
+        return self._combine_item
+
+    @combine_item.setter
+    def combine_item(self, value):
+        self._combine_item = value
     @property
     def consumable_amount(self):
         return self._consumable_amount
@@ -58,12 +68,26 @@ class ExaminationItemVO(object):
     def drug_amount(self, value):
         self._drug_amount = value
     @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
+    @property
     def item_code(self):
         return self._item_code
 
     @item_code.setter
     def item_code(self, value):
         self._item_code = value
+    @property
+    def parent_id(self):
+        return self._parent_id
+
+    @parent_id.setter
+    def parent_id(self, value):
+        self._parent_id = value
     @property
     def price_sale(self):
         return self._price_sale
@@ -99,6 +123,11 @@ class ExaminationItemVO(object):
                 params['amount_item'] = self.amount_item.to_alipay_dict()
             else:
                 params['amount_item'] = self.amount_item
+        if self.combine_item:
+            if hasattr(self.combine_item, 'to_alipay_dict'):
+                params['combine_item'] = self.combine_item.to_alipay_dict()
+            else:
+                params['combine_item'] = self.combine_item
         if self.consumable_amount:
             if hasattr(self.consumable_amount, 'to_alipay_dict'):
                 params['consumable_amount'] = self.consumable_amount.to_alipay_dict()
@@ -114,11 +143,21 @@ class ExaminationItemVO(object):
                 params['drug_amount'] = self.drug_amount.to_alipay_dict()
             else:
                 params['drug_amount'] = self.drug_amount
+        if self.id:
+            if hasattr(self.id, 'to_alipay_dict'):
+                params['id'] = self.id.to_alipay_dict()
+            else:
+                params['id'] = self.id
         if self.item_code:
             if hasattr(self.item_code, 'to_alipay_dict'):
                 params['item_code'] = self.item_code.to_alipay_dict()
             else:
                 params['item_code'] = self.item_code
+        if self.parent_id:
+            if hasattr(self.parent_id, 'to_alipay_dict'):
+                params['parent_id'] = self.parent_id.to_alipay_dict()
+            else:
+                params['parent_id'] = self.parent_id
         if self.price_sale:
             if hasattr(self.price_sale, 'to_alipay_dict'):
                 params['price_sale'] = self.price_sale.to_alipay_dict()
@@ -145,14 +184,20 @@ class ExaminationItemVO(object):
             o.amount_discount_amount = d['amount_discount_amount']
         if 'amount_item' in d:
             o.amount_item = d['amount_item']
+        if 'combine_item' in d:
+            o.combine_item = d['combine_item']
         if 'consumable_amount' in d:
             o.consumable_amount = d['consumable_amount']
         if 'discount' in d:
             o.discount = d['discount']
         if 'drug_amount' in d:
             o.drug_amount = d['drug_amount']
+        if 'id' in d:
+            o.id = d['id']
         if 'item_code' in d:
             o.item_code = d['item_code']
+        if 'parent_id' in d:
+            o.parent_id = d['parent_id']
         if 'price_sale' in d:
             o.price_sale = d['price_sale']
         if 'quantity' in d:

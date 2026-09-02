@@ -18,6 +18,7 @@ class AlipayEcoMycarLeadsDataCreateModel(object):
         self._mobile_no = None
         self._open_id = None
         self._out_leads_id = None
+        self._remark = None
         self._user_id = None
         self._user_name = None
 
@@ -87,6 +88,13 @@ class AlipayEcoMycarLeadsDataCreateModel(object):
     def out_leads_id(self, value):
         self._out_leads_id = value
     @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -149,6 +157,11 @@ class AlipayEcoMycarLeadsDataCreateModel(object):
                 params['out_leads_id'] = self.out_leads_id.to_alipay_dict()
             else:
                 params['out_leads_id'] = self.out_leads_id
+        if self.remark:
+            if hasattr(self.remark, 'to_alipay_dict'):
+                params['remark'] = self.remark.to_alipay_dict()
+            else:
+                params['remark'] = self.remark
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -182,6 +195,8 @@ class AlipayEcoMycarLeadsDataCreateModel(object):
             o.open_id = d['open_id']
         if 'out_leads_id' in d:
             o.out_leads_id = d['out_leads_id']
+        if 'remark' in d:
+            o.remark = d['remark']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'user_name' in d:

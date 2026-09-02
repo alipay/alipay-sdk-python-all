@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.SpecifiedSortChannelParam import SpecifiedSortChannelParam
 
 
 class AlipayEbppPdeductSignQueryResponse(AlipayResponse):
@@ -14,6 +15,8 @@ class AlipayEbppPdeductSignQueryResponse(AlipayResponse):
         self._charge_inst = None
         self._out_agreement_id = None
         self._sign_date = None
+        self._sign_expire_date = None
+        self._specified_sort_channels = None
         self._user_id = None
 
     @property
@@ -52,6 +55,26 @@ class AlipayEbppPdeductSignQueryResponse(AlipayResponse):
     def sign_date(self, value):
         self._sign_date = value
     @property
+    def sign_expire_date(self):
+        return self._sign_expire_date
+
+    @sign_expire_date.setter
+    def sign_expire_date(self, value):
+        self._sign_expire_date = value
+    @property
+    def specified_sort_channels(self):
+        return self._specified_sort_channels
+
+    @specified_sort_channels.setter
+    def specified_sort_channels(self, value):
+        if isinstance(value, list):
+            self._specified_sort_channels = list()
+            for i in value:
+                if isinstance(i, SpecifiedSortChannelParam):
+                    self._specified_sort_channels.append(i)
+                else:
+                    self._specified_sort_channels.append(SpecifiedSortChannelParam.from_alipay_dict(i))
+    @property
     def user_id(self):
         return self._user_id
 
@@ -71,5 +94,9 @@ class AlipayEbppPdeductSignQueryResponse(AlipayResponse):
             self.out_agreement_id = response['out_agreement_id']
         if 'sign_date' in response:
             self.sign_date = response['sign_date']
+        if 'sign_expire_date' in response:
+            self.sign_expire_date = response['sign_expire_date']
+        if 'specified_sort_channels' in response:
+            self.specified_sort_channels = response['specified_sort_channels']
         if 'user_id' in response:
             self.user_id = response['user_id']

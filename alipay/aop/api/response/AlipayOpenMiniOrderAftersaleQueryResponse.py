@@ -6,6 +6,7 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AftersaleAddressInfoVO import AftersaleAddressInfoVO
 from alipay.aop.api.domain.AftersaleItemInfo import AftersaleItemInfo
 from alipay.aop.api.domain.OrderMediaInfo import OrderMediaInfo
+from alipay.aop.api.domain.CertificateRefundDetailVO import CertificateRefundDetailVO
 from alipay.aop.api.domain.AftersaleFundsDetailItem import AftersaleFundsDetailItem
 from alipay.aop.api.domain.LogisticsWaybill import LogisticsWaybill
 from alipay.aop.api.domain.AftersaleServiceTag import AftersaleServiceTag
@@ -23,6 +24,7 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
         self._aftersale_media_list = None
         self._aftersale_reason = None
         self._apply_refund_amount = None
+        self._certificate_refund_detail_list = None
         self._create_time = None
         self._discount_amount = None
         self._finally_refund_amount = None
@@ -107,6 +109,19 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
     @apply_refund_amount.setter
     def apply_refund_amount(self, value):
         self._apply_refund_amount = value
+    @property
+    def certificate_refund_detail_list(self):
+        return self._certificate_refund_detail_list
+
+    @certificate_refund_detail_list.setter
+    def certificate_refund_detail_list(self, value):
+        if isinstance(value, list):
+            self._certificate_refund_detail_list = list()
+            for i in value:
+                if isinstance(i, CertificateRefundDetailVO):
+                    self._certificate_refund_detail_list.append(i)
+                else:
+                    self._certificate_refund_detail_list.append(CertificateRefundDetailVO.from_alipay_dict(i))
     @property
     def create_time(self):
         return self._create_time
@@ -225,6 +240,8 @@ class AlipayOpenMiniOrderAftersaleQueryResponse(AlipayResponse):
             self.aftersale_reason = response['aftersale_reason']
         if 'apply_refund_amount' in response:
             self.apply_refund_amount = response['apply_refund_amount']
+        if 'certificate_refund_detail_list' in response:
+            self.certificate_refund_detail_list = response['certificate_refund_detail_list']
         if 'create_time' in response:
             self.create_time = response['create_time']
         if 'discount_amount' in response:

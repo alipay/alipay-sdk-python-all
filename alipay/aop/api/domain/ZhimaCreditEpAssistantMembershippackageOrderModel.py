@@ -11,6 +11,7 @@ class ZhimaCreditEpAssistantMembershippackageOrderModel(object):
         self._duration_quantity = None
         self._duration_unit = None
         self._exclude_license_list = None
+        self._has_activity = None
         self._license_num = None
         self._order_no = None
         self._out_biz_no = None
@@ -40,6 +41,13 @@ class ZhimaCreditEpAssistantMembershippackageOrderModel(object):
             self._exclude_license_list = list()
             for i in value:
                 self._exclude_license_list.append(i)
+    @property
+    def has_activity(self):
+        return self._has_activity
+
+    @has_activity.setter
+    def has_activity(self, value):
+        self._has_activity = value
     @property
     def license_num(self):
         return self._license_num
@@ -92,6 +100,11 @@ class ZhimaCreditEpAssistantMembershippackageOrderModel(object):
                 params['exclude_license_list'] = self.exclude_license_list.to_alipay_dict()
             else:
                 params['exclude_license_list'] = self.exclude_license_list
+        if self.has_activity:
+            if hasattr(self.has_activity, 'to_alipay_dict'):
+                params['has_activity'] = self.has_activity.to_alipay_dict()
+            else:
+                params['has_activity'] = self.has_activity
         if self.license_num:
             if hasattr(self.license_num, 'to_alipay_dict'):
                 params['license_num'] = self.license_num.to_alipay_dict()
@@ -125,6 +138,8 @@ class ZhimaCreditEpAssistantMembershippackageOrderModel(object):
             o.duration_unit = d['duration_unit']
         if 'exclude_license_list' in d:
             o.exclude_license_list = d['exclude_license_list']
+        if 'has_activity' in d:
+            o.has_activity = d['has_activity']
         if 'license_num' in d:
             o.license_num = d['license_num']
         if 'order_no' in d:

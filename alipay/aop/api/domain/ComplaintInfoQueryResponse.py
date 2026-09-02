@@ -17,7 +17,10 @@ class ComplaintInfoQueryResponse(object):
         self._gmt_overdue = None
         self._gmt_process = None
         self._gmt_risk_finish_time = None
+        self._gmt_upgrade = None
+        self._gmt_upgrade_risk_finish_time = None
         self._id = None
+        self._label_tag_list = None
         self._opposite_name = None
         self._opposite_pid = None
         self._process_code = None
@@ -28,6 +31,7 @@ class ComplaintInfoQueryResponse(object):
         self._status_description = None
         self._task_id = None
         self._trade_no = None
+        self._upgrade_content = None
 
     @property
     def complain_amount(self):
@@ -92,12 +96,36 @@ class ComplaintInfoQueryResponse(object):
     def gmt_risk_finish_time(self, value):
         self._gmt_risk_finish_time = value
     @property
+    def gmt_upgrade(self):
+        return self._gmt_upgrade
+
+    @gmt_upgrade.setter
+    def gmt_upgrade(self, value):
+        self._gmt_upgrade = value
+    @property
+    def gmt_upgrade_risk_finish_time(self):
+        return self._gmt_upgrade_risk_finish_time
+
+    @gmt_upgrade_risk_finish_time.setter
+    def gmt_upgrade_risk_finish_time(self, value):
+        self._gmt_upgrade_risk_finish_time = value
+    @property
     def id(self):
         return self._id
 
     @id.setter
     def id(self, value):
         self._id = value
+    @property
+    def label_tag_list(self):
+        return self._label_tag_list
+
+    @label_tag_list.setter
+    def label_tag_list(self, value):
+        if isinstance(value, list):
+            self._label_tag_list = list()
+            for i in value:
+                self._label_tag_list.append(i)
     @property
     def opposite_name(self):
         return self._opposite_name
@@ -171,6 +199,13 @@ class ComplaintInfoQueryResponse(object):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def upgrade_content(self):
+        return self._upgrade_content
+
+    @upgrade_content.setter
+    def upgrade_content(self, value):
+        self._upgrade_content = value
 
 
     def to_alipay_dict(self):
@@ -220,11 +255,31 @@ class ComplaintInfoQueryResponse(object):
                 params['gmt_risk_finish_time'] = self.gmt_risk_finish_time.to_alipay_dict()
             else:
                 params['gmt_risk_finish_time'] = self.gmt_risk_finish_time
+        if self.gmt_upgrade:
+            if hasattr(self.gmt_upgrade, 'to_alipay_dict'):
+                params['gmt_upgrade'] = self.gmt_upgrade.to_alipay_dict()
+            else:
+                params['gmt_upgrade'] = self.gmt_upgrade
+        if self.gmt_upgrade_risk_finish_time:
+            if hasattr(self.gmt_upgrade_risk_finish_time, 'to_alipay_dict'):
+                params['gmt_upgrade_risk_finish_time'] = self.gmt_upgrade_risk_finish_time.to_alipay_dict()
+            else:
+                params['gmt_upgrade_risk_finish_time'] = self.gmt_upgrade_risk_finish_time
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
             else:
                 params['id'] = self.id
+        if self.label_tag_list:
+            if isinstance(self.label_tag_list, list):
+                for i in range(0, len(self.label_tag_list)):
+                    element = self.label_tag_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.label_tag_list[i] = element.to_alipay_dict()
+            if hasattr(self.label_tag_list, 'to_alipay_dict'):
+                params['label_tag_list'] = self.label_tag_list.to_alipay_dict()
+            else:
+                params['label_tag_list'] = self.label_tag_list
         if self.opposite_name:
             if hasattr(self.opposite_name, 'to_alipay_dict'):
                 params['opposite_name'] = self.opposite_name.to_alipay_dict()
@@ -280,6 +335,11 @@ class ComplaintInfoQueryResponse(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.upgrade_content:
+            if hasattr(self.upgrade_content, 'to_alipay_dict'):
+                params['upgrade_content'] = self.upgrade_content.to_alipay_dict()
+            else:
+                params['upgrade_content'] = self.upgrade_content
         return params
 
     @staticmethod
@@ -303,8 +363,14 @@ class ComplaintInfoQueryResponse(object):
             o.gmt_process = d['gmt_process']
         if 'gmt_risk_finish_time' in d:
             o.gmt_risk_finish_time = d['gmt_risk_finish_time']
+        if 'gmt_upgrade' in d:
+            o.gmt_upgrade = d['gmt_upgrade']
+        if 'gmt_upgrade_risk_finish_time' in d:
+            o.gmt_upgrade_risk_finish_time = d['gmt_upgrade_risk_finish_time']
         if 'id' in d:
             o.id = d['id']
+        if 'label_tag_list' in d:
+            o.label_tag_list = d['label_tag_list']
         if 'opposite_name' in d:
             o.opposite_name = d['opposite_name']
         if 'opposite_pid' in d:
@@ -325,6 +391,8 @@ class ComplaintInfoQueryResponse(object):
             o.task_id = d['task_id']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'upgrade_content' in d:
+            o.upgrade_content = d['upgrade_content']
         return o
 
 

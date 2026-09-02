@@ -13,6 +13,7 @@ class RecyclinginvoiceOrderItem(object):
         self._item_name = None
         self._item_num = None
         self._item_total_amount = None
+        self._item_unit = None
         self._item_unit_amount = None
         self._order_item_id = None
         self._tax_code = None
@@ -52,6 +53,13 @@ class RecyclinginvoiceOrderItem(object):
     @item_total_amount.setter
     def item_total_amount(self, value):
         self._item_total_amount = value
+    @property
+    def item_unit(self):
+        return self._item_unit
+
+    @item_unit.setter
+    def item_unit(self, value):
+        self._item_unit = value
     @property
     def item_unit_amount(self):
         return self._item_unit_amount
@@ -102,6 +110,11 @@ class RecyclinginvoiceOrderItem(object):
                 params['item_total_amount'] = self.item_total_amount.to_alipay_dict()
             else:
                 params['item_total_amount'] = self.item_total_amount
+        if self.item_unit:
+            if hasattr(self.item_unit, 'to_alipay_dict'):
+                params['item_unit'] = self.item_unit.to_alipay_dict()
+            else:
+                params['item_unit'] = self.item_unit
         if self.item_unit_amount:
             if hasattr(self.item_unit_amount, 'to_alipay_dict'):
                 params['item_unit_amount'] = self.item_unit_amount.to_alipay_dict()
@@ -134,6 +147,8 @@ class RecyclinginvoiceOrderItem(object):
             o.item_num = d['item_num']
         if 'item_total_amount' in d:
             o.item_total_amount = d['item_total_amount']
+        if 'item_unit' in d:
+            o.item_unit = d['item_unit']
         if 'item_unit_amount' in d:
             o.item_unit_amount = d['item_unit_amount']
         if 'order_item_id' in d:

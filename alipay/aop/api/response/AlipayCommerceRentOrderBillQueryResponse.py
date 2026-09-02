@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RentBillOrderDetailDto import RentBillOrderDetailDto
+from alipay.aop.api.domain.RepaymentDetailDto import RepaymentDetailDto
 from alipay.aop.api.domain.RentBillRoyaltyDetailDto import RentBillRoyaltyDetailDto
 
 
@@ -13,6 +14,7 @@ class AlipayCommerceRentOrderBillQueryResponse(AlipayResponse):
         super(AlipayCommerceRentOrderBillQueryResponse, self).__init__()
         self._biz_order_id = None
         self._order_detail_list = None
+        self._repayment_detail_list = None
         self._royalty_detail_list = None
         self._total_actual_royalty_amount = None
         self._total_royalty_amount = None
@@ -37,6 +39,19 @@ class AlipayCommerceRentOrderBillQueryResponse(AlipayResponse):
                     self._order_detail_list.append(i)
                 else:
                     self._order_detail_list.append(RentBillOrderDetailDto.from_alipay_dict(i))
+    @property
+    def repayment_detail_list(self):
+        return self._repayment_detail_list
+
+    @repayment_detail_list.setter
+    def repayment_detail_list(self, value):
+        if isinstance(value, list):
+            self._repayment_detail_list = list()
+            for i in value:
+                if isinstance(i, RepaymentDetailDto):
+                    self._repayment_detail_list.append(i)
+                else:
+                    self._repayment_detail_list.append(RepaymentDetailDto.from_alipay_dict(i))
     @property
     def royalty_detail_list(self):
         return self._royalty_detail_list
@@ -71,6 +86,8 @@ class AlipayCommerceRentOrderBillQueryResponse(AlipayResponse):
             self.biz_order_id = response['biz_order_id']
         if 'order_detail_list' in response:
             self.order_detail_list = response['order_detail_list']
+        if 'repayment_detail_list' in response:
+            self.repayment_detail_list = response['repayment_detail_list']
         if 'royalty_detail_list' in response:
             self.royalty_detail_list = response['royalty_detail_list']
         if 'total_actual_royalty_amount' in response:

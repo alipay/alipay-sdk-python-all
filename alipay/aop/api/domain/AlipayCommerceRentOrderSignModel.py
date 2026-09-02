@@ -11,6 +11,7 @@ class AlipayCommerceRentOrderSignModel(object):
 
     def __init__(self):
         self._credit_ext_info = None
+        self._identity_params = None
         self._need_face_validate_flag = None
         self._order_id = None
         self._rent_sign_info = None
@@ -25,6 +26,13 @@ class AlipayCommerceRentOrderSignModel(object):
             self._credit_ext_info = value
         else:
             self._credit_ext_info = RentCreditExtInfoDTO.from_alipay_dict(value)
+    @property
+    def identity_params(self):
+        return self._identity_params
+
+    @identity_params.setter
+    def identity_params(self, value):
+        self._identity_params = value
     @property
     def need_face_validate_flag(self):
         return self._need_face_validate_flag
@@ -58,6 +66,11 @@ class AlipayCommerceRentOrderSignModel(object):
                 params['credit_ext_info'] = self.credit_ext_info.to_alipay_dict()
             else:
                 params['credit_ext_info'] = self.credit_ext_info
+        if self.identity_params:
+            if hasattr(self.identity_params, 'to_alipay_dict'):
+                params['identity_params'] = self.identity_params.to_alipay_dict()
+            else:
+                params['identity_params'] = self.identity_params
         if self.need_face_validate_flag:
             if hasattr(self.need_face_validate_flag, 'to_alipay_dict'):
                 params['need_face_validate_flag'] = self.need_face_validate_flag.to_alipay_dict()
@@ -82,6 +95,8 @@ class AlipayCommerceRentOrderSignModel(object):
         o = AlipayCommerceRentOrderSignModel()
         if 'credit_ext_info' in d:
             o.credit_ext_info = d['credit_ext_info']
+        if 'identity_params' in d:
+            o.identity_params = d['identity_params']
         if 'need_face_validate_flag' in d:
             o.need_face_validate_flag = d['need_face_validate_flag']
         if 'order_id' in d:

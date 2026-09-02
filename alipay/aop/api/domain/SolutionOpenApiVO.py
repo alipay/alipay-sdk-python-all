@@ -9,6 +9,7 @@ class SolutionOpenApiVO(object):
 
     def __init__(self):
         self._solution_code = None
+        self._solution_config_code = None
         self._solution_name = None
 
     @property
@@ -18,6 +19,13 @@ class SolutionOpenApiVO(object):
     @solution_code.setter
     def solution_code(self, value):
         self._solution_code = value
+    @property
+    def solution_config_code(self):
+        return self._solution_config_code
+
+    @solution_config_code.setter
+    def solution_config_code(self, value):
+        self._solution_config_code = value
     @property
     def solution_name(self):
         return self._solution_name
@@ -34,6 +42,11 @@ class SolutionOpenApiVO(object):
                 params['solution_code'] = self.solution_code.to_alipay_dict()
             else:
                 params['solution_code'] = self.solution_code
+        if self.solution_config_code:
+            if hasattr(self.solution_config_code, 'to_alipay_dict'):
+                params['solution_config_code'] = self.solution_config_code.to_alipay_dict()
+            else:
+                params['solution_config_code'] = self.solution_config_code
         if self.solution_name:
             if hasattr(self.solution_name, 'to_alipay_dict'):
                 params['solution_name'] = self.solution_name.to_alipay_dict()
@@ -48,6 +61,8 @@ class SolutionOpenApiVO(object):
         o = SolutionOpenApiVO()
         if 'solution_code' in d:
             o.solution_code = d['solution_code']
+        if 'solution_config_code' in d:
+            o.solution_config_code = d['solution_config_code']
         if 'solution_name' in d:
             o.solution_name = d['solution_name']
         return o

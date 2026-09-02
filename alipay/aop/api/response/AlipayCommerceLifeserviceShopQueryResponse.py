@@ -19,6 +19,7 @@ class AlipayCommerceLifeserviceShopQueryResponse(AlipayResponse):
         self._shop_attrs = None
         self._shop_id = None
         self._shop_type = None
+        self._show_shop_assign = None
         self._status = None
         self._stock_fetch_type = None
         self._stock_query_app_id = None
@@ -87,6 +88,13 @@ class AlipayCommerceLifeserviceShopQueryResponse(AlipayResponse):
     def shop_type(self, value):
         self._shop_type = value
     @property
+    def show_shop_assign(self):
+        return self._show_shop_assign
+
+    @show_shop_assign.setter
+    def show_shop_assign(self, value):
+        self._show_shop_assign = value
+    @property
     def status(self):
         return self._status
 
@@ -139,6 +147,8 @@ class AlipayCommerceLifeserviceShopQueryResponse(AlipayResponse):
             self.shop_id = response['shop_id']
         if 'shop_type' in response:
             self.shop_type = response['shop_type']
+        if 'show_shop_assign' in response:
+            self.show_shop_assign = response['show_shop_assign']
         if 'status' in response:
             self.status = response['status']
         if 'stock_fetch_type' in response:

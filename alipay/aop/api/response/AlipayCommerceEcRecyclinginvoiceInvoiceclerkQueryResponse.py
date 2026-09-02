@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.ClerkInfo import ClerkInfo
+from alipay.aop.api.domain.ClerkInfo import ClerkInfo
 
 
 class AlipayCommerceEcRecyclinginvoiceInvoiceclerkQueryResponse(AlipayResponse):
@@ -11,6 +12,7 @@ class AlipayCommerceEcRecyclinginvoiceInvoiceclerkQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceEcRecyclinginvoiceInvoiceclerkQueryResponse, self).__init__()
         self._clerk_info_list = None
+        self._clerk_list = None
 
     @property
     def clerk_info_list(self):
@@ -22,8 +24,23 @@ class AlipayCommerceEcRecyclinginvoiceInvoiceclerkQueryResponse(AlipayResponse):
             self._clerk_info_list = value
         else:
             self._clerk_info_list = ClerkInfo.from_alipay_dict(value)
+    @property
+    def clerk_list(self):
+        return self._clerk_list
+
+    @clerk_list.setter
+    def clerk_list(self, value):
+        if isinstance(value, list):
+            self._clerk_list = list()
+            for i in value:
+                if isinstance(i, ClerkInfo):
+                    self._clerk_list.append(i)
+                else:
+                    self._clerk_list.append(ClerkInfo.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcRecyclinginvoiceInvoiceclerkQueryResponse, self).parse_response_content(response_content)
         if 'clerk_info_list' in response:
             self.clerk_info_list = response['clerk_info_list']
+        if 'clerk_list' in response:
+            self.clerk_list = response['clerk_list']

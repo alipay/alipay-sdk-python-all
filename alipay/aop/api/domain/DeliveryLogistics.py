@@ -12,6 +12,7 @@ class DeliveryLogistics(object):
         self._express_company_code = None
         self._express_company_name = None
         self._express_no = None
+        self._jump_url = None
 
     @property
     def delivery_status(self):
@@ -41,6 +42,13 @@ class DeliveryLogistics(object):
     @express_no.setter
     def express_no(self, value):
         self._express_no = value
+    @property
+    def jump_url(self):
+        return self._jump_url
+
+    @jump_url.setter
+    def jump_url(self, value):
+        self._jump_url = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class DeliveryLogistics(object):
                 params['express_no'] = self.express_no.to_alipay_dict()
             else:
                 params['express_no'] = self.express_no
+        if self.jump_url:
+            if hasattr(self.jump_url, 'to_alipay_dict'):
+                params['jump_url'] = self.jump_url.to_alipay_dict()
+            else:
+                params['jump_url'] = self.jump_url
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class DeliveryLogistics(object):
             o.express_company_name = d['express_company_name']
         if 'express_no' in d:
             o.express_no = d['express_no']
+        if 'jump_url' in d:
+            o.jump_url = d['jump_url']
         return o
 
 

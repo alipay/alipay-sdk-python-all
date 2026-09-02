@@ -6,12 +6,14 @@ from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoVO import RentOrderReceiverAddressInfoVO
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoVO import RentOrderReceiverAddressInfoVO
 from alipay.aop.api.domain.RentOrderDeliveryInfoVO import RentOrderDeliveryInfoVO
+from alipay.aop.api.domain.RentEcSignApplyInfoVO import RentEcSignApplyInfoVO
 from alipay.aop.api.domain.RentOrderExtendInfoVO import RentOrderExtendInfoVO
 from alipay.aop.api.domain.RentFastAuditInfoVO import RentFastAuditInfoVO
 from alipay.aop.api.domain.RentGoodsDetailInfoVO import RentGoodsDetailInfoVO
 from alipay.aop.api.domain.RentOfflineShoppingVO import RentOfflineShoppingVO
 from alipay.aop.api.domain.RentPathInfoVO import RentPathInfoVO
 from alipay.aop.api.domain.RentOrderPriceInfoVO import RentOrderPriceInfoVO
+from alipay.aop.api.domain.RentProcurementInfoVO import RentProcurementInfoVO
 from alipay.aop.api.domain.RentPromoInfoVO import RentPromoInfoVO
 from alipay.aop.api.domain.RentAftersaleOrderVO import RentAftersaleOrderVO
 from alipay.aop.api.domain.RentOrderPayInfoVO import RentOrderPayInfoVO
@@ -33,6 +35,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._buyer_open_id = None
         self._default_receiving_address = None
         self._delivery_info = None
+        self._ec_sign_apply_infos = None
         self._extend_info = None
         self._face_verify_result = None
         self._fast_audit_info = None
@@ -46,6 +49,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._outer_order_source = None
         self._path_info = None
         self._price_info = None
+        self._procurement_info = None
         self._promo_info = None
         self._rent_aftersale_orders = None
         self._rent_pay_infos = None
@@ -106,6 +110,19 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self._delivery_info = value
         else:
             self._delivery_info = RentOrderDeliveryInfoVO.from_alipay_dict(value)
+    @property
+    def ec_sign_apply_infos(self):
+        return self._ec_sign_apply_infos
+
+    @ec_sign_apply_infos.setter
+    def ec_sign_apply_infos(self, value):
+        if isinstance(value, list):
+            self._ec_sign_apply_infos = list()
+            for i in value:
+                if isinstance(i, RentEcSignApplyInfoVO):
+                    self._ec_sign_apply_infos.append(i)
+                else:
+                    self._ec_sign_apply_infos.append(RentEcSignApplyInfoVO.from_alipay_dict(i))
     @property
     def extend_info(self):
         return self._extend_info
@@ -218,6 +235,16 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self._price_info = value
         else:
             self._price_info = RentOrderPriceInfoVO.from_alipay_dict(value)
+    @property
+    def procurement_info(self):
+        return self._procurement_info
+
+    @procurement_info.setter
+    def procurement_info(self, value):
+        if isinstance(value, RentProcurementInfoVO):
+            self._procurement_info = value
+        else:
+            self._procurement_info = RentProcurementInfoVO.from_alipay_dict(value)
     @property
     def promo_info(self):
         return self._promo_info
@@ -387,6 +414,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.default_receiving_address = response['default_receiving_address']
         if 'delivery_info' in response:
             self.delivery_info = response['delivery_info']
+        if 'ec_sign_apply_infos' in response:
+            self.ec_sign_apply_infos = response['ec_sign_apply_infos']
         if 'extend_info' in response:
             self.extend_info = response['extend_info']
         if 'face_verify_result' in response:
@@ -413,6 +442,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.path_info = response['path_info']
         if 'price_info' in response:
             self.price_info = response['price_info']
+        if 'procurement_info' in response:
+            self.procurement_info = response['procurement_info']
         if 'promo_info' in response:
             self.promo_info = response['promo_info']
         if 'rent_aftersale_orders' in response:

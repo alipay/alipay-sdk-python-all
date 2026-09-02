@@ -12,6 +12,7 @@ class TrafficAirticketOrderDiscountInfo(object):
         self._item_desc = None
         self._item_id = None
         self._item_name = None
+        self._item_source = None
 
     @property
     def discount_price(self):
@@ -41,6 +42,13 @@ class TrafficAirticketOrderDiscountInfo(object):
     @item_name.setter
     def item_name(self, value):
         self._item_name = value
+    @property
+    def item_source(self):
+        return self._item_source
+
+    @item_source.setter
+    def item_source(self, value):
+        self._item_source = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class TrafficAirticketOrderDiscountInfo(object):
                 params['item_name'] = self.item_name.to_alipay_dict()
             else:
                 params['item_name'] = self.item_name
+        if self.item_source:
+            if hasattr(self.item_source, 'to_alipay_dict'):
+                params['item_source'] = self.item_source.to_alipay_dict()
+            else:
+                params['item_source'] = self.item_source
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class TrafficAirticketOrderDiscountInfo(object):
             o.item_id = d['item_id']
         if 'item_name' in d:
             o.item_name = d['item_name']
+        if 'item_source' in d:
+            o.item_source = d['item_source']
         return o
 
 

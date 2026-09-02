@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class GetAgentStatusVO(object):
 
     def __init__(self):
+        self._agent_id = None
         self._ai_assistant_opened_status = None
         self._avatar_id = None
         self._legal_status = None
         self._redirect_url = None
 
+    @property
+    def agent_id(self):
+        return self._agent_id
+
+    @agent_id.setter
+    def agent_id(self, value):
+        self._agent_id = value
     @property
     def ai_assistant_opened_status(self):
         return self._ai_assistant_opened_status
@@ -45,6 +53,11 @@ class GetAgentStatusVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_id:
+            if hasattr(self.agent_id, 'to_alipay_dict'):
+                params['agent_id'] = self.agent_id.to_alipay_dict()
+            else:
+                params['agent_id'] = self.agent_id
         if self.ai_assistant_opened_status:
             if hasattr(self.ai_assistant_opened_status, 'to_alipay_dict'):
                 params['ai_assistant_opened_status'] = self.ai_assistant_opened_status.to_alipay_dict()
@@ -72,6 +85,8 @@ class GetAgentStatusVO(object):
         if not d:
             return None
         o = GetAgentStatusVO()
+        if 'agent_id' in d:
+            o.agent_id = d['agent_id']
         if 'ai_assistant_opened_status' in d:
             o.ai_assistant_opened_status = d['ai_assistant_opened_status']
         if 'avatar_id' in d:

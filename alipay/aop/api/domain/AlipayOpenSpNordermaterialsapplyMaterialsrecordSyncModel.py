@@ -19,6 +19,7 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordSyncModel(object):
         self._order_app_id = None
         self._province = None
         self._rebate_pid = None
+        self._shop_biz_id = None
         self._shop_id = None
         self._shop_name = None
         self._shop_order_no = None
@@ -102,6 +103,13 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordSyncModel(object):
     @rebate_pid.setter
     def rebate_pid(self, value):
         self._rebate_pid = value
+    @property
+    def shop_biz_id(self):
+        return self._shop_biz_id
+
+    @shop_biz_id.setter
+    def shop_biz_id(self, value):
+        self._shop_biz_id = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -187,6 +195,11 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordSyncModel(object):
                 params['rebate_pid'] = self.rebate_pid.to_alipay_dict()
             else:
                 params['rebate_pid'] = self.rebate_pid
+        if self.shop_biz_id:
+            if hasattr(self.shop_biz_id, 'to_alipay_dict'):
+                params['shop_biz_id'] = self.shop_biz_id.to_alipay_dict()
+            else:
+                params['shop_biz_id'] = self.shop_biz_id
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -229,6 +242,8 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordSyncModel(object):
             o.province = d['province']
         if 'rebate_pid' in d:
             o.rebate_pid = d['rebate_pid']
+        if 'shop_biz_id' in d:
+            o.shop_biz_id = d['shop_biz_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'shop_name' in d:

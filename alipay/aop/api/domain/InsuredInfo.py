@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PolicyModeInfo import PolicyModeInfo
 
 
 class InsuredInfo(object):
@@ -14,6 +15,7 @@ class InsuredInfo(object):
         self._insured_cert_type = None
         self._insured_name = None
         self._insured_status = None
+        self._policy_info_list = None
 
     @property
     def ext_info(self):
@@ -57,6 +59,19 @@ class InsuredInfo(object):
     @insured_status.setter
     def insured_status(self, value):
         self._insured_status = value
+    @property
+    def policy_info_list(self):
+        return self._policy_info_list
+
+    @policy_info_list.setter
+    def policy_info_list(self, value):
+        if isinstance(value, list):
+            self._policy_info_list = list()
+            for i in value:
+                if isinstance(i, PolicyModeInfo):
+                    self._policy_info_list.append(i)
+                else:
+                    self._policy_info_list.append(PolicyModeInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -91,6 +106,16 @@ class InsuredInfo(object):
                 params['insured_status'] = self.insured_status.to_alipay_dict()
             else:
                 params['insured_status'] = self.insured_status
+        if self.policy_info_list:
+            if isinstance(self.policy_info_list, list):
+                for i in range(0, len(self.policy_info_list)):
+                    element = self.policy_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.policy_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.policy_info_list, 'to_alipay_dict'):
+                params['policy_info_list'] = self.policy_info_list.to_alipay_dict()
+            else:
+                params['policy_info_list'] = self.policy_info_list
         return params
 
     @staticmethod
@@ -110,6 +135,8 @@ class InsuredInfo(object):
             o.insured_name = d['insured_name']
         if 'insured_status' in d:
             o.insured_status = d['insured_status']
+        if 'policy_info_list' in d:
+            o.policy_info_list = d['policy_info_list']
         return o
 
 

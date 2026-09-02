@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
+from alipay.aop.api.domain.SpecifiedSortChannelParam import SpecifiedSortChannelParam
 
 
 
@@ -29,6 +30,7 @@ class AlipayEbppPdeductSignAddRequest(object):
         self._pay_password_token = None
         self._pid = None
         self._sign_expire_date = None
+        self._specified_sort_channels = None
         self._sub_biz_type = None
         self._user_id = None
         self._version = "1.0"
@@ -167,6 +169,19 @@ class AlipayEbppPdeductSignAddRequest(object):
     @sign_expire_date.setter
     def sign_expire_date(self, value):
         self._sign_expire_date = value
+    @property
+    def specified_sort_channels(self):
+        return self._specified_sort_channels
+
+    @specified_sort_channels.setter
+    def specified_sort_channels(self, value):
+        if isinstance(value, list):
+            self._specified_sort_channels = list()
+            for i in value:
+                if isinstance(i, SpecifiedSortChannelParam):
+                    self._specified_sort_channels.append(i)
+                else:
+                    self._specified_sort_channels.append(SpecifiedSortChannelParam.from_alipay_dict(i))
     @property
     def sub_biz_type(self):
         return self._sub_biz_type
@@ -345,6 +360,13 @@ class AlipayEbppPdeductSignAddRequest(object):
                 params['sign_expire_date'] = json.dumps(obj=self.sign_expire_date.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['sign_expire_date'] = self.sign_expire_date
+        if self.specified_sort_channels:
+            if isinstance(self.specified_sort_channels, list):
+                for i in range(0, len(self.specified_sort_channels)):
+                    element = self.specified_sort_channels[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.specified_sort_channels[i] = element.to_alipay_dict()
+                params['specified_sort_channels'] = json.dumps(obj=self.specified_sort_channels, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.sub_biz_type:
             if hasattr(self.sub_biz_type, 'to_alipay_dict'):
                 params['sub_biz_type'] = json.dumps(obj=self.sub_biz_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

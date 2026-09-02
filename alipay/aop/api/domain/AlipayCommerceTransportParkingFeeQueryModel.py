@@ -12,6 +12,7 @@ class AlipayCommerceTransportParkingFeeQueryModel(object):
         self._identity_type = None
         self._license_plate_no = None
         self._request_channel = None
+        self._serial_no = None
 
     @property
     def identity_id(self):
@@ -41,6 +42,13 @@ class AlipayCommerceTransportParkingFeeQueryModel(object):
     @request_channel.setter
     def request_channel(self, value):
         self._request_channel = value
+    @property
+    def serial_no(self):
+        return self._serial_no
+
+    @serial_no.setter
+    def serial_no(self, value):
+        self._serial_no = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayCommerceTransportParkingFeeQueryModel(object):
                 params['request_channel'] = self.request_channel.to_alipay_dict()
             else:
                 params['request_channel'] = self.request_channel
+        if self.serial_no:
+            if hasattr(self.serial_no, 'to_alipay_dict'):
+                params['serial_no'] = self.serial_no.to_alipay_dict()
+            else:
+                params['serial_no'] = self.serial_no
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayCommerceTransportParkingFeeQueryModel(object):
             o.license_plate_no = d['license_plate_no']
         if 'request_channel' in d:
             o.request_channel = d['request_channel']
+        if 'serial_no' in d:
+            o.serial_no = d['serial_no']
         return o
 
 

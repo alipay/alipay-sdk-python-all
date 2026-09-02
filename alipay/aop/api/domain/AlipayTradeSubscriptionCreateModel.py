@@ -10,9 +10,13 @@ class AlipayTradeSubscriptionCreateModel(object):
 
     def __init__(self):
         self._customer_id = None
+        self._deduct_type = None
+        self._effective_type = None
+        self._extend_params = None
         self._items = None
         self._metadata = None
         self._pay_amount = None
+        self._scheduled_effective_time = None
         self._subscribe_title = None
         self._trial_desc = None
         self._trial_period_days = None
@@ -24,6 +28,27 @@ class AlipayTradeSubscriptionCreateModel(object):
     @customer_id.setter
     def customer_id(self, value):
         self._customer_id = value
+    @property
+    def deduct_type(self):
+        return self._deduct_type
+
+    @deduct_type.setter
+    def deduct_type(self, value):
+        self._deduct_type = value
+    @property
+    def effective_type(self):
+        return self._effective_type
+
+    @effective_type.setter
+    def effective_type(self, value):
+        self._effective_type = value
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        self._extend_params = value
     @property
     def items(self):
         return self._items
@@ -51,6 +76,13 @@ class AlipayTradeSubscriptionCreateModel(object):
     @pay_amount.setter
     def pay_amount(self, value):
         self._pay_amount = value
+    @property
+    def scheduled_effective_time(self):
+        return self._scheduled_effective_time
+
+    @scheduled_effective_time.setter
+    def scheduled_effective_time(self, value):
+        self._scheduled_effective_time = value
     @property
     def subscribe_title(self):
         return self._subscribe_title
@@ -81,6 +113,21 @@ class AlipayTradeSubscriptionCreateModel(object):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
             else:
                 params['customer_id'] = self.customer_id
+        if self.deduct_type:
+            if hasattr(self.deduct_type, 'to_alipay_dict'):
+                params['deduct_type'] = self.deduct_type.to_alipay_dict()
+            else:
+                params['deduct_type'] = self.deduct_type
+        if self.effective_type:
+            if hasattr(self.effective_type, 'to_alipay_dict'):
+                params['effective_type'] = self.effective_type.to_alipay_dict()
+            else:
+                params['effective_type'] = self.effective_type
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -101,6 +148,11 @@ class AlipayTradeSubscriptionCreateModel(object):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
             else:
                 params['pay_amount'] = self.pay_amount
+        if self.scheduled_effective_time:
+            if hasattr(self.scheduled_effective_time, 'to_alipay_dict'):
+                params['scheduled_effective_time'] = self.scheduled_effective_time.to_alipay_dict()
+            else:
+                params['scheduled_effective_time'] = self.scheduled_effective_time
         if self.subscribe_title:
             if hasattr(self.subscribe_title, 'to_alipay_dict'):
                 params['subscribe_title'] = self.subscribe_title.to_alipay_dict()
@@ -125,12 +177,20 @@ class AlipayTradeSubscriptionCreateModel(object):
         o = AlipayTradeSubscriptionCreateModel()
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
+        if 'deduct_type' in d:
+            o.deduct_type = d['deduct_type']
+        if 'effective_type' in d:
+            o.effective_type = d['effective_type']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'items' in d:
             o.items = d['items']
         if 'metadata' in d:
             o.metadata = d['metadata']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
+        if 'scheduled_effective_time' in d:
+            o.scheduled_effective_time = d['scheduled_effective_time']
         if 'subscribe_title' in d:
             o.subscribe_title = d['subscribe_title']
         if 'trial_desc' in d:

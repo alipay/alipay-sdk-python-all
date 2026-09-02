@@ -10,11 +10,19 @@ class AlipayMerchantSolutionRecordQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayMerchantSolutionRecordQueryResponse, self).__init__()
+        self._fail_reason_desc = None
         self._record_data = None
         self._record_status_code = None
         self._record_status_desc = None
         self._solution_code = None
 
+    @property
+    def fail_reason_desc(self):
+        return self._fail_reason_desc
+
+    @fail_reason_desc.setter
+    def fail_reason_desc(self, value):
+        self._fail_reason_desc = value
     @property
     def record_data(self):
         return self._record_data
@@ -52,6 +60,8 @@ class AlipayMerchantSolutionRecordQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayMerchantSolutionRecordQueryResponse, self).parse_response_content(response_content)
+        if 'fail_reason_desc' in response:
+            self.fail_reason_desc = response['fail_reason_desc']
         if 'record_data' in response:
             self.record_data = response['record_data']
         if 'record_status_code' in response:

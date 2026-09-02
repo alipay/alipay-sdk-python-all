@@ -12,6 +12,7 @@ class AlipayFundWalletDepositorderCreateResponse(AlipayResponse):
         self._bill_no = None
         self._fund_order_id = None
         self._out_biz_no = None
+        self._wallet_order_id = None
 
     @property
     def bill_no(self):
@@ -34,6 +35,13 @@ class AlipayFundWalletDepositorderCreateResponse(AlipayResponse):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def wallet_order_id(self):
+        return self._wallet_order_id
+
+    @wallet_order_id.setter
+    def wallet_order_id(self, value):
+        self._wallet_order_id = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayFundWalletDepositorderCreateResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayFundWalletDepositorderCreateResponse(AlipayResponse):
             self.fund_order_id = response['fund_order_id']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
+        if 'wallet_order_id' in response:
+            self.wallet_order_id = response['wallet_order_id']

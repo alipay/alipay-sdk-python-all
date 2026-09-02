@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class CategoryInfoModel(object):
 
     def __init__(self):
+        self._category_code = None
         self._main_name = None
         self._name_list = None
 
+    @property
+    def category_code(self):
+        return self._category_code
+
+    @category_code.setter
+    def category_code(self, value):
+        self._category_code = value
     @property
     def main_name(self):
         return self._main_name
@@ -32,6 +40,11 @@ class CategoryInfoModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.category_code:
+            if hasattr(self.category_code, 'to_alipay_dict'):
+                params['category_code'] = self.category_code.to_alipay_dict()
+            else:
+                params['category_code'] = self.category_code
         if self.main_name:
             if hasattr(self.main_name, 'to_alipay_dict'):
                 params['main_name'] = self.main_name.to_alipay_dict()
@@ -54,6 +67,8 @@ class CategoryInfoModel(object):
         if not d:
             return None
         o = CategoryInfoModel()
+        if 'category_code' in d:
+            o.category_code = d['category_code']
         if 'main_name' in d:
             o.main_name = d['main_name']
         if 'name_list' in d:

@@ -28,6 +28,7 @@ class ObArtifactSyncDTO(object):
         self._purpose = None
         self._repo_url = None
         self._scan_details = None
+        self._sha_256 = None
         self._size = None
         self._tag = None
         self._trigger = None
@@ -172,6 +173,13 @@ class ObArtifactSyncDTO(object):
                 else:
                     self._scan_details.append(ScanDetail.from_alipay_dict(i))
     @property
+    def sha_256(self):
+        return self._sha_256
+
+    @sha_256.setter
+    def sha_256(self, value):
+        self._sha_256 = value
+    @property
     def size(self):
         return self._size
 
@@ -303,6 +311,11 @@ class ObArtifactSyncDTO(object):
                 params['scan_details'] = self.scan_details.to_alipay_dict()
             else:
                 params['scan_details'] = self.scan_details
+        if self.sha_256:
+            if hasattr(self.sha_256, 'to_alipay_dict'):
+                params['sha_256'] = self.sha_256.to_alipay_dict()
+            else:
+                params['sha_256'] = self.sha_256
         if self.size:
             if hasattr(self.size, 'to_alipay_dict'):
                 params['size'] = self.size.to_alipay_dict()
@@ -366,6 +379,8 @@ class ObArtifactSyncDTO(object):
             o.repo_url = d['repo_url']
         if 'scan_details' in d:
             o.scan_details = d['scan_details']
+        if 'sha_256' in d:
+            o.sha_256 = d['sha_256']
         if 'size' in d:
             o.size = d['size']
         if 'tag' in d:

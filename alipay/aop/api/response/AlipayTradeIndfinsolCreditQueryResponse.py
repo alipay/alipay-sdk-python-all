@@ -11,6 +11,7 @@ class AlipayTradeIndfinsolCreditQueryResponse(AlipayResponse):
         super(AlipayTradeIndfinsolCreditQueryResponse, self).__init__()
         self._bank_card_number = None
         self._inst_id = None
+        self._mobile = None
 
     @property
     def bank_card_number(self):
@@ -26,6 +27,13 @@ class AlipayTradeIndfinsolCreditQueryResponse(AlipayResponse):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def mobile(self):
+        return self._mobile
+
+    @mobile.setter
+    def mobile(self, value):
+        self._mobile = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeIndfinsolCreditQueryResponse, self).parse_response_content(response_content)
@@ -33,3 +41,5 @@ class AlipayTradeIndfinsolCreditQueryResponse(AlipayResponse):
             self.bank_card_number = response['bank_card_number']
         if 'inst_id' in response:
             self.inst_id = response['inst_id']
+        if 'mobile' in response:
+            self.mobile = response['mobile']

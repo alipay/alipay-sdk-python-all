@@ -18,10 +18,13 @@ class CardTemplateUse(object):
         self._cycle_info = None
         self._discount_recover_rule_info = None
         self._expire_period = None
+        self._new_customer_price = None
+        self._original_price = None
         self._period_price_list = None
         self._price_mode = None
         self._purchase_notice = None
         self._reservation_url = None
+        self._sale_price = None
         self._show_shop = None
         self._show_shop_ids = None
         self._usable_count = None
@@ -67,6 +70,20 @@ class CardTemplateUse(object):
     def expire_period(self, value):
         self._expire_period = value
     @property
+    def new_customer_price(self):
+        return self._new_customer_price
+
+    @new_customer_price.setter
+    def new_customer_price(self, value):
+        self._new_customer_price = value
+    @property
+    def original_price(self):
+        return self._original_price
+
+    @original_price.setter
+    def original_price(self, value):
+        self._original_price = value
+    @property
     def period_price_list(self):
         return self._period_price_list
 
@@ -103,6 +120,13 @@ class CardTemplateUse(object):
     @reservation_url.setter
     def reservation_url(self, value):
         self._reservation_url = value
+    @property
+    def sale_price(self):
+        return self._sale_price
+
+    @sale_price.setter
+    def sale_price(self, value):
+        self._sale_price = value
     @property
     def show_shop(self):
         return self._show_shop
@@ -181,6 +205,16 @@ class CardTemplateUse(object):
                 params['expire_period'] = self.expire_period.to_alipay_dict()
             else:
                 params['expire_period'] = self.expire_period
+        if self.new_customer_price:
+            if hasattr(self.new_customer_price, 'to_alipay_dict'):
+                params['new_customer_price'] = self.new_customer_price.to_alipay_dict()
+            else:
+                params['new_customer_price'] = self.new_customer_price
+        if self.original_price:
+            if hasattr(self.original_price, 'to_alipay_dict'):
+                params['original_price'] = self.original_price.to_alipay_dict()
+            else:
+                params['original_price'] = self.original_price
         if self.period_price_list:
             if isinstance(self.period_price_list, list):
                 for i in range(0, len(self.period_price_list)):
@@ -206,6 +240,11 @@ class CardTemplateUse(object):
                 params['reservation_url'] = self.reservation_url.to_alipay_dict()
             else:
                 params['reservation_url'] = self.reservation_url
+        if self.sale_price:
+            if hasattr(self.sale_price, 'to_alipay_dict'):
+                params['sale_price'] = self.sale_price.to_alipay_dict()
+            else:
+                params['sale_price'] = self.sale_price
         if self.show_shop:
             if hasattr(self.show_shop, 'to_alipay_dict'):
                 params['show_shop'] = self.show_shop.to_alipay_dict()
@@ -266,6 +305,10 @@ class CardTemplateUse(object):
             o.discount_recover_rule_info = d['discount_recover_rule_info']
         if 'expire_period' in d:
             o.expire_period = d['expire_period']
+        if 'new_customer_price' in d:
+            o.new_customer_price = d['new_customer_price']
+        if 'original_price' in d:
+            o.original_price = d['original_price']
         if 'period_price_list' in d:
             o.period_price_list = d['period_price_list']
         if 'price_mode' in d:
@@ -274,6 +317,8 @@ class CardTemplateUse(object):
             o.purchase_notice = d['purchase_notice']
         if 'reservation_url' in d:
             o.reservation_url = d['reservation_url']
+        if 'sale_price' in d:
+            o.sale_price = d['sale_price']
         if 'show_shop' in d:
             o.show_shop = d['show_shop']
         if 'show_shop_ids' in d:

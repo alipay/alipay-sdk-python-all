@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RightInfo import RightInfo
 
 
 class SpecialtyDiseasePackage(object):
 
     def __init__(self):
         self._fulfillment_valid_days = None
+        self._items = None
+        self._order_status = None
         self._service_package_desc = None
         self._service_package_id = None
         self._service_package_name = None
@@ -21,6 +24,26 @@ class SpecialtyDiseasePackage(object):
     @fulfillment_valid_days.setter
     def fulfillment_valid_days(self, value):
         self._fulfillment_valid_days = value
+    @property
+    def items(self):
+        return self._items
+
+    @items.setter
+    def items(self, value):
+        if isinstance(value, list):
+            self._items = list()
+            for i in value:
+                if isinstance(i, RightInfo):
+                    self._items.append(i)
+                else:
+                    self._items.append(RightInfo.from_alipay_dict(i))
+    @property
+    def order_status(self):
+        return self._order_status
+
+    @order_status.setter
+    def order_status(self, value):
+        self._order_status = value
     @property
     def service_package_desc(self):
         return self._service_package_desc
@@ -58,6 +81,21 @@ class SpecialtyDiseasePackage(object):
                 params['fulfillment_valid_days'] = self.fulfillment_valid_days.to_alipay_dict()
             else:
                 params['fulfillment_valid_days'] = self.fulfillment_valid_days
+        if self.items:
+            if isinstance(self.items, list):
+                for i in range(0, len(self.items)):
+                    element = self.items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.items[i] = element.to_alipay_dict()
+            if hasattr(self.items, 'to_alipay_dict'):
+                params['items'] = self.items.to_alipay_dict()
+            else:
+                params['items'] = self.items
+        if self.order_status:
+            if hasattr(self.order_status, 'to_alipay_dict'):
+                params['order_status'] = self.order_status.to_alipay_dict()
+            else:
+                params['order_status'] = self.order_status
         if self.service_package_desc:
             if hasattr(self.service_package_desc, 'to_alipay_dict'):
                 params['service_package_desc'] = self.service_package_desc.to_alipay_dict()
@@ -87,6 +125,10 @@ class SpecialtyDiseasePackage(object):
         o = SpecialtyDiseasePackage()
         if 'fulfillment_valid_days' in d:
             o.fulfillment_valid_days = d['fulfillment_valid_days']
+        if 'items' in d:
+            o.items = d['items']
+        if 'order_status' in d:
+            o.order_status = d['order_status']
         if 'service_package_desc' in d:
             o.service_package_desc = d['service_package_desc']
         if 'service_package_id' in d:

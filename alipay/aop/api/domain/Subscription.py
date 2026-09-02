@@ -16,6 +16,8 @@ class Subscription(object):
         self._current_period_end = None
         self._current_period_start = None
         self._customer_id = None
+        self._deduct_type = None
+        self._effective_type = None
         self._items = None
         self._metadata = None
         self._pending_items = None
@@ -68,6 +70,20 @@ class Subscription(object):
     @customer_id.setter
     def customer_id(self, value):
         self._customer_id = value
+    @property
+    def deduct_type(self):
+        return self._deduct_type
+
+    @deduct_type.setter
+    def deduct_type(self, value):
+        self._deduct_type = value
+    @property
+    def effective_type(self):
+        return self._effective_type
+
+    @effective_type.setter
+    def effective_type(self, value):
+        self._effective_type = value
     @property
     def items(self):
         return self._items
@@ -177,6 +193,16 @@ class Subscription(object):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
             else:
                 params['customer_id'] = self.customer_id
+        if self.deduct_type:
+            if hasattr(self.deduct_type, 'to_alipay_dict'):
+                params['deduct_type'] = self.deduct_type.to_alipay_dict()
+            else:
+                params['deduct_type'] = self.deduct_type
+        if self.effective_type:
+            if hasattr(self.effective_type, 'to_alipay_dict'):
+                params['effective_type'] = self.effective_type.to_alipay_dict()
+            else:
+                params['effective_type'] = self.effective_type
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -251,6 +277,10 @@ class Subscription(object):
             o.current_period_start = d['current_period_start']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
+        if 'deduct_type' in d:
+            o.deduct_type = d['deduct_type']
+        if 'effective_type' in d:
+            o.effective_type = d['effective_type']
         if 'items' in d:
             o.items = d['items']
         if 'metadata' in d:

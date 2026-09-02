@@ -12,12 +12,14 @@ class CertBillDetail(object):
         self._certificate_id = None
         self._code = None
         self._et_settle_time = None
+        self._gov_consumption_subsidy = None
         self._item_id = None
         self._item_type = None
         self._m_item_id = None
         self._m_shop_id = None
         self._m_use_order_id = None
         self._merchant_discount = None
+        self._merchant_promo = None
         self._net_income = None
         self._order_id = None
         self._origin_price = None
@@ -25,6 +27,7 @@ class CertBillDetail(object):
         self._real_pay = None
         self._sale_price = None
         self._scene_name = None
+        self._serial_no = None
         self._settle_account = None
         self._settle_amount = None
         self._settle_time = None
@@ -70,6 +73,13 @@ class CertBillDetail(object):
     def et_settle_time(self, value):
         self._et_settle_time = value
     @property
+    def gov_consumption_subsidy(self):
+        return self._gov_consumption_subsidy
+
+    @gov_consumption_subsidy.setter
+    def gov_consumption_subsidy(self, value):
+        self._gov_consumption_subsidy = value
+    @property
     def item_id(self):
         return self._item_id
 
@@ -111,6 +121,13 @@ class CertBillDetail(object):
     @merchant_discount.setter
     def merchant_discount(self, value):
         self._merchant_discount = value
+    @property
+    def merchant_promo(self):
+        return self._merchant_promo
+
+    @merchant_promo.setter
+    def merchant_promo(self, value):
+        self._merchant_promo = value
     @property
     def net_income(self):
         return self._net_income
@@ -160,6 +177,13 @@ class CertBillDetail(object):
     @scene_name.setter
     def scene_name(self, value):
         self._scene_name = value
+    @property
+    def serial_no(self):
+        return self._serial_no
+
+    @serial_no.setter
+    def serial_no(self, value):
+        self._serial_no = value
     @property
     def settle_account(self):
         return self._settle_account
@@ -289,6 +313,11 @@ class CertBillDetail(object):
                 params['et_settle_time'] = self.et_settle_time.to_alipay_dict()
             else:
                 params['et_settle_time'] = self.et_settle_time
+        if self.gov_consumption_subsidy:
+            if hasattr(self.gov_consumption_subsidy, 'to_alipay_dict'):
+                params['gov_consumption_subsidy'] = self.gov_consumption_subsidy.to_alipay_dict()
+            else:
+                params['gov_consumption_subsidy'] = self.gov_consumption_subsidy
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -319,6 +348,11 @@ class CertBillDetail(object):
                 params['merchant_discount'] = self.merchant_discount.to_alipay_dict()
             else:
                 params['merchant_discount'] = self.merchant_discount
+        if self.merchant_promo:
+            if hasattr(self.merchant_promo, 'to_alipay_dict'):
+                params['merchant_promo'] = self.merchant_promo.to_alipay_dict()
+            else:
+                params['merchant_promo'] = self.merchant_promo
         if self.net_income:
             if hasattr(self.net_income, 'to_alipay_dict'):
                 params['net_income'] = self.net_income.to_alipay_dict()
@@ -354,6 +388,11 @@ class CertBillDetail(object):
                 params['scene_name'] = self.scene_name.to_alipay_dict()
             else:
                 params['scene_name'] = self.scene_name
+        if self.serial_no:
+            if hasattr(self.serial_no, 'to_alipay_dict'):
+                params['serial_no'] = self.serial_no.to_alipay_dict()
+            else:
+                params['serial_no'] = self.serial_no
         if self.settle_account:
             if hasattr(self.settle_account, 'to_alipay_dict'):
                 params['settle_account'] = self.settle_account.to_alipay_dict()
@@ -444,6 +483,8 @@ class CertBillDetail(object):
             o.code = d['code']
         if 'et_settle_time' in d:
             o.et_settle_time = d['et_settle_time']
+        if 'gov_consumption_subsidy' in d:
+            o.gov_consumption_subsidy = d['gov_consumption_subsidy']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'item_type' in d:
@@ -456,6 +497,8 @@ class CertBillDetail(object):
             o.m_use_order_id = d['m_use_order_id']
         if 'merchant_discount' in d:
             o.merchant_discount = d['merchant_discount']
+        if 'merchant_promo' in d:
+            o.merchant_promo = d['merchant_promo']
         if 'net_income' in d:
             o.net_income = d['net_income']
         if 'order_id' in d:
@@ -470,6 +513,8 @@ class CertBillDetail(object):
             o.sale_price = d['sale_price']
         if 'scene_name' in d:
             o.scene_name = d['scene_name']
+        if 'serial_no' in d:
+            o.serial_no = d['serial_no']
         if 'settle_account' in d:
             o.settle_account = d['settle_account']
         if 'settle_amount' in d:

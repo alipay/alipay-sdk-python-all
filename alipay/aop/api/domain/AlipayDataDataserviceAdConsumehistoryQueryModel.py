@@ -16,6 +16,7 @@ class AlipayDataDataserviceAdConsumehistoryQueryModel(object):
         self._group_condition = None
         self._page_size = None
         self._principal_tag = None
+        self._query_all_principal = None
         self._scene_type = None
         self._sell_mode = None
         self._start_date = None
@@ -76,6 +77,13 @@ class AlipayDataDataserviceAdConsumehistoryQueryModel(object):
     @principal_tag.setter
     def principal_tag(self, value):
         self._principal_tag = value
+    @property
+    def query_all_principal(self):
+        return self._query_all_principal
+
+    @query_all_principal.setter
+    def query_all_principal(self, value):
+        self._query_all_principal = value
     @property
     def scene_type(self):
         return self._scene_type
@@ -141,6 +149,11 @@ class AlipayDataDataserviceAdConsumehistoryQueryModel(object):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
             else:
                 params['principal_tag'] = self.principal_tag
+        if self.query_all_principal:
+            if hasattr(self.query_all_principal, 'to_alipay_dict'):
+                params['query_all_principal'] = self.query_all_principal.to_alipay_dict()
+            else:
+                params['query_all_principal'] = self.query_all_principal
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -179,6 +192,8 @@ class AlipayDataDataserviceAdConsumehistoryQueryModel(object):
             o.page_size = d['page_size']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
+        if 'query_all_principal' in d:
+            o.query_all_principal = d['query_all_principal']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'sell_mode' in d:

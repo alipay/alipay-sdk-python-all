@@ -13,6 +13,7 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._apply_sub_scene = None
         self._bank_rule_id = None
         self._car_type = None
+        self._channel_order_id = None
         self._city_code = None
         self._mobile_no = None
         self._number_of_axles = None
@@ -78,6 +79,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @car_type.setter
     def car_type(self, value):
         self._car_type = value
+    @property
+    def channel_order_id(self):
+        return self._channel_order_id
+
+    @channel_order_id.setter
+    def channel_order_id(self, value):
+        self._channel_order_id = value
     @property
     def city_code(self):
         return self._city_code
@@ -310,6 +318,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['car_type'] = self.car_type.to_alipay_dict()
             else:
                 params['car_type'] = self.car_type
+        if self.channel_order_id:
+            if hasattr(self.channel_order_id, 'to_alipay_dict'):
+                params['channel_order_id'] = self.channel_order_id.to_alipay_dict()
+            else:
+                params['channel_order_id'] = self.channel_order_id
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -472,6 +485,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.bank_rule_id = d['bank_rule_id']
         if 'car_type' in d:
             o.car_type = d['car_type']
+        if 'channel_order_id' in d:
+            o.channel_order_id = d['channel_order_id']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'mobile_no' in d:

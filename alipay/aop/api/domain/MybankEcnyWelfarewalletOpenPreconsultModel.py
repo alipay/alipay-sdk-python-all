@@ -15,6 +15,7 @@ class MybankEcnyWelfarewalletOpenPreconsultModel(object):
         self._partner_abbr_name = None
         self._partner_id = None
         self._phone_no = None
+        self._relation_id = None
         self._uid = None
 
     @property
@@ -67,6 +68,13 @@ class MybankEcnyWelfarewalletOpenPreconsultModel(object):
     def phone_no(self, value):
         self._phone_no = value
     @property
+    def relation_id(self):
+        return self._relation_id
+
+    @relation_id.setter
+    def relation_id(self, value):
+        self._relation_id = value
+    @property
     def uid(self):
         return self._uid
 
@@ -112,6 +120,11 @@ class MybankEcnyWelfarewalletOpenPreconsultModel(object):
                 params['phone_no'] = self.phone_no.to_alipay_dict()
             else:
                 params['phone_no'] = self.phone_no
+        if self.relation_id:
+            if hasattr(self.relation_id, 'to_alipay_dict'):
+                params['relation_id'] = self.relation_id.to_alipay_dict()
+            else:
+                params['relation_id'] = self.relation_id
         if self.uid:
             if hasattr(self.uid, 'to_alipay_dict'):
                 params['uid'] = self.uid.to_alipay_dict()
@@ -138,6 +151,8 @@ class MybankEcnyWelfarewalletOpenPreconsultModel(object):
             o.partner_id = d['partner_id']
         if 'phone_no' in d:
             o.phone_no = d['phone_no']
+        if 'relation_id' in d:
+            o.relation_id = d['relation_id']
         if 'uid' in d:
             o.uid = d['uid']
         return o

@@ -12,6 +12,8 @@ class AlipayCommerceOperationPromoRecordQueryModel(object):
         self._page_no = None
         self._page_size = None
         self._query_data = None
+        self._query_sub_record = None
+        self._round_id = None
         self._subject_id = None
         self._subject_type = None
 
@@ -43,6 +45,20 @@ class AlipayCommerceOperationPromoRecordQueryModel(object):
     @query_data.setter
     def query_data(self, value):
         self._query_data = value
+    @property
+    def query_sub_record(self):
+        return self._query_sub_record
+
+    @query_sub_record.setter
+    def query_sub_record(self, value):
+        self._query_sub_record = value
+    @property
+    def round_id(self):
+        return self._round_id
+
+    @round_id.setter
+    def round_id(self, value):
+        self._round_id = value
     @property
     def subject_id(self):
         return self._subject_id
@@ -81,6 +97,16 @@ class AlipayCommerceOperationPromoRecordQueryModel(object):
                 params['query_data'] = self.query_data.to_alipay_dict()
             else:
                 params['query_data'] = self.query_data
+        if self.query_sub_record:
+            if hasattr(self.query_sub_record, 'to_alipay_dict'):
+                params['query_sub_record'] = self.query_sub_record.to_alipay_dict()
+            else:
+                params['query_sub_record'] = self.query_sub_record
+        if self.round_id:
+            if hasattr(self.round_id, 'to_alipay_dict'):
+                params['round_id'] = self.round_id.to_alipay_dict()
+            else:
+                params['round_id'] = self.round_id
         if self.subject_id:
             if hasattr(self.subject_id, 'to_alipay_dict'):
                 params['subject_id'] = self.subject_id.to_alipay_dict()
@@ -106,6 +132,10 @@ class AlipayCommerceOperationPromoRecordQueryModel(object):
             o.page_size = d['page_size']
         if 'query_data' in d:
             o.query_data = d['query_data']
+        if 'query_sub_record' in d:
+            o.query_sub_record = d['query_sub_record']
+        if 'round_id' in d:
+            o.round_id = d['round_id']
         if 'subject_id' in d:
             o.subject_id = d['subject_id']
         if 'subject_type' in d:

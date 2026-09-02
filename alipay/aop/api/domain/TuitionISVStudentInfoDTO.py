@@ -3,21 +3,32 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.IndrISVAddressDTO import IndrISVAddressDTO
 
 
 class TuitionISVStudentInfoDTO(object):
 
     def __init__(self):
+        self._birth_date = None
         self._email = None
         self._entrance_date = None
         self._first_name = None
+        self._identity_address = None
         self._identity_card_number = None
+        self._identity_type = None
         self._last_name = None
         self._length_of_schooling = None
         self._student_name = None
         self._student_number = None
         self._student_phone_number = None
 
+    @property
+    def birth_date(self):
+        return self._birth_date
+
+    @birth_date.setter
+    def birth_date(self, value):
+        self._birth_date = value
     @property
     def email(self):
         return self._email
@@ -40,12 +51,29 @@ class TuitionISVStudentInfoDTO(object):
     def first_name(self, value):
         self._first_name = value
     @property
+    def identity_address(self):
+        return self._identity_address
+
+    @identity_address.setter
+    def identity_address(self, value):
+        if isinstance(value, IndrISVAddressDTO):
+            self._identity_address = value
+        else:
+            self._identity_address = IndrISVAddressDTO.from_alipay_dict(value)
+    @property
     def identity_card_number(self):
         return self._identity_card_number
 
     @identity_card_number.setter
     def identity_card_number(self, value):
         self._identity_card_number = value
+    @property
+    def identity_type(self):
+        return self._identity_type
+
+    @identity_type.setter
+    def identity_type(self, value):
+        self._identity_type = value
     @property
     def last_name(self):
         return self._last_name
@@ -85,6 +113,11 @@ class TuitionISVStudentInfoDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.birth_date:
+            if hasattr(self.birth_date, 'to_alipay_dict'):
+                params['birth_date'] = self.birth_date.to_alipay_dict()
+            else:
+                params['birth_date'] = self.birth_date
         if self.email:
             if hasattr(self.email, 'to_alipay_dict'):
                 params['email'] = self.email.to_alipay_dict()
@@ -100,11 +133,21 @@ class TuitionISVStudentInfoDTO(object):
                 params['first_name'] = self.first_name.to_alipay_dict()
             else:
                 params['first_name'] = self.first_name
+        if self.identity_address:
+            if hasattr(self.identity_address, 'to_alipay_dict'):
+                params['identity_address'] = self.identity_address.to_alipay_dict()
+            else:
+                params['identity_address'] = self.identity_address
         if self.identity_card_number:
             if hasattr(self.identity_card_number, 'to_alipay_dict'):
                 params['identity_card_number'] = self.identity_card_number.to_alipay_dict()
             else:
                 params['identity_card_number'] = self.identity_card_number
+        if self.identity_type:
+            if hasattr(self.identity_type, 'to_alipay_dict'):
+                params['identity_type'] = self.identity_type.to_alipay_dict()
+            else:
+                params['identity_type'] = self.identity_type
         if self.last_name:
             if hasattr(self.last_name, 'to_alipay_dict'):
                 params['last_name'] = self.last_name.to_alipay_dict()
@@ -137,14 +180,20 @@ class TuitionISVStudentInfoDTO(object):
         if not d:
             return None
         o = TuitionISVStudentInfoDTO()
+        if 'birth_date' in d:
+            o.birth_date = d['birth_date']
         if 'email' in d:
             o.email = d['email']
         if 'entrance_date' in d:
             o.entrance_date = d['entrance_date']
         if 'first_name' in d:
             o.first_name = d['first_name']
+        if 'identity_address' in d:
+            o.identity_address = d['identity_address']
         if 'identity_card_number' in d:
             o.identity_card_number = d['identity_card_number']
+        if 'identity_type' in d:
+            o.identity_type = d['identity_type']
         if 'last_name' in d:
             o.last_name = d['last_name']
         if 'length_of_schooling' in d:

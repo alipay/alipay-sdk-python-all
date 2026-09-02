@@ -36,17 +36,24 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         self._test_password = None
         self._version_desc = None
         self._app_logo = None
+        self._eighth_special_license_pic = None
         self._fifth_license_pic = None
         self._fifth_screen_shot = None
+        self._fifth_special_license_pic = None
         self._first_license_pic = None
         self._first_screen_shot = None
         self._first_special_license_pic = None
         self._fourth_license_pic = None
         self._fourth_screen_shot = None
+        self._fourth_special_license_pic = None
+        self._ninth_special_license_pic = None
         self._out_door_pic = None
         self._second_license_pic = None
         self._second_screen_shot = None
         self._second_special_license_pic = None
+        self._seventh_special_license_pic = None
+        self._sixth_special_license_pic = None
+        self._tenth_special_license_pic = None
         self._test_file_name = None
         self._third_license_pic = None
         self._third_screen_shot = None
@@ -239,6 +246,15 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             return
         self._app_logo = value
     @property
+    def eighth_special_license_pic(self):
+        return self._eighth_special_license_pic
+
+    @eighth_special_license_pic.setter
+    def eighth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._eighth_special_license_pic = value
+    @property
     def fifth_license_pic(self):
         return self._fifth_license_pic
 
@@ -256,6 +272,15 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         if not isinstance(value, FileItem):
             return
         self._fifth_screen_shot = value
+    @property
+    def fifth_special_license_pic(self):
+        return self._fifth_special_license_pic
+
+    @fifth_special_license_pic.setter
+    def fifth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._fifth_special_license_pic = value
     @property
     def first_license_pic(self):
         return self._first_license_pic
@@ -302,6 +327,24 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             return
         self._fourth_screen_shot = value
     @property
+    def fourth_special_license_pic(self):
+        return self._fourth_special_license_pic
+
+    @fourth_special_license_pic.setter
+    def fourth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._fourth_special_license_pic = value
+    @property
+    def ninth_special_license_pic(self):
+        return self._ninth_special_license_pic
+
+    @ninth_special_license_pic.setter
+    def ninth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._ninth_special_license_pic = value
+    @property
     def out_door_pic(self):
         return self._out_door_pic
 
@@ -337,6 +380,33 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         if not isinstance(value, FileItem):
             return
         self._second_special_license_pic = value
+    @property
+    def seventh_special_license_pic(self):
+        return self._seventh_special_license_pic
+
+    @seventh_special_license_pic.setter
+    def seventh_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._seventh_special_license_pic = value
+    @property
+    def sixth_special_license_pic(self):
+        return self._sixth_special_license_pic
+
+    @sixth_special_license_pic.setter
+    def sixth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._sixth_special_license_pic = value
+    @property
+    def tenth_special_license_pic(self):
+        return self._tenth_special_license_pic
+
+    @tenth_special_license_pic.setter
+    def tenth_special_license_pic(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._tenth_special_license_pic = value
     @property
     def test_file_name(self):
         return self._test_file_name
@@ -581,10 +651,14 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
         multipart_params = dict()
         if self.app_logo:
             multipart_params['app_logo'] = self.app_logo
+        if self.eighth_special_license_pic:
+            multipart_params['eighth_special_license_pic'] = self.eighth_special_license_pic
         if self.fifth_license_pic:
             multipart_params['fifth_license_pic'] = self.fifth_license_pic
         if self.fifth_screen_shot:
             multipart_params['fifth_screen_shot'] = self.fifth_screen_shot
+        if self.fifth_special_license_pic:
+            multipart_params['fifth_special_license_pic'] = self.fifth_special_license_pic
         if self.first_license_pic:
             multipart_params['first_license_pic'] = self.first_license_pic
         if self.first_screen_shot:
@@ -595,6 +669,10 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             multipart_params['fourth_license_pic'] = self.fourth_license_pic
         if self.fourth_screen_shot:
             multipart_params['fourth_screen_shot'] = self.fourth_screen_shot
+        if self.fourth_special_license_pic:
+            multipart_params['fourth_special_license_pic'] = self.fourth_special_license_pic
+        if self.ninth_special_license_pic:
+            multipart_params['ninth_special_license_pic'] = self.ninth_special_license_pic
         if self.out_door_pic:
             multipart_params['out_door_pic'] = self.out_door_pic
         if self.second_license_pic:
@@ -603,6 +681,12 @@ class AlipayOpenMiniVersionAuditApplyRequest(object):
             multipart_params['second_screen_shot'] = self.second_screen_shot
         if self.second_special_license_pic:
             multipart_params['second_special_license_pic'] = self.second_special_license_pic
+        if self.seventh_special_license_pic:
+            multipart_params['seventh_special_license_pic'] = self.seventh_special_license_pic
+        if self.sixth_special_license_pic:
+            multipart_params['sixth_special_license_pic'] = self.sixth_special_license_pic
+        if self.tenth_special_license_pic:
+            multipart_params['tenth_special_license_pic'] = self.tenth_special_license_pic
         if self.test_file_name:
             multipart_params['test_file_name'] = self.test_file_name
         if self.third_license_pic:

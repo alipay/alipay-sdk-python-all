@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.RedirectUrlParam import RedirectUrlParam
 
 
 class MsgDataParam(object):
@@ -19,6 +20,7 @@ class MsgDataParam(object):
         self._msg_type = None
         self._patient_name = None
         self._redirect_url = None
+        self._redirect_url_params = None
         self._redirect_urls = None
 
     @property
@@ -99,6 +101,19 @@ class MsgDataParam(object):
     def redirect_url(self, value):
         self._redirect_url = value
     @property
+    def redirect_url_params(self):
+        return self._redirect_url_params
+
+    @redirect_url_params.setter
+    def redirect_url_params(self, value):
+        if isinstance(value, list):
+            self._redirect_url_params = list()
+            for i in value:
+                if isinstance(i, RedirectUrlParam):
+                    self._redirect_url_params.append(i)
+                else:
+                    self._redirect_url_params.append(RedirectUrlParam.from_alipay_dict(i))
+    @property
     def redirect_urls(self):
         return self._redirect_urls
 
@@ -167,6 +182,16 @@ class MsgDataParam(object):
                 params['redirect_url'] = self.redirect_url.to_alipay_dict()
             else:
                 params['redirect_url'] = self.redirect_url
+        if self.redirect_url_params:
+            if isinstance(self.redirect_url_params, list):
+                for i in range(0, len(self.redirect_url_params)):
+                    element = self.redirect_url_params[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.redirect_url_params[i] = element.to_alipay_dict()
+            if hasattr(self.redirect_url_params, 'to_alipay_dict'):
+                params['redirect_url_params'] = self.redirect_url_params.to_alipay_dict()
+            else:
+                params['redirect_url_params'] = self.redirect_url_params
         if self.redirect_urls:
             if isinstance(self.redirect_urls, list):
                 for i in range(0, len(self.redirect_urls)):
@@ -206,6 +231,8 @@ class MsgDataParam(object):
             o.patient_name = d['patient_name']
         if 'redirect_url' in d:
             o.redirect_url = d['redirect_url']
+        if 'redirect_url_params' in d:
+            o.redirect_url_params = d['redirect_url_params']
         if 'redirect_urls' in d:
             o.redirect_urls = d['redirect_urls']
         return o

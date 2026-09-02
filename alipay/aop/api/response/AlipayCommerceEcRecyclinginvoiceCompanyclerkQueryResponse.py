@@ -9,6 +9,7 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse, self).__init__()
+        self._clerk_auth_url = None
         self._clerk_name = None
         self._clerk_phone = None
         self._clerk_role = None
@@ -16,6 +17,13 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
         self._company_clerk_id = None
         self._out_clerk_id = None
 
+    @property
+    def clerk_auth_url(self):
+        return self._clerk_auth_url
+
+    @clerk_auth_url.setter
+    def clerk_auth_url(self, value):
+        self._clerk_auth_url = value
     @property
     def clerk_name(self):
         return self._clerk_name
@@ -61,6 +69,8 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcRecyclinginvoiceCompanyclerkQueryResponse, self).parse_response_content(response_content)
+        if 'clerk_auth_url' in response:
+            self.clerk_auth_url = response['clerk_auth_url']
         if 'clerk_name' in response:
             self.clerk_name = response['clerk_name']
         if 'clerk_phone' in response:

@@ -11,7 +11,11 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
         self._account_id = None
         self._agreement_no = None
         self._bill_month_day = None
+        self._bill_scope = None
+        self._combined_pay_mode = None
+        self._default_invoice_kind = None
         self._enterprise_id = None
+        self._invoice_remark_value_rule = None
         self._invoice_rule_name = None
         self._invoice_title_id = None
         self._open_mode = None
@@ -43,12 +47,40 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
     def bill_month_day(self, value):
         self._bill_month_day = value
     @property
+    def bill_scope(self):
+        return self._bill_scope
+
+    @bill_scope.setter
+    def bill_scope(self, value):
+        self._bill_scope = value
+    @property
+    def combined_pay_mode(self):
+        return self._combined_pay_mode
+
+    @combined_pay_mode.setter
+    def combined_pay_mode(self, value):
+        self._combined_pay_mode = value
+    @property
+    def default_invoice_kind(self):
+        return self._default_invoice_kind
+
+    @default_invoice_kind.setter
+    def default_invoice_kind(self, value):
+        self._default_invoice_kind = value
+    @property
     def enterprise_id(self):
         return self._enterprise_id
 
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def invoice_remark_value_rule(self):
+        return self._invoice_remark_value_rule
+
+    @invoice_remark_value_rule.setter
+    def invoice_remark_value_rule(self, value):
+        self._invoice_remark_value_rule = value
     @property
     def invoice_rule_name(self):
         return self._invoice_rule_name
@@ -124,11 +156,31 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
                 params['bill_month_day'] = self.bill_month_day.to_alipay_dict()
             else:
                 params['bill_month_day'] = self.bill_month_day
+        if self.bill_scope:
+            if hasattr(self.bill_scope, 'to_alipay_dict'):
+                params['bill_scope'] = self.bill_scope.to_alipay_dict()
+            else:
+                params['bill_scope'] = self.bill_scope
+        if self.combined_pay_mode:
+            if hasattr(self.combined_pay_mode, 'to_alipay_dict'):
+                params['combined_pay_mode'] = self.combined_pay_mode.to_alipay_dict()
+            else:
+                params['combined_pay_mode'] = self.combined_pay_mode
+        if self.default_invoice_kind:
+            if hasattr(self.default_invoice_kind, 'to_alipay_dict'):
+                params['default_invoice_kind'] = self.default_invoice_kind.to_alipay_dict()
+            else:
+                params['default_invoice_kind'] = self.default_invoice_kind
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.invoice_remark_value_rule:
+            if hasattr(self.invoice_remark_value_rule, 'to_alipay_dict'):
+                params['invoice_remark_value_rule'] = self.invoice_remark_value_rule.to_alipay_dict()
+            else:
+                params['invoice_remark_value_rule'] = self.invoice_remark_value_rule
         if self.invoice_rule_name:
             if hasattr(self.invoice_rule_name, 'to_alipay_dict'):
                 params['invoice_rule_name'] = self.invoice_rule_name.to_alipay_dict()
@@ -182,8 +234,16 @@ class AlipayEbppInvoiceEnterpriseconsumeEnterpriseopenruleCreateModel(object):
             o.agreement_no = d['agreement_no']
         if 'bill_month_day' in d:
             o.bill_month_day = d['bill_month_day']
+        if 'bill_scope' in d:
+            o.bill_scope = d['bill_scope']
+        if 'combined_pay_mode' in d:
+            o.combined_pay_mode = d['combined_pay_mode']
+        if 'default_invoice_kind' in d:
+            o.default_invoice_kind = d['default_invoice_kind']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'invoice_remark_value_rule' in d:
+            o.invoice_remark_value_rule = d['invoice_remark_value_rule']
         if 'invoice_rule_name' in d:
             o.invoice_rule_name = d['invoice_rule_name']
         if 'invoice_title_id' in d:

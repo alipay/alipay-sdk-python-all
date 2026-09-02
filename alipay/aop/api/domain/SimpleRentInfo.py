@@ -25,6 +25,7 @@ class SimpleRentInfo(object):
         self._loan_time = None
         self._merchant_app_id = None
         self._merchant_uscc = None
+        self._order_zst_type = None
         self._out_order_id = None
         self._plan_list = None
         self._price_info = None
@@ -134,6 +135,13 @@ class SimpleRentInfo(object):
     @merchant_uscc.setter
     def merchant_uscc(self, value):
         self._merchant_uscc = value
+    @property
+    def order_zst_type(self):
+        return self._order_zst_type
+
+    @order_zst_type.setter
+    def order_zst_type(self, value):
+        self._order_zst_type = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -296,6 +304,11 @@ class SimpleRentInfo(object):
                 params['merchant_uscc'] = self.merchant_uscc.to_alipay_dict()
             else:
                 params['merchant_uscc'] = self.merchant_uscc
+        if self.order_zst_type:
+            if hasattr(self.order_zst_type, 'to_alipay_dict'):
+                params['order_zst_type'] = self.order_zst_type.to_alipay_dict()
+            else:
+                params['order_zst_type'] = self.order_zst_type
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -396,6 +409,8 @@ class SimpleRentInfo(object):
             o.merchant_app_id = d['merchant_app_id']
         if 'merchant_uscc' in d:
             o.merchant_uscc = d['merchant_uscc']
+        if 'order_zst_type' in d:
+            o.order_zst_type = d['order_zst_type']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plan_list' in d:

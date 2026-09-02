@@ -10,6 +10,7 @@ class FulfillmentPatientInfo(object):
     def __init__(self):
         self._age = None
         self._disease_desc = None
+        self._disease_name = None
         self._gender = None
         self._id_card_no = None
         self._id_card_type = None
@@ -32,6 +33,13 @@ class FulfillmentPatientInfo(object):
     @disease_desc.setter
     def disease_desc(self, value):
         self._disease_desc = value
+    @property
+    def disease_name(self):
+        return self._disease_name
+
+    @disease_name.setter
+    def disease_name(self, value):
+        self._disease_name = value
     @property
     def gender(self):
         return self._gender
@@ -95,6 +103,11 @@ class FulfillmentPatientInfo(object):
                 params['disease_desc'] = self.disease_desc.to_alipay_dict()
             else:
                 params['disease_desc'] = self.disease_desc
+        if self.disease_name:
+            if hasattr(self.disease_name, 'to_alipay_dict'):
+                params['disease_name'] = self.disease_name.to_alipay_dict()
+            else:
+                params['disease_name'] = self.disease_name
         if self.gender:
             if hasattr(self.gender, 'to_alipay_dict'):
                 params['gender'] = self.gender.to_alipay_dict()
@@ -141,6 +154,8 @@ class FulfillmentPatientInfo(object):
             o.age = d['age']
         if 'disease_desc' in d:
             o.disease_desc = d['disease_desc']
+        if 'disease_name' in d:
+            o.disease_name = d['disease_name']
         if 'gender' in d:
             o.gender = d['gender']
         if 'id_card_no' in d:

@@ -13,6 +13,8 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
         self._count = None
         self._open_id = None
         self._out_biz_id = None
+        self._redemption_code = None
+        self._redemption_guide_url = None
         self._shop_id = None
         self._use_desc = None
         self._user_id = None
@@ -52,6 +54,20 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
     @out_biz_id.setter
     def out_biz_id(self, value):
         self._out_biz_id = value
+    @property
+    def redemption_code(self):
+        return self._redemption_code
+
+    @redemption_code.setter
+    def redemption_code(self, value):
+        self._redemption_code = value
+    @property
+    def redemption_guide_url(self):
+        return self._redemption_guide_url
+
+    @redemption_guide_url.setter
+    def redemption_guide_url(self, value):
+        self._redemption_guide_url = value
     @property
     def shop_id(self):
         return self._shop_id
@@ -102,6 +118,16 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
                 params['out_biz_id'] = self.out_biz_id.to_alipay_dict()
             else:
                 params['out_biz_id'] = self.out_biz_id
+        if self.redemption_code:
+            if hasattr(self.redemption_code, 'to_alipay_dict'):
+                params['redemption_code'] = self.redemption_code.to_alipay_dict()
+            else:
+                params['redemption_code'] = self.redemption_code
+        if self.redemption_guide_url:
+            if hasattr(self.redemption_guide_url, 'to_alipay_dict'):
+                params['redemption_guide_url'] = self.redemption_guide_url.to_alipay_dict()
+            else:
+                params['redemption_guide_url'] = self.redemption_guide_url
         if self.shop_id:
             if hasattr(self.shop_id, 'to_alipay_dict'):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
@@ -134,6 +160,10 @@ class AlipayCommerceMerchantcardDeductionorderUseModel(object):
             o.open_id = d['open_id']
         if 'out_biz_id' in d:
             o.out_biz_id = d['out_biz_id']
+        if 'redemption_code' in d:
+            o.redemption_code = d['redemption_code']
+        if 'redemption_guide_url' in d:
+            o.redemption_guide_url = d['redemption_guide_url']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
         if 'use_desc' in d:

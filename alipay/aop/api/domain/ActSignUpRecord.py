@@ -13,6 +13,7 @@ class ActSignUpRecord(object):
         self._activity_round_start_time = None
         self._activity_user_end_time = None
         self._activity_user_start_time = None
+        self._effective_status = None
         self._gmt_create = None
         self._gmt_modified = None
         self._id = None
@@ -56,6 +57,13 @@ class ActSignUpRecord(object):
     @activity_user_start_time.setter
     def activity_user_start_time(self, value):
         self._activity_user_start_time = value
+    @property
+    def effective_status(self):
+        return self._effective_status
+
+    @effective_status.setter
+    def effective_status(self, value):
+        self._effective_status = value
     @property
     def gmt_create(self):
         return self._gmt_create
@@ -134,6 +142,11 @@ class ActSignUpRecord(object):
                 params['activity_user_start_time'] = self.activity_user_start_time.to_alipay_dict()
             else:
                 params['activity_user_start_time'] = self.activity_user_start_time
+        if self.effective_status:
+            if hasattr(self.effective_status, 'to_alipay_dict'):
+                params['effective_status'] = self.effective_status.to_alipay_dict()
+            else:
+                params['effective_status'] = self.effective_status
         if self.gmt_create:
             if hasattr(self.gmt_create, 'to_alipay_dict'):
                 params['gmt_create'] = self.gmt_create.to_alipay_dict()
@@ -186,6 +199,8 @@ class ActSignUpRecord(object):
             o.activity_user_end_time = d['activity_user_end_time']
         if 'activity_user_start_time' in d:
             o.activity_user_start_time = d['activity_user_start_time']
+        if 'effective_status' in d:
+            o.effective_status = d['effective_status']
         if 'gmt_create' in d:
             o.gmt_create = d['gmt_create']
         if 'gmt_modified' in d:

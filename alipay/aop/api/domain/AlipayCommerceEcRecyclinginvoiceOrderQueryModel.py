@@ -11,6 +11,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryModel(object):
         self._order_id = None
         self._outer_order_id = None
         self._product_id = None
+        self._query_options = None
         self._tax_no = None
 
     @property
@@ -34,6 +35,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryModel(object):
     @product_id.setter
     def product_id(self, value):
         self._product_id = value
+    @property
+    def query_options(self):
+        return self._query_options
+
+    @query_options.setter
+    def query_options(self, value):
+        self._query_options = value
     @property
     def tax_no(self):
         return self._tax_no
@@ -60,6 +68,11 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryModel(object):
                 params['product_id'] = self.product_id.to_alipay_dict()
             else:
                 params['product_id'] = self.product_id
+        if self.query_options:
+            if hasattr(self.query_options, 'to_alipay_dict'):
+                params['query_options'] = self.query_options.to_alipay_dict()
+            else:
+                params['query_options'] = self.query_options
         if self.tax_no:
             if hasattr(self.tax_no, 'to_alipay_dict'):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
@@ -78,6 +91,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryModel(object):
             o.outer_order_id = d['outer_order_id']
         if 'product_id' in d:
             o.product_id = d['product_id']
+        if 'query_options' in d:
+            o.query_options = d['query_options']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
         return o

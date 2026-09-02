@@ -30,6 +30,7 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._sub_order_error_code = None
         self._sub_order_fail_reason = None
         self._sub_order_status = None
+        self._sub_pay_fund_order_id = None
         self._sub_status = None
         self._trans_amount = None
         self._transfer_bill_info = None
@@ -182,6 +183,13 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def sub_order_status(self, value):
         self._sub_order_status = value
     @property
+    def sub_pay_fund_order_id(self):
+        return self._sub_pay_fund_order_id
+
+    @sub_pay_fund_order_id.setter
+    def sub_pay_fund_order_id(self, value):
+        self._sub_pay_fund_order_id = value
+    @property
     def sub_status(self):
         return self._sub_status
 
@@ -247,6 +255,8 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.sub_order_fail_reason = response['sub_order_fail_reason']
         if 'sub_order_status' in response:
             self.sub_order_status = response['sub_order_status']
+        if 'sub_pay_fund_order_id' in response:
+            self.sub_pay_fund_order_id = response['sub_pay_fund_order_id']
         if 'sub_status' in response:
             self.sub_status = response['sub_status']
         if 'trans_amount' in response:

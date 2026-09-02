@@ -10,6 +10,7 @@ class AlipayTradeCustomerCreateModel(object):
     def __init__(self):
         self._description = None
         self._email = None
+        self._merchant_request_no = None
         self._name = None
         self._phone = None
 
@@ -27,6 +28,13 @@ class AlipayTradeCustomerCreateModel(object):
     @email.setter
     def email(self, value):
         self._email = value
+    @property
+    def merchant_request_no(self):
+        return self._merchant_request_no
+
+    @merchant_request_no.setter
+    def merchant_request_no(self, value):
+        self._merchant_request_no = value
     @property
     def name(self):
         return self._name
@@ -55,6 +63,11 @@ class AlipayTradeCustomerCreateModel(object):
                 params['email'] = self.email.to_alipay_dict()
             else:
                 params['email'] = self.email
+        if self.merchant_request_no:
+            if hasattr(self.merchant_request_no, 'to_alipay_dict'):
+                params['merchant_request_no'] = self.merchant_request_no.to_alipay_dict()
+            else:
+                params['merchant_request_no'] = self.merchant_request_no
         if self.name:
             if hasattr(self.name, 'to_alipay_dict'):
                 params['name'] = self.name.to_alipay_dict()
@@ -76,6 +89,8 @@ class AlipayTradeCustomerCreateModel(object):
             o.description = d['description']
         if 'email' in d:
             o.email = d['email']
+        if 'merchant_request_no' in d:
+            o.merchant_request_no = d['merchant_request_no']
         if 'name' in d:
             o.name = d['name']
         if 'phone' in d:

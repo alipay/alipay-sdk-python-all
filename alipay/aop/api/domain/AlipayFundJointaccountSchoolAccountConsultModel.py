@@ -9,9 +9,11 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
 
     def __init__(self):
         self._biz_scene = None
+        self._entity_id = None
         self._face_id = None
         self._master_open_id = None
         self._master_user_id = None
+        self._only_need_entity_info = None
         self._product_code = None
         self._school_sign_type = None
         self._student_cert_no = None
@@ -25,6 +27,13 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
     @biz_scene.setter
     def biz_scene(self, value):
         self._biz_scene = value
+    @property
+    def entity_id(self):
+        return self._entity_id
+
+    @entity_id.setter
+    def entity_id(self, value):
+        self._entity_id = value
     @property
     def face_id(self):
         return self._face_id
@@ -46,6 +55,13 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
     @master_user_id.setter
     def master_user_id(self, value):
         self._master_user_id = value
+    @property
+    def only_need_entity_info(self):
+        return self._only_need_entity_info
+
+    @only_need_entity_info.setter
+    def only_need_entity_info(self, value):
+        self._only_need_entity_info = value
     @property
     def product_code(self):
         return self._product_code
@@ -90,6 +106,11 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
             else:
                 params['biz_scene'] = self.biz_scene
+        if self.entity_id:
+            if hasattr(self.entity_id, 'to_alipay_dict'):
+                params['entity_id'] = self.entity_id.to_alipay_dict()
+            else:
+                params['entity_id'] = self.entity_id
         if self.face_id:
             if hasattr(self.face_id, 'to_alipay_dict'):
                 params['face_id'] = self.face_id.to_alipay_dict()
@@ -105,6 +126,11 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
                 params['master_user_id'] = self.master_user_id.to_alipay_dict()
             else:
                 params['master_user_id'] = self.master_user_id
+        if self.only_need_entity_info:
+            if hasattr(self.only_need_entity_info, 'to_alipay_dict'):
+                params['only_need_entity_info'] = self.only_need_entity_info.to_alipay_dict()
+            else:
+                params['only_need_entity_info'] = self.only_need_entity_info
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -139,12 +165,16 @@ class AlipayFundJointaccountSchoolAccountConsultModel(object):
         o = AlipayFundJointaccountSchoolAccountConsultModel()
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
+        if 'entity_id' in d:
+            o.entity_id = d['entity_id']
         if 'face_id' in d:
             o.face_id = d['face_id']
         if 'master_open_id' in d:
             o.master_open_id = d['master_open_id']
         if 'master_user_id' in d:
             o.master_user_id = d['master_user_id']
+        if 'only_need_entity_info' in d:
+            o.only_need_entity_info = d['only_need_entity_info']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'school_sign_type' in d:

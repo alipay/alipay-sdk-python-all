@@ -10,6 +10,7 @@ from alipay.aop.api.domain.UserSubOrganizationDTO import UserSubOrganizationDTO
 class UserOrganizationDTO(object):
 
     def __init__(self):
+        self._applicant_passport_id = None
         self._entity_id = None
         self._id = None
         self._ma_check_status = None
@@ -20,6 +21,13 @@ class UserOrganizationDTO(object):
         self._user_sub_org_list = None
         self._work_order_permission = None
 
+    @property
+    def applicant_passport_id(self):
+        return self._applicant_passport_id
+
+    @applicant_passport_id.setter
+    def applicant_passport_id(self, value):
+        self._applicant_passport_id = value
     @property
     def entity_id(self):
         return self._entity_id
@@ -99,6 +107,11 @@ class UserOrganizationDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.applicant_passport_id:
+            if hasattr(self.applicant_passport_id, 'to_alipay_dict'):
+                params['applicant_passport_id'] = self.applicant_passport_id.to_alipay_dict()
+            else:
+                params['applicant_passport_id'] = self.applicant_passport_id
         if self.entity_id:
             if hasattr(self.entity_id, 'to_alipay_dict'):
                 params['entity_id'] = self.entity_id.to_alipay_dict()
@@ -161,6 +174,8 @@ class UserOrganizationDTO(object):
         if not d:
             return None
         o = UserOrganizationDTO()
+        if 'applicant_passport_id' in d:
+            o.applicant_passport_id = d['applicant_passport_id']
         if 'entity_id' in d:
             o.entity_id = d['entity_id']
         if 'id' in d:

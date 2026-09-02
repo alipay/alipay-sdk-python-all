@@ -9,6 +9,9 @@ from alipay.aop.api.domain.ResalePayInfoVO import ResalePayInfoVO
 class AlipayCommerceResaleOrderPayModel(object):
 
     def __init__(self):
+        self._fq_channels = None
+        self._fq_num = None
+        self._fq_seller_percent = None
         self._open_id = None
         self._out_order_id = None
         self._out_pay_id = None
@@ -20,6 +23,27 @@ class AlipayCommerceResaleOrderPayModel(object):
         self._pay_type = None
         self._user_id = None
 
+    @property
+    def fq_channels(self):
+        return self._fq_channels
+
+    @fq_channels.setter
+    def fq_channels(self, value):
+        self._fq_channels = value
+    @property
+    def fq_num(self):
+        return self._fq_num
+
+    @fq_num.setter
+    def fq_num(self, value):
+        self._fq_num = value
+    @property
+    def fq_seller_percent(self):
+        return self._fq_seller_percent
+
+    @fq_seller_percent.setter
+    def fq_seller_percent(self, value):
+        self._fq_seller_percent = value
     @property
     def open_id(self):
         return self._open_id
@@ -100,6 +124,21 @@ class AlipayCommerceResaleOrderPayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.fq_channels:
+            if hasattr(self.fq_channels, 'to_alipay_dict'):
+                params['fq_channels'] = self.fq_channels.to_alipay_dict()
+            else:
+                params['fq_channels'] = self.fq_channels
+        if self.fq_num:
+            if hasattr(self.fq_num, 'to_alipay_dict'):
+                params['fq_num'] = self.fq_num.to_alipay_dict()
+            else:
+                params['fq_num'] = self.fq_num
+        if self.fq_seller_percent:
+            if hasattr(self.fq_seller_percent, 'to_alipay_dict'):
+                params['fq_seller_percent'] = self.fq_seller_percent.to_alipay_dict()
+            else:
+                params['fq_seller_percent'] = self.fq_seller_percent
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -162,6 +201,12 @@ class AlipayCommerceResaleOrderPayModel(object):
         if not d:
             return None
         o = AlipayCommerceResaleOrderPayModel()
+        if 'fq_channels' in d:
+            o.fq_channels = d['fq_channels']
+        if 'fq_num' in d:
+            o.fq_num = d['fq_num']
+        if 'fq_seller_percent' in d:
+            o.fq_seller_percent = d['fq_seller_percent']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'out_order_id' in d:

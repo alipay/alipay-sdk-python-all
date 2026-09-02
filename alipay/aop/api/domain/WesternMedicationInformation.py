@@ -10,6 +10,7 @@ class WesternMedicationInformation(object):
     def __init__(self):
         self._dosage = None
         self._medical_name = None
+        self._quantity = None
         self._remark = None
         self._spec = None
         self._usage = None
@@ -28,6 +29,13 @@ class WesternMedicationInformation(object):
     @medical_name.setter
     def medical_name(self, value):
         self._medical_name = value
+    @property
+    def quantity(self):
+        return self._quantity
+
+    @quantity.setter
+    def quantity(self, value):
+        self._quantity = value
     @property
     def remark(self):
         return self._remark
@@ -63,6 +71,11 @@ class WesternMedicationInformation(object):
                 params['medical_name'] = self.medical_name.to_alipay_dict()
             else:
                 params['medical_name'] = self.medical_name
+        if self.quantity:
+            if hasattr(self.quantity, 'to_alipay_dict'):
+                params['quantity'] = self.quantity.to_alipay_dict()
+            else:
+                params['quantity'] = self.quantity
         if self.remark:
             if hasattr(self.remark, 'to_alipay_dict'):
                 params['remark'] = self.remark.to_alipay_dict()
@@ -89,6 +102,8 @@ class WesternMedicationInformation(object):
             o.dosage = d['dosage']
         if 'medical_name' in d:
             o.medical_name = d['medical_name']
+        if 'quantity' in d:
+            o.quantity = d['quantity']
         if 'remark' in d:
             o.remark = d['remark']
         if 'spec' in d:

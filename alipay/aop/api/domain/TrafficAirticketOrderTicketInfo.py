@@ -27,8 +27,11 @@ class TrafficAirticketOrderTicketInfo(object):
         self._share_info = None
         self._status = None
         self._status_desc = None
+        self._ticket_fuel_cost = None
+        self._ticket_infrastructure_cost = None
         self._ticket_no = None
         self._ticket_order = None
+        self._ticket_raw_price = None
         self._ticket_type = None
         self._ticket_uuid = None
 
@@ -161,6 +164,20 @@ class TrafficAirticketOrderTicketInfo(object):
     def status_desc(self, value):
         self._status_desc = value
     @property
+    def ticket_fuel_cost(self):
+        return self._ticket_fuel_cost
+
+    @ticket_fuel_cost.setter
+    def ticket_fuel_cost(self, value):
+        self._ticket_fuel_cost = value
+    @property
+    def ticket_infrastructure_cost(self):
+        return self._ticket_infrastructure_cost
+
+    @ticket_infrastructure_cost.setter
+    def ticket_infrastructure_cost(self, value):
+        self._ticket_infrastructure_cost = value
+    @property
     def ticket_no(self):
         return self._ticket_no
 
@@ -174,6 +191,13 @@ class TrafficAirticketOrderTicketInfo(object):
     @ticket_order.setter
     def ticket_order(self, value):
         self._ticket_order = value
+    @property
+    def ticket_raw_price(self):
+        return self._ticket_raw_price
+
+    @ticket_raw_price.setter
+    def ticket_raw_price(self, value):
+        self._ticket_raw_price = value
     @property
     def ticket_type(self):
         return self._ticket_type
@@ -282,6 +306,16 @@ class TrafficAirticketOrderTicketInfo(object):
                 params['status_desc'] = self.status_desc.to_alipay_dict()
             else:
                 params['status_desc'] = self.status_desc
+        if self.ticket_fuel_cost:
+            if hasattr(self.ticket_fuel_cost, 'to_alipay_dict'):
+                params['ticket_fuel_cost'] = self.ticket_fuel_cost.to_alipay_dict()
+            else:
+                params['ticket_fuel_cost'] = self.ticket_fuel_cost
+        if self.ticket_infrastructure_cost:
+            if hasattr(self.ticket_infrastructure_cost, 'to_alipay_dict'):
+                params['ticket_infrastructure_cost'] = self.ticket_infrastructure_cost.to_alipay_dict()
+            else:
+                params['ticket_infrastructure_cost'] = self.ticket_infrastructure_cost
         if self.ticket_no:
             if hasattr(self.ticket_no, 'to_alipay_dict'):
                 params['ticket_no'] = self.ticket_no.to_alipay_dict()
@@ -292,6 +326,11 @@ class TrafficAirticketOrderTicketInfo(object):
                 params['ticket_order'] = self.ticket_order.to_alipay_dict()
             else:
                 params['ticket_order'] = self.ticket_order
+        if self.ticket_raw_price:
+            if hasattr(self.ticket_raw_price, 'to_alipay_dict'):
+                params['ticket_raw_price'] = self.ticket_raw_price.to_alipay_dict()
+            else:
+                params['ticket_raw_price'] = self.ticket_raw_price
         if self.ticket_type:
             if hasattr(self.ticket_type, 'to_alipay_dict'):
                 params['ticket_type'] = self.ticket_type.to_alipay_dict()
@@ -343,10 +382,16 @@ class TrafficAirticketOrderTicketInfo(object):
             o.status = d['status']
         if 'status_desc' in d:
             o.status_desc = d['status_desc']
+        if 'ticket_fuel_cost' in d:
+            o.ticket_fuel_cost = d['ticket_fuel_cost']
+        if 'ticket_infrastructure_cost' in d:
+            o.ticket_infrastructure_cost = d['ticket_infrastructure_cost']
         if 'ticket_no' in d:
             o.ticket_no = d['ticket_no']
         if 'ticket_order' in d:
             o.ticket_order = d['ticket_order']
+        if 'ticket_raw_price' in d:
+            o.ticket_raw_price = d['ticket_raw_price']
         if 'ticket_type' in d:
             o.ticket_type = d['ticket_type']
         if 'ticket_uuid' in d:

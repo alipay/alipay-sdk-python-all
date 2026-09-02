@@ -3,7 +3,9 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.IndustryInvoiceChannelInfo import IndustryInvoiceChannelInfo
 from alipay.aop.api.domain.IndustryInvoiceItemInfo import IndustryInvoiceItemInfo
+from alipay.aop.api.domain.IndustryInvoicePassengerTransport import IndustryInvoicePassengerTransport
 from alipay.aop.api.domain.IndustryInvoiceRealPropertyBusiness import IndustryInvoiceRealPropertyBusiness
 from alipay.aop.api.domain.IndustryInvoiceTradeInfo import IndustryInvoiceTradeInfo
 
@@ -12,12 +14,14 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
 
     def __init__(self):
         self._buyer_address = None
+        self._buyer_alipay_login_id = None
         self._buyer_bank_account = None
         self._buyer_bank_name = None
         self._buyer_name = None
         self._buyer_tax_no = None
         self._buyer_tax_no_type = None
         self._buyer_tel = None
+        self._channel_info = None
         self._checker = None
         self._clerk = None
         self._clerk_cert_no = None
@@ -31,7 +35,9 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._nature_person_country = None
         self._nature_person_flag = None
         self._outer_apply_id = None
+        self._passenger_transport_list = None
         self._payee = None
+        self._product_code = None
         self._product_id = None
         self._real_property_business_list = None
         self._related_blue_invoice_no = None
@@ -52,6 +58,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     @buyer_address.setter
     def buyer_address(self, value):
         self._buyer_address = value
+    @property
+    def buyer_alipay_login_id(self):
+        return self._buyer_alipay_login_id
+
+    @buyer_alipay_login_id.setter
+    def buyer_alipay_login_id(self, value):
+        self._buyer_alipay_login_id = value
     @property
     def buyer_bank_account(self):
         return self._buyer_bank_account
@@ -94,6 +107,16 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     @buyer_tel.setter
     def buyer_tel(self, value):
         self._buyer_tel = value
+    @property
+    def channel_info(self):
+        return self._channel_info
+
+    @channel_info.setter
+    def channel_info(self, value):
+        if isinstance(value, IndustryInvoiceChannelInfo):
+            self._channel_info = value
+        else:
+            self._channel_info = IndustryInvoiceChannelInfo.from_alipay_dict(value)
     @property
     def checker(self):
         return self._checker
@@ -192,12 +215,32 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     def outer_apply_id(self, value):
         self._outer_apply_id = value
     @property
+    def passenger_transport_list(self):
+        return self._passenger_transport_list
+
+    @passenger_transport_list.setter
+    def passenger_transport_list(self, value):
+        if isinstance(value, list):
+            self._passenger_transport_list = list()
+            for i in value:
+                if isinstance(i, IndustryInvoicePassengerTransport):
+                    self._passenger_transport_list.append(i)
+                else:
+                    self._passenger_transport_list.append(IndustryInvoicePassengerTransport.from_alipay_dict(i))
+    @property
     def payee(self):
         return self._payee
 
     @payee.setter
     def payee(self, value):
         self._payee = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
     @property
     def product_id(self):
         return self._product_id
@@ -303,6 +346,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['buyer_address'] = self.buyer_address.to_alipay_dict()
             else:
                 params['buyer_address'] = self.buyer_address
+        if self.buyer_alipay_login_id:
+            if hasattr(self.buyer_alipay_login_id, 'to_alipay_dict'):
+                params['buyer_alipay_login_id'] = self.buyer_alipay_login_id.to_alipay_dict()
+            else:
+                params['buyer_alipay_login_id'] = self.buyer_alipay_login_id
         if self.buyer_bank_account:
             if hasattr(self.buyer_bank_account, 'to_alipay_dict'):
                 params['buyer_bank_account'] = self.buyer_bank_account.to_alipay_dict()
@@ -333,6 +381,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['buyer_tel'] = self.buyer_tel.to_alipay_dict()
             else:
                 params['buyer_tel'] = self.buyer_tel
+        if self.channel_info:
+            if hasattr(self.channel_info, 'to_alipay_dict'):
+                params['channel_info'] = self.channel_info.to_alipay_dict()
+            else:
+                params['channel_info'] = self.channel_info
         if self.checker:
             if hasattr(self.checker, 'to_alipay_dict'):
                 params['checker'] = self.checker.to_alipay_dict()
@@ -403,11 +456,26 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['outer_apply_id'] = self.outer_apply_id.to_alipay_dict()
             else:
                 params['outer_apply_id'] = self.outer_apply_id
+        if self.passenger_transport_list:
+            if isinstance(self.passenger_transport_list, list):
+                for i in range(0, len(self.passenger_transport_list)):
+                    element = self.passenger_transport_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.passenger_transport_list[i] = element.to_alipay_dict()
+            if hasattr(self.passenger_transport_list, 'to_alipay_dict'):
+                params['passenger_transport_list'] = self.passenger_transport_list.to_alipay_dict()
+            else:
+                params['passenger_transport_list'] = self.passenger_transport_list
         if self.payee:
             if hasattr(self.payee, 'to_alipay_dict'):
                 params['payee'] = self.payee.to_alipay_dict()
             else:
                 params['payee'] = self.payee
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
         if self.product_id:
             if hasattr(self.product_id, 'to_alipay_dict'):
                 params['product_id'] = self.product_id.to_alipay_dict()
@@ -487,6 +555,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         o = AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel()
         if 'buyer_address' in d:
             o.buyer_address = d['buyer_address']
+        if 'buyer_alipay_login_id' in d:
+            o.buyer_alipay_login_id = d['buyer_alipay_login_id']
         if 'buyer_bank_account' in d:
             o.buyer_bank_account = d['buyer_bank_account']
         if 'buyer_bank_name' in d:
@@ -499,6 +569,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.buyer_tax_no_type = d['buyer_tax_no_type']
         if 'buyer_tel' in d:
             o.buyer_tel = d['buyer_tel']
+        if 'channel_info' in d:
+            o.channel_info = d['channel_info']
         if 'checker' in d:
             o.checker = d['checker']
         if 'clerk' in d:
@@ -525,8 +597,12 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.nature_person_flag = d['nature_person_flag']
         if 'outer_apply_id' in d:
             o.outer_apply_id = d['outer_apply_id']
+        if 'passenger_transport_list' in d:
+            o.passenger_transport_list = d['passenger_transport_list']
         if 'payee' in d:
             o.payee = d['payee']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
         if 'product_id' in d:
             o.product_id = d['product_id']
         if 'real_property_business_list' in d:

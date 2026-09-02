@@ -13,6 +13,7 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
         self._gmt_complaint_start = None
         self._gmt_process_end = None
         self._gmt_process_start = None
+        self._high_risk_tag = None
         self._page_size = None
         self._status_list = None
         self._task_id = None
@@ -55,6 +56,13 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
     @gmt_process_start.setter
     def gmt_process_start(self, value):
         self._gmt_process_start = value
+    @property
+    def high_risk_tag(self):
+        return self._high_risk_tag
+
+    @high_risk_tag.setter
+    def high_risk_tag(self, value):
+        self._high_risk_tag = value
     @property
     def page_size(self):
         return self._page_size
@@ -132,6 +140,11 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
                 params['gmt_process_start'] = self.gmt_process_start.to_alipay_dict()
             else:
                 params['gmt_process_start'] = self.gmt_process_start
+        if self.high_risk_tag:
+            if hasattr(self.high_risk_tag, 'to_alipay_dict'):
+                params['high_risk_tag'] = self.high_risk_tag.to_alipay_dict()
+            else:
+                params['high_risk_tag'] = self.high_risk_tag
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
@@ -189,6 +202,8 @@ class AlipaySecurityRiskComplaintInfoBatchqueryModel(object):
             o.gmt_process_end = d['gmt_process_end']
         if 'gmt_process_start' in d:
             o.gmt_process_start = d['gmt_process_start']
+        if 'high_risk_tag' in d:
+            o.high_risk_tag = d['high_risk_tag']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'status_list' in d:

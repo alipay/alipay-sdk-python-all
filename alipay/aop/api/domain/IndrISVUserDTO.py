@@ -4,15 +4,18 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.IndrISVAddressDTO import IndrISVAddressDTO
+from alipay.aop.api.domain.IndrISVAddressDTO import IndrISVAddressDTO
 
 
 class IndrISVUserDTO(object):
 
     def __init__(self):
         self._address = None
+        self._birth_date = None
         self._email = None
         self._first_name = None
         self._full_name = None
+        self._identity_address = None
         self._identity_card_number = None
         self._identity_type = None
         self._last_name = None
@@ -31,6 +34,13 @@ class IndrISVUserDTO(object):
             self._address = value
         else:
             self._address = IndrISVAddressDTO.from_alipay_dict(value)
+    @property
+    def birth_date(self):
+        return self._birth_date
+
+    @birth_date.setter
+    def birth_date(self, value):
+        self._birth_date = value
     @property
     def email(self):
         return self._email
@@ -52,6 +62,16 @@ class IndrISVUserDTO(object):
     @full_name.setter
     def full_name(self, value):
         self._full_name = value
+    @property
+    def identity_address(self):
+        return self._identity_address
+
+    @identity_address.setter
+    def identity_address(self, value):
+        if isinstance(value, IndrISVAddressDTO):
+            self._identity_address = value
+        else:
+            self._identity_address = IndrISVAddressDTO.from_alipay_dict(value)
     @property
     def identity_card_number(self):
         return self._identity_card_number
@@ -110,6 +130,11 @@ class IndrISVUserDTO(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
+        if self.birth_date:
+            if hasattr(self.birth_date, 'to_alipay_dict'):
+                params['birth_date'] = self.birth_date.to_alipay_dict()
+            else:
+                params['birth_date'] = self.birth_date
         if self.email:
             if hasattr(self.email, 'to_alipay_dict'):
                 params['email'] = self.email.to_alipay_dict()
@@ -125,6 +150,11 @@ class IndrISVUserDTO(object):
                 params['full_name'] = self.full_name.to_alipay_dict()
             else:
                 params['full_name'] = self.full_name
+        if self.identity_address:
+            if hasattr(self.identity_address, 'to_alipay_dict'):
+                params['identity_address'] = self.identity_address.to_alipay_dict()
+            else:
+                params['identity_address'] = self.identity_address
         if self.identity_card_number:
             if hasattr(self.identity_card_number, 'to_alipay_dict'):
                 params['identity_card_number'] = self.identity_card_number.to_alipay_dict()
@@ -169,12 +199,16 @@ class IndrISVUserDTO(object):
         o = IndrISVUserDTO()
         if 'address' in d:
             o.address = d['address']
+        if 'birth_date' in d:
+            o.birth_date = d['birth_date']
         if 'email' in d:
             o.email = d['email']
         if 'first_name' in d:
             o.first_name = d['first_name']
         if 'full_name' in d:
             o.full_name = d['full_name']
+        if 'identity_address' in d:
+            o.identity_address = d['identity_address']
         if 'identity_card_number' in d:
             o.identity_card_number = d['identity_card_number']
         if 'identity_type' in d:

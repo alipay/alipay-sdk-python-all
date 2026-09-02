@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.RecyclingInvoiceBizTransfer import RecyclingInvoiceBizTransfer
 from alipay.aop.api.domain.OrderElectronicReceipt import OrderElectronicReceipt
 from alipay.aop.api.domain.OrderInvoice import OrderInvoice
 from alipay.aop.api.domain.RecyclinginvoiceOrderItem import RecyclinginvoiceOrderItem
@@ -14,6 +15,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEcRecyclinginvoiceOrderQueryResponse, self).__init__()
+        self._biz_transfer_list = None
         self._collection_invoice_page_alipay_url = None
         self._collection_invoice_page_url = None
         self._company_clerk_id = None
@@ -35,6 +37,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._product_id = None
         self._proxy_seller_invoice_page_alipay_url = None
         self._proxy_seller_invoice_page_url = None
+        self._received_method = None
         self._seller_name = None
         self._seller_open_id = None
         self._seller_phone = None
@@ -42,6 +45,16 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._tax_no = None
         self._tax_total_amount = None
 
+    @property
+    def biz_transfer_list(self):
+        return self._biz_transfer_list
+
+    @biz_transfer_list.setter
+    def biz_transfer_list(self, value):
+        if isinstance(value, RecyclingInvoiceBizTransfer):
+            self._biz_transfer_list = value
+        else:
+            self._biz_transfer_list = RecyclingInvoiceBizTransfer.from_alipay_dict(value)
     @property
     def collection_invoice_page_alipay_url(self):
         return self._collection_invoice_page_alipay_url
@@ -214,6 +227,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
     def proxy_seller_invoice_page_url(self, value):
         self._proxy_seller_invoice_page_url = value
     @property
+    def received_method(self):
+        return self._received_method
+
+    @received_method.setter
+    def received_method(self, value):
+        self._received_method = value
+    @property
     def seller_name(self):
         return self._seller_name
 
@@ -258,6 +278,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcRecyclinginvoiceOrderQueryResponse, self).parse_response_content(response_content)
+        if 'biz_transfer_list' in response:
+            self.biz_transfer_list = response['biz_transfer_list']
         if 'collection_invoice_page_alipay_url' in response:
             self.collection_invoice_page_alipay_url = response['collection_invoice_page_alipay_url']
         if 'collection_invoice_page_url' in response:
@@ -300,6 +322,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
             self.proxy_seller_invoice_page_alipay_url = response['proxy_seller_invoice_page_alipay_url']
         if 'proxy_seller_invoice_page_url' in response:
             self.proxy_seller_invoice_page_url = response['proxy_seller_invoice_page_url']
+        if 'received_method' in response:
+            self.received_method = response['received_method']
         if 'seller_name' in response:
             self.seller_name = response['seller_name']
         if 'seller_open_id' in response:

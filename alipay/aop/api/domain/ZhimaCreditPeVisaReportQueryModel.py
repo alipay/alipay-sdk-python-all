@@ -13,6 +13,7 @@ class ZhimaCreditPeVisaReportQueryModel(object):
         self._passport_no = None
         self._scene_code = None
         self._user_id = None
+        self._visa_code = None
 
     @property
     def include_file(self):
@@ -49,6 +50,13 @@ class ZhimaCreditPeVisaReportQueryModel(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def visa_code(self):
+        return self._visa_code
+
+    @visa_code.setter
+    def visa_code(self, value):
+        self._visa_code = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class ZhimaCreditPeVisaReportQueryModel(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.visa_code:
+            if hasattr(self.visa_code, 'to_alipay_dict'):
+                params['visa_code'] = self.visa_code.to_alipay_dict()
+            else:
+                params['visa_code'] = self.visa_code
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class ZhimaCreditPeVisaReportQueryModel(object):
             o.scene_code = d['scene_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'visa_code' in d:
+            o.visa_code = d['visa_code']
         return o
 
 

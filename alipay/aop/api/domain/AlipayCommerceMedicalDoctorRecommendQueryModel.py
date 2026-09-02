@@ -15,6 +15,7 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
         self._experiment_name = None
         self._hdf_department_name = None
         self._hdf_disease_name = None
+        self._hdf_id = None
         self._hdf_tag_code = None
         self._limit = None
         self._need_case = None
@@ -81,6 +82,13 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
     @hdf_disease_name.setter
     def hdf_disease_name(self, value):
         self._hdf_disease_name = value
+    @property
+    def hdf_id(self):
+        return self._hdf_id
+
+    @hdf_id.setter
+    def hdf_id(self, value):
+        self._hdf_id = value
     @property
     def hdf_tag_code(self):
         return self._hdf_tag_code
@@ -222,6 +230,11 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
                 params['hdf_disease_name'] = self.hdf_disease_name.to_alipay_dict()
             else:
                 params['hdf_disease_name'] = self.hdf_disease_name
+        if self.hdf_id:
+            if hasattr(self.hdf_id, 'to_alipay_dict'):
+                params['hdf_id'] = self.hdf_id.to_alipay_dict()
+            else:
+                params['hdf_id'] = self.hdf_id
         if self.hdf_tag_code:
             if isinstance(self.hdf_tag_code, list):
                 for i in range(0, len(self.hdf_tag_code)):
@@ -318,6 +331,8 @@ class AlipayCommerceMedicalDoctorRecommendQueryModel(object):
             o.hdf_department_name = d['hdf_department_name']
         if 'hdf_disease_name' in d:
             o.hdf_disease_name = d['hdf_disease_name']
+        if 'hdf_id' in d:
+            o.hdf_id = d['hdf_id']
         if 'hdf_tag_code' in d:
             o.hdf_tag_code = d['hdf_tag_code']
         if 'limit' in d:

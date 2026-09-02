@@ -10,6 +10,7 @@ from alipay.aop.api.domain.GroupPurchaseCertificateInfo import GroupPurchaseCert
 from alipay.aop.api.domain.GroupPurchaseShopLicenseInfo import GroupPurchaseShopLicenseInfo
 from alipay.aop.api.domain.GroupPurchaseProofInfo import GroupPurchaseProofInfo
 from alipay.aop.api.domain.GroupPurchaseSettleInfo import GroupPurchaseSettleInfo
+from alipay.aop.api.domain.GroupPurchaseShopSettleInfo import GroupPurchaseShopSettleInfo
 
 
 class GroupPurchaseShopModel(object):
@@ -31,6 +32,7 @@ class GroupPurchaseShopModel(object):
         self._out_door_image = None
         self._proof_info = None
         self._settle_infos = None
+        self._shop_settle_infos = None
 
     @property
     def address(self):
@@ -177,6 +179,19 @@ class GroupPurchaseShopModel(object):
                     self._settle_infos.append(i)
                 else:
                     self._settle_infos.append(GroupPurchaseSettleInfo.from_alipay_dict(i))
+    @property
+    def shop_settle_infos(self):
+        return self._shop_settle_infos
+
+    @shop_settle_infos.setter
+    def shop_settle_infos(self, value):
+        if isinstance(value, list):
+            self._shop_settle_infos = list()
+            for i in value:
+                if isinstance(i, GroupPurchaseShopSettleInfo):
+                    self._shop_settle_infos.append(i)
+                else:
+                    self._shop_settle_infos.append(GroupPurchaseShopSettleInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -281,6 +296,16 @@ class GroupPurchaseShopModel(object):
                 params['settle_infos'] = self.settle_infos.to_alipay_dict()
             else:
                 params['settle_infos'] = self.settle_infos
+        if self.shop_settle_infos:
+            if isinstance(self.shop_settle_infos, list):
+                for i in range(0, len(self.shop_settle_infos)):
+                    element = self.shop_settle_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.shop_settle_infos[i] = element.to_alipay_dict()
+            if hasattr(self.shop_settle_infos, 'to_alipay_dict'):
+                params['shop_settle_infos'] = self.shop_settle_infos.to_alipay_dict()
+            else:
+                params['shop_settle_infos'] = self.shop_settle_infos
         return params
 
     @staticmethod
@@ -320,6 +345,8 @@ class GroupPurchaseShopModel(object):
             o.proof_info = d['proof_info']
         if 'settle_infos' in d:
             o.settle_infos = d['settle_infos']
+        if 'shop_settle_infos' in d:
+            o.shop_settle_infos = d['shop_settle_infos']
         return o
 
 

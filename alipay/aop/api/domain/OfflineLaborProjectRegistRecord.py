@@ -12,6 +12,7 @@ class OfflineLaborProjectRegistRecord(object):
         self._alipay_register_id = None
         self._birth_date = None
         self._certified = None
+        self._driving_license = None
         self._face_auth_status = None
         self._gender = None
         self._health_cert = None
@@ -28,6 +29,7 @@ class OfflineLaborProjectRegistRecord(object):
         self._social_risk_info = None
         self._user_id = None
         self._user_name = None
+        self._vehicle_registration_certificate = None
 
     @property
     def alipay_account(self):
@@ -57,6 +59,13 @@ class OfflineLaborProjectRegistRecord(object):
     @certified.setter
     def certified(self, value):
         self._certified = value
+    @property
+    def driving_license(self):
+        return self._driving_license
+
+    @driving_license.setter
+    def driving_license(self, value):
+        self._driving_license = value
     @property
     def face_auth_status(self):
         return self._face_auth_status
@@ -169,6 +178,13 @@ class OfflineLaborProjectRegistRecord(object):
     @user_name.setter
     def user_name(self, value):
         self._user_name = value
+    @property
+    def vehicle_registration_certificate(self):
+        return self._vehicle_registration_certificate
+
+    @vehicle_registration_certificate.setter
+    def vehicle_registration_certificate(self, value):
+        self._vehicle_registration_certificate = value
 
 
     def to_alipay_dict(self):
@@ -193,6 +209,11 @@ class OfflineLaborProjectRegistRecord(object):
                 params['certified'] = self.certified.to_alipay_dict()
             else:
                 params['certified'] = self.certified
+        if self.driving_license:
+            if hasattr(self.driving_license, 'to_alipay_dict'):
+                params['driving_license'] = self.driving_license.to_alipay_dict()
+            else:
+                params['driving_license'] = self.driving_license
         if self.face_auth_status:
             if hasattr(self.face_auth_status, 'to_alipay_dict'):
                 params['face_auth_status'] = self.face_auth_status.to_alipay_dict()
@@ -273,6 +294,11 @@ class OfflineLaborProjectRegistRecord(object):
                 params['user_name'] = self.user_name.to_alipay_dict()
             else:
                 params['user_name'] = self.user_name
+        if self.vehicle_registration_certificate:
+            if hasattr(self.vehicle_registration_certificate, 'to_alipay_dict'):
+                params['vehicle_registration_certificate'] = self.vehicle_registration_certificate.to_alipay_dict()
+            else:
+                params['vehicle_registration_certificate'] = self.vehicle_registration_certificate
         return params
 
     @staticmethod
@@ -288,6 +314,8 @@ class OfflineLaborProjectRegistRecord(object):
             o.birth_date = d['birth_date']
         if 'certified' in d:
             o.certified = d['certified']
+        if 'driving_license' in d:
+            o.driving_license = d['driving_license']
         if 'face_auth_status' in d:
             o.face_auth_status = d['face_auth_status']
         if 'gender' in d:
@@ -320,6 +348,8 @@ class OfflineLaborProjectRegistRecord(object):
             o.user_id = d['user_id']
         if 'user_name' in d:
             o.user_name = d['user_name']
+        if 'vehicle_registration_certificate' in d:
+            o.vehicle_registration_certificate = d['vehicle_registration_certificate']
         return o
 
 

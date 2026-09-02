@@ -11,6 +11,7 @@ class AssetPickupLogisticsDetail(object):
     def __init__(self):
         self._assign_item_id = None
         self._batch_no = None
+        self._fail_reason = None
         self._logistics_infos = None
         self._pickup_status = None
 
@@ -28,6 +29,13 @@ class AssetPickupLogisticsDetail(object):
     @batch_no.setter
     def batch_no(self, value):
         self._batch_no = value
+    @property
+    def fail_reason(self):
+        return self._fail_reason
+
+    @fail_reason.setter
+    def fail_reason(self, value):
+        self._fail_reason = value
     @property
     def logistics_infos(self):
         return self._logistics_infos
@@ -59,6 +67,11 @@ class AssetPickupLogisticsDetail(object):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
             else:
                 params['batch_no'] = self.batch_no
+        if self.fail_reason:
+            if hasattr(self.fail_reason, 'to_alipay_dict'):
+                params['fail_reason'] = self.fail_reason.to_alipay_dict()
+            else:
+                params['fail_reason'] = self.fail_reason
         if self.logistics_infos:
             if hasattr(self.logistics_infos, 'to_alipay_dict'):
                 params['logistics_infos'] = self.logistics_infos.to_alipay_dict()
@@ -80,6 +93,8 @@ class AssetPickupLogisticsDetail(object):
             o.assign_item_id = d['assign_item_id']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
+        if 'fail_reason' in d:
+            o.fail_reason = d['fail_reason']
         if 'logistics_infos' in d:
             o.logistics_infos = d['logistics_infos']
         if 'pickup_status' in d:

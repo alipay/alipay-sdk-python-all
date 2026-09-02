@@ -19,6 +19,7 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
         self._audit_refuse_reason = None
         self._click_track_url = None
         self._creative_biz_status = None
+        self._delivery_mode = None
         self._gmt_modified = None
         self._group_id = None
         self._group_name = None
@@ -95,6 +96,13 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
     @creative_biz_status.setter
     def creative_biz_status(self, value):
         self._creative_biz_status = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -261,6 +269,8 @@ class AlipayDataDataserviceAdcampaignCreativeQueryResponse(AlipayResponse):
             self.click_track_url = response['click_track_url']
         if 'creative_biz_status' in response:
             self.creative_biz_status = response['creative_biz_status']
+        if 'delivery_mode' in response:
+            self.delivery_mode = response['delivery_mode']
         if 'gmt_modified' in response:
             self.gmt_modified = response['gmt_modified']
         if 'group_id' in response:

@@ -22,7 +22,9 @@ class InqueryDoctorData(object):
         self._gender = None
         self._hospital_name = None
         self._id_no = None
+        self._official_hos_name = None
         self._practice_year = None
+        self._practicing_department_name = None
         self._practicing_doctor_certificate_no = None
         self._skilled_desc = None
         self._skilled_disease = None
@@ -131,12 +133,26 @@ class InqueryDoctorData(object):
     def id_no(self, value):
         self._id_no = value
     @property
+    def official_hos_name(self):
+        return self._official_hos_name
+
+    @official_hos_name.setter
+    def official_hos_name(self, value):
+        self._official_hos_name = value
+    @property
     def practice_year(self):
         return self._practice_year
 
     @practice_year.setter
     def practice_year(self, value):
         self._practice_year = value
+    @property
+    def practicing_department_name(self):
+        return self._practicing_department_name
+
+    @practicing_department_name.setter
+    def practicing_department_name(self, value):
+        self._practicing_department_name = value
     @property
     def practicing_doctor_certificate_no(self):
         return self._practicing_doctor_certificate_no
@@ -251,11 +267,21 @@ class InqueryDoctorData(object):
                 params['id_no'] = self.id_no.to_alipay_dict()
             else:
                 params['id_no'] = self.id_no
+        if self.official_hos_name:
+            if hasattr(self.official_hos_name, 'to_alipay_dict'):
+                params['official_hos_name'] = self.official_hos_name.to_alipay_dict()
+            else:
+                params['official_hos_name'] = self.official_hos_name
         if self.practice_year:
             if hasattr(self.practice_year, 'to_alipay_dict'):
                 params['practice_year'] = self.practice_year.to_alipay_dict()
             else:
                 params['practice_year'] = self.practice_year
+        if self.practicing_department_name:
+            if hasattr(self.practicing_department_name, 'to_alipay_dict'):
+                params['practicing_department_name'] = self.practicing_department_name.to_alipay_dict()
+            else:
+                params['practicing_department_name'] = self.practicing_department_name
         if self.practicing_doctor_certificate_no:
             if hasattr(self.practicing_doctor_certificate_no, 'to_alipay_dict'):
                 params['practicing_doctor_certificate_no'] = self.practicing_doctor_certificate_no.to_alipay_dict()
@@ -316,8 +342,12 @@ class InqueryDoctorData(object):
             o.hospital_name = d['hospital_name']
         if 'id_no' in d:
             o.id_no = d['id_no']
+        if 'official_hos_name' in d:
+            o.official_hos_name = d['official_hos_name']
         if 'practice_year' in d:
             o.practice_year = d['practice_year']
+        if 'practicing_department_name' in d:
+            o.practicing_department_name = d['practicing_department_name']
         if 'practicing_doctor_certificate_no' in d:
             o.practicing_doctor_certificate_no = d['practicing_doctor_certificate_no']
         if 'skilled_desc' in d:

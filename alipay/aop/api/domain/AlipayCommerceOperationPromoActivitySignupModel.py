@@ -9,6 +9,7 @@ class AlipayCommerceOperationPromoActivitySignupModel(object):
 
     def __init__(self):
         self._activity_code = None
+        self._round_id = None
         self._scene_code = None
         self._sign_up_info = None
         self._subject_id = None
@@ -21,6 +22,13 @@ class AlipayCommerceOperationPromoActivitySignupModel(object):
     @activity_code.setter
     def activity_code(self, value):
         self._activity_code = value
+    @property
+    def round_id(self):
+        return self._round_id
+
+    @round_id.setter
+    def round_id(self, value):
+        self._round_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -58,6 +66,11 @@ class AlipayCommerceOperationPromoActivitySignupModel(object):
                 params['activity_code'] = self.activity_code.to_alipay_dict()
             else:
                 params['activity_code'] = self.activity_code
+        if self.round_id:
+            if hasattr(self.round_id, 'to_alipay_dict'):
+                params['round_id'] = self.round_id.to_alipay_dict()
+            else:
+                params['round_id'] = self.round_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -87,6 +100,8 @@ class AlipayCommerceOperationPromoActivitySignupModel(object):
         o = AlipayCommerceOperationPromoActivitySignupModel()
         if 'activity_code' in d:
             o.activity_code = d['activity_code']
+        if 'round_id' in d:
+            o.round_id = d['round_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'sign_up_info' in d:

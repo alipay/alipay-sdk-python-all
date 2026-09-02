@@ -11,13 +11,17 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def __init__(self):
         self._company_clerk_id = None
         self._company_supplier_id = None
+        self._invoice_kind = None
         self._memo = None
         self._order_item_list = None
         self._outer_order_id = None
         self._personal_tax_project = None
         self._product_id = None
+        self._product_origin_code = None
         self._proxy_seller_cert_no = None
+        self._received_method = None
         self._tax_no = None
+        self._tax_rate = None
 
     @property
     def company_clerk_id(self):
@@ -33,6 +37,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     @company_supplier_id.setter
     def company_supplier_id(self, value):
         self._company_supplier_id = value
+    @property
+    def invoice_kind(self):
+        return self._invoice_kind
+
+    @invoice_kind.setter
+    def invoice_kind(self, value):
+        self._invoice_kind = value
     @property
     def memo(self):
         return self._memo
@@ -75,6 +86,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def product_id(self, value):
         self._product_id = value
     @property
+    def product_origin_code(self):
+        return self._product_origin_code
+
+    @product_origin_code.setter
+    def product_origin_code(self, value):
+        self._product_origin_code = value
+    @property
     def proxy_seller_cert_no(self):
         return self._proxy_seller_cert_no
 
@@ -82,12 +100,26 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def proxy_seller_cert_no(self, value):
         self._proxy_seller_cert_no = value
     @property
+    def received_method(self):
+        return self._received_method
+
+    @received_method.setter
+    def received_method(self, value):
+        self._received_method = value
+    @property
     def tax_no(self):
         return self._tax_no
 
     @tax_no.setter
     def tax_no(self, value):
         self._tax_no = value
+    @property
+    def tax_rate(self):
+        return self._tax_rate
+
+    @tax_rate.setter
+    def tax_rate(self, value):
+        self._tax_rate = value
 
 
     def to_alipay_dict(self):
@@ -102,6 +134,11 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
                 params['company_supplier_id'] = self.company_supplier_id.to_alipay_dict()
             else:
                 params['company_supplier_id'] = self.company_supplier_id
+        if self.invoice_kind:
+            if hasattr(self.invoice_kind, 'to_alipay_dict'):
+                params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
+            else:
+                params['invoice_kind'] = self.invoice_kind
         if self.memo:
             if hasattr(self.memo, 'to_alipay_dict'):
                 params['memo'] = self.memo.to_alipay_dict()
@@ -132,16 +169,31 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
                 params['product_id'] = self.product_id.to_alipay_dict()
             else:
                 params['product_id'] = self.product_id
+        if self.product_origin_code:
+            if hasattr(self.product_origin_code, 'to_alipay_dict'):
+                params['product_origin_code'] = self.product_origin_code.to_alipay_dict()
+            else:
+                params['product_origin_code'] = self.product_origin_code
         if self.proxy_seller_cert_no:
             if hasattr(self.proxy_seller_cert_no, 'to_alipay_dict'):
                 params['proxy_seller_cert_no'] = self.proxy_seller_cert_no.to_alipay_dict()
             else:
                 params['proxy_seller_cert_no'] = self.proxy_seller_cert_no
+        if self.received_method:
+            if hasattr(self.received_method, 'to_alipay_dict'):
+                params['received_method'] = self.received_method.to_alipay_dict()
+            else:
+                params['received_method'] = self.received_method
         if self.tax_no:
             if hasattr(self.tax_no, 'to_alipay_dict'):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
             else:
                 params['tax_no'] = self.tax_no
+        if self.tax_rate:
+            if hasattr(self.tax_rate, 'to_alipay_dict'):
+                params['tax_rate'] = self.tax_rate.to_alipay_dict()
+            else:
+                params['tax_rate'] = self.tax_rate
         return params
 
     @staticmethod
@@ -153,6 +205,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
             o.company_clerk_id = d['company_clerk_id']
         if 'company_supplier_id' in d:
             o.company_supplier_id = d['company_supplier_id']
+        if 'invoice_kind' in d:
+            o.invoice_kind = d['invoice_kind']
         if 'memo' in d:
             o.memo = d['memo']
         if 'order_item_list' in d:
@@ -163,10 +217,16 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
             o.personal_tax_project = d['personal_tax_project']
         if 'product_id' in d:
             o.product_id = d['product_id']
+        if 'product_origin_code' in d:
+            o.product_origin_code = d['product_origin_code']
         if 'proxy_seller_cert_no' in d:
             o.proxy_seller_cert_no = d['proxy_seller_cert_no']
+        if 'received_method' in d:
+            o.received_method = d['received_method']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
+        if 'tax_rate' in d:
+            o.tax_rate = d['tax_rate']
         return o
 
 

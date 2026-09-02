@@ -11,6 +11,7 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
         self._card_id = None
         self._closed = None
         self._issuance_date = None
+        self._member_channel = None
         self._occur_time = None
         self._open_date = None
         self._open_id = None
@@ -41,6 +42,13 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
     @issuance_date.setter
     def issuance_date(self, value):
         self._issuance_date = value
+    @property
+    def member_channel(self):
+        return self._member_channel
+
+    @member_channel.setter
+    def member_channel(self, value):
+        self._member_channel = value
     @property
     def occur_time(self):
         return self._occur_time
@@ -116,6 +124,11 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
                 params['issuance_date'] = self.issuance_date.to_alipay_dict()
             else:
                 params['issuance_date'] = self.issuance_date
+        if self.member_channel:
+            if hasattr(self.member_channel, 'to_alipay_dict'):
+                params['member_channel'] = self.member_channel.to_alipay_dict()
+            else:
+                params['member_channel'] = self.member_channel
         if self.occur_time:
             if hasattr(self.occur_time, 'to_alipay_dict'):
                 params['occur_time'] = self.occur_time.to_alipay_dict()
@@ -169,6 +182,8 @@ class AlipayEcoMycarMemberInfoSyncModel(object):
             o.closed = d['closed']
         if 'issuance_date' in d:
             o.issuance_date = d['issuance_date']
+        if 'member_channel' in d:
+            o.member_channel = d['member_channel']
         if 'occur_time' in d:
             o.occur_time = d['occur_time']
         if 'open_date' in d:

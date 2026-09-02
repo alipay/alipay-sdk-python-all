@@ -3,12 +3,15 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CarfinRegistrationMortgageInfo import CarfinRegistrationMortgageInfo
+from alipay.aop.api.domain.CarfinRegistrationTransferInfo import CarfinRegistrationTransferInfo
 
 
 class CarfinRegistrationInfo(object):
 
     def __init__(self):
         self._acquisition_method = None
+        self._applicant_in_transfer_history = None
         self._barcode = None
         self._engine_no = None
         self._fuel_type = None
@@ -17,13 +20,18 @@ class CarfinRegistrationInfo(object):
         self._last_replacement_date = None
         self._last_transfer_date = None
         self._manufacture_date = None
+        self._mortgage_info_list = None
         self._mortgage_release_date = None
         self._mortgage_status = None
+        self._mortgagee_has_pawn_or_individual = None
         self._owner = None
         self._owner_identification_number = None
+        self._passenger_capacity = None
+        self._personal_mortgage_count = None
         self._registration_authority = None
         self._registration_date = None
         self._transfer_count = None
+        self._transfer_info_list = None
         self._use_type = None
         self._vehicle_brand = None
         self._vehicle_license = None
@@ -39,6 +47,13 @@ class CarfinRegistrationInfo(object):
     @acquisition_method.setter
     def acquisition_method(self, value):
         self._acquisition_method = value
+    @property
+    def applicant_in_transfer_history(self):
+        return self._applicant_in_transfer_history
+
+    @applicant_in_transfer_history.setter
+    def applicant_in_transfer_history(self, value):
+        self._applicant_in_transfer_history = value
     @property
     def barcode(self):
         return self._barcode
@@ -96,6 +111,19 @@ class CarfinRegistrationInfo(object):
     def manufacture_date(self, value):
         self._manufacture_date = value
     @property
+    def mortgage_info_list(self):
+        return self._mortgage_info_list
+
+    @mortgage_info_list.setter
+    def mortgage_info_list(self, value):
+        if isinstance(value, list):
+            self._mortgage_info_list = list()
+            for i in value:
+                if isinstance(i, CarfinRegistrationMortgageInfo):
+                    self._mortgage_info_list.append(i)
+                else:
+                    self._mortgage_info_list.append(CarfinRegistrationMortgageInfo.from_alipay_dict(i))
+    @property
     def mortgage_release_date(self):
         return self._mortgage_release_date
 
@@ -110,6 +138,13 @@ class CarfinRegistrationInfo(object):
     def mortgage_status(self, value):
         self._mortgage_status = value
     @property
+    def mortgagee_has_pawn_or_individual(self):
+        return self._mortgagee_has_pawn_or_individual
+
+    @mortgagee_has_pawn_or_individual.setter
+    def mortgagee_has_pawn_or_individual(self, value):
+        self._mortgagee_has_pawn_or_individual = value
+    @property
     def owner(self):
         return self._owner
 
@@ -123,6 +158,20 @@ class CarfinRegistrationInfo(object):
     @owner_identification_number.setter
     def owner_identification_number(self, value):
         self._owner_identification_number = value
+    @property
+    def passenger_capacity(self):
+        return self._passenger_capacity
+
+    @passenger_capacity.setter
+    def passenger_capacity(self, value):
+        self._passenger_capacity = value
+    @property
+    def personal_mortgage_count(self):
+        return self._personal_mortgage_count
+
+    @personal_mortgage_count.setter
+    def personal_mortgage_count(self, value):
+        self._personal_mortgage_count = value
     @property
     def registration_authority(self):
         return self._registration_authority
@@ -144,6 +193,19 @@ class CarfinRegistrationInfo(object):
     @transfer_count.setter
     def transfer_count(self, value):
         self._transfer_count = value
+    @property
+    def transfer_info_list(self):
+        return self._transfer_info_list
+
+    @transfer_info_list.setter
+    def transfer_info_list(self, value):
+        if isinstance(value, list):
+            self._transfer_info_list = list()
+            for i in value:
+                if isinstance(i, CarfinRegistrationTransferInfo):
+                    self._transfer_info_list.append(i)
+                else:
+                    self._transfer_info_list.append(CarfinRegistrationTransferInfo.from_alipay_dict(i))
     @property
     def use_type(self):
         return self._use_type
@@ -202,6 +264,11 @@ class CarfinRegistrationInfo(object):
                 params['acquisition_method'] = self.acquisition_method.to_alipay_dict()
             else:
                 params['acquisition_method'] = self.acquisition_method
+        if self.applicant_in_transfer_history:
+            if hasattr(self.applicant_in_transfer_history, 'to_alipay_dict'):
+                params['applicant_in_transfer_history'] = self.applicant_in_transfer_history.to_alipay_dict()
+            else:
+                params['applicant_in_transfer_history'] = self.applicant_in_transfer_history
         if self.barcode:
             if hasattr(self.barcode, 'to_alipay_dict'):
                 params['barcode'] = self.barcode.to_alipay_dict()
@@ -242,6 +309,16 @@ class CarfinRegistrationInfo(object):
                 params['manufacture_date'] = self.manufacture_date.to_alipay_dict()
             else:
                 params['manufacture_date'] = self.manufacture_date
+        if self.mortgage_info_list:
+            if isinstance(self.mortgage_info_list, list):
+                for i in range(0, len(self.mortgage_info_list)):
+                    element = self.mortgage_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.mortgage_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.mortgage_info_list, 'to_alipay_dict'):
+                params['mortgage_info_list'] = self.mortgage_info_list.to_alipay_dict()
+            else:
+                params['mortgage_info_list'] = self.mortgage_info_list
         if self.mortgage_release_date:
             if hasattr(self.mortgage_release_date, 'to_alipay_dict'):
                 params['mortgage_release_date'] = self.mortgage_release_date.to_alipay_dict()
@@ -252,6 +329,11 @@ class CarfinRegistrationInfo(object):
                 params['mortgage_status'] = self.mortgage_status.to_alipay_dict()
             else:
                 params['mortgage_status'] = self.mortgage_status
+        if self.mortgagee_has_pawn_or_individual:
+            if hasattr(self.mortgagee_has_pawn_or_individual, 'to_alipay_dict'):
+                params['mortgagee_has_pawn_or_individual'] = self.mortgagee_has_pawn_or_individual.to_alipay_dict()
+            else:
+                params['mortgagee_has_pawn_or_individual'] = self.mortgagee_has_pawn_or_individual
         if self.owner:
             if hasattr(self.owner, 'to_alipay_dict'):
                 params['owner'] = self.owner.to_alipay_dict()
@@ -262,6 +344,16 @@ class CarfinRegistrationInfo(object):
                 params['owner_identification_number'] = self.owner_identification_number.to_alipay_dict()
             else:
                 params['owner_identification_number'] = self.owner_identification_number
+        if self.passenger_capacity:
+            if hasattr(self.passenger_capacity, 'to_alipay_dict'):
+                params['passenger_capacity'] = self.passenger_capacity.to_alipay_dict()
+            else:
+                params['passenger_capacity'] = self.passenger_capacity
+        if self.personal_mortgage_count:
+            if hasattr(self.personal_mortgage_count, 'to_alipay_dict'):
+                params['personal_mortgage_count'] = self.personal_mortgage_count.to_alipay_dict()
+            else:
+                params['personal_mortgage_count'] = self.personal_mortgage_count
         if self.registration_authority:
             if hasattr(self.registration_authority, 'to_alipay_dict'):
                 params['registration_authority'] = self.registration_authority.to_alipay_dict()
@@ -277,6 +369,16 @@ class CarfinRegistrationInfo(object):
                 params['transfer_count'] = self.transfer_count.to_alipay_dict()
             else:
                 params['transfer_count'] = self.transfer_count
+        if self.transfer_info_list:
+            if isinstance(self.transfer_info_list, list):
+                for i in range(0, len(self.transfer_info_list)):
+                    element = self.transfer_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.transfer_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.transfer_info_list, 'to_alipay_dict'):
+                params['transfer_info_list'] = self.transfer_info_list.to_alipay_dict()
+            else:
+                params['transfer_info_list'] = self.transfer_info_list
         if self.use_type:
             if hasattr(self.use_type, 'to_alipay_dict'):
                 params['use_type'] = self.use_type.to_alipay_dict()
@@ -321,6 +423,8 @@ class CarfinRegistrationInfo(object):
         o = CarfinRegistrationInfo()
         if 'acquisition_method' in d:
             o.acquisition_method = d['acquisition_method']
+        if 'applicant_in_transfer_history' in d:
+            o.applicant_in_transfer_history = d['applicant_in_transfer_history']
         if 'barcode' in d:
             o.barcode = d['barcode']
         if 'engine_no' in d:
@@ -337,20 +441,30 @@ class CarfinRegistrationInfo(object):
             o.last_transfer_date = d['last_transfer_date']
         if 'manufacture_date' in d:
             o.manufacture_date = d['manufacture_date']
+        if 'mortgage_info_list' in d:
+            o.mortgage_info_list = d['mortgage_info_list']
         if 'mortgage_release_date' in d:
             o.mortgage_release_date = d['mortgage_release_date']
         if 'mortgage_status' in d:
             o.mortgage_status = d['mortgage_status']
+        if 'mortgagee_has_pawn_or_individual' in d:
+            o.mortgagee_has_pawn_or_individual = d['mortgagee_has_pawn_or_individual']
         if 'owner' in d:
             o.owner = d['owner']
         if 'owner_identification_number' in d:
             o.owner_identification_number = d['owner_identification_number']
+        if 'passenger_capacity' in d:
+            o.passenger_capacity = d['passenger_capacity']
+        if 'personal_mortgage_count' in d:
+            o.personal_mortgage_count = d['personal_mortgage_count']
         if 'registration_authority' in d:
             o.registration_authority = d['registration_authority']
         if 'registration_date' in d:
             o.registration_date = d['registration_date']
         if 'transfer_count' in d:
             o.transfer_count = d['transfer_count']
+        if 'transfer_info_list' in d:
+            o.transfer_info_list = d['transfer_info_list']
         if 'use_type' in d:
             o.use_type = d['use_type']
         if 'vehicle_brand' in d:

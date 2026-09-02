@@ -29,6 +29,7 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._owner_id_list = None
         self._owner_open_id_list = None
         self._owner_type = None
+        self._payment_mode = None
         self._scene_type = None
         self._standard_info_list = None
 
@@ -174,6 +175,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     def owner_type(self, value):
         self._owner_type = value
     @property
+    def payment_mode(self):
+        return self._payment_mode
+
+    @payment_mode.setter
+    def payment_mode(self, value):
+        self._payment_mode = value
+    @property
     def scene_type(self):
         return self._scene_type
 
@@ -302,6 +310,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['owner_type'] = self.owner_type.to_alipay_dict()
             else:
                 params['owner_type'] = self.owner_type
+        if self.payment_mode:
+            if hasattr(self.payment_mode, 'to_alipay_dict'):
+                params['payment_mode'] = self.payment_mode.to_alipay_dict()
+            else:
+                params['payment_mode'] = self.payment_mode
         if self.scene_type:
             if hasattr(self.scene_type, 'to_alipay_dict'):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
@@ -360,6 +373,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.owner_open_id_list = d['owner_open_id_list']
         if 'owner_type' in d:
             o.owner_type = d['owner_type']
+        if 'payment_mode' in d:
+            o.payment_mode = d['payment_mode']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
         if 'standard_info_list' in d:

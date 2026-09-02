@@ -25,6 +25,7 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
         self._claim_report_no = None
         self._claim_status = None
         self._company_type = None
+        self._enterprise_id = None
         self._identity_materials = None
         self._image_batch_no = None
         self._lack_materials_sense = None
@@ -147,6 +148,13 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
     @company_type.setter
     def company_type(self, value):
         self._company_type = value
+    @property
+    def enterprise_id(self):
+        return self._enterprise_id
+
+    @enterprise_id.setter
+    def enterprise_id(self, value):
+        self._enterprise_id = value
     @property
     def identity_materials(self):
         return self._identity_materials
@@ -357,6 +365,11 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
                 params['company_type'] = self.company_type.to_alipay_dict()
             else:
                 params['company_type'] = self.company_type
+        if self.enterprise_id:
+            if hasattr(self.enterprise_id, 'to_alipay_dict'):
+                params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
+            else:
+                params['enterprise_id'] = self.enterprise_id
         if self.identity_materials:
             if isinstance(self.identity_materials, list):
                 for i in range(0, len(self.identity_materials)):
@@ -487,6 +500,8 @@ class AlipayCommerceMedicalInsuranceClaimreportModifyModel(object):
             o.claim_status = d['claim_status']
         if 'company_type' in d:
             o.company_type = d['company_type']
+        if 'enterprise_id' in d:
+            o.enterprise_id = d['enterprise_id']
         if 'identity_materials' in d:
             o.identity_materials = d['identity_materials']
         if 'image_batch_no' in d:

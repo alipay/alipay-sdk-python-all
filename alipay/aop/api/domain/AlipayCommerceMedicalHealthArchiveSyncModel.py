@@ -9,15 +9,24 @@ from alipay.aop.api.domain.ContentData import ContentData
 class AlipayCommerceMedicalHealthArchiveSyncModel(object):
 
     def __init__(self):
+        self._aq_open_id = None
         self._content_data = None
         self._data_source = None
         self._data_type = None
         self._open_id = None
+        self._save_from = None
         self._sync_status = None
         self._sync_type = None
         self._task_id = None
         self._user_id = None
 
+    @property
+    def aq_open_id(self):
+        return self._aq_open_id
+
+    @aq_open_id.setter
+    def aq_open_id(self, value):
+        self._aq_open_id = value
     @property
     def content_data(self):
         return self._content_data
@@ -50,6 +59,13 @@ class AlipayCommerceMedicalHealthArchiveSyncModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def save_from(self):
+        return self._save_from
+
+    @save_from.setter
+    def save_from(self, value):
+        self._save_from = value
+    @property
     def sync_status(self):
         return self._sync_status
 
@@ -81,6 +97,11 @@ class AlipayCommerceMedicalHealthArchiveSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aq_open_id:
+            if hasattr(self.aq_open_id, 'to_alipay_dict'):
+                params['aq_open_id'] = self.aq_open_id.to_alipay_dict()
+            else:
+                params['aq_open_id'] = self.aq_open_id
         if self.content_data:
             if hasattr(self.content_data, 'to_alipay_dict'):
                 params['content_data'] = self.content_data.to_alipay_dict()
@@ -101,6 +122,11 @@ class AlipayCommerceMedicalHealthArchiveSyncModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.save_from:
+            if hasattr(self.save_from, 'to_alipay_dict'):
+                params['save_from'] = self.save_from.to_alipay_dict()
+            else:
+                params['save_from'] = self.save_from
         if self.sync_status:
             if hasattr(self.sync_status, 'to_alipay_dict'):
                 params['sync_status'] = self.sync_status.to_alipay_dict()
@@ -128,6 +154,8 @@ class AlipayCommerceMedicalHealthArchiveSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalHealthArchiveSyncModel()
+        if 'aq_open_id' in d:
+            o.aq_open_id = d['aq_open_id']
         if 'content_data' in d:
             o.content_data = d['content_data']
         if 'data_source' in d:
@@ -136,6 +164,8 @@ class AlipayCommerceMedicalHealthArchiveSyncModel(object):
             o.data_type = d['data_type']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'save_from' in d:
+            o.save_from = d['save_from']
         if 'sync_status' in d:
             o.sync_status = d['sync_status']
         if 'sync_type' in d:

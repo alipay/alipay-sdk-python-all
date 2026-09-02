@@ -11,6 +11,7 @@ from alipay.aop.api.domain.RelatedPerson import RelatedPerson
 class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
 
     def __init__(self):
+        self._ant_policy_no = None
         self._company_type = None
         self._continuous_frequency = None
         self._continuous_period = None
@@ -26,6 +27,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._issue_time = None
         self._old_policy_no = None
         self._open_id = None
+        self._organization_code = None
         self._pay_time = None
         self._pay_trade_no = None
         self._person_list = None
@@ -36,6 +38,7 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._prod_name = None
         self._prod_no = None
         self._product_scheme_code = None
+        self._sales_method = None
         self._source_policy_no = None
         self._status = None
         self._sum_insured = None
@@ -47,6 +50,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         self._total_premium = None
         self._user_id = None
 
+    @property
+    def ant_policy_no(self):
+        return self._ant_policy_no
+
+    @ant_policy_no.setter
+    def ant_policy_no(self, value):
+        self._ant_policy_no = value
     @property
     def company_type(self):
         return self._company_type
@@ -165,6 +175,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def organization_code(self):
+        return self._organization_code
+
+    @organization_code.setter
+    def organization_code(self, value):
+        self._organization_code = value
+    @property
     def pay_time(self):
         return self._pay_time
 
@@ -241,6 +258,13 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
     def product_scheme_code(self, value):
         self._product_scheme_code = value
     @property
+    def sales_method(self):
+        return self._sales_method
+
+    @sales_method.setter
+    def sales_method(self, value):
+        self._sales_method = value
+    @property
     def source_policy_no(self):
         return self._source_policy_no
 
@@ -314,6 +338,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.ant_policy_no:
+            if hasattr(self.ant_policy_no, 'to_alipay_dict'):
+                params['ant_policy_no'] = self.ant_policy_no.to_alipay_dict()
+            else:
+                params['ant_policy_no'] = self.ant_policy_no
         if self.company_type:
             if hasattr(self.company_type, 'to_alipay_dict'):
                 params['company_type'] = self.company_type.to_alipay_dict()
@@ -399,6 +428,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.organization_code:
+            if hasattr(self.organization_code, 'to_alipay_dict'):
+                params['organization_code'] = self.organization_code.to_alipay_dict()
+            else:
+                params['organization_code'] = self.organization_code
         if self.pay_time:
             if hasattr(self.pay_time, 'to_alipay_dict'):
                 params['pay_time'] = self.pay_time.to_alipay_dict()
@@ -454,6 +488,11 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
                 params['product_scheme_code'] = self.product_scheme_code.to_alipay_dict()
             else:
                 params['product_scheme_code'] = self.product_scheme_code
+        if self.sales_method:
+            if hasattr(self.sales_method, 'to_alipay_dict'):
+                params['sales_method'] = self.sales_method.to_alipay_dict()
+            else:
+                params['sales_method'] = self.sales_method
         if self.source_policy_no:
             if hasattr(self.source_policy_no, 'to_alipay_dict'):
                 params['source_policy_no'] = self.source_policy_no.to_alipay_dict()
@@ -511,6 +550,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalInsurancePolicyinfoSyncModel()
+        if 'ant_policy_no' in d:
+            o.ant_policy_no = d['ant_policy_no']
         if 'company_type' in d:
             o.company_type = d['company_type']
         if 'continuous_frequency' in d:
@@ -541,6 +582,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.old_policy_no = d['old_policy_no']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'organization_code' in d:
+            o.organization_code = d['organization_code']
         if 'pay_time' in d:
             o.pay_time = d['pay_time']
         if 'pay_trade_no' in d:
@@ -561,6 +604,8 @@ class AlipayCommerceMedicalInsurancePolicyinfoSyncModel(object):
             o.prod_no = d['prod_no']
         if 'product_scheme_code' in d:
             o.product_scheme_code = d['product_scheme_code']
+        if 'sales_method' in d:
+            o.sales_method = d['sales_method']
         if 'source_policy_no' in d:
             o.source_policy_no = d['source_policy_no']
         if 'status' in d:

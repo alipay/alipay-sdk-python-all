@@ -11,6 +11,7 @@ class PlanPageListRes(object):
     def __init__(self):
         self._budget = None
         self._charge_type = None
+        self._delivery_mode = None
         self._end_date = None
         self._gmt_modified = None
         self._market_target_code = None
@@ -41,6 +42,13 @@ class PlanPageListRes(object):
     @charge_type.setter
     def charge_type(self, value):
         self._charge_type = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def end_date(self):
         return self._end_date
@@ -163,6 +171,11 @@ class PlanPageListRes(object):
                 params['charge_type'] = self.charge_type.to_alipay_dict()
             else:
                 params['charge_type'] = self.charge_type
+        if self.delivery_mode:
+            if hasattr(self.delivery_mode, 'to_alipay_dict'):
+                params['delivery_mode'] = self.delivery_mode.to_alipay_dict()
+            else:
+                params['delivery_mode'] = self.delivery_mode
         if self.end_date:
             if hasattr(self.end_date, 'to_alipay_dict'):
                 params['end_date'] = self.end_date.to_alipay_dict()
@@ -249,6 +262,8 @@ class PlanPageListRes(object):
             o.budget = d['budget']
         if 'charge_type' in d:
             o.charge_type = d['charge_type']
+        if 'delivery_mode' in d:
+            o.delivery_mode = d['delivery_mode']
         if 'end_date' in d:
             o.end_date = d['end_date']
         if 'gmt_modified' in d:

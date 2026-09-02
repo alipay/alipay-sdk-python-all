@@ -29,6 +29,7 @@ class AntMerchantExpandShopModifyModel(object):
         self._contact_mobile = None
         self._contact_phone = None
         self._cover = None
+        self._expire_time = None
         self._ext_infos = None
         self._industry_info = None
         self._industry_license = None
@@ -150,6 +151,13 @@ class AntMerchantExpandShopModifyModel(object):
     @cover.setter
     def cover(self, value):
         self._cover = value
+    @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
     @property
     def ext_infos(self):
         return self._ext_infos
@@ -383,6 +391,11 @@ class AntMerchantExpandShopModifyModel(object):
                 params['cover'] = self.cover.to_alipay_dict()
             else:
                 params['cover'] = self.cover
+        if self.expire_time:
+            if hasattr(self.expire_time, 'to_alipay_dict'):
+                params['expire_time'] = self.expire_time.to_alipay_dict()
+            else:
+                params['expire_time'] = self.expire_time
         if self.ext_infos:
             if isinstance(self.ext_infos, list):
                 for i in range(0, len(self.ext_infos)):
@@ -534,6 +547,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.contact_phone = d['contact_phone']
         if 'cover' in d:
             o.cover = d['cover']
+        if 'expire_time' in d:
+            o.expire_time = d['expire_time']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
         if 'industry_info' in d:

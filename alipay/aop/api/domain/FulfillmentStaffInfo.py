@@ -15,6 +15,7 @@ class FulfillmentStaffInfo(object):
         self._staff_name = None
         self._title = None
         self._work_years = None
+        self._work_years_text = None
 
     @property
     def department(self):
@@ -65,6 +66,13 @@ class FulfillmentStaffInfo(object):
     @work_years.setter
     def work_years(self, value):
         self._work_years = value
+    @property
+    def work_years_text(self):
+        return self._work_years_text
+
+    @work_years_text.setter
+    def work_years_text(self, value):
+        self._work_years_text = value
 
 
     def to_alipay_dict(self):
@@ -104,6 +112,11 @@ class FulfillmentStaffInfo(object):
                 params['work_years'] = self.work_years.to_alipay_dict()
             else:
                 params['work_years'] = self.work_years
+        if self.work_years_text:
+            if hasattr(self.work_years_text, 'to_alipay_dict'):
+                params['work_years_text'] = self.work_years_text.to_alipay_dict()
+            else:
+                params['work_years_text'] = self.work_years_text
         return params
 
     @staticmethod
@@ -125,6 +138,8 @@ class FulfillmentStaffInfo(object):
             o.title = d['title']
         if 'work_years' in d:
             o.work_years = d['work_years']
+        if 'work_years_text' in d:
+            o.work_years_text = d['work_years_text']
         return o
 
 

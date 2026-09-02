@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.LatestVerifyError import LatestVerifyError
 from alipay.aop.api.domain.UniOpenResItem import UniOpenResItem
 
 
@@ -12,6 +13,7 @@ class AlipayTradeSolutionprodUnifiedopenQueryResponse(AlipayResponse):
         super(AlipayTradeSolutionprodUnifiedopenQueryResponse, self).__init__()
         self._binding_logon_id = None
         self._fail_reason = None
+        self._latest_verify_error = None
         self._open_item_result_list = None
         self._out_biz_no = None
         self._uniopen_order_id = None
@@ -31,6 +33,19 @@ class AlipayTradeSolutionprodUnifiedopenQueryResponse(AlipayResponse):
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def latest_verify_error(self):
+        return self._latest_verify_error
+
+    @latest_verify_error.setter
+    def latest_verify_error(self, value):
+        if isinstance(value, list):
+            self._latest_verify_error = list()
+            for i in value:
+                if isinstance(i, LatestVerifyError):
+                    self._latest_verify_error.append(i)
+                else:
+                    self._latest_verify_error.append(LatestVerifyError.from_alipay_dict(i))
     @property
     def open_item_result_list(self):
         return self._open_item_result_list
@@ -72,6 +87,8 @@ class AlipayTradeSolutionprodUnifiedopenQueryResponse(AlipayResponse):
             self.binding_logon_id = response['binding_logon_id']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
+        if 'latest_verify_error' in response:
+            self.latest_verify_error = response['latest_verify_error']
         if 'open_item_result_list' in response:
             self.open_item_result_list = response['open_item_result_list']
         if 'out_biz_no' in response:

@@ -11,6 +11,7 @@ class AntMerchantExpandEcoOrderCreateModel(object):
         self._busi_platform = None
         self._eco_code = None
         self._express_no = None
+        self._item_ids = None
         self._order_status = None
         self._order_time = None
         self._out_order_id = None
@@ -45,6 +46,16 @@ class AntMerchantExpandEcoOrderCreateModel(object):
     @express_no.setter
     def express_no(self, value):
         self._express_no = value
+    @property
+    def item_ids(self):
+        return self._item_ids
+
+    @item_ids.setter
+    def item_ids(self, value):
+        if isinstance(value, list):
+            self._item_ids = list()
+            for i in value:
+                self._item_ids.append(i)
     @property
     def order_status(self):
         return self._order_status
@@ -160,6 +171,16 @@ class AntMerchantExpandEcoOrderCreateModel(object):
                 params['express_no'] = self.express_no.to_alipay_dict()
             else:
                 params['express_no'] = self.express_no
+        if self.item_ids:
+            if isinstance(self.item_ids, list):
+                for i in range(0, len(self.item_ids)):
+                    element = self.item_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.item_ids[i] = element.to_alipay_dict()
+            if hasattr(self.item_ids, 'to_alipay_dict'):
+                params['item_ids'] = self.item_ids.to_alipay_dict()
+            else:
+                params['item_ids'] = self.item_ids
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -253,6 +274,8 @@ class AntMerchantExpandEcoOrderCreateModel(object):
             o.eco_code = d['eco_code']
         if 'express_no' in d:
             o.express_no = d['express_no']
+        if 'item_ids' in d:
+            o.item_ids = d['item_ids']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'order_time' in d:

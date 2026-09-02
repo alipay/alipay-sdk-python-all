@@ -3,6 +3,9 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PluginPrivacyFields import PluginPrivacyFields
+from alipay.aop.api.domain.SdkPrivacyFields import SdkPrivacyFields
+from alipay.aop.api.domain.SystemPermissionPrivacyFields import SystemPermissionPrivacyFields
 from alipay.aop.api.domain.SystemPrivacyField import SystemPrivacyField
 from alipay.aop.api.domain.UserDefinePrivacyPolicyField import UserDefinePrivacyPolicyField
 
@@ -12,10 +15,14 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
     def __init__(self):
         self._contact_email = None
         self._contact_phone = None
+        self._plugin_privacy_fields = None
         self._public_type = None
         self._reply_cycle = None
+        self._sdk_privacy_fields = None
         self._storage_location = None
+        self._system_permission_privacy_fields = None
         self._system_privacy_fields = None
+        self._user_custom_file = None
         self._user_define_privacy_fields = None
 
     @property
@@ -33,6 +40,19 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
     def contact_phone(self, value):
         self._contact_phone = value
     @property
+    def plugin_privacy_fields(self):
+        return self._plugin_privacy_fields
+
+    @plugin_privacy_fields.setter
+    def plugin_privacy_fields(self, value):
+        if isinstance(value, list):
+            self._plugin_privacy_fields = list()
+            for i in value:
+                if isinstance(i, PluginPrivacyFields):
+                    self._plugin_privacy_fields.append(i)
+                else:
+                    self._plugin_privacy_fields.append(PluginPrivacyFields.from_alipay_dict(i))
+    @property
     def public_type(self):
         return self._public_type
 
@@ -47,12 +67,38 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
     def reply_cycle(self, value):
         self._reply_cycle = value
     @property
+    def sdk_privacy_fields(self):
+        return self._sdk_privacy_fields
+
+    @sdk_privacy_fields.setter
+    def sdk_privacy_fields(self, value):
+        if isinstance(value, list):
+            self._sdk_privacy_fields = list()
+            for i in value:
+                if isinstance(i, SdkPrivacyFields):
+                    self._sdk_privacy_fields.append(i)
+                else:
+                    self._sdk_privacy_fields.append(SdkPrivacyFields.from_alipay_dict(i))
+    @property
     def storage_location(self):
         return self._storage_location
 
     @storage_location.setter
     def storage_location(self, value):
         self._storage_location = value
+    @property
+    def system_permission_privacy_fields(self):
+        return self._system_permission_privacy_fields
+
+    @system_permission_privacy_fields.setter
+    def system_permission_privacy_fields(self, value):
+        if isinstance(value, list):
+            self._system_permission_privacy_fields = list()
+            for i in value:
+                if isinstance(i, SystemPermissionPrivacyFields):
+                    self._system_permission_privacy_fields.append(i)
+                else:
+                    self._system_permission_privacy_fields.append(SystemPermissionPrivacyFields.from_alipay_dict(i))
     @property
     def system_privacy_fields(self):
         return self._system_privacy_fields
@@ -66,6 +112,13 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
                     self._system_privacy_fields.append(i)
                 else:
                     self._system_privacy_fields.append(SystemPrivacyField.from_alipay_dict(i))
+    @property
+    def user_custom_file(self):
+        return self._user_custom_file
+
+    @user_custom_file.setter
+    def user_custom_file(self, value):
+        self._user_custom_file = value
     @property
     def user_define_privacy_fields(self):
         return self._user_define_privacy_fields
@@ -93,6 +146,16 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
                 params['contact_phone'] = self.contact_phone.to_alipay_dict()
             else:
                 params['contact_phone'] = self.contact_phone
+        if self.plugin_privacy_fields:
+            if isinstance(self.plugin_privacy_fields, list):
+                for i in range(0, len(self.plugin_privacy_fields)):
+                    element = self.plugin_privacy_fields[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.plugin_privacy_fields[i] = element.to_alipay_dict()
+            if hasattr(self.plugin_privacy_fields, 'to_alipay_dict'):
+                params['plugin_privacy_fields'] = self.plugin_privacy_fields.to_alipay_dict()
+            else:
+                params['plugin_privacy_fields'] = self.plugin_privacy_fields
         if self.public_type:
             if hasattr(self.public_type, 'to_alipay_dict'):
                 params['public_type'] = self.public_type.to_alipay_dict()
@@ -103,11 +166,31 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
                 params['reply_cycle'] = self.reply_cycle.to_alipay_dict()
             else:
                 params['reply_cycle'] = self.reply_cycle
+        if self.sdk_privacy_fields:
+            if isinstance(self.sdk_privacy_fields, list):
+                for i in range(0, len(self.sdk_privacy_fields)):
+                    element = self.sdk_privacy_fields[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sdk_privacy_fields[i] = element.to_alipay_dict()
+            if hasattr(self.sdk_privacy_fields, 'to_alipay_dict'):
+                params['sdk_privacy_fields'] = self.sdk_privacy_fields.to_alipay_dict()
+            else:
+                params['sdk_privacy_fields'] = self.sdk_privacy_fields
         if self.storage_location:
             if hasattr(self.storage_location, 'to_alipay_dict'):
                 params['storage_location'] = self.storage_location.to_alipay_dict()
             else:
                 params['storage_location'] = self.storage_location
+        if self.system_permission_privacy_fields:
+            if isinstance(self.system_permission_privacy_fields, list):
+                for i in range(0, len(self.system_permission_privacy_fields)):
+                    element = self.system_permission_privacy_fields[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.system_permission_privacy_fields[i] = element.to_alipay_dict()
+            if hasattr(self.system_permission_privacy_fields, 'to_alipay_dict'):
+                params['system_permission_privacy_fields'] = self.system_permission_privacy_fields.to_alipay_dict()
+            else:
+                params['system_permission_privacy_fields'] = self.system_permission_privacy_fields
         if self.system_privacy_fields:
             if isinstance(self.system_privacy_fields, list):
                 for i in range(0, len(self.system_privacy_fields)):
@@ -118,6 +201,11 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
                 params['system_privacy_fields'] = self.system_privacy_fields.to_alipay_dict()
             else:
                 params['system_privacy_fields'] = self.system_privacy_fields
+        if self.user_custom_file:
+            if hasattr(self.user_custom_file, 'to_alipay_dict'):
+                params['user_custom_file'] = self.user_custom_file.to_alipay_dict()
+            else:
+                params['user_custom_file'] = self.user_custom_file
         if self.user_define_privacy_fields:
             if isinstance(self.user_define_privacy_fields, list):
                 for i in range(0, len(self.user_define_privacy_fields)):
@@ -139,14 +227,22 @@ class AlipayOpenMiniPrivacyAuditCreateModel(object):
             o.contact_email = d['contact_email']
         if 'contact_phone' in d:
             o.contact_phone = d['contact_phone']
+        if 'plugin_privacy_fields' in d:
+            o.plugin_privacy_fields = d['plugin_privacy_fields']
         if 'public_type' in d:
             o.public_type = d['public_type']
         if 'reply_cycle' in d:
             o.reply_cycle = d['reply_cycle']
+        if 'sdk_privacy_fields' in d:
+            o.sdk_privacy_fields = d['sdk_privacy_fields']
         if 'storage_location' in d:
             o.storage_location = d['storage_location']
+        if 'system_permission_privacy_fields' in d:
+            o.system_permission_privacy_fields = d['system_permission_privacy_fields']
         if 'system_privacy_fields' in d:
             o.system_privacy_fields = d['system_privacy_fields']
+        if 'user_custom_file' in d:
+            o.user_custom_file = d['user_custom_file']
         if 'user_define_privacy_fields' in d:
             o.user_define_privacy_fields = d['user_define_privacy_fields']
         return o

@@ -11,6 +11,7 @@ class RentBillRoyaltyDetailDto(object):
     def __init__(self):
         self._actual_royalty_amount = None
         self._biz_order_id = None
+        self._compensation_fund_channel = None
         self._invest_id = None
         self._period = None
         self._rent_royalty_list = None
@@ -40,6 +41,13 @@ class RentBillRoyaltyDetailDto(object):
     @biz_order_id.setter
     def biz_order_id(self, value):
         self._biz_order_id = value
+    @property
+    def compensation_fund_channel(self):
+        return self._compensation_fund_channel
+
+    @compensation_fund_channel.setter
+    def compensation_fund_channel(self, value):
+        self._compensation_fund_channel = value
     @property
     def invest_id(self):
         return self._invest_id
@@ -158,6 +166,11 @@ class RentBillRoyaltyDetailDto(object):
                 params['biz_order_id'] = self.biz_order_id.to_alipay_dict()
             else:
                 params['biz_order_id'] = self.biz_order_id
+        if self.compensation_fund_channel:
+            if hasattr(self.compensation_fund_channel, 'to_alipay_dict'):
+                params['compensation_fund_channel'] = self.compensation_fund_channel.to_alipay_dict()
+            else:
+                params['compensation_fund_channel'] = self.compensation_fund_channel
         if self.invest_id:
             if hasattr(self.invest_id, 'to_alipay_dict'):
                 params['invest_id'] = self.invest_id.to_alipay_dict()
@@ -244,6 +257,8 @@ class RentBillRoyaltyDetailDto(object):
             o.actual_royalty_amount = d['actual_royalty_amount']
         if 'biz_order_id' in d:
             o.biz_order_id = d['biz_order_id']
+        if 'compensation_fund_channel' in d:
+            o.compensation_fund_channel = d['compensation_fund_channel']
         if 'invest_id' in d:
             o.invest_id = d['invest_id']
         if 'period' in d:

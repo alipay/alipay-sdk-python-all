@@ -13,6 +13,7 @@ class BsEnrollParticipantResult(object):
         self._enroll_result_detail = None
         self._fail_code = None
         self._fail_reason = None
+        self._out_activity_id = None
         self._value = None
 
     @property
@@ -47,6 +48,13 @@ class BsEnrollParticipantResult(object):
     def fail_reason(self, value):
         self._fail_reason = value
     @property
+    def out_activity_id(self):
+        return self._out_activity_id
+
+    @out_activity_id.setter
+    def out_activity_id(self, value):
+        self._out_activity_id = value
+    @property
     def value(self):
         return self._value
 
@@ -77,6 +85,11 @@ class BsEnrollParticipantResult(object):
                 params['fail_reason'] = self.fail_reason.to_alipay_dict()
             else:
                 params['fail_reason'] = self.fail_reason
+        if self.out_activity_id:
+            if hasattr(self.out_activity_id, 'to_alipay_dict'):
+                params['out_activity_id'] = self.out_activity_id.to_alipay_dict()
+            else:
+                params['out_activity_id'] = self.out_activity_id
         if self.value:
             if hasattr(self.value, 'to_alipay_dict'):
                 params['value'] = self.value.to_alipay_dict()
@@ -97,6 +110,8 @@ class BsEnrollParticipantResult(object):
             o.fail_code = d['fail_code']
         if 'fail_reason' in d:
             o.fail_reason = d['fail_reason']
+        if 'out_activity_id' in d:
+            o.out_activity_id = d['out_activity_id']
         if 'value' in d:
             o.value = d['value']
         return o

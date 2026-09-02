@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.VcpBizInfo import VcpBizInfo
 from alipay.aop.api.domain.VcpFundInfo import VcpFundInfo
 
 
@@ -11,6 +12,8 @@ class AlipayAssetVoucherTemplateInfoQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayAssetVoucherTemplateInfoQueryResponse, self).__init__()
         self._asset_code = None
+        self._biz_code = None
+        self._biz_info = None
         self._fund_infos = None
         self._product_code = None
         self._publish_end_time = None
@@ -26,6 +29,23 @@ class AlipayAssetVoucherTemplateInfoQueryResponse(AlipayResponse):
     @asset_code.setter
     def asset_code(self, value):
         self._asset_code = value
+    @property
+    def biz_code(self):
+        return self._biz_code
+
+    @biz_code.setter
+    def biz_code(self, value):
+        self._biz_code = value
+    @property
+    def biz_info(self):
+        return self._biz_info
+
+    @biz_info.setter
+    def biz_info(self, value):
+        if isinstance(value, VcpBizInfo):
+            self._biz_info = value
+        else:
+            self._biz_info = VcpBizInfo.from_alipay_dict(value)
     @property
     def fund_infos(self):
         return self._fund_infos
@@ -86,6 +106,10 @@ class AlipayAssetVoucherTemplateInfoQueryResponse(AlipayResponse):
         response = super(AlipayAssetVoucherTemplateInfoQueryResponse, self).parse_response_content(response_content)
         if 'asset_code' in response:
             self.asset_code = response['asset_code']
+        if 'biz_code' in response:
+            self.biz_code = response['biz_code']
+        if 'biz_info' in response:
+            self.biz_info = response['biz_info']
         if 'fund_infos' in response:
             self.fund_infos = response['fund_infos']
         if 'product_code' in response:

@@ -3,16 +3,20 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AdmissionInfo import AdmissionInfo
+from alipay.aop.api.domain.DischargeInfo import DischargeInfo
 from alipay.aop.api.domain.SurgeryInfo import SurgeryInfo
 
 
 class InpatientRecord(object):
 
     def __init__(self):
+        self._admission_info = None
         self._data_id = None
         self._days = None
         self._department_name = None
         self._discharge_date = None
+        self._discharge_info = None
         self._hospital_name = None
         self._in_date = None
         self._recovery_date = None
@@ -20,9 +24,20 @@ class InpatientRecord(object):
         self._recovery_memo = None
         self._surgery_info = None
         self._traditional_chinese_medicine_diagnosis = None
+        self._type = None
         self._way = None
         self._western_medicine_diagnosis = None
 
+    @property
+    def admission_info(self):
+        return self._admission_info
+
+    @admission_info.setter
+    def admission_info(self, value):
+        if isinstance(value, AdmissionInfo):
+            self._admission_info = value
+        else:
+            self._admission_info = AdmissionInfo.from_alipay_dict(value)
     @property
     def data_id(self):
         return self._data_id
@@ -51,6 +66,16 @@ class InpatientRecord(object):
     @discharge_date.setter
     def discharge_date(self, value):
         self._discharge_date = value
+    @property
+    def discharge_info(self):
+        return self._discharge_info
+
+    @discharge_info.setter
+    def discharge_info(self, value):
+        if isinstance(value, DischargeInfo):
+            self._discharge_info = value
+        else:
+            self._discharge_info = DischargeInfo.from_alipay_dict(value)
     @property
     def hospital_name(self):
         return self._hospital_name
@@ -104,6 +129,13 @@ class InpatientRecord(object):
     def traditional_chinese_medicine_diagnosis(self, value):
         self._traditional_chinese_medicine_diagnosis = value
     @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
+    @property
     def way(self):
         return self._way
 
@@ -121,6 +153,11 @@ class InpatientRecord(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.admission_info:
+            if hasattr(self.admission_info, 'to_alipay_dict'):
+                params['admission_info'] = self.admission_info.to_alipay_dict()
+            else:
+                params['admission_info'] = self.admission_info
         if self.data_id:
             if hasattr(self.data_id, 'to_alipay_dict'):
                 params['data_id'] = self.data_id.to_alipay_dict()
@@ -141,6 +178,11 @@ class InpatientRecord(object):
                 params['discharge_date'] = self.discharge_date.to_alipay_dict()
             else:
                 params['discharge_date'] = self.discharge_date
+        if self.discharge_info:
+            if hasattr(self.discharge_info, 'to_alipay_dict'):
+                params['discharge_info'] = self.discharge_info.to_alipay_dict()
+            else:
+                params['discharge_info'] = self.discharge_info
         if self.hospital_name:
             if hasattr(self.hospital_name, 'to_alipay_dict'):
                 params['hospital_name'] = self.hospital_name.to_alipay_dict()
@@ -176,6 +218,11 @@ class InpatientRecord(object):
                 params['traditional_chinese_medicine_diagnosis'] = self.traditional_chinese_medicine_diagnosis.to_alipay_dict()
             else:
                 params['traditional_chinese_medicine_diagnosis'] = self.traditional_chinese_medicine_diagnosis
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         if self.way:
             if hasattr(self.way, 'to_alipay_dict'):
                 params['way'] = self.way.to_alipay_dict()
@@ -193,6 +240,8 @@ class InpatientRecord(object):
         if not d:
             return None
         o = InpatientRecord()
+        if 'admission_info' in d:
+            o.admission_info = d['admission_info']
         if 'data_id' in d:
             o.data_id = d['data_id']
         if 'days' in d:
@@ -201,6 +250,8 @@ class InpatientRecord(object):
             o.department_name = d['department_name']
         if 'discharge_date' in d:
             o.discharge_date = d['discharge_date']
+        if 'discharge_info' in d:
+            o.discharge_info = d['discharge_info']
         if 'hospital_name' in d:
             o.hospital_name = d['hospital_name']
         if 'in_date' in d:
@@ -215,6 +266,8 @@ class InpatientRecord(object):
             o.surgery_info = d['surgery_info']
         if 'traditional_chinese_medicine_diagnosis' in d:
             o.traditional_chinese_medicine_diagnosis = d['traditional_chinese_medicine_diagnosis']
+        if 'type' in d:
+            o.type = d['type']
         if 'way' in d:
             o.way = d['way']
         if 'western_medicine_diagnosis' in d:

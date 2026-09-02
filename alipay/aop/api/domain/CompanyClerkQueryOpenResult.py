@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class CompanyClerkQueryOpenResult(object):
 
     def __init__(self):
+        self._clerk_auth_url = None
         self._clerk_name = None
         self._clerk_phone = None
         self._clerk_role = None
@@ -15,6 +16,13 @@ class CompanyClerkQueryOpenResult(object):
         self._company_clerk_id = None
         self._out_clerk_id = None
 
+    @property
+    def clerk_auth_url(self):
+        return self._clerk_auth_url
+
+    @clerk_auth_url.setter
+    def clerk_auth_url(self, value):
+        self._clerk_auth_url = value
     @property
     def clerk_name(self):
         return self._clerk_name
@@ -61,6 +69,11 @@ class CompanyClerkQueryOpenResult(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.clerk_auth_url:
+            if hasattr(self.clerk_auth_url, 'to_alipay_dict'):
+                params['clerk_auth_url'] = self.clerk_auth_url.to_alipay_dict()
+            else:
+                params['clerk_auth_url'] = self.clerk_auth_url
         if self.clerk_name:
             if hasattr(self.clerk_name, 'to_alipay_dict'):
                 params['clerk_name'] = self.clerk_name.to_alipay_dict()
@@ -98,6 +111,8 @@ class CompanyClerkQueryOpenResult(object):
         if not d:
             return None
         o = CompanyClerkQueryOpenResult()
+        if 'clerk_auth_url' in d:
+            o.clerk_auth_url = d['clerk_auth_url']
         if 'clerk_name' in d:
             o.clerk_name = d['clerk_name']
         if 'clerk_phone' in d:

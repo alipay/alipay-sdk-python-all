@@ -16,6 +16,7 @@ class ServiceFeeInfo(object):
         self._ext_info = None
         self._pay_no = None
         self._related_bill_no = None
+        self._status = None
         self._trans_in_open_id = None
         self._trans_in_user_id = None
         self._trans_in_user_name = None
@@ -75,6 +76,13 @@ class ServiceFeeInfo(object):
     @related_bill_no.setter
     def related_bill_no(self, value):
         self._related_bill_no = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def trans_in_open_id(self):
         return self._trans_in_open_id
@@ -156,6 +164,11 @@ class ServiceFeeInfo(object):
                 params['related_bill_no'] = self.related_bill_no.to_alipay_dict()
             else:
                 params['related_bill_no'] = self.related_bill_no
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.trans_in_open_id:
             if hasattr(self.trans_in_open_id, 'to_alipay_dict'):
                 params['trans_in_open_id'] = self.trans_in_open_id.to_alipay_dict()
@@ -207,6 +220,8 @@ class ServiceFeeInfo(object):
             o.pay_no = d['pay_no']
         if 'related_bill_no' in d:
             o.related_bill_no = d['related_bill_no']
+        if 'status' in d:
+            o.status = d['status']
         if 'trans_in_open_id' in d:
             o.trans_in_open_id = d['trans_in_open_id']
         if 'trans_in_user_id' in d:

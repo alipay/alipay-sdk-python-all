@@ -46,6 +46,7 @@ class SaleForceUpdateLeadsParams(object):
         self._our_sign_subject = None
         self._partner_id = None
         self._partner_name = None
+        self._platform_uid_id = None
         self._product_family = None
         self._project_name = None
         self._project_phase = None
@@ -323,6 +324,13 @@ class SaleForceUpdateLeadsParams(object):
     @partner_name.setter
     def partner_name(self, value):
         self._partner_name = value
+    @property
+    def platform_uid_id(self):
+        return self._platform_uid_id
+
+    @platform_uid_id.setter
+    def platform_uid_id(self, value):
+        self._platform_uid_id = value
     @property
     def product_family(self):
         return self._product_family
@@ -621,6 +629,11 @@ class SaleForceUpdateLeadsParams(object):
                 params['partner_name'] = self.partner_name.to_alipay_dict()
             else:
                 params['partner_name'] = self.partner_name
+        if self.platform_uid_id:
+            if hasattr(self.platform_uid_id, 'to_alipay_dict'):
+                params['platform_uid_id'] = self.platform_uid_id.to_alipay_dict()
+            else:
+                params['platform_uid_id'] = self.platform_uid_id
         if self.product_family:
             if hasattr(self.product_family, 'to_alipay_dict'):
                 params['product_family'] = self.product_family.to_alipay_dict()
@@ -777,6 +790,8 @@ class SaleForceUpdateLeadsParams(object):
             o.partner_id = d['partner_id']
         if 'partner_name' in d:
             o.partner_name = d['partner_name']
+        if 'platform_uid_id' in d:
+            o.platform_uid_id = d['platform_uid_id']
         if 'product_family' in d:
             o.product_family = d['product_family']
         if 'project_name' in d:

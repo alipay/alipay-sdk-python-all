@@ -10,6 +10,7 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
     def __init__(self):
         self._aq_open_id = None
         self._district_code = None
+        self._doctor_aq_open_id = None
         self._doctor_cert_no = None
         self._doctor_cert_no_encrypt = None
         self._doctor_group = None
@@ -46,6 +47,13 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
     @district_code.setter
     def district_code(self, value):
         self._district_code = value
+    @property
+    def doctor_aq_open_id(self):
+        return self._doctor_aq_open_id
+
+    @doctor_aq_open_id.setter
+    def doctor_aq_open_id(self, value):
+        self._doctor_aq_open_id = value
     @property
     def doctor_cert_no(self):
         return self._doctor_cert_no
@@ -207,6 +215,11 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
                 params['district_code'] = self.district_code.to_alipay_dict()
             else:
                 params['district_code'] = self.district_code
+        if self.doctor_aq_open_id:
+            if hasattr(self.doctor_aq_open_id, 'to_alipay_dict'):
+                params['doctor_aq_open_id'] = self.doctor_aq_open_id.to_alipay_dict()
+            else:
+                params['doctor_aq_open_id'] = self.doctor_aq_open_id
         if self.doctor_cert_no:
             if hasattr(self.doctor_cert_no, 'to_alipay_dict'):
                 params['doctor_cert_no'] = self.doctor_cert_no.to_alipay_dict()
@@ -323,6 +336,8 @@ class AlipayCommerceMedicalUserHomedoctorSyncModel(object):
             o.aq_open_id = d['aq_open_id']
         if 'district_code' in d:
             o.district_code = d['district_code']
+        if 'doctor_aq_open_id' in d:
+            o.doctor_aq_open_id = d['doctor_aq_open_id']
         if 'doctor_cert_no' in d:
             o.doctor_cert_no = d['doctor_cert_no']
         if 'doctor_cert_no_encrypt' in d:

@@ -10,6 +10,7 @@ class PeriodRuleParams(object):
 
     def __init__(self):
         self._execute_time = None
+        self._is_trial_mode = None
         self._period = None
         self._period_type = None
         self._scene_rule_params = None
@@ -24,6 +25,13 @@ class PeriodRuleParams(object):
     @execute_time.setter
     def execute_time(self, value):
         self._execute_time = value
+    @property
+    def is_trial_mode(self):
+        return self._is_trial_mode
+
+    @is_trial_mode.setter
+    def is_trial_mode(self, value):
+        self._is_trial_mode = value
     @property
     def period(self):
         return self._period
@@ -78,6 +86,11 @@ class PeriodRuleParams(object):
                 params['execute_time'] = self.execute_time.to_alipay_dict()
             else:
                 params['execute_time'] = self.execute_time
+        if self.is_trial_mode:
+            if hasattr(self.is_trial_mode, 'to_alipay_dict'):
+                params['is_trial_mode'] = self.is_trial_mode.to_alipay_dict()
+            else:
+                params['is_trial_mode'] = self.is_trial_mode
         if self.period:
             if hasattr(self.period, 'to_alipay_dict'):
                 params['period'] = self.period.to_alipay_dict()
@@ -117,6 +130,8 @@ class PeriodRuleParams(object):
         o = PeriodRuleParams()
         if 'execute_time' in d:
             o.execute_time = d['execute_time']
+        if 'is_trial_mode' in d:
+            o.is_trial_mode = d['is_trial_mode']
         if 'period' in d:
             o.period = d['period']
         if 'period_type' in d:

@@ -9,6 +9,7 @@ class ZhimaCreditPeVisaReportQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(ZhimaCreditPeVisaReportQueryResponse, self).__init__()
+        self._effect_time = None
         self._name_spell = None
         self._passport_no = None
         self._report_apply_status = None
@@ -16,6 +17,13 @@ class ZhimaCreditPeVisaReportQueryResponse(AlipayResponse):
         self._user_permit_status = None
         self._valid_time = None
 
+    @property
+    def effect_time(self):
+        return self._effect_time
+
+    @effect_time.setter
+    def effect_time(self, value):
+        self._effect_time = value
     @property
     def name_spell(self):
         return self._name_spell
@@ -64,6 +72,8 @@ class ZhimaCreditPeVisaReportQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(ZhimaCreditPeVisaReportQueryResponse, self).parse_response_content(response_content)
+        if 'effect_time' in response:
+            self.effect_time = response['effect_time']
         if 'name_spell' in response:
             self.name_spell = response['name_spell']
         if 'passport_no' in response:

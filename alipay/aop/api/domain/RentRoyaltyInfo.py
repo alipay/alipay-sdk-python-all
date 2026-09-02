@@ -17,8 +17,10 @@ class RentRoyaltyInfo(object):
         self._invest_app_id = None
         self._invest_pid = None
         self._order_id = None
+        self._order_zst_type = None
         self._out_order_id = None
         self._plan_list = None
+        self._rent_status = None
         self._royalty_list = None
         self._status = None
 
@@ -72,6 +74,13 @@ class RentRoyaltyInfo(object):
     def order_id(self, value):
         self._order_id = value
     @property
+    def order_zst_type(self):
+        return self._order_zst_type
+
+    @order_zst_type.setter
+    def order_zst_type(self, value):
+        self._order_zst_type = value
+    @property
     def out_order_id(self):
         return self._out_order_id
 
@@ -91,6 +100,13 @@ class RentRoyaltyInfo(object):
                     self._plan_list.append(i)
                 else:
                     self._plan_list.append(RentPlan.from_alipay_dict(i))
+    @property
+    def rent_status(self):
+        return self._rent_status
+
+    @rent_status.setter
+    def rent_status(self, value):
+        self._rent_status = value
     @property
     def royalty_list(self):
         return self._royalty_list
@@ -150,6 +166,11 @@ class RentRoyaltyInfo(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.order_zst_type:
+            if hasattr(self.order_zst_type, 'to_alipay_dict'):
+                params['order_zst_type'] = self.order_zst_type.to_alipay_dict()
+            else:
+                params['order_zst_type'] = self.order_zst_type
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -165,6 +186,11 @@ class RentRoyaltyInfo(object):
                 params['plan_list'] = self.plan_list.to_alipay_dict()
             else:
                 params['plan_list'] = self.plan_list
+        if self.rent_status:
+            if hasattr(self.rent_status, 'to_alipay_dict'):
+                params['rent_status'] = self.rent_status.to_alipay_dict()
+            else:
+                params['rent_status'] = self.rent_status
         if self.royalty_list:
             if isinstance(self.royalty_list, list):
                 for i in range(0, len(self.royalty_list)):
@@ -201,10 +227,14 @@ class RentRoyaltyInfo(object):
             o.invest_pid = d['invest_pid']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'order_zst_type' in d:
+            o.order_zst_type = d['order_zst_type']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'plan_list' in d:
             o.plan_list = d['plan_list']
+        if 'rent_status' in d:
+            o.rent_status = d['rent_status']
         if 'royalty_list' in d:
             o.royalty_list = d['royalty_list']
         if 'status' in d:

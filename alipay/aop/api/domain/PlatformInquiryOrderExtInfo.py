@@ -30,6 +30,7 @@ class PlatformInquiryOrderExtInfo(object):
         self._plus_register_info = None
         self._product_name = None
         self._refund_url = None
+        self._service_expect_end_time = None
         self._source = None
         self._user_type = None
 
@@ -180,6 +181,13 @@ class PlatformInquiryOrderExtInfo(object):
     def refund_url(self, value):
         self._refund_url = value
     @property
+    def service_expect_end_time(self):
+        return self._service_expect_end_time
+
+    @service_expect_end_time.setter
+    def service_expect_end_time(self, value):
+        self._service_expect_end_time = value
+    @property
     def source(self):
         return self._source
 
@@ -297,6 +305,11 @@ class PlatformInquiryOrderExtInfo(object):
                 params['refund_url'] = self.refund_url.to_alipay_dict()
             else:
                 params['refund_url'] = self.refund_url
+        if self.service_expect_end_time:
+            if hasattr(self.service_expect_end_time, 'to_alipay_dict'):
+                params['service_expect_end_time'] = self.service_expect_end_time.to_alipay_dict()
+            else:
+                params['service_expect_end_time'] = self.service_expect_end_time
         if self.source:
             if hasattr(self.source, 'to_alipay_dict'):
                 params['source'] = self.source.to_alipay_dict()
@@ -354,6 +367,8 @@ class PlatformInquiryOrderExtInfo(object):
             o.product_name = d['product_name']
         if 'refund_url' in d:
             o.refund_url = d['refund_url']
+        if 'service_expect_end_time' in d:
+            o.service_expect_end_time = d['service_expect_end_time']
         if 'source' in d:
             o.source = d['source']
         if 'user_type' in d:

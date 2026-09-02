@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ItemPromoInfo import ItemPromoInfo
 from alipay.aop.api.domain.QuotaInfoDTO import QuotaInfoDTO
+from alipay.aop.api.domain.VoucherDetailModel import VoucherDetailModel
 
 
 class VoucherConsultInfo(object):
@@ -17,6 +18,7 @@ class VoucherConsultInfo(object):
         self._expired_time = None
         self._item_promo_info = None
         self._optimal = None
+        self._pre_consult_id = None
         self._promo_amount = None
         self._promo_text = None
         self._promo_type = None
@@ -25,6 +27,7 @@ class VoucherConsultInfo(object):
         self._reduction_ratio = None
         self._specified_amount = None
         self._threshold_amount = None
+        self._voucher_detail = None
         self._voucher_id = None
         self._voucher_name = None
         self._voucher_type = None
@@ -81,6 +84,13 @@ class VoucherConsultInfo(object):
     @optimal.setter
     def optimal(self, value):
         self._optimal = value
+    @property
+    def pre_consult_id(self):
+        return self._pre_consult_id
+
+    @pre_consult_id.setter
+    def pre_consult_id(self, value):
+        self._pre_consult_id = value
     @property
     def promo_amount(self):
         return self._promo_amount
@@ -144,6 +154,16 @@ class VoucherConsultInfo(object):
     def threshold_amount(self, value):
         self._threshold_amount = value
     @property
+    def voucher_detail(self):
+        return self._voucher_detail
+
+    @voucher_detail.setter
+    def voucher_detail(self, value):
+        if isinstance(value, VoucherDetailModel):
+            self._voucher_detail = value
+        else:
+            self._voucher_detail = VoucherDetailModel.from_alipay_dict(value)
+    @property
     def voucher_id(self):
         return self._voucher_id
 
@@ -203,6 +223,11 @@ class VoucherConsultInfo(object):
                 params['optimal'] = self.optimal.to_alipay_dict()
             else:
                 params['optimal'] = self.optimal
+        if self.pre_consult_id:
+            if hasattr(self.pre_consult_id, 'to_alipay_dict'):
+                params['pre_consult_id'] = self.pre_consult_id.to_alipay_dict()
+            else:
+                params['pre_consult_id'] = self.pre_consult_id
         if self.promo_amount:
             if hasattr(self.promo_amount, 'to_alipay_dict'):
                 params['promo_amount'] = self.promo_amount.to_alipay_dict()
@@ -248,6 +273,11 @@ class VoucherConsultInfo(object):
                 params['threshold_amount'] = self.threshold_amount.to_alipay_dict()
             else:
                 params['threshold_amount'] = self.threshold_amount
+        if self.voucher_detail:
+            if hasattr(self.voucher_detail, 'to_alipay_dict'):
+                params['voucher_detail'] = self.voucher_detail.to_alipay_dict()
+            else:
+                params['voucher_detail'] = self.voucher_detail
         if self.voucher_id:
             if hasattr(self.voucher_id, 'to_alipay_dict'):
                 params['voucher_id'] = self.voucher_id.to_alipay_dict()
@@ -284,6 +314,8 @@ class VoucherConsultInfo(object):
             o.item_promo_info = d['item_promo_info']
         if 'optimal' in d:
             o.optimal = d['optimal']
+        if 'pre_consult_id' in d:
+            o.pre_consult_id = d['pre_consult_id']
         if 'promo_amount' in d:
             o.promo_amount = d['promo_amount']
         if 'promo_text' in d:
@@ -300,6 +332,8 @@ class VoucherConsultInfo(object):
             o.specified_amount = d['specified_amount']
         if 'threshold_amount' in d:
             o.threshold_amount = d['threshold_amount']
+        if 'voucher_detail' in d:
+            o.voucher_detail = d['voucher_detail']
         if 'voucher_id' in d:
             o.voucher_id = d['voucher_id']
         if 'voucher_name' in d:

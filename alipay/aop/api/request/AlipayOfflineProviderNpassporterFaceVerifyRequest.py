@@ -15,6 +15,7 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
         self._alipay_id = None
         self._open_id = None
         self._photo_url = None
+        self._photo_url_encrypted = None
         self._project_id = None
         self._solution_type = None
         self._sub_project_id = None
@@ -57,6 +58,13 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
     @photo_url.setter
     def photo_url(self, value):
         self._photo_url = value
+    @property
+    def photo_url_encrypted(self):
+        return self._photo_url_encrypted
+
+    @photo_url_encrypted.setter
+    def photo_url_encrypted(self, value):
+        self._photo_url_encrypted = value
     @property
     def project_id(self):
         return self._project_id
@@ -181,6 +189,11 @@ class AlipayOfflineProviderNpassporterFaceVerifyRequest(object):
                 params['photo_url'] = json.dumps(obj=self.photo_url.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['photo_url'] = self.photo_url
+        if self.photo_url_encrypted:
+            if hasattr(self.photo_url_encrypted, 'to_alipay_dict'):
+                params['photo_url_encrypted'] = json.dumps(obj=self.photo_url_encrypted.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['photo_url_encrypted'] = self.photo_url_encrypted
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = json.dumps(obj=self.project_id.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

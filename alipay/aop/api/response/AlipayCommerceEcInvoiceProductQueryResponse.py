@@ -18,10 +18,13 @@ class AlipayCommerceEcInvoiceProductQueryResponse(AlipayResponse):
 
     @invoice_product_list.setter
     def invoice_product_list(self, value):
-        if isinstance(value, InvoiceProductInfo):
-            self._invoice_product_list = value
-        else:
-            self._invoice_product_list = InvoiceProductInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._invoice_product_list = list()
+            for i in value:
+                if isinstance(i, InvoiceProductInfo):
+                    self._invoice_product_list.append(i)
+                else:
+                    self._invoice_product_list.append(InvoiceProductInfo.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcInvoiceProductQueryResponse, self).parse_response_content(response_content)

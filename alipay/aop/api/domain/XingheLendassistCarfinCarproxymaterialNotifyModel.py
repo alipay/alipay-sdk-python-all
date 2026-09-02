@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CarfinMortgageReceivedFile import CarfinMortgageReceivedFile
+from alipay.aop.api.domain.CarfinExpressInfo import CarfinExpressInfo
 
 
 class XingheLendassistCarfinCarproxymaterialNotifyModel(object):
@@ -13,6 +14,7 @@ class XingheLendassistCarfinCarproxymaterialNotifyModel(object):
         self._mortgage_no = None
         self._notify_scene = None
         self._out_proxy_no = None
+        self._return_express_info = None
 
     @property
     def file_list(self):
@@ -48,6 +50,16 @@ class XingheLendassistCarfinCarproxymaterialNotifyModel(object):
     @out_proxy_no.setter
     def out_proxy_no(self, value):
         self._out_proxy_no = value
+    @property
+    def return_express_info(self):
+        return self._return_express_info
+
+    @return_express_info.setter
+    def return_express_info(self, value):
+        if isinstance(value, CarfinExpressInfo):
+            self._return_express_info = value
+        else:
+            self._return_express_info = CarfinExpressInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -77,6 +89,11 @@ class XingheLendassistCarfinCarproxymaterialNotifyModel(object):
                 params['out_proxy_no'] = self.out_proxy_no.to_alipay_dict()
             else:
                 params['out_proxy_no'] = self.out_proxy_no
+        if self.return_express_info:
+            if hasattr(self.return_express_info, 'to_alipay_dict'):
+                params['return_express_info'] = self.return_express_info.to_alipay_dict()
+            else:
+                params['return_express_info'] = self.return_express_info
         return params
 
     @staticmethod
@@ -92,6 +109,8 @@ class XingheLendassistCarfinCarproxymaterialNotifyModel(object):
             o.notify_scene = d['notify_scene']
         if 'out_proxy_no' in d:
             o.out_proxy_no = d['out_proxy_no']
+        if 'return_express_info' in d:
+            o.return_express_info = d['return_express_info']
         return o
 
 

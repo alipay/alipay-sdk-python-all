@@ -50,6 +50,7 @@ class SiteInfoClasses(object):
         self._shanghai_shenzhen_stock_list = None
         self._site_info_abbreviation = None
         self._site_info_business_location = None
+        self._site_info_contact_information = None
         self._site_info_enterprise_cert_file_list = None
         self._site_info_id = None
         self._site_info_name = None
@@ -342,6 +343,13 @@ class SiteInfoClasses(object):
     def site_info_business_location(self, value):
         self._site_info_business_location = value
     @property
+    def site_info_contact_information(self):
+        return self._site_info_contact_information
+
+    @site_info_contact_information.setter
+    def site_info_contact_information(self, value):
+        self._site_info_contact_information = value
+    @property
     def site_info_enterprise_cert_file_list(self):
         return self._site_info_enterprise_cert_file_list
 
@@ -614,6 +622,11 @@ class SiteInfoClasses(object):
                 params['site_info_business_location'] = self.site_info_business_location.to_alipay_dict()
             else:
                 params['site_info_business_location'] = self.site_info_business_location
+        if self.site_info_contact_information:
+            if hasattr(self.site_info_contact_information, 'to_alipay_dict'):
+                params['site_info_contact_information'] = self.site_info_contact_information.to_alipay_dict()
+            else:
+                params['site_info_contact_information'] = self.site_info_contact_information
         if self.site_info_enterprise_cert_file_list:
             if isinstance(self.site_info_enterprise_cert_file_list, list):
                 for i in range(0, len(self.site_info_enterprise_cert_file_list)):
@@ -747,6 +760,8 @@ class SiteInfoClasses(object):
             o.site_info_abbreviation = d['site_info_abbreviation']
         if 'site_info_business_location' in d:
             o.site_info_business_location = d['site_info_business_location']
+        if 'site_info_contact_information' in d:
+            o.site_info_contact_information = d['site_info_contact_information']
         if 'site_info_enterprise_cert_file_list' in d:
             o.site_info_enterprise_cert_file_list = d['site_info_enterprise_cert_file_list']
         if 'site_info_id' in d:

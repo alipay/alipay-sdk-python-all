@@ -17,6 +17,7 @@ class NexusPayProduct(object):
         self._id = None
         self._metadata = None
         self._name = None
+        self._unit_label = None
 
     @property
     def active(self):
@@ -77,6 +78,13 @@ class NexusPayProduct(object):
     @name.setter
     def name(self, value):
         self._name = value
+    @property
+    def unit_label(self):
+        return self._unit_label
+
+    @unit_label.setter
+    def unit_label(self, value):
+        self._unit_label = value
 
 
     def to_alipay_dict(self):
@@ -121,6 +129,11 @@ class NexusPayProduct(object):
                 params['name'] = self.name.to_alipay_dict()
             else:
                 params['name'] = self.name
+        if self.unit_label:
+            if hasattr(self.unit_label, 'to_alipay_dict'):
+                params['unit_label'] = self.unit_label.to_alipay_dict()
+            else:
+                params['unit_label'] = self.unit_label
         return params
 
     @staticmethod
@@ -144,6 +157,8 @@ class NexusPayProduct(object):
             o.metadata = d['metadata']
         if 'name' in d:
             o.name = d['name']
+        if 'unit_label' in d:
+            o.unit_label = d['unit_label']
         return o
 
 

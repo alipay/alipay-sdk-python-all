@@ -19,6 +19,7 @@ class AxfItemAttrTemplate(object):
         self._input = None
         self._multiple = None
         self._required = None
+        self._unit = None
 
     @property
     def attr_desc(self):
@@ -96,6 +97,16 @@ class AxfItemAttrTemplate(object):
     @required.setter
     def required(self, value):
         self._required = value
+    @property
+    def unit(self):
+        return self._unit
+
+    @unit.setter
+    def unit(self, value):
+        if isinstance(value, list):
+            self._unit = list()
+            for i in value:
+                self._unit.append(i)
 
 
     def to_alipay_dict(self):
@@ -155,6 +166,16 @@ class AxfItemAttrTemplate(object):
                 params['required'] = self.required.to_alipay_dict()
             else:
                 params['required'] = self.required
+        if self.unit:
+            if isinstance(self.unit, list):
+                for i in range(0, len(self.unit)):
+                    element = self.unit[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.unit[i] = element.to_alipay_dict()
+            if hasattr(self.unit, 'to_alipay_dict'):
+                params['unit'] = self.unit.to_alipay_dict()
+            else:
+                params['unit'] = self.unit
         return params
 
     @staticmethod
@@ -182,6 +203,8 @@ class AxfItemAttrTemplate(object):
             o.multiple = d['multiple']
         if 'required' in d:
             o.required = d['required']
+        if 'unit' in d:
+            o.unit = d['unit']
         return o
 
 

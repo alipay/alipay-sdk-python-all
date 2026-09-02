@@ -12,6 +12,7 @@ class AxfItemAttr(object):
         self._attr_name = None
         self._attr_value = None
         self._show_text = None
+        self._unit = None
 
     @property
     def attr_key(self):
@@ -41,6 +42,13 @@ class AxfItemAttr(object):
     @show_text.setter
     def show_text(self, value):
         self._show_text = value
+    @property
+    def unit(self):
+        return self._unit
+
+    @unit.setter
+    def unit(self, value):
+        self._unit = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AxfItemAttr(object):
                 params['show_text'] = self.show_text.to_alipay_dict()
             else:
                 params['show_text'] = self.show_text
+        if self.unit:
+            if hasattr(self.unit, 'to_alipay_dict'):
+                params['unit'] = self.unit.to_alipay_dict()
+            else:
+                params['unit'] = self.unit
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AxfItemAttr(object):
             o.attr_value = d['attr_value']
         if 'show_text' in d:
             o.show_text = d['show_text']
+        if 'unit' in d:
+            o.unit = d['unit']
         return o
 
 

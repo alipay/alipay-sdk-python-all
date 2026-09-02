@@ -10,6 +10,7 @@ class AlipayCommerceRetailFocusbenefitdataQueryModel(object):
     def __init__(self):
         self._area = None
         self._digest = None
+        self._district_name = None
         self._dt_list = None
         self._hh_list = None
         self._minute_time = None
@@ -31,6 +32,13 @@ class AlipayCommerceRetailFocusbenefitdataQueryModel(object):
     @digest.setter
     def digest(self, value):
         self._digest = value
+    @property
+    def district_name(self):
+        return self._district_name
+
+    @district_name.setter
+    def district_name(self, value):
+        self._district_name = value
     @property
     def dt_list(self):
         return self._dt_list
@@ -87,6 +95,11 @@ class AlipayCommerceRetailFocusbenefitdataQueryModel(object):
                 params['digest'] = self.digest.to_alipay_dict()
             else:
                 params['digest'] = self.digest
+        if self.district_name:
+            if hasattr(self.district_name, 'to_alipay_dict'):
+                params['district_name'] = self.district_name.to_alipay_dict()
+            else:
+                params['district_name'] = self.district_name
         if self.dt_list:
             if hasattr(self.dt_list, 'to_alipay_dict'):
                 params['dt_list'] = self.dt_list.to_alipay_dict()
@@ -128,6 +141,8 @@ class AlipayCommerceRetailFocusbenefitdataQueryModel(object):
             o.area = d['area']
         if 'digest' in d:
             o.digest = d['digest']
+        if 'district_name' in d:
+            o.district_name = d['district_name']
         if 'dt_list' in d:
             o.dt_list = d['dt_list']
         if 'hh_list' in d:

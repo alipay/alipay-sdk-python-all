@@ -10,6 +10,7 @@ class TraditionalChineseMedicine(object):
 
     def __init__(self):
         self._medication_information_list = None
+        self._medication_order = None
         self._usage = None
 
     @property
@@ -25,6 +26,13 @@ class TraditionalChineseMedicine(object):
                     self._medication_information_list.append(i)
                 else:
                     self._medication_information_list.append(MedicationInformation.from_alipay_dict(i))
+    @property
+    def medication_order(self):
+        return self._medication_order
+
+    @medication_order.setter
+    def medication_order(self, value):
+        self._medication_order = value
     @property
     def usage(self):
         return self._usage
@@ -46,6 +54,11 @@ class TraditionalChineseMedicine(object):
                 params['medication_information_list'] = self.medication_information_list.to_alipay_dict()
             else:
                 params['medication_information_list'] = self.medication_information_list
+        if self.medication_order:
+            if hasattr(self.medication_order, 'to_alipay_dict'):
+                params['medication_order'] = self.medication_order.to_alipay_dict()
+            else:
+                params['medication_order'] = self.medication_order
         if self.usage:
             if hasattr(self.usage, 'to_alipay_dict'):
                 params['usage'] = self.usage.to_alipay_dict()
@@ -60,6 +73,8 @@ class TraditionalChineseMedicine(object):
         o = TraditionalChineseMedicine()
         if 'medication_information_list' in d:
             o.medication_information_list = d['medication_information_list']
+        if 'medication_order' in d:
+            o.medication_order = d['medication_order']
         if 'usage' in d:
             o.usage = d['usage']
         return o

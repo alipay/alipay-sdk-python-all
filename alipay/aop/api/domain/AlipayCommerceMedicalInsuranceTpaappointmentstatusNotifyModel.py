@@ -11,8 +11,10 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
         self._appointment_no = None
         self._appointment_status = None
         self._appointment_status_msg = None
+        self._ext_info = None
         self._fail_reason = None
         self._open_id = None
+        self._tpa_id = None
         self._user_id = None
         self._visit_department = None
         self._visit_hospital = None
@@ -43,6 +45,13 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
     def appointment_status_msg(self, value):
         self._appointment_status_msg = value
     @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
+    @property
     def fail_reason(self):
         return self._fail_reason
 
@@ -56,6 +65,13 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def tpa_id(self):
+        return self._tpa_id
+
+    @tpa_id.setter
+    def tpa_id(self, value):
+        self._tpa_id = value
     @property
     def user_id(self):
         return self._user_id
@@ -124,6 +140,11 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
                 params['appointment_status_msg'] = self.appointment_status_msg.to_alipay_dict()
             else:
                 params['appointment_status_msg'] = self.appointment_status_msg
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.fail_reason:
             if hasattr(self.fail_reason, 'to_alipay_dict'):
                 params['fail_reason'] = self.fail_reason.to_alipay_dict()
@@ -134,6 +155,11 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.tpa_id:
+            if hasattr(self.tpa_id, 'to_alipay_dict'):
+                params['tpa_id'] = self.tpa_id.to_alipay_dict()
+            else:
+                params['tpa_id'] = self.tpa_id
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -182,10 +208,14 @@ class AlipayCommerceMedicalInsuranceTpaappointmentstatusNotifyModel(object):
             o.appointment_status = d['appointment_status']
         if 'appointment_status_msg' in d:
             o.appointment_status_msg = d['appointment_status_msg']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'fail_reason' in d:
             o.fail_reason = d['fail_reason']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'tpa_id' in d:
+            o.tpa_id = d['tpa_id']
         if 'user_id' in d:
             o.user_id = d['user_id']
         if 'visit_department' in d:

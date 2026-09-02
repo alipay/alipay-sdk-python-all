@@ -25,6 +25,7 @@ class WeatherVariablesMark(object):
         self._pressure_msl = None
         self._rain = None
         self._relative_humidity_2m = None
+        self._short_term_rain = None
         self._shortwave_radiation = None
         self._shortwave_radiation_instant = None
         self._snowfall = None
@@ -159,6 +160,13 @@ class WeatherVariablesMark(object):
     @relative_humidity_2m.setter
     def relative_humidity_2m(self, value):
         self._relative_humidity_2m = value
+    @property
+    def short_term_rain(self):
+        return self._short_term_rain
+
+    @short_term_rain.setter
+    def short_term_rain(self, value):
+        self._short_term_rain = value
     @property
     def shortwave_radiation(self):
         return self._shortwave_radiation
@@ -346,6 +354,11 @@ class WeatherVariablesMark(object):
                 params['relative_humidity_2m'] = self.relative_humidity_2m.to_alipay_dict()
             else:
                 params['relative_humidity_2m'] = self.relative_humidity_2m
+        if self.short_term_rain:
+            if hasattr(self.short_term_rain, 'to_alipay_dict'):
+                params['short_term_rain'] = self.short_term_rain.to_alipay_dict()
+            else:
+                params['short_term_rain'] = self.short_term_rain
         if self.shortwave_radiation:
             if hasattr(self.shortwave_radiation, 'to_alipay_dict'):
                 params['shortwave_radiation'] = self.shortwave_radiation.to_alipay_dict()
@@ -457,6 +470,8 @@ class WeatherVariablesMark(object):
             o.rain = d['rain']
         if 'relative_humidity_2m' in d:
             o.relative_humidity_2m = d['relative_humidity_2m']
+        if 'short_term_rain' in d:
+            o.short_term_rain = d['short_term_rain']
         if 'shortwave_radiation' in d:
             o.shortwave_radiation = d['shortwave_radiation']
         if 'shortwave_radiation_instant' in d:

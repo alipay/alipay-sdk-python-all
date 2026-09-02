@@ -24,6 +24,7 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._converted_event = None
         self._converted_event_grp = None
         self._converted_id = None
+        self._delivery_mode = None
         self._district = None
         self._exclude_customized_crowd_list = None
         self._filter_converted_event_list = None
@@ -42,6 +43,7 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
         self._include_customized_crowd_list = None
         self._intelligent_target_switch = None
         self._interest_list = None
+        self._join_window_code = None
         self._lbs_list = None
         self._market_target_code = None
         self._market_target_name = None
@@ -160,6 +162,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
     @converted_id.setter
     def converted_id(self, value):
         self._converted_id = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def district(self):
         return self._district
@@ -301,6 +310,13 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self._interest_list = list()
             for i in value:
                 self._interest_list.append(i)
+    @property
+    def join_window_code(self):
+        return self._join_window_code
+
+    @join_window_code.setter
+    def join_window_code(self, value):
+        self._join_window_code = value
     @property
     def lbs_list(self):
         return self._lbs_list
@@ -470,6 +486,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.converted_event_grp = response['converted_event_grp']
         if 'converted_id' in response:
             self.converted_id = response['converted_id']
+        if 'delivery_mode' in response:
+            self.delivery_mode = response['delivery_mode']
         if 'district' in response:
             self.district = response['district']
         if 'exclude_customized_crowd_list' in response:
@@ -506,6 +524,8 @@ class AlipayDataDataserviceAdcampaignGroupQueryResponse(AlipayResponse):
             self.intelligent_target_switch = response['intelligent_target_switch']
         if 'interest_list' in response:
             self.interest_list = response['interest_list']
+        if 'join_window_code' in response:
+            self.join_window_code = response['join_window_code']
         if 'lbs_list' in response:
             self.lbs_list = response['lbs_list']
         if 'market_target_code' in response:

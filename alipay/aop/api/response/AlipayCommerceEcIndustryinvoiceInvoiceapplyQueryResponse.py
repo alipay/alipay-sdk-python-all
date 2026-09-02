@@ -37,7 +37,10 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
         self._pdf_file_url = None
         self._product_id = None
         self._real_property_business_list = None
+        self._red_confirmation_no = None
+        self._red_confirmation_uuid = None
         self._related_blue_invoice_no = None
+        self._remark = None
         self._seller_name = None
         self._seller_tax_no = None
         self._tax_no = None
@@ -231,12 +234,33 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
                 else:
                     self._real_property_business_list.append(IndustryInvoiceRealPropertyBusiness.from_alipay_dict(i))
     @property
+    def red_confirmation_no(self):
+        return self._red_confirmation_no
+
+    @red_confirmation_no.setter
+    def red_confirmation_no(self, value):
+        self._red_confirmation_no = value
+    @property
+    def red_confirmation_uuid(self):
+        return self._red_confirmation_uuid
+
+    @red_confirmation_uuid.setter
+    def red_confirmation_uuid(self, value):
+        self._red_confirmation_uuid = value
+    @property
     def related_blue_invoice_no(self):
         return self._related_blue_invoice_no
 
     @related_blue_invoice_no.setter
     def related_blue_invoice_no(self, value):
         self._related_blue_invoice_no = value
+    @property
+    def remark(self):
+        return self._remark
+
+    @remark.setter
+    def remark(self, value):
+        self._remark = value
     @property
     def seller_name(self):
         return self._seller_name
@@ -324,8 +348,14 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.product_id = response['product_id']
         if 'real_property_business_list' in response:
             self.real_property_business_list = response['real_property_business_list']
+        if 'red_confirmation_no' in response:
+            self.red_confirmation_no = response['red_confirmation_no']
+        if 'red_confirmation_uuid' in response:
+            self.red_confirmation_uuid = response['red_confirmation_uuid']
         if 'related_blue_invoice_no' in response:
             self.related_blue_invoice_no = response['related_blue_invoice_no']
+        if 'remark' in response:
+            self.remark = response['remark']
         if 'seller_name' in response:
             self.seller_name = response['seller_name']
         if 'seller_tax_no' in response:

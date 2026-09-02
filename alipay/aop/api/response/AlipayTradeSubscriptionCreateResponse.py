@@ -14,6 +14,7 @@ class AlipayTradeSubscriptionCreateResponse(AlipayResponse):
         self._order_no = None
         self._pay_amount = None
         self._promotion_info = None
+        self._schema_effective_end = None
         self._subscription_id = None
         self._trial_end = None
         self._trial_start = None
@@ -54,6 +55,13 @@ class AlipayTradeSubscriptionCreateResponse(AlipayResponse):
     def promotion_info(self, value):
         self._promotion_info = value
     @property
+    def schema_effective_end(self):
+        return self._schema_effective_end
+
+    @schema_effective_end.setter
+    def schema_effective_end(self, value):
+        self._schema_effective_end = value
+    @property
     def subscription_id(self):
         return self._subscription_id
 
@@ -87,6 +95,8 @@ class AlipayTradeSubscriptionCreateResponse(AlipayResponse):
             self.pay_amount = response['pay_amount']
         if 'promotion_info' in response:
             self.promotion_info = response['promotion_info']
+        if 'schema_effective_end' in response:
+            self.schema_effective_end = response['schema_effective_end']
         if 'subscription_id' in response:
             self.subscription_id = response['subscription_id']
         if 'trial_end' in response:

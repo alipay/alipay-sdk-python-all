@@ -12,6 +12,7 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordQueryResponse(AlipayRespons
         self._record_id = None
         self._reject_reason = None
         self._remain_retry_count = None
+        self._shop_biz_id = None
         self._status = None
 
     @property
@@ -36,6 +37,13 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordQueryResponse(AlipayRespons
     def remain_retry_count(self, value):
         self._remain_retry_count = value
     @property
+    def shop_biz_id(self):
+        return self._shop_biz_id
+
+    @shop_biz_id.setter
+    def shop_biz_id(self, value):
+        self._shop_biz_id = value
+    @property
     def status(self):
         return self._status
 
@@ -51,5 +59,7 @@ class AlipayOpenSpNordermaterialsapplyMaterialsrecordQueryResponse(AlipayRespons
             self.reject_reason = response['reject_reason']
         if 'remain_retry_count' in response:
             self.remain_retry_count = response['remain_retry_count']
+        if 'shop_biz_id' in response:
+            self.shop_biz_id = response['shop_biz_id']
         if 'status' in response:
             self.status = response['status']

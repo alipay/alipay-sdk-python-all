@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CustomUnitAmount import CustomUnitAmount
 from alipay.aop.api.domain.Recurring import Recurring
 
 
@@ -10,6 +11,7 @@ class NexusSimplePrice(object):
 
     def __init__(self):
         self._active = None
+        self._custom_unit_amount = None
         self._id = None
         self._metadata = None
         self._recurring = None
@@ -23,6 +25,16 @@ class NexusSimplePrice(object):
     @active.setter
     def active(self, value):
         self._active = value
+    @property
+    def custom_unit_amount(self):
+        return self._custom_unit_amount
+
+    @custom_unit_amount.setter
+    def custom_unit_amount(self, value):
+        if isinstance(value, CustomUnitAmount):
+            self._custom_unit_amount = value
+        else:
+            self._custom_unit_amount = CustomUnitAmount.from_alipay_dict(value)
     @property
     def id(self):
         return self._id
@@ -70,6 +82,11 @@ class NexusSimplePrice(object):
                 params['active'] = self.active.to_alipay_dict()
             else:
                 params['active'] = self.active
+        if self.custom_unit_amount:
+            if hasattr(self.custom_unit_amount, 'to_alipay_dict'):
+                params['custom_unit_amount'] = self.custom_unit_amount.to_alipay_dict()
+            else:
+                params['custom_unit_amount'] = self.custom_unit_amount
         if self.id:
             if hasattr(self.id, 'to_alipay_dict'):
                 params['id'] = self.id.to_alipay_dict()
@@ -104,6 +121,8 @@ class NexusSimplePrice(object):
         o = NexusSimplePrice()
         if 'active' in d:
             o.active = d['active']
+        if 'custom_unit_amount' in d:
+            o.custom_unit_amount = d['custom_unit_amount']
         if 'id' in d:
             o.id = d['id']
         if 'metadata' in d:

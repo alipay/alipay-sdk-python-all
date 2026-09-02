@@ -124,10 +124,13 @@ class AlipayFundBatchUniTransferModel(object):
 
     @transfer_scene_report_infos.setter
     def transfer_scene_report_infos(self, value):
-        if isinstance(value, TransferSceneReportInfo):
-            self._transfer_scene_report_infos = value
-        else:
-            self._transfer_scene_report_infos = TransferSceneReportInfo.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._transfer_scene_report_infos = list()
+            for i in value:
+                if isinstance(i, TransferSceneReportInfo):
+                    self._transfer_scene_report_infos.append(i)
+                else:
+                    self._transfer_scene_report_infos.append(TransferSceneReportInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -198,6 +201,11 @@ class AlipayFundBatchUniTransferModel(object):
             else:
                 params['transfer_scene_name'] = self.transfer_scene_name
         if self.transfer_scene_report_infos:
+            if isinstance(self.transfer_scene_report_infos, list):
+                for i in range(0, len(self.transfer_scene_report_infos)):
+                    element = self.transfer_scene_report_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.transfer_scene_report_infos[i] = element.to_alipay_dict()
             if hasattr(self.transfer_scene_report_infos, 'to_alipay_dict'):
                 params['transfer_scene_report_infos'] = self.transfer_scene_report_infos.to_alipay_dict()
             else:

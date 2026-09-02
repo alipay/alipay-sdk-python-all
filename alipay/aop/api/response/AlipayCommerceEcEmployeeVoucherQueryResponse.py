@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.VoucherInfoResponse import VoucherInfoResponse
+from alipay.aop.api.domain.VoucherInfoResponse import VoucherInfoResponse
 
 
 class AlipayCommerceEcEmployeeVoucherQueryResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayCommerceEcEmployeeVoucherQueryResponse(AlipayResponse):
         self._page_size = None
         self._total_page_count = None
         self._voucher_info_list = None
+        self._voucher_info_response_list = None
 
     @property
     def page_num(self):
@@ -46,6 +48,19 @@ class AlipayCommerceEcEmployeeVoucherQueryResponse(AlipayResponse):
             self._voucher_info_list = value
         else:
             self._voucher_info_list = VoucherInfoResponse.from_alipay_dict(value)
+    @property
+    def voucher_info_response_list(self):
+        return self._voucher_info_response_list
+
+    @voucher_info_response_list.setter
+    def voucher_info_response_list(self, value):
+        if isinstance(value, list):
+            self._voucher_info_response_list = list()
+            for i in value:
+                if isinstance(i, VoucherInfoResponse):
+                    self._voucher_info_response_list.append(i)
+                else:
+                    self._voucher_info_response_list.append(VoucherInfoResponse.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcEmployeeVoucherQueryResponse, self).parse_response_content(response_content)
@@ -57,3 +72,5 @@ class AlipayCommerceEcEmployeeVoucherQueryResponse(AlipayResponse):
             self.total_page_count = response['total_page_count']
         if 'voucher_info_list' in response:
             self.voucher_info_list = response['voucher_info_list']
+        if 'voucher_info_response_list' in response:
+            self.voucher_info_response_list = response['voucher_info_response_list']

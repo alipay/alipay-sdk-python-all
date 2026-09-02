@@ -27,6 +27,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._external_logon_id = None
         self._identity_params = None
         self._merchant_process_url = None
+        self._ori_agreement_no = None
         self._out_risk_info = None
         self._pass_params = None
         self._period_rule_params = None
@@ -35,6 +36,7 @@ class AlipayUserAgreementPageSignModel(object):
         self._product_code = None
         self._promo_params = None
         self._sign_scene = None
+        self._sign_sub_operate_type = None
         self._sign_validity_period = None
         self._specified_asset = None
         self._specified_deduct_rule_params = None
@@ -117,6 +119,13 @@ class AlipayUserAgreementPageSignModel(object):
     def merchant_process_url(self, value):
         self._merchant_process_url = value
     @property
+    def ori_agreement_no(self):
+        return self._ori_agreement_no
+
+    @ori_agreement_no.setter
+    def ori_agreement_no(self, value):
+        self._ori_agreement_no = value
+    @property
     def out_risk_info(self):
         return self._out_risk_info
 
@@ -178,6 +187,13 @@ class AlipayUserAgreementPageSignModel(object):
     @sign_scene.setter
     def sign_scene(self, value):
         self._sign_scene = value
+    @property
+    def sign_sub_operate_type(self):
+        return self._sign_sub_operate_type
+
+    @sign_sub_operate_type.setter
+    def sign_sub_operate_type(self, value):
+        self._sign_sub_operate_type = value
     @property
     def sign_validity_period(self):
         return self._sign_validity_period
@@ -298,6 +314,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['merchant_process_url'] = self.merchant_process_url.to_alipay_dict()
             else:
                 params['merchant_process_url'] = self.merchant_process_url
+        if self.ori_agreement_no:
+            if hasattr(self.ori_agreement_no, 'to_alipay_dict'):
+                params['ori_agreement_no'] = self.ori_agreement_no.to_alipay_dict()
+            else:
+                params['ori_agreement_no'] = self.ori_agreement_no
         if self.out_risk_info:
             if hasattr(self.out_risk_info, 'to_alipay_dict'):
                 params['out_risk_info'] = self.out_risk_info.to_alipay_dict()
@@ -338,6 +359,11 @@ class AlipayUserAgreementPageSignModel(object):
                 params['sign_scene'] = self.sign_scene.to_alipay_dict()
             else:
                 params['sign_scene'] = self.sign_scene
+        if self.sign_sub_operate_type:
+            if hasattr(self.sign_sub_operate_type, 'to_alipay_dict'):
+                params['sign_sub_operate_type'] = self.sign_sub_operate_type.to_alipay_dict()
+            else:
+                params['sign_sub_operate_type'] = self.sign_sub_operate_type
         if self.sign_validity_period:
             if hasattr(self.sign_validity_period, 'to_alipay_dict'):
                 params['sign_validity_period'] = self.sign_validity_period.to_alipay_dict()
@@ -403,6 +429,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.identity_params = d['identity_params']
         if 'merchant_process_url' in d:
             o.merchant_process_url = d['merchant_process_url']
+        if 'ori_agreement_no' in d:
+            o.ori_agreement_no = d['ori_agreement_no']
         if 'out_risk_info' in d:
             o.out_risk_info = d['out_risk_info']
         if 'pass_params' in d:
@@ -419,6 +447,8 @@ class AlipayUserAgreementPageSignModel(object):
             o.promo_params = d['promo_params']
         if 'sign_scene' in d:
             o.sign_scene = d['sign_scene']
+        if 'sign_sub_operate_type' in d:
+            o.sign_sub_operate_type = d['sign_sub_operate_type']
         if 'sign_validity_period' in d:
             o.sign_validity_period = d['sign_validity_period']
         if 'specified_asset' in d:

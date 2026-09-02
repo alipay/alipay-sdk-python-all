@@ -11,6 +11,10 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
         super(AlipayCommerceMedicalInsuranceUserfactorsQueryResponse, self).__init__()
         self._cert_no = None
         self._cert_type = None
+        self._ext_info = None
+        self._insured_cert_no = None
+        self._insured_cert_type = None
+        self._insured_name = None
         self._mobile = None
         self._name = None
         self._open_id = None
@@ -30,6 +34,34 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
     @cert_type.setter
     def cert_type(self, value):
         self._cert_type = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
+    @property
+    def insured_cert_no(self):
+        return self._insured_cert_no
+
+    @insured_cert_no.setter
+    def insured_cert_no(self, value):
+        self._insured_cert_no = value
+    @property
+    def insured_cert_type(self):
+        return self._insured_cert_type
+
+    @insured_cert_type.setter
+    def insured_cert_type(self, value):
+        self._insured_cert_type = value
+    @property
+    def insured_name(self):
+        return self._insured_name
+
+    @insured_name.setter
+    def insured_name(self, value):
+        self._insured_name = value
     @property
     def mobile(self):
         return self._mobile
@@ -65,6 +97,14 @@ class AlipayCommerceMedicalInsuranceUserfactorsQueryResponse(AlipayResponse):
             self.cert_no = response['cert_no']
         if 'cert_type' in response:
             self.cert_type = response['cert_type']
+        if 'ext_info' in response:
+            self.ext_info = response['ext_info']
+        if 'insured_cert_no' in response:
+            self.insured_cert_no = response['insured_cert_no']
+        if 'insured_cert_type' in response:
+            self.insured_cert_type = response['insured_cert_type']
+        if 'insured_name' in response:
+            self.insured_name = response['insured_name']
         if 'mobile' in response:
             self.mobile = response['mobile']
         if 'name' in response:

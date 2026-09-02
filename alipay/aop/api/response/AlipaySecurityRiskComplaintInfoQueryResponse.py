@@ -23,6 +23,7 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
         self._gmt_upgrade = None
         self._gmt_upgrade_risk_finish_time = None
         self._id = None
+        self._label_tag_list = None
         self._opposite_name = None
         self._opposite_pid = None
         self._process_code = None
@@ -136,6 +137,16 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
     def id(self, value):
         self._id = value
     @property
+    def label_tag_list(self):
+        return self._label_tag_list
+
+    @label_tag_list.setter
+    def label_tag_list(self, value):
+        if isinstance(value, list):
+            self._label_tag_list = list()
+            for i in value:
+                self._label_tag_list.append(i)
+    @property
     def opposite_name(self):
         return self._opposite_name
 
@@ -244,6 +255,8 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
             self.gmt_upgrade_risk_finish_time = response['gmt_upgrade_risk_finish_time']
         if 'id' in response:
             self.id = response['id']
+        if 'label_tag_list' in response:
+            self.label_tag_list = response['label_tag_list']
         if 'opposite_name' in response:
             self.opposite_name = response['opposite_name']
         if 'opposite_pid' in response:

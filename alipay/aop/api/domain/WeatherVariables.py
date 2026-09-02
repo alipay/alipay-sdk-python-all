@@ -21,12 +21,14 @@ class WeatherVariables(object):
         self._direct_normal_irradiance_instant = None
         self._direct_radiation = None
         self._direct_radiation_instant = None
+        self._forecast_batch_time = None
         self._precipitation = None
         self._precipitation_probability = None
         self._pressure_msl = None
         self._rain = None
         self._relative_humidity_2_m = None
         self._relative_humidity_2m = None
+        self._short_term_rain = None
         self._shortwave_radiation = None
         self._shortwave_radiation_instant = None
         self._snowfall = None
@@ -142,6 +144,13 @@ class WeatherVariables(object):
     def direct_radiation_instant(self, value):
         self._direct_radiation_instant = value
     @property
+    def forecast_batch_time(self):
+        return self._forecast_batch_time
+
+    @forecast_batch_time.setter
+    def forecast_batch_time(self, value):
+        self._forecast_batch_time = value
+    @property
     def precipitation(self):
         return self._precipitation
 
@@ -183,6 +192,13 @@ class WeatherVariables(object):
     @relative_humidity_2m.setter
     def relative_humidity_2m(self, value):
         self._relative_humidity_2m = value
+    @property
+    def short_term_rain(self):
+        return self._short_term_rain
+
+    @short_term_rain.setter
+    def short_term_rain(self, value):
+        self._short_term_rain = value
     @property
     def shortwave_radiation(self):
         return self._shortwave_radiation
@@ -406,6 +422,11 @@ class WeatherVariables(object):
                 params['direct_radiation_instant'] = self.direct_radiation_instant.to_alipay_dict()
             else:
                 params['direct_radiation_instant'] = self.direct_radiation_instant
+        if self.forecast_batch_time:
+            if hasattr(self.forecast_batch_time, 'to_alipay_dict'):
+                params['forecast_batch_time'] = self.forecast_batch_time.to_alipay_dict()
+            else:
+                params['forecast_batch_time'] = self.forecast_batch_time
         if self.precipitation:
             if hasattr(self.precipitation, 'to_alipay_dict'):
                 params['precipitation'] = self.precipitation.to_alipay_dict()
@@ -436,6 +457,11 @@ class WeatherVariables(object):
                 params['relative_humidity_2m'] = self.relative_humidity_2m.to_alipay_dict()
             else:
                 params['relative_humidity_2m'] = self.relative_humidity_2m
+        if self.short_term_rain:
+            if hasattr(self.short_term_rain, 'to_alipay_dict'):
+                params['short_term_rain'] = self.short_term_rain.to_alipay_dict()
+            else:
+                params['short_term_rain'] = self.short_term_rain
         if self.shortwave_radiation:
             if hasattr(self.shortwave_radiation, 'to_alipay_dict'):
                 params['shortwave_radiation'] = self.shortwave_radiation.to_alipay_dict()
@@ -579,6 +605,8 @@ class WeatherVariables(object):
             o.direct_radiation = d['direct_radiation']
         if 'direct_radiation_instant' in d:
             o.direct_radiation_instant = d['direct_radiation_instant']
+        if 'forecast_batch_time' in d:
+            o.forecast_batch_time = d['forecast_batch_time']
         if 'precipitation' in d:
             o.precipitation = d['precipitation']
         if 'precipitation_probability' in d:
@@ -591,6 +619,8 @@ class WeatherVariables(object):
             o.relative_humidity_2_m = d['relative_humidity_2_m']
         if 'relative_humidity_2m' in d:
             o.relative_humidity_2m = d['relative_humidity_2m']
+        if 'short_term_rain' in d:
+            o.short_term_rain = d['short_term_rain']
         if 'shortwave_radiation' in d:
             o.shortwave_radiation = d['shortwave_radiation']
         if 'shortwave_radiation_instant' in d:

@@ -26,9 +26,11 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
         self._field_image_list = None
         self._field_service_desc = None
         self._maximum_power = None
+        self._nfc_tagid = None
         self._pay_type = None
         self._plug_sum = None
         self._province = None
+        self._sn_id = None
         self._station_name = None
         self._station_no = None
         self._sync_type = None
@@ -166,6 +168,13 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
     def maximum_power(self, value):
         self._maximum_power = value
     @property
+    def nfc_tagid(self):
+        return self._nfc_tagid
+
+    @nfc_tagid.setter
+    def nfc_tagid(self, value):
+        self._nfc_tagid = value
+    @property
     def pay_type(self):
         return self._pay_type
 
@@ -186,6 +195,13 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
     @province.setter
     def province(self, value):
         self._province = value
+    @property
+    def sn_id(self):
+        return self._sn_id
+
+    @sn_id.setter
+    def sn_id(self, value):
+        self._sn_id = value
     @property
     def station_name(self):
         return self._station_name
@@ -311,6 +327,11 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
                 params['maximum_power'] = self.maximum_power.to_alipay_dict()
             else:
                 params['maximum_power'] = self.maximum_power
+        if self.nfc_tagid:
+            if hasattr(self.nfc_tagid, 'to_alipay_dict'):
+                params['nfc_tagid'] = self.nfc_tagid.to_alipay_dict()
+            else:
+                params['nfc_tagid'] = self.nfc_tagid
         if self.pay_type:
             if hasattr(self.pay_type, 'to_alipay_dict'):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
@@ -326,6 +347,11 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
                 params['province'] = self.province.to_alipay_dict()
             else:
                 params['province'] = self.province
+        if self.sn_id:
+            if hasattr(self.sn_id, 'to_alipay_dict'):
+                params['sn_id'] = self.sn_id.to_alipay_dict()
+            else:
+                params['sn_id'] = self.sn_id
         if self.station_name:
             if hasattr(self.station_name, 'to_alipay_dict'):
                 params['station_name'] = self.station_name.to_alipay_dict()
@@ -384,12 +410,16 @@ class AlipayCommerceTransportEbikeChargestationSyncModel(object):
             o.field_service_desc = d['field_service_desc']
         if 'maximum_power' in d:
             o.maximum_power = d['maximum_power']
+        if 'nfc_tagid' in d:
+            o.nfc_tagid = d['nfc_tagid']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
         if 'plug_sum' in d:
             o.plug_sum = d['plug_sum']
         if 'province' in d:
             o.province = d['province']
+        if 'sn_id' in d:
+            o.sn_id = d['sn_id']
         if 'station_name' in d:
             o.station_name = d['station_name']
         if 'station_no' in d:

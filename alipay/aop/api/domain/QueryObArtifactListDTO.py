@@ -14,6 +14,7 @@ class QueryObArtifactListDTO(object):
         self._download_url = None
         self._fullname = None
         self._project_name = None
+        self._sha_256 = None
         self._size = None
         self._unique_data_key = None
         self._use_type_str = None
@@ -61,6 +62,13 @@ class QueryObArtifactListDTO(object):
     @project_name.setter
     def project_name(self, value):
         self._project_name = value
+    @property
+    def sha_256(self):
+        return self._sha_256
+
+    @sha_256.setter
+    def sha_256(self, value):
+        self._sha_256 = value
     @property
     def size(self):
         return self._size
@@ -123,6 +131,11 @@ class QueryObArtifactListDTO(object):
                 params['project_name'] = self.project_name.to_alipay_dict()
             else:
                 params['project_name'] = self.project_name
+        if self.sha_256:
+            if hasattr(self.sha_256, 'to_alipay_dict'):
+                params['sha_256'] = self.sha_256.to_alipay_dict()
+            else:
+                params['sha_256'] = self.sha_256
         if self.size:
             if hasattr(self.size, 'to_alipay_dict'):
                 params['size'] = self.size.to_alipay_dict()
@@ -162,6 +175,8 @@ class QueryObArtifactListDTO(object):
             o.fullname = d['fullname']
         if 'project_name' in d:
             o.project_name = d['project_name']
+        if 'sha_256' in d:
+            o.sha_256 = d['sha_256']
         if 'size' in d:
             o.size = d['size']
         if 'unique_data_key' in d:

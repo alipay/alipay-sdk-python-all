@@ -3,12 +3,14 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ActivityDeliveryExtInfo import ActivityDeliveryExtInfo
 from alipay.aop.api.domain.BelongMerchantInfo import BelongMerchantInfo
 
 
 class ActivityBaseInfo(object):
 
     def __init__(self):
+        self._activity_delivery_ext_info = None
         self._activity_id = None
         self._activity_name = None
         self._activity_operation_status = None
@@ -18,6 +20,16 @@ class ActivityBaseInfo(object):
         self._code_mode = None
         self._out_activity_id = None
 
+    @property
+    def activity_delivery_ext_info(self):
+        return self._activity_delivery_ext_info
+
+    @activity_delivery_ext_info.setter
+    def activity_delivery_ext_info(self, value):
+        if isinstance(value, ActivityDeliveryExtInfo):
+            self._activity_delivery_ext_info = value
+        else:
+            self._activity_delivery_ext_info = ActivityDeliveryExtInfo.from_alipay_dict(value)
     @property
     def activity_id(self):
         return self._activity_id
@@ -81,6 +93,11 @@ class ActivityBaseInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.activity_delivery_ext_info:
+            if hasattr(self.activity_delivery_ext_info, 'to_alipay_dict'):
+                params['activity_delivery_ext_info'] = self.activity_delivery_ext_info.to_alipay_dict()
+            else:
+                params['activity_delivery_ext_info'] = self.activity_delivery_ext_info
         if self.activity_id:
             if hasattr(self.activity_id, 'to_alipay_dict'):
                 params['activity_id'] = self.activity_id.to_alipay_dict()
@@ -128,6 +145,8 @@ class ActivityBaseInfo(object):
         if not d:
             return None
         o = ActivityBaseInfo()
+        if 'activity_delivery_ext_info' in d:
+            o.activity_delivery_ext_info = d['activity_delivery_ext_info']
         if 'activity_id' in d:
             o.activity_id = d['activity_id']
         if 'activity_name' in d:

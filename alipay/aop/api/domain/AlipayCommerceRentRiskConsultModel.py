@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.ShipAssessmentRes import ShipAssessmentRes
 
 
 class AlipayCommerceRentRiskConsultModel(object):
@@ -13,6 +14,7 @@ class AlipayCommerceRentRiskConsultModel(object):
         self._consult_risk_types = None
         self._out_biz_no = None
         self._risk_biz_scene = None
+        self._ship_assessment_result = None
 
     @property
     def alipay_open_id(self):
@@ -52,6 +54,16 @@ class AlipayCommerceRentRiskConsultModel(object):
     @risk_biz_scene.setter
     def risk_biz_scene(self, value):
         self._risk_biz_scene = value
+    @property
+    def ship_assessment_result(self):
+        return self._ship_assessment_result
+
+    @ship_assessment_result.setter
+    def ship_assessment_result(self, value):
+        if isinstance(value, ShipAssessmentRes):
+            self._ship_assessment_result = value
+        else:
+            self._ship_assessment_result = ShipAssessmentRes.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -86,6 +98,11 @@ class AlipayCommerceRentRiskConsultModel(object):
                 params['risk_biz_scene'] = self.risk_biz_scene.to_alipay_dict()
             else:
                 params['risk_biz_scene'] = self.risk_biz_scene
+        if self.ship_assessment_result:
+            if hasattr(self.ship_assessment_result, 'to_alipay_dict'):
+                params['ship_assessment_result'] = self.ship_assessment_result.to_alipay_dict()
+            else:
+                params['ship_assessment_result'] = self.ship_assessment_result
         return params
 
     @staticmethod
@@ -103,6 +120,8 @@ class AlipayCommerceRentRiskConsultModel(object):
             o.out_biz_no = d['out_biz_no']
         if 'risk_biz_scene' in d:
             o.risk_biz_scene = d['risk_biz_scene']
+        if 'ship_assessment_result' in d:
+            o.ship_assessment_result = d['ship_assessment_result']
         return o
 
 

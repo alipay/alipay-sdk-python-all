@@ -12,6 +12,7 @@ class AlipayPcreditHuabeiAffinitycardApplyResponse(AlipayResponse):
         self._available_amount = None
         self._repay_date = None
         self._total_amount = None
+        self._user_prod_account_no = None
 
     @property
     def available_amount(self):
@@ -34,6 +35,13 @@ class AlipayPcreditHuabeiAffinitycardApplyResponse(AlipayResponse):
     @total_amount.setter
     def total_amount(self, value):
         self._total_amount = value
+    @property
+    def user_prod_account_no(self):
+        return self._user_prod_account_no
+
+    @user_prod_account_no.setter
+    def user_prod_account_no(self, value):
+        self._user_prod_account_no = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayPcreditHuabeiAffinitycardApplyResponse, self).parse_response_content(response_content)
@@ -43,3 +51,5 @@ class AlipayPcreditHuabeiAffinitycardApplyResponse(AlipayResponse):
             self.repay_date = response['repay_date']
         if 'total_amount' in response:
             self.total_amount = response['total_amount']
+        if 'user_prod_account_no' in response:
+            self.user_prod_account_no = response['user_prod_account_no']

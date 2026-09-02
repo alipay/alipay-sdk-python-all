@@ -10,6 +10,7 @@ class IndustryInvoiceTradeInfo(object):
     def __init__(self):
         self._channel_type = None
         self._trade_no = None
+        self._trade_product = None
 
     @property
     def channel_type(self):
@@ -25,6 +26,13 @@ class IndustryInvoiceTradeInfo(object):
     @trade_no.setter
     def trade_no(self, value):
         self._trade_no = value
+    @property
+    def trade_product(self):
+        return self._trade_product
+
+    @trade_product.setter
+    def trade_product(self, value):
+        self._trade_product = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class IndustryInvoiceTradeInfo(object):
                 params['trade_no'] = self.trade_no.to_alipay_dict()
             else:
                 params['trade_no'] = self.trade_no
+        if self.trade_product:
+            if hasattr(self.trade_product, 'to_alipay_dict'):
+                params['trade_product'] = self.trade_product.to_alipay_dict()
+            else:
+                params['trade_product'] = self.trade_product
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class IndustryInvoiceTradeInfo(object):
             o.channel_type = d['channel_type']
         if 'trade_no' in d:
             o.trade_no = d['trade_no']
+        if 'trade_product' in d:
+            o.trade_product = d['trade_product']
         return o
 
 

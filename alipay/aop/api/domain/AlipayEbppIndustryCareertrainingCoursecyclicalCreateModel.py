@@ -12,6 +12,7 @@ class AlipayEbppIndustryCareertrainingCoursecyclicalCreateModel(object):
         self._end_date = None
         self._schedule_description = None
         self._shop_id = None
+        self._shop_ids = None
         self._start_date = None
 
     @property
@@ -43,6 +44,16 @@ class AlipayEbppIndustryCareertrainingCoursecyclicalCreateModel(object):
     def shop_id(self, value):
         self._shop_id = value
     @property
+    def shop_ids(self):
+        return self._shop_ids
+
+    @shop_ids.setter
+    def shop_ids(self, value):
+        if isinstance(value, list):
+            self._shop_ids = list()
+            for i in value:
+                self._shop_ids.append(i)
+    @property
     def start_date(self):
         return self._start_date
 
@@ -73,6 +84,16 @@ class AlipayEbppIndustryCareertrainingCoursecyclicalCreateModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_ids:
+            if isinstance(self.shop_ids, list):
+                for i in range(0, len(self.shop_ids)):
+                    element = self.shop_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.shop_ids[i] = element.to_alipay_dict()
+            if hasattr(self.shop_ids, 'to_alipay_dict'):
+                params['shop_ids'] = self.shop_ids.to_alipay_dict()
+            else:
+                params['shop_ids'] = self.shop_ids
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
@@ -93,6 +114,8 @@ class AlipayEbppIndustryCareertrainingCoursecyclicalCreateModel(object):
             o.schedule_description = d['schedule_description']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_ids' in d:
+            o.shop_ids = d['shop_ids']
         if 'start_date' in d:
             o.start_date = d['start_date']
         return o

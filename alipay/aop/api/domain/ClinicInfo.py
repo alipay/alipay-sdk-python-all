@@ -8,19 +8,37 @@ from alipay.aop.api.constant.ParamConstants import *
 class ClinicInfo(object):
 
     def __init__(self):
+        self._appointment_end_time = None
+        self._appointment_start_time = None
         self._appointment_time = None
         self._city_code = None
         self._city_name = None
         self._clinic_category = None
+        self._current_city = None
         self._department = None
         self._district_code = None
         self._district_name = None
+        self._expert = None
         self._hospital_address = None
         self._hospital_name = None
         self._medical_record_url_list = None
         self._province_code = None
         self._province_name = None
 
+    @property
+    def appointment_end_time(self):
+        return self._appointment_end_time
+
+    @appointment_end_time.setter
+    def appointment_end_time(self, value):
+        self._appointment_end_time = value
+    @property
+    def appointment_start_time(self):
+        return self._appointment_start_time
+
+    @appointment_start_time.setter
+    def appointment_start_time(self, value):
+        self._appointment_start_time = value
     @property
     def appointment_time(self):
         return self._appointment_time
@@ -50,6 +68,13 @@ class ClinicInfo(object):
     def clinic_category(self, value):
         self._clinic_category = value
     @property
+    def current_city(self):
+        return self._current_city
+
+    @current_city.setter
+    def current_city(self, value):
+        self._current_city = value
+    @property
     def department(self):
         return self._department
 
@@ -70,6 +95,13 @@ class ClinicInfo(object):
     @district_name.setter
     def district_name(self, value):
         self._district_name = value
+    @property
+    def expert(self):
+        return self._expert
+
+    @expert.setter
+    def expert(self, value):
+        self._expert = value
     @property
     def hospital_address(self):
         return self._hospital_address
@@ -112,6 +144,16 @@ class ClinicInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.appointment_end_time:
+            if hasattr(self.appointment_end_time, 'to_alipay_dict'):
+                params['appointment_end_time'] = self.appointment_end_time.to_alipay_dict()
+            else:
+                params['appointment_end_time'] = self.appointment_end_time
+        if self.appointment_start_time:
+            if hasattr(self.appointment_start_time, 'to_alipay_dict'):
+                params['appointment_start_time'] = self.appointment_start_time.to_alipay_dict()
+            else:
+                params['appointment_start_time'] = self.appointment_start_time
         if self.appointment_time:
             if hasattr(self.appointment_time, 'to_alipay_dict'):
                 params['appointment_time'] = self.appointment_time.to_alipay_dict()
@@ -132,6 +174,11 @@ class ClinicInfo(object):
                 params['clinic_category'] = self.clinic_category.to_alipay_dict()
             else:
                 params['clinic_category'] = self.clinic_category
+        if self.current_city:
+            if hasattr(self.current_city, 'to_alipay_dict'):
+                params['current_city'] = self.current_city.to_alipay_dict()
+            else:
+                params['current_city'] = self.current_city
         if self.department:
             if hasattr(self.department, 'to_alipay_dict'):
                 params['department'] = self.department.to_alipay_dict()
@@ -147,6 +194,11 @@ class ClinicInfo(object):
                 params['district_name'] = self.district_name.to_alipay_dict()
             else:
                 params['district_name'] = self.district_name
+        if self.expert:
+            if hasattr(self.expert, 'to_alipay_dict'):
+                params['expert'] = self.expert.to_alipay_dict()
+            else:
+                params['expert'] = self.expert
         if self.hospital_address:
             if hasattr(self.hospital_address, 'to_alipay_dict'):
                 params['hospital_address'] = self.hospital_address.to_alipay_dict()
@@ -184,6 +236,10 @@ class ClinicInfo(object):
         if not d:
             return None
         o = ClinicInfo()
+        if 'appointment_end_time' in d:
+            o.appointment_end_time = d['appointment_end_time']
+        if 'appointment_start_time' in d:
+            o.appointment_start_time = d['appointment_start_time']
         if 'appointment_time' in d:
             o.appointment_time = d['appointment_time']
         if 'city_code' in d:
@@ -192,12 +248,16 @@ class ClinicInfo(object):
             o.city_name = d['city_name']
         if 'clinic_category' in d:
             o.clinic_category = d['clinic_category']
+        if 'current_city' in d:
+            o.current_city = d['current_city']
         if 'department' in d:
             o.department = d['department']
         if 'district_code' in d:
             o.district_code = d['district_code']
         if 'district_name' in d:
             o.district_name = d['district_name']
+        if 'expert' in d:
+            o.expert = d['expert']
         if 'hospital_address' in d:
             o.hospital_address = d['hospital_address']
         if 'hospital_name' in d:

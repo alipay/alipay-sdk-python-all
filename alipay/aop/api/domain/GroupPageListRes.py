@@ -14,6 +14,7 @@ class GroupPageListRes(object):
         self._boost_id = None
         self._boost_start_date = None
         self._charge_type = None
+        self._delivery_mode = None
         self._gmt_modified = None
         self._group_budget = None
         self._group_charge = None
@@ -73,6 +74,13 @@ class GroupPageListRes(object):
     @charge_type.setter
     def charge_type(self, value):
         self._charge_type = value
+    @property
+    def delivery_mode(self):
+        return self._delivery_mode
+
+    @delivery_mode.setter
+    def delivery_mode(self, value):
+        self._delivery_mode = value
     @property
     def gmt_modified(self):
         return self._gmt_modified
@@ -219,6 +227,11 @@ class GroupPageListRes(object):
                 params['charge_type'] = self.charge_type.to_alipay_dict()
             else:
                 params['charge_type'] = self.charge_type
+        if self.delivery_mode:
+            if hasattr(self.delivery_mode, 'to_alipay_dict'):
+                params['delivery_mode'] = self.delivery_mode.to_alipay_dict()
+            else:
+                params['delivery_mode'] = self.delivery_mode
         if self.gmt_modified:
             if hasattr(self.gmt_modified, 'to_alipay_dict'):
                 params['gmt_modified'] = self.gmt_modified.to_alipay_dict()
@@ -318,6 +331,8 @@ class GroupPageListRes(object):
             o.boost_start_date = d['boost_start_date']
         if 'charge_type' in d:
             o.charge_type = d['charge_type']
+        if 'delivery_mode' in d:
+            o.delivery_mode = d['delivery_mode']
         if 'gmt_modified' in d:
             o.gmt_modified = d['gmt_modified']
         if 'group_budget' in d:

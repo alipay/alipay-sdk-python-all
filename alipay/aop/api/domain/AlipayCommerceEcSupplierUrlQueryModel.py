@@ -12,7 +12,9 @@ class AlipayCommerceEcSupplierUrlQueryModel(object):
         self._enterprise_id = None
         self._expense_rule_id = None
         self._need_sign_url = None
+        self._order_id = None
         self._service_id = None
+        self._url_type = None
 
     @property
     def employee_id(self):
@@ -43,12 +45,26 @@ class AlipayCommerceEcSupplierUrlQueryModel(object):
     def need_sign_url(self, value):
         self._need_sign_url = value
     @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
     def service_id(self):
         return self._service_id
 
     @service_id.setter
     def service_id(self, value):
         self._service_id = value
+    @property
+    def url_type(self):
+        return self._url_type
+
+    @url_type.setter
+    def url_type(self, value):
+        self._url_type = value
 
 
     def to_alipay_dict(self):
@@ -73,11 +89,21 @@ class AlipayCommerceEcSupplierUrlQueryModel(object):
                 params['need_sign_url'] = self.need_sign_url.to_alipay_dict()
             else:
                 params['need_sign_url'] = self.need_sign_url
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
         if self.service_id:
             if hasattr(self.service_id, 'to_alipay_dict'):
                 params['service_id'] = self.service_id.to_alipay_dict()
             else:
                 params['service_id'] = self.service_id
+        if self.url_type:
+            if hasattr(self.url_type, 'to_alipay_dict'):
+                params['url_type'] = self.url_type.to_alipay_dict()
+            else:
+                params['url_type'] = self.url_type
         return params
 
     @staticmethod
@@ -93,8 +119,12 @@ class AlipayCommerceEcSupplierUrlQueryModel(object):
             o.expense_rule_id = d['expense_rule_id']
         if 'need_sign_url' in d:
             o.need_sign_url = d['need_sign_url']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
         if 'service_id' in d:
             o.service_id = d['service_id']
+        if 'url_type' in d:
+            o.url_type = d['url_type']
         return o
 
 

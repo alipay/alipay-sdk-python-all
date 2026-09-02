@@ -16,6 +16,7 @@ class AplusOrderDetailList(object):
         self._item_id = None
         self._item_title = None
         self._merchant_discount = None
+        self._merchant_no_fund_amount = None
         self._merchant_real_receipt_amount = None
         self._order_id = None
         self._order_status = None
@@ -85,6 +86,13 @@ class AplusOrderDetailList(object):
     @merchant_discount.setter
     def merchant_discount(self, value):
         self._merchant_discount = value
+    @property
+    def merchant_no_fund_amount(self):
+        return self._merchant_no_fund_amount
+
+    @merchant_no_fund_amount.setter
+    def merchant_no_fund_amount(self, value):
+        self._merchant_no_fund_amount = value
     @property
     def merchant_real_receipt_amount(self):
         return self._merchant_real_receipt_amount
@@ -213,6 +221,11 @@ class AplusOrderDetailList(object):
                 params['merchant_discount'] = self.merchant_discount.to_alipay_dict()
             else:
                 params['merchant_discount'] = self.merchant_discount
+        if self.merchant_no_fund_amount:
+            if hasattr(self.merchant_no_fund_amount, 'to_alipay_dict'):
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount.to_alipay_dict()
+            else:
+                params['merchant_no_fund_amount'] = self.merchant_no_fund_amount
         if self.merchant_real_receipt_amount:
             if hasattr(self.merchant_real_receipt_amount, 'to_alipay_dict'):
                 params['merchant_real_receipt_amount'] = self.merchant_real_receipt_amount.to_alipay_dict()
@@ -296,6 +309,8 @@ class AplusOrderDetailList(object):
             o.item_title = d['item_title']
         if 'merchant_discount' in d:
             o.merchant_discount = d['merchant_discount']
+        if 'merchant_no_fund_amount' in d:
+            o.merchant_no_fund_amount = d['merchant_no_fund_amount']
         if 'merchant_real_receipt_amount' in d:
             o.merchant_real_receipt_amount = d['merchant_real_receipt_amount']
         if 'order_id' in d:

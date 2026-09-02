@@ -34,6 +34,7 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
         self._group_name = None
         self._include_customized_crowd_list = None
         self._interest_list = None
+        self._join_window_code = None
         self._lbs_list = None
         self._new_target_roi = None
         self._one_boost_status = None
@@ -241,6 +242,13 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             self._interest_list = list()
             for i in value:
                 self._interest_list.append(i)
+    @property
+    def join_window_code(self):
+        return self._join_window_code
+
+    @join_window_code.setter
+    def join_window_code(self, value):
+        self._join_window_code = value
     @property
     def lbs_list(self):
         return self._lbs_list
@@ -524,6 +532,11 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
                 params['interest_list'] = self.interest_list.to_alipay_dict()
             else:
                 params['interest_list'] = self.interest_list
+        if self.join_window_code:
+            if hasattr(self.join_window_code, 'to_alipay_dict'):
+                params['join_window_code'] = self.join_window_code.to_alipay_dict()
+            else:
+                params['join_window_code'] = self.join_window_code
         if self.lbs_list:
             if isinstance(self.lbs_list, list):
                 for i in range(0, len(self.lbs_list)):
@@ -674,6 +687,8 @@ class AlipayDataDataserviceAdcampaignGroupCreateormodifyModel(object):
             o.include_customized_crowd_list = d['include_customized_crowd_list']
         if 'interest_list' in d:
             o.interest_list = d['interest_list']
+        if 'join_window_code' in d:
+            o.join_window_code = d['join_window_code']
         if 'lbs_list' in d:
             o.lbs_list = d['lbs_list']
         if 'new_target_roi' in d:

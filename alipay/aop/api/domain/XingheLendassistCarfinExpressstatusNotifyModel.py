@@ -11,12 +11,14 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
 
     def __init__(self):
         self._alert_reason = None
+        self._cancel_reason = None
         self._courier_info = None
         self._estimated_delivery_date = None
         self._express_no = None
         self._file_list = None
         self._notify_type = None
         self._out_express_no = None
+        self._overdue_auto_pickup = None
         self._status = None
 
     @property
@@ -26,6 +28,13 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
     @alert_reason.setter
     def alert_reason(self, value):
         self._alert_reason = value
+    @property
+    def cancel_reason(self):
+        return self._cancel_reason
+
+    @cancel_reason.setter
+    def cancel_reason(self, value):
+        self._cancel_reason = value
     @property
     def courier_info(self):
         return self._courier_info
@@ -78,6 +87,13 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
     def out_express_no(self, value):
         self._out_express_no = value
     @property
+    def overdue_auto_pickup(self):
+        return self._overdue_auto_pickup
+
+    @overdue_auto_pickup.setter
+    def overdue_auto_pickup(self, value):
+        self._overdue_auto_pickup = value
+    @property
     def status(self):
         return self._status
 
@@ -93,6 +109,11 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
                 params['alert_reason'] = self.alert_reason.to_alipay_dict()
             else:
                 params['alert_reason'] = self.alert_reason
+        if self.cancel_reason:
+            if hasattr(self.cancel_reason, 'to_alipay_dict'):
+                params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
+            else:
+                params['cancel_reason'] = self.cancel_reason
         if self.courier_info:
             if hasattr(self.courier_info, 'to_alipay_dict'):
                 params['courier_info'] = self.courier_info.to_alipay_dict()
@@ -128,6 +149,11 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
                 params['out_express_no'] = self.out_express_no.to_alipay_dict()
             else:
                 params['out_express_no'] = self.out_express_no
+        if self.overdue_auto_pickup:
+            if hasattr(self.overdue_auto_pickup, 'to_alipay_dict'):
+                params['overdue_auto_pickup'] = self.overdue_auto_pickup.to_alipay_dict()
+            else:
+                params['overdue_auto_pickup'] = self.overdue_auto_pickup
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -142,6 +168,8 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
         o = XingheLendassistCarfinExpressstatusNotifyModel()
         if 'alert_reason' in d:
             o.alert_reason = d['alert_reason']
+        if 'cancel_reason' in d:
+            o.cancel_reason = d['cancel_reason']
         if 'courier_info' in d:
             o.courier_info = d['courier_info']
         if 'estimated_delivery_date' in d:
@@ -154,6 +182,8 @@ class XingheLendassistCarfinExpressstatusNotifyModel(object):
             o.notify_type = d['notify_type']
         if 'out_express_no' in d:
             o.out_express_no = d['out_express_no']
+        if 'overdue_auto_pickup' in d:
+            o.overdue_auto_pickup = d['overdue_auto_pickup']
         if 'status' in d:
             o.status = d['status']
         return o
