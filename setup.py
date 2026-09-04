@@ -44,7 +44,7 @@ try:
 finally:
     desc_file.close()
 
-requires = ["pycryptodome","rsa"]
+requires = ["pycryptodomex","rsa"]
 
 setup(
     name=NAME,
