@@ -23,7 +23,7 @@ class AlipayClientConfig(object):
         # 蚂蚁金服开放平台网关地址
         self._server_url = "https://openapi.alipay.com/gateway.do"
         if sandbox_debug:
-            self._server_url = "https://openapi.alipaydev.com/gateway.do"
+            self._server_url = "https://openapi-sandbox.dl.alipaydev.com/gateway.do"
         # 请求字符集，默认utf-8
         self._charset = 'utf-8'
         # 请求响应报文格式
