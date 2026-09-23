@@ -12,8 +12,10 @@ class AlipayTradeSubscriptionModifyModel(object):
         self._cancel_at_period_end = None
         self._description = None
         self._extend_params = None
+        self._grace_period_days = None
         self._items = None
         self._modify_type = None
+        self._next_billing_amount = None
         self._pay_amount = None
         self._preserve_billing_cycle = None
         self._refund_amount = None
@@ -42,6 +44,13 @@ class AlipayTradeSubscriptionModifyModel(object):
     def extend_params(self, value):
         self._extend_params = value
     @property
+    def grace_period_days(self):
+        return self._grace_period_days
+
+    @grace_period_days.setter
+    def grace_period_days(self, value):
+        self._grace_period_days = value
+    @property
     def items(self):
         return self._items
 
@@ -61,6 +70,13 @@ class AlipayTradeSubscriptionModifyModel(object):
     @modify_type.setter
     def modify_type(self, value):
         self._modify_type = value
+    @property
+    def next_billing_amount(self):
+        return self._next_billing_amount
+
+    @next_billing_amount.setter
+    def next_billing_amount(self, value):
+        self._next_billing_amount = value
     @property
     def pay_amount(self):
         return self._pay_amount
@@ -115,6 +131,11 @@ class AlipayTradeSubscriptionModifyModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.grace_period_days:
+            if hasattr(self.grace_period_days, 'to_alipay_dict'):
+                params['grace_period_days'] = self.grace_period_days.to_alipay_dict()
+            else:
+                params['grace_period_days'] = self.grace_period_days
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -130,6 +151,11 @@ class AlipayTradeSubscriptionModifyModel(object):
                 params['modify_type'] = self.modify_type.to_alipay_dict()
             else:
                 params['modify_type'] = self.modify_type
+        if self.next_billing_amount:
+            if hasattr(self.next_billing_amount, 'to_alipay_dict'):
+                params['next_billing_amount'] = self.next_billing_amount.to_alipay_dict()
+            else:
+                params['next_billing_amount'] = self.next_billing_amount
         if self.pay_amount:
             if hasattr(self.pay_amount, 'to_alipay_dict'):
                 params['pay_amount'] = self.pay_amount.to_alipay_dict()
@@ -168,10 +194,14 @@ class AlipayTradeSubscriptionModifyModel(object):
             o.description = d['description']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'grace_period_days' in d:
+            o.grace_period_days = d['grace_period_days']
         if 'items' in d:
             o.items = d['items']
         if 'modify_type' in d:
             o.modify_type = d['modify_type']
+        if 'next_billing_amount' in d:
+            o.next_billing_amount = d['next_billing_amount']
         if 'pay_amount' in d:
             o.pay_amount = d['pay_amount']
         if 'preserve_billing_cycle' in d:

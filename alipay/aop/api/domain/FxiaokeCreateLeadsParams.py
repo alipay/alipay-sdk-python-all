@@ -10,6 +10,7 @@ class FxiaokeCreateLeadsParams(object):
 
     def __init__(self):
         self._actual_lead_party = None
+        self._ai_products = None
         self._ali_cloud_bpid_list = None
         self._alicloud_settlement_mode = None
         self._bid_type = None
@@ -77,6 +78,16 @@ class FxiaokeCreateLeadsParams(object):
     @actual_lead_party.setter
     def actual_lead_party(self, value):
         self._actual_lead_party = value
+    @property
+    def ai_products(self):
+        return self._ai_products
+
+    @ai_products.setter
+    def ai_products(self, value):
+        if isinstance(value, list):
+            self._ai_products = list()
+            for i in value:
+                self._ai_products.append(i)
     @property
     def ali_cloud_bpid_list(self):
         return self._ali_cloud_bpid_list
@@ -511,6 +522,16 @@ class FxiaokeCreateLeadsParams(object):
                 params['actual_lead_party'] = self.actual_lead_party.to_alipay_dict()
             else:
                 params['actual_lead_party'] = self.actual_lead_party
+        if self.ai_products:
+            if isinstance(self.ai_products, list):
+                for i in range(0, len(self.ai_products)):
+                    element = self.ai_products[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ai_products[i] = element.to_alipay_dict()
+            if hasattr(self.ai_products, 'to_alipay_dict'):
+                params['ai_products'] = self.ai_products.to_alipay_dict()
+            else:
+                params['ai_products'] = self.ai_products
         if self.ali_cloud_bpid_list:
             if hasattr(self.ali_cloud_bpid_list, 'to_alipay_dict'):
                 params['ali_cloud_bpid_list'] = self.ali_cloud_bpid_list.to_alipay_dict()
@@ -830,6 +851,8 @@ class FxiaokeCreateLeadsParams(object):
         o = FxiaokeCreateLeadsParams()
         if 'actual_lead_party' in d:
             o.actual_lead_party = d['actual_lead_party']
+        if 'ai_products' in d:
+            o.ai_products = d['ai_products']
         if 'ali_cloud_bpid_list' in d:
             o.ali_cloud_bpid_list = d['ali_cloud_bpid_list']
         if 'alicloud_settlement_mode' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.WaybillItemVO import WaybillItemVO
+from alipay.aop.api.domain.ShipmentVO import ShipmentVO
 
 
 class AlipayCommerceMedicalOrderWaybillSyncModel(object):
@@ -12,6 +13,7 @@ class AlipayCommerceMedicalOrderWaybillSyncModel(object):
         self._carrier_order_no = None
         self._items = None
         self._order_no = None
+        self._shipment_list = None
 
     @property
     def carrier_order_no(self):
@@ -40,6 +42,19 @@ class AlipayCommerceMedicalOrderWaybillSyncModel(object):
     @order_no.setter
     def order_no(self, value):
         self._order_no = value
+    @property
+    def shipment_list(self):
+        return self._shipment_list
+
+    @shipment_list.setter
+    def shipment_list(self, value):
+        if isinstance(value, list):
+            self._shipment_list = list()
+            for i in value:
+                if isinstance(i, ShipmentVO):
+                    self._shipment_list.append(i)
+                else:
+                    self._shipment_list.append(ShipmentVO.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -64,6 +79,16 @@ class AlipayCommerceMedicalOrderWaybillSyncModel(object):
                 params['order_no'] = self.order_no.to_alipay_dict()
             else:
                 params['order_no'] = self.order_no
+        if self.shipment_list:
+            if isinstance(self.shipment_list, list):
+                for i in range(0, len(self.shipment_list)):
+                    element = self.shipment_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.shipment_list[i] = element.to_alipay_dict()
+            if hasattr(self.shipment_list, 'to_alipay_dict'):
+                params['shipment_list'] = self.shipment_list.to_alipay_dict()
+            else:
+                params['shipment_list'] = self.shipment_list
         return params
 
     @staticmethod
@@ -77,6 +102,8 @@ class AlipayCommerceMedicalOrderWaybillSyncModel(object):
             o.items = d['items']
         if 'order_no' in d:
             o.order_no = d['order_no']
+        if 'shipment_list' in d:
+            o.shipment_list = d['shipment_list']
         return o
 
 

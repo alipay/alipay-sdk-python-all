@@ -13,6 +13,7 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
         self._delete_calendar_price = None
         self._district_code_list = None
         self._province_code_list = None
+        self._room_id_list = None
         self._shop_id_list = None
 
     @property
@@ -59,6 +60,16 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
             self._province_code_list = list()
             for i in value:
                 self._province_code_list.append(i)
+    @property
+    def room_id_list(self):
+        return self._room_id_list
+
+    @room_id_list.setter
+    def room_id_list(self, value):
+        if isinstance(value, list):
+            self._room_id_list = list()
+            for i in value:
+                self._room_id_list.append(i)
     @property
     def shop_id_list(self):
         return self._shop_id_list
@@ -113,6 +124,16 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
                 params['province_code_list'] = self.province_code_list.to_alipay_dict()
             else:
                 params['province_code_list'] = self.province_code_list
+        if self.room_id_list:
+            if isinstance(self.room_id_list, list):
+                for i in range(0, len(self.room_id_list)):
+                    element = self.room_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.room_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.room_id_list, 'to_alipay_dict'):
+                params['room_id_list'] = self.room_id_list.to_alipay_dict()
+            else:
+                params['room_id_list'] = self.room_id_list
         if self.shop_id_list:
             if isinstance(self.shop_id_list, list):
                 for i in range(0, len(self.shop_id_list)):
@@ -140,6 +161,8 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
             o.district_code_list = d['district_code_list']
         if 'province_code_list' in d:
             o.province_code_list = d['province_code_list']
+        if 'room_id_list' in d:
+            o.room_id_list = d['room_id_list']
         if 'shop_id_list' in d:
             o.shop_id_list = d['shop_id_list']
         return o

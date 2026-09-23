@@ -11,6 +11,8 @@ class AlipayCommerceMedicalAfusigninQueryResponse(AlipayResponse):
         super(AlipayCommerceMedicalAfusigninQueryResponse, self).__init__()
         self._agent_avatar = None
         self._doctor_id = None
+        self._open_agent_flag = None
+        self._source_type = None
         self._status = None
         self._url = None
 
@@ -28,6 +30,20 @@ class AlipayCommerceMedicalAfusigninQueryResponse(AlipayResponse):
     @doctor_id.setter
     def doctor_id(self, value):
         self._doctor_id = value
+    @property
+    def open_agent_flag(self):
+        return self._open_agent_flag
+
+    @open_agent_flag.setter
+    def open_agent_flag(self, value):
+        self._open_agent_flag = value
+    @property
+    def source_type(self):
+        return self._source_type
+
+    @source_type.setter
+    def source_type(self, value):
+        self._source_type = value
     @property
     def status(self):
         return self._status
@@ -49,6 +65,10 @@ class AlipayCommerceMedicalAfusigninQueryResponse(AlipayResponse):
             self.agent_avatar = response['agent_avatar']
         if 'doctor_id' in response:
             self.doctor_id = response['doctor_id']
+        if 'open_agent_flag' in response:
+            self.open_agent_flag = response['open_agent_flag']
+        if 'source_type' in response:
+            self.source_type = response['source_type']
         if 'status' in response:
             self.status = response['status']
         if 'url' in response:

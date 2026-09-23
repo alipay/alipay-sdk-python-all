@@ -14,6 +14,10 @@ class LeadsImportItem(object):
         self._driver_name = None
         self._driver_plate = None
         self._driver_tax_no = None
+        self._fleet_captain_company = None
+        self._fleet_captain_id_card = None
+        self._fleet_captain_name = None
+        self._fleet_captain_plate = None
         self._phone_one = None
         self._phone_three = None
         self._phone_two = None
@@ -62,6 +66,34 @@ class LeadsImportItem(object):
     @driver_tax_no.setter
     def driver_tax_no(self, value):
         self._driver_tax_no = value
+    @property
+    def fleet_captain_company(self):
+        return self._fleet_captain_company
+
+    @fleet_captain_company.setter
+    def fleet_captain_company(self, value):
+        self._fleet_captain_company = value
+    @property
+    def fleet_captain_id_card(self):
+        return self._fleet_captain_id_card
+
+    @fleet_captain_id_card.setter
+    def fleet_captain_id_card(self, value):
+        self._fleet_captain_id_card = value
+    @property
+    def fleet_captain_name(self):
+        return self._fleet_captain_name
+
+    @fleet_captain_name.setter
+    def fleet_captain_name(self, value):
+        self._fleet_captain_name = value
+    @property
+    def fleet_captain_plate(self):
+        return self._fleet_captain_plate
+
+    @fleet_captain_plate.setter
+    def fleet_captain_plate(self, value):
+        self._fleet_captain_plate = value
     @property
     def phone_one(self):
         return self._phone_one
@@ -131,6 +163,26 @@ class LeadsImportItem(object):
                 params['driver_tax_no'] = self.driver_tax_no.to_alipay_dict()
             else:
                 params['driver_tax_no'] = self.driver_tax_no
+        if self.fleet_captain_company:
+            if hasattr(self.fleet_captain_company, 'to_alipay_dict'):
+                params['fleet_captain_company'] = self.fleet_captain_company.to_alipay_dict()
+            else:
+                params['fleet_captain_company'] = self.fleet_captain_company
+        if self.fleet_captain_id_card:
+            if hasattr(self.fleet_captain_id_card, 'to_alipay_dict'):
+                params['fleet_captain_id_card'] = self.fleet_captain_id_card.to_alipay_dict()
+            else:
+                params['fleet_captain_id_card'] = self.fleet_captain_id_card
+        if self.fleet_captain_name:
+            if hasattr(self.fleet_captain_name, 'to_alipay_dict'):
+                params['fleet_captain_name'] = self.fleet_captain_name.to_alipay_dict()
+            else:
+                params['fleet_captain_name'] = self.fleet_captain_name
+        if self.fleet_captain_plate:
+            if hasattr(self.fleet_captain_plate, 'to_alipay_dict'):
+                params['fleet_captain_plate'] = self.fleet_captain_plate.to_alipay_dict()
+            else:
+                params['fleet_captain_plate'] = self.fleet_captain_plate
         if self.phone_one:
             if hasattr(self.phone_one, 'to_alipay_dict'):
                 params['phone_one'] = self.phone_one.to_alipay_dict()
@@ -175,6 +227,14 @@ class LeadsImportItem(object):
             o.driver_plate = d['driver_plate']
         if 'driver_tax_no' in d:
             o.driver_tax_no = d['driver_tax_no']
+        if 'fleet_captain_company' in d:
+            o.fleet_captain_company = d['fleet_captain_company']
+        if 'fleet_captain_id_card' in d:
+            o.fleet_captain_id_card = d['fleet_captain_id_card']
+        if 'fleet_captain_name' in d:
+            o.fleet_captain_name = d['fleet_captain_name']
+        if 'fleet_captain_plate' in d:
+            o.fleet_captain_plate = d['fleet_captain_plate']
         if 'phone_one' in d:
             o.phone_one = d['phone_one']
         if 'phone_three' in d:

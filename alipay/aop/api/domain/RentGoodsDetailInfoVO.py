@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class RentGoodsDetailInfoVO(object):
 
     def __init__(self):
+        self._daily_rent_cap_price = None
         self._image_material_id = None
         self._item_brand = None
         self._item_category = None
@@ -17,12 +18,20 @@ class RentGoodsDetailInfoVO(object):
         self._item_fineness_grade = None
         self._item_name = None
         self._item_value = None
+        self._original_rent_price = None
         self._out_item_id = None
         self._out_sku_id = None
         self._rent_model = None
         self._sale_price = None
         self._supervised = None
 
+    @property
+    def daily_rent_cap_price(self):
+        return self._daily_rent_cap_price
+
+    @daily_rent_cap_price.setter
+    def daily_rent_cap_price(self, value):
+        self._daily_rent_cap_price = value
     @property
     def image_material_id(self):
         return self._image_material_id
@@ -87,6 +96,13 @@ class RentGoodsDetailInfoVO(object):
     def item_value(self, value):
         self._item_value = value
     @property
+    def original_rent_price(self):
+        return self._original_rent_price
+
+    @original_rent_price.setter
+    def original_rent_price(self, value):
+        self._original_rent_price = value
+    @property
     def out_item_id(self):
         return self._out_item_id
 
@@ -125,6 +141,11 @@ class RentGoodsDetailInfoVO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.daily_rent_cap_price:
+            if hasattr(self.daily_rent_cap_price, 'to_alipay_dict'):
+                params['daily_rent_cap_price'] = self.daily_rent_cap_price.to_alipay_dict()
+            else:
+                params['daily_rent_cap_price'] = self.daily_rent_cap_price
         if self.image_material_id:
             if hasattr(self.image_material_id, 'to_alipay_dict'):
                 params['image_material_id'] = self.image_material_id.to_alipay_dict()
@@ -170,6 +191,11 @@ class RentGoodsDetailInfoVO(object):
                 params['item_value'] = self.item_value.to_alipay_dict()
             else:
                 params['item_value'] = self.item_value
+        if self.original_rent_price:
+            if hasattr(self.original_rent_price, 'to_alipay_dict'):
+                params['original_rent_price'] = self.original_rent_price.to_alipay_dict()
+            else:
+                params['original_rent_price'] = self.original_rent_price
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -202,6 +228,8 @@ class RentGoodsDetailInfoVO(object):
         if not d:
             return None
         o = RentGoodsDetailInfoVO()
+        if 'daily_rent_cap_price' in d:
+            o.daily_rent_cap_price = d['daily_rent_cap_price']
         if 'image_material_id' in d:
             o.image_material_id = d['image_material_id']
         if 'item_brand' in d:
@@ -220,6 +248,8 @@ class RentGoodsDetailInfoVO(object):
             o.item_name = d['item_name']
         if 'item_value' in d:
             o.item_value = d['item_value']
+        if 'original_rent_price' in d:
+            o.original_rent_price = d['original_rent_price']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:

@@ -10,6 +10,7 @@ class RentOrderExtendInfoVO(object):
 
     def __init__(self):
         self._ec_sign_user_authorized = None
+        self._extra_biz_info = None
         self._merchant_upload_contracts = None
         self._promised_send_time = None
         self._recycle_order_id = None
@@ -24,6 +25,13 @@ class RentOrderExtendInfoVO(object):
     @ec_sign_user_authorized.setter
     def ec_sign_user_authorized(self, value):
         self._ec_sign_user_authorized = value
+    @property
+    def extra_biz_info(self):
+        return self._extra_biz_info
+
+    @extra_biz_info.setter
+    def extra_biz_info(self, value):
+        self._extra_biz_info = value
     @property
     def merchant_upload_contracts(self):
         return self._merchant_upload_contracts
@@ -81,6 +89,11 @@ class RentOrderExtendInfoVO(object):
                 params['ec_sign_user_authorized'] = self.ec_sign_user_authorized.to_alipay_dict()
             else:
                 params['ec_sign_user_authorized'] = self.ec_sign_user_authorized
+        if self.extra_biz_info:
+            if hasattr(self.extra_biz_info, 'to_alipay_dict'):
+                params['extra_biz_info'] = self.extra_biz_info.to_alipay_dict()
+            else:
+                params['extra_biz_info'] = self.extra_biz_info
         if self.merchant_upload_contracts:
             if isinstance(self.merchant_upload_contracts, list):
                 for i in range(0, len(self.merchant_upload_contracts)):
@@ -125,6 +138,8 @@ class RentOrderExtendInfoVO(object):
         o = RentOrderExtendInfoVO()
         if 'ec_sign_user_authorized' in d:
             o.ec_sign_user_authorized = d['ec_sign_user_authorized']
+        if 'extra_biz_info' in d:
+            o.extra_biz_info = d['extra_biz_info']
         if 'merchant_upload_contracts' in d:
             o.merchant_upload_contracts = d['merchant_upload_contracts']
         if 'promised_send_time' in d:

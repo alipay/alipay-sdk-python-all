@@ -11,6 +11,7 @@ class ServicePackageItem(object):
         self._rights_id = None
         self._rights_name = None
         self._rights_type = None
+        self._service_item_id = None
         self._spec_quantity = None
         self._spec_quantity_left = None
         self._spec_type = None
@@ -36,6 +37,13 @@ class ServicePackageItem(object):
     @rights_type.setter
     def rights_type(self, value):
         self._rights_type = value
+    @property
+    def service_item_id(self):
+        return self._service_item_id
+
+    @service_item_id.setter
+    def service_item_id(self, value):
+        self._service_item_id = value
     @property
     def spec_quantity(self):
         return self._spec_quantity
@@ -76,6 +84,11 @@ class ServicePackageItem(object):
                 params['rights_type'] = self.rights_type.to_alipay_dict()
             else:
                 params['rights_type'] = self.rights_type
+        if self.service_item_id:
+            if hasattr(self.service_item_id, 'to_alipay_dict'):
+                params['service_item_id'] = self.service_item_id.to_alipay_dict()
+            else:
+                params['service_item_id'] = self.service_item_id
         if self.spec_quantity:
             if hasattr(self.spec_quantity, 'to_alipay_dict'):
                 params['spec_quantity'] = self.spec_quantity.to_alipay_dict()
@@ -104,6 +117,8 @@ class ServicePackageItem(object):
             o.rights_name = d['rights_name']
         if 'rights_type' in d:
             o.rights_type = d['rights_type']
+        if 'service_item_id' in d:
+            o.service_item_id = d['service_item_id']
         if 'spec_quantity' in d:
             o.spec_quantity = d['spec_quantity']
         if 'spec_quantity_left' in d:

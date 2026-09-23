@@ -13,6 +13,7 @@ class AlipayTradeSubscriptionCreateModel(object):
         self._deduct_type = None
         self._effective_type = None
         self._extend_params = None
+        self._grace_period_days = None
         self._items = None
         self._metadata = None
         self._pay_amount = None
@@ -49,6 +50,13 @@ class AlipayTradeSubscriptionCreateModel(object):
     @extend_params.setter
     def extend_params(self, value):
         self._extend_params = value
+    @property
+    def grace_period_days(self):
+        return self._grace_period_days
+
+    @grace_period_days.setter
+    def grace_period_days(self, value):
+        self._grace_period_days = value
     @property
     def items(self):
         return self._items
@@ -128,6 +136,11 @@ class AlipayTradeSubscriptionCreateModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.grace_period_days:
+            if hasattr(self.grace_period_days, 'to_alipay_dict'):
+                params['grace_period_days'] = self.grace_period_days.to_alipay_dict()
+            else:
+                params['grace_period_days'] = self.grace_period_days
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -183,6 +196,8 @@ class AlipayTradeSubscriptionCreateModel(object):
             o.effective_type = d['effective_type']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'grace_period_days' in d:
+            o.grace_period_days = d['grace_period_days']
         if 'items' in d:
             o.items = d['items']
         if 'metadata' in d:

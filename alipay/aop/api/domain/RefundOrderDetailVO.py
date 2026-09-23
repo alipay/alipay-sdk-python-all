@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RefundItemVO import RefundItemVO
 from alipay.aop.api.domain.MedicareVO import MedicareVO
+from alipay.aop.api.domain.ReturnLogisticsVO import ReturnLogisticsVO
 
 
 class RefundOrderDetailVO(object):
@@ -23,6 +24,7 @@ class RefundOrderDetailVO(object):
         self._items = None
         self._medicare = None
         self._mi_amount = None
+        self._operate_type = None
         self._operator_role = None
         self._order_no = None
         self._packing_fee = None
@@ -35,6 +37,7 @@ class RefundOrderDetailVO(object):
         self._refund_type = None
         self._refuse_reason = None
         self._refuse_reason_code = None
+        self._return_logistics = None
         self._success_time = None
         self._time_markup_price = None
 
@@ -142,6 +145,13 @@ class RefundOrderDetailVO(object):
     def mi_amount(self, value):
         self._mi_amount = value
     @property
+    def operate_type(self):
+        return self._operate_type
+
+    @operate_type.setter
+    def operate_type(self, value):
+        self._operate_type = value
+    @property
     def operator_role(self):
         return self._operator_role
 
@@ -228,6 +238,16 @@ class RefundOrderDetailVO(object):
     @refuse_reason_code.setter
     def refuse_reason_code(self, value):
         self._refuse_reason_code = value
+    @property
+    def return_logistics(self):
+        return self._return_logistics
+
+    @return_logistics.setter
+    def return_logistics(self, value):
+        if isinstance(value, ReturnLogisticsVO):
+            self._return_logistics = value
+        else:
+            self._return_logistics = ReturnLogisticsVO.from_alipay_dict(value)
     @property
     def success_time(self):
         return self._success_time
@@ -321,6 +341,11 @@ class RefundOrderDetailVO(object):
                 params['mi_amount'] = self.mi_amount.to_alipay_dict()
             else:
                 params['mi_amount'] = self.mi_amount
+        if self.operate_type:
+            if hasattr(self.operate_type, 'to_alipay_dict'):
+                params['operate_type'] = self.operate_type.to_alipay_dict()
+            else:
+                params['operate_type'] = self.operate_type
         if self.operator_role:
             if hasattr(self.operator_role, 'to_alipay_dict'):
                 params['operator_role'] = self.operator_role.to_alipay_dict()
@@ -386,6 +411,11 @@ class RefundOrderDetailVO(object):
                 params['refuse_reason_code'] = self.refuse_reason_code.to_alipay_dict()
             else:
                 params['refuse_reason_code'] = self.refuse_reason_code
+        if self.return_logistics:
+            if hasattr(self.return_logistics, 'to_alipay_dict'):
+                params['return_logistics'] = self.return_logistics.to_alipay_dict()
+            else:
+                params['return_logistics'] = self.return_logistics
         if self.success_time:
             if hasattr(self.success_time, 'to_alipay_dict'):
                 params['success_time'] = self.success_time.to_alipay_dict()
@@ -429,6 +459,8 @@ class RefundOrderDetailVO(object):
             o.medicare = d['medicare']
         if 'mi_amount' in d:
             o.mi_amount = d['mi_amount']
+        if 'operate_type' in d:
+            o.operate_type = d['operate_type']
         if 'operator_role' in d:
             o.operator_role = d['operator_role']
         if 'order_no' in d:
@@ -453,6 +485,8 @@ class RefundOrderDetailVO(object):
             o.refuse_reason = d['refuse_reason']
         if 'refuse_reason_code' in d:
             o.refuse_reason_code = d['refuse_reason_code']
+        if 'return_logistics' in d:
+            o.return_logistics = d['return_logistics']
         if 'success_time' in d:
             o.success_time = d['success_time']
         if 'time_markup_price' in d:

@@ -8,10 +8,18 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayBrandDTO(object):
 
     def __init__(self):
+        self._check_icon_url = None
         self._content = None
         self._icon_url = None
         self._title = None
 
+    @property
+    def check_icon_url(self):
+        return self._check_icon_url
+
+    @check_icon_url.setter
+    def check_icon_url(self, value):
+        self._check_icon_url = value
     @property
     def content(self):
         return self._content
@@ -37,6 +45,11 @@ class AlipayBrandDTO(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.check_icon_url:
+            if hasattr(self.check_icon_url, 'to_alipay_dict'):
+                params['check_icon_url'] = self.check_icon_url.to_alipay_dict()
+            else:
+                params['check_icon_url'] = self.check_icon_url
         if self.content:
             if hasattr(self.content, 'to_alipay_dict'):
                 params['content'] = self.content.to_alipay_dict()
@@ -59,6 +72,8 @@ class AlipayBrandDTO(object):
         if not d:
             return None
         o = AlipayBrandDTO()
+        if 'check_icon_url' in d:
+            o.check_icon_url = d['check_icon_url']
         if 'content' in d:
             o.content = d['content']
         if 'icon_url' in d:

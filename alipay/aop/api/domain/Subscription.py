@@ -18,6 +18,8 @@ class Subscription(object):
         self._customer_id = None
         self._deduct_type = None
         self._effective_type = None
+        self._grace_period_days = None
+        self._grace_period_end = None
         self._items = None
         self._metadata = None
         self._pending_items = None
@@ -84,6 +86,20 @@ class Subscription(object):
     @effective_type.setter
     def effective_type(self, value):
         self._effective_type = value
+    @property
+    def grace_period_days(self):
+        return self._grace_period_days
+
+    @grace_period_days.setter
+    def grace_period_days(self, value):
+        self._grace_period_days = value
+    @property
+    def grace_period_end(self):
+        return self._grace_period_end
+
+    @grace_period_end.setter
+    def grace_period_end(self, value):
+        self._grace_period_end = value
     @property
     def items(self):
         return self._items
@@ -203,6 +219,16 @@ class Subscription(object):
                 params['effective_type'] = self.effective_type.to_alipay_dict()
             else:
                 params['effective_type'] = self.effective_type
+        if self.grace_period_days:
+            if hasattr(self.grace_period_days, 'to_alipay_dict'):
+                params['grace_period_days'] = self.grace_period_days.to_alipay_dict()
+            else:
+                params['grace_period_days'] = self.grace_period_days
+        if self.grace_period_end:
+            if hasattr(self.grace_period_end, 'to_alipay_dict'):
+                params['grace_period_end'] = self.grace_period_end.to_alipay_dict()
+            else:
+                params['grace_period_end'] = self.grace_period_end
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -281,6 +307,10 @@ class Subscription(object):
             o.deduct_type = d['deduct_type']
         if 'effective_type' in d:
             o.effective_type = d['effective_type']
+        if 'grace_period_days' in d:
+            o.grace_period_days = d['grace_period_days']
+        if 'grace_period_end' in d:
+            o.grace_period_end = d['grace_period_end']
         if 'items' in d:
             o.items = d['items']
         if 'metadata' in d:

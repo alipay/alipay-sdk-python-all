@@ -19,6 +19,7 @@ class Examination(object):
         self._book_info = None
         self._cancel_type = None
         self._check_info = None
+        self._close_type = None
         self._deliver_info = None
         self._fulfillment_status = None
         self._items = None
@@ -68,6 +69,13 @@ class Examination(object):
             self._check_info = value
         else:
             self._check_info = ExaminationCheckInfo.from_alipay_dict(value)
+    @property
+    def close_type(self):
+        return self._close_type
+
+    @close_type.setter
+    def close_type(self, value):
+        self._close_type = value
     @property
     def deliver_info(self):
         return self._deliver_info
@@ -211,6 +219,11 @@ class Examination(object):
                 params['check_info'] = self.check_info.to_alipay_dict()
             else:
                 params['check_info'] = self.check_info
+        if self.close_type:
+            if hasattr(self.close_type, 'to_alipay_dict'):
+                params['close_type'] = self.close_type.to_alipay_dict()
+            else:
+                params['close_type'] = self.close_type
         if self.deliver_info:
             if hasattr(self.deliver_info, 'to_alipay_dict'):
                 params['deliver_info'] = self.deliver_info.to_alipay_dict()
@@ -306,6 +319,8 @@ class Examination(object):
             o.cancel_type = d['cancel_type']
         if 'check_info' in d:
             o.check_info = d['check_info']
+        if 'close_type' in d:
+            o.close_type = d['close_type']
         if 'deliver_info' in d:
             o.deliver_info = d['deliver_info']
         if 'fulfillment_status' in d:

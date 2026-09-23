@@ -27,6 +27,7 @@ class OrderServicePackageVO(object):
         self._service_package_name = None
         self._service_package_price = None
         self._service_package_time = None
+        self._service_package_type = None
 
     @property
     def amount_user(self):
@@ -152,6 +153,13 @@ class OrderServicePackageVO(object):
     @service_package_time.setter
     def service_package_time(self, value):
         self._service_package_time = value
+    @property
+    def service_package_type(self):
+        return self._service_package_type
+
+    @service_package_type.setter
+    def service_package_type(self, value):
+        self._service_package_type = value
 
 
     def to_alipay_dict(self):
@@ -241,6 +249,11 @@ class OrderServicePackageVO(object):
                 params['service_package_time'] = self.service_package_time.to_alipay_dict()
             else:
                 params['service_package_time'] = self.service_package_time
+        if self.service_package_type:
+            if hasattr(self.service_package_type, 'to_alipay_dict'):
+                params['service_package_type'] = self.service_package_type.to_alipay_dict()
+            else:
+                params['service_package_type'] = self.service_package_type
         return params
 
     @staticmethod
@@ -280,6 +293,8 @@ class OrderServicePackageVO(object):
             o.service_package_price = d['service_package_price']
         if 'service_package_time' in d:
             o.service_package_time = d['service_package_time']
+        if 'service_package_type' in d:
+            o.service_package_type = d['service_package_type']
         return o
 
 

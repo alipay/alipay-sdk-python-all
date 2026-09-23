@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CorroborationMaterials import CorroborationMaterials
 from alipay.aop.api.domain.RecyclinginvoiceOrderCreateItem import RecyclinginvoiceOrderCreateItem
 
 
@@ -11,6 +12,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def __init__(self):
         self._company_clerk_id = None
         self._company_supplier_id = None
+        self._corroboration_material_list = None
         self._invoice_kind = None
         self._memo = None
         self._order_item_list = None
@@ -18,6 +20,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
         self._personal_tax_project = None
         self._product_id = None
         self._product_origin_code = None
+        self._proxy_order_id = None
         self._proxy_seller_cert_no = None
         self._received_method = None
         self._tax_no = None
@@ -37,6 +40,19 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     @company_supplier_id.setter
     def company_supplier_id(self, value):
         self._company_supplier_id = value
+    @property
+    def corroboration_material_list(self):
+        return self._corroboration_material_list
+
+    @corroboration_material_list.setter
+    def corroboration_material_list(self, value):
+        if isinstance(value, list):
+            self._corroboration_material_list = list()
+            for i in value:
+                if isinstance(i, CorroborationMaterials):
+                    self._corroboration_material_list.append(i)
+                else:
+                    self._corroboration_material_list.append(CorroborationMaterials.from_alipay_dict(i))
     @property
     def invoice_kind(self):
         return self._invoice_kind
@@ -93,6 +109,13 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
     def product_origin_code(self, value):
         self._product_origin_code = value
     @property
+    def proxy_order_id(self):
+        return self._proxy_order_id
+
+    @proxy_order_id.setter
+    def proxy_order_id(self, value):
+        self._proxy_order_id = value
+    @property
     def proxy_seller_cert_no(self):
         return self._proxy_seller_cert_no
 
@@ -134,6 +157,16 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
                 params['company_supplier_id'] = self.company_supplier_id.to_alipay_dict()
             else:
                 params['company_supplier_id'] = self.company_supplier_id
+        if self.corroboration_material_list:
+            if isinstance(self.corroboration_material_list, list):
+                for i in range(0, len(self.corroboration_material_list)):
+                    element = self.corroboration_material_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.corroboration_material_list[i] = element.to_alipay_dict()
+            if hasattr(self.corroboration_material_list, 'to_alipay_dict'):
+                params['corroboration_material_list'] = self.corroboration_material_list.to_alipay_dict()
+            else:
+                params['corroboration_material_list'] = self.corroboration_material_list
         if self.invoice_kind:
             if hasattr(self.invoice_kind, 'to_alipay_dict'):
                 params['invoice_kind'] = self.invoice_kind.to_alipay_dict()
@@ -174,6 +207,11 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
                 params['product_origin_code'] = self.product_origin_code.to_alipay_dict()
             else:
                 params['product_origin_code'] = self.product_origin_code
+        if self.proxy_order_id:
+            if hasattr(self.proxy_order_id, 'to_alipay_dict'):
+                params['proxy_order_id'] = self.proxy_order_id.to_alipay_dict()
+            else:
+                params['proxy_order_id'] = self.proxy_order_id
         if self.proxy_seller_cert_no:
             if hasattr(self.proxy_seller_cert_no, 'to_alipay_dict'):
                 params['proxy_seller_cert_no'] = self.proxy_seller_cert_no.to_alipay_dict()
@@ -205,6 +243,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
             o.company_clerk_id = d['company_clerk_id']
         if 'company_supplier_id' in d:
             o.company_supplier_id = d['company_supplier_id']
+        if 'corroboration_material_list' in d:
+            o.corroboration_material_list = d['corroboration_material_list']
         if 'invoice_kind' in d:
             o.invoice_kind = d['invoice_kind']
         if 'memo' in d:
@@ -219,6 +259,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderCreateModel(object):
             o.product_id = d['product_id']
         if 'product_origin_code' in d:
             o.product_origin_code = d['product_origin_code']
+        if 'proxy_order_id' in d:
+            o.proxy_order_id = d['proxy_order_id']
         if 'proxy_seller_cert_no' in d:
             o.proxy_seller_cert_no = d['proxy_seller_cert_no']
         if 'received_method' in d:

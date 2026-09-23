@@ -11,6 +11,7 @@ class AlipayTradeSubscriptionSubmodeCreateModel(object):
     def __init__(self):
         self._customer_id = None
         self._deduct_type = None
+        self._grace_period_days = None
         self._items = None
         self._metadata = None
         self._pay_amount = None
@@ -31,6 +32,13 @@ class AlipayTradeSubscriptionSubmodeCreateModel(object):
     @deduct_type.setter
     def deduct_type(self, value):
         self._deduct_type = value
+    @property
+    def grace_period_days(self):
+        return self._grace_period_days
+
+    @grace_period_days.setter
+    def grace_period_days(self, value):
+        self._grace_period_days = value
     @property
     def items(self):
         return self._items
@@ -86,6 +94,11 @@ class AlipayTradeSubscriptionSubmodeCreateModel(object):
                 params['deduct_type'] = self.deduct_type.to_alipay_dict()
             else:
                 params['deduct_type'] = self.deduct_type
+        if self.grace_period_days:
+            if hasattr(self.grace_period_days, 'to_alipay_dict'):
+                params['grace_period_days'] = self.grace_period_days.to_alipay_dict()
+            else:
+                params['grace_period_days'] = self.grace_period_days
         if self.items:
             if isinstance(self.items, list):
                 for i in range(0, len(self.items)):
@@ -127,6 +140,8 @@ class AlipayTradeSubscriptionSubmodeCreateModel(object):
             o.customer_id = d['customer_id']
         if 'deduct_type' in d:
             o.deduct_type = d['deduct_type']
+        if 'grace_period_days' in d:
+            o.grace_period_days = d['grace_period_days']
         if 'items' in d:
             o.items = d['items']
         if 'metadata' in d:

@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.HeaderParam import HeaderParam
 from alipay.aop.api.domain.McpToolList import McpToolList
+from alipay.aop.api.domain.HeaderParam import HeaderParam
 
 
 class AlipayOpenSpMcpDetailQueryResponse(AlipayResponse):
@@ -21,6 +22,7 @@ class AlipayOpenSpMcpDetailQueryResponse(AlipayResponse):
         self._mcp_english_name = None
         self._mcp_server_url = None
         self._mcp_tool_list = None
+        self._query_list = None
         self._request_timeout = None
         self._response_timeout = None
         self._support_account_type_list = None
@@ -53,10 +55,13 @@ class AlipayOpenSpMcpDetailQueryResponse(AlipayResponse):
 
     @header_list.setter
     def header_list(self, value):
-        if isinstance(value, HeaderParam):
-            self._header_list = value
-        else:
-            self._header_list = HeaderParam.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._header_list = list()
+            for i in value:
+                if isinstance(i, HeaderParam):
+                    self._header_list.append(i)
+                else:
+                    self._header_list.append(HeaderParam.from_alipay_dict(i))
     @property
     def icon_url(self):
         return self._icon_url
@@ -105,6 +110,19 @@ class AlipayOpenSpMcpDetailQueryResponse(AlipayResponse):
                     self._mcp_tool_list.append(i)
                 else:
                     self._mcp_tool_list.append(McpToolList.from_alipay_dict(i))
+    @property
+    def query_list(self):
+        return self._query_list
+
+    @query_list.setter
+    def query_list(self, value):
+        if isinstance(value, list):
+            self._query_list = list()
+            for i in value:
+                if isinstance(i, HeaderParam):
+                    self._query_list.append(i)
+                else:
+                    self._query_list.append(HeaderParam.from_alipay_dict(i))
     @property
     def request_timeout(self):
         return self._request_timeout
@@ -162,6 +180,8 @@ class AlipayOpenSpMcpDetailQueryResponse(AlipayResponse):
             self.mcp_server_url = response['mcp_server_url']
         if 'mcp_tool_list' in response:
             self.mcp_tool_list = response['mcp_tool_list']
+        if 'query_list' in response:
+            self.query_list = response['query_list']
         if 'request_timeout' in response:
             self.request_timeout = response['request_timeout']
         if 'response_timeout' in response:

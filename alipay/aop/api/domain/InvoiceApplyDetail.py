@@ -10,6 +10,7 @@ class InvoiceApplyDetail(object):
     def __init__(self):
         self._bill_no = None
         self._biz_fund_type = None
+        self._external_merchant_trade_no = None
         self._invoice_amount = None
 
     @property
@@ -26,6 +27,13 @@ class InvoiceApplyDetail(object):
     @biz_fund_type.setter
     def biz_fund_type(self, value):
         self._biz_fund_type = value
+    @property
+    def external_merchant_trade_no(self):
+        return self._external_merchant_trade_no
+
+    @external_merchant_trade_no.setter
+    def external_merchant_trade_no(self, value):
+        self._external_merchant_trade_no = value
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -47,6 +55,11 @@ class InvoiceApplyDetail(object):
                 params['biz_fund_type'] = self.biz_fund_type.to_alipay_dict()
             else:
                 params['biz_fund_type'] = self.biz_fund_type
+        if self.external_merchant_trade_no:
+            if hasattr(self.external_merchant_trade_no, 'to_alipay_dict'):
+                params['external_merchant_trade_no'] = self.external_merchant_trade_no.to_alipay_dict()
+            else:
+                params['external_merchant_trade_no'] = self.external_merchant_trade_no
         if self.invoice_amount:
             if hasattr(self.invoice_amount, 'to_alipay_dict'):
                 params['invoice_amount'] = self.invoice_amount.to_alipay_dict()
@@ -63,6 +76,8 @@ class InvoiceApplyDetail(object):
             o.bill_no = d['bill_no']
         if 'biz_fund_type' in d:
             o.biz_fund_type = d['biz_fund_type']
+        if 'external_merchant_trade_no' in d:
+            o.external_merchant_trade_no = d['external_merchant_trade_no']
         if 'invoice_amount' in d:
             o.invoice_amount = d['invoice_amount']
         return o

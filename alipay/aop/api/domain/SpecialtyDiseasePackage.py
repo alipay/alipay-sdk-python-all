@@ -11,6 +11,7 @@ class SpecialtyDiseasePackage(object):
     def __init__(self):
         self._fulfillment_valid_days = None
         self._items = None
+        self._lead_doctor_id = None
         self._order_status = None
         self._service_package_desc = None
         self._service_package_id = None
@@ -37,6 +38,13 @@ class SpecialtyDiseasePackage(object):
                     self._items.append(i)
                 else:
                     self._items.append(RightInfo.from_alipay_dict(i))
+    @property
+    def lead_doctor_id(self):
+        return self._lead_doctor_id
+
+    @lead_doctor_id.setter
+    def lead_doctor_id(self, value):
+        self._lead_doctor_id = value
     @property
     def order_status(self):
         return self._order_status
@@ -91,6 +99,11 @@ class SpecialtyDiseasePackage(object):
                 params['items'] = self.items.to_alipay_dict()
             else:
                 params['items'] = self.items
+        if self.lead_doctor_id:
+            if hasattr(self.lead_doctor_id, 'to_alipay_dict'):
+                params['lead_doctor_id'] = self.lead_doctor_id.to_alipay_dict()
+            else:
+                params['lead_doctor_id'] = self.lead_doctor_id
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -127,6 +140,8 @@ class SpecialtyDiseasePackage(object):
             o.fulfillment_valid_days = d['fulfillment_valid_days']
         if 'items' in d:
             o.items = d['items']
+        if 'lead_doctor_id' in d:
+            o.lead_doctor_id = d['lead_doctor_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'service_package_desc' in d:

@@ -10,6 +10,7 @@ class AlipayCommerceMedicalHmItemQueryModel(object):
     def __init__(self):
         self._doctor_id = None
         self._package_order_id = None
+        self._package_service_item_id = None
         self._page = None
         self._page_size = None
         self._type = None
@@ -28,6 +29,13 @@ class AlipayCommerceMedicalHmItemQueryModel(object):
     @package_order_id.setter
     def package_order_id(self, value):
         self._package_order_id = value
+    @property
+    def package_service_item_id(self):
+        return self._package_service_item_id
+
+    @package_service_item_id.setter
+    def package_service_item_id(self, value):
+        self._package_service_item_id = value
     @property
     def page(self):
         return self._page
@@ -63,6 +71,11 @@ class AlipayCommerceMedicalHmItemQueryModel(object):
                 params['package_order_id'] = self.package_order_id.to_alipay_dict()
             else:
                 params['package_order_id'] = self.package_order_id
+        if self.package_service_item_id:
+            if hasattr(self.package_service_item_id, 'to_alipay_dict'):
+                params['package_service_item_id'] = self.package_service_item_id.to_alipay_dict()
+            else:
+                params['package_service_item_id'] = self.package_service_item_id
         if self.page:
             if hasattr(self.page, 'to_alipay_dict'):
                 params['page'] = self.page.to_alipay_dict()
@@ -89,6 +102,8 @@ class AlipayCommerceMedicalHmItemQueryModel(object):
             o.doctor_id = d['doctor_id']
         if 'package_order_id' in d:
             o.package_order_id = d['package_order_id']
+        if 'package_service_item_id' in d:
+            o.package_service_item_id = d['package_service_item_id']
         if 'page' in d:
             o.page = d['page']
         if 'page_size' in d:

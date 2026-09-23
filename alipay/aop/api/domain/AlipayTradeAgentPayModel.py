@@ -9,12 +9,21 @@ from alipay.aop.api.domain.AgentSignParams import AgentSignParams
 class AlipayTradeAgentPayModel(object):
 
     def __init__(self):
+        self._agent_id = None
         self._agreement_no = None
         self._agreement_sign_params = None
+        self._cashier_scene = None
         self._prepay_id = None
         self._user_token = None
         self._user_token_type = None
 
+    @property
+    def agent_id(self):
+        return self._agent_id
+
+    @agent_id.setter
+    def agent_id(self, value):
+        self._agent_id = value
     @property
     def agreement_no(self):
         return self._agreement_no
@@ -32,6 +41,13 @@ class AlipayTradeAgentPayModel(object):
             self._agreement_sign_params = value
         else:
             self._agreement_sign_params = AgentSignParams.from_alipay_dict(value)
+    @property
+    def cashier_scene(self):
+        return self._cashier_scene
+
+    @cashier_scene.setter
+    def cashier_scene(self, value):
+        self._cashier_scene = value
     @property
     def prepay_id(self):
         return self._prepay_id
@@ -57,6 +73,11 @@ class AlipayTradeAgentPayModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_id:
+            if hasattr(self.agent_id, 'to_alipay_dict'):
+                params['agent_id'] = self.agent_id.to_alipay_dict()
+            else:
+                params['agent_id'] = self.agent_id
         if self.agreement_no:
             if hasattr(self.agreement_no, 'to_alipay_dict'):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
@@ -67,6 +88,11 @@ class AlipayTradeAgentPayModel(object):
                 params['agreement_sign_params'] = self.agreement_sign_params.to_alipay_dict()
             else:
                 params['agreement_sign_params'] = self.agreement_sign_params
+        if self.cashier_scene:
+            if hasattr(self.cashier_scene, 'to_alipay_dict'):
+                params['cashier_scene'] = self.cashier_scene.to_alipay_dict()
+            else:
+                params['cashier_scene'] = self.cashier_scene
         if self.prepay_id:
             if hasattr(self.prepay_id, 'to_alipay_dict'):
                 params['prepay_id'] = self.prepay_id.to_alipay_dict()
@@ -89,10 +115,14 @@ class AlipayTradeAgentPayModel(object):
         if not d:
             return None
         o = AlipayTradeAgentPayModel()
+        if 'agent_id' in d:
+            o.agent_id = d['agent_id']
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
         if 'agreement_sign_params' in d:
             o.agreement_sign_params = d['agreement_sign_params']
+        if 'cashier_scene' in d:
+            o.cashier_scene = d['cashier_scene']
         if 'prepay_id' in d:
             o.prepay_id = d['prepay_id']
         if 'user_token' in d:

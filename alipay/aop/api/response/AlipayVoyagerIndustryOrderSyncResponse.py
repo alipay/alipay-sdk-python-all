@@ -11,6 +11,7 @@ class AlipayVoyagerIndustryOrderSyncResponse(AlipayResponse):
         super(AlipayVoyagerIndustryOrderSyncResponse, self).__init__()
         self._consume_status = None
         self._error_code = None
+        self._error_message = None
         self._need_retry = None
 
     @property
@@ -28,6 +29,13 @@ class AlipayVoyagerIndustryOrderSyncResponse(AlipayResponse):
     def error_code(self, value):
         self._error_code = value
     @property
+    def error_message(self):
+        return self._error_message
+
+    @error_message.setter
+    def error_message(self, value):
+        self._error_message = value
+    @property
     def need_retry(self):
         return self._need_retry
 
@@ -41,5 +49,7 @@ class AlipayVoyagerIndustryOrderSyncResponse(AlipayResponse):
             self.consume_status = response['consume_status']
         if 'error_code' in response:
             self.error_code = response['error_code']
+        if 'error_message' in response:
+            self.error_message = response['error_message']
         if 'need_retry' in response:
             self.need_retry = response['need_retry']

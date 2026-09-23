@@ -10,8 +10,13 @@ class SaleForceUpdateLeadsParams(object):
 
     def __init__(self):
         self._actual_lead_party = None
+        self._ai_products = None
+        self._ai_products_source_version = None
         self._alicloud_settlement_mode = None
         self._bd_work_no = None
+        self._close_request_id = None
+        self._close_request_version = None
+        self._close_validation_status = None
         self._cloud_platform_region = None
         self._crm_customer_id = None
         self._crm_customer_industry = None
@@ -53,6 +58,7 @@ class SaleForceUpdateLeadsParams(object):
         self._record_list = None
         self._related_leads_id = None
         self._resource_foundation = None
+        self._salesforce_opportunity_id = None
         self._salesforce_phase = None
         self._sign_path = None
         self._sign_probability = None
@@ -70,6 +76,23 @@ class SaleForceUpdateLeadsParams(object):
     def actual_lead_party(self, value):
         self._actual_lead_party = value
     @property
+    def ai_products(self):
+        return self._ai_products
+
+    @ai_products.setter
+    def ai_products(self, value):
+        if isinstance(value, list):
+            self._ai_products = list()
+            for i in value:
+                self._ai_products.append(i)
+    @property
+    def ai_products_source_version(self):
+        return self._ai_products_source_version
+
+    @ai_products_source_version.setter
+    def ai_products_source_version(self, value):
+        self._ai_products_source_version = value
+    @property
     def alicloud_settlement_mode(self):
         return self._alicloud_settlement_mode
 
@@ -83,6 +106,27 @@ class SaleForceUpdateLeadsParams(object):
     @bd_work_no.setter
     def bd_work_no(self, value):
         self._bd_work_no = value
+    @property
+    def close_request_id(self):
+        return self._close_request_id
+
+    @close_request_id.setter
+    def close_request_id(self, value):
+        self._close_request_id = value
+    @property
+    def close_request_version(self):
+        return self._close_request_version
+
+    @close_request_version.setter
+    def close_request_version(self, value):
+        self._close_request_version = value
+    @property
+    def close_validation_status(self):
+        return self._close_validation_status
+
+    @close_validation_status.setter
+    def close_validation_status(self, value):
+        self._close_validation_status = value
     @property
     def cloud_platform_region(self):
         return self._cloud_platform_region
@@ -380,6 +424,13 @@ class SaleForceUpdateLeadsParams(object):
     def resource_foundation(self, value):
         self._resource_foundation = value
     @property
+    def salesforce_opportunity_id(self):
+        return self._salesforce_opportunity_id
+
+    @salesforce_opportunity_id.setter
+    def salesforce_opportunity_id(self, value):
+        self._salesforce_opportunity_id = value
+    @property
     def salesforce_phase(self):
         return self._salesforce_phase
 
@@ -444,6 +495,21 @@ class SaleForceUpdateLeadsParams(object):
                 params['actual_lead_party'] = self.actual_lead_party.to_alipay_dict()
             else:
                 params['actual_lead_party'] = self.actual_lead_party
+        if self.ai_products:
+            if isinstance(self.ai_products, list):
+                for i in range(0, len(self.ai_products)):
+                    element = self.ai_products[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ai_products[i] = element.to_alipay_dict()
+            if hasattr(self.ai_products, 'to_alipay_dict'):
+                params['ai_products'] = self.ai_products.to_alipay_dict()
+            else:
+                params['ai_products'] = self.ai_products
+        if self.ai_products_source_version:
+            if hasattr(self.ai_products_source_version, 'to_alipay_dict'):
+                params['ai_products_source_version'] = self.ai_products_source_version.to_alipay_dict()
+            else:
+                params['ai_products_source_version'] = self.ai_products_source_version
         if self.alicloud_settlement_mode:
             if hasattr(self.alicloud_settlement_mode, 'to_alipay_dict'):
                 params['alicloud_settlement_mode'] = self.alicloud_settlement_mode.to_alipay_dict()
@@ -454,6 +520,21 @@ class SaleForceUpdateLeadsParams(object):
                 params['bd_work_no'] = self.bd_work_no.to_alipay_dict()
             else:
                 params['bd_work_no'] = self.bd_work_no
+        if self.close_request_id:
+            if hasattr(self.close_request_id, 'to_alipay_dict'):
+                params['close_request_id'] = self.close_request_id.to_alipay_dict()
+            else:
+                params['close_request_id'] = self.close_request_id
+        if self.close_request_version:
+            if hasattr(self.close_request_version, 'to_alipay_dict'):
+                params['close_request_version'] = self.close_request_version.to_alipay_dict()
+            else:
+                params['close_request_version'] = self.close_request_version
+        if self.close_validation_status:
+            if hasattr(self.close_validation_status, 'to_alipay_dict'):
+                params['close_validation_status'] = self.close_validation_status.to_alipay_dict()
+            else:
+                params['close_validation_status'] = self.close_validation_status
         if self.cloud_platform_region:
             if hasattr(self.cloud_platform_region, 'to_alipay_dict'):
                 params['cloud_platform_region'] = self.cloud_platform_region.to_alipay_dict()
@@ -669,6 +750,11 @@ class SaleForceUpdateLeadsParams(object):
                 params['resource_foundation'] = self.resource_foundation.to_alipay_dict()
             else:
                 params['resource_foundation'] = self.resource_foundation
+        if self.salesforce_opportunity_id:
+            if hasattr(self.salesforce_opportunity_id, 'to_alipay_dict'):
+                params['salesforce_opportunity_id'] = self.salesforce_opportunity_id.to_alipay_dict()
+            else:
+                params['salesforce_opportunity_id'] = self.salesforce_opportunity_id
         if self.salesforce_phase:
             if hasattr(self.salesforce_phase, 'to_alipay_dict'):
                 params['salesforce_phase'] = self.salesforce_phase.to_alipay_dict()
@@ -718,10 +804,20 @@ class SaleForceUpdateLeadsParams(object):
         o = SaleForceUpdateLeadsParams()
         if 'actual_lead_party' in d:
             o.actual_lead_party = d['actual_lead_party']
+        if 'ai_products' in d:
+            o.ai_products = d['ai_products']
+        if 'ai_products_source_version' in d:
+            o.ai_products_source_version = d['ai_products_source_version']
         if 'alicloud_settlement_mode' in d:
             o.alicloud_settlement_mode = d['alicloud_settlement_mode']
         if 'bd_work_no' in d:
             o.bd_work_no = d['bd_work_no']
+        if 'close_request_id' in d:
+            o.close_request_id = d['close_request_id']
+        if 'close_request_version' in d:
+            o.close_request_version = d['close_request_version']
+        if 'close_validation_status' in d:
+            o.close_validation_status = d['close_validation_status']
         if 'cloud_platform_region' in d:
             o.cloud_platform_region = d['cloud_platform_region']
         if 'crm_customer_id' in d:
@@ -804,6 +900,8 @@ class SaleForceUpdateLeadsParams(object):
             o.related_leads_id = d['related_leads_id']
         if 'resource_foundation' in d:
             o.resource_foundation = d['resource_foundation']
+        if 'salesforce_opportunity_id' in d:
+            o.salesforce_opportunity_id = d['salesforce_opportunity_id']
         if 'salesforce_phase' in d:
             o.salesforce_phase = d['salesforce_phase']
         if 'sign_path' in d:

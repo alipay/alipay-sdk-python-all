@@ -9,6 +9,7 @@ class RentGoodsDetailInfoDTO(object):
 
     def __init__(self):
         self._body = None
+        self._daily_rent_cap_price = None
         self._goods_picture_ids = None
         self._image_material_id = None
         self._imei = None
@@ -21,6 +22,7 @@ class RentGoodsDetailInfoDTO(object):
         self._item_name = None
         self._item_type = None
         self._item_value = None
+        self._original_rent_price = None
         self._out_item_id = None
         self._out_sku_id = None
         self._rent_model = None
@@ -34,6 +36,13 @@ class RentGoodsDetailInfoDTO(object):
     @body.setter
     def body(self, value):
         self._body = value
+    @property
+    def daily_rent_cap_price(self):
+        return self._daily_rent_cap_price
+
+    @daily_rent_cap_price.setter
+    def daily_rent_cap_price(self, value):
+        self._daily_rent_cap_price = value
     @property
     def goods_picture_ids(self):
         return self._goods_picture_ids
@@ -122,6 +131,13 @@ class RentGoodsDetailInfoDTO(object):
     def item_value(self, value):
         self._item_value = value
     @property
+    def original_rent_price(self):
+        return self._original_rent_price
+
+    @original_rent_price.setter
+    def original_rent_price(self, value):
+        self._original_rent_price = value
+    @property
     def out_item_id(self):
         return self._out_item_id
 
@@ -165,6 +181,11 @@ class RentGoodsDetailInfoDTO(object):
                 params['body'] = self.body.to_alipay_dict()
             else:
                 params['body'] = self.body
+        if self.daily_rent_cap_price:
+            if hasattr(self.daily_rent_cap_price, 'to_alipay_dict'):
+                params['daily_rent_cap_price'] = self.daily_rent_cap_price.to_alipay_dict()
+            else:
+                params['daily_rent_cap_price'] = self.daily_rent_cap_price
         if self.goods_picture_ids:
             if isinstance(self.goods_picture_ids, list):
                 for i in range(0, len(self.goods_picture_ids)):
@@ -230,6 +251,11 @@ class RentGoodsDetailInfoDTO(object):
                 params['item_value'] = self.item_value.to_alipay_dict()
             else:
                 params['item_value'] = self.item_value
+        if self.original_rent_price:
+            if hasattr(self.original_rent_price, 'to_alipay_dict'):
+                params['original_rent_price'] = self.original_rent_price.to_alipay_dict()
+            else:
+                params['original_rent_price'] = self.original_rent_price
         if self.out_item_id:
             if hasattr(self.out_item_id, 'to_alipay_dict'):
                 params['out_item_id'] = self.out_item_id.to_alipay_dict()
@@ -264,6 +290,8 @@ class RentGoodsDetailInfoDTO(object):
         o = RentGoodsDetailInfoDTO()
         if 'body' in d:
             o.body = d['body']
+        if 'daily_rent_cap_price' in d:
+            o.daily_rent_cap_price = d['daily_rent_cap_price']
         if 'goods_picture_ids' in d:
             o.goods_picture_ids = d['goods_picture_ids']
         if 'image_material_id' in d:
@@ -288,6 +316,8 @@ class RentGoodsDetailInfoDTO(object):
             o.item_type = d['item_type']
         if 'item_value' in d:
             o.item_value = d['item_value']
+        if 'original_rent_price' in d:
+            o.original_rent_price = d['original_rent_price']
         if 'out_item_id' in d:
             o.out_item_id = d['out_item_id']
         if 'out_sku_id' in d:

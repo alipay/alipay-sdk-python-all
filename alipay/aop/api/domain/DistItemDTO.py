@@ -13,6 +13,7 @@ class DistItemDTO(object):
         self._channel_item_price = None
         self._channel_item_title = None
         self._item_cnt = None
+        self._item_deposit_price = None
         self._item_id = None
         self._out_item_id = None
         self._out_sku_id = None
@@ -53,6 +54,13 @@ class DistItemDTO(object):
     @item_cnt.setter
     def item_cnt(self, value):
         self._item_cnt = value
+    @property
+    def item_deposit_price(self):
+        return self._item_deposit_price
+
+    @item_deposit_price.setter
+    def item_deposit_price(self, value):
+        self._item_deposit_price = value
     @property
     def item_id(self):
         return self._item_id
@@ -110,6 +118,11 @@ class DistItemDTO(object):
                 params['item_cnt'] = self.item_cnt.to_alipay_dict()
             else:
                 params['item_cnt'] = self.item_cnt
+        if self.item_deposit_price:
+            if hasattr(self.item_deposit_price, 'to_alipay_dict'):
+                params['item_deposit_price'] = self.item_deposit_price.to_alipay_dict()
+            else:
+                params['item_deposit_price'] = self.item_deposit_price
         if self.item_id:
             if hasattr(self.item_id, 'to_alipay_dict'):
                 params['item_id'] = self.item_id.to_alipay_dict()
@@ -147,6 +160,8 @@ class DistItemDTO(object):
             o.channel_item_title = d['channel_item_title']
         if 'item_cnt' in d:
             o.item_cnt = d['item_cnt']
+        if 'item_deposit_price' in d:
+            o.item_deposit_price = d['item_deposit_price']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'out_item_id' in d:

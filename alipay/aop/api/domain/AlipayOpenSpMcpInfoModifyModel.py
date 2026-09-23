@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.HeaderParam import HeaderParam
+from alipay.aop.api.domain.HeaderParam import HeaderParam
 
 
 class AlipayOpenSpMcpInfoModifyModel(object):
@@ -18,6 +19,7 @@ class AlipayOpenSpMcpInfoModifyModel(object):
         self._mcp_icon_pic = None
         self._mcp_server_url = None
         self._parameter_name = None
+        self._query_list = None
         self._request_timeout = None
         self._response_timeout = None
         self._support_account_type = None
@@ -92,6 +94,19 @@ class AlipayOpenSpMcpInfoModifyModel(object):
     @parameter_name.setter
     def parameter_name(self, value):
         self._parameter_name = value
+    @property
+    def query_list(self):
+        return self._query_list
+
+    @query_list.setter
+    def query_list(self, value):
+        if isinstance(value, list):
+            self._query_list = list()
+            for i in value:
+                if isinstance(i, HeaderParam):
+                    self._query_list.append(i)
+                else:
+                    self._query_list.append(HeaderParam.from_alipay_dict(i))
     @property
     def request_timeout(self):
         return self._request_timeout
@@ -177,6 +192,16 @@ class AlipayOpenSpMcpInfoModifyModel(object):
                 params['parameter_name'] = self.parameter_name.to_alipay_dict()
             else:
                 params['parameter_name'] = self.parameter_name
+        if self.query_list:
+            if isinstance(self.query_list, list):
+                for i in range(0, len(self.query_list)):
+                    element = self.query_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.query_list[i] = element.to_alipay_dict()
+            if hasattr(self.query_list, 'to_alipay_dict'):
+                params['query_list'] = self.query_list.to_alipay_dict()
+            else:
+                params['query_list'] = self.query_list
         if self.request_timeout:
             if hasattr(self.request_timeout, 'to_alipay_dict'):
                 params['request_timeout'] = self.request_timeout.to_alipay_dict()
@@ -227,6 +252,8 @@ class AlipayOpenSpMcpInfoModifyModel(object):
             o.mcp_server_url = d['mcp_server_url']
         if 'parameter_name' in d:
             o.parameter_name = d['parameter_name']
+        if 'query_list' in d:
+            o.query_list = d['query_list']
         if 'request_timeout' in d:
             o.request_timeout = d['request_timeout']
         if 'response_timeout' in d:

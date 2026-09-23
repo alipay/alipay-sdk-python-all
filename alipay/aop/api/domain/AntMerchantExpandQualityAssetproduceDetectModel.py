@@ -11,6 +11,9 @@ class AntMerchantExpandQualityAssetproduceDetectModel(object):
     def __init__(self):
         self._amount = None
         self._assign_item_id = None
+        self._delivery_time = None
+        self._logistics_no = None
+        self._nfc_detect_type = None
         self._quality_detect_detail = None
 
     @property
@@ -27,6 +30,27 @@ class AntMerchantExpandQualityAssetproduceDetectModel(object):
     @assign_item_id.setter
     def assign_item_id(self, value):
         self._assign_item_id = value
+    @property
+    def delivery_time(self):
+        return self._delivery_time
+
+    @delivery_time.setter
+    def delivery_time(self, value):
+        self._delivery_time = value
+    @property
+    def logistics_no(self):
+        return self._logistics_no
+
+    @logistics_no.setter
+    def logistics_no(self, value):
+        self._logistics_no = value
+    @property
+    def nfc_detect_type(self):
+        return self._nfc_detect_type
+
+    @nfc_detect_type.setter
+    def nfc_detect_type(self, value):
+        self._nfc_detect_type = value
     @property
     def quality_detect_detail(self):
         return self._quality_detect_detail
@@ -54,6 +78,21 @@ class AntMerchantExpandQualityAssetproduceDetectModel(object):
                 params['assign_item_id'] = self.assign_item_id.to_alipay_dict()
             else:
                 params['assign_item_id'] = self.assign_item_id
+        if self.delivery_time:
+            if hasattr(self.delivery_time, 'to_alipay_dict'):
+                params['delivery_time'] = self.delivery_time.to_alipay_dict()
+            else:
+                params['delivery_time'] = self.delivery_time
+        if self.logistics_no:
+            if hasattr(self.logistics_no, 'to_alipay_dict'):
+                params['logistics_no'] = self.logistics_no.to_alipay_dict()
+            else:
+                params['logistics_no'] = self.logistics_no
+        if self.nfc_detect_type:
+            if hasattr(self.nfc_detect_type, 'to_alipay_dict'):
+                params['nfc_detect_type'] = self.nfc_detect_type.to_alipay_dict()
+            else:
+                params['nfc_detect_type'] = self.nfc_detect_type
         if self.quality_detect_detail:
             if isinstance(self.quality_detect_detail, list):
                 for i in range(0, len(self.quality_detect_detail)):
@@ -75,6 +114,12 @@ class AntMerchantExpandQualityAssetproduceDetectModel(object):
             o.amount = d['amount']
         if 'assign_item_id' in d:
             o.assign_item_id = d['assign_item_id']
+        if 'delivery_time' in d:
+            o.delivery_time = d['delivery_time']
+        if 'logistics_no' in d:
+            o.logistics_no = d['logistics_no']
+        if 'nfc_detect_type' in d:
+            o.nfc_detect_type = d['nfc_detect_type']
         if 'quality_detect_detail' in d:
             o.quality_detect_detail = d['quality_detect_detail']
         return o

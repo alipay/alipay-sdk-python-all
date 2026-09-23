@@ -9,6 +9,7 @@ class AlipayDataDataserviceAdBudgetassignTransferModel(object):
 
     def __init__(self):
         self._amount_total = None
+        self._apply_no = None
         self._assign_mod = None
         self._benefit_amount = None
         self._biz_scene = None
@@ -24,6 +25,13 @@ class AlipayDataDataserviceAdBudgetassignTransferModel(object):
     @amount_total.setter
     def amount_total(self, value):
         self._amount_total = value
+    @property
+    def apply_no(self):
+        return self._apply_no
+
+    @apply_no.setter
+    def apply_no(self, value):
+        self._apply_no = value
     @property
     def assign_mod(self):
         return self._assign_mod
@@ -82,6 +90,11 @@ class AlipayDataDataserviceAdBudgetassignTransferModel(object):
                 params['amount_total'] = self.amount_total.to_alipay_dict()
             else:
                 params['amount_total'] = self.amount_total
+        if self.apply_no:
+            if hasattr(self.apply_no, 'to_alipay_dict'):
+                params['apply_no'] = self.apply_no.to_alipay_dict()
+            else:
+                params['apply_no'] = self.apply_no
         if self.assign_mod:
             if hasattr(self.assign_mod, 'to_alipay_dict'):
                 params['assign_mod'] = self.assign_mod.to_alipay_dict()
@@ -126,6 +139,8 @@ class AlipayDataDataserviceAdBudgetassignTransferModel(object):
         o = AlipayDataDataserviceAdBudgetassignTransferModel()
         if 'amount_total' in d:
             o.amount_total = d['amount_total']
+        if 'apply_no' in d:
+            o.apply_no = d['apply_no']
         if 'assign_mod' in d:
             o.assign_mod = d['assign_mod']
         if 'benefit_amount' in d:

@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LifeServiceAttr import LifeServiceAttr
+from alipay.aop.api.domain.LifeServiceBookingResourceSync import LifeServiceBookingResourceSync
 
 
 class AlipayCommerceLifeserviceBookingSyncModel(object):
@@ -12,6 +13,7 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
         self._action = None
         self._booking_attr = None
         self._booking_id = None
+        self._booking_resources = None
         self._reject_reason = None
         self._shop_id = None
 
@@ -42,6 +44,19 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
     @booking_id.setter
     def booking_id(self, value):
         self._booking_id = value
+    @property
+    def booking_resources(self):
+        return self._booking_resources
+
+    @booking_resources.setter
+    def booking_resources(self, value):
+        if isinstance(value, list):
+            self._booking_resources = list()
+            for i in value:
+                if isinstance(i, LifeServiceBookingResourceSync):
+                    self._booking_resources.append(i)
+                else:
+                    self._booking_resources.append(LifeServiceBookingResourceSync.from_alipay_dict(i))
     @property
     def reject_reason(self):
         return self._reject_reason
@@ -80,6 +95,16 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
                 params['booking_id'] = self.booking_id.to_alipay_dict()
             else:
                 params['booking_id'] = self.booking_id
+        if self.booking_resources:
+            if isinstance(self.booking_resources, list):
+                for i in range(0, len(self.booking_resources)):
+                    element = self.booking_resources[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.booking_resources[i] = element.to_alipay_dict()
+            if hasattr(self.booking_resources, 'to_alipay_dict'):
+                params['booking_resources'] = self.booking_resources.to_alipay_dict()
+            else:
+                params['booking_resources'] = self.booking_resources
         if self.reject_reason:
             if hasattr(self.reject_reason, 'to_alipay_dict'):
                 params['reject_reason'] = self.reject_reason.to_alipay_dict()
@@ -103,6 +128,8 @@ class AlipayCommerceLifeserviceBookingSyncModel(object):
             o.booking_attr = d['booking_attr']
         if 'booking_id' in d:
             o.booking_id = d['booking_id']
+        if 'booking_resources' in d:
+            o.booking_resources = d['booking_resources']
         if 'reject_reason' in d:
             o.reject_reason = d['reject_reason']
         if 'shop_id' in d:

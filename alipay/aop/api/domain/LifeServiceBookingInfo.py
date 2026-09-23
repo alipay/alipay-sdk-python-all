@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LifeServiceAttr import LifeServiceAttr
+from alipay.aop.api.domain.LifeServiceBookingResource import LifeServiceBookingResource
 
 
 class LifeServiceBookingInfo(object):
@@ -15,6 +16,7 @@ class LifeServiceBookingInfo(object):
         self._booking_date = None
         self._booking_deduction_status = None
         self._booking_id = None
+        self._booking_resources = None
         self._deduction_order_id = None
         self._end_time = None
         self._item_id = None
@@ -85,6 +87,19 @@ class LifeServiceBookingInfo(object):
     @booking_id.setter
     def booking_id(self, value):
         self._booking_id = value
+    @property
+    def booking_resources(self):
+        return self._booking_resources
+
+    @booking_resources.setter
+    def booking_resources(self, value):
+        if isinstance(value, list):
+            self._booking_resources = list()
+            for i in value:
+                if isinstance(i, LifeServiceBookingResource):
+                    self._booking_resources.append(i)
+                else:
+                    self._booking_resources.append(LifeServiceBookingResource.from_alipay_dict(i))
     @property
     def deduction_order_id(self):
         return self._deduction_order_id
@@ -271,6 +286,16 @@ class LifeServiceBookingInfo(object):
                 params['booking_id'] = self.booking_id.to_alipay_dict()
             else:
                 params['booking_id'] = self.booking_id
+        if self.booking_resources:
+            if isinstance(self.booking_resources, list):
+                for i in range(0, len(self.booking_resources)):
+                    element = self.booking_resources[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.booking_resources[i] = element.to_alipay_dict()
+            if hasattr(self.booking_resources, 'to_alipay_dict'):
+                params['booking_resources'] = self.booking_resources.to_alipay_dict()
+            else:
+                params['booking_resources'] = self.booking_resources
         if self.deduction_order_id:
             if hasattr(self.deduction_order_id, 'to_alipay_dict'):
                 params['deduction_order_id'] = self.deduction_order_id.to_alipay_dict()
@@ -395,6 +420,8 @@ class LifeServiceBookingInfo(object):
             o.booking_deduction_status = d['booking_deduction_status']
         if 'booking_id' in d:
             o.booking_id = d['booking_id']
+        if 'booking_resources' in d:
+            o.booking_resources = d['booking_resources']
         if 'deduction_order_id' in d:
             o.deduction_order_id = d['deduction_order_id']
         if 'end_time' in d:

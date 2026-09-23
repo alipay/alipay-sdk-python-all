@@ -15,6 +15,7 @@ class FulfillmentInfoVO(object):
         self._open_id = None
         self._order_biz_info = None
         self._service_package_order_no = None
+        self._status = None
         self._trade_order_id = None
         self._type = None
         self._user_id = None
@@ -60,6 +61,13 @@ class FulfillmentInfoVO(object):
     @service_package_order_no.setter
     def service_package_order_no(self, value):
         self._service_package_order_no = value
+    @property
+    def status(self):
+        return self._status
+
+    @status.setter
+    def status(self, value):
+        self._status = value
     @property
     def trade_order_id(self):
         return self._trade_order_id
@@ -110,6 +118,11 @@ class FulfillmentInfoVO(object):
                 params['service_package_order_no'] = self.service_package_order_no.to_alipay_dict()
             else:
                 params['service_package_order_no'] = self.service_package_order_no
+        if self.status:
+            if hasattr(self.status, 'to_alipay_dict'):
+                params['status'] = self.status.to_alipay_dict()
+            else:
+                params['status'] = self.status
         if self.trade_order_id:
             if hasattr(self.trade_order_id, 'to_alipay_dict'):
                 params['trade_order_id'] = self.trade_order_id.to_alipay_dict()
@@ -142,6 +155,8 @@ class FulfillmentInfoVO(object):
             o.order_biz_info = d['order_biz_info']
         if 'service_package_order_no' in d:
             o.service_package_order_no = d['service_package_order_no']
+        if 'status' in d:
+            o.status = d['status']
         if 'trade_order_id' in d:
             o.trade_order_id = d['trade_order_id']
         if 'type' in d:

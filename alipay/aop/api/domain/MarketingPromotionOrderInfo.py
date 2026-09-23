@@ -16,6 +16,10 @@ class MarketingPromotionOrderInfo(object):
         self._assess_min_quantity = None
         self._assess_quantity = None
         self._assess_type = None
+        self._city_code = None
+        self._city_name = None
+        self._district_code = None
+        self._district_name = None
         self._first_level_emp_id = None
         self._inspect_amount = None
         self._inspect_quantity = None
@@ -30,6 +34,8 @@ class MarketingPromotionOrderInfo(object):
         self._product_list = None
         self._promo_id = None
         self._promo_type = None
+        self._province_code = None
+        self._province_name = None
         self._second_level_emp_id = None
         self._service_category_code = None
         self._signup_id = None
@@ -85,6 +91,34 @@ class MarketingPromotionOrderInfo(object):
     @assess_type.setter
     def assess_type(self, value):
         self._assess_type = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
+    @property
+    def city_name(self):
+        return self._city_name
+
+    @city_name.setter
+    def city_name(self, value):
+        self._city_name = value
+    @property
+    def district_code(self):
+        return self._district_code
+
+    @district_code.setter
+    def district_code(self, value):
+        self._district_code = value
+    @property
+    def district_name(self):
+        return self._district_name
+
+    @district_name.setter
+    def district_name(self, value):
+        self._district_name = value
     @property
     def first_level_emp_id(self):
         return self._first_level_emp_id
@@ -190,6 +224,20 @@ class MarketingPromotionOrderInfo(object):
     def promo_type(self, value):
         self._promo_type = value
     @property
+    def province_code(self):
+        return self._province_code
+
+    @province_code.setter
+    def province_code(self, value):
+        self._province_code = value
+    @property
+    def province_name(self):
+        return self._province_name
+
+    @province_name.setter
+    def province_name(self, value):
+        self._province_name = value
+    @property
     def second_level_emp_id(self):
         return self._second_level_emp_id
 
@@ -263,6 +311,26 @@ class MarketingPromotionOrderInfo(object):
                 params['assess_type'] = self.assess_type.to_alipay_dict()
             else:
                 params['assess_type'] = self.assess_type
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
+        if self.city_name:
+            if hasattr(self.city_name, 'to_alipay_dict'):
+                params['city_name'] = self.city_name.to_alipay_dict()
+            else:
+                params['city_name'] = self.city_name
+        if self.district_code:
+            if hasattr(self.district_code, 'to_alipay_dict'):
+                params['district_code'] = self.district_code.to_alipay_dict()
+            else:
+                params['district_code'] = self.district_code
+        if self.district_name:
+            if hasattr(self.district_name, 'to_alipay_dict'):
+                params['district_name'] = self.district_name.to_alipay_dict()
+            else:
+                params['district_name'] = self.district_name
         if self.first_level_emp_id:
             if hasattr(self.first_level_emp_id, 'to_alipay_dict'):
                 params['first_level_emp_id'] = self.first_level_emp_id.to_alipay_dict()
@@ -338,6 +406,16 @@ class MarketingPromotionOrderInfo(object):
                 params['promo_type'] = self.promo_type.to_alipay_dict()
             else:
                 params['promo_type'] = self.promo_type
+        if self.province_code:
+            if hasattr(self.province_code, 'to_alipay_dict'):
+                params['province_code'] = self.province_code.to_alipay_dict()
+            else:
+                params['province_code'] = self.province_code
+        if self.province_name:
+            if hasattr(self.province_name, 'to_alipay_dict'):
+                params['province_name'] = self.province_name.to_alipay_dict()
+            else:
+                params['province_name'] = self.province_name
         if self.second_level_emp_id:
             if hasattr(self.second_level_emp_id, 'to_alipay_dict'):
                 params['second_level_emp_id'] = self.second_level_emp_id.to_alipay_dict()
@@ -384,6 +462,14 @@ class MarketingPromotionOrderInfo(object):
             o.assess_quantity = d['assess_quantity']
         if 'assess_type' in d:
             o.assess_type = d['assess_type']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
+        if 'city_name' in d:
+            o.city_name = d['city_name']
+        if 'district_code' in d:
+            o.district_code = d['district_code']
+        if 'district_name' in d:
+            o.district_name = d['district_name']
         if 'first_level_emp_id' in d:
             o.first_level_emp_id = d['first_level_emp_id']
         if 'inspect_amount' in d:
@@ -412,6 +498,10 @@ class MarketingPromotionOrderInfo(object):
             o.promo_id = d['promo_id']
         if 'promo_type' in d:
             o.promo_type = d['promo_type']
+        if 'province_code' in d:
+            o.province_code = d['province_code']
+        if 'province_name' in d:
+            o.province_name = d['province_name']
         if 'second_level_emp_id' in d:
             o.second_level_emp_id = d['second_level_emp_id']
         if 'service_category_code' in d:

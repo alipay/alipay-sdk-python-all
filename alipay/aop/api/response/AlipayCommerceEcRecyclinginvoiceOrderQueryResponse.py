@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.RecyclingInvoiceBizTransfer import RecyclingInvoiceBizTransfer
+from alipay.aop.api.domain.OrderDepositOpenResult import OrderDepositOpenResult
 from alipay.aop.api.domain.OrderElectronicReceipt import OrderElectronicReceipt
 from alipay.aop.api.domain.OrderInvoice import OrderInvoice
 from alipay.aop.api.domain.RecyclinginvoiceOrderItem import RecyclinginvoiceOrderItem
@@ -20,6 +21,7 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
         self._collection_invoice_page_url = None
         self._company_clerk_id = None
         self._company_supplier_id = None
+        self._deposit_list = None
         self._gmt_success = None
         self._memo = None
         self._order_amount = None
@@ -83,6 +85,19 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
     @company_supplier_id.setter
     def company_supplier_id(self, value):
         self._company_supplier_id = value
+    @property
+    def deposit_list(self):
+        return self._deposit_list
+
+    @deposit_list.setter
+    def deposit_list(self, value):
+        if isinstance(value, list):
+            self._deposit_list = list()
+            for i in value:
+                if isinstance(i, OrderDepositOpenResult):
+                    self._deposit_list.append(i)
+                else:
+                    self._deposit_list.append(OrderDepositOpenResult.from_alipay_dict(i))
     @property
     def gmt_success(self):
         return self._gmt_success
@@ -288,6 +303,8 @@ class AlipayCommerceEcRecyclinginvoiceOrderQueryResponse(AlipayResponse):
             self.company_clerk_id = response['company_clerk_id']
         if 'company_supplier_id' in response:
             self.company_supplier_id = response['company_supplier_id']
+        if 'deposit_list' in response:
+            self.deposit_list = response['deposit_list']
         if 'gmt_success' in response:
             self.gmt_success = response['gmt_success']
         if 'memo' in response:

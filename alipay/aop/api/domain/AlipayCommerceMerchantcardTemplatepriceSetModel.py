@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.MerchantCardTemplateCalendarPrice import MerchantCardTemplateCalendarPrice
 from alipay.aop.api.domain.MerchantCardTemplateRegionPrice import MerchantCardTemplateRegionPrice
+from alipay.aop.api.domain.MerchantCardTemplateRoomPrice import MerchantCardTemplateRoomPrice
 from alipay.aop.api.domain.MerchantCardTemplateShopPrice import MerchantCardTemplateShopPrice
 
 
@@ -14,6 +15,7 @@ class AlipayCommerceMerchantcardTemplatepriceSetModel(object):
         self._calendar_price = None
         self._card_template_id = None
         self._region_price_list = None
+        self._room_price_list = None
         self._shop_price_list = None
 
     @property
@@ -46,6 +48,19 @@ class AlipayCommerceMerchantcardTemplatepriceSetModel(object):
                     self._region_price_list.append(i)
                 else:
                     self._region_price_list.append(MerchantCardTemplateRegionPrice.from_alipay_dict(i))
+    @property
+    def room_price_list(self):
+        return self._room_price_list
+
+    @room_price_list.setter
+    def room_price_list(self, value):
+        if isinstance(value, list):
+            self._room_price_list = list()
+            for i in value:
+                if isinstance(i, MerchantCardTemplateRoomPrice):
+                    self._room_price_list.append(i)
+                else:
+                    self._room_price_list.append(MerchantCardTemplateRoomPrice.from_alipay_dict(i))
     @property
     def shop_price_list(self):
         return self._shop_price_list
@@ -83,6 +98,16 @@ class AlipayCommerceMerchantcardTemplatepriceSetModel(object):
                 params['region_price_list'] = self.region_price_list.to_alipay_dict()
             else:
                 params['region_price_list'] = self.region_price_list
+        if self.room_price_list:
+            if isinstance(self.room_price_list, list):
+                for i in range(0, len(self.room_price_list)):
+                    element = self.room_price_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.room_price_list[i] = element.to_alipay_dict()
+            if hasattr(self.room_price_list, 'to_alipay_dict'):
+                params['room_price_list'] = self.room_price_list.to_alipay_dict()
+            else:
+                params['room_price_list'] = self.room_price_list
         if self.shop_price_list:
             if isinstance(self.shop_price_list, list):
                 for i in range(0, len(self.shop_price_list)):
@@ -106,6 +131,8 @@ class AlipayCommerceMerchantcardTemplatepriceSetModel(object):
             o.card_template_id = d['card_template_id']
         if 'region_price_list' in d:
             o.region_price_list = d['region_price_list']
+        if 'room_price_list' in d:
+            o.room_price_list = d['room_price_list']
         if 'shop_price_list' in d:
             o.shop_price_list = d['shop_price_list']
         return o

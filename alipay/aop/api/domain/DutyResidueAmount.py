@@ -12,6 +12,7 @@ class DutyResidueAmount(object):
         self._claim_count = None
         self._claim_duty_code = None
         self._claim_duty_name = None
+        self._claim_duty_type = None
         self._claim_times_100_percent = None
         self._duty_deductible_excess = None
         self._duty_init_amount = None
@@ -56,6 +57,13 @@ class DutyResidueAmount(object):
     @claim_duty_name.setter
     def claim_duty_name(self, value):
         self._claim_duty_name = value
+    @property
+    def claim_duty_type(self):
+        return self._claim_duty_type
+
+    @claim_duty_type.setter
+    def claim_duty_type(self, value):
+        self._claim_duty_type = value
     @property
     def claim_times_100_percent(self):
         return self._claim_times_100_percent
@@ -185,6 +193,11 @@ class DutyResidueAmount(object):
                 params['claim_duty_name'] = self.claim_duty_name.to_alipay_dict()
             else:
                 params['claim_duty_name'] = self.claim_duty_name
+        if self.claim_duty_type:
+            if hasattr(self.claim_duty_type, 'to_alipay_dict'):
+                params['claim_duty_type'] = self.claim_duty_type.to_alipay_dict()
+            else:
+                params['claim_duty_type'] = self.claim_duty_type
         if self.claim_times_100_percent:
             if hasattr(self.claim_times_100_percent, 'to_alipay_dict'):
                 params['claim_times_100_percent'] = self.claim_times_100_percent.to_alipay_dict()
@@ -275,6 +288,8 @@ class DutyResidueAmount(object):
             o.claim_duty_code = d['claim_duty_code']
         if 'claim_duty_name' in d:
             o.claim_duty_name = d['claim_duty_name']
+        if 'claim_duty_type' in d:
+            o.claim_duty_type = d['claim_duty_type']
         if 'claim_times_100_percent' in d:
             o.claim_times_100_percent = d['claim_times_100_percent']
         if 'duty_deductible_excess' in d:

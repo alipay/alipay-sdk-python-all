@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.FileItem import FileItem
 from alipay.aop.api.constant.ParamConstants import *
 
+from alipay.aop.api.domain.InvoiceTravelInfo import InvoiceTravelInfo
 
 
 
@@ -39,6 +40,7 @@ class AlipayCommerceEcTcnInvoiceapplyUploadRequest(object):
         self._seller_name = None
         self._seller_tax_no = None
         self._seller_tel = None
+        self._travel_info_list = None
         self._file_data = None
         self._version = "1.0"
         self._terminal_type = None
@@ -246,6 +248,19 @@ class AlipayCommerceEcTcnInvoiceapplyUploadRequest(object):
     @seller_tel.setter
     def seller_tel(self, value):
         self._seller_tel = value
+    @property
+    def travel_info_list(self):
+        return self._travel_info_list
+
+    @travel_info_list.setter
+    def travel_info_list(self, value):
+        if isinstance(value, list):
+            self._travel_info_list = list()
+            for i in value:
+                if isinstance(i, InvoiceTravelInfo):
+                    self._travel_info_list.append(i)
+                else:
+                    self._travel_info_list.append(InvoiceTravelInfo.from_alipay_dict(i))
 
     @property
     def file_data(self):
@@ -469,6 +484,13 @@ class AlipayCommerceEcTcnInvoiceapplyUploadRequest(object):
                 params['seller_tel'] = json.dumps(obj=self.seller_tel.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['seller_tel'] = self.seller_tel
+        if self.travel_info_list:
+            if isinstance(self.travel_info_list, list):
+                for i in range(0, len(self.travel_info_list)):
+                    element = self.travel_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.travel_info_list[i] = element.to_alipay_dict()
+                params['travel_info_list'] = json.dumps(obj=self.travel_info_list, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

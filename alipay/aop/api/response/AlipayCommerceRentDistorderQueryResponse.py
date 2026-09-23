@@ -8,6 +8,7 @@ from alipay.aop.api.domain.DistItemDTO import DistItemDTO
 from alipay.aop.api.domain.DistLogisticsInfoDTO import DistLogisticsInfoDTO
 from alipay.aop.api.domain.DistRentPlanInfoDTO import DistRentPlanInfoDTO
 from alipay.aop.api.domain.DistributionMerchantAddressDTO import DistributionMerchantAddressDTO
+from alipay.aop.api.domain.DistLogisticsInfoDTO import DistLogisticsInfoDTO
 
 
 class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
@@ -24,6 +25,7 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
         self._create_time = None
         self._credit_deposit_amount = None
         self._credit_deposit_status = None
+        self._dist_deposit_free_pass = None
         self._distribution_channel = None
         self._end_time = None
         self._freight = None
@@ -33,6 +35,7 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
         self._pay_time = None
         self._rent_plan_info = None
         self._return_address = None
+        self._return_logistics_info = None
         self._ship_time = None
         self._status = None
 
@@ -109,6 +112,13 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
     @credit_deposit_status.setter
     def credit_deposit_status(self, value):
         self._credit_deposit_status = value
+    @property
+    def dist_deposit_free_pass(self):
+        return self._dist_deposit_free_pass
+
+    @dist_deposit_free_pass.setter
+    def dist_deposit_free_pass(self, value):
+        self._dist_deposit_free_pass = value
     @property
     def distribution_channel(self):
         return self._distribution_channel
@@ -188,6 +198,16 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
         else:
             self._return_address = DistributionMerchantAddressDTO.from_alipay_dict(value)
     @property
+    def return_logistics_info(self):
+        return self._return_logistics_info
+
+    @return_logistics_info.setter
+    def return_logistics_info(self, value):
+        if isinstance(value, DistLogisticsInfoDTO):
+            self._return_logistics_info = value
+        else:
+            self._return_logistics_info = DistLogisticsInfoDTO.from_alipay_dict(value)
+    @property
     def ship_time(self):
         return self._ship_time
 
@@ -224,6 +244,8 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
             self.credit_deposit_amount = response['credit_deposit_amount']
         if 'credit_deposit_status' in response:
             self.credit_deposit_status = response['credit_deposit_status']
+        if 'dist_deposit_free_pass' in response:
+            self.dist_deposit_free_pass = response['dist_deposit_free_pass']
         if 'distribution_channel' in response:
             self.distribution_channel = response['distribution_channel']
         if 'end_time' in response:
@@ -242,6 +264,8 @@ class AlipayCommerceRentDistorderQueryResponse(AlipayResponse):
             self.rent_plan_info = response['rent_plan_info']
         if 'return_address' in response:
             self.return_address = response['return_address']
+        if 'return_logistics_info' in response:
+            self.return_logistics_info = response['return_logistics_info']
         if 'ship_time' in response:
             self.ship_time = response['ship_time']
         if 'status' in response:

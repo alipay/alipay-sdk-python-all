@@ -19,10 +19,13 @@ class AlipayOfflineProviderIndflowPrizeRecommendResponse(AlipayResponse):
 
     @recommend_prizes.setter
     def recommend_prizes(self, value):
-        if isinstance(value, AdVoucherPrizeDetail):
-            self._recommend_prizes = value
-        else:
-            self._recommend_prizes = AdVoucherPrizeDetail.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._recommend_prizes = list()
+            for i in value:
+                if isinstance(i, AdVoucherPrizeDetail):
+                    self._recommend_prizes.append(i)
+                else:
+                    self._recommend_prizes.append(AdVoucherPrizeDetail.from_alipay_dict(i))
     @property
     def record_id(self):
         return self._record_id

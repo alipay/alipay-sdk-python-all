@@ -17,6 +17,7 @@ class MerchantCardTemplatePriceItem(object):
         self._price_mode = None
         self._province_code = None
         self._region_level = None
+        self._room_id = None
         self._sale_price = None
         self._shop_id = None
         self._week_price_list = None
@@ -76,6 +77,13 @@ class MerchantCardTemplatePriceItem(object):
     @region_level.setter
     def region_level(self, value):
         self._region_level = value
+    @property
+    def room_id(self):
+        return self._room_id
+
+    @room_id.setter
+    def room_id(self, value):
+        self._room_id = value
     @property
     def sale_price(self):
         return self._sale_price
@@ -147,6 +155,11 @@ class MerchantCardTemplatePriceItem(object):
                 params['region_level'] = self.region_level.to_alipay_dict()
             else:
                 params['region_level'] = self.region_level
+        if self.room_id:
+            if hasattr(self.room_id, 'to_alipay_dict'):
+                params['room_id'] = self.room_id.to_alipay_dict()
+            else:
+                params['room_id'] = self.room_id
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -188,6 +201,8 @@ class MerchantCardTemplatePriceItem(object):
             o.province_code = d['province_code']
         if 'region_level' in d:
             o.region_level = d['region_level']
+        if 'room_id' in d:
+            o.room_id = d['room_id']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'shop_id' in d:

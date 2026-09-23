@@ -11,6 +11,7 @@ class AlipayInsSceneCommonGroupendorseQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayInsSceneCommonGroupendorseQueryResponse, self).__init__()
         self._endorse_fee = None
+        self._instinfo_serial_no = None
         self._out_biz_no = None
         self._status = None
         self._sub_order_count = None
@@ -25,6 +26,13 @@ class AlipayInsSceneCommonGroupendorseQueryResponse(AlipayResponse):
     @endorse_fee.setter
     def endorse_fee(self, value):
         self._endorse_fee = value
+    @property
+    def instinfo_serial_no(self):
+        return self._instinfo_serial_no
+
+    @instinfo_serial_no.setter
+    def instinfo_serial_no(self, value):
+        self._instinfo_serial_no = value
     @property
     def out_biz_no(self):
         return self._out_biz_no
@@ -78,6 +86,8 @@ class AlipayInsSceneCommonGroupendorseQueryResponse(AlipayResponse):
         response = super(AlipayInsSceneCommonGroupendorseQueryResponse, self).parse_response_content(response_content)
         if 'endorse_fee' in response:
             self.endorse_fee = response['endorse_fee']
+        if 'instinfo_serial_no' in response:
+            self.instinfo_serial_no = response['instinfo_serial_no']
         if 'out_biz_no' in response:
             self.out_biz_no = response['out_biz_no']
         if 'status' in response:

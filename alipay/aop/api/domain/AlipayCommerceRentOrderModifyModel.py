@@ -6,7 +6,9 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoDTO import RentOrderReceiverAddressInfoDTO
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoDTO import RentOrderReceiverAddressInfoDTO
 from alipay.aop.api.domain.RentOrderDeliveryInfoDTO import RentOrderDeliveryInfoDTO
+from alipay.aop.api.domain.OrderModifyEnterpriseInfoOpenApiVO import OrderModifyEnterpriseInfoOpenApiVO
 from alipay.aop.api.domain.OrderNegotiatedPaymentTime import OrderNegotiatedPaymentTime
+from alipay.aop.api.domain.RentOrderShipperAddressInfoDTO import RentOrderShipperAddressInfoDTO
 from alipay.aop.api.domain.OrderModifyRentPlanInfo import OrderModifyRentPlanInfo
 
 
@@ -16,9 +18,11 @@ class AlipayCommerceRentOrderModifyModel(object):
         self._address_info = None
         self._default_receiving_address = None
         self._delivery_info = None
+        self._enterprise_info = None
         self._open_id = None
         self._order_id = None
         self._order_negotiated_payment_time = None
+        self._order_shipping_address = None
         self._out_order_id = None
         self._rent_plan_info = None
         self._type = None
@@ -55,6 +59,16 @@ class AlipayCommerceRentOrderModifyModel(object):
         else:
             self._delivery_info = RentOrderDeliveryInfoDTO.from_alipay_dict(value)
     @property
+    def enterprise_info(self):
+        return self._enterprise_info
+
+    @enterprise_info.setter
+    def enterprise_info(self, value):
+        if isinstance(value, OrderModifyEnterpriseInfoOpenApiVO):
+            self._enterprise_info = value
+        else:
+            self._enterprise_info = OrderModifyEnterpriseInfoOpenApiVO.from_alipay_dict(value)
+    @property
     def open_id(self):
         return self._open_id
 
@@ -81,6 +95,16 @@ class AlipayCommerceRentOrderModifyModel(object):
                     self._order_negotiated_payment_time.append(i)
                 else:
                     self._order_negotiated_payment_time.append(OrderNegotiatedPaymentTime.from_alipay_dict(i))
+    @property
+    def order_shipping_address(self):
+        return self._order_shipping_address
+
+    @order_shipping_address.setter
+    def order_shipping_address(self, value):
+        if isinstance(value, RentOrderShipperAddressInfoDTO):
+            self._order_shipping_address = value
+        else:
+            self._order_shipping_address = RentOrderShipperAddressInfoDTO.from_alipay_dict(value)
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -131,6 +155,11 @@ class AlipayCommerceRentOrderModifyModel(object):
                 params['delivery_info'] = self.delivery_info.to_alipay_dict()
             else:
                 params['delivery_info'] = self.delivery_info
+        if self.enterprise_info:
+            if hasattr(self.enterprise_info, 'to_alipay_dict'):
+                params['enterprise_info'] = self.enterprise_info.to_alipay_dict()
+            else:
+                params['enterprise_info'] = self.enterprise_info
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -151,6 +180,11 @@ class AlipayCommerceRentOrderModifyModel(object):
                 params['order_negotiated_payment_time'] = self.order_negotiated_payment_time.to_alipay_dict()
             else:
                 params['order_negotiated_payment_time'] = self.order_negotiated_payment_time
+        if self.order_shipping_address:
+            if hasattr(self.order_shipping_address, 'to_alipay_dict'):
+                params['order_shipping_address'] = self.order_shipping_address.to_alipay_dict()
+            else:
+                params['order_shipping_address'] = self.order_shipping_address
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -184,12 +218,16 @@ class AlipayCommerceRentOrderModifyModel(object):
             o.default_receiving_address = d['default_receiving_address']
         if 'delivery_info' in d:
             o.delivery_info = d['delivery_info']
+        if 'enterprise_info' in d:
+            o.enterprise_info = d['enterprise_info']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_id' in d:
             o.order_id = d['order_id']
         if 'order_negotiated_payment_time' in d:
             o.order_negotiated_payment_time = d['order_negotiated_payment_time']
+        if 'order_shipping_address' in d:
+            o.order_shipping_address = d['order_shipping_address']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'rent_plan_info' in d:

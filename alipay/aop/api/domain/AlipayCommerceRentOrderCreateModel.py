@@ -7,8 +7,11 @@ from alipay.aop.api.domain.RentOrderReceiverAddressInfoDTO import RentOrderRecei
 from alipay.aop.api.domain.RentBuyoutInfoDTO import RentBuyoutInfoDTO
 from alipay.aop.api.domain.RentOrderReceiverAddressInfoDTO import RentOrderReceiverAddressInfoDTO
 from alipay.aop.api.domain.RentOrderDeliveryInfoDTO import RentOrderDeliveryInfoDTO
+from alipay.aop.api.domain.OrderModifyEnterpriseInfoOpenApiVO import OrderModifyEnterpriseInfoOpenApiVO
+from alipay.aop.api.domain.ExternalScenariosMerchantDTO import ExternalScenariosMerchantDTO
 from alipay.aop.api.domain.RentGoodsDetailInfoDTO import RentGoodsDetailInfoDTO
 from alipay.aop.api.domain.RentOfflineShoppingDTO import RentOfflineShoppingDTO
+from alipay.aop.api.domain.RentOrderShipperAddressInfoDTO import RentOrderShipperAddressInfoDTO
 from alipay.aop.api.domain.RentPathInfoDTO import RentPathInfoDTO
 from alipay.aop.api.domain.RentOrderPriceInfoDTO import RentOrderPriceInfoDTO
 from alipay.aop.api.domain.RentReletInfoDTO import RentReletInfoDTO
@@ -31,9 +34,12 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._buyout_installment_no = None
         self._default_receiving_address = None
         self._delivery_info = None
+        self._enterprise_info = None
+        self._external_scenarios_merchant = None
         self._item_infos = None
         self._memo = None
         self._offline_shopping_info = None
+        self._order_shipping_address = None
         self._order_type = None
         self._out_order_id = None
         self._outer_order_source = None
@@ -127,6 +133,26 @@ class AlipayCommerceRentOrderCreateModel(object):
         else:
             self._delivery_info = RentOrderDeliveryInfoDTO.from_alipay_dict(value)
     @property
+    def enterprise_info(self):
+        return self._enterprise_info
+
+    @enterprise_info.setter
+    def enterprise_info(self, value):
+        if isinstance(value, OrderModifyEnterpriseInfoOpenApiVO):
+            self._enterprise_info = value
+        else:
+            self._enterprise_info = OrderModifyEnterpriseInfoOpenApiVO.from_alipay_dict(value)
+    @property
+    def external_scenarios_merchant(self):
+        return self._external_scenarios_merchant
+
+    @external_scenarios_merchant.setter
+    def external_scenarios_merchant(self, value):
+        if isinstance(value, ExternalScenariosMerchantDTO):
+            self._external_scenarios_merchant = value
+        else:
+            self._external_scenarios_merchant = ExternalScenariosMerchantDTO.from_alipay_dict(value)
+    @property
     def item_infos(self):
         return self._item_infos
 
@@ -156,6 +182,16 @@ class AlipayCommerceRentOrderCreateModel(object):
             self._offline_shopping_info = value
         else:
             self._offline_shopping_info = RentOfflineShoppingDTO.from_alipay_dict(value)
+    @property
+    def order_shipping_address(self):
+        return self._order_shipping_address
+
+    @order_shipping_address.setter
+    def order_shipping_address(self, value):
+        if isinstance(value, RentOrderShipperAddressInfoDTO):
+            self._order_shipping_address = value
+        else:
+            self._order_shipping_address = RentOrderShipperAddressInfoDTO.from_alipay_dict(value)
     @property
     def order_type(self):
         return self._order_type
@@ -341,6 +377,16 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['delivery_info'] = self.delivery_info.to_alipay_dict()
             else:
                 params['delivery_info'] = self.delivery_info
+        if self.enterprise_info:
+            if hasattr(self.enterprise_info, 'to_alipay_dict'):
+                params['enterprise_info'] = self.enterprise_info.to_alipay_dict()
+            else:
+                params['enterprise_info'] = self.enterprise_info
+        if self.external_scenarios_merchant:
+            if hasattr(self.external_scenarios_merchant, 'to_alipay_dict'):
+                params['external_scenarios_merchant'] = self.external_scenarios_merchant.to_alipay_dict()
+            else:
+                params['external_scenarios_merchant'] = self.external_scenarios_merchant
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -361,6 +407,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['offline_shopping_info'] = self.offline_shopping_info.to_alipay_dict()
             else:
                 params['offline_shopping_info'] = self.offline_shopping_info
+        if self.order_shipping_address:
+            if hasattr(self.order_shipping_address, 'to_alipay_dict'):
+                params['order_shipping_address'] = self.order_shipping_address.to_alipay_dict()
+            else:
+                params['order_shipping_address'] = self.order_shipping_address
         if self.order_type:
             if hasattr(self.order_type, 'to_alipay_dict'):
                 params['order_type'] = self.order_type.to_alipay_dict()
@@ -466,12 +517,18 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.default_receiving_address = d['default_receiving_address']
         if 'delivery_info' in d:
             o.delivery_info = d['delivery_info']
+        if 'enterprise_info' in d:
+            o.enterprise_info = d['enterprise_info']
+        if 'external_scenarios_merchant' in d:
+            o.external_scenarios_merchant = d['external_scenarios_merchant']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
         if 'memo' in d:
             o.memo = d['memo']
         if 'offline_shopping_info' in d:
             o.offline_shopping_info = d['offline_shopping_info']
+        if 'order_shipping_address' in d:
+            o.order_shipping_address = d['order_shipping_address']
         if 'order_type' in d:
             o.order_type = d['order_type']
         if 'out_order_id' in d:

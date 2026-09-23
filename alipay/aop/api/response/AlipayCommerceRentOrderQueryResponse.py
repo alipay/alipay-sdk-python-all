@@ -11,6 +11,7 @@ from alipay.aop.api.domain.RentOrderExtendInfoVO import RentOrderExtendInfoVO
 from alipay.aop.api.domain.RentFastAuditInfoVO import RentFastAuditInfoVO
 from alipay.aop.api.domain.RentGoodsDetailInfoVO import RentGoodsDetailInfoVO
 from alipay.aop.api.domain.RentOfflineShoppingVO import RentOfflineShoppingVO
+from alipay.aop.api.domain.RentOrderShipperAddressInfoVO import RentOrderShipperAddressInfoVO
 from alipay.aop.api.domain.RentPathInfoVO import RentPathInfoVO
 from alipay.aop.api.domain.RentOrderPriceInfoVO import RentOrderPriceInfoVO
 from alipay.aop.api.domain.RentProcurementInfoVO import RentProcurementInfoVO
@@ -44,6 +45,7 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
         self._offline_shopping_info = None
         self._order_create_time = None
         self._order_id = None
+        self._order_shipping_address = None
         self._order_type = None
         self._out_order_id = None
         self._outer_order_source = None
@@ -194,6 +196,16 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def order_shipping_address(self):
+        return self._order_shipping_address
+
+    @order_shipping_address.setter
+    def order_shipping_address(self, value):
+        if isinstance(value, RentOrderShipperAddressInfoVO):
+            self._order_shipping_address = value
+        else:
+            self._order_shipping_address = RentOrderShipperAddressInfoVO.from_alipay_dict(value)
     @property
     def order_type(self):
         return self._order_type
@@ -432,6 +444,8 @@ class AlipayCommerceRentOrderQueryResponse(AlipayResponse):
             self.order_create_time = response['order_create_time']
         if 'order_id' in response:
             self.order_id = response['order_id']
+        if 'order_shipping_address' in response:
+            self.order_shipping_address = response['order_shipping_address']
         if 'order_type' in response:
             self.order_type = response['order_type']
         if 'out_order_id' in response:

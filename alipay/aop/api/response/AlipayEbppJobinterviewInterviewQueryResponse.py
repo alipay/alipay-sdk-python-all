@@ -3,7 +3,12 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.BasicInfo import BasicInfo
+from alipay.aop.api.domain.CompetencyDetails import CompetencyDetails
+from alipay.aop.api.domain.ComprehensiveEvaluation import ComprehensiveEvaluation
+from alipay.aop.api.domain.DetectionDetail import DetectionDetail
 from alipay.aop.api.domain.EliminationRuleDetailItem import EliminationRuleDetailItem
+from alipay.aop.api.domain.QuestionDetails import QuestionDetails
 from alipay.aop.api.domain.ReportUrlItem import ReportUrlItem
 
 
@@ -11,7 +16,11 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayEbppJobinterviewInterviewQueryResponse, self).__init__()
+        self._basic_info = None
         self._candidate_id = None
+        self._competency_details = None
+        self._comprehensive_evaluation = None
+        self._detection_detail = None
         self._elimination_rule_detail = None
         self._external_candidate_id = None
         self._initiate_start_time = None
@@ -20,6 +29,7 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
         self._interview_start_time = None
         self._interview_summary = None
         self._interview_url = None
+        self._question_details = None
         self._report_generation_time = None
         self._report_url_list = None
         self._room_expire_time = None
@@ -27,12 +37,52 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
         self._status = None
 
     @property
+    def basic_info(self):
+        return self._basic_info
+
+    @basic_info.setter
+    def basic_info(self, value):
+        if isinstance(value, BasicInfo):
+            self._basic_info = value
+        else:
+            self._basic_info = BasicInfo.from_alipay_dict(value)
+    @property
     def candidate_id(self):
         return self._candidate_id
 
     @candidate_id.setter
     def candidate_id(self, value):
         self._candidate_id = value
+    @property
+    def competency_details(self):
+        return self._competency_details
+
+    @competency_details.setter
+    def competency_details(self, value):
+        if isinstance(value, CompetencyDetails):
+            self._competency_details = value
+        else:
+            self._competency_details = CompetencyDetails.from_alipay_dict(value)
+    @property
+    def comprehensive_evaluation(self):
+        return self._comprehensive_evaluation
+
+    @comprehensive_evaluation.setter
+    def comprehensive_evaluation(self, value):
+        if isinstance(value, ComprehensiveEvaluation):
+            self._comprehensive_evaluation = value
+        else:
+            self._comprehensive_evaluation = ComprehensiveEvaluation.from_alipay_dict(value)
+    @property
+    def detection_detail(self):
+        return self._detection_detail
+
+    @detection_detail.setter
+    def detection_detail(self, value):
+        if isinstance(value, DetectionDetail):
+            self._detection_detail = value
+        else:
+            self._detection_detail = DetectionDetail.from_alipay_dict(value)
     @property
     def elimination_rule_detail(self):
         return self._elimination_rule_detail
@@ -93,6 +143,16 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
     def interview_url(self, value):
         self._interview_url = value
     @property
+    def question_details(self):
+        return self._question_details
+
+    @question_details.setter
+    def question_details(self, value):
+        if isinstance(value, QuestionDetails):
+            self._question_details = value
+        else:
+            self._question_details = QuestionDetails.from_alipay_dict(value)
+    @property
     def report_generation_time(self):
         return self._report_generation_time
 
@@ -133,8 +193,16 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayEbppJobinterviewInterviewQueryResponse, self).parse_response_content(response_content)
+        if 'basic_info' in response:
+            self.basic_info = response['basic_info']
         if 'candidate_id' in response:
             self.candidate_id = response['candidate_id']
+        if 'competency_details' in response:
+            self.competency_details = response['competency_details']
+        if 'comprehensive_evaluation' in response:
+            self.comprehensive_evaluation = response['comprehensive_evaluation']
+        if 'detection_detail' in response:
+            self.detection_detail = response['detection_detail']
         if 'elimination_rule_detail' in response:
             self.elimination_rule_detail = response['elimination_rule_detail']
         if 'external_candidate_id' in response:
@@ -151,6 +219,8 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
             self.interview_summary = response['interview_summary']
         if 'interview_url' in response:
             self.interview_url = response['interview_url']
+        if 'question_details' in response:
+            self.question_details = response['question_details']
         if 'report_generation_time' in response:
             self.report_generation_time = response['report_generation_time']
         if 'report_url_list' in response:

@@ -9,6 +9,7 @@ class MedicalServiceMagaCardDTO(object):
 
     def __init__(self):
         self._desc = None
+        self._ext_info = None
         self._icon_url = None
         self._jump_url = None
         self._name = None
@@ -22,6 +23,13 @@ class MedicalServiceMagaCardDTO(object):
     @desc.setter
     def desc(self, value):
         self._desc = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def icon_url(self):
         return self._icon_url
@@ -66,6 +74,11 @@ class MedicalServiceMagaCardDTO(object):
                 params['desc'] = self.desc.to_alipay_dict()
             else:
                 params['desc'] = self.desc
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.icon_url:
             if hasattr(self.icon_url, 'to_alipay_dict'):
                 params['icon_url'] = self.icon_url.to_alipay_dict()
@@ -100,6 +113,8 @@ class MedicalServiceMagaCardDTO(object):
         o = MedicalServiceMagaCardDTO()
         if 'desc' in d:
             o.desc = d['desc']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'icon_url' in d:
             o.icon_url = d['icon_url']
         if 'jump_url' in d:

@@ -12,6 +12,7 @@ class AlipayOfflineProviderIndflowActionMaintainModel(object):
         self._action_type = None
         self._ad_pos_id = None
         self._mobile_phone = None
+        self._record_id = None
         self._supply_id = None
 
     @property
@@ -43,6 +44,13 @@ class AlipayOfflineProviderIndflowActionMaintainModel(object):
     def mobile_phone(self, value):
         self._mobile_phone = value
     @property
+    def record_id(self):
+        return self._record_id
+
+    @record_id.setter
+    def record_id(self, value):
+        self._record_id = value
+    @property
     def supply_id(self):
         return self._supply_id
 
@@ -73,6 +81,11 @@ class AlipayOfflineProviderIndflowActionMaintainModel(object):
                 params['mobile_phone'] = self.mobile_phone.to_alipay_dict()
             else:
                 params['mobile_phone'] = self.mobile_phone
+        if self.record_id:
+            if hasattr(self.record_id, 'to_alipay_dict'):
+                params['record_id'] = self.record_id.to_alipay_dict()
+            else:
+                params['record_id'] = self.record_id
         if self.supply_id:
             if hasattr(self.supply_id, 'to_alipay_dict'):
                 params['supply_id'] = self.supply_id.to_alipay_dict()
@@ -93,6 +106,8 @@ class AlipayOfflineProviderIndflowActionMaintainModel(object):
             o.ad_pos_id = d['ad_pos_id']
         if 'mobile_phone' in d:
             o.mobile_phone = d['mobile_phone']
+        if 'record_id' in d:
+            o.record_id = d['record_id']
         if 'supply_id' in d:
             o.supply_id = d['supply_id']
         return o

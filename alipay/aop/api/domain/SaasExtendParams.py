@@ -10,6 +10,7 @@ class SaasExtendParams(object):
     def __init__(self):
         self._card_type = None
         self._credit_ext_info = None
+        self._custom_notify_url = None
         self._hb_fq_num = None
         self._hb_fq_seller_percent = None
         self._industry_reflux_info = None
@@ -33,6 +34,13 @@ class SaasExtendParams(object):
     @credit_ext_info.setter
     def credit_ext_info(self, value):
         self._credit_ext_info = value
+    @property
+    def custom_notify_url(self):
+        return self._custom_notify_url
+
+    @custom_notify_url.setter
+    def custom_notify_url(self, value):
+        self._custom_notify_url = value
     @property
     def hb_fq_num(self):
         return self._hb_fq_num
@@ -103,6 +111,11 @@ class SaasExtendParams(object):
                 params['credit_ext_info'] = self.credit_ext_info.to_alipay_dict()
             else:
                 params['credit_ext_info'] = self.credit_ext_info
+        if self.custom_notify_url:
+            if hasattr(self.custom_notify_url, 'to_alipay_dict'):
+                params['custom_notify_url'] = self.custom_notify_url.to_alipay_dict()
+            else:
+                params['custom_notify_url'] = self.custom_notify_url
         if self.hb_fq_num:
             if hasattr(self.hb_fq_num, 'to_alipay_dict'):
                 params['hb_fq_num'] = self.hb_fq_num.to_alipay_dict()
@@ -154,6 +167,8 @@ class SaasExtendParams(object):
             o.card_type = d['card_type']
         if 'credit_ext_info' in d:
             o.credit_ext_info = d['credit_ext_info']
+        if 'custom_notify_url' in d:
+            o.custom_notify_url = d['custom_notify_url']
         if 'hb_fq_num' in d:
             o.hb_fq_num = d['hb_fq_num']
         if 'hb_fq_seller_percent' in d:

@@ -14,6 +14,7 @@ class OrderInfoVO(object):
         self._delivery_time = None
         self._delivery_type = None
         self._finish_time = None
+        self._free_order = None
         self._mi_type = None
         self._note = None
         self._open_id = None
@@ -22,6 +23,7 @@ class OrderInfoVO(object):
         self._order_status = None
         self._pay_time = None
         self._pick_type = None
+        self._policy_no = None
         self._pre_order_type = None
         self._predict_delivery_end_time = None
         self._predict_delivery_start_time = None
@@ -75,6 +77,13 @@ class OrderInfoVO(object):
     @finish_time.setter
     def finish_time(self, value):
         self._finish_time = value
+    @property
+    def free_order(self):
+        return self._free_order
+
+    @free_order.setter
+    def free_order(self, value):
+        self._free_order = value
     @property
     def mi_type(self):
         return self._mi_type
@@ -131,6 +140,13 @@ class OrderInfoVO(object):
     @pick_type.setter
     def pick_type(self, value):
         self._pick_type = value
+    @property
+    def policy_no(self):
+        return self._policy_no
+
+    @policy_no.setter
+    def policy_no(self, value):
+        self._policy_no = value
     @property
     def pre_order_type(self):
         return self._pre_order_type
@@ -235,6 +251,11 @@ class OrderInfoVO(object):
                 params['finish_time'] = self.finish_time.to_alipay_dict()
             else:
                 params['finish_time'] = self.finish_time
+        if self.free_order:
+            if hasattr(self.free_order, 'to_alipay_dict'):
+                params['free_order'] = self.free_order.to_alipay_dict()
+            else:
+                params['free_order'] = self.free_order
         if self.mi_type:
             if hasattr(self.mi_type, 'to_alipay_dict'):
                 params['mi_type'] = self.mi_type.to_alipay_dict()
@@ -275,6 +296,11 @@ class OrderInfoVO(object):
                 params['pick_type'] = self.pick_type.to_alipay_dict()
             else:
                 params['pick_type'] = self.pick_type
+        if self.policy_no:
+            if hasattr(self.policy_no, 'to_alipay_dict'):
+                params['policy_no'] = self.policy_no.to_alipay_dict()
+            else:
+                params['policy_no'] = self.policy_no
         if self.pre_order_type:
             if hasattr(self.pre_order_type, 'to_alipay_dict'):
                 params['pre_order_type'] = self.pre_order_type.to_alipay_dict()
@@ -344,6 +370,8 @@ class OrderInfoVO(object):
             o.delivery_type = d['delivery_type']
         if 'finish_time' in d:
             o.finish_time = d['finish_time']
+        if 'free_order' in d:
+            o.free_order = d['free_order']
         if 'mi_type' in d:
             o.mi_type = d['mi_type']
         if 'note' in d:
@@ -360,6 +388,8 @@ class OrderInfoVO(object):
             o.pay_time = d['pay_time']
         if 'pick_type' in d:
             o.pick_type = d['pick_type']
+        if 'policy_no' in d:
+            o.policy_no = d['policy_no']
         if 'pre_order_type' in d:
             o.pre_order_type = d['pre_order_type']
         if 'predict_delivery_end_time' in d:

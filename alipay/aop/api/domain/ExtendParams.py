@@ -10,6 +10,9 @@ class ExtendParams(object):
     def __init__(self):
         self._card_type = None
         self._credit_ext_info = None
+        self._fq_channels = None
+        self._fq_num = None
+        self._fq_seller_percent = None
         self._hb_fq_num = None
         self._hb_fq_seller_percent = None
         self._industry_reflux_info = None
@@ -33,6 +36,27 @@ class ExtendParams(object):
     @credit_ext_info.setter
     def credit_ext_info(self, value):
         self._credit_ext_info = value
+    @property
+    def fq_channels(self):
+        return self._fq_channels
+
+    @fq_channels.setter
+    def fq_channels(self, value):
+        self._fq_channels = value
+    @property
+    def fq_num(self):
+        return self._fq_num
+
+    @fq_num.setter
+    def fq_num(self, value):
+        self._fq_num = value
+    @property
+    def fq_seller_percent(self):
+        return self._fq_seller_percent
+
+    @fq_seller_percent.setter
+    def fq_seller_percent(self, value):
+        self._fq_seller_percent = value
     @property
     def hb_fq_num(self):
         return self._hb_fq_num
@@ -103,6 +127,21 @@ class ExtendParams(object):
                 params['credit_ext_info'] = self.credit_ext_info.to_alipay_dict()
             else:
                 params['credit_ext_info'] = self.credit_ext_info
+        if self.fq_channels:
+            if hasattr(self.fq_channels, 'to_alipay_dict'):
+                params['fq_channels'] = self.fq_channels.to_alipay_dict()
+            else:
+                params['fq_channels'] = self.fq_channels
+        if self.fq_num:
+            if hasattr(self.fq_num, 'to_alipay_dict'):
+                params['fq_num'] = self.fq_num.to_alipay_dict()
+            else:
+                params['fq_num'] = self.fq_num
+        if self.fq_seller_percent:
+            if hasattr(self.fq_seller_percent, 'to_alipay_dict'):
+                params['fq_seller_percent'] = self.fq_seller_percent.to_alipay_dict()
+            else:
+                params['fq_seller_percent'] = self.fq_seller_percent
         if self.hb_fq_num:
             if hasattr(self.hb_fq_num, 'to_alipay_dict'):
                 params['hb_fq_num'] = self.hb_fq_num.to_alipay_dict()
@@ -154,6 +193,12 @@ class ExtendParams(object):
             o.card_type = d['card_type']
         if 'credit_ext_info' in d:
             o.credit_ext_info = d['credit_ext_info']
+        if 'fq_channels' in d:
+            o.fq_channels = d['fq_channels']
+        if 'fq_num' in d:
+            o.fq_num = d['fq_num']
+        if 'fq_seller_percent' in d:
+            o.fq_seller_percent = d['fq_seller_percent']
         if 'hb_fq_num' in d:
             o.hb_fq_num = d['hb_fq_num']
         if 'hb_fq_seller_percent' in d:

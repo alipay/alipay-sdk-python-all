@@ -14,6 +14,9 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
         self._asset = None
         self._asset_info = None
         self._open_id = None
+        self._parent_logon_id = None
+        self._parent_open_id = None
+        self._parent_user_id = None
         self._school_code = None
         self._user_id = None
         self._user_unique_id = None
@@ -54,6 +57,27 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
     def open_id(self, value):
         self._open_id = value
     @property
+    def parent_logon_id(self):
+        return self._parent_logon_id
+
+    @parent_logon_id.setter
+    def parent_logon_id(self, value):
+        self._parent_logon_id = value
+    @property
+    def parent_open_id(self):
+        return self._parent_open_id
+
+    @parent_open_id.setter
+    def parent_open_id(self, value):
+        self._parent_open_id = value
+    @property
+    def parent_user_id(self):
+        return self._parent_user_id
+
+    @parent_user_id.setter
+    def parent_user_id(self, value):
+        self._parent_user_id = value
+    @property
     def school_code(self):
         return self._school_code
 
@@ -87,6 +111,12 @@ class AlipayCommerceEducateMultideductQueryResponse(AlipayResponse):
             self.asset_info = response['asset_info']
         if 'open_id' in response:
             self.open_id = response['open_id']
+        if 'parent_logon_id' in response:
+            self.parent_logon_id = response['parent_logon_id']
+        if 'parent_open_id' in response:
+            self.parent_open_id = response['parent_open_id']
+        if 'parent_user_id' in response:
+            self.parent_user_id = response['parent_user_id']
         if 'school_code' in response:
             self.school_code = response['school_code']
         if 'user_id' in response:

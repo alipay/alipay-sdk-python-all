@@ -10,6 +10,7 @@ class RentPickupShopInfoDTO(object):
     def __init__(self):
         self._address = None
         self._alipay_shop_id = None
+        self._free_duration_minutes = None
         self._merchant_shop_id = None
         self._name = None
         self._tel_number = None
@@ -28,6 +29,13 @@ class RentPickupShopInfoDTO(object):
     @alipay_shop_id.setter
     def alipay_shop_id(self, value):
         self._alipay_shop_id = value
+    @property
+    def free_duration_minutes(self):
+        return self._free_duration_minutes
+
+    @free_duration_minutes.setter
+    def free_duration_minutes(self, value):
+        self._free_duration_minutes = value
     @property
     def merchant_shop_id(self):
         return self._merchant_shop_id
@@ -63,6 +71,11 @@ class RentPickupShopInfoDTO(object):
                 params['alipay_shop_id'] = self.alipay_shop_id.to_alipay_dict()
             else:
                 params['alipay_shop_id'] = self.alipay_shop_id
+        if self.free_duration_minutes:
+            if hasattr(self.free_duration_minutes, 'to_alipay_dict'):
+                params['free_duration_minutes'] = self.free_duration_minutes.to_alipay_dict()
+            else:
+                params['free_duration_minutes'] = self.free_duration_minutes
         if self.merchant_shop_id:
             if hasattr(self.merchant_shop_id, 'to_alipay_dict'):
                 params['merchant_shop_id'] = self.merchant_shop_id.to_alipay_dict()
@@ -89,6 +102,8 @@ class RentPickupShopInfoDTO(object):
             o.address = d['address']
         if 'alipay_shop_id' in d:
             o.alipay_shop_id = d['alipay_shop_id']
+        if 'free_duration_minutes' in d:
+            o.free_duration_minutes = d['free_duration_minutes']
         if 'merchant_shop_id' in d:
             o.merchant_shop_id = d['merchant_shop_id']
         if 'name' in d:

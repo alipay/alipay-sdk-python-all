@@ -12,6 +12,7 @@ class AlipayCommerceRentOrderPayResponse(AlipayResponse):
         self._order_id = None
         self._out_trade_no = None
         self._pay_amount = None
+        self._pay_token = None
         self._trade_no = None
 
     @property
@@ -36,6 +37,13 @@ class AlipayCommerceRentOrderPayResponse(AlipayResponse):
     def pay_amount(self, value):
         self._pay_amount = value
     @property
+    def pay_token(self):
+        return self._pay_token
+
+    @pay_token.setter
+    def pay_token(self, value):
+        self._pay_token = value
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -51,5 +59,7 @@ class AlipayCommerceRentOrderPayResponse(AlipayResponse):
             self.out_trade_no = response['out_trade_no']
         if 'pay_amount' in response:
             self.pay_amount = response['pay_amount']
+        if 'pay_token' in response:
+            self.pay_token = response['pay_token']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']

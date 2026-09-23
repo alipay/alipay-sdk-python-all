@@ -18,6 +18,7 @@ class ModifyStandardInfo(object):
         self._modify_condition_list = None
         self._open_rule_id = None
         self._payment_policy = None
+        self._payment_time_mode = None
         self._personal_qrcode_mode = None
         self._standard_desc = None
         self._standard_id = None
@@ -90,6 +91,13 @@ class ModifyStandardInfo(object):
     @payment_policy.setter
     def payment_policy(self, value):
         self._payment_policy = value
+    @property
+    def payment_time_mode(self):
+        return self._payment_time_mode
+
+    @payment_time_mode.setter
+    def payment_time_mode(self, value):
+        self._payment_time_mode = value
     @property
     def personal_qrcode_mode(self):
         return self._personal_qrcode_mode
@@ -172,6 +180,11 @@ class ModifyStandardInfo(object):
                 params['payment_policy'] = self.payment_policy.to_alipay_dict()
             else:
                 params['payment_policy'] = self.payment_policy
+        if self.payment_time_mode:
+            if hasattr(self.payment_time_mode, 'to_alipay_dict'):
+                params['payment_time_mode'] = self.payment_time_mode.to_alipay_dict()
+            else:
+                params['payment_time_mode'] = self.payment_time_mode
         if self.personal_qrcode_mode:
             if hasattr(self.personal_qrcode_mode, 'to_alipay_dict'):
                 params['personal_qrcode_mode'] = self.personal_qrcode_mode.to_alipay_dict()
@@ -213,6 +226,8 @@ class ModifyStandardInfo(object):
             o.open_rule_id = d['open_rule_id']
         if 'payment_policy' in d:
             o.payment_policy = d['payment_policy']
+        if 'payment_time_mode' in d:
+            o.payment_time_mode = d['payment_time_mode']
         if 'personal_qrcode_mode' in d:
             o.personal_qrcode_mode = d['personal_qrcode_mode']
         if 'standard_desc' in d:

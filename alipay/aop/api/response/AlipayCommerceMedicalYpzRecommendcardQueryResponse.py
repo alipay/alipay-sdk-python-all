@@ -11,6 +11,7 @@ from alipay.aop.api.domain.YpzMedAccompanyCardOne import YpzMedAccompanyCardOne
 from alipay.aop.api.domain.YpzNpsCardOne import YpzNpsCardOne
 from alipay.aop.api.domain.YpzOfflineQrCodeCardOne import YpzOfflineQrCodeCardOne
 from alipay.aop.api.domain.YpzQaCardOne import YpzQaCardOne
+from alipay.aop.api.domain.YpzServiceDetailCard import YpzServiceDetailCard
 
 
 class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
@@ -18,6 +19,7 @@ class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceMedicalYpzRecommendcardQueryResponse, self).__init__()
         self._afu_download_card = None
+        self._card_page = None
         self._cloud_dispense_medicine_card = None
         self._cloud_dispense_medicine_home_card = None
         self._delivery_type = None
@@ -26,6 +28,7 @@ class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
         self._nps_card = None
         self._offline_qr_code_card = None
         self._qa_card = None
+        self._service_card_list = None
 
     @property
     def afu_download_card(self):
@@ -37,6 +40,13 @@ class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
             self._afu_download_card = value
         else:
             self._afu_download_card = YpzAfuDownloadCardOne.from_alipay_dict(value)
+    @property
+    def card_page(self):
+        return self._card_page
+
+    @card_page.setter
+    def card_page(self, value):
+        self._card_page = value
     @property
     def cloud_dispense_medicine_card(self):
         return self._cloud_dispense_medicine_card
@@ -117,11 +127,26 @@ class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
             self._qa_card = value
         else:
             self._qa_card = YpzQaCardOne.from_alipay_dict(value)
+    @property
+    def service_card_list(self):
+        return self._service_card_list
+
+    @service_card_list.setter
+    def service_card_list(self, value):
+        if isinstance(value, list):
+            self._service_card_list = list()
+            for i in value:
+                if isinstance(i, YpzServiceDetailCard):
+                    self._service_card_list.append(i)
+                else:
+                    self._service_card_list.append(YpzServiceDetailCard.from_alipay_dict(i))
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceMedicalYpzRecommendcardQueryResponse, self).parse_response_content(response_content)
         if 'afu_download_card' in response:
             self.afu_download_card = response['afu_download_card']
+        if 'card_page' in response:
+            self.card_page = response['card_page']
         if 'cloud_dispense_medicine_card' in response:
             self.cloud_dispense_medicine_card = response['cloud_dispense_medicine_card']
         if 'cloud_dispense_medicine_home_card' in response:
@@ -138,3 +163,5 @@ class AlipayCommerceMedicalYpzRecommendcardQueryResponse(AlipayResponse):
             self.offline_qr_code_card = response['offline_qr_code_card']
         if 'qa_card' in response:
             self.qa_card = response['qa_card']
+        if 'service_card_list' in response:
+            self.service_card_list = response['service_card_list']

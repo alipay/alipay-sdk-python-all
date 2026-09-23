@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.ExtUserInfo import ExtUserInfo
+from alipay.aop.api.domain.ExtendParams import ExtendParams
 from alipay.aop.api.domain.OrderDetail import OrderDetail
 
 
@@ -11,6 +12,7 @@ class AlipayTradeMergePrecreateModel(object):
 
     def __init__(self):
         self._ext_user_info = None
+        self._extend_params = None
         self._order_details = None
         self._out_merge_no = None
         self._time_expire = None
@@ -26,6 +28,16 @@ class AlipayTradeMergePrecreateModel(object):
             self._ext_user_info = value
         else:
             self._ext_user_info = ExtUserInfo.from_alipay_dict(value)
+    @property
+    def extend_params(self):
+        return self._extend_params
+
+    @extend_params.setter
+    def extend_params(self, value):
+        if isinstance(value, ExtendParams):
+            self._extend_params = value
+        else:
+            self._extend_params = ExtendParams.from_alipay_dict(value)
     @property
     def order_details(self):
         return self._order_details
@@ -69,6 +81,11 @@ class AlipayTradeMergePrecreateModel(object):
                 params['ext_user_info'] = self.ext_user_info.to_alipay_dict()
             else:
                 params['ext_user_info'] = self.ext_user_info
+        if self.extend_params:
+            if hasattr(self.extend_params, 'to_alipay_dict'):
+                params['extend_params'] = self.extend_params.to_alipay_dict()
+            else:
+                params['extend_params'] = self.extend_params
         if self.order_details:
             if isinstance(self.order_details, list):
                 for i in range(0, len(self.order_details)):
@@ -103,6 +120,8 @@ class AlipayTradeMergePrecreateModel(object):
         o = AlipayTradeMergePrecreateModel()
         if 'ext_user_info' in d:
             o.ext_user_info = d['ext_user_info']
+        if 'extend_params' in d:
+            o.extend_params = d['extend_params']
         if 'order_details' in d:
             o.order_details = d['order_details']
         if 'out_merge_no' in d:

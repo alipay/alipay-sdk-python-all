@@ -12,6 +12,9 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
         self._biz_tid = None
         self._msg_id = None
         self._out_order_no = None
+        self._promo_coupon_money = None
+        self._promo_coupon_num = None
+        self._promo_msg_id = None
         self._smid = None
         self._trade_id = None
         self._trade_type = None
@@ -44,6 +47,27 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
     @out_order_no.setter
     def out_order_no(self, value):
         self._out_order_no = value
+    @property
+    def promo_coupon_money(self):
+        return self._promo_coupon_money
+
+    @promo_coupon_money.setter
+    def promo_coupon_money(self, value):
+        self._promo_coupon_money = value
+    @property
+    def promo_coupon_num(self):
+        return self._promo_coupon_num
+
+    @promo_coupon_num.setter
+    def promo_coupon_num(self, value):
+        self._promo_coupon_num = value
+    @property
+    def promo_msg_id(self):
+        return self._promo_msg_id
+
+    @promo_msg_id.setter
+    def promo_msg_id(self, value):
+        self._promo_msg_id = value
     @property
     def smid(self):
         return self._smid
@@ -89,6 +113,21 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
                 params['out_order_no'] = self.out_order_no.to_alipay_dict()
             else:
                 params['out_order_no'] = self.out_order_no
+        if self.promo_coupon_money:
+            if hasattr(self.promo_coupon_money, 'to_alipay_dict'):
+                params['promo_coupon_money'] = self.promo_coupon_money.to_alipay_dict()
+            else:
+                params['promo_coupon_money'] = self.promo_coupon_money
+        if self.promo_coupon_num:
+            if hasattr(self.promo_coupon_num, 'to_alipay_dict'):
+                params['promo_coupon_num'] = self.promo_coupon_num.to_alipay_dict()
+            else:
+                params['promo_coupon_num'] = self.promo_coupon_num
+        if self.promo_msg_id:
+            if hasattr(self.promo_msg_id, 'to_alipay_dict'):
+                params['promo_msg_id'] = self.promo_msg_id.to_alipay_dict()
+            else:
+                params['promo_msg_id'] = self.promo_msg_id
         if self.smid:
             if hasattr(self.smid, 'to_alipay_dict'):
                 params['smid'] = self.smid.to_alipay_dict()
@@ -119,6 +158,12 @@ class AlipayCommerceIotDeviceTradevoiceSendModel(object):
             o.msg_id = d['msg_id']
         if 'out_order_no' in d:
             o.out_order_no = d['out_order_no']
+        if 'promo_coupon_money' in d:
+            o.promo_coupon_money = d['promo_coupon_money']
+        if 'promo_coupon_num' in d:
+            o.promo_coupon_num = d['promo_coupon_num']
+        if 'promo_msg_id' in d:
+            o.promo_msg_id = d['promo_msg_id']
         if 'smid' in d:
             o.smid = d['smid']
         if 'trade_id' in d:
