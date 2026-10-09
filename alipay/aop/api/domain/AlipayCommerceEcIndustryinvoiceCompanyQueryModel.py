@@ -9,6 +9,7 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryModel(object):
 
     def __init__(self):
         self._tax_no = None
+        self._update_tax_info = None
 
     @property
     def tax_no(self):
@@ -17,6 +18,13 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryModel(object):
     @tax_no.setter
     def tax_no(self, value):
         self._tax_no = value
+    @property
+    def update_tax_info(self):
+        return self._update_tax_info
+
+    @update_tax_info.setter
+    def update_tax_info(self, value):
+        self._update_tax_info = value
 
 
     def to_alipay_dict(self):
@@ -26,6 +34,11 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryModel(object):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
             else:
                 params['tax_no'] = self.tax_no
+        if self.update_tax_info:
+            if hasattr(self.update_tax_info, 'to_alipay_dict'):
+                params['update_tax_info'] = self.update_tax_info.to_alipay_dict()
+            else:
+                params['update_tax_info'] = self.update_tax_info
         return params
 
     @staticmethod
@@ -35,6 +48,8 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryModel(object):
         o = AlipayCommerceEcIndustryinvoiceCompanyQueryModel()
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
+        if 'update_tax_info' in d:
+            o.update_tax_info = d['update_tax_info']
         return o
 
 

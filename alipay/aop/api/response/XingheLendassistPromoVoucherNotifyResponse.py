@@ -9,11 +9,19 @@ class XingheLendassistPromoVoucherNotifyResponse(AlipayResponse):
 
     def __init__(self):
         super(XingheLendassistPromoVoucherNotifyResponse, self).__init__()
+        self._biz_success = None
         self._inst_voucher_id = None
         self._request_id = None
         self._retry = None
         self._voucher_id = None
 
+    @property
+    def biz_success(self):
+        return self._biz_success
+
+    @biz_success.setter
+    def biz_success(self, value):
+        self._biz_success = value
     @property
     def inst_voucher_id(self):
         return self._inst_voucher_id
@@ -45,6 +53,8 @@ class XingheLendassistPromoVoucherNotifyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(XingheLendassistPromoVoucherNotifyResponse, self).parse_response_content(response_content)
+        if 'biz_success' in response:
+            self.biz_success = response['biz_success']
         if 'inst_voucher_id' in response:
             self.inst_voucher_id = response['inst_voucher_id']
         if 'request_id' in response:

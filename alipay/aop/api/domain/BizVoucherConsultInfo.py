@@ -12,6 +12,7 @@ class BizVoucherConsultInfo(object):
         self._biz_logo = None
         self._expire_time = None
         self._optimal = None
+        self._order_page_promo_text = None
         self._promo_text = None
         self._promo_type = None
         self._use_threshold_text = None
@@ -48,6 +49,13 @@ class BizVoucherConsultInfo(object):
     @optimal.setter
     def optimal(self, value):
         self._optimal = value
+    @property
+    def order_page_promo_text(self):
+        return self._order_page_promo_text
+
+    @order_page_promo_text.setter
+    def order_page_promo_text(self, value):
+        self._order_page_promo_text = value
     @property
     def promo_text(self):
         return self._promo_text
@@ -121,6 +129,11 @@ class BizVoucherConsultInfo(object):
                 params['optimal'] = self.optimal.to_alipay_dict()
             else:
                 params['optimal'] = self.optimal
+        if self.order_page_promo_text:
+            if hasattr(self.order_page_promo_text, 'to_alipay_dict'):
+                params['order_page_promo_text'] = self.order_page_promo_text.to_alipay_dict()
+            else:
+                params['order_page_promo_text'] = self.order_page_promo_text
         if self.promo_text:
             if hasattr(self.promo_text, 'to_alipay_dict'):
                 params['promo_text'] = self.promo_text.to_alipay_dict()
@@ -171,6 +184,8 @@ class BizVoucherConsultInfo(object):
             o.expire_time = d['expire_time']
         if 'optimal' in d:
             o.optimal = d['optimal']
+        if 'order_page_promo_text' in d:
+            o.order_page_promo_text = d['order_page_promo_text']
         if 'promo_text' in d:
             o.promo_text = d['promo_text']
         if 'promo_type' in d:

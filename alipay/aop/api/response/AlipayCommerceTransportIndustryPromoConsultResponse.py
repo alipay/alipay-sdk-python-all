@@ -10,8 +10,16 @@ class AlipayCommerceTransportIndustryPromoConsultResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceTransportIndustryPromoConsultResponse, self).__init__()
+        self._cashier_order_info_text = None
         self._voucher_consult_list = None
 
+    @property
+    def cashier_order_info_text(self):
+        return self._cashier_order_info_text
+
+    @cashier_order_info_text.setter
+    def cashier_order_info_text(self, value):
+        self._cashier_order_info_text = value
     @property
     def voucher_consult_list(self):
         return self._voucher_consult_list
@@ -28,5 +36,7 @@ class AlipayCommerceTransportIndustryPromoConsultResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceTransportIndustryPromoConsultResponse, self).parse_response_content(response_content)
+        if 'cashier_order_info_text' in response:
+            self.cashier_order_info_text = response['cashier_order_info_text']
         if 'voucher_consult_list' in response:
             self.voucher_consult_list = response['voucher_consult_list']

@@ -9,6 +9,7 @@ class AlipayCommerceMedicalHyInquiryorderSyncModel(object):
 
     def __init__(self):
         self._doctor_audio_summary = None
+        self._doctor_text_summary = None
         self._gmt_adoption = None
         self._gmt_finished = None
         self._order_id = None
@@ -28,6 +29,13 @@ class AlipayCommerceMedicalHyInquiryorderSyncModel(object):
     @doctor_audio_summary.setter
     def doctor_audio_summary(self, value):
         self._doctor_audio_summary = value
+    @property
+    def doctor_text_summary(self):
+        return self._doctor_text_summary
+
+    @doctor_text_summary.setter
+    def doctor_text_summary(self, value):
+        self._doctor_text_summary = value
     @property
     def gmt_adoption(self):
         return self._gmt_adoption
@@ -114,6 +122,11 @@ class AlipayCommerceMedicalHyInquiryorderSyncModel(object):
                 params['doctor_audio_summary'] = self.doctor_audio_summary.to_alipay_dict()
             else:
                 params['doctor_audio_summary'] = self.doctor_audio_summary
+        if self.doctor_text_summary:
+            if hasattr(self.doctor_text_summary, 'to_alipay_dict'):
+                params['doctor_text_summary'] = self.doctor_text_summary.to_alipay_dict()
+            else:
+                params['doctor_text_summary'] = self.doctor_text_summary
         if self.gmt_adoption:
             if hasattr(self.gmt_adoption, 'to_alipay_dict'):
                 params['gmt_adoption'] = self.gmt_adoption.to_alipay_dict()
@@ -178,6 +191,8 @@ class AlipayCommerceMedicalHyInquiryorderSyncModel(object):
         o = AlipayCommerceMedicalHyInquiryorderSyncModel()
         if 'doctor_audio_summary' in d:
             o.doctor_audio_summary = d['doctor_audio_summary']
+        if 'doctor_text_summary' in d:
+            o.doctor_text_summary = d['doctor_text_summary']
         if 'gmt_adoption' in d:
             o.gmt_adoption = d['gmt_adoption']
         if 'gmt_finished' in d:

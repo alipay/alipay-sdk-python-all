@@ -9,6 +9,7 @@ class AlipayCommerceMedicalStoreVirtualstoreCreateModel(object):
 
     def __init__(self):
         self._channel = None
+        self._hdf_primary_hospital_id = None
         self._hdf_space_code = None
         self._hdf_space_leader_code = None
         self._hdf_space_user_name = None
@@ -27,6 +28,13 @@ class AlipayCommerceMedicalStoreVirtualstoreCreateModel(object):
     @channel.setter
     def channel(self, value):
         self._channel = value
+    @property
+    def hdf_primary_hospital_id(self):
+        return self._hdf_primary_hospital_id
+
+    @hdf_primary_hospital_id.setter
+    def hdf_primary_hospital_id(self, value):
+        self._hdf_primary_hospital_id = value
     @property
     def hdf_space_code(self):
         return self._hdf_space_code
@@ -106,6 +114,11 @@ class AlipayCommerceMedicalStoreVirtualstoreCreateModel(object):
                 params['channel'] = self.channel.to_alipay_dict()
             else:
                 params['channel'] = self.channel
+        if self.hdf_primary_hospital_id:
+            if hasattr(self.hdf_primary_hospital_id, 'to_alipay_dict'):
+                params['hdf_primary_hospital_id'] = self.hdf_primary_hospital_id.to_alipay_dict()
+            else:
+                params['hdf_primary_hospital_id'] = self.hdf_primary_hospital_id
         if self.hdf_space_code:
             if hasattr(self.hdf_space_code, 'to_alipay_dict'):
                 params['hdf_space_code'] = self.hdf_space_code.to_alipay_dict()
@@ -165,6 +178,8 @@ class AlipayCommerceMedicalStoreVirtualstoreCreateModel(object):
         o = AlipayCommerceMedicalStoreVirtualstoreCreateModel()
         if 'channel' in d:
             o.channel = d['channel']
+        if 'hdf_primary_hospital_id' in d:
+            o.hdf_primary_hospital_id = d['hdf_primary_hospital_id']
         if 'hdf_space_code' in d:
             o.hdf_space_code = d['hdf_space_code']
         if 'hdf_space_leader_code' in d:

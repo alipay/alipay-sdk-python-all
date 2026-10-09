@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsOpenAttachmentDTO import InsOpenAttachmentDTO
+from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 
 
 class AlipayInsSceneClaimApplyModifyModel(object):
@@ -17,6 +18,7 @@ class AlipayInsSceneClaimApplyModifyModel(object):
         self._apply_amout = None
         self._attachment_submit_type = None
         self._attachments = None
+        self._claim_payee = None
         self._claim_report_biz_info = None
         self._claim_report_no = None
         self._out_biz_no = None
@@ -84,6 +86,16 @@ class AlipayInsSceneClaimApplyModifyModel(object):
                     self._attachments.append(i)
                 else:
                     self._attachments.append(InsOpenAttachmentDTO.from_alipay_dict(i))
+    @property
+    def claim_payee(self):
+        return self._claim_payee
+
+    @claim_payee.setter
+    def claim_payee(self, value):
+        if isinstance(value, InsOpenUserDTO):
+            self._claim_payee = value
+        else:
+            self._claim_payee = InsOpenUserDTO.from_alipay_dict(value)
     @property
     def claim_report_biz_info(self):
         return self._claim_report_biz_info
@@ -161,6 +173,11 @@ class AlipayInsSceneClaimApplyModifyModel(object):
                 params['attachments'] = self.attachments.to_alipay_dict()
             else:
                 params['attachments'] = self.attachments
+        if self.claim_payee:
+            if hasattr(self.claim_payee, 'to_alipay_dict'):
+                params['claim_payee'] = self.claim_payee.to_alipay_dict()
+            else:
+                params['claim_payee'] = self.claim_payee
         if self.claim_report_biz_info:
             if hasattr(self.claim_report_biz_info, 'to_alipay_dict'):
                 params['claim_report_biz_info'] = self.claim_report_biz_info.to_alipay_dict()
@@ -204,6 +221,8 @@ class AlipayInsSceneClaimApplyModifyModel(object):
             o.attachment_submit_type = d['attachment_submit_type']
         if 'attachments' in d:
             o.attachments = d['attachments']
+        if 'claim_payee' in d:
+            o.claim_payee = d['claim_payee']
         if 'claim_report_biz_info' in d:
             o.claim_report_biz_info = d['claim_report_biz_info']
         if 'claim_report_no' in d:

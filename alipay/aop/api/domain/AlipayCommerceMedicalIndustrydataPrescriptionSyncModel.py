@@ -16,20 +16,26 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
         self._clinic_desc = None
         self._doctor_name = None
         self._drug_list = None
+        self._expire_time = None
         self._group_no = None
         self._medical_institution_name = None
+        self._medical_instructions = None
         self._merchant_doctor_id = None
         self._merchant_user_id = None
         self._out_audit_pharmacist_id = None
         self._out_order_id = None
+        self._out_prescription_buy_url = None
         self._out_prescription_id = None
         self._out_prescription_url = None
         self._patient_age = None
+        self._patient_birthday = None
         self._patient_idcard = None
         self._patient_name = None
         self._patient_phone = None
         self._patient_sex = None
         self._platform_code = None
+        self._prescription_image_url = None
+        self._prescription_pdf_url = None
         self._prescription_status = None
         self._prescription_time = None
         self._prescription_type = None
@@ -91,6 +97,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 else:
                     self._drug_list.append(PlatformPrescriptionDrugInfo.from_alipay_dict(i))
     @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
+    @property
     def group_no(self):
         return self._group_no
 
@@ -104,6 +117,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
     @medical_institution_name.setter
     def medical_institution_name(self, value):
         self._medical_institution_name = value
+    @property
+    def medical_instructions(self):
+        return self._medical_instructions
+
+    @medical_instructions.setter
+    def medical_instructions(self, value):
+        self._medical_instructions = value
     @property
     def merchant_doctor_id(self):
         return self._merchant_doctor_id
@@ -133,6 +153,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
     def out_order_id(self, value):
         self._out_order_id = value
     @property
+    def out_prescription_buy_url(self):
+        return self._out_prescription_buy_url
+
+    @out_prescription_buy_url.setter
+    def out_prescription_buy_url(self, value):
+        self._out_prescription_buy_url = value
+    @property
     def out_prescription_id(self):
         return self._out_prescription_id
 
@@ -153,6 +180,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
     @patient_age.setter
     def patient_age(self, value):
         self._patient_age = value
+    @property
+    def patient_birthday(self):
+        return self._patient_birthday
+
+    @patient_birthday.setter
+    def patient_birthday(self, value):
+        self._patient_birthday = value
     @property
     def patient_idcard(self):
         return self._patient_idcard
@@ -188,6 +222,20 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
     @platform_code.setter
     def platform_code(self, value):
         self._platform_code = value
+    @property
+    def prescription_image_url(self):
+        return self._prescription_image_url
+
+    @prescription_image_url.setter
+    def prescription_image_url(self, value):
+        self._prescription_image_url = value
+    @property
+    def prescription_pdf_url(self):
+        return self._prescription_pdf_url
+
+    @prescription_pdf_url.setter
+    def prescription_pdf_url(self, value):
+        self._prescription_pdf_url = value
     @property
     def prescription_status(self):
         return self._prescription_status
@@ -260,6 +308,11 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['drug_list'] = self.drug_list.to_alipay_dict()
             else:
                 params['drug_list'] = self.drug_list
+        if self.expire_time:
+            if hasattr(self.expire_time, 'to_alipay_dict'):
+                params['expire_time'] = self.expire_time.to_alipay_dict()
+            else:
+                params['expire_time'] = self.expire_time
         if self.group_no:
             if hasattr(self.group_no, 'to_alipay_dict'):
                 params['group_no'] = self.group_no.to_alipay_dict()
@@ -270,6 +323,11 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['medical_institution_name'] = self.medical_institution_name.to_alipay_dict()
             else:
                 params['medical_institution_name'] = self.medical_institution_name
+        if self.medical_instructions:
+            if hasattr(self.medical_instructions, 'to_alipay_dict'):
+                params['medical_instructions'] = self.medical_instructions.to_alipay_dict()
+            else:
+                params['medical_instructions'] = self.medical_instructions
         if self.merchant_doctor_id:
             if hasattr(self.merchant_doctor_id, 'to_alipay_dict'):
                 params['merchant_doctor_id'] = self.merchant_doctor_id.to_alipay_dict()
@@ -290,6 +348,11 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.out_prescription_buy_url:
+            if hasattr(self.out_prescription_buy_url, 'to_alipay_dict'):
+                params['out_prescription_buy_url'] = self.out_prescription_buy_url.to_alipay_dict()
+            else:
+                params['out_prescription_buy_url'] = self.out_prescription_buy_url
         if self.out_prescription_id:
             if hasattr(self.out_prescription_id, 'to_alipay_dict'):
                 params['out_prescription_id'] = self.out_prescription_id.to_alipay_dict()
@@ -305,6 +368,11 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['patient_age'] = self.patient_age.to_alipay_dict()
             else:
                 params['patient_age'] = self.patient_age
+        if self.patient_birthday:
+            if hasattr(self.patient_birthday, 'to_alipay_dict'):
+                params['patient_birthday'] = self.patient_birthday.to_alipay_dict()
+            else:
+                params['patient_birthday'] = self.patient_birthday
         if self.patient_idcard:
             if hasattr(self.patient_idcard, 'to_alipay_dict'):
                 params['patient_idcard'] = self.patient_idcard.to_alipay_dict()
@@ -330,6 +398,16 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
             else:
                 params['platform_code'] = self.platform_code
+        if self.prescription_image_url:
+            if hasattr(self.prescription_image_url, 'to_alipay_dict'):
+                params['prescription_image_url'] = self.prescription_image_url.to_alipay_dict()
+            else:
+                params['prescription_image_url'] = self.prescription_image_url
+        if self.prescription_pdf_url:
+            if hasattr(self.prescription_pdf_url, 'to_alipay_dict'):
+                params['prescription_pdf_url'] = self.prescription_pdf_url.to_alipay_dict()
+            else:
+                params['prescription_pdf_url'] = self.prescription_pdf_url
         if self.prescription_status:
             if hasattr(self.prescription_status, 'to_alipay_dict'):
                 params['prescription_status'] = self.prescription_status.to_alipay_dict()
@@ -371,10 +449,14 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
             o.doctor_name = d['doctor_name']
         if 'drug_list' in d:
             o.drug_list = d['drug_list']
+        if 'expire_time' in d:
+            o.expire_time = d['expire_time']
         if 'group_no' in d:
             o.group_no = d['group_no']
         if 'medical_institution_name' in d:
             o.medical_institution_name = d['medical_institution_name']
+        if 'medical_instructions' in d:
+            o.medical_instructions = d['medical_instructions']
         if 'merchant_doctor_id' in d:
             o.merchant_doctor_id = d['merchant_doctor_id']
         if 'merchant_user_id' in d:
@@ -383,12 +465,16 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
             o.out_audit_pharmacist_id = d['out_audit_pharmacist_id']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'out_prescription_buy_url' in d:
+            o.out_prescription_buy_url = d['out_prescription_buy_url']
         if 'out_prescription_id' in d:
             o.out_prescription_id = d['out_prescription_id']
         if 'out_prescription_url' in d:
             o.out_prescription_url = d['out_prescription_url']
         if 'patient_age' in d:
             o.patient_age = d['patient_age']
+        if 'patient_birthday' in d:
+            o.patient_birthday = d['patient_birthday']
         if 'patient_idcard' in d:
             o.patient_idcard = d['patient_idcard']
         if 'patient_name' in d:
@@ -399,6 +485,10 @@ class AlipayCommerceMedicalIndustrydataPrescriptionSyncModel(object):
             o.patient_sex = d['patient_sex']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
+        if 'prescription_image_url' in d:
+            o.prescription_image_url = d['prescription_image_url']
+        if 'prescription_pdf_url' in d:
+            o.prescription_pdf_url = d['prescription_pdf_url']
         if 'prescription_status' in d:
             o.prescription_status = d['prescription_status']
         if 'prescription_time' in d:

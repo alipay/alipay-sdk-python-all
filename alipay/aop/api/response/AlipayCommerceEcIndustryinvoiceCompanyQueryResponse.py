@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.CompanyProductInfo import CompanyProductInfo
+from alipay.aop.api.domain.IndustryNatureInfo import IndustryNatureInfo
 from alipay.aop.api.domain.CompanyInvoiceClerk import CompanyInvoiceClerk
 
 
@@ -13,6 +14,7 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryResponse(AlipayResponse):
         super(AlipayCommerceEcIndustryinvoiceCompanyQueryResponse, self).__init__()
         self._company_name = None
         self._company_product_info_list = None
+        self._industry_nature_list = None
         self._invoice_clerk = None
         self._tax_no = None
 
@@ -37,6 +39,19 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryResponse(AlipayResponse):
                 else:
                     self._company_product_info_list.append(CompanyProductInfo.from_alipay_dict(i))
     @property
+    def industry_nature_list(self):
+        return self._industry_nature_list
+
+    @industry_nature_list.setter
+    def industry_nature_list(self, value):
+        if isinstance(value, list):
+            self._industry_nature_list = list()
+            for i in value:
+                if isinstance(i, IndustryNatureInfo):
+                    self._industry_nature_list.append(i)
+                else:
+                    self._industry_nature_list.append(IndustryNatureInfo.from_alipay_dict(i))
+    @property
     def invoice_clerk(self):
         return self._invoice_clerk
 
@@ -60,6 +75,8 @@ class AlipayCommerceEcIndustryinvoiceCompanyQueryResponse(AlipayResponse):
             self.company_name = response['company_name']
         if 'company_product_info_list' in response:
             self.company_product_info_list = response['company_product_info_list']
+        if 'industry_nature_list' in response:
+            self.industry_nature_list = response['industry_nature_list']
         if 'invoice_clerk' in response:
             self.invoice_clerk = response['invoice_clerk']
         if 'tax_no' in response:

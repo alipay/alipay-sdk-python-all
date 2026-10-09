@@ -16,6 +16,7 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
         self._enterprise_id = None
         self._mobile = None
         self._open_id = None
+        self._query_pay_auth = None
         self._user_id = None
 
     @property
@@ -75,6 +76,13 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def query_pay_auth(self):
+        return self._query_pay_auth
+
+    @query_pay_auth.setter
+    def query_pay_auth(self, value):
+        self._query_pay_auth = value
+    @property
     def user_id(self):
         return self._user_id
 
@@ -125,6 +133,11 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.query_pay_auth:
+            if hasattr(self.query_pay_auth, 'to_alipay_dict'):
+                params['query_pay_auth'] = self.query_pay_auth.to_alipay_dict()
+            else:
+                params['query_pay_auth'] = self.query_pay_auth
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
@@ -153,6 +166,8 @@ class AlipayCommerceEcEmployeeInfoQueryModel(object):
             o.mobile = d['mobile']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'query_pay_auth' in d:
+            o.query_pay_auth = d['query_pay_auth']
         if 'user_id' in d:
             o.user_id = d['user_id']
         return o

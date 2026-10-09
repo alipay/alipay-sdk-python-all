@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.BenefitAccountFundBudgetInfoDTO import BenefitAccountFundBudgetInfoDTO
 from alipay.aop.api.domain.BenefitAccountRecycleInfoDTO import BenefitAccountRecycleInfoDTO
 from alipay.aop.api.domain.BenefitAccountRepayBankInfoDTO import BenefitAccountRepayBankInfoDTO
 
@@ -12,6 +13,7 @@ class BenefitAccountFsFundInfoDTO(object):
     def __init__(self):
         self._amount = None
         self._current_amount = None
+        self._fund_budget_info = None
         self._fund_principal = None
         self._fund_provider = None
         self._fund_type = None
@@ -33,6 +35,16 @@ class BenefitAccountFsFundInfoDTO(object):
     @current_amount.setter
     def current_amount(self, value):
         self._current_amount = value
+    @property
+    def fund_budget_info(self):
+        return self._fund_budget_info
+
+    @fund_budget_info.setter
+    def fund_budget_info(self, value):
+        if isinstance(value, BenefitAccountFundBudgetInfoDTO):
+            self._fund_budget_info = value
+        else:
+            self._fund_budget_info = BenefitAccountFundBudgetInfoDTO.from_alipay_dict(value)
     @property
     def fund_principal(self):
         return self._fund_principal
@@ -95,6 +107,11 @@ class BenefitAccountFsFundInfoDTO(object):
                 params['current_amount'] = self.current_amount.to_alipay_dict()
             else:
                 params['current_amount'] = self.current_amount
+        if self.fund_budget_info:
+            if hasattr(self.fund_budget_info, 'to_alipay_dict'):
+                params['fund_budget_info'] = self.fund_budget_info.to_alipay_dict()
+            else:
+                params['fund_budget_info'] = self.fund_budget_info
         if self.fund_principal:
             if hasattr(self.fund_principal, 'to_alipay_dict'):
                 params['fund_principal'] = self.fund_principal.to_alipay_dict()
@@ -136,6 +153,8 @@ class BenefitAccountFsFundInfoDTO(object):
             o.amount = d['amount']
         if 'current_amount' in d:
             o.current_amount = d['current_amount']
+        if 'fund_budget_info' in d:
+            o.fund_budget_info = d['fund_budget_info']
         if 'fund_principal' in d:
             o.fund_principal = d['fund_principal']
         if 'fund_provider' in d:

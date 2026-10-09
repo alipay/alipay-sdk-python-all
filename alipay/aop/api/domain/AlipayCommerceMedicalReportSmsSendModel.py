@@ -9,6 +9,7 @@ from alipay.aop.api.domain.MessageConfig import MessageConfig
 class AlipayCommerceMedicalReportSmsSendModel(object):
 
     def __init__(self):
+        self._agent_name = None
         self._cert_no = None
         self._cert_type = None
         self._department = None
@@ -25,6 +26,13 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
         self._uscc = None
         self._visit_time = None
 
+    @property
+    def agent_name(self):
+        return self._agent_name
+
+    @agent_name.setter
+    def agent_name(self, value):
+        self._agent_name = value
     @property
     def cert_no(self):
         return self._cert_no
@@ -137,6 +145,11 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_name:
+            if hasattr(self.agent_name, 'to_alipay_dict'):
+                params['agent_name'] = self.agent_name.to_alipay_dict()
+            else:
+                params['agent_name'] = self.agent_name
         if self.cert_no:
             if hasattr(self.cert_no, 'to_alipay_dict'):
                 params['cert_no'] = self.cert_no.to_alipay_dict()
@@ -219,6 +232,8 @@ class AlipayCommerceMedicalReportSmsSendModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalReportSmsSendModel()
+        if 'agent_name' in d:
+            o.agent_name = d['agent_name']
         if 'cert_no' in d:
             o.cert_no = d['cert_no']
         if 'cert_type' in d:

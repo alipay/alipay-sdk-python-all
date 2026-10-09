@@ -12,10 +12,15 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
         self._alipay_open_id = None
         self._alipay_prescription_id = None
         self._alipay_user_id = None
+        self._drug_purchase_status = None
+        self._expire_time = None
         self._ext_info = None
+        self._medical_buy_order_detail_url = None
         self._merchant_user_id = None
         self._out_prescription_id = None
         self._platform_code = None
+        self._prescription_image_url = None
+        self._prescription_pdf_url = None
         self._prescription_status = None
 
     @property
@@ -40,6 +45,20 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
     def alipay_user_id(self, value):
         self._alipay_user_id = value
     @property
+    def drug_purchase_status(self):
+        return self._drug_purchase_status
+
+    @drug_purchase_status.setter
+    def drug_purchase_status(self, value):
+        self._drug_purchase_status = value
+    @property
+    def expire_time(self):
+        return self._expire_time
+
+    @expire_time.setter
+    def expire_time(self, value):
+        self._expire_time = value
+    @property
     def ext_info(self):
         return self._ext_info
 
@@ -49,6 +68,13 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
             self._ext_info = value
         else:
             self._ext_info = PlatformPrescriptionStatusExtInfo.from_alipay_dict(value)
+    @property
+    def medical_buy_order_detail_url(self):
+        return self._medical_buy_order_detail_url
+
+    @medical_buy_order_detail_url.setter
+    def medical_buy_order_detail_url(self, value):
+        self._medical_buy_order_detail_url = value
     @property
     def merchant_user_id(self):
         return self._merchant_user_id
@@ -70,6 +96,20 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
     @platform_code.setter
     def platform_code(self, value):
         self._platform_code = value
+    @property
+    def prescription_image_url(self):
+        return self._prescription_image_url
+
+    @prescription_image_url.setter
+    def prescription_image_url(self, value):
+        self._prescription_image_url = value
+    @property
+    def prescription_pdf_url(self):
+        return self._prescription_pdf_url
+
+    @prescription_pdf_url.setter
+    def prescription_pdf_url(self, value):
+        self._prescription_pdf_url = value
     @property
     def prescription_status(self):
         return self._prescription_status
@@ -96,11 +136,26 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
                 params['alipay_user_id'] = self.alipay_user_id.to_alipay_dict()
             else:
                 params['alipay_user_id'] = self.alipay_user_id
+        if self.drug_purchase_status:
+            if hasattr(self.drug_purchase_status, 'to_alipay_dict'):
+                params['drug_purchase_status'] = self.drug_purchase_status.to_alipay_dict()
+            else:
+                params['drug_purchase_status'] = self.drug_purchase_status
+        if self.expire_time:
+            if hasattr(self.expire_time, 'to_alipay_dict'):
+                params['expire_time'] = self.expire_time.to_alipay_dict()
+            else:
+                params['expire_time'] = self.expire_time
         if self.ext_info:
             if hasattr(self.ext_info, 'to_alipay_dict'):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.medical_buy_order_detail_url:
+            if hasattr(self.medical_buy_order_detail_url, 'to_alipay_dict'):
+                params['medical_buy_order_detail_url'] = self.medical_buy_order_detail_url.to_alipay_dict()
+            else:
+                params['medical_buy_order_detail_url'] = self.medical_buy_order_detail_url
         if self.merchant_user_id:
             if hasattr(self.merchant_user_id, 'to_alipay_dict'):
                 params['merchant_user_id'] = self.merchant_user_id.to_alipay_dict()
@@ -116,6 +171,16 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
                 params['platform_code'] = self.platform_code.to_alipay_dict()
             else:
                 params['platform_code'] = self.platform_code
+        if self.prescription_image_url:
+            if hasattr(self.prescription_image_url, 'to_alipay_dict'):
+                params['prescription_image_url'] = self.prescription_image_url.to_alipay_dict()
+            else:
+                params['prescription_image_url'] = self.prescription_image_url
+        if self.prescription_pdf_url:
+            if hasattr(self.prescription_pdf_url, 'to_alipay_dict'):
+                params['prescription_pdf_url'] = self.prescription_pdf_url.to_alipay_dict()
+            else:
+                params['prescription_pdf_url'] = self.prescription_pdf_url
         if self.prescription_status:
             if hasattr(self.prescription_status, 'to_alipay_dict'):
                 params['prescription_status'] = self.prescription_status.to_alipay_dict()
@@ -134,14 +199,24 @@ class AlipayCommerceMedicalIndustrydataPrescriptionstatusSyncModel(object):
             o.alipay_prescription_id = d['alipay_prescription_id']
         if 'alipay_user_id' in d:
             o.alipay_user_id = d['alipay_user_id']
+        if 'drug_purchase_status' in d:
+            o.drug_purchase_status = d['drug_purchase_status']
+        if 'expire_time' in d:
+            o.expire_time = d['expire_time']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'medical_buy_order_detail_url' in d:
+            o.medical_buy_order_detail_url = d['medical_buy_order_detail_url']
         if 'merchant_user_id' in d:
             o.merchant_user_id = d['merchant_user_id']
         if 'out_prescription_id' in d:
             o.out_prescription_id = d['out_prescription_id']
         if 'platform_code' in d:
             o.platform_code = d['platform_code']
+        if 'prescription_image_url' in d:
+            o.prescription_image_url = d['prescription_image_url']
+        if 'prescription_pdf_url' in d:
+            o.prescription_pdf_url = d['prescription_pdf_url']
         if 'prescription_status' in d:
             o.prescription_status = d['prescription_status']
         return o

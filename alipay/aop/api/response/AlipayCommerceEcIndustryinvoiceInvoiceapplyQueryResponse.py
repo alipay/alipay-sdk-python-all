@@ -3,8 +3,10 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.IndustryInvoiceAdditionalElementInfo import IndustryInvoiceAdditionalElementInfo
 from alipay.aop.api.domain.IndustryInvoiceItemInfoQueryRes import IndustryInvoiceItemInfoQueryRes
 from alipay.aop.api.domain.IndustryInvoiceRealPropertyBusiness import IndustryInvoiceRealPropertyBusiness
+from alipay.aop.api.domain.IndustryInvoiceRefinedOilGasStation import IndustryInvoiceRefinedOilGasStation
 from alipay.aop.api.domain.IndustryInvoiceTradeInfo import IndustryInvoiceTradeInfo
 
 
@@ -12,6 +14,7 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse, self).__init__()
+        self._additional_element_list = None
         self._buyer_address = None
         self._buyer_bank_account = None
         self._buyer_bank_name = None
@@ -33,19 +36,36 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
         self._invoice_status = None
         self._invoice_tax_amount = None
         self._invoice_type = None
+        self._leqi_invoice_mode = None
         self._outer_apply_id = None
         self._pdf_file_url = None
         self._product_id = None
         self._real_property_business_list = None
         self._red_confirmation_no = None
         self._red_confirmation_uuid = None
+        self._refined_oil_gas_station = None
         self._related_blue_invoice_no = None
         self._remark = None
+        self._replace_invoice_no = None
         self._seller_name = None
         self._seller_tax_no = None
         self._tax_no = None
         self._trade_list = None
+        self._trade_source = None
 
+    @property
+    def additional_element_list(self):
+        return self._additional_element_list
+
+    @additional_element_list.setter
+    def additional_element_list(self, value):
+        if isinstance(value, list):
+            self._additional_element_list = list()
+            for i in value:
+                if isinstance(i, IndustryInvoiceAdditionalElementInfo):
+                    self._additional_element_list.append(i)
+                else:
+                    self._additional_element_list.append(IndustryInvoiceAdditionalElementInfo.from_alipay_dict(i))
     @property
     def buyer_address(self):
         return self._buyer_address
@@ -200,6 +220,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     def invoice_type(self, value):
         self._invoice_type = value
     @property
+    def leqi_invoice_mode(self):
+        return self._leqi_invoice_mode
+
+    @leqi_invoice_mode.setter
+    def leqi_invoice_mode(self, value):
+        self._leqi_invoice_mode = value
+    @property
     def outer_apply_id(self):
         return self._outer_apply_id
 
@@ -248,6 +275,16 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     def red_confirmation_uuid(self, value):
         self._red_confirmation_uuid = value
     @property
+    def refined_oil_gas_station(self):
+        return self._refined_oil_gas_station
+
+    @refined_oil_gas_station.setter
+    def refined_oil_gas_station(self, value):
+        if isinstance(value, IndustryInvoiceRefinedOilGasStation):
+            self._refined_oil_gas_station = value
+        else:
+            self._refined_oil_gas_station = IndustryInvoiceRefinedOilGasStation.from_alipay_dict(value)
+    @property
     def related_blue_invoice_no(self):
         return self._related_blue_invoice_no
 
@@ -261,6 +298,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     @remark.setter
     def remark(self, value):
         self._remark = value
+    @property
+    def replace_invoice_no(self):
+        return self._replace_invoice_no
+
+    @replace_invoice_no.setter
+    def replace_invoice_no(self, value):
+        self._replace_invoice_no = value
     @property
     def seller_name(self):
         return self._seller_name
@@ -295,9 +339,18 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
                     self._trade_list.append(i)
                 else:
                     self._trade_list.append(IndustryInvoiceTradeInfo.from_alipay_dict(i))
+    @property
+    def trade_source(self):
+        return self._trade_source
+
+    @trade_source.setter
+    def trade_source(self, value):
+        self._trade_source = value
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse, self).parse_response_content(response_content)
+        if 'additional_element_list' in response:
+            self.additional_element_list = response['additional_element_list']
         if 'buyer_address' in response:
             self.buyer_address = response['buyer_address']
         if 'buyer_bank_account' in response:
@@ -340,6 +393,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.invoice_tax_amount = response['invoice_tax_amount']
         if 'invoice_type' in response:
             self.invoice_type = response['invoice_type']
+        if 'leqi_invoice_mode' in response:
+            self.leqi_invoice_mode = response['leqi_invoice_mode']
         if 'outer_apply_id' in response:
             self.outer_apply_id = response['outer_apply_id']
         if 'pdf_file_url' in response:
@@ -352,10 +407,14 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.red_confirmation_no = response['red_confirmation_no']
         if 'red_confirmation_uuid' in response:
             self.red_confirmation_uuid = response['red_confirmation_uuid']
+        if 'refined_oil_gas_station' in response:
+            self.refined_oil_gas_station = response['refined_oil_gas_station']
         if 'related_blue_invoice_no' in response:
             self.related_blue_invoice_no = response['related_blue_invoice_no']
         if 'remark' in response:
             self.remark = response['remark']
+        if 'replace_invoice_no' in response:
+            self.replace_invoice_no = response['replace_invoice_no']
         if 'seller_name' in response:
             self.seller_name = response['seller_name']
         if 'seller_tax_no' in response:
@@ -364,3 +423,5 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.tax_no = response['tax_no']
         if 'trade_list' in response:
             self.trade_list = response['trade_list']
+        if 'trade_source' in response:
+            self.trade_source = response['trade_source']

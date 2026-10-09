@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.EmployeeAccountingEntityDTO import EmployeeAccountingEntityDTO
 from alipay.aop.api.domain.EmployeeDepartmentDTO import EmployeeDepartmentDTO
+from alipay.aop.api.domain.PayAuthInfoDTO import PayAuthInfoDTO
 
 
 class EmployeeInfoDTO(object):
@@ -31,6 +32,7 @@ class EmployeeInfoDTO(object):
         self._label_names = None
         self._mobile = None
         self._open_id = None
+        self._pay_auth_list = None
         self._profiles = None
         self._role_list = None
         self._tl_employee_id = None
@@ -199,6 +201,19 @@ class EmployeeInfoDTO(object):
     def open_id(self, value):
         self._open_id = value
     @property
+    def pay_auth_list(self):
+        return self._pay_auth_list
+
+    @pay_auth_list.setter
+    def pay_auth_list(self, value):
+        if isinstance(value, list):
+            self._pay_auth_list = list()
+            for i in value:
+                if isinstance(i, PayAuthInfoDTO):
+                    self._pay_auth_list.append(i)
+                else:
+                    self._pay_auth_list.append(PayAuthInfoDTO.from_alipay_dict(i))
+    @property
     def profiles(self):
         return self._profiles
 
@@ -353,6 +368,16 @@ class EmployeeInfoDTO(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.pay_auth_list:
+            if isinstance(self.pay_auth_list, list):
+                for i in range(0, len(self.pay_auth_list)):
+                    element = self.pay_auth_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pay_auth_list[i] = element.to_alipay_dict()
+            if hasattr(self.pay_auth_list, 'to_alipay_dict'):
+                params['pay_auth_list'] = self.pay_auth_list.to_alipay_dict()
+            else:
+                params['pay_auth_list'] = self.pay_auth_list
         if self.profiles:
             if hasattr(self.profiles, 'to_alipay_dict'):
                 params['profiles'] = self.profiles.to_alipay_dict()
@@ -427,6 +452,8 @@ class EmployeeInfoDTO(object):
             o.mobile = d['mobile']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'pay_auth_list' in d:
+            o.pay_auth_list = d['pay_auth_list']
         if 'profiles' in d:
             o.profiles = d['profiles']
         if 'role_list' in d:

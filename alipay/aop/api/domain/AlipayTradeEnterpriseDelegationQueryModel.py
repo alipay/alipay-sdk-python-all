@@ -9,6 +9,7 @@ class AlipayTradeEnterpriseDelegationQueryModel(object):
 
     def __init__(self):
         self._agreement_no = None
+        self._external_order_no = None
         self._prepay_id = None
 
     @property
@@ -18,6 +19,13 @@ class AlipayTradeEnterpriseDelegationQueryModel(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def external_order_no(self):
+        return self._external_order_no
+
+    @external_order_no.setter
+    def external_order_no(self, value):
+        self._external_order_no = value
     @property
     def prepay_id(self):
         return self._prepay_id
@@ -34,6 +42,11 @@ class AlipayTradeEnterpriseDelegationQueryModel(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.external_order_no:
+            if hasattr(self.external_order_no, 'to_alipay_dict'):
+                params['external_order_no'] = self.external_order_no.to_alipay_dict()
+            else:
+                params['external_order_no'] = self.external_order_no
         if self.prepay_id:
             if hasattr(self.prepay_id, 'to_alipay_dict'):
                 params['prepay_id'] = self.prepay_id.to_alipay_dict()
@@ -48,6 +61,8 @@ class AlipayTradeEnterpriseDelegationQueryModel(object):
         o = AlipayTradeEnterpriseDelegationQueryModel()
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'external_order_no' in d:
+            o.external_order_no = d['external_order_no']
         if 'prepay_id' in d:
             o.prepay_id = d['prepay_id']
         return o

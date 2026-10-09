@@ -3,16 +3,19 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.IndustryInvoiceAdditionalElementInfo import IndustryInvoiceAdditionalElementInfo
 from alipay.aop.api.domain.IndustryInvoiceChannelInfo import IndustryInvoiceChannelInfo
 from alipay.aop.api.domain.IndustryInvoiceItemInfo import IndustryInvoiceItemInfo
 from alipay.aop.api.domain.IndustryInvoicePassengerTransport import IndustryInvoicePassengerTransport
 from alipay.aop.api.domain.IndustryInvoiceRealPropertyBusiness import IndustryInvoiceRealPropertyBusiness
+from alipay.aop.api.domain.IndustryInvoiceRefinedOilGasStation import IndustryInvoiceRefinedOilGasStation
 from alipay.aop.api.domain.IndustryInvoiceTradeInfo import IndustryInvoiceTradeInfo
 
 
 class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
 
     def __init__(self):
+        self._additional_element_list = None
         self._buyer_address = None
         self._buyer_alipay_login_id = None
         self._buyer_bank_account = None
@@ -30,6 +33,7 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._invoice_kind = None
         self._invoice_red_reason = None
         self._invoice_type = None
+        self._leqi_invoice_mode = None
         self._nature_person_cert_no = None
         self._nature_person_cert_type = None
         self._nature_person_country = None
@@ -40,8 +44,10 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._product_code = None
         self._product_id = None
         self._real_property_business_list = None
+        self._refined_oil_gas_station = None
         self._related_blue_invoice_no = None
         self._remark = None
+        self._replace_invoice_no = None
         self._seller_address = None
         self._seller_bank_account = None
         self._seller_bank_name = None
@@ -50,7 +56,21 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._show_seller_bank_info = None
         self._tax_no = None
         self._trade_list = None
+        self._trade_source = None
 
+    @property
+    def additional_element_list(self):
+        return self._additional_element_list
+
+    @additional_element_list.setter
+    def additional_element_list(self, value):
+        if isinstance(value, list):
+            self._additional_element_list = list()
+            for i in value:
+                if isinstance(i, IndustryInvoiceAdditionalElementInfo):
+                    self._additional_element_list.append(i)
+                else:
+                    self._additional_element_list.append(IndustryInvoiceAdditionalElementInfo.from_alipay_dict(i))
     @property
     def buyer_address(self):
         return self._buyer_address
@@ -180,6 +200,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     def invoice_type(self, value):
         self._invoice_type = value
     @property
+    def leqi_invoice_mode(self):
+        return self._leqi_invoice_mode
+
+    @leqi_invoice_mode.setter
+    def leqi_invoice_mode(self, value):
+        self._leqi_invoice_mode = value
+    @property
     def nature_person_cert_no(self):
         return self._nature_person_cert_no
 
@@ -262,6 +289,16 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 else:
                     self._real_property_business_list.append(IndustryInvoiceRealPropertyBusiness.from_alipay_dict(i))
     @property
+    def refined_oil_gas_station(self):
+        return self._refined_oil_gas_station
+
+    @refined_oil_gas_station.setter
+    def refined_oil_gas_station(self, value):
+        if isinstance(value, IndustryInvoiceRefinedOilGasStation):
+            self._refined_oil_gas_station = value
+        else:
+            self._refined_oil_gas_station = IndustryInvoiceRefinedOilGasStation.from_alipay_dict(value)
+    @property
     def related_blue_invoice_no(self):
         return self._related_blue_invoice_no
 
@@ -275,6 +312,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
     @remark.setter
     def remark(self, value):
         self._remark = value
+    @property
+    def replace_invoice_no(self):
+        return self._replace_invoice_no
+
+    @replace_invoice_no.setter
+    def replace_invoice_no(self, value):
+        self._replace_invoice_no = value
     @property
     def seller_address(self):
         return self._seller_address
@@ -337,10 +381,27 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                     self._trade_list.append(i)
                 else:
                     self._trade_list.append(IndustryInvoiceTradeInfo.from_alipay_dict(i))
+    @property
+    def trade_source(self):
+        return self._trade_source
+
+    @trade_source.setter
+    def trade_source(self, value):
+        self._trade_source = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.additional_element_list:
+            if isinstance(self.additional_element_list, list):
+                for i in range(0, len(self.additional_element_list)):
+                    element = self.additional_element_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.additional_element_list[i] = element.to_alipay_dict()
+            if hasattr(self.additional_element_list, 'to_alipay_dict'):
+                params['additional_element_list'] = self.additional_element_list.to_alipay_dict()
+            else:
+                params['additional_element_list'] = self.additional_element_list
         if self.buyer_address:
             if hasattr(self.buyer_address, 'to_alipay_dict'):
                 params['buyer_address'] = self.buyer_address.to_alipay_dict()
@@ -431,6 +492,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['invoice_type'] = self.invoice_type.to_alipay_dict()
             else:
                 params['invoice_type'] = self.invoice_type
+        if self.leqi_invoice_mode:
+            if hasattr(self.leqi_invoice_mode, 'to_alipay_dict'):
+                params['leqi_invoice_mode'] = self.leqi_invoice_mode.to_alipay_dict()
+            else:
+                params['leqi_invoice_mode'] = self.leqi_invoice_mode
         if self.nature_person_cert_no:
             if hasattr(self.nature_person_cert_no, 'to_alipay_dict'):
                 params['nature_person_cert_no'] = self.nature_person_cert_no.to_alipay_dict()
@@ -491,6 +557,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['real_property_business_list'] = self.real_property_business_list.to_alipay_dict()
             else:
                 params['real_property_business_list'] = self.real_property_business_list
+        if self.refined_oil_gas_station:
+            if hasattr(self.refined_oil_gas_station, 'to_alipay_dict'):
+                params['refined_oil_gas_station'] = self.refined_oil_gas_station.to_alipay_dict()
+            else:
+                params['refined_oil_gas_station'] = self.refined_oil_gas_station
         if self.related_blue_invoice_no:
             if hasattr(self.related_blue_invoice_no, 'to_alipay_dict'):
                 params['related_blue_invoice_no'] = self.related_blue_invoice_no.to_alipay_dict()
@@ -501,6 +572,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['remark'] = self.remark.to_alipay_dict()
             else:
                 params['remark'] = self.remark
+        if self.replace_invoice_no:
+            if hasattr(self.replace_invoice_no, 'to_alipay_dict'):
+                params['replace_invoice_no'] = self.replace_invoice_no.to_alipay_dict()
+            else:
+                params['replace_invoice_no'] = self.replace_invoice_no
         if self.seller_address:
             if hasattr(self.seller_address, 'to_alipay_dict'):
                 params['seller_address'] = self.seller_address.to_alipay_dict()
@@ -546,6 +622,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['trade_list'] = self.trade_list.to_alipay_dict()
             else:
                 params['trade_list'] = self.trade_list
+        if self.trade_source:
+            if hasattr(self.trade_source, 'to_alipay_dict'):
+                params['trade_source'] = self.trade_source.to_alipay_dict()
+            else:
+                params['trade_source'] = self.trade_source
         return params
 
     @staticmethod
@@ -553,6 +634,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel()
+        if 'additional_element_list' in d:
+            o.additional_element_list = d['additional_element_list']
         if 'buyer_address' in d:
             o.buyer_address = d['buyer_address']
         if 'buyer_alipay_login_id' in d:
@@ -587,6 +670,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.invoice_red_reason = d['invoice_red_reason']
         if 'invoice_type' in d:
             o.invoice_type = d['invoice_type']
+        if 'leqi_invoice_mode' in d:
+            o.leqi_invoice_mode = d['leqi_invoice_mode']
         if 'nature_person_cert_no' in d:
             o.nature_person_cert_no = d['nature_person_cert_no']
         if 'nature_person_cert_type' in d:
@@ -607,10 +692,14 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.product_id = d['product_id']
         if 'real_property_business_list' in d:
             o.real_property_business_list = d['real_property_business_list']
+        if 'refined_oil_gas_station' in d:
+            o.refined_oil_gas_station = d['refined_oil_gas_station']
         if 'related_blue_invoice_no' in d:
             o.related_blue_invoice_no = d['related_blue_invoice_no']
         if 'remark' in d:
             o.remark = d['remark']
+        if 'replace_invoice_no' in d:
+            o.replace_invoice_no = d['replace_invoice_no']
         if 'seller_address' in d:
             o.seller_address = d['seller_address']
         if 'seller_bank_account' in d:
@@ -627,6 +716,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.tax_no = d['tax_no']
         if 'trade_list' in d:
             o.trade_list = d['trade_list']
+        if 'trade_source' in d:
+            o.trade_source = d['trade_source']
         return o
 
 
