@@ -10,6 +10,7 @@ from alipay.aop.api.domain.LsItemCustomAttr import LsItemCustomAttr
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
+from alipay.aop.api.domain.ItemSku import ItemSku
 from alipay.aop.api.domain.TimesCardInfo import TimesCardInfo
 from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 
@@ -39,6 +40,7 @@ class MerchantCardTemplate(object):
         self._item_attrs = None
         self._item_category_code = None
         self._item_custom_attrs = None
+        self._item_version = None
         self._money_card_info = None
         self._msg_app_id = None
         self._need_order_agreement = None
@@ -48,6 +50,7 @@ class MerchantCardTemplate(object):
         self._reject_reasons = None
         self._sale_info = None
         self._settle_type = None
+        self._sku_list = None
         self._support_withdraw = None
         self._times_card_info = None
         self._use_info = None
@@ -243,6 +246,13 @@ class MerchantCardTemplate(object):
                 else:
                     self._item_custom_attrs.append(LsItemCustomAttr.from_alipay_dict(i))
     @property
+    def item_version(self):
+        return self._item_version
+
+    @item_version.setter
+    def item_version(self, value):
+        self._item_version = value
+    @property
     def money_card_info(self):
         return self._money_card_info
 
@@ -317,6 +327,19 @@ class MerchantCardTemplate(object):
     @settle_type.setter
     def settle_type(self, value):
         self._settle_type = value
+    @property
+    def sku_list(self):
+        return self._sku_list
+
+    @sku_list.setter
+    def sku_list(self, value):
+        if isinstance(value, list):
+            self._sku_list = list()
+            for i in value:
+                if isinstance(i, ItemSku):
+                    self._sku_list.append(i)
+                else:
+                    self._sku_list.append(ItemSku.from_alipay_dict(i))
     @property
     def support_withdraw(self):
         return self._support_withdraw
@@ -498,6 +521,11 @@ class MerchantCardTemplate(object):
                 params['item_custom_attrs'] = self.item_custom_attrs.to_alipay_dict()
             else:
                 params['item_custom_attrs'] = self.item_custom_attrs
+        if self.item_version:
+            if hasattr(self.item_version, 'to_alipay_dict'):
+                params['item_version'] = self.item_version.to_alipay_dict()
+            else:
+                params['item_version'] = self.item_version
         if self.money_card_info:
             if hasattr(self.money_card_info, 'to_alipay_dict'):
                 params['money_card_info'] = self.money_card_info.to_alipay_dict()
@@ -548,6 +576,16 @@ class MerchantCardTemplate(object):
                 params['settle_type'] = self.settle_type.to_alipay_dict()
             else:
                 params['settle_type'] = self.settle_type
+        if self.sku_list:
+            if isinstance(self.sku_list, list):
+                for i in range(0, len(self.sku_list)):
+                    element = self.sku_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.sku_list[i] = element.to_alipay_dict()
+            if hasattr(self.sku_list, 'to_alipay_dict'):
+                params['sku_list'] = self.sku_list.to_alipay_dict()
+            else:
+                params['sku_list'] = self.sku_list
         if self.support_withdraw:
             if hasattr(self.support_withdraw, 'to_alipay_dict'):
                 params['support_withdraw'] = self.support_withdraw.to_alipay_dict()
@@ -614,6 +652,8 @@ class MerchantCardTemplate(object):
             o.item_category_code = d['item_category_code']
         if 'item_custom_attrs' in d:
             o.item_custom_attrs = d['item_custom_attrs']
+        if 'item_version' in d:
+            o.item_version = d['item_version']
         if 'money_card_info' in d:
             o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:
@@ -632,6 +672,8 @@ class MerchantCardTemplate(object):
             o.sale_info = d['sale_info']
         if 'settle_type' in d:
             o.settle_type = d['settle_type']
+        if 'sku_list' in d:
+            o.sku_list = d['sku_list']
         if 'support_withdraw' in d:
             o.support_withdraw = d['support_withdraw']
         if 'times_card_info' in d:

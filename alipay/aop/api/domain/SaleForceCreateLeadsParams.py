@@ -10,6 +10,8 @@ class SaleForceCreateLeadsParams(object):
 
     def __init__(self):
         self._actual_lead_party = None
+        self._ai_products = None
+        self._ai_products_source_version = None
         self._alicloud_settlement_mode = None
         self._cloud_platform_region = None
         self._creator = None
@@ -68,6 +70,23 @@ class SaleForceCreateLeadsParams(object):
     @actual_lead_party.setter
     def actual_lead_party(self, value):
         self._actual_lead_party = value
+    @property
+    def ai_products(self):
+        return self._ai_products
+
+    @ai_products.setter
+    def ai_products(self, value):
+        if isinstance(value, list):
+            self._ai_products = list()
+            for i in value:
+                self._ai_products.append(i)
+    @property
+    def ai_products_source_version(self):
+        return self._ai_products_source_version
+
+    @ai_products_source_version.setter
+    def ai_products_source_version(self, value):
+        self._ai_products_source_version = value
     @property
     def alicloud_settlement_mode(self):
         return self._alicloud_settlement_mode
@@ -436,6 +455,21 @@ class SaleForceCreateLeadsParams(object):
                 params['actual_lead_party'] = self.actual_lead_party.to_alipay_dict()
             else:
                 params['actual_lead_party'] = self.actual_lead_party
+        if self.ai_products:
+            if isinstance(self.ai_products, list):
+                for i in range(0, len(self.ai_products)):
+                    element = self.ai_products[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.ai_products[i] = element.to_alipay_dict()
+            if hasattr(self.ai_products, 'to_alipay_dict'):
+                params['ai_products'] = self.ai_products.to_alipay_dict()
+            else:
+                params['ai_products'] = self.ai_products
+        if self.ai_products_source_version:
+            if hasattr(self.ai_products_source_version, 'to_alipay_dict'):
+                params['ai_products_source_version'] = self.ai_products_source_version.to_alipay_dict()
+            else:
+                params['ai_products_source_version'] = self.ai_products_source_version
         if self.alicloud_settlement_mode:
             if hasattr(self.alicloud_settlement_mode, 'to_alipay_dict'):
                 params['alicloud_settlement_mode'] = self.alicloud_settlement_mode.to_alipay_dict()
@@ -705,6 +739,10 @@ class SaleForceCreateLeadsParams(object):
         o = SaleForceCreateLeadsParams()
         if 'actual_lead_party' in d:
             o.actual_lead_party = d['actual_lead_party']
+        if 'ai_products' in d:
+            o.ai_products = d['ai_products']
+        if 'ai_products_source_version' in d:
+            o.ai_products_source_version = d['ai_products_source_version']
         if 'alicloud_settlement_mode' in d:
             o.alicloud_settlement_mode = d['alicloud_settlement_mode']
         if 'cloud_platform_region' in d:

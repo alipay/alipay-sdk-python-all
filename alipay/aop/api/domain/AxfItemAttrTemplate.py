@@ -10,6 +10,7 @@ class AxfItemAttrTemplate(object):
 
     def __init__(self):
         self._attr_desc = None
+        self._attr_field_type = None
         self._attr_key = None
         self._attr_name = None
         self._attr_type = None
@@ -28,6 +29,13 @@ class AxfItemAttrTemplate(object):
     @attr_desc.setter
     def attr_desc(self, value):
         self._attr_desc = value
+    @property
+    def attr_field_type(self):
+        return self._attr_field_type
+
+    @attr_field_type.setter
+    def attr_field_type(self, value):
+        self._attr_field_type = value
     @property
     def attr_key(self):
         return self._attr_key
@@ -116,6 +124,11 @@ class AxfItemAttrTemplate(object):
                 params['attr_desc'] = self.attr_desc.to_alipay_dict()
             else:
                 params['attr_desc'] = self.attr_desc
+        if self.attr_field_type:
+            if hasattr(self.attr_field_type, 'to_alipay_dict'):
+                params['attr_field_type'] = self.attr_field_type.to_alipay_dict()
+            else:
+                params['attr_field_type'] = self.attr_field_type
         if self.attr_key:
             if hasattr(self.attr_key, 'to_alipay_dict'):
                 params['attr_key'] = self.attr_key.to_alipay_dict()
@@ -185,6 +198,8 @@ class AxfItemAttrTemplate(object):
         o = AxfItemAttrTemplate()
         if 'attr_desc' in d:
             o.attr_desc = d['attr_desc']
+        if 'attr_field_type' in d:
+            o.attr_field_type = d['attr_field_type']
         if 'attr_key' in d:
             o.attr_key = d['attr_key']
         if 'attr_name' in d:

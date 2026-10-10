@@ -15,6 +15,7 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
         self._province_code_list = None
         self._room_id_list = None
         self._shop_id_list = None
+        self._technician_id_list = None
 
     @property
     def card_template_id(self):
@@ -80,6 +81,16 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
             self._shop_id_list = list()
             for i in value:
                 self._shop_id_list.append(i)
+    @property
+    def technician_id_list(self):
+        return self._technician_id_list
+
+    @technician_id_list.setter
+    def technician_id_list(self, value):
+        if isinstance(value, list):
+            self._technician_id_list = list()
+            for i in value:
+                self._technician_id_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -144,6 +155,16 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
                 params['shop_id_list'] = self.shop_id_list.to_alipay_dict()
             else:
                 params['shop_id_list'] = self.shop_id_list
+        if self.technician_id_list:
+            if isinstance(self.technician_id_list, list):
+                for i in range(0, len(self.technician_id_list)):
+                    element = self.technician_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.technician_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.technician_id_list, 'to_alipay_dict'):
+                params['technician_id_list'] = self.technician_id_list.to_alipay_dict()
+            else:
+                params['technician_id_list'] = self.technician_id_list
         return params
 
     @staticmethod
@@ -165,6 +186,8 @@ class AlipayCommerceMerchantcardTemplatepriceDeleteModel(object):
             o.room_id_list = d['room_id_list']
         if 'shop_id_list' in d:
             o.shop_id_list = d['shop_id_list']
+        if 'technician_id_list' in d:
+            o.technician_id_list = d['technician_id_list']
         return o
 
 

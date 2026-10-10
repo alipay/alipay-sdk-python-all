@@ -20,6 +20,7 @@ class MerchantCardTemplatePriceItem(object):
         self._room_id = None
         self._sale_price = None
         self._shop_id = None
+        self._technician_id = None
         self._week_price_list = None
 
     @property
@@ -99,6 +100,13 @@ class MerchantCardTemplatePriceItem(object):
     def shop_id(self, value):
         self._shop_id = value
     @property
+    def technician_id(self):
+        return self._technician_id
+
+    @technician_id.setter
+    def technician_id(self, value):
+        self._technician_id = value
+    @property
     def week_price_list(self):
         return self._week_price_list
 
@@ -170,6 +178,11 @@ class MerchantCardTemplatePriceItem(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.technician_id:
+            if hasattr(self.technician_id, 'to_alipay_dict'):
+                params['technician_id'] = self.technician_id.to_alipay_dict()
+            else:
+                params['technician_id'] = self.technician_id
         if self.week_price_list:
             if isinstance(self.week_price_list, list):
                 for i in range(0, len(self.week_price_list)):
@@ -207,6 +220,8 @@ class MerchantCardTemplatePriceItem(object):
             o.sale_price = d['sale_price']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'technician_id' in d:
+            o.technician_id = d['technician_id']
         if 'week_price_list' in d:
             o.week_price_list = d['week_price_list']
         return o

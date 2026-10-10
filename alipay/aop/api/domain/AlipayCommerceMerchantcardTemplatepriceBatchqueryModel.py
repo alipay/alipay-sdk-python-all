@@ -17,6 +17,7 @@ class AlipayCommerceMerchantcardTemplatepriceBatchqueryModel(object):
         self._province_code = None
         self._room_id = None
         self._shop_id = None
+        self._technician_id = None
 
     @property
     def card_template_id(self):
@@ -81,6 +82,13 @@ class AlipayCommerceMerchantcardTemplatepriceBatchqueryModel(object):
     @shop_id.setter
     def shop_id(self, value):
         self._shop_id = value
+    @property
+    def technician_id(self):
+        return self._technician_id
+
+    @technician_id.setter
+    def technician_id(self, value):
+        self._technician_id = value
 
 
     def to_alipay_dict(self):
@@ -130,6 +138,11 @@ class AlipayCommerceMerchantcardTemplatepriceBatchqueryModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.technician_id:
+            if hasattr(self.technician_id, 'to_alipay_dict'):
+                params['technician_id'] = self.technician_id.to_alipay_dict()
+            else:
+                params['technician_id'] = self.technician_id
         return params
 
     @staticmethod
@@ -155,6 +168,8 @@ class AlipayCommerceMerchantcardTemplatepriceBatchqueryModel(object):
             o.room_id = d['room_id']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'technician_id' in d:
+            o.technician_id = d['technician_id']
         return o
 
 
