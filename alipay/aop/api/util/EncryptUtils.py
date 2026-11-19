@@ -8,7 +8,7 @@ import base64
 
 from alipay.aop.api.constant.CommonConstants import PYTHON_VERSION_3
 from alipay.aop.api.exception.Exception import RequestException
-from Crypto.Cipher import AES
+from Cryptodome.Cipher import AES
 
 
 BLOCK_SIZE = AES.block_size
