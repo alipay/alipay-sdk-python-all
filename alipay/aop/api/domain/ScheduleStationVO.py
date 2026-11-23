@@ -11,6 +11,8 @@ class ScheduleStationVO(object):
         self._est_time_in_sec = None
         self._name = None
         self._order = None
+        self._second_est_time_in_sec = None
+        self._second_train_stop_time = None
         self._station_code = None
         self._train_stop_time = None
 
@@ -35,6 +37,20 @@ class ScheduleStationVO(object):
     @order.setter
     def order(self, value):
         self._order = value
+    @property
+    def second_est_time_in_sec(self):
+        return self._second_est_time_in_sec
+
+    @second_est_time_in_sec.setter
+    def second_est_time_in_sec(self, value):
+        self._second_est_time_in_sec = value
+    @property
+    def second_train_stop_time(self):
+        return self._second_train_stop_time
+
+    @second_train_stop_time.setter
+    def second_train_stop_time(self, value):
+        self._second_train_stop_time = value
     @property
     def station_code(self):
         return self._station_code
@@ -68,6 +84,16 @@ class ScheduleStationVO(object):
                 params['order'] = self.order.to_alipay_dict()
             else:
                 params['order'] = self.order
+        if self.second_est_time_in_sec:
+            if hasattr(self.second_est_time_in_sec, 'to_alipay_dict'):
+                params['second_est_time_in_sec'] = self.second_est_time_in_sec.to_alipay_dict()
+            else:
+                params['second_est_time_in_sec'] = self.second_est_time_in_sec
+        if self.second_train_stop_time:
+            if hasattr(self.second_train_stop_time, 'to_alipay_dict'):
+                params['second_train_stop_time'] = self.second_train_stop_time.to_alipay_dict()
+            else:
+                params['second_train_stop_time'] = self.second_train_stop_time
         if self.station_code:
             if hasattr(self.station_code, 'to_alipay_dict'):
                 params['station_code'] = self.station_code.to_alipay_dict()
@@ -91,6 +117,10 @@ class ScheduleStationVO(object):
             o.name = d['name']
         if 'order' in d:
             o.order = d['order']
+        if 'second_est_time_in_sec' in d:
+            o.second_est_time_in_sec = d['second_est_time_in_sec']
+        if 'second_train_stop_time' in d:
+            o.second_train_stop_time = d['second_train_stop_time']
         if 'station_code' in d:
             o.station_code = d['station_code']
         if 'train_stop_time' in d:

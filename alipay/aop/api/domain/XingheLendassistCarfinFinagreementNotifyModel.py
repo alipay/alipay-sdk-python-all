@@ -14,6 +14,7 @@ class XingheLendassistCarfinFinagreementNotifyModel(object):
         self._lend_apply_no = None
         self._out_apply_no = None
         self._out_lend_apply_no = None
+        self._scene = None
 
     @property
     def agreement_file_list(self):
@@ -56,6 +57,13 @@ class XingheLendassistCarfinFinagreementNotifyModel(object):
     @out_lend_apply_no.setter
     def out_lend_apply_no(self, value):
         self._out_lend_apply_no = value
+    @property
+    def scene(self):
+        return self._scene
+
+    @scene.setter
+    def scene(self, value):
+        self._scene = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +98,11 @@ class XingheLendassistCarfinFinagreementNotifyModel(object):
                 params['out_lend_apply_no'] = self.out_lend_apply_no.to_alipay_dict()
             else:
                 params['out_lend_apply_no'] = self.out_lend_apply_no
+        if self.scene:
+            if hasattr(self.scene, 'to_alipay_dict'):
+                params['scene'] = self.scene.to_alipay_dict()
+            else:
+                params['scene'] = self.scene
         return params
 
     @staticmethod
@@ -107,6 +120,8 @@ class XingheLendassistCarfinFinagreementNotifyModel(object):
             o.out_apply_no = d['out_apply_no']
         if 'out_lend_apply_no' in d:
             o.out_lend_apply_no = d['out_lend_apply_no']
+        if 'scene' in d:
+            o.scene = d['scene']
         return o
 
 

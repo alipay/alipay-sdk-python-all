@@ -14,6 +14,7 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkCreateModel(object):
         self._clerk_phone = None
         self._clerk_role = None
         self._out_clerk_id = None
+        self._service_provider_url = None
         self._tax_no = None
 
     @property
@@ -62,6 +63,13 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkCreateModel(object):
     def out_clerk_id(self, value):
         self._out_clerk_id = value
     @property
+    def service_provider_url(self):
+        return self._service_provider_url
+
+    @service_provider_url.setter
+    def service_provider_url(self, value):
+        self._service_provider_url = value
+    @property
     def tax_no(self):
         return self._tax_no
 
@@ -107,6 +115,11 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkCreateModel(object):
                 params['out_clerk_id'] = self.out_clerk_id.to_alipay_dict()
             else:
                 params['out_clerk_id'] = self.out_clerk_id
+        if self.service_provider_url:
+            if hasattr(self.service_provider_url, 'to_alipay_dict'):
+                params['service_provider_url'] = self.service_provider_url.to_alipay_dict()
+            else:
+                params['service_provider_url'] = self.service_provider_url
         if self.tax_no:
             if hasattr(self.tax_no, 'to_alipay_dict'):
                 params['tax_no'] = self.tax_no.to_alipay_dict()
@@ -131,6 +144,8 @@ class AlipayCommerceEcRecyclinginvoiceCompanyclerkCreateModel(object):
             o.clerk_role = d['clerk_role']
         if 'out_clerk_id' in d:
             o.out_clerk_id = d['out_clerk_id']
+        if 'service_provider_url' in d:
+            o.service_provider_url = d['service_provider_url']
         if 'tax_no' in d:
             o.tax_no = d['tax_no']
         return o

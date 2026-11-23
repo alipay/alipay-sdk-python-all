@@ -41,6 +41,8 @@ class AlipayEbppIndustryCareertrainingNewcourseQueryResponse(AlipayResponse):
         self._out_course_id = None
         self._pt_hours = None
         self._pt_provide_venue_and_equipment = None
+        self._purchase_complete_text = None
+        self._purchase_switch = None
         self._relation_degree = None
         self._remark = None
         self._sale_price = None
@@ -287,6 +289,20 @@ class AlipayEbppIndustryCareertrainingNewcourseQueryResponse(AlipayResponse):
     def pt_provide_venue_and_equipment(self, value):
         self._pt_provide_venue_and_equipment = value
     @property
+    def purchase_complete_text(self):
+        return self._purchase_complete_text
+
+    @purchase_complete_text.setter
+    def purchase_complete_text(self, value):
+        self._purchase_complete_text = value
+    @property
+    def purchase_switch(self):
+        return self._purchase_switch
+
+    @purchase_switch.setter
+    def purchase_switch(self, value):
+        self._purchase_switch = value
+    @property
     def relation_degree(self):
         return self._relation_degree
 
@@ -452,6 +468,10 @@ class AlipayEbppIndustryCareertrainingNewcourseQueryResponse(AlipayResponse):
             self.pt_hours = response['pt_hours']
         if 'pt_provide_venue_and_equipment' in response:
             self.pt_provide_venue_and_equipment = response['pt_provide_venue_and_equipment']
+        if 'purchase_complete_text' in response:
+            self.purchase_complete_text = response['purchase_complete_text']
+        if 'purchase_switch' in response:
+            self.purchase_switch = response['purchase_switch']
         if 'relation_degree' in response:
             self.relation_degree = response['relation_degree']
         if 'remark' in response:

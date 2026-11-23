@@ -30,6 +30,7 @@ class EcomSellerDTO(object):
         self._seller_order_count = None
         self._seller_order_refund_exchange_rate = None
         self._seller_user_type = None
+        self._withdraw_account_type = None
 
     @property
     def address(self):
@@ -181,6 +182,13 @@ class EcomSellerDTO(object):
     @seller_user_type.setter
     def seller_user_type(self, value):
         self._seller_user_type = value
+    @property
+    def withdraw_account_type(self):
+        return self._withdraw_account_type
+
+    @withdraw_account_type.setter
+    def withdraw_account_type(self, value):
+        self._withdraw_account_type = value
 
 
     def to_alipay_dict(self):
@@ -290,6 +298,11 @@ class EcomSellerDTO(object):
                 params['seller_user_type'] = self.seller_user_type.to_alipay_dict()
             else:
                 params['seller_user_type'] = self.seller_user_type
+        if self.withdraw_account_type:
+            if hasattr(self.withdraw_account_type, 'to_alipay_dict'):
+                params['withdraw_account_type'] = self.withdraw_account_type.to_alipay_dict()
+            else:
+                params['withdraw_account_type'] = self.withdraw_account_type
         return params
 
     @staticmethod
@@ -339,6 +352,8 @@ class EcomSellerDTO(object):
             o.seller_order_refund_exchange_rate = d['seller_order_refund_exchange_rate']
         if 'seller_user_type' in d:
             o.seller_user_type = d['seller_user_type']
+        if 'withdraw_account_type' in d:
+            o.withdraw_account_type = d['withdraw_account_type']
         return o
 
 

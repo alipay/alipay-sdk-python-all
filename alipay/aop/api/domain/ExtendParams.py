@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class ExtendParams(object):
 
     def __init__(self):
+        self._alternate_order_info = None
         self._card_type = None
         self._credit_ext_info = None
         self._fq_channels = None
@@ -22,6 +23,13 @@ class ExtendParams(object):
         self._tc_installment_order_id = None
         self._trade_component_order_id = None
 
+    @property
+    def alternate_order_info(self):
+        return self._alternate_order_info
+
+    @alternate_order_info.setter
+    def alternate_order_info(self, value):
+        self._alternate_order_info = value
     @property
     def card_type(self):
         return self._card_type
@@ -117,6 +125,11 @@ class ExtendParams(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.alternate_order_info:
+            if hasattr(self.alternate_order_info, 'to_alipay_dict'):
+                params['alternate_order_info'] = self.alternate_order_info.to_alipay_dict()
+            else:
+                params['alternate_order_info'] = self.alternate_order_info
         if self.card_type:
             if hasattr(self.card_type, 'to_alipay_dict'):
                 params['card_type'] = self.card_type.to_alipay_dict()
@@ -189,6 +202,8 @@ class ExtendParams(object):
         if not d:
             return None
         o = ExtendParams()
+        if 'alternate_order_info' in d:
+            o.alternate_order_info = d['alternate_order_info']
         if 'card_type' in d:
             o.card_type = d['card_type']
         if 'credit_ext_info' in d:

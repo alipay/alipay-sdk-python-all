@@ -10,10 +10,14 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
 
     def __init__(self):
         self._company_type = None
+        self._effect_end_time = None
+        self._effect_start_time = None
+        self._equity_settle_start_time = None
         self._old_serial_no = None
         self._organization_code = None
         self._parent_serial_no = None
         self._parent_status = None
+        self._pay_time = None
         self._prod_no = None
         self._project_list = None
         self._sales_method = None
@@ -27,6 +31,27 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
     @company_type.setter
     def company_type(self, value):
         self._company_type = value
+    @property
+    def effect_end_time(self):
+        return self._effect_end_time
+
+    @effect_end_time.setter
+    def effect_end_time(self, value):
+        self._effect_end_time = value
+    @property
+    def effect_start_time(self):
+        return self._effect_start_time
+
+    @effect_start_time.setter
+    def effect_start_time(self, value):
+        self._effect_start_time = value
+    @property
+    def equity_settle_start_time(self):
+        return self._equity_settle_start_time
+
+    @equity_settle_start_time.setter
+    def equity_settle_start_time(self, value):
+        self._equity_settle_start_time = value
     @property
     def old_serial_no(self):
         return self._old_serial_no
@@ -55,6 +80,13 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
     @parent_status.setter
     def parent_status(self, value):
         self._parent_status = value
+    @property
+    def pay_time(self):
+        return self._pay_time
+
+    @pay_time.setter
+    def pay_time(self, value):
+        self._pay_time = value
     @property
     def prod_no(self):
         return self._prod_no
@@ -105,6 +137,21 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
                 params['company_type'] = self.company_type.to_alipay_dict()
             else:
                 params['company_type'] = self.company_type
+        if self.effect_end_time:
+            if hasattr(self.effect_end_time, 'to_alipay_dict'):
+                params['effect_end_time'] = self.effect_end_time.to_alipay_dict()
+            else:
+                params['effect_end_time'] = self.effect_end_time
+        if self.effect_start_time:
+            if hasattr(self.effect_start_time, 'to_alipay_dict'):
+                params['effect_start_time'] = self.effect_start_time.to_alipay_dict()
+            else:
+                params['effect_start_time'] = self.effect_start_time
+        if self.equity_settle_start_time:
+            if hasattr(self.equity_settle_start_time, 'to_alipay_dict'):
+                params['equity_settle_start_time'] = self.equity_settle_start_time.to_alipay_dict()
+            else:
+                params['equity_settle_start_time'] = self.equity_settle_start_time
         if self.old_serial_no:
             if hasattr(self.old_serial_no, 'to_alipay_dict'):
                 params['old_serial_no'] = self.old_serial_no.to_alipay_dict()
@@ -125,6 +172,11 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
                 params['parent_status'] = self.parent_status.to_alipay_dict()
             else:
                 params['parent_status'] = self.parent_status
+        if self.pay_time:
+            if hasattr(self.pay_time, 'to_alipay_dict'):
+                params['pay_time'] = self.pay_time.to_alipay_dict()
+            else:
+                params['pay_time'] = self.pay_time
         if self.prod_no:
             if hasattr(self.prod_no, 'to_alipay_dict'):
                 params['prod_no'] = self.prod_no.to_alipay_dict()
@@ -164,6 +216,12 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
         o = AlipayCommerceMedicalInsuranceRiskinfoSyncModel()
         if 'company_type' in d:
             o.company_type = d['company_type']
+        if 'effect_end_time' in d:
+            o.effect_end_time = d['effect_end_time']
+        if 'effect_start_time' in d:
+            o.effect_start_time = d['effect_start_time']
+        if 'equity_settle_start_time' in d:
+            o.equity_settle_start_time = d['equity_settle_start_time']
         if 'old_serial_no' in d:
             o.old_serial_no = d['old_serial_no']
         if 'organization_code' in d:
@@ -172,6 +230,8 @@ class AlipayCommerceMedicalInsuranceRiskinfoSyncModel(object):
             o.parent_serial_no = d['parent_serial_no']
         if 'parent_status' in d:
             o.parent_status = d['parent_status']
+        if 'pay_time' in d:
+            o.pay_time = d['pay_time']
         if 'prod_no' in d:
             o.prod_no = d['prod_no']
         if 'project_list' in d:

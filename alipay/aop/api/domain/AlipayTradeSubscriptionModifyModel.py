@@ -10,6 +10,7 @@ class AlipayTradeSubscriptionModifyModel(object):
 
     def __init__(self):
         self._cancel_at_period_end = None
+        self._cashier_mode = None
         self._description = None
         self._extend_params = None
         self._grace_period_days = None
@@ -29,6 +30,13 @@ class AlipayTradeSubscriptionModifyModel(object):
     @cancel_at_period_end.setter
     def cancel_at_period_end(self, value):
         self._cancel_at_period_end = value
+    @property
+    def cashier_mode(self):
+        return self._cashier_mode
+
+    @cashier_mode.setter
+    def cashier_mode(self, value):
+        self._cashier_mode = value
     @property
     def description(self):
         return self._description
@@ -121,6 +129,11 @@ class AlipayTradeSubscriptionModifyModel(object):
                 params['cancel_at_period_end'] = self.cancel_at_period_end.to_alipay_dict()
             else:
                 params['cancel_at_period_end'] = self.cancel_at_period_end
+        if self.cashier_mode:
+            if hasattr(self.cashier_mode, 'to_alipay_dict'):
+                params['cashier_mode'] = self.cashier_mode.to_alipay_dict()
+            else:
+                params['cashier_mode'] = self.cashier_mode
         if self.description:
             if hasattr(self.description, 'to_alipay_dict'):
                 params['description'] = self.description.to_alipay_dict()
@@ -190,6 +203,8 @@ class AlipayTradeSubscriptionModifyModel(object):
         o = AlipayTradeSubscriptionModifyModel()
         if 'cancel_at_period_end' in d:
             o.cancel_at_period_end = d['cancel_at_period_end']
+        if 'cashier_mode' in d:
+            o.cashier_mode = d['cashier_mode']
         if 'description' in d:
             o.description = d['description']
         if 'extend_params' in d:

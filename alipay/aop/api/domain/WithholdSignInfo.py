@@ -10,6 +10,7 @@ class WithholdSignInfo(object):
     def __init__(self):
         self._agreement_no = None
         self._agreement_status = None
+        self._external_agreement_no = None
         self._sign_scene = None
         self._sign_time = None
         self._unsign_time = None
@@ -28,6 +29,13 @@ class WithholdSignInfo(object):
     @agreement_status.setter
     def agreement_status(self, value):
         self._agreement_status = value
+    @property
+    def external_agreement_no(self):
+        return self._external_agreement_no
+
+    @external_agreement_no.setter
+    def external_agreement_no(self, value):
+        self._external_agreement_no = value
     @property
     def sign_scene(self):
         return self._sign_scene
@@ -63,6 +71,11 @@ class WithholdSignInfo(object):
                 params['agreement_status'] = self.agreement_status.to_alipay_dict()
             else:
                 params['agreement_status'] = self.agreement_status
+        if self.external_agreement_no:
+            if hasattr(self.external_agreement_no, 'to_alipay_dict'):
+                params['external_agreement_no'] = self.external_agreement_no.to_alipay_dict()
+            else:
+                params['external_agreement_no'] = self.external_agreement_no
         if self.sign_scene:
             if hasattr(self.sign_scene, 'to_alipay_dict'):
                 params['sign_scene'] = self.sign_scene.to_alipay_dict()
@@ -89,6 +102,8 @@ class WithholdSignInfo(object):
             o.agreement_no = d['agreement_no']
         if 'agreement_status' in d:
             o.agreement_status = d['agreement_status']
+        if 'external_agreement_no' in d:
+            o.external_agreement_no = d['external_agreement_no']
         if 'sign_scene' in d:
             o.sign_scene = d['sign_scene']
         if 'sign_time' in d:

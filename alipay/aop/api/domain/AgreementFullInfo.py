@@ -10,6 +10,7 @@ class AgreementFullInfo(object):
 
     def __init__(self):
         self._agreement_no = None
+        self._agreement_url = None
         self._agreement_version = None
         self._content = None
         self._contract_no = None
@@ -27,6 +28,13 @@ class AgreementFullInfo(object):
     @agreement_no.setter
     def agreement_no(self, value):
         self._agreement_no = value
+    @property
+    def agreement_url(self):
+        return self._agreement_url
+
+    @agreement_url.setter
+    def agreement_url(self, value):
+        self._agreement_url = value
     @property
     def agreement_version(self):
         return self._agreement_version
@@ -105,6 +113,11 @@ class AgreementFullInfo(object):
                 params['agreement_no'] = self.agreement_no.to_alipay_dict()
             else:
                 params['agreement_no'] = self.agreement_no
+        if self.agreement_url:
+            if hasattr(self.agreement_url, 'to_alipay_dict'):
+                params['agreement_url'] = self.agreement_url.to_alipay_dict()
+            else:
+                params['agreement_url'] = self.agreement_url
         if self.agreement_version:
             if hasattr(self.agreement_version, 'to_alipay_dict'):
                 params['agreement_version'] = self.agreement_version.to_alipay_dict()
@@ -164,6 +177,8 @@ class AgreementFullInfo(object):
         o = AgreementFullInfo()
         if 'agreement_no' in d:
             o.agreement_no = d['agreement_no']
+        if 'agreement_url' in d:
+            o.agreement_url = d['agreement_url']
         if 'agreement_version' in d:
             o.agreement_version = d['agreement_version']
         if 'content' in d:

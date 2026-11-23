@@ -20,11 +20,14 @@ class InvoiceDetailInfo(object):
         self._invoice_buyer_info = None
         self._invoice_create_time = None
         self._invoice_deliver_info = None
+        self._invoice_fail_reason = None
+        self._invoice_issuance_time = None
         self._invoice_issuer_info = None
         self._invoice_items = None
         self._invoice_main_info = None
         self._invoice_mode = None
         self._invoice_modified_time = None
+        self._invoice_no = None
         self._invoice_remark_info = None
         self._invoice_seller_info = None
         self._invoice_status = None
@@ -60,6 +63,20 @@ class InvoiceDetailInfo(object):
             self._invoice_deliver_info = value
         else:
             self._invoice_deliver_info = InvoiceDeliverInfo.from_alipay_dict(value)
+    @property
+    def invoice_fail_reason(self):
+        return self._invoice_fail_reason
+
+    @invoice_fail_reason.setter
+    def invoice_fail_reason(self, value):
+        self._invoice_fail_reason = value
+    @property
+    def invoice_issuance_time(self):
+        return self._invoice_issuance_time
+
+    @invoice_issuance_time.setter
+    def invoice_issuance_time(self, value):
+        self._invoice_issuance_time = value
     @property
     def invoice_issuer_info(self):
         return self._invoice_issuer_info
@@ -107,6 +124,13 @@ class InvoiceDetailInfo(object):
     @invoice_modified_time.setter
     def invoice_modified_time(self, value):
         self._invoice_modified_time = value
+    @property
+    def invoice_no(self):
+        return self._invoice_no
+
+    @invoice_no.setter
+    def invoice_no(self, value):
+        self._invoice_no = value
     @property
     def invoice_remark_info(self):
         return self._invoice_remark_info
@@ -190,6 +214,16 @@ class InvoiceDetailInfo(object):
                 params['invoice_deliver_info'] = self.invoice_deliver_info.to_alipay_dict()
             else:
                 params['invoice_deliver_info'] = self.invoice_deliver_info
+        if self.invoice_fail_reason:
+            if hasattr(self.invoice_fail_reason, 'to_alipay_dict'):
+                params['invoice_fail_reason'] = self.invoice_fail_reason.to_alipay_dict()
+            else:
+                params['invoice_fail_reason'] = self.invoice_fail_reason
+        if self.invoice_issuance_time:
+            if hasattr(self.invoice_issuance_time, 'to_alipay_dict'):
+                params['invoice_issuance_time'] = self.invoice_issuance_time.to_alipay_dict()
+            else:
+                params['invoice_issuance_time'] = self.invoice_issuance_time
         if self.invoice_issuer_info:
             if hasattr(self.invoice_issuer_info, 'to_alipay_dict'):
                 params['invoice_issuer_info'] = self.invoice_issuer_info.to_alipay_dict()
@@ -220,6 +254,11 @@ class InvoiceDetailInfo(object):
                 params['invoice_modified_time'] = self.invoice_modified_time.to_alipay_dict()
             else:
                 params['invoice_modified_time'] = self.invoice_modified_time
+        if self.invoice_no:
+            if hasattr(self.invoice_no, 'to_alipay_dict'):
+                params['invoice_no'] = self.invoice_no.to_alipay_dict()
+            else:
+                params['invoice_no'] = self.invoice_no
         if self.invoice_remark_info:
             if hasattr(self.invoice_remark_info, 'to_alipay_dict'):
                 params['invoice_remark_info'] = self.invoice_remark_info.to_alipay_dict()
@@ -273,6 +312,10 @@ class InvoiceDetailInfo(object):
             o.invoice_create_time = d['invoice_create_time']
         if 'invoice_deliver_info' in d:
             o.invoice_deliver_info = d['invoice_deliver_info']
+        if 'invoice_fail_reason' in d:
+            o.invoice_fail_reason = d['invoice_fail_reason']
+        if 'invoice_issuance_time' in d:
+            o.invoice_issuance_time = d['invoice_issuance_time']
         if 'invoice_issuer_info' in d:
             o.invoice_issuer_info = d['invoice_issuer_info']
         if 'invoice_items' in d:
@@ -283,6 +326,8 @@ class InvoiceDetailInfo(object):
             o.invoice_mode = d['invoice_mode']
         if 'invoice_modified_time' in d:
             o.invoice_modified_time = d['invoice_modified_time']
+        if 'invoice_no' in d:
+            o.invoice_no = d['invoice_no']
         if 'invoice_remark_info' in d:
             o.invoice_remark_info = d['invoice_remark_info']
         if 'invoice_seller_info' in d:

@@ -30,6 +30,7 @@ class EcomBuyerDTO(object):
         self._phone = None
         self._real_name = None
         self._user_type = None
+        self._withdraw_account_type = None
 
     @property
     def address(self):
@@ -185,6 +186,13 @@ class EcomBuyerDTO(object):
     @user_type.setter
     def user_type(self, value):
         self._user_type = value
+    @property
+    def withdraw_account_type(self):
+        return self._withdraw_account_type
+
+    @withdraw_account_type.setter
+    def withdraw_account_type(self, value):
+        self._withdraw_account_type = value
 
 
     def to_alipay_dict(self):
@@ -299,6 +307,11 @@ class EcomBuyerDTO(object):
                 params['user_type'] = self.user_type.to_alipay_dict()
             else:
                 params['user_type'] = self.user_type
+        if self.withdraw_account_type:
+            if hasattr(self.withdraw_account_type, 'to_alipay_dict'):
+                params['withdraw_account_type'] = self.withdraw_account_type.to_alipay_dict()
+            else:
+                params['withdraw_account_type'] = self.withdraw_account_type
         return params
 
     @staticmethod
@@ -350,6 +363,8 @@ class EcomBuyerDTO(object):
             o.real_name = d['real_name']
         if 'user_type' in d:
             o.user_type = d['user_type']
+        if 'withdraw_account_type' in d:
+            o.withdraw_account_type = d['withdraw_account_type']
         return o
 
 

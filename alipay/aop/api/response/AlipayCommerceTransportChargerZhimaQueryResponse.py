@@ -13,6 +13,7 @@ class AlipayCommerceTransportChargerZhimaQueryResponse(AlipayResponse):
         self._biz_time = None
         self._credit_agreement_id = None
         self._deduct_agreement_id = None
+        self._marketing_tips = None
         self._open_id = None
         self._out_agreement_no = None
         self._plugin_url = None
@@ -46,6 +47,13 @@ class AlipayCommerceTransportChargerZhimaQueryResponse(AlipayResponse):
     @deduct_agreement_id.setter
     def deduct_agreement_id(self, value):
         self._deduct_agreement_id = value
+    @property
+    def marketing_tips(self):
+        return self._marketing_tips
+
+    @marketing_tips.setter
+    def marketing_tips(self, value):
+        self._marketing_tips = value
     @property
     def open_id(self):
         return self._open_id
@@ -85,6 +93,8 @@ class AlipayCommerceTransportChargerZhimaQueryResponse(AlipayResponse):
             self.credit_agreement_id = response['credit_agreement_id']
         if 'deduct_agreement_id' in response:
             self.deduct_agreement_id = response['deduct_agreement_id']
+        if 'marketing_tips' in response:
+            self.marketing_tips = response['marketing_tips']
         if 'open_id' in response:
             self.open_id = response['open_id']
         if 'out_agreement_no' in response:

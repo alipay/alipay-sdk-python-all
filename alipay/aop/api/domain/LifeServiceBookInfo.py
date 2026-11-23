@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.LifeServiceRoomInfo import LifeServiceRoomInfo
 from alipay.aop.api.domain.LifeServiceShopInfo import LifeServiceShopInfo
+from alipay.aop.api.domain.LifeServiceBookingTechnicianInfo import LifeServiceBookingTechnicianInfo
 
 
 class LifeServiceBookInfo(object):
@@ -13,6 +14,7 @@ class LifeServiceBookInfo(object):
         self._book_id = None
         self._room_infos = None
         self._shop_info = None
+        self._technician_infos = None
 
     @property
     def book_id(self):
@@ -44,6 +46,19 @@ class LifeServiceBookInfo(object):
             self._shop_info = value
         else:
             self._shop_info = LifeServiceShopInfo.from_alipay_dict(value)
+    @property
+    def technician_infos(self):
+        return self._technician_infos
+
+    @technician_infos.setter
+    def technician_infos(self, value):
+        if isinstance(value, list):
+            self._technician_infos = list()
+            for i in value:
+                if isinstance(i, LifeServiceBookingTechnicianInfo):
+                    self._technician_infos.append(i)
+                else:
+                    self._technician_infos.append(LifeServiceBookingTechnicianInfo.from_alipay_dict(i))
 
 
     def to_alipay_dict(self):
@@ -68,6 +83,16 @@ class LifeServiceBookInfo(object):
                 params['shop_info'] = self.shop_info.to_alipay_dict()
             else:
                 params['shop_info'] = self.shop_info
+        if self.technician_infos:
+            if isinstance(self.technician_infos, list):
+                for i in range(0, len(self.technician_infos)):
+                    element = self.technician_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.technician_infos[i] = element.to_alipay_dict()
+            if hasattr(self.technician_infos, 'to_alipay_dict'):
+                params['technician_infos'] = self.technician_infos.to_alipay_dict()
+            else:
+                params['technician_infos'] = self.technician_infos
         return params
 
     @staticmethod
@@ -81,6 +106,8 @@ class LifeServiceBookInfo(object):
             o.room_infos = d['room_infos']
         if 'shop_info' in d:
             o.shop_info = d['shop_info']
+        if 'technician_infos' in d:
+            o.technician_infos = d['technician_infos']
         return o
 
 

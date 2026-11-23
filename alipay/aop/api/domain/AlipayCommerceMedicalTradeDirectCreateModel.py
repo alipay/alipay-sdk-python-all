@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CreateOrderExtInfo import CreateOrderExtInfo
 from alipay.aop.api.domain.SubMerchantInfo import SubMerchantInfo
 
 
@@ -13,6 +14,7 @@ class AlipayCommerceMedicalTradeDirectCreateModel(object):
         self._call_back_url = None
         self._ch_info = None
         self._channel_code = None
+        self._ext_info = None
         self._gmt_out_create = None
         self._gmt_time_expire = None
         self._open_id = None
@@ -54,6 +56,16 @@ class AlipayCommerceMedicalTradeDirectCreateModel(object):
     @channel_code.setter
     def channel_code(self, value):
         self._channel_code = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        if isinstance(value, CreateOrderExtInfo):
+            self._ext_info = value
+        else:
+            self._ext_info = CreateOrderExtInfo.from_alipay_dict(value)
     @property
     def gmt_out_create(self):
         return self._gmt_out_create
@@ -165,6 +177,11 @@ class AlipayCommerceMedicalTradeDirectCreateModel(object):
                 params['channel_code'] = self.channel_code.to_alipay_dict()
             else:
                 params['channel_code'] = self.channel_code
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.gmt_out_create:
             if hasattr(self.gmt_out_create, 'to_alipay_dict'):
                 params['gmt_out_create'] = self.gmt_out_create.to_alipay_dict()
@@ -240,6 +257,8 @@ class AlipayCommerceMedicalTradeDirectCreateModel(object):
             o.ch_info = d['ch_info']
         if 'channel_code' in d:
             o.channel_code = d['channel_code']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'gmt_out_create' in d:
             o.gmt_out_create = d['gmt_out_create']
         if 'gmt_time_expire' in d:

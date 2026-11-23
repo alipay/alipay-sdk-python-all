@@ -9,6 +9,7 @@ from alipay.aop.api.domain.LackMaterial import LackMaterial
 class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
 
     def __init__(self):
+        self._add_apply_amount = None
         self._advance_apply_desc = None
         self._advance_apply_no = None
         self._advance_apply_status = None
@@ -25,12 +26,20 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
         self._name = None
         self._open_id = None
         self._out_hospital_id = None
+        self._pending_balance_amount = None
         self._policy_no = None
         self._source = None
         self._status = None
         self._supplement_tag = None
         self._user_id = None
 
+    @property
+    def add_apply_amount(self):
+        return self._add_apply_amount
+
+    @add_apply_amount.setter
+    def add_apply_amount(self, value):
+        self._add_apply_amount = value
     @property
     def advance_apply_desc(self):
         return self._advance_apply_desc
@@ -150,6 +159,13 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
     def out_hospital_id(self, value):
         self._out_hospital_id = value
     @property
+    def pending_balance_amount(self):
+        return self._pending_balance_amount
+
+    @pending_balance_amount.setter
+    def pending_balance_amount(self, value):
+        self._pending_balance_amount = value
+    @property
     def policy_no(self):
         return self._policy_no
 
@@ -188,6 +204,11 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.add_apply_amount:
+            if hasattr(self.add_apply_amount, 'to_alipay_dict'):
+                params['add_apply_amount'] = self.add_apply_amount.to_alipay_dict()
+            else:
+                params['add_apply_amount'] = self.add_apply_amount
         if self.advance_apply_desc:
             if hasattr(self.advance_apply_desc, 'to_alipay_dict'):
                 params['advance_apply_desc'] = self.advance_apply_desc.to_alipay_dict()
@@ -273,6 +294,11 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
                 params['out_hospital_id'] = self.out_hospital_id.to_alipay_dict()
             else:
                 params['out_hospital_id'] = self.out_hospital_id
+        if self.pending_balance_amount:
+            if hasattr(self.pending_balance_amount, 'to_alipay_dict'):
+                params['pending_balance_amount'] = self.pending_balance_amount.to_alipay_dict()
+            else:
+                params['pending_balance_amount'] = self.pending_balance_amount
         if self.policy_no:
             if hasattr(self.policy_no, 'to_alipay_dict'):
                 params['policy_no'] = self.policy_no.to_alipay_dict()
@@ -305,6 +331,8 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalInsuranceAdvancepaySyncModel()
+        if 'add_apply_amount' in d:
+            o.add_apply_amount = d['add_apply_amount']
         if 'advance_apply_desc' in d:
             o.advance_apply_desc = d['advance_apply_desc']
         if 'advance_apply_no' in d:
@@ -337,6 +365,8 @@ class AlipayCommerceMedicalInsuranceAdvancepaySyncModel(object):
             o.open_id = d['open_id']
         if 'out_hospital_id' in d:
             o.out_hospital_id = d['out_hospital_id']
+        if 'pending_balance_amount' in d:
+            o.pending_balance_amount = d['pending_balance_amount']
         if 'policy_no' in d:
             o.policy_no = d['policy_no']
         if 'source' in d:

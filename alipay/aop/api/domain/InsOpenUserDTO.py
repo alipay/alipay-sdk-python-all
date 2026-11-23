@@ -9,6 +9,7 @@ class InsOpenUserDTO(object):
 
     def __init__(self):
         self._address = None
+        self._bank_name = None
         self._id_card_name = None
         self._id_card_no = None
         self._id_card_type = None
@@ -17,6 +18,7 @@ class InsOpenUserDTO(object):
         self._user_id = None
         self._user_name = None
         self._user_type = None
+        self._withdraw_account_type = None
 
     @property
     def address(self):
@@ -25,6 +27,13 @@ class InsOpenUserDTO(object):
     @address.setter
     def address(self, value):
         self._address = value
+    @property
+    def bank_name(self):
+        return self._bank_name
+
+    @bank_name.setter
+    def bank_name(self, value):
+        self._bank_name = value
     @property
     def id_card_name(self):
         return self._id_card_name
@@ -81,6 +90,13 @@ class InsOpenUserDTO(object):
     @user_type.setter
     def user_type(self, value):
         self._user_type = value
+    @property
+    def withdraw_account_type(self):
+        return self._withdraw_account_type
+
+    @withdraw_account_type.setter
+    def withdraw_account_type(self, value):
+        self._withdraw_account_type = value
 
 
     def to_alipay_dict(self):
@@ -90,6 +106,11 @@ class InsOpenUserDTO(object):
                 params['address'] = self.address.to_alipay_dict()
             else:
                 params['address'] = self.address
+        if self.bank_name:
+            if hasattr(self.bank_name, 'to_alipay_dict'):
+                params['bank_name'] = self.bank_name.to_alipay_dict()
+            else:
+                params['bank_name'] = self.bank_name
         if self.id_card_name:
             if hasattr(self.id_card_name, 'to_alipay_dict'):
                 params['id_card_name'] = self.id_card_name.to_alipay_dict()
@@ -130,6 +151,11 @@ class InsOpenUserDTO(object):
                 params['user_type'] = self.user_type.to_alipay_dict()
             else:
                 params['user_type'] = self.user_type
+        if self.withdraw_account_type:
+            if hasattr(self.withdraw_account_type, 'to_alipay_dict'):
+                params['withdraw_account_type'] = self.withdraw_account_type.to_alipay_dict()
+            else:
+                params['withdraw_account_type'] = self.withdraw_account_type
         return params
 
     @staticmethod
@@ -139,6 +165,8 @@ class InsOpenUserDTO(object):
         o = InsOpenUserDTO()
         if 'address' in d:
             o.address = d['address']
+        if 'bank_name' in d:
+            o.bank_name = d['bank_name']
         if 'id_card_name' in d:
             o.id_card_name = d['id_card_name']
         if 'id_card_no' in d:
@@ -155,6 +183,8 @@ class InsOpenUserDTO(object):
             o.user_name = d['user_name']
         if 'user_type' in d:
             o.user_type = d['user_type']
+        if 'withdraw_account_type' in d:
+            o.withdraw_account_type = d['withdraw_account_type']
         return o
 
 

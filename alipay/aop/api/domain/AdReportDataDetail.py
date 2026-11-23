@@ -48,6 +48,7 @@ class AdReportDataDetail(object):
         self._plan_id = None
         self._plan_name = None
         self._principal_alipay_account = None
+        self._principal_id = None
         self._principal_name = None
         self._principal_pid = None
         self._scene_name = None
@@ -334,6 +335,13 @@ class AdReportDataDetail(object):
     def principal_alipay_account(self, value):
         self._principal_alipay_account = value
     @property
+    def principal_id(self):
+        return self._principal_id
+
+    @principal_id.setter
+    def principal_id(self, value):
+        self._principal_id = value
+    @property
     def principal_name(self):
         return self._principal_name
 
@@ -572,6 +580,11 @@ class AdReportDataDetail(object):
                 params['principal_alipay_account'] = self.principal_alipay_account.to_alipay_dict()
             else:
                 params['principal_alipay_account'] = self.principal_alipay_account
+        if self.principal_id:
+            if hasattr(self.principal_id, 'to_alipay_dict'):
+                params['principal_id'] = self.principal_id.to_alipay_dict()
+            else:
+                params['principal_id'] = self.principal_id
         if self.principal_name:
             if hasattr(self.principal_name, 'to_alipay_dict'):
                 params['principal_name'] = self.principal_name.to_alipay_dict()
@@ -682,6 +695,8 @@ class AdReportDataDetail(object):
             o.plan_name = d['plan_name']
         if 'principal_alipay_account' in d:
             o.principal_alipay_account = d['principal_alipay_account']
+        if 'principal_id' in d:
+            o.principal_id = d['principal_id']
         if 'principal_name' in d:
             o.principal_name = d['principal_name']
         if 'principal_pid' in d:

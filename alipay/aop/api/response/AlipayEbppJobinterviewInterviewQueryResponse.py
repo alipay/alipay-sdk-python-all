@@ -10,6 +10,7 @@ from alipay.aop.api.domain.DetectionDetail import DetectionDetail
 from alipay.aop.api.domain.EliminationRuleDetailItem import EliminationRuleDetailItem
 from alipay.aop.api.domain.QuestionDetails import QuestionDetails
 from alipay.aop.api.domain.ReportUrlItem import ReportUrlItem
+from alipay.aop.api.domain.SocialRiskInfo import SocialRiskInfo
 
 
 class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
@@ -34,6 +35,7 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
         self._report_url_list = None
         self._room_expire_time = None
         self._score = None
+        self._social_risk_info = None
         self._status = None
 
     @property
@@ -184,6 +186,16 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
     def score(self, value):
         self._score = value
     @property
+    def social_risk_info(self):
+        return self._social_risk_info
+
+    @social_risk_info.setter
+    def social_risk_info(self, value):
+        if isinstance(value, SocialRiskInfo):
+            self._social_risk_info = value
+        else:
+            self._social_risk_info = SocialRiskInfo.from_alipay_dict(value)
+    @property
     def status(self):
         return self._status
 
@@ -229,5 +241,7 @@ class AlipayEbppJobinterviewInterviewQueryResponse(AlipayResponse):
             self.room_expire_time = response['room_expire_time']
         if 'score' in response:
             self.score = response['score']
+        if 'social_risk_info' in response:
+            self.social_risk_info = response['social_risk_info']
         if 'status' in response:
             self.status = response['status']

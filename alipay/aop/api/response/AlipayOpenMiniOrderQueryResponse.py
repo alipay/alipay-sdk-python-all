@@ -19,6 +19,7 @@ from alipay.aop.api.domain.MiniOrderAddressInfoDTO import MiniOrderAddressInfoDT
 from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
 from alipay.aop.api.domain.StagePayPlanVO import StagePayPlanVO
 from alipay.aop.api.domain.BizUnitInfoVO import BizUnitInfoVO
+from alipay.aop.api.domain.VirtualDeliverInfoVO import VirtualDeliverInfoVO
 
 
 class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
@@ -52,6 +53,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._store_info = None
         self._trade_no = None
         self._user_id = None
+        self._virtual_deliver_info = None
 
     @property
     def accept_info(self):
@@ -293,6 +295,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def virtual_deliver_info(self):
+        return self._virtual_deliver_info
+
+    @virtual_deliver_info.setter
+    def virtual_deliver_info(self, value):
+        if isinstance(value, VirtualDeliverInfoVO):
+            self._virtual_deliver_info = value
+        else:
+            self._virtual_deliver_info = VirtualDeliverInfoVO.from_alipay_dict(value)
 
     def parse_response_content(self, response_content):
         response = super(AlipayOpenMiniOrderQueryResponse, self).parse_response_content(response_content)
@@ -350,3 +362,5 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.trade_no = response['trade_no']
         if 'user_id' in response:
             self.user_id = response['user_id']
+        if 'virtual_deliver_info' in response:
+            self.virtual_deliver_info = response['virtual_deliver_info']

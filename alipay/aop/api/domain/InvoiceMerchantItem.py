@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InvoiceRefinedOilGasStationInfo import InvoiceRefinedOilGasStationInfo
 
 
 class InvoiceMerchantItem(object):
@@ -19,6 +20,7 @@ class InvoiceMerchantItem(object):
         self._item_unit = None
         self._item_unit_amount = None
         self._item_unit_amount_without_tax = None
+        self._refined_oil_gas_station = None
         self._related_blue_serial_no = None
         self._serial_no = None
         self._tax_code = None
@@ -101,6 +103,16 @@ class InvoiceMerchantItem(object):
     def item_unit_amount_without_tax(self, value):
         self._item_unit_amount_without_tax = value
     @property
+    def refined_oil_gas_station(self):
+        return self._refined_oil_gas_station
+
+    @refined_oil_gas_station.setter
+    def refined_oil_gas_station(self, value):
+        if isinstance(value, InvoiceRefinedOilGasStationInfo):
+            self._refined_oil_gas_station = value
+        else:
+            self._refined_oil_gas_station = InvoiceRefinedOilGasStationInfo.from_alipay_dict(value)
+    @property
     def related_blue_serial_no(self):
         return self._related_blue_serial_no
 
@@ -180,6 +192,11 @@ class InvoiceMerchantItem(object):
                 params['item_unit_amount_without_tax'] = self.item_unit_amount_without_tax.to_alipay_dict()
             else:
                 params['item_unit_amount_without_tax'] = self.item_unit_amount_without_tax
+        if self.refined_oil_gas_station:
+            if hasattr(self.refined_oil_gas_station, 'to_alipay_dict'):
+                params['refined_oil_gas_station'] = self.refined_oil_gas_station.to_alipay_dict()
+            else:
+                params['refined_oil_gas_station'] = self.refined_oil_gas_station
         if self.related_blue_serial_no:
             if hasattr(self.related_blue_serial_no, 'to_alipay_dict'):
                 params['related_blue_serial_no'] = self.related_blue_serial_no.to_alipay_dict()
@@ -224,6 +241,8 @@ class InvoiceMerchantItem(object):
             o.item_unit_amount = d['item_unit_amount']
         if 'item_unit_amount_without_tax' in d:
             o.item_unit_amount_without_tax = d['item_unit_amount_without_tax']
+        if 'refined_oil_gas_station' in d:
+            o.refined_oil_gas_station = d['refined_oil_gas_station']
         if 'related_blue_serial_no' in d:
             o.related_blue_serial_no = d['related_blue_serial_no']
         if 'serial_no' in d:

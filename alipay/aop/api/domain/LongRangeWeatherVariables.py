@@ -26,6 +26,7 @@ class LongRangeWeatherVariables(object):
         self._temperature_min_2_m = None
         self._variable_date = None
         self._weather_code = None
+        self._weather_type_code = None
         self._wind_direction_100_m = None
         self._wind_direction_10_m = None
         self._wind_direction_200_m = None
@@ -160,6 +161,13 @@ class LongRangeWeatherVariables(object):
     @weather_code.setter
     def weather_code(self, value):
         self._weather_code = value
+    @property
+    def weather_type_code(self):
+        return self._weather_type_code
+
+    @weather_type_code.setter
+    def weather_type_code(self, value):
+        self._weather_type_code = value
     @property
     def wind_direction_100_m(self):
         return self._wind_direction_100_m
@@ -303,6 +311,11 @@ class LongRangeWeatherVariables(object):
                 params['weather_code'] = self.weather_code.to_alipay_dict()
             else:
                 params['weather_code'] = self.weather_code
+        if self.weather_type_code:
+            if hasattr(self.weather_type_code, 'to_alipay_dict'):
+                params['weather_type_code'] = self.weather_type_code.to_alipay_dict()
+            else:
+                params['weather_type_code'] = self.weather_type_code
         if self.wind_direction_100_m:
             if hasattr(self.wind_direction_100_m, 'to_alipay_dict'):
                 params['wind_direction_100_m'] = self.wind_direction_100_m.to_alipay_dict()
@@ -381,6 +394,8 @@ class LongRangeWeatherVariables(object):
             o.variable_date = d['variable_date']
         if 'weather_code' in d:
             o.weather_code = d['weather_code']
+        if 'weather_type_code' in d:
+            o.weather_type_code = d['weather_type_code']
         if 'wind_direction_100_m' in d:
             o.wind_direction_100_m = d['wind_direction_100_m']
         if 'wind_direction_10_m' in d:

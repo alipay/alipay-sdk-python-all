@@ -7,6 +7,9 @@ from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOp
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
+from alipay.aop.api.domain.MultiCurrencyMoneyOpenApi import MultiCurrencyMoneyOpenApi
 
 
 class SummaryBillOpenApiDTO(object):
@@ -20,6 +23,8 @@ class SummaryBillOpenApiDTO(object):
         self._biz_pd_code = None
         self._fund_settle_time = None
         self._inst_id = None
+        self._invoiced_amt = None
+        self._invoicing_amt = None
         self._payee_ip_role_id = None
         self._real_bill_amount = None
         self._settle_ip_role_id = None
@@ -27,6 +32,15 @@ class SummaryBillOpenApiDTO(object):
         self._settle_time_type = None
         self._settled_amount = None
         self._source = None
+        self._summary_dmsn_1 = None
+        self._summary_dmsn_2 = None
+        self._summary_dmsn_3 = None
+        self._summary_dmsn_4 = None
+        self._summary_dmsn_5 = None
+        self._summary_dmsn_6 = None
+        self._summary_dmsn_7 = None
+        self._tax_rate = None
+        self._un_invoice_amt = None
 
     @property
     def adjust_amount(self):
@@ -91,6 +105,26 @@ class SummaryBillOpenApiDTO(object):
     def inst_id(self, value):
         self._inst_id = value
     @property
+    def invoiced_amt(self):
+        return self._invoiced_amt
+
+    @invoiced_amt.setter
+    def invoiced_amt(self, value):
+        if isinstance(value, MultiCurrencyMoneyOpenApi):
+            self._invoiced_amt = value
+        else:
+            self._invoiced_amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
+    @property
+    def invoicing_amt(self):
+        return self._invoicing_amt
+
+    @invoicing_amt.setter
+    def invoicing_amt(self, value):
+        if isinstance(value, MultiCurrencyMoneyOpenApi):
+            self._invoicing_amt = value
+        else:
+            self._invoicing_amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
+    @property
     def payee_ip_role_id(self):
         return self._payee_ip_role_id
 
@@ -145,6 +179,72 @@ class SummaryBillOpenApiDTO(object):
     @source.setter
     def source(self, value):
         self._source = value
+    @property
+    def summary_dmsn_1(self):
+        return self._summary_dmsn_1
+
+    @summary_dmsn_1.setter
+    def summary_dmsn_1(self, value):
+        self._summary_dmsn_1 = value
+    @property
+    def summary_dmsn_2(self):
+        return self._summary_dmsn_2
+
+    @summary_dmsn_2.setter
+    def summary_dmsn_2(self, value):
+        self._summary_dmsn_2 = value
+    @property
+    def summary_dmsn_3(self):
+        return self._summary_dmsn_3
+
+    @summary_dmsn_3.setter
+    def summary_dmsn_3(self, value):
+        self._summary_dmsn_3 = value
+    @property
+    def summary_dmsn_4(self):
+        return self._summary_dmsn_4
+
+    @summary_dmsn_4.setter
+    def summary_dmsn_4(self, value):
+        self._summary_dmsn_4 = value
+    @property
+    def summary_dmsn_5(self):
+        return self._summary_dmsn_5
+
+    @summary_dmsn_5.setter
+    def summary_dmsn_5(self, value):
+        self._summary_dmsn_5 = value
+    @property
+    def summary_dmsn_6(self):
+        return self._summary_dmsn_6
+
+    @summary_dmsn_6.setter
+    def summary_dmsn_6(self, value):
+        self._summary_dmsn_6 = value
+    @property
+    def summary_dmsn_7(self):
+        return self._summary_dmsn_7
+
+    @summary_dmsn_7.setter
+    def summary_dmsn_7(self, value):
+        self._summary_dmsn_7 = value
+    @property
+    def tax_rate(self):
+        return self._tax_rate
+
+    @tax_rate.setter
+    def tax_rate(self, value):
+        self._tax_rate = value
+    @property
+    def un_invoice_amt(self):
+        return self._un_invoice_amt
+
+    @un_invoice_amt.setter
+    def un_invoice_amt(self, value):
+        if isinstance(value, MultiCurrencyMoneyOpenApi):
+            self._un_invoice_amt = value
+        else:
+            self._un_invoice_amt = MultiCurrencyMoneyOpenApi.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -189,6 +289,16 @@ class SummaryBillOpenApiDTO(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.invoiced_amt:
+            if hasattr(self.invoiced_amt, 'to_alipay_dict'):
+                params['invoiced_amt'] = self.invoiced_amt.to_alipay_dict()
+            else:
+                params['invoiced_amt'] = self.invoiced_amt
+        if self.invoicing_amt:
+            if hasattr(self.invoicing_amt, 'to_alipay_dict'):
+                params['invoicing_amt'] = self.invoicing_amt.to_alipay_dict()
+            else:
+                params['invoicing_amt'] = self.invoicing_amt
         if self.payee_ip_role_id:
             if hasattr(self.payee_ip_role_id, 'to_alipay_dict'):
                 params['payee_ip_role_id'] = self.payee_ip_role_id.to_alipay_dict()
@@ -224,6 +334,51 @@ class SummaryBillOpenApiDTO(object):
                 params['source'] = self.source.to_alipay_dict()
             else:
                 params['source'] = self.source
+        if self.summary_dmsn_1:
+            if hasattr(self.summary_dmsn_1, 'to_alipay_dict'):
+                params['summary_dmsn_1'] = self.summary_dmsn_1.to_alipay_dict()
+            else:
+                params['summary_dmsn_1'] = self.summary_dmsn_1
+        if self.summary_dmsn_2:
+            if hasattr(self.summary_dmsn_2, 'to_alipay_dict'):
+                params['summary_dmsn_2'] = self.summary_dmsn_2.to_alipay_dict()
+            else:
+                params['summary_dmsn_2'] = self.summary_dmsn_2
+        if self.summary_dmsn_3:
+            if hasattr(self.summary_dmsn_3, 'to_alipay_dict'):
+                params['summary_dmsn_3'] = self.summary_dmsn_3.to_alipay_dict()
+            else:
+                params['summary_dmsn_3'] = self.summary_dmsn_3
+        if self.summary_dmsn_4:
+            if hasattr(self.summary_dmsn_4, 'to_alipay_dict'):
+                params['summary_dmsn_4'] = self.summary_dmsn_4.to_alipay_dict()
+            else:
+                params['summary_dmsn_4'] = self.summary_dmsn_4
+        if self.summary_dmsn_5:
+            if hasattr(self.summary_dmsn_5, 'to_alipay_dict'):
+                params['summary_dmsn_5'] = self.summary_dmsn_5.to_alipay_dict()
+            else:
+                params['summary_dmsn_5'] = self.summary_dmsn_5
+        if self.summary_dmsn_6:
+            if hasattr(self.summary_dmsn_6, 'to_alipay_dict'):
+                params['summary_dmsn_6'] = self.summary_dmsn_6.to_alipay_dict()
+            else:
+                params['summary_dmsn_6'] = self.summary_dmsn_6
+        if self.summary_dmsn_7:
+            if hasattr(self.summary_dmsn_7, 'to_alipay_dict'):
+                params['summary_dmsn_7'] = self.summary_dmsn_7.to_alipay_dict()
+            else:
+                params['summary_dmsn_7'] = self.summary_dmsn_7
+        if self.tax_rate:
+            if hasattr(self.tax_rate, 'to_alipay_dict'):
+                params['tax_rate'] = self.tax_rate.to_alipay_dict()
+            else:
+                params['tax_rate'] = self.tax_rate
+        if self.un_invoice_amt:
+            if hasattr(self.un_invoice_amt, 'to_alipay_dict'):
+                params['un_invoice_amt'] = self.un_invoice_amt.to_alipay_dict()
+            else:
+                params['un_invoice_amt'] = self.un_invoice_amt
         return params
 
     @staticmethod
@@ -247,6 +402,10 @@ class SummaryBillOpenApiDTO(object):
             o.fund_settle_time = d['fund_settle_time']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'invoiced_amt' in d:
+            o.invoiced_amt = d['invoiced_amt']
+        if 'invoicing_amt' in d:
+            o.invoicing_amt = d['invoicing_amt']
         if 'payee_ip_role_id' in d:
             o.payee_ip_role_id = d['payee_ip_role_id']
         if 'real_bill_amount' in d:
@@ -261,6 +420,24 @@ class SummaryBillOpenApiDTO(object):
             o.settled_amount = d['settled_amount']
         if 'source' in d:
             o.source = d['source']
+        if 'summary_dmsn_1' in d:
+            o.summary_dmsn_1 = d['summary_dmsn_1']
+        if 'summary_dmsn_2' in d:
+            o.summary_dmsn_2 = d['summary_dmsn_2']
+        if 'summary_dmsn_3' in d:
+            o.summary_dmsn_3 = d['summary_dmsn_3']
+        if 'summary_dmsn_4' in d:
+            o.summary_dmsn_4 = d['summary_dmsn_4']
+        if 'summary_dmsn_5' in d:
+            o.summary_dmsn_5 = d['summary_dmsn_5']
+        if 'summary_dmsn_6' in d:
+            o.summary_dmsn_6 = d['summary_dmsn_6']
+        if 'summary_dmsn_7' in d:
+            o.summary_dmsn_7 = d['summary_dmsn_7']
+        if 'tax_rate' in d:
+            o.tax_rate = d['tax_rate']
+        if 'un_invoice_amt' in d:
+            o.un_invoice_amt = d['un_invoice_amt']
         return o
 
 

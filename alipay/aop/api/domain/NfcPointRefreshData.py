@@ -27,6 +27,7 @@ class NfcPointRefreshData(object):
         self._process_value = None
         self._resources = None
         self._show_text = None
+        self._timeout_cache = None
         self._voice_resources = None
 
     @property
@@ -135,6 +136,13 @@ class NfcPointRefreshData(object):
         else:
             self._show_text = NfcPointRefreshShowText.from_alipay_dict(value)
     @property
+    def timeout_cache(self):
+        return self._timeout_cache
+
+    @timeout_cache.setter
+    def timeout_cache(self, value):
+        self._timeout_cache = value
+    @property
     def voice_resources(self):
         return self._voice_resources
 
@@ -216,6 +224,11 @@ class NfcPointRefreshData(object):
                 params['show_text'] = self.show_text.to_alipay_dict()
             else:
                 params['show_text'] = self.show_text
+        if self.timeout_cache:
+            if hasattr(self.timeout_cache, 'to_alipay_dict'):
+                params['timeout_cache'] = self.timeout_cache.to_alipay_dict()
+            else:
+                params['timeout_cache'] = self.timeout_cache
         if self.voice_resources:
             if isinstance(self.voice_resources, list):
                 for i in range(0, len(self.voice_resources)):
@@ -257,6 +270,8 @@ class NfcPointRefreshData(object):
             o.resources = d['resources']
         if 'show_text' in d:
             o.show_text = d['show_text']
+        if 'timeout_cache' in d:
+            o.timeout_cache = d['timeout_cache']
         if 'voice_resources' in d:
             o.voice_resources = d['voice_resources']
         return o

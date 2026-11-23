@@ -18,6 +18,7 @@ class AlipayEbppCommunityRelationshipModifyModel(object):
         self._daily_start = None
         self._extend_field = None
         self._out_bill_url = None
+        self._prepay_enabled = None
         self._service_end = None
         self._service_start = None
         self._service_type = None
@@ -89,6 +90,13 @@ class AlipayEbppCommunityRelationshipModifyModel(object):
     @out_bill_url.setter
     def out_bill_url(self, value):
         self._out_bill_url = value
+    @property
+    def prepay_enabled(self):
+        return self._prepay_enabled
+
+    @prepay_enabled.setter
+    def prepay_enabled(self, value):
+        self._prepay_enabled = value
     @property
     def service_end(self):
         return self._service_end
@@ -166,6 +174,11 @@ class AlipayEbppCommunityRelationshipModifyModel(object):
                 params['out_bill_url'] = self.out_bill_url.to_alipay_dict()
             else:
                 params['out_bill_url'] = self.out_bill_url
+        if self.prepay_enabled:
+            if hasattr(self.prepay_enabled, 'to_alipay_dict'):
+                params['prepay_enabled'] = self.prepay_enabled.to_alipay_dict()
+            else:
+                params['prepay_enabled'] = self.prepay_enabled
         if self.service_end:
             if hasattr(self.service_end, 'to_alipay_dict'):
                 params['service_end'] = self.service_end.to_alipay_dict()
@@ -211,6 +224,8 @@ class AlipayEbppCommunityRelationshipModifyModel(object):
             o.extend_field = d['extend_field']
         if 'out_bill_url' in d:
             o.out_bill_url = d['out_bill_url']
+        if 'prepay_enabled' in d:
+            o.prepay_enabled = d['prepay_enabled']
         if 'service_end' in d:
             o.service_end = d['service_end']
         if 'service_start' in d:

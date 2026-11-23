@@ -10,12 +10,20 @@ from alipay.aop.api.domain.StatisticVO import StatisticVO
 class AlipayCommerceMedicalDeviceDataSendModel(object):
 
     def __init__(self):
+        self._aq_user_id = None
         self._details = None
         self._device_id = None
         self._device_vendor = None
         self._out_id = None
         self._statistics = None
 
+    @property
+    def aq_user_id(self):
+        return self._aq_user_id
+
+    @aq_user_id.setter
+    def aq_user_id(self, value):
+        self._aq_user_id = value
     @property
     def details(self):
         return self._details
@@ -67,6 +75,11 @@ class AlipayCommerceMedicalDeviceDataSendModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.aq_user_id:
+            if hasattr(self.aq_user_id, 'to_alipay_dict'):
+                params['aq_user_id'] = self.aq_user_id.to_alipay_dict()
+            else:
+                params['aq_user_id'] = self.aq_user_id
         if self.details:
             if isinstance(self.details, list):
                 for i in range(0, len(self.details)):
@@ -109,6 +122,8 @@ class AlipayCommerceMedicalDeviceDataSendModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalDeviceDataSendModel()
+        if 'aq_user_id' in d:
+            o.aq_user_id = d['aq_user_id']
         if 'details' in d:
             o.details = d['details']
         if 'device_id' in d:

@@ -44,6 +44,7 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
         self._product_code = None
         self._product_id = None
         self._real_property_business_list = None
+        self._reduced_tax_rate_type = None
         self._refined_oil_gas_station = None
         self._related_blue_invoice_no = None
         self._remark = None
@@ -288,6 +289,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                     self._real_property_business_list.append(i)
                 else:
                     self._real_property_business_list.append(IndustryInvoiceRealPropertyBusiness.from_alipay_dict(i))
+    @property
+    def reduced_tax_rate_type(self):
+        return self._reduced_tax_rate_type
+
+    @reduced_tax_rate_type.setter
+    def reduced_tax_rate_type(self, value):
+        self._reduced_tax_rate_type = value
     @property
     def refined_oil_gas_station(self):
         return self._refined_oil_gas_station
@@ -557,6 +565,11 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
                 params['real_property_business_list'] = self.real_property_business_list.to_alipay_dict()
             else:
                 params['real_property_business_list'] = self.real_property_business_list
+        if self.reduced_tax_rate_type:
+            if hasattr(self.reduced_tax_rate_type, 'to_alipay_dict'):
+                params['reduced_tax_rate_type'] = self.reduced_tax_rate_type.to_alipay_dict()
+            else:
+                params['reduced_tax_rate_type'] = self.reduced_tax_rate_type
         if self.refined_oil_gas_station:
             if hasattr(self.refined_oil_gas_station, 'to_alipay_dict'):
                 params['refined_oil_gas_station'] = self.refined_oil_gas_station.to_alipay_dict()
@@ -692,6 +705,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyCreateModel(object):
             o.product_id = d['product_id']
         if 'real_property_business_list' in d:
             o.real_property_business_list = d['real_property_business_list']
+        if 'reduced_tax_rate_type' in d:
+            o.reduced_tax_rate_type = d['reduced_tax_rate_type']
         if 'refined_oil_gas_station' in d:
             o.refined_oil_gas_station = d['refined_oil_gas_station']
         if 'related_blue_invoice_no' in d:

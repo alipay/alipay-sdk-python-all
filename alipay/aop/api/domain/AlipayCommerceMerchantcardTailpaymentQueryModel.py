@@ -12,6 +12,7 @@ class AlipayCommerceMerchantcardTailpaymentQueryModel(object):
         self._main_order_id = None
         self._page_num = None
         self._page_size = None
+        self._tail_payment_id = None
 
     @property
     def main_booking_order_id(self):
@@ -41,6 +42,13 @@ class AlipayCommerceMerchantcardTailpaymentQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def tail_payment_id(self):
+        return self._tail_payment_id
+
+    @tail_payment_id.setter
+    def tail_payment_id(self, value):
+        self._tail_payment_id = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayCommerceMerchantcardTailpaymentQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.tail_payment_id:
+            if hasattr(self.tail_payment_id, 'to_alipay_dict'):
+                params['tail_payment_id'] = self.tail_payment_id.to_alipay_dict()
+            else:
+                params['tail_payment_id'] = self.tail_payment_id
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayCommerceMerchantcardTailpaymentQueryModel(object):
             o.page_num = d['page_num']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'tail_payment_id' in d:
+            o.tail_payment_id = d['tail_payment_id']
         return o
 
 

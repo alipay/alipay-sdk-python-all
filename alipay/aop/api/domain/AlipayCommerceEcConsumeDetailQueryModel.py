@@ -12,6 +12,7 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
         self._agreement_no = None
         self._ant_shop_id = None
         self._enterprise_id = None
+        self._merchant_role_id = None
         self._pay_no = None
         self._query_options = None
 
@@ -43,6 +44,13 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def merchant_role_id(self):
+        return self._merchant_role_id
+
+    @merchant_role_id.setter
+    def merchant_role_id(self, value):
+        self._merchant_role_id = value
     @property
     def pay_no(self):
         return self._pay_no
@@ -84,6 +92,11 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.merchant_role_id:
+            if hasattr(self.merchant_role_id, 'to_alipay_dict'):
+                params['merchant_role_id'] = self.merchant_role_id.to_alipay_dict()
+            else:
+                params['merchant_role_id'] = self.merchant_role_id
         if self.pay_no:
             if hasattr(self.pay_no, 'to_alipay_dict'):
                 params['pay_no'] = self.pay_no.to_alipay_dict()
@@ -114,6 +127,8 @@ class AlipayCommerceEcConsumeDetailQueryModel(object):
             o.ant_shop_id = d['ant_shop_id']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'merchant_role_id' in d:
+            o.merchant_role_id = d['merchant_role_id']
         if 'pay_no' in d:
             o.pay_no = d['pay_no']
         if 'query_options' in d:

@@ -9,11 +9,13 @@ class AlipayTradeSaasOrderQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayTradeSaasOrderQueryResponse, self).__init__()
+        self._biz_scene = None
         self._buyer_bank_account = None
         self._buyer_bank_name = None
         self._buyer_name = None
         self._buyer_pay_amount = None
         self._close_reason = None
+        self._inst_remark = None
         self._memo = None
         self._order_no = None
         self._out_trade_no = None
@@ -26,6 +28,13 @@ class AlipayTradeSaasOrderQueryResponse(AlipayResponse):
         self._trade_no = None
         self._trade_status = None
 
+    @property
+    def biz_scene(self):
+        return self._biz_scene
+
+    @biz_scene.setter
+    def biz_scene(self, value):
+        self._biz_scene = value
     @property
     def buyer_bank_account(self):
         return self._buyer_bank_account
@@ -61,6 +70,13 @@ class AlipayTradeSaasOrderQueryResponse(AlipayResponse):
     @close_reason.setter
     def close_reason(self, value):
         self._close_reason = value
+    @property
+    def inst_remark(self):
+        return self._inst_remark
+
+    @inst_remark.setter
+    def inst_remark(self, value):
+        self._inst_remark = value
     @property
     def memo(self):
         return self._memo
@@ -141,6 +157,8 @@ class AlipayTradeSaasOrderQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayTradeSaasOrderQueryResponse, self).parse_response_content(response_content)
+        if 'biz_scene' in response:
+            self.biz_scene = response['biz_scene']
         if 'buyer_bank_account' in response:
             self.buyer_bank_account = response['buyer_bank_account']
         if 'buyer_bank_name' in response:
@@ -151,6 +169,8 @@ class AlipayTradeSaasOrderQueryResponse(AlipayResponse):
             self.buyer_pay_amount = response['buyer_pay_amount']
         if 'close_reason' in response:
             self.close_reason = response['close_reason']
+        if 'inst_remark' in response:
+            self.inst_remark = response['inst_remark']
         if 'memo' in response:
             self.memo = response['memo']
         if 'order_no' in response:

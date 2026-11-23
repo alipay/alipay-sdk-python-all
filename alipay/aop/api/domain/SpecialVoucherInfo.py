@@ -10,6 +10,7 @@ class SpecialVoucherInfo(object):
 
     def __init__(self):
         self._floor_amount = None
+        self._floor_count = None
         self._special_amount = None
         self._voucher_deduct_threshold_info = None
 
@@ -20,6 +21,13 @@ class SpecialVoucherInfo(object):
     @floor_amount.setter
     def floor_amount(self, value):
         self._floor_amount = value
+    @property
+    def floor_count(self):
+        return self._floor_count
+
+    @floor_count.setter
+    def floor_count(self, value):
+        self._floor_count = value
     @property
     def special_amount(self):
         return self._special_amount
@@ -46,6 +54,11 @@ class SpecialVoucherInfo(object):
                 params['floor_amount'] = self.floor_amount.to_alipay_dict()
             else:
                 params['floor_amount'] = self.floor_amount
+        if self.floor_count:
+            if hasattr(self.floor_count, 'to_alipay_dict'):
+                params['floor_count'] = self.floor_count.to_alipay_dict()
+            else:
+                params['floor_count'] = self.floor_count
         if self.special_amount:
             if hasattr(self.special_amount, 'to_alipay_dict'):
                 params['special_amount'] = self.special_amount.to_alipay_dict()
@@ -65,6 +78,8 @@ class SpecialVoucherInfo(object):
         o = SpecialVoucherInfo()
         if 'floor_amount' in d:
             o.floor_amount = d['floor_amount']
+        if 'floor_count' in d:
+            o.floor_count = d['floor_count']
         if 'special_amount' in d:
             o.special_amount = d['special_amount']
         if 'voucher_deduct_threshold_info' in d:

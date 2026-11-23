@@ -53,6 +53,8 @@ class SaleForceUpdateLeadsParams(object):
         self._partner_name = None
         self._platform_uid_id = None
         self._product_family = None
+        self._project_close_comment = None
+        self._project_close_reason = None
         self._project_name = None
         self._project_phase = None
         self._record_list = None
@@ -382,6 +384,20 @@ class SaleForceUpdateLeadsParams(object):
     @product_family.setter
     def product_family(self, value):
         self._product_family = value
+    @property
+    def project_close_comment(self):
+        return self._project_close_comment
+
+    @project_close_comment.setter
+    def project_close_comment(self, value):
+        self._project_close_comment = value
+    @property
+    def project_close_reason(self):
+        return self._project_close_reason
+
+    @project_close_reason.setter
+    def project_close_reason(self, value):
+        self._project_close_reason = value
     @property
     def project_name(self):
         return self._project_name
@@ -720,6 +736,16 @@ class SaleForceUpdateLeadsParams(object):
                 params['product_family'] = self.product_family.to_alipay_dict()
             else:
                 params['product_family'] = self.product_family
+        if self.project_close_comment:
+            if hasattr(self.project_close_comment, 'to_alipay_dict'):
+                params['project_close_comment'] = self.project_close_comment.to_alipay_dict()
+            else:
+                params['project_close_comment'] = self.project_close_comment
+        if self.project_close_reason:
+            if hasattr(self.project_close_reason, 'to_alipay_dict'):
+                params['project_close_reason'] = self.project_close_reason.to_alipay_dict()
+            else:
+                params['project_close_reason'] = self.project_close_reason
         if self.project_name:
             if hasattr(self.project_name, 'to_alipay_dict'):
                 params['project_name'] = self.project_name.to_alipay_dict()
@@ -890,6 +916,10 @@ class SaleForceUpdateLeadsParams(object):
             o.platform_uid_id = d['platform_uid_id']
         if 'product_family' in d:
             o.product_family = d['product_family']
+        if 'project_close_comment' in d:
+            o.project_close_comment = d['project_close_comment']
+        if 'project_close_reason' in d:
+            o.project_close_reason = d['project_close_reason']
         if 'project_name' in d:
             o.project_name = d['project_name']
         if 'project_phase' in d:

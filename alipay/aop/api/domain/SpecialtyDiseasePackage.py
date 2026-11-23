@@ -13,6 +13,7 @@ class SpecialtyDiseasePackage(object):
         self._items = None
         self._lead_doctor_id = None
         self._order_status = None
+        self._pkg_info = None
         self._service_package_desc = None
         self._service_package_id = None
         self._service_package_name = None
@@ -52,6 +53,13 @@ class SpecialtyDiseasePackage(object):
     @order_status.setter
     def order_status(self, value):
         self._order_status = value
+    @property
+    def pkg_info(self):
+        return self._pkg_info
+
+    @pkg_info.setter
+    def pkg_info(self, value):
+        self._pkg_info = value
     @property
     def service_package_desc(self):
         return self._service_package_desc
@@ -109,6 +117,11 @@ class SpecialtyDiseasePackage(object):
                 params['order_status'] = self.order_status.to_alipay_dict()
             else:
                 params['order_status'] = self.order_status
+        if self.pkg_info:
+            if hasattr(self.pkg_info, 'to_alipay_dict'):
+                params['pkg_info'] = self.pkg_info.to_alipay_dict()
+            else:
+                params['pkg_info'] = self.pkg_info
         if self.service_package_desc:
             if hasattr(self.service_package_desc, 'to_alipay_dict'):
                 params['service_package_desc'] = self.service_package_desc.to_alipay_dict()
@@ -144,6 +157,8 @@ class SpecialtyDiseasePackage(object):
             o.lead_doctor_id = d['lead_doctor_id']
         if 'order_status' in d:
             o.order_status = d['order_status']
+        if 'pkg_info' in d:
+            o.pkg_info = d['pkg_info']
         if 'service_package_desc' in d:
             o.service_package_desc = d['service_package_desc']
         if 'service_package_id' in d:

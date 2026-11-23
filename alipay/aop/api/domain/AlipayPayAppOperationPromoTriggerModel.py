@@ -14,6 +14,7 @@ class AlipayPayAppOperationPromoTriggerModel(object):
         self._device_type = None
         self._open_id = None
         self._pay_operation_info = None
+        self._promo_params = None
         self._request_id = None
         self._trigger_type = None
         self._user_id = None
@@ -60,6 +61,13 @@ class AlipayPayAppOperationPromoTriggerModel(object):
     @pay_operation_info.setter
     def pay_operation_info(self, value):
         self._pay_operation_info = value
+    @property
+    def promo_params(self):
+        return self._promo_params
+
+    @promo_params.setter
+    def promo_params(self, value):
+        self._promo_params = value
     @property
     def request_id(self):
         return self._request_id
@@ -115,6 +123,11 @@ class AlipayPayAppOperationPromoTriggerModel(object):
                 params['pay_operation_info'] = self.pay_operation_info.to_alipay_dict()
             else:
                 params['pay_operation_info'] = self.pay_operation_info
+        if self.promo_params:
+            if hasattr(self.promo_params, 'to_alipay_dict'):
+                params['promo_params'] = self.promo_params.to_alipay_dict()
+            else:
+                params['promo_params'] = self.promo_params
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -149,6 +162,8 @@ class AlipayPayAppOperationPromoTriggerModel(object):
             o.open_id = d['open_id']
         if 'pay_operation_info' in d:
             o.pay_operation_info = d['pay_operation_info']
+        if 'promo_params' in d:
+            o.promo_params = d['promo_params']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'trigger_type' in d:

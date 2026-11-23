@@ -3,17 +3,30 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.CorporationInfo import CorporationInfo
 
 
 class AlipayTradeCustomerCreateModel(object):
 
     def __init__(self):
+        self._corporation_info = None
         self._description = None
         self._email = None
         self._merchant_request_no = None
         self._name = None
         self._phone = None
+        self._type = None
 
+    @property
+    def corporation_info(self):
+        return self._corporation_info
+
+    @corporation_info.setter
+    def corporation_info(self, value):
+        if isinstance(value, CorporationInfo):
+            self._corporation_info = value
+        else:
+            self._corporation_info = CorporationInfo.from_alipay_dict(value)
     @property
     def description(self):
         return self._description
@@ -49,10 +62,22 @@ class AlipayTradeCustomerCreateModel(object):
     @phone.setter
     def phone(self, value):
         self._phone = value
+    @property
+    def type(self):
+        return self._type
+
+    @type.setter
+    def type(self, value):
+        self._type = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.corporation_info:
+            if hasattr(self.corporation_info, 'to_alipay_dict'):
+                params['corporation_info'] = self.corporation_info.to_alipay_dict()
+            else:
+                params['corporation_info'] = self.corporation_info
         if self.description:
             if hasattr(self.description, 'to_alipay_dict'):
                 params['description'] = self.description.to_alipay_dict()
@@ -78,6 +103,11 @@ class AlipayTradeCustomerCreateModel(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.type:
+            if hasattr(self.type, 'to_alipay_dict'):
+                params['type'] = self.type.to_alipay_dict()
+            else:
+                params['type'] = self.type
         return params
 
     @staticmethod
@@ -85,6 +115,8 @@ class AlipayTradeCustomerCreateModel(object):
         if not d:
             return None
         o = AlipayTradeCustomerCreateModel()
+        if 'corporation_info' in d:
+            o.corporation_info = d['corporation_info']
         if 'description' in d:
             o.description = d['description']
         if 'email' in d:
@@ -95,6 +127,8 @@ class AlipayTradeCustomerCreateModel(object):
             o.name = d['name']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'type' in d:
+            o.type = d['type']
         return o
 
 

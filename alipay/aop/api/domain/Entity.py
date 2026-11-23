@@ -13,6 +13,7 @@ class Entity(object):
         self._department = None
         self._disease = None
         self._event_id = None
+        self._region = None
 
     @property
     def case_id(self):
@@ -49,6 +50,13 @@ class Entity(object):
     @event_id.setter
     def event_id(self, value):
         self._event_id = value
+    @property
+    def region(self):
+        return self._region
+
+    @region.setter
+    def region(self, value):
+        self._region = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class Entity(object):
                 params['event_id'] = self.event_id.to_alipay_dict()
             else:
                 params['event_id'] = self.event_id
+        if self.region:
+            if hasattr(self.region, 'to_alipay_dict'):
+                params['region'] = self.region.to_alipay_dict()
+            else:
+                params['region'] = self.region
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class Entity(object):
             o.disease = d['disease']
         if 'event_id' in d:
             o.event_id = d['event_id']
+        if 'region' in d:
+            o.region = d['region']
         return o
 
 

@@ -12,6 +12,7 @@ class AlipayUserAgreementDelegationQueryModel(object):
         self._delegation_id = None
         self._external_agreement_no = None
         self._external_delegation_id = None
+        self._personal_product_code = None
 
     @property
     def agreement_no(self):
@@ -41,6 +42,13 @@ class AlipayUserAgreementDelegationQueryModel(object):
     @external_delegation_id.setter
     def external_delegation_id(self, value):
         self._external_delegation_id = value
+    @property
+    def personal_product_code(self):
+        return self._personal_product_code
+
+    @personal_product_code.setter
+    def personal_product_code(self, value):
+        self._personal_product_code = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class AlipayUserAgreementDelegationQueryModel(object):
                 params['external_delegation_id'] = self.external_delegation_id.to_alipay_dict()
             else:
                 params['external_delegation_id'] = self.external_delegation_id
+        if self.personal_product_code:
+            if hasattr(self.personal_product_code, 'to_alipay_dict'):
+                params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
+            else:
+                params['personal_product_code'] = self.personal_product_code
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class AlipayUserAgreementDelegationQueryModel(object):
             o.external_agreement_no = d['external_agreement_no']
         if 'external_delegation_id' in d:
             o.external_delegation_id = d['external_delegation_id']
+        if 'personal_product_code' in d:
+            o.personal_product_code = d['personal_product_code']
         return o
 
 

@@ -9,12 +9,20 @@ class AlipayCommerceCareerOpenbaseFollowupQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceCareerOpenbaseFollowupQueryResponse, self).__init__()
+        self._artifact_id = None
         self._ended_type = None
         self._order_no = None
         self._out_biz_no = None
         self._plan_id = None
         self._status = None
 
+    @property
+    def artifact_id(self):
+        return self._artifact_id
+
+    @artifact_id.setter
+    def artifact_id(self, value):
+        self._artifact_id = value
     @property
     def ended_type(self):
         return self._ended_type
@@ -53,6 +61,8 @@ class AlipayCommerceCareerOpenbaseFollowupQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceCareerOpenbaseFollowupQueryResponse, self).parse_response_content(response_content)
+        if 'artifact_id' in response:
+            self.artifact_id = response['artifact_id']
         if 'ended_type' in response:
             self.ended_type = response['ended_type']
         if 'order_no' in response:

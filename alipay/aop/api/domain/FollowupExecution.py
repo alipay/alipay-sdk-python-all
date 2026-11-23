@@ -13,6 +13,7 @@ class FollowupExecution(object):
         self._call_status = None
         self._execution_no = None
         self._occurred_at = None
+        self._record_text = None
         self._record_url = None
         self._result_params = None
 
@@ -44,6 +45,13 @@ class FollowupExecution(object):
     @occurred_at.setter
     def occurred_at(self, value):
         self._occurred_at = value
+    @property
+    def record_text(self):
+        return self._record_text
+
+    @record_text.setter
+    def record_text(self, value):
+        self._record_text = value
     @property
     def record_url(self):
         return self._record_url
@@ -85,6 +93,11 @@ class FollowupExecution(object):
                 params['occurred_at'] = self.occurred_at.to_alipay_dict()
             else:
                 params['occurred_at'] = self.occurred_at
+        if self.record_text:
+            if hasattr(self.record_text, 'to_alipay_dict'):
+                params['record_text'] = self.record_text.to_alipay_dict()
+            else:
+                params['record_text'] = self.record_text
         if self.record_url:
             if hasattr(self.record_url, 'to_alipay_dict'):
                 params['record_url'] = self.record_url.to_alipay_dict()
@@ -110,6 +123,8 @@ class FollowupExecution(object):
             o.execution_no = d['execution_no']
         if 'occurred_at' in d:
             o.occurred_at = d['occurred_at']
+        if 'record_text' in d:
+            o.record_text = d['record_text']
         if 'record_url' in d:
             o.record_url = d['record_url']
         if 'result_params' in d:

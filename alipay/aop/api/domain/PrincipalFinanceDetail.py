@@ -9,10 +9,12 @@ class PrincipalFinanceDetail(object):
 
     def __init__(self):
         self._alipay_account = None
+        self._alipay_pid = None
         self._biz_date = None
         self._cash_amount_format = None
         self._credit_amount_format = None
         self._cut_amount_format = None
+        self._principal_id = None
         self._principal_name = None
         self._rebate_red_packet_amount_format = None
         self._red_packet_amount_format = None
@@ -26,6 +28,13 @@ class PrincipalFinanceDetail(object):
     @alipay_account.setter
     def alipay_account(self, value):
         self._alipay_account = value
+    @property
+    def alipay_pid(self):
+        return self._alipay_pid
+
+    @alipay_pid.setter
+    def alipay_pid(self, value):
+        self._alipay_pid = value
     @property
     def biz_date(self):
         return self._biz_date
@@ -54,6 +63,13 @@ class PrincipalFinanceDetail(object):
     @cut_amount_format.setter
     def cut_amount_format(self, value):
         self._cut_amount_format = value
+    @property
+    def principal_id(self):
+        return self._principal_id
+
+    @principal_id.setter
+    def principal_id(self, value):
+        self._principal_id = value
     @property
     def principal_name(self):
         return self._principal_name
@@ -98,6 +114,11 @@ class PrincipalFinanceDetail(object):
                 params['alipay_account'] = self.alipay_account.to_alipay_dict()
             else:
                 params['alipay_account'] = self.alipay_account
+        if self.alipay_pid:
+            if hasattr(self.alipay_pid, 'to_alipay_dict'):
+                params['alipay_pid'] = self.alipay_pid.to_alipay_dict()
+            else:
+                params['alipay_pid'] = self.alipay_pid
         if self.biz_date:
             if hasattr(self.biz_date, 'to_alipay_dict'):
                 params['biz_date'] = self.biz_date.to_alipay_dict()
@@ -118,6 +139,11 @@ class PrincipalFinanceDetail(object):
                 params['cut_amount_format'] = self.cut_amount_format.to_alipay_dict()
             else:
                 params['cut_amount_format'] = self.cut_amount_format
+        if self.principal_id:
+            if hasattr(self.principal_id, 'to_alipay_dict'):
+                params['principal_id'] = self.principal_id.to_alipay_dict()
+            else:
+                params['principal_id'] = self.principal_id
         if self.principal_name:
             if hasattr(self.principal_name, 'to_alipay_dict'):
                 params['principal_name'] = self.principal_name.to_alipay_dict()
@@ -152,6 +178,8 @@ class PrincipalFinanceDetail(object):
         o = PrincipalFinanceDetail()
         if 'alipay_account' in d:
             o.alipay_account = d['alipay_account']
+        if 'alipay_pid' in d:
+            o.alipay_pid = d['alipay_pid']
         if 'biz_date' in d:
             o.biz_date = d['biz_date']
         if 'cash_amount_format' in d:
@@ -160,6 +188,8 @@ class PrincipalFinanceDetail(object):
             o.credit_amount_format = d['credit_amount_format']
         if 'cut_amount_format' in d:
             o.cut_amount_format = d['cut_amount_format']
+        if 'principal_id' in d:
+            o.principal_id = d['principal_id']
         if 'principal_name' in d:
             o.principal_name = d['principal_name']
         if 'rebate_red_packet_amount_format' in d:

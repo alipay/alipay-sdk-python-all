@@ -11,11 +11,14 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
     def __init__(self):
         self._main_booking_order_id = None
         self._main_order_id = None
+        self._main_order_type = None
         self._out_order_id = None
         self._pay_invalid_hours = None
         self._service_desc = None
         self._service_programs = None
+        self._settle_shop_id = None
         self._tail_payment_order_price_yuan = None
+        self._third_category_code = None
 
     @property
     def main_booking_order_id(self):
@@ -31,6 +34,13 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
     @main_order_id.setter
     def main_order_id(self, value):
         self._main_order_id = value
+    @property
+    def main_order_type(self):
+        return self._main_order_type
+
+    @main_order_type.setter
+    def main_order_type(self, value):
+        self._main_order_type = value
     @property
     def out_order_id(self):
         return self._out_order_id
@@ -66,12 +76,26 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
                 else:
                     self._service_programs.append(LifeServiceTailPaymentServiceProgram.from_alipay_dict(i))
     @property
+    def settle_shop_id(self):
+        return self._settle_shop_id
+
+    @settle_shop_id.setter
+    def settle_shop_id(self, value):
+        self._settle_shop_id = value
+    @property
     def tail_payment_order_price_yuan(self):
         return self._tail_payment_order_price_yuan
 
     @tail_payment_order_price_yuan.setter
     def tail_payment_order_price_yuan(self, value):
         self._tail_payment_order_price_yuan = value
+    @property
+    def third_category_code(self):
+        return self._third_category_code
+
+    @third_category_code.setter
+    def third_category_code(self, value):
+        self._third_category_code = value
 
 
     def to_alipay_dict(self):
@@ -86,6 +110,11 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
                 params['main_order_id'] = self.main_order_id.to_alipay_dict()
             else:
                 params['main_order_id'] = self.main_order_id
+        if self.main_order_type:
+            if hasattr(self.main_order_type, 'to_alipay_dict'):
+                params['main_order_type'] = self.main_order_type.to_alipay_dict()
+            else:
+                params['main_order_type'] = self.main_order_type
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
@@ -111,11 +140,21 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
                 params['service_programs'] = self.service_programs.to_alipay_dict()
             else:
                 params['service_programs'] = self.service_programs
+        if self.settle_shop_id:
+            if hasattr(self.settle_shop_id, 'to_alipay_dict'):
+                params['settle_shop_id'] = self.settle_shop_id.to_alipay_dict()
+            else:
+                params['settle_shop_id'] = self.settle_shop_id
         if self.tail_payment_order_price_yuan:
             if hasattr(self.tail_payment_order_price_yuan, 'to_alipay_dict'):
                 params['tail_payment_order_price_yuan'] = self.tail_payment_order_price_yuan.to_alipay_dict()
             else:
                 params['tail_payment_order_price_yuan'] = self.tail_payment_order_price_yuan
+        if self.third_category_code:
+            if hasattr(self.third_category_code, 'to_alipay_dict'):
+                params['third_category_code'] = self.third_category_code.to_alipay_dict()
+            else:
+                params['third_category_code'] = self.third_category_code
         return params
 
     @staticmethod
@@ -127,6 +166,8 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
             o.main_booking_order_id = d['main_booking_order_id']
         if 'main_order_id' in d:
             o.main_order_id = d['main_order_id']
+        if 'main_order_type' in d:
+            o.main_order_type = d['main_order_type']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
         if 'pay_invalid_hours' in d:
@@ -135,8 +176,12 @@ class AlipayCommerceMerchantcardTailpaymentCreateModel(object):
             o.service_desc = d['service_desc']
         if 'service_programs' in d:
             o.service_programs = d['service_programs']
+        if 'settle_shop_id' in d:
+            o.settle_shop_id = d['settle_shop_id']
         if 'tail_payment_order_price_yuan' in d:
             o.tail_payment_order_price_yuan = d['tail_payment_order_price_yuan']
+        if 'third_category_code' in d:
+            o.third_category_code = d['third_category_code']
         return o
 
 

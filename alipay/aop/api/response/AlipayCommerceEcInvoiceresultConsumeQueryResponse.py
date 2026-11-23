@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
+from alipay.aop.api.domain.IndustrySpecificInfo import IndustrySpecificInfo
 from alipay.aop.api.domain.InvoiceMerchantItem import InvoiceMerchantItem
 
 
@@ -18,6 +19,7 @@ class AlipayCommerceEcInvoiceresultConsumeQueryResponse(AlipayResponse):
         self._buyer_tax_no = None
         self._buyer_tel = None
         self._fail_message = None
+        self._industry_specific_info = None
         self._invoice_amount = None
         self._invoice_amount_without_tax = None
         self._invoice_apply_id = None
@@ -92,6 +94,16 @@ class AlipayCommerceEcInvoiceresultConsumeQueryResponse(AlipayResponse):
     @fail_message.setter
     def fail_message(self, value):
         self._fail_message = value
+    @property
+    def industry_specific_info(self):
+        return self._industry_specific_info
+
+    @industry_specific_info.setter
+    def industry_specific_info(self, value):
+        if isinstance(value, IndustrySpecificInfo):
+            self._industry_specific_info = value
+        else:
+            self._industry_specific_info = IndustrySpecificInfo.from_alipay_dict(value)
     @property
     def invoice_amount(self):
         return self._invoice_amount
@@ -236,6 +248,8 @@ class AlipayCommerceEcInvoiceresultConsumeQueryResponse(AlipayResponse):
             self.buyer_tel = response['buyer_tel']
         if 'fail_message' in response:
             self.fail_message = response['fail_message']
+        if 'industry_specific_info' in response:
+            self.industry_specific_info = response['industry_specific_info']
         if 'invoice_amount' in response:
             self.invoice_amount = response['invoice_amount']
         if 'invoice_amount_without_tax' in response:

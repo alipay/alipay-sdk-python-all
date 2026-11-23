@@ -12,6 +12,8 @@ class DatadigitalFincloudGeneralsaasOcrLlmDetectRequest(object):
 
     def __init__(self, biz_model=None):
         self._biz_model = biz_model
+        self._extract_fields = None
+        self._ocr_type = None
         self._outer_order_no = None
         self._prompt = None
         self._file_content = None
@@ -32,6 +34,23 @@ class DatadigitalFincloudGeneralsaasOcrLlmDetectRequest(object):
     def biz_model(self, value):
         self._biz_model = value
 
+    @property
+    def extract_fields(self):
+        return self._extract_fields
+
+    @extract_fields.setter
+    def extract_fields(self, value):
+        if isinstance(value, list):
+            self._extract_fields = list()
+            for i in value:
+                self._extract_fields.append(i)
+    @property
+    def ocr_type(self):
+        return self._ocr_type
+
+    @ocr_type.setter
+    def ocr_type(self, value):
+        self._ocr_type = value
     @property
     def outer_order_no(self):
         return self._outer_order_no
@@ -134,6 +153,18 @@ class DatadigitalFincloudGeneralsaasOcrLlmDetectRequest(object):
         params[P_VERSION] = self.version
         if self.biz_model:
             params[P_BIZ_CONTENT] = json.dumps(obj=self.biz_model.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.extract_fields:
+            if isinstance(self.extract_fields, list):
+                for i in range(0, len(self.extract_fields)):
+                    element = self.extract_fields[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.extract_fields[i] = element.to_alipay_dict()
+                params['extract_fields'] = json.dumps(obj=self.extract_fields, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+        if self.ocr_type:
+            if hasattr(self.ocr_type, 'to_alipay_dict'):
+                params['ocr_type'] = json.dumps(obj=self.ocr_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['ocr_type'] = self.ocr_type
         if self.outer_order_no:
             if hasattr(self.outer_order_no, 'to_alipay_dict'):
                 params['outer_order_no'] = json.dumps(obj=self.outer_order_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))

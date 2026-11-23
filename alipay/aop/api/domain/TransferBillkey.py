@@ -10,6 +10,7 @@ class TransferBillkey(object):
     def __init__(self):
         self._bill_key = None
         self._inst_id = None
+        self._second_level_keys = None
 
     @property
     def bill_key(self):
@@ -25,6 +26,13 @@ class TransferBillkey(object):
     @inst_id.setter
     def inst_id(self, value):
         self._inst_id = value
+    @property
+    def second_level_keys(self):
+        return self._second_level_keys
+
+    @second_level_keys.setter
+    def second_level_keys(self, value):
+        self._second_level_keys = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class TransferBillkey(object):
                 params['inst_id'] = self.inst_id.to_alipay_dict()
             else:
                 params['inst_id'] = self.inst_id
+        if self.second_level_keys:
+            if hasattr(self.second_level_keys, 'to_alipay_dict'):
+                params['second_level_keys'] = self.second_level_keys.to_alipay_dict()
+            else:
+                params['second_level_keys'] = self.second_level_keys
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class TransferBillkey(object):
             o.bill_key = d['bill_key']
         if 'inst_id' in d:
             o.inst_id = d['inst_id']
+        if 'second_level_keys' in d:
+            o.second_level_keys = d['second_level_keys']
         return o
 
 

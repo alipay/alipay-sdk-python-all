@@ -9,10 +9,18 @@ class AlipayOverseasTransferCertifyResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayOverseasTransferCertifyResponse, self).__init__()
+        self._has_collection_method = None
         self._has_default_card = None
         self._pass_through_info = None
         self._result_msg = None
 
+    @property
+    def has_collection_method(self):
+        return self._has_collection_method
+
+    @has_collection_method.setter
+    def has_collection_method(self, value):
+        self._has_collection_method = value
     @property
     def has_default_card(self):
         return self._has_default_card
@@ -37,6 +45,8 @@ class AlipayOverseasTransferCertifyResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayOverseasTransferCertifyResponse, self).parse_response_content(response_content)
+        if 'has_collection_method' in response:
+            self.has_collection_method = response['has_collection_method']
         if 'has_default_card' in response:
             self.has_default_card = response['has_default_card']
         if 'pass_through_info' in response:

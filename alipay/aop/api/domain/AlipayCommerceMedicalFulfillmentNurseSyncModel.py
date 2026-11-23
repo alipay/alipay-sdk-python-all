@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.LocationInfoDTO import LocationInfoDTO
 
 
 class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
@@ -12,12 +13,14 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
         self._expected_report_start_time = None
         self._fulfillment_id = None
         self._gender = None
+        self._location_info = None
         self._nurse_id = None
         self._nurse_name = None
         self._nurse_status = None
         self._nurse_status_desc = None
         self._nurse_status_time = None
         self._out_biz_no = None
+        self._server_type = None
         self._trade_order_id = None
         self._type = None
         self._verify_code = None
@@ -50,6 +53,16 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
     @gender.setter
     def gender(self, value):
         self._gender = value
+    @property
+    def location_info(self):
+        return self._location_info
+
+    @location_info.setter
+    def location_info(self, value):
+        if isinstance(value, LocationInfoDTO):
+            self._location_info = value
+        else:
+            self._location_info = LocationInfoDTO.from_alipay_dict(value)
     @property
     def nurse_id(self):
         return self._nurse_id
@@ -92,6 +105,13 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
     @out_biz_no.setter
     def out_biz_no(self, value):
         self._out_biz_no = value
+    @property
+    def server_type(self):
+        return self._server_type
+
+    @server_type.setter
+    def server_type(self, value):
+        self._server_type = value
     @property
     def trade_order_id(self):
         return self._trade_order_id
@@ -137,6 +157,11 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
                 params['gender'] = self.gender.to_alipay_dict()
             else:
                 params['gender'] = self.gender
+        if self.location_info:
+            if hasattr(self.location_info, 'to_alipay_dict'):
+                params['location_info'] = self.location_info.to_alipay_dict()
+            else:
+                params['location_info'] = self.location_info
         if self.nurse_id:
             if hasattr(self.nurse_id, 'to_alipay_dict'):
                 params['nurse_id'] = self.nurse_id.to_alipay_dict()
@@ -167,6 +192,11 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
                 params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
             else:
                 params['out_biz_no'] = self.out_biz_no
+        if self.server_type:
+            if hasattr(self.server_type, 'to_alipay_dict'):
+                params['server_type'] = self.server_type.to_alipay_dict()
+            else:
+                params['server_type'] = self.server_type
         if self.trade_order_id:
             if hasattr(self.trade_order_id, 'to_alipay_dict'):
                 params['trade_order_id'] = self.trade_order_id.to_alipay_dict()
@@ -197,6 +227,8 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
             o.fulfillment_id = d['fulfillment_id']
         if 'gender' in d:
             o.gender = d['gender']
+        if 'location_info' in d:
+            o.location_info = d['location_info']
         if 'nurse_id' in d:
             o.nurse_id = d['nurse_id']
         if 'nurse_name' in d:
@@ -209,6 +241,8 @@ class AlipayCommerceMedicalFulfillmentNurseSyncModel(object):
             o.nurse_status_time = d['nurse_status_time']
         if 'out_biz_no' in d:
             o.out_biz_no = d['out_biz_no']
+        if 'server_type' in d:
+            o.server_type = d['server_type']
         if 'trade_order_id' in d:
             o.trade_order_id = d['trade_order_id']
         if 'type' in d:

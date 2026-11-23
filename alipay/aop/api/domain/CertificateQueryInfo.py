@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
+from alipay.aop.api.domain.DeductionInfoList import DeductionInfoList
+from alipay.aop.api.domain.PayBillInfo import PayBillInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 from alipay.aop.api.domain.CertificateTimesCardInfo import CertificateTimesCardInfo
 from alipay.aop.api.domain.CertificateUseRuleInfo import CertificateUseRuleInfo
@@ -16,7 +18,9 @@ class CertificateQueryInfo(object):
         self._can_use = None
         self._certificate_id = None
         self._code = None
+        self._deduction_info_list = None
         self._out_order_id = None
+        self._pay_bill_info = None
         self._sku_info = None
         self._status = None
         self._times_card_info = None
@@ -56,12 +60,35 @@ class CertificateQueryInfo(object):
     def code(self, value):
         self._code = value
     @property
+    def deduction_info_list(self):
+        return self._deduction_info_list
+
+    @deduction_info_list.setter
+    def deduction_info_list(self, value):
+        if isinstance(value, list):
+            self._deduction_info_list = list()
+            for i in value:
+                if isinstance(i, DeductionInfoList):
+                    self._deduction_info_list.append(i)
+                else:
+                    self._deduction_info_list.append(DeductionInfoList.from_alipay_dict(i))
+    @property
     def out_order_id(self):
         return self._out_order_id
 
     @out_order_id.setter
     def out_order_id(self, value):
         self._out_order_id = value
+    @property
+    def pay_bill_info(self):
+        return self._pay_bill_info
+
+    @pay_bill_info.setter
+    def pay_bill_info(self, value):
+        if isinstance(value, PayBillInfo):
+            self._pay_bill_info = value
+        else:
+            self._pay_bill_info = PayBillInfo.from_alipay_dict(value)
     @property
     def sku_info(self):
         return self._sku_info
@@ -137,11 +164,26 @@ class CertificateQueryInfo(object):
                 params['code'] = self.code.to_alipay_dict()
             else:
                 params['code'] = self.code
+        if self.deduction_info_list:
+            if isinstance(self.deduction_info_list, list):
+                for i in range(0, len(self.deduction_info_list)):
+                    element = self.deduction_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.deduction_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.deduction_info_list, 'to_alipay_dict'):
+                params['deduction_info_list'] = self.deduction_info_list.to_alipay_dict()
+            else:
+                params['deduction_info_list'] = self.deduction_info_list
         if self.out_order_id:
             if hasattr(self.out_order_id, 'to_alipay_dict'):
                 params['out_order_id'] = self.out_order_id.to_alipay_dict()
             else:
                 params['out_order_id'] = self.out_order_id
+        if self.pay_bill_info:
+            if hasattr(self.pay_bill_info, 'to_alipay_dict'):
+                params['pay_bill_info'] = self.pay_bill_info.to_alipay_dict()
+            else:
+                params['pay_bill_info'] = self.pay_bill_info
         if self.sku_info:
             if hasattr(self.sku_info, 'to_alipay_dict'):
                 params['sku_info'] = self.sku_info.to_alipay_dict()
@@ -187,8 +229,12 @@ class CertificateQueryInfo(object):
             o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
+        if 'deduction_info_list' in d:
+            o.deduction_info_list = d['deduction_info_list']
         if 'out_order_id' in d:
             o.out_order_id = d['out_order_id']
+        if 'pay_bill_info' in d:
+            o.pay_bill_info = d['pay_bill_info']
         if 'sku_info' in d:
             o.sku_info = d['sku_info']
         if 'status' in d:

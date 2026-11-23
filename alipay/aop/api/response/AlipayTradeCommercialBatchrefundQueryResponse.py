@@ -16,6 +16,7 @@ class AlipayTradeCommercialBatchrefundQueryResponse(AlipayResponse):
         self._details = None
         self._fail_count = None
         self._refund_reason = None
+        self._refund_scene = None
         self._status = None
         self._success_count = None
         self._total_count = None
@@ -70,6 +71,13 @@ class AlipayTradeCommercialBatchrefundQueryResponse(AlipayResponse):
     def refund_reason(self, value):
         self._refund_reason = value
     @property
+    def refund_scene(self):
+        return self._refund_scene
+
+    @refund_scene.setter
+    def refund_scene(self, value):
+        self._refund_scene = value
+    @property
     def status(self):
         return self._status
 
@@ -112,6 +120,8 @@ class AlipayTradeCommercialBatchrefundQueryResponse(AlipayResponse):
             self.fail_count = response['fail_count']
         if 'refund_reason' in response:
             self.refund_reason = response['refund_reason']
+        if 'refund_scene' in response:
+            self.refund_scene = response['refund_scene']
         if 'status' in response:
             self.status = response['status']
         if 'success_count' in response:

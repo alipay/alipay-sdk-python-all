@@ -10,6 +10,7 @@ class AlipayInsScenePolicyUrlQueryModel(object):
     def __init__(self):
         self._biz_id = None
         self._partner_org_id = None
+        self._policy_no = None
         self._pre_order_id = None
 
     @property
@@ -26,6 +27,13 @@ class AlipayInsScenePolicyUrlQueryModel(object):
     @partner_org_id.setter
     def partner_org_id(self, value):
         self._partner_org_id = value
+    @property
+    def policy_no(self):
+        return self._policy_no
+
+    @policy_no.setter
+    def policy_no(self, value):
+        self._policy_no = value
     @property
     def pre_order_id(self):
         return self._pre_order_id
@@ -47,6 +55,11 @@ class AlipayInsScenePolicyUrlQueryModel(object):
                 params['partner_org_id'] = self.partner_org_id.to_alipay_dict()
             else:
                 params['partner_org_id'] = self.partner_org_id
+        if self.policy_no:
+            if hasattr(self.policy_no, 'to_alipay_dict'):
+                params['policy_no'] = self.policy_no.to_alipay_dict()
+            else:
+                params['policy_no'] = self.policy_no
         if self.pre_order_id:
             if hasattr(self.pre_order_id, 'to_alipay_dict'):
                 params['pre_order_id'] = self.pre_order_id.to_alipay_dict()
@@ -63,6 +76,8 @@ class AlipayInsScenePolicyUrlQueryModel(object):
             o.biz_id = d['biz_id']
         if 'partner_org_id' in d:
             o.partner_org_id = d['partner_org_id']
+        if 'policy_no' in d:
+            o.policy_no = d['policy_no']
         if 'pre_order_id' in d:
             o.pre_order_id = d['pre_order_id']
         return o

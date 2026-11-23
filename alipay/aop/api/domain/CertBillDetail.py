@@ -23,8 +23,10 @@ class CertBillDetail(object):
         self._net_income = None
         self._order_id = None
         self._origin_price = None
+        self._other_third_party_subsidy = None
         self._platform_discount = None
         self._real_pay = None
+        self._receive_mode = None
         self._sale_price = None
         self._scene_name = None
         self._serial_no = None
@@ -43,6 +45,7 @@ class CertBillDetail(object):
         self._verify_point_id = None
         self._verify_point_name = None
         self._verify_time = None
+        self._withdraw_success_time = None
 
     @property
     def alipay_verify_time(self):
@@ -150,6 +153,13 @@ class CertBillDetail(object):
     def origin_price(self, value):
         self._origin_price = value
     @property
+    def other_third_party_subsidy(self):
+        return self._other_third_party_subsidy
+
+    @other_third_party_subsidy.setter
+    def other_third_party_subsidy(self, value):
+        self._other_third_party_subsidy = value
+    @property
     def platform_discount(self):
         return self._platform_discount
 
@@ -163,6 +173,13 @@ class CertBillDetail(object):
     @real_pay.setter
     def real_pay(self, value):
         self._real_pay = value
+    @property
+    def receive_mode(self):
+        return self._receive_mode
+
+    @receive_mode.setter
+    def receive_mode(self, value):
+        self._receive_mode = value
     @property
     def sale_price(self):
         return self._sale_price
@@ -289,6 +306,13 @@ class CertBillDetail(object):
     @verify_time.setter
     def verify_time(self, value):
         self._verify_time = value
+    @property
+    def withdraw_success_time(self):
+        return self._withdraw_success_time
+
+    @withdraw_success_time.setter
+    def withdraw_success_time(self, value):
+        self._withdraw_success_time = value
 
 
     def to_alipay_dict(self):
@@ -368,6 +392,11 @@ class CertBillDetail(object):
                 params['origin_price'] = self.origin_price.to_alipay_dict()
             else:
                 params['origin_price'] = self.origin_price
+        if self.other_third_party_subsidy:
+            if hasattr(self.other_third_party_subsidy, 'to_alipay_dict'):
+                params['other_third_party_subsidy'] = self.other_third_party_subsidy.to_alipay_dict()
+            else:
+                params['other_third_party_subsidy'] = self.other_third_party_subsidy
         if self.platform_discount:
             if hasattr(self.platform_discount, 'to_alipay_dict'):
                 params['platform_discount'] = self.platform_discount.to_alipay_dict()
@@ -378,6 +407,11 @@ class CertBillDetail(object):
                 params['real_pay'] = self.real_pay.to_alipay_dict()
             else:
                 params['real_pay'] = self.real_pay
+        if self.receive_mode:
+            if hasattr(self.receive_mode, 'to_alipay_dict'):
+                params['receive_mode'] = self.receive_mode.to_alipay_dict()
+            else:
+                params['receive_mode'] = self.receive_mode
         if self.sale_price:
             if hasattr(self.sale_price, 'to_alipay_dict'):
                 params['sale_price'] = self.sale_price.to_alipay_dict()
@@ -468,6 +502,11 @@ class CertBillDetail(object):
                 params['verify_time'] = self.verify_time.to_alipay_dict()
             else:
                 params['verify_time'] = self.verify_time
+        if self.withdraw_success_time:
+            if hasattr(self.withdraw_success_time, 'to_alipay_dict'):
+                params['withdraw_success_time'] = self.withdraw_success_time.to_alipay_dict()
+            else:
+                params['withdraw_success_time'] = self.withdraw_success_time
         return params
 
     @staticmethod
@@ -505,10 +544,14 @@ class CertBillDetail(object):
             o.order_id = d['order_id']
         if 'origin_price' in d:
             o.origin_price = d['origin_price']
+        if 'other_third_party_subsidy' in d:
+            o.other_third_party_subsidy = d['other_third_party_subsidy']
         if 'platform_discount' in d:
             o.platform_discount = d['platform_discount']
         if 'real_pay' in d:
             o.real_pay = d['real_pay']
+        if 'receive_mode' in d:
+            o.receive_mode = d['receive_mode']
         if 'sale_price' in d:
             o.sale_price = d['sale_price']
         if 'scene_name' in d:
@@ -545,6 +588,8 @@ class CertBillDetail(object):
             o.verify_point_name = d['verify_point_name']
         if 'verify_time' in d:
             o.verify_time = d['verify_time']
+        if 'withdraw_success_time' in d:
+            o.withdraw_success_time = d['withdraw_success_time']
         return o
 
 

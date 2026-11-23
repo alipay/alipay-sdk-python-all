@@ -12,6 +12,7 @@ class NOrderTagQueryByCoilNoResp(object):
         self._coil_no = None
         self._position_id = None
         self._qr_code_url = None
+        self._route_url = None
 
     @property
     def bind_status(self):
@@ -41,6 +42,13 @@ class NOrderTagQueryByCoilNoResp(object):
     @qr_code_url.setter
     def qr_code_url(self, value):
         self._qr_code_url = value
+    @property
+    def route_url(self):
+        return self._route_url
+
+    @route_url.setter
+    def route_url(self, value):
+        self._route_url = value
 
 
     def to_alipay_dict(self):
@@ -65,6 +73,11 @@ class NOrderTagQueryByCoilNoResp(object):
                 params['qr_code_url'] = self.qr_code_url.to_alipay_dict()
             else:
                 params['qr_code_url'] = self.qr_code_url
+        if self.route_url:
+            if hasattr(self.route_url, 'to_alipay_dict'):
+                params['route_url'] = self.route_url.to_alipay_dict()
+            else:
+                params['route_url'] = self.route_url
         return params
 
     @staticmethod
@@ -80,6 +93,8 @@ class NOrderTagQueryByCoilNoResp(object):
             o.position_id = d['position_id']
         if 'qr_code_url' in d:
             o.qr_code_url = d['qr_code_url']
+        if 'route_url' in d:
+            o.route_url = d['route_url']
         return o
 
 

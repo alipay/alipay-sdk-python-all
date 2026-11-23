@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.DeliveryInfoDTO import DeliveryInfoDTO
+from alipay.aop.api.domain.VirtualInfoDTO import VirtualInfoDTO
 
 
 class AlipayOpenMiniOrderDeliverySendModel(object):
@@ -16,6 +17,7 @@ class AlipayOpenMiniOrderDeliverySendModel(object):
         self._out_order_id = None
         self._ship_done_time = None
         self._user_id = None
+        self._virtual_info = None
 
     @property
     def delivery_list(self):
@@ -72,6 +74,16 @@ class AlipayOpenMiniOrderDeliverySendModel(object):
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def virtual_info(self):
+        return self._virtual_info
+
+    @virtual_info.setter
+    def virtual_info(self, value):
+        if isinstance(value, VirtualInfoDTO):
+            self._virtual_info = value
+        else:
+            self._virtual_info = VirtualInfoDTO.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -116,6 +128,11 @@ class AlipayOpenMiniOrderDeliverySendModel(object):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.virtual_info:
+            if hasattr(self.virtual_info, 'to_alipay_dict'):
+                params['virtual_info'] = self.virtual_info.to_alipay_dict()
+            else:
+                params['virtual_info'] = self.virtual_info
         return params
 
     @staticmethod
@@ -137,6 +154,8 @@ class AlipayOpenMiniOrderDeliverySendModel(object):
             o.ship_done_time = d['ship_done_time']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'virtual_info' in d:
+            o.virtual_info = d['virtual_info']
         return o
 
 

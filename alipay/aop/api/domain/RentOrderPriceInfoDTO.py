@@ -13,6 +13,7 @@ class RentOrderPriceInfoDTO(object):
         self._deposit_price = None
         self._freight = None
         self._order_price = None
+        self._vehicle_setup_price = None
 
     @property
     def additional_price(self):
@@ -49,6 +50,13 @@ class RentOrderPriceInfoDTO(object):
     @order_price.setter
     def order_price(self, value):
         self._order_price = value
+    @property
+    def vehicle_setup_price(self):
+        return self._vehicle_setup_price
+
+    @vehicle_setup_price.setter
+    def vehicle_setup_price(self, value):
+        self._vehicle_setup_price = value
 
 
     def to_alipay_dict(self):
@@ -78,6 +86,11 @@ class RentOrderPriceInfoDTO(object):
                 params['order_price'] = self.order_price.to_alipay_dict()
             else:
                 params['order_price'] = self.order_price
+        if self.vehicle_setup_price:
+            if hasattr(self.vehicle_setup_price, 'to_alipay_dict'):
+                params['vehicle_setup_price'] = self.vehicle_setup_price.to_alipay_dict()
+            else:
+                params['vehicle_setup_price'] = self.vehicle_setup_price
         return params
 
     @staticmethod
@@ -95,6 +108,8 @@ class RentOrderPriceInfoDTO(object):
             o.freight = d['freight']
         if 'order_price' in d:
             o.order_price = d['order_price']
+        if 'vehicle_setup_price' in d:
+            o.vehicle_setup_price = d['vehicle_setup_price']
         return o
 
 

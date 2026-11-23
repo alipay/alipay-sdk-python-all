@@ -9,6 +9,7 @@ from alipay.aop.api.domain.NexusPayPrice import NexusPayPrice
 class SubscriptionQueryPendingItem(object):
 
     def __init__(self):
+        self._charge_mode = None
         self._created = None
         self._item_id = None
         self._period_end = None
@@ -17,6 +18,13 @@ class SubscriptionQueryPendingItem(object):
         self._quantity = None
         self._status = None
 
+    @property
+    def charge_mode(self):
+        return self._charge_mode
+
+    @charge_mode.setter
+    def charge_mode(self, value):
+        self._charge_mode = value
     @property
     def created(self):
         return self._created
@@ -73,6 +81,11 @@ class SubscriptionQueryPendingItem(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.charge_mode:
+            if hasattr(self.charge_mode, 'to_alipay_dict'):
+                params['charge_mode'] = self.charge_mode.to_alipay_dict()
+            else:
+                params['charge_mode'] = self.charge_mode
         if self.created:
             if hasattr(self.created, 'to_alipay_dict'):
                 params['created'] = self.created.to_alipay_dict()
@@ -115,6 +128,8 @@ class SubscriptionQueryPendingItem(object):
         if not d:
             return None
         o = SubscriptionQueryPendingItem()
+        if 'charge_mode' in d:
+            o.charge_mode = d['charge_mode']
         if 'created' in d:
             o.created = d['created']
         if 'item_id' in d:

@@ -12,6 +12,7 @@ class AlipayEbppJobinterviewInterviewInitializeResponse(AlipayResponse):
         self._candidate_id = None
         self._interview_url = None
         self._room_expire_time = None
+        self._shorten_url = None
         self._status = None
 
     @property
@@ -36,6 +37,13 @@ class AlipayEbppJobinterviewInterviewInitializeResponse(AlipayResponse):
     def room_expire_time(self, value):
         self._room_expire_time = value
     @property
+    def shorten_url(self):
+        return self._shorten_url
+
+    @shorten_url.setter
+    def shorten_url(self, value):
+        self._shorten_url = value
+    @property
     def status(self):
         return self._status
 
@@ -51,5 +59,7 @@ class AlipayEbppJobinterviewInterviewInitializeResponse(AlipayResponse):
             self.interview_url = response['interview_url']
         if 'room_expire_time' in response:
             self.room_expire_time = response['room_expire_time']
+        if 'shorten_url' in response:
+            self.shorten_url = response['shorten_url']
         if 'status' in response:
             self.status = response['status']

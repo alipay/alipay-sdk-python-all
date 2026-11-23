@@ -7,6 +7,7 @@ from alipay.aop.api.domain.AccessParams import AccessParams
 from alipay.aop.api.domain.PcConversationHistory import PcConversationHistory
 from alipay.aop.api.domain.PcDelegationParams import PcDelegationParams
 from alipay.aop.api.domain.DelegationExtInfo import DelegationExtInfo
+from alipay.aop.api.domain.OutAgentRiskInfo import OutAgentRiskInfo
 
 
 class AlipayAipayDelegationPcApplyModel(object):
@@ -18,6 +19,7 @@ class AlipayAipayDelegationPcApplyModel(object):
         self._delegation_params = None
         self._ext_info = None
         self._external_agreement_no = None
+        self._out_agent_risk_info = None
         self._personal_product_code = None
 
     @property
@@ -78,6 +80,16 @@ class AlipayAipayDelegationPcApplyModel(object):
     def external_agreement_no(self, value):
         self._external_agreement_no = value
     @property
+    def out_agent_risk_info(self):
+        return self._out_agent_risk_info
+
+    @out_agent_risk_info.setter
+    def out_agent_risk_info(self, value):
+        if isinstance(value, OutAgentRiskInfo):
+            self._out_agent_risk_info = value
+        else:
+            self._out_agent_risk_info = OutAgentRiskInfo.from_alipay_dict(value)
+    @property
     def personal_product_code(self):
         return self._personal_product_code
 
@@ -123,6 +135,11 @@ class AlipayAipayDelegationPcApplyModel(object):
                 params['external_agreement_no'] = self.external_agreement_no.to_alipay_dict()
             else:
                 params['external_agreement_no'] = self.external_agreement_no
+        if self.out_agent_risk_info:
+            if hasattr(self.out_agent_risk_info, 'to_alipay_dict'):
+                params['out_agent_risk_info'] = self.out_agent_risk_info.to_alipay_dict()
+            else:
+                params['out_agent_risk_info'] = self.out_agent_risk_info
         if self.personal_product_code:
             if hasattr(self.personal_product_code, 'to_alipay_dict'):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
@@ -147,6 +164,8 @@ class AlipayAipayDelegationPcApplyModel(object):
             o.ext_info = d['ext_info']
         if 'external_agreement_no' in d:
             o.external_agreement_no = d['external_agreement_no']
+        if 'out_agent_risk_info' in d:
+            o.out_agent_risk_info = d['out_agent_risk_info']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
         return o

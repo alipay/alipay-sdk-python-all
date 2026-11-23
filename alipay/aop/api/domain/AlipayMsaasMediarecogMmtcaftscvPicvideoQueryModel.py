@@ -8,11 +8,19 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryModel(object):
 
     def __init__(self):
+        self._merchant_pid = None
         self._request_id = None
         self._transaction_id = None
         self._type = None
         self._video_detail = None
 
+    @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
     @property
     def request_id(self):
         return self._request_id
@@ -45,6 +53,11 @@ class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.merchant_pid:
+            if hasattr(self.merchant_pid, 'to_alipay_dict'):
+                params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
+            else:
+                params['merchant_pid'] = self.merchant_pid
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -72,6 +85,8 @@ class AlipayMsaasMediarecogMmtcaftscvPicvideoQueryModel(object):
         if not d:
             return None
         o = AlipayMsaasMediarecogMmtcaftscvPicvideoQueryModel()
+        if 'merchant_pid' in d:
+            o.merchant_pid = d['merchant_pid']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'transaction_id' in d:

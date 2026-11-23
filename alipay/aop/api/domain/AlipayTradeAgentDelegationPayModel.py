@@ -12,6 +12,7 @@ class AlipayTradeAgentDelegationPayModel(object):
         self._agreement_no = None
         self._biz_order_no = None
         self._delegation_id = None
+        self._order_str = None
         self._out_request_no = None
         self._prepay_id = None
 
@@ -43,6 +44,13 @@ class AlipayTradeAgentDelegationPayModel(object):
     @delegation_id.setter
     def delegation_id(self, value):
         self._delegation_id = value
+    @property
+    def order_str(self):
+        return self._order_str
+
+    @order_str.setter
+    def order_str(self, value):
+        self._order_str = value
     @property
     def out_request_no(self):
         return self._out_request_no
@@ -81,6 +89,11 @@ class AlipayTradeAgentDelegationPayModel(object):
                 params['delegation_id'] = self.delegation_id.to_alipay_dict()
             else:
                 params['delegation_id'] = self.delegation_id
+        if self.order_str:
+            if hasattr(self.order_str, 'to_alipay_dict'):
+                params['order_str'] = self.order_str.to_alipay_dict()
+            else:
+                params['order_str'] = self.order_str
         if self.out_request_no:
             if hasattr(self.out_request_no, 'to_alipay_dict'):
                 params['out_request_no'] = self.out_request_no.to_alipay_dict()
@@ -106,6 +119,8 @@ class AlipayTradeAgentDelegationPayModel(object):
             o.biz_order_no = d['biz_order_no']
         if 'delegation_id' in d:
             o.delegation_id = d['delegation_id']
+        if 'order_str' in d:
+            o.order_str = d['order_str']
         if 'out_request_no' in d:
             o.out_request_no = d['out_request_no']
         if 'prepay_id' in d:

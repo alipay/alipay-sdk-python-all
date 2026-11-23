@@ -12,6 +12,7 @@ class SubscriptionPaymentDetail(object):
         self._gmt_occur = None
         self._order_no = None
         self._out_req_no = None
+        self._pay_channel = None
         self._pay_status = None
         self._pay_type = None
         self._refund_details = None
@@ -39,6 +40,13 @@ class SubscriptionPaymentDetail(object):
     @out_req_no.setter
     def out_req_no(self, value):
         self._out_req_no = value
+    @property
+    def pay_channel(self):
+        return self._pay_channel
+
+    @pay_channel.setter
+    def pay_channel(self, value):
+        self._pay_channel = value
     @property
     def pay_status(self):
         return self._pay_status
@@ -99,6 +107,11 @@ class SubscriptionPaymentDetail(object):
                 params['out_req_no'] = self.out_req_no.to_alipay_dict()
             else:
                 params['out_req_no'] = self.out_req_no
+        if self.pay_channel:
+            if hasattr(self.pay_channel, 'to_alipay_dict'):
+                params['pay_channel'] = self.pay_channel.to_alipay_dict()
+            else:
+                params['pay_channel'] = self.pay_channel
         if self.pay_status:
             if hasattr(self.pay_status, 'to_alipay_dict'):
                 params['pay_status'] = self.pay_status.to_alipay_dict()
@@ -142,6 +155,8 @@ class SubscriptionPaymentDetail(object):
             o.order_no = d['order_no']
         if 'out_req_no' in d:
             o.out_req_no = d['out_req_no']
+        if 'pay_channel' in d:
+            o.pay_channel = d['pay_channel']
         if 'pay_status' in d:
             o.pay_status = d['pay_status']
         if 'pay_type' in d:

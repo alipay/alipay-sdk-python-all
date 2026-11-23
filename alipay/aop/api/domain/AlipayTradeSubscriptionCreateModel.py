@@ -9,10 +9,12 @@ from alipay.aop.api.domain.SubscriptionItem import SubscriptionItem
 class AlipayTradeSubscriptionCreateModel(object):
 
     def __init__(self):
+        self._cashier_mode = None
         self._customer_id = None
         self._deduct_type = None
         self._effective_type = None
         self._extend_params = None
+        self._first_period_days = None
         self._grace_period_days = None
         self._items = None
         self._metadata = None
@@ -22,6 +24,13 @@ class AlipayTradeSubscriptionCreateModel(object):
         self._trial_desc = None
         self._trial_period_days = None
 
+    @property
+    def cashier_mode(self):
+        return self._cashier_mode
+
+    @cashier_mode.setter
+    def cashier_mode(self, value):
+        self._cashier_mode = value
     @property
     def customer_id(self):
         return self._customer_id
@@ -50,6 +59,13 @@ class AlipayTradeSubscriptionCreateModel(object):
     @extend_params.setter
     def extend_params(self, value):
         self._extend_params = value
+    @property
+    def first_period_days(self):
+        return self._first_period_days
+
+    @first_period_days.setter
+    def first_period_days(self, value):
+        self._first_period_days = value
     @property
     def grace_period_days(self):
         return self._grace_period_days
@@ -116,6 +132,11 @@ class AlipayTradeSubscriptionCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.cashier_mode:
+            if hasattr(self.cashier_mode, 'to_alipay_dict'):
+                params['cashier_mode'] = self.cashier_mode.to_alipay_dict()
+            else:
+                params['cashier_mode'] = self.cashier_mode
         if self.customer_id:
             if hasattr(self.customer_id, 'to_alipay_dict'):
                 params['customer_id'] = self.customer_id.to_alipay_dict()
@@ -136,6 +157,11 @@ class AlipayTradeSubscriptionCreateModel(object):
                 params['extend_params'] = self.extend_params.to_alipay_dict()
             else:
                 params['extend_params'] = self.extend_params
+        if self.first_period_days:
+            if hasattr(self.first_period_days, 'to_alipay_dict'):
+                params['first_period_days'] = self.first_period_days.to_alipay_dict()
+            else:
+                params['first_period_days'] = self.first_period_days
         if self.grace_period_days:
             if hasattr(self.grace_period_days, 'to_alipay_dict'):
                 params['grace_period_days'] = self.grace_period_days.to_alipay_dict()
@@ -188,6 +214,8 @@ class AlipayTradeSubscriptionCreateModel(object):
         if not d:
             return None
         o = AlipayTradeSubscriptionCreateModel()
+        if 'cashier_mode' in d:
+            o.cashier_mode = d['cashier_mode']
         if 'customer_id' in d:
             o.customer_id = d['customer_id']
         if 'deduct_type' in d:
@@ -196,6 +224,8 @@ class AlipayTradeSubscriptionCreateModel(object):
             o.effective_type = d['effective_type']
         if 'extend_params' in d:
             o.extend_params = d['extend_params']
+        if 'first_period_days' in d:
+            o.first_period_days = d['first_period_days']
         if 'grace_period_days' in d:
             o.grace_period_days = d['grace_period_days']
         if 'items' in d:

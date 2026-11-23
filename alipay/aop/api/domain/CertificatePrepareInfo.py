@@ -4,6 +4,8 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
+from alipay.aop.api.domain.DeductionInfoList import DeductionInfoList
+from alipay.aop.api.domain.PayBillInfo import PayBillInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 from alipay.aop.api.domain.CertificateTimesCardInfo import CertificateTimesCardInfo
 
@@ -13,8 +15,10 @@ class CertificatePrepareInfo(object):
     def __init__(self):
         self._amount_info = None
         self._certificate_id = None
+        self._deduction_info_list = None
         self._encrypted_code = None
         self._order_id = None
+        self._pay_bill_info = None
         self._sku_info = None
         self._times_card_info = None
         self._valid_begin_time = None
@@ -38,6 +42,19 @@ class CertificatePrepareInfo(object):
     def certificate_id(self, value):
         self._certificate_id = value
     @property
+    def deduction_info_list(self):
+        return self._deduction_info_list
+
+    @deduction_info_list.setter
+    def deduction_info_list(self, value):
+        if isinstance(value, list):
+            self._deduction_info_list = list()
+            for i in value:
+                if isinstance(i, DeductionInfoList):
+                    self._deduction_info_list.append(i)
+                else:
+                    self._deduction_info_list.append(DeductionInfoList.from_alipay_dict(i))
+    @property
     def encrypted_code(self):
         return self._encrypted_code
 
@@ -51,6 +68,16 @@ class CertificatePrepareInfo(object):
     @order_id.setter
     def order_id(self, value):
         self._order_id = value
+    @property
+    def pay_bill_info(self):
+        return self._pay_bill_info
+
+    @pay_bill_info.setter
+    def pay_bill_info(self, value):
+        if isinstance(value, PayBillInfo):
+            self._pay_bill_info = value
+        else:
+            self._pay_bill_info = PayBillInfo.from_alipay_dict(value)
     @property
     def sku_info(self):
         return self._sku_info
@@ -99,6 +126,16 @@ class CertificatePrepareInfo(object):
                 params['certificate_id'] = self.certificate_id.to_alipay_dict()
             else:
                 params['certificate_id'] = self.certificate_id
+        if self.deduction_info_list:
+            if isinstance(self.deduction_info_list, list):
+                for i in range(0, len(self.deduction_info_list)):
+                    element = self.deduction_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.deduction_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.deduction_info_list, 'to_alipay_dict'):
+                params['deduction_info_list'] = self.deduction_info_list.to_alipay_dict()
+            else:
+                params['deduction_info_list'] = self.deduction_info_list
         if self.encrypted_code:
             if hasattr(self.encrypted_code, 'to_alipay_dict'):
                 params['encrypted_code'] = self.encrypted_code.to_alipay_dict()
@@ -109,6 +146,11 @@ class CertificatePrepareInfo(object):
                 params['order_id'] = self.order_id.to_alipay_dict()
             else:
                 params['order_id'] = self.order_id
+        if self.pay_bill_info:
+            if hasattr(self.pay_bill_info, 'to_alipay_dict'):
+                params['pay_bill_info'] = self.pay_bill_info.to_alipay_dict()
+            else:
+                params['pay_bill_info'] = self.pay_bill_info
         if self.sku_info:
             if hasattr(self.sku_info, 'to_alipay_dict'):
                 params['sku_info'] = self.sku_info.to_alipay_dict()
@@ -140,10 +182,14 @@ class CertificatePrepareInfo(object):
             o.amount_info = d['amount_info']
         if 'certificate_id' in d:
             o.certificate_id = d['certificate_id']
+        if 'deduction_info_list' in d:
+            o.deduction_info_list = d['deduction_info_list']
         if 'encrypted_code' in d:
             o.encrypted_code = d['encrypted_code']
         if 'order_id' in d:
             o.order_id = d['order_id']
+        if 'pay_bill_info' in d:
+            o.pay_bill_info = d['pay_bill_info']
         if 'sku_info' in d:
             o.sku_info = d['sku_info']
         if 'times_card_info' in d:

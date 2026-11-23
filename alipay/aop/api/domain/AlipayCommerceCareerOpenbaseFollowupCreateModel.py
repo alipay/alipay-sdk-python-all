@@ -9,6 +9,7 @@ from alipay.aop.api.domain.FollowupCreateContext import FollowupCreateContext
 class AlipayCommerceCareerOpenbaseFollowupCreateModel(object):
 
     def __init__(self):
+        self._artifact_id = None
         self._candidate_name = None
         self._candidate_phone = None
         self._context = None
@@ -16,6 +17,13 @@ class AlipayCommerceCareerOpenbaseFollowupCreateModel(object):
         self._out_biz_no = None
         self._plan_id = None
 
+    @property
+    def artifact_id(self):
+        return self._artifact_id
+
+    @artifact_id.setter
+    def artifact_id(self, value):
+        self._artifact_id = value
     @property
     def candidate_name(self):
         return self._candidate_name
@@ -65,6 +73,11 @@ class AlipayCommerceCareerOpenbaseFollowupCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.artifact_id:
+            if hasattr(self.artifact_id, 'to_alipay_dict'):
+                params['artifact_id'] = self.artifact_id.to_alipay_dict()
+            else:
+                params['artifact_id'] = self.artifact_id
         if self.candidate_name:
             if hasattr(self.candidate_name, 'to_alipay_dict'):
                 params['candidate_name'] = self.candidate_name.to_alipay_dict()
@@ -102,6 +115,8 @@ class AlipayCommerceCareerOpenbaseFollowupCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceCareerOpenbaseFollowupCreateModel()
+        if 'artifact_id' in d:
+            o.artifact_id = d['artifact_id']
         if 'candidate_name' in d:
             o.candidate_name = d['candidate_name']
         if 'candidate_phone' in d:

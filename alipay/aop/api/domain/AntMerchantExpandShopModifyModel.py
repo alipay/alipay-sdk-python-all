@@ -19,6 +19,7 @@ class AntMerchantExpandShopModifyModel(object):
     def __init__(self):
         self._biz_cards = None
         self._brand_id = None
+        self._brand_no = None
         self._business_address = None
         self._business_time = None
         self._cert_image = None
@@ -69,6 +70,13 @@ class AntMerchantExpandShopModifyModel(object):
     @brand_id.setter
     def brand_id(self, value):
         self._brand_id = value
+    @property
+    def brand_no(self):
+        return self._brand_no
+
+    @brand_no.setter
+    def brand_no(self, value):
+        self._brand_no = value
     @property
     def business_address(self):
         return self._business_address
@@ -336,6 +344,11 @@ class AntMerchantExpandShopModifyModel(object):
                 params['brand_id'] = self.brand_id.to_alipay_dict()
             else:
                 params['brand_id'] = self.brand_id
+        if self.brand_no:
+            if hasattr(self.brand_no, 'to_alipay_dict'):
+                params['brand_no'] = self.brand_no.to_alipay_dict()
+            else:
+                params['brand_no'] = self.brand_no
         if self.business_address:
             if hasattr(self.business_address, 'to_alipay_dict'):
                 params['business_address'] = self.business_address.to_alipay_dict()
@@ -527,6 +540,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.biz_cards = d['biz_cards']
         if 'brand_id' in d:
             o.brand_id = d['brand_id']
+        if 'brand_no' in d:
+            o.brand_no = d['brand_no']
         if 'business_address' in d:
             o.business_address = d['business_address']
         if 'business_time' in d:

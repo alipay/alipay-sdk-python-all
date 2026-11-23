@@ -35,6 +35,8 @@ class AlipayEbppIndustryCareertrainingNewcourseModifyModel(object):
         self._oc_students_per_class = None
         self._pt_hours = None
         self._pt_provide_venue_and_equipment = None
+        self._purchase_complete_text = None
+        self._purchase_switch = None
         self._relation_degree = None
         self._remark = None
         self._sale_price = None
@@ -245,6 +247,20 @@ class AlipayEbppIndustryCareertrainingNewcourseModifyModel(object):
     @pt_provide_venue_and_equipment.setter
     def pt_provide_venue_and_equipment(self, value):
         self._pt_provide_venue_and_equipment = value
+    @property
+    def purchase_complete_text(self):
+        return self._purchase_complete_text
+
+    @purchase_complete_text.setter
+    def purchase_complete_text(self, value):
+        self._purchase_complete_text = value
+    @property
+    def purchase_switch(self):
+        return self._purchase_switch
+
+    @purchase_switch.setter
+    def purchase_switch(self, value):
+        self._purchase_switch = value
     @property
     def relation_degree(self):
         return self._relation_degree
@@ -512,6 +528,16 @@ class AlipayEbppIndustryCareertrainingNewcourseModifyModel(object):
                 params['pt_provide_venue_and_equipment'] = self.pt_provide_venue_and_equipment.to_alipay_dict()
             else:
                 params['pt_provide_venue_and_equipment'] = self.pt_provide_venue_and_equipment
+        if self.purchase_complete_text:
+            if hasattr(self.purchase_complete_text, 'to_alipay_dict'):
+                params['purchase_complete_text'] = self.purchase_complete_text.to_alipay_dict()
+            else:
+                params['purchase_complete_text'] = self.purchase_complete_text
+        if self.purchase_switch:
+            if hasattr(self.purchase_switch, 'to_alipay_dict'):
+                params['purchase_switch'] = self.purchase_switch.to_alipay_dict()
+            else:
+                params['purchase_switch'] = self.purchase_switch
         if self.relation_degree:
             if hasattr(self.relation_degree, 'to_alipay_dict'):
                 params['relation_degree'] = self.relation_degree.to_alipay_dict()
@@ -644,6 +670,10 @@ class AlipayEbppIndustryCareertrainingNewcourseModifyModel(object):
             o.pt_hours = d['pt_hours']
         if 'pt_provide_venue_and_equipment' in d:
             o.pt_provide_venue_and_equipment = d['pt_provide_venue_and_equipment']
+        if 'purchase_complete_text' in d:
+            o.purchase_complete_text = d['purchase_complete_text']
+        if 'purchase_switch' in d:
+            o.purchase_switch = d['purchase_switch']
         if 'relation_degree' in d:
             o.relation_degree = d['relation_degree']
         if 'remark' in d:

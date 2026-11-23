@@ -4,6 +4,7 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.SaasAccountInfo import SaasAccountInfo
+from alipay.aop.api.domain.SaasCustomerInfo import SaasCustomerInfo
 
 
 class AlipayTradeSaasOrderCreateResponse(AlipayResponse):
@@ -14,6 +15,7 @@ class AlipayTradeSaasOrderCreateResponse(AlipayResponse):
         self._order_no = None
         self._out_trade_no = None
         self._saas_account_info = None
+        self._saas_customer_info = None
         self._trade_no = None
         self._trade_status = None
 
@@ -49,6 +51,16 @@ class AlipayTradeSaasOrderCreateResponse(AlipayResponse):
         else:
             self._saas_account_info = SaasAccountInfo.from_alipay_dict(value)
     @property
+    def saas_customer_info(self):
+        return self._saas_customer_info
+
+    @saas_customer_info.setter
+    def saas_customer_info(self, value):
+        if isinstance(value, SaasCustomerInfo):
+            self._saas_customer_info = value
+        else:
+            self._saas_customer_info = SaasCustomerInfo.from_alipay_dict(value)
+    @property
     def trade_no(self):
         return self._trade_no
 
@@ -73,6 +85,8 @@ class AlipayTradeSaasOrderCreateResponse(AlipayResponse):
             self.out_trade_no = response['out_trade_no']
         if 'saas_account_info' in response:
             self.saas_account_info = response['saas_account_info']
+        if 'saas_customer_info' in response:
+            self.saas_customer_info = response['saas_customer_info']
         if 'trade_no' in response:
             self.trade_no = response['trade_no']
         if 'trade_status' in response:

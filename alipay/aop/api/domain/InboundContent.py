@@ -3,13 +3,16 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InboundContactDetail import InboundContactDetail
 
 
 class InboundContent(object):
 
     def __init__(self):
+        self._business_address_list = None
         self._company_cert_no = None
         self._company_name = None
+        self._contact_detail_list = None
         self._contact_info = None
         self._legal_person_name = None
         self._link_url = None
@@ -20,6 +23,7 @@ class InboundContent(object):
         self._purchasing_power_rationale = None
         self._purchasing_power_score = None
         self._recommendation_rationale = None
+        self._registered_address_list = None
         self._similar_companies = None
         self._similarity_rationale = None
         self._tender_budget = None
@@ -30,6 +34,16 @@ class InboundContent(object):
         self._tender_winning_company = None
         self._tenderee_list = None
 
+    @property
+    def business_address_list(self):
+        return self._business_address_list
+
+    @business_address_list.setter
+    def business_address_list(self, value):
+        if isinstance(value, list):
+            self._business_address_list = list()
+            for i in value:
+                self._business_address_list.append(i)
     @property
     def company_cert_no(self):
         return self._company_cert_no
@@ -44,6 +58,19 @@ class InboundContent(object):
     @company_name.setter
     def company_name(self, value):
         self._company_name = value
+    @property
+    def contact_detail_list(self):
+        return self._contact_detail_list
+
+    @contact_detail_list.setter
+    def contact_detail_list(self, value):
+        if isinstance(value, list):
+            self._contact_detail_list = list()
+            for i in value:
+                if isinstance(i, InboundContactDetail):
+                    self._contact_detail_list.append(i)
+                else:
+                    self._contact_detail_list.append(InboundContactDetail.from_alipay_dict(i))
     @property
     def contact_info(self):
         return self._contact_info
@@ -120,6 +147,16 @@ class InboundContent(object):
     @recommendation_rationale.setter
     def recommendation_rationale(self, value):
         self._recommendation_rationale = value
+    @property
+    def registered_address_list(self):
+        return self._registered_address_list
+
+    @registered_address_list.setter
+    def registered_address_list(self, value):
+        if isinstance(value, list):
+            self._registered_address_list = list()
+            for i in value:
+                self._registered_address_list.append(i)
     @property
     def similar_companies(self):
         return self._similar_companies
@@ -199,6 +236,16 @@ class InboundContent(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.business_address_list:
+            if isinstance(self.business_address_list, list):
+                for i in range(0, len(self.business_address_list)):
+                    element = self.business_address_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.business_address_list[i] = element.to_alipay_dict()
+            if hasattr(self.business_address_list, 'to_alipay_dict'):
+                params['business_address_list'] = self.business_address_list.to_alipay_dict()
+            else:
+                params['business_address_list'] = self.business_address_list
         if self.company_cert_no:
             if hasattr(self.company_cert_no, 'to_alipay_dict'):
                 params['company_cert_no'] = self.company_cert_no.to_alipay_dict()
@@ -209,6 +256,16 @@ class InboundContent(object):
                 params['company_name'] = self.company_name.to_alipay_dict()
             else:
                 params['company_name'] = self.company_name
+        if self.contact_detail_list:
+            if isinstance(self.contact_detail_list, list):
+                for i in range(0, len(self.contact_detail_list)):
+                    element = self.contact_detail_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.contact_detail_list[i] = element.to_alipay_dict()
+            if hasattr(self.contact_detail_list, 'to_alipay_dict'):
+                params['contact_detail_list'] = self.contact_detail_list.to_alipay_dict()
+            else:
+                params['contact_detail_list'] = self.contact_detail_list
         if self.contact_info:
             if isinstance(self.contact_info, list):
                 for i in range(0, len(self.contact_info)):
@@ -269,6 +326,16 @@ class InboundContent(object):
                 params['recommendation_rationale'] = self.recommendation_rationale.to_alipay_dict()
             else:
                 params['recommendation_rationale'] = self.recommendation_rationale
+        if self.registered_address_list:
+            if isinstance(self.registered_address_list, list):
+                for i in range(0, len(self.registered_address_list)):
+                    element = self.registered_address_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.registered_address_list[i] = element.to_alipay_dict()
+            if hasattr(self.registered_address_list, 'to_alipay_dict'):
+                params['registered_address_list'] = self.registered_address_list.to_alipay_dict()
+            else:
+                params['registered_address_list'] = self.registered_address_list
         if self.similar_companies:
             if isinstance(self.similar_companies, list):
                 for i in range(0, len(self.similar_companies)):
@@ -341,10 +408,14 @@ class InboundContent(object):
         if not d:
             return None
         o = InboundContent()
+        if 'business_address_list' in d:
+            o.business_address_list = d['business_address_list']
         if 'company_cert_no' in d:
             o.company_cert_no = d['company_cert_no']
         if 'company_name' in d:
             o.company_name = d['company_name']
+        if 'contact_detail_list' in d:
+            o.contact_detail_list = d['contact_detail_list']
         if 'contact_info' in d:
             o.contact_info = d['contact_info']
         if 'legal_person_name' in d:
@@ -365,6 +436,8 @@ class InboundContent(object):
             o.purchasing_power_score = d['purchasing_power_score']
         if 'recommendation_rationale' in d:
             o.recommendation_rationale = d['recommendation_rationale']
+        if 'registered_address_list' in d:
+            o.registered_address_list = d['registered_address_list']
         if 'similar_companies' in d:
             o.similar_companies = d['similar_companies']
         if 'similarity_rationale' in d:

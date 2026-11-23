@@ -43,6 +43,7 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
         self._real_property_business_list = None
         self._red_confirmation_no = None
         self._red_confirmation_uuid = None
+        self._reduced_tax_rate_type = None
         self._refined_oil_gas_station = None
         self._related_blue_invoice_no = None
         self._remark = None
@@ -275,6 +276,13 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
     def red_confirmation_uuid(self, value):
         self._red_confirmation_uuid = value
     @property
+    def reduced_tax_rate_type(self):
+        return self._reduced_tax_rate_type
+
+    @reduced_tax_rate_type.setter
+    def reduced_tax_rate_type(self, value):
+        self._reduced_tax_rate_type = value
+    @property
     def refined_oil_gas_station(self):
         return self._refined_oil_gas_station
 
@@ -407,6 +415,8 @@ class AlipayCommerceEcIndustryinvoiceInvoiceapplyQueryResponse(AlipayResponse):
             self.red_confirmation_no = response['red_confirmation_no']
         if 'red_confirmation_uuid' in response:
             self.red_confirmation_uuid = response['red_confirmation_uuid']
+        if 'reduced_tax_rate_type' in response:
+            self.reduced_tax_rate_type = response['reduced_tax_rate_type']
         if 'refined_oil_gas_station' in response:
             self.refined_oil_gas_station = response['refined_oil_gas_station']
         if 'related_blue_invoice_no' in response:

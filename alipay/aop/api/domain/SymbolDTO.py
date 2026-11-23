@@ -13,6 +13,7 @@ class SymbolDTO(object):
         self._hand = None
         self._hand_unit = None
         self._list_type = None
+        self._listed_first_date = None
         self._market = None
         self._name = None
         self._price_decimal = None
@@ -55,6 +56,13 @@ class SymbolDTO(object):
     @list_type.setter
     def list_type(self, value):
         self._list_type = value
+    @property
+    def listed_first_date(self):
+        return self._listed_first_date
+
+    @listed_first_date.setter
+    def listed_first_date(self, value):
+        self._listed_first_date = value
     @property
     def market(self):
         return self._market
@@ -126,6 +134,11 @@ class SymbolDTO(object):
                 params['list_type'] = self.list_type.to_alipay_dict()
             else:
                 params['list_type'] = self.list_type
+        if self.listed_first_date:
+            if hasattr(self.listed_first_date, 'to_alipay_dict'):
+                params['listed_first_date'] = self.listed_first_date.to_alipay_dict()
+            else:
+                params['listed_first_date'] = self.listed_first_date
         if self.market:
             if hasattr(self.market, 'to_alipay_dict'):
                 params['market'] = self.market.to_alipay_dict()
@@ -173,6 +186,8 @@ class SymbolDTO(object):
             o.hand_unit = d['hand_unit']
         if 'list_type' in d:
             o.list_type = d['list_type']
+        if 'listed_first_date' in d:
+            o.listed_first_date = d['listed_first_date']
         if 'market' in d:
             o.market = d['market']
         if 'name' in d:

@@ -10,6 +10,7 @@ class Doctors(object):
     def __init__(self):
         self._authority = None
         self._department = None
+        self._doctor_title = None
         self._doctor_user_name = None
         self._hospital = None
         self._name = None
@@ -35,6 +36,13 @@ class Doctors(object):
     @department.setter
     def department(self, value):
         self._department = value
+    @property
+    def doctor_title(self):
+        return self._doctor_title
+
+    @doctor_title.setter
+    def doctor_title(self, value):
+        self._doctor_title = value
     @property
     def doctor_user_name(self):
         return self._doctor_user_name
@@ -119,6 +127,11 @@ class Doctors(object):
                 params['department'] = self.department.to_alipay_dict()
             else:
                 params['department'] = self.department
+        if self.doctor_title:
+            if hasattr(self.doctor_title, 'to_alipay_dict'):
+                params['doctor_title'] = self.doctor_title.to_alipay_dict()
+            else:
+                params['doctor_title'] = self.doctor_title
         if self.doctor_user_name:
             if hasattr(self.doctor_user_name, 'to_alipay_dict'):
                 params['doctor_user_name'] = self.doctor_user_name.to_alipay_dict()
@@ -180,6 +193,8 @@ class Doctors(object):
             o.authority = d['authority']
         if 'department' in d:
             o.department = d['department']
+        if 'doctor_title' in d:
+            o.doctor_title = d['doctor_title']
         if 'doctor_user_name' in d:
             o.doctor_user_name = d['doctor_user_name']
         if 'hospital' in d:

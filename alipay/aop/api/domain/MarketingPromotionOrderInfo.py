@@ -9,6 +9,7 @@ from alipay.aop.api.domain.MarketingProductInfo import MarketingProductInfo
 class MarketingPromotionOrderInfo(object):
 
     def __init__(self):
+        self._address = None
         self._assess_amount = None
         self._assess_max_amount = None
         self._assess_max_quantity = None
@@ -23,8 +24,10 @@ class MarketingPromotionOrderInfo(object):
         self._first_level_emp_id = None
         self._inspect_amount = None
         self._inspect_quantity = None
+        self._latitude = None
         self._logistics_bill_no = None
         self._logistics_platform = None
+        self._longitude = None
         self._open_id = None
         self._order_create_time = None
         self._order_modify_time = None
@@ -42,6 +45,13 @@ class MarketingPromotionOrderInfo(object):
         self._unit_type = None
         self._user_id = None
 
+    @property
+    def address(self):
+        return self._address
+
+    @address.setter
+    def address(self, value):
+        self._address = value
     @property
     def assess_amount(self):
         return self._assess_amount
@@ -141,6 +151,13 @@ class MarketingPromotionOrderInfo(object):
     def inspect_quantity(self, value):
         self._inspect_quantity = value
     @property
+    def latitude(self):
+        return self._latitude
+
+    @latitude.setter
+    def latitude(self, value):
+        self._latitude = value
+    @property
     def logistics_bill_no(self):
         return self._logistics_bill_no
 
@@ -154,6 +171,13 @@ class MarketingPromotionOrderInfo(object):
     @logistics_platform.setter
     def logistics_platform(self, value):
         self._logistics_platform = value
+    @property
+    def longitude(self):
+        return self._longitude
+
+    @longitude.setter
+    def longitude(self, value):
+        self._longitude = value
     @property
     def open_id(self):
         return self._open_id
@@ -276,6 +300,11 @@ class MarketingPromotionOrderInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.address:
+            if hasattr(self.address, 'to_alipay_dict'):
+                params['address'] = self.address.to_alipay_dict()
+            else:
+                params['address'] = self.address
         if self.assess_amount:
             if hasattr(self.assess_amount, 'to_alipay_dict'):
                 params['assess_amount'] = self.assess_amount.to_alipay_dict()
@@ -346,6 +375,11 @@ class MarketingPromotionOrderInfo(object):
                 params['inspect_quantity'] = self.inspect_quantity.to_alipay_dict()
             else:
                 params['inspect_quantity'] = self.inspect_quantity
+        if self.latitude:
+            if hasattr(self.latitude, 'to_alipay_dict'):
+                params['latitude'] = self.latitude.to_alipay_dict()
+            else:
+                params['latitude'] = self.latitude
         if self.logistics_bill_no:
             if hasattr(self.logistics_bill_no, 'to_alipay_dict'):
                 params['logistics_bill_no'] = self.logistics_bill_no.to_alipay_dict()
@@ -356,6 +390,11 @@ class MarketingPromotionOrderInfo(object):
                 params['logistics_platform'] = self.logistics_platform.to_alipay_dict()
             else:
                 params['logistics_platform'] = self.logistics_platform
+        if self.longitude:
+            if hasattr(self.longitude, 'to_alipay_dict'):
+                params['longitude'] = self.longitude.to_alipay_dict()
+            else:
+                params['longitude'] = self.longitude
         if self.open_id:
             if hasattr(self.open_id, 'to_alipay_dict'):
                 params['open_id'] = self.open_id.to_alipay_dict()
@@ -448,6 +487,8 @@ class MarketingPromotionOrderInfo(object):
         if not d:
             return None
         o = MarketingPromotionOrderInfo()
+        if 'address' in d:
+            o.address = d['address']
         if 'assess_amount' in d:
             o.assess_amount = d['assess_amount']
         if 'assess_max_amount' in d:
@@ -476,10 +517,14 @@ class MarketingPromotionOrderInfo(object):
             o.inspect_amount = d['inspect_amount']
         if 'inspect_quantity' in d:
             o.inspect_quantity = d['inspect_quantity']
+        if 'latitude' in d:
+            o.latitude = d['latitude']
         if 'logistics_bill_no' in d:
             o.logistics_bill_no = d['logistics_bill_no']
         if 'logistics_platform' in d:
             o.logistics_platform = d['logistics_platform']
+        if 'longitude' in d:
+            o.longitude = d['longitude']
         if 'open_id' in d:
             o.open_id = d['open_id']
         if 'order_create_time' in d:

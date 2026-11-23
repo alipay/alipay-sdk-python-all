@@ -14,6 +14,8 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryModel(object):
         self._first_market_target_code = None
         self._group_id = None
         self._market_target_code = None
+        self._modify_end_time = None
+        self._modify_start_time = None
         self._page_size = None
         self._plan_id = None
         self._principal_tag = None
@@ -65,6 +67,20 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryModel(object):
     @market_target_code.setter
     def market_target_code(self, value):
         self._market_target_code = value
+    @property
+    def modify_end_time(self):
+        return self._modify_end_time
+
+    @modify_end_time.setter
+    def modify_end_time(self, value):
+        self._modify_end_time = value
+    @property
+    def modify_start_time(self):
+        return self._modify_start_time
+
+    @modify_start_time.setter
+    def modify_start_time(self, value):
+        self._modify_start_time = value
     @property
     def page_size(self):
         return self._page_size
@@ -139,6 +155,16 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryModel(object):
                 params['market_target_code'] = self.market_target_code.to_alipay_dict()
             else:
                 params['market_target_code'] = self.market_target_code
+        if self.modify_end_time:
+            if hasattr(self.modify_end_time, 'to_alipay_dict'):
+                params['modify_end_time'] = self.modify_end_time.to_alipay_dict()
+            else:
+                params['modify_end_time'] = self.modify_end_time
+        if self.modify_start_time:
+            if hasattr(self.modify_start_time, 'to_alipay_dict'):
+                params['modify_start_time'] = self.modify_start_time.to_alipay_dict()
+            else:
+                params['modify_start_time'] = self.modify_start_time
         if self.page_size:
             if hasattr(self.page_size, 'to_alipay_dict'):
                 params['page_size'] = self.page_size.to_alipay_dict()
@@ -183,6 +209,10 @@ class AlipayDataDataserviceAdcampaignCreativeBatchqueryModel(object):
             o.group_id = d['group_id']
         if 'market_target_code' in d:
             o.market_target_code = d['market_target_code']
+        if 'modify_end_time' in d:
+            o.modify_end_time = d['modify_end_time']
+        if 'modify_start_time' in d:
+            o.modify_start_time = d['modify_start_time']
         if 'page_size' in d:
             o.page_size = d['page_size']
         if 'plan_id' in d:

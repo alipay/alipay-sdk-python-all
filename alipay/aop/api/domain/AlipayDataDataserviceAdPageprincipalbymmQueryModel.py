@@ -13,6 +13,7 @@ class AlipayDataDataserviceAdPageprincipalbymmQueryModel(object):
         self._current = None
         self._key_word = None
         self._page_size = None
+        self._principal_id_list = None
         self._principal_tag = None
         self._status = None
 
@@ -51,6 +52,16 @@ class AlipayDataDataserviceAdPageprincipalbymmQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def principal_id_list(self):
+        return self._principal_id_list
+
+    @principal_id_list.setter
+    def principal_id_list(self, value):
+        if isinstance(value, list):
+            self._principal_id_list = list()
+            for i in value:
+                self._principal_id_list.append(i)
     @property
     def principal_tag(self):
         return self._principal_tag
@@ -94,6 +105,16 @@ class AlipayDataDataserviceAdPageprincipalbymmQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.principal_id_list:
+            if isinstance(self.principal_id_list, list):
+                for i in range(0, len(self.principal_id_list)):
+                    element = self.principal_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.principal_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.principal_id_list, 'to_alipay_dict'):
+                params['principal_id_list'] = self.principal_id_list.to_alipay_dict()
+            else:
+                params['principal_id_list'] = self.principal_id_list
         if self.principal_tag:
             if hasattr(self.principal_tag, 'to_alipay_dict'):
                 params['principal_tag'] = self.principal_tag.to_alipay_dict()
@@ -121,6 +142,8 @@ class AlipayDataDataserviceAdPageprincipalbymmQueryModel(object):
             o.key_word = d['key_word']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'principal_id_list' in d:
+            o.principal_id_list = d['principal_id_list']
         if 'principal_tag' in d:
             o.principal_tag = d['principal_tag']
         if 'status' in d:

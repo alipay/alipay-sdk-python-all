@@ -10,6 +10,7 @@ class NfcPointRefreshShowText(object):
     def __init__(self):
         self._bottom_text = None
         self._middle_smart_text = None
+        self._prompt_text = None
         self._title_text = None
 
     @property
@@ -26,6 +27,13 @@ class NfcPointRefreshShowText(object):
     @middle_smart_text.setter
     def middle_smart_text(self, value):
         self._middle_smart_text = value
+    @property
+    def prompt_text(self):
+        return self._prompt_text
+
+    @prompt_text.setter
+    def prompt_text(self, value):
+        self._prompt_text = value
     @property
     def title_text(self):
         return self._title_text
@@ -47,6 +55,11 @@ class NfcPointRefreshShowText(object):
                 params['middle_smart_text'] = self.middle_smart_text.to_alipay_dict()
             else:
                 params['middle_smart_text'] = self.middle_smart_text
+        if self.prompt_text:
+            if hasattr(self.prompt_text, 'to_alipay_dict'):
+                params['prompt_text'] = self.prompt_text.to_alipay_dict()
+            else:
+                params['prompt_text'] = self.prompt_text
         if self.title_text:
             if hasattr(self.title_text, 'to_alipay_dict'):
                 params['title_text'] = self.title_text.to_alipay_dict()
@@ -63,6 +76,8 @@ class NfcPointRefreshShowText(object):
             o.bottom_text = d['bottom_text']
         if 'middle_smart_text' in d:
             o.middle_smart_text = d['middle_smart_text']
+        if 'prompt_text' in d:
+            o.prompt_text = d['prompt_text']
         if 'title_text' in d:
             o.title_text = d['title_text']
         return o

@@ -16,14 +16,17 @@ class ShortPlayRecordMaterial(object):
         self._avg_duration = None
         self._content_declared = None
         self._copyright_holder = None
+        self._cost_distribution = None
         self._director = None
         self._first_broadcast = None
+        self._issue_org = None
         self._main_actor_salary_ratio = None
         self._playlet_production_cost = None
         self._producer = None
         self._program_category = None
         self._screen_writer = None
         self._seqs_count = None
+        self._short_play_category = None
         self._summary = None
 
     @property
@@ -85,6 +88,13 @@ class ShortPlayRecordMaterial(object):
     def copyright_holder(self, value):
         self._copyright_holder = value
     @property
+    def cost_distribution(self):
+        return self._cost_distribution
+
+    @cost_distribution.setter
+    def cost_distribution(self, value):
+        self._cost_distribution = value
+    @property
     def director(self):
         return self._director
 
@@ -101,6 +111,13 @@ class ShortPlayRecordMaterial(object):
     @first_broadcast.setter
     def first_broadcast(self, value):
         self._first_broadcast = value
+    @property
+    def issue_org(self):
+        return self._issue_org
+
+    @issue_org.setter
+    def issue_org(self, value):
+        self._issue_org = value
     @property
     def main_actor_salary_ratio(self):
         return self._main_actor_salary_ratio
@@ -146,6 +163,13 @@ class ShortPlayRecordMaterial(object):
     @seqs_count.setter
     def seqs_count(self, value):
         self._seqs_count = value
+    @property
+    def short_play_category(self):
+        return self._short_play_category
+
+    @short_play_category.setter
+    def short_play_category(self, value):
+        self._short_play_category = value
     @property
     def summary(self):
         return self._summary
@@ -202,6 +226,11 @@ class ShortPlayRecordMaterial(object):
                 params['copyright_holder'] = self.copyright_holder.to_alipay_dict()
             else:
                 params['copyright_holder'] = self.copyright_holder
+        if self.cost_distribution:
+            if hasattr(self.cost_distribution, 'to_alipay_dict'):
+                params['cost_distribution'] = self.cost_distribution.to_alipay_dict()
+            else:
+                params['cost_distribution'] = self.cost_distribution
         if self.director:
             if isinstance(self.director, list):
                 for i in range(0, len(self.director)):
@@ -217,6 +246,11 @@ class ShortPlayRecordMaterial(object):
                 params['first_broadcast'] = self.first_broadcast.to_alipay_dict()
             else:
                 params['first_broadcast'] = self.first_broadcast
+        if self.issue_org:
+            if hasattr(self.issue_org, 'to_alipay_dict'):
+                params['issue_org'] = self.issue_org.to_alipay_dict()
+            else:
+                params['issue_org'] = self.issue_org
         if self.main_actor_salary_ratio:
             if hasattr(self.main_actor_salary_ratio, 'to_alipay_dict'):
                 params['main_actor_salary_ratio'] = self.main_actor_salary_ratio.to_alipay_dict()
@@ -252,6 +286,11 @@ class ShortPlayRecordMaterial(object):
                 params['seqs_count'] = self.seqs_count.to_alipay_dict()
             else:
                 params['seqs_count'] = self.seqs_count
+        if self.short_play_category:
+            if hasattr(self.short_play_category, 'to_alipay_dict'):
+                params['short_play_category'] = self.short_play_category.to_alipay_dict()
+            else:
+                params['short_play_category'] = self.short_play_category
         if self.summary:
             if hasattr(self.summary, 'to_alipay_dict'):
                 params['summary'] = self.summary.to_alipay_dict()
@@ -278,10 +317,14 @@ class ShortPlayRecordMaterial(object):
             o.content_declared = d['content_declared']
         if 'copyright_holder' in d:
             o.copyright_holder = d['copyright_holder']
+        if 'cost_distribution' in d:
+            o.cost_distribution = d['cost_distribution']
         if 'director' in d:
             o.director = d['director']
         if 'first_broadcast' in d:
             o.first_broadcast = d['first_broadcast']
+        if 'issue_org' in d:
+            o.issue_org = d['issue_org']
         if 'main_actor_salary_ratio' in d:
             o.main_actor_salary_ratio = d['main_actor_salary_ratio']
         if 'playlet_production_cost' in d:
@@ -294,6 +337,8 @@ class ShortPlayRecordMaterial(object):
             o.screen_writer = d['screen_writer']
         if 'seqs_count' in d:
             o.seqs_count = d['seqs_count']
+        if 'short_play_category' in d:
+            o.short_play_category = d['short_play_category']
         if 'summary' in d:
             o.summary = d['summary']
         return o

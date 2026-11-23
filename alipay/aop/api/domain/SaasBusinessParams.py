@@ -11,6 +11,7 @@ class SaasBusinessParams(object):
         self._campus_card = None
         self._saas_ebank_bank_code = None
         self._saas_ebank_inst_id = None
+        self._saas_enterprise_auth_url = None
 
     @property
     def campus_card(self):
@@ -33,6 +34,13 @@ class SaasBusinessParams(object):
     @saas_ebank_inst_id.setter
     def saas_ebank_inst_id(self, value):
         self._saas_ebank_inst_id = value
+    @property
+    def saas_enterprise_auth_url(self):
+        return self._saas_enterprise_auth_url
+
+    @saas_enterprise_auth_url.setter
+    def saas_enterprise_auth_url(self, value):
+        self._saas_enterprise_auth_url = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class SaasBusinessParams(object):
                 params['saas_ebank_inst_id'] = self.saas_ebank_inst_id.to_alipay_dict()
             else:
                 params['saas_ebank_inst_id'] = self.saas_ebank_inst_id
+        if self.saas_enterprise_auth_url:
+            if hasattr(self.saas_enterprise_auth_url, 'to_alipay_dict'):
+                params['saas_enterprise_auth_url'] = self.saas_enterprise_auth_url.to_alipay_dict()
+            else:
+                params['saas_enterprise_auth_url'] = self.saas_enterprise_auth_url
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class SaasBusinessParams(object):
             o.saas_ebank_bank_code = d['saas_ebank_bank_code']
         if 'saas_ebank_inst_id' in d:
             o.saas_ebank_inst_id = d['saas_ebank_inst_id']
+        if 'saas_enterprise_auth_url' in d:
+            o.saas_enterprise_auth_url = d['saas_enterprise_auth_url']
         return o
 
 

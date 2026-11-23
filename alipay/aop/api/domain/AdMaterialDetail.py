@@ -10,6 +10,7 @@ class AdMaterialDetail(object):
     def __init__(self):
         self._duration = None
         self._height = None
+        self._material_name = None
         self._material_type = None
         self._material_value = None
         self._size = None
@@ -33,6 +34,13 @@ class AdMaterialDetail(object):
     @height.setter
     def height(self, value):
         self._height = value
+    @property
+    def material_name(self):
+        return self._material_name
+
+    @material_name.setter
+    def material_name(self, value):
+        self._material_name = value
     @property
     def material_type(self):
         return self._material_type
@@ -103,6 +111,11 @@ class AdMaterialDetail(object):
                 params['height'] = self.height.to_alipay_dict()
             else:
                 params['height'] = self.height
+        if self.material_name:
+            if hasattr(self.material_name, 'to_alipay_dict'):
+                params['material_name'] = self.material_name.to_alipay_dict()
+            else:
+                params['material_name'] = self.material_name
         if self.material_type:
             if hasattr(self.material_type, 'to_alipay_dict'):
                 params['material_type'] = self.material_type.to_alipay_dict()
@@ -154,6 +167,8 @@ class AdMaterialDetail(object):
             o.duration = d['duration']
         if 'height' in d:
             o.height = d['height']
+        if 'material_name' in d:
+            o.material_name = d['material_name']
         if 'material_type' in d:
             o.material_type = d['material_type']
         if 'material_value' in d:

@@ -8,9 +8,17 @@ from alipay.aop.api.constant.ParamConstants import *
 class CommunityServiceInfo(object):
 
     def __init__(self):
+        self._prepay_enabled = None
         self._service_type = None
         self._status = None
 
+    @property
+    def prepay_enabled(self):
+        return self._prepay_enabled
+
+    @prepay_enabled.setter
+    def prepay_enabled(self, value):
+        self._prepay_enabled = value
     @property
     def service_type(self):
         return self._service_type
@@ -29,6 +37,11 @@ class CommunityServiceInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.prepay_enabled:
+            if hasattr(self.prepay_enabled, 'to_alipay_dict'):
+                params['prepay_enabled'] = self.prepay_enabled.to_alipay_dict()
+            else:
+                params['prepay_enabled'] = self.prepay_enabled
         if self.service_type:
             if hasattr(self.service_type, 'to_alipay_dict'):
                 params['service_type'] = self.service_type.to_alipay_dict()
@@ -46,6 +59,8 @@ class CommunityServiceInfo(object):
         if not d:
             return None
         o = CommunityServiceInfo()
+        if 'prepay_enabled' in d:
+            o.prepay_enabled = d['prepay_enabled']
         if 'service_type' in d:
             o.service_type = d['service_type']
         if 'status' in d:

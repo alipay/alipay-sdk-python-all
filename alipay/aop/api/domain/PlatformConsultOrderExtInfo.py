@@ -1,0 +1,378 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import json
+
+from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.PlatformConsultOrderEvaluateInfo import PlatformConsultOrderEvaluateInfo
+from alipay.aop.api.domain.PlatformConsultPlusRegisterInfo import PlatformConsultPlusRegisterInfo
+
+
+class PlatformConsultOrderExtInfo(object):
+
+    def __init__(self):
+        self._alipay_channel_order_flag = None
+        self._approve_comment = None
+        self._channel_desc = None
+        self._chat_url = None
+        self._complaint = None
+        self._doctor_avatar = None
+        self._doctor_inquiry_link_page = None
+        self._doctor_title = None
+        self._doctor_type = None
+        self._hospital_name = None
+        self._invoice_url = None
+        self._medical_inquiry_order_evaluate_info = None
+        self._order_from = None
+        self._order_pid = None
+        self._order_spu = None
+        self._original_price = None
+        self._out_biz_no = None
+        self._plus_register_info = None
+        self._product_name = None
+        self._refund_url = None
+        self._service_expect_end_time = None
+        self._source = None
+        self._user_type = None
+
+    @property
+    def alipay_channel_order_flag(self):
+        return self._alipay_channel_order_flag
+
+    @alipay_channel_order_flag.setter
+    def alipay_channel_order_flag(self, value):
+        self._alipay_channel_order_flag = value
+    @property
+    def approve_comment(self):
+        return self._approve_comment
+
+    @approve_comment.setter
+    def approve_comment(self, value):
+        self._approve_comment = value
+    @property
+    def channel_desc(self):
+        return self._channel_desc
+
+    @channel_desc.setter
+    def channel_desc(self, value):
+        self._channel_desc = value
+    @property
+    def chat_url(self):
+        return self._chat_url
+
+    @chat_url.setter
+    def chat_url(self, value):
+        self._chat_url = value
+    @property
+    def complaint(self):
+        return self._complaint
+
+    @complaint.setter
+    def complaint(self, value):
+        self._complaint = value
+    @property
+    def doctor_avatar(self):
+        return self._doctor_avatar
+
+    @doctor_avatar.setter
+    def doctor_avatar(self, value):
+        self._doctor_avatar = value
+    @property
+    def doctor_inquiry_link_page(self):
+        return self._doctor_inquiry_link_page
+
+    @doctor_inquiry_link_page.setter
+    def doctor_inquiry_link_page(self, value):
+        self._doctor_inquiry_link_page = value
+    @property
+    def doctor_title(self):
+        return self._doctor_title
+
+    @doctor_title.setter
+    def doctor_title(self, value):
+        self._doctor_title = value
+    @property
+    def doctor_type(self):
+        return self._doctor_type
+
+    @doctor_type.setter
+    def doctor_type(self, value):
+        self._doctor_type = value
+    @property
+    def hospital_name(self):
+        return self._hospital_name
+
+    @hospital_name.setter
+    def hospital_name(self, value):
+        self._hospital_name = value
+    @property
+    def invoice_url(self):
+        return self._invoice_url
+
+    @invoice_url.setter
+    def invoice_url(self, value):
+        self._invoice_url = value
+    @property
+    def medical_inquiry_order_evaluate_info(self):
+        return self._medical_inquiry_order_evaluate_info
+
+    @medical_inquiry_order_evaluate_info.setter
+    def medical_inquiry_order_evaluate_info(self, value):
+        if isinstance(value, PlatformConsultOrderEvaluateInfo):
+            self._medical_inquiry_order_evaluate_info = value
+        else:
+            self._medical_inquiry_order_evaluate_info = PlatformConsultOrderEvaluateInfo.from_alipay_dict(value)
+    @property
+    def order_from(self):
+        return self._order_from
+
+    @order_from.setter
+    def order_from(self, value):
+        self._order_from = value
+    @property
+    def order_pid(self):
+        return self._order_pid
+
+    @order_pid.setter
+    def order_pid(self, value):
+        self._order_pid = value
+    @property
+    def order_spu(self):
+        return self._order_spu
+
+    @order_spu.setter
+    def order_spu(self, value):
+        self._order_spu = value
+    @property
+    def original_price(self):
+        return self._original_price
+
+    @original_price.setter
+    def original_price(self, value):
+        self._original_price = value
+    @property
+    def out_biz_no(self):
+        return self._out_biz_no
+
+    @out_biz_no.setter
+    def out_biz_no(self, value):
+        self._out_biz_no = value
+    @property
+    def plus_register_info(self):
+        return self._plus_register_info
+
+    @plus_register_info.setter
+    def plus_register_info(self, value):
+        if isinstance(value, PlatformConsultPlusRegisterInfo):
+            self._plus_register_info = value
+        else:
+            self._plus_register_info = PlatformConsultPlusRegisterInfo.from_alipay_dict(value)
+    @property
+    def product_name(self):
+        return self._product_name
+
+    @product_name.setter
+    def product_name(self, value):
+        self._product_name = value
+    @property
+    def refund_url(self):
+        return self._refund_url
+
+    @refund_url.setter
+    def refund_url(self, value):
+        self._refund_url = value
+    @property
+    def service_expect_end_time(self):
+        return self._service_expect_end_time
+
+    @service_expect_end_time.setter
+    def service_expect_end_time(self, value):
+        self._service_expect_end_time = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
+    @property
+    def user_type(self):
+        return self._user_type
+
+    @user_type.setter
+    def user_type(self, value):
+        self._user_type = value
+
+
+    def to_alipay_dict(self):
+        params = dict()
+        if self.alipay_channel_order_flag:
+            if hasattr(self.alipay_channel_order_flag, 'to_alipay_dict'):
+                params['alipay_channel_order_flag'] = self.alipay_channel_order_flag.to_alipay_dict()
+            else:
+                params['alipay_channel_order_flag'] = self.alipay_channel_order_flag
+        if self.approve_comment:
+            if hasattr(self.approve_comment, 'to_alipay_dict'):
+                params['approve_comment'] = self.approve_comment.to_alipay_dict()
+            else:
+                params['approve_comment'] = self.approve_comment
+        if self.channel_desc:
+            if hasattr(self.channel_desc, 'to_alipay_dict'):
+                params['channel_desc'] = self.channel_desc.to_alipay_dict()
+            else:
+                params['channel_desc'] = self.channel_desc
+        if self.chat_url:
+            if hasattr(self.chat_url, 'to_alipay_dict'):
+                params['chat_url'] = self.chat_url.to_alipay_dict()
+            else:
+                params['chat_url'] = self.chat_url
+        if self.complaint:
+            if hasattr(self.complaint, 'to_alipay_dict'):
+                params['complaint'] = self.complaint.to_alipay_dict()
+            else:
+                params['complaint'] = self.complaint
+        if self.doctor_avatar:
+            if hasattr(self.doctor_avatar, 'to_alipay_dict'):
+                params['doctor_avatar'] = self.doctor_avatar.to_alipay_dict()
+            else:
+                params['doctor_avatar'] = self.doctor_avatar
+        if self.doctor_inquiry_link_page:
+            if hasattr(self.doctor_inquiry_link_page, 'to_alipay_dict'):
+                params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page.to_alipay_dict()
+            else:
+                params['doctor_inquiry_link_page'] = self.doctor_inquiry_link_page
+        if self.doctor_title:
+            if hasattr(self.doctor_title, 'to_alipay_dict'):
+                params['doctor_title'] = self.doctor_title.to_alipay_dict()
+            else:
+                params['doctor_title'] = self.doctor_title
+        if self.doctor_type:
+            if hasattr(self.doctor_type, 'to_alipay_dict'):
+                params['doctor_type'] = self.doctor_type.to_alipay_dict()
+            else:
+                params['doctor_type'] = self.doctor_type
+        if self.hospital_name:
+            if hasattr(self.hospital_name, 'to_alipay_dict'):
+                params['hospital_name'] = self.hospital_name.to_alipay_dict()
+            else:
+                params['hospital_name'] = self.hospital_name
+        if self.invoice_url:
+            if hasattr(self.invoice_url, 'to_alipay_dict'):
+                params['invoice_url'] = self.invoice_url.to_alipay_dict()
+            else:
+                params['invoice_url'] = self.invoice_url
+        if self.medical_inquiry_order_evaluate_info:
+            if hasattr(self.medical_inquiry_order_evaluate_info, 'to_alipay_dict'):
+                params['medical_inquiry_order_evaluate_info'] = self.medical_inquiry_order_evaluate_info.to_alipay_dict()
+            else:
+                params['medical_inquiry_order_evaluate_info'] = self.medical_inquiry_order_evaluate_info
+        if self.order_from:
+            if hasattr(self.order_from, 'to_alipay_dict'):
+                params['order_from'] = self.order_from.to_alipay_dict()
+            else:
+                params['order_from'] = self.order_from
+        if self.order_pid:
+            if hasattr(self.order_pid, 'to_alipay_dict'):
+                params['order_pid'] = self.order_pid.to_alipay_dict()
+            else:
+                params['order_pid'] = self.order_pid
+        if self.order_spu:
+            if hasattr(self.order_spu, 'to_alipay_dict'):
+                params['order_spu'] = self.order_spu.to_alipay_dict()
+            else:
+                params['order_spu'] = self.order_spu
+        if self.original_price:
+            if hasattr(self.original_price, 'to_alipay_dict'):
+                params['original_price'] = self.original_price.to_alipay_dict()
+            else:
+                params['original_price'] = self.original_price
+        if self.out_biz_no:
+            if hasattr(self.out_biz_no, 'to_alipay_dict'):
+                params['out_biz_no'] = self.out_biz_no.to_alipay_dict()
+            else:
+                params['out_biz_no'] = self.out_biz_no
+        if self.plus_register_info:
+            if hasattr(self.plus_register_info, 'to_alipay_dict'):
+                params['plus_register_info'] = self.plus_register_info.to_alipay_dict()
+            else:
+                params['plus_register_info'] = self.plus_register_info
+        if self.product_name:
+            if hasattr(self.product_name, 'to_alipay_dict'):
+                params['product_name'] = self.product_name.to_alipay_dict()
+            else:
+                params['product_name'] = self.product_name
+        if self.refund_url:
+            if hasattr(self.refund_url, 'to_alipay_dict'):
+                params['refund_url'] = self.refund_url.to_alipay_dict()
+            else:
+                params['refund_url'] = self.refund_url
+        if self.service_expect_end_time:
+            if hasattr(self.service_expect_end_time, 'to_alipay_dict'):
+                params['service_expect_end_time'] = self.service_expect_end_time.to_alipay_dict()
+            else:
+                params['service_expect_end_time'] = self.service_expect_end_time
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
+        if self.user_type:
+            if hasattr(self.user_type, 'to_alipay_dict'):
+                params['user_type'] = self.user_type.to_alipay_dict()
+            else:
+                params['user_type'] = self.user_type
+        return params
+
+    @staticmethod
+    def from_alipay_dict(d):
+        if not d:
+            return None
+        o = PlatformConsultOrderExtInfo()
+        if 'alipay_channel_order_flag' in d:
+            o.alipay_channel_order_flag = d['alipay_channel_order_flag']
+        if 'approve_comment' in d:
+            o.approve_comment = d['approve_comment']
+        if 'channel_desc' in d:
+            o.channel_desc = d['channel_desc']
+        if 'chat_url' in d:
+            o.chat_url = d['chat_url']
+        if 'complaint' in d:
+            o.complaint = d['complaint']
+        if 'doctor_avatar' in d:
+            o.doctor_avatar = d['doctor_avatar']
+        if 'doctor_inquiry_link_page' in d:
+            o.doctor_inquiry_link_page = d['doctor_inquiry_link_page']
+        if 'doctor_title' in d:
+            o.doctor_title = d['doctor_title']
+        if 'doctor_type' in d:
+            o.doctor_type = d['doctor_type']
+        if 'hospital_name' in d:
+            o.hospital_name = d['hospital_name']
+        if 'invoice_url' in d:
+            o.invoice_url = d['invoice_url']
+        if 'medical_inquiry_order_evaluate_info' in d:
+            o.medical_inquiry_order_evaluate_info = d['medical_inquiry_order_evaluate_info']
+        if 'order_from' in d:
+            o.order_from = d['order_from']
+        if 'order_pid' in d:
+            o.order_pid = d['order_pid']
+        if 'order_spu' in d:
+            o.order_spu = d['order_spu']
+        if 'original_price' in d:
+            o.original_price = d['original_price']
+        if 'out_biz_no' in d:
+            o.out_biz_no = d['out_biz_no']
+        if 'plus_register_info' in d:
+            o.plus_register_info = d['plus_register_info']
+        if 'product_name' in d:
+            o.product_name = d['product_name']
+        if 'refund_url' in d:
+            o.refund_url = d['refund_url']
+        if 'service_expect_end_time' in d:
+            o.service_expect_end_time = d['service_expect_end_time']
+        if 'source' in d:
+            o.source = d['source']
+        if 'user_type' in d:
+            o.user_type = d['user_type']
+        return o
+
+

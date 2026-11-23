@@ -8,6 +8,7 @@ from alipay.aop.api.domain.CardPromoInfo import CardPromoInfo
 from alipay.aop.api.domain.AxfItemAttr import AxfItemAttr
 from alipay.aop.api.domain.LsItemCustomAttr import LsItemCustomAttr
 from alipay.aop.api.domain.MoneyCardInfo import MoneyCardInfo
+from alipay.aop.api.domain.MerchantCardRechargeOption import MerchantCardRechargeOption
 from alipay.aop.api.domain.CardRejectReasonInfo import CardRejectReasonInfo
 from alipay.aop.api.domain.CardTemplateSale import CardTemplateSale
 from alipay.aop.api.domain.ItemSku import ItemSku
@@ -18,6 +19,7 @@ from alipay.aop.api.domain.CardTemplateUse import CardTemplateUse
 class MerchantCardTemplate(object):
 
     def __init__(self):
+        self._auto_extend = None
         self._ax_item_type = None
         self._booking_cancel_deadline = None
         self._booking_mode = None
@@ -41,20 +43,30 @@ class MerchantCardTemplate(object):
         self._item_category_code = None
         self._item_custom_attrs = None
         self._item_version = None
+        self._max_recharge_balance = None
         self._money_card_info = None
         self._msg_app_id = None
         self._need_order_agreement = None
         self._online_sale_switch = None
         self._online_show_switch = None
         self._out_card_id = None
+        self._recharge_options = None
         self._reject_reasons = None
         self._sale_info = None
         self._settle_type = None
         self._sku_list = None
+        self._support_recharge = None
         self._support_withdraw = None
         self._times_card_info = None
         self._use_info = None
 
+    @property
+    def auto_extend(self):
+        return self._auto_extend
+
+    @auto_extend.setter
+    def auto_extend(self, value):
+        self._auto_extend = value
     @property
     def ax_item_type(self):
         return self._ax_item_type
@@ -253,6 +265,13 @@ class MerchantCardTemplate(object):
     def item_version(self, value):
         self._item_version = value
     @property
+    def max_recharge_balance(self):
+        return self._max_recharge_balance
+
+    @max_recharge_balance.setter
+    def max_recharge_balance(self, value):
+        self._max_recharge_balance = value
+    @property
     def money_card_info(self):
         return self._money_card_info
 
@@ -298,6 +317,19 @@ class MerchantCardTemplate(object):
     def out_card_id(self, value):
         self._out_card_id = value
     @property
+    def recharge_options(self):
+        return self._recharge_options
+
+    @recharge_options.setter
+    def recharge_options(self, value):
+        if isinstance(value, list):
+            self._recharge_options = list()
+            for i in value:
+                if isinstance(i, MerchantCardRechargeOption):
+                    self._recharge_options.append(i)
+                else:
+                    self._recharge_options.append(MerchantCardRechargeOption.from_alipay_dict(i))
+    @property
     def reject_reasons(self):
         return self._reject_reasons
 
@@ -341,6 +373,13 @@ class MerchantCardTemplate(object):
                 else:
                     self._sku_list.append(ItemSku.from_alipay_dict(i))
     @property
+    def support_recharge(self):
+        return self._support_recharge
+
+    @support_recharge.setter
+    def support_recharge(self, value):
+        self._support_recharge = value
+    @property
     def support_withdraw(self):
         return self._support_withdraw
 
@@ -371,6 +410,11 @@ class MerchantCardTemplate(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.auto_extend:
+            if hasattr(self.auto_extend, 'to_alipay_dict'):
+                params['auto_extend'] = self.auto_extend.to_alipay_dict()
+            else:
+                params['auto_extend'] = self.auto_extend
         if self.ax_item_type:
             if hasattr(self.ax_item_type, 'to_alipay_dict'):
                 params['ax_item_type'] = self.ax_item_type.to_alipay_dict()
@@ -526,6 +570,11 @@ class MerchantCardTemplate(object):
                 params['item_version'] = self.item_version.to_alipay_dict()
             else:
                 params['item_version'] = self.item_version
+        if self.max_recharge_balance:
+            if hasattr(self.max_recharge_balance, 'to_alipay_dict'):
+                params['max_recharge_balance'] = self.max_recharge_balance.to_alipay_dict()
+            else:
+                params['max_recharge_balance'] = self.max_recharge_balance
         if self.money_card_info:
             if hasattr(self.money_card_info, 'to_alipay_dict'):
                 params['money_card_info'] = self.money_card_info.to_alipay_dict()
@@ -556,6 +605,16 @@ class MerchantCardTemplate(object):
                 params['out_card_id'] = self.out_card_id.to_alipay_dict()
             else:
                 params['out_card_id'] = self.out_card_id
+        if self.recharge_options:
+            if isinstance(self.recharge_options, list):
+                for i in range(0, len(self.recharge_options)):
+                    element = self.recharge_options[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.recharge_options[i] = element.to_alipay_dict()
+            if hasattr(self.recharge_options, 'to_alipay_dict'):
+                params['recharge_options'] = self.recharge_options.to_alipay_dict()
+            else:
+                params['recharge_options'] = self.recharge_options
         if self.reject_reasons:
             if isinstance(self.reject_reasons, list):
                 for i in range(0, len(self.reject_reasons)):
@@ -586,6 +645,11 @@ class MerchantCardTemplate(object):
                 params['sku_list'] = self.sku_list.to_alipay_dict()
             else:
                 params['sku_list'] = self.sku_list
+        if self.support_recharge:
+            if hasattr(self.support_recharge, 'to_alipay_dict'):
+                params['support_recharge'] = self.support_recharge.to_alipay_dict()
+            else:
+                params['support_recharge'] = self.support_recharge
         if self.support_withdraw:
             if hasattr(self.support_withdraw, 'to_alipay_dict'):
                 params['support_withdraw'] = self.support_withdraw.to_alipay_dict()
@@ -608,6 +672,8 @@ class MerchantCardTemplate(object):
         if not d:
             return None
         o = MerchantCardTemplate()
+        if 'auto_extend' in d:
+            o.auto_extend = d['auto_extend']
         if 'ax_item_type' in d:
             o.ax_item_type = d['ax_item_type']
         if 'booking_cancel_deadline' in d:
@@ -654,6 +720,8 @@ class MerchantCardTemplate(object):
             o.item_custom_attrs = d['item_custom_attrs']
         if 'item_version' in d:
             o.item_version = d['item_version']
+        if 'max_recharge_balance' in d:
+            o.max_recharge_balance = d['max_recharge_balance']
         if 'money_card_info' in d:
             o.money_card_info = d['money_card_info']
         if 'msg_app_id' in d:
@@ -666,6 +734,8 @@ class MerchantCardTemplate(object):
             o.online_show_switch = d['online_show_switch']
         if 'out_card_id' in d:
             o.out_card_id = d['out_card_id']
+        if 'recharge_options' in d:
+            o.recharge_options = d['recharge_options']
         if 'reject_reasons' in d:
             o.reject_reasons = d['reject_reasons']
         if 'sale_info' in d:
@@ -674,6 +744,8 @@ class MerchantCardTemplate(object):
             o.settle_type = d['settle_type']
         if 'sku_list' in d:
             o.sku_list = d['sku_list']
+        if 'support_recharge' in d:
+            o.support_recharge = d['support_recharge']
         if 'support_withdraw' in d:
             o.support_withdraw = d['support_withdraw']
         if 'times_card_info' in d:

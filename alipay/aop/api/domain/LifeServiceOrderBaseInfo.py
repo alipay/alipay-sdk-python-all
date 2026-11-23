@@ -10,6 +10,8 @@ class LifeServiceOrderBaseInfo(object):
     def __init__(self):
         self._merchant_order_id = None
         self._order_create_time = None
+        self._order_end_time = None
+        self._order_start_time = None
         self._order_status = None
         self._order_type = None
 
@@ -27,6 +29,20 @@ class LifeServiceOrderBaseInfo(object):
     @order_create_time.setter
     def order_create_time(self, value):
         self._order_create_time = value
+    @property
+    def order_end_time(self):
+        return self._order_end_time
+
+    @order_end_time.setter
+    def order_end_time(self, value):
+        self._order_end_time = value
+    @property
+    def order_start_time(self):
+        return self._order_start_time
+
+    @order_start_time.setter
+    def order_start_time(self, value):
+        self._order_start_time = value
     @property
     def order_status(self):
         return self._order_status
@@ -55,6 +71,16 @@ class LifeServiceOrderBaseInfo(object):
                 params['order_create_time'] = self.order_create_time.to_alipay_dict()
             else:
                 params['order_create_time'] = self.order_create_time
+        if self.order_end_time:
+            if hasattr(self.order_end_time, 'to_alipay_dict'):
+                params['order_end_time'] = self.order_end_time.to_alipay_dict()
+            else:
+                params['order_end_time'] = self.order_end_time
+        if self.order_start_time:
+            if hasattr(self.order_start_time, 'to_alipay_dict'):
+                params['order_start_time'] = self.order_start_time.to_alipay_dict()
+            else:
+                params['order_start_time'] = self.order_start_time
         if self.order_status:
             if hasattr(self.order_status, 'to_alipay_dict'):
                 params['order_status'] = self.order_status.to_alipay_dict()
@@ -76,6 +102,10 @@ class LifeServiceOrderBaseInfo(object):
             o.merchant_order_id = d['merchant_order_id']
         if 'order_create_time' in d:
             o.order_create_time = d['order_create_time']
+        if 'order_end_time' in d:
+            o.order_end_time = d['order_end_time']
+        if 'order_start_time' in d:
+            o.order_start_time = d['order_start_time']
         if 'order_status' in d:
             o.order_status = d['order_status']
         if 'order_type' in d:

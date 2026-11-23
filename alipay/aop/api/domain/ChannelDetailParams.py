@@ -10,11 +10,15 @@ class ChannelDetailParams(object):
     def __init__(self):
         self._card_group_name = None
         self._credit_risk_info = None
+        self._credit_value = None
         self._fund_loan_sign = None
         self._gov_subsidy = None
         self._inst_subsidy = None
         self._marketing_flag = None
         self._refuse_code = None
+        self._reject_desc = None
+        self._reject_reason = None
+        self._total_credit_value = None
         self._use_agreement_pay_willingness = None
         self._user_has_sign = None
         self._zm_score_gte_800 = None
@@ -33,6 +37,13 @@ class ChannelDetailParams(object):
     @credit_risk_info.setter
     def credit_risk_info(self, value):
         self._credit_risk_info = value
+    @property
+    def credit_value(self):
+        return self._credit_value
+
+    @credit_value.setter
+    def credit_value(self, value):
+        self._credit_value = value
     @property
     def fund_loan_sign(self):
         return self._fund_loan_sign
@@ -69,6 +80,27 @@ class ChannelDetailParams(object):
     def refuse_code(self, value):
         self._refuse_code = value
     @property
+    def reject_desc(self):
+        return self._reject_desc
+
+    @reject_desc.setter
+    def reject_desc(self, value):
+        self._reject_desc = value
+    @property
+    def reject_reason(self):
+        return self._reject_reason
+
+    @reject_reason.setter
+    def reject_reason(self, value):
+        self._reject_reason = value
+    @property
+    def total_credit_value(self):
+        return self._total_credit_value
+
+    @total_credit_value.setter
+    def total_credit_value(self, value):
+        self._total_credit_value = value
+    @property
     def use_agreement_pay_willingness(self):
         return self._use_agreement_pay_willingness
 
@@ -103,6 +135,11 @@ class ChannelDetailParams(object):
                 params['credit_risk_info'] = self.credit_risk_info.to_alipay_dict()
             else:
                 params['credit_risk_info'] = self.credit_risk_info
+        if self.credit_value:
+            if hasattr(self.credit_value, 'to_alipay_dict'):
+                params['credit_value'] = self.credit_value.to_alipay_dict()
+            else:
+                params['credit_value'] = self.credit_value
         if self.fund_loan_sign:
             if hasattr(self.fund_loan_sign, 'to_alipay_dict'):
                 params['fund_loan_sign'] = self.fund_loan_sign.to_alipay_dict()
@@ -128,6 +165,21 @@ class ChannelDetailParams(object):
                 params['refuse_code'] = self.refuse_code.to_alipay_dict()
             else:
                 params['refuse_code'] = self.refuse_code
+        if self.reject_desc:
+            if hasattr(self.reject_desc, 'to_alipay_dict'):
+                params['reject_desc'] = self.reject_desc.to_alipay_dict()
+            else:
+                params['reject_desc'] = self.reject_desc
+        if self.reject_reason:
+            if hasattr(self.reject_reason, 'to_alipay_dict'):
+                params['reject_reason'] = self.reject_reason.to_alipay_dict()
+            else:
+                params['reject_reason'] = self.reject_reason
+        if self.total_credit_value:
+            if hasattr(self.total_credit_value, 'to_alipay_dict'):
+                params['total_credit_value'] = self.total_credit_value.to_alipay_dict()
+            else:
+                params['total_credit_value'] = self.total_credit_value
         if self.use_agreement_pay_willingness:
             if hasattr(self.use_agreement_pay_willingness, 'to_alipay_dict'):
                 params['use_agreement_pay_willingness'] = self.use_agreement_pay_willingness.to_alipay_dict()
@@ -154,6 +206,8 @@ class ChannelDetailParams(object):
             o.card_group_name = d['card_group_name']
         if 'credit_risk_info' in d:
             o.credit_risk_info = d['credit_risk_info']
+        if 'credit_value' in d:
+            o.credit_value = d['credit_value']
         if 'fund_loan_sign' in d:
             o.fund_loan_sign = d['fund_loan_sign']
         if 'gov_subsidy' in d:
@@ -164,6 +218,12 @@ class ChannelDetailParams(object):
             o.marketing_flag = d['marketing_flag']
         if 'refuse_code' in d:
             o.refuse_code = d['refuse_code']
+        if 'reject_desc' in d:
+            o.reject_desc = d['reject_desc']
+        if 'reject_reason' in d:
+            o.reject_reason = d['reject_reason']
+        if 'total_credit_value' in d:
+            o.total_credit_value = d['total_credit_value']
         if 'use_agreement_pay_willingness' in d:
             o.use_agreement_pay_willingness = d['use_agreement_pay_willingness']
         if 'user_has_sign' in d:

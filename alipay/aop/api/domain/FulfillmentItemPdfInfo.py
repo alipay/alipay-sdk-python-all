@@ -13,6 +13,7 @@ class FulfillmentItemPdfInfo(object):
         self._item_ids = None
         self._item_infos = None
         self._link = None
+        self._sample_code = None
 
     @property
     def file_id(self):
@@ -51,6 +52,13 @@ class FulfillmentItemPdfInfo(object):
     @link.setter
     def link(self, value):
         self._link = value
+    @property
+    def sample_code(self):
+        return self._sample_code
+
+    @sample_code.setter
+    def sample_code(self, value):
+        self._sample_code = value
 
 
     def to_alipay_dict(self):
@@ -85,6 +93,11 @@ class FulfillmentItemPdfInfo(object):
                 params['link'] = self.link.to_alipay_dict()
             else:
                 params['link'] = self.link
+        if self.sample_code:
+            if hasattr(self.sample_code, 'to_alipay_dict'):
+                params['sample_code'] = self.sample_code.to_alipay_dict()
+            else:
+                params['sample_code'] = self.sample_code
         return params
 
     @staticmethod
@@ -100,6 +113,8 @@ class FulfillmentItemPdfInfo(object):
             o.item_infos = d['item_infos']
         if 'link' in d:
             o.link = d['link']
+        if 'sample_code' in d:
+            o.sample_code = d['sample_code']
         return o
 
 

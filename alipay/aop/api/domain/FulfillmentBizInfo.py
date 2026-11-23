@@ -14,6 +14,7 @@ from alipay.aop.api.domain.NursingVO import NursingVO
 from alipay.aop.api.domain.FulfillmentBizVO import FulfillmentBizVO
 from alipay.aop.api.domain.PsychologicalVO import PsychologicalVO
 from alipay.aop.api.domain.FulfillmentBizVO import FulfillmentBizVO
+from alipay.aop.api.domain.SosInfo import SosInfo
 
 
 class FulfillmentBizInfo(object):
@@ -30,6 +31,7 @@ class FulfillmentBizInfo(object):
         self._physical_examination = None
         self._psychological = None
         self._registration_green_channel = None
+        self._sos_info = None
 
     @property
     def advisory(self):
@@ -141,6 +143,16 @@ class FulfillmentBizInfo(object):
             self._registration_green_channel = value
         else:
             self._registration_green_channel = FulfillmentBizVO.from_alipay_dict(value)
+    @property
+    def sos_info(self):
+        return self._sos_info
+
+    @sos_info.setter
+    def sos_info(self, value):
+        if isinstance(value, SosInfo):
+            self._sos_info = value
+        else:
+            self._sos_info = SosInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
@@ -200,6 +212,11 @@ class FulfillmentBizInfo(object):
                 params['registration_green_channel'] = self.registration_green_channel.to_alipay_dict()
             else:
                 params['registration_green_channel'] = self.registration_green_channel
+        if self.sos_info:
+            if hasattr(self.sos_info, 'to_alipay_dict'):
+                params['sos_info'] = self.sos_info.to_alipay_dict()
+            else:
+                params['sos_info'] = self.sos_info
         return params
 
     @staticmethod
@@ -229,6 +246,8 @@ class FulfillmentBizInfo(object):
             o.psychological = d['psychological']
         if 'registration_green_channel' in d:
             o.registration_green_channel = d['registration_green_channel']
+        if 'sos_info' in d:
+            o.sos_info = d['sos_info']
         return o
 
 

@@ -8,9 +8,12 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalInquiryServiceSyncModel(object):
 
     def __init__(self):
+        self._all_service_id = None
         self._average_time = None
         self._data_version = None
+        self._description = None
         self._doctor_id = None
+        self._doctor_platform_status = None
         self._evaluation_score = None
         self._inquiry_mode = None
         self._inquiry_price = None
@@ -21,8 +24,17 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
         self._platform_code = None
         self._service_duration = None
         self._service_id = None
+        self._service_name = None
+        self._spu_type = None
         self._status = None
 
+    @property
+    def all_service_id(self):
+        return self._all_service_id
+
+    @all_service_id.setter
+    def all_service_id(self, value):
+        self._all_service_id = value
     @property
     def average_time(self):
         return self._average_time
@@ -38,12 +50,26 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
     def data_version(self, value):
         self._data_version = value
     @property
+    def description(self):
+        return self._description
+
+    @description.setter
+    def description(self, value):
+        self._description = value
+    @property
     def doctor_id(self):
         return self._doctor_id
 
     @doctor_id.setter
     def doctor_id(self, value):
         self._doctor_id = value
+    @property
+    def doctor_platform_status(self):
+        return self._doctor_platform_status
+
+    @doctor_platform_status.setter
+    def doctor_platform_status(self, value):
+        self._doctor_platform_status = value
     @property
     def evaluation_score(self):
         return self._evaluation_score
@@ -115,6 +141,20 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
     def service_id(self, value):
         self._service_id = value
     @property
+    def service_name(self):
+        return self._service_name
+
+    @service_name.setter
+    def service_name(self, value):
+        self._service_name = value
+    @property
+    def spu_type(self):
+        return self._spu_type
+
+    @spu_type.setter
+    def spu_type(self, value):
+        self._spu_type = value
+    @property
     def status(self):
         return self._status
 
@@ -125,6 +165,11 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.all_service_id:
+            if hasattr(self.all_service_id, 'to_alipay_dict'):
+                params['all_service_id'] = self.all_service_id.to_alipay_dict()
+            else:
+                params['all_service_id'] = self.all_service_id
         if self.average_time:
             if hasattr(self.average_time, 'to_alipay_dict'):
                 params['average_time'] = self.average_time.to_alipay_dict()
@@ -135,11 +180,21 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
                 params['data_version'] = self.data_version.to_alipay_dict()
             else:
                 params['data_version'] = self.data_version
+        if self.description:
+            if hasattr(self.description, 'to_alipay_dict'):
+                params['description'] = self.description.to_alipay_dict()
+            else:
+                params['description'] = self.description
         if self.doctor_id:
             if hasattr(self.doctor_id, 'to_alipay_dict'):
                 params['doctor_id'] = self.doctor_id.to_alipay_dict()
             else:
                 params['doctor_id'] = self.doctor_id
+        if self.doctor_platform_status:
+            if hasattr(self.doctor_platform_status, 'to_alipay_dict'):
+                params['doctor_platform_status'] = self.doctor_platform_status.to_alipay_dict()
+            else:
+                params['doctor_platform_status'] = self.doctor_platform_status
         if self.evaluation_score:
             if hasattr(self.evaluation_score, 'to_alipay_dict'):
                 params['evaluation_score'] = self.evaluation_score.to_alipay_dict()
@@ -190,6 +245,16 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
                 params['service_id'] = self.service_id.to_alipay_dict()
             else:
                 params['service_id'] = self.service_id
+        if self.service_name:
+            if hasattr(self.service_name, 'to_alipay_dict'):
+                params['service_name'] = self.service_name.to_alipay_dict()
+            else:
+                params['service_name'] = self.service_name
+        if self.spu_type:
+            if hasattr(self.spu_type, 'to_alipay_dict'):
+                params['spu_type'] = self.spu_type.to_alipay_dict()
+            else:
+                params['spu_type'] = self.spu_type
         if self.status:
             if hasattr(self.status, 'to_alipay_dict'):
                 params['status'] = self.status.to_alipay_dict()
@@ -202,12 +267,18 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalInquiryServiceSyncModel()
+        if 'all_service_id' in d:
+            o.all_service_id = d['all_service_id']
         if 'average_time' in d:
             o.average_time = d['average_time']
         if 'data_version' in d:
             o.data_version = d['data_version']
+        if 'description' in d:
+            o.description = d['description']
         if 'doctor_id' in d:
             o.doctor_id = d['doctor_id']
+        if 'doctor_platform_status' in d:
+            o.doctor_platform_status = d['doctor_platform_status']
         if 'evaluation_score' in d:
             o.evaluation_score = d['evaluation_score']
         if 'inquiry_mode' in d:
@@ -228,6 +299,10 @@ class AlipayCommerceMedicalInquiryServiceSyncModel(object):
             o.service_duration = d['service_duration']
         if 'service_id' in d:
             o.service_id = d['service_id']
+        if 'service_name' in d:
+            o.service_name = d['service_name']
+        if 'spu_type' in d:
+            o.spu_type = d['spu_type']
         if 'status' in d:
             o.status = d['status']
         return o

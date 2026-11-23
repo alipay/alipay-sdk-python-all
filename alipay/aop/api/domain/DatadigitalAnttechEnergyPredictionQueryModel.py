@@ -14,6 +14,7 @@ class DatadigitalAnttechEnergyPredictionQueryModel(object):
         self._forecast_id = None
         self._request_id = None
         self._start_date = None
+        self._target_customer_code = None
 
     @property
     def agreement_code(self):
@@ -57,6 +58,13 @@ class DatadigitalAnttechEnergyPredictionQueryModel(object):
     @start_date.setter
     def start_date(self, value):
         self._start_date = value
+    @property
+    def target_customer_code(self):
+        return self._target_customer_code
+
+    @target_customer_code.setter
+    def target_customer_code(self, value):
+        self._target_customer_code = value
 
 
     def to_alipay_dict(self):
@@ -91,6 +99,11 @@ class DatadigitalAnttechEnergyPredictionQueryModel(object):
                 params['start_date'] = self.start_date.to_alipay_dict()
             else:
                 params['start_date'] = self.start_date
+        if self.target_customer_code:
+            if hasattr(self.target_customer_code, 'to_alipay_dict'):
+                params['target_customer_code'] = self.target_customer_code.to_alipay_dict()
+            else:
+                params['target_customer_code'] = self.target_customer_code
         return params
 
     @staticmethod
@@ -110,6 +123,8 @@ class DatadigitalAnttechEnergyPredictionQueryModel(object):
             o.request_id = d['request_id']
         if 'start_date' in d:
             o.start_date = d['start_date']
+        if 'target_customer_code' in d:
+            o.target_customer_code = d['target_customer_code']
         return o
 
 

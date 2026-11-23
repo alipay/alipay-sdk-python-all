@@ -11,6 +11,7 @@ class AlipayCommerceEducateStudentverifyPhotoSyncModel(object):
         self._isv_app_id = None
         self._out_student_id = None
         self._photo_url = None
+        self._process_file_id = None
 
     @property
     def isv_app_id(self):
@@ -33,6 +34,13 @@ class AlipayCommerceEducateStudentverifyPhotoSyncModel(object):
     @photo_url.setter
     def photo_url(self, value):
         self._photo_url = value
+    @property
+    def process_file_id(self):
+        return self._process_file_id
+
+    @process_file_id.setter
+    def process_file_id(self, value):
+        self._process_file_id = value
 
 
     def to_alipay_dict(self):
@@ -52,6 +60,11 @@ class AlipayCommerceEducateStudentverifyPhotoSyncModel(object):
                 params['photo_url'] = self.photo_url.to_alipay_dict()
             else:
                 params['photo_url'] = self.photo_url
+        if self.process_file_id:
+            if hasattr(self.process_file_id, 'to_alipay_dict'):
+                params['process_file_id'] = self.process_file_id.to_alipay_dict()
+            else:
+                params['process_file_id'] = self.process_file_id
         return params
 
     @staticmethod
@@ -65,6 +78,8 @@ class AlipayCommerceEducateStudentverifyPhotoSyncModel(object):
             o.out_student_id = d['out_student_id']
         if 'photo_url' in d:
             o.photo_url = d['photo_url']
+        if 'process_file_id' in d:
+            o.process_file_id = d['process_file_id']
         return o
 
 

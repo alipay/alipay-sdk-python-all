@@ -10,6 +10,7 @@ class AlipayUserAgreementDelegationCancelModel(object):
     def __init__(self):
         self._agreement_no = None
         self._delegation_id = None
+        self._personal_product_code = None
 
     @property
     def agreement_no(self):
@@ -25,6 +26,13 @@ class AlipayUserAgreementDelegationCancelModel(object):
     @delegation_id.setter
     def delegation_id(self, value):
         self._delegation_id = value
+    @property
+    def personal_product_code(self):
+        return self._personal_product_code
+
+    @personal_product_code.setter
+    def personal_product_code(self, value):
+        self._personal_product_code = value
 
 
     def to_alipay_dict(self):
@@ -39,6 +47,11 @@ class AlipayUserAgreementDelegationCancelModel(object):
                 params['delegation_id'] = self.delegation_id.to_alipay_dict()
             else:
                 params['delegation_id'] = self.delegation_id
+        if self.personal_product_code:
+            if hasattr(self.personal_product_code, 'to_alipay_dict'):
+                params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
+            else:
+                params['personal_product_code'] = self.personal_product_code
         return params
 
     @staticmethod
@@ -50,6 +63,8 @@ class AlipayUserAgreementDelegationCancelModel(object):
             o.agreement_no = d['agreement_no']
         if 'delegation_id' in d:
             o.delegation_id = d['delegation_id']
+        if 'personal_product_code' in d:
+            o.personal_product_code = d['personal_product_code']
         return o
 
 

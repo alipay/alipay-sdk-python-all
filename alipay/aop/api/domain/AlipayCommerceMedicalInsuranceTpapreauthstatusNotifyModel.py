@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsurancePreAuthInfo import InsurancePreAuthInfo
 
 
 class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
@@ -13,6 +14,7 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
         self._open_id = None
         self._pre_auth_audit_status = None
         self._pre_auth_audit_status_msg = None
+        self._pre_auth_info_list = None
         self._pre_auth_no = None
         self._pre_auth_quota = None
         self._tpa_id = None
@@ -53,6 +55,19 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
     @pre_auth_audit_status_msg.setter
     def pre_auth_audit_status_msg(self, value):
         self._pre_auth_audit_status_msg = value
+    @property
+    def pre_auth_info_list(self):
+        return self._pre_auth_info_list
+
+    @pre_auth_info_list.setter
+    def pre_auth_info_list(self, value):
+        if isinstance(value, list):
+            self._pre_auth_info_list = list()
+            for i in value:
+                if isinstance(i, InsurancePreAuthInfo):
+                    self._pre_auth_info_list.append(i)
+                else:
+                    self._pre_auth_info_list.append(InsurancePreAuthInfo.from_alipay_dict(i))
     @property
     def pre_auth_no(self):
         return self._pre_auth_no
@@ -110,6 +125,16 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
                 params['pre_auth_audit_status_msg'] = self.pre_auth_audit_status_msg.to_alipay_dict()
             else:
                 params['pre_auth_audit_status_msg'] = self.pre_auth_audit_status_msg
+        if self.pre_auth_info_list:
+            if isinstance(self.pre_auth_info_list, list):
+                for i in range(0, len(self.pre_auth_info_list)):
+                    element = self.pre_auth_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.pre_auth_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.pre_auth_info_list, 'to_alipay_dict'):
+                params['pre_auth_info_list'] = self.pre_auth_info_list.to_alipay_dict()
+            else:
+                params['pre_auth_info_list'] = self.pre_auth_info_list
         if self.pre_auth_no:
             if hasattr(self.pre_auth_no, 'to_alipay_dict'):
                 params['pre_auth_no'] = self.pre_auth_no.to_alipay_dict()
@@ -147,6 +172,8 @@ class AlipayCommerceMedicalInsuranceTpapreauthstatusNotifyModel(object):
             o.pre_auth_audit_status = d['pre_auth_audit_status']
         if 'pre_auth_audit_status_msg' in d:
             o.pre_auth_audit_status_msg = d['pre_auth_audit_status_msg']
+        if 'pre_auth_info_list' in d:
+            o.pre_auth_info_list = d['pre_auth_info_list']
         if 'pre_auth_no' in d:
             o.pre_auth_no = d['pre_auth_no']
         if 'pre_auth_quota' in d:

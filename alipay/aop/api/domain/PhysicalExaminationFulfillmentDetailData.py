@@ -11,6 +11,7 @@ class PhysicalExaminationFulfillmentDetailData(object):
         self._appointment_end_time = None
         self._appointment_start_time = None
         self._birth_date = None
+        self._cancel_reason = None
         self._cancel_time = None
         self._cert_no = None
         self._cert_type = None
@@ -21,6 +22,8 @@ class PhysicalExaminationFulfillmentDetailData(object):
         self._marital_status = None
         self._package_name = None
         self._phone = None
+        self._report_pdf = None
+        self._report_query_url = None
         self._service_city = None
         self._service_institution = None
         self._update_time = None
@@ -46,6 +49,13 @@ class PhysicalExaminationFulfillmentDetailData(object):
     @birth_date.setter
     def birth_date(self, value):
         self._birth_date = value
+    @property
+    def cancel_reason(self):
+        return self._cancel_reason
+
+    @cancel_reason.setter
+    def cancel_reason(self, value):
+        self._cancel_reason = value
     @property
     def cancel_time(self):
         return self._cancel_time
@@ -117,6 +127,20 @@ class PhysicalExaminationFulfillmentDetailData(object):
     def phone(self, value):
         self._phone = value
     @property
+    def report_pdf(self):
+        return self._report_pdf
+
+    @report_pdf.setter
+    def report_pdf(self, value):
+        self._report_pdf = value
+    @property
+    def report_query_url(self):
+        return self._report_query_url
+
+    @report_query_url.setter
+    def report_query_url(self, value):
+        self._report_query_url = value
+    @property
     def service_city(self):
         return self._service_city
 
@@ -156,6 +180,11 @@ class PhysicalExaminationFulfillmentDetailData(object):
                 params['birth_date'] = self.birth_date.to_alipay_dict()
             else:
                 params['birth_date'] = self.birth_date
+        if self.cancel_reason:
+            if hasattr(self.cancel_reason, 'to_alipay_dict'):
+                params['cancel_reason'] = self.cancel_reason.to_alipay_dict()
+            else:
+                params['cancel_reason'] = self.cancel_reason
         if self.cancel_time:
             if hasattr(self.cancel_time, 'to_alipay_dict'):
                 params['cancel_time'] = self.cancel_time.to_alipay_dict()
@@ -206,6 +235,16 @@ class PhysicalExaminationFulfillmentDetailData(object):
                 params['phone'] = self.phone.to_alipay_dict()
             else:
                 params['phone'] = self.phone
+        if self.report_pdf:
+            if hasattr(self.report_pdf, 'to_alipay_dict'):
+                params['report_pdf'] = self.report_pdf.to_alipay_dict()
+            else:
+                params['report_pdf'] = self.report_pdf
+        if self.report_query_url:
+            if hasattr(self.report_query_url, 'to_alipay_dict'):
+                params['report_query_url'] = self.report_query_url.to_alipay_dict()
+            else:
+                params['report_query_url'] = self.report_query_url
         if self.service_city:
             if hasattr(self.service_city, 'to_alipay_dict'):
                 params['service_city'] = self.service_city.to_alipay_dict()
@@ -234,6 +273,8 @@ class PhysicalExaminationFulfillmentDetailData(object):
             o.appointment_start_time = d['appointment_start_time']
         if 'birth_date' in d:
             o.birth_date = d['birth_date']
+        if 'cancel_reason' in d:
+            o.cancel_reason = d['cancel_reason']
         if 'cancel_time' in d:
             o.cancel_time = d['cancel_time']
         if 'cert_no' in d:
@@ -254,6 +295,10 @@ class PhysicalExaminationFulfillmentDetailData(object):
             o.package_name = d['package_name']
         if 'phone' in d:
             o.phone = d['phone']
+        if 'report_pdf' in d:
+            o.report_pdf = d['report_pdf']
+        if 'report_query_url' in d:
+            o.report_query_url = d['report_query_url']
         if 'service_city' in d:
             o.service_city = d['service_city']
         if 'service_institution' in d:

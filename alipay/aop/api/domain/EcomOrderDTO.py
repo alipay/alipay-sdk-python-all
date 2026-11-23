@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.InsPeriodDTO import InsPeriodDTO
 from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 from alipay.aop.api.domain.InsTransportItineraryDTO import InsTransportItineraryDTO
+from alipay.aop.api.domain.InsTransportItineraryDTO import InsTransportItineraryDTO
 from alipay.aop.api.domain.InsOpenUserDTO import InsOpenUserDTO
 from alipay.aop.api.domain.EcomLogisticsOrderDTO import EcomLogisticsOrderDTO
 from alipay.aop.api.domain.PayOrderDTO import PayOrderDTO
@@ -33,6 +34,7 @@ class EcomOrderDTO(object):
         self._item_title = None
         self._item_total_value = None
         self._itineraries = None
+        self._itinerary_list = None
         self._leaser = None
         self._logistics_order = None
         self._main_order_id = None
@@ -190,6 +192,19 @@ class EcomOrderDTO(object):
             self._itineraries = value
         else:
             self._itineraries = InsTransportItineraryDTO.from_alipay_dict(value)
+    @property
+    def itinerary_list(self):
+        return self._itinerary_list
+
+    @itinerary_list.setter
+    def itinerary_list(self, value):
+        if isinstance(value, list):
+            self._itinerary_list = list()
+            for i in value:
+                if isinstance(i, InsTransportItineraryDTO):
+                    self._itinerary_list.append(i)
+                else:
+                    self._itinerary_list.append(InsTransportItineraryDTO.from_alipay_dict(i))
     @property
     def leaser(self):
         return self._leaser
@@ -433,6 +448,16 @@ class EcomOrderDTO(object):
                 params['itineraries'] = self.itineraries.to_alipay_dict()
             else:
                 params['itineraries'] = self.itineraries
+        if self.itinerary_list:
+            if isinstance(self.itinerary_list, list):
+                for i in range(0, len(self.itinerary_list)):
+                    element = self.itinerary_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.itinerary_list[i] = element.to_alipay_dict()
+            if hasattr(self.itinerary_list, 'to_alipay_dict'):
+                params['itinerary_list'] = self.itinerary_list.to_alipay_dict()
+            else:
+                params['itinerary_list'] = self.itinerary_list
         if self.leaser:
             if hasattr(self.leaser, 'to_alipay_dict'):
                 params['leaser'] = self.leaser.to_alipay_dict()
@@ -576,6 +601,8 @@ class EcomOrderDTO(object):
             o.item_total_value = d['item_total_value']
         if 'itineraries' in d:
             o.itineraries = d['itineraries']
+        if 'itinerary_list' in d:
+            o.itinerary_list = d['itinerary_list']
         if 'leaser' in d:
             o.leaser = d['leaser']
         if 'logistics_order' in d:

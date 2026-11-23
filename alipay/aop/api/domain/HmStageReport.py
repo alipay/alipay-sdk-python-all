@@ -9,6 +9,7 @@ class HmStageReport(object):
 
     def __init__(self):
         self._activity_id = None
+        self._activity_type = None
         self._content_markdown = None
         self._period_end = None
         self._period_index = None
@@ -25,6 +26,13 @@ class HmStageReport(object):
     @activity_id.setter
     def activity_id(self, value):
         self._activity_id = value
+    @property
+    def activity_type(self):
+        return self._activity_type
+
+    @activity_type.setter
+    def activity_type(self, value):
+        self._activity_type = value
     @property
     def content_markdown(self):
         return self._content_markdown
@@ -90,6 +98,11 @@ class HmStageReport(object):
                 params['activity_id'] = self.activity_id.to_alipay_dict()
             else:
                 params['activity_id'] = self.activity_id
+        if self.activity_type:
+            if hasattr(self.activity_type, 'to_alipay_dict'):
+                params['activity_type'] = self.activity_type.to_alipay_dict()
+            else:
+                params['activity_type'] = self.activity_type
         if self.content_markdown:
             if hasattr(self.content_markdown, 'to_alipay_dict'):
                 params['content_markdown'] = self.content_markdown.to_alipay_dict()
@@ -139,6 +152,8 @@ class HmStageReport(object):
         o = HmStageReport()
         if 'activity_id' in d:
             o.activity_id = d['activity_id']
+        if 'activity_type' in d:
+            o.activity_type = d['activity_type']
         if 'content_markdown' in d:
             o.content_markdown = d['content_markdown']
         if 'period_end' in d:

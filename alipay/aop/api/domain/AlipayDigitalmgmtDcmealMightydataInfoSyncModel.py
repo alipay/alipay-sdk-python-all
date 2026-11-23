@@ -19,8 +19,11 @@ class AlipayDigitalmgmtDcmealMightydataInfoSyncModel(object):
         self._order_type = None
         self._pay_details = None
         self._pay_type = None
+        self._restaurant_id = None
         self._restaurant_name = None
+        self._shop_id = None
         self._shop_name = None
+        self._source = None
         self._term_document_id = None
         self._term_name = None
         self._total_amount = None
@@ -104,6 +107,13 @@ class AlipayDigitalmgmtDcmealMightydataInfoSyncModel(object):
     def pay_type(self, value):
         self._pay_type = value
     @property
+    def restaurant_id(self):
+        return self._restaurant_id
+
+    @restaurant_id.setter
+    def restaurant_id(self, value):
+        self._restaurant_id = value
+    @property
     def restaurant_name(self):
         return self._restaurant_name
 
@@ -111,12 +121,26 @@ class AlipayDigitalmgmtDcmealMightydataInfoSyncModel(object):
     def restaurant_name(self, value):
         self._restaurant_name = value
     @property
+    def shop_id(self):
+        return self._shop_id
+
+    @shop_id.setter
+    def shop_id(self, value):
+        self._shop_id = value
+    @property
     def shop_name(self):
         return self._shop_name
 
     @shop_name.setter
     def shop_name(self, value):
         self._shop_name = value
+    @property
+    def source(self):
+        return self._source
+
+    @source.setter
+    def source(self, value):
+        self._source = value
     @property
     def term_document_id(self):
         return self._term_document_id
@@ -218,16 +242,31 @@ class AlipayDigitalmgmtDcmealMightydataInfoSyncModel(object):
                 params['pay_type'] = self.pay_type.to_alipay_dict()
             else:
                 params['pay_type'] = self.pay_type
+        if self.restaurant_id:
+            if hasattr(self.restaurant_id, 'to_alipay_dict'):
+                params['restaurant_id'] = self.restaurant_id.to_alipay_dict()
+            else:
+                params['restaurant_id'] = self.restaurant_id
         if self.restaurant_name:
             if hasattr(self.restaurant_name, 'to_alipay_dict'):
                 params['restaurant_name'] = self.restaurant_name.to_alipay_dict()
             else:
                 params['restaurant_name'] = self.restaurant_name
+        if self.shop_id:
+            if hasattr(self.shop_id, 'to_alipay_dict'):
+                params['shop_id'] = self.shop_id.to_alipay_dict()
+            else:
+                params['shop_id'] = self.shop_id
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
             else:
                 params['shop_name'] = self.shop_name
+        if self.source:
+            if hasattr(self.source, 'to_alipay_dict'):
+                params['source'] = self.source.to_alipay_dict()
+            else:
+                params['source'] = self.source
         if self.term_document_id:
             if hasattr(self.term_document_id, 'to_alipay_dict'):
                 params['term_document_id'] = self.term_document_id.to_alipay_dict()
@@ -283,10 +322,16 @@ class AlipayDigitalmgmtDcmealMightydataInfoSyncModel(object):
             o.pay_details = d['pay_details']
         if 'pay_type' in d:
             o.pay_type = d['pay_type']
+        if 'restaurant_id' in d:
+            o.restaurant_id = d['restaurant_id']
         if 'restaurant_name' in d:
             o.restaurant_name = d['restaurant_name']
+        if 'shop_id' in d:
+            o.shop_id = d['shop_id']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
+        if 'source' in d:
+            o.source = d['source']
         if 'term_document_id' in d:
             o.term_document_id = d['term_document_id']
         if 'term_name' in d:

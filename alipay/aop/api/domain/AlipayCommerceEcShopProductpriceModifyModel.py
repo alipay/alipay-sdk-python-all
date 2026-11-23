@@ -10,6 +10,7 @@ class AlipayCommerceEcShopProductpriceModifyModel(object):
 
     def __init__(self):
         self._merchant_enterprise_id = None
+        self._merchant_pid = None
         self._service_provider_id = None
         self._shop_product_price_list = None
 
@@ -20,6 +21,13 @@ class AlipayCommerceEcShopProductpriceModifyModel(object):
     @merchant_enterprise_id.setter
     def merchant_enterprise_id(self, value):
         self._merchant_enterprise_id = value
+    @property
+    def merchant_pid(self):
+        return self._merchant_pid
+
+    @merchant_pid.setter
+    def merchant_pid(self, value):
+        self._merchant_pid = value
     @property
     def service_provider_id(self):
         return self._service_provider_id
@@ -49,6 +57,11 @@ class AlipayCommerceEcShopProductpriceModifyModel(object):
                 params['merchant_enterprise_id'] = self.merchant_enterprise_id.to_alipay_dict()
             else:
                 params['merchant_enterprise_id'] = self.merchant_enterprise_id
+        if self.merchant_pid:
+            if hasattr(self.merchant_pid, 'to_alipay_dict'):
+                params['merchant_pid'] = self.merchant_pid.to_alipay_dict()
+            else:
+                params['merchant_pid'] = self.merchant_pid
         if self.service_provider_id:
             if hasattr(self.service_provider_id, 'to_alipay_dict'):
                 params['service_provider_id'] = self.service_provider_id.to_alipay_dict()
@@ -73,6 +86,8 @@ class AlipayCommerceEcShopProductpriceModifyModel(object):
         o = AlipayCommerceEcShopProductpriceModifyModel()
         if 'merchant_enterprise_id' in d:
             o.merchant_enterprise_id = d['merchant_enterprise_id']
+        if 'merchant_pid' in d:
+            o.merchant_pid = d['merchant_pid']
         if 'service_provider_id' in d:
             o.service_provider_id = d['service_provider_id']
         if 'shop_product_price_list' in d:

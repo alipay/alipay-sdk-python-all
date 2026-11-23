@@ -10,10 +10,13 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
 
     def __init__(self):
         self._agreement_code = None
+        self._city = None
+        self._district = None
         self._forecast_days = None
         self._latitude = None
         self._longitude = None
         self._past_days = None
+        self._province = None
         self._request_id = None
         self._timezone = None
         self._weather_variables_mark = None
@@ -25,6 +28,20 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
     @agreement_code.setter
     def agreement_code(self, value):
         self._agreement_code = value
+    @property
+    def city(self):
+        return self._city
+
+    @city.setter
+    def city(self, value):
+        self._city = value
+    @property
+    def district(self):
+        return self._district
+
+    @district.setter
+    def district(self, value):
+        self._district = value
     @property
     def forecast_days(self):
         return self._forecast_days
@@ -53,6 +70,13 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
     @past_days.setter
     def past_days(self, value):
         self._past_days = value
+    @property
+    def province(self):
+        return self._province
+
+    @province.setter
+    def province(self, value):
+        self._province = value
     @property
     def request_id(self):
         return self._request_id
@@ -86,6 +110,16 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
                 params['agreement_code'] = self.agreement_code.to_alipay_dict()
             else:
                 params['agreement_code'] = self.agreement_code
+        if self.city:
+            if hasattr(self.city, 'to_alipay_dict'):
+                params['city'] = self.city.to_alipay_dict()
+            else:
+                params['city'] = self.city
+        if self.district:
+            if hasattr(self.district, 'to_alipay_dict'):
+                params['district'] = self.district.to_alipay_dict()
+            else:
+                params['district'] = self.district
         if self.forecast_days:
             if hasattr(self.forecast_days, 'to_alipay_dict'):
                 params['forecast_days'] = self.forecast_days.to_alipay_dict()
@@ -106,6 +140,11 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
                 params['past_days'] = self.past_days.to_alipay_dict()
             else:
                 params['past_days'] = self.past_days
+        if self.province:
+            if hasattr(self.province, 'to_alipay_dict'):
+                params['province'] = self.province.to_alipay_dict()
+            else:
+                params['province'] = self.province
         if self.request_id:
             if hasattr(self.request_id, 'to_alipay_dict'):
                 params['request_id'] = self.request_id.to_alipay_dict()
@@ -130,6 +169,10 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
         o = DatadigitalAnttechWeatherFutureQueryModel()
         if 'agreement_code' in d:
             o.agreement_code = d['agreement_code']
+        if 'city' in d:
+            o.city = d['city']
+        if 'district' in d:
+            o.district = d['district']
         if 'forecast_days' in d:
             o.forecast_days = d['forecast_days']
         if 'latitude' in d:
@@ -138,6 +181,8 @@ class DatadigitalAnttechWeatherFutureQueryModel(object):
             o.longitude = d['longitude']
         if 'past_days' in d:
             o.past_days = d['past_days']
+        if 'province' in d:
+            o.province = d['province']
         if 'request_id' in d:
             o.request_id = d['request_id']
         if 'timezone' in d:

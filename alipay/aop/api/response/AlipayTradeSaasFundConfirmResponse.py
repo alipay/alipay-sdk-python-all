@@ -14,6 +14,7 @@ class AlipayTradeSaasFundConfirmResponse(AlipayResponse):
         self._claim_amount = None
         self._claim_request_no = None
         self._fund_no = None
+        self._inst_remark = None
         self._order_no = None
         self._out_trade_no = None
         self._trade_no = None
@@ -55,6 +56,13 @@ class AlipayTradeSaasFundConfirmResponse(AlipayResponse):
     def fund_no(self, value):
         self._fund_no = value
     @property
+    def inst_remark(self):
+        return self._inst_remark
+
+    @inst_remark.setter
+    def inst_remark(self, value):
+        self._inst_remark = value
+    @property
     def order_no(self):
         return self._order_no
 
@@ -95,6 +103,8 @@ class AlipayTradeSaasFundConfirmResponse(AlipayResponse):
             self.claim_request_no = response['claim_request_no']
         if 'fund_no' in response:
             self.fund_no = response['fund_no']
+        if 'inst_remark' in response:
+            self.inst_remark = response['inst_remark']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'out_trade_no' in response:

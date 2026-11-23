@@ -19,12 +19,17 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
         self._coupon_validity_type = None
         self._cumulative_arr = None
         self._denomination = None
+        self._instance_id_list = None
         self._leads_code = None
         self._ob_passport_id = None
         self._pain_spot_list = None
+        self._poc_risks_and_expectations = None
+        self._poc_value_propositions = None
+        self._poc_win_confidence = None
         self._reduction_reason = None
         self._region = None
         self._sales_force_id = None
+        self._sales_stage = None
         self._third_party_passport_id = None
         self._time_value = None
 
@@ -105,6 +110,16 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
     def denomination(self, value):
         self._denomination = value
     @property
+    def instance_id_list(self):
+        return self._instance_id_list
+
+    @instance_id_list.setter
+    def instance_id_list(self, value):
+        if isinstance(value, list):
+            self._instance_id_list = list()
+            for i in value:
+                self._instance_id_list.append(i)
+    @property
     def leads_code(self):
         return self._leads_code
 
@@ -129,6 +144,27 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
             for i in value:
                 self._pain_spot_list.append(i)
     @property
+    def poc_risks_and_expectations(self):
+        return self._poc_risks_and_expectations
+
+    @poc_risks_and_expectations.setter
+    def poc_risks_and_expectations(self, value):
+        self._poc_risks_and_expectations = value
+    @property
+    def poc_value_propositions(self):
+        return self._poc_value_propositions
+
+    @poc_value_propositions.setter
+    def poc_value_propositions(self, value):
+        self._poc_value_propositions = value
+    @property
+    def poc_win_confidence(self):
+        return self._poc_win_confidence
+
+    @poc_win_confidence.setter
+    def poc_win_confidence(self, value):
+        self._poc_win_confidence = value
+    @property
     def reduction_reason(self):
         return self._reduction_reason
 
@@ -149,6 +185,13 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
     @sales_force_id.setter
     def sales_force_id(self, value):
         self._sales_force_id = value
+    @property
+    def sales_stage(self):
+        return self._sales_stage
+
+    @sales_stage.setter
+    def sales_stage(self, value):
+        self._sales_stage = value
     @property
     def third_party_passport_id(self):
         return self._third_party_passport_id
@@ -222,6 +265,16 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
                 params['denomination'] = self.denomination.to_alipay_dict()
             else:
                 params['denomination'] = self.denomination
+        if self.instance_id_list:
+            if isinstance(self.instance_id_list, list):
+                for i in range(0, len(self.instance_id_list)):
+                    element = self.instance_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.instance_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.instance_id_list, 'to_alipay_dict'):
+                params['instance_id_list'] = self.instance_id_list.to_alipay_dict()
+            else:
+                params['instance_id_list'] = self.instance_id_list
         if self.leads_code:
             if hasattr(self.leads_code, 'to_alipay_dict'):
                 params['leads_code'] = self.leads_code.to_alipay_dict()
@@ -242,6 +295,21 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
                 params['pain_spot_list'] = self.pain_spot_list.to_alipay_dict()
             else:
                 params['pain_spot_list'] = self.pain_spot_list
+        if self.poc_risks_and_expectations:
+            if hasattr(self.poc_risks_and_expectations, 'to_alipay_dict'):
+                params['poc_risks_and_expectations'] = self.poc_risks_and_expectations.to_alipay_dict()
+            else:
+                params['poc_risks_and_expectations'] = self.poc_risks_and_expectations
+        if self.poc_value_propositions:
+            if hasattr(self.poc_value_propositions, 'to_alipay_dict'):
+                params['poc_value_propositions'] = self.poc_value_propositions.to_alipay_dict()
+            else:
+                params['poc_value_propositions'] = self.poc_value_propositions
+        if self.poc_win_confidence:
+            if hasattr(self.poc_win_confidence, 'to_alipay_dict'):
+                params['poc_win_confidence'] = self.poc_win_confidence.to_alipay_dict()
+            else:
+                params['poc_win_confidence'] = self.poc_win_confidence
         if self.reduction_reason:
             if hasattr(self.reduction_reason, 'to_alipay_dict'):
                 params['reduction_reason'] = self.reduction_reason.to_alipay_dict()
@@ -257,6 +325,11 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
                 params['sales_force_id'] = self.sales_force_id.to_alipay_dict()
             else:
                 params['sales_force_id'] = self.sales_force_id
+        if self.sales_stage:
+            if hasattr(self.sales_stage, 'to_alipay_dict'):
+                params['sales_stage'] = self.sales_stage.to_alipay_dict()
+            else:
+                params['sales_stage'] = self.sales_stage
         if self.third_party_passport_id:
             if hasattr(self.third_party_passport_id, 'to_alipay_dict'):
                 params['third_party_passport_id'] = self.third_party_passport_id.to_alipay_dict()
@@ -294,18 +367,28 @@ class AnttechOceanbaseObglobalSfcloudfeereductionCreateModel(object):
             o.cumulative_arr = d['cumulative_arr']
         if 'denomination' in d:
             o.denomination = d['denomination']
+        if 'instance_id_list' in d:
+            o.instance_id_list = d['instance_id_list']
         if 'leads_code' in d:
             o.leads_code = d['leads_code']
         if 'ob_passport_id' in d:
             o.ob_passport_id = d['ob_passport_id']
         if 'pain_spot_list' in d:
             o.pain_spot_list = d['pain_spot_list']
+        if 'poc_risks_and_expectations' in d:
+            o.poc_risks_and_expectations = d['poc_risks_and_expectations']
+        if 'poc_value_propositions' in d:
+            o.poc_value_propositions = d['poc_value_propositions']
+        if 'poc_win_confidence' in d:
+            o.poc_win_confidence = d['poc_win_confidence']
         if 'reduction_reason' in d:
             o.reduction_reason = d['reduction_reason']
         if 'region' in d:
             o.region = d['region']
         if 'sales_force_id' in d:
             o.sales_force_id = d['sales_force_id']
+        if 'sales_stage' in d:
+            o.sales_stage = d['sales_stage']
         if 'third_party_passport_id' in d:
             o.third_party_passport_id = d['third_party_passport_id']
         if 'time_value' in d:

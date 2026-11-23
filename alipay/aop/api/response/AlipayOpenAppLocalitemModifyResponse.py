@@ -11,6 +11,7 @@ class AlipayOpenAppLocalitemModifyResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenAppLocalitemModifyResponse, self).__init__()
         self._item_id = None
+        self._old_out_item_id = None
         self._out_item_id = None
         self._skus = None
 
@@ -21,6 +22,13 @@ class AlipayOpenAppLocalitemModifyResponse(AlipayResponse):
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def old_out_item_id(self):
+        return self._old_out_item_id
+
+    @old_out_item_id.setter
+    def old_out_item_id(self, value):
+        self._old_out_item_id = value
     @property
     def out_item_id(self):
         return self._out_item_id
@@ -46,6 +54,8 @@ class AlipayOpenAppLocalitemModifyResponse(AlipayResponse):
         response = super(AlipayOpenAppLocalitemModifyResponse, self).parse_response_content(response_content)
         if 'item_id' in response:
             self.item_id = response['item_id']
+        if 'old_out_item_id' in response:
+            self.old_out_item_id = response['old_out_item_id']
         if 'out_item_id' in response:
             self.out_item_id = response['out_item_id']
         if 'skus' in response:

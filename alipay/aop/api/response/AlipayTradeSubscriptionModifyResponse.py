@@ -11,6 +11,7 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
         super(AlipayTradeSubscriptionModifyResponse, self).__init__()
         self._alipay_jump_schema = None
         self._alipay_schema = None
+        self._effective_mode = None
         self._order_no = None
         self._pay_amount = None
         self._promotion_info = None
@@ -33,6 +34,13 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
     @alipay_schema.setter
     def alipay_schema(self, value):
         self._alipay_schema = value
+    @property
+    def effective_mode(self):
+        return self._effective_mode
+
+    @effective_mode.setter
+    def effective_mode(self, value):
+        self._effective_mode = value
     @property
     def order_no(self):
         return self._order_no
@@ -89,6 +97,8 @@ class AlipayTradeSubscriptionModifyResponse(AlipayResponse):
             self.alipay_jump_schema = response['alipay_jump_schema']
         if 'alipay_schema' in response:
             self.alipay_schema = response['alipay_schema']
+        if 'effective_mode' in response:
+            self.effective_mode = response['effective_mode']
         if 'order_no' in response:
             self.order_no = response['order_no']
         if 'pay_amount' in response:

@@ -9,12 +9,20 @@ from alipay.aop.api.domain.AlipaySolutionFile import AlipaySolutionFile
 class AlipayMerchantSolutionBatchSubmitModel(object):
 
     def __init__(self):
+        self._admit_mode = None
         self._file_info = None
         self._mrch_type = None
         self._out_batch_no = None
         self._scene_code = None
         self._solution_code = None
 
+    @property
+    def admit_mode(self):
+        return self._admit_mode
+
+    @admit_mode.setter
+    def admit_mode(self, value):
+        self._admit_mode = value
     @property
     def file_info(self):
         return self._file_info
@@ -60,6 +68,11 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.admit_mode:
+            if hasattr(self.admit_mode, 'to_alipay_dict'):
+                params['admit_mode'] = self.admit_mode.to_alipay_dict()
+            else:
+                params['admit_mode'] = self.admit_mode
         if self.file_info:
             if isinstance(self.file_info, list):
                 for i in range(0, len(self.file_info)):
@@ -97,6 +110,8 @@ class AlipayMerchantSolutionBatchSubmitModel(object):
         if not d:
             return None
         o = AlipayMerchantSolutionBatchSubmitModel()
+        if 'admit_mode' in d:
+            o.admit_mode = d['admit_mode']
         if 'file_info' in d:
             o.file_info = d['file_info']
         if 'mrch_type' in d:

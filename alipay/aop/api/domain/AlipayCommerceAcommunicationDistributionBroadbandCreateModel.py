@@ -8,12 +8,14 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
 
     def __init__(self):
+        self._active_id = None
         self._address_detail = None
         self._cert_name = None
         self._cert_no = None
         self._channel = None
         self._city_code = None
         self._contact_phone_number = None
+        self._developer_id = None
         self._district_code = None
         self._order_id = None
         self._province_code = None
@@ -21,6 +23,13 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
         self._sms_code = None
         self._supplier_pid = None
 
+    @property
+    def active_id(self):
+        return self._active_id
+
+    @active_id.setter
+    def active_id(self, value):
+        self._active_id = value
     @property
     def address_detail(self):
         return self._address_detail
@@ -63,6 +72,13 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
     @contact_phone_number.setter
     def contact_phone_number(self, value):
         self._contact_phone_number = value
+    @property
+    def developer_id(self):
+        return self._developer_id
+
+    @developer_id.setter
+    def developer_id(self, value):
+        self._developer_id = value
     @property
     def district_code(self):
         return self._district_code
@@ -109,6 +125,11 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.active_id:
+            if hasattr(self.active_id, 'to_alipay_dict'):
+                params['active_id'] = self.active_id.to_alipay_dict()
+            else:
+                params['active_id'] = self.active_id
         if self.address_detail:
             if hasattr(self.address_detail, 'to_alipay_dict'):
                 params['address_detail'] = self.address_detail.to_alipay_dict()
@@ -139,6 +160,11 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
                 params['contact_phone_number'] = self.contact_phone_number.to_alipay_dict()
             else:
                 params['contact_phone_number'] = self.contact_phone_number
+        if self.developer_id:
+            if hasattr(self.developer_id, 'to_alipay_dict'):
+                params['developer_id'] = self.developer_id.to_alipay_dict()
+            else:
+                params['developer_id'] = self.developer_id
         if self.district_code:
             if hasattr(self.district_code, 'to_alipay_dict'):
                 params['district_code'] = self.district_code.to_alipay_dict()
@@ -176,6 +202,8 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
         if not d:
             return None
         o = AlipayCommerceAcommunicationDistributionBroadbandCreateModel()
+        if 'active_id' in d:
+            o.active_id = d['active_id']
         if 'address_detail' in d:
             o.address_detail = d['address_detail']
         if 'cert_name' in d:
@@ -188,6 +216,8 @@ class AlipayCommerceAcommunicationDistributionBroadbandCreateModel(object):
             o.city_code = d['city_code']
         if 'contact_phone_number' in d:
             o.contact_phone_number = d['contact_phone_number']
+        if 'developer_id' in d:
+            o.developer_id = d['developer_id']
         if 'district_code' in d:
             o.district_code = d['district_code']
         if 'order_id' in d:
