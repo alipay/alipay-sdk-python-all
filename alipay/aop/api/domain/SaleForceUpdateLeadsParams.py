@@ -52,6 +52,7 @@ class SaleForceUpdateLeadsParams(object):
         self._partner_id = None
         self._partner_name = None
         self._platform_uid_id = None
+        self._platform_user_ids = None
         self._product_family = None
         self._project_close_comment = None
         self._project_close_reason = None
@@ -377,6 +378,16 @@ class SaleForceUpdateLeadsParams(object):
     @platform_uid_id.setter
     def platform_uid_id(self, value):
         self._platform_uid_id = value
+    @property
+    def platform_user_ids(self):
+        return self._platform_user_ids
+
+    @platform_user_ids.setter
+    def platform_user_ids(self, value):
+        if isinstance(value, list):
+            self._platform_user_ids = list()
+            for i in value:
+                self._platform_user_ids.append(i)
     @property
     def product_family(self):
         return self._product_family
@@ -731,6 +742,16 @@ class SaleForceUpdateLeadsParams(object):
                 params['platform_uid_id'] = self.platform_uid_id.to_alipay_dict()
             else:
                 params['platform_uid_id'] = self.platform_uid_id
+        if self.platform_user_ids:
+            if isinstance(self.platform_user_ids, list):
+                for i in range(0, len(self.platform_user_ids)):
+                    element = self.platform_user_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.platform_user_ids[i] = element.to_alipay_dict()
+            if hasattr(self.platform_user_ids, 'to_alipay_dict'):
+                params['platform_user_ids'] = self.platform_user_ids.to_alipay_dict()
+            else:
+                params['platform_user_ids'] = self.platform_user_ids
         if self.product_family:
             if hasattr(self.product_family, 'to_alipay_dict'):
                 params['product_family'] = self.product_family.to_alipay_dict()
@@ -914,6 +935,8 @@ class SaleForceUpdateLeadsParams(object):
             o.partner_name = d['partner_name']
         if 'platform_uid_id' in d:
             o.platform_uid_id = d['platform_uid_id']
+        if 'platform_user_ids' in d:
+            o.platform_user_ids = d['platform_user_ids']
         if 'product_family' in d:
             o.product_family = d['product_family']
         if 'project_close_comment' in d:

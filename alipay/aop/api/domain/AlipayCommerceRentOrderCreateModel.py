@@ -36,6 +36,7 @@ class AlipayCommerceRentOrderCreateModel(object):
         self._delivery_info = None
         self._enterprise_info = None
         self._external_scenarios_merchant = None
+        self._extra_biz_info = None
         self._item_infos = None
         self._memo = None
         self._offline_shopping_info = None
@@ -152,6 +153,13 @@ class AlipayCommerceRentOrderCreateModel(object):
             self._external_scenarios_merchant = value
         else:
             self._external_scenarios_merchant = ExternalScenariosMerchantDTO.from_alipay_dict(value)
+    @property
+    def extra_biz_info(self):
+        return self._extra_biz_info
+
+    @extra_biz_info.setter
+    def extra_biz_info(self, value):
+        self._extra_biz_info = value
     @property
     def item_infos(self):
         return self._item_infos
@@ -387,6 +395,11 @@ class AlipayCommerceRentOrderCreateModel(object):
                 params['external_scenarios_merchant'] = self.external_scenarios_merchant.to_alipay_dict()
             else:
                 params['external_scenarios_merchant'] = self.external_scenarios_merchant
+        if self.extra_biz_info:
+            if hasattr(self.extra_biz_info, 'to_alipay_dict'):
+                params['extra_biz_info'] = self.extra_biz_info.to_alipay_dict()
+            else:
+                params['extra_biz_info'] = self.extra_biz_info
         if self.item_infos:
             if isinstance(self.item_infos, list):
                 for i in range(0, len(self.item_infos)):
@@ -521,6 +534,8 @@ class AlipayCommerceRentOrderCreateModel(object):
             o.enterprise_info = d['enterprise_info']
         if 'external_scenarios_merchant' in d:
             o.external_scenarios_merchant = d['external_scenarios_merchant']
+        if 'extra_biz_info' in d:
+            o.extra_biz_info = d['extra_biz_info']
         if 'item_infos' in d:
             o.item_infos = d['item_infos']
         if 'memo' in d:
